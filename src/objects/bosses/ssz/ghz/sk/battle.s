@@ -7,15 +7,15 @@ Obj_SSZGHZBoss:
                 move.l  #Obj_Wait,(a0)
                 move.b  #1,(Boss_flag).w
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7A294,$34(a0)
+                move.l  #SSZGHZBoss_InstallBattleDispatcher,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7A244
+                bne.s   SSZGHZBoss_PositionAndQueueArt
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_EndBoss,subtype(a1)
 
-loc_7A244:
+SSZGHZBoss_PositionAndQueueArt:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$110,d0
                 move.w  d0,x_pos(a0)
@@ -32,57 +32,57 @@ loc_7A244:
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_7A282:
+SSZGHZBoss_SavePaletteAndLoadMiscColors:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7A282
+                dbf     d6,SSZGHZBoss_SavePaletteAndLoadMiscColors
                 lea     (Pal_SSZGHZMisc).l,a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_7A294:
-                move.l  #loc_7A29C,(a0)
+SSZGHZBoss_InstallBattleDispatcher:
+                move.l  #SSZGHZBoss_DispatchHandleHitsAndDraw,(a0)
 
-locret_7A29A:
+SSZGHZ_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A29C:
+SSZGHZBoss_DispatchHandleHitsAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7A2B4(pc,d0.w),d1
-                jsr     off_7A2B4(pc,d1.w)
+                move.w  SSZGHZBoss_StateOffsets(pc,d0.w),d1
+                jsr     SSZGHZBoss_StateOffsets(pc,d1.w)
                 bsr.w   SSZGHZBoss_HandleHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_7A2B4:
-                dc.w    loc_7A2C0-off_7A2B4
-                dc.w    loc_7A2F0-off_7A2B4
-                dc.w    loc_7A32C-off_7A2B4
-                dc.w    loc_7A35E-off_7A2B4
-                dc.w    loc_7A388-off_7A2B4
-                dc.w    loc_7A3A8-off_7A2B4
+SSZGHZBoss_StateOffsets:
+                dc.w    SSZGHZBoss_InitializeShipAndHead-SSZGHZBoss_StateOffsets
+                dc.w    SSZGHZBoss_DescendAndWaitForEntryTimer-SSZGHZBoss_StateOffsets
+                dc.w    SSZGHZBoss_MoveToChainDeploymentPoint-SSZGHZBoss_StateOffsets
+                dc.w    SSZGHZBoss_WaitForLastChainChildSignal-SSZGHZBoss_StateOffsets
+                dc.w    SSZGHZBoss_BobMoveAndWaitForPause-SSZGHZBoss_StateOffsets
+                dc.w    SSZGHZ_ConsumeTurnAndReverse-SSZGHZBoss_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A2C0:
+SSZGHZBoss_InitializeShipAndHead:
                 lea     ObjDat_SSZGHZBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
                 move.w  #$100,y_vel(a0)
                 move.w  #$67,$2E(a0)
-                move.l  #loc_7A2FC,$34(a0)
+                move.l  #SSZGHZ_BobLeftAndSpawnContact,$34(a0)
                 lea     (Child1_MakeMechaHead).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_7A2F0:
+SSZGHZBoss_DescendAndWaitForEntryTimer:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7A2FC:
+SSZGHZ_BobLeftAndSpawnContact:
                 move.b  #4,routine(a0)
                 move.w  #-$100,x_vel(a0)
-                lea     ChildObjDat_7A69E(pc),a2
+                lea     SSZGHZShipContactChild_NormalChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.w  #$C0,d0
                 move.w  d0,$3E(a0)
@@ -92,76 +92,76 @@ loc_7A2FC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A32C:
+SSZGHZBoss_MoveToChainDeploymentPoint:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_7A35C
+                blo.s   SSZGHZBoss_ReturnAfterDeploymentCheck
                 move.b  #6,routine(a0)
                 bset    #6,$38(a0)
-                lea     ChildObjDat_7A684(pc),a2
+                lea     SSZGHZChainAndBall_TreeChildRecords(pc),a2
                 jsr     (CreateChild9_TreeList).l
 
-locret_7A35C:
+SSZGHZBoss_ReturnAfterDeploymentCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A35E:
+SSZGHZBoss_WaitForLastChainChildSignal:
                 btst    #2,$38(a0)
-                beq.s   locret_7A386
+                beq.s   SSZGHZBoss_ReturnFromChainDeploymentWait
                 move.b  #8,routine(a0)
                 bclr    #6,$38(a0)
                 move.w  #-$100,x_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7A39A,$34(a0)
+                move.l  #SSZGHZBoss_PauseAndSuppressContactChild,$34(a0)
 
-locret_7A386:
+SSZGHZBoss_ReturnFromChainDeploymentWait:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A388:
+SSZGHZBoss_BobMoveAndWaitForPause:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7A39A:
+SSZGHZBoss_PauseAndSuppressContactChild:
                 move.b  #$A,routine(a0)
                 bset    #6,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A3A8:
+SSZGHZ_ConsumeTurnAndReverse:
                 bclr    #3,$38(a0)
-                beq.s   locret_7A3CC
+                beq.s   SSZGHZBoss_ReturnFromSwingTurnWait
                 move.b  #8,routine(a0)
                 bclr    #6,$38(a0)
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$3F,$2E(a0)
 
-locret_7A3CC:
+SSZGHZBoss_ReturnFromSwingTurnWait:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A3CE:
-                move.l  #loc_7A3E6,(a0)
+SSZGHZBoss_BeginDefeatDeparture:
+                move.l  #SSZGHZBoss_MoveAwayUntilExitTimer,(a0)
                 bset    #0,render_flags(a0)
                 move.w  #$400,x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A3E6:
+SSZGHZBoss_MoveAwayUntilExitTimer:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7A3F8
+                bmi.s   SSZGHZ_FinishEncounterAndRestorePal
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7A3F8:
+SSZGHZ_FinishEncounterAndRestorePal:
                 clr.b   (Boss_flag).w
                 bset    #4,$38(a0)
                 st      (_unkFA89).w
@@ -170,158 +170,159 @@ loc_7A3F8:
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_7A414:
+SSZGHZ_RestorePaletteLoadArtDelete:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7A414
+                dbf     d6,SSZGHZ_RestorePaletteLoadArtDelete
                 moveq   #PLCID_32,d0
                 jsr     (Load_PLC).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7A428:
+SSZGHZ_AnchorDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7A43E(pc,d0.w),d1
-                jsr     off_7A43E(pc,d1.w)
+                move.w  SSZGHZChainAnchor_StateOffsets(pc,d0.w),d1
+                jsr     SSZGHZChainAnchor_StateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_7A43E:
-                dc.w    loc_7A446-off_7A43E
-                dc.w    loc_7A460-off_7A43E
-                dc.w    loc_7A482-off_7A43E
-                dc.w    loc_7A496-off_7A43E
+SSZGHZChainAnchor_StateOffsets:
+                dc.w    SSZGHZChainAnchor_InitializeDropAndSwing-SSZGHZChainAnchor_StateOffsets
+                dc.w    SSZGHZ_DropLinksAndSignalLast-SSZGHZChainAnchor_StateOffsets
+                dc.w    SSZGHZ_AnchorWaitDeployment-SSZGHZChainAnchor_StateOffsets
+                dc.w    SSZGHZ_AnchorSwingAndCheckTurn-SSZGHZChainAnchor_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A446:
-                lea     ObjDat3_7A660(pc),a1
+SSZGHZChainAnchor_InitializeDropAndSwing:
+                lea     SSZGHZChainAnchor_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$1A,child_dy(a0)
                 move.b  #1,$3A(a0)
                 bra.w   SeedSSZGHZChainSegmentDropWaitBySubtype
 ; ---------------------------------------------------------------------------
 
-loc_7A460:
+; Subtype $A signals the boss when its drop timer expires
+SSZGHZ_DropLinksAndSignalLast:
                 addq.w  #2,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_7A480
+                bpl.s   SSZGHZChainChildren_ReturnAfterDropStep
                 addq.b  #2,routine(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   locret_7A480
+                bne.s   SSZGHZChainChildren_ReturnAfterDropStep
                 movea.w $44(a0),a1
                 bset    #2,$38(a1)
 
-locret_7A480:
+SSZGHZChainChildren_ReturnAfterDropStep:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A482:
+SSZGHZ_AnchorWaitDeployment:
                 movea.w $44(a0),a1
                 btst    #2,$38(a1)
-                beq.s   locret_7A494
+                beq.s   SSZGHZ_AnchorDeploymentReturn
                 move.b  #6,routine(a0)
 
-locret_7A494:
+SSZGHZ_AnchorDeploymentReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A496:
+SSZGHZ_AnchorSwingAndCheckTurn:
                 move.b  $3C(a0),d0
                 subi.b  #$40,d0
                 sls     d1
                 cmpi.b  #-$80,d0
-                bhs.s   loc_7A4C2
+                bhs.s   SSZGHZ_AnchorAdvancePhaseAndFollow
                 neg.b   $3A(a0)
                 movea.w $44(a0),a1
                 btst    #0,render_flags(a1)
-                beq.s   loc_7A4B8
+                beq.s   SSZGHZ_AnchorSignalSelectedTurn
                 not.b   d1
 
-loc_7A4B8:
+SSZGHZ_AnchorSignalSelectedTurn:
                 tst.b   d1
-                bne.s   loc_7A4C2
+                bne.s   SSZGHZ_AnchorAdvancePhaseAndFollow
                 bset    #3,$38(a1)
 
-loc_7A4C2:
+SSZGHZ_AnchorAdvancePhaseAndFollow:
                 move.b  $3A(a0),d0
                 add.b   d0,$3C(a0)
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_7A4D0:
+SSZGHZChainLink_DispatchAndDrawOrFlicker:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7A4E6(pc,d0.w),d1
-                jsr     off_7A4E6(pc,d1.w)
+                move.w  SSZGHZChainLink_StateOffsets(pc,d0.w),d1
+                jsr     SSZGHZChainLink_StateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_7A4E6:
-                dc.w    loc_7A4EC-off_7A4E6
-                dc.w    loc_7A460-off_7A4E6
-                dc.w    loc_7A500-off_7A4E6
+SSZGHZChainLink_StateOffsets:
+                dc.w    SSZGHZ_InitChainLinkDrop-SSZGHZChainLink_StateOffsets
+                dc.w    SSZGHZ_DropLinksAndSignalLast-SSZGHZChainLink_StateOffsets
+                dc.w    SSZGHZ_ChainLinkSyncPhaseAndOrbit-SSZGHZChainLink_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A4EC:
+SSZGHZ_InitChainLinkDrop:
                 bsr.w   SeedSSZGHZChainSegmentDropWaitBySubtype
                 move.b  #4,$3A(a0)
-                lea     ObjDat3_7A66C(pc),a1
+                lea     SSZGHZChainLink_Attributes(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_7A500:
+SSZGHZ_ChainLinkSyncPhaseAndOrbit:
                 movea.w parent3(a0),a1
                 move.b  $3C(a1),$3C(a0)
                 move.b  $3A(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_7A514:
+SSZGHZ_BallDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7A53E(pc,d0.w),d1
-                jsr     off_7A53E(pc,d1.w)
+                move.w  SSZGHZBall_StateOffsets(pc,d0.w),d1
+                jsr     SSZGHZBall_StateOffsets(pc,d1.w)
                 move.b  #0,mapping_frame(a0)
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_7A536
+                beq.s   SSZGHZBall_DrawTouchAfterFrameSelection
                 move.b  #1,mapping_frame(a0)
 
-loc_7A536:
+SSZGHZBall_DrawTouchAfterFrameSelection:
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_7A53E:
-                dc.w    loc_7A544-off_7A53E
-                dc.w    loc_7A460-off_7A53E
-                dc.w    loc_7A500-off_7A53E
+SSZGHZBall_StateOffsets:
+                dc.w    SSZGHZ_InitBallDrop-SSZGHZBall_StateOffsets
+                dc.w    SSZGHZ_DropLinksAndSignalLast-SSZGHZBall_StateOffsets
+                dc.w    SSZGHZ_ChainLinkSyncPhaseAndOrbit-SSZGHZBall_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A544:
+SSZGHZ_InitBallDrop:
                 bsr.w   SeedSSZGHZChainSegmentDropWaitBySubtype
                 move.b  #3,$3A(a0)
-                lea     ObjDat3_7A678(pc),a1
+                lea     SSZGHZBall_Attributes(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_7A558:
-                lea     word_7A65A(pc),a1
+SSZGHZShipContactChild_Initialize:
+                lea     SSZGHZShipContactChild_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_7A568,(a0)
+                move.l  #SSZGHZ_ShipContactVisibleEvenTick,(a0)
 
-loc_7A568:
+SSZGHZ_ShipContactVisibleEvenTick:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_7A59A
+                bne.s   SSZGHZShipContactChild_DeleteWithParent
                 btst    #6,$38(a1)
-                bne.w   locret_7A29A
+                bne.w   SSZGHZ_SharedReturn
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_7A29A
+                bne.w   SSZGHZ_SharedReturn
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7A59A:
+SSZGHZShipContactChild_DeleteWithParent:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -329,58 +330,58 @@ loc_7A59A:
 ; The scored defeat leaves the HUD timer running
 SSZGHZBoss_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_7A5EA
+                bne.s   SSZGHZBoss_ReturnFromHitOrDefeatCheck
                 move.b  collision_property(a0),d0
-                beq.s   loc_7A5EC
+                beq.s   SSZGHZ_BeginDefeatFadeAndExplosion
                 tst.b   $20(a0)
-                bne.s   loc_7A5C6
+                bne.s   SSZGHZBoss_SelectMisoffsetHitFlashColors
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
 
-loc_7A5C6:
+SSZGHZBoss_SelectMisoffsetHitFlashColors:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_7A5D4
+                bne.s   SSZGHZ_HitCopyColorsAndTick
 ; Bug: should be 2*3
                 addi.w  #2*2,d0
 
-loc_7A5D4:
+SSZGHZ_HitCopyColorsAndTick:
                 bsr.w   CopySSZGHZThreeColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
-                bne.s   locret_7A5EA
+                bne.s   SSZGHZBoss_ReturnFromHitOrDefeatCheck
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_7A5EA:
+SSZGHZBoss_ReturnFromHitOrDefeatCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A5EC:
+SSZGHZ_BeginDefeatFadeAndExplosion:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_7A3CE,$34(a0)
+                move.l  #SSZGHZBoss_BeginDefeatDeparture,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_7A60E
+                bne.s   SSZGHZBoss_AwardDefeatAndSeedFadeTimer
                 move.b  #4,subtype(a1)
 
-loc_7A60E:
+SSZGHZBoss_AwardDefeatAndSeedFadeTimer:
                 jmp     (BossDefeated).l
 ; End of function SSZGHZBoss_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopySSZGHZThreeColorPaletteAtByteOffset:
-                lea     word_7A622(pc),a1
-                lea     word_7A628(pc,d0.w),a2
+                lea     SSZGHZBoss_HitFlashPaletteSlotAddresses(pc),a1
+                lea     SSZGHZBoss_HitFlashColorWords(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
 ; End of function CopySSZGHZThreeColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
-word_7A622:
+SSZGHZBoss_HitFlashPaletteSlotAddresses:
                 dc.w    Normal_palette+$0E, Normal_palette+$1C, Normal_palette+$1E
-word_7A628:
+SSZGHZBoss_HitFlashColorWords:
                 dc.w    8,  $866,  $222
                 dc.w    $888,  $CCC,  $EEE
 
@@ -389,47 +390,47 @@ word_7A628:
 SeedSSZGHZChainSegmentDropWaitBySubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_7A642(pc,d0.w),$2E(a0)
+                move.w  SSZGHZChainChildren_DropTimersBySubtype(pc,d0.w),$2E(a0)
                 rts
 ; End of function SeedSSZGHZChainSegmentDropWaitBySubtype
 
 ; ---------------------------------------------------------------------------
-word_7A642:
+SSZGHZChainChildren_DropTimersBySubtype:
                 dc.w    $C,   $14,   $1C,   $24,   $2C,   $3C
 ObjDat_SSZGHZBoss:
                 dc.l    Map_RobotnikShip
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,0)
                 dc.w    $200
                 dc.b    $1C, $20,  $A,  $F
-word_7A65A:
+SSZGHZShipContactChild_PartialAttributes:
                 dc.w    $200
                 dc.b    8,   4,   6,   0
-ObjDat3_7A660:
+SSZGHZChainAnchor_Attributes:
                 dc.l    Map_SSZGHZMisc
 ; this is using the incorrect palette line
                 dc.w    make_art_tile(ArtTile_SSZGHZMisc,1,0)
                 dc.w    $300
                 dc.b    8,   8,   2,   0
-ObjDat3_7A66C:
+SSZGHZChainLink_Attributes:
                 dc.l    Map_SSZGHZMisc
 ; this is using the incorrect palette line
                 dc.w    make_art_tile(ArtTile_SSZGHZMisc,1,0)
                 dc.w    $300
                 dc.b    8,   8,   3,   0
-ObjDat3_7A678:
+SSZGHZBall_Attributes:
                 dc.l    Map_SSZGHZMisc
                 dc.w    make_art_tile(ArtTile_SSZGHZMisc,1,0)
                 dc.w    $280
                 dc.b    8,   8,   0, $8F
-ChildObjDat_7A684:
+SSZGHZChainAndBall_TreeChildRecords:
                 dc.w    6-1
-                dc.l    loc_7A428
-                dc.l    loc_7A4D0
-                dc.l    loc_7A4D0
-                dc.l    loc_7A4D0
-                dc.l    loc_7A4D0
-                dc.l    loc_7A514
-ChildObjDat_7A69E:
+                dc.l    SSZGHZ_AnchorDispatchAndDraw
+                dc.l    SSZGHZChainLink_DispatchAndDrawOrFlicker
+                dc.l    SSZGHZChainLink_DispatchAndDrawOrFlicker
+                dc.l    SSZGHZChainLink_DispatchAndDrawOrFlicker
+                dc.l    SSZGHZChainLink_DispatchAndDrawOrFlicker
+                dc.l    SSZGHZ_BallDispatchAndDraw
+SSZGHZShipContactChild_NormalChildRecord:
                 dc.w    1-1
-                dc.l    loc_7A558
+                dc.l    SSZGHZShipContactChild_Initialize
                 dc.b    $1E,   0

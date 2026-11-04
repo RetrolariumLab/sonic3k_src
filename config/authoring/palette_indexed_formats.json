@@ -4,13 +4,13 @@
   "groups": [
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "symbol": "off_7DD5A",
+      "symbol": "SSZMasterEmeraldColorCycle_IndexedScript",
       "first_line": 501,
       "last_line": 538,
-      "scope": "off_7DD5A",
+      "scope": "SSZMasterEmeraldColorCycle_IndexedScript",
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 74,
-      "declarations_sha256": "39f80e322cc9fb1a3ee55d3bbbc06e4f9eaa0ec86c081c713ddf645dfd832972",
+      "declarations_sha256": "53b0778b9a29bf3af152cda4423a20057c676bd32ee28c3f31b9bf62627f4da8",
       "palette_count": 7,
       "step_count": 12,
       "color_count": 2,
@@ -34,23 +34,23 @@
   "consumer_sources": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "79e54a0d813df6a1dfb6335b79e1f71b612363a747ddee19ea4e53632b2862d1"
+      "sha256": "a3cf0afd29e51a7a3de2e8ab2953cd806f5ded5858a5ba9e2eb23c0b81ceebeb"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "9f62efc861f4c4e3ab6ef8997f7052b14c3dfc3a5717910a05a77a95a7f6adbb"
+      "sha256": "464c75e0958758717d9a7f0a3368d00765b76f6f53c9e7bf7ef0b38798c64b13"
     },
     {
       "path": "src/objects/ending/sk/master_emerald.s",
-      "sha256": "a22c49190199cd446a0dafec8f08efc34d6e5f6ccf55bf5cc0fae1eed9135cac"
+      "sha256": "2a4a668660f885eadce44119ea376564d9b868c1605f6b3376f43d4782833419"
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "c93e2703f0acf693f685fdcd46160302e25158089a4c00e8f2267a81c0e0fb63"
+      "sha256": "de527c023d21ff966733f6f78c1a510b74e80f6655699fb9b95f358ed6f09631"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
-      "sha256": "8828b944d1bd72c4bfebaf51e635cf9616c30cbd057b55a430d8e8c25382e464"
+      "sha256": "70d7876e0237815d6b358a7390af484e34bd9597d5945fc21aa2aa3b2f9ef200"
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
@@ -69,7 +69,7 @@
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
       "call_line": 187,
-      "header": "off_7DD5A",
+      "header": "SSZMasterEmeraldColorCycle_IndexedScript",
       "destinations": [
         {
           "symbol": "Normal_palette_line_3",
@@ -80,7 +80,7 @@
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
       "call_line": 59,
-      "header": "off_7DD5A",
+      "header": "SSZMasterEmeraldColorCycle_IndexedScript",
       "destinations": [
         {
           "symbol": "Normal_palette_line_4",
@@ -91,7 +91,7 @@
     {
       "path": "src/objects/ending/sk/plane_scene.s",
       "call_line": 419,
-      "header": "off_7DD5A",
+      "header": "SSZMasterEmeraldColorCycle_IndexedScript",
       "destinations": [
         {
           "symbol": "Normal_palette_line_3",
@@ -102,7 +102,7 @@
     {
       "path": "src/objects/ending/sk/master_emerald.s",
       "call_line": 114,
-      "header": "off_7DD5A",
+      "header": "SSZMasterEmeraldColorCycle_IndexedScript",
       "destinations": [
         {
           "symbol": "Normal_palette_line_3",

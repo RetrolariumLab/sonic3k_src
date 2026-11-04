@@ -1227,9 +1227,15 @@
       "commits": ["02c2d206cc89d27aab43ed253db6660946bd1569"]
     },
     {
-      "id": "current-shorten-47-boss-lrz",
+      "id": "change-75fe1695635c",
       "kind": "source_or_tooling",
       "summary": "Apply 187 reviewed short labels for boss lrz.",
+      "commits": ["75fe1695635cb2bf1a7428349c0198bce13510b1"]
+    },
+    {
+      "id": "current-shorten-48-boss-ssz-mecha",
+      "kind": "source_or_tooling",
+      "summary": "Apply 235 reviewed short labels for boss ssz mecha.",
       "commits": ["release-commit"]
     }
   ],

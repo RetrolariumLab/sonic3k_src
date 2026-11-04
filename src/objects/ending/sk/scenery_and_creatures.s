@@ -5,7 +5,7 @@
 
 Obj_5EBC6:
                 move.l  #loc_5EBE4,(a0)
-                lea     (ObjDat3_7D450).l,a1
+                lea     (SSZMechaMasterEmerald_Attributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 addi.w  #make_art_tile($000,2,0),art_tile(a0)
                 move.b  #2,mapping_frame(a0)

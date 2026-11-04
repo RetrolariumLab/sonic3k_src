@@ -18,12 +18,12 @@ SSZSuperMechaShot_InitEightWayVel:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                move.l  word_7D172(pc,d0.w),x_vel(a0)   ; and y_vel
+                move.l  SSZMecha_RadialShotVelocityPairs(pc,d0.w),x_vel(a0)  ; and y_vel
                 rts
 ; End of function SSZSuperMechaShot_InitEightWayVel
 
 ; ---------------------------------------------------------------------------
-word_7D172:
+SSZMecha_RadialShotVelocityPairs:
                 dc.w    0,  $400
                 dc.w    $2D4,  $2D4
                 dc.w    $400,     0
@@ -38,17 +38,17 @@ word_7D172:
 SSZMechaLaser_SelectAnimAndCallback:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     off_7D1A6(pc,d0.w),a1
+                lea     SSZMecha_LaserScriptsAndCallbacks(pc,d0.w),a1
                 move.l  (a1)+,$30(a0)
                 move.l  (a1)+,$34(a0)
                 rts
 ; End of function SSZMechaLaser_SelectAnimAndCallback
 
 ; ---------------------------------------------------------------------------
-off_7D1A6:
-                dc.l    byte_7D68C
+SSZMecha_LaserScriptsAndCallbacks:
+                dc.l    SSZMecha_AimedLaserPrepAnim
                 dc.l    loc_7C764
-                dc.l    byte_7D6B3
+                dc.l    SSZMecha_StationaryLaserDeleteAnim
                 dc.l    Go_Delete_Sprite
 
 ; =============== S U B R O U T I N E =======================================
@@ -59,21 +59,21 @@ SSZMecha_TestPlayerAttackRegion:
                 moveq   #0,d0
                 move.b  child_dx(a0),d0
                 lsl.w   #2,d0
-                lea     byte_7D1D2-4(pc,d0.w),a1
+                lea     SSZMecha_AttackRegionRows-4(pc,d0.w),a1
 
-loc_7D1C6:
+SSZMechaAttackRegionList_ScanForMatch:
                 move.b  (a1)+,d1
-                beq.s   locret_7D1D0
+                beq.s   SSZMecha_AttackRegionMatchReturn
                 cmp.b   d1,d2
-                bne.s   loc_7D1C6
+                bne.s   SSZMechaAttackRegionList_ScanForMatch
                 moveq   #1,d0
 
-locret_7D1D0:
+SSZMecha_AttackRegionMatchReturn:
                 rts
 ; End of function SSZMecha_TestPlayerAttackRegion
 
 ; ---------------------------------------------------------------------------
-byte_7D1D2:
+SSZMecha_AttackRegionRows:
                 dc.b    1
                 dc.b    0
                 dc.b    0
@@ -109,45 +109,45 @@ SSZMecha_ClassifyPlayerXRegion:
                 move.w  d0,d1
                 subi.w  #$F0,d1
                 scc     d3
-                bcc.s   loc_7D202
+                bcc.s   SSZMechaPlayerRegion_SelectRightBase
                 moveq   #1,d2
-                bra.w   loc_7D204
+                bra.w   SSZMecha_ClassifyPlayerXThresholds
 ; ---------------------------------------------------------------------------
 
-loc_7D202:
+SSZMechaPlayerRegion_SelectRightBase:
                 moveq   #4,d2
 
-loc_7D204:
+SSZMecha_ClassifyPlayerXThresholds:
                 cmpi.w  #$50,d0
-                blo.s   locret_7D214
+                blo.s   SSZMecha_PlayerXRegionReturn
                 addq.w  #1,d2
                 cmpi.w  #$A0,d0
-                blo.s   locret_7D214
+                blo.s   SSZMecha_PlayerXRegionReturn
                 addq.w  #1,d2
 
-locret_7D214:
+SSZMecha_PlayerXRegionReturn:
                 rts
 ; End of function SSZMecha_ClassifyPlayerXRegion
 
 ; ---------------------------------------------------------------------------
 
-loc_7D216:
+SSZMecha_CheckFacingArenaBound:
                 tst.w   x_vel(a0)
-                bmi.s   loc_7D228
+                bmi.s   SSZMechaArenaBounds_TestLeftBoundary
                 move.w  (_unkFAB6).w,d0
                 cmp.w   x_pos(a0),d0
-                bls.s   loc_7D234
+                bls.s   SSZMecha_RunArenaBoundCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7D228:
+SSZMechaArenaBounds_TestLeftBoundary:
                 move.w  (_unkFAB4).w,d0
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_7D234
+                bhs.s   SSZMecha_RunArenaBoundCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7D234:
+SSZMecha_RunArenaBoundCallback:
                 jmp     (a1)
 
 ; =============== S U B R O U T I N E =======================================
@@ -156,14 +156,14 @@ SSZMechaTrail_InitOffsetsAndPriority:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                lea     byte_7D24C(pc,d0.w),a1
+                lea     SSZMecha_RollTrailOffsetPriority(pc,d0.w),a1
                 move.w  (a1)+,child_dx(a0)              ; and child_dy
                 move.w  (a1)+,priority(a0)
                 rts
 ; End of function SSZMechaTrail_InitOffsetsAndPriority
 
 ; ---------------------------------------------------------------------------
-byte_7D24C:
+SSZMecha_RollTrailOffsetPriority:
                 dc.b    -4, $1C
                 dc.w    $300
                 dc.b    8, $1C
@@ -178,7 +178,7 @@ byte_7D24C:
 ; =============== S U B R O U T I N E =======================================
 
 SSZMechaProxy_SetFromParentFrame:
-                lea     byte_7D280(pc),a1
+                lea     SSZMechaCollisionProxy_ParentFrameRows(pc),a1
                 movea.w parent3(a0),a2
                 moveq   #0,d0
                 move.b  mapping_frame(a2),d0
@@ -191,7 +191,7 @@ SSZMechaProxy_SetFromParentFrame:
 ; End of function SSZMechaProxy_SetFromParentFrame
 
 ; ---------------------------------------------------------------------------
-byte_7D280:
+SSZMechaCollisionProxy_ParentFrameRows:
                 dc.b    $10, -$C, $B4,   2
                 dc.b    $10,  -4, $B4,   2
                 dc.b    $10,   0, $B4,   2
@@ -221,23 +221,23 @@ byte_7D280:
 ; Skip collision updates during hit recovery. The caller can request the forced-harmful type
 SSZMecha_TrySetCollisionFromFrame:
                 btst    #6,status(a0)
-                bne.s   locret_7D2FA
+                bne.s   SSZMecha_FrameCollisionReturn
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
-                move.b  byte_7D2FC(pc,d0.w),d0
+                move.b  SSZMecha_CollisionFlagsByFrame(pc,d0.w),d0
                 btst    #7,$38(a0)
-                beq.s   loc_7D2F6
+                beq.s   SSZMecha_StoreFrameCollisionFlags
                 ori.b   #$80,d0
 
-loc_7D2F6:
+SSZMecha_StoreFrameCollisionFlags:
                 move.b  d0,collision_flags(a0)
 
-locret_7D2FA:
+SSZMecha_FrameCollisionReturn:
                 rts
 ; End of function SSZMecha_TrySetCollisionFromFrame
 
 ; ---------------------------------------------------------------------------
-byte_7D2FC:
+SSZMecha_CollisionFlagsByFrame:
                 dc.b    $23
                 dc.b    $23
                 dc.b    9
@@ -267,34 +267,34 @@ byte_7D2FC:
 ; At zero HP, tail-call the defeat handler in a4. The five-color flash retains its shifted palette offset
 SSZMecha_HandleHitFlashOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_7D356
+                bne.s   SSZMechaHitFlash_ReturnFromRecovery
                 move.b  collision_property(a0),d0
-                beq.s   loc_7D358
+                beq.s   SSZMecha_RunDefeatCallback
                 tst.b   $20(a0)
-                bne.s   loc_7D338
+                bne.s   SSZMecha_HitChooseFlashOffset
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
 
-loc_7D338:
+SSZMecha_HitChooseFlashOffset:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_7D346
+                bne.s   SSZMecha_HitCopyColorsAndTick
 ; Bug: this should be 2*5
                 addi.w  #2*4,d0
 
-loc_7D346:
+SSZMecha_HitCopyColorsAndTick:
                 bsr.w   CopySSZMechaFiveColorPaletteAtByteOffset
                 subq.b  #1,$20(a0)
-                bne.s   locret_7D356
+                bne.s   SSZMechaHitFlash_ReturnFromRecovery
                 bclr    #6,status(a0)
 
-locret_7D356:
+SSZMechaHitFlash_ReturnFromRecovery:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7D358:
+SSZMecha_RunDefeatCallback:
                 jmp     (a4)
 ; End of function SSZMecha_HandleHitFlashOrDefeat
 
@@ -302,9 +302,9 @@ loc_7D358:
 
 ; Switch the root to the shared post-battle controller, award score, stop the timer and try to spawn an explosion
 SSZMecha_BeginScoredDefeatScene:
-                move.l  #loc_7B81A,(a0)
+                move.l  #SSZMecha_DefeatDispatchAndDraw,(a0)
                 clr.b   routine(a0)
-                move.l  #loc_7B858,$34(a0)
+                move.l  #SSZMechaPostBattle_BeginDefeatFall,$34(a0)
                 bset    #6,status(a0)
                 clr.b   (Update_HUD_timer).w
                 move.w  #$7F,$2E(a0)
@@ -313,16 +313,16 @@ SSZMecha_BeginScoredDefeatScene:
                 bclr    #7,render_flags(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
-                bne.s   locret_7D39C
+                bne.s   SSZMecha_DefeatExplosionSpawnReturn
                 move.b  #4,subtype(a1)
 
-locret_7D39C:
+SSZMecha_DefeatExplosionSpawnReturn:
                 rts
 ; End of function SSZMecha_BeginScoredDefeatScene
 
 ; ---------------------------------------------------------------------------
 
-loc_7D39E:
+SSZMecha_FreezeCameraAndRestorePal:
                 bset    #7,$38(a0)
                 bsr.s   SSZMecha_BeginScoredDefeatScene
                 move.w  (Camera_X_pos).w,d0
@@ -334,14 +334,14 @@ loc_7D39E:
 ; =============== S U B R O U T I N E =======================================
 
 CopySSZMechaFiveColorPaletteAtByteOffset:
-                lea     word_7D3CC(pc),a1
-                lea     word_7D3D6(pc,d0.w),a2
+                lea     SSZMecha_HitPaletteDestinations(pc),a1
+                lea     SSZMechaHitFlash_SourceColorWords(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
 ; End of function CopySSZMechaFiveColorPaletteAtByteOffset
 
 ; ---------------------------------------------------------------------------
-word_7D3CC:
+SSZMecha_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$18, Normal_palette_line_2+$1C
-word_7D3D6:
+SSZMechaHitFlash_SourceColorWords:
                 dc.w    8,  $A24,  $624,  $422,   $20
                 dc.w    $888,  $666,  $888,  $AAA,  $EEE

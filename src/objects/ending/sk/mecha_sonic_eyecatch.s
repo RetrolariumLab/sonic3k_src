@@ -41,13 +41,13 @@ loc_5F78E:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_5F78E
                 bsr.w   Ending_TrySpawnLine2Fade
-                lea     (ChildObjDat_7D48C).l,a2
+                lea     (SSZMechaSparks_SimpleChildRecord).l,a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   loc_5F7AC
                 move.b  #$80,subtype(a1)
 
 loc_5F7AC:
-                lea     (word_7D842).l,a1
+                lea     (MechaSonic_IdleFlashPaletteScript).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -73,7 +73,7 @@ loc_5F7EA:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_5F7EA
                 bset    #6,$38(a0)
-                lea     (ChildObjDat_7D492).l,a2
+                lea     (SSZMechaSignalEffect_NormalChildRecord).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ loc_5F802:
                 move.b  #6,routine(a0)
                 move.b  #$E,mapping_frame(a0)
                 move.l  #loc_5F832,$34(a0)
-                lea     (byte_7D5EF).l,a1
+                lea     (SSZMecha_RecoverThenActAnim).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -94,7 +94,7 @@ loc_5F82C:
 loc_5F832:
                 move.b  #8,routine(a0)
                 move.l  #loc_5F84C,$34(a0)
-                lea     (byte_7D5F6).l,a1
+                lea     (SSZMecha_PreJumpCallbackRawAnimation).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -115,7 +115,7 @@ loc_5F85A:
                 move.l  #loc_5F89A,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     (byte_7D5AB).l,a1
+                lea     (SSZMecha_TransformLandingAnim).l,a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 

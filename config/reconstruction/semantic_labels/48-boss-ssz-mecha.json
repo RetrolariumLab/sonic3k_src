@@ -1,0 +1,5526 @@
+{
+  "schema_version": 1,
+  "packet": "48-boss-ssz-mecha",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 42,
+      "old": "loc_7B2DC",
+      "new": "SSZMechaBattle_InitializeSlottedActor",
+      "profiles": ["sk"],
+      "meaning": "Initialize normal SSZ Mecha battle actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 54,
+      "old": "loc_7B308",
+      "new": "SSZMecha_InitActOneRollingArrival",
+      "profiles": ["sk"],
+      "meaning": "Initialize camera-relative rolling arrival in act byte0."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 74,
+      "old": "loc_7B35A",
+      "new": "SSZMecha_QueueArtAndPreparePalette",
+      "profiles": ["sk"],
+      "meaning": "Load common Mecha extra art,explosion patterns and palette."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 89,
+      "old": "loc_7B39C",
+      "new": "SSZMecha_TryCollisionProxy",
+      "profiles": ["sk"],
+      "meaning": "Attempt collision proxy and preserve trailing object allocation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 95,
+      "old": "loc_7B3AC",
+      "new": "SSZMecha_WaitCameraAndBeginJump",
+      "profiles": ["sk"],
+      "meaning": "Wait for shared camera-transition bit before battle jump setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 111,
+      "old": "loc_7B3E6",
+      "new": "SSZMecha_RollLeftUntilOffscreen",
+      "profiles": ["sk"],
+      "meaning": "Move initial rolling arrival beyond camera left edge."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 122,
+      "old": "locret_7B414",
+      "new": "SSZMecha_ArrivalUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from rolling arrival threshold check."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 126,
+      "old": "loc_7B416",
+      "new": "SSZMechaBattle_WaitArrivalDelay",
+      "profiles": ["sk"],
+      "meaning": "Wait for arrival delay callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 130,
+      "old": "loc_7B41C",
+      "new": "SSZMechaBattle_BeginRightwardReturnRun",
+      "profiles": ["sk"],
+      "meaning": "Delay callback starts rightward Mecha return."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 140,
+      "old": "locret_7B448",
+      "new": "SSZMechaBattleAndChildren_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for SSZ Mecha and related child helper paths."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 144,
+      "old": "loc_7B44A",
+      "new": "SSZMecha_RunRightUntilBoundary",
+      "profiles": ["sk"],
+      "meaning": "Animate rightward Mecha return until right bound."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 153,
+      "old": "loc_7B462",
+      "new": "SSZMechaBattle_BeginRunEndDelay",
+      "profiles": ["sk"],
+      "meaning": "Install short animated run-end delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 160,
+      "old": "loc_7B478",
+      "new": "SSZMechaBattle_AnimateDuringRunEndDelay",
+      "profiles": ["sk"],
+      "meaning": "Animate while waiting for run-end callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 165,
+      "old": "loc_7B484",
+      "new": "SSZMecha_StopAndBeginDropAnim",
+      "profiles": ["sk"],
+      "meaning": "Stop horizontal/vertical velocity and choose one of two drop scripts."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 183,
+      "old": "loc_7B4CA",
+      "new": "SSZMecha_BeginTurnAfterDrop",
+      "profiles": ["sk"],
+      "meaning": "Select drop script that turns before the next attack."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 189,
+      "old": "loc_7B4DA",
+      "new": "SSZMecha_AnimateFallAndProbeFloor",
+      "profiles": ["sk"],
+      "meaning": "Animate drop with light gravity and floor callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 195,
+      "old": "loc_7B4EC",
+      "new": "SSZMecha_LandAndChooseRecovery",
+      "profiles": ["sk"],
+      "meaning": "Landing callback chooses roll or turn recovery script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 209,
+      "old": "loc_7B520",
+      "new": "SSZMecha_TurnAndPrepareJump",
+      "profiles": ["sk"],
+      "meaning": "Turn Mecha and install post-landing jump preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 217,
+      "old": "loc_7B53E",
+      "new": "SSZMechaBattle_RunRawCallbackAnimation",
+      "profiles": ["sk"],
+      "meaning": "Shared raw callback animation state in normal battle."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 221,
+      "old": "loc_7B544",
+      "new": "SSZMechaBattle_PrepareDeceleratingRoll",
+      "profiles": ["sk"],
+      "meaning": "Prepare fast roll with direction-sensitive deceleration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 230,
+      "old": "loc_7B55E",
+      "new": "SSZMecha_StoreRollSpeedAndTryTrails",
+      "profiles": ["sk"],
+      "meaning": "Store roll velocity/acceleration and attempt two trail actors."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 239,
+      "old": "loc_7B57A",
+      "new": "SSZMechaBattle_PrepareCyclicJumpScript",
+      "profiles": ["sk"],
+      "meaning": "Prepare next cyclic jump and face relative to camera midpoint."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 250,
+      "old": "locret_7B5AA",
+      "new": "SSZMecha_JumpFacingReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after common cyclic-jump facing preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 254,
+      "old": "loc_7B5AC",
+      "new": "SSZMecha_DecelerateRollToBoundary",
+      "profiles": ["sk"],
+      "meaning": "Update decelerating roll and test direction-selected bound."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 262,
+      "old": "loc_7B5C2",
+      "new": "SSZMecha_EndRollAndPrepareJump",
+      "profiles": ["sk"],
+      "meaning": "Boundary callback clamps roll and selects jump-recovery script."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 272,
+      "old": "loc_7B5E8",
+      "new": "SSZMechaBattle_LaunchCyclicJump",
+      "profiles": ["sk"],
+      "meaning": "Launch jump with direction-sensitive horizontal speed."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 281,
+      "old": "loc_7B606",
+      "new": "SSZMecha_ChooseJumpVariant",
+      "profiles": ["sk"],
+      "meaning": "Store jump velocities and choose repeating attack variant."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 293,
+      "old": "byte_7B62E",
+      "new": "SSZMechaBattle_CyclicJumpVariantOrder",
+      "profiles": ["sk"],
+      "meaning": "Eight BYTE jump-variant sequence."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 295,
+      "old": "byte_7B636",
+      "new": "SSZMechaBattle_JumpVariantRoutineValues",
+      "profiles": ["sk"],
+      "meaning": "Three BYTE routine values for cyclic jump variants."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 300,
+      "old": "loc_7B63A",
+      "new": "SSZMechaBattle_JumpUntilApexThenDash",
+      "profiles": ["sk"],
+      "meaning": "Animate jump with normal gravity until nonnegative Yvelocity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 308,
+      "old": "loc_7B64E",
+      "new": "SSZMechaBattle_PrepareApexDashDirection",
+      "profiles": ["sk"],
+      "meaning": "Choose apex dash velocity and braking direction from flipX."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 317,
+      "old": "loc_7B666",
+      "new": "SSZMechaBattle_StoreApexDashVelocity",
+      "profiles": ["sk"],
+      "meaning": "Store apex dash horizontal speed and deceleration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 326,
+      "old": "loc_7B67C",
+      "new": "SSZMechaBattle_MoveApexDashToBoundary",
+      "profiles": ["sk"],
+      "meaning": "Animate apex dash with deceleration and boundary callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 335,
+      "old": "loc_7B698",
+      "new": "SSZMecha_ClampApexDashAndWait",
+      "profiles": ["sk"],
+      "meaning": "Clamp apex dash at selected bound before delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 340,
+      "old": "loc_7B6A0",
+      "new": "SSZMechaBattle_JumpUntilFloorThenBounce",
+      "profiles": ["sk"],
+      "meaning": "Animate normal-gravity jump until descending floor contact."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 350,
+      "old": "locret_7B6BE",
+      "new": "SSZMecha_BounceFloorReturn",
+      "profiles": ["sk"],
+      "meaning": "Return before first bounce floor contact."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 354,
+      "old": "loc_7B6C0",
+      "new": "SSZMechaBattle_BounceUpAfterFloorContact",
+      "profiles": ["sk"],
+      "meaning": "Resolve floor contact and launch high bounce."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 363,
+      "old": "loc_7B6DA",
+      "new": "SSZMechaBattle_MoveHighBounceToBoundary",
+      "profiles": ["sk"],
+      "meaning": "Animate high bounce under gravity until horizontal boundary."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 370,
+      "old": "loc_7B6EE",
+      "new": "SSZMechaBattle_JumpUntilFloorRollSetup",
+      "profiles": ["sk"],
+      "meaning": "Animate third jump variant until descending floor contact."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 380,
+      "old": "locret_7B70C",
+      "new": "SSZMecha_FloorRollContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during floor wait or after optional trail allocation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 384,
+      "old": "loc_7B70E",
+      "new": "SSZMechaBattle_LandAndBeginRollDelay",
+      "profiles": ["sk"],
+      "meaning": "Resolve floor and begin short pre-roll delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 399,
+      "old": "loc_7B748",
+      "new": "SSZMecha_AnimateFloorRollDelay",
+      "profiles": ["sk"],
+      "meaning": "Shared animated wait for pre-roll and post-roll pauses."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 404,
+      "old": "loc_7B754",
+      "new": "SSZMechaBattle_PrepareBriefReverseMotion",
+      "profiles": ["sk"],
+      "meaning": "Reverse horizontal direction slowly before fast roll."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 411,
+      "old": "loc_7B766",
+      "new": "SSZMecha_BeginBriefReverse",
+      "profiles": ["sk"],
+      "meaning": "Store brief reverse motion before fast roll."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 419,
+      "old": "loc_7B77E",
+      "new": "SSZMecha_MoveAndAnimateReverse",
+      "profiles": ["sk"],
+      "meaning": "Move reverse preparation step while countdown runs."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 425,
+      "old": "loc_7B790",
+      "new": "SSZMecha_BeginOppositeFastRoll",
+      "profiles": ["sk"],
+      "meaning": "Choose fast roll opposite the short reverse step."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 434,
+      "old": "loc_7B7A8",
+      "new": "SSZMecha_StoreFastRollMotion",
+      "profiles": ["sk"],
+      "meaning": "Store fast roll and its deceleration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 442,
+      "old": "loc_7B7BA",
+      "new": "SSZMechaBattle_MoveFastRollToBoundary",
+      "profiles": ["sk"],
+      "meaning": "Animate fast roll with deceleration to direction-selected bound."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 451,
+      "old": "loc_7B7D6",
+      "new": "SSZMechaBattle_BeginPostRollJumpDelay",
+      "profiles": ["sk"],
+      "meaning": "Install short wait before upward recovery."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 458,
+      "old": "loc_7B7EC",
+      "new": "SSZMechaBattle_LaunchVerticalRecovery",
+      "profiles": ["sk"],
+      "meaning": "Launch vertical recovery after post-roll pause."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 466,
+      "old": "loc_7B804",
+      "new": "SSZMechaBattle_RiseUntilRecoveryApex",
+      "profiles": ["sk"],
+      "meaning": "Animate vertical recovery until normal-gravity apex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 474,
+      "old": "loc_7B81A",
+      "new": "SSZMecha_DefeatDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch post-defeat Mecha scene without normal hit/collision wrapper."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 483,
+      "old": "off_7B838",
+      "new": "SSZMechaPostBattle_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Thirteen relative WORD states for Mecha post-defeat scene."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 499,
+      "old": "loc_7B852",
+      "new": "SSZMecha_TickInitialDefeatDelay",
+      "profiles": ["sk"],
+      "meaning": "Wait before defeated Mecha falls."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 503,
+      "old": "loc_7B858",
+      "new": "SSZMechaPostBattle_BeginDefeatFall",
+      "profiles": ["sk"],
+      "meaning": "Initial defeat callback prepares Mecha fall."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 513,
+      "old": "loc_7B87C",
+      "new": "SSZMecha_FallAndProbeDefeatLanding",
+      "profiles": ["sk"],
+      "meaning": "Fall under light gravity until post-defeat landing callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 518,
+      "old": "loc_7B888",
+      "new": "SSZMecha_LandAndChooseActOutcome",
+      "profiles": ["sk"],
+      "meaning": "Landing callback prepares post-defeat palette/effects then act branch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 539,
+      "old": "locret_7B8E4",
+      "new": "SSZMecha_ResultsSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after act0 results-controller allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 543,
+      "old": "loc_7B8E6",
+      "new": "SSZMecha_ChooseSuperRoundOrDefeat",
+      "profiles": ["sk"],
+      "meaning": "Select super-round setup or final defeat from own phase flag."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 556,
+      "old": "loc_7B916",
+      "new": "SSZMechaPostBattle_BeginFinalDefeatDelay",
+      "profiles": ["sk"],
+      "meaning": "Install direct final-defeat hold and optional rumble actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 564,
+      "old": "loc_7B934",
+      "new": "SSZMecha_TryFinalExplosionEmitters",
+      "profiles": ["sk"],
+      "meaning": "Attempt three final explosion controllers regardless of rumble allocation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 569,
+      "old": "loc_7B93E",
+      "new": "SSZMecha_AnimateActOnePaletteHold",
+      "profiles": ["sk"],
+      "meaning": "Run act0 post-battle palette and raw hold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 584,
+      "old": "loc_7B972",
+      "new": "SSZMecha_UnusedFallUntilOffscreen",
+      "profiles": ["sk"],
+      "meaning": "Indexed fall/delete path whose setup follows unreachable unlabeled code."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 590,
+      "old": "loc_7B97E",
+      "new": "SSZMecha_DeleteUnusedFallingActor",
+      "profiles": ["sk"],
+      "meaning": "Delete Mecha through the unused fall path when offscreen."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 594,
+      "old": "loc_7B984",
+      "new": "SSZMecha_AnimateUntilSuperSetup",
+      "profiles": ["sk"],
+      "meaning": "Animate palette and raw script during pre-super wait."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 600,
+      "old": "loc_7B996",
+      "new": "SSZMecha_BeginSuperRoundSignal",
+      "profiles": ["sk"],
+      "meaning": "Start next-round scene and child effect handshake."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 615,
+      "old": "loc_7B9D2",
+      "new": "SSZMecha_WaitReleaseAndStartAnim",
+      "profiles": ["sk"],
+      "meaning": "Wait for child callback to release own wait bit6."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 624,
+      "old": "locret_7B9F8",
+      "new": "SSZMecha_ChildReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during child effect wait or after raw transition setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 628,
+      "old": "loc_7B9FA",
+      "new": "SSZMecha_AnimateRelease",
+      "profiles": ["sk"],
+      "meaning": "Run post-handshake callback raw animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 632,
+      "old": "loc_7BA00",
+      "new": "SSZMecha_BeginSpinCharge",
+      "profiles": ["sk"],
+      "meaning": "Raw callback begins spindash charge and chooses rolling trail variant."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 641,
+      "old": "loc_7BA22",
+      "new": "SSZMecha_TrySpinChargeTrails",
+      "profiles": ["sk"],
+      "meaning": "Attempt selected spin-charge rolling trail pair."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 645,
+      "old": "loc_7BA28",
+      "new": "SSZMecha_WaitWithSpinChargeSound",
+      "profiles": ["sk"],
+      "meaning": "Play gated spindash sound while charge countdown runs."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 653,
+      "old": "loc_7BA38",
+      "new": "SSZMecha_BeginDashAndOpenCamera",
+      "profiles": ["sk"],
+      "meaning": "Lock Player1 and start rightward dash while expanding camera."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 671,
+      "old": "loc_7BA80",
+      "new": "SSZMecha_TryCameraAdvanceActor",
+      "profiles": ["sk"],
+      "meaning": "Attempt fixed-step camera advance after dash setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 676,
+      "old": "locret_7BA8E",
+      "new": "SSZMecha_CameraAdvanceSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after optional camera advance actor creation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 680,
+      "old": "loc_7BA90",
+      "new": "SSZMecha_DashToBrakeThreshold",
+      "profiles": ["sk"],
+      "meaning": "Move dash right until saved rightbound minusAAhex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 689,
+      "old": "loc_7BAA6",
+      "new": "SSZMecha_BeginBrakingAnimation",
+      "profiles": ["sk"],
+      "meaning": "Select dash braking animation and jump callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 696,
+      "old": "loc_7BABE",
+      "new": "SSZMechaPostBattle_BrakeMoveAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "Decelerate dash while raw animation approaches jump callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 702,
+      "old": "loc_7BAD0",
+      "new": "SSZMecha_JumpTowardSuperArena",
+      "profiles": ["sk"],
+      "meaning": "Raw callback launches jump and chooses flip-sensitive animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 713,
+      "old": "loc_7BB00",
+      "new": "SSZMecha_InstallJumpAnimation",
+      "profiles": ["sk"],
+      "meaning": "Install selected post-battle jump animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 717,
+      "old": "loc_7BB06",
+      "new": "SSZMechaPostBattle_JumpUntilArenaLanding",
+      "profiles": ["sk"],
+      "meaning": "Animate with flip controls and light gravity until landing."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 725,
+      "old": "loc_7BB20",
+      "new": "SSZMecha_SetSuperArenaAndLanding",
+      "profiles": ["sk"],
+      "meaning": "Landing callback establishes seven horizontal arena positions."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 748,
+      "old": "loc_7BB7C",
+      "new": "SSZMecha_BeginTransformPaletteAndSparks",
+      "profiles": ["sk"],
+      "meaning": "Reset phase bits and install transformation palette/sparks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 760,
+      "old": "locret_7BBAA",
+      "new": "SSZMecha_TransformSparkSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after transformation spark creation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 764,
+      "old": "loc_7BBAC",
+      "new": "SSZMecha_AnimateAndSignalEmerald",
+      "profiles": ["sk"],
+      "meaning": "Run transformation palette/raw and toggle global emerald scene bit."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 772,
+      "old": "loc_7BBC6",
+      "new": "SSZMecha_PrepareForcedApproach",
+      "profiles": ["sk"],
+      "meaning": "Raw callback prepares Player1 for forced rightward approach."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 781,
+      "old": "loc_7BBE0",
+      "new": "SSZMecha_ForceApproachAndStartBattle",
+      "profiles": ["sk"],
+      "meaning": "Force Player1 right until arena threshold then hand off boss controller."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 802,
+      "old": "loc_7BC32",
+      "new": "SSZMechaFinalDefeat_HoldAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw final defeated Mecha during direct191timer delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 808,
+      "old": "loc_7BC3E",
+      "new": "SSZMecha_BeginFinalFadeAndDebris",
+      "profiles": ["sk"],
+      "meaning": "Install final fade-out/debris wait."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 820,
+      "old": "loc_7BC70",
+      "new": "SSZMecha_BeginWhiteFadeAndSound",
+      "profiles": ["sk"],
+      "meaning": "Prepare final white fade and finite explosion sound countdown."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 829,
+      "old": "loc_7BC90",
+      "new": "SSZMecha_SavePaletteAndTryWhiteFade",
+      "profiles": ["sk"],
+      "meaning": "Save all colors and attempt selected white fade actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 838,
+      "old": "locret_7BCAE",
+      "new": "SSZMecha_WhiteFadeSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after final white fade allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 842,
+      "old": "loc_7BCB0",
+      "new": "SSZMecha_WaitWhiteFadeThenSave",
+      "profiles": ["sk"],
+      "meaning": "Wait for fade actor statusbit7 before final save/scene signal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 861,
+      "old": "loc_7BCFC",
+      "new": "SSZMecha_WaitAndTryKnucklesEnding",
+      "profiles": ["sk"],
+      "meaning": "Continue sound burst until final ending countdown expires."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 870,
+      "old": "loc_7BD1C",
+      "new": "SSZMecha_TryPaletteRestore",
+      "profiles": ["sk"],
+      "meaning": "Attempt palette restoration after ending actor attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 875,
+      "old": "loc_7BD2A",
+      "new": "SSZMecha_DeleteAfterEndingSetup",
+      "profiles": ["sk"],
+      "meaning": "Delete final defeated Mecha controller after independent spawn attempts."
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "original_line": 889,
+      "old": "locret_7BD4A",
+      "new": "SSZMechaExplosionSoundBurst_Return",
+      "profiles": ["sk"],
+      "meaning": "Return from finite post-defeat explosion sound helper."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 18,
+      "old": "loc_7A244",
+      "new": "SSZGHZBoss_PositionAndQueueArt",
+      "profiles": ["sk"],
+      "meaning": "Place the delayed Green Hill-style ship encounter and prepare its graphics."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 35,
+      "old": "loc_7A282",
+      "new": "SSZGHZBoss_SavePaletteAndLoadMiscColors",
+      "profiles": ["sk"],
+      "meaning": "Snapshot original line2 colors before loading encounter palette."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 42,
+      "old": "loc_7A294",
+      "new": "SSZGHZBoss_InstallBattleDispatcher",
+      "profiles": ["sk"],
+      "meaning": "Timer callback installs the ship battle dispatcher."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 45,
+      "old": "locret_7A29A",
+      "new": "SSZGHZ_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for battle dispatcher installation and hidden collision child."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 49,
+      "old": "loc_7A29C",
+      "new": "SSZGHZBoss_DispatchHandleHitsAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch six ship states,handle hit/defeat and draw with touch registration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 57,
+      "old": "off_7A2B4",
+      "new": "SSZGHZBoss_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD state offsets for the Green Hill-style ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 66,
+      "old": "loc_7A2C0",
+      "new": "SSZGHZBoss_InitializeShipAndHead",
+      "profiles": ["sk"],
+      "meaning": "Initialize ship attributes,health and descending entry phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 77,
+      "old": "loc_7A2F0",
+      "new": "SSZGHZBoss_DescendAndWaitForEntryTimer",
+      "profiles": ["sk"],
+      "meaning": "Move ship downward during its entry countdown."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 82,
+      "old": "loc_7A2FC",
+      "new": "SSZGHZ_BobLeftAndSpawnContact",
+      "profiles": ["sk"],
+      "meaning": "Entry timer callback begins horizontal bob and attempts collision detail."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 95,
+      "old": "loc_7A32C",
+      "new": "SSZGHZBoss_MoveToChainDeploymentPoint",
+      "profiles": ["sk"],
+      "meaning": "Bob left to camera-relative chain deployment point."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 107,
+      "old": "locret_7A35C",
+      "new": "SSZGHZBoss_ReturnAfterDeploymentCheck",
+      "profiles": ["sk"],
+      "meaning": "Return after movement or chain creation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 111,
+      "old": "loc_7A35E",
+      "new": "SSZGHZBoss_WaitForLastChainChildSignal",
+      "profiles": ["sk"],
+      "meaning": "Wait for last dropped chain child to signal root bit2."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 120,
+      "old": "locret_7A386",
+      "new": "SSZGHZBoss_ReturnFromChainDeploymentWait",
+      "profiles": ["sk"],
+      "meaning": "Return while chain deployment is pending or after timed movement setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 124,
+      "old": "loc_7A388",
+      "new": "SSZGHZBoss_BobMoveAndWaitForPause",
+      "profiles": ["sk"],
+      "meaning": "Run timed horizontal motion between chain swing pauses."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 130,
+      "old": "loc_7A39A",
+      "new": "SSZGHZBoss_PauseAndSuppressContactChild",
+      "profiles": ["sk"],
+      "meaning": "Timer callback pauses ship while waiting for swing-direction signal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 136,
+      "old": "loc_7A3A8",
+      "new": "SSZGHZ_ConsumeTurnAndReverse",
+      "profiles": ["sk"],
+      "meaning": "Consume chain turn signal and resume ship in opposite direction."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 145,
+      "old": "locret_7A3CC",
+      "new": "SSZGHZBoss_ReturnFromSwingTurnWait",
+      "profiles": ["sk"],
+      "meaning": "Return after checking chain swing turn request."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 149,
+      "old": "loc_7A3CE",
+      "new": "SSZGHZBoss_BeginDefeatDeparture",
+      "profiles": ["sk"],
+      "meaning": "Post-fade callback starts rightward ship departure."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 157,
+      "old": "loc_7A3E6",
+      "new": "SSZGHZBoss_MoveAwayUntilExitTimer",
+      "profiles": ["sk"],
+      "meaning": "Move defeated ship until inherited departure timer underflows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 164,
+      "old": "loc_7A3F8",
+      "new": "SSZGHZ_FinishEncounterAndRestorePal",
+      "profiles": ["sk"],
+      "meaning": "Finish defeated encounter and request background progression."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 173,
+      "old": "loc_7A414",
+      "new": "SSZGHZ_RestorePaletteLoadArtDelete",
+      "profiles": ["sk"],
+      "meaning": "Restore original line2 colors and delete departing ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 181,
+      "old": "loc_7A428",
+      "new": "SSZGHZ_AnchorDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch root chain anchor state and apply parent-death display handling."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 189,
+      "old": "off_7A43E",
+      "new": "SSZGHZChainAnchor_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Four relative WORD offsets for root chain anchor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 196,
+      "old": "loc_7A446",
+      "new": "SSZGHZChainAnchor_InitializeDropAndSwing",
+      "profiles": ["sk"],
+      "meaning": "Initialize first chain anchor with vertical drop and phase step."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 204,
+      "old": "loc_7A460",
+      "new": "SSZGHZ_DropLinksAndSignalLast",
+      "profiles": ["sk"],
+      "meaning": "Shared two-pixel drop state for anchor,links and ball."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 214,
+      "old": "locret_7A480",
+      "new": "SSZGHZChainChildren_ReturnAfterDropStep",
+      "profiles": ["sk"],
+      "meaning": "Return during chain drop or after state advancement."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 218,
+      "old": "loc_7A482",
+      "new": "SSZGHZ_AnchorWaitDeployment",
+      "profiles": ["sk"],
+      "meaning": "Wait until final chain child has completed deployment."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 224,
+      "old": "locret_7A494",
+      "new": "SSZGHZ_AnchorDeploymentReturn",
+      "profiles": ["sk"],
+      "meaning": "Return before or just after anchor swing is selected."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 228,
+      "old": "loc_7A496",
+      "new": "SSZGHZ_AnchorSwingAndCheckTurn",
+      "profiles": ["sk"],
+      "meaning": "Advance chain swing phase and conditionally request ship reversal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 240,
+      "old": "loc_7A4B8",
+      "new": "SSZGHZ_AnchorSignalSelectedTurn",
+      "profiles": ["sk"],
+      "meaning": "Set ship turn-request bit for selected swing side and ship orientation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 245,
+      "old": "loc_7A4C2",
+      "new": "SSZGHZ_AnchorAdvancePhaseAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Increment anchor phase and keep anchor attached to root ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 251,
+      "old": "loc_7A4D0",
+      "new": "SSZGHZChainLink_DispatchAndDrawOrFlicker",
+      "profiles": ["sk"],
+      "meaning": "Dispatch a middle chain link and propagate immediate-parent defeat display."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 259,
+      "old": "off_7A4E6",
+      "new": "SSZGHZChainLink_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three relative WORD offsets for chain links."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 265,
+      "old": "loc_7A4EC",
+      "new": "SSZGHZ_InitChainLinkDrop",
+      "profiles": ["sk"],
+      "meaning": "Initialize a middle chain link with stagger timer and circular scale."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 272,
+      "old": "loc_7A500",
+      "new": "SSZGHZ_ChainLinkSyncPhaseAndOrbit",
+      "profiles": ["sk"],
+      "meaning": "Move chain link or ball around its immediately preceding child."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 279,
+      "old": "loc_7A514",
+      "new": "SSZGHZ_BallDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch end ball and alternate its visible frame each VInt parity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 289,
+      "old": "loc_7A536",
+      "new": "SSZGHZBall_DrawTouchAfterFrameSelection",
+      "profiles": ["sk"],
+      "meaning": "Apply ball touch/draw or parent-death flicker behavior after frame parity selection."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 293,
+      "old": "off_7A53E",
+      "new": "SSZGHZBall_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three relative WORD offsets for end ball."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 299,
+      "old": "loc_7A544",
+      "new": "SSZGHZ_InitBallDrop",
+      "profiles": ["sk"],
+      "meaning": "Initialize end ball with last stagger timer and larger circular offset."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 306,
+      "old": "loc_7A558",
+      "new": "SSZGHZShipContactChild_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize attached frame6 contact child of ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 311,
+      "old": "loc_7A568",
+      "new": "SSZGHZ_ShipContactVisibleEvenTick",
+      "profiles": ["sk"],
+      "meaning": "Show/register attached ship detail only when root is active and VInt is even."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 324,
+      "old": "loc_7A59A",
+      "new": "SSZGHZShipContactChild_DeleteWithParent",
+      "profiles": ["sk"],
+      "meaning": "Delete attached ship contact child after parent defeat status."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 341,
+      "old": "loc_7A5C6",
+      "new": "SSZGHZBoss_SelectMisoffsetHitFlashColors",
+      "profiles": ["sk"],
+      "meaning": "Select original overlapping hit-flash color groups by recovery parity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 348,
+      "old": "loc_7A5D4",
+      "new": "SSZGHZ_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Write three hit-flash palette slots and decrement recovery timer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 355,
+      "old": "locret_7A5EA",
+      "new": "SSZGHZBoss_ReturnFromHitOrDefeatCheck",
+      "profiles": ["sk"],
+      "meaning": "Return while contact is active or hit recovery is unfinished/completed."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 359,
+      "old": "loc_7A5EC",
+      "new": "SSZGHZ_BeginDefeatFadeAndExplosion",
+      "profiles": ["sk"],
+      "meaning": "Install defeat fade/departure sequence when health is zero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 367,
+      "old": "loc_7A60E",
+      "new": "SSZGHZBoss_AwardDefeatAndSeedFadeTimer",
+      "profiles": ["sk"],
+      "meaning": "Apply shared boss-defeat score/timer after explosion allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 380,
+      "old": "word_7A622",
+      "new": "SSZGHZBoss_HitFlashPaletteSlotAddresses",
+      "profiles": ["sk"],
+      "meaning": "Three WORD normal palette destination addresses for shared ship hit flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 382,
+      "old": "word_7A628",
+      "new": "SSZGHZBoss_HitFlashColorWords",
+      "profiles": ["sk"],
+      "meaning": "Six stored color words read with original overlapping byte offsets."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 396,
+      "old": "word_7A642",
+      "new": "SSZGHZChainChildren_DropTimersBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Six WORD drop timer seeds indexed directly by even child subtype."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 403,
+      "old": "word_7A65A",
+      "new": "SSZGHZShipContactChild_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte attributes for attached ship contact child."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 406,
+      "old": "ObjDat3_7A660",
+      "new": "SSZGHZChainAnchor_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full descriptor for root chain anchor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 412,
+      "old": "ObjDat3_7A66C",
+      "new": "SSZGHZChainLink_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full descriptor for middle chain links."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 418,
+      "old": "ObjDat3_7A678",
+      "new": "SSZGHZBall_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full descriptor for dangerous end ball."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 423,
+      "old": "ChildObjDat_7A684",
+      "new": "SSZGHZChainAndBall_TreeChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Six separate TreeList entries building anchor,four links and end ball."
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "original_line": 431,
+      "old": "ChildObjDat_7A69E",
+      "new": "SSZGHZShipContactChild_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Normal child record for attached ship frame6 contact detail."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 18,
+      "old": "locret_7AB7E",
+      "new": "SSZMTZLaserBurst_ReturnAfterTimerOrSpawn",
+      "profiles": ["sk"],
+      "meaning": "Return from the exact-zero laser pair burst timer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 23,
+      "old": "ChildObjDat_7AB80",
+      "new": "SSZMTZLaserPair_NormalChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Two normal child records for staggered horizontal lasers."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 31,
+      "old": "loc_7AB8E",
+      "new": "SSZMTZ_InitLaserAtParent",
+      "profiles": ["sk"],
+      "meaning": "Initialize one staggered laser and snapshot its adjusted parent position."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 43,
+      "old": "loc_7ABB8",
+      "new": "SSZMTZLaser_InstallLaunchDelay",
+      "profiles": ["sk"],
+      "meaning": "Store the selected laser delay and install countdown updater."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 47,
+      "old": "loc_7ABC2",
+      "new": "SSZMTZLaser_WaitBeforeHorizontalLaunch",
+      "profiles": ["sk"],
+      "meaning": "Draw an unlaunched laser while its signed countdown remains nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 53,
+      "old": "loc_7ABCE",
+      "new": "SSZMTZLaser_SelectLaunchVelocityFromFlip",
+      "profiles": ["sk"],
+      "meaning": "Select horizontal laser velocity from its inherited adjusted flip."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 60,
+      "old": "loc_7ABE2",
+      "new": "SSZMTZ_LaserSetSpeedAndPlaySound",
+      "profiles": ["sk"],
+      "meaning": "Store horizontal laser speed and play its launch sound."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 65,
+      "old": "loc_7ABEE",
+      "new": "SSZMTZ_LaserMoveTouchAndCull",
+      "profiles": ["sk"],
+      "meaning": "Move a launched laser without gravity and process touch/camera culling."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 69,
+      "old": "ObjDat3_7ABFA",
+      "new": "SSZMTZLaser_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the MTZ-style horizontal laser."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 92,
+      "old": "loc_7AC42",
+      "new": "SSZMTZ_HitStopSharedXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Stop boss shared horizontal velocity after the fresh-hit release policy."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 97,
+      "old": "loc_7AC4A",
+      "new": "SSZMTZ_HitCheckPlayersHurt",
+      "profiles": ["sk"],
+      "meaning": "Check whether either player is in routine 4 when no fresh-hit release was selected."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 103,
+      "old": "loc_7AC5A",
+      "new": "SSZMTZ_HitRequestLegacyAnim",
+      "profiles": ["sk"],
+      "meaning": "Set the second legacy packed slot requested animation nibble to 4."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 112,
+      "old": "locret_7AC78",
+      "new": "SSZMTZ_HitPlayerCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the player-routine and legacy animation-request policy."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 118,
+      "old": "loc_7AC7A",
+      "new": "SSZMTZDefeat_BeginRightwardDeparture",
+      "profiles": ["sk"],
+      "meaning": "Fade-wait callback begins defeated MTZ-style ship departure."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 126,
+      "old": "loc_7AC92",
+      "new": "SSZMTZ_DefeatMoveAndTickExit",
+      "profiles": ["sk"],
+      "meaning": "Move and draw defeated ship until inherited departure timer underflows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 133,
+      "old": "loc_7ACA4",
+      "new": "SSZMTZ_DefeatSignalAndRestorePal",
+      "profiles": ["sk"],
+      "meaning": "Signal MTZ encounter completion and prepare original palette restoration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 142,
+      "old": "loc_7ACC0",
+      "new": "SSZMTZ_DefeatRestoreArtAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Restore saved palette line2, load post-boss patterns and schedule deletion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 173,
+      "old": "loc_7AD1A",
+      "new": "SSZMTZ_HitChooseFlashOffset",
+      "profiles": ["sk"],
+      "meaning": "Select hit-flash source colors using the original overlapping byte offsets."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 180,
+      "old": "loc_7AD28",
+      "new": "SSZMTZ_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy three hit colors and restore contact when recovery expires."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 186,
+      "old": "locret_7AD38",
+      "new": "SSZMTZ_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from MTZ hit/defeat handling when no transition remains."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 190,
+      "old": "loc_7AD3A",
+      "new": "SSZMTZ_BeginDefeatFadeAndExplosion",
+      "profiles": ["sk"],
+      "meaning": "Install MTZ defeat fade/departure and attempt an explosion controller."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 200,
+      "old": "loc_7AD64",
+      "new": "SSZMTZDefeat_AwardScoreAndSeedFadeDelay",
+      "profiles": ["sk"],
+      "meaning": "Apply shared score, timer and render effects after explosion attempt."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 213,
+      "old": "word_7AD78",
+      "new": "SSZMTZHitFlash_PaletteSlotAddresses",
+      "profiles": ["sk"],
+      "meaning": "Three WORD destination addresses for MTZ boss hit flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 215,
+      "old": "word_7AD7E",
+      "new": "SSZMTZHitFlash_SourceColorWords",
+      "profiles": ["sk"],
+      "meaning": "Six stored color WORDs used by overlapping hit-flash source windows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 220,
+      "old": "loc_7AD8A",
+      "new": "SSZMTZOrb_DispatchState",
+      "profiles": ["sk"],
+      "meaning": "Tail-dispatch five MTZ orb lifecycle states."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 226,
+      "old": "off_7AD98",
+      "new": "SSZMTZOrb_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Five relative WORD state offsets for ring initialization and detached orb lifecycle."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 234,
+      "old": "loc_7ADA2",
+      "new": "SSZMTZ_InitFirstOrbInPlace",
+      "profiles": ["sk"],
+      "meaning": "Initialize a seven-member orb ring using the current actor as member zero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 241,
+      "old": "loc_7ADAA",
+      "new": "SSZMTZOrbRing_AllocateNextMember",
+      "profiles": ["sk"],
+      "meaning": "Allocate each later orb ring member until the seven-member count completes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 245,
+      "old": "loc_7ADB2",
+      "new": "SSZMTZ_InitOrbAndContinueRing",
+      "profiles": ["sk"],
+      "meaning": "Configure orb member attributes, phases and LONG boss pointer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 264,
+      "old": "locret_7AE12",
+      "new": "SSZMTZ_OrbRingInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after seven orb members or a partial allocation prefix."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 267,
+      "old": "byte_7AE14",
+      "new": "SSZMTZOrbRing_InitialPhaseBytes",
+      "profiles": ["sk"],
+      "meaning": "Seven initial angular phase BYTEs for orb ring members."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 269,
+      "old": "byte_7AE1B",
+      "new": "SSZMTZOrbRing_AuxiliaryByteInitializers",
+      "profiles": ["sk"],
+      "meaning": "Seven auxiliary initialization BYTEs written to orb member+0x40."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 274,
+      "old": "loc_7AE22",
+      "new": "SSZMTZ_OrbOrbitAndCheckRelease",
+      "profiles": ["sk"],
+      "meaning": "Update ring center from boss and let the first eligible orb consume its release request."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 293,
+      "old": "loc_7AE70",
+      "new": "SSZMTZ_OrbClampReleaseDirection",
+      "profiles": ["sk"],
+      "meaning": "Apply left hard-bound override to released orb horizontal velocity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 298,
+      "old": "loc_7AE7C",
+      "new": "SSZMTZOrb_ForceReleaseLeftAtRightBound",
+      "profiles": ["sk"],
+      "meaning": "Apply right hard-bound override to released orb horizontal velocity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 303,
+      "old": "loc_7AE88",
+      "new": "SSZMTZ_OrbFaceReleaseDirection",
+      "profiles": ["sk"],
+      "meaning": "Select released orb horizontal flip from chosen signed speed."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 309,
+      "old": "loc_7AE98",
+      "new": "SSZMTZ_OrbStoreReleaseXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Store horizontal speed for next-update detached motion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 312,
+      "old": "loc_7AE9C",
+      "new": "SSZMTZOrb_ProjectSelectDepthAndDrawTouch",
+      "profiles": ["sk"],
+      "meaning": "Project orb ring position, select depth appearance and draw with collision registration."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 334,
+      "old": "loc_7AED6",
+      "new": "SSZMTZ_OrbProjectXAndDepth",
+      "profiles": ["sk"],
+      "meaning": "Calculate ring X, signed depth and the source vertical phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 352,
+      "old": "loc_7AF0A",
+      "new": "SSZMTZ_OrbProjectYAndAdvancePhase",
+      "profiles": ["sk"],
+      "meaning": "Write projected Y and advance orbit phases according to fold mode."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 365,
+      "old": "loc_7AF2A",
+      "new": "SSZMTZOrbProjection_HandleSharedFoldMode",
+      "profiles": ["sk"],
+      "meaning": "Handle shared unfold/fold commands after the current projected position."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 374,
+      "old": "loc_7AF44",
+      "new": "SSZMTZOrbProjection_ClearSharedFoldMode",
+      "profiles": ["sk"],
+      "meaning": "Clear boss shared fold mode after local retraction or an unrecognized nonzero mode."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 379,
+      "old": "loc_7AF4C",
+      "new": "SSZMTZOrbProjection_GrowLocalFoldPhase",
+      "profiles": ["sk"],
+      "meaning": "Grow local fold phase by two while the shared command is0xFF."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "original_line": 384,
+      "old": "locret_7AF58",
+      "new": "SSZMTZ_OrbProjectionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after retaining or advancing local fold phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 18,
+      "old": "loc_7A6DC",
+      "new": "SSZMTZ_QueueArtAndSavePalette",
+      "profiles": ["sk"],
+      "meaning": "Prepare encounter art and original palette snapshot after optional music transition."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 29,
+      "old": "loc_7A702",
+      "new": "SSZMTZBoss_SavePaletteAndLoadOrbColors",
+      "profiles": ["sk"],
+      "meaning": "Snapshot original line2 colors and load the orb encounter palette."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 36,
+      "old": "loc_7A712",
+      "new": "SSZMTZBoss_InstallMainDispatcher",
+      "profiles": ["sk"],
+      "meaning": "Initial timer callback installs the main MTZ ship dispatcher."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 39,
+      "old": "locret_7A718",
+      "new": "SSZMTZBoss_ReturnFromSetupOrSharedPolicy",
+      "profiles": ["sk"],
+      "meaning": "Shared return for main-dispatch setup and detached-orb policy suppression."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 43,
+      "old": "loc_7A71A",
+      "new": "SSZMTZBoss_DispatchMainRoutine",
+      "profiles": ["sk"],
+      "meaning": "Tail-dispatch main initialization or active battle handler."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 49,
+      "old": "off_7A728",
+      "new": "SSZMTZBoss_MainRoutineOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two relative WORD offsets for MTZ ship main routine."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 54,
+      "old": "loc_7A72C",
+      "new": "SSZMTZ_InitShipAndOrbRing",
+      "profiles": ["sk"],
+      "meaning": "Initialize MTZ-style ship,shared motion and coordinated children."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 83,
+      "old": "loc_7A7C4",
+      "new": "SSZMTZ_SeedPackedAnimScratch",
+      "profiles": ["sk"],
+      "meaning": "Seed six shared packed-animation scratch bytes after child attempts."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 94,
+      "old": "loc_7A7E2",
+      "new": "SSZMTZBoss_DispatchAttackPhase",
+      "profiles": ["sk"],
+      "meaning": "Tail-dispatch secondary MTZ attack phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 100,
+      "old": "off_7A7F0",
+      "new": "SSZMTZBoss_AttackPhaseOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD attack phases of MTZ ship."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 111,
+      "old": "loc_7A800",
+      "new": "SSZMTZ_DescendAndChooseDirection",
+      "profiles": ["sk"],
+      "meaning": "Descend shared ship motion to lower threshold and face Player1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 128,
+      "old": "loc_7A84A",
+      "new": "SSZMTZ_CheckHitAndTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Shared initial-descent hit policy,touch registration and drawing tail."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 147,
+      "old": "loc_7A874",
+      "new": "SSZMTZ_MovePassAndCheckLeftLimit",
+      "profiles": ["sk"],
+      "meaning": "Move horizontal orb-shield pass and process leftward boundary."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 163,
+      "old": "loc_7A8AE",
+      "new": "SSZMTZBoss_TestRightBoundaryAndTurn",
+      "profiles": ["sk"],
+      "meaning": "Process rightward horizontal pass boundary and optional upward phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 174,
+      "old": "loc_7A8DA",
+      "new": "SSZMTZBoss_SynchronizeXAndApplySineBob",
+      "profiles": ["sk"],
+      "meaning": "Copy shared X into ship actor and apply four-pixel sine bob."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 178,
+      "old": "loc_7A8E4",
+      "new": "SSZMTZBoss_ApplyActiveHitPolicyAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Shared active-state hit/touch/draw tail without position synchronization."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 184,
+      "old": "loc_7A8F4",
+      "new": "SSZMTZ_RiseToCenterAndStopY",
+      "profiles": ["sk"],
+      "meaning": "Move upward and horizontally toward upper center."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 190,
+      "old": "loc_7A906",
+      "new": "SSZMTZ_StopXAtCenter",
+      "profiles": ["sk"],
+      "meaning": "Stop leftward motion once sharedX passes center."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 199,
+      "old": "loc_7A91E",
+      "new": "SSZMTZBoss_StopRightwardMotionAtCenter",
+      "profiles": ["sk"],
+      "meaning": "Stop rightward motion once sharedX reaches center."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 204,
+      "old": "loc_7A92C",
+      "new": "SSZMTZ_AdvanceAfterMotionStops",
+      "profiles": ["sk"],
+      "meaning": "Start orbit expansion only when shared X and Y velocities are both zero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 210,
+      "old": "loc_7A93A",
+      "new": "SSZMTZBoss_DrawAfterCenteringStep",
+      "profiles": ["sk"],
+      "meaning": "Route centering state to synchronized bobbed display."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 214,
+      "old": "loc_7A93C",
+      "new": "SSZMTZ_ExpandAndFlattenOrbit",
+      "profiles": ["sk"],
+      "meaning": "Expand orb geometry before reducing its vertical scale."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 222,
+      "old": "loc_7A94E",
+      "new": "SSZMTZBoss_FlattenOrbitUntilZeroScale",
+      "profiles": ["sk"],
+      "meaning": "Reduce orb vertical coefficient to zero after expansion."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 227,
+      "old": "loc_7A958",
+      "new": "SSZMTZBoss_DrawExpandedOrFlatteningOrbit",
+      "profiles": ["sk"],
+      "meaning": "Route orbit expansion/flattening to normal display tail."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 231,
+      "old": "loc_7A95A",
+      "new": "SSZMTZBoss_RetractOrbitRadius",
+      "profiles": ["sk"],
+      "meaning": "Retract expanded orbit radius before restoring its vertical scale."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 238,
+      "old": "loc_7A968",
+      "new": "SSZMTZ_RestoreOrbitAndDescend",
+      "profiles": ["sk"],
+      "meaning": "Restore orb vertical coefficient and resume normal descent."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 246,
+      "old": "loc_7A986",
+      "new": "SSZMTZBoss_DrawRetractingOrRestoredOrbit",
+      "profiles": ["sk"],
+      "meaning": "Route orbit retraction/restoration to synchronized bobbed draw."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 250,
+      "old": "loc_7A98A",
+      "new": "SSZMTZ_FlattenOrbitAfterOrbRelease",
+      "profiles": ["sk"],
+      "meaning": "Flatten orbit after hit-triggered orb release."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 257,
+      "old": "loc_7A996",
+      "new": "SSZMTZBoss_RequestOrbPhaseFold",
+      "profiles": ["sk"],
+      "meaning": "Request folded phase from remaining orbiting children."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 260,
+      "old": "loc_7A99C",
+      "new": "SSZMTZBoss_RetractRadiusAfterOrbRelease",
+      "profiles": ["sk"],
+      "meaning": "Reduce orbit radius during post-hit release phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 265,
+      "old": "loc_7A9A8",
+      "new": "SSZMTZ_RiseAfterOrbRelease",
+      "profiles": ["sk"],
+      "meaning": "Integrate post-hit upward shared motion and stop aboveY3B0hex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 271,
+      "old": "loc_7A9BA",
+      "new": "SSZMTZ_WaitForDetachedOrbs",
+      "profiles": ["sk"],
+      "meaning": "Wait for all currently detached orb actors to finish before recovery phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 278,
+      "old": "loc_7A9CC",
+      "new": "SSZMTZBoss_AdvanceToOrbRecoveryPhase",
+      "profiles": ["sk"],
+      "meaning": "Advance from released-orb wait to recovery/no-orb choice."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 281,
+      "old": "loc_7A9D0",
+      "new": "SSZMTZBoss_DrawDuringReleasedOrbWait",
+      "profiles": ["sk"],
+      "meaning": "Draw post-hit release phase regardless of remaining detached orb count."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 285,
+      "old": "loc_7A9D4",
+      "new": "SSZMTZ_RecoverOrbitOrBeginLaser",
+      "profiles": ["sk"],
+      "meaning": "Choose orbit recovery while shield orbs remain or unshielded laser movement."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 296,
+      "old": "loc_7A9EE",
+      "new": "SSZMTZ_DescendAfterOrbitRecovery",
+      "profiles": ["sk"],
+      "meaning": "Resume shielded movement after orbit scale recovery."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 303,
+      "old": "loc_7AA02",
+      "new": "SSZMTZ_BeginUnshieldedDiagonal",
+      "profiles": ["sk"],
+      "meaning": "Begin laser attack movement after remaining shield-orb count reacheszero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 312,
+      "old": "loc_7AA28",
+      "new": "SSZMTZ_InitLaserSubstate",
+      "profiles": ["sk"],
+      "meaning": "Select final laser phase and reset its substate/pause."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 318,
+      "old": "loc_7AA40",
+      "new": "SSZMTZ_DrawDuringRecovery",
+      "profiles": ["sk"],
+      "meaning": "Route recovery/no-orb transition through ordinary synchronized display."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 322,
+      "old": "loc_7AA44",
+      "new": "SSZMTZ_TickPauseOrDispatchLaser",
+      "profiles": ["sk"],
+      "meaning": "Pause final laser movement or dispatch its substate."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 329,
+      "old": "loc_7AA52",
+      "new": "SSZMTZ_DispatchLaserSubstate",
+      "profiles": ["sk"],
+      "meaning": "Tail-dispatch final laser phase movement substate."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 335,
+      "old": "off_7AA60",
+      "new": "SSZMTZBoss_UnshieldedMovementOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three relative WORD movement entries for final laser phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 341,
+      "old": "loc_7AA66",
+      "new": "SSZMTZ_MoveUpperApproach",
+      "profiles": ["sk"],
+      "meaning": "Integrate upper approach motion for final laser attack."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 347,
+      "old": "loc_7AA78",
+      "new": "SSZMTZ_CheckLeftAndArmBurst",
+      "profiles": ["sk"],
+      "meaning": "Arm downward laser pass after reaching left approach threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 360,
+      "old": "loc_7AAA6",
+      "new": "SSZMTZ_CheckRightAndArmBurst",
+      "profiles": ["sk"],
+      "meaning": "Arm downward laser pass after reaching right approach threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 369,
+      "old": "loc_7AACA",
+      "new": "SSZMTZBoss_DrawAfterUnshieldedApproach",
+      "profiles": ["sk"],
+      "meaning": "Draw synchronized ship after approach or laser-arming transition."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 373,
+      "old": "loc_7AACE",
+      "new": "SSZMTZ_DescendAndReverseLaserPass",
+      "profiles": ["sk"],
+      "meaning": "Integrate downward laser pass and reverse vertically at lower threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 383,
+      "old": "loc_7AAEC",
+      "new": "SSZMTZ_StopLaserPassAtLeft",
+      "profiles": ["sk"],
+      "meaning": "Stop horizontal movement at left boundary during downward pass."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 392,
+      "old": "loc_7AB04",
+      "new": "SSZMTZ_StopLaserPassAtRight",
+      "profiles": ["sk"],
+      "meaning": "Stop horizontal movement at right boundary during downward pass."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 397,
+      "old": "loc_7AB12",
+      "new": "SSZMTZ_TickLaserBurst",
+      "profiles": ["sk"],
+      "meaning": "Tick laser-pair burst after downward/bottom-turn movement."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 402,
+      "old": "loc_7AB1A",
+      "new": "SSZMTZ_RiseAndRestoreXMotion",
+      "profiles": ["sk"],
+      "meaning": "Integrate return rise and restart horizontal drift above center-height threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 411,
+      "old": "loc_7AB3A",
+      "new": "SSZMTZ_StopRiseAndRestartApproach",
+      "profiles": ["sk"],
+      "meaning": "Stop upward return and reset movementsubstate above upper threshold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "original_line": 417,
+      "old": "loc_7AB4E",
+      "new": "SSZMTZBoss_TickLaserBurstAfterReturnStep",
+      "profiles": ["sk"],
+      "meaning": "Tick laser burst after upward return and optional approach reset."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 17,
+      "old": "loc_7AF74",
+      "new": "SSZMTZ_OrbSelectNearDepthFrame",
+      "profiles": ["sk"],
+      "meaning": "Select the frame and queue priority for nonnegative depth below twelve."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 23,
+      "old": "loc_7AF82",
+      "new": "SSZMTZ_OrbSelectNegativeDepth",
+      "profiles": ["sk"],
+      "meaning": "Choose near or far negative-depth orb presentation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 31,
+      "old": "loc_7AF96",
+      "new": "SSZMTZOrbDepth_SelectFarNegativeFrame",
+      "profiles": ["sk"],
+      "meaning": "Select the frame and priority for depth below minus twelve."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 39,
+      "old": "loc_7AFA4",
+      "new": "SSZMTZ_OrbTickFlightTouchDelay",
+      "profiles": ["sk"],
+      "meaning": "Delay the released orb flight collision change until its byte countdown underflows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 46,
+      "old": "loc_7AFB6",
+      "new": "SSZMTZ_OrbMoveWithReducedGravity",
+      "profiles": ["sk"],
+      "meaning": "Integrate released orb flight and apply its reduced gravity and terminal speed."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 53,
+      "old": "loc_7AFD0",
+      "new": "SSZMTZDetachedOrb_TestFixedLandingHeight",
+      "profiles": ["sk"],
+      "meaning": "Switch a descending released orb to its fixed-height hopping state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 64,
+      "old": "loc_7AFF8",
+      "new": "SSZMTZ_OrbCheckFlightContact",
+      "profiles": ["sk"],
+      "meaning": "Apply player contact or boss-defeat policy after released orb flight."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 67,
+      "old": "loc_7AFFC",
+      "new": "SSZMTZ_OrbAnimateAndTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Run ordinary detached orb animation and collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 80,
+      "old": "locret_7B028",
+      "new": "SSZMTZDetachedOrb_LegacyContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from a preserved unused detached-orb contact tail."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 84,
+      "old": "loc_7B02A",
+      "new": "SSZMTZ_OrbTickHopTouchDelay",
+      "profiles": ["sk"],
+      "meaning": "Continue the released orb byte countdown in the hopping state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 91,
+      "old": "loc_7B03C",
+      "new": "SSZMTZ_OrbCheckHopContactAndFrame",
+      "profiles": ["sk"],
+      "meaning": "Run contact policy and move the orb only while visible frame is eight."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 111,
+      "old": "loc_7B07C",
+      "new": "SSZMTZDetachedOrb_ApplyOnePixelHopStep",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected one-pixel horizontal hopping step."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 114,
+      "old": "loc_7B080",
+      "new": "SSZMTZ_OrbHopTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw the manually positioned frame-eight hop without advancing animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 119,
+      "old": "loc_7B08C",
+      "new": "SSZMTZ_OrbRestartHopAtFloor",
+      "profiles": ["sk"],
+      "meaning": "Reset the sine hop at the fixed landing height and face Player1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 136,
+      "old": "loc_7B0BA",
+      "new": "SSZMTZ_OrbFacePlayerDelta",
+      "profiles": ["sk"],
+      "meaning": "Set the horizontal render flip for a nonnegative Player1 X difference."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 152,
+      "old": "loc_7B0D2",
+      "new": "SSZMTZ_OrbCheckPlayerAttack",
+      "profiles": ["sk"],
+      "meaning": "Consume one orb contact event and apply selected-player protection and attack policy."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 163,
+      "old": "loc_7B0F6",
+      "new": "SSZMTZDetachedOrb_SelectPopState",
+      "profiles": ["sk"],
+      "meaning": "Mark a detached orb for its final pop and released-count decrement."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 172,
+      "old": "word_7B10E",
+      "new": "SSZMTZDetachedOrb_ContactPlayerAddresses",
+      "profiles": ["sk"],
+      "meaning": "Four WORD player pointers selected by low contact-property bits."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 179,
+      "old": "loc_7B116",
+      "new": "SSZMTZ_OrbPopAndDecReleaseCount",
+      "profiles": ["sk"],
+      "meaning": "Finish a detached orb and release its contribution to the boss wait count."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 219,
+      "old": "loc_7B168",
+      "new": "SSZMTZ_PackedAnimReadMainSlot",
+      "profiles": ["sk"],
+      "meaning": "Decode one main frame slot from the preserved unused multisprite entry."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 222,
+      "old": "loc_7B16C",
+      "new": "SSZMTZ_PackedAnimLoadChildSlots",
+      "profiles": ["sk"],
+      "meaning": "Set up child-frame destinations and count for legacy packed animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 246,
+      "old": "loc_7B196",
+      "new": "SSZMTZ_PackedAnimReadCursorAndDelay",
+      "profiles": ["sk"],
+      "meaning": "Prepare repeated animation nibbles and read packed frame cursor/delay."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 258,
+      "old": "loc_7B1AA",
+      "new": "SSZMTZ_PackedAnimTickOrFetchToken",
+      "profiles": ["sk"],
+      "meaning": "Count down a packed slot delay or resolve its next script token."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 268,
+      "old": "loc_7B1C2",
+      "new": "SSZMTZ_PackedAnimWriteFrameAndStep",
+      "profiles": ["sk"],
+      "meaning": "Write a legacy frame and increment its byte cursor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 273,
+      "old": "loc_7B1CC",
+      "new": "SSZMTZ_PackedAnimStoreSlot",
+      "profiles": ["sk"],
+      "meaning": "Store packed slot state and advance to the next frame destination."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 281,
+      "old": "locret_7B1E0",
+      "new": "SSZMTZ_PackedAnimSlotLoopReturn",
+      "profiles": ["sk"],
+      "meaning": "Return when the legacy slot count is exhausted or no children exist."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 285,
+      "old": "loc_7B1E2",
+      "new": "SSZMTZLegacyAnimation_TestRestartCommand",
+      "profiles": ["sk"],
+      "meaning": "Handle FF restart or continue legacy negative-token dispatch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 293,
+      "old": "loc_7B1F0",
+      "new": "SSZMTZ_PackedAnimCheckAdvanceOwner",
+      "profiles": ["sk"],
+      "meaning": "Handle FE owner-phase advance or continue the command chain."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 300,
+      "old": "loc_7B1FC",
+      "new": "SSZMTZ_PackedAnimCheckChangeAnim",
+      "profiles": ["sk"],
+      "meaning": "Handle FD requested-animation change in packed slot state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 308,
+      "old": "loc_7B20A",
+      "new": "SSZMTZ_PackedAnimCheckSetCursor",
+      "profiles": ["sk"],
+      "meaning": "Handle FC absolute script cursor selection or reject another negative token."
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "original_line": 317,
+      "old": "locret_7B21A",
+      "new": "SSZMTZ_PackedAnimUnknownCmdReturn",
+      "profiles": ["sk"],
+      "meaning": "Return immediately for unsupported negative legacy animation tokens."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 26,
+      "old": "word_7D172",
+      "new": "SSZMecha_RadialShotVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Eight WORD XY velocities for radial projectile burst."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 48,
+      "old": "off_7D1A6",
+      "new": "SSZMecha_LaserScriptsAndCallbacks",
+      "profiles": ["sk"],
+      "meaning": "Two LONG script/callback pairs for Mecha laser subtype."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 63,
+      "old": "loc_7D1C6",
+      "new": "SSZMechaAttackRegionList_ScanForMatch",
+      "profiles": ["sk"],
+      "meaning": "Scan selected zero-terminated list for the classified Player1 region."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 70,
+      "old": "locret_7D1D0",
+      "new": "SSZMecha_AttackRegionMatchReturn",
+      "profiles": ["sk"],
+      "meaning": "Return the attack region membership condition codes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 75,
+      "old": "byte_7D1D2",
+      "new": "SSZMecha_AttackRegionRows",
+      "profiles": ["sk"],
+      "meaning": "Six padded four-byte region membership lists for attack choice."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 115,
+      "old": "loc_7D202",
+      "new": "SSZMechaPlayerRegion_SelectRightBase",
+      "profiles": ["sk"],
+      "meaning": "Select the right-side starting region number."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 118,
+      "old": "loc_7D204",
+      "new": "SSZMecha_ClassifyPlayerXThresholds",
+      "profiles": ["sk"],
+      "meaning": "Apply the original0x50/0xA0 X thresholds to the selected region base."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 126,
+      "old": "locret_7D214",
+      "new": "SSZMecha_PlayerXRegionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return the exact player region and side classification."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 132,
+      "old": "loc_7D216",
+      "new": "SSZMecha_CheckFacingArenaBound",
+      "profiles": ["sk"],
+      "meaning": "Invoke the caller continuation at the directional arena boundary."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 141,
+      "old": "loc_7D228",
+      "new": "SSZMechaArenaBounds_TestLeftBoundary",
+      "profiles": ["sk"],
+      "meaning": "Test left arena boundary for negative horizontal velocity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 148,
+      "old": "loc_7D234",
+      "new": "SSZMecha_RunArenaBoundCallback",
+      "profiles": ["sk"],
+      "meaning": "Tail-jump the supplied boundary completion continuation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 164,
+      "old": "byte_7D24C",
+      "new": "SSZMecha_RollTrailOffsetPriority",
+      "profiles": ["sk"],
+      "meaning": "Five signedXY and WORD priority records for rolling trail variants."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 192,
+      "old": "byte_7D280",
+      "new": "SSZMechaCollisionProxy_ParentFrameRows",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two four-byte parent-frame collision proxy records."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 229,
+      "old": "loc_7D2F6",
+      "new": "SSZMecha_StoreFrameCollisionFlags",
+      "profiles": ["sk"],
+      "meaning": "Store frame-selected Mecha collision flags outside hit recovery."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 232,
+      "old": "locret_7D2FA",
+      "new": "SSZMecha_FrameCollisionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after collision selection or hit-recovery suppression."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 237,
+      "old": "byte_7D2FC",
+      "new": "SSZMecha_CollisionFlagsByFrame",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two collision flag bytes indexed directly by Mecha mapping frame."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 276,
+      "old": "loc_7D338",
+      "new": "SSZMecha_HitChooseFlashOffset",
+      "profiles": ["sk"],
+      "meaning": "Select alternating five-color hit-flash source using original timer parity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 283,
+      "old": "loc_7D346",
+      "new": "SSZMecha_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy five selected hit colors and finish recovery when timer reaches zero."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 289,
+      "old": "locret_7D356",
+      "new": "SSZMechaHitFlash_ReturnFromRecovery",
+      "profiles": ["sk"],
+      "meaning": "Return from Mecha collision-hit recovery handling."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 293,
+      "old": "loc_7D358",
+      "new": "SSZMecha_RunDefeatCallback",
+      "profiles": ["sk"],
+      "meaning": "Tail-jump caller-selected Mecha defeat callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 314,
+      "old": "locret_7D39C",
+      "new": "SSZMecha_DefeatExplosionSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after optional scored-defeat explosion child setup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 320,
+      "old": "loc_7D39E",
+      "new": "SSZMecha_FreezeCameraAndRestorePal",
+      "profiles": ["sk"],
+      "meaning": "Complete Knuckles Mecha defeat setup with camera freeze and palette restore."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 338,
+      "old": "word_7D3CC",
+      "new": "SSZMecha_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Five WORD palette destination addresses for Mecha hit flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "original_line": 340,
+      "old": "word_7D3D6",
+      "new": "SSZMechaHitFlash_SourceColorWords",
+      "profiles": ["sk"],
+      "meaning": "Ten original source color WORDs for five-color hit flash copying."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 11,
+      "old": "word_7D3FC",
+      "new": "SSZMechaCollisionProxy_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "ObjDat3_7D402",
+      "new": "SSZMechaRollingTrail_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 24,
+      "old": "ObjDat3_7D41A",
+      "new": "SSZMechaSignalEffect_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 29,
+      "old": "ObjDat3_7D426",
+      "new": "SSZMechaActiveEffect_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 34,
+      "old": "word_7D432",
+      "new": "SSZMechaActiveParticle_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 37,
+      "old": "ObjDat3_7D438",
+      "new": "SSZMechaLaser_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 42,
+      "old": "ObjDat3_7D444",
+      "new": "SSZSuperMechaRadialProjectile_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 47,
+      "old": "ObjDat3_7D450",
+      "new": "SSZMechaMasterEmerald_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact full/partial descriptor for the reviewed Mecha child consumer."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 52,
+      "old": "ObjDat3_7D45C",
+      "new": "SSZCraneShipFragment_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the four crane ship breakup fragments."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 57,
+      "old": "ObjDat3_7D468",
+      "new": "SSZMechaDefeatFragment_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes for the sixteen final Mecha breakup fragments."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 62,
+      "old": "ChildObjDat_7D474",
+      "new": "SSZMechaCollisionProxy_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single simple child record for the Mecha pose-dependent collision proxy."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 65,
+      "old": "ChildObjDat_7D47A",
+      "new": "SSZMecha_RollTrailFirstPairChildren",
+      "profiles": ["sk"],
+      "meaning": "Two simple children selecting the first rolling trail offset pair."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 68,
+      "old": "ChildObjDat_7D480",
+      "new": "SSZMecha_RollTrailSingleChild",
+      "profiles": ["sk"],
+      "meaning": "Single simple rolling-trail child whose caller selects the final offset row."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 71,
+      "old": "ChildObjDat_7D486",
+      "new": "SSZMecha_RollTrailSecondPairChildren",
+      "profiles": ["sk"],
+      "meaning": "Two simple children selecting the second rolling trail offset pair."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 74,
+      "old": "ChildObjDat_7D48C",
+      "new": "SSZMechaSparks_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single simple child record for shared boss/ending Mecha sparks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 77,
+      "old": "ChildObjDat_7D492",
+      "new": "SSZMechaSignalEffect_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single normal child record for Mecha animation-completion wait release."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 81,
+      "old": "ChildObjDat_7D49A",
+      "new": "SSZMechaActiveEffect_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single normal child record for Mecha phase effect and particle source."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 85,
+      "old": "ChildObjDat_7D4A2",
+      "new": "SSZMechaActiveParticle_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single simple particle child created by the active Mecha effect."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 88,
+      "old": "ChildObjDat_7D4A8",
+      "new": "SSZMecha_RadialBurstChild",
+      "profiles": ["sk"],
+      "meaning": "Eight simple projectile children for the Super Mecha radial burst."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 91,
+      "old": "ChildObjDat_7D4AE",
+      "new": "SSZMechaLaser_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "One normal laser child record with a trailing unconsumed emerald record literal."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 97,
+      "old": "ChildObjDat_7D4BC",
+      "new": "SSZCraneGrabber_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Single normal child record for the crane player-grabbing assembly."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 101,
+      "old": "ChildObjDat_7D4C4",
+      "new": "SSZCraneShipFragments_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Four simple fragment children when crane ship breakup finishes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 104,
+      "old": "ChildObjDat_7D4CA",
+      "new": "SSZMecha_DefeatFragmentChild",
+      "profiles": ["sk"],
+      "meaning": "Sixteen simple children for the final Mecha fragment breakup."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 107,
+      "old": "ChildObjDat_7D4D0",
+      "new": "SSZMecha_FinalExplosionEmitterChild",
+      "profiles": ["sk"],
+      "meaning": "Three simple explosion controllers for final Mecha defeat effects."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 113,
+      "old": "byte_7D4DE",
+      "new": "SSZMecha_LandHoldFrame8Anim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay landing branch that eventually holds Mecha frame8."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 125,
+      "old": "byte_7D4EF",
+      "new": "SSZMecha_LandHoldFrame12Anim",
+      "profiles": ["sk"],
+      "meaning": "Alternate frame-delay landing branch ending at frameChex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 141,
+      "old": "byte_7D508",
+      "new": "SSZMecha_PaletteReturnFallAnim",
+      "profiles": ["sk"],
+      "meaning": "Animation used while falling after the hovering laser phase and palette return."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 146,
+      "old": "byte_7D510",
+      "new": "SSZMecha_NormalLandingAnim",
+      "profiles": ["sk"],
+      "meaning": "Landing frame-delay script that calls rolling-floor preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 152,
+      "old": "byte_7D519",
+      "new": "SSZMecha_RollingEntryAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay entry from Knuckles landing into the shared rolling frame loop."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 158,
+      "old": "byte_7D523",
+      "new": "SSZMecha_RollingFramesRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Shared frame-delay rolling loop for normal and Knuckles attack movement."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 163,
+      "old": "byte_7D52A",
+      "new": "SSZMecha_TargetedDiveAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay transition into rolling frames during the targeted dive attack."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 171,
+      "old": "byte_7D538",
+      "new": "SSZMecha_DiveReturnAnim",
+      "profiles": ["sk"],
+      "meaning": "Animation returning from the constant-velocity dive recovery into edge dash selection."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 177,
+      "old": "byte_7D541",
+      "new": "SSZMecha_JumpAttackPrepAnim",
+      "profiles": ["sk"],
+      "meaning": "Normal Mecha preparation script whose callback starts one of three jumping attack paths."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 183,
+      "old": "byte_7D54A",
+      "new": "SSZMecha_JumpingAttackFlightRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Normal Mecha jumping-attack transition into the shared rolling loop."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 190,
+      "old": "byte_7D556",
+      "new": "SSZMecha_DiagonalDiveBrakeAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay post-dive horizontal braking sequence that advances to jump preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 197,
+      "old": "byte_7D561",
+      "new": "SSZMecha_DiagonalReturnJumpPrepAnim",
+      "profiles": ["sk"],
+      "meaning": "Post-dive preparation script whose callback launches the high return jump."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 204,
+      "old": "byte_7D56C",
+      "new": "SSZMecha_HighReturnJumpFlipAnim",
+      "profiles": ["sk"],
+      "meaning": "Flip-capable animation used during the high return jump after diagonal dive."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 213,
+      "old": "byte_7D57C",
+      "new": "SSZKnucklesMecha_HoverEntryRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay animation for random hover entry under custom gravity."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 222,
+      "old": "byte_7D587",
+      "new": "SSZMecha_RadialBurstAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay script coordinating the eight-way projectile burst and return to hover."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 231,
+      "old": "byte_7D596",
+      "new": "SSZMecha_LandThenDashAnim",
+      "profiles": ["sk"],
+      "meaning": "Normal landing script whose callback starts the accelerating/decelerating dash branch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 235,
+      "old": "byte_7D59B",
+      "new": "SSZMecha_DashStopThenJumpPrepAnim",
+      "profiles": ["sk"],
+      "meaning": "Normal dash boundary script that returns to jumping-attack preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 240,
+      "old": "byte_7D5A2",
+      "new": "SSZMecha_AltLandThenJumpPrepAnim",
+      "profiles": ["sk"],
+      "meaning": "Alternate normal landing script leading directly to jumping-attack preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 246,
+      "old": "byte_7D5AB",
+      "new": "SSZMecha_TransformLandingAnim",
+      "profiles": ["sk"],
+      "meaning": "Shared landing script used by the post-battle transformation scene and ending eyecatch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 253,
+      "old": "byte_7D5B6",
+      "new": "SSZMecha_RestartTransformLandingAnim",
+      "profiles": ["sk"],
+      "meaning": "Knuckles Mecha landing script with long final hold before restarting transformation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 260,
+      "old": "byte_7D5C1",
+      "new": "SSZMecha_SmallJumpLandingAnim",
+      "profiles": ["sk"],
+      "meaning": "Small-jump landing script whose callback chooses the transformation-return jump."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 273,
+      "old": "byte_7D5D8",
+      "new": "SSZMecha_AltTransformReturnJumpAnim",
+      "profiles": ["sk"],
+      "meaning": "Alternate Knuckles return-jump sequence converging on shared frame8 hold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 280,
+      "old": "byte_7D5E4",
+      "new": "SSZMecha_PostBattleSettlingRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay settling animation used after Mecha lands in the post-battle scene."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 289,
+      "old": "byte_7D5EF",
+      "new": "SSZMecha_RecoverThenActAnim",
+      "profiles": ["sk"],
+      "meaning": "Shared recovery script before post-battle rolling action or ending jump preparation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 294,
+      "old": "byte_7D5F6",
+      "new": "SSZMecha_PreJumpCallbackRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Shared pre-jump script in the post-battle scene and ending eyecatch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 300,
+      "old": "byte_7D5FF",
+      "new": "SSZMecha_PrepareRiseAnim",
+      "profiles": ["sk"],
+      "meaning": "Knuckles Mecha rise-preparation script used at initial handoff and transformation restart."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 307,
+      "old": "byte_7D60A",
+      "new": "SSZMecha_PostBattleJumpFlipRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Flip-capable normal post-battle jump variant converging on shared frame8 hold."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 316,
+      "old": "byte_7D61A",
+      "new": "SSZMecha_TransformReturnHoldFrame8",
+      "profiles": ["sk"],
+      "meaning": "Shared frame8 hold base for normal post-battle and Knuckles return jumps."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 324,
+      "old": "byte_7D626",
+      "new": "SSZMecha_DashBrakeCrossStreamAnim",
+      "profiles": ["sk"],
+      "meaning": "Flip-capable dash-braking stream with an original unaligned cross-stream jump."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 333,
+      "old": "byte_7D636",
+      "new": "SSZMecha_HoverTurnAnim",
+      "profiles": ["sk"],
+      "meaning": "Flip-capable hover turn animation returning to the main hover state."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 342,
+      "old": "byte_7D645",
+      "new": "SSZMecha_RiseThenTransformAnim",
+      "profiles": ["sk"],
+      "meaning": "Knuckles post-rise transformation script and owner of the unaligned braking jump target."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 353,
+      "old": "byte_7D652",
+      "new": "SSZMecha_AccelerateAttackAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay attack script shared by the horizontal accelerating dash and random diagonal dive."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 363,
+      "old": "byte_7D65F",
+      "new": "SSZMechaRollingTrail_RawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay animation for parent-following rolling trail effects."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 369,
+      "old": "byte_7D668",
+      "new": "SSZMecha_ParentReleaseSignalAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay child effect whose completion releases the parent wait flag."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 380,
+      "old": "byte_7D67B",
+      "new": "SSZMechaActiveEffect_UniformRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay animation for the parent-following accelerating-attack effect."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 382,
+      "old": "byte_7D683",
+      "new": "SSZMecha_ActiveParticleDeleteAnim",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay particle animation ending in the configured delete callback."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 388,
+      "old": "byte_7D68C",
+      "new": "SSZMecha_AimedLaserPrepAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay attached laser script whose callback launches toward Player1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 398,
+      "old": "byte_7D6A3",
+      "new": "SSZMechaLaser_FlightUniformRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay looping animation used once the laser has launched."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 405,
+      "old": "byte_7D6B3",
+      "new": "SSZMecha_StationaryLaserDeleteAnim",
+      "profiles": ["sk"],
+      "meaning": "Alternate attached laser script ending in deletion instead of aimed launch."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 430,
+      "old": "word_7D842",
+      "new": "MechaSonic_IdleFlashPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Shared 16-color main/flash palette script for Mecha boss and ending presentation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 449,
+      "old": "word_7D9EA",
+      "new": "MechaSonic_TransformFlashPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Repeating main/flash palette used during Mecha transformation animation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 457,
+      "old": "word_7DA60",
+      "new": "MechaSonic_EnterSuperPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Flash transition into the repeating Super Mecha color loop."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 471,
+      "old": "word_7DB66",
+      "new": "MechaSonic_ReturnToMainPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Return Mecha from super colors to its main palette."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 482,
+      "old": "word_7DC06",
+      "new": "MechaSonic_RestoreSuperPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Restore the Super Mecha loop after upward return phase."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 490,
+      "old": "word_7DC7E",
+      "new": "SSZMecha_HoverShiftPaletteScript",
+      "profiles": ["sk"],
+      "meaning": "Timed hover palette flashes ending in the installed custom routine."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 501,
+      "old": "off_7DD5A",
+      "new": "SSZMasterEmeraldColorCycle_IndexedScript",
+      "profiles": ["sk"],
+      "meaning": "Indexed two-color Master Emerald palette cycle used by boss and ending actors."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 517,
+      "old": "off_7DD7A",
+      "new": "SSZMecha_EmeraldColorPairOffsets",
+      "profiles": ["sk"],
+      "meaning": "Seven relative WORD offsets to two-color Master Emerald cycle rows."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 525,
+      "old": "word_7DD88",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair0",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value0."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 527,
+      "old": "word_7DD8C",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair1",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value1."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 529,
+      "old": "word_7DD90",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair2",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value2."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 531,
+      "old": "word_7DD94",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair3",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value3."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 533,
+      "old": "word_7DD98",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair4",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value4."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 535,
+      "old": "word_7DD9C",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair5",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value5."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 537,
+      "old": "word_7DDA0",
+      "new": "SSZMasterEmeraldColorCycle_ColorPair6",
+      "profiles": ["sk"],
+      "meaning": "Color pair selected by indexed cycle value6."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "original_line": 540,
+      "old": "word_7DDA4",
+      "new": "DEZMiniboss_CameraTriggerAndArenaBounds",
+      "profiles": ["sk"],
+      "meaning": "DEZ miniboss camera trigger followed by target arena bounds,physically adjoining the shared SSZ catalog."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 6,
+      "old": "loc_7D056",
+      "new": "SSZPostBossResultsGate_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the delayed post-Mecha result gate."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 10,
+      "old": "loc_7D062",
+      "new": "SSZMecha_ResultsWaitForLanding",
+      "profiles": ["sk"],
+      "meaning": "Wait for timer/player eligibility and start post-boss level results."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 17,
+      "old": "locret_7D076",
+      "new": "SSZMecha_ResultsLandingCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while results start is pending or after next updater installation."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 21,
+      "old": "loc_7D078",
+      "new": "SSZMecha_RestoreControlsAfterResults",
+      "profiles": ["sk"],
+      "meaning": "Maintain companion ending pose then restore both players after result flag clears."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 31,
+      "old": "loc_7D09C",
+      "new": "SSZMecha_InitTransformFlash",
+      "profiles": ["sk"],
+      "meaning": "Initialize full-palette Mecha transformation flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 35,
+      "old": "loc_7D0A8",
+      "new": "SSZMecha_BeginPaletteRaisePass",
+      "profiles": ["sk"],
+      "meaning": "Wait between full-palette whitening passes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 42,
+      "old": "loc_7D0BA",
+      "new": "SSZMecha_RaisePaletteColors",
+      "profiles": ["sk"],
+      "meaning": "Raise every normal palette color toward white during three passes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 48,
+      "old": "locret_7D0CA",
+      "new": "SSZMecha_PalettePassReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return during flash whitening and restoring delays/passes."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 52,
+      "old": "loc_7D0CC",
+      "new": "SSZMechaTransformFlash_BeginRestoreDelay",
+      "profiles": ["sk"],
+      "meaning": "Install delayed three-pass return from white toward target palette."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 59,
+      "old": "loc_7D0E0",
+      "new": "SSZMecha_BeginPaletteRestorePass",
+      "profiles": ["sk"],
+      "meaning": "Wait then prepare full normal/target palette lowering pass."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 67,
+      "old": "loc_7D0F6",
+      "new": "SSZMecha_LowerPaletteColors",
+      "profiles": ["sk"],
+      "meaning": "Lower64colors toward target across three passes,then prepare exact restore."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 76,
+      "old": "loc_7D110",
+      "new": "SSZMecha_RestoreTargetPaletteAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Force exact full target palette before ending transformation flash."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 82,
+      "old": "loc_7D11C",
+      "new": "SSZCraneSceneCamera_AdvanceTowardFixedX",
+      "profiles": ["sk"],
+      "meaning": "Move crane-introduction camera and both horizontal bounds toward X100hex."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "original_line": 92,
+      "old": "loc_7D134",
+      "new": "SSZCraneSceneCamera_ClampUnlockAndSignal",
+      "profiles": ["sk"],
+      "meaning": "Finish fixed-X crane camera actor and signal scene readiness."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 14,
+      "old": "loc_7C964",
+      "new": "SSZMechaSparks_WaitForPaletteTrigger",
+      "profiles": ["sk"],
+      "meaning": "Show Mecha sparks only on the selected palette color."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 27,
+      "old": "loc_7C990",
+      "new": "SSZMechaSparks_SelectOffsetsFrameAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Select spark placement/frame and follow parent with flips."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 35,
+      "old": "byte_7C9AA",
+      "new": "SSZMechaSparks_OffsetFrameRows",
+      "profiles": ["sk"],
+      "meaning": "Four padded signedXY/frame rows for palette-triggered sparks."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 46,
+      "old": "loc_7C9BA",
+      "new": "SSZMechaCollisionProxy_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize Mecha frame-dependent collision proxy."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 51,
+      "old": "loc_7C9C8",
+      "new": "SSZMecha_TouchProxyFollowAndSubmit",
+      "profiles": ["sk"],
+      "meaning": "Update Mecha collision proxy from parent pose."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 60,
+      "old": "loc_7C9E2",
+      "new": "SSZMechaCollisionProxy_DeleteWithParent",
+      "profiles": ["sk"],
+      "meaning": "Delete Mecha collision proxy when parent statusbit7 is set."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 64,
+      "old": "loc_7C9E8",
+      "new": "SSZMecha_InitCameraScrollLock",
+      "profiles": ["sk"],
+      "meaning": "Install Mecha scene camera advance actor."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 70,
+      "old": "loc_7C9F6",
+      "new": "SSZMecha_StopPlayerAndAdvanceCamera",
+      "profiles": ["sk"],
+      "meaning": "Stop Player1 and advance camera toward its maximum."
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "original_line": 82,
+      "old": "loc_7CA12",
+      "new": "SSZMechaCameraAdvance_ClampAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Clamp Mecha transition camera to maximum and finish actor."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 26,
+      "old": "word_18587E",
+      "new": "SKMechaSonicDPLC_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 32,
+      "old": "word_18588A",
+      "new": "SKMechaSonicDPLC_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 37,
+      "old": "word_185894",
+      "new": "SKMechaSonicDPLC_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame02 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 42,
+      "old": "word_18589E",
+      "new": "SKMechaSonicDPLC_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 47,
+      "old": "word_1858A8",
+      "new": "SKMechaSonicDPLC_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame04 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 52,
+      "old": "word_1858B2",
+      "new": "SKMechaSonicDPLC_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame05 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 57,
+      "old": "word_1858BC",
+      "new": "SKMechaSonicDPLC_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 62,
+      "old": "word_1858C6",
+      "new": "SKMechaSonicDPLC_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame07 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 67,
+      "old": "word_1858D0",
+      "new": "SKMechaSonicDPLC_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame08 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 72,
+      "old": "word_1858DA",
+      "new": "SKMechaSonicDPLC_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame09 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 77,
+      "old": "word_1858E4",
+      "new": "SKMechaSonicDPLC_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 84,
+      "old": "word_1858F2",
+      "new": "SKMechaSonicDPLC_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 88,
+      "old": "word_1858FA",
+      "new": "SKMechaSonicDPLC_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0C from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 94,
+      "old": "word_185906",
+      "new": "SKMechaSonicDPLC_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0D from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 99,
+      "old": "word_185910",
+      "new": "SKMechaSonicDPLC_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0E from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 105,
+      "old": "word_18591C",
+      "new": "SKMechaSonicDPLC_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame0F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 110,
+      "old": "word_185926",
+      "new": "SKMechaSonicDPLC_Frame10",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame10 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 115,
+      "old": "word_185930",
+      "new": "SKMechaSonicDPLC_Frame11",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame11 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 119,
+      "old": "word_185938",
+      "new": "SKMechaSonicDPLC_Frame12",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame12 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 125,
+      "old": "word_185944",
+      "new": "SKMechaSonicDPLC_Frame13",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame13 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 129,
+      "old": "word_18594C",
+      "new": "SKMechaSonicDPLC_Frame14",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame14 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "original_line": 133,
+      "old": "word_185954",
+      "new": "SKMechaSonicDPLC_Frame15",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicDPLC_Frame15 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 31,
+      "old": "word_185654",
+      "new": "SKMechaSonicExtraMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 32,
+      "old": "word_185656",
+      "new": "SKMechaSonicExtraMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 34,
+      "old": "word_18565E",
+      "new": "SKMechaSonicExtraMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame02 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 36,
+      "old": "word_185666",
+      "new": "SKMechaSonicExtraMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 38,
+      "old": "word_18566E",
+      "new": "SKMechaSonicExtraMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame04 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 42,
+      "old": "word_185682",
+      "new": "SKMechaSonicExtraMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame05 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 46,
+      "old": "word_185696",
+      "new": "SKMechaSonicExtraMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 53,
+      "old": "word_1856BC",
+      "new": "SKMechaSonicExtraMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame07 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 60,
+      "old": "word_1856E2",
+      "new": "SKMechaSonicExtraMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame08 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 65,
+      "old": "word_1856FC",
+      "new": "SKMechaSonicExtraMap_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame09 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 71,
+      "old": "word_18571C",
+      "new": "SKMechaSonicExtraMap_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 76,
+      "old": "word_185736",
+      "new": "SKMechaSonicExtraMap_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 79,
+      "old": "word_185744",
+      "new": "SKMechaSonicExtraMap_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0C from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 81,
+      "old": "word_18574C",
+      "new": "SKMechaSonicExtraMap_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0D from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 86,
+      "old": "word_185766",
+      "new": "SKMechaSonicExtraMap_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0E from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 88,
+      "old": "word_18576E",
+      "new": "SKMechaSonicExtraMap_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame0F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 90,
+      "old": "word_185776",
+      "new": "SKMechaSonicExtraMap_Frame10",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame10 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 92,
+      "old": "word_18577E",
+      "new": "SKMechaSonicExtraMap_Frame11",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame11 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 94,
+      "old": "word_185786",
+      "new": "SKMechaSonicExtraMap_Frame12",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame12 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 96,
+      "old": "word_18578E",
+      "new": "SKMechaSonicExtraMap_Frame13",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame13 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 98,
+      "old": "word_185796",
+      "new": "SKMechaSonicExtraMap_Frame14",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame14 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 100,
+      "old": "word_18579E",
+      "new": "SKMechaSonicExtraMap_Frame15",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame15 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 103,
+      "old": "word_1857AC",
+      "new": "SKMechaSonicExtraMap_Frame16",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame16 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 108,
+      "old": "word_1857C6",
+      "new": "SKMechaSonicExtraMap_Frame17",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame17 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 113,
+      "old": "word_1857E0",
+      "new": "SKMechaSonicExtraMap_Frame18",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame18 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 119,
+      "old": "word_185800",
+      "new": "SKMechaSonicExtraMap_Frame19",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame19 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "original_line": 121,
+      "old": "word_185808",
+      "new": "SKMechaSonicExtraMap_Frame1A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicExtraMap_Frame1A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/head.s",
+      "original_line": 5,
+      "old": "word_681FE",
+      "new": "MechaSonicHead_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MechaSonicHead physical sprite mapping at verified table index00 hex."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 26,
+      "old": "word_1853D6",
+      "new": "SKMechaSonicMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 32,
+      "old": "word_1853F6",
+      "new": "SKMechaSonicMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 37,
+      "old": "word_185410",
+      "new": "SKMechaSonicMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame02 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 42,
+      "old": "word_18542A",
+      "new": "SKMechaSonicMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 47,
+      "old": "word_185444",
+      "new": "SKMechaSonicMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame04 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 52,
+      "old": "word_18545E",
+      "new": "SKMechaSonicMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame05 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 57,
+      "old": "word_185478",
+      "new": "SKMechaSonicMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 62,
+      "old": "word_185492",
+      "new": "SKMechaSonicMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame07 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 67,
+      "old": "word_1854AC",
+      "new": "SKMechaSonicMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame08 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 72,
+      "old": "word_1854C6",
+      "new": "SKMechaSonicMap_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame09 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 77,
+      "old": "word_1854E0",
+      "new": "SKMechaSonicMap_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 84,
+      "old": "word_185506",
+      "new": "SKMechaSonicMap_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 88,
+      "old": "word_18551A",
+      "new": "SKMechaSonicMap_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0C from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 94,
+      "old": "word_18553A",
+      "new": "SKMechaSonicMap_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0D from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 99,
+      "old": "word_185554",
+      "new": "SKMechaSonicMap_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0E from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 105,
+      "old": "word_185574",
+      "new": "SKMechaSonicMap_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame0F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 110,
+      "old": "word_18558E",
+      "new": "SKMechaSonicMap_Frame10",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame10 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 115,
+      "old": "word_1855A8",
+      "new": "SKMechaSonicMap_Frame11",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame11 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 119,
+      "old": "word_1855BC",
+      "new": "SKMechaSonicMap_Frame12",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame12 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 125,
+      "old": "word_1855DC",
+      "new": "SKMechaSonicMap_Frame13",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame13 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 129,
+      "old": "word_1855F0",
+      "new": "SKMechaSonicMap_Frame14",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame14 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "original_line": 133,
+      "old": "word_185604",
+      "new": "SKMechaSonicMap_Frame15",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicMap_Frame15 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 20,
+      "old": "word_7D7C2",
+      "new": "SKMechaSonicPiecesMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 22,
+      "old": "word_7D7CA",
+      "new": "SKMechaSonicPiecesMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 24,
+      "old": "word_7D7D2",
+      "new": "SKMechaSonicPiecesMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame02 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 26,
+      "old": "word_7D7DA",
+      "new": "SKMechaSonicPiecesMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 28,
+      "old": "word_7D7E2",
+      "new": "SKMechaSonicPiecesMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame04 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 30,
+      "old": "word_7D7EA",
+      "new": "SKMechaSonicPiecesMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame05 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 32,
+      "old": "word_7D7F2",
+      "new": "SKMechaSonicPiecesMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 34,
+      "old": "word_7D7FA",
+      "new": "SKMechaSonicPiecesMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame07 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 36,
+      "old": "word_7D802",
+      "new": "SKMechaSonicPiecesMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame08 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 38,
+      "old": "word_7D80A",
+      "new": "SKMechaSonicPiecesMap_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame09 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 40,
+      "old": "word_7D812",
+      "new": "SKMechaSonicPiecesMap_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 42,
+      "old": "word_7D81A",
+      "new": "SKMechaSonicPiecesMap_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 44,
+      "old": "word_7D822",
+      "new": "SKMechaSonicPiecesMap_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0C from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 46,
+      "old": "word_7D82A",
+      "new": "SKMechaSonicPiecesMap_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0D from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 48,
+      "old": "word_7D832",
+      "new": "SKMechaSonicPiecesMap_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0E from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "original_line": 50,
+      "old": "word_7D83A",
+      "new": "SKMechaSonicPiecesMap_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMechaSonicPiecesMap_Frame0F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 12,
+      "old": "byte_7B22C",
+      "new": "SSZAni_MTZOrb_StoredBackShapeHold",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredBackShapeHold resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 13,
+      "old": "byte_7B22F",
+      "new": "SSZAni_MTZOrb_StoredFrontMiddleCycle",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredFrontMiddleCycle resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 14,
+      "old": "byte_7B233",
+      "new": "SSZAni_MTZOrb_DetachTransformation",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachTransformation resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 15,
+      "old": "byte_7B248",
+      "new": "SSZAni_MTZOrb_StoredLaserShapeCycle",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredLaserShapeCycle resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 16,
+      "old": "byte_7B24C",
+      "new": "SSZMTZOrb_FinalAlternatingAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredAlternatingFinalAndAlias resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 17,
+      "old": "byte_7B257",
+      "new": "SSZMTZOrb_ExtendedHoldThenLaserAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredExtendedAliasHoldThenLaser resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 18,
+      "old": "byte_7B262",
+      "new": "SSZMTZOrb_ContactShapeAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb ContactShapeAndStoredRoutineEvent resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "original_line": 19,
+      "old": "byte_7B265",
+      "new": "SSZAni_MTZOrb_StoredExtendedAliasCycle",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb StoredExtendedAliasCycle resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
+      "original_line": 8,
+      "old": "word_186E84",
+      "new": "SSZMap_GHZMisc_TouchChainTipEvenPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ GHZMisc TouchChainTipEvenPhase resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
+      "original_line": 13,
+      "old": "word_186E9E",
+      "new": "SSZMap_GHZMisc_TouchChainTipOddPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ GHZMisc TouchChainTipOddPhase resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
+      "original_line": 18,
+      "old": "word_186EB8",
+      "new": "SSZMap_GHZMisc_ChainAnchor",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ GHZMisc ChainAnchor resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
+      "original_line": 20,
+      "old": "word_186EC0",
+      "new": "SSZMap_GHZMisc_ChainSegment",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ GHZMisc ChainSegment resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 33,
+      "old": "word_186DE6",
+      "new": "SSZMap_MTZOrb_FrontDepthShape",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb FrontDepthShape resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 35,
+      "old": "word_186DEE",
+      "new": "SSZMap_MTZOrb_MiddleDepthShape",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb MiddleDepthShape resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 37,
+      "old": "word_186DF6",
+      "new": "SSZMap_MTZOrb_BackDepthAndDetachStart",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb BackDepthAndDetachStart resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 39,
+      "old": "word_186DFE",
+      "new": "SSZMap_MTZOrb_DetachPhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachPhaseThree resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 41,
+      "old": "word_186E06",
+      "new": "SSZMap_MTZOrb_DetachPhaseFour",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachPhaseFour resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 43,
+      "old": "word_186E0E",
+      "new": "SSZMap_MTZOrb_DetachPhaseFive",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachPhaseFive resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 45,
+      "old": "word_186E16",
+      "new": "SSZMap_MTZOrb_DetachPhaseSix",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachPhaseSix resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 48,
+      "old": "word_186E24",
+      "new": "SSZMTZOrb_DetachedPhase7Map",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachPhaseSevenAndExtendedAliases resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 51,
+      "old": "word_186E32",
+      "new": "SSZMap_MTZOrb_DetachTerminalShapeEight",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb DetachTerminalShapeEight resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 55,
+      "old": "word_186E46",
+      "new": "SSZMTZOrb_NarrowLaserMap",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb LaserNarrowAndUnusedAliases resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 57,
+      "old": "word_186E4E",
+      "new": "SSZMap_MTZOrb_LaserThreePieceBody",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb LaserThreePieceBody resource."
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "original_line": 61,
+      "old": "word_186E62",
+      "new": "SSZMap_MTZOrb_ContactFinalShape",
+      "profiles": ["sk"],
+      "meaning": "Describe the SSZ MTZOrb ContactFinalShape resource."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "tokens": [[2, 1, 383, ""]]
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "tokens": [
+        [13, 1, 0, ""],
+        [14, 1, 4, ""],
+        [15, 1, 5, ""],
+        [16, 1, 7, ""],
+        [17, 1, 10, ""],
+        [18, 1, 12, ""],
+        [19, 1, 15, ""],
+        [20, 1, 18, ""],
+        [21, 1, 23, ""],
+        [22, 1, 18, ""],
+        [23, 1, 18, ""],
+        [24, 1, 29, ""],
+        [25, 1, 32, ""],
+        [26, 1, 34, ""],
+        [27, 1, 37, ""],
+        [28, 1, 38, ""],
+        [29, 1, 41, ""],
+        [30, 1, 44, ""],
+        [31, 1, 47, ""],
+        [32, 1, 41, ""],
+        [33, 1, 50, ""],
+        [34, 0, 0, ""],
+        [40, 1, 1, ""],
+        [43, 1, 2, ""],
+        [44, 0, 1, ""],
+        [49, 1, 316, ""],
+        [63, 0, 2, ""],
+        [72, 1, 3, ""],
+        [74, 1, 3, ""],
+        [77, 0, 3, ""],
+        [78, 1, 315, ""],
+        [81, 0, 4, ""],
+        [83, 1, 9, ""],
+        [94, 1, 21, ""],
+        [95, 0, 5, ""],
+        [100, 1, 6, ""],
+        [104, 2, 8, ""],
+        [105, 0, 6, ""],
+        [107, 0, 7, ""],
+        [109, 0, 8, ""],
+        [117, 2, 334, ""],
+        [118, 0, 9, ""],
+        [120, 0, 10, ""],
+        [125, 1, 11, ""],
+        [127, 0, 11, ""],
+        [130, 2, 13, ""],
+        [132, 0, 12, ""],
+        [135, 0, 13, ""],
+        [142, 2, 16, ""],
+        [145, 1, 14, ""],
+        [147, 1, 14, ""],
+        [148, 2, 329, ""],
+        [151, 0, 14, ""],
+        [152, 2, 330, ""],
+        [155, 0, 15, ""],
+        [159, 0, 16, ""],
+        [167, 1, 17, ""],
+        [168, 2, 344, ""],
+        [169, 2, 19, ""],
+        [171, 0, 17, ""],
+        [174, 2, 346, ""],
+        [175, 2, 21, ""],
+        [177, 0, 18, ""],
+        [179, 0, 19, ""],
+        [184, 1, 20, ""],
+        [187, 0, 20, ""],
+        [192, 1, 318, ""],
+        [194, 0, 21, ""],
+        [196, 2, 337, ""],
+        [197, 2, 25, ""],
+        [202, 1, 22, ""],
+        [204, 0, 22, ""],
+        [206, 0, 23, ""],
+        [210, 1, 24, ""],
+        [211, 1, 289, ""],
+        [212, 0, 24, ""],
+        [217, 2, 345, ""],
+        [218, 2, 21, ""],
+        [220, 0, 25, ""],
+        [222, 1, 338, ""],
+        [226, 1, 26, ""],
+        [228, 0, 26, ""],
+        [235, 1, 27, ""],
+        [237, 1, 28, ""],
+        [239, 0, 27, ""],
+        [241, 0, 28, ""],
+        [244, 0, 29, ""],
+        [248, 1, 30, ""],
+        [250, 0, 30, ""],
+        [255, 1, 31, ""],
+        [258, 0, 31, ""],
+        [265, 0, 32, ""],
+        [270, 1, 33, ""],
+        [271, 1, 289, ""],
+        [272, 0, 33, ""],
+        [274, 1, 11, ""],
+        [275, 0, 34, ""],
+        [279, 1, 35, ""],
+        [282, 1, 36, ""],
+        [283, 1, 36, ""],
+        [284, 0, 35, ""],
+        [286, 0, 36, ""],
+        [293, 0, 37, ""],
+        [296, 1, 11, ""],
+        [297, 1, 289, ""],
+        [298, 0, 38, ""],
+        [302, 1, 39, ""],
+        [305, 1, 40, ""],
+        [306, 1, 40, ""],
+        [307, 0, 39, ""],
+        [309, 0, 40, ""],
+        [313, 2, 42, ""],
+        [317, 1, 317, ""],
+        [319, 1, 39, ""],
+        [322, 0, 41, ""],
+        [325, 0, 42, ""],
+        [329, 1, 43, ""],
+        [331, 0, 43, ""],
+        [335, 2, 45, ""],
+        [337, 0, 44, ""],
+        [341, 0, 45, ""],
+        [346, 1, 46, ""],
+        [349, 0, 46, ""],
+        [355, 0, 47, ""],
+        [360, 1, 48, ""],
+        [361, 1, 289, ""],
+        [362, 0, 48, ""],
+        [365, 2, 49, ""],
+        [367, 0, 49, ""],
+        [373, 0, 50, ""],
+        [377, 1, 11, ""],
+        [379, 0, 51, ""],
+        [382, 1, 52, ""],
+        [383, 1, 52, ""],
+        [387, 0, 52, ""],
+        [388, 1, 53, ""],
+        [388, 3, 52, ""],
+        [389, 1, 55, ""],
+        [389, 3, 52, ""],
+        [390, 1, 61, ""],
+        [390, 3, 52, ""],
+        [391, 1, 62, ""],
+        [391, 3, 52, ""],
+        [392, 1, 64, ""],
+        [392, 3, 52, ""],
+        [393, 1, 66, ""],
+        [393, 3, 52, ""],
+        [394, 1, 68, ""],
+        [394, 3, 52, ""],
+        [395, 1, 71, ""],
+        [395, 3, 52, ""],
+        [396, 1, 75, ""],
+        [396, 3, 52, ""],
+        [397, 1, 77, ""],
+        [397, 3, 52, ""],
+        [398, 1, 80, ""],
+        [398, 3, 52, ""],
+        [399, 1, 84, ""],
+        [399, 3, 52, ""],
+        [400, 1, 86, ""],
+        [400, 3, 52, ""],
+        [401, 0, 53, ""],
+        [403, 0, 54, ""],
+        [409, 2, 56, ""],
+        [411, 0, 55, ""],
+        [414, 0, 56, ""],
+        [416, 1, 351, ""],
+        [418, 2, 368, ""],
+        [420, 1, 319, ""],
+        [425, 1, 58, ""],
+        [432, 1, 57, ""],
+        [433, 2, 384, ""],
+        [434, 0, 57, ""],
+        [436, 0, 58, ""],
+        [438, 1, 59, ""],
+        [442, 2, 65, ""],
+        [447, 0, 59, ""],
+        [448, 2, 87, ""],
+        [452, 1, 60, ""],
+        [454, 0, 60, ""],
+        [455, 1, 328, ""],
+        [457, 0, 61, ""],
+        [462, 1, 9, ""],
+        [463, 1, 9, ""],
+        [468, 0, 62, ""],
+        [470, 1, 63, ""],
+        [472, 0, 63, ""],
+        [474, 0, 64, ""],
+        [478, 0, 65, ""],
+        [486, 1, 320, ""],
+        [491, 0, 66, ""],
+        [493, 1, 67, ""],
+        [495, 1, 352, ""],
+        [498, 2, 69, ""],
+        [499, 0, 67, ""],
+        [501, 0, 68, ""],
+        [503, 0, 69, ""],
+        [507, 1, 318, ""],
+        [509, 1, 70, ""],
+        [510, 1, 316, ""],
+        [511, 0, 70, ""],
+        [513, 0, 71, ""],
+        [517, 1, 72, ""],
+        [519, 0, 72, ""],
+        [533, 1, 73, ""],
+        [536, 0, 73, ""],
+        [538, 1, 74, ""],
+        [539, 2, 404, ""],
+        [540, 0, 74, ""],
+        [542, 0, 75, ""],
+        [547, 1, 76, ""],
+        [549, 0, 76, ""],
+        [551, 2, 78, ""],
+        [552, 1, 353, ""],
+        [554, 0, 77, ""],
+        [558, 0, 78, ""],
+        [563, 2, 81, ""],
+        [564, 1, 356, ""],
+        [566, 1, 79, ""],
+        [567, 1, 355, ""],
+        [568, 0, 79, ""],
+        [570, 0, 80, ""],
+        [574, 1, 9, ""],
+        [576, 0, 81, ""],
+        [595, 2, 85, ""],
+        [596, 1, 347, ""],
+        [598, 0, 82, ""],
+        [603, 2, 369, ""],
+        [605, 1, 319, ""],
+        [607, 1, 83, ""],
+        [609, 0, 83, ""],
+        [611, 0, 84, ""],
+        [617, 0, 85, ""],
+        [624, 0, 86, ""],
+        [633, 1, 9, ""],
+        [643, 0, 87, ""],
+        [645, 1, 88, ""],
+        [647, 0, 88, ""],
+        [650, 2, 89, ""],
+        [655, 1, 327, ""],
+        [657, 0, 89, ""],
+        [658, 2, 92, ""],
+        [665, 0, 90, ""],
+        [667, 3, 90, ""],
+        [669, 1, 91, ""],
+        [673, 0, 91, ""],
+        [675, 0, 92, ""],
+        [679, 1, 9, ""],
+        [680, 2, 93, ""],
+        [692, 0, 93, ""],
+        [695, 1, 9, ""],
+        [698, 1, 94, ""],
+        [700, 0, 94, ""],
+        [702, 1, 95, ""],
+        [704, 0, 95, ""],
+        [708, 1, 96, ""],
+        [711, 1, 96, ""],
+        [714, 0, 96, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "tokens": [
+        [5, 2, 99, ""],
+        [9, 1, 97, ""],
+        [12, 0, 97, ""],
+        [28, 0, 98, ""],
+        [30, 3, 98, ""],
+        [33, 0, 99, ""],
+        [34, 2, 101, ""],
+        [35, 0, 100, ""],
+        [37, 0, 101, ""],
+        [40, 1, 102, ""],
+        [41, 1, 102, ""],
+        [44, 0, 102, ""],
+        [45, 1, 103, ""],
+        [45, 3, 102, ""],
+        [46, 1, 104, ""],
+        [46, 3, 102, ""],
+        [47, 1, 106, ""],
+        [47, 3, 102, ""],
+        [48, 1, 108, ""],
+        [48, 3, 102, ""],
+        [49, 1, 110, ""],
+        [49, 3, 102, ""],
+        [50, 1, 112, ""],
+        [50, 3, 102, ""],
+        [51, 0, 103, ""],
+        [57, 2, 105, ""],
+        [60, 0, 104, ""],
+        [63, 0, 105, ""],
+        [66, 1, 152, ""],
+        [74, 0, 106, ""],
+        [80, 1, 107, ""],
+        [83, 1, 151, ""],
+        [85, 0, 107, ""],
+        [87, 0, 108, ""],
+        [89, 1, 109, ""],
+        [94, 2, 111, ""],
+        [95, 0, 109, ""],
+        [97, 0, 110, ""],
+        [101, 0, 111, ""],
+        [105, 0, 112, ""],
+        [107, 1, 113, ""],
+        [113, 0, 113, ""],
+        [115, 0, 114, ""],
+        [116, 2, 115, ""],
+        [121, 0, 115, ""],
+        [123, 1, 116, ""],
+        [126, 0, 116, ""],
+        [134, 0, 117, ""],
+        [136, 3, 117, ""],
+        [140, 0, 118, ""],
+        [143, 1, 119, ""],
+        [144, 1, 119, ""],
+        [147, 0, 119, ""],
+        [148, 1, 120, ""],
+        [148, 3, 119, ""],
+        [149, 1, 121, ""],
+        [149, 3, 119, ""],
+        [150, 1, 123, ""],
+        [150, 3, 119, ""],
+        [151, 1, 125, ""],
+        [151, 3, 119, ""],
+        [152, 0, 120, ""],
+        [153, 1, 148, ""],
+        [158, 0, 121, ""],
+        [161, 1, 122, ""],
+        [164, 1, 122, ""],
+        [167, 0, 122, ""],
+        [169, 0, 123, ""],
+        [172, 1, 124, ""],
+        [174, 0, 124, ""],
+        [176, 0, 125, ""],
+        [181, 1, 127, ""],
+        [185, 1, 126, ""],
+        [187, 0, 126, ""],
+        [189, 1, 127, ""],
+        [191, 0, 127, ""],
+        [195, 0, 128, ""],
+        [198, 1, 129, ""],
+        [199, 1, 129, ""],
+        [202, 0, 129, ""],
+        [203, 1, 130, ""],
+        [203, 3, 129, ""],
+        [204, 1, 121, ""],
+        [204, 3, 129, ""],
+        [205, 1, 131, ""],
+        [205, 3, 129, ""],
+        [206, 0, 130, ""],
+        [209, 1, 149, ""],
+        [211, 0, 131, ""],
+        [216, 0, 132, ""],
+        [219, 1, 134, ""],
+        [220, 1, 134, ""],
+        [223, 1, 133, ""],
+        [225, 0, 133, ""],
+        [228, 0, 134, ""],
+        [229, 1, 135, ""],
+        [229, 3, 134, ""],
+        [230, 1, 121, ""],
+        [230, 3, 134, ""],
+        [231, 1, 131, ""],
+        [231, 3, 134, ""],
+        [232, 0, 135, ""],
+        [235, 1, 150, ""],
+        [237, 0, 136, ""],
+        [238, 1, 147, ""],
+        [240, 2, 137, ""],
+        [241, 0, 137, ""],
+        [244, 1, 138, ""],
+        [246, 1, 100, ""],
+        [248, 1, 100, ""],
+        [252, 0, 138, ""],
+        [256, 1, 141, ""],
+        [258, 1, 142, ""],
+        [260, 1, 139, ""],
+        [265, 0, 139, ""],
+        [268, 1, 140, ""],
+        [270, 0, 140, ""],
+        [273, 1, 141, ""],
+        [276, 0, 141, ""],
+        [278, 0, 142, ""],
+        [280, 2, 114, ""],
+        [283, 1, 143, ""],
+        [285, 0, 143, ""],
+        [288, 1, 144, ""],
+        [289, 1, 145, ""],
+        [291, 0, 144, ""],
+        [293, 0, 145, ""],
+        [299, 1, 146, ""],
+        [301, 0, 146, ""],
+        [308, 0, 147, ""],
+        [311, 0, 148, ""],
+        [316, 0, 149, ""],
+        [321, 0, 150, ""],
+        [326, 0, 151, ""],
+        [328, 1, 118, ""],
+        [329, 1, 128, ""],
+        [330, 1, 128, ""],
+        [331, 1, 128, ""],
+        [332, 1, 128, ""],
+        [333, 1, 132, ""],
+        [334, 0, 152, ""],
+        [336, 1, 136, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "tokens": [
+        [6, 1, 302, ""],
+        [59, 1, 354, ""],
+        [78, 1, 359, ""],
+        [87, 1, 370, ""],
+        [99, 2, 388, ""],
+        [130, 1, 360, ""],
+        [133, 1, 321, ""],
+        [174, 1, 357, ""],
+        [252, 1, 335, ""],
+        [270, 1, 360, ""],
+        [273, 1, 321, ""],
+        [279, 1, 342, ""],
+        [324, 1, 336, ""],
+        [373, 1, 339, ""],
+        [385, 1, 340, ""],
+        [394, 1, 341, ""],
+        [436, 1, 324, ""],
+        [439, 1, 9, ""],
+        [449, 2, 371, ""],
+        [451, 1, 331, ""],
+        [463, 1, 332, ""],
+        [472, 2, 333, ""],
+        [526, 1, 349, ""],
+        [537, 2, 356, ""],
+        [541, 2, 350, ""],
+        [547, 1, 9, ""],
+        [554, 1, 348, ""],
+        [556, 1, 82, ""],
+        [578, 1, 358, ""],
+        [590, 2, 373, ""],
+        [595, 1, 343, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "tokens": [
+        [12, 1, 9, ""],
+        [25, 1, 325, ""],
+        [85, 2, 396, ""],
+        [127, 1, 326, ""],
+        [147, 1, 9, ""],
+        [168, 1, 9, ""],
+        [275, 1, 313, ""],
+        [285, 1, 314, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "tokens": [
+        [8, 2, 372, ""],
+        [47, 1, 9, ""],
+        [49, 1, 9, ""],
+        [52, 1, 323, ""],
+        [59, 1, 311, ""],
+        [67, 1, 310, ""],
+        [82, 1, 366, ""],
+        [87, 1, 308, ""],
+        [91, 1, 363, ""],
+        [98, 1, 9, ""],
+        [100, 1, 322, ""],
+        [104, 1, 309, ""],
+        [117, 1, 364, ""],
+        [121, 1, 312, ""],
+        [141, 1, 374, ""],
+        [154, 1, 307, ""],
+        [162, 2, 362, ""],
+        [186, 1, 306, ""],
+        [193, 1, 361, ""],
+        [18, 2, 372, ".header"]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "tokens": [
+        [3, 1, 153, ""],
+        [5, 1, 153, ""],
+        [9, 1, 154, ""],
+        [11, 0, 153, ""],
+        [13, 0, 154, ""],
+        [15, 1, 155, ""],
+        [17, 1, 155, ""],
+        [19, 0, 155, ""],
+        [20, 1, 161, ""],
+        [26, 1, 156, ""],
+        [30, 0, 156, ""],
+        [32, 2, 157, ""],
+        [33, 0, 157, ""],
+        [35, 1, 158, ""],
+        [37, 0, 158, ""],
+        [38, 2, 160, ""],
+        [41, 1, 159, ""],
+        [43, 0, 159, ""],
+        [47, 0, 160, ""],
+        [50, 0, 161, ""],
+        [58, 1, 163, ""],
+        [64, 1, 162, ""],
+        [69, 0, 162, ""],
+        [72, 0, 163, ""],
+        [74, 1, 164, ""],
+        [76, 1, 165, ""],
+        [77, 0, 164, ""],
+        [82, 1, 165, ""],
+        [85, 0, 165, ""],
+        [87, 0, 166, ""],
+        [88, 2, 167, ""],
+        [93, 0, 167, ""],
+        [95, 1, 168, ""],
+        [98, 0, 168, ""],
+        [106, 0, 169, ""],
+        [108, 3, 169, ""],
+        [121, 1, 172, ""],
+        [123, 1, 173, ""],
+        [125, 1, 172, ""],
+        [127, 1, 170, ""],
+        [131, 0, 170, ""],
+        [134, 1, 171, ""],
+        [136, 0, 171, ""],
+        [139, 1, 172, ""],
+        [141, 0, 172, ""],
+        [143, 0, 173, ""],
+        [145, 2, 166, ""],
+        [150, 1, 174, ""],
+        [152, 0, 174, ""],
+        [155, 1, 175, ""],
+        [156, 1, 176, ""],
+        [158, 0, 175, ""],
+        [160, 0, 176, ""],
+        [163, 0, 177, ""],
+        [166, 1, 178, ""],
+        [167, 1, 178, ""],
+        [168, 0, 178, ""],
+        [169, 1, 179, ""],
+        [169, 3, 178, ""],
+        [170, 1, 185, ""],
+        [170, 3, 178, ""],
+        [171, 1, 253, ""],
+        [171, 3, 178, ""],
+        [172, 1, 259, ""],
+        [172, 3, 178, ""],
+        [173, 1, 268, ""],
+        [173, 3, 178, ""],
+        [174, 0, 179, ""],
+        [178, 1, 181, ""],
+        [179, 0, 180, ""],
+        [181, 1, 182, ""],
+        [182, 0, 181, ""],
+        [185, 2, 177, ""],
+        [192, 1, 183, ""],
+        [193, 1, 183, ""],
+        [194, 1, 184, ""],
+        [199, 3, 180, ""],
+        [200, 0, 182, ""],
+        [202, 0, 183, ""],
+        [204, 0, 184, ""],
+        [207, 0, 185, ""],
+        [213, 1, 190, ""],
+        [223, 1, 186, ""],
+        [225, 0, 186, ""],
+        [227, 1, 187, ""],
+        [229, 0, 187, ""],
+        [231, 1, 188, ""],
+        [233, 0, 188, ""],
+        [236, 1, 189, ""],
+        [238, 0, 189, ""],
+        [240, 0, 190, ""],
+        [256, 1, 191, ""],
+        [258, 0, 191, ""],
+        [273, 1, 192, ""],
+        [275, 0, 192, ""],
+        [283, 1, 193, ""],
+        [286, 0, 193, ""],
+        [288, 1, 195, ""],
+        [290, 1, 194, ""],
+        [292, 1, 196, ""],
+        [294, 0, 194, ""],
+        [297, 0, 195, ""],
+        [299, 1, 196, ""],
+        [301, 0, 196, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "tokens": [
+        [5, 2, 199, ""],
+        [9, 1, 197, ""],
+        [12, 0, 197, ""],
+        [22, 0, 198, ""],
+        [24, 3, 198, ""],
+        [27, 0, 199, ""],
+        [28, 2, 201, ""],
+        [29, 0, 200, ""],
+        [31, 0, 201, ""],
+        [34, 1, 202, ""],
+        [35, 1, 202, ""],
+        [36, 0, 202, ""],
+        [37, 1, 203, ""],
+        [37, 3, 202, ""],
+        [38, 1, 205, ""],
+        [38, 3, 202, ""],
+        [39, 0, 203, ""],
+        [64, 1, 204, ""],
+        [65, 2, 177, ""],
+        [67, 0, 204, ""],
+        [76, 0, 205, ""],
+        [79, 1, 206, ""],
+        [80, 1, 206, ""],
+        [81, 0, 206, ""],
+        [82, 1, 207, ""],
+        [82, 3, 206, ""],
+        [83, 1, 209, ""],
+        [83, 3, 206, ""],
+        [84, 1, 213, ""],
+        [84, 3, 206, ""],
+        [85, 1, 218, ""],
+        [85, 3, 206, ""],
+        [86, 1, 221, ""],
+        [86, 3, 206, ""],
+        [87, 1, 224, ""],
+        [87, 3, 206, ""],
+        [88, 1, 231, ""],
+        [88, 3, 206, ""],
+        [89, 1, 236, ""],
+        [89, 3, 206, ""],
+        [90, 0, 207, ""],
+        [94, 1, 208, ""],
+        [102, 1, 208, ""],
+        [106, 0, 208, ""],
+        [118, 0, 209, ""],
+        [121, 1, 210, ""],
+        [123, 1, 211, ""],
+        [128, 1, 211, ""],
+        [131, 1, 211, ""],
+        [132, 0, 210, ""],
+        [134, 1, 211, ""],
+        [139, 1, 211, ""],
+        [142, 0, 211, ""],
+        [145, 0, 212, ""],
+        [149, 0, 213, ""],
+        [152, 1, 214, ""],
+        [154, 0, 214, ""],
+        [156, 1, 215, ""],
+        [158, 1, 216, ""],
+        [160, 1, 216, ""],
+        [161, 0, 215, ""],
+        [163, 1, 216, ""],
+        [165, 0, 216, ""],
+        [168, 1, 217, ""],
+        [170, 0, 217, ""],
+        [171, 1, 211, ""],
+        [172, 0, 218, ""],
+        [174, 1, 219, ""],
+        [177, 1, 220, ""],
+        [178, 0, 219, ""],
+        [180, 1, 220, ""],
+        [182, 0, 220, ""],
+        [183, 1, 211, ""],
+        [184, 0, 221, ""],
+        [186, 1, 222, ""],
+        [188, 1, 223, ""],
+        [189, 0, 222, ""],
+        [192, 1, 223, ""],
+        [196, 0, 223, ""],
+        [197, 1, 211, ""],
+        [198, 0, 224, ""],
+        [200, 1, 225, ""],
+        [202, 1, 226, ""],
+        [203, 0, 225, ""],
+        [205, 0, 226, ""],
+        [207, 1, 227, ""],
+        [209, 0, 227, ""],
+        [212, 1, 228, ""],
+        [214, 0, 228, ""],
+        [216, 1, 230, ""],
+        [218, 1, 229, ""],
+        [220, 0, 229, ""],
+        [222, 0, 230, ""],
+        [223, 1, 211, ""],
+        [224, 0, 231, ""],
+        [226, 1, 233, ""],
+        [228, 1, 235, ""],
+        [230, 1, 232, ""],
+        [232, 1, 235, ""],
+        [233, 0, 232, ""],
+        [237, 1, 235, ""],
+        [238, 0, 233, ""],
+        [243, 1, 234, ""],
+        [246, 0, 234, ""],
+        [251, 0, 235, ""],
+        [252, 1, 211, ""],
+        [253, 0, 236, ""],
+        [255, 1, 237, ""],
+        [257, 1, 212, ""],
+        [258, 0, 237, ""],
+        [261, 1, 238, ""],
+        [262, 1, 238, ""],
+        [263, 0, 238, ""],
+        [264, 1, 239, ""],
+        [264, 3, 238, ""],
+        [265, 1, 243, ""],
+        [265, 3, 238, ""],
+        [266, 1, 247, ""],
+        [266, 3, 238, ""],
+        [267, 0, 239, ""],
+        [270, 1, 240, ""],
+        [272, 0, 240, ""],
+        [274, 1, 241, ""],
+        [276, 1, 242, ""],
+        [282, 1, 242, ""],
+        [283, 0, 241, ""],
+        [285, 1, 242, ""],
+        [291, 0, 242, ""],
+        [292, 1, 211, ""],
+        [293, 0, 243, ""],
+        [296, 1, 244, ""],
+        [300, 1, 246, ""],
+        [301, 0, 244, ""],
+        [303, 1, 245, ""],
+        [305, 1, 246, ""],
+        [307, 1, 246, ""],
+        [308, 0, 245, ""],
+        [310, 1, 246, ""],
+        [312, 0, 246, ""],
+        [314, 1, 211, ""],
+        [315, 0, 247, ""],
+        [318, 1, 248, ""],
+        [321, 1, 248, ""],
+        [323, 0, 248, ""],
+        [325, 1, 249, ""],
+        [328, 0, 249, ""],
+        [330, 1, 211, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "tokens": [
+        [3, 1, 251, ""],
+        [5, 1, 250, ""],
+        [9, 0, 250, ""],
+        [13, 0, 251, ""],
+        [15, 1, 252, ""],
+        [19, 0, 252, ""],
+        [23, 0, 253, ""],
+        [25, 1, 254, ""],
+        [27, 1, 254, ""],
+        [29, 0, 254, ""],
+        [33, 1, 255, ""],
+        [35, 0, 255, ""],
+        [37, 1, 256, ""],
+        [39, 1, 256, ""],
+        [45, 0, 256, ""],
+        [47, 0, 257, ""],
+        [53, 1, 258, ""],
+        [57, 0, 258, ""],
+        [59, 0, 259, ""],
+        [61, 1, 260, ""],
+        [63, 1, 260, ""],
+        [65, 0, 260, ""],
+        [68, 1, 257, ""],
+        [75, 1, 263, ""],
+        [79, 1, 262, ""],
+        [82, 1, 261, ""],
+        [84, 0, 261, ""],
+        [86, 0, 262, ""],
+        [89, 0, 263, ""],
+        [98, 1, 264, ""],
+        [101, 0, 264, ""],
+        [107, 1, 265, ""],
+        [109, 1, 266, ""],
+        [111, 0, 265, ""],
+        [115, 1, 267, ""],
+        [117, 1, 200, ""],
+        [119, 1, 266, ""],
+        [121, 0, 266, ""],
+        [127, 0, 267, ""],
+        [132, 0, 268, ""],
+        [157, 1, 269, ""],
+        [159, 1, 270, ""],
+        [160, 0, 269, ""],
+        [162, 0, 270, ""],
+        [166, 1, 275, ""],
+        [180, 1, 271, ""],
+        [182, 0, 271, ""],
+        [190, 1, 272, ""],
+        [193, 0, 272, ""],
+        [196, 1, 274, ""],
+        [201, 1, 276, ""],
+        [202, 0, 273, ""],
+        [206, 0, 274, ""],
+        [213, 0, 275, ""],
+        [215, 0, 276, ""],
+        [217, 1, 277, ""],
+        [220, 1, 273, ""],
+        [221, 0, 277, ""],
+        [223, 1, 278, ""],
+        [226, 0, 278, ""],
+        [228, 1, 279, ""],
+        [231, 1, 274, ""],
+        [232, 0, 279, ""],
+        [234, 1, 280, ""],
+        [238, 1, 273, ""],
+        [239, 0, 280, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "tokens": [
+        [11, 1, 281, ""],
+        [13, 0, 281, ""],
+        [25, 1, 282, ""],
+        [29, 0, 282, ""],
+        [30, 1, 365, ""],
+        [32, 1, 367, ""],
+        [39, 1, 285, ""],
+        [40, 0, 283, ""],
+        [42, 1, 284, ""],
+        [44, 1, 283, ""],
+        [46, 0, 284, ""],
+        [48, 0, 285, ""],
+        [80, 1, 286, ""],
+        [82, 1, 287, ""],
+        [83, 0, 286, ""],
+        [85, 0, 287, ""],
+        [87, 1, 288, ""],
+        [90, 1, 288, ""],
+        [92, 0, 288, ""],
+        [94, 0, 289, ""],
+        [96, 1, 290, ""],
+        [99, 1, 291, ""],
+        [101, 0, 290, ""],
+        [104, 1, 291, ""],
+        [106, 0, 291, ""],
+        [112, 1, 292, ""],
+        [116, 0, 292, ""],
+        [128, 1, 293, ""],
+        [138, 0, 293, ""],
+        [164, 1, 295, ""],
+        [167, 1, 296, ""],
+        [169, 1, 294, ""],
+        [171, 0, 294, ""],
+        [173, 0, 295, ""],
+        [175, 0, 296, ""],
+        [201, 1, 299, ""],
+        [203, 1, 300, ""],
+        [205, 1, 297, ""],
+        [210, 0, 297, ""],
+        [213, 1, 298, ""],
+        [215, 0, 298, ""],
+        [218, 1, 299, ""],
+        [220, 0, 299, ""],
+        [222, 0, 300, ""],
+        [225, 2, 51, ""],
+        [227, 2, 54, ""],
+        [236, 1, 301, ""],
+        [238, 0, 301, ""],
+        [240, 0, 302, ""],
+        [249, 1, 303, ""],
+        [250, 1, 304, ""],
+        [252, 0, 303, ""],
+        [254, 0, 304, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
+      "tokens": [
+        [8, 0, 305, ""],
+        [11, 0, 306, ""],
+        [21, 0, 307, ""],
+        [26, 0, 308, ""],
+        [31, 0, 309, ""],
+        [34, 0, 310, ""],
+        [39, 0, 311, ""],
+        [44, 0, 312, ""],
+        [49, 0, 313, ""],
+        [54, 0, 314, ""],
+        [59, 0, 315, ""],
+        [61, 1, 401, ""],
+        [62, 0, 316, ""],
+        [65, 0, 317, ""],
+        [68, 0, 318, ""],
+        [71, 0, 319, ""],
+        [74, 0, 320, ""],
+        [78, 0, 321, ""],
+        [82, 0, 322, ""],
+        [85, 0, 323, ""],
+        [88, 0, 324, ""],
+        [94, 0, 325, ""],
+        [98, 0, 326, ""],
+        [101, 0, 327, ""],
+        [104, 0, 328, ""],
+        [110, 0, 329, ""],
+        [117, 6, 329, ""],
+        [121, 0, 330, ""],
+        [132, 6, 330, ""],
+        [136, 0, 331, ""],
+        [140, 6, 331, ""],
+        [141, 0, 332, ""],
+        [147, 0, 333, ""],
+        [152, 4, 334, ""],
+        [152, 6, 333, ""],
+        [153, 0, 334, ""],
+        [158, 0, 335, ""],
+        [165, 4, 334, ""],
+        [165, 6, 335, ""],
+        [166, 0, 336, ""],
+        [172, 0, 337, ""],
+        [178, 0, 338, ""],
+        [184, 4, 334, ""],
+        [184, 6, 338, ""],
+        [185, 0, 339, ""],
+        [192, 0, 340, ""],
+        [199, 0, 341, ""],
+        [207, 6, 341, ""],
+        [208, 0, 342, ""],
+        [212, 6, 342, ""],
+        [216, 0, 343, ""],
+        [225, 0, 344, ""],
+        [229, 0, 345, ""],
+        [234, 0, 346, ""],
+        [240, 0, 347, ""],
+        [247, 0, 348, ""],
+        [254, 0, 349, ""],
+        [267, 0, 350, ""],
+        [273, 4, 356, ""],
+        [273, 6, 350, ""],
+        [274, 0, 351, ""],
+        [278, 6, 351, ""],
+        [282, 0, 352, ""],
+        [287, 0, 353, ""],
+        [293, 0, 354, ""],
+        [300, 0, 355, ""],
+        [308, 4, 356, ""],
+        [308, 6, 355, ""],
+        [309, 0, 356, ""],
+        [317, 0, 357, ""],
+        [325, 6, 357, ""],
+        [326, 0, 358, ""],
+        [335, 0, 359, ""],
+        [345, 0, 360, ""],
+        [350, 6, 360, ""],
+        [354, 0, 361, ""],
+        [360, 0, 362, ""],
+        [371, 0, 363, ""],
+        [373, 0, 364, ""],
+        [379, 0, 365, ""],
+        [389, 0, 366, ""],
+        [396, 0, 367, ""],
+        [420, 0, 368, ""],
+        [437, 0, 369, ""],
+        [444, 0, 370, ""],
+        [457, 0, 371, ""],
+        [467, 0, 372, ""],
+        [474, 0, 373, ""],
+        [484, 0, 374, ""],
+        [485, 1, 375, ""],
+        [500, 0, 375, ""],
+        [501, 1, 376, ""],
+        [501, 3, 375, ""],
+        [502, 1, 377, ""],
+        [502, 3, 375, ""],
+        [503, 1, 378, ""],
+        [503, 3, 375, ""],
+        [504, 1, 379, ""],
+        [504, 3, 375, ""],
+        [505, 1, 380, ""],
+        [505, 3, 375, ""],
+        [506, 1, 381, ""],
+        [506, 3, 375, ""],
+        [507, 1, 382, ""],
+        [507, 3, 375, ""],
+        [508, 0, 376, ""],
+        [510, 0, 377, ""],
+        [512, 0, 378, ""],
+        [514, 0, 379, ""],
+        [516, 0, 380, ""],
+        [518, 0, 381, ""],
+        [520, 0, 382, ""],
+        [522, 0, 383, ""],
+        [140, 4, 329, ".jump"],
+        [207, 4, 329, ".jump"],
+        [325, 4, 359, ".jump"],
+        [436, 3, 368, ".data"],
+        [473, 1, 370, ".headr2"]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "tokens": [
+        [1, 0, 384, ""],
+        [2, 2, 385, ""],
+        [4, 0, 385, ""],
+        [8, 1, 386, ""],
+        [9, 2, 387, ""],
+        [10, 0, 386, ""],
+        [12, 0, 387, ""],
+        [15, 1, 9, ""],
+        [20, 0, 388, ""],
+        [22, 2, 389, ""],
+        [23, 0, 389, ""],
+        [25, 1, 391, ""],
+        [29, 0, 390, ""],
+        [31, 3, 390, ""],
+        [33, 1, 392, ""],
+        [34, 0, 391, ""],
+        [36, 0, 392, ""],
+        [37, 2, 393, ""],
+        [41, 0, 393, ""],
+        [43, 1, 391, ""],
+        [48, 0, 394, ""],
+        [50, 3, 394, ""],
+        [52, 1, 391, ""],
+        [56, 0, 395, ""],
+        [58, 3, 395, ""],
+        [60, 0, 396, ""],
+        [63, 1, 397, ""],
+        [68, 0, 397, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/sparks_and_camera.s",
+      "tokens": [
+        [4, 2, 398, ""],
+        [6, 1, 398, ""],
+        [8, 0, 398, ""],
+        [13, 1, 9, ""],
+        [18, 1, 399, ""],
+        [20, 0, 399, ""],
+        [22, 1, 400, ""],
+        [27, 0, 400, ""],
+        [36, 0, 401, ""],
+        [37, 1, 305, ""],
+        [39, 2, 402, ""],
+        [40, 0, 402, ""],
+        [45, 1, 403, ""],
+        [47, 0, 403, ""],
+        [49, 0, 404, ""],
+        [51, 2, 405, ""],
+        [53, 0, 405, ""],
+        [60, 1, 406, ""],
+        [63, 0, 406, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/master_emerald.s",
+      "tokens": [[79, 2, 374, ""]]
+    },
+    {
+      "source": "src/objects/ending/sk/mecha_sonic_eyecatch.s",
+      "tokens": [
+        [35, 2, 319, ""],
+        [40, 2, 368, ""],
+        [61, 2, 320, ""],
+        [69, 2, 352, ""],
+        [76, 2, 353, ""],
+        [93, 2, 347, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/plane_scene.s",
+      "tokens": [[345, 2, 374, ""]]
+    },
+    {
+      "source": "src/objects/ending/sk/scenery_and_creatures.s",
+      "tokens": [[3, 2, 312, ""]]
+    },
+    {
+      "source": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
+      "tokens": [[42, 1, 374, ""]]
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/dplc/mecha_sonic.s",
+      "tokens": [
+        [2, 1, 407, ""],
+        [3, 1, 408, ""],
+        [4, 1, 409, ""],
+        [5, 1, 410, ""],
+        [6, 1, 411, ""],
+        [7, 1, 412, ""],
+        [8, 1, 413, ""],
+        [9, 1, 414, ""],
+        [10, 1, 415, ""],
+        [11, 1, 416, ""],
+        [12, 1, 417, ""],
+        [13, 1, 418, ""],
+        [14, 1, 419, ""],
+        [15, 1, 420, ""],
+        [16, 1, 421, ""],
+        [17, 1, 422, ""],
+        [18, 1, 423, ""],
+        [19, 1, 424, ""],
+        [20, 1, 425, ""],
+        [21, 1, 426, ""],
+        [22, 1, 427, ""],
+        [23, 1, 428, ""],
+        [24, 0, 407, ""],
+        [30, 0, 408, ""],
+        [35, 0, 409, ""],
+        [40, 0, 410, ""],
+        [45, 0, 411, ""],
+        [50, 0, 412, ""],
+        [55, 0, 413, ""],
+        [60, 0, 414, ""],
+        [65, 0, 415, ""],
+        [70, 0, 416, ""],
+        [75, 0, 417, ""],
+        [82, 0, 418, ""],
+        [86, 0, 419, ""],
+        [92, 0, 420, ""],
+        [97, 0, 421, ""],
+        [103, 0, 422, ""],
+        [108, 0, 423, ""],
+        [113, 0, 424, ""],
+        [117, 0, 425, ""],
+        [123, 0, 426, ""],
+        [127, 0, 427, ""],
+        [131, 0, 428, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/extra.s",
+      "tokens": [
+        [2, 1, 429, ""],
+        [3, 1, 430, ""],
+        [4, 1, 431, ""],
+        [5, 1, 432, ""],
+        [6, 1, 433, ""],
+        [7, 1, 434, ""],
+        [8, 1, 435, ""],
+        [9, 1, 436, ""],
+        [10, 1, 437, ""],
+        [11, 1, 438, ""],
+        [12, 1, 439, ""],
+        [13, 1, 440, ""],
+        [14, 1, 441, ""],
+        [15, 1, 442, ""],
+        [16, 1, 443, ""],
+        [17, 1, 444, ""],
+        [18, 1, 445, ""],
+        [19, 1, 446, ""],
+        [20, 1, 447, ""],
+        [21, 1, 448, ""],
+        [22, 1, 449, ""],
+        [23, 1, 450, ""],
+        [24, 1, 451, ""],
+        [25, 1, 452, ""],
+        [26, 1, 453, ""],
+        [27, 1, 454, ""],
+        [28, 1, 455, ""],
+        [29, 0, 429, ""],
+        [30, 0, 430, ""],
+        [32, 0, 431, ""],
+        [34, 0, 432, ""],
+        [36, 0, 433, ""],
+        [40, 0, 434, ""],
+        [44, 0, 435, ""],
+        [51, 0, 436, ""],
+        [58, 0, 437, ""],
+        [63, 0, 438, ""],
+        [69, 0, 439, ""],
+        [74, 0, 440, ""],
+        [77, 0, 441, ""],
+        [79, 0, 442, ""],
+        [84, 0, 443, ""],
+        [86, 0, 444, ""],
+        [88, 0, 445, ""],
+        [90, 0, 446, ""],
+        [92, 0, 447, ""],
+        [94, 0, 448, ""],
+        [96, 0, 449, ""],
+        [98, 0, 450, ""],
+        [101, 0, 451, ""],
+        [106, 0, 452, ""],
+        [111, 0, 453, ""],
+        [117, 0, 454, ""],
+        [119, 0, 455, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/head.s",
+      "tokens": [
+        [2, 1, 456, ""],
+        [3, 0, 456, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/mecha_sonic.s",
+      "tokens": [
+        [2, 1, 457, ""],
+        [3, 1, 458, ""],
+        [4, 1, 459, ""],
+        [5, 1, 460, ""],
+        [6, 1, 461, ""],
+        [7, 1, 462, ""],
+        [8, 1, 463, ""],
+        [9, 1, 464, ""],
+        [10, 1, 465, ""],
+        [11, 1, 466, ""],
+        [12, 1, 467, ""],
+        [13, 1, 468, ""],
+        [14, 1, 469, ""],
+        [15, 1, 470, ""],
+        [16, 1, 471, ""],
+        [17, 1, 472, ""],
+        [18, 1, 473, ""],
+        [19, 1, 474, ""],
+        [20, 1, 475, ""],
+        [21, 1, 476, ""],
+        [22, 1, 477, ""],
+        [23, 1, 478, ""],
+        [24, 0, 457, ""],
+        [30, 0, 458, ""],
+        [35, 0, 459, ""],
+        [40, 0, 460, ""],
+        [45, 0, 461, ""],
+        [50, 0, 462, ""],
+        [55, 0, 463, ""],
+        [60, 0, 464, ""],
+        [65, 0, 465, ""],
+        [70, 0, 466, ""],
+        [75, 0, 467, ""],
+        [82, 0, 468, ""],
+        [86, 0, 469, ""],
+        [92, 0, 470, ""],
+        [97, 0, 471, ""],
+        [103, 0, 472, ""],
+        [108, 0, 473, ""],
+        [113, 0, 474, ""],
+        [117, 0, 475, ""],
+        [123, 0, 476, ""],
+        [127, 0, 477, ""],
+        [131, 0, 478, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/mecha_sonic/mappings/pieces.s",
+      "tokens": [
+        [2, 1, 479, ""],
+        [3, 1, 480, ""],
+        [4, 1, 481, ""],
+        [5, 1, 482, ""],
+        [6, 1, 483, ""],
+        [7, 1, 484, ""],
+        [8, 1, 485, ""],
+        [9, 1, 486, ""],
+        [10, 1, 487, ""],
+        [11, 1, 488, ""],
+        [12, 1, 489, ""],
+        [13, 1, 490, ""],
+        [14, 1, 491, ""],
+        [15, 1, 492, ""],
+        [16, 1, 493, ""],
+        [17, 1, 494, ""],
+        [18, 0, 479, ""],
+        [20, 0, 480, ""],
+        [22, 0, 481, ""],
+        [24, 0, 482, ""],
+        [26, 0, 483, ""],
+        [28, 0, 484, ""],
+        [30, 0, 485, ""],
+        [32, 0, 486, ""],
+        [34, 0, 487, ""],
+        [36, 0, 488, ""],
+        [38, 0, 489, ""],
+        [40, 0, 490, ""],
+        [42, 0, 491, ""],
+        [44, 0, 492, ""],
+        [46, 0, 493, ""],
+        [48, 0, 494, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/animations/mtzorbs.s",
+      "tokens": [
+        [2, 1, 495, ""],
+        [3, 1, 496, ""],
+        [4, 1, 497, ""],
+        [5, 1, 498, ""],
+        [6, 1, 499, ""],
+        [7, 1, 500, ""],
+        [8, 1, 501, ""],
+        [9, 1, 502, ""],
+        [10, 0, 495, ""],
+        [11, 0, 496, ""],
+        [12, 0, 497, ""],
+        [13, 0, 498, ""],
+        [14, 0, 499, ""],
+        [15, 0, 500, ""],
+        [16, 0, 501, ""],
+        [17, 0, 502, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/ghz_misc.s",
+      "tokens": [
+        [2, 1, 503, ""],
+        [3, 1, 504, ""],
+        [4, 1, 505, ""],
+        [5, 1, 506, ""],
+        [6, 0, 503, ""],
+        [11, 0, 504, ""],
+        [16, 0, 505, ""],
+        [18, 0, 506, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/ssz/mappings/mtz_orbs.s",
+      "tokens": [
+        [2, 1, 507, ""],
+        [3, 1, 508, ""],
+        [4, 1, 509, ""],
+        [5, 1, 510, ""],
+        [6, 1, 511, ""],
+        [7, 1, 512, ""],
+        [8, 1, 513, ""],
+        [9, 1, 514, ""],
+        [10, 1, 515, ""],
+        [11, 1, 516, ""],
+        [12, 1, 516, ""],
+        [13, 1, 516, ""],
+        [14, 1, 516, ""],
+        [15, 1, 517, ""],
+        [16, 1, 518, ""],
+        [17, 1, 514, ""],
+        [18, 1, 514, ""],
+        [19, 1, 514, ""],
+        [20, 1, 514, ""],
+        [21, 1, 514, ""],
+        [22, 1, 514, ""],
+        [23, 1, 514, ""],
+        [24, 1, 514, ""],
+        [25, 1, 514, ""],
+        [26, 1, 514, ""],
+        [27, 1, 514, ""],
+        [28, 1, 514, ""],
+        [29, 1, 514, ""],
+        [30, 1, 514, ""],
+        [31, 0, 507, ""],
+        [33, 0, 508, ""],
+        [35, 0, 509, ""],
+        [37, 0, 510, ""],
+        [39, 0, 511, ""],
+        [41, 0, 512, ""],
+        [43, 0, 513, ""],
+        [46, 0, 514, ""],
+        [49, 0, 515, ""],
+        [53, 0, 516, ""],
+        [55, 0, 517, ""],
+        [59, 0, 518, ""]
+      ]
+    }
+  ]
+}

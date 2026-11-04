@@ -414,7 +414,7 @@ loc_5E6C0:
                 tst.b   (_unkFA88).w
                 beq.s   loc_5E6E6
                 bmi.s   loc_5E6E6
-                lea     (off_7DD5A).l,a1
+                lea     (SSZMasterEmeraldColorCycle_IndexedScript).l,a1
                 lea     (Normal_palette_line_3+$1C).w,a2
                 jsr     (Run_PalRotationScript2).l
 

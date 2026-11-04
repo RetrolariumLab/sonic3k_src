@@ -9,7 +9,7 @@ Obj_SSZ2_Boss:
                 move.b  routine(a0),d0
                 move.w  SSZ2_Boss_Index(pc,d0.w),d1
                 jsr     SSZ2_Boss_Index(pc,d1.w)
-                lea     loc_7D39E(pc),a4
+                lea     SSZMecha_FreezeCameraAndRestorePal(pc),a4
                 bsr.w   SSZMecha_HandleHitFlashOrDefeat
                 bsr.w   SSZMecha_TrySetCollisionFromFrame
                 lea     DPLCPtr_MechaSonic(pc),a2
@@ -67,7 +67,7 @@ loc_7BDD8:
                 move.b  #2,routine(a0)
                 bset    #6,$38(a0)
                 move.l  #loc_7BDF6,$34(a0)
-                lea     byte_7D5FF(pc),a1
+                lea     SSZMecha_PrepareRiseAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -92,7 +92,7 @@ loc_7BE26:
                 move.w  d0,y_pos(a0)
                 move.b  #6,routine(a0)
                 move.l  #loc_7BE4E,$34(a0)
-                lea     byte_7D645(pc),a1
+                lea     SSZMecha_RiseThenTransformAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -105,7 +105,7 @@ loc_7BE4E:
                 move.b  #8,routine(a0)
                 clr.b   $39(a0)
                 bclr    #1,$38(a0)
-                lea     word_7DA60(pc),a1
+                lea     MechaSonic_EnterSuperPaletteScript(pc),a1
                 bsr.w   InstallSingleGlobalPaletteRotationScript
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_7BEA8,$34(a0)
@@ -118,7 +118,7 @@ loc_7BE7E:
                 dbf     d6,loc_7BE7E
                 jsr     (AllocateObject).l
                 bne.s   loc_7BE92
-                move.l  #loc_7D09C,(a1)
+                move.l  #SSZMecha_InitTransformFlash,(a1)
 
 loc_7BE92:
                 moveq   #signextendB(sfx_SuperTransform),d0
@@ -158,10 +158,10 @@ loc_7BED2:
 
 loc_7BEEE:
                 move.w  d0,$40(a0)
-                lea     byte_7D652(pc),a1
+                lea     SSZMecha_AccelerateAttackAnim(pc),a1
                 jsr     (Set_Raw_Animation).l
                 bset    #6,$38(a0)
-                lea     ChildObjDat_7D49A(pc),a2
+                lea     SSZMechaActiveEffect_NormalChildRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
@@ -214,7 +214,7 @@ loc_7BF7C:
 loc_7BF8C:
                 move.b  #$E,routine(a0)
                 neg.w   $40(a0)
-                lea     byte_7D626(pc),a1
+                lea     SSZMecha_DashBrakeCrossStreamAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -309,7 +309,7 @@ loc_7C06E:
                 addi.w  #$B0,d1
                 moveq   #3,d5
                 jsr     (SetVelocityTowardPointByDominantAxis).l
-                lea     byte_7D52A(pc),a1
+                lea     SSZMecha_TargetedDiveAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -330,10 +330,10 @@ loc_7C0E0:
                 move.w  d1,$40(a0)
                 moveq   #signextendB(sfx_MissileShoot),d0
                 jsr     (Play_SFX).l
-                lea     byte_7D652(pc),a1
+                lea     SSZMecha_AccelerateAttackAnim(pc),a1
                 jsr     (Set_Raw_Animation).l
                 bset    #6,$38(a0)
-                lea     ChildObjDat_7D49A(pc),a2
+                lea     SSZMechaActiveEffect_NormalChildRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
@@ -341,7 +341,7 @@ loc_7C104:
                 move.b  #$28,routine(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                lea     byte_7D57C(pc),a1
+                lea     SSZKnucklesMecha_HoverEntryRawAnimation(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -401,7 +401,7 @@ loc_7C1AA:
                 bset    #0,render_flags(a0)
 
 loc_7C1CE:
-                lea     byte_7D538(pc),a1
+                lea     SSZMecha_DiveReturnAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -463,7 +463,7 @@ loc_7C274:
                 move.l  #loc_7C2BE,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     byte_7D556(pc),a1
+                lea     SSZMecha_DiagonalDiveBrakeAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -479,7 +479,7 @@ loc_7C2BE:
                 move.b  #$24,routine(a0)
                 bclr    #6,$38(a0)
                 move.l  #loc_7C2E8,$34(a0)
-                lea     byte_7D561(pc),a1
+                lea     SSZMecha_DiagonalReturnJumpPrepAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -492,7 +492,7 @@ loc_7C2E8:
                 move.b  #$26,routine(a0)
                 clr.w   x_vel(a0)
                 move.w  #-$600,y_vel(a0)
-                lea     byte_7D56C(pc),a1
+                lea     SSZMecha_HighReturnJumpFlipAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -547,10 +547,10 @@ loc_7C37A:
 
 loc_7C39E:
                 move.w  #$2F,$2E(a0)
-                lea     ChildObjDat_7D4AE(pc),a2
+                lea     SSZMechaLaser_NormalChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 subq.b  #1,$39(a0)
-                bpl.w   locret_7B448
+                bpl.w   SSZMechaBattleAndChildren_SharedReturn
                 move.b  #8,subtype(a1)
                 move.b  #$2C,routine(a0)
                 move.l  #loc_7C3CA,$34(a0)
@@ -562,9 +562,9 @@ loc_7C3CA:
                 move.b  #$1F,y_radius(a0)
                 move.l  #loc_7C410,$34(a0)
                 bclr    #7,$38(a0)
-                lea     (word_7DB66).l,a1
+                lea     (MechaSonic_ReturnToMainPaletteScript).l,a1
                 bsr.w   InstallSingleGlobalPaletteRotationScript
-                lea     byte_7D508(pc),a1
+                lea     SSZMecha_PaletteReturnFallAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -580,7 +580,7 @@ loc_7C410:
                 move.l  #loc_7C436,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     byte_7D510(pc),a1
+                lea     SSZMecha_NormalLandingAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -593,7 +593,7 @@ loc_7C436:
                 clr.b   y_vel(a0)
                 move.b  #$13,y_radius(a0)
                 move.l  #loc_7C46A,$34(a0)
-                move.l  #byte_7D519,$30(a0)
+                move.l  #SSZMecha_RollingEntryAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -662,7 +662,7 @@ loc_7C4F8:
                 move.l  #loc_7C522,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     byte_7D5C1(pc),a1
+                lea     SSZMecha_SmallJumpLandingAnim(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
@@ -677,13 +677,13 @@ loc_7C522:
                 move.l  #loc_7C578,$34(a0)
                 bclr    #0,render_flags(a0)
                 bne.s   loc_7C54E
-                move.l  #byte_7D61A,$30(a0)
+                move.l  #SSZMecha_TransformReturnHoldFrame8,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
 loc_7C54E:
                 move.b  #$C,mapping_frame(a0)
-                move.l  #byte_7D5D8,$30(a0)
+                move.l  #SSZMecha_AltTransformReturnJumpAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -691,7 +691,7 @@ loc_7C55E:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_7B448
+                bmi.w   SSZMechaBattleAndChildren_SharedReturn
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
@@ -700,9 +700,9 @@ loc_7C578:
                 move.l  #loc_7BDD8,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     byte_7D5B6(pc),a1
+                lea     SSZMecha_RestartTransformLandingAnim(pc),a1
                 jsr     Set_Raw_Animation(pc)
-                bra.w   loc_7BB7C
+                bra.w   SSZMecha_BeginTransformPaletteAndSparks
 ; ---------------------------------------------------------------------------
 
 loc_7C59A:
@@ -729,7 +729,7 @@ loc_7C5CA:
 loc_7C5D4:
                 move.b  #$3E,routine(a0)
                 move.l  #loc_7C646,$34(a0)
-                lea     byte_7D636(pc),a1
+                lea     SSZMecha_HoverTurnAnim(pc),a1
                 jmp     Set_Raw_Animation(pc)
 ; ---------------------------------------------------------------------------
 
@@ -744,14 +744,14 @@ loc_7C5EA:
 loc_7C604:
                 move.w  d0,x_vel(a0)
                 move.l  #loc_7C654,(Palette_rotation_custom).w
-                lea     (word_7DC7E).l,a1
+                lea     (SSZMecha_HoverShiftPaletteScript).l,a1
                 bra.w   InstallSingleGlobalPaletteRotationScript
 ; ---------------------------------------------------------------------------
 
 loc_7C61A:
                 move.b  #$46,routine(a0)
                 move.l  #loc_7C718,$34(a0)
-                lea     byte_7D587(pc),a1
+                lea     SSZMecha_RadialBurstAnim(pc),a1
                 jmp     Set_Raw_Animation(pc)
 ; ---------------------------------------------------------------------------
 

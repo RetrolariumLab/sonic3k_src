@@ -81,12 +81,12 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7D842",
+      "scope": "MechaSonic_IdleFlashPaletteScript",
       "first_line": 430,
       "last_line": 445,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 424,
-      "declarations_sha256": "d781514a08bc9397d4e2e7372f5c201cc5a864f585e3dfc8d0037c04c47f56d9",
+      "declarations_sha256": "aec6de990214089476fa88a02e2e31e5e28bf85cd1c59cebf2605b982955797d",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
@@ -96,12 +96,12 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7D9EA",
+      "scope": "MechaSonic_TransformFlashPaletteScript",
       "first_line": 449,
       "last_line": 455,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 118,
-      "declarations_sha256": "d94a9aef98160993619a59a70dcea13c8328c80a9851a5570f1c4bde68f1dea4",
+      "declarations_sha256": "ca7227e6a3bb50fcf6ed56827ad01891e7b060116e35d8bd30cc3ed1878b6048",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
@@ -111,12 +111,12 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7DA60",
+      "scope": "MechaSonic_EnterSuperPaletteScript",
       "first_line": 457,
       "last_line": 469,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 262,
-      "declarations_sha256": "045dad83eb515dd9d6ffdb393fca54707145962c64fbb62a12c84c9ea34928e8",
+      "declarations_sha256": "20fd8ba0a6aee6ac5261d1bf51fd232a6963556fbdb360878d3b4d2eb33726ab",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
@@ -129,12 +129,12 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7DB66",
+      "scope": "MechaSonic_ReturnToMainPaletteScript",
       "first_line": 471,
       "last_line": 480,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 160,
-      "declarations_sha256": "80d3ba2d59af417c027b738f3e03de4f3f95419d5dee835b68d15e77332a8d32",
+      "declarations_sha256": "0513b09cbb90f8da767af026a40669614eddea80939c46a09889e9d0b5ba9fdb",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
@@ -144,13 +144,13 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7DC06",
+      "scope": "MechaSonic_RestoreSuperPaletteScript",
       "first_line": 482,
       "last_line": 488,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 120,
-      "declarations_sha256": "72faba92e402697b051aa40d81ee4c1306711ac0d1e377e828f7146d240f88db",
-      "external_symbols": ["Normal_palette", "Normal_palette_line_2", "word_7DA60.headr2"],
+      "declarations_sha256": "a2a7bb69d3749235ceec05537d9d983bcf5b88450e0cf2c0d4175cd29bd715a1",
+      "external_symbols": ["Normal_palette", "Normal_palette_line_2", "MechaSonic_EnterSuperPaletteScript.headr2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin",
@@ -159,12 +159,12 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "scope": "word_7DC7E",
+      "scope": "SSZMecha_HoverShiftPaletteScript",
       "first_line": 490,
       "last_line": 499,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 220,
-      "declarations_sha256": "28922ac4ae403b97d803e1bad0741c413d9654e040470fe8bfa9c9746d8344df",
+      "declarations_sha256": "34652d5b3fa0aa4e84efd264fef41994059f20bdd2add4eda02fd22438a6d776",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": [
         "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin",

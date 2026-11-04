@@ -17,7 +17,7 @@ PLC_KnuxFinalBossCrane_End:
 loc_7CA3A:
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                beq.w   locret_7B448
+                beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.l  #loc_7CAAA,(a0)
                 lea     (ObjDat3_664EE).l,a1
                 jsr     SetUp_ObjAttributes(pc)
@@ -31,7 +31,7 @@ loc_7CA3A:
 loc_7CA78:
                 lea     (Child1_MakeRoboHead4).l,a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_7D4BC(pc),a2
+                lea     SSZCraneGrabber_NormalChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 lea     (Child1_MakeRoboShipFlame).l,a2
                 jsr     CreateChild1_Normal(pc)
@@ -104,7 +104,7 @@ loc_7CB64:
                 st      (Scroll_lock).w
                 jsr     (AllocateObject).l
                 bne.s   loc_7CB82
-                move.l  #loc_7D11C,(a1)
+                move.l  #SSZCraneSceneCamera_AdvanceTowardFixedX,(a1)
 
 loc_7CB82:
                 jsr     (AllocateObject).l
@@ -157,7 +157,7 @@ word_7CC1E:
 ; ---------------------------------------------------------------------------
 
 loc_7CC26:
-                lea     ChildObjDat_7D4C4(pc),a2
+                lea     SSZCraneShipFragments_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 ori.b   #$30,$38(a0)
                 jmp     (Go_Delete_Sprite).l
@@ -180,7 +180,7 @@ loc_7CC68:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),d0
                 cmp.w   (_unkFAB6).w,d0
-                blo.w   locret_7B448
+                blo.w   SSZMechaBattleAndChildren_SharedReturn
                 move.l  #loc_7CCB0,(a0)
                 move.w  #6,$2E(a0)
                 clr.w   x_vel(a0)
@@ -204,7 +204,7 @@ loc_7CCC6:
                 move.w  y_pos(a0),y_pos(a1)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   locret_7B448
+                bpl.w   SSZMechaBattleAndChildren_SharedReturn
                 lea     (Player_1).w,a1
                 add.w   d1,y_pos(a1)
                 clr.b   $2E(a1)
@@ -332,7 +332,7 @@ loc_7CE66:
 ; ---------------------------------------------------------------------------
 
 loc_7CE6C:
-                lea     ObjDat3_7D45C(pc),a1
+                lea     SSZCraneShipFragment_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
@@ -344,7 +344,7 @@ loc_7CE6C:
 ; ---------------------------------------------------------------------------
 
 loc_7CE90:
-                lea     ObjDat3_7D468(pc),a1
+                lea     SSZMechaDefeatFragment_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_7CF02,(a0)
                 moveq   #0,d0

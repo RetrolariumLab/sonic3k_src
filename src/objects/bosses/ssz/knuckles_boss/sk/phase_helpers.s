@@ -12,7 +12,7 @@ loc_7C65C:
 
 loc_7C66C:
                 move.b  #$44,routine(a0)
-                lea     (word_7DC06).l,a1
+                lea     (MechaSonic_RestoreSuperPaletteScript).l,a1
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -29,7 +29,7 @@ InstallSingleGlobalPaletteRotationScript:
 loc_7C684:
                 jsr     (Run_PalRotationScript).l
                 bclr    #7,$38(a0)
-                cmpi.l  #word_7DC06.header,(Palette_rotation_data+4).w
+                cmpi.l  #MechaSonic_RestoreSuperPaletteScript.header,(Palette_rotation_data+4).w
                 beq.s   loc_7C6A0
                 bset    #7,$38(a0)
 
@@ -64,12 +64,12 @@ loc_7C6C4:
 loc_7C6F0:
                 jsr     (Run_PalRotationScript).l
                 jsr     Animate_RawMultiDelay(pc)
-                beq.w   locret_7B448
+                beq.w   SSZMechaBattleAndChildren_SharedReturn
                 cmpi.b  #8,anim_frame(a0)
-                bne.w   locret_7B448
+                bne.w   SSZMechaBattleAndChildren_SharedReturn
                 moveq   #signextendB(sfx_BossProjectile),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7D4A8(pc),a2
+                lea     SSZMecha_RadialBurstChild(pc),a2
                 jmp     CreateChild6_Simple(pc)
 ; ---------------------------------------------------------------------------
 
@@ -80,7 +80,7 @@ loc_7C718:
 ; ---------------------------------------------------------------------------
 
 loc_7C726:
-                lea     ObjDat3_7D444(pc),a1
+                lea     SSZSuperMechaRadialProjectile_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C738,(a0)
                 bsr.w   SSZSuperMechaShot_InitEightWayVel
@@ -91,7 +91,7 @@ loc_7C738:
 ; ---------------------------------------------------------------------------
 
 loc_7C744:
-                lea     ObjDat3_7D438(pc),a1
+                lea     SSZMechaLaser_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C756,(a0)
                 bsr.w   SSZMechaLaser_SelectAnimAndCallback
@@ -111,34 +111,34 @@ loc_7C764:
 ; ---------------------------------------------------------------------------
 
 loc_7C77A:
-                lea     byte_7D6A3(pc),a1
+                lea     SSZMechaLaser_FlightUniformRawAnimation(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_CheckDeleteTouchXY).l
 ; ---------------------------------------------------------------------------
 
 loc_7C78E:
-                lea     ObjDat3_7D426(pc),a1
+                lea     SSZMechaActiveEffect_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C79C,(a0)
 
 loc_7C79C:
-                lea     byte_7D67B(pc),a1
+                lea     SSZMechaActiveEffect_UniformRawAnimation(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #6,$38(a1)
                 beq.w   loc_7C8F8
                 cmpi.b  #$12,mapping_frame(a1)
-                bne.w   locret_7B448
+                bne.w   SSZMechaBattleAndChildren_SharedReturn
                 btst    #0,(V_int_run_count+3).w
-                lea     ChildObjDat_7D4A2(pc),a2
+                lea     SSZMechaActiveParticle_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_7C7D4:
-                lea     word_7D432(pc),a1
+                lea     SSZMechaActiveParticle_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #loc_7C80A,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
@@ -152,13 +152,13 @@ loc_7C7D4:
                 add.w   d0,y_pos(a0)
 
 loc_7C80A:
-                lea     byte_7D683(pc),a1
+                lea     SSZMecha_ActiveParticleDeleteAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 loc_7C818:
-                lea     ObjDat3_7D450(pc),a1
+                lea     SSZMechaMasterEmerald_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  (Camera_max_X_pos).w,d0
                 addi.w  #$100,d0
@@ -182,7 +182,7 @@ locret_7C854:
 ; ---------------------------------------------------------------------------
 
 loc_7C856:
-                lea     off_7DD5A(pc),a1
+                lea     SSZMasterEmeraldColorCycle_IndexedScript(pc),a1
                 lea     (Normal_palette_line_3+$1C).w,a2
                 jsr     (Run_PalRotationScript2).l
 
@@ -199,7 +199,7 @@ loc_7C878:
 ; ---------------------------------------------------------------------------
 
 loc_7C886:
-                lea     ObjDat3_7D41A(pc),a1
+                lea     SSZMechaSignalEffect_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 movea.w parent3(a0),a1
                 btst    #2,render_flags(a1)
@@ -208,7 +208,7 @@ loc_7C886:
 
 loc_7C8A0:
                 move.l  #loc_7C8BA,(a0)
-                move.l  #byte_7D668,$30(a0)
+                move.l  #SSZMecha_ParentReleaseSignalAnim,$30(a0)
                 move.l  #loc_7C8C4,$34(a0)
                 jsr     Refresh_ChildPositionAdjusted(pc)
 
@@ -242,7 +242,7 @@ loc_7C8FE:
                 addq.b  #4,subtype(a0)
 
 loc_7C902:
-                lea     ObjDat3_7D402(pc),a1
+                lea     SSZMechaRollingTrail_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #loc_7C91C,(a0)
                 bsr.w   SSZMechaTrail_InitOffsetsAndPriority
@@ -250,7 +250,7 @@ loc_7C902:
                 jsr     (Play_SFX).l
 
 loc_7C91C:
-                lea     byte_7D65F(pc),a1
+                lea     SSZMechaRollingTrail_RawAnimation(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1

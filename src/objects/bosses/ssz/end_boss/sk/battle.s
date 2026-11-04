@@ -16,47 +16,47 @@ Obj_SSZEndBoss:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 SSZEndBoss_Index:
-                dc.w    loc_7B2DC-SSZEndBoss_Index
-                dc.w    loc_7B3AC-SSZEndBoss_Index
-                dc.w    loc_7B3E6-SSZEndBoss_Index
-                dc.w    loc_7B416-SSZEndBoss_Index
-                dc.w    loc_7B44A-SSZEndBoss_Index
-                dc.w    loc_7B478-SSZEndBoss_Index
-                dc.w    loc_7B4DA-SSZEndBoss_Index
-                dc.w    loc_7B53E-SSZEndBoss_Index
-                dc.w    loc_7B5AC-SSZEndBoss_Index
-                dc.w    loc_7B53E-SSZEndBoss_Index
-                dc.w    loc_7B53E-SSZEndBoss_Index
-                dc.w    loc_7B63A-SSZEndBoss_Index
-                dc.w    loc_7B67C-SSZEndBoss_Index
-                dc.w    loc_7B6A0-SSZEndBoss_Index
-                dc.w    loc_7B6DA-SSZEndBoss_Index
-                dc.w    loc_7B6EE-SSZEndBoss_Index
-                dc.w    loc_7B748-SSZEndBoss_Index
-                dc.w    loc_7B77E-SSZEndBoss_Index
-                dc.w    loc_7B7BA-SSZEndBoss_Index
-                dc.w    loc_7B748-SSZEndBoss_Index
-                dc.w    loc_7B804-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_InitializeSlottedActor-SSZEndBoss_Index
+                dc.w    SSZMecha_WaitCameraAndBeginJump-SSZEndBoss_Index
+                dc.w    SSZMecha_RollLeftUntilOffscreen-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_WaitArrivalDelay-SSZEndBoss_Index
+                dc.w    SSZMecha_RunRightUntilBoundary-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_AnimateDuringRunEndDelay-SSZEndBoss_Index
+                dc.w    SSZMecha_AnimateFallAndProbeFloor-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_RunRawCallbackAnimation-SSZEndBoss_Index
+                dc.w    SSZMecha_DecelerateRollToBoundary-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_RunRawCallbackAnimation-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_RunRawCallbackAnimation-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_JumpUntilApexThenDash-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_MoveApexDashToBoundary-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_JumpUntilFloorThenBounce-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_MoveHighBounceToBoundary-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_JumpUntilFloorRollSetup-SSZEndBoss_Index
+                dc.w    SSZMecha_AnimateFloorRollDelay-SSZEndBoss_Index
+                dc.w    SSZMecha_MoveAndAnimateReverse-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_MoveFastRollToBoundary-SSZEndBoss_Index
+                dc.w    SSZMecha_AnimateFloorRollDelay-SSZEndBoss_Index
+                dc.w    SSZMechaBattle_RiseUntilRecoveryApex-SSZEndBoss_Index
 ; ---------------------------------------------------------------------------
 
-loc_7B2DC:
+SSZMechaBattle_InitializeSlottedActor:
                 lea     ObjSlot_MechaSonic(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.b  #8,collision_property(a0)
                 move.l  (V_int_run_count).w,(RNG_seed).w
                 tst.b   (Current_act).w
-                beq.s   loc_7B308
+                beq.s   SSZMecha_InitActOneRollingArrival
                 move.w  #$220,x_pos(a0)
                 move.w  #$4A0,y_pos(a0)
-                bra.w   loc_7B35A
+                bra.w   SSZMecha_QueueArtAndPreparePalette
 ; ---------------------------------------------------------------------------
 
-loc_7B308:
+SSZMecha_InitActOneRollingArrival:
                 move.b  #4,routine(a0)
                 move.b  #2,mapping_frame(a0)
                 move.w  #-$800,x_vel(a0)
                 bset    #2,$38(a0)
-                lea     ChildObjDat_7D47A(pc),a2
+                lea     SSZMecha_RollTrailFirstPairChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$20,d0
@@ -71,7 +71,7 @@ loc_7B308:
                 addi.w  #$70,d0
                 move.w  d0,y_pos(a0)
 
-loc_7B35A:
+SSZMecha_QueueArtAndPreparePalette:
                 lea     (ArtKosM_MechaSonicExtra).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MechaSonicExtra),d2
                 jsr     (Queue_Kos_Module).l
@@ -80,21 +80,21 @@ loc_7B35A:
                 lea     (Pal_SSZGHZMisc).l,a1
                 jsr     (PalLoad_Line1).l
                 tst.b   (Current_act).w
-                bne.s   loc_7B39C
+                bne.s   SSZMecha_TryCollisionProxy
                 jsr     (AllocateObject).l
-                bne.s   loc_7B39C
+                bne.s   SSZMecha_TryCollisionProxy
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_EndBoss,subtype(a1)
 
-loc_7B39C:
-                lea     ChildObjDat_7D474(pc),a2
+SSZMecha_TryCollisionProxy:
+                lea     SSZMechaCollisionProxy_SimpleChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (AllocateObject).l
 ; ---------------------------------------------------------------------------
 
-loc_7B3AC:
+SSZMecha_WaitCameraAndBeginJump:
                 btst    #4,(_unkFAB8).w
-                beq.w   locret_7B448
+                beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.b  #$14,routine(a0)
                 move.b  #2,$3B(a0)
                 move.w  (Camera_X_pos).w,d0
@@ -105,29 +105,29 @@ loc_7B3AC:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$30,d0
                 move.w  d0,(_unkFAB0).w
-                bra.w   loc_7B57A
+                bra.w   SSZMechaBattle_PrepareCyclicJumpScript
 ; ---------------------------------------------------------------------------
 
-loc_7B3E6:
+SSZMecha_RollLeftUntilOffscreen:
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$20,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_7B414
+                blo.s   SSZMecha_ArrivalUpdateReturn
                 move.b  #6,routine(a0)
                 bclr    #2,$38(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7B41C,$34(a0)
+                move.l  #SSZMechaBattle_BeginRightwardReturnRun,$34(a0)
 
-locret_7B414:
+SSZMecha_ArrivalUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B416:
+SSZMechaBattle_WaitArrivalDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B41C:
+SSZMechaBattle_BeginRightwardReturnRun:
                 move.b  #8,routine(a0)
                 bset    #0,render_flags(a0)
                 move.w  (Camera_Y_pos).w,d0
@@ -135,64 +135,64 @@ loc_7B41C:
                 move.w  d0,y_pos(a0)
                 move.w  #$400,x_vel(a0)
                 move.b  #3,mapping_frame(a0)
-                move.l  #byte_7D523,$30(a0)
+                move.l  #SSZMecha_RollingFramesRawAnimation,$30(a0)
 
-locret_7B448:
+SSZMechaBattleAndChildren_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B44A:
+SSZMecha_RunRightUntilBoundary:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
                 move.w  x_pos(a0),d0
                 cmp.w   (_unkFAB6).w,d0
-                bhs.s   loc_7B462
+                bhs.s   SSZMechaBattle_BeginRunEndDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B462:
+SSZMechaBattle_BeginRunEndDelay:
                 move.b  #$A,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7B484,$34(a0)
+                move.l  #SSZMecha_StopAndBeginDropAnim,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B478:
+SSZMechaBattle_AnimateDuringRunEndDelay:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B484:
+SSZMecha_StopAndBeginDropAnim:
                 move.b  #$C,routine(a0)
                 move.b  #$1F,y_radius(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #loc_7B4EC,$34(a0)
+                move.l  #SSZMecha_LandAndChooseRecovery,$34(a0)
                 jsr     (Random_Number).l
                 tst.w   d0
-                bmi.s   loc_7B4CA
+                bmi.s   SSZMecha_BeginTurnAfterDrop
                 bclr    #4,(_unkFAB8).w
-                bne.s   loc_7B4CA
-                move.l  #byte_7D4DE,$30(a0)
+                bne.s   SSZMecha_BeginTurnAfterDrop
+                move.l  #SSZMecha_LandHoldFrame8Anim,$30(a0)
                 bclr    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B4CA:
-                move.l  #byte_7D4EF,$30(a0)
+SSZMecha_BeginTurnAfterDrop:
+                move.l  #SSZMecha_LandHoldFrame12Anim,$30(a0)
                 bset    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B4DA:
+SSZMecha_AnimateFallAndProbeFloor:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite_LightGravity).l
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_7B4EC:
+SSZMecha_LandAndChooseRecovery:
                 move.b  #$E,routine(a0)
                 clr.w   $16(a0)
                 clr.b   anim_frame(a0)
@@ -200,121 +200,121 @@ loc_7B4EC:
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 btst    #3,$38(a0)
-                bne.s   loc_7B520
-                move.l  #byte_7D596,$30(a0)
-                move.l  #loc_7B544,$34(a0)
+                bne.s   SSZMecha_TurnAndPrepareJump
+                move.l  #SSZMecha_LandThenDashAnim,$30(a0)
+                move.l  #SSZMechaBattle_PrepareDeceleratingRoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B520:
+SSZMecha_TurnAndPrepareJump:
                 bchg    #0,render_flags(a0)
                 move.b  #1,mapping_frame(a0)
-                move.l  #byte_7D5A2,$30(a0)
-                move.l  #loc_7B57A,$34(a0)
+                move.l  #SSZMecha_AltLandThenJumpPrepAnim,$30(a0)
+                move.l  #SSZMechaBattle_PrepareCyclicJumpScript,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B53E:
+SSZMechaBattle_RunRawCallbackAnimation:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_7B544:
+SSZMechaBattle_PrepareDeceleratingRoll:
                 move.b  #$10,routine(a0)
                 move.w  #$820,d0
                 move.w  #-$20,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_7B55E
+                beq.s   SSZMecha_StoreRollSpeedAndTryTrails
                 neg.w   d0
                 neg.w   d1
 
-loc_7B55E:
+SSZMecha_StoreRollSpeedAndTryTrails:
                 move.w  d0,x_vel(a0)
                 move.w  d1,$40(a0)
                 clr.w   y_vel(a0)
                 bset    #2,$38(a0)
-                lea     ChildObjDat_7D486(pc),a2
+                lea     SSZMecha_RollTrailSecondPairChildren(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_7B57A:
+SSZMechaBattle_PrepareCyclicJumpScript:
                 move.b  #$14,routine(a0)
-                move.l  #byte_7D541,$30(a0)
-                move.l  #loc_7B5E8,$34(a0)
+                move.l  #SSZMecha_JumpAttackPrepAnim,$30(a0)
+                move.l  #SSZMechaBattle_LaunchCyclicJump,$34(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 bset    #0,render_flags(a0)
                 cmp.w   x_pos(a0),d0
-                bhs.s   locret_7B5AA
+                bhs.s   SSZMecha_JumpFacingReturn
                 bclr    #0,render_flags(a0)
 
-locret_7B5AA:
+SSZMecha_JumpFacingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B5AC:
+SSZMecha_DecelerateRollToBoundary:
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                lea     loc_7B5C2(pc),a1
-                bra.w   loc_7D216
+                lea     SSZMecha_EndRollAndPrepareJump(pc),a1
+                bra.w   SSZMecha_CheckFacingArenaBound
 ; ---------------------------------------------------------------------------
 
-loc_7B5C2:
+SSZMecha_EndRollAndPrepareJump:
                 move.b  #$12,routine(a0)
                 move.w  d0,x_pos(a0)
                 clr.w   $12(a0)
                 bclr    #2,$38(a0)
-                move.l  #byte_7D59B,$30(a0)
-                move.l  #loc_7B57A,$34(a0)
+                move.l  #SSZMecha_DashStopThenJumpPrepAnim,$30(a0)
+                move.l  #SSZMechaBattle_PrepareCyclicJumpScript,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B5E8:
+SSZMechaBattle_LaunchCyclicJump:
                 move.b  #$F,y_radius(a0)
-                lea     byte_7D54A(pc),a1
+                lea     SSZMecha_JumpingAttackFlightRawAnimation(pc),a1
                 jsr     (Set_Raw_Animation).l
                 move.w  #$200,d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_7B606
+                bne.s   SSZMecha_ChooseJumpVariant
                 neg.w   d0
 
-loc_7B606:
+SSZMecha_ChooseJumpVariant:
                 move.w  d0,x_vel(a0)
                 move.w  #-$600,y_vel(a0)
                 move.b  $3B(a0),d0
                 addq.b  #1,$3B(a0)
                 andi.w  #7,d0
                 moveq   #0,d1
-                move.b  byte_7B62E(pc,d0.w),d1
+                move.b  SSZMechaBattle_CyclicJumpVariantOrder(pc,d0.w),d1
                 move.b  d1,$3A(a0)
-                move.b  byte_7B636(pc,d1.w),routine(a0)
+                move.b  SSZMechaBattle_JumpVariantRoutineValues(pc,d1.w),routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_7B62E:
+SSZMechaBattle_CyclicJumpVariantOrder:
                 dc.b    0,   1,   2,   0,   1,   2,   0,   1
-byte_7B636:
+SSZMechaBattle_JumpVariantRoutineValues:
                 dc.b    $16, $1A, $1E
                 even
 ; ---------------------------------------------------------------------------
 
-loc_7B63A:
+SSZMechaBattle_JumpUntilApexThenDash:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bpl.s   loc_7B64E
+                bpl.s   SSZMechaBattle_PrepareApexDashDirection
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B64E:
+SSZMechaBattle_PrepareApexDashDirection:
                 move.b  #$18,routine(a0)
                 move.w  #$780,d0
                 moveq   #-$20,d1
                 btst    #0,render_flags(a0)
-                bne.s   loc_7B666
+                bne.s   SSZMechaBattle_StoreApexDashVelocity
                 neg.w   d0
                 neg.w   d1
 
-loc_7B666:
+SSZMechaBattle_StoreApexDashVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  d1,$40(a0)
                 clr.w   y_vel(a0)
@@ -323,35 +323,35 @@ loc_7B666:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B67C:
+SSZMechaBattle_MoveApexDashToBoundary:
                 jsr     (Animate_RawMultiDelay).l
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                lea     loc_7B698(pc),a1
-                bra.w   loc_7D216
+                lea     SSZMecha_ClampApexDashAndWait(pc),a1
+                bra.w   SSZMecha_CheckFacingArenaBound
 ; ---------------------------------------------------------------------------
 
-loc_7B698:
+SSZMecha_ClampApexDashAndWait:
                 move.w  d0,x_pos(a0)
-                bra.w   loc_7B462
+                bra.w   SSZMechaBattle_BeginRunEndDelay
 ; ---------------------------------------------------------------------------
 
-loc_7B6A0:
+SSZMechaBattle_JumpUntilFloorThenBounce:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_7B6BE
+                bmi.s   SSZMecha_BounceFloorReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_7B6C0
-                beq.s   loc_7B6C0
+                bmi.s   SSZMechaBattle_BounceUpAfterFloorContact
+                beq.s   SSZMechaBattle_BounceUpAfterFloorContact
 
-locret_7B6BE:
+SSZMecha_BounceFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B6C0:
+SSZMechaBattle_BounceUpAfterFloorContact:
                 add.w   d1,y_pos(a0)
                 move.b  #$1C,routine(a0)
                 move.w  #-$900,y_vel(a0)
@@ -360,78 +360,78 @@ loc_7B6C0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B6DA:
+SSZMechaBattle_MoveHighBounceToBoundary:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
-                lea     loc_7B462(pc),a1
-                bra.w   loc_7D216
+                lea     SSZMechaBattle_BeginRunEndDelay(pc),a1
+                bra.w   SSZMecha_CheckFacingArenaBound
 ; ---------------------------------------------------------------------------
 
-loc_7B6EE:
+SSZMechaBattle_JumpUntilFloorRollSetup:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_7B70C
+                bmi.s   SSZMecha_FloorRollContactReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_7B70E
-                beq.s   loc_7B70E
+                bmi.s   SSZMechaBattle_LandAndBeginRollDelay
+                beq.s   SSZMechaBattle_LandAndBeginRollDelay
 
-locret_7B70C:
+SSZMecha_FloorRollContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B70E:
+SSZMechaBattle_LandAndBeginRollDelay:
                 add.w   d1,y_pos(a0)
                 move.b  #$20,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_7B754,$34(a0)
+                move.l  #SSZMechaBattle_PrepareBriefReverseMotion,$34(a0)
                 bset    #2,$38(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_7D480(pc),a2
+                lea     SSZMecha_RollTrailSingleChild(pc),a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   locret_7B70C
+                bne.s   SSZMecha_FloorRollContactReturn
                 move.b  #8,subtype(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B748:
+SSZMecha_AnimateFloorRollDelay:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B754:
+SSZMechaBattle_PrepareBriefReverseMotion:
                 move.b  #$22,routine(a0)
                 move.w  #$100,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_7B766
+                bmi.s   SSZMecha_BeginBriefReverse
                 neg.w   d0
 
-loc_7B766:
+SSZMecha_BeginBriefReverse:
                 move.w  d0,x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_7B790,$34(a0)
+                move.l  #SSZMecha_BeginOppositeFastRoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B77E:
+SSZMecha_MoveAndAnimateReverse:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B790:
+SSZMecha_BeginOppositeFastRoll:
                 move.b  #$24,routine(a0)
                 move.w  #$640,d0
                 move.w  #-$20,d1
                 tst.w   x_vel(a0)
-                bmi.s   loc_7B7A8
+                bmi.s   SSZMecha_StoreFastRollMotion
                 neg.w   d0
                 neg.w   d1
 
-loc_7B7A8:
+SSZMecha_StoreFastRollMotion:
                 move.w  d0,x_vel(a0)
                 move.w  d1,$40(a0)
                 moveq   #signextendB(sfx_Dash),d0
@@ -439,23 +439,23 @@ loc_7B7A8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B7BA:
+SSZMechaBattle_MoveFastRollToBoundary:
                 jsr     (Animate_RawMultiDelay).l
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                lea     loc_7B7D6(pc),a1
-                bra.w   loc_7D216
+                lea     SSZMechaBattle_BeginPostRollJumpDelay(pc),a1
+                bra.w   SSZMecha_CheckFacingArenaBound
 ; ---------------------------------------------------------------------------
 
-loc_7B7D6:
+SSZMechaBattle_BeginPostRollJumpDelay:
                 move.b  #$26,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_7B7EC,$34(a0)
+                move.l  #SSZMechaBattle_LaunchVerticalRecovery,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B7EC:
+SSZMechaBattle_LaunchVerticalRecovery:
                 move.b  #$28,routine(a0)
                 bclr    #2,$38(a0)
                 clr.w   x_vel(a0)
@@ -463,141 +463,141 @@ loc_7B7EC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B804:
+SSZMechaBattle_RiseUntilRecoveryApex:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bpl.w   loc_7B462
+                bpl.w   SSZMechaBattle_BeginRunEndDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B81A:
+SSZMecha_DefeatDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7B838(pc,d0.w),d1
-                jsr     off_7B838(pc,d1.w)
+                move.w  SSZMechaPostBattle_StateOffsets(pc,d0.w),d1
+                jsr     SSZMechaPostBattle_StateOffsets(pc,d1.w)
                 lea     DPLCPtr_MechaSonic(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_7B838:
-                dc.w    loc_7B852-off_7B838
-                dc.w    loc_7B87C-off_7B838
-                dc.w    loc_7B93E-off_7B838
-                dc.w    loc_7B972-off_7B838
-                dc.w    loc_7B984-off_7B838
-                dc.w    loc_7B9D2-off_7B838
-                dc.w    loc_7B9FA-off_7B838
-                dc.w    loc_7BA28-off_7B838
-                dc.w    loc_7BA90-off_7B838
-                dc.w    loc_7BABE-off_7B838
-                dc.w    loc_7BB06-off_7B838
-                dc.w    loc_7BBAC-off_7B838
-                dc.w    loc_7BBE0-off_7B838
+SSZMechaPostBattle_StateOffsets:
+                dc.w    SSZMecha_TickInitialDefeatDelay-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_FallAndProbeDefeatLanding-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_AnimateActOnePaletteHold-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_UnusedFallUntilOffscreen-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_AnimateUntilSuperSetup-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_WaitReleaseAndStartAnim-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_AnimateRelease-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_WaitWithSpinChargeSound-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_DashToBrakeThreshold-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMechaPostBattle_BrakeMoveAndAnimate-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMechaPostBattle_JumpUntilArenaLanding-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_AnimateAndSignalEmerald-SSZMechaPostBattle_StateOffsets
+                dc.w    SSZMecha_ForceApproachAndStartBattle-SSZMechaPostBattle_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7B852:
+SSZMecha_TickInitialDefeatDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B858:
+SSZMechaPostBattle_BeginDefeatFall:
                 move.b  #2,routine(a0)
                 move.b  #$E,mapping_frame(a0)
                 move.b  #$1F,y_radius(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                move.l  #loc_7B888,$34(a0)
+                move.l  #SSZMecha_LandAndChooseActOutcome,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B87C:
+SSZMecha_FallAndProbeDefeatLanding:
                 jsr     (MoveSprite_LightGravity).l
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_7B888:
+SSZMecha_LandAndChooseActOutcome:
                 move.b  #$23,y_radius(a0)
-                lea     byte_7D5E4(pc),a1
+                lea     SSZMecha_PostBattleSettlingRawAnimation(pc),a1
                 jsr     (Set_Raw_Animation).l
-                lea     (word_7D842).l,a1
+                lea     (MechaSonic_IdleFlashPaletteScript).l,a1
                 bsr.w   InstallSingleGlobalPaletteRotationScript
-                lea     ChildObjDat_7D48C(pc),a2
+                lea     SSZMechaSparks_SimpleChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 tst.b   (Current_act).w
-                bne.s   loc_7B8E6
+                bne.s   SSZMecha_ChooseSuperRoundOrDefeat
                 move.b  #4,routine(a0)
                 st      (_unkFAA8).w
                 bset    #5,$38(a0)
                 bclr    #3,$38(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_7B8E4
-                move.l  #loc_7D056,(a1)
+                bne.s   SSZMecha_ResultsSpawnReturn
+                move.l  #SSZPostBossResultsGate_Initialize,(a1)
 
-locret_7B8E4:
+SSZMecha_ResultsSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B8E6:
+SSZMecha_ChooseSuperRoundOrDefeat:
                 btst    #7,$38(a0)
-                bne.s   loc_7B916
+                bne.s   SSZMechaPostBattle_BeginFinalDefeatDelay
                 bset    #5,$38(a0)
                 move.b  #8,routine(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_7B996,$34(a0)
+                move.l  #SSZMecha_BeginSuperRoundSignal,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 st      (Ctrl_2_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B916:
-                move.l  #loc_7BC32,(a0)
+SSZMechaPostBattle_BeginFinalDefeatDelay:
+                move.l  #SSZMechaFinalDefeat_HoldAndDraw,(a0)
                 clr.b   (Update_HUD_timer).w
                 move.w  #$BF,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7B934
+                bne.s   SSZMecha_TryFinalExplosionEmitters
                 move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
-loc_7B934:
-                lea     ChildObjDat_7D4D0(pc),a2
+SSZMecha_TryFinalExplosionEmitters:
+                lea     SSZMecha_FinalExplosionEmitterChild(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_7B93E:
+SSZMecha_AnimateActOnePaletteHold:
                 jsr     (Run_PalRotationScript).l
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 ; unused
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.w   locret_7B448
-                beq.w   locret_7B448
+                bmi.w   SSZMechaBattleAndChildren_SharedReturn
+                beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.b  #6,routine(a0)
                 bset    #7,art_tile(a0)
                 lea     (Pal_SSZGHZMisc).l,a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_7B972:
+SSZMecha_UnusedFallUntilOffscreen:
                 tst.b   render_flags(a0)
-                bpl.s   loc_7B97E
+                bpl.s   SSZMecha_DeleteUnusedFallingActor
                 jmp     (MoveSprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7B97E:
+SSZMecha_DeleteUnusedFallingActor:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_7B984:
+SSZMecha_AnimateUntilSuperSetup:
                 jsr     (Run_PalRotationScript).l
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_7B996:
+SSZMecha_BeginSuperRoundSignal:
                 move.b  #$A,routine(a0)
                 move.b  #1,(Update_HUD_timer).w
                 clr.b   status(a0)
@@ -605,52 +605,52 @@ loc_7B996:
                 ori.b   #$50,$38(a0)
                 moveq   #signextendB(mus_DDZ),d0
                 jsr     (Play_Music).l
-                lea     ChildObjDat_7D492(pc),a2
+                lea     SSZMechaSignalEffect_NormalChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
                 lea     (ArtKosM_EndingMasterEmerald).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_MasterEmerald),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_7B9D2:
+SSZMecha_WaitReleaseAndStartAnim:
                 btst    #6,$38(a0)
-                bne.s   locret_7B9F8
+                bne.s   SSZMecha_ChildReleaseReturn
                 move.b  #$C,routine(a0)
-                lea     byte_7D5EF(pc),a1
+                lea     SSZMecha_RecoverThenActAnim(pc),a1
                 jsr     (Set_Raw_Animation).l
                 move.b  #$E,mapping_frame(a0)
-                move.l  #loc_7BA00,$34(a0)
+                move.l  #SSZMecha_BeginSpinCharge,$34(a0)
 
-locret_7B9F8:
+SSZMecha_ChildReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B9FA:
+SSZMecha_AnimateRelease:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_7BA00:
+SSZMecha_BeginSpinCharge:
                 move.b  #$E,routine(a0)
                 move.w  #$3B,$2E(a0)
                 bset    #2,$38(a0)
-                lea     ChildObjDat_7D486(pc),a2
+                lea     SSZMecha_RollTrailSecondPairChildren(pc),a2
                 btst    #0,render_flags(a0)
-                beq.s   loc_7BA22
-                lea     ChildObjDat_7D47A(pc),a2
+                beq.s   SSZMecha_TrySpinChargeTrails
+                lea     SSZMecha_RollTrailFirstPairChildren(pc),a2
 
-loc_7BA22:
+SSZMecha_TrySpinChargeTrails:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_7BA28:
+SSZMecha_WaitWithSpinChargeSound:
                 moveq   #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX_Continuous).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7BA38
+                bmi.s   SSZMecha_BeginDashAndOpenCamera
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BA38:
+SSZMecha_BeginDashAndOpenCamera:
                 move.b  #$10,routine(a0)
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
@@ -664,65 +664,65 @@ loc_7BA38:
                 move.w  #$600,x_vel(a0)
                 clr.w   y_vel(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7BA80
+                bne.s   SSZMecha_TryCameraAdvanceActor
                 move.l  #loc_7C818,(a1)
                 move.w  a1,$44(a0)
 
-loc_7BA80:
+SSZMecha_TryCameraAdvanceActor:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_7BA8E
-                move.l  #loc_7C9E8,(a1)
+                bne.s   SSZMecha_CameraAdvanceSpawnReturn
+                move.l  #SSZMecha_InitCameraScrollLock,(a1)
 
-locret_7BA8E:
+SSZMecha_CameraAdvanceSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BA90:
+SSZMecha_DashToBrakeThreshold:
                 jsr     (MoveSprite2).l
                 move.w  (_unkFAB6).w,d0
                 subi.w  #$AA,d0
                 cmp.w   x_pos(a0),d0
-                bls.s   loc_7BAA6
+                bls.s   SSZMecha_BeginBrakingAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BAA6:
+SSZMecha_BeginBrakingAnimation:
                 move.b  #$12,routine(a0)
-                move.l  #loc_7BAD0,$34(a0)
-                lea     byte_7D5F6(pc),a1
+                move.l  #SSZMecha_JumpTowardSuperArena,$34(a0)
+                lea     SSZMecha_PreJumpCallbackRawAnimation(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_7BABE:
+SSZMechaPostBattle_BrakeMoveAndAnimate:
                 addi.w  #-$30,x_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_7BAD0:
+SSZMecha_JumpTowardSuperArena:
                 move.b  #$14,routine(a0)
                 bclr    #2,$38(a0)
                 move.w  #-$400,y_vel(a0)
                 move.b  #$4B,y_radius(a0)
-                move.l  #loc_7BB20,$34(a0)
-                lea     byte_7D61A(pc),a1
+                move.l  #SSZMecha_SetSuperArenaAndLanding,$34(a0)
+                lea     SSZMecha_TransformReturnHoldFrame8(pc),a1
                 btst    #0,render_flags(a0)
-                beq.s   loc_7BB00
-                lea     byte_7D60A(pc),a1
+                beq.s   SSZMecha_InstallJumpAnimation
+                lea     SSZMecha_PostBattleJumpFlipRawAnimation(pc),a1
 
-loc_7BB00:
+SSZMecha_InstallJumpAnimation:
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_7BB06:
+SSZMechaPostBattle_JumpUntilArenaLanding:
                 jsr     (Animate_RawMultiDelayFlipX).l
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_7B448
+                bmi.w   SSZMechaBattleAndChildren_SharedReturn
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_7BB20:
+SSZMecha_SetSuperArenaAndLanding:
                 move.w  (Camera_min_X_pos).w,d0
                 addi.w  #$A0,d0
                 move.w  d0,(Camera_min_X_pos).w
@@ -741,27 +741,28 @@ loc_7BB20:
                 addi.w  #$50,d0
                 move.w  d0,(_unkFA8E).w
                 move.b  #$16,routine(a0)
-                move.l  #loc_7BBC6,$34(a0)
-                lea     byte_7D5AB(pc),a1
+                move.l  #SSZMecha_PrepareForcedApproach,$34(a0)
+                lea     SSZMecha_TransformLandingAnim(pc),a1
                 jsr     (Set_Raw_Animation).l
 
-loc_7BB7C:
+SSZMecha_BeginTransformPaletteAndSparks:
                 clr.b   $38(a0)
                 bset    #7,$38(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
-                lea     (word_7D9EA).l,a1
+                lea     (MechaSonic_TransformFlashPaletteScript).l,a1
                 bsr.w   InstallSingleGlobalPaletteRotationScript
-                lea     ChildObjDat_7D48C(pc),a2
+                lea     SSZMechaSparks_SimpleChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   locret_7BBAA
+                bne.s   SSZMecha_TransformSparkSpawnReturn
                 move.b  #8,subtype(a1)
 
-locret_7BBAA:
+SSZMecha_TransformSparkSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BBAC:
+; Toggle the emerald frame bit on every transformation update
+SSZMecha_AnimateAndSignalEmerald:
                 moveq   #signextendB(sfx_MechaTransform),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Run_PalRotationScript).l
@@ -769,7 +770,7 @@ loc_7BBAC:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_7BBC6:
+SSZMecha_PrepareForcedApproach:
                 move.b  #$18,routine(a0)
                 lea     (Player_1).w,a1
                 clr.b   status(a1)
@@ -778,7 +779,7 @@ loc_7BBC6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BBE0:
+SSZMecha_ForceApproachAndStartBattle:
                 jsr     (Run_PalRotationScript).l
                 bchg    #6,(_unkFAB8).w
                 move.w  #(button_right_mask<<8)|button_right_mask,(Ctrl_1_logical).w
@@ -787,7 +788,7 @@ loc_7BBE0:
                 move.w  (_unkFA8A).w,d1
                 addi.w  #$10,d1
                 cmp.w   d1,d0
-                blo.w   locret_7B448
+                blo.w   SSZMechaBattleAndChildren_SharedReturn
                 clr.b   (Scroll_lock).w
                 clr.w   (H_scroll_frame_offset).w
                 clr.w   (Ctrl_1_logical).w
@@ -799,26 +800,26 @@ loc_7BBE0:
                 bra.w   loc_7BDD8
 ; ---------------------------------------------------------------------------
 
-loc_7BC32:
+SSZMechaFinalDefeat_HoldAndDraw:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7BC3E
+                bmi.s   SSZMecha_BeginFinalFadeAndDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7BC3E:
+SSZMecha_BeginFinalFadeAndDebris:
                 move.l  #Obj_Wait,(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7BC70,$34(a0)
+                move.l  #SSZMecha_BeginWhiteFadeAndSound,$34(a0)
                 bclr    #7,render_flags(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 addi.w  #$20,y_pos(a0)
-                lea     ChildObjDat_7D4CA(pc),a2
+                lea     SSZMecha_DefeatFragmentChild(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_7BC70:
-                move.l  #loc_7BCB0,(a0)
+SSZMecha_BeginWhiteFadeAndSound:
+                move.l  #SSZMecha_WaitWhiteFadeThenSave,(a0)
                 bset    #5,$38(a0)
                 clr.w   $3A(a0)
                 move.b  #4,$39(a0)
@@ -826,25 +827,25 @@ loc_7BC70:
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
 
-loc_7BC90:
+SSZMecha_SavePaletteAndTryWhiteFade:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7BC90
+                dbf     d6,SSZMecha_SavePaletteAndTryWhiteFade
                 jsr     (AllocateObject).l
-                bne.s   locret_7BCAE
+                bne.s   SSZMecha_WhiteFadeSpawnReturn
                 move.w  a1,$44(a0)
                 move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  #7,$3A(a1)
 
-locret_7BCAE:
+SSZMecha_WhiteFadeSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7BCB0:
+SSZMecha_WaitWhiteFadeThenSave:
                 bsr.w   TickSSZPostBossExplosionSoundBurst
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_7B448
-                move.l  #loc_7BCFC,(a0)
+                beq.w   SSZMechaBattleAndChildren_SharedReturn
+                move.l  #SSZMecha_WaitAndTryKnucklesEnding,(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 st      (_unkFAA2).w
                 st      (Events_fg_4+1).w
@@ -858,34 +859,34 @@ loc_7BCB0:
                 jmp     (SaveGame).l
 ; ---------------------------------------------------------------------------
 
-loc_7BCFC:
+SSZMecha_WaitAndTryKnucklesEnding:
                 bsr.w   TickSSZPostBossExplosionSoundBurst
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_7B448
+                bpl.w   SSZMechaBattleAndChildren_SharedReturn
                 move.w  #3,(Player_mode).w
                 jsr     (AllocateObject).l
-                bne.s   loc_7BD1C
+                bne.s   SSZMecha_TryPaletteRestore
                 move.l  #loc_5E6C0,(a1)
 
-loc_7BD1C:
+SSZMecha_TryPaletteRestore:
                 jsr     (AllocateObject).l
-                bne.s   loc_7BD2A
+                bne.s   SSZMecha_DeleteAfterEndingSetup
                 move.l  #SKPalEffect_InitTargetPasses,(a1)
 
-loc_7BD2A:
+SSZMecha_DeleteAfterEndingSetup:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 TickSSZPostBossExplosionSoundBurst:
                 subq.w  #1,$3A(a0)
-                bpl.s   locret_7BD4A
+                bpl.s   SSZMechaExplosionSoundBurst_Return
                 move.w  #$1F,$3A(a0)
                 subq.b  #1,$39(a0)
-                bmi.s   locret_7BD4A
+                bmi.s   SSZMechaExplosionSoundBurst_Return
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
 
-locret_7BD4A:
+SSZMechaExplosionSoundBurst_Return:
                 rts
 ; End of function TickSSZPostBossExplosionSoundBurst

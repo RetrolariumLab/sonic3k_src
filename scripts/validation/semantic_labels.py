@@ -279,14 +279,14 @@ def validate(root=ROOT, index=None):
             explicit = []
             for entry in consumer["tokens"]:
                 if not isinstance(entry, list) or len(entry) != 4:
-                    raise ValueError("Semantic edit needs code-line, token, mapping index and size suffix")
+                    raise ValueError("Semantic edit needs code-line, token, mapping index and symbol suffix")
                 line, token, mapping, suffix = entry
                 if (
                     type(line) is not int
                     or type(token) is not int
                     or type(mapping) is not int
                     or not 0 <= mapping < len(document["mappings"])
-                    or suffix not in ("", ".b", ".w", ".l", ".B", ".W", ".L")
+                    or not isinstance(suffix, str)
                 ):
                     raise ValueError("Invalid semantic source-token edit")
                 coordinate = path, line, token
@@ -294,6 +294,17 @@ def validate(root=ROOT, index=None):
                     raise ValueError("Semantic source-token edits overlap")
                 edited_coordinates.add(coordinate)
                 selected = document["mappings"][mapping]
+                if suffix not in ("", ".b", ".w", ".l", ".B", ".W", ".L"):
+                    if (
+                        not suffix.startswith(".")
+                        or not NAME.fullmatch(suffix)
+                        or selected["old"].startswith(".")
+                        or not any(
+                            row["scope"] == selected["old"] and row["name"] == suffix
+                            for row in sources[selected["source"]]
+                        )
+                    ):
+                        raise ValueError("Semantic edit does not reference a local of the selected label")
                 explicit.append(
                     {
                         "code_line": line,

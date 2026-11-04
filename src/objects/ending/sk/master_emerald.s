@@ -104,7 +104,7 @@ loc_5DF58:
                 bmi.s   locret_5DF7E
                 move.b  (_unkFAC1).w,d0
                 beq.s   locret_5DF7E
-                lea     (off_7DD5A).l,a1
+                lea     (SSZMasterEmeraldColorCycle_IndexedScript).l,a1
                 lea     (Normal_palette_line_3+$1C).w,a2
                 tst.b   d0
                 bpl.s   loc_5DF78

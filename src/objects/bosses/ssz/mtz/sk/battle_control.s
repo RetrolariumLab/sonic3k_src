@@ -7,15 +7,15 @@ Obj_SSZMTZBoss:
                 move.l  #Obj_Wait,(a0)
                 move.b  #1,(Boss_flag).w
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7A712,$34(a0)
+                move.l  #SSZMTZBoss_InstallMainDispatcher,$34(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7A6DC
+                bne.s   SSZMTZ_QueueArtAndSavePalette
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_EndBoss,subtype(a1)
 
-loc_7A6DC:
+SSZMTZ_QueueArtAndSavePalette:
                 clr.w   (_unkFA88).w
                 moveq   #PLCID_7B,d0
                 jsr     (Load_PLC).l
@@ -26,32 +26,32 @@ loc_7A6DC:
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_7A702:
+SSZMTZBoss_SavePaletteAndLoadOrbColors:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_7A702
+                dbf     d6,SSZMTZBoss_SavePaletteAndLoadOrbColors
                 lea     Pal_SSZMTZOrbs(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_7A712:
-                move.l  #loc_7A71A,(a0)
+SSZMTZBoss_InstallMainDispatcher:
+                move.l  #SSZMTZBoss_DispatchMainRoutine,(a0)
 
-locret_7A718:
+SSZMTZBoss_ReturnFromSetupOrSharedPolicy:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A71A:
+SSZMTZBoss_DispatchMainRoutine:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7A728(pc,d0.w),d1
-                jmp     off_7A728(pc,d1.w)
+                move.w  SSZMTZBoss_MainRoutineOffsets(pc,d0.w),d1
+                jmp     SSZMTZBoss_MainRoutineOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_7A728:
-                dc.w    loc_7A72C-off_7A728
-                dc.w    loc_7A7E2-off_7A728
+SSZMTZBoss_MainRoutineOffsets:
+                dc.w    SSZMTZ_InitShipAndOrbRing-SSZMTZBoss_MainRoutineOffsets
+                dc.w    SSZMTZBoss_DispatchAttackPhase-SSZMTZBoss_MainRoutineOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A72C:
+SSZMTZ_InitShipAndOrbRing:
                 move.l  #Map_RobotnikShip,mappings(a0)
                 move.w  #make_art_tile(ArtTile_RobotnikShip,0,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
@@ -76,11 +76,11 @@ loc_7A72C:
                 lea     (Child1_MakeMechaHead).l,a2
                 jsr     (CreateChild1_Normal).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7A7C4
-                move.l  #loc_7AD8A,(a1)
+                bne.s   SSZMTZ_SeedPackedAnimScratch
+                move.l  #SSZMTZOrb_DispatchState,(a1)
                 move.l  a0,$34(a1)
 
-loc_7A7C4:
+SSZMTZ_SeedPackedAnimScratch:
                 lea     (_unkFA82).w,a2
                 move.b  #$10,(a2)+
                 move.b  #0,(a2)+
@@ -91,28 +91,28 @@ loc_7A7C4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A7E2:
+SSZMTZBoss_DispatchAttackPhase:
                 moveq   #0,d0
                 move.b  $26(a0),d0
-                move.w  off_7A7F0(pc,d0.w),d1
-                jmp     off_7A7F0(pc,d1.w)
+                move.w  SSZMTZBoss_AttackPhaseOffsets(pc,d0.w),d1
+                jmp     SSZMTZBoss_AttackPhaseOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_7A7F0:
-                dc.w    loc_7A800-off_7A7F0
-                dc.w    loc_7A874-off_7A7F0
-                dc.w    loc_7A8F4-off_7A7F0
-                dc.w    loc_7A93C-off_7A7F0
-                dc.w    loc_7A95A-off_7A7F0
-                dc.w    loc_7A98A-off_7A7F0
-                dc.w    loc_7A9D4-off_7A7F0
-                dc.w    loc_7AA44-off_7A7F0
+SSZMTZBoss_AttackPhaseOffsets:
+                dc.w    SSZMTZ_DescendAndChooseDirection-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_MovePassAndCheckLeftLimit-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_RiseToCenterAndStopY-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_ExpandAndFlattenOrbit-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZBoss_RetractOrbitRadius-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_FlattenOrbitAfterOrbRelease-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_RecoverOrbitOrBeginLaser-SSZMTZBoss_AttackPhaseOffsets
+                dc.w    SSZMTZ_TickPauseOrDispatchLaser-SSZMTZBoss_AttackPhaseOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7A800:
+SSZMTZ_DescendAndChooseDirection:
                 bsr.w   Boss_MoveObject
                 move.w  (SSZ_MTZ_boss_Y_pos).w,$14(a0)
                 cmpi.w  #$420,(SSZ_MTZ_boss_Y_pos).w
-                blo.s   loc_7A84A
+                blo.s   SSZMTZ_CheckHitAndTouchDraw
                 addq.b  #2,$26(a0)
                 move.w  #0,(SSZ_MTZ_boss_Y_vel).w
                 move.w  #-$100,(SSZ_MTZ_boss_X_vel).w
@@ -120,12 +120,12 @@ loc_7A800:
                 bclr    #0,render_flags(a0)
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   (SSZ_MTZ_boss_X_pos).w,d0
-                blo.s   loc_7A84A
+                blo.s   SSZMTZ_CheckHitAndTouchDraw
                 move.w  #$100,(SSZ_MTZ_boss_X_vel).w
                 bset    #7,$2E(a0)
                 bset    #0,render_flags(a0)
 
-loc_7A84A:
+SSZMTZ_CheckHitAndTouchDraw:
                 bsr.w   SSZMTZBoss_CheckHitOrbRelease
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
@@ -144,276 +144,276 @@ ApplySSZMTZBossFourPixelSineBob:
 
 ; ---------------------------------------------------------------------------
 
-loc_7A874:
+SSZMTZ_MovePassAndCheckLeftLimit:
                 bsr.w   Boss_MoveObject
                 btst    #7,$2E(a0)
-                bne.s   loc_7A8AE
+                bne.s   SSZMTZBoss_TestRightBoundaryAndTurn
                 cmpi.w  #$1680,(SSZ_MTZ_boss_X_pos).w
-                bhs.s   loc_7A8DA
+                bhs.s   SSZMTZBoss_SynchronizeXAndApplySineBob
                 bchg    #7,$2E(a0)
                 move.w  #$100,(SSZ_MTZ_boss_X_vel).w
                 bset    #0,render_flags(a0)
                 bset    #6,$2E(a0)
-                beq.s   loc_7A8DA
+                beq.s   SSZMTZBoss_SynchronizeXAndApplySineBob
                 addq.b  #2,$26(a0)
                 move.w  #-$100,(SSZ_MTZ_boss_Y_vel).w
-                bra.s   loc_7A8DA
+                bra.s   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7A8AE:
+SSZMTZBoss_TestRightBoundaryAndTurn:
                 cmpi.w  #$1780,(SSZ_MTZ_boss_X_pos).w
-                blo.s   loc_7A8DA
+                blo.s   SSZMTZBoss_SynchronizeXAndApplySineBob
                 bchg    #7,$2E(a0)
                 move.w  #-$100,(SSZ_MTZ_boss_X_vel).w
                 bclr    #0,render_flags(a0)
                 bset    #6,$2E(a0)
-                beq.s   loc_7A8DA
+                beq.s   SSZMTZBoss_SynchronizeXAndApplySineBob
                 addq.b  #2,$26(a0)
                 move.w  #-$100,(SSZ_MTZ_boss_Y_vel).w
 
-loc_7A8DA:
+SSZMTZBoss_SynchronizeXAndApplySineBob:
                 move.w  (SSZ_MTZ_boss_X_pos).w,x_pos(a0)
                 bsr.w   ApplySSZMTZBossFourPixelSineBob
 
-loc_7A8E4:
+SSZMTZBoss_ApplyActiveHitPolicyAndDraw:
                 bsr.w   SSZMTZBoss_CheckHitOrbRelease
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7A8F4:
+SSZMTZ_RiseToCenterAndStopY:
                 bsr.w   Boss_MoveObject
                 cmpi.w  #$3F0,(SSZ_MTZ_boss_Y_pos).w
-                bhs.s   loc_7A906
+                bhs.s   SSZMTZ_StopXAtCenter
                 move.w  #0,(SSZ_MTZ_boss_Y_vel).w
 
-loc_7A906:
+SSZMTZ_StopXAtCenter:
                 btst    #7,$2E(a0)
-                bne.s   loc_7A91E
+                bne.s   SSZMTZBoss_StopRightwardMotionAtCenter
                 cmpi.w  #$1700,(SSZ_MTZ_boss_X_pos).w
-                bhs.s   loc_7A92C
+                bhs.s   SSZMTZ_AdvanceAfterMotionStops
                 move.w  #0,(SSZ_MTZ_boss_X_vel).w
-                bra.s   loc_7A92C
+                bra.s   SSZMTZ_AdvanceAfterMotionStops
 ; ---------------------------------------------------------------------------
 
-loc_7A91E:
+SSZMTZBoss_StopRightwardMotionAtCenter:
                 cmpi.w  #$1700,(SSZ_MTZ_boss_X_pos).w
-                blo.s   loc_7A92C
+                blo.s   SSZMTZ_AdvanceAfterMotionStops
                 move.w  #0,(SSZ_MTZ_boss_X_vel).w
 
-loc_7A92C:
+SSZMTZ_AdvanceAfterMotionStops:
                 move.w  (SSZ_MTZ_boss_X_vel).w,d0
                 or.w    (SSZ_MTZ_boss_Y_vel).w,d0
-                bne.s   loc_7A93A
+                bne.s   SSZMTZBoss_DrawAfterCenteringStep
                 addq.b  #2,$26(a0)
 
-loc_7A93A:
-                bra.s   loc_7A8DA
+SSZMTZBoss_DrawAfterCenteringStep:
+                bra.s   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7A93C:
+SSZMTZ_ExpandAndFlattenOrbit:
                 cmpi.b  #$68,$38(a0)
-                bhs.s   loc_7A94E
+                bhs.s   SSZMTZBoss_FlattenOrbitUntilZeroScale
                 addq.b  #1,$38(a0)
                 addq.b  #1,$3A(a0)
-                bra.s   loc_7A958
+                bra.s   SSZMTZBoss_DrawExpandedOrFlatteningOrbit
 ; ---------------------------------------------------------------------------
 
-loc_7A94E:
+SSZMTZBoss_FlattenOrbitUntilZeroScale:
                 subq.b  #1,$3A(a0)
-                bne.s   loc_7A958
+                bne.s   SSZMTZBoss_DrawExpandedOrFlatteningOrbit
                 addq.b  #2,$26(a0)
 
-loc_7A958:
-                bra.s   loc_7A8DA
+SSZMTZBoss_DrawExpandedOrFlatteningOrbit:
+                bra.s   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7A95A:
+SSZMTZBoss_RetractOrbitRadius:
                 cmpi.b  #$27,$38(a0)
-                blo.s   loc_7A968
+                blo.s   SSZMTZ_RestoreOrbitAndDescend
                 subq.b  #1,$38(a0)
-                bra.s   loc_7A986
+                bra.s   SSZMTZBoss_DrawRetractingOrRestoredOrbit
 ; ---------------------------------------------------------------------------
 
-loc_7A968:
+SSZMTZ_RestoreOrbitAndDescend:
                 addq.b  #1,$3A(a0)
                 cmpi.b  #$27,$3A(a0)
-                blo.s   loc_7A986
+                blo.s   SSZMTZBoss_DrawRetractingOrRestoredOrbit
                 move.w  #$100,(SSZ_MTZ_boss_Y_vel).w
                 move.b  #0,$26(a0)
                 bclr    #6,$2E(a0)
 
-loc_7A986:
-                bra.w   loc_7A8DA
+SSZMTZBoss_DrawRetractingOrRestoredOrbit:
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7A98A:
+SSZMTZ_FlattenOrbitAfterOrbRelease:
                 tst.b   $3A(a0)
-                beq.s   loc_7A996
+                beq.s   SSZMTZBoss_RequestOrbPhaseFold
                 subq.b  #1,$3A(a0)
-                bra.s   loc_7A99C
+                bra.s   SSZMTZBoss_RetractRadiusAfterOrbRelease
 ; ---------------------------------------------------------------------------
 
-loc_7A996:
+SSZMTZBoss_RequestOrbPhaseFold:
                 move.b  #-1,$3B(a0)
 
-loc_7A99C:
+SSZMTZBoss_RetractRadiusAfterOrbRelease:
                 cmpi.b  #$27,$38(a0)
-                blo.s   loc_7A9A8
+                blo.s   SSZMTZ_RiseAfterOrbRelease
                 subq.b  #1,$38(a0)
 
-loc_7A9A8:
+SSZMTZ_RiseAfterOrbRelease:
                 bsr.w   Boss_MoveObject
                 cmpi.w  #$3B0,(SSZ_MTZ_boss_Y_pos).w
-                bhs.s   loc_7A9BA
+                bhs.s   SSZMTZ_WaitForDetachedOrbs
                 move.w  #0,(SSZ_MTZ_boss_Y_vel).w
 
-loc_7A9BA:
+SSZMTZ_WaitForDetachedOrbs:
                 tst.b   $30(a0)
-                bne.s   loc_7A9D0
+                bne.s   SSZMTZBoss_DrawDuringReleasedOrbWait
                 tst.b   $3B(a0)
-                beq.s   loc_7A9CC
+                beq.s   SSZMTZBoss_AdvanceToOrbRecoveryPhase
                 move.b  #$80,$3B(a0)
 
-loc_7A9CC:
+SSZMTZBoss_AdvanceToOrbRecoveryPhase:
                 addq.b  #2,$26(a0)
 
-loc_7A9D0:
-                bra.w   loc_7A8DA
+SSZMTZBoss_DrawDuringReleasedOrbWait:
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7A9D4:
+SSZMTZ_RecoverOrbitOrBeginLaser:
                 tst.b   $3C(a0)
-                beq.s   loc_7AA02
+                beq.s   SSZMTZ_BeginUnshieldedDiagonal
                 tst.b   $3B(a0)
-                bne.s   loc_7AA40
+                bne.s   SSZMTZ_DrawDuringRecovery
                 cmpi.b  #$27,$3A(a0)
-                bhs.s   loc_7A9EE
+                bhs.s   SSZMTZ_DescendAfterOrbitRecovery
                 addq.b  #1,$3A(a0)
-                bra.s   loc_7AA40
+                bra.s   SSZMTZ_DrawDuringRecovery
 ; ---------------------------------------------------------------------------
 
-loc_7A9EE:
+SSZMTZ_DescendAfterOrbitRecovery:
                 move.w  #$100,(SSZ_MTZ_boss_Y_vel).w
                 move.b  #0,$26(a0)
                 bclr    #6,$2E(a0)
-                bra.s   loc_7AA40
+                bra.s   SSZMTZ_DrawDuringRecovery
 ; ---------------------------------------------------------------------------
 
-loc_7AA02:
+SSZMTZ_BeginUnshieldedDiagonal:
                 move.w  #-$180,(SSZ_MTZ_boss_Y_vel).w
                 move.w  #-$100,(SSZ_MTZ_boss_X_vel).w
                 bclr    #0,render_flags(a0)
                 btst    #7,$2E(a0)
-                beq.s   loc_7AA28
+                beq.s   SSZMTZ_InitLaserSubstate
                 move.w  #$100,(SSZ_MTZ_boss_X_vel).w
                 bset    #0,render_flags(a0)
 
-loc_7AA28:
+SSZMTZ_InitLaserSubstate:
                 move.b  #$E,$26(a0)
                 move.b  #0,$32(a0)
                 bclr    #6,$2E(a0)
                 move.b  #0,$33(a0)
 
-loc_7AA40:
-                bra.w   loc_7A8DA
+SSZMTZ_DrawDuringRecovery:
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7AA44:
+SSZMTZ_TickPauseOrDispatchLaser:
                 tst.b   $33(a0)
-                beq.s   loc_7AA52
+                beq.s   SSZMTZ_DispatchLaserSubstate
                 subq.b  #1,$33(a0)
-                bra.w   loc_7A8E4
+                bra.w   SSZMTZBoss_ApplyActiveHitPolicyAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_7AA52:
+SSZMTZ_DispatchLaserSubstate:
                 moveq   #0,d0
                 move.b  $32(a0),d0
-                move.w  off_7AA60(pc,d0.w),d1
-                jmp     off_7AA60(pc,d1.w)
+                move.w  SSZMTZBoss_UnshieldedMovementOffsets(pc,d0.w),d1
+                jmp     SSZMTZBoss_UnshieldedMovementOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_7AA60:
-                dc.w    loc_7AA66-off_7AA60
-                dc.w    loc_7AACE-off_7AA60
-                dc.w    loc_7AB1A-off_7AA60
+SSZMTZBoss_UnshieldedMovementOffsets:
+                dc.w    SSZMTZ_MoveUpperApproach-SSZMTZBoss_UnshieldedMovementOffsets
+                dc.w    SSZMTZ_DescendAndReverseLaserPass-SSZMTZBoss_UnshieldedMovementOffsets
+                dc.w    SSZMTZ_RiseAndRestoreXMotion-SSZMTZBoss_UnshieldedMovementOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7AA66:
+SSZMTZ_MoveUpperApproach:
                 bsr.w   Boss_MoveObject
                 cmpi.w  #$3B0,(SSZ_MTZ_boss_Y_pos).w
-                bhs.s   loc_7AA78
+                bhs.s   SSZMTZ_CheckLeftAndArmBurst
                 move.w  #0,(SSZ_MTZ_boss_Y_vel).w
 
-loc_7AA78:
+SSZMTZ_CheckLeftAndArmBurst:
                 btst    #7,$2E(a0)
-                bne.s   loc_7AAA6
+                bne.s   SSZMTZ_CheckRightAndArmBurst
                 cmpi.w  #$16A0,(SSZ_MTZ_boss_X_pos).w
-                bhs.s   loc_7AACA
+                bhs.s   SSZMTZBoss_DrawAfterUnshieldedApproach
                 addq.b  #2,$32(a0)
                 move.w  #$180,(SSZ_MTZ_boss_Y_vel).w
                 move.b  #3,$31(a0)
                 move.w  #$1E,(SSZ_MTZ_boss_laser_timer).w
                 bset    #0,render_flags(a0)
-                bra.s   loc_7AACA
+                bra.s   SSZMTZBoss_DrawAfterUnshieldedApproach
 ; ---------------------------------------------------------------------------
 
-loc_7AAA6:
+SSZMTZ_CheckRightAndArmBurst:
                 cmpi.w  #$1760,(SSZ_MTZ_boss_X_pos).w
-                blo.s   loc_7AACA
+                blo.s   SSZMTZBoss_DrawAfterUnshieldedApproach
                 addq.b  #2,$32(a0)
                 move.w  #$180,(SSZ_MTZ_boss_Y_vel).w
                 move.b  #3,$31(a0)
                 move.w  #$1E,(SSZ_MTZ_boss_laser_timer).w
                 bclr    #0,render_flags(a0)
 
-loc_7AACA:
-                bra.w   loc_7A8DA
+SSZMTZBoss_DrawAfterUnshieldedApproach:
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7AACE:
+SSZMTZ_DescendAndReverseLaserPass:
                 bsr.w   Boss_MoveObject
                 cmpi.w  #$420,(SSZ_MTZ_boss_Y_pos).w
-                blo.s   loc_7AAEC
+                blo.s   SSZMTZ_StopLaserPassAtLeft
                 move.w  #-$180,(SSZ_MTZ_boss_Y_vel).w
                 addq.b  #2,$32(a0)
                 bchg    #7,$2E(a0)
-                bra.s   loc_7AB12
+                bra.s   SSZMTZ_TickLaserBurst
 ; ---------------------------------------------------------------------------
 
-loc_7AAEC:
+SSZMTZ_StopLaserPassAtLeft:
                 btst    #7,$2E(a0)
-                bne.s   loc_7AB04
+                bne.s   SSZMTZ_StopLaserPassAtRight
                 cmpi.w  #$1680,(SSZ_MTZ_boss_X_pos).w
-                bhs.s   loc_7AB12
+                bhs.s   SSZMTZ_TickLaserBurst
                 move.w  #0,(SSZ_MTZ_boss_X_vel).w
-                bra.s   loc_7AB12
+                bra.s   SSZMTZ_TickLaserBurst
 ; ---------------------------------------------------------------------------
 
-loc_7AB04:
+SSZMTZ_StopLaserPassAtRight:
                 cmpi.w  #$1780,(SSZ_MTZ_boss_X_pos).w
-                blo.s   loc_7AB12
+                blo.s   SSZMTZ_TickLaserBurst
                 move.w  #0,(SSZ_MTZ_boss_X_vel).w
 
-loc_7AB12:
+SSZMTZ_TickLaserBurst:
                 bsr.w   TickSSZMTZBossLaserPairBurst
-                bra.w   loc_7A8DA
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob
 ; ---------------------------------------------------------------------------
 
-loc_7AB1A:
+SSZMTZ_RiseAndRestoreXMotion:
                 bsr.w   Boss_MoveObject
                 cmpi.w  #$3F0,(SSZ_MTZ_boss_Y_pos).w
-                bhs.s   loc_7AB3A
+                bhs.s   SSZMTZ_StopRiseAndRestartApproach
                 move.w  #$100,(SSZ_MTZ_boss_X_vel).w
                 btst    #7,$2E(a0)
-                bne.s   loc_7AB3A
+                bne.s   SSZMTZ_StopRiseAndRestartApproach
                 move.w  #-$100,(SSZ_MTZ_boss_X_vel).w
 
-loc_7AB3A:
+SSZMTZ_StopRiseAndRestartApproach:
                 cmpi.w  #$3B0,(SSZ_MTZ_boss_Y_pos).w
-                bhs.s   loc_7AB4E
+                bhs.s   SSZMTZBoss_TickLaserBurstAfterReturnStep
                 move.w  #0,(SSZ_MTZ_boss_Y_vel).w
                 move.b  #0,$32(a0)
 
-loc_7AB4E:
+SSZMTZBoss_TickLaserBurstAfterReturnStep:
                 bsr.w   TickSSZMTZBossLaserPairBurst
-                bra.w   loc_7A8DA
+                bra.w   SSZMTZBoss_SynchronizeXAndApplySineBob

@@ -19690,7 +19690,7 @@
       "responsibility": "Sky Sanctuary Mecha Sonic battle controller, coordinated attacks, player response and defeat progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 891,
+      "physical_lines": 892,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -19725,7 +19725,7 @@
       "responsibility": "Sky Sanctuary Green Hill-style boss controller, ball attack, motion helpers and private object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 435,
+      "physical_lines": 436,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -19855,7 +19855,7 @@
       "responsibility": "Sky Sanctuary Metropolis-style boss attached actors, orbiting or moving attack states and defeat effects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 389,
+      "physical_lines": 390,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -20047,7 +20047,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_7D078",
+          "name": "SSZMecha_RestoreControlsAfterResults",
           "kind": "terminal-tail",
           "reason": "Close the post-battle player, palette and camera callbacks after the preceding timed wait return; their final conditional camera return and deletion tail remain inseparable.",
           "origin_first_line": 4673,
@@ -20092,7 +20092,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_7C9F6",
+          "name": "SSZMecha_StopPlayerAndAdvanceCamera",
           "kind": "terminal-tail",
           "reason": "Keep the final camera transition conditional return and deletion tail together after the original spark or scene returns.",
           "origin_first_line": 4127,

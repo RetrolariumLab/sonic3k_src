@@ -24003,31 +24003,31 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 268
       },
-      "declarations_sha256": "ae25c07c8510c492c71f4772f726894e4b6d95c7f4f9e82fc46b19f8f9fd0eaf",
+      "declarations_sha256": "ffd4a06ae57d3dbe7bc188b1668b50567245dfcfdcc48a473cf19936003790b1",
       "labels": {
         "DPLC_MechaSonic_": 0,
-        "word_18587E": 44,
-        "word_18588A": 56,
-        "word_185894": 66,
-        "word_18589E": 76,
-        "word_1858A8": 86,
-        "word_1858B2": 96,
-        "word_1858BC": 106,
-        "word_1858C6": 116,
-        "word_1858D0": 126,
-        "word_1858DA": 136,
-        "word_1858E4": 146,
-        "word_1858F2": 160,
-        "word_1858FA": 168,
-        "word_185906": 180,
-        "word_185910": 190,
-        "word_18591C": 202,
-        "word_185926": 212,
-        "word_185930": 222,
-        "word_185938": 230,
-        "word_185944": 242,
-        "word_18594C": 250,
-        "word_185954": 258
+        "SKMechaSonicDPLC_Frame00": 44,
+        "SKMechaSonicDPLC_Frame01": 56,
+        "SKMechaSonicDPLC_Frame02": 66,
+        "SKMechaSonicDPLC_Frame03": 76,
+        "SKMechaSonicDPLC_Frame04": 86,
+        "SKMechaSonicDPLC_Frame05": 96,
+        "SKMechaSonicDPLC_Frame06": 106,
+        "SKMechaSonicDPLC_Frame07": 116,
+        "SKMechaSonicDPLC_Frame08": 126,
+        "SKMechaSonicDPLC_Frame09": 136,
+        "SKMechaSonicDPLC_Frame0A": 146,
+        "SKMechaSonicDPLC_Frame0B": 160,
+        "SKMechaSonicDPLC_Frame0C": 168,
+        "SKMechaSonicDPLC_Frame0D": 180,
+        "SKMechaSonicDPLC_Frame0E": 190,
+        "SKMechaSonicDPLC_Frame0F": 202,
+        "SKMechaSonicDPLC_Frame10": 212,
+        "SKMechaSonicDPLC_Frame11": 222,
+        "SKMechaSonicDPLC_Frame12": 230,
+        "SKMechaSonicDPLC_Frame13": 242,
+        "SKMechaSonicDPLC_Frame14": 250,
+        "SKMechaSonicDPLC_Frame15": 258
       },
       "external_symbols": [],
       "blocks": [
@@ -24035,154 +24035,154 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18587E",
+          "target": "SKMechaSonicDPLC_Frame00",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18588A",
+          "target": "SKMechaSonicDPLC_Frame01",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185894",
+          "target": "SKMechaSonicDPLC_Frame02",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18589E",
+          "target": "SKMechaSonicDPLC_Frame03",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858A8",
+          "target": "SKMechaSonicDPLC_Frame04",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858B2",
+          "target": "SKMechaSonicDPLC_Frame05",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858BC",
+          "target": "SKMechaSonicDPLC_Frame06",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858C6",
+          "target": "SKMechaSonicDPLC_Frame07",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858D0",
+          "target": "SKMechaSonicDPLC_Frame08",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858DA",
+          "target": "SKMechaSonicDPLC_Frame09",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858E4",
+          "target": "SKMechaSonicDPLC_Frame0A",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858F2",
+          "target": "SKMechaSonicDPLC_Frame0B",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1858FA",
+          "target": "SKMechaSonicDPLC_Frame0C",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185906",
+          "target": "SKMechaSonicDPLC_Frame0D",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185910",
+          "target": "SKMechaSonicDPLC_Frame0E",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18591C",
+          "target": "SKMechaSonicDPLC_Frame0F",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185926",
+          "target": "SKMechaSonicDPLC_Frame10",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185930",
+          "target": "SKMechaSonicDPLC_Frame11",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185938",
+          "target": "SKMechaSonicDPLC_Frame12",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185944",
+          "target": "SKMechaSonicDPLC_Frame13",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18594C",
+          "target": "SKMechaSonicDPLC_Frame14",
           "base": "DPLC_MechaSonic_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185954",
+          "target": "SKMechaSonicDPLC_Frame15",
           "base": "DPLC_MechaSonic_"
         },
         {
@@ -24306,31 +24306,31 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 628
       },
-      "declarations_sha256": "526ca84a1b69a98d4925e626901b729afe21cbf39f87533fbb4450e7b151ad5d",
+      "declarations_sha256": "c6babd523e18ff02695862ec39c0ec9f702e91e5651f44bc1b90676c42ce0cce",
       "labels": {
         "Map_MechaSonic_": 0,
-        "word_1853D6": 44,
-        "word_1853F6": 76,
-        "word_185410": 102,
-        "word_18542A": 128,
-        "word_185444": 154,
-        "word_18545E": 180,
-        "word_185478": 206,
-        "word_185492": 232,
-        "word_1854AC": 258,
-        "word_1854C6": 284,
-        "word_1854E0": 310,
-        "word_185506": 348,
-        "word_18551A": 368,
-        "word_18553A": 400,
-        "word_185554": 426,
-        "word_185574": 458,
-        "word_18558E": 484,
-        "word_1855A8": 510,
-        "word_1855BC": 530,
-        "word_1855DC": 562,
-        "word_1855F0": 582,
-        "word_185604": 602
+        "SKMechaSonicMap_Frame00": 44,
+        "SKMechaSonicMap_Frame01": 76,
+        "SKMechaSonicMap_Frame02": 102,
+        "SKMechaSonicMap_Frame03": 128,
+        "SKMechaSonicMap_Frame04": 154,
+        "SKMechaSonicMap_Frame05": 180,
+        "SKMechaSonicMap_Frame06": 206,
+        "SKMechaSonicMap_Frame07": 232,
+        "SKMechaSonicMap_Frame08": 258,
+        "SKMechaSonicMap_Frame09": 284,
+        "SKMechaSonicMap_Frame0A": 310,
+        "SKMechaSonicMap_Frame0B": 348,
+        "SKMechaSonicMap_Frame0C": 368,
+        "SKMechaSonicMap_Frame0D": 400,
+        "SKMechaSonicMap_Frame0E": 426,
+        "SKMechaSonicMap_Frame0F": 458,
+        "SKMechaSonicMap_Frame10": 484,
+        "SKMechaSonicMap_Frame11": 510,
+        "SKMechaSonicMap_Frame12": 530,
+        "SKMechaSonicMap_Frame13": 562,
+        "SKMechaSonicMap_Frame14": 582,
+        "SKMechaSonicMap_Frame15": 602
       },
       "external_symbols": [],
       "blocks": [
@@ -24338,154 +24338,154 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1853D6",
+          "target": "SKMechaSonicMap_Frame00",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1853F6",
+          "target": "SKMechaSonicMap_Frame01",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185410",
+          "target": "SKMechaSonicMap_Frame02",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18542A",
+          "target": "SKMechaSonicMap_Frame03",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185444",
+          "target": "SKMechaSonicMap_Frame04",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18545E",
+          "target": "SKMechaSonicMap_Frame05",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185478",
+          "target": "SKMechaSonicMap_Frame06",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185492",
+          "target": "SKMechaSonicMap_Frame07",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1854AC",
+          "target": "SKMechaSonicMap_Frame08",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1854C6",
+          "target": "SKMechaSonicMap_Frame09",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1854E0",
+          "target": "SKMechaSonicMap_Frame0A",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185506",
+          "target": "SKMechaSonicMap_Frame0B",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18551A",
+          "target": "SKMechaSonicMap_Frame0C",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18553A",
+          "target": "SKMechaSonicMap_Frame0D",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185554",
+          "target": "SKMechaSonicMap_Frame0E",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185574",
+          "target": "SKMechaSonicMap_Frame0F",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18558E",
+          "target": "SKMechaSonicMap_Frame10",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1855A8",
+          "target": "SKMechaSonicMap_Frame11",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1855BC",
+          "target": "SKMechaSonicMap_Frame12",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1855DC",
+          "target": "SKMechaSonicMap_Frame13",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1855F0",
+          "target": "SKMechaSonicMap_Frame14",
           "base": "Map_MechaSonic_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185604",
+          "target": "SKMechaSonicMap_Frame15",
           "base": "Map_MechaSonic_"
         },
         {
@@ -24609,36 +24609,36 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 564
       },
-      "declarations_sha256": "c029cc748ea5cd45e40350851e5758320026c7fb19914f1807b5aa7466bd0a15",
+      "declarations_sha256": "8a460d45a9b51e81b44feb1a2072f504ec679008679c7842aa116d07313ce0b9",
       "labels": {
         "Map_MechaSonicExtra_": 0,
-        "word_185654": 54,
-        "word_185656": 56,
-        "word_18565E": 64,
-        "word_185666": 72,
-        "word_18566E": 80,
-        "word_185682": 100,
-        "word_185696": 120,
-        "word_1856BC": 158,
-        "word_1856E2": 196,
-        "word_1856FC": 222,
-        "word_18571C": 254,
-        "word_185736": 280,
-        "word_185744": 294,
-        "word_18574C": 302,
-        "word_185766": 328,
-        "word_18576E": 336,
-        "word_185776": 344,
-        "word_18577E": 352,
-        "word_185786": 360,
-        "word_18578E": 368,
-        "word_185796": 376,
-        "word_18579E": 384,
-        "word_1857AC": 398,
-        "word_1857C6": 424,
-        "word_1857E0": 450,
-        "word_185800": 482,
-        "word_185808": 490
+        "SKMechaSonicExtraMap_Frame00": 54,
+        "SKMechaSonicExtraMap_Frame01": 56,
+        "SKMechaSonicExtraMap_Frame02": 64,
+        "SKMechaSonicExtraMap_Frame03": 72,
+        "SKMechaSonicExtraMap_Frame04": 80,
+        "SKMechaSonicExtraMap_Frame05": 100,
+        "SKMechaSonicExtraMap_Frame06": 120,
+        "SKMechaSonicExtraMap_Frame07": 158,
+        "SKMechaSonicExtraMap_Frame08": 196,
+        "SKMechaSonicExtraMap_Frame09": 222,
+        "SKMechaSonicExtraMap_Frame0A": 254,
+        "SKMechaSonicExtraMap_Frame0B": 280,
+        "SKMechaSonicExtraMap_Frame0C": 294,
+        "SKMechaSonicExtraMap_Frame0D": 302,
+        "SKMechaSonicExtraMap_Frame0E": 328,
+        "SKMechaSonicExtraMap_Frame0F": 336,
+        "SKMechaSonicExtraMap_Frame10": 344,
+        "SKMechaSonicExtraMap_Frame11": 352,
+        "SKMechaSonicExtraMap_Frame12": 360,
+        "SKMechaSonicExtraMap_Frame13": 368,
+        "SKMechaSonicExtraMap_Frame14": 376,
+        "SKMechaSonicExtraMap_Frame15": 384,
+        "SKMechaSonicExtraMap_Frame16": 398,
+        "SKMechaSonicExtraMap_Frame17": 424,
+        "SKMechaSonicExtraMap_Frame18": 450,
+        "SKMechaSonicExtraMap_Frame19": 482,
+        "SKMechaSonicExtraMap_Frame1A": 490
       },
       "external_symbols": [],
       "blocks": [
@@ -24646,189 +24646,189 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185654",
+          "target": "SKMechaSonicExtraMap_Frame00",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185656",
+          "target": "SKMechaSonicExtraMap_Frame01",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18565E",
+          "target": "SKMechaSonicExtraMap_Frame02",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185666",
+          "target": "SKMechaSonicExtraMap_Frame03",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18566E",
+          "target": "SKMechaSonicExtraMap_Frame04",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185682",
+          "target": "SKMechaSonicExtraMap_Frame05",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185696",
+          "target": "SKMechaSonicExtraMap_Frame06",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1856BC",
+          "target": "SKMechaSonicExtraMap_Frame07",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1856E2",
+          "target": "SKMechaSonicExtraMap_Frame08",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1856FC",
+          "target": "SKMechaSonicExtraMap_Frame09",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18571C",
+          "target": "SKMechaSonicExtraMap_Frame0A",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185736",
+          "target": "SKMechaSonicExtraMap_Frame0B",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185744",
+          "target": "SKMechaSonicExtraMap_Frame0C",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18574C",
+          "target": "SKMechaSonicExtraMap_Frame0D",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185766",
+          "target": "SKMechaSonicExtraMap_Frame0E",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18576E",
+          "target": "SKMechaSonicExtraMap_Frame0F",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185776",
+          "target": "SKMechaSonicExtraMap_Frame10",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18577E",
+          "target": "SKMechaSonicExtraMap_Frame11",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185786",
+          "target": "SKMechaSonicExtraMap_Frame12",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18578E",
+          "target": "SKMechaSonicExtraMap_Frame13",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185796",
+          "target": "SKMechaSonicExtraMap_Frame14",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18579E",
+          "target": "SKMechaSonicExtraMap_Frame15",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1857AC",
+          "target": "SKMechaSonicExtraMap_Frame16",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1857C6",
+          "target": "SKMechaSonicExtraMap_Frame17",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1857E0",
+          "target": "SKMechaSonicExtraMap_Frame18",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185800",
+          "target": "SKMechaSonicExtraMap_Frame19",
           "base": "Map_MechaSonicExtra_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185808",
+          "target": "SKMechaSonicExtraMap_Frame1A",
           "base": "Map_MechaSonicExtra_"
         },
         {
@@ -24977,10 +24977,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "5394a908fdc2d7721180f351731b4b3cc2186fbf1c964e4702a24e7ae1188d17",
+      "declarations_sha256": "b8ba9c11919186daa13ed3f017c4218f587f72015bfb0572c8d6985f734585c1",
       "labels": {
         "Map_MechaSonicHead_": 0,
-        "word_681FE": 2
+        "MechaSonicHead_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -24988,7 +24988,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_681FE",
+          "target": "MechaSonicHead_MapFrame00",
           "base": "Map_MechaSonicHead_"
         },
         {
@@ -25007,25 +25007,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "47cc4c24f040e313c7e6248754c231db6896c1397614df1eaa0a99b79484d470",
+      "declarations_sha256": "f0bd737aad87f700bb0fec14446ae9865847be3cafdcc721f56665feeffda6a5",
       "labels": {
         "Map_MechaSonicPieces_": 0,
-        "word_7D7C2": 32,
-        "word_7D7CA": 40,
-        "word_7D7D2": 48,
-        "word_7D7DA": 56,
-        "word_7D7E2": 64,
-        "word_7D7EA": 72,
-        "word_7D7F2": 80,
-        "word_7D7FA": 88,
-        "word_7D802": 96,
-        "word_7D80A": 104,
-        "word_7D812": 112,
-        "word_7D81A": 120,
-        "word_7D822": 128,
-        "word_7D82A": 136,
-        "word_7D832": 144,
-        "word_7D83A": 152
+        "SKMechaSonicPiecesMap_Frame00": 32,
+        "SKMechaSonicPiecesMap_Frame01": 40,
+        "SKMechaSonicPiecesMap_Frame02": 48,
+        "SKMechaSonicPiecesMap_Frame03": 56,
+        "SKMechaSonicPiecesMap_Frame04": 64,
+        "SKMechaSonicPiecesMap_Frame05": 72,
+        "SKMechaSonicPiecesMap_Frame06": 80,
+        "SKMechaSonicPiecesMap_Frame07": 88,
+        "SKMechaSonicPiecesMap_Frame08": 96,
+        "SKMechaSonicPiecesMap_Frame09": 104,
+        "SKMechaSonicPiecesMap_Frame0A": 112,
+        "SKMechaSonicPiecesMap_Frame0B": 120,
+        "SKMechaSonicPiecesMap_Frame0C": 128,
+        "SKMechaSonicPiecesMap_Frame0D": 136,
+        "SKMechaSonicPiecesMap_Frame0E": 144,
+        "SKMechaSonicPiecesMap_Frame0F": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -25033,112 +25033,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7C2",
+          "target": "SKMechaSonicPiecesMap_Frame00",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7CA",
+          "target": "SKMechaSonicPiecesMap_Frame01",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7D2",
+          "target": "SKMechaSonicPiecesMap_Frame02",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7DA",
+          "target": "SKMechaSonicPiecesMap_Frame03",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7E2",
+          "target": "SKMechaSonicPiecesMap_Frame04",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7EA",
+          "target": "SKMechaSonicPiecesMap_Frame05",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7F2",
+          "target": "SKMechaSonicPiecesMap_Frame06",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D7FA",
+          "target": "SKMechaSonicPiecesMap_Frame07",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D802",
+          "target": "SKMechaSonicPiecesMap_Frame08",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D80A",
+          "target": "SKMechaSonicPiecesMap_Frame09",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D812",
+          "target": "SKMechaSonicPiecesMap_Frame0A",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D81A",
+          "target": "SKMechaSonicPiecesMap_Frame0B",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D822",
+          "target": "SKMechaSonicPiecesMap_Frame0C",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D82A",
+          "target": "SKMechaSonicPiecesMap_Frame0D",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D832",
+          "target": "SKMechaSonicPiecesMap_Frame0E",
           "base": "Map_MechaSonicPieces_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_7D83A",
+          "target": "SKMechaSonicPiecesMap_Frame0F",
           "base": "Map_MechaSonicPieces_"
         },
         {
@@ -115394,17 +115394,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "df1c500315e5e9894150006f9157af515ef13346e9729d603470f23a11922800",
+      "declarations_sha256": "b5069d96f33b340430d9842de112d667525bc0878b7d6c26a85e2801930a8249",
       "labels": {
         "Ani_SSZMTZOrbs_": 0,
-        "byte_7B22C": 16,
-        "byte_7B22F": 19,
-        "byte_7B233": 23,
-        "byte_7B248": 44,
-        "byte_7B24C": 48,
-        "byte_7B257": 59,
-        "byte_7B262": 70,
-        "byte_7B265": 73
+        "SSZAni_MTZOrb_StoredBackShapeHold": 16,
+        "SSZAni_MTZOrb_StoredFrontMiddleCycle": 19,
+        "SSZAni_MTZOrb_DetachTransformation": 23,
+        "SSZAni_MTZOrb_StoredLaserShapeCycle": 44,
+        "SSZMTZOrb_FinalAlternatingAnim": 48,
+        "SSZMTZOrb_ExtendedHoldThenLaserAnim": 59,
+        "SSZMTZOrb_ContactShapeAnim": 70,
+        "SSZAni_MTZOrb_StoredExtendedAliasCycle": 73
       },
       "external_symbols": [],
       "blocks": [
@@ -115412,56 +115412,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B22C",
+          "target": "SSZAni_MTZOrb_StoredBackShapeHold",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B22F",
+          "target": "SSZAni_MTZOrb_StoredFrontMiddleCycle",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B233",
+          "target": "SSZAni_MTZOrb_DetachTransformation",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B248",
+          "target": "SSZAni_MTZOrb_StoredLaserShapeCycle",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B24C",
+          "target": "SSZMTZOrb_FinalAlternatingAnim",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B257",
+          "target": "SSZMTZOrb_ExtendedHoldThenLaserAnim",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B262",
+          "target": "SSZMTZOrb_ContactShapeAnim",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_7B265",
+          "target": "SSZAni_MTZOrb_StoredExtendedAliasCycle",
           "base": "Ani_SSZMTZOrbs_"
         },
         {
@@ -116549,13 +116549,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "e330505d55d3ddc23713aa2b32f84ddb687001d163c91485662656f8722f78a7",
+      "declarations_sha256": "9af6ccf45ed4bdad52668bd0b478d1e74c09eeb574385fd0460b82fc6c9fe456",
       "labels": {
         "Map_SSZGHZMisc_": 0,
-        "word_186E84": 8,
-        "word_186E9E": 34,
-        "word_186EB8": 60,
-        "word_186EC0": 68
+        "SSZMap_GHZMisc_TouchChainTipEvenPhase": 8,
+        "SSZMap_GHZMisc_TouchChainTipOddPhase": 34,
+        "SSZMap_GHZMisc_ChainAnchor": 60,
+        "SSZMap_GHZMisc_ChainSegment": 68
       },
       "external_symbols": [],
       "blocks": [
@@ -116563,28 +116563,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E84",
+          "target": "SSZMap_GHZMisc_TouchChainTipEvenPhase",
           "base": "Map_SSZGHZMisc_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E9E",
+          "target": "SSZMap_GHZMisc_TouchChainTipOddPhase",
           "base": "Map_SSZGHZMisc_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186EB8",
+          "target": "SSZMap_GHZMisc_ChainAnchor",
           "base": "Map_SSZGHZMisc_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186EC0",
+          "target": "SSZMap_GHZMisc_ChainSegment",
           "base": "Map_SSZGHZMisc_"
         },
         {
@@ -116618,21 +116618,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 208
       },
-      "declarations_sha256": "f871489b6d632a40c3e2af9e2e0a4881dce7fd20955a59c928527918d8943392",
+      "declarations_sha256": "9c5acff99d4a180ed0a347a2e305bc19bf1be7a82fdc4ead6b1b930c9725dee9",
       "labels": {
         "Map_SSZMTZOrbs_": 0,
-        "word_186DE6": 58,
-        "word_186DEE": 66,
-        "word_186DF6": 74,
-        "word_186DFE": 82,
-        "word_186E06": 90,
-        "word_186E0E": 98,
-        "word_186E16": 106,
-        "word_186E24": 120,
-        "word_186E32": 134,
-        "word_186E46": 154,
-        "word_186E4E": 162,
-        "word_186E62": 182
+        "SSZMap_MTZOrb_FrontDepthShape": 58,
+        "SSZMap_MTZOrb_MiddleDepthShape": 66,
+        "SSZMap_MTZOrb_BackDepthAndDetachStart": 74,
+        "SSZMap_MTZOrb_DetachPhaseThree": 82,
+        "SSZMap_MTZOrb_DetachPhaseFour": 90,
+        "SSZMap_MTZOrb_DetachPhaseFive": 98,
+        "SSZMap_MTZOrb_DetachPhaseSix": 106,
+        "SSZMTZOrb_DetachedPhase7Map": 120,
+        "SSZMap_MTZOrb_DetachTerminalShapeEight": 134,
+        "SSZMTZOrb_NarrowLaserMap": 154,
+        "SSZMap_MTZOrb_LaserThreePieceBody": 162,
+        "SSZMap_MTZOrb_ContactFinalShape": 182
       },
       "external_symbols": [],
       "blocks": [
@@ -116640,203 +116640,203 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186DE6",
+          "target": "SSZMap_MTZOrb_FrontDepthShape",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186DEE",
+          "target": "SSZMap_MTZOrb_MiddleDepthShape",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186DF6",
+          "target": "SSZMap_MTZOrb_BackDepthAndDetachStart",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186DFE",
+          "target": "SSZMap_MTZOrb_DetachPhaseThree",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E06",
+          "target": "SSZMap_MTZOrb_DetachPhaseFour",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E0E",
+          "target": "SSZMap_MTZOrb_DetachPhaseFive",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E16",
+          "target": "SSZMap_MTZOrb_DetachPhaseSix",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E32",
+          "target": "SSZMap_MTZOrb_DetachTerminalShapeEight",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E46",
+          "target": "SSZMTZOrb_NarrowLaserMap",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E46",
+          "target": "SSZMTZOrb_NarrowLaserMap",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E46",
+          "target": "SSZMTZOrb_NarrowLaserMap",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E46",
+          "target": "SSZMTZOrb_NarrowLaserMap",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E4E",
+          "target": "SSZMap_MTZOrb_LaserThreePieceBody",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E62",
+          "target": "SSZMap_MTZOrb_ContactFinalShape",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186E24",
+          "target": "SSZMTZOrb_DetachedPhase7Map",
           "base": "Map_SSZMTZOrbs_"
         },
         {

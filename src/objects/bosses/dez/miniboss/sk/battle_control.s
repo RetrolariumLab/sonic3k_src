@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_DEZMiniboss:
-                lea     word_7DDA4(pc),a1
+                lea     DEZMiniboss_CameraTriggerAndArenaBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_Miniboss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l

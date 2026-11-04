@@ -6,29 +6,29 @@
 
 SSZMTZOrb_SelectFrameAndPriority:
                 move.w  $3A(a0),d0
-                bmi.s   loc_7AF82
+                bmi.s   SSZMTZ_OrbSelectNegativeDepth
                 cmpi.w  #$C,d0
-                blt.s   loc_7AF74
+                blt.s   SSZMTZ_OrbSelectNearDepthFrame
                 move.b  #0,mapping_frame(a0)
                 move.w  #$80,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7AF74:
+SSZMTZ_OrbSelectNearDepthFrame:
                 move.b  #1,mapping_frame(a0)
                 move.w  #$100,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7AF82:
+SSZMTZ_OrbSelectNegativeDepth:
                 cmpi.w  #-$C,d0
-                blt.s   loc_7AF96
+                blt.s   SSZMTZOrbDepth_SelectFarNegativeFrame
                 move.b  #1,mapping_frame(a0)
                 move.w  #$300,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7AF96:
+SSZMTZOrbDepth_SelectFarNegativeFrame:
                 move.b  #2,mapping_frame(a0)
                 move.w  #$380,priority(a0)
                 rts
@@ -36,35 +36,35 @@ loc_7AF96:
 
 ; ---------------------------------------------------------------------------
 
-loc_7AFA4:
+SSZMTZ_OrbTickFlightTouchDelay:
                 tst.b   $3C(a0)
-                bmi.s   loc_7AFB6
+                bmi.s   SSZMTZ_OrbMoveWithReducedGravity
                 subq.b  #1,$3C(a0)
-                bpl.s   loc_7AFB6
+                bpl.s   SSZMTZ_OrbMoveWithReducedGravity
                 move.b  #$C6,collision_flags(a0)
 
-loc_7AFB6:
+SSZMTZ_OrbMoveWithReducedGravity:
                 jsr     (MoveSprite).l
                 subi.w  #$20,y_vel(a0)
                 cmpi.w  #$180,y_vel(a0)
-                blt.s   loc_7AFD0
+                blt.s   SSZMTZDetachedOrb_TestFixedLandingHeight
                 move.w  #$180,y_vel(a0)
 
-loc_7AFD0:
+SSZMTZDetachedOrb_TestFixedLandingHeight:
                 tst.w   y_vel(a0)
-                bmi.s   loc_7AFF8
+                bmi.s   SSZMTZ_OrbCheckFlightContact
                 cmpi.w  #$42C,y_pos(a0)
-                blo.s   loc_7AFF8
+                blo.s   SSZMTZ_OrbCheckFlightContact
                 move.w  #$42C,y_pos(a0)
                 move.w  #$42C,$38(a0)
                 move.b  #1,$32(a0)
                 addq.b  #2,routine(a0)
                 bsr.w   SSZMTZOrb_FaceP1OnLanding
 
-loc_7AFF8:
+SSZMTZ_OrbCheckFlightContact:
                 bsr.w   SSZMTZOrb_HandleContactOrDefeat
 
-loc_7AFFC:
+SSZMTZ_OrbAnimateAndTouchDraw:
                 lea     Ani_SSZMTZOrbs(pc),a1
                 jsr     (Animate_Sprite).l
                 jsr     (Add_SpriteToCollisionResponseList).l
@@ -72,51 +72,51 @@ loc_7AFFC:
 ; ---------------------------------------------------------------------------
 ; unused
                 tst.b   collision_property(a0)
-                beq.s   locret_7B028
+                beq.s   SSZMTZDetachedOrb_LegacyContactReturn
                 move.b  #$E,mapping_frame(a0)
                 move.b  #6,anim(a0)
                 addq.b  #2,routine(a0)
 
-locret_7B028:
+SSZMTZDetachedOrb_LegacyContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B02A:
+SSZMTZ_OrbTickHopTouchDelay:
                 tst.b   $3C(a0)
-                bmi.s   loc_7B03C
+                bmi.s   SSZMTZ_OrbCheckHopContactAndFrame
                 subq.b  #1,$3C(a0)
-                bpl.s   loc_7B03C
+                bpl.s   SSZMTZ_OrbCheckHopContactAndFrame
                 move.b  #$DA,collision_flags(a0)
 
-loc_7B03C:
+SSZMTZ_OrbCheckHopContactAndFrame:
                 bsr.w   SSZMTZOrb_HandleContactOrDefeat
                 cmpi.b  #8,mapping_frame(a0)
-                bne.s   loc_7AFFC
+                bne.s   SSZMTZ_OrbAnimateAndTouchDraw
                 move.b  $32(a0),d0
                 jsr     (GetSineCosine).l
                 neg.w   d0
                 asr.w   #2,d0
                 add.w   $38(a0),d0
                 cmpi.w  #$42C,d0
-                bhs.s   loc_7B08C
+                bhs.s   SSZMTZ_OrbRestartHopAtFloor
                 move.w  d0,y_pos(a0)
                 addq.b  #1,$32(a0)
                 btst    #0,$32(a0)
-                beq.s   loc_7B080
+                beq.s   SSZMTZ_OrbHopTouchDraw
                 moveq   #-1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_7B07C
+                beq.s   SSZMTZDetachedOrb_ApplyOnePixelHopStep
                 neg.w   d0
 
-loc_7B07C:
+SSZMTZDetachedOrb_ApplyOnePixelHopStep:
                 add.w   d0,x_pos(a0)
 
-loc_7B080:
+SSZMTZ_OrbHopTouchDraw:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7B08C:
+SSZMTZ_OrbRestartHopAtFloor:
                 move.w  #$42C,y_pos(a0)
                 bsr.w   SSZMTZOrb_FaceP1OnLanding
                 move.b  #1,$32(a0)
@@ -128,12 +128,12 @@ loc_7B08C:
 SSZMTZOrb_FaceP1OnLanding:
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   x_pos(a0),d0
-                bpl.s   loc_7B0BA
+                bpl.s   SSZMTZ_OrbFacePlayerDelta
                 bclr    #0,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B0BA:
+SSZMTZ_OrbFacePlayerDelta:
                 bset    #0,render_flags(a0)
                 rts
 ; End of function SSZMTZOrb_FaceP1OnLanding
@@ -144,24 +144,24 @@ loc_7B0BA:
 SSZMTZOrb_HandleContactOrDefeat:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
-                bne.s   loc_7B0D2
+                bne.s   SSZMTZ_OrbCheckPlayerAttack
                 tst.b   (_unkFA88).w
-                bne.s   loc_7B0F6
+                bne.s   SSZMTZDetachedOrb_SelectPopState
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B0D2:
+SSZMTZ_OrbCheckPlayerAttack:
                 clr.b   collision_property(a0)
                 andi.b  #3,d0
                 add.w   d0,d0
-                movea.w word_7B10E(pc,d0.w),a1
+                movea.w SSZMTZDetachedOrb_ContactPlayerAddresses(pc,d0.w),a1
                 tst.b   $34(a1)
-                bne.w   locret_7A718
+                bne.w   SSZMTZBoss_ReturnFromSetupOrSharedPolicy
                 jsr     (Check_PlayerAttack).l
-                bne.s   loc_7B0F6
+                bne.s   SSZMTZDetachedOrb_SelectPopState
                 jsr     (HurtCharacter_Directly).l
 
-loc_7B0F6:
+SSZMTZDetachedOrb_SelectPopState:
                 clr.b   collision_flags(a0)
                 move.b  #$E,mapping_frame(a0)
                 move.b  #6,anim(a0)
@@ -170,14 +170,14 @@ loc_7B0F6:
 ; End of function SSZMTZOrb_HandleContactOrDefeat
 
 ; ---------------------------------------------------------------------------
-word_7B10E:
+SSZMTZDetachedOrb_ContactPlayerAddresses:
                 dc.w    Player_1
                 dc.w    Player_1
                 dc.w    Player_2
                 dc.w    Player_2
 ; ---------------------------------------------------------------------------
 
-loc_7B116:
+SSZMTZ_OrbPopAndDecReleaseCount:
                 moveq   #signextendB(sfx_Balloon),d0
                 jsr     (Play_SFX).l
                 movea.l $34(a0),a1
@@ -212,19 +212,19 @@ Boss_MoveObject:
                 lea     (_unkFA82).w,a2
                 lea     mapping_frame(a0),a3
                 tst.b   (a3)
-                bne.s   loc_7B168
+                bne.s   SSZMTZ_PackedAnimReadMainSlot
                 addq.w  #2,a2
-                bra.s   loc_7B16C
+                bra.s   SSZMTZ_PackedAnimLoadChildSlots
 ; ---------------------------------------------------------------------------
 
-loc_7B168:
+SSZMTZ_PackedAnimReadMainSlot:
                 bsr.w   DecodeLegacySSZMTZPackedAnimationSlots
 
-loc_7B16C:
+SSZMTZ_PackedAnimLoadChildSlots:
                 moveq   #0,d6
                 move.b  mainspr_childsprites(a0),d6
                 subq.w  #1,d6
-                bmi.s   locret_7B1E0
+                bmi.s   SSZMTZ_PackedAnimSlotLoopReturn
                 lea     sub2_mapframe(a0),a3
 
 ; =============== S U B R O U T I N E =======================================
@@ -241,10 +241,10 @@ DecodeLegacySSZMTZPackedAnimationSlots:
                 andi.b  #$F,d0
                 move.b  d0,d2
                 cmp.b   d0,d1
-                beq.s   loc_7B196
+                beq.s   SSZMTZ_PackedAnimReadCursorAndDelay
                 st      d4
 
-loc_7B196:
+SSZMTZ_PackedAnimReadCursorAndDelay:
                 move.b  d0,d5
                 lsl.b   #4,d5
                 or.b    d0,d5
@@ -252,26 +252,26 @@ loc_7B196:
                 move.b  d0,d1
                 lsr.b   #4,d1
                 tst.b   d4
-                beq.s   loc_7B1AA
+                beq.s   SSZMTZ_PackedAnimTickOrFetchToken
                 moveq   #0,d0
                 moveq   #0,d1
 
-loc_7B1AA:
+SSZMTZ_PackedAnimTickOrFetchToken:
                 andi.b  #$F,d0
                 subi.b  #1,d0
-                bpl.s   loc_7B1CC
+                bpl.s   SSZMTZ_PackedAnimStoreSlot
                 add.w   d2,d2
                 adda.w  (a1,d2.w),a1
                 move.b  (a1),d0
                 move.b  1(a1,d1.w),d2
-                bmi.s   loc_7B1E2
+                bmi.s   SSZMTZLegacyAnimation_TestRestartCommand
 
-loc_7B1C2:
+SSZMTZ_PackedAnimWriteFrameAndStep:
                 andi.b  #$7F,d2
                 move.b  d2,(a3)
                 addi.b  #1,d1
 
-loc_7B1CC:
+SSZMTZ_PackedAnimStoreSlot:
                 lsl.b   #4,d1
                 or.b    d1,d0
                 move.b  d0,-1(a2)
@@ -279,42 +279,42 @@ loc_7B1CC:
                 adda.w  #next_subspr,a3
                 dbf     d6,DecodeLegacySSZMTZPackedAnimationSlots
 
-locret_7B1E0:
+SSZMTZ_PackedAnimSlotLoopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B1E2:
+SSZMTZLegacyAnimation_TestRestartCommand:
                 addq.b  #1,d2
-                bne.s   loc_7B1F0
+                bne.s   SSZMTZ_PackedAnimCheckAdvanceOwner
                 move.b  #0,d1
                 move.b  1(a1),d2
-                bra.s   loc_7B1C2
+                bra.s   SSZMTZ_PackedAnimWriteFrameAndStep
 ; ---------------------------------------------------------------------------
 
-loc_7B1F0:
+SSZMTZ_PackedAnimCheckAdvanceOwner:
                 addq.b  #1,d2
-                bne.s   loc_7B1FC
+                bne.s   SSZMTZ_PackedAnimCheckChangeAnim
                 addi.b  #2,$26(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7B1FC:
+SSZMTZ_PackedAnimCheckChangeAnim:
                 addq.b  #1,d2
-                bne.s   loc_7B20A
+                bne.s   SSZMTZ_PackedAnimCheckSetCursor
                 andi.b  #$F0,d5
                 or.b    2(a1,d1.w),d5
-                bra.s   loc_7B1CC
+                bra.s   SSZMTZ_PackedAnimStoreSlot
 ; ---------------------------------------------------------------------------
 
-loc_7B20A:
+SSZMTZ_PackedAnimCheckSetCursor:
                 addq.b  #1,d2
-                bne.s   locret_7B21A
+                bne.s   SSZMTZ_PackedAnimUnknownCmdReturn
                 moveq   #0,d3
                 move.b  2(a1,d1.w),d1
                 move.b  1(a1,d1.w),d2
-                bra.s   loc_7B1C2
+                bra.s   SSZMTZ_PackedAnimWriteFrameAndStep
 ; ---------------------------------------------------------------------------
 
-locret_7B21A:
+SSZMTZ_PackedAnimUnknownCmdReturn:
                 rts
 ; End of function DecodeLegacySSZMTZPackedAnimationSlots

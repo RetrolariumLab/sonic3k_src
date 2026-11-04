@@ -8,10 +8,10 @@ ObjSlot_MechaSonic:
                 dc.l    Map_MechaSonic
                 dc.w    $280
                 dc.b    $20, $20,   0, $23
-word_7D3FC:
+SSZMechaCollisionProxy_PartialAttributes:
                 dc.w    $80
                 dc.b    $10, $10,   0,   0
-ObjDat3_7D402:
+SSZMechaRollingTrail_Attributes:
                 dc.l    Map_MechaSonicExtra
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,0,1)
                 dc.w    $200
@@ -21,108 +21,108 @@ ObjDat_MechaSonic_Sparks:
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,1,1)
                 dc.w    $200
                 dc.b    $14, $10,   4,   0
-ObjDat3_7D41A:
+SSZMechaSignalEffect_Attributes:
                 dc.l    Map_MechaSonicExtra
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,1,1)
                 dc.w    $200
                 dc.b    4,   4, $11,   0
-ObjDat3_7D426:
+SSZMechaActiveEffect_Attributes:
                 dc.l    Map_MechaSonicExtra
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,1,1)
                 dc.w    $280
                 dc.b    $18, $18,   8,   0
-word_7D432:
+SSZMechaActiveParticle_PartialAttributes:
                 dc.w    $280
                 dc.b    4,   4,   8,   0
-ObjDat3_7D438:
+SSZMechaLaser_Attributes:
                 dc.l    Map_MechaSonicExtra
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,1,1)
                 dc.w    $200
                 dc.b    $18, $18,  $A, $86
-ObjDat3_7D444:
+SSZSuperMechaRadialProjectile_Attributes:
                 dc.l    Map_MechaSonicExtra
                 dc.w    make_art_tile(ArtTile_MechaSonicExtra,1,1)
                 dc.w    $280
                 dc.b    8,   8, $15, $87
-ObjDat3_7D450:
+SSZMechaMasterEmerald_Attributes:
                 dc.l    Map_SSZMasterEmerald
                 dc.w    make_art_tile(ArtTile_Ending_MasterEmerald,0,1)
                 dc.w    $300
                 dc.b    $20, $18,   0,   0
-ObjDat3_7D45C:
+SSZCraneShipFragment_Attributes:
                 dc.l    Map_RoboshipPieces
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,1)
                 dc.w    0
                 dc.b    $1C, $20,   0,   0
-ObjDat3_7D468:
+SSZMechaDefeatFragment_Attributes:
                 dc.l    Map_MechaSonicPieces
                 dc.w    make_art_tile(ArtTile_MechaSonic,1,1)
                 dc.w    0
                 dc.b    4,   8,   0,   0
-ChildObjDat_7D474:
+SSZMechaCollisionProxy_SimpleChildRecord:
                 dc.w    1-1
-                dc.l    loc_7C9BA
-ChildObjDat_7D47A:
+                dc.l    SSZMechaCollisionProxy_Initialize
+SSZMecha_RollTrailFirstPairChildren:
                 dc.w    1
                 dc.l    loc_7C902
-ChildObjDat_7D480:
+SSZMecha_RollTrailSingleChild:
                 dc.w    1-1
                 dc.l    loc_7C902
-ChildObjDat_7D486:
+SSZMecha_RollTrailSecondPairChildren:
                 dc.w    2-1
                 dc.l    loc_7C8FE
-ChildObjDat_7D48C:
+SSZMechaSparks_SimpleChildRecord:
                 dc.w    1-1
                 dc.l    Obj_MechaSonic_Sparks
-ChildObjDat_7D492:
+SSZMechaSignalEffect_NormalChildRecord:
                 dc.w    1-1
                 dc.l    loc_7C886
                 dc.b    -4,  $C
-ChildObjDat_7D49A:
+SSZMechaActiveEffect_NormalChildRecord:
                 dc.w    1-1
                 dc.l    loc_7C78E
                 dc.b    $14,  -4
-ChildObjDat_7D4A2:
+SSZMechaActiveParticle_SimpleChildRecord:
                 dc.w    1-1
                 dc.l    loc_7C7D4
-ChildObjDat_7D4A8:
+SSZMecha_RadialBurstChild:
                 dc.w    8-1
                 dc.l    loc_7C726
-ChildObjDat_7D4AE:
+SSZMechaLaser_NormalChildRecord:
                 dc.w    1-1
                 dc.l    loc_7C744
                 dc.b    -7,  -8
                 dc.w    1-1
                 dc.l    loc_7C818
-ChildObjDat_7D4BC:
+SSZCraneGrabber_NormalChildRecord:
                 dc.w    1-1
                 dc.l    loc_7CCFE
                 dc.b    0, $23
-ChildObjDat_7D4C4:
+SSZCraneShipFragments_SimpleChildRecord:
                 dc.w    4-1
                 dc.l    loc_7CE6C
-ChildObjDat_7D4CA:
+SSZMecha_DefeatFragmentChild:
                 dc.w    $10-1
                 dc.l    loc_7CE90
-ChildObjDat_7D4D0:
+SSZMecha_FinalExplosionEmitterChild:
                 dc.w    3-1
                 dc.l    loc_7CF14
 DPLCPtr_MechaSonic:
                 dc.l    ArtUnc_MechaSonic
                 dc.l    DPLC_MechaSonic
-byte_7D4DE:
+SSZMecha_LandHoldFrame8Anim:
                 dc.b    3,   0
                 dc.b    4,   1
                 dc.b    5,   2
                 dc.b    6,   3
                 dc.b    7,   4
                 dc.b    8,   5
-                dc.b    $F8, .jump-byte_7D4DE
+                dc.b    $F8, .jump-SSZMecha_LandHoldFrame8Anim
 
                 .jump:
                 dc.b    8, $7F
                 dc.b    $FC
-byte_7D4EF:
+SSZMecha_LandHoldFrame12Anim:
                 dc.b    3,   0
                 dc.b    4,   1
                 dc.b    5,   2
@@ -133,75 +133,75 @@ byte_7D4EF:
                 dc.b    $A,   4
                 dc.b    $B,   4
                 dc.b    $C,   4
-                dc.b    $F8, .jump-byte_7D4EF
+                dc.b    $F8, .jump-SSZMecha_LandHoldFrame12Anim
 
                 .jump:
                 dc.b    $C, $7F
                 dc.b    $FC
-byte_7D508:
+SSZMecha_PaletteReturnFallAnim:
                 dc.b    $13,   5
                 dc.b    $13,   5
                 dc.b    8, $7F
-                dc.b    $F8, byte_7D4DE.jump-byte_7D508
-byte_7D510:
+                dc.b    $F8, SSZMecha_LandHoldFrame8Anim.jump-SSZMecha_PaletteReturnFallAnim
+SSZMecha_NormalLandingAnim:
                 dc.b    1,   5
                 dc.b    1,   5
                 dc.b    2,   9
                 dc.b    1,   5
                 dc.b    $F4
-byte_7D519:
+SSZMecha_RollingEntryAnim:
                 dc.b    3,   1
                 dc.b    3,   1
                 dc.b    4,   1
                 dc.b    5,   1
-                dc.b    $F8, byte_7D523-byte_7D519
-byte_7D523:
+                dc.b    $F8, SSZMecha_RollingFramesRawAnimation-SSZMecha_RollingEntryAnim
+SSZMecha_RollingFramesRawAnimation:
                 dc.b    3,   0
                 dc.b    4,   0
                 dc.b    5,   0
                 dc.b    $FC
-byte_7D52A:
+SSZMecha_TargetedDiveAnim:
                 dc.b    8,   0
                 dc.b    7,   3
                 dc.b    6,   3
                 dc.b    3,   1
                 dc.b    4,   1
                 dc.b    5,   1
-                dc.b    $F8, byte_7D523-byte_7D52A
-byte_7D538:
+                dc.b    $F8, SSZMecha_RollingFramesRawAnimation-SSZMecha_TargetedDiveAnim
+SSZMecha_DiveReturnAnim:
                 dc.b    6,   3
                 dc.b    6,   3
                 dc.b    7,   3
                 dc.b    8, $1F
                 dc.b    $F4
-byte_7D541:
+SSZMecha_JumpAttackPrepAnim:
                 dc.b    0,   0
                 dc.b    1,   5
                 dc.b    2,   9
                 dc.b    1,   0
                 dc.b    $F4
-byte_7D54A:
+SSZMecha_JumpingAttackFlightRawAnimation:
                 dc.b    1,   0
                 dc.b    1,   1
                 dc.b    3,   1
                 dc.b    4,   1
                 dc.b    5,   1
-                dc.b    $F8, byte_7D523-byte_7D54A
-byte_7D556:
+                dc.b    $F8, SSZMecha_RollingFramesRawAnimation-SSZMecha_JumpingAttackFlightRawAnimation
+SSZMecha_DiagonalDiveBrakeAnim:
                 dc.b    $12,   0
                 dc.b    $12,   5
                 dc.b    $D,   3
                 dc.b    8,   5
                 dc.b    1,   1
                 dc.b    $F4
-byte_7D561:
+SSZMecha_DiagonalReturnJumpPrepAnim:
                 dc.b    1,   3
                 dc.b    1,   7
                 dc.b    2,   7
                 dc.b    1,   3
                 dc.b    8,   0
                 dc.b    $F4
-byte_7D56C:
+SSZMecha_HighReturnJumpFlipAnim:
                 dc.b    8,   5
                 dc.b    8,   5
                 dc.b    9,   3
@@ -209,17 +209,17 @@ byte_7D56C:
                 dc.b    $B,   3
                 dc.b    $C,   3
                 dc.b    $40|8, $7F
-                dc.b    $F8, byte_7D4DE.jump-byte_7D56C
-byte_7D57C:
+                dc.b    $F8, SSZMecha_LandHoldFrame8Anim.jump-SSZMecha_HighReturnJumpFlipAnim
+SSZKnucklesMecha_HoverEntryRawAnimation:
                 dc.b    8,   5
                 dc.b    $13,   5
                 dc.b    $14, $7F
-                dc.b    $F8, .jump-byte_7D57C
+                dc.b    $F8, .jump-SSZKnucklesMecha_HoverEntryRawAnimation
 
                 .jump:
                 dc.b    $15, $7F
                 dc.b    $FC
-byte_7D587:
+SSZMecha_RadialBurstAnim:
                 dc.b    1,   5
                 dc.b    1,   5
                 dc.b    $10,  $F
@@ -228,36 +228,36 @@ byte_7D587:
                 dc.b    0,   5
                 dc.b    8,   3
                 dc.b    $F4
-byte_7D596:
+SSZMecha_LandThenDashAnim:
                 dc.b    1,   5
                 dc.b    2, $1F
                 dc.b    $F4
-byte_7D59B:
+SSZMecha_DashStopThenJumpPrepAnim:
                 dc.b    2,   0
                 dc.b    1,   5
                 dc.b    0, $3F
                 dc.b    $F4
-byte_7D5A2:
+SSZMecha_AltLandThenJumpPrepAnim:
                 dc.b    1,   5
                 dc.b    2,   9
                 dc.b    1,   5
                 dc.b    0, $3F
                 dc.b    $F4
-byte_7D5AB:
+SSZMecha_TransformLandingAnim:
                 dc.b    1,   5
                 dc.b    1,   5
                 dc.b    2,   9
                 dc.b    $13,   5
                 dc.b    $15,   3
                 dc.b    $F4
-byte_7D5B6:
+SSZMecha_RestartTransformLandingAnim:
                 dc.b    1,   5
                 dc.b    1,   5
                 dc.b    2,   9
                 dc.b    $13,   5
                 dc.b    $15, $7F
                 dc.b    $F4
-byte_7D5C1:
+SSZMecha_SmallJumpLandingAnim:
                 dc.b    3,   1
                 dc.b    3,   1
                 dc.b    4,   1
@@ -270,41 +270,41 @@ byte_7D5C1:
                 dc.b    1,   5
                 dc.b    0,   3
                 dc.b    $F4
-byte_7D5D8:
+SSZMecha_AltTransformReturnJumpAnim:
                 dc.b    $C,   3
                 dc.b    $C,   3
                 dc.b    $A,   3
                 dc.b    9,   3
                 dc.b    8,   3
-                dc.b    $F8, byte_7D61A-byte_7D5D8
-byte_7D5E4:
+                dc.b    $F8, SSZMecha_TransformReturnHoldFrame8-SSZMecha_AltTransformReturnJumpAnim
+SSZMecha_PostBattleSettlingRawAnimation:
                 dc.b    $E,   5
                 dc.b    $E,   5
                 dc.b    $F,   3
-                dc.b    $F8, .jump-byte_7D5E4
+                dc.b    $F8, .jump-SSZMecha_PostBattleSettlingRawAnimation
 
                 .jump:
                 dc.b    $F, $7F
                 dc.b    $FC
-byte_7D5EF:
+SSZMecha_RecoverThenActAnim:
                 dc.b    $F,   5
                 dc.b    $E,   5
                 dc.b    2,   1
                 dc.b    $F4
-byte_7D5F6:
+SSZMecha_PreJumpCallbackRawAnimation:
                 dc.b    2,   5
                 dc.b    2,  $F
                 dc.b    1,   5
                 dc.b    8,   0
                 dc.b    $F4
-byte_7D5FF:
+SSZMecha_PrepareRiseAnim:
                 dc.b    1,   3
                 dc.b    1,   3
                 dc.b    2,  $F
                 dc.b    1,   3
                 dc.b    8,   0
                 dc.b    $F4
-byte_7D60A:
+SSZMecha_PostBattleJumpFlipRawAnimation:
                 dc.b    8,   7
                 dc.b    8,   7
                 dc.b    9,   5
@@ -312,8 +312,8 @@ byte_7D60A:
                 dc.b    $B,   5
                 dc.b    $C,   5
                 dc.b    $40|8, $7F
-                dc.b    $F8, byte_7D61A-byte_7D60A
-byte_7D61A:
+                dc.b    $F8, SSZMecha_TransformReturnHoldFrame8-SSZMecha_PostBattleJumpFlipRawAnimation
+SSZMecha_TransformReturnHoldFrame8:
                 dc.b    8, $7F
                 dc.b    $FC
                 dc.b    2,   5
@@ -321,7 +321,7 @@ byte_7D61A:
                 dc.b    1,   5
                 dc.b    8,   0
                 dc.b    $F4
-byte_7D626:
+SSZMecha_DashBrakeCrossStreamAnim:
                 dc.b    8,   1
                 dc.b    8,   1
                 dc.b    9,   1
@@ -329,8 +329,8 @@ byte_7D626:
                 dc.b    $B,   1
                 dc.b    $C,   0
                 dc.b    $40|8, $7F
-                dc.b    $F8, byte_7D645.jump-byte_7D626
-byte_7D636:
+                dc.b    $F8, SSZMecha_RiseThenTransformAnim.jump-SSZMecha_DashBrakeCrossStreamAnim
+SSZMecha_HoverTurnAnim:
                 dc.b    8,   3
                 dc.b    8,   3
                 dc.b    9,   3
@@ -339,7 +339,7 @@ byte_7D636:
                 dc.b    $C,   3
                 dc.b    $40|8,   3
                 dc.b    $F4
-byte_7D645:
+SSZMecha_RiseThenTransformAnim:
                 dc.b    8,   3
                 dc.b    8,  $F
                 dc.b    1
@@ -350,23 +350,23 @@ byte_7D645:
                 dc.b    1,   5
                 dc.b    $11,   0
                 dc.b    $F4
-byte_7D652:
+SSZMecha_AccelerateAttackAnim:
                 dc.b    8,   1
                 dc.b    8,   1
                 dc.b    $D,   5
                 dc.b    $12, $7F
-                dc.b    $F8, .jump-byte_7D652
+                dc.b    $F8, .jump-SSZMecha_AccelerateAttackAnim
 
                 .jump:
                 dc.b    $12, $7F
                 dc.b    $FC
-byte_7D65F:
+SSZMechaRollingTrail_RawAnimation:
                 dc.b    1,   1
                 dc.b    2,   1
                 dc.b    3,   1
                 dc.b    0,   0
                 dc.b    $FC
-byte_7D668:
+SSZMecha_ParentReleaseSignalAnim:
                 dc.b    $11,   3
                 dc.b    $11,   3
                 dc.b    0,   3
@@ -377,15 +377,15 @@ byte_7D668:
                 dc.b    $13,   5
                 dc.b    $14, $3F
                 dc.b    $F4
-byte_7D67B:
+SSZMechaActiveEffect_UniformRawAnimation:
                 dc.b    0,   0,   8,   9,   0, $17, $18, $FC
-byte_7D683:
+SSZMecha_ActiveParticleDeleteAnim:
                 dc.b    $E,   1
                 dc.b    $E,   1
                 dc.b    $F,   2
                 dc.b    $10,   3
                 dc.b    $F4
-byte_7D68C:
+SSZMecha_AimedLaserPrepAnim:
                 dc.b    0
                 dc.b    $A,  $A,   0
                 dc.b    $A,  $B,   0
@@ -395,14 +395,14 @@ byte_7D68C:
                 dc.b    $19,  $D,   0
                 dc.b    $B,  $D,   0
                 dc.b    $F4
-byte_7D6A3:
+SSZMechaLaser_FlightUniformRawAnimation:
                 dc.b    0
                 dc.b    0,  $D, $16
                 dc.b    0,  $D,  $C, $16
                 dc.b    0,  $D, $16
                 dc.b    0,  $D, $19, $16
                 dc.b    $FC
-byte_7D6B3:
+SSZMecha_StationaryLaserDeleteAnim:
                 dc.b    0
                 dc.b    $B,  $B,  $D,   0
                 dc.b    $B,  $D,   0
@@ -427,7 +427,7 @@ Map_SSZMasterEmerald:
 Map_MechaSonicPieces:
                 include "src/objects/shared/mecha_sonic/mappings/pieces.s"
 
-word_7D842:     palscriptptr .header, .data
+MechaSonic_IdleFlashPaletteScript:  palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 0
                 .data:  palscriptfile 50,"data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
@@ -444,9 +444,9 @@ word_7D842:     palscriptptr .header, .data
                 palscriptfile 1, "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin"
                 palscriptrept
 
-Pal_SSZGHZMisc: equ     word_7D842.data                 ; yeah Sonic 3 is a fun game
+Pal_SSZGHZMisc: equ     MechaSonic_IdleFlashPaletteScript.data  ; yeah Sonic 3 is a fun game
 
-word_7D9EA:     palscriptptr .header, .data
+MechaSonic_TransformFlashPaletteScript: palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 0
                 .data:  palscriptfile 3, "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
@@ -454,7 +454,7 @@ word_7D9EA:     palscriptptr .header, .data
                 palscriptfile 1, "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin"
                 palscriptrept
 
-word_7DA60:     palscriptptr .header, .data
+MechaSonic_EnterSuperPaletteScript: palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 2-1
                 .data:  palscriptfile 6, "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin"
@@ -468,7 +468,7 @@ word_7DA60:     palscriptptr .header, .data
                 palscriptfile 6, "data/General/Sprites/Mecha Sonic/Palettes/Super 2.bin"
                 palscriptrept
 
-word_7DB66:     palscriptptr .header, .data
+MechaSonic_ReturnToMainPaletteScript:   palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 2-1
                 .data:  palscriptfile 6,  "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin"
@@ -479,15 +479,15 @@ word_7DB66:     palscriptptr .header, .data
                 palscriptfile 128,"data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
                 palscriptrept
 
-word_7DC06:     palscriptptr .header, .data
+MechaSonic_RestoreSuperPaletteScript:   palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 2-1
                 .data:  palscriptfile 8, "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
                 palscriptfile 8, "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin"
                 palscriptfile 8, "data/General/Sprites/Mecha Sonic/Palettes/Flash 1.bin"
-                palscriptloop word_7DA60.headr2
+                palscriptloop MechaSonic_EnterSuperPaletteScript.headr2
 
-word_7DC7E:     palscriptptr .header, .data
+SSZMecha_HoverShiftPaletteScript:   palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$00, 16, 2-1
                 .data:  palscriptfile 2, "data/General/Sprites/Mecha Sonic/Palettes/Flash 2.bin"
@@ -498,8 +498,8 @@ word_7DC7E:     palscriptptr .header, .data
                 palscriptfile 4, "data/General/Sprites/Mecha Sonic/Palettes/Main.bin"
                 palscriptrun
 
-off_7DD5A:
-                dc.l    off_7DD7A
+SSZMasterEmeraldColorCycle_IndexedScript:
+                dc.l    SSZMecha_EmeraldColorPairOffsets
                 dc.w    2-1
                 dc.b    0,  $F
                 dc.b    1,   9
@@ -514,29 +514,29 @@ off_7DD5A:
                 dc.b    2,   9
                 dc.b    1,   9
                 dc.b    $FF, $FC
-off_7DD7A:
-                dc.w    word_7DD88-off_7DD7A
-                dc.w    word_7DD8C-off_7DD7A
-                dc.w    word_7DD90-off_7DD7A
-                dc.w    word_7DD94-off_7DD7A
-                dc.w    word_7DD98-off_7DD7A
-                dc.w    word_7DD9C-off_7DD7A
-                dc.w    word_7DDA0-off_7DD7A
-word_7DD88:
+SSZMecha_EmeraldColorPairOffsets:
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair0-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair1-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair2-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair3-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair4-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair5-SSZMecha_EmeraldColorPairOffsets
+                dc.w    SSZMasterEmeraldColorCycle_ColorPair6-SSZMecha_EmeraldColorPairOffsets
+SSZMasterEmeraldColorCycle_ColorPair0:
                 dc.w    $480,  $6A0
-word_7DD8C:
+SSZMasterEmeraldColorCycle_ColorPair1:
                 dc.w    $680,  $8A0
-word_7DD90:
+SSZMasterEmeraldColorCycle_ColorPair2:
                 dc.w    $680,  $8C0
-word_7DD94:
+SSZMasterEmeraldColorCycle_ColorPair3:
                 dc.w    $6A0,  $AC0
-word_7DD98:
+SSZMasterEmeraldColorCycle_ColorPair4:
                 dc.w    $8A0,  $AE0
-word_7DD9C:
+SSZMasterEmeraldColorCycle_ColorPair5:
                 dc.w    $8C0,  $CE0
-word_7DDA0:
+SSZMasterEmeraldColorCycle_ColorPair6:
                 dc.w    $AC0,  $EE0
 ; ---------------------------------------------------------------------------
-word_7DDA4:
+DEZMiniboss_CameraTriggerAndArenaBounds:
                 dc.w    $18C,  $38C, $3400, $3780
                 dc.w    $28C,  $28C, $3680, $36C0

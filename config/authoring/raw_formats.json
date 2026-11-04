@@ -501,19 +501,19 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "d49bb2430e9e59ea4545cbaf3b53528a6fc870f125b2340d3fa842e1c4964b01"
+      "sha256": "51970d9b50ab2d4fcce6d31da48f97f28257e6b649903369f946d31a83091381"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
-      "sha256": "d1241c6e5af7a8faad2a7c061070008176f51c347bdbee4c0c01720b2f47a88a"
+      "sha256": "3ac1e41b57d9929a0b4156a51fc19d9144faed59b0635a5c5fade01bd02f57ba"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "79e54a0d813df6a1dfb6335b79e1f71b612363a747ddee19ea4e53632b2862d1"
+      "sha256": "a3cf0afd29e51a7a3de2e8ab2953cd806f5ded5858a5ba9e2eb23c0b81ceebeb"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "sha256": "9f62efc861f4c4e3ab6ef8997f7052b14c3dfc3a5717910a05a77a95a7f6adbb"
+      "sha256": "464c75e0958758717d9a7f0a3368d00765b76f6f53c9e7bf7ef0b38798c64b13"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/aftermath.s",
@@ -629,7 +629,7 @@
     },
     {
       "path": "src/objects/ending/sk/mecha_sonic_eyecatch.s",
-      "sha256": "9bc0746397371472bef8e8285cd07e4655242984bd0e470be61d6184fb88b638"
+      "sha256": "968c90126bbb91f8aebc8b537293793bc8e05f54b97986fc42751ff16a1c0261"
     },
     {
       "path": "src/objects/ending/sk/object_catalog.s",
@@ -641,7 +641,7 @@
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "c93e2703f0acf693f685fdcd46160302e25158089a4c00e8f2267a81c0e0fb63"
+      "sha256": "de527c023d21ff966733f6f78c1a510b74e80f6655699fb9b95f358ed6f09631"
     },
     {
       "path": "src/objects/ending/sk/scene_controller.s",
@@ -649,7 +649,7 @@
     },
     {
       "path": "src/objects/ending/sk/scenery_and_creatures.s",
-      "sha256": "3b9190d45cb56281cb130c3ccd71b2f3b5e5dcb8253d4db935ec3d28f240e99a"
+      "sha256": "a1383923cddca34887b463742fb0929dbd929a3fa07132886026b808b852be1e"
     },
     {
       "path": "src/objects/ending/sk/super_character_transition.s",
@@ -3208,13 +3208,13 @@
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
-      "symbol": "byte_7D4DE",
-      "scope": "byte_7D4DE",
+      "symbol": "SSZMecha_LandHoldFrame8Anim",
+      "scope": "SSZMecha_LandHoldFrame8Anim",
       "first_line": 113,
       "last_line": 422,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 506,
-      "declarations_sha256": "3e33fc057b0421867c22f0a13efe4e6536741734882c9964a9c65d975e847645",
+      "declarations_sha256": "7b95773792dc642669e5e27667aed6bd3993a620cf0e9c2558f3336f301c547b",
       "entries": [
         [0, "pairs"],
         [17, "pairs"],
@@ -3259,45 +3259,45 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_7D4DE",
-        "byte_7D4EF",
-        "byte_7D508",
-        "byte_7D510",
-        "byte_7D519",
-        "byte_7D523",
-        "byte_7D52A",
-        "byte_7D538",
-        "byte_7D541",
-        "byte_7D54A",
-        "byte_7D556",
-        "byte_7D561",
-        "byte_7D56C",
-        "byte_7D57C",
-        "byte_7D587",
-        "byte_7D596",
-        "byte_7D59B",
-        "byte_7D5A2",
-        "byte_7D5AB",
-        "byte_7D5B6",
-        "byte_7D5C1",
-        "byte_7D5D8",
-        "byte_7D5E4",
-        "byte_7D5EF",
-        "byte_7D5F6",
-        "byte_7D5FF",
-        "byte_7D60A",
-        "byte_7D61A",
-        "byte_7D626",
-        "byte_7D636",
-        "byte_7D645",
-        "byte_7D652",
-        "byte_7D65F",
-        "byte_7D668",
-        "byte_7D67B",
-        "byte_7D683",
-        "byte_7D68C",
-        "byte_7D6A3",
-        "byte_7D6B3"
+        "SSZMecha_LandHoldFrame8Anim",
+        "SSZMecha_LandHoldFrame12Anim",
+        "SSZMecha_PaletteReturnFallAnim",
+        "SSZMecha_NormalLandingAnim",
+        "SSZMecha_RollingEntryAnim",
+        "SSZMecha_RollingFramesRawAnimation",
+        "SSZMecha_TargetedDiveAnim",
+        "SSZMecha_DiveReturnAnim",
+        "SSZMecha_JumpAttackPrepAnim",
+        "SSZMecha_JumpingAttackFlightRawAnimation",
+        "SSZMecha_DiagonalDiveBrakeAnim",
+        "SSZMecha_DiagonalReturnJumpPrepAnim",
+        "SSZMecha_HighReturnJumpFlipAnim",
+        "SSZKnucklesMecha_HoverEntryRawAnimation",
+        "SSZMecha_RadialBurstAnim",
+        "SSZMecha_LandThenDashAnim",
+        "SSZMecha_DashStopThenJumpPrepAnim",
+        "SSZMecha_AltLandThenJumpPrepAnim",
+        "SSZMecha_TransformLandingAnim",
+        "SSZMecha_RestartTransformLandingAnim",
+        "SSZMecha_SmallJumpLandingAnim",
+        "SSZMecha_AltTransformReturnJumpAnim",
+        "SSZMecha_PostBattleSettlingRawAnimation",
+        "SSZMecha_RecoverThenActAnim",
+        "SSZMecha_PreJumpCallbackRawAnimation",
+        "SSZMecha_PrepareRiseAnim",
+        "SSZMecha_PostBattleJumpFlipRawAnimation",
+        "SSZMecha_TransformReturnHoldFrame8",
+        "SSZMecha_DashBrakeCrossStreamAnim",
+        "SSZMecha_HoverTurnAnim",
+        "SSZMecha_RiseThenTransformAnim",
+        "SSZMecha_AccelerateAttackAnim",
+        "SSZMechaRollingTrail_RawAnimation",
+        "SSZMecha_ParentReleaseSignalAnim",
+        "SSZMechaActiveEffect_UniformRawAnimation",
+        "SSZMecha_ActiveParticleDeleteAnim",
+        "SSZMecha_AimedLaserPrepAnim",
+        "SSZMechaLaser_FlightUniformRawAnimation",
+        "SSZMecha_StationaryLaserDeleteAnim"
       ],
       "stored_markers": []
     },

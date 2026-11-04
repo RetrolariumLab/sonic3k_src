@@ -54,7 +54,7 @@ word_7D03E:
 ; ---------------------------------------------------------------------------
 
 loc_7D042:
-                lea     off_7DD5A(pc),a1
+                lea     SSZMasterEmeraldColorCycle_IndexedScript(pc),a1
                 lea     (Normal_palette_line_4+$1C).w,a2
                 jsr     (Run_PalRotationScript2).l
 
