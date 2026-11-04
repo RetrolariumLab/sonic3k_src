@@ -1500,7 +1500,7 @@ S3SuperSonicDPLC_FrameBB_BD_BF_C1_C5_C7:    dc.w    4
                 dc.w    $7FE0
                 dc.w    $2FE8
                 dc.w    $0FEB
-S3SuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7: dc.w    3  ; unused PLCs for Super Sonic's third idle frame
+S3SuperSonicDPLC_UnusedIdle3:   dc.w    3               ; unused PLCs for Super Sonic's third idle frame
                 dc.w    $8E01
                 dc.w    $BFEC
                 dc.w    $0FF8

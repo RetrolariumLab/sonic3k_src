@@ -6,7 +6,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 13,
       "old": "loc_1345E",
-      "new": "S3SonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges",
+      "new": "S3SonicAnim_ResetOnAnimChange",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges."
     },
@@ -14,7 +14,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 23,
       "old": "loc_13480",
-      "new": "S3SonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode",
+      "new": "S3SonicAnim_DispatchHeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode."
     },
@@ -22,7 +22,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 36,
       "old": "loc_134A6",
-      "new": "S3SonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand",
+      "new": "S3SonicAnim_ReadFrameOrCommand",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand."
     },
@@ -30,7 +30,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 43,
       "old": "loc_134B6",
-      "new": "S3SonicAnimation_StoreMappingFrameAndAdvanceByteCursor",
+      "new": "S3SonicAnim_StoreFrameAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_StoreMappingFrameAndAdvanceByteCursor."
     },
@@ -38,7 +38,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 47,
       "old": "locret_134BE",
-      "new": "S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep",
+      "new": "S3SonicAnim_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep."
     },
@@ -46,7 +46,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 51,
       "old": "loc_134C0",
-      "new": "S3SonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands",
+      "new": "S3SonicAnim_TestRestartFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands."
     },
@@ -54,7 +54,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 59,
       "old": "loc_134D0",
-      "new": "S3SonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte",
+      "new": "S3SonicAnim_TestBacktrackFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte."
     },
@@ -62,7 +62,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 69,
       "old": "loc_134E4",
-      "new": "S3SonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled",
+      "new": "S3SonicAnim_TestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled."
     },
@@ -70,7 +70,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 74,
       "old": "locret_134EE",
-      "new": "S3SonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc",
+      "new": "S3SonicAnim_CommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc."
     },
@@ -78,7 +78,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 78,
       "old": "loc_134F0",
-      "new": "S3SonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode",
+      "new": "S3SonicAnim_DispatchMovementHeaderFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode."
     },
@@ -86,7 +86,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 92,
       "old": "loc_13514",
-      "new": "S3SonicAnimation_OrientWalkingAngleByFacing",
+      "new": "S3SonicAnim_OrientWalkAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_OrientWalkingAngleByFacing."
     },
@@ -94,7 +94,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 98,
       "old": "loc_13520",
-      "new": "S3SonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask",
+      "new": "S3SonicAnim_ChooseWalkFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask."
     },
@@ -102,7 +102,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 103,
       "old": "loc_13528",
-      "new": "S3SonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling",
+      "new": "S3SonicAnim_ApplyWalkFlipAndCheckPush",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling."
     },
@@ -110,7 +110,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 115,
       "old": "loc_1354C",
-      "new": "S3SonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit",
+      "new": "S3SonicAnim_AdjustWalkSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit."
     },
@@ -118,7 +118,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 120,
       "old": "loc_13556",
-      "new": "S3SonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick",
+      "new": "S3SonicAnim_SelectWalkOrRunAt600",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick."
     },
@@ -126,7 +126,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 129,
       "old": "loc_13570",
-      "new": "S3SonicAnimation_ReadNormalLocomotionFrameAndSectorOffset",
+      "new": "S3SonicAnim_ReadNormalMoveFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadNormalLocomotionFrameAndSectorOffset."
     },
@@ -134,7 +134,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 140,
       "old": "loc_1358E",
-      "new": "S3SonicAnimation_StoreNormalSectorFrameAndCountCursorDelay",
+      "new": "S3SonicAnim_StoreNormalMoveFrameAndTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_StoreNormalSectorFrameAndCountCursorDelay."
     },
@@ -142,7 +142,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 150,
       "old": "loc_135A6",
-      "new": "S3SonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder",
+      "new": "S3SonicAnim_ReloadNormalMoveDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder."
     },
@@ -150,7 +150,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 155,
       "old": "locret_135B0",
-      "new": "S3SonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming",
+      "new": "S3SonicAnim_NormalMoveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming."
     },
@@ -158,7 +158,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 159,
       "old": "loc_135B2",
-      "new": "S3SonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick",
+      "new": "S3SonicAnim_SelectSuperWalkOrRunAt800",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick."
     },
@@ -166,7 +166,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 169,
       "old": "loc_135CA",
-      "new": "S3SonicAnimation_DoubleSectorOffsetForSuperRunFrames",
+      "new": "S3SonicAnim_DoubleSuperRunSectorOffset",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_DoubleSectorOffsetForSuperRunFrames."
     },
@@ -174,7 +174,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 172,
       "old": "loc_135CC",
-      "new": "S3SonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap",
+      "new": "S3SonicAnim_ReadOrLoopSuperMoveFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap."
     },
@@ -182,7 +182,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 182,
       "old": "loc_135E8",
-      "new": "S3SonicAnimation_StoreSuperSectorFrameAndCountCursorDelay",
+      "new": "S3SonicAnim_StoreSuperMoveFrameAndTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_StoreSuperSectorFrameAndCountCursorDelay."
     },
@@ -190,7 +190,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 192,
       "old": "loc_13600",
-      "new": "S3SonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder",
+      "new": "S3SonicAnim_ReloadSuperMoveDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder."
     },
@@ -198,7 +198,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 197,
       "old": "locret_1360A",
-      "new": "S3SonicAnimation_ReturnAfterSuperLocomotionFrameTiming",
+      "new": "S3SonicAnim_SuperMoveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReturnAfterSuperLocomotionFrameTiming."
     },
@@ -206,7 +206,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 220,
       "old": "loc_13640",
-      "new": "S3SonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven",
+      "new": "S3SonicAnim_BiasRightTumble0Phase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven."
     },
@@ -214,7 +214,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 223,
       "old": "loc_13644",
-      "new": "S3SonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames",
+      "new": "S3SonicAnim_StoreRightTumble0Frame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames."
     },
@@ -222,7 +222,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 243,
       "old": "byte_1367E",
-      "new": "S3SonicAnimation_TumbleSubtypeFrameBaseBytes",
+      "new": "S3SonicAnim_TumbleFrameBases",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_TumbleSubtypeFrameBaseBytes."
     },
@@ -230,7 +230,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 248,
       "old": "loc_13682",
-      "new": "S3SonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne",
+      "new": "S3SonicAnim_ReadTumbleBaseAndTestType1",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne."
     },
@@ -238,7 +238,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 266,
       "old": "loc_136B8",
-      "new": "S3SonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip",
+      "new": "S3SonicAnim_StoreLeftTumble1Frame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip."
     },
@@ -246,7 +246,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 277,
       "old": "loc_136DA",
-      "new": "S3SonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch",
+      "new": "S3SonicAnim_TestTumbleType2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch."
     },
@@ -254,7 +254,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 294,
       "old": "loc_1370C",
-      "new": "S3SonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips",
+      "new": "S3SonicAnim_StoreLeftTumble2Frame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips."
     },
@@ -262,7 +262,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 306,
       "old": "loc_13730",
-      "new": "S3SonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback",
+      "new": "S3SonicAnim_DispatchTumbleType3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback."
     },
@@ -270,7 +270,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 323,
       "old": "loc_13764",
-      "new": "S3SonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip",
+      "new": "S3SonicAnim_StoreLeftTumble3Frame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip."
     },
@@ -278,7 +278,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 334,
       "old": "loc_13786",
-      "new": "S3SonicAnimation_CountNonFfNegativeHeaderRollCadence",
+      "new": "S3SonicAnim_TickRollFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_CountNonFfNegativeHeaderRollCadence."
     },
@@ -286,7 +286,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 341,
       "old": "loc_13796",
-      "new": "S3SonicAnimation_ChooseRollStreamAtSixPixelsPerTick",
+      "new": "S3SonicAnim_SelectRollSequenceAt600",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ChooseRollStreamAtSixPixelsPerTick."
     },
@@ -294,7 +294,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 347,
       "old": "loc_137A8",
-      "new": "S3SonicAnimation_ComputeRollDelayFromFourMinusSpeed",
+      "new": "S3SonicAnim_CalcRollDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ComputeRollDelayFromFourMinusSpeed."
     },
@@ -302,7 +302,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 353,
       "old": "loc_137B2",
-      "new": "S3SonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy",
+      "new": "S3SonicAnim_ReloadRollDelayAndReadFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy."
     },
@@ -310,7 +310,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 363,
       "old": "loc_137CE",
-      "new": "S3SonicAnimation_CountPushCadenceUsingRawGroundVelocity",
+      "new": "S3SonicAnim_TickPushFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_CountPushCadenceUsingRawGroundVelocity."
     },
@@ -318,7 +318,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 370,
       "old": "loc_137DE",
-      "new": "S3SonicAnimation_ClampPushWordRemainderBeforeTimerScaling",
+      "new": "S3SonicAnim_ClampPushDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ClampPushWordRemainderBeforeTimerScaling."
     },
@@ -326,7 +326,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 375,
       "old": "loc_137E6",
-      "new": "S3SonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream",
+      "new": "S3SonicAnim_SelectPushSequenceAndDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream."
     },
@@ -334,7 +334,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 383,
       "old": "loc_137FE",
-      "new": "S3SonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail",
+      "new": "S3SonicAnim_ReadPushFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail."
     },
@@ -342,7 +342,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 410,
       "old": "loc_13A44",
-      "new": "S3SonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank",
+      "new": "S3SonicAnim_ReadDPLCHeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank."
     },
@@ -350,7 +350,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 418,
       "old": "loc_13A54",
-      "new": "S3SonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination",
+      "new": "S3SonicAnim_QueueDPLCEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination."
     },
@@ -358,7 +358,7 @@
       "source": "src/objects/players/sonic/s3/animation_and_patterns.s",
       "original_line": 434,
       "old": "locret_13A80",
-      "new": "S3SonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop",
+      "new": "S3SonicAnim_DPLCLoadReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop."
     },
@@ -1750,7 +1750,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 13,
       "old": "loc_12612",
-      "new": "SKSonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges",
+      "new": "SKSonicAnim_ResetOnAnimChange",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges."
     },
@@ -1758,7 +1758,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 23,
       "old": "loc_12634",
-      "new": "SKSonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode",
+      "new": "SKSonicAnim_DispatchHeader",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode."
     },
@@ -1766,7 +1766,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 36,
       "old": "loc_1265A",
-      "new": "SKSonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand",
+      "new": "SKSonicAnim_ReadFrameOrCommand",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand."
     },
@@ -1774,7 +1774,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 43,
       "old": "loc_1266A",
-      "new": "SKSonicAnimation_StoreMappingFrameAndAdvanceByteCursor",
+      "new": "SKSonicAnim_StoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_StoreMappingFrameAndAdvanceByteCursor."
     },
@@ -1782,7 +1782,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 47,
       "old": "locret_12672",
-      "new": "SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep",
+      "new": "SKSonicAnim_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep."
     },
@@ -1790,7 +1790,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 51,
       "old": "loc_12674",
-      "new": "SKSonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands",
+      "new": "SKSonicAnim_TestRestartFF",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands."
     },
@@ -1798,7 +1798,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 59,
       "old": "loc_12684",
-      "new": "SKSonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte",
+      "new": "SKSonicAnim_TestBacktrackFE",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte."
     },
@@ -1806,7 +1806,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 69,
       "old": "loc_12698",
-      "new": "SKSonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled",
+      "new": "SKSonicAnim_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled."
     },
@@ -1814,7 +1814,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 74,
       "old": "locret_126A2",
-      "new": "SKSonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc",
+      "new": "SKSonicAnim_CommandReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc."
     },
@@ -1822,7 +1822,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 78,
       "old": "loc_126A4",
-      "new": "SKSonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode",
+      "new": "SKSonicAnim_DispatchMovementHeaderFF",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode."
     },
@@ -1830,7 +1830,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 92,
       "old": "loc_126C8",
-      "new": "SKSonicAnimation_OrientWalkingAngleByFacing",
+      "new": "SKSonicAnim_OrientWalkAngle",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_OrientWalkingAngleByFacing."
     },
@@ -1838,7 +1838,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 98,
       "old": "loc_126D4",
-      "new": "SKSonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask",
+      "new": "SKSonicAnim_ChooseWalkFlip",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask."
     },
@@ -1846,7 +1846,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 103,
       "old": "loc_126DC",
-      "new": "SKSonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling",
+      "new": "SKSonicAnim_ApplyWalkFlipAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling."
     },
@@ -1854,7 +1854,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 115,
       "old": "loc_12700",
-      "new": "SKSonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit",
+      "new": "SKSonicAnim_AdjustWalkSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit."
     },
@@ -1862,7 +1862,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 120,
       "old": "loc_1270A",
-      "new": "SKSonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick",
+      "new": "SKSonicAnim_SelectWalkOrRunAt600",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick."
     },
@@ -1870,7 +1870,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 129,
       "old": "loc_12724",
-      "new": "SKSonicAnimation_ReadNormalLocomotionFrameAndSectorOffset",
+      "new": "SKSonicAnim_ReadNormalMoveFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadNormalLocomotionFrameAndSectorOffset."
     },
@@ -1878,7 +1878,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 140,
       "old": "loc_12742",
-      "new": "SKSonicAnimation_StoreNormalSectorFrameAndCountCursorDelay",
+      "new": "SKSonicAnim_StoreNormalMoveFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_StoreNormalSectorFrameAndCountCursorDelay."
     },
@@ -1886,7 +1886,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 150,
       "old": "loc_1275A",
-      "new": "SKSonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder",
+      "new": "SKSonicAnim_ReloadNormalMoveDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder."
     },
@@ -1894,7 +1894,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 155,
       "old": "locret_12764",
-      "new": "SKSonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming",
+      "new": "SKSonicAnim_NormalMoveReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming."
     },
@@ -1902,7 +1902,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 159,
       "old": "loc_12766",
-      "new": "SKSonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick",
+      "new": "SKSonicAnim_SelectSuperWalkOrRunAt800",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick."
     },
@@ -1910,7 +1910,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 169,
       "old": "loc_1277E",
-      "new": "SKSonicAnimation_DoubleSectorOffsetForSuperRunFrames",
+      "new": "SKSonicAnim_DoubleSuperRunSectorOffset",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_DoubleSectorOffsetForSuperRunFrames."
     },
@@ -1918,7 +1918,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 172,
       "old": "loc_12780",
-      "new": "SKSonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap",
+      "new": "SKSonicAnim_ReadOrLoopSuperMoveFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap."
     },
@@ -1926,7 +1926,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 182,
       "old": "loc_1279C",
-      "new": "SKSonicAnimation_StoreSuperSectorFrameAndCountCursorDelay",
+      "new": "SKSonicAnim_StoreSuperMoveFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_StoreSuperSectorFrameAndCountCursorDelay."
     },
@@ -1934,7 +1934,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 192,
       "old": "loc_127B4",
-      "new": "SKSonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder",
+      "new": "SKSonicAnim_ReloadSuperMoveDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder."
     },
@@ -1942,7 +1942,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 197,
       "old": "locret_127BE",
-      "new": "SKSonicAnimation_ReturnAfterSuperLocomotionFrameTiming",
+      "new": "SKSonicAnim_SuperMoveReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReturnAfterSuperLocomotionFrameTiming."
     },
@@ -1950,7 +1950,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 224,
       "old": "loc_12806",
-      "new": "SKSonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven",
+      "new": "SKSonicAnim_BiasRightTumble0Phase",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven."
     },
@@ -1958,7 +1958,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 227,
       "old": "loc_1280A",
-      "new": "SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames",
+      "new": "SKSonicAnim_StoreRightTumble0Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames."
     },
@@ -1966,7 +1966,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 247,
       "old": "loc_12842",
-      "new": "SKSonicAnimation_BiasNegativeTypeZeroLeftTumbleInFbzDezOrMhz",
+      "new": "SKSonicAnim_BiasSpecialLeftTumble0",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_BiasNegativeTypeZeroLeftTumbleInFbzDezOrMhz."
     },
@@ -1974,7 +1974,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 253,
       "old": "loc_1284E",
-      "new": "SKSonicAnimation_MirrorOrdinaryLeftTypeZeroTumbleAcrossBothAxes",
+      "new": "SKSonicAnim_MirrorLeftTumble0XY",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_MirrorOrdinaryLeftTypeZeroTumbleAcrossBothAxes."
     },
@@ -1982,7 +1982,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 258,
       "old": "loc_1285A",
-      "new": "SKSonicAnimation_QuantizeLeftTypeZeroTumbleIntoBaseThirtyOneFrames",
+      "new": "SKSonicAnim_StoreLeftTumble0Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeLeftTypeZeroTumbleIntoBaseThirtyOneFrames."
     },
@@ -1990,7 +1990,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 265,
       "old": "byte_1286E",
-      "new": "SKSonicAnimation_TumbleSubtypeFrameBaseBytes",
+      "new": "SKSonicAnim_TumbleFrameBases",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_TumbleSubtypeFrameBaseBytes."
     },
@@ -1998,7 +1998,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 270,
       "old": "loc_12872",
-      "new": "SKSonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne",
+      "new": "SKSonicAnim_ReadTumbleBaseAndTestType1",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne."
     },
@@ -2006,7 +2006,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 288,
       "old": "loc_128A8",
-      "new": "SKSonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip",
+      "new": "SKSonicAnim_StoreLeftTumble1Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip."
     },
@@ -2014,7 +2014,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 299,
       "old": "loc_128CA",
-      "new": "SKSonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch",
+      "new": "SKSonicAnim_TestTumbleType2",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch."
     },
@@ -2022,7 +2022,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 316,
       "old": "loc_128FC",
-      "new": "SKSonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips",
+      "new": "SKSonicAnim_StoreLeftTumble2Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips."
     },
@@ -2030,7 +2030,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 328,
       "old": "loc_12920",
-      "new": "SKSonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback",
+      "new": "SKSonicAnim_DispatchTumbleType3",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback."
     },
@@ -2038,7 +2038,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 347,
       "old": "loc_1295A",
-      "new": "SKSonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip",
+      "new": "SKSonicAnim_StoreLeftTumble3Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip."
     },
@@ -2046,7 +2046,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 358,
       "old": "loc_1297C",
-      "new": "SKSonicAnimation_DispatchTypeFourBeforeGenericFixedBaseTumble",
+      "new": "SKSonicAnim_TestTumbleType4",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_DispatchTypeFourBeforeGenericFixedBaseTumble."
     },
@@ -2054,7 +2054,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 373,
       "old": "loc_129A4",
-      "new": "SKSonicAnimation_BiasNonnegativeRightFacingTypeFourTumble",
+      "new": "SKSonicAnim_BiasRightTumble4Phase",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_BiasNonnegativeRightFacingTypeFourTumble."
     },
@@ -2062,7 +2062,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 376,
       "old": "loc_129A8",
-      "new": "SKSonicAnimation_QuantizeRightFacingTypeFourUsingFixedBaseThirtyOne",
+      "new": "SKSonicAnim_StoreRightTumble4Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeRightFacingTypeFourUsingFixedBaseThirtyOne."
     },
@@ -2070,7 +2070,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 384,
       "old": "loc_129BC",
-      "new": "SKSonicAnimation_SelectLeftTypeFourMirrorWithIdenticalSignPaths",
+      "new": "SKSonicAnim_SelectLeftTumble4Mirror",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_SelectLeftTypeFourMirrorWithIdenticalSignPaths."
     },
@@ -2078,7 +2078,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 394,
       "old": "loc_129D6",
-      "new": "SKSonicAnimation_MirrorNonnegativeLeftFacingTypeFourTumble",
+      "new": "SKSonicAnim_MirrorLeftTumble4XY",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_MirrorNonnegativeLeftFacingTypeFourTumble."
     },
@@ -2086,7 +2086,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 399,
       "old": "loc_129E2",
-      "new": "SKSonicAnimation_QuantizeLeftFacingTypeFourUsingFixedBaseThirtyOne",
+      "new": "SKSonicAnim_StoreLeftTumble4Frame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeLeftFacingTypeFourUsingFixedBaseThirtyOne."
     },
@@ -2094,7 +2094,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 407,
       "old": "loc_129F6",
-      "new": "SKSonicAnimation_HandleTypesFiveAndAboveWithFixedBaseAndFacingXFlip",
+      "new": "SKSonicAnim_OrientHigherTumbleTypes",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_HandleTypesFiveAndAboveWithFixedBaseAndFacingXFlip."
     },
@@ -2102,7 +2102,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 416,
       "old": "loc_12A12",
-      "new": "SKSonicAnimation_QuantizeGenericHigherTumbleTypeUsingFixedBaseThirtyOne",
+      "new": "SKSonicAnim_StoreHigherTumbleFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QuantizeGenericHigherTumbleTypeUsingFixedBaseThirtyOne."
     },
@@ -2110,7 +2110,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 425,
       "old": "loc_12A2A",
-      "new": "SKSonicAnimation_CountNonFfNegativeHeaderRollCadence",
+      "new": "SKSonicAnim_TickRollFrames",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_CountNonFfNegativeHeaderRollCadence."
     },
@@ -2118,7 +2118,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 436,
       "old": "loc_12A4C",
-      "new": "SKSonicAnimation_ChooseRollStreamAtSixPixelsPerTick",
+      "new": "SKSonicAnim_SelectRollSequenceAt600",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ChooseRollStreamAtSixPixelsPerTick."
     },
@@ -2126,7 +2126,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 442,
       "old": "loc_12A5E",
-      "new": "SKSonicAnimation_ComputeRollDelayFromFourMinusSpeed",
+      "new": "SKSonicAnim_CalcRollDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ComputeRollDelayFromFourMinusSpeed."
     },
@@ -2134,7 +2134,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 448,
       "old": "loc_12A68",
-      "new": "SKSonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy",
+      "new": "SKSonicAnim_ReloadRollDelayAndReadFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy."
     },
@@ -2142,7 +2142,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 454,
       "old": "loc_12A72",
-      "new": "SKSonicAnimation_CountPushCadenceUsingRawGroundVelocity",
+      "new": "SKSonicAnim_TickPushFrames",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_CountPushCadenceUsingRawGroundVelocity."
     },
@@ -2150,7 +2150,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 461,
       "old": "loc_12A82",
-      "new": "SKSonicAnimation_ClampPushWordRemainderBeforeTimerScaling",
+      "new": "SKSonicAnim_ClampPushDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ClampPushWordRemainderBeforeTimerScaling."
     },
@@ -2158,7 +2158,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 466,
       "old": "loc_12A8A",
-      "new": "SKSonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream",
+      "new": "SKSonicAnim_SelectPushSequenceAndDelay",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream."
     },
@@ -2166,7 +2166,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 474,
       "old": "loc_12AA2",
-      "new": "SKSonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail",
+      "new": "SKSonicAnim_ReadPushFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail."
     },
@@ -2174,7 +2174,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 497,
       "old": "loc_12CD6",
-      "new": "SKSonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank",
+      "new": "SKSonicAnim_ReadDPLCHeaderAndPickArtBank",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank."
     },
@@ -2182,7 +2182,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 509,
       "old": "loc_12CF8",
-      "new": "SKSonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination",
+      "new": "SKSonicAnim_QueueDPLCEntry",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination."
     },
@@ -2190,7 +2190,7 @@
       "source": "src/objects/players/sonic/sk/animation_and_patterns.s",
       "original_line": 525,
       "old": "locret_12D20",
-      "new": "SKSonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop",
+      "new": "SKSonicAnim_DPLCLoadReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop."
     },
@@ -6278,7 +6278,7 @@
       "source": "src/objects/shared/sonic/dplc/s3.s",
       "original_line": 1503,
       "old": "word_14345E",
-      "new": "S3SuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7",
+      "new": "S3SuperSonicDPLC_UnusedIdle3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3SuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7 from actual frame-table and literal consumer format."
     },
@@ -8110,7 +8110,7 @@
       "source": "src/objects/shared/sonic/dplc/sonic.s",
       "original_line": 1338,
       "old": "word_148BEA",
-      "new": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+      "new": "SKSonicAndSuperDPLC_FramesDAtoDF",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF using actual table/record consumers."
     },
@@ -8742,7 +8742,7 @@
       "source": "src/objects/shared/sonic/dplc/sonic.s",
       "original_line": 1676,
       "old": "word_148E8E",
-      "new": "SKSuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7",
+      "new": "SKSuperSonicDPLC_UnusedIdle3",
       "profiles": ["sk"],
       "meaning": "Describe SKSuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7 using actual table/record consumers."
     },
@@ -13222,7 +13222,7 @@
       "source": "src/objects/shared/sonic/mappings/sonic.s",
       "original_line": 1349,
       "old": "word_147A6E",
-      "new": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+      "new": "SKSonicAndSuperMap_FramesDAtoDF",
       "profiles": ["sk"],
       "meaning": "Describe SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF using actual table/record consumers."
     },
@@ -13894,7 +13894,7 @@
       "source": "src/objects/shared/sonic/mappings/sstage_sonic.s",
       "original_line": 30,
       "old": "word_ABE2C",
-      "new": "SpecialStageSonic_EmptyMappingAndDplcFrame00",
+      "new": "SStageSonic_EmptyMapDPLC00",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe SpecialStageSonic_EmptyMappingAndDplcFrame00 using actual resource tables and consumers."
     },

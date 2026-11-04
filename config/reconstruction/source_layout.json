@@ -27884,7 +27884,7 @@
       "responsibility": "Sonic animation selection, dynamic pattern loading and the common player DPLC dispatch interface.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 446,
+      "physical_lines": 448,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -28214,7 +28214,7 @@
       "responsibility": "Sonic animation selection, dynamic pattern loading and the common player DPLC dispatch interface.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 539,
+      "physical_lines": 543,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",

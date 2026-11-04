@@ -219,12 +219,12 @@ Map_Sonic_:
                 dc.w    SKSonicAndSuperMapping_FrameD7-Map_Sonic_  ; 215
                 dc.w    SKSonicAndSuperMapping_FrameD8-Map_Sonic_  ; 216
                 dc.w    SKSonicAndSuperMapping_FrameD9-Map_Sonic_  ; 217
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 218
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 219
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 220
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 221
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 222
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_Sonic_  ; 223
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 218
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 219
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 220
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 221
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 222
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_Sonic_  ; 223
                 dc.w    SKSonicAndSuperMapping_FrameE0-Map_Sonic_  ; 224
                 dc.w    SKSonicAndSuperMapping_FrameE1-Map_Sonic_  ; 225
                 dc.w    SKSonicAndSuperMapping_FrameE2-Map_Sonic_  ; 226
@@ -472,12 +472,12 @@ Map_SuperSonic_:
                 dc.w    SKSonicAndSuperMapping_FrameD7-Map_SuperSonic_
                 dc.w    SKSonicAndSuperMapping_FrameD8-Map_SuperSonic_
                 dc.w    SKSonicAndSuperMapping_FrameD9-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
-                dc.w    SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
+                dc.w    SKSonicAndSuperMap_FramesDAtoDF-Map_SuperSonic_
                 dc.w    SKSonicAndSuperMapping_FrameE0-Map_SuperSonic_
                 dc.w    SKSonicAndSuperMapping_FrameE1-Map_SuperSonic_
                 dc.w    SKSonicAndSuperMapping_FrameE2-Map_SuperSonic_
@@ -1346,7 +1346,7 @@ SKSonicAndSuperMapping_FrameD9: dc.w    4
                 dc.b    $FC,   0,   0,  $C,   0,   8
                 dc.b    4,  $C,   0,  $D, $FF, $F0
                 dc.b    $C,   8,   0, $11, $FF, $F8
-SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF:  dc.w    3
+SKSonicAndSuperMap_FramesDAtoDF:    dc.w    3
                 dc.b    $EC,   9,   0,   0, $FF, $F0
                 dc.b    $FC,  $D,   0,   6, $FF, $F0
                 dc.b    $C,   4,   0,  $E, $FF, $F8

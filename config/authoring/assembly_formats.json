@@ -35237,7 +35237,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 3382
       },
-      "declarations_sha256": "e3fb74dddbb81539bedadd5eeef5f76519e6ad1528c005a77e6c969426eeea96",
+      "declarations_sha256": "1cf46cd7031e3aac94e4cf29329a1d1d8ecea60877a268101ea41d0ff147b620",
       "labels": {
         "PLC_Sonic_": 0,
         "PLC_SuperSonic": 502,
@@ -35452,7 +35452,7 @@
         "SKSonicAndSuperDPLC_FrameD7": 2638,
         "SKSonicAndSuperDPLC_FrameD8": 2646,
         "SKSonicAndSuperDPLC_FrameD9": 2654,
-        "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF": 2664,
+        "SKSonicAndSuperDPLC_FramesDAtoDF": 2664,
         "SKSonicAndSuperDPLC_FrameE0": 2672,
         "SKSonicAndSuperDPLC_FrameE1": 2676,
         "SKSonicAndSuperDPLC_FrameE2": 2682,
@@ -35531,7 +35531,7 @@
         "SKSuperSonicDPLC_FrameB9": 3312,
         "SKSuperSonicDPLC_FrameBA_BC_BE_C0_C2_C6": 3320,
         "SKSuperSonicDPLC_FrameBB_BD_BF_C1_C5_C7": 3330,
-        "SKSuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7": 3340,
+        "SKSuperSonicDPLC_UnusedIdle3": 3340,
         "SKSonicAndSuperDPLC_FrameD2": 3348,
         "SKSonicAndSuperDPLC_FrameD3": 3352,
         "SKSonicAndSuperDPLC_FrameD4": 3360,
@@ -37070,42 +37070,42 @@
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_Sonic_"
         },
         {
@@ -38827,42 +38827,42 @@
           "offset": 938,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
           "offset": 940,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
           "offset": 942,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
           "offset": 944,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
           "offset": 946,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
           "offset": 948,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperDPLC_FramesDAtoDF",
           "base": "PLC_SuperSonic_"
         },
         {
@@ -41123,7 +41123,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 3036
       },
-      "declarations_sha256": "1a1b876421aff7079056979a94dd5ea04f3b348e498a9f471190caeaa165559e",
+      "declarations_sha256": "35efc099516225da24c8da5b64ddb6529651002dd17f534ca30048808e31811c",
       "labels": {
         "PLC_Sonic_": 0,
         "PLC_SuperSonic": 436,
@@ -41389,7 +41389,7 @@
         "S3SuperSonicDPLC_FrameB9": 2966,
         "S3SuperSonicDPLC_FrameBA_BC_BE_C0_C2_C6": 2974,
         "S3SuperSonicDPLC_FrameBB_BD_BF_C1_C5_C7": 2984,
-        "S3SuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7": 2994,
+        "S3SuperSonicDPLC_UnusedIdle3": 2994,
         "S3SonicAndSuperDPLC_FrameD2": 3002,
         "S3SonicAndSuperDPLC_FrameD3": 3006,
         "S3SonicAndSuperDPLC_FrameD4": 3014,
@@ -46224,7 +46224,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 7010
       },
-      "declarations_sha256": "8644a838906ebdf954ebead20117e3bb8ae72a1d9b752057381963020e915507",
+      "declarations_sha256": "0f612827a596a3347a6e9a3d49658f662905da44268a0da3d54116855f87a5bb",
       "labels": {
         "Map_Sonic_": 0,
         "Map_SuperSonic": 502,
@@ -46442,7 +46442,7 @@
         "SKSonicAndSuperMapping_FrameD7": 5132,
         "SKSonicAndSuperMapping_FrameD8": 5152,
         "SKSonicAndSuperMapping_FrameD9": 5172,
-        "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF": 5198,
+        "SKSonicAndSuperMap_FramesDAtoDF": 5198,
         "SKSonicAndSuperMapping_FrameE0": 5218,
         "SKSonicAndSuperMapping_FrameE1": 5226,
         "SKSonicAndSuperMapping_FrameE2": 5240,
@@ -48059,42 +48059,42 @@
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_Sonic_"
         },
         {
@@ -49816,42 +49816,42 @@
           "offset": 938,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
           "offset": 940,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
           "offset": 942,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
           "offset": 944,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
           "offset": 946,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
           "offset": 948,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKSonicAndSuperMapping_FrameDA_DB_DC_DD_DE_DF",
+          "target": "SKSonicAndSuperMap_FramesDAtoDF",
           "base": "Map_SuperSonic_"
         },
         {
@@ -57140,12 +57140,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 294
       },
-      "declarations_sha256": "1aed43624699c1faa95101c248c428bfbdfc7750af596fa6739b5cbbd36b71fc",
+      "declarations_sha256": "d7b3fb2897729b2992efad8e8248864c2aece171ed27298998691c557fe0863c",
       "labels": {
         "Map_SStageSonic_": 0,
         "PLC_SStageSonic": 24,
         "PLC_SStageSonic_": 24,
-        "SpecialStageSonic_EmptyMappingAndDplcFrame00": 48,
+        "SStageSonic_EmptyMapDPLC00": 48,
         "SpecialStageSonic_MappingFrame01": 50,
         "SpecialStageSonic_MappingFrame02": 64,
         "SpecialStageSonic_MappingFrame03": 78,
@@ -57175,7 +57175,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "SpecialStageSonic_EmptyMappingAndDplcFrame00",
+          "target": "SStageSonic_EmptyMapDPLC00",
           "base": "Map_SStageSonic_"
         },
         {
@@ -57259,7 +57259,7 @@
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "SpecialStageSonic_EmptyMappingAndDplcFrame00",
+          "target": "SStageSonic_EmptyMapDPLC00",
           "base": "PLC_SStageSonic_"
         },
         {

@@ -219,12 +219,12 @@ PLC_Sonic_:
                 dc.w    SKSonicAndSuperDPLC_FrameD7-PLC_Sonic_
                 dc.w    SKSonicAndSuperDPLC_FrameD8-PLC_Sonic_
                 dc.w    SKSonicAndSuperDPLC_FrameD9-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_Sonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE0-PLC_Sonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE1-PLC_Sonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE2-PLC_Sonic_
@@ -472,12 +472,12 @@ PLC_SuperSonic_:
                 dc.w    SKSonicAndSuperDPLC_FrameD7-PLC_SuperSonic_
                 dc.w    SKSonicAndSuperDPLC_FrameD8-PLC_SuperSonic_
                 dc.w    SKSonicAndSuperDPLC_FrameD9-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
-                dc.w    SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
+                dc.w    SKSonicAndSuperDPLC_FramesDAtoDF-PLC_SuperSonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE0-PLC_SuperSonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE1-PLC_SuperSonic_
                 dc.w    SKSonicAndSuperDPLC_FrameE2-PLC_SuperSonic_
@@ -1335,7 +1335,7 @@ SKSonicAndSuperDPLC_FrameD9:    dc.w    4
                 dc.w    $0D63
                 dc.w    $3D64
                 dc.w    $2D68
-SKSonicAndSuperDPLC_FrameDA_DB_DC_DD_DE_DF: dc.w    3
+SKSonicAndSuperDPLC_FramesDAtoDF:   dc.w    3
                 dc.w    $5000
                 dc.w    $7006
                 dc.w    $100E
@@ -1673,7 +1673,7 @@ SKSuperSonicDPLC_FrameBB_BD_BF_C1_C5_C7:    dc.w    4
                 dc.w    $7FE0
                 dc.w    $2FE8
                 dc.w    $0FEB
-SKSuperSonicDPLC_UnselectedReplacementForFramesBC_BF_C2_C7: dc.w    3  ; unused PLCs for Super Sonic's third idle frame
+SKSuperSonicDPLC_UnusedIdle3:   dc.w    3               ; unused PLCs for Super Sonic's third idle frame
                 dc.w    $8E01
                 dc.w    $BFEC
                 dc.w    $0FF8

@@ -1,7 +1,7 @@
 ; Data owner: objects/shared/sonic
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SStageSonic_:
-                dc.w    SpecialStageSonic_EmptyMappingAndDplcFrame00-Map_SStageSonic_
+                dc.w    SStageSonic_EmptyMapDPLC00-Map_SStageSonic_
                 dc.w    SpecialStageSonic_MappingFrame01-Map_SStageSonic_
                 dc.w    SpecialStageSonic_MappingFrame02-Map_SStageSonic_
                 dc.w    SpecialStageSonic_MappingFrame03-Map_SStageSonic_
@@ -15,7 +15,7 @@ Map_SStageSonic_:
                 dc.w    SpecialStageSonic_MappingFrame0B-Map_SStageSonic_
 PLC_SStageSonic:
 PLC_SStageSonic_:
-                dc.w    SpecialStageSonic_EmptyMappingAndDplcFrame00-PLC_SStageSonic_
+                dc.w    SStageSonic_EmptyMapDPLC00-PLC_SStageSonic_
                 dc.w    SpecialStageSonic_DplcFrame01-PLC_SStageSonic_
                 dc.w    SpecialStageSonic_DplcFrame02-PLC_SStageSonic_
                 dc.w    SpecialStageSonic_DplcFrame03-PLC_SStageSonic_
@@ -27,8 +27,8 @@ PLC_SStageSonic_:
                 dc.w    SpecialStageSonic_DplcFrame09-PLC_SStageSonic_
                 dc.w    SpecialStageSonic_DplcFrame0A-PLC_SStageSonic_
                 dc.w    SpecialStageSonic_DplcFrame0B-PLC_SStageSonic_
-SpecialStageSonic_EmptyMappingAndDplcFrame00:   dc.w    0
-SpecialStageSonic_MappingFrame01:               dc.w    2
+SStageSonic_EmptyMapDPLC00:         dc.w    0
+SpecialStageSonic_MappingFrame01:   dc.w    2
                 dc.b    $DD,  $F,   0,   0, $FF, $F0
                 dc.b    $FD,   8,   0, $10, $FF, $F2
 SpecialStageSonic_MappingFrame02:   dc.w    2

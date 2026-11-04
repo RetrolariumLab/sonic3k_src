@@ -915,9 +915,15 @@
       "commits": ["227dc5ddb069fd100e23b7c439701ffeff6e643b"]
     },
     {
-      "id": "current-shorten-06a-sonic-motion",
+      "id": "change-a88daa2e8b27",
       "kind": "source_or_tooling",
       "summary": "Shorten 279 Sonic movement state names with comments for the uncommon state and speed rules.",
+      "commits": ["a88daa2e8b27b30bea2985e454e70431e3ca64cd"]
+    },
+    {
+      "id": "current-shorten-06b-sonic-animation",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 106 Sonic animation and pattern labels with equivalent resource bindings.",
       "commits": ["release-commit"]
     }
   ],
