@@ -34,7 +34,7 @@ Difficulty_Sprites:
 ; ---------------------------------------------------------------------------
 
 loc_4E1AA:
-                bsr.w   BlueSphereInitializeNumericSpriteMappingsArtAndBounds
+                bsr.w   BlueSphere_InitNumericSprite
                 move.l  #loc_4E1B4,(a0)
 
 loc_4E1B4:

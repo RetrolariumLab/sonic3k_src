@@ -29,7 +29,7 @@ loc_43882:
                 jsr     (CreateChild1_Normal).l
 
 loc_43892:
-                bsr.w   GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   S3GumballMachine_UpdateDescent
                 lea     word_438F0(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
@@ -68,7 +68,7 @@ word_438F0:
 ; ---------------------------------------------------------------------------
 
 loc_438F8:
-                bsr.w   GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   S3GumballMachine_UpdateDescent
                 lea     byte_4401C(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
@@ -81,7 +81,7 @@ loc_4390C:
 ; ---------------------------------------------------------------------------
 
 loc_4391A:
-                bsr.w   GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   S3GumballMachine_UpdateDescent
                 btst    #1,$38(a0)
                 bne.s   loc_4392C
                 move.l  #loc_43892,(a0)
@@ -103,7 +103,7 @@ loc_43958:
                 btst    #1,$38(a0)
                 bne.s   loc_43970
                 lea     (SolidObjectFull).l,a1
-                bsr.w   GumballS3CallPlatformSolidRoutineWithFixedDimensions
+                bsr.w   S3GumballPlatform_CallSolidity
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -200,7 +200,7 @@ loc_43A94:
                 lea     ObjDat3_43FAC(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_43AA8,(a0)
-                bsr.w   GumballS3SelectWeightedDropAndLimitLifeRollPerMachine
+                bsr.w   S3GumballMachine_ChooseDrop
 
 loc_43AA8:
                 move.w  y_vel(a0),d0
@@ -223,7 +223,7 @@ loc_43AD6:
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
                 bhi.s   loc_43AE8
-                jsr     (GumballS3CheckNearbyPlayersAndDispatchItemReward).l
+                jsr     (S3Gumball_TryRewardNearbyPlayer).l
                 bne.s   loc_43B02
 
 loc_43AE8:

@@ -22,23 +22,23 @@ loc_49C8A:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d5
                 moveq   #p1_standing_bit,d6
-                bsr.s   PachinkoFlipperCaptureRollSlideAndRequestLaunch
+                bsr.s   PachinkoFlipper_UpdateRider
                 lea     $37(a0),a3
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d5
                 moveq   #p2_standing_bit,d6
-                bsr.s   PachinkoFlipperCaptureRollSlideAndRequestLaunch
+                bsr.s   PachinkoFlipper_UpdateRider
                 tst.b   $38(a0)
                 beq.s   loc_49CEC
                 clr.b   $38(a0)
                 lea     $36(a0),a3
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.w   PachinkoFlipperLaunchStandingPlayerByLeverPosition
+                bsr.w   PachinkoFlipper_LaunchRider
                 lea     $37(a0),a3
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.w   PachinkoFlipperLaunchStandingPlayerByLeverPosition
+                bsr.w   PachinkoFlipper_LaunchRider
                 move.b  #1,anim(a0)
 
 loc_49CEC:
@@ -48,7 +48,8 @@ loc_49CEC:
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoFlipperCaptureRollSlideAndRequestLaunch:
+; Capture a standing player in rolling object control and slide along the flipper. A fresh jump requests the shared launch
+PachinkoFlipper_UpdateRider:
                 tst.w   (Debug_placement_mode).w
                 bne.s   loc_49D48
                 move.b  (a3),d0
@@ -95,11 +96,12 @@ loc_49D60:
 loc_49D68:
                 move.b  #1,$38(a0)
                 bra.w   loc_49DE4
-; End of function PachinkoFlipperCaptureRollSlideAndRequestLaunch
+; End of function PachinkoFlipper_UpdateRider
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoFlipperLaunchStandingPlayerByLeverPosition:
+; Launch speed depends on the rider's position on the lever. Clear capture and restore routine 2
+PachinkoFlipper_LaunchRider:
                 bclr    d6,status(a0)
                 beq.w   locret_49D3A
                 move.w  x_pos(a1),d0
@@ -135,7 +137,7 @@ loc_49DBC:
                 move.b  #0,(a3)
                 moveq   #signextendB(sfx_Flipper),d0
                 jmp     (Play_SFX).l
-; End of function PachinkoFlipperLaunchStandingPlayerByLeverPosition
+; End of function PachinkoFlipper_LaunchRider
 
 ; ---------------------------------------------------------------------------
 

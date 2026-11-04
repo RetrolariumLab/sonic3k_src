@@ -132,7 +132,7 @@ loc_B4E0:
                 tst.w   d0
                 bne.s   loc_B4A8
                 move.w  #$E00,(Current_zone_and_act).w
-                jsr     SKCompInitializeRoundLivesScoresTimersAndFlags(pc)
+                jsr     SKComp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------

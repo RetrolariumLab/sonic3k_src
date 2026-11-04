@@ -324,7 +324,7 @@ loc_5AEA8:
 
 loc_5AED4:
                 movem.l d7-a0/a2-a3,-(sp)
-                jsr     (SKEndingDispatchCreditsInitDelayScrollAndFinish).l
+                jsr     (SKCredits_DispatchScrollState).l
                 movem.l (sp)+,d7-a0/a2-a3
                 rts
 ; ---------------------------------------------------------------------------

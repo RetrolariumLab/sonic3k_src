@@ -31,7 +31,7 @@ loc_4CEC8:
                 lea     aGetBlueSpheres(pc),a1
                 move.w  #$100,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,0),d6
-                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
+                jsr     (SKCredits_BuildAndUploadText).l
                 move    #$2300,sr
 
 loc_4CEF8:
@@ -186,7 +186,7 @@ loc_4D0DA:
                 move.l  (Blue_spheres_current_level).w,d1
                 addq.l  #1,d1
                 andi.l  #$7FFFFFF,d1
-                bsr.w   BlueSphereSetCenteredSuppressedNineDigitWidget
+                bsr.w   BlueSphere_CenterLevelDigits
                 move.b  #0,mapping_frame(a0)
 
 loc_4D0F0:
@@ -231,7 +231,8 @@ loc_4D12A:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereSetCenteredSuppressedNineDigitWidget:
+; Display the significant digits of the 27-bit level across nine digit objects and two padding objects
+BlueSphere_CenterLevelDigits:
                 andi.l  #$7FFFFFF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
@@ -288,11 +289,12 @@ loc_4D19A:
                 move.w  d2,x_pos(a1)
                 dbf     d4,loc_4D19A
                 rts
-; End of function BlueSphereSetCenteredSuppressedNineDigitWidget
+; End of function BlueSphere_CenterLevelDigits
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereSetCenteredTwoDigitDifficultyWidget:
+; Use the low byte to format up to two significant digits in the four-child widget
+BlueSphere_CenterDifficultyDigits:
                 andi.l  #$FF,d1
                 movea.l a0,a1
                 lea     next_object(a1),a1
@@ -349,7 +351,7 @@ loc_4D208:
                 move.w  d2,x_pos(a1)
                 dbf     d4,loc_4D208
                 rts
-; End of function BlueSphereSetCenteredTwoDigitDifficultyWidget
+; End of function BlueSphere_CenterDifficultyDigits
 
 ; ---------------------------------------------------------------------------
                 dc.l    1000000000

@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompInitializeRoundLivesScoresTimersAndFlags:
+; Initialize both players with three lives and a 5000-point next-life threshold. Clear round counters
+SKComp_InitRoundState:
                 move.w  #1,(Competition_mode).w
                 bra.s   loc_C110
 ; ---------------------------------------------------------------------------
@@ -28,7 +29,7 @@ loc_C110:
                 move.l  #5000,(Next_extra_life_score).w
                 move.l  #5000,(Next_extra_life_score_P2).w
                 rts
-; End of function SKCompInitializeRoundLivesScoresTimersAndFlags
+; End of function SKComp_InitRoundState
 
 ; =============== S U B R O U T I N E =======================================
 

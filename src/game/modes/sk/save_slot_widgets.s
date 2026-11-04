@@ -188,7 +188,7 @@ Obj_SaveScreen_NoSave_Slot:
 
 loc_D376:
                 move.w  (Dataselect_nosave_player).w,d0
-                jsr     SKSaveCycleNewGameCharacterOnUpDownUnlessCursorBusy(pc)
+                jsr     SKSave_TryCycleNewGameCharacter(pc)
                 move.w  d0,(Dataselect_nosave_player).w
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
@@ -227,7 +227,7 @@ loc_D3B0:
                 move.b  d0,$3B(a0)
                 move.w  6(a1),d0
                 lea     (Collected_emeralds_array).w,a2
-                jsr     SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts(pc)
+                jsr     SKSave_DecodeEmeraldStates(pc)
                 move.b  d1,$3C(a0)
                 move.b  d2,$3D(a0)
                 tst.b   9(a1)
@@ -372,7 +372,7 @@ loc_D540:
                 clr.l   (Collected_special_ring_array).w
 
 loc_D57A:
-                jsr     SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception(pc)
+                jsr     SKSave_MapProgressToZoneAct(pc)
                 move.w  d0,(Current_zone_and_act).w
                 move.w  d0,(Apparent_zone_and_act).w
                 moveq   #0,d0
@@ -384,7 +384,7 @@ loc_D57A:
                 move.b  d0,(Current_special_stage).w
                 move.w  6(a1),d0
                 lea     (Collected_emeralds_array).w,a2
-                jsr     SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts(pc)
+                jsr     SKSave_DecodeEmeraldStates(pc)
                 move.b  d1,(Chaos_emerald_count).w
                 move.b  d2,(Super_emerald_count).w
                 move.l  a1,(Save_pointer).w
@@ -446,7 +446,7 @@ loc_D5FE:
 
 loc_D67A:
                 move.w  $34(a0),d0
-                jsr     SKSaveCycleNewGameCharacterOnUpDownUnlessCursorBusy(pc)
+                jsr     SKSave_TryCycleNewGameCharacter(pc)
                 move.w  d0,$34(a0)
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
@@ -473,7 +473,8 @@ loc_D6CA:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveCycleNewGameCharacterOnUpDownUnlessCursorBusy:
+; Use fresh Up or Down while cursor motion is idle
+SKSave_TryCycleNewGameCharacter:
                 moveq   #0,d2
                 tst.w   (Player_2+objoff_30).w
                 bne.s   loc_D6FA
@@ -506,6 +507,6 @@ loc_D6FA:
 
 locret_D70A:
                 rts
-; End of function SKSaveCycleNewGameCharacterOnUpDownUnlessCursorBusy
+; End of function SKSave_TryCycleNewGameCharacter
 
 ; ---------------------------------------------------------------------------

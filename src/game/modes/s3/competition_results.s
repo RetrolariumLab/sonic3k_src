@@ -39,7 +39,7 @@ Competition_Results:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_AE06(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap(pc)
+                jsr     S3Comp_BuildRaceResults(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -123,7 +123,7 @@ loc_AB62:
 
 loc_AB8A:
                 move.l  (_unkEE98).w,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
 
 loc_AB92:
                 tst.w   (Events_bg+$16).w
@@ -210,19 +210,20 @@ loc_AC2C:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap:
+; Draw both players' five-zone results and totals, count per-zone wins and prepare the fastest-total blink palette
+S3Comp_BuildRaceResults:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.w  #$C15A,d7
                 jsr     S3CompDrawFiveSequentialTimeRows(pc)
                 move.w  #$C7DA,d7
                 jsr     S3CompDrawFiveSequentialTimeRows(pc)
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
-                jsr     S3CompSumFiveBinaryMinuteSecondHundredthTimes(pc)
+                jsr     S3Comp_SumFivePackedTimes(pc)
                 move.w  #$C65A,d7
                 move.l  d6,(_unkEE98).w
                 move.w  d7,(_unkEEA0).w
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
-                jsr     S3CompSumFiveBinaryMinuteSecondHundredthTimes(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
+                jsr     S3Comp_SumFivePackedTimes(pc)
                 move.w  #$CCDA,d7
                 cmp.l   (_unkEE98).w,d6
                 bhi.s   loc_AC92
@@ -236,7 +237,7 @@ loc_AC8A:
                 move.w  d7,(_unkEEA0).w
 
 loc_AC92:
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 clr.w   (_unkEEA2).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
@@ -277,7 +278,7 @@ loc_ACD4:
                 move.w  (_unkEEA0).w,d7
                 beq.s   locret_AD26
                 move.l  (_unkEE98).w,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
                 moveq   #$10-1,d0
@@ -291,7 +292,7 @@ loc_AD16:
 
 locret_AD26:
                 rts
-; End of function S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap
+; End of function S3Comp_BuildRaceResults
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -301,7 +302,7 @@ S3CompDrawFiveSequentialTimeRows:
 loc_AD2A:
                 move.w  d0,-(sp)
                 move.l  (a0)+,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 addi.w  #$100,d7
                 move.w  (sp)+,d0
                 dbf     d0,loc_AD2A
@@ -310,7 +311,8 @@ loc_AD2A:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompSumFiveBinaryMinuteSecondHundredthTimes:
+; Carry at 100 hundredths and 60 seconds. Cap the minutes at 99
+S3Comp_SumFivePackedTimes:
                 clr.l   (_unkEF40_1).w
                 moveq   #5-1,d7
 
@@ -342,7 +344,7 @@ loc_AD7A:
                 dbf     d7,loc_AD44
                 move.l  (_unkEF40_1).w,d6
                 rts
-; End of function S3CompSumFiveBinaryMinuteSecondHundredthTimes
+; End of function S3Comp_SumFivePackedTimes
 
 ; ---------------------------------------------------------------------------
 Pal_CompetitionResults:

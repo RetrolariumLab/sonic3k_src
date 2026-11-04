@@ -42,15 +42,15 @@ SaveScreen:
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),d0
                 jsr     (Eni_Decomp).l
                 lea     word_BD16(pc),a0
-                jsr     S3SaveCopyListedMapRectanglesToWideVDPPlane(pc)
+                jsr     S3Save_UploadMapRectangles(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Save_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_S22POptions).l,a0
                 jsr     (Nem_Decomp).l
                 lea     NoSave_Delete_Text(pc),a1
                 move.w  #VRAM_Plane_A_Name_Table+$D06,d0
-                jsr     S3SaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     S3Save_WriteEncodedLabel(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$DB8,d0
-                jsr     S3SaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     S3Save_WriteEncodedLabel(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -150,23 +150,25 @@ loc_BAD0:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3SaveCopyListedMapRectanglesToWideVDPPlane:
+; Read the count-prefixed rectangle list and use a 128-cell-wide plane pitch
+S3Save_UploadMapRectangles:
                 move.w  (a0)+,d7
 
                 .loop:
                 movea.l (a0)+,a1
                 move.w  (a0)+,d0
-                bsr.s   S3SaveConvertVRAMWordAddressToWriteCommand
+                bsr.s   S3Save_MakeVRAMWriteCommand
                 move.w  (a0)+,d1
                 move.w  (a0)+,d2
                 jsr     (Plane_Map_To_VRAM_2).l
                 dbf     d7,.loop
                 rts
-; End of function S3SaveCopyListedMapRectanglesToWideVDPPlane
+; End of function S3Save_UploadMapRectangles
 
 ; =============== S U B R O U T I N E =======================================
 
-S3SaveConvertVRAMWordAddressToWriteCommand:
+; The low word of d0 holds the VRAM byte address. Return the full VDP command in d0
+S3Save_MakeVRAMWriteCommand:
                 swap    d0
                 clr.w   d0
                 swap    d0
@@ -175,7 +177,7 @@ S3SaveConvertVRAMWordAddressToWriteCommand:
                 ori.w   #$4000,d0
                 swap    d0
                 rts
-; End of function S3SaveConvertVRAMWordAddressToWriteCommand
+; End of function S3Save_MakeVRAMWriteCommand
 
 ; ---------------------------------------------------------------------------
 ; selects whether to display the static screen, or new screen
@@ -199,7 +201,7 @@ loc_BB26:
 
 loc_BB32:
                 move.w  d7,d0
-                bsr.s   S3SaveConvertVRAMWordAddressToWriteCommand
+                bsr.s   S3Save_MakeVRAMWriteCommand
                 moveq   #10-1,d1
                 moveq   #7-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
@@ -214,7 +216,7 @@ loc_BB32:
 loc_BB58:
                 move.w  d7,d0
                 subq.w  #2,d0
-                jsr     S3SaveConvertVRAMWordAddressToWriteCommand(pc)
+                jsr     S3Save_MakeVRAMWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Misc+$12,0,1),(a6)
                 lea     BlankSave_Text(pc),a1
@@ -226,7 +228,7 @@ loc_BB58:
                 lea     D_S_Zone_Text(pc),a1
                 move.w  d7,d0
                 subq.w  #2,d0
-                jsr     S3SaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     S3Save_WriteEncodedLabel(pc)
                 move.w  objoff_36(a3),d0
                 move.b  DataSelectS3_ZoneNums(pc,d0.w),d0
                 addi.w  #make_art_tile(ArtTile_Save_Text,1,1),d0
@@ -236,7 +238,7 @@ loc_BB58:
 
 loc_BB98:
                 move.w  d7,d0
-                jsr     S3SaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     S3Save_WriteEncodedLabel(pc)
 
 loc_BB9E:
                 addi.w  #$1A,d7

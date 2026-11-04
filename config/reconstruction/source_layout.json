@@ -3617,7 +3617,7 @@
       "responsibility": "Blue Sphere level and serial-code entry widgets, digit state and conversion helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 328,
+      "physical_lines": 330,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -3702,7 +3702,7 @@
       "responsibility": "Blue Sphere menu input, stage selection, stage-number widgets and numeric encoding helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 442,
+      "physical_lines": 444,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -3785,7 +3785,7 @@
       "responsibility": "Blue Sphere results mode, display setup, pattern-load resources and result text helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 282,
+      "physical_lines": 283,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -3938,7 +3938,7 @@
       "responsibility": "Blue Sphere title mode, display setup, serial and date text and title helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 346,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -4013,7 +4013,7 @@
       "responsibility": "Rotating slot bonus layout rendering, transformed tile lookup, collision and private mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 494,
+      "physical_lines": 498,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -4043,7 +4043,7 @@
       "responsibility": "Rotating slot bonus Sonic lifecycle, movement, collision, gravity and cage sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 895,
+      "physical_lines": 903,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -4078,7 +4078,7 @@
       "responsibility": "Rotating slot option cycling, outcome state, player awards, effects and shared helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 614,
+      "physical_lines": 619,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -10053,7 +10053,7 @@
       "responsibility": "Ending credit progression, character-specific pose graphics and scrolling tile transfer helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 409,
+      "physical_lines": 413,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -10203,7 +10203,7 @@
       "responsibility": "Choose credit scroll speed and delay from product, region, character and emerald completion state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 46,
+      "physical_lines": 47,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -10383,7 +10383,7 @@
       "responsibility": "Competition results initialization, win and loss displays, totals and results resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 418,
+      "physical_lines": 420,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -10423,7 +10423,7 @@
       "responsibility": "Competition zone selection, completion display, menu controls and zone preview resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 603,
+      "physical_lines": 606,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -10503,7 +10503,7 @@
       "responsibility": "Continue screen mode, character and icon actors, countdown display and private art resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 544,
+      "physical_lines": 547,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -10543,7 +10543,7 @@
       "responsibility": "Ending and credits mode, scene coordination, logo and text actors and text drawing helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 632,
+      "physical_lines": 634,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -10663,7 +10663,7 @@
       "responsibility": "Preserved options screen, sound test, player choices and text pointer tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 307,
+      "physical_lines": 308,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -10828,7 +10828,7 @@
       "responsibility": "Save selection mode initialization, active loop, navigation and product-specific save-slot presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 258,
+      "physical_lines": 260,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -10913,7 +10913,7 @@
       "responsibility": "Save-slot emerald decoration, erase-state transitions and slot icon art loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 286,
+      "physical_lines": 288,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -10998,7 +10998,7 @@
       "responsibility": "Save-slot selector, empty and populated slot displays, level icons and child sprite setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 468,
+      "physical_lines": 469,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -11038,7 +11038,7 @@
       "responsibility": "Competition time-attack record selection, record display, rank and zone-name resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 307,
+      "physical_lines": 308,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -11263,7 +11263,7 @@
       "responsibility": "Competition results initialization, win and loss displays, totals and results resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 394,
+      "physical_lines": 396,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11293,7 +11293,7 @@
       "responsibility": "Competition zone selection, completion display, menu controls and zone preview resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 600,
+      "physical_lines": 603,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11418,7 +11418,7 @@
       "responsibility": "Save selection mode initialization, active loop, navigation and product-specific save-slot presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 424,
+      "physical_lines": 427,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11478,7 +11478,7 @@
       "responsibility": "Save-slot emerald decoration, erase-state transitions and slot icon art loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 423,
+      "physical_lines": 427,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11538,7 +11538,7 @@
       "responsibility": "Save-slot selector, empty and populated slot displays, level icons and child sprite setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 511,
+      "physical_lines": 512,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11728,7 +11728,7 @@
       "responsibility": "Competition time-attack record selection, record display, rank and zone-name resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 280,
+      "physical_lines": 281,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11853,7 +11853,7 @@
       "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 267,
+      "physical_lines": 268,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -11898,7 +11898,7 @@
       "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 484,
+      "physical_lines": 485,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -12363,7 +12363,7 @@
       "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 399,
+      "physical_lines": 400,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -13158,7 +13158,7 @@
       "responsibility": "Projected tail and shadow rendering, scalar setup, stage motion and layout-space response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 431,
+      "physical_lines": 432,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "sonic3k.s",
@@ -13590,7 +13590,7 @@
       "responsibility": "Gumball machine item motion, collision, spawning and state helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 424,
+      "physical_lines": 432,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -13695,7 +13695,7 @@
       "responsibility": "Pachinko energy trap capture, player response and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 137,
+      "physical_lines": 138,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",
@@ -13730,7 +13730,7 @@
       "responsibility": "Pachinko flipper timing, player contact, launch and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 199,
+      "physical_lines": 201,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",
@@ -13855,7 +13855,7 @@
       "responsibility": "Pachinko magnet orb player attraction, capture, motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 204,
+      "physical_lines": 206,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",
@@ -13970,7 +13970,7 @@
       "responsibility": "Gumball triangle bumpers, player collision, bounce response and shared bonus resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 557,
+      "physical_lines": 565,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -14095,7 +14095,7 @@
       "responsibility": "Gumball item collection, effect selection, player response and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 115,
+      "physical_lines": 117,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",

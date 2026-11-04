@@ -264,13 +264,14 @@ OptionScreen_HexDumpSoundTest:
                 move.w  (Sound_test_sound).w,d1
                 move.b  d1,d2
                 lsr.b   #4,d1
-                bsr.s   S3LegacyOptionsAppendHexNibbleTilePreservingAttributes
+                bsr.s   S3LegacyOptions_AppendHexTile
                 move.b  d2,d1
 ; End of function OptionScreen_HexDumpSoundTest
 
 ; =============== S U B R O U T I N E =======================================
 
-S3LegacyOptionsAppendHexNibbleTilePreservingAttributes:
+; Keep the incoming tile attribute high byte
+S3LegacyOptions_AppendHexTile:
                 andi.w  #$F,d1
                 cmpi.b  #$A,d1
                 bcs.s   loc_6836
@@ -281,7 +282,7 @@ loc_6836:
                 move.b  d1,d0
                 move.w  d0,(a2)+
                 rts
-; End of function S3LegacyOptionsAppendHexNibbleTilePreservingAttributes
+; End of function S3LegacyOptions_AppendHexTile
 
 ; ---------------------------------------------------------------------------
 S2OptScrBoxData:

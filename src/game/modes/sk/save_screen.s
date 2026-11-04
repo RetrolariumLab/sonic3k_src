@@ -42,17 +42,17 @@ SaveScreen:
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),d0
                 jsr     (Eni_Decomp).l
                 lea     word_CD58(pc),a0
-                jsr     SKSaveCopyListedMapRectanglesToWideVDPPlane(pc)
+                jsr     SKSave_UploadMapRectangles(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Save_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_S22POptions).l,a0
                 jsr     (Nem_Decomp).l
                 lea     NoSave_Delete_Text(pc),a1
                 move.w  #VRAM_Plane_A_Name_Table+$C06,d0
-                jsr     SKSaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     SKSave_WriteEncodedLabel(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$C0C,d0
-                jsr     SKSaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     SKSave_WriteEncodedLabel(pc)
                 move.w  #VRAM_Plane_A_Name_Table+$CEC,d0
-                jsr     SKSaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     SKSave_WriteEncodedLabel(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -184,23 +184,25 @@ loc_C856:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveCopyListedMapRectanglesToWideVDPPlane:
+; Read the count-prefixed rectangle list and use a 128-cell-wide plane pitch
+SKSave_UploadMapRectangles:
                 move.w  (a0)+,d7
 
                 .loop:
                 movea.l (a0)+,a1
                 move.w  (a0)+,d0
-                bsr.s   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.s   SKSave_MakeVRAMWriteCommand
                 move.w  (a0)+,d1
                 move.w  (a0)+,d2
                 jsr     (Plane_Map_To_VRAM_2).l
                 dbf     d7,.loop
                 rts
-; End of function SKSaveCopyListedMapRectanglesToWideVDPPlane
+; End of function SKSave_UploadMapRectangles
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveConvertVRAMWordAddressToWriteCommand:
+; The low word of d0 holds the VRAM byte address. Return the full VDP command in d0
+SKSave_MakeVRAMWriteCommand:
                 swap    d0
                 clr.w   d0
                 swap    d0
@@ -209,7 +211,7 @@ SKSaveConvertVRAMWordAddressToWriteCommand:
                 ori.w   #$4000,d0
                 swap    d0
                 rts
-; End of function SKSaveConvertVRAMWordAddressToWriteCommand
+; End of function SKSave_MakeVRAMWriteCommand
 
 ; ---------------------------------------------------------------------------
 ; selects whether to display the static screen, or new screen
@@ -234,7 +236,7 @@ loc_C8B2:
 
 loc_C8BE:
                 move.w  d7,d0
-                bsr.s   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.s   SKSave_MakeVRAMWriteCommand
                 moveq   #10-1,d1
                 moveq   #7-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
@@ -249,7 +251,7 @@ loc_C8BE:
 loc_C8E6:
                 move.w  d7,d0
                 subq.w  #2,d0
-                jsr     SKSaveConvertVRAMWordAddressToWriteCommand(pc)
+                jsr     SKSave_MakeVRAMWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Misc+$12,0,1),(a6)
                 lea     BlankSave_Text(pc),a1
@@ -266,7 +268,7 @@ loc_C912:
                 lea     D_S_Zone_Text(pc),a1
                 move.w  d7,d0
                 subq.w  #2,d0
-                jsr     SKSaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     SKSave_WriteEncodedLabel(pc)
                 move.w  objoff_36(a3),d0
                 add.w   d0,d0
                 moveq   #0,d1
@@ -290,7 +292,7 @@ loc_C936:
 
 loc_C946:
                 move.w  d7,d0
-                jsr     SKSaveWriteEncodedLabelTilesUntilNegativeTerminator(pc)
+                jsr     SKSave_WriteEncodedLabel(pc)
 
 loc_C94C:
                 addi.w  #$1A,d7
@@ -341,7 +343,7 @@ loc_C99A:
                 movea.l a2,a1
                 adda.w  d0,a1
                 move.w  d7,d0
-                bsr.w   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.w   SKSave_MakeVRAMWriteCommand
                 moveq   #3-1,d1
                 moveq   #5-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
@@ -350,7 +352,7 @@ loc_C99A:
                 lea     word_DB08(pc),a1
                 move.w  d7,d0
                 addq.w  #6,d0
-                bsr.w   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.w   SKSave_MakeVRAMWriteCommand
                 moveq   #2-1,d1
                 moveq   #5-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
@@ -359,18 +361,18 @@ loc_C99A:
 
 loc_C9CC:
                 move.b  objoff_3E(a3),d0
-                jsr     SKSaveBuildTwoDigitLifeContinueMapWithBlankTens(pc)
+                jsr     SKSave_BuildLifeContinueDigitMap(pc)
                 move.w  d7,d0
                 addq.w  #6,d0
-                bsr.w   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.w   SKSave_MakeVRAMWriteCommand
                 moveq   #2-1,d1
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
                 move.b  objoff_3F(a3),d0
-                jsr     SKSaveBuildTwoDigitLifeContinueMapWithBlankTens(pc)
+                jsr     SKSave_BuildLifeContinueDigitMap(pc)
                 move.w  d7,d0
                 addi.w  #$306,d0
-                bsr.w   SKSaveConvertVRAMWordAddressToWriteCommand
+                bsr.w   SKSave_MakeVRAMWriteCommand
                 moveq   #2-1,d1
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
@@ -384,7 +386,8 @@ loc_CA02:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveBuildTwoDigitLifeContinueMapWithBlankTens:
+; Convert the binary count to two two-row digits, blanking zero tens
+SKSave_BuildLifeContinueDigitMap:
                 moveq   #0,d1
 
 loc_CA16:
@@ -406,7 +409,7 @@ loc_CA2E:
                 move.w  DataSelect_LifeContinue_Nums(pc,d0.w),2(a1)
                 move.w  DataSelect_LifeContinue_Nums+2(pc,d0.w),6(a1)
                 rts
-; End of function SKSaveBuildTwoDigitLifeContinueMapWithBlankTens
+; End of function SKSave_BuildLifeContinueDigitMap
 
 ; ---------------------------------------------------------------------------
 ; word_CA4C

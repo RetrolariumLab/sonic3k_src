@@ -39,7 +39,7 @@ Competition_Results:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_BBAC(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap(pc)
+                jsr     SKComp_BuildRaceResults(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
@@ -123,7 +123,7 @@ loc_B922:
 
 loc_B94A:
                 move.l  (_unkEE98).w,d6
-                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     SKComp_DrawPackedTime(pc)
 
 loc_B952:
                 tst.w   (Events_bg+$16).w
@@ -210,19 +210,20 @@ loc_B9EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap:
+; Draw both players' five-zone results and totals, count per-zone wins and prepare the fastest-total blink palette
+SKComp_BuildRaceResults:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.w  #$C15A,d7
                 jsr     SKCompDrawFiveSequentialTimeRows(pc)
                 move.w  #$C7DA,d7
                 jsr     SKCompDrawFiveSequentialTimeRows(pc)
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
-                jsr     SKCompSumFiveBinaryMinuteSecondHundredthTimes(pc)
+                jsr     SKComp_SumFivePackedTimes(pc)
                 move.w  #$C65A,d7
                 move.l  d6,(_unkEE98).w
                 move.w  d7,(_unkEEA0).w
-                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
-                jsr     SKCompSumFiveBinaryMinuteSecondHundredthTimes(pc)
+                jsr     SKComp_DrawPackedTime(pc)
+                jsr     SKComp_SumFivePackedTimes(pc)
                 move.w  #$CCDA,d7
                 cmp.l   (_unkEE98).w,d6
                 bhi.s   loc_BA52
@@ -236,7 +237,7 @@ loc_BA4A:
                 move.w  d7,(_unkEEA0).w
 
 loc_BA52:
-                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     SKComp_DrawPackedTime(pc)
                 clr.w   (_unkEEA2).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
@@ -277,7 +278,7 @@ loc_BA9A:
                 move.w  (_unkEEA0).w,d7
                 beq.s   locret_BAEC
                 move.l  (_unkEE98).w,d6
-                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     SKComp_DrawPackedTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
                 moveq   #$10-1,d0
@@ -291,7 +292,7 @@ loc_BADC:
 
 locret_BAEC:
                 rts
-; End of function SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap
+; End of function SKComp_BuildRaceResults
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -301,7 +302,7 @@ SKCompDrawFiveSequentialTimeRows:
 loc_BAF0:
                 move.w  d0,-(sp)
                 move.l  (a0)+,d6
-                jsr     SKCompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     SKComp_DrawPackedTime(pc)
                 addi.w  #$100,d7
                 move.w  (sp)+,d0
                 dbf     d0,loc_BAF0
@@ -310,7 +311,8 @@ loc_BAF0:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompSumFiveBinaryMinuteSecondHundredthTimes:
+; Carry at 100 hundredths and 60 seconds. Cap the minutes at 99
+SKComp_SumFivePackedTimes:
                 clr.l   (_unkEF40_1).w
                 moveq   #5-1,d7
 
@@ -342,7 +344,7 @@ loc_BB40:
                 dbf     d7,loc_BB0A
                 move.l  (_unkEF40_1).w,d6
                 rts
-; End of function SKCompSumFiveBinaryMinuteSecondHundredthTimes
+; End of function SKComp_SumFivePackedTimes
 
 ; ---------------------------------------------------------------------------
 ObjDat_BB4A:

@@ -75,7 +75,7 @@ loc_C5AA:
 
 loc_C5D4:
                 jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
-                jsr     S3SaveEraseCycleChildFramesEightThroughEleven(pc)
+                jsr     S3SaveErase_AnimateChild(pc)
                 tst.w   (Player_2+object_control).w
                 bne.s   loc_C624
                 move.b  (Ctrl_1_pressed).w,d0
@@ -140,7 +140,7 @@ loc_C688:
 
 loc_C68C:
                 jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
-                jsr     S3SaveEraseCycleChildFramesEightThroughEleven(pc)
+                jsr     S3SaveErase_AnimateChild(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
                 bne.s   loc_C6A6
                 move.b  #$C,sub2_mapframe(a0)
@@ -204,7 +204,8 @@ byte_C716:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3SaveEraseCycleChildFramesEightThroughEleven:
+; Cycle frames 8 through 11 once every four calls
+S3SaveErase_AnimateChild:
                 subq.b  #1,$25(a0)
                 bpl.s   locret_C744
                 move.b  #3,$25(a0)
@@ -216,7 +217,7 @@ S3SaveEraseCycleChildFramesEightThroughEleven:
 
 locret_C744:
                 rts
-; End of function S3SaveEraseCycleChildFramesEightThroughEleven
+; End of function S3SaveErase_AnimateChild
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -257,9 +258,10 @@ loc_C78C:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3SaveWriteEncodedLabelTilesUntilNegativeTerminator:
+; A zero byte writes a blank tile. Any negative byte ends the label
+S3Save_WriteEncodedLabel:
                 lea     (VDP_data_port).l,a6
-                jsr     S3SaveConvertVRAMWordAddressToWriteCommand(pc)
+                jsr     S3Save_MakeVRAMWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
@@ -281,6 +283,6 @@ loc_C7B2:
 
 locret_C7BC:
                 rts
-; End of function S3SaveWriteEncodedLabelTilesUntilNegativeTerminator
+; End of function S3Save_WriteEncodedLabel
 
 ; ---------------------------------------------------------------------------

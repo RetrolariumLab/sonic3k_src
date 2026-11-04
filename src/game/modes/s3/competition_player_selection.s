@@ -132,7 +132,7 @@ loc_A376:
                 tst.w   d0
                 bne.s   loc_A33E
                 move.w  #$E00,(Current_zone_and_act).w
-                jsr     S3CompInitializeRoundLivesScoresTimersAndFlags(pc)
+                jsr     S3Comp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------

@@ -44,7 +44,7 @@ TimeAttack_Records:
                 moveq   #13-1,d1
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM).l
-                jsr     S3CompDrawSixLapTimesAndThreeSavedTopRecords(pc)
+                jsr     S3Comp_DrawLapTimesAndTopRecords(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Competition_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_ContinueDigits).l,a0
                 jsr     (Nem_Decomp).l
@@ -148,7 +148,7 @@ loc_B16A:
 
 loc_B192:
                 move.l  (_unkEE98).w,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
 
 loc_B19A:
                 tst.w   (Events_bg+$16).w
@@ -172,7 +172,8 @@ loc_B1B8:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompDrawSixLapTimesAndThreeSavedTopRecords:
+; Draw six current lap times and three saved records for the selected zone
+S3Comp_DrawLapTimesAndTopRecords:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a0
                 move.w  #VRAM_Plane_A_Name_Table+$15A,d7
                 moveq   #6-1,d0
@@ -185,16 +186,16 @@ S3CompDrawSixLapTimesAndThreeSavedTopRecords:
                 adda.w  d0,a0
                 move.w  #VRAM_Plane_A_Name_Table+$95A,d7
                 move.l  (a0)+,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 addi.w  #$180,d7
                 move.l  (a0)+,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 addi.w  #$180,d7
                 move.l  (a0)+,d6
-                jsr     S3CompFormatAndUploadMinuteSecondHundredthTime(pc)
+                jsr     S3Comp_DrawPackedTime(pc)
                 clr.w   (_unkEEA0).w
                 rts
-; End of function S3CompDrawSixLapTimesAndThreeSavedTopRecords
+; End of function S3Comp_DrawLapTimesAndTopRecords
 
 ; ---------------------------------------------------------------------------
 

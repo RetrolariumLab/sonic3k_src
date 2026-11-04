@@ -73,14 +73,15 @@ loc_49FAE:
                 jsr     (Play_SFX).l
 
 loc_49FD6:
-                bsr.s   PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
+                bsr.s   PachinkoTrap_HoldAndReturnPlayer
                 lea     (Player_2).w,a1
-                bsr.s   PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
+                bsr.s   PachinkoTrap_HoldAndReturnPlayer
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown:
+; Hold players at the barrier. Player 1 can restore the main level after the countdown or immediately above the top boundary
+PachinkoTrap_HoldAndReturnPlayer:
                 move.w  y_pos(a1),d0
                 cmpi.w  #-$20,d0
                 bge.s   loc_49FFC
@@ -124,7 +125,7 @@ loc_4A024:
 
 locret_4A078:
                 rts
-; End of function PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown
+; End of function PachinkoTrap_HoldAndReturnPlayer
 
 ; ---------------------------------------------------------------------------
 

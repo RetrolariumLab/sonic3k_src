@@ -41,7 +41,7 @@ loc_3F0F4:
                 move.l  (a1)+,(a2)+
                 dbf     d6,loc_3F0F4
                 lea     aCONTINUE(pc),a1
-                jsr     S3CreditsDrawCountedTextPageAndRequestPlaneUpload(pc)
+                jsr     S3Credits_DrawPageAndQueueUpload(pc)
                 move.l  #Obj_Continue_SonicWTails,(Player_1).w
                 move.l  #Obj_Continue_TailsWSonic,(Player_2).w
                 move.l  #loc_3F47E,(Reserved_object_3).w
@@ -49,7 +49,7 @@ loc_3F0F4:
                 move.l  #loc_3F1D4,(a1)
                 move.w  a1,(_unkFAA4).w
                 move.l  #loc_3F500,(Dynamic_object_RAM+object_size).w
-                bsr.w   S3ContinueClampCountAndCreateRemainingLifeIcons
+                bsr.w   S3Continue_InitRemainingLifeIcons
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 move.b  #VInt_ID_18,(V_int_routine).w
@@ -110,7 +110,7 @@ loc_3F1E4:
                 subq.b  #1,d0
                 bmi.s   loc_3F212
                 move.b  d0,(_unkFA84).w
-                bsr.w   S3ContinueWriteTwoNibbleTimerTileMapAndRequestUpload
+                bsr.w   S3Continue_DrawTimerAndQueueUpload
 
 locret_3F210:
                 rts
@@ -412,7 +412,7 @@ loc_3F53E:
                 bsr.w   S3ContinuePositionIconByEvenSubtypeTable
                 move.w  #$D8,y_pos(a0)
                 move.l  #loc_3F572,(a0)
-                bsr.w   S3ContinueSelectCharacterIconFramesAndTailsChild
+                bsr.w   S3Continue_SelectCharacterIcon
 
 loc_3F572:
                 moveq   #0,d0
@@ -441,7 +441,8 @@ loc_3F5B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3ContinueWriteTwoNibbleTimerTileMapAndRequestUpload:
+; Use the two countdown nibbles as two-tile-high digits and request a V-int upload
+S3Continue_DrawTimerAndQueueUpload:
                 move.b  (_unkFA84).w,d0
                 move.b  d0,d1
                 andi.w  #$F0,d0
@@ -460,11 +461,12 @@ S3ContinueWriteTwoNibbleTimerTileMapAndRequestUpload:
                 move.w  d1,$82(a1)
                 bset    #0,(_unkFA88).w
                 rts
-; End of function S3ContinueWriteTwoNibbleTimerTileMapAndRequestUpload
+; End of function S3Continue_DrawTimerAndQueueUpload
 
 ; =============== S U B R O U T I N E =======================================
 
-S3ContinueClampCountAndCreateRemainingLifeIcons:
+; Clamp the count to 1 through 10 and initialize count minus one supplementary icons
+S3Continue_InitRemainingLifeIcons:
                 moveq   #0,d0
                 move.b  (Continue_count).w,d0
                 beq.s   loc_3F60C
@@ -487,7 +489,7 @@ loc_3F618:
                 addq.w  #2,d1
                 lea     next_object(a1),a1
                 bra.s   loc_3F618
-; End of function S3ContinueClampCountAndCreateRemainingLifeIcons
+; End of function S3Continue_InitRemainingLifeIcons
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -512,7 +514,8 @@ word_3F63E:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3ContinueSelectCharacterIconFramesAndTailsChild:
+; Select the two-frame sequence by player mode and create a Tails child in mode 2
+S3Continue_SelectCharacterIcon:
                 move.w  (Player_mode).w,d4
                 cmpi.b  #2,d4
                 bne.s   loc_3F664
@@ -523,7 +526,7 @@ loc_3F664:
                 lsl.w   #2,d4
                 move.l  off_3F674(pc,d4.w),$30(a0)
                 rts
-; End of function S3ContinueSelectCharacterIconFramesAndTailsChild
+; End of function S3Continue_SelectCharacterIcon
 
 ; ---------------------------------------------------------------------------
 ChildObjDat_3F66E:

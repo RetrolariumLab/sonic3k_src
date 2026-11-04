@@ -84,7 +84,7 @@ loc_D7C0:
 
 loc_D7EA:
                 jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
-                jsr     SKSaveEraseCycleChildFramesEightThroughEleven(pc)
+                jsr     SKSaveErase_AnimateChild(pc)
                 tst.w   (Player_2+object_control).w
                 bne.s   loc_D83C
                 move.b  (Ctrl_1_pressed).w,d0
@@ -149,7 +149,7 @@ loc_D8A0:
 
 loc_D8A4:
                 jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
-                jsr     SKSaveEraseCycleChildFramesEightThroughEleven(pc)
+                jsr     SKSaveErase_AnimateChild(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
                 bne.s   loc_D8BE
                 move.b  #$C,sub2_mapframe(a0)
@@ -215,7 +215,8 @@ byte_D93A:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveEraseCycleChildFramesEightThroughEleven:
+; Cycle frames 8 through 11 once every four calls
+SKSaveErase_AnimateChild:
                 subq.b  #1,$25(a0)
                 bpl.s   locret_D968
                 move.b  #3,$25(a0)
@@ -227,7 +228,7 @@ SKSaveEraseCycleChildFramesEightThroughEleven:
 
 locret_D968:
                 rts
-; End of function SKSaveEraseCycleChildFramesEightThroughEleven
+; End of function SKSaveErase_AnimateChild
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -295,9 +296,10 @@ loc_D9EC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveWriteEncodedLabelTilesUntilNegativeTerminator:
+; A zero byte writes a blank tile. Any negative byte ends the label
+SKSave_WriteEncodedLabel:
                 lea     (VDP_data_port).l,a6
-                jsr     SKSaveConvertVRAMWordAddressToWriteCommand(pc)
+                jsr     SKSave_MakeVRAMWriteCommand(pc)
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
@@ -319,11 +321,12 @@ loc_DA12:
 
 locret_DA1C:
                 rts
-; End of function SKSaveWriteEncodedLabelTilesUntilNegativeTerminator
+; End of function SKSave_WriteEncodedLabel
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts:
+; Expand seven two-bit entries and derive the Chaos and Super Emerald counts and conversion flag
+SKSave_DecodeEmeraldStates:
                 clr.b   (Emeralds_converted_flag).w
                 moveq   #0,d1
                 moveq   #0,d2
@@ -348,11 +351,12 @@ loc_DA3E:
 loc_DA48:
                 dbf     d3,loc_DA28
                 rts
-; End of function SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts
+; End of function SKSave_DecodeEmeraldStates
 
 ; =============== S U B R O U T I N E =======================================
 
-SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception:
+; Knuckles has a separate Sky Sanctuary Act 2 result for progress index $B
+SKSave_MapProgressToZoneAct:
                 cmpi.w  #3,$34(a0)
                 bne.s   loc_DA62
                 cmpi.b  #$B,d0
@@ -368,7 +372,7 @@ loc_DA62:
 
 locret_DA6C:
                 rts
-; End of function SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception
+; End of function SKSave_MapProgressToZoneAct
 
 ; ---------------------------------------------------------------------------
 LevelList_DA6E:

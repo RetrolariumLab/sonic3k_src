@@ -975,9 +975,15 @@
       "commits": ["58f70dc9880933601187cf9bdbcb0d2b2596e91e"]
     },
     {
-      "id": "current-shorten-L04-competition",
+      "id": "change-a11f9d81279f",
       "kind": "source_or_tooling",
       "summary": "Shorten 40 earlier Competition race, timing and item procedure names.",
+      "commits": ["a11f9d81279f59107f3948ea5f158e3f2ade8079"]
+    },
+    {
+      "id": "current-shorten-L05-modes",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 97 earlier menu, credits and bonus-stage procedure names.",
       "commits": ["release-commit"]
     }
   ],

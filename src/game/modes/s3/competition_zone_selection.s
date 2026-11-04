@@ -50,10 +50,10 @@ Competition_LevelSelect:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_CompetitionLevelSelect(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     S3CompClampSelectedZoneToVisibleScrollRow(pc)
+                jsr     S3Comp_GetZoneWindowRow(pc)
                 mulu.w  #$48,d0
                 move.w  d0,(V_scroll_value).w
-                jsr     S3CompClearCharacterSelectAreasAtZoneWindowRow(pc)
+                jsr     S3Comp_ClearCharacterSelectAreas(pc)
                 jsr     S3CompDrawFiveZoneBestTimesInMenuOrder(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
@@ -257,7 +257,7 @@ loc_9D5C:
                 move.b  (Competition_menu_zone).w,d0
                 move.b  Comp_ZoneList(pc,d0.w),(Current_zone_and_act).w
                 clr.b   (Current_act).w
-                jsr     S3CompInitializeRoundLivesScoresTimersAndFlags(pc)
+                jsr     S3Comp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -327,7 +327,8 @@ loc_9E10:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompClampSelectedZoneToVisibleScrollRow:
+; Clamp the selected zone minus one to the three possible window rows
+S3Comp_GetZoneWindowRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
@@ -341,7 +342,7 @@ loc_9E24:
 
 locret_9E2C:
                 rts
-; End of function S3CompClampSelectedZoneToVisibleScrollRow
+; End of function S3Comp_GetZoneWindowRow
 
 ; ---------------------------------------------------------------------------
 
@@ -366,8 +367,8 @@ loc_9E56:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompClearCharacterSelectAreasAtZoneWindowRow:
-                bsr.s   S3CompClampSelectedZoneToVisibleScrollRow
+S3Comp_ClearCharacterSelectAreas:
+                bsr.s   S3Comp_GetZoneWindowRow
                 mulu.w  #$48,d0
                 addi.w  #$20,d0
                 lsl.w   #4,d0
@@ -387,30 +388,31 @@ S3CompClearCharacterSelectAreasAtZoneWindowRow:
 loc_9E94:
                 addi.w  #$300,d0
                 jmp     Menu_ClearNineByEightTileArea(pc)
-; End of function S3CompClearCharacterSelectAreasAtZoneWindowRow
+; End of function S3Comp_ClearCharacterSelectAreas
 
 ; =============== S U B R O U T I N E =======================================
 
 S3CompDrawFiveZoneBestTimesInMenuOrder:
                 move.w  #VRAM_Plane_A_Name_Table+$2D2,d7
                 move.l  (Competition_saved_data).w,d6
-                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   S3Comp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$10).w,d6
-                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   S3Comp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$30).w,d6
-                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   S3Comp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$20).w,d6
-                bsr.s   S3CompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   S3Comp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$40).w,d6
 ; End of function S3CompDrawFiveZoneBestTimesInMenuOrder
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompFormatAndUploadMinuteSecondHundredthTime:
+; Format the three binary time fields into six decimal digits and two separators, then upload an 8-by-2 map
+S3Comp_DrawPackedTime:
                 moveq   #0,d5
                 lsl.l   #8,d6
                 moveq   #2,d3
@@ -426,17 +428,17 @@ loc_9ED2:
                 lea     (Plane_buffer).w,a1
                 lea     MapUnc_CompetitionNumbers(pc),a2
                 moveq   #0,d0
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3Comp_AppendTimeDigit
                 st      d0
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3Comp_AppendTimeDigit
                 moveq   #$A,d1
                 bsr.s   S3CompAppendTwoRowNumericGlyphColumn
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3Comp_AppendTimeDigit
+                bsr.s   S3Comp_AppendTimeDigit
                 moveq   #$B,d1
                 bsr.s   S3CompAppendTwoRowNumericGlyphColumn
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
-                bsr.s   S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   S3Comp_AppendTimeDigit
+                bsr.s   S3Comp_AppendTimeDigit
                 lea     (Plane_buffer).w,a1
 
 loc_9F0A:
@@ -451,11 +453,12 @@ loc_9F0A:
                 moveq   #8-1,d1
                 moveq   #2-1,d2
                 jmp     (Plane_Map_To_VRAM).l
-; End of function S3CompFormatAndUploadMinuteSecondHundredthTime
+; End of function S3Comp_DrawPackedTime
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompAppendNextTimeDigitWithFirstZeroBlankFlag:
+; Rotate to the next BCD nibble and optionally emit the blank glyph for a leading zero
+S3Comp_AppendTimeDigit:
                 rol.l   #4,d5
                 move.w  d5,d1
                 andi.w  #$F,d1
@@ -464,7 +467,7 @@ S3CompAppendNextTimeDigitWithFirstZeroBlankFlag:
                 bne.s   S3CompAppendTwoRowNumericGlyphColumn
                 moveq   #$C,d1
                 st      d0
-; End of function S3CompAppendNextTimeDigitWithFirstZeroBlankFlag
+; End of function S3Comp_AppendTimeDigit
 
 ; =============== S U B R O U T I N E =======================================
 

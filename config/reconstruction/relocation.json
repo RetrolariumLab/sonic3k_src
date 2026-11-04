@@ -2945,7 +2945,7 @@
     },
     {
       "alias": "PLC_CreditsKnuxPose_End",
-      "target": "SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay",
+      "target": "SKCredits_SelectScrollSpeedAndDelay",
       "kind": "data-end-code-alias",
       "profiles": ["sk"],
       "reason": "The final Knuckles credit-pose graphics descriptor ends at the following credit scroll parameter selector. Preserve its original code-entry alias and require independently assembled equal addresses in normal and relocated builds."

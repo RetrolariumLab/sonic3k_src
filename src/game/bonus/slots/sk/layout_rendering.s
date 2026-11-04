@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 Slots_RenderLayout:
-                bsr.w   SlotsUpdateCellFramesFromRotationAndGlobalTimers
+                bsr.w   Slots_UpdateCellFrames
                 bsr.w   SlotsAdvanceAllTransientCellAnimations
                 lea     (Chunk_table+$7800).l,a1
                 move.b  (Stat_table).w,d0
@@ -109,7 +109,7 @@ loc_4B428:
                 move.b  (a1)+,d1
                 subq.b  #1,d1
                 bmi.s   loc_4B47C
-                bsr.s   SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
+                bsr.s   Slots_AppendPiecesToSpriteTable
 
 loc_4B47C:
                 addq.w  #4,a4
@@ -122,7 +122,8 @@ loc_4B47C:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable:
+; Translate five-byte mapping pieces into hardware entries and stop at 80 sprites
+Slots_AppendPiecesToSpriteTable:
                 cmpi.b  #$50,d5
                 beq.s   locret_4B4C2
                 move.b  (a1)+,d0
@@ -146,15 +147,16 @@ SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable:
 
 loc_4B4BC:
                 move.w  d0,(a2)+
-                dbf     d1,SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
+                dbf     d1,Slots_AppendPiecesToSpriteTable
 
 locret_4B4C2:
                 rts
-; End of function SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable
+; End of function Slots_AppendPiecesToSpriteTable
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsUpdateCellFramesFromRotationAndGlobalTimers:
+; Update descriptor frames from field rotation, ring animation and the two local frame timers
+Slots_UpdateCellFrames:
                 lea     (Chunk_table+$700C).l,a1
                 moveq   #0,d0
                 move.b  (Stat_table).w,d0
@@ -200,7 +202,7 @@ loc_4B526:
 loc_4B548:
                 move.b  (Slot_machine_peppermint_frame).w,$38(a1)
                 rts
-; End of function SlotsUpdateCellFramesFromRotationAndGlobalTimers
+; End of function Slots_UpdateCellFrames
 
 ; ---------------------------------------------------------------------------
 ; unused
@@ -220,7 +222,8 @@ loc_4B566:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsFindFreeTransientCellAnimationRecord:
+; Search the 32 eight-byte records for a zero type. Return its pointer in a2 and signal success through Z
+Slots_FindFreeCellAnimRecord:
                 lea     (Chunk_table+$7400).l,a2
                 move.w  #$20-1,d0
 
@@ -232,7 +235,7 @@ loc_4B586:
 
 locret_4B590:
                 rts
-; End of function SlotsFindFreeTransientCellAnimationRecord
+; End of function Slots_FindFreeCellAnimRecord
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -395,7 +398,8 @@ byte_4B688:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsInitializePaddedLayoutDescriptorsAndCage:
+; Prepare the padded 128-by-128 layout, nineteen render descriptors and 32 transient records
+Slots_InitLayoutDescriptorsAndCage:
                 lea     (RAM_start+$3000).l,a1
                 move.w  #bytesToLcnt($4000),d0
 
@@ -438,7 +442,7 @@ loc_4B70A:
 
 locret_4B720:
                 rts
-; End of function SlotsInitializePaddedLayoutDescriptorsAndCage
+; End of function Slots_InitLayoutDescriptorsAndCage
 
 ; ---------------------------------------------------------------------------
 SlotBonusMaps:

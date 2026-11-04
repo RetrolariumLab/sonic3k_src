@@ -12,7 +12,7 @@
       "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
       "original_line": 163,
       "old": "sub_4D488",
-      "new": "BlueSphereValidateEnteredCodeAndRestoreLevelStageSelection",
+      "new": "BlueSphere_TryRestoreEnteredCode",
       "profiles": ["sk"],
       "meaning": "Decode12decimal digit sprites,validate embedded11-bit custom check value,and restore level/progress/stage on success."
     },
@@ -20,7 +20,7 @@
       "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
       "original_line": 265,
       "old": "sub_4D5A0",
-      "new": "BlueSphereComputeWordXorSingleShiftCheckValue",
+      "new": "BlueSphere_ComputeCodeCheck",
       "profiles": ["sk"],
       "meaning": "Compute custom WORDwise XOR/right-shift check value using conditional0x8810 feedback after each source WORD."
     },
@@ -28,7 +28,7 @@
       "source": "src/game/blue_sphere/sk/code_entry_widgets.s",
       "original_line": 291,
       "old": "sub_4D5C2",
-      "new": "BlueSphereInitializeNumericSpriteMappingsArtAndBounds",
+      "new": "BlueSphere_InitNumericSprite",
       "profiles": ["sk"],
       "meaning": "Initialize common numeric sprite mapping,art attributes,priority and8-pixel display bounds."
     },
@@ -36,7 +36,7 @@
       "source": "src/game/blue_sphere/sk/results_mode.s",
       "original_line": 243,
       "old": "sub_4DEA2",
-      "new": "BlueSphereTileResultsLogoBackgroundAndOffsetScroll",
+      "new": "BlueSphere_TileResultsLogoBg",
       "profiles": ["sk"],
       "meaning": "Stamp same12x8 background map at14 planeB destinations and apply initial16-pixel background scroll offset."
     },
@@ -52,7 +52,7 @@
       "source": "src/game/blue_sphere/sk/stage_selection.s",
       "original_line": 234,
       "old": "sub_4D13A",
-      "new": "BlueSphereSetCenteredSuppressedNineDigitWidget",
+      "new": "BlueSphere_CenterLevelDigits",
       "profiles": ["sk"],
       "meaning": "Render centered significant decimal digits of a27-bit level value using nine digit objects and two padding objects."
     },
@@ -60,7 +60,7 @@
       "source": "src/game/blue_sphere/sk/stage_selection.s",
       "original_line": 295,
       "old": "sub_4D1AA",
-      "new": "BlueSphereSetCenteredTwoDigitDifficultyWidget",
+      "new": "BlueSphere_CenterDifficultyDigits",
       "profiles": ["sk"],
       "meaning": "Format lowBYTE difficulty value into two significant-digit objects and center four-child widget."
     },
@@ -68,7 +68,7 @@
       "source": "src/game/blue_sphere/sk/title_mode.s",
       "original_line": 98,
       "old": "sub_4CB1A",
-      "new": "BlueSphereCopyProgressSelectedFullPalette",
+      "new": "BlueSphere_CopyProgressPalette",
       "profiles": ["sk"],
       "meaning": "Copy one of two complete128-byte palettes to caller-selected destination based on progress flag."
     },
@@ -76,7 +76,7 @@
       "source": "src/game/blue_sphere/sk/title_mode.s",
       "original_line": 129,
       "old": "sub_4CC96",
-      "new": "BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo",
+      "new": "BlueSphere_ScrollTop64FgLines",
       "profiles": ["sk"],
       "meaning": "Subtract two from foreground horizontal scroll of first64 screen lines per title frame."
     },
@@ -84,7 +84,7 @@
       "source": "src/game/blue_sphere/sk/title_mode.s",
       "original_line": 142,
       "old": "sub_4CCA6",
-      "new": "BlueSphereClassifyLockonSerialAndInitializeLevelSelection",
+      "new": "BlueSphere_InitSelectionFromSerial",
       "profiles": ["sk"],
       "meaning": "Select normal level-selection mode for recognized Sonic1 serial,otherwise derive header-seeded challenge stage."
     },
@@ -92,7 +92,7 @@
       "source": "src/game/blue_sphere/sk/title_mode.s",
       "original_line": 188,
       "old": "sub_4CD18",
-      "new": "BlueSphereDeriveTwentySevenBitLevelFromLockonHeader",
+      "new": "BlueSphere_DeriveLevelFromHeader",
       "profiles": ["sk"],
       "meaning": "Derive a27-bit challenge level from serial/date/header fields and convert it to four modular stage indices."
     },
@@ -100,7 +100,7 @@
       "source": "src/game/bonus/slots/sk/layout_rendering.s",
       "original_line": 125,
       "old": "sub_4B490",
-      "new": "SlotsAppendFiveByteMappingPiecesToHardwareSpriteTable",
+      "new": "Slots_AppendPiecesToSpriteTable",
       "profiles": ["sk"],
       "meaning": "Append a slot-cell mapping frame to the existing hardware sprite table, translating5-byte pieces and respecting exact80-sprite stop count."
     },
@@ -108,7 +108,7 @@
       "source": "src/game/bonus/slots/sk/layout_rendering.s",
       "original_line": 157,
       "old": "sub_4B4C4",
-      "new": "SlotsUpdateCellFramesFromRotationAndGlobalTimers",
+      "new": "Slots_UpdateCellFrames",
       "profiles": ["sk"],
       "meaning": "Refresh per-cell-type frame WORDs in slot rendering descriptors from rotation, ring animation and two local timer cycles."
     },
@@ -116,7 +116,7 @@
       "source": "src/game/bonus/slots/sk/layout_rendering.s",
       "original_line": 223,
       "old": "sub_4B57C",
-      "new": "SlotsFindFreeTransientCellAnimationRecord",
+      "new": "Slots_FindFreeCellAnimRecord",
       "profiles": ["sk"],
       "meaning": "Find first zero-type record among32 eight-byte transient cell-animation slots and report it through a2/Z."
     },
@@ -132,7 +132,7 @@
       "source": "src/game/bonus/slots/sk/layout_rendering.s",
       "original_line": 398,
       "old": "sub_4B6AA",
-      "new": "SlotsInitializePaddedLayoutDescriptorsAndCage",
+      "new": "Slots_InitLayoutDescriptorsAndCage",
       "profiles": ["sk"],
       "meaning": "Initialize the slot bonus128x128 padded layout,19 render descriptors,32 transient records and optional cage actor."
     },
@@ -148,7 +148,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 137,
       "old": "sub_4BABC",
-      "new": "SlotsApplyTangentialInputMotionAndRejectBlockedStep",
+      "new": "Slots_TryTangentialInputStep",
       "profiles": ["sk"],
       "meaning": "Apply left/right inertia and friction, translate along the nearest rotating-field cardinal tangent, then undo the complete step on solid-cell contact."
     },
@@ -172,7 +172,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 257,
       "old": "sub_4BBB2",
-      "new": "SlotsJumpOppositeRotatingFieldGravityOnNewButton",
+      "new": "Slots_TryJumpAgainstGravity",
       "profiles": ["sk"],
       "meaning": "On newly pressed A/B/C set outward jump velocity opposite the rotating gravity vector."
     },
@@ -180,7 +180,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 282,
       "old": "sub_4BBF4",
-      "new": "SlotsCenterCameraWherePlayerCoordinateExceedsInset",
+      "new": "Slots_CenterCameraPastInset",
       "profiles": ["sk"],
       "meaning": "Set each camera axis to player position minus screen-center inset when unsigned position permits it."
     },
@@ -188,7 +188,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 349,
       "old": "sub_4BCB0",
-      "new": "SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace",
+      "new": "Slots_IntegrateGravityAndProbeAxes",
       "profiles": ["sk"],
       "meaning": "Build field-relative gravity displacement, reject blocked axes and update player velocities with a four-count grounded grace field."
     },
@@ -196,7 +196,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 418,
       "old": "sub_4BD5A",
-      "new": "SlotsProbeFourLayoutCellsAtCandidatePosition",
+      "new": "Slots_ProbeFourCandidateCells",
       "profiles": ["sk"],
       "meaning": "Probe a two-by-two24-pixel-cell rectangle for a tentative16.16 player position and return aggregate collision Z."
     },
@@ -204,7 +204,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 451,
       "old": "sub_4BDA2",
-      "new": "SlotsClassifyProbedCellAndLatchInteractiveSolid",
+      "new": "Slots_ClassifyCellAndLatchContact",
       "profiles": ["sk"],
       "meaning": "Classify the just-read slot cell, accumulating solidity and latching interactive contacts1..6."
     },
@@ -212,7 +212,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 477,
       "old": "sub_4BDCA",
-      "new": "SlotsCollectCenterCellRingAndAwardFiftyRingContinue",
+      "new": "Slots_TryCollectCenterRing",
       "profiles": ["sk"],
       "meaning": "Probe center cell for a ring, start its removal animation when capacity exists and award ring plus once-per-flag50-ring continue."
     },
@@ -220,7 +220,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 526,
       "old": "sub_4BE3A",
-      "new": "SlotsApplyLatchedBumperGoalReverseOrWallContact",
+      "new": "Slots_ApplyLatchedCellEffect",
       "profiles": ["sk"],
       "meaning": "Apply the special effect of the last interactive solid cell latched by movement probes."
     },
@@ -228,7 +228,7 @@
       "source": "src/game/bonus/slots/sk/player_controller.s",
       "original_line": 696,
       "old": "sub_4C014",
-      "new": "SlotsDispatchCageCapturePayoutReleaseCooldown",
+      "new": "Slots_DispatchCageState",
       "profiles": ["sk"],
       "meaning": "Dispatch the slot cage four-state player capture, outcome actor emission, aligned release and cooldown lifecycle."
     },
@@ -236,7 +236,7 @@
       "source": "src/game/bonus/slots/sk/slot_outcomes.s",
       "original_line": 188,
       "old": "sub_4C5C4",
-      "new": "SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive",
+      "new": "Slots_GetSelectedReelSymbol",
       "profiles": ["sk"],
       "meaning": "Extract current reel requested symbol from packed outcome WORD and map code7 to5."
     },
@@ -244,7 +244,7 @@
       "source": "src/game/bonus/slots/sk/slot_outcomes.s",
       "original_line": 208,
       "old": "sub_4C5E0",
-      "new": "SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits",
+      "new": "Slots_SetSelectedReelSymbol",
       "profiles": ["sk"],
       "meaning": "Replace one packed symbol nibble at current reel shift and clear unused high bits of all three symbols."
     },
@@ -252,7 +252,7 @@
       "source": "src/game/bonus/slots/sk/slot_outcomes.s",
       "original_line": 330,
       "old": "sub_4C6D6",
-      "new": "SlotsAdvanceOneReelAndQueueChangedStripArt",
+      "new": "Slots_AdvanceReelAndQueueArt",
       "profiles": ["sk"],
       "meaning": "Round-robin advance one of three reel phases and rebuild its512-byte art strip only when an8-unit scroll boundary changes."
     },
@@ -268,7 +268,7 @@
       "source": "src/game/bonus/slots/sk/slot_outcomes.s",
       "original_line": 420,
       "old": "sub_4C7A2",
-      "new": "SlotsEvaluateTripleWildcardOrSymbolSixPayout",
+      "new": "Slots_EvaluateReelPayout",
       "profiles": ["sk"],
       "meaning": "Replace the three packed result symbols with signed ring payout using triples, symbol0 wildcard multipliers, or unmatched symbol6 consolation counts."
     },
@@ -300,7 +300,7 @@
       "source": "src/game/bonus/slots/sk/slot_outcomes.s",
       "original_line": 589,
       "old": "sub_4C8E4",
-      "new": "BlueSphereResetSceneVideoQueuesAndRuntimeMemory",
+      "new": "BlueSphere_ResetVideoAndSceneRAM",
       "profiles": ["sk"],
       "meaning": "Reset compression/display queues, VDP configuration and transient game memory before Blue Sphere title/results scenes."
     },
@@ -1460,7 +1460,7 @@
       "source": "src/game/modes/ending/sk/credits_sequence.s",
       "original_line": 7,
       "old": "sub_5B18E",
-      "new": "SKEndingDispatchCreditsInitDelayScrollAndFinish",
+      "new": "SKCredits_DispatchScrollState",
       "profiles": ["sk"],
       "meaning": "Run four-state ending credit sequence: load font, delay, scroll and stream text rows, then signal completion."
     },
@@ -1468,7 +1468,7 @@
       "source": "src/game/modes/ending/sk/credits_sequence.s",
       "original_line": 149,
       "old": "sub_5B2D6",
-      "new": "SKCreditsClearFortyColumnsAcrossTwoPlaneRows",
+      "new": "SKCredits_ClearTwoPlaneRows",
       "profiles": ["sk"],
       "meaning": "Clear two40-tile-wide planeA rows for upcoming scrolling credits text."
     },
@@ -1476,7 +1476,7 @@
       "source": "src/game/modes/ending/sk/credits_sequence.s",
       "original_line": 182,
       "old": "sub_5B318",
-      "new": "SKCreditsBuildAndUploadVariableWidthTwoRowText",
+      "new": "SKCredits_BuildAndUploadText",
       "profiles": ["sk"],
       "meaning": "Build one credit text line in two scratch rows and upload its computed width to consecutive planeA rows."
     },
@@ -1484,7 +1484,7 @@
       "source": "src/game/modes/ending/sk/credits_sequence.s",
       "original_line": 216,
       "old": "sub_5B36C",
-      "new": "SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows",
+      "new": "SKCredits_BuildGlyphRows",
       "profiles": ["sk"],
       "meaning": "Convert null-terminated supportedASCII into variable-width two-tile-high credit glyphs in separate scratch rows."
     },
@@ -1492,7 +1492,7 @@
       "source": "src/game/modes/ending/sk/credits_sequence.s",
       "original_line": 322,
       "old": "sub_5B42A",
-      "new": "SKCreditsQueueProductCharacterCompletionPoseGraphics",
+      "new": "SKCredits_QueueEndingPoseArt",
       "profiles": ["sk"],
       "meaning": "Queue ANDKnuckles art and dispatch ending banner/pose graphics by character, standalone/lock-on product and emerald category."
     },
@@ -1508,7 +1508,7 @@
       "source": "src/game/modes/ending/sk/scroll_parameters.s",
       "original_line": 7,
       "old": "sub_5B514",
-      "new": "SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay",
+      "new": "SKCredits_SelectScrollSpeedAndDelay",
       "profiles": ["sk"],
       "meaning": "Choosecredit fixed-point scroll speed andstartupdelay from36-record product/region/character/emerald tables."
     },
@@ -1516,7 +1516,7 @@
       "source": "src/game/modes/s3/competition_results.s",
       "original_line": 213,
       "old": "sub_AC44",
-      "new": "S3CompBuildFiveRaceResultsTotalsWinsAndBlinkMap",
+      "new": "S3Comp_BuildRaceResults",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Build both players five-zone results, summed times, per-zone win labels/counters and a palette alternate for fastest total blink."
     },
@@ -1532,7 +1532,7 @@
       "source": "src/game/modes/s3/competition_results.s",
       "original_line": 313,
       "old": "sub_AD3E",
-      "new": "S3CompSumFiveBinaryMinuteSecondHundredthTimes",
+      "new": "S3Comp_SumFivePackedTimes",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Sum five normalized time LONGs with base100 hundredths carry, base60 seconds carry and99-minute cap."
     },
@@ -1540,7 +1540,7 @@
       "source": "src/game/modes/s3/competition_zone_selection.s",
       "original_line": 330,
       "old": "sub_9E18",
-      "new": "S3CompClampSelectedZoneToVisibleScrollRow",
+      "new": "S3Comp_GetZoneWindowRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Return clamped middle-window scroll row for five-entry competition zone selector."
     },
@@ -1548,7 +1548,7 @@
       "source": "src/game/modes/s3/competition_zone_selection.s",
       "original_line": 369,
       "old": "sub_9E6C",
-      "new": "S3CompClearCharacterSelectAreasAtZoneWindowRow",
+      "new": "S3Comp_ClearCharacterSelectAreas",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Clear character-selection tile rectangles positioned relative to current competition zone scroll window."
     },
@@ -1564,7 +1564,7 @@
       "source": "src/game/modes/s3/competition_zone_selection.s",
       "original_line": 413,
       "old": "sub_9ECC",
-      "new": "S3CompFormatAndUploadMinuteSecondHundredthTime",
+      "new": "S3Comp_DrawPackedTime",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Format three binary time bytes into six decimal digits plus two separator glyphs, then upload an8x2 tile rectangle."
     },
@@ -1572,7 +1572,7 @@
       "source": "src/game/modes/s3/competition_zone_selection.s",
       "original_line": 458,
       "old": "sub_9F26",
-      "new": "S3CompAppendNextTimeDigitWithFirstZeroBlankFlag",
+      "new": "S3Comp_AppendTimeDigit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Extract next packed-BCD nibble and append its two-row glyph, optionally replacing one zero with blank."
     },
@@ -1596,7 +1596,7 @@
       "source": "src/game/modes/s3/continue_screen.s",
       "original_line": 444,
       "old": "sub_3F5C4",
-      "new": "S3ContinueWriteTwoNibbleTimerTileMapAndRequestUpload",
+      "new": "S3Continue_DrawTimerAndQueueUpload",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Write two two-tile-high numeric glyphs from countdown BYTE nibbles into plane RAM, then request VInt upload."
     },
@@ -1604,7 +1604,7 @@
       "source": "src/game/modes/s3/continue_screen.s",
       "original_line": 467,
       "old": "sub_3F5FE",
-      "new": "S3ContinueClampCountAndCreateRemainingLifeIcons",
+      "new": "S3Continue_InitRemainingLifeIcons",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Normalize continue count to1..10 and initialize count-minus-one supplementary icon actors in consecutive slots."
     },
@@ -1620,7 +1620,7 @@
       "source": "src/game/modes/s3/continue_screen.s",
       "original_line": 515,
       "old": "sub_3F650",
-      "new": "S3ContinueSelectCharacterIconFramesAndTailsChild",
+      "new": "S3Continue_SelectCharacterIcon",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Select two-frame continue icon mapping sequence for Player_mode and create Tails companion animation when mode2."
     },
@@ -1628,7 +1628,7 @@
       "source": "src/game/modes/s3/ending_credits.s",
       "original_line": 98,
       "old": "sub_4051E",
-      "new": "S3CreditsDispatchTimedPagesAlternativeScrollAndEyecatch",
+      "new": "S3Credits_DispatchDisplayState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Dispatch S3 credit pages, alternate scrolling text state and terminal emerald-dependent eyecatch setup."
     },
@@ -1636,7 +1636,7 @@
       "source": "src/game/modes/s3/ending_credits.s",
       "original_line": 340,
       "old": "sub_407DC",
-      "new": "S3EndingLatchLogoReadyAnimationAndResumeAtCallerContinuation",
+      "new": "S3Ending_TryResumeLogoAnimation",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Once main logo signals ready, reset side-sprite animation and replace object handler with caller continuation address."
     },
@@ -1644,7 +1644,7 @@
       "source": "src/game/modes/s3/ending_credits.s",
       "original_line": 528,
       "old": "sub_40A4A",
-      "new": "S3CreditsDrawCountedTextPageAndRequestPlaneUpload",
+      "new": "S3Credits_DrawPageAndQueueUpload",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Draw a count-prefixed group of positionedtextstrings into creditplaneRAM and mark itfornextVIntupload."
     },
@@ -1652,7 +1652,7 @@
       "source": "src/game/modes/s3/ending_credits.s",
       "original_line": 540,
       "old": "sub_40A5C",
-      "new": "S3CreditsDrawPositionedMixedSizeAsciiIntoWrappingPlaneRAM",
+      "new": "S3Credits_DrawPositionedText",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Draw one positionedNULASCIIstring using8x16lowercaseandvariable-width24-pixel-highuppercaseglyphs into an8KBwrappingplaneRAM."
     },
@@ -1660,7 +1660,7 @@
       "source": "src/game/modes/s3/legacy_options.s",
       "original_line": 273,
       "old": "sub_6828",
-      "new": "S3LegacyOptionsAppendHexNibbleTilePreservingAttributes",
+      "new": "S3LegacyOptions_AppendHexTile",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Append one sound-test hexadecimal nibble as a menu tile while retaining incoming tile attribute highBYTE."
     },
@@ -1676,7 +1676,7 @@
       "source": "src/game/modes/s3/save_screen.s",
       "original_line": 153,
       "old": "sub_BAE0",
-      "new": "S3SaveCopyListedMapRectanglesToWideVDPPlane",
+      "new": "S3Save_UploadMapRectangles",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Process count-prefixed map rectangle list and upload every rectangle using128-cell-wide plane pitch."
     },
@@ -1684,7 +1684,7 @@
       "source": "src/game/modes/s3/save_screen.s",
       "original_line": 169,
       "old": "sub_BAF8",
-      "new": "S3SaveConvertVRAMWordAddressToWriteCommand",
+      "new": "S3Save_MakeVRAMWriteCommand",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Convert d0 lowWORD VRAM byte address into VDP VRAM-write command LONG."
     },
@@ -1700,7 +1700,7 @@
       "source": "src/game/modes/s3/save_slot_erase.s",
       "original_line": 207,
       "old": "sub_C726",
-      "new": "S3SaveEraseCycleChildFramesEightThroughEleven",
+      "new": "S3SaveErase_AnimateChild",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Cycle erase-widget child mapping frames8..11 at four-call intervals."
     },
@@ -1708,7 +1708,7 @@
       "source": "src/game/modes/s3/save_slot_erase.s",
       "original_line": 260,
       "old": "sub_C794",
-      "new": "S3SaveWriteEncodedLabelTilesUntilNegativeTerminator",
+      "new": "S3Save_WriteEncodedLabel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Write one encoded save-menu label to VDP, using zero as blank and any negative BYTE as terminator."
     },
@@ -1716,7 +1716,7 @@
       "source": "src/game/modes/s3/save_slot_widgets.s",
       "original_line": 433,
       "old": "sub_C4CC",
-      "new": "S3SaveCycleNewGameCharacterOnUpDownUnlessCursorBusy",
+      "new": "S3Save_TryCycleNewGameCharacter",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Cycle new-game character selection with pressed Up/Down when menu cursor motion flag is clear."
     },
@@ -1724,7 +1724,7 @@
       "source": "src/game/modes/s3/time_attack_records.s",
       "original_line": 175,
       "old": "sub_B1C6",
-      "new": "S3CompDrawSixLapTimesAndThreeSavedTopRecords",
+      "new": "S3Comp_DrawLapTimesAndTopRecords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Render six current time-attack rows and three saved top times for the current competition zone."
     },
@@ -1732,7 +1732,7 @@
       "source": "src/game/modes/sk/competition_results.s",
       "original_line": 213,
       "old": "sub_BA04",
-      "new": "SKCompBuildFiveRaceResultsTotalsWinsAndBlinkMap",
+      "new": "SKComp_BuildRaceResults",
       "profiles": ["sk"],
       "meaning": "Build both players five-zone results, summed times, per-zone win labels/counters and a palette alternate for fastest total blink."
     },
@@ -1748,7 +1748,7 @@
       "source": "src/game/modes/sk/competition_results.s",
       "original_line": 313,
       "old": "sub_BB04",
-      "new": "SKCompSumFiveBinaryMinuteSecondHundredthTimes",
+      "new": "SKComp_SumFivePackedTimes",
       "profiles": ["sk"],
       "meaning": "Sum five normalized time LONGs with base100 hundredths carry, base60 seconds carry and99-minute cap."
     },
@@ -1756,7 +1756,7 @@
       "source": "src/game/modes/sk/competition_zone_selection.s",
       "original_line": 330,
       "old": "sub_AFB2",
-      "new": "SKCompClampSelectedZoneToVisibleScrollRow",
+      "new": "SKComp_GetZoneWindowRow",
       "profiles": ["sk"],
       "meaning": "Return clamped middle-window scroll row for five-entry competition zone selector."
     },
@@ -1764,7 +1764,7 @@
       "source": "src/game/modes/sk/competition_zone_selection.s",
       "original_line": 369,
       "old": "sub_B006",
-      "new": "SKCompClearCharacterSelectAreasAtZoneWindowRow",
+      "new": "SKComp_ClearCharacterSelectAreas",
       "profiles": ["sk"],
       "meaning": "Clear character-selection tile rectangles positioned relative to current competition zone scroll window."
     },
@@ -1780,7 +1780,7 @@
       "source": "src/game/modes/sk/competition_zone_selection.s",
       "original_line": 413,
       "old": "sub_B066",
-      "new": "SKCompFormatAndUploadMinuteSecondHundredthTime",
+      "new": "SKComp_DrawPackedTime",
       "profiles": ["sk"],
       "meaning": "Format three binary time bytes into six decimal digits plus two separator glyphs, then upload an8x2 tile rectangle."
     },
@@ -1796,7 +1796,7 @@
       "source": "src/game/modes/sk/competition_zone_selection.s",
       "original_line": 458,
       "old": "sub_B0C2",
-      "new": "SKCompAppendNextTimeDigitWithFirstZeroBlankFlag",
+      "new": "SKComp_AppendTimeDigit",
       "profiles": ["sk"],
       "meaning": "Extract next packed-BCD nibble and append its two-row glyph, optionally replacing one zero with blank."
     },
@@ -1828,7 +1828,7 @@
       "source": "src/game/modes/sk/save_screen.s",
       "original_line": 187,
       "old": "sub_C866",
-      "new": "SKSaveCopyListedMapRectanglesToWideVDPPlane",
+      "new": "SKSave_UploadMapRectangles",
       "profiles": ["sk"],
       "meaning": "Process count-prefixed map rectangle list and upload every rectangle using128-cell-wide plane pitch."
     },
@@ -1836,7 +1836,7 @@
       "source": "src/game/modes/sk/save_screen.s",
       "original_line": 203,
       "old": "sub_C87E",
-      "new": "SKSaveConvertVRAMWordAddressToWriteCommand",
+      "new": "SKSave_MakeVRAMWriteCommand",
       "profiles": ["sk"],
       "meaning": "Convert d0 lowWORD VRAM byte address into VDP VRAM-write command LONG."
     },
@@ -1844,7 +1844,7 @@
       "source": "src/game/modes/sk/save_screen.s",
       "original_line": 387,
       "old": "sub_CA14",
-      "new": "SKSaveBuildTwoDigitLifeContinueMapWithBlankTens",
+      "new": "SKSave_BuildLifeContinueDigitMap",
       "profiles": ["sk"],
       "meaning": "Convert binary BYTE life/continue count into a two-column,two-row numeric tile map with blank zero tens."
     },
@@ -1860,7 +1860,7 @@
       "source": "src/game/modes/sk/save_slot_erase.s",
       "original_line": 218,
       "old": "sub_D94A",
-      "new": "SKSaveEraseCycleChildFramesEightThroughEleven",
+      "new": "SKSaveErase_AnimateChild",
       "profiles": ["sk"],
       "meaning": "Cycle erase-widget child mapping frames8..11 at four-call intervals."
     },
@@ -1868,7 +1868,7 @@
       "source": "src/game/modes/sk/save_slot_erase.s",
       "original_line": 298,
       "old": "sub_D9F4",
-      "new": "SKSaveWriteEncodedLabelTilesUntilNegativeTerminator",
+      "new": "SKSave_WriteEncodedLabel",
       "profiles": ["sk"],
       "meaning": "Write one encoded save-menu label to VDP, using zero as blank and any negative BYTE as terminator."
     },
@@ -1876,7 +1876,7 @@
       "source": "src/game/modes/sk/save_slot_erase.s",
       "original_line": 326,
       "old": "sub_DA1E",
-      "new": "SKSaveDecodeSevenTwoBitEmeraldStatesAndCounts",
+      "new": "SKSave_DecodeEmeraldStates",
       "profiles": ["sk"],
       "meaning": "Expand packed save emerald states into seven BYTE entries and derive chaos/super counts plus conversion flag."
     },
@@ -1884,7 +1884,7 @@
       "source": "src/game/modes/sk/save_slot_erase.s",
       "original_line": 355,
       "old": "sub_DA4E",
-      "new": "SKSaveMapProgressIndexToZoneActWithKnucklesSSZ2Exception",
+      "new": "SKSave_MapProgressToZoneAct",
       "profiles": ["sk"],
       "meaning": "Translate saved/menu progress index to engine zone/act WORD,with Knuckles Sky Sanctuary act2 exception."
     },
@@ -1892,7 +1892,7 @@
       "source": "src/game/modes/sk/save_slot_widgets.s",
       "original_line": 476,
       "old": "sub_D6D0",
-      "new": "SKSaveCycleNewGameCharacterOnUpDownUnlessCursorBusy",
+      "new": "SKSave_TryCycleNewGameCharacter",
       "profiles": ["sk"],
       "meaning": "Cycle new-game character selection with pressed Up/Down when menu cursor motion flag is clear."
     },
@@ -1908,7 +1908,7 @@
       "source": "src/game/modes/sk/time_attack_records.s",
       "original_line": 175,
       "old": "sub_BEB2",
-      "new": "SKCompDrawSixLapTimesAndThreeSavedTopRecords",
+      "new": "SKComp_DrawLapTimesAndTopRecords",
       "profiles": ["sk"],
       "meaning": "Render six current time-attack rows and three saved top times for the current competition zone."
     },
@@ -1916,7 +1916,7 @@
       "source": "src/game/persistence/s3/sram_storage.s",
       "original_line": 7,
       "old": "sub_B5EC",
-      "new": "S3CompInitializeRoundLivesScoresTimersAndFlags",
+      "new": "S3Comp_InitRoundState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Initialize competition round state for both players with three lives, zero counters and5000-point next-life thresholds."
     },
@@ -1924,7 +1924,7 @@
       "source": "src/game/persistence/sk/sram_storage.s",
       "original_line": 7,
       "old": "sub_C104",
-      "new": "SKCompInitializeRoundLivesScoresTimersAndFlags",
+      "new": "SKComp_InitRoundState",
       "profiles": ["sk"],
       "meaning": "Initialize competition round state for both players with three lives, zero counters and5000-point next-life thresholds."
     },
@@ -1932,7 +1932,7 @@
       "source": "src/game/special_stage/s3/projected_character_motion.s",
       "original_line": 90,
       "old": "sub_8402",
-      "new": "SStage_UpdateProjectionRotationCoefficients",
+      "new": "SStage_UpdateProjectionScalars",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Refresh four cached Q14 sine/cosine pairs used to transform and project special-stage character coordinates."
     },
@@ -2044,7 +2044,7 @@
       "source": "src/game/special_stage/sk/projected_character_motion.s",
       "original_line": 78,
       "old": "sub_950C",
-      "new": "SStage_UpdateProjectionRotationCoefficients",
+      "new": "SStage_UpdateProjectionScalars",
       "profiles": ["sk"],
       "meaning": "Refresh four cached Q14 sine/cosine pairs used to transform and project special-stage character coordinates."
     },
@@ -2172,7 +2172,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 7,
       "old": "sub_60F94",
-      "new": "GumballSKLaunchFromTriangleAndConsumeBumperCell",
+      "new": "SKGumballTriangle_LaunchAndClear",
       "profiles": ["sk"],
       "meaning": "Launch selected player from a disposable triangle bumper and notify the machine to lower after its paired occupancy cells clear."
     },
@@ -2180,7 +2180,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 111,
       "old": "sub_610E0",
-      "new": "GumballSKCheckNearbyPlayersAndDispatchItemReward",
+      "new": "SKGumball_TryRewardNearbyPlayer",
       "profiles": ["sk"],
       "meaning": "Range-test both players for a dropped gumball and dispatch one subtype effect, returning Z to retain/no-contact or nonzero to consume."
     },
@@ -2188,7 +2188,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 195,
       "old": "sub_61176",
-      "new": "GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter",
+      "new": "SKGumballRound_RepelPlayer",
       "profiles": ["sk"],
       "meaning": "Kick the selected player away from a round gumball bumper with magnitude0x700 and a small angle perturbation from the frame counter high BYTE."
     },
@@ -2196,7 +2196,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 260,
       "old": "sub_61254",
-      "new": "GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits",
+      "new": "SKGumball_SetLiveAndSavedShield",
       "profiles": ["sk"],
       "meaning": "Set a chosen live shield-type bit and replace saved elemental-shield bits for eventual main-level restoration."
     },
@@ -2204,7 +2204,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 276,
       "old": "sub_6126C",
-      "new": "GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend",
+      "new": "SKGumballMachine_UpdateDescent",
       "profiles": ["sk"],
       "meaning": "When flagged, derive the machine downward target from leading empty occupancy WORDs, then move toward it four pixels per update."
     },
@@ -2212,7 +2212,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 308,
       "old": "sub_612A8",
-      "new": "GumballSKSelectWeightedDropAndLimitLifeRollPerMachine",
+      "new": "SKGumballMachine_ChooseDrop",
       "profiles": ["sk"],
       "meaning": "Choose dropped gumball subtype and raw animation from a weighted16-entry RNG table, allowing only the first index0 life roll per machine."
     },
@@ -2220,7 +2220,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 362,
       "old": "sub_61314",
-      "new": "GumballSKCallPlatformSolidRoutineWithFixedDimensions",
+      "new": "SKGumballPlatform_CallSolidity",
       "profiles": ["sk"],
       "meaning": "Tail-call a supplied solidity routine with gumball refill-platform dimensions and current X."
     },
@@ -2236,7 +2236,7 @@
       "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "original_line": 409,
       "old": "sub_61362",
-      "new": "GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild",
+      "new": "SKGumballDecor_SelectFrameAndMask",
       "profiles": ["sk"],
       "meaning": "Choose one of four attached machine decoration frames from subtype and optionally create the central sprite-mask child."
     },
@@ -2244,7 +2244,7 @@
       "source": "src/objects/bonus/pachinko/sk/energy_trap.s",
       "original_line": 83,
       "old": "sub_49FE4",
-      "new": "PachinkoEnergyTrapHoldPlayerAndReturnP1AfterCountdown",
+      "new": "PachinkoTrap_HoldAndReturnPlayer",
       "profiles": ["sk"],
       "meaning": "Catch players at the energy barrier Y and, for P1, count down to restoring the saved main level; above-top P1 takes immediate return path."
     },
@@ -2252,7 +2252,7 @@
       "source": "src/objects/bonus/pachinko/sk/flipper.s",
       "original_line": 51,
       "old": "sub_49CFE",
-      "new": "PachinkoFlipperCaptureRollSlideAndRequestLaunch",
+      "new": "PachinkoFlipper_UpdateRider",
       "profiles": ["sk"],
       "meaning": "Manage one flipper rider: capture standing player into rolling object control, slide along the flipper, and request a shared launch when a jump button is newly pressed."
     },
@@ -2260,7 +2260,7 @@
       "source": "src/objects/bonus/pachinko/sk/flipper.s",
       "original_line": 102,
       "old": "sub_49D72",
-      "new": "PachinkoFlipperLaunchStandingPlayerByLeverPosition",
+      "new": "PachinkoFlipper_LaunchRider",
       "profiles": ["sk"],
       "meaning": "Release a standing flipper rider with position-dependent upward/sideways speed, clearing its capture/control and returning it to routine2."
     },
@@ -2268,7 +2268,7 @@
       "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
       "original_line": 28,
       "old": "sub_4A428",
-      "new": "PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch",
+      "new": "PachinkoMagnet_UpdatePlayer",
       "profiles": ["sk"],
       "meaning": "Manage one player magnet record: capture nearby eligible player, reposition it on a rotating oscillation, launch from phase on jump press, and enforce recapture cooldown."
     },
@@ -2276,7 +2276,7 @@
       "source": "src/objects/bonus/pachinko/sk/magnet_orb.s",
       "original_line": 172,
       "old": "sub_4A5E0",
-      "new": "PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius",
+      "new": "PachinkoMagnet_PositionCapturedPlayer",
       "profiles": ["sk"],
       "meaning": "Place a captured player on a heading-oriented line with56-pixel cosine-varying radius, choose front/back drawing priority, and advance its radial phase."
     },
@@ -2284,7 +2284,7 @@
       "source": "src/objects/bonus/pachinko/sk/triangle_bumper.s",
       "original_line": 81,
       "old": "sub_49B76",
-      "new": "PachinkoTriangleKickSidewaysAndStartFlipPose",
+      "new": "PachinkoTriangle_KickAndFlipPlayer",
       "profiles": ["sk"],
       "meaning": "Kick the selected player horizontally away from a pachinko triangle, clear its pushing contact and start the flip pose."
     },
@@ -2292,7 +2292,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 47,
       "old": "sub_43B6E",
-      "new": "GumballS3LaunchFromTriangleAndConsumeBumperCell",
+      "new": "S3GumballTriangle_LaunchAndClear",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Launch selected player from a disposable triangle bumper and notify the machine to lower after its paired occupancy cells clear."
     },
@@ -2300,7 +2300,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 148,
       "old": "sub_43CAE",
-      "new": "GumballS3CheckNearbyPlayersAndDispatchItemReward",
+      "new": "S3Gumball_TryRewardNearbyPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Range-test both players for a dropped gumball and dispatch one subtype effect, returning Z to retain/no-contact or nonzero to consume."
     },
@@ -2308,7 +2308,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 225,
       "old": "sub_43D42",
-      "new": "GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter",
+      "new": "S3GumballRound_RepelPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Kick the selected player away from a round gumball bumper with magnitude0x700 and a small angle perturbation from the frame counter high BYTE."
     },
@@ -2316,7 +2316,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 290,
       "old": "sub_43E20",
-      "new": "GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits",
+      "new": "S3Gumball_SetLiveAndSavedShield",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Set a chosen live shield-type bit and replace saved elemental-shield bits for eventual main-level restoration."
     },
@@ -2324,7 +2324,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 306,
       "old": "sub_43E38",
-      "new": "GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend",
+      "new": "S3GumballMachine_UpdateDescent",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "When flagged, derive the machine downward target from leading empty occupancy WORDs, then move toward it four pixels per update."
     },
@@ -2332,7 +2332,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 338,
       "old": "sub_43E74",
-      "new": "GumballS3SelectWeightedDropAndLimitLifeRollPerMachine",
+      "new": "S3GumballMachine_ChooseDrop",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Choose dropped gumball subtype and raw animation from a weighted16-entry RNG table, allowing only the first index0 life roll per machine."
     },
@@ -2340,7 +2340,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 392,
       "old": "sub_43EE0",
-      "new": "GumballS3CallPlatformSolidRoutineWithFixedDimensions",
+      "new": "S3GumballPlatform_CallSolidity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Tail-call a supplied solidity routine with gumball refill-platform dimensions and current X."
     },
@@ -2356,7 +2356,7 @@
       "source": "src/objects/bonus/s3/gumball_bumpers.s",
       "original_line": 439,
       "old": "sub_43F2E",
-      "new": "GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild",
+      "new": "S3GumballDecor_SelectFrameAndMask",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Choose one of four attached machine decoration frames from subtype and optionally create the central sprite-mask child."
     },
@@ -2364,7 +2364,7 @@
       "source": "src/objects/bonus/sk/gumball_item.s",
       "original_line": 63,
       "old": "sub_4A362",
-      "new": "PachinkoGumballConsumeBothQueuedPlayerContacts",
+      "new": "PachinkoGumball_ConsumeBothContacts",
       "profiles": ["sk"],
       "meaning": "Consume queued P1/P2 special-touch bits in order and invoke the gumball reward bridge for each bit, even after the first call schedules deletion."
     },
@@ -2372,7 +2372,7 @@
       "source": "src/objects/bonus/sk/gumball_item.s",
       "original_line": 82,
       "old": "sub_4A384",
-      "new": "PachinkoGumballScheduleDeleteAndApplySubtypeReward",
+      "new": "PachinkoGumball_DeleteAndApplyReward",
       "profiles": ["sk"],
       "meaning": "Schedule a pachinko item for deletion and translate its subtype into either a coarse-height ring reward, a sound-only result or the shared gumball effect table."
     },

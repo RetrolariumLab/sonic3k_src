@@ -26,14 +26,14 @@ loc_49ADA:
                 beq.s   loc_49B08
                 lea     (Player_1).w,a1
                 moveq   #p1_pushing_bit,d5
-                bsr.s   PachinkoTriangleKickSidewaysAndStartFlipPose
+                bsr.s   PachinkoTriangle_KickAndFlipPlayer
 
 loc_49B08:
                 andi.w  #2,d6
                 beq.s   loc_49B16
                 lea     (Player_2).w,a1
                 moveq   #p2_pushing_bit,d5
-                bsr.s   PachinkoTriangleKickSidewaysAndStartFlipPose
+                bsr.s   PachinkoTriangle_KickAndFlipPlayer
 
 loc_49B16:
                 lea     (Ani_PachinkoTriangleBumper).l,a1
@@ -78,7 +78,7 @@ loc_49B70:
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoTriangleKickSidewaysAndStartFlipPose:
+PachinkoTriangle_KickAndFlipPlayer:
                 moveq   #signextendB(sfx_Bumper),d0
                 jsr     (Play_SFX).l
                 bclr    #Status_Facing,status(a1)
@@ -112,7 +112,7 @@ loc_49BD0:
 loc_49BEE:
                 move.b  #1,anim(a0)
                 rts
-; End of function PachinkoTriangleKickSidewaysAndStartFlipPose
+; End of function PachinkoTriangle_KickAndFlipPlayer
 
 ; ---------------------------------------------------------------------------
 Ani_PachinkoTriangleBumper:

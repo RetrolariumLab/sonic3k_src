@@ -50,10 +50,10 @@ Competition_LevelSelect:
                 jsr     (Eni_Decomp).l
                 lea     VRAMDatList_CompetitionLevelSelect(pc),a0
                 jsr     Copy_Listed_Data_To_VRAM(pc)
-                jsr     SKCompClampSelectedZoneToVisibleScrollRow(pc)
+                jsr     SKComp_GetZoneWindowRow(pc)
                 mulu.w  #$48,d0
                 move.w  d0,(V_scroll_value).w
-                jsr     SKCompClearCharacterSelectAreasAtZoneWindowRow(pc)
+                jsr     SKComp_ClearCharacterSelectAreas(pc)
                 jsr     SKCompDrawFiveZoneBestTimesInMenuOrder(pc)
                 lea     (ArtKos_S3MenuBG).l,a0          ; Decompress source
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
@@ -257,7 +257,7 @@ loc_AEF2:
                 move.b  (Competition_menu_zone).w,d0
                 move.b  Comp_ZoneList(pc,d0.w),(Current_zone).w
                 clr.b   (Current_act).w
-                jsr     SKCompInitializeRoundLivesScoresTimersAndFlags(pc)
+                jsr     SKComp_InitRoundState(pc)
                 move.b  #GameMode_Level,(Game_mode).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -327,7 +327,8 @@ loc_AFAA:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompClampSelectedZoneToVisibleScrollRow:
+; Clamp the selected zone minus one to the three possible window rows
+SKComp_GetZoneWindowRow:
                 moveq   #0,d0
                 move.b  (Competition_menu_zone).w,d0
                 subq.w  #1,d0
@@ -341,7 +342,7 @@ loc_AFBE:
 
 locret_AFC6:
                 rts
-; End of function SKCompClampSelectedZoneToVisibleScrollRow
+; End of function SKComp_GetZoneWindowRow
 
 ; ---------------------------------------------------------------------------
 
@@ -366,8 +367,8 @@ loc_AFF0:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompClearCharacterSelectAreasAtZoneWindowRow:
-                bsr.s   SKCompClampSelectedZoneToVisibleScrollRow
+SKComp_ClearCharacterSelectAreas:
+                bsr.s   SKComp_GetZoneWindowRow
                 mulu.w  #$48,d0
                 addi.w  #$20,d0
                 lsl.w   #4,d0
@@ -387,30 +388,31 @@ SKCompClearCharacterSelectAreasAtZoneWindowRow:
 loc_B02E:
                 addi.w  #$300,d0
                 jmp     Menu_ClearNineByEightTileArea(pc)
-; End of function SKCompClearCharacterSelectAreasAtZoneWindowRow
+; End of function SKComp_ClearCharacterSelectAreas
 
 ; =============== S U B R O U T I N E =======================================
 
 SKCompDrawFiveZoneBestTimesInMenuOrder:
                 move.w  #VRAM_Plane_A_Name_Table+$2D2,d7
                 move.l  (Competition_saved_data).w,d6
-                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   SKComp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$10).w,d6
-                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   SKComp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$30).w,d6
-                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   SKComp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$20).w,d6
-                bsr.s   SKCompFormatAndUploadMinuteSecondHundredthTime
+                bsr.s   SKComp_DrawPackedTime
                 addi.w  #$480,d7
                 move.l  (Competition_saved_data+$40).w,d6
 ; End of function SKCompDrawFiveZoneBestTimesInMenuOrder
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompFormatAndUploadMinuteSecondHundredthTime:
+; Format the three binary time fields into six decimal digits and two separators, then upload an 8-by-2 map
+SKComp_DrawPackedTime:
                 moveq   #0,d5
                 lsl.l   #8,d6
                 moveq   #2,d3
@@ -426,17 +428,17 @@ loc_B06C:
                 lea     (Plane_buffer).w,a1
                 lea     (MapUnc_CompetitionNumbers).l,a2
                 moveq   #0,d0
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKComp_AppendTimeDigit
                 st      d0
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKComp_AppendTimeDigit
                 moveq   #$A,d1
                 bsr.s   SKCompAppendTwoRowNumericGlyphColumn
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKComp_AppendTimeDigit
+                bsr.s   SKComp_AppendTimeDigit
                 moveq   #$B,d1
                 bsr.s   SKCompAppendTwoRowNumericGlyphColumn
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
-                bsr.s   SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+                bsr.s   SKComp_AppendTimeDigit
+                bsr.s   SKComp_AppendTimeDigit
                 lea     (Plane_buffer).w,a1
 
 CompetitionMenuUploadEightByTwoTileBlock:
@@ -451,11 +453,12 @@ CompetitionMenuUploadEightByTwoTileBlock:
                 moveq   #8-1,d1
                 moveq   #2-1,d2
                 jmp     (Plane_Map_To_VRAM).l
-; End of function SKCompFormatAndUploadMinuteSecondHundredthTime
+; End of function SKComp_DrawPackedTime
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCompAppendNextTimeDigitWithFirstZeroBlankFlag:
+; Rotate to the next BCD nibble and optionally emit the blank glyph for a leading zero
+SKComp_AppendTimeDigit:
                 rol.l   #4,d5
                 move.w  d5,d1
                 andi.w  #$F,d1
@@ -464,7 +467,7 @@ SKCompAppendNextTimeDigitWithFirstZeroBlankFlag:
                 bne.s   SKCompAppendTwoRowNumericGlyphColumn
                 moveq   #$C,d1
                 st      d0
-; End of function SKCompAppendNextTimeDigitWithFirstZeroBlankFlag
+; End of function SKComp_AppendTimeDigit
 
 ; =============== S U B R O U T I N E =======================================
 

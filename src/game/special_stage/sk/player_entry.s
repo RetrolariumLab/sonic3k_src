@@ -152,7 +152,7 @@ loc_9010:
                 move.w  #0,$34(a0)
                 move.w  #$F800,$36(a0)
                 move.w  #0,$38(a0)
-                bsr.w   SStage_UpdateProjectionRotationCoefficients
+                bsr.w   SStage_UpdateProjectionScalars
                 move.b  #$FF,$3A(a0)
                 move.l  #loc_903E,(a0)
 
@@ -251,7 +251,7 @@ loc_9138:
                 move.w  d0,$36(a0)
 
 loc_9152:
-                bsr.w   SStage_UpdateProjectionRotationCoefficients
+                bsr.w   SStage_UpdateProjectionScalars
                 bsr.w   SStage_ProjectCharacterCoordinates
                 jsr     (Draw_Sprite).l
                 lea     (PLC_SStageSonic).l,a2

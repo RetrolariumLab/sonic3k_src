@@ -4,11 +4,11 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SKEndingDispatchCreditsInitDelayScrollAndFinish:
+SKCredits_DispatchScrollState:
                 move.w  (_unkFA86).w,d0
                 move.w  off_5B19A(pc,d0.w),d0
                 jmp     off_5B19A(pc,d0.w)
-; End of function SKEndingDispatchCreditsInitDelayScrollAndFinish
+; End of function SKCredits_DispatchScrollState
 
 ; ---------------------------------------------------------------------------
 off_5B19A:
@@ -32,7 +32,7 @@ loc_5B1A2:
                 move.b  #mus_CreditsK,subtype(a1)
 
 loc_5B1D2:
-                bsr.w   SKCreditsSelectProductRegionCharacterCompletionScrollSpeedDelay
+                bsr.w   SKCredits_SelectScrollSpeedAndDelay
                 move.w  #$EEE,(Normal_palette+$2).w
                 move.w  #$EE,(Normal_palette_line_2+$2).w
                 lea     PLC_SKCredits(pc),a1
@@ -47,7 +47,7 @@ loc_5B1F4:
                 subq.w  #1,(_unkF660).w
                 bpl.s   locret_5B202
                 addq.w  #2,(_unkFA86).w
-                bsr.w   SKCreditsQueueProductCharacterCompletionPoseGraphics
+                bsr.w   SKCredits_QueueEndingPoseArt
 
 locret_5B202:
                 rts
@@ -67,7 +67,7 @@ loc_5B204:
                 addi.w  #$E00,d0
                 move.w  d0,d1
                 andi.w  #$F00,d1
-                bsr.w   SKCreditsClearFortyColumnsAcrossTwoPlaneRows
+                bsr.w   SKCredits_ClearTwoPlaneRows
                 moveq   #0,d2
                 tst.w   (SK_alone_flag).w
                 beq.s   loc_5B238
@@ -96,7 +96,7 @@ loc_5B238:
 
 loc_5B276:
                 andi.w  #$FFE,d2
-                bsr.w   SKCreditsBuildAndUploadVariableWidthTwoRowText
+                bsr.w   SKCredits_BuildAndUploadText
                 addq.w  #2,(_unkFA84).w
 
 locret_5B282:
@@ -146,7 +146,8 @@ locret_5B2D4:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCreditsClearFortyColumnsAcrossTwoPlaneRows:
+; Clear forty columns of each plane A row
+SKCredits_ClearTwoPlaneRows:
                 move    #$2700,sr
                 lea     (VDP_data_port).l,a6
                 move.w  d1,d2
@@ -175,12 +176,13 @@ loc_5B306:
 
 locret_5B316:
                 rts
-; End of function SKCreditsClearFortyColumnsAcrossTwoPlaneRows
+; End of function SKCredits_ClearTwoPlaneRows
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCreditsBuildAndUploadVariableWidthTwoRowText:
-                bsr.w   SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows
+; Upload the computed width of both scratch rows to consecutive plane A rows
+SKCredits_BuildAndUploadText:
+                bsr.w   SKCredits_BuildGlyphRows
                 move    #$2700,sr
                 lea     (VDP_data_port).l,a6
                 addi.w  #VRAM_Plane_A_Name_Table,d2
@@ -209,11 +211,12 @@ loc_5B360:
                 dbf     d1,loc_5B360
                 move    #$2300,sr
                 rts
-; End of function SKCreditsBuildAndUploadVariableWidthTwoRowText
+; End of function SKCredits_BuildAndUploadText
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows:
+; Expand a null-terminated ASCII line to variable-width glyphs in two scratch rows
+SKCredits_BuildGlyphRows:
                 lea     (Chunk_table+$7000).l,a2
                 lea     (Chunk_table+$7080).l,a3
                 moveq   #0,d0
@@ -315,11 +318,12 @@ loc_5B420:
                 clr.w   (a2)+
                 clr.w   (a3)+
                 bra.w   loc_5B37A
-; End of function SKCreditsBuildAsciiGlyphLineIntoTwoScratchRows
+; End of function SKCredits_BuildGlyphRows
 
 ; =============== S U B R O U T I N E =======================================
 
-SKCreditsQueueProductCharacterCompletionPoseGraphics:
+; Queue AND Knuckles art, then select banner and pose by product, character and emerald completion
+SKCredits_QueueEndingPoseArt:
                 lea     (ArtKosM_ANDKnuckles).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_ANDKnuckles),d2
                 jsr     (Queue_Kos_Module).l
@@ -351,7 +355,7 @@ loc_5B468:
 loc_5B46C:
                 movea.l off_5B472(pc,d1.w),a2
                 jmp     (a2)
-; End of function SKCreditsQueueProductCharacterCompletionPoseGraphics
+; End of function SKCredits_QueueEndingPoseArt
 
 ; ---------------------------------------------------------------------------
 off_5B472:

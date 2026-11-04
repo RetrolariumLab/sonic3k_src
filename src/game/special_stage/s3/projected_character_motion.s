@@ -87,7 +87,8 @@ Map_SStageShadow:
 
 ; =============== S U B R O U T I N E =======================================
 
-SStage_UpdateProjectionRotationCoefficients:
+; Refresh the four Q14 sine and cosine pairs used for character projection
+SStage_UpdateProjectionScalars:
                 move.w  (SStage_scalar_index_2).w,d0
                 lea     (SStage_scalar_result_2).w,a1
                 bsr.w   GetScalars2
@@ -101,7 +102,7 @@ SStage_UpdateProjectionRotationCoefficients:
                 lea     (SStage_scalar_result_3).w,a1
                 bsr.w   GetScalars2
                 rts
-; End of function SStage_UpdateProjectionRotationCoefficients
+; End of function SStage_UpdateProjectionScalars
 
 ; =============== S U B R O U T I N E =======================================
 

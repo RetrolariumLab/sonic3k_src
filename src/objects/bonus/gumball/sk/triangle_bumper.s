@@ -23,7 +23,7 @@ loc_60F3E:
 
 loc_60F64:
                 lea     (Player_1).w,a1
-                bsr.w   GumballSKLaunchFromTriangleAndConsumeBumperCell
+                bsr.w   SKGumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ loc_60F72:
 
 loc_60F80:
                 lea     (Player_2).w,a1
-                bsr.w   GumballSKLaunchFromTriangleAndConsumeBumperCell
+                bsr.w   SKGumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 

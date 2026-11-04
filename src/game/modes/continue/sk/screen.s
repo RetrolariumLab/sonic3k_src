@@ -47,7 +47,7 @@ loc_5C3BC:
                 lea     aCONTINUE(pc),a1
                 move.w  #$292,d2
                 move.w  #make_art_tile(ArtTile_Continue_Text,0,1),d6
-                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
+                jsr     (SKCredits_BuildAndUploadText).l
                 cmpi.w  #3,(Player_mode).w
                 beq.s   loc_5C3FE
                 tst.w   (SK_alone_flag).w

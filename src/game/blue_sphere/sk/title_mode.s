@@ -8,10 +8,10 @@ BlueSpheresTitle:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeToBlack).l
-                bsr.w   BlueSphereResetSceneVideoQueuesAndRuntimeMemory
-                bsr.w   BlueSphereClassifyLockonSerialAndInitializeLevelSelection
+                bsr.w   BlueSphere_ResetVideoAndSceneRAM
+                bsr.w   BlueSphere_InitSelectionFromSerial
                 lea     (Target_palette).w,a2
-                bsr.w   BlueSphereCopyProgressSelectedFullPalette
+                bsr.w   BlueSphere_CopyProgressPalette
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_BlueSphere_TitleText),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_CreditsText).l,a0
                 jsr     (Nem_Decomp).l
@@ -63,7 +63,7 @@ BlueSpheresTitle:
 loc_4CA8C:
                 move.w  #$100,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,0),d6
-                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
+                jsr     (SKCredits_BuildAndUploadText).l
                 tst.b   (Blue_spheres_mode).w
                 bne.s   loc_4CAA8
                 move.l  #$FFF0FFF8,(V_scroll_value).w
@@ -85,7 +85,7 @@ loc_4CAE8:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 jsr     (Wait_VSync).l
-                bsr.w   BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo
+                bsr.w   BlueSphere_ScrollTop64FgLines
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
@@ -95,7 +95,8 @@ loc_4CAE8:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereCopyProgressSelectedFullPalette:
+; Use the progress flag to select one complete 128-byte palette for the caller's destination
+BlueSphere_CopyProgressPalette:
                 lea     (Pal_SpheresTitle_2).l,a1
                 tst.b   (Blue_spheres_progress_flag).w
                 bne.s   loc_4CB2C
@@ -108,7 +109,7 @@ loc_4CB2E:
                 move.w  (a1)+,(a2)+
                 dbf     d0,loc_4CB2E
                 rts
-; End of function BlueSphereCopyProgressSelectedFullPalette
+; End of function BlueSphere_CopyProgressPalette
 
 ; ---------------------------------------------------------------------------
 Pal_SpheresTitle_1:
@@ -126,7 +127,8 @@ aGetBlueSpheres:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo:
+; Subtract two from foreground scroll on each title update
+BlueSphere_ScrollTop64FgLines:
                 lea     (H_scroll_buffer).w,a1
                 moveq   #$40-1,d1
 
@@ -135,11 +137,12 @@ BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo:
                 addq.w  #4,a1
                 dbf     d1,.loop
                 rts
-; End of function BlueSphereScrollFirstSixtyFourForegroundLinesLeftTwo
+; End of function BlueSphere_ScrollTop64FgLines
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereClassifyLockonSerialAndInitializeLevelSelection:
+; Recognized Sonic 1 serials use normal selection. Other cartridges seed a challenge from their header
+BlueSphere_InitSelectionFromSerial:
                 lea     (BlueSpheresSerialsText).l,a1
                 moveq   #4-1,d1
 
@@ -161,7 +164,7 @@ loc_4CCC0:
                 dbf     d1,loc_4CCAE
                 move.b  #0,(Blue_spheres_mode).w
                 move.b  #-1,(Blue_spheres_progress_flag).w
-                bsr.s   BlueSphereDeriveTwentySevenBitLevelFromLockonHeader
+                bsr.s   BlueSphere_DeriveLevelFromHeader
 
 locret_4CCDA:
                 rts
@@ -175,7 +178,7 @@ loc_4CCDC:
                 move.l  #0,(Blue_spheres_current_level).w
                 move.l  #$10203,(Blue_spheres_current_stage).w
                 rts
-; End of function BlueSphereClassifyLockonSerialAndInitializeLevelSelection
+; End of function BlueSphere_InitSelectionFromSerial
 
 ; ---------------------------------------------------------------------------
 BlueSpheresSerialsText:
@@ -185,7 +188,8 @@ BlueSpheresSerialsText:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereDeriveTwentySevenBitLevelFromLockonHeader:
+; Fold the serial, date and other header fields to 27 bits, then derive four modular stage indices
+BlueSphere_DeriveLevelFromHeader:
                 lea     (LockonSerialNumber).l,a1
                 moveq   #$B-1,d1
 
@@ -321,7 +325,7 @@ loc_4CDE6:
                 swap    d2
                 move.b  d2,(a2)+
                 rts
-; End of function BlueSphereDeriveTwentySevenBitLevelFromLockonHeader
+; End of function BlueSphere_DeriveLevelFromHeader
 
 ; ---------------------------------------------------------------------------
 BlueSpheresMonthText:

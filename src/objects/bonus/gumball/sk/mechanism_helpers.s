@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKLaunchFromTriangleAndConsumeBumperCell:
+; Consume the bumper cell. Notify the machine to descend once both cells in the pair are empty
+SKGumballTriangle_LaunchAndClear:
                 move.w  #-$300,d0
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
@@ -30,7 +31,7 @@ loc_60FB4:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function GumballSKLaunchFromTriangleAndConsumeBumperCell
+; End of function SKGumballTriangle_LaunchAndClear
 
 ; ---------------------------------------------------------------------------
 
@@ -38,7 +39,7 @@ loc_60FFE:
                 lea     ObjDat3_6138C(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_61012,(a0)
-                bsr.w   GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild
+                bsr.w   SKGumballDecor_SelectFrameAndMask
 
 loc_61012:
                 jsr     (Refresh_ChildPosition).l
@@ -108,7 +109,8 @@ loc_610C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKCheckNearbyPlayersAndDispatchItemReward:
+; Check both players, dispatch one subtype effect and return Z when the item should remain
+SKGumball_TryRewardNearbyPlayer:
                 lea     word_610F0(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
@@ -132,7 +134,7 @@ loc_61100:
 
 locret_6110C:
                 rts
-; End of function GumballSKCheckNearbyPlayersAndDispatchItemReward
+; End of function SKGumball_TryRewardNearbyPlayer
 
 ; ---------------------------------------------------------------------------
 off_6110E:
@@ -176,14 +178,14 @@ loc_6115C:
                 move.l  d0,-(sp)
                 tst.w   d0
                 beq.s   loc_61164
-                bsr.s   GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
+                bsr.s   SKGumballRound_RepelPlayer
 
 loc_61164:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
                 beq.s   loc_6116E
-                bsr.s   GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
+                bsr.s   SKGumballRound_RepelPlayer
 
 loc_6116E:
                 clr.b   collision_property(a0)
@@ -192,7 +194,8 @@ loc_6116E:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter:
+; Use magnitude $700 and perturb the angle with the high byte of the frame counter
+SKGumballRound_RepelPlayer:
                 movea.w d0,a1
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
@@ -216,7 +219,7 @@ GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter:
                 move.b  #1,anim(a0)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function GumballSKRepelPlayerFromRoundItemWithHighCounterByteJitter
+; End of function SKGumballRound_RepelPlayer
 
 ; ---------------------------------------------------------------------------
 
@@ -227,7 +230,7 @@ loc_611D6:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_FireShield,d0
-                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   SKGumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_FireShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -239,7 +242,7 @@ loc_61200:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_BublShield,d0
-                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   SKGumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -251,19 +254,20 @@ loc_6122A:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_LtngShield,d0
-                bsr.w   GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   SKGumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_LightningShield),d0
                 jmp     (Play_Music).l
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits:
+; Set the live shield bit and replace the saved elemental bits used when returning to the main level
+SKGumball_SetLiveAndSavedShield:
                 bset    d0,status_secondary(a1)
                 lea     (Saved_status_secondary).w,a2
                 andi.b  #$8F,(a2)
                 bset    d0,(a2)
                 rts
-; End of function GumballSKSetLiveShieldTypeAndReplaceSavedTypeBits
+; End of function SKGumball_SetLiveAndSavedShield
 
 ; ---------------------------------------------------------------------------
 
@@ -273,7 +277,8 @@ loc_61264:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend:
+; When flagged, count leading empty occupancy words to choose the target. Move down four pixels per update
+SKGumballMachine_UpdateDescent:
                 bclr    #0,$38(a0)
                 beq.s   loc_61294
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
@@ -301,11 +306,12 @@ loc_61294:
 
 locret_612A6:
                 rts
-; End of function GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+; End of function SKGumballMachine_UpdateDescent
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKSelectWeightedDropAndLimitLifeRollPerMachine:
+; Use the weighted 16-entry table and honor only the first index-zero life roll for each machine
+SKGumballMachine_ChooseDrop:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
                 bne.s   loc_612C2
@@ -325,7 +331,7 @@ loc_612D6:
                 lsl.w   #2,d0
                 move.l  off_612F0(pc,d0.w),$30(a0)
                 rts
-; End of function GumballSKSelectWeightedDropAndLimitLifeRollPerMachine
+; End of function SKGumballMachine_ChooseDrop
 
 ; ---------------------------------------------------------------------------
 byte_612E0:
@@ -359,13 +365,14 @@ off_612F0:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKCallPlatformSolidRoutineWithFixedDimensions:
+; Pass the fixed refill-platform dimensions and current X, then tail-call the supplied worker in a1
+SKGumballPlatform_CallSolidity:
                 moveq   #$4B,d1
                 moveq   #$10,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jmp     (a1)
-; End of function GumballSKCallPlatformSolidRoutineWithFixedDimensions
+; End of function SKGumballPlatform_CallSolidity
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -406,7 +413,8 @@ byte_61342:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild:
+; Subtype selects one of four decoration frames and can spawn the central mask sprite
+SKGumballDecor_SelectFrameAndMask:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
@@ -417,7 +425,7 @@ GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild:
                 bne.w   locret_60EB8
                 lea     ChildObjDat_6144A(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function GumballSKSelectAttachedDecorationFrameAndOptionalMaskChild
+; End of function SKGumballDecor_SelectFrameAndMask
 
 ; ---------------------------------------------------------------------------
 RawAni_61388:

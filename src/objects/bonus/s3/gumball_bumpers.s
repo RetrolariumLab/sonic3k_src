@@ -23,7 +23,7 @@ loc_43B18:
 
 loc_43B3E:
                 lea     (Player_1).w,a1
-                bsr.w   GumballS3LaunchFromTriangleAndConsumeBumperCell
+                bsr.w   S3GumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -35,7 +35,7 @@ loc_43B4C:
 
 loc_43B5A:
                 lea     (Player_2).w,a1
-                bsr.w   GumballS3LaunchFromTriangleAndConsumeBumperCell
+                bsr.w   S3GumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -44,7 +44,8 @@ loc_43B68:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3LaunchFromTriangleAndConsumeBumperCell:
+; Consume the bumper cell. Notify the machine to descend once both cells in the pair are empty
+S3GumballTriangle_LaunchAndClear:
                 move.w  #-$300,d0
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
@@ -70,7 +71,7 @@ loc_43B8E:
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l
                 rts
-; End of function GumballS3LaunchFromTriangleAndConsumeBumperCell
+; End of function S3GumballTriangle_LaunchAndClear
 
 ; ---------------------------------------------------------------------------
 
@@ -78,7 +79,7 @@ loc_43BD8:
                 lea     ObjDat3_43F58(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_43BEC,(a0)
-                bsr.w   GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild
+                bsr.w   S3GumballDecor_SelectFrameAndMask
 
 loc_43BEC:
                 jsr     (Refresh_ChildPosition).l
@@ -145,7 +146,8 @@ loc_43C94:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3CheckNearbyPlayersAndDispatchItemReward:
+; Check both players, dispatch one subtype effect and return Z when the item should remain
+S3Gumball_TryRewardNearbyPlayer:
                 lea     word_43CE4(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
@@ -160,7 +162,7 @@ GumballS3CheckNearbyPlayersAndDispatchItemReward:
 
 locret_43CD0:
                 rts
-; End of function GumballS3CheckNearbyPlayersAndDispatchItemReward
+; End of function S3Gumball_TryRewardNearbyPlayer
 
 ; ---------------------------------------------------------------------------
 off_43CD2:
@@ -206,14 +208,14 @@ loc_43D28:
                 move.l  d0,-(sp)
                 tst.w   d0
                 beq.s   loc_43D30
-                bsr.s   GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
+                bsr.s   S3GumballRound_RepelPlayer
 
 loc_43D30:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
                 beq.s   loc_43D3A
-                bsr.s   GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
+                bsr.s   S3GumballRound_RepelPlayer
 
 loc_43D3A:
                 clr.b   collision_property(a0)
@@ -222,7 +224,8 @@ loc_43D3A:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter:
+; Use magnitude $700 and perturb the angle with the high byte of the frame counter
+S3GumballRound_RepelPlayer:
                 movea.w d0,a1
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
@@ -246,7 +249,7 @@ GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter:
                 move.b  #1,anim(a0)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function GumballS3RepelPlayerFromRoundItemWithHighCounterByteJitter
+; End of function S3GumballRound_RepelPlayer
 
 ; ---------------------------------------------------------------------------
 
@@ -257,7 +260,7 @@ loc_43DA2:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_FireShield,d0
-                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   S3Gumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_FireShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -269,7 +272,7 @@ loc_43DCC:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_BublShield,d0
-                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   S3Gumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
@@ -281,19 +284,20 @@ loc_43DF6:
                 andi.b  #$8E,status_secondary(a1)
                 bset    #Status_Shield,status_secondary(a1)
                 moveq   #Status_LtngShield,d0
-                bsr.w   GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
+                bsr.w   S3Gumball_SetLiveAndSavedShield
                 moveq   #signextendB(sfx_LightningShield),d0
                 jmp     (Play_Music).l
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits:
+; Set the live shield bit and replace the saved elemental bits used when returning to the main level
+S3Gumball_SetLiveAndSavedShield:
                 bset    d0,status_secondary(a1)
                 lea     (Saved_status_secondary).w,a2
                 andi.b  #$8F,(a2)
                 bset    d0,(a2)
                 rts
-; End of function GumballS3SetLiveShieldTypeAndReplaceSavedTypeBits
+; End of function S3Gumball_SetLiveAndSavedShield
 
 ; ---------------------------------------------------------------------------
 
@@ -303,7 +307,8 @@ loc_43E30:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend:
+; When flagged, count leading empty occupancy words to choose the target. Move down four pixels per update
+S3GumballMachine_UpdateDescent:
                 bclr    #0,$38(a0)
                 beq.s   loc_43E60
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
@@ -331,11 +336,12 @@ loc_43E60:
 
 locret_43E72:
                 rts
-; End of function GumballS3RecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+; End of function S3GumballMachine_UpdateDescent
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3SelectWeightedDropAndLimitLifeRollPerMachine:
+; Use the weighted 16-entry table and honor only the first index-zero life roll for each machine
+S3GumballMachine_ChooseDrop:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
                 bne.s   loc_43E8E
@@ -355,7 +361,7 @@ loc_43EA2:
                 lsl.w   #2,d0
                 move.l  off_43EBC(pc,d0.w),$30(a0)
                 rts
-; End of function GumballS3SelectWeightedDropAndLimitLifeRollPerMachine
+; End of function S3GumballMachine_ChooseDrop
 
 ; ---------------------------------------------------------------------------
 byte_43EAC:
@@ -389,13 +395,14 @@ off_43EBC:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3CallPlatformSolidRoutineWithFixedDimensions:
+; Pass the fixed refill-platform dimensions and current X, then tail-call the supplied worker in a1
+S3GumballPlatform_CallSolidity:
                 moveq   #$4B,d1
                 moveq   #$10,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jmp     (a1)
-; End of function GumballS3CallPlatformSolidRoutineWithFixedDimensions
+; End of function S3GumballPlatform_CallSolidity
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -436,7 +443,8 @@ byte_43F0E:
 
 ; =============== S U B R O U T I N E =======================================
 
-GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild:
+; Subtype selects one of four decoration frames and can spawn the central mask sprite
+S3GumballDecor_SelectFrameAndMask:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
@@ -447,7 +455,7 @@ GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild:
                 bne.w   locret_43A92
                 lea     ChildObjDat_44016(pc),a2
                 jmp     (CreateChild6_Simple).l
-; End of function GumballS3SelectAttachedDecorationFrameAndOptionalMaskChild
+; End of function S3GumballDecor_SelectFrameAndMask
 
 ; ---------------------------------------------------------------------------
 RawAni_43F54:

@@ -6,7 +6,7 @@
 BlueSpheresResults:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                bsr.w   BlueSphereResetSceneVideoQueuesAndRuntimeMemory
+                bsr.w   BlueSphere_ResetVideoAndSceneRAM
                 lea     (Pal_SphereResults_012).l,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToWcnt($80),d0
@@ -40,12 +40,12 @@ loc_4DA96:
                 lea     aCongratulation(pc),a1
                 move.w  #$30A,d2
                 move.w  #make_art_tile(ArtTile_BlueSphere_TitleText,0,1),d6
-                jsr     (SKCreditsBuildAndUploadVariableWidthTwoRowText).l
+                jsr     (SKCredits_BuildAndUploadText).l
                 lea     (Level_layout_header).w,a1
                 lea     (MapEni_BlueSphereTitleBG).l,a0
                 move.w  #make_art_tile(ArtTile_BlueSphere_BG,3,0),d0
                 jsr     (Eni_Decomp).l
-                bsr.w   BlueSphereTileResultsLogoBackgroundAndOffsetScroll
+                bsr.w   BlueSphere_TileResultsLogoBg
                 move.b  #1,(Blue_spheres_option).w
                 move.l  #Obj_SphereResults_4DEF8,(Player_1).w
                 move.l  #Obj_SphereResults_4DF86,(Player_2).w
@@ -102,7 +102,7 @@ loc_4DC1A:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeToBlack).l
-                bsr.w   BlueSphereResetSceneVideoQueuesAndRuntimeMemory
+                bsr.w   BlueSphere_ResetVideoAndSceneRAM
                 clearRAM _unkFA80,(DMA_queue-_unkFA80)
                 lea     (Pal_SonicTails).l,a1
                 lea     (Target_palette).w,a2
@@ -157,7 +157,7 @@ loc_4DC7E:
                 lea     (MapEni_BlueSphereTitleBG).l,a0
                 move.w  #make_art_tile($000,2,0),d0
                 jsr     (Eni_Decomp).l
-                bsr.w   BlueSphereTileResultsLogoBackgroundAndOffsetScroll
+                bsr.w   BlueSphere_TileResultsLogoBg
                 move.l  #Obj_SpheresTitle_4D03E,(Player_2).w
                 move.w  #$C0,(Player_2+y_pos).w
                 move.l  #Obj_SphereResults_4E0A4,(Dynamic_object_RAM+(object_size*10)).w
@@ -240,7 +240,8 @@ aPerfect:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereTileResultsLogoBackgroundAndOffsetScroll:
+; Stamp the 12-by-8 map at fourteen plane B destinations and set the initial 16-pixel scroll offset
+BlueSphere_TileResultsLogoBg:
                 lea     word_4DEDC(pc),a2
                 moveq   #$E-1,d5
 
@@ -262,7 +263,7 @@ loc_4DED0:
                 addq.w  #4,a1
                 dbf     d1,loc_4DED0
                 rts
-; End of function BlueSphereTileResultsLogoBackgroundAndOffsetScroll
+; End of function BlueSphere_TileResultsLogoBg
 
 ; ---------------------------------------------------------------------------
 word_4DEDC:

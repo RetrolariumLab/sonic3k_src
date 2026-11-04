@@ -61,7 +61,7 @@ S3Credits:
                 lea     S3CreditsText_Main(pc),a1
                 move.w  (a1),d0
                 adda.w  d0,a1
-                bsr.w   S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+                bsr.w   S3Credits_DrawPageAndQueueUpload
                 lea     (Pal_Ending).l,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($40),d6
@@ -86,7 +86,7 @@ loc_404E0:
                 addq.w  #1,(Level_frame_counter).w
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                bsr.w   S3CreditsDispatchTimedPagesAlternativeScrollAndEyecatch
+                bsr.w   S3Credits_DispatchDisplayState
                 jsr     (Process_Nem_Queue_Init).l
                 jsr     (Process_Kos_Module_Queue).l
                 cmpi.b  #GameMode_S3Credits,(Game_mode).w
@@ -95,11 +95,11 @@ loc_404E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CreditsDispatchTimedPagesAlternativeScrollAndEyecatch:
+S3Credits_DispatchDisplayState:
                 move.w  (_unkFA86).w,d0
                 move.w  off_4052A(pc,d0.w),d0
                 jmp     off_4052A(pc,d0.w)
-; End of function S3CreditsDispatchTimedPagesAlternativeScrollAndEyecatch
+; End of function S3Credits_DispatchDisplayState
 
 ; ---------------------------------------------------------------------------
 off_4052A:
@@ -125,7 +125,7 @@ loc_40538:
                 move.w  (a1,d0.w),d0
                 beq.w   loc_405FA
                 lea     (a1,d0.w),a1
-                bsr.w   S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+                bsr.w   S3Credits_DrawPageAndQueueUpload
                 move.b  #VInt_ID_18,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 jmp     (Pal_FadeFromBlack).l
@@ -135,7 +135,7 @@ loc_40538:
                 lea     S3CreditsText_Dummy(pc),a1
                 move.w  (a1),d0
                 adda.w  d0,a1
-                bsr.w   S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+                bsr.w   S3Credits_DrawPageAndQueueUpload
                 lea     (Target_palette).w,a1
                 lea     (Normal_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
@@ -176,7 +176,7 @@ loc_405E2:
                 move.w  (a1,d0.w),d0
                 beq.s   loc_405FA
                 lea     (a1,d0.w),a1
-                bra.w   S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+                bra.w   S3Credits_DrawPageAndQueueUpload
 ; ---------------------------------------------------------------------------
 
 loc_405FA:
@@ -201,7 +201,7 @@ loc_4061C:
                 cmpi.w  #7,(Chaos_emerald_count).w
                 beq.s   loc_40656
                 lea     S3CreditsText_TryAgain(pc),a1
-                bsr.w   S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+                bsr.w   S3Credits_DrawPageAndQueueUpload
                 lea     Child6_EndingTryAgain(pc),a1
 
 loc_40656:
@@ -331,13 +331,14 @@ loc_4078C:
                 move.l  #AniRaw_41932,$30(a0)
 
 loc_407CC:
-                bsr.w   S3EndingLatchLogoReadyAnimationAndResumeAtCallerContinuation
+                bsr.w   S3Ending_TryResumeLogoAnimation
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
-S3EndingLatchLogoReadyAnimationAndResumeAtCallerContinuation:
+; When the main logo is ready, reset the side sprite's animation and store the caller's continuation as its handler
+S3Ending_TryResumeLogoAnimation:
                 movea.w (_unkFAA4).w,a1
                 btst    #5,$38(a1)
                 beq.s   locret_407FA
@@ -348,7 +349,7 @@ S3EndingLatchLogoReadyAnimationAndResumeAtCallerContinuation:
 
 locret_407FA:
                 rts
-; End of function S3EndingLatchLogoReadyAnimationAndResumeAtCallerContinuation
+; End of function S3Ending_TryResumeLogoAnimation
 
 ; ---------------------------------------------------------------------------
 
@@ -525,19 +526,20 @@ loc_40A42:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CreditsDrawCountedTextPageAndRequestPlaneUpload:
+S3Credits_DrawPageAndQueueUpload:
                 move.w  (a1)+,d6
 
 loc_40A4C:
-                bsr.w   S3CreditsDrawPositionedMixedSizeAsciiIntoWrappingPlaneRAM
+                bsr.w   S3Credits_DrawPositionedText
                 dbf     d6,loc_40A4C
                 bset    #0,(_unkFA88).w
                 rts
-; End of function S3CreditsDrawCountedTextPageAndRequestPlaneUpload
+; End of function S3Credits_DrawPageAndQueueUpload
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CreditsDrawPositionedMixedSizeAsciiIntoWrappingPlaneRAM:
+; Use 8-by-16 lowercase and variable-width 24-pixel-high uppercase glyphs. Wrap addresses within the 8 KB plane buffer
+S3Credits_DrawPositionedText:
                 lea     (RAM_start+$2000).l,a2
                 move.w  (a1)+,d0
                 adda.w  d0,a2
@@ -629,4 +631,4 @@ loc_40B10:
 
 locret_40B1A:
                 rts
-; End of function S3CreditsDrawPositionedMixedSizeAsciiIntoWrappingPlaneRAM
+; End of function S3Credits_DrawPositionedText

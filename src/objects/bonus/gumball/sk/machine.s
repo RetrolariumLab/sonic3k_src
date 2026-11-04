@@ -28,7 +28,7 @@ loc_60CA8:
                 jsr     (CreateChild1_Normal).l
 
 loc_60CB8:
-                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   SKGumballMachine_UpdateDescent
                 lea     word_60D16(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
@@ -67,7 +67,7 @@ word_60D16:
 ; ---------------------------------------------------------------------------
 
 loc_60D1E:
-                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   SKGumballMachine_UpdateDescent
                 lea     byte_61450(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
@@ -80,7 +80,7 @@ loc_60D32:
 ; ---------------------------------------------------------------------------
 
 loc_60D40:
-                bsr.w   GumballSKRecomputeDropTargetFromLeadingEmptyBumperPairsAndDescend
+                bsr.w   SKGumballMachine_UpdateDescent
                 btst    #1,$38(a0)
                 bne.s   loc_60D52
                 move.l  #loc_60CB8,(a0)
@@ -102,7 +102,7 @@ loc_60D7E:
                 btst    #1,$38(a0)
                 bne.s   loc_60D96
                 lea     (SolidObjectFull).l,a1
-                bsr.w   GumballSKCallPlatformSolidRoutineWithFixedDimensions
+                bsr.w   SKGumballPlatform_CallSolidity
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -199,7 +199,7 @@ loc_60EBA:
                 lea     ObjDat3_613E0(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_60ECE,(a0)
-                bsr.w   GumballSKSelectWeightedDropAndLimitLifeRollPerMachine
+                bsr.w   SKGumballMachine_ChooseDrop
 
 loc_60ECE:
                 move.w  y_vel(a0),d0
@@ -222,7 +222,7 @@ loc_60EFC:
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
                 bhi.s   loc_60F0E
-                jsr     (GumballSKCheckNearbyPlayersAndDispatchItemReward).l
+                jsr     (SKGumball_TryRewardNearbyPlayer).l
                 bne.s   loc_60F28
 
 loc_60F0E:

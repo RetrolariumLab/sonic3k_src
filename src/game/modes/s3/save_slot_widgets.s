@@ -187,7 +187,7 @@ Obj_SaveScreen_NoSave_Slot:
 
 loc_C224:
                 move.w  (Dataselect_nosave_player).w,d0
-                jsr     S3SaveCycleNewGameCharacterOnUpDownUnlessCursorBusy(pc)
+                jsr     S3Save_TryCycleNewGameCharacter(pc)
                 move.w  d0,(Dataselect_nosave_player).w
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
@@ -403,7 +403,7 @@ loc_C40A:
 
 loc_C476:
                 move.w  $34(a0),d0
-                jsr     S3SaveCycleNewGameCharacterOnUpDownUnlessCursorBusy(pc)
+                jsr     S3Save_TryCycleNewGameCharacter(pc)
                 move.w  d0,$34(a0)
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
@@ -430,7 +430,8 @@ loc_C4C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3SaveCycleNewGameCharacterOnUpDownUnlessCursorBusy:
+; Use fresh Up or Down while cursor motion is idle
+S3Save_TryCycleNewGameCharacter:
                 moveq   #0,d2
                 tst.w   (Player_2+objoff_30).w
                 bne.s   loc_C4F6
@@ -463,6 +464,6 @@ loc_C4F6:
 
 locret_C506:
                 rts
-; End of function S3SaveCycleNewGameCharacterOnUpDownUnlessCursorBusy
+; End of function S3Save_TryCycleNewGameCharacter
 
 ; ---------------------------------------------------------------------------

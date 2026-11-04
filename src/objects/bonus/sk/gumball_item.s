@@ -26,7 +26,7 @@ loc_4A2F4:
 loc_4A312:
                 tst.b   collision_property(a0)
                 beq.s   loc_4A31A
-                bsr.s   PachinkoGumballConsumeBothQueuedPlayerContacts
+                bsr.s   PachinkoGumball_ConsumeBothContacts
 
 loc_4A31A:
                 move.w  y_pos(a0),d0
@@ -51,7 +51,7 @@ loc_4A346:
 loc_4A34C:
                 tst.b   collision_property(a0)
                 beq.s   loc_4A354
-                bsr.s   PachinkoGumballConsumeBothQueuedPlayerContacts
+                bsr.s   PachinkoGumball_ConsumeBothContacts
 
 loc_4A354:
                 jsr     (MoveSprite2).l
@@ -60,26 +60,28 @@ loc_4A354:
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoGumballConsumeBothQueuedPlayerContacts:
+; Apply the reward for each queued player in order, even when the first schedules deletion
+PachinkoGumball_ConsumeBothContacts:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_4A370
-                bsr.s   PachinkoGumballScheduleDeleteAndApplySubtypeReward
+                bsr.s   PachinkoGumball_DeleteAndApplyReward
 
 loc_4A370:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_4A37E
-                bsr.s   PachinkoGumballScheduleDeleteAndApplySubtypeReward
+                bsr.s   PachinkoGumball_DeleteAndApplyReward
 
 loc_4A37E:
                 clr.b   collision_property(a0)
                 rts
-; End of function PachinkoGumballConsumeBothQueuedPlayerContacts
+; End of function PachinkoGumball_ConsumeBothContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoGumballScheduleDeleteAndApplySubtypeReward:
+; Subtype chooses a height-based ring award, a sound-only result or a shared gumball effect
+PachinkoGumball_DeleteAndApplyReward:
                 move.l  #Delete_Current_Sprite,(a0)
                 moveq   #0,d1
                 moveq   #1,d2
@@ -108,7 +110,7 @@ loc_4A3B6:
                 move.b  (a1,d0.w),d0
                 add.w   d0,(Saved_ring_count).w
                 jmp     (AddRings).l
-; End of function PachinkoGumballScheduleDeleteAndApplySubtypeReward
+; End of function PachinkoGumball_DeleteAndApplyReward
 
 ; ---------------------------------------------------------------------------
 Map_PachinkoFItem:

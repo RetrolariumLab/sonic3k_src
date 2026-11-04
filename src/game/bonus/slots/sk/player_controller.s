@@ -8,7 +8,7 @@ Obj_Sonic_RotatingSlotBonus:
                 tst.w   (Debug_placement_mode).w
                 beq.s   loc_4B96E
                 jsr     (DebugMode).l
-                bra.w   SlotsCenterCameraWherePlayerCoordinateExceedsInset
+                bra.w   Slots_CenterCameraPastInset
 ; ---------------------------------------------------------------------------
 
 loc_4B96E:
@@ -24,7 +24,7 @@ loc_4B97C:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jsr     (Perform_Player_DPLC).l
-                bsr.w   SlotsCenterCameraWherePlayerCoordinateExceedsInset
+                bsr.w   Slots_CenterCameraPastInset
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -119,13 +119,13 @@ off_4BA90:
 ; ---------------------------------------------------------------------------
 
 loc_4BA94:
-                bsr.w   SlotsJumpOppositeRotatingFieldGravityOnNewButton
+                bsr.w   Slots_TryJumpAgainstGravity
 
 loc_4BA98:
-                bsr.w   SlotsApplyTangentialInputMotionAndRejectBlockedStep
-                bsr.w   SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace
-                bsr.w   SlotsCollectCenterCellRingAndAwardFiftyRingContinue
-                bsr.w   SlotsApplyLatchedBumperGoalReverseOrWallContact
+                bsr.w   Slots_TryTangentialInputStep
+                bsr.w   Slots_IntegrateGravityAndProbeAxes
+                bsr.w   Slots_TryCollectCenterRing
+                bsr.w   Slots_ApplyLatchedCellEffect
                 jsr     (MoveSprite2).l
                 move.w  (Stat_table).w,d0
                 add.w   (SStage_scalar_index_1).w,d0
@@ -134,7 +134,8 @@ loc_4BA98:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsApplyTangentialInputMotionAndRejectBlockedStep:
+; Apply inertia and friction along the nearest cardinal tangent. A solid probe rolls back the entire position step
+Slots_TryTangentialInputStep:
                 btst    #button_left,(Ctrl_1_logical).w
                 beq.s   loc_4BAC8
                 bsr.w   SlotsAccelerateLeftGroundInertia
@@ -181,7 +182,7 @@ loc_4BB04:
                 movem.l d0-d1,-(sp)
                 move.l  y_pos(a0),d2
                 move.l  x_pos(a0),d3
-                bsr.w   SlotsProbeFourLayoutCellsAtCandidatePosition
+                bsr.w   Slots_ProbeFourCandidateCells
                 beq.s   loc_4BB4E
                 movem.l (sp)+,d0-d1
                 sub.l   d1,x_pos(a0)
@@ -193,7 +194,7 @@ loc_4BB04:
 loc_4BB4E:
                 movem.l (sp)+,d0-d1
                 rts
-; End of function SlotsApplyTangentialInputMotionAndRejectBlockedStep
+; End of function Slots_TryTangentialInputStep
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -254,7 +255,8 @@ locret_4BBB0:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsJumpOppositeRotatingFieldGravityOnNewButton:
+; Require a fresh A, B or C press and launch away from the rotating gravity vector
+Slots_TryJumpAgainstGravity:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
                 beq.s   locret_4BBF2
@@ -275,11 +277,12 @@ SlotsJumpOppositeRotatingFieldGravityOnNewButton:
 
 locret_4BBF2:
                 rts
-; End of function SlotsJumpOppositeRotatingFieldGravityOnNewButton
+; End of function Slots_TryJumpAgainstGravity
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsCenterCameraWherePlayerCoordinateExceedsInset:
+; For each axis, subtract the screen-center inset when the unsigned player coordinate permits it
+Slots_CenterCameraPastInset:
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
                 move.w  (Camera_X_pos).w,d0
@@ -297,7 +300,7 @@ loc_4BC0C:
 
 locret_4BC1C:
                 rts
-; End of function SlotsCenterCameraWherePlayerCoordinateExceedsInset
+; End of function Slots_CenterCameraPastInset
 
 ; ---------------------------------------------------------------------------
 
@@ -346,7 +349,8 @@ loc_4BCAC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace:
+; Reject blocked axes independently and preserve the four-count ground grace state
+Slots_IntegrateGravityAndProbeAxes:
                 move.l  y_pos(a0),d2
                 move.l  x_pos(a0),d3
                 move.b  (Stat_table).w,d0
@@ -363,7 +367,7 @@ SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace:
                 muls.w  #$2A,d1
                 add.l   d4,d1
                 add.l   d0,d3
-                bsr.w   SlotsProbeFourLayoutCellsAtCandidatePosition
+                bsr.w   Slots_ProbeFourCandidateCells
                 beq.s   loc_4BD10
                 sub.l   d0,d3
                 moveq   #0,d0
@@ -371,7 +375,7 @@ SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace:
                 bclr    #Status_InAir,status(a0)
                 move.b  #4,$3A(a0)
                 add.l   d1,d2
-                bsr.w   SlotsProbeFourLayoutCellsAtCandidatePosition
+                bsr.w   Slots_ProbeFourCandidateCells
                 beq.s   loc_4BD2C
                 sub.l   d1,d2
                 moveq   #0,d1
@@ -381,7 +385,7 @@ SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace:
 
 loc_4BD10:
                 add.l   d1,d2
-                bsr.w   SlotsProbeFourLayoutCellsAtCandidatePosition
+                bsr.w   Slots_ProbeFourCandidateCells
                 beq.s   loc_4BD3A
                 sub.l   d1,d2
                 moveq   #0,d1
@@ -411,11 +415,12 @@ loc_4BD3A:
 loc_4BD54:
                 subq.b  #1,$3A(a0)
                 rts
-; End of function SlotsIntegrateRotatingGravityWithAxisProbesAndAirGrace
+; End of function Slots_IntegrateGravityAndProbeAxes
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsProbeFourLayoutCellsAtCandidatePosition:
+; Probe a two-by-two block of 24-pixel cells at the candidate 16.16 position. Z reports whether all probes cleared
+Slots_ProbeFourCandidateCells:
                 lea     (RAM_start+$3000).l,a1
                 moveq   #0,d4
                 swap    d2
@@ -434,21 +439,22 @@ SlotsProbeFourLayoutCellsAtCandidatePosition:
                 adda.w  d4,a1
                 moveq   #0,d5
                 move.b  (a1)+,d4
-                bsr.s   SlotsClassifyProbedCellAndLatchInteractiveSolid
+                bsr.s   Slots_ClassifyCellAndLatchContact
                 move.b  (a1)+,d4
-                bsr.s   SlotsClassifyProbedCellAndLatchInteractiveSolid
+                bsr.s   Slots_ClassifyCellAndLatchContact
                 adda.w  #$7E,a1
                 move.b  (a1)+,d4
-                bsr.s   SlotsClassifyProbedCellAndLatchInteractiveSolid
+                bsr.s   Slots_ClassifyCellAndLatchContact
                 move.b  (a1)+,d4
-                bsr.s   SlotsClassifyProbedCellAndLatchInteractiveSolid
+                bsr.s   Slots_ClassifyCellAndLatchContact
                 tst.b   d5
                 rts
-; End of function SlotsProbeFourLayoutCellsAtCandidatePosition
+; End of function Slots_ProbeFourCandidateCells
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsClassifyProbedCellAndLatchInteractiveSolid:
+; Accumulate solidity and latch interactive cell types 1 through 6
+Slots_ClassifyCellAndLatchContact:
                 beq.s   locret_4BDB0
                 cmpi.b  #8,d4
                 beq.s   locret_4BDB0
@@ -470,11 +476,12 @@ loc_4BDB2:
 loc_4BDC6:
                 moveq   #-1,d5
                 rts
-; End of function SlotsClassifyProbedCellAndLatchInteractiveSolid
+; End of function Slots_ClassifyCellAndLatchContact
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsCollectCenterCellRingAndAwardFiftyRingContinue:
+; Use a free record for ring removal and award the 50-ring continue once per flag
+Slots_TryCollectCenterRing:
                 lea     (RAM_start+$3000).l,a1
                 moveq   #0,d4
                 move.w  y_pos(a0),d4
@@ -496,7 +503,7 @@ SlotsCollectCenterCellRingAndAwardFiftyRingContinue:
 loc_4BDFC:
                 cmpi.b  #8,d4
                 bne.s   loc_4BE36
-                bsr.w   SlotsFindFreeTransientCellAnimationRecord
+                bsr.w   Slots_FindFreeCellAnimRecord
                 bne.s   loc_4BE10
                 move.b  #1,(a2)
                 move.l  a1,4(a2)
@@ -519,11 +526,11 @@ loc_4BE32:
 loc_4BE36:
                 moveq   #-1,d4
                 rts
-; End of function SlotsCollectCenterCellRingAndAwardFiftyRingContinue
+; End of function Slots_TryCollectCenterRing
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsApplyLatchedBumperGoalReverseOrWallContact:
+Slots_ApplyLatchedCellEffect:
                 move.b  $30(a0),d0
                 bne.s   loc_4BE5A
                 subq.b  #1,$36(a0)
@@ -563,7 +570,7 @@ loc_4BE5A:
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
                 bset    #Status_InAir,status(a0)
-                bsr.w   SlotsFindFreeTransientCellAnimationRecord
+                bsr.w   Slots_FindFreeCellAnimRecord
                 bne.s   loc_4BEC8
                 move.b  #2,(a2)
                 move.l  $32(a0),d0
@@ -590,7 +597,7 @@ loc_4BEE4:
                 tst.b   $37(a0)
                 bne.w   locret_4BF60
                 move.b  #$1E,$37(a0)
-                bsr.w   SlotsFindFreeTransientCellAnimationRecord
+                bsr.w   Slots_FindFreeCellAnimRecord
                 bne.s   loc_4BF0C
                 move.b  #4,(a2)
                 move.l  $32(a0),d0
@@ -614,7 +621,7 @@ loc_4BF18:
                 bne.s   locret_4BF60
 
 loc_4BF30:
-                bsr.w   SlotsFindFreeTransientCellAnimationRecord
+                bsr.w   Slots_FindFreeCellAnimRecord
                 bne.s   loc_4BF58
                 move.b  #3,(a2)
                 movea.l $32(a0),a1
@@ -637,7 +644,7 @@ loc_4BF58:
 
 locret_4BF60:
                 rts
-; End of function SlotsApplyLatchedBumperGoalReverseOrWallContact
+; End of function Slots_ApplyLatchedCellEffect
 
 ; ---------------------------------------------------------------------------
 
@@ -679,7 +686,7 @@ loc_4BF9A:
                 move.w  d3,(Events_bg+$02).w
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
-                bsr.w   SlotsDispatchCageCapturePayoutReleaseCooldown
+                bsr.w   Slots_DispatchCageState
                 subq.b  #1,anim_frame_timer(a0)
                 bpl.s   locret_4C012
                 move.b  #1,anim_frame_timer(a0)
@@ -693,11 +700,12 @@ locret_4C012:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsDispatchCageCapturePayoutReleaseCooldown:
+; The cage states capture the player, spawn the outcome, release in alignment and wait through cooldown
+Slots_DispatchCageState:
                 move.w  (a2),d0
                 move.w  off_4C01E(pc,d0.w),d0
                 jmp     off_4C01E(pc,d0.w)
-; End of function SlotsDispatchCageCapturePayoutReleaseCooldown
+; End of function Slots_DispatchCageState
 
 ; ---------------------------------------------------------------------------
 off_4C01E:

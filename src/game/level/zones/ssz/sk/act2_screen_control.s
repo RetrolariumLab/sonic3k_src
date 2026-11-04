@@ -118,7 +118,7 @@ loc_58B7C:
 
 loc_58B9E:
                 movem.l d7-a0/a2-a3,-(sp)
-                jsr     (SKEndingDispatchCreditsInitDelayScrollAndFinish).l
+                jsr     (SKCredits_DispatchScrollState).l
                 movem.l (sp)+,d7-a0/a2-a3
                 cmpi.b  #7,(Super_emerald_count).w
                 bhs.s   loc_58BBC

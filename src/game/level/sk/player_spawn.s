@@ -313,7 +313,7 @@ loc_6B76:
                 move.b  d0,(SStage_scalar_result_0+2).w
                 move.w  d0,(SStage_scalar_result_0).w
                 move.l  #Obj_Sonic_RotatingSlotBonus,(Player_1).w
-                jsr     (SlotsInitializePaddedLayoutDescriptorsAndCage).l
+                jsr     (Slots_InitLayoutDescriptorsAndCage).l
                 st      (Deform_lock).w
                 rts
 ; ---------------------------------------------------------------------------

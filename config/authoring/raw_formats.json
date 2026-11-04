@@ -25,11 +25,11 @@
     },
     {
       "path": "src/game/modes/s3/continue_screen.s",
-      "sha256": "2f02927f61ccf4890f8fadd12a2e1d2cb1e476c3756b41045655e93fbe8ed69f"
+      "sha256": "682ad5ff198e2cee9cbcfa456b4c45ec0419eb4766c2b8023111219070ae092f"
     },
     {
       "path": "src/game/modes/s3/ending_credits.s",
-      "sha256": "4a316a37a3639a83857f7fde8a81503c8ee826a536fa8eefefb63c4c93493185"
+      "sha256": "18e7c395946c99f4b84e13dc1187849b4955294566c9add0f355f1bf9cd883dc"
     },
     {
       "path": "src/game/modes/s3/ending_credits_data.s",
@@ -37,11 +37,11 @@
     },
     {
       "path": "src/objects/bonus/gumball/sk/machine.s",
-      "sha256": "ee50f8f1a555d4e4012d0c38f73b8806191f7ab8adb59258b3b4bb73d4fce15a"
+      "sha256": "ecfb8a81ba03ac97791aca2aca659bfd660cfe5a0053fa10b9626217067b74ac"
     },
     {
       "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
-      "sha256": "50b9236d4bbbe491f3f1d80a9a956f33d29771ac0fee28a9dbef3cb1bab739f0"
+      "sha256": "68af5194a641f13c881ab18018f1967e93fe2333e3f1e7c27c2b260c40087cb7"
     },
     {
       "path": "src/objects/bonus/gumball/sk/object_catalog.s",
@@ -53,11 +53,11 @@
     },
     {
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
-      "sha256": "c84775cae49a591122035d5c9546545b15e078ec6abd361fc321eb72e89ff624"
+      "sha256": "a53d78b191150b5005fc0ae63716acaf37cc8a76eba892e437b69e488da6a842"
     },
     {
       "path": "src/objects/bonus/s3/gumball_machine.s",
-      "sha256": "2276087298e2f6b2ca6dbad33156684af13e4f597938828b527f38cdafecad00"
+      "sha256": "c0bed58af8a54decc610590f0252de4917ed307bead1813ff183d4b5fdd887b3"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/attachments_and_attacks.s",
@@ -1425,8 +1425,8 @@
       "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
       "symbol": "RawAni_61388",
       "scope": "RawAni_61388",
-      "first_line": 423,
-      "last_line": 424,
+      "first_line": 431,
+      "last_line": 432,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
       "declarations_sha256": "dde20e2cadcd986db78a73dcbf57c902bd15012dc8127cb1d1e3a36db1a4bfc9",
@@ -1492,8 +1492,8 @@
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
       "symbol": "RawAni_43F54",
       "scope": "RawAni_43F54",
-      "first_line": 453,
-      "last_line": 454,
+      "first_line": 461,
+      "last_line": 462,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
       "declarations_sha256": "0b043b634c83986669ed851b60cca32b851b89e3e4cf57130ad998f0b0b531b5",
@@ -1506,8 +1506,8 @@
       "path": "src/objects/bonus/s3/gumball_bumpers.s",
       "symbol": "byte_4401C",
       "scope": "byte_4401C",
-      "first_line": 535,
-      "last_line": 557,
+      "first_line": 543,
+      "last_line": 565,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 58,
       "declarations_sha256": "79f7d9b257b3a9b929b0fba2be61d0d96d7891961c4ada81abb8d04d41d2e36b",

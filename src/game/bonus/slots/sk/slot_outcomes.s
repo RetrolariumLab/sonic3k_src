@@ -54,7 +54,7 @@ loc_4C41A:
 ; ---------------------------------------------------------------------------
 
 loc_4C462:
-                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
+                bsr.w   Slots_AdvanceReelAndQueueArt
                 tst.b   1(a4)
                 beq.s   loc_4C46E
                 rts
@@ -133,7 +133,7 @@ loc_4C4F8:
 ; ---------------------------------------------------------------------------
 
 loc_4C540:
-                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
+                bsr.w   Slots_AdvanceReelAndQueueArt
                 tst.b   1(a4)
                 beq.s   loc_4C54C
                 rts
@@ -153,7 +153,7 @@ loc_4C54C:
 ; ---------------------------------------------------------------------------
 
 loc_4C576:
-                bsr.w   SlotsAdvanceOneReelAndQueueChangedStripArt
+                bsr.w   Slots_AdvanceReelAndQueueArt
                 cmpi.b  #$C,9(a4)
                 bne.s   loc_4C594
                 cmpi.b  #$C,$D(a4)
@@ -185,7 +185,8 @@ loc_4C5B4:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive:
+; Unpack the selected reel's outcome and map symbol 7 to 5
+Slots_GetSelectedReelSymbol:
                 move.w  4(a4),d1
                 move.b  3(a4),d0
                 beq.s   loc_4C5D0
@@ -201,11 +202,12 @@ loc_4C5D0:
 loc_4C5DC:
                 subq.b  #2,d1
                 rts
-; End of function SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
+; End of function Slots_GetSelectedReelSymbol
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits:
+; Replace the selected nibble and clear the unused high bit of each of the three symbols
+Slots_SetSelectedReelSymbol:
                 move.w  #$FFF0,d2
                 andi.w  #$F,d1
                 move.b  3(a4),d0
@@ -218,7 +220,7 @@ loc_4C5F2:
                 or.w    d1,4(a4)
                 andi.w  #$777,4(a4)
                 rts
-; End of function SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits
+; End of function Slots_SetSelectedReelSymbol
 
 ; ---------------------------------------------------------------------------
 
@@ -237,7 +239,7 @@ loc_4C610:
 ; ---------------------------------------------------------------------------
 
 loc_4C61A:
-                bsr.s   SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
+                bsr.s   Slots_GetSelectedReelSymbol
                 move.w  (a1),d0
                 subi.w  #$A0,d0
                 lsr.w   #8,d0
@@ -255,7 +257,7 @@ loc_4C632:
 ; ---------------------------------------------------------------------------
 
 loc_4C63E:
-                bsr.s   SlotsGetSelectedPackedSymbolAndNormalizeSevenToFive
+                bsr.s   Slots_GetSelectedReelSymbol
                 move.w  (a1),d0
                 addi.w  #$F0,d0
                 andi.w  #$700,d0
@@ -294,7 +296,7 @@ loc_4C67C:
                 lsr.w   #8,d0
                 andi.w  #7,d0
                 move.b  (a3,d0.w),d1
-                bsr.w   SlotsReplaceSelectedOutcomeNibbleAndMaskSymbolBits
+                bsr.w   Slots_SetSelectedReelSymbol
                 move.b  #-8,2(a1)
                 addq.b  #4,3(a1)
                 rts
@@ -321,13 +323,14 @@ loc_4C6BC:
                 clr.w   $C(a4)
                 clr.w   $10(a4)
                 clr.b   1(a4)
-                bsr.w   SlotsEvaluateTripleWildcardOrSymbolSixPayout
+                bsr.w   Slots_EvaluateReelPayout
                 move.b  #$18,(a4)
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsAdvanceOneReelAndQueueChangedStripArt:
+; Advance one of three reels in rotation. Rebuild its 512-byte strip only across an eight-unit scroll boundary
+Slots_AdvanceReelAndQueueArt:
                 moveq   #0,d0
                 move.b  3(a4),d0
                 lea     6(a4),a1
@@ -336,7 +339,7 @@ SlotsAdvanceOneReelAndQueueChangedStripArt:
                 adda.w  d0,a3
                 adda.w  d0,a3
                 jmp     loc_4C6F0(pc,d0.w)
-; End of function SlotsAdvanceOneReelAndQueueChangedStripArt
+; End of function Slots_AdvanceReelAndQueueArt
 
 ; ---------------------------------------------------------------------------
 
@@ -417,7 +420,8 @@ SlotsResolveSymbolStripRowArtPointer:
 
 ; =============== S U B R O U T I N E =======================================
 
-SlotsEvaluateTripleWildcardOrSymbolSixPayout:
+; Match triples, apply symbol 0 wildcard multipliers, or award the consolation count for unmatched symbol 6
+Slots_EvaluateReelPayout:
                 move.b  5(a4),d2
                 move.b  d2,d3
                 andi.w  #$F0,d2
@@ -435,7 +439,7 @@ loc_4C7BC:
 
 loc_4C7C4:
                 jmp     loc_4C7C8(pc,d0.w)
-; End of function SlotsEvaluateTripleWildcardOrSymbolSixPayout
+; End of function Slots_EvaluateReelPayout
 
 ; ---------------------------------------------------------------------------
 
@@ -586,7 +590,8 @@ byte_4C8DC:
 
 ; =============== S U B R O U T I N E =======================================
 
-BlueSphereResetSceneVideoQueuesAndRuntimeMemory:
+; Clear compression and display queues, reset VDP setup and clear transient memory for title or results
+BlueSphere_ResetVideoAndSceneRAM:
                 clr.w   (Kos_decomp_queue_count).w
                 clearRAM Kos_decomp_stored_registers,(Kos_decomp_module_end-Kos_decomp_stored_registers)
                 jsr     (Clear_Nem_Queue).l
@@ -611,4 +616,4 @@ BlueSphereResetSceneVideoQueuesAndRuntimeMemory:
                 clr.w   (DMA_queue).w
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 rts
-; End of function BlueSphereResetSceneVideoQueuesAndRuntimeMemory
+; End of function BlueSphere_ResetVideoAndSceneRAM

@@ -16,16 +16,17 @@ loc_4A408:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
-                bsr.s   PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
+                bsr.s   PachinkoMagnet_UpdatePlayer
                 addq.w  #1,a2
                 lea     (Player_2).w,a1
                 move.w  (Ctrl_2_logical).w,d1
-                bsr.s   PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
+                bsr.s   PachinkoMagnet_UpdatePlayer
                 jmp     (loc_49B4E).l
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch:
+; Capture an eligible player, move it through the oscillation and launch by phase on jump. Then enforce recapture cooldown
+PachinkoMagnet_UpdatePlayer:
                 tst.b   (a2)
                 beq.w   loc_4A53A
                 tst.w   (Debug_placement_mode).w
@@ -49,7 +50,7 @@ loc_4A464:
                 move.w  x_pos(a1),d1
                 move.w  y_pos(a1),d2
                 movem.l d1-d2,-(sp)
-                bsr.w   PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius
+                bsr.w   PachinkoMagnet_PositionCapturedPlayer
                 movem.l (sp)+,d1-d2
                 sub.w   x_pos(a1),d1
                 asl.w   #8,d1
@@ -161,15 +162,16 @@ loc_4A5AA:
                 move.b  #2,anim(a1)
                 move.b  #1,object_control(a1)
                 move.b  #1,(a2)
-                bsr.w   PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius
+                bsr.w   PachinkoMagnet_PositionCapturedPlayer
 
 locret_4A5DE:
                 rts
-; End of function PachinkoMagnetUpdatePlayerCaptureOscillationAndPhaseLaunch
+; End of function PachinkoMagnet_UpdatePlayer
 
 ; =============== S U B R O U T I N E =======================================
 
-PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius:
+; Use a cosine-varying radius along the magnet heading, set front or back priority, and advance phase
+PachinkoMagnet_PositionCapturedPlayer:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 jsr     (GetSineCosine).l
@@ -201,4 +203,4 @@ loc_4A63C:
                 addq.b  #4,d0
                 move.b  d0,4(a2)
                 rts
-; End of function PachinkoMagnetPositionCapturedPlayerOnOscillatingRadius
+; End of function PachinkoMagnet_PositionCapturedPlayer
