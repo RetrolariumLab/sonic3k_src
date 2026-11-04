@@ -12,7 +12,7 @@ Sonic_Water:
                 tst.b   (Water_flag).w                  ; does level have water?
                 bne.s   Sonic_InWater                   ; if yes, branch
 
-locret_11F32:
+S3SonicEnvironment_ReturnFromWaterTransitionCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ Sonic_InWater:
                 bge.s   Sonic_OutWater                  ; if yes, branch
 
                 bset    #Status_Underwater,status(a0)   ; set underwater flag
-                bne.s   locret_11F32                    ; if already underwater, branch
+                bne.s   S3SonicEnvironment_ReturnFromWaterTransitionCheck  ; if already underwater, branch
 
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
@@ -34,18 +34,18 @@ Sonic_InWater:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_11F88
+                beq.s   S3SonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled
                 move.w  #$500,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
 
-loc_11F88:
+S3SonicEnvironment_DampenWaterEntryVelocityUnlessObjectControlled:
                 tst.b   object_control(a0)
-                bne.s   locret_11F32
+                bne.s   S3SonicEnvironment_ReturnFromWaterTransitionCheck
                 asr     x_vel(a0)
                 asr     y_vel(a0)                       ; memory operands can only be shifted one bit at a time
                 asr     y_vel(a0)
-                beq.s   locret_11F32
+                beq.s   S3SonicEnvironment_ReturnFromWaterTransitionCheck
                 move.w  #1<<8,anim(a6)                  ; splash animation, write 1 to anim and clear prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
@@ -53,7 +53,7 @@ loc_11F88:
 
 Sonic_OutWater:
                 bclr    #Status_Underwater,status(a0)   ; unset underwater flag
-                beq.w   locret_11F32                    ; if already above water, branch
+                beq.w   S3SonicEnvironment_ReturnFromWaterTransitionCheck  ; if already above water, branch
                 addq.b  #1,(Water_entered_counter).w
 
                 movea.l a0,a1
@@ -62,32 +62,32 @@ Sonic_OutWater:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_11FE6                       ; if Super, set different values
+                beq.s   S3SonicEnvironment_DoubleWaterExitYVelocityWhenEligible  ; if Super, set different values
                 move.w  #$A00,Max_speed-Max_speed(a4)
                 move.w  #$30,Acceleration-Max_speed(a4)
                 move.w  #$100,Deceleration-Max_speed(a4)
 
-loc_11FE6:
+S3SonicEnvironment_DoubleWaterExitYVelocityWhenEligible:
                 cmpi.b  #4,routine(a0)                  ; is Sonic falling back from getting hurt?
-                beq.s   loc_12002                       ; if yes, branch
+                beq.s   S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity  ; if yes, branch
                 tst.b   object_control(a0)
-                bne.s   loc_12002
+                bne.s   S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   loc_12002
+                blt.s   S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity
                 asl     y_vel(a0)
 
-loc_12002:
+S3SonicEnvironment_GateWaterExitSplashAndClampNegativeYVelocity:
                 cmpi.b  #$1C,anim(a0)                   ; is Sonic in his 'blank' animation?
-                beq.w   locret_11F32                    ; if so, branch
+                beq.w   S3SonicEnvironment_ReturnFromWaterTransitionCheck  ; if so, branch
                 tst.w   y_vel(a0)
-                beq.w   locret_11F32
+                beq.w   S3SonicEnvironment_ReturnFromWaterTransitionCheck
                 move.w  #1<<8,anim(a6)                  ; splash animation, write 1 to anim and clear prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   loc_12028
+                bgt.s   S3SonicEnvironment_PlayWaterExitSplashSound
                 move.w  #-$1000,y_vel(a0)               ; limit upward y velocity exiting the water
 
-loc_12028:
+S3SonicEnvironment_PlayWaterExitSplashSound:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Sonic_Water
@@ -108,7 +108,7 @@ Sonic_MdNormal:
                 bsr.w   Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_1207C
+                beq.s   S3SonicEnvironment_ReturnAfterNormalGroundBackgroundChecks
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
@@ -116,10 +116,10 @@ Sonic_MdNormal:
                 bsr.w   CheckLeftWallDist
                 movem.l (sp)+,a4-a6
                 tst.w   d1
-                bpl.s   locret_1207C
+                bpl.s   S3SonicEnvironment_ReturnAfterNormalGroundBackgroundChecks
                 sub.w   d1,x_pos(a0)
 
-locret_1207C:
+S3SonicEnvironment_ReturnAfterNormalGroundBackgroundChecks:
                 rts
 ; ---------------------------------------------------------------------------
 ; Start of subroutine Sonic_MdAir
@@ -131,10 +131,10 @@ Sonic_MdAir:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)   ; is Sonic underwater?
-                beq.s   loc_1209E                       ; if not, branch
+                beq.s   S3SonicEnvironment_FinishAirModeWithAngleAndTerrainCollision  ; if not, branch
                 subi.w  #$28,y_vel(a0)                  ; reduce gravity by $28 ($38-$28=$10)
 
-loc_1209E:
+S3SonicEnvironment_FinishAirModeWithAngleAndTerrainCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   Sonic_DoLevelCollision
                 rts
@@ -144,10 +144,10 @@ loc_1209E:
 
 Sonic_MdRoll:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_120B2
+                bne.s   S3SonicEnvironment_ContinueGroundRollAfterOptionalJump
                 bsr.w   Sonic_Jump
 
-loc_120B2:
+S3SonicEnvironment_ContinueGroundRollAfterOptionalJump:
                 bsr.w   Player_RollRepel
                 bsr.w   Sonic_RollSpeed
                 bsr.w   Player_LevelBound
@@ -155,7 +155,7 @@ loc_120B2:
                 bsr.w   Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_120F0
+                beq.s   S3SonicEnvironment_ReturnAfterGroundRollBackgroundChecks
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
@@ -163,10 +163,10 @@ loc_120B2:
                 bsr.w   CheckLeftWallDist
                 movem.l (sp)+,a4-a6
                 tst.w   d1
-                bpl.s   locret_120F0
+                bpl.s   S3SonicEnvironment_ReturnAfterGroundRollBackgroundChecks
                 sub.w   d1,x_pos(a0)
 
-locret_120F0:
+S3SonicEnvironment_ReturnAfterGroundRollBackgroundChecks:
                 rts
 ; ---------------------------------------------------------------------------
 ; Start of subroutine Sonic_MdJump
@@ -180,10 +180,10 @@ Sonic_MdJump:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)   ; is Sonic underwater?
-                beq.s   loc_12112                       ; if not, branch
+                beq.s   S3SonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision  ; if not, branch
                 subi.w  #$28,y_vel(a0)                  ; reduce gravity by $28 ($38-$28=$10)
 
-loc_12112:
+S3SonicEnvironment_FinishBallAirModeWithAngleAndTerrainCollision:
                 bsr.w   Player_JumpAngle
                 bsr.w   Sonic_DoLevelCollision
                 rts

@@ -17,16 +17,16 @@ Obj_Sonic:
                 beq.s   JmpTo_DebugMode                 ; If so, skip to debug mode routine
 ; By this point, we're assuming you're in frame cycling mode
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_11BE0
+                beq.s   S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit
                 move.w  #0,(Debug_placement_mode).w     ; Leave debug mode
 
-loc_11BE0:
+S3SonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit:
                 addq.b  #1,mapping_frame(a0)            ; Next frame
                 cmpi.b  #$D9,mapping_frame(a0)          ; Have we reached the end of Sonic's frames?
-                bcs.s   loc_11BF2
+                bcs.s   S3SonicLifecycle_LoadAndQueueCurrentDebugFrame
                 move.b  #0,mapping_frame(a0)            ; If so, reset to Sonic's first frame
 
-loc_11BF2:
+S3SonicLifecycle_LoadAndQueueCurrentDebugFrame:
                 bsr.w   Sonic_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -98,32 +98,32 @@ Sonic_Init_Continued:
 
 Sonic_Control:                                          ; Routine 2
                 tst.w   (Debug_mode_flag).w             ; is debug cheat enabled?
-                beq.s   loc_11D06                       ; if not, branch
+                beq.s   S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
                 btst    #button_B,(Ctrl_1_pressed).w    ; is button B pressed?
-                beq.s   loc_11D06                       ; if not, branch
+                beq.s   S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
                 move.w  #1,(Debug_placement_mode).w     ; change Sonic into a ring/item
                 clr.b   (Ctrl_1_locked).w               ; unlock control
                 btst    #button_C,(Ctrl_1_held).w       ; was button C held before pressing B?
-                beq.s   locret_11D04                    ; if not, branch
+                beq.s   S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle  ; if not, branch
                 move.w  #2,(Debug_placement_mode).w     ; enter animation cycle mode
 
-locret_11D04:
+S3SonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11D06:
+S3SonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked:
                 tst.b   (Ctrl_1_locked).w               ; are controls locked?
-                bne.s   loc_11D12                       ; if yes, branch
+                bne.s   S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled  ; if yes, branch
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w   ; copy new held buttons, to enable joypad control
 
-loc_11D12:
+S3SonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled:
                 btst    #0,object_control(a0)           ; is Sonic interacting with another object that holds him in place or controls his movement somehow?
-                beq.s   loc_11D22                       ; if yes, branch to skip Sonic's control
+                beq.s   S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters  ; if yes, branch to skip Sonic's control
                 move.b  #0,double_jump_flag(a0)         ; enable double jump
-                bra.s   loc_11D3C
+                bra.s   S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum
 ; ---------------------------------------------------------------------------
 
-loc_11D22:
+S3SonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -132,13 +132,13 @@ loc_11D22:
                 jsr     Sonic_Modes(pc,d1.w)            ; run Sonic's movement control code
                 movem.l (sp)+,a4-a6
 
-loc_11D3C:
+S3SonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w     ; is vertical wrapping enabled?
-                bne.s   loc_11D4C
+                bne.s   S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)                    ; perform wrapping of Sonic's y position
 
-loc_11D4C:
+S3SonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation:
                 bsr.s   Sonic_Display
                 bsr.w   Sonic_Super
                 bsr.w   Sonic_RecordPos
@@ -146,24 +146,24 @@ loc_11D4C:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag).w
-                beq.s   loc_11D78
+                beq.s   S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
                 tst.b   anim(a0)
-                bne.s   loc_11D78
+                bne.s   S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
                 move.b  prev_anim(a0),anim(a0)
 
-loc_11D78:
+S3SonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne:
                 btst    #1,object_control(a0)
-                bne.s   loc_11D88
+                bne.s   S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet
                 bsr.w   Animate_Sonic
                 bsr.w   Sonic_Load_PLC
 
-loc_11D88:
+S3SonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   locret_11D98
+                bne.s   S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse
                 jsr     (TouchResponse).l
 
-locret_11D98:
+S3SonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse:
                 rts
 ; ---------------------------------------------------------------------------
 ; secondary states under state Sonic_Control
@@ -177,12 +177,12 @@ Sonic_Modes:
 
 Sonic_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   loc_11DB0
+                beq.s   S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
                 bcc.s   Sonic_ChkInvin
 
-loc_11DB0:
+S3SonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks:
                 jsr     (Draw_Sprite).l
 
 Sonic_ChkInvin:                                         ; Checks if invincibility has expired and disables it if it has
@@ -221,12 +221,12 @@ Sonic_ChkShoes:                                         ; Checks if Speed Shoes 
                 move.w  #$C,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$80,Deceleration-Max_speed(a4)  ; set Deceleration
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_11E3C                       ; if Super, set different values
+                beq.s   S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo  ; if Super, set different values
                 move.w  #$A00,Max_speed-Max_speed(a4)   ; set Max_speed
                 move.w  #$30,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$100,Deceleration-Max_speed(a4)  ; set Deceleration
 
-loc_11E3C:
+S3SonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo:
                 bclr    #Status_SpeedShoes,status_secondary(a0)
                 moveq   #0,d0                           ; Slow down tempo
                 jmp     (Change_Music_Tempo).l
@@ -260,7 +260,7 @@ Sonic_RecordPos:
                 tst.w   (Competition_mode).w            ; are we in Competition mode?
                 bne.s   Sonic_RecordPosCompetition      ; if so, branch
                 cmpa.w  #Player_1,a0                    ; is Sonic the sidekick?
-                bne.s   locret_11EA4                    ; if so, branch
+                bne.s   S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip  ; if so, branch
                 move.w  (Pos_table_index).w,d0
                 lea     (Pos_table).w,a1
                 lea     (a1,d0.w),a1
@@ -272,7 +272,7 @@ Sonic_RecordPos:
                 move.w  (Ctrl_1_logical).w,(a1)+
                 move.w  status(a0),(a1)+
 
-locret_11EA4:
+S3SonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip:
                 rts
 ; ---------------------------------------------------------------------------
 

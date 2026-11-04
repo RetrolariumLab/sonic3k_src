@@ -10,57 +10,57 @@ Sonic_RollSpeed:
                 move.w  Acceleration-Max_speed(a4),d5
                 asr.w   #1,d5
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_1151C
+                beq.s   SKSonicRolling_GateRollingInputAfterSuperFrictionSelection
                 move.w  #6,d5
 
-loc_1151C:
+SKSonicRolling_GateRollingInputAfterSuperFrictionSelection:
                 move.w  #$20,d4
                 tst.b   spin_dash_flag(a0)
-                bmi.w   loc_115C6
+                bmi.w   SKSonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.b   status_secondary(a0)
-                bmi.w   loc_115C6
+                bmi.w   SKSonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.w   move_lock(a0)
-                bne.s   loc_1154E
+                bne.s   SKSonicRolling_ApplyRollingFrictionByGroundVelocitySign
                 btst    #button_left,(Ctrl_1_logical).w
-                beq.s   loc_11542
+                beq.s   SKSonicRolling_TestRollingRightInputAfterLeftInput
                 bsr.w   SonicSKApplyRollingLeftInput
 
-loc_11542:
+SKSonicRolling_TestRollingRightInputAfterLeftInput:
                 btst    #button_right,(Ctrl_1_logical).w
-                beq.s   loc_1154E
+                beq.s   SKSonicRolling_ApplyRollingFrictionByGroundVelocitySign
                 bsr.w   SonicSKApplyRollingRightInput
 
-loc_1154E:
+SKSonicRolling_ApplyRollingFrictionByGroundVelocitySign:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_11570
-                bmi.s   loc_11564
+                beq.s   SKSonicRolling_TakeWordMagnitudeForRollingExitThreshold
+                bmi.s   SKSonicRolling_AddFrictionToNegativeRollingVelocity
                 sub.w   d5,d0
-                bcc.s   loc_1155E
+                bcc.s   SKSonicRolling_StoreNonnegativeRollingFrictionResult
                 move.w  #0,d0
 
-loc_1155E:
+SKSonicRolling_StoreNonnegativeRollingFrictionResult:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_11570
+                bra.s   SKSonicRolling_TakeWordMagnitudeForRollingExitThreshold
 ; ---------------------------------------------------------------------------
 
-loc_11564:
+SKSonicRolling_AddFrictionToNegativeRollingVelocity:
                 add.w   d5,d0
-                bcc.s   loc_1156C
+                bcc.s   SKSonicRolling_StoreNegativeRollingFrictionResult
                 move.w  #0,d0
 
-loc_1156C:
+SKSonicRolling_StoreNegativeRollingFrictionResult:
                 move.w  d0,ground_vel(a0)
 
-loc_11570:
+SKSonicRolling_TakeWordMagnitudeForRollingExitThreshold:
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_11578
+                bpl.s   SKSonicRolling_EndSlowRollBelowUnsignedMagnitudeThreshold
                 neg.w   d0
 
-loc_11578:
+SKSonicRolling_EndSlowRollBelowUnsignedMagnitudeThreshold:
                 cmpi.w  #$80,d0
-                bhs.s   loc_115C6
+                bhs.s   SKSonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_115B4
+                bne.s   SKSonicRolling_RestartSlowChargedRollAtFacingSpeed
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d0
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -69,30 +69,30 @@ loc_11578:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_115AE
+                beq.s   SKSonicRolling_ApplyGravityAdjustedUnrollRadiusOffset
                 neg.w   d0
 
-loc_115AE:
+SKSonicRolling_ApplyGravityAdjustedUnrollRadiusOffset:
                 add.w   d0,y_pos(a0)
-                bra.s   loc_115C6
+                bra.s   SKSonicRolling_RelaxRollingCameraDistanceTowardDefault
 ; ---------------------------------------------------------------------------
 
-loc_115B4:
+SKSonicRolling_RestartSlowChargedRollAtFacingSpeed:
                 move.w  #$400,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_115C6
+                beq.s   SKSonicRolling_RelaxRollingCameraDistanceTowardDefault
                 neg.w   ground_vel(a0)
 
-loc_115C6:
+SKSonicRolling_RelaxRollingCameraDistanceTowardDefault:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_115D2
-                bcc.s   loc_115D0
+                beq.s   SKSonicRolling_ProjectRollingGroundVelocityThroughSineCosine
+                bcc.s   SKSonicRolling_SubtractTwoFromRollingCameraDistance
                 addq.w  #4,(a5)
 
-loc_115D0:
+SKSonicRolling_SubtractTwoFromRollingCameraDistance:
                 subq.w  #2,(a5)
 
-loc_115D2:
+SKSonicRolling_ProjectRollingGroundVelocityThroughSineCosine:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -101,38 +101,38 @@ loc_115D2:
                 muls.w  ground_vel(a0),d1
                 asr.l   #8,d1
                 cmpi.w  #$1000,d1
-                ble.s   loc_115F6
+                ble.s   SKSonicRolling_ClampProjectedRollingXVelocityLowerBound
                 move.w  #$1000,d1
 
-loc_115F6:
+SKSonicRolling_ClampProjectedRollingXVelocityLowerBound:
                 cmpi.w  #-$1000,d1
-                bge.s   loc_11600
+                bge.s   SKSonicRolling_StoreRollingXVelocityAndContinueGroundProbe
                 move.w  #-$1000,d1
 
-loc_11600:
+SKSonicRolling_StoreRollingXVelocityAndContinueGroundProbe:
                 move.w  d1,x_vel(a0)
-                bra.w   loc_11350
+                bra.w   SKSonicGroundMove_GateSharedWalkingAndRollingObstructionProbe
 ; End of function Sonic_RollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
 SonicSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_11610
-                bpl.s   loc_1161E
+                beq.s   SKSonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped
+                bpl.s   SKSonicRolling_BrakeRightwardRollWithLeftInput
 
-loc_11610:
+SKSonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped:
                 bset    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1161E:
+SKSonicRolling_BrakeRightwardRollWithLeftInput:
                 sub.w   d4,d0
-                bcc.s   loc_11626
+                bcc.s   SKSonicRolling_StoreLeftInputRollingBrakeResult
                 move.w  #-$80,d0
 
-loc_11626:
+SKSonicRolling_StoreLeftInputRollingBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function SonicSKApplyRollingLeftInput
@@ -141,18 +141,18 @@ loc_11626:
 
 SonicSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_11640
+                bmi.s   SKSonicRolling_BrakeLeftwardRollWithRightInput
                 bclr    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11640:
+SKSonicRolling_BrakeLeftwardRollWithRightInput:
                 add.w   d4,d0
-                bcc.s   loc_11648
+                bcc.s   SKSonicRolling_StoreRightInputRollingBrakeResult
                 move.w  #$80,d0
 
-loc_11648:
+SKSonicRolling_StoreRightInputRollingBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function SonicSKApplyRollingRightInput
@@ -171,70 +171,70 @@ Sonic_ChgJumpDir:
                 bne.s   Sonic_Jump_ResetScr             ; if yes, branch to skip midair control
                 move.w  x_vel(a0),d0
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   loc_11682                       ; if not holding left, branch
+                beq.s   SKSonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if not holding left, branch
 
                 bset    #Status_Facing,status(a0)
                 sub.w   d5,d0                           ; add acceleration to the left
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0                           ; compare new speed with top speed
-                bgt.s   loc_11682                       ; if new speed is less than the maximum, branch
+                bgt.s   SKSonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if new speed is less than the maximum, branch
                 add.w   d5,d0                           ; remove this frame's acceleration change
                 cmp.w   d1,d0                           ; compare speed with top speed
-                ble.s   loc_11682                       ; if speed was already greater than the maximum, branch
+                ble.s   SKSonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if speed was already greater than the maximum, branch
                 move.w  d1,d0
 
-loc_11682:
+SKSonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   loc_1169E                       ; if not holding right, branch
+                beq.s   SKSonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if not holding right, branch
 
                 bclr    #Status_Facing,status(a0)
                 add.w   d5,d0                           ; accelerate right in the air
                 cmp.w   d6,d0                           ; compare new speed with top speed
-                blt.s   loc_1169E                       ; if new speed is less than the maximum, branch
+                blt.s   SKSonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if new speed is less than the maximum, branch
                 sub.w   d5,d0                           ; remove this frame's acceleration change
                 cmp.w   d6,d0                           ; compare speed with top speed
-                bge.s   loc_1169E                       ; if speed was already greater than the maximum, branch
+                bge.s   SKSonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if speed was already greater than the maximum, branch
                 move.w  d6,d0
 
-loc_1169E:
+SKSonicRolling_StoreAirInputXVelocityBeforeCameraReset:
                 move.w  d0,x_vel(a0)
 
 Sonic_Jump_ResetScr:
                 cmpi.w  #$60,(a5)                       ; is screen in its default position?
                 beq.s   Sonic_JumpPeakDecelerate        ; if yes, branch
-                bhs.s   loc_116AC                       ; depending on the sign of the difference,
+                bhs.s   SKSonicRolling_SubtractTwoFromAirCameraDistance  ; depending on the sign of the difference,
                 addq.w  #4,(a5)                         ; either add 2
 
-loc_116AC:
+SKSonicRolling_SubtractTwoFromAirCameraDistance:
                 subq.w  #2,(a5)                         ; or subtract 2
 
 Sonic_JumpPeakDecelerate:
                 cmpi.w  #-$400,y_vel(a0)                ; is Sonic moving faster than -$400 upwards?
-                blo.s   locret_116DC                    ; if yes, return
+                blo.s   SKSonicRolling_ReturnAfterAirDragOrUnsignedYGate  ; if yes, return
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 asr.w   #5,d1                           ; d1 = x_velocity / 32
-                beq.s   locret_116DC                    ; return if d1 is 0
+                beq.s   SKSonicRolling_ReturnAfterAirDragOrUnsignedYGate  ; return if d1 is 0
                 bmi.s   Sonic_JumpPeakDecelerateLeft    ; branch if moving left
 
                 sub.w   d1,d0                           ; reduce x velocity by d1
-                bcc.s   loc_116CA
+                bcc.s   SKSonicRolling_StoreRightwardAirDragResult
                 move.w  #0,d0
 
-loc_116CA:
+SKSonicRolling_StoreRightwardAirDragResult:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
 Sonic_JumpPeakDecelerateLeft:
                 sub.w   d1,d0                           ; reduce x velocity by d1
-                bcs.s   loc_116D8
+                bcs.s   SKSonicRolling_StoreLeftwardAirDragResult
                 move.w  #0,d0
 
-loc_116D8:
+SKSonicRolling_StoreLeftwardAirDragResult:
                 move.w  d0,x_vel(a0)
 
-locret_116DC:
+SKSonicRolling_ReturnAfterAirDragOrUnsignedYGate:
                 rts
 ; End of function Sonic_ChgJumpDir

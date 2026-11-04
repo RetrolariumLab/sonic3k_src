@@ -26,22 +26,22 @@ Player_LevelBound:
 
 Player_Boundary_CheckBottom:
                 tst.b   (Disable_death_plane).w
-                bne.s   locret_11720
+                bne.s   SKSonicJumpActions_ReturnAfterDeathPlaneDisabledOrBoundsPassed
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_11722
+                bne.s   SKSonicJumpActions_CheckReverseGravityDeathAtCameraMinimum
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0                    ; has Sonic touched the bottom boundary?
                 blt.s   Player_Boundary_Bottom          ; if yes, branch
 
-locret_11720:
+SKSonicJumpActions_ReturnAfterDeathPlaneDisabledOrBoundsPassed:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11722:
+SKSonicJumpActions_CheckReverseGravityDeathAtCameraMinimum:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   locret_11720
+                blt.s   SKSonicJumpActions_ReturnAfterDeathPlaneDisabledOrBoundsPassed
 
 Player_Boundary_Bottom:
                 jmp     (Kill_Character).l
@@ -59,30 +59,30 @@ Player_Boundary_Sides:
 
 SonicKnux_Roll:
                 tst.b   status_secondary(a0)
-                bmi.s   locret_1177E
+                bmi.s   SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0  ; is left/right being pressed?
-                bne.s   locret_1177E                    ; if yes, branch
+                bne.s   SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection  ; if yes, branch
                 btst    #button_down,(Ctrl_1_logical).w  ; is down being pressed?
                 beq.s   Player_ChkWalk                  ; if not, branch
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_1176A
+                bpl.s   SKSonicJumpActions_CompareRollingStartSpeedMagnitude
                 neg.w   d0
 
-loc_1176A:
+SKSonicJumpActions_CompareRollingStartSpeedMagnitude:
                 cmpi.w  #$100,d0                        ; is Sonic moving at $100 speed or faster?
                 bhs.s   Player_ChkRoll                  ; if so, branch
                 btst    #Status_OnObj,status(a0)
-                bne.s   locret_1177E
+                bne.s   SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection
                 move.b  #8,anim(a0)                     ; enter ducking animation
 
-locret_1177E:
+SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection:
                 rts
 ; ---------------------------------------------------------------------------
 
 Player_ChkWalk:
                 cmpi.b  #8,anim(a0)                     ; is Sonic ducking?
-                bne.s   locret_1177E
+                bne.s   SKSonicJumpActions_ReturnAfterRollInputGateOrDuckSelection
                 move.b  #0,anim(a0)                     ; if so, enter walking animation
                 rts
 ; ---------------------------------------------------------------------------
@@ -100,17 +100,17 @@ Player_DoRoll:
                 move.b  #2,anim(a0)                     ; enter roll animation
                 addq.w  #5,y_pos(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_117C2
+                beq.s   SKSonicJumpActions_PlayRollSoundAfterGravityAdjustedShapeShift
                 subi.w  #2*5,y_pos(a0)
 
-loc_117C2:
+SKSonicJumpActions_PlayRollSoundAfterGravityAdjustedShapeShift:
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
                 tst.w   ground_vel(a0)
-                bne.s   locret_117D8
+                bne.s   SKSonicJumpActions_ReturnAfterRollingShapeAndOptionalMinimumSpeed
                 move.w  #$200,ground_vel(a0)
 
-locret_117D8:
+SKSonicJumpActions_ReturnAfterRollingShapeAndOptionalMinimumSpeed:
                 rts
 ; End of function SonicKnux_Roll
 
@@ -123,33 +123,33 @@ locret_117D8:
 Sonic_Jump:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0  ; is A, B or C pressed?
-                beq.w   locret_118B2                    ; if not, return
+                beq.w   SKSonicJumpActions_ReturnFromRejectedJumpOrCompletedLaunch  ; if not, return
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_117FC
+                beq.s   SKSonicJumpActions_ProbeJumpClearanceWithGravityAdjustedNormal
                 addi.b  #$40,d0
                 neg.b   d0
                 subi.b  #$40,d0
 
-loc_117FC:
+SKSonicJumpActions_ProbeJumpClearanceWithGravityAdjustedNormal:
                 addi.b  #$80,d0
                 movem.l a4-a6,-(sp)
                 bsr.w   CalcRoomOverHead
                 movem.l (sp)+,a4-a6
                 cmpi.w  #6,d1                           ; does Sonic have enough room to jump?
-                blt.w   locret_118B2                    ; if not, branch
+                blt.w   SKSonicJumpActions_ReturnFromRejectedJumpOrCompletedLaunch  ; if not, branch
                 move.w  #$680,d2
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_11822
+                beq.s   SKSonicJumpActions_OverrideJumpImpulseForUnderwaterStatus
                 move.w  #$800,d2                        ; set higher jump speed if super
 
-loc_11822:
+SKSonicJumpActions_OverrideJumpImpulseForUnderwaterStatus:
                 btst    #Status_Underwater,status(a0)   ; Test if underwater
-                beq.s   loc_1182E
+                beq.s   SKSonicJumpActions_ApplySurfaceNormalJumpImpulseAndAbortGroundCaller
                 move.w  #$380,d2                        ; set lower jump speed if under
 
-loc_1182E:
+SKSonicJumpActions_ApplySurfaceNormalJumpImpulseAndAbortGroundCaller:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -179,13 +179,13 @@ loc_1182E:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_118AE
+                beq.s   SKSonicJumpActions_ApplyGravityAdjustedJumpRadiusCompensation
                 neg.w   d0
 
-loc_118AE:
+SKSonicJumpActions_ApplyGravityAdjustedJumpRadiusCompensation:
                 sub.w   d0,y_pos(a0)
 
-locret_118B2:
+SKSonicJumpActions_ReturnFromRejectedJumpOrCompletedLaunch:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -202,38 +202,38 @@ Sonic_JumpHeight:
 
                 move.w  #-$400,d1
                 btst    #Status_Underwater,status(a0)   ; is Sonic underwater?
-                beq.s   loc_118D2                       ; if not, branch
+                beq.s   SKSonicJumpActions_GateJumpReleaseCapVersusShieldAction  ; if not, branch
                 move.w  #-$200,d1                       ; Underwater-specific
 
-loc_118D2:
+SKSonicJumpActions_GateJumpReleaseCapVersusShieldAction:
                 cmp.w   y_vel(a0),d1                    ; is y speed greater than 4? (2 if underwater)
                 ble.w   Sonic_ShieldMoves               ; if not, branch
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0  ; are buttons A, B or C being pressed?
-                bne.s   locret_118E8                    ; if yes, branch
+                bne.s   SKSonicJumpActions_ReturnAfterHeldJumpOrReleaseVelocityCap  ; if yes, branch
                 move.w  d1,y_vel(a0)                    ; cap jump height
 
-locret_118E8:
+SKSonicJumpActions_ReturnAfterHeldJumpOrReleaseVelocityCap:
                 rts
 ; ---------------------------------------------------------------------------
 
 Sonic_UpVelCap:
                 tst.b   spin_dash_flag(a0)              ; is Sonic charging his spin dash?
-                bne.s   locret_118FE                    ; if yes, branch
+                bne.s   SKSonicJumpActions_ReturnAfterNonJumpingUpwardVelocityLimit  ; if yes, branch
                 cmpi.w  #-$FC0,y_vel(a0)                ; is Sonic's Y speed faster (less than) than -15.75 (-$FC0)?
-                bge.s   locret_118FE                    ; if not, branch
+                bge.s   SKSonicJumpActions_ReturnAfterNonJumpingUpwardVelocityLimit  ; if not, branch
                 move.w  #-$FC0,y_vel(a0)                ; cap upward speed
 
-locret_118FE:
+SKSonicJumpActions_ReturnAfterNonJumpingUpwardVelocityLimit:
                 rts
 ; ---------------------------------------------------------------------------
 
 Sonic_ShieldMoves:
                 tst.b   double_jump_flag(a0)            ; is Sonic currently performing a double jump?
-                bne.w   locret_11A14                    ; if yes, branch
+                bne.w   SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks  ; if yes, branch
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0  ; are buttons A, B, or C being pressed?
-                beq.w   locret_11A14                    ; if not, branch
+                beq.w   SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks  ; if not, branch
                 bclr    #Status_RollJump,status(a0)
                 tst.b   (Super_Sonic_Knux_flag).w       ; check Super-state
                 beq.s   Sonic_FireShield                ; if not in a super-state, branch
@@ -244,17 +244,17 @@ Sonic_ShieldMoves:
 
 Sonic_FireShield:
                 btst    #Status_Invincible,status_secondary(a0)  ; first, does Sonic have invincibility?
-                bne.w   locret_11A14                    ; if yes, branch
+                bne.w   SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks  ; if yes, branch
                 btst    #Status_FireShield,status_secondary(a0)  ; does Sonic have a Fire Shield?
                 beq.s   Sonic_LightningShield           ; if not, branch
                 move.b  #1,(Shield+anim).w
                 move.b  #1,double_jump_flag(a0)
                 move.w  #$800,d0
                 btst    #Status_Facing,status(a0)       ; is Sonic facing left?
-                beq.s   loc_11958                       ; if not, branch
+                beq.s   SKSonicJumpActions_ApplyFacingFireShieldDashAndResetHistory  ; if not, branch
                 neg.w   d0                              ; reverse speed value, moving Sonic left
 
-loc_11958:
+SKSonicJumpActions_ApplyFacingFireShieldDashAndResetHistory:
                 move.w  d0,x_vel(a0)                    ; apply velocity
                 move.w  d0,ground_vel(a0)               ; ...both ground and air
                 move.w  #0,y_vel(a0)                    ; kill y-velocity
@@ -292,13 +292,13 @@ Sonic_BubbleShield:
 
 Sonic_CheckTransform:
                 cmpi.b  #7,(Super_emerald_count).w      ; does Sonic have all 7 Super Emeralds?
-                bhs.s   loc_119E8                       ; if yes, branch
+                bhs.s   SKSonicJumpActions_GateEmeraldEligibleTransformationByRingsAndTimer  ; if yes, branch
                 cmpi.b  #7,(Chaos_emerald_count).w      ; does Sonic have all 7 Chaos Emeralds?
                 blo.s   Sonic_InstaShield               ; if not, branch
                 tst.b   (Emeralds_converted_flag).w
                 bne.s   Sonic_InstaShield
 
-loc_119E8:
+SKSonicJumpActions_GateEmeraldEligibleTransformationByRingsAndTimer:
                 cmpi.w  #50,(Ring_count).w              ; does Sonic have at least 50 rings?
                 blo.s   Sonic_InstaShield               ; if not, perform Insta-Shield
                 tst.b   (Update_HUD_timer).w
@@ -306,14 +306,14 @@ loc_119E8:
 
 Sonic_InstaShield:
                 btst    #Status_Shield,status_secondary(a0)  ; does Sonic have an S2 shield? (the elementals were already filtered out at this point)
-                bne.s   locret_11A14                    ; if yes, branch
+                bne.s   SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks  ; if yes, branch
                 move.b  #1,(Shield+anim).w
                 move.b  #1,double_jump_flag(a0)
                 move.w  #sfx_InstaAttack,d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-locret_11A14:
+SKSonicJumpActions_ReturnWhenAirActionUnavailableOrBasicShieldBlocks:
                 rts
 ; ---------------------------------------------------------------------------
 

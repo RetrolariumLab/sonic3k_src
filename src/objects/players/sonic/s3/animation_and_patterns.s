@@ -7,77 +7,77 @@
 Animate_Sonic:
                 lea     (AniSonic).l,a1
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_1345E
+                beq.s   S3SonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges
                 lea     (AniSuperSonic).l,a1
 
-loc_1345E:
+S3SonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   loc_13480
+                beq.s   S3SonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-loc_13480:
+S3SonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   loc_134F0
+                bmi.s   S3SonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_134BE
+                bpl.s   S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.b  d0,anim_frame_timer(a0)
 
-loc_134A6:
+S3SonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$FC,d0
-                bhs.s   loc_134C0
+                bhs.s   S3SonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands
 
-loc_134B6:
+S3SonicAnimation_StoreMappingFrameAndAdvanceByteCursor:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_134BE:
+S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_134C0:
+S3SonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands:
                 addq.b  #1,d0
-                bne.s   loc_134D0
+                bne.s   S3SonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   loc_134B6
+                bra.s   S3SonicAnimation_StoreMappingFrameAndAdvanceByteCursor
 ; ---------------------------------------------------------------------------
 
-loc_134D0:
+S3SonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte:
                 addq.b  #1,d0
-                bne.s   loc_134E4
+                bne.s   S3SonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   loc_134B6
+                bra.s   S3SonicAnimation_StoreMappingFrameAndAdvanceByteCursor
 ; ---------------------------------------------------------------------------
 
-loc_134E4:
+S3SonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled:
                 addq.b  #1,d0
-                bne.s   locret_134EE
+                bne.s   S3SonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc
                 move.b  2(a1,d1.w),anim(a0)
 
-locret_134EE:
+S3SonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_134F0:
+S3SonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode:
                 addq.b  #1,d0
-                bne.w   loc_13786
+                bne.w   S3SonicAnimation_CountNonFfNegativeHeaderRollCadence
                 moveq   #0,d0
                 tst.b   flip_type(a0)
                 bmi.w   Anim_Tumble
@@ -85,116 +85,116 @@ loc_134F0:
                 bne.w   Anim_Tumble
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   loc_13514
-                beq.s   loc_13514
+                bmi.s   S3SonicAnimation_OrientWalkingAngleByFacing
+                beq.s   S3SonicAnimation_OrientWalkingAngleByFacing
                 subq.b  #1,d0
 
-loc_13514:
+S3SonicAnimation_OrientWalkingAngleByFacing:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_13520
+                bne.s   S3SonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask
                 not.b   d0
 
-loc_13520:
+S3SonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask:
                 addi.b  #$10,d0
-                bpl.s   loc_13528
+                bpl.s   S3SonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling
                 moveq   #3,d1
 
-loc_13528:
+S3SonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   loc_137CE
+                bne.w   S3SonicAnimation_CountPushCadenceUsingRawGroundVelocity
                 lsr.b   #4,d0
                 andi.b  #6,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_1354C
+                bpl.s   S3SonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit
                 neg.w   d2
 
-loc_1354C:
+S3SonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit:
                 tst.b   status_secondary(a0)
-                bpl.w   loc_13556
+                bpl.w   S3SonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick
                 add.w   d2,d2
 
-loc_13556:
+S3SonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick:
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   loc_135B2
+                bne.s   S3SonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick
                 lea     (AniSonic01).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_13570
+                bhs.s   S3SonicAnimation_ReadNormalLocomotionFrameAndSectorOffset
                 lea     (AniSonic00).l,a1
                 add.b   d0,d0
 
-loc_13570:
+S3SonicAnimation_ReadNormalLocomotionFrameAndSectorOffset:
                 add.b   d0,d0
                 move.b  d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_1358E
+                bne.s   S3SonicAnimation_StoreNormalSectorFrameAndCountCursorDelay
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-loc_1358E:
+S3SonicAnimation_StoreNormalSectorFrameAndCountCursorDelay:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_135B0
+                bpl.s   S3SonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   loc_135A6
+                bpl.s   S3SonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder
                 moveq   #0,d2
 
-loc_135A6:
+S3SonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_135B0:
+S3SonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_135B2:
+S3SonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick:
                 lea     (AniSuperSonic01).l,a1
                 cmpi.w  #$800,d2
-                bhs.s   loc_135CA
+                bhs.s   S3SonicAnimation_DoubleSectorOffsetForSuperRunFrames
                 lea     (AniSuperSonic00).l,a1
                 add.b   d0,d0
                 add.b   d0,d0
-                bra.s   loc_135CC
+                bra.s   S3SonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap
 ; ---------------------------------------------------------------------------
 
-loc_135CA:
+S3SonicAnimation_DoubleSectorOffsetForSuperRunFrames:
                 add.b   d0,d0
 
-loc_135CC:
+S3SonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap:
                 move.b  d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_135E8
+                bne.s   S3SonicAnimation_StoreSuperSectorFrameAndCountCursorDelay
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-loc_135E8:
+S3SonicAnimation_StoreSuperSectorFrameAndCountCursorDelay:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_1360A
+                bpl.s   S3SonicAnimation_ReturnAfterSuperLocomotionFrameTiming
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   loc_13600
+                bpl.s   S3SonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder
                 moveq   #0,d2
 
-loc_13600:
+S3SonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_1360A:
+S3SonicAnimation_ReturnAfterSuperLocomotionFrameTiming:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ locret_1360A:
 Anim_Tumble:
                 move.b  flip_type(a0),d1
                 andi.w  #$7F,d1
-                bne.s   loc_13682
+                bne.s   S3SonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
@@ -210,17 +210,17 @@ Anim_Tumble:
                 bne.s   Anim_TumbleLeft
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_13640
+                bpl.s   S3SonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven
                 ori.b   #2,render_flags(a0)
                 neg.b   d0
                 addi.b  #$8F,d0
-                bra.s   loc_13644
+                bra.s   S3SonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames
 ; ---------------------------------------------------------------------------
 
-loc_13640:
+S3SonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven:
                 addi.b  #$B,d0
 
-loc_13644:
+S3SonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames:
                 divu.w  #$16,d0
                 addi.b  #$31,d0
                 move.b  d0,mapping_frame(a0)
@@ -240,20 +240,20 @@ Anim_TumbleLeft:
                 move.b  #0,anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_1367E:
+S3SonicAnimation_TumbleSubtypeFrameBaseBytes:
                 dc.b    0, $3D, $49, $49
                 even
 ; ---------------------------------------------------------------------------
 
-loc_13682:
-                move.b  byte_1367E(pc,d1.w),d3
+S3SonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne:
+                move.b  S3SonicAnimation_TumbleSubtypeFrameBaseBytes(pc,d1.w),d3
                 cmpi.b  #1,d1
-                bne.s   loc_136DA
+                bne.s   S3SonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_136B8
+                bne.s   S3SonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #-8,d0
                 divu.w  #$16,d0
@@ -263,7 +263,7 @@ loc_13682:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_136B8:
+S3SonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #1,render_flags(a0)
                 addi.b  #-8,d0
@@ -274,14 +274,14 @@ loc_136B8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_136DA:
+S3SonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch:
                 cmpi.b  #2,d1
-                bne.s   loc_13730
+                bne.s   S3SonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_1370C
+                bne.s   S3SonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #$B,d0
                 divu.w  #$16,d0
@@ -291,7 +291,7 @@ loc_136DA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1370C:
+S3SonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
@@ -303,12 +303,12 @@ loc_1370C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13730:
+S3SonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback:
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_13764
+                bne.s   S3SonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #2,render_flags(a0)
                 neg.b   d0
@@ -320,7 +320,7 @@ loc_13730:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13764:
+S3SonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #1,render_flags(a0)
                 addi.b  #$B,d0
@@ -331,61 +331,61 @@ loc_13764:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13786:
+S3SonicAnimation_CountNonFfNegativeHeaderRollCadence:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_134BE
+                bpl.w   S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_13796
+                bpl.s   S3SonicAnimation_ChooseRollStreamAtSixPixelsPerTick
                 neg.w   d2
 
-loc_13796:
+S3SonicAnimation_ChooseRollStreamAtSixPixelsPerTick:
                 lea     (AniSonic03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_137A8
+                bhs.s   S3SonicAnimation_ComputeRollDelayFromFourMinusSpeed
                 lea     (AniSonic02).l,a1
 
-loc_137A8:
+S3SonicAnimation_ComputeRollDelayFromFourMinusSpeed:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   loc_137B2
+                bpl.s   S3SonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy
                 moveq   #0,d2
 
-loc_137B2:
+S3SonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   loc_134A6
+                bra.w   S3SonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand
 ; ---------------------------------------------------------------------------
 
-loc_137CE:
+S3SonicAnimation_CountPushCadenceUsingRawGroundVelocity:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_134BE
+                bpl.w   S3SonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.w  ground_vel(a0),d2
-                bmi.s   loc_137DE
+                bmi.s   S3SonicAnimation_ClampPushWordRemainderBeforeTimerScaling
                 neg.w   d2
 
-loc_137DE:
+S3SonicAnimation_ClampPushWordRemainderBeforeTimerScaling:
                 addi.w  #$800,d2
-                bpl.s   loc_137E6
+                bpl.s   S3SonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream
                 moveq   #0,d2
 
-loc_137E6:
+S3SonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream:
                 lsr.w   #6,d2
                 move.b  d2,anim_frame_timer(a0)
                 lea     (AniSonic04).l,a1
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_137FE
+                beq.s   S3SonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail
                 lea     (AniSuperSonic04).l,a1
 
-loc_137FE:
+S3SonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail:
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   loc_134A6
+                bra.w   S3SonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand
 ; End of function Animate_Sonic
 
 ; ---------------------------------------------------------------------------
@@ -400,22 +400,22 @@ Sonic_Load_PLC:
 
 Sonic_Load_PLC2:
                 cmp.b   (Player_prev_frame).w,d0
-                beq.s   locret_13A80
+                beq.s   S3SonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop
                 move.b  d0,(Player_prev_frame).w
                 lea     (PLC_Sonic).l,a2
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_13A44
+                beq.s   S3SonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank
                 lea     (PLC_SuperSonic).l,a2
 
-loc_13A44:
+S3SonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank:
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_13A80
+                bmi.s   S3SonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
 
-loc_13A54:
+S3SonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -429,9 +429,9 @@ loc_13A54:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_13A54
+                dbf     d5,S3SonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination
 
-locret_13A80:
+S3SonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop:
                 rts
 ; End of function Sonic_Load_PLC
 

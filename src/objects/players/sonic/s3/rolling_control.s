@@ -11,46 +11,46 @@ Sonic_RollSpeed:
                 asr.w   #1,d5
                 move.w  #$20,d4
                 tst.b   spin_dash_flag(a0)
-                bmi.w   loc_12636
+                bmi.w   S3SonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.b   status_secondary(a0)
-                bmi.w   loc_12636
+                bmi.w   S3SonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.w   move_lock(a0)
-                bne.s   loc_125CE
+                bne.s   S3SonicRolling_ApplyRollingFrictionByGroundVelocitySign
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   loc_125C2
+                beq.s   S3SonicRolling_TestRollingRightInputAfterLeftInput
                 bsr.w   SonicS3ApplyRollingLeftInput
 
-loc_125C2:
+S3SonicRolling_TestRollingRightInputAfterLeftInput:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   loc_125CE
+                beq.s   S3SonicRolling_ApplyRollingFrictionByGroundVelocitySign
                 bsr.w   SonicS3ApplyRollingRightInput
 
-loc_125CE:
+S3SonicRolling_ApplyRollingFrictionByGroundVelocitySign:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_125F0
-                bmi.s   loc_125E4
+                beq.s   S3SonicRolling_EndRollingOnlyAtZeroGroundVelocity
+                bmi.s   S3SonicRolling_AddFrictionToNegativeRollingVelocity
                 sub.w   d5,d0
-                bcc.s   loc_125DE
+                bcc.s   S3SonicRolling_StoreNonnegativeRollingFrictionResult
                 move.w  #0,d0
 
-loc_125DE:
+S3SonicRolling_StoreNonnegativeRollingFrictionResult:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_125F0
+                bra.s   S3SonicRolling_EndRollingOnlyAtZeroGroundVelocity
 ; ---------------------------------------------------------------------------
 
-loc_125E4:
+S3SonicRolling_AddFrictionToNegativeRollingVelocity:
                 add.w   d5,d0
-                bcc.s   loc_125EC
+                bcc.s   S3SonicRolling_StoreNegativeRollingFrictionResult
                 move.w  #0,d0
 
-loc_125EC:
+S3SonicRolling_StoreNegativeRollingFrictionResult:
                 move.w  d0,ground_vel(a0)
 
-loc_125F0:
+S3SonicRolling_EndRollingOnlyAtZeroGroundVelocity:
                 tst.w   ground_vel(a0)
-                bne.s   loc_12636
+                bne.s   S3SonicRolling_RelaxRollingCameraDistanceTowardDefault
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_12624
+                bne.s   S3SonicRolling_RestartSlowChargedRollAtFacingSpeed
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d0
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -59,25 +59,25 @@ loc_125F0:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 add.w   d0,y_pos(a0)
-                bra.s   loc_12636
+                bra.s   S3SonicRolling_RelaxRollingCameraDistanceTowardDefault
 ; ---------------------------------------------------------------------------
 
-loc_12624:
+S3SonicRolling_RestartSlowChargedRollAtFacingSpeed:
                 move.w  #$400,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_12636
+                beq.s   S3SonicRolling_RelaxRollingCameraDistanceTowardDefault
                 neg.w   ground_vel(a0)
 
-loc_12636:
+S3SonicRolling_RelaxRollingCameraDistanceTowardDefault:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_12642
-                bcc.s   loc_12640
+                beq.s   S3SonicRolling_ProjectRollingGroundVelocityThroughSineCosine
+                bcc.s   S3SonicRolling_SubtractTwoFromRollingCameraDistance
                 addq.w  #4,(a5)
 
-loc_12640:
+S3SonicRolling_SubtractTwoFromRollingCameraDistance:
                 subq.w  #2,(a5)
 
-loc_12642:
+S3SonicRolling_ProjectRollingGroundVelocityThroughSineCosine:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -86,38 +86,38 @@ loc_12642:
                 muls.w  ground_vel(a0),d1
                 asr.l   #8,d1
                 cmpi.w  #$1000,d1
-                ble.s   loc_12666
+                ble.s   S3SonicRolling_ClampProjectedRollingXVelocityLowerBound
                 move.w  #$1000,d1
 
-loc_12666:
+S3SonicRolling_ClampProjectedRollingXVelocityLowerBound:
                 cmpi.w  #-$1000,d1
-                bge.s   loc_12670
+                bge.s   S3SonicRolling_StoreRollingXVelocityAndContinueGroundProbe
                 move.w  #-$1000,d1
 
-loc_12670:
+S3SonicRolling_StoreRollingXVelocityAndContinueGroundProbe:
                 move.w  d1,x_vel(a0)
-                bra.w   loc_123F4
+                bra.w   S3SonicGroundMove_GateSharedWalkingAndRollingObstructionProbe
 ; End of function Sonic_RollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
 SonicS3ApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_12680
-                bpl.s   loc_1268E
+                beq.s   S3SonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped
+                bpl.s   S3SonicRolling_BrakeRightwardRollWithLeftInput
 
-loc_12680:
+S3SonicRolling_FaceLeftWhileAlreadyRollingLeftOrStopped:
                 bset    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1268E:
+S3SonicRolling_BrakeRightwardRollWithLeftInput:
                 sub.w   d4,d0
-                bcc.s   loc_12696
+                bcc.s   S3SonicRolling_StoreLeftInputRollingBrakeResult
                 move.w  #-$80,d0
 
-loc_12696:
+S3SonicRolling_StoreLeftInputRollingBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function SonicS3ApplyRollingLeftInput
@@ -126,18 +126,18 @@ loc_12696:
 
 SonicS3ApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_126B0
+                bmi.s   S3SonicRolling_BrakeLeftwardRollWithRightInput
                 bclr    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_126B0:
+S3SonicRolling_BrakeLeftwardRollWithRightInput:
                 add.w   d4,d0
-                bcc.s   loc_126B8
+                bcc.s   S3SonicRolling_StoreRightInputRollingBrakeResult
                 move.w  #$80,d0
 
-loc_126B8:
+S3SonicRolling_StoreRightInputRollingBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function SonicS3ApplyRollingRightInput
@@ -156,70 +156,70 @@ Sonic_ChgJumpDir:
                 bne.s   Sonic_Jump_ResetScr             ; if yes, branch to skip midair control
                 move.w  x_vel(a0),d0
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   loc_126F2                       ; if not holding left, branch
+                beq.s   S3SonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if not holding left, branch
 
                 bset    #Status_Facing,status(a0)
                 sub.w   d5,d0                           ; add acceleration to the left
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0                           ; compare new speed with top speed
-                bgt.s   loc_126F2                       ; if new speed is less than the maximum, branch
+                bgt.s   S3SonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if new speed is less than the maximum, branch
                 add.w   d5,d0                           ; remove this frame's acceleration change
                 cmp.w   d1,d0                           ; compare speed with top speed
-                ble.s   loc_126F2                       ; if speed was already greater than the maximum, branch
+                ble.s   S3SonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling  ; if speed was already greater than the maximum, branch
                 move.w  d1,d0
 
-loc_126F2:
+S3SonicRolling_ApplyAirRightInputAfterLeftSpeedLimitHandling:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   loc_1270E                       ; if not holding right, branch
+                beq.s   S3SonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if not holding right, branch
 
                 bclr    #Status_Facing,status(a0)
                 add.w   d5,d0                           ; accelerate right in the air
                 cmp.w   d6,d0                           ; compare new speed with top speed
-                blt.s   loc_1270E                       ; if new speed is less than the maximum, branch
+                blt.s   S3SonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if new speed is less than the maximum, branch
                 sub.w   d5,d0                           ; remove this frame's acceleration change
                 cmp.w   d6,d0                           ; compare speed with top speed
-                bge.s   loc_1270E                       ; if speed was already greater than the maximum, branch
+                bge.s   S3SonicRolling_StoreAirInputXVelocityBeforeCameraReset  ; if speed was already greater than the maximum, branch
                 move.w  d6,d0
 
-loc_1270E:
+S3SonicRolling_StoreAirInputXVelocityBeforeCameraReset:
                 move.w  d0,x_vel(a0)
 
 Sonic_Jump_ResetScr:
                 cmpi.w  #$60,(a5)                       ; is screen in its default position?
                 beq.s   Sonic_JumpPeakDecelerate        ; if yes, branch
-                bhs.s   loc_1271C                       ; depending on the sign of the difference,
+                bhs.s   S3SonicRolling_SubtractTwoFromAirCameraDistance  ; depending on the sign of the difference,
                 addq.w  #4,(a5)                         ; either add 2
 
-loc_1271C:
+S3SonicRolling_SubtractTwoFromAirCameraDistance:
                 subq.w  #2,(a5)                         ; or subtract 2
 
 Sonic_JumpPeakDecelerate:
                 cmpi.w  #-$400,y_vel(a0)                ; is Sonic moving faster than -$400 upwards?
-                blo.s   locret_1274C                    ; if yes, return
+                blo.s   S3SonicRolling_ReturnAfterAirDragOrUnsignedYGate  ; if yes, return
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 asr.w   #5,d1                           ; d1 = x_velocity / 32
-                beq.s   locret_1274C                    ; return if d1 is 0
+                beq.s   S3SonicRolling_ReturnAfterAirDragOrUnsignedYGate  ; return if d1 is 0
                 bmi.s   Sonic_JumpPeakDecelerateLeft    ; branch if moving left
 
                 sub.w   d1,d0                           ; reduce x velocity by d1
-                bcc.s   loc_1273A
+                bcc.s   S3SonicRolling_StoreRightwardAirDragResult
                 move.w  #0,d0
 
-loc_1273A:
+S3SonicRolling_StoreRightwardAirDragResult:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
 Sonic_JumpPeakDecelerateLeft:
                 sub.w   d1,d0                           ; reduce x velocity by d1
-                bcs.s   loc_12748
+                bcs.s   S3SonicRolling_StoreLeftwardAirDragResult
                 move.w  #0,d0
 
-loc_12748:
+S3SonicRolling_StoreLeftwardAirDragResult:
                 move.w  d0,x_vel(a0)
 
-locret_1274C:
+S3SonicRolling_ReturnAfterAirDragOrUnsignedYGate:
                 rts
 ; End of function Sonic_ChgJumpDir

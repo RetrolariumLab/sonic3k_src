@@ -13,9 +13,9 @@ Sonic_Move:
                 move.w  Acceleration-Max_speed(a4),d5   ; set Acceleration
                 move.w  Deceleration-Max_speed(a4),d4   ; set Deceleration
                 tst.b   status_secondary(a0)            ; is bit 7 set? (Infinite inertia)
-                bmi.w   loc_123D6                       ; if so, branch
+                bmi.w   S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity  ; if so, branch
                 tst.w   move_lock(a0)
-                bne.w   loc_1238C
+                bne.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 btst    #button_left,(Ctrl_1_held_logical).w  ; is left being pressed?
                 beq.s   Sonic_NotLeft                   ; if not, branch
                 bsr.w   SonicS3ApplyGroundLeftInput
@@ -29,16 +29,16 @@ Sonic_NotRight:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0                         ; is Sonic on a slope?
-                bne.w   loc_1238C                       ; if yes, branch
+                bne.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if yes, branch
                 tst.w   ground_vel(a0)                  ; is Sonic moving?
-                bne.w   loc_1238C                       ; if yes, branch
+                bne.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if yes, branch
                 bclr    #Status_Push,status(a0)
                 move.b  #5,anim(a0)                     ; use standing animation
                 btst    #Status_OnObj,status(a0)
                 beq.w   Sonic_Balance
                 movea.w interact(a0),a1                 ; load interacting object's RAM space
                 tst.b   status(a1)                      ; is status bit 7 set? (unused?)
-                bmi.w   loc_12338                       ; if so, branch
+                bmi.w   S3SonicGroundMove_CheckPrimaryStationaryLookControl  ; if so, branch
 
 ; Calculations to determine where on the object Sonic is, and make him balance accordingly
                 moveq   #0,d1                           ; Clear d1
@@ -54,29 +54,29 @@ Sonic_NotRight:
                 blt.s   Sonic_BalanceOnObjLeft          ; if so, branch
                 cmp.w   d2,d1
                 bge.s   Sonic_BalanceOnObjRight         ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
-                bra.w   loc_12338                       ; if Sonic is more than 2 units from both edges, branch
+                bra.w   S3SonicGroundMove_CheckPrimaryStationaryLookControl  ; if Sonic is more than 2 units from both edges, branch
 ; ---------------------------------------------------------------------------
 
 SuperSonic_Balance:
                 cmpi.w  #2,d1                           ; is Sonic within two units of object's left edge?
-                blt.w   loc_1232A                       ; if so, branch
+                blt.w   S3SonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance  ; if so, branch
                 cmp.w   d2,d1
-                bge.w   loc_1231A                       ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
-                bra.w   loc_12338                       ; if Sonic is more than 2 units from both edges, branch
+                bge.w   S3SonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance  ; if Sonic is within two units of object's right edge, branch (Realistically, it checks this, and BEYOND the right edge of the object)
+                bra.w   S3SonicGroundMove_CheckPrimaryStationaryLookControl  ; if Sonic is more than 2 units from both edges, branch
 ; ---------------------------------------------------------------------------
 ; balancing checks for when you're on the right edge of an object
 
 Sonic_BalanceOnObjRight:
                 btst    #Status_Facing,status(a0)       ; is Sonic facing right?
-                bne.s   loc_121E4                       ; if so, branch
+                bne.s   S3SonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance  ; if so, branch
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 addq.w  #6,d2                           ; extend balance range
                 cmp.w   d2,d1                           ; is Sonic within (two units before and) four units past the right edge?
-                blt.w   loc_1238C                       ; if so, branch
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so, branch
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 
-loc_121E4:
+S3SonicGroundMove_FaceRightAndChooseObjectRightEdgeBalance:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
@@ -84,54 +84,54 @@ loc_121E4:
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 addq.w  #6,d2                           ; extend balance range
                 cmp.w   d2,d1                           ; is Sonic within (two units before and) four units past the right edge?
-                blt.w   loc_1238C                       ; if so, branch
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so, branch
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 
 Sonic_BalanceOnObjLeft:
                 btst    #Status_Facing,status(a0)       ; is Sonic facing right?
-                beq.s   loc_12222
+                beq.s   S3SonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 cmpi.w  #-4,d1                          ; is Sonic within (two units before and) four units past the left edge?
-                bge.w   loc_1238C                       ; if so branch (instruction signed to match)
+                bge.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so branch (instruction signed to match)
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 
-loc_12222:
+S3SonicGroundMove_FaceLeftAndChooseObjectLeftEdgeBalance:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
                 bset    #Status_Facing,status(a0)       ; is Sonic facing right?
                 move.b  #6,anim(a0)                     ; Balance animation 1
                 cmpi.w  #-4,d1                          ; is Sonic within (two units before and) four units past the left edge?
-                bge.w   loc_1238C                       ; if so branch (instruction signed to match)
+                bge.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery  ; if so branch (instruction signed to match)
                 move.b  #$C,anim(a0)                    ; if REALLY close to the edge, use different animation (Balance animation 2)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 ; balancing checks for when you're on the edge of part of the level
 
 Sonic_Balance:
                 jsr     (ChkFloorEdge).l
                 cmpi.w  #$C,d1
-                blt.w   loc_12338
+                blt.w   S3SonicGroundMove_CheckPrimaryStationaryLookControl
                 tst.b   (Super_Sonic_Knux_flag).w       ; is Sonic Super?
-                bne.w   loc_12312                       ; if so, branch
+                bne.w   S3SonicGroundMove_CheckPoweredTerrainRightEdgeSensor  ; if so, branch
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   loc_122B4
+                bne.s   S3SonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance
                 btst    #Status_Facing,status(a0)
-                bne.s   loc_1228A
+                bne.s   S3SonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 subq.w  #6,d3
                 jsr     (ChkFloorEdge_Part2).l
                 cmpi.w  #$C,d1
-                blt.w   loc_1238C
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 move.b  #$C,anim(a0)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; on right edge but facing left:
 
-loc_1228A:
+S3SonicGroundMove_FaceRightAndReprobeTerrainSixPixelsLeftForBalance:
 ; Somewhat dummied out/redundant code from Sonic 2
 ; Originally, Sonic displayed different animations for each direction faced
 ; But now, Sonic uses only the one set of animations no matter what, making the check pointless, and the code redundant
@@ -141,129 +141,129 @@ loc_1228A:
                 subq.w  #6,d3
                 jsr     (ChkFloorEdge_Part2).l
                 cmpi.w  #$C,d1
-                blt.w   loc_1238C
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 move.b  #$C,anim(a0)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 
-loc_122B4:
+S3SonicGroundMove_CheckOtherTerrainSensorBeforeLeftEdgeBalance:
                 cmpi.b  #3,tilt(a0)
-                bne.s   loc_12338
+                bne.s   S3SonicGroundMove_CheckPrimaryStationaryLookControl
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_122E8
+                beq.s   S3SonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 addq.w  #6,d3
                 jsr     (ChkFloorEdge_Part2).l
                 cmpi.w  #$C,d1
-                blt.w   loc_1238C
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 move.b  #$C,anim(a0)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 
-loc_122E8:
+S3SonicGroundMove_FaceLeftAndReprobeTerrainSixPixelsRightForBalance:
                 bset    #Status_Facing,status(a0)
                 move.b  #6,anim(a0)
                 move.w  x_pos(a0),d3
                 addq.w  #6,d3
                 jsr     (ChkFloorEdge_Part2).l
                 cmpi.w  #$C,d1
-                blt.w   loc_1238C
+                blt.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 move.b  #$C,anim(a0)
-                bra.w   loc_1238C
+                bra.w   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 
-loc_12312:
+S3SonicGroundMove_CheckPoweredTerrainRightEdgeSensor:
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   loc_12322
+                bne.s   S3SonicGroundMove_CheckPoweredTerrainLeftEdgeSensor
 
-loc_1231A:
+S3SonicGroundMove_FaceRightForPoweredObjectOrTerrainBalance:
                 bclr    #Status_Facing,status(a0)
-                bra.s   loc_12330
+                bra.s   S3SonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay
 ; ---------------------------------------------------------------------------
 
-loc_12322:
+S3SonicGroundMove_CheckPoweredTerrainLeftEdgeSensor:
                 cmpi.b  #3,tilt(a0)
-                bne.s   loc_12338
+                bne.s   S3SonicGroundMove_CheckPrimaryStationaryLookControl
 
-loc_1232A:
+S3SonicGroundMove_FaceLeftForPoweredObjectOrTerrainBalance:
                 bset    #Status_Facing,status(a0)
 
-loc_12330:
+S3SonicGroundMove_SetPoweredBalanceAnimationAndResetLookDelay:
                 move.b  #6,anim(a0)
-                bra.s   loc_1238C
+                bra.s   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
 ; ---------------------------------------------------------------------------
 
-loc_12338:
+S3SonicGroundMove_CheckPrimaryStationaryLookControl:
                 btst    #button_up,(Ctrl_1_held_logical).w
-                beq.s   loc_12362
+                beq.s   S3SonicGroundMove_CheckSecondaryStationaryLookControl
                 move.b  #7,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #120,scroll_delay_counter(a0)
-                blo.s   loc_12392
+                blo.s   S3SonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo
                 move.b  #120,scroll_delay_counter(a0)
                 cmpi.w  #$C8,(a5)
-                beq.s   loc_1239E
+                beq.s   S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep
                 addq.w  #2,(a5)
-                bra.s   loc_1239E
+                bra.s   S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep
 ; ---------------------------------------------------------------------------
 
-loc_12362:
+S3SonicGroundMove_CheckSecondaryStationaryLookControl:
                 btst    #button_down,(Ctrl_1_held_logical).w
-                beq.s   loc_1238C
+                beq.s   S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery
                 move.b  #8,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #120,scroll_delay_counter(a0)
-                bcs.s   loc_12392
+                bcs.s   S3SonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo
                 move.b  #120,scroll_delay_counter(a0)
                 cmpi.w  #8,(a5)
-                beq.s   loc_1239E
+                beq.s   S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep
                 subq.w  #2,(a5)
-                bra.s   loc_1239E
+                bra.s   S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep
 ; ---------------------------------------------------------------------------
 
-loc_1238C:
+S3SonicGroundMove_ResetLookDelayBeforeCameraOffsetRecovery:
                 move.b  #0,scroll_delay_counter(a0)
 
-loc_12392:
+S3SonicGroundMove_RecoverCameraDistanceTowardDefaultByTwo:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_1239E
-                bcc.s   loc_1239C
+                beq.s   S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep
+                bcc.s   S3SonicGroundMove_SubtractCameraRecoveryStep
                 addq.w  #4,(a5)
 
-loc_1239C:
+S3SonicGroundMove_SubtractCameraRecoveryStep:
                 subq.w  #2,(a5)
 
-loc_1239E:
+S3SonicGroundMove_SelectPoweredNeutralGroundDecayStep:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   loc_123AA
+                beq.w   S3SonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput
                 move.w  #$C,d5
 
-loc_123AA:
+S3SonicGroundMove_ApplyNeutralGroundDecayOnlyWithoutHorizontalInput:
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   loc_123D6
+                bne.s   S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
                 move.w  ground_vel(a0),d0
-                beq.s   loc_123D6
-                bmi.s   loc_123CA
+                beq.s   S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
+                bmi.s   S3SonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry
                 sub.w   d5,d0
-                bcc.s   loc_123C4
+                bcc.s   S3SonicGroundMove_StorePositiveNeutralDecayResult
                 move.w  #0,d0
 
-loc_123C4:
+S3SonicGroundMove_StorePositiveNeutralDecayResult:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_123D6
+                bra.s   S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity
 ; ---------------------------------------------------------------------------
 
-loc_123CA:
+S3SonicGroundMove_DecayNegativeGroundSpeedAndClampOnCarry:
                 add.w   d5,d0
-                bcc.s   loc_123D2
+                bcc.s   S3SonicGroundMove_StoreNegativeNeutralDecayResult
                 move.w  #0,d0
 
-loc_123D2:
+S3SonicGroundMove_StoreNegativeNeutralDecayResult:
                 move.w  d0,ground_vel(a0)
 
-loc_123D6:
+S3SonicGroundMove_ProjectGroundSpeedIntoCartesianVelocity:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -273,62 +273,62 @@ loc_123D6:
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
 
-loc_123F4:
+S3SonicGroundMove_GateSharedWalkingAndRollingObstructionProbe:
                 btst    #6,object_control(a0)
-                bne.w   locret_1247E
+                bne.w   S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bmi.s   locret_1247E
+                bmi.s   S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
-                beq.s   locret_1247E
-                bmi.s   loc_12416
+                beq.s   S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
+                bmi.s   S3SonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance
                 neg.w   d1
 
-loc_12416:
+S3SonicGroundMove_ProbeGroundTravelSideAndApplyOnlyNegativeClearance:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
                 bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
-                bpl.s   locret_1247E
+                bpl.s   S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse
                 asl.w   #8,d1
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   loc_1247A
+                beq.s   S3SonicGroundMove_AddScaledFloorClearanceToYVelocity
                 cmpi.b  #$40,d0
-                beq.s   loc_12460
+                beq.s   S3SonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft
                 cmpi.b  #$80,d0
-                beq.s   loc_1245A
+                beq.s   S3SonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity
                 add.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                bne.s   locret_12458
+                bne.s   S3SonicGroundMove_ReturnAfterHorizontalObstructionResponse
                 bset    #Status_Push,status(a0)
 
-locret_12458:
+S3SonicGroundMove_ReturnAfterHorizontalObstructionResponse:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1245A:
+S3SonicGroundMove_SubtractScaledCeilingClearanceFromYVelocity:
                 sub.w   d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12460:
+S3SonicGroundMove_CorrectLeftWallVelocityAndSetPushOnlyWhenFacingLeft:
                 sub.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   locret_12458
+                beq.s   S3SonicGroundMove_ReturnAfterHorizontalObstructionResponse
                 bset    #Status_Push,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1247A:
+S3SonicGroundMove_AddScaledFloorClearanceToYVelocity:
                 add.w   d1,y_vel(a0)
 
-locret_1247E:
+S3SonicGroundMove_ReturnAfterSkippedProbeOrVerticalResponse:
                 rts
 ; End of function Sonic_Move
 
@@ -336,38 +336,38 @@ locret_1247E:
 
 SonicS3ApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_12488
-                bpl.s   loc_124BA
+                beq.s   S3SonicGroundMove_FaceLeftForNonpositiveGroundAcceleration
+                bpl.s   S3SonicGroundMove_BrakePositiveGroundSpeedForLeftInput
 
-loc_12488:
+S3SonicGroundMove_FaceLeftForNonpositiveGroundAcceleration:
                 bset    #Status_Facing,status(a0)
-                bne.s   loc_1249C
+                bne.s   S3SonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_1249C:
+S3SonicGroundMove_AccelerateLeftWithoutIncreasingExistingOverspeed:
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_124AE
+                bgt.s   S3SonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_124AE
+                ble.s   S3SonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation
                 move.w  d1,d0
 
-loc_124AE:
+S3SonicGroundMove_StoreLeftAccelerationAndRequestMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_124BA:
+S3SonicGroundMove_BrakePositiveGroundSpeedForLeftInput:
                 sub.w   d4,d0
-                bcc.s   loc_124C2
+                bcc.s   S3SonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord
                 move.w  #-$80,d0
 
-loc_124C2:
+S3SonicGroundMove_StoreLeftBrakeAndGateRightFacingSkidUsingModifiedSpeedWord:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -377,21 +377,21 @@ loc_124C2:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_1250A
+                bne.s   S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
                 cmpi.w  #$400,d0
-                blt.s   locret_1250A
+                blt.s   S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_1250A
+                bmi.s   S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bclr    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_1250A
+                blo.s   S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_1250A:
+S3SonicGroundMove_ReturnAfterLeftBrakingAndOptionalSkidDustRequest:
                 rts
 ; End of function SonicS3ApplyGroundLeftInput
 
@@ -399,33 +399,33 @@ locret_1250A:
 
 SonicS3ApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_12540
+                bmi.s   S3SonicGroundMove_BrakeNegativeGroundSpeedForRightInput
                 bclr    #Status_Facing,status(a0)
-                beq.s   loc_12526
+                beq.s   S3SonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_12526:
+S3SonicGroundMove_AccelerateRightWithoutIncreasingExistingOverspeed:
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_12534
+                blt.s   S3SonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_12534
+                bge.s   S3SonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation
                 move.w  d6,d0
 
-loc_12534:
+S3SonicGroundMove_StoreRightAccelerationAndRequestMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12540:
+S3SonicGroundMove_BrakeNegativeGroundSpeedForRightInput:
                 add.w   d4,d0
-                bcc.s   loc_12548
+                bcc.s   S3SonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord
                 move.w  #$80,d0
 
-loc_12548:
+S3SonicGroundMove_StoreRightBrakeAndGateLeftFacingSkidUsingModifiedSpeedWord:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -435,20 +435,20 @@ loc_12548:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_12590
+                bne.s   S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
                 cmpi.w  #-$400,d0
-                bgt.s   locret_12590
+                bgt.s   S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_12590
+                bmi.s   S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bset    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_12590
+                blo.s   S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_12590:
+S3SonicGroundMove_ReturnAfterRightBrakingAndOptionalSkidDustRequest:
                 rts
 ; End of function SonicS3ApplyGroundRightInput

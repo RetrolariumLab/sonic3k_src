@@ -1,132 +1,132 @@
 ; Data owner: objects/shared/sonic
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Sonic2P_:
-                dc.w    Frame_29FC92-Map_Sonic2P_
-                dc.w    Frame_29FC94-Map_Sonic2P_
-                dc.w    Frame_29FC9C-Map_Sonic2P_
-                dc.w    Frame_29FCA4-Map_Sonic2P_
-                dc.w    Frame_29FCAC-Map_Sonic2P_
-                dc.w    Frame_29FCB4-Map_Sonic2P_
-                dc.w    Frame_29FCBC-Map_Sonic2P_
-                dc.w    Frame_29FCC4-Map_Sonic2P_
-                dc.w    Frame_29FCCC-Map_Sonic2P_
-                dc.w    Frame_29FCD4-Map_Sonic2P_
-                dc.w    Frame_29FCDC-Map_Sonic2P_
-                dc.w    Frame_29FCE4-Map_Sonic2P_
-                dc.w    Frame_29FCEC-Map_Sonic2P_
-                dc.w    Frame_29FCF4-Map_Sonic2P_
-                dc.w    Frame_29FCFC-Map_Sonic2P_
-                dc.w    Frame_29FD04-Map_Sonic2P_
-                dc.w    Frame_29FD0C-Map_Sonic2P_
-                dc.w    Frame_29FD14-Map_Sonic2P_
-                dc.w    Frame_29FD1C-Map_Sonic2P_
-                dc.w    Frame_29FD24-Map_Sonic2P_
-                dc.w    Frame_29FD2C-Map_Sonic2P_
-                dc.w    Frame_29FD34-Map_Sonic2P_
-                dc.w    Frame_29FD3C-Map_Sonic2P_
-                dc.w    Frame_29FD44-Map_Sonic2P_
-                dc.w    Frame_29FD4C-Map_Sonic2P_
-                dc.w    Frame_29FD54-Map_Sonic2P_
-                dc.w    Frame_29FD5C-Map_Sonic2P_
-                dc.w    Frame_29FD64-Map_Sonic2P_
-                dc.w    Frame_29FD6C-Map_Sonic2P_
-                dc.w    Frame_29FD74-Map_Sonic2P_
-                dc.w    Frame_29FD7C-Map_Sonic2P_
-                dc.w    Frame_29FD84-Map_Sonic2P_
-                dc.w    Frame_29FD8C-Map_Sonic2P_
-                dc.w    Frame_29FD94-Map_Sonic2P_
-                dc.w    Frame_29FD9C-Map_Sonic2P_
-                dc.w    Frame_29FDA4-Map_Sonic2P_
-                dc.w    Frame_29FDAC-Map_Sonic2P_
-                dc.w    Frame_29FDB4-Map_Sonic2P_
-                dc.w    Frame_29FDBC-Map_Sonic2P_
-                dc.w    Frame_29FDBC-Map_Sonic2P_
-                dc.w    Frame_29FDC4-Map_Sonic2P_
-                dc.w    Frame_29FDCC-Map_Sonic2P_
-                dc.w    Frame_29FDD4-Map_Sonic2P_
-                dc.w    Frame_29FDDC-Map_Sonic2P_
-Frame_29FC92:   dc.w    0
-Frame_29FC94:   dc.w    1
+                dc.w    S3Sonic2P_MappingFrame00-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame01-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame02-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame03-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame04-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame05-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame06-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame07-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame08-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame09-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0A-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0B-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0C-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0D-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0E-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame0F-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame10-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame11-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame12-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame13-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame14-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame15-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame16-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame17-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame18-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame19-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1A-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1B-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1C-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1D-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1E-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame1F-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame20-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame21-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame22-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame23-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame24-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame25-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame26_27-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame26_27-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame28-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame29-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame2A-Map_Sonic2P_
+                dc.w    S3Sonic2P_MappingFrame2B-Map_Sonic2P_
+S3Sonic2P_MappingFrame00:   dc.w    0
+S3Sonic2P_MappingFrame01:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FC9C:   dc.w    1
+S3Sonic2P_MappingFrame02:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCA4:   dc.w    1
+S3Sonic2P_MappingFrame03:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCAC:   dc.w    1
+S3Sonic2P_MappingFrame04:   dc.w    1
                 dc.b    $F0,  $B,   0,   0, $FF, $F4
-Frame_29FCB4:   dc.w    1
+S3Sonic2P_MappingFrame05:   dc.w    1
                 dc.b    $F0,  $B,   0,   0, $FF, $F4
-Frame_29FCBC:   dc.w    1
+S3Sonic2P_MappingFrame06:   dc.w    1
                 dc.b    $F0,  $B,   0,   0, $FF, $F4
-Frame_29FCC4:   dc.w    1
+S3Sonic2P_MappingFrame07:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCCC:   dc.w    1
+S3Sonic2P_MappingFrame08:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCD4:   dc.w    1
+S3Sonic2P_MappingFrame09:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCDC:   dc.w    1
+S3Sonic2P_MappingFrame0A:   dc.w    1
                 dc.b    $F4,  $E,   0,   0, $FF, $F0
-Frame_29FCE4:   dc.w    1
+S3Sonic2P_MappingFrame0B:   dc.w    1
                 dc.b    $F4,  $E,   0,   0, $FF, $F0
-Frame_29FCEC:   dc.w    1
+S3Sonic2P_MappingFrame0C:   dc.w    1
                 dc.b    $F4,  $E,   0,   0, $FF, $F0
-Frame_29FCF4:   dc.w    1
+S3Sonic2P_MappingFrame0D:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FCFC:   dc.w    1
+S3Sonic2P_MappingFrame0E:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD04:   dc.w    1
+S3Sonic2P_MappingFrame0F:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD0C:   dc.w    1
+S3Sonic2P_MappingFrame10:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD14:   dc.w    1
+S3Sonic2P_MappingFrame11:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD1C:   dc.w    1
+S3Sonic2P_MappingFrame12:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD24:   dc.w    1
+S3Sonic2P_MappingFrame13:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD2C:   dc.w    1
+S3Sonic2P_MappingFrame14:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD34:   dc.w    1
+S3Sonic2P_MappingFrame15:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD3C:   dc.w    1
+S3Sonic2P_MappingFrame16:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD44:   dc.w    1
+S3Sonic2P_MappingFrame17:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD4C:   dc.w    1
+S3Sonic2P_MappingFrame18:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD54:   dc.w    1
+S3Sonic2P_MappingFrame19:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD5C:   dc.w    1
+S3Sonic2P_MappingFrame1A:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD64:   dc.w    1
+S3Sonic2P_MappingFrame1B:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD6C:   dc.w    1
+S3Sonic2P_MappingFrame1C:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD74:   dc.w    1
+S3Sonic2P_MappingFrame1D:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD7C:   dc.w    1
+S3Sonic2P_MappingFrame1E:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD84:   dc.w    1
+S3Sonic2P_MappingFrame1F:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD8C:   dc.w    1
+S3Sonic2P_MappingFrame20:   dc.w    1
                 dc.b    $F0,  $B,   0,   0, $FF, $F4
-Frame_29FD94:   dc.w    1
+S3Sonic2P_MappingFrame21:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FD9C:   dc.w    1
+S3Sonic2P_MappingFrame22:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDA4:   dc.w    1
+S3Sonic2P_MappingFrame23:   dc.w    1
                 dc.b    $FC,   9,   0,   0, $FF, $F4
-Frame_29FDAC:   dc.w    1
+S3Sonic2P_MappingFrame24:   dc.w    1
                 dc.b    $FC,   9,   0,   0, $FF, $F4
-Frame_29FDB4:   dc.w    1
+S3Sonic2P_MappingFrame25:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDBC:   dc.w    1
+S3Sonic2P_MappingFrame26_27:    dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDC4:   dc.w    1
+S3Sonic2P_MappingFrame28:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDCC:   dc.w    1
+S3Sonic2P_MappingFrame29:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDD4:   dc.w    1
+S3Sonic2P_MappingFrame2A:   dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-Frame_29FDDC:   dc.w    1
+S3Sonic2P_MappingFrame2B:   dc.w    1
                 dc.b    $FC,   9,   0,   0, $FF, $F4

@@ -17,16 +17,16 @@ Obj_Sonic:
                 beq.s   JmpTo_DebugMode                 ; If so, skip to debug mode routine
 ; By this point, we're assuming you're in frame cycling mode
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_10ABC
+                beq.s   SKSonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit
                 move.w  #0,(Debug_placement_mode).w     ; Leave debug mode
 
-loc_10ABC:
+SKSonicLifecycle_AdvanceDebugFrameCycleWithProfileLimit:
                 addq.b  #1,mapping_frame(a0)            ; Next frame
                 cmpi.b  #$FB,mapping_frame(a0)          ; Have we reached the end of Sonic's frames?
-                blo.s   loc_10ACE
+                blo.s   SKSonicLifecycle_LoadAndQueueCurrentDebugFrame
                 move.b  #0,mapping_frame(a0)            ; If so, reset to Sonic's first frame
 
-loc_10ACE:
+SKSonicLifecycle_LoadAndQueueCurrentDebugFrame:
                 bsr.w   Sonic_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -98,37 +98,37 @@ Sonic_Init_Continued:
 
 Sonic_Control:                                          ; Routine 2
                 tst.w   (Debug_mode_flag).w             ; is debug cheat enabled?
-                beq.s   loc_10BF0                       ; if not, branch
+                beq.s   SKSonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
                 bclr    #button_A,(Ctrl_1_pressed).w    ; is button A pressed?
-                beq.s   loc_10BCE                       ; if not, branch
+                beq.s   SKSonicLifecycle_CheckDebugBEntryAfterConsumingNewAForGravityToggle  ; if not, branch
                 eori.b  #1,(Reverse_gravity_flag).w     ; toggle reverse gravity
 
-loc_10BCE:
+SKSonicLifecycle_CheckDebugBEntryAfterConsumingNewAForGravityToggle:
                 btst    #button_B,(Ctrl_1_pressed).w    ; is button B pressed?
-                beq.s   loc_10BF0                       ; if not, branch
+                beq.s   SKSonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked  ; if not, branch
                 move.w  #1,(Debug_placement_mode).w     ; change Sonic into a ring/item
                 clr.b   (Ctrl_1_locked).w               ; unlock control
                 btst    #button_C,(Ctrl_1_held).w       ; was button C held before pressing B?
-                beq.s   locret_10BEE                    ; if not, branch
+                beq.s   SKSonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle  ; if not, branch
                 move.w  #2,(Debug_placement_mode).w     ; enter animation cycle mode
 
-locret_10BEE:
+SKSonicLifecycle_ReturnAfterEnteringDebugPlacementOrFrameCycle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10BF0:
+SKSonicLifecycle_CopyPhysicalControllerWordUnlessLogicalInputLocked:
                 tst.b   (Ctrl_1_locked).w               ; are controls locked?
-                bne.s   loc_10BFC                       ; if yes, branch
+                bne.s   SKSonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled  ; if yes, branch
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w   ; copy new held buttons, to enable joypad control
 
-loc_10BFC:
+SKSonicLifecycle_SkipOwnMovementAndResetDoubleJumpWhenExternallyControlled:
                 btst    #0,object_control(a0)           ; is Sonic interacting with another object that holds him in place or controls his movement somehow?
-                beq.s   loc_10C0C                       ; if yes, branch to skip Sonic's control
+                beq.s   SKSonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters  ; if yes, branch to skip Sonic's control
                 move.b  #0,double_jump_flag(a0)         ; enable double jump
-                bra.s   loc_10C26
+                bra.s   SKSonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum
 ; ---------------------------------------------------------------------------
 
-loc_10C0C:
+SKSonicLifecycle_DispatchGroundAirRollJumpModeWhilePreservingSharedBaseRegisters:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -137,13 +137,13 @@ loc_10C0C:
                 jsr     Sonic_Modes(pc,d1.w)            ; run Sonic's movement control code
                 movem.l (sp)+,a4-a6
 
-loc_10C26:
+SKSonicLifecycle_WrapPlayerYWordOnlyAtMinusOneHundredCameraMinimum:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w     ; is vertical wrapping enabled?
-                bne.s   loc_10C36                       ; if not, branch
+                bne.s   SKSonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation  ; if not, branch
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)                    ; perform wrapping of Sonic's y position
 
-loc_10C36:
+SKSonicLifecycle_QueueDisplayThenUpdatePowersHistoryWaterAndWindTunnelAnimation:
                 bsr.s   Sonic_Display
                 bsr.w   SonicKnux_SuperHyper
                 bsr.w   Sonic_RecordPos
@@ -151,29 +151,29 @@ loc_10C36:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag).w
-                beq.s   loc_10C62
+                beq.s   SKSonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
                 tst.b   anim(a0)
-                bne.s   loc_10C62
+                bne.s   SKSonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne
                 move.b  prev_anim(a0),anim(a0)
 
-loc_10C62:
+SKSonicLifecycle_GateAnimationPatternLoadAndSkOuterGravityFlipByControlBitOne:
                 btst    #1,object_control(a0)
-                bne.s   loc_10C7E
+                bne.s   SKSonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet
                 bsr.w   Animate_Sonic
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_10C7A
+                beq.s   SKSonicLifecycle_LoadSonicPatternsAfterOptionalOuterReverseGravityFlip
                 eori.b  #2,render_flags(a0)
 
-loc_10C7A:
+SKSonicLifecycle_LoadSonicPatternsAfterOptionalOuterReverseGravityFlip:
                 bsr.w   Sonic_Load_PLC
 
-loc_10C7E:
+SKSonicLifecycle_RunTouchResponseUnlessControlBitsFiveOrSevenSet:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   locret_10C8E
+                bne.s   SKSonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse
                 jsr     (TouchResponse).l
 
-locret_10C8E:
+SKSonicLifecycle_ReturnAfterNormalServicesAndOptionalTouchResponse:
                 rts
 ; ---------------------------------------------------------------------------
 ; secondary states under state Sonic_Control
@@ -187,12 +187,12 @@ Sonic_Modes:
 
 Sonic_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   loc_10CA6
+                beq.s   SKSonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
                 bcc.s   Sonic_ChkInvin
 
-loc_10CA6:
+SKSonicLifecycle_QueueVisibleBlinkPhaseBeforeTimedPowerExpiryChecks:
                 jsr     (Draw_Sprite).l
 
 Sonic_ChkInvin:                                         ; Checks if invincibility has expired and disables it if it has
@@ -231,12 +231,12 @@ Sonic_ChkShoes:                                         ; Checks if Speed Shoes 
                 move.w  #$C,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$80,Deceleration-Max_speed(a4)  ; set Deceleration
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_10D32                       ; if Super/Hyper, set different values
+                beq.s   SKSonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo  ; if Super/Hyper, set different values
                 move.w  #$A00,Max_speed-Max_speed(a4)   ; set Max_speed
                 move.w  #$30,Acceleration-Max_speed(a4)  ; set Acceleration
                 move.w  #$100,Deceleration-Max_speed(a4)  ; set Deceleration
 
-loc_10D32:
+SKSonicLifecycle_ClearExpiredSpeedShoesAndRestoreMusicTempo:
                 bclr    #Status_SpeedShoes,status_secondary(a0)
                 moveq   #0,d0                           ; Slow down tempo
                 jmp     (Change_Music_Tempo).l
@@ -270,7 +270,7 @@ Sonic_RecordPos:
                 tst.w   (Competition_mode).w            ; are we in Competition mode?
                 bne.s   Sonic_RecordPosCompetition      ; if so, branch
                 cmpa.w  #Player_1,a0                    ; is Sonic the sidekick?
-                bne.s   locret_10D9E                    ; if so, branch
+                bne.s   SKSonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip  ; if so, branch
                 move.w  (Pos_table_index).w,d0
                 lea     (Pos_table).w,a1
                 lea     (a1,d0.w),a1
@@ -283,7 +283,7 @@ Sonic_RecordPos:
                 move.b  status(a0),(a1)+
                 move.b  art_tile(a0),(a1)+
 
-locret_10D9E:
+SKSonicLifecycle_ReturnAfterPrimaryHistoryRecordOrNonprimarySkip:
                 rts
 ; ---------------------------------------------------------------------------
 

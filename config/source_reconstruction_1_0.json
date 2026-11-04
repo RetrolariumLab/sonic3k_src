@@ -843,9 +843,15 @@
       "commits": ["9af530b6ca67ff4c1b65f3dae807a7c7442d5823"]
     },
     {
-      "id": "current-z80-historical-symbol-projection",
+      "id": "change-f63b63cd43d7",
       "kind": "source_or_tooling",
       "summary": "Compare current Z80 RAM, code and table symbols through validated profile-scoped historical names; retain independent RAM addresses and historical entry coverage, with negative regression tests.",
+      "commits": ["f63b63cd43d7eb0cc357ca0f4d32ee148447c1cd"]
+    },
+    {
+      "id": "current-semantic-06-player-sonic",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 06-player-sonic; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],

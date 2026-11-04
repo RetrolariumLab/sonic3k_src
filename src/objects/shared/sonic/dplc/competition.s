@@ -1,132 +1,132 @@
 ; Data owner: objects/shared/sonic
 ; Provenance and source range: config/reconstruction/source_layout.json
 PLC_Sonic2P_:
-                dc.w    Frame_29FE3C-PLC_Sonic2P_
-                dc.w    Frame_29FE3E-PLC_Sonic2P_
-                dc.w    Frame_29FE42-PLC_Sonic2P_
-                dc.w    Frame_29FE46-PLC_Sonic2P_
-                dc.w    Frame_29FE4A-PLC_Sonic2P_
-                dc.w    Frame_29FE4E-PLC_Sonic2P_
-                dc.w    Frame_29FE52-PLC_Sonic2P_
-                dc.w    Frame_29FE56-PLC_Sonic2P_
-                dc.w    Frame_29FE5A-PLC_Sonic2P_
-                dc.w    Frame_29FE5E-PLC_Sonic2P_
-                dc.w    Frame_29FE62-PLC_Sonic2P_
-                dc.w    Frame_29FE66-PLC_Sonic2P_
-                dc.w    Frame_29FE6A-PLC_Sonic2P_
-                dc.w    Frame_29FE6E-PLC_Sonic2P_
-                dc.w    Frame_29FE72-PLC_Sonic2P_
-                dc.w    Frame_29FE76-PLC_Sonic2P_
-                dc.w    Frame_29FE7A-PLC_Sonic2P_
-                dc.w    Frame_29FE7E-PLC_Sonic2P_
-                dc.w    Frame_29FE82-PLC_Sonic2P_
-                dc.w    Frame_29FE86-PLC_Sonic2P_
-                dc.w    Frame_29FE8A-PLC_Sonic2P_
-                dc.w    Frame_29FE8E-PLC_Sonic2P_
-                dc.w    Frame_29FE92-PLC_Sonic2P_
-                dc.w    Frame_29FE96-PLC_Sonic2P_
-                dc.w    Frame_29FE9A-PLC_Sonic2P_
-                dc.w    Frame_29FE9E-PLC_Sonic2P_
-                dc.w    Frame_29FEA2-PLC_Sonic2P_
-                dc.w    Frame_29FEA6-PLC_Sonic2P_
-                dc.w    Frame_29FEAA-PLC_Sonic2P_
-                dc.w    Frame_29FEAE-PLC_Sonic2P_
-                dc.w    Frame_29FEB2-PLC_Sonic2P_
-                dc.w    Frame_29FEB6-PLC_Sonic2P_
-                dc.w    Frame_29FEBA-PLC_Sonic2P_
-                dc.w    Frame_29FEBE-PLC_Sonic2P_
-                dc.w    Frame_29FEC2-PLC_Sonic2P_
-                dc.w    Frame_29FEC6-PLC_Sonic2P_
-                dc.w    Frame_29FECA-PLC_Sonic2P_
-                dc.w    Frame_29FECE-PLC_Sonic2P_
-                dc.w    Frame_29FED2-PLC_Sonic2P_
-                dc.w    Frame_29FED2-PLC_Sonic2P_
-                dc.w    Frame_29FED6-PLC_Sonic2P_
-                dc.w    Frame_29FEDA-PLC_Sonic2P_
-                dc.w    Frame_29FEDE-PLC_Sonic2P_
-                dc.w    Frame_29FEE2-PLC_Sonic2P_
-Frame_29FE3C:   dc.w    0
-Frame_29FE3E:   dc.w    1
+                dc.w    S3Sonic2P_DplcFrame00-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame01-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame02-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame03-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame04-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame05-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame06-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame07-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame08-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame09-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0A-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0B-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0C-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0D-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0E-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame0F-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame10-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame11-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame12-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame13-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame14-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame15-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame16-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame17-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame18-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame19-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1A-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1B-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1C-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1D-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1E-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame1F-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame20-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame21-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame22-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame23-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame24-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame25-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame26_27-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame26_27-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame28-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame29-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame2A-PLC_Sonic2P_
+                dc.w    S3Sonic2P_DplcFrame2B-PLC_Sonic2P_
+S3Sonic2P_DplcFrame00:  dc.w    0
+S3Sonic2P_DplcFrame01:  dc.w    1
                 dc.w    $8000
-Frame_29FE42:   dc.w    1
+S3Sonic2P_DplcFrame02:  dc.w    1
                 dc.w    $8009
-Frame_29FE46:   dc.w    1
+S3Sonic2P_DplcFrame03:  dc.w    1
                 dc.w    $8012
-Frame_29FE4A:   dc.w    1
+S3Sonic2P_DplcFrame04:  dc.w    1
                 dc.w    $B01B
-Frame_29FE4E:   dc.w    1
+S3Sonic2P_DplcFrame05:  dc.w    1
                 dc.w    $B027
-Frame_29FE52:   dc.w    1
+S3Sonic2P_DplcFrame06:  dc.w    1
                 dc.w    $B033
-Frame_29FE56:   dc.w    1
+S3Sonic2P_DplcFrame07:  dc.w    1
                 dc.w    $803F
-Frame_29FE5A:   dc.w    1
+S3Sonic2P_DplcFrame08:  dc.w    1
                 dc.w    $8048
-Frame_29FE5E:   dc.w    1
+S3Sonic2P_DplcFrame09:  dc.w    1
                 dc.w    $8051
-Frame_29FE62:   dc.w    1
+S3Sonic2P_DplcFrame0A:  dc.w    1
                 dc.w    $B05A
-Frame_29FE66:   dc.w    1
+S3Sonic2P_DplcFrame0B:  dc.w    1
                 dc.w    $B066
-Frame_29FE6A:   dc.w    1
+S3Sonic2P_DplcFrame0C:  dc.w    1
                 dc.w    $B072
-Frame_29FE6E:   dc.w    1
+S3Sonic2P_DplcFrame0D:  dc.w    1
                 dc.w    $807E
-Frame_29FE72:   dc.w    1
+S3Sonic2P_DplcFrame0E:  dc.w    1
                 dc.w    $8087
-Frame_29FE76:   dc.w    1
+S3Sonic2P_DplcFrame0F:  dc.w    1
                 dc.w    $8090
-Frame_29FE7A:   dc.w    1
+S3Sonic2P_DplcFrame10:  dc.w    1
                 dc.w    $8099
-Frame_29FE7E:   dc.w    1
+S3Sonic2P_DplcFrame11:  dc.w    1
                 dc.w    $80A2
-Frame_29FE82:   dc.w    1
+S3Sonic2P_DplcFrame12:  dc.w    1
                 dc.w    $80AB
-Frame_29FE86:   dc.w    1
+S3Sonic2P_DplcFrame13:  dc.w    1
                 dc.w    $80B4
-Frame_29FE8A:   dc.w    1
+S3Sonic2P_DplcFrame14:  dc.w    1
                 dc.w    $80BD
-Frame_29FE8E:   dc.w    1
+S3Sonic2P_DplcFrame15:  dc.w    1
                 dc.w    $80C6
-Frame_29FE92:   dc.w    1
+S3Sonic2P_DplcFrame16:  dc.w    1
                 dc.w    $80CF
-Frame_29FE96:   dc.w    1
+S3Sonic2P_DplcFrame17:  dc.w    1
                 dc.w    $80D8
-Frame_29FE9A:   dc.w    1
+S3Sonic2P_DplcFrame18:  dc.w    1
                 dc.w    $80E1
-Frame_29FE9E:   dc.w    1
+S3Sonic2P_DplcFrame19:  dc.w    1
                 dc.w    $80EA
-Frame_29FEA2:   dc.w    1
+S3Sonic2P_DplcFrame1A:  dc.w    1
                 dc.w    $80F3
-Frame_29FEA6:   dc.w    1
+S3Sonic2P_DplcFrame1B:  dc.w    1
                 dc.w    $80FC
-Frame_29FEAA:   dc.w    1
+S3Sonic2P_DplcFrame1C:  dc.w    1
                 dc.w    $8105
-Frame_29FEAE:   dc.w    1
+S3Sonic2P_DplcFrame1D:  dc.w    1
                 dc.w    $810E
-Frame_29FEB2:   dc.w    1
+S3Sonic2P_DplcFrame1E:  dc.w    1
                 dc.w    $8117
-Frame_29FEB6:   dc.w    1
+S3Sonic2P_DplcFrame1F:  dc.w    1
                 dc.w    $8120
-Frame_29FEBA:   dc.w    1
+S3Sonic2P_DplcFrame20:  dc.w    1
                 dc.w    $B129
-Frame_29FEBE:   dc.w    1
+S3Sonic2P_DplcFrame21:  dc.w    1
                 dc.w    $8135
-Frame_29FEC2:   dc.w    1
+S3Sonic2P_DplcFrame22:  dc.w    1
                 dc.w    $813E
-Frame_29FEC6:   dc.w    1
+S3Sonic2P_DplcFrame23:  dc.w    1
                 dc.w    $5147
-Frame_29FECA:   dc.w    1
+S3Sonic2P_DplcFrame24:  dc.w    1
                 dc.w    $514D
-Frame_29FECE:   dc.w    1
+S3Sonic2P_DplcFrame25:  dc.w    1
                 dc.w    $8153
-Frame_29FED2:   dc.w    1
+S3Sonic2P_DplcFrame26_27:   dc.w    1
                 dc.w    $815C
-Frame_29FED6:   dc.w    1
+S3Sonic2P_DplcFrame28:  dc.w    1
                 dc.w    $8165
-Frame_29FEDA:   dc.w    1
+S3Sonic2P_DplcFrame29:  dc.w    1
                 dc.w    $816E
-Frame_29FEDE:   dc.w    1
+S3Sonic2P_DplcFrame2A:  dc.w    1
                 dc.w    $8177
-Frame_29FEE2:   dc.w    1
+S3Sonic2P_DplcFrame2B:  dc.w    1
                 dc.w    $5180

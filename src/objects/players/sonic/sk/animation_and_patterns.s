@@ -7,77 +7,77 @@
 Animate_Sonic:
                 lea     (AniSonic).l,a1
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_12612
+                beq.s   SKSonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges
                 lea     (AniSuperSonic).l,a1
 
-loc_12612:
+SKSonicAnimation_ResetAnimationCursorTimerAndPushFlagWhenIdChanges:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   loc_12634
+                beq.s   SKSonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-loc_12634:
+SKSonicAnimation_ReadAnimationHeaderAndRunOrdinaryDelayOrSpeedMode:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   loc_126A4
+                bmi.s   SKSonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_12672
+                bpl.s   SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.b  d0,anim_frame_timer(a0)
 
-loc_1265A:
+SKSonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$FC,d0
-                bhs.s   loc_12674
+                bhs.s   SKSonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands
 
-loc_1266A:
+SKSonicAnimation_StoreMappingFrameAndAdvanceByteCursor:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_12672:
+SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12674:
+SKSonicAnimation_RestartPlayerStreamOnFfOrTestRemainingCommands:
                 addq.b  #1,d0
-                bne.s   loc_12684
+                bne.s   SKSonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   loc_1266A
+                bra.s   SKSonicAnimation_StoreMappingFrameAndAdvanceByteCursor
 ; ---------------------------------------------------------------------------
 
-loc_12684:
+SKSonicAnimation_BacktrackPlayerStreamOnFeByFollowingByte:
                 addq.b  #1,d0
-                bne.s   loc_12698
+                bne.s   SKSonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   loc_1266A
+                bra.s   SKSonicAnimation_StoreMappingFrameAndAdvanceByteCursor
 ; ---------------------------------------------------------------------------
 
-loc_12698:
+SKSonicAnimation_ChangePlayerAnimationOnFdOtherwiseLeaveFcUnhandled:
                 addq.b  #1,d0
-                bne.s   locret_126A2
+                bne.s   SKSonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc
                 move.b  2(a1,d1.w),anim(a0)
 
-locret_126A2:
+SKSonicAnimation_ReturnAfterFdBankRequestOrUnhandledFc:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_126A4:
+SKSonicAnimation_SelectWalkTumbleForFfHeaderOrOtherNegativeSpeedMode:
                 addq.b  #1,d0
-                bne.w   loc_12A2A
+                bne.w   SKSonicAnimation_CountNonFfNegativeHeaderRollCadence
                 moveq   #0,d0
                 tst.b   flip_type(a0)
                 bmi.w   Anim_Tumble
@@ -85,116 +85,116 @@ loc_126A4:
                 bne.w   Anim_Tumble
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   loc_126C8
-                beq.s   loc_126C8
+                bmi.s   SKSonicAnimation_OrientWalkingAngleByFacing
+                beq.s   SKSonicAnimation_OrientWalkingAngleByFacing
                 subq.b  #1,d0
 
-loc_126C8:
+SKSonicAnimation_OrientWalkingAngleByFacing:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_126D4
+                bne.s   SKSonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask
                 not.b   d0
 
-loc_126D4:
+SKSonicAnimation_BiasWalkingAngleAndChooseQuadrantFlipMask:
                 addi.b  #$10,d0
-                bpl.s   loc_126DC
+                bpl.s   SKSonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling
                 moveq   #3,d1
 
-loc_126DC:
+SKSonicAnimation_ApplyWalkQuadrantFlipAndChoosePushOrSpeedSampling:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   loc_12A72
+                bne.w   SKSonicAnimation_CountPushCadenceUsingRawGroundVelocity
                 lsr.b   #4,d0
                 andi.b  #6,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_12700
+                bpl.s   SKSonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit
                 neg.w   d2
 
-loc_12700:
+SKSonicAnimation_DoubleAnimationSpeedMagnitudeForSecondarySignBit:
                 tst.b   status_secondary(a0)
-                bpl.w   loc_1270A
+                bpl.w   SKSonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick
                 add.w   d2,d2
 
-loc_1270A:
+SKSonicAnimation_ChooseNormalWalkOrRunStreamAtSixPixelsPerTick:
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   loc_12766
+                bne.s   SKSonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick
                 lea     (AniSonic01).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_12724
+                bhs.s   SKSonicAnimation_ReadNormalLocomotionFrameAndSectorOffset
                 lea     (AniSonic00).l,a1
                 add.b   d0,d0
 
-loc_12724:
+SKSonicAnimation_ReadNormalLocomotionFrameAndSectorOffset:
                 add.b   d0,d0
                 move.b  d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_12742
+                bne.s   SKSonicAnimation_StoreNormalSectorFrameAndCountCursorDelay
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-loc_12742:
+SKSonicAnimation_StoreNormalSectorFrameAndCountCursorDelay:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_12764
+                bpl.s   SKSonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   loc_1275A
+                bpl.s   SKSonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder
                 moveq   #0,d2
 
-loc_1275A:
+SKSonicAnimation_ReloadNormalWalkTimerFromClampedWordRemainder:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_12764:
+SKSonicAnimation_ReturnAfterNormalWalkFrameOrCursorTiming:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12766:
+SKSonicAnimation_ChooseSuperWalkOrRunAtEightPixelsPerTick:
                 lea     (AniSuperSonic01).l,a1
                 cmpi.w  #$800,d2
-                bhs.s   loc_1277E
+                bhs.s   SKSonicAnimation_DoubleSectorOffsetForSuperRunFrames
                 lea     (AniSuperSonic00).l,a1
                 add.b   d0,d0
                 add.b   d0,d0
-                bra.s   loc_12780
+                bra.s   SKSonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap
 ; ---------------------------------------------------------------------------
 
-loc_1277E:
+SKSonicAnimation_DoubleSectorOffsetForSuperRunFrames:
                 add.b   d0,d0
 
-loc_12780:
+SKSonicAnimation_ReadSuperLocomotionFrameAndHandleFfWrap:
                 move.b  d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_1279C
+                bne.s   SKSonicAnimation_StoreSuperSectorFrameAndCountCursorDelay
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-loc_1279C:
+SKSonicAnimation_StoreSuperSectorFrameAndCountCursorDelay:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_127BE
+                bpl.s   SKSonicAnimation_ReturnAfterSuperLocomotionFrameTiming
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   loc_127B4
+                bpl.s   SKSonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder
                 moveq   #0,d2
 
-loc_127B4:
+SKSonicAnimation_ReloadSuperWalkTimerFromClampedWordRemainder:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_127BE:
+SKSonicAnimation_ReturnAfterSuperLocomotionFrameTiming:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -202,7 +202,7 @@ locret_127BE:
 Anim_Tumble:
                 move.b  flip_type(a0),d1
                 andi.w  #$7F,d1
-                bne.w   loc_12872
+                bne.w   SKSonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
@@ -210,21 +210,21 @@ Anim_Tumble:
                 bne.s   Anim_TumbleLeft
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_12806
+                bpl.s   SKSonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven
                 cmpi.b  #$B,(Current_zone).w            ; is this DEZ?
-                beq.s   loc_1280A                       ; if so, branch
+                beq.s   SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames  ; if so, branch
                 cmpi.b  #4,(Current_zone).w             ; is this FBZ?
-                beq.s   loc_1280A                       ; if so, branch
+                beq.s   SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames  ; if so, branch
                 ori.b   #2,render_flags(a0)
                 neg.b   d0
                 addi.b  #$8F,d0
-                bra.s   loc_1280A
+                bra.s   SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames
 ; ---------------------------------------------------------------------------
 
-loc_12806:
+SKSonicAnimation_BiasRightFacingTypeZeroTumblePhaseByEleven:
                 addi.b  #$B,d0
 
-loc_1280A:
+SKSonicAnimation_QuantizeRightTypeZeroTumbleIntoBaseThirtyOneFrames:
                 divu.w  #$16,d0
                 addi.b  #$31,d0
                 move.b  d0,mapping_frame(a0)
@@ -236,46 +236,46 @@ loc_1280A:
 Anim_TumbleLeft:
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_1284E
+                bpl.s   SKSonicAnimation_MirrorOrdinaryLeftTypeZeroTumbleAcrossBothAxes
                 cmpi.b  #4,(Current_zone).w             ; is this FBZ?
-                beq.s   loc_12842                       ; if so, branch
+                beq.s   SKSonicAnimation_BiasNegativeTypeZeroLeftTumbleInFbzDezOrMhz  ; if so, branch
                 cmpi.b  #$B,(Current_zone).w            ; is this DEZ?
-                beq.s   loc_12842                       ; if so, branch
+                beq.s   SKSonicAnimation_BiasNegativeTypeZeroLeftTumbleInFbzDezOrMhz  ; if so, branch
                 cmpi.b  #7,(Current_zone).w             ; is this MHZ?
-                bne.s   loc_1284E                       ; if not, branch
+                bne.s   SKSonicAnimation_MirrorOrdinaryLeftTypeZeroTumbleAcrossBothAxes  ; if not, branch
 
-loc_12842:
+SKSonicAnimation_BiasNegativeTypeZeroLeftTumbleInFbzDezOrMhz:
                 ori.b   #1,render_flags(a0)
                 addi.b  #$B,d0
-                bra.s   loc_1285A
+                bra.s   SKSonicAnimation_QuantizeLeftTypeZeroTumbleIntoBaseThirtyOneFrames
 ; ---------------------------------------------------------------------------
 
-loc_1284E:
+SKSonicAnimation_MirrorOrdinaryLeftTypeZeroTumbleAcrossBothAxes:
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$8F,d0
 
-loc_1285A:
+SKSonicAnimation_QuantizeLeftTypeZeroTumbleIntoBaseThirtyOneFrames:
                 divu.w  #$16,d0
                 addi.b  #$31,d0
                 move.b  d0,mapping_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_1286E:
+SKSonicAnimation_TumbleSubtypeFrameBaseBytes:
                 dc.b    0, $3D, $49, $49
                 even
 ; ---------------------------------------------------------------------------
 
-loc_12872:
-                move.b  byte_1286E(pc,d1.w),d3
+SKSonicAnimation_ReadSubtypeTumbleBaseAndHandleTypeOne:
+                move.b  SKSonicAnimation_TumbleSubtypeFrameBaseBytes(pc,d1.w),d3
                 cmpi.b  #1,d1
-                bne.s   loc_128CA
+                bne.s   SKSonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_128A8
+                bne.s   SKSonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #-8,d0
                 divu.w  #$16,d0
@@ -285,7 +285,7 @@ loc_12872:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_128A8:
+SKSonicAnimation_QuantizeLeftFacingTypeOneTumbleWithXFlip:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #1,render_flags(a0)
                 addi.b  #-8,d0
@@ -296,14 +296,14 @@ loc_128A8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_128CA:
+SKSonicAnimation_HandleTypeTwoTumbleOrContinueOtherSubtypeDispatch:
                 cmpi.b  #2,d1
-                bne.s   loc_12920
+                bne.s   SKSonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_128FC
+                bne.s   SKSonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #$B,d0
                 divu.w  #$16,d0
@@ -313,7 +313,7 @@ loc_128CA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_128FC:
+SKSonicAnimation_QuantizeLeftFacingTypeTwoTumbleWithBothFlips:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
@@ -325,14 +325,14 @@ loc_128FC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12920:
+SKSonicAnimation_HandleMirroredSubtypeThreeTumbleWithProfileFallback:
                 cmpi.b  #3,d1
-                bne.s   loc_1297C
+                bne.s   SKSonicAnimation_DispatchTypeFourBeforeGenericFixedBaseTumble
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_1295A
+                bne.s   SKSonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #2,render_flags(a0)
                 neg.b   d0
@@ -344,7 +344,7 @@ loc_12920:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1295A:
+SKSonicAnimation_QuantizeLeftFacingSubtypeThreeWithXFlip:
                 andi.b  #$FC,render_flags(a0)
                 ori.b   #1,render_flags(a0)
                 addi.b  #$B,d0
@@ -355,25 +355,25 @@ loc_1295A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1297C:
+SKSonicAnimation_DispatchTypeFourBeforeGenericFixedBaseTumble:
                 cmpi.b  #4,d1
-                bne.s   loc_129F6
+                bne.s   SKSonicAnimation_HandleTypesFiveAndAboveWithFixedBaseAndFacingXFlip
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_129BC
+                bne.s   SKSonicAnimation_SelectLeftTypeFourMirrorWithIdenticalSignPaths
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_129A4
+                bpl.s   SKSonicAnimation_BiasNonnegativeRightFacingTypeFourTumble
                 addi.b  #$B,d0
-                bra.s   loc_129A8
+                bra.s   SKSonicAnimation_QuantizeRightFacingTypeFourUsingFixedBaseThirtyOne
 ; ---------------------------------------------------------------------------
 
-loc_129A4:
+SKSonicAnimation_BiasNonnegativeRightFacingTypeFourTumble:
                 addi.b  #$B,d0
 
-loc_129A8:
+SKSonicAnimation_QuantizeRightFacingTypeFourUsingFixedBaseThirtyOne:
                 divu.w  #$16,d0
                 addi.b  #$31,d0
                 move.b  d0,mapping_frame(a0)
@@ -381,22 +381,22 @@ loc_129A8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_129BC:
+SKSonicAnimation_SelectLeftTypeFourMirrorWithIdenticalSignPaths:
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_129D6
+                bpl.s   SKSonicAnimation_MirrorNonnegativeLeftFacingTypeFourTumble
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$8F,d0
-                bra.s   loc_129E2
+                bra.s   SKSonicAnimation_QuantizeLeftFacingTypeFourUsingFixedBaseThirtyOne
 ; ---------------------------------------------------------------------------
 
-loc_129D6:
+SKSonicAnimation_MirrorNonnegativeLeftFacingTypeFourTumble:
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$8F,d0
 
-loc_129E2:
+SKSonicAnimation_QuantizeLeftFacingTypeFourUsingFixedBaseThirtyOne:
                 divu.w  #$16,d0
                 addi.b  #$31,d0
                 move.b  d0,mapping_frame(a0)
@@ -404,16 +404,16 @@ loc_129E2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_129F6:
+SKSonicAnimation_HandleTypesFiveAndAboveWithFixedBaseAndFacingXFlip:
                 move.b  flip_angle(a0),d0
                 andi.b  #$FC,render_flags(a0)
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                beq.s   loc_12A12
+                beq.s   SKSonicAnimation_QuantizeGenericHigherTumbleTypeUsingFixedBaseThirtyOne
                 ori.b   #1,render_flags(a0)
 
-loc_12A12:
+SKSonicAnimation_QuantizeGenericHigherTumbleTypeUsingFixedBaseThirtyOne:
                 addi.b  #$B,d0
                 divu.w  #$16,d0
                 addi.b  #$31,d0
@@ -422,57 +422,57 @@ loc_12A12:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12A2A:
+SKSonicAnimation_CountNonFfNegativeHeaderRollCadence:
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_12672
+                bpl.w   SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_12A4C
+                bpl.s   SKSonicAnimation_ChooseRollStreamAtSixPixelsPerTick
                 neg.w   d2
 
-loc_12A4C:
+SKSonicAnimation_ChooseRollStreamAtSixPixelsPerTick:
                 lea     (AniSonic03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_12A5E
+                bhs.s   SKSonicAnimation_ComputeRollDelayFromFourMinusSpeed
                 lea     (AniSonic02).l,a1
 
-loc_12A5E:
+SKSonicAnimation_ComputeRollDelayFromFourMinusSpeed:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   loc_12A68
+                bpl.s   SKSonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy
                 moveq   #0,d2
 
-loc_12A68:
+SKSonicAnimation_ReloadRollTimerAndReadNextFrameWithProfileFlipPolicy:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
-                bra.w   loc_1265A
+                bra.w   SKSonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand
 ; ---------------------------------------------------------------------------
 
-loc_12A72:
+SKSonicAnimation_CountPushCadenceUsingRawGroundVelocity:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_12672
+                bpl.w   SKSonicAnimation_ReturnAfterFrameWriteOrNonnegativeTimerStep
                 move.w  ground_vel(a0),d2
-                bmi.s   loc_12A82
+                bmi.s   SKSonicAnimation_ClampPushWordRemainderBeforeTimerScaling
                 neg.w   d2
 
-loc_12A82:
+SKSonicAnimation_ClampPushWordRemainderBeforeTimerScaling:
                 addi.w  #$800,d2
-                bpl.s   loc_12A8A
+                bpl.s   SKSonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream
                 moveq   #0,d2
 
-loc_12A8A:
+SKSonicAnimation_ReloadPushTimerAndSelectNormalOrSuperStream:
                 lsr.w   #6,d2
                 move.b  d2,anim_frame_timer(a0)
                 lea     (AniSonic04).l,a1
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_12AA2
+                beq.s   SKSonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail
                 lea     (AniSuperSonic04).l,a1
 
-loc_12AA2:
-                bra.w   loc_1265A
+SKSonicAnimation_ReadPushFrameWithProfileSpecificRenderFlipTail:
+                bra.w   SKSonicAnimation_ReadNextFrameOrPlayerSpecificAnimationCommand
 ; End of function Animate_Sonic
 
 ; ---------------------------------------------------------------------------
@@ -487,26 +487,26 @@ Sonic_Load_PLC:
 
 Sonic_Load_PLC2:
                 cmp.b   (Player_prev_frame).w,d0
-                beq.s   locret_12D20
+                beq.s   SKSonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop
                 move.b  d0,(Player_prev_frame).w
                 lea     (PLC_Sonic).l,a2
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_12CD6
+                beq.s   SKSonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank
                 lea     (PLC_SuperSonic).l,a2
 
-loc_12CD6:
+SKSonicAnimation_ReadSelectedSonicDplcHeaderAndChooseSourceBank:
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_12D20
+                bmi.s   SKSonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
                 move.l  #ArtUnc_Sonic,d6
                 cmpi.w  #2*$DA,d0
-                blo.s   loc_12CF8
+                blo.s   SKSonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination
                 move.l  #ArtUnc_Sonic_Extra,d6
 
-loc_12CF8:
+SKSonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -520,9 +520,9 @@ loc_12CF8:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_12CF8
+                dbf     d5,SKSonicAnimation_QueueSonicPackedDplcEntryAndAdvanceVramDestination
 
-locret_12D20:
+SKSonicAnimation_ReturnFromSonicFrameCacheHitEmptyDplcOrTransferLoop:
                 rts
 ; End of function Sonic_Load_PLC
 
