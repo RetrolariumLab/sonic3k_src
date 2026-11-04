@@ -3,189 +3,190 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_806DA:
-                lea     ObjDat3_812D4(pc),a1
+DEZFinal_InitMasterEmerald:
+                lea     DEZFinalMasterEmerald_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 lea     (Collected_emeralds_array).w,a1
                 moveq   #3,d0
                 moveq   #7-1,d1
 
-loc_806EC:
+DEZFinal_EmeraldCheckSevenStatusBytes:
                 cmp.b   (a1)+,d0
-                bne.s   loc_8070A
-                dbf     d1,loc_806EC
+                bne.s   DEZFinal_EmeraldChooseFollowMode
+                dbf     d1,DEZFinal_EmeraldCheckSevenStatusBytes
                 st      $3A(a0)
-                lea     word_813AA(pc),a1
+                lea     DEZMasterEmerald_TwoSlotPalettePrograms(pc),a1
                 lea     (Palette_rotation_data).w,a2
                 moveq   #bytesToLcnt($10),d0
 
-loc_80702:
+DEZFinal_EmeraldCopyPaletteSlots:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_80702
+                dbf     d0,DEZFinal_EmeraldCopyPaletteSlots
                 clr.w   (a2)
 
-loc_8070A:
+DEZFinal_EmeraldChooseFollowMode:
                 tst.b   $2C(a0)
-                bne.s   loc_80724
-                move.l  #loc_80730,(a0)
+                bne.s   DEZFinal_EmeraldBeginEscapeFollow
+                move.l  #DEZFinal_EmeraldCycleWorldPalette,(a0)
                 move.w  #$58,$42(a0)
                 move.w  #8,$44(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80724:
-                move.l  #loc_80760,(a0)
+DEZFinal_EmeraldBeginEscapeFollow:
+                move.l  #DEZFinal_EmeraldCycleEscapePalette,(a0)
                 clr.b   mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80730:
+DEZFinal_EmeraldCycleWorldPalette:
                 tst.b   $3A(a0)
-                beq.s   loc_8073A
+                beq.s   DEZFinal_EmeraldFollowWorld
                 jsr     Run_PalRotationScript(pc)
 
-loc_8073A:
+DEZFinal_EmeraldFollowWorld:
                 bsr.w   DEZFinalChild_SetPosFromParent
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.w   loc_810D0
+                bne.w   DEZFinal_DeleteCurrentActor
                 tst.b   (_unkFAA9).w
-                beq.s   loc_80758
+                beq.s   DEZFinal_EmeraldHideUntilSignal
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_80758:
+DEZFinal_EmeraldHideUntilSignal:
                 bclr    #7,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80760:
+DEZFinal_EmeraldCycleEscapePalette:
                 tst.b   $3A(a0)
-                beq.s   loc_8076A
+                beq.s   DEZFinal_EmeraldFollowEscapeParent
                 jsr     Run_PalRotationScript(pc)
 
-loc_8076A:
+DEZFinal_EmeraldFollowEscapeParent:
                 jsr     Refresh_ChildPosition(pc)
                 btst    #4,(_unkFAB8).w
-                beq.s   loc_8077C
-                move.l  #loc_80782,(a0)
+                beq.s   DEZFinal_EmeraldDrawAfterRelease
+                move.l  #DEZFinal_EmeraldCycleFallPalette,(a0)
 
-loc_8077C:
+DEZFinal_EmeraldDrawAfterRelease:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_80782:
+DEZFinal_EmeraldCycleFallPalette:
                 tst.b   $3A(a0)
-                beq.s   loc_8078C
+                beq.s   DEZFinal_EmeraldFallAndClamp
                 jsr     Run_PalRotationScript(pc)
 
-loc_8078C:
+DEZFinal_EmeraldFallAndClamp:
                 jsr     (MoveSprite).l
                 cmpi.w  #$CF,y_pos(a0)
-                blo.s   loc_807A6
-                move.l  #loc_807AC,(a0)
+                blo.s   DEZFinal_EmeraldDrawAfterFall
+                move.l  #DEZFinal_EmeraldCycleAtFinalHeight,(a0)
                 move.w  #$CF,y_pos(a0)
 
-loc_807A6:
+DEZFinal_EmeraldDrawAfterFall:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_807AC:
+DEZFinal_EmeraldCycleAtFinalHeight:
                 tst.b   $3A(a0)
-                beq.s   loc_807B6
+                beq.s   DEZFinalMasterEmerald_DrawHeldEmerald
                 jsr     Run_PalRotationScript(pc)
 
-loc_807B6:
+DEZFinalMasterEmerald_DrawHeldEmerald:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_807BC:
-                lea     ObjDat3_812B6(pc),a1
+DEZFinalBeamCharge_Initialize:
+                lea     DEZFinalBeamCharge_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_807EE,(a0)
+                move.l  #DEZFinal_ChargeEmitAnimateAndFollow,(a0)
                 move.w  #$58,$42(a0)
                 move.w  #4,$44(a0)
-                move.l  #loc_80802,$34(a0)
+                move.l  #DEZFinalBeamCharge_BeginTimedHold,$34(a0)
                 move.b  #$13,$39(a0)
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
 
-loc_807EE:
+DEZFinal_ChargeEmitAnimateAndFollow:
                 bsr.w   DEZFinal_TryChargeParticleEvery4
-                lea     byte_8135A(pc),a1
+                lea     DEZFinal_BeamChargeFlickerAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_80802:
-                move.l  #loc_80810,(a0)
+DEZFinalBeamCharge_BeginTimedHold:
+                move.l  #DEZFinal_ChargeTickAndTryParticle,(a0)
                 move.w  #2*60,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80810:
+DEZFinal_ChargeTickAndTryParticle:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8083C
+                bmi.s   DEZFinalBeamActor_BeginFiringAnimation
                 cmpi.w  #$28,$2E(a0)
-                blo.s   loc_80822
+                blo.s   DEZFinal_ChargeChooseFrameFromD0
                 bsr.w   DEZFinal_TryChargeParticleEvery4
 
-loc_80822:
+; Select frame $1A or $1F from bit zero of the current D0
+DEZFinal_ChargeChooseFrameFromD0:
                 move.b  #$1A,mapping_frame(a0)
                 btst    #0,d0
-                bne.s   loc_80834
+                bne.s   DEZFinal_ChargeFollowAndDraw
                 move.b  #$1F,mapping_frame(a0)
 
-loc_80834:
+DEZFinal_ChargeFollowAndDraw:
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8083C:
-                move.l  #loc_8086C,(a0)
+DEZFinalBeamActor_BeginFiringAnimation:
+                move.l  #DEZFinal_BeamAnimateAndPublishFrame,(a0)
                 addi.w  #$34,$42(a0)
                 addi.w  #4,$44(a0)
-                lea     byte_81397(pc),a1
+                lea     DEZFinal_ActiveBeamAnim(pc),a1
                 jsr     Set_Raw_Animation(pc)
-                move.l  #loc_80888,$34(a0)
+                move.l  #DEZFinal_BeamBeginReleaseDelay,$34(a0)
                 bclr    #7,render_flags(a0)
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
 
-loc_8086C:
+DEZFinal_BeamAnimateAndPublishFrame:
                 jsr     Animate_RawMultiDelay(pc)
-                beq.s   loc_8087C
+                beq.s   DEZFinal_BeamApplyDamageAndFollow
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 move.w  d0,(Events_bg+$10).w
 
-loc_8087C:
+DEZFinal_BeamApplyDamageAndFollow:
                 bsr.w   HurtPlayersInsideDEZFinalBeamActiveFrame
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_80888:
-                move.l  #loc_80894,(a0)
+DEZFinal_BeamBeginReleaseDelay:
+                move.l  #DEZFinal_BeamTickReleaseDelay,(a0)
                 move.w  #$5F,$2E(a0)
 
-loc_80894:
+DEZFinal_BeamTickReleaseDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8089E
+                bmi.s   DEZFinal_BeamReleaseChargeAndDelete
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8089E:
+DEZFinal_BeamReleaseChargeAndDelete:
                 movea.w $3A(a0),a1
                 bclr    #2,$38(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_808AE:
-                lea     word_812C2(pc),a1
+DEZFinal_InitRandomChargeParticle:
+                lea     DEZFinalChargeParticle_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_808FA,(a0)
+                move.l  #DEZFinal_ChargeParticleConverge,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
@@ -204,8 +205,8 @@ loc_808AE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_808FA:
-                lea     byte_8138E(pc),a1
+DEZFinal_ChargeParticleConverge:
+                lea     DEZFinal_ChargeParticleDeleteAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 subi.w  #$40,x_vel(a0)
                 movea.w parent3(a0),a1
@@ -218,8 +219,8 @@ loc_808FA:
                 move.w  x_pos(a1),d0
                 addi.w  #$3C,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8093A
+                blo.s   DEZFinal_ChargeParticleDraw
                 jsr     (Go_Delete_Sprite).l
 
-loc_8093A:
+DEZFinal_ChargeParticleDraw:
                 jmp     (Draw_Sprite).l

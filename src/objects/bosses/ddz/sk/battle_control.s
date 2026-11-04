@@ -422,7 +422,7 @@ loc_81CEC:
                 bne.s   locret_81D0C
                 dbf     d1,loc_81CEC
                 st      $3A(a0)
-                lea     (word_8141E).l,a1
+                lea     (DDZMasterEmerald_TwoSlotPalettePrograms).l,a1
                 lea     (Palette_rotation_data).w,a2
                 moveq   #bytesToLcnt($10),d0
 

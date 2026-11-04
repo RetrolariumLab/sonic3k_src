@@ -3,183 +3,184 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_804B0:
+DEZEscapeCrane_DispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_804C4(pc,d0.w),d1
-                jsr     off_804C4(pc,d1.w)
+                move.w  DEZEscapeCrane_StateOffsets(pc,d0.w),d1
+                jsr     DEZEscapeCrane_StateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_804C4:
-                dc.w    loc_804C8-off_804C4
-                dc.w    loc_804D2-off_804C4
+DEZEscapeCrane_StateOffsets:
+                dc.w    DEZEscapeCrane_InitializeAttributes-DEZEscapeCrane_StateOffsets
+                dc.w    DEZFinal_CraneFollowUntilDefeat-DEZEscapeCrane_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_804C8:
-                lea     ObjDat3_812F8(pc),a1
+DEZEscapeCrane_InitializeAttributes:
+                lea     DEZFinalEscapeCrane_Attributes(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_804D2:
+DEZFinal_CraneFollowUntilDefeat:
                 btst    #3,(_unkFAB8).w
-                bne.s   loc_804E0
+                bne.s   DEZFinal_CraneWaitThenDelete
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
 
-loc_804E0:
+; Install the deletion callback without reloading the existing timer
+DEZFinal_CraneWaitThenDelete:
                 move.l  #Wait_Draw,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_804F0:
-                lea     ObjDat3_812C8(pc),a1
+DEZFinal_InitHeadHealthAndOffsets:
+                lea     DEZFinalHead_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_80512,(a0)
+                move.l  #DEZFinalHead_WaitHiddenForExposureMode,(a0)
                 move.w  #$6C,$42(a0)
                 move.w  #8,$44(a0)
                 move.b  #8,collision_property(a0)
 
-loc_80512:
+DEZFinalHead_WaitHiddenForExposureMode:
                 tst.b   (_unkFAA9).w
-                bne.s   loc_8051C
+                bne.s   DEZFinalHead_InstallOpeningModeUpdater
                 bra.w   DEZFinalHead_TickFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
-loc_8051C:
-                move.l  #loc_80522,(a0)
+DEZFinalHead_InstallOpeningModeUpdater:
+                move.l  #DEZFinal_HeadDrawUntilExposed,(a0)
 
-loc_80522:
+DEZFinal_HeadDrawUntilExposed:
                 tst.b   (_unkFAA9).w
-                bmi.s   loc_80536
+                bmi.s   DEZFinalHead_EnableVulnerableExposure
                 bsr.w   DEZFinalHead_TickFlashOrDefeat
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_80536:
-                move.l  #loc_80542,(a0)
+DEZFinalHead_EnableVulnerableExposure:
+                move.l  #DEZFinal_HeadCheckExposedHits,(a0)
                 move.b  #$16,collision_flags(a0)
 
-loc_80542:
+DEZFinal_HeadCheckExposedHits:
                 tst.b   (_unkFAA9).w
-                bpl.s   loc_8055C
+                bpl.s   DEZFinalHead_InstallClosingModeUpdater
                 bsr.w   DEZFinalChild_SetPosFromParent
                 bsr.w   DEZFinalHead_ProcessHitOrDefeat
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8055C:
-                move.l  #loc_80562,(a0)
+DEZFinalHead_InstallClosingModeUpdater:
+                move.l  #DEZFinalHead_ShowInactiveUntilModeClears,(a0)
 
-loc_80562:
+DEZFinalHead_ShowInactiveUntilModeClears:
                 tst.b   (_unkFAA9).w
-                beq.s   loc_80576
+                beq.s   DEZFinalHead_ReturnToHiddenWait
                 bsr.w   DEZFinalChild_SetPosFromParent
                 bsr.w   DEZFinalHead_TickFlashOrDefeat
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_80576:
-                move.l  #loc_80512,(a0)
+DEZFinalHead_ReturnToHiddenWait:
+                move.l  #DEZFinalHead_WaitHiddenForExposureMode,(a0)
                 bclr    #7,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80584:
+DEZFinal_DefeatedHeadClearBeam:
                 clr.w   (Events_bg+$10).w
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_80590:
-                move.l  #loc_805AE,(a0)
+DEZFinal_InitHeadTrigger:
+                move.l  #DEZFinal_TriggerTouchOrExpose,(a0)
                 move.b  #8,collision_flags(a0)
                 move.b  #-1,collision_property(a0)
                 move.w  #$A0,$42(a0)
                 move.w  #-$34,$44(a0)
 
-loc_805AE:
+DEZFinal_TriggerTouchOrExpose:
                 tst.b   collision_flags(a0)
-                beq.s   loc_805C2
+                beq.s   DEZFinal_RequestHeadExposure
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_805C2:
-                move.l  #loc_805F0,(a0)
+DEZFinal_RequestHeadExposure:
+                move.l  #DEZFinal_WaitExposureRequestClear,(a0)
                 move.b  #-1,collision_property(a0)
                 movea.w parent3(a0),a1
                 bset    #2,$38(a1)
                 st      (Events_fg_5).w
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_805F0
-                move.l  #loc_8060C,(a1)
+                bne.s   DEZFinal_WaitExposureRequestClear
+                move.l  #DEZFinal_InitExposureGraphic,(a1)
                 move.w  parent3(a0),parent3(a1)
 
-loc_805F0:
+DEZFinal_WaitExposureRequestClear:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_80608
-                move.l  #loc_805AE,(a0)
+                bne.s   DEZFinal_ExposureTriggerCheckParent
+                move.l  #DEZFinal_TriggerTouchOrExpose,(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-loc_80608:
+DEZFinal_ExposureTriggerCheckParent:
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8060C:
-                lea     ObjDat3_812AA(pc),a1
+DEZFinal_InitExposureGraphic:
+                lea     DEZFinalBeamGate_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_80634,(a0)
+                move.l  #DEZFinal_OpenHeadAndTryBeam,(a0)
                 bset    #0,render_flags(a0)
                 move.w  #$7C,$42(a0)
                 move.w  #$28,$44(a0)
                 move.b  #1,(_unkFAA9).w
 
-loc_80634:
+DEZFinal_OpenHeadAndTryBeam:
                 move.w  $44(a0),d0
                 addq.w  #4,d0
                 move.w  d0,$44(a0)
                 cmpi.w  #$68,d0
-                blo.s   loc_80672
-                move.l  #loc_8067A,(a0)
+                blo.s   DEZFinal_DrawOpeningHead
+                move.l  #DEZFinal_WaitForBeamCompletion,(a0)
                 bset    #2,$38(a0)
                 move.b  #$80,(_unkFAA9).w
                 st      (Events_fg_5).w
                 jsr     (AllocateObject).l
-                bne.s   loc_80672
-                move.l  #loc_807BC,(a1)
+                bne.s   DEZFinal_DrawOpeningHead
+                move.l  #DEZFinalBeamCharge_Initialize,(a1)
                 move.w  parent3(a0),parent3(a1)
                 move.w  a0,$3A(a1)
 
-loc_80672:
+DEZFinal_DrawOpeningHead:
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8067A:
+DEZFinal_WaitForBeamCompletion:
                 btst    #2,$38(a0)
-                beq.s   loc_8068A
+                beq.s   DEZFinalHeadExposure_BeginClosingMode
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8068A:
-                move.l  #loc_806A6,(a0)
+DEZFinalHeadExposure_BeginClosingMode:
+                move.l  #DEZFinal_CloseHeadAndClearRequest,(a0)
                 move.w  #$80,$2E(a0)
                 move.b  #1,(_unkFAA9).w
                 st      (Events_fg_5).w
                 move.b  #1,(_unkFAA9).w
 
-loc_806A6:
+DEZFinal_CloseHeadAndClearRequest:
                 move.w  $44(a0),d0
                 subq.w  #4,d0
                 move.w  d0,$44(a0)
                 cmpi.w  #$28,d0
-                bhi.s   loc_806D2
+                bhi.s   DEZFinal_DrawClosingHead
                 movea.w parent3(a0),a1
                 bclr    #2,$38(a1)
                 clr.w   $1C(a1)
@@ -187,6 +188,6 @@ loc_806A6:
                 st      (Events_fg_5).w
                 jsr     (Go_Delete_Sprite).l
 
-loc_806D2:
+DEZFinal_DrawClosingHead:
                 bsr.w   DEZFinalChild_SetPosFromParent
                 jmp     Child_Draw_Sprite(pc)

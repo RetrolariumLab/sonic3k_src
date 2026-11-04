@@ -1,0 +1,3039 @@
+{
+  "schema_version": 1,
+  "packet": "52-boss-dez-final",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 6,
+      "old": "loc_804B0",
+      "new": "DEZEscapeCrane_DispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch two crane attachment states on the separate escape ship."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 13,
+      "old": "off_804C4",
+      "new": "DEZEscapeCrane_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two relative WORD entries for escape crane attachment."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 18,
+      "old": "loc_804C8",
+      "new": "DEZEscapeCrane_InitializeAttributes",
+      "profiles": ["sk"],
+      "meaning": "Initialize escape crane mappings, art, queue and initial frame."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 23,
+      "old": "loc_804D2",
+      "new": "DEZFinal_CraneFollowUntilDefeat",
+      "profiles": ["sk"],
+      "meaning": "Follow escape ship until global defeat bit3 is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 29,
+      "old": "loc_804E0",
+      "new": "DEZFinal_CraneWaitThenDelete",
+      "profiles": ["sk"],
+      "meaning": "Install delayed deletion using the crane existing timer field."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 35,
+      "old": "loc_804F0",
+      "new": "DEZFinal_InitHeadHealthAndOffsets",
+      "profiles": ["sk"],
+      "meaning": "Initialize the final-boss vulnerable head actor and its exposure-state wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 43,
+      "old": "loc_80512",
+      "new": "DEZFinalHead_WaitHiddenForExposureMode",
+      "profiles": ["sk"],
+      "meaning": "Keep head inactive until shared exposure byte becomes nonzero."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 49,
+      "old": "loc_8051C",
+      "new": "DEZFinalHead_InstallOpeningModeUpdater",
+      "profiles": ["sk"],
+      "meaning": "Install the head visible opening-phase updater."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 52,
+      "old": "loc_80522",
+      "new": "DEZFinal_HeadDrawUntilExposed",
+      "profiles": ["sk"],
+      "meaning": "Show inactive head through nonnegative exposure mode, then enable vulnerable phase."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 60,
+      "old": "loc_80536",
+      "new": "DEZFinalHead_EnableVulnerableExposure",
+      "profiles": ["sk"],
+      "meaning": "Enable head collision when exposure mode becomes signed negative."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 64,
+      "old": "loc_80542",
+      "new": "DEZFinal_HeadCheckExposedHits",
+      "profiles": ["sk"],
+      "meaning": "Position vulnerable head and process hit flash, bounce and defeat while mode is negative."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 73,
+      "old": "loc_8055C",
+      "new": "DEZFinalHead_InstallClosingModeUpdater",
+      "profiles": ["sk"],
+      "meaning": "Install visible inactive closing-phase head updater."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 76,
+      "old": "loc_80562",
+      "new": "DEZFinalHead_ShowInactiveUntilModeClears",
+      "profiles": ["sk"],
+      "meaning": "Continue inactive head palette/defeat handling and drawing until shared mode clears."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 84,
+      "old": "loc_80576",
+      "new": "DEZFinalHead_ReturnToHiddenWait",
+      "profiles": ["sk"],
+      "meaning": "Hide head and return to the initial exposure wait after mode becomes zero."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 90,
+      "old": "loc_80584",
+      "new": "DEZFinal_DefeatedHeadClearBeam",
+      "profiles": ["sk"],
+      "meaning": "Follow defeated head, clear beam rendering event and use root bit4 lifetime."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 96,
+      "old": "loc_80590",
+      "new": "DEZFinal_InitHeadTrigger",
+      "profiles": ["sk"],
+      "meaning": "Initialize invisible contact trigger for the head exposure sequence."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 103,
+      "old": "loc_805AE",
+      "new": "DEZFinal_TriggerTouchOrExpose",
+      "profiles": ["sk"],
+      "meaning": "Position invisible head trigger and wait until its collision flags are cleared."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 111,
+      "old": "loc_805C2",
+      "new": "DEZFinal_RequestHeadExposure",
+      "profiles": ["sk"],
+      "meaning": "Request head exposure and independently attempt its graphics/beam controller."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 122,
+      "old": "loc_805F0",
+      "new": "DEZFinal_WaitExposureRequestClear",
+      "profiles": ["sk"],
+      "meaning": "Wait for exposure controller to clear root bit2 before restoring trigger collision."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 129,
+      "old": "loc_80608",
+      "new": "DEZFinal_ExposureTriggerCheckParent",
+      "profiles": ["sk"],
+      "meaning": "Apply root status lifetime check after trigger exposure-wait work."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 133,
+      "old": "loc_8060C",
+      "new": "DEZFinal_InitExposureGraphic",
+      "profiles": ["sk"],
+      "meaning": "Initialize graphical controller that gates head exposure and the beam lifecycle."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 142,
+      "old": "loc_80634",
+      "new": "DEZFinal_OpenHeadAndTryBeam",
+      "profiles": ["sk"],
+      "meaning": "Increase exposure graphic Y offset until head becomes vulnerable, then attempt beam actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 158,
+      "old": "loc_80672",
+      "new": "DEZFinal_DrawOpeningHead",
+      "profiles": ["sk"],
+      "meaning": "Position/draw exposure graphic during opening and after the beam allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 163,
+      "old": "loc_8067A",
+      "new": "DEZFinal_WaitForBeamCompletion",
+      "profiles": ["sk"],
+      "meaning": "Wait for own hold bit2 to be cleared by the beam actor lifecycle."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 170,
+      "old": "loc_8068A",
+      "new": "DEZFinalHeadExposure_BeginClosingMode",
+      "profiles": ["sk"],
+      "meaning": "Switch shared head mode back to inactive while starting graphic closure."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 177,
+      "old": "loc_806A6",
+      "new": "DEZFinal_CloseHeadAndClearRequest",
+      "profiles": ["sk"],
+      "meaning": "Decrease exposure graphic Y offset and clear root request when fully closed."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "original_line": 190,
+      "old": "loc_806D2",
+      "new": "DEZFinal_DrawClosingHead",
+      "profiles": ["sk"],
+      "meaning": "Position/draw exposure graphic after closure step and optional deletion scheduling."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 7,
+      "old": "loc_80A3A",
+      "new": "DEZFinal_FlameDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch a cloned fireball flame segment and choose its position mode."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 18,
+      "old": "loc_80A56",
+      "new": "DEZFinal_FlameSetXAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Position horizontal flame segment from parent X only."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 22,
+      "old": "off_80A5C",
+      "new": "DEZFinalFlameSegment_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two relative WORD states for flame segment initialization and custom animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 27,
+      "old": "loc_80A60",
+      "new": "DEZFinal_InitFlameAndChooseScript",
+      "profiles": ["sk"],
+      "meaning": "Initialize a cloned flame segment and select subtype script."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 37,
+      "old": "loc_80A82",
+      "new": "DEZFinal_FlameStoreScript",
+      "profiles": ["sk"],
+      "meaning": "Store flame segment custom script selected by subtype."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 42,
+      "old": "off_80A8C",
+      "new": "DEZFinal_FlameScriptsBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Three LONG pointers for fireball flame segment variants."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 48,
+      "old": "loc_80A98",
+      "new": "DEZFinal_FlameAdvanceFrameAndOffsets",
+      "profiles": ["sk"],
+      "meaning": "Decode one custom flame frame and signed offset increments."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 68,
+      "old": "locret_80ACE",
+      "new": "DEZFinal_FlameStepReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during flame timer wait or after one decoded row."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 72,
+      "old": "loc_80AD0",
+      "new": "DEZFinal_FlameDeleteOnNegativeFrame",
+      "profiles": ["sk"],
+      "meaning": "Schedule flame segment deletion on a negative custom frame byte."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 75,
+      "old": "byte_80AD4",
+      "new": "DEZFinal_FlameParentXYScript",
+      "profiles": ["sk"],
+      "meaning": "Custom frame/delay/signedXY-delta rows for parent-XY flame."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 83,
+      "old": "byte_80AEE",
+      "new": "DEZFinal_FlameParentXScript",
+      "profiles": ["sk"],
+      "meaning": "Custom rows for subtype1 horizontal flame segment."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 91,
+      "old": "byte_80B08",
+      "new": "DEZFinal_FlameFlippedParentXScript",
+      "profiles": ["sk"],
+      "meaning": "Custom rows for subtype2 flipped horizontal flame segment."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 101,
+      "old": "loc_80B22",
+      "new": "DEZFinal_ArmDispatchOrSignalDefeat",
+      "profiles": ["sk"],
+      "meaning": "Dispatch invisible arm controller and signal when all three segments are destroyed."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 113,
+      "old": "loc_80B42",
+      "new": "DEZFinal_ArmChooseDefeatSide",
+      "profiles": ["sk"],
+      "meaning": "Select shared flag for the destroyed left or right arm group."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 119,
+      "old": "loc_80B50",
+      "new": "DEZFinal_ArmSignalDefeatAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Signal all arm segments destroyed and schedule controller deletion."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 123,
+      "old": "off_80B58",
+      "new": "DEZFinalArmController_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Seven relative WORD states for arm tracking and impact cycle."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 133,
+      "old": "loc_80B66",
+      "new": "DEZFinal_InitArmSegmentsAndSide",
+      "profiles": ["sk"],
+      "meaning": "Initialize side arm controller and attempt three attached segments."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 143,
+      "old": "loc_80B86",
+      "new": "DEZFinal_ArmSetOffsetAndStartY",
+      "profiles": ["sk"],
+      "meaning": "Store initial arm X offset and fixed baseline Y."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 147,
+      "old": "loc_80B90",
+      "new": "DEZFinal_ArmTrackOrBeginImpact",
+      "profiles": ["sk"],
+      "meaning": "Track Player1 with surviving-segment adjustments or react to root impact request."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 162,
+      "old": "loc_80BB6",
+      "new": "DEZFinal_ArmCalcPlayerDelta",
+      "profiles": ["sk"],
+      "meaning": "Compute player delta relative to adjusted arm center."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 169,
+      "old": "loc_80BC0",
+      "new": "DEZFinal_ArmCheckDistanceAndSide",
+      "profiles": ["sk"],
+      "meaning": "Change tracking offset only for player distance strictly between4 and128."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 179,
+      "old": "loc_80BD8",
+      "new": "DEZFinal_ArmInitTrackingStep",
+      "profiles": ["sk"],
+      "meaning": "Prepare current X offset and tracking step from destroyed segment mask."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 185,
+      "old": "loc_80BE4",
+      "new": "DEZFinal_ArmScaleStepByLostSegments",
+      "profiles": ["sk"],
+      "meaning": "Count one destroyed segment bit for tracking speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 190,
+      "old": "loc_80BEA",
+      "new": "DEZFinal_ArmMoveOffsetTowardPlayer",
+      "profiles": ["sk"],
+      "meaning": "Finish bit count and select signed tracking offset update."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 201,
+      "old": "loc_80C00",
+      "new": "DEZFinal_ArmMoveOffsetLeft",
+      "profiles": ["sk"],
+      "meaning": "Decrease arm X offset within original signed lower-limit test."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 207,
+      "old": "locret_80C0C",
+      "new": "DEZFinal_ArmTrackingReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without additional motion from arm tracking."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 211,
+      "old": "loc_80C0E",
+      "new": "DEZFinal_ArmBeginImpactRise",
+      "profiles": ["sk"],
+      "meaning": "React to root impact request with a short upward move."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 219,
+      "old": "loc_80C2A",
+      "new": "DEZFinalArmController_MoveAndWait",
+      "profiles": ["sk"],
+      "meaning": "Shared move/timer state for initial rise, stopped delay and final descent."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 224,
+      "old": "loc_80C34",
+      "new": "DEZFinal_ArmStopBeforeImpact",
+      "profiles": ["sk"],
+      "meaning": "First timed callback stops vertical motion before impact animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 231,
+      "old": "loc_80C48",
+      "new": "DEZFinal_ArmBeginImpactAnimation",
+      "profiles": ["sk"],
+      "meaning": "Timed callback selects forward impact animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 237,
+      "old": "loc_80C58",
+      "new": "DEZFinalArmController_AnimateImpact",
+      "profiles": ["sk"],
+      "meaning": "Run arm impact frame-delay script to configured callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 242,
+      "old": "loc_80C60",
+      "new": "DEZFinal_ArmBeginImpactHold",
+      "profiles": ["sk"],
+      "meaning": "Raw callback starts impact hold and exposes segment collision state."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 253,
+      "old": "locret_80C88",
+      "new": "DEZFinalAttackActors_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for impact setup and external final-boss helpers."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 257,
+      "old": "loc_80C8A",
+      "new": "DEZFinal_ArmWaitBeforeRetract",
+      "profiles": ["sk"],
+      "meaning": "Wait for impact hold underflow before retracting animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 264,
+      "old": "locret_80CA4",
+      "new": "DEZFinal_ArmImpactHoldReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during impact timer or after selecting retract animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 268,
+      "old": "loc_80CA6",
+      "new": "DEZFinalArmController_AnimateRetraction",
+      "profiles": ["sk"],
+      "meaning": "Run reverse frame-delay arm animation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 273,
+      "old": "loc_80CAE",
+      "new": "DEZFinalArmController_BeginReturnDescent",
+      "profiles": ["sk"],
+      "meaning": "Raw callback starts the final downward move."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 281,
+      "old": "loc_80CCA",
+      "new": "DEZFinal_ArmResetAndClearRequest",
+      "profiles": ["sk"],
+      "meaning": "Finish arm impact cycle and clear shared root request."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 289,
+      "old": "loc_80CE2",
+      "new": "DEZFinal_InitArmSegmentHealth",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of three hittable arm segments."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 295,
+      "old": "loc_80CF8",
+      "new": "DEZFinal_SegmentFollowAndRecover",
+      "profiles": ["sk"],
+      "meaning": "Follow arm controller while it is not in impact-collision hold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 305,
+      "old": "loc_80D18",
+      "new": "DEZFinal_SegmentEnableImpactTouch",
+      "profiles": ["sk"],
+      "meaning": "Enable impact segment collision and foreground priority."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 311,
+      "old": "loc_80D30",
+      "new": "DEZFinal_SegmentFollowCheckHitDraw",
+      "profiles": ["sk"],
+      "meaning": "Update active impact segment and its three-hit recovery/destruction policy."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 321,
+      "old": "loc_80D50",
+      "new": "DEZFinal_SegmentRestoreInactive",
+      "profiles": ["sk"],
+      "meaning": "Return to inactive follow/recovery presentation when impact flag clears."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 328,
+      "old": "loc_80D64",
+      "new": "DEZFinal_SegmentFollowBeforeBreakup",
+      "profiles": ["sk"],
+      "meaning": "Follow and draw a destroyed segment during its delayed deletion."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 334,
+      "old": "loc_80D72",
+      "new": "DEZFinal_InitIntroPanel",
+      "profiles": ["sk"],
+      "meaning": "Initialize frame5 intro panel beside the final-boss world actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 346,
+      "old": "loc_80D9E",
+      "new": "DEZFinal_PanelWaitForRunner",
+      "profiles": ["sk"],
+      "meaning": "Wait for intro runner to set shared bit0."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 353,
+      "old": "loc_80DB8",
+      "new": "DEZFinalIntroPanel_DrawWhileWaiting",
+      "profiles": ["sk"],
+      "meaning": "Draw intro panel before or after its motion pointer is installed."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 357,
+      "old": "loc_80DBE",
+      "new": "DEZFinal_PanelMoveAndTickDelay",
+      "profiles": ["sk"],
+      "meaning": "Move intro panel left while timer remains nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 364,
+      "old": "loc_80DD0",
+      "new": "DEZFinalIntroPanel_SignalStageAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Signal final stage/background continuation after panel motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 370,
+      "old": "loc_80DE0",
+      "new": "DEZFinalIntroRunner_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize running Robotnik actor for final-boss intro."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 378,
+      "old": "loc_80E02",
+      "new": "DEZFinalIntroRunner_AnimateAndMoveRight",
+      "profiles": ["sk"],
+      "meaning": "Animate intro runner and move six integer pixels each update."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "original_line": 389,
+      "old": "loc_80E20",
+      "new": "DEZFinalIntroRunner_SignalPanelAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Tell intro panel that running sequence reached its threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 6,
+      "old": "loc_806DA",
+      "new": "DEZFinal_InitMasterEmerald",
+      "profiles": ["sk"],
+      "meaning": "Initialize Master Emerald actor and inspect seven collected status bytes."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 13,
+      "old": "loc_806EC",
+      "new": "DEZFinal_EmeraldCheckSevenStatusBytes",
+      "profiles": ["sk"],
+      "meaning": "Enable emerald palette cycling only when all seven array bytes equal3."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 22,
+      "old": "loc_80702",
+      "new": "DEZFinal_EmeraldCopyPaletteSlots",
+      "profiles": ["sk"],
+      "meaning": "Install two global color-cycle slots for eligible Master Emerald."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 27,
+      "old": "loc_8070A",
+      "new": "DEZFinal_EmeraldChooseFollowMode",
+      "profiles": ["sk"],
+      "meaning": "Choose world-attached display or escape/drop behavior by subtype."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 36,
+      "old": "loc_80724",
+      "new": "DEZFinal_EmeraldBeginEscapeFollow",
+      "profiles": ["sk"],
+      "meaning": "Initialize escape-child Master Emerald frame and updater."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 42,
+      "old": "loc_80730",
+      "new": "DEZFinal_EmeraldCycleWorldPalette",
+      "profiles": ["sk"],
+      "meaning": "Run eligible palette cycling before world-attached emerald update."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 47,
+      "old": "loc_8073A",
+      "new": "DEZFinal_EmeraldFollowWorld",
+      "profiles": ["sk"],
+      "meaning": "Follow world actor and gate emerald display with the shared head/beam phase byte."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 57,
+      "old": "loc_80758",
+      "new": "DEZFinal_EmeraldHideUntilSignal",
+      "profiles": ["sk"],
+      "meaning": "Hide world-attached emerald when shared phase byte is zero."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 62,
+      "old": "loc_80760",
+      "new": "DEZFinal_EmeraldCycleEscapePalette",
+      "profiles": ["sk"],
+      "meaning": "Run eligible palette cycling before escape-child follow/release checks."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 67,
+      "old": "loc_8076A",
+      "new": "DEZFinal_EmeraldFollowEscapeParent",
+      "profiles": ["sk"],
+      "meaning": "Follow escape parent until shared release bit4 is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 73,
+      "old": "loc_8077C",
+      "new": "DEZFinal_EmeraldDrawAfterRelease",
+      "profiles": ["sk"],
+      "meaning": "Draw emerald during escape follow and its transition to falling."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 77,
+      "old": "loc_80782",
+      "new": "DEZFinal_EmeraldCycleFallPalette",
+      "profiles": ["sk"],
+      "meaning": "Run eligible color cycling before emerald gravity movement."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 82,
+      "old": "loc_8078C",
+      "new": "DEZFinal_EmeraldFallAndClamp",
+      "profiles": ["sk"],
+      "meaning": "Move released emerald under normal gravity to YCFhex."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 89,
+      "old": "loc_807A6",
+      "new": "DEZFinal_EmeraldDrawAfterFall",
+      "profiles": ["sk"],
+      "meaning": "Draw emerald after gravity movement and optional height clamp."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 93,
+      "old": "loc_807AC",
+      "new": "DEZFinal_EmeraldCycleAtFinalHeight",
+      "profiles": ["sk"],
+      "meaning": "Continue eligible palette cycling while holding final emerald position."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 98,
+      "old": "loc_807B6",
+      "new": "DEZFinalMasterEmerald_DrawHeldEmerald",
+      "profiles": ["sk"],
+      "meaning": "Draw final-height emerald without additional movement."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 102,
+      "old": "loc_807BC",
+      "new": "DEZFinalBeamCharge_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize parent-linked beam charge display and particle emission."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 113,
+      "old": "loc_807EE",
+      "new": "DEZFinal_ChargeEmitAnimateAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Animate charge display and attempt particles every four VInt phases."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 121,
+      "old": "loc_80802",
+      "new": "DEZFinalBeamCharge_BeginTimedHold",
+      "profiles": ["sk"],
+      "meaning": "Raw callback starts121-decrement charging hold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 127,
+      "old": "loc_80810",
+      "new": "DEZFinal_ChargeTickAndTryParticle",
+      "profiles": ["sk"],
+      "meaning": "Count down charge hold and stop particle attempts for the final40 nonnegative timer values (39 through0)."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 134,
+      "old": "loc_80822",
+      "new": "DEZFinal_ChargeChooseFrameFromD0",
+      "profiles": ["sk"],
+      "meaning": "Choose charge frame from the original current D0 value."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 140,
+      "old": "loc_80834",
+      "new": "DEZFinal_ChargeFollowAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Position charge from WORD offsets and draw with parent lifetime check."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 145,
+      "old": "loc_8083C",
+      "new": "DEZFinalBeamActor_BeginFiringAnimation",
+      "profiles": ["sk"],
+      "meaning": "Replace charging display with background-driven beam animation and damage phase."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 156,
+      "old": "loc_8086C",
+      "new": "DEZFinal_BeamAnimateAndPublishFrame",
+      "profiles": ["sk"],
+      "meaning": "Animate firing beam and publish normal frame changes to background event RAM."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 163,
+      "old": "loc_8087C",
+      "new": "DEZFinal_BeamApplyDamageAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Apply active-frame beam damage, synchronize WORD-offset position and check lifetime."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 169,
+      "old": "loc_80888",
+      "new": "DEZFinal_BeamBeginReleaseDelay",
+      "profiles": ["sk"],
+      "meaning": "Raw callback installs the post-fire release countdown."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 173,
+      "old": "loc_80894",
+      "new": "DEZFinal_BeamTickReleaseDelay",
+      "profiles": ["sk"],
+      "meaning": "Wait for post-fire timer underflow while checking parent lifetime."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 179,
+      "old": "loc_8089E",
+      "new": "DEZFinal_BeamReleaseChargeAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Release the separately linked charge governor and delete beam actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 185,
+      "old": "loc_808AE",
+      "new": "DEZFinal_InitRandomChargeParticle",
+      "profiles": ["sk"],
+      "meaning": "Initialize a charge particle to the right of its charge-display parent."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 207,
+      "old": "loc_808FA",
+      "new": "DEZFinal_ChargeParticleConverge",
+      "profiles": ["sk"],
+      "meaning": "Animate charge particle, accelerate it leftward and steer vertically with a sine of Y difference."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "original_line": 224,
+      "old": "loc_8093A",
+      "new": "DEZFinal_ChargeParticleDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw charge particle after movement and optional deletion scheduling."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 6,
+      "old": "loc_80160",
+      "new": "DEZFinal_EscapeDispatchHitAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Run one escape-ship state, then its hit/defeat policy and collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 14,
+      "old": "off_8017A",
+      "new": "DEZEscapeShip_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Five relative WORD state offsets indexed by the even routine BYTE."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 22,
+      "old": "loc_80184",
+      "new": "DEZFinal_InitEscapeShipAndHealth",
+      "profiles": ["sk"],
+      "meaning": "Initialize the eight-hit ship and attempt a rumble actor before creating its children."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 38,
+      "old": "loc_801C6",
+      "new": "DEZFinal_SpawnEscapeAttachments",
+      "profiles": ["sk"],
+      "meaning": "Attempt the RoboHead3 group and two ship attachments regardless of rumble allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 45,
+      "old": "loc_801D8",
+      "new": "DEZFinal_RiseToEscapeCameraBand",
+      "profiles": ["sk"],
+      "meaning": "Rise one integer pixel per call until the ship reaches the camera-relative ascent threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 58,
+      "old": "loc_80208",
+      "new": "DEZFinal_RunAheadAndBeginSwing",
+      "profiles": ["sk"],
+      "meaning": "Accelerate the escape camera and run the ship to the initial ahead-of-camera threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 71,
+      "old": "locret_8023C",
+      "new": "DEZFinal_EscapeIntroRunReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from the initial run after testing or installing the wait state."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 75,
+      "old": "loc_8023E",
+      "new": "DEZFinal_SwingMoveAndWaitPursuit",
+      "profiles": ["sk"],
+      "meaning": "Maintain swinging movement and falling-debris attempts during the pre-pursuit timer."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 82,
+      "old": "loc_80250",
+      "new": "DEZFinal_BeginEscapePursuit",
+      "profiles": ["sk"],
+      "meaning": "Leave the timed wait and enable the pursuit-specific hit response."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 89,
+      "old": "loc_80264",
+      "new": "DEZFinal_MoveCameraAndSlowShip",
+      "profiles": ["sk"],
+      "meaning": "Continue the escape camera and debris while reducing excessive pursuit speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 99,
+      "old": "loc_80282",
+      "new": "DEZFinal_MoveShipAndClampMinX",
+      "profiles": ["sk"],
+      "meaning": "Move the pursuing ship and keep its integer X at least 0x100 ahead of the camera."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 107,
+      "old": "locret_8029A",
+      "new": "DEZFinal_PursuitPositionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the pursuit X test or correction."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 111,
+      "old": "loc_8029C",
+      "new": "DEZFinal_SignalFirstEscapeDefeat",
+      "profiles": ["sk"],
+      "meaning": "Signal escape defeat stage bit 3 and schedule the next callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 118,
+      "old": "loc_802B2",
+      "new": "DEZFinal_SignalSecondEscapeDefeat",
+      "profiles": ["sk"],
+      "meaning": "Switch from Wait_Draw to departure motion and signal defeat stage bit 4."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 124,
+      "old": "loc_802C0",
+      "new": "DEZFinal_DepartToExplosionGate",
+      "profiles": ["sk"],
+      "meaning": "Swing and move the defeated ship until it passes the explosion transition threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 134,
+      "old": "loc_802DE",
+      "new": "DEZFinal_BeginExplosionSweep",
+      "profiles": ["sk"],
+      "meaning": "Install the explosion-sweep initializer and signal departure stage bit 5."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 142,
+      "old": "loc_802FE",
+      "new": "DEZFinal_QueueEscapeExplosionArt",
+      "profiles": ["sk"],
+      "meaning": "Queue Badnik explosion art regardless of rumble allocation success."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 148,
+      "old": "loc_8030E",
+      "new": "DEZFinal_InitSweepAndTryEmitterOne",
+      "profiles": ["sk"],
+      "meaning": "Position the invisible sweep controller and begin four independent boss-explosion child attempts."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 162,
+      "old": "loc_80344",
+      "new": "DEZFinal_TrySweepEmitterTwo",
+      "profiles": ["sk"],
+      "meaning": "Attempt the second independently allocated sweep explosion child."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 168,
+      "old": "loc_80358",
+      "new": "DEZFinal_TrySweepEmitterThree",
+      "profiles": ["sk"],
+      "meaning": "Attempt the third independently allocated sweep explosion child."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 174,
+      "old": "loc_8036C",
+      "new": "DEZFinal_TrySweepEmitterFour",
+      "profiles": ["sk"],
+      "meaning": "Attempt the final explosion child in the sweep setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 180,
+      "old": "locret_80380",
+      "new": "DEZFinal_SweepEmitterSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after all four independent sweep-child attempts."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 184,
+      "old": "loc_80382",
+      "new": "DEZFinal_AdvanceSweepAndTryWhiteFade",
+      "profiles": ["sk"],
+      "meaning": "Advance the sweep two integer pixels until it can start the white-fade completion actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 199,
+      "old": "loc_803B4",
+      "new": "DEZFinal_WhiteFadeSelectForcedSlot",
+      "profiles": ["sk"],
+      "meaning": "Select dynamic object slot 61 as the original no-free-slot fade fallback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 205,
+      "old": "loc_803BE",
+      "new": "DEZFinal_WhiteFadeInitForcedSlot",
+      "profiles": ["sk"],
+      "meaning": "Clear the fallback slot and install the fade actor and completion handle."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 212,
+      "old": "locret_803D4",
+      "new": "DEZFinal_WhiteFadeSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Return either before the sweep threshold or after forced fade-slot setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 216,
+      "old": "loc_803D6",
+      "new": "DEZFinal_WaitFadeSaveAndRoute",
+      "profiles": ["sk"],
+      "meaning": "Wait for the fade actor deletion flag, save progress and choose the completion route."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 231,
+      "old": "loc_8040C",
+      "new": "DEZFinal_RouteToNextLevelOrSega",
+      "profiles": ["sk"],
+      "meaning": "Choose the secondary completion level unless Player_mode equals three."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 238,
+      "old": "loc_8041E",
+      "new": "DEZFinal_ReturnToSegaScreen",
+      "profiles": ["sk"],
+      "meaning": "Set Sega-screen game mode for the exact Player_mode three completion branch."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 241,
+      "old": "locret_80424",
+      "new": "DEZFinal_EscapeCompletionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while fade completion is pending or after selecting Sega-screen mode."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 245,
+      "old": "loc_80426",
+      "new": "DEZFinal_InitEscapeDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize one falling-debris actor and choose its draw priority from a random sign bit."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 255,
+      "old": "loc_8044C",
+      "new": "DEZFinal_RandomizeDebrisPoseAndFall",
+      "profiles": ["sk"],
+      "meaning": "Use separate low/high random bits for camera-relative spawn properties."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 276,
+      "old": "RawAni_80490",
+      "new": "DEZFinal_EscapeDebrisFrames",
+      "profiles": ["sk"],
+      "meaning": "Four-entry random initial-frame lookup for falling debris."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "original_line": 281,
+      "old": "loc_80494",
+      "new": "DEZFinal_EscapeDebrisFallAndCull",
+      "profiles": ["sk"],
+      "meaning": "Integrate falling debris and delete it after the signed camera-relative lower threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 18,
+      "old": "loc_80956",
+      "new": "DEZFinal_InitFireballAndBlast",
+      "profiles": ["sk"],
+      "meaning": "Initialize the primary trajectory controller without installing a visible sprite descriptor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 30,
+      "old": "loc_80980",
+      "new": "DEZFinal_FireballTickAirPath",
+      "profiles": ["sk"],
+      "meaning": "Wait for the trajectory timer and select airborne stepping or the fixed-Y ground trail."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 43,
+      "old": "loc_809A6",
+      "new": "DEZFinal_FireballStepAirAndClone",
+      "profiles": ["sk"],
+      "meaning": "Apply the actual unscaled new-cursor trajectory window before attempting an airborne flame clone."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 58,
+      "old": "loc_809CA",
+      "new": "DEZFinal_FireballBeginGroundTrail",
+      "profiles": ["sk"],
+      "meaning": "Install the ground-trail controller while preserving its fixed landing Y."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 69,
+      "old": "byte_809EE",
+      "new": "DEZFinal_FireballAirPathBytes",
+      "profiles": ["sk"],
+      "meaning": "Signed byte trajectory constants read through overlapping new-cursor windows."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 76,
+      "old": "loc_809F4",
+      "new": "DEZFinal_FireballStepGroundTrail",
+      "profiles": ["sk"],
+      "meaning": "Maintain X-only following and emit alternating ground-trail segments at timed offset steps."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "original_line": 90,
+      "old": "loc_80A1E",
+      "new": "DEZFinal_FireballMoveYAndClone",
+      "profiles": ["sk"],
+      "meaning": "Apply the alternating integer Y step and attempt a flame segment before updating X."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 25,
+      "old": "loc_80E68",
+      "new": "DEZFinal_EscapeHitClearPlayerXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Clear the selected last-hitter player horizontal and ground speeds on a new pursuit hit."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 29,
+      "old": "loc_80E70",
+      "new": "DEZFinal_EscapeHitChooseFlashOffset",
+      "profiles": ["sk"],
+      "meaning": "Choose the ship flash source byte offset with its original overlapping stride."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 36,
+      "old": "loc_80E7E",
+      "new": "DEZFinal_EscapeHitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy three ship colors and finish hit recovery when the BYTE countdown reaches zero."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 46,
+      "old": "locret_80EA2",
+      "new": "DEZFinal_EscapeHitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without further ship damage/flash handling."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 50,
+      "old": "loc_80EA4",
+      "new": "DEZFinal_EscapeBeginDefeatWait",
+      "profiles": ["sk"],
+      "meaning": "Replace the defeated ship with a timed draw/wait and attempt one explosion child."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 59,
+      "old": "loc_80ECC",
+      "new": "DEZFinal_EscapeAwardDefeatScore",
+      "profiles": ["sk"],
+      "meaning": "Award the escape-ship defeat score regardless of explosion allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 74,
+      "old": "word_80EE2",
+      "new": "DEZEscapeShipHit_PaletteDestinationWords",
+      "profiles": ["sk"],
+      "meaning": "Three palette destination addresses for the ship hit-flash scatter copy."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 76,
+      "old": "word_80EE8",
+      "new": "DEZFinal_EscapeHitPaletteColors",
+      "profiles": ["sk"],
+      "meaning": "Six color constants whose actual ship flash reader selects overlapping three-WORD windows."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 90,
+      "old": "locret_80F0C",
+      "new": "DEZFinal_EscapeDebrisSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the periodic debris gate and optional actor allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 103,
+      "old": "loc_80F24",
+      "new": "DEZFinal_MoveAndLockEscapeCamera",
+      "profiles": ["sk"],
+      "meaning": "Integrate the current acceleration candidate even when it was too large to store."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 125,
+      "old": "loc_80F62",
+      "new": "DEZFinal_WorldDefeatTryFirstExplosion",
+      "profiles": ["sk"],
+      "meaning": "Clear world flag bit 5 and attempt the first defeat explosion independently of rumble allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 132,
+      "old": "loc_80F7C",
+      "new": "DEZFinal_WorldDefeatTrySecondExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt a second independent world-defeat explosion child."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 138,
+      "old": "loc_80F90",
+      "new": "DEZFinal_LoadShipArtAndAbortUpdate",
+      "profiles": ["sk"],
+      "meaning": "Load the ship PLC and skip the remainder of the calling world state."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 143,
+      "old": "locret_80F9C",
+      "new": "DEZFinal_WorldDefeatReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from the status gate or the custom defeat-stack continuation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 172,
+      "old": "loc_80FD6",
+      "new": "DEZFinal_BeamCheckPackedP2",
+      "profiles": ["sk"],
+      "meaning": "Process the second player returned in the packed beam-rectangle query."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 183,
+      "old": "locret_80FF0",
+      "new": "DEZFinal_BeamRangeCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the beam active-frame and two-player protection checks."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 188,
+      "old": "word_80FF2",
+      "new": "DEZFinal_BeamContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Beam rectangle X/Y offset and extent WORDs for Check_PlayerInRange."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 200,
+      "old": "locret_8100C",
+      "new": "DEZFinal_ChargeParticleSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the four-tick charge-particle gate and optional simple child allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 243,
+      "old": "locret_8106C",
+      "new": "DEZFinal_FireballSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from the enabled fireball interval helper for all allocation outcomes."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 260,
+      "old": "locret_8109E",
+      "new": "DEZFinal_FlameCloneSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after a visible flame-clone allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 266,
+      "old": "loc_810A0",
+      "new": "DEZFinal_LockBattleCameraAtThreshold",
+      "profiles": ["sk"],
+      "meaning": "Track the camera minimum until the battle threshold, then signal and retire the gate actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 279,
+      "old": "loc_810D0",
+      "new": "DEZFinal_DeleteCurrentActor",
+      "profiles": ["sk"],
+      "meaning": "Shared immediate current-actor deletion tail."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 295,
+      "old": "locret_810F8",
+      "new": "DEZFinal_ArmFlashReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after continuing an existing arm-segment flash or skipping an idle timer."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 315,
+      "old": "loc_81128",
+      "new": "DEZFinal_ArmTickHitRecovery",
+      "profiles": ["sk"],
+      "meaning": "Advance the arm-segment flash after a recognized impact-frame hit."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 322,
+      "old": "locret_8113E",
+      "new": "DEZFinal_ArmHitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the impact-frame collision gate or recovery update."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 326,
+      "old": "loc_81140",
+      "new": "DEZFinal_ArmBeginDefeatWait",
+      "profiles": ["sk"],
+      "meaning": "Put a zero-health arm segment into a parent-following deletion wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 335,
+      "old": "loc_81168",
+      "new": "DEZFinal_ArmSignalDestroyedSegment",
+      "profiles": ["sk"],
+      "meaning": "Record this destroyed arm segment in the parent BYTE bit field."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 355,
+      "old": "loc_81190",
+      "new": "DEZFinal_ArmSelectFlashFrame",
+      "profiles": ["sk"],
+      "meaning": "Select the alternate arm flash mapping frame on an even recovery timer."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 378,
+      "old": "loc_811C8",
+      "new": "DEZFinal_HeadSetPlayerBounceSpeed",
+      "profiles": ["sk"],
+      "meaning": "Assign fixed bounce velocities to the last-hitter selected player."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 384,
+      "old": "loc_811DA",
+      "new": "DEZFinal_HeadHitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Mark active head hit recovery and choose one of two five-color profiles."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 391,
+      "old": "loc_811EE",
+      "new": "DEZFinal_HeadHitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy the active head flash profile and finish the recovery collision state."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 398,
+      "old": "locret_81204",
+      "new": "DEZFinal_HeadHitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after active head collision and flash handling."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 402,
+      "old": "loc_81206",
+      "new": "DEZFinal_HeadBeginDefeatExplosion",
+      "profiles": ["sk"],
+      "meaning": "Switch the defeated head to its parent-following completion handler."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 409,
+      "old": "loc_81220",
+      "new": "DEZFinal_HeadSignalWorldDefeat",
+      "profiles": ["sk"],
+      "meaning": "Signal world defeat regardless of explosion allocation and apply common head defeat bookkeeping."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 424,
+      "old": "word_8123E",
+      "new": "DEZFinalHeadHit_PaletteDestinationWords",
+      "profiles": ["sk"],
+      "meaning": "Five scatter destination addresses for final-head hit colors."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 426,
+      "old": "word_81248",
+      "new": "DEZFinal_HeadHitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two complete five-WORD source profiles for active and inactive head hit flash."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 442,
+      "old": "loc_81276",
+      "new": "DEZFinal_InactiveHeadTickFlash",
+      "profiles": ["sk"],
+      "meaning": "Continue a head flash during an inactive head phase without re-enabling collision."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "original_line": 448,
+      "old": "locret_81284",
+      "new": "DEZFinal_InactiveHeadFlashReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the inactive head-flash timer gate or countdown tail."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 6,
+      "old": "ObjDat3_81286",
+      "new": "DEZFinalIntroSlidingPiece_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 11,
+      "old": "ObjDat3_81292",
+      "new": "DEZFinalArmSegment_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 16,
+      "old": "ObjDat3_8129E",
+      "new": "DEZFinalScriptedAttack_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 21,
+      "old": "ObjDat3_812AA",
+      "new": "DEZFinalBeamGate_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 26,
+      "old": "ObjDat3_812B6",
+      "new": "DEZFinalBeamCharge_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 31,
+      "old": "word_812C2",
+      "new": "DEZFinalChargeParticle_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 34,
+      "old": "ObjDat3_812C8",
+      "new": "DEZFinalHead_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 39,
+      "old": "ObjDat3_812D4",
+      "new": "DEZFinalMasterEmerald_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 44,
+      "old": "ObjDat3_812E0",
+      "new": "DEZFinalIntroRobotnikRun_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 49,
+      "old": "ObjDat3_812EC",
+      "new": "DEZFinalEscapeShip_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 54,
+      "old": "ObjDat3_812F8",
+      "new": "DEZFinalEscapeCrane_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 59,
+      "old": "ObjDat3_81304",
+      "new": "DEZFinalEscapeFallingDebris_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact descriptor for the reviewed DEZ final-boss actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 64,
+      "old": "ChildObjDat_81310",
+      "new": "DEZFinalArmControllers_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Two simple arm controllers for the world-stage battle."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 67,
+      "old": "ChildObjDat_81316",
+      "new": "DEZFinalArmSegments_NormalChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Three normal collision/display segments per arm controller."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "ChildObjDat_8132A",
+      "new": "DEZFinalChargeParticle_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "One simple charge particle attempted on each four-tick gate."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 78,
+      "old": "ChildObjDat_81330",
+      "new": "DEZFinal_EscapeCraneAndEmeraldChildren",
+      "profiles": ["sk"],
+      "meaning": "Two normal children carried by the escape ship."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_8133E",
+      "new": "DEZFinalArm_ImpactExtensionRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay arm extension script whose callback starts impact hold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 91,
+      "old": "byte_81349",
+      "new": "DEZFinalArm_ImpactRetractionRawAnimation",
+      "profiles": ["sk"],
+      "meaning": "Frame-delay arm retraction script before downward return motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 98,
+      "old": "byte_81354",
+      "new": "DEZFinal_IntroRobotnikRunAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay running Robotnik frame loop."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 100,
+      "old": "byte_8135A",
+      "new": "DEZFinal_BeamChargeFlickerAnim",
+      "profiles": ["sk"],
+      "meaning": "Increasing-rate charge flicker ending in the timed hold callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 127,
+      "old": "byte_8138E",
+      "new": "DEZFinal_ChargeParticleDeleteAnim",
+      "profiles": ["sk"],
+      "meaning": "Fixed frame-delay particle animation ending in its configured deletion callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 133,
+      "old": "byte_81397",
+      "new": "DEZFinal_ActiveBeamAnim",
+      "profiles": ["sk"],
+      "meaning": "Active beam frame/delay sequence driving background frame and explicit damage checks."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 146,
+      "old": "word_813AA",
+      "new": "DEZMasterEmerald_TwoSlotPalettePrograms",
+      "profiles": ["sk"],
+      "meaning": "Two independent one-color palette programs for Master Emerald on normal line3."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "original_line": 175,
+      "old": "word_8141E",
+      "new": "DDZMasterEmerald_TwoSlotPalettePrograms",
+      "profiles": ["sk"],
+      "meaning": "Two independent one-color palette programs for Master Emerald on normal line4."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 31,
+      "old": "loc_7FD9E",
+      "new": "DEZFinal_InitWorldIntroAndActors",
+      "profiles": ["sk"],
+      "meaning": "Initialize the final world controller, intro actors and two player placements."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 43,
+      "old": "loc_7FDD0",
+      "new": "DEZFinalWorld_AttemptIntroDetailActor",
+      "profiles": ["sk"],
+      "meaning": "Attempt parent-linked intro detail independently of the runner allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 49,
+      "old": "loc_7FDE2",
+      "new": "DEZFinal_PlaceIntroPlayers",
+      "profiles": ["sk"],
+      "meaning": "Place Player1 and Player2 and start their fixed intro run controls."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 69,
+      "old": "locret_7FE2A",
+      "new": "DEZFinalIntroPlayer_ReturnAfterRunSetup",
+      "profiles": ["sk"],
+      "meaning": "Return from intro player run-control setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 75,
+      "old": "loc_7FE2C",
+      "new": "DEZFinal_AdvanceIntroToCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Advance both players six pixels until Player1 reaches the camera-relative music threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 88,
+      "old": "locret_7FE5A",
+      "new": "DEZFinalWorld_ReturnAfterIntroCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Return before intro camera threshold or after optional music transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 110,
+      "old": "loc_7FE74",
+      "new": "DEZFinal_AdvanceIntroToPlayerStop",
+      "profiles": ["sk"],
+      "meaning": "Advance both intro players until Player1 X reaches0x360, then stop both."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 124,
+      "old": "locret_7FE94",
+      "new": "DEZFinal_IntroPlayerStopReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from intro threshold wait or player stop helper."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 130,
+      "old": "loc_7FE96",
+      "new": "DEZFinal_WaitForIntroDetail",
+      "profiles": ["sk"],
+      "meaning": "Wait for intro detail bit1 before raising the world and returning player control."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 142,
+      "old": "loc_7FEC6",
+      "new": "DEZFinal_LoadExplosionArtAndTryGate",
+      "profiles": ["sk"],
+      "meaning": "Load explosion patterns and attempt the camera-position gate actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 149,
+      "old": "locret_7FEE0",
+      "new": "DEZFinal_IntroReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while waiting for intro signal or after independent helper allocations."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 153,
+      "old": "loc_7FEE2",
+      "new": "DEZFinalWorld_RaiseForTimedIntroInterval",
+      "profiles": ["sk"],
+      "meaning": "Integrate upward world motion during the intro rise timer."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 159,
+      "old": "locret_7FEF4",
+      "new": "DEZFinalWorld_ReturnAfterRiseTimerUpdate",
+      "profiles": ["sk"],
+      "meaning": "Return during or just after timed world rise."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 163,
+      "old": "loc_7FEF6",
+      "new": "DEZFinal_WaitCameraAndSpawnBattle",
+      "profiles": ["sk"],
+      "meaning": "Wait for camera gate bit2 before initializing world hops and main battle actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 174,
+      "old": "loc_7FF22",
+      "new": "DEZFinalWorld_AttemptMasterEmeraldActor",
+      "profiles": ["sk"],
+      "meaning": "Attempt root-linked Master Emerald independently of head allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 180,
+      "old": "loc_7FF34",
+      "new": "DEZFinalWorld_AttemptArmControllerPair",
+      "profiles": ["sk"],
+      "meaning": "Attempt two same-entry arm controllers at the world position."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 184,
+      "old": "locret_7FF3C",
+      "new": "DEZFinal_BattleSetupGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from camera-gate wait or completed battle actor attempts."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 205,
+      "old": "loc_7FF6A",
+      "new": "DEZFinal_LandHopAndDispatch",
+      "profiles": ["sk"],
+      "meaning": "End the half-sine hop with shake, sound and phase-specific callback selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 218,
+      "old": "loc_7FF8E",
+      "new": "DEZFinalWorld_ImpactPhaseBranchTable",
+      "profiles": ["sk"],
+      "meaning": "Three four-byte BRA.W entries selected by world phase BYTE."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 226,
+      "old": "loc_7FF9A",
+      "new": "DEZFinal_ChooseHopAndArmAttack",
+      "profiles": ["sk"],
+      "meaning": "Choose ordinary hop callback and arm-attack phase after X threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 234,
+      "old": "loc_7FFB2",
+      "new": "DEZFinal_ChooseArmAttackAfterImpact",
+      "profiles": ["sk"],
+      "meaning": "Select arm-attack request callback for this impact wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 239,
+      "old": "loc_7FFBC",
+      "new": "DEZFinalWorld_BeginLatePhaseImpactWait",
+      "profiles": ["sk"],
+      "meaning": "Select late-phase forward-moving impact wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 244,
+      "old": "locret_7FFD0",
+      "new": "DEZFinal_ImpactSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after phase0 threshold check or late-phase wait setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 248,
+      "old": "loc_7FFD2",
+      "new": "DEZFinalWorld_WaitForImpactCallback",
+      "profiles": ["sk"],
+      "meaning": "Wait for the current ordinary or arm impact callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 252,
+      "old": "loc_7FFD8",
+      "new": "DEZFinal_ChooseHopFromPlayerRegion",
+      "profiles": ["sk"],
+      "meaning": "Resume half-sine hops with player-region-dependent integer X direction."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 265,
+      "old": "loc_7FFFA",
+      "new": "DEZFinal_CheckRightRegionHop",
+      "profiles": ["sk"],
+      "meaning": "Choose hop direction using worldX+0x80 for the right player region."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 271,
+      "old": "loc_80006",
+      "new": "DEZFinalWorld_NegateSelectedHopStep",
+      "profiles": ["sk"],
+      "meaning": "Change prepared integer hop X step from+1 to-1."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 274,
+      "old": "loc_80008",
+      "new": "DEZFinalWorld_StoreIntegerHopStep",
+      "profiles": ["sk"],
+      "meaning": "Store selected world integer X step for the next hop."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 279,
+      "old": "loc_8000E",
+      "new": "DEZFinalWorld_RequestArmAttackAndWait",
+      "profiles": ["sk"],
+      "meaning": "Request coordinated arm attack after impact pause."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 285,
+      "old": "loc_8001C",
+      "new": "DEZFinal_WaitArmsOrBeginReposition",
+      "profiles": ["sk"],
+      "meaning": "Wait for arm recovery or transition when both shared arm-destruction bytes areFF."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 293,
+      "old": "loc_80030",
+      "new": "DEZFinal_BeginArmDefeatReposition",
+      "profiles": ["sk"],
+      "meaning": "Begin world repositioning after both arm controllers report complete segment destruction."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 300,
+      "old": "loc_8004A",
+      "new": "DEZFinal_LockCameraAfterArmPhase",
+      "profiles": ["sk"],
+      "meaning": "Lock horizontal camera limits after optional rumble allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 307,
+      "old": "loc_80058",
+      "new": "DEZFinalWorld_LowerToRepositionThreshold",
+      "profiles": ["sk"],
+      "meaning": "Lower world one integer pixel per update to Y0x18F."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 319,
+      "old": "locret_80080",
+      "new": "DEZFinalWorld_ReturnAfterLoweringStep",
+      "profiles": ["sk"],
+      "meaning": "Return after world lowering and optional reposition selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 323,
+      "old": "loc_80082",
+      "new": "DEZFinal_RiseIntoHeadPhase",
+      "profiles": ["sk"],
+      "meaning": "Raise world to Y0xAF and initialize exposed-head/fireball phase controls."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 339,
+      "old": "loc_800C0",
+      "new": "DEZFinal_QueueHeadPhaseEmeraldArt",
+      "profiles": ["sk"],
+      "meaning": "Queue MasterEmerald art after optional head exposure trigger allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 344,
+      "old": "loc_800D0",
+      "new": "DEZFinal_BeginRightwardLateHop",
+      "profiles": ["sk"],
+      "meaning": "Select late world-hop updater with one-pixel rightward step."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 350,
+      "old": "loc_800DE",
+      "new": "DEZFinal_LateHopCheckDefeatAndFire",
+      "profiles": ["sk"],
+      "meaning": "Run late half-sine hop with defeat, fireball and camera work."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 357,
+      "old": "loc_800EE",
+      "new": "DEZFinal_LateImpactWaitAndFire",
+      "profiles": ["sk"],
+      "meaning": "Move world/camera during late impact wait while checking defeat and fireball interval."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 365,
+      "old": "loc_80102",
+      "new": "DEZFinal_MoveDefeatedWorldToExitY",
+      "profiles": ["sk"],
+      "meaning": "Move defeated world through a direct updater until its exit height."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 374,
+      "old": "loc_8011E",
+      "new": "DEZFinal_StopShakeAndTryEscapeShip",
+      "profiles": ["sk"],
+      "meaning": "Finish defeated-world descent and attempt the separate escape ship."
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "original_line": 382,
+      "old": "loc_8013A",
+      "new": "DEZFinal_QueueEscapeArtAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Queue escape resources and schedule world deletion using bit4 lifetime signaling."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/debris.s",
+      "original_line": 7,
+      "old": "word_187B6C",
+      "new": "DEZFinalBossDebris_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossDebris mapping frame at verified table slot(s) 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/debris.s",
+      "original_line": 10,
+      "old": "word_187B7A",
+      "new": "DEZFinalBossDebris_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossDebris mapping frame at verified table slot(s) 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/debris.s",
+      "original_line": 12,
+      "old": "word_187B82",
+      "new": "DEZFinalBossDebris_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossDebris mapping frame at verified table slot(s) 02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/master_emerald.s",
+      "original_line": 6,
+      "old": "word_187B38",
+      "new": "BossMasterEmerald_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "BossMasterEmerald mapping frame at verified table slot(s) 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/master_emerald.s",
+      "original_line": 12,
+      "old": "word_187B58",
+      "new": "BossMasterEmerald_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "BossMasterEmerald mapping frame at verified table slot(s) 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 36,
+      "old": "word_1878C8",
+      "new": "DEZFinalBossMisc_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 43,
+      "old": "word_1878EE",
+      "new": "DEZFinalBossMisc_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 50,
+      "old": "word_187914",
+      "new": "DEZFinalBossMisc_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 55,
+      "old": "word_18792E",
+      "new": "DEZFinalBossMisc_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 60,
+      "old": "word_187948",
+      "new": "DEZFinalBossMisc_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 63,
+      "old": "word_187956",
+      "new": "DEZFinalBossMisc_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 66,
+      "old": "word_187964",
+      "new": "DEZFinalBossMisc_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 68,
+      "old": "word_18796C",
+      "new": "DEZFinalBossMisc_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 71,
+      "old": "word_18797A",
+      "new": "DEZFinalBossMisc_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 74,
+      "old": "word_187988",
+      "new": "DEZFinalBossMisc_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 77,
+      "old": "word_187996",
+      "new": "DEZFinalBossMisc_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 80,
+      "old": "word_1879A4",
+      "new": "DEZFinalBossMisc_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 83,
+      "old": "word_1879B2",
+      "new": "DEZFinalBossMisc_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 85,
+      "old": "word_1879BA",
+      "new": "DEZFinalBossMisc_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 88,
+      "old": "word_1879C8",
+      "new": "DEZFinalBossMisc_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 90,
+      "old": "word_1879D0",
+      "new": "DEZFinalBossMisc_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 93,
+      "old": "word_1879DE",
+      "new": "DEZFinalBossMisc_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 96,
+      "old": "word_1879EC",
+      "new": "DEZFinalBossMisc_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 99,
+      "old": "word_1879FA",
+      "new": "DEZFinalBossMisc_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 101,
+      "old": "word_187A02",
+      "new": "DEZFinalBossMisc_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 108,
+      "old": "word_187A28",
+      "new": "DEZFinalBossMisc_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 115,
+      "old": "word_187A4E",
+      "new": "DEZFinalBossMisc_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 120,
+      "old": "word_187A68",
+      "new": "DEZFinalBossMisc_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 125,
+      "old": "word_187A82",
+      "new": "DEZFinalBossMisc_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 127,
+      "old": "word_187A8A",
+      "new": "DEZFinalBossMisc_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 130,
+      "old": "word_187A98",
+      "new": "DEZFinalBossMisc_MapFrame19And1A",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 19,1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 136,
+      "old": "word_187AB8",
+      "new": "DEZFinalBossMisc_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 1B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 138,
+      "old": "word_187AC0",
+      "new": "DEZFinalBossMisc_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 1C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 140,
+      "old": "word_187AC8",
+      "new": "DEZFinalBossMisc_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 1D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 142,
+      "old": "word_187AD0",
+      "new": "DEZFinalBossMisc_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 1E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "original_line": 159,
+      "old": "word_187B32",
+      "new": "DEZFinalBossMisc_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "DEZFinalBossMisc mapping frame at verified table slot(s) 1F hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "tokens": [[364, 2, 212, ""]]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "tokens": [
+        [1, 0, 0, ""],
+        [4, 1, 1, ""],
+        [5, 1, 1, ""],
+        [7, 0, 1, ""],
+        [8, 1, 2, ""],
+        [8, 3, 1, ""],
+        [9, 1, 3, ""],
+        [9, 3, 1, ""],
+        [10, 0, 2, ""],
+        [11, 1, 199, ""],
+        [13, 0, 3, ""],
+        [15, 1, 4, ""],
+        [17, 0, 4, ""],
+        [21, 0, 5, ""],
+        [22, 1, 195, ""],
+        [24, 2, 6, ""],
+        [28, 0, 6, ""],
+        [30, 1, 7, ""],
+        [32, 0, 7, ""],
+        [33, 2, 8, ""],
+        [34, 0, 8, ""],
+        [36, 1, 9, ""],
+        [40, 0, 9, ""],
+        [41, 2, 10, ""],
+        [43, 0, 10, ""],
+        [45, 1, 11, ""],
+        [50, 0, 11, ""],
+        [51, 2, 12, ""],
+        [52, 0, 12, ""],
+        [54, 1, 13, ""],
+        [58, 0, 13, ""],
+        [59, 2, 6, ""],
+        [62, 0, 14, ""],
+        [66, 0, 15, ""],
+        [67, 2, 16, ""],
+        [72, 0, 16, ""],
+        [74, 1, 17, ""],
+        [78, 0, 17, ""],
+        [79, 2, 18, ""],
+        [85, 1, 18, ""],
+        [86, 2, 20, ""],
+        [88, 0, 18, ""],
+        [91, 1, 19, ""],
+        [92, 2, 16, ""],
+        [94, 0, 19, ""],
+        [96, 0, 20, ""],
+        [97, 1, 192, ""],
+        [99, 2, 21, ""],
+        [104, 0, 21, ""],
+        [109, 1, 22, ""],
+        [110, 2, 23, ""],
+        [115, 1, 22, ""],
+        [116, 2, 95, ""],
+        [119, 0, 22, ""],
+        [122, 0, 23, ""],
+        [124, 1, 24, ""],
+        [127, 0, 24, ""],
+        [128, 2, 25, ""],
+        [133, 0, 25, ""],
+        [138, 1, 26, ""],
+        [145, 0, 26, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "tokens": [
+        [1, 0, 27, ""],
+        [4, 1, 29, ""],
+        [5, 1, 29, ""],
+        [7, 1, 28, ""],
+        [10, 0, 28, ""],
+        [13, 0, 29, ""],
+        [14, 1, 30, ""],
+        [14, 3, 29, ""],
+        [15, 1, 33, ""],
+        [15, 3, 29, ""],
+        [16, 0, 30, ""],
+        [17, 1, 191, ""],
+        [23, 1, 31, ""],
+        [25, 0, 31, ""],
+        [27, 1, 32, ""],
+        [29, 0, 32, ""],
+        [30, 1, 36, ""],
+        [31, 1, 37, ""],
+        [32, 1, 38, ""],
+        [33, 0, 33, ""],
+        [35, 1, 34, ""],
+        [43, 1, 35, ""],
+        [52, 0, 34, ""],
+        [54, 0, 35, ""],
+        [56, 0, 36, ""],
+        [64, 0, 37, ""],
+        [72, 0, 38, ""],
+        [80, 0, 39, ""],
+        [83, 1, 42, ""],
+        [84, 1, 42, ""],
+        [88, 1, 40, ""],
+        [90, 0, 40, ""],
+        [93, 1, 41, ""],
+        [95, 0, 41, ""],
+        [98, 0, 42, ""],
+        [99, 1, 43, ""],
+        [99, 3, 42, ""],
+        [100, 1, 45, ""],
+        [100, 3, 42, ""],
+        [101, 1, 54, ""],
+        [101, 3, 42, ""],
+        [102, 1, 57, ""],
+        [102, 3, 42, ""],
+        [103, 1, 60, ""],
+        [103, 3, 42, ""],
+        [104, 1, 62, ""],
+        [104, 3, 42, ""],
+        [105, 1, 54, ""],
+        [105, 3, 42, ""],
+        [106, 0, 43, ""],
+        [109, 1, 202, ""],
+        [113, 1, 44, ""],
+        [115, 0, 44, ""],
+        [118, 0, 45, ""],
+        [121, 1, 53, ""],
+        [127, 1, 46, ""],
+        [130, 1, 46, ""],
+        [132, 0, 46, ""],
+        [136, 1, 47, ""],
+        [138, 0, 47, ""],
+        [140, 1, 52, ""],
+        [142, 1, 52, ""],
+        [145, 1, 48, ""],
+        [147, 0, 48, ""],
+        [152, 0, 49, ""],
+        [154, 1, 50, ""],
+        [156, 0, 50, ""],
+        [157, 3, 49, ""],
+        [159, 1, 51, ""],
+        [162, 1, 52, ""],
+        [165, 0, 51, ""],
+        [168, 1, 52, ""],
+        [170, 0, 52, ""],
+        [172, 0, 53, ""],
+        [176, 2, 55, ""],
+        [178, 0, 54, ""],
+        [181, 0, 55, ""],
+        [184, 2, 56, ""],
+        [186, 0, 56, ""],
+        [188, 2, 58, ""],
+        [190, 0, 57, ""],
+        [191, 1, 205, ""],
+        [193, 0, 58, ""],
+        [203, 0, 59, ""],
+        [205, 0, 60, ""],
+        [207, 1, 61, ""],
+        [210, 2, 63, ""],
+        [211, 0, 61, ""],
+        [213, 0, 62, ""],
+        [214, 1, 206, ""],
+        [216, 0, 63, ""],
+        [220, 2, 64, ""],
+        [222, 0, 64, ""],
+        [228, 0, 65, ""],
+        [229, 1, 190, ""],
+        [231, 2, 66, ""],
+        [233, 0, 66, ""],
+        [237, 1, 67, ""],
+        [241, 0, 67, ""],
+        [242, 2, 68, ""],
+        [246, 0, 68, ""],
+        [250, 1, 69, ""],
+        [254, 0, 69, ""],
+        [255, 2, 66, ""],
+        [258, 1, 66, ""],
+        [259, 0, 70, ""],
+        [263, 0, 71, ""],
+        [264, 1, 189, ""],
+        [266, 2, 72, ""],
+        [274, 0, 72, ""],
+        [276, 1, 73, ""],
+        [277, 2, 74, ""],
+        [280, 0, 73, ""],
+        [282, 0, 74, ""],
+        [284, 1, 75, ""],
+        [287, 0, 75, ""],
+        [291, 0, 76, ""],
+        [292, 1, 197, ""],
+        [294, 2, 77, ""],
+        [298, 0, 77, ""],
+        [299, 1, 207, ""],
+        [305, 1, 78, ""],
+        [307, 0, 78, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "tokens": [
+        [1, 0, 79, ""],
+        [2, 1, 196, ""],
+        [7, 0, 80, ""],
+        [9, 1, 82, ""],
+        [10, 3, 80, ""],
+        [12, 1, 211, ""],
+        [15, 0, 81, ""],
+        [17, 3, 81, ""],
+        [19, 0, 82, ""],
+        [21, 1, 83, ""],
+        [22, 2, 84, ""],
+        [26, 0, 83, ""],
+        [27, 2, 87, ""],
+        [30, 0, 84, ""],
+        [32, 1, 85, ""],
+        [34, 0, 85, ""],
+        [38, 1, 172, ""],
+        [40, 1, 86, ""],
+        [42, 0, 86, ""],
+        [45, 0, 87, ""],
+        [47, 1, 88, ""],
+        [49, 0, 88, ""],
+        [52, 1, 89, ""],
+        [53, 2, 90, ""],
+        [54, 0, 89, ""],
+        [56, 0, 90, ""],
+        [58, 1, 91, ""],
+        [60, 0, 91, ""],
+        [63, 1, 92, ""],
+        [64, 2, 93, ""],
+        [66, 0, 92, ""],
+        [68, 0, 93, ""],
+        [70, 1, 94, ""],
+        [72, 0, 94, ""],
+        [74, 0, 95, ""],
+        [75, 1, 193, ""],
+        [77, 2, 96, ""],
+        [80, 2, 97, ""],
+        [84, 0, 96, ""],
+        [86, 1, 208, ""],
+        [90, 0, 97, ""],
+        [91, 2, 98, ""],
+        [94, 0, 98, ""],
+        [96, 1, 101, ""],
+        [98, 1, 99, ""],
+        [100, 0, 99, ""],
+        [103, 1, 100, ""],
+        [105, 0, 100, ""],
+        [108, 0, 101, ""],
+        [109, 2, 102, ""],
+        [112, 1, 210, ""],
+        [114, 2, 104, ""],
+        [118, 0, 102, ""],
+        [120, 1, 103, ""],
+        [124, 0, 103, ""],
+        [128, 0, 104, ""],
+        [129, 2, 105, ""],
+        [131, 0, 105, ""],
+        [133, 1, 106, ""],
+        [135, 0, 106, ""],
+        [139, 0, 107, ""],
+        [140, 1, 194, ""],
+        [142, 2, 108, ""],
+        [159, 0, 108, ""],
+        [160, 1, 209, ""],
+        [173, 1, 109, ""],
+        [175, 0, 109, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "tokens": [
+        [1, 0, 110, ""],
+        [4, 1, 111, ""],
+        [5, 1, 111, ""],
+        [8, 0, 111, ""],
+        [9, 1, 112, ""],
+        [9, 3, 111, ""],
+        [10, 1, 114, ""],
+        [10, 3, 111, ""],
+        [11, 1, 115, ""],
+        [11, 3, 111, ""],
+        [12, 1, 117, ""],
+        [12, 3, 111, ""],
+        [13, 1, 119, ""],
+        [13, 3, 111, ""],
+        [14, 0, 112, ""],
+        [15, 1, 198, ""],
+        [27, 1, 113, ""],
+        [29, 0, 113, ""],
+        [32, 1, 204, ""],
+        [34, 0, 114, ""],
+        [39, 1, 59, ""],
+        [45, 0, 115, ""],
+        [52, 1, 116, ""],
+        [56, 2, 118, ""],
+        [57, 0, 116, ""],
+        [59, 0, 117, ""],
+        [64, 0, 118, ""],
+        [69, 0, 119, ""],
+        [75, 1, 120, ""],
+        [78, 0, 120, ""],
+        [83, 1, 121, ""],
+        [85, 0, 121, ""],
+        [87, 0, 122, ""],
+        [90, 2, 123, ""],
+        [92, 0, 123, ""],
+        [93, 2, 124, ""],
+        [96, 0, 124, ""],
+        [102, 1, 125, ""],
+        [104, 0, 125, ""],
+        [105, 2, 127, ""],
+        [109, 1, 126, ""],
+        [111, 0, 126, ""],
+        [115, 0, 127, ""],
+        [116, 2, 132, ""],
+        [126, 1, 128, ""],
+        [128, 0, 128, ""],
+        [131, 1, 129, ""],
+        [133, 0, 129, ""],
+        [136, 1, 130, ""],
+        [138, 0, 130, ""],
+        [141, 1, 131, ""],
+        [143, 0, 131, ""],
+        [145, 0, 132, ""],
+        [150, 1, 135, ""],
+        [151, 2, 136, ""],
+        [153, 1, 133, ""],
+        [158, 0, 133, ""],
+        [163, 0, 134, ""],
+        [165, 3, 134, ""],
+        [169, 0, 135, ""],
+        [171, 0, 136, ""],
+        [174, 1, 139, ""],
+        [179, 1, 137, ""],
+        [181, 1, 137, ""],
+        [184, 0, 137, ""],
+        [186, 1, 138, ""],
+        [189, 0, 138, ""],
+        [191, 0, 139, ""],
+        [193, 0, 140, ""],
+        [194, 1, 200, ""],
+        [196, 2, 143, ""],
+        [200, 1, 141, ""],
+        [202, 0, 141, ""],
+        [216, 1, 142, ""],
+        [222, 0, 142, ""],
+        [225, 0, 143, ""],
+        [230, 1, 172, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/fireball.s",
+      "tokens": [
+        [8, 1, 144, ""],
+        [9, 1, 145, ""],
+        [10, 0, 144, ""],
+        [20, 0, 145, ""],
+        [22, 1, 59, ""],
+        [24, 1, 147, ""],
+        [30, 1, 146, ""],
+        [32, 0, 146, ""],
+        [36, 1, 148, ""],
+        [45, 0, 147, ""],
+        [46, 2, 149, ""],
+        [55, 0, 148, ""],
+        [60, 0, 149, ""],
+        [66, 1, 172, ""],
+        [70, 1, 150, ""],
+        [73, 0, 150, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "tokens": [
+        [3, 1, 154, ""],
+        [5, 1, 155, ""],
+        [7, 1, 152, ""],
+        [13, 1, 152, ""],
+        [16, 1, 151, ""],
+        [18, 0, 151, ""],
+        [21, 0, 152, ""],
+        [24, 1, 153, ""],
+        [26, 0, 153, ""],
+        [29, 1, 154, ""],
+        [33, 1, 154, ""],
+        [35, 0, 154, ""],
+        [37, 0, 155, ""],
+        [40, 2, 122, ""],
+        [43, 1, 156, ""],
+        [45, 0, 156, ""],
+        [50, 1, 157, ""],
+        [51, 1, 158, ""],
+        [53, 0, 157, ""],
+        [55, 0, 158, ""],
+        [61, 1, 159, ""],
+        [63, 1, 159, ""],
+        [64, 2, 140, ""],
+        [65, 0, 159, ""],
+        [71, 1, 160, ""],
+        [73, 0, 160, ""],
+        [83, 1, 164, ""],
+        [84, 2, 252, ""],
+        [88, 1, 161, ""],
+        [90, 0, 161, ""],
+        [94, 1, 162, ""],
+        [96, 0, 162, ""],
+        [99, 1, 163, ""],
+        [101, 0, 163, ""],
+        [105, 0, 164, ""],
+        [112, 1, 166, ""],
+        [113, 1, 167, ""],
+        [116, 1, 166, ""],
+        [118, 1, 165, ""],
+        [121, 1, 165, ""],
+        [123, 1, 165, ""],
+        [127, 0, 165, ""],
+        [130, 1, 166, ""],
+        [133, 1, 166, ""],
+        [135, 1, 166, ""],
+        [137, 0, 166, ""],
+        [139, 0, 167, ""],
+        [144, 1, 168, ""],
+        [145, 1, 203, ""],
+        [147, 0, 168, ""],
+        [169, 1, 169, ""],
+        [171, 1, 169, ""],
+        [174, 1, 169, ""],
+        [177, 0, 169, ""],
+        [181, 1, 170, ""],
+        [182, 2, 27, ""],
+        [189, 0, 170, ""],
+        [191, 0, 171, ""],
+        [196, 1, 59, ""],
+        [203, 0, 172, ""],
+        [207, 1, 176, ""],
+        [209, 1, 173, ""],
+        [212, 1, 173, ""],
+        [215, 0, 173, ""],
+        [221, 1, 175, ""],
+        [223, 1, 176, ""],
+        [225, 1, 174, ""],
+        [230, 0, 174, ""],
+        [233, 1, 175, ""],
+        [236, 0, 175, ""],
+        [238, 0, 176, ""],
+        [239, 2, 70, ""],
+        [244, 1, 177, ""],
+        [246, 0, 177, ""],
+        [257, 1, 178, ""],
+        [260, 0, 178, ""],
+        [266, 1, 182, ""],
+        [268, 1, 183, ""],
+        [270, 1, 180, ""],
+        [276, 1, 179, ""],
+        [278, 0, 179, ""],
+        [283, 0, 180, ""],
+        [287, 1, 181, ""],
+        [289, 0, 181, ""],
+        [292, 1, 182, ""],
+        [295, 0, 182, ""],
+        [297, 0, 183, ""],
+        [298, 2, 14, ""],
+        [301, 1, 184, ""],
+        [303, 0, 184, ""],
+        [308, 1, 185, ""],
+        [309, 1, 186, ""],
+        [311, 0, 185, ""],
+        [313, 0, 186, ""],
+        [318, 1, 183, ""],
+        [320, 1, 188, ""],
+        [323, 1, 187, ""],
+        [325, 0, 187, ""],
+        [328, 1, 188, ""],
+        [330, 0, 188, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
+      "tokens": [
+        [1, 0, 189, ""],
+        [6, 0, 190, ""],
+        [11, 0, 191, ""],
+        [16, 0, 192, ""],
+        [21, 0, 193, ""],
+        [26, 0, 194, ""],
+        [29, 0, 195, ""],
+        [34, 0, 196, ""],
+        [39, 0, 197, ""],
+        [44, 0, 198, ""],
+        [49, 0, 199, ""],
+        [54, 0, 200, ""],
+        [59, 0, 201, ""],
+        [61, 1, 39, ""],
+        [62, 0, 202, ""],
+        [64, 1, 65, ""],
+        [66, 1, 65, ""],
+        [68, 1, 65, ""],
+        [70, 0, 203, ""],
+        [72, 1, 107, ""],
+        [73, 0, 204, ""],
+        [75, 1, 0, ""],
+        [77, 1, 79, ""],
+        [79, 0, 205, ""],
+        [86, 0, 206, ""],
+        [93, 0, 207, ""],
+        [95, 0, 208, ""],
+        [122, 0, 209, ""],
+        [128, 0, 210, ""],
+        [140, 0, 211, ""],
+        [168, 0, 212, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "tokens": [
+        [10, 1, 213, ""],
+        [11, 1, 217, ""],
+        [12, 1, 219, ""],
+        [13, 1, 221, ""],
+        [14, 1, 224, ""],
+        [15, 1, 226, ""],
+        [17, 1, 236, ""],
+        [18, 1, 242, ""],
+        [19, 1, 245, ""],
+        [20, 1, 247, ""],
+        [21, 1, 250, ""],
+        [22, 1, 251, ""],
+        [23, 0, 213, ""],
+        [32, 1, 214, ""],
+        [33, 2, 76, ""],
+        [34, 0, 214, ""],
+        [36, 1, 215, ""],
+        [37, 2, 71, ""],
+        [39, 0, 215, ""],
+        [53, 1, 216, ""],
+        [55, 0, 216, ""],
+        [57, 0, 217, ""],
+        [62, 1, 218, ""],
+        [66, 1, 218, ""],
+        [69, 0, 218, ""],
+        [80, 0, 219, ""],
+        [83, 1, 220, ""],
+        [90, 0, 220, ""],
+        [92, 0, 221, ""],
+        [94, 1, 223, ""],
+        [101, 1, 222, ""],
+        [103, 0, 222, ""],
+        [107, 1, 223, ""],
+        [108, 2, 171, ""],
+        [109, 0, 223, ""],
+        [111, 0, 224, ""],
+        [114, 1, 225, ""],
+        [116, 0, 225, ""],
+        [118, 0, 226, ""],
+        [120, 1, 229, ""],
+        [125, 1, 227, ""],
+        [126, 2, 5, ""],
+        [128, 0, 227, ""],
+        [130, 1, 228, ""],
+        [131, 2, 79, ""],
+        [133, 0, 228, ""],
+        [134, 1, 201, ""],
+        [136, 0, 229, ""],
+        [145, 1, 230, ""],
+        [152, 0, 230, ""],
+        [160, 1, 231, ""],
+        [161, 0, 231, ""],
+        [162, 1, 232, ""],
+        [163, 1, 233, ""],
+        [164, 1, 234, ""],
+        [165, 0, 232, ""],
+        [166, 2, 237, ""],
+        [168, 1, 235, ""],
+        [171, 0, 233, ""],
+        [172, 2, 241, ""],
+        [174, 0, 234, ""],
+        [177, 2, 249, ""],
+        [178, 0, 235, ""],
+        [180, 0, 236, ""],
+        [182, 0, 237, ""],
+        [187, 1, 238, ""],
+        [191, 1, 240, ""],
+        [192, 1, 239, ""],
+        [193, 0, 238, ""],
+        [197, 1, 240, ""],
+        [198, 0, 239, ""],
+        [200, 0, 240, ""],
+        [203, 0, 241, ""],
+        [207, 0, 242, ""],
+        [209, 1, 243, ""],
+        [211, 1, 237, ""],
+        [213, 0, 243, ""],
+        [217, 1, 244, ""],
+        [219, 0, 244, ""],
+        [224, 0, 245, ""],
+        [229, 1, 246, ""],
+        [235, 0, 246, ""],
+        [237, 0, 247, ""],
+        [242, 1, 59, ""],
+        [249, 1, 248, ""],
+        [250, 2, 15, ""],
+        [252, 0, 248, ""],
+        [256, 0, 249, ""],
+        [260, 0, 250, ""],
+        [265, 0, 251, ""],
+        [271, 0, 252, ""],
+        [274, 1, 253, ""],
+        [278, 0, 253, ""],
+        [283, 1, 254, ""],
+        [284, 2, 110, ""],
+        [285, 0, 254, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/debris.s",
+      "tokens": [
+        [2, 1, 255, ""],
+        [3, 1, 256, ""],
+        [4, 1, 257, ""],
+        [5, 0, 255, ""],
+        [8, 0, 256, ""],
+        [10, 0, 257, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/master_emerald.s",
+      "tokens": [
+        [2, 1, 258, ""],
+        [3, 1, 259, ""],
+        [4, 0, 258, ""],
+        [10, 0, 259, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/final_boss/mappings/misc.s",
+      "tokens": [
+        [2, 1, 260, ""],
+        [3, 1, 261, ""],
+        [4, 1, 262, ""],
+        [5, 1, 263, ""],
+        [6, 1, 264, ""],
+        [7, 1, 265, ""],
+        [8, 1, 266, ""],
+        [9, 1, 267, ""],
+        [10, 1, 268, ""],
+        [11, 1, 269, ""],
+        [12, 1, 270, ""],
+        [13, 1, 271, ""],
+        [14, 1, 272, ""],
+        [15, 1, 273, ""],
+        [16, 1, 274, ""],
+        [17, 1, 275, ""],
+        [18, 1, 276, ""],
+        [19, 1, 277, ""],
+        [20, 1, 278, ""],
+        [21, 1, 279, ""],
+        [22, 1, 280, ""],
+        [23, 1, 281, ""],
+        [24, 1, 282, ""],
+        [25, 1, 283, ""],
+        [26, 1, 284, ""],
+        [27, 1, 285, ""],
+        [28, 1, 285, ""],
+        [29, 1, 286, ""],
+        [30, 1, 287, ""],
+        [31, 1, 288, ""],
+        [32, 1, 289, ""],
+        [33, 1, 290, ""],
+        [34, 0, 260, ""],
+        [41, 0, 261, ""],
+        [48, 0, 262, ""],
+        [53, 0, 263, ""],
+        [58, 0, 264, ""],
+        [61, 0, 265, ""],
+        [64, 0, 266, ""],
+        [66, 0, 267, ""],
+        [69, 0, 268, ""],
+        [72, 0, 269, ""],
+        [75, 0, 270, ""],
+        [78, 0, 271, ""],
+        [81, 0, 272, ""],
+        [83, 0, 273, ""],
+        [86, 0, 274, ""],
+        [88, 0, 275, ""],
+        [91, 0, 276, ""],
+        [94, 0, 277, ""],
+        [97, 0, 278, ""],
+        [99, 0, 279, ""],
+        [106, 0, 280, ""],
+        [113, 0, 281, ""],
+        [118, 0, 282, ""],
+        [123, 0, 283, ""],
+        [125, 0, 284, ""],
+        [128, 0, 285, ""],
+        [134, 0, 286, ""],
+        [136, 0, 287, ""],
+        [138, 0, 288, ""],
+        [140, 0, 289, ""],
+        [157, 0, 290, ""]
+      ]
+    }
+  ]
+}

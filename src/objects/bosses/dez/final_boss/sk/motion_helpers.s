@@ -6,57 +6,58 @@
 
 UpdateDEZEscapeShipHitFlashAndDefeatWait:
                 tst.b   collision_flags(a0)
-                bne.s   locret_80EA2
+                bne.s   DEZFinal_EscapeHitReturn
                 move.b  collision_property(a0),d0
-                beq.s   loc_80EA4
+                beq.s   DEZFinal_EscapeBeginDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_80E70
+                bne.s   DEZFinal_EscapeHitChooseFlashOffset
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
                 btst    #7,$38(a0)
-                beq.s   loc_80E70
+                beq.s   DEZFinal_EscapeHitChooseFlashOffset
                 lea     (Player_1).w,a1
                 tst.b   $1C(a0)
-                beq.s   loc_80E68
+                beq.s   DEZFinal_EscapeHitClearPlayerXSpeed
                 lea     (Player_2).w,a1
 
-loc_80E68:
+DEZFinal_EscapeHitClearPlayerXSpeed:
                 clr.w   x_vel(a1)
                 clr.w   ground_vel(a1)
 
-loc_80E70:
+; The parity path skips two colors, while the reader copies three
+DEZFinal_EscapeHitChooseFlashOffset:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_80E7E
+                bne.s   DEZFinal_EscapeHitCopyColorsAndTick
 ; Bug: this should be 2*3
                 addi.w  #2*2,d0
 
-loc_80E7E:
+DEZFinal_EscapeHitCopyColorsAndTick:
                 bsr.w   DEZEscapeShip_CopyPalette3
                 subq.b  #1,$20(a0)
-                bne.s   locret_80EA2
+                bne.s   DEZFinal_EscapeHitReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
                 cmpi.b  #8,routine(a0)
-                blo.s   locret_80EA2
+                blo.s   DEZFinal_EscapeHitReturn
                 move.w  #$800,x_vel(a0)
 
-locret_80EA2:
+DEZFinal_EscapeHitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_80EA4:
+DEZFinal_EscapeBeginDefeatWait:
                 move.l  #Wait_Draw,(a0)
                 move.w  #$2F,$2E(a0)
-                move.l  #loc_8029C,$34(a0)
+                move.l  #DEZFinal_SignalFirstEscapeDefeat,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_80ECC
+                bne.s   DEZFinal_EscapeAwardDefeatScore
                 move.b  #4,subtype(a1)
 
-loc_80ECC:
+DEZFinal_EscapeAwardDefeatScore:
                 moveq   #100,d0
                 jsr     (HUD_AddToScore).l
                 rts
@@ -66,15 +67,15 @@ loc_80ECC:
 
 ; d0.w supplies the source byte offset for the three fixed destinations
 DEZEscapeShip_CopyPalette3:
-                lea     word_80EE2(pc),a1
-                lea     word_80EE8(pc,d0.w),a2
+                lea     DEZEscapeShipHit_PaletteDestinationWords(pc),a1
+                lea     DEZFinal_EscapeHitPaletteColors(pc,d0.w),a2
                 jmp     CopyWordData_3(pc)
 ; End of function DEZEscapeShip_CopyPalette3
 
 ; ---------------------------------------------------------------------------
-word_80EE2:
+DEZEscapeShipHit_PaletteDestinationWords:
                 dc.w    Normal_palette+$0E, Normal_palette+$1C, Normal_palette+$1E
-word_80EE8:
+DEZFinal_EscapeHitPaletteColors:
                 dc.w    8,  $866,  $222
                 dc.w    $888,  $CCC,  $EEE
 
@@ -83,12 +84,12 @@ word_80EE8:
 DEZEscape_TryFallingDebrisEvery16:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_80F0C
+                bne.s   DEZFinal_EscapeDebrisSpawnReturn
                 jsr     (AllocateObject).l
-                bne.s   locret_80F0C
-                move.l  #loc_80426,(a1)
+                bne.s   DEZFinal_EscapeDebrisSpawnReturn
+                move.l  #DEZFinal_InitEscapeDebris,(a1)
 
-locret_80F0C:
+DEZFinal_EscapeDebrisSpawnReturn:
                 rts
 ; End of function DEZEscape_TryFallingDebrisEvery16
 
@@ -99,10 +100,10 @@ DEZEscape_AccelAndLockCameraX:
                 move.l  (_unkFA84).w,d0
                 addi.l  #$1000,d0
                 cmpi.l  #$40000,d0
-                bhi.s   loc_80F24
+                bhi.s   DEZFinal_MoveAndLockEscapeCamera
                 move.l  d0,(_unkFA84).w
 
-loc_80F24:
+DEZFinal_MoveAndLockEscapeCamera:
                 move.l  (Camera_X_pos).w,d1
                 add.l   d0,d1
                 move.l  d1,(Camera_X_pos).w
@@ -117,33 +118,33 @@ loc_80F24:
 ; On status bit 7, install the defeat drift and discard the return address to skip the rest of this state
 DEZFinalWorld_TryBeginDefeat:
                 btst    #7,status(a0)
-                beq.s   locret_80F9C
-                move.l  #loc_80102,(a0)
+                beq.s   DEZFinal_WorldDefeatReturn
+                move.l  #DEZFinal_MoveDefeatedWorldToExitY,(a0)
                 move.w  #$80,x_vel(a0)
                 move.w  #$80,y_vel(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_80F62
+                bne.s   DEZFinal_WorldDefeatTryFirstExplosion
                 move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
-loc_80F62:
+DEZFinal_WorldDefeatTryFirstExplosion:
                 bclr    #5,$38(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_80F7C
+                bne.s   DEZFinal_WorldDefeatTrySecondExplosion
                 move.b  #$16,subtype(a1)
 
-loc_80F7C:
+DEZFinal_WorldDefeatTrySecondExplosion:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_80F90
+                bne.s   DEZFinal_LoadShipArtAndAbortUpdate
                 move.b  #$16,subtype(a1)
 
-loc_80F90:
+DEZFinal_LoadShipArtAndAbortUpdate:
                 lea     PLC_DEZ3_Boss(pc),a1
                 jsr     (Load_PLC_Raw).l
                 addq.w  #4,sp
 
-locret_80F9C:
+DEZFinal_WorldDefeatReturn:
                 rts
 ; End of function DEZFinalWorld_TryBeginDefeat
 
@@ -156,39 +157,39 @@ PLC_DEZ3_Boss_End:
 
 HurtPlayersInsideDEZFinalBeamActiveFrame:
                 cmpi.b  #$1E,mapping_frame(a0)
-                bne.s   locret_80FF0
-                lea     word_80FF2(pc),a1
+                bne.s   DEZFinal_BeamRangeCheckReturn
+                lea     DEZFinal_BeamContactBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_80FF0
+                beq.s   DEZFinal_BeamRangeCheckReturn
                 tst.w   d0
-                beq.s   loc_80FD6
+                beq.s   DEZFinal_BeamCheckPackedP2
                 movea.w d0,a1
                 tst.b   invulnerability_timer(a1)
-                bne.s   loc_80FD6
+                bne.s   DEZFinal_BeamCheckPackedP2
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.s   loc_80FD6
+                bne.s   DEZFinal_BeamCheckPackedP2
                 move.l  d0,-(sp)
                 jsr     HurtCharacter_Directly(pc)
                 move.l  (sp)+,d0
 
-loc_80FD6:
+DEZFinal_BeamCheckPackedP2:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_80FF0
+                beq.s   DEZFinal_BeamRangeCheckReturn
                 movea.w d0,a1
                 tst.b   invulnerability_timer(a1)
-                bne.s   locret_80FF0
+                bne.s   DEZFinal_BeamRangeCheckReturn
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.s   locret_80FF0
+                bne.s   DEZFinal_BeamRangeCheckReturn
                 jsr     HurtCharacter_Directly(pc)
 
-locret_80FF0:
+DEZFinal_BeamRangeCheckReturn:
                 rts
 ; End of function HurtPlayersInsideDEZFinalBeamActiveFrame
 
 ; ---------------------------------------------------------------------------
-word_80FF2:
+DEZFinal_BeamContactBounds:
                 dc.w    0,  $120,  -$20,   $40
 
 ; =============== S U B R O U T I N E =======================================
@@ -196,11 +197,11 @@ word_80FF2:
 DEZFinal_TryChargeParticleEvery4:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   locret_8100C
-                lea     ChildObjDat_8132A(pc),a2
+                bne.s   DEZFinal_ChargeParticleSpawnReturn
+                lea     DEZFinalChargeParticle_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-locret_8100C:
+DEZFinal_ChargeParticleSpawnReturn:
                 rts
 ; End of function DEZFinal_TryChargeParticleEvery4
 
@@ -237,16 +238,16 @@ DEZFinalChild_SetPosFromParent:
 ; Pause the fireball countdown while the attack-inhibit bit is set
 DEZFinal_TryTimedFireball:
                 btst    #2,$38(a0)
-                bne.s   locret_8106C
+                bne.s   DEZFinal_FireballSpawnReturn
                 subq.w  #1,$1C(a0)
-                bpl.s   locret_8106C
+                bpl.s   DEZFinal_FireballSpawnReturn
                 move.w  #$140,$1C(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_8106C
+                bne.s   DEZFinal_FireballSpawnReturn
                 move.l  #Obj_DEZ3_Boss_Fireball,(a1)
                 move.w  a0,parent3(a1)
 
-locret_8106C:
+DEZFinal_FireballSpawnReturn:
                 rts
 ; End of function DEZFinal_TryTimedFireball
 
@@ -255,8 +256,8 @@ locret_8106C:
 ; Allocate after the current slot and copy its root attachment, position and trajectory offsets
 DEZFireball_SpawnFlameSegment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_8109E
-                move.l  #loc_80A3A,(a1)
+                bne.s   DEZFinal_FlameCloneSpawnReturn
+                move.l  #DEZFinal_FlameDispatchAndDraw,(a1)
                 move.w  parent3(a0),parent3(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -264,18 +265,18 @@ DEZFireball_SpawnFlameSegment:
                 move.w  $44(a0),$44(a1)
                 move.b  d2,subtype(a1)
 
-locret_8109E:
+DEZFinal_FlameCloneSpawnReturn:
                 rts
 ; End of function DEZFireball_SpawnFlameSegment
 
 ; ---------------------------------------------------------------------------
 
-loc_810A0:
+DEZFinal_LockBattleCameraAtThreshold:
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  #$520,d1
                 cmp.w   d1,d0
-                blo.w   locret_80C88
+                blo.w   DEZFinalAttackActors_SharedReturn
                 bset    #2,(_unkFAB8).w
                 move.w  d1,(Camera_min_X_pos).w
                 addi.w  #$A0,d1
@@ -283,23 +284,23 @@ loc_810A0:
                 move.w  #$2C0,(Events_bg+$00).w
                 addi.w  #$100,x_pos(a0)
 
-loc_810D0:
+DEZFinal_DeleteCurrentActor:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 DEZArmSegment_ContinueFlashOrBreak:
                 move.b  collision_property(a0),d0
-                beq.s   loc_81140
+                beq.s   DEZFinal_ArmBeginDefeatWait
                 tst.b   $20(a0)
-                beq.s   locret_810F8
+                beq.s   DEZFinal_ArmFlashReturn
                 bsr.w   SetDEZArmSegmentFlashFrameFromParent
                 subq.b  #1,$20(a0)
-                bne.s   locret_810F8
+                bne.s   DEZFinal_ArmFlashReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_810F8:
+DEZFinal_ArmFlashReturn:
                 rts
 ; End of function DEZArmSegment_ContinueFlashOrBreak
 
@@ -309,37 +310,37 @@ RecognizeDEZArmSegmentHitAtImpactFrame:
                 cmpi.b  #4,mapping_frame(a0)
                 bne.s   DEZArmSegment_ContinueFlashOrBreak
                 tst.b   collision_flags(a0)
-                bne.s   locret_8113E
+                bne.s   DEZFinal_ArmHitUpdateReturn
                 move.b  collision_property(a0),d0
-                beq.s   loc_81140
+                beq.s   DEZFinal_ArmBeginDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_81128
+                bne.s   DEZFinal_ArmTickHitRecovery
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
 
-loc_81128:
+DEZFinal_ArmTickHitRecovery:
                 bsr.w   SetDEZArmSegmentFlashFrameFromParent
                 subq.b  #1,$20(a0)
-                bne.s   locret_8113E
+                bne.s   DEZFinal_ArmHitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_8113E:
+DEZFinal_ArmHitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81140:
-                move.l  #loc_80D64,(a0)
+DEZFinal_ArmBeginDefeatWait:
+                move.l  #DEZFinal_SegmentFollowBeforeBreakup,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_81168
+                bne.s   DEZFinal_ArmSignalDestroyedSegment
                 move.b  #6,subtype(a1)
 
-loc_81168:
+DEZFinal_ArmSignalDestroyedSegment:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
@@ -354,12 +355,12 @@ SetDEZArmSegmentFlashFrameFromParent:
                 movea.w parent3(a0),a1
                 move.b  mapping_frame(a1),d0
                 btst    #0,$20(a0)
-                beq.s   loc_81190
+                beq.s   DEZFinal_ArmSelectFlashFrame
                 move.b  d0,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81190:
+DEZFinal_ArmSelectFlashFrame:
                 addi.b  #$13,d0
                 move.b  d0,mapping_frame(a0)
                 rts
@@ -370,51 +371,51 @@ loc_81190:
 ; Bounce the hitter and flash five colors. At zero HP, signal the world controller's defeat
 DEZFinalHead_ProcessHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_81204
+                bne.s   DEZFinal_HeadHitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_81206
+                beq.s   DEZFinal_HeadBeginDefeatExplosion
                 tst.b   $20(a0)
-                bne.s   loc_811DA
+                bne.s   DEZFinal_HeadHitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 lea     (Player_1).w,a1
                 tst.b   $1C(a0)
-                beq.s   loc_811C8
+                beq.s   DEZFinal_HeadSetPlayerBounceSpeed
                 lea     (Player_2).w,a1
 
-loc_811C8:
+DEZFinal_HeadSetPlayerBounceSpeed:
                 move.w  #$600,d0
                 move.w  d0,ground_vel(a1)
                 move.w  d0,x_vel(a1)
                 move.w  #-$300,y_vel(a1)
 
-loc_811DA:
+DEZFinal_HeadHitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_811EE
+                bne.s   DEZFinal_HeadHitCopyColorsAndTick
                 addi.w  #2*5,d0
 
-loc_811EE:
+DEZFinal_HeadHitCopyColorsAndTick:
                 bsr.w   DEZFinalHead_CopyPalette5
                 subq.b  #1,$20(a0)
-                bne.s   locret_81204
+                bne.s   DEZFinal_HeadHitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_81204:
+DEZFinal_HeadHitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81206:
-                move.l  #loc_80584,(a0)
+DEZFinal_HeadBeginDefeatExplosion:
+                move.l  #DEZFinal_DefeatedHeadClearBeam,(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_81220
+                bne.s   DEZFinal_HeadSignalWorldDefeat
                 move.b  #4,subtype(a1)
 
-loc_81220:
+DEZFinal_HeadSignalWorldDefeat:
                 movea.w parent3(a0),a1
                 bset    #7,status(a1)
                 jmp     (BossDefeated_StopTimer).l
@@ -424,15 +425,15 @@ loc_81220:
 
 ; d0.w selects the source byte offset for the five destinations in palette line 2
 DEZFinalHead_CopyPalette5:
-                lea     word_8123E(pc),a1
-                lea     word_81248(pc,d0.w),a2
+                lea     DEZFinalHeadHit_PaletteDestinationWords(pc),a1
+                lea     DEZFinal_HeadHitPaletteColorRows(pc,d0.w),a2
                 jmp     (CopyWordData_5).l
 ; End of function DEZFinalHead_CopyPalette5
 
 ; ---------------------------------------------------------------------------
-word_8123E:
+DEZFinalHeadHit_PaletteDestinationWords:
                 dc.w    Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_81248:
+DEZFinal_HeadHitPaletteColorRows:
                 dc.w    $888,  $666,  $444,  $222,     0
                 dc.w    $EEE,  $EEE,  $CCC,  $AAA,  $888
 
@@ -441,20 +442,20 @@ word_81248:
 ; Continue an existing flash while the head is unexposed. Zero HP still enters defeat
 DEZFinalHead_TickFlashOrDefeat:
                 tst.b   collision_property(a0)
-                beq.s   loc_81206
+                beq.s   DEZFinal_HeadBeginDefeatExplosion
                 tst.b   $20(a0)
-                beq.s   locret_81284
+                beq.s   DEZFinal_InactiveHeadFlashReturn
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_81276
+                bne.s   DEZFinal_InactiveHeadTickFlash
                 addi.w  #2*5,d0
 
-loc_81276:
+DEZFinal_InactiveHeadTickFlash:
                 bsr.s   DEZFinalHead_CopyPalette5
                 subq.b  #1,$20(a0)
-                bne.s   locret_81284
+                bne.s   DEZFinal_InactiveHeadFlashReturn
                 bclr    #6,status(a0)
 
-locret_81284:
+DEZFinal_InactiveHeadFlashReturn:
                 rts
 ; End of function DEZFinalHead_TickFlashOrDefeat

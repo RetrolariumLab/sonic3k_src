@@ -284,23 +284,23 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
-      "scope": "word_813AA",
+      "scope": "DEZMasterEmerald_TwoSlotPalettePrograms",
       "first_line": 146,
       "last_line": 173,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 116,
-      "declarations_sha256": "5ef452f27f632b6b8781bc6d907b9dfd7ffb21fa7b7b90f0cc3913100cef34ba",
+      "declarations_sha256": "5a89d2c30f67fde4bdba5d9ac4fea99bf3c19b6dffdd7d0235810bbd2f9896af",
       "external_symbols": ["Normal_palette", "Normal_palette_line_3"],
       "file_frames": []
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
-      "scope": "word_8141E",
+      "scope": "DDZMasterEmerald_TwoSlotPalettePrograms",
       "first_line": 175,
       "last_line": 202,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 116,
-      "declarations_sha256": "478ed61107049d528fa0c01c41dbba2f6d9efa6423b85413f0a3d979fb7885e0",
+      "declarations_sha256": "5540c2867b06a3669bc08d82bd0adc664d12444ec07fbef6ebaf645eaf800e1d",
       "external_symbols": ["Normal_palette", "Normal_palette_line_4"],
       "file_frames": []
     },

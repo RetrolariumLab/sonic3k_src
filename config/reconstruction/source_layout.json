@@ -15570,7 +15570,7 @@
       "responsibility": "Death Egg final-boss attached control actors, damage flags, movement and parent synchronization.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 192,
+      "physical_lines": 193,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15635,7 +15635,7 @@
       "responsibility": "Death Egg final-boss body and arm actors, collision states, animation and parent-relative motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 225,
+      "physical_lines": 226,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15670,7 +15670,7 @@
       "responsibility": "Death Egg final-boss escape ship state, defeat explosions, debris actors and end-of-scene progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 288,
+      "physical_lines": 289,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15682,7 +15682,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_80426",
+          "name": "DEZFinal_InitEscapeDebris",
           "kind": "terminal-tail",
           "reason": "Close the final moving debris callback, private indexed placement table and conditional offscreen drawing tail after the original ship sequence returns.",
           "origin_first_line": 9456,
@@ -15715,7 +15715,7 @@
       "responsibility": "Death Egg final-boss fireball state, trajectory and player interaction.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 103,
+      "physical_lines": 104,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15750,7 +15750,7 @@
       "responsibility": "Death Egg final-boss movement, collision, palette, parent-state and damage helpers with private lookup constants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 460,
+      "physical_lines": 461,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15822,7 +15822,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_800DE",
+          "name": "DEZFinal_LateHopCheckDefeatAndFire",
           "kind": "terminal-tail",
           "reason": "Close the final stage motion and scene transition callbacks after the preceding original independent return, ending at the unconditional object deletion dispatch.",
           "origin_first_line": 9175,

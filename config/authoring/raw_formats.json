@@ -161,7 +161,7 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/battle_control.s",
-      "sha256": "f3495fc28a12f9b28dfa50a5413820c319f98a205094a3f94e274f464103e66f"
+      "sha256": "66779d8d01ac407edf225c5b2986231b5f89b8b52da7915178a0105d6204bf45"
     },
     {
       "path": "src/objects/bosses/ddz/sk/missile.s",
@@ -185,19 +185,19 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
-      "sha256": "e53b249478619a3af7ede525c52c30fdcf0d124b5c94be3674d21bb2c96056f8"
+      "sha256": "851ee07ec33a9cae2deaa23cca080071534c26786e0d0100754c29420d266c6f"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
-      "sha256": "85934b102f4ac3c2216f65f9c97ea20a0153c962b1d90eb705ec9d0865d3ee69"
+      "sha256": "79296483a59dad2a95d1740ae9985030ec016f199251ec29613caf40c96d61f0"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
-      "sha256": "1300917e8b92e8b132f31a04e114e2168d128124cb103efb0f7fe61f393376b0"
+      "sha256": "377b163c8f9c5fe2e49f30ae4b454b61cb77f45437cb1538da66a651563b9c7b"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
-      "sha256": "bc2489a8f612fc7b3d0429217f7076f9b2b5c94fb2646aa3b9a1566def333891"
+      "sha256": "2e52293e644192306693f4302fee4c01d66878a52d53e1487bebfd9f4480f666"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
@@ -1958,20 +1958,20 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
-      "symbol": "byte_80AD4",
-      "scope": "byte_80AD4",
+      "symbol": "DEZFinal_FlameParentXYScript",
+      "scope": "DEZFinal_FlameParentXYScript",
       "first_line": 75,
       "last_line": 98,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 78,
-      "declarations_sha256": "9ff1be1c0cd63ed6e072c07beb56d9d4e6b0e331274aae9470e34427eb501a31",
+      "declarations_sha256": "404ff113ad0f5ffa013bfcf0b1b1ce4bf4d2459f0273adb56baea0883e42c117",
       "entries": [
         [0, "delta-frames"],
         [26, "delta-frames"],
         [52, "delta-frames"]
       ],
       "external_symbols": [],
-      "members": ["byte_80AD4", "byte_80AEE", "byte_80B08"],
+      "members": ["DEZFinal_FlameParentXYScript", "DEZFinal_FlameParentXScript", "DEZFinal_FlameFlippedParentXScript"],
       "stored_markers": [
         {
           "offset": 25,
@@ -1992,27 +1992,27 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
-      "symbol": "RawAni_80490",
-      "scope": "RawAni_80490",
-      "first_line": 276,
-      "last_line": 278,
+      "symbol": "DEZFinal_EscapeDebrisFrames",
+      "scope": "DEZFinal_EscapeDebrisFrames",
+      "first_line": 277,
+      "last_line": 279,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "fe1e5f7e96c50699ada5d187c5cb919c6b73fefe3c853ffb4e8795c895cfe94c",
+      "declarations_sha256": "6a441f2aad82ac1ab5e80b4fa828245c9a1b73cd8eaf9246d2369ae3462c8625",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_80490"],
+      "members": ["DEZFinal_EscapeDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
-      "symbol": "byte_8133E",
-      "scope": "byte_8133E",
+      "symbol": "DEZFinalArm_ImpactExtensionRawAnimation",
+      "scope": "DEZFinalArm_ImpactExtensionRawAnimation",
       "first_line": 84,
       "last_line": 144,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 108,
-      "declarations_sha256": "503eced1dae36b496d171a66c7ea6c5438da7772e1963a85b66481104f8f89e9",
+      "declarations_sha256": "91982b848ffda962fb839d04e341588c2d0ee5d7d4c5b2861fd164245d0e076f",
       "entries": [
         [0, "pairs"],
         [11, "pairs"],
@@ -2023,7 +2023,14 @@
         [89, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8133E", "byte_81349", "byte_81354", "byte_8135A", "byte_8138E", "byte_81397"],
+      "members": [
+        "DEZFinalArm_ImpactExtensionRawAnimation",
+        "DEZFinalArm_ImpactRetractionRawAnimation",
+        "DEZFinal_IntroRobotnikRunAnim",
+        "DEZFinal_BeamChargeFlickerAnim",
+        "DEZFinal_ChargeParticleDeleteAnim",
+        "DEZFinal_ActiveBeamAnim"
+      ],
       "stored_markers": []
     },
     {
