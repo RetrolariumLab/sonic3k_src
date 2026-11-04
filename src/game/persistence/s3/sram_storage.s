@@ -7,13 +7,13 @@
 ; Initialize both players with three lives and a 5000-point next-life threshold. Clear round counters
 S3Comp_InitRoundState:
                 move.w  #1,(Competition_mode).w
-                bra.s   loc_B5F8
+                bra.s   S3Sram_ResetPlayerStats
 ; ---------------------------------------------------------------------------
 
 Set_Lives_and_Continues:
                 clr.w   (Competition_mode).w
 
-loc_B5F8:
+S3Sram_ResetPlayerStats:
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
                 moveq   #0,d0
@@ -41,34 +41,34 @@ SRAM_Load:
                 moveq   #bytesToWcnt(SRAM_competition_size),d0
                 move.w  #$4C44,d1                       ; RAM integrity value
                 jsr     Get_From_SRAM(pc)
-                beq.s   loc_B674                        ; If the data read was successful, branch
+                beq.s   S3Sram_LoadAndValidateGameRegion  ; If the data read was successful, branch
                 lea     SaveData_GeneralDefault(pc),a0
                 lea     (Competition_saved_data).w,a1
                 moveq   #bytesToWcnt((Competition_saved_data_end-Competition_saved_data)-2),d0
 
-loc_B66A:
+S3Sram_CopyDefaultCompetitionData:
                 move.w  (a0)+,(a1)+                     ; Reset the general save data to the default
-                dbf     d0,loc_B66A
+                dbf     d0,S3Sram_CopyDefaultCompetitionData
                 jsr     Write_SaveGeneral(pc)           ; Write default data back to SRAM
 
-loc_B674:
+S3Sram_LoadAndValidateGameRegion:
                 lea     (SRAM_S3game).l,a0
                 lea     (SRAM_S3game_backup).l,a1
                 lea     (Saved_data).w,a2
                 moveq   #bytesToWcnt(SRAM_S3game_size),d0
                 move.w  #$4244,d1                       ; RAM integrity value for save game data
                 jsr     Get_From_SRAM(pc)
-                beq.s   loc_B6A4                        ; If the data read was not successful, branch
+                beq.s   S3Sram_ResetMenuSelection       ; If the data read was not successful, branch
                 lea     SaveData_GameDefault(pc),a0
                 lea     (Saved_data).w,a1
                 moveq   #bytesToWcnt((8*6)+2),d0
 
-loc_B69A:
+S3Sram_CopySixEmptySlots:
                 move.w  (a0)+,(a1)+
-                dbf     d0,loc_B69A
+                dbf     d0,S3Sram_CopySixEmptySlots
                 jsr     Write_SaveGame(pc)
 
-loc_B6A4:
+S3Sram_ResetMenuSelection:
                 clr.w   (Dataselect_nosave_player).w
                 move.b  #1,(Dataselect_entry).w
                 rts
@@ -113,18 +113,18 @@ Read_SRAM:
                 movea.l a2,a6
                 move.w  d0,d6
 
-loc_B74A:
+S3Sram_ReadOddBusWords:
                 movep.w 0(a0),d3
                 move.w  d3,(a2)+                        ; Read data from SRAM
                 addq.w  #4,a0
-                dbf     d0,loc_B74A
+                dbf     d0,S3Sram_ReadOddBusWords
                 subq.w  #1,d6
                 bsr.s   Create_SRAMChecksum             ; Get the checksum of the given data
                 cmp.w   (a6),d7                         ; Compare the result
-                bne.s   locret_B762
+                bne.s   S3Sram_ReturnValidationStatus
                 cmp.w   -2(a6),d1                       ; Also compare the data before with the data given in d1
 
-locret_B762:
+S3Sram_ReturnValidationStatus:
                 rts
 ; End of function Read_SRAM
 
@@ -156,17 +156,17 @@ Write_SRAM:
                 movea.l a2,a3
                 move.w  d0,d1
 
-loc_B786:
+S3Sram_WritePrimaryOddBusWords:
                 move.w  (a2)+,d2
                 movep.w d2,0(a0)                        ; Copy data to SRAM
                 addq.w  #4,a0
-                dbf     d0,loc_B786
+                dbf     d0,S3Sram_WritePrimaryOddBusWords
 
-loc_B792:
+S3Sram_WriteBackupOddBusWords:
                 move.w  (a3)+,d2
                 movep.w d2,0(a1)                        ; Copy data to backup SRAM
                 addq.w  #4,a1
-                dbf     d1,loc_B792
+                dbf     d1,S3Sram_WriteBackupOddBusWords
                 rts
 ; End of function Write_SRAM
 
@@ -204,12 +204,12 @@ Write_SaveGame:
 
 SaveGame:
                 tst.b   (Apparent_act).w
-                beq.s   locret_B80E
+                beq.s   S3Sram_ProgressSaveReturn
                 move.l  (Save_pointer).w,d0
-                beq.s   loc_B80A                        ; If not playing on a save file, get out
+                beq.s   S3Sram_ClearGlobalSpecialRingFlags  ; If not playing on a save file, get out
                 movea.l d0,a1
                 cmpi.b  #6,3(a1)
-                bhi.s   loc_B80A
+                bhi.s   S3Sram_ClearGlobalSpecialRingFlags
                 moveq   #0,d0
                 move.b  (Apparent_zone).w,d0
                 move.b  SaveGame_NextLevel(pc,d0.w),3(a1)
@@ -217,10 +217,10 @@ SaveGame:
                 clr.b   1(a1)
                 jsr     Write_SaveGame(pc)
 
-loc_B80A:
+S3Sram_ClearGlobalSpecialRingFlags:
                 clr.l   (Collected_special_ring_array).w  ; Clear special stage ring collection RAM
 
-locret_B80E:
+S3Sram_ProgressSaveReturn:
                 rts
 ; End of function SaveGame
 
@@ -233,7 +233,7 @@ SaveGame_NextLevel:
 
 SaveGame_SpecialStage:
                 move.l  (Save_pointer).w,d0
-                beq.s   locret_B858
+                beq.s   S3Sram_SpecialStageSaveReturn
                 movea.l d0,a1                           ; Get address of save slot
                 move.b  (Current_special_stage).w,4(a1)
                 move.b  (Chaos_emerald_count+1).w,5(a1)
@@ -241,14 +241,15 @@ SaveGame_SpecialStage:
                 moveq   #0,d0
                 moveq   #7-1,d1
 
-loc_B834:
+S3Sram_PackEmeraldPresence:
                 tst.b   (a2)+
-                beq.s   loc_B83C
+                beq.s   S3Sram_ShiftPackedEmeraldBit
                 ori.w   #1,d0
 
-loc_B83C:
+; The seven stored emerald flags occupy bits 7 through 1
+S3Sram_ShiftPackedEmeraldBit:
                 lsl.b   #1,d0
-                dbf     d1,loc_B834
+                dbf     d1,S3Sram_PackEmeraldPresence
                 move.b  d0,6(a1)                        ; Compress emerald collection RAM and put it into Save Game
                 move.l  (Collected_special_ring_array).w,d0  ; Special stage entry ring memory is copied as well
                 move.b  d0,7(a1)
@@ -257,12 +258,12 @@ loc_B83C:
                 jmp     Write_SaveGame(pc)
 ; ---------------------------------------------------------------------------
 
-locret_B858:
+S3Sram_SpecialStageSaveReturn:
                 rts
 ; End of function SaveGame_SpecialStage
 
 ; ---------------------------------------------------------------------------
 
-locret_B85A:
+S3Sram_SaveMenuVBlankReturn:
                 rts
 ; ---------------------------------------------------------------------------

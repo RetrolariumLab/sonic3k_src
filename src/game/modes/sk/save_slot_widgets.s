@@ -7,153 +7,153 @@ Obj_SaveScreen_Selector:
                 moveq   #0,d2
                 move.b  (Dataselect_entry).w,d2
                 subq.w  #1,d2
-                bcs.s   loc_D1E6
+                bcs.s   SKSaveSlot_SetInitialCursorAndScroll
 
-loc_D1C6:
+SKSaveSlot_Begin13CursorSubsteps:
                 moveq   #$D-1,d4
 
-loc_D1C8:
+SKSaveSlot_AdvancePreselectedCursor:
                 addq.w  #8,d0
                 cmpi.w  #$120,d0
-                bls.s   loc_D1DE
+                bls.s   SKSaveSlot_RepeatInitialCursorSteps
                 subq.w  #8,d0
                 addq.w  #8,d1
                 cmpi.w  #$2C0,d1
-                bls.s   loc_D1DE
+                bls.s   SKSaveSlot_RepeatInitialCursorSteps
                 subq.w  #8,d1
                 addq.w  #8,d0
 
-loc_D1DE:
-                dbf     d4,loc_D1C8
-                dbf     d2,loc_D1C6
+SKSaveSlot_RepeatInitialCursorSteps:
+                dbf     d4,SKSaveSlot_AdvancePreselectedCursor
+                dbf     d2,SKSaveSlot_Begin13CursorSubsteps
 
-loc_D1E6:
+SKSaveSlot_SetInitialCursorAndScroll:
                 move.w  d0,$12(a0)
                 move.w  d1,(Camera_X_pos_copy).w
                 neg.w   d1
                 move.w  d1,(H_scroll_buffer+2).w
-                move.l  #loc_D1FA,(a0)
+                move.l  #SKSaveSlot_CheckTitleExitOnB,(a0)
 
-loc_D1FA:
+SKSaveSlot_CheckTitleExitOnB:
                 tst.w   (Events_bg+$12).w
-                bne.s   loc_D212
+                bne.s   SKSaveSlot_GateSelectorInput
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_D212
+                beq.s   SKSaveSlot_GateSelectorInput
                 move.b  #GameMode_TitleScreen,(Game_mode).w
-                bra.w   loc_D2CE
+                bra.w   SKSaveSlot_SelectEndpointCursorOffset
 ; ---------------------------------------------------------------------------
 
-loc_D212:
+SKSaveSlot_GateSelectorInput:
                 tst.w   (Events_bg+$10).w
-                bne.w   loc_D2CE
+                bne.w   SKSaveSlot_SelectEndpointCursorOffset
                 tst.w   $30(a0)
-                bne.s   loc_D28A
+                bne.s   SKSaveSlot_StepRightThroughScroll
                 moveq   #0,d0
                 btst    #button_left,(Ctrl_1_pressed).w
-                beq.s   loc_D254
+                beq.s   SKSaveSlot_IncrementChoiceWithinBounds
                 tst.w   (Events_bg+$12).w
-                beq.s   loc_D238
+                beq.s   SKSaveSlot_DecrementChoiceAndSelectSound
                 cmpi.b  #1,(Dataselect_entry).w
-                beq.s   loc_D254
+                beq.s   SKSaveSlot_IncrementChoiceWithinBounds
 
-loc_D238:
+SKSaveSlot_DecrementChoiceAndSelectSound:
                 tst.b   (Dataselect_entry).w
-                beq.s   loc_D254
+                beq.s   SKSaveSlot_IncrementChoiceWithinBounds
                 subq.b  #1,(Dataselect_entry).w
                 moveq   #signextendB(sfx_SlotMachine),d0
                 tst.w   (Events_bg+$12).w
-                beq.s   loc_D24C
+                beq.s   SKSaveSlot_PlayLeftSoundAndSetStep
                 moveq   #signextendB(sfx_SmallBumpers),d0
 
-loc_D24C:
+SKSaveSlot_PlayLeftSoundAndSetStep:
                 jsr     (Play_SFX).l
                 moveq   #-8,d0
 
-loc_D254:
+SKSaveSlot_IncrementChoiceWithinBounds:
                 btst    #button_right,(Ctrl_1_pressed).w
-                beq.s   loc_D27A
+                beq.s   SKSaveSlot_Start13StepCursorMove
                 cmpi.b  #9,(Dataselect_entry).w
-                beq.s   loc_D27A
+                beq.s   SKSaveSlot_Start13StepCursorMove
                 addq.b  #1,(Dataselect_entry).w
                 moveq   #signextendB(sfx_SlotMachine),d0
                 tst.w   (Events_bg+$12).w
-                beq.s   loc_D272
+                beq.s   SKSaveSlot_PlayRightSoundAndSetStep
                 moveq   #signextendB(sfx_SmallBumpers),d0
 
-loc_D272:
+SKSaveSlot_PlayRightSoundAndSetStep:
                 jsr     (Play_SFX).l
                 moveq   #8,d0
 
-loc_D27A:
+SKSaveSlot_Start13StepCursorMove:
                 move.w  d0,$2E(a0)
-                beq.s   loc_D288
+                beq.s   SKSaveSlot_DrawSelectorWithoutStep
                 move.w  #$D,$30(a0)
-                bra.s   loc_D28A
+                bra.s   SKSaveSlot_StepRightThroughScroll
 ; ---------------------------------------------------------------------------
 
-loc_D288:
-                bra.s   loc_D2CE
+SKSaveSlot_DrawSelectorWithoutStep:
+                bra.s   SKSaveSlot_SelectEndpointCursorOffset
 ; ---------------------------------------------------------------------------
 
-loc_D28A:
+SKSaveSlot_StepRightThroughScroll:
                 move.w  $12(a0),d0
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  $2E(a0),d2
-                bmi.s   loc_D2B0
+                bmi.s   SKSaveSlot_StepLeftThroughScroll
                 add.w   d2,d0
                 cmpi.w  #$120,d0
-                bls.s   loc_D2C2
+                bls.s   SKSaveSlot_StoreMoveAndTickRemaining
                 sub.w   d2,d0
                 add.w   d2,d1
                 cmpi.w  #$2C0,d1
-                bls.s   loc_D2C2
+                bls.s   SKSaveSlot_StoreMoveAndTickRemaining
                 sub.w   d2,d1
                 add.w   d2,d0
-                bra.s   loc_D2C2
+                bra.s   SKSaveSlot_StoreMoveAndTickRemaining
 ; ---------------------------------------------------------------------------
 
-loc_D2B0:
+SKSaveSlot_StepLeftThroughScroll:
                 add.w   d2,d0
                 cmpi.w  #$120,d0
-                bhs.s   loc_D2C2
+                bhs.s   SKSaveSlot_StoreMoveAndTickRemaining
                 sub.w   d2,d0
                 add.w   d2,d1
-                bpl.s   loc_D2C2
+                bpl.s   SKSaveSlot_StoreMoveAndTickRemaining
                 sub.w   d2,d1
                 add.w   d2,d0
 
-loc_D2C2:
+SKSaveSlot_StoreMoveAndTickRemaining:
                 move.w  d0,$12(a0)
                 move.w  d1,(Camera_X_pos_copy).w
                 subq.w  #1,$30(a0)
 
-loc_D2CE:
+SKSaveSlot_SelectEndpointCursorOffset:
                 moveq   #8,d2
                 move.b  (Dataselect_entry).w,d1
-                beq.s   loc_D2E0
+                beq.s   SKSaveSlot_PositionCursorAndSelectFrame
                 neg.w   d2
                 cmpi.b  #9,d1
-                beq.s   loc_D2E0
+                beq.s   SKSaveSlot_PositionCursorAndSelectFrame
                 moveq   #0,d2
 
-loc_D2E0:
+SKSaveSlot_PositionCursorAndSelectFrame:
                 add.w   $12(a0),d2
                 move.w  d2,x_pos(a0)
                 moveq   #2,d0
                 cmpi.w  #$F0,d2
-                blo.s   loc_D2F8
+                blo.s   SKSaveSlot_StoreCursorFrameAndBlink
                 cmpi.w  #$148,d2
-                bhi.s   loc_D2F8
+                bhi.s   SKSaveSlot_StoreCursorFrameAndBlink
                 moveq   #1,d0
 
-loc_D2F8:
+SKSaveSlot_StoreCursorFrameAndBlink:
                 move.b  d0,mapping_frame(a0)
                 btst    #2,(Level_frame_counter+1).w
-                beq.s   locret_D30A
+                beq.s   SKSaveSlot_InvisibleCursorReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_D30A:
+SKSaveSlot_InvisibleCursorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -163,13 +163,13 @@ Obj_SaveScreen_NoSave_Slot:
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
                 tst.b   (Dataselect_entry).w
-                bne.s   loc_D396
+                bne.s   SKSaveSlot_ClearNoSaveChildCount
                 move.w  (Player_2+object_control).w,d0
                 or.w    (Events_bg+$12).w,d0
-                bne.s   loc_D396
+                bne.s   SKSaveSlot_ClearNoSaveChildCount
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_D376
+                beq.s   SKSaveSlot_CycleNoSaveChoiceAndBlink
                 move.b  #GameMode_Level,(Game_mode).w
                 move.w  (Dataselect_nosave_player).w,(Player_option).w
                 clr.w   (Current_zone_and_act).w
@@ -186,7 +186,7 @@ Obj_SaveScreen_NoSave_Slot:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_D376:
+SKSaveSlot_CycleNoSaveChoiceAndBlink:
                 move.w  (Dataselect_nosave_player).w,d0
                 jsr     SKSave_TryCycleNewGameCharacter(pc)
                 move.w  d0,(Dataselect_nosave_player).w
@@ -194,22 +194,22 @@ loc_D376:
                 move.b  d0,mapping_frame(a0)
                 move.w  #1,mainspr_childsprites(a0)
                 btst    #4,(Level_frame_counter+1).w
-                bne.s   loc_D39A
+                bne.s   SKSaveSlot_DrawNoSaveChildren
 
-loc_D396:
+SKSaveSlot_ClearNoSaveChildCount:
                 clr.w   mainspr_childsprites(a0)
 
-loc_D39A:
+SKSaveSlot_DrawNoSaveChildren:
                 bra.w   Set_ChildSprites
 ; ---------------------------------------------------------------------------
 
 Obj_SaveScreen_Save_Slot:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_D3B0
+                bne.s   SKSaveSlot_BindTenByteSaveRecord
                 move.l  #Obj_SaveScreen_Emeralds,(a1)
                 move.w  a0,parent2(a1)
 
-loc_D3B0:
+SKSaveSlot_BindTenByteSaveRecord:
                 moveq   #0,d0
                 move.b  $2E(a0),d0
                 mulu.w  #$A,d0
@@ -231,21 +231,21 @@ loc_D3B0:
                 move.b  d1,$3C(a0)
                 move.b  d2,$3D(a0)
                 tst.b   9(a1)
-                bne.s   loc_D41A
+                bne.s   SKSaveSlot_CacheLivesAndContinues
                 cmpi.b  #3,8(a1)
-                bhs.s   loc_D41A
+                bhs.s   SKSaveSlot_CacheLivesAndContinues
                 move.b  #3,8(a1)
                 move.l  a1,-(sp)
                 st      (SRAM_mask_interrupts_flag).w
                 jsr     Write_SaveGame(pc)
                 movea.l (sp)+,a1
 
-loc_D41A:
+SKSaveSlot_CacheLivesAndContinues:
                 move.b  8(a1),$3E(a0)
                 move.b  9(a1),$3F(a0)
-                move.l  #loc_D42C,(a0)
+                move.l  #SKSaveSlot_RefreshSlotAndCheckSelection,(a0)
 
-loc_D42C:
+SKSaveSlot_RefreshSlotAndCheckSelection:
                 clr.w   mainspr_childsprites(a0)
                 movea.l $30(a0),a1
                 move.b  (Dataselect_entry).w,d0
@@ -255,7 +255,7 @@ loc_D42C:
                 move.b  3(a1),$37(a0)
                 clr.w   $38(a0)
 
-loc_D44A:
+SKSaveSlot_DrawCharacterChildFrame:
                 move.w  $34(a0),d0
                 addq.w  #4,d0
                 move.b  d0,mapping_frame(a0)
@@ -264,114 +264,114 @@ loc_D44A:
 
 Load_Level_Icons:
                 tst.b   (a1)
-                bmi.w   loc_D5FE
+                bmi.w   SKSaveSlot_ConfirmOrEditEmptySlot
                 move.w  $36(a0),d1
                 jsr     Load_Icon_Art(pc)
                 move.b  #$17,sub3_mapframe(a0)
                 move.w  $36(a0),d1
                 cmp.b   $3A(a0),d1
-                bne.s   loc_D4A4
+                bne.s   SKSaveSlot_LatchCompletedProgressChoice
                 move.b  $3B(a0),d0
-                beq.s   loc_D4A4
+                beq.s   SKSaveSlot_LatchCompletedProgressChoice
                 addq.b  #1,sub3_mapframe(a0)
                 cmpi.b  #1,d0
-                beq.s   loc_D496
+                beq.s   SKSaveSlot_UseTailsOrKnucklesFinishCard
                 addq.b  #1,sub3_mapframe(a0)
                 cmpi.b  #2,d0
-                beq.s   loc_D496
+                beq.s   SKSaveSlot_UseTailsOrKnucklesFinishCard
                 addq.b  #2,sub3_mapframe(a0)
-                bra.s   loc_D4A4
+                bra.s   SKSaveSlot_LatchCompletedProgressChoice
 ; ---------------------------------------------------------------------------
 
-loc_D496:
+SKSaveSlot_UseTailsOrKnucklesFinishCard:
                 cmpi.w  #1,$34(a0)
-                bls.s   loc_D4A4
+                bls.s   SKSaveSlot_LatchCompletedProgressChoice
                 move.b  #$23,sub3_mapframe(a0)
 
-loc_D4A4:
+SKSaveSlot_LatchCompletedProgressChoice:
                 tst.w   $38(a0)
-                bne.s   loc_D4B6
+                bne.s   SKSaveSlot_GateProgressSelectionInput
                 tst.b   $3B(a0)
-                beq.w   loc_D534
+                beq.w   SKSaveSlot_CheckUnlatchedProgressDraw
                 st      $38(a0)
 
-loc_D4B6:
+SKSaveSlot_GateProgressSelectionInput:
                 tst.w   (Player_2+object_control).w
-                bne.s   loc_D44A
+                bne.s   SKSaveSlot_DrawCharacterChildFrame
                 tst.w   (Events_bg+$12).w
-                beq.s   loc_D4D0
+                beq.s   SKSaveSlot_SelectProgressCeiling
                 clr.b   sub2_mapframe(a0)
                 move.w  #2,mainspr_childsprites(a0)
-                bra.w   loc_D44A
+                bra.w   SKSaveSlot_DrawCharacterChildFrame
 ; ---------------------------------------------------------------------------
 
-loc_D4D0:
+SKSaveSlot_SelectProgressCeiling:
                 moveq   #$B,d6
                 cmpi.w  #3,$34(a0)
-                beq.s   loc_D4EE
+                beq.s   SKSaveSlot_DecrementProgressOrWrap
                 moveq   #$C,d6
                 cmpi.w  #2,$34(a0)
-                beq.s   loc_D4EE
+                beq.s   SKSaveSlot_DecrementProgressOrWrap
                 cmpi.b  #2,$3B(a0)
-                blo.s   loc_D4EE
+                blo.s   SKSaveSlot_DecrementProgressOrWrap
                 moveq   #$D,d6
 
-loc_D4EE:
+SKSaveSlot_DecrementProgressOrWrap:
                 moveq   #0,d2
                 move.w  $36(a0),d1
                 move.b  (Ctrl_1_pressed).w,d0
                 btst    #button_down,d0
-                beq.s   loc_D508
+                beq.s   SKSaveSlot_IncrementProgressOrWrap
                 moveq   #signextendB(sfx_Switch),d2
                 subq.w  #1,d1
-                bpl.s   loc_D518
+                bpl.s   SKSaveSlot_StoreProgressAndBlinkMarker
                 move.w  d6,d1
-                bra.s   loc_D518
+                bra.s   SKSaveSlot_StoreProgressAndBlinkMarker
 ; ---------------------------------------------------------------------------
 
-loc_D508:
+SKSaveSlot_IncrementProgressOrWrap:
                 btst    #button_up,d0
-                beq.s   loc_D518
+                beq.s   SKSaveSlot_StoreProgressAndBlinkMarker
                 moveq   #signextendB(sfx_Switch),d2
                 addq.w  #1,d1
                 cmp.w   d6,d1
-                bls.s   loc_D518
+                bls.s   SKSaveSlot_StoreProgressAndBlinkMarker
                 moveq   #0,d1
 
-loc_D518:
+SKSaveSlot_StoreProgressAndBlinkMarker:
                 move.w  d1,$36(a0)
                 move.l  d2,d0
                 jsr     (Play_SFX).l
                 move.b  #$1A,sub2_mapframe(a0)
                 btst    #4,(Level_frame_counter+1).w
-                beq.s   loc_D53C
-                bra.s   loc_D540
+                beq.s   SKSaveSlot_ClearProgressMarkerFrame
+                bra.s   SKSaveSlot_ConfirmProgressBelowSaved
 ; ---------------------------------------------------------------------------
 
-loc_D534:
+SKSaveSlot_CheckUnlatchedProgressDraw:
                 tst.w   (Player_2+object_control).w
-                bne.w   loc_D44A
+                bne.w   SKSaveSlot_DrawCharacterChildFrame
 
-loc_D53C:
+SKSaveSlot_ClearProgressMarkerFrame:
                 clr.b   sub2_mapframe(a0)
 
-loc_D540:
+SKSaveSlot_ConfirmProgressBelowSaved:
                 move.w  #2,mainspr_childsprites(a0)
                 tst.w   (Events_bg+$12).w
-                bne.w   loc_D44A
+                bne.w   SKSaveSlot_DrawCharacterChildFrame
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.w   loc_D44A
+                beq.w   SKSaveSlot_DrawCharacterChildFrame
                 move.w  4(a1),(Collected_special_ring_array+2).w
                 move.b  3(a1),d0
                 tst.b   $3B(a0)
-                beq.s   loc_D57A
+                beq.s   SKSaveSlot_RestoreProgressAndSavedState
                 move.w  $36(a0),d0
                 cmp.b   $3A(a0),d0
-                bhs.w   loc_D44A
+                bhs.w   SKSaveSlot_DrawCharacterChildFrame
                 clr.l   (Collected_special_ring_array).w
 
-loc_D57A:
+SKSaveSlot_RestoreProgressAndSavedState:
                 jsr     SKSave_MapProgressToZoneAct(pc)
                 move.w  d0,(Current_zone_and_act).w
                 move.w  d0,(Apparent_zone_and_act).w
@@ -390,19 +390,20 @@ loc_D57A:
                 move.l  a1,(Save_pointer).w
                 jsr     (Set_Lives_and_Continues).l
                 move.b  8(a1),d0
-                beq.s   loc_D5CE
+                beq.s   SKSaveSlot_ResetLivesAndConsumeContinue
                 cmpi.b  #3,d0
-                bhs.s   loc_D5DE
+                bhs.s   SKSaveSlot_PersistRestoredStatsAndStart
                 tst.b   9(a1)
-                bne.s   loc_D5DE
+                bne.s   SKSaveSlot_PersistRestoredStatsAndStart
 
-loc_D5CE:
+; Clamp the continue count to zero if the subtraction borrows
+SKSaveSlot_ResetLivesAndConsumeContinue:
                 move.b  #3,8(a1)
                 subq.b  #1,9(a1)
-                bcc.s   loc_D5DE
+                bcc.s   SKSaveSlot_PersistRestoredStatsAndStart
                 clr.b   9(a1)
 
-loc_D5DE:
+SKSaveSlot_PersistRestoredStatsAndStart:
                 move.b  8(a1),(Life_count).w
                 move.b  9(a1),(Continue_count).w
                 st      (SRAM_mask_interrupts_flag).w
@@ -411,15 +412,15 @@ loc_D5DE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_D5FE:
+SKSaveSlot_ConfirmOrEditEmptySlot:
                 move.b  #$F,sub2_mapframe(a0)
                 clr.b   sub3_mapframe(a0)
                 move.w  (Player_2+object_control).w,d0
                 or.w    (Events_bg+$12).w,d0
-                bne.w   loc_D44A
+                bne.w   SKSaveSlot_DrawCharacterChildFrame
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_D67A
+                beq.s   SKSaveSlot_CycleNewFileChoiceAndBlink
                 move.b  #GameMode_Level,(Game_mode).w
                 clr.l   (a1)
                 clr.l   4(a1)
@@ -444,7 +445,7 @@ loc_D5FE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_D67A:
+SKSaveSlot_CycleNewFileChoiceAndBlink:
                 move.w  $34(a0),d0
                 jsr     SKSave_TryCycleNewGameCharacter(pc)
                 move.w  d0,$34(a0)
@@ -465,10 +466,10 @@ Set_ChildSprites:
                 move.w  d0,sub3_x_pos(a0)
                 move.w  d1,sub3_y_pos(a0)
                 cmpi.b  #$1A,sub2_mapframe(a0)
-                bne.s   loc_D6CA
+                bne.s   SKSaveSlot_DrawSlotAndChildren
                 subq.w  #8,sub2_y_pos(a0)
 
-loc_D6CA:
+SKSaveSlot_DrawSlotAndChildren:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -477,35 +478,35 @@ loc_D6CA:
 SKSave_TryCycleNewGameCharacter:
                 moveq   #0,d2
                 tst.w   (Player_2+objoff_30).w
-                bne.s   loc_D6FA
+                bne.s   SKSaveSlot_PlayCharacterChangeSound
                 move.b  (Ctrl_1_pressed).w,d1
                 lsr.w   #1,d1
-                bcc.s   loc_D6EE
+                bcc.s   SKSaveSlot_CycleCharacterBackward
                 moveq   #signextendB(sfx_Switch),d2
                 addq.w  #1,d0
                 cmpi.w  #3,d0
-                bls.s   loc_D6FA
+                bls.s   SKSaveSlot_PlayCharacterChangeSound
                 moveq   #0,d0
-                bra.s   loc_D6FA
+                bra.s   SKSaveSlot_PlayCharacterChangeSound
 ; ---------------------------------------------------------------------------
 
-loc_D6EE:
+SKSaveSlot_CycleCharacterBackward:
                 lsr.w   #1,d1
-                bcc.s   loc_D6FA
+                bcc.s   SKSaveSlot_PlayCharacterChangeSound
                 moveq   #signextendB(sfx_Switch),d2
                 subq.w  #1,d0
-                bpl.s   loc_D6FA
+                bpl.s   SKSaveSlot_PlayCharacterChangeSound
                 moveq   #3,d0
 
-loc_D6FA:
+SKSaveSlot_PlayCharacterChangeSound:
                 tst.w   d2
-                beq.s   locret_D70A
+                beq.s   SKSaveSlot_CharacterChoiceReturn
                 move.l  d0,-(sp)
                 move.l  d2,d0
                 jsr     (Play_SFX).l
                 move.l  (sp)+,d0
 
-locret_D70A:
+SKSaveSlot_CharacterChoiceReturn:
                 rts
 ; End of function SKSave_TryCycleNewGameCharacter
 

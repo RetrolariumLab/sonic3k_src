@@ -18,27 +18,27 @@ Obj_SaveScreen_Emeralds:
                 moveq   #$10,d2
                 moveq   #7-1,d3
 
-loc_D750:
+SKSaveErase_DecodeNextEmeraldState:
                 clr.b   5(a1)
                 moveq   #0,d6
                 rol.w   #2,d4
                 move.w  d4,d5
                 andi.w  #3,d5
-                beq.s   loc_D774
+                beq.s   SKSaveErase_AdvanceEmeraldDecoration
                 cmpi.w  #3,d5
-                bne.s   loc_D768
+                bne.s   SKSaveErase_StoreEmeraldDecorationFrame
                 moveq   #$C,d6
 
-loc_D768:
+SKSaveErase_StoreEmeraldDecorationFrame:
                 add.b   d2,d6
                 move.w  d0,(a1)
                 move.w  d1,sub2_y_pos-sub2_x_pos(a1)
                 move.b  d6,sub2_mapframe-sub2_x_pos(a1)
 
-loc_D774:
+SKSaveErase_AdvanceEmeraldDecoration:
                 addq.w  #1,d2
                 addq.w  #6,a1
-                dbf     d3,loc_D750
+                dbf     d3,SKSaveErase_DecodeNextEmeraldState
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -49,51 +49,51 @@ Obj_SaveScreen_Delete_Save:
 ; ---------------------------------------------------------------------------
 
 SaveScreen_Delete_Save_Index:
-                bra.w   loc_D7A4
+                bra.w   SKSaveErase_InitEraseActor
 ; ---------------------------------------------------------------------------
-                bra.w   loc_D7C0
+                bra.w   SKSaveErase_EnterEraseSelection
 ; ---------------------------------------------------------------------------
-                bra.w   loc_D7EA
+                bra.w   SKSaveErase_AnimateAndLatchNonemptySlot
 ; ---------------------------------------------------------------------------
-                bra.w   loc_D884
+                bra.w   SKSaveErase_ClearSelectionAndTestEnd
 ; ---------------------------------------------------------------------------
-                bra.w   loc_D8A4
+                bra.w   SKSaveErase_WaitForConfirmationMarker
 ; ---------------------------------------------------------------------------
-                bra.w   loc_D8C4
+                bra.w   SKSaveErase_EraseOnLeftOrCancelOnRight
 ; ---------------------------------------------------------------------------
 
-loc_D7A4:
+SKSaveErase_InitEraseActor:
                 move.b  #$40,render_flags(a0)
                 move.b  #$30,width_pixels(a0)
                 move.w  #1,mainspr_childsprites(a0)
                 move.b  #8,sub2_mapframe(a0)
                 addq.b  #4,routine(a0)
 
-loc_D7C0:
+SKSaveErase_EnterEraseSelection:
                 cmpi.b  #9,(Dataselect_entry).w
-                bne.w   loc_D8A0
+                bne.w   SKSaveErase_ProjectActorAndChildren
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.w   loc_D8A0
+                beq.w   SKSaveErase_ProjectActorAndChildren
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 st      (Events_bg+$12).w
                 addq.b  #4,routine(a0)
-                bra.w   loc_D8A0
+                bra.w   SKSaveErase_ProjectActorAndChildren
 ; ---------------------------------------------------------------------------
 
-loc_D7EA:
+SKSaveErase_AnimateAndLatchNonemptySlot:
                 jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
                 jsr     SKSaveErase_AnimateChild(pc)
                 tst.w   (Player_2+object_control).w
-                bne.s   loc_D83C
+                bne.s   SKSaveErase_FollowSelectorX
                 move.b  (Ctrl_1_pressed).w,d0
                 btst    #button_B,d0
-                bne.s   loc_D854
+                bne.s   SKSaveErase_ResetAnimAndBeginReturn
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_D83C
+                beq.s   SKSaveErase_FollowSelectorX
                 cmpi.b  #9,(Dataselect_entry).w
-                beq.s   loc_D854
+                beq.s   SKSaveErase_ResetAnimAndBeginReturn
                 moveq   #0,d0
                 move.b  (Dataselect_entry).w,d0
                 subq.w  #1,d0
@@ -102,13 +102,13 @@ loc_D7EA:
                 move.l  d0,$2E(a0)
                 movea.l d0,a1
                 tst.b   (a1)
-                bmi.s   loc_D854
+                bmi.s   SKSaveErase_ResetAnimAndBeginReturn
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 st      (Events_bg+$10).w
                 addq.b  #8,routine(a0)
 
-loc_D83C:
+SKSaveErase_FollowSelectorX:
                 move.w  (Player_2+x_pos).w,d0
                 move.w  d0,x_pos(a0)
                 move.w  d0,sub2_x_pos(a0)
@@ -116,7 +116,7 @@ loc_D83C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_D854:
+SKSaveErase_ResetAnimAndBeginReturn:
                 clr.b   $24(a0)
                 clr.b   $23(a0)
                 clr.b   $25(a0)
@@ -130,41 +130,42 @@ loc_D854:
                 bra.w   Set_ChildSprites
 ; ---------------------------------------------------------------------------
 
-loc_D884:
+SKSaveErase_ClearSelectionAndTestEnd:
                 clr.w   (Events_bg+$12).w
                 move.w  $12(a0),d0
                 cmpi.w  #$448,d0
-                blo.s   loc_D89A
+                blo.s   SKSaveErase_Step8PixelsTowardEndpoint
                 move.b  #4,routine(a0)
-                bra.s   loc_D8A0
+                bra.s   SKSaveErase_ProjectActorAndChildren
 ; ---------------------------------------------------------------------------
 
-loc_D89A:
+SKSaveErase_Step8PixelsTowardEndpoint:
                 addq.w  #8,d0
                 move.w  d0,$12(a0)
 
-loc_D8A0:
+SKSaveErase_ProjectActorAndChildren:
                 bra.w   Set_ChildSprites
 ; ---------------------------------------------------------------------------
 
-loc_D8A4:
+SKSaveErase_WaitForConfirmationMarker:
                 jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
                 jsr     SKSaveErase_AnimateChild(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
-                bne.s   loc_D8BE
+                bne.s   SKSaveErase_DrawConfirmationPrep
                 move.b  #$C,sub2_mapframe(a0)
                 addq.b  #4,routine(a0)
 
-loc_D8BE:
+SKSaveErase_DrawConfirmationPrep:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_D8C4:
+; Clearing a ten-byte record restores the default lives in its last word
+SKSaveErase_EraseOnLeftOrCancelOnRight:
                 jsr     SKSaveEraseAdvanceMainIconBlinkSequence(pc)
                 btst    #button_right,(Ctrl_1_pressed).w
-                bne.s   loc_D8FE
+                bne.s   SKSaveErase_UnlockAndBeginReturn
                 btst    #button_left,(Ctrl_1_pressed).w
-                beq.s   loc_D90C
+                beq.s   SKSaveErase_DrawWhileAwaitingDirection
                 moveq   #signextendB(sfx_Perfect),d0
                 jsr     (Play_SFX).l
                 movea.l $2E(a0),a1
@@ -175,41 +176,41 @@ loc_D8C4:
                 st      (SRAM_mask_interrupts_flag).w
                 jsr     Write_SaveGame(pc)
 
-loc_D8FE:
+SKSaveErase_UnlockAndBeginReturn:
                 move.b  #8,routine(a0)
                 clr.w   (Events_bg+$10).w
-                bra.w   loc_D854
+                bra.w   SKSaveErase_ResetAnimAndBeginReturn
 ; ---------------------------------------------------------------------------
 
-loc_D90C:
+SKSaveErase_DrawWhileAwaitingDirection:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 SKSaveEraseAdvanceMainIconBlinkSequence:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_D938
+                bpl.s   SKSaveErase_MainBlinkUpdateReturn
                 move.b  #5,anim_frame_timer(a0)
 
-loc_D91E:
+SKSaveErase_AdvanceBlinkFrameOrRestart:
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,anim_frame(a0)
-                move.b  byte_D93A(pc,d0.w),d0
-                bpl.s   loc_D934
+                move.b  SKSaveErase_MainBlinkFrames(pc,d0.w),d0
+                bpl.s   SKSaveErase_StoreEraseBlinkMappingFrame
                 clr.b   anim_frame(a0)
-                bra.s   loc_D91E
+                bra.s   SKSaveErase_AdvanceBlinkFrameOrRestart
 ; ---------------------------------------------------------------------------
 
-loc_D934:
+SKSaveErase_StoreEraseBlinkMappingFrame:
                 move.b  d0,mapping_frame(a0)
 
-locret_D938:
+SKSaveErase_MainBlinkUpdateReturn:
                 rts
 ; End of function SKSaveEraseAdvanceMainIconBlinkSequence
 
 ; ---------------------------------------------------------------------------
-byte_D93A:
+SKSaveErase_MainBlinkFrames:
                 dc.b    $D,  $E,  $D,  $E,  $D,  $E,  $D,  $E,  $D,  $E,  $D,  $D,  $D,  $D, $FF
                 even
 
@@ -218,7 +219,7 @@ byte_D93A:
 ; Cycle frames 8 through 11 once every four calls
 SKSaveErase_AnimateChild:
                 subq.b  #1,$25(a0)
-                bpl.s   locret_D968
+                bpl.s   SKSaveErase_ChildFrameUpdateReturn
                 move.b  #3,$25(a0)
                 addq.b  #1,$28(a0)
                 move.b  $28(a0),d0
@@ -226,7 +227,7 @@ SKSaveErase_AnimateChild:
                 addq.b  #8,d0
                 move.b  d0,sub2_mapframe(a0)
 
-locret_D968:
+SKSaveErase_ChildFrameUpdateReturn:
                 rts
 ; End of function SKSaveErase_AnimateChild
 
@@ -234,32 +235,32 @@ locret_D968:
 
 Load_Icon_Art:
                 cmp.b   $3A(a0),d1
-                bne.s   loc_D9A2
+                bne.s   SKSaveErase_SelectZoneCardUploadDest
                 tst.b   $3B(a0)
-                beq.s   loc_D9A2
+                beq.s   SKSaveErase_SelectZoneCardUploadDest
                 cmpi.w  #1,$34(a0)
-                bls.s   loc_D9C8
+                bls.s   SKSaveErase_SelectCompletedCardPalette
                 cmpi.b  #3,$3B(a0)
-                beq.s   loc_D9C8
+                beq.s   SKSaveErase_SelectCompletedCardPalette
                 moveq   #$E,d1
                 cmpi.w  #3,$34(a0)
-                beq.s   loc_D992
+                beq.s   SKSaveErase_SelectCompletedPortrait
                 addq.w  #2,d1
 
-loc_D992:
+SKSaveErase_SelectCompletedPortrait:
                 cmpi.b  #1,$3B(a0)
-                beq.s   loc_D99C
+                beq.s   SKSaveErase_SelectPortraitUploadDest
                 addq.w  #1,d1
 
-loc_D99C:
+SKSaveErase_SelectPortraitUploadDest:
                 move.w  #tiles_to_bytes(ArtTile_Save_Misc+$27D),d2
-                bra.s   loc_D9A6
+                bra.s   SKSaveErase_QueueCardOrPortraitArt
 ; ---------------------------------------------------------------------------
 
-loc_D9A2:
+SKSaveErase_SelectZoneCardUploadDest:
                 move.w  #tiles_to_bytes(ArtTile_Save_Misc+$31B),d2
 
-loc_D9A6:
+SKSaveErase_QueueCardOrPortraitArt:
                 move.l  a1,-(sp)
                 move.w  d1,-(sp)
                 mulu.w  #$8C0,d1
@@ -269,28 +270,28 @@ loc_D9A6:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a1
                 lea     Pal_Save_ZoneCard1(pc),a2
-                bra.s   loc_D9E2
+                bra.s   SKSaveErase_SelectIndexedCardPalette
 ; ---------------------------------------------------------------------------
 
-loc_D9C8:
+SKSaveErase_SelectCompletedCardPalette:
                 lea     Pal_Save_FinishCard1(pc),a2
                 moveq   #0,d0
                 cmpi.b  #1,$3B(a0)
-                beq.s   loc_D9E2
+                beq.s   SKSaveErase_SelectIndexedCardPalette
                 addq.w  #1,d0
                 cmpi.b  #2,$3B(a0)
-                beq.s   loc_D9E2
+                beq.s   SKSaveErase_SelectIndexedCardPalette
                 addq.w  #1,d0
 
-loc_D9E2:
+SKSaveErase_SelectIndexedCardPalette:
                 lsl.w   #5,d0
                 adda.w  d0,a2
                 lea     (Normal_palette_line_4).w,a3
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
-loc_D9EC:
+SKSaveErase_CopyCardPaletteToNormal:
                 move.l  (a2)+,(a3)+
-                dbf     d0,loc_D9EC
+                dbf     d0,SKSaveErase_CopyCardPaletteToNormal
                 rts
 ; End of function Load_Icon_Art
 
@@ -304,22 +305,22 @@ SKSave_WriteEncodedLabel:
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
 
-loc_DA08:
+SKSaveErase_WriteEncodedLabelOrBlank:
                 move.b  (a1)+,d6
-                bne.s   loc_DA12
+                bne.s   SKSaveErase_EndEncodedLabelOrWriteGlyph
                 move.w  #$8000,(a6)
-                bra.s   loc_DA08
+                bra.s   SKSaveErase_WriteEncodedLabelOrBlank
 ; ---------------------------------------------------------------------------
 
-loc_DA12:
-                bmi.s   locret_DA1C
+SKSaveErase_EndEncodedLabelOrWriteGlyph:
+                bmi.s   SKSaveErase_EncodedLabelWriteReturn
                 move.w  d5,d4
                 add.w   d6,d4
                 move.w  d4,(a6)
-                bra.s   loc_DA08
+                bra.s   SKSaveErase_WriteEncodedLabelOrBlank
 ; ---------------------------------------------------------------------------
 
-locret_DA1C:
+SKSaveErase_EncodedLabelWriteReturn:
                 rts
 ; End of function SKSave_WriteEncodedLabel
 
@@ -332,24 +333,24 @@ SKSave_DecodeEmeraldStates:
                 moveq   #0,d2
                 moveq   #7-1,d3
 
-loc_DA28:
+SKSaveErase_DecodeAndCountEmeraldStates:
                 rol.w   #2,d0
                 move.w  d0,d4
                 andi.w  #3,d4
                 move.b  d4,(a2)+
-                beq.s   loc_DA3E
+                beq.s   SKSaveErase_LatchEmeraldConversion
                 addq.w  #1,d1
                 cmpi.w  #3,d4
-                bne.s   loc_DA3E
+                bne.s   SKSaveErase_LatchEmeraldConversion
                 addq.w  #1,d2
 
-loc_DA3E:
+SKSaveErase_LatchEmeraldConversion:
                 cmpi.w  #2,d4
-                blo.s   loc_DA48
+                blo.s   SKSaveErase_RepeatEmeraldStateDecode
                 st      (Emeralds_converted_flag).w
 
-loc_DA48:
-                dbf     d3,loc_DA28
+SKSaveErase_RepeatEmeraldStateDecode:
+                dbf     d3,SKSaveErase_DecodeAndCountEmeraldStates
                 rts
 ; End of function SKSave_DecodeEmeraldStates
 
@@ -358,24 +359,24 @@ loc_DA48:
 ; Knuckles has a separate Sky Sanctuary Act 2 result for progress index $B
 SKSave_MapProgressToZoneAct:
                 cmpi.w  #3,$34(a0)
-                bne.s   loc_DA62
+                bne.s   SKSaveErase_MapProgressToZoneAct
                 cmpi.b  #$B,d0
-                bne.s   loc_DA62
+                bne.s   SKSaveErase_MapProgressToZoneAct
                 move.w  #$A01,d0
-                bra.s   locret_DA6C
+                bra.s   SKSaveErase_ProgressZoneActReturn
 ; ---------------------------------------------------------------------------
 
-loc_DA62:
+SKSaveErase_MapProgressToZoneAct:
                 andi.w  #$F,d0
                 add.w   d0,d0
-                move.w  LevelList_DA6E(pc,d0.w),d0
+                move.w  SKSaveErase_ProgressToZoneActTable(pc,d0.w),d0
 
-locret_DA6C:
+SKSaveErase_ProgressZoneActReturn:
                 rts
 ; End of function SKSave_MapProgressToZoneAct
 
 ; ---------------------------------------------------------------------------
-LevelList_DA6E:
+SKSaveErase_ProgressToZoneActTable:
                 dc.w    0
                 dc.w    $100
                 dc.w    $200
@@ -419,7 +420,7 @@ Map_DataSelect_Player_LivesContinues:
                 dc.w    make_art_tile(ArtTile_Save_Extra+$68,1,1), make_art_tile(ArtTile_Save_Extra+$6B,1,1), make_art_tile($000,1,1)
                 dc.w    make_art_tile(ArtTile_Save_Extra+$69,1,1), make_art_tile(ArtTile_Save_Extra+$6C,1,1), make_art_tile(ArtTile_Save_Extra+$5A,1,1)
                 dc.w    make_art_tile(ArtTile_Save_Extra+$6A,1,1), make_art_tile(ArtTile_Save_Extra+$6D,1,1), make_art_tile(ArtTile_Save_Extra+$5B,1,1)
-word_DB08:
+SKSaveErase_BlankLivesAndContinuesDigits:
                 dc.w    make_art_tile($000,0,1), make_art_tile($000,0,1)
                 dc.w    make_art_tile($000,0,1), make_art_tile($000,0,1)
                 dc.w    make_art_tile($000,0,1), make_art_tile($000,0,1)

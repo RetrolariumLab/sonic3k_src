@@ -70,7 +70,7 @@ Pal_Save_ZoneCard11:
 Pal_Save_ZoneCard12:
                 binclude "data/General/Save Menu/Palettes/Zone Card 12.bin"
                 even
-word_CD58:
+SKSaveMenu_WidePlaneRectangles:
                 dc.w    $12-1
                 dc.l    RAM_start+$0222
                 dc.w    VRAM_Plane_A_Name_Table+$102, $B-1,  $C-1

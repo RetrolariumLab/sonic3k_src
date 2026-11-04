@@ -41,7 +41,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),d0
                 jsr     (Eni_Decomp).l
-                lea     word_CD58(pc),a0
+                lea     SKSaveMenu_WidePlaneRectangles(pc),a0
                 jsr     SKSave_UploadMapRectangles(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Save_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_S22POptions).l,a0
@@ -57,7 +57,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     (KosArt_To_VDP).l
-                move.l  #locret_C56E,(_unkEF44_1).w
+                move.l  #SKSram_SaveMenuVBlankReturn,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_SaveScreenMisc).l,a0    ; Decompress source
@@ -76,21 +76,21 @@ SaveScreen:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_C710:
+SKSaveMenu_CopyFirstTargetPaletteLine:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_C710
+                dbf     d0,SKSaveMenu_CopyFirstTargetPaletteLine
                 lea     Pal_Save_Chars(pc),a0
                 moveq   #bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
-loc_C71C:
+SKSaveMenu_CopyCharacterPaletteLines:
 
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_C71C
+                dbf     d0,SKSaveMenu_CopyCharacterPaletteLines
                 lea     (Object_RAM).w,a0
                 lea     ObjDat_SaveScreen(pc),a1
                 moveq   #$C-1,d0
 
-loc_C72C:
+SKSaveMenu_BuildFixedActorFromRecord:
                 move.l  (a1)+,(a0)
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),art_tile(a0)
                 move.l  #Map_SaveScreen,mappings(a0)
@@ -101,7 +101,7 @@ loc_C72C:
                 move.b  (a1)+,objoff_2E(a0)             ; used for save slot id
                 move.b  #$40,render_flags(a0)           ; sets multi-sprite flag
                 lea     next_object(a0),a0
-                dbf     d0,loc_C72C
+                dbf     d0,SKSaveMenu_BuildFixedActorFromRecord
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -109,10 +109,10 @@ loc_C72C:
                 lea     (Target_palette_line_4).w,a1
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
-loc_C77A:
+SKSaveMenu_CopyCardTargetAndBlankNormal:
                 move.l  (a0),(a1)+
                 clr.l   (a0)+
-                dbf     d0,loc_C77A
+                dbf     d0,SKSaveMenu_CopyCardTargetAndBlankNormal
                 lea     (ArtKos_SaveScreenS3Zone).l,a0
                 lea     (RAM_start).l,a1
                 jsr     (Kos_Decomp).l
@@ -120,10 +120,11 @@ loc_C77A:
                 lea     (RAM_start+$2300).l,a1
                 move.w  #bytesToXcnt($1180,8),d0
 
-loc_C7A4:
+; Close the gap left by the omitted $8C0-byte art block
+SKSaveMenu_CompactZoneCardArt:
                 move.l  (a0)+,(a1)+
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_C7A4
+                dbf     d0,SKSaveMenu_CompactZoneCardArt
                 lea     (ArtKos_SaveScreenSKZone).l,a0
                 jsr     (Kos_Decomp).l
                 lea     (ArtKos_SaveScreenPortrait).l,a0
@@ -131,12 +132,12 @@ loc_C7A4:
                 lea     -$8C0(a1),a0
                 move.w  #bytesToLcnt($540),d0
 
-loc_C7CC:
+SKSaveMenu_DuplicateLoadedArtBlock:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_C7CC
+                dbf     d0,SKSaveMenu_DuplicateLoadedArtBlock
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
-                move.l  #loc_C890,(_unkEF44_1).w
+                move.l  #SKSaveMenu_SelectSlotMapOnVBlank,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 move.w  (VDP_reg_1_command).w,d0
@@ -158,25 +159,25 @@ SaveScreen_MainLoop:
                 move.w  (Emerald_flicker_flag).w,d1
                 addq.w  #1,d1
                 cmpi.w  #3,d1
-                blo.s   loc_C83C
+                blo.s   SKSaveMenu_StoreEmeraldFlickerPhase
                 moveq   #0,d1
 
-loc_C83C:
+SKSaveMenu_StoreEmeraldFlickerPhase:
                 move.w  d1,(Emerald_flicker_flag).w
-                beq.s   loc_C84E
+                beq.s   SKSaveMenu_BlankEmeraldColors
                 lea     Pal_Save_Emeralds(pc),a1
 
-loc_C846:
+SKSaveMenu_CopyVisibleEmeraldColors:
                 move.w  (a1)+,(a0)+
-                dbf     d0,loc_C846
-                bra.s   loc_C856
+                dbf     d0,SKSaveMenu_CopyVisibleEmeraldColors
+                bra.s   SKSaveMenu_RepeatFrameOrPlayExitSound
 ; ---------------------------------------------------------------------------
 
-loc_C84E:
+SKSaveMenu_BlankEmeraldColors:
                 move.w  #$EEE,(a0)+
-                dbf     d0,loc_C84E
+                dbf     d0,SKSaveMenu_BlankEmeraldColors
 
-loc_C856:
+SKSaveMenu_RepeatFrameOrPlayExitSound:
                 cmpi.b  #GameMode_SaveScreen,(Game_mode).w  ; are we still in the savescreen mode?
                 beq.s   SaveScreen_MainLoop             ; if so, loop
                 moveq   #signextendB(sfx_EnterSS),d0
@@ -218,7 +219,7 @@ SKSave_MakeVRAMWriteCommand:
 ; and is called during vblank
 next_SaveSlot:  equ     $A
 
-loc_C890:
+SKSaveMenu_SelectSlotMapOnVBlank:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #$C,d0
                 lea     (MapPtrs_SaveScreenStatic).l,a2
@@ -228,13 +229,13 @@ loc_C890:
                 lea     (Saved_data).w,a0
                 moveq   #8-1,d6
 
-loc_C8B2:
+SKSaveMenu_ChooseNewOrAnimatedSlotMap:
                 lea     (MapUnc_SaveScreenNEW).l,a1
                 tst.b   (a0)                            ; is a game in progress?
-                bmi.s   loc_C8BE
+                bmi.s   SKSaveMenu_UploadSlotMapAndAdvance
                 movea.l a2,a1
 
-loc_C8BE:
+SKSaveMenu_UploadSlotMapAndAdvance:
                 move.w  d7,d0
                 bsr.s   SKSave_MakeVRAMWriteCommand
                 moveq   #10-1,d1
@@ -242,13 +243,13 @@ loc_C8BE:
                 jsr     (Plane_Map_To_VRAM_2).l
                 addi.w  #$1A,d7
                 lea     next_SaveSlot(a0),a0
-                dbf     d6,loc_C8B2
+                dbf     d6,SKSaveMenu_ChooseNewOrAnimatedSlotMap
                 lea     (Dynamic_object_RAM+object_size).w,a3  ; load the first save slot object
                 move.w  #VRAM_Plane_A_Name_Table+$A20,d7
                 lea     (Saved_data).w,a0
                 moveq   #8-1,d3
 
-loc_C8E6:
+SKSaveMenu_WriteSlotPrefixAndChooseLabel:
                 move.w  d7,d0
                 subq.w  #2,d0
                 jsr     SKSave_MakeVRAMWriteCommand(pc)
@@ -256,15 +257,15 @@ loc_C8E6:
                 move.w  #make_art_tile(ArtTile_Save_Misc+$12,0,1),(a6)
                 lea     BlankSave_Text(pc),a1
                 tst.b   (a0)
-                bmi.s   loc_C946
+                bmi.s   SKSaveMenu_WriteBlankOrClearLabel
                 lea     Clear_Text(pc),a1
                 move.b  objoff_3A(a3),d0
                 cmp.b   objoff_37(a3),d0
-                bne.s   loc_C912
+                bne.s   SKSaveMenu_WriteZoneLabelAndPrepDigits
                 tst.b   objoff_3B(a3)
-                bne.s   loc_C946
+                bne.s   SKSaveMenu_WriteBlankOrClearLabel
 
-loc_C912:
+SKSaveMenu_WriteZoneLabelAndPrepDigits:
                 lea     D_S_Zone_Text(pc),a1
                 move.w  d7,d0
                 subq.w  #2,d0
@@ -273,33 +274,33 @@ loc_C912:
                 add.w   d0,d0
                 moveq   #0,d1
                 move.b  DataSelect_Zone_Nums(pc,d0.w),d1
-                bpl.s   loc_C932
+                bpl.s   SKSaveMenu_AddFontBaseToZoneTens
                 move.w  #high_priority,d1
-                bra.s   loc_C936
+                bra.s   SKSaveMenu_WriteZoneNumberAndAdvance
 ; ---------------------------------------------------------------------------
 
-loc_C932:
+SKSaveMenu_AddFontBaseToZoneTens:
                 addi.w  #make_art_tile(ArtTile_Save_Text,1,1),d1
 
-loc_C936:
+SKSaveMenu_WriteZoneNumberAndAdvance:
                 move.w  d1,(a6)
                 moveq   #0,d1
                 move.b  DataSelect_Zone_Nums+1(pc,d0.w),d1
                 addi.w  #make_art_tile(ArtTile_Save_Text,1,1),d1
                 move.w  d1,(a6)
-                bra.s   loc_C94C
+                bra.s   SKSaveMenu_AdvanceSlotLabelPointers
 ; ---------------------------------------------------------------------------
 
-loc_C946:
+SKSaveMenu_WriteBlankOrClearLabel:
                 move.w  d7,d0
                 jsr     SKSave_WriteEncodedLabel(pc)
 
-loc_C94C:
+SKSaveMenu_AdvanceSlotLabelPointers:
                 addi.w  #$1A,d7
                 lea     next_SaveSlot(a0),a0
                 lea     next_object(a3),a3
-                dbf     d3,loc_C8E6
-                bra.s   loc_C97A
+                dbf     d3,SKSaveMenu_WriteSlotPrefixAndChooseLabel
+                bra.s   SKSaveMenu_BeginCharacterAndStatsPanels
 ; ---------------------------------------------------------------------------
 ; shows level number 1-14
 ; NOTE: $FF acts as zero
@@ -321,24 +322,24 @@ DataSelect_Zone_Nums:
                 dc.b    1,   4                          ; 14
 ; ---------------------------------------------------------------------------
 
-loc_C97A:
+SKSaveMenu_BeginCharacterAndStatsPanels:
                 lea     Map_DataSelect_Player_LivesContinues(pc),a2
                 lea     (Dynamic_object_RAM+object_size).w,a3
                 move.w  #VRAM_Plane_A_Name_Table+$1220,d7
                 lea     (Saved_data).w,a0
                 moveq   #8-1,d6
 
-loc_C98C:
+SKSaveMenu_UseSonicPanelForCombinedMode:
                 move.w  objoff_34(a3),d0
-                bne.s   loc_C994
+                bne.s   SKSaveMenu_BlankCharacterPanelIfEmpty
                 moveq   #1,d0
 
-loc_C994:
+SKSaveMenu_BlankCharacterPanelIfEmpty:
                 tst.b   (a0)
-                bpl.s   loc_C99A
+                bpl.s   SKSaveMenu_UploadCharacterPanel
                 moveq   #0,d0
 
-loc_C99A:
+SKSaveMenu_UploadCharacterPanel:
                 lsl.w   #5,d0
                 movea.l a2,a1
                 adda.w  d0,a1
@@ -348,18 +349,18 @@ loc_C99A:
                 moveq   #5-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
                 tst.b   (a0)
-                bpl.s   loc_C9CC
-                lea     word_DB08(pc),a1
+                bpl.s   SKSaveMenu_UploadLivesAndContinuesDigits
+                lea     SKSaveErase_BlankLivesAndContinuesDigits(pc),a1
                 move.w  d7,d0
                 addq.w  #6,d0
                 bsr.w   SKSave_MakeVRAMWriteCommand
                 moveq   #2-1,d1
                 moveq   #5-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
-                bra.s   loc_CA02
+                bra.s   SKSaveMenu_AdvanceStatsPanelPointers
 ; ---------------------------------------------------------------------------
 
-loc_C9CC:
+SKSaveMenu_UploadLivesAndContinuesDigits:
                 move.b  objoff_3E(a3),d0
                 jsr     SKSave_BuildLifeContinueDigitMap(pc)
                 move.w  d7,d0
@@ -377,11 +378,11 @@ loc_C9CC:
                 moveq   #2-1,d2
                 jsr     (Plane_Map_To_VRAM_2).l
 
-loc_CA02:
+SKSaveMenu_AdvanceStatsPanelPointers:
                 addi.w  #$1A,d7
                 lea     next_SaveSlot(a0),a0
                 lea     next_object(a3),a3
-                dbf     d6,loc_C98C
+                dbf     d6,SKSaveMenu_UseSonicPanelForCombinedMode
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -390,18 +391,18 @@ loc_CA02:
 SKSave_BuildLifeContinueDigitMap:
                 moveq   #0,d1
 
-loc_CA16:
+SKSaveMenu_CountDecimalTens:
                 addq.w  #1,d1
                 subi.b  #$A,d0
-                bcc.s   loc_CA16
+                bcc.s   SKSaveMenu_CountDecimalTens
                 subq.w  #1,d1
                 addi.b  #$A,d0
                 lea     (_unkEEEA).w,a1
                 lsl.w   #2,d1
-                bne.s   loc_CA2E
+                bne.s   SKSaveMenu_WriteTwoByTwoDigitTiles
                 moveq   #$28,d1
 
-loc_CA2E:
+SKSaveMenu_WriteTwoByTwoDigitTiles:
                 move.w  DataSelect_LifeContinue_Nums(pc,d1.w),(a1)
                 move.w  DataSelect_LifeContinue_Nums+2(pc,d1.w),4(a1)
                 andi.w  #$FF,d0

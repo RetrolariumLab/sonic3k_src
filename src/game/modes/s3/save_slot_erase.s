@@ -18,18 +18,18 @@ Obj_SaveScreen_Emeralds:
                 moveq   #$10,d2
                 moveq   #7-1,d3
 
-loc_C54C:
+S3SaveErase_DecorateFromEmeraldBit:
                 clr.b   5(a1)
                 lsl.b   #1,d4
-                bcc.s   loc_C55E
+                bcc.s   S3SaveErase_AdvanceEmeraldDecoration
                 move.w  d0,(a1)
                 move.w  d1,sub2_y_pos-sub2_x_pos(a1)
                 move.b  d2,sub2_mapframe-sub2_x_pos(a1)
 
-loc_C55E:
+S3SaveErase_AdvanceEmeraldDecoration:
                 addq.w  #1,d2
                 addq.w  #6,a1
-                dbf     d3,loc_C54C
+                dbf     d3,S3SaveErase_DecorateFromEmeraldBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -40,51 +40,51 @@ Obj_SaveScreen_Delete_Save:
 ; ---------------------------------------------------------------------------
 
 SaveScreen_Delete_Save_Index:
-                bra.w   loc_C58E
+                bra.w   S3SaveErase_InitEraseActor
 ; ---------------------------------------------------------------------------
-                bra.w   loc_C5AA
+                bra.w   S3SaveErase_EnterEraseSelection
 ; ---------------------------------------------------------------------------
-                bra.w   loc_C5D4
+                bra.w   S3SaveErase_AnimateAndLatchNonemptySlot
 ; ---------------------------------------------------------------------------
-                bra.w   loc_C66C
+                bra.w   S3SaveErase_ClearSelectionAndTestEnd
 ; ---------------------------------------------------------------------------
-                bra.w   loc_C68C
+                bra.w   S3SaveErase_WaitForConfirmationMarker
 ; ---------------------------------------------------------------------------
-                bra.w   loc_C6AC
+                bra.w   S3SaveErase_EraseOnLeftOrCancelOnRight
 ; ---------------------------------------------------------------------------
 
-loc_C58E:
+S3SaveErase_InitEraseActor:
                 move.b  #$40,render_flags(a0)
                 move.b  #$30,width_pixels(a0)
                 move.w  #1,mainspr_childsprites(a0)
                 move.b  #8,sub2_mapframe(a0)
                 addq.b  #4,routine(a0)
 
-loc_C5AA:
+S3SaveErase_EnterEraseSelection:
                 cmpi.b  #7,(Dataselect_entry).w
-                bne.w   loc_C688
+                bne.w   S3SaveErase_ProjectActorAndChildren
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.w   loc_C688
+                beq.w   S3SaveErase_ProjectActorAndChildren
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 st      (Events_bg+$12).w
                 addq.b  #4,routine(a0)
-                bra.w   loc_C688
+                bra.w   S3SaveErase_ProjectActorAndChildren
 ; ---------------------------------------------------------------------------
 
-loc_C5D4:
+S3SaveErase_AnimateAndLatchNonemptySlot:
                 jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
                 jsr     S3SaveErase_AnimateChild(pc)
                 tst.w   (Player_2+object_control).w
-                bne.s   loc_C624
+                bne.s   S3SaveErase_FollowSelectorX
                 move.b  (Ctrl_1_pressed).w,d0
                 btst    #button_B,d0
-                bne.s   loc_C63C
+                bne.s   S3SaveErase_ResetAnimAndBeginReturn
                 andi.w  #button_A_mask|button_C_mask|button_start_mask,d0
-                beq.s   loc_C624
+                beq.s   S3SaveErase_FollowSelectorX
                 cmpi.b  #7,(Dataselect_entry).w
-                beq.s   loc_C63C
+                beq.s   S3SaveErase_ResetAnimAndBeginReturn
                 moveq   #0,d0
                 move.b  (Dataselect_entry).w,d0
                 subq.w  #1,d0
@@ -93,13 +93,13 @@ loc_C5D4:
                 move.l  d0,$2E(a0)
                 movea.l d0,a1
                 tst.b   (a1)
-                bmi.s   loc_C63C
+                bmi.s   S3SaveErase_ResetAnimAndBeginReturn
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 st      (Events_bg+$10).w
                 addq.b  #8,routine(a0)
 
-loc_C624:
+S3SaveErase_FollowSelectorX:
                 move.w  (Player_2+x_pos).w,d0
                 move.w  d0,x_pos(a0)
                 move.w  d0,sub2_x_pos(a0)
@@ -107,7 +107,7 @@ loc_C624:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_C63C:
+S3SaveErase_ResetAnimAndBeginReturn:
                 clr.b   $24(a0)
                 clr.b   $23(a0)
                 clr.b   $25(a0)
@@ -121,41 +121,41 @@ loc_C63C:
                 bra.w   Set_ChildSprites
 ; ---------------------------------------------------------------------------
 
-loc_C66C:
+S3SaveErase_ClearSelectionAndTestEnd:
                 clr.w   (Events_bg+$12).w
                 move.w  $12(a0),d0
                 cmpi.w  #$378,d0
-                blo.s   loc_C682
+                blo.s   S3SaveErase_Step8PixelsTowardEndpoint
                 move.b  #4,routine(a0)
-                bra.s   loc_C688
+                bra.s   S3SaveErase_ProjectActorAndChildren
 ; ---------------------------------------------------------------------------
 
-loc_C682:
+S3SaveErase_Step8PixelsTowardEndpoint:
                 addq.w  #8,d0
                 move.w  d0,$12(a0)
 
-loc_C688:
+S3SaveErase_ProjectActorAndChildren:
                 bra.w   Set_ChildSprites
 ; ---------------------------------------------------------------------------
 
-loc_C68C:
+S3SaveErase_WaitForConfirmationMarker:
                 jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
                 jsr     S3SaveErase_AnimateChild(pc)
                 cmpi.b  #$B,sub2_mapframe(a0)
-                bne.s   loc_C6A6
+                bne.s   S3SaveErase_DrawConfirmationPrep
                 move.b  #$C,sub2_mapframe(a0)
                 addq.b  #4,routine(a0)
 
-loc_C6A6:
+S3SaveErase_DrawConfirmationPrep:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_C6AC:
+S3SaveErase_EraseOnLeftOrCancelOnRight:
                 jsr     S3SaveEraseAdvanceMainIconBlinkSequence(pc)
                 btst    #button_right,(Ctrl_1_pressed).w
-                bne.s   loc_C6DA
+                bne.s   S3SaveErase_UnlockAndBeginReturn
                 btst    #button_left,(Ctrl_1_pressed).w
-                beq.s   loc_C6E8
+                beq.s   S3SaveErase_DrawWhileAwaitingDirection
                 moveq   #signextendB(sfx_Perfect),d0
                 jsr     (Play_SFX).l
                 movea.l $2E(a0),a1
@@ -164,41 +164,41 @@ loc_C6AC:
                 bset    #7,(a1)
                 jsr     Write_SaveGame(pc)
 
-loc_C6DA:
+S3SaveErase_UnlockAndBeginReturn:
                 move.b  #8,routine(a0)
                 clr.w   (Events_bg+$10).w
-                bra.w   loc_C63C
+                bra.w   S3SaveErase_ResetAnimAndBeginReturn
 ; ---------------------------------------------------------------------------
 
-loc_C6E8:
+S3SaveErase_DrawWhileAwaitingDirection:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 S3SaveEraseAdvanceMainIconBlinkSequence:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_C714
+                bpl.s   S3SaveErase_MainBlinkUpdateReturn
                 move.b  #5,anim_frame_timer(a0)
 
-loc_C6FA:
+S3SaveErase_AdvanceBlinkFrameOrRestart:
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,anim_frame(a0)
-                move.b  byte_C716(pc,d0.w),d0
-                bpl.s   loc_C710
+                move.b  S3SaveErase_MainBlinkFrames(pc,d0.w),d0
+                bpl.s   S3SaveErase_StoreEraseBlinkMappingFrame
                 clr.b   anim_frame(a0)
-                bra.s   loc_C6FA
+                bra.s   S3SaveErase_AdvanceBlinkFrameOrRestart
 ; ---------------------------------------------------------------------------
 
-loc_C710:
+S3SaveErase_StoreEraseBlinkMappingFrame:
                 move.b  d0,mapping_frame(a0)
 
-locret_C714:
+S3SaveErase_MainBlinkUpdateReturn:
                 rts
 ; End of function S3SaveEraseAdvanceMainIconBlinkSequence
 
 ; ---------------------------------------------------------------------------
-byte_C716:
+S3SaveErase_MainBlinkFrames:
                 dc.b    $D,  $E,  $D,  $E,  $D,  $E,  $D,  $E,  $D,  $E,  $D,  $D,  $D,  $D, $FF
                 even
 
@@ -207,7 +207,7 @@ byte_C716:
 ; Cycle frames 8 through 11 once every four calls
 S3SaveErase_AnimateChild:
                 subq.b  #1,$25(a0)
-                bpl.s   locret_C744
+                bpl.s   S3SaveErase_ChildFrameUpdateReturn
                 move.b  #3,$25(a0)
                 addq.b  #1,$28(a0)
                 move.b  $28(a0),d0
@@ -215,7 +215,7 @@ S3SaveErase_AnimateChild:
                 addq.b  #8,d0
                 move.b  d0,sub2_mapframe(a0)
 
-locret_C744:
+S3SaveErase_ChildFrameUpdateReturn:
                 rts
 ; End of function S3SaveErase_AnimateChild
 
@@ -223,7 +223,7 @@ locret_C744:
 
 Load_Icon_Art:
                 cmpi.b  #6,d1
-                bhi.s   loc_C772
+                bhi.s   S3SaveErase_SelectFinishPaletteByChaos
                 move.l  a1,-(sp)
                 move.w  d1,-(sp)
                 mulu.w  #$8C0,d1
@@ -234,25 +234,25 @@ Load_Icon_Art:
                 move.w  (sp)+,d0
                 movea.l (sp)+,a1
                 lea     Pal_Save_ZoneCard1(pc),a2
-                bra.s   loc_C782
+                bra.s   S3SaveErase_SelectIndexedCardPalette
 ; ---------------------------------------------------------------------------
 
-loc_C772:
+S3SaveErase_SelectFinishPaletteByChaos:
                 lea     Pal_Save_FinishCard1(pc),a2
                 moveq   #0,d0
                 cmpi.b  #7,5(a1)
-                bcs.s   loc_C782
+                bcs.s   S3SaveErase_SelectIndexedCardPalette
                 moveq   #1,d0
 
-loc_C782:
+S3SaveErase_SelectIndexedCardPalette:
                 lsl.w   #5,d0
                 adda.w  d0,a2
                 lea     (Normal_palette_line_4).w,a3
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
-loc_C78C:
+S3SaveErase_CopyCardPaletteToNormal:
                 move.l  (a2)+,(a3)+
-                dbf     d0,loc_C78C
+                dbf     d0,S3SaveErase_CopyCardPaletteToNormal
                 rts
 ; End of function Load_Icon_Art
 
@@ -266,22 +266,22 @@ S3Save_WriteEncodedLabel:
                 move.w  #make_art_tile(ArtTile_Save_Text-$10,1,1),d5
                 moveq   #0,d6
 
-loc_C7A8:
+S3SaveErase_WriteEncodedLabelOrBlank:
                 move.b  (a1)+,d6
-                bne.s   loc_C7B2
+                bne.s   S3SaveErase_EndEncodedLabelOrWriteGlyph
                 move.w  #$8000,(a6)
-                bra.s   loc_C7A8
+                bra.s   S3SaveErase_WriteEncodedLabelOrBlank
 ; ---------------------------------------------------------------------------
 
-loc_C7B2:
-                bmi.s   locret_C7BC
+S3SaveErase_EndEncodedLabelOrWriteGlyph:
+                bmi.s   S3SaveErase_EncodedLabelWriteReturn
                 move.w  d5,d4
                 add.w   d6,d4
                 move.w  d4,(a6)
-                bra.s   loc_C7A8
+                bra.s   S3SaveErase_WriteEncodedLabelOrBlank
 ; ---------------------------------------------------------------------------
 
-locret_C7BC:
+S3SaveErase_EncodedLabelWriteReturn:
                 rts
 ; End of function S3Save_WriteEncodedLabel
 

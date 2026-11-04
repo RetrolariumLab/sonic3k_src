@@ -91,53 +91,53 @@ OptionScreen_Controls:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 btst    #button_up,d0
-                beq.s   loc_6686
+                beq.s   S3LegacyOptions_MoveDownWrapThreeBoxes
                 subq.b  #1,d2
-                bcc.s   loc_6686
+                bcc.s   S3LegacyOptions_MoveDownWrapThreeBoxes
                 move.b  #2,d2
 
-loc_6686:
+S3LegacyOptions_MoveDownWrapThreeBoxes:
                 btst    #button_down,d0
-                beq.s   loc_6696
+                beq.s   S3LegacyOptions_StoreBoxAndLoadBound
                 addq.b  #1,d2
                 cmpi.b  #3,d2
-                bcs.s   loc_6696
+                bcs.s   S3LegacyOptions_StoreBoxAndLoadBound
                 moveq   #0,d2
 
-loc_6696:
+S3LegacyOptions_StoreBoxAndLoadBound:
                 move.b  d2,(Options_menu_box).w
                 lsl.w   #2,d2
                 move.b  OptionScreen_Choices(pc,d2.w),d3
                 movea.l OptionScreen_Choices(pc,d2.w),a1
                 move.w  (a1),d2
                 btst    #button_left,d0
-                beq.s   loc_66B2
+                beq.s   S3LegacyOptions_MoveRightAndWrap
                 subq.b  #1,d2
-                bcc.s   loc_66B2
+                bcc.s   S3LegacyOptions_MoveRightAndWrap
                 move.b  d3,d2
 
-loc_66B2:
+S3LegacyOptions_MoveRightAndWrap:
                 btst    #button_right,d0
-                beq.s   loc_66C0
+                beq.s   S3LegacyOptions_StepChoice16OnA
                 addq.b  #1,d2
                 cmp.b   d3,d2
-                bls.s   loc_66C0
+                bls.s   S3LegacyOptions_StepChoice16OnA
                 moveq   #0,d2
 
-loc_66C0:
+S3LegacyOptions_StepChoice16OnA:
                 btst    #button_A,d0
-                beq.s   loc_66D0
+                beq.s   S3LegacyOptions_StoreChoicePlaySound
                 addi.b  #$10,d2
                 cmp.b   d3,d2
-                bls.s   loc_66D0
+                bls.s   S3LegacyOptions_StoreChoicePlaySound
                 moveq   #0,d2
 
-loc_66D0:
+S3LegacyOptions_StoreChoicePlaySound:
                 move.w  d2,(a1)
                 cmpi.b  #2,(Options_menu_box).w
-                bne.s   locret_66FE
+                bne.s   S3LegacyOptions_ControlsReturn
                 andi.w  #button_B_mask|button_C_mask,d0
-                beq.s   locret_66FE
+                beq.s   S3LegacyOptions_ControlsReturn
                 move.w  (Sound_test_sound).w,d0
                 bsr.w   Play_Music
                 lea     (S2LevelSelectCodeDat).l,a0
@@ -146,7 +146,7 @@ loc_66D0:
                 moveq   #0,d2
                 bsr.w   CheckCheats
 
-locret_66FE:
+S3LegacyOptions_ControlsReturn:
                 rts
 ; End of function OptionScreen_Controls
 
@@ -172,7 +172,7 @@ OptionScreen_DrawSelected:
                 lea     (RAM_start+$0B6).l,a2
                 moveq   #0,d1
                 cmpi.b  #2,(Options_menu_box).w
-                beq.s   loc_6754
+                beq.s   S3LegacyOptions_DrawSelectedChoice
                 move.b  (Options_menu_box).w,d1
                 lsl.w   #2,d1
                 lea     OptionScreen_Choices(pc),a1
@@ -180,15 +180,15 @@ OptionScreen_DrawSelected:
                 move.w  (a1),d1
                 lsl.w   #2,d1
 
-loc_6754:
+S3LegacyOptions_DrawSelectedChoice:
                 movea.l (a4,d1.w),a1
                 bsr.w   MenuScreenTextToRAM
                 cmpi.b  #2,(Options_menu_box).w
-                bne.s   loc_676E
+                bne.s   S3LegacyOptions_UploadSelectedBox
                 lea     (RAM_start+$0C2).l,a2
                 bsr.w   OptionScreen_HexDumpSoundTest
 
-loc_676E:
+S3LegacyOptions_UploadSelectedBox:
                 lea     (RAM_start).l,a1
                 move.l  (a3)+,d0
                 moveq   #22-1,d1
@@ -212,7 +212,7 @@ OptionScreen_DrawUnselected:
                 lea     (RAM_start+$216).l,a2
                 moveq   #0,d1
                 cmpi.b  #2,(Options_menu_box).w
-                beq.s   loc_67C4
+                beq.s   S3LegacyOptions_DrawUnselectedChoice
                 move.b  (Options_menu_box).w,d1
                 lsl.w   #2,d1
                 lea     OptionScreen_Choices(pc),a1
@@ -220,15 +220,15 @@ OptionScreen_DrawUnselected:
                 move.w  (a1),d1
                 lsl.w   #2,d1
 
-loc_67C4:
+S3LegacyOptions_DrawUnselectedChoice:
                 movea.l (a4,d1.w),a1
                 bsr.w   MenuScreenTextToRAM
                 cmpi.b  #2,(Options_menu_box).w
-                bne.s   loc_67DE
+                bne.s   S3LegacyOptions_UploadUnselectedBox
                 lea     (RAM_start+$222).l,a2
                 bsr.w   OptionScreen_HexDumpSoundTest
 
-loc_67DE:
+S3LegacyOptions_UploadUnselectedBox:
                 lea     (RAM_start+$160).l,a1
                 move.l  (a3)+,d0
                 moveq   #22-1,d1
@@ -239,22 +239,22 @@ loc_67DE:
 ; =============== S U B R O U T I N E =======================================
 
 OptionScreen_SelectTextPtr:
-                lea     (off_6858).l,a4
+                lea     (S3LegacyOptions_MilesChoiceText).l,a4
                 tst.b   (Graphics_flags).w
-                bpl.s   loc_6800
-                lea     (off_6864).l,a4
+                bpl.s   S3LegacyOptions_UseItemChoiceText
+                lea     (S3LegacyOptions_TailsChoiceText).l,a4
 
-loc_6800:
+S3LegacyOptions_UseItemChoiceText:
                 tst.b   (Options_menu_box).w
-                beq.s   loc_680C
-                lea     (off_6870).l,a4
+                beq.s   S3LegacyOptions_UseSoundPlaceholderText
+                lea     (S3LegacyOptions_VersusItemChoiceText).l,a4
 
-loc_680C:
+S3LegacyOptions_UseSoundPlaceholderText:
                 cmpi.b  #2,(Options_menu_box).w
-                bne.s   locret_681A
-                lea     (off_6878).l,a4
+                bne.s   S3LegacyOptions_ChoiceTextReturn
+                lea     (S3LegacyOptions_SoundTestPlaceholder).l,a4
 
-locret_681A:
+S3LegacyOptions_ChoiceTextReturn:
                 rts
 ; End of function OptionScreen_SelectTextPtr
 
@@ -274,10 +274,11 @@ OptionScreen_HexDumpSoundTest:
 S3LegacyOptions_AppendHexTile:
                 andi.w  #$F,d1
                 cmpi.b  #$A,d1
-                bcs.s   loc_6836
+                bcs.s   S3LegacyOptions_WriteHexTileKeepAttrs
                 addi.b  #4,d1
 
-loc_6836:
+; Update the low byte of the tile word and preserve its attributes
+S3LegacyOptions_WriteHexTileKeepAttrs:
                 addi.b  #$10,d1
                 move.b  d1,d0
                 move.w  d0,(a2)+
@@ -292,17 +293,17 @@ S2OptScrBoxData:
                 dc.l    vdpComm(VRAM_Plane_A_Name_Table+$592,VRAM,WRITE)
                 dc.l    TextOptScr_SoundTest
                 dc.l    vdpComm(VRAM_Plane_A_Name_Table+$992,VRAM,WRITE)
-off_6858:
+S3LegacyOptions_MilesChoiceText:
                 dc.l    TextOptScr_SonicAndMiles
                 dc.l    TextOptScr_SonicAlone
                 dc.l    TextOptScr_MilesAlone
-off_6864:
+S3LegacyOptions_TailsChoiceText:
                 dc.l    TextOptScr_SonicAndTails
                 dc.l    TextOptScr_SonicAlone
                 dc.l    TextOptScr_TailsAlone
-off_6870:
+S3LegacyOptions_VersusItemChoiceText:
                 dc.l    TextOptScr_AllKindsItems
                 dc.l    TextOptScr_TeleportOnly
-off_6878:
+S3LegacyOptions_SoundTestPlaceholder:
                 dc.l    TextOptScr_0
 ; ---------------------------------------------------------------------------

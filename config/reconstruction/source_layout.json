@@ -10663,7 +10663,7 @@
       "responsibility": "Preserved options screen, sound test, player choices and text pointer tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 308,
+      "physical_lines": 309,
       "origin": {
         "commit": "dc09abaa4de117f92491789747178b9736494966",
         "path": "s3.s",
@@ -11418,7 +11418,7 @@
       "responsibility": "Save selection mode initialization, active loop, navigation and product-specific save-slot presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 427,
+      "physical_lines": 428,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11478,7 +11478,7 @@
       "responsibility": "Save-slot emerald decoration, erase-state transitions and slot icon art loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 427,
+      "physical_lines": 428,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11538,7 +11538,7 @@
       "responsibility": "Save-slot selector, empty and populated slot displays, level icons and child sprite setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 512,
+      "physical_lines": 513,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",
@@ -11853,7 +11853,7 @@
       "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 268,
+      "physical_lines": 269,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -11898,7 +11898,7 @@
       "responsibility": "Initial lives, SRAM initialization, default records, checksum validation, record reads and game-state persistence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 485,
+      "physical_lines": 487,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",

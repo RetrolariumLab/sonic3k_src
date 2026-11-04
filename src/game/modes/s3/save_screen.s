@@ -41,7 +41,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),d0
                 jsr     (Eni_Decomp).l
-                lea     word_BD16(pc),a0
+                lea     S3SaveMenu_WidePlaneRectangles(pc),a0
                 jsr     S3Save_UploadMapRectangles(pc)
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Save_Text),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_S22POptions).l,a0
@@ -55,7 +55,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     (KosArt_To_VDP).l
-                move.l  #locret_B85A,(_unkEF44_1).w
+                move.l  #S3Sram_SaveMenuVBlankReturn,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_SaveScreenMisc).l,a0    ; Decompress source
@@ -68,20 +68,20 @@ SaveScreen:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_B9D4:
+S3SaveMenu_CopyFirstTargetPaletteLine:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B9D4
+                dbf     d0,S3SaveMenu_CopyFirstTargetPaletteLine
                 lea     Pal_Save_Chars(pc),a0
                 moveq   #bytesToLcnt(Target_palette_line_4-Target_palette_line_2),d0
 
-loc_B9E0:
+S3SaveMenu_CopyCharacterPaletteLines:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_B9E0
+                dbf     d0,S3SaveMenu_CopyCharacterPaletteLines
                 lea     (Object_RAM).w,a0
                 lea     ObjDat_SaveScreen(pc),a1
                 move.w  (a1)+,d0
 
-loc_B9F0:
+S3SaveMenu_BuildFixedActorFromRecord:
                 move.l  (a1)+,(a0)
                 move.w  #make_art_tile(ArtTile_Save_Misc,0,1),art_tile(a0)
                 move.l  #Map_SaveScreen,mappings(a0)
@@ -92,7 +92,7 @@ loc_B9F0:
                 move.b  (a1)+,objoff_2E(a0)             ; used for save slot id
                 move.b  #$40,render_flags(a0)           ; sets multi-sprite flag
                 lea     next_object(a0),a0
-                dbf     d0,loc_B9F0
+                dbf     d0,S3SaveMenu_BuildFixedActorFromRecord
                 jsr     (Init_SpriteTable).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
@@ -100,16 +100,16 @@ loc_B9F0:
                 lea     (Target_palette_line_4).w,a1
                 moveq   #bytesToLcnt(Normal_palette_end-Normal_palette_line_4),d0
 
-loc_BA3E:
+S3SaveMenu_CopyCardTargetAndBlankNormal:
                 move.l  (a0),(a1)+
                 clr.l   (a0)+
-                dbf     d0,loc_BA3E
+                dbf     d0,S3SaveMenu_CopyCardTargetAndBlankNormal
                 lea     (ArtKos_SaveScreenS3Zone).l,a0
                 lea     (RAM_start).l,a1
                 jsr     (Kos_Decomp).l
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
-                move.l  #loc_BB0A,(_unkEF44_1).w
+                move.l  #S3SaveMenu_SelectSlotMapOnVBlank,(_unkEF44_1).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 move.w  (VDP_reg_1_command).w,d0
@@ -129,20 +129,20 @@ SaveScreen_MainLoop:
                 lea     (Normal_palette_line_3+$2).w,a0
                 moveq   #$E,d0
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_BAC8
+                beq.s   S3SaveMenu_BlankEmeraldColors
                 lea     Pal_Save_Emeralds(pc),a1
 
-loc_BAC0:
+S3SaveMenu_CopyVisibleEmeraldColors:
                 move.w  (a1)+,(a0)+
-                dbf     d0,loc_BAC0
-                bra.s   loc_BAD0
+                dbf     d0,S3SaveMenu_CopyVisibleEmeraldColors
+                bra.s   S3SaveMenu_RepeatFrameOrPlayExitSound
 ; ---------------------------------------------------------------------------
 
-loc_BAC8:
+S3SaveMenu_BlankEmeraldColors:
                 move.w  #$CCC,(a0)+
-                dbf     d0,loc_BAC8
+                dbf     d0,S3SaveMenu_BlankEmeraldColors
 
-loc_BAD0:
+S3SaveMenu_RepeatFrameOrPlayExitSound:
                 cmpi.b  #GameMode_SaveScreen,(Game_mode).w  ; are we still in the savescreen mode?
                 beq.s   SaveScreen_MainLoop             ; if so, loop
                 moveq   #signextendB(sfx_EnterSS),d0
@@ -184,7 +184,7 @@ S3Save_MakeVRAMWriteCommand:
 ; and is called during vblank
 next_SaveSlot:  equ     8
 
-loc_BB0A:
+S3SaveMenu_SelectSlotMapOnVBlank:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #$C,d0
                 lea     (MapPtrs_SaveScreenStatic).l,a2
@@ -193,13 +193,13 @@ loc_BB0A:
                 move.w  #VRAM_Plane_A_Name_Table+$31A,d7
                 moveq   #6-1,d6
 
-loc_BB26:
+S3SaveMenu_ChooseNewOrAnimatedSlotMap:
                 lea     (MapUnc_SaveScreenNEW).l,a1
                 tst.b   (a0)                            ; is a game in progress?
-                bmi.s   loc_BB32
+                bmi.s   S3SaveMenu_UploadSlotMapAndAdvance
                 movea.l a2,a1
 
-loc_BB32:
+S3SaveMenu_UploadSlotMapAndAdvance:
                 move.w  d7,d0
                 bsr.s   S3Save_MakeVRAMWriteCommand
                 moveq   #10-1,d1
@@ -207,13 +207,13 @@ loc_BB32:
                 jsr     (Plane_Map_To_VRAM_2).l
                 addi.w  #$1A,d7
                 addq.w  #next_SaveSlot,a0
-                dbf     d6,loc_BB26
+                dbf     d6,S3SaveMenu_ChooseNewOrAnimatedSlotMap
                 lea     (Saved_data).w,a0
                 lea     (Dynamic_object_RAM+object_size).w,a3  ; load the first save slot object
                 move.w  #VRAM_Plane_A_Name_Table+$B20,d7
                 moveq   #6-1,d3
 
-loc_BB58:
+S3SaveMenu_WriteSlotPrefixAndChooseLabel:
                 move.w  d7,d0
                 subq.w  #2,d0
                 jsr     S3Save_MakeVRAMWriteCommand(pc)
@@ -221,10 +221,10 @@ loc_BB58:
                 move.w  #make_art_tile(ArtTile_Save_Misc+$12,0,1),(a6)
                 lea     BlankSave_Text(pc),a1
                 tst.b   (a0)
-                bmi.s   loc_BB98
+                bmi.s   S3SaveMenu_WriteBlankOrClearLabel
                 lea     Clear_Text(pc),a1
                 cmpi.w  #6,objoff_36(a3)
-                bhi.s   loc_BB98
+                bhi.s   S3SaveMenu_WriteBlankOrClearLabel
                 lea     D_S_Zone_Text(pc),a1
                 move.w  d7,d0
                 subq.w  #2,d0
@@ -233,18 +233,18 @@ loc_BB58:
                 move.b  DataSelectS3_ZoneNums(pc,d0.w),d0
                 addi.w  #make_art_tile(ArtTile_Save_Text,1,1),d0
                 move.w  d0,(a6)
-                bra.s   loc_BB9E
+                bra.s   S3SaveMenu_AdvanceSlotLabelPointers
 ; ---------------------------------------------------------------------------
 
-loc_BB98:
+S3SaveMenu_WriteBlankOrClearLabel:
                 move.w  d7,d0
                 jsr     S3Save_WriteEncodedLabel(pc)
 
-loc_BB9E:
+S3SaveMenu_AdvanceSlotLabelPointers:
                 addi.w  #$1A,d7
                 addq.w  #next_SaveSlot,a0
                 lea     next_object(a3),a3
-                dbf     d3,loc_BB58
+                dbf     d3,S3SaveMenu_WriteSlotPrefixAndChooseLabel
                 rts
 ; ---------------------------------------------------------------------------
 ; byte_BBAE

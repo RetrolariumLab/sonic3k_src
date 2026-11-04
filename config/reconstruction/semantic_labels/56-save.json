@@ -1,0 +1,3558 @@
+{
+  "schema_version": 1,
+  "packet": "56-save",
+  "mappings": [
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 99,
+      "old": "loc_6686",
+      "new": "S3LegacyOptions_MoveDownWrapThreeBoxes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ApplyDownAndWrapThreeBoxes"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 107,
+      "old": "loc_6696",
+      "new": "S3LegacyOptions_StoreBoxAndLoadBound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_StoreBoxAndLoadChoiceBoundPointer"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 119,
+      "old": "loc_66B2",
+      "new": "S3LegacyOptions_MoveRightAndWrap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ApplyRightAndWrapChoiceToZero"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 127,
+      "old": "loc_66C0",
+      "new": "S3LegacyOptions_StepChoice16OnA",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ApplySixteenChoiceStepOnA"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 135,
+      "old": "loc_66D0",
+      "new": "S3LegacyOptions_StoreChoicePlaySound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_StoreChoiceAndPlaySoundWithLegacyCheats"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 149,
+      "old": "locret_66FE",
+      "new": "S3LegacyOptions_ControlsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ReturnFromLegacyChoiceControls"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 183,
+      "old": "loc_6754",
+      "new": "S3LegacyOptions_DrawSelectedChoice",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_DrawSelectedChoiceTextAndOptionalHexSound"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 191,
+      "old": "loc_676E",
+      "new": "S3LegacyOptions_UploadSelectedBox",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_UploadSelectedTwentyTwoByEightBox"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 223,
+      "old": "loc_67C4",
+      "new": "S3LegacyOptions_DrawUnselectedChoice",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_DrawUnselectedChoiceTextAndOptionalHexSound"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 231,
+      "old": "loc_67DE",
+      "new": "S3LegacyOptions_UploadUnselectedBox",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_UploadUnselectedTwentyTwoByEightBox"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 247,
+      "old": "loc_6800",
+      "new": "S3LegacyOptions_UseItemChoiceText",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ReplaceCharacterTextTableForItemsBox"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 252,
+      "old": "loc_680C",
+      "new": "S3LegacyOptions_UseSoundPlaceholderText",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_SelectSingleSoundPlaceholderTableForBoxTwo"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 257,
+      "old": "locret_681A",
+      "new": "S3LegacyOptions_ChoiceTextReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_ReturnSelectedChoiceTextTable"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 279,
+      "old": "loc_6836",
+      "new": "S3LegacyOptions_WriteHexTileKeepAttrs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LegacyOptions_AppendHexTilePreservingAttributeWord"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 294,
+      "old": "off_6858",
+      "new": "S3LegacyOptions_MilesChoiceText",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3LegacyOptions_MilesCharacterChoiceTextPointers"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 298,
+      "old": "off_6864",
+      "new": "S3LegacyOptions_TailsChoiceText",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3LegacyOptions_TailsCharacterChoiceTextPointers"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 302,
+      "old": "off_6870",
+      "new": "S3LegacyOptions_VersusItemChoiceText",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3LegacyOptions_VersusItemChoiceTextPointers"
+    },
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "original_line": 305,
+      "old": "off_6878",
+      "new": "S3LegacyOptions_SoundTestPlaceholder",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3LegacyOptions_SoundTestPlaceholderTextPointer"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 71,
+      "old": "loc_B9D4",
+      "new": "S3SaveMenu_CopyFirstTargetPaletteLine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_CopySaveMenuFirstTargetPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 77,
+      "old": "loc_B9E0",
+      "new": "S3SaveMenu_CopyCharacterPaletteLines",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_CopyTwoCharacterTargetPaletteLinesAndPrepareFixedActors"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 84,
+      "old": "loc_B9F0",
+      "new": "S3SaveMenu_BuildFixedActorFromRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_ConstructNextFixedSaveMenuActorFromTenByteRecord"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 103,
+      "old": "loc_BA3E",
+      "new": "S3SaveMenu_CopyCardTargetAndBlankNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_TransferCurrentCardPaletteToTargetAndClearNormalLine"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 135,
+      "old": "loc_BAC0",
+      "new": "S3SaveMenu_CopyVisibleEmeraldColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_CopyFifteenEmeraldColorsOnVisibleFlickerPhase"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 141,
+      "old": "loc_BAC8",
+      "new": "S3SaveMenu_BlankEmeraldColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_FillFifteenEmeraldColorsOnBlankFlickerPhase"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 145,
+      "old": "loc_BAD0",
+      "new": "S3SaveMenu_RepeatFrameOrPlayExitSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_RepeatSaveMenuFrameOrPlaySelectionSoundOnExit"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 185,
+      "old": "loc_BB0A",
+      "new": "S3SaveMenu_SelectSlotMapOnVBlank",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_SelectAnimatedSaveSlotStaticRectangleForVBlank"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 194,
+      "old": "loc_BB26",
+      "new": "S3SaveMenu_ChooseNewOrAnimatedSlotMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_ChooseNewFileOrAnimatedStaticMapForOneSavedSlot"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 200,
+      "old": "loc_BB32",
+      "new": "S3SaveMenu_UploadSlotMapAndAdvance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_UploadTenBySevenSaveSlotRectangleAndAdvanceRecord"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 214,
+      "old": "loc_BB58",
+      "new": "S3SaveMenu_WriteSlotPrefixAndChooseLabel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_WriteSaveSlotPrefixAndChooseBlankClearOrZoneLabel"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 237,
+      "old": "loc_BB98",
+      "new": "S3SaveMenu_WriteBlankOrClearLabel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_WriteChosenBlankOrClearEncodedLabelAtSlotTextOrigin"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "original_line": 241,
+      "old": "loc_BB9E",
+      "new": "S3SaveMenu_AdvanceSlotLabelPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveMenu_AdvanceSaveLabelRecordActorAndVramDestination"
+    },
+    {
+      "source": "src/game/modes/s3/save_screen_data.s",
+      "original_line": 37,
+      "old": "word_BD16",
+      "new": "S3SaveMenu_WidePlaneRectangles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenu_WidePlaneSaveMenuRectangleDescriptors"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 21,
+      "old": "loc_C54C",
+      "new": "S3SaveErase_DecorateFromEmeraldBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_BuildOneEmeraldDecorationFromNextSavedHighBit"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 29,
+      "old": "loc_C55E",
+      "new": "S3SaveErase_AdvanceEmeraldDecoration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_AdvanceEmeraldDecorationFrameAndEmbeddedRecord"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 56,
+      "old": "loc_C58E",
+      "new": "S3SaveErase_InitEraseActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_InitializeEraseActorAndFallIntoIdleState"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 63,
+      "old": "loc_C5AA",
+      "new": "S3SaveErase_EnterEraseSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_EnterEraseSelectionOnConfirmAtFinalMenuEntry"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 76,
+      "old": "loc_C5D4",
+      "new": "S3SaveErase_AnimateAndLatchNonemptySlot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_AnimateEraseSelectionAndLatchNonemptyFileForConfirmation"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 102,
+      "old": "loc_C624",
+      "new": "S3SaveErase_FollowSelectorX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_FollowSelectorScreenXWithEraseActorAndChild"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 110,
+      "old": "loc_C63C",
+      "new": "S3SaveErase_ResetAnimAndBeginReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ResetEraseAnimationsAndArmSlideBackToDeleteEntry"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 124,
+      "old": "loc_C66C",
+      "new": "S3SaveErase_ClearSelectionAndTestEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ClearEraseSelectionLatchAndTestReturnEndpoint"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 133,
+      "old": "loc_C682",
+      "new": "S3SaveErase_Step8PixelsTowardEndpoint",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_MoveEraseIconEightPixelsTowardReturnEndpoint"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 137,
+      "old": "loc_C688",
+      "new": "S3SaveErase_ProjectActorAndChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_TailProjectEraseActorAndEmbeddedChildren"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 141,
+      "old": "loc_C68C",
+      "new": "S3SaveErase_WaitForConfirmationMarker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_WaitForChildFrameElevenThenArmConfirmationMarker"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 149,
+      "old": "loc_C6A6",
+      "new": "S3SaveErase_DrawConfirmationPrep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_DrawEraseConfirmationPreparationActor"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 153,
+      "old": "loc_C6AC",
+      "new": "S3SaveErase_EraseOnLeftOrCancelOnRight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ConfirmEightByteS3EraseOnLeftOrCancelOnRight"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 167,
+      "old": "loc_C6DA",
+      "new": "S3SaveErase_UnlockAndBeginReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_UnlockEraseConfirmationAndEnterReturnSetup"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 173,
+      "old": "loc_C6E8",
+      "new": "S3SaveErase_DrawWhileAwaitingDirection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_DrawWhileWaitingForEraseConfirmationDirection"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 183,
+      "old": "loc_C6FA",
+      "new": "S3SaveErase_AdvanceBlinkFrameOrRestart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ReadNextEraseBlinkFrameOrRestartOnNegativeSentinel"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 193,
+      "old": "loc_C710",
+      "new": "S3SaveErase_StoreEraseBlinkMappingFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_StoreEraseBlinkMappingFrame"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 196,
+      "old": "locret_C714",
+      "new": "S3SaveErase_MainBlinkUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ReturnFromMainEraseBlinkTimerOrFrameUpdate"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 201,
+      "old": "byte_C716",
+      "new": "S3SaveErase_MainBlinkFrames",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveErase_EraseMainIconBlinkFramesAndNegativeRestartSentinel"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 217,
+      "old": "locret_C744",
+      "new": "S3SaveErase_ChildFrameUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ReturnFromEraseChildFrameTimerOrUpdate"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 239,
+      "old": "loc_C772",
+      "new": "S3SaveErase_SelectFinishPaletteByChaos",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ChooseFinishedCardPaletteFromSavedChaosCount"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 246,
+      "old": "loc_C782",
+      "new": "S3SaveErase_SelectIndexedCardPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_SelectThirtyTwoByteCardPaletteByWordIndex"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 252,
+      "old": "loc_C78C",
+      "new": "S3SaveErase_CopyCardPaletteToNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_CopyOneCardPaletteLineToNormalPalette"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 267,
+      "old": "loc_C7A8",
+      "new": "S3SaveErase_WriteEncodedLabelOrBlank",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ReadEncodedLabelByteAndWriteLiteralPriorityBlankForZero"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 274,
+      "old": "loc_C7B2",
+      "new": "S3SaveErase_EndEncodedLabelOrWriteGlyph",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_TerminateOnNegativeEncodedByteOrWriteOffsetGlyphTile"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "original_line": 282,
+      "old": "locret_C7BC",
+      "new": "S3SaveErase_EncodedLabelWriteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveErase_ReturnAfterEncodedLabelNegativeTerminator"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 12,
+      "old": "loc_C078",
+      "new": "S3SaveSlot_Begin13CursorSubsteps",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_BeginThirteenSubstepsPerPreselectedEntry"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 15,
+      "old": "loc_C07A",
+      "new": "S3SaveSlot_AdvancePreselectedCursor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_AdvancePreselectedCursorAcrossScreenAndScrollRanges"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 26,
+      "old": "loc_C090",
+      "new": "S3SaveSlot_RepeatInitialCursorSteps",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_RepeatSubstepsAndSelectedEntryInitialization"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 30,
+      "old": "loc_C098",
+      "new": "S3SaveSlot_SetInitialCursorAndScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CommitInitialCursorAndCameraScrollThenActivateInput"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 37,
+      "old": "loc_C0AC",
+      "new": "S3SaveSlot_CheckTitleExitOnB",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_AllowTitleExitOnBOnlyOutsideEraseSelection"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 46,
+      "old": "loc_C0C4",
+      "new": "S3SaveSlot_GateSelectorInput",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_GateSelectorInputByEraseLockAndMovementTimer"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 59,
+      "old": "loc_C0EA",
+      "new": "S3SaveSlot_DecrementChoiceAndSelectSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_DecrementSelectionAndChooseEraseOrNormalNavigationSound"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 68,
+      "old": "loc_C0FE",
+      "new": "S3SaveSlot_PlayLeftSoundAndSetStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_PlayLeftNavigationSoundAndSetNegativeStep"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 72,
+      "old": "loc_C106",
+      "new": "S3SaveSlot_IncrementChoiceWithinBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_IncrementSelectionUnlessAtProfileFinalEntry"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 83,
+      "old": "loc_C124",
+      "new": "S3SaveSlot_PlayRightSoundAndSetStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_PlayRightNavigationSoundAndSetPositiveStep"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 87,
+      "old": "loc_C12C",
+      "new": "S3SaveSlot_Start13StepCursorMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_StoreNavigationStepAndArmThirteenUpdateMovement"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 94,
+      "old": "loc_C13A",
+      "new": "S3SaveSlot_DrawSelectorWithoutStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_JoinSelectorDrawingWhenNoNavigationStep"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 98,
+      "old": "loc_C13C",
+      "new": "S3SaveSlot_StepRightThroughScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_MovePositiveStepThroughScreenThenScrollAndFarEdge"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 115,
+      "old": "loc_C162",
+      "new": "S3SaveSlot_StepLeftThroughScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_MoveNegativeStepThroughScreenThenScrollAndNearEdge"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 125,
+      "old": "loc_C174",
+      "new": "S3SaveSlot_StoreMoveAndTickRemaining",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CommitCursorMovementAndDecrementRemainingUpdates"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 130,
+      "old": "loc_C180",
+      "new": "S3SaveSlot_SelectEndpointCursorOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ChooseEndpointCursorOffsetBeforeFrameAndBlink"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 139,
+      "old": "loc_C192",
+      "new": "S3SaveSlot_PositionCursorAndSelectFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_SetCursorXAndChooseCentralOrOuterFrame"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 149,
+      "old": "loc_C1AA",
+      "new": "S3SaveSlot_StoreCursorFrameAndBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_StoreCursorFrameAndDrawOnlyOnFrameCounterBitTwo"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 156,
+      "old": "locret_C1BC",
+      "new": "S3SaveSlot_InvisibleCursorReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ReturnDuringCursorInvisibleBlinkPhase"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 188,
+      "old": "loc_C224",
+      "new": "S3SaveSlot_CycleNoSaveChoiceAndBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CycleNoSaveCharacterAndBlinkOneChildMarker"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 198,
+      "old": "loc_C244",
+      "new": "S3SaveSlot_ClearNoSaveChildCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ClearNoSaveChildCountWhenInactiveOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 201,
+      "old": "loc_C248",
+      "new": "S3SaveSlot_DrawNoSaveChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_TailPositionAndDrawNoSaveChildSprites"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 211,
+      "old": "loc_C25E",
+      "new": "S3SaveSlot_BindEightByteSaveRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_BindEightByteSaveRecordAndCacheCharacterProgressBytes"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 222,
+      "old": "loc_C284",
+      "new": "S3SaveSlot_RefreshSlotAndCheckSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_RefreshSaveSlotAndRouteSelectedOrInactiveDisplay"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 232,
+      "old": "loc_C2A2",
+      "new": "S3SaveSlot_DrawCharacterChildFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_DrawCharacterFrameThroughEmbeddedChildProjection"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 252,
+      "old": "loc_C2DC",
+      "new": "S3SaveSlot_LatchCompletedProgressChoice",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_LatchProgressSelectionOnlyForSavedIndexAboveSix"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 259,
+      "old": "loc_C2EE",
+      "new": "S3SaveSlot_GateProgressSelectionInput",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_BlockSelectedSlotInputDuringCursorControlOrEraseMode"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 269,
+      "old": "loc_C306",
+      "new": "S3SaveSlot_DecrementProgressOrWrapTo6",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_DecrementUnlockedS3ProgressOrWrapToSix"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 282,
+      "old": "loc_C320",
+      "new": "S3SaveSlot_SkipProgress4Backward",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_SkipProgressFourWhileCyclingBackward"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 289,
+      "old": "loc_C32A",
+      "new": "S3SaveSlot_IncrementProgressAndSkip4",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_IncrementUnlockedS3ProgressAndSkipFour"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 298,
+      "old": "loc_C33C",
+      "new": "S3SaveSlot_WrapProgressAbove6",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_WrapS3ProgressAboveSixToZero"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 303,
+      "old": "loc_C344",
+      "new": "S3SaveSlot_StoreProgressAndBlinkMarker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CommitProgressChoicePlayNativeSfxCallAndBlinkMarker"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 313,
+      "old": "loc_C360",
+      "new": "S3SaveSlot_CheckUnlatchedProgressDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_GateUnlatchedProgressDisplayByCursorControlWord"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 317,
+      "old": "loc_C368",
+      "new": "S3SaveSlot_ClearProgressMarkerFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ClearProgressSelectionMarkerFrame"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 320,
+      "old": "loc_C36C",
+      "new": "S3SaveSlot_ConfirmSelectedSave",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ConfirmSelectedS3SaveOrRemainInDisplay"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 339,
+      "old": "loc_C3AE",
+      "new": "S3SaveSlot_RestoreRingFlagsAndProgress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_RestoreSavedSpecialRingBytesAndOriginalProgress"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 344,
+      "old": "loc_C3BE",
+      "new": "S3SaveSlot_ShiftZoneIndexToHighByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ShiftSelectedS3ZoneIndexIntoHighByte"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 347,
+      "old": "loc_C3C0",
+      "new": "S3SaveSlot_RestoreSavedGameState",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CommitS3ZoneCharacterSpecialStageAndEmeraldState"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 361,
+      "old": "loc_C3EC",
+      "new": "S3SaveSlot_ExtractNextSavedEmeraldBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ExtractNextSavedEmeraldHighBit"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 367,
+      "old": "loc_C3F4",
+      "new": "S3SaveSlot_StoreEmeraldBitAndBindSave",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_StoreSevenEmeraldFlagsThenBindSaveAndResetStats"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 375,
+      "old": "loc_C40A",
+      "new": "S3SaveSlot_ConfirmOrEditEmptySlot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ConfirmOrEditEmptyEightByteS3SaveSlot"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 404,
+      "old": "loc_C476",
+      "new": "S3SaveSlot_CycleNewFileChoiceAndBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CycleEmptySlotCharacterAndBlinkNewFileMarker"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 428,
+      "old": "loc_C4C6",
+      "new": "S3SaveSlot_DrawSlotAndChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_DrawProjectedSaveSlotAndEmbeddedChildren"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 448,
+      "old": "loc_C4EA",
+      "new": "S3SaveSlot_CycleCharacterBackward",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_CycleCharacterBackwardOnSecondInputBitWithWrap"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 456,
+      "old": "loc_C4F6",
+      "new": "S3SaveSlot_PlayCharacterChangeSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_PlayCharacterChangeSoundWhilePreservingFullD0"
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "original_line": 464,
+      "old": "locret_C506",
+      "new": "S3SaveSlot_CharacterChoiceReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SaveSlotWidget_ReturnChosenOrUnchangedNewGameCharacter"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 79,
+      "old": "loc_C710",
+      "new": "SKSaveMenu_CopyFirstTargetPaletteLine",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_CopySaveMenuFirstTargetPaletteLine"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 85,
+      "old": "loc_C71C",
+      "new": "SKSaveMenu_CopyCharacterPaletteLines",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_CopyTwoCharacterTargetPaletteLinesAndPrepareFixedActors"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 93,
+      "old": "loc_C72C",
+      "new": "SKSaveMenu_BuildFixedActorFromRecord",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_ConstructNextFixedSaveMenuActorFromTenByteRecord"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 112,
+      "old": "loc_C77A",
+      "new": "SKSaveMenu_CopyCardTargetAndBlankNormal",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_TransferCurrentCardPaletteToTargetAndClearNormalLine"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 123,
+      "old": "loc_C7A4",
+      "new": "SKSaveMenu_CompactZoneCardArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_CompactZoneCardArtByRemovingOneEightC0ByteBlock"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 134,
+      "old": "loc_C7CC",
+      "new": "SKSaveMenu_DuplicateLoadedArtBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_DuplicateFiveFortyBytesOfPreviousLoadedArtBlock"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 164,
+      "old": "loc_C83C",
+      "new": "SKSaveMenu_StoreEmeraldFlickerPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_StoreThreePhaseEmeraldFlickerAndChooseBlankPhase"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 169,
+      "old": "loc_C846",
+      "new": "SKSaveMenu_CopyVisibleEmeraldColors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_CopyFifteenEmeraldColorsOnVisibleFlickerPhase"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 175,
+      "old": "loc_C84E",
+      "new": "SKSaveMenu_BlankEmeraldColors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_FillFifteenEmeraldColorsOnBlankFlickerPhase"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 179,
+      "old": "loc_C856",
+      "new": "SKSaveMenu_RepeatFrameOrPlayExitSound",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_RepeatSaveMenuFrameOrPlaySelectionSoundOnExit"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 219,
+      "old": "loc_C890",
+      "new": "SKSaveMenu_SelectSlotMapOnVBlank",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_SelectAnimatedSaveSlotStaticRectangleForVBlank"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 229,
+      "old": "loc_C8B2",
+      "new": "SKSaveMenu_ChooseNewOrAnimatedSlotMap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_ChooseNewFileOrAnimatedStaticMapForOneSavedSlot"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 235,
+      "old": "loc_C8BE",
+      "new": "SKSaveMenu_UploadSlotMapAndAdvance",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_UploadTenBySevenSaveSlotRectangleAndAdvanceRecord"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 249,
+      "old": "loc_C8E6",
+      "new": "SKSaveMenu_WriteSlotPrefixAndChooseLabel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_WriteSaveSlotPrefixAndChooseBlankClearOrZoneLabel"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 265,
+      "old": "loc_C912",
+      "new": "SKSaveMenu_WriteZoneLabelAndPrepDigits",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_WriteZoneLabelAndPrepareTwoZoneNumberGlyphs"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 279,
+      "old": "loc_C932",
+      "new": "SKSaveMenu_AddFontBaseToZoneTens",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_AddFontBaseToNonnegativeZoneTensCode"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 282,
+      "old": "loc_C936",
+      "new": "SKSaveMenu_WriteZoneNumberAndAdvance",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_WriteZoneTensAndUnitsThenAdvanceLabelSlot"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 291,
+      "old": "loc_C946",
+      "new": "SKSaveMenu_WriteBlankOrClearLabel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_WriteChosenBlankOrClearEncodedLabelAtSlotTextOrigin"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 295,
+      "old": "loc_C94C",
+      "new": "SKSaveMenu_AdvanceSlotLabelPointers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_AdvanceSaveLabelRecordActorAndVramDestination"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 322,
+      "old": "loc_C97A",
+      "new": "SKSaveMenu_BeginCharacterAndStatsPanels",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_BeginEightSlotCharacterAndLifeContinuePanelPass"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 329,
+      "old": "loc_C98C",
+      "new": "SKSaveMenu_UseSonicPanelForCombinedMode",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_AliasCombinedCharacterToSonicForLifePanel"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 334,
+      "old": "loc_C994",
+      "new": "SKSaveMenu_BlankCharacterPanelIfEmpty",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_ForceBlankCharacterPanelForEmptySaveHeader"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 339,
+      "old": "loc_C99A",
+      "new": "SKSaveMenu_UploadCharacterPanel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_UploadThreeByFiveCharacterPanelAndChooseBlankDigitArea"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 360,
+      "old": "loc_C9CC",
+      "new": "SKSaveMenu_UploadLivesAndContinuesDigits",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_ConvertAndUploadCachedLivesAndContinuesAsTwoByTwoDigits"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 378,
+      "old": "loc_CA02",
+      "new": "SKSaveMenu_AdvanceStatsPanelPointers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_AdvanceEightLifePanelActorsRecordsAndDestinations"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 390,
+      "old": "loc_CA16",
+      "new": "SKSaveMenu_CountDecimalTens",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_CountDecimalTensByByteSubtractionUntilBorrow"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "original_line": 401,
+      "old": "loc_CA2E",
+      "new": "SKSaveMenu_WriteTwoByTwoDigitTiles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveMenu_WriteTensAndUnitsIntoTwoByTwoTileScratch"
+    },
+    {
+      "source": "src/game/modes/sk/save_screen_data.s",
+      "original_line": 73,
+      "old": "word_CD58",
+      "new": "SKSaveMenu_WidePlaneRectangles",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenu_WidePlaneEighteenSaveMenuRectangleDescriptors"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 21,
+      "old": "loc_D750",
+      "new": "SKSaveErase_DecodeNextEmeraldState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_DecodeNextTwoBitEmeraldDecorationState"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 32,
+      "old": "loc_D768",
+      "new": "SKSaveErase_StoreEmeraldDecorationFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_StoreEmeraldDecorationFrameWithOptionalStateThreeOffset"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 38,
+      "old": "loc_D774",
+      "new": "SKSaveErase_AdvanceEmeraldDecoration",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_AdvanceEmeraldDecorationFrameAndEmbeddedRecord"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 65,
+      "old": "loc_D7A4",
+      "new": "SKSaveErase_InitEraseActor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_InitializeEraseActorAndFallIntoIdleState"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 72,
+      "old": "loc_D7C0",
+      "new": "SKSaveErase_EnterEraseSelection",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_EnterEraseSelectionOnConfirmAtFinalMenuEntry"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 85,
+      "old": "loc_D7EA",
+      "new": "SKSaveErase_AnimateAndLatchNonemptySlot",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_AnimateEraseSelectionAndLatchNonemptyFileForConfirmation"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 111,
+      "old": "loc_D83C",
+      "new": "SKSaveErase_FollowSelectorX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_FollowSelectorScreenXWithEraseActorAndChild"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 119,
+      "old": "loc_D854",
+      "new": "SKSaveErase_ResetAnimAndBeginReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ResetEraseAnimationsAndArmSlideBackToDeleteEntry"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 133,
+      "old": "loc_D884",
+      "new": "SKSaveErase_ClearSelectionAndTestEnd",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ClearEraseSelectionLatchAndTestReturnEndpoint"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 142,
+      "old": "loc_D89A",
+      "new": "SKSaveErase_Step8PixelsTowardEndpoint",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_MoveEraseIconEightPixelsTowardReturnEndpoint"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 146,
+      "old": "loc_D8A0",
+      "new": "SKSaveErase_ProjectActorAndChildren",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_TailProjectEraseActorAndEmbeddedChildren"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 150,
+      "old": "loc_D8A4",
+      "new": "SKSaveErase_WaitForConfirmationMarker",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_WaitForChildFrameElevenThenArmConfirmationMarker"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 158,
+      "old": "loc_D8BE",
+      "new": "SKSaveErase_DrawConfirmationPrep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_DrawEraseConfirmationPreparationActor"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 162,
+      "old": "loc_D8C4",
+      "new": "SKSaveErase_EraseOnLeftOrCancelOnRight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ConfirmTenByteSkEraseWithDefaultLivesOrCancelOnRight"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 178,
+      "old": "loc_D8FE",
+      "new": "SKSaveErase_UnlockAndBeginReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_UnlockEraseConfirmationAndEnterReturnSetup"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 184,
+      "old": "loc_D90C",
+      "new": "SKSaveErase_DrawWhileAwaitingDirection",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_DrawWhileWaitingForEraseConfirmationDirection"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 194,
+      "old": "loc_D91E",
+      "new": "SKSaveErase_AdvanceBlinkFrameOrRestart",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReadNextEraseBlinkFrameOrRestartOnNegativeSentinel"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 204,
+      "old": "loc_D934",
+      "new": "SKSaveErase_StoreEraseBlinkMappingFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_StoreEraseBlinkMappingFrame"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 207,
+      "old": "locret_D938",
+      "new": "SKSaveErase_MainBlinkUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReturnFromMainEraseBlinkTimerOrFrameUpdate"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 212,
+      "old": "byte_D93A",
+      "new": "SKSaveErase_MainBlinkFrames",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveErase_EraseMainIconBlinkFramesAndNegativeRestartSentinel"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 228,
+      "old": "locret_D968",
+      "new": "SKSaveErase_ChildFrameUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReturnFromEraseChildFrameTimerOrUpdate"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 248,
+      "old": "loc_D992",
+      "new": "SKSaveErase_SelectCompletedPortrait",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_SelectCompletedCharacterPortraitIndexFourteenThroughSeventeen"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 253,
+      "old": "loc_D99C",
+      "new": "SKSaveErase_SelectPortraitUploadDest",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ChoosePortraitUploadDestinationAndJoinArtQueue"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 258,
+      "old": "loc_D9A2",
+      "new": "SKSaveErase_SelectZoneCardUploadDest",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ChooseOrdinaryZoneCardUploadDestination"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 261,
+      "old": "loc_D9A6",
+      "new": "SKSaveErase_QueueCardOrPortraitArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_QueueOneCardOrPortraitArtBlockAndRestoreSavedRecord"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 274,
+      "old": "loc_D9C8",
+      "new": "SKSaveErase_SelectCompletedCardPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_SelectCompletedCardPaletteForOutcomeOneTwoOrThree"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 284,
+      "old": "loc_D9E2",
+      "new": "SKSaveErase_SelectIndexedCardPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_SelectThirtyTwoByteCardPaletteByWordIndex"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 290,
+      "old": "loc_D9EC",
+      "new": "SKSaveErase_CopyCardPaletteToNormal",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_CopyOneCardPaletteLineToNormalPalette"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 305,
+      "old": "loc_DA08",
+      "new": "SKSaveErase_WriteEncodedLabelOrBlank",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReadEncodedLabelByteAndWriteLiteralPriorityBlankForZero"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 312,
+      "old": "loc_DA12",
+      "new": "SKSaveErase_EndEncodedLabelOrWriteGlyph",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_TerminateOnNegativeEncodedByteOrWriteOffsetGlyphTile"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 320,
+      "old": "locret_DA1C",
+      "new": "SKSaveErase_EncodedLabelWriteReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReturnAfterEncodedLabelNegativeTerminator"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 332,
+      "old": "loc_DA28",
+      "new": "SKSaveErase_DecodeAndCountEmeraldStates",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_DecodeSevenTwoBitEmeraldStatesAndCountChaosAndSuper"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 343,
+      "old": "loc_DA3E",
+      "new": "SKSaveErase_LatchEmeraldConversion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_LatchEmeraldConversionForStateAtLeastTwo"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 348,
+      "old": "loc_DA48",
+      "new": "SKSaveErase_RepeatEmeraldStateDecode",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_RepeatSevenEmeraldStateDecodesAndReturnCounts"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 364,
+      "old": "loc_DA62",
+      "new": "SKSaveErase_MapProgressToZoneAct",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_MapLowFourProgressBitsThroughFourteenWordZoneActTable"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 369,
+      "old": "locret_DA6C",
+      "new": "SKSaveErase_ProgressZoneActReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveErase_ReturnMappedProgressZoneActOrKnucklesException"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 374,
+      "old": "LevelList_DA6E",
+      "new": "SKSaveErase_ProgressToZoneActTable",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveErase_ProgressIndexZoneActWordLookup"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "original_line": 418,
+      "old": "word_DB08",
+      "new": "SKSaveErase_BlankLivesAndContinuesDigits",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveErase_BlankTwoColumnFiveRowLivesContinuesDigitArea"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 12,
+      "old": "loc_D1C6",
+      "new": "SKSaveSlot_Begin13CursorSubsteps",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_BeginThirteenSubstepsPerPreselectedEntry"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 15,
+      "old": "loc_D1C8",
+      "new": "SKSaveSlot_AdvancePreselectedCursor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_AdvancePreselectedCursorAcrossScreenAndScrollRanges"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 26,
+      "old": "loc_D1DE",
+      "new": "SKSaveSlot_RepeatInitialCursorSteps",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_RepeatSubstepsAndSelectedEntryInitialization"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 30,
+      "old": "loc_D1E6",
+      "new": "SKSaveSlot_SetInitialCursorAndScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CommitInitialCursorAndCameraScrollThenActivateInput"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 37,
+      "old": "loc_D1FA",
+      "new": "SKSaveSlot_CheckTitleExitOnB",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_AllowTitleExitOnBOnlyOutsideEraseSelection"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 46,
+      "old": "loc_D212",
+      "new": "SKSaveSlot_GateSelectorInput",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_GateSelectorInputByEraseLockAndMovementTimer"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 59,
+      "old": "loc_D238",
+      "new": "SKSaveSlot_DecrementChoiceAndSelectSound",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_DecrementSelectionAndChooseEraseOrNormalNavigationSound"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 68,
+      "old": "loc_D24C",
+      "new": "SKSaveSlot_PlayLeftSoundAndSetStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_PlayLeftNavigationSoundAndSetNegativeStep"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 72,
+      "old": "loc_D254",
+      "new": "SKSaveSlot_IncrementChoiceWithinBounds",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_IncrementSelectionUnlessAtProfileFinalEntry"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 83,
+      "old": "loc_D272",
+      "new": "SKSaveSlot_PlayRightSoundAndSetStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_PlayRightNavigationSoundAndSetPositiveStep"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 87,
+      "old": "loc_D27A",
+      "new": "SKSaveSlot_Start13StepCursorMove",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_StoreNavigationStepAndArmThirteenUpdateMovement"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 94,
+      "old": "loc_D288",
+      "new": "SKSaveSlot_DrawSelectorWithoutStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_JoinSelectorDrawingWhenNoNavigationStep"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 98,
+      "old": "loc_D28A",
+      "new": "SKSaveSlot_StepRightThroughScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_MovePositiveStepThroughScreenThenScrollAndFarEdge"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 115,
+      "old": "loc_D2B0",
+      "new": "SKSaveSlot_StepLeftThroughScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_MoveNegativeStepThroughScreenThenScrollAndNearEdge"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 125,
+      "old": "loc_D2C2",
+      "new": "SKSaveSlot_StoreMoveAndTickRemaining",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CommitCursorMovementAndDecrementRemainingUpdates"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 130,
+      "old": "loc_D2CE",
+      "new": "SKSaveSlot_SelectEndpointCursorOffset",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ChooseEndpointCursorOffsetBeforeFrameAndBlink"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 139,
+      "old": "loc_D2E0",
+      "new": "SKSaveSlot_PositionCursorAndSelectFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_SetCursorXAndChooseCentralOrOuterFrame"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 149,
+      "old": "loc_D2F8",
+      "new": "SKSaveSlot_StoreCursorFrameAndBlink",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_StoreCursorFrameAndDrawOnlyOnFrameCounterBitTwo"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 156,
+      "old": "locret_D30A",
+      "new": "SKSaveSlot_InvisibleCursorReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ReturnDuringCursorInvisibleBlinkPhase"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 189,
+      "old": "loc_D376",
+      "new": "SKSaveSlot_CycleNoSaveChoiceAndBlink",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CycleNoSaveCharacterAndBlinkOneChildMarker"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 199,
+      "old": "loc_D396",
+      "new": "SKSaveSlot_ClearNoSaveChildCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ClearNoSaveChildCountWhenInactiveOrBlinkOff"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 202,
+      "old": "loc_D39A",
+      "new": "SKSaveSlot_DrawNoSaveChildren",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_TailPositionAndDrawNoSaveChildSprites"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 212,
+      "old": "loc_D3B0",
+      "new": "SKSaveSlot_BindTenByteSaveRecord",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_BindTenByteSaveRecordDecodeStateAndNormalizeStoredLives"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 243,
+      "old": "loc_D41A",
+      "new": "SKSaveSlot_CacheLivesAndContinues",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CacheStoredLivesContinuesAndActivateSaveSlotUpdate"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 248,
+      "old": "loc_D42C",
+      "new": "SKSaveSlot_RefreshSlotAndCheckSelection",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_RefreshSaveSlotAndRouteSelectedOrInactiveDisplay"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 258,
+      "old": "loc_D44A",
+      "new": "SKSaveSlot_DrawCharacterChildFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_DrawCharacterFrameThroughEmbeddedChildProjection"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 286,
+      "old": "loc_D496",
+      "new": "SKSaveSlot_UseTailsOrKnucklesFinishCard",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_OverrideCompletedCardFrameForTailsOrKnuckles"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 291,
+      "old": "loc_D4A4",
+      "new": "SKSaveSlot_LatchCompletedProgressChoice",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_LatchProgressChoiceWhenSavedCompletionBitsNonzero"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 298,
+      "old": "loc_D4B6",
+      "new": "SKSaveSlot_GateProgressSelectionInput",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_BlockSelectedSlotInputDuringCursorControlOrEraseMode"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 308,
+      "old": "loc_D4D0",
+      "new": "SKSaveSlot_SelectProgressCeiling",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ChooseProgressCeilingByCharacterAndCompletionStatus"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 319,
+      "old": "loc_D4EE",
+      "new": "SKSaveSlot_DecrementProgressOrWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_DecrementUnlockedSkProgressAndWrapToChosenCeiling"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 332,
+      "old": "loc_D508",
+      "new": "SKSaveSlot_IncrementProgressOrWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_IncrementUnlockedSkProgressAndWrapAboveCeiling"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 341,
+      "old": "loc_D518",
+      "new": "SKSaveSlot_StoreProgressAndBlinkMarker",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CommitProgressChoicePlayNativeSfxCallAndBlinkMarker"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 351,
+      "old": "loc_D534",
+      "new": "SKSaveSlot_CheckUnlatchedProgressDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_GateUnlatchedProgressDisplayByCursorControlWord"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 355,
+      "old": "loc_D53C",
+      "new": "SKSaveSlot_ClearProgressMarkerFrame",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ClearProgressSelectionMarkerFrame"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 358,
+      "old": "loc_D540",
+      "new": "SKSaveSlot_ConfirmProgressBelowSaved",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ConfirmSelectedSkProgressAndRejectAtOrBeyondSavedIndex"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 374,
+      "old": "loc_D57A",
+      "new": "SKSaveSlot_RestoreProgressAndSavedState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_MapProgressRestorePackedSkStateAndPrepareSavedLives"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 399,
+      "old": "loc_D5CE",
+      "new": "SKSaveSlot_ResetLivesAndConsumeContinue",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ResetStoredLivesToThreeAndConsumeContinueWithBorrowClamp"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 405,
+      "old": "loc_D5DE",
+      "new": "SKSaveSlot_PersistRestoredStatsAndStart",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_RestoreStoredLivesContinuesPersistAndStartLevel"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 414,
+      "old": "loc_D5FE",
+      "new": "SKSaveSlot_ConfirmOrEditEmptySlot",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ConfirmOrEditEmptyTenByteSkSaveSlot"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 447,
+      "old": "loc_D67A",
+      "new": "SKSaveSlot_CycleNewFileChoiceAndBlink",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CycleEmptySlotCharacterAndBlinkNewFileMarker"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 471,
+      "old": "loc_D6CA",
+      "new": "SKSaveSlot_DrawSlotAndChildren",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_DrawProjectedSaveSlotAndEmbeddedChildren"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 491,
+      "old": "loc_D6EE",
+      "new": "SKSaveSlot_CycleCharacterBackward",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_CycleCharacterBackwardOnSecondInputBitWithWrap"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 499,
+      "old": "loc_D6FA",
+      "new": "SKSaveSlot_PlayCharacterChangeSound",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_PlayCharacterChangeSoundWhilePreservingFullD0"
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "original_line": 507,
+      "old": "locret_D70A",
+      "new": "SKSaveSlot_CharacterChoiceReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSaveSlotWidget_ReturnChosenOrUnchangedNewGameCharacter"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 15,
+      "old": "loc_B5F8",
+      "new": "S3Sram_ResetPlayerStats",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ResetPlayerStatisticsForNewGameOrCompetition"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 48,
+      "old": "loc_B66A",
+      "new": "S3Sram_CopyDefaultCompetitionData",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_CopyDefaultCompetitionDataExcludingChecksum"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 53,
+      "old": "loc_B674",
+      "new": "S3Sram_LoadAndValidateGameRegion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_LoadProfileSavedGameRegionWithMagicValidation"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 65,
+      "old": "loc_B69A",
+      "new": "S3Sram_CopySixEmptySlots",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_CopySixEmptyEightByteSavesAndMagicBeforeWritingDefaults"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 70,
+      "old": "loc_B6A4",
+      "new": "S3Sram_ResetMenuSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ClearNoSaveCharacterAndSelectFirstMenuEntryAfterLoad"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 115,
+      "old": "loc_B74A",
+      "new": "S3Sram_ReadOddBusWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ReadLogicalWordsFromOddByteSramBus"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 126,
+      "old": "locret_B762",
+      "new": "S3Sram_ReturnValidationStatus",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ReturnChecksumOrMagicComparisonStatus"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 158,
+      "old": "loc_B786",
+      "new": "S3Sram_WritePrimaryOddBusWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_WriteAllLogicalWordsToPrimaryOddByteSramCopy"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 164,
+      "old": "loc_B792",
+      "new": "S3Sram_WriteBackupOddBusWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_WriteAllLogicalWordsToBackupOddByteSramCopy"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 219,
+      "old": "loc_B80A",
+      "new": "S3Sram_ClearGlobalSpecialRingFlags",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ClearGlobalSpecialStageRingBitfieldAfterProgressSaveAttempt"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 222,
+      "old": "locret_B80E",
+      "new": "S3Sram_ProgressSaveReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ReturnFromProgressSaveWithoutAdditionalWork"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 243,
+      "old": "loc_B834",
+      "new": "S3Sram_PackEmeraldPresence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_PackCollectedEmeraldStatesForSavedRecord"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 248,
+      "old": "loc_B83C",
+      "new": "S3Sram_ShiftPackedEmeraldBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ShiftNextS3EmeraldBitIntoHighSevenSavedBits"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 259,
+      "old": "locret_B858",
+      "new": "S3Sram_SpecialStageSaveReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ReturnWithoutSavingSpecialStageForMissingSaveContext"
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "original_line": 265,
+      "old": "locret_B85A",
+      "new": "S3Sram_SaveMenuVBlankReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Sram_ReturnFromSaveMenuAssetLoadingVBlankCallback"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 15,
+      "old": "loc_C110",
+      "new": "SKSram_ResetPlayerStats",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ResetPlayerStatisticsForNewGameOrCompetition"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 50,
+      "old": "loc_C186",
+      "new": "SKSram_CopyDefaultCompetitionData",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_CopyDefaultCompetitionDataExcludingChecksum"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 55,
+      "old": "loc_C190",
+      "new": "SKSram_LoadAndValidateGameRegion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_LoadProfileSavedGameRegionWithMagicValidation"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 66,
+      "old": "loc_C1B2",
+      "new": "SKSram_FindNonemptySlotBeforeImport",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_FindAnyNonemptyTenByteSkSaveBeforeMigration"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 72,
+      "old": "loc_C1C0",
+      "new": "SKSram_PrepareDefaultSlotsForImport",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_PrepareEightDefaultSkRecordsForOldS3Import"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 77,
+      "old": "loc_C1CA",
+      "new": "SKSram_CopyDefaultsAndReadS3Region",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_CopyDefaultSkRegionThenReadOldS3RegionIntoRamScratch"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 92,
+      "old": "loc_C1FE",
+      "new": "SKSram_ImportS3Slot",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_TranslateOneNonemptyEightByteS3SaveIntoTenByteSkRecord"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 110,
+      "old": "loc_C236",
+      "new": "SKSram_ImportNextS3EmeraldBit",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ConvertNextS3HighEmeraldBitIntoSkStateOne"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 115,
+      "old": "loc_C23E",
+      "new": "SKSram_ShiftImportedEmeraldState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ShiftPackedMigratedEmeraldStateAndRepeatSevenBits"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 120,
+      "old": "loc_C248",
+      "new": "SKSram_AdvanceS3AndSKSlotPointers",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_AdvanceOldAndNewSavePointersAcrossSixMigratedSlots"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 125,
+      "old": "loc_C252",
+      "new": "SKSram_WriteDefaultOrImportedSlots",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_WriteDefaultOrMigratedSkSaveRegionAndBothChecksums"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 128,
+      "old": "loc_C256",
+      "new": "SKSram_ResetMenuSelection",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ResetNoSaveCharacterAndMenuSelectionAfterLockOnLoad"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 132,
+      "old": "locret_C260",
+      "new": "SKSram_InitReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnFromStandaloneOrCompletedSramInitialization"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 188,
+      "old": "loc_C32A",
+      "new": "SKSram_EnableBusAndBindReadDest",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_EnableSramAndSaveDestinationForLogicalWordRead"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 193,
+      "old": "loc_C336",
+      "new": "SKSram_ReadOddBusWords",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReadLogicalWordsFromOddByteSramBus"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 203,
+      "old": "loc_C354",
+      "new": "SKSram_VerifyChecksumAndRegionMagic",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_VerifyComputedChecksumThenExpectedRegionMagic"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 210,
+      "old": "locret_C360",
+      "new": "SKSram_ReturnValidationStatus",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnChecksumOrMagicComparisonStatus"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 243,
+      "old": "loc_C38A",
+      "new": "SKSram_EnableBusAndBindBackupSource",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_EnableSramAndBindBackupSourceForMirroredWrite"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 248,
+      "old": "loc_C396",
+      "new": "SKSram_WritePrimaryOddBusWords",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_WriteAllLogicalWordsToPrimaryOddByteSramCopy"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 254,
+      "old": "loc_C3A2",
+      "new": "SKSram_WriteBackupOddBusWords",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_WriteAllLogicalWordsToBackupOddByteSramCopy"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 264,
+      "old": "locret_C3C0",
+      "new": "SKSram_MirroredWriteReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnFromMirroredWriteAfterMappingAndOptionalMaskReset"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 351,
+      "old": "loc_C464",
+      "new": "SKSram_StoreProgressAndCheckKnuckles",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_StoreNewProgressAndTestCharacterSpecificCompletionThreshold"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 360,
+      "old": "loc_C478",
+      "new": "SKSram_CheckTailsCompletion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ApplyTailsOrSonicFinalProgressThreshold"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 368,
+      "old": "loc_C488",
+      "new": "SKSram_CheckSonicDoomsdayCompletion",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ChooseSonicCompletionAtDoomsdayThresholdByChaosCount"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 375,
+      "old": "loc_C498",
+      "new": "SKSram_ChooseStatusFromEmeraldCounts",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ChooseCompletedSaveStatusFromChaosAndSuperCounts"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 384,
+      "old": "loc_C4AE",
+      "new": "SKSram_StoreCompletionStatus",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReplaceSavedHeaderWithCompletionStatusOneTwoOrThree"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 387,
+      "old": "loc_C4B0",
+      "new": "SKSram_ClearSavedSpecialRingFlags",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ClearSavedSpecialStageRingWordForNewProgress"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 390,
+      "old": "loc_C4B4",
+      "new": "SKSram_CapLivesAt99",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_CapCurrentLivesBeforeUpdatingSelectedSkSave"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 396,
+      "old": "loc_C4C0",
+      "new": "SKSram_StoreLivesAndWriteProgress",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_StoreCappedLivesInRecordAndGlobalThenWriteAllSaves"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 401,
+      "old": "loc_C4CC",
+      "new": "SKSram_ClearGlobalSpecialRingFlags",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ClearGlobalRingFlagsAfterSkProgressSaveOrContextSkip"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 421,
+      "old": "loc_C4F8",
+      "new": "SKSram_PrepareEmeraldStatePacking",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_PrepareSevenTwoBitEmeraldStatesForSpecialStageSave"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 426,
+      "old": "loc_C500",
+      "new": "SKSram_PackEmeraldStates",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_PackCollectedEmeraldStatesForSavedRecord"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 439,
+      "old": "loc_C524",
+      "new": "SKSram_StoreContinuesAndWriteStage",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_StoreCappedContinuesAndTailWriteSpecialStageSave"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 445,
+      "old": "locret_C530",
+      "new": "SKSram_SpecialStageSaveReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnWithoutSavingSpecialStageForMissingSaveContext"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 462,
+      "old": "loc_C54C",
+      "new": "SKSram_StoreLivesAndCapContinues",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_StoreCappedLivesAndPrepareContinuesForStatisticsSave"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 470,
+      "old": "loc_C560",
+      "new": "SKSram_StoreContinuesAndWriteStats",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_StoreCappedContinuesAndWriteMirroredSaveStatistics"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 476,
+      "old": "locret_C56C",
+      "new": "SKSram_StatsSaveReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnWithoutLivesContinuesWriteOutsideSaveContext"
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "original_line": 482,
+      "old": "locret_C56E",
+      "new": "SKSram_SaveMenuVBlankReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKSram_ReturnFromSaveMenuAssetLoadingVBlankCallback"
+    },
+    {
+      "source": "src/ui/shared/s2menu/animations/sega_sonic.s",
+      "original_line": 5,
+      "old": "byte_434F6",
+      "new": "S3SegaSonic_RunCycleUniformAnimation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_RunCycleUniformAnimation"
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "original_line": 9,
+      "old": "word_43506",
+      "new": "S3SegaSonic_RunCycleFirstCompositePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_RunCycleFirstCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "original_line": 16,
+      "old": "word_4352C",
+      "new": "S3SegaSonic_RunCycleMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_RunCycleSecondCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "original_line": 23,
+      "old": "word_43552",
+      "new": "S3SegaSonic_RunCycleThirdCompositePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_RunCycleThirdCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "original_line": 30,
+      "old": "word_43578",
+      "new": "S3SegaSonic_RunCycleMap4",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_RunCycleFourthCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "original_line": 37,
+      "old": "word_4359E",
+      "new": "S3SegaSonic_StreakCompositePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SegaSonic_StreakCompositePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 31,
+      "old": "word_BD9E",
+      "new": "S3SaveMenuMapping_EmptyMappingFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EmptyMappingFrame"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 32,
+      "old": "word_BDA0",
+      "new": "S3Save_CenterCursorMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_CentralMenuCursorPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 51,
+      "old": "word_BE0E",
+      "new": "S3SaveMenuMapping_OuterMenuCursorPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_OuterMenuCursorPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 66,
+      "old": "word_BE64",
+      "new": "S3SaveMenuMapping_FixedMenuHeadingPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_FixedMenuHeadingPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 71,
+      "old": "word_BE7E",
+      "new": "S3Save_CombinedChoiceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_CombinedCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 78,
+      "old": "word_BEA4",
+      "new": "S3Save_SonicChoiceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_SonicCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 81,
+      "old": "word_BEB2",
+      "new": "S3Save_TailsChoiceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_TailsCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 86,
+      "old": "word_BECC",
+      "new": "S3Save_KnucklesChoiceMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_KnucklesCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 90,
+      "old": "word_BEE0",
+      "new": "S3Save_EraseChildInitialMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseChildInitialCyclePhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 93,
+      "old": "word_BEEE",
+      "new": "S3Save_EraseChildCycleMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseChildCyclePhaseOnePiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 95,
+      "old": "word_BEF6",
+      "new": "S3Save_EraseChildCycleMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseChildCyclePhaseTwoPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 97,
+      "old": "word_BEFE",
+      "new": "S3Save_EraseChildCycleMap3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseChildCyclePhaseThreePiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 99,
+      "old": "word_BF06",
+      "new": "S3Save_EraseConfirmationMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseConfirmationChildMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 102,
+      "old": "word_BF14",
+      "new": "S3Save_EraseMainBlinkMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseMainBlinkFirstPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 106,
+      "old": "word_BF28",
+      "new": "S3Save_EraseMainBlinkMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_EraseMainBlinkSecondPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 110,
+      "old": "word_BF3C",
+      "new": "S3Save_NoSaveChildMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_NoSaveSlotChildMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 113,
+      "old": "word_BF4A",
+      "new": "S3Save_ChaosEmeraldMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_FirstChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 115,
+      "old": "word_BF52",
+      "new": "S3Save_ChaosEmeraldMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_SecondChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 117,
+      "old": "word_BF5A",
+      "new": "S3Save_ChaosEmeraldMap3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_ThirdChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 119,
+      "old": "word_BF62",
+      "new": "S3Save_ChaosEmeraldMap4",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_FourthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 121,
+      "old": "word_BF6A",
+      "new": "S3Save_ChaosEmeraldMap5",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_FifthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 123,
+      "old": "word_BF72",
+      "new": "S3Save_ChaosEmeraldMap6",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_SixthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 125,
+      "old": "word_BF7A",
+      "new": "S3Save_ChaosEmeraldMap7",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_SeventhChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 127,
+      "old": "word_BF82",
+      "new": "S3Save_ProgressCardMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_OrdinaryProgressCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 134,
+      "old": "word_BFA8",
+      "new": "S3Save_CompletedCardMap1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_FirstCompletedOutcomeCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 141,
+      "old": "word_BFCE",
+      "new": "S3Save_CompletedCardMap2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_SecondCompletedOutcomeCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "original_line": 148,
+      "old": "word_BFF4",
+      "new": "S3Save_RaisedProgressMarkerMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3SaveMenuMapping_RaisedProgressChoiceMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 40,
+      "old": "word_CE56",
+      "new": "SKSaveMenuMapping_EmptyMappingFrame",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EmptyMappingFrame"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 41,
+      "old": "word_CE58",
+      "new": "SKSave_CenterCursorMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_CentralMenuCursorPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 60,
+      "old": "word_CEC6",
+      "new": "SKSaveMenuMapping_OuterMenuCursorPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_OuterMenuCursorPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 75,
+      "old": "word_CF1C",
+      "new": "SKSaveMenuMapping_FixedMenuHeadingPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FixedMenuHeadingPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 80,
+      "old": "word_CF36",
+      "new": "SKSave_CombinedChoiceMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_CombinedCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 87,
+      "old": "word_CF5C",
+      "new": "SKSave_SonicChoiceMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SonicCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 90,
+      "old": "word_CF6A",
+      "new": "SKSave_TailsChoiceMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_TailsCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 95,
+      "old": "word_CF84",
+      "new": "SKSave_KnucklesChoiceMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_KnucklesCharacterChoicePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 99,
+      "old": "word_CF98",
+      "new": "SKSave_EraseChildInitialMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseChildInitialCyclePhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 102,
+      "old": "word_CFA6",
+      "new": "SKSave_EraseChildCycleMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseChildCyclePhaseOnePiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 104,
+      "old": "word_CFAE",
+      "new": "SKSave_EraseChildCycleMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseChildCyclePhaseTwoPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 106,
+      "old": "word_CFB6",
+      "new": "SKSave_EraseChildCycleMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseChildCyclePhaseThreePiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 108,
+      "old": "word_CFBE",
+      "new": "SKSave_EraseConfirmationMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseConfirmationChildMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 111,
+      "old": "word_CFCC",
+      "new": "SKSave_EraseMainBlinkMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseMainBlinkFirstPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 115,
+      "old": "word_CFE0",
+      "new": "SKSave_EraseMainBlinkMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_EraseMainBlinkSecondPhasePieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 119,
+      "old": "word_CFF4",
+      "new": "SKSave_NoSaveChildMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_NoSaveSlotChildMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 122,
+      "old": "word_D002",
+      "new": "SKSave_ChaosEmeraldMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FirstChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 124,
+      "old": "word_D00A",
+      "new": "SKSave_ChaosEmeraldMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SecondChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 126,
+      "old": "word_D012",
+      "new": "SKSave_ChaosEmeraldMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_ThirdChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 128,
+      "old": "word_D01A",
+      "new": "SKSave_ChaosEmeraldMap4",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FourthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 130,
+      "old": "word_D022",
+      "new": "SKSave_ChaosEmeraldMap5",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FifthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 132,
+      "old": "word_D02A",
+      "new": "SKSave_ChaosEmeraldMap6",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SixthChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 134,
+      "old": "word_D032",
+      "new": "SKSave_ChaosEmeraldMap7",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SeventhChaosEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 136,
+      "old": "word_D03A",
+      "new": "SKSave_ProgressCardMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_OrdinaryProgressCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 143,
+      "old": "word_D060",
+      "new": "SKSave_CompletedCardMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FirstCompletedOutcomeCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 150,
+      "old": "word_D086",
+      "new": "SKSave_CompletedCardMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SecondCompletedOutcomeCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 157,
+      "old": "word_D0AC",
+      "new": "SKSave_RaisedProgressMarkerMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_RaisedProgressChoiceMarkerPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 160,
+      "old": "word_D0BA",
+      "new": "SKSave_AllSuperCompletedCardMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_AllSuperCompletedOutcomeCardPieces"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 167,
+      "old": "word_D0E0",
+      "new": "SKSave_SuperEmeraldMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FirstSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 169,
+      "old": "word_D0E8",
+      "new": "SKSave_SuperEmeraldMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SecondSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 171,
+      "old": "word_D0F0",
+      "new": "SKSave_SuperEmeraldMap3",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_ThirdSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 173,
+      "old": "word_D0F8",
+      "new": "SKSave_SuperEmeraldMap4",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FourthSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 175,
+      "old": "word_D100",
+      "new": "SKSave_SuperEmeraldMap5",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_FifthSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 177,
+      "old": "word_D108",
+      "new": "SKSave_SuperEmeraldMap6",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SixthSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 179,
+      "old": "word_D110",
+      "new": "SKSave_SuperEmeraldMap7",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_SeventhSuperEmeraldDecorationPiece"
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "original_line": 181,
+      "old": "word_D118",
+      "new": "SKSave_AlternateCharacterCardMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKSaveMenuMapping_AlternateCharacterCompletedCardPieces"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/modes/s3/legacy_options.s",
+      "tokens": [
+        [81, 1, 0, ""],
+        [83, 1, 0, ""],
+        [85, 0, 0, ""],
+        [87, 1, 1, ""],
+        [90, 1, 1, ""],
+        [92, 0, 1, ""],
+        [99, 1, 2, ""],
+        [101, 1, 2, ""],
+        [103, 0, 2, ""],
+        [105, 1, 3, ""],
+        [108, 1, 3, ""],
+        [110, 0, 3, ""],
+        [112, 1, 4, ""],
+        [115, 1, 4, ""],
+        [117, 0, 4, ""],
+        [120, 1, 5, ""],
+        [122, 1, 5, ""],
+        [130, 0, 5, ""],
+        [150, 1, 6, ""],
+        [157, 0, 6, ""],
+        [161, 1, 7, ""],
+        [164, 0, 7, ""],
+        [184, 1, 8, ""],
+        [191, 0, 8, ""],
+        [195, 1, 9, ""],
+        [198, 0, 9, ""],
+        [205, 2, 14, ""],
+        [207, 1, 10, ""],
+        [208, 2, 15, ""],
+        [209, 0, 10, ""],
+        [211, 1, 11, ""],
+        [212, 2, 16, ""],
+        [213, 0, 11, ""],
+        [215, 1, 12, ""],
+        [216, 2, 17, ""],
+        [217, 0, 12, ""],
+        [228, 1, 13, ""],
+        [230, 0, 13, ""],
+        [242, 0, 14, ""],
+        [246, 0, 15, ""],
+        [250, 0, 16, ""],
+        [253, 0, 17, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "tokens": [
+        [39, 1, 31, ""],
+        [53, 2, 229, ""],
+        [65, 0, 18, ""],
+        [67, 3, 18, ""],
+        [70, 0, 19, ""],
+        [72, 3, 19, ""],
+        [76, 0, 20, ""],
+        [87, 3, 20, ""],
+        [94, 0, 21, ""],
+        [97, 3, 21, ""],
+        [103, 2, 25, ""],
+        [122, 1, 23, ""],
+        [124, 0, 22, ""],
+        [126, 3, 22, ""],
+        [127, 1, 24, ""],
+        [128, 0, 23, ""],
+        [130, 3, 23, ""],
+        [131, 0, 24, ""],
+        [157, 0, 25, ""],
+        [165, 0, 26, ""],
+        [168, 1, 27, ""],
+        [170, 0, 27, ""],
+        [178, 3, 26, ""],
+        [183, 0, 28, ""],
+        [191, 1, 29, ""],
+        [194, 1, 29, ""],
+        [203, 1, 30, ""],
+        [204, 0, 29, ""],
+        [207, 0, 30, ""],
+        [211, 3, 28, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/save_screen_data.s",
+      "tokens": [[34, 0, 31, ""]]
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_erase.s",
+      "tokens": [
+        [17, 0, 32, ""],
+        [20, 1, 33, ""],
+        [24, 0, 33, ""],
+        [27, 3, 32, ""],
+        [34, 1, 34, ""],
+        [35, 1, 35, ""],
+        [36, 1, 36, ""],
+        [37, 1, 39, ""],
+        [38, 1, 42, ""],
+        [39, 1, 44, ""],
+        [40, 0, 34, ""],
+        [46, 0, 35, ""],
+        [48, 1, 41, ""],
+        [51, 1, 41, ""],
+        [56, 1, 41, ""],
+        [57, 0, 36, ""],
+        [61, 1, 37, ""],
+        [64, 1, 38, ""],
+        [66, 1, 37, ""],
+        [68, 1, 38, ""],
+        [77, 1, 38, ""],
+        [82, 0, 37, ""],
+        [88, 0, 38, ""],
+        [100, 0, 39, ""],
+        [104, 1, 40, ""],
+        [106, 1, 41, ""],
+        [107, 0, 40, ""],
+        [110, 0, 41, ""],
+        [112, 0, 42, ""],
+        [116, 1, 43, ""],
+        [119, 0, 43, ""],
+        [121, 0, 44, ""],
+        [124, 1, 45, ""],
+        [126, 1, 46, ""],
+        [134, 0, 45, ""],
+        [137, 1, 38, ""],
+        [138, 0, 46, ""],
+        [142, 1, 49, ""],
+        [144, 0, 47, ""],
+        [148, 1, 50, ""],
+        [149, 1, 48, ""],
+        [151, 1, 47, ""],
+        [152, 0, 48, ""],
+        [154, 0, 49, ""],
+        [156, 0, 50, ""],
+        [161, 1, 51, ""],
+        [168, 0, 51, ""],
+        [172, 1, 52, ""],
+        [183, 1, 53, ""],
+        [184, 0, 52, ""],
+        [188, 1, 53, ""],
+        [190, 0, 53, ""],
+        [195, 0, 54, ""],
+        [197, 3, 54, ""],
+        [205, 0, 55, ""],
+        [207, 1, 56, ""],
+        [209, 1, 55, ""],
+        [210, 0, 56, ""],
+        [211, 1, 57, ""],
+        [215, 1, 55, ""],
+        [216, 0, 57, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/save_slot_widgets.s",
+      "tokens": [
+        [7, 1, 61, ""],
+        [8, 0, 58, ""],
+        [10, 0, 59, ""],
+        [13, 1, 60, ""],
+        [17, 1, 60, ""],
+        [20, 0, 60, ""],
+        [21, 3, 59, ""],
+        [22, 3, 58, ""],
+        [23, 0, 61, ""],
+        [28, 2, 62, ""],
+        [29, 0, 62, ""],
+        [31, 1, 63, ""],
+        [33, 1, 63, ""],
+        [35, 1, 73, ""],
+        [36, 0, 63, ""],
+        [38, 1, 73, ""],
+        [40, 1, 70, ""],
+        [43, 1, 66, ""],
+        [45, 1, 64, ""],
+        [47, 1, 66, ""],
+        [48, 0, 64, ""],
+        [50, 1, 66, ""],
+        [54, 1, 65, ""],
+        [56, 0, 65, ""],
+        [59, 0, 66, ""],
+        [61, 1, 68, ""],
+        [63, 1, 68, ""],
+        [67, 1, 67, ""],
+        [69, 0, 67, ""],
+        [72, 0, 68, ""],
+        [74, 1, 69, ""],
+        [76, 1, 70, ""],
+        [77, 0, 69, ""],
+        [78, 1, 73, ""],
+        [79, 0, 70, ""],
+        [83, 1, 71, ""],
+        [86, 1, 72, ""],
+        [90, 1, 72, ""],
+        [93, 1, 72, ""],
+        [94, 0, 71, ""],
+        [97, 1, 72, ""],
+        [100, 1, 72, ""],
+        [103, 0, 72, ""],
+        [107, 0, 73, ""],
+        [110, 1, 74, ""],
+        [113, 1, 74, ""],
+        [115, 0, 74, ""],
+        [120, 1, 75, ""],
+        [122, 1, 75, ""],
+        [124, 0, 75, ""],
+        [127, 1, 76, ""],
+        [129, 0, 76, ""],
+        [137, 1, 78, ""],
+        [140, 1, 78, ""],
+        [143, 1, 77, ""],
+        [157, 0, 77, ""],
+        [165, 1, 79, ""],
+        [166, 0, 78, ""],
+        [168, 0, 79, ""],
+        [172, 1, 80, ""],
+        [175, 0, 80, ""],
+        [184, 2, 81, ""],
+        [185, 0, 81, ""],
+        [194, 0, 82, ""],
+        [201, 1, 98, ""],
+        [206, 1, 83, ""],
+        [209, 1, 83, ""],
+        [211, 0, 83, ""],
+        [213, 1, 84, ""],
+        [215, 1, 90, ""],
+        [217, 0, 84, ""],
+        [219, 1, 82, ""],
+        [221, 1, 85, ""],
+        [224, 1, 82, ""],
+        [225, 0, 85, ""],
+        [230, 1, 87, ""],
+        [233, 1, 86, ""],
+        [235, 1, 89, ""],
+        [236, 0, 86, ""],
+        [238, 1, 89, ""],
+        [240, 1, 89, ""],
+        [241, 0, 87, ""],
+        [243, 1, 89, ""],
+        [247, 1, 88, ""],
+        [249, 0, 88, ""],
+        [251, 1, 89, ""],
+        [253, 0, 89, ""],
+        [259, 1, 91, ""],
+        [260, 1, 92, ""],
+        [261, 0, 90, ""],
+        [263, 1, 82, ""],
+        [264, 0, 91, ""],
+        [266, 0, 92, ""],
+        [269, 1, 82, ""],
+        [272, 1, 82, ""],
+        [276, 1, 93, ""],
+        [279, 1, 94, ""],
+        [282, 1, 95, ""],
+        [283, 0, 93, ""],
+        [287, 0, 94, ""],
+        [289, 0, 95, ""],
+        [302, 0, 96, ""],
+        [305, 1, 97, ""],
+        [307, 0, 97, ""],
+        [309, 3, 96, ""],
+        [313, 0, 98, ""],
+        [318, 1, 82, ""],
+        [321, 1, 99, ""],
+        [340, 0, 99, ""],
+        [360, 1, 100, ""],
+        [362, 0, 100, ""],
+        [367, 1, 102, ""],
+        [370, 1, 101, ""],
+        [374, 1, 102, ""],
+        [376, 1, 102, ""],
+        [377, 0, 101, ""],
+        [379, 1, 102, ""],
+        [382, 1, 102, ""],
+        [384, 0, 102, ""],
+        [386, 1, 103, ""],
+        [391, 0, 103, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "tokens": [
+        [39, 1, 131, ""],
+        [55, 2, 267, ""],
+        [73, 0, 104, ""],
+        [75, 3, 104, ""],
+        [78, 0, 105, ""],
+        [80, 3, 105, ""],
+        [84, 0, 106, ""],
+        [95, 3, 106, ""],
+        [102, 0, 107, ""],
+        [105, 3, 107, ""],
+        [112, 0, 108, ""],
+        [115, 3, 108, ""],
+        [122, 0, 109, ""],
+        [124, 3, 109, ""],
+        [127, 2, 114, ""],
+        [148, 1, 110, ""],
+        [150, 0, 110, ""],
+        [152, 1, 112, ""],
+        [154, 0, 111, ""],
+        [156, 3, 111, ""],
+        [157, 1, 113, ""],
+        [158, 0, 112, ""],
+        [160, 3, 112, ""],
+        [161, 0, 113, ""],
+        [187, 0, 114, ""],
+        [196, 0, 115, ""],
+        [199, 1, 116, ""],
+        [201, 0, 116, ""],
+        [209, 3, 115, ""],
+        [214, 0, 117, ""],
+        [222, 1, 121, ""],
+        [226, 1, 118, ""],
+        [228, 1, 121, ""],
+        [229, 0, 118, ""],
+        [238, 1, 119, ""],
+        [240, 1, 120, ""],
+        [241, 0, 119, ""],
+        [243, 0, 120, ""],
+        [249, 1, 122, ""],
+        [250, 0, 121, ""],
+        [253, 0, 122, ""],
+        [257, 3, 117, ""],
+        [258, 1, 123, ""],
+        [274, 0, 123, ""],
+        [280, 0, 124, ""],
+        [282, 1, 125, ""],
+        [284, 0, 125, ""],
+        [286, 1, 126, ""],
+        [288, 0, 126, ""],
+        [298, 1, 127, ""],
+        [299, 1, 169, ""],
+        [306, 1, 128, ""],
+        [307, 0, 127, ""],
+        [324, 0, 128, ""],
+        [328, 3, 124, ""],
+        [332, 0, 129, ""],
+        [335, 1, 129, ""],
+        [340, 1, 130, ""],
+        [342, 0, 130, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/save_screen_data.s",
+      "tokens": [[70, 0, 131, ""]]
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_erase.s",
+      "tokens": [
+        [17, 0, 132, ""],
+        [23, 1, 134, ""],
+        [25, 1, 133, ""],
+        [27, 0, 133, ""],
+        [32, 0, 134, ""],
+        [35, 3, 132, ""],
+        [42, 1, 135, ""],
+        [43, 1, 136, ""],
+        [44, 1, 137, ""],
+        [45, 1, 140, ""],
+        [46, 1, 143, ""],
+        [47, 1, 145, ""],
+        [48, 0, 135, ""],
+        [54, 0, 136, ""],
+        [56, 1, 142, ""],
+        [59, 1, 142, ""],
+        [64, 1, 142, ""],
+        [65, 0, 137, ""],
+        [69, 1, 138, ""],
+        [72, 1, 139, ""],
+        [74, 1, 138, ""],
+        [76, 1, 139, ""],
+        [85, 1, 139, ""],
+        [90, 0, 138, ""],
+        [96, 0, 139, ""],
+        [108, 0, 140, ""],
+        [112, 1, 141, ""],
+        [114, 1, 142, ""],
+        [115, 0, 141, ""],
+        [118, 0, 142, ""],
+        [120, 0, 143, ""],
+        [124, 1, 144, ""],
+        [127, 0, 144, ""],
+        [129, 0, 145, ""],
+        [132, 1, 146, ""],
+        [134, 1, 147, ""],
+        [144, 0, 146, ""],
+        [147, 1, 139, ""],
+        [148, 0, 147, ""],
+        [152, 1, 150, ""],
+        [154, 0, 148, ""],
+        [158, 1, 151, ""],
+        [159, 1, 149, ""],
+        [161, 1, 148, ""],
+        [162, 0, 149, ""],
+        [164, 0, 150, ""],
+        [166, 0, 151, ""],
+        [171, 1, 152, ""],
+        [178, 0, 152, ""],
+        [182, 1, 155, ""],
+        [184, 1, 155, ""],
+        [186, 1, 157, ""],
+        [188, 1, 157, ""],
+        [191, 1, 153, ""],
+        [193, 0, 153, ""],
+        [195, 1, 154, ""],
+        [197, 0, 154, ""],
+        [199, 1, 156, ""],
+        [200, 0, 155, ""],
+        [202, 0, 156, ""],
+        [212, 1, 158, ""],
+        [213, 0, 157, ""],
+        [217, 1, 158, ""],
+        [220, 1, 158, ""],
+        [222, 0, 158, ""],
+        [227, 0, 159, ""],
+        [229, 3, 159, ""],
+        [237, 0, 160, ""],
+        [239, 1, 161, ""],
+        [241, 1, 160, ""],
+        [242, 0, 161, ""],
+        [243, 1, 162, ""],
+        [247, 1, 160, ""],
+        [248, 0, 162, ""],
+        [255, 0, 163, ""],
+        [260, 1, 164, ""],
+        [263, 1, 164, ""],
+        [265, 0, 164, ""],
+        [267, 1, 165, ""],
+        [269, 0, 165, ""],
+        [270, 3, 163, ""],
+        [274, 1, 166, ""],
+        [276, 1, 166, ""],
+        [278, 1, 167, ""],
+        [279, 0, 166, ""],
+        [282, 1, 168, ""],
+        [283, 0, 167, ""],
+        [285, 0, 168, ""],
+        [324, 0, 169, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/save_slot_widgets.s",
+      "tokens": [
+        [7, 1, 173, ""],
+        [8, 0, 170, ""],
+        [10, 0, 171, ""],
+        [13, 1, 172, ""],
+        [17, 1, 172, ""],
+        [20, 0, 172, ""],
+        [21, 3, 171, ""],
+        [22, 3, 170, ""],
+        [23, 0, 173, ""],
+        [28, 2, 174, ""],
+        [29, 0, 174, ""],
+        [31, 1, 175, ""],
+        [33, 1, 175, ""],
+        [35, 1, 185, ""],
+        [36, 0, 175, ""],
+        [38, 1, 185, ""],
+        [40, 1, 182, ""],
+        [43, 1, 178, ""],
+        [45, 1, 176, ""],
+        [47, 1, 178, ""],
+        [48, 0, 176, ""],
+        [50, 1, 178, ""],
+        [54, 1, 177, ""],
+        [56, 0, 177, ""],
+        [59, 0, 178, ""],
+        [61, 1, 180, ""],
+        [63, 1, 180, ""],
+        [67, 1, 179, ""],
+        [69, 0, 179, ""],
+        [72, 0, 180, ""],
+        [74, 1, 181, ""],
+        [76, 1, 182, ""],
+        [77, 0, 181, ""],
+        [78, 1, 185, ""],
+        [79, 0, 182, ""],
+        [83, 1, 183, ""],
+        [86, 1, 184, ""],
+        [90, 1, 184, ""],
+        [93, 1, 184, ""],
+        [94, 0, 183, ""],
+        [97, 1, 184, ""],
+        [100, 1, 184, ""],
+        [103, 0, 184, ""],
+        [107, 0, 185, ""],
+        [110, 1, 186, ""],
+        [113, 1, 186, ""],
+        [115, 0, 186, ""],
+        [120, 1, 187, ""],
+        [122, 1, 187, ""],
+        [124, 0, 187, ""],
+        [127, 1, 188, ""],
+        [129, 0, 188, ""],
+        [137, 1, 190, ""],
+        [140, 1, 190, ""],
+        [143, 1, 189, ""],
+        [158, 0, 189, ""],
+        [166, 1, 191, ""],
+        [167, 0, 190, ""],
+        [169, 0, 191, ""],
+        [173, 1, 192, ""],
+        [176, 0, 192, ""],
+        [198, 1, 193, ""],
+        [200, 1, 193, ""],
+        [206, 0, 193, ""],
+        [209, 2, 194, ""],
+        [210, 0, 194, ""],
+        [219, 0, 195, ""],
+        [226, 1, 209, ""],
+        [232, 1, 197, ""],
+        [234, 1, 197, ""],
+        [237, 1, 196, ""],
+        [240, 1, 196, ""],
+        [242, 1, 197, ""],
+        [243, 0, 196, ""],
+        [245, 1, 197, ""],
+        [247, 0, 197, ""],
+        [249, 1, 198, ""],
+        [251, 1, 203, ""],
+        [253, 0, 198, ""],
+        [255, 1, 195, ""],
+        [257, 1, 199, ""],
+        [260, 1, 195, ""],
+        [261, 0, 199, ""],
+        [264, 1, 200, ""],
+        [267, 1, 200, ""],
+        [269, 1, 200, ""],
+        [271, 0, 200, ""],
+        [276, 1, 201, ""],
+        [279, 1, 202, ""],
+        [281, 1, 202, ""],
+        [282, 0, 201, ""],
+        [284, 1, 202, ""],
+        [288, 1, 202, ""],
+        [290, 0, 202, ""],
+        [296, 1, 204, ""],
+        [297, 1, 205, ""],
+        [298, 0, 203, ""],
+        [300, 1, 195, ""],
+        [301, 0, 204, ""],
+        [303, 0, 205, ""],
+        [306, 1, 195, ""],
+        [309, 1, 195, ""],
+        [313, 1, 206, ""],
+        [316, 1, 195, ""],
+        [318, 0, 206, ""],
+        [337, 1, 207, ""],
+        [339, 1, 208, ""],
+        [341, 1, 208, ""],
+        [342, 0, 207, ""],
+        [345, 1, 208, ""],
+        [347, 0, 208, ""],
+        [354, 0, 209, ""],
+        [359, 1, 195, ""],
+        [362, 1, 210, ""],
+        [385, 0, 210, ""],
+        [405, 1, 211, ""],
+        [407, 0, 211, ""],
+        [412, 1, 213, ""],
+        [415, 1, 212, ""],
+        [419, 1, 213, ""],
+        [421, 1, 213, ""],
+        [422, 0, 212, ""],
+        [424, 1, 213, ""],
+        [427, 1, 213, ""],
+        [429, 0, 213, ""],
+        [431, 1, 214, ""],
+        [436, 0, 214, ""]
+      ]
+    },
+    {
+      "source": "src/game/persistence/s3/sram_storage.s",
+      "tokens": [
+        [3, 1, 215, ""],
+        [6, 0, 215, ""],
+        [30, 1, 217, ""],
+        [34, 0, 216, ""],
+        [36, 3, 216, ""],
+        [38, 0, 217, ""],
+        [45, 1, 219, ""],
+        [49, 0, 218, ""],
+        [51, 3, 218, ""],
+        [53, 0, 219, ""],
+        [86, 0, 220, ""],
+        [90, 3, 220, ""],
+        [94, 1, 221, ""],
+        [96, 0, 221, ""],
+        [117, 0, 222, ""],
+        [121, 3, 222, ""],
+        [122, 0, 223, ""],
+        [126, 3, 223, ""],
+        [152, 1, 225, ""],
+        [154, 1, 224, ""],
+        [157, 1, 224, ""],
+        [164, 0, 224, ""],
+        [166, 0, 225, ""],
+        [173, 1, 228, ""],
+        [180, 0, 226, ""],
+        [182, 1, 227, ""],
+        [184, 0, 227, ""],
+        [186, 3, 226, ""],
+        [193, 0, 228, ""],
+        [195, 0, 229, ""]
+      ]
+    },
+    {
+      "source": "src/game/persistence/sk/sram_storage.s",
+      "tokens": [
+        [3, 1, 230, ""],
+        [6, 0, 230, ""],
+        [24, 1, 242, ""],
+        [32, 1, 232, ""],
+        [36, 0, 231, ""],
+        [38, 3, 231, ""],
+        [40, 0, 232, ""],
+        [47, 1, 234, ""],
+        [50, 0, 233, ""],
+        [52, 1, 241, ""],
+        [54, 3, 233, ""],
+        [55, 0, 234, ""],
+        [59, 0, 235, ""],
+        [61, 3, 235, ""],
+        [68, 1, 240, ""],
+        [73, 0, 236, ""],
+        [75, 1, 239, ""],
+        [90, 0, 237, ""],
+        [92, 1, 238, ""],
+        [94, 0, 238, ""],
+        [96, 3, 237, ""],
+        [98, 0, 239, ""],
+        [101, 3, 236, ""],
+        [102, 0, 240, ""],
+        [104, 0, 241, ""],
+        [107, 0, 242, ""],
+        [149, 1, 243, ""],
+        [151, 0, 243, ""],
+        [155, 0, 244, ""],
+        [159, 3, 244, ""],
+        [162, 1, 245, ""],
+        [164, 0, 245, ""],
+        [168, 1, 246, ""],
+        [170, 0, 246, ""],
+        [190, 1, 247, ""],
+        [192, 0, 247, ""],
+        [196, 0, 248, ""],
+        [200, 3, 248, ""],
+        [201, 0, 249, ""],
+        [205, 3, 249, ""],
+        [208, 1, 250, ""],
+        [210, 0, 250, ""],
+        [264, 1, 259, ""],
+        [266, 1, 259, ""],
+        [274, 1, 251, ""],
+        [276, 1, 257, ""],
+        [278, 0, 251, ""],
+        [281, 1, 252, ""],
+        [283, 1, 256, ""],
+        [284, 1, 254, ""],
+        [285, 0, 252, ""],
+        [287, 1, 253, ""],
+        [289, 1, 256, ""],
+        [290, 1, 254, ""],
+        [291, 0, 253, ""],
+        [293, 1, 254, ""],
+        [294, 1, 256, ""],
+        [296, 1, 256, ""],
+        [297, 0, 254, ""],
+        [300, 1, 255, ""],
+        [303, 1, 255, ""],
+        [305, 0, 255, ""],
+        [307, 0, 256, ""],
+        [309, 0, 257, ""],
+        [312, 1, 258, ""],
+        [314, 0, 258, ""],
+        [318, 0, 259, ""],
+        [323, 1, 263, ""],
+        [325, 1, 263, ""],
+        [328, 1, 260, ""],
+        [333, 0, 260, ""],
+        [337, 0, 261, ""],
+        [342, 3, 261, ""],
+        [347, 1, 262, ""],
+        [349, 0, 262, ""],
+        [353, 0, 263, ""],
+        [357, 1, 266, ""],
+        [359, 1, 266, ""],
+        [363, 1, 264, ""],
+        [365, 0, 264, ""],
+        [370, 1, 265, ""],
+        [372, 0, 265, ""],
+        [376, 0, 266, ""],
+        [378, 0, 267, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/s2menu/animations/sega_sonic.s",
+      "tokens": [
+        [2, 1, 268, ""],
+        [3, 0, 268, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/s2menu/mappings/sega_sonic.s",
+      "tokens": [
+        [2, 1, 269, ""],
+        [3, 1, 270, ""],
+        [4, 1, 271, ""],
+        [5, 1, 272, ""],
+        [6, 1, 273, ""],
+        [7, 0, 269, ""],
+        [14, 0, 270, ""],
+        [21, 0, 271, ""],
+        [28, 0, 272, ""],
+        [35, 0, 273, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/general_s3.s",
+      "tokens": [
+        [2, 1, 274, ""],
+        [3, 1, 275, ""],
+        [4, 1, 276, ""],
+        [5, 1, 277, ""],
+        [6, 1, 278, ""],
+        [7, 1, 279, ""],
+        [8, 1, 280, ""],
+        [9, 1, 281, ""],
+        [10, 1, 282, ""],
+        [11, 1, 283, ""],
+        [12, 1, 284, ""],
+        [13, 1, 285, ""],
+        [14, 1, 286, ""],
+        [15, 1, 287, ""],
+        [16, 1, 288, ""],
+        [17, 1, 289, ""],
+        [18, 1, 290, ""],
+        [19, 1, 291, ""],
+        [20, 1, 292, ""],
+        [21, 1, 293, ""],
+        [22, 1, 294, ""],
+        [23, 1, 295, ""],
+        [24, 1, 296, ""],
+        [25, 1, 297, ""],
+        [26, 1, 298, ""],
+        [27, 1, 299, ""],
+        [28, 1, 300, ""],
+        [29, 0, 274, ""],
+        [30, 0, 275, ""],
+        [49, 0, 276, ""],
+        [64, 0, 277, ""],
+        [69, 0, 278, ""],
+        [76, 0, 279, ""],
+        [79, 0, 280, ""],
+        [84, 0, 281, ""],
+        [88, 0, 282, ""],
+        [91, 0, 283, ""],
+        [93, 0, 284, ""],
+        [95, 0, 285, ""],
+        [97, 0, 286, ""],
+        [100, 0, 287, ""],
+        [104, 0, 288, ""],
+        [108, 0, 289, ""],
+        [111, 0, 290, ""],
+        [113, 0, 291, ""],
+        [115, 0, 292, ""],
+        [117, 0, 293, ""],
+        [119, 0, 294, ""],
+        [121, 0, 295, ""],
+        [123, 0, 296, ""],
+        [125, 0, 297, ""],
+        [132, 0, 298, ""],
+        [139, 0, 299, ""],
+        [146, 0, 300, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/save_menu/mappings/save_screen_general.s",
+      "tokens": [
+        [2, 1, 301, ""],
+        [3, 1, 302, ""],
+        [4, 1, 303, ""],
+        [5, 1, 304, ""],
+        [6, 1, 305, ""],
+        [7, 1, 306, ""],
+        [8, 1, 307, ""],
+        [9, 1, 308, ""],
+        [10, 1, 309, ""],
+        [11, 1, 310, ""],
+        [12, 1, 311, ""],
+        [13, 1, 312, ""],
+        [14, 1, 313, ""],
+        [15, 1, 314, ""],
+        [16, 1, 315, ""],
+        [17, 1, 316, ""],
+        [18, 1, 317, ""],
+        [19, 1, 318, ""],
+        [20, 1, 319, ""],
+        [21, 1, 320, ""],
+        [22, 1, 321, ""],
+        [23, 1, 322, ""],
+        [24, 1, 323, ""],
+        [25, 1, 324, ""],
+        [26, 1, 325, ""],
+        [27, 1, 326, ""],
+        [28, 1, 327, ""],
+        [29, 1, 328, ""],
+        [30, 1, 329, ""],
+        [31, 1, 330, ""],
+        [32, 1, 331, ""],
+        [33, 1, 332, ""],
+        [34, 1, 333, ""],
+        [35, 1, 334, ""],
+        [36, 1, 335, ""],
+        [37, 1, 336, ""],
+        [38, 0, 301, ""],
+        [39, 0, 302, ""],
+        [58, 0, 303, ""],
+        [73, 0, 304, ""],
+        [78, 0, 305, ""],
+        [85, 0, 306, ""],
+        [88, 0, 307, ""],
+        [93, 0, 308, ""],
+        [97, 0, 309, ""],
+        [100, 0, 310, ""],
+        [102, 0, 311, ""],
+        [104, 0, 312, ""],
+        [106, 0, 313, ""],
+        [109, 0, 314, ""],
+        [113, 0, 315, ""],
+        [117, 0, 316, ""],
+        [120, 0, 317, ""],
+        [122, 0, 318, ""],
+        [124, 0, 319, ""],
+        [126, 0, 320, ""],
+        [128, 0, 321, ""],
+        [130, 0, 322, ""],
+        [132, 0, 323, ""],
+        [134, 0, 324, ""],
+        [141, 0, 325, ""],
+        [148, 0, 326, ""],
+        [155, 0, 327, ""],
+        [158, 0, 328, ""],
+        [165, 0, 329, ""],
+        [167, 0, 330, ""],
+        [169, 0, 331, ""],
+        [171, 0, 332, ""],
+        [173, 0, 333, ""],
+        [175, 0, 334, ""],
+        [177, 0, 335, ""],
+        [179, 0, 336, ""]
+      ]
+    }
+  ]
+}

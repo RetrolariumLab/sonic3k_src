@@ -119679,10 +119679,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "76c6340582993948d3de766588ac0612bc8669bc7f640051f93d4b6ff6cb09eb",
+      "declarations_sha256": "ea0a20981dd546f437c7905c918cebe2ec18295d906d14474a39407f50672e4c",
       "labels": {
         "Ani_SonicOnSegaScr_": 0,
-        "byte_434F6": 2
+        "S3SegaSonic_RunCycleUniformAnimation": 2
       },
       "external_symbols": ["Ani_SonicOnSegaScr"],
       "blocks": [
@@ -119690,7 +119690,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_434F6",
+          "target": "S3SegaSonic_RunCycleUniformAnimation",
           "base": "Ani_SonicOnSegaScr"
         },
         {
@@ -119710,14 +119710,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 176
       },
-      "declarations_sha256": "fcc43ff5a9a8738ae3c0b59f0719c6f568818d1cc15f4f25ec6cc7986fe51e37",
+      "declarations_sha256": "1b884003aa9a760b807e7ec06004d31fe760c9bf28e08b524c6e033722579040",
       "labels": {
         "Map_SonicOnSegaScr_": 0,
-        "word_43506": 10,
-        "word_4352C": 48,
-        "word_43552": 86,
-        "word_43578": 124,
-        "word_4359E": 162
+        "S3SegaSonic_RunCycleFirstCompositePieces": 10,
+        "S3SegaSonic_RunCycleMap2": 48,
+        "S3SegaSonic_RunCycleThirdCompositePieces": 86,
+        "S3SegaSonic_RunCycleMap4": 124,
+        "S3SegaSonic_StreakCompositePieces": 162
       },
       "external_symbols": [],
       "blocks": [
@@ -119725,35 +119725,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43506",
+          "target": "S3SegaSonic_RunCycleFirstCompositePieces",
           "base": "Map_SonicOnSegaScr_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4352C",
+          "target": "S3SegaSonic_RunCycleMap2",
           "base": "Map_SonicOnSegaScr_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43552",
+          "target": "S3SegaSonic_RunCycleThirdCompositePieces",
           "base": "Map_SonicOnSegaScr_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_43578",
+          "target": "S3SegaSonic_RunCycleMap4",
           "base": "Map_SonicOnSegaScr_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4359E",
+          "target": "S3SegaSonic_StreakCompositePieces",
           "base": "Map_SonicOnSegaScr_"
         },
         {
@@ -119792,45 +119792,45 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 816
       },
-      "declarations_sha256": "2204bfc8d5899b7f34b15216e9bb58eb33a38fb5bea5668ac23dec7d2dbc66c8",
+      "declarations_sha256": "d393b1e66551c4c5279b53e85e1fa7bc56d57f6fb43cd3fa2bd097e4e036c910",
       "labels": {
         "Map_SaveScreen_": 0,
-        "word_CE56": 72,
-        "word_CE58": 74,
-        "word_CEC6": 184,
-        "word_CF1C": 270,
-        "word_CF36": 296,
-        "word_CF5C": 334,
-        "word_CF6A": 348,
-        "word_CF84": 374,
-        "word_CF98": 394,
-        "word_CFA6": 408,
-        "word_CFAE": 416,
-        "word_CFB6": 424,
-        "word_CFBE": 432,
-        "word_CFCC": 446,
-        "word_CFE0": 466,
-        "word_CFF4": 486,
-        "word_D002": 500,
-        "word_D00A": 508,
-        "word_D012": 516,
-        "word_D01A": 524,
-        "word_D022": 532,
-        "word_D02A": 540,
-        "word_D032": 548,
-        "word_D03A": 556,
-        "word_D060": 594,
-        "word_D086": 632,
-        "word_D0AC": 670,
-        "word_D0BA": 684,
-        "word_D0E0": 722,
-        "word_D0E8": 730,
-        "word_D0F0": 738,
-        "word_D0F8": 746,
-        "word_D100": 754,
-        "word_D108": 762,
-        "word_D110": 770,
-        "word_D118": 778
+        "SKSaveMenuMapping_EmptyMappingFrame": 72,
+        "SKSave_CenterCursorMap": 74,
+        "SKSaveMenuMapping_OuterMenuCursorPieces": 184,
+        "SKSaveMenuMapping_FixedMenuHeadingPieces": 270,
+        "SKSave_CombinedChoiceMap": 296,
+        "SKSave_SonicChoiceMap": 334,
+        "SKSave_TailsChoiceMap": 348,
+        "SKSave_KnucklesChoiceMap": 374,
+        "SKSave_EraseChildInitialMap": 394,
+        "SKSave_EraseChildCycleMap1": 408,
+        "SKSave_EraseChildCycleMap2": 416,
+        "SKSave_EraseChildCycleMap3": 424,
+        "SKSave_EraseConfirmationMap": 432,
+        "SKSave_EraseMainBlinkMap1": 446,
+        "SKSave_EraseMainBlinkMap2": 466,
+        "SKSave_NoSaveChildMap": 486,
+        "SKSave_ChaosEmeraldMap1": 500,
+        "SKSave_ChaosEmeraldMap2": 508,
+        "SKSave_ChaosEmeraldMap3": 516,
+        "SKSave_ChaosEmeraldMap4": 524,
+        "SKSave_ChaosEmeraldMap5": 532,
+        "SKSave_ChaosEmeraldMap6": 540,
+        "SKSave_ChaosEmeraldMap7": 548,
+        "SKSave_ProgressCardMap": 556,
+        "SKSave_CompletedCardMap1": 594,
+        "SKSave_CompletedCardMap2": 632,
+        "SKSave_RaisedProgressMarkerMap": 670,
+        "SKSave_AllSuperCompletedCardMap": 684,
+        "SKSave_SuperEmeraldMap1": 722,
+        "SKSave_SuperEmeraldMap2": 730,
+        "SKSave_SuperEmeraldMap3": 738,
+        "SKSave_SuperEmeraldMap4": 746,
+        "SKSave_SuperEmeraldMap5": 754,
+        "SKSave_SuperEmeraldMap6": 762,
+        "SKSave_SuperEmeraldMap7": 770,
+        "SKSave_AlternateCharacterCardMap": 778
       },
       "external_symbols": [],
       "blocks": [
@@ -119838,252 +119838,252 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CE56",
+          "target": "SKSaveMenuMapping_EmptyMappingFrame",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CE58",
+          "target": "SKSave_CenterCursorMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CEC6",
+          "target": "SKSaveMenuMapping_OuterMenuCursorPieces",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF1C",
+          "target": "SKSaveMenuMapping_FixedMenuHeadingPieces",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF36",
+          "target": "SKSave_CombinedChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF5C",
+          "target": "SKSave_SonicChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF6A",
+          "target": "SKSave_TailsChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF84",
+          "target": "SKSave_KnucklesChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CF98",
+          "target": "SKSave_EraseChildInitialMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFA6",
+          "target": "SKSave_EraseChildCycleMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFAE",
+          "target": "SKSave_EraseChildCycleMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFB6",
+          "target": "SKSave_EraseChildCycleMap3",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFBE",
+          "target": "SKSave_EraseConfirmationMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFCC",
+          "target": "SKSave_EraseMainBlinkMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFE0",
+          "target": "SKSave_EraseMainBlinkMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CFF4",
+          "target": "SKSave_NoSaveChildMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D002",
+          "target": "SKSave_ChaosEmeraldMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D00A",
+          "target": "SKSave_ChaosEmeraldMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D012",
+          "target": "SKSave_ChaosEmeraldMap3",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D01A",
+          "target": "SKSave_ChaosEmeraldMap4",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D022",
+          "target": "SKSave_ChaosEmeraldMap5",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D02A",
+          "target": "SKSave_ChaosEmeraldMap6",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D032",
+          "target": "SKSave_ChaosEmeraldMap7",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D03A",
+          "target": "SKSave_ProgressCardMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D060",
+          "target": "SKSave_CompletedCardMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D086",
+          "target": "SKSave_CompletedCardMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0AC",
+          "target": "SKSave_RaisedProgressMarkerMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0BA",
+          "target": "SKSave_AllSuperCompletedCardMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0E0",
+          "target": "SKSave_SuperEmeraldMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0E8",
+          "target": "SKSave_SuperEmeraldMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0F0",
+          "target": "SKSave_SuperEmeraldMap3",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D0F8",
+          "target": "SKSave_SuperEmeraldMap4",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D100",
+          "target": "SKSave_SuperEmeraldMap5",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D108",
+          "target": "SKSave_SuperEmeraldMap6",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D110",
+          "target": "SKSave_SuperEmeraldMap7",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_D118",
+          "target": "SKSave_AlternateCharacterCardMap",
           "base": "Map_SaveScreen_"
         },
         {
@@ -120277,36 +120277,36 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 666
       },
-      "declarations_sha256": "ad3ad13ba720674fa8f800764f67a970f304b84f0ba54e9a5630050750753583",
+      "declarations_sha256": "a484a8b3fb7147b7a6d456f542f10ec5398e974a87f145ecdbe45c5c5f292778",
       "labels": {
         "Map_SaveScreen_": 0,
-        "word_BD9E": 54,
-        "word_BDA0": 56,
-        "word_BE0E": 166,
-        "word_BE64": 252,
-        "word_BE7E": 278,
-        "word_BEA4": 316,
-        "word_BEB2": 330,
-        "word_BECC": 356,
-        "word_BEE0": 376,
-        "word_BEEE": 390,
-        "word_BEF6": 398,
-        "word_BEFE": 406,
-        "word_BF06": 414,
-        "word_BF14": 428,
-        "word_BF28": 448,
-        "word_BF3C": 468,
-        "word_BF4A": 482,
-        "word_BF52": 490,
-        "word_BF5A": 498,
-        "word_BF62": 506,
-        "word_BF6A": 514,
-        "word_BF72": 522,
-        "word_BF7A": 530,
-        "word_BF82": 538,
-        "word_BFA8": 576,
-        "word_BFCE": 614,
-        "word_BFF4": 652
+        "S3SaveMenuMapping_EmptyMappingFrame": 54,
+        "S3Save_CenterCursorMap": 56,
+        "S3SaveMenuMapping_OuterMenuCursorPieces": 166,
+        "S3SaveMenuMapping_FixedMenuHeadingPieces": 252,
+        "S3Save_CombinedChoiceMap": 278,
+        "S3Save_SonicChoiceMap": 316,
+        "S3Save_TailsChoiceMap": 330,
+        "S3Save_KnucklesChoiceMap": 356,
+        "S3Save_EraseChildInitialMap": 376,
+        "S3Save_EraseChildCycleMap1": 390,
+        "S3Save_EraseChildCycleMap2": 398,
+        "S3Save_EraseChildCycleMap3": 406,
+        "S3Save_EraseConfirmationMap": 414,
+        "S3Save_EraseMainBlinkMap1": 428,
+        "S3Save_EraseMainBlinkMap2": 448,
+        "S3Save_NoSaveChildMap": 468,
+        "S3Save_ChaosEmeraldMap1": 482,
+        "S3Save_ChaosEmeraldMap2": 490,
+        "S3Save_ChaosEmeraldMap3": 498,
+        "S3Save_ChaosEmeraldMap4": 506,
+        "S3Save_ChaosEmeraldMap5": 514,
+        "S3Save_ChaosEmeraldMap6": 522,
+        "S3Save_ChaosEmeraldMap7": 530,
+        "S3Save_ProgressCardMap": 538,
+        "S3Save_CompletedCardMap1": 576,
+        "S3Save_CompletedCardMap2": 614,
+        "S3Save_RaisedProgressMarkerMap": 652
       },
       "external_symbols": [],
       "blocks": [
@@ -120314,189 +120314,189 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BD9E",
+          "target": "S3SaveMenuMapping_EmptyMappingFrame",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BDA0",
+          "target": "S3Save_CenterCursorMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BE0E",
+          "target": "S3SaveMenuMapping_OuterMenuCursorPieces",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BE64",
+          "target": "S3SaveMenuMapping_FixedMenuHeadingPieces",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BE7E",
+          "target": "S3Save_CombinedChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEA4",
+          "target": "S3Save_SonicChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEB2",
+          "target": "S3Save_TailsChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BECC",
+          "target": "S3Save_KnucklesChoiceMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEE0",
+          "target": "S3Save_EraseChildInitialMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEEE",
+          "target": "S3Save_EraseChildCycleMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEF6",
+          "target": "S3Save_EraseChildCycleMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BEFE",
+          "target": "S3Save_EraseChildCycleMap3",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF06",
+          "target": "S3Save_EraseConfirmationMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF14",
+          "target": "S3Save_EraseMainBlinkMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF28",
+          "target": "S3Save_EraseMainBlinkMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF3C",
+          "target": "S3Save_NoSaveChildMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF4A",
+          "target": "S3Save_ChaosEmeraldMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF52",
+          "target": "S3Save_ChaosEmeraldMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF5A",
+          "target": "S3Save_ChaosEmeraldMap3",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF62",
+          "target": "S3Save_ChaosEmeraldMap4",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF6A",
+          "target": "S3Save_ChaosEmeraldMap5",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF72",
+          "target": "S3Save_ChaosEmeraldMap6",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF7A",
+          "target": "S3Save_ChaosEmeraldMap7",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BF82",
+          "target": "S3Save_ProgressCardMap",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BFA8",
+          "target": "S3Save_CompletedCardMap1",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BFCE",
+          "target": "S3Save_CompletedCardMap2",
           "base": "Map_SaveScreen_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_BFF4",
+          "target": "S3Save_RaisedProgressMarkerMap",
           "base": "Map_SaveScreen_"
         },
         {
