@@ -14,24 +14,24 @@ Obj_Blaster_2:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Blaster_Index:
-                dc.w    loc_894B6-Blaster_Index
-                dc.w    loc_894F2-Blaster_Index
-                dc.w    loc_89552-Blaster_Index
-                dc.w    loc_8957A-Blaster_Index
-                dc.w    loc_895A4-Blaster_Index
-                dc.w    loc_895C6-Blaster_Index
-                dc.w    loc_895EC-Blaster_Index
-                dc.w    loc_895FA-Blaster_Index
+                dc.w    SKBlaster_InitAndCheckCeilingFlag-Blaster_Index
+                dc.w    SKBlaster_CheckFacingTarget-Blaster_Index
+                dc.w    SKBlaster_TickTurnWait-Blaster_Index
+                dc.w    SKBlaster_TickDelayAndTryFire-Blaster_Index
+                dc.w    SKBlaster_AnimateAndTrySecondary-Blaster_Index
+                dc.w    SKBlaster_RiseTowardCeiling-Blaster_Index
+                dc.w    SKBlaster_WaitAtCeiling-Blaster_Index
+                dc.w    SKBlaster_FallTowardFloor-Blaster_Index
 ; ---------------------------------------------------------------------------
 
-loc_894B6:
+SKBlaster_InitAndCheckCeilingFlag:
                 lea     ObjDat_Blaster(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 bclr    #1,render_flags(a0)
-                beq.s   loc_894CA
+                beq.s   SKBlaster_InitPatrol
                 st      $3C(a0)
 
-loc_894CA:
+SKBlaster_InitPatrol:
                 move.b  #$E,y_radius(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -39,187 +39,188 @@ loc_894CA:
                 move.w  d0,$2E(a0)
                 add.w   d0,d0
                 move.w  d0,$3A(a0)
-                move.l  #loc_8953C,$34(a0)
+                move.l  #BlasterSK_Body_StartTurnPause,$34(a0)
                 move.w  #-$80,d4
                 jmp     Set_VelocityXTrackSonic(pc)
 ; ---------------------------------------------------------------------------
 
-loc_894F2:
+SKBlaster_CheckFacingTarget:
                 bsr.w   Blaster_TryRetreatToCeiling
                 jsr     Find_SonicTails(pc)
                 tst.w   d1
-                bne.s   loc_89512
+                bne.s   SKBlaster_AnimateAndPatrol
                 cmpi.w  #$80,d2
-                bhs.s   loc_89512
+                bhs.s   SKBlaster_AnimateAndPatrol
                 btst    #0,render_flags(a0)
-                beq.s   loc_8950E
+                beq.s   SKBlaster_TryAttackFacingSide
                 subq.w  #2,d0
 
-loc_8950E:
+SKBlaster_TryAttackFacingSide:
                 tst.w   d0
-                beq.s   loc_89528
+                beq.s   SKBlaster_BeginFireDelay
 
-loc_89512:
-                lea     byte_8975E(pc),a1
+SKBlaster_AnimateAndPatrol:
+                lea     BlasterSK_Body_PairedPatrolFrames(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jsr     (MoveSprite2).l
                 jsr     ObjHitFloor2_DoRoutine(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_89528:
+SKBlaster_BeginFireDelay:
                 move.b  #6,routine(a0)
                 move.b  #0,mapping_frame(a0)
                 move.b  #$10,$39(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8953C:
+BlasterSK_Body_StartTurnPause:
                 move.b  #4,routine(a0)
                 move.w  #$20,$2E(a0)
-                move.l  #loc_8955A,$34(a0)
+                move.l  #BlasterSK_Body_ReverseHorizontalPatrol,$34(a0)
 
-locret_89550:
+SKBlaster_WaitOrAirborneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89552:
+SKBlaster_TickTurnWait:
                 bsr.w   Blaster_TryRetreatToCeiling
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8955A:
+BlasterSK_Body_ReverseHorizontalPatrol:
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  $3A(a0),$2E(a0)
 
-loc_8956A:
+SKBlaster_ResumePatrol:
                 move.b  #2,routine(a0)
-                move.l  #loc_8953C,$34(a0)
+                move.l  #BlasterSK_Body_StartTurnPause,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8957A:
+SKBlaster_TickDelayAndTryFire:
                 bsr.w   Blaster_TryRetreatToCeiling
                 subq.b  #1,$39(a0)
-                bpl.w   locret_89550
+                bpl.w   SKBlaster_WaitOrAirborneReturn
                 move.b  #8,routine(a0)
-                move.l  #loc_8956A,$34(a0)
-                lea     ChildObjDat_89726(pc),a2
+                move.l  #SKBlaster_ResumePatrol,$34(a0)
+                lea     BlasterSK_Body_OneNormalMuzzleRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_8972E(pc),a2
+                lea     SKBlaster_PrimaryShotChild(pc),a2
                 jmp     CreateChild5_ComplexAdjusted(pc)
 ; ---------------------------------------------------------------------------
 
-loc_895A4:
+; Try the secondary projectile when animation advances to cursor 6
+SKBlaster_AnimateAndTrySecondary:
                 bsr.w   Blaster_TryRetreatToCeiling
-                lea     byte_89768(pc),a1
+                lea     SKBlaster_FireAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_895C4
+                beq.s   SKBlaster_FireEventReturn
                 cmpi.b  #6,anim_frame(a0)
-                bne.s   locret_895C4
-                lea     ChildObjDat_89746(pc),a2
+                bne.s   SKBlaster_FireEventReturn
+                lea     SKBlaster_SecondaryShotChild(pc),a2
                 jsr     CreateChild5_ComplexAdjusted(pc)
 
-locret_895C4:
+SKBlaster_FireEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_895C6:
+SKBlaster_RiseTowardCeiling:
                 addi.w  #-$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   locret_895EA
+                bpl.s   SKBlaster_CeilingProbeReturn
                 add.w   d1,y_pos(a0)
                 move.b  #$C,routine(a0)
                 clr.w   y_vel(a0)
 
-locret_895EA:
+SKBlaster_CeilingProbeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_895EC:
+SKBlaster_WaitAtCeiling:
                 tst.b   (_unkF7C1).w
-                bne.s   locret_895F8
+                bne.s   SKBlaster_CeilingHoldReturn
                 move.b  #$E,routine(a0)
 
-locret_895F8:
+SKBlaster_CeilingHoldReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_895FA:
+SKBlaster_FallTowardFloor:
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_89624
+                bpl.s   SKBlaster_FloorProbeReturn
                 add.w   d1,y_pos(a0)
                 move.b  $3D(a0),routine(a0)
                 move.w  $3E(a0),x_vel(a0)
                 clr.w   y_vel(a0)
 
-locret_89624:
+SKBlaster_FloorProbeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89626:
-                lea     word_89708(pc),a1
+SKBlaster_InitMuzzle:
+                lea     BlasterSK_Muzzle_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8963E,(a0)
+                move.l  #SKBlaster_AnimateAndDrawMuzzle,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8963E:
+SKBlaster_AnimateAndDrawMuzzle:
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                lea     byte_89763(pc),a1
+                lea     SKBlaster_MuzzleAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_89650:
+SKBlaster_UpdateCapsuleSpawn:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_89662(pc,d0.w),d1
-                jsr     off_89662(pc,d1.w)
+                move.w  SKBlaster_CapsuleStateTable(pc,d0.w),d1
+                jsr     SKBlaster_CapsuleStateTable(pc,d1.w)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
-off_89662:
-                dc.w    loc_89666-off_89662
-                dc.w    loc_8968A-off_89662
+SKBlaster_CapsuleStateTable:
+                dc.w    SKBlaster_InitCapsuleLaunch-SKBlaster_CapsuleStateTable
+                dc.w    SKBlaster_FallFromCapsule-SKBlaster_CapsuleStateTable
 ; ---------------------------------------------------------------------------
 
-loc_89666:
+SKBlaster_InitCapsuleLaunch:
                 lea     ObjDat_Blaster(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8969E,$34(a0)
+                move.l  #SKBlaster_JoinPatrolOnLanding,$34(a0)
                 move.b  #$E,y_radius(a0)
                 moveq   #8,d0
                 jsr     (Set_IndexedVelocity).l
                 jmp     (Change_FlipXWithVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_8968A:
+SKBlaster_FallFromCapsule:
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_89550
+                bmi.w   SKBlaster_WaitOrAirborneReturn
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_8969E:
+SKBlaster_JoinPatrolOnLanding:
                 move.l  #Obj_Blaster_2,(a0)
                 move.b  #2,routine(a0)
                 move.w  #$3F,$2E(a0)
                 move.w  #$7F,$3A(a0)
-                move.l  #loc_8953C,$34(a0)
+                move.l  #BlasterSK_Body_StartTurnPause,$34(a0)
                 move.w  #-$80,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_896CC
+                beq.s   SKBlaster_SetLandingSpeed
                 neg.w   d0
 
-loc_896CC:
+SKBlaster_SetLandingSpeed:
                 move.w  d0,x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
@@ -229,16 +230,17 @@ loc_896CC:
 ; The local enable and engine-specific global must both allow retreat. Save the ground state and X velocity
 Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
-                beq.s   locret_896FA
+                beq.s   SKBlaster_RetreatCheckReturn
                 tst.b   (_unkF7C1).w
-                beq.s   locret_896FA
+                beq.s   SKBlaster_RetreatCheckReturn
                 move.b  routine(a0),$3D(a0)
                 move.b  #$A,routine(a0)
                 move.w  x_vel(a0),$3E(a0)
                 clr.w   x_vel(a0)
                 addq.w  #4,sp
 
-locret_896FA:
+; Starting the ceiling retreat discards the helper's return address and exits the caller
+SKBlaster_RetreatCheckReturn:
                 rts
 ; End of function Blaster_TryRetreatToCeiling
 
@@ -248,54 +250,54 @@ ObjDat_Blaster:
                 dc.w    make_art_tile(ArtTile_Blaster,1,1)
                 dc.w    $280
                 dc.b    $18, $10,   0,  $A
-word_89708:
+BlasterSK_Muzzle_PartialAttributes:
                 dc.w    $200
                 dc.b    8,   8,   4,   0
-ObjDat3_8970E:
+SKBlaster_PrimaryShotAttrs:
                 dc.l    Map_Blaster
                 dc.w    make_art_tile(ArtTile_Blaster,1,1)
                 dc.w    $280
                 dc.b    4,   4,   5, $98
-ObjDat3_8971A:
+SKBlaster_SecondaryShotAttrs:
                 dc.l    Map_Blaster
                 dc.w    make_art_tile(ArtTile_Blaster,1,1)
                 dc.w    $200
                 dc.b    4,   4,   7,   0
-ChildObjDat_89726:
+BlasterSK_Body_OneNormalMuzzleRecord:
                 dc.w    1-1
-                dc.l    loc_89626
+                dc.l    SKBlaster_InitMuzzle
                 dc.b    -$1B,-$16
-ChildObjDat_8972E:
+SKBlaster_PrimaryShotChild:
                 dc.w    1-1
                 dc.l    SKCallbackShot_InitDeflectable
-                dc.l    ObjDat3_8970E
-                dc.l    byte_89771
+                dc.l    SKBlaster_PrimaryShotAttrs
+                dc.l    SKBlaster_PrimaryShotAnim
                 dc.l    MoveFall_AnimateRaw
                 dc.b    -$20,-$20
                 dc.w    -$200, -$400
-ChildObjDat_89746:
+SKBlaster_SecondaryShotChild:
                 dc.w    1-1
                 dc.l    SKCallbackShot_InitDeflectable
-                dc.l    ObjDat3_8971A
-                dc.l    byte_89775
+                dc.l    SKBlaster_SecondaryShotAttrs
+                dc.l    SKBlaster_SecondaryShotAnim
                 dc.l    MoveFall_AnimateRaw
                 dc.b    -$C,  -4
                 dc.w    $100, -$200
-byte_8975E:
+BlasterSK_Body_PairedPatrolFrames:
                 dc.b    0, $17
                 dc.b    1,   2
                 dc.b    $FC
-byte_89763:
+SKBlaster_MuzzleAnim:
                 dc.b    0,   4,   4,   5, $F4
-byte_89768:
+SKBlaster_FireAnim:
                 dc.b    0,   1
                 dc.b    0,   1
                 dc.b    2,   5
                 dc.b    0, $1F
                 dc.b    $F4
-byte_89771:
+SKBlaster_PrimaryShotAnim:
                 dc.b    1,   5,   6, $FC
-byte_89775:
+SKBlaster_SecondaryShotAnim:
                 dc.b    2,   7,   8,   9,  $A, $FC
                 even
 Map_Blaster:

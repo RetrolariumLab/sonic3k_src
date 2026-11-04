@@ -697,27 +697,27 @@
     },
     {
       "path": "src/objects/enemies/fbz/s3/batbot.s",
-      "sha256": "bc3861d8f2190e568d5e6875d5ce9c539dec6489527b36bb5f3feb81a1cb0ab1"
+      "sha256": "a669466caf41c6c8ddda4ee5820fbae967bdf449e847db7cd06b856cd38f8d8d"
     },
     {
       "path": "src/objects/enemies/fbz/s3/blaster.s",
-      "sha256": "67091be788a2c8d80d854f137833d54871ebb28713406e1070e02ee80794db6b"
+      "sha256": "d0f2e0593ba168c3bd059d69aaf7cfe5df19abb9c001721be3876db89fdb86ea"
     },
     {
       "path": "src/objects/enemies/fbz/s3/techno_squeek.s",
-      "sha256": "529e894b1f8eb7df8bd2b2b4c9cc73c09bdbc051d020c8f15a7ab4672c466f2f"
+      "sha256": "809d256953fbc05cdcfa61510c91ece0735fd273594159ee648a9ae45480eafe"
     },
     {
       "path": "src/objects/enemies/fbz/sk/batbot.s",
-      "sha256": "3885e5da93a0294588e965d0e9fac48c89ed4bbf8231a751313ddaeea62512f7"
+      "sha256": "d707830c741f142d3c1b947d8e5595413cad91bc782297d10c49206dd0511b21"
     },
     {
       "path": "src/objects/enemies/fbz/sk/blaster.s",
-      "sha256": "caf08f0d28d97d60f2de274f6c6b9620bad306294d023e345c971d5181a32f94"
+      "sha256": "f5c753584b569d0399bbaacc5259785a5687186c984f43143bda74789205f552"
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "sha256": "7b2dccf70666f6e2ea606b71138a8b45f455f43ac054bf6ca726bfc7b9bf8602"
+      "sha256": "87883c6344ae7430076489bd8ecb48c3827c358718409c3b0075ae4420939549"
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
@@ -1217,15 +1217,15 @@
     },
     {
       "path": "src/objects/zones/fbz/sk/chain_link.s",
-      "sha256": "0abeeb87e7f8937150e097ac1af06a5eae92640aeacdd9ed61e77be0cfc7451f"
+      "sha256": "e89000af4f6cb02b3563f934ad888da2c828aaca880339aa4cdfbbd7a7f246dc"
     },
     {
       "path": "src/objects/zones/fbz/sk/spinning_pole.s",
-      "sha256": "8ac52d159f8958d26f2c6b8ec6b1a43d948115e08aae47a5b07c8e0526982e94"
+      "sha256": "9e5834485b1c6b8216423fdf292a828e79a5a704948338bda78bf1855a6d21b3"
     },
     {
       "path": "src/objects/zones/fbz/sk/wire_cages.s",
-      "sha256": "e0e0bfef30d21c7d1f0fd729de81a45e7ff42864a5b20cc74ae541d5e8e5e7ca"
+      "sha256": "b0b94f6a4d4d6e39736002bf41c161cf75d4358562bda29ec6ddba796dcba7bb"
     },
     {
       "path": "src/objects/zones/hpz/sk/emerald_resources.s",
@@ -1297,7 +1297,7 @@
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
-      "sha256": "766538b7e935124cfa80f208bbacf9ce817f0829f1ab1729904407db90d82cd7"
+      "sha256": "368a5fc100423eb04077329d71eb49bbce0ee1a461dfc052babb6a2c63d17b43"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_controller.s",
@@ -3729,30 +3729,30 @@
     },
     {
       "path": "src/objects/enemies/fbz/s3/batbot.s",
-      "symbol": "byte_5722E",
-      "scope": "byte_5722E",
-      "first_line": 133,
-      "last_line": 143,
+      "symbol": "BatbotS3_Body_UniformPursuitFrames",
+      "scope": "BatbotS3_Body_UniformPursuitFrames",
+      "first_line": 134,
+      "last_line": 144,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 20,
-      "declarations_sha256": "9621e07aa71ae3cc73d2c5a56872176ba2600c9abfaea80175cc2f7825b880ff",
+      "declarations_sha256": "46500781d00b78e78e35266834947cdfb590b368b70932096c887e8abe12d36e",
       "entries": [
         [0, "fixed"],
         [6, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_5722E", "byte_57234"],
+      "members": ["BatbotS3_Body_UniformPursuitFrames", "BatbotS3_LargeVisual_PairedActiveFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/fbz/s3/blaster.s",
-      "symbol": "byte_5749A",
-      "scope": "byte_5749A",
-      "first_line": 238,
-      "last_line": 254,
+      "symbol": "BlasterS3_Body_PairedPatrolFrames",
+      "scope": "BlasterS3_Body_PairedPatrolFrames",
+      "first_line": 239,
+      "last_line": 255,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 30,
-      "declarations_sha256": "8028789d831a19d2b0903479c2948138a7918b103ce90d131526164daa382d46",
+      "declarations_sha256": "2470eecc831d5407f5ea96a0f8b719a74fc057fd27023f819189d2b3fdfaf265",
       "entries": [
         [0, "pairs"],
         [5, "fixed"],
@@ -3761,18 +3761,24 @@
         [23, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_5749A", "byte_5749F", "byte_574A4", "byte_574AD", "byte_574B1"],
+      "members": [
+        "BlasterS3_Body_PairedPatrolFrames",
+        "S3Blaster_MuzzleAnim",
+        "S3Blaster_FireAnim",
+        "S3Blaster_PrimaryShotAnim",
+        "S3Blaster_SecondaryShotAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/fbz/s3/techno_squeek.s",
-      "symbol": "byte_57718",
-      "scope": "byte_57718",
+      "symbol": "S3TechnoSqueek_FirstHorizontalAnim",
+      "scope": "S3TechnoSqueek_FirstHorizontalAnim",
       "first_line": 234,
       "last_line": 270,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 76,
-      "declarations_sha256": "40c6229a8759340bd49b38b4e6efc23f0ce15fb4be7854fdcd8edc10ce631a13",
+      "declarations_sha256": "3f7738d463e26fca99aee78c3f699d5313be226ba6259e07a8bdcae72a10acf1",
       "entries": [
         [0, "pairs-flip-x"],
         [11, "pairs-flip-x"],
@@ -3785,43 +3791,43 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_57718",
-        "byte_57723",
-        "byte_5772E",
-        "byte_57739",
-        "byte_5773E",
-        "byte_57749",
-        "byte_57754",
-        "byte_5775F"
+        "S3TechnoSqueek_FirstHorizontalAnim",
+        "S3TechnoSqueek_RepeatHorizontalAnim",
+        "S3TechnoSqueek_HorizontalTurnAnim",
+        "S3TechnoSqueek_HorizontalVisualAnim",
+        "S3TechnoSqueek_FirstVerticalAnim",
+        "S3TechnoSqueek_RepeatVerticalAnim",
+        "S3TechnoSqueek_VerticalTurnAnim",
+        "S3TechnoSqueek_VerticalVisualAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/fbz/sk/batbot.s",
-      "symbol": "byte_8947A",
-      "scope": "byte_8947A",
-      "first_line": 133,
-      "last_line": 143,
+      "symbol": "BatbotSK_Body_UniformPursuitFrames",
+      "scope": "BatbotSK_Body_UniformPursuitFrames",
+      "first_line": 134,
+      "last_line": 144,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "1aceaef5aa7193b2fcc273fe2b5a667ebcb0631cac7c7f341d3b619daee3c663",
+      "declarations_sha256": "0e6ba3b1e98a792ce062b716ed1119acfd70855f0a2b7686275c8543978ed085",
       "entries": [
         [0, "fixed"],
         [6, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8947A", "byte_89480"],
+      "members": ["BatbotSK_Body_UniformPursuitFrames", "BatbotSK_LargeVisual_PairedActiveFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/fbz/sk/blaster.s",
-      "symbol": "byte_8975E",
-      "scope": "byte_8975E",
-      "first_line": 284,
-      "last_line": 300,
+      "symbol": "BlasterSK_Body_PairedPatrolFrames",
+      "scope": "BlasterSK_Body_PairedPatrolFrames",
+      "first_line": 286,
+      "last_line": 302,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 30,
-      "declarations_sha256": "f8dc9b10ce99d23761ace3d7fe4498a72fe16b29da8ae5b23edb433b14e80ea4",
+      "declarations_sha256": "cece777118de4a24121878374bc7a2e4ffeeee40280608309d3ced44f367e0f2",
       "entries": [
         [0, "pairs"],
         [5, "fixed"],
@@ -3830,18 +3836,24 @@
         [23, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8975E", "byte_89763", "byte_89768", "byte_89771", "byte_89775"],
+      "members": [
+        "BlasterSK_Body_PairedPatrolFrames",
+        "SKBlaster_MuzzleAnim",
+        "SKBlaster_FireAnim",
+        "SKBlaster_PrimaryShotAnim",
+        "SKBlaster_SecondaryShotAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "symbol": "byte_89B2C",
-      "scope": "byte_89B2C",
+      "symbol": "SKTechnoSqueek_FirstHorizontalAnim",
+      "scope": "SKTechnoSqueek_FirstHorizontalAnim",
       "first_line": 290,
       "last_line": 326,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 76,
-      "declarations_sha256": "e87533b8d153f8222a2e1402dabd230b6f55ab089b5780e8f36a9721b67c0b8f",
+      "declarations_sha256": "6961f889e704d7652ad793824480ffe0bf5c3b13fb489a533e361014981c4af3",
       "entries": [
         [0, "pairs-flip-x"],
         [11, "pairs-flip-x"],
@@ -3854,14 +3866,14 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_89B2C",
-        "byte_89B37",
-        "byte_89B42",
-        "byte_89B4D",
-        "byte_89B52",
-        "byte_89B5D",
-        "byte_89B68",
-        "byte_89B73"
+        "SKTechnoSqueek_FirstHorizontalAnim",
+        "SKTechnoSqueek_RepeatHorizontalAnim",
+        "SKTechnoSqueek_HorizontalTurnAnim",
+        "SKTechnoSqueek_HorizontalVisualAnim",
+        "SKTechnoSqueek_FirstVerticalAnim",
+        "SKTechnoSqueek_RepeatVerticalAnim",
+        "SKTechnoSqueek_VerticalTurnAnim",
+        "SKTechnoSqueek_VerticalVisualAnim"
       ],
       "stored_markers": []
     },
@@ -5285,72 +5297,72 @@
     },
     {
       "path": "src/objects/zones/fbz/sk/chain_link.s",
-      "symbol": "RawAni_3AC38",
-      "scope": "RawAni_3AC38",
+      "symbol": "SKFBZChain_TraversalFrames",
+      "scope": "SKFBZChain_TraversalFrames",
       "first_line": 373,
       "last_line": 374,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "6ae5926f8eb64f05907b30ea96a575484fb459a16dd7f12b81797c0ee23fb9dc",
+      "declarations_sha256": "eea648435ec23146447b83d5ab41d1666c44e04f5858026a7a1ccee155bb530c",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3AC38"],
+      "members": ["SKFBZChain_TraversalFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/fbz/sk/spinning_pole.s",
-      "symbol": "RawAni_3C048",
-      "scope": "RawAni_3C048",
+      "symbol": "SKFBZSpinPole_PoseFrames",
+      "scope": "SKFBZSpinPole_PoseFrames",
       "first_line": 100,
       "last_line": 101,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "84188ecac4e18234cd485139eda73194c276080190558dd2561a1605e4abf48d",
+      "declarations_sha256": "d6694908fdbebe55e839262f1afb2be5e742afec5fa7987c924927707dd82aae",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3C048"],
+      "members": ["SKFBZSpinPole_PoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/fbz/sk/wire_cages.s",
-      "symbol": "RawAni_3A220",
-      "scope": "RawAni_3A220",
+      "symbol": "SKFBZCage_VerticalRideFrames",
+      "scope": "SKFBZCage_VerticalRideFrames",
       "first_line": 274,
       "last_line": 277,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "2539cd55ea9d89b3651e23f2209bf0a9c4fdb7d63f58f17ca828356cd651de6a",
+      "declarations_sha256": "c7b9c10a4077b4d5523dcfc808df52a4da15c87670bbe4947243f83ca77e61d7",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3A220"],
+      "members": ["SKFBZCage_VerticalRideFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/fbz/sk/wire_cages.s",
-      "symbol": "RawAni_3A474",
-      "scope": "RawAni_3A474",
+      "symbol": "SKFBZCage_FlatRideFrames",
+      "scope": "SKFBZCage_FlatRideFrames",
       "first_line": 477,
       "last_line": 479,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "77656acba7ac5501e392b19b355793c3aaa92f03715c31cfa4d3a9c0db154a67",
+      "declarations_sha256": "2019eb1c50ff4e12ecb2ad70ca40ae45cb1abae5c5efc1ebbd91e73504327fd5",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3A474"],
+      "members": ["SKFBZCage_FlatRideFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/fbz/sk/wire_cages.s",
-      "symbol": "RawAni_3A548",
-      "scope": "RawAni_3A548",
+      "symbol": "SKFBZCage_HelixFrames",
+      "scope": "SKFBZCage_HelixFrames",
       "first_line": 549,
       "last_line": 552,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 36,
-      "declarations_sha256": "322b6cd93d5c7deb09364c3160a13e6f893f42eeeac7bf7b337ff4c6089b1a55",
+      "declarations_sha256": "a359da04139fab1bd753f2b223d67278ef975248c86e9965fdc05f13547bdc84",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_3A548"],
+      "members": ["SKFBZCage_HelixFrames"],
       "stored_markers": []
     },
     {

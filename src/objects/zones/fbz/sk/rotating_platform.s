@@ -7,14 +7,14 @@ Obj_FBZRotatingPlatform:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lsl.w   #3,d0
-                lea     byte_3B780(pc,d0.w),a2
+                lea     SKFBZOrbitPlat_OrbitGroupConfigs(pc,d0.w),a2
                 moveq   #0,d1
                 move.b  (a2)+,d1
                 move.b  (a2)+,d2
                 movea.l a0,a1
-                bra.w   loc_3B802
+                bra.w   SKFBZOrbitPlat_InitOrbitMember
 ; ---------------------------------------------------------------------------
-byte_3B780:
+SKFBZOrbitPlat_OrbitGroupConfigs:
                 dc.b    6-1,   0, $5C, $44, $2C, $D4, $BC, $A4
                 dc.b    6-1,   1, $5C, $44, $2C, $D4, $BC, $A4
                 dc.b    6-1, $21, $5C, $44, $2C, $D4, $BC, $A4
@@ -33,12 +33,13 @@ byte_3B780:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3B7F8:
+; A failed allocation still consumes the current attempt and allows the remaining attempts
+SKFBZOrbitPlat_TryAllocateOrbitMember:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3B866
+                bne.w   SKFBZOrbitPlat_NextOrbitAttempt
 
-loc_3B802:
-                move.l  #loc_3B86A,(a1)
+SKFBZOrbitPlat_InitOrbitMember:
+                move.l  #SKFBZOrbitPlat_UpdateSolidOrbit,(a1)
                 move.l  #Map_FBZRotatingPlatform,mappings(a1)
                 move.w  #make_art_tile(ArtTile_FBZMisc+$F2,1,0),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -51,16 +52,16 @@ loc_3B802:
                 move.w  y_pos(a0),$46(a1)
                 move.b  (a2)+,$30(a1)
                 lsr.b   #1,d2
-                bcc.s   loc_3B866
-                move.l  #loc_3B8C2,(a1)
+                bcc.s   SKFBZOrbitPlat_NextOrbitAttempt
+                move.l  #SKFBZOrbitPlat_UpdateHazardOrbit,(a1)
                 move.w  #make_art_tile(ArtTile_FBZMisc+$CA,1,0),art_tile(a1)
                 move.b  #1,mapping_frame(a1)
                 move.b  #$86,collision_flags(a1)
 
-loc_3B866:
-                dbf     d1,loc_3B7F8
+SKFBZOrbitPlat_NextOrbitAttempt:
+                dbf     d1,SKFBZOrbitPlat_TryAllocateOrbitMember
 
-loc_3B86A:
+SKFBZOrbitPlat_UpdateSolidOrbit:
                 move.w  x_pos(a0),-(sp)
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -80,16 +81,16 @@ loc_3B86A:
                 jsr     (SolidObjectFull).l
                 moveq   #1,d1
                 btst    #0,status(a0)
-                beq.s   loc_3B8B4
+                beq.s   SKFBZOrbitPlat_StepSolidPhaseAndDraw
                 neg.w   d1
 
-loc_3B8B4:
+SKFBZOrbitPlat_StepSolidPhaseAndDraw:
                 add.b   d1,angle(a0)
                 move.w  $44(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_3B8C2:
+SKFBZOrbitPlat_UpdateHazardOrbit:
                 move.w  x_pos(a0),-(sp)
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
@@ -109,10 +110,10 @@ loc_3B8C2:
                 jsr     (SolidObjectFull).l
                 moveq   #1,d1
                 btst    #0,status(a0)
-                beq.s   loc_3B90C
+                beq.s   SKFBZOrbitPlat_StepHazardPhaseAndDraw
                 neg.w   d1
 
-loc_3B90C:
+SKFBZOrbitPlat_StepHazardPhaseAndDraw:
                 add.b   d1,angle(a0)
                 move.w  $44(a0),d0
                 jmp     (SKTouchCull_TestAnchorAndDraw).l

@@ -2,7 +2,7 @@
 ; Responsibility: Bent pipe initialization, player contact and display
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_3B6D8:
+SKFBZBentPipe_SubtypeDimensions:
                 dc.b    $18, $10
                 dc.b    $10,   8
                 dc.b    $18, $10
@@ -18,11 +18,11 @@ Obj_FBZBentPipe:
                 move.b  d0,mapping_frame(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.b  byte_3B6D8(pc,d0.w),width_pixels(a0)
-                move.b  byte_3B6D8+1(pc,d0.w),height_pixels(a0)
-                move.l  #loc_3B718,(a0)
+                move.b  SKFBZBentPipe_SubtypeDimensions(pc,d0.w),width_pixels(a0)
+                move.b  SKFBZBentPipe_SubtypeDimensions+1(pc,d0.w),height_pixels(a0)
+                move.l  #SKFBZBentPipe_ResolveSolidAndDraw,(a0)
 
-loc_3B718:
+SKFBZBentPipe_ResolveSolidAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1

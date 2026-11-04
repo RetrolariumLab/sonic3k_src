@@ -62,7 +62,7 @@ set_soz_enemy_cg:
 SOZ_capsule:
                 lea     SOZ_capsule_init_tbl(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_89C14,(a0)
+                move.l  #SKFBZEggPrison_CheckButtonAndSaveOpened,(a0)
                 move.b  #3,subtype(a0)
                 lea     SOZ_capsule_switch_set_tbl(pc),a2
                 jsr     (CreateChild1_Normal).l
@@ -73,7 +73,7 @@ SOZ_capsule:
 
 ; loc_8F424:
                 ._100:
-                move.l  #loc_89C54,(a0)
+                move.l  #FBZEggPrisonSK_ResolveSolidThenTouchCull,(a0)
                 move.b  #1,mapping_frame(a0)
                 bset    #5,$38(a0)
 

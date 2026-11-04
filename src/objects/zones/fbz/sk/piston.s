@@ -18,26 +18,26 @@ Obj_FBZPiston:
                 andi.w  #$FF80,d0
                 addi.w  #$200,d0
                 move.w  d0,$36(a0)
-                move.l  #loc_3C2A6,(a0)
+                move.l  #SKFBZPiston_SaveXAndRetract,(a0)
 
-loc_3C2A6:
+SKFBZPiston_SaveXAndRetract:
                 move.w  x_pos(a0),-(sp)
                 tst.b   $30(a0)
-                beq.s   loc_3C2BE
+                beq.s   SKFBZPiston_ExtendToLimit
                 subq.w  #2,$32(a0)
-                bne.s   loc_3C2D2
+                bne.s   SKFBZPiston_PlaceAndResolveSolid
                 move.b  #0,$30(a0)
-                bra.s   loc_3C2D2
+                bra.s   SKFBZPiston_PlaceAndResolveSolid
 ; ---------------------------------------------------------------------------
 
-loc_3C2BE:
+SKFBZPiston_ExtendToLimit:
                 addq.w  #2,$32(a0)
                 move.w  $34(a0),d0
                 cmp.w   $32(a0),d0
-                bne.s   loc_3C2D2
+                bne.s   SKFBZPiston_PlaceAndResolveSolid
                 move.b  #1,$30(a0)
 
-loc_3C2D2:
+SKFBZPiston_PlaceAndResolveSolid:
                 move.w  $32(a0),d0
                 neg.w   d0
                 add.w   $44(a0),d0
@@ -55,17 +55,17 @@ loc_3C2D2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmp.w   $36(a0),d0
-                bhi.w   loc_3C316
+                bhi.w   SKFBZPiston_ClearRespawnBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3C316:
+SKFBZPiston_ClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_3C322
+                beq.s   SKFBZPiston_DeleteOutOfRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_3C322:
+SKFBZPiston_DeleteOutOfRange:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZPiston:

@@ -8358,7 +8358,7 @@
       "responsibility": "Flying Battery act-one screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 523,
+      "physical_lines": 524,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -8388,7 +8388,7 @@
       "responsibility": "Flying Battery act-two background events, end-boss event actors, pillars and clouds.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 543,
+      "physical_lines": 544,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -8418,7 +8418,7 @@
       "responsibility": "Flying Battery act-two screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 204,
+      "physical_lines": 205,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -23919,7 +23919,7 @@
       "responsibility": "Batbot flight and attack controller with private object and child construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 143,
+      "physical_lines": 144,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23964,7 +23964,7 @@
       "responsibility": "Blaster attack and projectile state machines, movement helpers and child resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 254,
+      "physical_lines": 255,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24054,7 +24054,7 @@
       "responsibility": "Batbot flight and attack controller with private object and child construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 143,
+      "physical_lines": 144,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24089,7 +24089,7 @@
       "responsibility": "Blaster attack and projectile state machines, movement helpers and child resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 302,
+      "physical_lines": 304,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24119,7 +24119,7 @@
       "responsibility": "Techno Squeek movement and attack states with private child and object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 649,
+      "physical_lines": 650,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -59406,7 +59406,7 @@
       "responsibility": "Flamethrower timing, flame creation, flame motion and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 279,
+      "physical_lines": 280,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59441,7 +59441,7 @@
       "responsibility": "Floating platform movement, player riding and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 168,
+      "physical_lines": 169,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59476,7 +59476,7 @@
       "responsibility": "Magnetic pendulum motion, attraction, player interactions and coordinated sprites.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 509,
+      "physical_lines": 511,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59516,7 +59516,7 @@
       "responsibility": "Magnetic platform state, movement, player collision and riding.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 157,
+      "physical_lines": 159,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59596,7 +59596,7 @@
       "responsibility": "Mine movement, contact, explosion state and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 69,
+      "physical_lines": 70,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59631,7 +59631,7 @@
       "responsibility": "Missile launcher activation, aiming, missile creation and launcher state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 248,
+      "physical_lines": 250,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59846,7 +59846,7 @@
       "responsibility": "Rotating platform phase, motion, collision and player riding.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 122,
+      "physical_lines": 123,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -59936,7 +59936,7 @@
       "responsibility": "Snake platform initialization, wait and movement states, restart and player riding.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 162,
+      "physical_lines": 163,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",

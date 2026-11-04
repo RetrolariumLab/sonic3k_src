@@ -9,8 +9,8 @@ Obj_FBZMagneticSpikeBall:
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_3B16E
-                bmi.s   loc_3B122
+                beq.s   SKFBZMagSpike_InitFallingBall
+                bmi.s   SKFBZMagSpike_ChooseMagnetVisual
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$9A,collision_flags(a0)
@@ -18,109 +18,109 @@ Obj_FBZMagneticSpikeBall:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_3B122:
+SKFBZMagSpike_ChooseMagnetVisual:
                 btst    #0,subtype(a0)
-                bne.s   loc_3B146
+                bne.s   SKFBZMagSpike_InitCompactMagnet
                 ori.w   #high_priority,art_tile(a0)
                 move.b  #$30,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
-                move.l  #loc_3B1FC,(a0)
-                bra.w   loc_3B1FC
+                move.l  #SKFBZMagSpike_AnimateLargeMagnet,(a0)
+                bra.w   SKFBZMagSpike_AnimateLargeMagnet
 ; ---------------------------------------------------------------------------
 
-loc_3B146:
+SKFBZMagSpike_InitCompactMagnet:
                 move.w  #make_art_tile(ArtTile_FBZMisc+$C9,1,1),art_tile(a0)
                 move.b  #$24,width_pixels(a0)
                 move.b  #4,height_pixels(a0)
                 move.b  #4,mapping_frame(a0)
                 move.w  #$200,priority(a0)
-                move.l  #loc_3B238,(a0)
-                bra.w   loc_3B238
+                move.l  #SKFBZMagSpike_AnimateCompactMagnet,(a0)
+                bra.w   SKFBZMagSpike_AnimateCompactMagnet
 ; ---------------------------------------------------------------------------
 
-loc_3B16E:
+SKFBZMagSpike_InitFallingBall:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$A,y_radius(a0)
                 move.b  #$9A,collision_flags(a0)
-                move.l  #loc_3B18C,(a0)
+                move.l  #SKFBZMagSpike_FallAndCheckFloor,(a0)
 
-loc_3B18C:
+SKFBZMagSpike_FallAndCheckFloor:
                 jsr     (MoveSprite2).l
                 addi.w  #$58,y_vel(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_3B1B2
+                bpl.s   SKFBZMagSpike_TrySwitchToRising
                 add.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
-                move.l  #loc_3B1B2,(a0)
+                move.l  #SKFBZMagSpike_TrySwitchToRising,(a0)
 
-loc_3B1B2:
+SKFBZMagSpike_TrySwitchToRising:
                 tst.b   (_unkF7C1).w
-                beq.s   loc_3B1BE
-                move.l  #loc_3B1C4,(a0)
+                beq.s   SKFBZMagSpike_DrawFallingBall
+                move.l  #SKFBZMagSpike_RiseAndCheckCeiling,(a0)
 
-loc_3B1BE:
+SKFBZMagSpike_DrawFallingBall:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_3B1C4:
+SKFBZMagSpike_RiseAndCheckCeiling:
                 jsr     (MoveSprite2).l
                 subi.w  #$18,y_vel(a0)
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   loc_3B1EA
+                bpl.s   SKFBZMagSpike_TrySwitchToFalling
                 sub.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
-                move.l  #loc_3B1EA,(a0)
+                move.l  #SKFBZMagSpike_TrySwitchToFalling,(a0)
 
-loc_3B1EA:
+SKFBZMagSpike_TrySwitchToFalling:
                 tst.b   (_unkF7C1).w
-                bne.s   loc_3B1F6
-                move.l  #loc_3B18C,(a0)
+                bne.s   SKFBZMagSpike_DrawRisingBall
+                move.l  #SKFBZMagSpike_FallAndCheckFloor,(a0)
 
-loc_3B1F6:
+SKFBZMagSpike_DrawRisingBall:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_3B1FC:
+SKFBZMagSpike_AnimateLargeMagnet:
                 tst.b   (_unkF7C1).w
-                beq.s   loc_3B232
+                beq.s   SKFBZMagSpike_CullHiddenLargeMagnet
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #5,mapping_frame(a0)
-                blo.s   loc_3B214
+                blo.s   SKFBZMagSpike_TryPlayMagnetSound
                 move.b  #1,mapping_frame(a0)
 
-loc_3B214:
+SKFBZMagSpike_TryPlayMagnetSound:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_3B22C
+                bne.s   SKFBZMagSpike_DrawLargeMagnet
                 tst.b   render_flags(a0)
-                bpl.s   loc_3B22C
+                bpl.s   SKFBZMagSpike_DrawLargeMagnet
                 moveq   #signextendB(sfx_MagneticSpike),d0
                 jsr     (Play_SFX).l
 
-loc_3B22C:
+SKFBZMagSpike_DrawLargeMagnet:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3B232:
+SKFBZMagSpike_CullHiddenLargeMagnet:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_3B238:
+SKFBZMagSpike_AnimateCompactMagnet:
                 tst.b   (_unkF7C1).w
-                beq.s   loc_3B256
+                beq.s   SKFBZMagSpike_CullHiddenCompactMagnet
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #7,mapping_frame(a0)
-                blo.s   loc_3B250
+                blo.s   SKFBZMagSpike_DrawCompactMagnet
                 move.b  #5,mapping_frame(a0)
 
-loc_3B250:
+SKFBZMagSpike_DrawCompactMagnet:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3B256:
+SKFBZMagSpike_CullHiddenCompactMagnet:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 Map_FBZMagneticSpikeBall:

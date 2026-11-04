@@ -4325,16 +4325,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "ce49884e2cbdd84ef44f2d865ce62a90b461faac6fb84b7da129560db804ec69",
+      "declarations_sha256": "0a9e563893cd4963943e1e4d53c80da4400bc2cfc7376706bdfbab5e8f597847",
       "labels": {
         "Map_Batbot_": 0,
-        "Frame_361BDE": 14,
-        "Frame_361BEC": 28,
-        "Frame_361BFA": 42,
-        "Frame_361C14": 68,
-        "Frame_361C22": 82,
-        "Frame_361C30": 96,
-        "Frame_361C38": 104
+        "BatbotS3_MapFrame00": 14,
+        "BatbotS3_MapFrame01": 28,
+        "BatbotS3_MapFrame02": 42,
+        "BatbotS3_MapFrame03": 68,
+        "BatbotS3_MapFrame04": 82,
+        "BatbotS3_MapFrame05": 96,
+        "BatbotS3_MapFrame06": 104
       },
       "external_symbols": [],
       "blocks": [
@@ -4342,49 +4342,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BDE",
+          "target": "BatbotS3_MapFrame00",
           "base": "Map_Batbot_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BEC",
+          "target": "BatbotS3_MapFrame01",
           "base": "Map_Batbot_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361BFA",
+          "target": "BatbotS3_MapFrame02",
           "base": "Map_Batbot_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361C14",
+          "target": "BatbotS3_MapFrame03",
           "base": "Map_Batbot_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361C22",
+          "target": "BatbotS3_MapFrame04",
           "base": "Map_Batbot_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361C30",
+          "target": "BatbotS3_MapFrame05",
           "base": "Map_Batbot_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361C38",
+          "target": "BatbotS3_MapFrame06",
           "base": "Map_Batbot_"
         },
         {
@@ -4433,20 +4433,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 164
       },
-      "declarations_sha256": "8261eb06daa6d970bca2bb507498ea44c1cea7227e817ae67e6553ac98c1c8b6",
+      "declarations_sha256": "cd4c52bfcfd981af8e91c52f848d44c4ae870da301dded533c7abb7161ff98a0",
       "labels": {
         "Map_Blaster_": 0,
-        "word_89792": 22,
-        "word_897AC": 48,
-        "word_897C6": 74,
-        "word_897E0": 100,
-        "word_897E8": 108,
-        "word_897F0": 116,
-        "word_897F8": 124,
-        "word_89800": 132,
-        "word_89808": 140,
-        "word_89810": 148,
-        "word_89818": 156
+        "BlasterShared_MapFrame00": 22,
+        "BlasterShared_MapFrame01": 48,
+        "BlasterShared_MapFrame02": 74,
+        "BlasterShared_MapFrame03": 100,
+        "BlasterShared_MapFrame04": 108,
+        "BlasterShared_MapFrame05": 116,
+        "BlasterShared_MapFrame06": 124,
+        "BlasterShared_MapFrame07": 132,
+        "BlasterShared_MapFrame08": 140,
+        "BlasterShared_MapFrame09": 148,
+        "BlasterShared_MapFrame0A": 156
       },
       "external_symbols": [],
       "blocks": [
@@ -4454,77 +4454,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89792",
+          "target": "BlasterShared_MapFrame00",
           "base": "Map_Blaster_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897AC",
+          "target": "BlasterShared_MapFrame01",
           "base": "Map_Blaster_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897C6",
+          "target": "BlasterShared_MapFrame02",
           "base": "Map_Blaster_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897E0",
+          "target": "BlasterShared_MapFrame03",
           "base": "Map_Blaster_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897E8",
+          "target": "BlasterShared_MapFrame04",
           "base": "Map_Blaster_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897F0",
+          "target": "BlasterShared_MapFrame05",
           "base": "Map_Blaster_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_897F8",
+          "target": "BlasterShared_MapFrame06",
           "base": "Map_Blaster_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89800",
+          "target": "BlasterShared_MapFrame07",
           "base": "Map_Blaster_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89808",
+          "target": "BlasterShared_MapFrame08",
           "base": "Map_Blaster_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89810",
+          "target": "BlasterShared_MapFrame09",
           "base": "Map_Blaster_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89818",
+          "target": "BlasterShared_MapFrame0A",
           "base": "Map_Blaster_"
         },
         {
@@ -76753,19 +76753,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 100
       },
-      "declarations_sha256": "05690efbeaffc10706c0048dda96794e8da2572f2dcbb5134587eff5ba14be69",
+      "declarations_sha256": "246866dd14c1fbf877786f0eb639206323aa5127b4848dc79c4e456fdfbeaf5f",
       "labels": {
         "Map_TechnoSqueek_": 0,
-        "word_89B8C": 20,
-        "word_89B94": 28,
-        "word_89B9C": 36,
-        "word_89BA4": 44,
-        "word_89BAC": 52,
-        "word_89BB4": 60,
-        "word_89BBC": 68,
-        "word_89BC4": 76,
-        "word_89BCC": 84,
-        "word_89BD4": 92
+        "TechnoSqueekShared_MapFrame00": 20,
+        "TechnoSqueekShared_MapFrame01": 28,
+        "TechnoSqueekShared_MapFrame02": 36,
+        "TechnoSqueekShared_MapFrame03": 44,
+        "TechnoSqueekShared_MapFrame04": 52,
+        "TechnoSqueekShared_MapFrame05": 60,
+        "TechnoSqueekShared_MapFrame06": 68,
+        "TechnoSqueekShared_MapFrame07": 76,
+        "TechnoSqueekShared_MapFrame08": 84,
+        "TechnoSqueekShared_MapFrame09": 92
       },
       "external_symbols": [],
       "blocks": [
@@ -76773,70 +76773,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89B8C",
+          "target": "TechnoSqueekShared_MapFrame00",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89B94",
+          "target": "TechnoSqueekShared_MapFrame01",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89B9C",
+          "target": "TechnoSqueekShared_MapFrame02",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BA4",
+          "target": "TechnoSqueekShared_MapFrame03",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BAC",
+          "target": "TechnoSqueekShared_MapFrame04",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BB4",
+          "target": "TechnoSqueekShared_MapFrame05",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BBC",
+          "target": "TechnoSqueekShared_MapFrame06",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BC4",
+          "target": "TechnoSqueekShared_MapFrame07",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BCC",
+          "target": "TechnoSqueekShared_MapFrame08",
           "base": "Map_TechnoSqueek_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_89BD4",
+          "target": "TechnoSqueekShared_MapFrame09",
           "base": "Map_TechnoSqueek_"
         },
         {
@@ -91689,13 +91689,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 36
       },
-      "declarations_sha256": "81fd05196c19bad298cdfda6150e0e851d80b5076f891e79df91cf6a22f2cfbe",
+      "declarations_sha256": "41154e655c0e6884df4368beb9d1e3b6f0fae0bded5877912ff8838516a96f9a",
       "labels": {
         "Ani_FBZDisappearingPlatform_": 0,
-        "byte_3BBA2": 8,
-        "byte_3BBA9": 15,
-        "byte_3BBB0": 22,
-        "byte_3BBB7": 29
+        "SKFBZVanishPlat_VisibleDelay60": 8,
+        "SKFBZVanishPlat_VisibleDelay120": 15,
+        "SKFBZVanishPlat_VisibleDelay180": 22,
+        "SKFBZVanishPlat_VisibleDelay240": 29
       },
       "external_symbols": [],
       "blocks": [
@@ -91703,28 +91703,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BBA2",
+          "target": "SKFBZVanishPlat_VisibleDelay60",
           "base": "Ani_FBZDisappearingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BBA9",
+          "target": "SKFBZVanishPlat_VisibleDelay120",
           "base": "Ani_FBZDisappearingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BBB0",
+          "target": "SKFBZVanishPlat_VisibleDelay180",
           "base": "Ani_FBZDisappearingPlatform_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BBB7",
+          "target": "SKFBZVanishPlat_VisibleDelay240",
           "base": "Ani_FBZDisappearingPlatform_"
         },
         {
@@ -91762,15 +91762,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "c6051a8091ad04cadf7b9615809d03576f2321622638397427fdac8c56d2b204",
+      "declarations_sha256": "a11dfc2a27f69f015643c36159d23de4547bd22ffdde11380d8e919b98a27a1f",
       "labels": {
         "Ani_FBZScrewDoor_": 0,
-        "byte_3BD6A": 12,
-        "byte_3BD70": 18,
-        "byte_3BD76": 24,
-        "byte_3BD7C": 30,
-        "byte_3BD82": 36,
-        "byte_3BD88": 42
+        "FBZScrewDoorSK_StandardAnim00": 12,
+        "FBZScrewDoorSK_StandardAnim01": 18,
+        "FBZScrewDoorSK_StandardAnim02": 24,
+        "FBZScrewDoorSK_StandardAnim03": 30,
+        "FBZScrewDoorSK_StandardAnim04": 36,
+        "FBZScrewDoorSK_StandardAnim05": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -91778,42 +91778,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD6A",
+          "target": "FBZScrewDoorSK_StandardAnim00",
           "base": "Ani_FBZScrewDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD70",
+          "target": "FBZScrewDoorSK_StandardAnim01",
           "base": "Ani_FBZScrewDoor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD76",
+          "target": "FBZScrewDoorSK_StandardAnim02",
           "base": "Ani_FBZScrewDoor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD7C",
+          "target": "FBZScrewDoorSK_StandardAnim03",
           "base": "Ani_FBZScrewDoor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD82",
+          "target": "FBZScrewDoorSK_StandardAnim04",
           "base": "Ani_FBZScrewDoor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3BD88",
+          "target": "FBZScrewDoorSK_StandardAnim05",
           "base": "Ani_FBZScrewDoor_"
         },
         {
@@ -91863,11 +91863,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 14
       },
-      "declarations_sha256": "1f1e44678d08711a9c289efaf50a414867f7411d0ca2209e36febc0fcf914780",
+      "declarations_sha256": "7337b1794b566855842d9c5c38526b91f02733492b509111b585813f98284427",
       "labels": {
         "Ani_FBZTrapSpring_": 0,
-        "byte_3CC50": 4,
-        "byte_3CC55": 9
+        "FBZTrapSpringSK_StandardAnim00": 4,
+        "FBZTrapSpringSK_StandardAnim01": 9
       },
       "external_symbols": [],
       "blocks": [
@@ -91875,14 +91875,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3CC50",
+          "target": "FBZTrapSpringSK_StandardAnim00",
           "base": "Ani_FBZTrapSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3CC55",
+          "target": "FBZTrapSpringSK_StandardAnim01",
           "base": "Ani_FBZTrapSpring_"
         },
         {
@@ -92297,12 +92297,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "66232a92c7efd99939e2fb0da0efd7924a9226532aabfcffe38acf91df1edb9e",
+      "declarations_sha256": "8b4dbaef375f2170b5d6c8f11afd5d295aa35d2685f2133d06a0bca36e3d1faf",
       "labels": {
         "Map_FBZBentPipe_": 0,
-        "word_3B742": 6,
-        "word_3B750": 20,
-        "word_3B758": 28
+        "FBZBentPipeSK_MapSlot00": 6,
+        "FBZBentPipeSK_MapSlot01": 20,
+        "FBZBentPipeSK_MapSlot02": 28
       },
       "external_symbols": [],
       "blocks": [
@@ -92310,21 +92310,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B742",
+          "target": "FBZBentPipeSK_MapSlot00",
           "base": "Map_FBZBentPipe_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B750",
+          "target": "FBZBentPipeSK_MapSlot01",
           "base": "Map_FBZBentPipe_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B758",
+          "target": "FBZBentPipeSK_MapSlot02",
           "base": "Map_FBZBentPipe_"
         },
         {
@@ -92353,23 +92353,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 856
       },
-      "declarations_sha256": "42638e377eb0b9491ca8664401608fcd0eae53fa8637106f4825077ee269d41d",
+      "declarations_sha256": "4c263f1a70048735a632ff3de6d33704b969fe3440c321ae6d21b7b40e049534",
       "labels": {
         "Map_FBZChainLink_": 0,
-        "word_3ADA8": 30,
-        "word_3ADBC": 50,
-        "word_3ADD6": 76,
-        "word_3ADF6": 108,
-        "word_3AE1C": 146,
-        "word_3AE48": 190,
-        "word_3AE7A": 240,
-        "word_3AEB2": 296,
-        "word_3AEF0": 358,
-        "word_3AF34": 426,
-        "word_3AF7E": 500,
-        "word_3AFCE": 580,
-        "word_3B024": 666,
-        "word_3B080": 758
+        "FBZChainLinkSK_MapSlot00": 30,
+        "FBZChainLinkSK_MapSlot01": 50,
+        "FBZChainLinkSK_MapSlot02": 76,
+        "FBZChainLinkSK_MapSlot03": 108,
+        "FBZChainLinkSK_MapSlot04": 146,
+        "FBZChainLinkSK_MapSlot05": 190,
+        "FBZChainLinkSK_MapSlot06": 240,
+        "FBZChainLinkSK_MapSlot07": 296,
+        "FBZChainLinkSK_MapSlot08": 358,
+        "FBZChainLinkSK_MapSlot09": 426,
+        "FBZChainLinkSK_MapSlot0A": 500,
+        "FBZChainLinkSK_MapSlot0B": 580,
+        "FBZChainLinkSK_MapSlot0C": 666,
+        "FBZChainLinkSK_MapSlots0D_0E": 758
       },
       "external_symbols": [],
       "blocks": [
@@ -92377,105 +92377,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3ADA8",
+          "target": "FBZChainLinkSK_MapSlot00",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3ADBC",
+          "target": "FBZChainLinkSK_MapSlot01",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3ADD6",
+          "target": "FBZChainLinkSK_MapSlot02",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3ADF6",
+          "target": "FBZChainLinkSK_MapSlot03",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AE1C",
+          "target": "FBZChainLinkSK_MapSlot04",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AE48",
+          "target": "FBZChainLinkSK_MapSlot05",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AE7A",
+          "target": "FBZChainLinkSK_MapSlot06",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AEB2",
+          "target": "FBZChainLinkSK_MapSlot07",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AEF0",
+          "target": "FBZChainLinkSK_MapSlot08",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AF34",
+          "target": "FBZChainLinkSK_MapSlot09",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AF7E",
+          "target": "FBZChainLinkSK_MapSlot0A",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3AFCE",
+          "target": "FBZChainLinkSK_MapSlot0B",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B024",
+          "target": "FBZChainLinkSK_MapSlot0C",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B080",
+          "target": "FBZChainLinkSK_MapSlots0D_0E",
           "base": "Map_FBZChainLink_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B080",
+          "target": "FBZChainLinkSK_MapSlots0D_0E",
           "base": "Map_FBZChainLink_"
         },
         {
@@ -92559,12 +92559,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 492
       },
-      "declarations_sha256": "aef73359dd3468f96dae0e10935c35a9f109e64380df90e2cdbdfa6985ea5837",
+      "declarations_sha256": "550f609daf38b6573c4fdbc7c5d842042963b5120729d54bb3eeafe27134db96",
       "labels": {
         "Map_FBZCollapsingBridge_": 0,
-        "word_21094": 6,
-        "word_210F6": 104,
-        "word_211B8": 298
+        "FBZCollapsingBridgeSK_MapSlot00": 6,
+        "FBZCollapsingBridgeSK_MapSlot01": 104,
+        "FBZCollapsingBridgeSK_MapSlot02": 298
       },
       "external_symbols": [],
       "blocks": [
@@ -92572,21 +92572,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21094",
+          "target": "FBZCollapsingBridgeSK_MapSlot00",
           "base": "Map_FBZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_210F6",
+          "target": "FBZCollapsingBridgeSK_MapSlot01",
           "base": "Map_FBZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_211B8",
+          "target": "FBZCollapsingBridgeSK_MapSlot02",
           "base": "Map_FBZCollapsingBridge_"
         },
         {
@@ -92615,11 +92615,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "03567b6a55a7f9830d973d9e4611033fac4158baab01d29767c4c08b25ce538c",
+      "declarations_sha256": "a4e8d30fcbb0ecb40c6955373f001d0e6067dc39a926301fe91ac350911164d6",
       "labels": {
         "Map_FBZCorkFloor_": 0,
-        "word_2A924": 4,
-        "word_2A932": 18
+        "FBZCorkFloorSK_MapSlot00": 4,
+        "FBZCorkFloorSK_MapSlot01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -92627,14 +92627,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2A924",
+          "target": "FBZCorkFloorSK_MapSlot00",
           "base": "Map_FBZCorkFloor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2A932",
+          "target": "FBZCorkFloorSK_MapSlot01",
           "base": "Map_FBZCorkFloor_"
         },
         {
@@ -92658,11 +92658,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "0c8aa18730ede2f1f32e07744faf35e29d183cd45e54af8bdb0924d293ad9497",
+      "declarations_sha256": "744c2ff07242a7cb5d6c840c07c9f04a0d80b152f181778e2a1e4f512338f3e7",
       "labels": {
         "Map_FBZDEZPlayerLauncher_": 0,
-        "word_3BA8E": 4,
-        "word_3BA9C": 18
+        "FBZDezPlayerLauncherSK_MapSlot00": 4,
+        "FBZDezPlayerLauncherSK_MapSlot01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -92670,14 +92670,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BA8E",
+          "target": "FBZDezPlayerLauncherSK_MapSlot00",
           "base": "Map_FBZDEZPlayerLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BA9C",
+          "target": "FBZDezPlayerLauncherSK_MapSlot01",
           "base": "Map_FBZDEZPlayerLauncher_"
         },
         {
@@ -92701,12 +92701,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "3ef1f880cd06c451075d136cf09e9799e41c28f01d1a642529dc514121c25dda",
+      "declarations_sha256": "80babd4845e00b26a7f6cfe4b4ceed2dd561dc1ccf3faab2989fb9d70dfc4da5",
       "labels": {
         "Map_FBZDisappearingPlatform_": 0,
-        "word_3BBC4": 6,
-        "word_3BBD2": 20,
-        "word_3BBE6": 40
+        "FBZDisappearingPlatformSK_MapSlot00": 6,
+        "FBZDisappearingPlatformSK_MapSlot01": 20,
+        "FBZDisappearingPlatformSK_MapSlot02": 40
       },
       "external_symbols": [],
       "blocks": [
@@ -92714,21 +92714,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BBC4",
+          "target": "FBZDisappearingPlatformSK_MapSlot00",
           "base": "Map_FBZDisappearingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BBD2",
+          "target": "FBZDisappearingPlatformSK_MapSlot01",
           "base": "Map_FBZDisappearingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BBE6",
+          "target": "FBZDisappearingPlatformSK_MapSlot02",
           "base": "Map_FBZDisappearingPlatform_"
         },
         {
@@ -92757,18 +92757,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 206
       },
-      "declarations_sha256": "b68c40f1a2740d598c51fa4402800d628309312cfc2c3e4d50c4b68aa6f1bba4",
+      "declarations_sha256": "026a84a1d97e640607ba7504b03ab66ea4cbbb3bbb6e3286c2709e10ba3e90e6",
       "labels": {
         "Map_FBZEggCapsule_": 0,
-        "word_187202": 26,
-        "word_187240": 88,
-        "word_187272": 138,
-        "word_18727A": 146,
-        "word_187282": 154,
-        "word_18728A": 162,
-        "word_187298": 176,
-        "word_1872A0": 184,
-        "word_1872A8": 192
+        "FBZEggCapsuleSK_MapFrame00": 26,
+        "FBZEggCapsuleSK_MapFrame01": 88,
+        "FBZEggCapsuleSK_MapFrame02": 138,
+        "FBZEggCapsuleSK_MapFrame03": 146,
+        "FBZEggCapsuleSK_MapFrame04": 154,
+        "FBZEggCapsuleSK_MapFrame05": 162,
+        "FBZEggCapsuleSK_MapFrame0A": 176,
+        "FBZEggCapsuleSK_MapFrame0B": 184,
+        "FBZEggCapsuleSK_MapFrame0C": 192
       },
       "external_symbols": [],
       "blocks": [
@@ -92776,91 +92776,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187202",
+          "target": "FBZEggCapsuleSK_MapFrame00",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187240",
+          "target": "FBZEggCapsuleSK_MapFrame01",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187272",
+          "target": "FBZEggCapsuleSK_MapFrame02",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18727A",
+          "target": "FBZEggCapsuleSK_MapFrame03",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187282",
+          "target": "FBZEggCapsuleSK_MapFrame04",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18728A",
+          "target": "FBZEggCapsuleSK_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18728A",
+          "target": "FBZEggCapsuleSK_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18728A",
+          "target": "FBZEggCapsuleSK_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18728A",
+          "target": "FBZEggCapsuleSK_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18728A",
+          "target": "FBZEggCapsuleSK_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187298",
+          "target": "FBZEggCapsuleSK_MapFrame0A",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872A0",
+          "target": "FBZEggCapsuleSK_MapFrame0B",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872A8",
+          "target": "FBZEggCapsuleSK_MapFrame0C",
           "base": "Map_FBZEggCapsule_"
         },
         {
@@ -92919,16 +92919,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 132
       },
-      "declarations_sha256": "685934dc2db6e765b2eeb3e299614ca16b230cef12377fc0b58877561a544747",
+      "declarations_sha256": "c92d6aa696cb0b8e0d00fbd9cb624cd4472d40fb096101603a35fb79e5050fa5",
       "labels": {
         "Map_FBZEggCapsule_": 0,
-        "word_160D5C": 16,
-        "word_160D82": 54,
-        "word_160DA8": 92,
-        "word_160DB0": 100,
-        "word_160DB8": 108,
-        "word_160DC0": 116,
-        "word_160DC8": 124
+        "FBZEggCapsuleS3_MapFrame00": 16,
+        "FBZEggCapsuleS3_MapFrame01": 54,
+        "FBZEggCapsuleS3_MapFrame02": 92,
+        "FBZEggCapsuleS3_MapFrame03": 100,
+        "FBZEggCapsuleS3_MapFrame04": 108,
+        "FBZEggCapsuleS3_MapFrame05": 116,
+        "FBZEggCapsuleS3_MapFrame06": 124
       },
       "external_symbols": [],
       "blocks": [
@@ -92936,56 +92936,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160D5C",
+          "target": "FBZEggCapsuleS3_MapFrame00",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160D82",
+          "target": "FBZEggCapsuleS3_MapFrame01",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DA8",
+          "target": "FBZEggCapsuleS3_MapFrame02",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DB0",
+          "target": "FBZEggCapsuleS3_MapFrame03",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DB8",
+          "target": "FBZEggCapsuleS3_MapFrame04",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DC0",
+          "target": "FBZEggCapsuleS3_MapFrame05",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DC8",
+          "target": "FBZEggCapsuleS3_MapFrame06",
           "base": "Map_FBZEggCapsule_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160DC8",
+          "target": "FBZEggCapsuleS3_MapFrame06",
           "base": "Map_FBZEggCapsule_"
         },
         {
@@ -93034,10 +93034,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 46
       },
-      "declarations_sha256": "f0e9b5b7fa48b06f5452381a37cd5b5cc42f4a0de45950d08e441f729fd8c570",
+      "declarations_sha256": "971412251eab269133fb7365a805cb7227785a03b8234e5e3b70f605662373d2",
       "labels": {
         "Map_FBZElevator_": 0,
-        "word_3CB0E": 2
+        "FBZElevatorSK_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -93045,7 +93045,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CB0E",
+          "target": "FBZElevatorSK_MapSlot00",
           "base": "Map_FBZElevator_"
         },
         {
@@ -93371,10 +93371,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "731d6eb61abf20b353906fbcb4c159a5e6b40ea328c8b4992755e4b41f79b33d",
+      "declarations_sha256": "d555b58e9fa92f26ba4d7c5457c83933f803a353d1f61377d35ca516b3b8791d",
       "labels": {
         "Map_FBZExitDoor_": 0,
-        "word_70F80": 2
+        "FBZBossExitDoor_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -93382,7 +93382,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_70F80",
+          "target": "FBZBossExitDoor_MapFrame00",
           "base": "Map_FBZExitDoor_"
         },
         {
@@ -93401,11 +93401,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "f86c6ce968a21cce04b7ea8615404206324db7c2e418119d2598087fc5d6b832",
+      "declarations_sha256": "d49a823951face6cc15ec4aff2fab15a3012933c91dffcf48ac6583e71450e05",
       "labels": {
         "Map_FBZExitHall_": 0,
-        "word_86D2E": 4,
-        "word_86D3C": 18
+        "FBZExitHallSK_MapSlot00": 4,
+        "FBZExitHallSK_MapSlot01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -93413,14 +93413,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_86D2E",
+          "target": "FBZExitHallSK_MapSlot00",
           "base": "Map_FBZExitHall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_86D3C",
+          "target": "FBZExitHallSK_MapSlot01",
           "base": "Map_FBZExitHall_"
         },
         {
@@ -93444,27 +93444,27 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 192
       },
-      "declarations_sha256": "60d01b64425e8aa1f335dbcd1b44c099b12fcedcc53ffe186f9767b3c49a4788",
+      "declarations_sha256": "f15f95ad6c9dab77a3a7e605e709b5e3b13f8e85c79b87a269b8c0f781a4d866",
       "labels": {
         "Map_FBZFlameThrower_": 0,
-        "word_3CFF4": 36,
-        "word_3CFFC": 44,
-        "word_3D00A": 58,
-        "word_3D018": 72,
-        "word_3D020": 80,
-        "word_3D028": 88,
-        "word_3D030": 96,
-        "word_3D038": 104,
-        "word_3D040": 112,
-        "word_3D048": 120,
-        "word_3D050": 128,
-        "word_3D058": 136,
-        "word_3D060": 144,
-        "word_3D068": 152,
-        "word_3D070": 160,
-        "word_3D078": 168,
-        "word_3D080": 176,
-        "word_3D088": 184
+        "FBZFlamethrowerSK_MapSlot00": 36,
+        "FBZFlamethrowerSK_MapSlot01": 44,
+        "FBZFlamethrowerSK_MapSlot02": 58,
+        "FBZFlamethrowerSK_MapSlot03": 72,
+        "FBZFlamethrowerSK_MapSlot04": 80,
+        "FBZFlamethrowerSK_MapSlot05": 88,
+        "FBZFlamethrowerSK_MapSlot06": 96,
+        "FBZFlamethrowerSK_MapSlot07": 104,
+        "FBZFlamethrowerSK_MapSlot08": 112,
+        "FBZFlamethrowerSK_MapSlot09": 120,
+        "FBZFlamethrowerSK_MapSlot0A": 128,
+        "FBZFlamethrowerSK_MapSlot0B": 136,
+        "FBZFlamethrowerSK_MapSlot0C": 144,
+        "FBZFlamethrowerSK_MapSlot0D": 152,
+        "FBZFlamethrowerSK_MapSlot0E": 160,
+        "FBZFlamethrowerSK_MapSlot0F": 168,
+        "FBZFlamethrowerSK_MapSlot10": 176,
+        "FBZFlamethrowerSK_MapSlot11": 184
       },
       "external_symbols": [],
       "blocks": [
@@ -93472,126 +93472,126 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CFF4",
+          "target": "FBZFlamethrowerSK_MapSlot00",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CFFC",
+          "target": "FBZFlamethrowerSK_MapSlot01",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D00A",
+          "target": "FBZFlamethrowerSK_MapSlot02",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D018",
+          "target": "FBZFlamethrowerSK_MapSlot03",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D020",
+          "target": "FBZFlamethrowerSK_MapSlot04",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D028",
+          "target": "FBZFlamethrowerSK_MapSlot05",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D030",
+          "target": "FBZFlamethrowerSK_MapSlot06",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D038",
+          "target": "FBZFlamethrowerSK_MapSlot07",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D040",
+          "target": "FBZFlamethrowerSK_MapSlot08",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D048",
+          "target": "FBZFlamethrowerSK_MapSlot09",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D050",
+          "target": "FBZFlamethrowerSK_MapSlot0A",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D058",
+          "target": "FBZFlamethrowerSK_MapSlot0B",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D060",
+          "target": "FBZFlamethrowerSK_MapSlot0C",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D068",
+          "target": "FBZFlamethrowerSK_MapSlot0D",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D070",
+          "target": "FBZFlamethrowerSK_MapSlot0E",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D078",
+          "target": "FBZFlamethrowerSK_MapSlot0F",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D080",
+          "target": "FBZFlamethrowerSK_MapSlot10",
           "base": "Map_FBZFlameThrower_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D088",
+          "target": "FBZFlamethrowerSK_MapSlot11",
           "base": "Map_FBZFlameThrower_"
         },
         {
@@ -93695,12 +93695,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 138
       },
-      "declarations_sha256": "3798892264b8d149f1f7e7c9453d42395269b82f8bab680e7a59b8d4c1fea11b",
+      "declarations_sha256": "01eeb7a567bf08be51da4219d6b89633339847c7f0cf3eb796a9bcc79f185235",
       "labels": {
         "Map_FBZFloatingPlatform_": 0,
-        "word_3A748": 6,
-        "word_3A774": 50,
-        "word_3A7A0": 94
+        "FBZFloatingPlatformSK_MapSlot00": 6,
+        "FBZFloatingPlatformSK_MapSlot01": 50,
+        "FBZFloatingPlatformSK_MapSlot02": 94
       },
       "external_symbols": [],
       "blocks": [
@@ -93708,21 +93708,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3A748",
+          "target": "FBZFloatingPlatformSK_MapSlot00",
           "base": "Map_FBZFloatingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3A774",
+          "target": "FBZFloatingPlatformSK_MapSlot01",
           "base": "Map_FBZFloatingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3A7A0",
+          "target": "FBZFloatingPlatformSK_MapSlot02",
           "base": "Map_FBZFloatingPlatform_"
         },
         {
@@ -93751,13 +93751,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 82
       },
-      "declarations_sha256": "be41cb8a2d4d05f7844429272773d0660a95583eecca989e1d8940fc4f7bbda6",
+      "declarations_sha256": "c868df033f95e01ccc9ac69ca013e8934e2227cf74da215d6d1b1b7fcf766cff",
       "labels": {
         "Map_FBZMagneticPendulum_": 0,
-        "word_3D9B6": 8,
-        "word_3D9D0": 34,
-        "word_3D9EA": 60,
-        "word_3D9F2": 68
+        "FBZMagneticPendulumSK_MapSlot00": 8,
+        "FBZMagneticPendulumSK_MapSlot01": 34,
+        "FBZMagneticPendulumSK_MapSlot02": 60,
+        "FBZMagneticPendulumSK_MapSlot03": 68
       },
       "external_symbols": [],
       "blocks": [
@@ -93765,28 +93765,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D9B6",
+          "target": "FBZMagneticPendulumSK_MapSlot00",
           "base": "Map_FBZMagneticPendulum_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D9D0",
+          "target": "FBZMagneticPendulumSK_MapSlot01",
           "base": "Map_FBZMagneticPendulum_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D9EA",
+          "target": "FBZMagneticPendulumSK_MapSlot02",
           "base": "Map_FBZMagneticPendulum_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D9F2",
+          "target": "FBZMagneticPendulumSK_MapSlot03",
           "base": "Map_FBZMagneticPendulum_"
         },
         {
@@ -93820,14 +93820,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 86
       },
-      "declarations_sha256": "8be3db876c8023c34ec216790a5707dd3a245acf8efd1ac069012c7a7508eb80",
+      "declarations_sha256": "39bce723cbcafe657016c0be0abf112a7fc3a4d3d51cd36aadeda046ebc81d8a",
       "labels": {
         "Map_FBZMagneticPlatform_": 0,
-        "word_3B4E8": 10,
-        "word_3B4F6": 24,
-        "word_3B4FE": 32,
-        "word_3B50C": 46,
-        "word_3B51A": 60
+        "FBZMagneticPlatformSK_MapSlot00": 10,
+        "FBZMagneticPlatformSK_MapSlot01": 24,
+        "FBZMagneticPlatformSK_MapSlot02": 32,
+        "FBZMagneticPlatformSK_MapSlot03": 46,
+        "FBZMagneticPlatformSK_MapSlot04": 60
       },
       "external_symbols": [],
       "blocks": [
@@ -93835,35 +93835,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B4E8",
+          "target": "FBZMagneticPlatformSK_MapSlot00",
           "base": "Map_FBZMagneticPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B4F6",
+          "target": "FBZMagneticPlatformSK_MapSlot01",
           "base": "Map_FBZMagneticPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B4FE",
+          "target": "FBZMagneticPlatformSK_MapSlot02",
           "base": "Map_FBZMagneticPlatform_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B50C",
+          "target": "FBZMagneticPlatformSK_MapSlot03",
           "base": "Map_FBZMagneticPlatform_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B51A",
+          "target": "FBZMagneticPlatformSK_MapSlot04",
           "base": "Map_FBZMagneticPlatform_"
         },
         {
@@ -93902,16 +93902,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 154
       },
-      "declarations_sha256": "bc840e9bf725b0f5418b675fbe02165757b9973baef8e92e86957a3383cbc080",
+      "declarations_sha256": "fcfd482299502b296a7f92d9d4c3510d784db3eea0074cf37ec332f0942ce737",
       "labels": {
         "Map_FBZMagneticSpikeBall_": 0,
-        "word_3B26A": 14,
-        "word_3B278": 28,
-        "word_3B292": 54,
-        "word_3B2AC": 80,
-        "word_3B2C6": 106,
-        "word_3B2E0": 132,
-        "word_3B2F4": 152
+        "FBZMagneticSpikeBallSK_MapSlot00": 14,
+        "FBZMagneticSpikeBallSK_MapSlot01": 28,
+        "FBZMagneticSpikeBallSK_MapSlot02": 54,
+        "FBZMagneticSpikeBallSK_MapSlot03": 80,
+        "FBZMagneticSpikeBallSK_MapSlot04": 106,
+        "FBZMagneticSpikeBallSK_MapSlot05": 132,
+        "FBZMagneticSpikeBallSK_MapSlot06": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -93919,49 +93919,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B26A",
+          "target": "FBZMagneticSpikeBallSK_MapSlot00",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B278",
+          "target": "FBZMagneticSpikeBallSK_MapSlot01",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B292",
+          "target": "FBZMagneticSpikeBallSK_MapSlot02",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B2AC",
+          "target": "FBZMagneticSpikeBallSK_MapSlot03",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B2C6",
+          "target": "FBZMagneticSpikeBallSK_MapSlot04",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B2E0",
+          "target": "FBZMagneticSpikeBallSK_MapSlot05",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B2F4",
+          "target": "FBZMagneticSpikeBallSK_MapSlot06",
           "base": "Map_FBZMagneticSpikeBall_"
         },
         {
@@ -94010,11 +94010,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "d12f85e32a0c6addafa1ac7f710bce5003591aef74067f7b28b38f8d3317e857",
+      "declarations_sha256": "3da159d95c5ffc69de817710a0980daa837a0b0d61a365988405f26b7ce82ebf",
       "labels": {
         "Map_FBZMine_": 0,
-        "word_3CA0A": 4,
-        "word_3CA12": 12
+        "FBZMineSK_MapSlot00": 4,
+        "FBZMineSK_MapSlot01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -94022,14 +94022,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CA0A",
+          "target": "FBZMineSK_MapSlot00",
           "base": "Map_FBZMine_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CA12",
+          "target": "FBZMineSK_MapSlot01",
           "base": "Map_FBZMine_"
         },
         {
@@ -94304,16 +94304,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 94
       },
-      "declarations_sha256": "b503ebdb350c7895e2581fad4c04e80e1d98ca26a8121f7309fa94feeb012982",
+      "declarations_sha256": "05560d8dda4061fa70704fc959c2979e4df73cef5aced8eee3b0abf3ed8b8d1e",
       "labels": {
         "Map_FBZMissileLauncher_": 0,
-        "word_3C79C": 14,
-        "word_3C7AA": 28,
-        "word_3C7B8": 42,
-        "word_3C7C0": 50,
-        "word_3C7CE": 64,
-        "word_3C7D6": 72,
-        "word_3C7DE": 80
+        "FBZMissileLauncherSK_MapSlot00": 14,
+        "FBZMissileLauncherSK_MapSlot01": 28,
+        "FBZMissileLauncherSK_MapSlot02": 42,
+        "FBZMissileLauncherSK_MapSlot03": 50,
+        "FBZMissileLauncherSK_MapSlot04": 64,
+        "FBZMissileLauncherSK_MapSlot05": 72,
+        "FBZMissileLauncherSK_MapSlot06": 80
       },
       "external_symbols": [],
       "blocks": [
@@ -94321,49 +94321,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C79C",
+          "target": "FBZMissileLauncherSK_MapSlot00",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7AA",
+          "target": "FBZMissileLauncherSK_MapSlot01",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7B8",
+          "target": "FBZMissileLauncherSK_MapSlot02",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7C0",
+          "target": "FBZMissileLauncherSK_MapSlot03",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7CE",
+          "target": "FBZMissileLauncherSK_MapSlot04",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7D6",
+          "target": "FBZMissileLauncherSK_MapSlot05",
           "base": "Map_FBZMissileLauncher_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7DE",
+          "target": "FBZMissileLauncherSK_MapSlot06",
           "base": "Map_FBZMissileLauncher_"
         },
         {
@@ -94412,10 +94412,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "d3d17fce703123a893327bd01914dfdbdfada70ba17909183ffa177747845517",
+      "declarations_sha256": "76c842366f64656d54b575819b1bf0223e131c37ec0ca8ed10ec08529298acc0",
       "labels": {
         "Map_FBZPiston_": 0,
-        "word_3C32A": 2
+        "FBZPistonSK_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -94423,7 +94423,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C32A",
+          "target": "FBZPistonSK_MapSlot00",
           "base": "Map_FBZPiston_"
         },
         {
@@ -94442,13 +94442,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "2310b3e03ef073303c82e936ce7c096c55519395f7098126513d99f4015d4a61",
+      "declarations_sha256": "7910d78c424af777b2732ca8021c3a5416c72d904dda5f82a3286ec0f09ef3cd",
       "labels": {
         "Map_FBZPlatformBlocks_": 0,
-        "word_3C41E": 8,
-        "word_3C426": 16,
-        "word_3C434": 30,
-        "word_3C448": 50
+        "FBZPlatformBlocksSK_MapSlot00": 8,
+        "FBZPlatformBlocksSK_MapSlot01": 16,
+        "FBZPlatformBlocksSK_MapSlot02": 30,
+        "FBZPlatformBlocksSK_MapSlot03": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -94456,28 +94456,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C41E",
+          "target": "FBZPlatformBlocksSK_MapSlot00",
           "base": "Map_FBZPlatformBlocks_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C426",
+          "target": "FBZPlatformBlocksSK_MapSlot01",
           "base": "Map_FBZPlatformBlocks_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C434",
+          "target": "FBZPlatformBlocksSK_MapSlot02",
           "base": "Map_FBZPlatformBlocks_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C448",
+          "target": "FBZPlatformBlocksSK_MapSlot03",
           "base": "Map_FBZPlatformBlocks_"
         },
         {
@@ -94511,12 +94511,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "777d2652b535c98bb0fc2d822b3024b72429b8d4a6cad609e4f514d2868eedb7",
+      "declarations_sha256": "9fe9ea1e2ea66b408fae7aff5e1583839e2ab9e6c35884b8c0dab23b8dcdcee2",
       "labels": {
         "Map_FBZPropeller_": 0,
-        "word_3C214": 8,
-        "word_3C23A": 46,
-        "word_3C254": 72
+        "FBZPropellerSK_MapSlot00": 8,
+        "FBZPropellerSK_MapSlots01_03": 46,
+        "FBZPropellerSK_MapSlot02": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -94524,28 +94524,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C214",
+          "target": "FBZPropellerSK_MapSlot00",
           "base": "Map_FBZPropeller_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C23A",
+          "target": "FBZPropellerSK_MapSlots01_03",
           "base": "Map_FBZPropeller_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C254",
+          "target": "FBZPropellerSK_MapSlot02",
           "base": "Map_FBZPropeller_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C23A",
+          "target": "FBZPropellerSK_MapSlots01_03",
           "base": "Map_FBZPropeller_"
         },
         {
@@ -94574,11 +94574,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "9c3d57898514b04e21e4691098123994a03701ab6978b11d2fc0ff2ee0860bd7",
+      "declarations_sha256": "a7bc8dd9a7c4cf92c56ba316e4272c914958ada749ba58825dd97c23f8987ad4",
       "labels": {
         "Map_FBZRotatingPlatform_": 0,
-        "word_3B91E": 4,
-        "word_3B926": 12
+        "FBZRotatingPlatformSK_MapSlot00": 4,
+        "FBZRotatingPlatformSK_MapSlot01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -94586,14 +94586,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B91E",
+          "target": "FBZRotatingPlatformSK_MapSlot00",
           "base": "Map_FBZRotatingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B926",
+          "target": "FBZRotatingPlatformSK_MapSlot01",
           "base": "Map_FBZRotatingPlatform_"
         },
         {
@@ -94617,21 +94617,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 456
       },
-      "declarations_sha256": "c7c5a5e30b3aecd449a378533669b1601c5ac770116d352a7df8548925e32c4e",
+      "declarations_sha256": "dc025ba2808b4dbe2d7044a7b1e6ddf2b830dedbe8ce1b9ab6b8b95af4bd5d3f",
       "labels": {
         "Map_FBZScrewDoor_": 0,
-        "word_3BDA6": 24,
-        "word_3BDC6": 56,
-        "word_3BDE6": 88,
-        "word_3BE06": 120,
-        "word_3BE26": 152,
-        "word_3BE40": 178,
-        "word_3BE5A": 204,
-        "word_3BE74": 230,
-        "word_3BE8E": 256,
-        "word_3BEC0": 306,
-        "word_3BEF2": 356,
-        "word_3BF24": 406
+        "FBZScrewDoorSK_MapSlot00": 24,
+        "FBZScrewDoorSK_MapSlot01": 56,
+        "FBZScrewDoorSK_MapSlot02": 88,
+        "FBZScrewDoorSK_MapSlot03": 120,
+        "FBZScrewDoorSK_MapSlot04": 152,
+        "FBZScrewDoorSK_MapSlot05": 178,
+        "FBZScrewDoorSK_MapSlot06": 204,
+        "FBZScrewDoorSK_MapSlot07": 230,
+        "FBZScrewDoorSK_MapSlot08": 256,
+        "FBZScrewDoorSK_MapSlot09": 306,
+        "FBZScrewDoorSK_MapSlot0A": 356,
+        "FBZScrewDoorSK_MapSlot0B": 406
       },
       "external_symbols": [],
       "blocks": [
@@ -94639,84 +94639,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BDA6",
+          "target": "FBZScrewDoorSK_MapSlot00",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BDC6",
+          "target": "FBZScrewDoorSK_MapSlot01",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BDE6",
+          "target": "FBZScrewDoorSK_MapSlot02",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE06",
+          "target": "FBZScrewDoorSK_MapSlot03",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE26",
+          "target": "FBZScrewDoorSK_MapSlot04",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE40",
+          "target": "FBZScrewDoorSK_MapSlot05",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE5A",
+          "target": "FBZScrewDoorSK_MapSlot06",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE74",
+          "target": "FBZScrewDoorSK_MapSlot07",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BE8E",
+          "target": "FBZScrewDoorSK_MapSlot08",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BEC0",
+          "target": "FBZScrewDoorSK_MapSlot09",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BEF2",
+          "target": "FBZScrewDoorSK_MapSlot0A",
           "base": "Map_FBZScrewDoor_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3BF24",
+          "target": "FBZScrewDoorSK_MapSlot0B",
           "base": "Map_FBZScrewDoor_"
         },
         {
@@ -94790,10 +94790,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "87cfb4014309565010bdc2cd18823eb3d860bfd6db87f9aafe520b1fe9deb31a",
+      "declarations_sha256": "43ad679708e9d22b06fcd7094d3e7156dfa9d259d5a7f40f42671cd1352bf9d2",
       "labels": {
         "Map_FBZSnakePlatform_": 0,
-        "word_3B6D0": 2
+        "FBZSnakePlatformSK_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -94801,7 +94801,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3B6D0",
+          "target": "FBZSnakePlatformSK_MapSlot00",
           "base": "Map_FBZSnakePlatform_"
         },
         {
@@ -94820,23 +94820,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 332
       },
-      "declarations_sha256": "f57987c8d91a30d231253d6a69bd0c557bdc65328c136300cdfbdc81e9f1faaa",
+      "declarations_sha256": "256e0aae95d19f1cfab50698466400a1e5fc4f8044ba0149b32f18aba24414d6",
       "labels": {
         "Map_FBZSpiderCrane_": 0,
-        "word_3D318": 28,
-        "word_3D31A": 30,
-        "word_3D322": 38,
-        "word_3D330": 52,
-        "word_3D344": 72,
-        "word_3D35E": 98,
-        "word_3D37E": 130,
-        "word_3D3A4": 168,
-        "word_3D3D0": 212,
-        "word_3D402": 262,
-        "word_3D416": 282,
-        "word_3D430": 308,
-        "word_3D438": 316,
-        "word_3D440": 324
+        "FBZSpiderCraneSK_MapSlot00": 28,
+        "FBZSpiderCraneSK_MapSlot01": 30,
+        "FBZSpiderCraneSK_MapSlot02": 38,
+        "FBZSpiderCraneSK_MapSlot03": 52,
+        "FBZSpiderCraneSK_MapSlot04": 72,
+        "FBZSpiderCraneSK_MapSlot05": 98,
+        "FBZSpiderCraneSK_MapSlot06": 130,
+        "FBZSpiderCraneSK_MapSlot07": 168,
+        "FBZSpiderCraneSK_MapSlot08": 212,
+        "FBZSpiderCraneSK_MapSlot09": 262,
+        "FBZSpiderCraneSK_MapSlot0A": 282,
+        "FBZSpiderCraneSK_MapSlot0B": 308,
+        "FBZSpiderCraneSK_MapSlot0C": 316,
+        "FBZSpiderCraneSK_MapSlot0D": 324
       },
       "external_symbols": [],
       "blocks": [
@@ -94844,98 +94844,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D318",
+          "target": "FBZSpiderCraneSK_MapSlot00",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D31A",
+          "target": "FBZSpiderCraneSK_MapSlot01",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D322",
+          "target": "FBZSpiderCraneSK_MapSlot02",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D330",
+          "target": "FBZSpiderCraneSK_MapSlot03",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D344",
+          "target": "FBZSpiderCraneSK_MapSlot04",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D35E",
+          "target": "FBZSpiderCraneSK_MapSlot05",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D37E",
+          "target": "FBZSpiderCraneSK_MapSlot06",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D3A4",
+          "target": "FBZSpiderCraneSK_MapSlot07",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D3D0",
+          "target": "FBZSpiderCraneSK_MapSlot08",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D402",
+          "target": "FBZSpiderCraneSK_MapSlot09",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D416",
+          "target": "FBZSpiderCraneSK_MapSlot0A",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D430",
+          "target": "FBZSpiderCraneSK_MapSlot0B",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D438",
+          "target": "FBZSpiderCraneSK_MapSlot0C",
           "base": "Map_FBZSpiderCrane_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3D440",
+          "target": "FBZSpiderCraneSK_MapSlot0D",
           "base": "Map_FBZSpiderCrane_"
         },
         {
@@ -95019,10 +95019,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "06febb6f5b90fcea9796bdf36dacf7dfa3ff3c715413df2209129fc33374e263",
+      "declarations_sha256": "402aaae3b2a4cc11b060bad956ab3726330650d422aa82d652f8704449c6284f",
       "labels": {
         "Map_FBZSpinningPole_": 0,
-        "word_3C19E": 2
+        "FBZSpinningPoleUnusedSK_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -95030,7 +95030,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C19E",
+          "target": "FBZSpinningPoleUnusedSK_MapSlot00",
           "base": "Map_FBZSpinningPole_"
         },
         {
@@ -95049,12 +95049,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "83fe650238b67f184b1dd4451ae105584b20038777a4f8c1a9de58af993181ce",
+      "declarations_sha256": "90ee222ba6bb47babd0f456e31af2407deff10551702af9c33e52561eca4e98d",
       "labels": {
         "Map_FBZTrapSpring_": 0,
-        "word_3CC60": 6,
-        "word_3CC6E": 20,
-        "word_3CC7C": 34
+        "FBZTrapSpringSK_MapSlot00": 6,
+        "FBZTrapSpringSK_MapSlot01": 20,
+        "FBZTrapSpringSK_MapSlot02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -95062,21 +95062,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CC60",
+          "target": "FBZTrapSpringSK_MapSlot00",
           "base": "Map_FBZTrapSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CC6E",
+          "target": "FBZTrapSpringSK_MapSlot01",
           "base": "Map_FBZTrapSpring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3CC7C",
+          "target": "FBZTrapSpringSK_MapSlot02",
           "base": "Map_FBZTrapSpring_"
         },
         {
@@ -95105,72 +95105,72 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "a3bbbbc131e23f1765763466fce7141e1a786875111653d614eef2526204df2d",
+      "declarations_sha256": "f781df759dc69117312a2e78a3dc6309fd9f67403dcbd4a4a7cd9e9e01db46b4",
       "labels": {
         "Map_FBZWallMissile_": 0,
-        "word_3C916": 16,
-        "word_3C91E": 24,
-        "word_3C926": 32,
-        "word_3C92E": 40,
-        "word_3C936": 48,
-        "word_3C93E": 56
+        "FBZWallMissileSK_MapSlot02": 16,
+        "FBZWallMissileSK_MapSlot03": 24,
+        "FBZWallMissileSK_MapSlot04": 32,
+        "FBZWallMissileSK_MapSlot05": 40,
+        "FBZWallMissileSK_MapSlot06": 48,
+        "FBZWallMissileSK_MapSlot07": 56
       },
-      "external_symbols": ["word_3C7CE", "word_3C7D6"],
+      "external_symbols": ["FBZMissileLauncherSK_MapSlot04", "FBZMissileLauncherSK_MapSlot05"],
       "blocks": [
         {
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7CE",
+          "target": "FBZMissileLauncherSK_MapSlot04",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C7D6",
+          "target": "FBZMissileLauncherSK_MapSlot05",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C916",
+          "target": "FBZWallMissileSK_MapSlot02",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C91E",
+          "target": "FBZWallMissileSK_MapSlot03",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C926",
+          "target": "FBZWallMissileSK_MapSlot04",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C92E",
+          "target": "FBZWallMissileSK_MapSlot05",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C936",
+          "target": "FBZWallMissileSK_MapSlot06",
           "base": "Map_FBZWallMissile_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_3C93E",
+          "target": "FBZWallMissileSK_MapSlot07",
           "base": "Map_FBZWallMissile_"
         },
         {

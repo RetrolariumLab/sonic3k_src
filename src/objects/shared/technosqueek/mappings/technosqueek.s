@@ -2,33 +2,33 @@
 ; Provenance and source range: config/reconstruction/source_layout.json
 ; Technosqueek mappings
 Map_TechnoSqueek_:
-                dc.w    word_89B8C-Map_TechnoSqueek_
-                dc.w    word_89B94-Map_TechnoSqueek_
-                dc.w    word_89B9C-Map_TechnoSqueek_
-                dc.w    word_89BA4-Map_TechnoSqueek_
-                dc.w    word_89BAC-Map_TechnoSqueek_
-                dc.w    word_89BB4-Map_TechnoSqueek_
-                dc.w    word_89BBC-Map_TechnoSqueek_
-                dc.w    word_89BC4-Map_TechnoSqueek_
-                dc.w    word_89BCC-Map_TechnoSqueek_
-                dc.w    word_89BD4-Map_TechnoSqueek_
-word_89B8C:     dc.w    1
+                dc.w    TechnoSqueekShared_MapFrame00-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame01-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame02-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame03-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame04-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame05-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame06-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame07-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame08-Map_TechnoSqueek_
+                dc.w    TechnoSqueekShared_MapFrame09-Map_TechnoSqueek_
+TechnoSqueekShared_MapFrame00:  dc.w    1
                 dc.b    $F8,   9,   0,   0, $FF, $F4
-word_89B94:     dc.w    1
+TechnoSqueekShared_MapFrame01:  dc.w    1
                 dc.b    $F8,   9,   0,   6, $FF, $F4
-word_89B9C:     dc.w    1
+TechnoSqueekShared_MapFrame02:  dc.w    1
                 dc.b    $FC,   4,   0,  $C, $FF, $F8
-word_89BA4:     dc.w    1
+TechnoSqueekShared_MapFrame03:  dc.w    1
                 dc.b    $FC,   4,   0,  $E, $FF, $F8
-word_89BAC:     dc.w    1
+TechnoSqueekShared_MapFrame04:  dc.w    1
                 dc.b    $FC,   4,   0, $10, $FF, $F8
-word_89BB4:     dc.w    1
+TechnoSqueekShared_MapFrame05:  dc.w    1
                 dc.b    $F4,   6,   0, $12, $FF, $F8
-word_89BBC:     dc.w    1
+TechnoSqueekShared_MapFrame06:  dc.w    1
                 dc.b    $F4,   6,   0, $18, $FF, $F8
-word_89BC4:     dc.w    1
+TechnoSqueekShared_MapFrame07:  dc.w    1
                 dc.b    $F8,   1,   0, $1E, $FF, $FC
-word_89BCC:     dc.w    1
+TechnoSqueekShared_MapFrame08:  dc.w    1
                 dc.b    $F8,   1,   0, $20, $FF, $FC
-word_89BD4:     dc.w    1
+TechnoSqueekShared_MapFrame09:  dc.w    1
                 dc.b    $F8,   1,   0, $22, $FF, $FC

@@ -16,9 +16,9 @@ Obj_FBZPropeller:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #0,(a2)+
-                move.l  #loc_3C1EE,(a0)
+                move.l  #SKFBZPropeller_AdvanceFrameAndContact,(a0)
 
-loc_3C1EE:
+SKFBZPropeller_AdvanceFrameAndContact:
                 lea     sub2_mapframe(a0),a2
                 addq.b  #1,(a2)
                 andi.b  #3,(a2)

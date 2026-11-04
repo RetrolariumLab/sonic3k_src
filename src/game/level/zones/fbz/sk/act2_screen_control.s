@@ -6,7 +6,7 @@
 FBZ2_ScreenInit:
                 move.w  #$2C40,d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   loc_52E2C
+                bhi.s   SKFBZ2FG_RefreshInitialForeground
                 move.w  #4,(Events_routine_fg).w        ; If screen X is past subboss battle, change screen event
                 move.w  d0,(Camera_min_X_pos).w
                 jsr     SetUp_FBZ2BossEvent(pc)
@@ -22,7 +22,7 @@ FBZ2_ScreenInit:
                 jsr     (Queue_Kos_Module).l            ; Load boss event graphics
                 movem.l (sp)+,d7-a0/a2-a3
 
-loc_52E2C:
+SKFBZ2FG_RefreshInitialForeground:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 jmp     Refresh_PlaneFull(pc)
 ; ---------------------------------------------------------------------------
@@ -46,19 +46,19 @@ FBZ2_ScreenEvent_Index:
 
 FBZ2SE_Normal:
                 cmpi.b  #6,(Player_1+routine).w
-                blo.s   loc_52E5E
+                blo.s   SKFBZ2FG_DispatchLayoutEvent
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52E5E:
+SKFBZ2FG_DispatchLayoutEvent:
                 lea     FBZ2_LayoutModRange(pc),a1      ; Only one layout mod this time around
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 move.w  (Events_bg+$00).w,d2
-                jmp     loc_52E72(pc,d2.w)
+                jmp     SKFBZ2FG_LayoutEventTable(pc,d2.w)
 ; ---------------------------------------------------------------------------
 
-loc_52E72:
+SKFBZ2FG_LayoutEventTable:
                 bra.w   FBZ2_NoLayoutMod
 ; ---------------------------------------------------------------------------
                 bra.w   FBZ2_LayoutMod1
@@ -66,76 +66,76 @@ loc_52E72:
 
 FBZ2_NoLayoutMod:
                 cmp.w   (a1)+,d0
-                blo.s   loc_52E90
+                blo.s   SKFBZ2FG_DrawAndTryStartBoss
                 cmp.w   (a1)+,d0
-                bhi.s   loc_52E90
+                bhi.s   SKFBZ2FG_DrawAndTryStartBoss
                 cmp.w   (a1)+,d1
-                blo.s   loc_52E90
+                blo.s   SKFBZ2FG_DrawAndTryStartBoss
                 cmp.w   (a1)+,d1
-                bhi.s   loc_52E90
+                bhi.s   SKFBZ2FG_DrawAndTryStartBoss
                 move.w  #4,(Events_bg+$00).w
 
-loc_52E90:
+SKFBZ2FG_DrawAndTryStartBoss:
                 jsr     DrawTilesAsYouMove(pc)
                 cmpi.w  #$2B30,(Camera_X_pos).w
-                blo.s   locret_52EAC
+                blo.s   SKFBZ2FG_ScreenEventReturn
                 jsr     SetUp_FBZ2BossEvent(pc)         ; If Player passes certain point, set up the boss event
                 clr.l   (_unkEE98).w
                 clr.l   (_unkEE9C).w
                 addq.w  #4,(Events_routine_fg).w
 
-locret_52EAC:
+SKFBZ2FG_ScreenEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 FBZ2_LayoutMod1:
                 jsr     FBZ1Screen_CheckInRange(pc)
                 cmpi.w  #$E00,d0
-                blo.s   loc_52EBE
+                blo.s   SKFBZ2FG_CheckLayoutSwitchHeight
                 cmpi.w  #$1280,d0
-                bls.s   loc_52F10
+                bls.s   SKFBZ2FG_DrawWithoutChangingActTwoLayout
 
-loc_52EBE:
+SKFBZ2FG_CheckLayoutSwitchHeight:
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_52ECC
+                bne.s   SKFBZ2FG_TryReturnIndoors
                 cmpi.w  #$B0E,d1                        ; If indoors
-                bls.s   loc_52F10
-                bra.s   loc_52EDE
+                bls.s   SKFBZ2FG_DrawWithoutChangingActTwoLayout
+                bra.s   SKFBZ2FG_BindOutdoorLayout
 ; ---------------------------------------------------------------------------
 
-loc_52ECC:
+SKFBZ2FG_TryReturnIndoors:
                 cmpi.w  #$AF2,d1                        ; If outdoors
-                bhi.s   loc_52F10
+                bhi.s   SKFBZ2FG_DrawWithoutChangingActTwoLayout
                 clr.w   (Events_bg+$02).w
                 movea.w (a3),a5
                 lea     $70(a5),a5
-                bra.s   loc_52EEA
+                bra.s   SKFBZ2FG_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_52EDE:
+SKFBZ2FG_BindOutdoorLayout:
                 st      (Events_bg+$02).w
                 movea.w $10(a3),a5
                 lea     $70(a5),a5
 
-loc_52EEA:
+SKFBZ2FG_BeginLayoutCopy:
                 movea.w $50(a3),a1
                 lea     $1A(a1),a1
                 move.w  -8(a3),d0
                 subi.w  #$E,d0                          ; Width of 14 tiles
                 moveq   #4-1,d1                         ; Height of 4 tiles
 
-loc_52EFC:
+SKFBZ2FG_CopyAndRefreshLayout:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_52EFC
+                dbf     d1,SKFBZ2FG_CopyAndRefreshLayout
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_52F10:
+SKFBZ2FG_DrawWithoutChangingActTwoLayout:
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
@@ -159,30 +159,31 @@ FBZ2SE_BossEventEnd:
 
 SetUp_FBZ2BossEvent:
                 jsr     (AllocateObject).l
-                bne.s   loc_52F7A
+                bne.s   SKFBZ2FG_SetBossAreaPalettes
                 move.l  #Obj_FBZEndBossEventControl,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_52F7A
+                bne.s   SKFBZ2FG_SetBossAreaPalettes
                 move.l  #Obj_FBZBossPillar,(a1)
                 lea     (FBZ_cloud_addr).w,a5
                 moveq   #0,d1
                 moveq   #5-1,d2
 
-loc_52F56:
+SKFBZ2FG_ClearCloudHandles:
                 move.l  d1,(a5)+                        ; Reset object addresses for clouds
-                dbf     d2,loc_52F56
+                dbf     d2,SKFBZ2FG_ClearCloudHandles
                 lea     (FBZ_cloud_addr).w,a5
                 moveq   #$A-1,d1
 
-loc_52F62:
+SKFBZ2FG_TrySpawnClouds:
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_52F7A
+                bne.s   SKFBZ2FG_SetBossAreaPalettes
                 move.w  a1,(a5)+
                 move.l  #Obj_FBZCloud,(a1)              ; Create cloud objects and place addresses in FFEEEA
                 move.w  d1,$2E(a1)
-                dbf     d1,loc_52F62
+                dbf     d1,SKFBZ2FG_TrySpawnClouds
 
-loc_52F7A:
+; Apply the current and target palettes even when a boss-area actor fails to allocate
+SKFBZ2FG_SetBossAreaPalettes:
                 lea     Pal_FBZBGOutdoors(pc),a1        ; Modify palette
                 lea     (Normal_palette_line_4+$2).w,a5
                 lea     (Target_palette_line_4+$2).w,a6

@@ -5,21 +5,21 @@
 
 Obj_FBZWireCage:
                 move.b  subtype(a0),d0
-                bpl.s   loc_39F48
+                bpl.s   SKFBZCage_InitHorizontalSpan
                 andi.w  #$7F,d0
                 lsl.w   #3,d0
                 move.w  d0,subtype(a0)
-                move.l  #loc_3A0B0,(a0)
-                bra.w   loc_3A0B0
+                move.l  #SKFBZCage_UpdateVerticalRiders,(a0)
+                bra.w   SKFBZCage_UpdateVerticalRiders
 ; ---------------------------------------------------------------------------
 
-loc_39F48:
+SKFBZCage_InitHorizontalSpan:
                 andi.w  #$7F,d0
                 lsl.w   #3,d0
                 move.w  d0,subtype(a0)
-                move.l  #loc_39F58,(a0)
+                move.l  #SKFBZCage_UpdateHorizontalRiders,(a0)
 
-loc_39F58:
+SKFBZCage_UpdateHorizontalRiders:
                 move.w  subtype(a0),d4
                 move.w  d4,d5
                 add.w   d5,d5
@@ -37,27 +37,27 @@ loc_39F58:
 
 UpdatePlayerOnFbzHorizontalWireCage:
                 btst    d6,status(a0)
-                bne.w   loc_3A01A
+                bne.w   SKFBZCage_CheckHorizontalRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d4,d0
                 cmp.w   d5,d0
-                bhs.w   locret_3A018
+                bhs.w   SKFBZCage_HorizontalCaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$50,d0
                 cmpi.w  #$18,d0
-                bhs.s   loc_39FAE
+                bhs.s   SKFBZCage_TickHorizontalCooldown
                 move.b  #$28,2(a2)
 
-loc_39FAE:
+SKFBZCage_TickHorizontalCooldown:
                 tst.b   2(a2)
-                beq.s   loc_39FBA
+                beq.s   SKFBZCage_TryHorizontalCapture
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_39FBA:
+SKFBZCage_TryHorizontalCapture:
                 move.w  y_pos(a0),d0
                 addi.w  #$3C,d0
                 move.w  y_pos(a1),d2
@@ -66,13 +66,13 @@ loc_39FBA:
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.s   locret_3A018
+                bhi.s   SKFBZCage_HorizontalCaptureReturn
                 cmpi.w  #-$10,d0
-                blo.s   locret_3A018
+                blo.s   SKFBZCage_HorizontalCaptureReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_3A018
+                bhs.s   SKFBZCage_HorizontalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3A018
+                bne.s   SKFBZCage_HorizontalCaptureReturn
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
@@ -82,23 +82,23 @@ loc_39FBA:
                 move.b  #0,(a2)
                 move.b  #0,2(a2)
                 tst.w   ground_vel(a1)
-                bne.s   locret_3A018
+                bne.s   SKFBZCage_HorizontalCaptureReturn
                 move.w  #1,ground_vel(a1)
 
-locret_3A018:
+SKFBZCage_HorizontalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A01A:
+SKFBZCage_CheckHorizontalRider:
                 btst    #1,status(a1)
-                bne.s   loc_3A054
+                bne.s   SKFBZCage_TryDampDepartureYSpeed
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d4,d0
                 cmp.w   d5,d0
-                blo.s   loc_3A06E
+                blo.s   SKFBZCage_ProjectHorizontalRideY
 
-loc_3A030:
+SKFBZCage_ReleaseHorizontalRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -108,23 +108,23 @@ loc_3A030:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A054:
+SKFBZCage_TryDampDepartureYSpeed:
                 move.b  (a2),d0
                 addi.b  #$20,d0
                 cmpi.b  #$40,d0
-                bhs.s   loc_3A066
+                bhs.s   SKFBZCage_ClearDepartureYSpeed
                 asr     y_vel(a1)
-                bra.s   loc_3A030
+                bra.s   SKFBZCage_ReleaseHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_3A066:
+SKFBZCage_ClearDepartureYSpeed:
                 move.w  #0,y_vel(a1)
-                bra.s   loc_3A030
+                bra.s   SKFBZCage_ReleaseHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_3A06E:
+SKFBZCage_ProjectHorizontalRideY:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_3A018
+                beq.s   SKFBZCage_HorizontalCaptureReturn
                 move.b  (a2),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$2800,d1
@@ -140,16 +140,16 @@ loc_3A06E:
                 move.b  d0,flip_angle(a1)
                 addq.b  #4,(a2)
                 tst.w   ground_vel(a1)
-                bne.s   locret_3A0AE
+                bne.s   SKFBZCage_HorizontalProjectionReturn
                 move.w  #1,ground_vel(a1)
 
-locret_3A0AE:
+SKFBZCage_HorizontalProjectionReturn:
                 rts
 ; End of function UpdatePlayerOnFbzHorizontalWireCage
 
 ; ---------------------------------------------------------------------------
 
-loc_3A0B0:
+SKFBZCage_UpdateVerticalRiders:
                 move.w  subtype(a0),d4
                 move.w  d4,d5
                 add.w   d5,d5
@@ -169,29 +169,29 @@ loc_3A0B0:
 
 UpdatePlayerOnFbzVerticalWireCage:
                 btst    d6,status(a0)
-                bne.w   loc_3A18E
+                bne.w   SKFBZCage_CheckVerticalRideSpan
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$80,d0
                 cmpi.w  #$100,d0
-                bhs.w   locret_3A18C
+                bhs.w   SKFBZCage_VerticalCaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 add.w   d4,d1
                 cmp.w   d5,d1
-                bhs.w   locret_3A18C
+                bhs.w   SKFBZCage_VerticalCaptureReturn
                 cmpi.b  #6,routine(a1)
-                bhs.w   locret_3A18C
+                bhs.w   SKFBZCage_VerticalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_3A18C
+                bne.w   SKFBZCage_VerticalCaptureReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_3A18C
+                bmi.s   SKFBZCage_VerticalCaptureReturn
                 cmpi.w  #$20,d0
-                blo.s   loc_3A126
+                blo.s   SKFBZCage_AttachAtVerticalEdge
                 cmpi.w  #$E0,d0
-                blo.s   locret_3A18C
+                blo.s   SKFBZCage_VerticalCaptureReturn
 
-loc_3A126:
+SKFBZCage_AttachAtVerticalEdge:
                 bsr.w   AttachPlayerToScriptedRideObject
                 move.b  #-$40,angle(a1)
                 bclr    #0,render_flags(a1)
@@ -199,37 +199,37 @@ loc_3A126:
                 move.b  #0,(a2)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bcc.s   loc_3A14E
+                bcc.s   SKFBZCage_SetVerticalRideDirection
                 move.b  #$80,(a2)
 
-loc_3A14E:
+SKFBZCage_SetVerticalRideDirection:
                 move.w  y_vel(a1),ground_vel(a1)
                 neg.w   ground_vel(a1)
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
-                bcc.s   loc_3A16C
+                bcc.s   SKFBZCage_BeginVerticalControl
                 move.b  #$40,angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_3A16C:
+SKFBZCage_BeginVerticalControl:
                 bset    #6,object_control(a1)
                 bset    #1,object_control(a1)
                 move.w  #1,anim(a1)
                 move.b  #0,flip_angle(a1)
                 move.b  #0,2(a2)
-                bra.s   loc_3A18E
+                bra.s   SKFBZCage_CheckVerticalRideSpan
 ; ---------------------------------------------------------------------------
 
-locret_3A18C:
+SKFBZCage_VerticalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A18E:
+SKFBZCage_CheckVerticalRideSpan:
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 add.w   d4,d1
                 cmp.w   d5,d1
-                blo.s   loc_3A1C6
+                blo.s   SKFBZCage_SetVerticalRideFlip
                 move.b  #0,object_control(a1)
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
@@ -240,15 +240,15 @@ loc_3A18E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A1C6:
+SKFBZCage_SetVerticalRideFlip:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_3A18C
+                beq.s   SKFBZCage_VerticalCaptureReturn
                 bclr    #1,render_flags(a1)
                 tst.w   y_vel(a1)
-                bmi.s   loc_3A1E0
+                bmi.s   SKFBZCage_ProjectVerticalRideX
                 bset    #1,render_flags(a1)
 
-loc_3A1E0:
+SKFBZCage_ProjectVerticalRideX:
                 move.b  (a2),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$6800,d1
@@ -264,14 +264,14 @@ loc_3A1E0:
                 move.b  (a2),d2
                 addq.b  #4,(a2)
                 divu.w  #$B,d2
-                move.b  RawAni_3A220(pc,d2.w),mapping_frame(a1)
+                move.b  SKFBZCage_VerticalRideFrames(pc,d2.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
 ; End of function UpdatePlayerOnFbzVerticalWireCage
 
 ; ---------------------------------------------------------------------------
-RawAni_3A220:
+SKFBZCage_VerticalRideFrames:
                 dc.b    $6D, $6D, $6E, $6E, $6F, $6F, $70, $70, $71, $71, $72, $72, $73, $73, $74, $74, $75, $75, $76, $76
                 dc.b    $77, $77, $6C, $6C, $6D, $6D
                 even
@@ -284,9 +284,9 @@ Obj_FBZWireCageStationary:
                 move.w  d0,$40(a0)
                 lsl.w   #2,d0
                 move.w  d0,$42(a0)
-                move.l  #loc_3A252,(a0)
+                move.l  #SKFBZCage_UpdateStationaryRiders,(a0)
 
-loc_3A252:
+SKFBZCage_UpdateStationaryRiders:
                 lea     (Player_1).w,a1
                 lea     $30(a0),a2
                 moveq   #p1_standing_bit,d6
@@ -303,91 +303,91 @@ loc_3A252:
 
 UpdatePlayerInFbzStationaryWireCage:
                 btst    d6,status(a0)
-                bne.w   loc_3A314
+                bne.w   SKFBZCage_CalcAbsRideSpeed
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_3A312
+                bne.w   SKFBZCage_StationaryCaptureReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 tst.w   x_vel(a1)
-                bmi.s   loc_3A2A2
+                bmi.s   SKFBZCage_CheckRightEntry
                 cmpi.w  #-$B0,d0
-                bgt.w   locret_3A312
+                bgt.w   SKFBZCage_StationaryCaptureReturn
                 cmpi.w  #-$C0,d0
-                blt.s   locret_3A312
+                blt.s   SKFBZCage_StationaryCaptureReturn
                 moveq   #0,d2
-                bra.s   loc_3A2B0
+                bra.s   SKFBZCage_CheckEntryYAndSpeed
 ; ---------------------------------------------------------------------------
 
-loc_3A2A2:
+SKFBZCage_CheckRightEntry:
                 cmpi.w  #$B0,d0
-                blt.s   locret_3A312
+                blt.s   SKFBZCage_StationaryCaptureReturn
                 cmpi.w  #$C0,d0
-                bgt.s   locret_3A312
+                bgt.s   SKFBZCage_StationaryCaptureReturn
                 moveq   #1,d2
 
-loc_3A2B0:
+SKFBZCage_CheckEntryYAndSpeed:
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$10,d1
                 cmpi.w  #$20,d1
-                bhs.s   locret_3A312
+                bhs.s   SKFBZCage_StationaryCaptureReturn
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3A2CA
+                bpl.s   SKFBZCage_CheckSpeedAndSide
                 neg.w   d0
 
-loc_3A2CA:
+SKFBZCage_CheckSpeedAndSide:
                 cmpi.w  #$400,d0
-                blo.s   locret_3A312
+                blo.s   SKFBZCage_StationaryCaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3A312
+                bne.s   SKFBZCage_StationaryCaptureReturn
                 moveq   #0,d3
                 tst.b   subtype(a0)
-                beq.s   loc_3A2F0
+                beq.s   SKFBZCage_AttachStationaryRider
                 btst    #0,status(a0)
-                bne.s   loc_3A2EC
+                bne.s   SKFBZCage_RequireRightEntry
                 tst.w   d2
-                bne.s   locret_3A312
-                bra.s   loc_3A2F0
+                bne.s   SKFBZCage_StationaryCaptureReturn
+                bra.s   SKFBZCage_AttachStationaryRider
 ; ---------------------------------------------------------------------------
 
-loc_3A2EC:
+SKFBZCage_RequireRightEntry:
                 tst.w   d2
-                beq.s   locret_3A312
+                beq.s   SKFBZCage_StationaryCaptureReturn
 
-loc_3A2F0:
+SKFBZCage_AttachStationaryRider:
                 move.l  #0,(a2)
                 move.b  d2,4(a2)
                 move.w  d3,6(a2)
                 bset    #Status_InAir,status(a1)
                 jsr     (RideObject_SetRide).l
                 move.b  #$42,object_control(a1)
-                bra.s   loc_3A314
+                bra.s   SKFBZCage_CalcAbsRideSpeed
 ; ---------------------------------------------------------------------------
 
-locret_3A312:
+SKFBZCage_StationaryCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A314:
+SKFBZCage_CalcAbsRideSpeed:
                 move.w  ground_vel(a1),d0
-                bpl.s   loc_3A31C
+                bpl.s   SKFBZCage_CheckRideAndPickPath
                 neg.w   d0
 
-loc_3A31C:
+SKFBZCage_CheckRideAndPickPath:
                 cmpi.w  #$400,d0
-                blo.s   loc_3A36E
+                blo.s   SKFBZCage_ReleaseStationaryAirborne
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3A36E
+                bne.s   SKFBZCage_ReleaseStationaryAirborne
                 tst.l   (a2)
-                bne.w   loc_3A480
+                bne.w   SKFBZCage_StepHelixProgress
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$C0,d0
-                bmi.s   loc_3A344
+                bmi.s   SKFBZCage_ReleaseAtStationaryEnd
                 cmpi.w  #$180,d0
-                blo.s   loc_3A3B4
+                blo.s   SKFBZCage_TryEnterHelixLeft
 
-loc_3A344:
+SKFBZCage_ReleaseAtStationaryEnd:
                 bclr    #Status_Roll,status(a1)
                 move.b  default_y_radius(a1),y_radius(a1)
                 move.b  default_x_radius(a1),x_radius(a1)
@@ -398,7 +398,7 @@ loc_3A344:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A36E:
+SKFBZCage_ReleaseStationaryAirborne:
                 asr     x_vel(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_Roll,status(a1)
@@ -414,30 +414,30 @@ loc_3A36E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A3B4:
+SKFBZCage_TryEnterHelixLeft:
                 btst    #Status_OnObj,status(a1)
-                beq.w   locret_3A312
+                beq.w   SKFBZCage_StationaryCaptureReturn
                 tst.b   subtype(a0)
-                beq.s   loc_3A426
+                beq.s   SKFBZCage_SetFlatRidePose
                 tst.b   4(a2)
-                bne.s   loc_3A3F2
+                bne.s   SKFBZCage_TryEnterHelixRight
                 cmpi.w  #$C0,d0
-                blo.s   loc_3A426
+                blo.s   SKFBZCage_SetFlatRidePose
                 tst.w   ground_vel(a1)
-                bmi.s   loc_3A426
+                bmi.s   SKFBZCage_SetFlatRidePose
                 subi.w  #$C0,d0
                 move.w  d0,(a2)
                 move.w  #0,2(a2)
                 bset    #0,render_flags(a1)
                 bset    #1,render_flags(a1)
-                bra.w   loc_3A480
+                bra.w   SKFBZCage_StepHelixProgress
 ; ---------------------------------------------------------------------------
 
-loc_3A3F2:
+SKFBZCage_TryEnterHelixRight:
                 cmpi.w  #$C0,d0
-                bhs.s   loc_3A426
+                bhs.s   SKFBZCage_SetFlatRidePose
                 tst.w   ground_vel(a1)
-                bpl.s   loc_3A426
+                bpl.s   SKFBZCage_SetFlatRidePose
                 subi.w  #$C0,d0
                 add.w   $42(a0),d0
                 move.w  d0,(a2)
@@ -447,14 +447,14 @@ loc_3A3F2:
                 move.w  d0,6(a2)
                 bclr    #0,render_flags(a1)
                 bclr    #1,render_flags(a1)
-                bra.s   loc_3A480
+                bra.s   SKFBZCage_StepHelixProgress
 ; ---------------------------------------------------------------------------
 
-loc_3A426:
+SKFBZCage_SetFlatRidePose:
                 lsr.w   #5,d0
                 andi.w  #$F,d0
-                move.b  byte_3A468(pc,d0.w),d1
-                move.b  RawAni_3A474(pc,d0.w),mapping_frame(a1)
+                move.b  SKFBZCage_FlatRideHeights(pc,d0.w),d1
+                move.b  SKFBZCage_FlatRideFrames(pc,d0.w),mapping_frame(a1)
                 ext.w   d1
                 move.w  y_pos(a0),d2
                 add.w   6(a2),d2
@@ -472,19 +472,19 @@ loc_3A426:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_3A468:
+SKFBZCage_FlatRideHeights:
                 dc.b    4,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   4
-RawAni_3A474:
+SKFBZCage_FlatRideFrames:
                 dc.b    $49, $54, $53, $52, $53, $52, $53, $52, $53, $52, $54, $49
                 even
 ; ---------------------------------------------------------------------------
 
-loc_3A480:
+SKFBZCage_StepHelixProgress:
                 move.w  ground_vel(a1),d0
                 ext.l   d0
                 lsl.l   #8,d0
                 add.l   d0,(a2)
-                bpl.s   loc_3A4B2
+                bpl.s   SKFBZCage_CheckHelixEnd
                 move.l  #0,(a2)
                 move.b  #0,4(a2)
                 move.w  $40(a0),d0
@@ -492,22 +492,22 @@ loc_3A480:
                 move.w  d0,6(a2)
                 bset    #0,render_flags(a1)
                 bclr    #1,render_flags(a1)
-                bra.w   loc_3A314
+                bra.w   SKFBZCage_CalcAbsRideSpeed
 ; ---------------------------------------------------------------------------
 
-loc_3A4B2:
+SKFBZCage_CheckHelixEnd:
                 move.w  (a2),d0
                 cmp.w   $42(a0),d0
-                blo.s   loc_3A4DC
+                blo.s   SKFBZCage_ProjectHelixAndSetSpeed
                 move.l  #0,(a2)
                 move.b  #1,4(a2)
                 move.w  $40(a0),6(a2)
                 bclr    #0,render_flags(a1)
                 bclr    #1,render_flags(a1)
-                bra.w   loc_3A314
+                bra.w   SKFBZCage_CalcAbsRideSpeed
 ; ---------------------------------------------------------------------------
 
-loc_3A4DC:
+SKFBZCage_ProjectHelixAndSetSpeed:
                 move.w  x_pos(a1),d2
                 move.w  (a2),d0
                 lsr.w   #1,d0
@@ -533,12 +533,12 @@ loc_3A4DC:
                 lsr.w   #1,d0
                 andi.w  #$FF,d0
                 tst.w   ground_vel(a1)
-                bpl.s   loc_3A52E
+                bpl.s   SKFBZCage_ApplyHelixPose
                 neg.b   d0
 
-loc_3A52E:
+SKFBZCage_ApplyHelixPose:
                 divu.w  #$B,d0
-                move.b  RawAni_3A548(pc,d0.w),mapping_frame(a1)
+                move.b  SKFBZCage_HelixFrames(pc,d0.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  d0,anim(a1)
                 move.b  mapping_frame(a1),d0
@@ -546,7 +546,7 @@ loc_3A52E:
 ; End of function UpdatePlayerInFbzStationaryWireCage
 
 ; ---------------------------------------------------------------------------
-RawAni_3A548:
+SKFBZCage_HelixFrames:
                 dc.b    $70, $70, $71, $71, $72, $72, $73, $73, $74, $74, $75, $75, $76, $76, $77, $77, $6C, $6C, $6D, $6D
                 dc.b    $6E, $6E, $6F, $6F, $70, $70, $71, $71, $72, $72, $73, $73, $74, $74, $75, $75
                 even

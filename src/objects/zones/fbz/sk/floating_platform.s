@@ -2,12 +2,12 @@
 ; Responsibility: Floating platform movement, player riding and mapping resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-off_3A56C:
-                dc.l    loc_3A620
-                dc.l    loc_3A63A
-                dc.l    loc_3A646
-                dc.l    loc_3A664
-                dc.l    loc_3A692
+SKFBZFloatPlat_MotionTable:
+                dc.l    SKFBZFloatPlat_BobVertically
+                dc.l    SKFBZFloatPlat_ReadSmallOscillator
+                dc.l    SKFBZFloatPlat_ReadLargeOscillator
+                dc.l    SKFBZFloatPlat_CalcSignedOrbitAngle
+                dc.l    SKFBZFloatPlat_TryLatchStanding
 ; ---------------------------------------------------------------------------
 
 Obj_FBZFloatingPlatform:
@@ -24,13 +24,13 @@ Obj_FBZFloatingPlatform:
                 move.b  d0,d1
                 andi.w  #$70,d0
                 lsr.w   #2,d0
-                move.l  off_3A56C(pc,d0.w),$40(a0)
+                move.l  SKFBZFloatPlat_MotionTable(pc,d0.w),$40(a0)
                 andi.w  #$F,d1
                 lsl.w   #4,d1
                 move.b  d1,angle(a0)
-                move.l  #loc_3A5DA,(a0)
+                move.l  #SKFBZFloatPlat_UpdateMotionAndSolid,(a0)
 
-loc_3A5DA:
+SKFBZFloatPlat_UpdateMotionAndSolid:
                 move.w  x_pos(a0),-(sp)
                 movea.l $40(a0),a1
                 jsr     (a1)
@@ -40,19 +40,19 @@ loc_3A5DA:
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull_Offset).l
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_3A616
+                bpl.s   SKFBZFloatPlat_DrawFromBaseX
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   loc_3A616
+                blo.s   SKFBZFloatPlat_DrawFromBaseX
                 move.b  #0,mapping_frame(a0)
 
-loc_3A616:
+SKFBZFloatPlat_DrawFromBaseX:
                 move.w  $44(a0),d0
                 jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
-loc_3A620:
+SKFBZFloatPlat_BobVertically:
                 move.b  $27(a0),d0
                 addq.b  #1,$27(a0)
                 jsr     (GetSineCosine).l
@@ -62,36 +62,36 @@ loc_3A620:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A63A:
+SKFBZFloatPlat_ReadSmallOscillator:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
                 subi.w  #$20,d0
-                bra.s   loc_3A650
+                bra.s   SKFBZFloatPlat_SignVerticalOffset
 ; ---------------------------------------------------------------------------
 
-loc_3A646:
+SKFBZFloatPlat_ReadLargeOscillator:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 subi.w  #$40,d0
 
-loc_3A650:
+SKFBZFloatPlat_SignVerticalOffset:
                 btst    #0,status(a0)
-                beq.s   loc_3A65A
+                beq.s   SKFBZFloatPlat_SetYFromBase
                 neg.w   d0
 
-loc_3A65A:
+SKFBZFloatPlat_SetYFromBase:
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A664:
+SKFBZFloatPlat_CalcSignedOrbitAngle:
                 move.b  (Level_frame_counter+1).w,d0
                 btst    #0,status(a0)
-                beq.s   loc_3A672
+                beq.s   SKFBZFloatPlat_ProjectOrbit64
                 neg.b   d0
 
-loc_3A672:
+SKFBZFloatPlat_ProjectOrbit64:
                 add.b   angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
@@ -103,17 +103,17 @@ loc_3A672:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A692:
+SKFBZFloatPlat_TryLatchStanding:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_3A620
-                move.l  #loc_3A6A4,$40(a0)
+                beq.s   SKFBZFloatPlat_BobVertically
+                move.l  #SKFBZFloatPlat_WaitForPulsePhase,$40(a0)
 
-loc_3A6A4:
+SKFBZFloatPlat_WaitForPulsePhase:
                 move.b  $27(a0),d0
                 andi.b  #$7F,d0
-                bne.w   loc_3A620
-                move.l  #loc_3A6D0,$40(a0)
+                bne.w   SKFBZFloatPlat_BobVertically
+                move.l  #SKFBZFloatPlat_AcceleratePulse,$40(a0)
                 move.b  #0,$27(a0)
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
@@ -121,47 +121,48 @@ loc_3A6A4:
                 addi.w  #$28,d0
                 move.w  d0,$36(a0)
 
-loc_3A6D0:
+SKFBZFloatPlat_AcceleratePulse:
                 move.w  $36(a0),d2
                 subq.w  #1,d2
                 tst.b   $30(a0)
-                bne.s   loc_3A6F8
+                bne.s   SKFBZFloatPlat_DeceleratePulse
                 move.w  $34(a0),d1
                 addq.w  #4,d1
                 move.w  d1,$34(a0)
                 add.w   d1,$32(a0)
                 cmp.b   $32(a0),d2
-                bhi.s   loc_3A712
+                bhi.s   SKFBZFloatPlat_ScaleAndSignPulse
                 move.b  #1,$30(a0)
-                bra.s   loc_3A712
+                bra.s   SKFBZFloatPlat_ScaleAndSignPulse
 ; ---------------------------------------------------------------------------
 
-loc_3A6F8:
+SKFBZFloatPlat_DeceleratePulse:
                 move.w  $34(a0),d1
                 subq.w  #4,d1
                 move.w  d1,$34(a0)
                 add.w   d1,$32(a0)
                 cmp.b   $32(a0),d2
-                bls.s   loc_3A712
+                bls.s   SKFBZFloatPlat_ScaleAndSignPulse
                 move.b  #0,$30(a0)
 
-loc_3A712:
+SKFBZFloatPlat_ScaleAndSignPulse:
                 moveq   #0,d0
                 move.w  $32(a0),d0
                 lsr.w   #6,d0
                 btst    #0,status(a0)
-                beq.s   loc_3A724
+                beq.s   SKFBZFloatPlat_PlacePulseOrResumeBob
                 neg.w   d0
 
-loc_3A724:
+; When the pulse stops, keep the new baseline and switch to ordinary bobbing
+SKFBZFloatPlat_PlacePulseOrResumeBob:
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
                 tst.w   $34(a0)
-                bne.s   locret_3A740
+                bne.s   SKFBZFloatPlat_PulseReturn
                 move.w  y_pos(a0),$46(a0)
-                move.l  #loc_3A620,$40(a0)
+                move.l  #SKFBZFloatPlat_BobVertically,$40(a0)
 
-locret_3A740:
+SKFBZFloatPlat_PulseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_FBZFloatingPlatform:

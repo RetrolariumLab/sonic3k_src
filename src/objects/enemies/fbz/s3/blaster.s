@@ -12,26 +12,26 @@ Obj_Blaster:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Blaster_Index:
-                dc.w    loc_5726A-Blaster_Index
-                dc.w    loc_572B2-Blaster_Index
-                dc.w    loc_5731C-Blaster_Index
-                dc.w    loc_5731C-Blaster_Index
-                dc.w    loc_57362-Blaster_Index
-                dc.w    loc_57384-Blaster_Index
-                dc.w    loc_573AC-Blaster_Index
-                dc.w    loc_573BC-Blaster_Index
+                dc.w    S3Blaster_InitAndCheckCeilingFlag-Blaster_Index
+                dc.w    S3Blaster_CheckFacingTarget-Blaster_Index
+                dc.w    S3Blaster_TickTurnWait-Blaster_Index
+                dc.w    S3Blaster_TickTurnWait-Blaster_Index
+                dc.w    S3Blaster_AnimateAndTrySecondary-Blaster_Index
+                dc.w    S3Blaster_RiseTowardCeiling-Blaster_Index
+                dc.w    S3Blaster_WaitAtCeiling-Blaster_Index
+                dc.w    S3Blaster_FallTowardFloor-Blaster_Index
 ; ---------------------------------------------------------------------------
 
-loc_5726A:
+S3Blaster_InitAndCheckCeilingFlag:
                 lea     ObjDat_Blaster(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #$10,y_radius(a0)
                 bset    #1,render_flags(a0)
                 bclr    #1,render_flags(a0)
-                beq.s   loc_5728A
+                beq.s   S3Blaster_InitPatrol
                 st      $3C(a0)
 
-loc_5728A:
+S3Blaster_InitPatrol:
                 move.b  #$E,y_radius(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -39,125 +39,126 @@ loc_5728A:
                 move.w  d0,$2E(a0)
                 add.w   d0,d0
                 move.w  d0,$3A(a0)
-                move.l  #loc_57306,$34(a0)
+                move.l  #BlasterS3_Body_StartTurnPause,$34(a0)
                 move.w  #-$80,d4
                 jmp     Set_VelocityXTrackSonic(pc)
 ; ---------------------------------------------------------------------------
 
-loc_572B2:
+S3Blaster_CheckFacingTarget:
                 bsr.w   Blaster_TryRetreatToCeiling
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
-                bhs.s   loc_572CE
+                bhs.s   S3Blaster_AnimateAndPatrol
                 btst    #0,render_flags(a0)
-                beq.s   loc_572CA
+                beq.s   S3Blaster_TryAttackFacingSide
                 subq.w  #2,d0
 
-loc_572CA:
+S3Blaster_TryAttackFacingSide:
                 tst.w   d0
-                beq.s   loc_572E4
+                beq.s   S3Blaster_BeginFireDelay
 
-loc_572CE:
-                lea     byte_5749A(pc),a1
+S3Blaster_AnimateAndPatrol:
+                lea     BlasterS3_Body_PairedPatrolFrames(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jsr     (MoveSprite2).l
                 jsr     ObjHitFloor2_DoRoutine(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_572E4:
+S3Blaster_BeginFireDelay:
                 move.b  #6,routine(a0)
                 move.b  #0,mapping_frame(a0)
                 move.w  $2E(a0),$3A(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_57344,$34(a0)
+                move.l  #S3Blaster_SpawnMuzzleAndPrimary,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57306:
+BlasterS3_Body_StartTurnPause:
                 move.b  #4,routine(a0)
                 move.w  #$20,$2E(a0)
-                move.l  #loc_57324,$34(a0)
+                move.l  #BlasterS3_Body_ReverseHorizontalPatrol,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5731C:
+S3Blaster_TickTurnWait:
                 bsr.w   Blaster_TryRetreatToCeiling
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57324:
+BlasterS3_Body_ReverseHorizontalPatrol:
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
 
-loc_5732E:
+S3Blaster_ResumePatrol:
                 move.b  #2,routine(a0)
                 move.w  $3A(a0),$2E(a0)
-                move.l  #loc_57306,$34(a0)
+                move.l  #BlasterS3_Body_StartTurnPause,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57344:
+S3Blaster_SpawnMuzzleAndPrimary:
                 move.b  #8,routine(a0)
-                move.l  #loc_5732E,$34(a0)
-                lea     ChildObjDat_57462(pc),a2
+                move.l  #S3Blaster_ResumePatrol,$34(a0)
+                lea     BlasterS3_Body_OneNormalMuzzleRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_5746A(pc),a2
+                lea     S3Blaster_PrimaryShotChild(pc),a2
                 jmp     CreateChild5_ComplexAdjusted(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57362:
+; Try the secondary projectile when animation advances to cursor 6
+S3Blaster_AnimateAndTrySecondary:
                 bsr.w   Blaster_TryRetreatToCeiling
-                lea     byte_574A4(pc),a1
+                lea     S3Blaster_FireAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_57382
+                beq.s   S3Blaster_FireEventReturn
                 cmpi.b  #6,anim_frame(a0)
-                bne.s   locret_57382
-                lea     ChildObjDat_57482(pc),a2
+                bne.s   S3Blaster_FireEventReturn
+                lea     S3Blaster_SecondaryShotChild(pc),a2
                 jsr     CreateChild5_ComplexAdjusted(pc)
 
-locret_57382:
+S3Blaster_FireEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57384:
+S3Blaster_RiseTowardCeiling:
                 addi.w  #-$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bmi.s   loc_5739C
+                bmi.s   S3Blaster_StopAtCeiling
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5739C:
+S3Blaster_StopAtCeiling:
                 add.w   d1,y_pos(a0)
                 move.b  #$C,routine(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_573AC:
+S3Blaster_WaitAtCeiling:
                 tst.b   (_unkFAA2).w
-                beq.s   loc_573B4
+                beq.s   S3Blaster_BeginFallFromCeiling
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_573B4:
+S3Blaster_BeginFallFromCeiling:
                 move.b  #$E,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_573BC:
+S3Blaster_FallTowardFloor:
                 addi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_573D4
+                bmi.s   S3Blaster_LandAndRestoreState
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_573D4:
+S3Blaster_LandAndRestoreState:
                 add.w   d1,y_pos(a0)
                 move.b  $3D(a0),routine(a0)
                 move.w  $3E(a0),x_vel(a0)
@@ -165,17 +166,17 @@ loc_573D4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_573EA:
-                lea     word_57444(pc),a1
+S3Blaster_InitMuzzle:
+                lea     BlasterS3_Muzzle_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_57402,(a0)
+                move.l  #S3Blaster_AnimateAndDrawMuzzle,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57402:
+S3Blaster_AnimateAndDrawMuzzle:
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                lea     byte_5749F(pc),a1
+                lea     S3Blaster_MuzzleAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jmp     (Draw_Sprite).l
 
@@ -184,15 +185,15 @@ loc_57402:
 ; The local enable and engine-specific global must both allow retreat. Save the ground state and X velocity
 Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
-                beq.s   locret_57436
+                beq.s   S3Blaster_RetreatCheckReturn
                 tst.b   (_unkFAA2).w
-                beq.s   locret_57436
+                beq.s   S3Blaster_RetreatCheckReturn
                 move.b  routine(a0),$3D(a0)
                 move.b  #$A,routine(a0)
                 move.w  x_vel(a0),$3E(a0)
                 clr.w   x_vel(a0)
 
-locret_57436:
+S3Blaster_RetreatCheckReturn:
                 rts
 ; End of function Blaster_TryRetreatToCeiling
 
@@ -202,53 +203,53 @@ ObjDat_Blaster:
                 dc.w    make_art_tile(ArtTile_Blaster-6,1,1)
                 dc.w    $280
                 dc.b    $18, $10,   0,  $A
-word_57444:
+BlasterS3_Muzzle_PartialAttributes:
                 dc.w    $200
                 dc.b    8,   8,   4,   0
-ObjDat3_5744A:
+S3Blaster_PrimaryShotAttrs:
                 dc.l    Map_Blaster
                 dc.w    make_art_tile(ArtTile_Blaster-6,1,1)
                 dc.w    $280
                 dc.b    4,   4,   5, $18
-ObjDat3_57456:
+S3Blaster_SecondaryShotAttrs:
                 dc.l    Map_Blaster
                 dc.w    make_art_tile(ArtTile_Blaster-6,1,1)
                 dc.w    $200
                 dc.b    4,   4,   7,   0
-ChildObjDat_57462:
+BlasterS3_Body_OneNormalMuzzleRecord:
                 dc.w    1-1
-                dc.l    loc_573EA
+                dc.l    S3Blaster_InitMuzzle
                 dc.b    -$1B,-$16
-ChildObjDat_5746A:
+S3Blaster_PrimaryShotChild:
                 dc.w    1-1
                 dc.l    S3CallbackShot_InitDeflectable
-                dc.l    ObjDat3_5744A
-                dc.l    byte_574AD
+                dc.l    S3Blaster_PrimaryShotAttrs
+                dc.l    S3Blaster_PrimaryShotAnim
                 dc.l    MoveFall_AnimateRaw
                 dc.b    -$20,-$20
                 dc.w    -$200, -$400
-ChildObjDat_57482:
+S3Blaster_SecondaryShotChild:
                 dc.w    1-1
                 dc.l    S3CallbackShot_InitDeflectable
-                dc.l    ObjDat3_57456
-                dc.l    byte_574B1
+                dc.l    S3Blaster_SecondaryShotAttrs
+                dc.l    S3Blaster_SecondaryShotAnim
                 dc.l    MoveFall_AnimateRaw
                 dc.b    -$C,  -4
                 dc.w    $100, -$200
-byte_5749A:
+BlasterS3_Body_PairedPatrolFrames:
                 dc.b    0, $17
                 dc.b    1,   2
                 dc.b    $FC
-byte_5749F:
+S3Blaster_MuzzleAnim:
                 dc.b    0,   4,   4,   5, $F4
-byte_574A4:
+S3Blaster_FireAnim:
                 dc.b    0,   1
                 dc.b    0,   1
                 dc.b    2,   5
                 dc.b    0, $1F
                 dc.b    $F4
-byte_574AD:
+S3Blaster_PrimaryShotAnim:
                 dc.b    1,   5,   6, $FC
-byte_574B1:
+S3Blaster_SecondaryShotAnim:
                 dc.b    2,   7,   8,   9,  $A, $FC
                 even

@@ -7,18 +7,18 @@ Obj_FBZExitHall:
                 move.l  #Sprite_OnScreen_Test,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                movea.l off_86D12(pc,d0.w),a1
+                movea.l SKFBZExitHall_SubtypeAttrs(pc,d0.w),a1
                 move.l  #Map_FBZExitHall,mappings(a0)
                 jmp     SetUp_ObjAttributes2(pc)
 ; ---------------------------------------------------------------------------
-off_86D12:
-                dc.l    word_86D1A
-                dc.l    word_86D22
-word_86D1A:
+SKFBZExitHall_SubtypeAttrs:
+                dc.l    SKFBZExitHall_DoorAttrs
+                dc.l    SKFBZExitHall_HallAttrs
+SKFBZExitHall_DoorAttrs:
                 dc.w    make_art_tile(ArtTile_FBZExitDoor,2,0)
                 dc.w    0
                 dc.b    8, $20,   0,   0
-word_86D22:
+SKFBZExitHall_HallAttrs:
                 dc.w    make_art_tile(ArtTile_FBZExitHall,2,0)
                 dc.w    $280
                 dc.b    8, $18,   1,   0

@@ -10,36 +10,36 @@ Obj_FBZTrapSpring:
                 move.b  #$10,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_3CB66,(a0)
+                move.l  #SKFBZTrapSpring_TrySetP1BelowAnim,(a0)
 
-loc_3CB66:
+SKFBZTrapSpring_TrySetP1BelowAnim:
                 move.w  (Player_1+y_pos).w,d0
                 sub.w   y_pos(a0),d0
-                bcs.s   loc_3CB7E
+                bcs.s   SKFBZTrapSpring_TrySetP1AboveAnim
                 cmpi.w  #$20,d0
-                blt.s   loc_3CB8A
+                blt.s   SKFBZTrapSpring_TryLaunchP1
                 move.b  #1,anim(a0)
-                bra.s   loc_3CB8A
+                bra.s   SKFBZTrapSpring_TryLaunchP1
 ; ---------------------------------------------------------------------------
 
-loc_3CB7E:
+SKFBZTrapSpring_TrySetP1AboveAnim:
                 cmpi.w  #-$10,d0
-                bge.s   loc_3CB8A
+                bge.s   SKFBZTrapSpring_TryLaunchP1
                 move.b  #0,anim(a0)
 
-loc_3CB8A:
+SKFBZTrapSpring_TryLaunchP1:
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_3CB98
+                beq.s   SKFBZTrapSpring_TryLaunchP2
                 bsr.s   LaunchPlayerFromFbzSpringSurface
 
-loc_3CB98:
+SKFBZTrapSpring_TryLaunchP2:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_3CBA6
+                beq.s   SKFBZTrapSpring_ResolveSolidAndDraw
                 bsr.s   LaunchPlayerFromFbzSpringSurface
 
-loc_3CBA6:
+SKFBZTrapSpring_ResolveSolidAndDraw:
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #9,d3
@@ -55,10 +55,10 @@ LaunchPlayerFromFbzSpringSurface:
                 move.w  #-$1000,y_vel(a1)
                 move.b  subtype(a0),d0
                 btst    #1,d0
-                beq.s   loc_3CBE4
+                beq.s   SKFBZTrapSpring_SetAirborneAndTryTumble
                 move.w  #-$A00,y_vel(a1)
 
-loc_3CBE4:
+SKFBZTrapSpring_SetAirborneAndTryTumble:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 clr.b   jumping(a1)
@@ -66,23 +66,23 @@ loc_3CBE4:
                 move.b  #$10,anim(a1)
                 move.b  #2,routine(a1)
                 btst    #0,d0
-                beq.s   loc_3CC44
+                beq.s   SKFBZTrapSpring_PlaySpringSound
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #0,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_3CC34
+                bne.s   SKFBZTrapSpring_TryFlipTumbleDirection
                 move.b  #1,flips_remaining(a1)
 
-loc_3CC34:
+SKFBZTrapSpring_TryFlipTumbleDirection:
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_3CC44
+                beq.s   SKFBZTrapSpring_PlaySpringSound
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_3CC44:
+SKFBZTrapSpring_PlaySpringSound:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
 ; End of function LaunchPlayerFromFbzSpringSurface

@@ -1,59 +1,59 @@
 ; Data owner: objects/shared/zones/fbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FBZFlameThrower_:
-                dc.w    word_3CFF4-Map_FBZFlameThrower_
-                dc.w    word_3CFFC-Map_FBZFlameThrower_
-                dc.w    word_3D00A-Map_FBZFlameThrower_
-                dc.w    word_3D018-Map_FBZFlameThrower_
-                dc.w    word_3D020-Map_FBZFlameThrower_
-                dc.w    word_3D028-Map_FBZFlameThrower_
-                dc.w    word_3D030-Map_FBZFlameThrower_
-                dc.w    word_3D038-Map_FBZFlameThrower_
-                dc.w    word_3D040-Map_FBZFlameThrower_
-                dc.w    word_3D048-Map_FBZFlameThrower_
-                dc.w    word_3D050-Map_FBZFlameThrower_
-                dc.w    word_3D058-Map_FBZFlameThrower_
-                dc.w    word_3D060-Map_FBZFlameThrower_
-                dc.w    word_3D068-Map_FBZFlameThrower_
-                dc.w    word_3D070-Map_FBZFlameThrower_
-                dc.w    word_3D078-Map_FBZFlameThrower_
-                dc.w    word_3D080-Map_FBZFlameThrower_
-                dc.w    word_3D088-Map_FBZFlameThrower_
-word_3CFF4:     dc.w    1
+                dc.w    FBZFlamethrowerSK_MapSlot00-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot01-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot02-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot03-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot04-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot05-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot06-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot07-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot08-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot09-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0A-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0B-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0C-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0D-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0E-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot0F-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot10-Map_FBZFlameThrower_
+                dc.w    FBZFlamethrowerSK_MapSlot11-Map_FBZFlameThrower_
+FBZFlamethrowerSK_MapSlot00:    dc.w    1
                 dc.b    $F8,   0, $20, $1C,   0,   0
-word_3CFFC:     dc.w    2
+FBZFlamethrowerSK_MapSlot01:    dc.w    2
                 dc.b    $F0,  $C, $20,   0, $FF, $F0
                 dc.b    0,  $C, $20,   6, $FF, $F0
-word_3D00A:     dc.w    2
+FBZFlamethrowerSK_MapSlot02:    dc.w    2
                 dc.b    $F8,  $C, $20,   0, $FF, $F0
                 dc.b    0,  $C, $20,   6, $FF, $F0
-word_3D018:     dc.w    1
+FBZFlamethrowerSK_MapSlot03:    dc.w    1
                 dc.b    0,  $C, $20,   6, $FF, $F0
-word_3D020:     dc.w    1
+FBZFlamethrowerSK_MapSlot04:    dc.w    1
                 dc.b    $F8,   5,   0,  $A, $FF, $F8
-word_3D028:     dc.w    1
+FBZFlamethrowerSK_MapSlot05:    dc.w    1
                 dc.b    $F8,   5,   0,  $E, $FF, $F8
-word_3D030:     dc.w    1
+FBZFlamethrowerSK_MapSlot06:    dc.w    1
                 dc.b    $F8,   5,   8,  $E, $FF, $F8
-word_3D038:     dc.w    1
+FBZFlamethrowerSK_MapSlot07:    dc.w    1
                 dc.b    $F8,   5,   8,  $A, $FF, $F8
-word_3D040:     dc.w    1
+FBZFlamethrowerSK_MapSlot08:    dc.w    1
                 dc.b    $F8,   5,   0, $12, $FF, $F8
-word_3D048:     dc.w    1
+FBZFlamethrowerSK_MapSlot09:    dc.w    1
                 dc.b    $F8,   5,   0, $16, $FF, $F8
-word_3D050:     dc.w    1
+FBZFlamethrowerSK_MapSlot0A:    dc.w    1
                 dc.b    $F8,   5,   8, $16, $FF, $F8
-word_3D058:     dc.w    1
+FBZFlamethrowerSK_MapSlot0B:    dc.w    1
                 dc.b    $F8,   5,   8, $12, $FF, $F8
-word_3D060:     dc.w    1
+FBZFlamethrowerSK_MapSlot0C:    dc.w    1
                 dc.b    $FC,   0,   0, $1A, $FF, $FC
-word_3D068:     dc.w    1
+FBZFlamethrowerSK_MapSlot0D:    dc.w    1
                 dc.b    $FC,   0,   0, $1B, $FF, $FC
-word_3D070:     dc.w    1
+FBZFlamethrowerSK_MapSlot0E:    dc.w    1
                 dc.b    $FC,   0,   8, $1B, $FF, $FC
-word_3D078:     dc.w    1
+FBZFlamethrowerSK_MapSlot0F:    dc.w    1
                 dc.b    $FC,   0,   8, $1A, $FF, $FC
-word_3D080:     dc.w    1
+FBZFlamethrowerSK_MapSlot10:    dc.w    1
                 dc.b    $F8,   0, $28, $1C, $FF, $F8
-word_3D088:     dc.w    1
+FBZFlamethrowerSK_MapSlot11:    dc.w    1
                 dc.b    $F8,   4, $20,   4, $FF, $F8

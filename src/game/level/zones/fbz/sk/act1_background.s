@@ -5,12 +5,12 @@
 
 FBZ1_BackgroundInit:
                 jsr     (AllocateObject).l
-                bne.s   loc_5286A
+                bne.s   SKFBZ1BG_TryInitOutdoorBackground
                 move.l  #Obj_FBZOutdoorBGMotion,(a1)
 
-loc_5286A:
+SKFBZ1BG_TryInitOutdoorBackground:
                 cmpi.w  #$180,(Player_1+x_pos).w
-                bhs.s   loc_528A4
+                bhs.s   SKFBZ1BG_RefreshInitialBackground
                 st      (Events_bg+$04).w               ; if player is at start, then he's outside. Set outdoors flag
                 lea     Pal_FBZBGOutdoors(pc),a1
                 lea     (Target_palette_line_4+$4).w,a5
@@ -28,7 +28,7 @@ loc_5286A:
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_528A4:
+SKFBZ1BG_RefreshInitialBackground:
                 jsr     FBZ_Deform(pc)                  ; Indoors
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
@@ -58,15 +58,15 @@ FBZ1_BackgroundEvent_Index:
 FBZ1BGE_ChangeTopDown:
                 jsr     FBZ1_CheckBGChange(pc)
 
-loc_528DE:
+SKFBZ1BG_BeginTopDownRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_528F0
+                beq.s   SKFBZ1BG_StepTopDownRedraw
                 move.w  #$200,d1
                 moveq   #0,d2
 
-loc_528F0:
+SKFBZ1BG_StepTopDownRedraw:
                 jsr     Draw_PlaneVertTopDown(pc)
                 bpl.w   FBZ1BGE_GoDeform
                 clr.w   (Events_routine_bg).w
@@ -76,15 +76,15 @@ loc_528F0:
 FBZ1BGE_ChangeBottomUp:
                 jsr     FBZ1_CheckBGChange(pc)
 
-loc_52904:
+SKFBZ1BG_BeginBottomUpRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_52916
+                beq.s   SKFBZ1BG_StepBottomUpRedraw
                 move.w  #$200,d1
                 moveq   #0,d2
 
-loc_52916:
+SKFBZ1BG_StepBottomUpRedraw:
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
                 bpl.w   FBZ1BGE_GoDeform
                 clr.w   (Events_routine_bg).w
@@ -94,15 +94,15 @@ loc_52916:
 FBZ1BGE_ChangeLeftRight:
                 jsr     FBZ1_CheckBGChange(pc)
 
-loc_5292A:
+SKFBZ1BG_BeginLeftToRightRedraw:
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 moveq   #0,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_5293C
+                beq.s   SKFBZ1BG_StepLeftToRightRedraw
                 moveq   #0,d1
                 move.w  #$200,d2
 
-loc_5293C:
+SKFBZ1BG_StepLeftToRightRedraw:
                 jsr     Draw_PlaneHorzLeftToRight(pc)
                 bpl.w   FBZ1BGE_GoDeform
                 clr.w   (Events_routine_bg).w
@@ -112,15 +112,15 @@ loc_5293C:
 FBZ1BGE_ChangeRightLeft:
                 jsr     FBZ1_CheckBGChange(pc)
 
-loc_52950:
+SKFBZ1BG_BeginRightToLeftRedraw:
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 moveq   #0,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_52962
+                beq.s   SKFBZ1BG_StepRightToLeftRedraw
                 moveq   #0,d1
                 move.w  #$200,d2
 
-loc_52962:
+SKFBZ1BG_StepRightToLeftRedraw:
                 jsr     Draw_PlaneHorzRightToLeft(pc)
                 bpl.w   FBZ1BGE_GoDeform
                 clr.w   (Events_routine_bg).w
@@ -129,7 +129,7 @@ loc_52962:
 
 FBZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_529EE
+                beq.s   SKFBZ1BG_CheckPlayerBeforeRedraw
                 clr.w   (Events_fg_5).w                 ; Check for transition flag
                 movem.l d7-a0/a2-a3,-(sp)
                 moveq   #PLCID_1C,d0
@@ -161,31 +161,31 @@ FBZ1BGE_Normal:
                 bra.s   FBZ1BGE_GoDeform
 ; ---------------------------------------------------------------------------
 
-loc_529EE:
+SKFBZ1BG_CheckPlayerBeforeRedraw:
                 cmpi.b  #6,(Player_1+routine).w
-                blo.s   loc_529F8
+                blo.s   SKFBZ1BG_CheckBackgroundRegion
                 rts                                     ; Don't do special events if Sonic is dying
 ; ---------------------------------------------------------------------------
 
-loc_529F8:
+SKFBZ1BG_CheckBackgroundRegion:
                 jsr     FBZ1_CheckBGChange(pc)
 
 FBZ1BGE_GoDeform:
                 move.w  (Events_bg+$04).w,d1
-                beq.s   loc_52A06
+                beq.s   SKFBZ1BG_DrawRowAndSelectBands
                 move.w  #$200,d1
 
-loc_52A06:
+SKFBZ1BG_DrawRowAndSelectBands:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
                 lea     FBZ_InBGDeformArray(pc),a4
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_52A22
+                beq.s   SKFBZ1BG_ApplyScrollBands
                 lea     FBZ_OutBGDeformArray(pc),a4
 
-loc_52A22:
+SKFBZ1BG_ApplyScrollBands:
                 lea     (HScroll_table).w,a5
                 jmp     ApplyDeformation(pc)
 
@@ -193,7 +193,7 @@ loc_52A22:
 
 FBZ_Deform:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52A70
+                bne.s   SKFBZ1BG_SetOutdoorYAndBands
                 move.w  (Camera_Y_pos_copy).w,d0        ; Indoors
                 asr.w   #1,d0
                 move.w  d0,d1
@@ -209,26 +209,26 @@ FBZ_Deform:
                 lea     FBZ_InBGDeformIndex(pc),a5
                 moveq   #0,d2
 
-loc_52A56:
+SKFBZ1BG_ReadIndoorScrollGroup:
                 move.b  (a5)+,d3
-                bmi.s   locret_52A6E
+                bmi.s   SKFBZ1BG_IndoorScrollReturn
                 ext.w   d3
                 swap    d0
 
-loc_52A5E:
+SKFBZ1BG_WriteIndoorScrollGroup:
                 move.b  (a5)+,d2
                 move.w  d0,(a1,d2.w)
-                dbf     d3,loc_52A5E
+                dbf     d3,SKFBZ1BG_WriteIndoorScrollGroup
                 swap    d0
                 add.l   d1,d0
-                bra.s   loc_52A56
+                bra.s   SKFBZ1BG_ReadIndoorScrollGroup
 ; ---------------------------------------------------------------------------
 
-locret_52A6E:
+SKFBZ1BG_IndoorScrollReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52A70:
+SKFBZ1BG_SetOutdoorYAndBands:
                 moveq   #$16,d0                         ; Outdoors
                 add.w   (Events_bg+$08).w,d0            ; Add offset of bobbing motion to 16
                 move.w  d0,(Camera_Y_pos_BG_copy).w
@@ -244,14 +244,14 @@ loc_52A70:
                 addi.l  #$E00,(HScroll_table+$1FC).w
                 moveq   #9-1,d3
 
-loc_52A9E:
+SKFBZ1BG_WriteOutdoorScrollBands:
                 move.w  (a5)+,d4
                 add.l   d2,d0
                 swap    d0
                 move.w  d0,(a1,d4.w)
                 swap    d0
                 add.l   d1,d0
-                dbf     d3,loc_52A9E
+                dbf     d3,SKFBZ1BG_WriteOutdoorScrollBands
                 rts
 ; End of function FBZ_Deform
 
@@ -284,40 +284,40 @@ FBZ1_CheckBGChange_Index:
 
 FBZ1_BGChange1:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52AFE
+                bne.s   SKFBZ1BG_Region1_CheckOutdoorHalf
                 cmpi.w  #$B00,d0                        ; If indoors
-                bhs.s   loc_52AF4
+                bhs.s   SKFBZ1BG_Region1_IndoorYGate
                 cmpi.w  #$9C0,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52B22
+                bra.s   SKFBZ1BG_Region1_OutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52AF4:
+SKFBZ1BG_Region1_IndoorYGate:
                 cmpi.w  #$900,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52B22
+                bra.s   SKFBZ1BG_Region1_OutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52AFE:
+SKFBZ1BG_Region1_CheckOutdoorHalf:
                 cmpi.w  #$B00,d0                        ; If outdoors
-                bhs.s   loc_52B0E
+                bhs.s   SKFBZ1BG_Region1_OutdoorYGate
                 cmpi.w  #$9C0,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52B16
+                bra.s   SKFBZ1BG_Region1_IndoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52B0E:
+SKFBZ1BG_Region1_OutdoorYGate:
                 cmpi.w  #$900,d1
                 bhi.w   FBZ_Deform
 
-loc_52B16:
+SKFBZ1BG_Region1_IndoorTopDown:
                 clr.w   (Events_bg+$04).w
                 moveq   #4,d0
                 moveq   #0,d6
                 bra.w   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52B22:
+SKFBZ1BG_Region1_OutdoorBottomUp:
                 st      (Events_bg+$04).w
                 moveq   #8,d0
                 move.w  #$F0,d6
@@ -326,40 +326,40 @@ loc_52B22:
 
 FBZ1_BGChange2:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52B50
+                bne.s   SKFBZ1BG_Region2_CheckOutdoorHalf
                 cmpi.w  #$C80,d0
-                bhs.s   loc_52B46
+                bhs.s   SKFBZ1BG_Region2_IndoorYGate
                 cmpi.w  #$2C0,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52B76
+                bra.s   SKFBZ1BG_Region2_OutdoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52B46:
+SKFBZ1BG_Region2_IndoorYGate:
                 cmpi.w  #$240,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52B76
+                bra.s   SKFBZ1BG_Region2_OutdoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52B50:
+SKFBZ1BG_Region2_CheckOutdoorHalf:
                 cmpi.w  #$C80,d0
-                bhs.s   loc_52B60
+                bhs.s   SKFBZ1BG_Region2_OutdoorYGate
                 cmpi.w  #$2C0,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52B68
+                bra.s   SKFBZ1BG_Region2_IndoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52B60:
+SKFBZ1BG_Region2_OutdoorYGate:
                 cmpi.w  #$240,d1
                 blo.w   FBZ_Deform
 
-loc_52B68:
+SKFBZ1BG_Region2_IndoorBottomUp:
                 clr.w   (Events_bg+$04).w
                 moveq   #8,d0
                 move.w  #$F0,d6
                 bra.w   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52B76:
+SKFBZ1BG_Region2_OutdoorTopDown:
                 st      (Events_bg+$04).w
                 moveq   #4,d0
                 moveq   #0,d6
@@ -368,40 +368,40 @@ loc_52B76:
 
 FBZ1_BGChange3:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52BA2
+                bne.s   SKFBZ1BG_Region3_CheckOutdoorHalf
                 cmpi.w  #$1880,d0
-                bhs.s   loc_52B98
+                bhs.s   SKFBZ1BG_Region3_IndoorYGate
                 cmpi.w  #$9C0,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52BC6
+                bra.s   SKFBZ1BG_Region3_OutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52B98:
+SKFBZ1BG_Region3_IndoorYGate:
                 cmpi.w  #$940,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52BC6
+                bra.s   SKFBZ1BG_Region3_OutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52BA2:
+SKFBZ1BG_Region3_CheckOutdoorHalf:
                 cmpi.w  #$1880,d0
-                bhs.s   loc_52BB2
+                bhs.s   SKFBZ1BG_Region3_OutdoorYGate
                 cmpi.w  #$9C0,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52BBA
+                bra.s   SKFBZ1BG_Region3_IndoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52BB2:
+SKFBZ1BG_Region3_OutdoorYGate:
                 cmpi.w  #$940,d1
                 bhi.w   FBZ_Deform
 
-loc_52BBA:
+SKFBZ1BG_Region3_IndoorTopDown:
                 clr.w   (Events_bg+$04).w
                 moveq   #4,d0
                 moveq   #0,d6
                 bra.w   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52BC6:
+SKFBZ1BG_Region3_OutdoorBottomUp:
                 st      (Events_bg+$04).w
                 moveq   #8,d0
                 move.w  #$F0,d6
@@ -410,15 +410,15 @@ loc_52BC6:
 
 FBZ1_BGChange4:
                 cmpi.w  #$100,d1
-                blo.s   loc_52C0C
+                blo.s   SKFBZ1BG_Region4_CheckSideRedraw
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52BEA
+                bne.s   SKFBZ1BG_Region4_IndoorBottomUp
                 cmpi.w  #$1C0,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52C00
+                bra.s   SKFBZ1BG_Region4_OutdoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52BEA:
+SKFBZ1BG_Region4_IndoorBottomUp:
                 cmpi.w  #$1C0,d1
                 blo.w   FBZ_Deform
                 clr.w   (Events_bg+$04).w
@@ -427,42 +427,42 @@ loc_52BEA:
                 bra.w   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52C00:
+SKFBZ1BG_Region4_OutdoorTopDown:
                 st      (Events_bg+$04).w
                 moveq   #4,d0
                 moveq   #0,d6
                 bra.w   FBZ_BGChangeGoOut
 ; ---------------------------------------------------------------------------
 
-loc_52C0C:
+SKFBZ1BG_Region4_CheckSideRedraw:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52C1C
+                bne.s   SKFBZ1BG_ReturnIndoorsLeftToRightAtX1B00
                 cmpi.w  #$1B00,d0
                 blo.w   FBZ_Deform
-                bra.s   loc_52C2E
+                bra.s   SKFBZ1BG_EnterOutdoorsRightToLeftAtX1B00
 ; ---------------------------------------------------------------------------
 
-loc_52C1C:
+SKFBZ1BG_ReturnIndoorsLeftToRightAtX1B00:
                 cmpi.w  #$1B00,d0
                 bhi.w   FBZ_Deform
                 clr.w   (Events_bg+$04).w
                 moveq   #$C,d0
                 moveq   #0,d6
-                bra.s   loc_52C3E
+                bra.s   SKFBZ1BG_BindIndoorSidePalette
 ; ---------------------------------------------------------------------------
 
-loc_52C2E:
+SKFBZ1BG_EnterOutdoorsRightToLeftAtX1B00:
                 st      (Events_bg+$04).w
                 moveq   #$10,d0
                 move.w  #$3F0,d6
                 lea     Pal_FBZBGOutdoors(pc),a1
-                bra.s   loc_52C42
+                bra.s   SKFBZ1BG_StartHorizontalRedraw
 ; ---------------------------------------------------------------------------
 
-loc_52C3E:
+SKFBZ1BG_BindIndoorSidePalette:
                 lea     Pal_FBZBGIndoors(pc),a1         ; Special case for going left/right rather than up/down
 
-loc_52C42:
+SKFBZ1BG_StartHorizontalRedraw:
                 lea     (Normal_palette_line_4+$4).w,a5
                 move.l  (a1)+,(a5)+
                 move.l  (a1)+,(a5)+
@@ -475,19 +475,19 @@ loc_52C42:
                 move.w  #$1F,(Draw_delayed_rowcount).w
                 addq.w  #4,sp
                 cmpi.w  #$C,(Events_routine_bg).w
-                beq.w   loc_5292A
-                bra.w   loc_52950
+                beq.w   SKFBZ1BG_BeginLeftToRightRedraw
+                bra.w   SKFBZ1BG_BeginRightToLeftRedraw
 ; ---------------------------------------------------------------------------
 
 FBZ1_BGChange5:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52C84
+                bne.s   SKFBZ1BG_Region5_IndoorBottomUp
                 cmpi.w  #$240,d1
                 bhi.w   FBZ_Deform
-                bra.s   loc_52C98
+                bra.s   SKFBZ1BG_Region5_OutdoorTopDown
 ; ---------------------------------------------------------------------------
 
-loc_52C84:
+SKFBZ1BG_Region5_IndoorBottomUp:
                 cmpi.w  #$240,d1
                 blo.w   FBZ_Deform
                 clr.w   (Events_bg+$04).w
@@ -496,7 +496,7 @@ loc_52C84:
                 bra.s   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52C98:
+SKFBZ1BG_Region5_OutdoorTopDown:
                 st      (Events_bg+$04).w
                 moveq   #4,d0
                 moveq   #0,d6
@@ -505,13 +505,13 @@ loc_52C98:
 
 FBZ1_BGChange6:
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_52CB2
+                bne.s   SKFBZ1BG_Region6_IndoorTopDown
                 cmpi.w  #$640,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_52CC4
+                bra.s   SKFBZ1BG_Region6_OutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_52CB2:
+SKFBZ1BG_Region6_IndoorTopDown:
                 cmpi.w  #$640,d1
                 bhi.w   FBZ_Deform
                 clr.w   (Events_bg+$04).w
@@ -520,20 +520,20 @@ loc_52CB2:
                 bra.s   FBZ_BGChangeGoIn
 ; ---------------------------------------------------------------------------
 
-loc_52CC4:
+SKFBZ1BG_Region6_OutdoorBottomUp:
                 st      (Events_bg+$04).w
                 moveq   #8,d0
                 move.w  #$F0,d6
 
 FBZ_BGChangeGoOut:
                 lea     Pal_FBZBGOutdoors(pc),a1
-                bra.s   loc_52CD8
+                bra.s   SKFBZ1BG_StartVerticalRedraw
 ; ---------------------------------------------------------------------------
 
 FBZ_BGChangeGoIn:
                 lea     Pal_FBZBGIndoors(pc),a1
 
-loc_52CD8:
+SKFBZ1BG_StartVerticalRedraw:
                 lea     (Normal_palette_line_4+$4).w,a5
                 move.l  (a1)+,(a5)+
                 move.l  (a1)+,(a5)+
@@ -548,8 +548,8 @@ loc_52CD8:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,sp                           ; Finish here without doing anything else
                 cmpi.w  #4,(Events_routine_bg).w
-                beq.w   loc_528DE
-                bra.w   loc_52904
+                beq.w   SKFBZ1BG_BeginTopDownRedraw
+                bra.w   SKFBZ1BG_BeginBottomUpRedraw
 ; ---------------------------------------------------------------------------
 
 Obj_FBZOutdoorBGMotion:

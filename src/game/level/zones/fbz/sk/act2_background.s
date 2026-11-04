@@ -5,12 +5,12 @@
 
 FBZ2_BackgroundInit:
                 jsr     (AllocateObject).l
-                bne.s   loc_52FB6
+                bne.s   SKFBZ2BG_CheckBossPlaneSwap
                 move.l  #Obj_FBZOutdoorBGMotion,(a1)
 
-loc_52FB6:
+SKFBZ2BG_CheckBossPlaneSwap:
                 cmpi.w  #$2C40,(Camera_X_pos).w
-                blo.s   loc_53002
+                blo.s   SKFBZ2BG_InitNormalScrollBands
                 move.w  #$10,(Events_routine_bg).w      ; If in boss event area, set BG event
                 move.w  (a3),d0
                 move.w  d0,$70(a3)                      ; Copy top BG line to bottom BG line (I guess so the scrolling doesn't garble the screen?)
@@ -30,7 +30,7 @@ loc_52FB6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_53002:
+SKFBZ2BG_InitNormalScrollBands:
                 jsr     FBZ_Deform(pc)                  ; Normal play
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
@@ -60,37 +60,37 @@ FBZ2_BackgroundEvent_Index:
 FBZ2BGE_ChangeTopDown:
                 jsr     FBZ2_CheckBGChange(pc)
 
-loc_5303C:
+SKFBZ2BG_BeginTopDownRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_5304E
+                beq.s   SKFBZ2BG_StepTopDownRedraw
                 move.w  #$200,d1
                 moveq   #0,d2
 
-loc_5304E:
+SKFBZ2BG_StepTopDownRedraw:
                 jsr     Draw_PlaneVertTopDown(pc)
-                bpl.s   loc_530BA
+                bpl.s   SKFBZ2BG_SelectBackgroundRow
                 move.w  #4,(Events_routine_bg).w
-                bra.s   loc_530BA
+                bra.s   SKFBZ2BG_SelectBackgroundRow
 ; ---------------------------------------------------------------------------
 
 FBZ2BGE_ChangeBottomUp:
                 jsr     FBZ2_CheckBGChange(pc)
 
-loc_53060:
+SKFBZ2BG_BeginBottomUpRedraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_53072
+                beq.s   SKFBZ2BG_StepBottomUpRedraw
                 move.w  #$200,d1
                 moveq   #0,d2
 
-loc_53072:
+SKFBZ2BG_StepBottomUpRedraw:
                 jsr     Draw_PlaneVertSingleBottomUp(pc)
-                bpl.s   loc_530BA
+                bpl.s   SKFBZ2BG_SelectBackgroundRow
                 move.w  #4,(Events_routine_bg).w
-                bra.s   loc_530BA
+                bra.s   SKFBZ2BG_SelectBackgroundRow
 ; ---------------------------------------------------------------------------
 
 FBZ2BGE_Init:
@@ -103,38 +103,38 @@ FBZ2BGE_Init:
 
 FBZ2BGE_Normal:
                 tst.w   (Events_routine_fg).w
-                beq.s   loc_530AC
+                beq.s   SKFBZ2BG_CheckPlayerBeforeRedraw
                 jsr     FBZ2_CloudDeform(pc)            ; If boss event has started
                 jsr     Reset_TileOffsetPositionEff(pc)
                 move.w  #$10,(Events_routine_bg).w
-                bra.s   loc_530F0
+                bra.s   SKFBZ2BG_DrawSwappedBossPlanes
 ; ---------------------------------------------------------------------------
 
-loc_530AC:
+SKFBZ2BG_CheckPlayerBeforeRedraw:
                 cmpi.b  #6,(Player_1+routine).w
-                blo.s   loc_530B6                       ; Don't change BG if dying
+                blo.s   SKFBZ2BG_CheckBackgroundRegion  ; Don't change BG if dying
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_530B6:
+SKFBZ2BG_CheckBackgroundRegion:
                 jsr     FBZ2_CheckBGChange(pc)
 
-loc_530BA:
+SKFBZ2BG_SelectBackgroundRow:
                 move.w  (Events_bg+$04).w,d1
-                beq.s   loc_530C4
+                beq.s   SKFBZ2BG_DrawRowAndSelectBands
                 move.w  #$200,d1
 
-loc_530C4:
+SKFBZ2BG_DrawRowAndSelectBands:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #$20,d6
                 jsr     Draw_TileRow(pc)
                 lea     FBZ_InBGDeformArray(pc),a4
                 tst.w   (Events_bg+$04).w
-                beq.s   loc_530E0
+                beq.s   SKFBZ2BG_ApplyScrollBandsAndShake
                 lea     FBZ_OutBGDeformArray(pc),a4
 
-loc_530E0:
+SKFBZ2BG_ApplyScrollBandsAndShake:
                 lea     (HScroll_table).w,a5
                 jsr     ApplyDeformation(pc)
                 jmp     ShakeScreen_Setup(pc)
@@ -143,7 +143,7 @@ loc_530E0:
 FBZ2BGE_BossEvent:
                 jsr     FBZ2_CloudDeform(pc)
 
-loc_530F0:
+SKFBZ2BG_DrawSwappedBossPlanes:
                 move.w  #VRAM_Plane_A_Name_Table,d7
                 jsr     DrawBGAsYouMove(pc)             ; Draw BG on plane A
                 jsr     PlainDeformation_Flipped(pc)
@@ -153,16 +153,16 @@ loc_530F0:
                 move.w  (Camera_Y_pos_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
                 tst.w   (Events_bg+$06).w
-                beq.s   locret_5318A
+                beq.s   SKFBZ2BG_BossPlaneSwapReturn
                 clr.w   (Events_bg+$06).w               ; If boss has been loaded
                 move.w  (_unkEE9C).w,d0
                 clr.w   (_unkEE9C).w                    ; Get final Y offset and clear it
                 btst    #Status_InAir,(Player_1+status).w
-                beq.s   loc_53134
+                beq.s   SKFBZ2BG_RebaseBossArea
                 add.w   d0,(Player_1+y_pos).w           ; If player is not on ground, adjust his Y position properly
                 add.w   d0,(Player_2+y_pos).w
 
-loc_53134:
+SKFBZ2BG_RebaseBossArea:
                 add.w   d0,(Camera_Y_pos).w
                 add.w   d0,(Camera_Y_pos_copy).w
                 add.w   d0,(Camera_min_Y_pos).w
@@ -182,16 +182,16 @@ loc_53134:
                 subi.w  #$14,d0
                 moveq   #4-1,d1
 
-loc_5317C:
+SKFBZ2BG_BeginBossLayoutClearRow:
                 moveq   #$14-1,d2
 
-loc_5317E:
+SKFBZ2BG_ClearBossLayoutBytes:
                 clr.b   (a1)+                           ; Clear large area of FG, probably erasing the copied FG area from the layout mod
-                dbf     d2,loc_5317E
+                dbf     d2,SKFBZ2BG_ClearBossLayoutBytes
                 adda.w  d0,a1
-                dbf     d1,loc_5317C
+                dbf     d1,SKFBZ2BG_BeginBossLayoutClearRow
 
-locret_5318A:
+SKFBZ2BG_BossPlaneSwapReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -218,14 +218,14 @@ FBZ2_CloudDeform:
                 addi.l  #$8000,(HScroll_table+$1FC).w   ; Perform cloud movement
                 moveq   #$A-1,d3
 
-loc_531D2:
+SKFBZ2BG_WriteCloudScrollBands:
                 move.w  (a5)+,d4
                 add.l   d2,d0
                 swap    d0
                 move.w  d0,(a1,d4.w)                    ; Set up cloud speeds
                 swap    d0
                 add.l   d1,d0
-                dbf     d3,loc_531D2
+                dbf     d3,SKFBZ2BG_WriteCloudScrollBands
                 lea     (HScroll_table).w,a1
                 lea     (FBZ_cloud_addr).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d0
@@ -237,9 +237,9 @@ loc_531D2:
                 add.w   (Events_bg+$08).w,d0            ; Get effective Y, add BG motion offset to it
                 moveq   #$A-1,d1
 
-loc_53202:
+SKFBZ2BG_UpdateCloudFromScroll:
                 move.w  (a5)+,d2
-                beq.s   loc_5322E
+                beq.s   SKFBZ2BG_NextCloudHandle
                 movea.w d2,a6                           ; Load cloud address
                 move.w  $30(a6),d3                      ; Get Y position
                 add.w   d0,d3                           ; Add offset
@@ -253,8 +253,8 @@ loc_53202:
                 addi.w  #$54,d3
                 move.w  d3,$10(a6)                      ; Do the same to the X
 
-loc_5322E:
-                dbf     d1,loc_53202
+SKFBZ2BG_NextCloudHandle:
+                dbf     d1,SKFBZ2BG_UpdateCloudFromScroll
                 rts
 ; End of function FBZ2_CloudDeform
 
@@ -273,33 +273,33 @@ FBZ2_CheckBGChange_Index:
                 bra.w   FBZ_Deform
 ; ---------------------------------------------------------------------------
                 tst.w   (Events_bg+$04).w
-                bne.s   loc_53258
+                bne.s   SKFBZ2BG_TryReturnIndoors
                 cmpi.w  #$A40,d1
                 blo.w   FBZ_Deform
-                bra.s   loc_5326A
+                bra.s   SKFBZ2BG_StartOutdoorBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_53258:
+SKFBZ2BG_TryReturnIndoors:
                 cmpi.w  #$A40,d1
                 bhi.w   FBZ_Deform
                 clr.w   (Events_bg+$04).w
                 moveq   #8,d0
                 moveq   #0,d6
-                bra.s   loc_5327A
+                bra.s   SKFBZ2BG_BindIndoorPalette
 ; ---------------------------------------------------------------------------
 
-loc_5326A:
+SKFBZ2BG_StartOutdoorBottomUp:
                 st      (Events_bg+$04).w
                 moveq   #$C,d0
                 move.w  #$F0,d6
                 lea     Pal_FBZBGOutdoors(pc),a1
-                bra.s   loc_5327E
+                bra.s   SKFBZ2BG_StartVerticalRedraw
 ; ---------------------------------------------------------------------------
 
-loc_5327A:
+SKFBZ2BG_BindIndoorPalette:
                 lea     Pal_FBZBGIndoors(pc),a1
 
-loc_5327E:
+SKFBZ2BG_StartVerticalRedraw:
                 lea     (Normal_palette_line_4+$4).w,a5
                 move.l  (a1)+,(a5)+
                 move.l  (a1)+,(a5)+
@@ -314,89 +314,90 @@ loc_5327E:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,sp
                 cmpi.w  #8,(Events_routine_bg).w
-                beq.w   loc_5303C
-                bra.w   loc_53060
+                beq.w   SKFBZ2BG_BeginTopDownRedraw
+                bra.w   SKFBZ2BG_BeginBottomUpRedraw
 ; ---------------------------------------------------------------------------
 
 Obj_FBZEndBossEventControl:
-                move.l  #loc_532E0,(a0)
+                move.l  #SKFBZ2BG_WaitToMoveBossArea,(a0)
                 move.b  #$11,height_pixels(a0)
                 bset    #7,status(a0)
                 move.w  #$32B8,(Camera_max_X_pos).w     ; Set $32B8 as the X end
                 move.w  #$3C,d0
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_532DC
+                bne.s   SKFBZ2BG_SetBossAreaMinY
                 addq.w  #4,d0
 
-loc_532DC:
+SKFBZ2BG_SetBossAreaMinY:
                 move.w  d0,(Camera_min_Y_pos).w         ; Set level Y start depending on whether Tails is playing or not. I guess this is because Tails' center point is slightly lower than Sonic's
 
-loc_532E0:
+SKFBZ2BG_WaitToMoveBossArea:
                 cmpi.w  #$2E80,(Player_1+x_pos).w
-                blo.w   loc_533A4
-                move.l  #loc_532F0,(a0)                 ; If Sonic has passed $2E80 X, start moving the BG
+                blo.w   SKFBZ2BG_CalcArenaPlatformPosition
+                move.l  #SKFBZ2BG_StepBossAreaOffsets,(a0)  ; If Sonic has passed $2E80 X, start moving the BG
 
-loc_532F0:
+SKFBZ2BG_StepBossAreaOffsets:
                 st      (Background_collision_flag).w   ; Set BG collision on
                 addi.l  #$A000,(_unkEE9C).w
                 addi.l  #$7800,(_unkEE98).w             ; Move the extra BG camera by a set amount
                 cmpi.w  #$5D0,(_unkEE9C).w
-                blo.s   loc_5333A
+                blo.s   SKFBZ2BG_TryRaiseCameraMinX
                 move.w  #$5D0,(_unkEE9C).w              ; When BG has reached end point
                 move.w  #$45C,(_unkEE98).w
                 clr.b   (Background_collision_flag).w   ; Stop BG collision
-                move.l  #loc_53322,(a0)
+                move.l  #SKFBZ2BG_TryLockCameraY,(a0)
 
-loc_53322:
+SKFBZ2BG_TryLockCameraY:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   (Camera_Y_pos).w,d0
-                bne.s   loc_5333A
+                bne.s   SKFBZ2BG_TryRaiseCameraMinX
                 move.w  d0,(Camera_max_Y_pos).w         ; Lock screen when camera has scrolled as high as possible
                 move.w  d0,(Camera_target_max_Y_pos).w
-                move.l  #loc_5333A,(a0)
+                move.l  #SKFBZ2BG_TryRaiseCameraMinX,(a0)
 
-loc_5333A:
+SKFBZ2BG_TryRaiseCameraMinX:
                 cmpi.w  #$280,(Player_1+y_pos).w
-                bhs.s   loc_53348
+                bhs.s   SKFBZ2BG_TryRefreshLockedBossFg
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w  ; If player is above $280 Y then lock screen X as you move
 
-loc_53348:
+SKFBZ2BG_TryRefreshLockedBossFg:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                bne.s   loc_533A4
+                bne.s   SKFBZ2BG_CalcArenaPlatformPosition
                 move.w  (Camera_max_X_pos).w,d0
                 cmp.w   (Camera_min_X_pos).w,d0
-                bne.s   loc_533A4
+                bne.s   SKFBZ2BG_CalcArenaPlatformPosition
                 move.w  #$F0,(Draw_delayed_position).w  ; When the screen is completely locked, start proper Screen Events
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w        ; Next screen event
-                move.l  #loc_53372,(a0)
+                move.l  #SKFBZ2BG_TrySpawnBossAfterRefresh,(a0)
 
-loc_53372:
+SKFBZ2BG_TrySpawnBossAfterRefresh:
                 cmpi.w  #$C,(Events_routine_fg).w
-                bne.s   loc_533A4
+                bne.s   SKFBZ2BG_CalcArenaPlatformPosition
                 jsr     (AllocateObject).l
-                bne.s   loc_53388                       ; When screen event has finished, load the boss
+                bne.s   SKFBZ2BG_FinishBossAreaSetup    ; When screen event has finished, load the boss
                 move.l  #Obj_FBZEndBoss,(a1)
 
-loc_53388:
+; Complete the arena setup even when the boss object fails to allocate
+SKFBZ2BG_FinishBossAreaSetup:
                 clr.w   (Screen_shake_flag).w           ; Stop shaking
                 st      (Events_bg+$06).w               ; Set variable when boss has loaded
                 move.w  #$31C0,d0
                 move.w  #$31C0,d4
                 move.w  #$690,d1
-                move.l  #loc_533A4,(a0)
-                bra.s   loc_533B8
+                move.l  #SKFBZ2BG_CalcArenaPlatformPosition,(a0)
+                bra.s   SKFBZ2BG_PlaceArenaPlatformAndSolid
 ; ---------------------------------------------------------------------------
 
-loc_533A4:
+SKFBZ2BG_CalcArenaPlatformPosition:
                 move.w  x_pos(a0),d4
                 move.w  #$31C0,d0
                 add.w   (_unkEE98).w,d0
                 move.w  #$690,d1
                 sub.w   (_unkEE9C).w,d1
 
-loc_533B8:
+SKFBZ2BG_PlaceArenaPlatformAndSolid:
                 move.w  d0,x_pos(a0)
                 move.w  d1,y_pos(a0)
                 move.w  #$4C0,d1
@@ -423,10 +424,10 @@ Obj_FBZBossPillarMain:
                 move.w  d4,d1
                 subi.w  #$200,d0
                 tst.w   $30(a0)
-                beq.s   loc_5341E
+                beq.s   SKFBZ2BG_CheckPillarActivation
                 addi.w  #$28,d1
 
-loc_5341E:
+SKFBZ2BG_CheckPillarActivation:
                 move.w  #$580,d5
                 sub.w   (_unkEE9C).w,d5                 ; Get proper Y offset
                 move.w  d5,d2
@@ -439,34 +440,34 @@ loc_5341E:
                 lea     (Player_2).w,a1
                 bsr.s   FBZBossPillar_CheckPlayerPos
                 tst.w   $30(a0)
-                beq.s   loc_53456
+                beq.s   SKFBZ2BG_LowerInactivePillar
                 cmpi.w  #$40,$2E(a0)                    ; If player is in range, increase pillar offset
-                bhs.s   loc_5346A
+                bhs.s   SKFBZ2BG_SetPillarHeight
                 addq.w  #8,$2E(a0)
-                bra.s   loc_5346A
+                bra.s   SKFBZ2BG_SetPillarHeight
 ; ---------------------------------------------------------------------------
 
-loc_53456:
+SKFBZ2BG_LowerInactivePillar:
                 tst.w   $2E(a0)
-                beq.s   loc_5346A
+                beq.s   SKFBZ2BG_SetPillarHeight
                 subq.w  #8,$2E(a0)                      ; If player is not in range, decrease pillar offset
-                bne.s   loc_5346A
+                bne.s   SKFBZ2BG_SetPillarHeight
                 moveq   #signextendB(sfx_SpikeBalls),d0  ; Play sound only when pillar hits ground
                 jsr     (Play_SFX).l
 
-loc_5346A:
+SKFBZ2BG_SetPillarHeight:
                 sub.w   $2E(a0),d5
                 move.w  d5,y_pos(a0)                    ; Subtract Y from offset and place it in sprite Y
                 lea     sub2_x_pos(a0),a1
                 addi.w  #$80,d5
                 moveq   #1,d0
 
-loc_5347C:
+SKFBZ2BG_PlacePillarSpritesAndDraw:
                 move.w  d4,(a1)
                 move.w  d5,sub2_y_pos-sub2_x_pos(a1)
                 subi.w  #$100,d5                        ; Set the sprite positions of each pillar sprite
                 addq.w  #6,a1
-                dbf     d0,loc_5347C
+                dbf     d0,SKFBZ2BG_PlacePillarSpritesAndDraw
                 moveq   #$2B,d1
                 move.w  #$100,d2
                 move.w  #$100,d3

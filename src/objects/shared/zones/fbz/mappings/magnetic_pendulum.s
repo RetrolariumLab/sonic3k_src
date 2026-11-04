@@ -1,22 +1,22 @@
 ; Data owner: objects/shared/zones/fbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FBZMagneticPendulum_:
-                dc.w    word_3D9B6-Map_FBZMagneticPendulum_
-                dc.w    word_3D9D0-Map_FBZMagneticPendulum_
-                dc.w    word_3D9EA-Map_FBZMagneticPendulum_
-                dc.w    word_3D9F2-Map_FBZMagneticPendulum_
-word_3D9B6:     dc.w    4
+                dc.w    FBZMagneticPendulumSK_MapSlot00-Map_FBZMagneticPendulum_
+                dc.w    FBZMagneticPendulumSK_MapSlot01-Map_FBZMagneticPendulum_
+                dc.w    FBZMagneticPendulumSK_MapSlot02-Map_FBZMagneticPendulum_
+                dc.w    FBZMagneticPendulumSK_MapSlot03-Map_FBZMagneticPendulum_
+FBZMagneticPendulumSK_MapSlot00:    dc.w    4
                 dc.b    $F0,   7,   0,   0, $FF, $F0
                 dc.b    $F0,   7,   8,   0,   0,   0
                 dc.b    0,   1,   0, $14, $FF, $F8
                 dc.b    0,   1,   8, $14,   0,   0
-word_3D9D0:     dc.w    4
+FBZMagneticPendulumSK_MapSlot01:    dc.w    4
                 dc.b    $F0,   7,   0,   0, $FF, $F0
                 dc.b    $F0,   7,   8,   0,   0,   0
                 dc.b    $F8,   1,   0, $14, $FF, $F0
                 dc.b    $F8,   1,   8, $14, $FF, $F8
-word_3D9EA:     dc.w    1
+FBZMagneticPendulumSK_MapSlot02:    dc.w    1
                 dc.b    $F8,   5,   0,   8, $FF, $F8
-word_3D9F2:     dc.w    2
+FBZMagneticPendulumSK_MapSlot03:    dc.w    2
                 dc.b    $F0,   7,   0,  $C, $FF, $F0
                 dc.b    $F0,   7,   8,  $C,   0,   0

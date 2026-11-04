@@ -28,58 +28,58 @@ Obj_FBZFlamethrower:
                 move.w  #$10,(a2)+
                 move.b  #1,mapping_frame(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_3CCFA
+                bpl.s   SKFBZFlame_ChooseNozzleLayout
                 move.b  #3,mapping_frame(a0)
 
-loc_3CCFA:
+SKFBZFlame_ChooseNozzleLayout:
                 andi.b  #$40,d0
-                beq.s   loc_3CD26
+                beq.s   SKFBZFlame_StartRotatingEmitter
                 move.w  #2,mainspr_childsprites(a0)
                 btst    #0,status(a0)
-                beq.s   loc_3CD1C
+                beq.s   SKFBZFlame_StartSideEmitter
                 lea     sub2_x_pos(a0),a2
                 subi.w  #$10,(a2)
                 move.b  #$10,sub2_mapframe-sub2_x_pos(a2)
 
-loc_3CD1C:
-                move.l  #loc_3CDB0,(a0)
-                bra.w   loc_3CDB0
+SKFBZFlame_StartSideEmitter:
+                move.l  #SKFBZFlame_TickSideEmitter,(a0)
+                bra.w   SKFBZFlame_TickSideEmitter
 ; ---------------------------------------------------------------------------
 
-loc_3CD26:
-                move.l  #loc_3CD2C,(a0)
+SKFBZFlame_StartRotatingEmitter:
+                move.l  #SKFBZFlame_TickRotatingEmitter,(a0)
 
-loc_3CD2C:
+SKFBZFlame_TickRotatingEmitter:
                 cmpi.b  #2,mapping_frame(a0)
-                beq.w   loc_3CD8E
+                beq.w   SKFBZFlame_PlaceNozzlesAndCharge
                 subq.b  #1,$34(a0)
-                bpl.s   loc_3CD4C
+                bpl.s   SKFBZFlame_CheckRotatingFireFrame
                 move.b  #2,$34(a0)
                 addq.b  #1,$35(a0)
                 andi.b  #3,$35(a0)
 
-loc_3CD4C:
+SKFBZFlame_CheckRotatingFireFrame:
                 move.b  (Level_frame_counter+1).w,d0
                 move.b  d0,d1
                 andi.b  #3,d0
-                bne.w   loc_3CD8E
+                bne.w   SKFBZFlame_PlaceNozzlesAndCharge
                 andi.b  #$F,d1
-                bne.s   loc_3CD6E
+                bne.s   SKFBZFlame_TrySpawnOppositeFlames
                 tst.b   render_flags(a0)
-                bpl.s   loc_3CD6E
+                bpl.s   SKFBZFlame_TrySpawnOppositeFlames
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_3CD6E:
+SKFBZFlame_TrySpawnOppositeFlames:
                 tst.b   render_flags(a0)
-                bpl.w   loc_3CD8E
+                bpl.w   SKFBZFlame_PlaceNozzlesAndCharge
                 subq.b  #4,$2E(a0)
                 andi.b  #$7F,$2E(a0)
                 bsr.w   SpawnFbzFlamethrowerParticle
                 ori.b   #$80,$2E(a0)
                 bsr.w   SpawnFbzFlamethrowerParticle
 
-loc_3CD8E:
+SKFBZFlame_PlaceNozzlesAndCharge:
                 bsr.w   PositionFbzFlamethrowerRotatingNozzles
                 move.w  #$1B,d1
                 move.w  #8,d2
@@ -90,32 +90,33 @@ loc_3CD8E:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3CDB0:
+SKFBZFlame_TickSideEmitter:
                 cmpi.b  #2,mapping_frame(a0)
-                beq.w   loc_3CDFC
+                beq.w   SKFBZFlame_ResolveSideSolidAndDraw
                 subq.b  #1,$34(a0)
-                bpl.s   loc_3CDD0
+                bpl.s   SKFBZFlame_CheckSideFireFrame
                 move.b  #2,$34(a0)
                 addq.b  #1,$35(a0)
                 andi.b  #3,$35(a0)
 
-loc_3CDD0:
+; The periodic sound can play offscreen. Only the particle spawn tests visibility
+SKFBZFlame_CheckSideFireFrame:
                 move.b  (Level_frame_counter+1).w,d0
                 move.b  d0,d1
                 andi.b  #3,d0
-                bne.w   loc_3CDFC
+                bne.w   SKFBZFlame_ResolveSideSolidAndDraw
                 andi.b  #$F,d1
-                bne.s   loc_3CDEC
+                bne.s   SKFBZFlame_TrySpawnSideFlame
                 moveq   #signextendB(sfx_FlamethrowerLoud),d0
                 jsr     (Play_SFX).l
 
-loc_3CDEC:
+SKFBZFlame_TrySpawnSideFlame:
                 tst.b   render_flags(a0)
-                bpl.w   loc_3CDFC
+                bpl.w   SKFBZFlame_ResolveSideSolidAndDraw
                 addq.b  #2,$2E(a0)
                 bsr.w   SpawnFbzFlamethrowerParticle
 
-loc_3CDFC:
+SKFBZFlame_ResolveSideSolidAndDraw:
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #9,d3
@@ -128,41 +129,41 @@ loc_3CDFC:
 
 UpdateFbzFlamethrowerStandingCharge:
                 tst.b   subtype(a0)
-                bmi.s   locret_3CE42
+                bmi.s   SKFBZFlame_ChargeReturn
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_3CE44
+                beq.s   SKFBZFlame_ResetCharge
                 tst.w   $30(a0)
-                bne.s   loc_3CE52
+                bne.s   SKFBZFlame_TickChargeAndTryP1
                 move.w  #$3C,$30(a0)
                 move.b  #2,mapping_frame(a0)
                 move.b  #0,$2E(a0)
 
-locret_3CE42:
+SKFBZFlame_ChargeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3CE44:
+SKFBZFlame_ResetCharge:
                 move.w  #0,$30(a0)
                 move.b  #1,mapping_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3CE52:
+SKFBZFlame_TickChargeAndTryP1:
                 subq.w  #1,$30(a0)
-                bne.s   locret_3CE42
+                bne.s   SKFBZFlame_ChargeReturn
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_3CE68
+                beq.s   SKFBZFlame_TryLaunchP2
                 bsr.w   LaunchPlayerFromFbzSpringSurface
 
-loc_3CE68:
+SKFBZFlame_TryLaunchP2:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   locret_3CE78
+                beq.s   SKFBZFlame_LaunchReturn
                 bsr.w   LaunchPlayerFromFbzSpringSurface
 
-locret_3CE78:
+SKFBZFlame_LaunchReturn:
                 rts
 ; End of function UpdateFbzFlamethrowerStandingCharge
 
@@ -181,13 +182,13 @@ PositionFbzFlamethrowerRotatingNozzles:
                 add.w   d2,d0
                 move.w  d0,sub4_x_pos-sub2_x_pos(a2)
                 cmpi.b  #-$40,$2E(a0)
-                blo.s   loc_3CEB2
+                blo.s   SKFBZFlame_SwapOuterNozzleFrames
                 move.b  #0,sub2_mapframe-sub2_x_pos(a2)
                 move.b  #$10,sub4_mapframe-sub2_x_pos(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3CEB2:
+SKFBZFlame_SwapOuterNozzleFrames:
                 move.b  #$10,sub2_mapframe-sub2_x_pos(a2)
                 move.b  #0,sub4_mapframe-sub2_x_pos(a2)
                 rts
@@ -197,8 +198,8 @@ loc_3CEB2:
 
 SpawnFbzFlamethrowerParticle:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_3CF4A
-                move.l  #loc_3CF90,(a1)
+                bne.w   SKFBZFlame_FlameSpawnReturn
+                move.l  #SKFBZFlame_TickFlameStage,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 subq.w  #4,y_pos(a1)
@@ -211,12 +212,12 @@ SpawnFbzFlamethrowerParticle:
                 move.b  #$98,collision_flags(a1)
                 bset    #4,shield_reaction(a1)
                 btst    #6,subtype(a0)
-                bne.s   loc_3CF4C
+                bne.s   SKFBZFlame_CalcSideFlameSpeed
                 move.b  $2E(a0),d0
-                bpl.s   loc_3CF24
+                bpl.s   SKFBZFlame_InitRotatingFlame
                 move.w  #$80,priority(a1)
 
-loc_3CF24:
+SKFBZFlame_InitRotatingFlame:
                 jsr     (GetSineCosine).l
                 move.w  d1,d0
                 asl.w   #2,d1
@@ -227,11 +228,11 @@ loc_3CF24:
                 move.b  #4,anim_frame_timer(a1)
                 move.b  #$C,anim(a1)
 
-locret_3CF4A:
+SKFBZFlame_FlameSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3CF4C:
+SKFBZFlame_CalcSideFlameSpeed:
                 move.b  $2E(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d1,d2
@@ -241,11 +242,11 @@ loc_3CF4C:
                 move.w  d1,x_vel(a1)
                 addi.w  #$10,x_pos(a1)
                 btst    #0,status(a0)
-                beq.s   loc_3CF7C
+                beq.s   SKFBZFlame_InitSideFlameAnim
                 neg.w   x_vel(a1)
                 subi.w  #$20,x_pos(a1)
 
-loc_3CF7C:
+SKFBZFlame_InitSideFlameAnim:
                 move.b  $35(a0),anim_frame(a1)
                 move.b  #4,anim_frame_timer(a1)
                 move.b  #$C,anim(a1)
@@ -254,14 +255,14 @@ loc_3CF7C:
 
 ; ---------------------------------------------------------------------------
 
-loc_3CF90:
+SKFBZFlame_TickFlameStage:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_3CFA2
+                bpl.s   SKFBZFlame_AnimateAndMoveFlame
                 move.b  #5,anim_frame_timer(a0)
                 subq.b  #4,anim(a0)
-                beq.s   loc_3CFCA
+                beq.s   SKFBZFlame_DeleteSpentFlame
 
-loc_3CFA2:
+SKFBZFlame_AnimateAndMoveFlame:
                 addq.b  #1,anim_frame(a0)
                 andi.b  #3,anim_frame(a0)
                 move.b  anim(a0),d0
@@ -272,7 +273,7 @@ loc_3CFA2:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3CFCA:
+SKFBZFlame_DeleteSpentFlame:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZFlameThrower:

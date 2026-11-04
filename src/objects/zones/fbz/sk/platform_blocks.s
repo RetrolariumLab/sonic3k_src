@@ -2,7 +2,7 @@
 ; Responsibility: Platform block placement, motion, player riding and mapping resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_3C344:
+SKFBZPlatBlocks_SubtypeDimensions:
                 dc.b    $10, $10
                 dc.b    $20, $10
                 dc.b    $30, $10
@@ -16,8 +16,8 @@ Obj_FBZPlatformBlocks:
                 andi.w  #7,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.b  byte_3C344(pc,d0.w),width_pixels(a0)
-                move.b  byte_3C344+1(pc,d0.w),height_pixels(a0)
+                move.b  SKFBZPlatBlocks_SubtypeDimensions(pc,d0.w),width_pixels(a0)
+                move.b  SKFBZPlatBlocks_SubtypeDimensions+1(pc,d0.w),height_pixels(a0)
                 move.l  #Map_FBZPlatformBlocks,mappings(a0)
                 move.w  #make_art_tile(ArtTile_FBZMisc+$94,2,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
@@ -27,45 +27,45 @@ Obj_FBZPlatformBlocks:
                 andi.w  #$F,d0
                 lsl.w   #4,d0
                 move.w  d0,$30(a0)
-                bne.s   loc_3C3A2
-                move.l  #loc_3C3EE,(a0)
-                bra.w   loc_3C3EE
+                bne.s   SKFBZPlatBlocks_StartHeightDrivenMotion
+                move.l  #SKFBZPlatBlocks_ResolveSolidAndDraw,(a0)
+                bra.w   SKFBZPlatBlocks_ResolveSolidAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3C3A2:
-                move.l  #loc_3C3A8,(a0)
+SKFBZPlatBlocks_StartHeightDrivenMotion:
+                move.l  #SKFBZPlatBlocks_TryExtendForP1,(a0)
 
-loc_3C3A8:
+SKFBZPlatBlocks_TryExtendForP1:
                 move.w  (Player_1+y_pos).w,d0
                 sub.w   y_pos(a0),d0
-                bcs.s   loc_3C3C8
+                bcs.s   SKFBZPlatBlocks_TryRetractForP1
                 cmpi.w  #$20,d0
-                blt.s   loc_3C3D8
+                blt.s   SKFBZPlatBlocks_SignOffsetByFacing
                 move.w  $30(a0),d1
                 cmp.w   $32(a0),d1
-                beq.s   loc_3C3D8
+                beq.s   SKFBZPlatBlocks_SignOffsetByFacing
                 addq.w  #8,$32(a0)
-                bra.s   loc_3C3D8
+                bra.s   SKFBZPlatBlocks_SignOffsetByFacing
 ; ---------------------------------------------------------------------------
 
-loc_3C3C8:
+SKFBZPlatBlocks_TryRetractForP1:
                 cmpi.w  #-$28,d0
-                bge.s   loc_3C3D8
+                bge.s   SKFBZPlatBlocks_SignOffsetByFacing
                 tst.w   $32(a0)
-                beq.s   loc_3C3D8
+                beq.s   SKFBZPlatBlocks_SignOffsetByFacing
                 subq.w  #8,$32(a0)
 
-loc_3C3D8:
+SKFBZPlatBlocks_SignOffsetByFacing:
                 move.w  $32(a0),d0
                 btst    #0,status(a0)
-                beq.s   loc_3C3E6
+                beq.s   SKFBZPlatBlocks_ApplyOffsetFromBase
                 neg.w   d0
 
-loc_3C3E6:
+SKFBZPlatBlocks_ApplyOffsetFromBase:
                 add.w   $44(a0),d0
                 move.w  d0,x_pos(a0)
 
-loc_3C3EE:
+SKFBZPlatBlocks_ResolveSolidAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1

@@ -15,17 +15,17 @@ Obj_FBZWallMissile:
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
                 move.w  d0,$30(a0)
-                move.l  #loc_3C828,(a0)
+                move.l  #SKFBZWallMissile_TickVisibleFireDelay,(a0)
 
-loc_3C828:
+SKFBZWallMissile_TickVisibleFireDelay:
                 tst.b   render_flags(a0)
-                bpl.w   loc_3C8B0
+                bpl.w   SKFBZWallMissile_DrawIdleLauncher
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_3C8B0
+                bpl.s   SKFBZWallMissile_DrawIdleLauncher
                 move.w  $30(a0),$2E(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3C89C
-                move.l  #loc_3C8D4,(a1)
+                bne.w   SKFBZWallMissile_BeginLauncherRecoil
+                move.l  #SKFBZWallMissile_AnimateMissile,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -37,52 +37,52 @@ loc_3C828:
                 move.b  #$9B,collision_flags(a1)
                 move.w  #$400,x_vel(a1)
                 btst    #0,status(a0)
-                bne.s   loc_3C894
+                bne.s   SKFBZWallMissile_PlayFireSound
                 neg.w   x_vel(a1)
 
-loc_3C894:
+SKFBZWallMissile_PlayFireSound:
                 moveq   #signextendB(sfx_LevelProjectile),d0
                 jsr     (Play_SFX).l
 
-loc_3C89C:
-                move.l  #loc_3C8B6,(a0)
+SKFBZWallMissile_BeginLauncherRecoil:
+                move.l  #SKFBZWallMissile_StepLauncherRecoil,(a0)
                 move.b  #7,mapping_frame(a0)
                 move.b  #$1F,anim_frame_timer(a0)
-                bra.s   loc_3C8B6
+                bra.s   SKFBZWallMissile_StepLauncherRecoil
 ; ---------------------------------------------------------------------------
 
-loc_3C8B0:
+SKFBZWallMissile_DrawIdleLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3C8B6:
+SKFBZWallMissile_StepLauncherRecoil:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_3C8CE
+                bpl.s   SKFBZWallMissile_DrawRecoilFrame
                 move.b  #7,anim_frame_timer(a0)
                 subq.b  #1,mapping_frame(a0)
-                bne.s   loc_3C8CE
-                move.l  #loc_3C828,(a0)
+                bne.s   SKFBZWallMissile_DrawRecoilFrame
+                move.l  #SKFBZWallMissile_TickVisibleFireDelay,(a0)
 
-loc_3C8CE:
+SKFBZWallMissile_DrawRecoilFrame:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3C8D4:
+SKFBZWallMissile_AnimateMissile:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
-                bne.s   loc_3C8E8
+                bne.s   SKFBZWallMissile_MoveVisibleMissile
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #1,mapping_frame(a0)
 
-loc_3C8E8:
+SKFBZWallMissile_MoveVisibleMissile:
                 tst.b   render_flags(a0)
-                bpl.s   loc_3C900
+                bpl.s   SKFBZWallMissile_DeleteHiddenMissile
                 jsr     (MoveSprite2).l
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3C900:
+SKFBZWallMissile_DeleteHiddenMissile:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_FBZWallMissile:

@@ -1,10 +1,10 @@
 ; Data owner: objects/shared/zones/fbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FBZCollapsingBridge_:
-                dc.w    word_21094-Map_FBZCollapsingBridge_
-                dc.w    word_210F6-Map_FBZCollapsingBridge_
-                dc.w    word_211B8-Map_FBZCollapsingBridge_
-word_21094:     dc.w    $10
+                dc.w    FBZCollapsingBridgeSK_MapSlot00-Map_FBZCollapsingBridge_
+                dc.w    FBZCollapsingBridgeSK_MapSlot01-Map_FBZCollapsingBridge_
+                dc.w    FBZCollapsingBridgeSK_MapSlot02-Map_FBZCollapsingBridge_
+FBZCollapsingBridgeSK_MapSlot00:    dc.w    $10
                 dc.b    $F0,  $D,   0,   0, $FF, $C0
                 dc.b    $F0,  $D,   0,   0, $FF, $E0
                 dc.b    $F0,  $D,   0,   0,   0,   0
@@ -21,7 +21,7 @@ word_21094:     dc.w    $10
                 dc.b    $20,  $D,   8, $10, $FF, $E0
                 dc.b    $20,  $D,   0, $10,   0,   0
                 dc.b    $20,  $D,   8, $10,   0, $20
-word_210F6:     dc.w    $20
+FBZCollapsingBridgeSK_MapSlot01:    dc.w    $20
                 dc.b    $F0,   5,   0,   0, $FF, $C0
                 dc.b    $F0,   5,   0,   4, $FF, $D0
                 dc.b    $F0,   5,   0,   0, $FF, $E0
@@ -54,7 +54,7 @@ word_210F6:     dc.w    $20
                 dc.b    $20,   5,   0, $14,   0, $10
                 dc.b    $20,   5,   8, $14,   0, $20
                 dc.b    $20,   5,   8, $10,   0, $30
-word_211B8:     dc.w    $20
+FBZCollapsingBridgeSK_MapSlot02:    dc.w    $20
                 dc.b    $F0,   5,   0,   4,   0, $30
                 dc.b    $F0,   5,   0,   0, $FF, $C0
                 dc.b    $F0,   5,   0,   4, $FF, $D0

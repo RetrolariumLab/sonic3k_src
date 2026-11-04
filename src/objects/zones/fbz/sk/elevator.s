@@ -4,15 +4,15 @@
 ; ---------------------------------------------------------------------------
 
 Obj_FBZElevator:
-                move.l  #loc_3CA20,(a0)
+                move.l  #SKFBZElevator_TickAndTrySpawn,(a0)
 
-loc_3CA20:
+SKFBZElevator_TickAndTrySpawn:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_3CA8C
+                bpl.s   SKFBZElevator_CullSpawner
                 move.w  #$5F,$30(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3CA8C
-                move.l  #loc_3CA92,(a1)
+                bne.w   SKFBZElevator_CullSpawner
+                move.l  #SKFBZElevator_TickPlatformLifetime,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  #Map_FBZElevator,mappings(a1)
@@ -27,34 +27,34 @@ loc_3CA20:
                 move.w  d0,$30(a1)
                 move.w  #1,y_vel(a1)
                 btst    #0,status(a0)
-                bne.s   loc_3CA8C
+                bne.s   SKFBZElevator_CullSpawner
                 neg.w   y_vel(a1)
 
-loc_3CA8C:
+SKFBZElevator_CullSpawner:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_3CA92:
+SKFBZElevator_TickPlatformLifetime:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_3CA9E
+                bpl.s   SKFBZElevator_MoveAndResolveSolid
                 move.w  #$7F00,x_pos(a0)
 
-loc_3CA9E:
+SKFBZElevator_MoveAndResolveSolid:
                 move.w  y_vel(a0),d0
                 add.w   d0,y_pos(a0)
                 move.w  #$3B,d1
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
-                lea     (byte_3CAD0).l,a2
+                lea     (SKFBZElevator_SurfaceHeights).l,a2
                 jsr     (CollidePlayersWithHeightProfileSolid).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_3CACA
+                bmi.s   SKFBZElevator_DrawAndCull
                 jsr     (CheckPlayerReleaseFromObj).l
 
-loc_3CACA:
+SKFBZElevator_DrawAndCull:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-byte_3CAD0:
+SKFBZElevator_SurfaceHeights:
                 dc.b    $10, $10, $10, $10, $10, $10, $10, $11, $12, $12, $13, $13, $13, $14, $14, $14, $15, $15, $15, $16
                 dc.b    $16, $16, $17, $17, $17, $18, $18, $18, $19, $19, $19, $1A, $1A, $1A, $1B, $1B, $1B, $1C, $1C, $1C
                 dc.b    $1D, $1D, $1D, $1E, $1E, $1E, $1F, $1F, $1F, $20, $20, $20, $21, $21, $21, $21, $21, $21, $21, $21

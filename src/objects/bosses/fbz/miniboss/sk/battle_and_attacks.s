@@ -114,7 +114,7 @@ loc_6EFB2:
                 jsr     (Obj_EndSignControl).l
                 lea     ChildObjDat_6FAB0(pc),a2
                 jsr     (CreateChild6_Simple).l
-                lea     (ChildObjDat_89ED0).l,a2
+                lea     (FBZEggPrisonSK_FiveNormalAnimalRecords).l,a2
                 jsr     (CreateChild1_Normal).l
                 lea     (SKCapsule_FiveReleasedFragmentChildList).l,a2
                 jmp     (CreateChild1_Normal).l

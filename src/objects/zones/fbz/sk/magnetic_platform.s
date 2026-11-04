@@ -19,8 +19,8 @@ Obj_FBZMagneticPlatform:
                 subi.w  #$20,d1
                 move.w  d1,$2E(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_3B3BA
-                move.l  #loc_3B482,(a1)
+                bne.w   SKFBZMagPlat_StartFalling
+                move.l  #SKFBZMagPlat_DrawChainActor,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -39,69 +39,71 @@ Obj_FBZMagneticPlatform:
                 move.w  mainspr_childsprites(a1),d0
                 subq.w  #1,d0
 
-loc_3B3A2:
+SKFBZMagPlat_InitChainSprites:
                 move.w  x_pos(a0),(a2)+
                 move.w  d1,(a2)+
                 move.w  #1,(a2)+
-                dbf     d0,loc_3B3A2
+                dbf     d0,SKFBZMagPlat_InitChainSprites
                 move.w  #3,$1C(a1)
                 move.w  a1,$3C(a0)
 
-loc_3B3BA:
-                move.l  #loc_3B3C0,(a0)
+; The platform starts moving even when the chain actor could not be allocated
+SKFBZMagPlat_StartFalling:
+                move.l  #SKFBZMagPlat_FallAndCheckFloor,(a0)
 
-loc_3B3C0:
+SKFBZMagPlat_FallAndCheckFloor:
                 jsr     (MoveSprite2).l
                 addi.w  #$58,y_vel(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_3B3EC
+                bpl.s   SKFBZMagPlat_TrySwitchToRising
                 add.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 move.b  #$10,y_radius(a0)
-                move.l  #loc_3B3EC,(a0)
+                move.l  #SKFBZMagPlat_TrySwitchToRising,(a0)
 
-loc_3B3EC:
+SKFBZMagPlat_TrySwitchToRising:
                 tst.b   (_unkF7C1).w
-                beq.s   loc_3B3F8
-                move.l  #loc_3B3FA,(a0)
+                beq.s   SKFBZMagPlat_FinishFallUpdate
+                move.l  #SKFBZMagPlat_RiseAndCheckHeight,(a0)
 
-loc_3B3F8:
-                bra.s   loc_3B462
+SKFBZMagPlat_FinishFallUpdate:
+                bra.s   SKFBZMagPlat_RebuildChainAndResolveSolid
 ; ---------------------------------------------------------------------------
 
-loc_3B3FA:
+SKFBZMagPlat_RiseAndCheckHeight:
                 jsr     (MoveSprite2).l
                 subi.w  #$18,y_vel(a0)
                 move.w  $46(a0),d0
                 sub.w   y_pos(a0),d0
                 cmp.w   $2E(a0),d0
-                blo.s   loc_3B436
+                blo.s   SKFBZMagPlat_TryStopAtCeiling
                 move.w  $46(a0),d0
                 sub.w   $2E(a0),d0
                 move.w  d0,y_pos(a0)
                 move.w  #0,y_vel(a0)
-                move.l  #loc_3B450,(a0)
+                move.l  #SKFBZMagPlat_WaitForMagnetOff,(a0)
                 moveq   #signextendB(sfx_ChainTension),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_3B450
+                bra.s   SKFBZMagPlat_WaitForMagnetOff
 ; ---------------------------------------------------------------------------
 
-loc_3B436:
+SKFBZMagPlat_TryStopAtCeiling:
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   loc_3B450
+                bpl.s   SKFBZMagPlat_WaitForMagnetOff
                 sub.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
-                move.l  #loc_3B450,(a0)
+                move.l  #SKFBZMagPlat_WaitForMagnetOff,(a0)
 
-loc_3B450:
+SKFBZMagPlat_WaitForMagnetOff:
                 tst.b   (_unkF7C1).w
-                bne.s   loc_3B462
+                bne.s   SKFBZMagPlat_RebuildChainAndResolveSolid
                 move.b  #$F,y_radius(a0)
-                move.l  #loc_3B3C0,(a0)
+                move.l  #SKFBZMagPlat_FallAndCheckFloor,(a0)
 
-loc_3B462:
+; The chain update uses the stored child pointer directly
+SKFBZMagPlat_RebuildChainAndResolveSolid:
                 bsr.w   BuildFbzMagneticPlatformChainSprites
                 move.w  #$23,d1
                 move.w  #8,d2
@@ -111,7 +113,7 @@ loc_3B462:
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_3B482:
+SKFBZMagPlat_DrawChainActor:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,27 +130,27 @@ BuildFbzMagneticPlatformChainSprites:
                 lsr.w   #5,d6
                 addq.w  #1,d6
                 cmpi.w  #8,d6
-                blo.s   loc_3B4B2
+                blo.s   SKFBZMagPlat_SetChainSpriteCount
                 moveq   #8,d6
 
-loc_3B4B2:
+SKFBZMagPlat_SetChainSpriteCount:
                 move.w  d6,mainspr_childsprites(a1)
                 subq.w  #2,d6
-                bcs.s   locret_3B4DC
+                bcs.s   SKFBZMagPlat_ChainBuildReturn
 
-loc_3B4BA:
+SKFBZMagPlat_PlaceChainSegments:
                 move.w  d2,(a2)+
                 move.w  #2,(a2)+
                 addq.w  #2,a2
                 addi.w  #$20,d2
-                dbf     d6,loc_3B4BA
+                dbf     d6,SKFBZMagPlat_PlaceChainSegments
                 subq.w  #8,d0
                 andi.w  #$1F,d0
                 cmpi.w  #$10,d0
-                bhs.s   locret_3B4DC
+                bhs.s   SKFBZMagPlat_ChainBuildReturn
                 move.w  #1,-4(a2)
 
-locret_3B4DC:
+SKFBZMagPlat_ChainBuildReturn:
                 rts
 ; End of function BuildFbzMagneticPlatformChainSprites
 

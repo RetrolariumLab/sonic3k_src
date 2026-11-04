@@ -5,15 +5,15 @@
 
 Obj_FBZChainLink:
                 move.b  subtype(a0),d0
-                bpl.s   loc_3A7E6
+                bpl.s   SKFBZChain_InitVerticalChain
                 andi.w  #$3F,d0
                 lsl.w   #4,d0
                 move.w  d0,$3E(a0)
-                move.l  #loc_3AA5A,(a0)
-                bra.w   loc_3AA5A
+                move.l  #SKFBZChain_UpdateHorizontalRiders,(a0)
+                bra.w   SKFBZChain_UpdateHorizontalRiders
 ; ---------------------------------------------------------------------------
 
-loc_3A7E6:
+SKFBZChain_InitVerticalChain:
                 move.b  #4,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.w  #$80,priority(a0)
@@ -27,7 +27,7 @@ loc_3A7E6:
                 move.w  d0,$2E(a0)
                 move.w  #2,$3C(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_3A846
+                bpl.s   SKFBZChain_StartVerticalChain
                 move.w  $2E(a0),d0
                 move.w  d0,$3A(a0)
                 move.b  #1,$38(a0)
@@ -36,48 +36,48 @@ loc_3A7E6:
                 addq.w  #1,d0
                 move.b  d0,mapping_frame(a0)
 
-loc_3A846:
-                move.l  #loc_3A84C,(a0)
+SKFBZChain_StartVerticalChain:
+                move.l  #SKFBZChain_PickTravelByOccupancy,(a0)
 
-loc_3A84C:
+SKFBZChain_PickTravelByOccupancy:
                 tst.b   $38(a0)
-                beq.s   loc_3A85A
+                beq.s   SKFBZChain_CheckNormalPolarity
                 tst.w   $30(a0)
-                bne.s   loc_3A870
-                bra.s   loc_3A860
+                bne.s   SKFBZChain_TryRetractChain
+                bra.s   SKFBZChain_TryExtendChain
 ; ---------------------------------------------------------------------------
 
-loc_3A85A:
+SKFBZChain_CheckNormalPolarity:
                 tst.w   $30(a0)
-                beq.s   loc_3A870
+                beq.s   SKFBZChain_TryRetractChain
 
-loc_3A860:
+SKFBZChain_TryExtendChain:
                 move.w  $3A(a0),d2
                 cmp.w   $2E(a0),d2
-                beq.s   loc_3A894
+                beq.s   SKFBZChain_UpdateVerticalRiders
                 add.w   $3C(a0),d2
-                bra.s   loc_3A87A
+                bra.s   SKFBZChain_SetExtensionAndY
 ; ---------------------------------------------------------------------------
 
-loc_3A870:
+SKFBZChain_TryRetractChain:
                 move.w  $3A(a0),d2
-                beq.s   loc_3A894
+                beq.s   SKFBZChain_UpdateVerticalRiders
                 sub.w   $3C(a0),d2
 
-loc_3A87A:
+SKFBZChain_SetExtensionAndY:
                 move.w  d2,$3A(a0)
                 move.w  $46(a0),d0
                 add.w   d2,d0
                 move.w  d0,y_pos(a0)
                 move.w  d2,d0
-                beq.s   loc_3A890
+                beq.s   SKFBZChain_SetLengthFrame
                 lsr.w   #4,d0
                 addq.w  #1,d0
 
-loc_3A890:
+SKFBZChain_SetLengthFrame:
                 move.b  d0,mapping_frame(a0)
 
-loc_3A894:
+SKFBZChain_UpdateVerticalRiders:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -92,33 +92,33 @@ loc_3A894:
 
 UpdatePlayerHangingFromFbzVerticalChain:
                 tst.b   (a2)
-                beq.w   loc_3A9A6
+                beq.w   SKFBZChain_TickVerticalCooldown
                 tst.b   render_flags(a1)
-                bpl.w   loc_3A954
+                bpl.w   SKFBZChain_DropVerticalRider
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_3A954
+                bne.w   SKFBZChain_DropVerticalRider
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_3A954
+                bhs.s   SKFBZChain_DropVerticalRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_3A96E
+                beq.w   SKFBZChain_TryFaceVerticalLeft
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_3A8F8
+                beq.w   SKFBZChain_TrySetVerticalJumpLeft
                 move.b  #$3C,2(a2)
 
-loc_3A8F8:
+SKFBZChain_TrySetVerticalJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_3A904
+                beq.s   SKFBZChain_TrySetVerticalJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_3A904:
+SKFBZChain_TrySetVerticalJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3A910
+                beq.s   SKFBZChain_JumpFromVerticalChain
                 move.w  #$200,x_vel(a1)
 
-loc_3A910:
+SKFBZChain_JumpFromVerticalChain:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -133,7 +133,7 @@ loc_3A910:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A954:
+SKFBZChain_DropVerticalRider:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
@@ -142,17 +142,17 @@ loc_3A954:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A96E:
+SKFBZChain_TryFaceVerticalLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_3A97A
+                beq.s   SKFBZChain_TryFaceVerticalRight
                 bset    #0,status(a1)
 
-loc_3A97A:
+SKFBZChain_TryFaceVerticalRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3A986
+                beq.s   SKFBZChain_SyncVerticalFacingAndY
                 bclr    #Status_Facing,status(a1)
 
-loc_3A986:
+SKFBZChain_SyncVerticalFacingAndY:
                 move.b  status(a1),d0
                 andi.b  #1,d0
                 andi.b  #$FE,render_flags(a1)
@@ -162,43 +162,43 @@ loc_3A986:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A9A6:
+SKFBZChain_TickVerticalCooldown:
                 tst.b   2(a2)
-                beq.s   loc_3A9B4
+                beq.s   SKFBZChain_TryVerticalCapture
                 subq.b  #1,2(a2)
-                bne.w   locret_3AA58
+                bne.w   SKFBZChain_VerticalCaptureReturn
 
-loc_3A9B4:
+SKFBZChain_TryVerticalCapture:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_3AA58
+                bhs.w   SKFBZChain_VerticalCaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$90,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_3AA58
+                bhs.w   SKFBZChain_VerticalCaptureReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_3AA58
+                bmi.s   SKFBZChain_VerticalCaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_3AA58
+                bhs.s   SKFBZChain_VerticalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3AA58
+                bne.s   SKFBZChain_VerticalCaptureReturn
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_3AA18
+                beq.s   SKFBZChain_AttachAtVerticalEnd
                 movea.w interact(a1),a3
-                cmpi.l  #loc_3AA5A,(a3)
-                bne.s   loc_3AA18
+                cmpi.l  #SKFBZChain_UpdateHorizontalRiders,(a3)
+                bne.s   SKFBZChain_AttachAtVerticalEnd
                 move.w  a2,d0
                 sub.w   a0,d0
                 adda.w  d0,a3
                 tst.b   4(a3)
-                bne.s   locret_3AA58
+                bne.s   SKFBZChain_VerticalCaptureReturn
                 clr.b   (a3)
                 move.b  #$3C,2(a3)
 
-loc_3AA18:
+SKFBZChain_AttachAtVerticalEnd:
                 move.w  a0,interact(a1)
                 bset    #Status_OnObj,status(a1)
                 clr.w   x_vel(a1)
@@ -213,11 +213,11 @@ loc_3AA18:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_3AA58:
+SKFBZChain_VerticalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3AA5A:
+SKFBZChain_UpdateHorizontalRiders:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -233,33 +233,33 @@ loc_3AA5A:
 
 UpdatePlayerTraversingFbzHorizontalChain:
                 tst.b   (a2)
-                beq.w   loc_3AC86
+                beq.w   SKFBZChain_TickHorizontalCooldown
                 tst.b   render_flags(a1)
-                bpl.w   loc_3AB24
+                bpl.w   SKFBZChain_DropHorizontalRider
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_3AB24
+                bne.w   SKFBZChain_DropHorizontalRider
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_3AB24
+                bhs.w   SKFBZChain_DropHorizontalRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_3AB3E
+                beq.w   SKFBZChain_UpdateTraversal
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_3AAC0
+                beq.w   SKFBZChain_TrySetHorizJumpLeft
                 move.b  #$3C,2(a2)
 
-loc_3AAC0:
+SKFBZChain_TrySetHorizJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_3AACC
+                beq.s   SKFBZChain_TrySetHorizJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_3AACC:
+SKFBZChain_TrySetHorizJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3AAD8
+                beq.s   SKFBZChain_JumpFromHorizontalChain
                 move.w  #$200,x_vel(a1)
 
-loc_3AAD8:
+SKFBZChain_JumpFromHorizontalChain:
                 move.w  #-$380,y_vel(a1)
                 bset    #1,status(a1)
                 move.b  #1,jumping(a1)
@@ -272,10 +272,10 @@ loc_3AAD8:
                 move.b  #0,flip_angle(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.w  #0,interact(a1)
-                bra.w   loc_3AC26
+                bra.w   SKFBZChain_UploadTraversalTiles
 ; ---------------------------------------------------------------------------
 
-loc_3AB24:
+SKFBZChain_DropHorizontalRider:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
@@ -284,37 +284,37 @@ loc_3AB24:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3AB3E:
+SKFBZChain_UpdateTraversal:
                 tst.b   4(a2)
-                bne.s   loc_3ABBE
+                bne.s   SKFBZChain_TickTraversalStep
 
-loc_3AB44:
+SKFBZChain_TryTraverseLeft:
                 move.w  $3E(a0),d2
                 subi.w  #$10,d2
                 btst    #button_left+8,d0
-                beq.s   loc_3AB70
+                beq.s   SKFBZChain_TryTraverseRight
                 bset    #Status_Facing,status(a1)
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
                 add.w   d2,d1
-                beq.s   loc_3AB70
+                beq.s   SKFBZChain_TryTraverseRight
                 move.b  #4,4(a2)
                 move.b  #1,2(a2)
 
-loc_3AB70:
+SKFBZChain_TryTraverseRight:
                 btst    #button_right+8,d0
-                beq.s   loc_3AB9A
+                beq.s   SKFBZChain_SyncHorizFacingAndY
                 bclr    #Status_Facing,status(a1)
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
                 add.w   d2,d1
                 add.w   d2,d2
                 cmp.w   d2,d1
-                beq.w   loc_3AB9A
+                beq.w   SKFBZChain_SyncHorizFacingAndY
                 move.b  #4,4(a2)
                 move.b  #0,2(a2)
 
-loc_3AB9A:
+SKFBZChain_SyncHorizFacingAndY:
                 move.b  status(a1),d0
                 andi.b  #1,d0
                 andi.b  #$FC,render_flags(a1)
@@ -322,45 +322,45 @@ loc_3AB9A:
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$12,y_pos(a1)
                 tst.b   4(a2)
-                beq.s   loc_3AC26
+                beq.s   SKFBZChain_UploadTraversalTiles
 
-loc_3ABBE:
+SKFBZChain_TickTraversalStep:
                 subq.b  #1,6(a2)
-                bpl.s   loc_3AC26
+                bpl.s   SKFBZChain_UploadTraversalTiles
                 move.b  #7,6(a2)
                 move.b  #0,anim(a1)
                 moveq   #0,d1
                 move.b  4(a2),d1
                 cmpi.b  #2,d1
-                bne.s   loc_3ABE4
+                bne.s   SKFBZChain_TrySetHangingPose
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-loc_3ABE4:
+SKFBZChain_TrySetHangingPose:
                 subq.w  #1,d1
-                bne.s   loc_3ABEE
+                bne.s   SKFBZChain_LookupTraversalPose
                 move.b  #$14,anim(a1)
 
-loc_3ABEE:
+SKFBZChain_LookupTraversalPose:
                 add.b   8(a2),d1
-                move.b  RawAni_3AC38(pc,d1.w),mapping_frame(a1)
-                move.b  byte_3AC40(pc,d1.w),d1
+                move.b  SKFBZChain_TraversalFrames(pc,d1.w),mapping_frame(a1)
+                move.b  SKFBZChain_TraversalSteps(pc,d1.w),d1
                 ext.w   d1
                 tst.b   2(a2)
-                beq.s   loc_3AC06
+                beq.s   SKFBZChain_ApplyTraversalStep
                 neg.w   d1
 
-loc_3AC06:
+SKFBZChain_ApplyTraversalStep:
                 add.w   d1,x_pos(a1)
                 subq.b  #1,4(a2)
-                bne.s   loc_3AC26
+                bne.s   SKFBZChain_UploadTraversalTiles
                 bsr.s   ReleaseFbzChainPlayerAtOneWayEndpoint
                 move.b  #0,6(a2)
                 bchg    #2,8(a2)
                 andi.w  #(button_left_mask|button_right_mask)<<8,d0
-                bne.w   loc_3AB44
+                bne.w   SKFBZChain_TryTraverseLeft
 
-loc_3AC26:
+SKFBZChain_UploadTraversalTiles:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -370,9 +370,9 @@ loc_3AC26:
 ; End of function UpdatePlayerTraversingFbzHorizontalChain
 
 ; ---------------------------------------------------------------------------
-RawAni_3AC38:
+SKFBZChain_TraversalFrames:
                 dc.b    $91, $81, $80, $85, $91, $84, $83, $82
-byte_3AC40:
+SKFBZChain_TraversalSteps:
                 dc.b    4,  $C,  $A,   6,   4,  $C,  $C,   4
                 even
 
@@ -380,81 +380,81 @@ byte_3AC40:
 
 ReleaseFbzChainPlayerAtOneWayEndpoint:
                 btst    #6,subtype(a0)
-                beq.s   locret_3AC84
+                beq.s   SKFBZChain_EndpointReleaseReturn
                 move.w  $3E(a0),d2
                 subi.w  #$10,d2
                 btst    #0,status(a0)
-                beq.s   loc_3AC70
+                beq.s   SKFBZChain_TryReleaseAtRightEnd
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
                 add.w   d2,d1
-                bne.s   locret_3AC84
-                bra.w   loc_3AB24
+                bne.s   SKFBZChain_EndpointReleaseReturn
+                bra.w   SKFBZChain_DropHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_3AC70:
+SKFBZChain_TryReleaseAtRightEnd:
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
                 add.w   d2,d1
                 add.w   d2,d2
                 cmp.w   d2,d1
-                bne.s   locret_3AC84
-                bra.w   loc_3AB24
+                bne.s   SKFBZChain_EndpointReleaseReturn
+                bra.w   SKFBZChain_DropHorizontalRider
 ; ---------------------------------------------------------------------------
 
-locret_3AC84:
+SKFBZChain_EndpointReleaseReturn:
                 rts
 ; End of function ReleaseFbzChainPlayerAtOneWayEndpoint
 
 ; ---------------------------------------------------------------------------
 
-loc_3AC86:
+SKFBZChain_TickHorizontalCooldown:
                 tst.b   2(a2)
-                beq.s   loc_3AC94
+                beq.s   SKFBZChain_TryHorizontalCapture
                 subq.b  #1,2(a2)
-                bne.w   locret_3AD88
+                bne.w   SKFBZChain_HorizontalCaptureReturn
 
-loc_3AC94:
+SKFBZChain_TryHorizontalCapture:
                 move.w  $3E(a0),d2
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d2,d0
                 add.w   d2,d2
                 cmp.w   d2,d0
-                bhs.w   locret_3AD88
+                bhs.w   SKFBZChain_HorizontalCaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_3AD88
+                bhs.w   SKFBZChain_HorizontalCaptureReturn
                 tst.b   object_control(a1)
-                bmi.w   locret_3AD88
+                bmi.w   SKFBZChain_HorizontalCaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_3AD88
+                bhs.w   SKFBZChain_HorizontalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_3AD88
+                bne.w   SKFBZChain_HorizontalCaptureReturn
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_3ACEA
+                beq.s   SKFBZChain_SnapEntryAndCheckOneWay
                 movea.w interact(a1),a3
-                cmpi.l  #loc_3A84C,(a3)
-                beq.w   locret_3AD88
+                cmpi.l  #SKFBZChain_PickTravelByOccupancy,(a3)
+                beq.w   SKFBZChain_HorizontalCaptureReturn
 
-loc_3ACEA:
+SKFBZChain_SnapEntryAndCheckOneWay:
                 andi.w  #$FFE0,d0
                 btst    #6,subtype(a0)
-                beq.s   loc_3AD10
+                beq.s   SKFBZChain_AttachHorizontalRider
                 btst    #0,status(a0)
-                beq.s   loc_3AD06
+                beq.s   SKFBZChain_RejectOneWayRightEnd
                 tst.w   d0
-                beq.w   locret_3AD88
-                bra.s   loc_3AD10
+                beq.w   SKFBZChain_HorizontalCaptureReturn
+                bra.s   SKFBZChain_AttachHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_3AD06:
+SKFBZChain_RejectOneWayRightEnd:
                 subi.w  #$20,d2
                 cmp.w   d2,d0
-                beq.w   locret_3AD88
+                beq.w   SKFBZChain_HorizontalCaptureReturn
 
-loc_3AD10:
+SKFBZChain_AttachHorizontalRider:
                 addi.w  #$10,d0
                 sub.w   $3E(a0),d0
                 add.w   x_pos(a0),d0
@@ -482,7 +482,7 @@ loc_3AD10:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_3AD88:
+SKFBZChain_HorizontalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_FBZChainLink:

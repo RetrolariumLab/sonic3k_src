@@ -12,28 +12,28 @@ Obj_TechnoSqueek:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Technosqueek_Index:
-                dc.w    loc_574DA-Technosqueek_Index
-                dc.w    loc_57574-Technosqueek_Index
-                dc.w    loc_575C6-Technosqueek_Index
-                dc.w    loc_575F4-Technosqueek_Index
-                dc.w    loc_57638-Technosqueek_Index
+                dc.w    S3TechnoSqueek_InitSwingMode-Technosqueek_Index
+                dc.w    S3TechnoSqueek_AnimateHorizontalSwing-Technosqueek_Index
+                dc.w    S3TechnoSqueek_AnimateHorizontalTurn-Technosqueek_Index
+                dc.w    S3TechnoSqueek_AnimateVerticalSwing-Technosqueek_Index
+                dc.w    S3TechnoSqueek_AnimateVerticalTurn-Technosqueek_Index
 ; ---------------------------------------------------------------------------
 
-loc_574DA:
+S3TechnoSqueek_InitSwingMode:
                 move.w  #$800,$2E(a0)
-                move.l  #loc_575BE,$34(a0)
+                move.l  #S3TechnoSqueek_UnfreezeVisual,$34(a0)
                 cmpi.b  #4,subtype(a0)
-                beq.s   loc_57536
-                lea     ObjDat_576F2(pc),a1
+                beq.s   S3TechnoSqueek_InitVerticalSwing
+                lea     S3TechnoSqueek_HorizontalAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #byte_57718,$30(a0)
+                move.l  #S3TechnoSqueek_FirstHorizontalAnim,$30(a0)
                 bset    #0,render_flags(a0)
                 cmpi.b  #2,subtype(a0)
-                bne.s   loc_57514
+                bne.s   S3TechnoSqueek_InitHorizontalSwing
                 bset    #1,render_flags(a0)
 
-loc_57514:
-                lea     ChildObjDat_57710(pc),a2
+S3TechnoSqueek_InitHorizontalSwing:
+                lea     S3TechnoSqueek_VisualChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.w  #$400,d0
                 move.w  d0,$3A(a0)
@@ -43,13 +43,13 @@ loc_57514:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57536:
-                lea     ObjDat3_576FE(pc),a1
+S3TechnoSqueek_InitVerticalSwing:
+                lea     S3TechnoSqueek_VerticalAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #6,routine(a0)
-                move.l  #byte_5773E,$30(a0)
+                move.l  #S3TechnoSqueek_FirstVerticalAnim,$30(a0)
                 bset    #1,render_flags(a0)
-                lea     ChildObjDat_57710(pc),a2
+                lea     S3TechnoSqueek_VisualChildRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.w  #$400,d0
                 move.w  d0,$3E(a0)
@@ -59,212 +59,212 @@ loc_57536:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57574:
+S3TechnoSqueek_AnimateHorizontalSwing:
                 jsr     Animate_RawMultiDelayFlipX(pc)
                 tst.w   d2
-                beq.s   loc_5758A
+                beq.s   S3TechnoSqueek_StepHorizontalSwing
                 cmpi.b  #6,anim_frame(a0)
-                bne.s   loc_5758A
+                bne.s   S3TechnoSqueek_StepHorizontalSwing
                 bset    #1,$38(a0)
 
-loc_5758A:
+S3TechnoSqueek_StepHorizontalSwing:
                 jsr     Swing_LeftAndRight(pc)
                 tst.w   x_vel(a0)
-                beq.s   loc_5759E
+                beq.s   S3TechnoSqueek_BeginHorizontalTurn
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5759E:
+S3TechnoSqueek_BeginHorizontalTurn:
                 move.b  #4,routine(a0)
-                move.l  #byte_5772E,$30(a0)
-                move.l  #loc_575CA,$34(a0)
+                move.l  #S3TechnoSqueek_HorizontalTurnAnim,$30(a0)
+                move.l  #S3TechnoSqueek_ResumeHorizontalSwing,$34(a0)
 
-loc_575B4:
+S3TechnoSqueek_ResetAnimCursorAndDelay:
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_575BE:
+S3TechnoSqueek_UnfreezeVisual:
                 bclr    #5,$38(a0)
 
-locret_575C4:
+S3TechnoSqueek_SwingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_575C6:
+S3TechnoSqueek_AnimateHorizontalTurn:
                 jmp     Animate_RawAdjustFlipX(pc)
 ; ---------------------------------------------------------------------------
 
-loc_575CA:
+S3TechnoSqueek_ResumeHorizontalSwing:
                 move.b  #2,routine(a0)
-                move.l  #byte_57723,$30(a0)
+                move.l  #S3TechnoSqueek_RepeatHorizontalAnim,$30(a0)
 
-loc_575D8:
+S3TechnoSqueek_FreezeVisualAndResetAnim:
                 bclr    #1,$38(a0)
                 bset    #5,$38(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_575BE,$34(a0)
-                bra.s   loc_575B4
+                move.l  #S3TechnoSqueek_UnfreezeVisual,$34(a0)
+                bra.s   S3TechnoSqueek_ResetAnimCursorAndDelay
 ; ---------------------------------------------------------------------------
 
-loc_575F4:
+S3TechnoSqueek_AnimateVerticalSwing:
                 jsr     Animate_RawMultiDelayFlipY(pc)
                 tst.w   d2
-                beq.s   loc_5760A
+                beq.s   S3TechnoSqueek_StepVerticalSwing
                 cmpi.b  #6,anim_frame(a0)
-                bne.s   loc_5760A
+                bne.s   S3TechnoSqueek_StepVerticalSwing
                 bset    #1,$38(a0)
 
-loc_5760A:
+S3TechnoSqueek_StepVerticalSwing:
                 jsr     Swing_UpAndDown(pc)
                 tst.w   y_vel(a0)
-                beq.s   loc_5761E
+                beq.s   S3TechnoSqueek_BeginVerticalTurn
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5761E:
+S3TechnoSqueek_BeginVerticalTurn:
                 move.b  #8,routine(a0)
-                move.l  #byte_57754,$30(a0)
-                move.l  #loc_5763C,$34(a0)
-                bra.w   loc_575B4
+                move.l  #S3TechnoSqueek_VerticalTurnAnim,$30(a0)
+                move.l  #S3TechnoSqueek_ResumeVerticalSwing,$34(a0)
+                bra.w   S3TechnoSqueek_ResetAnimCursorAndDelay
 ; ---------------------------------------------------------------------------
 
-loc_57638:
+S3TechnoSqueek_AnimateVerticalTurn:
                 jmp     Animate_RawAdjustFlipY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5763C:
+S3TechnoSqueek_ResumeVerticalSwing:
                 move.b  #6,routine(a0)
-                move.l  #byte_57749,$30(a0)
-                bra.s   loc_575D8
+                move.l  #S3TechnoSqueek_RepeatVerticalAnim,$30(a0)
+                bra.s   S3TechnoSqueek_FreezeVisualAndResetAnim
 ; ---------------------------------------------------------------------------
 
-loc_5764C:
+S3TechnoSqueek_UpdateVisual:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_5765E(pc,d0.w),d1
-                jsr     off_5765E(pc,d1.w)
+                move.w  S3TechnoSqueek_VisualStateTable(pc,d0.w),d1
+                jsr     S3TechnoSqueek_VisualStateTable(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_5765E:
-                dc.w    loc_57664-off_5765E
-                dc.w    loc_57680-off_5765E
-                dc.w    loc_576B8-off_5765E
+S3TechnoSqueek_VisualStateTable:
+                dc.w    S3TechnoSqueek_InitVisual-S3TechnoSqueek_VisualStateTable
+                dc.w    S3TechnoSqueek_AnimateHorizontalVisual-S3TechnoSqueek_VisualStateTable
+                dc.w    S3TechnoSqueek_AnimateVerticalVisual-S3TechnoSqueek_VisualStateTable
 ; ---------------------------------------------------------------------------
 
-loc_57664:
-                lea     word_5770A(pc),a1
+S3TechnoSqueek_InitVisual:
+                lea     TechnoSqueekS3_Visual_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 movea.w parent3(a0),a1
                 cmpi.b  #4,subtype(a1)
-                bne.s   locret_5767E
+                bne.s   S3TechnoSqueek_VisualReturn
                 move.b  #4,routine(a0)
 
-locret_5767E:
+S3TechnoSqueek_VisualReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57680:
-                lea     byte_57739(pc),a1
+S3TechnoSqueek_AnimateHorizontalVisual:
+                lea     S3TechnoSqueek_HorizontalVisualAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 btst    #1,$38(a1)
-                beq.s   loc_5769C
+                beq.s   S3TechnoSqueek_UpdateHorizontalOffset
                 moveq   #2,d0
 
-loc_5769C:
+S3TechnoSqueek_UpdateHorizontalOffset:
                 add.w   d0,d0
-                move.w  byte_576B2(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  S3TechnoSqueek_HorizontalOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 btst    #5,$38(a1)
-                bne.w   locret_575C4
+                bne.w   S3TechnoSqueek_SwingReturn
                 jmp     Refresh_ChildPositionAdjusted(pc)
 ; ---------------------------------------------------------------------------
-byte_576B2:
+S3TechnoSqueek_HorizontalOffsets:
                 dc.b    $14,   4
                 dc.b    $C,   4
                 dc.b    0,   4
                 even
 ; ---------------------------------------------------------------------------
 
-loc_576B8:
-                lea     byte_5775F(pc),a1
+S3TechnoSqueek_AnimateVerticalVisual:
+                lea     S3TechnoSqueek_VerticalVisualAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 subq.w  #5,d0
                 btst    #1,$38(a1)
-                beq.s   loc_576D6
+                beq.s   S3TechnoSqueek_UpdateVerticalOffset
                 moveq   #2,d0
 
-loc_576D6:
+S3TechnoSqueek_UpdateVerticalOffset:
                 add.w   d0,d0
-                move.w  byte_576EC(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  S3TechnoSqueek_VerticalOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 btst    #5,$38(a1)
-                bne.w   locret_575C4
+                bne.w   S3TechnoSqueek_SwingReturn
                 jmp     Refresh_ChildPositionAdjusted(pc)
 ; ---------------------------------------------------------------------------
-byte_576EC:
+S3TechnoSqueek_VerticalOffsets:
                 dc.b    -4, $14
                 dc.b    -4,  $C
                 dc.b    -4,   0
                 even
-ObjDat_576F2:
+S3TechnoSqueek_HorizontalAttrs:
                 dc.l    Map_TechnoSqueek
                 dc.w    make_art_tile(ArtTile_Technosqueek-6,1,1)
                 dc.w    $280
                 dc.b    $C,   8,   0,  $B
-ObjDat3_576FE:
+S3TechnoSqueek_VerticalAttrs:
                 dc.l    Map_TechnoSqueek
                 dc.w    make_art_tile(ArtTile_Technosqueek-6,1,1)
                 dc.w    $280
                 dc.b    8,  $C,   5,  $B
-word_5770A:
+TechnoSqueekS3_Visual_PartialAttributes:
                 dc.w    $280
                 dc.b    8,   4,   2,   0
-ChildObjDat_57710:
+S3TechnoSqueek_VisualChildRecord:
                 dc.w    1-1
-                dc.l    loc_5764C
+                dc.l    S3TechnoSqueek_UpdateVisual
                 dc.b    $14,   4
-byte_57718:
+S3TechnoSqueek_FirstHorizontalAnim:
                 dc.b    0,       0
                 dc.b    0,     $17
                 dc.b    1,       1
                 dc.b    1|$40,   1
                 dc.b    0,     $1F
                 dc.b    $F4
-byte_57723:
+S3TechnoSqueek_RepeatHorizontalAnim:
                 dc.b    0,       0
                 dc.b    0,     $37
                 dc.b    1,       1
                 dc.b    1|$40,   1
                 dc.b    0,     $1F
                 dc.b    $F4
-byte_5772E:
+S3TechnoSqueek_HorizontalTurnAnim:
                 dc.b    3,   0,   0,   1, 1|$40,   0,   0,   1, 1|$40,   0, $F4
-byte_57739:
+S3TechnoSqueek_HorizontalVisualAnim:
                 dc.b    3,   2,   3,   4, $FC
-byte_5773E:
+S3TechnoSqueek_FirstVerticalAnim:
                 dc.b    5,       0
                 dc.b    5,     $17
                 dc.b    6,       1
                 dc.b    6|$20,   1
                 dc.b    0,     $1F
                 dc.b    $F4
-byte_57749:
+S3TechnoSqueek_RepeatVerticalAnim:
                 dc.b    5,       0
                 dc.b    5,     $37
                 dc.b    6,       1
                 dc.b    6|$20,   1
                 dc.b    5,     $1F
                 dc.b    $F4
-byte_57754:
+S3TechnoSqueek_VerticalTurnAnim:
                 dc.b    3,   5,   5,   6, 6|$20,   5,   5,   6, 6|$20,   5, $F4
-byte_5775F:
+S3TechnoSqueek_VerticalVisualAnim:
                 dc.b    3,   7,   8,   9, $FC
                 even

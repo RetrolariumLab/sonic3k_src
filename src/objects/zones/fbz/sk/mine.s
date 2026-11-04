@@ -10,9 +10,9 @@ Obj_FBZMine:
                 move.b  #$C,width_pixels(a0)
                 move.b  #4,height_pixels(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_3C972,(a0)
+                move.l  #SKFBZMine_CheckPlayersAndDraw,(a0)
 
-loc_3C972:
+SKFBZMine_CheckPlayersAndDraw:
                 lea     (Player_1).w,a1
                 bsr.s   ArmFbzMineNearPlayer
                 lea     (Player_2).w,a1
@@ -26,37 +26,38 @@ ArmFbzMineNearPlayer:
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_3C9BA
+                bhs.s   SKFBZMine_ArmingReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$18,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_3C9BA
+                bhs.s   SKFBZMine_ArmingReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3C9BA
+                bne.s   SKFBZMine_ArmingReturn
                 move.w  #$1E,$30(a0)
-                move.l  #loc_3C9BC,(a0)
+                move.l  #SKFBZMine_FlashAndArmContact,(a0)
 
-locret_3C9BA:
+SKFBZMine_ArmingReturn:
                 rts
 ; End of function ArmFbzMineNearPlayer
 
 ; ---------------------------------------------------------------------------
 
-loc_3C9BC:
+; Enable harmful contact for one update before switching to the explosion handler
+SKFBZMine_FlashAndArmContact:
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #1,mapping_frame(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_3C9DE
-                move.l  #loc_3C9E4,(a0)
+                bpl.s   SKFBZMine_DrawAndCull
+                move.l  #SKFBZMine_BecomeExplosion,(a0)
                 move.b  #$8B,collision_flags(a0)
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_3C9DE:
+SKFBZMine_DrawAndCull:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3C9E4:
+SKFBZMine_BecomeExplosion:
                 move.l  #Obj_Explosion,(a0)
                 move.b  #6,routine(a0)
                 clr.b   collision_flags(a0)

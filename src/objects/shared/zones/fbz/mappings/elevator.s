@@ -1,8 +1,8 @@
 ; Data owner: objects/shared/zones/fbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FBZElevator_:
-                dc.w    word_3CB0E-Map_FBZElevator_
-word_3CB0E:     dc.w    7
+                dc.w    FBZElevatorSK_MapSlot00-Map_FBZElevator_
+FBZElevatorSK_MapSlot00:    dc.w    7
                 dc.b    $E8,  $E,   0,   0, $FF, $D0
                 dc.b    0,  $D,   0,  $C, $FF, $D0
                 dc.b    $E0,  $E,   0, $14,   0, $10

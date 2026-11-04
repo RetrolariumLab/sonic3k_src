@@ -5,38 +5,38 @@
 
 FBZ1_ScreenInit:
                 cmpi.w  #$180,(Player_1+x_pos).w
-                blo.s   loc_52412
+                blo.s   SKFBZ1FG_InitOutdoorStart
                 move.w  -8(a3),d0
                 subq.w  #5,d0
                 movea.w $34(a3),a1                      ; $680 Y
                 movea.w $48(a3),a5                      ; $900 Y
                 moveq   #3-1,d1
 
-loc_52404:
+SKFBZ1FG_CopyIndoorStartRows:
                 move.l  (a5)+,(a1)+                     ; Copy the "indoors" beginning part
                 move.b  (a5)+,(a1)+
                 adda.w  d0,a1
                 adda.w  d0,a5
-                dbf     d1,loc_52404
-                bra.s   loc_5241C
+                dbf     d1,SKFBZ1FG_CopyIndoorStartRows
+                bra.s   SKFBZ1FG_RefreshInitialForeground
 ; ---------------------------------------------------------------------------
 
-loc_52412:
+SKFBZ1FG_InitOutdoorStart:
                 move.w  #$18,(Events_bg+$00).w          ; If player is < $180 X
                 st      (Events_bg+$02).w
 
-loc_5241C:
+SKFBZ1FG_RefreshInitialForeground:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 jmp     Refresh_PlaneFull(pc)
 ; ---------------------------------------------------------------------------
 
 FBZ1_ScreenEvent:
                 cmpi.b  #6,(Player_1+routine).w
-                blo.s   loc_5242E
+                blo.s   SKFBZ1FG_DispatchLayoutEvent
                 rts                                     ; Don't do any special events while Sonic is dying
 ; ---------------------------------------------------------------------------
 
-loc_5242E:
+SKFBZ1FG_DispatchLayoutEvent:
                 lea     FBZ1_LayoutModRange(pc),a1
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
@@ -64,98 +64,98 @@ FBZ1SE_Normal:
                 moveq   #4,d2
                 moveq   #6-1,d3
 
-loc_52462:
+SKFBZ1FG_FindPlayerRegion:
                 lea     (a1),a5                         ; Check layout mod ranges
                 cmp.w   (a5)+,d0
-                blo.s   loc_5247A
+                blo.s   SKFBZ1FG_NextPlayerRegion
                 cmp.w   (a5)+,d0
-                bhi.s   loc_5247A
+                bhi.s   SKFBZ1FG_NextPlayerRegion
                 cmp.w   (a5)+,d1
-                blo.s   loc_5247A
+                blo.s   SKFBZ1FG_NextPlayerRegion
                 cmp.w   (a5)+,d1
-                bhi.s   loc_5247A
+                bhi.s   SKFBZ1FG_NextPlayerRegion
                 move.w  d2,(Events_bg+$00).w
-                bra.s   loc_52482
+                bra.s   SKFBZ1FG_DrawForegroundAfterRangeScan
 ; ---------------------------------------------------------------------------
 
-loc_5247A:
+SKFBZ1FG_NextPlayerRegion:
                 addq.w  #8,a1
                 addq.w  #4,d2
-                dbf     d3,loc_52462
+                dbf     d3,SKFBZ1FG_FindPlayerRegion
 
-loc_52482:
+SKFBZ1FG_DrawForegroundAfterRangeScan:
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
 FBZ1SE_LayoutMod1:
                 jsr     FBZ1Screen_CheckInRange(pc)     ; Make sure Sonic is still in range
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_524AA
+                bne.s   SKFBZ1FG_Mod1_OutdoorXGate
                 cmpi.w  #$B00,d0                        ; If indoors, check if Sonic is in right half of ranged area
-                bhs.s   loc_524A0                       ; If so, branch
+                bhs.s   SKFBZ1FG_Mod1_IndoorYGate       ; If so, branch
                 cmpi.w  #$70A,d0                        ; Otherwise, check if Sonic has gone far enough to the right
-                bls.w   loc_52828
-                bra.s   loc_524D4
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod1_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_524A0:
+SKFBZ1FG_Mod1_IndoorYGate:
                 cmpi.w  #$A0E,d1                        ; If to the right of ranged area, instead check if Sonic has gone low enough
-                bls.w   loc_52828
-                bra.s   loc_524D4
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod1_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_524AA:
+SKFBZ1FG_Mod1_OutdoorXGate:
                 cmpi.w  #$B00,d0                        ; If outdoors, check if Sonic is in right half of ranged area
-                bhs.s   loc_524BA                       ; If so, branch
+                bhs.s   SKFBZ1FG_Mod1_OutdoorYGate      ; If so, branch
                 cmpi.w  #$6F6,d0                        ; Otherwise, check if Sonic has gone far enough to the left
-                bls.s   loc_524C2
-                bra.w   loc_52828
+                bls.s   SKFBZ1FG_Mod1_BindIndoor
+                bra.w   SKFBZ1FG_DrawForeground
 ; ---------------------------------------------------------------------------
 
-loc_524BA:
+SKFBZ1FG_Mod1_OutdoorYGate:
                 cmpi.w  #$9F2,d1                        ; If to the right of ranged area, instead check if Sonic has gone high enough
-                bhi.w   loc_52828
+                bhi.w   SKFBZ1FG_DrawForeground
 
-loc_524C2:
+SKFBZ1FG_Mod1_BindIndoor:
                 clr.w   (Events_bg+$02).w               ; In either case, go outdoors->indoors
                 movea.w (a3),a5
                 lea     $60(a5),a5
                 movea.w (a3),a6
                 lea     $64(a6),a6
-                bra.s   loc_524E8
+                bra.s   SKFBZ1FG_Mod1_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_524D4:
+SKFBZ1FG_Mod1_BindOutdoor:
                 st      (Events_bg+$02).w               ; Go indoors->outdoors
                 movea.w $18(a3),a5
                 lea     $60(a5),a5                      ; First source is at $300 Y, $3000 X
                 movea.w $14(a3),a6
                 lea     $64(a6),a6                      ; Second source is at $280 Y, $3200 X (both of these are technically out of range)
 
-loc_524E8:
+SKFBZ1FG_Mod1_BeginLayoutCopy:
                 movea.w $48(a3),a1
                 lea     $C(a1),a1                       ; First destination is $900 Y, $600 X
                 move.w  -8(a3),d0
                 subq.w  #4,d0                           ; Width of four tiles
                 moveq   #6-1,d1                         ; Height of 6 tiles
 
-loc_524F8:
+SKFBZ1FG_Mod1_CopyLeftRows:
                 move.l  (a5)+,(a1)+                     ; Copy over layout
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_524F8
+                dbf     d1,SKFBZ1FG_Mod1_CopyLeftRows
                 movea.w $48(a3),a1
                 lea     $1A(a1),a1                      ; Second destination is $900 Y, $D00 X
                 move.w  -8(a3),d0
                 subq.w  #6,d0                           ; Width of 6 tiles
                 moveq   #4-1,d1                         ; Height of 4 tiles
 
-loc_52512:
+SKFBZ1FG_Mod1_CopyRightRows:
                 move.l  (a6)+,(a1)+
                 move.w  (a6)+,(a1)+                     ; Copy over layout
                 adda.w  d0,a6
                 adda.w  d0,a1
-                dbf     d1,loc_52512
+                dbf     d1,SKFBZ1FG_Mod1_CopyRightRows
                 jmp     Refresh_PlaneScreenDirect(pc)   ; Refresh screen
 ; ---------------------------------------------------------------------------
 
@@ -163,75 +163,75 @@ FBZ1SE_LayoutMod2:
                 lea     8(a1),a1                        ; The following layout mods all basically work identically to the above with modifications in positioning, etc
                 jsr     FBZ1Screen_CheckInRange(pc)     ; I'll leave it as an exercise to the reader to get the specifics of each routine :)
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_5254A
+                bne.s   SKFBZ1FG_Mod2_CheckOutdoorHalf
                 cmpi.w  #$C80,d0
-                bhs.s   loc_52540
+                bhs.s   SKFBZ1FG_Mod2_IndoorXGate
                 cmpi.w  #$1F2,d1
-                bhs.w   loc_52828
-                bra.s   loc_52574
+                bhs.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod2_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_52540:
+SKFBZ1FG_Mod2_IndoorXGate:
                 cmpi.w  #$108A,d0
-                bls.w   loc_52828
-                bra.s   loc_52574
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod2_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_5254A:
+SKFBZ1FG_Mod2_CheckOutdoorHalf:
                 cmpi.w  #$C80,d0
-                bhs.s   loc_5255A
+                bhs.s   SKFBZ1FG_Mod2_OutdoorXGate
                 cmpi.w  #$20E,d1
-                bhs.s   loc_52562
-                bra.w   loc_52828
+                bhs.s   SKFBZ1FG_Mod2_BindIndoor
+                bra.w   SKFBZ1FG_DrawForeground
 ; ---------------------------------------------------------------------------
 
-loc_5255A:
+SKFBZ1FG_Mod2_OutdoorXGate:
                 cmpi.w  #$1076,d0
-                bhi.w   loc_52828
+                bhi.w   SKFBZ1FG_DrawForeground
 
-loc_52562:
+SKFBZ1FG_Mod2_BindIndoor:
                 clr.w   (Events_bg+$02).w
                 movea.w (a3),a5
                 lea     $6C(a5),a5
                 movea.w (a3),a6
                 lea     $76(a6),a6
-                bra.s   loc_52588
+                bra.s   SKFBZ1FG_Mod2_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_52574:
+SKFBZ1FG_Mod2_BindOutdoor:
                 st      (Events_bg+$02).w
                 movea.w $14(a3),a5
                 lea     $6C(a5),a5
                 movea.w $10(a3),a6
                 lea     $76(a6),a6
 
-loc_52588:
+SKFBZ1FG_Mod2_BeginLayoutCopy:
                 movea.w 8(a3),a1
                 lea     $E(a1),a1
                 move.w  -8(a3),d0
                 subi.w  #$A,d0
                 moveq   #4-1,d1
 
-loc_5259A:
+SKFBZ1FG_Mod2_CopyLeftRows:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_5259A
+                dbf     d1,SKFBZ1FG_Mod2_CopyLeftRows
                 movea.w $C(a3),a1
                 lea     $1C(a1),a1
                 move.w  -8(a3),d0
                 subi.w  #$C,d0
                 moveq   #3-1,d1
 
-loc_525BA:
+SKFBZ1FG_Mod2_CopyRightRows:
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
                 adda.w  d0,a6
                 adda.w  d0,a1
-                dbf     d1,loc_525BA
+                dbf     d1,SKFBZ1FG_Mod2_CopyRightRows
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
@@ -239,73 +239,73 @@ FBZ1SE_LayoutMod3:
                 lea     $10(a1),a1
                 jsr     FBZ1Screen_CheckInRange(pc)
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_525F4
+                bne.s   SKFBZ1FG_Mod3_OutdoorXGate
                 cmpi.w  #$1880,d0
-                bhs.s   loc_525EA
+                bhs.s   SKFBZ1FG_Mod3_IndoorYGate
                 cmpi.w  #$158A,d0
-                bls.w   loc_52828
-                bra.s   loc_52622
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod3_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_525EA:
+SKFBZ1FG_Mod3_IndoorYGate:
                 cmpi.w  #$A0E,d1
-                bls.w   loc_52828
-                bra.s   loc_52622
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod3_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_525F4:
+SKFBZ1FG_Mod3_OutdoorXGate:
                 cmpi.w  #$1880,d0
-                bhs.s   loc_52604
+                bhs.s   SKFBZ1FG_Mod3_OutdoorYGate
                 cmpi.w  #$1576,d0
-                bls.s   loc_5260C
-                bra.w   loc_52828
+                bls.s   SKFBZ1FG_Mod3_BindIndoor
+                bra.w   SKFBZ1FG_DrawForeground
 ; ---------------------------------------------------------------------------
 
-loc_52604:
+SKFBZ1FG_Mod3_OutdoorYGate:
                 cmpi.w  #$9F2,d1
-                bhi.w   loc_52828
+                bhi.w   SKFBZ1FG_DrawForeground
 
-loc_5260C:
+SKFBZ1FG_Mod3_BindIndoor:
                 clr.w   (Events_bg+$02).w
                 movea.w $34(a3),a5
                 lea     $60(a5),a5
                 movea.w $28(a3),a6
                 lea     $66(a6),a6
-                bra.s   loc_52636
+                bra.s   SKFBZ1FG_Mod3_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_52622:
+SKFBZ1FG_Mod3_BindOutdoor:
                 st      (Events_bg+$02).w
                 movea.w $44(a3),a5
                 lea     $60(a5),a5
                 movea.w $3C(a3),a6
                 lea     $66(a6),a6
 
-loc_52636:
+SKFBZ1FG_Mod3_BeginLayoutCopy:
                 movea.w $48(a3),a1
                 lea     $28(a1),a1
                 move.w  -8(a3),d0
                 subq.w  #6,d0
                 moveq   #4-1,d1
 
-loc_52646:
+SKFBZ1FG_Mod3_CopyFirstRows:
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_52646
+                dbf     d1,SKFBZ1FG_Mod3_CopyFirstRows
                 movea.w $48(a3),a1
                 lea     $34(a1),a1
                 move.w  -8(a3),d0
                 subq.w  #6,d0
                 moveq   #4-1,d1
 
-loc_52662:
+SKFBZ1FG_Mod3_CopySecondRows:
                 move.l  (a6)+,(a1)+
                 move.w  (a6)+,(a1)+
                 adda.w  d0,a6
                 adda.w  d0,a1
-                dbf     d1,loc_52662
+                dbf     d1,SKFBZ1FG_Mod3_CopySecondRows
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
@@ -313,72 +313,72 @@ FBZ1SE_LayoutMod4:
                 lea     $18(a1),a1
                 jsr     FBZ1Screen_CheckInRange(pc)
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_526A0
+                bne.s   SKFBZ1FG_Mod4_CheckOutdoorHalf
                 cmpi.w  #$208A,d0
-                bhs.s   loc_526D6
+                bhs.s   SKFBZ1FG_Mod4_BindOutdoor
                 cmpi.w  #$1D80,d0
-                bhs.s   loc_52696
+                bhs.s   SKFBZ1FG_Mod4_IndoorYGate
                 cmpi.w  #$1C0A,d0
-                bls.w   loc_52828
-                bra.s   loc_526D6
+                bls.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod4_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_52696:
+SKFBZ1FG_Mod4_IndoorYGate:
                 cmpi.w  #$F2,d1
-                bhs.w   loc_52828
-                bra.s   loc_526D6
+                bhs.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod4_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_526A0:
+SKFBZ1FG_Mod4_CheckOutdoorHalf:
                 cmpi.w  #$1D80,d0
-                bhs.s   loc_526B0
+                bhs.s   SKFBZ1FG_Mod4_OutdoorXYGate
                 cmpi.w  #$1BF6,d0
-                bls.s   loc_526C0
-                bra.w   loc_52828
+                bls.s   SKFBZ1FG_Mod4_BindIndoor
+                bra.w   SKFBZ1FG_DrawForeground
 ; ---------------------------------------------------------------------------
 
-loc_526B0:
+SKFBZ1FG_Mod4_OutdoorXYGate:
                 cmpi.w  #$10E,d1
-                bls.w   loc_52828
+                bls.w   SKFBZ1FG_DrawForeground
                 cmpi.w  #$2076,d0
-                bhs.w   loc_52828
+                bhs.w   SKFBZ1FG_DrawForeground
 
-loc_526C0:
+SKFBZ1FG_Mod4_BindIndoor:
                 clr.w   (Events_bg+$02).w
                 movea.w $28(a3),a5
                 lea     $6E(a5),a5
                 movea.w $28(a3),a6
                 lea     $76(a6),a6
-                bra.s   loc_526EA
+                bra.s   SKFBZ1FG_Mod4_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_526D6:
+SKFBZ1FG_Mod4_BindOutdoor:
                 st      (Events_bg+$02).w
                 movea.w $3C(a3),a5
                 lea     $6E(a5),a5
                 movea.w $3C(a3),a6
                 lea     $76(a6),a6
 
-loc_526EA:
+SKFBZ1FG_Mod4_BeginLayoutCopy:
                 movea.w (a3),a1
                 lea     $36(a1),a1
                 move.w  -8(a3),d0
                 subq.w  #8,d0
                 moveq   #4-1,d1
 
-loc_526F8:
+SKFBZ1FG_Mod4_CopyLeftRows:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_526F8
+                dbf     d1,SKFBZ1FG_Mod4_CopyLeftRows
                 movea.w (a3),a1
                 lea     $3E(a1),a1
                 move.w  -8(a3),d0
                 subi.w  #$12,d0
                 moveq   #5-1,d1
 
-loc_52714:
+SKFBZ1FG_Mod4_CopyRightRows:
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
@@ -386,7 +386,7 @@ loc_52714:
                 move.w  (a6)+,(a1)+
                 adda.w  d0,a6
                 adda.w  d0,a1
-                dbf     d1,loc_52714
+                dbf     d1,SKFBZ1FG_Mod4_CopyRightRows
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
@@ -394,56 +394,56 @@ FBZ1SE_LayoutMod5:
                 lea     $20(a1),a1
                 jsr     FBZ1Screen_CheckInRange(pc)
                 cmpi.w  #$2100,d0
-                blo.s   loc_52740
+                blo.s   SKFBZ1FG_Mod5_CheckSwitchHeight
                 cmpi.w  #$2600,d0
-                bls.w   loc_52828
+                bls.w   SKFBZ1FG_DrawForeground
 
-loc_52740:
+SKFBZ1FG_Mod5_CheckSwitchHeight:
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_52750
+                bne.s   SKFBZ1FG_ReturnFifthLayoutIndoorsAtY018E
                 cmpi.w  #$172,d1
-                bhs.w   loc_52828
-                bra.s   loc_5276E
+                bhs.w   SKFBZ1FG_DrawForeground
+                bra.s   SKFBZ1FG_Mod5_BindOutdoor
 ; ---------------------------------------------------------------------------
 
-loc_52750:
+SKFBZ1FG_ReturnFifthLayoutIndoorsAtY018E:
                 cmpi.w  #$18E,d1
-                blo.w   loc_52828
+                blo.w   SKFBZ1FG_DrawForeground
                 clr.w   (Events_bg+$02).w
                 movea.w $28(a3),a5
                 lea     $6E(a5),a5
                 movea.w $28(a3),a6
                 lea     $76(a6),a6
-                bra.s   loc_52782
+                bra.s   SKFBZ1FG_Mod5_BeginLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_5276E:
+SKFBZ1FG_Mod5_BindOutdoor:
                 st      (Events_bg+$02).w
                 movea.w $3C(a3),a5
                 lea     $6E(a5),a5
                 movea.w $3C(a3),a6
                 lea     $76(a6),a6
 
-loc_52782:
+SKFBZ1FG_Mod5_BeginLayoutCopy:
                 movea.w (a3),a1
                 lea     $36(a1),a1
                 move.w  -8(a3),d0
                 subq.w  #8,d0
                 moveq   #4-1,d1
 
-loc_52790:
+SKFBZ1FG_Mod5_CopyLeftRows:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_52790
+                dbf     d1,SKFBZ1FG_Mod5_CopyLeftRows
                 movea.w (a3),a1
                 lea     $3E(a1),a1
                 move.w  -8(a3),d0
                 subi.w  #$12,d0
                 moveq   #5-1,d1
 
-loc_527AC:
+SKFBZ1FG_Mod5_CopyRightRows:
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
                 move.l  (a6)+,(a1)+
@@ -451,7 +451,7 @@ loc_527AC:
                 move.w  (a6)+,(a1)+
                 adda.w  d0,a6
                 adda.w  d0,a1
-                dbf     d1,loc_527AC
+                dbf     d1,SKFBZ1FG_Mod5_CopyRightRows
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
@@ -459,57 +459,58 @@ FBZ1SE_LayoutMod6:
                 lea     $28(a1),a1                      ; Get the last layout change range
                 jsr     FBZ1Screen_CheckInRange(pc)     ; Ensure player is still in specified range
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_527DA
+                bne.s   SKFBZ1FG_TryRestoreIndoorStart
                 cmpi.w  #$70E,d1                        ; If "indoors", check if Sonic is below given point
-                bls.w   loc_52828                       ; If not, don't do anything
-                bra.s   loc_527EC
+                bls.w   SKFBZ1FG_DrawForeground         ; If not, don't do anything
+                bra.s   SKFBZ1FG_BindOutdoorStart
 ; ---------------------------------------------------------------------------
 
-loc_527DA:
+SKFBZ1FG_TryRestoreIndoorStart:
                 cmpi.w  #$6F2,d1                        ; If "outdoors" flag is set, check if Sonic is above point given
-                bhi.w   loc_52828                       ; If not, don't do anything
+                bhi.w   SKFBZ1FG_DrawForeground         ; If not, don't do anything
                 clr.w   (Events_bg+$02).w               ; Make Sonic "indoors"
                 movea.w $48(a3),a5                      ; Perform layout copy of indoor tiles
-                bra.s   loc_527F4
+                bra.s   SKFBZ1FG_BeginStartLayoutCopy
 ; ---------------------------------------------------------------------------
 
-loc_527EC:
+SKFBZ1FG_BindOutdoorStart:
                 st      (Events_bg+$02).w               ; Make Sonic "outdoors"
                 movea.w $54(a3),a5                      ; Perform layout copy of outdoor tiles
 
-loc_527F4:
+SKFBZ1FG_BeginStartLayoutCopy:
                 movea.w $34(a3),a1
                 move.w  -8(a3),d0
                 subq.w  #5,d0
                 moveq   #3-1,d1
 
-loc_52800:
+SKFBZ1FG_CopyAndRefreshStart:
                 move.l  (a5)+,(a1)+
                 move.b  (a5)+,(a1)+                     ; Perform layout copy
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_52800
+                dbf     d1,SKFBZ1FG_CopyAndRefreshStart
                 jmp     Refresh_PlaneScreenDirect(pc)   ; Redraw screen directly
 
 ; =============== S U B R O U T I N E =======================================
 
 FBZ1Screen_CheckInRange:
                 cmp.w   (a1)+,d0
-                blo.s   loc_52822
+                blo.s   SKFBZ1FG_CancelLayoutEvent
                 cmp.w   (a1)+,d0
-                bhi.s   loc_52822
+                bhi.s   SKFBZ1FG_CancelLayoutEvent
                 cmp.w   (a1)+,d1
-                blo.s   loc_52822
+                blo.s   SKFBZ1FG_CancelLayoutEvent
                 cmp.w   (a1)+,d1
-                bhi.s   loc_52822
+                bhi.s   SKFBZ1FG_CancelLayoutEvent
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52822:
+; Discard the range check's return address and resume ordinary foreground drawing
+SKFBZ1FG_CancelLayoutEvent:
                 addq.w  #4,sp
                 clr.w   (Events_bg+$00).w
 
-loc_52828:
+SKFBZ1FG_DrawForeground:
                 jmp     DrawTilesAsYouMove(pc)
 ; End of function FBZ1Screen_CheckInRange
 

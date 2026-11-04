@@ -1095,9 +1095,15 @@
       "commits": ["812ae1a6681515d79219d713727d92cccd9e69ca"]
     },
     {
-      "id": "current-shorten-26-zone-cnz",
+      "id": "change-9c6bf68fbdba",
       "kind": "source_or_tooling",
       "summary": "Apply 707 reviewed short labels for cnz.",
+      "commits": ["9c6bf68fbdbadda6def821e909acbb51a08bc869"]
+    },
+    {
+      "id": "current-shorten-27-zone-fbz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 690 reviewed short labels for fbz.",
       "commits": ["release-commit"]
     }
   ],

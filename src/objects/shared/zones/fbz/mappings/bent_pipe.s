@@ -1,14 +1,14 @@
 ; Data owner: objects/shared/zones/fbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FBZBentPipe_:
-                dc.w    word_3B742-Map_FBZBentPipe_
-                dc.w    word_3B750-Map_FBZBentPipe_
-                dc.w    word_3B758-Map_FBZBentPipe_
-word_3B742:     dc.w    2
+                dc.w    FBZBentPipeSK_MapSlot00-Map_FBZBentPipe_
+                dc.w    FBZBentPipeSK_MapSlot01-Map_FBZBentPipe_
+                dc.w    FBZBentPipeSK_MapSlot02-Map_FBZBentPipe_
+FBZBentPipeSK_MapSlot00:    dc.w    2
                 dc.b    $F0,  $F,   0,   9, $FF, $E8
                 dc.b    $F0,   7,   0, $19,   0,   8
-word_3B750:     dc.w    1
+FBZBentPipeSK_MapSlot01:    dc.w    1
                 dc.b    $F8,  $D,   0, $21, $FF, $F0
-word_3B758:     dc.w    2
+FBZBentPipeSK_MapSlot02:    dc.w    2
                 dc.b    $F0,  $F, $10,   9, $FF, $E8
                 dc.b    $F0,   7,   0, $19,   0,   8
