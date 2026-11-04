@@ -25301,20 +25301,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 104
       },
-      "declarations_sha256": "9e7eaca2ee780c1fb358e8179fb1e5ed88c18b9e49de277a77413b24970dbe77",
+      "declarations_sha256": "b60a1839cc59391050066db233a8fce008d96b5b1a7bae16197ad8f6095806c0",
       "labels": {
         "Ani_Monitor_": 0,
-        "byte_1DB50": 22,
-        "byte_1DB54": 26,
-        "byte_1DB5C": 34,
-        "byte_1DB64": 42,
-        "byte_1DB6C": 50,
-        "byte_1DB74": 58,
-        "byte_1DB7C": 66,
-        "byte_1DB84": 74,
-        "byte_1DB8C": 82,
-        "byte_1DB94": 90,
-        "byte_1DB9C": 98
+        "MonitorSTD_EggmanIndexZero": 22,
+        "MonitorSTD_OneUp": 26,
+        "MonitorSTD_Eggman": 34,
+        "MonitorSTD_Rings": 42,
+        "MonitorSTD_SpeedShoes": 50,
+        "MonitorSTD_FireShield": 58,
+        "MonitorSTD_LightningShield": 66,
+        "MonitorSTD_BubbleShield": 74,
+        "MonitorSTD_Invincibility": 82,
+        "MonitorSTD_Transformation": 90,
+        "MonitorSTD_BrokenHold": 98
       },
       "external_symbols": [],
       "blocks": [
@@ -25322,77 +25322,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB50",
+          "target": "MonitorSTD_EggmanIndexZero",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB54",
+          "target": "MonitorSTD_OneUp",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB5C",
+          "target": "MonitorSTD_Eggman",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB64",
+          "target": "MonitorSTD_Rings",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB6C",
+          "target": "MonitorSTD_SpeedShoes",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB74",
+          "target": "MonitorSTD_FireShield",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB7C",
+          "target": "MonitorSTD_LightningShield",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB84",
+          "target": "MonitorSTD_BubbleShield",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB8C",
+          "target": "MonitorSTD_Invincibility",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB94",
+          "target": "MonitorSTD_Transformation",
           "base": "Ani_Monitor_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1DB9C",
+          "target": "MonitorSTD_BrokenHold",
           "base": "Ani_Monitor_"
         },
         {
@@ -25472,21 +25472,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 180
       },
-      "declarations_sha256": "f9ae7317361cfa3b7f99ea7b34029f8e921eb8d2d5435148574e3b74afbe7e8a",
+      "declarations_sha256": "bc5450dcf5200e82d4fc8bbf8dc5a1f446c674bf4c03b4ff38ecdf440b36ea3f",
       "labels": {
         "Map_Monitor_": 0,
-        "word_1DBBA": 24,
-        "word_1DBC2": 32,
-        "word_1DBD0": 46,
-        "word_1DBDE": 60,
-        "word_1DBEC": 74,
-        "word_1DBFA": 88,
-        "word_1DC08": 102,
-        "word_1DC16": 116,
-        "word_1DC24": 130,
-        "word_1DC32": 144,
-        "word_1DC40": 158,
-        "word_1DC4E": 172
+        "SKMonitorMap_CaseOnly": 24,
+        "SKMonitorMap_EggmanIndexZero": 32,
+        "SKMonitorMap_OneUp": 46,
+        "SKMonitorMap_Eggman": 60,
+        "SKMonitorMap_Rings": 74,
+        "SKMonitorMap_SpeedShoes": 88,
+        "SKMonitorMap_FireShield": 102,
+        "SKMonitorMap_LightningShield": 116,
+        "SKMonitorMap_BubbleShield": 130,
+        "SKMonitorMap_Invincibility": 144,
+        "SKMonitorMap_Transformation": 158,
+        "SKMonitorMap_Broken": 172
       },
       "external_symbols": [],
       "blocks": [
@@ -25494,84 +25494,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBBA",
+          "target": "SKMonitorMap_CaseOnly",
           "base": "Map_Monitor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBC2",
+          "target": "SKMonitorMap_EggmanIndexZero",
           "base": "Map_Monitor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBD0",
+          "target": "SKMonitorMap_OneUp",
           "base": "Map_Monitor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBDE",
+          "target": "SKMonitorMap_Eggman",
           "base": "Map_Monitor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBEC",
+          "target": "SKMonitorMap_Rings",
           "base": "Map_Monitor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DBFA",
+          "target": "SKMonitorMap_SpeedShoes",
           "base": "Map_Monitor_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC08",
+          "target": "SKMonitorMap_FireShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC16",
+          "target": "SKMonitorMap_LightningShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC24",
+          "target": "SKMonitorMap_BubbleShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC32",
+          "target": "SKMonitorMap_Invincibility",
           "base": "Map_Monitor_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC40",
+          "target": "SKMonitorMap_Transformation",
           "base": "Map_Monitor_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1DC4E",
+          "target": "SKMonitorMap_Broken",
           "base": "Map_Monitor_"
         },
         {
@@ -25645,21 +25645,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 180
       },
-      "declarations_sha256": "3c5af0cc7a820cb45c8a1808412489d336a5495acc3103de3a5ccef07a57ead1",
+      "declarations_sha256": "4ff8d70b4c03c31c79dcd295a557e53b9a572038adbc50154b1fd44fe7a22285",
       "labels": {
         "Map_Monitor_": 0,
-        "word_1B970": 24,
-        "word_1B978": 32,
-        "word_1B986": 46,
-        "word_1B994": 60,
-        "word_1B9A2": 74,
-        "word_1B9B0": 88,
-        "word_1B9BE": 102,
-        "word_1B9CC": 116,
-        "word_1B9DA": 130,
-        "word_1B9E8": 144,
-        "word_1B9F6": 158,
-        "word_1BA04": 172
+        "S3MonitorMap_CaseOnly": 24,
+        "S3MonitorMap_EggmanIndexZero": 32,
+        "S3MonitorMap_OneUp": 46,
+        "S3MonitorMap_Eggman": 60,
+        "S3MonitorMap_Rings": 74,
+        "S3MonitorMap_SpeedShoes": 88,
+        "S3MonitorMap_FireShield": 102,
+        "S3MonitorMap_LightningShield": 116,
+        "S3MonitorMap_BubbleShield": 130,
+        "S3MonitorMap_Invincibility": 144,
+        "S3MonitorMap_Transformation": 158,
+        "S3MonitorMap_Broken": 172
       },
       "external_symbols": [],
       "blocks": [
@@ -25667,84 +25667,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B970",
+          "target": "S3MonitorMap_CaseOnly",
           "base": "Map_Monitor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B978",
+          "target": "S3MonitorMap_EggmanIndexZero",
           "base": "Map_Monitor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B986",
+          "target": "S3MonitorMap_OneUp",
           "base": "Map_Monitor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B994",
+          "target": "S3MonitorMap_Eggman",
           "base": "Map_Monitor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9A2",
+          "target": "S3MonitorMap_Rings",
           "base": "Map_Monitor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9B0",
+          "target": "S3MonitorMap_SpeedShoes",
           "base": "Map_Monitor_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9BE",
+          "target": "S3MonitorMap_FireShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9CC",
+          "target": "S3MonitorMap_LightningShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9DA",
+          "target": "S3MonitorMap_BubbleShield",
           "base": "Map_Monitor_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9E8",
+          "target": "S3MonitorMap_Invincibility",
           "base": "Map_Monitor_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1B9F6",
+          "target": "S3MonitorMap_Transformation",
           "base": "Map_Monitor_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1BA04",
+          "target": "S3MonitorMap_Broken",
           "base": "Map_Monitor_"
         },
         {
@@ -28098,10 +28098,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "761bfea04add8e853edf69621983822f2de3f0b49d8e36b697a063c6a4b82adb",
+      "declarations_sha256": "baaae53382198ee29223b19858474b77b8f27e8fc8cb678d2abc3fed6ba006a8",
       "labels": {
         "Ani_Ring_": 0,
-        "byte_1AA68": 2
+        "SKSlotRing_StandardSpinLoopAnimation": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -28109,7 +28109,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1AA68",
+          "target": "SKSlotRing_StandardSpinLoopAnimation",
           "base": "Ani_Ring_"
         },
         {
@@ -28129,10 +28129,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "f2cc047b9fe9c1903ff88e87d16e972e85c51672f446d228d6a52780bdeb1382",
+      "declarations_sha256": "bc325e2ab7999d3551da520528962ba2cb941f10d4d8158b1e363a02cd256c7f",
       "labels": {
         "Ani_RingSparkle_": 0,
-        "byte_1A994": 2
+        "RingSparkle_CollectedAnim": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -28140,7 +28140,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1A994",
+          "target": "RingSparkle_CollectedAnim",
           "base": "Ani_RingSparkle_"
         },
         {
@@ -28160,18 +28160,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "91dc7817fcf9e8adf4fe855e651c3d889a740788d7104d3a16b0e0ea69dbe3ff",
+      "declarations_sha256": "343227259fca5b31b8f10abb69e500af128d8a173250339203da8c82f09f1f98",
       "labels": {
         "Map_Ring_": 0,
-        "word_1A9AC": 18,
-        "word_1A9B4": 26,
-        "word_1A9BC": 34,
-        "word_1A9C4": 42,
-        "word_1A9CC": 50,
-        "word_1A9D4": 58,
-        "word_1A9DC": 66,
-        "word_1A9E4": 74,
-        "word_1A9EC": 82
+        "SharedRingMap_SpinFrame00": 18,
+        "SharedRingMap_SpinFrame01": 26,
+        "SharedRingMap_SpinFrame02": 34,
+        "SharedRingMap_SpinFrame03": 42,
+        "SharedRingMap_SparkleFrame04": 50,
+        "SharedRingMap_SparkleFrame05": 58,
+        "SharedRingMap_SparkleFrame06": 66,
+        "SharedRingMap_SparkleFrame07": 74,
+        "SharedRingMap_BlankFrame08": 82
       },
       "external_symbols": [],
       "blocks": [
@@ -28179,63 +28179,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9AC",
+          "target": "SharedRingMap_SpinFrame00",
           "base": "Map_Ring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9B4",
+          "target": "SharedRingMap_SpinFrame01",
           "base": "Map_Ring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9BC",
+          "target": "SharedRingMap_SpinFrame02",
           "base": "Map_Ring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9C4",
+          "target": "SharedRingMap_SpinFrame03",
           "base": "Map_Ring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9CC",
+          "target": "SharedRingMap_SparkleFrame04",
           "base": "Map_Ring_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9D4",
+          "target": "SharedRingMap_SparkleFrame05",
           "base": "Map_Ring_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9DC",
+          "target": "SharedRingMap_SparkleFrame06",
           "base": "Map_Ring_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9E4",
+          "target": "SharedRingMap_SparkleFrame07",
           "base": "Map_Ring_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A9EC",
+          "target": "SharedRingMap_BlankFrame08",
           "base": "Map_Ring_"
         },
         {
@@ -58910,12 +58910,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "40b938bfe757bf70021dcb0f95c43c4a07d1dfcd7f3644645fb76ed75a095a13",
+      "declarations_sha256": "60c8fa2fe1da0bb3fd02c8fa3e07a689836648046b98ec53c40726b434e1deb3",
       "labels": {
         "Ani_Starpost_": 0,
-        "byte_2D33E": 6,
-        "byte_2D341": 9,
-        "byte_2D344": 12
+        "StarpostSTD_FrameZeroLoop": 6,
+        "StarpostSTD_FrameOneLoop": 9,
+        "StarpostSTD_AlternateFramesZeroFour": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -58923,21 +58923,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2D33E",
+          "target": "StarpostSTD_FrameZeroLoop",
           "base": "Ani_Starpost_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2D341",
+          "target": "StarpostSTD_FrameOneLoop",
           "base": "Ani_Starpost_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2D344",
+          "target": "StarpostSTD_AlternateFramesZeroFour",
           "base": "Ani_Starpost_"
         },
         {
@@ -58969,14 +58969,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 98
       },
-      "declarations_sha256": "43b1d1ee13ec1fd3ac303926f260bb0045d892bf22605e1557af9a131c1ee9ce",
+      "declarations_sha256": "ceb02a1fa7584008cc62f6dde70c813237d7ec15bd57fbfc393a3f89566cc4aa",
       "labels": {
         "Map_StarPost_": 0,
-        "word_2D352": 10,
-        "word_2D36C": 36,
-        "word_2D380": 56,
-        "word_2D388": 64,
-        "word_2D390": 72
+        "StarpostMap_Frame00": 10,
+        "StarpostMap_Frame01": 36,
+        "StarpostMap_Frame02": 56,
+        "StarpostMap_Frame03": 64,
+        "StarpostMap_Frame04": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -58984,35 +58984,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D352",
+          "target": "StarpostMap_Frame00",
           "base": "Map_StarPost_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D36C",
+          "target": "StarpostMap_Frame01",
           "base": "Map_StarPost_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D380",
+          "target": "StarpostMap_Frame02",
           "base": "Map_StarPost_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D388",
+          "target": "StarpostMap_Frame03",
           "base": "Map_StarPost_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D390",
+          "target": "StarpostMap_Frame04",
           "base": "Map_StarPost_"
         },
         {
@@ -59051,12 +59051,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "9c113d4c28e1d09a09ed7ac0fb77d2180cd6bf990a76b0c5bfd8127e685c292b",
+      "declarations_sha256": "40f4aa6eb652850b9ad085fc02e36c92527829aa5ba053f174b133a4f5e06093",
       "labels": {
         "Map_StarpostStars_": 0,
-        "word_2D3B0": 6,
-        "word_2D3B8": 14,
-        "word_2D3C0": 22
+        "StarpostBonusStarsMap_Frame00": 6,
+        "StarpostBonusStarsMap_Frame01": 14,
+        "StarpostBonusStarsMap_Frame02": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -59064,21 +59064,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D3B0",
+          "target": "StarpostBonusStarsMap_Frame00",
           "base": "Map_StarpostStars_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D3B8",
+          "target": "StarpostBonusStarsMap_Frame01",
           "base": "Map_StarpostStars_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2D3C0",
+          "target": "StarpostBonusStarsMap_Frame02",
           "base": "Map_StarpostStars_"
         },
         {

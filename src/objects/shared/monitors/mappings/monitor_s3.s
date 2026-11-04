@@ -1,49 +1,49 @@
 ; Data owner: objects/shared/monitors
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Monitor_:
-                dc.w    word_1B970-Map_Monitor_
-                dc.w    word_1B978-Map_Monitor_
-                dc.w    word_1B986-Map_Monitor_
-                dc.w    word_1B994-Map_Monitor_
-                dc.w    word_1B9A2-Map_Monitor_
-                dc.w    word_1B9B0-Map_Monitor_
-                dc.w    word_1B9BE-Map_Monitor_
-                dc.w    word_1B9CC-Map_Monitor_
-                dc.w    word_1B9DA-Map_Monitor_
-                dc.w    word_1B9E8-Map_Monitor_
-                dc.w    word_1B9F6-Map_Monitor_
-                dc.w    word_1BA04-Map_Monitor_
-word_1B970:     dc.w    1
+                dc.w    S3MonitorMap_CaseOnly-Map_Monitor_
+                dc.w    S3MonitorMap_EggmanIndexZero-Map_Monitor_
+                dc.w    S3MonitorMap_OneUp-Map_Monitor_
+                dc.w    S3MonitorMap_Eggman-Map_Monitor_
+                dc.w    S3MonitorMap_Rings-Map_Monitor_
+                dc.w    S3MonitorMap_SpeedShoes-Map_Monitor_
+                dc.w    S3MonitorMap_FireShield-Map_Monitor_
+                dc.w    S3MonitorMap_LightningShield-Map_Monitor_
+                dc.w    S3MonitorMap_BubbleShield-Map_Monitor_
+                dc.w    S3MonitorMap_Invincibility-Map_Monitor_
+                dc.w    S3MonitorMap_Transformation-Map_Monitor_
+                dc.w    S3MonitorMap_Broken-Map_Monitor_
+S3MonitorMap_CaseOnly:  dc.w    1
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B978:     dc.w    2
+S3MonitorMap_EggmanIndexZero:   dc.w    2
                 dc.b    $F3,   5,   0, $18, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B986:     dc.w    2
+S3MonitorMap_OneUp: dc.w    2
                 dc.b    $F3,   5,   3, $10, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B994:     dc.w    2
+S3MonitorMap_Eggman:    dc.w    2
                 dc.b    $F3,   5,   0, $1C, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9A2:     dc.w    2
+S3MonitorMap_Rings: dc.w    2
                 dc.b    $F3,   5, $20, $20, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9B0:     dc.w    2
+S3MonitorMap_SpeedShoes:    dc.w    2
                 dc.b    $F3,   5,   0, $24, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9BE:     dc.w    2
+S3MonitorMap_FireShield:    dc.w    2
                 dc.b    $F3,   5,   0, $30, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9CC:     dc.w    2
+S3MonitorMap_LightningShield:   dc.w    2
                 dc.b    $F3,   5,   0, $2C, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9DA:     dc.w    2
+S3MonitorMap_BubbleShield:  dc.w    2
                 dc.b    $F3,   5,   0, $34, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9E8:     dc.w    2
+S3MonitorMap_Invincibility: dc.w    2
                 dc.b    $F3,   5,   0, $28, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1B9F6:     dc.w    2
+S3MonitorMap_Transformation:    dc.w    2
                 dc.b    $F3,   5,   0, $38, $FF, $F8
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_1BA04:     dc.w    1
+S3MonitorMap_Broken:    dc.w    1
                 dc.b    $FF,  $D,   0, $10, $FF, $F0

@@ -10,117 +10,117 @@ Load_Rings:
 
 ; ---------------------------------------------------------------------------
 Load_Rings_Index:
-                dc.w    loc_F604-Load_Rings_Index
-                dc.w    loc_F642-Load_Rings_Index
+                dc.w    S3RingManager_InitAndSeekWindow-Load_Rings_Index
+                dc.w    S3RingQueue_InitActiveLoop-Load_Rings_Index
 ; ---------------------------------------------------------------------------
 
-loc_F604:
+S3RingManager_InitAndSeekWindow:
                 addq.b  #2,(Rings_manager_routine).w
                 bsr.w   S3LevelRings_InitLayoutAndTotal
                 movea.l (Ring_start_addr_ROM).w,a1
                 lea     (Ring_status_table).w,a2
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_F624
+                bhi.s   S3RingWindow_StoreInitialStart
                 moveq   #1,d4
-                bra.s   loc_F624
+                bra.s   S3RingWindow_StoreInitialStart
 ; ---------------------------------------------------------------------------
 
-loc_F620:
+S3RingWindow_NextInitialStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_F624:
+S3RingWindow_StoreInitialStart:
                 cmp.w   (a1),d4
-                bhi.s   loc_F620
+                bhi.s   S3RingWindow_NextInitialStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 addi.w  #$150,d4
-                bra.s   loc_F638
+                bra.s   S3RingWindow_StoreInitialEnd
 ; ---------------------------------------------------------------------------
 
-loc_F636:
+S3RingWindow_NextInitialEnd:
                 addq.w  #4,a1
 
-loc_F638:
+S3RingWindow_StoreInitialEnd:
                 cmp.w   (a1),d4
-                bhi.s   loc_F636
+                bhi.s   S3RingWindow_NextInitialEnd
                 move.l  a1,(Ring_end_addr_ROM).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_F642:
+S3RingQueue_InitActiveLoop:
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
-                bcs.s   loc_F676
+                bcs.s   S3RingWindow_GetCameraStartX
 
-loc_F64C:
+S3RingQueue_TickAndRetireSparkle:
                 move.w  (a2)+,d0
-                beq.s   loc_F64C
+                beq.s   S3RingQueue_TickAndRetireSparkle
                 movea.w d0,a1
                 subq.b  #1,(a1)
-                bne.s   loc_F672
+                bne.s   S3RingQueue_RepeatActiveLoop
                 move.b  #6,(a1)
                 addq.b  #1,1(a1)
                 cmpi.b  #8,1(a1)
-                bne.s   loc_F672
+                bne.s   S3RingQueue_RepeatActiveLoop
                 move.w  #-1,(a1)
                 clr.w   -2(a2)
                 subq.w  #1,(Ring_consumption_table).w
 
-loc_F672:
-                dbf     d1,loc_F64C
+S3RingQueue_RepeatActiveLoop:
+                dbf     d1,S3RingQueue_TickAndRetireSparkle
 
-loc_F676:
+S3RingWindow_GetCameraStartX:
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.w (Ring_start_addr_RAM).w,a2
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_F68E
+                bhi.s   S3Rings_TestForwardLeftWindowSeek
                 moveq   #1,d4
-                bra.s   loc_F68E
+                bra.s   S3Rings_TestForwardLeftWindowSeek
 ; ---------------------------------------------------------------------------
 
-loc_F68A:
+S3RingWindow_AdvanceStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_F68E:
+S3Rings_TestForwardLeftWindowSeek:
                 cmp.w   (a1),d4
-                bhi.s   loc_F68A
-                bra.s   loc_F698
+                bhi.s   S3RingWindow_AdvanceStart
+                bra.s   S3RingWindow_StoreStartAndSeekEnd
 ; ---------------------------------------------------------------------------
 
-loc_F694:
+S3RingWindow_RewindStart:
                 subq.w  #4,a1
                 subq.w  #2,a2
 
-loc_F698:
+S3RingWindow_StoreStartAndSeekEnd:
                 cmp.w   -4(a1),d4
-                bls.s   loc_F694
+                bls.s   S3RingWindow_RewindStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 movea.l (Ring_end_addr_ROM).w,a2
                 addi.w  #$150,d4
-                bra.s   loc_F6B2
+                bra.s   S3Rings_TestForwardRightWindowSeek
 ; ---------------------------------------------------------------------------
 
-loc_F6B0:
+S3RingWindow_AdvanceEnd:
                 addq.w  #4,a2
 
-loc_F6B2:
+S3Rings_TestForwardRightWindowSeek:
                 cmp.w   (a2),d4
-                bhi.s   loc_F6B0
-                bra.s   loc_F6BA
+                bhi.s   S3RingWindow_AdvanceEnd
+                bra.s   S3RingWindow_StoreExclusiveEnd
 ; ---------------------------------------------------------------------------
 
-loc_F6B8:
+S3RingWindow_RewindEnd:
                 subq.w  #4,a2
 
-loc_F6BA:
+S3RingWindow_StoreExclusiveEnd:
                 cmp.w   -4(a2),d4
-                bls.s   loc_F6B8
+                bls.s   S3RingWindow_RewindEnd
                 move.l  a2,(Ring_end_addr_ROM).w
                 rts
 
@@ -128,11 +128,11 @@ loc_F6BA:
 
 Test_Ring_Collisions:
                 cmpi.b  #90,invulnerability_timer(a0)
-                bhs.w   locret_F78A
+                bhs.w   S3Rings_ReturnAfterRingScanOrEntryGuard
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.l (Ring_end_addr_ROM).w,a2
                 cmpa.l  a1,a2
-                beq.w   locret_F78A
+                beq.w   S3Rings_ReturnAfterRingScanOrEntryGuard
                 movea.w (Ring_start_addr_RAM).w,a4
                 btst    #Status_LtngShield,status_secondary(a0)  ; does Sonic have a Lightning Shield?
                 beq.s   Test_Ring_Collisions_NoAttraction
@@ -162,56 +162,56 @@ Test_Ring_Collisions_NoAttraction:
 
 Test_Ring_Collisions_NextRing:
                 tst.w   (a4)
-                bne.w   loc_F780
+                bne.w   S3RingContact_NextLayoutEntry
                 move.w  (a1),d0
                 sub.w   d1,d0
                 sub.w   d2,d0
-                bcc.s   loc_F746
+                bcc.s   S3RingContact_CheckWidth
                 add.w   d6,d0
-                bcs.s   loc_F74C
-                bra.w   loc_F780
+                bcs.s   S3RingContact_CheckYOverlap
+                bra.w   S3RingContact_NextLayoutEntry
 ; ---------------------------------------------------------------------------
 
-loc_F746:
+S3RingContact_CheckWidth:
                 cmp.w   d4,d0
-                bhi.w   loc_F780
+                bhi.w   S3RingContact_NextLayoutEntry
 
-loc_F74C:
+S3RingContact_CheckYOverlap:
                 move.w  2(a1),d0
                 sub.w   d1,d0
                 sub.w   d3,d0
-                bcc.s   loc_F75E
+                bcc.s   S3RingContact_CheckHeight
                 add.w   d6,d0
-                bcs.s   loc_F764
-                bra.w   loc_F780
+                bcs.s   S3RingContact_SelectPickupPath
+                bra.w   S3RingContact_NextLayoutEntry
 ; ---------------------------------------------------------------------------
 
-loc_F75E:
+S3RingContact_CheckHeight:
                 cmp.w   d5,d0
-                bhi.w   loc_F780
+                bhi.w   S3RingContact_NextLayoutEntry
 
-loc_F764:
+S3RingContact_SelectPickupPath:
                 btst    #Status_LtngShield,status_secondary(a0)  ; does Sonic have a Lightning Shield?
                 bne.s   Test_Ring_Collisions_AttractRing
 
-loc_F76C:
+S3RingContact_MarkSparkleAndCredit:
                 move.w  #$604,(a4)
                 bsr.s   S3LevelRings_PickupForP1
                 lea     (Ring_consumption_table+2).w,a3
 
-loc_F776:
+S3RingQueue_InsertFirstFree:
                 tst.w   (a3)+
-                bne.s   loc_F776
+                bne.s   S3RingQueue_InsertFirstFree
                 move.w  a4,-(a3)
                 addq.w  #1,(Ring_consumption_table).w
 
-loc_F780:
+S3RingContact_NextLayoutEntry:
                 addq.w  #4,a1
                 addq.w  #2,a4
                 cmpa.l  a1,a2
                 bne.w   Test_Ring_Collisions_NextRing
 
-locret_F78A:
+S3Rings_ReturnAfterRingScanOrEntryGuard:
                 rts
 ; End of function Test_Ring_Collisions
 
@@ -228,7 +228,7 @@ S3LevelRings_PickupForP1:
 Test_Ring_Collisions_AttractRing:
                 movea.l a1,a3
                 jsr     (AllocateObject).l
-                bne.w   loc_F7BC
+                bne.w   S3RingContact_CollectOnAllocFailure
                 move.l  #Obj_Attracted_Ring,(a1)
                 move.w  (a3),x_pos(a1)
                 move.w  2(a3),y_pos(a1)
@@ -237,9 +237,9 @@ Test_Ring_Collisions_AttractRing:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_F7BC:
+S3RingContact_CollectOnAllocFailure:
                 movea.l a3,a1
-                bra.s   loc_F76C
+                bra.s   S3RingContact_MarkSparkleAndCredit
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -247,21 +247,21 @@ loc_F7BC:
 S3LevelRings_InitLayoutAndTotal:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
-                bne.s   loc_F7D6
+                bne.s   S3RingManager_InitQueueClear
                 lea     (Ring_status_table).w,a1
                 move.w  #bytesToLcnt(Ring_status_table_end-Ring_status_table),d1
 
-loc_F7D0:
+S3RingManager_ClearStatusWords:
                 move.l  d0,(a1)+
-                dbf     d1,loc_F7D0
+                dbf     d1,S3RingManager_ClearStatusWords
 
-loc_F7D6:
+S3RingManager_InitQueueClear:
                 lea     (Ring_consumption_table).w,a1
                 moveq   #bytesToLcnt(Ring_consumption_table_end-Ring_consumption_table),d1
 
-loc_F7DC:
+S3RingManager_ClearQueueAndGetLayout:
                 move.l  d0,(a1)+
-                dbf     d1,loc_F7DC
+                dbf     d1,S3RingManager_ClearQueueAndGetLayout
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
@@ -272,13 +272,14 @@ loc_F7DC:
                 moveq   #0,d5
                 move.w  #511-1,d0
 
-loc_F800:
+; Count at most 511 records and stop at the negative long sentinel
+S3RingManager_CountLayoutRings:
                 tst.l   (a1)+
-                bmi.s   loc_F80A
+                bmi.s   S3RingManager_StorePerfectCount
                 addq.w  #1,d5
-                dbf     d0,loc_F800
+                dbf     d0,S3RingManager_CountLayoutRings
 
-loc_F80A:
+S3RingManager_StorePerfectCount:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts

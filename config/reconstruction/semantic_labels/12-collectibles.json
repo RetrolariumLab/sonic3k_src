@@ -1,0 +1,3367 @@
+{
+  "schema_version": 1,
+  "packet": "12-collectibles",
+  "mappings": [
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 20,
+      "old": "loc_2C436",
+      "new": "S3Starpost_InitAndCheckSavedPost",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_InitializePostAndDerivePriorActivation"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 38,
+      "old": "loc_2C47E",
+      "new": "S3Starpost_MarkAlreadyActive",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_MarkPreviouslyActivatedPostAndSelectAnimationTwo"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 42,
+      "old": "loc_2C488",
+      "new": "S3Starpost_TryActivateP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_TestPrimaryPlayerActivationUnlessDebugPlacement"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 90,
+      "old": "loc_2C546",
+      "new": "S3Starpost_CommitActivation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_CommitActivationAndSnapshotDespiteChildAllocationFailure"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 97,
+      "old": "locret_2C55E",
+      "new": "S3Starpost_ActivationReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_ReturnFromActivationAfterRangeRejectOrCommittedSave"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 101,
+      "old": "loc_2C560",
+      "new": "S3Starpost_SetReachedAnimIfIdle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_SelectAnimationTwoForAlreadyReachedPostIfAnimationZero"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 106,
+      "old": "locret_2C56C",
+      "new": "S3Starpost_ReachedAnimReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_ReturnAfterAlreadyReachedAnimationCheck"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 112,
+      "old": "loc_2C56E",
+      "new": "S3Starpost_AnimateAndCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_AnimatePostThenApplyImmediateCoarseCull"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 118,
+      "old": "loc_2C580",
+      "new": "S3StarpostSpin_TickLifeAndParent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_SpinHead_TickLifetimeThenConditionallyUpdateParent"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 127,
+      "old": "loc_2C59E",
+      "new": "S3StarpostSpin_DeleteExpired",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_SpinHead_DeleteImmediatelyAfterExpiredParentCheck"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 131,
+      "old": "loc_2C5A4",
+      "new": "S3StarpostSpin_PositionFromOldAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_SpinHead_PositionFromOldAngleAndSignedHighProducts"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 214,
+      "old": "loc_2C6EA",
+      "new": "S3Starpost_RestoreTimerAndCamera",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_RestorePrimaryTimerAndCameraWithByteSecondWrap"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 230,
+      "old": "locret_2C736",
+      "new": "S3Starpost_PrimaryRestoreReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_ReturnAfterPrimarySnapshotAndOptionalWaterRestore"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 234,
+      "old": "loc_2C738",
+      "new": "S3Starpost_RestoreSecondarySnapshot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_RestoreSecondaryEntrySnapshotWithoutLastPostCopy"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 257,
+      "old": "locret_2C7AC",
+      "new": "S3Starpost_SecondaryRestoreReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_ReturnAfterSecondarySnapshotAndOptionalWaterRestore"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 275,
+      "old": "loc_2C842",
+      "new": "S3StarpostQuartet_SpawnOrbitStars",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusQuartet_AllocatePrefixAndSeedIndependentOrbitStates"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 299,
+      "old": "locret_2C8AC",
+      "new": "S3StarpostQuartet_SpawnReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusQuartet_ReturnAfterCompletionOrAllocationFailure"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 305,
+      "old": "loc_2C8AE",
+      "new": "S3StarpostStar_TryBonusRestart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_TestOddContactAndBeginBonusRestart"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 319,
+      "old": "loc_2C8EC",
+      "new": "S3StarpostStar_ClearContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_ClearNonzeroContactAfterOptionalRestartSetup"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 322,
+      "old": "loc_2C8F0",
+      "new": "S3StarpostStar_BuildOrbitBase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_BuildTrigBaseAndFoldedPhaseMultiplier"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 339,
+      "old": "loc_2C920",
+      "new": "S3StarpostStar_FoldPhaseTo8",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_FoldPhaseIndexIntoZeroThroughEight"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 346,
+      "old": "loc_2C930",
+      "new": "S3StarpostStar_TryAddCosine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_AddCosineWhenShiftedFoldIndexNonzero"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 351,
+      "old": "loc_2C936",
+      "new": "S3StarpostStar_FinishWarpAndAge",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_FinishThreePassWarpAndAdvanceSignedAge"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 362,
+      "old": "loc_2C950",
+      "new": "S3StarpostStar_ScaleOrbitLowWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_ScaleOrbitWithLowWordSignedProducts"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 370,
+      "old": "loc_2C95A",
+      "new": "S3StarpostStar_EnableContactAt128",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_WriteSpecialContactAtExactAgeOneTwentyEight"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 373,
+      "old": "loc_2C960",
+      "new": "S3StarpostStar_CheckOrbitShrink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_KeepFullOrbitThenShrinkAndDeleteBySignedFactor"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 382,
+      "old": "loc_2C972",
+      "new": "S3StarpostStar_SetPosAndFrameBits",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_StoreCenteredPositionAndDeriveFrameBits"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 397,
+      "old": "loc_2C99C",
+      "new": "S3StarpostStar_SetFrameAndQueueTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_StoreFrameAndQueueContactAfterCoarseCull"
+    },
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "original_line": 402,
+      "old": "loc_2C9A6",
+      "new": "S3StarpostStar_DeleteAfterShrink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: S3Starpost_BonusStar_DeleteImmediatelyForNegativeShrinkFactor"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 20,
+      "old": "loc_2CFC0",
+      "new": "SKStarpost_InitAndCheckSavedPost",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_InitializePostAndDerivePriorActivation"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 38,
+      "old": "loc_2D008",
+      "new": "SKStarpost_MarkAlreadyActive",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_MarkPreviouslyActivatedPostAndSelectAnimationTwo"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 42,
+      "old": "loc_2D012",
+      "new": "SKStarpost_TryActivateP1",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_TestPrimaryPlayerActivationUnlessDebugPlacement"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 90,
+      "old": "loc_2D0D0",
+      "new": "SKStarpost_CommitActivation",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_CommitActivationAndSnapshotDespiteChildAllocationFailure"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 97,
+      "old": "locret_2D0E8",
+      "new": "SKStarpost_ActivationReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_ReturnFromActivationAfterRangeRejectOrCommittedSave"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 101,
+      "old": "loc_2D0EA",
+      "new": "SKStarpost_SetReachedAnimIfIdle",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_SelectAnimationTwoForAlreadyReachedPostIfAnimationZero"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 106,
+      "old": "locret_2D0F6",
+      "new": "SKStarpost_ReachedAnimReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_ReturnAfterAlreadyReachedAnimationCheck"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 112,
+      "old": "loc_2D0F8",
+      "new": "SKStarpost_AnimateAndCull",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_AnimatePostThenApplyImmediateCoarseCull"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 118,
+      "old": "loc_2D10A",
+      "new": "SKStarpostSpin_TickLifeAndParent",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_SpinHead_TickLifetimeThenConditionallyUpdateParent"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 127,
+      "old": "loc_2D128",
+      "new": "SKStarpostSpin_DeleteExpired",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_SpinHead_DeleteImmediatelyAfterExpiredParentCheck"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 131,
+      "old": "loc_2D12E",
+      "new": "SKStarpostSpin_PositionFromOldAngle",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_SpinHead_PositionFromOldAngleAndSignedHighProducts"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 214,
+      "old": "loc_2D274",
+      "new": "SKStarpost_RestoreTimerAndCamera",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_RestorePrimaryTimerAndCameraWithByteSecondWrap"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 230,
+      "old": "locret_2D2C0",
+      "new": "SKStarpost_PrimaryRestoreReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_ReturnAfterPrimarySnapshotAndOptionalWaterRestore"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 234,
+      "old": "loc_2D2C2",
+      "new": "SKStarpost_RestoreSecondarySnapshot",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_RestoreSecondaryEntrySnapshotWithoutLastPostCopy"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 257,
+      "old": "locret_2D336",
+      "new": "SKStarpost_SecondaryRestoreReturn",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_ReturnAfterSecondarySnapshotAndOptionalWaterRestore"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 275,
+      "old": "loc_2D3CC",
+      "new": "SKStarpostQuartet_SpawnOrbitStars",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusQuartet_AllocatePrefixAndSeedIndependentOrbitStates"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 299,
+      "old": "loc_2D436",
+      "new": "SKStarpostQuartet_SelectArt",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusQuartet_SelectStarArtFromLiveRingBandAfterAnyPrefix"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 310,
+      "old": "loc_2D454",
+      "new": "SKStarpostQuartet_PickArtRemainder",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusQuartet_ChooseArtByStandaloneOrCombinedRemainder"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 322,
+      "old": "loc_2D474",
+      "new": "SKStarpostQuartet_QueueArt",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusQuartet_QueueSelectedArtAtStarpostTileBase"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 329,
+      "old": "loc_2D47E",
+      "new": "SKStarpostStar_TryBonusRestart",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_TestOddContactAndBeginBonusRestart"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 345,
+      "old": "loc_2D4AE",
+      "new": "SKStarpostStar_PickBonusZone",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_ChooseZoneFromSavedRingBandRemainder"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 357,
+      "old": "loc_2D4CA",
+      "new": "SKStarpostStar_SaveBonusEntry",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_CommitSelectedZoneAndPreserveMaskedEntryPowers"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 371,
+      "old": "loc_2D506",
+      "new": "SKStarpostStar_ClearContacts",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_ClearNonzeroContactAfterOptionalRestartSetup"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 374,
+      "old": "loc_2D50A",
+      "new": "SKStarpostStar_BuildOrbitBase",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_BuildTrigBaseAndFoldedPhaseMultiplier"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 391,
+      "old": "loc_2D53A",
+      "new": "SKStarpostStar_FoldPhaseTo8",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_FoldPhaseIndexIntoZeroThroughEight"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 398,
+      "old": "loc_2D54A",
+      "new": "SKStarpostStar_TryAddCosine",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_AddCosineWhenShiftedFoldIndexNonzero"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 403,
+      "old": "loc_2D550",
+      "new": "SKStarpostStar_FinishWarpAndAge",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_FinishThreePassWarpAndAdvanceSignedAge"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 414,
+      "old": "loc_2D56A",
+      "new": "SKStarpostStar_ScaleOrbitLowWords",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_ScaleOrbitWithLowWordSignedProducts"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 422,
+      "old": "loc_2D574",
+      "new": "SKStarpostStar_EnableContactAt128",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_WriteSpecialContactAtExactAgeOneTwentyEight"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 425,
+      "old": "loc_2D57A",
+      "new": "SKStarpostStar_CheckOrbitShrink",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_KeepFullOrbitThenShrinkAndDeleteBySignedFactor"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 434,
+      "old": "loc_2D58C",
+      "new": "SKStarpostStar_SetPosAndFrameBits",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_StoreCenteredPositionAndDeriveFrameBits"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 449,
+      "old": "loc_2D5B6",
+      "new": "SKStarpostStar_SetFrameAndQueueTouch",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_StoreFrameAndQueueContactAfterCoarseCull"
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "original_line": 454,
+      "old": "loc_2D5C0",
+      "new": "SKStarpostStar_DeleteAfterShrink",
+      "profiles": ["sk"],
+      "meaning": "Actualcheckpoint/bonusstatejoin: SKStarpost_BonusStar_DeleteImmediatelyForNegativeShrinkFactor"
+    },
+    {
+      "source": "src/objects/items/s3/hidden_monitor.s",
+      "original_line": 41,
+      "old": "loc_52352",
+      "new": "S3HiddenMonitor_RejectAndCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Hidden_RejectOutsideRectangleAndInstallVisibleCullHandler from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/hidden_monitor.s",
+      "original_line": 46,
+      "old": "loc_52360",
+      "new": "S3HiddenMonitor_CullUnrevealed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Hidden_PerformNativeUnrevealedCull from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/hidden_monitor.s",
+      "original_line": 50,
+      "old": "loc_52366",
+      "new": "S3HiddenMonitor_RevealFromSign",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Hidden_ConsumeSignTriggerAndRevealFallingMonitor from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/hidden_monitor.s",
+      "original_line": 60,
+      "old": "word_52392",
+      "new": "S3HiddenMonitor_SignTriggerRect",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Hidden_SignRelativeTriggerRectangle from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 60,
+      "old": "loc_1B4C8",
+      "new": "S3Monitor_UpdateSolidBox",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Box_SolidPlayersRegisterAnimateAndCull from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 80,
+      "old": "loc_1B504",
+      "new": "S3Monitor_Box_DrawAndCullCurrentX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Box_DrawAndCullCurrentX from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 195,
+      "old": "loc_1B616",
+      "new": "S3MonitorIcon_InitFirstPiece",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_InitializeStaticFirstMappingPiece from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 212,
+      "old": "loc_1B656",
+      "new": "S3Monitor_Icon_MoveTowardApexThenDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_MoveTowardApexThenDraw from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 226,
+      "old": "loc_1B670",
+      "new": "S3MonitorIcon_InitLifeAndLedger",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_ArmWordLifetimeAndSelectRecipientBrokenLedger from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 235,
+      "old": "loc_1B68C",
+      "new": "S3MonitorIcon_DispatchAnimReward",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_DispatchUncheckedAnimationRewardIndex from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 244,
+      "old": "off_1B69C",
+      "new": "S3Monitor_Icon_RewardRelativeWordTable",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_RewardRelativeWordTable from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 281,
+      "old": "loc_1B6EA",
+      "new": "S3MonitorRings_CapP1At999",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Rings_ApplyUnsigned999CapThenStorePlayerOneLedger from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 287,
+      "old": "loc_1B6F8",
+      "new": "S3MonitorRings_UpdateHudAndLives",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Rings_UpdateHudAndTest100Then200ExtraLifeFlags from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 298,
+      "old": "loc_1B714",
+      "new": "S3MonitorRings_PlayRightSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Rings_RequestRingRightSoundThroughMusicEntry from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 303,
+      "old": "loc_1B71C",
+      "new": "S3MonitorRings_PickLifeOrEggman",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Rings_SelectExtraLifeOrEggmanUsingRecipientPointer from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 323,
+      "old": "loc_1B758",
+      "new": "S3MonitorShoes_SetP2SpeedParams",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_SpeedShoes_WriteSecondPlayerMovementTriplet from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 328,
+      "old": "loc_1B76A",
+      "new": "S3MonitorShoes_SetGlobalTempo8",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_SpeedShoes_RequestGlobalTempoEight from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 347,
+      "old": "loc_1B7A2",
+      "new": "S3MonitorFireShield_InitP2Slot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_FireShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 367,
+      "old": "loc_1B7E0",
+      "new": "S3MonitorLightning_InitP2Slot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_LightningShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 387,
+      "old": "loc_1B81E",
+      "new": "S3MonitorBubbleShield_InitP2Slot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_BubbleShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 406,
+      "old": "loc_1B856",
+      "new": "S3MonitorStars_SelectSlot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Invincibility_SelectFixedStarsSlotByParentLowByte from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 414,
+      "old": "loc_1B86A",
+      "new": "S3MonitorStars_InitP2Slot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Invincibility_InstallSecondFixedStarsSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 418,
+      "old": "locret_1B876",
+      "new": "S3MonitorStars_GrantReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Invincibility_ReturnAfterGrantOrGlobalSuperGate from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "original_line": 447,
+      "old": "loc_1B8E4",
+      "new": "S3MonitorIcon_TickLifeOrDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Monitor_Icon_DecrementWordLifetimeThenDeleteOrDraw from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "original_line": 43,
+      "old": "loc_8374C",
+      "new": "SKHiddenMonitor_RejectAndCull",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Hidden_RejectOutsideRectangleAndInstallVisibleCullHandler from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "original_line": 48,
+      "old": "loc_8375A",
+      "new": "SKHiddenMonitor_CullUnrevealed",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Hidden_PerformNativeUnrevealedCull from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "original_line": 52,
+      "old": "loc_83760",
+      "new": "SKHiddenMonitor_RevealFromSign",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Hidden_ConsumeSignTriggerAndRevealFallingMonitor from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "original_line": 65,
+      "old": "loc_83798",
+      "new": "SKHiddenMonitor_DrawRevealedBox",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Hidden_DrawRevealedMonitorAfterOptionalOrientationCleanup from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "original_line": 68,
+      "old": "word_8379E",
+      "new": "SKHiddenMonitor_SignTriggerRect",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Hidden_SignRelativeTriggerRectangle from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 64,
+      "old": "loc_1D61A",
+      "new": "SKMonitor_Box_DrawAndCullCurrentX",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Box_DrawAndCullCurrentX from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 115,
+      "old": "locret_1D694",
+      "new": "SKMonitor_Box_ReturnFromNativeFallOrSkip",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Box_ReturnFromNativeFallOrSkip from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 133,
+      "old": "locret_1D6BC",
+      "new": "SKMonitor_SkipNewSolidReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Box_SkipNewSolidForRollingGlidingOrSlidingPlayer from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 137,
+      "old": "loc_1D6BE",
+      "new": "SKMonitor_ContinueSolidContact",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Box_TailCallSolidObjectContinuation from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 245,
+      "old": "loc_1D7CE",
+      "new": "SKMonitorIcon_InitFirstPiece",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_InitializeStaticFirstMappingPiece from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 256,
+      "old": "loc_1D7FC",
+      "new": "SKMonitorIcon_SelectFirstPiece",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_SelectStaticFirstPieceAfterOrientationVelocitySetup from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 267,
+      "old": "loc_1D81A",
+      "new": "SKMonitor_Icon_MoveTowardApexThenDraw",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_MoveTowardApexThenDraw from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 283,
+      "old": "loc_1D83C",
+      "new": "SKMonitorIcon_MoveFlippedToApex",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_MoveFlippedTowardApexOrDispatchNegativeVelocity from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 291,
+      "old": "loc_1D850",
+      "new": "SKMonitorIcon_InitLifeAndLedger",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_ArmWordLifetimeAndSelectRecipientBrokenLedger from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 300,
+      "old": "loc_1D86C",
+      "new": "SKMonitorIcon_DispatchAnimReward",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_DispatchUncheckedAnimationRewardIndex from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 309,
+      "old": "off_1D87C",
+      "new": "SKMonitor_Icon_RewardRelativeWordTable",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_RewardRelativeWordTable from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 346,
+      "old": "loc_1D8CC",
+      "new": "SKMonitorRings_CapP1At999",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Rings_ApplyUnsigned999CapThenStorePlayerOneLedger from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 352,
+      "old": "loc_1D8DA",
+      "new": "SKMonitorRings_UpdateHudAndLives",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Rings_UpdateHudAndTest100Then200ExtraLifeFlags from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 363,
+      "old": "loc_1D8F6",
+      "new": "SKMonitorRings_PlayRightSound",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Rings_RequestRingRightSoundThroughMusicEntry from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 368,
+      "old": "loc_1D8FE",
+      "new": "SKMonitorRings_PickLifeOrEggman",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Rings_SelectExtraLifeOrEggmanUsingRecipientPointer from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 388,
+      "old": "loc_1D93A",
+      "new": "SKMonitorShoes_SetP2SpeedParams",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_SpeedShoes_WriteSecondPlayerMovementTriplet from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 393,
+      "old": "loc_1D94C",
+      "new": "SKMonitorShoes_SetGlobalTempo8",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_SpeedShoes_RequestGlobalTempoEight from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 412,
+      "old": "loc_1D984",
+      "new": "SKMonitorFireShield_InitP2Slot",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_FireShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 432,
+      "old": "loc_1D9C2",
+      "new": "SKMonitorLightning_InitP2Slot",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_LightningShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 452,
+      "old": "loc_1DA00",
+      "new": "SKMonitorBubbleShield_InitP2Slot",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_BubbleShield_InstallSecondFixedShieldSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 473,
+      "old": "loc_1DA3E",
+      "new": "SKMonitorStars_SelectSlot",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Invincibility_SelectFixedStarsSlotByParentLowByte from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 481,
+      "old": "loc_1DA52",
+      "new": "SKMonitorStars_InitP2Slot",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Invincibility_InstallSecondFixedStarsSlot from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 485,
+      "old": "locret_1DA5E",
+      "new": "SKMonitorStars_GrantReturn",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Invincibility_ReturnAfterGrantOrGlobalSuperGate from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "original_line": 542,
+      "old": "loc_1DB2E",
+      "new": "SKMonitorIcon_TickLifeOrDelete",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitor_Icon_DecrementWordLifetimeThenDeleteOrDraw from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 74,
+      "old": "loc_18DB4",
+      "new": "S3Rings_AwardP1RingThresholdExtraLife",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 93,
+      "old": "loc_18DD8",
+      "new": "S3Rings_SaturateP2CurrentRingCountAt999",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 98,
+      "old": "loc_18DE4",
+      "new": "S3RingReward_SelectP2CreditPath",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 112,
+      "old": "loc_18E14",
+      "new": "S3RingReward_AwardCompP2Life",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 118,
+      "old": "loc_18E20",
+      "new": "S3Rings_PlayP2CompetitionRingPickupSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 138,
+      "old": "loc_18E3E",
+      "new": "S3RingSpill_SelectLedger",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 146,
+      "old": "loc_18E50",
+      "new": "S3RingSpill_CapAt32",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 152,
+      "old": "loc_18E58",
+      "new": "S3RingSpill_InitCountAndFanSeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 158,
+      "old": "loc_18E60",
+      "new": "S3RingSpill_TryNextRing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 162,
+      "old": "loc_18E68",
+      "new": "S3RingSpill_InitRingAndFanVel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 192,
+      "old": "loc_18EDE",
+      "new": "S3RingSpill_StoreVelAndMirrorX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 199,
+      "old": "loc_18EEE",
+      "new": "S3RingSpill_PlayLossAndClearP1",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 206,
+      "old": "loc_18F0A",
+      "new": "S3RingSpill_MoveAndTryFloorBounce",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 226,
+      "old": "loc_18F4A",
+      "new": "S3RingSpill_CullOrQueueTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 239,
+      "old": "loc_18F6E",
+      "new": "S3RingSpill_CollectAndSparkle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 245,
+      "old": "loc_18F82",
+      "new": "S3RingSpill_DrawSparkle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 251,
+      "old": "loc_18F90",
+      "new": "S3Rings_DeleteExpiredOrFinishedLostRing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 268,
+      "old": "loc_18FD2",
+      "new": "S3AttractedRing_MoveOrRelease",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 285,
+      "old": "loc_1900C",
+      "new": "S3AttractedRing_CullOrDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 295,
+      "old": "loc_19028",
+      "new": "S3AttractedRing_ClearLoadedBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 301,
+      "old": "loc_19034",
+      "new": "S3AttractedRing_ClearStatusFromVector",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 310,
+      "old": "loc_19040",
+      "new": "S3Rings_DeleteCoarseCulledAttractedRing",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 322,
+      "old": "loc_19064",
+      "new": "S3AttractedRing_AnimateSparkle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "original_line": 330,
+      "old": "loc_19078",
+      "new": "S3AttractedRing_DeleteAfterSparkle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_rendering.s",
+      "original_line": 18,
+      "old": "loc_F836",
+      "new": "S3RingRender_FilterLayoutEntry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_rendering.s",
+      "original_line": 35,
+      "old": "loc_F85E",
+      "new": "S3RingRender_EmitLayoutSprite",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_rendering.s",
+      "original_line": 48,
+      "old": "loc_F876",
+      "new": "S3RingRender_NextLayoutEntry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_rendering.s",
+      "original_line": 53,
+      "old": "locret_F87C",
+      "new": "S3RingRender_LayoutReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 17,
+      "old": "loc_F604",
+      "new": "S3RingManager_InitAndSeekWindow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 29,
+      "old": "loc_F620",
+      "new": "S3RingWindow_NextInitialStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 33,
+      "old": "loc_F624",
+      "new": "S3RingWindow_StoreInitialStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 42,
+      "old": "loc_F636",
+      "new": "S3RingWindow_NextInitialEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 45,
+      "old": "loc_F638",
+      "new": "S3RingWindow_StoreInitialEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 52,
+      "old": "loc_F642",
+      "new": "S3RingQueue_InitActiveLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 58,
+      "old": "loc_F64C",
+      "new": "S3RingQueue_TickAndRetireSparkle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 72,
+      "old": "loc_F672",
+      "new": "S3RingQueue_RepeatActiveLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 75,
+      "old": "loc_F676",
+      "new": "S3RingWindow_GetCameraStartX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 85,
+      "old": "loc_F68A",
+      "new": "S3RingWindow_AdvanceStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 89,
+      "old": "loc_F68E",
+      "new": "S3Rings_TestForwardLeftWindowSeek",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 95,
+      "old": "loc_F694",
+      "new": "S3RingWindow_RewindStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 99,
+      "old": "loc_F698",
+      "new": "S3RingWindow_StoreStartAndSeekEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 109,
+      "old": "loc_F6B0",
+      "new": "S3RingWindow_AdvanceEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 112,
+      "old": "loc_F6B2",
+      "new": "S3Rings_TestForwardRightWindowSeek",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 118,
+      "old": "loc_F6B8",
+      "new": "S3RingWindow_RewindEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 121,
+      "old": "loc_F6BA",
+      "new": "S3RingWindow_StoreExclusiveEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 175,
+      "old": "loc_F746",
+      "new": "S3RingContact_CheckWidth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 179,
+      "old": "loc_F74C",
+      "new": "S3RingContact_CheckYOverlap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 189,
+      "old": "loc_F75E",
+      "new": "S3RingContact_CheckHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 193,
+      "old": "loc_F764",
+      "new": "S3RingContact_SelectPickupPath",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 197,
+      "old": "loc_F76C",
+      "new": "S3RingContact_MarkSparkleAndCredit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 202,
+      "old": "loc_F776",
+      "new": "S3RingQueue_InsertFirstFree",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 208,
+      "old": "loc_F780",
+      "new": "S3RingContact_NextLayoutEntry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 214,
+      "old": "locret_F78A",
+      "new": "S3Rings_ReturnAfterRingScanOrEntryGuard",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 239,
+      "old": "loc_F7BC",
+      "new": "S3RingContact_CollectOnAllocFailure",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 252,
+      "old": "loc_F7D0",
+      "new": "S3RingManager_ClearStatusWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 256,
+      "old": "loc_F7D6",
+      "new": "S3RingManager_InitQueueClear",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 260,
+      "old": "loc_F7DC",
+      "new": "S3RingManager_ClearQueueAndGetLayout",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 273,
+      "old": "loc_F800",
+      "new": "S3RingManager_CountLayoutRings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "original_line": 279,
+      "old": "loc_F80A",
+      "new": "S3RingManager_StorePerfectCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish native S3 ring state or reader join from actual source/callers."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 74,
+      "old": "loc_1A5D8",
+      "new": "SKRings_AwardP1LatchedRingThresholdLife",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AwardP1LatchedRingThresholdLife."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 93,
+      "old": "loc_1A5FC",
+      "new": "SKRingReward_TryIncrementP2",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_IncrementP2RingLedgerUnlessAlready999."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 98,
+      "old": "loc_1A608",
+      "new": "SKRingReward_SelectP2CreditPath",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_SelectSharedP1OrCompetitionP2RewardPath."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 112,
+      "old": "loc_1A638",
+      "new": "SKRingReward_AwardCompP2Life",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AwardCompetitionP2LatchedThresholdLife."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 118,
+      "old": "loc_1A644",
+      "new": "SKRings_RequestCompetitionP2RingSound",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RequestCompetitionP2RingSound."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 152,
+      "old": "loc_1A67A",
+      "new": "SKRingSpill_SelectGravityHandler",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ChooseSpillHandlerFromCurrentGravityFlag."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 158,
+      "old": "loc_1A68C",
+      "new": "SKRingSpill_SelectLedger",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_UseCurrentActorAsFirstSpillAndSelectLedger."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 166,
+      "old": "loc_1A69E",
+      "new": "SKRingSpill_CapAt32",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CapRequestedSpillCountAtThirtyTwo."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 172,
+      "old": "loc_1A6A6",
+      "new": "SKRingSpill_InitCountAndFanSeed",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_PrepareCountMinusOneAndPackedFanAngleSpeed."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 178,
+      "old": "loc_1A6AE",
+      "new": "SKRingSpill_TryNextRing",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AllocateNextSpilledRingOrFinishPartialFanout."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 182,
+      "old": "loc_1A6B6",
+      "new": "SKRingSpill_InitRingAndFanVel",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_InitializeFanoutInstanceAndMaybeComputeSineVelocity."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 212,
+      "old": "loc_1A728",
+      "new": "SKRingSpill_StoreVelAndMirrorX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_StoreFanVelocityMirrorXAndTogglePackedState."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 219,
+      "old": "loc_1A738",
+      "new": "SKRingSpill_PlayLossAndMoveFirst",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RequestLossSoundClearP1LedgerAndMoveOriginalImmediately."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 228,
+      "old": "loc_1A75C",
+      "new": "SKRingSpill_MoveAndTryFloorBounce",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_MoveNormalSpillAndGateBounceLifetimeChecks."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 248,
+      "old": "loc_1A79C",
+      "new": "SKRingSpill_CheckLifetimeAndMaxY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_DeleteNormalSpillOnZeroCounterOrUnsignedDeathPlane."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 256,
+      "old": "loc_1A7B0",
+      "new": "SKRingSpill_DrawNormalAndQueueTouch",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RegisterNormalSpillTouchSubtractRepeatXAndDraw."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 263,
+      "old": "loc_1A7C2",
+      "new": "SKRingSpill_CollectAndSparkle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CollectSpilledRingIntoP1LedgerAndStartSparkle."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 269,
+      "old": "loc_1A7D6",
+      "new": "SKRingSpill_DrawSparkle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AnimateSpilledRingSparkleAndDrawUntilNextState."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 275,
+      "old": "loc_1A7E4",
+      "new": "SKRingSpill_Delete",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ImmediatelyClearExpiredOrFinishedSpill."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 279,
+      "old": "loc_1A7E8",
+      "new": "SKRingSpill_MoveAndTryCeilingBounce",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_MoveReverseSpillAndProbeOppositeSurfaceOnPhase."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 299,
+      "old": "loc_1A828",
+      "new": "SKRingSpill_CheckReverseLifetime",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ApplyReverseSpillSharedCounterAndSameMaxYGate."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 307,
+      "old": "loc_1A83C",
+      "new": "SKRingSpill_DrawReverseAndQueueTouch",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RegisterReverseSpillTouchSubtractRepeatXAndDraw."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 327,
+      "old": "loc_1A88C",
+      "new": "SKAttractedRing_MoveOrRelease",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_MoveAttractedRingOrCollectThenCheckP1Shield."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 344,
+      "old": "loc_1A8C6",
+      "new": "SKAttractedRing_CullOrDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CullAttractedRingByCoarseXOrRegisterTouchAndDraw."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 354,
+      "old": "loc_1A8E4",
+      "new": "SKAttractedRing_ClearLoadedBit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ClearAttractedObjectRespawnBitBeforeBrokenStatusRead."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 360,
+      "old": "loc_1A8F0",
+      "new": "SKAttractedRing_ClearStatusFromVector",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ReadAbsoluteVectorWordInsteadOfActorRingStatus."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 369,
+      "old": "loc_1A8FC",
+      "new": "SKAttractedRing_DeleteAfterCleanup",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ImmediatelyDeleteAttractedRingAfterDespawnCleanup."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 381,
+      "old": "loc_1A920",
+      "new": "SKAttractedRing_AnimateSparkle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RunCollectedAttractedSparkleUntilNativeRoutineChanges."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 389,
+      "old": "loc_1A934",
+      "new": "SKAttractedRing_DeleteAfterSparkle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ImmediatelyClearAttractedSparkleAfterRoutineChange."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 461,
+      "old": "loc_1AA02",
+      "new": "SKSlotRing_EaseAndRewardAtZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_EaseSlotRingFixedPointTowardTargetThenRewardAtExactZero."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 487,
+      "old": "loc_1AA56",
+      "new": "SKSlotRing_DrawRewardSparkle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AnimateSlotRewardSparkleAndDrawBeforeDeleteState."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "original_line": 493,
+      "old": "loc_1AA62",
+      "new": "SKSlotRing_DeleteAfterReward",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ImmediatelyClearCompletedSlotRewardRing."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_rendering.s",
+      "original_line": 18,
+      "old": "loc_EBA6",
+      "new": "SKRingRender_FilterLayoutEntry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ScanStaticStatusesCullWrappedYAndChooseFrame."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_rendering.s",
+      "original_line": 35,
+      "old": "loc_EBCE",
+      "new": "SKRingRender_EmitLayoutSprite",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_EmitOneCustomEightByteRingSpriteAndDecrementBudget."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_rendering.s",
+      "original_line": 48,
+      "old": "loc_EBE6",
+      "new": "SKRingRender_NextLayoutEntry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceStaticRingRecordAndRemainingRomByteSpan."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_rendering.s",
+      "original_line": 53,
+      "old": "locret_EBEC",
+      "new": "SKRingRender_LayoutReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ReturnFromEmptyOrRenderedStaticRingWindow."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 18,
+      "old": "loc_E8BE",
+      "new": "SKRingManager_InitAndChooseAxis",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_InitializeManagerResetStateAndChooseHorizontalOrVertical."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 32,
+      "old": "loc_E8E2",
+      "new": "SKRingWindow_NextInitialXStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceInitialHorizontalLayoutAndStatusTogether."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 36,
+      "old": "loc_E8E6",
+      "new": "SKRingWindow_StoreInitialXStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitInitialHorizontalStartAndPrepareExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 45,
+      "old": "loc_E8F8",
+      "new": "SKRingWindow_NextInitialXEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceInitialHorizontalExclusiveEndRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 48,
+      "old": "loc_E8FA",
+      "new": "SKRingWindow_StoreInitialXEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitInitialHorizontalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 55,
+      "old": "loc_E904",
+      "new": "SKRingWindow_InitPachinkoY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_InitializeVerticalPachinkoWindowAndAlternateStatusBase."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 66,
+      "old": "loc_E91C",
+      "new": "SKRingWindow_NextInitialYStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceInitialVerticalLayoutAndStatusTogether."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 70,
+      "old": "loc_E920",
+      "new": "SKRingWindow_StoreInitialYStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitInitialVerticalStartAndPrepareExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 79,
+      "old": "loc_E934",
+      "new": "SKRingWindow_NextInitialYEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceInitialVerticalExclusiveEndRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 82,
+      "old": "loc_E936",
+      "new": "SKRingWindow_StoreInitialYEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitInitialVerticalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 89,
+      "old": "loc_E942",
+      "new": "SKRingWindow_UpdateSparklesAndX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceSparklesThenReconcileHorizontalWindow."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 100,
+      "old": "loc_E958",
+      "new": "SKRingWindow_AdvanceXStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceUpdatedHorizontalStartAndStatus."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 104,
+      "old": "loc_E95C",
+      "new": "SKRingWindow_TestXStartForward",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_FinishHorizontalForwardScanThenTestPreviousRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 110,
+      "old": "loc_E962",
+      "new": "SKRingWindow_RewindXStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RewindHorizontalStartAndStatusOneRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 114,
+      "old": "loc_E966",
+      "new": "SKRingWindow_StoreXStartAndSeekEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitReconciledHorizontalStartAndLoadOldEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 124,
+      "old": "loc_E97E",
+      "new": "SKRingWindow_AdvanceXEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceUpdatedHorizontalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 127,
+      "old": "loc_E980",
+      "new": "SKRingWindow_TestXEndForward",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_FinishHorizontalEndForwardScanThenCheckPrevious."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 133,
+      "old": "loc_E986",
+      "new": "SKRingWindow_RewindXEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RewindHorizontalExclusiveEndOneRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 136,
+      "old": "loc_E988",
+      "new": "SKRingWindow_StoreExclusiveXEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitReconciledHorizontalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 150,
+      "old": "loc_E99E",
+      "new": "SKRingQueue_TickSparkleHighByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ScanQueuedStatusPointersAndTickSparkleHighByte."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 164,
+      "old": "loc_E9C4",
+      "new": "SKRingQueue_NextActiveEntry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CountProcessedNonzeroQueuePointers."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 167,
+      "old": "locret_E9C8",
+      "new": "SKRingQueue_UpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ReturnFromEmptyOrProcessedConsumptionQueue."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 173,
+      "old": "loc_E9CA",
+      "new": "SKRingWindow_UpdateSparklesAndY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceSparklesThenReconcileVerticalWindow."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 184,
+      "old": "loc_E9E0",
+      "new": "SKRingWindow_AdvanceYStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceUpdatedVerticalStartAndStatus."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 188,
+      "old": "loc_E9E4",
+      "new": "SKRingWindow_TestYStartForward",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_FinishVerticalForwardScanThenTestPrevious."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 194,
+      "old": "loc_E9EC",
+      "new": "SKRingWindow_RewindYStart",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RewindVerticalStartAndStatusOneRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 198,
+      "old": "loc_E9F0",
+      "new": "SKRingWindow_StoreYStartAndSeekEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitReconciledVerticalStartAndLoadOldEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 208,
+      "old": "loc_EA08",
+      "new": "SKRingWindow_AdvanceYEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceUpdatedVerticalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 211,
+      "old": "loc_EA0A",
+      "new": "SKRingWindow_TestYEndForward",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_FinishVerticalEndForwardScanThenCheckPrevious."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 217,
+      "old": "loc_EA12",
+      "new": "SKRingWindow_RewindYEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RewindVerticalExclusiveEndOneRecord."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 220,
+      "old": "loc_EA14",
+      "new": "SKRingWindow_StoreExclusiveYEnd",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CommitReconciledVerticalExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 274,
+      "old": "loc_EAA0",
+      "new": "SKRingContact_CheckWidth",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AcceptNonborrowedHorizontalOverlapWithinCallerWidth."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 278,
+      "old": "loc_EAA6",
+      "new": "SKRingContact_CheckYOverlap",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_TestVerticalOverlapUsingSixPixelRingRadius."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 288,
+      "old": "loc_EAB8",
+      "new": "SKRingContact_CheckHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AcceptNonborrowedVerticalOverlapWithinCallerHeight."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 292,
+      "old": "loc_EABE",
+      "new": "SKRingContact_SelectPickupPath",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ChooseDirectCollectionOrDynamicMagnetFromCallerShield."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 296,
+      "old": "loc_EAC6",
+      "new": "SKRingContact_MarkSparkleAndCredit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_MarkStaticRingSparkleRewardP1AndFindQueueHole."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 301,
+      "old": "loc_EAD0",
+      "new": "SKRingQueue_InsertFirstFree",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AppendStaticRingStatusPointerToFirstZeroQueueSlot."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 307,
+      "old": "loc_EADA",
+      "new": "SKRingContact_NextLayoutEntry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AdvanceCollisionLayoutAndParallelStatusUntilExclusiveEnd."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 313,
+      "old": "locret_EAE4",
+      "new": "SKRingContact_ScanReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ReturnFromRingCollisionGateOrCompletedScan."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 338,
+      "old": "loc_EB16",
+      "new": "SKRingContact_CollectOnAllocFailure",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_RestoreLayoutPointerAndCollectDirectlyWhenMagnetAllocationFails."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 351,
+      "old": "loc_EB2A",
+      "new": "SKRingManager_ClearStatusWords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ClearAllPrimaryRingStatusLongwordsWhenKeepFlagClear."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 355,
+      "old": "loc_EB30",
+      "new": "SKRingManager_InitQueueClear",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_AlwaysSelectConsumptionQueueForReset."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 359,
+      "old": "loc_EB36",
+      "new": "SKRingManager_ClearQueueAndCheckY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ClearQueueAndSelectOptionalVerticalStatusReset."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 367,
+      "old": "loc_EB4C",
+      "new": "SKRingManager_ClearPachinkoStatus",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_ClearAlternatePachinkoStatusLongwords."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 371,
+      "old": "loc_EB52",
+      "new": "SKRingManager_GetLayoutAndCount",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_DecodeZoneActPointerOffsetAndCountFollowingLayoutRecords."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 382,
+      "old": "loc_EB70",
+      "new": "SKRingManager_CountLayoutRings",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_CountAtMost511RecordsUntilSignedLongTerminator."
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "original_line": 388,
+      "old": "loc_EB7A",
+      "new": "SKRingManager_StorePerfectCount",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKRings_StoreInitialPerfectRingCountAndClearPerfectFlag."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 15,
+      "old": "byte_1DB50",
+      "new": "MonitorSTD_EggmanIndexZero",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_EggmanIndexZero from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 16,
+      "old": "byte_1DB54",
+      "new": "MonitorSTD_OneUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_OneUp from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 17,
+      "old": "byte_1DB5C",
+      "new": "MonitorSTD_Eggman",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_Eggman from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 18,
+      "old": "byte_1DB64",
+      "new": "MonitorSTD_Rings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_Rings from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 19,
+      "old": "byte_1DB6C",
+      "new": "MonitorSTD_SpeedShoes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_SpeedShoes from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 20,
+      "old": "byte_1DB74",
+      "new": "MonitorSTD_FireShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_FireShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 21,
+      "old": "byte_1DB7C",
+      "new": "MonitorSTD_LightningShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_LightningShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 22,
+      "old": "byte_1DB84",
+      "new": "MonitorSTD_BubbleShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_BubbleShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 23,
+      "old": "byte_1DB8C",
+      "new": "MonitorSTD_Invincibility",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_Invincibility from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 24,
+      "old": "byte_1DB94",
+      "new": "MonitorSTD_Transformation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_Transformation from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "original_line": 25,
+      "old": "byte_1DB9C",
+      "new": "MonitorSTD_BrokenHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish MonitorSTD_BrokenHold from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 16,
+      "old": "word_1DBBA",
+      "new": "SKMonitorMap_CaseOnly",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_CaseOnly from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 18,
+      "old": "word_1DBC2",
+      "new": "SKMonitorMap_EggmanIndexZero",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_EggmanIndexZero from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 21,
+      "old": "word_1DBD0",
+      "new": "SKMonitorMap_OneUp",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_OneUp from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 24,
+      "old": "word_1DBDE",
+      "new": "SKMonitorMap_Eggman",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_Eggman from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 27,
+      "old": "word_1DBEC",
+      "new": "SKMonitorMap_Rings",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_Rings from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 30,
+      "old": "word_1DBFA",
+      "new": "SKMonitorMap_SpeedShoes",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_SpeedShoes from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 33,
+      "old": "word_1DC08",
+      "new": "SKMonitorMap_FireShield",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_FireShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 36,
+      "old": "word_1DC16",
+      "new": "SKMonitorMap_LightningShield",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_LightningShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 39,
+      "old": "word_1DC24",
+      "new": "SKMonitorMap_BubbleShield",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_BubbleShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 42,
+      "old": "word_1DC32",
+      "new": "SKMonitorMap_Invincibility",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_Invincibility from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 45,
+      "old": "word_1DC40",
+      "new": "SKMonitorMap_Transformation",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_Transformation from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "original_line": 48,
+      "old": "word_1DC4E",
+      "new": "SKMonitorMap_Broken",
+      "profiles": ["sk"],
+      "meaning": "Establish SKMonitorMap_Broken from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 16,
+      "old": "word_1B970",
+      "new": "S3MonitorMap_CaseOnly",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_CaseOnly from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 18,
+      "old": "word_1B978",
+      "new": "S3MonitorMap_EggmanIndexZero",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_EggmanIndexZero from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 21,
+      "old": "word_1B986",
+      "new": "S3MonitorMap_OneUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_OneUp from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 24,
+      "old": "word_1B994",
+      "new": "S3MonitorMap_Eggman",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_Eggman from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 27,
+      "old": "word_1B9A2",
+      "new": "S3MonitorMap_Rings",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_Rings from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 30,
+      "old": "word_1B9B0",
+      "new": "S3MonitorMap_SpeedShoes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_SpeedShoes from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 33,
+      "old": "word_1B9BE",
+      "new": "S3MonitorMap_FireShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_FireShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 36,
+      "old": "word_1B9CC",
+      "new": "S3MonitorMap_LightningShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_LightningShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 39,
+      "old": "word_1B9DA",
+      "new": "S3MonitorMap_BubbleShield",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_BubbleShield from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 42,
+      "old": "word_1B9E8",
+      "new": "S3MonitorMap_Invincibility",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_Invincibility from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 45,
+      "old": "word_1B9F6",
+      "new": "S3MonitorMap_Transformation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_Transformation from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "original_line": 48,
+      "old": "word_1BA04",
+      "new": "S3MonitorMap_Broken",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3MonitorMap_Broken from actual native graph and true consumers."
+    },
+    {
+      "source": "src/objects/shared/ring/animations/ring.s",
+      "original_line": 4,
+      "old": "byte_1AA68",
+      "new": "SKSlotRing_StandardSpinLoopAnimation",
+      "profiles": ["sk"],
+      "meaning": "SKSlotRing_StandardSpinLoopAnimation"
+    },
+    {
+      "source": "src/objects/shared/ring/animations/sparkle.s",
+      "original_line": 5,
+      "old": "byte_1A994",
+      "new": "RingSparkle_CollectedAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "SharedRing_CollectedSparkleStandardAnimation"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 13,
+      "old": "word_1A9AC",
+      "new": "SharedRingMap_SpinFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe00"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 15,
+      "old": "word_1A9B4",
+      "new": "SharedRingMap_SpinFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe01"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 17,
+      "old": "word_1A9BC",
+      "new": "SharedRingMap_SpinFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe02"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 19,
+      "old": "word_1A9C4",
+      "new": "SharedRingMap_SpinFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe03"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 21,
+      "old": "word_1A9CC",
+      "new": "SharedRingMap_SparkleFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe04"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 23,
+      "old": "word_1A9D4",
+      "new": "SharedRingMap_SparkleFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe05"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 25,
+      "old": "word_1A9DC",
+      "new": "SharedRingMap_SparkleFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe06"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 27,
+      "old": "word_1A9E4",
+      "new": "SharedRingMap_SparkleFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe07"
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "original_line": 29,
+      "old": "word_1A9EC",
+      "new": "SharedRingMap_BlankFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Actualsharedringmappingtableframe08"
+    },
+    {
+      "source": "src/objects/shared/starpost/animations/starpost.s",
+      "original_line": 7,
+      "old": "byte_2D33E",
+      "new": "StarpostSTD_FrameZeroLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostSTD_FrameZeroLoop"
+    },
+    {
+      "source": "src/objects/shared/starpost/animations/starpost.s",
+      "original_line": 8,
+      "old": "byte_2D341",
+      "new": "StarpostSTD_FrameOneLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostSTD_FrameOneLoop"
+    },
+    {
+      "source": "src/objects/shared/starpost/animations/starpost.s",
+      "original_line": 9,
+      "old": "byte_2D344",
+      "new": "StarpostSTD_AlternateFramesZeroFour",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostSTD_AlternateFramesZeroFour"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "original_line": 9,
+      "old": "word_2D352",
+      "new": "StarpostMap_Frame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostMap_Frame00"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "original_line": 14,
+      "old": "word_2D36C",
+      "new": "StarpostMap_Frame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostMap_Frame01"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "original_line": 18,
+      "old": "word_2D380",
+      "new": "StarpostMap_Frame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostMap_Frame02"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "original_line": 20,
+      "old": "word_2D388",
+      "new": "StarpostMap_Frame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostMap_Frame03"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "original_line": 22,
+      "old": "word_2D390",
+      "new": "StarpostMap_Frame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostMap_Frame04"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/stars.s",
+      "original_line": 7,
+      "old": "word_2D3B0",
+      "new": "StarpostBonusStarsMap_Frame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostBonusStarsMap_Frame00"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/stars.s",
+      "original_line": 9,
+      "old": "word_2D3B8",
+      "new": "StarpostBonusStarsMap_Frame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostBonusStarsMap_Frame01"
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/stars.s",
+      "original_line": 11,
+      "old": "word_2D3C0",
+      "new": "StarpostBonusStarsMap_Frame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "ActualDATA: StarpostBonusStarsMap_Frame02"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/checkpoints/s3/starpost.s",
+      "tokens": [
+        [7, 1, 0, ""],
+        [8, 1, 2, ""],
+        [9, 1, 7, ""],
+        [10, 1, 8, ""],
+        [11, 1, 17, ""],
+        [12, 0, 0, ""],
+        [22, 1, 1, ""],
+        [28, 1, 2, ""],
+        [29, 0, 1, ""],
+        [32, 0, 2, ""],
+        [34, 1, 7, ""],
+        [38, 1, 7, ""],
+        [44, 1, 5, ""],
+        [49, 1, 4, ""],
+        [54, 1, 4, ""],
+        [58, 1, 3, ""],
+        [74, 1, 3, ""],
+        [76, 0, 3, ""],
+        [82, 0, 4, ""],
+        [84, 0, 5, ""],
+        [86, 1, 6, ""],
+        [88, 0, 6, ""],
+        [90, 0, 7, ""],
+        [94, 0, 8, ""],
+        [96, 1, 10, ""],
+        [99, 1, 9, ""],
+        [102, 0, 9, ""],
+        [104, 0, 10, ""],
+        [159, 1, 13, ""],
+        [168, 1, 11, ""],
+        [171, 0, 11, ""],
+        [183, 1, 12, ""],
+        [186, 0, 12, ""],
+        [188, 0, 13, ""],
+        [207, 1, 14, ""],
+        [210, 0, 14, ""],
+        [221, 0, 15, ""],
+        [223, 1, 16, ""],
+        [243, 3, 15, ""],
+        [244, 0, 16, ""],
+        [246, 0, 17, ""],
+        [248, 1, 19, ""],
+        [250, 1, 18, ""],
+        [259, 0, 18, ""],
+        [261, 0, 19, ""],
+        [275, 1, 20, ""],
+        [277, 0, 20, ""],
+        [280, 1, 21, ""],
+        [283, 0, 21, ""],
+        [285, 1, 22, ""],
+        [287, 0, 22, ""],
+        [289, 3, 21, ""],
+        [295, 1, 24, ""],
+        [296, 1, 25, ""],
+        [297, 0, 23, ""],
+        [302, 1, 26, ""],
+        [303, 0, 24, ""],
+        [305, 0, 25, ""],
+        [307, 1, 26, ""],
+        [310, 1, 28, ""],
+        [311, 1, 23, ""],
+        [312, 0, 26, ""],
+        [324, 1, 27, ""],
+        [326, 0, 27, ""],
+        [329, 0, 28, ""]
+      ]
+    },
+    {
+      "source": "src/objects/checkpoints/sk/starpost.s",
+      "tokens": [
+        [7, 1, 29, ""],
+        [8, 1, 31, ""],
+        [9, 1, 36, ""],
+        [10, 1, 37, ""],
+        [11, 1, 48, ""],
+        [12, 0, 29, ""],
+        [22, 1, 30, ""],
+        [28, 1, 31, ""],
+        [29, 0, 30, ""],
+        [32, 0, 31, ""],
+        [34, 1, 36, ""],
+        [38, 1, 36, ""],
+        [44, 1, 34, ""],
+        [49, 1, 33, ""],
+        [54, 1, 33, ""],
+        [58, 1, 32, ""],
+        [74, 1, 32, ""],
+        [76, 0, 32, ""],
+        [82, 0, 33, ""],
+        [84, 0, 34, ""],
+        [86, 1, 35, ""],
+        [88, 0, 35, ""],
+        [90, 0, 36, ""],
+        [94, 0, 37, ""],
+        [96, 1, 39, ""],
+        [99, 1, 38, ""],
+        [102, 0, 38, ""],
+        [104, 0, 39, ""],
+        [159, 1, 42, ""],
+        [168, 1, 40, ""],
+        [171, 0, 40, ""],
+        [183, 1, 41, ""],
+        [186, 0, 41, ""],
+        [188, 0, 42, ""],
+        [207, 1, 43, ""],
+        [210, 0, 43, ""],
+        [221, 0, 44, ""],
+        [223, 1, 45, ""],
+        [243, 3, 44, ""],
+        [244, 0, 45, ""],
+        [252, 1, 46, ""],
+        [254, 0, 46, ""],
+        [258, 1, 47, ""],
+        [261, 1, 47, ""],
+        [263, 1, 47, ""],
+        [265, 0, 47, ""],
+        [268, 0, 48, ""],
+        [270, 1, 52, ""],
+        [272, 1, 51, ""],
+        [281, 1, 49, ""],
+        [283, 0, 49, ""],
+        [287, 1, 50, ""],
+        [290, 1, 50, ""],
+        [292, 1, 50, ""],
+        [294, 0, 50, ""],
+        [307, 0, 51, ""],
+        [309, 0, 52, ""],
+        [323, 1, 53, ""],
+        [325, 0, 53, ""],
+        [328, 1, 54, ""],
+        [331, 0, 54, ""],
+        [333, 1, 55, ""],
+        [335, 0, 55, ""],
+        [337, 3, 54, ""],
+        [343, 1, 57, ""],
+        [344, 1, 58, ""],
+        [345, 0, 56, ""],
+        [350, 1, 59, ""],
+        [351, 0, 57, ""],
+        [353, 0, 58, ""],
+        [355, 1, 59, ""],
+        [358, 1, 61, ""],
+        [359, 1, 56, ""],
+        [360, 0, 59, ""],
+        [372, 1, 60, ""],
+        [374, 0, 60, ""],
+        [377, 0, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/items/s3/hidden_monitor.s",
+      "tokens": [
+        [13, 1, 63, ""],
+        [15, 1, 63, ""],
+        [16, 1, 65, ""],
+        [21, 1, 62, ""],
+        [24, 1, 62, ""],
+        [29, 1, 62, ""],
+        [32, 1, 64, ""],
+        [33, 0, 62, ""],
+        [37, 0, 63, ""],
+        [39, 0, 64, ""],
+        [48, 0, 65, ""]
+      ]
+    },
+    {
+      "source": "src/objects/items/s3/monitor.s",
+      "tokens": [
+        [11, 1, 67, ""],
+        [38, 1, 66, ""],
+        [41, 1, 66, ""],
+        [44, 1, 66, ""],
+        [48, 0, 66, ""],
+        [66, 0, 67, ""],
+        [150, 1, 68, ""],
+        [151, 1, 69, ""],
+        [152, 1, 85, ""],
+        [153, 0, 68, ""],
+        [169, 0, 69, ""],
+        [174, 1, 70, ""],
+        [178, 0, 70, ""],
+        [184, 1, 71, ""],
+        [186, 0, 71, ""],
+        [190, 1, 72, ""],
+        [191, 1, 72, ""],
+        [192, 0, 72, ""],
+        [193, 3, 72, ""],
+        [194, 3, 72, ""],
+        [195, 3, 72, ""],
+        [196, 3, 72, ""],
+        [197, 3, 72, ""],
+        [198, 3, 72, ""],
+        [199, 3, 72, ""],
+        [200, 3, 72, ""],
+        [201, 3, 72, ""],
+        [202, 3, 72, ""],
+        [220, 1, 73, ""],
+        [222, 0, 73, ""],
+        [225, 1, 74, ""],
+        [227, 0, 74, ""],
+        [230, 1, 75, ""],
+        [232, 1, 76, ""],
+        [234, 1, 75, ""],
+        [236, 1, 76, ""],
+        [237, 0, 75, ""],
+        [240, 0, 76, ""],
+        [249, 1, 77, ""],
+        [251, 1, 77, ""],
+        [255, 1, 78, ""],
+        [256, 0, 77, ""],
+        [260, 0, 78, ""],
+        [271, 1, 79, ""],
+        [275, 0, 79, ""],
+        [287, 1, 80, ""],
+        [291, 0, 80, ""],
+        [303, 1, 81, ""],
+        [307, 0, 81, ""],
+        [314, 1, 84, ""],
+        [318, 1, 82, ""],
+        [320, 1, 82, ""],
+        [323, 0, 82, ""],
+        [325, 1, 83, ""],
+        [329, 0, 83, ""],
+        [332, 0, 84, ""],
+        [355, 0, 85, ""]
+      ]
+    },
+    {
+      "source": "src/objects/items/sk/hidden_monitor.s",
+      "tokens": [
+        [12, 1, 87, ""],
+        [15, 1, 87, ""],
+        [17, 1, 87, ""],
+        [18, 1, 90, ""],
+        [23, 1, 86, ""],
+        [26, 1, 86, ""],
+        [31, 1, 86, ""],
+        [34, 1, 88, ""],
+        [35, 0, 86, ""],
+        [39, 0, 87, ""],
+        [41, 0, 88, ""],
+        [50, 1, 89, ""],
+        [53, 0, 89, ""],
+        [55, 0, 90, ""]
+      ]
+    },
+    {
+      "source": "src/objects/items/sk/monitor.s",
+      "tokens": [
+        [11, 1, 91, ""],
+        [51, 0, 91, ""],
+        [56, 2, 91, ""],
+        [63, 1, 92, ""],
+        [68, 1, 92, ""],
+        [72, 1, 92, ""],
+        [82, 1, 92, ""],
+        [86, 1, 92, ""],
+        [91, 0, 92, ""],
+        [97, 1, 93, ""],
+        [99, 1, 94, ""],
+        [101, 1, 93, ""],
+        [103, 1, 94, ""],
+        [104, 0, 93, ""],
+        [106, 0, 94, ""],
+        [186, 1, 95, ""],
+        [187, 1, 97, ""],
+        [188, 1, 114, ""],
+        [189, 0, 95, ""],
+        [197, 1, 96, ""],
+        [199, 0, 96, ""],
+        [209, 0, 97, ""],
+        [214, 1, 98, ""],
+        [216, 1, 99, ""],
+        [220, 0, 98, ""],
+        [222, 1, 99, ""],
+        [226, 0, 99, ""],
+        [232, 1, 100, ""],
+        [234, 0, 100, ""],
+        [238, 1, 101, ""],
+        [239, 1, 101, ""],
+        [240, 0, 101, ""],
+        [241, 3, 101, ""],
+        [242, 3, 101, ""],
+        [243, 3, 101, ""],
+        [244, 3, 101, ""],
+        [245, 3, 101, ""],
+        [246, 3, 101, ""],
+        [247, 3, 101, ""],
+        [248, 3, 101, ""],
+        [249, 3, 101, ""],
+        [250, 3, 101, ""],
+        [268, 1, 102, ""],
+        [270, 0, 102, ""],
+        [273, 1, 103, ""],
+        [275, 0, 103, ""],
+        [278, 1, 104, ""],
+        [280, 1, 105, ""],
+        [282, 1, 104, ""],
+        [284, 1, 105, ""],
+        [285, 0, 104, ""],
+        [288, 0, 105, ""],
+        [297, 1, 106, ""],
+        [299, 1, 106, ""],
+        [303, 1, 107, ""],
+        [304, 0, 106, ""],
+        [308, 0, 107, ""],
+        [319, 1, 108, ""],
+        [323, 0, 108, ""],
+        [335, 1, 109, ""],
+        [339, 0, 109, ""],
+        [351, 1, 110, ""],
+        [355, 0, 110, ""],
+        [362, 1, 113, ""],
+        [364, 1, 113, ""],
+        [368, 1, 111, ""],
+        [370, 1, 111, ""],
+        [373, 0, 111, ""],
+        [375, 1, 112, ""],
+        [379, 0, 112, ""],
+        [382, 0, 113, ""],
+        [426, 0, 114, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "tokens": [
+        [50, 1, 115, ""],
+        [55, 0, 115, ""],
+        [65, 1, 116, ""],
+        [67, 0, 116, ""],
+        [69, 1, 117, ""],
+        [71, 0, 117, ""],
+        [77, 1, 119, ""],
+        [79, 1, 118, ""],
+        [81, 1, 119, ""],
+        [83, 1, 119, ""],
+        [84, 0, 118, ""],
+        [88, 0, 119, ""],
+        [96, 1, 120, ""],
+        [97, 1, 127, ""],
+        [98, 1, 129, ""],
+        [99, 1, 130, ""],
+        [100, 1, 131, ""],
+        [101, 0, 120, ""],
+        [106, 1, 121, ""],
+        [108, 0, 121, ""],
+        [111, 1, 122, ""],
+        [113, 0, 122, ""],
+        [116, 1, 124, ""],
+        [117, 0, 123, ""],
+        [119, 1, 126, ""],
+        [120, 0, 124, ""],
+        [135, 1, 125, ""],
+        [145, 1, 125, ""],
+        [147, 1, 125, ""],
+        [149, 0, 125, ""],
+        [154, 3, 123, ""],
+        [155, 0, 126, ""],
+        [161, 0, 127, ""],
+        [165, 1, 128, ""],
+        [169, 1, 128, ""],
+        [171, 1, 128, ""],
+        [174, 1, 128, ""],
+        [180, 0, 128, ""],
+        [182, 1, 131, ""],
+        [186, 1, 131, ""],
+        [191, 0, 129, ""],
+        [196, 0, 130, ""],
+        [200, 0, 131, ""],
+        [212, 2, 132, ""],
+        [213, 0, 132, ""],
+        [224, 1, 133, ""],
+        [228, 0, 133, ""],
+        [233, 1, 134, ""],
+        [236, 0, 134, ""],
+        [238, 1, 135, ""],
+        [241, 0, 135, ""],
+        [243, 1, 136, ""],
+        [246, 0, 136, ""],
+        [253, 2, 137, ""],
+        [255, 0, 137, ""],
+        [257, 1, 138, ""],
+        [261, 0, 138, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/s3/ring_rendering.s",
+      "tokens": [
+        [5, 1, 142, ""],
+        [11, 0, 139, ""],
+        [13, 1, 141, ""],
+        [19, 1, 141, ""],
+        [25, 1, 140, ""],
+        [27, 0, 140, ""],
+        [39, 0, 141, ""],
+        [42, 1, 139, ""],
+        [43, 0, 142, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/s3/ring_runtime.s",
+      "tokens": [
+        [7, 1, 143, ""],
+        [8, 1, 148, ""],
+        [9, 0, 143, ""],
+        [16, 1, 145, ""],
+        [18, 1, 145, ""],
+        [19, 0, 144, ""],
+        [22, 0, 145, ""],
+        [24, 1, 144, ""],
+        [28, 1, 147, ""],
+        [29, 0, 146, ""],
+        [31, 0, 147, ""],
+        [33, 1, 146, ""],
+        [36, 0, 148, ""],
+        [40, 1, 151, ""],
+        [41, 0, 149, ""],
+        [43, 1, 149, ""],
+        [46, 1, 150, ""],
+        [50, 1, 150, ""],
+        [54, 0, 150, ""],
+        [55, 3, 149, ""],
+        [56, 0, 151, ""],
+        [61, 1, 153, ""],
+        [63, 1, 153, ""],
+        [64, 0, 152, ""],
+        [67, 0, 153, ""],
+        [69, 1, 152, ""],
+        [70, 1, 155, ""],
+        [71, 0, 154, ""],
+        [74, 0, 155, ""],
+        [76, 1, 154, ""],
+        [81, 1, 157, ""],
+        [82, 0, 156, ""],
+        [84, 0, 157, ""],
+        [86, 1, 156, ""],
+        [87, 1, 159, ""],
+        [88, 0, 158, ""],
+        [90, 0, 159, ""],
+        [92, 1, 158, ""],
+        [97, 1, 167, ""],
+        [101, 1, 167, ""],
+        [128, 1, 166, ""],
+        [132, 1, 160, ""],
+        [134, 1, 161, ""],
+        [135, 1, 166, ""],
+        [136, 0, 160, ""],
+        [138, 1, 166, ""],
+        [139, 0, 161, ""],
+        [143, 1, 162, ""],
+        [145, 1, 163, ""],
+        [146, 1, 166, ""],
+        [147, 0, 162, ""],
+        [149, 1, 166, ""],
+        [150, 0, 163, ""],
+        [153, 0, 164, ""],
+        [157, 0, 165, ""],
+        [159, 1, 165, ""],
+        [162, 0, 166, ""],
+        [167, 0, 167, ""],
+        [175, 1, 168, ""],
+        [182, 0, 168, ""],
+        [184, 1, 164, ""],
+        [188, 1, 170, ""],
+        [191, 0, 169, ""],
+        [193, 3, 169, ""],
+        [194, 0, 170, ""],
+        [197, 0, 171, ""],
+        [199, 3, 171, ""],
+        [209, 0, 172, ""],
+        [211, 1, 173, ""],
+        [213, 3, 172, ""],
+        [214, 0, 173, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "tokens": [
+        [50, 1, 174, ""],
+        [55, 0, 174, ""],
+        [65, 1, 175, ""],
+        [67, 0, 175, ""],
+        [69, 1, 176, ""],
+        [71, 0, 176, ""],
+        [77, 1, 178, ""],
+        [79, 1, 177, ""],
+        [81, 1, 178, ""],
+        [83, 1, 178, ""],
+        [84, 0, 177, ""],
+        [88, 0, 178, ""],
+        [96, 1, 179, ""],
+        [97, 1, 187, ""],
+        [98, 1, 190, ""],
+        [99, 1, 191, ""],
+        [100, 1, 192, ""],
+        [107, 1, 179, ""],
+        [108, 1, 193, ""],
+        [109, 1, 190, ""],
+        [110, 1, 191, ""],
+        [111, 1, 192, ""],
+        [112, 0, 179, ""],
+        [115, 1, 180, ""],
+        [117, 0, 180, ""],
+        [122, 1, 181, ""],
+        [124, 0, 181, ""],
+        [127, 1, 182, ""],
+        [129, 0, 182, ""],
+        [132, 1, 184, ""],
+        [133, 0, 183, ""],
+        [135, 1, 186, ""],
+        [136, 0, 184, ""],
+        [151, 1, 185, ""],
+        [161, 1, 185, ""],
+        [163, 1, 185, ""],
+        [165, 0, 185, ""],
+        [170, 3, 183, ""],
+        [171, 0, 186, ""],
+        [178, 1, 193, ""],
+        [179, 0, 187, ""],
+        [183, 1, 189, ""],
+        [187, 1, 189, ""],
+        [189, 1, 188, ""],
+        [192, 1, 188, ""],
+        [198, 0, 188, ""],
+        [200, 1, 192, ""],
+        [204, 1, 192, ""],
+        [205, 0, 189, ""],
+        [210, 0, 190, ""],
+        [215, 0, 191, ""],
+        [219, 0, 192, ""],
+        [221, 0, 193, ""],
+        [225, 1, 195, ""],
+        [229, 1, 195, ""],
+        [231, 1, 194, ""],
+        [234, 1, 194, ""],
+        [240, 0, 194, ""],
+        [242, 1, 192, ""],
+        [246, 1, 192, ""],
+        [247, 0, 195, ""],
+        [262, 2, 196, ""],
+        [263, 0, 196, ""],
+        [274, 1, 197, ""],
+        [278, 0, 197, ""],
+        [283, 1, 198, ""],
+        [286, 0, 198, ""],
+        [288, 1, 199, ""],
+        [291, 0, 199, ""],
+        [293, 1, 200, ""],
+        [296, 0, 200, ""],
+        [303, 2, 201, ""],
+        [305, 0, 201, ""],
+        [307, 1, 202, ""],
+        [311, 0, 202, ""],
+        [359, 1, 203, ""],
+        [360, 1, 204, ""],
+        [361, 1, 205, ""],
+        [362, 0, 203, ""],
+        [387, 0, 204, ""],
+        [391, 0, 205, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/sk/ring_rendering.s",
+      "tokens": [
+        [5, 1, 209, ""],
+        [11, 0, 206, ""],
+        [13, 1, 208, ""],
+        [19, 1, 208, ""],
+        [25, 1, 207, ""],
+        [27, 0, 207, ""],
+        [39, 0, 208, ""],
+        [42, 1, 206, ""],
+        [43, 0, 209, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/sk/ring_runtime.s",
+      "tokens": [
+        [7, 1, 210, ""],
+        [8, 1, 220, ""],
+        [9, 1, 232, ""],
+        [10, 0, 210, ""],
+        [14, 1, 215, ""],
+        [19, 1, 212, ""],
+        [21, 1, 212, ""],
+        [22, 0, 211, ""],
+        [25, 0, 212, ""],
+        [27, 1, 211, ""],
+        [31, 1, 214, ""],
+        [32, 0, 213, ""],
+        [34, 0, 214, ""],
+        [36, 1, 213, ""],
+        [39, 0, 215, ""],
+        [45, 1, 217, ""],
+        [47, 1, 217, ""],
+        [48, 0, 216, ""],
+        [51, 0, 217, ""],
+        [53, 1, 216, ""],
+        [57, 1, 219, ""],
+        [58, 0, 218, ""],
+        [60, 0, 219, ""],
+        [62, 1, 218, ""],
+        [65, 0, 220, ""],
+        [71, 1, 222, ""],
+        [73, 1, 222, ""],
+        [74, 0, 221, ""],
+        [77, 0, 222, ""],
+        [79, 1, 221, ""],
+        [80, 1, 224, ""],
+        [81, 0, 223, ""],
+        [84, 0, 224, ""],
+        [86, 1, 223, ""],
+        [91, 1, 226, ""],
+        [92, 0, 225, ""],
+        [94, 0, 226, ""],
+        [96, 1, 225, ""],
+        [97, 1, 228, ""],
+        [98, 0, 227, ""],
+        [100, 0, 228, ""],
+        [102, 1, 227, ""],
+        [109, 1, 231, ""],
+        [110, 0, 229, ""],
+        [112, 1, 229, ""],
+        [115, 1, 230, ""],
+        [119, 1, 230, ""],
+        [123, 0, 230, ""],
+        [124, 3, 229, ""],
+        [125, 0, 231, ""],
+        [127, 0, 232, ""],
+        [133, 1, 234, ""],
+        [135, 1, 234, ""],
+        [136, 0, 233, ""],
+        [139, 0, 234, ""],
+        [141, 1, 233, ""],
+        [142, 1, 236, ""],
+        [143, 0, 235, ""],
+        [146, 0, 236, ""],
+        [148, 1, 235, ""],
+        [153, 1, 238, ""],
+        [154, 0, 237, ""],
+        [156, 0, 238, ""],
+        [158, 1, 237, ""],
+        [159, 1, 240, ""],
+        [160, 0, 239, ""],
+        [162, 0, 240, ""],
+        [164, 1, 239, ""],
+        [169, 1, 248, ""],
+        [173, 1, 248, ""],
+        [200, 1, 247, ""],
+        [204, 1, 241, ""],
+        [206, 1, 242, ""],
+        [207, 1, 247, ""],
+        [208, 0, 241, ""],
+        [210, 1, 247, ""],
+        [211, 0, 242, ""],
+        [215, 1, 243, ""],
+        [217, 1, 244, ""],
+        [218, 1, 247, ""],
+        [219, 0, 243, ""],
+        [221, 1, 247, ""],
+        [222, 0, 244, ""],
+        [225, 0, 245, ""],
+        [229, 0, 246, ""],
+        [231, 1, 246, ""],
+        [234, 0, 247, ""],
+        [239, 0, 248, ""],
+        [247, 1, 249, ""],
+        [254, 0, 249, ""],
+        [256, 1, 245, ""],
+        [260, 1, 251, ""],
+        [263, 0, 250, ""],
+        [265, 3, 250, ""],
+        [266, 0, 251, ""],
+        [269, 0, 252, ""],
+        [271, 3, 252, ""],
+        [273, 1, 254, ""],
+        [276, 0, 253, ""],
+        [278, 3, 253, ""],
+        [279, 0, 254, ""],
+        [289, 0, 255, ""],
+        [291, 1, 256, ""],
+        [293, 3, 255, ""],
+        [294, 0, 256, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/monitors/animations/monitor.s",
+      "tokens": [
+        [2, 1, 257, ""],
+        [3, 1, 258, ""],
+        [4, 1, 259, ""],
+        [5, 1, 260, ""],
+        [6, 1, 261, ""],
+        [7, 1, 262, ""],
+        [8, 1, 263, ""],
+        [9, 1, 264, ""],
+        [10, 1, 265, ""],
+        [11, 1, 266, ""],
+        [12, 1, 267, ""],
+        [13, 0, 257, ""],
+        [14, 0, 258, ""],
+        [15, 0, 259, ""],
+        [16, 0, 260, ""],
+        [17, 0, 261, ""],
+        [18, 0, 262, ""],
+        [19, 0, 263, ""],
+        [20, 0, 264, ""],
+        [21, 0, 265, ""],
+        [22, 0, 266, ""],
+        [23, 0, 267, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor.s",
+      "tokens": [
+        [2, 1, 268, ""],
+        [3, 1, 269, ""],
+        [4, 1, 270, ""],
+        [5, 1, 271, ""],
+        [6, 1, 272, ""],
+        [7, 1, 273, ""],
+        [8, 1, 274, ""],
+        [9, 1, 275, ""],
+        [10, 1, 276, ""],
+        [11, 1, 277, ""],
+        [12, 1, 278, ""],
+        [13, 1, 279, ""],
+        [14, 0, 268, ""],
+        [16, 0, 269, ""],
+        [19, 0, 270, ""],
+        [22, 0, 271, ""],
+        [25, 0, 272, ""],
+        [28, 0, 273, ""],
+        [31, 0, 274, ""],
+        [34, 0, 275, ""],
+        [37, 0, 276, ""],
+        [40, 0, 277, ""],
+        [43, 0, 278, ""],
+        [46, 0, 279, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/monitors/mappings/monitor_s3.s",
+      "tokens": [
+        [2, 1, 280, ""],
+        [3, 1, 281, ""],
+        [4, 1, 282, ""],
+        [5, 1, 283, ""],
+        [6, 1, 284, ""],
+        [7, 1, 285, ""],
+        [8, 1, 286, ""],
+        [9, 1, 287, ""],
+        [10, 1, 288, ""],
+        [11, 1, 289, ""],
+        [12, 1, 290, ""],
+        [13, 1, 291, ""],
+        [14, 0, 280, ""],
+        [16, 0, 281, ""],
+        [19, 0, 282, ""],
+        [22, 0, 283, ""],
+        [25, 0, 284, ""],
+        [28, 0, 285, ""],
+        [31, 0, 286, ""],
+        [34, 0, 287, ""],
+        [37, 0, 288, ""],
+        [40, 0, 289, ""],
+        [43, 0, 290, ""],
+        [46, 0, 291, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/ring/animations/ring.s",
+      "tokens": [
+        [1, 3, 292, ""],
+        [2, 0, 292, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/ring/animations/sparkle.s",
+      "tokens": [
+        [2, 1, 293, ""],
+        [3, 0, 293, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/ring/mappings/ring.s",
+      "tokens": [
+        [2, 1, 294, ""],
+        [3, 1, 295, ""],
+        [4, 1, 296, ""],
+        [5, 1, 297, ""],
+        [6, 1, 298, ""],
+        [7, 1, 299, ""],
+        [8, 1, 300, ""],
+        [9, 1, 301, ""],
+        [10, 1, 302, ""],
+        [11, 0, 294, ""],
+        [13, 0, 295, ""],
+        [15, 0, 296, ""],
+        [17, 0, 297, ""],
+        [19, 0, 298, ""],
+        [21, 0, 299, ""],
+        [23, 0, 300, ""],
+        [25, 0, 301, ""],
+        [27, 0, 302, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/starpost/animations/starpost.s",
+      "tokens": [
+        [2, 1, 303, ""],
+        [3, 1, 304, ""],
+        [4, 1, 305, ""],
+        [5, 0, 303, ""],
+        [6, 0, 304, ""],
+        [7, 0, 305, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/starpost.s",
+      "tokens": [
+        [2, 1, 306, ""],
+        [3, 1, 307, ""],
+        [4, 1, 308, ""],
+        [5, 1, 309, ""],
+        [6, 1, 310, ""],
+        [7, 0, 306, ""],
+        [12, 0, 307, ""],
+        [16, 0, 308, ""],
+        [18, 0, 309, ""],
+        [20, 0, 310, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/starpost/mappings/stars.s",
+      "tokens": [
+        [2, 1, 311, ""],
+        [3, 1, 312, ""],
+        [4, 1, 313, ""],
+        [5, 0, 311, ""],
+        [7, 0, 312, ""],
+        [9, 0, 313, ""]
+      ]
+    }
+  ]
+}

@@ -14,7 +14,7 @@ Monitor_Index:
                 dc.w    Obj_MonitorMain-Monitor_Index
                 dc.w    Obj_MonitorBreak-Monitor_Index
                 dc.w    Obj_MonitorAnimate-Monitor_Index
-                dc.w    loc_1B504-Monitor_Index
+                dc.w    S3Monitor_Box_DrawAndCullCurrentX-Monitor_Index
 ; ---------------------------------------------------------------------------
 
 Obj_MonitorInit:
@@ -46,18 +46,18 @@ Obj_MonitorInit:
 
 Obj_MonitorMain:
                 move.b  $3C(a0),d0
-                beq.s   loc_1B4C8
+                beq.s   S3Monitor_UpdateSolidBox
                 bsr.w   MoveSprite
                 tst.w   y_vel(a0)
-                bmi.s   loc_1B4C8
+                bmi.s   S3Monitor_UpdateSolidBox
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   loc_1B4C8
+                bpl.w   S3Monitor_UpdateSolidBox
                 add.w   d1,y_pos(a0)
                 clr.w   y_vel(a0)
                 clr.b   $3C(a0)
 
-loc_1B4C8:
+S3Monitor_UpdateSolidBox:
                 move.w  #$19,d1                         ; Monitor's width
                 move.w  #$10,d2
                 move.w  d2,d3
@@ -77,7 +77,7 @@ Obj_MonitorAnimate:
                 lea     (Ani_Monitor).l,a1
                 bsr.w   Animate_Sprite
 
-loc_1B504:
+S3Monitor_Box_DrawAndCullCurrentX:
                 bra.w   Sprite_OnScreen_Test
 
 ; =============== S U B R O U T I N E =======================================
@@ -187,12 +187,12 @@ Obj_MonitorContents:
                 jmp     MonitorContents_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 MonitorContents_Index:
-                dc.w    loc_1B616-MonitorContents_Index
-                dc.w    loc_1B656-MonitorContents_Index
-                dc.w    loc_1B8E4-MonitorContents_Index
+                dc.w    S3MonitorIcon_InitFirstPiece-MonitorContents_Index
+                dc.w    S3Monitor_Icon_MoveTowardApexThenDraw-MonitorContents_Index
+                dc.w    S3MonitorIcon_TickLifeOrDelete-MonitorContents_Index
 ; ---------------------------------------------------------------------------
 
-loc_1B616:
+S3MonitorIcon_InitFirstPiece:
                 addq.b  #2,routine(a0)
                 move.w  #make_art_tile(ArtTile_Monitors,0,1),art_tile(a0)
                 move.b  #$24,render_flags(a0)
@@ -209,7 +209,7 @@ loc_1B616:
                 addq.w  #2,a1
                 move.l  a1,mappings(a0)
 
-loc_1B656:
+S3Monitor_Icon_MoveTowardApexThenDraw:
                 bsr.s   MonitorIconS3MoveToApexAndDispatchReward
                 bra.w   Draw_Sprite
 
@@ -217,41 +217,43 @@ loc_1B656:
 
 MonitorIconS3MoveToApexAndDispatchReward:
                 tst.w   y_vel(a0)
-                bpl.w   loc_1B670
+                bpl.w   S3MonitorIcon_InitLifeAndLedger
                 bsr.w   MoveSprite2
                 addi.w  #$18,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B670:
+; Set a 30-update word timer and select the broken-monitor counter for the recipient
+S3MonitorIcon_InitLifeAndLedger:
                 addq.b  #2,routine(a0)
                 move.w  #30-1,anim_frame_timer(a0)
                 movea.w parent(a0),a1
                 lea     (Monitors_broken).w,a2
                 cmpa.w  #Player_1,a1
-                beq.s   loc_1B68C
+                beq.s   S3MonitorIcon_DispatchAnimReward
                 lea     (Monitors_broken_P2).w,a2
 
-loc_1B68C:
+; Use the animation byte as an unchecked word-table index
+S3MonitorIcon_DispatchAnimReward:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_1B69C(pc,d0.w),d0
-                jmp     off_1B69C(pc,d0.w)
+                move.w  S3Monitor_Icon_RewardRelativeWordTable(pc,d0.w),d0
+                jmp     S3Monitor_Icon_RewardRelativeWordTable(pc,d0.w)
 ; End of function MonitorIconS3MoveToApexAndDispatchReward
 
 ; ---------------------------------------------------------------------------
-off_1B69C:
-                dc.w    Monitor_Give_Eggman-off_1B69C
-                dc.w    Monitor_Give_1up-off_1B69C
-                dc.w    Monitor_Give_Eggman-off_1B69C
-                dc.w    Monitor_Give_Rings-off_1B69C
-                dc.w    Monitor_Give_SpeedShoes-off_1B69C
-                dc.w    Monitor_Give_FireShield-off_1B69C
-                dc.w    Monitor_Give_LightningShield-off_1B69C
-                dc.w    Monitor_Give_BubbleShield-off_1B69C
-                dc.w    Monitor_Give_Invincibility-off_1B69C
-                dc.w    Monitor_Give_SuperSonic-off_1B69C
+S3Monitor_Icon_RewardRelativeWordTable:
+                dc.w    Monitor_Give_Eggman-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_1up-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Eggman-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Rings-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_SpeedShoes-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_FireShield-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_LightningShield-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_BubbleShield-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Invincibility-S3Monitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_SuperSonic-S3Monitor_Icon_RewardRelativeWordTable
 ; ---------------------------------------------------------------------------
 
 Monitor_Give_Eggman:
@@ -275,32 +277,34 @@ Monitor_Give_Rings:
                 lea     (Total_ring_count).w,a5
                 addi.w  #10,(a5)
                 cmpi.w  #999,(a5)
-                blo.s   loc_1B6EA
+                blo.s   S3MonitorRings_CapP1At999
                 move.w  #999,(a5)
 
-loc_1B6EA:
+S3MonitorRings_CapP1At999:
                 addi.w  #10,(a2)
                 cmpi.w  #999,(a2)
-                blo.s   loc_1B6F8
+                blo.s   S3MonitorRings_UpdateHudAndLives
                 move.w  #999,(a2)
 
-loc_1B6F8:
+; Test the 100-ring life flag before the 200-ring flag
+S3MonitorRings_UpdateHudAndLives:
                 ori.b   #1,(a3)
                 cmpi.w  #100,(a2)
-                blo.s   loc_1B714
+                blo.s   S3MonitorRings_PlayRightSound
                 bset    #1,(a4)
-                beq.s   loc_1B71C
+                beq.s   S3MonitorRings_PickLifeOrEggman
                 cmpi.w  #200,(a2)
-                blo.s   loc_1B714
+                blo.s   S3MonitorRings_PlayRightSound
                 bset    #2,(a4)
-                beq.s   loc_1B71C
+                beq.s   S3MonitorRings_PickLifeOrEggman
 
-loc_1B714:
+; Send the right-ring sound through Play_Music
+S3MonitorRings_PlayRightSound:
                 moveq   #signextendB(sfx_RingRight),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_1B71C:
+S3MonitorRings_PickLifeOrEggman:
                 cmpa.w  #Player_1,a1
                 beq.w   Monitor_Give_1up
                 bra.w   Monitor_Give_Eggman
@@ -311,21 +315,21 @@ Monitor_Give_SpeedShoes:
                 bset    #Status_SpeedShoes,status_secondary(a1)
                 move.b  #(20*60)/8,speed_shoes_timer(a1)
                 cmpa.w  #Player_1,a1
-                bne.s   loc_1B758
+                bne.s   S3MonitorShoes_SetP2SpeedParams
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_1B758
+                beq.s   S3MonitorShoes_SetP2SpeedParams
                 move.w  #$C00,(Max_speed).w
                 move.w  #$18,(Acceleration).w
                 move.w  #$80,(Deceleration).w
-                bra.s   loc_1B76A
+                bra.s   S3MonitorShoes_SetGlobalTempo8
 ; ---------------------------------------------------------------------------
 
-loc_1B758:
+S3MonitorShoes_SetP2SpeedParams:
                 move.w  #$C00,(Max_speed_P2).w
                 move.w  #$18,(Acceleration_P2).w
                 move.w  #$80,(Deceleration_P2).w
 
-loc_1B76A:
+S3MonitorShoes_SetGlobalTempo8:
                 moveq   #8,d0
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
@@ -338,13 +342,13 @@ Monitor_Give_FireShield:
                 moveq   #signextendB(sfx_FireShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1B7A2
+                bne.s   S3MonitorFireShield_InitP2Slot
                 move.l  #Obj_FireShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B7A2:
+S3MonitorFireShield_InitP2Slot:
                 move.l  #Obj_FireShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -358,13 +362,13 @@ Monitor_Give_LightningShield:
                 moveq   #signextendB(sfx_LightningShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1B7E0
+                bne.s   S3MonitorLightning_InitP2Slot
                 move.l  #Obj_LightningShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B7E0:
+S3MonitorLightning_InitP2Slot:
                 move.l  #Obj_LightningShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -378,13 +382,13 @@ Monitor_Give_BubbleShield:
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1B81E
+                bne.s   S3MonitorBubbleShield_InitP2Slot
                 move.l  #Obj_BubbleShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B81E:
+S3MonitorBubbleShield_InitP2Slot:
                 move.l  #Obj_BubbleShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -393,29 +397,30 @@ loc_1B81E:
 Monitor_Give_Invincibility:
                 addq.w  #1,(a2)
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   locret_1B876
+                bne.s   S3MonitorStars_GrantReturn
                 bset    #1,status_secondary(a1)
                 move.b  #(20*60)/8,invincibility_timer(a1)
                 tst.b   (Boss_flag).w
-                bne.s   loc_1B856
+                bne.s   S3MonitorStars_SelectSlot
                 cmpi.b  #12,air_left(a1)
-                bls.s   loc_1B856
+                bls.s   S3MonitorStars_SelectSlot
                 moveq   #signextendB(mus_Invincibility),d0
                 jsr     (Play_Music).l
 
-loc_1B856:
+; Choose the fixed stars slot using the low byte of the parent pointer
+S3MonitorStars_SelectSlot:
                 tst.b   parent+1(a0)
-                bne.s   loc_1B86A
+                bne.s   S3MonitorStars_InitP2Slot
                 move.l  #Obj_Invincibility,(Invincibility_stars).w
                 move.w  a1,(Invincibility_stars+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B86A:
+S3MonitorStars_InitP2Slot:
                 move.l  #Obj_Invincibility,(Invincibility_stars_P2).w
                 move.w  a1,(Invincibility_stars_P2+parent).w
 
-locret_1B876:
+S3MonitorStars_GrantReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -444,7 +449,7 @@ Monitor_Give_SuperSonic:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B8E4:
+S3MonitorIcon_TickLifeOrDelete:
                 subq.w  #1,anim_frame_timer(a0)
                 bmi.w   Delete_Current_Sprite
                 bra.w   Draw_Sprite

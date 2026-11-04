@@ -10,14 +10,14 @@ Obj_StarPost:
                 jmp     StarPost_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 StarPost_Index:
-                dc.w    loc_2C436-StarPost_Index
-                dc.w    loc_2C488-StarPost_Index
-                dc.w    loc_2C56E-StarPost_Index
-                dc.w    loc_2C580-StarPost_Index
-                dc.w    loc_2C8AE-StarPost_Index
+                dc.w    S3Starpost_InitAndCheckSavedPost-StarPost_Index
+                dc.w    S3Starpost_TryActivateP1-StarPost_Index
+                dc.w    S3Starpost_AnimateAndCull-StarPost_Index
+                dc.w    S3StarpostSpin_TickLifeAndParent-StarPost_Index
+                dc.w    S3StarpostStar_TryBonusRestart-StarPost_Index
 ; ---------------------------------------------------------------------------
 
-loc_2C436:
+S3Starpost_InitAndCheckSavedPost:
                 addq.b  #2,routine(a0)
                 move.l  #Map_StarPost,mappings(a0)
                 move.w  #make_art_tile(ArtTile_StarPost+8,0,0),art_tile(a0)
@@ -27,25 +27,25 @@ loc_2C436:
                 move.w  #$280,priority(a0)
                 movea.w respawn_addr(a0),a2
                 btst    #0,(a2)
-                bne.s   loc_2C47E
+                bne.s   S3Starpost_MarkAlreadyActive
                 move.b  (Last_star_post_hit).w,d1
                 andi.b  #$7F,d1
                 move.b  subtype(a0),d2
                 andi.b  #$7F,d2
                 cmp.b   d2,d1
-                blo.s   loc_2C488
+                blo.s   S3Starpost_TryActivateP1
 
-loc_2C47E:
+S3Starpost_MarkAlreadyActive:
                 bset    #0,(a2)
                 move.b  #2,anim(a0)
 
-loc_2C488:
+S3Starpost_TryActivateP1:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_2C56E
+                bne.w   S3Starpost_AnimateAndCull
                 lea     (Player_1).w,a3
                 move.b  (Last_star_post_hit).w,d1
                 bsr.s   S3Starpost_TryActivateForP1
-                bra.w   loc_2C56E
+                bra.w   S3Starpost_AnimateAndCull
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -55,21 +55,21 @@ S3Starpost_TryActivateForP1:
                 move.b  subtype(a0),d2
                 andi.b  #$7F,d2
                 cmp.b   d2,d1
-                bhs.w   loc_2C560
+                bhs.w   S3Starpost_SetReachedAnimIfIdle
                 move.w  x_pos(a3),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #8,d0
                 cmpi.w  #$10,d0
-                bhs.w   locret_2C55E
+                bhs.w   S3Starpost_ActivationReturn
                 move.w  y_pos(a3),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$68,d0
-                bcc.w   locret_2C55E
+                bcc.w   S3Starpost_ActivationReturn
                 moveq   #signextendB(sfx_Starpost),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
-                bne.s   loc_2C546
+                bne.s   S3Starpost_CommitActivation
                 move.l  #Obj_StarPost,(a1)
                 move.b  #6,routine(a1)
                 move.w  x_pos(a0),$30(a1)
@@ -85,51 +85,53 @@ S3Starpost_TryActivateForP1:
                 move.w  #$20,$36(a1)
                 move.w  a0,$3E(a1)
                 cmpi.w  #50,(Ring_count).w
-                blo.s   loc_2C546
+                blo.s   S3Starpost_CommitActivation
                 bsr.w   StarpostS3SpawnBonusEntryStarQuartet
 
-loc_2C546:
+; Save the checkpoint even when the optional child allocation fails
+S3Starpost_CommitActivation:
                 move.b  #1,anim(a0)
                 bsr.w   S3Starpost_SaveCheckpoint
                 move.b  #4,routine(a0)
                 movea.w respawn_addr(a0),a2
                 bset    #0,(a2)
 
-locret_2C55E:
+S3Starpost_ActivationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2C560:
+S3Starpost_SetReachedAnimIfIdle:
                 tst.b   anim(a0)
-                bne.s   locret_2C56C
+                bne.s   S3Starpost_ReachedAnimReturn
                 move.b  #2,anim(a0)
 
-locret_2C56C:
+S3Starpost_ReachedAnimReturn:
                 rts
 ; End of function S3Starpost_TryActivateForP1
 
 ; ---------------------------------------------------------------------------
 
-loc_2C56E:
+S3Starpost_AnimateAndCull:
                 lea     (Ani_Starpost).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2C580:
+S3StarpostSpin_TickLifeAndParent:
                 subq.w  #1,$36(a0)
-                bpl.s   loc_2C5A4
+                bpl.s   S3StarpostSpin_PositionFromOldAngle
                 movea.w $3E(a0),a1
                 cmpi.l  #Obj_StarPost,(a1)
-                bne.s   loc_2C59E
+                bne.s   S3StarpostSpin_DeleteExpired
                 move.b  #2,anim(a1)
                 move.b  #0,mapping_frame(a1)
 
-loc_2C59E:
+S3StarpostSpin_DeleteExpired:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2C5A4:
+; Use the angle sampled before decrement and the signed high words of the products
+S3StarpostSpin_PositionFromOldAngle:
                 move.b  angle(a0),d0
                 subi.b  #$10,angle(a0)
                 subi.b  #$40,d0
@@ -200,7 +202,7 @@ Save_Level_Data2:
 
 Load_Starpost_Settings:
                 tst.b   (Special_bonus_entry_flag).w
-                bne.w   loc_2C738
+                bne.w   S3Starpost_RestoreSecondarySnapshot
                 move.b  (Saved_last_star_post_hit).w,(Last_star_post_hit).w
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
@@ -209,11 +211,12 @@ Load_Starpost_Settings:
                 move.w  (Saved_ring_count).w,(Ring_count).w
                 move.b  (Saved_extra_life_flags).w,(Extra_life_flags).w
                 tst.b   (Respawn_table_keep).w
-                bne.s   loc_2C6EA
+                bne.s   S3Starpost_RestoreTimerAndCamera
                 clr.w   (Ring_count).w
                 clr.b   (Extra_life_flags).w
 
-loc_2C6EA:
+; Set the frame byte to 59 and decrement seconds as a byte with wrap
+S3Starpost_RestoreTimerAndCamera:
                 move.l  (Saved_timer).w,(Timer).w
                 move.b  #60-1,(Timer_frame).w
                 subq.b  #1,(Timer_second).w
@@ -225,15 +228,16 @@ loc_2C6EA:
                 move.w  (Saved_camera_X_pos).w,(Camera_X_pos).w
                 move.w  (Saved_camera_Y_pos).w,(Camera_Y_pos).w
                 tst.b   (Water_flag).w
-                beq.s   locret_2C736
+                beq.s   S3Starpost_PrimaryRestoreReturn
                 move.w  (Saved_mean_water_level).w,(Mean_water_level).w
                 move.b  (Saved_water_full_screen_flag).w,(Water_full_screen_flag).w
 
-locret_2C736:
+S3Starpost_PrimaryRestoreReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2C738:
+; The secondary entry snapshot leaves the last-post identifier untouched
+S3Starpost_RestoreSecondarySnapshot:
                 clr.b   (Special_bonus_entry_flag).w
                 move.w  (Saved2_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved2_apparent_zone_and_act).w,(Apparent_zone_and_act).w
@@ -252,11 +256,11 @@ loc_2C738:
                 move.w  (Saved2_camera_X_pos).w,(Camera_X_pos).w
                 move.w  (Saved2_camera_Y_pos).w,(Camera_Y_pos).w
                 tst.b   (Water_flag).w
-                beq.s   locret_2C7AC
+                beq.s   S3Starpost_SecondaryRestoreReturn
                 move.w  (Saved2_mean_water_level).w,(Mean_water_level).w
                 move.b  (Saved2_water_full_screen_flag).w,(Water_full_screen_flag).w
 
-locret_2C7AC:
+S3Starpost_SecondaryRestoreReturn:
                 rts
 ; End of function Load_Starpost_Settings
 
@@ -274,9 +278,9 @@ StarpostS3SpawnBonusEntryStarQuartet:
                 moveq   #4-1,d1
                 moveq   #0,d2
 
-loc_2C842:
+S3StarpostQuartet_SpawnOrbitStars:
                 jsr     (AllocateObject).l
-                bne.s   locret_2C8AC
+                bne.s   S3StarpostQuartet_SpawnReturn
                 move.l  (a0),(a1)
                 move.l  #Map_StarpostStars,mappings(a1)
                 move.w  #make_art_tile(ArtTile_StarPost+8,0,0),art_tile(a1)
@@ -296,19 +300,20 @@ loc_2C842:
                 move.w  #0,y_vel(a1)
                 move.w  d2,$34(a1)
                 addi.w  #$40,d2
-                dbf     d1,loc_2C842
+                dbf     d1,S3StarpostQuartet_SpawnOrbitStars
 
-locret_2C8AC:
+S3StarpostQuartet_SpawnReturn:
                 rts
 ; End of function StarpostS3SpawnBonusEntryStarQuartet
 
 ; ---------------------------------------------------------------------------
 
-loc_2C8AE:
+; Only contact bit 0 enters the bonus restart path
+S3StarpostStar_TryBonusRestart:
                 move.b  collision_property(a0),d0
-                beq.w   loc_2C8F0
+                beq.w   S3StarpostStar_BuildOrbitBase
                 andi.b  #1,d0
-                beq.s   loc_2C8EC
+                beq.s   S3StarpostStar_ClearContacts
                 move.b  #2,(Special_bonus_entry_flag).w
                 move.w  #$1300,(Current_zone_and_act).w
                 move.w  #$1300,(Apparent_zone_and_act).w
@@ -318,10 +323,10 @@ loc_2C8AE:
                 move.b  #1,(Respawn_table_keep).w
                 jsr     (Clear_SpriteRingMem).l
 
-loc_2C8EC:
+S3StarpostStar_ClearContacts:
                 clr.b   collision_property(a0)
 
-loc_2C8F0:
+S3StarpostStar_BuildOrbitBase:
                 addi.w  #$A,$34(a0)
                 move.w  $34(a0),d0
                 andi.w  #$FF,d0
@@ -335,53 +340,54 @@ loc_2C8F0:
                 moveq   #2,d5
                 moveq   #0,d4
                 cmpi.w  #$10,d2
-                ble.s   loc_2C920
+                ble.s   S3StarpostStar_FoldPhaseTo8
                 neg.w   d1
 
-loc_2C920:
+S3StarpostStar_FoldPhaseTo8:
                 andi.w  #$F,d2
                 cmpi.w  #8,d2
-                ble.s   loc_2C930
+                ble.s   S3StarpostStar_TryAddCosine
                 neg.w   d2
                 andi.w  #7,d2
 
-loc_2C930:
+S3StarpostStar_TryAddCosine:
                 lsr.w   #1,d2
-                beq.s   loc_2C936
+                beq.s   S3StarpostStar_FinishWarpAndAge
                 add.w   d1,d4
 
-loc_2C936:
+S3StarpostStar_FinishWarpAndAge:
                 asl.w   #1,d1
-                dbf     d5,loc_2C930
+                dbf     d5,S3StarpostStar_TryAddCosine
                 asr.w   #4,d4
                 add.w   d4,d0
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),d1
                 cmpi.w  #$80,d1
-                beq.s   loc_2C95A
-                bgt.s   loc_2C960
+                beq.s   S3StarpostStar_EnableContactAt128
+                bgt.s   S3StarpostStar_CheckOrbitShrink
 
-loc_2C950:
+; Shift the low words of the signed products by seven
+S3StarpostStar_ScaleOrbitLowWords:
                 muls.w  d1,d0
                 muls.w  d1,d3
                 asr.w   #7,d0
                 asr.w   #7,d3
-                bra.s   loc_2C972
+                bra.s   S3StarpostStar_SetPosAndFrameBits
 ; ---------------------------------------------------------------------------
 
-loc_2C95A:
+S3StarpostStar_EnableContactAt128:
                 move.b  #$D8,collision_flags(a0)
 
-loc_2C960:
+S3StarpostStar_CheckOrbitShrink:
                 cmpi.w  #$180,d1
-                ble.s   loc_2C972
+                ble.s   S3StarpostStar_SetPosAndFrameBits
                 neg.w   d1
                 addi.w  #$200,d1
-                bmi.w   loc_2C9A6
-                bra.s   loc_2C950
+                bmi.w   S3StarpostStar_DeleteAfterShrink
+                bra.s   S3StarpostStar_ScaleOrbitLowWords
 ; ---------------------------------------------------------------------------
 
-loc_2C972:
+S3StarpostStar_SetPosAndFrameBits:
                 move.w  $30(a0),d2
                 add.w   d3,d2
                 move.w  d2,x_pos(a0)
@@ -393,13 +399,13 @@ loc_2C972:
                 andi.w  #6,d0
                 lsr.w   #1,d0
                 cmpi.b  #3,d0
-                bne.s   loc_2C99C
+                bne.s   S3StarpostStar_SetFrameAndQueueTouch
                 moveq   #1,d0
 
-loc_2C99C:
+S3StarpostStar_SetFrameAndQueueTouch:
                 move.b  d0,mapping_frame(a0)
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_2C9A6:
+S3StarpostStar_DeleteAfterShrink:
                 jmp     (Delete_Current_Sprite).l

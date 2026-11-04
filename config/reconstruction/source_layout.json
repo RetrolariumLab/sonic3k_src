@@ -20155,7 +20155,7 @@
       "responsibility": "Checkpoint post activation, star sprites, saved player state and restart support.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 405,
+      "physical_lines": 411,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -20195,7 +20195,7 @@
       "responsibility": "Checkpoint post activation, star sprites, saved player state and restart support.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 458,
+      "physical_lines": 468,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26684,7 +26684,7 @@
       "responsibility": "Item monitor initialization, solid contact, breakage and product-specific reward effects with animation resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 455,
+      "physical_lines": 460,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -26759,7 +26759,7 @@
       "responsibility": "Item monitor initialization, solid contact, breakage and product-specific reward effects with animation resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 550,
+      "physical_lines": 555,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -29599,7 +29599,7 @@
       "responsibility": "Dynamic ring objects, collection rewards, bouncing lost rings and attracted ring motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 387,
+      "physical_lines": 390,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -29639,7 +29639,7 @@
       "responsibility": "Visible ring sprite construction and its private ring mapping table.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 115,
+      "physical_lines": 116,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -29684,7 +29684,7 @@
       "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 285,
+      "physical_lines": 286,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -29729,7 +29729,7 @@
       "responsibility": "Dynamic ring objects, collection rewards, bouncing lost rings and attracted ring motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 497,
+      "physical_lines": 500,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -29759,7 +29759,7 @@
       "responsibility": "Visible ring sprite construction and its private ring mapping table.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 115,
+      "physical_lines": 116,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -29794,7 +29794,7 @@
       "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 394,
+      "physical_lines": 396,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",

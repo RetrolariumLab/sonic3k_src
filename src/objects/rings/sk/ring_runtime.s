@@ -10,132 +10,133 @@ Load_Rings:
 
 ; ---------------------------------------------------------------------------
 Load_Rings_Index:
-                dc.w    loc_E8BE-Load_Rings_Index
-                dc.w    loc_E942-Load_Rings_Index
-                dc.w    loc_E9CA-Load_Rings_Index
+                dc.w    SKRingManager_InitAndChooseAxis-Load_Rings_Index
+                dc.w    SKRingWindow_UpdateSparklesAndX-Load_Rings_Index
+                dc.w    SKRingWindow_UpdateSparklesAndY-Load_Rings_Index
 ; ---------------------------------------------------------------------------
 
-loc_E8BE:
+SKRingManager_InitAndChooseAxis:
                 addq.b  #2,(Rings_manager_routine).w
                 bsr.w   SKLevelRings_InitLayoutAndTotal
                 cmpi.b  #$14,(Current_zone).w
-                beq.s   loc_E904
+                beq.s   SKRingWindow_InitPachinkoY
                 movea.l (Ring_start_addr_ROM).w,a1
                 lea     (Ring_status_table).w,a2
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_E8E6
+                bhi.s   SKRingWindow_StoreInitialXStart
                 moveq   #1,d4
-                bra.s   loc_E8E6
+                bra.s   SKRingWindow_StoreInitialXStart
 ; ---------------------------------------------------------------------------
 
-loc_E8E2:
+SKRingWindow_NextInitialXStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_E8E6:
+SKRingWindow_StoreInitialXStart:
                 cmp.w   (a1),d4
-                bhi.s   loc_E8E2
+                bhi.s   SKRingWindow_NextInitialXStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 addi.w  #$150,d4
-                bra.s   loc_E8FA
+                bra.s   SKRingWindow_StoreInitialXEnd
 ; ---------------------------------------------------------------------------
 
-loc_E8F8:
+SKRingWindow_NextInitialXEnd:
                 addq.w  #4,a1
 
-loc_E8FA:
+SKRingWindow_StoreInitialXEnd:
                 cmp.w   (a1),d4
-                bhi.s   loc_E8F8
+                bhi.s   SKRingWindow_NextInitialXEnd
                 move.l  a1,(Ring_end_addr_ROM).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_E904:
+; The vertical window uses the alternate status table
+SKRingWindow_InitPachinkoY:
                 addq.b  #2,(Rings_manager_routine).w
                 movea.l (Ring_start_addr_ROM).w,a1
                 lea     (Ring_status_table_2).w,a2
                 move.w  (Camera_Y_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_E920
+                bhi.s   SKRingWindow_StoreInitialYStart
                 moveq   #1,d4
-                bra.s   loc_E920
+                bra.s   SKRingWindow_StoreInitialYStart
 ; ---------------------------------------------------------------------------
 
-loc_E91C:
+SKRingWindow_NextInitialYStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_E920:
+SKRingWindow_StoreInitialYStart:
                 cmp.w   2(a1),d4
-                bhi.s   loc_E91C
+                bhi.s   SKRingWindow_NextInitialYStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 addi.w  #$F0,d4
-                bra.s   loc_E936
+                bra.s   SKRingWindow_StoreInitialYEnd
 ; ---------------------------------------------------------------------------
 
-loc_E934:
+SKRingWindow_NextInitialYEnd:
                 addq.w  #4,a1
 
-loc_E936:
+SKRingWindow_StoreInitialYEnd:
                 cmp.w   2(a1),d4
-                bhi.s   loc_E934
+                bhi.s   SKRingWindow_NextInitialYEnd
                 move.l  a1,(Ring_end_addr_ROM).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_E942:
+SKRingWindow_UpdateSparklesAndX:
                 bsr.s   AdvanceQueuedRingConsumptionSparkles
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.w (Ring_start_addr_RAM).w,a2
                 move.w  (Camera_X_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_E95C
+                bhi.s   SKRingWindow_TestXStartForward
                 moveq   #1,d4
-                bra.s   loc_E95C
+                bra.s   SKRingWindow_TestXStartForward
 ; ---------------------------------------------------------------------------
 
-loc_E958:
+SKRingWindow_AdvanceXStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_E95C:
+SKRingWindow_TestXStartForward:
                 cmp.w   (a1),d4
-                bhi.s   loc_E958
-                bra.s   loc_E966
+                bhi.s   SKRingWindow_AdvanceXStart
+                bra.s   SKRingWindow_StoreXStartAndSeekEnd
 ; ---------------------------------------------------------------------------
 
-loc_E962:
+SKRingWindow_RewindXStart:
                 subq.w  #4,a1
                 subq.w  #2,a2
 
-loc_E966:
+SKRingWindow_StoreXStartAndSeekEnd:
                 cmp.w   -4(a1),d4
-                bls.s   loc_E962
+                bls.s   SKRingWindow_RewindXStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 movea.l (Ring_end_addr_ROM).w,a2
                 addi.w  #$150,d4
-                bra.s   loc_E980
+                bra.s   SKRingWindow_TestXEndForward
 ; ---------------------------------------------------------------------------
 
-loc_E97E:
+SKRingWindow_AdvanceXEnd:
                 addq.w  #4,a2
 
-loc_E980:
+SKRingWindow_TestXEndForward:
                 cmp.w   (a2),d4
-                bhi.s   loc_E97E
-                bra.s   loc_E988
+                bhi.s   SKRingWindow_AdvanceXEnd
+                bra.s   SKRingWindow_StoreExclusiveXEnd
 ; ---------------------------------------------------------------------------
 
-loc_E986:
+SKRingWindow_RewindXEnd:
                 subq.w  #4,a2
 
-loc_E988:
+SKRingWindow_StoreExclusiveXEnd:
                 cmp.w   -4(a2),d4
-                bls.s   loc_E986
+                bls.s   SKRingWindow_RewindXEnd
                 move.l  a2,(Ring_end_addr_ROM).w
                 rts
 
@@ -145,81 +146,81 @@ AdvanceQueuedRingConsumptionSparkles:
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
-                bcs.s   locret_E9C8
+                bcs.s   SKRingQueue_UpdateReturn
 
-loc_E99E:
+SKRingQueue_TickSparkleHighByte:
                 move.w  (a2)+,d0
-                beq.s   loc_E99E
+                beq.s   SKRingQueue_TickSparkleHighByte
                 movea.w d0,a1
                 subq.b  #1,(a1)
-                bne.s   loc_E9C4
+                bne.s   SKRingQueue_NextActiveEntry
                 move.b  #6,(a1)
                 addq.b  #1,1(a1)
                 cmpi.b  #8,1(a1)
-                bne.s   loc_E9C4
+                bne.s   SKRingQueue_NextActiveEntry
                 move.w  #-1,(a1)
                 clr.w   -2(a2)
                 subq.w  #1,(Ring_consumption_table).w
 
-loc_E9C4:
-                dbf     d1,loc_E99E
+SKRingQueue_NextActiveEntry:
+                dbf     d1,SKRingQueue_TickSparkleHighByte
 
-locret_E9C8:
+SKRingQueue_UpdateReturn:
                 rts
 ; End of function AdvanceQueuedRingConsumptionSparkles
 
 ; ---------------------------------------------------------------------------
 
-loc_E9CA:
+SKRingWindow_UpdateSparklesAndY:
                 bsr.s   AdvanceQueuedRingConsumptionSparkles
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.w (Ring_start_addr_RAM).w,a2
                 move.w  (Camera_Y_pos).w,d4
                 subq.w  #8,d4
-                bhi.s   loc_E9E4
+                bhi.s   SKRingWindow_TestYStartForward
                 moveq   #1,d4
-                bra.s   loc_E9E4
+                bra.s   SKRingWindow_TestYStartForward
 ; ---------------------------------------------------------------------------
 
-loc_E9E0:
+SKRingWindow_AdvanceYStart:
                 addq.w  #4,a1
                 addq.w  #2,a2
 
-loc_E9E4:
+SKRingWindow_TestYStartForward:
                 cmp.w   2(a1),d4
-                bhi.s   loc_E9E0
-                bra.s   loc_E9F0
+                bhi.s   SKRingWindow_AdvanceYStart
+                bra.s   SKRingWindow_StoreYStartAndSeekEnd
 ; ---------------------------------------------------------------------------
 
-loc_E9EC:
+SKRingWindow_RewindYStart:
                 subq.w  #4,a1
                 subq.w  #2,a2
 
-loc_E9F0:
+SKRingWindow_StoreYStartAndSeekEnd:
                 cmp.w   -2(a1),d4
-                bls.s   loc_E9EC
+                bls.s   SKRingWindow_RewindYStart
                 move.l  a1,(Ring_start_addr_ROM).w
                 move.w  a2,(Ring_start_addr_RAM).w
                 movea.l (Ring_end_addr_ROM).w,a2
                 addi.w  #$F0,d4
-                bra.s   loc_EA0A
+                bra.s   SKRingWindow_TestYEndForward
 ; ---------------------------------------------------------------------------
 
-loc_EA08:
+SKRingWindow_AdvanceYEnd:
                 addq.w  #4,a2
 
-loc_EA0A:
+SKRingWindow_TestYEndForward:
                 cmp.w   2(a2),d4
-                bhi.s   loc_EA08
-                bra.s   loc_EA14
+                bhi.s   SKRingWindow_AdvanceYEnd
+                bra.s   SKRingWindow_StoreExclusiveYEnd
 ; ---------------------------------------------------------------------------
 
-loc_EA12:
+SKRingWindow_RewindYEnd:
                 subq.w  #4,a2
 
-loc_EA14:
+SKRingWindow_StoreExclusiveYEnd:
                 cmp.w   -2(a2),d4
-                bls.s   loc_EA12
+                bls.s   SKRingWindow_RewindYEnd
                 move.l  a2,(Ring_end_addr_ROM).w
                 rts
 
@@ -227,11 +228,11 @@ loc_EA14:
 
 Test_Ring_Collisions:
                 cmpi.b  #90,invulnerability_timer(a0)
-                bhs.w   locret_EAE4
+                bhs.w   SKRingContact_ScanReturn
                 movea.l (Ring_start_addr_ROM).w,a1
                 movea.l (Ring_end_addr_ROM).w,a2
                 cmpa.l  a1,a2
-                beq.w   locret_EAE4
+                beq.w   SKRingContact_ScanReturn
                 movea.w (Ring_start_addr_RAM).w,a4
                 btst    #Status_LtngShield,status_secondary(a0)  ; does Sonic have a Lightning Shield?
                 beq.s   Test_Ring_Collisions_NoAttraction
@@ -261,56 +262,56 @@ Test_Ring_Collisions_NoAttraction:
 
 Test_Ring_Collisions_NextRing:
                 tst.w   (a4)
-                bne.w   loc_EADA
+                bne.w   SKRingContact_NextLayoutEntry
                 move.w  (a1),d0
                 sub.w   d1,d0
                 sub.w   d2,d0
-                bcc.s   loc_EAA0
+                bcc.s   SKRingContact_CheckWidth
                 add.w   d6,d0
-                bcs.s   loc_EAA6
-                bra.w   loc_EADA
+                bcs.s   SKRingContact_CheckYOverlap
+                bra.w   SKRingContact_NextLayoutEntry
 ; ---------------------------------------------------------------------------
 
-loc_EAA0:
+SKRingContact_CheckWidth:
                 cmp.w   d4,d0
-                bhi.w   loc_EADA
+                bhi.w   SKRingContact_NextLayoutEntry
 
-loc_EAA6:
+SKRingContact_CheckYOverlap:
                 move.w  2(a1),d0
                 sub.w   d1,d0
                 sub.w   d3,d0
-                bcc.s   loc_EAB8
+                bcc.s   SKRingContact_CheckHeight
                 add.w   d6,d0
-                bcs.s   loc_EABE
-                bra.w   loc_EADA
+                bcs.s   SKRingContact_SelectPickupPath
+                bra.w   SKRingContact_NextLayoutEntry
 ; ---------------------------------------------------------------------------
 
-loc_EAB8:
+SKRingContact_CheckHeight:
                 cmp.w   d5,d0
-                bhi.w   loc_EADA
+                bhi.w   SKRingContact_NextLayoutEntry
 
-loc_EABE:
+SKRingContact_SelectPickupPath:
                 btst    #Status_LtngShield,status_secondary(a0)  ; does Sonic have a Lightning Shield?
                 bne.s   Test_Ring_Collisions_AttractRing
 
-loc_EAC6:
+SKRingContact_MarkSparkleAndCredit:
                 move.w  #$604,(a4)
                 bsr.s   SKLevelRings_PickupForP1
                 lea     (Ring_consumption_list).w,a3
 
-loc_EAD0:
+SKRingQueue_InsertFirstFree:
                 tst.w   (a3)+
-                bne.s   loc_EAD0
+                bne.s   SKRingQueue_InsertFirstFree
                 move.w  a4,-(a3)
                 addq.w  #1,(Ring_consumption_table).w
 
-loc_EADA:
+SKRingContact_NextLayoutEntry:
                 addq.w  #4,a1
                 addq.w  #2,a4
                 cmpa.l  a1,a2
                 bne.w   Test_Ring_Collisions_NextRing
 
-locret_EAE4:
+SKRingContact_ScanReturn:
                 rts
 ; End of function Test_Ring_Collisions
 
@@ -327,7 +328,7 @@ SKLevelRings_PickupForP1:
 Test_Ring_Collisions_AttractRing:
                 movea.l a1,a3
                 jsr     (AllocateObject).l
-                bne.w   loc_EB16
+                bne.w   SKRingContact_CollectOnAllocFailure
                 move.l  #Obj_Attracted_Ring,(a1)
                 move.w  (a3),x_pos(a1)
                 move.w  2(a3),y_pos(a1)
@@ -336,9 +337,9 @@ Test_Ring_Collisions_AttractRing:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EB16:
+SKRingContact_CollectOnAllocFailure:
                 movea.l a3,a1
-                bra.s   loc_EAC6
+                bra.s   SKRingContact_MarkSparkleAndCredit
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -346,31 +347,31 @@ loc_EB16:
 SKLevelRings_InitLayoutAndTotal:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
-                bne.s   loc_EB30
+                bne.s   SKRingManager_InitQueueClear
                 lea     (Ring_status_table).w,a1
                 move.w  #bytesToLcnt(Ring_status_table_end-Ring_status_table),d1
 
-loc_EB2A:
+SKRingManager_ClearStatusWords:
                 move.l  d0,(a1)+
-                dbf     d1,loc_EB2A
+                dbf     d1,SKRingManager_ClearStatusWords
 
-loc_EB30:
+SKRingManager_InitQueueClear:
                 lea     (Ring_consumption_table).w,a1
                 moveq   #bytesToLcnt(Ring_consumption_table_end-Ring_consumption_table),d1
 
-loc_EB36:
+SKRingManager_ClearQueueAndCheckY:
                 move.l  d0,(a1)+
-                dbf     d1,loc_EB36
+                dbf     d1,SKRingManager_ClearQueueAndCheckY
                 cmpi.b  #$14,(Current_zone).w
-                bne.s   loc_EB52
+                bne.s   SKRingManager_GetLayoutAndCount
                 lea     (Ring_status_table_2).w,a1
                 move.w  #bytesToLcnt(Ring_status_table_2_end-Ring_status_table_2),d1
 
-loc_EB4C:
+SKRingManager_ClearPachinkoStatus:
                 move.l  d0,(a1)+
-                dbf     d1,loc_EB4C
+                dbf     d1,SKRingManager_ClearPachinkoStatus
 
-loc_EB52:
+SKRingManager_GetLayoutAndCount:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
@@ -381,13 +382,14 @@ loc_EB52:
                 moveq   #0,d5
                 move.w  #511-1,d0
 
-loc_EB70:
+; Count at most 511 records and stop at the negative long sentinel
+SKRingManager_CountLayoutRings:
                 tst.l   (a1)+
-                bmi.s   loc_EB7A
+                bmi.s   SKRingManager_StorePerfectCount
                 addq.w  #1,d5
-                dbf     d0,loc_EB70
+                dbf     d0,SKRingManager_CountLayoutRings
 
-loc_EB7A:
+SKRingManager_StorePerfectCount:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts

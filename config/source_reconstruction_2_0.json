@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 116
+    "commit_count": 117
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -743,9 +743,15 @@
       "commits": ["9650eaee6cd2f25ac5010e30707fee01a2097825"]
     },
     {
-      "id": "current-shorten-11-object-hazards",
+      "id": "change-06ef2ae49ef1",
       "kind": "source_or_tooling",
       "summary": "Apply 224 reviewed short labels for object hazards.",
+      "commits": ["06ef2ae49ef12ada0c62191a549a6b85c6695917"]
+    },
+    {
+      "id": "current-shorten-12-collectibles",
+      "kind": "source_or_tooling",
+      "summary": "Apply 241 reviewed short labels for collectibles.",
       "commits": ["release-commit"]
     }
   ],

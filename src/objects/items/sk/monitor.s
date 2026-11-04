@@ -15,7 +15,7 @@ Monitor_Index:
                 dc.w    Obj_MonitorMain-Monitor_Index
                 dc.w    Obj_MonitorBreak-Monitor_Index
                 dc.w    Obj_MonitorAnimate-Monitor_Index
-                dc.w    loc_1D61A-Monitor_Index
+                dc.w    SKMonitor_Box_DrawAndCullCurrentX-Monitor_Index
 ; ---------------------------------------------------------------------------
 
 Obj_MonitorInit:
@@ -61,14 +61,14 @@ Obj_MonitorMain:
                 lea     (Ani_Monitor).l,a1
                 bsr.w   Animate_Sprite
 
-loc_1D61A:
+SKMonitor_Box_DrawAndCullCurrentX:
                 bra.w   Sprite_OnScreen_Test
 ; ---------------------------------------------------------------------------
 
 Obj_MonitorAnimate:
                 cmpi.b  #$B,mapping_frame(a0)           ; Is monitor broken?
                 bne.s   .notbroken                      ; If not, branch
-                move.l  #loc_1D61A,(a0)
+                move.l  #SKMonitor_Box_DrawAndCullCurrentX,(a0)
 
                 .notbroken:
                 lea     (Ani_Monitor).l,a1
@@ -79,16 +79,16 @@ Obj_MonitorAnimate:
 
 Obj_MonitorFall:
                 move.b  routine_secondary(a0),d0
-                beq.s   locret_1D694
+                beq.s   SKMonitor_Box_ReturnFromNativeFallOrSkip
                 btst    #1,render_flags(a0)             ; Is monitor upside down?
                 bne.s   Obj_MonitorFallUpsideDown       ; If so, branch
                 bsr.w   MoveSprite
                 tst.w   y_vel(a0)                       ; Is monitor moving up?
-                bmi.s   locret_1D694                    ; If so, return
+                bmi.s   SKMonitor_Box_ReturnFromNativeFallOrSkip  ; If so, return
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1                              ; Is monitor in the ground?
                 beq.s   .inground                       ; If so, branch
-                bpl.s   locret_1D694                    ; if not, return
+                bpl.s   SKMonitor_Box_ReturnFromNativeFallOrSkip  ; if not, return
 
                 .inground:
                 add.w   d1,y_pos(a0)                    ; Move monitor out of the ground
@@ -101,18 +101,18 @@ Obj_MonitorFallUpsideDown:
                 bsr.w   MoveSprite2
                 subi.w  #$38,y_vel(a0)
                 tst.w   y_vel(a0)                       ; Is monitor moving down?
-                bpl.s   locret_1D694                    ; If so, return
+                bpl.s   SKMonitor_Box_ReturnFromNativeFallOrSkip  ; If so, return
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1                              ; Is monitor in the ground (ceiling)?
                 beq.s   .inground                       ; If so, branch
-                bpl.s   locret_1D694                    ; if not, return
+                bpl.s   SKMonitor_Box_ReturnFromNativeFallOrSkip  ; if not, return
 
                 .inground:
                 sub.w   d1,y_pos(a0)                    ; Move monitor out of the ground
                 clr.w   y_vel(a0)
                 clr.b   routine_secondary(a0)           ; Stop monitor from falling
 
-locret_1D694:
+SKMonitor_Box_ReturnFromNativeFallOrSkip:
                 rts
 ; End of function Obj_MonitorFall
 
@@ -122,19 +122,19 @@ SolidObject_Monitor_SonicKnux:
                 btst    d6,status(a0)                   ; Is Sonic/Knux standing on the monitor?
                 bne.s   Monitor_ChkOverEdge             ; If so, branch
                 cmpi.b  #2,anim(a1)                     ; Is Sonic/Knux in their rolling animation?
-                beq.s   locret_1D6BC                    ; If so, return
+                beq.s   SKMonitor_SkipNewSolidReturn    ; If so, return
                 cmpi.b  #2,character_id(a1)             ; Is character Knuckles?
-                bne.s   loc_1D6BE                       ; If not, branch
+                bne.s   SKMonitor_ContinueSolidContact  ; If not, branch
                 cmpi.b  #1,double_jump_flag(a1)         ; Is Knuckles gliding?
-                beq.s   locret_1D6BC                    ; If so, return
+                beq.s   SKMonitor_SkipNewSolidReturn    ; If so, return
                 cmpi.b  #3,double_jump_flag(a1)         ; Is Knuckles sliding after gliding?
-                bne.s   loc_1D6BE                       ; If not, branch
+                bne.s   SKMonitor_ContinueSolidContact  ; If not, branch
 
-locret_1D6BC:
+SKMonitor_SkipNewSolidReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D6BE:
+SKMonitor_ContinueSolidContact:
                 bra.w   SolidObject_cont
 ; End of function SolidObject_Monitor_SonicKnux
 
@@ -237,12 +237,12 @@ Obj_MonitorContents:
                 jmp     MonitorContents_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 MonitorContents_Index:
-                dc.w    loc_1D7CE-MonitorContents_Index
-                dc.w    loc_1D81A-MonitorContents_Index
-                dc.w    loc_1DB2E-MonitorContents_Index
+                dc.w    SKMonitorIcon_InitFirstPiece-MonitorContents_Index
+                dc.w    SKMonitor_Icon_MoveTowardApexThenDraw-MonitorContents_Index
+                dc.w    SKMonitorIcon_TickLifeOrDelete-MonitorContents_Index
 ; ---------------------------------------------------------------------------
 
-loc_1D7CE:
+SKMonitorIcon_InitFirstPiece:
                 addq.b  #2,routine(a0)
                 move.w  #make_art_tile(ArtTile_Monitors,0,1),art_tile(a0)
                 ori.b   #$24,render_flags(a0)
@@ -250,10 +250,10 @@ loc_1D7CE:
                 move.b  #8,width_pixels(a0)
                 move.w  #-$300,y_vel(a0)
                 btst    #1,render_flags(a0)
-                beq.s   loc_1D7FC
+                beq.s   SKMonitorIcon_SelectFirstPiece
                 neg.w   y_vel(a0)
 
-loc_1D7FC:
+SKMonitorIcon_SelectFirstPiece:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 addq.b  #1,d0
@@ -264,7 +264,7 @@ loc_1D7FC:
                 addq.w  #2,a1
                 move.l  a1,mappings(a0)
 
-loc_1D81A:
+SKMonitor_Icon_MoveTowardApexThenDraw:
                 bsr.s   MonitorIconSKMoveToApexAndDispatchReward
                 bra.w   Draw_Sprite
 
@@ -272,51 +272,53 @@ loc_1D81A:
 
 MonitorIconSKMoveToApexAndDispatchReward:
                 btst    #1,render_flags(a0)
-                bne.s   loc_1D83C
+                bne.s   SKMonitorIcon_MoveFlippedToApex
                 tst.w   y_vel(a0)
-                bpl.w   loc_1D850
+                bpl.w   SKMonitorIcon_InitLifeAndLedger
                 bsr.w   MoveSprite2
                 addi.w  #$18,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D83C:
+SKMonitorIcon_MoveFlippedToApex:
                 tst.w   y_vel(a0)
-                bmi.w   loc_1D850
+                bmi.w   SKMonitorIcon_InitLifeAndLedger
                 bsr.w   MoveSprite2
                 subi.w  #$18,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D850:
+; Set a 30-update word timer and select the broken-monitor counter for the recipient
+SKMonitorIcon_InitLifeAndLedger:
                 addq.b  #2,routine(a0)
                 move.w  #30-1,anim_frame_timer(a0)
                 movea.w parent(a0),a1
                 lea     (Monitors_broken).w,a2
                 cmpa.w  #Player_1,a1
-                beq.s   loc_1D86C
+                beq.s   SKMonitorIcon_DispatchAnimReward
                 lea     (Monitors_broken_P2).w,a2
 
-loc_1D86C:
+; Use the animation byte as an unchecked word-table index
+SKMonitorIcon_DispatchAnimReward:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_1D87C(pc,d0.w),d0
-                jmp     off_1D87C(pc,d0.w)
+                move.w  SKMonitor_Icon_RewardRelativeWordTable(pc,d0.w),d0
+                jmp     SKMonitor_Icon_RewardRelativeWordTable(pc,d0.w)
 ; End of function MonitorIconSKMoveToApexAndDispatchReward
 
 ; ---------------------------------------------------------------------------
-off_1D87C:
-                dc.w    Monitor_Give_Eggman-off_1D87C
-                dc.w    Monitor_Give_1up-off_1D87C
-                dc.w    Monitor_Give_Eggman-off_1D87C
-                dc.w    Monitor_Give_Rings-off_1D87C
-                dc.w    Monitor_Give_SpeedShoes-off_1D87C
-                dc.w    Monitor_Give_FireShield-off_1D87C
-                dc.w    Monitor_Give_LightningShield-off_1D87C
-                dc.w    Monitor_Give_BubbleShield-off_1D87C
-                dc.w    Monitor_Give_Invincibility-off_1D87C
-                dc.w    Monitor_Give_SuperSonic-off_1D87C
+SKMonitor_Icon_RewardRelativeWordTable:
+                dc.w    Monitor_Give_Eggman-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_1up-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Eggman-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Rings-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_SpeedShoes-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_FireShield-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_LightningShield-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_BubbleShield-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_Invincibility-SKMonitor_Icon_RewardRelativeWordTable
+                dc.w    Monitor_Give_SuperSonic-SKMonitor_Icon_RewardRelativeWordTable
 ; ---------------------------------------------------------------------------
 
 Monitor_Give_Eggman:
@@ -340,32 +342,34 @@ Monitor_Give_Rings:
                 lea     (Total_ring_count).w,a5
                 addi.w  #10,(a5)
                 cmpi.w  #999,(a5)
-                blo.s   loc_1D8CC
+                blo.s   SKMonitorRings_CapP1At999
                 move.w  #999,(a5)
 
-loc_1D8CC:
+SKMonitorRings_CapP1At999:
                 addi.w  #10,(a2)
                 cmpi.w  #999,(a2)
-                blo.s   loc_1D8DA
+                blo.s   SKMonitorRings_UpdateHudAndLives
                 move.w  #999,(a2)
 
-loc_1D8DA:
+; Test the 100-ring life flag before the 200-ring flag
+SKMonitorRings_UpdateHudAndLives:
                 ori.b   #1,(a3)
                 cmpi.w  #100,(a2)
-                blo.s   loc_1D8F6
+                blo.s   SKMonitorRings_PlayRightSound
                 bset    #1,(a4)
-                beq.s   loc_1D8FE
+                beq.s   SKMonitorRings_PickLifeOrEggman
                 cmpi.w  #200,(a2)
-                blo.s   loc_1D8F6
+                blo.s   SKMonitorRings_PlayRightSound
                 bset    #2,(a4)
-                beq.s   loc_1D8FE
+                beq.s   SKMonitorRings_PickLifeOrEggman
 
-loc_1D8F6:
+; Send the right-ring sound through Play_Music
+SKMonitorRings_PlayRightSound:
                 moveq   #signextendB(sfx_RingRight),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_1D8FE:
+SKMonitorRings_PickLifeOrEggman:
                 cmpa.w  #Player_1,a1
                 beq.w   Monitor_Give_1up
                 bra.w   Monitor_Give_Eggman
@@ -376,21 +380,21 @@ Monitor_Give_SpeedShoes:
                 bset    #Status_SpeedShoes,status_secondary(a1)
                 move.b  #(20*60)/8,speed_shoes_timer(a1)
                 cmpa.w  #Player_1,a1
-                bne.s   loc_1D93A
+                bne.s   SKMonitorShoes_SetP2SpeedParams
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_1D93A
+                beq.s   SKMonitorShoes_SetP2SpeedParams
                 move.w  #$C00,(Max_speed).w
                 move.w  #$18,(Acceleration).w
                 move.w  #$80,(Deceleration).w
-                bra.s   loc_1D94C
+                bra.s   SKMonitorShoes_SetGlobalTempo8
 ; ---------------------------------------------------------------------------
 
-loc_1D93A:
+SKMonitorShoes_SetP2SpeedParams:
                 move.w  #$C00,(Max_speed_P2).w
                 move.w  #$18,(Acceleration_P2).w
                 move.w  #$80,(Deceleration_P2).w
 
-loc_1D94C:
+SKMonitorShoes_SetGlobalTempo8:
                 moveq   #8,d0
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
@@ -403,13 +407,13 @@ Monitor_Give_FireShield:
                 moveq   #signextendB(sfx_FireShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1D984
+                bne.s   SKMonitorFireShield_InitP2Slot
                 move.l  #Obj_FireShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D984:
+SKMonitorFireShield_InitP2Slot:
                 move.l  #Obj_FireShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -423,13 +427,13 @@ Monitor_Give_LightningShield:
                 moveq   #signextendB(sfx_LightningShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1D9C2
+                bne.s   SKMonitorLightning_InitP2Slot
                 move.l  #Obj_LightningShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1D9C2:
+SKMonitorLightning_InitP2Slot:
                 move.l  #Obj_LightningShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -443,13 +447,13 @@ Monitor_Give_BubbleShield:
                 moveq   #signextendB(sfx_BubbleShield),d0
                 jsr     (Play_Music).l
                 tst.b   parent+1(a0)
-                bne.s   loc_1DA00
+                bne.s   SKMonitorBubbleShield_InitP2Slot
                 move.l  #Obj_BubbleShield,(Shield).w
                 move.w  a1,(Shield+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1DA00:
+SKMonitorBubbleShield_InitP2Slot:
                 move.l  #Obj_BubbleShield,(Shield_P2).w
                 move.w  a1,(Shield_P2+parent).w
                 rts
@@ -458,31 +462,32 @@ loc_1DA00:
 Monitor_Give_Invincibility:
                 addq.w  #1,(a2)
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   locret_1DA5E
+                bne.s   SKMonitorStars_GrantReturn
                 tst.b   (Super_Tails_flag).w
-                bne.s   locret_1DA5E
+                bne.s   SKMonitorStars_GrantReturn
                 bset    #1,status_secondary(a1)
                 move.b  #(20*60)/8,invincibility_timer(a1)
                 tst.b   (Boss_flag).w
-                bne.s   loc_1DA3E
+                bne.s   SKMonitorStars_SelectSlot
                 cmpi.b  #12,air_left(a1)
-                bls.s   loc_1DA3E
+                bls.s   SKMonitorStars_SelectSlot
                 moveq   #signextendB(mus_Invincibility),d0
                 jsr     (Play_Music).l
 
-loc_1DA3E:
+; Choose the fixed stars slot using the low byte of the parent pointer
+SKMonitorStars_SelectSlot:
                 tst.b   parent+1(a0)
-                bne.s   loc_1DA52
+                bne.s   SKMonitorStars_InitP2Slot
                 move.l  #Obj_Invincibility,(Invincibility_stars).w
                 move.w  a1,(Invincibility_stars+parent).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1DA52:
+SKMonitorStars_InitP2Slot:
                 move.l  #Obj_Invincibility,(Invincibility_stars_P2).w
                 move.w  a1,(Invincibility_stars_P2+parent).w
 
-locret_1DA5E:
+SKMonitorStars_GrantReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -539,7 +544,7 @@ Monitor_Give_SuperSonic:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1DB2E:
+SKMonitorIcon_TickLifeOrDelete:
                 subq.w  #1,anim_frame_timer(a0)
                 bmi.w   Delete_Current_Sprite
                 bra.w   Draw_Sprite

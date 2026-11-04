@@ -16,40 +16,40 @@ Obj_HiddenMonitor:
 
 Obj_HiddenMonitorMain:
                 move.w  (Signpost_addr).w,d0
-                beq.s   loc_8375A
+                beq.s   SKHiddenMonitor_CullUnrevealed
                 movea.w d0,a1
                 cmpi.l  #Obj_EndSign,(a1)
-                bne.s   loc_8375A                       ; If no signpost is active, branch
+                bne.s   SKHiddenMonitor_CullUnrevealed  ; If no signpost is active, branch
                 btst    #0,$38(a1)
-                beq.s   loc_8375A                       ; If signpost hasn't landed, branch
-                lea     word_8379E(pc),a2
+                beq.s   SKHiddenMonitor_CullUnrevealed  ; If signpost hasn't landed, branch
+                lea     SKHiddenMonitor_SignTriggerRect(pc),a2
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                blo.s   loc_8374C
+                blo.s   SKHiddenMonitor_RejectAndCull
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bhs.s   loc_8374C
+                bhs.s   SKHiddenMonitor_RejectAndCull
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                blo.s   loc_8374C
+                blo.s   SKHiddenMonitor_RejectAndCull
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                blo.s   loc_83760
+                blo.s   SKHiddenMonitor_RevealFromSign
 
-loc_8374C:
+SKHiddenMonitor_RejectAndCull:
                 moveq   #signextendB(sfx_GroundSlide),d0  ; If signpost has landed
                 jsr     (Play_SFX).l
                 move.l  #Sprite_OnScreen_Test,(a0)
 
-loc_8375A:
+SKHiddenMonitor_CullUnrevealed:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_83760:
+SKHiddenMonitor_RevealFromSign:
                 bclr    #0,$38(a1)                      ; If signpost has landed and is in range
                 move.l  #Obj_Monitor,(a0)               ; make this object a monitor
                 move.b  #2,routine(a0)
@@ -58,14 +58,14 @@ loc_83760:
                 moveq   #signextendB(sfx_BubbleAttack),d0
                 jsr     (Play_SFX).l
                 bclr    #0,render_flags(a0)
-                beq.s   loc_83798
+                beq.s   SKHiddenMonitor_DrawRevealedBox
                 bset    #7,art_tile(a0)
                 clr.b   status(a0)
 
-loc_83798:
+SKHiddenMonitor_DrawRevealedBox:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-word_8379E:
+SKHiddenMonitor_SignTriggerRect:
                 dc.w    -$E,   $1C,  -$80,   $C0
 ObjDat_HiddenMonitor:
                 dc.l    Map_Monitor

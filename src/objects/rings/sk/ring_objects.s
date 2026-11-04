@@ -65,13 +65,13 @@ GiveRing_1P:
                 cmpi.w  #100,(Ring_count).w             ; does the player 1 have less than 100 rings?
                 blo.s   JmpTo_Play_SFX                  ; if yes, play the ring sound
                 bset    #1,(Extra_life_flags).w         ; test and set the flag for the first extra life
-                beq.s   loc_1A5D8                       ; if it was clear before, branch
+                beq.s   SKRings_AwardP1LatchedRingThresholdLife  ; if it was clear before, branch
                 cmpi.w  #200,(Ring_count).w             ; does the player 1 have less than 200 rings?
                 blo.s   JmpTo_Play_SFX                  ; if yes, play the ring sound
                 bset    #2,(Extra_life_flags).w         ; test and set the flag for the second extra life
                 bne.s   JmpTo_Play_SFX                  ; if it was set before, play the ring sound
 
-loc_1A5D8:
+SKRings_AwardP1LatchedRingThresholdLife:
                 addq.b  #1,(Life_count).w               ; add 1 to the life count
                 addq.b  #1,(Update_HUD_life_count).w    ; add 1 to the displayed life count
                 moveq   #signextendB(mus_ExtraLife),d0  ; prepare to play the extra life jingle
@@ -87,35 +87,35 @@ JmpTo_Play_SFX:
 
 GiveRing_Tails:
                 cmpi.w  #999,(Total_ring_count_P2).w
-                bhs.s   loc_1A5FC
+                bhs.s   SKRingReward_TryIncrementP2
                 addq.w  #1,(Total_ring_count_P2).w
 
-loc_1A5FC:
+SKRingReward_TryIncrementP2:
                 cmpi.w  #999,(Ring_count_P2).w
-                bhs.s   loc_1A608
+                bhs.s   SKRingReward_SelectP2CreditPath
                 addq.w  #1,(Ring_count_P2).w
 
-loc_1A608:
+SKRingReward_SelectP2CreditPath:
                 tst.w   (Competition_mode).w
                 beq.s   GiveRing_1P
                 ori.b   #1,(_unkFEBE).w
                 move.w  #sfx_RingRight,d0
                 cmpi.w  #100,(Ring_count_P2).w
-                blo.s   loc_1A644
+                blo.s   SKRings_RequestCompetitionP2RingSound
                 bset    #1,(Extra_life_flags_P2).w
-                beq.s   loc_1A638
+                beq.s   SKRingReward_AwardCompP2Life
                 cmpi.w  #200,(Ring_count_P2).w
-                blo.s   loc_1A644
+                blo.s   SKRings_RequestCompetitionP2RingSound
                 bset    #2,(Extra_life_flags_P2).w
-                bne.s   loc_1A644
+                bne.s   SKRings_RequestCompetitionP2RingSound
 
-loc_1A638:
+SKRingReward_AwardCompP2Life:
                 addq.b  #1,(Life_count_P2).w
                 moveq   #signextendB(mus_ExtraLife),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_1A644:
+SKRings_RequestCompetitionP2RingSound:
                 jmp     (Play_SFX).l
 ; End of function GiveRing
 
@@ -128,11 +128,11 @@ Obj_Bouncing_Ring:
                 jmp     Bouncing_Ring_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 Bouncing_Ring_Index:
-                dc.w    loc_1A67A-Bouncing_Ring_Index
-                dc.w    loc_1A75C-Bouncing_Ring_Index
-                dc.w    loc_1A7C2-Bouncing_Ring_Index
-                dc.w    loc_1A7D6-Bouncing_Ring_Index
-                dc.w    loc_1A7E4-Bouncing_Ring_Index
+                dc.w    SKRingSpill_SelectGravityHandler-Bouncing_Ring_Index
+                dc.w    SKRingSpill_MoveAndTryFloorBounce-Bouncing_Ring_Index
+                dc.w    SKRingSpill_CollectAndSparkle-Bouncing_Ring_Index
+                dc.w    SKRingSpill_DrawSparkle-Bouncing_Ring_Index
+                dc.w    SKRingSpill_Delete-Bouncing_Ring_Index
 ; ---------------------------------------------------------------------------
 
 Obj_Bouncing_Ring_Reverse_Gravity:
@@ -142,44 +142,44 @@ Obj_Bouncing_Ring_Reverse_Gravity:
                 jmp     Bouncing_Ring_Reverse_Gravity_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 Bouncing_Ring_Reverse_Gravity_Index:
-                dc.w    loc_1A67A-Bouncing_Ring_Reverse_Gravity_Index
-                dc.w    loc_1A7E8-Bouncing_Ring_Reverse_Gravity_Index
-                dc.w    loc_1A7C2-Bouncing_Ring_Reverse_Gravity_Index
-                dc.w    loc_1A7D6-Bouncing_Ring_Reverse_Gravity_Index
-                dc.w    loc_1A7E4-Bouncing_Ring_Reverse_Gravity_Index
+                dc.w    SKRingSpill_SelectGravityHandler-Bouncing_Ring_Reverse_Gravity_Index
+                dc.w    SKRingSpill_MoveAndTryCeilingBounce-Bouncing_Ring_Reverse_Gravity_Index
+                dc.w    SKRingSpill_CollectAndSparkle-Bouncing_Ring_Reverse_Gravity_Index
+                dc.w    SKRingSpill_DrawSparkle-Bouncing_Ring_Reverse_Gravity_Index
+                dc.w    SKRingSpill_Delete-Bouncing_Ring_Reverse_Gravity_Index
 ; ---------------------------------------------------------------------------
 
-loc_1A67A:
+SKRingSpill_SelectGravityHandler:
                 move.l  #Obj_Bouncing_Ring,d6
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_1A68C
+                beq.s   SKRingSpill_SelectLedger
                 move.l  #Obj_Bouncing_Ring_Reverse_Gravity,d6
 
-loc_1A68C:
+SKRingSpill_SelectLedger:
                 movea.l a0,a1
                 moveq   #0,d5
                 move.w  (Ring_count).w,d5
                 tst.b   $3F(a0)
-                beq.s   loc_1A69E
+                beq.s   SKRingSpill_CapAt32
                 move.w  (Ring_count_P2).w,d5
 
-loc_1A69E:
+SKRingSpill_CapAt32:
                 moveq   #$20,d0
                 cmp.w   d0,d5
-                blo.s   loc_1A6A6
+                blo.s   SKRingSpill_InitCountAndFanSeed
                 move.w  d0,d5
 
-loc_1A6A6:
+SKRingSpill_InitCountAndFanSeed:
                 subq.w  #1,d5
                 move.w  #$288,d4
-                bra.s   loc_1A6B6
+                bra.s   SKRingSpill_InitRingAndFanVel
 ; ---------------------------------------------------------------------------
 
-loc_1A6AE:
+SKRingSpill_TryNextRing:
                 bsr.w   AllocateObjectAfterCurrent
-                bne.w   loc_1A738
+                bne.w   SKRingSpill_PlayLossAndMoveFirst
 
-loc_1A6B6:
+SKRingSpill_InitRingAndFanVel:
                 move.l  d6,(a1)
                 addq.b  #2,routine(a1)
                 move.b  #8,y_radius(a1)
@@ -194,7 +194,7 @@ loc_1A6B6:
                 move.b  #8,width_pixels(a1)
                 move.b  #-1,(Ring_spill_anim_counter).w
                 tst.w   d4
-                bmi.s   loc_1A728
+                bmi.s   SKRingSpill_StoreVelAndMirrorX
                 move.w  d4,d0
                 jsr     (GetSineCosine).l
                 move.w  d4,d2
@@ -204,107 +204,109 @@ loc_1A6B6:
                 move.w  d0,d2
                 move.w  d1,d3
                 addi.b  #$10,d4
-                bcc.s   loc_1A728
+                bcc.s   SKRingSpill_StoreVelAndMirrorX
                 subi.w  #$80,d4
-                bcc.s   loc_1A728
+                bcc.s   SKRingSpill_StoreVelAndMirrorX
                 move.w  #$288,d4
 
-loc_1A728:
+SKRingSpill_StoreVelAndMirrorX:
                 move.w  d2,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 neg.w   d2
                 neg.w   d4
-                dbf     d5,loc_1A6AE
+                dbf     d5,SKRingSpill_TryNextRing
 
-loc_1A738:
+; Clear Player 1's ring ledger, then move the original object immediately
+SKRingSpill_PlayLossAndMoveFirst:
                 move.w  #signextendB(sfx_RingLoss),d0
                 jsr     (Play_SFX).l
                 move.w  #0,(Ring_count).w
                 move.b  #$80,(Update_HUD_ring_count).w
                 move.b  #0,(Extra_life_flags).w
                 tst.b   (Reverse_gravity_flag).w
-                bne.w   loc_1A7E8
+                bne.w   SKRingSpill_MoveAndTryCeilingBounce
 
-loc_1A75C:
+SKRingSpill_MoveAndTryFloorBounce:
                 move.b  (Ring_spill_anim_frame).w,mapping_frame(a0)
                 bsr.w   MoveSprite2
                 addi.w  #$18,y_vel(a0)
-                bmi.s   loc_1A7B0
+                bmi.s   SKRingSpill_DrawNormalAndQueueTouch
                 move.b  (V_int_run_count+3).w,d0
                 add.b   d7,d0
                 andi.b  #7,d0
-                bne.s   loc_1A7B0
+                bne.s   SKRingSpill_DrawNormalAndQueueTouch
                 tst.b   render_flags(a0)
-                bpl.s   loc_1A79C
+                bpl.s   SKRingSpill_CheckLifetimeAndMaxY
                 jsr     (RingCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_1A79C
+                bpl.s   SKRingSpill_CheckLifetimeAndMaxY
                 add.w   d1,y_pos(a0)
                 move.w  y_vel(a0),d0
                 asr.w   #2,d0
                 sub.w   d0,y_vel(a0)
                 neg.w   y_vel(a0)
 
-loc_1A79C:
+SKRingSpill_CheckLifetimeAndMaxY:
                 tst.b   (Ring_spill_anim_counter).w
-                beq.s   loc_1A7E4
+                beq.s   SKRingSpill_Delete
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_1A7E4
+                blo.s   SKRingSpill_Delete
 
-loc_1A7B0:
+SKRingSpill_DrawNormalAndQueueTouch:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1A7C2:
+SKRingSpill_CollectAndSparkle:
                 addq.b  #2,routine(a0)
                 move.b  #0,collision_flags(a0)
                 move.w  #$80,priority(a0)
                 bsr.w   GiveRing
 
-loc_1A7D6:
+SKRingSpill_DrawSparkle:
                 lea     (Ani_RingSparkle).l,a1
                 bsr.w   Animate_Sprite
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1A7E4:
+SKRingSpill_Delete:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1A7E8:
+SKRingSpill_MoveAndTryCeilingBounce:
                 move.b  (Ring_spill_anim_frame).w,mapping_frame(a0)
                 bsr.w   MoveSprite_TestGravity2
                 addi.w  #$18,y_vel(a0)
-                bmi.s   loc_1A83C
+                bmi.s   SKRingSpill_DrawReverseAndQueueTouch
                 move.b  (V_int_run_count+3).w,d0
                 add.b   d7,d0
                 andi.b  #7,d0
-                bne.s   loc_1A83C
+                bne.s   SKRingSpill_DrawReverseAndQueueTouch
                 tst.b   render_flags(a0)
-                bpl.s   loc_1A828
+                bpl.s   SKRingSpill_CheckReverseLifetime
                 jsr     (RingCheckFloorDist_ReverseGravity).l
                 tst.w   d1
-                bpl.s   loc_1A828
+                bpl.s   SKRingSpill_CheckReverseLifetime
                 sub.w   d1,y_pos(a0)
                 move.w  y_vel(a0),d0
                 asr.w   #2,d0
                 sub.w   d0,y_vel(a0)
                 neg.w   y_vel(a0)
 
-loc_1A828:
+; Reverse gravity shares the lifetime counter and the same unsigned maximum Y test
+SKRingSpill_CheckReverseLifetime:
                 tst.b   (Ring_spill_anim_counter).w
-                beq.s   loc_1A7E4
+                beq.s   SKRingSpill_Delete
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_1A7E4
+                blo.s   SKRingSpill_Delete
 
-loc_1A83C:
+SKRingSpill_DrawReverseAndQueueTouch:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 move.w  (Level_repeat_offset).w,d0
                 sub.w   d0,x_pos(a0)
@@ -322,9 +324,9 @@ Obj_Attracted_Ring:
                 move.b  #8,height_pixels(a0)
                 move.b  #8,y_radius(a0)
                 move.b  #8,x_radius(a0)
-                move.l  #loc_1A88C,(a0)
+                move.l  #SKAttractedRing_MoveOrRelease,(a0)
 
-loc_1A88C:
+SKAttractedRing_MoveOrRelease:
                 tst.b   routine(a0)
                 bne.s   AttractedRing_GiveRing
                 bsr.w   AttractedRing_Move
@@ -336,37 +338,38 @@ loc_1A88C:
 
 Obj_Attracted_RingAnimate:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1A8C6
+                bpl.s   SKAttractedRing_CullOrDraw
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
 
-loc_1A8C6:
+SKAttractedRing_CullOrDraw:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1A8E4
+                bhi.w   SKAttractedRing_ClearLoadedBit
                 jsr     (Add_SpriteToCollisionResponseList).l
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1A8E4:
+SKAttractedRing_ClearLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1A8F0
+                beq.s   SKAttractedRing_ClearStatusFromVector
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1A8F0:
+; The original status-clear path reads the absolute word at Vectors+$30
+SKAttractedRing_ClearStatusFromVector:
 ; Bug: Probably meant to be $30(a0), as Test_Ring_Collisions_AttractRing
 ; stores the ring's address in the ring status table there
 ; This is corrected in Sonic & Knuckles Collection
                 move.w  (Vectors+$30).w,d0
-                beq.s   loc_1A8FC
+                beq.s   SKAttractedRing_DeleteAfterCleanup
                 movea.w d0,a2
                 move.w  #0,(a2)
 
-loc_1A8FC:
+SKAttractedRing_DeleteAfterCleanup:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
@@ -375,18 +378,18 @@ AttractedRing_GiveRing:
                 move.w  #$80,priority(a0)
                 subq.w  #1,(Perfect_rings_left).w
                 bsr.w   GiveRing
-                move.l  #loc_1A920,(a0)
+                move.l  #SKAttractedRing_AnimateSparkle,(a0)
                 move.b  #0,routine(a0)
 
-loc_1A920:
+SKAttractedRing_AnimateSparkle:
                 tst.b   routine(a0)
-                bne.s   loc_1A934
+                bne.s   SKAttractedRing_DeleteAfterSparkle
                 lea     (Ani_RingSparkle).l,a1
                 bsr.w   Animate_Sprite
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1A934:
+SKAttractedRing_DeleteAfterSparkle:
                 bra.w   Delete_Current_Sprite
 
 ; =============== S U B R O U T I N E =======================================
@@ -453,12 +456,12 @@ Obj_SlotRing:
                 jmp     SlotRing_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 SlotRing_Index:
-                dc.w    loc_1AA02-SlotRing_Index
-                dc.w    loc_1AA56-SlotRing_Index
-                dc.w    loc_1AA62-SlotRing_Index
+                dc.w    SKSlotRing_EaseAndRewardAtZero-SlotRing_Index
+                dc.w    SKSlotRing_DrawRewardSparkle-SlotRing_Index
+                dc.w    SKSlotRing_DeleteAfterReward-SlotRing_Index
 ; ---------------------------------------------------------------------------
 
-loc_1AA02:
+SKSlotRing_EaseAndRewardAtZero:
                 moveq   #0,d1
                 move.w  $3C(a0),d1
                 swap    d1
@@ -484,13 +487,13 @@ loc_1AA02:
                 bsr.w   GiveRing
                 addi.b  #2,routine(a0)
 
-loc_1AA56:
+SKSlotRing_DrawRewardSparkle:
                 lea     Ani_RingSparkle(pc),a1
                 bsr.w   Animate_Sprite
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1AA62:
+SKSlotRing_DeleteAfterReward:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 Ani_Ring:
