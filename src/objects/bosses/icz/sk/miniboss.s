@@ -227,7 +227,7 @@ loc_713D2:
 loc_713E8:
                 jsr     (Obj_EndSignControl).l
                 movea.w (_unkFAAE).w,a1
-                cmpi.l  #loc_8B660,(a1)
+                cmpi.l  #SKICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   loc_71400
                 bset    #5,$38(a1)
 

@@ -8,32 +8,32 @@ Obj_ICZSnowPile:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 bclr    #7,d0
-                lea     off_58F8C(pc),a1
+                lea     S3ICZSnowPile_SubtypeSetupTable(pc),a1
                 lea     (a1,d0.w),a2
                 move.l  (a2)+,(a0)
                 movea.l (a2)+,a1
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_58D06:
-                lea     word_58D28(pc),a1
+S3ICZSnowPile_UpdatePileContacts:
+                lea     S3ICZSnowPile_DragPileBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   loc_58D24
+                beq.s   S3ICZSnowPile_DrawIntactPile
                 tst.w   d0
-                beq.s   loc_58D1A
+                beq.s   S3ICZSnowPile_TryP2PileContact
                 bsr.w   ApplyIczSnowPileDragOrBreak
 
-loc_58D1A:
+S3ICZSnowPile_TryP2PileContact:
                 swap    d0
                 tst.w   d0
-                beq.s   loc_58D24
+                beq.s   S3ICZSnowPile_DrawIntactPile
                 bsr.w   ApplyIczSnowPileDragOrBreak
 
-loc_58D24:
+S3ICZSnowPile_DrawIntactPile:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
-word_58D28:
+S3ICZSnowPile_DragPileBounds:
                 dc.w    -$28,   $50,  -$18,   $20
 
 ; =============== S U B R O U T I N E =======================================
@@ -42,131 +42,133 @@ ApplyIczSnowPileDragOrBreak:
                 movea.w d0,a3
                 move.w  d0,$44(a0)
                 cmpi.b  #9,anim(a3)
-                beq.s   loc_58D5E
+                beq.s   S3ICZSnowPile_BreakAndSkipCaller
                 btst    #Status_InAir,status(a3)
-                bne.s   locret_58D5C
+                bne.s   S3ICZSnowPile_DragReturn
                 move.w  x_vel(a3),d2
                 move.w  d2,d3
-                bpl.s   loc_58D50
+                bpl.s   S3ICZSnowPile_BreakOrHalveGroundSpeed
                 neg.w   d2
 
-loc_58D50:
+S3ICZSnowPile_BreakOrHalveGroundSpeed:
                 cmpi.w  #$600,d2
-                bhs.s   loc_58D5E
+                bhs.s   S3ICZSnowPile_BreakAndSkipCaller
                 asr.w   #1,d3
                 move.w  d3,ground_vel(a3)
 
-locret_58D5C:
+S3ICZSnowPile_DragReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58D5E:
+; Discard the caller's return address to skip the remaining contacts and draw
+S3ICZSnowPile_BreakAndSkipCaller:
                 move.w  a3,$44(a0)
-                lea     ChildObjDat_58FE4(pc),a2
+                lea     S3ICZSnowPile_DragPileFragments(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jsr     (Go_Delete_Sprite).l
                 addq.w  #4,sp
 
-locret_58D72:
+S3ICZSnowPile_BreakOrFlakeReturn:
                 rts
 ; End of function ApplyIczSnowPileDragOrBreak
 
 ; ---------------------------------------------------------------------------
 
-loc_58D74:
-                lea     word_58DA6(pc),a1
+S3ICZSnowPile_CheckNarrowGateP1:
+                lea     S3ICZSnowPile_NarrowGateBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.w   d0
-                bne.s   loc_58D84
+                bne.s   S3ICZSnowPile_BoostP1ThroughNarrowGate
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_58D84:
+S3ICZSnowPile_BoostP1ThroughNarrowGate:
                 move.w  d0,$44(a0)
-                beq.s   loc_58DA0
+                beq.s   S3ICZSnowPile_DeleteNarrowGate
                 movea.w d0,a1
                 move.w  #$800,x_vel(a1)
                 move.w  #$800,ground_vel(a1)
-                lea     ChildObjDat_5900A(pc),a2
+                lea     S3ICZSnowPile_NarrowGateFragments(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_58DA0:
+S3ICZSnowPile_DeleteNarrowGate:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-word_58DA6:
+S3ICZSnowPile_NarrowGateBounds:
                 dc.w    -8,   $10,  -$10,   $20
 ; ---------------------------------------------------------------------------
 
-loc_58DAE:
-                lea     word_58DF0(pc),a1
+S3ICZSnowPile_CheckTransitionGateP1:
+                lea     S3ICZSnowPile_TransitionGateBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.w   d0
-                bne.s   loc_58DBE
+                bne.s   S3ICZSnowPile_BoostP1AndTryTransition
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_58DBE:
+S3ICZSnowPile_BoostP1AndTryTransition:
                 move.w  d0,$44(a0)
-                beq.s   loc_58DEA
+                beq.s   S3ICZSnowPile_DeleteTransitionGate
                 movea.w d0,a1
                 move.w  #$800,x_vel(a1)
                 move.w  #$800,ground_vel(a1)
-                lea     ChildObjDat_59018(pc),a2
+                lea     S3ICZSnowPile_TransitionGateFragments(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 btst    #7,subtype(a0)
-                beq.s   loc_58DEA
+                beq.s   S3ICZSnowPile_DeleteTransitionGate
                 move.w  #$600,d0
                 jsr     StartNewLevel(pc)
 
-loc_58DEA:
+S3ICZSnowPile_DeleteTransitionGate:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-word_58DF0:
+S3ICZSnowPile_TransitionGateBounds:
                 dc.w    -8,   $10,  -$10,   $20
 ; ---------------------------------------------------------------------------
 
-loc_58DF8:
+; Increment the live flake count before attempting allocation
+S3ICZSnowPile_UpdateCameraSnowEmitter:
                 move.w  a0,(_unkFAAE).w
                 btst    #5,$38(a0)
-                bne.s   loc_58E40
+                bne.s   S3ICZSnowPile_DeleteSnowEmitter
                 move.w  (Camera_X_pos_copy).w,x_pos(a0)
                 move.w  (Camera_Y_pos_copy).w,y_pos(a0)
                 subq.w  #8,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_58E3E
+                bpl.s   S3ICZSnowPile_SnowEmitterReturn
                 move.w  #8,$2E(a0)
                 move.b  (Hyudoro_count).w,d0
                 addq.b  #1,d0
                 cmpi.b  #$3C,d0
-                bhi.s   locret_58E3E
+                bhi.s   S3ICZSnowPile_SnowEmitterReturn
                 move.b  d0,(Hyudoro_count).w
                 jsr     (AllocateObject).l
-                bne.s   locret_58E3E
-                move.l  #loc_58E46,(a1)
+                bne.s   S3ICZSnowPile_SnowEmitterReturn
+                move.l  #S3ICZSnowPile_InitFlakeAndFoldXOffset,(a1)
 
-locret_58E3E:
+S3ICZSnowPile_SnowEmitterReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58E40:
+S3ICZSnowPile_DeleteSnowEmitter:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58E46:
-                lea     ObjDat3_58FD0(pc),a1
+S3ICZSnowPile_InitFlakeAndFoldXOffset:
+                lea     S3ICZSnowPile_FlakeAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_58EB8,(a0)
+                move.l  #S3ICZSnowPile_MoveUntilFirstVisible,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$1FF,d0
                 cmpi.w  #$140,d0
-                blo.s   loc_58E6A
+                blo.s   S3ICZSnowPile_PlaceFlakeAndPickVisual
                 andi.w  #$3F,d0
                 lsl.w   #2,d0
 
-loc_58E6A:
+S3ICZSnowPile_PlaceFlakeAndPickVisual:
                 add.w   (Camera_X_pos).w,d0
                 cmpi.w  #$380,d0
-                blo.s   loc_58EEE
+                blo.s   S3ICZSnowPile_TryDecrementFlakeCount
                 move.w  d0,x_pos(a0)
                 move.w  (Camera_Y_pos).w,d0
                 subq.w  #4,d0
@@ -174,75 +176,75 @@ loc_58E6A:
                 swap    d0
                 move.w  d0,d1
                 andi.w  #3,d0
-                move.b  RawAni_58EAC(pc,d0.w),mapping_frame(a0)
+                move.b  S3ICZSnowPile_FlakeFrames(pc,d0.w),mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_58EB0(pc,d0.w),priority(a0)
+                move.w  S3ICZSnowPile_FlakePriorities(pc,d0.w),priority(a0)
                 andi.w  #$3C,d1
                 subi.w  #$20,d1
                 move.w  d1,x_vel(a0)
                 move.w  #$100,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_58EAC:
+S3ICZSnowPile_FlakeFrames:
                 dc.b    $B, $10,  $B,  $B
                 even
-word_58EB0:
+S3ICZSnowPile_FlakePriorities:
                 dc.w    $80
                 dc.w    $380
                 dc.w    $80
                 dc.w    $80
 ; ---------------------------------------------------------------------------
 
-loc_58EB8:
+S3ICZSnowPile_MoveUntilFirstVisible:
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_58ECA
+                bmi.s   S3ICZSnowPile_BeginVisibleFlakeState
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58ECA:
-                move.l  #loc_58ED2,(a0)
+S3ICZSnowPile_BeginVisibleFlakeState:
+                move.l  #S3ICZSnowPile_MoveAndFlickerFlake,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58ED2:
+S3ICZSnowPile_MoveAndFlickerFlake:
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_58EEE
+                bpl.s   S3ICZSnowPile_TryDecrementFlakeCount
                 bchg    #0,$38(a0)
-                bne.w   locret_58D72
+                bne.w   S3ICZSnowPile_BreakOrFlakeReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58EEE:
+S3ICZSnowPile_TryDecrementFlakeCount:
                 move.b  (Hyudoro_count).w,d0
                 subq.b  #1,d0
-                bmi.s   loc_58EFA
+                bmi.s   S3ICZSnowPile_DeleteSnowflake
                 move.b  d0,(Hyudoro_count).w
 
-loc_58EFA:
+S3ICZSnowPile_DeleteSnowflake:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58F00:
-                lea     word_58FDC(pc),a1
+S3ICZSnowPile_InitSnowFragment:
+                lea     S3ICZSnowPile_FragmentAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_58F1E,(a0)
-                move.l  #loc_58F28,$34(a0)
+                move.l  #S3ICZSnowPile_TickFragmentStagger,(a0)
+                move.l  #S3ICZSnowPile_BeginFragmentFall,$34(a0)
                 bsr.w   ICZSnowFragment_InitLaunch
                 jsr     Refresh_ChildPositionAdjusted(pc)
 
-loc_58F1E:
+S3ICZSnowPile_TickFragmentStagger:
                 jsr     Obj_Wait(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58F28:
-                move.l  #loc_58F30,(a0)
+S3ICZSnowPile_BeginFragmentFall:
+                move.l  #S3ICZSnowPile_MoveAndCullFragment,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58F30:
+S3ICZSnowPile_MoveAndCullFragment:
                 jsr     MoveSprite_LightGravity(pc)
                 jmp     Sprite_CheckDeleteXY(pc)
 
@@ -252,92 +254,92 @@ loc_58F30:
 ICZSnowFragment_InitLaunch:
                 movea.w parent3(a0),a1
                 move.w  $44(a1),d0
-                beq.s   locret_58F72
+                beq.s   S3ICZSnowPile_FragmentLaunchReturn
                 movea.w d0,a2
-                lea     word_58F74(pc),a3
+                lea     S3ICZSnowPile_FragmentLaunchSpeeds(pc),a3
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,$2E(a0)
                 add.w   d0,d0
                 move.l  (a3,d0.w),x_vel(a0)             ; and y_vel
                 btst    #0,render_flags(a2)
-                beq.s   locret_58F72
+                beq.s   S3ICZSnowPile_FragmentLaunchReturn
                 bset    #0,render_flags(a0)
                 bset    #0,render_flags(a1)
                 neg.w   x_vel(a0)
 
-locret_58F72:
+S3ICZSnowPile_FragmentLaunchReturn:
                 rts
 ; End of function ICZSnowFragment_InitLaunch
 
 ; ---------------------------------------------------------------------------
-word_58F74:
+S3ICZSnowPile_FragmentLaunchSpeeds:
                 dc.w    -$300, -$200
                 dc.w    -$400, -$300
                 dc.w    -$400, -$280
                 dc.w    -$280, -$200
                 dc.w    -$200, -$180
                 dc.w    -$200, -$100
-off_58F8C:
-                dc.l    loc_58D06
-                dc.l    ObjDat3_58FAC
-                dc.l    loc_58D74
-                dc.l    ObjDat3_58FB8
-                dc.l    loc_58DAE
-                dc.l    ObjDat3_58FC4
-                dc.l    loc_58DF8
-                dc.l    ObjDat3_58FD0
-ObjDat3_58FAC:
+S3ICZSnowPile_SubtypeSetupTable:
+                dc.l    S3ICZSnowPile_UpdatePileContacts
+                dc.l    S3ICZSnowPile_DragPileAttrs
+                dc.l    S3ICZSnowPile_CheckNarrowGateP1
+                dc.l    S3ICZSnowPile_NarrowGateAttrs
+                dc.l    S3ICZSnowPile_CheckTransitionGateP1
+                dc.l    S3ICZSnowPile_TransitionGateAttrs
+                dc.l    S3ICZSnowPile_UpdateCameraSnowEmitter
+                dc.l    S3ICZSnowPile_FlakeAttrs
+S3ICZSnowPile_DragPileAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc2,2,0)
                 dc.w    $80
                 dc.b    $18,   8, $20,   0
-ObjDat3_58FB8:
+S3ICZSnowPile_NarrowGateAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc2,2,1)
                 dc.w    $80
                 dc.b    8, $10, $21,   0
-ObjDat3_58FC4:
+S3ICZSnowPile_TransitionGateAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc2,2,1)
                 dc.w    $80
                 dc.b    $10, $10, $22,   0
-ObjDat3_58FD0:
+S3ICZSnowPile_FlakeAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    4,   4,  $B,   0
-word_58FDC:
+S3ICZSnowPile_FragmentAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    8,   8,   9,   0
-ChildObjDat_58FE4:
+S3ICZSnowPile_DragPileFragments:
                 dc.w    6-1
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    -8,  -8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    8,  -8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    -$18,   0
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    -8,   0
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    8,   0
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    $18,   0
-ChildObjDat_5900A:
+S3ICZSnowPile_NarrowGateFragments:
                 dc.w    2-1
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    0,  -8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    0,   8
-ChildObjDat_59018:
+S3ICZSnowPile_TransitionGateFragments:
                 dc.w    4-1
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    -8,  -8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    0,   8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    8,  -8
-                dc.l    loc_58F00
+                dc.l    S3ICZSnowPile_InitSnowFragment
                 dc.b    8,   8

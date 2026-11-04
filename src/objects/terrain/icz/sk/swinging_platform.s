@@ -6,26 +6,26 @@
 Obj_ICZSwingingPlatform:
                 lea     ObjDat_ICZSwingingPlatform(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8AD20,(a0)
-                lea     ChildObjDat_8B164(pc),a2
+                move.l  #SKICZSwingPlat_WaitForSwingImpulse,(a0)
+                lea     SKICZSwingPlat_SwingAssemblyChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.w  a1,parent3(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8AD20:
+SKICZSwingPlat_WaitForSwingImpulse:
                 btst    #3,$38(a0)
-                beq.s   loc_8AD3C
-                move.l  #loc_8AD40,(a0)
+                beq.s   SKICZSwingPlat_DrawIdlePlatform
+                move.l  #SKICZSwingPlat_StepUnflippedAngle,(a0)
                 btst    #0,render_flags(a0)
-                beq.s   loc_8AD3C
-                move.l  #loc_8ADCA,(a0)
+                beq.s   SKICZSwingPlat_DrawIdlePlatform
+                move.l  #SKICZSwingPlat_StepMirroredAngle,(a0)
 
-loc_8AD3C:
+SKICZSwingPlat_DrawIdlePlatform:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AD40:
+SKICZSwingPlat_StepUnflippedAngle:
                 move.w  $3E(a0),d0
                 subi.w  #$10,d0
                 move.w  d0,$3E(a0)
@@ -33,31 +33,31 @@ loc_8AD40:
                 add.w   d0,d1
                 scc     d2
                 tst.w   d0
-                bpl.s   loc_8AD5C
+                bpl.s   SKICZSwingPlat_TryDetachUnflipped
                 tst.b   d2
-                bne.s   loc_8AD82
+                bne.s   SKICZSwingPlat_ResetSwingAtCenter
 
-loc_8AD5C:
+SKICZSwingPlat_TryDetachUnflipped:
                 move.w  d1,$3C(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_8AD72
+                beq.s   SKICZSwingPlat_TryProjectUnflipped
                 cmpi.w  #$4800,d1
-                blo.s   loc_8AD72
+                blo.s   SKICZSwingPlat_TryProjectUnflipped
                 cmpi.w  #$200,d0
-                bhs.s   loc_8AD9C
+                bhs.s   SKICZSwingPlat_DetachAndSignalChain
 
-loc_8AD72:
+SKICZSwingPlat_TryProjectUnflipped:
                 cmpi.w  #$6E00,d1
-                bhs.s   loc_8AD7E
+                bhs.s   SKICZSwingPlat_DrawUnflippedSwing
                 moveq   #1,d2
                 jsr     MoveSprite_CircularSimple(pc)
 
-loc_8AD7E:
+SKICZSwingPlat_DrawUnflippedSwing:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AD82:
-                move.l  #loc_8AD20,(a0)
+SKICZSwingPlat_ResetSwingAtCenter:
+                move.l  #SKICZSwingPlat_WaitForSwingImpulse,(a0)
                 bclr    #3,$38(a0)
                 clr.w   $3C(a0)
                 moveq   #1,d2
@@ -65,22 +65,22 @@ loc_8AD82:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AD9C:
-                move.l  #loc_8AE0C,(a0)
+SKICZSwingPlat_DetachAndSignalChain:
+                move.l  #SKICZSwingPlat_FlyAndTryBounce,(a0)
                 bset    #2,$38(a0)
                 move.b  #$10,y_radius(a0)
                 move.w  #$400,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_8ADBC
+                beq.s   SKICZSwingPlat_SetThrowVelocity
                 neg.w   d0
 
-loc_8ADBC:
+SKICZSwingPlat_SetThrowVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  #-$600,y_vel(a0)
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8ADCA:
+SKICZSwingPlat_StepMirroredAngle:
                 move.w  $3E(a0),d0
                 addi.w  #$10,d0
                 move.w  d0,$3E(a0)
@@ -88,175 +88,177 @@ loc_8ADCA:
                 add.w   d0,d1
                 scs     d2
                 tst.w   d0
-                bmi.s   loc_8ADE6
+                bmi.s   SKICZSwingPlat_TryDetachMirrored
                 tst.b   d2
-                bne.s   loc_8AD82
+                bne.s   SKICZSwingPlat_ResetSwingAtCenter
 
-loc_8ADE6:
+SKICZSwingPlat_TryDetachMirrored:
                 move.w  d1,$3C(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_8ADFC
+                beq.s   SKICZSwingPlat_TryProjectMirrored
                 cmpi.w  #-$4800,d1
-                bhi.s   loc_8ADFC
+                bhi.s   SKICZSwingPlat_TryProjectMirrored
                 cmpi.w  #$200,d0
-                bhs.s   loc_8AD9C
+                bhs.s   SKICZSwingPlat_DetachAndSignalChain
 
-loc_8ADFC:
+SKICZSwingPlat_TryProjectMirrored:
                 cmpi.w  #-$6E00,d1
-                bls.s   loc_8AE08
+                bls.s   SKICZSwingPlat_DrawMirroredSwing
                 moveq   #1,d2
                 jsr     MoveSprite_CircularSimple(pc)
 
-loc_8AE08:
+SKICZSwingPlat_DrawMirroredSwing:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AE0C:
+SKICZSwingPlat_FlyAndTryBounce:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_8AE40
+                bmi.s   SKICZSwingPlat_DrawFlyingPlatform
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_8AE40
+                bpl.s   SKICZSwingPlat_DrawFlyingPlatform
                 add.w   d1,y_pos(a0)
                 move.w  y_vel(a0),d0
                 cmpi.w  #$100,d0
-                blo.s   loc_8AE44
+                blo.s   SKICZSwingPlat_BeginSlideFriction
                 asr.w   #2,d0
                 neg.w   d0
                 move.w  d0,y_vel(a0)
-                lea     ChildObjDat_8B17E(pc),a2
+                lea     SKICZSwingPlat_BounceDustChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_8AE40:
+SKICZSwingPlat_DrawFlyingPlatform:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AE44:
-                move.l  #loc_8AE62,(a0)
+SKICZSwingPlat_BeginSlideFriction:
+                move.l  #SKICZSwingPlat_SlideAndTryDust,(a0)
                 move.w  #$10,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_8AE56
+                bmi.s   SKICZSwingPlat_SetFrictionAndStopY
                 neg.w   d0
 
-loc_8AE56:
+SKICZSwingPlat_SetFrictionAndStopY:
                 move.w  d0,$40(a0)
                 clr.w   y_vel(a0)
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AE62:
+SKICZSwingPlat_SlideAndTryDust:
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 add.w   $40(a0),d0
                 eor.w   d0,d1
-                bmi.s   loc_8AE96
+                bmi.s   SKICZSwingPlat_BeginRestingPlatform
                 move.w  d0,x_vel(a0)
                 move.w  x_pos(a0),d1
                 jsr     (MoveSprite2).l
                 move.w  x_pos(a0),d0
                 eor.w   d0,d1
                 btst    #3,d1
-                beq.s   loc_8AE92
-                lea     ChildObjDat_8B18C(pc),a2
+                beq.s   SKICZSwingPlat_DrawSlidingPlatform
+                lea     SKICZSwingPlat_SlideDustChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_8AE92:
+SKICZSwingPlat_DrawSlidingPlatform:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AE96:
-                move.l  #loc_8AEA0,(a0)
+; Stop integrating motion when the next friction step would change sign, leaving the old X speed stored
+SKICZSwingPlat_BeginRestingPlatform:
+                move.l  #SKICZSwingPlat_DrawRestingPlatform,(a0)
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AEA0:
+SKICZSwingPlat_DrawRestingPlatform:
                 jmp     Sprite_CheckDeleteTouch2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AEA4:
-                lea     word_8B158(pc),a1
+SKICZSwingPlat_InitMainLedge:
+                lea     SKICZSwingPlat_MainLedgeAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8AEB2,(a0)
+                move.l  #SKICZSwingPlat_TryMainLedgeImpulse,(a0)
 
-loc_8AEB2:
+SKICZSwingPlat_TryMainLedgeImpulse:
                 bsr.w   ICZSwingLedge_UpdateRiderImpulse
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AEBA:
+SKICZSwingPlat_RearmLedgeAfterSwing:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_8AECC
-                move.l  #loc_8AEB2,(a0)
+                bne.s   SKICZSwingPlat_UpdateMovingMainLedge
+                move.l  #SKICZSwingPlat_TryMainLedgeImpulse,(a0)
 
-loc_8AECC:
+SKICZSwingPlat_UpdateMovingMainLedge:
                 bsr.w   RefreshAndCollideIczSwingMainLedge
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AED4:
-                lea     word_8B15E(pc),a1
+SKICZSwingPlat_InitSideLedge:
+                lea     SKICZSwingPlat_SideLedgeAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8AEE2,(a0)
+                move.l  #SKICZSwingPlat_UpdateSideLedge,(a0)
 
-loc_8AEE2:
+SKICZSwingPlat_UpdateSideLedge:
                 bsr.w   RefreshAndCollideIczSwingSideLedge
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AEEA:
-                lea     word_8B144(pc),a1
+SKICZSwingPlat_InitChainAnchor:
+                lea     SKICZSwingPlat_ChainAnchorAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_8AF32,(a0)
+                move.l  #SKICZSwingPlat_UpdateChainAndDraw,(a0)
                 subi.w  #$80,y_pos(a0)
                 movea.w parent3(a0),a1
                 btst    #0,render_flags(a1)
-                beq.s   loc_8AF10
+                beq.s   SKICZSwingPlat_InitChainSprites
                 bset    #0,render_flags(a0)
 
-loc_8AF10:
+SKICZSwingPlat_InitChainSprites:
                 bset    #6,render_flags(a0)
                 move.w  #7,mainspr_childsprites(a0)
                 lea     sub2_mapframe-1(a0),a1
                 moveq   #7-1,d6
 
-loc_8AF22:
+SKICZSwingPlat_SetChainLinkFrame:
                 move.w  #8,(a1)
                 addq.w  #next_subspr,a1
-                dbf     d6,loc_8AF22
+                dbf     d6,SKICZSwingPlat_SetChainLinkFrame
                 move.b  #8,mapping_frame(a0)
 
-loc_8AF32:
+; Rebuild and draw the chain on the same update that handles detachment
+SKICZSwingPlat_UpdateChainAndDraw:
                 bsr.w   ICZSwingChain_TryBreakOnDetach
                 bsr.w   ICZSwingChain_BuildLinkPositions
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8AF3E:
-                lea     ObjDat3_8B14C(pc),a1
+SKICZSwingPlat_InitChainDebris:
+                lea     SKICZSwingPlat_ChainDebrisAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8AF9E,(a0)
+                move.l  #SKICZSwingPlat_MoveChainDebris,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_8AF86(pc,d0.w),d1
+                move.w  SKICZSwingPlat_ChainDebrisSpeeds(pc,d0.w),d1
                 neg.w   d1
                 move.w  d1,y_vel(a0)
                 movea.w parent3(a0),a1
                 btst    #0,render_flags(a1)
-                bne.s   loc_8AF6A
+                bne.s   SKICZSwingPlat_SetShardSpeedAndOrigin
                 neg.w   d1
 
-loc_8AF6A:
+SKICZSwingPlat_SetShardSpeedAndOrigin:
                 move.w  d1,x_vel(a0)
                 lsr.w   #1,d0
-                move.b  byte_8AF96(pc,d0.w),d0
+                move.b  SKICZSwingPlat_ChainLinkOffsets(pc,d0.w),d0
                 movea.w parent3(a0),a1
                 move.w  (a1,d0.w),x_pos(a0)
                 move.w  sub2_y_pos-sub2_x_pos(a1,d0.w),y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_8AF86:
+SKICZSwingPlat_ChainDebrisSpeeds:
                 dc.w    $80
                 dc.w    $100
                 dc.w    $180
@@ -265,7 +267,7 @@ word_8AF86:
                 dc.w    $300
                 dc.w    $380
                 dc.w    $400
-byte_8AF96:
+SKICZSwingPlat_ChainLinkOffsets:
                 dc.b    sub9_x_pos
                 dc.b    sub2_x_pos
                 dc.b    sub3_x_pos
@@ -277,7 +279,7 @@ byte_8AF96:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_8AF9E:
+SKICZSwingPlat_MoveChainDebris:
                 jmp     MoveChkDel(pc)
 
 ; =============== S U B R O U T I N E =======================================
@@ -297,46 +299,46 @@ ICZSwingChain_BuildLinkPositions:
                 moveq   #0,d5
                 moveq   #6,d6
 
-loc_8AFC6:
+SKICZSwingPlat_InterpolateChainLink:
                 move.l  d1,d2
-                move.w  off_8AFE0(pc,d5.w),d4
-                jsr     off_8AFE0(pc,d4.w)
+                move.w  SKICZSwingPlat_ChainFractionTable(pc,d5.w),d4
+                jsr     SKICZSwingPlat_ChainFractionTable(pc,d4.w)
                 move.l  d0,(a2)
                 swap    d2
                 add.l   d2,(a2)+
                 addq.w  #2,a2
                 addq.w  #2,d5
-                dbf     d6,loc_8AFC6
+                dbf     d6,SKICZSwingPlat_InterpolateChainLink
                 rts
 ; End of function ICZSwingChain_BuildLinkPositions
 
 ; ---------------------------------------------------------------------------
-off_8AFE0:
-                dc.w    loc_8AFF0-off_8AFE0
-                dc.w    loc_8AFF8-off_8AFE0
-                dc.w    loc_8B000-off_8AFE0
-                dc.w    loc_8B014-off_8AFE0
-                dc.w    loc_8B01C-off_8AFE0
-                dc.w    loc_8B030-off_8AFE0
-                dc.w    loc_8B044-off_8AFE0
-                dc.w    locret_8B052-off_8AFE0
+SKICZSwingPlat_ChainFractionTable:
+                dc.w    SKICZSwingPlat_ScaleDelta1Of8-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta1Of4-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta3Of8-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta1Of2-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta5Of8-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta3Of4-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ScaleDelta7Of8-SKICZSwingPlat_ChainFractionTable
+                dc.w    SKICZSwingPlat_ChainFractionReturn-SKICZSwingPlat_ChainFractionTable
 ; ---------------------------------------------------------------------------
 
-loc_8AFF0:
+SKICZSwingPlat_ScaleDelta1Of8:
                 asr.w   #3,d2
                 swap    d2
                 asr.w   #3,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8AFF8:
+SKICZSwingPlat_ScaleDelta1Of4:
                 asr.w   #2,d2
                 swap    d2
                 asr.w   #2,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B000:
+SKICZSwingPlat_ScaleDelta3Of8:
                 asr.w   #2,d2
                 move.w  d2,d3
                 asr.w   #1,d2
@@ -349,14 +351,14 @@ loc_8B000:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B014:
+SKICZSwingPlat_ScaleDelta1Of2:
                 asr.w   #1,d2
                 swap    d2
                 asr.w   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B01C:
+SKICZSwingPlat_ScaleDelta5Of8:
                 asr.w   #1,d2
                 move.w  d2,d3
                 asr.w   #2,d2
@@ -369,7 +371,7 @@ loc_8B01C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B030:
+SKICZSwingPlat_ScaleDelta3Of4:
                 asr.w   #1,d2
                 move.w  d2,d3
                 asr.w   #1,d2
@@ -382,7 +384,7 @@ loc_8B030:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B044:
+SKICZSwingPlat_ScaleDelta7Of8:
                 move.w  d2,d3
                 asr.w   #3,d3
                 sub.w   d3,d2
@@ -391,7 +393,7 @@ loc_8B044:
                 asr.w   #3,d3
                 sub.w   d3,d2
 
-locret_8B052:
+SKICZSwingPlat_ChainFractionReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -427,7 +429,7 @@ ICZSwingLedge_UpdateRiderImpulse:
                 move.b  $39(a0),d0
                 move.b  status(a0),d1
                 andi.b  #standing_mask,d1
-                beq.s   locret_8B0AE
+                beq.s   SKICZSwingPlat_LedgeImpulseReturn
                 movea.w parent3(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d2
@@ -436,7 +438,7 @@ ICZSwingLedge_UpdateRiderImpulse:
                 moveq   #p2_standing_bit,d2
                 bsr.w   ICZSwingLedge_TryStartFromRider
 
-locret_8B0AE:
+SKICZSwingPlat_LedgeImpulseReturn:
                 rts
 ; End of function ICZSwingLedge_UpdateRiderImpulse
 
@@ -445,50 +447,51 @@ locret_8B0AE:
 ; A rider moving in the required direction supplies a bounded swing impulse and has their own speed adjusted
 ICZSwingLedge_TryStartFromRider:
                 btst    d2,d1
-                beq.s   locret_8B0AE
+                beq.s   SKICZSwingPlat_LedgeImpulseReturn
                 move.w  x_vel(a1),d3
                 smi     d4
                 cmpi.w  #-$200,d3
-                ble.s   loc_8B0C6
+                ble.s   SKICZSwingPlat_TryHalveStandingImpulse
                 cmpi.w  #$200,d3
-                blt.s   locret_8B0AE
+                blt.s   SKICZSwingPlat_LedgeImpulseReturn
 
-loc_8B0C6:
+SKICZSwingPlat_TryHalveStandingImpulse:
                 btst    d2,d0
-                beq.s   loc_8B0CC
+                beq.s   SKICZSwingPlat_SignImpulseForMirroring
                 asr.w   #1,d3
 
-loc_8B0CC:
+SKICZSwingPlat_SignImpulseForMirroring:
                 btst    #0,render_flags(a2)
-                beq.s   loc_8B0D6
+                beq.s   SKICZSwingPlat_StartSwingFromImpulse
                 not.b   d4
 
-loc_8B0D6:
+SKICZSwingPlat_StartSwingFromImpulse:
                 tst.b   d4
-                bne.s   locret_8B0AE
-                move.l  #loc_8AEBA,(a0)
+                bne.s   SKICZSwingPlat_LedgeImpulseReturn
+                move.l  #SKICZSwingPlat_RearmLedgeAfterSwing,(a0)
                 bset    #3,$38(a2)
                 asr.w   #1,d3
-                bmi.s   loc_8B0F8
+                bmi.s   SKICZSwingPlat_ClampNegativeImpulse
                 cmpi.w  #$400,d3
-                ble.s   loc_8B102
+                ble.s   SKICZSwingPlat_SetImpulseAndSkipCaller
                 move.w  #$400,d3
-                bra.w   loc_8B102
+                bra.w   SKICZSwingPlat_SetImpulseAndSkipCaller
 ; ---------------------------------------------------------------------------
 
-loc_8B0F8:
+SKICZSwingPlat_ClampNegativeImpulse:
                 cmpi.w  #-$400,d3
-                bge.s   loc_8B102
+                bge.s   SKICZSwingPlat_SetImpulseAndSkipCaller
                 move.w  #-$400,d3
 
-loc_8B102:
+; The first accepted rider sets the swing speed and discards the return address for the remaining rider pass
+SKICZSwingPlat_SetImpulseAndSkipCaller:
                 move.w  d3,$3E(a2)
                 asl.w   #1,d3
                 move.w  d3,x_vel(a1)
                 move.w  d3,ground_vel(a1)
                 addq.w  #4,sp
 
-locret_8B112:
+SKICZSwingPlat_SwingOrChainReturn:
                 rts
 ; End of function ICZSwingLedge_TryStartFromRider
 
@@ -498,10 +501,10 @@ locret_8B112:
 ICZSwingChain_TryBreakOnDetach:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   locret_8B112
+                beq.s   SKICZSwingPlat_SwingOrChainReturn
                 move.w  x_pos(a0),sub5_x_pos(a0)
                 move.w  y_pos(a0),sub5_y_pos(a0)
-                lea     ChildObjDat_8B178(pc),a2
+                lea     SKICZSwingPlat_ChainDebrisChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jmp     Go_Delete_Sprite_2(pc)
 ; End of function ICZSwingChain_TryBreakOnDetach
@@ -512,39 +515,39 @@ ObjDat_ICZSwingingPlatform:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,1,0)
                 dc.w    $80
                 dc.b    $20, $10,   7,   0
-word_8B144:
+SKICZSwingPlat_ChainAnchorAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    $80, $80,   8,   0
-ObjDat3_8B14C:
+SKICZSwingPlat_ChainDebrisAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    8,   8,   8,   0
-word_8B158:
+SKICZSwingPlat_MainLedgeAttrs:
                 dc.w    $300
                 dc.b    $20, $10, $27,   0
-word_8B15E:
+SKICZSwingPlat_SideLedgeAttrs:
                 dc.w    $300
                 dc.b    $30,   8, $27,   0
-ChildObjDat_8B164:
+SKICZSwingPlat_SwingAssemblyChildren:
                 dc.w    3-1
-                dc.l    loc_8AEA4
+                dc.l    SKICZSwingPlat_InitMainLedge
                 dc.b    0,   8
-                dc.l    loc_8AED4
+                dc.l    SKICZSwingPlat_InitSideLedge
                 dc.b    $1C,  -8
-                dc.l    loc_8AEEA
+                dc.l    SKICZSwingPlat_InitChainAnchor
                 dc.b    0,   0
-ChildObjDat_8B178:
+SKICZSwingPlat_ChainDebrisChildren:
                 dc.w    8-1
-                dc.l    loc_8AF3E
-ChildObjDat_8B17E:
+                dc.l    SKICZSwingPlat_InitChainDebris
+SKICZSwingPlat_BounceDustChildren:
                 dc.w    2-1
                 dc.l    Obj_ICZSnowdust
                 dc.b    $1C, $10
                 dc.l    Obj_ICZSnowdust
                 dc.b    $14, $10
-ChildObjDat_8B18C:
+SKICZSwingPlat_SlideDustChild:
                 dc.w    1-1
                 dc.l    Obj_ICZSnowdust
                 dc.b    $1C, $10

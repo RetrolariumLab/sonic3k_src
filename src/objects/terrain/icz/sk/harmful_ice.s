@@ -5,29 +5,29 @@
 
 Obj_ICZHarmfulIce:
                 jsr     Obj_WaitOffscreen(pc)
-                lea     ObjDat3_8B532(pc),a1
+                lea     SKICZHarmIce_SolidHazardAttrs(pc),a1
                 move.l  #Sprite_CheckDeleteTouch,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_8B4E8
-                lea     ObjDat3_8B53E(pc),a1
-                move.l  #loc_8B4EC,(a0)
+                beq.s   SKICZHarmIce_ApplySubtypeAttrs
+                lea     SKICZHarmIce_ShatteringHazardAttrs(pc),a1
+                move.l  #SKICZHarmIce_CheckRecordedContact,(a0)
 
-loc_8B4E8:
+SKICZHarmIce_ApplySubtypeAttrs:
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B4EC:
+SKICZHarmIce_CheckRecordedContact:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
-                bne.s   loc_8B4F8
+                bne.s   SKICZHarmIce_TryHurtContactPlayer
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B4F8:
+SKICZHarmIce_TryHurtContactPlayer:
                 add.w   d0,d0
-                movea.w word_8B52C-2(pc,d0.w),a1
+                movea.w SKICZHarmIce_ContactPlayerTable-2(pc,d0.w),a1
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.s   loc_8B512
+                bne.s   SKICZHarmIce_Shatter
 ; Bug: no invulnerability check is performed,
 ; allowing flashing characters to be hurt
                 movea.l a0,a2
@@ -35,29 +35,29 @@ loc_8B4F8:
                 jsr     (HurtCharacter).l
                 movea.l a2,a0
 
-loc_8B512:
-                lea     ChildObjDat_8B54A(pc),a2
+SKICZHarmIce_Shatter:
+                lea     SKICZHarmIce_IceShardChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jsr     Go_Delete_Sprite(pc)
                 moveq   #signextendB(sfx_IceSpikes),d0
                 jsr     (Play_SFX).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_8B52C:
+SKICZHarmIce_ContactPlayerTable:
                 dc.w    Player_1
                 dc.w    Player_2
                 dc.w    Player_2
-ObjDat3_8B532:
+SKICZHarmIce_SolidHazardAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    $10, $18,   5, $82
-ObjDat3_8B53E:
+SKICZHarmIce_ShatteringHazardAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    $10, $10,   4, $D7
-ChildObjDat_8B54A:
+SKICZHarmIce_IceShardChildren:
                 dc.w    $C-1
-                dc.l    loc_8B230
+                dc.l    SKICZStalactite_InitIceShard
 ; End of function Obj_ICZHarmfulIce

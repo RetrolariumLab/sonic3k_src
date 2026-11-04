@@ -6,33 +6,33 @@
 Obj_ICZTensionPlatform:
                 lea     ObjDat_ICZTensionPlatform(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8B8B6,(a0)
+                move.l  #SKICZTensionPlat_UpdateSpringAndContacts,(a0)
                 move.w  y_pos(a0),$30(a0)
-                lea     ChildObjDat_8BAD0(pc),a2
+                lea     SKICZTensionPlat_SideRopeChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B8B6:
+SKICZTensionPlat_UpdateSpringAndContacts:
                 bsr.w   StepIczTensionPlatformSpringMotion
                 bsr.w   ICZTension_UpdateRiderContacts
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B8C2:
-                lea     word_8BAC8(pc),a1
+SKICZTensionPlat_InitSideRope:
+                lea     SKICZTensionPlat_SideRopeAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_8B8F2,(a0)
+                move.l  #SKICZTensionPlat_UpdateRopeAndDraw,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_8B8DC
+                beq.s   SKICZTensionPlat_InitRopeSprites
                 bset    #0,render_flags(a0)
 
-loc_8B8DC:
+SKICZTensionPlat_InitRopeSprites:
                 bset    #6,render_flags(a0)
                 move.w  #2,mainspr_childsprites(a0)
                 bsr.w   ICZTensionRope_InitSideSprites
                 move.b  #8,mapping_frame(a0)
 
-loc_8B8F2:
+SKICZTensionPlat_UpdateRopeAndDraw:
                 bsr.w   UpdateIczTensionSideRopeVerticalSpan
                 jmp     Child_Draw_Sprite(pc)
 
@@ -46,25 +46,25 @@ ICZTensionRope_InitSideSprites:
                 moveq   #0,d2
                 moveq   #1,d3
 
-loc_8B90A:
+SKICZTensionPlat_GetMirroredRopeOffset:
                 move.w  d0,d4
-                move.w  word_8B92C(pc,d2.w),d5
+                move.w  SKICZTensionPlat_RopeXOffsets(pc,d2.w),d5
                 btst    #0,render_flags(a0)
-                beq.s   loc_8B91A
+                beq.s   SKICZTensionPlat_PlaceRopeSprite
                 neg.w   d5
 
-loc_8B91A:
+SKICZTensionPlat_PlaceRopeSprite:
                 add.w   d5,d4
                 move.w  d4,(a1)+
                 move.w  d1,(a1)+
                 move.w  #8,(a1)+
                 addq.w  #2,d2
-                dbf     d3,loc_8B90A
+                dbf     d3,SKICZTensionPlat_GetMirroredRopeOffset
                 rts
 ; End of function ICZTensionRope_InitSideSprites
 
 ; ---------------------------------------------------------------------------
-word_8B92C:
+SKICZTensionPlat_RopeXOffsets:
                 dc.w    $C,   $18
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,65 +88,66 @@ UpdateIczTensionSideRopeVerticalSpan:
 
 StepIczTensionPlatformSpringMotion:
                 btst    #2,$38(a0)
-                beq.s   locret_8B9D6
+                beq.s   SKICZTensionPlat_SpringMotionReturn
                 move.w  #$80,d0
                 move.w  y_pos(a0),d1
                 move.w  sub2_y_pos(a0),d2
                 move.b  $39(a0),d3
                 sub.w   $32(a0),d1
                 scs     $39(a0)
-                bcs.s   loc_8B978
+                bcs.s   SKICZTensionPlat_CalcAbsRestDistance
                 neg.w   d0
-                bra.w   loc_8B97A
+                bra.w   SKICZTensionPlat_HandleRestCrossing
 ; ---------------------------------------------------------------------------
 
-loc_8B978:
+SKICZTensionPlat_CalcAbsRestDistance:
                 neg.w   d1
 
-loc_8B97A:
+; Apply two extra acceleration steps on crossing, then test rider launch or spring rest
+SKICZTensionPlat_HandleRestCrossing:
                 cmp.b   $39(a0),d3
-                beq.s   loc_8B9AA
+                beq.s   SKICZTensionPlat_AccelerateAndClamp
                 add.w   d0,d2
                 add.w   d0,d2
                 cmpi.w  #-$80,d2
-                bge.s   loc_8B998
+                bge.s   SKICZTensionPlat_TryStopNearRest
                 cmpi.w  #-$400,d2
-                bgt.s   loc_8B9AA
+                bgt.s   SKICZTensionPlat_AccelerateAndClamp
                 bsr.w   LaunchIczTensionPlatformStandingPlayers
-                bra.w   loc_8B9AA
+                bra.w   SKICZTensionPlat_AccelerateAndClamp
 ; ---------------------------------------------------------------------------
 
-loc_8B998:
+SKICZTensionPlat_TryStopNearRest:
                 cmpi.w  #$80,d2
-                bgt.s   loc_8B9AA
+                bgt.s   SKICZTensionPlat_AccelerateAndClamp
                 cmpi.w  #1,d1
-                bhi.s   loc_8B9AA
+                bhi.s   SKICZTensionPlat_AccelerateAndClamp
                 bclr    #2,$38(a0)
 
-loc_8B9AA:
+SKICZTensionPlat_AccelerateAndClamp:
                 add.w   d0,d2
                 move.w  #-$900,d3
                 cmp.w   d3,d2
-                bge.s   loc_8B9B8
-                bra.w   loc_8B9BE
+                bge.s   SKICZTensionPlat_CheckPositiveSpeedLimit
+                bra.w   SKICZTensionPlat_ApplySignedSpeedLimit
 ; ---------------------------------------------------------------------------
 
-loc_8B9B8:
+SKICZTensionPlat_CheckPositiveSpeedLimit:
                 neg.w   d3
                 cmp.w   d3,d2
-                ble.s   loc_8B9C0
+                ble.s   SKICZTensionPlat_MoveAndCheckDistance
 
-loc_8B9BE:
+SKICZTensionPlat_ApplySignedSpeedLimit:
                 move.w  d3,d2
 
-loc_8B9C0:
+SKICZTensionPlat_MoveAndCheckDistance:
                 move.w  d2,y_vel(a0)
                 jsr     (MoveSprite2).l
                 cmpi.w  #$50,d1
-                blo.s   locret_8B9D6
+                blo.s   SKICZTensionPlat_SpringMotionReturn
                 move.w  #-$100,y_vel(a0)
 
-locret_8B9D6:
+SKICZTensionPlat_SpringMotionReturn:
                 rts
 ; End of function StepIczTensionPlatformSpringMotion
 
@@ -155,15 +156,15 @@ locret_8B9D6:
 LaunchIczTensionPlatformStandingPlayers:
                 move.b  $3A(a0),d3
                 andi.b  #standing_mask,d3
-                beq.s   locret_8BA1A
+                beq.s   SKICZTensionPlat_LaunchReturn
                 btst    #p1_standing_bit,d3
-                beq.s   loc_8B9F0
+                beq.s   SKICZTensionPlat_TryLaunchP2
                 lea     (Player_1).w,a1
                 bsr.w   LaunchPlayerFromIczTensionPlatform
 
-loc_8B9F0:
+SKICZTensionPlat_TryLaunchP2:
                 btst    #p2_standing_bit,d3
-                beq.s   locret_8BA1A
+                beq.s   SKICZTensionPlat_LaunchReturn
                 lea     (Player_2).w,a1
 ; End of function LaunchIczTensionPlatformStandingPlayers
 
@@ -177,7 +178,7 @@ LaunchPlayerFromIczTensionPlatform:
                 move.b  #$10,anim(a1)
                 move.b  #2,routine(a1)
 
-locret_8BA1A:
+SKICZTensionPlat_LaunchReturn:
                 rts
 ; End of function LaunchPlayerFromIczTensionPlatform
 
@@ -199,25 +200,25 @@ ICZTension_UpdateRiderContacts:
                 move.b  d1,$3A(a0)
                 eor.b   d1,d2
                 andi.b  #standing_mask,d2
-                beq.s   locret_8BA7C
+                beq.s   SKICZTensionPlat_ContactImpulseReturn
                 bsr.w   ICZTension_SetRestHeightFromRiders
                 bset    #2,$38(a0)
                 clr.b   $39(a0)
                 moveq   #p1_standing_bit,d4
                 btst    d4,d2
-                beq.s   loc_8BA6C
+                beq.s   SKICZTensionPlat_TryTransferP2Impulse
                 lea     (Player_1).w,a1
                 bsr.w   ICZTension_TransferRiderYImpulse
 
-loc_8BA6C:
+SKICZTensionPlat_TryTransferP2Impulse:
                 moveq   #p2_standing_bit,d4
                 btst    d4,d2
-                beq.s   locret_8BA7C
+                beq.s   SKICZTensionPlat_ContactImpulseReturn
                 swap    d0
                 lea     (Player_2).w,a1
                 bsr.w   ICZTension_TransferRiderYImpulse
 
-locret_8BA7C:
+SKICZTensionPlat_ContactImpulseReturn:
                 rts
 ; End of function ICZTension_UpdateRiderContacts
 
@@ -227,13 +228,13 @@ locret_8BA7C:
 ICZTension_TransferRiderYImpulse:
                 move.w  y_vel(a0),d5
                 btst    d4,d1
-                bne.s   loc_8BA90
+                bne.s   SKICZTensionPlat_AddAndDampRiderImpulse
                 tst.w   d0
-                bpl.s   loc_8BA90
+                bpl.s   SKICZTensionPlat_AddAndDampRiderImpulse
                 add.w   d5,y_vel(a1)
                 neg.w   d0
 
-loc_8BA90:
+SKICZTensionPlat_AddAndDampRiderImpulse:
                 add.w   d0,d5
                 move.w  d5,d6
                 asr.w   #2,d6
@@ -248,15 +249,15 @@ loc_8BA90:
 ICZTension_SetRestHeightFromRiders:
                 moveq   #0,d5
                 btst    #3,d1
-                beq.s   loc_8BAA8
+                beq.s   SKICZTensionPlat_AddP2RestHeight
                 addq.w  #8,d5
 
-loc_8BAA8:
+SKICZTensionPlat_AddP2RestHeight:
                 btst    #4,d1
-                beq.s   loc_8BAB0
+                beq.s   SKICZTensionPlat_SetWeightedRestHeight
                 addq.w  #8,d5
 
-loc_8BAB0:
+SKICZTensionPlat_SetWeightedRestHeight:
                 move.w  $30(a0),d3
                 add.w   d5,d3
                 move.w  d3,$32(a0)
@@ -269,13 +270,13 @@ ObjDat_ICZTensionPlatform:
                 dc.w    make_art_tile(ArtTile_ICZMisc2,2,0)
                 dc.w    $280
                 dc.b    $18,  $C, $1F,   0
-word_8BAC8:
+SKICZTensionPlat_SideRopeAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    $40, $40,   8,   0
-ChildObjDat_8BAD0:
+SKICZTensionPlat_SideRopeChildren:
                 dc.w    2-1
-                dc.l    loc_8B8C2
+                dc.l    SKICZTensionPlat_InitSideRope
                 dc.b    -$38,   0
-                dc.l    loc_8B8C2
+                dc.l    SKICZTensionPlat_InitSideRope
                 dc.b    $38,   0

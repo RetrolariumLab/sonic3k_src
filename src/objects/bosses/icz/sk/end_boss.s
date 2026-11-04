@@ -671,7 +671,7 @@ loc_722C6:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #loc_71D80,$34(a0)
                 movea.w (_unkFAAE).w,a1
-                cmpi.l  #loc_8B660,(a1)
+                cmpi.l  #SKICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   loc_722E6
                 bset    #5,$38(a1)
 

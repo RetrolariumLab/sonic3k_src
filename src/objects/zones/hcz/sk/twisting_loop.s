@@ -374,7 +374,7 @@ SKSnowboard_InitSonicAndTrySnow:
                 move.w  #1,anim(a0)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   SKSnowboard_StartFollowUntilGrounded
-                move.l  #loc_398E0,(a1)
+                move.l  #SKICZBoardIntro_BeginSnowEmitter,(a1)
                 move.w  a0,$30(a1)
 
 SKSnowboard_StartFollowUntilGrounded:

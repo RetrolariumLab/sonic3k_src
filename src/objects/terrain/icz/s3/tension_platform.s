@@ -6,33 +6,33 @@
 Obj_ICZTensionPlatform:
                 lea     ObjDat_ICZTensionPlatform(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_5904E,(a0)
+                move.l  #S3ICZTensionPlat_UpdateSpringAndContacts,(a0)
                 move.w  y_pos(a0),$30(a0)
-                lea     ChildObjDat_59268(pc),a2
+                lea     S3ICZTensionPlat_SideRopeChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5904E:
+S3ICZTensionPlat_UpdateSpringAndContacts:
                 bsr.w   StepIczTensionPlatformSpringMotion
                 bsr.w   ICZTension_UpdateRiderContacts
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5905A:
-                lea     word_59260(pc),a1
+S3ICZTensionPlat_InitSideRope:
+                lea     S3ICZTensionPlat_SideRopeAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_5908A,(a0)
+                move.l  #S3ICZTensionPlat_UpdateRopeAndDraw,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_59074
+                beq.s   S3ICZTensionPlat_InitRopeSprites
                 bset    #0,render_flags(a0)
 
-loc_59074:
+S3ICZTensionPlat_InitRopeSprites:
                 bset    #6,render_flags(a0)
                 move.w  #2,mainspr_childsprites(a0)
                 bsr.w   ICZTensionRope_InitSideSprites
                 move.b  #8,mapping_frame(a0)
 
-loc_5908A:
+S3ICZTensionPlat_UpdateRopeAndDraw:
                 bsr.w   UpdateIczTensionSideRopeVerticalSpan
                 jmp     Child_Draw_Sprite(pc)
 
@@ -46,25 +46,25 @@ ICZTensionRope_InitSideSprites:
                 moveq   #0,d2
                 moveq   #1,d3
 
-loc_590A2:
+S3ICZTensionPlat_GetMirroredRopeOffset:
                 move.w  d0,d4
-                move.w  word_590C4(pc,d2.w),d5
+                move.w  S3ICZTensionPlat_RopeXOffsets(pc,d2.w),d5
                 btst    #0,render_flags(a0)
-                beq.s   loc_590B2
+                beq.s   S3ICZTensionPlat_PlaceRopeSprite
                 neg.w   d5
 
-loc_590B2:
+S3ICZTensionPlat_PlaceRopeSprite:
                 add.w   d5,d4
                 move.w  d4,(a1)+
                 move.w  d1,(a1)+
                 move.w  #8,(a1)+
                 addq.w  #2,d2
-                dbf     d3,loc_590A2
+                dbf     d3,S3ICZTensionPlat_GetMirroredRopeOffset
                 rts
 ; End of function ICZTensionRope_InitSideSprites
 
 ; ---------------------------------------------------------------------------
-word_590C4:
+S3ICZTensionPlat_RopeXOffsets:
                 dc.w    $C,   $18
 
 ; =============== S U B R O U T I N E =======================================
@@ -88,65 +88,66 @@ UpdateIczTensionSideRopeVerticalSpan:
 
 StepIczTensionPlatformSpringMotion:
                 btst    #2,$38(a0)
-                beq.s   locret_5916E
+                beq.s   S3ICZTensionPlat_SpringMotionReturn
                 move.w  #$80,d0
                 move.w  y_pos(a0),d1
                 move.w  sub2_y_pos(a0),d2
                 move.b  $39(a0),d3
                 sub.w   $32(a0),d1
                 scs     $39(a0)
-                bcs.s   loc_59110
+                bcs.s   S3ICZTensionPlat_CalcAbsRestDistance
                 neg.w   d0
-                bra.w   loc_59112
+                bra.w   S3ICZTensionPlat_HandleRestCrossing
 ; ---------------------------------------------------------------------------
 
-loc_59110:
+S3ICZTensionPlat_CalcAbsRestDistance:
                 neg.w   d1
 
-loc_59112:
+; Apply two extra acceleration steps on crossing, then test rider launch or spring rest
+S3ICZTensionPlat_HandleRestCrossing:
                 cmp.b   $39(a0),d3
-                beq.s   loc_59142
+                beq.s   S3ICZTensionPlat_AccelerateAndClamp
                 add.w   d0,d2
                 add.w   d0,d2
                 cmpi.w  #-$80,d2
-                bge.s   loc_59130
+                bge.s   S3ICZTensionPlat_TryStopNearRest
                 cmpi.w  #-$400,d2
-                bgt.s   loc_59142
+                bgt.s   S3ICZTensionPlat_AccelerateAndClamp
                 bsr.w   LaunchIczTensionPlatformStandingPlayers
-                bra.w   loc_59142
+                bra.w   S3ICZTensionPlat_AccelerateAndClamp
 ; ---------------------------------------------------------------------------
 
-loc_59130:
+S3ICZTensionPlat_TryStopNearRest:
                 cmpi.w  #$80,d2
-                bgt.s   loc_59142
+                bgt.s   S3ICZTensionPlat_AccelerateAndClamp
                 cmpi.w  #1,d1
-                bhi.s   loc_59142
+                bhi.s   S3ICZTensionPlat_AccelerateAndClamp
                 bclr    #2,$38(a0)
 
-loc_59142:
+S3ICZTensionPlat_AccelerateAndClamp:
                 add.w   d0,d2
                 move.w  #-$900,d3
                 cmp.w   d3,d2
-                bge.s   loc_59150
-                bra.w   loc_59156
+                bge.s   S3ICZTensionPlat_CheckPositiveSpeedLimit
+                bra.w   S3ICZTensionPlat_ApplySignedSpeedLimit
 ; ---------------------------------------------------------------------------
 
-loc_59150:
+S3ICZTensionPlat_CheckPositiveSpeedLimit:
                 neg.w   d3
                 cmp.w   d3,d2
-                ble.s   loc_59158
+                ble.s   S3ICZTensionPlat_MoveAndCheckDistance
 
-loc_59156:
+S3ICZTensionPlat_ApplySignedSpeedLimit:
                 move.w  d3,d2
 
-loc_59158:
+S3ICZTensionPlat_MoveAndCheckDistance:
                 move.w  d2,y_vel(a0)
                 jsr     (MoveSprite2).l
                 cmpi.w  #$50,d1
-                blo.s   locret_5916E
+                blo.s   S3ICZTensionPlat_SpringMotionReturn
                 move.w  #-$100,y_vel(a0)
 
-locret_5916E:
+S3ICZTensionPlat_SpringMotionReturn:
                 rts
 ; End of function StepIczTensionPlatformSpringMotion
 
@@ -155,15 +156,15 @@ locret_5916E:
 LaunchIczTensionPlatformStandingPlayers:
                 move.b  $3A(a0),d3
                 andi.b  #standing_mask,d3
-                beq.s   locret_591B2
+                beq.s   S3ICZTensionPlat_LaunchReturn
                 btst    #p1_standing_bit,d3
-                beq.s   loc_59188
+                beq.s   S3ICZTensionPlat_TryLaunchP2
                 lea     (Player_1).w,a1
                 bsr.w   LaunchPlayerFromIczTensionPlatform
 
-loc_59188:
+S3ICZTensionPlat_TryLaunchP2:
                 btst    #p2_standing_bit,d3
-                beq.s   locret_591B2
+                beq.s   S3ICZTensionPlat_LaunchReturn
                 lea     (Player_2).w,a1
 ; End of function LaunchIczTensionPlatformStandingPlayers
 
@@ -177,7 +178,7 @@ LaunchPlayerFromIczTensionPlatform:
                 move.b  #$10,anim(a1)
                 move.b  #2,routine(a1)
 
-locret_591B2:
+S3ICZTensionPlat_LaunchReturn:
                 rts
 ; End of function LaunchPlayerFromIczTensionPlatform
 
@@ -199,25 +200,25 @@ ICZTension_UpdateRiderContacts:
                 move.b  d1,$3A(a0)
                 eor.b   d1,d2
                 andi.b  #standing_mask,d2
-                beq.s   locret_59214
+                beq.s   S3ICZTensionPlat_ContactImpulseReturn
                 bsr.w   ICZTension_SetRestHeightFromRiders
                 bset    #2,$38(a0)
                 clr.b   $39(a0)
                 moveq   #p1_standing_bit,d4
                 btst    d4,d2
-                beq.s   loc_59204
+                beq.s   S3ICZTensionPlat_TryTransferP2Impulse
                 lea     (Player_1).w,a1
                 bsr.w   ICZTension_TransferRiderYImpulse
 
-loc_59204:
+S3ICZTensionPlat_TryTransferP2Impulse:
                 moveq   #p2_standing_bit,d4
                 btst    d4,d2
-                beq.s   locret_59214
+                beq.s   S3ICZTensionPlat_ContactImpulseReturn
                 swap    d0
                 lea     (Player_2).w,a1
                 bsr.w   ICZTension_TransferRiderYImpulse
 
-locret_59214:
+S3ICZTensionPlat_ContactImpulseReturn:
                 rts
 ; End of function ICZTension_UpdateRiderContacts
 
@@ -227,13 +228,13 @@ locret_59214:
 ICZTension_TransferRiderYImpulse:
                 move.w  y_vel(a0),d5
                 btst    d4,d1
-                bne.s   loc_59228
+                bne.s   S3ICZTensionPlat_AddAndDampRiderImpulse
                 tst.w   d0
-                bpl.s   loc_59228
+                bpl.s   S3ICZTensionPlat_AddAndDampRiderImpulse
                 add.w   d5,y_vel(a1)
                 neg.w   d0
 
-loc_59228:
+S3ICZTensionPlat_AddAndDampRiderImpulse:
                 add.w   d0,d5
                 move.w  d5,d6
                 asr.w   #2,d6
@@ -248,15 +249,15 @@ loc_59228:
 ICZTension_SetRestHeightFromRiders:
                 moveq   #0,d5
                 btst    #3,d1
-                beq.s   loc_59240
+                beq.s   S3ICZTensionPlat_AddP2RestHeight
                 addq.w  #8,d5
 
-loc_59240:
+S3ICZTensionPlat_AddP2RestHeight:
                 btst    #4,d1
-                beq.s   loc_59248
+                beq.s   S3ICZTensionPlat_SetWeightedRestHeight
                 addq.w  #8,d5
 
-loc_59248:
+S3ICZTensionPlat_SetWeightedRestHeight:
                 move.w  $30(a0),d3
                 add.w   d5,d3
                 move.w  d3,$32(a0)
@@ -269,13 +270,13 @@ ObjDat_ICZTensionPlatform:
                 dc.w    make_art_tile(ArtTile_ICZMisc2,2,0)
                 dc.w    $280
                 dc.b    $18,  $C, $1F,   0
-word_59260:
+S3ICZTensionPlat_SideRopeAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $280
                 dc.b    $40, $40,   8,   0
-ChildObjDat_59268:
+S3ICZTensionPlat_SideRopeChildren:
                 dc.w    2-1
-                dc.l    loc_5905A
+                dc.l    S3ICZTensionPlat_InitSideRope
                 dc.b    -$38,   0
-                dc.l    loc_5905A
+                dc.l    S3ICZTensionPlat_InitSideRope
                 dc.b    $38,   0

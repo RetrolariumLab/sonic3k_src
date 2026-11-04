@@ -5,274 +5,276 @@
 
 Obj_ICZFreezer:
                 jsr     Obj_WaitOffscreen(pc)
-                move.l  #loc_8A656,(a0)
+                move.l  #SKICZFreezer_TryArmFreezer,(a0)
                 lea     ObjDat_ICZFreezer(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A656:
+SKICZFreezer_TryArmFreezer:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_8A67A
-                move.l  #loc_8A67E,(a0)
+                bhs.s   SKICZFreezer_DrawWaitingFreezer
+                move.l  #SKICZFreezer_TickEmissionPhase,(a0)
                 clr.w   $2E(a0)
                 clr.w   $30(a0)
                 clr.b   $39(a0)
                 moveq   #signextendB(sfx_FrostPuff),d0
                 jsr     (Play_SFX).l
 
-loc_8A67A:
+SKICZFreezer_DrawWaitingFreezer:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A67E:
+SKICZFreezer_TickEmissionPhase:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_8A6C6
+                bhs.s   SKICZFreezer_StopFreezerOutOfRange
                 subq.w  #1,$30(a0)
-                bpl.s   loc_8A6AA
+                bpl.s   SKICZFreezer_TryEmitFrostPuff
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 bchg    #1,d0
                 move.b  d0,$39(a0)
-                move.w  word_8A6DE(pc,d0.w),$30(a0)
-                move.w  off_8A6E2(pc,d0.w),d0
-                jsr     off_8A6E2(pc,d0.w)
+                move.w  SKICZFreezer_PhaseDelays(pc,d0.w),$30(a0)
+                move.w  SKICZFreezer_PhaseHandlers(pc,d0.w),d0
+                jsr     SKICZFreezer_PhaseHandlers(pc,d0.w)
 
-loc_8A6AA:
+SKICZFreezer_TryEmitFrostPuff:
                 btst    #1,$38(a0)
-                beq.s   loc_8A6C2
+                beq.s   SKICZFreezer_DrawActiveFreezer
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_8A6C2
+                bpl.s   SKICZFreezer_DrawActiveFreezer
                 move.w  #1,$2E(a0)
                 bsr.w   SpawnIczFreezerFrostPuff
 
-loc_8A6C2:
+SKICZFreezer_DrawActiveFreezer:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A6C6:
-                move.l  #loc_8A656,(a0)
+SKICZFreezer_StopFreezerOutOfRange:
+                move.l  #SKICZFreezer_TryArmFreezer,(a0)
                 bclr    #1,$38(a0)
                 moveq   #signextendB(cmd_StopSFX),d0
                 jsr     (Play_SFX).l
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
-word_8A6DE:
+SKICZFreezer_PhaseDelays:
                 dc.w    $40,   $40
-off_8A6E2:
-                dc.w    loc_8A6E6-off_8A6E2
-                dc.w    loc_8A6EE-off_8A6E2
+SKICZFreezer_PhaseHandlers:
+                dc.w    SKICZFreezer_DisableEmission-SKICZFreezer_PhaseHandlers
+                dc.w    SKICZFreezer_EnableAndPickCaptureField-SKICZFreezer_PhaseHandlers
 ; ---------------------------------------------------------------------------
 
-loc_8A6E6:
+SKICZFreezer_DisableEmission:
                 bclr    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A6EE:
+SKICZFreezer_EnableAndPickCaptureField:
                 bset    #1,$38(a0)
-                lea     ChildObjDat_8AAD2(pc),a2
+                lea     SKICZFreezer_LowerFieldChild(pc),a2
                 btst    #1,render_flags(a0)
-                beq.s   loc_8A704
-                lea     ChildObjDat_8AADA(pc),a2
+                beq.s   SKICZFreezer_SpawnCaptureField
+                lea     SKICZFreezer_UpperFieldChild(pc),a2
 
-loc_8A704:
+SKICZFreezer_SpawnCaptureField:
                 jmp     CreateChild1_Normal(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
 SpawnIczFreezerFrostPuff:
-                lea     ChildObjDat_8AAC2(pc),a2
+                lea     SKICZFreezer_LowerPuffChild(pc),a2
                 btst    #1,render_flags(a0)
-                beq.s   loc_8A718
-                lea     ChildObjDat_8AACA(pc),a2
+                beq.s   SKICZFreezer_SpawnFrostPuff
+                lea     SKICZFreezer_UpperPuffChild(pc),a2
 
-loc_8A718:
+SKICZFreezer_SpawnFrostPuff:
                 jmp     CreateChild1_Normal(pc)
 ; End of function SpawnIczFreezerFrostPuff
 
 ; ---------------------------------------------------------------------------
 
-loc_8A71C:
-                lea     word_8AAA2(pc),a1
+SKICZFreezer_InitFrostPuff:
+                lea     SKICZFreezer_FrostPuffAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_8A72C,(a0)
+                move.l  #SKICZFreezer_UpdateAndDrawPuff,(a0)
 
-locret_8A72A:
+SKICZFreezer_PuffDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A72C:
+SKICZFreezer_UpdateAndDrawPuff:
                 bsr.w   AdvanceIczFreezerPuffEnvelopeAndJitter
                 jsr     Refresh_ChildPosition(pc)
                 subq.b  #1,$3A(a0)
-                bpl.w   locret_8A72A
+                bpl.w   SKICZFreezer_PuffDrawReturn
                 move.b  #2,$3A(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8A748:
-                move.l  #loc_8A75C,(a0)
+SKICZFreezer_InitCaptureWarmup:
+                move.l  #SKICZFreezer_TickCaptureWarmup,(a0)
                 move.w  #$1F,$2E(a0)
                 lea     ObjDat_ICZFreezer(pc),a1
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A75C:
+SKICZFreezer_TickCaptureWarmup:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_8A78C
+                beq.s   SKICZFreezer_BeginResidualCapture
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8A770
+                bmi.s   SKICZFreezer_BeginActiveCapture
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A770:
-                move.l  #loc_8A778,(a0)
+SKICZFreezer_BeginActiveCapture:
+                move.l  #SKICZFreezer_CaptureDuringEmission,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A778:
+SKICZFreezer_CaptureDuringEmission:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_8A78C
-                lea     word_8AA30(pc),a1
+                beq.s   SKICZFreezer_BeginResidualCapture
+                lea     SKICZFreezer_CaptureBounds(pc),a1
                 bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
-loc_8A78C:
-                move.l  #loc_8A7A2,(a0)
+SKICZFreezer_BeginResidualCapture:
+                move.l  #SKICZFreezer_CaptureDuringResidual,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A7A2:
+; Run the capture test even on the update that schedules field deletion
+SKICZFreezer_CaptureDuringResidual:
                 jsr     Obj_Wait(pc)
-                lea     word_8AA30(pc),a1
+                lea     SKICZFreezer_CaptureBounds(pc),a1
                 bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
-loc_8A7AE:
-                lea     ObjDat3_8AAAA(pc),a1
+SKICZFreezer_InitFrozenShell:
+                lea     SKICZFreezer_FrozenShellAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8A80C,(a0)
+                move.l  #SKICZFreezer_CheckShellRightLimit,(a0)
                 move.b  #$10,y_radius(a0)
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_8A7E2
+                beq.s   SKICZFreezer_ChooseShellThrowX
                 bset    #0,render_flags(a0)
 
-loc_8A7E2:
+SKICZFreezer_ChooseShellThrowX:
                 movea.w parent3(a0),a2
                 move.w  #$200,d1
                 cmp.w   x_pos(a2),d0
-                bhs.s   loc_8A7F2
+                bhs.s   SKICZFreezer_SetShellLaunchAndTimer
                 neg.w   d1
 
-loc_8A7F2:
+SKICZFreezer_SetShellLaunchAndTimer:
                 move.w  d1,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_8A88A,$34(a0)
+                move.l  #SKICZFreezer_HurtOnShellTimeout,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A80C:
+SKICZFreezer_CheckShellRightLimit:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_8A824
+                bmi.s   SKICZFreezer_CheckShellLeftLimit
                 addi.w  #$128,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8A82E
-                bra.w   loc_8A832
+                blo.s   SKICZFreezer_StopShellX
+                bra.w   SKICZFreezer_MoveShellAndCheckFloor
 ; ---------------------------------------------------------------------------
 
-loc_8A824:
+SKICZFreezer_CheckShellLeftLimit:
                 addi.w  #$20,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8A832
+                blo.s   SKICZFreezer_MoveShellAndCheckFloor
 
-loc_8A82E:
+SKICZFreezer_StopShellX:
                 clr.w   x_vel(a0)
 
-loc_8A832:
+SKICZFreezer_MoveShellAndCheckFloor:
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_8A84C
+                bpl.s   SKICZFreezer_UpdateFrozenPlayer
                 add.w   d1,y_pos(a0)
-                move.l  #loc_8A84C,(a0)
+                move.l  #SKICZFreezer_UpdateFrozenPlayer,(a0)
 
-loc_8A84C:
+SKICZFreezer_UpdateFrozenPlayer:
                 movea.w $44(a0),a1
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 cmpi.b  #2,character_id(a1)
-                bne.s   loc_8A870
+                bne.s   SKICZFreezer_PlacePlayerAndTestEscape
                 moveq   #-4,d2
                 btst    #0,render_flags(a1)
-                beq.s   loc_8A86C
+                beq.s   SKICZFreezer_OffsetFrozenKnuckles
                 neg.w   d2
 
-loc_8A86C:
+SKICZFreezer_OffsetFrozenKnuckles:
                 add.w   d2,d0
                 addq.w  #2,d1
 
-loc_8A870:
+SKICZFreezer_PlacePlayerAndTestEscape:
                 move.w  d0,x_pos(a1)
                 move.w  d1,y_pos(a1)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8A88A
+                bmi.s   SKICZFreezer_HurtOnShellTimeout
                 bsr.w   TryRescueIczFrozenPlayerWithPartner
-                bne.s   loc_8A8BA
+                bne.s   SKICZFreezer_ReleasePlayerAndShatter
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8A88A:
+; The invincibility bit test has no branch. The timeout still calls HurtCharacter
+SKICZFreezer_HurtOnShellTimeout:
                 movea.w $44(a0),a1
                 btst    #Status_Invincible,status_secondary(a1)
                 movea.l a0,a2
                 movea.l a1,a0
                 jsr     (HurtCharacter).l
                 cmpi.b  #$18,anim(a0)
-                beq.s   loc_8A8B8
+                beq.s   SKICZFreezer_RestoreShellPointer
                 move.w  #$200,d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_8A8B4
+                bne.s   SKICZFreezer_SetTimeoutHurtXSpeed
                 neg.w   d0
 
-loc_8A8B4:
+SKICZFreezer_SetTimeoutHurtXSpeed:
                 move.w  d0,x_vel(a0)
 
-loc_8A8B8:
+SKICZFreezer_RestoreShellPointer:
                 movea.l a2,a0
 
-loc_8A8BA:
+SKICZFreezer_ReleasePlayerAndShatter:
                 movea.w $44(a0),a1
                 bset    #1,status(a1)
                 clr.b   object_control(a1)
                 move.b  #2*60,invulnerability_timer(a1)
-                lea     ChildObjDat_8AAEA(pc),a2
+                lea     SKICZFreezer_ShellShardChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8A8DC:
-                lea     ObjDat3_8AAB6(pc),a1
+SKICZFreezer_InitShellShard:
+                lea     SKICZFreezer_ShellShardAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AnimateRaw_MoveChkDel,(a0)
-                move.l  #byte_8AB3E,$30(a0)
+                move.l  #SKICZFreezer_MediumIceShardAnim,$30(a0)
                 cmpi.b  #8,subtype(a0)
-                bhs.s   loc_8A902
-                move.l  #byte_8AB34,$30(a0)
+                bhs.s   SKICZFreezer_SetShardFrameAndSpeed
+                move.l  #SKICZFreezer_LargeIceShardAnim,$30(a0)
 
-loc_8A902:
+SKICZFreezer_SetShardFrameAndSpeed:
                 jsr     (Random_Number).l
                 andi.b  #3,d0
                 move.b  d0,anim_frame(a0)
@@ -283,15 +285,15 @@ loc_8A902:
 
 AdvanceIczFreezerPuffEnvelopeAndJitter:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_8A96E
+                bpl.s   SKICZFreezer_PuffEnvelopeReturn
                 move.w  #2,$2E(a0)
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 addq.b  #4,d0
                 cmpi.b  #$48,d0
-                bhs.s   loc_8A970
+                bhs.s   SKICZFreezer_DeletePuffAndSkipCaller
                 move.b  d0,$39(a0)
-                lea     byte_8A97A(pc,d0.w),a1
+                lea     SKICZFreezer_PuffEnvelope(pc,d0.w),a1
                 move.b  (a1)+,child_dy(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,d2
@@ -306,24 +308,25 @@ AdvanceIczFreezerPuffEnvelopeAndJitter:
                 sub.b   d3,d0
                 movea.w parent3(a0),a1
                 btst    #1,render_flags(a1)
-                beq.s   loc_8A96A
+                beq.s   SKICZFreezer_ApplyPuffYJitter
                 neg.b   child_dy(a0)
 
-loc_8A96A:
+SKICZFreezer_ApplyPuffYJitter:
                 add.b   d0,child_dy(a0)
 
-locret_8A96E:
+SKICZFreezer_PuffEnvelopeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A970:
+; Discard the caller's return address to skip position refresh and drawing
+SKICZFreezer_DeletePuffAndSkipCaller:
                 jsr     (Delete_Current_Sprite).l
                 addq.w  #4,sp
                 rts
 ; End of function AdvanceIczFreezerPuffEnvelopeAndJitter
 
 ; ---------------------------------------------------------------------------
-byte_8A97A:
+SKICZFreezer_PuffEnvelope:
                 dc.b    $10, $16,   3
                 even
                 dc.b    $10, $16,   3
@@ -368,16 +371,16 @@ byte_8A97A:
 CapturePlayersInsideIczFreezerZone:
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_8AA2E
+                beq.s   SKICZFreezer_FreezeReturn
                 tst.w   d0
-                beq.s   loc_8A9D8
+                beq.s   SKICZFreezer_TryCaptureP2
                 movea.w d0,a4
                 bsr.w   FreezeEligiblePlayerInIczShell
 
-loc_8A9D8:
+SKICZFreezer_TryCaptureP2:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_8AA2E
+                beq.s   SKICZFreezer_FreezeReturn
                 movea.w d0,a4
 ; End of function CapturePlayersInsideIczFreezerZone
 
@@ -385,13 +388,13 @@ loc_8A9D8:
 
 FreezeEligiblePlayerInIczShell:
                 tst.b   object_control(a4)
-                bne.s   locret_8AA2E
+                bne.s   SKICZFreezer_FreezeReturn
                 btst    #Status_Invincible,status_secondary(a4)
-                bne.s   locret_8AA2E
+                bne.s   SKICZFreezer_FreezeReturn
                 tst.b   invulnerability_timer(a4)
-                bne.s   locret_8AA2E
+                bne.s   SKICZFreezer_FreezeReturn
                 cmpi.b  #4,routine(a4)
-                bhs.s   locret_8AA2E
+                bhs.s   SKICZFreezer_FreezeReturn
                 move.b  #$81,object_control(a4)
                 move.b  #$1A,anim(a4)
                 bset    #Status_InAir,status(a4)
@@ -400,17 +403,18 @@ FreezeEligiblePlayerInIczShell:
                 clr.w   y_vel(a4)
                 clr.w   ground_vel(a4)
                 move.l  d0,d4
-                lea     ChildObjDat_8AAE2(pc),a2
+                lea     SKICZFreezer_FrozenShellChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.l  d4,d0
                 move.w  a4,$44(a1)
 
-locret_8AA2E:
+; The preceding path freezes the player and writes their handle into the shell without testing allocation
+SKICZFreezer_FreezeReturn:
                 rts
 ; End of function FreezeEligiblePlayerInIczShell
 
 ; ---------------------------------------------------------------------------
-word_8AA30:
+SKICZFreezer_CaptureBounds:
                 dc.w    -$10,   $20,  -$28,   $50
 
 ; =============== S U B R O U T I N E =======================================
@@ -418,121 +422,122 @@ word_8AA30:
 TryRescueIczFrozenPlayerWithPartner:
                 lea     (Player_1).w,a3
                 cmpa.w  $44(a0),a3
-                bne.s   loc_8AA46
+                bne.s   SKICZFreezer_CheckRescuePartner
                 lea     (Player_2).w,a3
 
-loc_8AA46:
+SKICZFreezer_CheckRescuePartner:
                 tst.w   y_vel(a3)
-                bmi.s   loc_8AA8A
+                bmi.s   SKICZFreezer_RescueFailed
                 cmpi.b  #2,anim(a3)
-                beq.s   loc_8AA5C
+                beq.s   SKICZFreezer_FindRescueContact
                 cmpi.b  #9,anim(a3)
-                bne.s   loc_8AA8A
+                bne.s   SKICZFreezer_RescueFailed
 
-loc_8AA5C:
-                lea     word_8AA8E(pc),a1
+SKICZFreezer_FindRescueContact:
+                lea     SKICZFreezer_RescueBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_8AA88
+                beq.s   SKICZFreezer_RescueReturn
                 tst.w   d0
-                beq.s   loc_8AA74
+                beq.s   SKICZFreezer_TryP2RescueContact
                 movea.w d0,a4
                 tst.b   object_control(a4)
-                beq.s   loc_8AA82
+                beq.s   SKICZFreezer_BounceRescuePartner
 
-loc_8AA74:
+SKICZFreezer_TryP2RescueContact:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_8AA88
+                beq.s   SKICZFreezer_RescueReturn
                 movea.w d0,a4
                 tst.b   object_control(a4)
-                bne.s   loc_8AA8A
+                bne.s   SKICZFreezer_RescueFailed
 
-loc_8AA82:
+SKICZFreezer_BounceRescuePartner:
                 neg.w   y_vel(a3)
                 moveq   #1,d0
 
-locret_8AA88:
+; The shell tests the zero flag on return to decide whether to shatter
+SKICZFreezer_RescueReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8AA8A:
+SKICZFreezer_RescueFailed:
                 moveq   #0,d0
                 rts
 ; End of function TryRescueIczFrozenPlayerWithPartner
 
 ; ---------------------------------------------------------------------------
-word_8AA8E:
+SKICZFreezer_RescueBounds:
                 dc.w    -$1C,   $38,  -$18,   $30
 ObjDat_ICZFreezer:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,1,0)
                 dc.w    $280
                 dc.b    $10,  $C,   6, $9A
-word_8AAA2:
+SKICZFreezer_FrostPuffAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    $C,  $C, $16,   0
-ObjDat3_8AAAA:
+SKICZFreezer_FrozenShellAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    $14, $10,   2,   0
-ObjDat3_8AAB6:
+SKICZFreezer_ShellShardAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    4,   4,  $C,   0
-ChildObjDat_8AAC2:
+SKICZFreezer_LowerPuffChild:
                 dc.w    1-1
-                dc.l    loc_8A71C
+                dc.l    SKICZFreezer_InitFrostPuff
                 dc.b    0,  $C
-ChildObjDat_8AACA:
+SKICZFreezer_UpperPuffChild:
                 dc.w    1-1
-                dc.l    loc_8A71C
+                dc.l    SKICZFreezer_InitFrostPuff
                 dc.b    0, -$C
-ChildObjDat_8AAD2:
+SKICZFreezer_LowerFieldChild:
                 dc.w    1-1
-                dc.l    loc_8A748
+                dc.l    SKICZFreezer_InitCaptureWarmup
                 dc.b    0, $30
-ChildObjDat_8AADA:
+SKICZFreezer_UpperFieldChild:
                 dc.w    1-1
-                dc.l    loc_8A748
+                dc.l    SKICZFreezer_InitCaptureWarmup
                 dc.b    0,-$30
-ChildObjDat_8AAE2:
+SKICZFreezer_FrozenShellChild:
                 dc.w    1-1
-                dc.l    loc_8A7AE
+                dc.l    SKICZFreezer_InitFrozenShell
                 dc.b    0,   0
-ChildObjDat_8AAEA:
+SKICZFreezer_ShellShardChildren:
                 dc.w    $C-1
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -$C,  -8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -4,  -8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    4,  -8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    $C,  -8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -$C,   0
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -4,   0
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    4,   0
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    $C,   0
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -$C,   8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    -4,   8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    4,   8
-                dc.l    loc_8A8DC
+                dc.l    SKICZFreezer_InitShellShard
                 dc.b    $C,   8
-byte_8AB34:
+SKICZFreezer_LargeIceShardAnim:
                 dc.b    0, $27, $23, $27, $13, $27, $24, $27, $14, $FC
-byte_8AB3E:
+SKICZFreezer_MediumIceShardAnim:
                 dc.b    0, $27,  $C, $27,  $D, $27,  $E, $FC
-byte_8AB46:
+SKICZFreezer_SmallIceShardAnim:
                 dc.b    0, $27,  $F, $27, $10, $27, $11, $FC
                 even

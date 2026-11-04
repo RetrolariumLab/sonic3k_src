@@ -5,259 +5,260 @@
 
 Obj_ICZFreezer:
                 jsr     Obj_WaitOffscreen(pc)
-                move.l  #loc_57E4E,(a0)
+                move.l  #S3ICZFreezer_TryArmFreezer,(a0)
                 lea     ObjDat_ICZFreezer(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57E4E:
+S3ICZFreezer_TryArmFreezer:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_57E72
-                move.l  #loc_57E76,(a0)
+                bhs.s   S3ICZFreezer_DrawWaitingFreezer
+                move.l  #S3ICZFreezer_TickEmissionPhase,(a0)
                 clr.w   $2E(a0)
                 clr.w   $30(a0)
                 clr.b   $39(a0)
                 moveq   #signextendB(sfx_FrostPuff),d0
                 jsr     (Play_SFX).l
 
-loc_57E72:
+S3ICZFreezer_DrawWaitingFreezer:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57E76:
+S3ICZFreezer_TickEmissionPhase:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_57EBE
+                bhs.s   S3ICZFreezer_StopFreezerOutOfRange
                 subq.w  #1,$30(a0)
-                bpl.s   loc_57EA2
+                bpl.s   S3ICZFreezer_TryEmitFrostPuff
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 bchg    #1,d0
                 move.b  d0,$39(a0)
-                move.w  word_57ED6(pc,d0.w),$30(a0)
-                move.w  off_57EDA(pc,d0.w),d0
-                jsr     off_57EDA(pc,d0.w)
+                move.w  S3ICZFreezer_PhaseDelays(pc,d0.w),$30(a0)
+                move.w  S3ICZFreezer_PhaseHandlers(pc,d0.w),d0
+                jsr     S3ICZFreezer_PhaseHandlers(pc,d0.w)
 
-loc_57EA2:
+S3ICZFreezer_TryEmitFrostPuff:
                 btst    #1,$38(a0)
-                beq.s   loc_57EBA
+                beq.s   S3ICZFreezer_DrawActiveFreezer
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_57EBA
+                bpl.s   S3ICZFreezer_DrawActiveFreezer
                 move.w  #1,$2E(a0)
                 bsr.w   SpawnIczFreezerFrostPuff
 
-loc_57EBA:
+S3ICZFreezer_DrawActiveFreezer:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57EBE:
-                move.l  #loc_57E4E,(a0)
+S3ICZFreezer_StopFreezerOutOfRange:
+                move.l  #S3ICZFreezer_TryArmFreezer,(a0)
                 bclr    #1,$38(a0)
                 moveq   #signextendB(cmd_StopSFX),d0
                 jsr     (Play_SFX).l
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
-word_57ED6:
+S3ICZFreezer_PhaseDelays:
                 dc.w    $40,   $40
-off_57EDA:
-                dc.w    loc_57EDE-off_57EDA
-                dc.w    loc_57EE6-off_57EDA
+S3ICZFreezer_PhaseHandlers:
+                dc.w    S3ICZFreezer_DisableEmission-S3ICZFreezer_PhaseHandlers
+                dc.w    S3ICZFreezer_EnableAndPickCaptureField-S3ICZFreezer_PhaseHandlers
 ; ---------------------------------------------------------------------------
 
-loc_57EDE:
+S3ICZFreezer_DisableEmission:
                 bclr    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57EE6:
+S3ICZFreezer_EnableAndPickCaptureField:
                 bset    #1,$38(a0)
-                lea     ChildObjDat_582A8(pc),a2
+                lea     S3ICZFreezer_LowerFieldChild(pc),a2
                 btst    #1,render_flags(a0)
-                beq.s   loc_57EFC
-                lea     ChildObjDat_582B0(pc),a2
+                beq.s   S3ICZFreezer_SpawnCaptureField
+                lea     S3ICZFreezer_UpperFieldChild(pc),a2
 
-loc_57EFC:
+S3ICZFreezer_SpawnCaptureField:
                 jmp     CreateChild1_Normal(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
 SpawnIczFreezerFrostPuff:
-                lea     ChildObjDat_58298(pc),a2
+                lea     S3ICZFreezer_LowerPuffChild(pc),a2
                 btst    #1,render_flags(a0)
-                beq.s   loc_57F10
-                lea     ChildObjDat_582A0(pc),a2
+                beq.s   S3ICZFreezer_SpawnFrostPuff
+                lea     S3ICZFreezer_UpperPuffChild(pc),a2
 
-loc_57F10:
+S3ICZFreezer_SpawnFrostPuff:
                 jmp     CreateChild1_Normal(pc)
 ; End of function SpawnIczFreezerFrostPuff
 
 ; ---------------------------------------------------------------------------
 
-loc_57F14:
-                lea     word_58278(pc),a1
+S3ICZFreezer_InitFrostPuff:
+                lea     S3ICZFreezer_FrostPuffAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_57F24,(a0)
+                move.l  #S3ICZFreezer_UpdateAndDrawPuff,(a0)
 
-locret_57F22:
+S3ICZFreezer_PuffDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57F24:
+S3ICZFreezer_UpdateAndDrawPuff:
                 bsr.w   AdvanceIczFreezerPuffEnvelopeAndJitter
                 jsr     Refresh_ChildPosition(pc)
                 subq.b  #1,$3A(a0)
-                bpl.w   locret_57F22
+                bpl.w   S3ICZFreezer_PuffDrawReturn
                 move.b  #2,$3A(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_57F40:
-                move.l  #loc_57F54,(a0)
+S3ICZFreezer_InitCaptureWarmup:
+                move.l  #S3ICZFreezer_TickCaptureWarmup,(a0)
                 move.w  #$1F,$2E(a0)
                 lea     ObjDat_ICZFreezer(pc),a1
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57F54:
+S3ICZFreezer_TickCaptureWarmup:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_57F84
+                beq.s   S3ICZFreezer_BeginResidualCapture
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_57F68
+                bmi.s   S3ICZFreezer_BeginActiveCapture
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57F68:
-                move.l  #loc_57F70,(a0)
+S3ICZFreezer_BeginActiveCapture:
+                move.l  #S3ICZFreezer_CaptureDuringEmission,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57F70:
+S3ICZFreezer_CaptureDuringEmission:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_57F84
-                lea     word_58206(pc),a1
+                beq.s   S3ICZFreezer_BeginResidualCapture
+                lea     S3ICZFreezer_CaptureBounds(pc),a1
                 bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
-loc_57F84:
-                move.l  #loc_57F9A,(a0)
+S3ICZFreezer_BeginResidualCapture:
+                move.l  #S3ICZFreezer_CaptureDuringResidual,(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57F9A:
+; Run the capture test even on the update that schedules field deletion
+S3ICZFreezer_CaptureDuringResidual:
                 jsr     Obj_Wait(pc)
-                lea     word_58206(pc),a1
+                lea     S3ICZFreezer_CaptureBounds(pc),a1
                 bra.w   CapturePlayersInsideIczFreezerZone
 ; ---------------------------------------------------------------------------
 
-loc_57FA6:
-                lea     ObjDat3_58280(pc),a1
+S3ICZFreezer_InitFrozenShell:
+                lea     S3ICZFreezer_FrozenShellAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_58004,(a0)
+                move.l  #S3ICZFreezer_CheckShellRightLimit,(a0)
                 move.b  #$10,y_radius(a0)
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_57FDA
+                beq.s   S3ICZFreezer_ChooseShellThrowX
                 bset    #0,render_flags(a0)
 
-loc_57FDA:
+S3ICZFreezer_ChooseShellThrowX:
                 movea.w parent3(a0),a2
                 move.w  #$200,d1
                 cmp.w   x_pos(a2),d0
-                bhs.s   loc_57FEA
+                bhs.s   S3ICZFreezer_SetShellLaunchAndTimer
                 neg.w   d1
 
-loc_57FEA:
+S3ICZFreezer_SetShellLaunchAndTimer:
                 move.w  d1,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_58066,$34(a0)
+                move.l  #S3ICZFreezer_HurtOnShellTimeout,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58004:
+S3ICZFreezer_CheckShellRightLimit:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_5801C
+                bmi.s   S3ICZFreezer_CheckShellLeftLimit
                 addi.w  #$128,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_58026
-                bra.w   loc_5802A
+                blo.s   S3ICZFreezer_StopShellX
+                bra.w   S3ICZFreezer_MoveShellAndCheckFloor
 ; ---------------------------------------------------------------------------
 
-loc_5801C:
+S3ICZFreezer_CheckShellLeftLimit:
                 addi.w  #$20,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_5802A
+                blo.s   S3ICZFreezer_MoveShellAndCheckFloor
 
-loc_58026:
+S3ICZFreezer_StopShellX:
                 clr.w   x_vel(a0)
 
-loc_5802A:
+S3ICZFreezer_MoveShellAndCheckFloor:
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_58044
+                bpl.s   S3ICZFreezer_UpdateFrozenPlayer
                 add.w   d1,y_pos(a0)
-                move.l  #loc_58044,(a0)
+                move.l  #S3ICZFreezer_UpdateFrozenPlayer,(a0)
 
-loc_58044:
+S3ICZFreezer_UpdateFrozenPlayer:
                 movea.w $44(a0),a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_58066
+                bmi.s   S3ICZFreezer_HurtOnShellTimeout
                 bsr.w   TryRescueIczFrozenPlayerWithPartner
-                bne.s   loc_58090
+                bne.s   S3ICZFreezer_ReleasePlayerAndShatter
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_58066:
+S3ICZFreezer_HurtOnShellTimeout:
                 movea.w $44(a0),a1
                 movea.l a0,a2
                 movea.l a1,a0
                 jsr     (HurtCharacter).l
                 cmpi.b  #$18,anim(a0)
-                beq.s   loc_5808E
+                beq.s   S3ICZFreezer_RestoreShellPointer
                 move.w  #$200,d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_5808A
+                bne.s   S3ICZFreezer_SetTimeoutHurtXSpeed
                 neg.w   d0
 
-loc_5808A:
+S3ICZFreezer_SetTimeoutHurtXSpeed:
                 move.w  d0,x_vel(a0)
 
-loc_5808E:
+S3ICZFreezer_RestoreShellPointer:
                 movea.l a2,a0
 
-loc_58090:
+S3ICZFreezer_ReleasePlayerAndShatter:
                 movea.w $44(a0),a1
                 bset    #1,status(a1)
                 clr.b   object_control(a1)
                 move.b  #2*60,invulnerability_timer(a1)
-                lea     ChildObjDat_582C0(pc),a2
+                lea     S3ICZFreezer_ShellShardChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_580B2:
-                lea     ObjDat3_5828C(pc),a1
+S3ICZFreezer_InitShellShard:
+                lea     S3ICZFreezer_ShellShardAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AnimateRaw_MoveChkDel,(a0)
-                move.l  #byte_58314,$30(a0)
+                move.l  #S3ICZFreezer_MediumIceShardAnim,$30(a0)
                 cmpi.b  #8,subtype(a0)
-                bhs.s   loc_580D8
-                move.l  #byte_5830A,$30(a0)
+                bhs.s   S3ICZFreezer_SetShardFrameAndSpeed
+                move.l  #S3ICZFreezer_LargeIceShardAnim,$30(a0)
 
-loc_580D8:
+S3ICZFreezer_SetShardFrameAndSpeed:
                 jsr     (Random_Number).l
                 andi.b  #3,d0
                 move.b  d0,anim_frame(a0)
@@ -268,15 +269,15 @@ loc_580D8:
 
 AdvanceIczFreezerPuffEnvelopeAndJitter:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_58144
+                bpl.s   S3ICZFreezer_PuffEnvelopeReturn
                 move.w  #2,$2E(a0)
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 addq.b  #4,d0
                 cmpi.b  #$48,d0
-                bhs.s   loc_58146
+                bhs.s   S3ICZFreezer_DeletePuffAndSkipCaller
                 move.b  d0,$39(a0)
-                lea     byte_58150(pc,d0.w),a1
+                lea     S3ICZFreezer_PuffEnvelope(pc,d0.w),a1
                 move.b  (a1)+,child_dy(a0)
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,d2
@@ -291,24 +292,25 @@ AdvanceIczFreezerPuffEnvelopeAndJitter:
                 sub.b   d3,d0
                 movea.w parent3(a0),a1
                 btst    #1,render_flags(a1)
-                beq.s   loc_58140
+                beq.s   S3ICZFreezer_ApplyPuffYJitter
                 neg.b   child_dy(a0)
 
-loc_58140:
+S3ICZFreezer_ApplyPuffYJitter:
                 add.b   d0,child_dy(a0)
 
-locret_58144:
+S3ICZFreezer_PuffEnvelopeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58146:
+; Discard the caller's return address to skip position refresh and drawing
+S3ICZFreezer_DeletePuffAndSkipCaller:
                 jsr     (Delete_Current_Sprite).l
                 addq.w  #4,sp
                 rts
 ; End of function AdvanceIczFreezerPuffEnvelopeAndJitter
 
 ; ---------------------------------------------------------------------------
-byte_58150:
+S3ICZFreezer_PuffEnvelope:
                 dc.b    $10, $16,   3
                 even
                 dc.b    $10, $16,   3
@@ -353,16 +355,16 @@ byte_58150:
 CapturePlayersInsideIczFreezerZone:
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_58204
+                beq.s   S3ICZFreezer_FreezeReturn
                 tst.w   d0
-                beq.s   loc_581AE
+                beq.s   S3ICZFreezer_TryCaptureP2
                 movea.w d0,a4
                 bsr.w   FreezeEligiblePlayerInIczShell
 
-loc_581AE:
+S3ICZFreezer_TryCaptureP2:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_58204
+                beq.s   S3ICZFreezer_FreezeReturn
                 movea.w d0,a4
 ; End of function CapturePlayersInsideIczFreezerZone
 
@@ -370,13 +372,13 @@ loc_581AE:
 
 FreezeEligiblePlayerInIczShell:
                 tst.b   object_control(a4)
-                bne.s   locret_58204
+                bne.s   S3ICZFreezer_FreezeReturn
                 btst    #Status_Invincible,status_secondary(a4)
-                bne.s   locret_58204
+                bne.s   S3ICZFreezer_FreezeReturn
                 tst.b   invulnerability_timer(a4)
-                bne.s   locret_58204
+                bne.s   S3ICZFreezer_FreezeReturn
                 cmpi.b  #4,routine(a4)
-                bhs.s   locret_58204
+                bhs.s   S3ICZFreezer_FreezeReturn
                 move.b  #$81,object_control(a4)
                 move.b  #$1A,anim(a4)
                 bset    #Status_InAir,status(a4)
@@ -385,17 +387,18 @@ FreezeEligiblePlayerInIczShell:
                 clr.w   y_vel(a4)
                 clr.w   ground_vel(a4)
                 move.l  d0,d4
-                lea     ChildObjDat_582B8(pc),a2
+                lea     S3ICZFreezer_FrozenShellChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 move.l  d4,d0
                 move.w  a4,$44(a1)
 
-locret_58204:
+; The preceding path freezes the player and writes their handle into the shell without testing allocation
+S3ICZFreezer_FreezeReturn:
                 rts
 ; End of function FreezeEligiblePlayerInIczShell
 
 ; ---------------------------------------------------------------------------
-word_58206:
+S3ICZFreezer_CaptureBounds:
                 dc.w    -$10,   $20,  -$28,   $50
 
 ; =============== S U B R O U T I N E =======================================
@@ -403,121 +406,122 @@ word_58206:
 TryRescueIczFrozenPlayerWithPartner:
                 lea     (Player_1).w,a3
                 cmpa.w  $44(a0),a3
-                bne.s   loc_5821C
+                bne.s   S3ICZFreezer_CheckRescuePartner
                 lea     (Player_2).w,a3
 
-loc_5821C:
+S3ICZFreezer_CheckRescuePartner:
                 tst.w   y_vel(a3)
-                bmi.s   loc_58260
+                bmi.s   S3ICZFreezer_RescueFailed
                 cmpi.b  #2,anim(a3)
-                beq.s   loc_58232
+                beq.s   S3ICZFreezer_FindRescueContact
                 cmpi.b  #9,anim(a3)
-                bne.s   loc_58260
+                bne.s   S3ICZFreezer_RescueFailed
 
-loc_58232:
-                lea     word_58264(pc),a1
+S3ICZFreezer_FindRescueContact:
+                lea     S3ICZFreezer_RescueBounds(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_5825E
+                beq.s   S3ICZFreezer_RescueReturn
                 tst.w   d0
-                beq.s   loc_5824A
+                beq.s   S3ICZFreezer_TryP2RescueContact
                 movea.w d0,a4
                 tst.b   object_control(a4)
-                beq.s   loc_58258
+                beq.s   S3ICZFreezer_BounceRescuePartner
 
-loc_5824A:
+S3ICZFreezer_TryP2RescueContact:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_5825E
+                beq.s   S3ICZFreezer_RescueReturn
                 movea.w d0,a4
                 tst.b   object_control(a4)
-                bne.s   loc_58260
+                bne.s   S3ICZFreezer_RescueFailed
 
-loc_58258:
+S3ICZFreezer_BounceRescuePartner:
                 neg.w   y_vel(a3)
                 moveq   #1,d0
 
-locret_5825E:
+; The shell tests the zero flag on return to decide whether to shatter
+S3ICZFreezer_RescueReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58260:
+S3ICZFreezer_RescueFailed:
                 moveq   #0,d0
                 rts
 ; End of function TryRescueIczFrozenPlayerWithPartner
 
 ; ---------------------------------------------------------------------------
-word_58264:
+S3ICZFreezer_RescueBounds:
                 dc.w    -$1C,   $38,  -$18,   $30
 ObjDat_ICZFreezer:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,1,0)
                 dc.w    $280
                 dc.b    $10,  $C,   6, $9A
-word_58278:
+S3ICZFreezer_FrostPuffAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    $C,  $C, $16,   0
-ObjDat3_58280:
+S3ICZFreezer_FrozenShellAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    $14, $10,   2,   0
-ObjDat3_5828C:
+S3ICZFreezer_ShellShardAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    4,   4,  $C,   0
-ChildObjDat_58298:
+S3ICZFreezer_LowerPuffChild:
                 dc.w    1-1
-                dc.l    loc_57F14
+                dc.l    S3ICZFreezer_InitFrostPuff
                 dc.b    0,  $C
-ChildObjDat_582A0:
+S3ICZFreezer_UpperPuffChild:
                 dc.w    1-1
-                dc.l    loc_57F14
+                dc.l    S3ICZFreezer_InitFrostPuff
                 dc.b    0, -$C
-ChildObjDat_582A8:
+S3ICZFreezer_LowerFieldChild:
                 dc.w    1-1
-                dc.l    loc_57F40
+                dc.l    S3ICZFreezer_InitCaptureWarmup
                 dc.b    0, $30
-ChildObjDat_582B0:
+S3ICZFreezer_UpperFieldChild:
                 dc.w    1-1
-                dc.l    loc_57F40
+                dc.l    S3ICZFreezer_InitCaptureWarmup
                 dc.b    0,-$30
-ChildObjDat_582B8:
+S3ICZFreezer_FrozenShellChild:
                 dc.w    1-1
-                dc.l    loc_57FA6
+                dc.l    S3ICZFreezer_InitFrozenShell
                 dc.b    0,   0
-ChildObjDat_582C0:
+S3ICZFreezer_ShellShardChildren:
                 dc.w    $C-1
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -$C,  -8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -4,  -8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    4,  -8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    $C,  -8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -$C,   0
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -4,   0
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    4,   0
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    $C,   0
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -$C,   8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    -4,   8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    4,   8
-                dc.l    loc_580B2
+                dc.l    S3ICZFreezer_InitShellShard
                 dc.b    $C,   8
-byte_5830A:
+S3ICZFreezer_LargeIceShardAnim:
                 dc.b    0, $27, $23, $27, $13, $27, $24, $27, $14, $FC
-byte_58314:
+S3ICZFreezer_MediumIceShardAnim:
                 dc.b    0, $27,  $C, $27,  $D, $27,  $E, $FC
-byte_5831C:
+S3ICZFreezer_SmallIceShardAnim:
                 dc.b    0, $27,  $F, $27, $10, $27, $11, $FC
                 even

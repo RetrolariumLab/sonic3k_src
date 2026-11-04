@@ -26038,18 +26038,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "f5d6115c6c8230b3ac6ce82a59f2e79e8401855667d75ed8ad61f43eb850ff19",
+      "declarations_sha256": "e2bd0cdcf98dcd682f04ab6bcc33fb49930768a68da6249c9a5f7d24f3cdcb24",
       "labels": {
         "DPLC_Penguinator_": 0,
-        "Frame_361E60": 18,
-        "Frame_361E64": 22,
-        "Frame_361E68": 26,
-        "Frame_361E6C": 30,
-        "Frame_361E72": 36,
-        "Frame_361E78": 42,
-        "Frame_361E7E": 48,
-        "Frame_361E84": 54,
-        "Frame_361E8A": 60
+        "PenguinatorS3_DPLCFrame00": 18,
+        "PenguinatorS3_DPLCFrame01": 22,
+        "PenguinatorS3_DPLCFrame02": 26,
+        "PenguinatorS3_DPLCFrame03": 30,
+        "PenguinatorS3_DPLCFrame04": 36,
+        "PenguinatorS3_DPLCFrame05": 42,
+        "PenguinatorS3_DPLCFrame06": 48,
+        "PenguinatorS3_DPLCFrame07": 54,
+        "PenguinatorS3_DPLCFrame08": 60
       },
       "external_symbols": [],
       "blocks": [
@@ -26057,63 +26057,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E60",
+          "target": "PenguinatorS3_DPLCFrame00",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E64",
+          "target": "PenguinatorS3_DPLCFrame01",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E68",
+          "target": "PenguinatorS3_DPLCFrame02",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E6C",
+          "target": "PenguinatorS3_DPLCFrame03",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E72",
+          "target": "PenguinatorS3_DPLCFrame04",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E78",
+          "target": "PenguinatorS3_DPLCFrame05",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E7E",
+          "target": "PenguinatorS3_DPLCFrame06",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E84",
+          "target": "PenguinatorS3_DPLCFrame07",
           "base": "DPLC_Penguinator_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361E8A",
+          "target": "PenguinatorS3_DPLCFrame08",
           "base": "DPLC_Penguinator_"
         },
         {
@@ -26172,18 +26172,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 126
       },
-      "declarations_sha256": "9fedca37fcb54169733ed2275d09d2ef43138a8be3ff4fff076edc0957af9ad4",
+      "declarations_sha256": "9c7b1240bd8fe3c6a4aa999def1ddec2fc8e4ab04e5c1bf9c0a3db4d1ab151c4",
       "labels": {
         "Map_Penguinator_": 0,
-        "Frame_361EA2": 18,
-        "Frame_361EAA": 26,
-        "Frame_361EB2": 34,
-        "Frame_361EBA": 42,
-        "Frame_361EC8": 56,
-        "Frame_361ED6": 70,
-        "Frame_361EE4": 84,
-        "Frame_361EF2": 98,
-        "Frame_361F00": 112
+        "PenguinatorS3_MapFrame00": 18,
+        "PenguinatorS3_MapFrame01": 26,
+        "PenguinatorS3_MapFrame02": 34,
+        "PenguinatorS3_MapFrame03": 42,
+        "PenguinatorS3_MapFrame04": 56,
+        "PenguinatorS3_MapFrame05": 70,
+        "PenguinatorS3_MapFrame06": 84,
+        "PenguinatorS3_MapFrame07": 98,
+        "PenguinatorS3_MapFrame08": 112
       },
       "external_symbols": [],
       "blocks": [
@@ -26191,63 +26191,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EA2",
+          "target": "PenguinatorS3_MapFrame00",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EAA",
+          "target": "PenguinatorS3_MapFrame01",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EB2",
+          "target": "PenguinatorS3_MapFrame02",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EBA",
+          "target": "PenguinatorS3_MapFrame03",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EC8",
+          "target": "PenguinatorS3_MapFrame04",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361ED6",
+          "target": "PenguinatorS3_MapFrame05",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EE4",
+          "target": "PenguinatorS3_MapFrame06",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361EF2",
+          "target": "PenguinatorS3_MapFrame07",
           "base": "Map_Penguinator_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F00",
+          "target": "PenguinatorS3_MapFrame08",
           "base": "Map_Penguinator_"
         },
         {
@@ -32190,20 +32190,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 164
       },
-      "declarations_sha256": "1d8c05f14ddc3458901a605c91a67bde77a5626b24a3affcdabdd85126b2d500",
+      "declarations_sha256": "9e0b3d05fa1d43d6d43ad19f436be61a12ca3f2672959282108913f20d6323ab",
       "labels": {
         "Map_SnaleBlaster_": 0,
-        "Frame_360416": 22,
-        "Frame_36042A": 42,
-        "Frame_36043E": 62,
-        "Frame_360452": 82,
-        "Frame_360466": 102,
-        "Frame_36047A": 122,
-        "Frame_360482": 130,
-        "Frame_36048A": 138,
-        "Frame_360492": 146,
-        "Frame_36049A": 154,
-        "Frame_3604A2": 162
+        "SnaleBlasterS3_MapFrame00": 22,
+        "SnaleBlasterS3_MapFrame01": 42,
+        "SnaleBlasterS3_MapFrame02": 62,
+        "SnaleBlasterS3_MapFrame03": 82,
+        "SnaleBlasterS3_MapFrame04": 102,
+        "SnaleBlasterS3_MapFrame05": 122,
+        "SnaleBlasterS3_MapFrame06": 130,
+        "SnaleBlasterS3_MapFrame07": 138,
+        "SnaleBlasterS3_MapFrame08": 146,
+        "SnaleBlasterS3_MapFrame09": 154,
+        "SnaleBlasterS3_MapFrame0A": 162
       },
       "external_symbols": [],
       "blocks": [
@@ -32211,77 +32211,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360416",
+          "target": "SnaleBlasterS3_MapFrame00",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36042A",
+          "target": "SnaleBlasterS3_MapFrame01",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36043E",
+          "target": "SnaleBlasterS3_MapFrame02",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360452",
+          "target": "SnaleBlasterS3_MapFrame03",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360466",
+          "target": "SnaleBlasterS3_MapFrame04",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36047A",
+          "target": "SnaleBlasterS3_MapFrame05",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360482",
+          "target": "SnaleBlasterS3_MapFrame06",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36048A",
+          "target": "SnaleBlasterS3_MapFrame07",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360492",
+          "target": "SnaleBlasterS3_MapFrame08",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36049A",
+          "target": "SnaleBlasterS3_MapFrame09",
           "base": "Map_SnaleBlaster_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3604A2",
+          "target": "SnaleBlasterS3_MapFrame0A",
           "base": "Map_SnaleBlaster_"
         },
         {
@@ -58841,13 +58841,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "d7f59082e8858e8b46572bac15e78d111d2d0e9222ce1122abde77910fe8f16d",
+      "declarations_sha256": "f0777b24cf321ab539bb08c571198ba1763cd1475c82decb41037521e788bc6c",
       "labels": {
         "Map_StarPointer_": 0,
-        "Frame_361FB6": 8,
-        "Frame_361FBE": 16,
-        "Frame_361FC6": 24,
-        "Frame_361FCE": 32
+        "StarPointerS3_MapFrame00": 8,
+        "StarPointerS3_MapFrame01": 16,
+        "StarPointerS3_MapFrame02": 24,
+        "StarPointerS3_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -58855,28 +58855,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361FB6",
+          "target": "StarPointerS3_MapFrame00",
           "base": "Map_StarPointer_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361FBE",
+          "target": "StarPointerS3_MapFrame01",
           "base": "Map_StarPointer_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361FC6",
+          "target": "StarPointerS3_MapFrame02",
           "base": "Map_StarPointer_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361FCE",
+          "target": "StarPointerS3_MapFrame03",
           "base": "Map_StarPointer_"
         },
         {
@@ -99620,14 +99620,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 970
       },
-      "declarations_sha256": "42bd72b69184748f22f569068a6d3000276b6c90ce890132ffba664fef26dd14",
+      "declarations_sha256": "39deb11318924e239756b722db02a3c2b67dbc9c780cb3b69d47bdfec1ef6207",
       "labels": {
         "Map_ICZCollapsingBridge_": 0,
-        "Frame_21F2FE": 12,
-        "Frame_21F360": 110,
-        "Frame_21F422": 304,
-        "Frame_21F4A8": 438,
-        "Frame_21F5B2": 704
+        "ICZCollapsingBridgeS3_MapSlot00": 12,
+        "ICZCollapsingBridgeS3_MapSlots01_02": 110,
+        "ICZCollapsingBridgeS3_MapSlot03": 304,
+        "ICZCollapsingBridgeS3_MapSlot04": 438,
+        "ICZCollapsingBridgeS3_MapSlot05": 704
       },
       "external_symbols": [],
       "blocks": [
@@ -99635,42 +99635,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F2FE",
+          "target": "ICZCollapsingBridgeS3_MapSlot00",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F360",
+          "target": "ICZCollapsingBridgeS3_MapSlots01_02",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F360",
+          "target": "ICZCollapsingBridgeS3_MapSlots01_02",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F422",
+          "target": "ICZCollapsingBridgeS3_MapSlot03",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F4A8",
+          "target": "ICZCollapsingBridgeS3_MapSlot04",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21F5B2",
+          "target": "ICZCollapsingBridgeS3_MapSlot05",
           "base": "Map_ICZCollapsingBridge_"
         },
         {
@@ -99709,20 +99709,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 520
       },
-      "declarations_sha256": "bb6309d14ba0ea8257abac04026bd8f22d2b6494ed2f3ecac7c0fbf6eeef65fc",
+      "declarations_sha256": "1dd9475af04ab1f7ff623cfd999e53ad78b0ea90bad5efb2b350880798c3eabd",
       "labels": {
         "Map_ICZCorkFloor_": 0,
-        "Frame_229CF8": 24,
-        "Frame_229D24": 68,
-        "Frame_229D7A": 154,
-        "Frame_229DA0": 192,
-        "Frame_229DEA": 266,
-        "Frame_229E0A": 298,
-        "Frame_229E48": 360,
-        "Frame_229E62": 386,
-        "Frame_229E94": 436,
-        "Frame_229EA8": 456,
-        "Frame_229ECE": 494
+        "ICZCorkFloorS3_MapSlot00": 24,
+        "ICZCorkFloorS3_MapSlot01": 68,
+        "ICZCorkFloorS3_MapSlot02": 154,
+        "ICZCorkFloorS3_MapSlot03": 192,
+        "ICZCorkFloorS3_MapSlot04": 266,
+        "ICZCorkFloorS3_MapSlot05": 298,
+        "ICZCorkFloorS3_MapSlot06": 360,
+        "ICZCorkFloorS3_MapSlot07": 386,
+        "ICZCorkFloorS3_MapSlot08": 436,
+        "ICZCorkFloorS3_MapSlot09": 456,
+        "ICZCorkFloorS3_MapSlots0A_0B": 494
       },
       "external_symbols": [],
       "blocks": [
@@ -99730,84 +99730,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229CF8",
+          "target": "ICZCorkFloorS3_MapSlot00",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229D24",
+          "target": "ICZCorkFloorS3_MapSlot01",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229D7A",
+          "target": "ICZCorkFloorS3_MapSlot02",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229DA0",
+          "target": "ICZCorkFloorS3_MapSlot03",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229DEA",
+          "target": "ICZCorkFloorS3_MapSlot04",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229E0A",
+          "target": "ICZCorkFloorS3_MapSlot05",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229E48",
+          "target": "ICZCorkFloorS3_MapSlot06",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229E62",
+          "target": "ICZCorkFloorS3_MapSlot07",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229E94",
+          "target": "ICZCorkFloorS3_MapSlot08",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229EA8",
+          "target": "ICZCorkFloorS3_MapSlot09",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229ECE",
+          "target": "ICZCorkFloorS3_MapSlots0A_0B",
           "base": "Map_ICZCorkFloor_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229ECE",
+          "target": "ICZCorkFloorS3_MapSlots0A_0B",
           "base": "Map_ICZCorkFloor_"
         },
         {
@@ -100218,13 +100218,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 56
       },
-      "declarations_sha256": "1fe2c9aa093c56fa775593a7f462e8a77fa79a4737766f350206946d3f571d11",
+      "declarations_sha256": "7c09b1ef4e698dc606a6bb7e042a1366d2884f6d24a93e2e40f4f15a0a34ab95",
       "labels": {
         "Map_ICZTensionBridge_": 0,
-        "word_38FD2": 24,
-        "word_38FDA": 32,
-        "word_38FE2": 40,
-        "word_38FEA": 48
+        "ICZTensionBridgeShared_MapSlots00_01_02": 24,
+        "ICZTensionBridgeShared_MapSlots03_04_05": 32,
+        "ICZTensionBridgeShared_MapSlots06_07_08": 40,
+        "ICZTensionBridgeShared_MapSlots09_0A_0B": 48
       },
       "external_symbols": [],
       "blocks": [
@@ -100232,84 +100232,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FD2",
+          "target": "ICZTensionBridgeShared_MapSlots00_01_02",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FD2",
+          "target": "ICZTensionBridgeShared_MapSlots00_01_02",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FD2",
+          "target": "ICZTensionBridgeShared_MapSlots00_01_02",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FDA",
+          "target": "ICZTensionBridgeShared_MapSlots03_04_05",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FDA",
+          "target": "ICZTensionBridgeShared_MapSlots03_04_05",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FDA",
+          "target": "ICZTensionBridgeShared_MapSlots03_04_05",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FE2",
+          "target": "ICZTensionBridgeShared_MapSlots06_07_08",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FE2",
+          "target": "ICZTensionBridgeShared_MapSlots06_07_08",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FE2",
+          "target": "ICZTensionBridgeShared_MapSlots06_07_08",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FEA",
+          "target": "ICZTensionBridgeShared_MapSlots09_0A_0B",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FEA",
+          "target": "ICZTensionBridgeShared_MapSlots09_0A_0B",
           "base": "Map_ICZTensionBridge_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_38FEA",
+          "target": "ICZTensionBridgeShared_MapSlots09_0A_0B",
           "base": "Map_ICZTensionBridge_"
         },
         {
@@ -100555,49 +100555,49 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 580
       },
-      "declarations_sha256": "a586395bff8ed32b2a00d3fc1734b13a6e81b0823deb7e8165b57a17f4eff05d",
+      "declarations_sha256": "3f2af6f3c74ed5d95e4602e6ad92c53cf850ea1fb4d4e6ce5d9062d6b931aebe",
       "labels": {
         "Map_ICZPlatforms_": 0,
-        "Frame_363C94": 80,
-        "Frame_363CAE": 106,
-        "Frame_363CBC": 120,
-        "Frame_363CD6": 146,
-        "Frame_363CE4": 160,
-        "Frame_363CEC": 168,
-        "Frame_363CFA": 182,
-        "Frame_363D08": 196,
-        "Frame_363D22": 222,
-        "Frame_363D2A": 230,
-        "Frame_363D32": 238,
-        "Frame_363D3A": 246,
-        "Frame_363D42": 254,
-        "Frame_363D4A": 262,
-        "Frame_363D52": 270,
-        "Frame_363D5A": 278,
-        "Frame_363D62": 286,
-        "Frame_363D6A": 294,
-        "Frame_363D72": 302,
-        "Frame_363D7A": 310,
-        "Frame_363D82": 318,
-        "Frame_363D8A": 326,
-        "Frame_363D92": 334,
-        "Frame_363D9A": 342,
-        "Frame_363DA2": 350,
-        "Frame_363DAA": 358,
-        "Frame_363DB2": 366,
-        "Frame_363DD2": 398,
-        "Frame_363E10": 460,
-        "Frame_363E18": 468,
-        "Frame_363E20": 476,
-        "Frame_363E2E": 490,
-        "Frame_363E3C": 504,
-        "Frame_363E4A": 518,
-        "Frame_363E58": 532,
-        "Frame_363E66": 546,
-        "Frame_363E6E": 554,
-        "Frame_363E76": 562,
-        "Frame_363E7E": 570,
-        "Frame_363E86": 578
+        "ICZTerrainPlatformsS3_MapSlot00": 80,
+        "ICZTerrainPlatformsS3_MapSlot01": 106,
+        "ICZTerrainPlatformsS3_MapSlot02": 120,
+        "ICZTerrainPlatformsS3_MapSlot03": 146,
+        "ICZTerrainPlatformsS3_MapSlot04": 160,
+        "ICZTerrainPlatformsS3_MapSlot05": 168,
+        "ICZTerrainPlatformsS3_MapSlot06": 182,
+        "ICZTerrainPlatformsS3_MapSlot07": 196,
+        "ICZTerrainPlatformsS3_MapSlot08": 222,
+        "ICZTerrainPlatformsS3_MapSlot09": 230,
+        "ICZTerrainPlatformsS3_MapSlot0A": 238,
+        "ICZTerrainPlatformsS3_MapSlot0B": 246,
+        "ICZTerrainPlatformsS3_MapSlot0C": 254,
+        "ICZTerrainPlatformsS3_MapSlot0D": 262,
+        "ICZTerrainPlatformsS3_MapSlot0E": 270,
+        "ICZTerrainPlatformsS3_MapSlot0F": 278,
+        "ICZTerrainPlatformsS3_MapSlot10": 286,
+        "ICZTerrainPlatformsS3_MapSlot11": 294,
+        "ICZTerrainPlatformsS3_MapSlot12": 302,
+        "ICZTerrainPlatformsS3_MapSlot13": 310,
+        "ICZTerrainPlatformsS3_MapSlot14": 318,
+        "ICZTerrainPlatformsS3_MapSlot15": 326,
+        "ICZTerrainPlatformsS3_MapSlot16": 334,
+        "ICZTerrainPlatformsS3_MapSlot17": 342,
+        "ICZTerrainPlatformsS3_MapSlot18": 350,
+        "ICZTerrainPlatformsS3_MapSlot19": 358,
+        "ICZTerrainPlatformsS3_MapSlot1A": 366,
+        "ICZTerrainPlatformsS3_MapSlot1B": 398,
+        "ICZTerrainPlatformsS3_MapSlot1C": 460,
+        "ICZTerrainPlatformsS3_MapSlot1D": 468,
+        "ICZTerrainPlatformsS3_MapSlot1E": 476,
+        "ICZTerrainPlatformsS3_MapSlot1F": 490,
+        "ICZTerrainPlatformsS3_MapSlot20": 504,
+        "ICZTerrainPlatformsS3_MapSlot21": 518,
+        "ICZTerrainPlatformsS3_MapSlot22": 532,
+        "ICZTerrainPlatformsS3_MapSlot23": 546,
+        "ICZTerrainPlatformsS3_MapSlot24": 554,
+        "ICZTerrainPlatformsS3_MapSlot25": 562,
+        "ICZTerrainPlatformsS3_MapSlot26": 570,
+        "ICZTerrainPlatformsS3_MapSlot27": 578
       },
       "external_symbols": [],
       "blocks": [
@@ -100605,280 +100605,280 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363C94",
+          "target": "ICZTerrainPlatformsS3_MapSlot00",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CAE",
+          "target": "ICZTerrainPlatformsS3_MapSlot01",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CBC",
+          "target": "ICZTerrainPlatformsS3_MapSlot02",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CD6",
+          "target": "ICZTerrainPlatformsS3_MapSlot03",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CE4",
+          "target": "ICZTerrainPlatformsS3_MapSlot04",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CEC",
+          "target": "ICZTerrainPlatformsS3_MapSlot05",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363CFA",
+          "target": "ICZTerrainPlatformsS3_MapSlot06",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D08",
+          "target": "ICZTerrainPlatformsS3_MapSlot07",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D22",
+          "target": "ICZTerrainPlatformsS3_MapSlot08",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D2A",
+          "target": "ICZTerrainPlatformsS3_MapSlot09",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D32",
+          "target": "ICZTerrainPlatformsS3_MapSlot0A",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D3A",
+          "target": "ICZTerrainPlatformsS3_MapSlot0B",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D42",
+          "target": "ICZTerrainPlatformsS3_MapSlot0C",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D4A",
+          "target": "ICZTerrainPlatformsS3_MapSlot0D",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D52",
+          "target": "ICZTerrainPlatformsS3_MapSlot0E",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D5A",
+          "target": "ICZTerrainPlatformsS3_MapSlot0F",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D62",
+          "target": "ICZTerrainPlatformsS3_MapSlot10",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D6A",
+          "target": "ICZTerrainPlatformsS3_MapSlot11",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D72",
+          "target": "ICZTerrainPlatformsS3_MapSlot12",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D7A",
+          "target": "ICZTerrainPlatformsS3_MapSlot13",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D82",
+          "target": "ICZTerrainPlatformsS3_MapSlot14",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D8A",
+          "target": "ICZTerrainPlatformsS3_MapSlot15",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D92",
+          "target": "ICZTerrainPlatformsS3_MapSlot16",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363D9A",
+          "target": "ICZTerrainPlatformsS3_MapSlot17",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363DA2",
+          "target": "ICZTerrainPlatformsS3_MapSlot18",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363DAA",
+          "target": "ICZTerrainPlatformsS3_MapSlot19",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363DB2",
+          "target": "ICZTerrainPlatformsS3_MapSlot1A",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363DD2",
+          "target": "ICZTerrainPlatformsS3_MapSlot1B",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E10",
+          "target": "ICZTerrainPlatformsS3_MapSlot1C",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E18",
+          "target": "ICZTerrainPlatformsS3_MapSlot1D",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E20",
+          "target": "ICZTerrainPlatformsS3_MapSlot1E",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E2E",
+          "target": "ICZTerrainPlatformsS3_MapSlot1F",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E3C",
+          "target": "ICZTerrainPlatformsS3_MapSlot20",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E4A",
+          "target": "ICZTerrainPlatformsS3_MapSlot21",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E58",
+          "target": "ICZTerrainPlatformsS3_MapSlot22",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E66",
+          "target": "ICZTerrainPlatformsS3_MapSlot23",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E6E",
+          "target": "ICZTerrainPlatformsS3_MapSlot24",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E76",
+          "target": "ICZTerrainPlatformsS3_MapSlot25",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E7E",
+          "target": "ICZTerrainPlatformsS3_MapSlot26",
           "base": "Map_ICZPlatforms_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363E86",
+          "target": "ICZTerrainPlatformsS3_MapSlot27",
           "base": "Map_ICZPlatforms_"
         },
         {
@@ -101092,15 +101092,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 60
       },
-      "declarations_sha256": "313e35a8f12d1133ba8f9d49e3f2cc08afebd269fd0bf16f11136a6608e59dbb",
+      "declarations_sha256": "0261a9af04fd9d4bdd4048a33649b0281930a6e0fac29d6e072e488c25fe835a",
       "labels": {
         "Map_ICZSnowdust_": 0,
-        "Frame_361F1A": 12,
-        "Frame_361F22": 20,
-        "Frame_361F2A": 28,
-        "Frame_361F32": 36,
-        "Frame_361F3A": 44,
-        "Frame_361F42": 52
+        "ICZSnowdustS3_MapFrame00": 12,
+        "ICZSnowdustS3_MapFrame01": 20,
+        "ICZSnowdustS3_MapFrame02": 28,
+        "ICZSnowdustS3_MapFrame03": 36,
+        "ICZSnowdustS3_MapFrame04": 44,
+        "ICZSnowdustS3_MapFrame05": 52
       },
       "external_symbols": [],
       "blocks": [
@@ -101108,42 +101108,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F1A",
+          "target": "ICZSnowdustS3_MapFrame00",
           "base": "Map_ICZSnowdust_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F22",
+          "target": "ICZSnowdustS3_MapFrame01",
           "base": "Map_ICZSnowdust_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F2A",
+          "target": "ICZSnowdustS3_MapFrame02",
           "base": "Map_ICZSnowdust_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F32",
+          "target": "ICZSnowdustS3_MapFrame03",
           "base": "Map_ICZSnowdust_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F3A",
+          "target": "ICZSnowdustS3_MapFrame04",
           "base": "Map_ICZSnowdust_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361F42",
+          "target": "ICZSnowdustS3_MapFrame05",
           "base": "Map_ICZSnowdust_"
         },
         {
@@ -101187,23 +101187,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 644
       },
-      "declarations_sha256": "5bbb5eb1146d6cff58149045c28ab4a80e96a1f968c83d16255cf165f1c1f3de",
+      "declarations_sha256": "f992c4d93ea56a15b24c0672143959df98e6a3fa21964c2a69be08a43a26d4e6",
       "labels": {
         "Map_ICZWallAndColumn_": 0,
-        "Frame_3639DC": 28,
-        "Frame_363A3E": 126,
-        "Frame_363AC4": 260,
-        "Frame_363B1A": 346,
-        "Frame_363B28": 360,
-        "Frame_363B30": 368,
-        "Frame_363B38": 376,
-        "Frame_363B6A": 426,
-        "Frame_363B7E": 446,
-        "Frame_363B8C": 460,
-        "Frame_363BAC": 492,
-        "Frame_363BBA": 506,
-        "Frame_363BBC": 508,
-        "Frame_363C12": 594
+        "ICZTerrainWallColumnS3_MapSlot00": 28,
+        "ICZTerrainWallColumnS3_MapSlot01": 126,
+        "ICZTerrainWallColumnS3_MapSlot02": 260,
+        "ICZTerrainWallColumnS3_MapSlot03": 346,
+        "ICZTerrainWallColumnS3_MapSlot04": 360,
+        "ICZTerrainWallColumnS3_MapSlot05": 368,
+        "ICZTerrainWallColumnS3_MapSlot06": 376,
+        "ICZTerrainWallColumnS3_MapSlot07": 426,
+        "ICZTerrainWallColumnS3_MapSlot08": 446,
+        "ICZTerrainWallColumnS3_MapSlot09": 460,
+        "ICZTerrainWallColumnS3_MapSlot0A": 492,
+        "ICZTerrainWallColumnS3_MapSlot0B": 506,
+        "ICZTerrainWallColumnS3_MapSlot0C": 508,
+        "ICZTerrainWallColumnS3_MapSlot0D": 594
       },
       "external_symbols": [],
       "blocks": [
@@ -101211,98 +101211,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3639DC",
+          "target": "ICZTerrainWallColumnS3_MapSlot00",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363A3E",
+          "target": "ICZTerrainWallColumnS3_MapSlot01",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363AC4",
+          "target": "ICZTerrainWallColumnS3_MapSlot02",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B1A",
+          "target": "ICZTerrainWallColumnS3_MapSlot03",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B28",
+          "target": "ICZTerrainWallColumnS3_MapSlot04",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B30",
+          "target": "ICZTerrainWallColumnS3_MapSlot05",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B38",
+          "target": "ICZTerrainWallColumnS3_MapSlot06",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B6A",
+          "target": "ICZTerrainWallColumnS3_MapSlot07",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B7E",
+          "target": "ICZTerrainWallColumnS3_MapSlot08",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363B8C",
+          "target": "ICZTerrainWallColumnS3_MapSlot09",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363BAC",
+          "target": "ICZTerrainWallColumnS3_MapSlot0A",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363BBA",
+          "target": "ICZTerrainWallColumnS3_MapSlot0B",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363BBC",
+          "target": "ICZTerrainWallColumnS3_MapSlot0C",
           "base": "Map_ICZWallAndColumn_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363C12",
+          "target": "ICZTerrainWallColumnS3_MapSlot0D",
           "base": "Map_ICZWallAndColumn_"
         },
         {

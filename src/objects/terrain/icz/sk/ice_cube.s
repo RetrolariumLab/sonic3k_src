@@ -5,13 +5,13 @@
 
 Obj_ICZIceCube:
                 jsr     Obj_WaitOffscreen(pc)
-                move.l  #loc_8B384,(a0)
+                move.l  #SKICZIceCube_ResolveSolidAndTryBreak,(a0)
                 lea     ObjDat_ICZIceCube(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_8B384:
+SKICZIceCube_ResolveSolidAndTryBreak:
                 move.b  (Player_1+anim).w,$3A(a0)
                 move.b  (Player_2+anim).w,$3B(a0)
                 moveq   #$23,d1
@@ -27,19 +27,19 @@ loc_8B384:
 BreakIczIceCubeUnderRollingRider:
                 move.b  status(a0),d0
                 btst    #p1_standing_bit,d0
-                beq.s   loc_8B3C0
+                beq.s   SKICZIceCube_TryBreakForRollingP2
                 lea     (Player_1).w,a1
                 cmpi.b  #2,$3A(a0)
-                beq.s   loc_8B3D2
+                beq.s   SKICZIceCube_BounceRiderAndBreak
 
-loc_8B3C0:
+SKICZIceCube_TryBreakForRollingP2:
                 btst    #p2_standing_bit,d0
-                beq.s   locret_8B430
+                beq.s   SKICZIceCube_BreakReturn
                 lea     (Player_2).w,a1
                 cmpi.b  #2,$3B(a0)
-                bne.s   locret_8B430
+                bne.s   SKICZIceCube_BreakReturn
 
-loc_8B3D2:
+SKICZIceCube_BounceRiderAndBreak:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -49,34 +49,34 @@ loc_8B3D2:
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_8B41A
+                beq.s   SKICZIceCube_SpawnShardsAndDelete
                 lea     (Player_2).w,a1
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
 
-loc_8B41A:
-                lea     ChildObjDat_8B480(pc),a2
+SKICZIceCube_SpawnShardsAndDelete:
+                lea     SKICZIceCube_CubeShardChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 jsr     (Go_Delete_Sprite).l
 
-locret_8B430:
+SKICZIceCube_BreakReturn:
                 rts
 ; End of function BreakIczIceCubeUnderRollingRider
 
 ; ---------------------------------------------------------------------------
 
-loc_8B432:
-                lea     word_8B478(pc),a1
+SKICZIceCube_InitCubeShard:
+                lea     SKICZIceCube_ShardAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
                 move.l  #AnimateRaw_MoveChkDel,(a0)
-                move.l  #byte_8AB34,$30(a0)
+                move.l  #SKICZFreezer_LargeIceShardAnim,$30(a0)
                 cmpi.b  #$C,subtype(a0)
-                blo.s   loc_8B458
-                move.l  #byte_8AB3E,$30(a0)
+                blo.s   SKICZIceCube_SetShardFrameAndSpeed
+                move.l  #SKICZFreezer_MediumIceShardAnim,$30(a0)
 
-loc_8B458:
+SKICZIceCube_SetShardFrameAndSpeed:
                 jsr     (Random_Number).l
                 andi.b  #3,d0
                 move.b  d0,anim_frame(a0)
@@ -88,33 +88,33 @@ ObjDat_ICZIceCube:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,0)
                 dc.w    $80
                 dc.b    $18, $10,   3, $2E
-word_8B478:
+SKICZIceCube_ShardAttrs:
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,1)
                 dc.w    $280
                 dc.b    $20, $20, $12,   0
-ChildObjDat_8B480:
+SKICZIceCube_CubeShardChildren:
                 dc.w    $C-1
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,  -8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    -$10,  -8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    $10,  -8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    -$10,   8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    $10,   8
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0
-                dc.l    loc_8B432
+                dc.l    SKICZIceCube_InitCubeShard
                 dc.b    0,   0

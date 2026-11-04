@@ -374,7 +374,7 @@ S3Snowboard_InitSonicAndTrySnow:
                 move.w  #1,anim(a0)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3Snowboard_StartFollowUntilGrounded
-                move.l  #loc_38EDE,(a1)
+                move.l  #S3ICZBoardIntro_BeginSnowEmitter,(a1)
                 move.w  a0,$30(a1)
 
 S3Snowboard_StartFollowUntilGrounded:

@@ -24709,7 +24709,7 @@
       "responsibility": "Penguinator sliding or attack states, snowdust effect actors and private pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 326,
+      "physical_lines": 327,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24749,7 +24749,7 @@
       "responsibility": "Snale Blaster locomotion and projectile states with private child or object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 347,
+      "physical_lines": 350,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24789,7 +24789,7 @@
       "responsibility": "Star Pointer enemy and child motion with private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 156,
+      "physical_lines": 157,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24834,7 +24834,7 @@
       "responsibility": "Penguinator sliding or attack states, snowdust effect actors and private pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 326,
+      "physical_lines": 327,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24864,7 +24864,7 @@
       "responsibility": "Snale Blaster locomotion and projectile states with private child or object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 347,
+      "physical_lines": 350,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24894,7 +24894,7 @@
       "responsibility": "Star Pointer enemy and child motion with private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 156,
+      "physical_lines": 157,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55110,7 +55110,7 @@
       "responsibility": "IceCap crushing column states and private object or child descriptors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 221,
+      "physical_lines": 222,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55155,7 +55155,7 @@
       "responsibility": "IceCap freezer trap, player freeze and release states, fragments and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 523,
+      "physical_lines": 527,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55340,7 +55340,7 @@
       "responsibility": "IceCap path-following platform variants and their shared path controller.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 339,
+      "physical_lines": 341,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55380,7 +55380,7 @@
       "responsibility": "IceCap segmented column movement, collision and private child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 166,
+      "physical_lines": 168,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55425,7 +55425,7 @@
       "responsibility": "IceCap snow-pile controller, thrown snow, child helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 343,
+      "physical_lines": 345,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55465,7 +55465,7 @@
       "responsibility": "IceCap falling stalactite state, trigger helper and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 109,
+      "physical_lines": 110,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55510,7 +55510,7 @@
       "responsibility": "IceCap swinging platform states, linked children, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 550,
+      "physical_lines": 553,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55550,7 +55550,7 @@
       "responsibility": "IceCap tension platform mechanics, collision helpers and private child construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 281,
+      "physical_lines": 282,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55630,7 +55630,7 @@
       "responsibility": "IceCap crushing column states and private object or child descriptors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 232,
+      "physical_lines": 233,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55665,7 +55665,7 @@
       "responsibility": "IceCap freezer trap, player freeze and release states, fragments and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 538,
+      "physical_lines": 543,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55810,7 +55810,7 @@
       "responsibility": "IceCap path-following platform variants and their shared path controller.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 344,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55840,7 +55840,7 @@
       "responsibility": "IceCap segmented column movement, collision and private child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 182,
+      "physical_lines": 184,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55875,7 +55875,7 @@
       "responsibility": "IceCap snow-pile controller, thrown snow, child helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 343,
+      "physical_lines": 345,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55905,7 +55905,7 @@
       "responsibility": "IceCap falling stalactite state, trigger helper and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 109,
+      "physical_lines": 110,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55940,7 +55940,7 @@
       "responsibility": "IceCap swinging platform states, linked children, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 550,
+      "physical_lines": 553,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55970,7 +55970,7 @@
       "responsibility": "IceCap tension platform mechanics, collision helpers and private child construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 281,
+      "physical_lines": 282,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -61271,7 +61271,7 @@
       "responsibility": "IceCap opening scene control, snowboard dust objects and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 226,
+      "physical_lines": 228,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -61361,7 +61361,7 @@
       "responsibility": "IceCap opening scene control, snowboard dust objects and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 226,
+      "physical_lines": 228,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -69971,7 +69971,7 @@
       "responsibility": "IceCap animated tiles, transfer timing and frame selection.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 117,
+      "physical_lines": 118,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -70016,7 +70016,7 @@
       "responsibility": "IceCap animated tiles, transfer timing and frame selection.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 117,
+      "physical_lines": 118,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",

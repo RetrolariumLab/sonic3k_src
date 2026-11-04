@@ -5,11 +5,11 @@
 
 ICZ1_ScreenInit:
                 tst.b   (Last_star_post_hit).w
-                bne.s   loc_53648                       ; If not restarting from a lamppost
+                bne.s   SKICZ1Events_SetVerticalLoopMasks  ; If not restarting from a lamppost
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_53648                       ; And we're Knuckles
+                bne.s   SKICZ1Events_SetVerticalLoopMasks  ; And we're Knuckles
                 jsr     (AllocateObject).l
-                bne.s   loc_53648
+                bne.s   SKICZ1Events_SetVerticalLoopMasks
                 move.l  #Obj_ICZTeleporter,(a1)         ; Make teleporter object, etc
                 move.w  #$3640,(Player_1+x_pos).w
                 move.w  #$660,(Player_1+y_pos).w
@@ -20,7 +20,7 @@ ICZ1_ScreenInit:
                 move.w  d0,(Camera_Y_pos_copy).w
                 move.w  d0,(Camera_Y_pos).w
 
-loc_53648:
+SKICZ1Events_SetVerticalLoopMasks:
                 move.w  #$7FF,(Screen_Y_wrap_value).w
                 move.w  #$7F0,(Camera_Y_pos_mask).w
                 move.w  #$3C,(Layout_row_index_mask).w  ; We're in a looping level!
@@ -49,13 +49,13 @@ ICZ1_ScreenEvent_Index:
 
 ICZ1SE_Init:
                 tst.w   (Screen_shake_flag).w
-                beq.s   loc_53696
+                beq.s   SKICZ1Events_ApplyIntroShakeX
                 tst.b   (Ctrl_1_locked).w               ; If shaking due to hitting the wall, remove player control temporarily
-                bne.s   loc_53696
+                bne.s   SKICZ1Events_ApplyIntroShakeX
                 st      (Ctrl_1_locked).w
                 clr.w   (Ctrl_1_logical).w
 
-loc_53696:
+SKICZ1Events_ApplyIntroShakeX:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_X_pos_copy).w
                 bra.s   ICZ1SE_Normal
@@ -73,19 +73,19 @@ ICZ1_BackgroundInit:
                 lea     (a3),a1
                 moveq   #8-1,d0
 
-loc_536B0:
+SKICZ1Events_MirrorRowsAndInitWrap:
                 move.w  (a1),$20(a1)                    ; Upper $400 of BG is mirrored in lower $400
                 addq.w  #4,a1
-                dbf     d0,loc_536B0
+                dbf     d0,SKICZ1Events_MirrorRowsAndInitWrap
                 move.w  (Camera_Y_pos_copy).w,(Events_fg_0).w
                 move.w  (Camera_Y_pos_copy).w,(Events_fg_1).w  ; Camera BG Y is noted in two variables
                 cmpi.w  #$3940,(Camera_X_pos).w
-                bhs.s   loc_53704
+                bhs.s   SKICZ1Events_InitIndoorBackground
                 cmpi.w  #$3580,(Camera_X_pos).w
-                blo.s   loc_536DC
+                blo.s   SKICZ1Events_InitIntroBackground
                 addi.w  #$2800,(Events_fg_1).w          ; If past $3580 X, adjust BG camera
 
-loc_536DC:
+SKICZ1Events_InitIntroBackground:
                 clr.w   (Events_bg+$16).w               ; No VScrolling when outside
                 jsr     (ICZ1_SetIntroPal).l
                 jsr     ICZ1_IntroDeform(pc)
@@ -97,7 +97,7 @@ loc_536DC:
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53704:
+SKICZ1Events_InitIndoorBackground:
                 move.w  #$10,(Events_routine_bg).w      ; If past $3940 X, we're indoors already
                 st      (Events_bg+$16).w               ; Go indoors
                 jsr     (ICZ1_SetIndoorPal).l
@@ -128,29 +128,29 @@ ICZ1_BackgroundEvent_Index:
 
 ICZ1BGE_Intro:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_53780
+                beq.s   SKICZ1Events_DrawIntroAndShake
                 clr.w   (Events_fg_5).w                 ; If flag is set
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_5375C
+                bne.s   SKICZ1Events_TrySpawnBigSnowPile
                 addq.w  #4,(Events_routine_bg).w        ; Just go to next BG event if playing as Knuckles
-                bra.s   loc_53780
+                bra.s   SKICZ1Events_DrawIntroAndShake
 ; ---------------------------------------------------------------------------
 
-loc_5375C:
+SKICZ1Events_TrySpawnBigSnowPile:
                 jsr     (AllocateObject).l
-                bne.s   loc_5376A
+                bne.s   SKICZ1Events_InitSnowBackground
                 move.l  #Obj_ICZ1BigSnowPile,(a1)
 
-loc_5376A:
+SKICZ1Events_InitSnowBackground:
                 clr.l   (Events_bg+$00).w
                 clr.l   (Events_bg+$04).w               ; Clear offsets
                 jsr     ICZ1_BigSnowFall(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_537BA
+                bra.s   SKICZ1Events_DrawSnowAndShake
 ; ---------------------------------------------------------------------------
 
-loc_53780:
+SKICZ1Events_DrawIntroAndShake:
                 jsr     ICZ1_IntroDeform(pc)            ; Deformation is pretty standard during the intro portion
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -165,18 +165,18 @@ loc_53780:
 
 ICZ1BGE_SnowFall:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_537C6
+                bne.s   SKICZ1Events_BeginSnowRefresh
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_53780                       ; If Knuckles, skip
+                beq.s   SKICZ1Events_DrawIntroAndShake  ; If Knuckles, skip
                 jsr     ICZ1_BigSnowFall(pc)
 
-loc_537BA:
+SKICZ1Events_DrawSnowAndShake:
                 jsr     DrawBGAsYouMove(pc)
                 jsr     PlainDeformation(pc)
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
-loc_537C6:
+SKICZ1Events_BeginSnowRefresh:
                 clr.w   (Events_fg_5).w
                 move.w  #$2E0,(Draw_delayed_position).w  ; Set BG refresh position
                 move.w  #$F,(Draw_delayed_rowcount).w
@@ -194,26 +194,26 @@ ICZ1BGE_Refresh:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5380E
+                bra.s   SKICZ1Events_FinishRefreshAndGoIndoors
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Refresh2:
                 jsr     ICZ1_Deform(pc)
 
-loc_5380E:
+SKICZ1Events_FinishRefreshAndGoIndoors:
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_5387E
+                bpl.s   SKICZ1Events_DrawPlainBackground
                 st      (Events_bg+$16).w               ; Go indoors
                 jsr     (ICZ1_SetIndoorPal).l           ; Set indoor palette
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_5387E
+                bra.s   SKICZ1Events_DrawPlainBackground
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Normal:
                 cmpi.w  #$6900,(Camera_X_pos).w
-                blo.s   loc_5387A
+                blo.s   SKICZ1Events_DeformIndoorBackground
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (ICZ2_128x128_Secondary_Kos).l,a1
                 lea     (RAM_start+$A00).l,a2
@@ -229,17 +229,17 @@ ICZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5387A:
+SKICZ1Events_DeformIndoorBackground:
                 jsr     ICZ1_Deform(pc)
 
-loc_5387E:
+SKICZ1Events_DrawPlainBackground:
                 jsr     DrawBGAsYouMove(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Transition:
                 tst.w   (Kos_decomp_queue_count).w
-                bne.w   loc_53938
+                bne.w   SKICZ1Events_DeformActTransition
                 move.w  #$501,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -278,7 +278,7 @@ ICZ1BGE_Transition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.w   (Events_routine_bg).w
 
-loc_53938:
+SKICZ1Events_DeformActTransition:
                 jsr     ICZ1_Deform(pc)
                 jmp     PlainDeformation(pc)
 
@@ -333,7 +333,7 @@ WriteIcz1IntroAcceleratingScrollBands:
 
 ICZ1_BigSnowFall:
                 cmpi.w  #-$12E,(Events_bg+$00).w
-                ble.s   loc_539DE
+                ble.s   SKICZ1Events_TrySwitchToTimedShake
                 st      (Screen_shake_flag).w
                 addi.l  #$2400,(Events_bg+$04).w
                 move.l  (Events_bg+$04).w,d0
@@ -341,19 +341,19 @@ ICZ1_BigSnowFall:
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_539F0
+                bne.s   SKICZ1Events_PositionSnowBackground
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_539F0
+                bra.s   SKICZ1Events_PositionSnowBackground
 ; ---------------------------------------------------------------------------
 
-loc_539DE:
+SKICZ1Events_TrySwitchToTimedShake:
                 tst.w   (Screen_shake_flag).w
-                bpl.s   loc_539F0
+                bpl.s   SKICZ1Events_PositionSnowBackground
                 move.w  #4,(Screen_shake_flag).w
                 move.w  #-$12E,(Events_bg+$00).w
 
-loc_539F0:
+SKICZ1Events_PositionSnowBackground:
                 move.w  (Camera_Y_pos_copy).w,d0        ; Use portion of background to show snow object
                 subi.w  #$460,d0
                 add.w   (Events_bg+$00).w,d0
@@ -384,18 +384,18 @@ ICZ1_Deform:
 ; ---------------------------------------------------------------------------
 
 Obj_ICZ1BigSnowPile:
-                move.l  #loc_53A4C,(a0)
+                move.l  #SKICZ1Events_CheckSnowPileLifetime,(a0)
                 move.b  #$80,height_pixels(a0)
                 move.w  #$3880,x_pos(a0)
                 bset    #7,status(a0)
 
-loc_53A4C:
+SKICZ1Events_CheckSnowPileLifetime:
                 cmpi.w  #8,(Events_routine_bg).w
-                blo.s   loc_53A5A
+                blo.s   SKICZ1Events_PlaceSnowAndTryJump
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_53A5A:
+SKICZ1Events_PlaceSnowAndTryJump:
                 move.w  #$5E0,d0
                 sub.w   (Events_bg+$00).w,d0            ; Shift Y position based on offset
                 move.w  d0,y_pos(a0)
@@ -404,15 +404,15 @@ loc_53A5A:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTopSloped2).l
                 cmpi.w  #$70E,y_pos(a0)
-                bne.s   locret_53AD2
+                bne.s   SKICZ1Events_SnowPileReturn
                 tst.b   (Ctrl_1_locked).w
-                beq.s   locret_53AD2
+                beq.s   SKICZ1Events_SnowPileReturn
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)        ; Wait till player is standing on ground
-                bne.s   locret_53AD2
+                bne.s   SKICZ1Events_SnowPileReturn
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0  ; Wait until a jump button is pressed
-                beq.s   locret_53AD2
+                beq.s   SKICZ1Events_SnowPileReturn
                 clr.b   (Ctrl_1_locked).w               ; When done, unlock player
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -424,16 +424,16 @@ loc_53A5A:
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l                    ; Perform jumping on player object manually
 
-locret_53AD2:
+SKICZ1Events_SnowPileReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_ICZTeleporter:
                 jsr     (AllocateObjectAfterCurrent).l
-                beq.s   loc_53ADE
+                beq.s   SKICZ1Events_InitTeleporterAndBeam
                 rts
 
-loc_53ADE:
+SKICZ1Events_InitTeleporterAndBeam:
                 move.l  #Obj_ICZTeleporterMain,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
@@ -477,28 +477,28 @@ Obj_ICZTeleporterMain:
                 add.w   $3E(a0),d0
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
-                bmi.s   loc_53BFE
+                bmi.s   SKICZ1Events_DrawTeleporter
                 clr.b   object_control(a1)              ; Return player control to Knuckles
                 clr.b   anim(a1)
                 move.l  #Obj_ICZTeleporterCheckDel,(a0)
 
 Obj_ICZTeleporterCheckDel:
                 cmpi.w  #$3780,(Camera_X_pos_copy).w
-                blo.s   loc_53BEE
+                blo.s   SKICZ1Events_ResolveTeleporterSolid
                 lea     (Normal_palette_line_2+$10).w,a1  ; When player moves far enough to the right, restore palette and delete object
                 move.w  #$2C,(a1)
                 clr.w   4(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_53BEE:
+SKICZ1Events_ResolveTeleporterSolid:
                 moveq   #$23,d1                         ; Act as a solid object otherwise
                 moveq   #$10,d2
                 moveq   #1,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
 
-loc_53BFE:
+SKICZ1Events_DrawTeleporter:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
                 dc.b    $61, $61

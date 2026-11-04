@@ -7,73 +7,73 @@ Obj_ICZStalagtite:
                 jsr     Obj_WaitOffscreen(pc)
                 lea     ObjDat_ICZStalagtite(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_58966,(a0)
+                move.l  #S3ICZStalactite_ResolveSolidAndTryShake,(a0)
                 move.b  #$10,y_radius(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58966:
+S3ICZStalactite_ResolveSolidAndTryShake:
                 bsr.w   CollideIczStalactiteAsSolidRectangle
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$70,d2
-                bhs.s   loc_58988
-                move.l  #loc_5898C,(a0)
+                bhs.s   S3ICZStalactite_DrawIntact
+                move.l  #S3ICZStalactite_ChooseShakeOffset,(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_589A4,$34(a0)
+                move.l  #S3ICZStalactite_BeginHarmfulFall,$34(a0)
 
-loc_58988:
+S3ICZStalactite_DrawIntact:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5898C:
+S3ICZStalactite_ChooseShakeOffset:
                 moveq   #2,d0
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_58998
+                beq.s   S3ICZStalactite_ShakeAndTickRelease
                 neg.w   d0
 
-loc_58998:
+S3ICZStalactite_ShakeAndTickRelease:
                 add.w   d0,x_pos(a0)
                 jsr     Obj_Wait(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_589A4:
-                move.l  #loc_589B2,(a0)
+S3ICZStalactite_BeginHarmfulFall:
+                move.l  #S3ICZStalactite_FallAndCheckImpact,(a0)
                 move.b  #$82,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_589B2:
+S3ICZStalactite_FallAndCheckImpact:
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   loc_589DC
-                move.l  #loc_589E0,(a0)
+                bpl.s   S3ICZStalactite_DrawFalling
+                move.l  #S3ICZStalactite_UpdateSettledSolid,(a0)
                 clr.b   collision_flags(a0)
-                lea     ChildObjDat_58A4A(pc),a2
+                lea     S3ICZStalactite_IceShardChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 moveq   #signextendB(sfx_FloorThump),d0
                 jsr     (Play_SFX).l
 
-loc_589DC:
+S3ICZStalactite_DrawFalling:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_589E0:
+S3ICZStalactite_UpdateSettledSolid:
                 bsr.w   CollideIczStalactiteAsSolidRectangle
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_589E8:
-                lea     ObjDat3_58A3E(pc),a1
+S3ICZStalactite_InitIceShard:
+                lea     S3ICZStalactite_IceShardAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AnimateRaw_MoveChkDel,(a0)
-                move.l  #byte_5831C,$30(a0)
+                move.l  #S3ICZFreezer_SmallIceShardAnim,$30(a0)
                 cmpi.b  #6,subtype(a0)
-                bhs.s   loc_58A0E
-                move.l  #byte_58314,$30(a0)
+                bhs.s   S3ICZStalactite_SetShardFrameAndSpeed
+                move.l  #S3ICZFreezer_MediumIceShardAnim,$30(a0)
 
-loc_58A0E:
+S3ICZStalactite_SetShardFrameAndSpeed:
                 jsr     (Random_Number).l
                 andi.b  #3,d0
                 move.b  d0,anim_frame(a0)
@@ -96,14 +96,15 @@ ObjDat_ICZStalagtite:
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $280
                 dc.b    $10, $20,   7,   0
-ObjDat3_58A3E:
+S3ICZStalactite_IceShardAttrs:
                 dc.l    Map_ICZPlatforms
                 dc.w    make_art_tile(ArtTile_ICZMisc1,2,1)
                 dc.w    $280
                 dc.b    4,   4,  $F,   0
-ChildObjDat_58A4A:
+; The simple child spawner reads the count and handler. The stored tail is unused
+S3ICZStalactite_IceShardChildren:
                 dc.w    $C-1
-                dc.l    loc_589E8
+                dc.l    S3ICZStalactite_InitIceShard
                 dc.b    0, $27
                 dc.b    $F, $27, $10, $27, $11, $FC
                 even

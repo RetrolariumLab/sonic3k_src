@@ -1,7 +1,7 @@
 ; Owner: rendering/zones/icz/s3
 ; Responsibility: IceCap animated tiles, transfer timing and frame selection
 ; Source provenance and ranges: config/reconstruction/source_layout.json
-word_26FF6:
+S3ICZTiles_HorizontalDmaWordCounts:
                 dc.w    $100
                 dc.w    0
                 dc.w    $C0
@@ -19,7 +19,7 @@ AnimateTiles_ICZ:
                 sub.w   (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$1F,d0
                 cmp.b   1(a3),d0
-                beq.s   loc_2706C
+                beq.s   S3ICZTiles_TryUpdateVerticalBands
                 move.b  d0,1(a3)
                 move.l  d0,d1
                 move.w  d0,d2
@@ -31,7 +31,7 @@ AnimateTiles_ICZ:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26FF6(pc,d0.w),a4
+                lea     S3ICZTiles_HorizontalDmaWordCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniICZ__1).l,a0
                 move.w  #tiles_to_bytes($10E),d4
                 add.l   a0,d1
@@ -44,22 +44,23 @@ AnimateTiles_ICZ:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_2706C
+                beq.s   S3ICZTiles_TryUpdateVerticalBands
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
 
-loc_2706C:
+; In act 1, a change in the first vertical phase triggers DMA for all four bands
+S3ICZTiles_TryUpdateVerticalBands:
                 addq.w  #2,a3
                 tst.b   (Current_act).w
-                bne.w   loc_27132
+                bne.w   S3ICZTiles_RunScriptedTileAnims
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 sub.w   (Events_bg+$12).w,d1
                 neg.w   d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.w   loc_27132
+                beq.w   S3ICZTiles_RunScriptedTileAnims
                 move.b  d1,1(a3)
                 add.w   d1,d1
                 add.w   d1,d1
@@ -109,7 +110,7 @@ loc_2706C:
                 move.w  #$10,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_27132:
+S3ICZTiles_RunScriptedTileAnims:
                 addq.w  #2,a3
                 bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------

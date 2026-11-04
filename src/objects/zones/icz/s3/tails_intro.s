@@ -20,28 +20,28 @@ Obj_LevelIntroICZ1Tails:
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_1).w
                 move.b  #30,anim_frame_timer(a0)
-                move.l  #loc_391C2,(a0)
+                move.l  #S3ICZTailsIntro_HoldInputsDuringIntro,(a0)
 
-loc_391C2:
+S3ICZTailsIntro_HoldInputsDuringIntro:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_391DC
+                beq.s   S3ICZTailsIntro_ReleaseObjectControl
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_391DC:
+S3ICZTailsIntro_ReleaseObjectControl:
                 lea     (Player_1).w,a2
                 move.b  #0,object_control(a2)
-                move.l  #loc_391EC,(a0)
+                move.l  #S3ICZTailsIntro_WaitForCrashPosition,(a0)
 
-loc_391EC:
+S3ICZTailsIntro_WaitForCrashPosition:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 lea     (Player_1).w,a2
                 cmpi.w  #$38F0,x_pos(a2)
-                blo.s   locret_3923C
+                blo.s   S3ICZTailsIntro_CrashWaitReturn
                 bset    #Status_InAir,status(a2)
                 move.w  #-$200,x_vel(a2)
                 move.w  #-$400,y_vel(a2)
@@ -54,5 +54,5 @@ loc_391EC:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_3923C:
+S3ICZTailsIntro_CrashWaitReturn:
                 rts

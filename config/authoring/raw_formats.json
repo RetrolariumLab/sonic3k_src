@@ -285,19 +285,19 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "sha256": "cc44d80778e0c2144ed1e56dc450f90e4c2700e3fca098b56f7179da3949875f"
+      "sha256": "af96c181d6794a5bd84c15c49dc9ce00709e78ba8dfc0dadef843099516d1fd6"
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
-      "sha256": "b9146629f43494779e38fcbd63d7e9b2e0422b64438bb1faa08ec5c39a4a32c6"
+      "sha256": "ee8435c864eb41b44ac43e8aa6538d0b3c766e6b9afd0bd876bb5ffd9e0b2b50"
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "sha256": "e4faf3d0db830f477ec98e17873bb15d8c1abb9b65bd6796a116792f1df76205"
+      "sha256": "16c6256d934396dd01a925aba391e5606d06e19baa73f70e5b597d8e1bf7defb"
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
-      "sha256": "dafc3bdaf97c17e5df359b8a674572db069448616d744c793c2f750698f4461c"
+      "sha256": "7c01d5e88287336d8c312e34947bc7c032ab77e5026f2f41ddec98e3a7f19f81"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
@@ -777,27 +777,27 @@
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
-      "sha256": "6b37e459d9fce0ae9f15285d41fff163c323cf29d0b7129d183d311e55d3f44c"
+      "sha256": "7723679317e47382752a6ee78dfaa2295e7518a50dbb1d0972a9c024e21403c3"
     },
     {
       "path": "src/objects/enemies/icz/s3/snale_blaster.s",
-      "sha256": "3289c295774a3ac8e7054f93946cd7992fc952e4dc0ddc1618dfe303bd793630"
+      "sha256": "de401630f4fb1bff1a58ca739dbb02143507b5d8dbc6469f658162e778b84749"
     },
     {
       "path": "src/objects/enemies/icz/s3/star_pointer.s",
-      "sha256": "855e078567880b3d79186b78a3fa1396b6509229610f791c38a33027e2c017c3"
+      "sha256": "6a620e8e85abb8a9cbd746f1f90cc9fc910a936f4dc360524119ad7b5099bc9b"
     },
     {
       "path": "src/objects/enemies/icz/sk/penguinator.s",
-      "sha256": "f033a47084287428c1103780b2ac4b725f8457c7bfbad9eb7e55618c5ff918f9"
+      "sha256": "26c8c761e3db60118b250c6e00f0261c2d1c06449531fb027e1d88b133b9e2da"
     },
     {
       "path": "src/objects/enemies/icz/sk/snale_blaster.s",
-      "sha256": "ec13ef97e8f453d3db393e64c0799c738bee4d321c562d9daa5b9dadb7de902d"
+      "sha256": "c87d15d4299c139aef4f81afd63634089b71a5f1a4bd4f8d95c8b1898d5f6a66"
     },
     {
       "path": "src/objects/enemies/icz/sk/star_pointer.s",
-      "sha256": "ecace3fc17cfb55f19b8dc9146c430131f6fd7f373cb0069bda3bb551b5be36b"
+      "sha256": "5e9e84313d41584b270dcad66aa82ac3edab03642c93e01955ae4cea9f8bfc44"
     },
     {
       "path": "src/objects/enemies/lbz/s3/corkey.s",
@@ -1109,51 +1109,51 @@
     },
     {
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
-      "sha256": "d5ee70b5a41a092fafc87eb949114095dffb59c67865e5e3042a67fa6e8f93d3"
+      "sha256": "39e8e6795270599e7d6912217790b3561593d88e21b408515b2f795fc59983de"
     },
     {
       "path": "src/objects/terrain/icz/s3/freezer.s",
-      "sha256": "2a2329bed65e036e1b825b472959b0c59bddcb54ba49a4d670c27143a406d498"
+      "sha256": "835066e01376ca3eff779d7d4a8638f14e7f1344781a6f3a2e7fc4dc3d63f183"
     },
     {
       "path": "src/objects/terrain/icz/s3/ice_cube.s",
-      "sha256": "86c908cc3411e6e62db513277147b8d47f48b0fac7ff9fdff6a385e836670c3d"
+      "sha256": "f3aa212dc2e28279f3379d03e0f66745bf473d2f196fc795e6bb75dcb88eac23"
     },
     {
       "path": "src/objects/terrain/icz/s3/path_platform.s",
-      "sha256": "f0b324146bc6e529e858126eeebe03ed4b1308053162cf689475084b1af0089b"
+      "sha256": "afabb5da2455cc56c1587e8766ca8cae06e98c160bce45b0b9337f094507179c"
     },
     {
       "path": "src/objects/terrain/icz/s3/snow_pile.s",
-      "sha256": "df136bd253604c3e265ae1862932cb9fc082ee220e3f937547b18a842b8d0fac"
+      "sha256": "43deefd6c9214d6c033678f14717db34154efd1152e7be8f6e1af997672d122f"
     },
     {
       "path": "src/objects/terrain/icz/s3/stalactite.s",
-      "sha256": "f00728fb6215868e4ebdf710015e93dec1f3ea2fedbc1ee09a90925367c4c48e"
+      "sha256": "897668bb0f9177f0bd77d6b3584f122a6f485a303852fb8dbe02430ddc9db6b7"
     },
     {
       "path": "src/objects/terrain/icz/sk/breakable_ice.s",
-      "sha256": "90daf8b11f550ffb6b5d45575db73f2f7feb71e4e7a6e657a413896d74e830f9"
+      "sha256": "d0de26c85e801de01ce27adb295cfafef5b5613a154d6c938b7325dbb0633b62"
     },
     {
       "path": "src/objects/terrain/icz/sk/freezer.s",
-      "sha256": "8ca974867694e2baf309cadb072df0bcaf2487a30268968f7e640cc00b40b295"
+      "sha256": "242e634356e1589cc826a4d81643232c4e901bd83fe13247e0c3e60103bc3947"
     },
     {
       "path": "src/objects/terrain/icz/sk/ice_cube.s",
-      "sha256": "146868aeac051face44d57a2d4cc86968d590dc8405fc8634adfdca6c4b93714"
+      "sha256": "e2905a54b3e03b515cd0bc429365fd63281f6240b3be8fab36f54471dc403e35"
     },
     {
       "path": "src/objects/terrain/icz/sk/path_platform.s",
-      "sha256": "9bb257cafcdf11b4612eb88098881d4ec3d75243bef4f8412db8b89fc989669c"
+      "sha256": "4fb067daf8e218389eec48004fb0f66afcc7be3b7799c5abe3a1199c8b5c8bae"
     },
     {
       "path": "src/objects/terrain/icz/sk/snow_pile.s",
-      "sha256": "c9ad2e531ba77ed5f4c6dd986a9832d866bdbc36bb2c8df1ede1d1958a70ee6c"
+      "sha256": "eb27b994c12abd32601f3c125bcc1ea763eb879818cf0f952d88aee84cb1a6e3"
     },
     {
       "path": "src/objects/terrain/icz/sk/stalactite.s",
-      "sha256": "3807906c9dcbe5b877f61fb82f0f7ec1a2b61956570df7739e3518788e2312a2"
+      "sha256": "f24f11f095a7708f24d94f8be5ebe1d80e6b77d2345cf76d49af8ba308d891a9"
     },
     {
       "path": "src/objects/zones/aiz/s3/hollow_tree.s",
@@ -4107,27 +4107,27 @@
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
-      "symbol": "RawAni_5954A",
-      "scope": "RawAni_5954A",
-      "first_line": 278,
-      "last_line": 280,
+      "symbol": "S3Penguinator_SlopeSlideFrames",
+      "scope": "S3Penguinator_SlopeSlideFrames",
+      "first_line": 279,
+      "last_line": 281,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "5ee8d7efd89de3b7a4dab8dc2a7ec575a8cf35e0e49d8e782cd5d979615fbd9f",
+      "declarations_sha256": "c583959b0ffb3b006d8188ee6d2063e3c7b048c5173d4aab9a6e6864f6edcf33",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_5954A"],
+      "members": ["S3Penguinator_SlopeSlideFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
-      "symbol": "byte_595A2",
-      "scope": "byte_595A2",
-      "first_line": 315,
-      "last_line": 326,
+      "symbol": "S3Penguinator_AccelerationAnim",
+      "scope": "S3Penguinator_AccelerationAnim",
+      "first_line": 316,
+      "last_line": 327,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 36,
-      "declarations_sha256": "6b00d2927731703fae5b97befb24d502ef0f8575913b260b49241720b743c1dd",
+      "declarations_sha256": "d3076aa54b1ab2981a65cff77c2e68e70cb03e6045b4746dd42ccf28da11a1c1",
       "entries": [
         [0, "accelerating"],
         [7, "fixed"],
@@ -4135,18 +4135,23 @@
         [21, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_595A2", "byte_595A9", "byte_595AE", "byte_595B7"],
+      "members": [
+        "S3Penguinator_AccelerationAnim",
+        "S3Penguinator_SlideTransitionAnim",
+        "S3Penguinator_SlideRecoveryAnim",
+        "S3Penguinator_SnowdustAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/s3/snale_blaster.s",
-      "symbol": "byte_59A48",
-      "scope": "byte_59A48",
-      "first_line": 322,
-      "last_line": 347,
+      "symbol": "S3SnaleBlaster_OpeningAnim",
+      "scope": "S3SnaleBlaster_OpeningAnim",
+      "first_line": 325,
+      "last_line": 350,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 44,
-      "declarations_sha256": "801fe19618d1eefb1bfd324f1911d799adc5ae2ce4be2075939262b9d2095936",
+      "declarations_sha256": "536b2bccd58261ec01bdf433ff057c1ebb87677f01ef1abbfb742f6f13e2baa1",
       "entries": [
         [0, "fixed"],
         [10, "pairs"],
@@ -4155,46 +4160,52 @@
         [35, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_59A48", "byte_59A52", "byte_59A57", "byte_59A62", "byte_59A6B"],
+      "members": [
+        "S3SnaleBlaster_OpeningAnim",
+        "S3SnaleBlaster_VerticalMoveAnim",
+        "S3SnaleBlaster_VisualWindowAnim",
+        "S3SnaleBlaster_FirstEmitterAnim",
+        "S3SnaleBlaster_DelayedEmitterAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/s3/star_pointer.s",
-      "symbol": "byte_59740",
-      "scope": "byte_59740",
-      "first_line": 154,
-      "last_line": 156,
+      "symbol": "S3StarPointer_SpikeBreakAnim",
+      "scope": "S3StarPointer_SpikeBreakAnim",
+      "first_line": 155,
+      "last_line": 157,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "186e632284672a36b6c1bc5753b26ee01c46dab06c48b154a746f60a5ac378b9",
+      "declarations_sha256": "383a4edcd2c2ff0633632b4da25ae8ef87077966fe3b8fbf87bbe0486348f383",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_59740"],
+      "members": ["S3StarPointer_SpikeBreakAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/sk/penguinator.s",
-      "symbol": "RawAni_8BDB2",
-      "scope": "RawAni_8BDB2",
-      "first_line": 278,
-      "last_line": 280,
+      "symbol": "SKPenguinator_SlopeSlideFrames",
+      "scope": "SKPenguinator_SlopeSlideFrames",
+      "first_line": 279,
+      "last_line": 281,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "bb230c71d7c9875c090067afe6c55514769b2b198dd8613f537877143fbc90d6",
+      "declarations_sha256": "0d26fd85c039403a341b72ee8527e6bf279f97a785cf53999f406180afcf66d4",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_8BDB2"],
+      "members": ["SKPenguinator_SlopeSlideFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/sk/penguinator.s",
-      "symbol": "byte_8BE0A",
-      "scope": "byte_8BE0A",
-      "first_line": 315,
-      "last_line": 326,
+      "symbol": "SKPenguinator_AccelerationAnim",
+      "scope": "SKPenguinator_AccelerationAnim",
+      "first_line": 316,
+      "last_line": 327,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 36,
-      "declarations_sha256": "679f4d0e6fc24939cb4f1f1d1292039632bbbc14fc89a7e189b3585461feca8b",
+      "declarations_sha256": "5e432369dbc395f73e5c934b08c8702fabab10cb2a96eb00a07930c624e2d7b9",
       "entries": [
         [0, "accelerating"],
         [7, "fixed"],
@@ -4202,18 +4213,23 @@
         [21, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8BE0A", "byte_8BE11", "byte_8BE16", "byte_8BE1F"],
+      "members": [
+        "SKPenguinator_AccelerationAnim",
+        "SKPenguinator_SlideTransitionAnim",
+        "SKPenguinator_SlideRecoveryAnim",
+        "SKPenguinator_SnowdustAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/sk/snale_blaster.s",
-      "symbol": "byte_8C2B6",
-      "scope": "byte_8C2B6",
-      "first_line": 322,
-      "last_line": 347,
+      "symbol": "SKSnaleBlaster_OpeningAnim",
+      "scope": "SKSnaleBlaster_OpeningAnim",
+      "first_line": 325,
+      "last_line": 350,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 44,
-      "declarations_sha256": "079e2b53710b691eaee8700ccf672ccf4ff17bf8d970e44a9a3e02da2e23defc",
+      "declarations_sha256": "2be781db99619b4cbfd796197b47ca64e25e09497f4cdcb478ee51a52a6a9980",
       "entries": [
         [0, "fixed"],
         [10, "pairs"],
@@ -4222,21 +4238,27 @@
         [35, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8C2B6", "byte_8C2C0", "byte_8C2C5", "byte_8C2D0", "byte_8C2D9"],
+      "members": [
+        "SKSnaleBlaster_OpeningAnim",
+        "SKSnaleBlaster_VerticalMoveAnim",
+        "SKSnaleBlaster_VisualWindowAnim",
+        "SKSnaleBlaster_FirstEmitterAnim",
+        "SKSnaleBlaster_DelayedEmitterAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/icz/sk/star_pointer.s",
-      "symbol": "byte_8BFA8",
-      "scope": "byte_8BFA8",
-      "first_line": 154,
-      "last_line": 156,
+      "symbol": "SKStarPointer_SpikeBreakAnim",
+      "scope": "SKStarPointer_SpikeBreakAnim",
+      "first_line": 155,
+      "last_line": 157,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "736c84a3757d8818e9276cf024308833f4af164697d1c0638a8e3b5c69be0321",
+      "declarations_sha256": "44c2f1dc7d004d3c6d14e09c8182b3a12c4f33d9712a175537ddea89f674a445",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_8BFA8"],
+      "members": ["SKStarPointer_SpikeBreakAnim"],
       "stored_markers": []
     },
     {
@@ -4899,100 +4921,108 @@
     },
     {
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
-      "symbol": "byte_57C48",
-      "scope": "byte_57C48",
+      "symbol": "S3ICZBreakIce_PlatformDebrisAnim",
+      "scope": "S3ICZBreakIce_PlatformDebrisAnim",
       "first_line": 214,
       "last_line": 218,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
-      "declarations_sha256": "75842b79b933c54f09e93558bedbb9b3df27c22a957c365b5b25c66232a0a9af",
+      "declarations_sha256": "3b69801508fad6c3a8a9c60459ddd9d75a8c115c2fef0bd29d36f90d72d2abac",
       "entries": [
         [0, "fixed"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_57C48", "byte_57C4E"],
+      "members": ["S3ICZBreakIce_PlatformDebrisAnim", "S3ICZBreakIce_WallDebrisAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/terrain/icz/s3/freezer.s",
-      "symbol": "byte_5830A",
-      "scope": "byte_5830A",
-      "first_line": 517,
-      "last_line": 523,
+      "symbol": "S3ICZFreezer_LargeIceShardAnim",
+      "scope": "S3ICZFreezer_LargeIceShardAnim",
+      "first_line": 521,
+      "last_line": 527,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 26,
-      "declarations_sha256": "d77dbc4bdfd86dc16826079c7012545224bc2d6049bdcf1f7893a48072593f6c",
+      "declarations_sha256": "dd40f8db14457e984b832d6578d7071a2c67593b6bfcd06c89bad195462d6e19",
       "entries": [
         [0, "fixed"],
         [10, "fixed"],
         [18, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_5830A", "byte_58314", "byte_5831C"],
+      "members": [
+        "S3ICZFreezer_LargeIceShardAnim",
+        "S3ICZFreezer_MediumIceShardAnim",
+        "S3ICZFreezer_SmallIceShardAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/terrain/icz/s3/snow_pile.s",
-      "symbol": "RawAni_58EAC",
-      "scope": "RawAni_58EAC",
-      "first_line": 186,
-      "last_line": 188,
+      "symbol": "S3ICZSnowPile_FlakeFrames",
+      "scope": "S3ICZSnowPile_FlakeFrames",
+      "first_line": 188,
+      "last_line": 190,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
-      "declarations_sha256": "1f879229e00290ffea608913d20ef3728fa37b54c8360bb4c25207f3fbd38db5",
+      "declarations_sha256": "e580095bbf527e43cb61e1f93cf38d62452b6d4c381f377682a1182317dd6a32",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_58EAC"],
+      "members": ["S3ICZSnowPile_FlakeFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/terrain/icz/sk/breakable_ice.s",
-      "symbol": "byte_8A43E",
-      "scope": "byte_8A43E",
+      "symbol": "SKICZBreakIce_PlatformDebrisAnim",
+      "scope": "SKICZBreakIce_PlatformDebrisAnim",
       "first_line": 227,
       "last_line": 231,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "99e2545f1518bbc23969d5b047be822aa7f33b3117ce4711093c5d7b9da6d8a7",
+      "declarations_sha256": "a612602206f7931e44b192019fd37951249cef35f52e672df30c4815d2c076ad",
       "entries": [
         [0, "fixed"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8A43E", "byte_8A444"],
+      "members": ["SKICZBreakIce_PlatformDebrisAnim", "SKICZBreakIce_WallDebrisAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/terrain/icz/sk/freezer.s",
-      "symbol": "byte_8AB34",
-      "scope": "byte_8AB34",
-      "first_line": 532,
-      "last_line": 538,
+      "symbol": "SKICZFreezer_LargeIceShardAnim",
+      "scope": "SKICZFreezer_LargeIceShardAnim",
+      "first_line": 537,
+      "last_line": 543,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "6419ef1dc9bdcd4af1025a0e13323a64d8196bffb855aa86ba8af27487a358cf",
+      "declarations_sha256": "05ca636f0c06777d59c131382477b76e1d4f94fb66e87fcb2bd21099b8c69be5",
       "entries": [
         [0, "fixed"],
         [10, "fixed"],
         [18, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8AB34", "byte_8AB3E", "byte_8AB46"],
+      "members": [
+        "SKICZFreezer_LargeIceShardAnim",
+        "SKICZFreezer_MediumIceShardAnim",
+        "SKICZFreezer_SmallIceShardAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/terrain/icz/sk/snow_pile.s",
-      "symbol": "RawAni_8B714",
-      "scope": "RawAni_8B714",
-      "first_line": 186,
-      "last_line": 188,
+      "symbol": "SKICZSnowPile_FlakeFrames",
+      "scope": "SKICZSnowPile_FlakeFrames",
+      "first_line": 188,
+      "last_line": 190,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "1392f0250b984683202d033c4df95143873a3cce007f1a1e7d3e291e2c5306ff",
+      "declarations_sha256": "8bf398627a517d2040090ad6c8eff38c73254e432ee84767c7e30f925e5cc0cb",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_8B714"],
+      "members": ["SKICZSnowPile_FlakeFrames"],
       "stored_markers": []
     },
     {

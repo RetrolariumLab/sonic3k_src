@@ -17,201 +17,202 @@ Obj_ICZCrushingColumn:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 ICZCrushingColumn_Index:
-                dc.w    loc_8A488-ICZCrushingColumn_Index
-                dc.w    loc_8A4C4-ICZCrushingColumn_Index
-                dc.w    loc_8A4D6-ICZCrushingColumn_Index
-                dc.w    loc_8A4DE-ICZCrushingColumn_Index
-                dc.w    loc_8A504-ICZCrushingColumn_Index
-                dc.w    loc_8A50C-ICZCrushingColumn_Index
-                dc.w    loc_8A51C-ICZCrushingColumn_Index
-                dc.w    loc_8A562-ICZCrushingColumn_Index
-                dc.w    loc_8A586-ICZCrushingColumn_Index
-                dc.w    loc_8A596-ICZCrushingColumn_Index
-                dc.w    loc_8A5AC-ICZCrushingColumn_Index
-                dc.w    loc_8A5C8-ICZCrushingColumn_Index
-                dc.w    loc_8A5E4-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_InitCrusherAndChild-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_WaitForStandingRider-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_TickRiseDelay-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_CheckFastDropApproach-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_TickFastDropDelay-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_CheckKnuckles-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_AccelerateUpToLimit-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_AccelerateDownToLimit-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_StepFastDropAndProbe-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_TickImpactPause-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_ReturnUpTowardBase-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_ReturnDownTowardBase-ICZCrushingColumn_Index
+                dc.w    SKICZCrusher_CheckP1ReturnSide-ICZCrushingColumn_Index
 ; ---------------------------------------------------------------------------
 
-loc_8A488:
+SKICZCrusher_InitCrusherAndChild:
                 lea     ObjDat_ICZCrushingColumn(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #$70,y_radius(a0)
                 move.w  y_pos(a0),$3E(a0)
                 move.w  #$1F,$2E(a0)
                 cmpi.b  #3,subtype(a0)
-                bhs.s   loc_8A4B8
+                bhs.s   SKICZCrusher_RestoreSubtypeState
                 move.b  #$C,mapping_frame(a0)
-                lea     ChildObjDat_8A638(pc),a2
+                lea     SKICZCrusher_LowerVisualChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_8A4B8:
+SKICZCrusher_RestoreSubtypeState:
                 move.b  subtype(a0),d0
                 add.b   d0,d0
                 move.b  d0,routine(a0)
 
-locret_8A4C2:
+SKICZCrusher_StateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A4C4:
+SKICZCrusher_WaitForStandingRider:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   locret_8A4C2
+                beq.s   SKICZCrusher_StateReturn
 
-loc_8A4CE:
+SKICZCrusher_BeginRise:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A4D6:
+SKICZCrusher_TickRiseDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8A4CE
+                bmi.s   SKICZCrusher_BeginRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A4DE:
+SKICZCrusher_CheckFastDropApproach:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 cmpi.w  #$28,d2
-                blo.w   locret_8A4C2
+                blo.w   SKICZCrusher_StateReturn
                 btst    #0,render_flags(a0)
-                beq.s   loc_8A4F8
+                beq.s   SKICZCrusher_CheckFastDropSide
                 subq.w  #2,d0
 
-loc_8A4F8:
+SKICZCrusher_CheckFastDropSide:
                 tst.w   d0
-                beq.s   locret_8A4C2
+                beq.s   SKICZCrusher_StateReturn
 
-loc_8A4FC:
+SKICZCrusher_BeginFastDrop:
                 move.b  #$10,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A504:
+SKICZCrusher_TickFastDropDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8A4FC
+                bmi.s   SKICZCrusher_BeginFastDrop
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A50C:
+SKICZCrusher_CheckKnuckles:
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_8A516
+                bne.s   SKICZCrusher_DeleteForNonKnuckles
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A516:
+SKICZCrusher_DeleteForNonKnuckles:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8A51C:
+SKICZCrusher_AccelerateUpToLimit:
                 move.w  y_vel(a0),d0
                 addi.w  #-$20,d0
                 cmpi.w  #-$400,d0
-                ble.s   loc_8A52E
+                ble.s   SKICZCrusher_RiseAndCheckCeiling
                 move.w  d0,y_vel(a0)
 
-loc_8A52E:
+SKICZCrusher_RiseAndCheckCeiling:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.w   locret_8A4C2
+                bpl.w   SKICZCrusher_StateReturn
 
-loc_8A540:
+; Correct the impact position and start the pause while retaining Y velocity
+SKICZCrusher_BeginImpactPause:
                 add.w   d1,y_pos(a0)
                 move.b  #$12,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_8A59A,$34(a0)
+                move.l  #SKICZCrusher_SelectReturnState,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A562:
+SKICZCrusher_AccelerateDownToLimit:
                 move.w  y_vel(a0),d0
                 addi.w  #$20,d0
                 cmpi.w  #$400,d0
-                bgt.s   loc_8A574
+                bgt.s   SKICZCrusher_FallAndCheckFloor
                 move.w  d0,y_vel(a0)
 
-loc_8A574:
+SKICZCrusher_FallAndCheckFloor:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_8A540
+                bmi.s   SKICZCrusher_BeginImpactPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A586:
+SKICZCrusher_StepFastDropAndProbe:
                 addq.w  #8,y_pos(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_8A540
+                bmi.s   SKICZCrusher_BeginImpactPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A596:
+SKICZCrusher_TickImpactPause:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A59A:
+SKICZCrusher_SelectReturnState:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.b  byte_8A5A8-1(pc,d0.w),routine(a0)
+                move.b  SKICZCrusher_PostImpactStates-1(pc,d0.w),routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_8A5A8:
+SKICZCrusher_PostImpactStates:
                 dc.b    $16, $16, $18, $14
                 even
 ; ---------------------------------------------------------------------------
 
-loc_8A5AC:
+SKICZCrusher_ReturnUpTowardBase:
                 move.w  y_pos(a0),d0
                 subq.w  #1,d0
                 cmp.w   $3E(a0),d0
-                bls.s   loc_8A5BE
+                bls.s   SKICZCrusher_FinishUpwardReturn
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A5BE:
+SKICZCrusher_FinishUpwardReturn:
                 move.w  #$5F,$2E(a0)
-                bra.w   loc_8A4B8
+                bra.w   SKICZCrusher_RestoreSubtypeState
 ; ---------------------------------------------------------------------------
 
-loc_8A5C8:
+SKICZCrusher_ReturnDownTowardBase:
                 move.w  y_pos(a0),d0
                 addq.w  #1,d0
                 cmp.w   $3E(a0),d0
-                bhs.s   loc_8A5DA
+                bhs.s   SKICZCrusher_FinishDownwardReturn
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A5DA:
+SKICZCrusher_FinishDownwardReturn:
                 move.w  #$5F,$2E(a0)
-                bra.w   loc_8A4B8
+                bra.w   SKICZCrusher_RestoreSubtypeState
 ; ---------------------------------------------------------------------------
 
-loc_8A5E4:
+SKICZCrusher_CheckP1ReturnSide:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 btst    #0,render_flags(a0)
-                beq.s   loc_8A5F6
+                beq.s   SKICZCrusher_TryBeginUpwardReturn
                 subq.w  #2,d0
 
-loc_8A5F6:
+SKICZCrusher_TryBeginUpwardReturn:
                 tst.w   d0
-                bne.w   locret_8A4C2
+                bne.w   SKICZCrusher_StateReturn
                 move.b  #$14,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A604:
-                move.l  #loc_8A612,(a0)
-                lea     word_8A632(pc),a1
+SKICZCrusher_InitLowerVisual:
+                move.l  #SKICZCrusher_FollowParentAndDraw,(a0)
+                lea     SKICZCrusher_LowerVisualAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
 
-loc_8A612:
+SKICZCrusher_FollowParentAndDraw:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 addi.w  #$B0,d0
@@ -223,10 +224,10 @@ ObjDat_ICZCrushingColumn:
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $280
                 dc.b    $20, $70,   2,   0
-word_8A632:
+SKICZCrusher_LowerVisualAttrs:
                 dc.w    $280
                 dc.b    $20, $40,  $D,   0
-ChildObjDat_8A638:
+SKICZCrusher_LowerVisualChild:
                 dc.w    1-1
-                dc.l    loc_8A604
+                dc.l    SKICZCrusher_InitLowerVisual
                 dc.b    0,   0

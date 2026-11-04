@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 132
+    "commit_count": 133
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -839,9 +839,15 @@
       "commits": ["9c6bf68fbdbadda6def821e909acbb51a08bc869"]
     },
     {
-      "id": "current-shorten-27-zone-fbz",
+      "id": "change-cb8d092905bf",
       "kind": "source_or_tooling",
       "summary": "Apply 690 reviewed short labels for fbz.",
+      "commits": ["cb8d092905bf149c218fb83969cc5f1b8ca0fc78"]
+    },
+    {
+      "id": "current-shorten-28-zone-icz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 1017 reviewed short labels for icz.",
       "commits": ["release-commit"]
     }
   ],

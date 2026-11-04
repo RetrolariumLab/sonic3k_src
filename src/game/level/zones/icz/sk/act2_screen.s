@@ -15,26 +15,26 @@ ICZ2_ScreenEvent:
 ICZ2_BackgroundInit:
                 move.w  #4,(Events_routine_bg).w
                 cmpi.w  #$3600,(Camera_X_pos).w         ; Check ranges for either indoor/outdoor BGs
-                bhs.s   loc_53CF6
+                bhs.s   SKICZ2Events_ChooseInitialOutdoorPalette
                 cmpi.w  #$720,(Camera_Y_pos).w
-                bhs.s   loc_53D2C
+                bhs.s   SKICZ2Events_InitIndoorBackground
                 cmpi.w  #$1000,(Camera_X_pos).w
-                bhs.s   loc_53CF6
+                bhs.s   SKICZ2Events_ChooseInitialOutdoorPalette
                 cmpi.w  #$580,(Camera_Y_pos).w
-                bhs.s   loc_53D2C
+                bhs.s   SKICZ2Events_InitIndoorBackground
 
-loc_53CF6:
+SKICZ2Events_ChooseInitialOutdoorPalette:
                 clr.w   (Events_bg+$16).w               ; Outdoors
                 cmpi.w  #$720,(Camera_X_pos).w
-                bhs.s   loc_53D0A
+                bhs.s   SKICZ2Events_LoadInitialOutdoorPalette
                 jsr     (ICZ2_SetICZ1Pal).l
-                bra.s   loc_53D10
+                bra.s   SKICZ2Events_InitOutdoorBackground
 ; ---------------------------------------------------------------------------
 
-loc_53D0A:
+SKICZ2Events_LoadInitialOutdoorPalette:
                 jsr     (ICZ2_SetOutdoorsPal).l
 
-loc_53D10:
+SKICZ2Events_InitOutdoorBackground:
                 jsr     (ICZ2_OutDeform).l
                 moveq   #0,d0
                 moveq   #0,d1
@@ -44,7 +44,7 @@ loc_53D10:
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53D2C:
+SKICZ2Events_InitIndoorBackground:
                 st      (Events_bg+$16).w               ; Indoors
                 jsr     (ICZ2_SetIndoorsPal).l
                 jsr     (ICZ2_InDeform).l
@@ -72,22 +72,22 @@ ICZ2_BackgroundEvent_Index:
 ICZ2BGE_FromICZ1:
                 addq.w  #4,(Events_routine_bg).w        ; This only applies when coming from ICZ 1
                 cmpi.w  #$580,(Camera_Y_pos).w
-                bhs.s   loc_53D96
-                bra.w   loc_53DFC
+                bhs.s   SKICZ2Events_BeginIndoorRefresh
+                bra.w   SKICZ2Events_ChooseReturnPalette
 ; ---------------------------------------------------------------------------
 
 ICZ2BGE_Normal:
                 tst.w   (Events_bg+$16).w
-                bne.s   loc_53DD8
+                bne.s   SKICZ2Events_CheckIndoorKeepRange
                 move.w  (Camera_X_pos).w,d0             ; If outdoors
                 cmpi.w  #$1000,d0
-                blo.s   loc_53DC4
+                blo.s   SKICZ2Events_DeformOutdoorBackground
                 cmpi.w  #$3600,d0
-                bhs.s   loc_53DC4
+                bhs.s   SKICZ2Events_DeformOutdoorBackground
                 cmpi.w  #$720,(Camera_Y_pos).w
-                blo.s   loc_53DC4
+                blo.s   SKICZ2Events_DeformOutdoorBackground
 
-loc_53D96:
+SKICZ2Events_BeginIndoorRefresh:
                 st      (Events_bg+$16).w               ; Set to go indoors
                 jsr     (ICZ2_SetIndoorsPal).l
                 jsr     (ICZ2_InDeform).l
@@ -97,45 +97,45 @@ loc_53D96:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.w   loc_53E84
+                bra.w   SKICZ2Events_StepIndoorRefresh
 ; ---------------------------------------------------------------------------
 
-loc_53DC4:
+SKICZ2Events_DeformOutdoorBackground:
                 jsr     (ICZ2_OutDeform).l              ; No trigger, run normal deformation
 
-loc_53DCA:
+SKICZ2Events_ApplyOutdoorBandSpans:
                 lea     (ICZ2_OutBGDeformArray).l,a4
                 lea     (HScroll_table).w,a5
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53DD8:
+SKICZ2Events_CheckIndoorKeepRange:
                 move.w  (Camera_X_pos).w,d0             ; If indoors
                 cmpi.w  #$1900,d0
-                blo.s   loc_53DE8
+                blo.s   SKICZ2Events_CheckOutdoorReturnBounds
                 cmpi.w  #$1B80,d0
-                blo.s   loc_53E38
+                blo.s   SKICZ2Events_DeformIndoorBackground
 
-loc_53DE8:
+SKICZ2Events_CheckOutdoorReturnBounds:
                 cmpi.w  #$1000,d0
-                blo.s   loc_53E38
+                blo.s   SKICZ2Events_DeformIndoorBackground
                 cmpi.w  #$3600,d0
-                bhs.s   loc_53E38
+                bhs.s   SKICZ2Events_DeformIndoorBackground
                 cmpi.w  #$720,(Camera_Y_pos).w
-                bhs.s   loc_53E38
+                bhs.s   SKICZ2Events_DeformIndoorBackground
 
-loc_53DFC:
+SKICZ2Events_ChooseReturnPalette:
                 clr.w   (Events_bg+$16).w
                 cmpi.w  #$720,(Camera_X_pos).w
-                bhs.s   loc_53E10
+                bhs.s   SKICZ2Events_LoadReturnOutdoorPalette
                 jsr     (ICZ2_SetICZ1Pal).l
-                bra.s   loc_53E16
+                bra.s   SKICZ2Events_BeginOutdoorRefresh
 ; ---------------------------------------------------------------------------
 
-loc_53E10:
+SKICZ2Events_LoadReturnOutdoorPalette:
                 jsr     (ICZ2_SetOutdoorsPal).l
 
-loc_53E16:
+SKICZ2Events_BeginOutdoorRefresh:
                 jsr     (ICZ2_OutDeform).l
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addi.w  #$E0,d0
@@ -143,13 +143,13 @@ loc_53E16:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_53E68
+                bra.s   SKICZ2Events_StepOutdoorRefresh
 ; ---------------------------------------------------------------------------
 
-loc_53E38:
+SKICZ2Events_DeformIndoorBackground:
                 jsr     (ICZ2_InDeform).l
 
-loc_53E3E:
+SKICZ2Events_DrawIndoorAndApplyBands:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -162,26 +162,26 @@ loc_53E3E:
 
 ICZ2BGE_Refresh:
                 tst.w   (Events_bg+$16).w
-                bne.s   loc_53E7E
+                bne.s   SKICZ2Events_DeformBeforeIndoorRefresh
                 jsr     (ICZ2_OutDeform).l
 
-loc_53E68:
+SKICZ2Events_StepOutdoorRefresh:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.w   loc_53DCA
+                bpl.w   SKICZ2Events_ApplyOutdoorBandSpans
                 subq.w  #4,(Events_routine_bg).w
-                bra.w   loc_53DCA
+                bra.w   SKICZ2Events_ApplyOutdoorBandSpans
 ; ---------------------------------------------------------------------------
 
-loc_53E7E:
+SKICZ2Events_DeformBeforeIndoorRefresh:
                 jsr     (ICZ2_InDeform).l
 
-loc_53E84:
+SKICZ2Events_StepIndoorRefresh:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_53E3E
+                bpl.s   SKICZ2Events_DrawIndoorAndApplyBands
                 subq.w  #4,(Events_routine_bg).w
-                bra.s   loc_53E3E
+                bra.s   SKICZ2Events_DrawIndoorAndApplyBands
 ; End of function ICZ2_ScreenInit

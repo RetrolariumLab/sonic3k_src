@@ -48,21 +48,21 @@ ICZ1_BackgroundInit:
                 lea     (a3),a1
                 moveq   #8-1,d0
 
-loc_3DB44:
+S3ICZ1Events_MirrorRowsAndInitWrap:
                 move.w  (a1),$20(a1)                    ; Upper $400 of BG is mirrored in lower $400
                 addq.w  #4,a1
-                dbf     d0,loc_3DB44
+                dbf     d0,S3ICZ1Events_MirrorRowsAndInitWrap
                 move.w  (Camera_Y_pos_copy).w,(Events_fg_0).w
                 move.w  (Camera_Y_pos_copy).w,(Events_fg_1).w  ; Camera BG Y is noted in two variables
                 cmpi.w  #$3940,(Camera_X_pos_copy).w
-                bhs.s   loc_3DB9C
+                bhs.s   S3ICZ1Events_InitIndoorBackground
                 cmpi.w  #$3600,(Camera_X_pos_copy).w
-                blo.s   loc_3DB70
+                blo.s   S3ICZ1Events_InitIntroBackground
                 addi.w  #$2800,(Events_fg_1).w          ; If past $3580 X, adjust BG camera
 
-loc_3DB70:
+S3ICZ1Events_InitIntroBackground:
                 cmpi.w  #$580,(Camera_Y_pos_copy).w
-                bcc.s   loc_3DB9C
+                bcc.s   S3ICZ1Events_InitIndoorBackground
                 clr.w   (Events_bg+$16).w               ; No VScrolling when outside
                 jsr     ICZ1_SetIntroPal(pc)
                 jsr     ICZ1_IntroDeform(pc)
@@ -74,7 +74,7 @@ loc_3DB70:
                 jmp     ApplyDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3DB9C:
+S3ICZ1Events_InitIndoorBackground:
                 move.w  #$10,(Events_routine_bg).w      ; If past $3940 X, we're indoors already
                 st      (Events_bg+$16).w               ; Go indoors
                 jsr     ICZ1_SetIndoorPal(pc)
@@ -105,17 +105,17 @@ ICZ1_BackgroundEvent_Index:
 
 ICZ1BGE_Intro:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3DBFA
+                beq.s   S3ICZ1Events_DrawIntroAndShake
                 clr.w   (Events_fg_5).w                 ; If flag is set
                 clr.l   (Events_bg+$00).w
                 clr.l   (Events_bg+$04).w               ; Clear offsets
                 jsr     ICZ1_BigSnowFall(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3DC2A
+                bra.s   S3ICZ1Events_DrawSnowAndShake
 ; ---------------------------------------------------------------------------
 
-loc_3DBFA:
+S3ICZ1Events_DrawIntroAndShake:
                 jsr     ICZ1_IntroDeform(pc)            ; Deformation is pretty standard during the intro portion
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -130,16 +130,16 @@ loc_3DBFA:
 
 ICZ1BGE_SnowFall:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_3DC36
+                bne.s   S3ICZ1Events_BeginSnowRefresh
                 jsr     ICZ1_BigSnowFall(pc)
 
-loc_3DC2A:
+S3ICZ1Events_DrawSnowAndShake:
                 jsr     DrawBGAsYouMove(pc)
                 jsr     PlainDeformation(pc)
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3DC36:
+S3ICZ1Events_BeginSnowRefresh:
                 clr.w   (Events_fg_5).w
                 move.w  #$2E0,(Draw_delayed_position).w  ; Set BG refresh position
                 move.w  #$F,(Draw_delayed_rowcount).w
@@ -157,26 +157,26 @@ ICZ1BGE_Refresh:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3DC7E
+                bra.s   S3ICZ1Events_FinishRefreshAndGoIndoors
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Refresh2:
                 jsr     ICZ1_Deform(pc)
 
-loc_3DC7E:
+S3ICZ1Events_FinishRefreshAndGoIndoors:
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_3DCEC
+                bpl.s   S3ICZ1Events_DrawPlainBackground
                 st      (Events_bg+$16).w               ; Go indoors
                 jsr     ICZ1_SetIndoorPal(pc)           ; Set indoor palette
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3DCEC
+                bra.s   S3ICZ1Events_DrawPlainBackground
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Normal:
                 cmpi.w  #$6900,(Camera_X_pos_copy).w
-                blo.s   loc_3DCE8
+                blo.s   S3ICZ1Events_DeformIndoorBackground
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (ICZ2_128x128_Secondary_Kos).l,a1
                 lea     (RAM_start+$A00).l,a2
@@ -192,17 +192,17 @@ ICZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_3DCE8:
+S3ICZ1Events_DeformIndoorBackground:
                 jsr     ICZ1_Deform(pc)
 
-loc_3DCEC:
+S3ICZ1Events_DrawPlainBackground:
                 jsr     DrawBGAsYouMove(pc)
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
 ICZ1BGE_Transition:
                 tst.w   (Kos_decomp_queue_count).w
-                bne.w   loc_3DDA6
+                bne.w   S3ICZ1Events_DeformActTransition
                 move.w  #$501,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -241,7 +241,7 @@ ICZ1BGE_Transition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.w   (Events_routine_bg).w
 
-loc_3DDA6:
+S3ICZ1Events_DeformActTransition:
                 jsr     ICZ1_Deform(pc)
                 jmp     PlainDeformation(pc)
 
@@ -291,7 +291,7 @@ WriteIcz1IntroLinearScrollBands:
 
 ICZ1_BigSnowFall:
                 cmpi.w  #-$120,(Events_bg+$00).w
-                ble.s   loc_3DE36
+                ble.s   S3ICZ1Events_TrySwitchToTimedShake
                 st      (Screen_shake_flag).w
                 addi.l  #$2400,(Events_bg+$04).w
                 move.l  (Events_bg+$04).w,d0
@@ -299,18 +299,18 @@ ICZ1_BigSnowFall:
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_3DE42
+                bne.s   S3ICZ1Events_PositionSnowBackground
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_3DE42
+                bra.s   S3ICZ1Events_PositionSnowBackground
 ; ---------------------------------------------------------------------------
 
-loc_3DE36:
+S3ICZ1Events_TrySwitchToTimedShake:
                 tst.w   (Screen_shake_flag).w
-                bpl.s   loc_3DE42
+                bpl.s   S3ICZ1Events_PositionSnowBackground
                 move.w  #4,(Screen_shake_flag).w
 
-loc_3DE42:
+S3ICZ1Events_PositionSnowBackground:
                 move.w  (Camera_Y_pos_copy).w,d0        ; Use portion of background to show snow object
                 subi.w  #$460,d0
                 add.w   (Events_bg+$00).w,d0
@@ -342,11 +342,11 @@ ICZ1_Deform:
 
 ICZ1_SetIntroPal:
                 tst.b   (Game_mode).w
-                bmi.s   loc_3DE92
+                bmi.s   S3ICZ1Events_WriteTargetIntroPalette
                 lea     (Normal_palette_line_4+2).w,a1
                 bsr.s   WriteIcz1IntroPaletteColors
 
-loc_3DE92:
+S3ICZ1Events_WriteTargetIntroPalette:
                 lea     (Target_palette_line_4+2).w,a1
 
 WriteIcz1IntroPaletteColors:
@@ -365,11 +365,11 @@ WriteIcz1IntroPaletteColors:
 
 ICZ1_SetIndoorPal:
                 tst.b   (Game_mode).w
-                bmi.s   loc_3DED2
+                bmi.s   S3ICZ1Events_WriteTargetIndoorPalette
                 lea     (Normal_palette_line_4+2).w,a1
                 bsr.s   WriteIcz1IndoorPaletteColors
 
-loc_3DED2:
+S3ICZ1Events_WriteTargetIndoorPalette:
                 lea     (Target_palette_line_4+2).w,a1
 
 WriteIcz1IndoorPaletteColors:

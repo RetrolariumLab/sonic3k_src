@@ -17,27 +17,27 @@ Obj_ICZPathFollowPlatform_2:
                 moveq   #$14,d3
                 move.w  (sp)+,d4
                 btst    #7,status(a0)
-                bne.s   loc_89F64
+                bne.s   SKICZPathPlat_DrawPlatform
                 jsr     (SolidObjectFull).l
                 bsr.w   SetFastVerticalCameraForIczPlatformRider
 
-loc_89F64:
+SKICZPathPlat_DrawPlatform:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 ICZPathFollowPlatform_Index:
-                dc.w    loc_89F7E-ICZPathFollowPlatform_Index
-                dc.w    loc_89FB6-ICZPathFollowPlatform_Index
-                dc.w    loc_89FD6-ICZPathFollowPlatform_Index
-                dc.w    loc_89FF2-ICZPathFollowPlatform_Index
-                dc.w    loc_8A036-ICZPathFollowPlatform_Index
-                dc.w    loc_8A11C-ICZPathFollowPlatform_Index
-                dc.w    locret_8A176-ICZPathFollowPlatform_Index
-                dc.w    loc_8A178-ICZPathFollowPlatform_Index
-                dc.w    loc_8A192-ICZPathFollowPlatform_Index
-                dc.w    loc_8A1AE-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_InitAndRegisterPlatform-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_WaitForP1Standing-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_ChooseShakeOffset-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_CheckP1PushInput-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_TryWrapPlatformY-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_MoveAirborneAndProbe-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_HoldInertPlatform-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_WaitForSagRider-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_SinkWhileOccupied-ICZPathFollowPlatform_Index
+                dc.w    SKICZPathPlat_RiseTowardSagBase-ICZPathFollowPlatform_Index
 ; ---------------------------------------------------------------------------
 
-loc_89F7E:
+SKICZPathPlat_InitAndRegisterPlatform:
                 lea     ObjDat_ICZPathFollowPlatform(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  a0,(_unkFAA4).w
@@ -46,97 +46,98 @@ loc_89F7E:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
-                move.b  byte_89FB2(pc,d0.w),routine(a0)
+                move.b  SKICZPathPlat_InitialStates(pc,d0.w),routine(a0)
                 tst.w   d0
-                bne.w   locret_8A034
-                lea     ChildObjDat_8A436(pc),a2
+                bne.w   SKICZPathPlat_SetupReturn
+                lea     SKICZBreakIce_AttachedIcePieceChild(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
-byte_89FB2:
+SKICZPathPlat_InitialStates:
                 dc.b    2,   6,  $C,  $E
                 even
 ; ---------------------------------------------------------------------------
 
-loc_89FB6:
+SKICZPathPlat_WaitForP1Standing:
                 btst    #p1_standing_bit,status(a0)
-                bne.s   loc_89FC0
+                bne.s   SKICZPathPlat_BeginShakeDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89FC0:
+SKICZPathPlat_BeginShakeDelay:
                 move.b  #4,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_89FEA,$34(a0)
+                move.l  #SKICZPathPlat_BeginFall,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89FD6:
+SKICZPathPlat_ChooseShakeOffset:
                 moveq   #1,d0
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_89FE2
+                beq.s   SKICZPathPlat_ShakeAndTickDelay
                 neg.w   d0
 
-loc_89FE2:
+SKICZPathPlat_ShakeAndTickDelay:
                 add.w   d0,x_pos(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_89FEA:
+SKICZPathPlat_BeginFall:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_89FF2:
+SKICZPathPlat_CheckP1PushInput:
                 btst    #p1_pushing_bit,status(a0)
-                beq.s   loc_8A004
+                beq.s   SKICZPathPlat_ResetPushCount
                 move.b  (Ctrl_1_held).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   loc_8A00A
+                bne.s   SKICZPathPlat_TickPushAndChooseSpeed
 
-loc_8A004:
+SKICZPathPlat_ResetPushCount:
                 clr.b   $39(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A00A:
+SKICZPathPlat_TickPushAndChooseSpeed:
                 addq.b  #1,$39(a0)
                 cmpi.b  #$10,$39(a0)
-                blo.w   locret_8A034
+                blo.w   SKICZPathPlat_SetupReturn
                 move.b  #8,routine(a0)
                 lea     (Player_1).w,a1
                 jsr     Find_SonicTails(pc)
                 move.w  #$80,d1
                 tst.w   d0
-                beq.s   loc_8A030
+                beq.s   SKICZPathPlat_SetInitialXSpeed
                 neg.w   d1
 
-loc_8A030:
+SKICZPathPlat_SetInitialXSpeed:
                 move.w  d1,x_vel(a0)
 
-locret_8A034:
+SKICZPathPlat_SetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A036:
+; Wrap Y only when the camera minimum is exactly -$100
+SKICZPathPlat_TryWrapPlatformY:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_8A046
+                bne.s   SKICZPathPlat_MoveAndFollowFloor
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_8A046:
+SKICZPathPlat_MoveAndFollowFloor:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 cmpi.w  #8,d1
-                bge.s   loc_8A09E
+                bge.s   SKICZPathPlat_LeaveFloorAndSetYSpeed
                 move.b  d3,angle(a0)
                 add.w   d1,y_pos(a0)
                 move.b  d3,d0
-                bpl.s   loc_8A066
+                bpl.s   SKICZPathPlat_TryApplySlopeAccel
                 neg.b   d0
 
-loc_8A066:
+SKICZPathPlat_TryApplySlopeAccel:
                 andi.b  #$F8,d0
-                beq.s   loc_8A07C
+                beq.s   SKICZPathPlat_ProbeGroundRightWall
                 move.w  x_vel(a0),d0
                 add.w   d3,d3
                 ext.w   d3
@@ -144,52 +145,52 @@ loc_8A066:
                 add.w   d3,d0
                 bsr.w   ICZPathPlatform_TrySetXVel
 
-loc_8A07C:
+SKICZPathPlat_ProbeGroundRightWall:
                 tst.w   x_vel(a0)
-                bmi.s   loc_8A090
+                bmi.s   SKICZPathPlat_ProbeGroundLeftWall
                 moveq   #$1C,d3
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   loc_8A0AA
+                bmi.s   SKICZPathPlat_HandleRightWallImpact
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A090:
+SKICZPathPlat_ProbeGroundLeftWall:
                 moveq   #-$1C,d3
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bmi.s   loc_8A0F4
+                bmi.s   SKICZPathPlat_HandleLeftWallImpact
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A09E:
+SKICZPathPlat_LeaveFloorAndSetYSpeed:
                 move.b  #$A,routine(a0)
                 bsr.w   ICZPathPlatform_SetDepartureYVel
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A0AA:
+SKICZPathPlat_HandleRightWallImpact:
                 move.b  #$C,routine(a0)
                 clr.b   (Fast_V_scroll_flag).w
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 tst.b   subtype(a0)
-                beq.w   locret_8A034
-                lea     ChildObjDat_8A42A(pc),a2
+                beq.w   SKICZPathPlat_SetupReturn
+                lea     SKICZBreakIce_PlatformDebrisChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_8A0EC
+                bne.s   SKICZPathPlat_DisplaceRidersAndDelete
                 move.l  #Obj_Spring,(a1)
                 move.w  #$5D5A,x_pos(a1)
                 move.w  #$27A,y_pos(a1)
                 move.b  #0,subtype(a1)
 
-loc_8A0EC:
+SKICZPathPlat_DisplaceRidersAndDelete:
                 jsr     Displace_PlayerOffObject(pc)
                 jmp     SKCull_ReleaseRespawnForStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8A0F4:
+SKICZPathPlat_HandleLeftWallImpact:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -198,107 +199,108 @@ loc_8A0F4:
                 dc.w    -$38,  -$30,  -$28,  -$20,  -$18,  -$10,    -8,     0
 ; ---------------------------------------------------------------------------
 
-loc_8A11C:
+SKICZPathPlat_MoveAirborneAndProbe:
                 bsr.w   ICZPathPlatform_TryApplyGravity
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_8A15E
+                bmi.s   SKICZPathPlat_LandAndConvertYSpeed
                 tst.w   x_vel(a0)
-                beq.s   locret_8A15C
-                bmi.s   loc_8A148
+                beq.s   SKICZPathPlat_AirborneReturn
+                bmi.s   SKICZPathPlat_ProbeAirLeftWall
                 moveq   #$20,d3
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   loc_8A154
-                bra.w   locret_8A15C
+                bmi.s   SKICZPathPlat_ResolveWallAndStopX
+                bra.w   SKICZPathPlat_AirborneReturn
 ; ---------------------------------------------------------------------------
 
-loc_8A148:
+SKICZPathPlat_ProbeAirLeftWall:
                 moveq   #-$20,d3
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bpl.s   locret_8A15C
+                bpl.s   SKICZPathPlat_AirborneReturn
 
-loc_8A154:
+SKICZPathPlat_ResolveWallAndStopX:
                 add.w   d1,x_pos(a0)
                 clr.w   x_vel(a0)
 
-locret_8A15C:
+SKICZPathPlat_AirborneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A15E:
+; Convert Y speed to signed X speed and enter the grounded state. Position stays as integrated
+SKICZPathPlat_LandAndConvertYSpeed:
                 move.b  #8,routine(a0)
                 move.w  y_vel(a0),d0
                 btst    #6,d3
-                beq.s   loc_8A170
+                beq.s   SKICZPathPlat_SetLandingXSpeed
                 neg.w   d0
 
-loc_8A170:
+SKICZPathPlat_SetLandingXSpeed:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_8A176:
+SKICZPathPlat_HoldInertPlatform:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A178:
+SKICZPathPlat_WaitForSagRider:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_8A184
+                bne.s   SKICZPathPlat_SaveSagBaseAndStart
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A184:
+SKICZPathPlat_SaveSagBaseAndStart:
                 move.b  #$10,routine(a0)
                 move.w  y_pos(a0),$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A192:
+SKICZPathPlat_SinkWhileOccupied:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_8A1A2
+                beq.s   SKICZPathPlat_BeginSagReturn
                 addq.w  #1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A1A2:
+SKICZPathPlat_BeginSagReturn:
                 move.b  #$12,routine(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A1AE:
+SKICZPathPlat_RiseTowardSagBase:
                 addi.w  #-$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  y_pos(a0),d0
                 cmp.w   $3A(a0),d0
-                bls.s   loc_8A1C6
+                bls.s   SKICZPathPlat_SnapToSagBase
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A1C6:
+SKICZPathPlat_SnapToSagBase:
                 move.b  #$E,routine(a0)
                 move.w  $3A(a0),y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8A1D4:
-                lea     ObjDat3_8A412(pc),a1
+SKICZPathPlat_InitPlatformDebris:
+                lea     SKICZBreakIce_PlatformDebrisAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AnimateRaw_MoveChkDel,(a0)
-                move.l  #byte_8A43E,$30(a0)
+                move.l  #SKICZBreakIce_PlatformDebrisAnim,$30(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  byte_8A200(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  SKICZPathPlat_PlatformDebrisOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #8,d0
                 jmp     Set_IndexedVelocity(pc)
 ; ---------------------------------------------------------------------------
-byte_8A200:
+SKICZPathPlat_PlatformDebrisOffsets:
                 dc.b    -$14,  -9
                 dc.b    $14, -$C
                 dc.b    $14,   0
@@ -308,21 +310,21 @@ byte_8A200:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_8A20C:
-                lea     ObjDat3_8A41E(pc),a1
+SKICZPathPlat_InitWallDebris:
+                lea     SKICZBreakIce_WallDebrisAttrs(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_8A258,(a0)
-                move.l  #byte_8A444,$30(a0)
+                move.l  #SKICZPathPlat_UpdateWallDebris,(a0)
+                move.l  #SKICZBreakIce_WallDebrisAnim,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 move.w  #$5F,$2E(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  byte_8A246(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  SKICZPathPlat_WallDebrisOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 jmp     Set_IndexedVelocity(pc)
 ; ---------------------------------------------------------------------------
-byte_8A246:
+SKICZPathPlat_WallDebrisOffsets:
                 dc.b    -$14,-$30
                 dc.b    8,-$34
                 dc.b    -$C,-$14
@@ -335,7 +337,7 @@ byte_8A246:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_8A258:
+SKICZPathPlat_UpdateWallDebris:
                 jsr     Animate_Raw(pc)
                 jsr     (MoveSprite).l
                 jsr     Obj_Wait(pc)

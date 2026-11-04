@@ -30,67 +30,68 @@ Obj_LevelIntroICZ1:
                 move.b  #8,mapping_frame(a0)
                 move.w  #$C0,x_pos(a0)
                 move.w  #$170,y_pos(a0)
-                move.l  #loc_39780,(a0)
+                move.l  #SKICZBoardIntro_TickIntroControlDelay,(a0)
 
-loc_39780:
+SKICZBoardIntro_TickIntroControlDelay:
                 subq.b  #1,anim_frame_timer(a0)
-                bne.s   loc_39796
+                bne.s   SKICZBoardIntro_LockInputAndTryJump
                 lea     (Player_1).w,a2
                 move.b  #0,object_control(a2)
-                move.l  #loc_39796,(a0)
+                move.l  #SKICZBoardIntro_LockInputAndTryJump,(a0)
 
-loc_39796:
+SKICZBoardIntro_LockInputAndTryJump:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 lea     (Player_1).w,a2
                 cmpi.w  #$C0,x_pos(a2)
-                blo.s   loc_397C6
+                blo.s   SKICZBoardIntro_QueueBoardTilesAndDraw
                 move.w  #-$600,y_vel(a0)
                 move.w  #$400,x_vel(a2)
                 move.w  #-$800,y_vel(a2)
-                move.l  #loc_397D2,(a0)
+                move.l  #SKICZBoardIntro_FollowP1AndSpinBoard,(a0)
 
-loc_397C6:
+SKICZBoardIntro_QueueBoardTilesAndDraw:
                 jsr     (QueueIczSnowboardFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_397D2:
+SKICZBoardIntro_FollowP1AndSpinBoard:
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),x_pos(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_397FA
+                bpl.s   SKICZBoardIntro_TrySpawnRiderVisual
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #9,mapping_frame(a0)
-                blo.s   loc_397FA
+                blo.s   SKICZBoardIntro_TrySpawnRiderVisual
                 move.b  #1,mapping_frame(a0)
 
-loc_397FA:
+SKICZBoardIntro_TrySpawnRiderVisual:
                 cmpi.w  #$184,x_pos(a2)
-                blo.s   loc_3983E
+                blo.s   SKICZBoardIntro_MoveBoardAndApplyGravity
                 move.b  #0,mapping_frame(a2)
                 move.b  #2,object_control(a2)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_39836
+                bne.w   SKICZBoardIntro_BeginHiddenInputControl
                 move.l  #SKSnowboard_InitSonicAndTrySnow,(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
                 move.w  x_vel(a2),x_vel(a1)
                 move.w  y_vel(a2),y_vel(a1)
 
-loc_39836:
-                move.l  #loc_3984E,(a0)
+; Switch to hidden input control even if the rider visual could not be allocated
+SKICZBoardIntro_BeginHiddenInputControl:
+                move.l  #SKICZBoardIntro_FollowP1AndFilterInput,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3983E:
+SKICZBoardIntro_MoveBoardAndApplyGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$28,y_vel(a0)
-                bra.w   loc_397C6
+                bra.w   SKICZBoardIntro_QueueBoardTilesAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_3984E:
+SKICZBoardIntro_FollowP1AndFilterInput:
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
@@ -98,65 +99,66 @@ loc_3984E:
                 andi.w  #((button_A_mask|button_B_mask|button_C_mask|button_start_mask)<<8)|button_A_mask|button_B_mask|button_C_mask|button_start_mask,d0
                 move.w  d0,(Ctrl_1_logical).w
                 tst.b   object_control(a2)
-                bne.s   locret_398A4
+                bne.s   SKICZBoardIntro_InputControlReturn
                 move.b  #0,(Ctrl_1_locked).w
-                move.l  #loc_398A6,(a0)
+                move.l  #SKICZBoardIntro_CheckDiscardedVisibility,(a0)
                 addi.w  #$14,y_pos(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 move.b  #$84,render_flags(a0)
                 move.b  #1,mapping_frame(a0)
                 move.b  #1,anim_frame_timer(a0)
-                bra.w   loc_397C6
+                bra.w   SKICZBoardIntro_QueueBoardTilesAndDraw
 ; ---------------------------------------------------------------------------
 
-locret_398A4:
+SKICZBoardIntro_InputControlReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_398A6:
+SKICZBoardIntro_CheckDiscardedVisibility:
                 tst.b   render_flags(a0)
-                bmi.s   loc_398B2
+                bmi.s   SKICZBoardIntro_SpinDiscardedBoard
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_398B2:
+SKICZBoardIntro_SpinDiscardedBoard:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_398D0
+                bpl.s   SKICZBoardIntro_MoveDiscardedBoard
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #9,mapping_frame(a0)
-                blo.s   loc_398D0
+                blo.s   SKICZBoardIntro_MoveDiscardedBoard
                 move.b  #1,mapping_frame(a0)
 
-loc_398D0:
+SKICZBoardIntro_MoveDiscardedBoard:
                 jsr     (MoveSprite2).l
                 addi.w  #$28,y_vel(a0)
-                bra.w   loc_397C6
+                bra.w   SKICZBoardIntro_QueueBoardTilesAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_398E0:
-                move.l  #loc_398E6,(a0)
+SKICZBoardIntro_BeginSnowEmitter:
+                move.l  #SKICZBoardIntro_CheckSnowEmitterControl,(a0)
 
-loc_398E6:
+SKICZBoardIntro_CheckSnowEmitterControl:
                 movea.w $30(a0),a3
                 lea     (Player_1).w,a2
                 tst.b   object_control(a2)
-                bne.s   loc_398FA
+                bne.s   SKICZBoardIntro_TryEmitGroundSnow
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_398FA:
+SKICZBoardIntro_TryEmitGroundSnow:
                 btst    #Status_InAir,status(a2)
-                bne.s   locret_39922
+                bne.s   SKICZBoardIntro_SnowEmitterReturn
                 bsr.s   SpawnSnowboardSnowParticle
                 bsr.s   SpawnSnowboardSnowParticle
                 cmpi.b  #7,mapping_frame(a3)
-                beq.s   loc_39916
+                beq.s   SKICZBoardIntro_TryEmitExtraSnow
                 cmpi.b  #8,mapping_frame(a3)
-                bne.s   locret_39922
+                bne.s   SKICZBoardIntro_SnowEmitterReturn
 
-loc_39916:
+; Rider frames 7 and 8 request six extra particles after the ordinary pair
+SKICZBoardIntro_TryEmitExtraSnow:
                 bsr.s   SpawnSnowboardSnowParticle
                 bsr.s   SpawnSnowboardSnowParticle
                 bsr.s   SpawnSnowboardSnowParticle
@@ -164,15 +166,15 @@ loc_39916:
                 bsr.s   SpawnSnowboardSnowParticle
                 bsr.s   SpawnSnowboardSnowParticle
 
-locret_39922:
+SKICZBoardIntro_SnowEmitterReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 SpawnSnowboardSnowParticle:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   locret_399A4
-                move.l  #loc_399A6,(a1)
+                bne.w   SKICZBoardIntro_ParticleSpawnReturn
+                move.l  #SKICZBoardIntro_UpdateSnowParticle,(a1)
                 move.w  #make_art_tile(ArtTile_SnowboardDust,0,0),art_tile(a1)
                 move.l  #Map_SnowboardDust,mappings(a1)
                 move.w  #$100,priority(a1)
@@ -197,24 +199,24 @@ SpawnSnowboardSnowParticle:
                 andi.w  #$F,d0
                 sub.w   d0,y_pos(a1)
 
-locret_399A4:
+SKICZBoardIntro_ParticleSpawnReturn:
                 rts
 ; End of function SpawnSnowboardSnowParticle
 
 ; ---------------------------------------------------------------------------
 
-loc_399A6:
+SKICZBoardIntro_UpdateSnowParticle:
                 tst.b   render_flags(a0)
-                bpl.s   loc_399CA
+                bpl.s   SKICZBoardIntro_DeleteSnowParticle
                 jsr     (MoveSprite2).l
                 lea     (Ani_SnowboardDust).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                bne.s   loc_399CA
+                bne.s   SKICZBoardIntro_DeleteSnowParticle
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_399CA:
+SKICZBoardIntro_DeleteSnowParticle:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_SnowboardDust:

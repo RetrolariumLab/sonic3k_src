@@ -661,7 +661,7 @@ loc_4F35E:
                 move.l  #Wait_Draw,(a0)
                 move.l  #loc_4EE74,$34(a0)
                 movea.w (_unkFAAE).w,a1
-                cmpi.l  #loc_58DF8,(a1)
+                cmpi.l  #S3ICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   loc_4F37E
                 bset    #5,$38(a1)
 

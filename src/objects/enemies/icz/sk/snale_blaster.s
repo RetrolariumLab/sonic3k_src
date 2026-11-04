@@ -12,254 +12,256 @@ Obj_SnaleBlaster:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 SnaleBlaster_Index:
-                dc.w    loc_8BFD4-SnaleBlaster_Index
-                dc.w    loc_8BFF2-SnaleBlaster_Index
-                dc.w    loc_8C026-SnaleBlaster_Index
-                dc.w    loc_8C052-SnaleBlaster_Index
-                dc.w    loc_8C0AA-SnaleBlaster_Index
-                dc.w    loc_8C0D4-SnaleBlaster_Index
-                dc.w    loc_8C0F4-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_InitAndSpawnChildren-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_SetContactForWindow-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_SetContactAndAnimateOpen-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_CheckRollAndAnimateMove-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_AnimateRetraction-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_TickRetractedHold-SnaleBlaster_Index
+                dc.w    SKSnaleBlaster_TickReemergenceWait-SnaleBlaster_Index
 ; ---------------------------------------------------------------------------
 
-loc_8BFD4:
+SKSnaleBlaster_InitAndSpawnChildren:
                 lea     ObjDat_SnaleBlaster(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  #$20,$2E(a0)
-                move.l  #loc_8C00E,$34(a0)
-                lea     ChildObjDat_8C28A(pc),a2
+                move.l  #SKSnaleBlaster_BeginOpening,$34(a0)
+                lea     SKSnaleBlaster_EmitterAndVisualChildren(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8BFF2:
+SKSnaleBlaster_SetContactForWindow:
                 move.b  #$1A,collision_flags(a0)
                 clr.b   collision_property(a0)
                 btst    #1,$38(a0)
-                bne.s   loc_8C00A
+                bne.s   SKSnaleBlaster_TickWindowWait
                 move.b  #$7F,collision_property(a0)
 
-loc_8C00A:
+SKSnaleBlaster_TickWindowWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C00E:
+SKSnaleBlaster_BeginOpening:
                 move.b  #4,routine(a0)
-                move.l  #byte_8C2B6,$30(a0)
-                move.l  #loc_8C030,$34(a0)
+                move.l  #SKSnaleBlaster_OpeningAnim,$30(a0)
+                move.l  #SKSnaleBlaster_BeginUpwardMotion,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C026:
+SKSnaleBlaster_SetContactAndAnimateOpen:
                 move.b  #$1A,collision_flags(a0)
                 jmp     Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C030:
+SKSnaleBlaster_BeginUpwardMotion:
                 move.w  #-2,$40(a0)
-                move.l  #byte_8C2C0,$30(a0)
+                move.l  #SKSnaleBlaster_VerticalMoveAnim,$30(a0)
 
-loc_8C03E:
+SKSnaleBlaster_ResetMotionAndWindow:
                 move.b  #6,routine(a0)
                 move.b  #2,$39(a0)
                 bclr    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C052:
+SKSnaleBlaster_CheckRollAndAnimateMove:
                 move.b  #$1A,collision_flags(a0)
                 move.b  #$7F,collision_property(a0)
                 bsr.w   SnaleBlaster_TryRetractNearRoll
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_8C088
+                beq.s   SKSnaleBlaster_MotionEventReturn
                 moveq   #3,d0
                 tst.w   $40(a0)
-                bmi.s   loc_8C074
+                bmi.s   SKSnaleBlaster_StepYOnMatchingFrame
                 moveq   #4,d0
 
-loc_8C074:
+SKSnaleBlaster_StepYOnMatchingFrame:
                 cmp.b   mapping_frame(a0),d0
-                bne.s   locret_8C088
+                bne.s   SKSnaleBlaster_MotionEventReturn
                 move.w  $40(a0),d0
                 add.w   d0,y_pos(a0)
                 subq.b  #1,$39(a0)
-                bmi.s   loc_8C08A
+                bmi.s   SKSnaleBlaster_OpenWindowAndReverseY
 
-locret_8C088:
+SKSnaleBlaster_MotionEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C08A:
+SKSnaleBlaster_OpenWindowAndReverseY:
                 move.b  #2,routine(a0)
                 move.w  #$90,$2E(a0)
                 bset    #1,$38(a0)
-                move.l  #loc_8C03E,$34(a0)
+                move.l  #SKSnaleBlaster_ResetMotionAndWindow,$34(a0)
                 neg.w   $40(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C0AA:
+SKSnaleBlaster_AnimateRetraction:
                 move.b  #$7F,collision_property(a0)
                 subq.b  #1,mapping_frame(a0)
-                beq.s   loc_8C0B8
+                beq.s   SKSnaleBlaster_BeginRetractedHold
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C0B8:
+SKSnaleBlaster_BeginRetractedHold:
                 move.b  #$A,routine(a0)
                 move.b  #$7F,collision_property(a0)
                 move.w  #60-1,$2E(a0)
-                move.l  #loc_8C0DE,$34(a0)
+                move.l  #SKSnaleBlaster_BeginReemergence,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C0D4:
+SKSnaleBlaster_TickRetractedHold:
                 move.b  #$7F,collision_property(a0)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C0DE:
+SKSnaleBlaster_BeginReemergence:
                 move.b  #$C,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_8C0F8,$34(a0)
+                move.l  #SKSnaleBlaster_StepReemergence,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C0F4:
+SKSnaleBlaster_TickReemergenceWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C0F8:
+SKSnaleBlaster_StepReemergence:
                 move.b  #$1A,collision_flags(a0)
                 move.b  #$7F,collision_property(a0)
                 move.w  #2,$2E(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   locret_8C11C
+                blo.s   SKSnaleBlaster_ReemergenceReturn
                 move.b  #6,routine(a0)
 
-locret_8C11C:
+SKSnaleBlaster_ReemergenceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C11E:
+SKSnaleBlaster_UpdateVisualChild:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8C134(pc,d0.w),d1
-                jsr     off_8C134(pc,d1.w)
+                move.w  SKSnaleBlaster_VisualStateTable(pc,d0.w),d1
+                jsr     SKSnaleBlaster_VisualStateTable(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_8C134:
-                dc.w    loc_8C13A-off_8C134
-                dc.w    loc_8C144-off_8C134
-                dc.w    Animate_RawMultiDelay-off_8C134
+SKSnaleBlaster_VisualStateTable:
+                dc.w    SKSnaleBlaster_InitVisualChild-SKSnaleBlaster_VisualStateTable
+                dc.w    SKSnaleBlaster_WaitVisualWindow-SKSnaleBlaster_VisualStateTable
+                dc.w    Animate_RawMultiDelay-SKSnaleBlaster_VisualStateTable
 ; ---------------------------------------------------------------------------
 
-loc_8C13A:
-                lea     word_8C272(pc),a1
+SKSnaleBlaster_InitVisualChild:
+                lea     SKSnaleBlaster_VisualAttrs(pc),a1
                 jmp     (SetUp_ObjAttributes3).l
 ; ---------------------------------------------------------------------------
 
-loc_8C144:
+SKSnaleBlaster_WaitVisualWindow:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_8C152
+                bne.s   SKSnaleBlaster_BeginVisualWindowAnim
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C152:
+SKSnaleBlaster_BeginVisualWindowAnim:
                 move.b  #4,routine(a0)
-                move.l  #byte_8C2C5,$30(a0)
-                move.l  #loc_8C16A,$34(a0)
+                move.l  #SKSnaleBlaster_VisualWindowAnim,$30(a0)
+                move.l  #SKSnaleBlaster_ClearParentWindow,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C16A:
+SKSnaleBlaster_ClearParentWindow:
                 move.b  #2,routine(a0)
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C17C:
+SKSnaleBlaster_UpdateEmitter:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8C192(pc,d0.w),d1
-                jsr     off_8C192(pc,d1.w)
+                move.w  SKSnaleBlaster_EmitterStateTable(pc,d0.w),d1
+                jsr     SKSnaleBlaster_EmitterStateTable(pc,d1.w)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_8C192:
-                dc.w    loc_8C19A-off_8C192
-                dc.w    loc_8C1A4-off_8C192
-                dc.w    loc_8C1D8-off_8C192
-                dc.w    loc_8C226-off_8C192
+SKSnaleBlaster_EmitterStateTable:
+                dc.w    SKSnaleBlaster_InitEmitter-SKSnaleBlaster_EmitterStateTable
+                dc.w    SKSnaleBlaster_WaitEmitterWindow-SKSnaleBlaster_EmitterStateTable
+                dc.w    SKSnaleBlaster_AnimateAndTryFire-SKSnaleBlaster_EmitterStateTable
+                dc.w    SKSnaleBlaster_WaitEmitterClose-SKSnaleBlaster_EmitterStateTable
 ; ---------------------------------------------------------------------------
 
-loc_8C19A:
-                lea     word_8C278(pc),a1
+SKSnaleBlaster_InitEmitter:
+                lea     SKSnaleBlaster_EmitterAttrs(pc),a1
                 jmp     (SetUp_ObjAttributes3).l
 ; ---------------------------------------------------------------------------
 
-loc_8C1A4:
+SKSnaleBlaster_WaitEmitterWindow:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_8C1B2
+                bne.s   SKSnaleBlaster_SelectStaggeredFireAnim
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C1B2:
+SKSnaleBlaster_SelectStaggeredFireAnim:
                 move.b  #4,routine(a0)
-                move.l  #byte_8C2D0,$30(a0)
+                move.l  #SKSnaleBlaster_FirstEmitterAnim,$30(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_8C1CE
-                move.l  #byte_8C2D9,$30(a0)
+                beq.s   SKSnaleBlaster_SetFireFinishCallback
+                move.l  #SKSnaleBlaster_DelayedEmitterAnim,$30(a0)
 
-loc_8C1CE:
-                move.l  #loc_8C21E,$34(a0)
+SKSnaleBlaster_SetFireFinishCallback:
+                move.l  #SKSnaleBlaster_BeginEmitterCloseWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C1D8:
+; Try a shot on a positive animation event at cursor 4 while visible
+SKSnaleBlaster_AnimateAndTryFire:
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_8C21C
-                bmi.s   locret_8C21C
+                beq.s   SKSnaleBlaster_ShotReturn
+                bmi.s   SKSnaleBlaster_ShotReturn
                 cmpi.b  #4,anim_frame(a0)
-                bne.s   locret_8C21C
+                bne.s   SKSnaleBlaster_ShotReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_8C21C
+                bpl.s   SKSnaleBlaster_ShotReturn
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_8C29E(pc),a2
+                lea     SKSnaleBlaster_StraightShotChild(pc),a2
                 jsr     (CreateChild2_Complex).l
                 movea.w parent3(a0),a2
                 btst    #0,render_flags(a2)
-                beq.s   loc_8C212
+                beq.s   SKSnaleBlaster_TryReflectShotY
                 neg.w   x_vel(a1)
 
-loc_8C212:
+; Like the X reflection above, this uses a1 without checking projectile allocation
+SKSnaleBlaster_TryReflectShotY:
                 tst.b   subtype(a0)
-                beq.s   locret_8C21C
+                beq.s   SKSnaleBlaster_ShotReturn
                 neg.w   y_vel(a1)
 
-locret_8C21C:
+SKSnaleBlaster_ShotReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C21E:
+SKSnaleBlaster_BeginEmitterCloseWait:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C226:
+SKSnaleBlaster_WaitEmitterClose:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_8C234
+                beq.s   SKSnaleBlaster_RearmEmitter
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C234:
+SKSnaleBlaster_RearmEmitter:
                 move.b  #2,routine(a0)
                 rts
 
@@ -269,17 +271,18 @@ loc_8C234:
 SnaleBlaster_TryRetractNearRoll:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$30,d2
-                bhs.s   locret_8C254
+                bhs.s   SKSnaleBlaster_RollingCheckReturn
                 cmpi.w  #$30,d3
-                bhs.s   locret_8C254
+                bhs.s   SKSnaleBlaster_RollingCheckReturn
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_8C256
+                beq.s   SKSnaleBlaster_RetractAndSkipMotion
 
-locret_8C254:
+SKSnaleBlaster_RollingCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C256:
+; Discard the caller's return address so movement and animation stop for this update
+SKSnaleBlaster_RetractAndSkipMotion:
                 move.b  #8,routine(a0)
                 move.b  #3,mapping_frame(a0)
                 addq.w  #4,sp
@@ -292,53 +295,53 @@ ObjDat_SnaleBlaster:
                 dc.w    make_art_tile(ArtTile_SnaleBlaster,1,0)
                 dc.w    $200
                 dc.b    $10, $10,   0,  $B
-word_8C272:
+SKSnaleBlaster_VisualAttrs:
                 dc.w    $180
                 dc.b    4,  $C,   5,   0
-word_8C278:
+SKSnaleBlaster_EmitterAttrs:
                 dc.w    $200
                 dc.b    4,   4,   7,   0
-ObjDat3_8C27E:
+SKSnaleBlaster_ProjectileAttrs:
                 dc.l    Map_SnaleBlaster
                 dc.w    make_art_tile(ArtTile_SnaleBlaster,0,1)
                 dc.w    $200
                 dc.b    4,   4,   9, $98
-ChildObjDat_8C28A:
+SKSnaleBlaster_EmitterAndVisualChildren:
                 dc.w    3-1
-                dc.l    loc_8C17C
+                dc.l    SKSnaleBlaster_UpdateEmitter
                 dc.b    -8,   0
-                dc.l    loc_8C17C
+                dc.l    SKSnaleBlaster_UpdateEmitter
                 dc.b    -8,   7
-                dc.l    loc_8C11E
+                dc.l    SKSnaleBlaster_UpdateVisualChild
                 dc.b    -8,   4
-ChildObjDat_8C29E:
+SKSnaleBlaster_StraightShotChild:
                 dc.w    1-1
                 dc.l    SKCallbackShot_InitDeflectable
-                dc.l    ObjDat3_8C27E
+                dc.l    SKSnaleBlaster_ProjectileAttrs
                 dc.l    0
                 dc.l    MoveSprite2
                 dc.b    0,   0
                 dc.w    -$200, -$100
-byte_8C2B6:
+SKSnaleBlaster_OpeningAnim:
                 dc.b    5,   0,   1,   2,   3,   4,   4,   4,   4, $F4
-byte_8C2C0:
+SKSnaleBlaster_VerticalMoveAnim:
                 dc.b    4,  $F
                 dc.b    3,  $F
                 dc.b    $FC
-byte_8C2C5:
+SKSnaleBlaster_VisualWindowAnim:
                 dc.b    5,   2
                 dc.b    6,   2
                 dc.b    $A, $5F
                 dc.b    6,   2
                 dc.b    5,   2
                 dc.b    $F4
-byte_8C2D0:
+SKSnaleBlaster_FirstEmitterAnim:
                 dc.b    7,   2
                 dc.b    7, $1F
                 dc.b    8,   3
                 dc.b    7,   0
                 dc.b    $F4
-byte_8C2D9:
+SKSnaleBlaster_DelayedEmitterAnim:
                 dc.b    7,   2
                 dc.b    7, $2F
                 dc.b    8,   3

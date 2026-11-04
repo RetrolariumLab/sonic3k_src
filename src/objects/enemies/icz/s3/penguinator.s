@@ -14,24 +14,24 @@ Obj_Penguinator:
                 jmp     Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
 Penguinator_Index:
-                dc.w    loc_592A6-Penguinator_Index
-                dc.w    loc_59302-Penguinator_Index
-                dc.w    loc_5939C-Penguinator_Index
-                dc.w    loc_593B6-Penguinator_Index
-                dc.w    loc_59404-Penguinator_Index
-                dc.w    loc_59452-Penguinator_Index
-                dc.w    loc_5948C-Penguinator_Index
-                dc.w    loc_594D4-Penguinator_Index
+                dc.w    S3Penguinator_InitSlotAndArtFlip-Penguinator_Index
+                dc.w    S3Penguinator_AnimateAndCheckAccel-Penguinator_Index
+                dc.w    S3Penguinator_AnimateSlideTransition-Penguinator_Index
+                dc.w    S3Penguinator_FallAndCheckFloor-Penguinator_Index
+                dc.w    S3Penguinator_UpdateGroundSlide-Penguinator_Index
+                dc.w    S3Penguinator_UpdateSlideRecovery-Penguinator_Index
+                dc.w    S3Penguinator_BrakeAndFollowFloor-Penguinator_Index
+                dc.w    S3Penguinator_TickWait-Penguinator_Index
 ; ---------------------------------------------------------------------------
 
-loc_592A6:
+S3Penguinator_InitSlotAndArtFlip:
                 lea     ObjSlot_Penguinator(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 bclr    #1,render_flags(a0)
-                beq.s   loc_592BC
+                beq.s   S3Penguinator_BeginAcceleration
                 bset    #7,art_tile(a0)
 
-loc_592BC:
+S3Penguinator_BeginAcceleration:
                 move.b  #2,routine(a0)
                 move.b  #$F,y_radius(a0)
                 move.b  #4,x_radius(a0)
@@ -39,25 +39,25 @@ loc_592BC:
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.w   $2E(a0)
-                move.l  #byte_595A2,$30(a0)
-                move.l  #loc_5938C,$34(a0)
+                move.l  #S3Penguinator_AccelerationAnim,$30(a0)
+                move.l  #S3Penguinator_ReverseMotionAndFacing,$34(a0)
                 moveq   #2,d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_592FC
+                bne.s   S3Penguinator_SetHorizontalAccel
                 neg.w   d0
 
-loc_592FC:
+S3Penguinator_SetHorizontalAccel:
                 move.w  d0,$40(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59302:
+S3Penguinator_AnimateAndCheckAccel:
                 jsr     Animate_RawGetFaster(pc)
-                beq.s   loc_59310
+                beq.s   S3Penguinator_AccelerateAndProbeFloor
                 cmpi.b  #2,$2E(a0)
-                bls.s   loc_59328
+                bls.s   S3Penguinator_ChooseSlideOrTurn
 
-loc_59310:
+S3Penguinator_AccelerateAndProbeFloor:
                 move.w  $40(a0),d0
                 move.w  x_vel(a0),d1
                 add.w   d0,d1
@@ -66,97 +66,97 @@ loc_59310:
                 jmp     ObjHitFloor2_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_59328:
+S3Penguinator_ChooseSlideOrTurn:
                 jsr     (ObjCheckFloorDist).l
                 tst.b   d3
-                beq.s   loc_59344
+                beq.s   S3Penguinator_BeginSlideTransition
                 btst    #0,render_flags(a0)
-                beq.s   loc_5933E
+                beq.s   S3Penguinator_CheckFacingSlope
                 bchg    #6,d3
 
-loc_5933E:
+S3Penguinator_CheckFacingSlope:
                 btst    #6,d3
-                beq.s   loc_59378
+                beq.s   S3Penguinator_BeginTurnWait
 
-loc_59344:
+S3Penguinator_BeginSlideTransition:
                 move.b  #4,routine(a0)
                 move.w  #-$200,d0
                 move.w  #$40,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_5935E
+                beq.s   S3Penguinator_SetSlideMotionAndAnim
                 neg.w   d0
                 neg.w   d1
 
-loc_5935E:
+S3Penguinator_SetSlideMotionAndAnim:
                 move.w  d0,x_vel(a0)
                 move.w  d1,$40(a0)
-                move.l  #byte_595A9,$30(a0)
-                move.l  #loc_593A0,$34(a0)
+                move.l  #S3Penguinator_SlideTransitionAnim,$30(a0)
+                move.l  #S3Penguinator_BeginSlideFall,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59378:
+S3Penguinator_BeginTurnWait:
                 move.b  #$E,routine(a0)
                 move.w  #$40,$2E(a0)
-                move.l  #loc_59344,$34(a0)
+                move.l  #S3Penguinator_BeginSlideTransition,$34(a0)
 
-loc_5938C:
+S3Penguinator_ReverseMotionAndFacing:
                 neg.w   x_vel(a0)
                 neg.w   $40(a0)
                 bchg    #0,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5939C:
+S3Penguinator_AnimateSlideTransition:
                 jmp     Move_AnimateRaw(pc)
 ; ---------------------------------------------------------------------------
 
-loc_593A0:
+S3Penguinator_BeginSlideFall:
                 move.b  #6,routine(a0)
                 move.b  #$B,y_radius(a0)
-                move.l  #loc_593BE,$34(a0)
+                move.l  #S3Penguinator_CalcAbsLandingAngle,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_593B6:
+S3Penguinator_FallAndCheckFloor:
                 jsr     MoveSprite_LightGravity(pc)
                 jmp     ObjHitFloor_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_593BE:
+S3Penguinator_CalcAbsLandingAngle:
                 tst.b   d3
                 move.b  d3,d4
-                bpl.s   loc_593C6
+                bpl.s   S3Penguinator_CheckLandingSlope
                 neg.b   d4
 
-loc_593C6:
+S3Penguinator_CheckLandingSlope:
                 andi.b  #$F8,d4
-                beq.s   loc_593EA
+                beq.s   S3Penguinator_BeginGroundSlide
                 tst.w   x_vel(a0)
-                bmi.s   loc_593D6
+                bmi.s   S3Penguinator_TryReverseOnLanding
                 bchg    #6,d3
 
-loc_593D6:
+S3Penguinator_TryReverseOnLanding:
                 btst    #6,d3
-                bne.s   loc_593EA
+                bne.s   S3Penguinator_BeginGroundSlide
                 neg.w   x_vel(a0)
                 neg.w   $40(a0)
                 bchg    #0,render_flags(a0)
 
-loc_593EA:
+S3Penguinator_BeginGroundSlide:
                 move.b  #8,routine(a0)
                 move.w  #$20,$2E(a0)
-                move.l  #loc_5942C,$34(a0)
+                move.l  #S3Penguinator_BeginSlideRecovery,$34(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59404:
+S3Penguinator_UpdateGroundSlide:
                 bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
-                blt.w   loc_5938C
+                blt.w   S3Penguinator_ReverseMotionAndFacing
                 cmpi.w  #$C,d1
-                bge.s   loc_593A0
+                bge.s   S3Penguinator_BeginSlideFall
                 add.w   d1,y_pos(a0)
                 bsr.w   SetPenguinatorSlidingPoseFromFloorAngle
                 bsr.w   Penguinator_TrySkidSoundAndDust
@@ -164,29 +164,30 @@ loc_59404:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5942C:
+; Enter the recovery animation at cursor 8 minus the current slope frame
+S3Penguinator_BeginSlideRecovery:
                 move.b  #$A,routine(a0)
                 moveq   #8,d0
                 sub.b   mapping_frame(a0),d0
                 move.b  d0,anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_595AE,$30(a0)
-                move.l  #loc_59474,$34(a0)
+                move.l  #S3Penguinator_SlideRecoveryAnim,$30(a0)
+                move.l  #S3Penguinator_BeginUprightBrake,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59452:
+S3Penguinator_UpdateSlideRecovery:
                 bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
-                blt.w   loc_5938C
+                blt.w   S3Penguinator_ReverseMotionAndFacing
                 cmpi.w  #$C,d1
-                bge.w   loc_593A0
+                bge.w   S3Penguinator_BeginSlideFall
                 add.w   d1,y_pos(a0)
                 jsr     (MoveSprite2).l
                 jmp     Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
 
-loc_59474:
+S3Penguinator_BeginUprightBrake:
                 move.b  #$C,routine(a0)
                 move.b  #0,mapping_frame(a0)
                 move.b  #$F,y_radius(a0)
@@ -194,31 +195,31 @@ loc_59474:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5948C:
+S3Penguinator_BrakeAndFollowFloor:
                 move.w  x_vel(a0),d0
                 add.w   $40(a0),d0
                 move.w  d0,x_vel(a0)
-                beq.s   loc_594B4
+                beq.s   S3Penguinator_BeginRestartWait
                 bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
-                blt.s   loc_594B4
+                blt.s   S3Penguinator_BeginRestartWait
                 cmpi.w  #$C,d1
-                bge.s   loc_594B4
+                bge.s   S3Penguinator_BeginRestartWait
                 add.w   d1,y_pos(a0)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_594B4:
+S3Penguinator_BeginRestartWait:
                 move.b  #$E,routine(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,$2E(a0)
-                move.l  #loc_592BC,$34(a0)
+                move.l  #S3Penguinator_BeginAcceleration,$34(a0)
                 bchg    #0,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_594D4:
+S3Penguinator_TickWait:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -228,23 +229,23 @@ Obj_ICZSnowdust:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                beq.s   loc_59504
+                beq.s   S3Penguinator_BeginSnowdustAnim
                 move.l  #Obj_Wait,(a0)
                 lsl.w   #2,d0
                 subq.w  #1,d0
                 move.w  d0,$2E(a0)
-                move.l  #loc_59504,$34(a0)
+                move.l  #S3Penguinator_BeginSnowdustAnim,$34(a0)
 
-locret_59502:
+S3Penguinator_SnowdustReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_59504:
-                move.l  #loc_59512,(a0)
+S3Penguinator_BeginSnowdustAnim:
+                move.l  #S3Penguinator_AnimateAndDrawSnowdust,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-loc_59512:
-                lea     byte_595B7(pc),a1
+S3Penguinator_AnimateAndDrawSnowdust:
+                lea     S3Penguinator_SnowdustAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jmp     (Draw_Sprite).l
 
@@ -264,18 +265,18 @@ Penguinator_ProbeFloorAhead:
 SetPenguinatorSlidingPoseFromFloorAngle:
                 moveq   #4,d0
                 tst.b   d3
-                beq.s   loc_59544
+                beq.s   S3Penguinator_SetSlopeSlideFrame
                 lsr.b   #3,d3
                 andi.w  #$F,d3
-                move.b  RawAni_5954A(pc,d3.w),d0
+                move.b  S3Penguinator_SlopeSlideFrames(pc,d3.w),d0
 
-loc_59544:
+S3Penguinator_SetSlopeSlideFrame:
                 move.b  d0,mapping_frame(a0)
                 rts
 ; End of function SetPenguinatorSlidingPoseFromFloorAngle
 
 ; ---------------------------------------------------------------------------
-RawAni_5954A:
+S3Penguinator_SlopeSlideFrames:
                 dc.b    4,  5,  6,  6,  7,  7,  8,  8,  8,  8,  7,  7,  6,  6,  5,  4
                 even
 
@@ -285,10 +286,10 @@ RawAni_5954A:
 Penguinator_TrySkidSoundAndDust:
                 move.w  $2E(a0),d0
                 andi.w  #3,d0
-                bne.s   locret_59502
+                bne.s   S3Penguinator_SnowdustReturn
                 moveq   #signextendB(sfx_SlideSkidQuiet),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_59592(pc),a2
+                lea     S3Penguinator_SnowdustChild(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; End of function Penguinator_TrySkidSoundAndDust
 
@@ -305,22 +306,22 @@ ObjDat_ICZSnowdust:
                 dc.w    make_art_tile(ArtTile_ICZSnowdust,1,0)
                 dc.w    0
                 dc.b    4, $18,   0,   0
-ChildObjDat_59592:
+S3Penguinator_SnowdustChild:
                 dc.w    1-1
                 dc.l    Obj_ICZSnowdust
                 dc.b    0,  $C
 DPLCPtr_Penguinator:
                 dc.l    ArtUnc_Penguinator
                 dc.l    DPLC_Penguinator
-byte_595A2:
+S3Penguinator_AccelerationAnim:
                 dc.b    7, $10
                 dc.b    0,   1
                 dc.b    0,   2
                 dc.b    $FC
-byte_595A9:
+S3Penguinator_SlideTransitionAnim:
                 dc.b    3,   3,   3,   4, $F4
-byte_595AE:
+S3Penguinator_SlideRecoveryAnim:
                 dc.b    3,   8,   8,   7,   6,   5,   4,   3, $F4
-byte_595B7:
+S3Penguinator_SnowdustAnim:
                 dc.b    0,   0,   0,   1,   2,   3,   4,   5,   4,   3,   2,   1,   0, $F4
                 even

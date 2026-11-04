@@ -17,190 +17,191 @@ Obj_ICZCrushingColumn:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 ICZCrushingColumn_Index:
-                dc.w    loc_57C90-ICZCrushingColumn_Index
-                dc.w    loc_57CCC-ICZCrushingColumn_Index
-                dc.w    loc_57CDE-ICZCrushingColumn_Index
-                dc.w    loc_57CE6-ICZCrushingColumn_Index
-                dc.w    loc_57D0C-ICZCrushingColumn_Index
-                dc.w    loc_57D14-ICZCrushingColumn_Index
-                dc.w    loc_57D5A-ICZCrushingColumn_Index
-                dc.w    loc_57D7E-ICZCrushingColumn_Index
-                dc.w    loc_57D8E-ICZCrushingColumn_Index
-                dc.w    loc_57DA4-ICZCrushingColumn_Index
-                dc.w    loc_57DC0-ICZCrushingColumn_Index
-                dc.w    loc_57DDC-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_InitCrusherAndChild-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_WaitForStandingRider-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_TickRiseDelay-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_CheckFastDropApproach-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_TickFastDropDelay-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_AccelerateUpToLimit-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_AccelerateDownToLimit-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_StepFastDropAndProbe-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_TickImpactPause-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_ReturnUpTowardBase-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_ReturnDownTowardBase-ICZCrushingColumn_Index
+                dc.w    S3ICZCrusher_CheckP1ReturnSide-ICZCrushingColumn_Index
 ; ---------------------------------------------------------------------------
 
-loc_57C90:
+S3ICZCrusher_InitCrusherAndChild:
                 lea     ObjDat_ICZCrushingColumn(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #$70,y_radius(a0)
                 move.w  y_pos(a0),$3E(a0)
                 move.w  #$1F,$2E(a0)
                 cmpi.b  #3,subtype(a0)
-                bhs.s   loc_57CC0
+                bhs.s   S3ICZCrusher_RestoreSubtypeState
                 move.b  #$C,mapping_frame(a0)
-                lea     ChildObjDat_57E30(pc),a2
+                lea     S3ICZCrusher_LowerVisualChild(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_57CC0:
+S3ICZCrusher_RestoreSubtypeState:
                 move.b  subtype(a0),d0
                 add.b   d0,d0
                 move.b  d0,routine(a0)
 
-locret_57CCA:
+S3ICZCrusher_StateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57CCC:
+S3ICZCrusher_WaitForStandingRider:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   locret_57CCA
+                beq.s   S3ICZCrusher_StateReturn
 
-loc_57CD6:
+S3ICZCrusher_BeginRise:
                 move.b  #$A,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57CDE:
+S3ICZCrusher_TickRiseDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_57CD6
+                bmi.s   S3ICZCrusher_BeginRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57CE6:
+S3ICZCrusher_CheckFastDropApproach:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 cmpi.w  #$28,d2
-                blo.w   locret_57CCA
+                blo.w   S3ICZCrusher_StateReturn
                 btst    #0,render_flags(a0)
-                beq.s   loc_57D00
+                beq.s   S3ICZCrusher_CheckFastDropSide
                 subq.w  #2,d0
 
-loc_57D00:
+S3ICZCrusher_CheckFastDropSide:
                 tst.w   d0
-                beq.s   locret_57CCA
+                beq.s   S3ICZCrusher_StateReturn
 
-loc_57D04:
+S3ICZCrusher_BeginFastDrop:
                 move.b  #$E,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D0C:
+S3ICZCrusher_TickFastDropDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_57D04
+                bmi.s   S3ICZCrusher_BeginFastDrop
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D14:
+S3ICZCrusher_AccelerateUpToLimit:
                 move.w  y_vel(a0),d0
                 addi.w  #-$20,d0
                 cmpi.w  #-$400,d0
-                ble.s   loc_57D26
+                ble.s   S3ICZCrusher_RiseAndCheckCeiling
                 move.w  d0,y_vel(a0)
 
-loc_57D26:
+S3ICZCrusher_RiseAndCheckCeiling:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.w   locret_57CCA
+                bpl.w   S3ICZCrusher_StateReturn
 
-loc_57D38:
+; Correct the impact position and start the pause while retaining Y velocity
+S3ICZCrusher_BeginImpactPause:
                 add.w   d1,y_pos(a0)
                 move.b  #$10,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_57D92,$34(a0)
+                move.l  #S3ICZCrusher_SelectReturnState,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D5A:
+S3ICZCrusher_AccelerateDownToLimit:
                 move.w  y_vel(a0),d0
                 addi.w  #$20,d0
                 cmpi.w  #$400,d0
-                bgt.s   loc_57D6C
+                bgt.s   S3ICZCrusher_FallAndCheckFloor
                 move.w  d0,y_vel(a0)
 
-loc_57D6C:
+S3ICZCrusher_FallAndCheckFloor:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_57D38
+                bmi.s   S3ICZCrusher_BeginImpactPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D7E:
+S3ICZCrusher_StepFastDropAndProbe:
                 addq.w  #8,y_pos(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_57D38
+                bmi.s   S3ICZCrusher_BeginImpactPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57D8E:
+S3ICZCrusher_TickImpactPause:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_57D92:
+S3ICZCrusher_SelectReturnState:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.b  byte_57DA0-1(pc,d0.w),routine(a0)
+                move.b  S3ICZCrusher_PostImpactStates-1(pc,d0.w),routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_57DA0:
+S3ICZCrusher_PostImpactStates:
                 dc.b    $14, $14, $16, $12
                 even
 ; ---------------------------------------------------------------------------
 
-loc_57DA4:
+S3ICZCrusher_ReturnUpTowardBase:
                 move.w  y_pos(a0),d0
                 subq.w  #1,d0
                 cmp.w   $3E(a0),d0
-                bls.s   loc_57DB6
+                bls.s   S3ICZCrusher_FinishUpwardReturn
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57DB6:
+S3ICZCrusher_FinishUpwardReturn:
                 move.w  #$5F,$2E(a0)
-                bra.w   loc_57CC0
+                bra.w   S3ICZCrusher_RestoreSubtypeState
 ; ---------------------------------------------------------------------------
 
-loc_57DC0:
+S3ICZCrusher_ReturnDownTowardBase:
                 move.w  y_pos(a0),d0
                 addq.w  #1,d0
                 cmp.w   $3E(a0),d0
-                bhs.s   loc_57DD2
+                bhs.s   S3ICZCrusher_FinishDownwardReturn
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57DD2:
+S3ICZCrusher_FinishDownwardReturn:
                 move.w  #$5F,$2E(a0)
-                bra.w   loc_57CC0
+                bra.w   S3ICZCrusher_RestoreSubtypeState
 ; ---------------------------------------------------------------------------
 
-loc_57DDC:
+S3ICZCrusher_CheckP1ReturnSide:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 btst    #0,render_flags(a0)
-                beq.s   loc_57DEE
+                beq.s   S3ICZCrusher_TryBeginUpwardReturn
                 subq.w  #2,d0
 
-loc_57DEE:
+S3ICZCrusher_TryBeginUpwardReturn:
                 tst.w   d0
-                bne.w   locret_57CCA
+                bne.w   S3ICZCrusher_StateReturn
                 move.b  #$12,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_57DFC:
-                move.l  #loc_57E0A,(a0)
-                lea     word_57E2A(pc),a1
+S3ICZCrusher_InitLowerVisual:
+                move.l  #S3ICZCrusher_FollowParentAndDraw,(a0)
+                lea     S3ICZCrusher_LowerVisualAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
 
-loc_57E0A:
+S3ICZCrusher_FollowParentAndDraw:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 addi.w  #$B0,d0
@@ -212,10 +213,10 @@ ObjDat_ICZCrushingColumn:
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $280
                 dc.b    $20, $70,   2,   0
-word_57E2A:
+S3ICZCrusher_LowerVisualAttrs:
                 dc.w    $280
                 dc.b    $20, $40,  $D,   0
-ChildObjDat_57E30:
+S3ICZCrusher_LowerVisualChild:
                 dc.w    1-1
-                dc.l    loc_57DFC
+                dc.l    S3ICZCrusher_InitLowerVisual
                 dc.b    0,   0

@@ -20,28 +20,28 @@ Obj_LevelIntroICZ1Tails:
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_1).w
                 move.b  #30,anim_frame_timer(a0)
-                move.l  #loc_39BC4,(a0)
+                move.l  #SKICZTailsIntro_HoldInputsDuringIntro,(a0)
 
-loc_39BC4:
+SKICZTailsIntro_HoldInputsDuringIntro:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_39BDE
+                beq.s   SKICZTailsIntro_ReleaseObjectControl
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_39BDE:
+SKICZTailsIntro_ReleaseObjectControl:
                 lea     (Player_1).w,a2
                 move.b  #0,object_control(a2)
-                move.l  #loc_39BEE,(a0)
+                move.l  #SKICZTailsIntro_WaitForCrashPosition,(a0)
 
-loc_39BEE:
+SKICZTailsIntro_WaitForCrashPosition:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 lea     (Player_1).w,a2
                 cmpi.w  #$38F0,x_pos(a2)
-                blo.s   locret_39C4E
+                blo.s   SKICZTailsIntro_CrashWaitReturn
                 bset    #Status_InAir,status(a2)
                 move.w  #-$200,x_vel(a2)
                 move.w  #-$400,y_vel(a2)
@@ -58,5 +58,5 @@ loc_39BEE:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_39C4E:
+SKICZTailsIntro_CrashWaitReturn:
                 rts

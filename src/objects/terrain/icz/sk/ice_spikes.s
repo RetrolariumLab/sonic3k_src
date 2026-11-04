@@ -8,24 +8,24 @@ Obj_ICZIceSpikes:
                 lea     ObjDat_ICZIceSpikes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 tst.b   subtype(a0)
-                bne.s   loc_8B2CC
-                move.l  #loc_8B2DA,(a0)
-                lea     ChildObjDat_8B35C(pc),a2
+                bne.s   SKICZIceSpike_InitFallingSpike
+                move.l  #SKICZIceSpike_UpdateStationarySpike,(a0)
+                lea     SKICZIceSpike_LowerContactChild(pc),a2
                 btst    #1,render_flags(a0)
-                beq.s   loc_8B2C8
-                lea     ChildObjDat_8B364(pc),a2
+                beq.s   SKICZIceSpike_SpawnContactChild
+                lea     SKICZIceSpike_UpperContactChild(pc),a2
 
-loc_8B2C8:
+SKICZIceSpike_SpawnContactChild:
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B2CC:
-                move.l  #loc_8B2EE,(a0)
+SKICZIceSpike_InitFallingSpike:
+                move.l  #SKICZIceSpike_TryArmShake,(a0)
                 move.b  #$92,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B2DA:
+SKICZIceSpike_UpdateStationarySpike:
                 moveq   #$17,d1
                 moveq   #8,d2
                 moveq   #8,d3
@@ -34,43 +34,43 @@ loc_8B2DA:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B2EE:
+SKICZIceSpike_TryArmShake:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_8B30C
-                move.l  #loc_8B310,(a0)
+                bhs.s   SKICZIceSpike_DrawAndCheckTouch
+                move.l  #SKICZIceSpike_ChooseShakeOffset,(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_8B328,$34(a0)
+                move.l  #SKICZIceSpike_BeginFall,$34(a0)
 
-loc_8B30C:
+SKICZIceSpike_DrawAndCheckTouch:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B310:
+SKICZIceSpike_ChooseShakeOffset:
                 moveq   #2,d0
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_8B31C
+                beq.s   SKICZIceSpike_ShakeAndTickRelease
                 neg.w   d0
 
-loc_8B31C:
+SKICZIceSpike_ShakeAndTickRelease:
                 add.w   d0,x_pos(a0)
                 jsr     Obj_Wait(pc)
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8B328:
+SKICZIceSpike_BeginFall:
                 move.l  #MoveTouchChkDel,(a0)
 
-locret_8B32E:
+SKICZIceSpike_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8B330:
+SKICZIceSpike_UpdateContactChild:
                 move.b  #$98,collision_flags(a0)
                 jsr     (Add_SpriteToCollisionResponseList).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_8B32E
+                beq.w   SKICZIceSpike_UpdateReturn
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 ObjDat_ICZIceSpikes:
@@ -78,11 +78,11 @@ ObjDat_ICZIceSpikes:
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $280
                 dc.b    $C, $10,   5,   0
-ChildObjDat_8B35C:
+SKICZIceSpike_LowerContactChild:
                 dc.w    1-1
-                dc.l    loc_8B330
+                dc.l    SKICZIceSpike_UpdateContactChild
                 dc.b    0,  $C
-ChildObjDat_8B364:
+SKICZIceSpike_UpperContactChild:
                 dc.w    1-1
-                dc.l    loc_8B330
+                dc.l    SKICZIceSpike_UpdateContactChild
                 dc.b    0, -$C
