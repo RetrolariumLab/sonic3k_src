@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 93
+    "commit_count": 94
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -605,9 +605,15 @@
       "commits": ["35a2d7d8d8edcd905c4c5ce052304499beb11b4e"]
     },
     {
-      "id": "current-shorten-audio-labels",
+      "id": "change-a9150777b5da",
       "kind": "source_or_tooling",
       "summary": "Shorten twelve registered audio labels and their references, and document the differences in the music state and Z80 update paths.",
+      "commits": ["a9150777b5da2b6e73ca1856a0984b2796113b01"]
+    },
+    {
+      "id": "current-anchor-semantic-label-comments",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed explanatory comments through verified code anchors and reject changes to assembly tokens.",
       "commits": ["release-commit"]
     }
   ],

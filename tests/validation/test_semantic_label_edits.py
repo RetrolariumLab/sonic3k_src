@@ -2,7 +2,13 @@
 
 import unittest
 
-from scripts.validation.semantic_label_edits import apply_edits, code_fingerprint, code_lines, tokens
+from scripts.validation.semantic_label_edits import (
+    apply_comment_edits,
+    apply_edits,
+    code_fingerprint,
+    code_lines,
+    tokens,
+)
 
 
 def edit_at(text, old, new, occurrence=0):
@@ -29,6 +35,39 @@ class SymbolTokenEditsTests(unittest.TestCase):
         edit = edit_at(before, "loc_100", "ReadState", 1)
         text = "; Input is a signed byte.\n\nloc_100:\n; Retain the original branch.\n bra.s loc_100\n"
         self.assertTrue(apply_edits(text, [edit]).endswith(" bra.s ReadState\n"))
+
+    def test_catalog_notes_use_post_rename_anchors_and_preserve_crlf(self):
+        before = "loc_100:\r\n    ; Old note\r\n    bra.s loc_100\r\n"
+        edits = [edit_at(before, "loc_100", "ReadState", n) for n in (0, 1)]
+        notes = [
+            {"code_line": 1, "anchor": ["ReadState", ":"], "lines": ["A saved state"]},
+            {
+                "code_line": 2,
+                "anchor": ["bra.s", "ReadState"],
+                "lines": ["A checked branch", "The saved state is retained"],
+                "replace": ["Old note"],
+            },
+        ]
+        actual = apply_edits(before, edits, comments=notes)
+        self.assertEqual(
+            actual,
+            "; A saved state\r\nReadState:\r\n    ; A checked branch\r\n"
+            "    ; The saved state is retained\r\n    bra.s ReadState\r\n",
+        )
+        self.assertEqual(apply_comment_edits(actual, notes), actual)
+
+    def test_catalog_notes_reject_stale_text_and_cannot_create_code_or_markers(self):
+        before = "; Existing note\nReadState:\n rts\n"
+        edit = {"code_line": 1, "anchor": ["ReadState", ":"], "lines": ["New note"], "replace": ["Existing note"]}
+        for bad in (
+            [{**edit, "anchor": ["OtherState", ":"]}],
+            [{**edit, "replace": ["Stale note"]}],
+            [{**edit, "lines": ["note\n dc.b 1"]}],
+            [{**edit, "lines": ["End of function ReadState"]}],
+            [edit, edit],
+        ):
+            with self.subTest(edits=bad), self.assertRaises(ValueError):
+                apply_comment_edits(before, bad)
 
     def test_prefixes_qualified_names_and_operand_sizes_are_distinct(self):
         text = " dc.l loc_10,loc_100.w,Owner.local,._100\n"
