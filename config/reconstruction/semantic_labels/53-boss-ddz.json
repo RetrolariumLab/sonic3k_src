@@ -1,0 +1,3986 @@
+{
+  "schema_version": 1,
+  "packet": "53-boss-ddz",
+  "mappings": [
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 11,
+      "old": "loc_5957A",
+      "new": "DDZ_ResetBossPlaneScroll",
+      "profiles": ["sk"],
+      "meaning": "Reset DDZ foreground scroll and tile-draw anchors regardless of controller allocation."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 37,
+      "old": "loc_595B0",
+      "new": "DDZ_BossPlaneWaitForOffset",
+      "profiles": ["sk"],
+      "meaning": "Start incremental boss-plane drawing once the boss background offset is nonzero."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 43,
+      "old": "loc_595C0",
+      "new": "DDZ_DrawFirstStageOrBeginRedraw",
+      "profiles": ["sk"],
+      "meaning": "Validate first-stage plane coordinates or initiate the inter-stage redraw."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 53,
+      "old": "loc_595D6",
+      "new": "DDZ_InitBottomUpRedraw",
+      "profiles": ["sk"],
+      "meaning": "Initialize delayed foreground redraw after boss plane mode changes."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 62,
+      "old": "loc_595EE",
+      "new": "DDZ_RestoreScrollAndRedraw",
+      "profiles": ["sk"],
+      "meaning": "Hold previously displayed plane scroll while delayed redraw continues."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 65,
+      "old": "loc_595F0",
+      "new": "DDZ_DrawRedrawRowsBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Draw delayed plane rows and advance stage only after the drawer returns negative."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 74,
+      "old": "loc_59602",
+      "new": "DDZ_DrawSecondStageRegion",
+      "profiles": ["sk"],
+      "meaning": "Accept the second-stage boss-plane region or keep previous scroll."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 90,
+      "old": "loc_5961E",
+      "new": "DDZ_UpdateBossPlaneColumnAndRow",
+      "profiles": ["sk"],
+      "meaning": "Update boss-plane tile columns and rows from private scroll and rounded anchors."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 103,
+      "old": "locret_59646",
+      "new": "DDZ_BossPlaneDrawReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared foreground return after region checks, scroll restore or delayed redraw."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 155,
+      "old": "loc_596BC",
+      "new": "DDZ_ApplyParallaxAndSkipDefaultVScroll",
+      "profiles": ["sk"],
+      "meaning": "Build the per-line scroll buffer, publish DDZ-specific vertical scroll and bypass the default dispatcher writes."
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "original_line": 183,
+      "old": "loc_59708",
+      "new": "DDZ_WriteSixParallaxBands",
+      "profiles": ["sk"],
+      "meaning": "Fill six background horizontal-scroll bands from signed fixed-point phase arithmetic."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 13,
+      "old": "loc_821FC",
+      "new": "DDZ_AsteroidMoveOutsideDebug",
+      "profiles": ["sk"],
+      "meaning": "Run an asteroid velocity step unless debug placement mode suppresses it."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 18,
+      "old": "loc_82208",
+      "new": "DDZ_AsteroidWrapAndCheckSuperContact",
+      "profiles": ["sk"],
+      "meaning": "Apply the DDZ world-wrap correction and test the active super player against this asteroid range."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 28,
+      "old": "loc_82224",
+      "new": "DDZ_AsteroidCullOrDraw",
+      "profiles": ["sk"],
+      "meaning": "Finish an unbroken asteroid through the ordinary coarse horizontal lifetime helper."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 32,
+      "old": "loc_8222A",
+      "new": "DDZ_AsteroidBreakAndKnockPlayer",
+      "profiles": ["sk"],
+      "meaning": "Start contact breakup and apply a backward impulse to the shared flight controller when present."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 40,
+      "old": "loc_82240",
+      "new": "DDZ_AsteroidReduceScrollSpeed",
+      "profiles": ["sk"],
+      "meaning": "Subtract one 16.16 flight-speed unit with the original unsigned floor comparison."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 48,
+      "old": "loc_82252",
+      "new": "DDZ_AsteroidStoreSpeedAndCheckSize",
+      "profiles": ["sk"],
+      "meaning": "Store the contact-adjusted flight speed and select large-asteroid splitting only for high subtype nibble 0x20."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 62,
+      "old": "loc_82276",
+      "new": "DDZ_LargeAsteroidSelectSplitByY",
+      "profiles": ["sk"],
+      "meaning": "Choose centered or vertical-side splitting from the signed Y difference and its magnitude."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 70,
+      "old": "loc_82284",
+      "new": "DDZ_LargeAsteroidSelectSplitOffsets",
+      "profiles": ["sk"],
+      "meaning": "Resolve one of three split layouts and prepare three medium asteroid attempts."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 75,
+      "old": "loc_8228E",
+      "new": "DDZ_LargeAsteroidSpawnMediumPieces",
+      "profiles": ["sk"],
+      "meaning": "Allocate up to three medium asteroids, preserving low subtype drift selection."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 97,
+      "old": "loc_822D8",
+      "new": "DDZ_AsteroidSelectParticleRecord",
+      "profiles": ["sk"],
+      "meaning": "Choose a five- or seven-particle breakup record from subtype bit 4."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 108,
+      "old": "loc_822FA",
+      "new": "DDZ_AsteroidSpawnBreakupParticles",
+      "profiles": ["sk"],
+      "meaning": "Allocate breakup particles from signed offsets, packed subtype bytes and velocity WORDs."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 127,
+      "old": "loc_82334",
+      "new": "DDZ_AsteroidClearRespawnBit",
+      "profiles": ["sk"],
+      "meaning": "Clear the asteroid placement loaded bit before deleting the broken actor."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 133,
+      "old": "loc_82340",
+      "new": "DDZ_AsteroidDeleteAfterBreakup",
+      "profiles": ["sk"],
+      "meaning": "Immediately delete the original asteroid after breakup or an allocation shortage."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 136,
+      "old": "off_82346",
+      "new": "DDZ_LargeAsteroidSplitLayoutTable",
+      "profiles": ["sk"],
+      "meaning": "Three LONG pointers to the large-asteroid medium-child layouts."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 140,
+      "old": "word_82352",
+      "new": "DDZ_LargeAsteroidCenteredOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three signed WORD medium-child offsets for near-equal asteroid/player Y."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 144,
+      "old": "word_8235E",
+      "new": "DDZ_LargeAsteroidLowerOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three signed WORD medium-child offsets for asteroid Y at least 16 below Player1."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 148,
+      "old": "word_8236A",
+      "new": "DDZ_LargeAsteroidUpperOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three signed WORD medium-child offsets for asteroid Y at least 16 above Player1."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 152,
+      "old": "word_82376",
+      "new": "DDZ_LargeAsteroidParticleYShifts",
+      "profiles": ["sk"],
+      "meaning": "Signed WORD origin corrections paired with the three medium-child layouts."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 156,
+      "old": "off_82382",
+      "new": "DDZ_AsteroidParticleRecordsBySize",
+      "profiles": ["sk"],
+      "meaning": "Two LONG pointers selected by asteroid subtype bit 4."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 159,
+      "old": "word_8238A",
+      "new": "DDZ_AsteroidFiveParticleRecords",
+      "profiles": ["sk"],
+      "meaning": "Five custom particle records used when asteroid subtype bit 4 is clear."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 171,
+      "old": "word_823B4",
+      "new": "DDZ_AsteroidSevenParticleRecords",
+      "profiles": ["sk"],
+      "meaning": "Seven custom particle records used when asteroid subtype bit 4 is set."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 189,
+      "old": "loc_823EE",
+      "new": "DDZ_InitAsteroidParticle",
+      "profiles": ["sk"],
+      "meaning": "Initialize a breakup particle while retaining copied mappings/art and supplied velocities."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 198,
+      "old": "loc_82412",
+      "new": "DDZ_AsteroidParticleWrapAnimateCull",
+      "profiles": ["sk"],
+      "meaning": "Apply wrap correction, animate and integrate a free breakup particle."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 206,
+      "old": "loc_8242A",
+      "new": "DDZ_InitSuperStarTrailAndArt",
+      "profiles": ["sk"],
+      "meaning": "Initialize the normal-super star trail slot and queue its uncompressed graphics."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 217,
+      "old": "loc_82452",
+      "new": "DDZ_SuperStarTrailCycleSnapshots",
+      "profiles": ["sk"],
+      "meaning": "Move and cycle the star trail only while super mode is active."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 235,
+      "old": "loc_82490",
+      "new": "DDZ_SuperStarTrailStoreFrame",
+      "profiles": ["sk"],
+      "meaning": "Store the advanced or restarted star mapping frame."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 238,
+      "old": "loc_82494",
+      "new": "DDZSuperStarTrail_DrawCurrentSnapshot",
+      "profiles": ["sk"],
+      "meaning": "Draw the current trail frame after movement or a frame update."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 242,
+      "old": "loc_8249A",
+      "new": "DDZ_InitHeavyLinearShot",
+      "profiles": ["sk"],
+      "meaning": "Initialize a four-shot pattern member with staggered delay and table-selected vertical velocity."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 259,
+      "old": "word_824D4",
+      "new": "DDZ_HeavyLinearShotYVelocities",
+      "profiles": ["sk"],
+      "meaning": "Sixteen signed velocity WORDs addressed by tick-group bytes plus even subtype."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 278,
+      "old": "loc_824F4",
+      "new": "DDZ_HeavyLinearShotWaitAndAttach",
+      "profiles": ["sk"],
+      "meaning": "Wait the subtype stagger before placing the heavy shot and attempting its two normal children."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 298,
+      "old": "loc_8253C",
+      "new": "DDZ_HeavyLinearShotSetFlightPriority",
+      "profiles": ["sk"],
+      "meaning": "Advance the launch-stage timer before selecting accelerated flight."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 305,
+      "old": "loc_82554",
+      "new": "DDZ_HeavyLinearShotMoveDuringLaunch",
+      "profiles": ["sk"],
+      "meaning": "Step the heavy shot four integer X pixels during launch."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 310,
+      "old": "loc_8255C",
+      "new": "DDZ_HeavyLinearShotAccelerateLeft",
+      "profiles": ["sk"],
+      "meaning": "Reduce the shot horizontal velocity and integrate its independent flight motion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 314,
+      "old": "loc_82568",
+      "new": "DDZ_HeavyLinearShotAnimateAndCollide",
+      "profiles": ["sk"],
+      "meaning": "Shared heavy-shot animation, world carry, collision and horizontal lifetime tail."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 325,
+      "old": "loc_82588",
+      "new": "DDZ_InitHeavyShotFrontChild",
+      "profiles": ["sk"],
+      "meaning": "Initialize the front animated child of a heavy linear shot."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 332,
+      "old": "loc_8259A",
+      "new": "DDZ_HeavyShotChildInheritPriority",
+      "profiles": ["sk"],
+      "meaning": "Change attachment queue priority when its parent launch-transition bit is set."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 338,
+      "old": "loc_825AC",
+      "new": "DDZ_HeavyShotChildAnimateAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Animate and follow the front heavy-shot attachment."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 345,
+      "old": "loc_825BC",
+      "new": "DDZ_InitHeavyShotRearTrail",
+      "profiles": ["sk"],
+      "meaning": "Initialize the rear heavy-shot attachment using the shared missile trail updater without heading updates."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 351,
+      "old": "loc_825CA",
+      "new": "DDZ_InitHeavyCurveShot",
+      "profiles": ["sk"],
+      "meaning": "Initialize a staggered curving-shot pattern member and execute its first launch step."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 366,
+      "old": "loc_82606",
+      "new": "DDZ_HeavyCurveShotSetCurveTimer",
+      "profiles": ["sk"],
+      "meaning": "Advance the initial curve-shot launch delay before selecting the subtype timing."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 379,
+      "old": "loc_82632",
+      "new": "DDZ_HeavyCurveShotMoveDuringLaunch",
+      "profiles": ["sk"],
+      "meaning": "Integrate launch motion, carry with flight scroll and honor parent death before XY culling."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 389,
+      "old": "loc_82652",
+      "new": "DDZ_HeavyCurveShotWaitAndCurve",
+      "profiles": ["sk"],
+      "meaning": "Use the subtype countdown to select particle-emitting wait or accelerated curved flight."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 402,
+      "old": "loc_82678",
+      "new": "DDZ_HeavyCurveShotTryPuffEvery8Frames",
+      "profiles": ["sk"],
+      "meaning": "Attempt one simple trailing puff on eight-VInt boundaries during the nonnegative subtype delay."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 409,
+      "old": "loc_8268A",
+      "new": "DDZ_HeavyCurveShotMoveAndCollide",
+      "profiles": ["sk"],
+      "meaning": "Finish curve-shot flight with movement, scroll carry, heavy-contact handling and XY lifetime."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 417,
+      "old": "loc_826A0",
+      "new": "DDZ_InitHeavyCurveShotPuff",
+      "profiles": ["sk"],
+      "meaning": "Initialize a curve-shot trailing puff using shared raw-animation motion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 429,
+      "old": "loc_826CC",
+      "new": "DDZ_InitDefeatExplosion",
+      "profiles": ["sk"],
+      "meaning": "Initialize an independently moving DDZ defeat explosion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 435,
+      "old": "loc_826E2",
+      "new": "DDZ_DefeatExplosionSelectScrollCarry",
+      "profiles": ["sk"],
+      "meaning": "Apply world correction and scroll carry only for a nonzero-subtype explosion emitter parent."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 444,
+      "old": "loc_826FC",
+      "new": "DDZ_DefeatExplosionAnimateAndMove",
+      "profiles": ["sk"],
+      "meaning": "Animate the explosion and add its two acceleration WORDs before movement."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 455,
+      "old": "loc_82722",
+      "new": "DDZ_RingWarningCheckTenRingThreshold",
+      "profiles": ["sk"],
+      "meaning": "Maintain music tempo mode from the unsigned ring-count warning threshold."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "original_line": 462,
+      "old": "loc_82732",
+      "new": "DDZ_RingWarningApplyChangedTempo",
+      "profiles": ["sk"],
+      "meaning": "Send the selected tempo mode only when it differs from the remembered WORD."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 28,
+      "old": "loc_8180E",
+      "new": "DDZ_InitBossPhase1AndAttachments",
+      "profiles": ["sk"],
+      "meaning": "Initialize the first boss stage and attempt its hit target, flickering attachments and turrets."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 46,
+      "old": "loc_81856",
+      "new": "DDZ_Phase1ApproachAndEnableAttacks",
+      "profiles": ["sk"],
+      "meaning": "Oscillate and approach before enabling first-stage turret attacks and missile launcher."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 61,
+      "old": "loc_81890",
+      "new": "DDZ_Phase1TrySpawnMissileLauncher",
+      "profiles": ["sk"],
+      "meaning": "Attempt the parent-linked first-stage three-missile launcher."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 70,
+      "old": "locret_818B2",
+      "new": "DDZ_Phase1ApproachReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during approach or after its transition allocation attempts."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 74,
+      "old": "loc_818B4",
+      "new": "DDZ_Phase1ChaseUntilTargetDefeated",
+      "profiles": ["sk"],
+      "meaning": "Chase with vertical swing until the shared first-stage hit target is marked defeated."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 96,
+      "old": "locret_81912",
+      "new": "DDZ_Phase1ChaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from chase or after beginning the first-stage defeat sequence."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 100,
+      "old": "loc_81914",
+      "new": "DDZBoss_WaitBeforeFirstStageDescent",
+      "profiles": ["sk"],
+      "meaning": "Keep horizontal chase adjustment during the five-second first-stage defeat delay."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 116,
+      "old": "locret_81956",
+      "new": "DDZ_Phase1DefeatWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during first-stage defeat delay or after selecting descent."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 120,
+      "old": "loc_81958",
+      "new": "DDZ_Phase1TickDescentPaletteSteps",
+      "profiles": ["sk"],
+      "meaning": "Schedule discrete normal-line-3 darkening passes during first-stage descent."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 131,
+      "old": "loc_81974",
+      "new": "DDZBoss_DarkenOneFirstStagePaletteLine",
+      "profiles": ["sk"],
+      "meaning": "Apply the original per-channel decrement to all 16 normal-line-3 colors."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 135,
+      "old": "loc_8197C",
+      "new": "DDZ_Phase1DescendAndSelectPhase2",
+      "profiles": ["sk"],
+      "meaning": "Move the first-stage wreck below the camera before reconfiguring the second stage."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 155,
+      "old": "loc_819CE",
+      "new": "DDZBoss_PrepareSecondStagePaletteCopy",
+      "profiles": ["sk"],
+      "meaning": "Prepare the replacement line-3 palette after the first-stage wreck leaves view."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 160,
+      "old": "loc_819DA",
+      "new": "DDZBoss_CopySecondStagePaletteLine",
+      "profiles": ["sk"],
+      "meaning": "Copy exactly 32 bytes into normal palette line 3."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 167,
+      "old": "loc_819EA",
+      "new": "DDZ_SavePaletteAndQueueEmeraldArt",
+      "profiles": ["sk"],
+      "meaning": "Copy the full normal palette to target palette and queue Master Emerald graphics."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 175,
+      "old": "loc_81A00",
+      "new": "DDZ_WaitAndResetForPhase2Entrance",
+      "profiles": ["sk"],
+      "meaning": "End the short transition pause and reactivate the boss for its second entrance."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 186,
+      "old": "loc_81A28",
+      "new": "DDZ_Phase2LockCameraAndSpawnParts",
+      "profiles": ["sk"],
+      "meaning": "Lock both camera axes and place the second-stage boss below and behind the camera."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 207,
+      "old": "loc_81A74",
+      "new": "DDZ_Phase2RiseAndStartEntrance",
+      "profiles": ["sk"],
+      "meaning": "Move the second-stage boss upward, stop its vertical motion once, and continue rightward acceleration."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 219,
+      "old": "loc_81A9C",
+      "new": "DDZ_Phase2EnterAndBeginFinalChase",
+      "profiles": ["sk"],
+      "meaning": "Accelerate rightward until the second-stage boss reaches the final chase window."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 241,
+      "old": "loc_81AFC",
+      "new": "DDZBoss_SetSecondStageMaximumYTarget",
+      "profiles": ["sk"],
+      "meaning": "Prepare gradual camera maximum-Y expansion for final chase."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 249,
+      "old": "loc_81B16",
+      "new": "DDZ_EnableFlightForFinalChase",
+      "profiles": ["sk"],
+      "meaning": "Enable flight-controller flag 2 after final-chase camera setup."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 255,
+      "old": "locret_81B24",
+      "new": "DDZ_Phase2EntranceReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during entrance or after final-chase setup."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 259,
+      "old": "loc_81B26",
+      "new": "DDZ_FinalChaseSwingAndReadRecoil",
+      "profiles": ["sk"],
+      "meaning": "Start final-stage swing, movement and input-dependent horizontal positioning."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 269,
+      "old": "loc_81B44",
+      "new": "DDZ_FinalChaseAdjustXWithoutRight",
+      "profiles": ["sk"],
+      "meaning": "Apply recoil-derived horizontal step and the no-right-input upper gate."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 285,
+      "old": "loc_81B68",
+      "new": "DDZBoss_FinalChaseAdjustXWithRightInput",
+      "profiles": ["sk"],
+      "meaning": "Apply the right-input step and original lower comparison."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 294,
+      "old": "loc_81B7C",
+      "new": "DDZ_FinalChaseStoreCandidateX",
+      "profiles": ["sk"],
+      "meaning": "Commit the original SWAP-based horizontal candidate."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 298,
+      "old": "loc_81B82",
+      "new": "DDZ_FinalChaseAddForwardStepAndRecoil",
+      "profiles": ["sk"],
+      "meaning": "Prepare the full LONG X value used by the final-stage window clamp."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 305,
+      "old": "loc_81B98",
+      "new": "DDZ_FinalChaseClampXToCamera",
+      "profiles": ["sk"],
+      "meaning": "Clamp the advanced LONG X against the original packed camera-word bounds."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 314,
+      "old": "loc_81BB0",
+      "new": "DDZBoss_SelectFinalChaseLongBoundary",
+      "profiles": ["sk"],
+      "meaning": "Replace the advanced position with the currently selected LONG boundary."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 317,
+      "old": "loc_81BB2",
+      "new": "DDZ_FinalChaseStoreXSpawnAndHitCheck",
+      "profiles": ["sk"],
+      "meaning": "Commit final-stage X, attempt a height-selected four-shot pattern and resolve direct player contact."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 323,
+      "old": "loc_81BBE",
+      "new": "DDZ_FinalDefeatDispatchAndCarry",
+      "profiles": ["sk"],
+      "meaning": "Dispatch the four final-defeat stages with rebase subtraction and scroll carry."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 336,
+      "old": "off_81BEA",
+      "new": "DDZBoss_FinalDefeatStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Four relative WORD states for camera catch-up, fall/fade setup, fade completion and level handoff."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 343,
+      "old": "loc_81BF2",
+      "new": "DDZ_FinalDefeatCameraCatchup",
+      "profiles": ["sk"],
+      "meaning": "Advance camera X until it reaches the defeated boss before starting its fall."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 358,
+      "old": "locret_81C2A",
+      "new": "DDZ_FinalDefeatCameraReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while the camera catches the defeated boss or after its anchor attempt."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 362,
+      "old": "loc_81C2C",
+      "new": "DDZBoss_FinalDefeatGateExplosionSound",
+      "profiles": ["sk"],
+      "meaning": "Request the defeat explosion sound on every eighth VInt phase before falling."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 369,
+      "old": "loc_81C3E",
+      "new": "DDZ_FinalDefeatFallAndTryWhiteFade",
+      "profiles": ["sk"],
+      "meaning": "Accelerate downward until starting the final full-palette fade-to-white actor."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 381,
+      "old": "locret_81C6E",
+      "new": "DDZ_FinalDefeatFallReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during falling or after the final palette actor allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 385,
+      "old": "loc_81C70",
+      "new": "DDZ_FinalDefeatCarryPlayerUntilFade",
+      "profiles": ["sk"],
+      "meaning": "Move the flight controller right and wait for palette actor status bit 7."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 399,
+      "old": "loc_81CA4",
+      "new": "DDZ_SaveAndStartEndingLevel",
+      "profiles": ["sk"],
+      "meaning": "After the short final pause, save game progress and start level 0xD01."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 409,
+      "old": "loc_81CC6",
+      "new": "DDZ_InitMasterEmeraldAndCheckPalette",
+      "profiles": ["sk"],
+      "meaning": "Initialize the carried Master Emerald and remember both its carrier and root."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 420,
+      "old": "loc_81CEC",
+      "new": "DDZ_MasterEmeraldCheckSevenEmeralds",
+      "profiles": ["sk"],
+      "meaning": "Enable Master Emerald palette rotation only if all seven status bytes equal 3."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 429,
+      "old": "loc_81D04",
+      "new": "DDZ_MasterEmeraldCopyPaletteSlots",
+      "profiles": ["sk"],
+      "meaning": "Install both eligible line-4 palette slots and append the caller-owned RAM terminator."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 434,
+      "old": "locret_81D0C",
+      "new": "DDZ_MasterEmeraldInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after a status mismatch or successful palette-slot installation."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 438,
+      "old": "loc_81D0E",
+      "new": "DDZ_MasterEmeraldFollowAndCycleColors",
+      "profiles": ["sk"],
+      "meaning": "Follow the carrier with a frame-dependent signed BYTE Y offset and optional palette cycling."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 450,
+      "old": "loc_81D32",
+      "new": "DDZMasterEmerald_TestRootReleaseOrDraw",
+      "profiles": ["sk"],
+      "meaning": "Check the separately saved root flag before drawing or releasing the emerald."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 457,
+      "old": "loc_81D44",
+      "new": "DDZ_MasterEmeraldBeginReleasedScroll",
+      "profiles": ["sk"],
+      "meaning": "Replace carried display with the released emerald X updater."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 460,
+      "old": "loc_81D4A",
+      "new": "DDZ_MasterEmeraldClampReleasedX",
+      "profiles": ["sk"],
+      "meaning": "Rebase released emerald X and keep it at least Player1 X before scroll carry."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 469,
+      "old": "loc_81D64",
+      "new": "DDZ_MasterEmeraldCarryAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Add the current integer scroll delta to released emerald X and draw."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 475,
+      "old": "loc_81D72",
+      "new": "DDZ_InitPhase2PartAndEmeraldChild",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of three second-stage attached graphic variants."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 493,
+      "old": "byte_81DB0",
+      "new": "DDZ_Phase2PartInitialFrames",
+      "profiles": ["sk"],
+      "meaning": "Three initial mapping frame bytes for second-stage attachments."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 498,
+      "old": "word_81DB4",
+      "new": "DDZ_Phase2PartVariantOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three parent-relative WORD XY pairs for second-stage attachments."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 502,
+      "old": "off_81DC0",
+      "new": "DDZ_Phase2PartOptionalAnimPointers",
+      "profiles": ["sk"],
+      "meaning": "Three LONG fixed-pointer frame-delay animation selections."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 508,
+      "old": "loc_81DCC",
+      "new": "DDZ_Phase2PartAnimateOptionalStream",
+      "profiles": ["sk"],
+      "meaning": "Run the selected raw animation only when its stored pointer is nonzero."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 514,
+      "old": "loc_81DD8",
+      "new": "DDZ_Phase2PartFollowOrDetach",
+      "profiles": ["sk"],
+      "meaning": "Follow root until root flag 4 detaches the attachment as flickering debris."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 530,
+      "old": "loc_81E16",
+      "new": "DDZ_Phase2PartDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw attachment after normal follow or its detach/explosion attempt."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 533,
+      "old": "word_81E1C",
+      "new": "DDZ_Phase2PartDetachedVelocities",
+      "profiles": ["sk"],
+      "meaning": "Three signed x/y velocity WORD pairs for detached attachments."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 539,
+      "old": "loc_81E28",
+      "new": "DDZ_Phase2PartCarryAndFlicker",
+      "profiles": ["sk"],
+      "meaning": "Move detached attachment with scroll carry, gravity, range deletion and alternating drawing."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 547,
+      "old": "loc_81E3C",
+      "new": "DDZ_Phase1TargetDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch first-stage missile hit target and draw its current presentation."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 554,
+      "old": "off_81E50",
+      "new": "DDZFirstStageHitTarget_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two relative WORD states for hit-target initialization and follow/flash policy."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 559,
+      "old": "loc_81E54",
+      "new": "DDZ_InitPhase1TargetHandleAndHealth",
+      "profiles": ["sk"],
+      "meaning": "Initialize the shared homing-missile hit target with health byte 7."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 567,
+      "old": "loc_81E72",
+      "new": "DDZ_Phase1TargetFollowAndResolveHit",
+      "profiles": ["sk"],
+      "meaning": "Synchronize target position and apply missile-hit recovery or defeat."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 572,
+      "old": "loc_81E7A",
+      "new": "DDZ_Phase1TargetFollowUntilDiscard",
+      "profiles": ["sk"],
+      "meaning": "Keep the defeated first-stage hit target attached until the root discard flag."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 577,
+      "old": "loc_81E82",
+      "new": "DDZ_InitTurretOffsetAndShotTimer",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of three eight-way aimed turrets with staggered first-shot delay."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 591,
+      "old": "word_81EAC",
+      "new": "DDZTurret_ParentWordOffsetsByVariant",
+      "profiles": ["sk"],
+      "meaning": "Three parent-relative turret WORD XY pairs."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 597,
+      "old": "loc_81EB8",
+      "new": "DDZTurret_WaitForRootAttackEnable",
+      "profiles": ["sk"],
+      "meaning": "Wait for root flag 3 before enabling the turret shot countdown."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 603,
+      "old": "loc_81ECA",
+      "new": "DDZTurret_CountDownAndTryOneAimedShot",
+      "profiles": ["sk"],
+      "meaning": "Attempt a simple turret shot after signed WORD timer underflow."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 610,
+      "old": "loc_81EDE",
+      "new": "DDZ_TurretAimEvery16Frames",
+      "profiles": ["sk"],
+      "meaning": "Update the turret eight-way index and mapping frame on a VInt phase gate."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 625,
+      "old": "loc_81F0A",
+      "new": "DDZTurret_PositionMuzzleAndDrawOrDetach",
+      "profiles": ["sk"],
+      "meaning": "Position turret with indexed muzzle nudge and use parent-status flicker-move policy."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 631,
+      "old": "loc_81F14",
+      "new": "DDZ_InitTurretShotAndVelocity",
+      "profiles": ["sk"],
+      "meaning": "Initialize small turret projectile with inherited mappings/art and parent-indexed velocity."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 637,
+      "old": "loc_81F26",
+      "new": "DDZ_TurretShotMoveAndCollide",
+      "profiles": ["sk"],
+      "meaning": "Integrate projectile velocity, resolve player/parent interaction and apply XY range lifetime."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 643,
+      "old": "loc_81F36",
+      "new": "DDZ_InitPhase1FlickerPart",
+      "profiles": ["sk"],
+      "meaning": "Initialize the first-stage group of three phase-flickering attached graphics."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 648,
+      "old": "loc_81F42",
+      "new": "DDZ_FlickerPartStoreOffsets",
+      "profiles": ["sk"],
+      "meaning": "Shared initializer for first- and second-stage flickering attachment offsets."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 658,
+      "old": "word_81F5E",
+      "new": "DDZ_Phase1FlickerPartOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three WORD parent-relative positions for first-stage flickering attachments."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 664,
+      "old": "loc_81F6A",
+      "new": "DDZ_FlickerPartFollowAndDrawByTick",
+      "profiles": ["sk"],
+      "meaning": "Follow parent WORD offsets and draw only when VInt bit 1 is clear."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 671,
+      "old": "loc_81F7A",
+      "new": "DDZ_FlickerPartCheckHiddenParent",
+      "profiles": ["sk"],
+      "meaning": "Keep parent lifetime checking on hidden VInt phases."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 675,
+      "old": "loc_81F7E",
+      "new": "DDZ_InitPhase2FlickerPart",
+      "profiles": ["sk"],
+      "meaning": "Initialize two second-stage flickering graphics through the shared offset initializer."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 681,
+      "old": "word_81F8C",
+      "new": "DDZ_Phase2FlickerPartOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two signed WORD offset pairs for second-stage flickering attachments."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 686,
+      "old": "loc_81F94",
+      "new": "DDZ_MissileLauncherWaitForPlayerX",
+      "profiles": ["sk"],
+      "meaning": "Follow the first-stage boss and launch a three-missile group once armed and reached by Player1."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 697,
+      "old": "loc_81FB0",
+      "new": "DDZ_MissileLauncherTryThreeHoming",
+      "profiles": ["sk"],
+      "meaning": "Attempt three indexed subtype-1 homing missiles from the launcher."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "original_line": 709,
+      "old": "loc_81FDA",
+      "new": "DDZ_MissileCheckParentAndRetire",
+      "profiles": ["sk"],
+      "meaning": "Shared parent-status tail for the launcher and missile initialization/follow states."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 20,
+      "old": "word_82D86",
+      "new": "DDZ_BossFlashPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Scatter destinations for twelve boss hit-flash colors."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 25,
+      "old": "word_82D9E",
+      "new": "DDZ_BossFlashPaletteProfiles",
+      "profiles": ["sk"],
+      "meaning": "Two disjoint twelve-WORD source profiles for both boss hit policies."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 30,
+      "old": "loc_82DCE",
+      "new": "DDZ_ChaseCheckSuperHitOrFlash",
+      "profiles": ["sk"],
+      "meaning": "Recognize final chase-body contact or continue its hit cooldown."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 51,
+      "old": "loc_82E14",
+      "new": "DDZ_ChaseSelectFlashPalette",
+      "profiles": ["sk"],
+      "meaning": "Select the current final chase hit-flash source row."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 57,
+      "old": "loc_82E22",
+      "new": "DDZ_ChaseCopyFlashAndTickCooldown",
+      "profiles": ["sk"],
+      "meaning": "Copy the selected twelve colors and advance the final chase cooldown."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 61,
+      "old": "locret_82E2A",
+      "new": "DDZ_ChaseHitReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared final chase hit-policy return."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 65,
+      "old": "loc_82E2C",
+      "new": "DDZ_ChaseApplyDefeatState",
+      "profiles": ["sk"],
+      "meaning": "Commit final defeat when the decremented health BYTE becomes negative."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 83,
+      "old": "loc_82E72",
+      "new": "DDZ_ChaseTrySpawnThreeBurstActor",
+      "profiles": ["sk"],
+      "meaning": "Try to attach the final three-position explosion sequence to the defeated world actor."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 92,
+      "old": "word_82E92",
+      "new": "DDZ_ChasePlayerHitBounds",
+      "profiles": ["sk"],
+      "meaning": "Signed contact rectangle used by the final chase-body hit test."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 96,
+      "old": "loc_82E9A",
+      "new": "DDZ_Phase1UpdateTenBurstSequence",
+      "profiles": ["sk"],
+      "meaning": "Follow the parent and periodically attempt ten explosion-emitter positions."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 115,
+      "old": "loc_82EDC",
+      "new": "DDZ_Phase1AdvanceBurstAttempt",
+      "profiles": ["sk"],
+      "meaning": "Consume one of the ten burst positions even on allocation failure."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 123,
+      "old": "loc_82EEA",
+      "new": "DDZ_Phase1ScheduleBurstActorDelete",
+      "profiles": ["sk"],
+      "meaning": "Finish the first breakup after all ten position attempts."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 126,
+      "old": "loc_82EEE",
+      "new": "DDZ_Phase1RestoreNormalColors",
+      "profiles": ["sk"],
+      "meaning": "Restore normal boss colors on non-attempt updates or final completion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 130,
+      "old": "word_82EF4",
+      "new": "DDZFirstStageBreakup_TenWordOffsetPairs",
+      "profiles": ["sk"],
+      "meaning": "Ten parent-relative burst-center coordinates for the first defeat stage."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 143,
+      "old": "loc_82F1C",
+      "new": "DDZ_FinalUpdateThreeBurstSequence",
+      "profiles": ["sk"],
+      "meaning": "Follow the defeated world and periodically attempt three scrolling burst emitters."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 161,
+      "old": "loc_82F5C",
+      "new": "DDZ_FinalAdvanceOrFinishBurstAttempts",
+      "profiles": ["sk"],
+      "meaning": "Consume the current final-breakup position and retire after the third."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 167,
+      "old": "locret_82F6A",
+      "new": "DDZ_FinalBurstSequenceReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after a final-breakup countdown or intermediate position attempt."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 170,
+      "old": "word_82F6C",
+      "new": "DDZFinalBreakup_ThreeWordOffsetPairs",
+      "profiles": ["sk"],
+      "meaning": "Three parent-relative burst-center coordinates for final defeat."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 176,
+      "old": "loc_82F78",
+      "new": "DDZ_EmitterTryNextExplosionOffset",
+      "profiles": ["sk"],
+      "meaning": "Attempt one explosion at each of twenty-four signed local offsets."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 203,
+      "old": "locret_82FD2",
+      "new": "DDZ_EmitterExplosionAttemptReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after one consumed explosion offset."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 206,
+      "old": "byte_82FD4",
+      "new": "DDZ_EmitterExplosionOffsets",
+      "profiles": ["sk"],
+      "meaning": "Twenty-four signed BYTE XY positions around each burst center."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 234,
+      "old": "loc_83004",
+      "new": "DDZ_InitPhase1ExplosionAnchor",
+      "profiles": ["sk"],
+      "meaning": "Install the first-stage defeat explosion anchor and attempt a large explosion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 243,
+      "old": "loc_8302A",
+      "new": "DDZ_Phase1AnchorFollowUntilRelease",
+      "profiles": ["sk"],
+      "meaning": "Follow the first-stage world until its breakup release bit."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 248,
+      "old": "loc_83038",
+      "new": "DDZ_DeleteSceneActor",
+      "profiles": ["sk"],
+      "meaning": "Shared direct actor-deletion tail for DDZ effects and projectiles."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 252,
+      "old": "loc_8303E",
+      "new": "DDZ_InitFinalAnchorAndTryExplosion",
+      "profiles": ["sk"],
+      "meaning": "Install the final defeat anchor and try its first independent explosion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 261,
+      "old": "loc_83064",
+      "new": "DDZ_FinalAnchorTrySecondExplosion",
+      "profiles": ["sk"],
+      "meaning": "Try the second final-defeat explosion regardless of first allocation outcome."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 267,
+      "old": "loc_83078",
+      "new": "DDZ_FinalAnchorFollowOffsets",
+      "profiles": ["sk"],
+      "meaning": "Follow the world with fixed WORD offsets without drawing or explicit retirement."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 290,
+      "old": "loc_830B8",
+      "new": "DDZ_SelectUpperPlayerShotPattern",
+      "profiles": ["sk"],
+      "meaning": "Choose the four-shot pattern when Player1 is at or above the split height."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 315,
+      "old": "loc_830EC",
+      "new": "DDZ_BossCheckRightHeldStepBound",
+      "profiles": ["sk"],
+      "meaning": "Compute the right-held horizontal candidate with a strict lower-bound gate."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 324,
+      "old": "loc_83100",
+      "new": "DDZ_BossCommitRightHeldStep",
+      "profiles": ["sk"],
+      "meaning": "Commit an accepted integer-X candidate through the original full-LONG write."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 328,
+      "old": "locret_83106",
+      "new": "DDZ_BossHorizontalStepReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after horizontal candidate commit or right-held bound rejection."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 334,
+      "old": "loc_83108",
+      "new": "DDZ_StageFlashInitFivePasses",
+      "profiles": ["sk"],
+      "meaning": "Initialize the first-stage defeat full-palette white flash."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 339,
+      "old": "loc_8311A",
+      "new": "DDZ_StageFlashWaitAndBeginPass",
+      "profiles": ["sk"],
+      "meaning": "Run one whole-palette raise pass every four countdown updates."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 346,
+      "old": "loc_8312E",
+      "new": "DDZ_StageFlashRaiseAllColors",
+      "profiles": ["sk"],
+      "meaning": "Raise each RGB channel toward white across all four palette lines."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 354,
+      "old": "loc_8313E",
+      "new": "DDZ_StageFlashBeginPaletteRestore",
+      "profiles": ["sk"],
+      "meaning": "After five raise passes select the common target-palette restoration effect."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 379,
+      "old": "word_8317E",
+      "new": "DDZ_AsteroidSubtypeXVelocities",
+      "profiles": ["sk"],
+      "meaning": "Horizontal drift choices selected by subtype low nibble."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 381,
+      "old": "byte_8318A",
+      "new": "DDZ_AsteroidSizeFrameAndRange",
+      "profiles": ["sk"],
+      "meaning": "Three eight-byte descriptors selected by subtype high nibble."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 388,
+      "old": "word_831A2",
+      "new": "DDZAsteroidSmall_ManualContactRectangle",
+      "profiles": ["sk"],
+      "meaning": "Small asteroid signed offset/extent contact rectangle."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 390,
+      "old": "word_831AA",
+      "new": "DDZAsteroidMedium_ManualContactRectangle",
+      "profiles": ["sk"],
+      "meaning": "Medium asteroid signed offset/extent contact rectangle."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "original_line": 392,
+      "old": "word_831B2",
+      "new": "DDZAsteroidLarge_ManualContactRectangle",
+      "profiles": ["sk"],
+      "meaning": "Large asteroid signed offset/extent contact rectangle."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 18,
+      "old": "loc_82014",
+      "new": "DDZ_InitHomingMissileVolley",
+      "profiles": ["sk"],
+      "meaning": "Initialize a nonzero-subtype missile using its three-volley member index."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 29,
+      "old": "word_82032",
+      "new": "DDZHomingMissile_InitialVolleyYNudges",
+      "profiles": ["sk"],
+      "meaning": "Three signed WORD initial Y nudges indexed by volley member BYTE."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 33,
+      "old": "loc_82038",
+      "new": "DDZ_StraightMissilePlayDashOnce",
+      "profiles": ["sk"],
+      "meaning": "Wait for an onscreen render flag before latching the straight missile Dash sound."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 40,
+      "old": "loc_8204C",
+      "new": "DDZ_StraightMissileMoveAndCollide",
+      "profiles": ["sk"],
+      "meaning": "Move a straight missile two integer pixels left and apply its lifetime/contact policy."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 48,
+      "old": "loc_82060",
+      "new": "DDZ_HomingMissileFollowDuringDelay",
+      "profiles": ["sk"],
+      "meaning": "Hold a volley missile at its parent position until its indexed delay underflows."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 61,
+      "old": "loc_8209A",
+      "new": "DDZ_HomingMissileCheckHiddenParent",
+      "profiles": ["sk"],
+      "meaning": "Run the parent lifetime gate after delayed following or release setup."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 65,
+      "old": "loc_8209E",
+      "new": "DDZ_HomingMissileMoveAndFollowY",
+      "profiles": ["sk"],
+      "meaning": "Perform the short rightward release stage while following parent Y."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 73,
+      "old": "loc_820B6",
+      "new": "DDZ_InitHomingMissileMotion",
+      "profiles": ["sk"],
+      "meaning": "Start the timed coast before the programmed turn and homing states."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 81,
+      "old": "loc_820D0",
+      "new": "DDZ_HomingMissileDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Run coast, programmed turn or homing motion, then missile contact and drawing."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 89,
+      "old": "off_820E8",
+      "new": "DDZHomingMissile_MotionStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Three relative WORD motion-state offsets indexed by routine 0,2,4."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 95,
+      "old": "loc_820EE",
+      "new": "DDZ_HomingMissileCoastAndWait",
+      "profiles": ["sk"],
+      "meaning": "Integrate the released missile and count down to the programmed turn."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 100,
+      "old": "loc_820F8",
+      "new": "DDZ_HomingMissileStartProgrammedTurn",
+      "profiles": ["sk"],
+      "meaning": "Begin the indexed turn stage and elevate its art/queue priority."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 110,
+      "old": "byte_8211E",
+      "new": "DDZ_HomingMissileTurnSteps",
+      "profiles": ["sk"],
+      "meaning": "Signed BYTE heading increments for the three volley members."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 115,
+      "old": "loc_82122",
+      "new": "DDZ_HomingMissileTickTurnTimer",
+      "profiles": ["sk"],
+      "meaning": "Advance the programmed-turn countdown and select homing after signed underflow."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 120,
+      "old": "loc_8212E",
+      "new": "DDZ_HomingMissileStepHeading",
+      "profiles": ["sk"],
+      "meaning": "Add the selected turn increment and derive this update velocity from heading."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 127,
+      "old": "loc_8213E",
+      "new": "DDZ_HomingMissileTurnTowardPlayer",
+      "profiles": ["sk"],
+      "meaning": "Use the player-bearing helper before display quantization and sine-derived flight."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 133,
+      "old": "loc_8214A",
+      "new": "DDZ_InitMissileFlame",
+      "profiles": ["sk"],
+      "meaning": "Initialize the missile rear flame while retaining inherited mappings/art."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 139,
+      "old": "loc_8215C",
+      "new": "DDZ_MissileFlameRefreshFrameAndOffset",
+      "profiles": ["sk"],
+      "meaning": "Refresh the flame mapping frame and signed BYTE rear offset from its missile sector."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 142,
+      "old": "loc_82160",
+      "new": "DDZ_MissileTrailTryPuffEvery8Frames",
+      "profiles": ["sk"],
+      "meaning": "Shared trail updater for sector-following missile flame or fixed-offset heavy-shot rear flame."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 150,
+      "old": "loc_82176",
+      "new": "DDZ_MissileTrailSelectVisibility",
+      "profiles": ["sk"],
+      "meaning": "Choose trail drawing or a hidden parent-only check from masked VInt bit 1."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 157,
+      "old": "loc_82184",
+      "new": "DDZ_MissileTrailHideAndCheckParent",
+      "profiles": ["sk"],
+      "meaning": "Hide this trail update while retaining its parent lifetime check."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 162,
+      "old": "loc_8218E",
+      "new": "DDZ_InitMissileTrailPuff",
+      "profiles": ["sk"],
+      "meaning": "Initialize a trail puff from its grandparent projectile +0x3C heading BYTE."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "original_line": 176,
+      "old": "loc_821C2",
+      "new": "DDZ_MissilePuffAnimateMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Shared puff update for opposite-heading missile puffs and fixed-diagonal heavy-shot puffs."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 4,
+      "old": "ObjDat3_831BA",
+      "new": "DDZFirstPhaseTurret_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "word_831C6",
+      "new": "DDZTurretShot_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 12,
+      "old": "ObjDat3_831CC",
+      "new": "DDZFirstPhaseVulnerableBody_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 17,
+      "old": "ObjDat3_831D8",
+      "new": "DDZ_Phase1DetailAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 22,
+      "old": "ObjDat3_831E4",
+      "new": "DDZ_Phase2DetailAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 32,
+      "old": "word_831FC",
+      "new": "DDZ_MissileFlamePartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 35,
+      "old": "word_83202",
+      "new": "DDZ_TrailPuffPartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 38,
+      "old": "word_83208",
+      "new": "DDZAsteroidFragment_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 41,
+      "old": "ObjDat3_8320E",
+      "new": "DDZSecondPhaseAttachedParts_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 46,
+      "old": "ObjDat3_8321A",
+      "new": "DDZSuperPlayerTrailingStars_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 51,
+      "old": "ObjDat3_83226",
+      "new": "DDZMasterEmerald_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 56,
+      "old": "ObjDat3_83232",
+      "new": "DDZHorizontalHeavyProjectile_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 61,
+      "old": "word_8323E",
+      "new": "DDZ_HeavyShotFrontPartialAttrs",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 64,
+      "old": "ObjDat3_83244",
+      "new": "DDZCurvedHeavyProjectile_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Exact attributes for the actual DDZ actor role."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 69,
+      "old": "ChildObjDat_83250",
+      "new": "DDZMissileRearFlame_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 72,
+      "old": "ChildObjDat_83256",
+      "new": "DDZ_MissileFlamePuffChild",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "ChildObjDat_8325C",
+      "new": "DDZ_Phase1VulnerableBodyChild",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 78,
+      "old": "ChildObjDat_83262",
+      "new": "DDZ_Phase1FlickerDetailChildren",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 81,
+      "old": "ChildObjDat_83268",
+      "new": "DDZFirstPhaseTurrets_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "ChildObjDat_8326E",
+      "new": "DDZTurretShot_SimpleChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 87,
+      "old": "ChildObjDat_83274",
+      "new": "DDZ_Phase2AttachedPartChildren",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 90,
+      "old": "ChildObjDat_8327A",
+      "new": "DDZMasterEmerald_NormalChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 94,
+      "old": "ChildObjDat_83282",
+      "new": "DDZ_Phase2FlickerDetailChildren",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 97,
+      "old": "ChildObjDat_83288",
+      "new": "DDZ_CurvedHeavyShotChildren",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 100,
+      "old": "ChildObjDat_8328E",
+      "new": "DDZ_HorizontalHeavyShotChildren",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 103,
+      "old": "ChildObjDat_83294",
+      "new": "DDZ_HorizontalHeavyShotEffects",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 109,
+      "old": "ChildObjDat_832A2",
+      "new": "DDZ_CurvedHeavyShotPuffChild",
+      "profiles": ["sk"],
+      "meaning": "Exact child record and real creator/actor relationship."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 112,
+      "old": "byte_832A8",
+      "new": "DDZ_AsteroidFragmentSubtype0Anim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 114,
+      "old": "byte_832AE",
+      "new": "DDZ_AsteroidFragmentOtherAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 116,
+      "old": "byte_832B4",
+      "new": "DDZ_TrailPuffDeleteAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 123,
+      "old": "byte_832BF",
+      "new": "DDZ_HorizontalHeavyShotAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 125,
+      "old": "byte_832C3",
+      "new": "DDZ_HorizontalHeavyShotFrontAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 133,
+      "old": "byte_832D0",
+      "new": "DDZ_Phase2AttachedPart0Anim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "original_line": 139,
+      "old": "byte_832D9",
+      "new": "DDZ_Phase2AttachedPart4Anim",
+      "profiles": ["sk"],
+      "meaning": "Actual raw animation format and verified actor owner."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 19,
+      "old": "loc_82AA0",
+      "new": "DDZ_HomingMissileApplySignedTurn",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected two-unit wrapped heading adjustment."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 22,
+      "old": "locret_82AA4",
+      "new": "DDZ_HomingMissileTurnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the homing tick gate or heading step."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 36,
+      "old": "locret_82ABA",
+      "new": "DDZ_MotionHelpersReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared RTS for heading quantization and cross-file countdown/bound gates."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 42,
+      "old": "loc_82ABC",
+      "new": "DDZ_MissileMoveAtDoubledHeadingSpeed",
+      "profiles": ["sk"],
+      "meaning": "Set missile velocity from its current heading and integrate once."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 65,
+      "old": "byte_82AF6",
+      "new": "DDZ_MissileFlameRearOffsets",
+      "profiles": ["sk"],
+      "meaning": "Sector-indexed signed BYTE rear offsets for the missile flame."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 94,
+      "old": "loc_82B30",
+      "new": "DDZ_MissileTestSectorContact",
+      "profiles": ["sk"],
+      "meaning": "Test Player1 using heading-sector contact geometry."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 106,
+      "old": "loc_82B50",
+      "new": "DDZ_MissileCheckLauncherDeath",
+      "profiles": ["sk"],
+      "meaning": "When no contact occurred, dispose only if the launcher parent is defeated."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 113,
+      "old": "locret_82B60",
+      "new": "DDZMissileContact_ReturnWithoutDisposal",
+      "profiles": ["sk"],
+      "meaning": "Return when missile contact and parent-death policy takes no action."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 117,
+      "old": "loc_82B62",
+      "new": "DDZ_MissileDamageBossAndFlash",
+      "profiles": ["sk"],
+      "meaning": "Apply missile contact to the first-stage boss collision receiver."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 123,
+      "old": "loc_82B6E",
+      "new": "DDZ_MissileGrantPlayerInvulnerability",
+      "profiles": ["sk"],
+      "meaning": "Mark Player1 temporarily immune after accepted missile contact."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 127,
+      "old": "loc_82B78",
+      "new": "DDZ_MissileDecrementLauncherCount",
+      "profiles": ["sk"],
+      "meaning": "Consume one launcher missile count after accepted boss or player contact."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 133,
+      "old": "loc_82B84",
+      "new": "DDZ_ProjectileWaitAndTryExplosion",
+      "profiles": ["sk"],
+      "meaning": "Replace a contacted missile or heavy projectile with a four-decrement draw wait."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 142,
+      "old": "loc_82BAC",
+      "new": "DDZ_ProjectileMarkDead",
+      "profiles": ["sk"],
+      "meaning": "Mark the disposing projectile dead independently of explosion allocation."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 148,
+      "old": "word_82BB4",
+      "new": "DDZ_MissileBossContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Manual rectangle for missile point inside the first-stage boss receiver."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 150,
+      "old": "off_82BBC",
+      "new": "DDZ_MissilePlayerBoundsBySector",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD choices sharing three player-contact rectangles."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 159,
+      "old": "word_82BCC",
+      "new": "DDZ_MissileVerticalContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Player contact rectangle for vertical missile display sectors0 and4."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 161,
+      "old": "word_82BD4",
+      "new": "DDZ_MissileDiagonalContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Player contact rectangle shared by all four diagonal sectors."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 163,
+      "old": "word_82BDC",
+      "new": "DDZ_MissileHorizontalContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Player contact rectangle for horizontal missile sectors2 and6."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 184,
+      "old": "loc_82C18",
+      "new": "DDZ_TurretShotScheduleDelete",
+      "profiles": ["sk"],
+      "meaning": "Schedule turret-shot deletion after accepted player contact or parent death."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 187,
+      "old": "locret_82C1E",
+      "new": "DDZ_TurretShotContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from turret-shot lifetime and contact policy."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 192,
+      "old": "word_82C20",
+      "new": "DDZTurretShotContact_PlayerRectangle",
+      "profiles": ["sk"],
+      "meaning": "Turret-shot signed actor-relative player contact geometry."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 209,
+      "old": "locret_82C4E",
+      "new": "DDZ_HeavyShotContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return when the heavy projectile needs no contact or death action."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 213,
+      "old": "loc_82C50",
+      "new": "DDZ_HeavyShotGrantIFramesAndSlow",
+      "profiles": ["sk"],
+      "meaning": "On accepted heavy-projectile touch slow scrolling and begin shared disposal."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 221,
+      "old": "word_82C62",
+      "new": "DDZ_HeavyShotPlayerContactBounds",
+      "profiles": ["sk"],
+      "meaning": "Heavy projectile signed player-contact rectangle."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 234,
+      "old": "loc_82C80",
+      "new": "DDZ_FlightStoreReducedScrollSpeed",
+      "profiles": ["sk"],
+      "meaning": "Store the original signed-clamped LONG scroll-speed reduction."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 263,
+      "old": "word_82CB6",
+      "new": "DDZTurretShot_EightPackedVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Eight WORD x/y velocity pairs selected by the turret heading byte displacement."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 295,
+      "old": "byte_82D08",
+      "new": "DDZTurret_EightSignedMuzzleNudgePairs",
+      "profiles": ["sk"],
+      "meaning": "Eight signed BYTE position nudges indexed by the even turret angle field."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 307,
+      "old": "loc_82D18",
+      "new": "DDZ_Phase1ReceiverCheckHit",
+      "profiles": ["sk"],
+      "meaning": "Handle missile-decremented receiver health and its nonstandard collision-flag flash gate."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 320,
+      "old": "loc_82D3E",
+      "new": "DDZ_Phase1ReceiverSelectFlashPalette",
+      "profiles": ["sk"],
+      "meaning": "Select one of the two twelve-color source rows for the receiver cooldown."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 326,
+      "old": "loc_82D4C",
+      "new": "DDZ_Phase1ReceiverCopyFlashAndTick",
+      "profiles": ["sk"],
+      "meaning": "Update receiver palette and reopen missile acceptance when its cooldown expires."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 332,
+      "old": "locret_82D5A",
+      "new": "DDZ_Phase1ReceiverHitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after receiver hit-policy gate or countdown completion."
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "original_line": 336,
+      "old": "loc_82D5C",
+      "new": "DDZ_Phase1ReceiverAwardScoreAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Commit first-stage receiver defeat after signed BYTE health underflow."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 6,
+      "old": "loc_81492",
+      "new": "DDZ_FlightDispatchAndLatchDebug",
+      "profiles": ["sk"],
+      "meaning": "Dispatch scripted entry or early free flight, then detect debug-mode changes."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 19,
+      "old": "loc_814B8",
+      "new": "DDZ_FlightCameraOrVirtualScroll",
+      "profiles": ["sk"],
+      "meaning": "Skip camera synchronization during debug placement or enter the boss-stage virtual-scroll mode."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 40,
+      "old": "loc_81504",
+      "new": "DDZ_FlightTryExpandCameraMaxX",
+      "profiles": ["sk"],
+      "meaning": "Attempt the second independent horizontal camera-bound actor."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 45,
+      "old": "locret_81512",
+      "new": "DDZ_FlightUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from debug pause, absent boss signal or camera-bound allocation tail."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 48,
+      "old": "off_81514",
+      "new": "DDZFlightController_EntryStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Four relative WORD states for entry, light-gravity delay, transformation wait and free flight."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 69,
+      "old": "loc_81548",
+      "new": "DDZ_FlightDebugUnlockCameraX",
+      "profiles": ["sk"],
+      "meaning": "Widen horizontal camera bounds when entering debug placement."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 77,
+      "old": "loc_81554",
+      "new": "DDZ_FlightInitEntryAndPlayer",
+      "profiles": ["sk"],
+      "meaning": "Initialize scripted flight entry, player state, scroll variables and movement windows."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 108,
+      "old": "loc_815DC",
+      "new": "DDZ_FlightClearP2AndTryTempoWatcher",
+      "profiles": ["sk"],
+      "meaning": "Clear the complete Player2 slot and attempt the ring-sensitive music-tempo watcher."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 116,
+      "old": "loc_815F2",
+      "new": "DDZFlightController_QueueDoomsdayMiscArt",
+      "profiles": ["sk"],
+      "meaning": "Queue compressed DDZ miscellaneous graphics after controller setup."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 121,
+      "old": "word_81602",
+      "new": "DDZ_FlightInitialWindowBounds",
+      "profiles": ["sk"],
+      "meaning": "Four WORD camera-relative movement-window limits copied into shared flight state."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 126,
+      "old": "loc_8160A",
+      "new": "DDZ_FlightEntryGravityThenSuper",
+      "profiles": ["sk"],
+      "meaning": "Integrate the short entry arc and initialize the forced Super transformation."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 149,
+      "old": "loc_8167C",
+      "new": "DDZ_FlightRiseUntilPlayerReleased",
+      "profiles": ["sk"],
+      "meaning": "Move upward until Player1 object control is cleared by transformation palette processing."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 169,
+      "old": "loc_816D2",
+      "new": "DDZ_FlightInstallHyperEffects",
+      "profiles": ["sk"],
+      "meaning": "Prepare Hyper Sonic palette state and install Hyper stars/trail."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 174,
+      "old": "loc_816E8",
+      "new": "DDZ_FlightLoadBossExplosionPLC",
+      "profiles": ["sk"],
+      "meaning": "Load the boss-explosion pattern list after either Super or Hyper flight setup."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 179,
+      "old": "loc_816F4",
+      "new": "DDZ_FlightUpdateEarlyFreeFlight",
+      "profiles": ["sk"],
+      "meaning": "Compute effective flight velocity and integrate inside camera-relative windows."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 184,
+      "old": "loc_816FC",
+      "new": "DDZ_FlightUpdateVirtualBossStage",
+      "profiles": ["sk"],
+      "meaning": "Update free flight against a virtual scrolling world during the first boss stage."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 195,
+      "old": "locret_81724",
+      "new": "DDZ_FlightVirtualStageReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after virtual boss-stage movement or its final-chase handoff."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 199,
+      "old": "loc_81726",
+      "new": "DDZ_FlightRebaseFinalChaseCamera",
+      "profiles": ["sk"],
+      "meaning": "Perform the final-chase world rebase before input and actual-camera scrolling."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 212,
+      "old": "loc_8174E",
+      "new": "DDZ_FlightClearRingsAndSetWrapDelta",
+      "profiles": ["sk"],
+      "meaning": "Clear ring persistence bookkeeping after camera rebase and shift the flight controller."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 223,
+      "old": "loc_81770",
+      "new": "DDZ_FlightUpdateFinalChase",
+      "profiles": ["sk"],
+      "meaning": "Compute final-chase flight movement and detect debug placement changes."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 234,
+      "old": "loc_81790",
+      "new": "DDZ_FlightAdvanceCameraOutsideDebug",
+      "profiles": ["sk"],
+      "meaning": "Advance camera and synchronize Player1 when final-chase debug placement is inactive."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "original_line": 241,
+      "old": "loc_8179E",
+      "new": "DDZ_FlightFallAndTryPlayerDeath",
+      "profiles": ["sk"],
+      "meaning": "Run the failure fall and request player death once below the camera."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 13,
+      "old": "locret_82750",
+      "new": "DDZ_FlightFailureCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without selecting failure until transformation has armed the check and Super mode is absent."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 17,
+      "old": "loc_82752",
+      "new": "DDZ_FlightBeginFailureFall",
+      "profiles": ["sk"],
+      "meaning": "Install the flight failure-fall actor pointer and player animation."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 45,
+      "old": "loc_827A0",
+      "new": "DDZ_FlightClearPlayerAngleAndStatus",
+      "profiles": ["sk"],
+      "meaning": "Clear player angle and status before ordinary flight input processing."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 49,
+      "old": "loc_827A8",
+      "new": "DDZ_FlightApplyHorizontalDrag",
+      "profiles": ["sk"],
+      "meaning": "Begin ordinary horizontal impulse decay toward zero by0x40."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 62,
+      "old": "loc_827C0",
+      "new": "DDZ_FlightDragNegativeXImpulse",
+      "profiles": ["sk"],
+      "meaning": "Decay a negative horizontal controller impulse."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 66,
+      "old": "loc_827C4",
+      "new": "DDZ_FlightZeroXImpulse",
+      "profiles": ["sk"],
+      "meaning": "Zero the horizontal impulse when drag reaches or crosses zero."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 69,
+      "old": "loc_827C6",
+      "new": "DDZ_FlightStoreXImpulse",
+      "profiles": ["sk"],
+      "meaning": "Store the decayed persistent X impulse and continue vertical drag."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 72,
+      "old": "loc_827CA",
+      "new": "DDZ_FlightApplyVerticalDrag",
+      "profiles": ["sk"],
+      "meaning": "Decay the persistent vertical impulse by0x40 toward zero."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 83,
+      "old": "loc_827DE",
+      "new": "DDZ_FlightDragNegativeYImpulse",
+      "profiles": ["sk"],
+      "meaning": "Decay a negative vertical controller impulse."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 87,
+      "old": "loc_827E2",
+      "new": "DDZ_FlightZeroYImpulse",
+      "profiles": ["sk"],
+      "meaning": "Zero vertical controller impulse after a drag zero crossing."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 90,
+      "old": "loc_827E4",
+      "new": "DDZ_FlightStoreYImpulse",
+      "profiles": ["sk"],
+      "meaning": "Store decayed persistent Y impulse before processing controls."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 93,
+      "old": "loc_827E8",
+      "new": "DDZ_FlightReadControlsAndPressImpulse",
+      "profiles": ["sk"],
+      "meaning": "Use raw held directions and newly pressed A/B/C to form optional persistent impulse."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 111,
+      "old": "loc_8281A",
+      "new": "DDZ_FlightAddHeldDirectionVelocity",
+      "profiles": ["sk"],
+      "meaning": "Add ordinary D-pad vector to effective movement after optional impulse replacement."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 118,
+      "old": "loc_82828",
+      "new": "DDZ_FlightStorePlayerVelocity",
+      "profiles": ["sk"],
+      "meaning": "Write computed effective flight velocity into Player1."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 125,
+      "old": "word_82832",
+      "new": "DDZ_FlightHeldDirectionVelocities",
+      "profiles": ["sk"],
+      "meaning": "Sixteen WORD XY vectors indexed by the four-bit held D-pad mask."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 142,
+      "old": "word_82872",
+      "new": "DDZ_FlightNewButtonImpulses",
+      "profiles": ["sk"],
+      "meaning": "Sixteen persistent impulse WORD pairs selected on eligible newly pressed A/B/C."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 185,
+      "old": "loc_828EE",
+      "new": "DDZ_FlightIntegrateYWithinWindow",
+      "profiles": ["sk"],
+      "meaning": "Integrate effective Y movement only while the candidate remains inside shared camera-relative limits."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 206,
+      "old": "locret_8291E",
+      "new": "DDZ_FlightIntegrateWindowReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after candidate integration or absent/out-of-window Y movement."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 229,
+      "old": "loc_82952",
+      "new": "DDZ_FlightClampScrollCandidate",
+      "profiles": ["sk"],
+      "meaning": "Cap actual-camera scroll candidate using the selected signed LONG maximum."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 234,
+      "old": "loc_82958",
+      "new": "DDZ_FlightStoreSpeedAboveOnePixel",
+      "profiles": ["sk"],
+      "meaning": "Conditionally update persistent actual-camera scroll speed."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 239,
+      "old": "loc_82964",
+      "new": "DDZ_FlightAdvanceCameraAndCarryActor",
+      "profiles": ["sk"],
+      "meaning": "Advance actual camera LONG position, update bounds and carry controller by integer delta."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 270,
+      "old": "loc_829B4",
+      "new": "DDZ_FlightApplyVirtualScrollDelta",
+      "profiles": ["sk"],
+      "meaning": "Advance virtual boss-stage scrolling with the original unsigned store-only cap behavior."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 305,
+      "old": "loc_82A06",
+      "new": "DDZFlightCamera_ClampLeftwardXToMinimum",
+      "profiles": ["sk"],
+      "meaning": "Apply minimum-X boundary after the player is left of horizontal deadband."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 310,
+      "old": "loc_82A10",
+      "new": "DDZ_FlightCameraFollowRight",
+      "profiles": ["sk"],
+      "meaning": "Move camera right when player exceeds cameraX+0xA0."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 321,
+      "old": "loc_82A28",
+      "new": "DDZFlightCamera_ClampRightwardXToMaximum",
+      "profiles": ["sk"],
+      "meaning": "Clamp rightward horizontal camera movement to maximum X."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 324,
+      "old": "loc_82A2E",
+      "new": "DDZ_FlightSyncPlayerYAndCheckFollow",
+      "profiles": ["sk"],
+      "meaning": "Copy controller Y into Player1 and conditionally follow its vertical deadband."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 342,
+      "old": "loc_82A5C",
+      "new": "DDZFlightCamera_ClampUpwardYToMinimum",
+      "profiles": ["sk"],
+      "meaning": "Clamp an upward vertical camera adjustment to minimum Y."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 347,
+      "old": "loc_82A64",
+      "new": "DDZ_FlightCameraFollowDown",
+      "profiles": ["sk"],
+      "meaning": "Follow downward after player exceeds cameraY+0x80."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 358,
+      "old": "loc_82A7A",
+      "new": "DDZFlightCamera_ClampDownwardYToMaximum",
+      "profiles": ["sk"],
+      "meaning": "Clamp the downward vertical camera adjustment to maximum Y."
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "original_line": 361,
+      "old": "locret_82A80",
+      "new": "DDZ_FlightCameraFollowReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after inactive vertical follow, deadband rejection or maximum clamp."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 68,
+      "old": "word_83362",
+      "new": "DDZMissileAsteroid_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)00."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 81,
+      "old": "word_833AC",
+      "new": "DDZMissileAsteroid_MapFrame01To05",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)01,02,03,04,05."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 84,
+      "old": "word_833BA",
+      "new": "DDZMissileAsteroid_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)06."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 87,
+      "old": "word_833C8",
+      "new": "DDZMissileAsteroid_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)07."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 90,
+      "old": "word_833D6",
+      "new": "DDZMissileAsteroid_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)08."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 93,
+      "old": "word_833E4",
+      "new": "DDZMissileAsteroid_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)09."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 97,
+      "old": "word_833F8",
+      "new": "DDZMissileAsteroid_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0A."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 100,
+      "old": "word_83406",
+      "new": "DDZMissileAsteroid_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0B."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 104,
+      "old": "word_8341A",
+      "new": "DDZMissileAsteroid_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0C."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 107,
+      "old": "word_83428",
+      "new": "DDZMissileAsteroid_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0D."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 111,
+      "old": "word_8343C",
+      "new": "DDZMissileAsteroid_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0E."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 114,
+      "old": "word_8344A",
+      "new": "DDZMissileAsteroid_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)0F."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 118,
+      "old": "word_8345E",
+      "new": "DDZMissileAsteroid_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)10."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 120,
+      "old": "word_83466",
+      "new": "DDZMissileAsteroid_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)11."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 122,
+      "old": "word_8346E",
+      "new": "DDZMissileAsteroid_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)12."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 124,
+      "old": "word_83476",
+      "new": "DDZMissileAsteroid_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)13."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 126,
+      "old": "word_8347E",
+      "new": "DDZMissileAsteroid_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)14."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 128,
+      "old": "word_83486",
+      "new": "DDZMissileAsteroid_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)15."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 130,
+      "old": "word_8348E",
+      "new": "DDZMissileAsteroid_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)16."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 132,
+      "old": "word_83496",
+      "new": "DDZMissileAsteroid_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)17."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 134,
+      "old": "word_8349E",
+      "new": "DDZMissileAsteroid_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)18."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 136,
+      "old": "word_834A6",
+      "new": "DDZMissileAsteroid_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)19."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 138,
+      "old": "word_834AE",
+      "new": "DDZMissileAsteroid_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1A."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 140,
+      "old": "word_834B6",
+      "new": "DDZMissileAsteroid_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1B."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 142,
+      "old": "word_834BE",
+      "new": "DDZMissileAsteroid_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1C."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 144,
+      "old": "word_834C6",
+      "new": "DDZMissileAsteroid_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1D."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 146,
+      "old": "word_834CE",
+      "new": "DDZMissileAsteroid_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1E."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 148,
+      "old": "word_834D6",
+      "new": "DDZMissileAsteroid_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)1F."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 150,
+      "old": "word_834DE",
+      "new": "DDZMissileAsteroid_MapFrame20",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)20."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 152,
+      "old": "word_834E6",
+      "new": "DDZMissileAsteroid_MapFrame21",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)21."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 154,
+      "old": "word_834EE",
+      "new": "DDZMissileAsteroid_MapFrame22",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)22."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 156,
+      "old": "word_834F6",
+      "new": "DDZMissileAsteroid_MapFrame23",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)23."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 158,
+      "old": "word_834FE",
+      "new": "DDZMissileAsteroid_MapFrame24",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)24."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 160,
+      "old": "word_83506",
+      "new": "DDZMissileAsteroid_MapFrame25",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)25."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 162,
+      "old": "word_8350E",
+      "new": "DDZMissileAsteroid_MapFrame26",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)26."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 164,
+      "old": "word_83516",
+      "new": "DDZMissileAsteroid_MapFrame27",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)27."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 169,
+      "old": "word_83530",
+      "new": "DDZMissileAsteroid_MapFrame28",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)28."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 180,
+      "old": "word_8356E",
+      "new": "DDZMissileAsteroid_MapFrame29",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)29."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 182,
+      "old": "word_83576",
+      "new": "DDZMissileAsteroid_MapFrame2A",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2A."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 184,
+      "old": "word_8357E",
+      "new": "DDZMissileAsteroid_MapFrame2B",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2B."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 186,
+      "old": "word_83586",
+      "new": "DDZMissileAsteroid_MapFrame2C",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2C."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 188,
+      "old": "word_8358E",
+      "new": "DDZMissileAsteroid_MapFrame2D",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2D."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 190,
+      "old": "word_83596",
+      "new": "DDZMissileAsteroid_MapFrame2E",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2E."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 192,
+      "old": "word_8359E",
+      "new": "DDZMissileAsteroid_MapFrame2F",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)2F."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 194,
+      "old": "word_835A6",
+      "new": "DDZMissileAsteroid_MapFrame30",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)30."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 196,
+      "old": "word_835AE",
+      "new": "DDZMissileAsteroid_MapFrame31",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)31."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 199,
+      "old": "word_835BC",
+      "new": "DDZMissileAsteroid_MapFrame32",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)32."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 202,
+      "old": "word_835CA",
+      "new": "DDZMissileAsteroid_MapFrame33",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)33."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 204,
+      "old": "word_835D2",
+      "new": "DDZMissileAsteroid_MapFrame34",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)34."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 206,
+      "old": "word_835DA",
+      "new": "DDZMissileAsteroid_MapFrame35",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)35."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 208,
+      "old": "word_835E2",
+      "new": "DDZMissileAsteroid_MapFrame36",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)36."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 210,
+      "old": "word_835EA",
+      "new": "DDZMissileAsteroid_MapFrame37",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)37."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 212,
+      "old": "word_835F2",
+      "new": "DDZMissileAsteroid_MapFrame38",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)38."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 217,
+      "old": "word_8360C",
+      "new": "DDZMissileAsteroid_MapFrame39",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)39."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 218,
+      "old": "word_8360E",
+      "new": "DDZMissileAsteroid_MapFrame3A",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3A."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 224,
+      "old": "word_8362E",
+      "new": "DDZMissileAsteroid_MapFrame3B",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3B."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 230,
+      "old": "word_8364E",
+      "new": "DDZMissileAsteroid_MapFrame3C",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3C."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 236,
+      "old": "word_8366E",
+      "new": "DDZMissileAsteroid_MapFrame3D",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3D."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 243,
+      "old": "word_83694",
+      "new": "DDZMissileAsteroid_MapFrame3E",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3E."
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "original_line": 250,
+      "old": "word_836BA",
+      "new": "DDZMissileAsteroid_MapFrame3F",
+      "profiles": ["sk"],
+      "meaning": "DDZ mapping frame at actual BYTE mapping_frame slot(s)3F."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "tokens": [
+        [3, 1, 0, ""],
+        [4, 2, 269, ""],
+        [5, 0, 0, ""],
+        [18, 1, 1, ""],
+        [19, 1, 2, ""],
+        [20, 1, 4, ""],
+        [21, 1, 6, ""],
+        [22, 0, 1, ""],
+        [24, 1, 8, ""],
+        [27, 0, 2, ""],
+        [29, 1, 3, ""],
+        [34, 1, 7, ""],
+        [35, 0, 3, ""],
+        [41, 1, 5, ""],
+        [42, 0, 4, ""],
+        [44, 0, 5, ""],
+        [48, 1, 8, ""],
+        [50, 1, 8, ""],
+        [51, 0, 6, ""],
+        [57, 1, 7, ""],
+        [61, 1, 8, ""],
+        [62, 0, 7, ""],
+        [73, 0, 8, ""],
+        [102, 1, 9, ""],
+        [110, 0, 9, ""],
+        [134, 0, 10, ""],
+        [139, 3, 10, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "tokens": [
+        [2, 2, 11, ""],
+        [7, 0, 11, ""],
+        [9, 1, 12, ""],
+        [11, 0, 12, ""],
+        [15, 1, 13, ""],
+        [19, 1, 14, ""],
+        [20, 0, 13, ""],
+        [22, 0, 14, ""],
+        [26, 1, 15, ""],
+        [29, 0, 15, ""],
+        [34, 1, 16, ""],
+        [36, 0, 16, ""],
+        [42, 1, 20, ""],
+        [47, 1, 17, ""],
+        [49, 0, 17, ""],
+        [51, 1, 18, ""],
+        [54, 1, 18, ""],
+        [56, 0, 18, ""],
+        [57, 1, 24, ""],
+        [60, 0, 19, ""],
+        [62, 1, 22, ""],
+        [74, 3, 19, ""],
+        [75, 1, 28, ""],
+        [81, 0, 20, ""],
+        [85, 1, 29, ""],
+        [87, 2, 32, ""],
+        [91, 0, 21, ""],
+        [93, 1, 22, ""],
+        [108, 3, 21, ""],
+        [109, 0, 22, ""],
+        [111, 1, 23, ""],
+        [114, 0, 23, ""],
+        [116, 0, 24, ""],
+        [117, 1, 25, ""],
+        [118, 1, 26, ""],
+        [119, 1, 27, ""],
+        [120, 0, 25, ""],
+        [124, 0, 26, ""],
+        [128, 0, 27, ""],
+        [132, 0, 28, ""],
+        [136, 0, 29, ""],
+        [137, 1, 30, ""],
+        [138, 1, 31, ""],
+        [139, 0, 30, ""],
+        [151, 0, 31, ""],
+        [167, 0, 32, ""],
+        [168, 1, 210, ""],
+        [170, 2, 33, ""],
+        [171, 2, 230, ""],
+        [173, 1, 33, ""],
+        [174, 2, 231, ""],
+        [175, 0, 33, ""],
+        [181, 0, 34, ""],
+        [182, 1, 212, ""],
+        [184, 2, 35, ""],
+        [190, 0, 35, ""],
+        [192, 1, 239, ""],
+        [197, 1, 37, ""],
+        [202, 1, 36, ""],
+        [207, 0, 36, ""],
+        [209, 0, 37, ""],
+        [211, 0, 38, ""],
+        [212, 1, 214, ""],
+        [214, 2, 40, ""],
+        [221, 1, 39, ""],
+        [227, 0, 39, ""],
+        [244, 0, 40, ""],
+        [248, 1, 239, ""],
+        [249, 2, 41, ""],
+        [260, 1, 228, ""],
+        [262, 0, 41, ""],
+        [264, 1, 42, ""],
+        [265, 2, 43, ""],
+        [268, 0, 42, ""],
+        [270, 1, 44, ""],
+        [271, 0, 43, ""],
+        [274, 0, 44, ""],
+        [275, 1, 233, ""],
+        [283, 0, 45, ""],
+        [284, 2, 46, ""],
+        [285, 1, 215, ""],
+        [288, 0, 46, ""],
+        [291, 1, 47, ""],
+        [293, 0, 47, ""],
+        [294, 1, 234, ""],
+        [298, 0, 48, ""],
+        [299, 2, 198, ""],
+        [300, 1, 208, ""],
+        [302, 0, 49, ""],
+        [303, 1, 216, ""],
+        [305, 2, 50, ""],
+        [316, 0, 50, ""],
+        [320, 1, 51, ""],
+        [321, 2, 52, ""],
+        [328, 0, 51, ""],
+        [334, 1, 163, ""],
+        [336, 0, 52, ""],
+        [340, 1, 53, ""],
+        [344, 1, 54, ""],
+        [346, 1, 54, ""],
+        [347, 0, 53, ""],
+        [350, 1, 54, ""],
+        [351, 1, 229, ""],
+        [353, 0, 54, ""],
+        [359, 0, 55, ""],
+        [360, 1, 209, ""],
+        [362, 2, 202, ""],
+        [369, 0, 56, ""],
+        [372, 2, 57, ""],
+        [374, 0, 57, ""],
+        [377, 1, 58, ""],
+        [382, 0, 58, ""],
+        [391, 0, 59, ""],
+        [395, 1, 60, ""],
+        [397, 0, 60, ""],
+        [399, 1, 239, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "tokens": [
+        [12, 1, 61, ""],
+        [13, 1, 62, ""],
+        [14, 1, 65, ""],
+        [15, 1, 67, ""],
+        [16, 1, 69, ""],
+        [17, 1, 75, ""],
+        [18, 1, 77, ""],
+        [19, 1, 82, ""],
+        [20, 0, 61, ""],
+        [30, 1, 219, ""],
+        [32, 1, 220, ""],
+        [34, 1, 221, ""],
+        [36, 0, 62, ""],
+        [41, 1, 64, ""],
+        [48, 1, 63, ""],
+        [50, 0, 63, ""],
+        [52, 1, 64, ""],
+        [53, 2, 137, ""],
+        [58, 0, 64, ""],
+        [60, 0, 65, ""],
+        [67, 1, 66, ""],
+        [70, 1, 66, ""],
+        [76, 1, 66, ""],
+        [77, 2, 149, ""],
+        [81, 0, 66, ""],
+        [83, 0, 67, ""],
+        [88, 1, 68, ""],
+        [95, 1, 68, ""],
+        [96, 2, 161, ""],
+        [98, 0, 68, ""],
+        [100, 0, 69, ""],
+        [102, 1, 71, ""],
+        [105, 1, 71, ""],
+        [110, 0, 70, ""],
+        [112, 3, 70, ""],
+        [113, 0, 71, ""],
+        [123, 1, 239, ""],
+        [130, 1, 72, ""],
+        [131, 2, 171, ""],
+        [132, 0, 72, ""],
+        [136, 0, 73, ""],
+        [138, 3, 73, ""],
+        [142, 0, 74, ""],
+        [144, 3, 74, ""],
+        [148, 0, 75, ""],
+        [150, 1, 239, ""],
+        [155, 1, 76, ""],
+        [158, 0, 76, ""],
+        [173, 1, 223, ""],
+        [175, 1, 225, ""],
+        [177, 0, 77, ""],
+        [182, 1, 78, ""],
+        [184, 1, 78, ""],
+        [188, 0, 78, ""],
+        [193, 1, 81, ""],
+        [207, 1, 79, ""],
+        [209, 0, 79, ""],
+        [214, 1, 80, ""],
+        [216, 0, 80, ""],
+        [218, 1, 81, ""],
+        [221, 0, 81, ""],
+        [223, 0, 82, ""],
+        [230, 1, 83, ""],
+        [232, 0, 83, ""],
+        [237, 1, 84, ""],
+        [244, 1, 85, ""],
+        [246, 0, 84, ""],
+        [253, 1, 86, ""],
+        [254, 0, 85, ""],
+        [257, 0, 86, ""],
+        [261, 1, 87, ""],
+        [263, 0, 87, ""],
+        [267, 1, 88, ""],
+        [270, 1, 89, ""],
+        [271, 0, 88, ""],
+        [273, 0, 89, ""],
+        [276, 1, 142, ""],
+        [277, 0, 90, ""],
+        [282, 1, 91, ""],
+        [283, 1, 91, ""],
+        [289, 0, 91, ""],
+        [290, 1, 92, ""],
+        [290, 3, 91, ""],
+        [291, 1, 94, ""],
+        [291, 3, 91, ""],
+        [292, 1, 97, ""],
+        [292, 3, 91, ""],
+        [293, 1, 98, ""],
+        [293, 3, 91, ""],
+        [294, 0, 92, ""],
+        [300, 1, 93, ""],
+        [305, 1, 93, ""],
+        [306, 2, 164, ""],
+        [308, 0, 93, ""],
+        [310, 0, 94, ""],
+        [313, 1, 95, ""],
+        [316, 0, 95, ""],
+        [320, 1, 96, ""],
+        [323, 1, 96, ""],
+        [327, 0, 96, ""],
+        [329, 0, 97, ""],
+        [336, 1, 239, ""],
+        [341, 0, 98, ""],
+        [343, 1, 239, ""],
+        [349, 0, 99, ""],
+        [350, 1, 213, ""],
+        [352, 2, 103, ""],
+        [359, 0, 100, ""],
+        [361, 1, 102, ""],
+        [362, 3, 100, ""],
+        [367, 0, 101, ""],
+        [369, 3, 101, ""],
+        [371, 0, 102, ""],
+        [373, 0, 103, ""],
+        [382, 1, 104, ""],
+        [384, 0, 104, ""],
+        [387, 1, 105, ""],
+        [389, 0, 105, ""],
+        [390, 2, 106, ""],
+        [391, 0, 106, ""],
+        [397, 1, 107, ""],
+        [399, 0, 107, ""],
+        [403, 0, 108, ""],
+        [404, 1, 211, ""],
+        [406, 2, 112, ""],
+        [410, 1, 110, ""],
+        [413, 1, 111, ""],
+        [415, 1, 109, ""],
+        [417, 1, 239, ""],
+        [418, 1, 224, ""],
+        [420, 0, 109, ""],
+        [425, 0, 110, ""],
+        [429, 0, 111, ""],
+        [430, 1, 235, ""],
+        [432, 1, 236, ""],
+        [433, 0, 112, ""],
+        [435, 1, 113, ""],
+        [438, 0, 113, ""],
+        [442, 1, 114, ""],
+        [443, 2, 116, ""],
+        [448, 1, 115, ""],
+        [451, 1, 114, ""],
+        [453, 0, 114, ""],
+        [455, 0, 115, ""],
+        [459, 0, 116, ""],
+        [465, 0, 117, ""],
+        [468, 1, 118, ""],
+        [469, 1, 118, ""],
+        [471, 0, 118, ""],
+        [472, 1, 119, ""],
+        [472, 3, 118, ""],
+        [473, 1, 120, ""],
+        [473, 3, 118, ""],
+        [474, 0, 119, ""],
+        [475, 1, 205, ""],
+        [481, 0, 120, ""],
+        [483, 1, 264, ""],
+        [484, 0, 121, ""],
+        [487, 0, 122, ""],
+        [488, 1, 203, ""],
+        [490, 2, 124, ""],
+        [494, 1, 123, ""],
+        [500, 0, 123, ""],
+        [504, 0, 124, ""],
+        [507, 1, 126, ""],
+        [508, 2, 125, ""],
+        [509, 0, 125, ""],
+        [511, 1, 126, ""],
+        [513, 1, 222, ""],
+        [515, 0, 126, ""],
+        [518, 1, 127, ""],
+        [529, 0, 127, ""],
+        [533, 0, 128, ""],
+        [534, 1, 204, ""],
+        [536, 2, 129, ""],
+        [538, 0, 129, ""],
+        [542, 0, 130, ""],
+        [543, 1, 206, ""],
+        [545, 1, 132, ""],
+        [546, 0, 131, ""],
+        [547, 2, 133, ""],
+        [555, 0, 132, ""],
+        [559, 0, 133, ""],
+        [562, 1, 134, ""],
+        [564, 0, 134, ""],
+        [566, 0, 135, ""],
+        [567, 1, 207, ""],
+        [569, 1, 136, ""],
+        [570, 1, 131, ""],
+        [571, 0, 136, ""],
+        [574, 0, 137, ""],
+        [577, 1, 139, ""],
+        [580, 1, 139, ""],
+        [584, 0, 138, ""],
+        [586, 1, 139, ""],
+        [592, 3, 138, ""],
+        [595, 0, 139, ""],
+        [598, 1, 239, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "tokens": [
+        [2, 1, 140, ""],
+        [3, 1, 141, ""],
+        [10, 0, 140, ""],
+        [15, 0, 141, ""],
+        [18, 0, 142, ""],
+        [20, 1, 145, ""],
+        [22, 1, 143, ""],
+        [24, 1, 148, ""],
+        [26, 1, 145, ""],
+        [28, 1, 146, ""],
+        [35, 1, 143, ""],
+        [38, 0, 143, ""],
+        [41, 1, 144, ""],
+        [43, 0, 144, ""],
+        [46, 0, 145, ""],
+        [48, 0, 146, ""],
+        [51, 2, 90, ""],
+        [60, 1, 147, ""],
+        [65, 0, 147, ""],
+        [67, 1, 145, ""],
+        [68, 2, 154, ""],
+        [73, 0, 148, ""],
+        [75, 0, 149, ""],
+        [78, 1, 152, ""],
+        [86, 1, 153, ""],
+        [88, 1, 150, ""],
+        [89, 2, 158, ""],
+        [93, 0, 150, ""],
+        [96, 1, 151, ""],
+        [99, 0, 151, ""],
+        [101, 0, 152, ""],
+        [104, 0, 153, ""],
+        [115, 0, 154, ""],
+        [118, 1, 156, ""],
+        [124, 1, 157, ""],
+        [126, 1, 155, ""],
+        [127, 2, 158, ""],
+        [132, 0, 155, ""],
+        [135, 1, 163, ""],
+        [137, 0, 156, ""],
+        [139, 0, 157, ""],
+        [143, 0, 158, ""],
+        [148, 1, 163, ""],
+        [150, 1, 160, ""],
+        [152, 1, 159, ""],
+        [153, 2, 56, ""],
+        [169, 0, 159, ""],
+        [171, 0, 160, ""],
+        [197, 0, 161, ""],
+        [198, 2, 162, ""],
+        [203, 1, 162, ""],
+        [205, 0, 162, ""],
+        [209, 0, 163, ""],
+        [211, 0, 164, ""],
+        [212, 2, 166, ""],
+        [217, 1, 165, ""],
+        [219, 0, 165, ""],
+        [222, 1, 166, ""],
+        [224, 0, 166, ""],
+        [230, 1, 239, ""],
+        [232, 1, 239, ""],
+        [237, 1, 167, ""],
+        [240, 1, 226, ""],
+        [242, 0, 167, ""],
+        [243, 1, 227, ""],
+        [252, 1, 168, ""],
+        [259, 1, 169, ""],
+        [261, 0, 168, ""],
+        [268, 1, 170, ""],
+        [269, 0, 169, ""],
+        [272, 0, 170, ""],
+        [274, 0, 171, ""],
+        [276, 2, 172, ""],
+        [278, 0, 172, ""],
+        [280, 1, 239, ""],
+        [284, 0, 173, ""],
+        [286, 3, 173, ""],
+        [288, 1, 174, ""],
+        [290, 0, 174, ""],
+        [298, 1, 176, ""],
+        [307, 1, 175, ""],
+        [309, 0, 175, ""],
+        [311, 0, 176, ""],
+        [313, 1, 177, ""],
+        [315, 1, 178, ""],
+        [317, 1, 179, ""],
+        [318, 0, 177, ""],
+        [320, 0, 178, ""],
+        [322, 0, 179, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "tokens": [
+        [4, 1, 217, ""],
+        [7, 1, 180, ""],
+        [8, 2, 182, ""],
+        [11, 0, 180, ""],
+        [12, 2, 184, ""],
+        [16, 1, 181, ""],
+        [20, 1, 139, ""],
+        [21, 0, 181, ""],
+        [23, 0, 182, ""],
+        [25, 1, 183, ""],
+        [26, 2, 183, ""],
+        [29, 0, 183, ""],
+        [35, 0, 184, ""],
+        [40, 1, 185, ""],
+        [41, 2, 186, ""],
+        [46, 2, 187, ""],
+        [47, 0, 185, ""],
+        [48, 1, 139, ""],
+        [49, 0, 186, ""],
+        [55, 0, 187, ""],
+        [56, 2, 188, ""],
+        [59, 2, 191, ""],
+        [61, 0, 188, ""],
+        [64, 1, 189, ""],
+        [65, 1, 189, ""],
+        [68, 0, 189, ""],
+        [69, 1, 190, ""],
+        [69, 3, 189, ""],
+        [70, 1, 193, ""],
+        [70, 3, 189, ""],
+        [71, 1, 195, ""],
+        [71, 3, 189, ""],
+        [72, 0, 190, ""],
+        [75, 0, 191, ""],
+        [82, 1, 192, ""],
+        [84, 0, 192, ""],
+        [87, 0, 193, ""],
+        [89, 1, 194, ""],
+        [91, 0, 194, ""],
+        [95, 1, 240, ""],
+        [96, 0, 195, ""],
+        [99, 1, 240, ""],
+        [100, 0, 196, ""],
+        [101, 1, 208, ""],
+        [103, 2, 197, ""],
+        [105, 0, 197, ""],
+        [107, 0, 198, ""],
+        [111, 1, 199, ""],
+        [112, 1, 218, ""],
+        [114, 0, 199, ""],
+        [116, 1, 200, ""],
+        [119, 0, 200, ""],
+        [122, 0, 201, ""],
+        [123, 1, 209, ""],
+        [125, 2, 202, ""],
+        [135, 0, 202, ""],
+        [138, 1, 232, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/object_catalog.s",
+      "tokens": [
+        [1, 0, 203, ""],
+        [6, 0, 204, ""],
+        [9, 0, 205, ""],
+        [14, 0, 206, ""],
+        [19, 0, 207, ""],
+        [29, 0, 208, ""],
+        [32, 0, 209, ""],
+        [35, 0, 210, ""],
+        [38, 0, 211, ""],
+        [43, 0, 212, ""],
+        [48, 0, 213, ""],
+        [53, 0, 214, ""],
+        [58, 0, 215, ""],
+        [61, 0, 216, ""],
+        [66, 0, 217, ""],
+        [68, 1, 196, ""],
+        [69, 0, 218, ""],
+        [71, 1, 201, ""],
+        [72, 0, 219, ""],
+        [74, 1, 117, ""],
+        [75, 0, 220, ""],
+        [77, 1, 130, ""],
+        [78, 0, 221, ""],
+        [80, 1, 122, ""],
+        [81, 0, 222, ""],
+        [83, 1, 128, ""],
+        [84, 0, 223, ""],
+        [86, 1, 108, ""],
+        [87, 0, 224, ""],
+        [89, 1, 99, ""],
+        [91, 0, 225, ""],
+        [93, 1, 135, ""],
+        [94, 0, 226, ""],
+        [96, 1, 49, ""],
+        [97, 0, 227, ""],
+        [99, 1, 38, ""],
+        [100, 0, 228, ""],
+        [102, 1, 45, ""],
+        [104, 1, 48, ""],
+        [106, 0, 229, ""],
+        [108, 1, 55, ""],
+        [109, 0, 230, ""],
+        [111, 0, 231, ""],
+        [113, 0, 232, ""],
+        [120, 0, 233, ""],
+        [122, 0, 234, ""],
+        [130, 0, 235, ""],
+        [136, 0, 236, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "tokens": [
+        [4, 1, 238, ""],
+        [10, 1, 237, ""],
+        [12, 0, 237, ""],
+        [14, 0, 238, ""],
+        [23, 0, 239, ""],
+        [25, 0, 240, ""],
+        [40, 1, 241, ""],
+        [42, 0, 241, ""],
+        [54, 1, 244, ""],
+        [56, 1, 242, ""],
+        [58, 1, 242, ""],
+        [60, 1, 242, ""],
+        [63, 1, 242, ""],
+        [64, 1, 250, ""],
+        [66, 1, 245, ""],
+        [67, 0, 242, ""],
+        [70, 1, 243, ""],
+        [74, 1, 251, ""],
+        [75, 1, 251, ""],
+        [77, 1, 246, ""],
+        [78, 0, 243, ""],
+        [80, 1, 244, ""],
+        [83, 1, 248, ""],
+        [84, 0, 244, ""],
+        [86, 0, 245, ""],
+        [89, 1, 247, ""],
+        [90, 0, 246, ""],
+        [93, 0, 247, ""],
+        [95, 1, 248, ""],
+        [98, 0, 248, ""],
+        [104, 1, 249, ""],
+        [106, 0, 249, ""],
+        [109, 0, 250, ""],
+        [111, 0, 251, ""],
+        [112, 1, 252, ""],
+        [112, 3, 251, ""],
+        [113, 1, 253, ""],
+        [113, 3, 251, ""],
+        [114, 1, 254, ""],
+        [114, 3, 251, ""],
+        [115, 1, 253, ""],
+        [115, 3, 251, ""],
+        [116, 1, 252, ""],
+        [116, 3, 251, ""],
+        [117, 1, 253, ""],
+        [117, 3, 251, ""],
+        [118, 1, 254, ""],
+        [118, 3, 251, ""],
+        [119, 1, 253, ""],
+        [119, 3, 251, ""],
+        [120, 0, 252, ""],
+        [122, 0, 253, ""],
+        [124, 0, 254, ""],
+        [128, 1, 256, ""],
+        [131, 1, 255, ""],
+        [134, 1, 256, ""],
+        [135, 1, 257, ""],
+        [137, 1, 256, ""],
+        [141, 0, 255, ""],
+        [143, 0, 256, ""],
+        [145, 0, 257, ""],
+        [149, 1, 258, ""],
+        [152, 1, 260, ""],
+        [154, 1, 259, ""],
+        [157, 1, 248, ""],
+        [158, 0, 258, ""],
+        [160, 0, 259, ""],
+        [164, 1, 248, ""],
+        [165, 0, 260, ""],
+        [172, 1, 261, ""],
+        [174, 0, 261, ""],
+        [190, 1, 262, ""],
+        [192, 0, 262, ""],
+        [203, 1, 263, ""],
+        [218, 0, 263, ""],
+        [228, 0, 264, ""],
+        [230, 1, 267, ""],
+        [232, 1, 267, ""],
+        [234, 1, 268, ""],
+        [236, 1, 265, ""],
+        [240, 0, 265, ""],
+        [243, 1, 266, ""],
+        [245, 0, 266, ""],
+        [248, 1, 267, ""],
+        [250, 0, 267, ""],
+        [252, 0, 268, ""],
+        [256, 2, 121, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "tokens": [
+        [1, 0, 269, ""],
+        [5, 1, 273, ""],
+        [6, 1, 273, ""],
+        [11, 1, 270, ""],
+        [13, 0, 270, ""],
+        [15, 1, 272, ""],
+        [19, 1, 272, ""],
+        [20, 2, 284, ""],
+        [31, 1, 271, ""],
+        [33, 0, 271, ""],
+        [35, 1, 272, ""],
+        [37, 0, 272, ""],
+        [39, 0, 273, ""],
+        [40, 1, 275, ""],
+        [40, 3, 273, ""],
+        [41, 1, 279, ""],
+        [41, 3, 273, ""],
+        [42, 1, 280, ""],
+        [42, 3, 273, ""],
+        [43, 1, 283, ""],
+        [43, 3, 273, ""],
+        [46, 1, 274, ""],
+        [55, 0, 274, ""],
+        [59, 0, 275, ""],
+        [79, 1, 278, ""],
+        [89, 0, 276, ""],
+        [91, 3, 276, ""],
+        [94, 1, 277, ""],
+        [95, 2, 59, ""],
+        [96, 0, 277, ""],
+        [100, 0, 278, ""],
+        [103, 0, 279, ""],
+        [106, 1, 239, ""],
+        [124, 0, 280, ""],
+        [129, 1, 239, ""],
+        [139, 1, 281, ""],
+        [140, 2, 34, ""],
+        [141, 1, 282, ""],
+        [142, 0, 281, ""],
+        [146, 0, 282, ""],
+        [149, 0, 283, ""],
+        [152, 0, 284, ""],
+        [159, 1, 285, ""],
+        [160, 2, 286, ""],
+        [162, 0, 285, ""],
+        [164, 0, 286, ""],
+        [168, 1, 288, ""],
+        [176, 0, 287, ""],
+        [178, 3, 287, ""],
+        [186, 0, 288, ""],
+        [194, 1, 289, ""],
+        [196, 0, 289, ""],
+        [198, 1, 239, ""],
+        [201, 0, 290, ""],
+        [209, 1, 239, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "tokens": [
+        [3, 1, 291, ""],
+        [5, 1, 292, ""],
+        [6, 0, 291, ""],
+        [8, 0, 292, ""],
+        [9, 2, 290, ""],
+        [19, 1, 293, ""],
+        [22, 1, 294, ""],
+        [29, 1, 304, ""],
+        [30, 0, 293, ""],
+        [33, 0, 294, ""],
+        [38, 1, 298, ""],
+        [39, 1, 295, ""],
+        [42, 1, 297, ""],
+        [43, 1, 296, ""],
+        [44, 0, 295, ""],
+        [46, 1, 297, ""],
+        [47, 0, 296, ""],
+        [49, 0, 297, ""],
+        [51, 0, 298, ""],
+        [54, 1, 302, ""],
+        [55, 1, 299, ""],
+        [58, 1, 301, ""],
+        [59, 1, 300, ""],
+        [60, 0, 299, ""],
+        [62, 1, 301, ""],
+        [63, 0, 300, ""],
+        [65, 0, 301, ""],
+        [67, 0, 302, ""],
+        [70, 1, 304, ""],
+        [72, 1, 304, ""],
+        [78, 1, 303, ""],
+        [80, 1, 303, ""],
+        [81, 1, 306, ""],
+        [84, 0, 303, ""],
+        [86, 1, 304, ""],
+        [87, 1, 305, ""],
+        [90, 0, 304, ""],
+        [94, 0, 305, ""],
+        [111, 0, 306, ""],
+        [130, 1, 307, ""],
+        [140, 1, 307, ""],
+        [146, 1, 307, ""],
+        [150, 0, 307, ""],
+        [152, 1, 308, ""],
+        [162, 1, 308, ""],
+        [167, 1, 308, ""],
+        [170, 0, 308, ""],
+        [177, 1, 309, ""],
+        [180, 1, 309, ""],
+        [182, 1, 309, ""],
+        [183, 1, 309, ""],
+        [188, 0, 309, ""],
+        [190, 1, 310, ""],
+        [192, 0, 310, ""],
+        [194, 1, 311, ""],
+        [196, 0, 311, ""],
+        [220, 1, 312, ""],
+        [222, 0, 312, ""],
+        [241, 1, 316, ""],
+        [245, 1, 314, ""],
+        [248, 1, 313, ""],
+        [250, 1, 316, ""],
+        [251, 0, 313, ""],
+        [253, 1, 316, ""],
+        [254, 0, 314, ""],
+        [257, 1, 316, ""],
+        [260, 1, 315, ""],
+        [262, 1, 316, ""],
+        [263, 0, 315, ""],
+        [265, 0, 316, ""],
+        [271, 1, 320, ""],
+        [275, 1, 318, ""],
+        [278, 1, 317, ""],
+        [281, 0, 317, ""],
+        [284, 0, 318, ""],
+        [287, 1, 320, ""],
+        [290, 1, 319, ""],
+        [293, 0, 319, ""],
+        [295, 0, 320, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/ddz/mappings/missile_asteroid.s",
+      "tokens": [
+        [2, 1, 321, ""],
+        [3, 1, 322, ""],
+        [4, 1, 322, ""],
+        [5, 1, 322, ""],
+        [6, 1, 322, ""],
+        [7, 1, 322, ""],
+        [8, 1, 323, ""],
+        [9, 1, 324, ""],
+        [10, 1, 325, ""],
+        [11, 1, 326, ""],
+        [12, 1, 327, ""],
+        [13, 1, 328, ""],
+        [14, 1, 329, ""],
+        [15, 1, 330, ""],
+        [16, 1, 331, ""],
+        [17, 1, 332, ""],
+        [18, 1, 333, ""],
+        [19, 1, 334, ""],
+        [20, 1, 335, ""],
+        [21, 1, 336, ""],
+        [22, 1, 337, ""],
+        [23, 1, 338, ""],
+        [24, 1, 339, ""],
+        [25, 1, 340, ""],
+        [26, 1, 341, ""],
+        [27, 1, 342, ""],
+        [28, 1, 343, ""],
+        [29, 1, 344, ""],
+        [30, 1, 345, ""],
+        [31, 1, 346, ""],
+        [32, 1, 347, ""],
+        [33, 1, 348, ""],
+        [34, 1, 349, ""],
+        [35, 1, 350, ""],
+        [36, 1, 351, ""],
+        [37, 1, 352, ""],
+        [38, 1, 353, ""],
+        [39, 1, 354, ""],
+        [40, 1, 355, ""],
+        [41, 1, 356, ""],
+        [42, 1, 357, ""],
+        [43, 1, 358, ""],
+        [44, 1, 359, ""],
+        [45, 1, 360, ""],
+        [46, 1, 361, ""],
+        [47, 1, 362, ""],
+        [48, 1, 363, ""],
+        [49, 1, 364, ""],
+        [50, 1, 365, ""],
+        [51, 1, 366, ""],
+        [52, 1, 367, ""],
+        [53, 1, 368, ""],
+        [54, 1, 369, ""],
+        [55, 1, 370, ""],
+        [56, 1, 371, ""],
+        [57, 1, 372, ""],
+        [58, 1, 373, ""],
+        [59, 1, 374, ""],
+        [60, 1, 375, ""],
+        [61, 1, 376, ""],
+        [62, 1, 377, ""],
+        [63, 1, 378, ""],
+        [64, 1, 379, ""],
+        [65, 1, 380, ""],
+        [66, 0, 321, ""],
+        [79, 0, 322, ""],
+        [82, 0, 323, ""],
+        [85, 0, 324, ""],
+        [88, 0, 325, ""],
+        [91, 0, 326, ""],
+        [95, 0, 327, ""],
+        [98, 0, 328, ""],
+        [102, 0, 329, ""],
+        [105, 0, 330, ""],
+        [109, 0, 331, ""],
+        [112, 0, 332, ""],
+        [116, 0, 333, ""],
+        [118, 0, 334, ""],
+        [120, 0, 335, ""],
+        [122, 0, 336, ""],
+        [124, 0, 337, ""],
+        [126, 0, 338, ""],
+        [128, 0, 339, ""],
+        [130, 0, 340, ""],
+        [132, 0, 341, ""],
+        [134, 0, 342, ""],
+        [136, 0, 343, ""],
+        [138, 0, 344, ""],
+        [140, 0, 345, ""],
+        [142, 0, 346, ""],
+        [144, 0, 347, ""],
+        [146, 0, 348, ""],
+        [148, 0, 349, ""],
+        [150, 0, 350, ""],
+        [152, 0, 351, ""],
+        [154, 0, 352, ""],
+        [156, 0, 353, ""],
+        [158, 0, 354, ""],
+        [160, 0, 355, ""],
+        [162, 0, 356, ""],
+        [167, 0, 357, ""],
+        [178, 0, 358, ""],
+        [180, 0, 359, ""],
+        [182, 0, 360, ""],
+        [184, 0, 361, ""],
+        [186, 0, 362, ""],
+        [188, 0, 363, ""],
+        [190, 0, 364, ""],
+        [192, 0, 365, ""],
+        [194, 0, 366, ""],
+        [197, 0, 367, ""],
+        [200, 0, 368, ""],
+        [202, 0, 369, ""],
+        [204, 0, 370, ""],
+        [206, 0, 371, ""],
+        [208, 0, 372, ""],
+        [210, 0, 373, ""],
+        [215, 0, 374, ""],
+        [216, 0, 375, ""],
+        [222, 0, 376, ""],
+        [228, 0, 377, ""],
+        [234, 0, 378, ""],
+        [241, 0, 379, ""],
+        [248, 0, 380, ""]
+      ]
+    }
+  ]
+}

@@ -5,10 +5,10 @@
 
 DDZ_ScreenInit:
                 jsr     (AllocateObject).l
-                bne.s   loc_5957A
-                move.l  #loc_81492,(a1)
+                bne.s   DDZ_ResetBossPlaneScroll
+                move.l  #DDZ_FlightDispatchAndLatchDebug,(a1)
 
-loc_5957A:
+DDZ_ResetBossPlaneScroll:
                 clr.w   (_unkEE98).w
                 clr.w   (_unkEEA0).w
                 clr.w   (_unkEE9C).w
@@ -25,69 +25,69 @@ DDZ_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 DDZ_ScreenEvent_Index:
-                bra.w   loc_595B0
+                bra.w   DDZ_BossPlaneWaitForOffset
 ; ---------------------------------------------------------------------------
-                bra.w   loc_595C0
+                bra.w   DDZ_DrawFirstStageOrBeginRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_595EE
+                bra.w   DDZ_RestoreScrollAndRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_59602
+                bra.w   DDZ_DrawSecondStageRegion
 ; ---------------------------------------------------------------------------
 
-loc_595B0:
+DDZ_BossPlaneWaitForOffset:
                 tst.w   (Events_bg+$00).w
-                beq.w   locret_59646
+                beq.w   DDZ_BossPlaneDrawReturn
                 jsr     ResetDdzBossPlaneTileDrawAnchors(pc)
                 addq.w  #4,(Events_routine_fg).w
 
-loc_595C0:
+DDZ_DrawFirstStageOrBeginRedraw:
                 cmpi.w  #$200,(Events_bg+$00).w
-                bne.s   loc_595D6
+                bne.s   DDZ_InitBottomUpRedraw
                 cmpi.w  #$400,d0
                 bhs.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$220,d1
                 bhs.s   RestorePreviousDdzBossPlaneScroll
-                bra.s   loc_5961E
+                bra.s   DDZ_UpdateBossPlaneColumnAndRow
 ; ---------------------------------------------------------------------------
 
-loc_595D6:
+DDZ_InitBottomUpRedraw:
                 jsr     ResetDdzBossPlaneTileDrawAnchors(pc)
                 bsr.s   RestorePreviousDdzBossPlaneScroll
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
-                bra.s   loc_595F0
+                bra.s   DDZ_DrawRedrawRowsBottomUp
 ; ---------------------------------------------------------------------------
 
-loc_595EE:
+DDZ_RestoreScrollAndRedraw:
                 bsr.s   RestorePreviousDdzBossPlaneScroll
 
-loc_595F0:
+DDZ_DrawRedrawRowsBottomUp:
                 moveq   #0,d1
                 moveq   #0,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   locret_59646
+                bpl.s   DDZ_BossPlaneDrawReturn
                 addq.w  #4,(Events_routine_fg).w
-                bra.s   locret_59646
+                bra.s   DDZ_BossPlaneDrawReturn
 ; ---------------------------------------------------------------------------
 
-loc_59602:
+DDZ_DrawSecondStageRegion:
                 cmpi.w  #$400,d0
                 blo.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$800,d0
                 bhs.s   RestorePreviousDdzBossPlaneScroll
                 cmpi.w  #$220,d1
-                blo.s   loc_5961E
+                blo.s   DDZ_UpdateBossPlaneColumnAndRow
 
 ; =============== S U B R O U T I N E =======================================
 
 RestorePreviousDdzBossPlaneScroll:
                 move.w  d2,(_unkEE98).w
                 move.w  d3,(_unkEE9C).w
-                bra.s   locret_59646
+                bra.s   DDZ_BossPlaneDrawReturn
 ; ---------------------------------------------------------------------------
 
-loc_5961E:
+DDZ_UpdateBossPlaneColumnAndRow:
                 lea     (_unkEE98).w,a6
                 lea     (_unkEEA0).w,a5
                 move.w  (_unkEE9C).w,d1
@@ -100,7 +100,7 @@ loc_5961E:
                 jmp     (Draw_TileRow).l
 ; ---------------------------------------------------------------------------
 
-locret_59646:
+DDZ_BossPlaneDrawReturn:
                 rts
 ; End of function RestorePreviousDdzBossPlaneScroll
 
@@ -141,7 +141,7 @@ DDZ_BackgroundInit:
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
-                bra.s   loc_596BC
+                bra.s   DDZ_ApplyParallaxAndSkipDefaultVScroll
 ; ---------------------------------------------------------------------------
 
 DDZ_BackgroundEvent:
@@ -152,7 +152,7 @@ DDZ_BackgroundEvent:
                 moveq   #$20,d6
                 jsr     (Draw_TileRow).l
 
-loc_596BC:
+DDZ_ApplyParallaxAndSkipDefaultVScroll:
                 lea     DDZ_BGDeformArray(pc),a4
                 lea     (HScroll_table).w,a5
                 lea     (H_scroll_buffer).w,a1
@@ -180,12 +180,12 @@ BuildDdzBackgroundParallaxBands:
                 moveq   #5,d2
                 lea     (HScroll_table+$00E).w,a1
 
-loc_59708:
+DDZ_WriteSixParallaxBands:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_59708
+                dbf     d2,DDZ_WriteSixParallaxBands
                 rts
 ; End of function BuildDdzBackgroundParallaxBands
 

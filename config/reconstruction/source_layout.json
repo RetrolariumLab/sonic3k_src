@@ -15250,7 +15250,7 @@
       "responsibility": "Doomsday asteroid actor variants, movement, collisions, fragments and scene effects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 466,
+      "physical_lines": 468,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15280,7 +15280,7 @@
       "responsibility": "Doomsday final-boss battle controller, chase stages, damage state, world scrolling and completion progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 713,
+      "physical_lines": 715,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15315,7 +15315,7 @@
       "responsibility": "Doomsday missile initialization, tracking, player interaction and destruction.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 183,
+      "physical_lines": 184,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15327,7 +15327,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_820D0",
+          "name": "DDZ_HomingMissileDispatchAndDraw",
           "kind": "terminal-tail",
           "reason": "Close the missile tracking, impact and destruction callback tails after the earlier original independent missile returns.",
           "origin_first_line": 12083,
@@ -15390,7 +15390,7 @@
       "responsibility": "Doomsday palette transfer, player response, defeat progression, spawning and scene motion helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 397,
+      "physical_lines": 399,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -27549,7 +27549,7 @@
       "responsibility": "Doomsday player motion, ring or state updates, camera synchronization and controller helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 369,
+      "physical_lines": 370,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",

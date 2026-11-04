@@ -15,17 +15,17 @@ Obj_DDZEndBoss:
                 rts
 ; ---------------------------------------------------------------------------
 DDZEndBoss_Index:
-                dc.w    loc_8180E-DDZEndBoss_Index
-                dc.w    loc_81856-DDZEndBoss_Index
-                dc.w    loc_818B4-DDZEndBoss_Index
-                dc.w    loc_81914-DDZEndBoss_Index
-                dc.w    loc_81958-DDZEndBoss_Index
-                dc.w    loc_81A00-DDZEndBoss_Index
-                dc.w    loc_81A74-DDZEndBoss_Index
-                dc.w    loc_81B26-DDZEndBoss_Index
+                dc.w    DDZ_InitBossPhase1AndAttachments-DDZEndBoss_Index
+                dc.w    DDZ_Phase1ApproachAndEnableAttacks-DDZEndBoss_Index
+                dc.w    DDZ_Phase1ChaseUntilTargetDefeated-DDZEndBoss_Index
+                dc.w    DDZBoss_WaitBeforeFirstStageDescent-DDZEndBoss_Index
+                dc.w    DDZ_Phase1TickDescentPaletteSteps-DDZEndBoss_Index
+                dc.w    DDZ_WaitAndResetForPhase2Entrance-DDZEndBoss_Index
+                dc.w    DDZ_Phase2RiseAndStartEntrance-DDZEndBoss_Index
+                dc.w    DDZ_FinalChaseSwingAndReadRecoil-DDZEndBoss_Index
 ; ---------------------------------------------------------------------------
 
-loc_8180E:
+DDZ_InitBossPhase1AndAttachments:
                 move.b  #2,routine(a0)
                 bset    #1,(_unkFAB8).w
                 move.w  #$200,(Events_bg+$00).w
@@ -35,104 +35,104 @@ loc_8180E:
                 move.w  #$A0,y_pos(a0)
                 move.w  #$8F,$2E(a0)
                 jsr     (Swing_Setup1).l
-                lea     ChildObjDat_8325C(pc),a2
+                lea     DDZ_Phase1VulnerableBodyChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                lea     ChildObjDat_83262(pc),a2
+                lea     DDZ_Phase1FlickerDetailChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                lea     ChildObjDat_83268(pc),a2
+                lea     DDZFirstPhaseTurrets_SimpleChildRecord(pc),a2
                 jmp     CreateChild6_Simple(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81856:
+DDZ_Phase1ApproachAndEnableAttacks:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 subq.w  #1,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_818B2
+                bpl.s   DDZ_Phase1ApproachReturn
                 move.b  #4,routine(a0)
                 bset    #3,$38(a0)
                 move.w  (Camera_min_X_pos).w,d0
                 subi.w  #$100,d0
                 move.w  d0,(Camera_stored_min_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_81890
+                bne.s   DDZ_Phase1TrySpawnMissileLauncher
                 move.l  #Obj_DecLevStartXGradual,(a1)
 
-loc_81890:
+DDZ_Phase1TrySpawnMissileLauncher:
                 jsr     (AllocateObject).l
-                bne.s   locret_818B2
-                move.l  #loc_81F94,(a1)
+                bne.s   DDZ_Phase1ApproachReturn
+                move.l  #DDZ_MissileLauncherWaitForPlayerX,(a1)
                 move.w  a0,parent3(a1)
                 st      $39(a1)
                 move.w  #$D8,$42(a1)
                 move.w  #$80,$44(a1)
 
-locret_818B2:
+DDZ_Phase1ApproachReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_818B4:
+DDZ_Phase1ChaseUntilTargetDefeated:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 move.w  #$160,d2
                 move.w  #$130,d3
                 bsr.w   DDZBoss_StepXFromFlightInput
                 move.w  (_unkFAA4).w,d0
-                beq.s   locret_81912
+                beq.s   DDZ_Phase1ChaseReturn
                 movea.w d0,a1
                 btst    #7,status(a1)
-                beq.s   locret_81912
+                beq.s   DDZ_Phase1ChaseReturn
                 move.b  #6,routine(a0)
                 bset    #7,status(a0)
                 move.w  #(5*60)-1,$2E(a0)
                 move.l  #-$20,(_unkFA8A).w
                 jsr     (AllocateObject).l
-                bne.s   locret_81912
-                move.l  #loc_82E9A,(a1)
+                bne.s   DDZ_Phase1ChaseReturn
+                move.l  #DDZ_Phase1UpdateTenBurstSequence,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  a0,parent3(a1)
 
-locret_81912:
+DDZ_Phase1ChaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81914:
+DDZBoss_WaitBeforeFirstStageDescent:
                 move.w  #$160,d2
                 move.w  #$130,d3
                 bsr.w   DDZBoss_StepXFromFlightInput
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_81956
+                bpl.s   DDZ_Phase1DefeatWaitReturn
                 move.b  #8,routine(a0)
                 move.w  #60-1,$3A(a0)
                 move.b  #3,$39(a0)
                 move.w  #-$300,x_vel(a0)
                 move.w  #$100,y_vel(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_81956
-                move.l  #loc_83004,(a1)
+                bne.s   DDZ_Phase1DefeatWaitReturn
+                move.l  #DDZ_InitPhase1ExplosionAnchor,(a1)
                 move.w  a0,parent3(a1)
 
-locret_81956:
+DDZ_Phase1DefeatWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81958:
+DDZ_Phase1TickDescentPaletteSteps:
                 subq.w  #1,$3A(a0)
-                bpl.s   loc_8197C
+                bpl.s   DDZ_Phase1DescendAndSelectPhase2
                 move.w  #$59,$3A(a0)
                 subq.b  #1,$39(a0)
-                bmi.s   loc_8197C
+                bmi.s   DDZ_Phase1DescendAndSelectPhase2
                 lea     (Normal_palette_line_3).w,a1
                 moveq   #$10-1,d0
                 moveq   #$E,d1
                 moveq   #-$20,d2
 
-loc_81974:
+DDZBoss_DarkenOneFirstStagePaletteLine:
                 jsr     DecColor_Obj(pc)
-                dbf     d0,loc_81974
+                dbf     d0,DDZBoss_DarkenOneFirstStagePaletteLine
 
-loc_8197C:
+DDZ_Phase1DescendAndSelectPhase2:
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX_Continuous).l
                 move.w  #$160,d2
@@ -142,48 +142,48 @@ loc_8197C:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$D0,d0
                 cmp.w   y_pos(a0),d0
-                bhs.w   locret_82ABA
+                bhs.w   DDZ_MotionHelpersReturn
                 move.b  #$A,routine(a0)
                 ori.b   #$30,$38(a0)
                 move.w  #$1F,$2E(a0)
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
-                bne.s   loc_819CE
-                move.l  #loc_83108,(a1)
+                bne.s   DDZBoss_PrepareSecondStagePaletteCopy
+                move.l  #DDZ_StageFlashInitFivePasses,(a1)
 
-loc_819CE:
+DDZBoss_PrepareSecondStagePaletteCopy:
                 lea     (Pal_DDZ+$20).l,a1
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_819DA:
+DDZBoss_CopySecondStagePaletteLine:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_819DA
+                dbf     d6,DDZBoss_CopySecondStagePaletteLine
                 lea     (Normal_palette).w,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($80),d6
 
-loc_819EA:
+DDZ_SavePaletteAndQueueEmeraldArt:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_819EA
+                dbf     d6,DDZ_SavePaletteAndQueueEmeraldArt
                 lea     (ArtKosM_BossMasterEmerald).l,a1
                 move.w  #tiles_to_bytes(ArtTile_BossMasterEmerald),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_81A00:
+DDZ_WaitAndResetForPhase2Entrance:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_82ABA
+                bpl.w   DDZ_MotionHelpersReturn
                 move.b  #$C,routine(a0)
                 bclr    #7,status(a0)
                 andi.b  #$CF,$38(a0)
                 move.w  (_unkFA8E).w,d0
-                beq.s   loc_81A28
+                beq.s   DDZ_Phase2LockCameraAndSpawnParts
                 movea.w d0,a1
                 andi.b  #$F3,$38(a1)
 
-loc_81A28:
+DDZ_Phase2LockCameraAndSpawnParts:
                 move.w  #$600,(Events_bg+$00).w
                 move.w  (Camera_X_pos).w,d0
                 move.w  d0,(Camera_min_X_pos).w
@@ -198,30 +198,30 @@ loc_81A28:
                 move.w  d0,y_pos(a0)
                 clr.w   x_vel(a0)
                 move.w  #-$200,y_vel(a0)
-                lea     ChildObjDat_83274(pc),a2
+                lea     DDZ_Phase2AttachedPartChildren(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                lea     ChildObjDat_83282(pc),a2
+                lea     DDZ_Phase2FlickerDetailChildren(pc),a2
                 jmp     CreateChild6_Simple(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81A74:
+DDZ_Phase2RiseAndStartEntrance:
                 jsr     (MoveSprite2).l
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$20,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_81A9C
+                blo.s   DDZ_Phase2EnterAndBeginFinalChase
                 bset    #7,$38(a0)
-                bne.s   loc_81A9C
+                bne.s   DDZ_Phase2EnterAndBeginFinalChase
                 moveq   #signextendB(sfx_Blast),d0
                 jsr     (Play_SFX).l
                 clr.w   y_vel(a0)
 
-loc_81A9C:
+DDZ_Phase2EnterAndBeginFinalChase:
                 addi.w  #$10,x_vel(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$1C0,d0
                 cmp.w   x_pos(a0),d0
-                bhi.s   locret_81B24
+                bhi.s   DDZ_Phase2EntranceReturn
                 move.b  #$E,routine(a0)
                 bclr    #4,$38(a0)
                 move.l  #$800,(_unkFA8A).w
@@ -235,170 +235,172 @@ loc_81A9C:
                 addi.w  #$C0,d0
                 move.w  d0,y_pos(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_81AFC
+                bne.s   DDZBoss_SetSecondStageMaximumYTarget
                 move.l  #Obj_DecLevStartYGradual,(a1)
 
-loc_81AFC:
+DDZBoss_SetSecondStageMaximumYTarget:
                 move.w  #$120,d0
                 move.w  d0,(Camera_stored_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_81B16
+                bne.s   DDZ_EnableFlightForFinalChase
                 move.l  #Obj_IncLevEndYGradual,(a1)
 
-loc_81B16:
+DDZ_EnableFlightForFinalChase:
                 move.w  (_unkFA8E).w,d0
-                beq.s   locret_81B24
+                beq.s   DDZ_Phase2EntranceReturn
                 movea.w d0,a1
                 bset    #2,$38(a1)
 
-locret_81B24:
+DDZ_Phase2EntranceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81B26:
+DDZ_FinalChaseSwingAndReadRecoil:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 move.w  #$40,d2
                 move.w  #$60,d3
                 movea.w (_unkFA8E).w,a1
                 move.b  x_vel(a1),d1
-                bmi.s   loc_81B44
+                bmi.s   DDZ_FinalChaseAdjustXWithoutRight
                 moveq   #0,d1
 
-loc_81B44:
+DDZ_FinalChaseAdjustXWithoutRight:
                 ext.w   d1
                 neg.w   d1
                 asr.w   #1,d1
                 btst    #button_right,(Ctrl_1_held).w
-                bne.s   loc_81B68
+                bne.s   DDZBoss_FinalChaseAdjustXWithRightInput
                 move.w  x_pos(a0),d0
                 addi.w  #2,d0
                 add.w   d1,d0
                 move.w  (Camera_max_X_pos).w,d1
                 add.w   d2,d1
                 cmp.w   d1,d0
-                blo.s   loc_81B7C
+                blo.s   DDZ_FinalChaseStoreCandidateX
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81B68:
+DDZBoss_FinalChaseAdjustXWithRightInput:
                 move.w  x_pos(a0),d0
                 addi.w  #-2,d0
                 add.w   d1,d0
                 move.w  (Camera_min_X_pos).w,d1
                 add.w   d3,d1
                 cmp.w   d1,d0
-                bls.s   loc_81B82
+                bls.s   DDZ_FinalChaseAddForwardStepAndRecoil
 
-loc_81B7C:
+; Swapping the register carries its previous high word into the position fraction
+DDZ_FinalChaseStoreCandidateX:
                 swap    d0
                 move.l  d0,x_pos(a0)
 
-loc_81B82:
+DDZ_FinalChaseAddForwardStepAndRecoil:
                 move.l  x_pos(a0),d0
                 addi.l  #$70000,d0
                 tst.b   $20(a0)
-                beq.s   loc_81B98
+                beq.s   DDZ_FinalChaseClampXToCamera
                 addi.l  #$80000,d0
 
-loc_81B98:
+; The longword load reads Camera_min_X_pos together with the following word
+DDZ_FinalChaseClampXToCamera:
                 move.l  (Camera_min_X_pos).w,d1
                 addi.l  #$600000,d1
                 cmp.l   d1,d0
-                blo.s   loc_81BB0
+                blo.s   DDZBoss_SelectFinalChaseLongBoundary
                 addi.l  #$1500000,d1
                 cmp.l   d1,d0
-                blo.s   loc_81BB2
+                blo.s   DDZ_FinalChaseStoreXSpawnAndHitCheck
 
-loc_81BB0:
+DDZBoss_SelectFinalChaseLongBoundary:
                 move.l  d1,d0
 
-loc_81BB2:
+DDZ_FinalChaseStoreXSpawnAndHitCheck:
                 move.l  d0,x_pos(a0)
                 bsr.w   DDZBoss_TryFourShotBurst
-                bra.w   loc_82DCE
+                bra.w   DDZ_ChaseCheckSuperHitOrFlash
 ; ---------------------------------------------------------------------------
 
-loc_81BBE:
+DDZ_FinalDefeatDispatchAndCarry:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_81BEA(pc,d0.w),d1
-                jsr     off_81BEA(pc,d1.w)
+                move.w  DDZBoss_FinalDefeatStateOffsets(pc,d0.w),d1
+                jsr     DDZBoss_FinalDefeatStateOffsets(pc,d1.w)
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
                 move.w  x_pos(a0),(Events_bg+$02).w
                 move.w  y_pos(a0),(Events_bg+$04).w
                 rts
 ; ---------------------------------------------------------------------------
-off_81BEA:
-                dc.w    loc_81BF2-off_81BEA
-                dc.w    loc_81C2C-off_81BEA
-                dc.w    loc_81C70-off_81BEA
-                dc.w    loc_81CA4-off_81BEA
+DDZBoss_FinalDefeatStateOffsets:
+                dc.w    DDZ_FinalDefeatCameraCatchup-DDZBoss_FinalDefeatStateOffsets
+                dc.w    DDZBoss_FinalDefeatGateExplosionSound-DDZBoss_FinalDefeatStateOffsets
+                dc.w    DDZ_FinalDefeatCarryPlayerUntilFade-DDZBoss_FinalDefeatStateOffsets
+                dc.w    DDZ_SaveAndStartEndingLevel-DDZBoss_FinalDefeatStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_81BF2:
+DDZ_FinalDefeatCameraCatchup:
                 move.w  (Camera_X_pos).w,d0
                 addq.w  #1,d0
                 move.w  d0,(Camera_X_pos).w
                 addi.w  #$40,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_81C2A
+                blo.s   DDZ_FinalDefeatCameraReturn
                 move.b  #2,routine(a0)
                 bset    #4,$38(a0)
                 move.w  #$40,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_81C2A
-                move.l  #loc_8303E,(a1)
+                bne.s   DDZ_FinalDefeatCameraReturn
+                move.l  #DDZ_InitFinalAnchorAndTryExplosion,(a1)
                 move.w  a0,parent3(a1)
 
-locret_81C2A:
+DDZ_FinalDefeatCameraReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81C2C:
+DDZBoss_FinalDefeatGateExplosionSound:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #7,d0
-                bne.s   loc_81C3E
+                bne.s   DDZ_FinalDefeatFallAndTryWhiteFade
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
 
-loc_81C3E:
+DDZ_FinalDefeatFallAndTryWhiteFade:
                 addi.w  #$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_81C6E
+                bpl.s   DDZ_FinalDefeatFallReturn
                 move.b  #4,routine(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_81C6E
+                bne.s   DDZ_FinalDefeatFallReturn
                 move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  a1,$44(a0)
                 move.w  #7,$3A(a1)
 
-locret_81C6E:
+DDZ_FinalDefeatFallReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81C70:
+DDZ_FinalDefeatCarryPlayerUntilFade:
                 movea.w (_unkFA8E).w,a1
                 addq.w  #8,x_pos(a1)
                 addi.w  #$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_82ABA
+                beq.w   DDZ_MotionHelpersReturn
                 move.b  #6,routine(a0)
                 move.w  #$1F,$2E(a0)
                 clr.b   (Super_palette_status).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81CA4:
+DDZ_SaveAndStartEndingLevel:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_82ABA
+                bpl.w   DDZ_MotionHelpersReturn
                 st      (SRAM_mask_interrupts_flag).w
                 jsr     (SaveGame).l
                 move.w  #$D01,d0
@@ -406,10 +408,10 @@ loc_81CA4:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_81CC6:
-                lea     ObjDat3_83226(pc),a1
+DDZ_InitMasterEmeraldAndCheckPalette:
+                lea     DDZMasterEmerald_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_81D0E,(a0)
+                move.l  #DDZ_MasterEmeraldFollowAndCycleColors,(a0)
                 move.b  $43(a0),$3C(a0)
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
@@ -417,25 +419,25 @@ loc_81CC6:
                 moveq   #3,d0
                 moveq   #7-1,d1
 
-loc_81CEC:
+DDZ_MasterEmeraldCheckSevenEmeralds:
                 cmp.b   (a1)+,d0
-                bne.s   locret_81D0C
-                dbf     d1,loc_81CEC
+                bne.s   DDZ_MasterEmeraldInitReturn
+                dbf     d1,DDZ_MasterEmeraldCheckSevenEmeralds
                 st      $3A(a0)
                 lea     (DDZMasterEmerald_TwoSlotPalettePrograms).l,a1
                 lea     (Palette_rotation_data).w,a2
                 moveq   #bytesToLcnt($10),d0
 
-loc_81D04:
+DDZ_MasterEmeraldCopyPaletteSlots:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_81D04
+                dbf     d0,DDZ_MasterEmeraldCopyPaletteSlots
                 clr.w   (a2)
 
-locret_81D0C:
+DDZ_MasterEmeraldInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81D0E:
+DDZ_MasterEmeraldFollowAndCycleColors:
                 movea.w parent3(a0),a1
                 move.b  mapping_frame(a1),d0
                 subi.b  #$3A,d0
@@ -444,99 +446,99 @@ loc_81D0E:
                 move.b  d1,$43(a0)
                 jsr     Refresh_ChildPosition(pc)
                 tst.b   $3A(a0)
-                beq.s   loc_81D32
+                beq.s   DDZMasterEmerald_TestRootReleaseOrDraw
                 jsr     Run_PalRotationScript(pc)
 
-loc_81D32:
+DDZMasterEmerald_TestRootReleaseOrDraw:
                 movea.w $44(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_81D44
+                bne.s   DDZ_MasterEmeraldBeginReleasedScroll
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_81D44:
-                move.l  #loc_81D4A,(a0)
+DDZ_MasterEmeraldBeginReleasedScroll:
+                move.l  #DDZ_MasterEmeraldClampReleasedX,(a0)
 
-loc_81D4A:
+DDZ_MasterEmeraldClampReleasedX:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_81D64
+                blo.s   DDZ_MasterEmeraldCarryAndDraw
                 move.w  d0,x_pos(a0)
 
-loc_81D64:
+DDZ_MasterEmeraldCarryAndDraw:
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_81D72:
-                lea     ObjDat3_8320E(pc),a1
+DDZ_InitPhase2PartAndEmeraldChild:
+                lea     DDZSecondPhaseAttachedParts_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_81DCC,(a0)
+                move.l  #DDZ_Phase2PartAnimateOptionalStream,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                lea     word_81DB4(pc,d0.w),a1
+                lea     DDZ_Phase2PartVariantOffsets(pc,d0.w),a1
                 move.w  (a1)+,$42(a0)
                 move.w  (a1)+,$44(a0)
-                move.l  off_81DC0(pc,d0.w),$30(a0)
+                move.l  DDZ_Phase2PartOptionalAnimPointers(pc,d0.w),$30(a0)
                 lsr.w   #2,d0
-                move.b  byte_81DB0(pc,d0.w),mapping_frame(a0)
+                move.b  DDZ_Phase2PartInitialFrames(pc,d0.w),mapping_frame(a0)
                 tst.w   d0
-                bne.w   locret_82ABA
-                lea     ChildObjDat_8327A(pc),a2
+                bne.w   DDZ_MotionHelpersReturn
+                lea     DDZMasterEmerald_NormalChildRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
-byte_81DB0:
+DDZ_Phase2PartInitialFrames:
                 dc.b    $3A
                 dc.b    5
                 dc.b    $3D
                 even
-word_81DB4:
+DDZ_Phase2PartVariantOffsets:
                 dc.w    $64,   $4C
                 dc.w    $10,   $20
                 dc.w    $1C,   $8C
-off_81DC0:
-                dc.l    byte_832D0
+DDZ_Phase2PartOptionalAnimPointers:
+                dc.l    DDZ_Phase2AttachedPart0Anim
                 dc.l    0
-                dc.l    byte_832D9
+                dc.l    DDZ_Phase2AttachedPart4Anim
 ; ---------------------------------------------------------------------------
 
-loc_81DCC:
+DDZ_Phase2PartAnimateOptionalStream:
                 move.l  $30(a0),d0
-                beq.s   loc_81DD8
+                beq.s   DDZ_Phase2PartFollowOrDetach
                 movea.l d0,a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
 
-loc_81DD8:
+DDZ_Phase2PartFollowOrDetach:
                 bsr.w   DDZChild_SetPosFromParent
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.s   loc_81E16
-                move.l  #loc_81E28,(a0)
+                beq.s   DDZ_Phase2PartDraw
+                move.l  #DDZ_Phase2PartCarryAndFlicker,(a0)
                 bset    #7,status(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                move.l  word_81E1C(pc,d0.w),x_vel(a0)   ; and y_vel
+                move.l  DDZ_Phase2PartDetachedVelocities(pc,d0.w),x_vel(a0)  ; and y_vel
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_81E16
+                bne.s   DDZ_Phase2PartDraw
                 move.b  #4,subtype(a1)
 
-loc_81E16:
+DDZ_Phase2PartDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_81E1C:
+DDZ_Phase2PartDetachedVelocities:
                 dc.w    $80, -$200
                 dc.w    -$100, -$100
                 dc.w    -$200, -$300
 ; ---------------------------------------------------------------------------
 
-loc_81E28:
+DDZ_Phase2PartCarryAndFlicker:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 move.w  (_unkFA90).w,d0
@@ -544,73 +546,73 @@ loc_81E28:
                 jmp     Obj_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81E3C:
+DDZ_Phase1TargetDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_81E50(pc,d0.w),d1
-                jsr     off_81E50(pc,d1.w)
+                move.w  DDZFirstStageHitTarget_StateOffsets(pc,d0.w),d1
+                jsr     DDZFirstStageHitTarget_StateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_81E50:
-                dc.w    loc_81E54-off_81E50
-                dc.w    loc_81E72-off_81E50
+DDZFirstStageHitTarget_StateOffsets:
+                dc.w    DDZ_InitPhase1TargetHandleAndHealth-DDZFirstStageHitTarget_StateOffsets
+                dc.w    DDZ_Phase1TargetFollowAndResolveHit-DDZFirstStageHitTarget_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_81E54:
-                lea     ObjDat3_831CC(pc),a1
+DDZ_InitPhase1TargetHandleAndHealth:
+                lea     DDZFirstPhaseVulnerableBody_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  a0,(_unkFAA4).w
                 move.w  #$C0,$42(a0)
                 move.w  #$4B,$44(a0)
                 move.b  #7,collision_property(a0)
 
-loc_81E72:
+DDZ_Phase1TargetFollowAndResolveHit:
                 bsr.w   DDZChild_SetPosFromParent
-                bra.w   loc_82D18
+                bra.w   DDZ_Phase1ReceiverCheckHit
 ; ---------------------------------------------------------------------------
 
-loc_81E7A:
+DDZ_Phase1TargetFollowUntilDiscard:
                 bsr.w   DDZChild_SetPosFromParent
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81E82:
-                lea     ObjDat3_831BA(pc),a1
+DDZ_InitTurretOffsetAndShotTimer:
+                lea     DDZFirstPhaseTurret_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_81EB8,(a0)
+                move.l  #DDZTurret_WaitForRootAttackEnable,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                lea     word_81EAC(pc,d0.w),a1
+                lea     DDZTurret_ParentWordOffsetsByVariant(pc,d0.w),a1
                 move.w  (a1)+,$42(a0)
                 move.w  (a1)+,$44(a0)
                 lsl.w   #2,d0
                 move.w  d0,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_81EAC:
+DDZTurret_ParentWordOffsetsByVariant:
                 dc.w    $90,   $60
                 dc.w    $B0,   $58
                 dc.w    $A8,   $78
 ; ---------------------------------------------------------------------------
 
-loc_81EB8:
+DDZTurret_WaitForRootAttackEnable:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_81EDE
-                move.l  #loc_81ECA,(a0)
+                beq.s   DDZ_TurretAimEvery16Frames
+                move.l  #DDZTurret_CountDownAndTryOneAimedShot,(a0)
 
-loc_81ECA:
+DDZTurret_CountDownAndTryOneAimedShot:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_81EDE
+                bpl.s   DDZ_TurretAimEvery16Frames
                 move.w  #$60,$2E(a0)
-                lea     ChildObjDat_8326E(pc),a2
+                lea     DDZTurretShot_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-loc_81EDE:
+DDZ_TurretAimEvery16Frames:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_81F0A
+                bne.s   DDZTurret_PositionMuzzleAndDrawOrDetach
                 movea.l a0,a1
                 lea     (Player_1).w,a2
                 jsr     GetApproximateObjectBearing(pc)
@@ -622,31 +624,31 @@ loc_81EDE:
                 addi.b  #$1C,d0
                 move.b  d0,mapping_frame(a0)
 
-loc_81F0A:
+DDZTurret_PositionMuzzleAndDrawOrDetach:
                 bsr.w   PositionDDZTurretWithEightWayMuzzleNudge
                 moveq   #0,d0
                 jmp     Child_Draw_Sprite_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81F14:
-                lea     word_831C6(pc),a1
+DDZ_InitTurretShotAndVelocity:
+                lea     DDZTurretShot_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_81F26,(a0)
+                move.l  #DDZ_TurretShotMoveAndCollide,(a0)
                 bsr.w   DDZTurretShot_SetVelFromParentAngle
 
-loc_81F26:
+DDZ_TurretShotMoveAndCollide:
                 jsr     (MoveSprite2).l
                 jsr     (DDZTurretShot_CheckContactOrRetire).l
                 jmp     Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81F36:
-                lea     ObjDat3_831D8(pc),a1
+DDZ_InitPhase1FlickerPart:
+                lea     DDZ_Phase1DetailAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     word_81F5E(pc),a1
+                lea     DDZ_Phase1FlickerPartOffsets(pc),a1
 
-loc_81F42:
-                move.l  #loc_81F6A,(a0)
+DDZ_FlickerPartStoreOffsets:
+                move.l  #DDZ_FlickerPartFollowAndDrawByTick,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
@@ -655,59 +657,59 @@ loc_81F42:
                 move.w  (a1)+,$44(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_81F5E:
+DDZ_Phase1FlickerPartOffsets:
                 dc.w    $10,   $38
                 dc.w    $10,   $87
                 dc.w    $28,   $60
 ; ---------------------------------------------------------------------------
 
-loc_81F6A:
+DDZ_FlickerPartFollowAndDrawByTick:
                 bsr.w   DDZChild_SetPosFromParent
                 btst    #1,(V_int_run_count+3).w
-                bne.s   loc_81F7A
+                bne.s   DDZ_FlickerPartCheckHiddenParent
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81F7A:
+DDZ_FlickerPartCheckHiddenParent:
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_81F7E:
-                lea     ObjDat3_831E4(pc),a1
+DDZ_InitPhase2FlickerPart:
+                lea     DDZ_Phase2DetailAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     word_81F8C(pc),a1
-                bra.s   loc_81F42
+                lea     DDZ_Phase2FlickerPartOffsets(pc),a1
+                bra.s   DDZ_FlickerPartStoreOffsets
 ; ---------------------------------------------------------------------------
-word_81F8C:
+DDZ_Phase2FlickerPartOffsets:
                 dc.w    -$20,   $24
                 dc.w    -$10,   $44
 ; ---------------------------------------------------------------------------
 
-loc_81F94:
+DDZ_MissileLauncherWaitForPlayerX:
                 bsr.w   DDZChild_SetPosFromParent
                 tst.b   $39(a0)
-                bpl.s   loc_81FDA
+                bpl.s   DDZ_MissileCheckParentAndRetire
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_81FDA
+                blo.s   DDZ_MissileCheckParentAndRetire
                 moveq   #2,d1
                 move.b  d1,$39(a0)
                 moveq   #0,d2
 
-loc_81FB0:
+DDZ_MissileLauncherTryThreeHoming:
                 jsr     (AllocateObject).l
-                bne.s   loc_81FDA
+                bne.s   DDZ_MissileCheckParentAndRetire
                 move.l  #Obj_DDZMissile,(a1)
                 move.b  #1,subtype(a1)
                 move.w  a0,parent3(a1)
                 move.b  d2,$39(a1)
                 addq.w  #1,d2
-                dbf     d1,loc_81FB0
+                dbf     d1,DDZ_MissileLauncherTryThreeHoming
                 moveq   #signextendB(sfx_TubeLauncher),d0
                 jsr     (Play_SFX).l
 
-loc_81FDA:
+DDZ_MissileCheckParentAndRetire:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_82ABA
+                beq.w   DDZ_MotionHelpersReturn
                 jmp     (Go_Delete_Sprite).l

@@ -4,77 +4,78 @@
 ; ---------------------------------------------------------------------------
 
 Obj_DDZAsteroid:
-                move.l  #loc_821FC,(a0)
+                move.l  #DDZ_AsteroidMoveOutsideDebug,(a0)
                 move.l  #Map_DDZMissileAsteroid,mappings(a0)
                 move.w  #make_art_tile(ArtTile_DDZMisc,1,1),art_tile(a0)
                 move.w  #0,priority(a0)
                 bsr.w   DDZAsteroid_InitFromSubtype
 
-loc_821FC:
+DDZ_AsteroidMoveOutsideDebug:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_82208
+                bne.s   DDZ_AsteroidWrapAndCheckSuperContact
                 jsr     (MoveSprite2).l
 
-loc_82208:
+DDZ_AsteroidWrapAndCheckSuperContact:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_82224
+                beq.s   DDZ_AsteroidCullOrDraw
                 lea     (Player_1).w,a1
                 movea.l $30(a0),a2
                 jsr     Check_InMyRange(pc)
-                bne.s   loc_8222A
+                bne.s   DDZ_AsteroidBreakAndKnockPlayer
 
-loc_82224:
+DDZ_AsteroidCullOrDraw:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_8222A:
+DDZ_AsteroidBreakAndKnockPlayer:
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
                 move.w  (_unkFA8E).w,d0
-                beq.s   loc_82240
+                beq.s   DDZ_AsteroidReduceScrollSpeed
                 movea.w d0,a2
                 move.w  #-$400,x_vel(a2)
 
-loc_82240:
+; The one-pixel floor uses an unsigned comparison after subtraction
+DDZ_AsteroidReduceScrollSpeed:
                 move.l  (_unkFA82).w,d0
                 move.l  #$10000,d1
                 sub.l   d1,d0
                 cmp.l   d1,d0
-                bhs.s   loc_82252
+                bhs.s   DDZ_AsteroidStoreSpeedAndCheckSize
                 move.l  d1,d0
 
-loc_82252:
+DDZ_AsteroidStoreSpeedAndCheckSize:
                 move.l  d0,(_unkFA82).w
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 cmpi.b  #$20,d0
-                bne.s   loc_822D8
+                bne.s   DDZ_AsteroidSelectParticleRecord
                 moveq   #0,d1
                 move.w  y_pos(a0),d2
                 sub.w   (Player_1+y_pos).w,d2
                 smi     d3
-                bpl.s   loc_82276
+                bpl.s   DDZ_LargeAsteroidSelectSplitByY
                 neg.w   d2
 
-loc_82276:
+DDZ_LargeAsteroidSelectSplitByY:
                 cmpi.w  #$10,d2
-                blo.s   loc_82284
+                blo.s   DDZ_LargeAsteroidSelectSplitOffsets
                 moveq   #4,d1
                 tst.b   d3
-                beq.s   loc_82284
+                beq.s   DDZ_LargeAsteroidSelectSplitOffsets
                 moveq   #8,d1
 
-loc_82284:
-                lea     off_82346(pc),a2
+DDZ_LargeAsteroidSelectSplitOffsets:
+                lea     DDZ_LargeAsteroidSplitLayoutTable(pc),a2
                 movea.l (a2,d1.w),a2
                 moveq   #3-1,d4
 
-loc_8228E:
+DDZ_LargeAsteroidSpawnMediumPieces:
                 jsr     (AllocateObject).l
-                bne.w   loc_82334
+                bne.w   DDZ_AsteroidClearRespawnBit
                 move.l  #Obj_DDZAsteroid,(a1)
                 move.w  x_pos(a0),d2
                 add.w   (a2)+,d2
@@ -86,28 +87,28 @@ loc_8228E:
                 andi.b  #$F,d0
                 addi.b  #$10,d0
                 move.b  d0,subtype(a1)
-                dbf     d4,loc_8228E
-                lea     word_82376(pc),a1
+                dbf     d4,DDZ_LargeAsteroidSpawnMediumPieces
+                lea     DDZ_LargeAsteroidParticleYShifts(pc),a1
                 adda.w  d1,a1
                 move.w  (a1)+,d1
                 add.w   d1,x_pos(a0)
                 move.w  (a1)+,d1
                 add.w   d1,y_pos(a0)
 
-loc_822D8:
+DDZ_AsteroidSelectParticleRecord:
                 move.b  subtype(a0),d0
                 andi.w  #$10,d0
                 lsr.w   #2,d0
-                lea     off_82382(pc),a2
+                lea     DDZ_AsteroidParticleRecordsBySize(pc),a2
                 movea.l (a2,d0.w),a2
-                move.l  #loc_823EE,d1
+                move.l  #DDZ_InitAsteroidParticle,d1
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 move.w  (a2)+,d4
 
-loc_822FA:
+DDZ_AsteroidSpawnBreakupParticles:
                 jsr     (AllocateObject).l
-                bne.s   loc_82334
+                bne.s   DDZ_AsteroidClearRespawnBit
                 move.l  d1,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
@@ -122,41 +123,41 @@ loc_822FA:
                 move.w  (a2)+,subtype(a1)
                 move.w  (a2)+,x_vel(a1)
                 move.w  (a2)+,y_vel(a1)
-                dbf     d4,loc_822FA
+                dbf     d4,DDZ_AsteroidSpawnBreakupParticles
 
-loc_82334:
+DDZ_AsteroidClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_82340
+                beq.s   DDZ_AsteroidDeleteAfterBreakup
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_82340:
+DDZ_AsteroidDeleteAfterBreakup:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-off_82346:
-                dc.l    word_82352
-                dc.l    word_8235E
-                dc.l    word_8236A
-word_82352:
+DDZ_LargeAsteroidSplitLayoutTable:
+                dc.l    DDZ_LargeAsteroidCenteredOffsets
+                dc.l    DDZ_LargeAsteroidLowerOffsets
+                dc.l    DDZ_LargeAsteroidUpperOffsets
+DDZ_LargeAsteroidCenteredOffsets:
                 dc.w    0, $FFE8
                 dc.w    $18,     0
                 dc.w    0,   $18
-word_8235E:
+DDZ_LargeAsteroidLowerOffsets:
                 dc.w    -$18,     0
                 dc.w    0,   $18
                 dc.w    $18,     0
-word_8236A:
+DDZ_LargeAsteroidUpperOffsets:
                 dc.w    -$18,     0
                 dc.w    0,  -$18
                 dc.w    $18,     0
-word_82376:
+DDZ_LargeAsteroidParticleYShifts:
                 dc.w    -$10,     0
                 dc.w    0,  -$18
                 dc.w    0,   $18
-off_82382:
-                dc.l    word_8238A
-                dc.l    word_823B4
-word_8238A:
+DDZ_AsteroidParticleRecordsBySize:
+                dc.l    DDZ_AsteroidFiveParticleRecords
+                dc.l    DDZ_AsteroidSevenParticleRecords
+DDZ_AsteroidFiveParticleRecords:
                 dc.w    5-1
                 dc.b    -8,   2
                 dc.w    0,  -$80,  $140
@@ -168,7 +169,7 @@ word_8238A:
                 dc.w    $100, -$200,  $100
                 dc.b    4,   8
                 dc.w    $100, -$180,  $280
-word_823B4:
+DDZ_AsteroidSevenParticleRecords:
                 dc.w    7-1
                 dc.b    -$C,  -4
                 dc.w    0,  -$80, -$180
@@ -186,16 +187,16 @@ word_823B4:
                 dc.w    $100, -$140,   $80
 ; ---------------------------------------------------------------------------
 
-loc_823EE:
-                lea     word_83208(pc),a1
+DDZ_InitAsteroidParticle:
+                lea     DDZAsteroidFragment_PartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_82412,(a0)
-                move.l  #byte_832A8,$30(a0)
+                move.l  #DDZ_AsteroidParticleWrapAnimateCull,(a0)
+                move.l  #DDZ_AsteroidFragmentSubtype0Anim,$30(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_82412
-                move.l  #byte_832AE,$30(a0)
+                beq.s   DDZ_AsteroidParticleWrapAnimateCull
+                move.l  #DDZ_AsteroidFragmentOtherAnim,$30(a0)
 
-loc_82412:
+DDZ_AsteroidParticleWrapAnimateCull:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 jsr     Animate_Raw(pc)
@@ -203,10 +204,10 @@ loc_82412:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_8242A:
-                lea     ObjDat3_8321A(pc),a1
+DDZ_InitSuperStarTrailAndArt:
+                lea     DDZSuperPlayerTrailingStars_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_82452,(a0)
+                move.l  #DDZ_SuperStarTrailCycleSnapshots,(a0)
                 move.b  #6,mapping_frame(a0)
                 move.l  #ArtUnc_SuperSonic_Stars,d1
                 move.w  #tiles_to_bytes(ArtTile_Shield),d2
@@ -214,49 +215,49 @@ loc_8242A:
                 jmp     (Add_To_DMA_Queue).l
 ; ---------------------------------------------------------------------------
 
-loc_82452:
+DDZ_SuperStarTrailCycleSnapshots:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   locret_82ABA
+                beq.w   DDZ_MotionHelpersReturn
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #8,x_pos(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_82494
+                bpl.s   DDZSuperStarTrail_DrawCurrentSnapshot
                 move.b  #1,anim_frame_timer(a0)
                 move.b  mapping_frame(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #6,d0
-                blo.s   loc_82490
+                blo.s   DDZ_SuperStarTrailStoreFrame
                 moveq   #0,d0
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
 
-loc_82490:
+DDZ_SuperStarTrailStoreFrame:
                 move.b  d0,mapping_frame(a0)
 
-loc_82494:
+DDZSuperStarTrail_DrawCurrentSnapshot:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8249A:
-                lea     ObjDat3_83232(pc),a1
+DDZ_InitHeavyLinearShot:
+                lea     DDZHorizontalHeavyProjectile_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_824F4,(a0)
+                move.l  #DDZ_HeavyLinearShotWaitAndAttach,(a0)
                 move.w  #$400,x_vel(a0)
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$18,d0
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 add.w   d1,d0
-                move.w  word_824D4(pc,d0.w),y_vel(a0)
+                move.w  DDZ_HeavyLinearShotYVelocities(pc,d0.w),y_vel(a0)
                 lsl.w   #3,d1
                 move.w  d1,$2E(a0)
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_824D4:
+DDZ_HeavyLinearShotYVelocities:
                 dc.w    -$140
                 dc.w    -$120
                 dc.w    $100
@@ -275,12 +276,12 @@ word_824D4:
                 dc.w    $A0
 ; ---------------------------------------------------------------------------
 
-loc_824F4:
+DDZ_HeavyLinearShotWaitAndAttach:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_82ABA
-                move.l  #loc_8253C,(a0)
+                bpl.w   DDZ_MotionHelpersReturn
+                move.l  #DDZ_HeavyLinearShotSetFlightPriority,(a0)
                 move.w  #$10,$2E(a0)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d0
@@ -291,28 +292,28 @@ loc_824F4:
                 move.w  d0,y_pos(a0)
                 moveq   #signextendB(sfx_TubeLauncher),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_83294(pc),a2
+                lea     DDZ_HorizontalHeavyShotEffects(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8253C:
+DDZ_HeavyLinearShotSetFlightPriority:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_82554
-                move.l  #loc_8255C,(a0)
+                bpl.s   DDZ_HeavyLinearShotMoveDuringLaunch
+                move.l  #DDZ_HeavyLinearShotAccelerateLeft,(a0)
                 move.w  #$180,priority(a0)
                 bset    #7,$38(a0)
 
-loc_82554:
+DDZ_HeavyLinearShotMoveDuringLaunch:
                 addq.w  #4,x_pos(a0)
-                bra.w   loc_82568
+                bra.w   DDZ_HeavyLinearShotAnimateAndCollide
 ; ---------------------------------------------------------------------------
 
-loc_8255C:
+DDZ_HeavyLinearShotAccelerateLeft:
                 addi.w  #-$20,x_vel(a0)
                 jsr     (MoveSprite2).l
 
-loc_82568:
-                lea     byte_832BF(pc),a1
+DDZ_HeavyLinearShotAnimateAndCollide:
+                lea     DDZ_HorizontalHeavyShotAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
@@ -322,36 +323,36 @@ loc_82568:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_82588:
-                move.l  #loc_8259A,(a0)
-                lea     word_8323E(pc),a1
+DDZ_InitHeavyShotFrontChild:
+                move.l  #DDZ_HeavyShotChildInheritPriority,(a0)
+                lea     DDZ_HeavyShotFrontPartialAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8259A:
+DDZ_HeavyShotChildInheritPriority:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                beq.s   loc_825AC
+                beq.s   DDZ_HeavyShotChildAnimateAndFollow
                 move.w  #$100,priority(a0)
 
-loc_825AC:
-                lea     byte_832C3(pc),a1
+DDZ_HeavyShotChildAnimateAndFollow:
+                lea     DDZ_HorizontalHeavyShotFrontAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jsr     Refresh_ChildPosition(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_825BC:
-                move.l  #loc_82160,(a0)
-                lea     word_831FC(pc),a1
+DDZ_InitHeavyShotRearTrail:
+                move.l  #DDZ_MissileTrailTryPuffEvery8Frames,(a0)
+                lea     DDZ_MissileFlamePartialAttributes(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_825CA:
-                lea     ObjDat3_83244(pc),a1
+DDZ_InitHeavyCurveShot:
+                lea     DDZCurvedHeavyProjectile_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_82606,(a0)
+                move.l  #DDZ_HeavyCurveShotSetCurveTimer,(a0)
                 movea.w parent3(a0),a1
                 move.w  x_pos(a0),d0
                 addi.w  #$52,d0
@@ -363,12 +364,12 @@ loc_825CA:
                 move.w  #$200,y_vel(a0)
                 move.w  #4,$2E(a0)
 
-loc_82606:
+DDZ_HeavyCurveShotSetCurveTimer:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_82632
-                move.l  #loc_82652,(a0)
+                bpl.s   DDZ_HeavyCurveShotMoveDuringLaunch
+                move.l  #DDZ_HeavyCurveShotWaitAndCurve,(a0)
                 move.w  #$80,priority(a0)
                 bset    #7,art_tile(a0)
                 moveq   #0,d0
@@ -376,37 +377,38 @@ loc_82606:
                 lsl.w   #3,d0
                 move.w  d0,$2E(a0)
 
-loc_82632:
+DDZ_HeavyCurveShotMoveDuringLaunch:
                 jsr     (MoveSprite2).l
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   loc_83038
+                bne.w   DDZ_DeleteSceneActor
                 jmp     Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_82652:
+; A negative Y-velocity candidate leaves the stored Y velocity unchanged
+DDZ_HeavyCurveShotWaitAndCurve:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_82678
+                bpl.s   DDZ_HeavyCurveShotTryPuffEvery8Frames
                 addi.w  #-$40,x_vel(a0)
                 move.w  y_vel(a0),d0
                 addi.w  #-$20,d0
-                bmi.s   loc_8268A
+                bmi.s   DDZ_HeavyCurveShotMoveAndCollide
                 move.w  d0,y_vel(a0)
-                bra.w   loc_8268A
+                bra.w   DDZ_HeavyCurveShotMoveAndCollide
 ; ---------------------------------------------------------------------------
 
-loc_82678:
+DDZ_HeavyCurveShotTryPuffEvery8Frames:
                 move.b  (V_int_run_count+3).w,d3
                 andi.b  #7,d3
-                bne.s   loc_8268A
-                lea     ChildObjDat_832A2(pc),a2
+                bne.s   DDZ_HeavyCurveShotMoveAndCollide
+                lea     DDZ_CurvedHeavyShotPuffChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-loc_8268A:
+DDZ_HeavyCurveShotMoveAndCollide:
                 jsr     (MoveSprite2).l
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
@@ -414,10 +416,10 @@ loc_8268A:
                 jmp     Sprite_CheckDeleteXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_826A0:
-                lea     word_83202(pc),a1
+DDZ_InitHeavyCurveShotPuff:
+                lea     DDZ_TrailPuffPartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_821C2,(a0)
+                move.l  #DDZ_MissilePuffAnimateMoveAndCull,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$200,y_vel(a0)
@@ -426,22 +428,22 @@ loc_826A0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_826CC:
+DDZ_InitDefeatExplosion:
                 lea     ObjDat_BossExplosion1(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_826E2,(a0)
+                move.l  #DDZ_DefeatExplosionSelectScrollCarry,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-loc_826E2:
+DDZ_DefeatExplosionSelectScrollCarry:
                 movea.w parent3(a0),a1
                 tst.b   subtype(a1)
-                beq.s   loc_826FC
+                beq.s   DDZ_DefeatExplosionAnimateAndMove
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 move.w  (_unkFA90).w,d0
                 add.w   d0,x_pos(a0)
 
-loc_826FC:
+DDZ_DefeatExplosionAnimateAndMove:
                 lea     (AniRaw_BossExplosion).l,a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 move.w  $3A(a0),d0
@@ -452,15 +454,15 @@ loc_826FC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_82722:
+DDZ_RingWarningCheckTenRingThreshold:
                 move.w  $3A(a0),d1
                 moveq   #0,d0
                 cmpi.w  #10,(Ring_count).w
-                bhi.s   loc_82732
+                bhi.s   DDZ_RingWarningApplyChangedTempo
                 moveq   #8,d0
 
-loc_82732:
+DDZ_RingWarningApplyChangedTempo:
                 cmp.w   d1,d0
-                beq.w   locret_82ABA
+                beq.w   DDZ_MotionHelpersReturn
                 move.w  d0,$3A(a0)
                 jmp     (Change_Music_Tempo).l

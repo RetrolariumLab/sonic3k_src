@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 158
+    "commit_count": 159
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -995,9 +995,15 @@
       "commits": ["ab66c1c8046685f2e1d706b6eee7a8f7794440df"]
     },
     {
-      "id": "current-shorten-52-boss-dez-final",
+      "id": "change-964f4f9351a3",
       "kind": "source_or_tooling",
       "summary": "Apply 192 reviewed short labels for boss dez final.",
+      "commits": ["964f4f9351a38f7f95457c4612f908a90e77a34f"]
+    },
+    {
+      "id": "current-shorten-53-boss-ddz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 275 reviewed short labels for boss ddz.",
       "commits": ["release-commit"]
     }
   ],

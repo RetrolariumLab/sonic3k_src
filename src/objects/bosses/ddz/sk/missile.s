@@ -6,38 +6,38 @@
 Obj_DDZMissile:
                 lea     ObjDat_DDZMissile(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     ChildObjDat_83250(pc),a2
+                lea     DDZMissileRearFlame_SimpleChildRecord(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 tst.b   subtype(a0)
-                bne.s   loc_82014
-                move.l  #loc_82038,(a0)
+                bne.s   DDZ_InitHomingMissileVolley
+                move.l  #DDZ_StraightMissilePlayDashOnce,(a0)
                 move.w  #-$3FFA,$3C(a0)
                 bra.w   DDZMissile_SelectEightWayFrame
 ; ---------------------------------------------------------------------------
 
-loc_82014:
-                move.l  #loc_82060,(a0)
+DDZ_InitHomingMissileVolley:
+                move.l  #DDZ_HomingMissileFollowDuringDelay,(a0)
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 add.w   d0,d0
-                move.w  word_82032(pc,d0.w),d1
+                move.w  DDZHomingMissile_InitialVolleyYNudges(pc,d0.w),d1
                 add.w   d1,y_pos(a0)
                 lsl.w   #3,d0
                 move.w  d0,$2E(a0)
-                bra.s   loc_81FDA
+                bra.s   DDZ_MissileCheckParentAndRetire
 ; ---------------------------------------------------------------------------
-word_82032:
+DDZHomingMissile_InitialVolleyYNudges:
                 dc.w    0,    -8,     8
 ; ---------------------------------------------------------------------------
 
-loc_82038:
+DDZ_StraightMissilePlayDashOnce:
                 tst.b   render_flags(a0)
-                bpl.s   loc_8204C
-                move.l  #loc_8204C,(a0)
+                bpl.s   DDZ_StraightMissileMoveAndCollide
+                move.l  #DDZ_StraightMissileMoveAndCollide,(a0)
                 moveq   #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
 
-loc_8204C:
+DDZ_StraightMissileMoveAndCollide:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #2,x_pos(a0)
@@ -45,24 +45,24 @@ loc_8204C:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_82060:
+DDZ_HomingMissileFollowDuringDelay:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_8209A
-                move.l  #loc_8209E,(a0)
+                bpl.s   DDZ_HomingMissileCheckHiddenParent
+                move.l  #DDZ_HomingMissileMoveAndFollowY,(a0)
                 move.b  #$40,$3C(a0)
                 bsr.w   DDZMissile_SelectEightWayFrame
                 move.w  #$200,x_vel(a0)
                 move.w  #$B,$2E(a0)
-                move.l  #loc_820B6,$34(a0)
+                move.l  #DDZ_InitHomingMissileMotion,$34(a0)
 
-loc_8209A:
-                bra.w   loc_81FDA
+DDZ_HomingMissileCheckHiddenParent:
+                bra.w   DDZ_MissileCheckParentAndRetire
 ; ---------------------------------------------------------------------------
 
-loc_8209E:
+DDZ_HomingMissileMoveAndFollowY:
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),y_pos(a0)
                 jsr     (MoveSprite2).l
@@ -70,99 +70,100 @@ loc_8209E:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_820B6:
-                move.l  #loc_820D0,(a0)
+DDZ_InitHomingMissileMotion:
+                move.l  #DDZ_HomingMissileDispatchAndDraw,(a0)
                 clr.b   routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_820F8,$34(a0)
+                move.l  #DDZ_HomingMissileStartProgrammedTurn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_820D0:
+DDZ_HomingMissileDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_820E8(pc,d0.w),d1
-                jsr     off_820E8(pc,d1.w)
+                move.w  DDZHomingMissile_MotionStateOffsets(pc,d0.w),d1
+                jsr     DDZHomingMissile_MotionStateOffsets(pc,d1.w)
                 bsr.w   DDZMissile_CheckContactAndRetire
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_820E8:
-                dc.w    loc_820EE-off_820E8
-                dc.w    loc_82122-off_820E8
-                dc.w    loc_8213E-off_820E8
+DDZHomingMissile_MotionStateOffsets:
+                dc.w    DDZ_HomingMissileCoastAndWait-DDZHomingMissile_MotionStateOffsets
+                dc.w    DDZ_HomingMissileTickTurnTimer-DDZHomingMissile_MotionStateOffsets
+                dc.w    DDZ_HomingMissileTurnTowardPlayer-DDZHomingMissile_MotionStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_820EE:
+DDZ_HomingMissileCoastAndWait:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_820F8:
+DDZ_HomingMissileStartProgrammedTurn:
                 move.b  #2,routine(a0)
                 move.w  #$1F,$2E(a0)
                 bset    #7,art_tile(a0)
                 move.w  #$180,priority(a0)
                 moveq   #0,d0
                 move.b  $39(a0),d0
-                move.b  byte_8211E(pc,d0.w),$40(a0)
+                move.b  DDZ_HomingMissileTurnSteps(pc,d0.w),$40(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_8211E:
+DDZ_HomingMissileTurnSteps:
                 dc.b    4,   2,  -2
                 even
 ; ---------------------------------------------------------------------------
 
-loc_82122:
+DDZ_HomingMissileTickTurnTimer:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_8212E
+                bpl.s   DDZ_HomingMissileStepHeading
                 move.b  #4,routine(a0)
 
-loc_8212E:
+DDZ_HomingMissileStepHeading:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 bsr.w   DDZMissile_SelectEightWayFrame
-                bra.w   loc_82ABC
+                bra.w   DDZ_MissileMoveAtDoubledHeadingSpeed
 ; ---------------------------------------------------------------------------
 
-loc_8213E:
+DDZ_HomingMissileTurnTowardPlayer:
                 bsr.w   DDZMissile_TurnTowardP1
                 bsr.w   DDZMissile_SelectEightWayFrame
-                bra.w   loc_82ABC
+                bra.w   DDZ_MissileMoveAtDoubledHeadingSpeed
 ; ---------------------------------------------------------------------------
 
-loc_8214A:
-                lea     word_831FC(pc),a1
+DDZ_InitMissileFlame:
+                lea     DDZ_MissileFlamePartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8215C,(a0)
+                move.l  #DDZ_MissileFlameRefreshFrameAndOffset,(a0)
                 bsr.w   DDZMissileFlame_SetFrameAndOffset
 
-loc_8215C:
+DDZ_MissileFlameRefreshFrameAndOffset:
                 bsr.w   DDZMissileFlame_SetFrameAndOffset
 
-loc_82160:
+DDZ_MissileTrailTryPuffEvery8Frames:
                 jsr     Child_GetPriority(pc)
                 move.b  (V_int_run_count+3).w,d3
                 andi.b  #7,d3
-                bne.s   loc_82176
-                lea     ChildObjDat_83256(pc),a2
+                bne.s   DDZ_MissileTrailSelectVisibility
+                lea     DDZ_MissileFlamePuffChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-loc_82176:
+DDZ_MissileTrailSelectVisibility:
                 btst    #1,d3
-                bne.s   loc_82184
+                bne.s   DDZ_MissileTrailHideAndCheckParent
                 jsr     Refresh_ChildPosition(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_82184:
+DDZ_MissileTrailHideAndCheckParent:
                 bclr    #7,render_flags(a0)
                 jmp     Child_CheckParent(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8218E:
-                lea     word_83202(pc),a1
+; Set the puff velocity opposite the grandparent projectile's heading
+DDZ_InitMissileTrailPuff:
+                lea     DDZ_TrailPuffPartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_821C2,(a0)
+                move.l  #DDZ_MissilePuffAnimateMoveAndCull,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
@@ -173,11 +174,11 @@ loc_8218E:
                 move.w  d0,x_vel(a0)
                 move.w  d1,y_vel(a0)
 
-loc_821C2:
+DDZ_MissilePuffAnimateMoveAndCull:
                 move.w  (_unkFAAE).w,d0
                 sub.w   d0,x_pos(a0)
-                lea     byte_832B4(pc),a1
+                lea     DDZ_TrailPuffDeleteAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_OnScreen_Test).l
-; End of function loc_820D0
+; End of function DDZ_HomingMissileDispatchAndDraw

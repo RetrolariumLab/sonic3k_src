@@ -86758,69 +86758,69 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 1022
       },
-      "declarations_sha256": "02e1cc89c4a6f201dffbd261f5ff6d80a7a6650d4c3445359078c2b275f5a5a4",
+      "declarations_sha256": "bd4bc9e760c69695ebe92554d6a8dd628fc22600967543c65af09c623a46811e",
       "labels": {
         "Map_DDZMissileAsteroid_": 0,
-        "word_83362": 128,
-        "word_833AC": 202,
-        "word_833BA": 216,
-        "word_833C8": 230,
-        "word_833D6": 244,
-        "word_833E4": 258,
-        "word_833F8": 278,
-        "word_83406": 292,
-        "word_8341A": 312,
-        "word_83428": 326,
-        "word_8343C": 346,
-        "word_8344A": 360,
-        "word_8345E": 380,
-        "word_83466": 388,
-        "word_8346E": 396,
-        "word_83476": 404,
-        "word_8347E": 412,
-        "word_83486": 420,
-        "word_8348E": 428,
-        "word_83496": 436,
-        "word_8349E": 444,
-        "word_834A6": 452,
-        "word_834AE": 460,
-        "word_834B6": 468,
-        "word_834BE": 476,
-        "word_834C6": 484,
-        "word_834CE": 492,
-        "word_834D6": 500,
-        "word_834DE": 508,
-        "word_834E6": 516,
-        "word_834EE": 524,
-        "word_834F6": 532,
-        "word_834FE": 540,
-        "word_83506": 548,
-        "word_8350E": 556,
-        "word_83516": 564,
-        "word_83530": 590,
-        "word_8356E": 652,
-        "word_83576": 660,
-        "word_8357E": 668,
-        "word_83586": 676,
-        "word_8358E": 684,
-        "word_83596": 692,
-        "word_8359E": 700,
-        "word_835A6": 708,
-        "word_835AE": 716,
-        "word_835BC": 730,
-        "word_835CA": 744,
-        "word_835D2": 752,
-        "word_835DA": 760,
-        "word_835E2": 768,
-        "word_835EA": 776,
-        "word_835F2": 784,
-        "word_8360C": 810,
-        "word_8360E": 812,
-        "word_8362E": 844,
-        "word_8364E": 876,
-        "word_8366E": 908,
-        "word_83694": 946,
-        "word_836BA": 984
+        "DDZMissileAsteroid_MapFrame00": 128,
+        "DDZMissileAsteroid_MapFrame01To05": 202,
+        "DDZMissileAsteroid_MapFrame06": 216,
+        "DDZMissileAsteroid_MapFrame07": 230,
+        "DDZMissileAsteroid_MapFrame08": 244,
+        "DDZMissileAsteroid_MapFrame09": 258,
+        "DDZMissileAsteroid_MapFrame0A": 278,
+        "DDZMissileAsteroid_MapFrame0B": 292,
+        "DDZMissileAsteroid_MapFrame0C": 312,
+        "DDZMissileAsteroid_MapFrame0D": 326,
+        "DDZMissileAsteroid_MapFrame0E": 346,
+        "DDZMissileAsteroid_MapFrame0F": 360,
+        "DDZMissileAsteroid_MapFrame10": 380,
+        "DDZMissileAsteroid_MapFrame11": 388,
+        "DDZMissileAsteroid_MapFrame12": 396,
+        "DDZMissileAsteroid_MapFrame13": 404,
+        "DDZMissileAsteroid_MapFrame14": 412,
+        "DDZMissileAsteroid_MapFrame15": 420,
+        "DDZMissileAsteroid_MapFrame16": 428,
+        "DDZMissileAsteroid_MapFrame17": 436,
+        "DDZMissileAsteroid_MapFrame18": 444,
+        "DDZMissileAsteroid_MapFrame19": 452,
+        "DDZMissileAsteroid_MapFrame1A": 460,
+        "DDZMissileAsteroid_MapFrame1B": 468,
+        "DDZMissileAsteroid_MapFrame1C": 476,
+        "DDZMissileAsteroid_MapFrame1D": 484,
+        "DDZMissileAsteroid_MapFrame1E": 492,
+        "DDZMissileAsteroid_MapFrame1F": 500,
+        "DDZMissileAsteroid_MapFrame20": 508,
+        "DDZMissileAsteroid_MapFrame21": 516,
+        "DDZMissileAsteroid_MapFrame22": 524,
+        "DDZMissileAsteroid_MapFrame23": 532,
+        "DDZMissileAsteroid_MapFrame24": 540,
+        "DDZMissileAsteroid_MapFrame25": 548,
+        "DDZMissileAsteroid_MapFrame26": 556,
+        "DDZMissileAsteroid_MapFrame27": 564,
+        "DDZMissileAsteroid_MapFrame28": 590,
+        "DDZMissileAsteroid_MapFrame29": 652,
+        "DDZMissileAsteroid_MapFrame2A": 660,
+        "DDZMissileAsteroid_MapFrame2B": 668,
+        "DDZMissileAsteroid_MapFrame2C": 676,
+        "DDZMissileAsteroid_MapFrame2D": 684,
+        "DDZMissileAsteroid_MapFrame2E": 692,
+        "DDZMissileAsteroid_MapFrame2F": 700,
+        "DDZMissileAsteroid_MapFrame30": 708,
+        "DDZMissileAsteroid_MapFrame31": 716,
+        "DDZMissileAsteroid_MapFrame32": 730,
+        "DDZMissileAsteroid_MapFrame33": 744,
+        "DDZMissileAsteroid_MapFrame34": 752,
+        "DDZMissileAsteroid_MapFrame35": 760,
+        "DDZMissileAsteroid_MapFrame36": 768,
+        "DDZMissileAsteroid_MapFrame37": 776,
+        "DDZMissileAsteroid_MapFrame38": 784,
+        "DDZMissileAsteroid_MapFrame39": 810,
+        "DDZMissileAsteroid_MapFrame3A": 812,
+        "DDZMissileAsteroid_MapFrame3B": 844,
+        "DDZMissileAsteroid_MapFrame3C": 876,
+        "DDZMissileAsteroid_MapFrame3D": 908,
+        "DDZMissileAsteroid_MapFrame3E": 946,
+        "DDZMissileAsteroid_MapFrame3F": 984
       },
       "external_symbols": [],
       "blocks": [
@@ -86828,448 +86828,448 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83362",
+          "target": "DDZMissileAsteroid_MapFrame00",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833AC",
+          "target": "DDZMissileAsteroid_MapFrame01To05",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833AC",
+          "target": "DDZMissileAsteroid_MapFrame01To05",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833AC",
+          "target": "DDZMissileAsteroid_MapFrame01To05",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833AC",
+          "target": "DDZMissileAsteroid_MapFrame01To05",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833AC",
+          "target": "DDZMissileAsteroid_MapFrame01To05",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833BA",
+          "target": "DDZMissileAsteroid_MapFrame06",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833C8",
+          "target": "DDZMissileAsteroid_MapFrame07",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833D6",
+          "target": "DDZMissileAsteroid_MapFrame08",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833E4",
+          "target": "DDZMissileAsteroid_MapFrame09",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_833F8",
+          "target": "DDZMissileAsteroid_MapFrame0A",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83406",
+          "target": "DDZMissileAsteroid_MapFrame0B",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8341A",
+          "target": "DDZMissileAsteroid_MapFrame0C",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83428",
+          "target": "DDZMissileAsteroid_MapFrame0D",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8343C",
+          "target": "DDZMissileAsteroid_MapFrame0E",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8344A",
+          "target": "DDZMissileAsteroid_MapFrame0F",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8345E",
+          "target": "DDZMissileAsteroid_MapFrame10",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83466",
+          "target": "DDZMissileAsteroid_MapFrame11",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8346E",
+          "target": "DDZMissileAsteroid_MapFrame12",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83476",
+          "target": "DDZMissileAsteroid_MapFrame13",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8347E",
+          "target": "DDZMissileAsteroid_MapFrame14",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83486",
+          "target": "DDZMissileAsteroid_MapFrame15",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8348E",
+          "target": "DDZMissileAsteroid_MapFrame16",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83496",
+          "target": "DDZMissileAsteroid_MapFrame17",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8349E",
+          "target": "DDZMissileAsteroid_MapFrame18",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834A6",
+          "target": "DDZMissileAsteroid_MapFrame19",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834AE",
+          "target": "DDZMissileAsteroid_MapFrame1A",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834B6",
+          "target": "DDZMissileAsteroid_MapFrame1B",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834BE",
+          "target": "DDZMissileAsteroid_MapFrame1C",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834C6",
+          "target": "DDZMissileAsteroid_MapFrame1D",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834CE",
+          "target": "DDZMissileAsteroid_MapFrame1E",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834D6",
+          "target": "DDZMissileAsteroid_MapFrame1F",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834DE",
+          "target": "DDZMissileAsteroid_MapFrame20",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834E6",
+          "target": "DDZMissileAsteroid_MapFrame21",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834EE",
+          "target": "DDZMissileAsteroid_MapFrame22",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834F6",
+          "target": "DDZMissileAsteroid_MapFrame23",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_834FE",
+          "target": "DDZMissileAsteroid_MapFrame24",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83506",
+          "target": "DDZMissileAsteroid_MapFrame25",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8350E",
+          "target": "DDZMissileAsteroid_MapFrame26",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83516",
+          "target": "DDZMissileAsteroid_MapFrame27",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83530",
+          "target": "DDZMissileAsteroid_MapFrame28",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8356E",
+          "target": "DDZMissileAsteroid_MapFrame29",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83576",
+          "target": "DDZMissileAsteroid_MapFrame2A",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8357E",
+          "target": "DDZMissileAsteroid_MapFrame2B",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83586",
+          "target": "DDZMissileAsteroid_MapFrame2C",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8358E",
+          "target": "DDZMissileAsteroid_MapFrame2D",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83596",
+          "target": "DDZMissileAsteroid_MapFrame2E",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8359E",
+          "target": "DDZMissileAsteroid_MapFrame2F",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835A6",
+          "target": "DDZMissileAsteroid_MapFrame30",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835AE",
+          "target": "DDZMissileAsteroid_MapFrame31",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835BC",
+          "target": "DDZMissileAsteroid_MapFrame32",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835CA",
+          "target": "DDZMissileAsteroid_MapFrame33",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 104,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835D2",
+          "target": "DDZMissileAsteroid_MapFrame34",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 106,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835DA",
+          "target": "DDZMissileAsteroid_MapFrame35",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 108,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835E2",
+          "target": "DDZMissileAsteroid_MapFrame36",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 110,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835EA",
+          "target": "DDZMissileAsteroid_MapFrame37",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 112,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_835F2",
+          "target": "DDZMissileAsteroid_MapFrame38",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 114,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8360C",
+          "target": "DDZMissileAsteroid_MapFrame39",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 116,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8360E",
+          "target": "DDZMissileAsteroid_MapFrame3A",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 118,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8362E",
+          "target": "DDZMissileAsteroid_MapFrame3B",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 120,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8364E",
+          "target": "DDZMissileAsteroid_MapFrame3C",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 122,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8366E",
+          "target": "DDZMissileAsteroid_MapFrame3D",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 124,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_83694",
+          "target": "DDZMissileAsteroid_MapFrame3E",
           "base": "Map_DDZMissileAsteroid_"
         },
         {
           "offset": 126,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_836BA",
+          "target": "DDZMissileAsteroid_MapFrame3F",
           "base": "Map_DDZMissileAsteroid_"
         },
         {

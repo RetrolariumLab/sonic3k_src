@@ -3,27 +3,27 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_81492:
+DDZ_FlightDispatchAndLatchDebug:
                 bsr.w   DDZFlight_TryFailAfterSuperExpires
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_81514(pc,d0.w),d1
-                jsr     off_81514(pc,d1.w)
+                move.w  DDZFlightController_EntryStateOffsets(pc,d0.w),d1
+                jsr     DDZFlightController_EntryStateOffsets(pc,d1.w)
                 move.w  (_unkFABC).w,d0
                 move.w  (Debug_placement_mode).w,d1
                 move.w  d1,(_unkFABC).w
                 eor.w   d1,d0
-                beq.s   loc_814B8
+                beq.s   DDZ_FlightCameraOrVirtualScroll
                 bsr.w   HandleDDZFlightDebugModeTransition
 
-loc_814B8:
+DDZ_FlightCameraOrVirtualScroll:
                 tst.w   d1
-                bne.s   locret_81512
+                bne.s   DDZ_FlightUpdateReturn
                 bsr.w   DDZFlight_AdvanceCameraAndCarry
                 bsr.w   DDZFlight_SyncPlayerAndTrackCamera
                 btst    #1,(_unkFAB8).w
-                beq.s   locret_81512
-                move.l  #loc_816FC,(a0)
+                beq.s   DDZ_FlightUpdateReturn
+                move.l  #DDZ_FlightUpdateVirtualBossStage,(a0)
                 bset    #3,$38(a0)
                 move.l  (Camera_X_pos).w,d0
                 move.l  d0,(_unkFA86).w
@@ -34,28 +34,28 @@ loc_814B8:
                 addi.w  #$140,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_81504
+                bne.s   DDZ_FlightTryExpandCameraMaxX
                 move.l  #Obj_DecLevStartXGradual,(a1)
 
-loc_81504:
+DDZ_FlightTryExpandCameraMaxX:
                 jsr     (AllocateObject).l
-                bne.s   locret_81512
+                bne.s   DDZ_FlightUpdateReturn
                 move.l  #Obj_IncLevEndXGradual,(a1)
 
-locret_81512:
+DDZ_FlightUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-off_81514:
-                dc.w    loc_81554-off_81514
-                dc.w    loc_8160A-off_81514
-                dc.w    loc_8167C-off_81514
-                dc.w    loc_816F4-off_81514
+DDZFlightController_EntryStateOffsets:
+                dc.w    DDZ_FlightInitEntryAndPlayer-DDZFlightController_EntryStateOffsets
+                dc.w    DDZ_FlightEntryGravityThenSuper-DDZFlightController_EntryStateOffsets
+                dc.w    DDZ_FlightRiseUntilPlayerReleased-DDZFlightController_EntryStateOffsets
+                dc.w    DDZ_FlightUpdateEarlyFreeFlight-DDZFlightController_EntryStateOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
 HandleDDZFlightDebugModeTransition:
                 tst.w   d1
-                bne.s   loc_81548
+                bne.s   DDZ_FlightDebugUnlockCameraX
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
@@ -66,7 +66,7 @@ HandleDDZFlightDebugModeTransition:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81548:
+DDZ_FlightDebugUnlockCameraX:
                 clr.w   (Camera_min_X_pos).w
                 move.w  #$7FFF,(Camera_max_X_pos).w
                 rts
@@ -74,7 +74,7 @@ loc_81548:
 
 ; ---------------------------------------------------------------------------
 
-loc_81554:
+DDZ_FlightInitEntryAndPlayer:
                 move.b  #2,routine(a0)
                 move.w  a0,(_unkFA8E).w
                 move.w  #$17,$2E(a0)
@@ -94,7 +94,7 @@ loc_81554:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$20,d0
                 move.w  d0,y_pos(a0)
-                lea     word_81602(pc),a1
+                lea     DDZ_FlightInitialWindowBounds(pc),a1
                 lea     (_unkFAB0).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -105,28 +105,28 @@ loc_81554:
                 moveq   #0,d0
                 moveq   #$12-1,d1
 
-loc_815DC:
+DDZ_FlightClearP2AndTryTempoWatcher:
                 move.l  d0,(a1)+
-                dbf     d1,loc_815DC
+                dbf     d1,DDZ_FlightClearP2AndTryTempoWatcher
                 clr.w   (a1)
                 jsr     (AllocateObject).l
-                bne.s   loc_815F2
-                move.l  #loc_82722,(a1)
+                bne.s   DDZFlightController_QueueDoomsdayMiscArt
+                move.l  #DDZ_RingWarningCheckTenRingThreshold,(a1)
 
-loc_815F2:
+DDZFlightController_QueueDoomsdayMiscArt:
                 lea     (ArtKosM_DDZMisc).l,a1
                 move.w  #tiles_to_bytes(ArtTile_DDZMisc),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
-word_81602:
+DDZ_FlightInitialWindowBounds:
                 dc.w    $20,   $C0
                 dc.w    $20,   $C0
 ; ---------------------------------------------------------------------------
 
-loc_8160A:
+DDZ_FlightEntryGravityThenSuper:
                 jsr     (MoveSprite_LightGravity).l
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_82ABA
+                bpl.w   DDZ_MotionHelpersReturn
                 move.b  #4,routine(a0)
                 bset    #7,$38(a0)
                 addi.w  #50,(Ring_count).w
@@ -146,12 +146,12 @@ loc_8160A:
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_8167C:
+DDZ_FlightRiseUntilPlayerReleased:
                 subi.w  #$20,y_vel(a0)
                 jsr     (MoveSprite2).l
                 lea     (Player_1).w,a1
                 tst.b   object_control(a1)
-                bne.w   locret_82ABA
+                bne.w   DDZ_MotionHelpersReturn
                 move.b  #6,routine(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
@@ -161,46 +161,46 @@ loc_8167C:
                 move.w  #$1000,x_vel(a1)
                 move.w  #$1000,ground_vel(a1)
                 cmpi.b  #7,(Super_emerald_count).w
-                beq.s   loc_816D2
-                move.l  #loc_8242A,(Super_stars).w
-                bra.w   loc_816E8
+                beq.s   DDZ_FlightInstallHyperEffects
+                move.l  #DDZ_InitSuperStarTrailAndArt,(Super_stars).w
+                bra.w   DDZ_FlightLoadBossExplosionPLC
 ; ---------------------------------------------------------------------------
 
-loc_816D2:
+DDZ_FlightInstallHyperEffects:
                 jsr     (EndingAndDDZPrepareHyperSonicVisualState).l
                 move.l  #Obj_HyperSonic_Stars,(Invincibility_stars).w
                 move.l  #Obj_HyperSonicKnux_Trail,(Super_stars).w
 
-loc_816E8:
+DDZ_FlightLoadBossExplosionPLC:
                 lea     (PLC_BossExplosion).l,a1
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_816F4:
+DDZ_FlightUpdateEarlyFreeFlight:
                 bsr.w   DDZFlight_ComputeInputAndHitVel
                 bra.w   DDZFlight_IntegrateWithinView
 ; ---------------------------------------------------------------------------
 
-loc_816FC:
+DDZ_FlightUpdateVirtualBossStage:
                 bsr.w   DDZFlight_TryFailAfterSuperExpires
                 bsr.w   DDZFlight_ComputeInputAndHitVel
                 bsr.w   DDZFlight_IntegrateWithinView
                 bsr.w   DDZBoss_AdvanceVirtualScroll
                 bsr.w   DDZFlight_SyncPlayerAndTrackCamera
                 btst    #0,(_unkFAB8).w
-                beq.s   locret_81724
-                move.l  #loc_81726,(a0)
+                beq.s   DDZ_FlightVirtualStageReturn
+                move.l  #DDZ_FlightRebaseFinalChaseCamera,(a0)
                 move.w  #$140,$3C(a0)
 
-locret_81724:
+DDZ_FlightVirtualStageReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_81726:
+DDZ_FlightRebaseFinalChaseCamera:
                 clr.w   (_unkFAAE).w
                 move.w  (Camera_X_pos).w,d0
                 cmpi.w  #$7400,d0
-                blo.s   loc_81770
+                blo.s   DDZ_FlightUpdateFinalChase
                 move.w  #$2000,d1
                 sub.w   d1,d0
                 move.w  d0,(Camera_X_pos).w
@@ -209,9 +209,9 @@ loc_81726:
                 lea     (Ring_status_table).w,a1
                 move.w  #bytesToLcnt($400),d1
 
-loc_8174E:
+DDZ_FlightClearRingsAndSetWrapDelta:
                 move.l  d0,(a1)+
-                dbf     d1,loc_8174E
+                dbf     d1,DDZ_FlightClearRingsAndSetWrapDelta
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$80,d0
                 andi.w  #$FF80,d0
@@ -220,7 +220,7 @@ loc_8174E:
                 move.w  d1,(_unkFAAE).w
                 sub.w   d1,x_pos(a0)
 
-loc_81770:
+DDZ_FlightUpdateFinalChase:
                 bsr.w   DDZFlight_TryFailAfterSuperExpires
                 bsr.w   DDZFlight_ComputeInputAndHitVel
                 bsr.w   DDZFlight_IntegrateWithinView
@@ -228,17 +228,17 @@ loc_81770:
                 move.w  (Debug_placement_mode).w,d1
                 move.w  d1,(_unkFABC).w
                 eor.w   d1,d0
-                beq.s   loc_81790
+                beq.s   DDZ_FlightAdvanceCameraOutsideDebug
                 bsr.w   HandleDDZFlightDebugModeTransition
 
-loc_81790:
+DDZ_FlightAdvanceCameraOutsideDebug:
                 tst.w   d1
-                bne.w   locret_82ABA
+                bne.w   DDZ_MotionHelpersReturn
                 bsr.w   DDZFlight_AdvanceCameraAndCarry
                 bra.w   DDZFlight_SyncPlayerAndTrackCamera
 ; ---------------------------------------------------------------------------
 
-loc_8179E:
+DDZ_FlightFallAndTryPlayerDeath:
                 lea     (Player_1).w,a1
                 jsr     (MoveSprite).l
                 move.w  x_pos(a0),x_pos(a1)
@@ -246,7 +246,7 @@ loc_8179E:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$F0,d0
                 cmp.w   y_pos(a0),d0
-                bhs.w   locret_82ABA
+                bhs.w   DDZ_MotionHelpersReturn
                 movea.l a0,a2
                 lea     (Player_1).w,a1
                 movea.l a1,a0

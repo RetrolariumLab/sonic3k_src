@@ -157,19 +157,19 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/asteroids.s",
-      "sha256": "93f107413673e6a432c5a3847fb09e4e3c50716da217887b0699179f5075fcf3"
+      "sha256": "3ead51afe98d568af6b4c50fa169eb2595f12953d50b51d30461a95d67755f04"
     },
     {
       "path": "src/objects/bosses/ddz/sk/battle_control.s",
-      "sha256": "66779d8d01ac407edf225c5b2986231b5f89b8b52da7915178a0105d6204bf45"
+      "sha256": "8f8223492cecd80b1a292c912f8e1c9356b6b9fb3136da25e9abc023a09cb151"
     },
     {
       "path": "src/objects/bosses/ddz/sk/missile.s",
-      "sha256": "28acc49fa1924e6b30228d77c10999cfe1d7c59ac8e98431f7f807d317200b5a"
+      "sha256": "801f9e88ae0bb030aba395886042f2ac5d20d0656b35a11996d6f8a18e198e9e"
     },
     {
       "path": "src/objects/bosses/ddz/sk/object_catalog.s",
-      "sha256": "32752ff2bd6c28f4bcea6caf493be74ac912b5c7164b54a668b884d185a787b9"
+      "sha256": "a8955e7e54a9a4ab4e5dc523d0bbfd21a04331c24a4000b159a7d52eb905ec1b"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
@@ -1896,27 +1896,27 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/battle_control.s",
-      "symbol": "byte_81DB0",
-      "scope": "byte_81DB0",
-      "first_line": 493,
-      "last_line": 497,
+      "symbol": "DDZ_Phase2PartInitialFrames",
+      "scope": "DDZ_Phase2PartInitialFrames",
+      "first_line": 495,
+      "last_line": 499,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "469b190ed7be003ff76b15841b9f5608d4caf77597ebaa593cd81a78c7116ffb",
+      "declarations_sha256": "453838181553b4ec8a2bfa57d8c2f308f1f87c6d3331ded9c3ec45c5530547e5",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_81DB0"],
+      "members": ["DDZ_Phase2PartInitialFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/ddz/sk/object_catalog.s",
-      "symbol": "byte_832A8",
-      "scope": "byte_832A8",
+      "symbol": "DDZ_AsteroidFragmentSubtype0Anim",
+      "scope": "DDZ_AsteroidFragmentSubtype0Anim",
       "first_line": 112,
       "last_line": 145,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 58,
-      "declarations_sha256": "9de776e00cedcc946b54c9e165904422c419dfeb2228f3b78eb17934f1390a58",
+      "declarations_sha256": "9b38c4f73bff6a385d78471093372f0132016a92241fc1d16b072762d28825cb",
       "entries": [
         [0, "fixed"],
         [6, "fixed"],
@@ -1927,7 +1927,15 @@
         [49, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_832A8", "byte_832AE", "byte_832B4", "byte_832BF", "byte_832C3", "byte_832D0", "byte_832D9"],
+      "members": [
+        "DDZ_AsteroidFragmentSubtype0Anim",
+        "DDZ_AsteroidFragmentOtherAnim",
+        "DDZ_TrailPuffDeleteAnim",
+        "DDZ_HorizontalHeavyShotAnim",
+        "DDZ_HorizontalHeavyShotFrontAnim",
+        "DDZ_Phase2AttachedPart0Anim",
+        "DDZ_Phase2AttachedPart4Anim"
+      ],
       "stored_markers": []
     },
     {

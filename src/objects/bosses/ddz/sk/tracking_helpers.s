@@ -8,19 +8,19 @@
 DDZMissile_TurnTowardP1:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                beq.s   locret_82AA4
+                beq.s   DDZ_HomingMissileTurnReturn
                 movea.l a0,a1
                 lea     (Player_1).w,a2
                 jsr     GetApproximateObjectBearing(pc)
                 moveq   #2,d1
                 sub.b   $3C(a0),d0
-                bpl.s   loc_82AA0
+                bpl.s   DDZ_HomingMissileApplySignedTurn
                 neg.w   d1
 
-loc_82AA0:
+DDZ_HomingMissileApplySignedTurn:
                 add.b   d1,$3C(a0)
 
-locret_82AA4:
+DDZ_HomingMissileTurnReturn:
                 rts
 ; End of function DDZMissile_TurnTowardP1
 
@@ -34,13 +34,13 @@ DDZMissile_SelectEightWayFrame:
                 addq.b  #8,d0
                 move.b  d0,mapping_frame(a0)
 
-locret_82ABA:
+DDZ_MotionHelpersReturn:
                 rts
 ; End of function DDZMissile_SelectEightWayFrame
 
 ; ---------------------------------------------------------------------------
 
-loc_82ABC:
+DDZ_MissileMoveAtDoubledHeadingSpeed:
                 move.b  $3C(a0),d0
                 jsr     (GetSineCosine).l
                 add.w   d0,d0
@@ -59,12 +59,12 @@ DDZMissileFlame_SetFrameAndOffset:
                 move.b  #$10,mapping_frame(a0)
                 add.b   d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  byte_82AF6(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  DDZ_MissileFlameRearOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 rts
 ; End of function DDZMissileFlame_SetFrameAndOffset
 
 ; ---------------------------------------------------------------------------
-byte_82AF6:
+DDZ_MissileFlameRearOffsets:
                 dc.b    0,-$20
                 dc.b    -$16,-$16
                 dc.b    -$20,   0
@@ -80,90 +80,90 @@ byte_82AF6:
 ; Check the vulnerable boss before Player 1. Contact schedules explosion cleanup. A defeated parent also retires the missile
 DDZMissile_CheckContactAndRetire:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   locret_82B60
+                beq.s   DDZMissileContact_ReturnWithoutDisposal
                 tst.b   render_flags(a0)
-                bpl.s   loc_82B30
+                bpl.s   DDZ_MissileTestSectorContact
                 tst.b   subtype(a0)
-                beq.s   loc_82B30
+                beq.s   DDZ_MissileTestSectorContact
                 move.w  (_unkFAA4).w,d0
-                beq.s   loc_82B30
+                beq.s   DDZ_MissileTestSectorContact
                 movea.w d0,a1
                 tst.b   collision_flags(a1)
-                bne.s   loc_82B30
-                lea     word_82BB4(pc),a2
+                bne.s   DDZ_MissileTestSectorContact
+                lea     DDZ_MissileBossContactBounds(pc),a2
                 jsr     Check_InTheirRange(pc)
-                bne.s   loc_82B62
+                bne.s   DDZ_MissileDamageBossAndFlash
 
-loc_82B30:
+DDZ_MissileTestSectorContact:
                 lea     (Player_1).w,a1
                 tst.b   invulnerability_timer(a1)
-                bne.s   loc_82B50
+                bne.s   DDZ_MissileCheckLauncherDeath
                 moveq   #0,d0
                 move.b  $3D(a0),d0
                 add.w   d0,d0
-                move.w  off_82BBC(pc,d0.w),d1
-                lea     off_82BBC(pc,d1.w),a2
+                move.w  DDZ_MissilePlayerBoundsBySector(pc,d0.w),d1
+                lea     DDZ_MissilePlayerBoundsBySector(pc,d1.w),a2
                 jsr     Check_InMyRange(pc)
-                bne.s   loc_82B6E
+                bne.s   DDZ_MissileGrantPlayerInvulnerability
 
-loc_82B50:
+DDZ_MissileCheckLauncherDeath:
                 move.w  parent3(a0),d0
-                beq.s   locret_82B60
+                beq.s   DDZMissileContact_ReturnWithoutDisposal
                 movea.w d0,a1
                 btst    #7,status(a1)
-                bne.s   loc_82B84
+                bne.s   DDZ_ProjectileWaitAndTryExplosion
 
-locret_82B60:
+DDZMissileContact_ReturnWithoutDisposal:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_82B62:
+DDZ_MissileDamageBossAndFlash:
                 subq.b  #1,collision_property(a1)
                 st      collision_flags(a1)
-                bra.w   loc_82B78
+                bra.w   DDZ_MissileDecrementLauncherCount
 ; ---------------------------------------------------------------------------
 
-loc_82B6E:
+DDZ_MissileGrantPlayerInvulnerability:
                 lea     (Player_1).w,a1
                 move.b  #90-1,invulnerability_timer(a1)
 
-loc_82B78:
+DDZ_MissileDecrementLauncherCount:
                 move.w  parent3(a0),d0
-                beq.s   loc_82B84
+                beq.s   DDZ_ProjectileWaitAndTryExplosion
                 movea.w d0,a1
                 subq.b  #1,$39(a1)
 
-loc_82B84:
+DDZ_ProjectileWaitAndTryExplosion:
                 move.l  #Wait_Draw,(a0)
                 move.w  #3,$2E(a0)
                 move.l  #SKCull_ReleaseRespawnForStatusDelete,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_82BAC
+                bne.s   DDZ_ProjectileMarkDead
                 move.b  #6,subtype(a1)
 
-loc_82BAC:
+DDZ_ProjectileMarkDead:
                 bset    #7,status(a0)
                 rts
 ; End of function DDZMissile_CheckContactAndRetire
 
 ; ---------------------------------------------------------------------------
-word_82BB4:
+DDZ_MissileBossContactBounds:
                 dc.w    0,   $38,  -$2C,   $18
-off_82BBC:
-                dc.w    word_82BCC-off_82BBC
-                dc.w    word_82BD4-off_82BBC
-                dc.w    word_82BDC-off_82BBC
-                dc.w    word_82BD4-off_82BBC
-                dc.w    word_82BCC-off_82BBC
-                dc.w    word_82BD4-off_82BBC
-                dc.w    word_82BDC-off_82BBC
-                dc.w    word_82BD4-off_82BBC
-word_82BCC:
+DDZ_MissilePlayerBoundsBySector:
+                dc.w    DDZ_MissileVerticalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileDiagonalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileHorizontalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileDiagonalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileVerticalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileDiagonalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileHorizontalContactBounds-DDZ_MissilePlayerBoundsBySector
+                dc.w    DDZ_MissileDiagonalContactBounds-DDZ_MissilePlayerBoundsBySector
+DDZ_MissileVerticalContactBounds:
                 dc.w    -$18,   $30,  -$24,   $48
-word_82BD4:
+DDZ_MissileDiagonalContactBounds:
                 dc.w    -$1C,   $38,  -$1C,   $38
-word_82BDC:
+DDZ_MissileHorizontalContactBounds:
                 dc.w    -$24,   $48,  -$18,   $30
 
 ; =============== S U B R O U T I N E =======================================
@@ -171,29 +171,29 @@ word_82BDC:
 ; Retire when the parent dies. A Player 1 hit also sets a short invulnerability timer
 DDZTurretShot_CheckContactOrRetire:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   locret_82C1E
+                beq.s   DDZ_TurretShotContactReturn
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_82C18
+                bne.s   DDZ_TurretShotScheduleDelete
                 lea     (Player_1).w,a1
                 tst.b   invulnerability_timer(a1)
-                bne.s   locret_82C1E
-                lea     word_82C20(pc),a2
+                bne.s   DDZ_TurretShotContactReturn
+                lea     DDZTurretShotContact_PlayerRectangle(pc),a2
                 jsr     Check_InMyRange(pc)
-                beq.s   locret_82C1E
+                beq.s   DDZ_TurretShotContactReturn
                 move.b  #60-1,invulnerability_timer(a1)
                 moveq   #signextendB(sfx_Explode),d0
                 jsr     (Play_SFX).l
 
-loc_82C18:
+DDZ_TurretShotScheduleDelete:
                 jsr     (Go_Delete_Sprite).l
 
-locret_82C1E:
+DDZ_TurretShotContactReturn:
                 rts
 ; End of function DDZTurretShot_CheckContactOrRetire
 
 ; ---------------------------------------------------------------------------
-word_82C20:
+DDZTurretShotContact_PlayerRectangle:
                 dc.w    -$10,   $20,  -$10,   $20
 
 ; =============== S U B R O U T I N E =======================================
@@ -201,29 +201,29 @@ word_82C20:
 ; On a Player 1 hit, start the invulnerability timer and explode the projectile after slowing flight
 DDZHeavyShot_CheckHitAndSlowFlight:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   locret_82C4E
+                beq.s   DDZ_HeavyShotContactReturn
                 lea     (Player_1).w,a1
                 tst.b   invulnerability_timer(a1)
-                lea     word_82C62(pc),a2
+                lea     DDZ_HeavyShotPlayerContactBounds(pc),a2
                 jsr     Check_InMyRange(pc)
-                bne.s   loc_82C50
+                bne.s   DDZ_HeavyShotGrantIFramesAndSlow
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   loc_82B84
+                bne.w   DDZ_ProjectileWaitAndTryExplosion
 
-locret_82C4E:
+DDZ_HeavyShotContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_82C50:
+DDZ_HeavyShotGrantIFramesAndSlow:
                 lea     (Player_1).w,a1
                 move.b  #90-1,invulnerability_timer(a1)
                 bsr.w   DDZFlight_ReduceScrollSpeed
-                bra.w   loc_82B84
+                bra.w   DDZ_ProjectileWaitAndTryExplosion
 ; End of function DDZHeavyShot_CheckHitAndSlowFlight
 
 ; ---------------------------------------------------------------------------
-word_82C62:
+DDZ_HeavyShotPlayerContactBounds:
                 dc.w    -$10,   $20,  -$10,   $20
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,10 +234,10 @@ DDZFlight_ReduceScrollSpeed:
                 move.l  #$10000,d1
                 subi.l  #$30000,d0
                 cmp.l   d1,d0
-                bge.s   loc_82C80
+                bge.s   DDZ_FlightStoreReducedScrollSpeed
                 move.l  d1,d0
 
-loc_82C80:
+DDZ_FlightStoreReducedScrollSpeed:
                 move.l  d0,(_unkFA82).w
                 rts
 ; End of function DDZFlight_ReduceScrollSpeed
@@ -262,12 +262,12 @@ DDZTurretShot_SetVelFromParentAngle:
                 movea.w parent3(a0),a1
                 move.w  angle(a1),d0
                 add.w   d0,d0
-                move.l  word_82CB6(pc,d0.w),x_vel(a0)   ; and y_vel
+                move.l  DDZTurretShot_EightPackedVelocityPairs(pc,d0.w),x_vel(a0)  ; and y_vel
                 rts
 ; End of function DDZTurretShot_SetVelFromParentAngle
 
 ; ---------------------------------------------------------------------------
-word_82CB6:
+DDZTurretShot_EightPackedVelocityPairs:
                 dc.w    0,  $400
                 dc.w    $2D4,  $2D4
                 dc.w    $400,     0
@@ -281,7 +281,7 @@ word_82CB6:
 
 PositionDDZTurretWithEightWayMuzzleNudge:
                 move.w  angle(a0),d0
-                lea     byte_82D08(pc,d0.w),a1
+                lea     DDZTurret_EightSignedMuzzleNudgePairs(pc,d0.w),a1
                 movea.w parent3(a0),a2
                 move.b  (a1)+,d1
                 ext.w   d1
@@ -299,7 +299,7 @@ PositionDDZTurretWithEightWayMuzzleNudge:
 ; End of function PositionDDZTurretWithEightWayMuzzleNudge
 
 ; ---------------------------------------------------------------------------
-byte_82D08:
+DDZTurret_EightSignedMuzzleNudgePairs:
                 dc.b    0,   8
                 dc.b    8,   8
                 dc.b    8,   0
@@ -311,38 +311,38 @@ byte_82D08:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_82D18:
+DDZ_Phase1ReceiverCheckHit:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   locret_82D5A
+                beq.s   DDZ_Phase1ReceiverHitReturn
                 tst.b   collision_flags(a0)
-                beq.s   locret_82D5A
+                beq.s   DDZ_Phase1ReceiverHitReturn
                 tst.b   collision_property(a0)
-                bmi.s   loc_82D5C
+                bmi.s   DDZ_Phase1ReceiverAwardScoreAndFollow
                 tst.b   $20(a0)
-                bne.s   loc_82D3E
+                bne.s   DDZ_Phase1ReceiverSelectFlashPalette
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_ThumpBoss),d0
                 jsr     (Play_SFX).l
 
-loc_82D3E:
+DDZ_Phase1ReceiverSelectFlashPalette:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_82D4C
+                bne.s   DDZ_Phase1ReceiverCopyFlashAndTick
                 addi.w  #2*$C,d0
 
-loc_82D4C:
+DDZ_Phase1ReceiverCopyFlashAndTick:
                 bsr.w   DDZBoss_CopyPalette12
                 subq.b  #1,$20(a0)
-                bne.s   locret_82D5A
+                bne.s   DDZ_Phase1ReceiverHitReturn
                 clr.b   collision_flags(a0)
 
-locret_82D5A:
+DDZ_Phase1ReceiverHitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_82D5C:
+DDZ_Phase1ReceiverAwardScoreAndFollow:
                 moveq   #100,d0
                 jsr     (HUD_AddToScore).l
                 bset    #7,status(a0)
-                move.l  #loc_81E7A,(a0)
+                move.l  #DDZ_Phase1TargetFollowUntilDiscard,(a0)
                 rts
