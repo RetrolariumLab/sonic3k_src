@@ -6,7 +6,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 32,
       "old": "loc_14BA6",
-      "new": "S3TailsCpuScript_AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged",
+      "new": "S3TailsScript_TickOffscreenTimeout",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged."
     },
@@ -14,7 +14,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 37,
       "old": "loc_14BB2",
-      "new": "S3TailsCpuScript_ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord",
+      "new": "S3TailsScript_ResetToOffscreenCatchUp",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord."
     },
@@ -22,7 +22,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 41,
       "old": "loc_14BB6",
-      "new": "S3TailsCpuScript_ClearOffscreenTimerWhenRenderSignMarksVisible",
+      "new": "S3TailsScript_ClearTimeoutWhenVisible",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearOffscreenTimerWhenRenderSignMarksVisible."
     },
@@ -30,7 +30,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 44,
       "old": "loc_14BBC",
-      "new": "S3TailsCpuScript_SampleInteractingObjectCodeWordForProfile",
+      "new": "S3TailsScript_ReadInteractCodeWord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SampleInteractingObjectCodeWordForProfile."
     },
@@ -38,7 +38,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 52,
       "old": "loc_14BC6",
-      "new": "S3TailsCpuScript_GateIdleCpuSpindashAfterOffscreenWatch",
+      "new": "S3TailsScript_CheckIdleSpinDash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateIdleCpuSpindashAfterOffscreenWatch."
     },
@@ -46,7 +46,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 68,
       "old": "loc_14BFA",
-      "new": "S3TailsCpuScript_SynthesizeDownAndInitialSpindashButtonsByGlobalPhase",
+      "new": "S3TailsScript_StartSpinDashInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SynthesizeDownAndInitialSpindashButtonsByGlobalPhase."
     },
@@ -54,7 +54,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 79,
       "old": "loc_14C1A",
-      "new": "S3TailsCpuScript_MaintainCpuSpindashDownUntilGlobalReleasePhase",
+      "new": "S3TailsScript_HoldSpinDashDown",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MaintainCpuSpindashDownUntilGlobalReleasePhase."
     },
@@ -62,7 +62,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 85,
       "old": "loc_14C2A",
-      "new": "S3TailsCpuScript_ReleaseCpuSpindashInputAndResumeTracking",
+      "new": "S3TailsScript_ReleaseSpinDashAndFollow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseCpuSpindashInputAndResumeTracking."
     },
@@ -70,7 +70,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 91,
       "old": "loc_14C38",
-      "new": "S3TailsCpuScript_PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames",
+      "new": "S3TailsScript_PulseSpinChargeEvery32",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames."
     },
@@ -78,7 +78,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 96,
       "old": "locret_14C44",
-      "new": "S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis",
+      "new": "S3TailsScript_IdleSpinDashReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterIdleSpindashGateOrButtonSynthesis."
     },
@@ -86,7 +86,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 100,
       "old": "locret_14C46",
-      "new": "S3TailsCpuScript_ReturnWithoutInputChangesInInactiveCpuState",
+      "new": "S3TailsScript_InactiveStateReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnWithoutInputChangesInInactiveCpuState."
     },
@@ -94,7 +94,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 104,
       "old": "loc_14C48",
-      "new": "S3TailsCpuScript_InitializeIntroCarryFlightWithRightwardVelocity",
+      "new": "S3TailsScript_StartIntroCarryRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeIntroCarryFlightWithRightwardVelocity."
     },
@@ -102,7 +102,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 116,
       "old": "loc_14C80",
-      "new": "S3TailsCpuScript_ClearIdleAndPulseRightDuringIntroCarry",
+      "new": "S3TailsScript_PulseIntroCarryRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearIdleAndPulseRightDuringIntroCarry."
     },
@@ -110,7 +110,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 124,
       "old": "loc_14C9C",
-      "new": "S3TailsCpuScript_FinishIntroCarryWhenPrimaryPlayerGrounded",
+      "new": "S3TailsScript_FinishIntroOnRiderGrounded",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FinishIntroCarryWhenPrimaryPlayerGrounded."
     },
@@ -118,7 +118,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 142,
       "old": "loc_14CEE",
-      "new": "S3TailsCpuScript_CopyPrimarySolidityAndSelectPartnerExitFlight",
+      "new": "S3TailsScript_CopySolidityAndCheckExit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CopyPrimarySolidityAndSelectPartnerExitFlight."
     },
@@ -126,7 +126,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 149,
       "old": "loc_14D08",
-      "new": "S3TailsCpuScript_RunPrimaryCarryLogicAfterIntroPhase",
+      "new": "S3TailsScript_RunIntroCarry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunPrimaryCarryLogicAfterIntroPhase."
     },
@@ -134,7 +134,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 154,
       "old": "loc_14D10",
-      "new": "S3TailsCpuScript_PulseRightAndFlapWhilePartnerLeavesIntro",
+      "new": "S3TailsScript_PulsePartnerExitInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseRightAndFlapWhilePartnerLeavesIntro."
     },
@@ -142,7 +142,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 163,
       "old": "loc_14D32",
-      "new": "S3TailsCpuScript_HandleOffscreenPartnerExitByProfile",
+      "new": "S3TailsScript_FinishPartnerExitOffscreen",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe HandleOffscreenPartnerExitByProfile."
     },
@@ -150,7 +150,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 170,
       "old": "locret_14D4A",
-      "new": "S3TailsCpuScript_ReturnAfterPartnerExitVisibilityDecision",
+      "new": "S3TailsScript_PartnerExitReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPartnerExitVisibilityDecision."
     },
@@ -158,7 +158,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 174,
       "old": "loc_14D4C",
-      "new": "S3TailsCpuScript_ClearCpuInputWhileWaitingForBossCarrySetup",
+      "new": "S3TailsScript_ClearInputBeforeBossCarry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearCpuInputWhileWaitingForBossCarrySetup."
     },
@@ -166,7 +166,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 179,
       "old": "loc_14D54",
-      "new": "S3TailsCpuScript_InitializeBossCarryFlightAndAttachPrimary",
+      "new": "S3TailsScript_StartBossCarry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeBossCarryFlightAndAttachPrimary."
     },
@@ -174,7 +174,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 191,
       "old": "loc_14D8C",
-      "new": "S3TailsCpuScript_PulseFlapDuringBossCarryClimb",
+      "new": "S3TailsScript_PulseBossCarryFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseFlapDuringBossCarryClimb."
     },
@@ -182,7 +182,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 200,
       "old": "loc_14DAE",
-      "new": "S3TailsCpuScript_SwitchBossCarryToAltitudeControlAtCameraThreshold",
+      "new": "S3TailsScript_CheckBossCarryAltitude",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SwitchBossCarryToAltitudeControlAtCameraThreshold."
     },
@@ -190,7 +190,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 207,
       "old": "loc_14DC2",
-      "new": "S3TailsCpuScript_InvokeCarryAfterBossClimbThreshold",
+      "new": "S3TailsScript_RunBossClimbCarry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InvokeCarryAfterBossClimbThreshold."
     },
@@ -198,7 +198,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 214,
       "old": "loc_14DD2",
-      "new": "S3TailsCpuScript_ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry",
+      "new": "S3TailsScript_ChooseAutoCarryOrReacquire",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry."
     },
@@ -206,7 +206,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 223,
       "old": "loc_14DEA",
-      "new": "S3TailsCpuScript_SynthesizeAutomaticCarryFlapsWithDownPriority",
+      "new": "S3TailsScript_CheckDownForSlowFlaps",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SynthesizeAutomaticCarryFlapsWithDownPriority."
     },
@@ -214,7 +214,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 238,
       "old": "loc_14E1E",
-      "new": "S3TailsCpuScript_UseFasterFlapCadenceWhenPhysicalUpHeld",
+      "new": "S3TailsScript_CheckUpForFastFlaps",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe UseFasterFlapCadenceWhenPhysicalUpHeld."
     },
@@ -222,7 +222,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 249,
       "old": "loc_14E40",
-      "new": "S3TailsCpuScript_PulseNeutralAltitudeFlapAtTimerEightyEight",
+      "new": "S3TailsScript_PulseNeutralFlapAt88",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseNeutralAltitudeFlapAtTimerEightyEight."
     },
@@ -230,7 +230,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 256,
       "old": "loc_14E58",
-      "new": "S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte",
+      "new": "S3TailsScript_MergeLeaderHeldXInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MergePrimaryHorizontalHeldInputIntoFollowerHeldByte."
     },
@@ -238,7 +238,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 262,
       "old": "loc_14E68",
-      "new": "S3TailsCpuScript_TailCarryWithPhysicalPrimaryControllerWord",
+      "new": "S3TailsScript_RunCarryWithLeaderInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailCarryWithPhysicalPrimaryControllerWord."
     },
@@ -246,7 +246,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 269,
       "old": "loc_14E78",
-      "new": "S3TailsCpuScript_InitializeSoloBossFlightWithoutPrimaryAttachment",
+      "new": "S3TailsScript_StartSoloBossFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeSoloBossFlightWithoutPrimaryAttachment."
     },
@@ -254,7 +254,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 278,
       "old": "loc_14EA2",
-      "new": "S3TailsCpuScript_PulseSoloBossClimbAndRefreshFlightBudget",
+      "new": "S3TailsScript_PulseSoloClimbFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseSoloBossClimbAndRefreshFlightBudget."
     },
@@ -262,7 +262,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 287,
       "old": "loc_14EC4",
-      "new": "S3TailsCpuScript_ReleaseSoloScriptClimbAtCameraAltitude",
+      "new": "S3TailsScript_CheckSoloClimbAltitude",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseSoloScriptClimbAtCameraAltitude."
     },
@@ -270,7 +270,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 294,
       "old": "locret_14ED8",
-      "new": "S3TailsCpuScript_ReturnAfterSoloClimbAltitudeDecision",
+      "new": "S3TailsScript_SoloClimbReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterSoloClimbAltitudeDecision."
     },
@@ -278,7 +278,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 298,
       "old": "loc_14EDA",
-      "new": "S3TailsCpuScript_RefreshSoloFlightBudgetWithoutChangingInput",
+      "new": "S3TailsScript_RefreshSoloFlightBudget",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RefreshSoloFlightBudgetWithoutChangingInput."
     },
@@ -286,7 +286,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 303,
       "old": "loc_14EE2",
-      "new": "S3TailsCpuScript_InitializeScriptedPrimaryFlyInWithRightwardVelocity",
+      "new": "S3TailsScript_StartPrimaryFlyInRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeScriptedPrimaryFlyInWithRightwardVelocity."
     },
@@ -294,7 +294,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 312,
       "old": "loc_14F0C",
-      "new": "S3TailsCpuScript_PulseRightDuringScriptedPrimaryFlyIn",
+      "new": "S3TailsScript_PulsePrimaryFlyInRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PulseRightDuringScriptedPrimaryFlyIn."
     },
@@ -302,7 +302,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 320,
       "old": "loc_14F28",
-      "new": "S3TailsCpuScript_FinishPrimaryFlyInOnGroundContact",
+      "new": "S3TailsScript_FinishFlyInOnLanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FinishPrimaryFlyInOnGroundContact."
     },
@@ -310,7 +310,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 333,
       "old": "locret_14F66",
-      "new": "S3TailsCpuScript_ReturnAfterPrimaryFlyInAirOrCompletionGate",
+      "new": "S3TailsScript_PrimaryFlyInReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPrimaryFlyInAirOrCompletionGate."
     },
@@ -318,7 +318,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 337,
       "old": "loc_14F68",
-      "new": "S3TailsCpuScript_ChooseHoverOrLatchedPrimaryReacquisition",
+      "new": "S3TailsScript_ChooseHoverOrChase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseHoverOrLatchedPrimaryReacquisition."
     },
@@ -326,7 +326,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 356,
       "old": "loc_14FAE",
-      "new": "S3TailsCpuScript_EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate",
+      "new": "S3TailsScript_EmitFallbackHoverFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate."
     },
@@ -334,7 +334,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 359,
       "old": "loc_14FB4",
-      "new": "S3TailsCpuScript_JoinCarryAfterHoverPulseOrTimerHold",
+      "new": "S3TailsScript_AfterHoverPulse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe JoinCarryAfterHoverPulseOrTimerHold."
     },
@@ -342,7 +342,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 363,
       "old": "loc_14FB6",
-      "new": "S3TailsCpuScript_LatchReacquisitionAndTakePrimaryVerticalDistance",
+      "new": "S3TailsScript_LatchChaseAndMeasureY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe LatchReacquisitionAndTakePrimaryVerticalDistance."
     },
@@ -350,7 +350,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 370,
       "old": "loc_14FC6",
-      "new": "S3TailsCpuScript_StoreVerticalCatchUpAccelerationInSharedCameraWord",
+      "new": "S3TailsScript_StoreChaseYAccel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreVerticalCatchUpAccelerationInSharedCameraWord."
     },
@@ -358,7 +358,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 381,
       "old": "loc_14FDE",
-      "new": "S3TailsCpuScript_StoreHorizontalCatchUpAccelerationAndDeferChase",
+      "new": "S3TailsScript_StoreChaseXAccel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreHorizontalCatchUpAccelerationAndDeferChase."
     },
@@ -366,7 +366,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 387,
       "old": "loc_14FE8",
-      "new": "S3TailsCpuScript_ChasePrimaryUsingLatchedAccelerationAndFacing",
+      "new": "S3TailsScript_ChaseLeaderWithSavedAccel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChasePrimaryUsingLatchedAccelerationAndFacing."
     },
@@ -374,7 +374,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 400,
       "old": "loc_15016",
-      "new": "S3TailsCpuScript_ApplyHorizontalCatchUpAndGateVerticalAddition",
+      "new": "S3TailsScript_ApplyChaseXAndCheckY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyHorizontalCatchUpAndGateVerticalAddition."
     },
@@ -382,7 +382,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 409,
       "old": "loc_1502C",
-      "new": "S3TailsCpuScript_AddGuardedVerticalCatchUpAcceleration",
+      "new": "S3TailsScript_ApplyChaseY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddGuardedVerticalCatchUpAcceleration."
     },
@@ -390,7 +390,7 @@
       "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
       "original_line": 412,
       "old": "loc_15030",
-      "new": "S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition",
+      "new": "S3TailsScript_RunCarryAfterHoverOrChase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailPrimaryCarryAfterHoverOrReacquisition."
     },
@@ -398,7 +398,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 13,
       "old": "loc_146EE",
-      "new": "S3TailsAI_DispatchFollowerStateAfterManualInputRefresh",
+      "new": "S3TailsAI_DispatchFollowState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchFollowerStateAfterManualInputRefresh."
     },
@@ -406,7 +406,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 42,
       "old": "loc_14722",
-      "new": "S3TailsAI_InitializeFollowerByCheckpointAndStage",
+      "new": "S3TailsAI_InitFromCheckpointOrStage",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeFollowerByCheckpointAndStage."
     },
@@ -414,7 +414,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 53,
       "old": "loc_14744",
-      "new": "S3TailsAI_SelectEarlyStagePlacementOrDirectFollow",
+      "new": "S3TailsAI_SelectEarlyStageStart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectEarlyStagePlacementOrDirectFollow."
     },
@@ -422,7 +422,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 69,
       "old": "loc_14786",
-      "new": "S3TailsAI_HoldFollowerOffscreenForSelectedStageStart",
+      "new": "S3TailsAI_TryOffscreenStageStart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe HoldFollowerOffscreenForSelectedStageStart."
     },
@@ -430,7 +430,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 78,
       "old": "loc_147A0",
-      "new": "S3TailsAI_SelectDirectFollowOrExtendedStageStart",
+      "new": "S3TailsAI_SelectLaterStageStart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectDirectFollowOrExtendedStageStart."
     },
@@ -438,7 +438,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 82,
       "old": "loc_147A8",
-      "new": "S3TailsAI_ClearFollowerMotionBeforeStartingFollow",
+      "new": "S3TailsAI_ResetMotionBeforeFollow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearFollowerMotionBeforeStartingFollow."
     },
@@ -446,7 +446,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 89,
       "old": "loc_147C6",
-      "new": "S3TailsAI_StartNormalFollowWithOwnControlEnabled",
+      "new": "S3TailsAI_StartFollowWithOwnControl",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StartNormalFollowWithOwnControlEnabled."
     },
@@ -454,7 +454,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 109,
       "old": "loc_14804",
-      "new": "S3TailsAI_BeginFlightCatchUpAtLeaderPosition",
+      "new": "S3TailsAI_SpawnFlightAtLeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BeginFlightCatchUpAtLeaderPosition."
     },
@@ -462,7 +462,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 147,
       "old": "locret_148A0",
-      "new": "S3TailsAI_ReturnFromCatchUpSpawnGateOrSetup",
+      "new": "S3TailsAI_FlightSpawnReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnFromCatchUpSpawnGateOrSetup."
     },
@@ -470,7 +470,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 168,
       "old": "loc_148E4",
-      "new": "S3TailsAI_RefreshVisibleFlightAnimationAndClearTimeout",
+      "new": "S3TailsAI_RefreshVisibleFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RefreshVisibleFlightAnimationAndClearTimeout."
     },
@@ -478,7 +478,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 174,
       "old": "loc_148FA",
-      "new": "S3TailsAI_ReadDelayedLeaderPositionAndApproachInFlight",
+      "new": "S3TailsAI_ReadFlightTargetFromHistory",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadDelayedLeaderPositionAndApproachInFlight."
     },
@@ -486,7 +486,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 191,
       "old": "loc_1492C",
-      "new": "S3TailsAI_ScaleAndCapFlightHorizontalDistanceStep",
+      "new": "S3TailsAI_ScaleAndCapFlightXStep",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ScaleAndCapFlightHorizontalDistanceStep."
     },
@@ -494,7 +494,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 197,
       "old": "loc_14936",
-      "new": "S3TailsAI_ReadLeaderHorizontalVelocityHighByte",
+      "new": "S3TailsAI_GetLeaderXSpeedHighByte",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadLeaderHorizontalVelocityHighByte."
     },
@@ -502,7 +502,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 202,
       "old": "loc_1493E",
-      "new": "S3TailsAI_AddLeaderVelocityByteAndChooseFlightDirection",
+      "new": "S3TailsAI_AddLeaderSpeedAndChooseXStep",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddLeaderVelocityByteAndChooseFlightDirection."
     },
@@ -510,7 +510,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 213,
       "old": "loc_14954",
-      "new": "S3TailsAI_NegateFlightStepWhenFollowerIsRightOfTarget",
+      "new": "S3TailsAI_NegateFlightXStep",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NegateFlightStepWhenFollowerIsRightOfTarget."
     },
@@ -526,7 +526,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 226,
       "old": "loc_14968",
-      "new": "S3TailsAI_AddFlightHorizontalStepToIntegerPosition",
+      "new": "S3TailsAI_ApplyFlightXStep",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddFlightHorizontalStepToIntegerPosition."
     },
@@ -534,7 +534,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 229,
       "old": "loc_1496C",
-      "new": "S3TailsAI_ChooseSinglePixelFlightVerticalStep",
+      "new": "S3TailsAI_ChooseFlightYStep1px",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseSinglePixelFlightVerticalStep."
     },
@@ -550,7 +550,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 240,
       "old": "loc_14980",
-      "new": "S3TailsAI_GateFlightHandoffFromDelayedLeaderState",
+      "new": "S3TailsAI_CheckFlightHandoff",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateFlightHandoffFromDelayedLeaderState."
     },
@@ -558,7 +558,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 261,
       "old": "loc_149DA",
-      "new": "S3TailsAI_CopyLeaderCollisionPlanesOnFlightHandoff",
+      "new": "S3TailsAI_CopyLeaderSolidityBits",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CopyLeaderCollisionPlanesOnFlightHandoff."
     },
@@ -566,7 +566,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 265,
       "old": "locret_149E6",
-      "new": "S3TailsAI_ReturnAfterFlightHandoffOrUnreadyFlightChecks",
+      "new": "S3TailsAI_FlightHandoffReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterFlightHandoffOrUnreadyFlightChecks."
     },
@@ -574,7 +574,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 269,
       "old": "loc_149E8",
-      "new": "S3TailsAI_SwitchNormalFollowToFlightWhenLeaderRoutineRequires",
+      "new": "S3TailsAI_CheckLeaderRoutineForFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SwitchNormalFollowToFlightWhenLeaderRoutineRequires."
     },
@@ -582,7 +582,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 281,
       "old": "loc_14A16",
-      "new": "S3TailsAI_GateNormalAIByTimeoutManualControlAndPlayerState",
+      "new": "S3TailsAI_CheckFollowInputEligibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateNormalAIByTimeoutManualControlAndPlayerState."
     },
@@ -590,7 +590,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 295,
       "old": "loc_14A44",
-      "new": "S3TailsAI_ReadDelayedLeaderXAndApplyTrailingOffset",
+      "new": "S3TailsAI_ReadFollowTargetX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadDelayedLeaderXAndApplyTrailingOffset."
     },
@@ -598,7 +598,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 309,
       "old": "loc_14A6E",
-      "new": "S3TailsAI_ReadDelayedInputStatusAndCheckPushMismatch",
+      "new": "S3TailsAI_ReadLeaderInputAndCheckPush",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadDelayedInputStatusAndCheckPushMismatch."
     },
@@ -606,7 +606,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 320,
       "old": "loc_14A90",
-      "new": "S3TailsAI_ChooseFollowerHorizontalInputFromTargetError",
+      "new": "S3TailsAI_ChooseFollowXInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseFollowerHorizontalInputFromTargetError."
     },
@@ -614,7 +614,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 330,
       "old": "loc_14AA8",
-      "new": "S3TailsAI_NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft",
+      "new": "S3TailsAI_NudgeMovingLeft",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft."
     },
@@ -622,7 +622,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 339,
       "old": "loc_14ABC",
-      "new": "S3TailsAI_OverrideInputRightWhenTargetFarEnough",
+      "new": "S3TailsAI_SetRightInputIfFar",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe OverrideInputRightWhenTargetFarEnough."
     },
@@ -630,7 +630,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 345,
       "old": "loc_14ACA",
-      "new": "S3TailsAI_NudgeFollowerRightWhenAlreadyMovingAndFacingRight",
+      "new": "S3TailsAI_NudgeMovingRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NudgeFollowerRightWhenAlreadyMovingAndFacingRight."
     },
@@ -638,7 +638,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 354,
       "old": "loc_14ADE",
-      "new": "S3TailsAI_MatchDelayedLeaderFacingAtEqualX",
+      "new": "S3TailsAI_MatchLeaderFacingAtEqualX",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MatchDelayedLeaderFacingAtEqualX."
     },
@@ -646,7 +646,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 361,
       "old": "loc_14AF2",
-      "new": "S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears",
+      "new": "S3TailsAI_HoldAutoJumpUntilLanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ContinueAutomaticJumpHoldUntilAirborneClears."
     },
@@ -654,7 +654,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 369,
       "old": "loc_14B0A",
-      "new": "S3TailsAI_GateVerticalJumpCheckByHorizontalDistanceAndFramePhase",
+      "new": "S3TailsAI_CheckAutoJumpXOrPhase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateVerticalJumpCheckByHorizontalDistanceAndFramePhase."
     },
@@ -662,7 +662,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 376,
       "old": "loc_14B1A",
-      "new": "S3TailsAI_RequireTargetAboveByAtLeastThirtyTwoPixels",
+      "new": "S3TailsAI_CheckTarget32pxAbove",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RequireTargetAboveByAtLeastThirtyTwoPixels."
     },
@@ -670,7 +670,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 384,
       "old": "loc_14B2A",
-      "new": "S3TailsAI_IssueAutomaticJumpOnSixtyFourFramePhase",
+      "new": "S3TailsAI_TryAutoJumpOn64FramePhase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe IssueAutomaticJumpOnSixtyFourFramePhase."
     },
@@ -678,7 +678,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 393,
       "old": "loc_14B46",
-      "new": "S3TailsAI_WriteFollowerLogicalControllerWord",
+      "new": "S3TailsAI_WriteFollowInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WriteFollowerLogicalControllerWord."
     },
@@ -686,7 +686,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 398,
       "old": "loc_14B4C",
-      "new": "S3TailsAI_DecrementManualOverrideTimerWithoutReplacingInput",
+      "new": "S3TailsAI_TickManualOverride",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DecrementManualOverrideTimerWithoutReplacingInput."
     },
@@ -694,7 +694,7 @@
       "source": "src/objects/players/tails/s3/ai_tracking.s",
       "original_line": 403,
       "old": "locret_14B56",
-      "new": "S3TailsAI_ReturnWithExistingFollowerInput",
+      "new": "S3TailsAI_KeepExistingInputReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnWithExistingFollowerInput."
     },
@@ -942,7 +942,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 28,
       "old": "loc_15096",
-      "new": "S3TailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease",
+      "new": "S3TailsCarry_ApplyLeftReleaseSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyHeldLeftVelocityOnCarryJumpRelease."
     },
@@ -950,7 +950,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 33,
       "old": "loc_150A2",
-      "new": "S3TailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease",
+      "new": "S3TailsCarry_ApplyRightReleaseSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyHeldRightVelocityOnCarryJumpRelease."
     },
@@ -958,7 +958,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 38,
       "old": "loc_150AE",
-      "new": "S3TailsCarry_LaunchReleasedPlayerIntoRollingJump",
+      "new": "S3TailsCarry_LaunchReleasedRollJump",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe LaunchReleasedPlayerIntoRollingJump."
     },
@@ -966,7 +966,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 50,
       "old": "loc_150E0",
-      "new": "S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch",
+      "new": "S3TailsCarry_SetDropYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SetDropVelocityAfterGroundOrHorizontalMismatch."
     },
@@ -974,7 +974,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 53,
       "old": "loc_150E6",
-      "new": "S3TailsCarry_ClearJumpingOnCarryMotionRelease",
+      "new": "S3TailsCarry_ClearJumpingOnRelease",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearJumpingOnCarryMotionRelease."
     },
@@ -982,7 +982,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 56,
       "old": "loc_150EC",
-      "new": "S3TailsCarry_ClearCarriedControlBeforeForcedDetach",
+      "new": "S3TailsCarry_ClearCarriedControl",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearCarriedControlBeforeForcedDetach."
     },
@@ -990,7 +990,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 59,
       "old": "loc_150F0",
-      "new": "S3TailsCarry_DetachAndArmSixtyCallPickupCooldown",
+      "new": "S3TailsCarry_DetachAndArmPickupCooldown",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DetachAndArmSixtyCallPickupCooldown."
     },
@@ -998,7 +998,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 65,
       "old": "loc_150FA",
-      "new": "S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment",
+      "new": "S3TailsCarry_SyncRiderPosition",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SynchronizeCarriedPlayerPositionForAttachment."
     },
@@ -1006,7 +1006,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 87,
       "old": "loc_15152",
-      "new": "S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns",
+      "new": "S3TailsCarry_StoreFrameAndLoadPatterns",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreCarryFrameAndLoadCharacterPatterns."
     },
@@ -1014,7 +1014,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 95,
       "old": "loc_15166",
-      "new": "S3TailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain",
+      "new": "S3TailsCarry_CopySpeedAndProbeTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain."
     },
@@ -1022,7 +1022,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 111,
       "old": "loc_151A2",
-      "new": "S3TailsCarry_CountDownPickupInhibitBeforeAcquisition",
+      "new": "S3TailsCarry_TickPickupCooldown",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CountDownPickupInhibitBeforeAcquisition."
     },
@@ -1030,7 +1030,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 117,
       "old": "loc_151B0",
-      "new": "S3TailsCarry_TestPickupRelativePositionAndEligibility",
+      "new": "S3TailsCarry_CheckPickupRange",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TestPickupRelativePositionAndEligibility."
     },
@@ -1038,7 +1038,7 @@
       "source": "src/objects/players/tails/s3/carrying.s",
       "original_line": 141,
       "old": "locret_15200",
-      "new": "S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit",
+      "new": "S3TailsCarry_PickupReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPickupGateOrAttachmentCommit."
     },
@@ -1678,7 +1678,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 15,
       "old": "loc_1544E",
-      "new": "S3TailsFlight_AdvanceActiveFlapOrTestNewFlapRequest",
+      "new": "S3TailsFly_TickFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceActiveFlapOrTestNewFlapRequest."
     },
@@ -1686,7 +1686,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 25,
       "old": "loc_15470",
-      "new": "S3TailsFlight_ResetFlapCounterToWaitingState",
+      "new": "S3TailsFly_ResetFlapToWaiting",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetFlapCounterToWaitingState."
     },
@@ -1694,7 +1694,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 28,
       "old": "loc_15476",
-      "new": "S3TailsFlight_JoinCeilingAndAnimationAfterActiveFlap",
+      "new": "S3TailsFly_AfterActiveFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe JoinCeilingAndAnimationAfterActiveFlap."
     },
@@ -1702,7 +1702,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 32,
       "old": "loc_15478",
-      "new": "S3TailsFlight_GateNewFlapByPressedInputBudgetAndCarryState",
+      "new": "S3TailsFly_CheckNewFlap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateNewFlapByPressedInputBudgetAndCarryState."
     },
@@ -1710,7 +1710,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 45,
       "old": "loc_1549E",
-      "new": "S3TailsFlight_BeginNewFlapCounterBeforeWaitingGravity",
+      "new": "S3TailsFly_StartFlapCounter",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BeginNewFlapCounterBeforeWaitingGravity."
     },
@@ -1718,7 +1718,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 48,
       "old": "loc_154A4",
-      "new": "S3TailsFlight_AddWaitingFlightGravityBeforeCeilingCheck",
+      "new": "S3TailsFly_ApplyWaitingGravity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddWaitingFlightGravityBeforeCeilingCheck."
     },
@@ -1726,7 +1726,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 51,
       "old": "loc_154AA",
-      "new": "S3TailsFlight_ClampUpwardVelocityAtSignedCameraCeiling",
+      "new": "S3TailsFly_ClampAscentAtCameraCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClampUpwardVelocityAtSignedCameraCeiling."
     },
@@ -1734,7 +1734,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 73,
       "old": "loc_154DC",
-      "new": "S3TailsFlight_OffsetDryFlightAnimationWhenCarrying",
+      "new": "S3TailsFly_ChooseDryCarryAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe OffsetDryFlightAnimationWhenCarrying."
     },
@@ -1742,7 +1742,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 78,
       "old": "loc_154E4",
-      "new": "S3TailsFlight_SelectExhaustedDryFlightAndGateTiredSound",
+      "new": "S3TailsFly_CheckTiredFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectExhaustedDryFlightAndGateTiredSound."
     },
@@ -1750,7 +1750,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 92,
       "old": "locret_1550A",
-      "new": "S3TailsFlight_ReturnAfterExhaustedDryFlightSelection",
+      "new": "S3TailsFly_TiredFlightReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterExhaustedDryFlightSelection."
     },
@@ -1758,7 +1758,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 96,
       "old": "loc_1550C",
-      "new": "S3TailsFlight_StoreDryFlightAnimationAndGateFlyingSound",
+      "new": "S3TailsFly_StoreFlightAnimAndCheckSound",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreDryFlightAnimationAndGateFlyingSound."
     },
@@ -1766,7 +1766,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 107,
       "old": "locret_1552A",
-      "new": "S3TailsFlight_ReturnAfterDryFlightAnimationAndSoundGate",
+      "new": "S3TailsFly_DryFlightReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterDryFlightAnimationAndSoundGate."
     },
@@ -1774,7 +1774,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 111,
       "old": "loc_1552C",
-      "new": "S3TailsFlight_SelectSwimAnimationFromStoredVerticalVelocity",
+      "new": "S3TailsFly_PickSwimAnimFromYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectSwimAnimationFromStoredVerticalVelocity."
     },
@@ -1782,7 +1782,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 117,
       "old": "loc_15536",
-      "new": "S3TailsFlight_OverrideSwimAnimationWhenCarrying",
+      "new": "S3TailsFly_PickCarrySwimAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe OverrideSwimAnimationWhenCarrying."
     },
@@ -1790,7 +1790,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 122,
       "old": "loc_1553E",
-      "new": "S3TailsFlight_OverrideSwimAnimationWhenBudgetExhausted",
+      "new": "S3TailsFly_PickTiredSwimAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe OverrideSwimAnimationWhenBudgetExhausted."
     },
@@ -1798,7 +1798,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 127,
       "old": "loc_15546",
-      "new": "S3TailsFlight_CommitSelectedSwimAnimation",
+      "new": "S3TailsFly_StoreSwimAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitSelectedSwimAnimation."
     },
@@ -1806,7 +1806,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 142,
       "old": "loc_15564",
-      "new": "S3TailsFlight_AttemptRollingGroundJumpAfterCarryRelease",
+      "new": "S3TailsFly_TryGroundRollJump",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AttemptRollingGroundJumpAfterCarryRelease."
     },
@@ -1814,7 +1814,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 147,
       "old": "loc_1556E",
-      "new": "S3TailsFlight_RunRollingGroundPhysicsAndBackgroundProbe",
+      "new": "S3TailsFly_RunGroundRollAndProbe",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunRollingGroundPhysicsAndBackgroundProbe."
     },
@@ -1822,7 +1822,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 166,
       "old": "locret_155AC",
-      "new": "S3TailsFlight_ReturnAfterRollingGroundStepAndBackgroundChecks",
+      "new": "S3TailsFly_GroundRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollingGroundStepAndBackgroundChecks."
     },
@@ -1830,7 +1830,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 178,
       "old": "loc_155C6",
-      "new": "S3TailsFlight_RunRollingAirMotionAfterCarryRelease",
+      "new": "S3TailsFly_RunAirRollMotion",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunRollingAirMotionAfterCarryRelease."
     },
@@ -1838,7 +1838,7 @@
       "source": "src/objects/players/tails/s3/flight_and_swim.s",
       "original_line": 187,
       "old": "loc_155E6",
-      "new": "S3TailsFlight_ResolveRollingAirAngleAndTerrainAfterMotion",
+      "new": "S3TailsFly_ResolveAirRollTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveRollingAirAngleAndTerrainAfterMotion."
     },
@@ -3478,7 +3478,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 32,
       "old": "loc_13F18",
-      "new": "SKTailsCpuScript_AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged",
+      "new": "SKTailsScript_TickOffscreenTimeout",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged."
     },
@@ -3486,7 +3486,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 37,
       "old": "loc_13F24",
-      "new": "SKTailsCpuScript_ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord",
+      "new": "SKTailsScript_ResetToOffscreenCatchUp",
       "profiles": ["sk"],
       "meaning": "Describe ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord."
     },
@@ -3494,7 +3494,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 41,
       "old": "loc_13F28",
-      "new": "SKTailsCpuScript_ClearOffscreenTimerWhenRenderSignMarksVisible",
+      "new": "SKTailsScript_ClearTimeoutWhenVisible",
       "profiles": ["sk"],
       "meaning": "Describe ClearOffscreenTimerWhenRenderSignMarksVisible."
     },
@@ -3502,7 +3502,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 44,
       "old": "loc_13F2E",
-      "new": "SKTailsCpuScript_SampleInteractingObjectCodeWordForProfile",
+      "new": "SKTailsScript_ReadInteractCodeWord",
       "profiles": ["sk"],
       "meaning": "Describe SampleInteractingObjectCodeWordForProfile."
     },
@@ -3510,7 +3510,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 50,
       "old": "locret_13F3E",
-      "new": "SKTailsCpuScript_ReturnWithoutInteractionSampleWhenNotOnObject",
+      "new": "SKTailsScript_InteractSampleReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnWithoutInteractionSampleWhenNotOnObject."
     },
@@ -3518,7 +3518,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 56,
       "old": "loc_13F40",
-      "new": "SKTailsCpuScript_GateIdleCpuSpindashAfterOffscreenWatch",
+      "new": "SKTailsScript_CheckIdleSpinDash",
       "profiles": ["sk"],
       "meaning": "Describe GateIdleCpuSpindashAfterOffscreenWatch."
     },
@@ -3526,7 +3526,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 72,
       "old": "loc_13F74",
-      "new": "SKTailsCpuScript_SynthesizeDownAndInitialSpindashButtonsByGlobalPhase",
+      "new": "SKTailsScript_StartSpinDashInput",
       "profiles": ["sk"],
       "meaning": "Describe SynthesizeDownAndInitialSpindashButtonsByGlobalPhase."
     },
@@ -3534,7 +3534,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 83,
       "old": "loc_13F94",
-      "new": "SKTailsCpuScript_MaintainCpuSpindashDownUntilGlobalReleasePhase",
+      "new": "SKTailsScript_HoldSpinDashDown",
       "profiles": ["sk"],
       "meaning": "Describe MaintainCpuSpindashDownUntilGlobalReleasePhase."
     },
@@ -3542,7 +3542,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 89,
       "old": "loc_13FA4",
-      "new": "SKTailsCpuScript_ReleaseCpuSpindashInputAndResumeTracking",
+      "new": "SKTailsScript_ReleaseSpinDashAndFollow",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseCpuSpindashInputAndResumeTracking."
     },
@@ -3550,7 +3550,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 95,
       "old": "loc_13FB2",
-      "new": "SKTailsCpuScript_PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames",
+      "new": "SKTailsScript_PulseSpinChargeEvery32",
       "profiles": ["sk"],
       "meaning": "Describe PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames."
     },
@@ -3558,7 +3558,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 100,
       "old": "locret_13FBE",
-      "new": "SKTailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis",
+      "new": "SKTailsScript_IdleSpinDashReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterIdleSpindashGateOrButtonSynthesis."
     },
@@ -3566,7 +3566,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 104,
       "old": "locret_13FC0",
-      "new": "SKTailsCpuScript_ReturnWithoutInputChangesInInactiveCpuState",
+      "new": "SKTailsScript_InactiveStateReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnWithoutInputChangesInInactiveCpuState."
     },
@@ -3574,7 +3574,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 108,
       "old": "loc_13FC2",
-      "new": "SKTailsCpuScript_InitializeIntroCarryFlightWithRightwardVelocity",
+      "new": "SKTailsScript_StartIntroCarryRight",
       "profiles": ["sk"],
       "meaning": "Describe InitializeIntroCarryFlightWithRightwardVelocity."
     },
@@ -3582,7 +3582,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 120,
       "old": "loc_13FFA",
-      "new": "SKTailsCpuScript_ClearIdleAndPulseRightDuringIntroCarry",
+      "new": "SKTailsScript_PulseIntroCarryRight",
       "profiles": ["sk"],
       "meaning": "Describe ClearIdleAndPulseRightDuringIntroCarry."
     },
@@ -3590,7 +3590,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 128,
       "old": "loc_14016",
-      "new": "SKTailsCpuScript_FinishIntroCarryWhenPrimaryPlayerGrounded",
+      "new": "SKTailsScript_FinishIntroOnRiderGrounded",
       "profiles": ["sk"],
       "meaning": "Describe FinishIntroCarryWhenPrimaryPlayerGrounded."
     },
@@ -3598,7 +3598,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 146,
       "old": "loc_14068",
-      "new": "SKTailsCpuScript_CopyPrimarySolidityAndSelectPartnerExitFlight",
+      "new": "SKTailsScript_CopySolidityAndCheckExit",
       "profiles": ["sk"],
       "meaning": "Describe CopyPrimarySolidityAndSelectPartnerExitFlight."
     },
@@ -3606,7 +3606,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 153,
       "old": "loc_14082",
-      "new": "SKTailsCpuScript_RunPrimaryCarryLogicAfterIntroPhase",
+      "new": "SKTailsScript_RunIntroCarry",
       "profiles": ["sk"],
       "meaning": "Describe RunPrimaryCarryLogicAfterIntroPhase."
     },
@@ -3614,7 +3614,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 158,
       "old": "loc_1408A",
-      "new": "SKTailsCpuScript_PulseRightAndFlapWhilePartnerLeavesIntro",
+      "new": "SKTailsScript_PulsePartnerExitInput",
       "profiles": ["sk"],
       "meaning": "Describe PulseRightAndFlapWhilePartnerLeavesIntro."
     },
@@ -3622,7 +3622,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 167,
       "old": "loc_140AC",
-      "new": "SKTailsCpuScript_HandleOffscreenPartnerExitByProfile",
+      "new": "SKTailsScript_FinishPartnerExitOffscreen",
       "profiles": ["sk"],
       "meaning": "Describe HandleOffscreenPartnerExitByProfile."
     },
@@ -3630,7 +3630,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 176,
       "old": "locret_140C4",
-      "new": "SKTailsCpuScript_ReturnAfterPartnerExitVisibilityDecision",
+      "new": "SKTailsScript_PartnerExitReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterPartnerExitVisibilityDecision."
     },
@@ -3638,7 +3638,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 180,
       "old": "loc_140C6",
-      "new": "SKTailsCpuScript_ClearCpuInputWhileWaitingForBossCarrySetup",
+      "new": "SKTailsScript_ClearInputBeforeBossCarry",
       "profiles": ["sk"],
       "meaning": "Describe ClearCpuInputWhileWaitingForBossCarrySetup."
     },
@@ -3646,7 +3646,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 185,
       "old": "loc_140CE",
-      "new": "SKTailsCpuScript_InitializeBossCarryFlightAndAttachPrimary",
+      "new": "SKTailsScript_StartBossCarry",
       "profiles": ["sk"],
       "meaning": "Describe InitializeBossCarryFlightAndAttachPrimary."
     },
@@ -3654,7 +3654,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 197,
       "old": "loc_14106",
-      "new": "SKTailsCpuScript_PulseFlapDuringBossCarryClimb",
+      "new": "SKTailsScript_PulseBossCarryFlap",
       "profiles": ["sk"],
       "meaning": "Describe PulseFlapDuringBossCarryClimb."
     },
@@ -3662,7 +3662,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 206,
       "old": "loc_14128",
-      "new": "SKTailsCpuScript_SwitchBossCarryToAltitudeControlAtCameraThreshold",
+      "new": "SKTailsScript_CheckBossCarryAltitude",
       "profiles": ["sk"],
       "meaning": "Describe SwitchBossCarryToAltitudeControlAtCameraThreshold."
     },
@@ -3670,7 +3670,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 213,
       "old": "loc_1413C",
-      "new": "SKTailsCpuScript_InvokeCarryAfterBossClimbThreshold",
+      "new": "SKTailsScript_RunBossClimbCarry",
       "profiles": ["sk"],
       "meaning": "Describe InvokeCarryAfterBossClimbThreshold."
     },
@@ -3678,7 +3678,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 220,
       "old": "loc_1414C",
-      "new": "SKTailsCpuScript_ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry",
+      "new": "SKTailsScript_ChooseAutoCarryOrReacquire",
       "profiles": ["sk"],
       "meaning": "Describe ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry."
     },
@@ -3686,7 +3686,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 229,
       "old": "loc_14164",
-      "new": "SKTailsCpuScript_SynthesizeAutomaticCarryFlapsWithDownPriority",
+      "new": "SKTailsScript_CheckDownForSlowFlaps",
       "profiles": ["sk"],
       "meaning": "Describe SynthesizeAutomaticCarryFlapsWithDownPriority."
     },
@@ -3694,7 +3694,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 244,
       "old": "loc_14198",
-      "new": "SKTailsCpuScript_UseFasterFlapCadenceWhenPhysicalUpHeld",
+      "new": "SKTailsScript_CheckUpForFastFlaps",
       "profiles": ["sk"],
       "meaning": "Describe UseFasterFlapCadenceWhenPhysicalUpHeld."
     },
@@ -3702,7 +3702,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 255,
       "old": "loc_141BA",
-      "new": "SKTailsCpuScript_PulseNeutralAltitudeFlapAtTimerEightyEight",
+      "new": "SKTailsScript_PulseNeutralFlapAt88",
       "profiles": ["sk"],
       "meaning": "Describe PulseNeutralAltitudeFlapAtTimerEightyEight."
     },
@@ -3710,7 +3710,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 262,
       "old": "loc_141D2",
-      "new": "SKTailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte",
+      "new": "SKTailsScript_MergeLeaderHeldXInput",
       "profiles": ["sk"],
       "meaning": "Describe MergePrimaryHorizontalHeldInputIntoFollowerHeldByte."
     },
@@ -3718,7 +3718,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 268,
       "old": "loc_141E2",
-      "new": "SKTailsCpuScript_TailCarryWithPhysicalPrimaryControllerWord",
+      "new": "SKTailsScript_RunCarryWithLeaderInput",
       "profiles": ["sk"],
       "meaning": "Describe TailCarryWithPhysicalPrimaryControllerWord."
     },
@@ -3726,7 +3726,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 275,
       "old": "loc_141F2",
-      "new": "SKTailsCpuScript_InitializeSoloBossFlightWithoutPrimaryAttachment",
+      "new": "SKTailsScript_StartSoloBossFlight",
       "profiles": ["sk"],
       "meaning": "Describe InitializeSoloBossFlightWithoutPrimaryAttachment."
     },
@@ -3734,7 +3734,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 284,
       "old": "loc_1421C",
-      "new": "SKTailsCpuScript_PulseSoloBossClimbAndRefreshFlightBudget",
+      "new": "SKTailsScript_PulseSoloClimbFlap",
       "profiles": ["sk"],
       "meaning": "Describe PulseSoloBossClimbAndRefreshFlightBudget."
     },
@@ -3742,7 +3742,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 293,
       "old": "loc_1423E",
-      "new": "SKTailsCpuScript_ReleaseSoloScriptClimbAtCameraAltitude",
+      "new": "SKTailsScript_CheckSoloClimbAltitude",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseSoloScriptClimbAtCameraAltitude."
     },
@@ -3750,7 +3750,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 300,
       "old": "locret_14252",
-      "new": "SKTailsCpuScript_ReturnAfterSoloClimbAltitudeDecision",
+      "new": "SKTailsScript_SoloClimbReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterSoloClimbAltitudeDecision."
     },
@@ -3758,7 +3758,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 304,
       "old": "loc_14254",
-      "new": "SKTailsCpuScript_RefreshSoloFlightBudgetWithoutChangingInput",
+      "new": "SKTailsScript_RefreshSoloFlightBudget",
       "profiles": ["sk"],
       "meaning": "Describe RefreshSoloFlightBudgetWithoutChangingInput."
     },
@@ -3766,7 +3766,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 309,
       "old": "loc_1425C",
-      "new": "SKTailsCpuScript_InitializeScriptedPrimaryFlyInWithRightwardVelocity",
+      "new": "SKTailsScript_StartPrimaryFlyInRight",
       "profiles": ["sk"],
       "meaning": "Describe InitializeScriptedPrimaryFlyInWithRightwardVelocity."
     },
@@ -3774,7 +3774,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 318,
       "old": "loc_14286",
-      "new": "SKTailsCpuScript_PulseRightDuringScriptedPrimaryFlyIn",
+      "new": "SKTailsScript_PulsePrimaryFlyInRight",
       "profiles": ["sk"],
       "meaning": "Describe PulseRightDuringScriptedPrimaryFlyIn."
     },
@@ -3782,7 +3782,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 326,
       "old": "loc_142A2",
-      "new": "SKTailsCpuScript_FinishPrimaryFlyInOnGroundContact",
+      "new": "SKTailsScript_FinishFlyInOnLanding",
       "profiles": ["sk"],
       "meaning": "Describe FinishPrimaryFlyInOnGroundContact."
     },
@@ -3790,7 +3790,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 339,
       "old": "locret_142E0",
-      "new": "SKTailsCpuScript_ReturnAfterPrimaryFlyInAirOrCompletionGate",
+      "new": "SKTailsScript_PrimaryFlyInReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterPrimaryFlyInAirOrCompletionGate."
     },
@@ -3798,7 +3798,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 343,
       "old": "loc_142E2",
-      "new": "SKTailsCpuScript_ChooseHoverOrLatchedPrimaryReacquisition",
+      "new": "SKTailsScript_ChooseHoverOrChase",
       "profiles": ["sk"],
       "meaning": "Describe ChooseHoverOrLatchedPrimaryReacquisition."
     },
@@ -3806,7 +3806,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 362,
       "old": "loc_14328",
-      "new": "SKTailsCpuScript_EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate",
+      "new": "SKTailsScript_EmitFallbackHoverFlap",
       "profiles": ["sk"],
       "meaning": "Describe EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate."
     },
@@ -3814,7 +3814,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 365,
       "old": "loc_1432E",
-      "new": "SKTailsCpuScript_JoinCarryAfterHoverPulseOrTimerHold",
+      "new": "SKTailsScript_AfterHoverPulse",
       "profiles": ["sk"],
       "meaning": "Describe JoinCarryAfterHoverPulseOrTimerHold."
     },
@@ -3822,7 +3822,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 369,
       "old": "loc_14330",
-      "new": "SKTailsCpuScript_LatchReacquisitionAndTakePrimaryVerticalDistance",
+      "new": "SKTailsScript_LatchChaseAndMeasureY",
       "profiles": ["sk"],
       "meaning": "Describe LatchReacquisitionAndTakePrimaryVerticalDistance."
     },
@@ -3830,7 +3830,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 376,
       "old": "loc_14340",
-      "new": "SKTailsCpuScript_StoreVerticalCatchUpAccelerationInSharedCameraWord",
+      "new": "SKTailsScript_StoreChaseYAccel",
       "profiles": ["sk"],
       "meaning": "Describe StoreVerticalCatchUpAccelerationInSharedCameraWord."
     },
@@ -3838,7 +3838,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 387,
       "old": "loc_14358",
-      "new": "SKTailsCpuScript_StoreHorizontalCatchUpAccelerationAndDeferChase",
+      "new": "SKTailsScript_StoreChaseXAccel",
       "profiles": ["sk"],
       "meaning": "Describe StoreHorizontalCatchUpAccelerationAndDeferChase."
     },
@@ -3846,7 +3846,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 393,
       "old": "loc_14362",
-      "new": "SKTailsCpuScript_ChasePrimaryUsingLatchedAccelerationAndFacing",
+      "new": "SKTailsScript_ChaseLeaderWithSavedAccel",
       "profiles": ["sk"],
       "meaning": "Describe ChasePrimaryUsingLatchedAccelerationAndFacing."
     },
@@ -3854,7 +3854,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 406,
       "old": "loc_14390",
-      "new": "SKTailsCpuScript_ApplyHorizontalCatchUpAndGateVerticalAddition",
+      "new": "SKTailsScript_ApplyChaseXAndCheckY",
       "profiles": ["sk"],
       "meaning": "Describe ApplyHorizontalCatchUpAndGateVerticalAddition."
     },
@@ -3862,7 +3862,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 415,
       "old": "loc_143A6",
-      "new": "SKTailsCpuScript_AddGuardedVerticalCatchUpAcceleration",
+      "new": "SKTailsScript_ApplyChaseY",
       "profiles": ["sk"],
       "meaning": "Describe AddGuardedVerticalCatchUpAcceleration."
     },
@@ -3870,7 +3870,7 @@
       "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
       "original_line": 418,
       "old": "loc_143AA",
-      "new": "SKTailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition",
+      "new": "SKTailsScript_RunCarryAfterHoverOrChase",
       "profiles": ["sk"],
       "meaning": "Describe TailPrimaryCarryAfterHoverOrReacquisition."
     },
@@ -3878,7 +3878,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 13,
       "old": "loc_139DC",
-      "new": "SKTailsAI_DispatchFollowerStateAfterManualInputRefresh",
+      "new": "SKTailsAI_DispatchFollowState",
       "profiles": ["sk"],
       "meaning": "Describe DispatchFollowerStateAfterManualInputRefresh."
     },
@@ -3886,7 +3886,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 42,
       "old": "loc_13A10",
-      "new": "SKTailsAI_InitializeFollowerByCheckpointAndStage",
+      "new": "SKTailsAI_InitFromCheckpointOrStage",
       "profiles": ["sk"],
       "meaning": "Describe InitializeFollowerByCheckpointAndStage."
     },
@@ -3894,7 +3894,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 53,
       "old": "loc_13A32",
-      "new": "SKTailsAI_SelectEarlyStagePlacementOrDirectFollow",
+      "new": "SKTailsAI_SelectEarlyStageStart",
       "profiles": ["sk"],
       "meaning": "Describe SelectEarlyStagePlacementOrDirectFollow."
     },
@@ -3902,7 +3902,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 63,
       "old": "loc_13A5A",
-      "new": "SKTailsAI_StartStageSpecificCarryingInitializationAtChosenPosition",
+      "new": "SKTailsAI_StartStageCarry",
       "profiles": ["sk"],
       "meaning": "Describe StartStageSpecificCarryingInitializationAtChosenPosition."
     },
@@ -3910,7 +3910,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 71,
       "old": "loc_13A74",
-      "new": "SKTailsAI_HoldFollowerOffscreenForSelectedStageStart",
+      "new": "SKTailsAI_TryOffscreenStageStart",
       "profiles": ["sk"],
       "meaning": "Describe HoldFollowerOffscreenForSelectedStageStart."
     },
@@ -3918,7 +3918,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 80,
       "old": "loc_13A8E",
-      "new": "SKTailsAI_SelectDirectFollowOrExtendedStageStart",
+      "new": "SKTailsAI_SelectLaterStageStart",
       "profiles": ["sk"],
       "meaning": "Describe SelectDirectFollowOrExtendedStageStart."
     },
@@ -3926,7 +3926,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 92,
       "old": "loc_13AB4",
-      "new": "SKTailsAI_SelectAdditionalLateStageFollowerStartup",
+      "new": "SKTailsAI_SelectLateStageStart",
       "profiles": ["sk"],
       "meaning": "Describe SelectAdditionalLateStageFollowerStartup."
     },
@@ -3934,7 +3934,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 105,
       "old": "loc_13AE2",
-      "new": "SKTailsAI_ChooseLateStageDirectFollowWithOrWithoutControlClear",
+      "new": "SKTailsAI_ChooseLateStageControl",
       "profiles": ["sk"],
       "meaning": "Describe ChooseLateStageDirectFollowWithOrWithoutControlClear."
     },
@@ -3942,7 +3942,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 111,
       "old": "loc_13AF4",
-      "new": "SKTailsAI_ClearFollowerMotionBeforeStartingFollow",
+      "new": "SKTailsAI_ResetMotionBeforeFollow",
       "profiles": ["sk"],
       "meaning": "Describe ClearFollowerMotionBeforeStartingFollow."
     },
@@ -3950,7 +3950,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 118,
       "old": "loc_13B12",
-      "new": "SKTailsAI_StartNormalFollowWithOwnControlEnabled",
+      "new": "SKTailsAI_StartFollowWithOwnControl",
       "profiles": ["sk"],
       "meaning": "Describe StartNormalFollowWithOwnControlEnabled."
     },
@@ -3958,7 +3958,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 121,
       "old": "loc_13B18",
-      "new": "SKTailsAI_StartNormalFollowWhilePreservingExistingControlByte",
+      "new": "SKTailsAI_StartFollowKeepControl",
       "profiles": ["sk"],
       "meaning": "Describe StartNormalFollowWhilePreservingExistingControlByte."
     },
@@ -3966,7 +3966,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 140,
       "old": "loc_13B50",
-      "new": "SKTailsAI_BeginFlightCatchUpAtLeaderPosition",
+      "new": "SKTailsAI_SpawnFlightAtLeader",
       "profiles": ["sk"],
       "meaning": "Describe BeginFlightCatchUpAtLeaderPosition."
     },
@@ -3974,7 +3974,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 152,
       "old": "loc_13B78",
-      "new": "SKTailsAI_ApplyGravityAdjustedFlightSpawnYAndResetCatchUpFields",
+      "new": "SKTailsAI_ApplySpawnYAndResetFlight",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityAdjustedFlightSpawnYAndResetCatchUpFields."
     },
@@ -3982,7 +3982,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 183,
       "old": "locret_13BF6",
-      "new": "SKTailsAI_ReturnFromCatchUpSpawnGateOrSetup",
+      "new": "SKTailsAI_FlightSpawnReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromCatchUpSpawnGateOrSetup."
     },
@@ -3990,7 +3990,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 204,
       "old": "loc_13C3A",
-      "new": "SKTailsAI_RefreshVisibleFlightAnimationAndClearTimeout",
+      "new": "SKTailsAI_RefreshVisibleFlight",
       "profiles": ["sk"],
       "meaning": "Describe RefreshVisibleFlightAnimationAndClearTimeout."
     },
@@ -3998,7 +3998,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 210,
       "old": "loc_13C50",
-      "new": "SKTailsAI_ReadDelayedLeaderPositionAndApproachInFlight",
+      "new": "SKTailsAI_ReadFlightTargetFromHistory",
       "profiles": ["sk"],
       "meaning": "Describe ReadDelayedLeaderPositionAndApproachInFlight."
     },
@@ -4006,7 +4006,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 226,
       "old": "loc_13C7E",
-      "new": "SKTailsAI_ScaleAndCapFlightHorizontalDistanceStep",
+      "new": "SKTailsAI_ScaleAndCapFlightXStep",
       "profiles": ["sk"],
       "meaning": "Describe ScaleAndCapFlightHorizontalDistanceStep."
     },
@@ -4014,7 +4014,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 232,
       "old": "loc_13C88",
-      "new": "SKTailsAI_ReadLeaderHorizontalVelocityHighByte",
+      "new": "SKTailsAI_GetLeaderXSpeedHighByte",
       "profiles": ["sk"],
       "meaning": "Describe ReadLeaderHorizontalVelocityHighByte."
     },
@@ -4022,7 +4022,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 237,
       "old": "loc_13C90",
-      "new": "SKTailsAI_AddLeaderVelocityByteAndChooseFlightDirection",
+      "new": "SKTailsAI_AddLeaderSpeedAndChooseXStep",
       "profiles": ["sk"],
       "meaning": "Describe AddLeaderVelocityByteAndChooseFlightDirection."
     },
@@ -4030,7 +4030,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 248,
       "old": "loc_13CA6",
-      "new": "SKTailsAI_NegateFlightStepWhenFollowerIsRightOfTarget",
+      "new": "SKTailsAI_NegateFlightXStep",
       "profiles": ["sk"],
       "meaning": "Describe NegateFlightStepWhenFollowerIsRightOfTarget."
     },
@@ -4046,7 +4046,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 261,
       "old": "loc_13CBA",
-      "new": "SKTailsAI_AddFlightHorizontalStepToIntegerPosition",
+      "new": "SKTailsAI_ApplyFlightXStep",
       "profiles": ["sk"],
       "meaning": "Describe AddFlightHorizontalStepToIntegerPosition."
     },
@@ -4054,7 +4054,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 264,
       "old": "loc_13CBE",
-      "new": "SKTailsAI_ChooseSinglePixelFlightVerticalStep",
+      "new": "SKTailsAI_ChooseFlightYStep1px",
       "profiles": ["sk"],
       "meaning": "Describe ChooseSinglePixelFlightVerticalStep."
     },
@@ -4070,7 +4070,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 275,
       "old": "loc_13CD2",
-      "new": "SKTailsAI_GateFlightHandoffFromDelayedLeaderState",
+      "new": "SKTailsAI_CheckFlightHandoff",
       "profiles": ["sk"],
       "meaning": "Describe GateFlightHandoffFromDelayedLeaderState."
     },
@@ -4078,7 +4078,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 298,
       "old": "loc_13D34",
-      "new": "SKTailsAI_CopyLeaderCollisionPlanesOnFlightHandoff",
+      "new": "SKTailsAI_CopyLeaderSolidityBits",
       "profiles": ["sk"],
       "meaning": "Describe CopyLeaderCollisionPlanesOnFlightHandoff."
     },
@@ -4086,7 +4086,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 304,
       "old": "loc_13D42",
-      "new": "SKTailsAI_RetainOwnMovementSuppressionWhenFlightHandoffIsUnready",
+      "new": "SKTailsAI_KeepCatchUpControl",
       "profiles": ["sk"],
       "meaning": "Describe RetainOwnMovementSuppressionWhenFlightHandoffIsUnready."
     },
@@ -4094,7 +4094,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 309,
       "old": "loc_13D4A",
-      "new": "SKTailsAI_SwitchNormalFollowToFlightWhenLeaderRoutineRequires",
+      "new": "SKTailsAI_CheckLeaderRoutineForFlight",
       "profiles": ["sk"],
       "meaning": "Describe SwitchNormalFollowToFlightWhenLeaderRoutineRequires."
     },
@@ -4102,7 +4102,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 321,
       "old": "loc_13D78",
-      "new": "SKTailsAI_GateNormalAIByTimeoutManualControlAndPlayerState",
+      "new": "SKTailsAI_CheckFollowInputEligibility",
       "profiles": ["sk"],
       "meaning": "Describe GateNormalAIByTimeoutManualControlAndPlayerState."
     },
@@ -4110,7 +4110,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 335,
       "old": "loc_13DA6",
-      "new": "SKTailsAI_ReadDelayedLeaderXAndApplyTrailingOffset",
+      "new": "SKTailsAI_ReadFollowTargetX",
       "profiles": ["sk"],
       "meaning": "Describe ReadDelayedLeaderXAndApplyTrailingOffset."
     },
@@ -4118,7 +4118,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 349,
       "old": "loc_13DD0",
-      "new": "SKTailsAI_ReadDelayedInputStatusAndCheckPushMismatch",
+      "new": "SKTailsAI_ReadLeaderInputAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe ReadDelayedInputStatusAndCheckPushMismatch."
     },
@@ -4126,7 +4126,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 360,
       "old": "loc_13DF2",
-      "new": "SKTailsAI_ChooseFollowerHorizontalInputFromTargetError",
+      "new": "SKTailsAI_ChooseFollowXInput",
       "profiles": ["sk"],
       "meaning": "Describe ChooseFollowerHorizontalInputFromTargetError."
     },
@@ -4134,7 +4134,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 370,
       "old": "loc_13E0A",
-      "new": "SKTailsAI_NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft",
+      "new": "SKTailsAI_NudgeMovingLeft",
       "profiles": ["sk"],
       "meaning": "Describe NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft."
     },
@@ -4142,7 +4142,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 381,
       "old": "loc_13E26",
-      "new": "SKTailsAI_OverrideInputRightWhenTargetFarEnough",
+      "new": "SKTailsAI_SetRightInputIfFar",
       "profiles": ["sk"],
       "meaning": "Describe OverrideInputRightWhenTargetFarEnough."
     },
@@ -4150,7 +4150,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 387,
       "old": "loc_13E34",
-      "new": "SKTailsAI_NudgeFollowerRightWhenAlreadyMovingAndFacingRight",
+      "new": "SKTailsAI_NudgeMovingRight",
       "profiles": ["sk"],
       "meaning": "Describe NudgeFollowerRightWhenAlreadyMovingAndFacingRight."
     },
@@ -4158,7 +4158,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 398,
       "old": "loc_13E50",
-      "new": "SKTailsAI_MatchDelayedLeaderFacingAtEqualX",
+      "new": "SKTailsAI_MatchLeaderFacingAtEqualX",
       "profiles": ["sk"],
       "meaning": "Describe MatchDelayedLeaderFacingAtEqualX."
     },
@@ -4166,7 +4166,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 405,
       "old": "loc_13E64",
-      "new": "SKTailsAI_ContinueAutomaticJumpHoldUntilAirborneClears",
+      "new": "SKTailsAI_HoldAutoJumpUntilLanding",
       "profiles": ["sk"],
       "meaning": "Describe ContinueAutomaticJumpHoldUntilAirborneClears."
     },
@@ -4174,7 +4174,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 413,
       "old": "loc_13E7C",
-      "new": "SKTailsAI_GateVerticalJumpCheckByHorizontalDistanceAndFramePhase",
+      "new": "SKTailsAI_CheckAutoJumpXOrPhase",
       "profiles": ["sk"],
       "meaning": "Describe GateVerticalJumpCheckByHorizontalDistanceAndFramePhase."
     },
@@ -4182,7 +4182,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 420,
       "old": "loc_13E8C",
-      "new": "SKTailsAI_RequireTargetAboveByAtLeastThirtyTwoPixels",
+      "new": "SKTailsAI_CheckTarget32pxAbove",
       "profiles": ["sk"],
       "meaning": "Describe RequireTargetAboveByAtLeastThirtyTwoPixels."
     },
@@ -4190,7 +4190,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 428,
       "old": "loc_13E9C",
-      "new": "SKTailsAI_IssueAutomaticJumpOnSixtyFourFramePhase",
+      "new": "SKTailsAI_TryAutoJumpOn64FramePhase",
       "profiles": ["sk"],
       "meaning": "Describe IssueAutomaticJumpOnSixtyFourFramePhase."
     },
@@ -4198,7 +4198,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 437,
       "old": "loc_13EB8",
-      "new": "SKTailsAI_WriteFollowerLogicalControllerWord",
+      "new": "SKTailsAI_WriteFollowInput",
       "profiles": ["sk"],
       "meaning": "Describe WriteFollowerLogicalControllerWord."
     },
@@ -4206,7 +4206,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 442,
       "old": "loc_13EBE",
-      "new": "SKTailsAI_DecrementManualOverrideTimerWithoutReplacingInput",
+      "new": "SKTailsAI_TickManualOverride",
       "profiles": ["sk"],
       "meaning": "Describe DecrementManualOverrideTimerWithoutReplacingInput."
     },
@@ -4214,7 +4214,7 @@
       "source": "src/objects/players/tails/sk/ai_tracking.s",
       "original_line": 447,
       "old": "locret_13EC8",
-      "new": "SKTailsAI_ReturnWithExistingFollowerInput",
+      "new": "SKTailsAI_KeepExistingInputReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnWithExistingFollowerInput."
     },
@@ -4478,7 +4478,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 28,
       "old": "loc_14410",
-      "new": "SKTailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease",
+      "new": "SKTailsCarry_ApplyLeftReleaseSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ApplyHeldLeftVelocityOnCarryJumpRelease."
     },
@@ -4486,7 +4486,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 33,
       "old": "loc_1441C",
-      "new": "SKTailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease",
+      "new": "SKTailsCarry_ApplyRightReleaseSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ApplyHeldRightVelocityOnCarryJumpRelease."
     },
@@ -4494,7 +4494,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 38,
       "old": "loc_14428",
-      "new": "SKTailsCarry_LaunchReleasedPlayerIntoRollingJump",
+      "new": "SKTailsCarry_LaunchReleasedRollJump",
       "profiles": ["sk"],
       "meaning": "Describe LaunchReleasedPlayerIntoRollingJump."
     },
@@ -4502,7 +4502,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 50,
       "old": "loc_1445A",
-      "new": "SKTailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch",
+      "new": "SKTailsCarry_SetDropYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SetDropVelocityAfterGroundOrHorizontalMismatch."
     },
@@ -4510,7 +4510,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 53,
       "old": "loc_14460",
-      "new": "SKTailsCarry_ClearJumpingOnCarryMotionRelease",
+      "new": "SKTailsCarry_ClearJumpingOnRelease",
       "profiles": ["sk"],
       "meaning": "Describe ClearJumpingOnCarryMotionRelease."
     },
@@ -4518,7 +4518,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 56,
       "old": "loc_14466",
-      "new": "SKTailsCarry_ClearCarriedControlBeforeForcedDetach",
+      "new": "SKTailsCarry_ClearCarriedControl",
       "profiles": ["sk"],
       "meaning": "Describe ClearCarriedControlBeforeForcedDetach."
     },
@@ -4526,7 +4526,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 59,
       "old": "loc_1446A",
-      "new": "SKTailsCarry_DetachAndArmSixtyCallPickupCooldown",
+      "new": "SKTailsCarry_DetachAndArmPickupCooldown",
       "profiles": ["sk"],
       "meaning": "Describe DetachAndArmSixtyCallPickupCooldown."
     },
@@ -4534,7 +4534,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 65,
       "old": "loc_14474",
-      "new": "SKTailsCarry_SynchronizeCarriedPlayerPositionForAttachment",
+      "new": "SKTailsCarry_SyncRiderPosition",
       "profiles": ["sk"],
       "meaning": "Describe SynchronizeCarriedPlayerPositionForAttachment."
     },
@@ -4542,7 +4542,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 73,
       "old": "loc_14492",
-      "new": "SKTailsCarry_MirrorCarriedFacingAndApplyReverseGravityFlip",
+      "new": "SKTailsCarry_SyncRiderFacingAndFlip",
       "profiles": ["sk"],
       "meaning": "Describe MirrorCarriedFacingAndApplyReverseGravityFlip."
     },
@@ -4550,7 +4550,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 84,
       "old": "loc_144BA",
-      "new": "SKTailsCarry_GateCarryFrameStepBySignedByteTimer",
+      "new": "SKTailsCarry_TickCarryFrameTimer",
       "profiles": ["sk"],
       "meaning": "Describe GateCarryFrameStepBySignedByteTimer."
     },
@@ -4558,7 +4558,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 97,
       "old": "loc_144E4",
-      "new": "SKTailsCarry_StoreCarryFrameAndLoadCharacterPatterns",
+      "new": "SKTailsCarry_StoreFrameAndLoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe StoreCarryFrameAndLoadCharacterPatterns."
     },
@@ -4566,7 +4566,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 105,
       "old": "loc_144F8",
-      "new": "SKTailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain",
+      "new": "SKTailsCarry_CopySpeedAndProbeTerrain",
       "profiles": ["sk"],
       "meaning": "Describe CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain."
     },
@@ -4574,7 +4574,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 121,
       "old": "loc_14534",
-      "new": "SKTailsCarry_CountDownPickupInhibitBeforeAcquisition",
+      "new": "SKTailsCarry_TickPickupCooldown",
       "profiles": ["sk"],
       "meaning": "Describe CountDownPickupInhibitBeforeAcquisition."
     },
@@ -4582,7 +4582,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 127,
       "old": "loc_14542",
-      "new": "SKTailsCarry_TestPickupRelativePositionAndEligibility",
+      "new": "SKTailsCarry_CheckPickupRange",
       "profiles": ["sk"],
       "meaning": "Describe TestPickupRelativePositionAndEligibility."
     },
@@ -4590,7 +4590,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 140,
       "old": "loc_1456C",
-      "new": "SKTailsCarry_TestGravityAdjustedPickupHeightAndEligibility",
+      "new": "SKTailsCarry_CheckPickupYAndState",
       "profiles": ["sk"],
       "meaning": "Describe TestGravityAdjustedPickupHeightAndEligibility."
     },
@@ -4598,7 +4598,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 156,
       "old": "locret_1459C",
-      "new": "SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit",
+      "new": "SKTailsCarry_PickupReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterPickupGateOrAttachmentCommit."
     },
@@ -4606,7 +4606,7 @@
       "source": "src/objects/players/tails/sk/carrying.s",
       "original_line": 192,
       "old": "locret_14630",
-      "new": "SKTailsCarry_ReturnFromGravityAdjustedAttachmentInitialization",
+      "new": "SKTailsCarry_InitAttachmentReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromGravityAdjustedAttachmentInitialization."
     },
@@ -5310,7 +5310,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 15,
       "old": "loc_14836",
-      "new": "SKTailsFlight_AdvanceActiveFlapOrTestNewFlapRequest",
+      "new": "SKTailsFly_TickFlap",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceActiveFlapOrTestNewFlapRequest."
     },
@@ -5318,7 +5318,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 25,
       "old": "loc_14858",
-      "new": "SKTailsFlight_ResetFlapCounterToWaitingState",
+      "new": "SKTailsFly_ResetFlapToWaiting",
       "profiles": ["sk"],
       "meaning": "Describe ResetFlapCounterToWaitingState."
     },
@@ -5326,7 +5326,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 28,
       "old": "loc_1485E",
-      "new": "SKTailsFlight_JoinCeilingAndAnimationAfterActiveFlap",
+      "new": "SKTailsFly_AfterActiveFlap",
       "profiles": ["sk"],
       "meaning": "Describe JoinCeilingAndAnimationAfterActiveFlap."
     },
@@ -5334,7 +5334,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 32,
       "old": "loc_14860",
-      "new": "SKTailsFlight_GateNewFlapByPressedInputBudgetAndCarryState",
+      "new": "SKTailsFly_CheckNewFlap",
       "profiles": ["sk"],
       "meaning": "Describe GateNewFlapByPressedInputBudgetAndCarryState."
     },
@@ -5342,7 +5342,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 45,
       "old": "loc_14886",
-      "new": "SKTailsFlight_BeginNewFlapCounterBeforeWaitingGravity",
+      "new": "SKTailsFly_StartFlapCounter",
       "profiles": ["sk"],
       "meaning": "Describe BeginNewFlapCounterBeforeWaitingGravity."
     },
@@ -5350,7 +5350,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 48,
       "old": "loc_1488C",
-      "new": "SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck",
+      "new": "SKTailsFly_ApplyWaitingGravity",
       "profiles": ["sk"],
       "meaning": "Describe AddWaitingFlightGravityBeforeCeilingCheck."
     },
@@ -5358,7 +5358,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 51,
       "old": "loc_14892",
-      "new": "SKTailsFlight_ClampUpwardVelocityAtSignedCameraCeiling",
+      "new": "SKTailsFly_ClampAscentAtCameraCeiling",
       "profiles": ["sk"],
       "meaning": "Describe ClampUpwardVelocityAtSignedCameraCeiling."
     },
@@ -5366,7 +5366,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 73,
       "old": "loc_148C4",
-      "new": "SKTailsFlight_OffsetDryFlightAnimationWhenCarrying",
+      "new": "SKTailsFly_ChooseDryCarryAnim",
       "profiles": ["sk"],
       "meaning": "Describe OffsetDryFlightAnimationWhenCarrying."
     },
@@ -5374,7 +5374,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 78,
       "old": "loc_148CC",
-      "new": "SKTailsFlight_SelectExhaustedDryFlightAndGateTiredSound",
+      "new": "SKTailsFly_CheckTiredFlight",
       "profiles": ["sk"],
       "meaning": "Describe SelectExhaustedDryFlightAndGateTiredSound."
     },
@@ -5382,7 +5382,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 92,
       "old": "locret_148F2",
-      "new": "SKTailsFlight_ReturnAfterExhaustedDryFlightSelection",
+      "new": "SKTailsFly_TiredFlightReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterExhaustedDryFlightSelection."
     },
@@ -5390,7 +5390,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 96,
       "old": "loc_148F4",
-      "new": "SKTailsFlight_StoreDryFlightAnimationAndGateFlyingSound",
+      "new": "SKTailsFly_StoreFlightAnimAndCheckSound",
       "profiles": ["sk"],
       "meaning": "Describe StoreDryFlightAnimationAndGateFlyingSound."
     },
@@ -5398,7 +5398,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 107,
       "old": "locret_14912",
-      "new": "SKTailsFlight_ReturnAfterDryFlightAnimationAndSoundGate",
+      "new": "SKTailsFly_DryFlightReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterDryFlightAnimationAndSoundGate."
     },
@@ -5406,7 +5406,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 111,
       "old": "loc_14914",
-      "new": "SKTailsFlight_SelectSwimAnimationFromStoredVerticalVelocity",
+      "new": "SKTailsFly_PickSwimAnimFromYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SelectSwimAnimationFromStoredVerticalVelocity."
     },
@@ -5414,7 +5414,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 117,
       "old": "loc_1491E",
-      "new": "SKTailsFlight_OverrideSwimAnimationWhenCarrying",
+      "new": "SKTailsFly_PickCarrySwimAnim",
       "profiles": ["sk"],
       "meaning": "Describe OverrideSwimAnimationWhenCarrying."
     },
@@ -5422,7 +5422,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 122,
       "old": "loc_14926",
-      "new": "SKTailsFlight_OverrideSwimAnimationWhenBudgetExhausted",
+      "new": "SKTailsFly_PickTiredSwimAnim",
       "profiles": ["sk"],
       "meaning": "Describe OverrideSwimAnimationWhenBudgetExhausted."
     },
@@ -5430,7 +5430,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 127,
       "old": "loc_1492E",
-      "new": "SKTailsFlight_CommitSelectedSwimAnimation",
+      "new": "SKTailsFly_StoreSwimAnim",
       "profiles": ["sk"],
       "meaning": "Describe CommitSelectedSwimAnimation."
     },
@@ -5438,7 +5438,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 142,
       "old": "loc_1494C",
-      "new": "SKTailsFlight_AttemptRollingGroundJumpAfterCarryRelease",
+      "new": "SKTailsFly_TryGroundRollJump",
       "profiles": ["sk"],
       "meaning": "Describe AttemptRollingGroundJumpAfterCarryRelease."
     },
@@ -5446,7 +5446,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 147,
       "old": "loc_14956",
-      "new": "SKTailsFlight_RunRollingGroundPhysicsAndBackgroundProbe",
+      "new": "SKTailsFly_RunGroundRollAndProbe",
       "profiles": ["sk"],
       "meaning": "Describe RunRollingGroundPhysicsAndBackgroundProbe."
     },
@@ -5454,7 +5454,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 165,
       "old": "loc_14990",
-      "new": "SKTailsFlight_ProbeRightBackgroundWallAfterLeftCorrection",
+      "new": "SKTailsFly_ProbeRightBackgroundWall",
       "profiles": ["sk"],
       "meaning": "Describe ProbeRightBackgroundWallAfterLeftCorrection."
     },
@@ -5462,7 +5462,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 171,
       "old": "loc_1499C",
-      "new": "SKTailsFlight_RestoreSavedCollisionRegistersAfterBothSideProbes",
+      "new": "SKTailsFly_RestoreWallProbeRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreSavedCollisionRegistersAfterBothSideProbes."
     },
@@ -5470,7 +5470,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 174,
       "old": "locret_149A0",
-      "new": "SKTailsFlight_ReturnAfterRollingGroundStepAndBackgroundChecks",
+      "new": "SKTailsFly_GroundRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollingGroundStepAndBackgroundChecks."
     },
@@ -5478,7 +5478,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 186,
       "old": "loc_149BA",
-      "new": "SKTailsFlight_RunRollingAirMotionAfterCarryRelease",
+      "new": "SKTailsFly_RunAirRollMotion",
       "profiles": ["sk"],
       "meaning": "Describe RunRollingAirMotionAfterCarryRelease."
     },
@@ -5486,7 +5486,7 @@
       "source": "src/objects/players/tails/sk/flight_and_swim.s",
       "original_line": 195,
       "old": "loc_149DA",
-      "new": "SKTailsFlight_ResolveRollingAirAngleAndTerrainAfterMotion",
+      "new": "SKTailsFly_ResolveAirRollTerrain",
       "profiles": ["sk"],
       "meaning": "Describe ResolveRollingAirAngleAndTerrainAfterMotion."
     },

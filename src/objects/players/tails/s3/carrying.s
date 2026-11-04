@@ -3,39 +3,39 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Tails_Carry_Sonic:
                 tst.b   (a2)
-                beq.w   S3TailsCarry_CountDownPickupInhibitBeforeAcquisition
+                beq.w   S3TailsCarry_TickPickupCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.w   S3TailsCarry_ClearCarriedControlBeforeForcedDetach
+                bhs.w   S3TailsCarry_ClearCarriedControl
                 btst    #Status_InAir,status(a1)
-                beq.w   S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
+                beq.w   S3TailsCarry_SetDropYSpeed
                 move.w  (_unkF744).w,d1
                 cmp.w   x_vel(a1),d1
-                bne.s   S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
+                bne.s   S3TailsCarry_SetDropYSpeed
                 move.w  (_unkF74C).w,d1
                 cmp.w   y_vel(a1),d1
-                bne.s   S3TailsCarry_ClearJumpingOnCarryMotionRelease
+                bne.s   S3TailsCarry_ClearJumpingOnRelease
                 tst.b   object_control(a1)
-                bmi.s   S3TailsCarry_DetachAndArmSixtyCallPickupCooldown
+                bmi.s   S3TailsCarry_DetachAndArmPickupCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment
+                beq.w   S3TailsCarry_SyncRiderPosition
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,1(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   S3TailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease
+                beq.w   S3TailsCarry_ApplyLeftReleaseSpeed
                 move.b  #$3C,1(a2)
 
-S3TailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease:
+S3TailsCarry_ApplyLeftReleaseSpeed:
                 btst    #button_left+8,d0
-                beq.s   S3TailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease
+                beq.s   S3TailsCarry_ApplyRightReleaseSpeed
                 move.w  #-$200,x_vel(a1)
 
-S3TailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease:
+S3TailsCarry_ApplyRightReleaseSpeed:
                 btst    #button_right+8,d0
-                beq.s   S3TailsCarry_LaunchReleasedPlayerIntoRollingJump
+                beq.s   S3TailsCarry_LaunchReleasedRollJump
                 move.w  #$200,x_vel(a1)
 
-S3TailsCarry_LaunchReleasedPlayerIntoRollingJump:
+S3TailsCarry_LaunchReleasedRollJump:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -47,22 +47,23 @@ S3TailsCarry_LaunchReleasedPlayerIntoRollingJump:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch:
+S3TailsCarry_SetDropYSpeed:
                 move.w  #-$100,y_vel(a1)
 
-S3TailsCarry_ClearJumpingOnCarryMotionRelease:
+S3TailsCarry_ClearJumpingOnRelease:
                 move.b  #0,jumping(a1)
 
-S3TailsCarry_ClearCarriedControlBeforeForcedDetach:
+S3TailsCarry_ClearCarriedControl:
                 clr.b   object_control(a1)
 
-S3TailsCarry_DetachAndArmSixtyCallPickupCooldown:
+; Count 60 pickup checks before another attachment attempt
+S3TailsCarry_DetachAndArmPickupCooldown:
                 clr.b   (a2)
                 move.b  #$3C,1(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment:
+S3TailsCarry_SyncRiderPosition:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$1C,y_pos(a1)
@@ -73,18 +74,18 @@ S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment:
                 or.b    d0,render_flags(a1)
                 or.b    d0,status(a1)
                 subq.b  #1,anim_frame_timer(a1)
-                bpl.s   S3TailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain
+                bpl.s   S3TailsCarry_CopySpeedAndProbeTerrain
                 move.b  #$B,anim_frame_timer(a1)
                 moveq   #0,d1
                 move.b  anim_frame(a1),d1
                 addq.b  #1,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns
+                bne.s   S3TailsCarry_StoreFrameAndLoadPatterns
                 move.b  #0,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc),d0
 
-S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns:
+S3TailsCarry_StoreFrameAndLoadPatterns:
                 move.b  d0,mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -92,7 +93,7 @@ S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
 
-S3TailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain:
+S3TailsCarry_CopySpeedAndProbeTerrain:
                 move.w  x_vel(a0),(Player_1+x_vel).w
                 move.w  x_vel(a0),(_unkF744).w
                 move.w  y_vel(a0),(Player_1+y_vel).w
@@ -108,37 +109,37 @@ AniRaw_Tails_Carry:
                 even
 ; ---------------------------------------------------------------------------
 
-S3TailsCarry_CountDownPickupInhibitBeforeAcquisition:
+S3TailsCarry_TickPickupCooldown:
                 tst.b   1(a2)
-                beq.s   S3TailsCarry_TestPickupRelativePositionAndEligibility
+                beq.s   S3TailsCarry_CheckPickupRange
                 subq.b  #1,1(a2)
-                bne.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bne.w   S3TailsCarry_PickupReturn
 
-S3TailsCarry_TestPickupRelativePositionAndEligibility:
+S3TailsCarry_CheckPickupRange:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bhs.w   S3TailsCarry_PickupReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$20,d1
                 cmpi.w  #$10,d1
-                bhs.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bhs.w   S3TailsCarry_PickupReturn
                 tst.b   object_control(a1)
-                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bne.s   S3TailsCarry_PickupReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bhs.s   S3TailsCarry_PickupReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bne.s   S3TailsCarry_PickupReturn
                 tst.b   spin_dash_flag(a1)
-                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
+                bne.s   S3TailsCarry_PickupReturn
                 bsr.s   TailsS3InitializeCarriedPlayerAttachment
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(a2)
 
-S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit:
+S3TailsCarry_PickupReturn:
                 rts
 ; End of function Tails_Carry_Sonic
 

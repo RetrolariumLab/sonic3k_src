@@ -921,9 +921,15 @@
       "commits": ["a88daa2e8b27b30bea2985e454e70431e3ca64cd"]
     },
     {
-      "id": "current-shorten-06b-sonic-animation",
+      "id": "change-639fe97806be",
       "kind": "source_or_tooling",
       "summary": "Shorten 106 Sonic animation and pattern labels with equivalent resource bindings.",
+      "commits": ["639fe97806bee2e32df035822714e4b086ba6932"]
+    },
+    {
+      "id": "current-shorten-07a-tails-ai",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 250 Tails AI, flight, and carry labels and retain both registered carry blocks.",
       "commits": ["release-commit"]
     }
   ],

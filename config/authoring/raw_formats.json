@@ -937,11 +937,11 @@
     },
     {
       "path": "src/objects/players/tails/s3/carrying.s",
-      "sha256": "c2350507dbf161ea376b56e60e6ec0d76d6eef10ec6075415cd21366284c5ef6"
+      "sha256": "ec455419b773c08e37a25534f2b78f717b845cc0b7e57118d9998494119b9c1c"
     },
     {
       "path": "src/objects/players/tails/sk/carrying.s",
-      "sha256": "59610061b86610c1836ca9b0368df9c30cae2e163a3bf80c0d3becc71e986bb2"
+      "sha256": "7675aa3bcd45c16f31b5d9729f577be2d7d5c6c4a69054349684b8fc0971f9ff"
     },
     {
       "path": "src/objects/runtime/s3/attributes_and_children.s",
@@ -4799,8 +4799,8 @@
       "path": "src/objects/players/tails/s3/carrying.s",
       "symbol": "AniRaw_Tails_Carry",
       "scope": "AniRaw_Tails_Carry",
-      "first_line": 106,
-      "last_line": 108,
+      "first_line": 107,
+      "last_line": 109,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 18,
       "declarations_sha256": "fea412d66f31d45b9c636cb3d650f9f0c3a4b17850925aa5c378eaf1a94b6eeb",
@@ -4813,8 +4813,8 @@
       "path": "src/objects/players/tails/sk/carrying.s",
       "symbol": "AniRaw_Tails_Carry",
       "scope": "AniRaw_Tails_Carry",
-      "first_line": 116,
-      "last_line": 118,
+      "first_line": 117,
+      "last_line": 119,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 18,
       "declarations_sha256": "fea412d66f31d45b9c636cb3d650f9f0c3a4b17850925aa5c378eaf1a94b6eeb",

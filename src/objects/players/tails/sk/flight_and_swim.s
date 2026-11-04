@@ -7,48 +7,49 @@
 Tails_Move_FlySwim:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                beq.s   SKTailsFlight_AdvanceActiveFlapOrTestNewFlapRequest
+                beq.s   SKTailsFly_TickFlap
                 tst.b   double_jump_property(a0)
-                beq.s   SKTailsFlight_AdvanceActiveFlapOrTestNewFlapRequest
+                beq.s   SKTailsFly_TickFlap
                 subq.b  #1,double_jump_property(a0)
 
-SKTailsFlight_AdvanceActiveFlapOrTestNewFlapRequest:
+SKTailsFly_TickFlap:
                 cmpi.b  #1,double_jump_flag(a0)
-                beq.s   SKTailsFlight_GateNewFlapByPressedInputBudgetAndCarryState
+                beq.s   SKTailsFly_CheckNewFlap
                 cmpi.w  #-$100,y_vel(a0)
-                blt.s   SKTailsFlight_ResetFlapCounterToWaitingState
+                blt.s   SKTailsFly_ResetFlapToWaiting
                 subi.w  #$20,y_vel(a0)
                 addq.b  #1,double_jump_flag(a0)
                 cmpi.b  #$20,double_jump_flag(a0)
-                bne.s   SKTailsFlight_JoinCeilingAndAnimationAfterActiveFlap
+                bne.s   SKTailsFly_AfterActiveFlap
 
-SKTailsFlight_ResetFlapCounterToWaitingState:
+SKTailsFly_ResetFlapToWaiting:
                 move.b  #1,double_jump_flag(a0)
 
-SKTailsFlight_JoinCeilingAndAnimationAfterActiveFlap:
-                bra.s   SKTailsFlight_ClampUpwardVelocityAtSignedCameraCeiling
+SKTailsFly_AfterActiveFlap:
+                bra.s   SKTailsFly_ClampAscentAtCameraCeiling
 ; ---------------------------------------------------------------------------
 
-SKTailsFlight_GateNewFlapByPressedInputBudgetAndCarryState:
+; A new flap needs a fresh button press and remaining flight budget. Underwater, carrying a rider also blocks it
+SKTailsFly_CheckNewFlap:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck
+                beq.s   SKTailsFly_ApplyWaitingGravity
                 cmpi.w  #-$100,y_vel(a0)
-                blt.s   SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck
+                blt.s   SKTailsFly_ApplyWaitingGravity
                 tst.b   double_jump_property(a0)
-                beq.s   SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck
+                beq.s   SKTailsFly_ApplyWaitingGravity
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKTailsFlight_BeginNewFlapCounterBeforeWaitingGravity
+                beq.s   SKTailsFly_StartFlapCounter
                 tst.b   (Flying_carrying_Sonic_flag).w
-                bne.s   SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck
+                bne.s   SKTailsFly_ApplyWaitingGravity
 
-SKTailsFlight_BeginNewFlapCounterBeforeWaitingGravity:
+SKTailsFly_StartFlapCounter:
                 move.b  #2,double_jump_flag(a0)
 
-SKTailsFlight_AddWaitingFlightGravityBeforeCeilingCheck:
+SKTailsFly_ApplyWaitingGravity:
                 addi.w  #8,y_vel(a0)
 
-SKTailsFlight_ClampUpwardVelocityAtSignedCameraCeiling:
+SKTailsFly_ClampAscentAtCameraCeiling:
                 move.w  (Camera_min_Y_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
@@ -62,69 +63,69 @@ SKTailsFlight_ClampUpwardVelocityAtSignedCameraCeiling:
 
 Tails_Set_Flying_Animation:
                 btst    #Status_Underwater,status(a0)
-                bne.s   SKTailsFlight_SelectSwimAnimationFromStoredVerticalVelocity
+                bne.s   SKTailsFly_PickSwimAnimFromYSpeed
                 moveq   #$20,d0
                 tst.w   (Competition_mode).w
-                bne.s   SKTailsFlight_StoreDryFlightAnimationAndGateFlyingSound
+                bne.s   SKTailsFly_StoreFlightAnimAndCheckSound
                 tst.w   y_vel(a0)
-                bpl.s   SKTailsFlight_OffsetDryFlightAnimationWhenCarrying
+                bpl.s   SKTailsFly_ChooseDryCarryAnim
                 moveq   #$21,d0
 
-SKTailsFlight_OffsetDryFlightAnimationWhenCarrying:
+SKTailsFly_ChooseDryCarryAnim:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   SKTailsFlight_SelectExhaustedDryFlightAndGateTiredSound
+                beq.s   SKTailsFly_CheckTiredFlight
                 addq.b  #2,d0
 
-SKTailsFlight_SelectExhaustedDryFlightAndGateTiredSound:
+SKTailsFly_CheckTiredFlight:
                 tst.b   double_jump_property(a0)
-                bne.s   SKTailsFlight_StoreDryFlightAnimationAndGateFlyingSound
+                bne.s   SKTailsFly_StoreFlightAnimAndCheckSound
                 moveq   #$24,d0
                 move.b  d0,anim(a0)
                 tst.b   render_flags(a0)
-                bpl.s   SKTailsFlight_ReturnAfterExhaustedDryFlightSelection
+                bpl.s   SKTailsFly_TiredFlightReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #8,d0
                 andi.b  #$F,d0
-                bne.s   SKTailsFlight_ReturnAfterExhaustedDryFlightSelection
+                bne.s   SKTailsFly_TiredFlightReturn
                 moveq   #signextendB(sfx_FlyTired),d0
                 jsr     (Play_SFX).l
 
-SKTailsFlight_ReturnAfterExhaustedDryFlightSelection:
+SKTailsFly_TiredFlightReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsFlight_StoreDryFlightAnimationAndGateFlyingSound:
+SKTailsFly_StoreFlightAnimAndCheckSound:
                 move.b  d0,anim(a0)
                 tst.b   render_flags(a0)
-                bpl.s   SKTailsFlight_ReturnAfterDryFlightAnimationAndSoundGate
+                bpl.s   SKTailsFly_DryFlightReturn
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #8,d0
                 andi.b  #$F,d0
-                bne.s   SKTailsFlight_ReturnAfterDryFlightAnimationAndSoundGate
+                bne.s   SKTailsFly_DryFlightReturn
                 moveq   #signextendB(sfx_Flying),d0
                 jsr     (Play_SFX).l
 
-SKTailsFlight_ReturnAfterDryFlightAnimationAndSoundGate:
+SKTailsFly_DryFlightReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsFlight_SelectSwimAnimationFromStoredVerticalVelocity:
+SKTailsFly_PickSwimAnimFromYSpeed:
                 moveq   #$25,d0
                 tst.w   y_vel(a0)
-                bpl.s   SKTailsFlight_OverrideSwimAnimationWhenCarrying
+                bpl.s   SKTailsFly_PickCarrySwimAnim
                 moveq   #$26,d0
 
-SKTailsFlight_OverrideSwimAnimationWhenCarrying:
+SKTailsFly_PickCarrySwimAnim:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   SKTailsFlight_OverrideSwimAnimationWhenBudgetExhausted
+                beq.s   SKTailsFly_PickTiredSwimAnim
                 moveq   #$27,d0
 
-SKTailsFlight_OverrideSwimAnimationWhenBudgetExhausted:
+SKTailsFly_PickTiredSwimAnim:
                 tst.b   double_jump_property(a0)
-                bne.s   SKTailsFlight_CommitSelectedSwimAnimation
+                bne.s   SKTailsFly_StoreSwimAnim
                 moveq   #$28,d0
 
-SKTailsFlight_CommitSelectedSwimAnimation:
+SKTailsFly_StoreSwimAnim:
                 move.b  d0,anim(a0)
                 rts
 ; End of function Tails_Set_Flying_Animation
@@ -133,18 +134,18 @@ SKTailsFlight_CommitSelectedSwimAnimation:
 
 Tails_Spin_Path:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   SKTailsFlight_AttemptRollingGroundJumpAfterCarryRelease
+                beq.s   SKTailsFly_TryGroundRollJump
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-SKTailsFlight_AttemptRollingGroundJumpAfterCarryRelease:
+SKTailsFly_TryGroundRollJump:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKTailsFlight_RunRollingGroundPhysicsAndBackgroundProbe
+                bne.s   SKTailsFly_RunGroundRollAndProbe
                 bsr.w   Tails_Jump
 
-SKTailsFlight_RunRollingGroundPhysicsAndBackgroundProbe:
+SKTailsFly_RunGroundRollAndProbe:
                 bsr.w   Player_RollRepel
                 bsr.w   Tails_RollSpeed
                 bsr.w   Tails_Check_Screen_Boundaries
@@ -152,47 +153,47 @@ SKTailsFlight_RunRollingGroundPhysicsAndBackgroundProbe:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   SKTailsFlight_ReturnAfterRollingGroundStepAndBackgroundChecks
+                beq.s   SKTailsFly_GroundRollReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   SKTailsFlight_ProbeRightBackgroundWallAfterLeftCorrection
+                bpl.s   SKTailsFly_ProbeRightBackgroundWall
                 sub.w   d1,x_pos(a0)
 
-SKTailsFlight_ProbeRightBackgroundWallAfterLeftCorrection:
+SKTailsFly_ProbeRightBackgroundWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   SKTailsFlight_RestoreSavedCollisionRegistersAfterBothSideProbes
+                bpl.s   SKTailsFly_RestoreWallProbeRegisters
                 add.w   d1,x_pos(a0)
 
-SKTailsFlight_RestoreSavedCollisionRegistersAfterBothSideProbes:
+SKTailsFly_RestoreWallProbeRegisters:
                 movem.l (sp)+,a4-a6
 
-SKTailsFlight_ReturnAfterRollingGroundStepAndBackgroundChecks:
+SKTailsFly_GroundRollReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Tails_Spin_Freespace:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   SKTailsFlight_RunRollingAirMotionAfterCarryRelease
+                beq.s   SKTailsFly_RunAirRollMotion
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-SKTailsFlight_RunRollingAirMotionAfterCarryRelease:
+SKTailsFly_RunAirRollMotion:
                 bsr.w   Tails_JumpHeight
                 bsr.w   Tails_InputAcceleration_Freespace
                 bsr.w   Tails_Check_Screen_Boundaries
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKTailsFlight_ResolveRollingAirAngleAndTerrainAfterMotion
+                beq.s   SKTailsFly_ResolveAirRollTerrain
                 subi.w  #$28,y_vel(a0)
 
-SKTailsFlight_ResolveRollingAirAngleAndTerrainAfterMotion:
+SKTailsFly_ResolveAirRollTerrain:
                 bsr.w   Player_JumpAngle
                 bsr.w   Tails_DoLevelCollision
                 rts

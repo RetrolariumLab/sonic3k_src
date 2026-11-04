@@ -28464,7 +28464,7 @@
       "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 418,
+      "physical_lines": 422,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28504,7 +28504,7 @@
       "responsibility": "Follower control dispatch, stage-specific initialization, flying catch-up and normal companion navigation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 404,
+      "physical_lines": 406,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28584,7 +28584,7 @@
       "responsibility": "Sonic carrying attachment, release input, relative position checks and carry-coordinate synchronization.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 175,
+      "physical_lines": 176,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28799,7 +28799,7 @@
       "responsibility": "Tails flight and swimming motion, exhaustion state and flight animation selection.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 190,
+      "physical_lines": 191,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29109,7 +29109,7 @@
       "responsibility": "Follower reset and interaction helpers, idle spindash and level-scripted flight or carrying sequences.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 424,
+      "physical_lines": 428,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29139,7 +29139,7 @@
       "responsibility": "Follower control dispatch, stage-specific initialization, flying catch-up and normal companion navigation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 448,
+      "physical_lines": 450,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29199,7 +29199,7 @@
       "responsibility": "Sonic carrying attachment, release input, relative position checks and carry-coordinate synchronization.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 196,
+      "physical_lines": 197,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29364,7 +29364,7 @@
       "responsibility": "Tails flight and swimming motion, exhaustion state and flight animation selection.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 198,
+      "physical_lines": 199,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
