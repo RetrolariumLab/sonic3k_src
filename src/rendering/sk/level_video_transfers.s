@@ -91,9 +91,9 @@ VInt_DrawLevel_Competition:
                 lea     (VDP_data_port).l,a6
                 lea     (Plane_buffer).w,a0
 
-loc_4E7E4:
+SKCompVInt_TryWritePlanePair:
                 move.w  (a0),d0
-                beq.s   locret_4E7FE
+                beq.s   SKCompVInt_PlanePairReturn
                 clr.w   (a0)+
                 move.w  (a0)+,d1
                 move.w  d0,d2
@@ -103,10 +103,10 @@ loc_4E7E4:
                 add.w   (_unkEEB0).w,d0
                 move.w  d4,d1
                 bsr.s   VInt_VRAMWrite
-                bra.s   loc_4E7E4
+                bra.s   SKCompVInt_TryWritePlanePair
 ; ---------------------------------------------------------------------------
 
-locret_4E7FE:
+SKCompVInt_PlanePairReturn:
                 rts
 ; End of function VInt_DrawLevel_Competition
 
@@ -227,15 +227,16 @@ SpecialVInt_LBZ2WindowClear:
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$900,VRAM,WRITE),(VDP_control_port).l  ; VRAM position $C900
                 moveq   #6-1,d0
 
-loc_4E90C:
+; Replay the same buffered row at each of the six window rows
+SKCompVInt_RestoreWindowRow:
                 lea     (VRAM_buffer).w,a0
                 moveq   #$10-1,d1
 
-loc_4E912:
+SKCompVInt_CopyWindowCellPair:
                 move.l  (a0)+,(a6)
                 move.l  (a0)+,(a6)                      ; Write cell lines back to Scroll A
-                dbf     d1,loc_4E912
-                dbf     d0,loc_4E90C
+                dbf     d1,SKCompVInt_CopyWindowCellPair
+                dbf     d0,SKCompVInt_RestoreWindowRow
                 move.w  #$9200,VDP_control_port-VDP_data_port(a6)  ; VRAM command $9200 - Zero out window position
                 clr.w   (Special_V_int_routine).w
                 rts

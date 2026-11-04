@@ -16,7 +16,7 @@ AnimateTiles_CNZ:
                 sub.w   (Camera_X_pos_BG_copy).w,d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_26FD0
+                beq.s   S3CNZTiles_SkipSlotAndRunScripts
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -27,7 +27,7 @@ AnimateTiles_CNZ:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26FD6(pc,d0.w),a4
+                lea     S3CNZTiles_CyclicSplitWordCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniCNZ__6).l,a0
                 move.w  #tiles_to_bytes($308),d4
                 add.l   a0,d1
@@ -40,14 +40,14 @@ AnimateTiles_CNZ:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_26FD0
+                beq.s   S3CNZTiles_SkipSlotAndRunScripts
                 jsr     (Add_To_DMA_Queue).l
 
-loc_26FD0:
+S3CNZTiles_SkipSlotAndRunScripts:
                 addq.w  #2,a3
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
-word_26FD6:
+S3CNZTiles_CyclicSplitWordCounts:
                 dc.w    $200
                 dc.w    0
                 dc.w    $1C0

@@ -141,7 +141,7 @@ loc_54E86:
                 lea     (HScroll_table).w,a5
                 moveq   #$15,d6
                 moveq   #2,d5
-                jmp     loc_4EDD8(pc)
+                jmp     SKTileDraw_UpdateFgDeformed(pc)
 ; ---------------------------------------------------------------------------
 
 loc_54E9C:

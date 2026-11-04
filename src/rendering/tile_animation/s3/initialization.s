@@ -10,18 +10,18 @@ AnimateTiles_NULL3:
 
 Animate_Init:
                 cmpi.w  #$100,(Current_zone_and_act).w
-                bne.s   loc_278C4
+                bne.s   S3TileInit_SeedHCZ2Caches
                 bsr.w   AniHCZ1_InitWaterlineTiles
 
-loc_278C4:
+S3TileInit_SeedHCZ2Caches:
                 cmpi.w  #$101,(Current_zone_and_act).w
-                bne.s   loc_278D8
+                bne.s   S3TileInit_SeedCarnivalCounterBytes
                 move.b  #$20,(Anim_Counters+1).w
                 move.b  #$40,(Anim_Counters+3).w
 
-loc_278D8:
+S3TileInit_SeedCarnivalCounterBytes:
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_27910
+                bne.s   S3TileInit_SeedLaunchBaseFirstActCache
                 move.b  #$40,(Anim_Counters+1).w
                 move.b  #0,(Anim_Counters+2).w
                 move.b  #0,(Anim_Counters+4).w
@@ -31,29 +31,29 @@ loc_278D8:
                 move.b  #2,(Anim_Counters+$C).w
                 move.b  #1,(Anim_Counters+$E).w
 
-loc_27910:
+S3TileInit_SeedLaunchBaseFirstActCache:
                 cmpi.w  #$600,(Current_zone_and_act).w
-                bne.s   loc_2791E
+                bne.s   S3TileInit_SeedLBZ2Waterline
                 move.b  #$20,(Anim_Counters+3).w
 
-loc_2791E:
+S3TileInit_SeedLBZ2Waterline:
                 cmpi.w  #$601,(Current_zone_and_act).w
-                bne.s   loc_27930
+                bne.s   S3TileInit_DirtyLRZ1Caches
                 bsr.w   AniLBZ2_InitWaterlineTiles
                 move.b  #$10,(Anim_Counters+1).w
 
-loc_27930:
+S3TileInit_DirtyLRZ1Caches:
                 cmpi.w  #$900,(Current_zone_and_act).w
-                bne.s   loc_27944
+                bne.s   S3TileInit_SeedDPZCaches
                 move.b  #-1,(Anim_Counters+1).w
                 move.b  #-1,(Anim_Counters+3).w
 
-loc_27944:
+S3TileInit_SeedDPZCaches:
                 cmpi.w  #$1000,(Current_zone_and_act).w
-                bne.s   locret_27958
+                bne.s   S3TileInit_Return
                 move.b  #$40,(Anim_Counters+1).w
                 move.b  #$40,(Anim_Counters+3).w
 
-locret_27958:
+S3TileInit_Return:
                 rts
 ; End of function Animate_Init

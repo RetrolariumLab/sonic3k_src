@@ -13,12 +13,12 @@ PlainDeformation:
                 neg.w   d0
                 moveq   #bytesToXcnt(H_scroll_buffer_end-H_scroll_buffer,$10),d1
 
-loc_4F086:
+SKDeform_FillPlainScroll:
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
-                dbf     d1,loc_4F086
+                dbf     d1,SKDeform_FillPlainScroll
                 rts
 ; End of function PlainDeformation
 
@@ -33,12 +33,12 @@ PlainDeformation_Flipped:
                 neg.w   d0
                 moveq   #bytesToXcnt(H_scroll_buffer_end-H_scroll_buffer,$10),d1
 
-loc_4F0A8:
+SKDeform_FillFlippedPlainScroll:
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
-                dbf     d1,loc_4F0A8
+                dbf     d1,SKDeform_FillFlippedPlainScroll
                 rts
 ; End of function PlainDeformation_Flipped
 
@@ -47,18 +47,18 @@ loc_4F0A8:
 MakeFGDeformArray:
                 move.w  d1,d0
                 lsr.w   #1,d0
-                bcc.s   loc_4F0C2
+                bcc.s   SKDeform_WriteFgWordSecond
 
-loc_4F0BC:
+SKDeform_WriteFgWordFirst:
                 move.w  (a6)+,d5
                 add.w   d6,d5
                 move.w  d5,(a1)+
 
-loc_4F0C2:
+SKDeform_WriteFgWordSecond:
                 move.w  (a6)+,d5
                 add.w   d6,d5
                 move.w  d5,(a1)+
-                dbf     d0,loc_4F0BC
+                dbf     d0,SKDeform_WriteFgWordFirst
                 rts
 ; End of function MakeFGDeformArray
 
@@ -75,12 +75,12 @@ ApplyDeformation3:
 ApplyDeformation2:
                 move.w  (a4)+,d2
                 smi     d4
-                bpl.s   loc_4F0E8
+                bpl.s   SKDeform_SkipBgSpansToY
                 andi.w  #$7FFF,d2
 
-loc_4F0E8:
+SKDeform_SkipBgSpansToY:
                 sub.w   d2,d0
-                bmi.s   loc_4F0FA
+                bmi.s   SKDeform_SeekDynamicBgSpan
                 addq.w  #2,a5
                 tst.b   d4
                 beq.s   ApplyDeformation2
@@ -90,77 +90,77 @@ loc_4F0E8:
                 bra.s   ApplyDeformation2
 ; ---------------------------------------------------------------------------
 
-loc_4F0FA:
+SKDeform_SeekDynamicBgSpan:
                 tst.b   d4
-                beq.s   loc_4F104
+                beq.s   SKDeform_CapFirstBgSpan
                 add.w   d0,d2
                 add.w   d2,d2
                 adda.w  d2,a5
 
-loc_4F104:
+SKDeform_CapFirstBgSpan:
                 neg.w   d0
                 move.w  d1,d2
                 sub.w   d0,d2
-                bcc.s   loc_4F110
+                bcc.s   SKDeform_PackFgBaseForBgSpan
                 move.w  d1,d0
                 addq.w  #1,d0
 
-loc_4F110:
+SKDeform_PackFgBaseForBgSpan:
                 neg.w   d3
                 swap    d3
 
-loc_4F114:
+SKDeform_InitBgSpanLoopCount:
                 subq.w  #1,d0
 
-loc_4F116:
+SKDeform_PickBgSpanWriter:
                 tst.b   d4
-                beq.s   loc_4F130
+                beq.s   SKDeform_ReadRepeatedBgScroll
                 lsr.w   #1,d0
-                bcc.s   loc_4F124
+                bcc.s   SKDeform_WriteDynamicBgSecond
 
-loc_4F11E:
+SKDeform_WriteDynamicBgFirst:
                 move.w  (a5)+,d3
                 neg.w   d3
                 move.l  d3,(a1)+
 
-loc_4F124:
+SKDeform_WriteDynamicBgSecond:
                 move.w  (a5)+,d3
                 neg.w   d3
                 move.l  d3,(a1)+
-                dbf     d0,loc_4F11E
-                bra.s   loc_4F140
+                dbf     d0,SKDeform_WriteDynamicBgFirst
+                bra.s   SKDeform_TryReadNextBgSpan
 ; ---------------------------------------------------------------------------
 
-loc_4F130:
+SKDeform_ReadRepeatedBgScroll:
                 move.w  (a5)+,d3
                 neg.w   d3
                 lsr.w   #1,d0
-                bcc.s   loc_4F13A
+                bcc.s   SKDeform_WriteRepeatedBgSecond
 
-loc_4F138:
+SKDeform_WriteRepeatedBgFirst:
                 move.l  d3,(a1)+
 
-loc_4F13A:
+SKDeform_WriteRepeatedBgSecond:
                 move.l  d3,(a1)+
-                dbf     d0,loc_4F138
+                dbf     d0,SKDeform_WriteRepeatedBgFirst
 
-loc_4F140:
+SKDeform_TryReadNextBgSpan:
                 tst.w   d2
-                bmi.s   locret_4F158
+                bmi.s   SKDeform_BgSpanReturn
                 move.w  (a4)+,d0
                 smi     d4
-                bpl.s   loc_4F14E
+                bpl.s   SKDeform_CapNextBgSpan
                 andi.w  #$7FFF,d0
 
-loc_4F14E:
+SKDeform_CapNextBgSpan:
                 move.w  d2,d3
                 sub.w   d0,d2
-                bpl.s   loc_4F114
+                bpl.s   SKDeform_InitBgSpanLoopCount
                 move.w  d3,d0
-                bra.s   loc_4F116
+                bra.s   SKDeform_PickBgSpanWriter
 ; ---------------------------------------------------------------------------
 
-locret_4F158:
+SKDeform_BgSpanReturn:
                 rts
 ; End of function ApplyDeformation
 
@@ -175,12 +175,12 @@ ApplyFGDeformation:
 ApplyFGDeformation2:
                 move.w  (a4)+,d2
                 smi     d4
-                bpl.s   loc_4F174
+                bpl.s   SKDeform_SkipFgSpansToY
                 andi.w  #$7FFF,d2
 
-loc_4F174:
+SKDeform_SkipFgSpansToY:
                 sub.w   d2,d0
-                bmi.s   loc_4F186
+                bmi.s   SKDeform_SeekDynamicFgSpan
                 addq.w  #2,a5
                 tst.b   d4
                 beq.s   ApplyFGDeformation2
@@ -190,82 +190,82 @@ loc_4F174:
                 bra.s   ApplyFGDeformation2
 ; ---------------------------------------------------------------------------
 
-loc_4F186:
+SKDeform_SeekDynamicFgSpan:
                 tst.b   d4
-                beq.s   loc_4F190
+                beq.s   SKDeform_CapFirstFgSpan
                 add.w   d0,d2
                 add.w   d2,d2
                 adda.w  d2,a5
 
-loc_4F190:
+SKDeform_CapFirstFgSpan:
                 neg.w   d0
                 move.w  d1,d2
                 sub.w   d0,d2
-                bcc.s   loc_4F19C
+                bcc.s   SKDeform_NegateBgBaseForFgSpan
                 move.w  d1,d0
                 addq.w  #1,d0
 
-loc_4F19C:
+SKDeform_NegateBgBaseForFgSpan:
                 neg.w   d3
 
-loc_4F19E:
+SKDeform_InitFgSpanLoopCount:
                 subq.w  #1,d0
 
-loc_4F1A0:
+SKDeform_PickFgSpanWriter:
                 tst.b   d4
-                beq.s   loc_4F1C2
+                beq.s   SKDeform_ReadRepeatedFgScroll
                 lsr.w   #1,d0
-                bcc.s   loc_4F1B2
+                bcc.s   SKDeform_WriteDynamicFgSecond
 
-loc_4F1A8:
+SKDeform_WriteDynamicFgFirst:
                 swap    d3
                 move.w  (a5)+,d3
                 neg.w   d3
                 swap    d3
                 move.l  d3,(a1)+
 
-loc_4F1B2:
+SKDeform_WriteDynamicFgSecond:
                 swap    d3
                 move.w  (a5)+,d3
                 neg.w   d3
                 swap    d3
                 move.l  d3,(a1)+
-                dbf     d0,loc_4F1A8
-                bra.s   loc_4F1D6
+                dbf     d0,SKDeform_WriteDynamicFgFirst
+                bra.s   SKDeform_TryReadNextFgSpan
 ; ---------------------------------------------------------------------------
 
-loc_4F1C2:
+SKDeform_ReadRepeatedFgScroll:
                 swap    d3
                 move.w  (a5)+,d3
                 neg.w   d3
                 swap    d3
                 lsr.w   #1,d0
-                bcc.s   loc_4F1D0
+                bcc.s   SKDeform_WriteRepeatedFgSecond
 
-loc_4F1CE:
+SKDeform_WriteRepeatedFgFirst:
                 move.l  d3,(a1)+
 
-loc_4F1D0:
+SKDeform_WriteRepeatedFgSecond:
                 move.l  d3,(a1)+
-                dbf     d0,loc_4F1CE
+                dbf     d0,SKDeform_WriteRepeatedFgFirst
 
-loc_4F1D6:
+SKDeform_TryReadNextFgSpan:
                 tst.w   d2
-                bmi.s   locret_4F1EE
+                bmi.s   SKDeform_FgSpanReturn
                 move.w  (a4)+,d0
                 smi     d4
-                bpl.s   loc_4F1E4
+                bpl.s   SKDeform_CapNextFgSpan
                 andi.w  #$7FFF,d0
 
-loc_4F1E4:
+SKDeform_CapNextFgSpan:
                 move.w  d2,d1
                 sub.w   d0,d2
-                bpl.s   loc_4F19E
+                bpl.s   SKDeform_InitFgSpanLoopCount
                 move.w  d1,d0
-                bra.s   loc_4F1A0
+                bra.s   SKDeform_PickFgSpanWriter
 ; ---------------------------------------------------------------------------
 
-locret_4F1EE:
+SKDeform_FgSpanReturn:
                 rts
 ; End of function ApplyFGDeformation
 
@@ -275,50 +275,52 @@ ApplyFGandBGDeformation:
                 swap    d7
                 swap    d3
 
-loc_4F1F4:
+; The sign bit selects a dynamic span. Clear it to obtain the row count
+SKDeform_DecodeCombinedBgSpan:
                 move.w  (a4)+,d3
                 smi     d7
-                bpl.s   loc_4F1FE
+                bpl.s   SKDeform_SkipCombinedSpansToY
                 andi.w  #$7FFF,d3
 
-loc_4F1FE:
+SKDeform_SkipCombinedSpansToY:
                 sub.w   d3,d0
-                bmi.s   loc_4F210
+                bmi.s   SKDeform_SeekDynamicCombinedSpan
                 addq.w  #2,a5
                 tst.b   d7
-                beq.s   loc_4F1F4
+                beq.s   SKDeform_DecodeCombinedBgSpan
                 subq.w  #2,a5
                 add.w   d3,d3
                 adda.w  d3,a5
-                bra.s   loc_4F1F4
+                bra.s   SKDeform_DecodeCombinedBgSpan
 ; ---------------------------------------------------------------------------
 
-loc_4F210:
+SKDeform_SeekDynamicCombinedSpan:
                 tst.b   d7
-                beq.s   loc_4F21A
+                beq.s   SKDeform_CapFirstCombinedSpan
                 add.w   d0,d3
                 add.w   d3,d3
                 adda.w  d3,a5
 
-loc_4F21A:
+; Restore the saved low word of d3 before calculating the remaining rows
+SKDeform_CapFirstCombinedSpan:
                 swap    d3
                 neg.w   d0
                 move.w  d1,d4
                 sub.w   d0,d4
-                bcc.s   loc_4F228
+                bcc.s   SKDeform_InitCombinedLoopCount
                 move.w  d1,d0
                 addq.w  #1,d0
 
-loc_4F228:
+SKDeform_InitCombinedLoopCount:
                 subq.w  #1,d0
 
-loc_4F22A:
+SKDeform_PickCombinedSpanWriter:
                 tst.b   d7
-                beq.s   loc_4F250
+                beq.s   SKDeform_ReadCombinedBgBase
                 lsr.w   #1,d0
-                bcc.s   loc_4F23E
+                bcc.s   SKDeform_WriteDynamicCombinedSecond
 
-loc_4F232:
+SKDeform_WriteDynamicCombinedFirst:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a5)+,d6
@@ -326,55 +328,55 @@ loc_4F232:
                 add.w   (a6)+,d6
                 move.l  d6,(a1)+
 
-loc_4F23E:
+SKDeform_WriteDynamicCombinedSecond:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a5)+,d6
                 neg.w   d6
                 add.w   (a6)+,d6
                 move.l  d6,(a1)+
-                dbf     d0,loc_4F232
-                bra.s   loc_4F270
+                dbf     d0,SKDeform_WriteDynamicCombinedFirst
+                bra.s   SKDeform_TryReadNextCombinedSpan
 ; ---------------------------------------------------------------------------
 
-loc_4F250:
+SKDeform_ReadCombinedBgBase:
                 move.w  (a5)+,d5
                 neg.w   d5
                 lsr.w   #1,d0
-                bcc.s   loc_4F262
+                bcc.s   SKDeform_WriteConstantCombinedSecond
 
-loc_4F258:
+SKDeform_WriteConstantCombinedFirst:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a6)+,d6
                 add.w   d5,d6
                 move.l  d6,(a1)+
 
-loc_4F262:
+SKDeform_WriteConstantCombinedSecond:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a6)+,d6
                 add.w   d5,d6
                 move.l  d6,(a1)+
-                dbf     d0,loc_4F258
+                dbf     d0,SKDeform_WriteConstantCombinedFirst
 
-loc_4F270:
+SKDeform_TryReadNextCombinedSpan:
                 tst.w   d4
-                bmi.s   loc_4F288
+                bmi.s   SKDeform_RestorePlaneAndReturn
                 move.w  (a4)+,d0
                 smi     d7
-                bpl.s   loc_4F27E
+                bpl.s   SKDeform_CapNextCombinedSpan
                 andi.w  #$7FFF,d0
 
-loc_4F27E:
+SKDeform_CapNextCombinedSpan:
                 move.w  d4,d5
                 sub.w   d0,d4
-                bpl.s   loc_4F228
+                bpl.s   SKDeform_InitCombinedLoopCount
                 move.w  d5,d0
-                bra.s   loc_4F22A
+                bra.s   SKDeform_PickCombinedSpanWriter
 ; ---------------------------------------------------------------------------
 
-loc_4F288:
+SKDeform_RestorePlaneAndReturn:
                 swap    d7
                 rts
 
@@ -386,45 +388,45 @@ Apply_FGVScroll:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  d0,d2
                 andi.w  #$F,d2
-                beq.s   loc_4F2A4
+                beq.s   SKDeform_CameraXToBlockColumn
                 addi.w  #$10,d0
 
-loc_4F2A4:
+SKDeform_CameraXToBlockColumn:
                 lsr.w   #4,d0
 
-loc_4F2A6:
+SKDeform_FindVScrollSpan:
                 addq.w  #2,a5
                 move.w  (a4)+,d2
                 lsr.w   #4,d2
                 sub.w   d2,d0
-                bpl.s   loc_4F2A6
+                bpl.s   SKDeform_FindVScrollSpan
                 neg.w   d0
                 moveq   #$13,d2
                 sub.w   d0,d2
-                bcc.s   loc_4F2BA
+                bcc.s   SKDeform_InitVScrollLoopCount
                 moveq   #$14,d0
 
-loc_4F2BA:
+SKDeform_InitVScrollLoopCount:
                 subq.w  #1,d0
 
-loc_4F2BC:
+SKDeform_ReadFgVScroll:
                 move.w  (a5)+,d3
 
-loc_4F2BE:
+SKDeform_WriteVScrollPair:
                 move.w  d3,(a1)+
                 move.w  d1,(a1)+
-                dbf     d0,loc_4F2BE
+                dbf     d0,SKDeform_WriteVScrollPair
                 tst.w   d2
-                bmi.s   locret_4F2D8
+                bmi.s   SKDeform_VScrollReturn
                 move.w  (a4)+,d0
                 lsr.w   #4,d0
                 move.w  d2,d3
                 sub.w   d0,d2
-                bpl.s   loc_4F2BA
+                bpl.s   SKDeform_InitVScrollLoopCount
                 move.w  d3,d0
-                bra.s   loc_4F2BC
+                bra.s   SKDeform_ReadFgVScroll
 ; ---------------------------------------------------------------------------
 
-locret_4F2D8:
+SKDeform_VScrollReturn:
                 rts
 ; End of function Apply_FGVScroll

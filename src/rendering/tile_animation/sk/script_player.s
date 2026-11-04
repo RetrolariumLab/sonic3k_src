@@ -7,7 +7,8 @@
 AnimateTiles_DoAniPLC:
                 lea     (Anim_Counters).w,a3
 
-loc_286E8:
+; Use the existing counter cursor in a3 and return for an empty list
+SKTileScripts_RunAtCounter:
                 move.w  (a2)+,d6                        ; Get number of scripts in list
                 bpl.s   AnimateTiles_DoAniPLC_Part2     ; If there are any, continue
                 rts

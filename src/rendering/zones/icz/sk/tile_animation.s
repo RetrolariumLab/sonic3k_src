@@ -111,7 +111,7 @@ loc_27D32:
 
 loc_27DF8:
                 addq.w  #2,a3
-                bra.w   loc_286E8
+                bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 ; unused
                 rts

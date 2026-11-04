@@ -80,12 +80,12 @@ loc_271F6:
                 move.w  #0,(a3)
 
 loc_27208:
-                bsr.w   loc_275F0
+                bsr.w   S3TileScripts_RunAtCounter
 
 loc_2720C:
                 lea     (Anim_Counters+$C).w,a3
                 lea     (AniPLC_LBZSpec).l,a2
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 word_2721A:
                 dc.w    $140
@@ -135,7 +135,7 @@ loc_27294:
                 addq.w  #2,a3
                 bsr.s   AniLBZ2_UpdateWaterlineTiles
                 addq.w  #4,a3
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 
 loc_2729E:

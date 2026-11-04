@@ -127,7 +127,7 @@ loc_28364:
 
 loc_283CC:
                 addq.w  #2,a3
-                bra.w   loc_286E8
+                bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 word_283D2:
                 dc.w    $C0

@@ -371,7 +371,7 @@ loc_26EDA:
 
 loc_26F40:
                 addq.w  #2,a3
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 word_26F46:
                 dc.w    $300

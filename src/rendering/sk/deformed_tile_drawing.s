@@ -15,13 +15,14 @@ Get_DeformDrawPosVert:
 
 FindVerticalDeformationBand:
                 cmp.w   d2,d0
-                bmi.s   loc_4EE98
+                bmi.s   SKTileDraw_ReturnBandHScroll
                 add.w   (a4)+,d2
                 addq.w  #4,a5
                 bra.s   FindVerticalDeformationBand
 ; ---------------------------------------------------------------------------
 
-loc_4EE98:
+; Return the selected scroll word in the upper half of d1
+SKTileDraw_ReturnBandHScroll:
                 move.w  (a5),d1
                 swap    d1
                 rts
@@ -37,7 +38,7 @@ DrawTilesVDeform:
                 jsr     Draw_TileColumn2(pc)
                 movem.l (sp)+,d5/a4/a6
                 move.w  (Camera_X_pos_rounded).w,d6
-                bra.s   loc_4EED8
+                bra.s   SKTileDraw_SeedRowBandX
 
 ; ---------------------------------------------------------------------------
 
@@ -50,29 +51,29 @@ DrawTilesVDeform2:
                 movem.l (sp)+,d5/a4/a6
                 move.w  (Camera_X_pos_BG_rounded).w,d6
 
-loc_4EED8:
+SKTileDraw_SeedRowBandX:
                 move.w  d6,d1
 
-loc_4EEDA:
+SKTileDraw_SkipOffscreenRowBands:
                 sub.w   (a4)+,d6
-                bcs.s   loc_4EEEA
+                bcs.s   SKTileDraw_CalcFirstVisibleRowWidth
                 move.w  (a6)+,d0
                 and.w   (Camera_Y_pos_mask).w,d0
                 move.w  d0,(a6)+
                 subq.w  #1,d5
-                bra.s   loc_4EEDA
+                bra.s   SKTileDraw_SkipOffscreenRowBands
 ; ---------------------------------------------------------------------------
 
-loc_4EEEA:
+SKTileDraw_CalcFirstVisibleRowWidth:
                 neg.w   d6
                 lsr.w   #4,d6
                 moveq   #$15,d4
                 sub.w   d6,d4
-                bcc.s   loc_4EEF8
+                bcc.s   SKTileDraw_DrawVisibleBandRow
                 moveq   #0,d4
                 moveq   #$15,d6
 
-loc_4EEF8:
+SKTileDraw_DrawVisibleBandRow:
                 movem.w d1/d4-d6,-(sp)
                 movem.l a4/a6,-(sp)
                 lea     2(a6),a5
@@ -81,7 +82,7 @@ loc_4EEF8:
                 movem.w (sp)+,d1/d4-d6
                 addq.w  #4,a6
                 tst.w   d4
-                beq.s   loc_4EF2C
+                beq.s   SKTileDraw_SyncHiddenBandY
                 lsl.w   #4,d6
                 add.w   d6,d1
                 subq.w  #1,d5
@@ -89,22 +90,22 @@ loc_4EEF8:
                 lsr.w   #4,d6
                 move.w  d4,d0
                 sub.w   d6,d4
-                bcc.s   loc_4EEF8
+                bcc.s   SKTileDraw_DrawVisibleBandRow
                 move.w  d0,d6
                 moveq   #0,d4
-                bra.s   loc_4EEF8
+                bra.s   SKTileDraw_DrawVisibleBandRow
 ; ---------------------------------------------------------------------------
 
-loc_4EF2C:
+SKTileDraw_SyncHiddenBandY:
                 subq.w  #1,d5
-                beq.s   locret_4EF3A
+                beq.s   SKTileDraw_DeformedRowsReturn
                 move.w  (a6)+,d0
                 and.w   (Camera_Y_pos_mask).w,d0
                 move.w  d0,(a6)+
-                bra.s   loc_4EF2C
+                bra.s   SKTileDraw_SyncHiddenBandY
 ; ---------------------------------------------------------------------------
 
-locret_4EF3A:
+SKTileDraw_DeformedRowsReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -120,13 +121,14 @@ Get_XDeformRange:
 
 FindHorizontalDeformationBand:
                 cmp.w   d2,d0
-                blo.s   loc_4EF50
+                blo.s   SKTileDraw_ReturnBandVScroll
                 add.w   (a4)+,d2
                 addq.w  #4,a5
                 bra.s   FindHorizontalDeformationBand
 ; ---------------------------------------------------------------------------
 
-loc_4EF50:
+; Return the selected scroll word in the upper half of d1
+SKTileDraw_ReturnBandVScroll:
                 move.w  (a5),d1
                 swap    d1
                 rts
@@ -151,13 +153,14 @@ Draw_PlaneVertSingleBottomUp:
                 and.w   (Camera_Y_pos_mask).w,d3
                 move.w  (Draw_delayed_position).w,d0
                 cmp.w   d2,d0
-                blo.s   loc_4EF84
+                blo.s   SKTileDraw_AdvanceBottomUp
                 cmp.w   d3,d0
-                bhi.s   loc_4EF84
+                bhi.s   SKTileDraw_AdvanceBottomUp
                 moveq   #$20,d6
                 jsr     Setup_TileRowDraw(pc)
 
-loc_4EF84:
+; Return the row counter's condition codes for the caller's continuation check
+SKTileDraw_AdvanceBottomUp:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
@@ -172,13 +175,13 @@ Draw_PlaneVertTopDown:
                 and.w   (Camera_Y_pos_mask).w,d3
                 move.w  (Draw_delayed_position).w,d0
                 cmp.w   d2,d0
-                blo.s   loc_4EFB0
+                blo.s   SKTileDraw_AdvanceTopDown
                 cmp.w   d3,d0
-                bhi.s   loc_4EFB0
+                bhi.s   SKTileDraw_AdvanceTopDown
                 moveq   #$20,d6
                 jsr     Setup_TileRowDraw(pc)
 
-loc_4EFB0:
+SKTileDraw_AdvanceTopDown:
                 addi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
@@ -203,13 +206,13 @@ DrawPlaneRightToLeftStep:
                 andi.w  #$FFF0,d3
                 move.w  (Draw_delayed_position).w,d0
                 cmp.w   d2,d0
-                blo.s   loc_4EFEA
+                blo.s   SKTileDraw_AdvanceRightToLeft
                 cmp.w   d3,d0
-                bhi.s   loc_4EFEA
+                bhi.s   SKTileDraw_AdvanceRightToLeft
                 moveq   #$10,d6
                 jsr     Setup_TileColumnDraw(pc)
 
-loc_4EFEA:
+SKTileDraw_AdvanceRightToLeft:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
@@ -234,13 +237,13 @@ DrawPlaneLeftToRightStep:
                 andi.w  #$FFF0,d3
                 move.w  (Draw_delayed_position).w,d0
                 cmp.w   d2,d0
-                blo.s   loc_4F024
+                blo.s   SKTileDraw_AdvanceLeftToRight
                 cmp.w   d3,d0
-                bhi.s   loc_4F024
+                bhi.s   SKTileDraw_AdvanceLeftToRight
                 moveq   #$10,d6
                 jsr     Setup_TileColumnDraw(pc)
 
-loc_4F024:
+SKTileDraw_AdvanceLeftToRight:
                 addi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts
@@ -265,19 +268,20 @@ DrawDeformedPlaneBottomUpStep:
                 and.w   (Camera_Y_pos_mask).w,d2
                 move.w  (Draw_delayed_position).w,d0
                 cmp.w   d1,d0
-                blo.s   loc_4F066
+                blo.s   SKTileDraw_AdvanceDeformedBottomUp
                 cmp.w   d2,d0
-                bhi.s   loc_4F066
+                bhi.s   SKTileDraw_AdvanceDeformedBottomUp
 
-loc_4F058:
+SKTileDraw_FindRedrawScroll:
                 addq.w  #4,a5
                 cmp.w   (a4)+,d0
-                bpl.s   loc_4F058
+                bpl.s   SKTileDraw_FindRedrawScroll
                 move.w  (a5),d1
                 moveq   #$20,d6
                 jsr     Setup_TileRowDraw(pc)
 
-loc_4F066:
+; Return the row counter's condition codes for the caller's continuation check
+SKTileDraw_AdvanceDeformedBottomUp:
                 subi.w  #$10,(Draw_delayed_position).w
                 subq.w  #1,(Draw_delayed_rowcount).w
                 rts

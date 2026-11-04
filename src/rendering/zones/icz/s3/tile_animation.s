@@ -111,7 +111,7 @@ loc_2706C:
 
 loc_27132:
                 addq.w  #2,a3
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 ; unused
                 rts

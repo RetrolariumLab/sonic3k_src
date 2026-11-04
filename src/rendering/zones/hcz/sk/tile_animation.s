@@ -371,7 +371,7 @@ loc_27BA0:
 
 loc_27C06:
                 addq.w  #2,a3
-                bra.w   loc_286E8
+                bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 word_27C0C:
                 dc.w    $300

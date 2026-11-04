@@ -1,0 +1,2647 @@
+{
+  "schema_version": 1,
+  "packet": "17-tile-rendering",
+  "mappings": [
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 16,
+      "old": "loc_39E66",
+      "new": "S3Deform_FillPlainScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_FillPlainScrollBufferFourForegroundBackgroundLongsPerIteration"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 32,
+      "old": "loc_39E7A",
+      "new": "S3Deform_WriteFgWordFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteFirstBiasedForegroundWordOfUnrolledPair"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 37,
+      "old": "loc_39E80",
+      "new": "S3Deform_WriteFgWordSecond",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteSecondBiasedForegroundWordAndLoopPairs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 61,
+      "old": "loc_39EA6",
+      "new": "S3Deform_SkipBgSpansToY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_SkipBackgroundSpansToStartingVerticalOffset"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 73,
+      "old": "loc_39EB8",
+      "new": "S3Deform_SeekDynamicBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_AdvanceDynamicBackgroundReaderToPartialSpanStart"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 80,
+      "old": "loc_39EC2",
+      "new": "S3Deform_CapFirstBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_LimitFirstBackgroundSpanToRequestedRowCount"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 88,
+      "old": "loc_39ECE",
+      "new": "S3Deform_PackFgBaseForBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_PackNegatedForegroundBaseForBackgroundSpanOutputs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 92,
+      "old": "loc_39ED2",
+      "new": "S3Deform_InitBgSpanLoopCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ConvertBackgroundSpanRowCountToLoopCountMinusOne"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 95,
+      "old": "loc_39ED4",
+      "new": "S3Deform_PickBgSpanWriter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ChooseDynamicOrRepeatedBackgroundSpanWriter"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 101,
+      "old": "loc_39EDC",
+      "new": "S3Deform_WriteDynamicBgFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteFirstDynamicBackgroundLongOfPair"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 106,
+      "old": "loc_39EE2",
+      "new": "S3Deform_WriteDynamicBgSecond",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteSecondDynamicBackgroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 114,
+      "old": "loc_39EEE",
+      "new": "S3Deform_ReadRepeatedBgScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReadOneRepeatedBackgroundScrollForCurrentSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 120,
+      "old": "loc_39EF6",
+      "new": "S3Deform_WriteRepeatedBgFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteFirstRepeatedBackgroundScrollLongOfPair"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 123,
+      "old": "loc_39EF8",
+      "new": "S3Deform_WriteRepeatedBgSecond",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteSecondRepeatedBackgroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 127,
+      "old": "loc_39EFE",
+      "new": "S3Deform_TryReadNextBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReadNextBackgroundSpanOrReturnWhenRowsExhausted"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 135,
+      "old": "loc_39F0C",
+      "new": "S3Deform_CapNextBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_LimitNextBackgroundSpanToRemainingRows"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 143,
+      "old": "locret_39F16",
+      "new": "S3Deform_BgSpanReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReturnAfterBackgroundDeformationRowRequest"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 153,
+      "old": "loc_39F1C",
+      "new": "S3Deform_DecodeCombinedBgSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_DecodeCombinedBackgroundSpanSignAndLength"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 159,
+      "old": "loc_39F26",
+      "new": "S3Deform_SkipCombinedSpansToY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_SkipCombinedSpansToStartingVerticalOffset"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 171,
+      "old": "loc_39F38",
+      "new": "S3Deform_SeekDynamicCombinedSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_AdvanceCombinedDynamicBackgroundReaderToPartialSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 178,
+      "old": "loc_39F42",
+      "new": "S3Deform_CapFirstCombinedSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_RestoreSavedD3LowAndLimitFirstCombinedSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 187,
+      "old": "loc_39F50",
+      "new": "S3Deform_InitCombinedLoopCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ConvertCombinedSpanCountToLoopCountMinusOne"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 190,
+      "old": "loc_39F52",
+      "new": "S3Deform_PickCombinedSpanWriter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ChooseDynamicOrConstantBaseCombinedScrollWriter"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 196,
+      "old": "loc_39F5A",
+      "new": "S3Deform_WriteDynamicCombinedFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteFirstDynamicCombinedForegroundBackgroundLong"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 204,
+      "old": "loc_39F66",
+      "new": "S3Deform_WriteDynamicCombinedSecond",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteSecondDynamicCombinedLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 215,
+      "old": "loc_39F78",
+      "new": "S3Deform_ReadCombinedBgBase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReadNegatedConstantBackgroundBaseForCombinedSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 221,
+      "old": "loc_39F80",
+      "new": "S3Deform_WriteConstantCombinedFirst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteFirstConstantBaseCombinedScrollLong"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 228,
+      "old": "loc_39F8A",
+      "new": "S3Deform_WriteConstantCombinedSecond",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_WriteSecondConstantBaseCombinedLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 236,
+      "old": "loc_39F98",
+      "new": "S3Deform_TryReadNextCombinedSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReadNextCombinedSpanOrRestorePlaneWhenRowsExhausted"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 244,
+      "old": "loc_39FA6",
+      "new": "S3Deform_CapNextCombinedSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_LimitNextCombinedSpanToRemainingRowCount"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 252,
+      "old": "loc_39FB0",
+      "new": "S3Deform_RestorePlaneAndReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_RestorePlaneWordAndReturnFromCombinedDeformation"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 267,
+      "old": "loc_39FCC",
+      "new": "S3Deform_CameraXToBlockColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_QuantizeForegroundCameraXAfterNativePartialColumnAdjustment"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 270,
+      "old": "loc_39FCE",
+      "new": "S3Deform_FindVScrollSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_FindVerticalScrollSpanBySixteenPixelWidthsAndPreadvanceSource"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 282,
+      "old": "loc_39FE2",
+      "new": "S3Deform_InitVScrollLoopCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ConvertVerticalScrollSpanColumnsToCountMinusOne"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 285,
+      "old": "loc_39FE4",
+      "new": "S3Deform_ReadFgVScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReadForegroundVerticalWordForCurrentHorizontalSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 288,
+      "old": "loc_39FE6",
+      "new": "S3Deform_WriteVScrollPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_RepeatForegroundBackgroundVerticalPairAndAdvanceSpan"
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "original_line": 303,
+      "old": "locret_3A000",
+      "new": "S3Deform_VScrollReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3DeformCore_ReturnAfterForegroundVerticalScrollPairOutput"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 24,
+      "old": "loc_39D18",
+      "new": "S3TileDraw_ReturnBandHScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnSelectedHorizontalScrollWordInPackedEdgeRegister"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 53,
+      "old": "loc_39D58",
+      "new": "S3TileDraw_SeedRowBandX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SeedSourceXForVisibleHorizontalBandRowScan"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 56,
+      "old": "loc_39D5A",
+      "new": "S3TileDraw_SkipOffscreenRowBands",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SkipHorizontalSpansAndSynchronizeOffscreenRoundedY"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 66,
+      "old": "loc_39D6A",
+      "new": "S3TileDraw_CalcFirstVisibleRowWidth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ComputeFirstVisibleBandRowWidthWithTwentyOneBlockCap"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 75,
+      "old": "loc_39D78",
+      "new": "S3TileDraw_DrawVisibleBandRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_DrawRowForOneVisibleHorizontalBandThenSelectNext"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 98,
+      "old": "loc_39DAC",
+      "new": "S3TileDraw_SyncHiddenBandY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SynchronizeRemainingInvisibleBandRoundedYPartners"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 107,
+      "old": "locret_39DBA",
+      "new": "S3TileDraw_DeformedRowsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnFromVerticallyDeformedTileRowDrawing"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 129,
+      "old": "loc_39DD0",
+      "new": "S3TileDraw_ReturnBandVScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnSelectedVerticalScrollWordInPackedEdgeRegister"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 160,
+      "old": "loc_39E04",
+      "new": "S3TileDraw_AdvanceBottomUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_RetireBottomUpRowAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 189,
+      "old": "loc_39E38",
+      "new": "S3TileDraw_FindRedrawScroll",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SelectComplexRedrawScrollBySeparateThresholdWords"
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "original_line": 197,
+      "old": "loc_39E46",
+      "new": "S3TileDraw_AdvanceDeformedBottomUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_RetireComplexBottomUpAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "original_line": 88,
+      "old": "loc_3969A",
+      "new": "S3CompVInt_TryWritePlanePair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionVInt_ConsumePlaneRequestAndWritePairedCopies"
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "original_line": 103,
+      "old": "locret_396B4",
+      "new": "S3CompVInt_PlanePairReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionVInt_ReturnAtEmptyCompetitionPlaneToken"
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "original_line": 224,
+      "old": "loc_397C2",
+      "new": "S3CompVInt_RestoreWindowRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionVInt_RestartBufferedWindowLineForSixRows"
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "original_line": 228,
+      "old": "loc_397C8",
+      "new": "S3CompVInt_CopyWindowCellPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CompetitionVInt_CopyTwoLongwordsPerWindowRestoreStep"
+    },
+    {
+      "source": "src/rendering/s3/menu_transfers.s",
+      "original_line": 126,
+      "old": "loc_B5DE",
+      "new": "S3MenuDepth_CompareAndSwapA1A2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3MenuDepth_CompareSecondAndThirdCharacterDepthPointers"
+    },
+    {
+      "source": "src/rendering/s3/menu_transfers.s",
+      "original_line": 132,
+      "old": "locret_B5EA",
+      "new": "S3MenuDepth_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3MenuDepth_ReturnAfterDepthPointerCompareSwapPass"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 27,
+      "old": "loc_39B82",
+      "new": "S3TileDraw_FindFullRowBand",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_FindCumulativeHorizontalScrollBandForFullPlaneRows"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 35,
+      "old": "loc_39B8C",
+      "new": "S3TileDraw_UploadFullBandRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_UploadSixteenDeformedPlaneRowsUsingSelectedScrollWord"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 53,
+      "old": "loc_39BAE",
+      "new": "S3TileDraw_FindFullColumnBand",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_FindCumulativeVerticalScrollBandForDirectPlaneColumns"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 61,
+      "old": "loc_39BB8",
+      "new": "S3TileDraw_UploadFullBandColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_UploadThirtyTwoDeformedPlaneColumnsUsingSelectedScrollWord"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 89,
+      "old": "loc_39BFE",
+      "new": "S3TileDraw_UploadScreenRows",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_UploadFifteenDirectScreenRowsWithFixedTwentyOneBlockWidth"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 155,
+      "old": "loc_39CA2",
+      "new": "S3TileDraw_SkipOffscreenColumnBands",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SkipVerticalBandsAndSynchronizeOffscreenRoundedX"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 165,
+      "old": "loc_39CB2",
+      "new": "S3TileDraw_CalcFirstVisibleColumnHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ComputeFirstVisibleBandColumnHeightWithFifteenBlockCap"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 174,
+      "old": "loc_39CC0",
+      "new": "S3TileDraw_DrawVisibleBandColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_DrawColumnForOneVisibleVerticalBandThenSelectNext"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 197,
+      "old": "loc_39CF4",
+      "new": "S3TileDraw_SyncHiddenBandX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SynchronizeRemainingInvisibleBandRoundedXPartners"
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "original_line": 206,
+      "old": "locret_39D02",
+      "new": "S3TileDraw_BandedColumnsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnFromBandedBackgroundColumnDrawing"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 21,
+      "old": "loc_397FE",
+      "new": "S3TileDraw_PickColumnUpdateCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ChooseOneOrTwoColumnUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 51,
+      "old": "loc_39842",
+      "new": "S3TileDraw_PickDeformedColumnCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ChooseOneOrTwoDeformedColumnUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 99,
+      "old": "loc_398B2",
+      "new": "S3TileDraw_SplitColumnAtWrap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SplitColumnCommandAtNameTableVerticalWrap"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 133,
+      "old": "loc_39900",
+      "new": "S3TileDraw_SavePlaneWord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SavePlaneWordBeforeColumnTilePayloadAssembly"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 136,
+      "old": "loc_39902",
+      "new": "S3TileDraw_PackColumnBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_AssembleTwoColumnTileLongsFromBlockRecordAndVerticalFlip"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 155,
+      "old": "loc_3993A",
+      "new": "S3TileDraw_TryFlipColumnH",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ApplyHorizontalFlipToPackedColumnTileLongs"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 162,
+      "old": "loc_3994E",
+      "new": "S3TileDraw_AppendColumnBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_AppendColumnLongPairsAndAdvanceWithinOrAcrossChunkRows"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 172,
+      "old": "loc_39964",
+      "new": "S3TileDraw_NextColumnBlockOrEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_LoopColumnBlocksThenRestorePlaneWordAndTerminateBuffer"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 177,
+      "old": "locret_3996C",
+      "new": "S3TileDraw_ColumnUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnAfterColumnNoMovementOrPayloadCompletion"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 217,
+      "old": "loc_399B0",
+      "new": "S3TileDraw_PickRowUpdateCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ChooseOneOrTwoRowUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 249,
+      "old": "loc_399FC",
+      "new": "S3TileDraw_PickDeformedRowCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ChooseOneOrTwoDeformedRowUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 297,
+      "old": "loc_39A68",
+      "new": "S3TileDraw_SplitRowAtWrap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SplitRowCommandAtNameTableHorizontalWrap"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 329,
+      "old": "loc_39AA8",
+      "new": "S3TileDraw_PackRowBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_AssembleTopBottomTileRowLongsAndApplyVerticalFlip"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 342,
+      "old": "loc_39AD0",
+      "new": "S3TileDraw_TryFlipRowH",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ApplyHorizontalFlipToPackedTopBottomTileRows"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 350,
+      "old": "loc_39AE6",
+      "new": "S3TileDraw_AppendRowBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_AppendRowLongPairsAndAdvanceWithinOrAcrossChunkColumns"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 359,
+      "old": "loc_39AF6",
+      "new": "S3TileDraw_NextRowBlockOrEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_LoopRowBlocksThenAppendZeroAddressStop"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 363,
+      "old": "locret_39AFC",
+      "new": "S3TileDraw_RowUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_ReturnAfterRowNoMovementOrPayloadCompletion"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 401,
+      "old": "loc_39B3A",
+      "new": "S3TileDraw_PickCompRowPitch32",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_SelectShiftFiveCompetitionDestinationPitchAndMask"
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "original_line": 405,
+      "old": "loc_39B40",
+      "new": "S3TileDraw_BuildCompRowHeader",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3RenderCore_BuildCompetitionRowHeaderAndReuseOrdinaryTilePayload"
+    },
+    {
+      "source": "src/rendering/s3/vram_dma.s",
+      "original_line": 19,
+      "old": "loc_177C",
+      "new": "S3PlaneMap_BeginRowForSixtyFourCellPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3PlaneMap_BeginRowForSixtyFourCellPlane"
+    },
+    {
+      "source": "src/rendering/s3/vram_dma.s",
+      "original_line": 23,
+      "old": "loc_1782",
+      "new": "S3PlaneMap_CopyRow64",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3PlaneMap_CopyTileWordsForSixtyFourCellPlaneRow"
+    },
+    {
+      "source": "src/rendering/s3/vram_dma.s",
+      "original_line": 46,
+      "old": "loc_179C",
+      "new": "S3PlaneMap_BeginRow128",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3PlaneMap_BeginRowForOneHundredTwentyEightCellPlane"
+    },
+    {
+      "source": "src/rendering/s3/vram_dma.s",
+      "original_line": 50,
+      "old": "loc_17A2",
+      "new": "S3PlaneMap_CopyTileWordsForWidePlaneRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3PlaneMap_CopyTileWordsForWidePlaneRow"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 16,
+      "old": "loc_4F086",
+      "new": "SKDeform_FillPlainScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_FillPlainScrollBufferFourForegroundBackgroundLongsPerIteration"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 36,
+      "old": "loc_4F0A8",
+      "new": "SKDeform_FillFlippedPlainScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_FillFlippedPlainScrollBufferFourLongsPerIteration"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 52,
+      "old": "loc_4F0BC",
+      "new": "SKDeform_WriteFgWordFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstBiasedForegroundWordOfUnrolledPair"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 57,
+      "old": "loc_4F0C2",
+      "new": "SKDeform_WriteFgWordSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondBiasedForegroundWordAndLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 81,
+      "old": "loc_4F0E8",
+      "new": "SKDeform_SkipBgSpansToY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_SkipBackgroundSpansToStartingVerticalOffset"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 93,
+      "old": "loc_4F0FA",
+      "new": "SKDeform_SeekDynamicBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_AdvanceDynamicBackgroundReaderToPartialSpanStart"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 100,
+      "old": "loc_4F104",
+      "new": "SKDeform_CapFirstBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_LimitFirstBackgroundSpanToRequestedRowCount"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 108,
+      "old": "loc_4F110",
+      "new": "SKDeform_PackFgBaseForBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_PackNegatedForegroundBaseForBackgroundSpanOutputs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 112,
+      "old": "loc_4F114",
+      "new": "SKDeform_InitBgSpanLoopCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ConvertBackgroundSpanRowCountToLoopCountMinusOne"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 115,
+      "old": "loc_4F116",
+      "new": "SKDeform_PickBgSpanWriter",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ChooseDynamicOrRepeatedBackgroundSpanWriter"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 121,
+      "old": "loc_4F11E",
+      "new": "SKDeform_WriteDynamicBgFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstDynamicBackgroundLongOfPair"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 126,
+      "old": "loc_4F124",
+      "new": "SKDeform_WriteDynamicBgSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondDynamicBackgroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 134,
+      "old": "loc_4F130",
+      "new": "SKDeform_ReadRepeatedBgScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadOneRepeatedBackgroundScrollForCurrentSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 140,
+      "old": "loc_4F138",
+      "new": "SKDeform_WriteRepeatedBgFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstRepeatedBackgroundScrollLongOfPair"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 143,
+      "old": "loc_4F13A",
+      "new": "SKDeform_WriteRepeatedBgSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondRepeatedBackgroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 147,
+      "old": "loc_4F140",
+      "new": "SKDeform_TryReadNextBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadNextBackgroundSpanOrReturnWhenRowsExhausted"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 155,
+      "old": "loc_4F14E",
+      "new": "SKDeform_CapNextBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_LimitNextBackgroundSpanToRemainingRows"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 163,
+      "old": "locret_4F158",
+      "new": "SKDeform_BgSpanReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReturnAfterBackgroundDeformationRowRequest"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 181,
+      "old": "loc_4F174",
+      "new": "SKDeform_SkipFgSpansToY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_SkipForegroundSpansToStartingVerticalOffset"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 193,
+      "old": "loc_4F186",
+      "new": "SKDeform_SeekDynamicFgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_AdvanceDynamicForegroundReaderToPartialSpanStart"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 200,
+      "old": "loc_4F190",
+      "new": "SKDeform_CapFirstFgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_LimitFirstForegroundSpanToRequestedRows"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 208,
+      "old": "loc_4F19C",
+      "new": "SKDeform_NegateBgBaseForFgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_NegateBackgroundBaseForForegroundSpanOutputs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 211,
+      "old": "loc_4F19E",
+      "new": "SKDeform_InitFgSpanLoopCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ConvertForegroundSpanRowsToLoopCountMinusOne"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 214,
+      "old": "loc_4F1A0",
+      "new": "SKDeform_PickFgSpanWriter",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ChooseDynamicOrRepeatedForegroundSpanWriter"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 220,
+      "old": "loc_4F1A8",
+      "new": "SKDeform_WriteDynamicFgFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstDynamicForegroundScrollLongOfPair"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 227,
+      "old": "loc_4F1B2",
+      "new": "SKDeform_WriteDynamicFgSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondDynamicForegroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 237,
+      "old": "loc_4F1C2",
+      "new": "SKDeform_ReadRepeatedFgScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadOneRepeatedForegroundScrollForCurrentSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 245,
+      "old": "loc_4F1CE",
+      "new": "SKDeform_WriteRepeatedFgFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstRepeatedForegroundScrollLongOfPair"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 248,
+      "old": "loc_4F1D0",
+      "new": "SKDeform_WriteRepeatedFgSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondRepeatedForegroundLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 252,
+      "old": "loc_4F1D6",
+      "new": "SKDeform_TryReadNextFgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadNextForegroundSpanOrReturnWhenRowsExhausted"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 260,
+      "old": "loc_4F1E4",
+      "new": "SKDeform_CapNextFgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_LimitNextForegroundSpanToRemainingRows"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 268,
+      "old": "locret_4F1EE",
+      "new": "SKDeform_FgSpanReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReturnAfterForegroundDeformationRowRequest"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 278,
+      "old": "loc_4F1F4",
+      "new": "SKDeform_DecodeCombinedBgSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_DecodeCombinedBackgroundSpanSignAndLength"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 284,
+      "old": "loc_4F1FE",
+      "new": "SKDeform_SkipCombinedSpansToY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_SkipCombinedSpansToStartingVerticalOffset"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 296,
+      "old": "loc_4F210",
+      "new": "SKDeform_SeekDynamicCombinedSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_AdvanceCombinedDynamicBackgroundReaderToPartialSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 303,
+      "old": "loc_4F21A",
+      "new": "SKDeform_CapFirstCombinedSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_RestoreSavedD3LowAndLimitFirstCombinedSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 312,
+      "old": "loc_4F228",
+      "new": "SKDeform_InitCombinedLoopCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ConvertCombinedSpanCountToLoopCountMinusOne"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 315,
+      "old": "loc_4F22A",
+      "new": "SKDeform_PickCombinedSpanWriter",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ChooseDynamicOrConstantBaseCombinedScrollWriter"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 321,
+      "old": "loc_4F232",
+      "new": "SKDeform_WriteDynamicCombinedFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstDynamicCombinedForegroundBackgroundLong"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 329,
+      "old": "loc_4F23E",
+      "new": "SKDeform_WriteDynamicCombinedSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondDynamicCombinedLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 340,
+      "old": "loc_4F250",
+      "new": "SKDeform_ReadCombinedBgBase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadNegatedConstantBackgroundBaseForCombinedSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 346,
+      "old": "loc_4F258",
+      "new": "SKDeform_WriteConstantCombinedFirst",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteFirstConstantBaseCombinedScrollLong"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 353,
+      "old": "loc_4F262",
+      "new": "SKDeform_WriteConstantCombinedSecond",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_WriteSecondConstantBaseCombinedLongThenLoopPairs"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 361,
+      "old": "loc_4F270",
+      "new": "SKDeform_TryReadNextCombinedSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadNextCombinedSpanOrRestorePlaneWhenRowsExhausted"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 369,
+      "old": "loc_4F27E",
+      "new": "SKDeform_CapNextCombinedSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_LimitNextCombinedSpanToRemainingRowCount"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 377,
+      "old": "loc_4F288",
+      "new": "SKDeform_RestorePlaneAndReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_RestorePlaneWordAndReturnFromCombinedDeformation"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 392,
+      "old": "loc_4F2A4",
+      "new": "SKDeform_CameraXToBlockColumn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_QuantizeForegroundCameraXAfterNativePartialColumnAdjustment"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 395,
+      "old": "loc_4F2A6",
+      "new": "SKDeform_FindVScrollSpan",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_FindVerticalScrollSpanBySixteenPixelWidthsAndPreadvanceSource"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 407,
+      "old": "loc_4F2BA",
+      "new": "SKDeform_InitVScrollLoopCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ConvertVerticalScrollSpanColumnsToCountMinusOne"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 410,
+      "old": "loc_4F2BC",
+      "new": "SKDeform_ReadFgVScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReadForegroundVerticalWordForCurrentHorizontalSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 413,
+      "old": "loc_4F2BE",
+      "new": "SKDeform_WriteVScrollPair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_RepeatForegroundBackgroundVerticalPairAndAdvanceSpan"
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "original_line": 428,
+      "old": "locret_4F2D8",
+      "new": "SKDeform_VScrollReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDeformCore_ReturnAfterForegroundVerticalScrollPairOutput"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 24,
+      "old": "loc_4EE98",
+      "new": "SKTileDraw_ReturnBandHScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnSelectedHorizontalScrollWordInPackedEdgeRegister"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 53,
+      "old": "loc_4EED8",
+      "new": "SKTileDraw_SeedRowBandX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SeedSourceXForVisibleHorizontalBandRowScan"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 56,
+      "old": "loc_4EEDA",
+      "new": "SKTileDraw_SkipOffscreenRowBands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SkipHorizontalSpansAndSynchronizeOffscreenRoundedY"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 66,
+      "old": "loc_4EEEA",
+      "new": "SKTileDraw_CalcFirstVisibleRowWidth",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ComputeFirstVisibleBandRowWidthWithTwentyOneBlockCap"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 75,
+      "old": "loc_4EEF8",
+      "new": "SKTileDraw_DrawVisibleBandRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_DrawRowForOneVisibleHorizontalBandThenSelectNext"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 98,
+      "old": "loc_4EF2C",
+      "new": "SKTileDraw_SyncHiddenBandY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SynchronizeRemainingInvisibleBandRoundedYPartners"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 107,
+      "old": "locret_4EF3A",
+      "new": "SKTileDraw_DeformedRowsReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnFromVerticallyDeformedTileRowDrawing"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 129,
+      "old": "loc_4EF50",
+      "new": "SKTileDraw_ReturnBandVScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnSelectedVerticalScrollWordInPackedEdgeRegister"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 160,
+      "old": "loc_4EF84",
+      "new": "SKTileDraw_AdvanceBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_RetireBottomUpRowAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 181,
+      "old": "loc_4EFB0",
+      "new": "SKTileDraw_AdvanceTopDown",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_RetireTopDownRowAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 212,
+      "old": "loc_4EFEA",
+      "new": "SKTileDraw_AdvanceRightToLeft",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_RetireRightToLeftColumnAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 243,
+      "old": "loc_4F024",
+      "new": "SKTileDraw_AdvanceLeftToRight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_RetireLeftToRightColumnAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 272,
+      "old": "loc_4F058",
+      "new": "SKTileDraw_FindRedrawScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SelectComplexRedrawScrollBySeparateThresholdWords"
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "original_line": 280,
+      "old": "loc_4F066",
+      "new": "SKTileDraw_AdvanceDeformedBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_RetireComplexBottomUpAttemptAndReturnCountConditionCodes"
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "original_line": 94,
+      "old": "loc_4E7E4",
+      "new": "SKCompVInt_TryWritePlanePair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionVInt_ConsumePlaneRequestAndWritePairedCopies"
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "original_line": 109,
+      "old": "locret_4E7FE",
+      "new": "SKCompVInt_PlanePairReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionVInt_ReturnAtEmptyCompetitionPlaneToken"
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "original_line": 230,
+      "old": "loc_4E90C",
+      "new": "SKCompVInt_RestoreWindowRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionVInt_RestartBufferedWindowLineForSixRows"
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "original_line": 234,
+      "old": "loc_4E912",
+      "new": "SKCompVInt_CopyWindowCellPair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCompetitionVInt_CopyTwoLongwordsPerWindowRestoreStep"
+    },
+    {
+      "source": "src/rendering/sk/menu_transfers.s",
+      "original_line": 126,
+      "old": "loc_C0F6",
+      "new": "SKMenuDepth_CompareAndSwapA1A2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMenuDepth_CompareSecondAndThirdCharacterDepthPointers"
+    },
+    {
+      "source": "src/rendering/sk/menu_transfers.s",
+      "original_line": 132,
+      "old": "locret_C102",
+      "new": "SKMenuDepth_Return",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKMenuDepth_ReturnAfterDepthPointerCompareSwapPass"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 27,
+      "old": "loc_4ECF0",
+      "new": "SKTileDraw_FindFullRowBand",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_FindCumulativeHorizontalScrollBandForFullPlaneRows"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 35,
+      "old": "loc_4ECFA",
+      "new": "SKTileDraw_UploadFullBandRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_UploadSixteenDeformedPlaneRowsUsingSelectedScrollWord"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 53,
+      "old": "loc_4ED1C",
+      "new": "SKTileDraw_FindFullColumnBand",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_FindCumulativeVerticalScrollBandForDirectPlaneColumns"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 61,
+      "old": "loc_4ED26",
+      "new": "SKTileDraw_UploadFullBandColumn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_UploadThirtyTwoDeformedPlaneColumnsUsingSelectedScrollWord"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 99,
+      "old": "loc_4ED72",
+      "new": "SKTileDraw_UploadDirectRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_UploadFifteenDirectPlaneRowsWithCallerSelectedWidth"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 141,
+      "old": "loc_4EDD8",
+      "new": "SKTileDraw_UpdateFgDeformed",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_UpdateForegroundDeformedRowThenJoinBandedColumnDrawing"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 169,
+      "old": "loc_4EE22",
+      "new": "SKTileDraw_SkipOffscreenColumnBands",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SkipVerticalBandsAndSynchronizeOffscreenRoundedX"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 179,
+      "old": "loc_4EE32",
+      "new": "SKTileDraw_CalcFirstVisibleColumnHeight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ComputeFirstVisibleBandColumnHeightWithFifteenBlockCap"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 188,
+      "old": "loc_4EE40",
+      "new": "SKTileDraw_DrawVisibleBandColumn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_DrawColumnForOneVisibleVerticalBandThenSelectNext"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 211,
+      "old": "loc_4EE74",
+      "new": "SKTileDraw_SyncHiddenBandX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SynchronizeRemainingInvisibleBandRoundedXPartners"
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "original_line": 220,
+      "old": "locret_4EE82",
+      "new": "SKTileDraw_BandedColumnsReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnFromBandedBackgroundColumnDrawing"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 21,
+      "old": "loc_4E948",
+      "new": "SKTileDraw_PickColumnUpdateCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ChooseOneOrTwoColumnUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 51,
+      "old": "loc_4E98C",
+      "new": "SKTileDraw_PickDeformedColumnCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ChooseOneOrTwoDeformedColumnUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 99,
+      "old": "loc_4E9FC",
+      "new": "SKTileDraw_SplitColumnAtWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SplitColumnCommandAtNameTableVerticalWrap"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 136,
+      "old": "loc_4EA4C",
+      "new": "SKTileDraw_PackColumnBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_AssembleTwoColumnTileLongsFromBlockRecordAndVerticalFlip"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 155,
+      "old": "loc_4EA84",
+      "new": "SKTileDraw_TryFlipColumnH",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ApplyHorizontalFlipToPackedColumnTileLongs"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 162,
+      "old": "loc_4EA98",
+      "new": "SKTileDraw_AppendColumnBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_AppendColumnLongPairsAndAdvanceWithinOrAcrossChunkRows"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 172,
+      "old": "loc_4EAAE",
+      "new": "SKTileDraw_NextColumnBlockOrEnd",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_LoopColumnBlocksThenRestorePlaneWordAndTerminateBuffer"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 177,
+      "old": "locret_4EAB6",
+      "new": "SKTileDraw_ColumnUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnAfterColumnNoMovementOrPayloadCompletion"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 217,
+      "old": "loc_4EAFA",
+      "new": "SKTileDraw_PickRowUpdateCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ChooseOneOrTwoRowUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 249,
+      "old": "loc_4EB46",
+      "new": "SKTileDraw_PickDeformedRowCount",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ChooseOneOrTwoDeformedRowUpdatesFromMaskedDelta"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 297,
+      "old": "loc_4EBB2",
+      "new": "SKTileDraw_SplitRowAtWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SplitRowCommandAtNameTableHorizontalWrap"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 329,
+      "old": "loc_4EBF2",
+      "new": "SKTileDraw_PackRowBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_AssembleTopBottomTileRowLongsAndApplyVerticalFlip"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 342,
+      "old": "loc_4EC1A",
+      "new": "SKTileDraw_TryFlipRowH",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ApplyHorizontalFlipToPackedTopBottomTileRows"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 350,
+      "old": "loc_4EC30",
+      "new": "SKTileDraw_AppendRowBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_AppendRowLongPairsAndAdvanceWithinOrAcrossChunkColumns"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 359,
+      "old": "loc_4EC40",
+      "new": "SKTileDraw_NextRowBlockOrEnd",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_LoopRowBlocksThenAppendZeroAddressStop"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 363,
+      "old": "locret_4EC46",
+      "new": "SKTileDraw_RowUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_ReturnAfterRowNoMovementOrPayloadCompletion"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 401,
+      "old": "loc_4EC84",
+      "new": "SKTileDraw_PickCompRowPitch32",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_SelectShiftFiveCompetitionDestinationPitchAndMask"
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "original_line": 405,
+      "old": "loc_4EC8A",
+      "new": "SKTileDraw_BuildCompRowHeader",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKRenderCore_BuildCompetitionRowHeaderAndReuseOrdinaryTilePayload"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "original_line": 40,
+      "old": "loc_27530",
+      "new": "S3DPZTiles_AdvanceToP2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3OtherTiles_AdvanceFromFirstPlayerDesertBandToSecond"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "original_line": 44,
+      "old": "word_27534",
+      "new": "S3DPZTiles_CyclicSplitWordCounts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3OtherTiles_DesertTwoPlayerEightSplitWordCountPairs"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "original_line": 63,
+      "old": "loc_27554",
+      "new": "S3DPZTiles_UpdateP2Band",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3OtherTiles_UpdateSecondPlayerDesertCyclicBand"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "original_line": 96,
+      "old": "loc_275B0",
+      "new": "S3DPZTiles_RunRemainingScripts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3OtherTiles_AdvancePastBothDesertSlotsAndRunScripts"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "original_line": 117,
+      "old": "locret_275EA",
+      "new": "S3GumballTiles_UpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3OtherTiles_ReturnFromGumballPhaseUpdate"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 16,
+      "old": "loc_278C4",
+      "new": "S3TileInit_SeedHCZ2Caches",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_SeedHydrocitySecondActPhaseCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 22,
+      "old": "loc_278D8",
+      "new": "S3TileInit_SeedCarnivalCounterBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_SeedCarnivalCounterBytes"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 34,
+      "old": "loc_27910",
+      "new": "S3TileInit_SeedLaunchBaseFirstActCache",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_SeedLaunchBaseFirstActCache"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 39,
+      "old": "loc_2791E",
+      "new": "S3TileInit_SeedLBZ2Waterline",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_InitializeLaunchBaseSecondActWaterlineAndFrame"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 45,
+      "old": "loc_27930",
+      "new": "S3TileInit_DirtyLRZ1Caches",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_DirtyLegacyLavaReefFirstActCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 51,
+      "old": "loc_27944",
+      "new": "S3TileInit_SeedDPZCaches",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_DirtyBothDesertCompetitionCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "original_line": 57,
+      "old": "locret_27958",
+      "new": "S3TileInit_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileInit_ReturnAfterConditionalCounterInitialization"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/marble_and_carnival.s",
+      "original_line": 46,
+      "old": "loc_26FD0",
+      "new": "S3CNZTiles_SkipSlotAndRunScripts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3CNZTiles_AdvancePastCyclicSlotAndRunScripts"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/marble_and_carnival.s",
+      "original_line": 50,
+      "old": "word_26FD6",
+      "new": "S3CNZTiles_CyclicSplitWordCounts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3CNZTiles_EightCyclicSplitWordCountPairs"
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/script_player.s",
+      "original_line": 10,
+      "old": "loc_275F0",
+      "new": "S3TileScripts_RunAtCounter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TileScripts_RunAniPlcListWithExistingCounterCursor"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 40,
+      "old": "loc_28442",
+      "new": "SKDPZTiles_AdvanceToP2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_AdvanceDPZFirstPlayerCacheToSecondPlayerCyclicRow"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 44,
+      "old": "word_28446",
+      "new": "SKDPZTiles_CyclicSplitWordCounts",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCustomTileAnimation_DPZEightCyclicRowSplitWordCountPairs"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 63,
+      "old": "loc_28466",
+      "new": "SKDPZTiles_UpdateP2Band",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_UpdateDPZSecondPlayerCyclicBackgroundTiles"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 96,
+      "old": "loc_284C2",
+      "new": "SKDPZTiles_RunRemainingScripts",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_RunDPZRemainingScriptsAfterTwoProceduralSlots"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 117,
+      "old": "locret_284FC",
+      "new": "SKGumballTiles_UpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ReturnAfterGumballCachedScrollTileUpdate"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 134,
+      "old": "loc_2852E",
+      "new": "SKPachinkoTiles_BeginBaseRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_BeginOneOfThreePachinkoDuplicatedBaseRows"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 137,
+      "old": "loc_28530",
+      "new": "SKPachinkoTiles_CopyBaseBlock",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_CopyThirtyTwoLongwordsPerBaseBlockAndSkipDuplicatedSourceHalf"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 149,
+      "old": "loc_2858A",
+      "new": "SKPachinkoTiles_BeginGap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_BeginFourInterpolatedTilesForOnePachinkoRowGap"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 152,
+      "old": "loc_2858C",
+      "new": "SKPachinkoTiles_PickBlendSources",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SelectPairedBaseBlocksForEightLongwordNibbleBlend"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 161,
+      "old": "loc_285A2",
+      "new": "SKPachinkoTiles_BlendGapTile",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_BlendEightLongwordsWithMovingNibbleBoundary"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 179,
+      "old": "word_285CE",
+      "new": "SKPachinkoTiles_PrimaryBlendOffsets",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCustomTileAnimation_PachinkoLeadingFourPrimaryBlendSourceOffsets"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 184,
+      "old": "word_285D6",
+      "new": "SKPachinkoTiles_SecondaryBlendOffsets",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCustomTileAnimation_PachinkoTwelveSecondaryAndSharedPrimaryBlendOffsets"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 199,
+      "old": "loc_285EE",
+      "new": "SKPachinkoTiles_CompositeNextSlice",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_CompositeOneOfThreePachinkoRecoloredSlicesAndAdvancePhase"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 210,
+      "old": "loc_28610",
+      "new": "SKPachinkoTiles_QueueFinishedImage",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_QueueCompletedThreeSlicePachinkoBackgroundImage"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 216,
+      "old": "loc_28624",
+      "new": "SKPachinkoTiles_RunStandardScripts",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_RunPachinkoStandardScriptsAfterCustomStage"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 221,
+      "old": "byte_28632",
+      "new": "SKPachinkoTiles_RecolorParams",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCustomTileAnimation_PachinkoThreeFourByteNibbleRecolorParameterRecords"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 259,
+      "old": "loc_28672",
+      "new": "SKPachinkoTiles_AddMainOverlay",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_OverlayFirstFiveHundredTwelveSourceBytesWithAdditiveNibbleColors"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 269,
+      "old": "loc_28686",
+      "new": "SKPachinkoTiles_AddMainLowNibble",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_OverlayAdditiveLowNibbleInFirstPachinkoRegion"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 276,
+      "old": "loc_28694",
+      "new": "SKPachinkoTiles_NextMainByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_AdvanceFirstOverlayByteThenPrepareOneHundredTwentyEightSpecialBytes"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 281,
+      "old": "loc_2869E",
+      "new": "SKPachinkoTiles_RecolorSpecialByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_OverlaySpecialRegionHighNibbleBySignedColorClass"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 294,
+      "old": "loc_286B6",
+      "new": "SKPachinkoTiles_SubtractHighColor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SubtractSpecialHighNibbleColorParameter"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 299,
+      "old": "loc_286BE",
+      "new": "SKPachinkoTiles_RecolorSpecialLow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ChooseLowNibbleAddOrSubtractForSpecialRegion"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 310,
+      "old": "loc_286D4",
+      "new": "SKPachinkoTiles_SubtractLowColor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SubtractSpecialLowNibbleColorParameter"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "original_line": 315,
+      "old": "loc_286DC",
+      "new": "SKPachinkoTiles_NextSpecialByte",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_AdvanceSpecialOverlayByteAndReturnAfterSlice"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 16,
+      "old": "loc_28C8C",
+      "new": "SKTileInit_SeedHCZ2Caches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SeedHCZActTwoFirstTwoDirtyScrollCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 22,
+      "old": "loc_28CA0",
+      "new": "SKTileInit_SeedCNZCounters",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_InitializeCNZInterleavedAnimationCounterBytes"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 34,
+      "old": "loc_28CD8",
+      "new": "SKTileInit_SeedLBZ1Scroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ForceInitialLBZActOneRelativeScrollUpdate"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 39,
+      "old": "loc_28CE6",
+      "new": "SKTileInit_SeedLBZ2Waterline",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_InitializeLBZActTwoWaterlineAndSeedOldArtFrameSixteen"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 45,
+      "old": "loc_28CF8",
+      "new": "SKTileInit_SeedMHZCaches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SeedMHZTwoActIndependentDirtyCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 51,
+      "old": "loc_28D0C",
+      "new": "SKTileInit_DirtySOZCache",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ForceSOZInitialFirstCacheUpdate"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 56,
+      "old": "loc_28D1A",
+      "new": "SKTileInit_DirtyLRZ1Caches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ForceLRZActOneInitialTwoCacheUpdates"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 62,
+      "old": "loc_28D2E",
+      "new": "SKTileInit_SeedDPZCaches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_SeedDPZActZeroBothPlayerScrollCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 68,
+      "old": "loc_28D42",
+      "new": "SKTileInit_LoadPachinkoArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_DecompressPachinkoArtAndPrepareDuplicatedBaseSeed"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 81,
+      "old": "loc_28D7C",
+      "new": "SKTileInit_BeginPachinkoRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_BeginOneOfTwelveDuplicatedPachinkoSeedRows"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 84,
+      "old": "loc_28D7E",
+      "new": "SKTileInit_DuplicatePachinkoLong",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_DuplicateEachSeedLongwordIntoTwoRowHalves"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 94,
+      "old": "loc_28DA2",
+      "new": "SKTileInit_DirtyLRZ3Caches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ForceLRZThirdActInitialTwoScrollCaches"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "original_line": 100,
+      "old": "locret_28DB6",
+      "new": "SKTileInit_Return",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCustomTileAnimation_ReturnAfterZoneSpecificAnimationInitialization"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/marble_and_carnival.s",
+      "original_line": 46,
+      "old": "loc_27C96",
+      "new": "SKCNZTiles_SkipSlotAndRunScripts",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKCNZTiles_AdvancePastCyclicSlotAndRunScripts"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/marble_and_carnival.s",
+      "original_line": 50,
+      "old": "word_27C9C",
+      "new": "SKCNZTiles_CyclicSplitWordCounts",
+      "profiles": ["sk"],
+      "meaning": "Data structure: SKCNZTiles_EightCyclicSplitWordCountPairs"
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/script_player.s",
+      "original_line": 10,
+      "old": "loc_286E8",
+      "new": "SKTileScripts_RunAtCounter",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTileScripts_RunAniPlcListWithExistingCounterCursor"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "tokens": [[111, 1, 164, ""]]
+    },
+    {
+      "source": "src/rendering/s3/deformation_operators.s",
+      "tokens": [
+        [9, 0, 0, ""],
+        [14, 3, 0, ""],
+        [19, 1, 2, ""],
+        [20, 0, 1, ""],
+        [24, 0, 2, ""],
+        [28, 3, 1, ""],
+        [39, 1, 3, ""],
+        [41, 0, 3, ""],
+        [43, 1, 4, ""],
+        [51, 0, 4, ""],
+        [53, 1, 5, ""],
+        [57, 0, 5, ""],
+        [61, 1, 6, ""],
+        [64, 0, 6, ""],
+        [67, 0, 7, ""],
+        [69, 0, 8, ""],
+        [71, 1, 11, ""],
+        [73, 1, 10, ""],
+        [74, 0, 9, ""],
+        [78, 0, 10, ""],
+        [82, 3, 9, ""],
+        [83, 1, 14, ""],
+        [84, 0, 11, ""],
+        [88, 1, 13, ""],
+        [89, 0, 12, ""],
+        [91, 0, 13, ""],
+        [93, 3, 12, ""],
+        [94, 0, 14, ""],
+        [96, 1, 16, ""],
+        [99, 1, 15, ""],
+        [101, 0, 15, ""],
+        [104, 1, 7, ""],
+        [106, 1, 8, ""],
+        [107, 0, 16, ""],
+        [112, 0, 17, ""],
+        [115, 1, 18, ""],
+        [117, 0, 18, ""],
+        [119, 1, 19, ""],
+        [122, 1, 17, ""],
+        [126, 1, 17, ""],
+        [127, 0, 19, ""],
+        [129, 1, 20, ""],
+        [133, 0, 20, ""],
+        [138, 1, 21, ""],
+        [141, 0, 21, ""],
+        [143, 0, 22, ""],
+        [145, 1, 25, ""],
+        [147, 1, 24, ""],
+        [148, 0, 23, ""],
+        [155, 0, 24, ""],
+        [162, 3, 23, ""],
+        [163, 1, 28, ""],
+        [164, 0, 25, ""],
+        [168, 1, 27, ""],
+        [169, 0, 26, ""],
+        [175, 0, 27, ""],
+        [181, 3, 26, ""],
+        [182, 0, 28, ""],
+        [184, 1, 30, ""],
+        [187, 1, 29, ""],
+        [189, 0, 29, ""],
+        [192, 1, 21, ""],
+        [194, 1, 22, ""],
+        [195, 0, 30, ""],
+        [204, 1, 31, ""],
+        [206, 0, 31, ""],
+        [208, 0, 32, ""],
+        [213, 1, 32, ""],
+        [217, 1, 33, ""],
+        [219, 0, 33, ""],
+        [221, 0, 34, ""],
+        [223, 0, 35, ""],
+        [226, 3, 35, ""],
+        [228, 1, 36, ""],
+        [233, 1, 33, ""],
+        [235, 1, 34, ""],
+        [236, 0, 36, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/deformed_tile_drawing.s",
+      "tokens": [
+        [8, 1, 37, ""],
+        [12, 0, 37, ""],
+        [24, 1, 38, ""],
+        [33, 0, 38, ""],
+        [35, 0, 39, ""],
+        [37, 1, 40, ""],
+        [42, 1, 39, ""],
+        [43, 0, 40, ""],
+        [48, 1, 41, ""],
+        [51, 0, 41, ""],
+        [60, 1, 42, ""],
+        [68, 1, 41, ""],
+        [71, 1, 41, ""],
+        [72, 0, 42, ""],
+        [74, 1, 43, ""],
+        [78, 1, 42, ""],
+        [79, 0, 43, ""],
+        [88, 1, 44, ""],
+        [92, 0, 44, ""],
+        [109, 1, 45, ""],
+        [111, 1, 45, ""],
+        [114, 0, 45, ""],
+        [131, 1, 47, ""],
+        [133, 1, 47, ""],
+        [134, 0, 46, ""],
+        [137, 1, 46, ""],
+        [141, 0, 47, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "tokens": [
+        [58, 0, 48, ""],
+        [60, 1, 49, ""],
+        [70, 1, 48, ""],
+        [71, 0, 49, ""],
+        [159, 0, 50, ""],
+        [162, 0, 51, ""],
+        [165, 3, 51, ""],
+        [166, 3, 50, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/menu_transfers.s",
+      "tokens": [
+        [85, 1, 52, ""],
+        [87, 0, 52, ""],
+        [90, 1, 53, ""],
+        [92, 0, 53, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/plane_refresh.s",
+      "tokens": [
+        [15, 0, 54, ""],
+        [17, 1, 55, ""],
+        [20, 1, 54, ""],
+        [21, 0, 55, ""],
+        [29, 3, 54, ""],
+        [34, 0, 56, ""],
+        [36, 1, 57, ""],
+        [39, 1, 56, ""],
+        [40, 0, 57, ""],
+        [48, 3, 56, ""],
+        [63, 0, 58, ""],
+        [70, 3, 58, ""],
+        [113, 0, 59, ""],
+        [115, 1, 60, ""],
+        [120, 1, 59, ""],
+        [121, 0, 60, ""],
+        [126, 1, 61, ""],
+        [129, 0, 61, ""],
+        [138, 1, 62, ""],
+        [146, 1, 61, ""],
+        [149, 1, 61, ""],
+        [150, 0, 62, ""],
+        [152, 1, 63, ""],
+        [156, 1, 62, ""],
+        [157, 0, 63, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "tokens": [
+        [8, 1, 72, ""],
+        [10, 1, 64, ""],
+        [14, 0, 64, ""],
+        [22, 1, 72, ""],
+        [32, 1, 72, ""],
+        [34, 1, 65, ""],
+        [39, 0, 65, ""],
+        [47, 1, 72, ""],
+        [64, 1, 66, ""],
+        [80, 1, 67, ""],
+        [81, 0, 66, ""],
+        [99, 1, 67, ""],
+        [114, 0, 67, ""],
+        [116, 0, 68, ""],
+        [129, 1, 69, ""],
+        [134, 0, 69, ""],
+        [136, 1, 70, ""],
+        [140, 0, 70, ""],
+        [145, 1, 71, ""],
+        [149, 0, 71, ""],
+        [150, 3, 68, ""],
+        [153, 0, 72, ""],
+        [177, 1, 80, ""],
+        [179, 1, 73, ""],
+        [184, 0, 73, ""],
+        [192, 1, 80, ""],
+        [203, 1, 80, ""],
+        [205, 1, 74, ""],
+        [211, 0, 74, ""],
+        [219, 1, 80, ""],
+        [237, 1, 75, ""],
+        [252, 1, 76, ""],
+        [253, 0, 75, ""],
+        [270, 1, 76, ""],
+        [284, 0, 76, ""],
+        [292, 1, 77, ""],
+        [296, 0, 77, ""],
+        [298, 1, 78, ""],
+        [303, 0, 78, ""],
+        [308, 1, 79, ""],
+        [311, 0, 79, ""],
+        [312, 3, 76, ""],
+        [314, 0, 80, ""],
+        [337, 1, 81, ""],
+        [340, 1, 82, ""],
+        [341, 0, 81, ""],
+        [344, 0, 82, ""],
+        [358, 1, 76, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/vram_dma.s",
+      "tokens": [
+        [4, 0, 83, ""],
+        [7, 0, 84, ""],
+        [9, 3, 84, ""],
+        [11, 3, 83, ""],
+        [16, 0, 85, ""],
+        [19, 0, 86, ""],
+        [21, 3, 86, ""],
+        [23, 3, 85, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/deformation_operators.s",
+      "tokens": [
+        [9, 0, 87, ""],
+        [14, 3, 87, ""],
+        [24, 0, 88, ""],
+        [29, 3, 88, ""],
+        [34, 1, 90, ""],
+        [35, 0, 89, ""],
+        [39, 0, 90, ""],
+        [43, 3, 89, ""],
+        [54, 1, 91, ""],
+        [56, 0, 91, ""],
+        [58, 1, 92, ""],
+        [66, 0, 92, ""],
+        [68, 1, 93, ""],
+        [72, 0, 93, ""],
+        [76, 1, 94, ""],
+        [79, 0, 94, ""],
+        [82, 0, 95, ""],
+        [84, 0, 96, ""],
+        [86, 1, 99, ""],
+        [88, 1, 98, ""],
+        [89, 0, 97, ""],
+        [93, 0, 98, ""],
+        [97, 3, 97, ""],
+        [98, 1, 102, ""],
+        [99, 0, 99, ""],
+        [103, 1, 101, ""],
+        [104, 0, 100, ""],
+        [106, 0, 101, ""],
+        [108, 3, 100, ""],
+        [109, 0, 102, ""],
+        [111, 1, 104, ""],
+        [114, 1, 103, ""],
+        [116, 0, 103, ""],
+        [119, 1, 95, ""],
+        [121, 1, 96, ""],
+        [122, 0, 104, ""],
+        [132, 1, 105, ""],
+        [134, 0, 105, ""],
+        [136, 1, 106, ""],
+        [144, 0, 106, ""],
+        [146, 1, 107, ""],
+        [150, 0, 107, ""],
+        [154, 1, 108, ""],
+        [157, 0, 108, ""],
+        [159, 0, 109, ""],
+        [161, 0, 110, ""],
+        [163, 1, 113, ""],
+        [165, 1, 112, ""],
+        [166, 0, 111, ""],
+        [172, 0, 112, ""],
+        [178, 3, 111, ""],
+        [179, 1, 116, ""],
+        [180, 0, 113, ""],
+        [186, 1, 115, ""],
+        [187, 0, 114, ""],
+        [189, 0, 115, ""],
+        [191, 3, 114, ""],
+        [192, 0, 116, ""],
+        [194, 1, 118, ""],
+        [197, 1, 117, ""],
+        [199, 0, 117, ""],
+        [202, 1, 109, ""],
+        [204, 1, 110, ""],
+        [205, 0, 118, ""],
+        [210, 0, 119, ""],
+        [213, 1, 120, ""],
+        [215, 0, 120, ""],
+        [217, 1, 121, ""],
+        [220, 1, 119, ""],
+        [224, 1, 119, ""],
+        [225, 0, 121, ""],
+        [227, 1, 122, ""],
+        [231, 0, 122, ""],
+        [236, 1, 123, ""],
+        [239, 0, 123, ""],
+        [241, 0, 124, ""],
+        [243, 1, 127, ""],
+        [245, 1, 126, ""],
+        [246, 0, 125, ""],
+        [253, 0, 126, ""],
+        [260, 3, 125, ""],
+        [261, 1, 130, ""],
+        [262, 0, 127, ""],
+        [266, 1, 129, ""],
+        [267, 0, 128, ""],
+        [273, 0, 129, ""],
+        [279, 3, 128, ""],
+        [280, 0, 130, ""],
+        [282, 1, 132, ""],
+        [285, 1, 131, ""],
+        [287, 0, 131, ""],
+        [290, 1, 123, ""],
+        [292, 1, 124, ""],
+        [293, 0, 132, ""],
+        [302, 1, 133, ""],
+        [304, 0, 133, ""],
+        [306, 0, 134, ""],
+        [311, 1, 134, ""],
+        [315, 1, 135, ""],
+        [317, 0, 135, ""],
+        [319, 0, 136, ""],
+        [321, 0, 137, ""],
+        [324, 3, 137, ""],
+        [326, 1, 138, ""],
+        [331, 1, 135, ""],
+        [333, 1, 136, ""],
+        [334, 0, 138, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/deformed_tile_drawing.s",
+      "tokens": [
+        [8, 1, 139, ""],
+        [12, 0, 139, ""],
+        [24, 1, 140, ""],
+        [33, 0, 140, ""],
+        [35, 0, 141, ""],
+        [37, 1, 142, ""],
+        [42, 1, 141, ""],
+        [43, 0, 142, ""],
+        [48, 1, 143, ""],
+        [51, 0, 143, ""],
+        [60, 1, 144, ""],
+        [68, 1, 143, ""],
+        [71, 1, 143, ""],
+        [72, 0, 144, ""],
+        [74, 1, 145, ""],
+        [78, 1, 144, ""],
+        [79, 0, 145, ""],
+        [88, 1, 146, ""],
+        [92, 0, 146, ""],
+        [109, 1, 147, ""],
+        [111, 1, 147, ""],
+        [114, 0, 147, ""],
+        [125, 1, 148, ""],
+        [127, 1, 148, ""],
+        [130, 0, 148, ""],
+        [147, 1, 149, ""],
+        [149, 1, 149, ""],
+        [152, 0, 149, ""],
+        [169, 1, 150, ""],
+        [171, 1, 150, ""],
+        [174, 0, 150, ""],
+        [191, 1, 152, ""],
+        [193, 1, 152, ""],
+        [194, 0, 151, ""],
+        [197, 1, 151, ""],
+        [201, 0, 152, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "tokens": [
+        [63, 0, 153, ""],
+        [65, 1, 154, ""],
+        [75, 1, 153, ""],
+        [76, 0, 154, ""],
+        [164, 0, 155, ""],
+        [167, 0, 156, ""],
+        [170, 3, 156, ""],
+        [171, 3, 155, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/menu_transfers.s",
+      "tokens": [
+        [85, 1, 157, ""],
+        [87, 0, 157, ""],
+        [90, 1, 158, ""],
+        [92, 0, 158, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/plane_refresh.s",
+      "tokens": [
+        [15, 0, 159, ""],
+        [17, 1, 160, ""],
+        [20, 1, 159, ""],
+        [21, 0, 160, ""],
+        [29, 3, 159, ""],
+        [34, 0, 161, ""],
+        [36, 1, 162, ""],
+        [39, 1, 161, ""],
+        [40, 0, 162, ""],
+        [48, 3, 161, ""],
+        [69, 0, 163, ""],
+        [75, 3, 163, ""],
+        [100, 0, 164, ""],
+        [123, 0, 165, ""],
+        [125, 1, 166, ""],
+        [130, 1, 165, ""],
+        [131, 0, 166, ""],
+        [136, 1, 167, ""],
+        [139, 0, 167, ""],
+        [148, 1, 168, ""],
+        [156, 1, 167, ""],
+        [159, 1, 167, ""],
+        [160, 0, 168, ""],
+        [162, 1, 169, ""],
+        [166, 1, 168, ""],
+        [167, 0, 169, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "tokens": [
+        [8, 1, 177, ""],
+        [10, 1, 170, ""],
+        [14, 0, 170, ""],
+        [22, 1, 177, ""],
+        [32, 1, 177, ""],
+        [34, 1, 171, ""],
+        [39, 0, 171, ""],
+        [47, 1, 177, ""],
+        [64, 1, 172, ""],
+        [81, 0, 172, ""],
+        [116, 0, 173, ""],
+        [129, 1, 174, ""],
+        [134, 0, 174, ""],
+        [136, 1, 175, ""],
+        [140, 0, 175, ""],
+        [145, 1, 176, ""],
+        [149, 0, 176, ""],
+        [150, 3, 173, ""],
+        [153, 0, 177, ""],
+        [177, 1, 185, ""],
+        [179, 1, 178, ""],
+        [184, 0, 178, ""],
+        [192, 1, 185, ""],
+        [203, 1, 185, ""],
+        [205, 1, 179, ""],
+        [211, 0, 179, ""],
+        [219, 1, 185, ""],
+        [237, 1, 180, ""],
+        [252, 1, 181, ""],
+        [253, 0, 180, ""],
+        [270, 1, 181, ""],
+        [284, 0, 181, ""],
+        [292, 1, 182, ""],
+        [296, 0, 182, ""],
+        [298, 1, 183, ""],
+        [303, 0, 183, ""],
+        [308, 1, 184, ""],
+        [311, 0, 184, ""],
+        [312, 3, 181, ""],
+        [314, 0, 185, ""],
+        [337, 1, 186, ""],
+        [340, 1, 187, ""],
+        [341, 0, 186, ""],
+        [344, 0, 187, ""],
+        [358, 1, 181, ""],
+        [374, 1, 181, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/bonus_modes.s",
+      "tokens": [
+        [8, 1, 188, ""],
+        [19, 1, 189, ""],
+        [32, 1, 188, ""],
+        [34, 0, 188, ""],
+        [36, 1, 190, ""],
+        [37, 0, 189, ""],
+        [54, 0, 190, ""],
+        [60, 1, 191, ""],
+        [71, 1, 189, ""],
+        [84, 1, 191, ""],
+        [86, 0, 191, ""],
+        [88, 1, 202, ""],
+        [96, 1, 192, ""],
+        [104, 0, 192, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/initialization.s",
+      "tokens": [
+        [5, 1, 193, ""],
+        [7, 0, 193, ""],
+        [9, 1, 194, ""],
+        [12, 0, 194, ""],
+        [14, 1, 195, ""],
+        [23, 0, 195, ""],
+        [25, 1, 196, ""],
+        [27, 0, 196, ""],
+        [29, 1, 197, ""],
+        [32, 0, 197, ""],
+        [34, 1, 198, ""],
+        [37, 0, 198, ""],
+        [39, 1, 199, ""],
+        [42, 0, 199, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/marble_and_carnival.s",
+      "tokens": [
+        [12, 1, 200, ""],
+        [23, 1, 201, ""],
+        [36, 1, 200, ""],
+        [38, 0, 200, ""],
+        [40, 1, 202, ""],
+        [41, 0, 201, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/s3/script_player.s",
+      "tokens": [[3, 0, 202, ""]]
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/bonus_modes.s",
+      "tokens": [
+        [8, 1, 203, ""],
+        [19, 1, 204, ""],
+        [32, 1, 203, ""],
+        [34, 0, 203, ""],
+        [36, 1, 205, ""],
+        [37, 0, 204, ""],
+        [54, 0, 205, ""],
+        [60, 1, 206, ""],
+        [71, 1, 204, ""],
+        [84, 1, 206, ""],
+        [86, 0, 206, ""],
+        [88, 1, 242, ""],
+        [96, 1, 207, ""],
+        [104, 0, 207, ""],
+        [109, 1, 215, ""],
+        [118, 0, 208, ""],
+        [120, 0, 209, ""],
+        [125, 3, 209, ""],
+        [127, 3, 208, ""],
+        [131, 0, 210, ""],
+        [133, 0, 211, ""],
+        [136, 1, 213, ""],
+        [137, 1, 214, ""],
+        [141, 0, 212, ""],
+        [151, 3, 212, ""],
+        [153, 3, 211, ""],
+        [155, 3, 210, ""],
+        [157, 1, 217, ""],
+        [158, 0, 213, ""],
+        [163, 0, 214, ""],
+        [176, 0, 215, ""],
+        [180, 1, 217, ""],
+        [184, 1, 216, ""],
+        [186, 0, 216, ""],
+        [191, 0, 217, ""],
+        [194, 1, 242, ""],
+        [195, 0, 218, ""],
+        [221, 1, 218, ""],
+        [229, 0, 219, ""],
+        [231, 1, 221, ""],
+        [234, 1, 220, ""],
+        [238, 0, 220, ""],
+        [240, 1, 221, ""],
+        [244, 0, 221, ""],
+        [246, 3, 219, ""],
+        [248, 0, 222, ""],
+        [250, 1, 226, ""],
+        [253, 1, 224, ""],
+        [254, 1, 223, ""],
+        [258, 1, 224, ""],
+        [259, 0, 223, ""],
+        [263, 0, 224, ""],
+        [265, 1, 226, ""],
+        [267, 1, 225, ""],
+        [271, 1, 226, ""],
+        [272, 0, 225, ""],
+        [276, 0, 226, ""],
+        [278, 3, 222, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/initialization.s",
+      "tokens": [
+        [5, 1, 227, ""],
+        [7, 0, 227, ""],
+        [9, 1, 228, ""],
+        [12, 0, 228, ""],
+        [14, 1, 229, ""],
+        [23, 0, 229, ""],
+        [25, 1, 230, ""],
+        [27, 0, 230, ""],
+        [29, 1, 231, ""],
+        [32, 0, 231, ""],
+        [34, 1, 232, ""],
+        [37, 0, 232, ""],
+        [39, 1, 233, ""],
+        [41, 0, 233, ""],
+        [43, 1, 234, ""],
+        [46, 0, 234, ""],
+        [48, 1, 235, ""],
+        [51, 0, 235, ""],
+        [53, 1, 238, ""],
+        [63, 0, 236, ""],
+        [65, 0, 237, ""],
+        [68, 3, 237, ""],
+        [70, 3, 236, ""],
+        [74, 0, 238, ""],
+        [76, 1, 239, ""],
+        [79, 0, 239, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/marble_and_carnival.s",
+      "tokens": [
+        [12, 1, 240, ""],
+        [23, 1, 241, ""],
+        [36, 1, 240, ""],
+        [38, 0, 240, ""],
+        [40, 1, 242, ""],
+        [41, 0, 241, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/tile_animation/sk/script_player.s",
+      "tokens": [[3, 0, 242, ""]]
+    },
+    {
+      "source": "src/rendering/zones/hcz/s3/tile_animation.s",
+      "tokens": [[311, 1, 202, ""]]
+    },
+    {
+      "source": "src/rendering/zones/hcz/sk/tile_animation.s",
+      "tokens": [[311, 1, 242, ""]]
+    },
+    {
+      "source": "src/rendering/zones/icz/s3/tile_animation.s",
+      "tokens": [[107, 1, 202, ""]]
+    },
+    {
+      "source": "src/rendering/zones/icz/sk/tile_animation.s",
+      "tokens": [[107, 1, 242, ""]]
+    },
+    {
+      "source": "src/rendering/zones/lbz/s3/tile_animation.s",
+      "tokens": [
+        [74, 1, 202, ""],
+        [78, 1, 202, ""],
+        [123, 1, 202, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/zones/lbz/sk/tile_animation.s",
+      "tokens": [
+        [74, 1, 242, ""],
+        [78, 1, 242, ""],
+        [123, 1, 242, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/zones/lrz/sk/tile_animation.s",
+      "tokens": [[113, 1, 242, ""]]
+    },
+    {
+      "source": "src/rendering/zones/mhz/sk/tile_animation.s",
+      "tokens": [[89, 1, 242, ""]]
+    }
+  ]
+}

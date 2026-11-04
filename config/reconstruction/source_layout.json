@@ -67701,7 +67701,7 @@
       "responsibility": "Foreground and background deformation array construction, application and vertical-scroll output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 305,
+      "physical_lines": 307,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -67741,7 +67741,7 @@
       "responsibility": "Vertical deformation tile drawing, range selection and bottom-up plane operations.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 201,
+      "physical_lines": 205,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -67911,7 +67911,7 @@
       "responsibility": "Level VInt drawing, VRAM read or write operations and special window or scroll transfers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 235,
+      "physical_lines": 236,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -68776,7 +68776,7 @@
       "responsibility": "Normal or flipped deformation array construction, foreground or background application and vertical-scroll output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 430,
+      "physical_lines": 432,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -68806,7 +68806,7 @@
       "responsibility": "Deformed tile drawing, range selection and directional plane operations.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 284,
+      "physical_lines": 288,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -68936,7 +68936,7 @@
       "responsibility": "Level VInt drawing, VRAM operations and special window or scroll transfers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 241,
+      "physical_lines": 242,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -69096,7 +69096,7 @@
       "responsibility": "Full or partial plane refresh, direct scroll modes and drawing during camera motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 222,
+      "physical_lines": 223,
       "origin": {
         "commit": "75049e71feb95a37eb4ee01ee4a54e23b66a7824",
         "path": "sonic3k.s",
@@ -69516,7 +69516,7 @@
       "responsibility": "Tile-animation script playback, frame duration, source address and DMA transfer dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 63,
+      "physical_lines": 64,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -69561,7 +69561,7 @@
       "responsibility": "Bonus-mode tile animation and frame transfers with product-specific bonus machines.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 319,
+      "physical_lines": 323,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -69786,7 +69786,7 @@
       "responsibility": "Tile-animation script playback, frame duration, source address and DMA transfer dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 65,
+      "physical_lines": 66,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",

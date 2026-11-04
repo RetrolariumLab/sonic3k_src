@@ -13,12 +13,12 @@ PlainDeformation:
                 neg.w   d0
                 moveq   #bytesToXcnt(H_scroll_buffer_end-H_scroll_buffer,$10),d1
 
-loc_39E66:
+S3Deform_FillPlainScroll:
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
-                dbf     d1,loc_39E66
+                dbf     d1,S3Deform_FillPlainScroll
                 rts
 ; End of function PlainDeformation
 
@@ -27,18 +27,18 @@ loc_39E66:
 MakeFGDeformArray:
                 move.w  d1,d0
                 lsr.w   #1,d0
-                bcc.s   loc_39E80
+                bcc.s   S3Deform_WriteFgWordSecond
 
-loc_39E7A:
+S3Deform_WriteFgWordFirst:
                 move.w  (a6)+,d5
                 add.w   d6,d5
                 move.w  d5,(a1)+
 
-loc_39E80:
+S3Deform_WriteFgWordSecond:
                 move.w  (a6)+,d5
                 add.w   d6,d5
                 move.w  d5,(a1)+
-                dbf     d0,loc_39E7A
+                dbf     d0,S3Deform_WriteFgWordFirst
                 rts
 ; End of function MakeFGDeformArray
 
@@ -55,12 +55,12 @@ ApplyDeformation3:
 ApplyDeformation2:
                 move.w  (a4)+,d2
                 smi     d4
-                bpl.s   loc_39EA6
+                bpl.s   S3Deform_SkipBgSpansToY
                 andi.w  #$7FFF,d2
 
-loc_39EA6:
+S3Deform_SkipBgSpansToY:
                 sub.w   d2,d0
-                bmi.s   loc_39EB8
+                bmi.s   S3Deform_SeekDynamicBgSpan
                 addq.w  #2,a5
                 tst.b   d4
                 beq.s   ApplyDeformation2
@@ -70,77 +70,77 @@ loc_39EA6:
                 bra.s   ApplyDeformation2
 ; ---------------------------------------------------------------------------
 
-loc_39EB8:
+S3Deform_SeekDynamicBgSpan:
                 tst.b   d4
-                beq.s   loc_39EC2
+                beq.s   S3Deform_CapFirstBgSpan
                 add.w   d0,d2
                 add.w   d2,d2
                 adda.w  d2,a5
 
-loc_39EC2:
+S3Deform_CapFirstBgSpan:
                 neg.w   d0
                 move.w  d1,d2
                 sub.w   d0,d2
-                bcc.s   loc_39ECE
+                bcc.s   S3Deform_PackFgBaseForBgSpan
                 move.w  d1,d0
                 addq.w  #1,d0
 
-loc_39ECE:
+S3Deform_PackFgBaseForBgSpan:
                 neg.w   d3
                 swap    d3
 
-loc_39ED2:
+S3Deform_InitBgSpanLoopCount:
                 subq.w  #1,d0
 
-loc_39ED4:
+S3Deform_PickBgSpanWriter:
                 tst.b   d4
-                beq.s   loc_39EEE
+                beq.s   S3Deform_ReadRepeatedBgScroll
                 lsr.w   #1,d0
-                bcc.s   loc_39EE2
+                bcc.s   S3Deform_WriteDynamicBgSecond
 
-loc_39EDC:
+S3Deform_WriteDynamicBgFirst:
                 move.w  (a5)+,d3
                 neg.w   d3
                 move.l  d3,(a1)+
 
-loc_39EE2:
+S3Deform_WriteDynamicBgSecond:
                 move.w  (a5)+,d3
                 neg.w   d3
                 move.l  d3,(a1)+
-                dbf     d0,loc_39EDC
-                bra.s   loc_39EFE
+                dbf     d0,S3Deform_WriteDynamicBgFirst
+                bra.s   S3Deform_TryReadNextBgSpan
 ; ---------------------------------------------------------------------------
 
-loc_39EEE:
+S3Deform_ReadRepeatedBgScroll:
                 move.w  (a5)+,d3
                 neg.w   d3
                 lsr.w   #1,d0
-                bcc.s   loc_39EF8
+                bcc.s   S3Deform_WriteRepeatedBgSecond
 
-loc_39EF6:
+S3Deform_WriteRepeatedBgFirst:
                 move.l  d3,(a1)+
 
-loc_39EF8:
+S3Deform_WriteRepeatedBgSecond:
                 move.l  d3,(a1)+
-                dbf     d0,loc_39EF6
+                dbf     d0,S3Deform_WriteRepeatedBgFirst
 
-loc_39EFE:
+S3Deform_TryReadNextBgSpan:
                 tst.w   d2
-                bmi.s   locret_39F16
+                bmi.s   S3Deform_BgSpanReturn
                 move.w  (a4)+,d0
                 smi     d4
-                bpl.s   loc_39F0C
+                bpl.s   S3Deform_CapNextBgSpan
                 andi.w  #$7FFF,d0
 
-loc_39F0C:
+S3Deform_CapNextBgSpan:
                 move.w  d2,d3
                 sub.w   d0,d2
-                bpl.s   loc_39ED2
+                bpl.s   S3Deform_InitBgSpanLoopCount
                 move.w  d3,d0
-                bra.s   loc_39ED4
+                bra.s   S3Deform_PickBgSpanWriter
 ; ---------------------------------------------------------------------------
 
-locret_39F16:
+S3Deform_BgSpanReturn:
                 rts
 ; End of function ApplyDeformation
 
@@ -150,50 +150,52 @@ ApplyFGandBGDeformation:
                 swap    d7
                 swap    d3
 
-loc_39F1C:
+; The sign bit selects a dynamic span. Clear it to obtain the row count
+S3Deform_DecodeCombinedBgSpan:
                 move.w  (a4)+,d3
                 smi     d7
-                bpl.s   loc_39F26
+                bpl.s   S3Deform_SkipCombinedSpansToY
                 andi.w  #$7FFF,d3
 
-loc_39F26:
+S3Deform_SkipCombinedSpansToY:
                 sub.w   d3,d0
-                bmi.s   loc_39F38
+                bmi.s   S3Deform_SeekDynamicCombinedSpan
                 addq.w  #2,a5
                 tst.b   d7
-                beq.s   loc_39F1C
+                beq.s   S3Deform_DecodeCombinedBgSpan
                 subq.w  #2,a5
                 add.w   d3,d3
                 adda.w  d3,a5
-                bra.s   loc_39F1C
+                bra.s   S3Deform_DecodeCombinedBgSpan
 ; ---------------------------------------------------------------------------
 
-loc_39F38:
+S3Deform_SeekDynamicCombinedSpan:
                 tst.b   d7
-                beq.s   loc_39F42
+                beq.s   S3Deform_CapFirstCombinedSpan
                 add.w   d0,d3
                 add.w   d3,d3
                 adda.w  d3,a5
 
-loc_39F42:
+; Restore the saved low word of d3 before calculating the remaining rows
+S3Deform_CapFirstCombinedSpan:
                 swap    d3
                 neg.w   d0
                 move.w  d1,d4
                 sub.w   d0,d4
-                bcc.s   loc_39F50
+                bcc.s   S3Deform_InitCombinedLoopCount
                 move.w  d1,d0
                 addq.w  #1,d0
 
-loc_39F50:
+S3Deform_InitCombinedLoopCount:
                 subq.w  #1,d0
 
-loc_39F52:
+S3Deform_PickCombinedSpanWriter:
                 tst.b   d7
-                beq.s   loc_39F78
+                beq.s   S3Deform_ReadCombinedBgBase
                 lsr.w   #1,d0
-                bcc.s   loc_39F66
+                bcc.s   S3Deform_WriteDynamicCombinedSecond
 
-loc_39F5A:
+S3Deform_WriteDynamicCombinedFirst:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a5)+,d6
@@ -201,55 +203,55 @@ loc_39F5A:
                 add.w   (a6)+,d6
                 move.l  d6,(a1)+
 
-loc_39F66:
+S3Deform_WriteDynamicCombinedSecond:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a5)+,d6
                 neg.w   d6
                 add.w   (a6)+,d6
                 move.l  d6,(a1)+
-                dbf     d0,loc_39F5A
-                bra.s   loc_39F98
+                dbf     d0,S3Deform_WriteDynamicCombinedFirst
+                bra.s   S3Deform_TryReadNextCombinedSpan
 ; ---------------------------------------------------------------------------
 
-loc_39F78:
+S3Deform_ReadCombinedBgBase:
                 move.w  (a5)+,d5
                 neg.w   d5
                 lsr.w   #1,d0
-                bcc.s   loc_39F8A
+                bcc.s   S3Deform_WriteConstantCombinedSecond
 
-loc_39F80:
+S3Deform_WriteConstantCombinedFirst:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a6)+,d6
                 add.w   d5,d6
                 move.l  d6,(a1)+
 
-loc_39F8A:
+S3Deform_WriteConstantCombinedSecond:
                 move.w  (a2)+,d6
                 swap    d6
                 move.w  (a6)+,d6
                 add.w   d5,d6
                 move.l  d6,(a1)+
-                dbf     d0,loc_39F80
+                dbf     d0,S3Deform_WriteConstantCombinedFirst
 
-loc_39F98:
+S3Deform_TryReadNextCombinedSpan:
                 tst.w   d4
-                bmi.s   loc_39FB0
+                bmi.s   S3Deform_RestorePlaneAndReturn
                 move.w  (a4)+,d0
                 smi     d7
-                bpl.s   loc_39FA6
+                bpl.s   S3Deform_CapNextCombinedSpan
                 andi.w  #$7FFF,d0
 
-loc_39FA6:
+S3Deform_CapNextCombinedSpan:
                 move.w  d4,d5
                 sub.w   d0,d4
-                bpl.s   loc_39F50
+                bpl.s   S3Deform_InitCombinedLoopCount
                 move.w  d5,d0
-                bra.s   loc_39F52
+                bra.s   S3Deform_PickCombinedSpanWriter
 ; ---------------------------------------------------------------------------
 
-loc_39FB0:
+S3Deform_RestorePlaneAndReturn:
                 swap    d7
                 rts
 
@@ -261,45 +263,45 @@ Apply_FGVScroll:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  d0,d2
                 andi.w  #$F,d2
-                beq.s   loc_39FCC
+                beq.s   S3Deform_CameraXToBlockColumn
                 addi.w  #$10,d0
 
-loc_39FCC:
+S3Deform_CameraXToBlockColumn:
                 lsr.w   #4,d0
 
-loc_39FCE:
+S3Deform_FindVScrollSpan:
                 addq.w  #2,a5
                 move.w  (a4)+,d2
                 lsr.w   #4,d2
                 sub.w   d2,d0
-                bpl.s   loc_39FCE
+                bpl.s   S3Deform_FindVScrollSpan
                 neg.w   d0
                 moveq   #$13,d2
                 sub.w   d0,d2
-                bcc.s   loc_39FE2
+                bcc.s   S3Deform_InitVScrollLoopCount
                 moveq   #$14,d0
 
-loc_39FE2:
+S3Deform_InitVScrollLoopCount:
                 subq.w  #1,d0
 
-loc_39FE4:
+S3Deform_ReadFgVScroll:
                 move.w  (a5)+,d3
 
-loc_39FE6:
+S3Deform_WriteVScrollPair:
                 move.w  d3,(a1)+
                 move.w  d1,(a1)+
-                dbf     d0,loc_39FE6
+                dbf     d0,S3Deform_WriteVScrollPair
                 tst.w   d2
-                bmi.s   locret_3A000
+                bmi.s   S3Deform_VScrollReturn
                 move.w  (a4)+,d0
                 lsr.w   #4,d0
                 move.w  d2,d3
                 sub.w   d0,d2
-                bpl.s   loc_39FE2
+                bpl.s   S3Deform_InitVScrollLoopCount
                 move.w  d3,d0
-                bra.s   loc_39FE4
+                bra.s   S3Deform_ReadFgVScroll
 ; ---------------------------------------------------------------------------
 
-locret_3A000:
+S3Deform_VScrollReturn:
                 rts
 ; End of function Apply_FGVScroll

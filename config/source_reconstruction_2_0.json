@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 121
+    "commit_count": 122
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -773,9 +773,15 @@
       "commits": ["62d6304dcca85601e6acf6f27a857086cacb6b76"]
     },
     {
-      "id": "current-shorten-16-sprite-rendering",
+      "id": "change-8ebcef847119",
       "kind": "source_or_tooling",
       "summary": "Apply 238 reviewed short labels for sprite rendering.",
+      "commits": ["8ebcef8471196bd28a327a64455ea3df9752fa87"]
+    },
+    {
+      "id": "current-shorten-17-tile-rendering",
+      "kind": "source_or_tooling",
+      "summary": "Apply 239 reviewed short labels for tile rendering.",
       "commits": ["release-commit"]
     }
   ],

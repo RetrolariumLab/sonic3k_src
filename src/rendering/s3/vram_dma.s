@@ -16,15 +16,15 @@ Plane_Map_To_VRAM:
                 lea     (VDP_data_port).l,a6
                 move.l  #$80<<16,d4                     ; row increment value
 
-loc_177C:
+S3PlaneMap_BeginRowForSixtyFourCellPlane:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  d1,d3
 
-loc_1782:
+S3PlaneMap_CopyRow64:
                 move.w  (a1)+,(a6)
-                dbf     d3,loc_1782                     ; copy one row
+                dbf     d3,S3PlaneMap_CopyRow64         ; copy one row
                 add.l   d4,d0                           ; move onto next row
-                dbf     d2,loc_177C                     ; and copy it
+                dbf     d2,S3PlaneMap_BeginRowForSixtyFourCellPlane  ; and copy it
                 rts
 ; End of function Plane_Map_To_VRAM
 
@@ -43,15 +43,15 @@ Plane_Map_To_VRAM_2:
                 lea     (VDP_data_port).l,a6
                 move.l  #$100<<16,d4                    ; row increment value
 
-loc_179C:
+S3PlaneMap_BeginRow128:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 move.w  d1,d3
 
-loc_17A2:
+S3PlaneMap_CopyTileWordsForWidePlaneRow:
                 move.w  (a1)+,(a6)
-                dbf     d3,loc_17A2                     ; copy one row
+                dbf     d3,S3PlaneMap_CopyTileWordsForWidePlaneRow  ; copy one row
                 add.l   d4,d0                           ; move onto next row
-                dbf     d2,loc_179C                     ; and copy it
+                dbf     d2,S3PlaneMap_BeginRow128       ; and copy it
                 rts
 ; End of function Plane_Map_To_VRAM_2
 

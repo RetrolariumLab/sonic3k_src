@@ -10,18 +10,18 @@ AnimateTiles_NULL3:
 
 Animate_Init:
                 cmpi.w  #$100,(Current_zone_and_act).w
-                bne.s   loc_28C8C
+                bne.s   SKTileInit_SeedHCZ2Caches
                 bsr.w   AniHCZ1_InitWaterlineTiles
 
-loc_28C8C:
+SKTileInit_SeedHCZ2Caches:
                 cmpi.w  #$101,(Current_zone_and_act).w
-                bne.s   loc_28CA0
+                bne.s   SKTileInit_SeedCNZCounters
                 move.b  #$20,(Anim_Counters+1).w
                 move.b  #$40,(Anim_Counters+3).w
 
-loc_28CA0:
+SKTileInit_SeedCNZCounters:
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_28CD8
+                bne.s   SKTileInit_SeedLBZ1Scroll
                 move.b  #$40,(Anim_Counters+1).w
                 move.b  #0,(Anim_Counters+2).w
                 move.b  #0,(Anim_Counters+4).w
@@ -31,43 +31,43 @@ loc_28CA0:
                 move.b  #2,(Anim_Counters+$C).w
                 move.b  #1,(Anim_Counters+$E).w
 
-loc_28CD8:
+SKTileInit_SeedLBZ1Scroll:
                 cmpi.w  #$600,(Current_zone_and_act).w
-                bne.s   loc_28CE6
+                bne.s   SKTileInit_SeedLBZ2Waterline
                 move.b  #$20,(Anim_Counters+3).w
 
-loc_28CE6:
+SKTileInit_SeedLBZ2Waterline:
                 cmpi.w  #$601,(Current_zone_and_act).w
-                bne.s   loc_28CF8
+                bne.s   SKTileInit_SeedMHZCaches
                 bsr.w   AniLBZ2_InitWaterlineTiles
                 move.b  #$10,(Anim_Counters+1).w
 
-loc_28CF8:
+SKTileInit_SeedMHZCaches:
                 cmpi.b  #7,(Current_zone).w
-                bne.s   loc_28D0C
+                bne.s   SKTileInit_DirtySOZCache
                 move.b  #$20,(Anim_Counters+1).w
                 move.b  #$40,(Anim_Counters+3).w
 
-loc_28D0C:
+SKTileInit_DirtySOZCache:
                 cmpi.b  #8,(Current_zone).w
-                bne.s   loc_28D1A
+                bne.s   SKTileInit_DirtyLRZ1Caches
                 move.b  #-1,(Anim_Counters+1).w
 
-loc_28D1A:
+SKTileInit_DirtyLRZ1Caches:
                 cmpi.w  #$900,(Current_zone_and_act).w
-                bne.s   loc_28D2E
+                bne.s   SKTileInit_SeedDPZCaches
                 move.b  #-1,(Anim_Counters+1).w
                 move.b  #-1,(Anim_Counters+3).w
 
-loc_28D2E:
+SKTileInit_SeedDPZCaches:
                 cmpi.w  #$1000,(Current_zone_and_act).w
-                bne.s   loc_28D42
+                bne.s   SKTileInit_LoadPachinkoArt
                 move.b  #$40,(Anim_Counters+1).w
                 move.b  #$40,(Anim_Counters+3).w
 
-loc_28D42:
+SKTileInit_LoadPachinkoArt:
                 cmpi.b  #$14,(Current_zone).w
-                bne.s   loc_28DA2
+                bne.s   SKTileInit_DirtyLRZ3Caches
                 lea     (ArtKos_PachinkoBG1).l,a0
                 lea     (RAM_start+$1000).l,a1
                 jsr     (Kos_Decomp).l
@@ -78,25 +78,25 @@ loc_28D42:
                 lea     (Chunk_table+$7000).l,a2
                 moveq   #$C-1,d0
 
-loc_28D7C:
+SKTileInit_BeginPachinkoRow:
                 moveq   #$20-1,d1
 
-loc_28D7E:
+SKTileInit_DuplicatePachinkoLong:
                 move.l  (a2),$80(a1)
                 move.l  (a2)+,(a1)+
-                dbf     d1,loc_28D7E
+                dbf     d1,SKTileInit_DuplicatePachinkoLong
                 lea     $80(a1),a1
-                dbf     d0,loc_28D7C
+                dbf     d0,SKTileInit_BeginPachinkoRow
                 lea     (PalKos_Pachinko).l,a0
                 lea     (Chunk_table+$7800).l,a1
                 jsr     (Kos_Decomp).l
 
-loc_28DA2:
+SKTileInit_DirtyLRZ3Caches:
                 cmpi.w  #$1600,(Current_zone_and_act).w
-                bne.s   locret_28DB6
+                bne.s   SKTileInit_Return
                 move.b  #-1,(Anim_Counters+1).w
                 move.b  #-1,(Anim_Counters+3).w
 
-locret_28DB6:
+SKTileInit_Return:
                 rts
 ; End of function Animate_Init

@@ -98,7 +98,7 @@ loc_28180:
 
 loc_28190:
                 move.b  d0,(Anim_Counters+$F).w
-                bra.w   loc_286E8
+                bra.w   SKTileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 word_28198:
                 dc.w    $200

@@ -7,7 +7,8 @@
 AnimateTiles_DoAniPLC:
                 lea     (Anim_Counters).w,a3
 
-loc_275F0:
+; Use the existing counter cursor in a3
+S3TileScripts_RunAtCounter:
                 move.w  (a2)+,d6                        ; Get number of scripts in list
 
 AnimateTiles_DoAniPLC_Part2:

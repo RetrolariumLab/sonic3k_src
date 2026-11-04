@@ -24,15 +24,15 @@ Refresh_PlaneTileDeform:
                 move.w  (a4)+,d2
                 moveq   #$10-1,d3
 
-loc_39B82:
+S3TileDraw_FindFullRowBand:
                 cmp.w   d2,d0
-                bmi.s   loc_39B8C
+                bmi.s   S3TileDraw_UploadFullBandRow
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   loc_39B82
+                bra.s   S3TileDraw_FindFullRowBand
 ; ---------------------------------------------------------------------------
 
-loc_39B8C:
+S3TileDraw_UploadFullBandRow:
                 move.w  (a5),d1
                 moveq   #$20,d6
                 movem.l d0/d2-d3/a0/a4-a5,-(sp)
@@ -40,7 +40,7 @@ loc_39B8C:
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0/d2-d3/a0/a4-a5
                 addi.w  #$10,d0
-                dbf     d3,loc_39B82
+                dbf     d3,S3TileDraw_FindFullRowBand
                 rts
 ; End of function Refresh_PlaneTileDeform
 
@@ -50,15 +50,15 @@ Refresh_PlaneDirectVScroll:
                 move.w  (a4)+,d2
                 moveq   #$20-1,d3
 
-loc_39BAE:
+S3TileDraw_FindFullColumnBand:
                 cmp.w   d2,d0
-                bmi.s   loc_39BB8
+                bmi.s   S3TileDraw_UploadFullBandColumn
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   loc_39BAE
+                bra.s   S3TileDraw_FindFullColumnBand
 ; ---------------------------------------------------------------------------
 
-loc_39BB8:
+S3TileDraw_UploadFullBandColumn:
                 move.w  (a5),d1
                 moveq   #$10,d6
                 movem.l d0/d2-d3/a0/a4-a5,-(sp)
@@ -66,7 +66,7 @@ loc_39BB8:
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0/d2-d3/a0/a4-a5
                 addi.w  #$10,d0
-                dbf     d3,loc_39BAE
+                dbf     d3,S3TileDraw_FindFullColumnBand
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -86,14 +86,14 @@ Refresh_PlaneScreenDirect:
                 move.w  (Camera_X_pos_copy).w,d1
                 moveq   #$F-1,d2
 
-loc_39BFE:
+S3TileDraw_UploadScreenRows:
                 movem.l d0-d2/a0,-(sp)                  ; Redraws the entire plane in one go during 68k execution
                 moveq   #$15,d6
                 jsr     Setup_TileRowDraw(pc)
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0-d2/a0
                 addi.w  #$10,d0
-                dbf     d2,loc_39BFE
+                dbf     d2,S3TileDraw_UploadScreenRows
                 move    #$2300,sr
                 rts
 
@@ -152,26 +152,26 @@ Draw_BG:
 Draw_BGNoVert:
                 move.w  d6,d1
 
-loc_39CA2:
+S3TileDraw_SkipOffscreenColumnBands:
                 sub.w   (a4)+,d6
-                bmi.s   loc_39CB2
+                bmi.s   S3TileDraw_CalcFirstVisibleColumnHeight
                 move.w  (a6)+,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(a6)+
                 subq.w  #1,d5
-                bra.s   loc_39CA2
+                bra.s   S3TileDraw_SkipOffscreenColumnBands
 ; ---------------------------------------------------------------------------
 
-loc_39CB2:
+S3TileDraw_CalcFirstVisibleColumnHeight:
                 neg.w   d6
                 lsr.w   #4,d6
                 moveq   #$F,d4
                 sub.w   d6,d4
-                bcc.s   loc_39CC0
+                bcc.s   S3TileDraw_DrawVisibleBandColumn
                 moveq   #0,d4
                 moveq   #$F,d6
 
-loc_39CC0:
+S3TileDraw_DrawVisibleBandColumn:
                 movem.w d1/d4-d6,-(sp)
                 movem.l a4/a6,-(sp)
                 lea     2(a6),a5
@@ -180,7 +180,7 @@ loc_39CC0:
                 movem.w (sp)+,d1/d4-d6
                 addq.w  #4,a6
                 tst.w   d4
-                beq.s   loc_39CF4
+                beq.s   S3TileDraw_SyncHiddenBandX
                 lsl.w   #4,d6
                 add.w   d6,d1
                 subq.w  #1,d5
@@ -188,21 +188,21 @@ loc_39CC0:
                 lsr.w   #4,d6
                 move.w  d4,d0
                 sub.w   d6,d4
-                bpl.s   loc_39CC0
+                bpl.s   S3TileDraw_DrawVisibleBandColumn
                 move.w  d0,d6
                 moveq   #0,d4
-                bra.s   loc_39CC0
+                bra.s   S3TileDraw_DrawVisibleBandColumn
 ; ---------------------------------------------------------------------------
 
-loc_39CF4:
+S3TileDraw_SyncHiddenBandX:
                 subq.w  #1,d5
-                beq.s   locret_39D02
+                beq.s   S3TileDraw_BandedColumnsReturn
                 move.w  (a6)+,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(a6)+
-                bra.s   loc_39CF4
+                bra.s   S3TileDraw_SyncHiddenBandX
 ; ---------------------------------------------------------------------------
 
-locret_39D02:
+S3TileDraw_BandedColumnsReturn:
                 rts
 ; End of function Draw_BG

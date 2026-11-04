@@ -10,7 +10,7 @@ AnimateTiles_DPZ:
                 sub.w   (Camera_X_pos_BG_copy).w,d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_27530
+                beq.s   S3DPZTiles_AdvanceToP2
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -21,7 +21,7 @@ AnimateTiles_DPZ:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_27534(pc,d0.w),a4
+                lea     S3DPZTiles_CyclicSplitWordCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniDPZ__BG).l,a0
                 move.w  #tiles_to_bytes($153),d4
                 add.l   a0,d1
@@ -34,14 +34,14 @@ AnimateTiles_DPZ:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_27530
+                beq.s   S3DPZTiles_AdvanceToP2
                 jsr     (Add_To_DMA_Queue).l
 
-loc_27530:
+S3DPZTiles_AdvanceToP2:
                 addq.w  #2,a3
-                bra.s   loc_27554
+                bra.s   S3DPZTiles_UpdateP2Band
 ; ---------------------------------------------------------------------------
-word_27534:
+S3DPZTiles_CyclicSplitWordCounts:
                 dc.w    $200
                 dc.w    0
                 dc.w    $1C0
@@ -60,13 +60,13 @@ word_27534:
                 dc.w    $1C0
 ; ---------------------------------------------------------------------------
 
-loc_27554:
+S3DPZTiles_UpdateP2Band:
                 moveq   #0,d1
                 move.w  (Events_bg+$12).w,d1
                 sub.w   (Camera_X_pos_P2_BG_copy).w,d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_275B0
+                beq.s   S3DPZTiles_RunRemainingScripts
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -77,7 +77,7 @@ loc_27554:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_27534(pc,d0.w),a4
+                lea     S3DPZTiles_CyclicSplitWordCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniDPZ__BG).l,a0
                 move.w  #tiles_to_bytes($173),d4
                 add.l   a0,d1
@@ -90,12 +90,12 @@ loc_27554:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_275B0
+                beq.s   S3DPZTiles_RunRemainingScripts
                 jsr     (Add_To_DMA_Queue).l
 
-loc_275B0:
+S3DPZTiles_RunRemainingScripts:
                 addq.w  #2,a3
-                bra.w   loc_275F0
+                bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 
 AnimateTiles_Gumball:
@@ -105,7 +105,7 @@ AnimateTiles_Gumball:
                 sub.w   (Camera_Y_pos_BG_copy).w,d1
                 andi.w  #$1F,d1
                 cmp.b   1(a3),d1
-                beq.s   locret_275EA
+                beq.s   S3GumballTiles_UpdateReturn
                 move.b  d1,1(a3)
                 add.w   d1,d1
                 add.w   d1,d1
@@ -114,5 +114,5 @@ AnimateTiles_Gumball:
                 move.w  #$40,d3
                 jsr     (Add_To_DMA_Queue).l
 
-locret_275EA:
+S3GumballTiles_UpdateReturn:
                 rts

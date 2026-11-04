@@ -120,15 +120,15 @@ Menu_SetCharacterGroupDepthPriorities:
 Menu_CompareSwapCharacterDepths:
                 move.w  y_pos(a0),d0
                 cmp.w   y_pos(a1),d0
-                bgt.s   loc_B5DE
+                bgt.s   S3MenuDepth_CompareAndSwapA1A2
                 exg     a0,a1
 
-loc_B5DE:
+S3MenuDepth_CompareAndSwapA1A2:
                 move.w  y_pos(a1),d0
                 cmp.w   y_pos(a2),d0
-                bgt.s   locret_B5EA
+                bgt.s   S3MenuDepth_Return
                 exg     a1,a2
 
-locret_B5EA:
+S3MenuDepth_Return:
                 rts
 ; End of function Menu_CompareSwapCharacterDepths

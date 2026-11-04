@@ -24,15 +24,15 @@ Refresh_PlaneTileDeform:
                 move.w  (a4)+,d2
                 moveq   #$10-1,d3
 
-loc_4ECF0:
+SKTileDraw_FindFullRowBand:
                 cmp.w   d2,d0
-                bmi.s   loc_4ECFA
+                bmi.s   SKTileDraw_UploadFullBandRow
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   loc_4ECF0
+                bra.s   SKTileDraw_FindFullRowBand
 ; ---------------------------------------------------------------------------
 
-loc_4ECFA:
+SKTileDraw_UploadFullBandRow:
                 move.w  (a5),d1
                 moveq   #$20,d6
                 movem.l d0/d2-d3/a0/a4-a5,-(sp)
@@ -40,7 +40,7 @@ loc_4ECFA:
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0/d2-d3/a0/a4-a5
                 addi.w  #$10,d0
-                dbf     d3,loc_4ECF0
+                dbf     d3,SKTileDraw_FindFullRowBand
                 rts
 ; End of function Refresh_PlaneTileDeform
 
@@ -50,15 +50,15 @@ Refresh_PlaneDirectVScroll:
                 move.w  (a4)+,d2
                 moveq   #$20-1,d3
 
-loc_4ED1C:
+SKTileDraw_FindFullColumnBand:
                 cmp.w   d2,d0
-                bmi.s   loc_4ED26
+                bmi.s   SKTileDraw_UploadFullBandColumn
                 add.w   (a4)+,d2
                 addq.w  #4,a5
-                bra.s   loc_4ED1C
+                bra.s   SKTileDraw_FindFullColumnBand
 ; ---------------------------------------------------------------------------
 
-loc_4ED26:
+SKTileDraw_UploadFullBandColumn:
                 move.w  (a5),d1
                 moveq   #$10,d6
                 movem.l d0/d2-d3/a0/a4-a5,-(sp)
@@ -66,7 +66,7 @@ loc_4ED26:
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0/d2-d3/a0/a4-a5
                 addi.w  #$10,d0
-                dbf     d3,loc_4ED1C
+                dbf     d3,SKTileDraw_FindFullColumnBand
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -96,13 +96,14 @@ Refresh_PlaneDirect:
                 move    #$2700,sr
                 moveq   #$F-1,d2
 
-loc_4ED72:
+; Upload 15 rows using the block width already in d6
+SKTileDraw_UploadDirectRows:
                 movem.l d0-d2/d6/a0,-(sp)               ; Redraws the entire plane in one go during 68k execution
                 jsr     Setup_TileRowDraw(pc)
                 jsr     VInt_DrawLevel(pc)
                 movem.l (sp)+,d0-d2/d6/a0
                 addi.w  #$10,d0
-                dbf     d2,loc_4ED72
+                dbf     d2,SKTileDraw_UploadDirectRows
                 move    #$2300,sr
                 rts
 
@@ -138,7 +139,7 @@ DrawBGAsYouMove:
 
 ; ---------------------------------------------------------------------------
 
-loc_4EDD8:
+SKTileDraw_UpdateFgDeformed:
                 movem.l d5/a4-a5,-(sp)
                 lea     (Camera_Y_pos_copy).w,a6
                 jsr     Get_DeformDrawPosVert(pc)
@@ -166,26 +167,26 @@ Draw_BG:
 Draw_BGNoVert:
                 move.w  d6,d1
 
-loc_4EE22:
+SKTileDraw_SkipOffscreenColumnBands:
                 sub.w   (a4)+,d6
-                bmi.s   loc_4EE32
+                bmi.s   SKTileDraw_CalcFirstVisibleColumnHeight
                 move.w  (a6)+,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(a6)+
                 subq.w  #1,d5
-                bra.s   loc_4EE22
+                bra.s   SKTileDraw_SkipOffscreenColumnBands
 ; ---------------------------------------------------------------------------
 
-loc_4EE32:
+SKTileDraw_CalcFirstVisibleColumnHeight:
                 neg.w   d6
                 lsr.w   #4,d6
                 moveq   #$F,d4
                 sub.w   d6,d4
-                bcc.s   loc_4EE40
+                bcc.s   SKTileDraw_DrawVisibleBandColumn
                 moveq   #0,d4
                 moveq   #$F,d6
 
-loc_4EE40:
+SKTileDraw_DrawVisibleBandColumn:
                 movem.w d1/d4-d6,-(sp)
                 movem.l a4/a6,-(sp)
                 lea     2(a6),a5
@@ -194,7 +195,7 @@ loc_4EE40:
                 movem.w (sp)+,d1/d4-d6
                 addq.w  #4,a6
                 tst.w   d4
-                beq.s   loc_4EE74
+                beq.s   SKTileDraw_SyncHiddenBandX
                 lsl.w   #4,d6
                 add.w   d6,d1
                 subq.w  #1,d5
@@ -202,21 +203,21 @@ loc_4EE40:
                 lsr.w   #4,d6
                 move.w  d4,d0
                 sub.w   d6,d4
-                bpl.s   loc_4EE40
+                bpl.s   SKTileDraw_DrawVisibleBandColumn
                 move.w  d0,d6
                 moveq   #0,d4
-                bra.s   loc_4EE40
+                bra.s   SKTileDraw_DrawVisibleBandColumn
 ; ---------------------------------------------------------------------------
 
-loc_4EE74:
+SKTileDraw_SyncHiddenBandX:
                 subq.w  #1,d5
-                beq.s   locret_4EE82
+                beq.s   SKTileDraw_BandedColumnsReturn
                 move.w  (a6)+,d0
                 andi.w  #$FFF0,d0
                 move.w  d0,(a6)+
-                bra.s   loc_4EE74
+                bra.s   SKTileDraw_SyncHiddenBandX
 ; ---------------------------------------------------------------------------
 
-locret_4EE82:
+SKTileDraw_BandedColumnsReturn:
                 rts
 ; End of function Draw_BG

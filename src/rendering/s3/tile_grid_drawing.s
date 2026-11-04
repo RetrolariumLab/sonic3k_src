@@ -11,14 +11,14 @@ Draw_TileColumn:
                 move.w  d0,(a5)
                 move.w  d2,d3
                 sub.w   d0,d2
-                beq.w   locret_3996C
+                beq.w   S3TileDraw_ColumnUpdateReturn
                 tst.b   d2
-                bpl.s   loc_397FE
+                bpl.s   S3TileDraw_PickColumnUpdateCount
                 neg.w   d2
                 move.w  d3,d0
                 addi.w  #$150,d0
 
-loc_397FE:
+S3TileDraw_PickColumnUpdateCount:
                 andi.w  #$30,d2
                 cmpi.w  #$10,d2
                 sne     (Plane_double_update_flag).w
@@ -26,7 +26,7 @@ loc_397FE:
                 bsr.s   Setup_TileColumnDraw
                 movem.w (sp)+,d1/d6
                 tst.b   (Plane_double_update_flag).w
-                beq.w   locret_3996C
+                beq.w   S3TileDraw_ColumnUpdateReturn
                 addi.w  #$10,d0
                 bra.s   Setup_TileColumnDraw
 ; End of function Draw_TileColumn
@@ -40,15 +40,15 @@ Draw_TileColumn2:
                 move.w  d0,(a5)
                 move.w  d2,d3
                 sub.w   d0,d2
-                beq.w   locret_3996C
+                beq.w   S3TileDraw_ColumnUpdateReturn
                 tst.b   d2
-                bpl.s   loc_39842
+                bpl.s   S3TileDraw_PickDeformedColumnCount
                 neg.w   d2
                 move.w  d3,d0
                 addi.w  #$150,d0
                 swap    d1
 
-loc_39842:
+S3TileDraw_PickDeformedColumnCount:
                 andi.w  #$30,d2
                 cmpi.w  #$10,d2
                 sne     (Plane_double_update_flag).w
@@ -56,7 +56,7 @@ loc_39842:
                 bsr.s   Setup_TileColumnDraw
                 movem.w (sp)+,d1/d6
                 tst.b   (Plane_double_update_flag).w
-                beq.w   locret_3996C
+                beq.w   S3TileDraw_ColumnUpdateReturn
                 addi.w  #$10,d0
 ; End of function Draw_TileColumn2
 
@@ -77,7 +77,7 @@ Setup_TileColumnDraw:
                 sub.w   d4,d5
                 move.w  d5,d4
                 sub.w   d6,d5
-                bmi.s   loc_398B2
+                bmi.s   S3TileDraw_SplitColumnAtWrap
                 move.w  d0,d5
                 asr.w   #2,d5
                 andi.w  #$7C,d5
@@ -93,10 +93,10 @@ Setup_TileColumnDraw:
                 add.w   d5,d5
                 adda.w  d5,a0
                 jsr     Get_LevelChunkColumn(pc)
-                bra.s   loc_39900
+                bra.s   S3TileDraw_SavePlaneWord
 ; ---------------------------------------------------------------------------
 
-loc_398B2:
+S3TileDraw_SplitColumnAtWrap:
                 neg.w   d5
                 move.w  d5,-(sp)
                 move.w  d0,d5
@@ -114,7 +114,7 @@ loc_398B2:
                 add.w   d4,d4
                 adda.w  d4,a0
                 jsr     Get_LevelChunkColumn(pc)
-                bsr.s   loc_39900
+                bsr.s   S3TileDraw_SavePlaneWord
                 move.w  (sp)+,d6
                 move.w  d0,d5
                 asr.w   #2,d5
@@ -130,10 +130,10 @@ loc_398B2:
                 add.w   d5,d5
                 adda.w  d5,a0
 
-loc_39900:
+S3TileDraw_SavePlaneWord:
                 swap    d7
 
-loc_39902:
+S3TileDraw_PackColumnBlock:
                 move.w  (a5,d2.w),d3
                 move.w  d3,d4
                 andi.w  #$3FF,d3
@@ -146,35 +146,35 @@ loc_39902:
                 swap    d3
                 move.w  d7,d3
                 btst    #$B,d4
-                beq.s   loc_3993A
+                beq.s   S3TileDraw_TryFlipColumnH
                 eori.l  #$10001000,d5
                 eori.l  #$10001000,d3
                 swap    d5
                 swap    d3
 
-loc_3993A:
+S3TileDraw_TryFlipColumnH:
                 btst    #$A,d4
-                beq.s   loc_3994E
+                beq.s   S3TileDraw_AppendColumnBlock
                 eori.l  #$8000800,d5
                 eori.l  #$8000800,d3
                 exg     d3,d5
 
-loc_3994E:
+S3TileDraw_AppendColumnBlock:
                 move.l  d5,(a1)+
                 move.l  d3,(a0)+
                 addi.w  #$10,d2
                 andi.w  #$70,d2
-                bne.s   loc_39964
+                bne.s   S3TileDraw_NextColumnBlockOrEnd
                 addq.w  #4,d1
                 and.w   (Layout_row_index_mask).w,d1
                 bsr.s   Get_LevelChunkColumn
 
-loc_39964:
-                dbf     d6,loc_39902
+S3TileDraw_NextColumnBlockOrEnd:
+                dbf     d6,S3TileDraw_PackColumnBlock
                 swap    d7
                 clr.w   (a0)
 
-locret_3996C:
+S3TileDraw_ColumnUpdateReturn:
                 rts
 ; End of function Setup_TileColumnDraw
 
@@ -206,15 +206,15 @@ Draw_TileRow:
                 move.w  d0,(a5)
                 move.w  d2,d3
                 sub.w   d0,d2
-                beq.w   locret_39AFC
+                beq.w   S3TileDraw_RowUpdateReturn
                 tst.b   d2
-                bpl.s   loc_399B0
+                bpl.s   S3TileDraw_PickRowUpdateCount
                 neg.w   d2
                 move.w  d3,d0
                 addi.w  #$F0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
 
-loc_399B0:
+S3TileDraw_PickRowUpdateCount:
                 andi.w  #$30,d2
                 cmpi.w  #$10,d2
                 sne.b   (Plane_double_update_flag).w
@@ -222,7 +222,7 @@ loc_399B0:
                 bsr.s   Setup_TileRowDraw
                 movem.w (sp)+,d1/d6
                 tst.b   (Plane_double_update_flag).w
-                beq.w   locret_39AFC
+                beq.w   S3TileDraw_RowUpdateReturn
                 addi.w  #$10,d0
                 and.w   (Camera_Y_pos_mask).w,d0
                 bra.s   Setup_TileRowDraw
@@ -237,16 +237,16 @@ Draw_TileRow2:
                 move.w  d0,(a5)
                 move.w  d2,d3
                 sub.w   d0,d2
-                beq.w   locret_39AFC
+                beq.w   S3TileDraw_RowUpdateReturn
                 tst.b   d2
-                bpl.s   loc_399FC
+                bpl.s   S3TileDraw_PickDeformedRowCount
                 neg.w   d2
                 move.w  d3,d0
                 addi.w  #$F0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
                 swap    d1
 
-loc_399FC:
+S3TileDraw_PickDeformedRowCount:
                 andi.w  #$30,d2
                 cmpi.w  #$10,d2
                 sne     (Plane_double_update_flag).w
@@ -254,7 +254,7 @@ loc_399FC:
                 bsr.s   Setup_TileRowDraw
                 movem.w (sp)+,d1/d6
                 tst.b   (Plane_double_update_flag).w
-                beq.w   locret_39AFC
+                beq.w   S3TileDraw_RowUpdateReturn
                 addi.w  #$10,d0
                 and.w   (Camera_Y_pos_mask).w,d0
 ; End of function Draw_TileRow2
@@ -276,7 +276,7 @@ Setup_TileRowDraw:
                 sub.w   d4,d5
                 move.w  d5,d4
                 sub.w   d6,d5
-                bmi.s   loc_39A68
+                bmi.s   S3TileDraw_SplitRowAtWrap
                 move.w  d0,d5
                 andi.w  #$F0,d5                         ; If the length of the write can fit without wrapping the nametable
                 lsl.w   #4,d5
@@ -291,10 +291,10 @@ Setup_TileRowDraw:
                 add.w   d5,d5
                 adda.w  d5,a0
                 jsr     Get_LevelAddrChunkRow(pc)
-                bra.s   loc_39AA8
+                bra.s   S3TileDraw_PackRowBlock
 ; ---------------------------------------------------------------------------
 
-loc_39A68:
+S3TileDraw_SplitRowAtWrap:
                 neg.w   d5                              ; If the length of the write wraps over the length of the nametable
                 move.w  d5,-(sp)
                 move.w  d0,d5
@@ -311,7 +311,7 @@ loc_39A68:
                 add.w   d4,d4
                 adda.w  d4,a0
                 bsr.s   Get_LevelAddrChunkRow
-                bsr.s   loc_39AA8
+                bsr.s   S3TileDraw_PackRowBlock
                 move.w  (sp)+,d6                        ; Must place one more write command to account for rollover
                 move.w  d0,d5
                 andi.w  #$F0,d5
@@ -326,7 +326,7 @@ loc_39A68:
                 add.w   d5,d5
                 adda.w  d5,a0
 
-loc_39AA8:
+S3TileDraw_PackRowBlock:
                 move.w  (a5,d2.w),d3
                 move.w  d3,d4
                 andi.w  #$3FF,d3
@@ -334,33 +334,33 @@ loc_39AA8:
                 move.l  (a2,d3.w),d5
                 move.l  4(a2,d3.w),d3
                 btst    #$B,d4
-                beq.s   loc_39AD0
+                beq.s   S3TileDraw_TryFlipRowH
                 eori.l  #$10001000,d5
                 eori.l  #$10001000,d3
                 exg     d3,d5
 
-loc_39AD0:
+S3TileDraw_TryFlipRowH:
                 btst    #$A,d4
-                beq.s   loc_39AE6
+                beq.s   S3TileDraw_AppendRowBlock
                 eori.l  #$8000800,d5
                 eori.l  #$8000800,d3
                 swap    d5
                 swap    d3
 
-loc_39AE6:
+S3TileDraw_AppendRowBlock:
                 move.l  d5,(a1)+
                 move.l  d3,(a0)+
                 addq.w  #2,d2
                 andi.w  #$E,d2
-                bne.s   loc_39AF6
+                bne.s   S3TileDraw_NextRowBlockOrEnd
                 addq.w  #1,d1
                 bsr.s   Get_ChunkRow
 
-loc_39AF6:
-                dbf     d6,loc_39AA8
+S3TileDraw_NextRowBlockOrEnd:
+                dbf     d6,S3TileDraw_PackRowBlock
                 clr.w   (a0)
 
-locret_39AFC:
+S3TileDraw_RowUpdateReturn:
                 rts
 ; End of function Setup_TileRowDraw
 
@@ -392,17 +392,17 @@ Setup_TileRowDraw_Competition:
                 asr.w   #4,d1
                 andi.w  #$E,d2
                 cmpi.w  #$100,(_unkEEB0).w
-                beq.s   loc_39B3A
+                beq.s   S3TileDraw_PickCompRowPitch32
                 moveq   #4,d3
                 move.w  #$1F80,d4
-                bra.s   loc_39B40
+                bra.s   S3TileDraw_BuildCompRowHeader
 ; ---------------------------------------------------------------------------
 
-loc_39B3A:
+S3TileDraw_PickCompRowPitch32:
                 moveq   #5,d3
                 move.w  #$1F00,d4
 
-loc_39B40:
+S3TileDraw_BuildCompRowHeader:
                 move.w  d0,d5
                 lsl.w   d3,d5
                 and.w   d4,d5
@@ -416,5 +416,5 @@ loc_39B40:
                 add.w   d5,d5
                 adda.w  d5,a0
                 jsr     Get_LevelAddrChunkRow(pc)
-                bra.w   loc_39AA8
+                bra.w   S3TileDraw_PackRowBlock
 ; End of function Setup_TileRowDraw_Competition
