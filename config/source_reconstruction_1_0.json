@@ -1209,9 +1209,15 @@
       "commits": ["e6cc1e0b8c612920a76ad21abe878964f1e8c4b8"]
     },
     {
-      "id": "current-shorten-44-boss-lbz-final-2",
+      "id": "change-6b37744bdd5e",
       "kind": "source_or_tooling",
       "summary": "Apply 387 reviewed short labels for boss lbz final 2.",
+      "commits": ["6b37744bdd5eb1c8c01da9a71bb4c432041f0a01"]
+    },
+    {
+      "id": "current-shorten-45-boss-mhz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 209 reviewed short labels for boss mhz.",
       "commits": ["release-commit"]
     }
   ],

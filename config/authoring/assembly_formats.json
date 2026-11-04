@@ -110286,33 +110286,33 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 588
       },
-      "declarations_sha256": "f48244b04ced775218cb2e4e26cfd8392060efb0fe4939c0ba586ce78e7ed2db",
+      "declarations_sha256": "43dde49d9a6a2602807d988652c514e89933345ebacc38da4d71f9e11fcb923c",
       "labels": {
         "Map_MHZEndBoss_": 0,
-        "word_185F4C": 48,
-        "word_185F4E": 50,
-        "word_185F68": 76,
-        "word_185F7C": 96,
-        "word_185FAE": 146,
-        "word_185FC2": 166,
-        "word_185FCA": 174,
-        "word_185FD2": 182,
-        "word_185FE0": 196,
-        "word_185FE8": 204,
-        "word_185FF0": 212,
-        "word_185FF8": 220,
-        "word_186000": 228,
-        "word_186008": 236,
-        "word_186046": 298,
-        "word_186084": 360,
-        "word_1860C2": 422,
-        "word_186100": 484,
-        "word_186108": 492,
-        "word_18611C": 512,
-        "word_18612A": 526,
-        "word_18613E": 546,
-        "word_18614C": 560,
-        "word_18615A": 574
+        "MHZEndBoss_MapFrame00": 48,
+        "MHZEndBoss_MapFrame01": 50,
+        "MHZEndBoss_MapFrame02": 76,
+        "MHZEndBoss_MapFrame03": 96,
+        "MHZEndBoss_MapFrame04": 146,
+        "MHZEndBoss_MapFrame05": 166,
+        "MHZEndBoss_MapFrame06": 174,
+        "MHZEndBoss_MapFrame07": 182,
+        "MHZEndBoss_MapFrame08": 196,
+        "MHZEndBoss_MapFrame09": 204,
+        "MHZEndBoss_MapFrame0A": 212,
+        "MHZEndBoss_MapFrame0B": 220,
+        "MHZEndBoss_MapFrame0C": 228,
+        "MHZEndBoss_MapFrame0D": 236,
+        "MHZEndBoss_MapFrame0E": 298,
+        "MHZEndBoss_MapFrame0F": 360,
+        "MHZEndBoss_MapFrame10": 422,
+        "MHZEndBoss_MapFrame11": 484,
+        "MHZEndBoss_MapFrame12": 492,
+        "MHZEndBoss_MapFrame13": 512,
+        "MHZEndBoss_MapFrame14": 526,
+        "MHZEndBoss_MapFrame15": 546,
+        "MHZEndBoss_MapFrame16": 560,
+        "MHZEndBoss_MapFrame17": 574
       },
       "external_symbols": [],
       "blocks": [
@@ -110320,168 +110320,168 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F4C",
+          "target": "MHZEndBoss_MapFrame00",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F4E",
+          "target": "MHZEndBoss_MapFrame01",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F68",
+          "target": "MHZEndBoss_MapFrame02",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F7C",
+          "target": "MHZEndBoss_MapFrame03",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FAE",
+          "target": "MHZEndBoss_MapFrame04",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FC2",
+          "target": "MHZEndBoss_MapFrame05",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FCA",
+          "target": "MHZEndBoss_MapFrame06",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FD2",
+          "target": "MHZEndBoss_MapFrame07",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FE0",
+          "target": "MHZEndBoss_MapFrame08",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FE8",
+          "target": "MHZEndBoss_MapFrame09",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FF0",
+          "target": "MHZEndBoss_MapFrame0A",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185FF8",
+          "target": "MHZEndBoss_MapFrame0B",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186000",
+          "target": "MHZEndBoss_MapFrame0C",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186008",
+          "target": "MHZEndBoss_MapFrame0D",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186046",
+          "target": "MHZEndBoss_MapFrame0E",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186084",
+          "target": "MHZEndBoss_MapFrame0F",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1860C2",
+          "target": "MHZEndBoss_MapFrame10",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186100",
+          "target": "MHZEndBoss_MapFrame11",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186108",
+          "target": "MHZEndBoss_MapFrame12",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18611C",
+          "target": "MHZEndBoss_MapFrame13",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18612A",
+          "target": "MHZEndBoss_MapFrame14",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18613E",
+          "target": "MHZEndBoss_MapFrame15",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18614C",
+          "target": "MHZEndBoss_MapFrame16",
           "base": "Map_MHZEndBoss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18615A",
+          "target": "MHZEndBoss_MapFrame17",
           "base": "Map_MHZEndBoss_"
         },
         {
@@ -110615,17 +110615,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 308
       },
-      "declarations_sha256": "8c95c3e8bbfc0f81450425a696946bf7bc815a27ed05c24b88f9e709288c78e1",
+      "declarations_sha256": "1ced4e652fd84caa1ffbadce222321f44596f4709d22d5d1e6fabb3f92cd2fb0",
       "labels": {
         "Map_MHZEndBossMisc_": 0,
-        "word_55918": 16,
-        "word_55950": 72,
-        "word_5597C": 116,
-        "word_55984": 124,
-        "word_5598C": 132,
-        "word_55994": 140,
-        "word_559CC": 196,
-        "word_55A04": 252
+        "MHZAct2ShipAndBossSceneSKData_MapSlot00": 16,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot01": 72,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot02": 116,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot03": 124,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot04": 132,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot05": 140,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot06": 196,
+        "MHZAct2ShipAndBossSceneSKData_MapSlot07": 252
       },
       "external_symbols": [],
       "blocks": [
@@ -110633,56 +110633,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_55918",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot00",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_55950",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot01",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5597C",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot02",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_55984",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot03",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5598C",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot04",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_55994",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot05",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_559CC",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot06",
           "base": "Map_MHZEndBossMisc_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_55A04",
+          "target": "MHZAct2ShipAndBossSceneSKData_MapSlot07",
           "base": "Map_MHZEndBossMisc_"
         },
         {
@@ -110848,38 +110848,38 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 2336
       },
-      "declarations_sha256": "bde50fdd3108829ea3d63b8989ea43d268825cc25d627e21027bb5808f058338",
+      "declarations_sha256": "3f632d3285c71bb820f4687f511849d05202588c18e9daea3c62d5613eb0bb0c",
       "labels": {
         "Map_MHZMiniboss_": 0,
-        "word_1861A2": 58,
-        "word_18623A": 210,
-        "word_1862D2": 362,
-        "word_18636A": 514,
-        "word_186402": 666,
-        "word_18646A": 770,
-        "word_1864D2": 874,
-        "word_18653A": 978,
-        "word_18659C": 1076,
-        "word_1865FE": 1174,
-        "word_18664E": 1254,
-        "word_18669E": 1334,
-        "word_1866EE": 1414,
-        "word_18673E": 1494,
-        "word_186782": 1562,
-        "word_1867D2": 1642,
-        "word_186810": 1704,
-        "word_186854": 1772,
-        "word_186898": 1840,
-        "word_1868DC": 1908,
-        "word_18691A": 1970,
-        "word_18698E": 2086,
-        "word_186A14": 2220,
-        "word_186A1C": 2228,
-        "word_186A2A": 2242,
-        "word_186A3E": 2262,
-        "word_186A52": 2282,
-        "word_186A66": 2302,
-        "word_186A7A": 2322
+        "MHZMiniboss_MapFrame00": 58,
+        "MHZMiniboss_MapFrame01": 210,
+        "MHZMiniboss_MapFrame02": 362,
+        "MHZMiniboss_MapFrame03": 514,
+        "MHZMiniboss_MapFrame04": 666,
+        "MHZMiniboss_MapFrame05": 770,
+        "MHZMiniboss_MapFrame06": 874,
+        "MHZMiniboss_MapFrame07": 978,
+        "MHZMiniboss_MapFrame08": 1076,
+        "MHZMiniboss_MapFrame09": 1174,
+        "MHZMiniboss_MapFrame0A": 1254,
+        "MHZMiniboss_MapFrame0B": 1334,
+        "MHZMiniboss_MapFrame0C": 1414,
+        "MHZMiniboss_MapFrame0D": 1494,
+        "MHZMiniboss_MapFrame0E": 1562,
+        "MHZMiniboss_MapFrame0F": 1642,
+        "MHZMiniboss_MapFrame10": 1704,
+        "MHZMiniboss_MapFrame11": 1772,
+        "MHZMiniboss_MapFrame12": 1840,
+        "MHZMiniboss_MapFrame13": 1908,
+        "MHZMiniboss_MapFrame14": 1970,
+        "MHZMiniboss_MapFrame15": 2086,
+        "MHZMiniboss_MapFrame16": 2220,
+        "MHZMiniboss_MapFrame17": 2228,
+        "MHZMiniboss_MapFrame18": 2242,
+        "MHZMiniboss_MapFrame19": 2262,
+        "MHZMiniboss_MapFrame1A": 2282,
+        "MHZMiniboss_MapFrame1B": 2302,
+        "MHZMiniboss_MapFrame1C": 2322
       },
       "external_symbols": [],
       "blocks": [
@@ -110887,203 +110887,203 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1861A2",
+          "target": "MHZMiniboss_MapFrame00",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18623A",
+          "target": "MHZMiniboss_MapFrame01",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1862D2",
+          "target": "MHZMiniboss_MapFrame02",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18636A",
+          "target": "MHZMiniboss_MapFrame03",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186402",
+          "target": "MHZMiniboss_MapFrame04",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18646A",
+          "target": "MHZMiniboss_MapFrame05",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1864D2",
+          "target": "MHZMiniboss_MapFrame06",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18653A",
+          "target": "MHZMiniboss_MapFrame07",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18659C",
+          "target": "MHZMiniboss_MapFrame08",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1865FE",
+          "target": "MHZMiniboss_MapFrame09",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18664E",
+          "target": "MHZMiniboss_MapFrame0A",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18669E",
+          "target": "MHZMiniboss_MapFrame0B",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1866EE",
+          "target": "MHZMiniboss_MapFrame0C",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18673E",
+          "target": "MHZMiniboss_MapFrame0D",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186782",
+          "target": "MHZMiniboss_MapFrame0E",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1867D2",
+          "target": "MHZMiniboss_MapFrame0F",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186810",
+          "target": "MHZMiniboss_MapFrame10",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186854",
+          "target": "MHZMiniboss_MapFrame11",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186898",
+          "target": "MHZMiniboss_MapFrame12",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1868DC",
+          "target": "MHZMiniboss_MapFrame13",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18691A",
+          "target": "MHZMiniboss_MapFrame14",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18698E",
+          "target": "MHZMiniboss_MapFrame15",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A14",
+          "target": "MHZMiniboss_MapFrame16",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A1C",
+          "target": "MHZMiniboss_MapFrame17",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A2A",
+          "target": "MHZMiniboss_MapFrame18",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A3E",
+          "target": "MHZMiniboss_MapFrame19",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A52",
+          "target": "MHZMiniboss_MapFrame1A",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A66",
+          "target": "MHZMiniboss_MapFrame1B",
           "base": "Map_MHZMiniboss_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A7A",
+          "target": "MHZMiniboss_MapFrame1C",
           "base": "Map_MHZMiniboss_"
         },
         {
@@ -111242,17 +111242,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "6d15c09e9f57c11312a4c880a758b75cf1bef65406622c3304be6172f8934618",
+      "declarations_sha256": "f0ad8c975a397acc2a834461e2f698569a595c77e4c1c08c063ea3ddf971602e",
       "labels": {
         "Map_MHZMinibossLog_": 0,
-        "word_186B28": 16,
-        "word_186B36": 30,
-        "word_186B4A": 50,
-        "word_186B58": 64,
-        "word_186B6C": 84,
-        "word_186B7A": 98,
-        "word_186B8E": 118,
-        "word_186B9C": 132
+        "MHZMinibossLog_MapFrame00": 16,
+        "MHZMinibossLog_MapFrame01": 30,
+        "MHZMinibossLog_MapFrame02": 50,
+        "MHZMinibossLog_MapFrame03": 64,
+        "MHZMinibossLog_MapFrame04": 84,
+        "MHZMinibossLog_MapFrame05": 98,
+        "MHZMinibossLog_MapFrame06": 118,
+        "MHZMinibossLog_MapFrame07": 132
       },
       "external_symbols": [],
       "blocks": [
@@ -111260,56 +111260,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B28",
+          "target": "MHZMinibossLog_MapFrame00",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B36",
+          "target": "MHZMinibossLog_MapFrame01",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B4A",
+          "target": "MHZMinibossLog_MapFrame02",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B58",
+          "target": "MHZMinibossLog_MapFrame03",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B6C",
+          "target": "MHZMinibossLog_MapFrame04",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B7A",
+          "target": "MHZMinibossLog_MapFrame05",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B8E",
+          "target": "MHZMinibossLog_MapFrame06",
           "base": "Map_MHZMinibossLog_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186B9C",
+          "target": "MHZMinibossLog_MapFrame07",
           "base": "Map_MHZMinibossLog_"
         },
         {
@@ -111363,15 +111363,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 144
       },
-      "declarations_sha256": "834b00578b61bcd9460ba10e156fe3a6ee70a48ab87b0d639aa2cabe2c79f3e1",
+      "declarations_sha256": "3933dfb9e196cfa68d8b8eef20809fbabb6bceca8fc6d5d63ff3486ebcd8bc98",
       "labels": {
         "Map_MHZMinibossTree_": 0,
-        "word_186A94": 12,
-        "word_186A96": 14,
-        "word_186AA4": 28,
-        "word_186AB8": 48,
-        "word_186AD2": 74,
-        "word_186AF2": 106
+        "MHZMinibossTree_MapFrame00": 12,
+        "MHZMinibossTree_MapFrame01": 14,
+        "MHZMinibossTree_MapFrame02": 28,
+        "MHZMinibossTree_MapFrame03": 48,
+        "MHZMinibossTree_MapFrame04": 74,
+        "MHZMinibossTree_MapFrame05": 106
       },
       "external_symbols": [],
       "blocks": [
@@ -111379,42 +111379,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A94",
+          "target": "MHZMinibossTree_MapFrame00",
           "base": "Map_MHZMinibossTree_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186A96",
+          "target": "MHZMinibossTree_MapFrame01",
           "base": "Map_MHZMinibossTree_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186AA4",
+          "target": "MHZMinibossTree_MapFrame02",
           "base": "Map_MHZMinibossTree_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186AB8",
+          "target": "MHZMinibossTree_MapFrame03",
           "base": "Map_MHZMinibossTree_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186AD2",
+          "target": "MHZMinibossTree_MapFrame04",
           "base": "Map_MHZMinibossTree_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186AF2",
+          "target": "MHZMinibossTree_MapFrame05",
           "base": "Map_MHZMinibossTree_"
         },
         {

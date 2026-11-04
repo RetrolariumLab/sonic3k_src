@@ -7,7 +7,7 @@ ObjDat_MHZMiniboss:
                 dc.w    make_art_tile(ArtTile_MHZMiniboss,1,1)
                 dc.w    $200
                 dc.b    $48, $40,   0,  $F
-word_75E5E:
+MHZMini_ArtPriorityBounds:
                 dc.w    make_art_tile(ArtTile_MHZMiniboss,0,1)
                 dc.w    $280
                 dc.b    $C,  $C, $16, $9A
@@ -16,34 +16,34 @@ ObjDat_MHZMinibossTree:
                 dc.w    make_art_tile($001,3,0)
                 dc.w    $380
                 dc.b    $14, $90,   5,   0
-ObjDat3_75E72:
+MHZMinibossLog_FullAttributes:
                 dc.l    Map_MHZMinibossLog
                 dc.w    make_art_tile(ArtTile_MHZMinibossLog,3,0)
                 dc.w    $380
                 dc.b    $14, $14,   6, $86
-word_75E7E:
+MHZMinibossThrownActor_PartialAttributes:
                 dc.w    $300
                 dc.b    8,   8, $18, $8B
-ChildObjDat_75E84:
+MHZMini_LinkedBodyChildren:
                 dc.w    1
-                dc.l    loc_757C0
+                dc.l    MHZMini_InitLeafSpawner
                 dc.b    0,   0
-                dc.l    loc_757C0
+                dc.l    MHZMini_InitLeafSpawner
                 dc.b    0,   0
-                dc.l    loc_75B64
+                dc.l    MHZMini_LogSyncAndSubmitTouch
                 dc.b    0,   0
-ChildObjDat_75E98:
+MHZMinibossTree_SingleLogSimpleChild:
                 dc.w    1-1
-                dc.l    loc_75AD4
-ChildObjDat_75E9E:
+                dc.l    MHZMini_InitLogHeightAndMotion
+MHZMinibossRoot_SingleThrownNormalChild:
                 dc.w    1-1
-                dc.l    loc_7583A
+                dc.l    MHZMini_ThrownActorDispatchAndDraw
                 dc.b    0,  -8
-ChildObjDat_75EA6:
+MHZMini_RecoveryChild:
                 dc.w    1-1
-                dc.l    loc_759C0
+                dc.l    MHZMini_InitFlickerFollower
                 dc.b    1, $13
-byte_75EAE:
+MHZMinibossRoot_DefaultFrameDelayLoop:
                 dc.b    0,  $B
                 dc.b    1,   5
                 dc.b    2,   5
@@ -51,7 +51,7 @@ byte_75EAE:
                 dc.b    2,   5
                 dc.b    1,   5
                 dc.b    $FC
-byte_75EBB:
+MHZMini_ChopAnim:
                 dc.b    4, $27
                 dc.b    4, $27
                 dc.b    7,   2
@@ -63,7 +63,7 @@ byte_75EBB:
                 dc.b    7,   2
                 dc.b    4, $27
                 dc.b    $F4
-byte_75ED0:
+MHZMini_StuckChopAnim:
                 dc.b    4, $27
                 dc.b    4, $27
                 dc.b    7,   2
@@ -82,31 +82,31 @@ byte_75ED0:
                 dc.b    $11,   7
                 dc.b    $12, $31
                 dc.b    $F4
-byte_75EF3:
+MHZMini_RecoilAnim:
                 dc.b    $A,   3
                 dc.b    $A,   3
                 dc.b    8,   3
                 dc.b    6,   3
-                dc.b    $F8, .jump-byte_75EF3
+                dc.b    $F8, .jump-MHZMini_RecoilAnim
 
                 .jump:
                 dc.b    6, $7F
                 dc.b    6, $7F
                 dc.b    $FC
-byte_75F02:
+MHZMini_ThrowAnim:
                 dc.b    $F, $31
                 dc.b    $F, $31
                 dc.b    $13,   4
                 dc.b    $14,   4
                 dc.b    $15,   4
                 dc.b    $F4
-byte_75F0D:
+MHZMinibossRoot_LongFrameFivePairLoop:
                 dc.b    5, $7F
                 dc.b    5, $7F
                 dc.b    $FC
-byte_75F12:
+MHZMinibossLog_UniformRollingFrameLoop:
                 dc.b    1,   0,   1,   2,   3,   4,   5,   6,   7, $FC
-byte_75F1C:
+MHZMinibossThrownActor_FrameDelayLoop:
                 dc.b    $18,   3
                 dc.b    $19,   3
                 dc.b    $1A,   3

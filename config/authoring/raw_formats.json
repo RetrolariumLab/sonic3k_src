@@ -449,31 +449,31 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "98d6234a5aff90d03b90b89f4ee12707bf46669cd20be95df7a4e1629263f376"
+      "sha256": "c163277efbaa70c89abb496e6b1cddd6c059caba364338ac6d0c9a4fe91cc498"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
-      "sha256": "39b1260ad71542de53651fa09dc8264926b10e3a655eda466343deb193a9277d"
+      "sha256": "853b04549ff840ad4b708031418354c8d242acd7678d58995a899c976556d5c3"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
-      "sha256": "8c97ed91449d7043e1625f47d392f5ef3ec464c00ca8e63b6751c75481f8a5ae"
+      "sha256": "5ec7c647e65ed28d96fcd7d9ccb45f1fe0eeabaa31994adf1b50a88156f4883c"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
-      "sha256": "ab63af551564d102aa051b329433dbed4a7be2767d81daa71d8762424f42c9b8"
+      "sha256": "b5c1408f7d083143ada73aa4c340d17fdf7d9e3d4252942fb0eaaf4eaf080f6b"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
-      "sha256": "d32ce478c37e5a103d8a1bb8bb55d5f902a0eb937de206dba77364921be210fe"
+      "sha256": "5736b934c29fdd3198ee0a7c2aa720b7d004ed77deb128f7f3e1261a5058e2f3"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
-      "sha256": "38b689d78f7a70db2c25a33aed6359bd6915fa3a6d8eaf81a2c4f97ec37bb24c"
+      "sha256": "fc0c9b396609d7d7cdb8e10a3b37042c7533f6a529873aebab799eec8956baa6"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
-      "sha256": "2c7e877f58c2cba9e858e7d5ecf399b772d48f89c6ea978b25063a97c1cc7259"
+      "sha256": "aed70213cc4ae78462c990b353c106d563bd440cb5b58064097eb425e396ad32"
     },
     {
       "path": "src/objects/bosses/shared/sk/robotnik_heads.s",
@@ -3072,45 +3072,45 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_769B6",
-      "scope": "byte_769B6",
+      "symbol": "MHZEndBoss_WeatherPrimaryFrameDelayLoop",
+      "scope": "MHZEndBoss_WeatherPrimaryFrameDelayLoop",
       "first_line": 68,
       "last_line": 85,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 30,
-      "declarations_sha256": "e63fd479d280f69e99e7e79af5f964fd09ec0da6e5b412664509720b0079f85b",
+      "declarations_sha256": "753d4201c52ad224471e2ac053217b0b614c1c1ae52da48509e9e68e2afbb3a4",
       "entries": [
         [0, "pairs"],
         [11, "pairs"],
         [24, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_769B6", "byte_769C1", "byte_769CE"],
+      "members": ["MHZEndBoss_WeatherPrimaryFrameDelayLoop", "MHZBoss_WeatherPairAnim", "MHZBoss_DiagonalEffectAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
-      "symbol": "RawAni_75CB6",
-      "scope": "RawAni_75CB6",
+      "symbol": "MHZMini_FramesByParentFrame",
+      "scope": "MHZMini_FramesByParentFrame",
       "first_line": 143,
       "last_line": 146,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
-      "declarations_sha256": "3b46e2eaef6cdec49e02e760c760d5d22ebfda919f86ef16f20e50d11495d26a",
+      "declarations_sha256": "3baa24eab37df8e496b3ce02a2091fd26f6245be5e828f1b685f218f3327dab0",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_75CB6"],
+      "members": ["MHZMini_FramesByParentFrame"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
-      "symbol": "byte_75EAE",
-      "scope": "byte_75EAE",
+      "symbol": "MHZMinibossRoot_DefaultFrameDelayLoop",
+      "scope": "MHZMinibossRoot_DefaultFrameDelayLoop",
       "first_line": 46,
       "last_line": 116,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 122,
-      "declarations_sha256": "bc84ae1d7203b64fdf32df9fdb6b7c6bc739d5c63b6f2033cd431b62bd2045ef",
+      "declarations_sha256": "ab2a8559c196f69d073da8b9182371f1253f02ee613c28ae997c94e126f29413",
       "entries": [
         [0, "pairs"],
         [13, "pairs"],
@@ -3123,14 +3123,14 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_75EAE",
-        "byte_75EBB",
-        "byte_75ED0",
-        "byte_75EF3",
-        "byte_75F02",
-        "byte_75F0D",
-        "byte_75F12",
-        "byte_75F1C"
+        "MHZMinibossRoot_DefaultFrameDelayLoop",
+        "MHZMini_ChopAnim",
+        "MHZMini_StuckChopAnim",
+        "MHZMini_RecoilAnim",
+        "MHZMini_ThrowAnim",
+        "MHZMinibossRoot_LongFrameFivePairLoop",
+        "MHZMinibossLog_UniformRollingFrameLoop",
+        "MHZMinibossThrownActor_FrameDelayLoop"
       ],
       "stored_markers": []
     },

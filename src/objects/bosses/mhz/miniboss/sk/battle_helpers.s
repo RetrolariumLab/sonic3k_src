@@ -7,7 +7,7 @@
 ; Correct the floor penetration on contact. Bounce once, then schedule the recovery wait on the next contact
 MHZMiniThrown_BounceOrStartRecovery:
                 bset    #7,$38(a0)
-                bne.s   loc_758E2
+                bne.s   MHZMini_BeginSecondBounceWait
                 add.w   d1,y_pos(a0)
                 move.w  x_vel(a0),d0
                 asr.w   #1,d0
@@ -19,42 +19,42 @@ MHZMiniThrown_BounceOrStartRecovery:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_758E2:
+MHZMini_BeginSecondBounceWait:
                 move.b  #4,routine(a0)
                 add.w   d1,y_pos(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_758FC,$34(a0)
+                move.l  #MHZMini_BeginRecoveryAndTryChild,$34(a0)
                 rts
 ; End of function MHZMiniThrown_BounceOrStartRecovery
 
 ; ---------------------------------------------------------------------------
 
-loc_758FC:
+MHZMini_BeginRecoveryAndTryChild:
                 move.b  #6,routine(a0)
                 clr.w   x_vel(a0)
                 move.w  #-$200,y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_75936,$34(a0)
-                lea     ChildObjDat_75EA6(pc),a2
+                move.l  #MHZMini_HoldBeforeReturn,$34(a0)
+                lea     MHZMini_RecoveryChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_75924:
+MHZMini_MoveAnimateAndWait:
                 jsr     (MoveSprite2).l
 
-loc_7592A:
+MHZMini_AnimateAndWait:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_75936:
+MHZMini_HoldBeforeReturn:
                 move.b  #8,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_7594C,$34(a0)
+                move.l  #MHZMini_AimReturnTowardBoss,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7594C:
+MHZMini_AimReturnTowardBoss:
                 move.b  #$A,routine(a0)
                 move.w  #$180,priority(a0)
                 move.w  #-$300,y_vel(a0)
@@ -64,70 +64,70 @@ loc_7594C:
                 subq.w  #6,d0
                 sub.w   x_pos(a0),d0
                 smi     d1
-                bpl.s   loc_75974
+                bpl.s   MHZMini_DivideReturnXDistance
                 neg.w   d0
 
-loc_75974:
+MHZMini_DivideReturnXDistance:
                 swap    d0
                 divu.w  #$6100,d0
                 tst.b   d1
-                beq.s   loc_75980
+                beq.s   MHZMini_StoreReturnXSpeed
                 neg.w   d0
 
-loc_75980:
+MHZMini_StoreReturnXSpeed:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75986:
+MHZMini_FallAndCheckCatchHeight:
                 addi.w  #$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_759AA
+                bmi.s   MHZMini_AnimateBeforeCatch
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 addi.w  #-8,d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_759B0
+                bls.s   MHZMini_SignalReturnAndDelete
 
-loc_759AA:
+MHZMini_AnimateBeforeCatch:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_759B0:
+MHZMini_SignalReturnAndDelete:
                 movea.w parent3(a0),a1
                 bset    #2,$38(a1)
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_759C0:
-                lea     word_75E5E(pc),a1
+MHZMini_InitFlickerFollower:
+                lea     MHZMini_ArtPriorityBounds(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_759D0,(a0)
+                move.l  #MHZMini_FollowerDrawByParity,(a0)
 
-loc_759D0:
+MHZMini_FollowerDrawByParity:
                 movea.w parent3(a0),a1
                 move.b  (V_int_run_count+3).w,d0
                 btst    #0,d0
-                bne.w   loc_759EC
+                bne.w   MHZMini_FollowerCheckParent
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_759EC:
+MHZMini_FollowerCheckParent:
                 btst    #7,status(a1)
-                bne.s   loc_759F6
+                bne.s   MHZMini_DeleteFlickerFollower
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_759F6:
+MHZMini_DeleteFlickerFollower:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_759FC:
+MHZMini_InitCameraRelativeMotion:
                 lea     (ObjDat3_6646E).l,a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_75A24,(a0)
+                move.l  #MHZMini_CheckHorizontalDeceleration,(a0)
                 bsr.w   MHZMiniParticle_InitMotion
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$AC,d0
@@ -135,42 +135,43 @@ loc_759FC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_75A24:
+; Accept speeds at or below -$100. At or above +$100, skip storing the candidate
+MHZMini_CheckHorizontalDeceleration:
                 move.w  x_vel(a0),d0
                 add.w   $40(a0),d0
                 cmpi.w  #-$100,d0
-                ble.s   loc_75A44
+                ble.s   MHZMini_StoreHorizontalCandidate
                 cmpi.w  #$100,d0
-                bge.s   loc_75A48
-                move.l  #loc_75A48,(a0)
+                bge.s   MHZMini_ChooseCoastYAcceleration
+                move.l  #MHZMini_ChooseCoastYAcceleration,(a0)
                 bset    #0,$38(a0)
 
-loc_75A44:
+MHZMini_StoreHorizontalCandidate:
                 move.w  d0,x_vel(a0)
 
-loc_75A48:
+MHZMini_ChooseCoastYAcceleration:
                 move.w  y_vel(a0),d0
                 move.w  $3E(a0),d1
                 btst    #0,$38(a0)
-                beq.s   loc_75A5A
+                beq.s   MHZMini_UpdateVerticalSpeed
                 moveq   #-1,d1
 
-loc_75A5A:
+MHZMini_UpdateVerticalSpeed:
                 sub.w   d1,d0
                 cmpi.w  #$80,d0
-                blt.s   loc_75A68
-                move.l  #loc_75A6C,(a0)
+                blt.s   MHZMinibossLeaf_StoreVerticalCandidate
+                move.l  #MHZMini_MoveDrawOrDelete,(a0)
 
-loc_75A68:
+MHZMinibossLeaf_StoreVerticalCandidate:
                 move.w  d0,y_vel(a0)
 
-loc_75A6C:
+MHZMini_MoveDrawOrDelete:
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_75A7E
+                bpl.s   MHZMinibossLeaf_DeleteCurrentImmediately
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_75A7E:
+MHZMinibossLeaf_DeleteCurrentImmediately:
                 jmp     (Delete_Current_Sprite).l
-; End of function loc_75986
+; End of function MHZMini_FallAndCheckCatchHeight

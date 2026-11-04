@@ -9,15 +9,15 @@ SyncMHZMinibossFrameCollisionProxy:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 lsl.w   #2,d0
-                lea     byte_75BAE(pc,d0.w),a2
+                lea     MHZMini_FrameOffsetsAndResponse(pc,d0.w),a2
                 move.b  (a2)+,d0
                 ext.w   d0
                 move.w  x_pos(a1),d1
                 btst    #0,render_flags(a1)
-                beq.s   loc_75B90
+                beq.s   MHZMini_StoreFrameGeometry
                 neg.w   d0
 
-loc_75B90:
+MHZMini_StoreFrameGeometry:
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 move.b  (a2)+,d0
@@ -31,7 +31,7 @@ loc_75B90:
 ; End of function SyncMHZMinibossFrameCollisionProxy
 
 ; ---------------------------------------------------------------------------
-byte_75BAE:
+MHZMini_FrameOffsetsAndResponse:
                 dc.b    -$2A, $28, $A3,  $B
                 dc.b    -$2A, $29, $A3,  $B
                 dc.b    -$2A, $2A, $A3,  $B
@@ -66,16 +66,16 @@ MHZMiniParticle_InitMotion:
                 lsr.w   #3,d2
                 andi.w  #$1E,d2
                 jsr     (Random_Number).l
-                move.w  word_75C4A(pc,d2.w),d3
+                move.w  MHZMini_SpeedByHeightBucket(pc,d2.w),d3
                 andi.w  #$1FF,d0
                 add.w   d0,d3
                 moveq   #-$C,d4
                 btst    #1,d0
-                beq.s   loc_75C34
+                beq.s   MHZMini_StoreMotionAndRandomYAccel
                 neg.w   d3
                 neg.w   d4
 
-loc_75C34:
+MHZMini_StoreMotionAndRandomYAccel:
                 move.w  d3,x_vel(a0)
                 move.w  d4,$40(a0)
                 swap    d0
@@ -86,7 +86,7 @@ loc_75C34:
 ; End of function MHZMiniParticle_InitMotion
 
 ; ---------------------------------------------------------------------------
-word_75C4A:
+MHZMini_SpeedByHeightBucket:
                 dc.w    $400
                 dc.w    $400
                 dc.w    $400
@@ -127,24 +127,24 @@ MHZMiniPart_SetFramePriorityOffsets:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
-                move.b  RawAni_75CB6(pc,d0.w),mapping_frame(a0)
+                move.b  MHZMini_FramesByParentFrame(pc,d0.w),mapping_frame(a0)
                 add.w   d0,d0
                 move.w  d0,d1
-                lea     word_75CCC(pc,d0.w),a2
+                lea     MHZMini_QueuePriorityByFrame(pc,d0.w),a2
                 move.w  (a2)+,priority(a0)
                 add.w   d1,d1
                 add.b   subtype(a0),d1
-                lea     byte_75CF8(pc,d1.w),a2
+                lea     MHZMini_OffsetPairsByFrame(pc,d1.w),a2
                 move.w  (a2)+,child_dx(a0)              ; and child_dy
                 rts
 ; End of function MHZMiniPart_SetFramePriorityOffsets
 
 ; ---------------------------------------------------------------------------
-RawAni_75CB6:
+MHZMini_FramesByParentFrame:
                 dc.b    $16, $16, $16, $16, $16, $17, $16, $16, $16, $16, $16, $16, $16, $16, $16, $16, $16, $16, $16, $16
                 dc.b    $16, $16
                 even
-word_75CCC:
+MHZMini_QueuePriorityByFrame:
                 dc.w    $280
                 dc.w    $280
                 dc.w    $280
@@ -167,7 +167,7 @@ word_75CCC:
                 dc.w    $180
                 dc.w    $280
                 dc.w    $280
-byte_75CF8:
+MHZMini_OffsetPairsByFrame:
                 dc.b    $B, $1C
                 dc.b    1, $1C
                 dc.b    $B, $1C
@@ -220,16 +220,16 @@ MHZMini_SetPriorityFromFrame:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 move.w  #$200,priority(a0)
-                move.b  byte_75D6A(pc,d0.w),d0
-                beq.s   locret_75D68
+                move.b  MHZMini_FrontQueueFlagsByFrame(pc,d0.w),d0
+                beq.s   MHZMini_FrameSelectionReturn
                 move.w  #$80,priority(a0)
 
-locret_75D68:
+MHZMini_FrameSelectionReturn:
                 rts
 ; End of function MHZMini_SetPriorityFromFrame
 
 ; ---------------------------------------------------------------------------
-byte_75D6A:
+MHZMini_FrontQueueFlagsByFrame:
                 dc.b    0
                 dc.b    0
                 dc.b    0
@@ -258,80 +258,80 @@ byte_75D6A:
 
 HandleMHZMinibossFourColorHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.s   locret_75DCA
+                bne.s   MHZMini_HitUpdateReturn
                 move.b  collision_property(a0),d0
-                beq.s   loc_75DCC
+                beq.s   MHZMini_BeginDefeatFadeAndExplosion
                 tst.b   $20(a0)
-                bne.s   loc_75DA0
+                bne.s   MHZMini_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_75DA0:
+MHZMini_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_75DB4
+                bne.s   MHZMini_HitCopyColorsAndTick
                 addi.w  #2*4,d0
 
-loc_75DB4:
+MHZMini_HitCopyColorsAndTick:
                 bsr.w   CopyMHZMinibossFourColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_75DCA
+                bne.s   MHZMini_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_75DCA:
+MHZMini_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75DCC:
+MHZMini_BeginDefeatFadeAndExplosion:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_757BA,$34(a0)
+                move.l  #MHZMini_StartEndSign,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_75DEE
+                bne.s   MHZMini_StopTimerAndAwardScore
                 move.b  #$10,subtype(a1)
 
-loc_75DEE:
+MHZMini_StopTimerAndAwardScore:
                 jmp     (BossDefeated_StopTimer).l
 ; End of function HandleMHZMinibossFourColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyMHZMinibossFourColorPalette:
-                lea     word_75E02(pc),a1
-                lea     word_75E0A(pc,d0.w),a2
+                lea     MHZMini_HitPaletteDestinations(pc),a1
+                lea     MHZMinibossRootHit_TwoFourColorProfiles(pc,d0.w),a2
                 jmp     (CopyWordData_4).l
 ; End of function CopyMHZMinibossFourColorPalette
 
 ; ---------------------------------------------------------------------------
-word_75E02:
+MHZMini_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$0E, Normal_palette_line_2+$16, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_75E0A:
+MHZMinibossRootHit_TwoFourColorProfiles:
                 dc.w    $224,  $222,  $A64,  $642
                 dc.w    $AAA,  $EEE,  $888,  $666
 ; ---------------------------------------------------------------------------
 
-loc_75E1A:
+MHZMini_AdvanceCameraIfSameOwner:
                 move.w  (Camera_max_X_pos).w,d0
                 cmp.w   $34(a0),d0
-                bne.s   loc_75E4C
+                bne.s   MHZMini_DeleteCameraAccelerator
                 move.l  $30(a0),d1
                 addi.l  #$4000,d1
                 move.l  d1,$30(a0)
                 swap    d1
                 add.w   d1,d0
                 cmp.w   (Camera_stored_max_X_pos).w,d0
-                bhs.s   loc_75E46
+                bhs.s   MHZMini_ClampCameraMaximum
                 move.w  d0,(Camera_max_X_pos).w
                 move.w  d0,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75E46:
+MHZMini_ClampCameraMaximum:
                 move.w  (Camera_stored_max_X_pos).w,(Camera_max_X_pos).w
 
-loc_75E4C:
+MHZMini_DeleteCameraAccelerator:
                 jmp     (Delete_Current_Sprite).l
-; End of function loc_75E1A
+; End of function MHZMini_AdvanceCameraIfSameOwner

@@ -9,42 +9,42 @@ Obj_MHZMiniboss:
                 move.w  MHZMiniboss_Index(pc,d0.w),d1
                 jsr     MHZMiniboss_Index(pc,d1.w)
                 move.w  (Level_repeat_offset).w,d0
-                beq.s   loc_751E2
+                beq.s   MHZMini_CheckHitFrameAndDraw
                 sub.w   d0,x_pos(a0)
 
-loc_751E2:
+MHZMini_CheckHitFrameAndDraw:
                 bsr.w   HandleMHZMinibossFourColorHitOrDefeat
                 bsr.w   MHZMini_SetPriorityFromFrame
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 MHZMiniboss_Index:
-                dc.w    loc_75220-MHZMiniboss_Index
-                dc.w    loc_752D4-MHZMiniboss_Index
-                dc.w    loc_7531C-MHZMiniboss_Index
-                dc.w    loc_752D4-MHZMiniboss_Index
-                dc.w    loc_75392-MHZMiniboss_Index
-                dc.w    loc_753B6-MHZMiniboss_Index
-                dc.w    loc_753DE-MHZMiniboss_Index
-                dc.w    loc_7541A-MHZMiniboss_Index
-                dc.w    loc_7544C-MHZMiniboss_Index
-                dc.w    loc_754A0-MHZMiniboss_Index
-                dc.w    loc_754E0-MHZMiniboss_Index
-                dc.w    loc_75532-MHZMiniboss_Index
-                dc.w    loc_75564-MHZMiniboss_Index
-                dc.w    loc_754A0-MHZMiniboss_Index
-                dc.w    loc_755AE-MHZMiniboss_Index
-                dc.w    loc_754A0-MHZMiniboss_Index
-                dc.w    loc_7560C-MHZMiniboss_Index
-                dc.w    loc_7565C-MHZMiniboss_Index
-                dc.w    loc_754A0-MHZMiniboss_Index
-                dc.w    loc_75694-MHZMiniboss_Index
-                dc.w    loc_756C6-MHZMiniboss_Index
-                dc.w    loc_756FC-MHZMiniboss_Index
-                dc.w    loc_7571C-MHZMiniboss_Index
-                dc.w    loc_757A0-MHZMiniboss_Index
+                dc.w    MHZMini_InitBossAndLinkedChildren-MHZMiniboss_Index
+                dc.w    MHZMinibossRoot_AnimateMoveAndWait-MHZMiniboss_Index
+                dc.w    MHZMini_SwingThenBeginRightRun-MHZMiniboss_Index
+                dc.w    MHZMinibossRoot_AnimateMoveAndWait-MHZMiniboss_Index
+                dc.w    MHZMini_MoveAndWaitOnscreen-MHZMiniboss_Index
+                dc.w    MHZMini_DecelerateToZero-MHZMiniboss_Index
+                dc.w    MHZMini_SwingToChopWindow-MHZMiniboss_Index
+                dc.w    MHZMini_SwingAndChopTree-MHZMiniboss_Index
+                dc.w    MHZMini_WaitForLoweringTurn-MHZMiniboss_Index
+                dc.w    MHZMini_MoveAndTickPhaseWait-MHZMiniboss_Index
+                dc.w    MHZMini_AnimateStuckChopAndSound-MHZMiniboss_Index
+                dc.w    MHZMini_RecoilAndCheckFloor-MHZMiniboss_Index
+                dc.w    MHZMini_MoveToRecoverySpeed-MHZMiniboss_Index
+                dc.w    MHZMini_MoveAndTickPhaseWait-MHZMiniboss_Index
+                dc.w    MHZMini_MoveReturnArcToBaseline-MHZMiniboss_Index
+                dc.w    MHZMini_MoveAndTickPhaseWait-MHZMiniboss_Index
+                dc.w    MHZMini_KnucklesChopAndThrow-MHZMiniboss_Index
+                dc.w    MHZMini_AnimateThrownPhase-MHZMiniboss_Index
+                dc.w    MHZMini_MoveAndTickPhaseWait-MHZMiniboss_Index
+                dc.w    MHZMini_SwingUntilThrownActorReturns-MHZMiniboss_Index
+                dc.w    MHZMini_MoveToUpperCameraBand-MHZMiniboss_Index
+                dc.w    MHZMini_AnimateAndTickWait-MHZMiniboss_Index
+                dc.w    MHZMini_AnimateAndLimitYAcceleration-MHZMiniboss_Index
+                dc.w    MHZMini_SlowDiagonalYToZero-MHZMiniboss_Index
 ; ---------------------------------------------------------------------------
 
-loc_75220:
+MHZMini_InitBossAndLinkedChildren:
                 lea     ObjDat_MHZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  (Camera_X_pos).w,d0
@@ -60,17 +60,17 @@ loc_75220:
                 move.b  #1,(Boss_flag).w
                 move.w  #$100,y_vel(a0)
                 move.w  #$97,$2E(a0)
-                move.l  #loc_752E6,$34(a0)
-                move.l  #byte_75EAE,$30(a0)
+                move.l  #MHZMini_SaveXAndBeginCountedSwing,$34(a0)
+                move.l  #MHZMinibossRoot_DefaultFrameDelayLoop,$30(a0)
                 move.b  #$18,y_radius(a0)
-                lea     ChildObjDat_75E84(pc),a2
+                lea     MHZMini_LinkedBodyChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7529E
+                bne.s   MHZMini_QueueBossArtAndPalette
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_Miniboss,subtype(a1)
 
-loc_7529E:
+MHZMini_QueueBossArtAndPalette:
                 lea     (ArtKosM_MHZMiniboss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MHZMiniboss),d2
                 jsr     (Queue_Kos_Module).l
@@ -83,20 +83,20 @@ loc_7529E:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_752D4:
+MHZMinibossRoot_AnimateMoveAndWait:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_752E6:
+MHZMini_SaveXAndBeginCountedSwing:
                 move.b  #4,routine(a0)
                 clr.w   y_vel(a0)
                 move.b  x_pos+1(a0),$3A(a0)
                 move.w  y_pos(a0),$3C(a0)
                 move.b  #3,$39(a0)
 
-loc_75302:
+MHZMini_ResetSwingAndVelocity:
                 move.w  #$80,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
@@ -105,181 +105,182 @@ loc_75302:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7531C:
+MHZMini_SwingThenBeginRightRun:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (Swing_UpAndDown_Count).l
-                bne.s   loc_75330
+                bne.s   MHZMini_ClampAndBeginShortRun
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_75330:
+MHZMini_ClampAndBeginShortRun:
                 move.b  #6,routine(a0)
                 move.w  $3C(a0),y_pos(a0)
                 move.w  #$400,x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_75356,$34(a0)
+                move.l  #MHZMini_BeginRunAndOpenCamera,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75356:
+MHZMini_BeginRunAndOpenCamera:
                 move.b  #8,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 move.w  #$4F,$2E(a0)
-                move.l  #loc_753A4,$34(a0)
+                move.l  #MHZMini_BeginRunDeceleration,$34(a0)
                 move.w  #$6000,(Camera_target_max_X_pos).w
                 move.w  #$6000,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   locret_75390
-                move.l  #loc_75E1A,(a1)
+                bne.s   MHZMini_CameraHelperSpawnReturn
+                move.l  #MHZMini_AdvanceCameraIfSameOwner,(a1)
                 move.w  (Camera_max_X_pos).w,$34(a1)
 
-locret_75390:
+MHZMini_CameraHelperSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75392:
+MHZMini_MoveAndWaitOnscreen:
                 tst.b   render_flags(a0)
-                bpl.s   locret_753B4
+                bpl.s   MHZMini_RunUpdateReturn
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_753A4:
+MHZMini_BeginRunDeceleration:
                 move.b  #$A,routine(a0)
                 move.b  #4,mapping_frame(a0)
                 addq.w  #2,x_pos(a0)
 
-locret_753B4:
+MHZMini_RunUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_753B6:
+MHZMini_DecelerateToZero:
                 move.w  x_vel(a0),d0
                 addi.w  #-$20,d0
                 move.w  d0,x_vel(a0)
-                beq.s   loc_753CA
+                beq.s   MHZMini_RestoreXAndSwing
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_753CA:
+MHZMini_RestoreXAndSwing:
                 move.b  #$C,routine(a0)
                 move.b  $3A(a0),x_pos+1(a0)
                 clr.w   x_vel(a0)
-                bra.w   loc_75302
+                bra.w   MHZMini_ResetSwingAndVelocity
 ; ---------------------------------------------------------------------------
 
-loc_753DE:
+MHZMini_SwingToChopWindow:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 move.w  x_pos(a0),d0
                 sub.w   (Camera_X_pos).w,d0
                 cmpi.w  #$110,d0
-                bls.s   loc_753FA
+                bls.s   MHZMini_BeginChopAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_753FA:
+MHZMini_BeginChopAnimation:
                 move.b  #$E,routine(a0)
-                move.l  #byte_75EBB,$30(a0)
-                move.l  #loc_75444,$34(a0)
+                move.l  #MHZMini_ChopAnim,$30(a0)
+                move.l  #MHZMinibossRoot_SelectWaitForSwingTurn,$34(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7541A:
+; Advance the tree damage only when the decoder steps to cursor $A
+MHZMini_SwingAndChopTree:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Animate_RawMultiDelay).l
-                beq.s   locret_75442
+                beq.s   MHZMini_ChopAnimationReturn
                 cmpi.b  #$A,anim_frame(a0)
-                bne.s   locret_75442
+                bne.s   MHZMini_ChopAnimationReturn
                 subq.b  #1,$42(a0)
                 moveq   #signextendB(sfx_ChopTree),d0
                 jsr     (Play_SFX).l
 
-locret_75442:
+MHZMini_ChopAnimationReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75444:
+MHZMinibossRoot_SelectWaitForSwingTurn:
                 move.b  #$10,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7544C:
+MHZMini_WaitForLoweringTurn:
                 jsr     (Swing_UpAndDown).l
                 tst.w   d3
-                bne.s   loc_7545C
+                bne.s   MHZMini_BeginLoweringAndCheckTrees
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_7545C:
+MHZMini_BeginLoweringAndCheckTrees:
                 move.b  #$12,routine(a0)
                 move.w  #$200,y_vel(a0)
                 cmpi.b  #1,$42(a0)
-                beq.s   loc_75480
+                beq.s   MHZMini_ChooseLastTreeCallback
                 move.w  #$F,$2E(a0)
-                move.l  #loc_754AC,$34(a0)
+                move.l  #MHZMini_ReturnToChopSwing,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75480:
+MHZMini_ChooseLastTreeCallback:
                 move.w  #7,$2E(a0)
-                move.l  #loc_754BE,$34(a0)
+                move.l  #MHZMini_BeginStuckChop,$34(a0)
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   locret_7549E
-                move.l  #loc_754D6,$34(a0)
+                bne.s   MHZMini_LastTreeSetupReturn
+                move.l  #MHZMini_BeginKnucklesThrowSwing,$34(a0)
 
-locret_7549E:
+MHZMini_LastTreeSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_754A0:
+MHZMini_MoveAndTickPhaseWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_754AC:
+MHZMini_ReturnToChopSwing:
                 move.b  #$E,routine(a0)
-                move.l  #loc_75444,$34(a0)
-                bra.w   loc_75302
+                move.l  #MHZMinibossRoot_SelectWaitForSwingTurn,$34(a0)
+                bra.w   MHZMini_ResetSwingAndVelocity
 ; ---------------------------------------------------------------------------
 
-loc_754BE:
+MHZMini_BeginStuckChop:
                 move.b  #$14,routine(a0)
-                move.l  #byte_75ED0,$30(a0)
-                move.l  #loc_75508,$34(a0)
+                move.l  #MHZMini_StuckChopAnim,$30(a0)
+                move.l  #MHZMini_BeginRecoilAndHideLinks,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_754D6:
+MHZMini_BeginKnucklesThrowSwing:
                 move.b  #$20,routine(a0)
-                bra.w   loc_75302
+                bra.w   MHZMini_ResetSwingAndVelocity
 ; ---------------------------------------------------------------------------
 
-loc_754E0:
+MHZMini_AnimateStuckChopAndSound:
                 jsr     (Animate_RawMultiDelay).l
-                beq.s   locret_75506
+                beq.s   MHZMini_StuckChopUpdateReturn
                 cmpi.b  #$12,mapping_frame(a0)
-                bne.s   loc_754F8
+                bne.s   MHZMinibossRoot_NudgeXAtStuckRawCursor
                 moveq   #signextendB(sfx_ChopStuck),d0
                 jsr     (Play_SFX).l
 
-loc_754F8:
+MHZMinibossRoot_NudgeXAtStuckRawCursor:
                 cmpi.b  #$C,anim_frame(a0)
-                bne.s   locret_75506
+                bne.s   MHZMini_StuckChopUpdateReturn
                 subi.w  #$20,x_pos(a0)
 
-locret_75506:
+MHZMini_StuckChopUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75508:
+MHZMini_BeginRecoilAndHideLinks:
                 move.b  #$16,routine(a0)
                 bset    #6,$38(a0)
-                move.l  #byte_75EF3,$30(a0)
+                move.l  #MHZMini_RecoilAnim,$30(a0)
                 move.w  #-$400,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 moveq   #signextendB(sfx_ChopStuck),d0
@@ -287,66 +288,66 @@ loc_75508:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75532:
+MHZMini_RecoilAndCheckFloor:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_7554E
+                bmi.s   MHZMini_RecoilFloorReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_75550
+                bmi.s   MHZMini_SetSecondRecoilVelocity
 
-locret_7554E:
+MHZMini_RecoilFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75550:
+MHZMini_SetSecondRecoilVelocity:
                 move.b  #$18,routine(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$300,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75564:
+MHZMini_MoveToRecoverySpeed:
                 jsr     (MoveSprite).l
                 move.w  y_vel(a0),d0
-                bmi.s   locret_75576
+                bmi.s   MHZMini_RecoverySpeedReturn
                 cmpi.w  #$100,d0
-                bhs.s   loc_75578
+                bhs.s   MHZMini_BeginVisibleRecovery
 
-locret_75576:
+MHZMini_RecoverySpeedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75578:
+MHZMini_BeginVisibleRecovery:
                 move.b  #$1A,routine(a0)
                 bclr    #6,$38(a0)
                 move.w  #$100,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_755A0,$34(a0)
+                move.l  #MHZMini_BeginReturnArcAndHideLinks,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_755A0:
+MHZMini_BeginReturnArcAndHideLinks:
                 move.b  #$1C,routine(a0)
                 bset    #6,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_755AE:
+MHZMini_MoveReturnArcToBaseline:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_755C4
+                bmi.s   MHZMini_ReturnArcGateReturn
                 move.w  y_pos(a0),d0
                 cmp.w   $3C(a0),d0
-                bhs.s   loc_755C6
+                bhs.s   MHZMini_ClampAndBeginRecoveryRun
 
-locret_755C4:
+MHZMini_ReturnArcGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_755C6:
+MHZMini_ClampAndBeginRecoveryRun:
                 move.b  #$1E,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 bclr    #6,$38(a0)
@@ -355,117 +356,117 @@ loc_755C6:
                 clr.w   y_vel(a0)
                 move.w  #$400,x_vel(a0)
                 move.w  #$2A,$2E(a0)
-                move.l  #loc_75330,$34(a0)
+                move.l  #MHZMini_ClampAndBeginShortRun,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_75F0D,$30(a0)
+                move.l  #MHZMinibossRoot_LongFrameFivePairLoop,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7560C:
+MHZMini_KnucklesChopAndThrow:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Animate_RawMultiDelay).l
-                beq.s   locret_7565A
+                beq.s   MHZMini_KnucklesChopReturn
                 cmpi.b  #$A,anim_frame(a0)
-                bne.s   locret_7565A
+                bne.s   MHZMini_KnucklesChopReturn
                 move.b  #$22,routine(a0)
                 move.b  #$F,mapping_frame(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_75F02,$30(a0)
-                move.l  #loc_7566E,$34(a0)
+                move.l  #MHZMini_ThrowAnim,$30(a0)
+                move.l  #MHZMini_BeginPostThrowDrift,$34(a0)
                 subq.b  #1,$42(a0)
-                lea     ChildObjDat_75E9E(pc),a2
+                lea     MHZMinibossRoot_SingleThrownNormalChild(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-locret_7565A:
+MHZMini_KnucklesChopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7565C:
+MHZMini_AnimateThrownPhase:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_7566E:
+MHZMini_BeginPostThrowDrift:
                 move.b  #$24,routine(a0)
                 move.w  #-$80,y_vel(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_7568A,$34(a0)
+                move.l  #MHZMini_BeginWaitingSwing,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7568A:
+MHZMini_BeginWaitingSwing:
                 move.b  #$26,routine(a0)
-                bra.w   loc_75302
+                bra.w   MHZMini_ResetSwingAndVelocity
 ; ---------------------------------------------------------------------------
 
-loc_75694:
+MHZMini_SwingUntilThrownActorReturns:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 btst    #2,$38(a0)
-                bne.s   loc_756AA
+                bne.s   MHZMinibossRoot_StartUpwardCameraExit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_756AA:
+MHZMinibossRoot_StartUpwardCameraExit:
                 move.b  #$28,routine(a0)
                 move.b  #0,mapping_frame(a0)
                 move.w  #-$200,y_vel(a0)
-                move.l  #byte_75EAE,$30(a0)
+                move.l  #MHZMinibossRoot_DefaultFrameDelayLoop,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_756C6:
+MHZMini_MoveToUpperCameraBand:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$30,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_756E2
+                bhs.s   MHZMini_ClampUpperBandAndPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_756E2:
+MHZMini_ClampUpperBandAndPause:
                 move.b  #$2A,routine(a0)
                 move.w  d0,y_pos(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_75708,$34(a0)
+                move.l  #MHZMini_BeginDownLeftArc,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_756FC:
+MHZMini_AnimateAndTickWait:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_75708:
+MHZMini_BeginDownLeftArc:
                 move.b  #$2C,routine(a0)
                 move.w  #-$400,x_vel(a0)
                 move.w  #$700,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7571C:
+MHZMini_AnimateAndLimitYAcceleration:
                 jsr     (Animate_RawMultiDelay).l
                 move.w  y_vel(a0),d0
                 addi.w  #-$48,d0
                 cmpi.w  #-$700,d0
-                blt.s   loc_75734
+                blt.s   MHZMini_MoveArcAndCheckExit
                 move.w  d0,y_vel(a0)
 
-loc_75734:
+MHZMini_MoveArcAndCheckExit:
                 jsr     (MoveSprite2).l
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$80,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_7574A
+                bhs.s   MHZMini_BeginDiagonalRecoveryRun
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7574A:
+MHZMini_BeginDiagonalRecoveryRun:
                 move.b  #$2E,routine(a0)
                 move.b  #5,mapping_frame(a0)
                 move.w  (Camera_X_pos_copy).w,d0
@@ -477,120 +478,120 @@ loc_7574A:
                 move.w  #$400,x_vel(a0)
                 move.w  #$400,y_vel(a0)
                 move.w  #$37,$2E(a0)
-                move.l  #loc_75330,$34(a0)
+                move.l  #MHZMini_ClampAndBeginShortRun,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
-                move.l  #byte_75F0D,$30(a0)
+                move.l  #MHZMinibossRoot_LongFrameFivePairLoop,$30(a0)
                 bclr    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_757A0:
+MHZMini_SlowDiagonalYToZero:
                 move.w  y_vel(a0),d0
                 addi.w  #-$10,d0
-                bmi.s   loc_757AE
+                bmi.s   MHZMini_MoveAndTickRecovery
                 move.w  d0,y_vel(a0)
 
-loc_757AE:
+MHZMini_MoveAndTickRecovery:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_757BA:
+MHZMini_StartEndSign:
                 jmp     (Obj_EndSignControl).l
 ; ---------------------------------------------------------------------------
 
-loc_757C0:
-                move.l  #loc_757D6,(a0)
+MHZMini_InitLeafSpawner:
+                move.l  #MHZMini_FollowAndTryLeaf,(a0)
                 bset    #4,shield_reaction(a0)
-                lea     word_75E5E(pc),a1
+                lea     MHZMini_ArtPriorityBounds(pc),a1
                 jmp     (SetUp_ObjAttributes2).l
 ; ---------------------------------------------------------------------------
 
-loc_757D6:
+MHZMini_FollowAndTryLeaf:
                 bsr.w   MHZMiniPart_SetFramePriorityOffsets
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #6,$38(a1)
-                bne.w   loc_7582A
+                bne.w   MHZMini_LeafSpawnerCheckParent
                 move.b  (V_int_run_count+3).w,d0
                 btst    #0,d0
-                bne.w   loc_7582A
+                bne.w   MHZMini_LeafSpawnerCheckParent
                 andi.b  #$F,d0
-                bne.s   loc_75824
+                bne.s   MHZMini_LeafSpawnerTouchDraw
                 tst.b   render_flags(a0)
-                bpl.s   loc_75824
+                bpl.s   MHZMini_LeafSpawnerTouchDraw
                 jsr     (AllocateObject).l
-                bne.s   loc_75824
-                move.l  #loc_759FC,(a1)
+                bne.s   MHZMini_LeafSpawnerTouchDraw
+                move.l  #MHZMini_InitCameraRelativeMotion,(a1)
                 move.w  a0,parent3(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
 
-loc_75824:
+MHZMini_LeafSpawnerTouchDraw:
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7582A:
+MHZMini_LeafSpawnerCheckParent:
                 btst    #7,status(a1)
-                bne.s   loc_75834
+                bne.s   MHZMini_DeleteLeafSpawner
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_75834:
+MHZMini_DeleteLeafSpawner:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7583A:
+MHZMini_ThrownActorDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7584E(pc,d0.w),d1
-                jsr     off_7584E(pc,d1.w)
+                move.w  MHZMinibossThrownActor_StateOffsets(pc,d0.w),d1
+                jsr     MHZMinibossThrownActor_StateOffsets(pc,d1.w)
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_7584E:
-                dc.w    loc_7585A-off_7584E
-                dc.w    loc_7589E-off_7584E
-                dc.w    loc_7592A-off_7584E
-                dc.w    loc_75924-off_7584E
-                dc.w    loc_7592A-off_7584E
-                dc.w    loc_75986-off_7584E
+MHZMinibossThrownActor_StateOffsets:
+                dc.w    MHZMini_InitPlayerAimedThrow-MHZMinibossThrownActor_StateOffsets
+                dc.w    MHZMini_ThrownActorFallAndBounce-MHZMinibossThrownActor_StateOffsets
+                dc.w    MHZMini_AnimateAndWait-MHZMinibossThrownActor_StateOffsets
+                dc.w    MHZMini_MoveAnimateAndWait-MHZMinibossThrownActor_StateOffsets
+                dc.w    MHZMini_AnimateAndWait-MHZMinibossThrownActor_StateOffsets
+                dc.w    MHZMini_FallAndCheckCatchHeight-MHZMinibossThrownActor_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7585A:
-                lea     word_75E7E(pc),a1
+MHZMini_InitPlayerAimedThrow:
+                lea     MHZMinibossThrownActor_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #6,y_radius(a0)
                 move.w  #-$300,y_vel(a0)
-                move.l  #byte_75F1C,$30(a0)
+                move.l  #MHZMinibossThrownActor_FrameDelayLoop,$30(a0)
                 moveq   #0,d0
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                beq.s   loc_7589A
+                beq.s   MHZMini_StoreThrowXSpeed
                 smi     d1
-                bpl.s   loc_7588E
+                bpl.s   MHZMini_DivideThrowXDistance
                 neg.w   d0
 
-loc_7588E:
+MHZMini_DivideThrowXDistance:
                 swap    d0
                 divu.w  #$3800,d0
                 tst.b   d1
-                beq.s   loc_7589A
+                beq.s   MHZMini_StoreThrowXSpeed
                 neg.w   d0
 
-loc_7589A:
+MHZMini_StoreThrowXSpeed:
                 move.w  d0,x_vel(a0)
 
-loc_7589E:
+MHZMini_ThrownActorFallAndBounce:
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_758B8
+                bmi.s   MHZMini_AnimateAfterThrow
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_758B8
+                bpl.s   MHZMini_AnimateAfterThrow
                 bsr.w   MHZMiniThrown_BounceOrStartRecovery
 
-loc_758B8:
+MHZMini_AnimateAfterThrow:
                 jmp     (Animate_RawMultiDelay).l
-; End of function loc_757A0
+; End of function MHZMini_SlowDiagonalYToZero

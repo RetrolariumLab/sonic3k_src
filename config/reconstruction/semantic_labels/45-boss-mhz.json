@@ -1,0 +1,3340 @@
+{
+  "schema_version": 1,
+  "packet": "45-boss-mhz",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 35,
+      "old": "loc_75FD4",
+      "new": "MHZBoss_BattleDispatchHitAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch the eight-slot root state graph and finish the current root update."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 45,
+      "old": "off_75FF4",
+      "new": "MHZEndBoss_RootStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD state slots indexed by even routine BYTE."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 56,
+      "old": "loc_76004",
+      "new": "MHZBoss_ResetHealthUntilWeatherSignal",
+      "profiles": ["sk"],
+      "meaning": "Restore root collision and nine-hit counter while routine0 remains selected."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 62,
+      "old": "loc_7601A",
+      "new": "MHZBoss_WaitWeatherAndArmRise",
+      "profiles": ["sk"],
+      "meaning": "Wait for weather-machine destruction flag before starting the root delay."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 69,
+      "old": "locret_76036",
+      "new": "MHZBoss_WeatherWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the weather signal gate or delay setup."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 73,
+      "old": "loc_76038",
+      "new": "MHZEndBoss_WaitBeforeRootRise",
+      "profiles": ["sk"],
+      "meaning": "Run the signed WORD timer before the first upward travel."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 77,
+      "old": "loc_7603E",
+      "new": "MHZEndBoss_StartTimedUpwardRise",
+      "profiles": ["sk"],
+      "meaning": "Select rising movement and its later swing callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 85,
+      "old": "locret_76060",
+      "new": "MHZBoss_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for root setup,cutscene and attached-child visibility gates."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 89,
+      "old": "loc_76062",
+      "new": "MHZEndBoss_MoveAndWaitDuringRise",
+      "profiles": ["sk"],
+      "meaning": "Integrate velocity then consume the current signed timer callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 94,
+      "old": "loc_7606E",
+      "new": "MHZEndBoss_StartSwingDelayBeforeDash",
+      "profiles": ["sk"],
+      "meaning": "Select bobbing wait before the first rightward dash."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 101,
+      "old": "loc_76088",
+      "new": "MHZBoss_SwingMoveAndWait",
+      "profiles": ["sk"],
+      "meaning": "Shared swing,velocity integration and signed WORD wait."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 107,
+      "old": "loc_7609A",
+      "new": "MHZBoss_BeginSpikedDash",
+      "profiles": ["sk"],
+      "meaning": "Select rightward dash and enable spike-child presentation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 118,
+      "old": "loc_760C4",
+      "new": "MHZBoss_EnterChaseAndTryArtWatcher",
+      "profiles": ["sk"],
+      "meaning": "Enter final chase coordinates and attempt its delayed spike-art actor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 129,
+      "old": "loc_760F4",
+      "new": "MHZBoss_SetChaseCameraTarget",
+      "profiles": ["sk"],
+      "meaning": "Expand stored camera max regardless of spike-watcher allocation result."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 135,
+      "old": "loc_76106",
+      "new": "MHZBoss_SwingUntilCameraChaseGate",
+      "profiles": ["sk"],
+      "meaning": "Wait until unsigned cameraX+0xE0 is at least root X."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 144,
+      "old": "loc_76120",
+      "new": "MHZBoss_BeginAlternatingChase",
+      "profiles": ["sk"],
+      "meaning": "Select the shared chase wait and force its first callback immediately."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 151,
+      "old": "loc_76136",
+      "new": "MHZBoss_LoadCharacterChaseSpeed",
+      "profiles": ["sk"],
+      "meaning": "Reload chase interval and choose normal or Knuckles base speed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 158,
+      "old": "loc_7614C",
+      "new": "MHZBoss_ToggleSpikesAndAdjustSpeed",
+      "profiles": ["sk"],
+      "meaning": "Toggle own spike phase and select plus/minus0x100 speed adjustment."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 164,
+      "old": "loc_7615C",
+      "new": "MHZEndBoss_CommitAdjustedChaseXVelocity",
+      "profiles": ["sk"],
+      "meaning": "Store character base speed plus the selected phase adjustment."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 170,
+      "old": "loc_76164",
+      "new": "MHZBoss_EscapeToDefeatGate",
+      "profiles": ["sk"],
+      "meaning": "Move the one-health escape until unsigned X reaches0x44D0."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 183,
+      "old": "loc_761A4",
+      "new": "MHZEndBoss_WrapCorrectAndDrawEscapeShip",
+      "profiles": ["sk"],
+      "meaning": "Finish escape movement with integer-world wrap correction and ordinary draw."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 189,
+      "old": "loc_761B2",
+      "new": "MHZBoss_BeginRiseAndBreakup",
+      "profiles": ["sk"],
+      "meaning": "Select post-music breakup rise and attempt six simple debris children."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 202,
+      "old": "loc_761E8",
+      "new": "MHZBoss_FallThenSpawnCapsule",
+      "profiles": ["sk"],
+      "meaning": "Move with normal gravity until actorY exceeds cameraY+0x120 unsigned."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 220,
+      "old": "loc_76236",
+      "new": "MHZEndBoss_DrawBreakupShipAfterDepthGate",
+      "profiles": ["sk"],
+      "meaning": "Draw after the post-defeat falling threshold or capsule attempt."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 224,
+      "old": "loc_7623C",
+      "new": "MHZBoss_AdvanceCameraToExitLock",
+      "profiles": ["sk"],
+      "meaning": "Move camera X right by4 until unsigned candidate reaches0x45A0."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 239,
+      "old": "loc_7626A",
+      "new": "MHZEndBoss_CommitPostDefeatCameraX",
+      "profiles": ["sk"],
+      "meaning": "Write prepared camera candidate or clamped target."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 244,
+      "old": "loc_76270",
+      "new": "MHZBoss_WaitCapsuleAndResetShip",
+      "profiles": ["sk"],
+      "meaning": "Wait for FAA8 completion before rebuilding the scripted departure."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 278,
+      "old": "loc_76310",
+      "new": "MHZEndBoss_WaitBeforeDepartureFlight",
+      "profiles": ["sk"],
+      "meaning": "Consume the scripted ship departure delay."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 284,
+      "old": "loc_76318",
+      "new": "MHZBoss_BeginShipDeparture",
+      "profiles": ["sk"],
+      "meaning": "Clear defeat presentation flags and start rightward departure."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 298,
+      "old": "loc_76356",
+      "new": "MHZBoss_PlaySirenAndSetDeparture",
+      "profiles": ["sk"],
+      "meaning": "Face players and choose upward acceleration only past camera-relative X."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 309,
+      "old": "loc_76376",
+      "new": "MHZBoss_MoveShipAndSetWalkStage",
+      "profiles": ["sk"],
+      "meaning": "Integrate custom gravity and stop drawing updates once ship reaches upper camera band."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 321,
+      "old": "loc_763A4",
+      "new": "MHZBoss_WrapAndDrawShip",
+      "profiles": ["sk"],
+      "meaning": "Finish current siren-flight update after optional input-lock allocation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 327,
+      "old": "loc_763B2",
+      "new": "MHZBoss_WalkPlayerToStopX",
+      "profiles": ["sk"],
+      "meaning": "Delegate logical right walking until unsigned Player1 X reaches0x4778."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 334,
+      "old": "loc_763C4",
+      "new": "MHZEndBoss_StopPlayerAtDepartureWalkGate",
+      "profiles": ["sk"],
+      "meaning": "Install up-input wait after reaching the walk gate."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 341,
+      "old": "loc_763D8",
+      "new": "MHZBoss_WaitBackgroundThenJump",
+      "profiles": ["sk"],
+      "meaning": "Hold logical Player1 up and RAW Player2 up while waiting for FAA9."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 353,
+      "old": "loc_76404",
+      "new": "MHZBoss_WaitJumpApexAndGrab",
+      "profiles": ["sk"],
+      "meaning": "Wait for nonnegative Player1 y_vel before freezing its scripted pose."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 371,
+      "old": "loc_76456",
+      "new": "MHZBoss_TickGrabPoseDelay",
+      "profiles": ["sk"],
+      "meaning": "Consume signed WORD pose delay and start MGZ on underflow."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 377,
+      "old": "loc_7645E",
+      "new": "MHZBoss_StartMarbleGardenAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Start level0x400 and directly delete this ship/coordinator slot."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 383,
+      "old": "loc_7646E",
+      "new": "MHZBoss_InitPartnerDeparturePose",
+      "profiles": ["sk"],
+      "meaning": "Set Player2 scripted pose then select its direct integer-step helper."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 393,
+      "old": "loc_76492",
+      "new": "MHZBoss_MovePartnerUpAndRight",
+      "profiles": ["sk"],
+      "meaning": "Shift Player2 by one integer pixel right and one up per update."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 400,
+      "old": "loc_764A0",
+      "new": "MHZBoss_InitPairedTouchProxy",
+      "profiles": ["sk"],
+      "meaning": "Initialize the root paired collision receiver and publish its short handle."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 409,
+      "old": "loc_764C4",
+      "new": "MHZBoss_ProxyFollowAndSubmitTouch",
+      "profiles": ["sk"],
+      "meaning": "Refresh paired receiver position and register parent-aware touch without drawing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 414,
+      "old": "loc_764D0",
+      "new": "MHZBoss_InitPriorityOverlay",
+      "profiles": ["sk"],
+      "meaning": "Apply full visual overlay attributes and install parent-flag priority gate."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 419,
+      "old": "loc_764E0",
+      "new": "MHZBoss_RaiseOverlayPriority",
+      "profiles": ["sk"],
+      "meaning": "Latch high art priority once parent own flag3 appears."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 426,
+      "old": "loc_764F8",
+      "new": "MHZBoss_SyncAndDrawPriorityOverlay",
+      "profiles": ["sk"],
+      "meaning": "Copy root XY/flip then draw with own-flag4 parent lifetime."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 431,
+      "old": "loc_76502",
+      "new": "MHZBoss_InitLayeredOverlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two simple visual overlays with subtype-selected frame/layer."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 437,
+      "old": "loc_76516",
+      "new": "MHZBoss_SyncAndDrawLayeredOverlay",
+      "profiles": ["sk"],
+      "meaning": "Update subtype-layered overlay position and horizontal flip from root."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 442,
+      "old": "loc_76520",
+      "new": "MHZBoss_InitWeatherMachine",
+      "profiles": ["sk"],
+      "meaning": "Initialize the one-hit weather actor and attempt two independent simple effect groups."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 452,
+      "old": "loc_7654A",
+      "new": "MHZBoss_TickWeatherSound",
+      "profiles": ["sk"],
+      "meaning": "Play intermittent weather-machine sound until its collision field is cleared."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 464,
+      "old": "loc_7656E",
+      "new": "MHZEndBoss_DrawAndTouchWeatherMachine",
+      "profiles": ["sk"],
+      "meaning": "Finish living weather-machine update with collision-list registration and drawing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 468,
+      "old": "loc_76574",
+      "new": "MHZBoss_SignalWeatherDefeat",
+      "profiles": ["sk"],
+      "meaning": "Schedule weather actor deletion and signal the root to begin rising."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 478,
+      "old": "loc_7659C",
+      "new": "MHZBoss_SaveFirstPaletteLine",
+      "profiles": ["sk"],
+      "meaning": "Copy current palette line1 before loading boss target line2."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 485,
+      "old": "loc_765AE",
+      "new": "MHZBoss_CopyBossPaletteLine",
+      "profiles": ["sk"],
+      "meaning": "Copy boss palette to target line2 and prepare the64-byte zone copy."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 492,
+      "old": "loc_765C0",
+      "new": "MHZBoss_CopyZoneTargetPalette",
+      "profiles": ["sk"],
+      "meaning": "Copy target lines3/4 then independently try the all-color flash coordinator."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 501,
+      "old": "loc_765DE",
+      "new": "MHZBoss_TryBossMusicTransition",
+      "profiles": ["sk"],
+      "meaning": "Attempt end-boss song transition independently of flash allocation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 507,
+      "old": "loc_765F2",
+      "new": "MHZBoss_TryWeatherExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt weather-machine explosion and clear original scene signal."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 514,
+      "old": "loc_76604",
+      "new": "MHZBoss_InitWeatherPairEffect",
+      "profiles": ["sk"],
+      "meaning": "Choose one of two raw pair loops for repeated weather effects."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 522,
+      "old": "loc_76624",
+      "new": "MHZBoss_InstallWeatherPairUpdate",
+      "profiles": ["sk"],
+      "meaning": "Install the common pair-effect direct handler and execute its first update."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 525,
+      "old": "loc_7662A",
+      "new": "MHZBoss_AnimateWeatherPairAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Animate pair stream then draw while parent status7 remains clear."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 530,
+      "old": "loc_76636",
+      "new": "MHZBoss_InitDiagonalWeatherEffect",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of four offset diagonal uniform effects."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 537,
+      "old": "loc_76652",
+      "new": "MHZBoss_AnimateDiagonalEffect",
+      "profiles": ["sk"],
+      "meaning": "Run uniform raw loop then parent-aware ordinary drawing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 542,
+      "old": "loc_7665E",
+      "new": "MHZBoss_InitShieldSpike",
+      "profiles": ["sk"],
+      "meaning": "Initialize shield-reacting attached spike/contact actor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 548,
+      "old": "loc_76674",
+      "new": "MHZBoss_SpikeFollowAndCheckHit",
+      "profiles": ["sk"],
+      "meaning": "Refresh spike position and disable collision during parent hit flash."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 558,
+      "old": "loc_76698",
+      "new": "MHZBoss_SpikeSelectDrawParity",
+      "profiles": ["sk"],
+      "meaning": "Select complementary VInt parity for the two normal spike children."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 565,
+      "old": "loc_766A8",
+      "new": "MHZBoss_SpikeDrawAndSubmitTouch",
+      "profiles": ["sk"],
+      "meaning": "Draw/register a spike only on its parity and parent own flag6."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 574,
+      "old": "loc_766C4",
+      "new": "MHZBoss_SpikeDeleteWithParent",
+      "profiles": ["sk"],
+      "meaning": "Schedule ordinary spike deletion once root status7 is set."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 578,
+      "old": "loc_766CA",
+      "new": "MHZBoss_InitBreakupFragment",
+      "profiles": ["sk"],
+      "meaning": "Select six-fragment priority/frame data and indexed velocity before first draw."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 592,
+      "old": "word_766FC",
+      "new": "MHZBoss_FragmentPriorityFrames",
+      "profiles": ["sk"],
+      "meaning": "Six padded priority/frame records indexed by simple-child even subtype."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 20,
+      "old": "word_7672E",
+      "new": "MHZBoss_DiagonalEffectOffsets",
+      "profiles": ["sk"],
+      "meaning": "Four signed WORD XY offsets selected by repeated-simple effect subtype."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 39,
+      "old": "word_76754",
+      "new": "MHZBoss_OverlayPriorityFrames",
+      "profiles": ["sk"],
+      "meaning": "Two padded overlay priority/frame records selected by simple-child subtype."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 58,
+      "old": "locret_76780",
+      "new": "MHZBoss_OverlaySyncReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after parent integer XY and horizontal flip synchronization."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 74,
+      "old": "loc_767A0",
+      "new": "MHZBoss_ClampHealthBeforeChase",
+      "profiles": ["sk"],
+      "meaning": "Apply pre-final signed health floor to either root or proxy hit."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 81,
+      "old": "loc_767B0",
+      "new": "MHZBoss_StorePairedHealthAndFlash",
+      "profiles": ["sk"],
+      "meaning": "Store local paired-hit health and begin common hit flash only when timer0."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 96,
+      "old": "loc_767E4",
+      "new": "MHZBoss_ClearHitPlayerXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Clear horizontal velocity of the player recorded by the paired hit."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 99,
+      "old": "loc_767E8",
+      "new": "MHZBoss_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Choose palette row by old hit-timer parity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 105,
+      "old": "loc_767F6",
+      "new": "MHZBoss_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy current flash row and consume hit timer before deciding exact-health escape."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 116,
+      "old": "locret_76820",
+      "new": "MHZBoss_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after absent hit,ongoing flash or restored paired collision."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 120,
+      "old": "loc_76822",
+      "new": "MHZBoss_BeginOneHitEscape",
+      "profiles": ["sk"],
+      "meaning": "Select the escape handler after exact-health1 flash expiry."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 128,
+      "old": "loc_7683E",
+      "new": "MHZBoss_SetEscapeSpeedAndTryWatcher",
+      "profiles": ["sk"],
+      "meaning": "Commit escape speed and publish FAA9 chase handshake before allocation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 135,
+      "old": "loc_76854",
+      "new": "MHZBoss_TryEscapeExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt escape explosion independently of the input-watcher result."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 141,
+      "old": "locret_76868",
+      "new": "MHZBoss_EscapeEffectReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after failed or successful escape explosion setup."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 154,
+      "old": "word_76878",
+      "new": "MHZBoss_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Five sparse palette destinations consumed by CopyWordData_5."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 156,
+      "old": "word_76882",
+      "new": "MHZBoss_HitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two five-WORD palette source rows selected by offset0 or10 bytes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 161,
+      "old": "loc_76896",
+      "new": "MHZBoss_WaitCameraAndLoadSpikeArt",
+      "profiles": ["sk"],
+      "meaning": "Wait until unsigned cameraX reaches0x4010 before requesting spike graphics."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 170,
+      "old": "loc_768B6",
+      "new": "MHZBoss_WaitChaseAndTryP2Lock",
+      "profiles": ["sk"],
+      "meaning": "Wait for background to clear FAA9 then install grounded-player watcher."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 178,
+      "old": "loc_768D2",
+      "new": "MHZBoss_ResetPlayerAndWaitGround",
+      "profiles": ["sk"],
+      "meaning": "Clear two player status bits while waiting for Player1 not in air."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 189,
+      "old": "locret_768FC",
+      "new": "MHZBoss_EscapeGroundGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during grounded-player wait or after walking stage selection."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 193,
+      "old": "loc_768FE",
+      "new": "MHZBoss_WalkPlayerToEscapeGate",
+      "profiles": ["sk"],
+      "meaning": "Hold logical right while Player1 X remains below0x4600."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "original_line": 201,
+      "old": "loc_76912",
+      "new": "MHZBoss_StopPlayerAndDeleteWatcher",
+      "profiles": ["sk"],
+      "meaning": "Clamp Player1 X to0x4600 and stop its forced walk."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 10,
+      "old": "ObjDat3_76934",
+      "new": "MHZEndBoss_VisualOverlayFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full resources and initial frame for all three ship visual overlays."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 15,
+      "old": "ObjDat3_76940",
+      "new": "MHZEndBoss_WeatherMachineFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full weather-machine resource and collision descriptor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 20,
+      "old": "ObjDat3_7694C",
+      "new": "MHZEndBoss_ShieldSpikeFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full alternate-parity spike child attributes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 25,
+      "old": "word_76958",
+      "new": "MHZBoss_WeatherPairAttributes",
+      "profiles": ["sk"],
+      "meaning": "Inherited-resource partial3 pair-effect draw attributes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 28,
+      "old": "word_7695E",
+      "new": "MHZBoss_DiagonalEffectAttributes",
+      "profiles": ["sk"],
+      "meaning": "Inherited-resource partial3 diagonal-effect attributes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 31,
+      "old": "word_76964",
+      "new": "MHZBoss_TouchProxyAttributes",
+      "profiles": ["sk"],
+      "meaning": "Inherited-resource partial3 paired hit receiver attributes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 34,
+      "old": "ObjDat3_7696A",
+      "new": "MHZEndBoss_BreakupFragmentFullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full shared resources for the six root breakup fragments."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 39,
+      "old": "ChildObjDat_76976",
+      "new": "MHZBoss_LayeredOverlayChildren",
+      "profiles": ["sk"],
+      "meaning": "Two repeated-simple visual overlays at root integer XY."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 42,
+      "old": "ChildObjDat_7697C",
+      "new": "MHZBoss_PriorityOverlayChild",
+      "profiles": ["sk"],
+      "meaning": "One simple parent-following priority-switching visual overlay."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 45,
+      "old": "ChildObjDat_76982",
+      "new": "MHZBoss_SpikeWeatherProxyChildren",
+      "profiles": ["sk"],
+      "meaning": "Four normal entries for two spikes,the weather machine and paired collision receiver."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 55,
+      "old": "ChildObjDat_7699C",
+      "new": "MHZEndBoss_RobotnikHeadNormalRecord",
+      "profiles": ["sk"],
+      "meaning": "One normal RobotnikHead4 child at root offset(0,-0x1C)."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 59,
+      "old": "ChildObjDat_769A4",
+      "new": "MHZBoss_WeatherPairChildren",
+      "profiles": ["sk"],
+      "meaning": "Two simple pair-stream children sharing weather actor origin."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 62,
+      "old": "ChildObjDat_769AA",
+      "new": "MHZBoss_DiagonalEffectChildren",
+      "profiles": ["sk"],
+      "meaning": "Four simple diagonal uniform effects selected by subtype."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 65,
+      "old": "ChildObjDat_769B0",
+      "new": "MHZBoss_BreakupFragmentChildren",
+      "profiles": ["sk"],
+      "meaning": "Six simple fragments at root position during post-music breakup."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 68,
+      "old": "byte_769B6",
+      "new": "MHZEndBoss_WeatherPrimaryFrameDelayLoop",
+      "profiles": ["sk"],
+      "meaning": "Primary weather pair loop with blank-frame interval."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "byte_769C1",
+      "new": "MHZBoss_WeatherPairAnim",
+      "profiles": ["sk"],
+      "meaning": "Secondary weather pair loop selected by nonzero subtype."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 83,
+      "old": "byte_769CE",
+      "new": "MHZBoss_DiagonalEffectAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniform delay diagonal-effect loop selected by all four offset children."
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "original_line": 89,
+      "old": "word_769F4",
+      "new": "MHZEndBoss_CameraTriggerAndTargetBounds",
+      "profiles": ["sk"],
+      "meaning": "Adjacent four-WORD camera trigger rectangle and four-WORD target bounds."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 15,
+      "old": "loc_751E2",
+      "new": "MHZMini_CheckHitFrameAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Complete the root dispatcher with hit policy, frame-selected priority and collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 47,
+      "old": "loc_75220",
+      "new": "MHZMini_InitBossAndLinkedChildren",
+      "profiles": ["sk"],
+      "meaning": "Initialize the six-hit root, initial descent and tree-cut count."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 73,
+      "old": "loc_7529E",
+      "new": "MHZMini_QueueBossArtAndPalette",
+      "profiles": ["sk"],
+      "meaning": "Queue boss/log graphics, explosion PLC and palette regardless of song actor allocation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 86,
+      "old": "loc_752D4",
+      "new": "MHZMinibossRoot_AnimateMoveAndWait",
+      "profiles": ["sk"],
+      "meaning": "Shared raw-animation, velocity-integration and signed-wait state."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 92,
+      "old": "loc_752E6",
+      "new": "MHZMini_SaveXAndBeginCountedSwing",
+      "profiles": ["sk"],
+      "meaning": "Save the post-descent baseline and initialize counted swing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 99,
+      "old": "loc_75302",
+      "new": "MHZMini_ResetSwingAndVelocity",
+      "profiles": ["sk"],
+      "meaning": "Reset the shared vertical swing parameters."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 108,
+      "old": "loc_7531C",
+      "new": "MHZMini_SwingThenBeginRightRun",
+      "profiles": ["sk"],
+      "meaning": "Animate and swing until the counted-turn helper reports completion."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 115,
+      "old": "loc_75330",
+      "new": "MHZMini_ClampAndBeginShortRun",
+      "profiles": ["sk"],
+      "meaning": "End swinging at baseline and select short rightward travel."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 125,
+      "old": "loc_75356",
+      "new": "MHZMini_BeginRunAndOpenCamera",
+      "profiles": ["sk"],
+      "meaning": "Select the onscreen-gated run and attempt its dedicated camera accelerator."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 137,
+      "old": "locret_75390",
+      "new": "MHZMini_CameraHelperSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after optional camera-expansion actor setup."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 141,
+      "old": "loc_75392",
+      "new": "MHZMini_MoveAndWaitOnscreen",
+      "profiles": ["sk"],
+      "meaning": "Pause both motion and timer when the root lacks its onscreen bit."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 148,
+      "old": "loc_753A4",
+      "new": "MHZMini_BeginRunDeceleration",
+      "profiles": ["sk"],
+      "meaning": "Select horizontal deceleration after onscreen run timer."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 153,
+      "old": "locret_753B4",
+      "new": "MHZMini_RunUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the onscreen run gate or its deceleration callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 157,
+      "old": "loc_753B6",
+      "new": "MHZMini_DecelerateToZero",
+      "profiles": ["sk"],
+      "meaning": "Reduce horizontal speed by0x20 and stop only on exact zero."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 165,
+      "old": "loc_753CA",
+      "new": "MHZMini_RestoreXAndSwing",
+      "profiles": ["sk"],
+      "meaning": "Restore only the saved low integer-X byte before patrol swing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 172,
+      "old": "loc_753DE",
+      "new": "MHZMini_SwingToChopWindow",
+      "profiles": ["sk"],
+      "meaning": "Swing/move until unsigned camera-relative X is at most0x110."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 182,
+      "old": "loc_753FA",
+      "new": "MHZMini_BeginChopAnimation",
+      "profiles": ["sk"],
+      "meaning": "Select the chopping sequence and its completion callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 191,
+      "old": "loc_7541A",
+      "new": "MHZMini_SwingAndChopTree",
+      "profiles": ["sk"],
+      "meaning": "Advance chop motion and consume one tree-state unit on a specific animation step."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 202,
+      "old": "locret_75442",
+      "new": "MHZMini_ChopAnimationReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after no raw change, a different cursor, or the tree cut."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 206,
+      "old": "loc_75444",
+      "new": "MHZMinibossRoot_SelectWaitForSwingTurn",
+      "profiles": ["sk"],
+      "meaning": "Select routine16 after chopping animation terminal callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 211,
+      "old": "loc_7544C",
+      "new": "MHZMini_WaitForLoweringTurn",
+      "profiles": ["sk"],
+      "meaning": "Wait for the swing helper direction-change result."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 218,
+      "old": "loc_7545C",
+      "new": "MHZMini_BeginLoweringAndCheckTrees",
+      "profiles": ["sk"],
+      "meaning": "Start timed downward motion and choose the remaining-tree/character route."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 228,
+      "old": "loc_75480",
+      "new": "MHZMini_ChooseLastTreeCallback",
+      "profiles": ["sk"],
+      "meaning": "Choose the short last-tree wait callback by exact Player1 character ID."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 235,
+      "old": "locret_7549E",
+      "new": "MHZMini_LastTreeSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the short character-dependent callback selection."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 239,
+      "old": "loc_754A0",
+      "new": "MHZMini_MoveAndTickPhaseWait",
+      "profiles": ["sk"],
+      "meaning": "Shared velocity integration and signed wait for several attack/recovery phases."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 244,
+      "old": "loc_754AC",
+      "new": "MHZMini_ReturnToChopSwing",
+      "profiles": ["sk"],
+      "meaning": "Restart chopping movement after the ordinary short lowering wait."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 250,
+      "old": "loc_754BE",
+      "new": "MHZMini_BeginStuckChop",
+      "profiles": ["sk"],
+      "meaning": "Select the last-tree stuck sequence for non-ID2 characters."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 257,
+      "old": "loc_754D6",
+      "new": "MHZMini_BeginKnucklesThrowSwing",
+      "profiles": ["sk"],
+      "meaning": "Select special routine32 and reset swing parameters."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 262,
+      "old": "loc_754E0",
+      "new": "MHZMini_AnimateStuckChopAndSound",
+      "profiles": ["sk"],
+      "meaning": "Decode the stuck pair stream and play cue when an ordinary decoded frame equals0x12."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 270,
+      "old": "loc_754F8",
+      "new": "MHZMinibossRoot_NudgeXAtStuckRawCursor",
+      "profiles": ["sk"],
+      "meaning": "Nudge root left only at the specified ordinary decoded-frame cursor position."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 275,
+      "old": "locret_75506",
+      "new": "MHZMini_StuckChopUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after unchanged/raw-cursor work or terminal callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 279,
+      "old": "loc_75508",
+      "new": "MHZMini_BeginRecoilAndHideLinks",
+      "profiles": ["sk"],
+      "meaning": "Start the first recoil arc and suppress linked-child rendering via flag6."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 290,
+      "old": "loc_75532",
+      "new": "MHZMini_RecoilAndCheckFloor",
+      "profiles": ["sk"],
+      "meaning": "Animate and integrate recoil, then test floor only after vertical speed is nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 299,
+      "old": "locret_7554E",
+      "new": "MHZMini_RecoilFloorReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while rising or without a negative floor distance."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 303,
+      "old": "loc_75550",
+      "new": "MHZMini_SetSecondRecoilVelocity",
+      "profiles": ["sk"],
+      "meaning": "Start the second gravity arc without correcting floor penetration."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 310,
+      "old": "loc_75564",
+      "new": "MHZMini_MoveToRecoverySpeed",
+      "profiles": ["sk"],
+      "meaning": "Run second recoil arc until unsigned nonnegative y_vel reaches0x100."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 317,
+      "old": "locret_75576",
+      "new": "MHZMini_RecoverySpeedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return before second recoil reaches its downward speed gate."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 321,
+      "old": "loc_75578",
+      "new": "MHZMini_BeginVisibleRecovery",
+      "profiles": ["sk"],
+      "meaning": "Make linked children eligible again and begin a timed upward/right recovery."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 331,
+      "old": "loc_755A0",
+      "new": "MHZMini_BeginReturnArcAndHideLinks",
+      "profiles": ["sk"],
+      "meaning": "Select gravity return arc and set linked-child suppression flag."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 337,
+      "old": "loc_755AE",
+      "new": "MHZMini_MoveReturnArcToBaseline",
+      "profiles": ["sk"],
+      "meaning": "Apply gravity until descending at or below the saved baseline."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 345,
+      "old": "locret_755C4",
+      "new": "MHZMini_ReturnArcGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while return arc rises or has not crossed its saved baseline."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 349,
+      "old": "loc_755C6",
+      "new": "MHZMini_ClampAndBeginRecoveryRun",
+      "profiles": ["sk"],
+      "meaning": "Clamp return Y/fraction and restart timed rightward travel."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 365,
+      "old": "loc_7560C",
+      "new": "MHZMini_KnucklesChopAndThrow",
+      "profiles": ["sk"],
+      "meaning": "Advance special chop route until a changed raw cursor triggers thrown-child creation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 382,
+      "old": "locret_7565A",
+      "new": "MHZMini_KnucklesChopReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after special chop raw gating or thrown-child attempt."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 386,
+      "old": "loc_7565C",
+      "new": "MHZMini_AnimateThrownPhase",
+      "profiles": ["sk"],
+      "meaning": "Continue swing movement while the thrown-phase script controls its callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 392,
+      "old": "loc_7566E",
+      "new": "MHZMini_BeginPostThrowDrift",
+      "profiles": ["sk"],
+      "meaning": "Start a timed slow upward drift after thrown-phase animation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 400,
+      "old": "loc_7568A",
+      "new": "MHZMini_BeginWaitingSwing",
+      "profiles": ["sk"],
+      "meaning": "Select return-handshake swing and reset vertical swing parameters."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 405,
+      "old": "loc_75694",
+      "new": "MHZMini_SwingUntilThrownActorReturns",
+      "profiles": ["sk"],
+      "meaning": "Swing and move until child completion flag2 is observed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 413,
+      "old": "loc_756AA",
+      "new": "MHZMinibossRoot_StartUpwardCameraExit",
+      "profiles": ["sk"],
+      "meaning": "Begin upward motion after the thrown child returns."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 421,
+      "old": "loc_756C6",
+      "new": "MHZMini_MoveToUpperCameraBand",
+      "profiles": ["sk"],
+      "meaning": "Move upward until unsigned actorY is no greater than cameraY+0x30."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 431,
+      "old": "loc_756E2",
+      "new": "MHZMini_ClampUpperBandAndPause",
+      "profiles": ["sk"],
+      "meaning": "Clamp integer Y to upper camera band and install pause."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 439,
+      "old": "loc_756FC",
+      "new": "MHZMini_AnimateAndTickWait",
+      "profiles": ["sk"],
+      "meaning": "Animate through the upper-band pause while counting its callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 444,
+      "old": "loc_75708",
+      "new": "MHZMini_BeginDownLeftArc",
+      "profiles": ["sk"],
+      "meaning": "Select the leftward arc with a large downward initial velocity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 451,
+      "old": "loc_7571C",
+      "new": "MHZMini_AnimateAndLimitYAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Animate and decrease y_vel while retaining the last candidate at the lower threshold."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 459,
+      "old": "loc_75734",
+      "new": "MHZMini_MoveArcAndCheckExit",
+      "profiles": ["sk"],
+      "meaning": "Integrate the retained arc speed and test unsigned upper camera threshold."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 468,
+      "old": "loc_7574A",
+      "new": "MHZMini_BeginDiagonalRecoveryRun",
+      "profiles": ["sk"],
+      "meaning": "Reposition relative to copied camera coordinates and install diagonal timed recovery."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 488,
+      "old": "loc_757A0",
+      "new": "MHZMini_SlowDiagonalYToZero",
+      "profiles": ["sk"],
+      "meaning": "Reduce recovery y_vel only while the candidate stays nonnegative."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 494,
+      "old": "loc_757AE",
+      "new": "MHZMini_MoveAndTickRecovery",
+      "profiles": ["sk"],
+      "meaning": "Integrate the retained diagonal recovery velocity and count callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 499,
+      "old": "loc_757BA",
+      "new": "MHZMini_StartEndSign",
+      "profiles": ["sk"],
+      "meaning": "Enter common end-sign progression after the scored music-fade wait."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 503,
+      "old": "loc_757C0",
+      "new": "MHZMini_InitLeafSpawner",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of the two normal linked presentation/contact children."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 510,
+      "old": "loc_757D6",
+      "new": "MHZMini_FollowAndTryLeaf",
+      "profiles": ["sk"],
+      "meaning": "Update linked child properties and gate its draw/contact and leaf emission."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 530,
+      "old": "loc_75824",
+      "new": "MHZMini_LeafSpawnerTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Parent-aware draw/contact after the visible even-phase path."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 534,
+      "old": "loc_7582A",
+      "new": "MHZMini_LeafSpawnerCheckParent",
+      "profiles": ["sk"],
+      "meaning": "Apply parent lifetime only during suppressed linked-child updates."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 540,
+      "old": "loc_75834",
+      "new": "MHZMini_DeleteLeafSpawner",
+      "profiles": ["sk"],
+      "meaning": "Schedule ordinary deletion of the linked child."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 544,
+      "old": "loc_7583A",
+      "new": "MHZMini_ThrownActorDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch the six-state thrown actor then run parent-aware touch drawing."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 551,
+      "old": "off_7584E",
+      "new": "MHZMinibossThrownActor_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD thrown/recovery/return state offsets."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 560,
+      "old": "loc_7585A",
+      "new": "MHZMini_InitPlayerAimedThrow",
+      "profiles": ["sk"],
+      "meaning": "Initialize thrown actor velocity from Player1 horizontal displacement."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 575,
+      "old": "loc_7588E",
+      "new": "MHZMini_DivideThrowXDistance",
+      "profiles": ["sk"],
+      "meaning": "Convert absolute launch X displacement into fixed-point horizontal velocity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 582,
+      "old": "loc_7589A",
+      "new": "MHZMini_StoreThrowXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Store zero or signed divided launch speed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 585,
+      "old": "loc_7589E",
+      "new": "MHZMini_ThrownActorFallAndBounce",
+      "profiles": ["sk"],
+      "meaning": "Integrate initial flight and use floor contact only for nonnegative vertical speed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "original_line": 594,
+      "old": "loc_758B8",
+      "new": "MHZMini_AnimateAfterThrow",
+      "profiles": ["sk"],
+      "meaning": "Finish initial thrown-flight update with stored pair-stream animation."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 21,
+      "old": "loc_758E2",
+      "new": "MHZMini_BeginSecondBounceWait",
+      "profiles": ["sk"],
+      "meaning": "Select recovery waiting on a floor hit after the one-time bounce flag was already set."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 31,
+      "old": "loc_758FC",
+      "new": "MHZMini_BeginRecoveryAndTryChild",
+      "profiles": ["sk"],
+      "meaning": "Start a short upward recovery and attempt its temporary linked presentation child."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 41,
+      "old": "loc_75924",
+      "new": "MHZMini_MoveAnimateAndWait",
+      "profiles": ["sk"],
+      "meaning": "Move the recovering actor before its shared pair-animation/wait tail."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 44,
+      "old": "loc_7592A",
+      "new": "MHZMini_AnimateAndWait",
+      "profiles": ["sk"],
+      "meaning": "Animate and count the current recovery timer."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 49,
+      "old": "loc_75936",
+      "new": "MHZMini_HoldBeforeReturn",
+      "profiles": ["sk"],
+      "meaning": "Pause after upward recovery before computing parent return speed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 56,
+      "old": "loc_7594C",
+      "new": "MHZMini_AimReturnTowardBoss",
+      "profiles": ["sk"],
+      "meaning": "Select return flight and derive horizontal speed toward parentX-6."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 69,
+      "old": "loc_75974",
+      "new": "MHZMini_DivideReturnXDistance",
+      "profiles": ["sk"],
+      "meaning": "Convert parent-target displacement into return horizontal velocity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 76,
+      "old": "loc_75980",
+      "new": "MHZMini_StoreReturnXSpeed",
+      "profiles": ["sk"],
+      "meaning": "Commit the signed divided return speed."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 81,
+      "old": "loc_75986",
+      "new": "MHZMini_FallAndCheckCatchHeight",
+      "profiles": ["sk"],
+      "meaning": "Integrate return with0x10 vertical acceleration and wait for the parent-relative catch threshold."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 92,
+      "old": "loc_759AA",
+      "new": "MHZMini_AnimateBeforeCatch",
+      "profiles": ["sk"],
+      "meaning": "Animate the return actor while not yet passing the catch gate."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 96,
+      "old": "loc_759B0",
+      "new": "MHZMini_SignalReturnAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Signal the root return handshake and schedule own deletion."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 102,
+      "old": "loc_759C0",
+      "new": "MHZMini_InitFlickerFollower",
+      "profiles": ["sk"],
+      "meaning": "Initialize the normal child of the recovering thrown actor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 107,
+      "old": "loc_759D0",
+      "new": "MHZMini_FollowerDrawByParity",
+      "profiles": ["sk"],
+      "meaning": "Follow/touch-draw on even VInt and only check parent lifetime on odd."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 116,
+      "old": "loc_759EC",
+      "new": "MHZMini_FollowerCheckParent",
+      "profiles": ["sk"],
+      "meaning": "Retain parent-status checking during hidden odd updates."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 122,
+      "old": "loc_759F6",
+      "new": "MHZMini_DeleteFlickerFollower",
+      "profiles": ["sk"],
+      "meaning": "Schedule deletion of the temporary recovery child."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 126,
+      "old": "loc_759FC",
+      "new": "MHZMini_InitCameraRelativeMotion",
+      "profiles": ["sk"],
+      "meaning": "Initialize a decorative leaf from its inherited spawn height, then relocate it to cameraY+0xAC."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 137,
+      "old": "loc_75A24",
+      "new": "MHZMini_CheckHorizontalDeceleration",
+      "profiles": ["sk"],
+      "meaning": "Compute horizontal speed candidate with asymmetric signed threshold stores."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 147,
+      "old": "loc_75A44",
+      "new": "MHZMini_StoreHorizontalCandidate",
+      "profiles": ["sk"],
+      "meaning": "Store the candidate only on the original negative/outside or inner-threshold paths."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 150,
+      "old": "loc_75A48",
+      "new": "MHZMini_ChooseCoastYAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Choose initial upward acceleration or slow downward recovery."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 157,
+      "old": "loc_75A5A",
+      "new": "MHZMini_UpdateVerticalSpeed",
+      "profiles": ["sk"],
+      "meaning": "Apply selected Y acceleration and stop it once signed speed reaches0x80."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 163,
+      "old": "loc_75A68",
+      "new": "MHZMinibossLeaf_StoreVerticalCandidate",
+      "profiles": ["sk"],
+      "meaning": "Store the updated leaf vertical velocity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 166,
+      "old": "loc_75A6C",
+      "new": "MHZMini_MoveDrawOrDelete",
+      "profiles": ["sk"],
+      "meaning": "Move leaf and use its prior onscreen flag for lifetime."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "original_line": 173,
+      "old": "loc_75A7E",
+      "new": "MHZMinibossLeaf_DeleteCurrentImmediately",
+      "profiles": ["sk"],
+      "meaning": "Immediately clear an offscreen leaf actor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 20,
+      "old": "loc_75B90",
+      "new": "MHZMini_StoreFrameGeometry",
+      "profiles": ["sk"],
+      "meaning": "Store parent-frame-selected collision proxy position and response fields."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 34,
+      "old": "byte_75BAE",
+      "new": "MHZMini_FrameOffsetsAndResponse",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two four-BYTE proxy rows indexed by parent mapping frame."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 77,
+      "old": "loc_75C34",
+      "new": "MHZMini_StoreMotionAndRandomYAccel",
+      "profiles": ["sk"],
+      "meaning": "Store signed initial X speed,its step and high-random-bit vertical acceleration."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 88,
+      "old": "word_75C4A",
+      "new": "MHZMini_SpeedByHeightBucket",
+      "profiles": ["sk"],
+      "meaning": "Thirty-two stored signed speed WORDs with only first sixteen selected by actual mask."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 141,
+      "old": "RawAni_75CB6",
+      "new": "MHZMini_FramesByParentFrame",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two direct linked-child mapping-frame selections."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 145,
+      "old": "word_75CCC",
+      "new": "MHZMini_QueuePriorityByFrame",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two WORD queue priorities selected by parent mapping frame."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 168,
+      "old": "byte_75CF8",
+      "new": "MHZMini_OffsetPairsByFrame",
+      "profiles": ["sk"],
+      "meaning": "Forty-four signed BYTE XY pairs for the two linked-child variants across twenty-two frames."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 225,
+      "old": "locret_75D68",
+      "new": "MHZMini_FrameSelectionReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after choosing one of two root queue priorities."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 230,
+      "old": "byte_75D6A",
+      "new": "MHZMini_FrontQueueFlagsByFrame",
+      "profiles": ["sk"],
+      "meaning": "Twenty-two direct BYTE flags for root sprite queue selection."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 268,
+      "old": "loc_75DA0",
+      "new": "MHZMini_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Set hit-recovery status and select full four-color profile by timer parity."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 275,
+      "old": "loc_75DB4",
+      "new": "MHZMini_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Advance four-color hit flash and restore saved collision BYTE."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 282,
+      "old": "locret_75DCA",
+      "new": "MHZMini_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after collision gate or nonfatal flash handling."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 286,
+      "old": "loc_75DCC",
+      "new": "MHZMini_BeginDefeatFadeAndExplosion",
+      "profiles": ["sk"],
+      "meaning": "Install scored defeat music-fade wait and independently attempt its explosion."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 294,
+      "old": "loc_75DEE",
+      "new": "MHZMini_StopTimerAndAwardScore",
+      "profiles": ["sk"],
+      "meaning": "Apply common defeat wait/score/render bookkeeping after explosion attempt."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 307,
+      "old": "word_75E02",
+      "new": "MHZMini_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Four scatter palette destination addresses."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 309,
+      "old": "word_75E0A",
+      "new": "MHZMinibossRootHit_TwoFourColorProfiles",
+      "profiles": ["sk"],
+      "meaning": "Two disjoint four-WORD root hit-flash color rows."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 314,
+      "old": "loc_75E1A",
+      "new": "MHZMini_AdvanceCameraIfSameOwner",
+      "profiles": ["sk"],
+      "meaning": "Accelerate camera maxX while no other writer changes its last remembered value."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 330,
+      "old": "loc_75E46",
+      "new": "MHZMini_ClampCameraMaximum",
+      "profiles": ["sk"],
+      "meaning": "Clamp the accelerated camera boundary at its unsigned target."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "original_line": 333,
+      "old": "loc_75E4C",
+      "new": "MHZMini_DeleteCameraAccelerator",
+      "profiles": ["sk"],
+      "meaning": "Immediately delete the dedicated camera accelerator."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 10,
+      "old": "word_75E5E",
+      "new": "MHZMini_ArtPriorityBounds",
+      "profiles": ["sk"],
+      "meaning": "Eight-byte art-first attributes shared by linked/root and temporary recovery children."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 19,
+      "old": "ObjDat3_75E72",
+      "new": "MHZMinibossLog_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full twelve-byte chopped-log descriptor."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 24,
+      "old": "word_75E7E",
+      "new": "MHZMinibossThrownActor_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte thrown-actor attributes."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 27,
+      "old": "ChildObjDat_75E84",
+      "new": "MHZMini_LinkedBodyChildren",
+      "profiles": ["sk"],
+      "meaning": "Two declared normal children followed by an unconsumed third stored record."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 35,
+      "old": "ChildObjDat_75E98",
+      "new": "MHZMinibossTree_SingleLogSimpleChild",
+      "profiles": ["sk"],
+      "meaning": "Single chopped-log simple-child record."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 38,
+      "old": "ChildObjDat_75E9E",
+      "new": "MHZMinibossRoot_SingleThrownNormalChild",
+      "profiles": ["sk"],
+      "meaning": "Single normal thrown actor emitted by special chop cursor transition."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 42,
+      "old": "ChildObjDat_75EA6",
+      "new": "MHZMini_RecoveryChild",
+      "profiles": ["sk"],
+      "meaning": "Single normal presentation/contact child for thrown recovery."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 46,
+      "old": "byte_75EAE",
+      "new": "MHZMinibossRoot_DefaultFrameDelayLoop",
+      "profiles": ["sk"],
+      "meaning": "Six-pair default root raw animation loop."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 54,
+      "old": "byte_75EBB",
+      "new": "MHZMini_ChopAnim",
+      "profiles": ["sk"],
+      "meaning": "Ten-pair chopping script ending in the phase callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 66,
+      "old": "byte_75ED0",
+      "new": "MHZMini_StuckChopAnim",
+      "profiles": ["sk"],
+      "meaning": "Seventeen-pair stuck animation with repeated frame0x12 and configured callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 85,
+      "old": "byte_75EF3",
+      "new": "MHZMini_RecoilAnim",
+      "profiles": ["sk"],
+      "meaning": "Pair stream with F8 relative jump to its embedded looping tail."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 96,
+      "old": "byte_75F02",
+      "new": "MHZMini_ThrowAnim",
+      "profiles": ["sk"],
+      "meaning": "Five-pair thrown-phase sequence ending in its configured callback."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 103,
+      "old": "byte_75F0D",
+      "new": "MHZMinibossRoot_LongFrameFivePairLoop",
+      "profiles": ["sk"],
+      "meaning": "Two identical long frame5 pairs with FC restart."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 107,
+      "old": "byte_75F12",
+      "new": "MHZMinibossLog_UniformRollingFrameLoop",
+      "profiles": ["sk"],
+      "meaning": "Uniform delay log animation with eight stored frames and FC restart."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "original_line": 109,
+      "old": "byte_75F1C",
+      "new": "MHZMinibossThrownActor_FrameDelayLoop",
+      "profiles": ["sk"],
+      "meaning": "Five-pair thrown/recovery actor animation loop."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 11,
+      "old": "loc_75A94",
+      "new": "MHZMini_TreeCheckBossOrReset",
+      "profiles": ["sk"],
+      "meaning": "Follow tree-state only while shared root handle still names the original root dispatcher."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 21,
+      "old": "loc_75AB0",
+      "new": "MHZMini_TreeSyncStateAndTryLog",
+      "profiles": ["sk"],
+      "meaning": "Change tree presentation and emit one log only for changed values below5."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 31,
+      "old": "loc_75ACE",
+      "new": "MHZMinibossTree_DrawOrCullHorizontally",
+      "profiles": ["sk"],
+      "meaning": "Finish tree via coarse horizontal draw/deferred deletion wrapper."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 35,
+      "old": "loc_75AD4",
+      "new": "MHZMini_InitLogHeightAndMotion",
+      "profiles": ["sk"],
+      "meaning": "Initialize log Y from the current root tree-state before selecting motion."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 51,
+      "old": "loc_75B0E",
+      "new": "MHZMini_ChooseStraightOrBouncingLog",
+      "profiles": ["sk"],
+      "meaning": "Select horizontal speed and the optional vertical-motion flag."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 60,
+      "old": "loc_75B24",
+      "new": "MHZMini_StoreLogXSpeedAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Commit selected log X speed after height/mode initialization."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 64,
+      "old": "byte_75B2E",
+      "new": "MHZMini_LogYOffsetsByTreeState",
+      "profiles": ["sk"],
+      "meaning": "Six signed BYTE log spawn offsets indexed by root tree-state."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 69,
+      "old": "loc_75B34",
+      "new": "MHZMini_LogAnimateAndTryBounce",
+      "profiles": ["sk"],
+      "meaning": "Animate the log and apply vertical behavior only when its mode BYTE is set."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 80,
+      "old": "loc_75B58",
+      "new": "MHZMini_LogMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Integrate current log velocities and apply horizontal touch/draw lifetime."
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "original_line": 85,
+      "old": "loc_75B64",
+      "new": "MHZMini_LogSyncAndSubmitTouch",
+      "profiles": ["sk"],
+      "meaning": "Collision-proxy entry whose only stored constructor reference follows the declared normal-child count."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 12,
+      "old": "word_55918",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot00",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 0."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 22,
+      "old": "word_55950",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot01",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 1."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 30,
+      "old": "word_5597C",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot02",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 2."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 32,
+      "old": "word_55984",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot03",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 3."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 34,
+      "old": "word_5598C",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot04",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 4."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 36,
+      "old": "word_55994",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot05",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 5."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 46,
+      "old": "word_559CC",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot06",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 6."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "original_line": 56,
+      "old": "word_55A04",
+      "new": "MHZAct2ShipAndBossSceneSKData_MapSlot07",
+      "profiles": ["sk"],
+      "meaning": "MHZAct2ShipAndBossSceneSKData physical geometry at actual map selector 7."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 28,
+      "old": "word_185F4C",
+      "new": "MHZEndBoss_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 29,
+      "old": "word_185F4E",
+      "new": "MHZEndBoss_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 34,
+      "old": "word_185F68",
+      "new": "MHZEndBoss_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 39,
+      "old": "word_185F7C",
+      "new": "MHZEndBoss_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 48,
+      "old": "word_185FAE",
+      "new": "MHZEndBoss_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 52,
+      "old": "word_185FC2",
+      "new": "MHZEndBoss_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 54,
+      "old": "word_185FCA",
+      "new": "MHZEndBoss_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 56,
+      "old": "word_185FD2",
+      "new": "MHZEndBoss_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 59,
+      "old": "word_185FE0",
+      "new": "MHZEndBoss_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 61,
+      "old": "word_185FE8",
+      "new": "MHZEndBoss_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 63,
+      "old": "word_185FF0",
+      "new": "MHZEndBoss_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 65,
+      "old": "word_185FF8",
+      "new": "MHZEndBoss_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 67,
+      "old": "word_186000",
+      "new": "MHZEndBoss_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 69,
+      "old": "word_186008",
+      "new": "MHZEndBoss_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 80,
+      "old": "word_186046",
+      "new": "MHZEndBoss_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 91,
+      "old": "word_186084",
+      "new": "MHZEndBoss_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 102,
+      "old": "word_1860C2",
+      "new": "MHZEndBoss_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 113,
+      "old": "word_186100",
+      "new": "MHZEndBoss_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 115,
+      "old": "word_186108",
+      "new": "MHZEndBoss_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 119,
+      "old": "word_18611C",
+      "new": "MHZEndBoss_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 122,
+      "old": "word_18612A",
+      "new": "MHZEndBoss_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 126,
+      "old": "word_18613E",
+      "new": "MHZEndBoss_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 129,
+      "old": "word_18614C",
+      "new": "MHZEndBoss_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "original_line": 132,
+      "old": "word_18615A",
+      "new": "MHZEndBoss_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "MHZEndBoss mapping frame at verified BYTE index17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 33,
+      "old": "word_1861A2",
+      "new": "MHZMiniboss_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 59,
+      "old": "word_18623A",
+      "new": "MHZMiniboss_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 85,
+      "old": "word_1862D2",
+      "new": "MHZMiniboss_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 111,
+      "old": "word_18636A",
+      "new": "MHZMiniboss_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 137,
+      "old": "word_186402",
+      "new": "MHZMiniboss_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 155,
+      "old": "word_18646A",
+      "new": "MHZMiniboss_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 173,
+      "old": "word_1864D2",
+      "new": "MHZMiniboss_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 191,
+      "old": "word_18653A",
+      "new": "MHZMiniboss_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 208,
+      "old": "word_18659C",
+      "new": "MHZMiniboss_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 225,
+      "old": "word_1865FE",
+      "new": "MHZMiniboss_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 239,
+      "old": "word_18664E",
+      "new": "MHZMiniboss_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 253,
+      "old": "word_18669E",
+      "new": "MHZMiniboss_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 267,
+      "old": "word_1866EE",
+      "new": "MHZMiniboss_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 281,
+      "old": "word_18673E",
+      "new": "MHZMiniboss_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 293,
+      "old": "word_186782",
+      "new": "MHZMiniboss_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 307,
+      "old": "word_1867D2",
+      "new": "MHZMiniboss_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 318,
+      "old": "word_186810",
+      "new": "MHZMiniboss_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 330,
+      "old": "word_186854",
+      "new": "MHZMiniboss_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 342,
+      "old": "word_186898",
+      "new": "MHZMiniboss_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 354,
+      "old": "word_1868DC",
+      "new": "MHZMiniboss_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 365,
+      "old": "word_18691A",
+      "new": "MHZMiniboss_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 385,
+      "old": "word_18698E",
+      "new": "MHZMiniboss_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 408,
+      "old": "word_186A14",
+      "new": "MHZMiniboss_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 410,
+      "old": "word_186A1C",
+      "new": "MHZMiniboss_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 413,
+      "old": "word_186A2A",
+      "new": "MHZMiniboss_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 417,
+      "old": "word_186A3E",
+      "new": "MHZMiniboss_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index19 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 421,
+      "old": "word_186A52",
+      "new": "MHZMiniboss_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 425,
+      "old": "word_186A66",
+      "new": "MHZMiniboss_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index1B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "original_line": 429,
+      "old": "word_186A7A",
+      "new": "MHZMiniboss_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "MHZMiniboss mapping frame at verified BYTE index1C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 12,
+      "old": "word_186B28",
+      "new": "MHZMinibossLog_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 15,
+      "old": "word_186B36",
+      "new": "MHZMinibossLog_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 19,
+      "old": "word_186B4A",
+      "new": "MHZMinibossLog_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 22,
+      "old": "word_186B58",
+      "new": "MHZMinibossLog_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 26,
+      "old": "word_186B6C",
+      "new": "MHZMinibossLog_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 29,
+      "old": "word_186B7A",
+      "new": "MHZMinibossLog_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 33,
+      "old": "word_186B8E",
+      "new": "MHZMinibossLog_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "original_line": 36,
+      "old": "word_186B9C",
+      "new": "MHZMinibossLog_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossLog mapping frame at verified BYTE index07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 10,
+      "old": "word_186A94",
+      "new": "MHZMinibossTree_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 11,
+      "old": "word_186A96",
+      "new": "MHZMinibossTree_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 14,
+      "old": "word_186AA4",
+      "new": "MHZMinibossTree_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 18,
+      "old": "word_186AB8",
+      "new": "MHZMinibossTree_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 23,
+      "old": "word_186AD2",
+      "new": "MHZMinibossTree_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "original_line": 29,
+      "old": "word_186AF2",
+      "new": "MHZMinibossTree_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "MHZMinibossTree mapping frame at verified BYTE index05 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [2, 1, 106, ""],
+        [4, 2, 0, ""],
+        [20, 1, 99, ""],
+        [22, 1, 98, ""],
+        [24, 1, 97, ""],
+        [26, 1, 96, ""],
+        [28, 0, 0, ""],
+        [31, 1, 1, ""],
+        [32, 1, 1, ""],
+        [37, 0, 1, ""],
+        [38, 1, 2, ""],
+        [38, 3, 1, ""],
+        [39, 1, 3, ""],
+        [39, 3, 1, ""],
+        [40, 1, 5, ""],
+        [40, 3, 1, ""],
+        [41, 1, 8, ""],
+        [41, 3, 1, ""],
+        [42, 1, 10, ""],
+        [42, 3, 1, ""],
+        [43, 1, 10, ""],
+        [43, 3, 1, ""],
+        [44, 1, 14, ""],
+        [44, 3, 1, ""],
+        [45, 1, 10, ""],
+        [45, 3, 1, ""],
+        [46, 0, 2, ""],
+        [51, 0, 3, ""],
+        [53, 1, 4, ""],
+        [56, 2, 6, ""],
+        [57, 0, 4, ""],
+        [59, 0, 5, ""],
+        [61, 0, 6, ""],
+        [65, 2, 9, ""],
+        [68, 0, 7, ""],
+        [70, 0, 8, ""],
+        [73, 0, 9, ""],
+        [76, 2, 11, ""],
+        [78, 0, 10, ""],
+        [82, 0, 11, ""],
+        [87, 2, 12, ""],
+        [91, 0, 12, ""],
+        [99, 1, 13, ""],
+        [100, 2, 83, ""],
+        [101, 0, 13, ""],
+        [105, 0, 14, ""],
+        [109, 1, 15, ""],
+        [112, 0, 15, ""],
+        [114, 2, 16, ""],
+        [116, 1, 10, ""],
+        [117, 0, 16, ""],
+        [121, 1, 17, ""],
+        [123, 0, 17, ""],
+        [126, 1, 18, ""],
+        [128, 0, 18, ""],
+        [132, 0, 19, ""],
+        [136, 1, 20, ""],
+        [140, 2, 21, ""],
+        [144, 0, 20, ""],
+        [148, 0, 21, ""],
+        [149, 2, 22, ""],
+        [157, 1, 102, ""],
+        [159, 0, 22, ""],
+        [164, 1, 23, ""],
+        [165, 2, 24, ""],
+        [172, 1, 23, ""],
+        [176, 0, 23, ""],
+        [178, 0, 24, ""],
+        [183, 1, 25, ""],
+        [184, 2, 26, ""],
+        [192, 0, 25, ""],
+        [195, 0, 26, ""],
+        [197, 1, 7, ""],
+        [198, 2, 27, ""],
+        [221, 1, 99, ""],
+        [227, 0, 27, ""],
+        [229, 1, 28, ""],
+        [231, 0, 28, ""],
+        [232, 2, 29, ""],
+        [241, 1, 7, ""],
+        [243, 0, 29, ""],
+        [251, 1, 30, ""],
+        [253, 0, 30, ""],
+        [258, 1, 31, ""],
+        [259, 2, 32, ""],
+        [262, 1, 31, ""],
+        [264, 0, 31, ""],
+        [268, 0, 32, ""],
+        [271, 1, 33, ""],
+        [273, 0, 33, ""],
+        [274, 2, 34, ""],
+        [278, 0, 34, ""],
+        [282, 1, 7, ""],
+        [283, 2, 35, ""],
+        [288, 0, 35, ""],
+        [292, 1, 7, ""],
+        [293, 2, 36, ""],
+        [303, 1, 36, ""],
+        [304, 2, 38, ""],
+        [305, 0, 36, ""],
+        [307, 1, 37, ""],
+        [309, 0, 37, ""],
+        [313, 0, 38, ""],
+        [314, 2, 39, ""],
+        [321, 0, 39, ""],
+        [326, 0, 40, ""],
+        [327, 1, 94, ""],
+        [329, 2, 41, ""],
+        [334, 0, 41, ""],
+        [337, 0, 42, ""],
+        [338, 1, 89, ""],
+        [340, 2, 43, ""],
+        [341, 0, 43, ""],
+        [344, 1, 44, ""],
+        [345, 2, 44, ""],
+        [347, 0, 44, ""],
+        [350, 0, 45, ""],
+        [351, 1, 89, ""],
+        [353, 2, 46, ""],
+        [355, 0, 46, ""],
+        [358, 0, 47, ""],
+        [359, 1, 90, ""],
+        [361, 2, 48, ""],
+        [363, 1, 100, ""],
+        [365, 1, 101, ""],
+        [367, 0, 48, ""],
+        [369, 1, 50, ""],
+        [371, 1, 49, ""],
+        [378, 0, 49, ""],
+        [380, 0, 50, ""],
+        [389, 0, 51, ""],
+        [391, 3, 51, ""],
+        [395, 0, 52, ""],
+        [397, 3, 52, ""],
+        [401, 0, 53, ""],
+        [403, 3, 53, ""],
+        [405, 1, 54, ""],
+        [409, 0, 54, ""],
+        [411, 1, 55, ""],
+        [414, 0, 55, ""],
+        [419, 0, 56, ""],
+        [420, 1, 92, ""],
+        [422, 2, 103, ""],
+        [424, 1, 57, ""],
+        [425, 2, 104, ""],
+        [426, 0, 57, ""],
+        [427, 2, 58, ""],
+        [428, 0, 58, ""],
+        [431, 0, 59, ""],
+        [432, 1, 93, ""],
+        [434, 2, 60, ""],
+        [435, 2, 105, ""],
+        [437, 0, 60, ""],
+        [440, 0, 61, ""],
+        [441, 1, 91, ""],
+        [443, 2, 62, ""],
+        [445, 0, 62, ""],
+        [449, 1, 65, ""],
+        [452, 1, 63, ""],
+        [454, 0, 63, ""],
+        [458, 1, 64, ""],
+        [460, 0, 64, ""],
+        [462, 1, 7, ""],
+        [464, 1, 7, ""],
+        [467, 0, 65, ""],
+        [469, 0, 66, ""],
+        [470, 1, 95, ""],
+        [476, 1, 67, ""],
+        [482, 0, 67, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [5, 1, 68, ""],
+        [11, 0, 68, ""],
+        [20, 1, 69, ""],
+        [24, 0, 69, ""],
+        [37, 1, 70, ""],
+        [39, 0, 70, ""],
+        [45, 1, 71, ""],
+        [47, 1, 76, ""],
+        [50, 0, 71, ""],
+        [52, 1, 72, ""],
+        [54, 1, 72, ""],
+        [56, 0, 72, ""],
+        [59, 1, 74, ""],
+        [68, 1, 73, ""],
+        [70, 0, 73, ""],
+        [72, 0, 74, ""],
+        [75, 1, 75, ""],
+        [77, 0, 75, ""],
+        [80, 1, 76, ""],
+        [83, 1, 77, ""],
+        [87, 0, 76, ""],
+        [89, 0, 77, ""],
+        [90, 2, 19, ""],
+        [94, 1, 78, ""],
+        [96, 0, 78, ""],
+        [100, 1, 79, ""],
+        [101, 2, 84, ""],
+        [102, 0, 79, ""],
+        [105, 1, 80, ""],
+        [107, 0, 80, ""],
+        [110, 1, 81, ""],
+        [111, 1, 82, ""],
+        [113, 0, 81, ""],
+        [115, 0, 82, ""],
+        [118, 0, 83, ""],
+        [120, 1, 7, ""],
+        [125, 0, 84, ""],
+        [127, 1, 7, ""],
+        [128, 2, 85, ""],
+        [130, 1, 85, ""],
+        [132, 0, 85, ""],
+        [138, 1, 86, ""],
+        [139, 2, 87, ""],
+        [142, 0, 86, ""],
+        [144, 0, 87, ""],
+        [148, 1, 88, ""],
+        [150, 0, 88, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 89, ""],
+        [11, 0, 90, ""],
+        [16, 0, 91, ""],
+        [21, 0, 92, ""],
+        [24, 0, 93, ""],
+        [27, 0, 94, ""],
+        [30, 0, 95, ""],
+        [35, 0, 96, ""],
+        [37, 1, 45, ""],
+        [38, 0, 97, ""],
+        [40, 1, 42, ""],
+        [41, 0, 98, ""],
+        [43, 1, 61, ""],
+        [45, 1, 61, ""],
+        [47, 1, 47, ""],
+        [49, 1, 40, ""],
+        [51, 0, 99, ""],
+        [55, 0, 100, ""],
+        [57, 1, 56, ""],
+        [58, 0, 101, ""],
+        [60, 1, 59, ""],
+        [61, 0, 102, ""],
+        [63, 1, 66, ""],
+        [64, 0, 103, ""],
+        [71, 0, 104, ""],
+        [79, 0, 105, ""],
+        [85, 0, 106, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "tokens": [
+        [7, 1, 107, ""],
+        [9, 0, 107, ""],
+        [14, 1, 108, ""],
+        [15, 1, 110, ""],
+        [16, 1, 113, ""],
+        [17, 1, 110, ""],
+        [18, 1, 117, ""],
+        [19, 1, 120, ""],
+        [20, 1, 122, ""],
+        [21, 1, 124, ""],
+        [22, 1, 127, ""],
+        [23, 1, 131, ""],
+        [24, 1, 135, ""],
+        [25, 1, 139, ""],
+        [26, 1, 142, ""],
+        [27, 1, 131, ""],
+        [28, 1, 146, ""],
+        [29, 1, 131, ""],
+        [30, 1, 149, ""],
+        [31, 1, 151, ""],
+        [32, 1, 131, ""],
+        [33, 1, 154, ""],
+        [34, 1, 156, ""],
+        [35, 1, 158, ""],
+        [36, 1, 160, ""],
+        [37, 1, 163, ""],
+        [38, 0, 108, ""],
+        [54, 2, 111, ""],
+        [55, 2, 227, ""],
+        [57, 1, 223, ""],
+        [60, 1, 109, ""],
+        [63, 0, 109, ""],
+        [74, 0, 110, ""],
+        [78, 0, 111, ""],
+        [84, 0, 112, ""],
+        [91, 0, 113, ""],
+        [94, 1, 114, ""],
+        [96, 0, 114, ""],
+        [102, 2, 115, ""],
+        [104, 0, 115, ""],
+        [108, 2, 118, ""],
+        [112, 1, 116, ""],
+        [113, 2, 217, ""],
+        [115, 0, 116, ""],
+        [117, 0, 117, ""],
+        [119, 1, 119, ""],
+        [122, 0, 118, ""],
+        [126, 0, 119, ""],
+        [128, 0, 120, ""],
+        [132, 1, 121, ""],
+        [134, 0, 121, ""],
+        [138, 1, 112, ""],
+        [139, 0, 122, ""],
+        [145, 1, 123, ""],
+        [147, 0, 123, ""],
+        [149, 2, 228, ""],
+        [150, 2, 126, ""],
+        [154, 0, 124, ""],
+        [158, 1, 125, ""],
+        [160, 1, 125, ""],
+        [164, 0, 125, ""],
+        [166, 0, 126, ""],
+        [169, 0, 127, ""],
+        [172, 1, 128, ""],
+        [174, 0, 128, ""],
+        [178, 1, 129, ""],
+        [180, 2, 132, ""],
+        [182, 0, 129, ""],
+        [184, 2, 133, ""],
+        [186, 1, 130, ""],
+        [187, 2, 134, ""],
+        [188, 0, 130, ""],
+        [190, 0, 131, ""],
+        [193, 0, 132, ""],
+        [195, 2, 126, ""],
+        [196, 1, 112, ""],
+        [197, 0, 133, ""],
+        [199, 2, 229, ""],
+        [200, 2, 138, ""],
+        [202, 0, 134, ""],
+        [204, 1, 112, ""],
+        [205, 0, 135, ""],
+        [207, 1, 137, ""],
+        [209, 1, 136, ""],
+        [212, 0, 136, ""],
+        [214, 1, 137, ""],
+        [216, 0, 137, ""],
+        [218, 0, 138, ""],
+        [221, 2, 230, ""],
+        [227, 0, 139, ""],
+        [231, 1, 140, ""],
+        [234, 1, 141, ""],
+        [235, 0, 140, ""],
+        [237, 0, 141, ""],
+        [242, 0, 142, ""],
+        [245, 1, 143, ""],
+        [247, 1, 144, ""],
+        [248, 0, 143, ""],
+        [250, 0, 144, ""],
+        [256, 2, 145, ""],
+        [258, 0, 145, ""],
+        [262, 0, 146, ""],
+        [265, 1, 147, ""],
+        [268, 1, 148, ""],
+        [269, 0, 147, ""],
+        [271, 0, 148, ""],
+        [280, 2, 114, ""],
+        [283, 2, 232, ""],
+        [285, 0, 149, ""],
+        [289, 1, 150, ""],
+        [291, 1, 150, ""],
+        [296, 2, 231, ""],
+        [297, 2, 152, ""],
+        [299, 1, 225, ""],
+        [301, 0, 150, ""],
+        [303, 0, 151, ""],
+        [307, 0, 152, ""],
+        [311, 2, 153, ""],
+        [313, 0, 153, ""],
+        [315, 1, 112, ""],
+        [316, 0, 154, ""],
+        [320, 1, 155, ""],
+        [322, 0, 155, ""],
+        [326, 2, 227, ""],
+        [328, 0, 156, ""],
+        [334, 1, 157, ""],
+        [336, 0, 157, ""],
+        [340, 2, 159, ""],
+        [342, 0, 158, ""],
+        [345, 0, 159, ""],
+        [350, 0, 160, ""],
+        [355, 1, 161, ""],
+        [357, 0, 161, ""],
+        [362, 1, 162, ""],
+        [364, 0, 162, ""],
+        [376, 2, 114, ""],
+        [379, 2, 232, ""],
+        [382, 0, 163, ""],
+        [385, 1, 164, ""],
+        [387, 0, 164, ""],
+        [390, 0, 165, ""],
+        [392, 0, 166, ""],
+        [393, 2, 167, ""],
+        [395, 1, 220, ""],
+        [397, 0, 167, ""],
+        [402, 1, 169, ""],
+        [405, 1, 169, ""],
+        [407, 1, 168, ""],
+        [409, 1, 168, ""],
+        [411, 1, 168, ""],
+        [412, 2, 193, ""],
+        [416, 0, 168, ""],
+        [418, 0, 169, ""],
+        [420, 1, 170, ""],
+        [422, 0, 170, ""],
+        [424, 0, 171, ""],
+        [427, 1, 172, ""],
+        [428, 1, 172, ""],
+        [430, 0, 172, ""],
+        [431, 1, 173, ""],
+        [431, 3, 172, ""],
+        [432, 1, 176, ""],
+        [432, 3, 172, ""],
+        [433, 1, 181, ""],
+        [433, 3, 172, ""],
+        [434, 1, 180, ""],
+        [434, 3, 172, ""],
+        [435, 1, 181, ""],
+        [435, 3, 172, ""],
+        [436, 1, 186, ""],
+        [436, 3, 172, ""],
+        [437, 0, 173, ""],
+        [438, 1, 222, ""],
+        [442, 2, 234, ""],
+        [447, 1, 175, ""],
+        [449, 1, 174, ""],
+        [451, 0, 174, ""],
+        [455, 1, 175, ""],
+        [457, 0, 175, ""],
+        [459, 0, 176, ""],
+        [462, 1, 177, ""],
+        [465, 1, 177, ""],
+        [467, 0, 177, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
+      "tokens": [
+        [3, 1, 178, ""],
+        [13, 0, 178, ""],
+        [17, 2, 179, ""],
+        [19, 0, 179, ""],
+        [24, 2, 182, ""],
+        [25, 1, 226, ""],
+        [27, 0, 180, ""],
+        [29, 0, 181, ""],
+        [32, 0, 182, ""],
+        [35, 2, 183, ""],
+        [37, 0, 183, ""],
+        [47, 1, 184, ""],
+        [49, 0, 184, ""],
+        [53, 1, 185, ""],
+        [55, 0, 185, ""],
+        [58, 0, 186, ""],
+        [62, 1, 187, ""],
+        [67, 1, 188, ""],
+        [68, 0, 187, ""],
+        [70, 0, 188, ""],
+        [74, 0, 189, ""],
+        [75, 1, 220, ""],
+        [77, 2, 190, ""],
+        [78, 0, 190, ""],
+        [82, 1, 191, ""],
+        [85, 0, 191, ""],
+        [87, 1, 192, ""],
+        [89, 0, 192, ""],
+        [91, 0, 193, ""],
+        [94, 2, 194, ""],
+        [100, 0, 194, ""],
+        [104, 1, 195, ""],
+        [106, 1, 196, ""],
+        [107, 2, 196, ""],
+        [109, 0, 195, ""],
+        [111, 0, 196, ""],
+        [115, 1, 197, ""],
+        [117, 0, 197, ""],
+        [120, 1, 198, ""],
+        [121, 2, 199, ""],
+        [122, 0, 198, ""],
+        [124, 0, 199, ""],
+        [127, 1, 200, ""],
+        [129, 0, 200, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
+      "tokens": [
+        [6, 1, 202, ""],
+        [11, 1, 201, ""],
+        [13, 0, 201, ""],
+        [24, 0, 202, ""],
+        [55, 1, 204, ""],
+        [60, 1, 203, ""],
+        [63, 0, 203, ""],
+        [71, 0, 204, ""],
+        [108, 1, 205, ""],
+        [111, 1, 206, ""],
+        [115, 1, 207, ""],
+        [118, 0, 205, ""],
+        [122, 0, 206, ""],
+        [145, 0, 207, ""],
+        [195, 1, 209, ""],
+        [196, 1, 208, ""],
+        [198, 0, 208, ""],
+        [200, 0, 209, ""],
+        [226, 1, 212, ""],
+        [228, 1, 213, ""],
+        [230, 1, 210, ""],
+        [234, 0, 210, ""],
+        [238, 1, 211, ""],
+        [240, 0, 211, ""],
+        [243, 1, 212, ""],
+        [246, 0, 212, ""],
+        [248, 0, 213, ""],
+        [250, 2, 165, ""],
+        [253, 1, 214, ""],
+        [255, 0, 214, ""],
+        [258, 1, 215, ""],
+        [259, 1, 216, ""],
+        [261, 0, 215, ""],
+        [263, 0, 216, ""],
+        [266, 0, 217, ""],
+        [269, 1, 219, ""],
+        [276, 1, 218, ""],
+        [280, 0, 218, ""],
+        [282, 0, 219, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 220, ""],
+        [15, 0, 221, ""],
+        [20, 0, 222, ""],
+        [23, 0, 223, ""],
+        [25, 1, 166, ""],
+        [27, 1, 166, ""],
+        [29, 1, 244, ""],
+        [31, 0, 224, ""],
+        [33, 1, 238, ""],
+        [34, 0, 225, ""],
+        [36, 1, 171, ""],
+        [38, 0, 226, ""],
+        [40, 1, 189, ""],
+        [42, 0, 227, ""],
+        [50, 0, 228, ""],
+        [62, 0, 229, ""],
+        [81, 0, 230, ""],
+        [86, 6, 230, ""],
+        [91, 0, 231, ""],
+        [98, 0, 232, ""],
+        [102, 0, 233, ""],
+        [104, 0, 234, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "tokens": [
+        [4, 2, 235, ""],
+        [5, 0, 235, ""],
+        [7, 1, 237, ""],
+        [10, 1, 237, ""],
+        [12, 1, 236, ""],
+        [14, 0, 236, ""],
+        [17, 1, 237, ""],
+        [20, 1, 237, ""],
+        [21, 1, 224, ""],
+        [23, 0, 237, ""],
+        [25, 0, 238, ""],
+        [26, 1, 221, ""],
+        [28, 2, 242, ""],
+        [33, 1, 241, ""],
+        [38, 1, 239, ""],
+        [40, 0, 239, ""],
+        [43, 1, 240, ""],
+        [45, 1, 240, ""],
+        [48, 0, 240, ""],
+        [51, 0, 241, ""],
+        [54, 0, 242, ""],
+        [55, 1, 233, ""],
+        [58, 1, 243, ""],
+        [62, 1, 243, ""],
+        [64, 0, 243, ""],
+        [67, 0, 244, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/boss/mappings/misc.s",
+      "tokens": [
+        [2, 1, 245, ""],
+        [3, 1, 246, ""],
+        [4, 1, 247, ""],
+        [5, 1, 248, ""],
+        [6, 1, 249, ""],
+        [7, 1, 250, ""],
+        [8, 1, 251, ""],
+        [9, 1, 252, ""],
+        [10, 0, 245, ""],
+        [20, 0, 246, ""],
+        [28, 0, 247, ""],
+        [30, 0, 248, ""],
+        [32, 0, 249, ""],
+        [34, 0, 250, ""],
+        [44, 0, 251, ""],
+        [54, 0, 252, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/end_boss.s",
+      "tokens": [
+        [2, 1, 253, ""],
+        [3, 1, 254, ""],
+        [4, 1, 255, ""],
+        [5, 1, 256, ""],
+        [6, 1, 257, ""],
+        [7, 1, 258, ""],
+        [8, 1, 259, ""],
+        [9, 1, 260, ""],
+        [10, 1, 261, ""],
+        [11, 1, 262, ""],
+        [12, 1, 263, ""],
+        [13, 1, 264, ""],
+        [14, 1, 265, ""],
+        [15, 1, 266, ""],
+        [16, 1, 267, ""],
+        [17, 1, 268, ""],
+        [18, 1, 269, ""],
+        [19, 1, 270, ""],
+        [20, 1, 271, ""],
+        [21, 1, 272, ""],
+        [22, 1, 273, ""],
+        [23, 1, 274, ""],
+        [24, 1, 275, ""],
+        [25, 1, 276, ""],
+        [26, 0, 253, ""],
+        [27, 0, 254, ""],
+        [32, 0, 255, ""],
+        [37, 0, 256, ""],
+        [46, 0, 257, ""],
+        [50, 0, 258, ""],
+        [52, 0, 259, ""],
+        [54, 0, 260, ""],
+        [57, 0, 261, ""],
+        [59, 0, 262, ""],
+        [61, 0, 263, ""],
+        [63, 0, 264, ""],
+        [65, 0, 265, ""],
+        [67, 0, 266, ""],
+        [78, 0, 267, ""],
+        [89, 0, 268, ""],
+        [100, 0, 269, ""],
+        [111, 0, 270, ""],
+        [113, 0, 271, ""],
+        [117, 0, 272, ""],
+        [120, 0, 273, ""],
+        [124, 0, 274, ""],
+        [127, 0, 275, ""],
+        [130, 0, 276, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/mappings/miniboss.s",
+      "tokens": [
+        [2, 1, 277, ""],
+        [3, 1, 278, ""],
+        [4, 1, 279, ""],
+        [5, 1, 280, ""],
+        [6, 1, 281, ""],
+        [7, 1, 282, ""],
+        [8, 1, 283, ""],
+        [9, 1, 284, ""],
+        [10, 1, 285, ""],
+        [11, 1, 286, ""],
+        [12, 1, 287, ""],
+        [13, 1, 288, ""],
+        [14, 1, 289, ""],
+        [15, 1, 290, ""],
+        [16, 1, 291, ""],
+        [17, 1, 292, ""],
+        [18, 1, 293, ""],
+        [19, 1, 294, ""],
+        [20, 1, 295, ""],
+        [21, 1, 296, ""],
+        [22, 1, 297, ""],
+        [23, 1, 298, ""],
+        [24, 1, 299, ""],
+        [25, 1, 300, ""],
+        [26, 1, 301, ""],
+        [27, 1, 302, ""],
+        [28, 1, 303, ""],
+        [29, 1, 304, ""],
+        [30, 1, 305, ""],
+        [31, 0, 277, ""],
+        [57, 0, 278, ""],
+        [83, 0, 279, ""],
+        [109, 0, 280, ""],
+        [135, 0, 281, ""],
+        [153, 0, 282, ""],
+        [171, 0, 283, ""],
+        [189, 0, 284, ""],
+        [206, 0, 285, ""],
+        [223, 0, 286, ""],
+        [237, 0, 287, ""],
+        [251, 0, 288, ""],
+        [265, 0, 289, ""],
+        [279, 0, 290, ""],
+        [291, 0, 291, ""],
+        [305, 0, 292, ""],
+        [316, 0, 293, ""],
+        [328, 0, 294, ""],
+        [340, 0, 295, ""],
+        [352, 0, 296, ""],
+        [363, 0, 297, ""],
+        [383, 0, 298, ""],
+        [406, 0, 299, ""],
+        [408, 0, 300, ""],
+        [411, 0, 301, ""],
+        [415, 0, 302, ""],
+        [419, 0, 303, ""],
+        [423, 0, 304, ""],
+        [427, 0, 305, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/log.s",
+      "tokens": [
+        [2, 1, 306, ""],
+        [3, 1, 307, ""],
+        [4, 1, 308, ""],
+        [5, 1, 309, ""],
+        [6, 1, 310, ""],
+        [7, 1, 311, ""],
+        [8, 1, 312, ""],
+        [9, 1, 313, ""],
+        [10, 0, 306, ""],
+        [13, 0, 307, ""],
+        [17, 0, 308, ""],
+        [20, 0, 309, ""],
+        [24, 0, 310, ""],
+        [27, 0, 311, ""],
+        [31, 0, 312, ""],
+        [34, 0, 313, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/mhz/miniboss/mappings/tree.s",
+      "tokens": [
+        [2, 1, 314, ""],
+        [3, 1, 315, ""],
+        [4, 1, 316, ""],
+        [5, 1, 317, ""],
+        [6, 1, 318, ""],
+        [7, 1, 319, ""],
+        [8, 0, 314, ""],
+        [9, 0, 315, ""],
+        [12, 0, 316, ""],
+        [16, 0, 317, ""],
+        [21, 0, 318, ""],
+        [27, 0, 319, ""]
+      ]
+    }
+  ]
+}
