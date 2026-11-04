@@ -329,23 +329,23 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
-      "sha256": "3ac8d7abef8e52109c5bde59bfcd5257045c8f490005b83516fa94b6c72ffc97"
+      "sha256": "4643f62c0f80726319a861539d1598c3e2b08f6140d21048fad7a24270a57ce0"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
-      "sha256": "4ecf477ebf9767f4d5dfa4795c7dcabbd349e008d1d7dab3c2708d7a2cc98f13"
+      "sha256": "c2518a2eaebcaafedf765caac5196aba73a4ee4b11b7309414d4f551510690ae"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "sha256": "6592d7e1b831d19afcfdde5299d723a241c76cc4f3a7afcb07976a2027aa8a87"
+      "sha256": "5324035c77fc2207745c12e3ff683b37cd6126921651aa9691d9ece4c55c59e6"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
-      "sha256": "a318c0a923a1d35ff762b9e6abe5e3107ba35b3535318fb4b130799ab5517b93"
+      "sha256": "bdbf6ef83b4b8c9a8dfd7d5c1c2f917b0eb8f74318d7b4535eeccc214206d9aa"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
-      "sha256": "cfaa9d44309154785e41545bc44ed41459caf9ac47d1b3037da24c7a863d4f92"
+      "sha256": "b4c0964c1e84e54ecac2cb78fa333bf6914c56b161d3f73b73816d4a80e7a454"
     },
     {
       "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
@@ -2545,27 +2545,27 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
-      "symbol": "RawAni_5169C",
-      "scope": "RawAni_5169C",
-      "first_line": 425,
-      "last_line": 427,
+      "symbol": "LBZBoss2S3_FallingDebrisFrames",
+      "scope": "LBZBoss2S3_FallingDebrisFrames",
+      "first_line": 426,
+      "last_line": 428,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 8,
-      "declarations_sha256": "2658cf513a249a1cf12ec4e4fd71d3d03e9240f1c6a35139bf848d5f87963842",
+      "declarations_sha256": "26de1c43d7412ba7d4d2092f1974c6733d0822af3e9d9165037e3b31ca679778",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_5169C"],
+      "members": ["LBZBoss2S3_FallingDebrisFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "symbol": "byte_5205A",
-      "scope": "byte_5205A",
+      "symbol": "LBZBoss2S3_ArmSegmentDefaultAnim",
+      "scope": "LBZBoss2S3_ArmSegmentDefaultAnim",
       "first_line": 139,
       "last_line": 162,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 54,
-      "declarations_sha256": "733b3bb4e8edc35a499af949880eb7769555e45c39cb6baed97d3ac4e8d4470f",
+      "declarations_sha256": "0cc17083b4dc831d26be705ab9491a49cd5a9531042e25289649c1dfce942464",
       "entries": [
         [0, "fixed"],
         [8, "fixed"],
@@ -2574,41 +2574,47 @@
         [32, "external-player-s3"]
       ],
       "external_symbols": [],
-      "members": ["byte_5205A", "byte_52062", "byte_5206A", "byte_52070", "byte_5207A"],
+      "members": [
+        "LBZBoss2S3_ArmSegmentDefaultAnim",
+        "LBZBoss2S3_ArmSegmentAlternateAnim",
+        "LBZBoss2S3_SparkleTrailDeleteAnim",
+        "LBZBoss2S3_EndingFirstExternalAnim",
+        "LBZBoss2S3_EndingSecondExternalAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "symbol": "byte_52098",
-      "scope": "byte_52098",
+      "symbol": "LBZBoss2S3_EndingSonicExternalAnim",
+      "scope": "LBZBoss2S3_EndingSonicExternalAnim",
       "first_line": 166,
       "last_line": 201,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 68,
-      "declarations_sha256": "0a922b36a15da09ccea6bc23be1f41fb27a84142878f126e1f7295883e10cbd4",
+      "declarations_sha256": "c508c5e9e14b82cf81186c262853ddaa04cbf26894e2c1d56971f9228ca2e275",
       "entries": [
         [0, "external-player-s3"],
         [58, "external-player-s3"]
       ],
       "external_symbols": [],
-      "members": ["byte_52098", "byte_520D2"],
+      "members": ["LBZBoss2S3_EndingSonicExternalAnim", "LBZBoss2S3_EndingTailsExternalAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
-      "symbol": "byte_75194",
-      "scope": "byte_75194",
+      "symbol": "LBZBoss2SK_ArmSegmentDefaultAnim",
+      "scope": "LBZBoss2SK_ArmSegmentDefaultAnim",
       "first_line": 97,
       "last_line": 100,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "f8f43af34a04555e5639bc9fecf329a365a2c167f1ff8dca54a968d3516e4ad8",
+      "declarations_sha256": "944285a0a5e91532abd381c952f98e5a50535968985b04c067eb63b0251d9891",
       "entries": [
         [0, "fixed"],
         [8, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_75194", "byte_7519C"],
+      "members": ["LBZBoss2SK_ArmSegmentDefaultAnim", "LBZBoss2SK_ArmSegmentAlternateAnim"],
       "stored_markers": []
     },
     {

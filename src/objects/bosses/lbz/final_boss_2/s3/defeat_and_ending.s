@@ -3,25 +3,25 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_516A4:
-                lea     ObjDat3_51F78(pc),a1
+LBZBoss2S3_InitDeathEggPiece:
+                lea     LBZBoss2S3_DeathEggPieceAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_516FA,(a0)
+                move.l  #LBZBoss2S3_DeathEggFadeAndEmitSparkles,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                beq.s   loc_516C0
-                move.l  #loc_5173E,(a0)
+                beq.s   LBZBoss2S3_DeathEggLoadPieceVariant
+                move.l  #LBZBoss2S3_DeathEggPieceMoveAndDraw,(a0)
 
-loc_516C0:
-                move.w  word_516EA(pc,d0.w),y_vel(a0)
-                lea     byte_516DC(pc,d0.w),a1
+LBZBoss2S3_DeathEggLoadPieceVariant:
+                move.w  LBZBoss2S3_DeathEggPieceYSpeeds(pc,d0.w),y_vel(a0)
+                lea     LBZBoss2S3_DeathEggPieceFrameFlips(pc,d0.w),a1
                 move.b  (a1)+,mapping_frame(a0)
                 move.b  (a1)+,d0
                 or.b    d0,render_flags(a0)
                 lea     Pal_LBZEnding(pc),a1
                 jmp     PalLoad_Line1(pc)
 ; ---------------------------------------------------------------------------
-byte_516DC:
+LBZBoss2S3_DeathEggPieceFrameFlips:
                 dc.b    0,   0
                 dc.b    1,   0
                 dc.b    1,   0
@@ -30,7 +30,7 @@ byte_516DC:
                 dc.b    2,   2
                 dc.b    2,   3
                 even
-word_516EA:
+LBZBoss2S3_DeathEggPieceYSpeeds:
                 dc.w    $40
                 dc.w    $38
                 dc.w    $3C
@@ -41,12 +41,12 @@ word_516EA:
                 dc.w    $50
 ; ---------------------------------------------------------------------------
 
-loc_516FA:
+LBZBoss2S3_DeathEggFadeAndEmitSparkles:
                 bsr.w   FadeLBZEndingMusicOnceAtCameraYOffset
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_51730
-                lea     ChildObjDat_52042(pc),a2
+                bne.s   LBZBoss2S3_DeathEggCheckFallThreshold
+                lea     LBZBoss2S3_DeathEggSparkleChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jsr     (Random_Number).l
                 andi.w  #$1F,d0
@@ -57,13 +57,13 @@ loc_516FA:
                 subi.w  #$10,d0
                 add.w   d0,y_pos(a1)
 
-loc_51730:
+LBZBoss2S3_DeathEggCheckFallThreshold:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$A0,d0
                 cmp.w   y_pos(a0),d0
-                bcs.s   loc_51764
+                bcs.s   LBZBoss2S3_TryEndingWhiteFade
 
-loc_5173E:
+LBZBoss2S3_DeathEggPieceMoveAndDraw:
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 
@@ -73,74 +73,74 @@ FadeLBZEndingMusicOnceAtCameraYOffset:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmp.w   y_pos(a0),d0
-                bcc.s   locret_51762
+                bcc.s   LBZBoss2S3_DeathEggMusicFadeReturn
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.l  (sp),(a0)
 
-locret_51762:
+LBZBoss2S3_DeathEggMusicFadeReturn:
                 rts
 ; End of function FadeLBZEndingMusicOnceAtCameraYOffset
 
 ; ---------------------------------------------------------------------------
 
-loc_51764:
-                lea     ChildObjDat_5204E(pc),a2
+LBZBoss2S3_TryEndingWhiteFade:
+                lea     LBZBoss2S3_EndingWhiteFadeChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.w   locret_50DD2
+                bne.w   LBZBoss2S3_SharedReturn
                 move.w  a1,$44(a0)
                 lea     (Normal_palette).w,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($80),d0
 
-loc_5177E:
+LBZBoss2S3_SavePaletteAndQueuePoseArt:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_5177E
-                move.l  #loc_517BA,(a0)
+                dbf     d0,LBZBoss2S3_SavePaletteAndQueuePoseArt
+                move.l  #LBZBoss2S3_WaitWhiteThenFadeToTarget,(a0)
                 moveq   #signextendB(sfx_FlamethrowerQuiet),d0
                 jsr     (Play_SFX).l
                 moveq   #signextendB(mus_Ending),d0
                 jsr     (Play_Music).l
                 jsr     GetS3LBZEndingCharacterVariant(pc)
                 lsl.w   #2,d0
-                movea.l off_517AE(pc,d0.w),a1
+                movea.l LBZBoss2S3_EndingPoseArtPointers(pc,d0.w),a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_S3EndPose),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
-off_517AE:
+LBZBoss2S3_EndingPoseArtPointers:
                 dc.l    ArtKosM_SonicEndPose
                 dc.l    ArtKosM_TailsEndPose
                 dc.l    ArtKosM_SuperSonicEndPose
 ; ---------------------------------------------------------------------------
 
-loc_517BA:
+LBZBoss2S3_WaitWhiteThenFadeToTarget:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_517DE
+                beq.s   LBZBoss2S3_DrawDuringPaletteFade
                 clr.b   (Level_started_flag).w
-                lea     ChildObjDat_52054(pc),a2
+                lea     LBZBoss2S3_EndingTargetFadeChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.s   loc_517DE
+                bne.s   LBZBoss2S3_DrawDuringPaletteFade
                 move.w  a1,$44(a0)
-                move.l  #loc_517E4,(a0)
+                move.l  #LBZBoss2S3_WaitTargetThenSignalEnding,(a0)
 
-loc_517DE:
+LBZBoss2S3_DrawDuringPaletteFade:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_517E4:
+LBZBoss2S3_WaitTargetThenSignalEnding:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                beq.w   locret_50DD2
+                beq.w   LBZBoss2S3_SharedReturn
                 bset    #1,(_unkFA88).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_517FE:
-                move.l  #loc_5182A,(a0)
+LBZBoss2S3_InitEndingPaletteActor:
+                move.l  #LBZBoss2S3_RunEndingPaletteScript,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                movea.l off_51822(pc,d0.w),a1
+                movea.l LBZBoss2S3_EndingPaletteScriptPointers(pc,d0.w),a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -148,73 +148,73 @@ loc_517FE:
                 move.l  #Go_Delete_Sprite,(Palette_rotation_custom).w
                 rts
 ; ---------------------------------------------------------------------------
-off_51822:
+LBZBoss2S3_EndingPaletteScriptPointers:
                 dc.l    PalSPtr_LBZFinalBoss2_FadeIn
                 dc.l    PalSPtr_LBZFinalBoss2_FadeOut
 ; ---------------------------------------------------------------------------
 
-loc_5182A:
+LBZBoss2S3_RunEndingPaletteScript:
                 jmp     Run_PalRotationScript(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5182E:
+LBZBoss2S3_WaitAndTakeExternalAnim:
                 btst    #0,(_unkFA88).w
-                beq.w   locret_50DD2
-                move.l  #loc_5185A,(a0)
-                move.l  #loc_51868,$34(a0)
+                beq.w   LBZBoss2S3_SharedReturn
+                move.l  #LBZBoss2S3_AnimateFirstExternalPose,(a0)
+                move.l  #LBZBoss2S3_InstallSecondEventWait,$34(a0)
                 clr.b   (Ctrl_1_locked).w
                 lea     (Player_1).w,a1
                 move.b  #$53,object_control(a1)
                 move.b  #0,anim(a1)
 
-loc_5185A:
-                lea     byte_52070(pc),a1
+LBZBoss2S3_AnimateFirstExternalPose:
+                lea     LBZBoss2S3_EndingFirstExternalAnim(pc),a1
                 bsr.w   Animate_ExternalPlayerSprite
                 jmp     (Player_Load_PLC).l
 ; ---------------------------------------------------------------------------
 
-loc_51868:
-                move.l  #loc_5186E,(a0)
+LBZBoss2S3_InstallSecondEventWait:
+                move.l  #LBZBoss2S3_WaitSecondEventAndResetAnim,(a0)
 
-loc_5186E:
+LBZBoss2S3_WaitSecondEventAndResetAnim:
                 btst    #1,(_unkFA88).w
-                beq.w   locret_50DD2
-                move.l  #loc_5188E,(a0)
-                move.l  #loc_5189C,$34(a0)
+                beq.w   LBZBoss2S3_SharedReturn
+                move.l  #LBZBoss2S3_AnimateSecondExternalPose,(a0)
+                move.l  #LBZBoss2S3_BeginCharacterTimedAnim,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-loc_5188E:
-                lea     byte_5207A(pc),a1
+LBZBoss2S3_AnimateSecondExternalPose:
+                lea     LBZBoss2S3_EndingSecondExternalAnim(pc),a1
                 bsr.w   Animate_ExternalPlayerSprite
                 jmp     (Player_Load_PLC).l
 ; ---------------------------------------------------------------------------
 
-loc_5189C:
-                move.l  #loc_518CE,(a0)
+LBZBoss2S3_BeginCharacterTimedAnim:
+                move.l  #LBZBoss2S3_TickTimedExternalAnim,(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_518E2,$34(a0)
+                move.l  #LBZBoss2S3_InstallEndingPose,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.b  character_id(a1),d0
                 lsl.w   #2,d0
-                lea     off_52090(pc),a2
+                lea     LBZBoss2S3_EndingAnimByCharacter(pc),a2
                 move.l  (a2,d0.w),$30(a0)
 
-loc_518CE:
+LBZBoss2S3_TickTimedExternalAnim:
                 movea.l $30(a0),a1
                 bsr.w   Animate_ExternalPlayerSprite
                 jsr     (Player_Load_PLC).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_518E2:
-                move.l  #loc_518E8,(a0)
+LBZBoss2S3_InstallEndingPose:
+                move.l  #LBZBoss2S3_InitEndingPoseByVariant,(a0)
 
-loc_518E8:
-                lea     ObjDat3_51FA8(pc),a1
+LBZBoss2S3_InitEndingPoseByVariant:
+                lea     LBZBoss2S3_EndingPoseAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -224,68 +224,68 @@ loc_518E8:
                 jsr     GetS3LBZEndingCharacterVariant(pc)
                 moveq   #0,d1
                 subq.w  #1,d0
-                beq.s   loc_51920
-                bmi.s   loc_51922
+                beq.s   LBZBoss2S3_AddFinalPoseVariant
+                bmi.s   LBZBoss2S3_BindPoseHandlerAndPalette
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_5191E
+                beq.s   LBZBoss2S3_AddMiddlePoseVariant
                 addq.w  #4,d1
 
-loc_5191E:
+LBZBoss2S3_AddMiddlePoseVariant:
                 addq.w  #4,d1
 
-loc_51920:
+LBZBoss2S3_AddFinalPoseVariant:
                 addq.w  #4,d1
 
-loc_51922:
-                move.l  off_5192C(pc,d1.w),(a0)
+LBZBoss2S3_BindPoseHandlerAndPalette:
+                move.l  LBZBoss2S3_EndingPoseHandlerPointers(pc,d1.w),(a0)
                 move.w  d1,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_5192C:
-                dc.l    loc_5193C
-                dc.l    loc_51994
-                dc.l    loc_519B8
-                dc.l    loc_51A62
+LBZBoss2S3_EndingPoseHandlerPointers:
+                dc.l    LBZBoss2S3_BeginSonicEndingPose
+                dc.l    LBZBoss2S3_BeginTailsEndingPose
+                dc.l    LBZBoss2S3_BeginSuperJump
+                dc.l    LBZBoss2S3_BeginSuperRun
 ; ---------------------------------------------------------------------------
 
-loc_5193C:
-                move.l  #loc_5195E,(a0)
+LBZBoss2S3_BeginSonicEndingPose:
+                move.l  #LBZBoss2S3_TickPoseAndArmCredits,(a0)
                 move.w  #6,$2E(a0)
                 move.b  #0,mapping_frame(a0)
                 subi.w  #$10,y_pos(a0)
                 move.b  #0,(Player_1+mapping_frame).w
                 bsr.w   LoadLBZEndingPosePaletteLine
 
-loc_5195E:
+LBZBoss2S3_TickPoseAndArmCredits:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_51982
+                bpl.s   LBZBoss2S3_DrawEndingPose
                 move.l  #Wait_Draw,(a0)
                 addq.b  #1,mapping_frame(a0)
                 move.w  #5*60,$2E(a0)
-                move.l  #loc_51988,$34(a0)
+                move.l  #LBZBoss2S3_StartCreditsAndDeletePose,$34(a0)
                 subi.w  #$20,y_pos(a0)
 
-loc_51982:
+LBZBoss2S3_DrawEndingPose:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_51988:
+LBZBoss2S3_StartCreditsAndDeletePose:
                 move.b  #GameMode_S3Credits,(Game_mode).w
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_51994:
-                move.l  #loc_5195E,(a0)
+LBZBoss2S3_BeginTailsEndingPose:
+                move.l  #LBZBoss2S3_TickPoseAndArmCredits,(a0)
                 move.w  #4,$2E(a0)
                 move.b  #2,mapping_frame(a0)
                 subi.w  #$10,y_pos(a0)
                 move.b  #0,(Player_1+mapping_frame).w
                 bsr.w   LoadLBZEndingPosePaletteLine
-                bra.s   loc_5195E
+                bra.s   LBZBoss2S3_TickPoseAndArmCredits
 ; ---------------------------------------------------------------------------
 
-loc_519B8:
-                move.l  #loc_519E0,(a0)
+LBZBoss2S3_BeginSuperJump:
+                move.l  #LBZBoss2S3_MoveSuperJumpAndSyncPlayer,(a0)
                 move.b  #4,mapping_frame(a0)
                 move.w  #$100,x_vel(a0)
                 move.w  #-$600,y_vel(a0)
@@ -293,7 +293,7 @@ loc_519B8:
                 move.b  #$81,object_control(a1)
                 move.b  #2,anim(a1)
 
-loc_519E0:
+LBZBoss2S3_MoveSuperJumpAndSyncPlayer:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -301,12 +301,12 @@ loc_519E0:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$140,d0
                 cmp.w   y_pos(a0),d0
-                bcs.s   loc_51A06
+                bcs.s   LBZBoss2S3_RepositionForReturnFlight
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51A06:
-                move.l  #loc_51A34,(a0)
+LBZBoss2S3_RepositionForReturnFlight:
+                move.l  #LBZBoss2S3_FlyToCameraCenterForCredits,(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$180,d0
                 move.w  d0,x_pos(a0)
@@ -318,22 +318,22 @@ loc_51A06:
                 bra.w   LoadLBZEndingPosePaletteLine
 ; ---------------------------------------------------------------------------
 
-loc_51A34:
+LBZBoss2S3_FlyToCameraCenterForCredits:
                 jsr     (MoveSprite2).l
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 cmp.w   x_pos(a0),d0
-                bcs.s   loc_51A5C
+                bcs.s   LBZBoss2S3_DrawReturnFlight
                 move.l  #Wait_Draw,(a0)
                 move.w  #3*60,$2E(a0)
-                move.l  #loc_51988,$34(a0)
+                move.l  #LBZBoss2S3_StartCreditsAndDeletePose,$34(a0)
 
-loc_51A5C:
+LBZBoss2S3_DrawReturnFlight:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_51A62:
-                move.l  #loc_51A90,(a0)
+LBZBoss2S3_BeginSuperRun:
+                move.l  #LBZBoss2S3_MoveSuperRunAndCheckGate,(a0)
                 move.b  #4,mapping_frame(a0)
                 move.w  #$600,x_vel(a0)
                 lea     (Player_1).w,a1
@@ -342,7 +342,8 @@ loc_51A62:
                 move.w  #$600,x_vel(a1)
                 move.w  #$600,ground_vel(a1)
 
-loc_51A90:
+; Compare the actor's Y against camera X plus $180, as in the original
+LBZBoss2S3_MoveSuperRunAndCheckGate:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -350,24 +351,24 @@ loc_51A90:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$180,d0
                 cmp.w   y_pos(a0),d0
-                bcs.w   loc_51A06
+                bcs.w   LBZBoss2S3_RepositionForReturnFlight
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51AB8:
-                lea     ObjDat3_51F84(pc),a1
+LBZBoss2S3_InitSparkleAndTryTrail:
+                lea     LBZBoss2S3_SparkleAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_51AE2,(a0)
+                move.l  #LBZBoss2S3_SparkleTickFlips,(a0)
                 move.w  #-$40,y_vel(a0)
                 move.w  #$7F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
-                lea     ChildObjDat_52048(pc),a2
+                lea     LBZBoss2S3_SparkleTrailChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
 
-loc_51AE2:
+LBZBoss2S3_SparkleTickFlips:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   loc_51B08
+                bne.s   LBZFinalBoss2S3_Sparkle_MoveWaitThenDraw
                 move.b  $39(a0),d0
                 addq.b  #1,d0
                 move.b  d0,$39(a0)
@@ -377,21 +378,21 @@ loc_51AE2:
                 or.b    d0,d1
                 move.b  d1,render_flags(a0)
 
-loc_51B08:
+LBZFinalBoss2S3_Sparkle_MoveWaitThenDraw:
                 jsr     (MoveSprite2).l
                 jsr     Obj_Wait(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_51B18:
-                lea     ObjDat3_51F90(pc),a1
+LBZBoss2S3_InitFallingSparkleTrail:
+                lea     LBZBoss2S3_SparkleTrailAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_51B3C,(a0)
-                move.l  #byte_5206A,$30(a0)
+                move.l  #LBZBoss2S3_SparkleTrailAnimateAndMove,(a0)
+                move.l  #LBZBoss2S3_SparkleTrailDeleteAnim,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 move.w  #$40,y_vel(a0)
 
-loc_51B3C:
+LBZBoss2S3_SparkleTrailAnimateAndMove:
                 jsr     Animate_Raw(pc)
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l

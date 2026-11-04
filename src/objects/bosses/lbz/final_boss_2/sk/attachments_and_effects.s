@@ -3,93 +3,93 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_749AE:
-                lea     ObjDat3_750C2(pc),a1
+LBZBoss2SK_InitBodyPartAndFollow:
+                lea     LBZBoss2SK_BodyPartAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_749BE,(a0)
+                move.l  #LBZBoss2SK_BodyPartSyncPriorityAndDraw,(a0)
 
-loc_749BE:
+LBZBoss2SK_BodyPartSyncPriorityAndDraw:
                 jsr     (Child_GetPriorityOnce).l
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_749D0:
+LBZBoss2SK_ArmDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_749E6(pc,d0.w),d1
-                jsr     off_749E6(pc,d1.w)
+                move.w  LBZBoss2SK_ArmStateOffsets(pc,d0.w),d1
+                jsr     LBZBoss2SK_ArmStateOffsets(pc,d1.w)
                 moveq   #$C,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_749E6:
-                dc.w    loc_749EC-off_749E6
-                dc.w    loc_74A14-off_749E6
-                dc.w    loc_74A3E-off_749E6
+LBZBoss2SK_ArmStateOffsets:
+                dc.w    LBZBoss2SK_InitArmAndSpawnChildren-LBZBoss2SK_ArmStateOffsets
+                dc.w    LBZBoss2SK_ArmWaitForContactPriority-LBZBoss2SK_ArmStateOffsets
+                dc.w    LBZBoss2SK_ArmTrackPlayerY-LBZBoss2SK_ArmStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_749EC:
-                lea     ObjDat3_750CE(pc),a1
+LBZBoss2SK_InitArmAndSpawnChildren:
+                lea     LBZBoss2SK_PrimaryArmAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 movea.w parent3(a0),a1
                 move.w  a0,$44(a1)
                 move.b  #$14,child_dx(a0)
                 move.b  #-6,child_dy(a0)
-                lea     ChildObjDat_75144(pc),a2
+                lea     LBZBoss2SK_PrimaryArmChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_74A14:
+LBZBoss2SK_ArmWaitForContactPriority:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   loc_74A32
+                beq.s   LBZBoss2SK_ArmPlaceFromCircle
                 bset    #7,art_tile(a0)
                 move.b  #4,routine(a0)
                 move.b  #$AD,collision_flags(a0)
 
-loc_74A32:
+LBZBoss2SK_ArmPlaceFromCircle:
                 lea     (LBZFinalBoss2_CircleLookup).l,a2
                 jmp     (MoveSprite_CircularLookup).l
 ; ---------------------------------------------------------------------------
 
-loc_74A3E:
+LBZBoss2SK_ArmTrackPlayerY:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.w   locret_74374
+                bne.w   LBZBoss2SK_SharedReturn
                 btst    #2,$38(a1)
-                bne.s   loc_74A88
+                bne.s   LBZBoss2SK_ArmCopyFacingAndPlace
                 lea     (Player_1).w,a1
                 move.b  $3C(a0),d0
                 move.w  y_pos(a0),d1
                 sub.w   y_pos(a1),d1
                 cmpi.w  #-2,d1
-                blt.s   loc_74A7C
+                blt.s   LBZBoss2SK_ArmIncreaseTrackingPhase
                 cmpi.w  #2,d1
-                ble.s   loc_74A88
+                ble.s   LBZBoss2SK_ArmCopyFacingAndPlace
                 subq.b  #1,d0
                 cmpi.b  #-$30,d0
-                blt.s   loc_74A88
-                bra.w   loc_74A84
+                blt.s   LBZBoss2SK_ArmCopyFacingAndPlace
+                bra.w   LBZBoss2SK_ArmStoreTrackingPhase
 ; ---------------------------------------------------------------------------
 
-loc_74A7C:
+LBZBoss2SK_ArmIncreaseTrackingPhase:
                 addq.b  #1,d0
                 cmpi.b  #0,d0
-                bgt.s   loc_74A88
+                bgt.s   LBZBoss2SK_ArmCopyFacingAndPlace
 
-loc_74A84:
+LBZBoss2SK_ArmStoreTrackingPhase:
                 move.b  d0,$3C(a0)
 
-loc_74A88:
+LBZBoss2SK_ArmCopyFacingAndPlace:
                 jsr     (Change_FlipXUseParent).l
                 lea     (LBZFinalBoss2_CircleLookup).l,a2
                 jmp     (MoveSprite_CircularLookup).l
 ; ---------------------------------------------------------------------------
 
-loc_74A9A:
-                lea     word_750E0(pc),a1
+LBZBoss2SK_InitFollowerAndReparent:
+                lea     LBZBoss2SK_SecondaryArmAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_74ACA,(a0)
+                move.l  #LBZBoss2SK_FollowerSyncPhaseAndDraw,(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a2
                 move.w  a2,parent3(a0)
@@ -98,7 +98,7 @@ loc_74A9A:
                 move.b  #$18,child_dx(a0)
                 move.b  #-6,child_dy(a0)
 
-loc_74ACA:
+LBZBoss2SK_FollowerSyncPhaseAndDraw:
                 jsr     (Child_GetPriorityOnce).l
                 jsr     (Change_FlipXUseParent).l
                 movea.w $44(a0),a1
@@ -111,142 +111,142 @@ loc_74ACA:
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_74AFA:
-                lea     word_750DA(pc),a1
+LBZBoss2SK_InitSegmentAndCacheBoss:
+                lea     LBZBoss2SK_ArmSegmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
-                move.l  #loc_74B36,(a0)
-                move.l  #byte_75194,$30(a0)
+                move.l  #LBZBoss2SK_SegmentLatchPriority,(a0)
+                move.l  #LBZBoss2SK_ArmSegmentDefaultAnim,$30(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_74B36
+                beq.s   LBZBoss2SK_SegmentLatchPriority
                 move.b  #8,mapping_frame(a0)
                 move.w  #$180,priority(a0)
-                move.l  #byte_7519C,$30(a0)
+                move.l  #LBZBoss2SK_ArmSegmentAlternateAnim,$30(a0)
 
-loc_74B36:
+LBZBoss2SK_SegmentLatchPriority:
                 jsr     (Child_GetPriorityOnce).l
 
-loc_74B3C:
+LBZBoss2SK_SegmentFollowAndCheckHeld:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Animate_Raw).l
                 movea.w $44(a0),a1
                 tst.b   $30(a1)
-                beq.s   loc_74B6E
-                move.l  #loc_74B76,(a0)
+                beq.s   LBZBoss2SK_SegmentActiveTouchDraw
+                move.l  #LBZBoss2SK_SegmentWaitFrozenForRelease,(a0)
                 move.b  #7,mapping_frame(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_74B6E
+                beq.s   LBZBoss2SK_SegmentActiveTouchDraw
                 move.b  #$B,mapping_frame(a0)
                 addq.b  #8,child_dx(a0)
 
-loc_74B6E:
+LBZBoss2SK_SegmentActiveTouchDraw:
                 moveq   #$C,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_74B76:
+LBZBoss2SK_SegmentWaitFrozenForRelease:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w $44(a0),a1
                 tst.b   $30(a1)
-                bne.s   loc_74B96
-                move.l  #loc_74B3C,(a0)
+                bne.s   LBZBoss2SK_SegmentFrozenTouchDraw
+                move.l  #LBZBoss2SK_SegmentFollowAndCheckHeld,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_74B96
+                beq.s   LBZBoss2SK_SegmentFrozenTouchDraw
                 subq.b  #8,child_dx(a0)
 
-loc_74B96:
+LBZBoss2SK_SegmentFrozenTouchDraw:
                 moveq   #$C,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_74B9E:
-                lea     ObjDat3_750E6(pc),a1
+LBZBoss2SK_InitCoverAndFollow:
+                lea     LBZBoss2SK_CoverAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_74BAE,(a0)
+                move.l  #LBZBoss2SK_CoverSyncPriorityAndDraw,(a0)
 
-loc_74BAE:
+LBZBoss2SK_CoverSyncPriorityAndDraw:
                 jsr     (Child_GetPriorityOnce).l
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_74BC0:
-                lea     ObjDat3_750F2(pc),a1
+LBZBoss2SK_InitCollisionFlashVisual:
+                lea     LBZBoss2SK_FlashVisualAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_74BD0,(a0)
+                move.l  #LBZBoss2SK_FlashVisualFollowAndFlicker,(a0)
 
-loc_74BD0:
+LBZBoss2SK_FlashVisualFollowAndFlicker:
                 move.b  #$9A,d0
                 bsr.w   LBZBoss2Child_LatchPriorityAndColl
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_74BFA
+                bne.s   LBZBoss2SK_DeleteDefeatedChild
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_74374
+                bne.w   LBZBoss2SK_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_74BFA:
+LBZBoss2SK_DeleteDefeatedChild:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_74C00:
-                move.l  #loc_74C0C,(a0)
+LBZBoss2SK_InitInvisibleTouchProxy:
+                move.l  #LBZBoss2SK_TouchProxyFollowAndSubmit,(a0)
                 move.b  #$9C,collision_flags(a0)
 
-loc_74C0C:
+LBZBoss2SK_TouchProxyFollowAndSubmit:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_74BFA
+                bne.s   LBZBoss2SK_DeleteDefeatedChild
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_74C24:
-                move.l  #loc_74C34,(a0)
+LBZBoss2SK_CaptureProbeCacheBoss:
+                move.l  #LBZBoss2SK_CaptureProbeCheckPlayer,(a0)
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
 
-loc_74C34:
+LBZBoss2SK_CaptureProbeCheckPlayer:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_74C7A
+                bne.s   LBZBoss2SK_CaptureProbeReleaseAndDelete
                 btst    #3,$38(a1)
-                bne.w   locret_74374
+                bne.w   LBZBoss2SK_SharedReturn
                 btst    #6,status(a1)
-                bne.w   locret_74374
-                lea     word_74C84(pc),a1
+                bne.w   LBZBoss2SK_SharedReturn
+                lea     LBZBoss2SK_CaptureProbeBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                beq.s   locret_74C78
+                beq.s   LBZBoss2SK_CaptureProbeReturn
                 movea.w d0,a1
                 tst.b   invulnerability_timer(a1)
-                bne.s   locret_74C78
+                bne.s   LBZBoss2SK_CaptureProbeReturn
                 cmpi.b  #6,routine(a1)
-                blo.s   loc_74C8C
+                blo.s   LBZBoss2SK_CapturePlayerAndSignalBoss
 
-locret_74C78:
+LBZBoss2SK_CaptureProbeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74C7A:
+LBZBoss2SK_CaptureProbeReleaseAndDelete:
                 clr.b   (Player_1+object_control).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_74C84:
+LBZBoss2SK_CaptureProbeBounds:
                 dc.w    -$10,   $20,  -$10,   $20
 ; ---------------------------------------------------------------------------
 
-loc_74C8C:
-                move.l  #loc_74CCC,(a0)
+LBZBoss2SK_CapturePlayerAndSignalBoss:
+                move.l  #LBZBoss2SK_FollowWhilePlayerHeld,(a0)
                 movea.w $44(a0),a1
                 st      $30(a1)
                 move.b  #$1E,routine(a1)
                 move.w  #$40,$2E(a1)
-                move.l  #loc_74562,$34(a1)
+                move.l  #LBZBoss2SK_BeginCapturedPlayerAscent,$34(a1)
                 lea     (Player_1).w,a1
                 move.b  #$81,object_control(a1)
                 move.b  #2,anim(a1)
@@ -255,12 +255,12 @@ loc_74C8C:
                 move.w  d0,y_vel(a1)
                 move.w  d0,ground_vel(a1)
 
-loc_74CCC:
+LBZBoss2SK_FollowWhilePlayerHeld:
                 movea.w $44(a0),a1
                 tst.b   $30(a1)
-                beq.s   loc_74CF8
+                beq.s   LBZBoss2SK_BeginCaptureCooldown
                 btst    #7,status(a1)
-                bne.w   loc_74BFA
+                bne.w   LBZBoss2SK_DeleteDefeatedChild
                 jsr     (Refresh_ChildPositionAdjusted).l
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
@@ -268,23 +268,24 @@ loc_74CCC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74CF8:
-                move.l  #loc_74D04,(a0)
+; Preload $40 and decrement on entry, for 65 calls before rearming
+LBZBoss2SK_BeginCaptureCooldown:
+                move.l  #LBZBoss2SK_TickCaptureCooldown,(a0)
                 move.w  #$40,$2E(a0)
 
-loc_74D04:
+LBZBoss2SK_TickCaptureCooldown:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_74D0C
+                bmi.s   LBZBoss2SK_RearmCaptureProbe
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74D0C:
-                move.l  #loc_74C34,(a0)
+LBZBoss2SK_RearmCaptureProbe:
+                move.l  #LBZBoss2SK_CaptureProbeCheckPlayer,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74D14:
-                lea     ObjDat3_750FE(pc),a1
+LBZBoss2SK_InitBodyFragment:
+                lea     LBZBoss2SK_BodyFragmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 jsr     (Refresh_ChildPositionAdjusted).l
                 move.l  #Obj_FlickerMove,(a0)
@@ -298,46 +299,47 @@ loc_74D14:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_74D48:
+LBZBoss2SK_RelayDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_74D5C(pc,d0.w),d1
-                jsr     off_74D5C(pc,d1.w)
+                move.w  LBZBoss2SK_RelayStateOffsets(pc,d0.w),d1
+                jsr     LBZBoss2SK_RelayStateOffsets(pc,d1.w)
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_74D5C:
-                dc.w    loc_74D62-off_74D5C
-                dc.w    loc_74D7C-off_74D5C
-                dc.w    loc_74DEA-off_74D5C
+LBZBoss2SK_RelayStateOffsets:
+                dc.w    LBZBoss2SK_InitDroppedRelay-LBZBoss2SK_RelayStateOffsets
+                dc.w    LBZBoss2SK_RelayFallAndProbeFloor-LBZBoss2SK_RelayStateOffsets
+                dc.w    LBZBoss2SK_RelayTryPeriodicExplosion-LBZBoss2SK_RelayStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_74D62:
-                lea     ObjDat3_7510A(pc),a1
+LBZBoss2SK_InitDroppedRelay:
+                lea     LBZBoss2SK_DroppedRelayAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$10,y_radius(a0)
-                move.l  #loc_74D90,$34(a0)
+                move.l  #LBZBoss2SK_RelayBounceOrSettle,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74D7C:
+LBZBoss2SK_RelayFallAndProbeFloor:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_74374
+                bmi.w   LBZBoss2SK_SharedReturn
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_74D90:
+; Reflect half the downward speed until it falls below one pixel per frame
+LBZBoss2SK_RelayBounceOrSettle:
                 move.w  y_vel(a0),d0
                 cmpi.w  #$100,d0
-                blo.s   loc_74DA4
+                blo.s   LBZBoss2SK_RelaySettleAndOpenArena
                 asr.w   #1,d0
                 neg.w   d0
                 move.w  d0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74DA4:
-                move.l  #loc_74DEA,(a0)
+LBZBoss2SK_RelaySettleAndOpenArena:
+                move.l  #LBZBoss2SK_RelayTryPeriodicExplosion,(a0)
                 move.b  #$7F,$39(a0)
                 movea.w parent3(a0),a1
                 bset    #3,$38(a1)
@@ -352,56 +354,56 @@ loc_74DA4:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_74DEA:
+LBZBoss2SK_RelayTryPeriodicExplosion:
                 bclr    #7,render_flags(a0)
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.w   locret_74374
+                bne.w   LBZBoss2SK_SharedReturn
                 subq.b  #1,$39(a0)
-                bmi.s   loc_74E0C
-                lea     ChildObjDat_7518E(pc),a2
+                bmi.s   LBZBoss2SK_RelayDeleteOnBudgetExpiry
+                lea     LBZBoss2SK_RelayExplosionControllerChild(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_74E0C:
+LBZBoss2SK_RelayDeleteOnBudgetExpiry:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_74E12:
-                lea     ObjDat3_75116(pc),a1
+LBZBoss2SK_InitDefeatUnderlay:
+                lea     LBZBoss2SK_DefeatUnderlayAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_74E24,(a0)
+                move.l  #LBZBoss2SK_DefeatUnderlayFollowDraw,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74E24:
+LBZBoss2SK_DefeatUnderlayFollowDraw:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_74E30:
+LBZBoss2SK_InitRandomExplosionTimer:
                 jsr     (Random_Number).l
                 andi.w  #$3C,d0
-                lea     word_74E7C(pc,d0.w),a1
+                lea     LBZBoss2SK_RandomExplosionSites(pc,d0.w),a1
                 move.w  (a1)+,x_pos(a0)
                 move.w  (a1)+,y_pos(a0)
                 move.l  #Obj_Wait,(a0)
                 move.w  #$60,$2E(a0)
-                move.l  #loc_74E70,$34(a0)
+                move.l  #LBZBoss2SK_StopExplosionController,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_74E6E
+                bne.s   LBZBoss2SK_RandomExplosionSpawnReturn
                 move.b  #4,subtype(a1)
 
-locret_74E6E:
+LBZBoss2SK_RandomExplosionSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_74E70:
+LBZBoss2SK_StopExplosionController:
                 bset    #5,$38(a0)
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-word_74E7C:
+LBZBoss2SK_RandomExplosionSites:
                 dc.w    $4310,  $3ED
                 dc.w    $4330,  $3F0
                 dc.w    $4350,  $3F0

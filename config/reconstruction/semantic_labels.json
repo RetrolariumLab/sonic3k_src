@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 26698,
+  "applied_targets": 27109,
   "packets": [
     {
       "id": "01-audio",
@@ -5577,7 +5577,7 @@
     },
     {
       "id": "44-boss-lbz-final-2",
-      "state": "pending",
+      "state": "applied",
       "target_count": 411,
       "scope_sha256": "b19b2d778f03b00aa819c2f4ee121539b727baffe21d76e7636514ae8f345d00",
       "registry": "config/reconstruction/semantic_labels/44-boss-lbz-final-2.json",
@@ -5623,7 +5623,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "5a13437c82bcab1bab42e959265a88840b128212255be80e635e828916ecec19"
+      "destination_sha256": "bfa49274fc1ac97d327140bfe030077f479923f33062efa2683da80a2d534883"
     },
     {
       "id": "45-boss-mhz",
@@ -7460,6 +7460,7 @@
     "40-boss-fbz",
     "41-boss-icz",
     "42-boss-lbz-main",
-    "43-boss-lbz-final-1"
+    "43-boss-lbz-final-1",
+    "44-boss-lbz-final-2"
   ]
 }

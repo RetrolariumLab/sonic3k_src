@@ -8,12 +8,12 @@
 LBZBoss2Child_LatchPriorityAndColl:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   locret_51BE0
+                beq.s   LBZBoss2S3_PriorityLatchReturn
                 bset    #7,art_tile(a0)
                 move.l  (sp),(a0)
                 move.b  d0,collision_flags(a0)
 
-locret_51BE0:
+LBZBoss2S3_PriorityLatchReturn:
                 rts
 ; End of function LBZBoss2Child_LatchPriorityAndColl
 
@@ -24,18 +24,18 @@ locret_51BE0:
                 move.w  x_pos(a1),d0
                 moveq   #$10,d2
                 btst    #0,render_flags(a2)
-                beq.s   loc_51BFA
+                beq.s   LBZBoss2S3_UnusedMidpointFirstOffset
                 neg.w   d2
 
-loc_51BFA:
+LBZBoss2S3_UnusedMidpointFirstOffset:
                 add.w   d2,d0
                 move.w  x_pos(a2),d1
                 moveq   #$C,d2
                 btst    #0,render_flags(a2)
-                beq.s   loc_51C0C
+                beq.s   LBZBoss2S3_UnusedStoreActorMidpoint
                 neg.w   d2
 
-loc_51C0C:
+LBZBoss2S3_UnusedStoreActorMidpoint:
                 add.w   d2,d1
                 sub.w   d1,d0
                 asr.w   #1,d0
@@ -52,7 +52,7 @@ loc_51C0C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51C30:
+LBZBoss2S3_ChoosePassHeightAndSpeed:
                 jsr     (Random_Number).l
                 andi.w  #6,d0
                 move.w  d0,$3A(a0)
@@ -60,35 +60,35 @@ loc_51C30:
                 move.w  #$1A8,d2
                 move.w  #-$300,d3
                 btst    #0,render_flags(a0)
-                beq.s   loc_51C58
+                beq.s   LBZBoss2S3_ApplyPassStartMotion
                 move.w  #-$68,d2
                 neg.w   d3
 
-loc_51C58:
+LBZBoss2S3_ApplyPassStartMotion:
                 add.w   d2,d1
                 move.w  d1,x_pos(a0)
                 move.w  d3,x_vel(a0)
                 move.w  (Camera_Y_pos).w,d1
-                move.w  word_51C7E(pc,d0.w),d2
+                move.w  LBZBoss2S3_PassCameraYOffsets(pc,d0.w),d2
                 add.w   d1,d2
                 move.w  d2,y_pos(a0)
-                move.w  word_51C86(pc,d0.w),y_vel(a0)
+                move.w  LBZBoss2S3_PassInitialYSpeeds(pc,d0.w),y_vel(a0)
                 move.w  #8,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_51C7E:
+LBZBoss2S3_PassCameraYOffsets:
                 dc.w    $60,   $10,   $A0,   $80
-word_51C86:
+LBZBoss2S3_PassInitialYSpeeds:
                 dc.w    0,  $200, -$200,     0
 ; ---------------------------------------------------------------------------
 
-loc_51C8E:
+LBZBoss2S3_ChoosePatrolFacingSpeed:
                 move.w  #-$300,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_51C9C
+                beq.s   LBZBoss2S3_StorePatrolSpeedAndWait
                 neg.w   d0
 
-loc_51C9C:
+LBZBoss2S3_StorePatrolSpeedAndWait:
                 move.w  d0,x_vel(a0)
                 jsr     (Random_Number).l
                 andi.w  #$7F,d0
@@ -101,23 +101,23 @@ loc_51C9C:
 LBZBoss2_ReverseAtCameraBounds:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_51CCA
+                bmi.s   LBZBoss2S3_CheckLeftPatrolBound
                 add.w   d2,d0
                 cmp.w   x_pos(a0),d0
-                bls.s   loc_51CD2
-                bra.w   locret_51CDC
+                bls.s   LBZBoss2S3_ReversePatrolFacingAndSpeed
+                bra.w   LBZBoss2S3_PatrolBoundsReturn
 ; ---------------------------------------------------------------------------
 
-loc_51CCA:
+LBZBoss2S3_CheckLeftPatrolBound:
                 add.w   d1,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_51CDC
+                blo.s   LBZBoss2S3_PatrolBoundsReturn
 
-loc_51CD2:
+LBZBoss2S3_ReversePatrolFacingAndSpeed:
                 bchg    #0,render_flags(a0)
                 neg.w   x_vel(a0)
 
-locret_51CDC:
+LBZBoss2S3_PatrolBoundsReturn:
                 rts
 ; End of function LBZBoss2_ReverseAtCameraBounds
 
@@ -125,76 +125,77 @@ locret_51CDC:
 
 HandleLBZFinalBoss2SixColorHitOrDefeat:
                 cmpi.b  #8,routine(a0)
-                blo.s   locret_51D50
+                blo.s   LBZBoss2S3_HitUpdateReturn
                 tst.b   collision_flags(a0)
-                bne.s   locret_51D50
+                bne.s   LBZBoss2S3_HitUpdateReturn
                 move.b  collision_property(a0),d0
-                beq.s   loc_51D52
+                beq.s   LBZBoss2S3_BeginScoredDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_51D1C
+                bne.s   LBZBoss2S3_HitChooseFlashRow
                 cmpi.b  #$A,routine(a0)
-                bne.s   loc_51D06
+                bne.s   LBZBoss2S3_BeginHitFlashDisableArm
                 move.w  #8,$3A(a0)
 
-loc_51D06:
+LBZBoss2S3_BeginHitFlashDisableArm:
                 move.b  #$3C,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 movea.w $44(a0),a1
                 clr.b   collision_flags(a1)
 
-loc_51D1C:
+LBZBoss2S3_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_51D30
+                bne.s   LBZBoss2S3_HitCopyColorsAndTick
                 addi.w  #2*6,d0
 
-loc_51D30:
+; Restore collision on both the root and arm when the flash expires
+LBZBoss2S3_HitCopyColorsAndTick:
                 bsr.w   CopyLBZFinalBoss2SixColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_51D50
+                bne.s   LBZBoss2S3_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
                 movea.w $44(a0),a1
                 move.b  #$AD,collision_flags(a1)
 
-locret_51D50:
+LBZBoss2S3_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51D52:
+LBZBoss2S3_BeginScoredDefeatWait:
                 move.l  #Wait_Draw,(a0)
-                move.l  #loc_510DE,$34(a0)
+                move.l  #LBZBoss2S3_BeginDefeatSinkAndBreakup,$34(a0)
                 jsr     BossDefeated_StopTimer(pc)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_51D78
+                bne.s   LBZBoss2S3_DefeatCheckPlayerRelease
                 move.b  #4,subtype(a1)
 
-loc_51D78:
+LBZBoss2S3_DefeatCheckPlayerRelease:
                 tst.b   $30(a0)
 ; Bug: this branch is inverted, freeing the player if they're _not_ being held
-                bne.s   loc_51D82
+                bne.s   LBZBoss2S3_DefeatSaveGame
                 jsr     Restore_PlayerControl(pc)
 
-loc_51D82:
+LBZBoss2S3_DefeatSaveGame:
                 jmp     (SaveGame).l
 ; End of function HandleLBZFinalBoss2SixColorHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyLBZFinalBoss2SixColorPalette:
-                lea     word_51D94(pc),a1
-                lea     word_51DA0(pc,d0.w),a2
+                lea     LBZBoss2S3_HitPaletteDestinations(pc),a1
+                lea     LBZFinalBoss2S3_Hit_TwoSixColorBanks(pc,d0.w),a2
                 jmp     CopyWordData_6(pc)
 ; End of function CopyLBZFinalBoss2SixColorPalette
 
 ; ---------------------------------------------------------------------------
-word_51D94:
+LBZBoss2S3_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$0E, Normal_palette_line_2+$10
                 dc.w    Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_51DA0:
+LBZFinalBoss2S3_Hit_TwoSixColorBanks:
                 dc.w    8,    $A,     4,  $644,  $422,     0
                 dc.w    $888,  $666,  $AAA,  $AAA,  $EEE,  $EEE
 
@@ -223,17 +224,17 @@ LBZUnusedRobotnik_AdjustVel:
                 move.w  x_vel(a0),d0
                 addi.w  #-$28,d0
                 cmpi.w  #-$80,d0
-                blt.s   loc_51DFC
+                blt.s   LBZBoss2S3_UnusedScalerUpdateYSpeed
                 move.w  d0,x_vel(a0)
 
-loc_51DFC:
+LBZBoss2S3_UnusedScalerUpdateYSpeed:
                 move.w  y_vel(a0),d0
                 addi.w  #8,d0
                 cmpi.w  #$40,d0
-                bge.s   locret_51E0E
+                bge.s   LBZBoss2S3_UnusedScalerYSpeedReturn
                 move.w  d0,y_vel(a0)
 
-locret_51E0E:
+LBZBoss2S3_UnusedScalerYSpeedReturn:
                 rts
 ; End of function LBZUnusedRobotnik_AdjustVel
 
@@ -261,38 +262,38 @@ LBZUnusedRobotnik_IntegrateAndProject:
 ; Regenerate and queue scaled art as the actor grows. Schedule deletion after the last source frame
 LBZUnusedRobotnik_StepArtAndScale:
                 subq.w  #1,$1C(a0)
-                bpl.s   loc_51E62
+                bpl.s   LBZBoss2S3_UnusedScalerTickArt
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #6,d0
-                bhi.s   loc_51E80
+                bhi.s   LBZBoss2S3_UnusedScalerQueueDeletion
                 move.b  d0,anim_frame(a0)
                 add.w   d0,d0
-                move.w  word_51E86(pc,d0.w),$1C(a0)
+                move.w  LBZBoss2S3_UnusedScalerFrameDelays(pc,d0.w),$1C(a0)
                 add.w   d0,d0
-                move.l  off_51E94(pc,d0.w),$42(a0)
+                move.l  LBZBoss2S3_UnusedScalerArtPointers(pc,d0.w),$42(a0)
 
-loc_51E62:
+LBZBoss2S3_UnusedScalerTickArt:
                 subq.b  #1,$25(a0)
-                bpl.s   locret_51E7E
+                bpl.s   LBZBoss2S3_UnusedScalerArtReturn
                 move.b  #4,$25(a0)
                 move.b  $40(a0),d0
                 addq.b  #1,d0
-                bmi.s   locret_51E7E
+                bmi.s   LBZBoss2S3_UnusedScalerArtReturn
                 move.b  d0,$40(a0)
                 bsr.w   Perform_Art_Scaling
 
-locret_51E7E:
+LBZBoss2S3_UnusedScalerArtReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51E80:
+LBZBoss2S3_UnusedScalerQueueDeletion:
                 jmp     (Go_Delete_Sprite).l
 ; End of function LBZUnusedRobotnik_StepArtAndScale
 
 ; ---------------------------------------------------------------------------
-word_51E86:
+LBZBoss2S3_UnusedScalerFrameDelays:
                 dc.w    $20
                 dc.w    $20
                 dc.w    $10
@@ -300,7 +301,7 @@ word_51E86:
                 dc.w    8
                 dc.w    8
                 dc.w    $200
-off_51E94:
+LBZBoss2S3_UnusedScalerArtPointers:
                 dc.l    ArtScaled_LBZ2UnusedRobotnik
                 dc.l    ArtScaled_LBZ2UnusedRobotnik
                 dc.l    ArtScaled_LBZ2UnusedRobotnik+$1000
@@ -313,18 +314,18 @@ off_51E94:
 
 LoadLBZEndingPosePaletteLine:
                 move.w  $3A(a0),d1
-                movea.l off_51EC6(pc,d1.w),a1
+                movea.l LBZBoss2S3_EndingPosePalettes(pc,d1.w),a1
                 lea     (Normal_palette).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_51EBE:
+LBZBoss2S3_EndingCopyPosePalette:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_51EBE
+                dbf     d0,LBZBoss2S3_EndingCopyPosePalette
                 rts
 ; End of function LoadLBZEndingPosePaletteLine
 
 ; ---------------------------------------------------------------------------
-off_51EC6:
+LBZBoss2S3_EndingPosePalettes:
                 dc.l    Pal_SonicEndPose
                 dc.l    Pal_TailsEndPose
                 dc.l    Pal_SuperSonicEndPose
@@ -334,7 +335,7 @@ off_51EC6:
 
 Animate_ExternalPlayerSprite:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_51F10
+                bpl.s   LBZBoss2S3_ExternalAnimUpdateReturn
                 lea     (Player_1).w,a2
                 move.b  (a1),anim_frame_timer(a0)
                 moveq   #0,d0
@@ -343,18 +344,18 @@ Animate_ExternalPlayerSprite:
                 move.b  d0,anim_frame(a0)
                 move.b  1(a1,d0.w),d1
                 cmpi.b  #-1,d1
-                beq.s   loc_51F12
+                beq.s   LBZBoss2S3_ExternalAnimRunEndCallback
                 move.b  d1,mapping_frame(a2)
                 bclr    #0,render_flags(a2)
                 tst.b   2(a1,d0.w)
-                beq.s   locret_51F10
+                beq.s   LBZBoss2S3_ExternalAnimUpdateReturn
                 bset    #0,render_flags(a2)
 
-locret_51F10:
+LBZBoss2S3_ExternalAnimUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51F12:
+LBZBoss2S3_ExternalAnimRunEndCallback:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function Animate_ExternalPlayerSprite

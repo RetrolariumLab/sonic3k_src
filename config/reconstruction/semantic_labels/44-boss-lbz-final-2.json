@@ -1,0 +1,4271 @@
+{
+  "schema_version": 1,
+  "packet": "44-boss-lbz-final-2",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 6,
+      "old": "loc_511CE",
+      "new": "LBZBoss2S3_InitBodyPartAndFollow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize frame0 full boss-map attachment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 11,
+      "old": "loc_511DC",
+      "new": "LBZBoss2S3_BodyPartSyncPriorityAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow frame0 body attachment with one-time parent tile-priority latch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 17,
+      "old": "loc_511E8",
+      "new": "LBZBoss2S3_ArmDispatchAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Dispatch primary arm before parent-status breakaway policy."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 25,
+      "old": "off_511FC",
+      "new": "LBZBoss2S3_ArmStateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Three relative WORD primary-arm states."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 31,
+      "old": "loc_51202",
+      "new": "LBZBoss2S3_InitArmAndSpawnChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize arm and publish its handle to root."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 42,
+      "old": "loc_51226",
+      "new": "LBZBoss2S3_ArmWaitForContactPriority",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait for root tilepriority before active tracking."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 50,
+      "old": "loc_51244",
+      "new": "LBZBoss2S3_ArmPlaceFromCircle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Position primary arm from phase and stored offsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 55,
+      "old": "loc_5124E",
+      "new": "LBZBoss2S3_ArmTrackPlayerY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Track P1 height unless root freeze flags block it."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 75,
+      "old": "loc_5128C",
+      "new": "LBZBoss2S3_ArmIncreaseTrackingPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance upward tracking phase one BYTE step."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 80,
+      "old": "loc_51294",
+      "new": "LBZBoss2S3_ArmStoreTrackingPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit accepted arm phase candidate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 83,
+      "old": "loc_51298",
+      "new": "LBZBoss2S3_ArmCopyFacingAndPlace",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Refresh arm flip and position after tracking gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 89,
+      "old": "loc_512A6",
+      "new": "LBZBoss2S3_InitFollowerAndReparent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize secondary arm and reparent it to root."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 101,
+      "old": "loc_512D4",
+      "new": "LBZBoss2S3_FollowerSyncPhaseAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow root using primary phase plus14hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 114,
+      "old": "loc_512FC",
+      "new": "LBZBoss2S3_InitSegmentAndCacheBoss",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one of two animated primary-arm segments."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 127,
+      "old": "loc_51336",
+      "new": "LBZBoss2S3_SegmentLatchPriority",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply one-time tilepriority latch before segment update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 130,
+      "old": "loc_5133A",
+      "new": "LBZBoss2S3_SegmentFollowAndCheckHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate segment and enter frozen held presentation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 143,
+      "old": "loc_51368",
+      "new": "LBZBoss2S3_SegmentActiveTouchDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply segment status7 breakaway with indexedbase0C."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 148,
+      "old": "loc_5136E",
+      "new": "LBZBoss2S3_SegmentWaitFrozenForRelease",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow held segment without raw advancement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 158,
+      "old": "loc_5138C",
+      "new": "LBZBoss2S3_SegmentFrozenTouchDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared held-state indexed breakaway touch/draw tail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 163,
+      "old": "loc_51392",
+      "new": "LBZBoss2S3_InitCoverAndFollow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize frame1 full boss-map attachment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 168,
+      "old": "loc_513A0",
+      "new": "LBZBoss2S3_CoverSyncPriorityAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow frame1 body attachment with one-time priority latch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 174,
+      "old": "loc_513AC",
+      "new": "LBZBoss2S3_InitCollisionFlashVisual",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize tilepriority-dependent rendered part."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 179,
+      "old": "loc_513BA",
+      "new": "LBZBoss2S3_FlashVisualFollowAndFlicker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Latch parentpriority/collision then render on even VInts."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 191,
+      "old": "loc_513E2",
+      "new": "LBZBoss2S3_DeleteDefeatedChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Direct-delete shared attachment tail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 195,
+      "old": "loc_513E8",
+      "new": "LBZBoss2S3_InitInvisibleTouchProxy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize invisible root collision proxy."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 199,
+      "old": "loc_513F4",
+      "new": "LBZBoss2S3_TouchProxyFollowAndSubmit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow invisible proxy and queue collision only."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 207,
+      "old": "loc_5140A",
+      "new": "LBZBoss2S3_CaptureProbeCacheBoss",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize capture sensor with root handle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 212,
+      "old": "loc_5141A",
+      "new": "LBZBoss2S3_CaptureProbeCheckPlayer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Poll root flags and packed player rectangle result."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 231,
+      "old": "locret_5145C",
+      "new": "LBZBoss2S3_CaptureProbeReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return when P1 not eligible for capture."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 235,
+      "old": "loc_5145E",
+      "new": "LBZBoss2S3_CaptureProbeReleaseAndDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retire capture sensor on polled root death."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 239,
+      "old": "word_51468",
+      "new": "LBZBoss2S3_CaptureProbeBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four WORD offsets/spans for packed-player rectangle test."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 243,
+      "old": "loc_51470",
+      "new": "LBZBoss2S3_CapturePlayerAndSignalBoss",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit capture and force root held ascent sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 258,
+      "old": "loc_514B0",
+      "new": "LBZBoss2S3_FollowWhilePlayerHeld",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attach P1 to sensor while root latch remains set."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 271,
+      "old": "loc_514DA",
+      "new": "LBZBoss2S3_BeginCaptureCooldown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Begin sensor rearm delay when held latch clears."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 275,
+      "old": "loc_514E6",
+      "new": "LBZBoss2S3_TickCaptureCooldown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count signed WORD cooldown before rearming."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 281,
+      "old": "loc_514EE",
+      "new": "LBZBoss2S3_RearmCaptureProbe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return sensor to root/player eligibility poll."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 286,
+      "old": "loc_514F6",
+      "new": "LBZBoss2S3_InitBodyFragment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one of five full boss-map debris pieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 301,
+      "old": "loc_51524",
+      "new": "LBZBoss2S3_InitExplosionTravel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start one of two invisible explosion travel controllers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 311,
+      "old": "loc_51548",
+      "new": "LBZBoss2S3_ExplosionTravelBeginXLeg",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Arm initial explosion travel leg."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 316,
+      "old": "loc_5155A",
+      "new": "LBZBoss2S3_ExplosionTravelTryPeriodic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Emit masked explosions every four BYTEcount updates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 322,
+      "old": "loc_5156C",
+      "new": "LBZBoss2S3_ExplosionTravelMoveAndWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate invisible controller before signed wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 327,
+      "old": "loc_51576",
+      "new": "LBZBoss2S3_ExplosionTravelBeginYLeg",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch explosion travel controller to vertical ascent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 335,
+      "old": "loc_51590",
+      "new": "LBZBoss2S3_ExplosionTravelTryFixedBurst",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attempt shared explosion and position it on success."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 343,
+      "old": "loc_515AC",
+      "new": "LBZBoss2S3_ExplosionTravelTryCoordinator",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Only subtypezero may request the next coordinator."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 357,
+      "old": "loc_515DE",
+      "new": "LBZBoss2S3_ExplosionTravelQueueDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Schedule controller deletion after fixed effect/helper attempts."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 361,
+      "old": "loc_515E2",
+      "new": "LBZBoss2S3_DebrisCoordinatorTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count variable delay and advance debris sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 369,
+      "old": "loc_515F8",
+      "new": "LBZBoss2S3_DebrisTrySpawnOrFinish",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attempt debris for steps1..23 with increasing delay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 378,
+      "old": "locret_51618",
+      "new": "LBZBoss2S3_DebrisCoordinatorReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after debris coordinator countdown/attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 382,
+      "old": "loc_5161A",
+      "new": "LBZBoss2S3_DebrisBeginFinalWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start final wait after step reaches24."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 386,
+      "old": "loc_51626",
+      "new": "LBZBoss2S3_DebrisTickFinalWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count final ending-event wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 392,
+      "old": "loc_5162E",
+      "new": "LBZBoss2S3_DebrisSignalEndingAndPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Signal external-player animator and request ending fades/pieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 401,
+      "old": "loc_51650",
+      "new": "LBZBoss2S3_SpawnDeathEggPiecesAndDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Create seven ending pieces and retire coordinator."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 407,
+      "old": "loc_5165C",
+      "new": "LBZBoss2S3_InitRandomFallingDebris",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize independently allocated falling debris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "original_line": 425,
+      "old": "RawAni_5169C",
+      "new": "LBZBoss2S3_FallingDebrisFrames",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Eight direct mapping selectors for random debris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 39,
+      "old": "loc_50CEE",
+      "new": "LBZBoss2S3_InitShipAndHealth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize final boss root and normal head attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 54,
+      "old": "loc_50D28",
+      "new": "LBZBoss2S3_RiseAboveCameraForIntro",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Raise entrance root by integer pixel steps."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 63,
+      "old": "loc_50D3C",
+      "new": "LBZBoss2S3_BeginIntroWaitAndMusic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Arm entrance wait and attempt final-boss music transition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 72,
+      "old": "loc_50D64",
+      "new": "LBZBoss2S3_TryIntroPaletteActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attempt initial fade-in script actor independently."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 77,
+      "old": "locret_50D72",
+      "new": "LBZBoss2S3_IntroSpawnReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after initial helper allocations."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 81,
+      "old": "loc_50D74",
+      "new": "LBZBoss2S3_TickIntroOrResetWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run shared ordinary root wait state."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 85,
+      "old": "loc_50D78",
+      "new": "LBZBoss2S3_BeginDropAndSpawnBody",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start body fall and request attachments."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 92,
+      "old": "loc_50D8C",
+      "new": "LBZBoss2S3_FallToCameraBottom",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate light gravity before camera-relative threshold test."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 101,
+      "old": "loc_50DA0",
+      "new": "LBZBoss2S3_EnableContactAndSpawnProxy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Activate root after entrance fall."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 109,
+      "old": "loc_50DBE",
+      "new": "LBZBoss2S3_BeginAttackHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Arm ordinary wait before attack selector."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 114,
+      "old": "locret_50DD2",
+      "new": "LBZBoss2S3_SharedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared literal return across boss/ending gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 118,
+      "old": "loc_50DD4",
+      "new": "LBZBoss2S3_ChooseAttackFamily",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose traversal versus bounce from old counter bit1."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 132,
+      "old": "loc_50E0C",
+      "new": "LBZBoss2S3_BeginInnerPatrol",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Prepare first bounded bounce pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 141,
+      "old": "loc_50E2C",
+      "new": "LBZBoss2S3_ApplyPassVariantAndMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Dispatch vertical pattern before integration and wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 148,
+      "old": "off_50E42",
+      "new": "LBZBoss2S3_PassHeightStateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Five relative WORD vertical-pattern entries."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 156,
+      "old": "loc_50E4C",
+      "new": "LBZBoss2S3_PassDecreaseYSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply upward acceleration to traversal."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 159,
+      "old": "locret_50E50",
+      "new": "LBZBoss2S3_PassVariantReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from no-op or acceleration step."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 163,
+      "old": "loc_50E52",
+      "new": "LBZBoss2S3_PassAddYAcceleration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Update traversal y velocity with exact-zero feedback."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 170,
+      "old": "locret_50E66",
+      "new": "LBZBoss2S3_PassAccelerationReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after traversal velocity update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 174,
+      "old": "loc_50E68",
+      "new": "LBZBoss2S3_PassRaiseYFour",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply hit-selected direct Y displacement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 179,
+      "old": "loc_50E6E",
+      "new": "LBZBoss2S3_MoveBetweenInnerBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run bounded horizontal pass using camera offsets50/F0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 187,
+      "old": "loc_50E82",
+      "new": "LBZBoss2S3_BeginInnerPatrolHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Pause first bounded pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 195,
+      "old": "loc_50E9C",
+      "new": "LBZBoss2S3_TickBeforeCaptureDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail ordinary wait for first bounce pause."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 199,
+      "old": "loc_50EA0",
+      "new": "LBZBoss2S3_BeginCaptureDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start first bounce drop phase."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 205,
+      "old": "loc_50EAE",
+      "new": "LBZBoss2S3_DropToCaptureDepth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Fall until below copied-camera Y+C0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 214,
+      "old": "loc_50EC2",
+      "new": "LBZBoss2S3_ReverseCaptureAcceleration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select next bounce stage and freeze arm tracking flag."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 220,
+      "old": "loc_50ED0",
+      "new": "LBZBoss2S3_AccelerateUpToBounceGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply strong upward acceleration and test new velocity/height."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 230,
+      "old": "locret_50EF0",
+      "new": "LBZBoss2S3_BounceUpGateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return while strong upward phase remains active."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 234,
+      "old": "loc_50EF2",
+      "new": "LBZBoss2S3_BeginDownwardAcceleration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select gentler downward bounce acceleration."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 239,
+      "old": "loc_50EFA",
+      "new": "LBZBoss2S3_AccelerateDownToBounceGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply downward acceleration before integration and landing gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 249,
+      "old": "locret_50F1A",
+      "new": "LBZBoss2S3_BounceDownGateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return before downward landing condition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 253,
+      "old": "loc_50F1C",
+      "new": "LBZBoss2S3_ClampCaptureYAndHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Clamp integer landing Y and pause before second pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 262,
+      "old": "loc_50F3A",
+      "new": "LBZBoss2S3_TickClampedHeightHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail ordinary landing wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 266,
+      "old": "loc_50F3E",
+      "new": "LBZBoss2S3_BeginLowerPatrol",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select second horizontal pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 272,
+      "old": "loc_50F50",
+      "new": "LBZBoss2S3_MoveBetweenOuterBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run second pass using camera offsets30/110."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 280,
+      "old": "loc_50F64",
+      "new": "LBZFinalBoss2S3_Root_ArmSecondPassPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Pause after second horizontal pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 287,
+      "old": "loc_50F7A",
+      "new": "LBZBoss2S3_TickCaptureExitHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail wait before high ascent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 291,
+      "old": "loc_50F7E",
+      "new": "LBZBoss2S3_BeginFastCaptureEscape",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start reset ascent after second pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 298,
+      "old": "loc_50F92",
+      "new": "LBZBoss2S3_RiseAboveCameraAndReset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate ascent then test current camera top threshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 307,
+      "old": "loc_50FA8",
+      "new": "LBZBoss2S3_RestartAttackHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Route completed ascent into reset timer."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 311,
+      "old": "loc_50FAC",
+      "new": "LBZBoss2S3_TickPlayerHeldWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail root wait used during player capture lift."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 315,
+      "old": "loc_50FB0",
+      "new": "LBZBoss2S3_BeginCapturedPlayerAscent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Begin high ascent during capture sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 322,
+      "old": "loc_50FC4",
+      "new": "LBZBoss2S3_MoveHeldAscentAboveCamera",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move captured sequence root to CameraY-60."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 331,
+      "old": "loc_50FDA",
+      "new": "LBZBoss2S3_BeginThrowSetupHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Pause captured attack before side placement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 338,
+      "old": "loc_50FF0",
+      "new": "LBZBoss2S3_TickThrowSetupHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail sixty-four-call top wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 342,
+      "old": "loc_50FF4",
+      "new": "LBZBoss2S3_ResetArmAndChooseThrowSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reset stored arm and choose opposite side of camera center."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 356,
+      "old": "loc_51026",
+      "new": "LBZFinalBoss2S3_Root_StoreSelectedSideX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Write selected camera-relative integer X."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 362,
+      "old": "loc_5102E",
+      "new": "LBZBoss2S3_StepDownToThrowHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Drop held root with direct integer steps."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 371,
+      "old": "loc_51042",
+      "new": "LBZBoss2S3_SignalImpactAndBeginSteps",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Signal held-player impact stage."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 381,
+      "old": "loc_51064",
+      "new": "LBZBoss2S3_TickImpactSteps",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Perform bounded direct impact descent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 388,
+      "old": "loc_51070",
+      "new": "LBZBoss2S3_BeginPostImpactHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Prepare post-impact delay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 395,
+      "old": "loc_51086",
+      "new": "LBZFinalBoss2S3_Root_CountImpactPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail eight-call impact wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 399,
+      "old": "loc_5108A",
+      "new": "LBZBoss2S3_ReleasePlayerAndAimRecoil",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start recoil and release held-state latch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 409,
+      "old": "loc_510AE",
+      "new": "LBZBoss2S3_RecoilAndHurtPlayer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Assign recoil and invoke direct P1 hurt routine."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 420,
+      "old": "loc_510CE",
+      "new": "LBZBoss2S3_MoveRecoilAndTickReset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate ordinary gravity and count recoil updates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 427,
+      "old": "loc_510DE",
+      "new": "LBZBoss2S3_BeginDefeatSinkAndBreakup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Replace scored-defeat wait by sinking ending root."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 435,
+      "old": "loc_510F8",
+      "new": "LBZBoss2S3_SinkThenLockPlayerForEnding",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Sink until camera bottom and commit ending control."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 454,
+      "old": "loc_51142",
+      "new": "LBZBoss2S3_DrawSinkingShip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw current sinking-root update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 458,
+      "old": "loc_51148",
+      "new": "LBZBoss2S3_EndingWaitGroundedAndCenter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Steer grounded player toward CameraX+A0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 469,
+      "old": "loc_51166",
+      "new": "LBZBoss2S3_EndingChooseCenterDirection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Test unsigned magnitude and choose controller bit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 477,
+      "old": "loc_51174",
+      "new": "LBZBoss2S3_EndingApplyHeldDirection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Inject one held-input direction bit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 480,
+      "old": "locret_51178",
+      "new": "LBZBoss2S3_EndingCenteringReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from P1 ground/centering logic."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 484,
+      "old": "loc_5117A",
+      "new": "LBZBoss2S3_EndingStopAndTryPoseActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Stop centered player and create independent ending helpers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 501,
+      "old": "loc_511C4",
+      "new": "LBZBoss2S3_EndingSpawnBurstControllers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Create two repeated ending travel controllers independently."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "original_line": 506,
+      "old": "locret_511CC",
+      "new": "LBZFinalBoss2S3_Ending_RootInertReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Keep completed root inert while ending helpers advance."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 6,
+      "old": "loc_516A4",
+      "new": "LBZBoss2S3_InitDeathEggPiece",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one of seven ending Death Egg pieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 15,
+      "old": "loc_516C0",
+      "new": "LBZBoss2S3_DeathEggLoadPieceVariant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Load individual piece motion and direct presentation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 24,
+      "old": "byte_516DC",
+      "new": "LBZBoss2S3_DeathEggPieceFrameFlips",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Seven direct frame/flip pairs for even subtypes."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 33,
+      "old": "word_516EA",
+      "new": "LBZBoss2S3_DeathEggPieceYSpeeds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Eight stored WORD velocities with seventh-child scope."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 44,
+      "old": "loc_516FA",
+      "new": "LBZBoss2S3_DeathEggFadeAndEmitSparkles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance primary piece and begin palette handoff at lower threshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 60,
+      "old": "loc_51730",
+      "new": "LBZBoss2S3_DeathEggCheckFallThreshold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Check primary Y before movement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 66,
+      "old": "loc_5173E",
+      "new": "LBZBoss2S3_DeathEggPieceMoveAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move passive pieces and primary before palette handoff."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 81,
+      "old": "locret_51762",
+      "new": "LBZBoss2S3_DeathEggMusicFadeReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from camera-height music fade helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 87,
+      "old": "loc_51764",
+      "new": "LBZBoss2S3_TryEndingWhiteFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Create white-fade actor before committing ending music/art handoff."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 96,
+      "old": "loc_5177E",
+      "new": "LBZBoss2S3_SavePaletteAndQueuePoseArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy saved palette and select character-specific ending art."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 110,
+      "old": "off_517AE",
+      "new": "LBZBoss2S3_EndingPoseArtPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Three LONG ending-pose art pointers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 116,
+      "old": "loc_517BA",
+      "new": "LBZBoss2S3_WaitWhiteThenFadeToTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait white-fade child status7 before second fade attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 127,
+      "old": "loc_517DE",
+      "new": "LBZBoss2S3_DrawDuringPaletteFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw primary piece during palette handoff polling."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 131,
+      "old": "loc_517E4",
+      "new": "LBZBoss2S3_WaitTargetThenSignalEnding",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finish palette handoff after second fade child marksstatus7."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 139,
+      "old": "loc_517FE",
+      "new": "LBZBoss2S3_InitEndingPaletteActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one palette script by subtype BYTE offset."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 151,
+      "old": "off_51822",
+      "new": "LBZBoss2S3_EndingPaletteScriptPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two LONG palette-rotation setup pointers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 156,
+      "old": "loc_5182A",
+      "new": "LBZBoss2S3_RunEndingPaletteScript",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail palette script reader for current actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 160,
+      "old": "loc_5182E",
+      "new": "LBZBoss2S3_WaitAndTakeExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start first external player-sprite animation afterFA88bit0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 170,
+      "old": "loc_5185A",
+      "new": "LBZBoss2S3_AnimateFirstExternalPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate P1 mapping/flip through controller actor cursor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 176,
+      "old": "loc_51868",
+      "new": "LBZBoss2S3_InstallSecondEventWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install second-event wait callback then fall through its gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 179,
+      "old": "loc_5186E",
+      "new": "LBZBoss2S3_WaitSecondEventAndResetAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "WaitFA88bit1thenstartsecondexternalstream."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 187,
+      "old": "loc_5188E",
+      "new": "LBZBoss2S3_AnimateSecondExternalPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate P1 second external sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 193,
+      "old": "loc_5189C",
+      "new": "LBZBoss2S3_BeginCharacterTimedAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start per-character P1 external stream for256waitcalls."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 206,
+      "old": "loc_518CE",
+      "new": "LBZBoss2S3_TickTimedExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run selected external animation and ordinary signed wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 213,
+      "old": "loc_518E2",
+      "new": "LBZBoss2S3_InstallEndingPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select full ending-pose setup then execute immediately."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 216,
+      "old": "loc_518E8",
+      "new": "LBZBoss2S3_InitEndingPoseByVariant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Replace player animator with separate ending-pose actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 233,
+      "old": "loc_5191E",
+      "new": "LBZBoss2S3_AddMiddlePoseVariant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance ending pose selector into Super variants."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 236,
+      "old": "loc_51920",
+      "new": "LBZBoss2S3_AddFinalPoseVariant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance selector one LONG slot."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 239,
+      "old": "loc_51922",
+      "new": "LBZBoss2S3_BindPoseHandlerAndPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install chosen pose handler and its palette pointer offset."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 244,
+      "old": "off_5192C",
+      "new": "LBZBoss2S3_EndingPoseHandlerPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four LONG ending-pose presentation entrypoints."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 251,
+      "old": "loc_5193C",
+      "new": "LBZBoss2S3_BeginSonicEndingPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize normal Sonic ending pose."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 259,
+      "old": "loc_5195E",
+      "new": "LBZBoss2S3_TickPoseAndArmCredits",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count initial pose transition and select next frame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 268,
+      "old": "loc_51982",
+      "new": "LBZBoss2S3_DrawEndingPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw pose after optional first-frame transition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 272,
+      "old": "loc_51988",
+      "new": "LBZBoss2S3_StartCreditsAndDeletePose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch game mode to S3 credits."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 277,
+      "old": "loc_51994",
+      "new": "LBZBoss2S3_BeginTailsEndingPose",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize normal Tails ending pose."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 287,
+      "old": "loc_519B8",
+      "new": "LBZBoss2S3_BeginSuperJump",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize jumping Super ending actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 296,
+      "old": "loc_519E0",
+      "new": "LBZBoss2S3_MoveSuperJumpAndSyncPlayer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attach P1 to previous actor position before gravity update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 308,
+      "old": "loc_51A06",
+      "new": "LBZBoss2S3_RepositionForReturnFlight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start visible return flight after Super trajectory."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 321,
+      "old": "loc_51A34",
+      "new": "LBZBoss2S3_FlyToCameraCenterForCredits",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move return pose left/up until center threshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 331,
+      "old": "loc_51A5C",
+      "new": "LBZBoss2S3_DrawReturnFlight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared direct draw after return-flight threshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 335,
+      "old": "loc_51A62",
+      "new": "LBZBoss2S3_BeginSuperRun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize running Super ending path."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 345,
+      "old": "loc_51A90",
+      "new": "LBZBoss2S3_MoveSuperRunAndCheckGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run Super pose with preserved mixed-axis test."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 357,
+      "old": "loc_51AB8",
+      "new": "LBZBoss2S3_InitSparkleAndTryTrail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize primary small Death Egg sparkle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 367,
+      "old": "loc_51AE2",
+      "new": "LBZBoss2S3_SparkleTickFlips",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Cycle small sparkle flip bits from incremented counter."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 380,
+      "old": "loc_51B08",
+      "new": "LBZFinalBoss2S3_Sparkle_MoveWaitThenDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate sparkle and countdown deletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 386,
+      "old": "loc_51B18",
+      "new": "LBZBoss2S3_InitFallingSparkleTrail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize separate small Death Egg trail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "original_line": 394,
+      "old": "loc_51B3C",
+      "new": "LBZBoss2S3_SparkleTrailAnimateAndMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run trail animation and current-update continuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 11,
+      "old": "ObjDat3_51F24",
+      "new": "LBZBoss2S3_BodyPartAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full frame0 body resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 16,
+      "old": "ObjDat3_51F30",
+      "new": "LBZBoss2S3_PrimaryArmAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full primary-arm resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 21,
+      "old": "word_51F3C",
+      "new": "LBZBoss2S3_ArmSegmentAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Priority-first inherited arm-segment descriptor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 24,
+      "old": "word_51F42",
+      "new": "LBZBoss2S3_SecondaryArmAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Priority-first inherited secondary arm descriptor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 27,
+      "old": "ObjDat3_51F48",
+      "new": "LBZBoss2S3_CoverAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full frame1 body resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 32,
+      "old": "ObjDat3_51F54",
+      "new": "LBZBoss2S3_TilePartAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full tilepriority-rendered part resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 37,
+      "old": "ObjDat3_51F60",
+      "new": "LBZBoss2S3_BodyFragmentAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full detached boss-fragment resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 42,
+      "old": "ObjDat3_51F6C",
+      "new": "LBZBoss2S3_FallingDebrisAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full randomly selected small Death Egg debris resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 47,
+      "old": "ObjDat3_51F78",
+      "new": "LBZBoss2S3_DeathEggPieceAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full seven-piece ending Death Egg resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 52,
+      "old": "ObjDat3_51F84",
+      "new": "LBZBoss2S3_SparkleAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full small floating sparkle resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 57,
+      "old": "ObjDat3_51F90",
+      "new": "LBZBoss2S3_SparkleTrailAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full small trail resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 67,
+      "old": "ObjDat3_51FA8",
+      "new": "LBZBoss2S3_EndingPoseAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Separate full ending-pose mapping/art resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 72,
+      "old": "ChildObjDat_51FB4",
+      "new": "LBZBoss2S3_BodyPartChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four normal full-resource root attachments."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 82,
+      "old": "ChildObjDat_51FCE",
+      "new": "LBZBoss2S3_TouchProxyChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One normal invisible collision proxy."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 86,
+      "old": "ChildObjDat_51FD6",
+      "new": "LBZBoss2S3_PrimaryArmChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four normal children beneath primary arm."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 96,
+      "old": "ChildObjDat_51FF0",
+      "new": "LBZBoss2S3_DefeatFragmentChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Five normal fragments from defeated root."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 108,
+      "old": "ChildObjDat_52010",
+      "new": "LBZBoss2S3_EndingBurstChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two repeated simple invisible travel controllers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 111,
+      "old": "ChildObjDat_52016",
+      "new": "LBZBoss2S3_DeathEggPieceChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Seven normal ending Death Egg pieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 127,
+      "old": "ChildObjDat_52042",
+      "new": "LBZBoss2S3_DeathEggSparkleChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One simple floating sparkle attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 130,
+      "old": "ChildObjDat_52048",
+      "new": "LBZBoss2S3_SparkleTrailChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One simple trail actor at sparkle position."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 133,
+      "old": "ChildObjDat_5204E",
+      "new": "LBZBoss2S3_EndingWhiteFadeChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One simple shared white-fade callback actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 136,
+      "old": "ChildObjDat_52054",
+      "new": "LBZBoss2S3_EndingTargetFadeChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "One simple shared target-palette fade actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 139,
+      "old": "byte_5205A",
+      "new": "LBZBoss2S3_ArmSegmentDefaultAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniform first-segment mapping loop."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 141,
+      "old": "byte_52062",
+      "new": "LBZBoss2S3_ArmSegmentAlternateAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniform second-segment mapping loop."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 143,
+      "old": "byte_5206A",
+      "new": "LBZBoss2S3_SparkleTrailDeleteAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniform trail frame sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 145,
+      "old": "byte_52070",
+      "new": "LBZBoss2S3_EndingFirstExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "First custom external-player frame/flip stream."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 151,
+      "old": "byte_5207A",
+      "new": "LBZBoss2S3_EndingSecondExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Second custom external-player frame/flip stream."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 163,
+      "old": "off_52090",
+      "new": "LBZBoss2S3_EndingAnimByCharacter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two LONG external-player animation pointers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 166,
+      "old": "byte_52098",
+      "new": "LBZBoss2S3_EndingSonicExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Sonic custom external frame/flip stream."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "original_line": 196,
+      "old": "byte_520D2",
+      "new": "LBZBoss2S3_EndingTailsExternalAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tails custom external frame/flip stream."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 15,
+      "old": "locret_51BE0",
+      "new": "LBZBoss2S3_PriorityLatchReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from one-time collision/priority latch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 29,
+      "old": "loc_51BFA",
+      "new": "LBZBoss2S3_UnusedMidpointFirstOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Continue preserved unused midpoint-position code."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 37,
+      "old": "loc_51C0C",
+      "new": "LBZBoss2S3_UnusedStoreActorMidpoint",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finish preserved unused midpoint coordinates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 54,
+      "old": "loc_51C30",
+      "new": "LBZBoss2S3_ChoosePassHeightAndSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Randomize one of four traversal patterns."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 66,
+      "old": "loc_51C58",
+      "new": "LBZBoss2S3_ApplyPassStartMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Store chosen side and vertical pattern values."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 78,
+      "old": "word_51C7E",
+      "new": "LBZBoss2S3_PassCameraYOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four traversal starting heights."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 80,
+      "old": "word_51C86",
+      "new": "LBZBoss2S3_PassInitialYSpeeds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four signed traversal y velocities."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 84,
+      "old": "loc_51C8E",
+      "new": "LBZBoss2S3_ChoosePatrolFacingSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select +/-300 horizontal speed before random duration."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 90,
+      "old": "loc_51C9C",
+      "new": "LBZBoss2S3_StorePatrolSpeedAndWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Store horizontal speed and bounded random wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 110,
+      "old": "loc_51CCA",
+      "new": "LBZBoss2S3_CheckLeftPatrolBound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Test moving-left side of horizontal reversal helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 115,
+      "old": "loc_51CD2",
+      "new": "LBZBoss2S3_ReversePatrolFacingAndSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reverse bounded horizontal pass in place."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 119,
+      "old": "locret_51CDC",
+      "new": "LBZBoss2S3_PatrolBoundsReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from horizontal bounds helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 138,
+      "old": "loc_51D06",
+      "new": "LBZBoss2S3_BeginHitFlashDisableArm",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start root hit interval and clear remembered arm collision."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 145,
+      "old": "loc_51D1C",
+      "new": "LBZBoss2S3_HitChooseFlashRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Mark root hit status and select six-color palette."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 152,
+      "old": "loc_51D30",
+      "new": "LBZBoss2S3_HitCopyColorsAndTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply flash and restore both hitboxes at timerzero."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 161,
+      "old": "locret_51D50",
+      "new": "LBZBoss2S3_HitUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from final-boss hit processing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 165,
+      "old": "loc_51D52",
+      "new": "LBZBoss2S3_BeginScoredDefeatWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start final defeat wait and independent explosion attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 174,
+      "old": "loc_51D78",
+      "new": "LBZBoss2S3_DefeatCheckPlayerRelease",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply original inverted P1 control restoration gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 180,
+      "old": "loc_51D82",
+      "new": "LBZBoss2S3_DefeatSaveGame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail save after defeat setup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 193,
+      "old": "word_51D94",
+      "new": "LBZBoss2S3_HitPaletteDestinations",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Six sparse RAM WORD palette handles."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 196,
+      "old": "word_51DA0",
+      "new": "LBZFinalBoss2S3_Hit_TwoSixColorBanks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two ordered six-WORD flash banks."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 227,
+      "old": "loc_51DFC",
+      "new": "LBZBoss2S3_UnusedScalerUpdateYSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finish unused scaled Robotnik bounded velocity adjustment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 234,
+      "old": "locret_51E0E",
+      "new": "LBZBoss2S3_UnusedScalerYSpeedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after signed candidate guard checks."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 272,
+      "old": "loc_51E62",
+      "new": "LBZBoss2S3_UnusedScalerTickArt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Update preserved unused actor scale on BYTEdelay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 282,
+      "old": "locret_51E7E",
+      "new": "LBZBoss2S3_UnusedScalerArtReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after scale-step gate/build."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 286,
+      "old": "loc_51E80",
+      "new": "LBZBoss2S3_UnusedScalerQueueDeletion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retire unused scaled actor after frame advancespast6."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 291,
+      "old": "word_51E86",
+      "new": "LBZBoss2S3_UnusedScalerFrameDelays",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Seven delays for unused scaled actor frame progression."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 299,
+      "old": "off_51E94",
+      "new": "LBZBoss2S3_UnusedScalerArtPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Seven LONG source-art pointers for unused actor progression."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 316,
+      "old": "loc_51EBE",
+      "new": "LBZBoss2S3_EndingCopyPosePalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy one selected ending-pose palette line."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 323,
+      "old": "off_51EC6",
+      "new": "LBZBoss2S3_EndingPosePalettes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four LONG presentation palette pointers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 349,
+      "old": "locret_51F10",
+      "new": "LBZBoss2S3_ExternalAnimUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after controller timer/decode update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "original_line": 353,
+      "old": "loc_51F12",
+      "new": "LBZBoss2S3_ExternalAnimRunEndCallback",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Tail external animation custom callback."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 6,
+      "old": "loc_749AE",
+      "new": "LBZBoss2SK_InitBodyPartAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Initialize frame0 boss attachment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 11,
+      "old": "loc_749BE",
+      "new": "LBZBoss2SK_BodyPartSyncPriorityAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow root attachment until parentflag4 deletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 17,
+      "old": "loc_749D0",
+      "new": "LBZBoss2SK_ArmDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch orbit arm before parentstatus7 policy."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 25,
+      "old": "off_749E6",
+      "new": "LBZBoss2SK_ArmStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Define orbit arm setup,reveal wait and player-height phase states."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 31,
+      "old": "loc_749EC",
+      "new": "LBZBoss2SK_InitArmAndSpawnChildren",
+      "profiles": ["sk"],
+      "meaning": "Initialize main arm and register unchecked handle on root."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 42,
+      "old": "loc_74A14",
+      "new": "LBZBoss2SK_ArmWaitForContactPriority",
+      "profiles": ["sk"],
+      "meaning": "Latch reveal before active arm phase control."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 50,
+      "old": "loc_74A32",
+      "new": "LBZBoss2SK_ArmPlaceFromCircle",
+      "profiles": ["sk"],
+      "meaning": "Place arm around root from stored phase."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 55,
+      "old": "loc_74A3E",
+      "new": "LBZBoss2SK_ArmTrackPlayerY",
+      "profiles": ["sk"],
+      "meaning": "Control main arm phase from player-one height."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 75,
+      "old": "loc_74A7C",
+      "new": "LBZBoss2SK_ArmIncreaseTrackingPhase",
+      "profiles": ["sk"],
+      "meaning": "Move arm phase towardzero within signed limit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 80,
+      "old": "loc_74A84",
+      "new": "LBZBoss2SK_ArmStoreTrackingPhase",
+      "profiles": ["sk"],
+      "meaning": "Store selected arm phaseBYTE."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 83,
+      "old": "loc_74A88",
+      "new": "LBZBoss2SK_ArmCopyFacingAndPlace",
+      "profiles": ["sk"],
+      "meaning": "Place active arm with rootfacing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 89,
+      "old": "loc_74A9A",
+      "new": "LBZBoss2SK_InitFollowerAndReparent",
+      "profiles": ["sk"],
+      "meaning": "Create small armfollower rooted at grandparent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 101,
+      "old": "loc_74ACA",
+      "new": "LBZBoss2SK_FollowerSyncPhaseAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow main arm phase using smaller quartercurve."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 114,
+      "old": "loc_74AFA",
+      "new": "LBZBoss2SK_InitSegmentAndCacheBoss",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two animated arm sections."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 127,
+      "old": "loc_74B36",
+      "new": "LBZBoss2SK_SegmentLatchPriority",
+      "profiles": ["sk"],
+      "meaning": "Latch arm artpriority then enter rawsection behavior."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 130,
+      "old": "loc_74B3C",
+      "new": "LBZBoss2SK_SegmentFollowAndCheckHeld",
+      "profiles": ["sk"],
+      "meaning": "Animate section until root heldflag becomes nonzero."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 143,
+      "old": "loc_74B6E",
+      "new": "LBZBoss2SK_SegmentActiveTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Finish rawsection current update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 148,
+      "old": "loc_74B76",
+      "new": "LBZBoss2SK_SegmentWaitFrozenForRelease",
+      "profiles": ["sk"],
+      "meaning": "Keep held-pose section and later restore rawhandler."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 158,
+      "old": "loc_74B96",
+      "new": "LBZBoss2SK_SegmentFrozenTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Finish heldsection update."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 163,
+      "old": "loc_74B9E",
+      "new": "LBZBoss2SK_InitCoverAndFollow",
+      "profiles": ["sk"],
+      "meaning": "Initialize independent full-resource cover."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 168,
+      "old": "loc_74BAE",
+      "new": "LBZBoss2SK_CoverSyncPriorityAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow cover until rootflag4 deletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 174,
+      "old": "loc_74BC0",
+      "new": "LBZBoss2SK_InitCollisionFlashVisual",
+      "profiles": ["sk"],
+      "meaning": "Initialize flashing palette0 bossvisual."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 179,
+      "old": "loc_74BD0",
+      "new": "LBZBoss2SK_FlashVisualFollowAndFlicker",
+      "profiles": ["sk"],
+      "meaning": "Follow flashing visual and draw on even lowVInts."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 191,
+      "old": "loc_74BFA",
+      "new": "LBZBoss2SK_DeleteDefeatedChild",
+      "profiles": ["sk"],
+      "meaning": "Erase child on parent-death paths."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 195,
+      "old": "loc_74C00",
+      "new": "LBZBoss2SK_InitInvisibleTouchProxy",
+      "profiles": ["sk"],
+      "meaning": "Initialize invisible contact actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 199,
+      "old": "loc_74C0C",
+      "new": "LBZBoss2SK_TouchProxyFollowAndSubmit",
+      "profiles": ["sk"],
+      "meaning": "Follow invisible collider and appendcollision."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 207,
+      "old": "loc_74C24",
+      "new": "LBZBoss2SK_CaptureProbeCacheBoss",
+      "profiles": ["sk"],
+      "meaning": "Initialize invisible arm captureprobe."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 212,
+      "old": "loc_74C34",
+      "new": "LBZBoss2SK_CaptureProbeCheckPlayer",
+      "profiles": ["sk"],
+      "meaning": "Poll player-one eligibility for capture."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 231,
+      "old": "locret_74C78",
+      "new": "LBZBoss2SK_CaptureProbeReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without capture after range/invulnerability gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 235,
+      "old": "loc_74C7A",
+      "new": "LBZBoss2SK_CaptureProbeReleaseAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Release playercontrol only on idle rootdeathpath."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 239,
+      "old": "word_74C84",
+      "new": "LBZBoss2SK_CaptureProbeBounds",
+      "profiles": ["sk"],
+      "meaning": "Define capture probe's player rectangle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 243,
+      "old": "loc_74C8C",
+      "new": "LBZBoss2SK_CapturePlayerAndSignalBoss",
+      "profiles": ["sk"],
+      "meaning": "Capture playerone and stop its velocity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 258,
+      "old": "loc_74CCC",
+      "new": "LBZBoss2SK_FollowWhilePlayerHeld",
+      "profiles": ["sk"],
+      "meaning": "Keep captured player at arm-relative probeposition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 271,
+      "old": "loc_74CF8",
+      "new": "LBZBoss2SK_BeginCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Begin capture cooldown after rootheldflagclears."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 275,
+      "old": "loc_74D04",
+      "new": "LBZBoss2SK_TickCaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Wait before enabling another captureprobe attempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 281,
+      "old": "loc_74D0C",
+      "new": "LBZBoss2SK_RearmCaptureProbe",
+      "profiles": ["sk"],
+      "meaning": "Return captureprobe to idle proximitypoll."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 286,
+      "old": "loc_74D14",
+      "new": "LBZBoss2SK_InitBodyFragment",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of five defeatbreakup pieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 301,
+      "old": "loc_74D48",
+      "new": "LBZBoss2SK_RelayDispatchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Dispatch dropped relay actor before touch/draw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 308,
+      "old": "off_74D5C",
+      "new": "LBZBoss2SK_RelayStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Define dropped relay setup,bounce and emitter slots."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 314,
+      "old": "loc_74D62",
+      "new": "LBZBoss2SK_InitDroppedRelay",
+      "profiles": ["sk"],
+      "meaning": "Initialize relay with borrowed firstbossresources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 322,
+      "old": "loc_74D7C",
+      "new": "LBZBoss2SK_RelayFallAndProbeFloor",
+      "profiles": ["sk"],
+      "meaning": "Move relay before downwardfloorprobe."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 329,
+      "old": "loc_74D90",
+      "new": "LBZBoss2SK_RelayBounceOrSettle",
+      "profiles": ["sk"],
+      "meaning": "Damp relay floorimpact velocity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 339,
+      "old": "loc_74DA4",
+      "new": "LBZBoss2SK_RelaySettleAndOpenArena",
+      "profiles": ["sk"],
+      "meaning": "Settle relay and signal cutscenecontinuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 355,
+      "old": "loc_74DEA",
+      "new": "LBZBoss2SK_RelayTryPeriodicExplosion",
+      "profiles": ["sk"],
+      "meaning": "Emit127 random explosioncontroller requests then stop."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 366,
+      "old": "loc_74E0C",
+      "new": "LBZBoss2SK_RelayDeleteOnBudgetExpiry",
+      "profiles": ["sk"],
+      "meaning": "Erase exhausted relay emitter."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 370,
+      "old": "loc_74E12",
+      "new": "LBZBoss2SK_InitDefeatUnderlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize firstboss frame15hex under defeatedship."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 377,
+      "old": "loc_74E24",
+      "new": "LBZBoss2SK_DefeatUnderlayFollowDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow defeatunderlay withoutflipreflection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 382,
+      "old": "loc_74E30",
+      "new": "LBZBoss2SK_InitRandomExplosionTimer",
+      "profiles": ["sk"],
+      "meaning": "Choose one of16 absolute explosionpositions."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 396,
+      "old": "locret_74E6E",
+      "new": "LBZBoss2SK_RandomExplosionSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from guarded explosioncontrollerrequest."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 400,
+      "old": "loc_74E70",
+      "new": "LBZBoss2SK_StopExplosionController",
+      "profiles": ["sk"],
+      "meaning": "Finish timed random explosioncontroller."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "original_line": 404,
+      "old": "word_74E7C",
+      "new": "LBZBoss2SK_RandomExplosionSites",
+      "profiles": ["sk"],
+      "meaning": "Define16 random explosionlocationsacrossarena."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 39,
+      "old": "loc_742A8",
+      "new": "LBZBoss2SK_InitShipAndHealth",
+      "profiles": ["sk"],
+      "meaning": "Initialize root ship before boss-body construction."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 62,
+      "old": "loc_7430E",
+      "new": "LBZBoss2SK_TickIntroOrResetWait",
+      "profiles": ["sk"],
+      "meaning": "Run root plain wait in three initial state slots."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 66,
+      "old": "loc_74314",
+      "new": "LBZBoss2SK_BeginDropAndSpawnBody",
+      "profiles": ["sk"],
+      "meaning": "Begin falling reveal after initial wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 73,
+      "old": "loc_7432A",
+      "new": "LBZBoss2SK_FallToCameraBottom",
+      "profiles": ["sk"],
+      "meaning": "Fall before reveal threshold check."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 82,
+      "old": "loc_74340",
+      "new": "LBZBoss2SK_EnableContactAndSpawnProxy",
+      "profiles": ["sk"],
+      "meaning": "Reveal body and enable initial root contact."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 90,
+      "old": "loc_74360",
+      "new": "LBZBoss2SK_BeginAttackHold",
+      "profiles": ["sk"],
+      "meaning": "Select stationary hold between attack cycles."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 95,
+      "old": "locret_74374",
+      "new": "LBZBoss2SK_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from shared root or child conditional branches."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 99,
+      "old": "loc_74376",
+      "new": "LBZBoss2SK_ChooseAttackFamily",
+      "profiles": ["sk"],
+      "meaning": "Select crossing pass or capture-oriented sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 113,
+      "old": "loc_743AE",
+      "new": "LBZBoss2SK_BeginInnerPatrol",
+      "profiles": ["sk"],
+      "meaning": "Start alternate patrol above camera."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 122,
+      "old": "loc_743CE",
+      "new": "LBZBoss2SK_ApplyPassVariantAndMove",
+      "profiles": ["sk"],
+      "meaning": "Execute selected pass variant before movement/wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 129,
+      "old": "off_743E6",
+      "new": "LBZBoss2SK_PassHeightStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Define four random variants plus hit-response variant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 137,
+      "old": "loc_743F0",
+      "new": "LBZBoss2SK_PassDecreaseYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Accelerate selected crossing pass upward."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 140,
+      "old": "locret_743F4",
+      "new": "LBZBoss2SK_PassVariantReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from pass variant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 144,
+      "old": "loc_743F6",
+      "new": "LBZBoss2SK_PassAddYAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Update pass Y velocity with retained acceleration."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 151,
+      "old": "locret_7440A",
+      "new": "LBZBoss2SK_PassAccelerationReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after pass velocity/acceleration step."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 155,
+      "old": "loc_7440C",
+      "new": "LBZBoss2SK_PassRaiseYFour",
+      "profiles": ["sk"],
+      "meaning": "Apply hit-triggered direct rise during crossing pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 160,
+      "old": "loc_74412",
+      "new": "LBZBoss2SK_MoveBetweenInnerBounds",
+      "profiles": ["sk"],
+      "meaning": "Patrol at first capture-cycle horizontal bounds."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 168,
+      "old": "loc_74428",
+      "new": "LBZBoss2SK_BeginInnerPatrolHold",
+      "profiles": ["sk"],
+      "meaning": "Hold before capture-cycle downward reveal."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 176,
+      "old": "loc_74442",
+      "new": "LBZBoss2SK_TickBeforeCaptureDrop",
+      "profiles": ["sk"],
+      "meaning": "Run stationary capture-cycle preparation wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 180,
+      "old": "loc_74448",
+      "new": "LBZBoss2SK_BeginCaptureDrop",
+      "profiles": ["sk"],
+      "meaning": "Start falling capture-cycle phase."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 186,
+      "old": "loc_74456",
+      "new": "LBZBoss2SK_DropToCaptureDepth",
+      "profiles": ["sk"],
+      "meaning": "Fall until next copied-camera height gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 195,
+      "old": "loc_7446C",
+      "new": "LBZBoss2SK_ReverseCaptureAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Select rising acceleration after lower height gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 201,
+      "old": "loc_7447A",
+      "new": "LBZBoss2SK_AccelerateUpToBounceGate",
+      "profiles": ["sk"],
+      "meaning": "Apply strong upward acceleration before rise gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 211,
+      "old": "locret_7449A",
+      "new": "LBZBoss2SK_BounceUpGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from upward-acceleration state gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 215,
+      "old": "loc_7449C",
+      "new": "LBZBoss2SK_BeginDownwardAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Advance to downward-acceleration segment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 220,
+      "old": "loc_744A4",
+      "new": "LBZBoss2SK_AccelerateDownToBounceGate",
+      "profiles": ["sk"],
+      "meaning": "Reverse upward motion and land at stored capture height."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 230,
+      "old": "locret_744C4",
+      "new": "LBZBoss2SK_BounceDownGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from downward-acceleration gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 234,
+      "old": "loc_744C6",
+      "new": "LBZBoss2SK_ClampCaptureYAndHold",
+      "profiles": ["sk"],
+      "meaning": "Clamp integerY and pause after capture-cycle arc."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 243,
+      "old": "loc_744E4",
+      "new": "LBZBoss2SK_TickClampedHeightHold",
+      "profiles": ["sk"],
+      "meaning": "Wait before lower horizontal patrol."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 247,
+      "old": "loc_744EA",
+      "new": "LBZBoss2SK_BeginLowerPatrol",
+      "profiles": ["sk"],
+      "meaning": "Select lower patrol and its completion callback."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 253,
+      "old": "loc_744FC",
+      "new": "LBZBoss2SK_MoveBetweenOuterBounds",
+      "profiles": ["sk"],
+      "meaning": "Patrol lower phase with wider horizontal span."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 261,
+      "old": "loc_74512",
+      "new": "LBZBoss2SK_BeginCaptureExitHold",
+      "profiles": ["sk"],
+      "meaning": "Pause after lower patrol interval."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 268,
+      "old": "loc_74528",
+      "new": "LBZBoss2SK_TickCaptureExitHold",
+      "profiles": ["sk"],
+      "meaning": "Run capture-cycle escape preparation wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 272,
+      "old": "loc_7452E",
+      "new": "LBZBoss2SK_BeginFastCaptureEscape",
+      "profiles": ["sk"],
+      "meaning": "Leave lower patrol upward."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 279,
+      "old": "loc_74542",
+      "new": "LBZBoss2SK_RiseAboveCameraAndReset",
+      "profiles": ["sk"],
+      "meaning": "Move upward escape before checking live camera threshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 288,
+      "old": "loc_74558",
+      "new": "LBZBoss2SK_RestartAttackHold",
+      "profiles": ["sk"],
+      "meaning": "Complete capture-cycle escape."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 292,
+      "old": "loc_7455C",
+      "new": "LBZBoss2SK_TickPlayerHeldWait",
+      "profiles": ["sk"],
+      "meaning": "Run captured-player root hold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 296,
+      "old": "loc_74562",
+      "new": "LBZBoss2SK_BeginCapturedPlayerAscent",
+      "profiles": ["sk"],
+      "meaning": "Move captured-player attack into upward ascent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 303,
+      "old": "loc_74576",
+      "new": "LBZBoss2SK_MoveHeldAscentAboveCamera",
+      "profiles": ["sk"],
+      "meaning": "Move root during captured ascent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 312,
+      "old": "loc_7458C",
+      "new": "LBZBoss2SK_BeginThrowSetupHold",
+      "profiles": ["sk"],
+      "meaning": "Pause captured ascent before side teleport."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 319,
+      "old": "loc_745A2",
+      "new": "LBZBoss2SK_TickThrowSetupHold",
+      "profiles": ["sk"],
+      "meaning": "Run captured-player side-placement hold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 323,
+      "old": "loc_745A8",
+      "new": "LBZBoss2SK_ResetArmAndChooseThrowSide",
+      "profiles": ["sk"],
+      "meaning": "Prepare captured throw placement relative camera center."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 337,
+      "old": "loc_745DA",
+      "new": "LBZBoss2SK_StoreThrowSideX",
+      "profiles": ["sk"],
+      "meaning": "Commit selected throw side integerX."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 343,
+      "old": "loc_745E2",
+      "new": "LBZBoss2SK_StepDownToThrowHeight",
+      "profiles": ["sk"],
+      "meaning": "Lower captured root toward copied-camera throw gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 352,
+      "old": "loc_745F6",
+      "new": "LBZBoss2SK_SignalImpactAndBeginSteps",
+      "profiles": ["sk"],
+      "meaning": "Signal floor-impact effect before throw launch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 362,
+      "old": "loc_74618",
+      "new": "LBZBoss2SK_TickImpactSteps",
+      "profiles": ["sk"],
+      "meaning": "Apply fixed impact displacement before short hold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 369,
+      "old": "loc_74624",
+      "new": "LBZBoss2SK_BeginPostImpactHold",
+      "profiles": ["sk"],
+      "meaning": "Hold after four throw-impact displacements."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 376,
+      "old": "loc_7463A",
+      "new": "LBZBoss2SK_TickBeforePlayerRelease",
+      "profiles": ["sk"],
+      "meaning": "Run short post-impact wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 380,
+      "old": "loc_74640",
+      "new": "LBZBoss2SK_ReleasePlayerAndAimRecoil",
+      "profiles": ["sk"],
+      "meaning": "Release held flag and prepare root's ballistic jump."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 390,
+      "old": "loc_74664",
+      "new": "LBZBoss2SK_RecoilAndHurtPlayer",
+      "profiles": ["sk"],
+      "meaning": "Launch root and choose player damage versus spring release."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 403,
+      "old": "loc_7468C",
+      "new": "LBZBoss2SK_SpringReleaseInvincibleP1",
+      "profiles": ["sk"],
+      "meaning": "Release invincible player with explicit spring motion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 419,
+      "old": "loc_746C8",
+      "new": "LBZBoss2SK_MoveRecoilAndTickReset",
+      "profiles": ["sk"],
+      "meaning": "Run root ballistic recovery after captured throw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 426,
+      "old": "loc_746D8",
+      "new": "LBZBoss2SK_BeginDefeatRiseAndBreakup",
+      "profiles": ["sk"],
+      "meaning": "Begin defeat breakup after scored fade wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 434,
+      "old": "loc_746F4",
+      "new": "LBZBoss2SK_RiseToDefeatCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Move defeated ship upward using integer position."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 445,
+      "old": "loc_74710",
+      "new": "LBZBoss2SK_SpawnCapsuleAndInstallWait",
+      "profiles": ["sk"],
+      "meaning": "Hide defeated ship and enter capsule progression."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 456,
+      "old": "loc_7473A",
+      "new": "LBZBoss2SK_WaitCapsuleAndFinishEvent",
+      "profiles": ["sk"],
+      "meaning": "Wait until capsule scene permits scripted player movement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 468,
+      "old": "loc_74768",
+      "new": "LBZBoss2SK_ChoosePlayerAlignmentInput",
+      "profiles": ["sk"],
+      "meaning": "Steer player one toward cutscene target."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 478,
+      "old": "loc_74784",
+      "new": "LBZBoss2SK_ApplyInputAndStopAtTarget",
+      "profiles": ["sk"],
+      "meaning": "Finish player alignment when horizontal distance<8."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 497,
+      "old": "loc_747D6",
+      "new": "LBZBoss2SK_DescendShipAndHoldUp",
+      "profiles": ["sk"],
+      "meaning": "Lower ship while scripting player up input."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 509,
+      "old": "loc_747F8",
+      "new": "LBZBoss2SK_BeginBobbingFlightAndFlame",
+      "profiles": ["sk"],
+      "meaning": "Begin ship flight after scripted descent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 518,
+      "old": "loc_7481C",
+      "new": "LBZBoss2SK_BobAndFacePlayerToShip",
+      "profiles": ["sk"],
+      "meaning": "Fly ship while scripting player up input and facing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 531,
+      "old": "loc_74854",
+      "new": "LBZBoss2SK_CheckFlightCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Check current shipX for scene relay drop."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 539,
+      "old": "loc_74866",
+      "new": "LBZBoss2SK_BeginFlightHoldAndDropRelay",
+      "profiles": ["sk"],
+      "meaning": "Pause ship and drop the level-expansion relay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 550,
+      "old": "loc_74894",
+      "new": "LBZBoss2SK_TickFlightHoldAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Run stationary scene hold with current draw continuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 555,
+      "old": "loc_748A0",
+      "new": "LBZBoss2SK_BeginFastHorizontalFlight",
+      "profiles": ["sk"],
+      "meaning": "Resume scripted ship exit at faster horizontal speed."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 561,
+      "old": "loc_748AE",
+      "new": "LBZBoss2SK_BobPastRightCameraGate",
+      "profiles": ["sk"],
+      "meaning": "Fly ship beyond camera before relay-completion wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 572,
+      "old": "loc_748D0",
+      "new": "LBZBoss2SK_HideShipAndClearBossFlag",
+      "profiles": ["sk"],
+      "meaning": "Hide ship and select relay completion gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 582,
+      "old": "loc_748F4",
+      "new": "LBZBoss2SK_WaitForRelayThenMoveRight",
+      "profiles": ["sk"],
+      "meaning": "Wait for dropped relay's signal before player exit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 588,
+      "old": "locret_74908",
+      "new": "LBZBoss2SK_RelayWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from relay poll."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 592,
+      "old": "loc_7490A",
+      "new": "LBZBoss2SK_CapturePlayerAtExitX",
+      "profiles": ["sk"],
+      "meaning": "Start scripted player flight at absolute worldX4510hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 607,
+      "old": "locret_74950",
+      "new": "LBZBoss2SK_ExitCaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from scripted exit position gate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 611,
+      "old": "loc_74952",
+      "new": "LBZBoss2SK_CarryPlayerWithGravity",
+      "profiles": ["sk"],
+      "meaning": "Carry player one through scripted ballistic transition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 625,
+      "old": "loc_74984",
+      "new": "LBZBoss2SK_SetAlternateCarryFrame",
+      "profiles": ["sk"],
+      "meaning": "Load selected scripted player frame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "original_line": 629,
+      "old": "loc_7498E",
+      "new": "LBZBoss2SK_StartZoneAtExitHeight",
+      "profiles": ["sk"],
+      "meaning": "Finish scripted exit when player descends below stored arena bound."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 15,
+      "old": "locret_74ED4",
+      "new": "LBZBoss2SK_PriorityLatchReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from private tilepriority/collision latch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 29,
+      "old": "loc_74EEE",
+      "new": "LBZBoss2SK_UnusedMidpointFirstOffset",
+      "profiles": ["sk"],
+      "meaning": "Describe stored midpoint-placement continuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 37,
+      "old": "loc_74F00",
+      "new": "LBZBoss2SK_UnusedStoreActorMidpoint",
+      "profiles": ["sk"],
+      "meaning": "Describe stored unused integer midpoint calculation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 54,
+      "old": "loc_74F24",
+      "new": "LBZBoss2SK_ChoosePassHeightAndSpeed",
+      "profiles": ["sk"],
+      "meaning": "Randomize crossing pass variant and side placement."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 66,
+      "old": "loc_74F4C",
+      "new": "LBZBoss2SK_ApplyPassStartMotion",
+      "profiles": ["sk"],
+      "meaning": "Commit random pass position and velocities."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 78,
+      "old": "word_74F72",
+      "new": "LBZBoss2SK_PassCameraYOffsets",
+      "profiles": ["sk"],
+      "meaning": "Define four random pass height offsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 80,
+      "old": "word_74F7A",
+      "new": "LBZBoss2SK_PassInitialYSpeeds",
+      "profiles": ["sk"],
+      "meaning": "Define four random pass starting Yspeeds."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 84,
+      "old": "loc_74F82",
+      "new": "LBZBoss2SK_ChoosePatrolFacingSpeed",
+      "profiles": ["sk"],
+      "meaning": "Set patrol horizontalvelocity and random wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 90,
+      "old": "loc_74F90",
+      "new": "LBZBoss2SK_StorePatrolSpeedAndWait",
+      "profiles": ["sk"],
+      "meaning": "Assign patrol speed and variable signed wait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 110,
+      "old": "loc_74FBE",
+      "new": "LBZBoss2SK_CheckLeftPatrolBound",
+      "profiles": ["sk"],
+      "meaning": "Check left bound for leftward patrol."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 115,
+      "old": "loc_74FC6",
+      "new": "LBZBoss2SK_ReversePatrolFacingAndSpeed",
+      "profiles": ["sk"],
+      "meaning": "Reverse patrol at camera-relative boundary."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 119,
+      "old": "locret_74FD0",
+      "new": "LBZBoss2SK_PatrolBoundsReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from patrol boundary helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 138,
+      "old": "loc_74FFA",
+      "new": "LBZBoss2SK_BeginHitFlashDisableArm",
+      "profiles": ["sk"],
+      "meaning": "Start fresh hit flash and temporarily disable armcontact."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 145,
+      "old": "loc_75010",
+      "new": "LBZBoss2SK_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Choose original or flash six-color palettebank."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 152,
+      "old": "loc_75024",
+      "new": "LBZBoss2SK_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Finish hit flash and restore root plus armcontact."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 161,
+      "old": "locret_75044",
+      "new": "LBZBoss2SK_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from hit policy while root remains in battlewrapper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 165,
+      "old": "loc_75046",
+      "new": "LBZBoss2SK_BeginScoredDefeatFade",
+      "profiles": ["sk"],
+      "meaning": "Schedule scored defeat and independent effects."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 174,
+      "old": "loc_7506E",
+      "new": "LBZBoss2SK_DefeatCheckPlayerRelease",
+      "profiles": ["sk"],
+      "meaning": "Preserve original inverted held-player release branch."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 180,
+      "old": "loc_7507A",
+      "new": "LBZBoss2SK_DefeatSpawnUnderlay",
+      "profiles": ["sk"],
+      "meaning": "Attempt defeatunderlay independently of earlierexplosion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 194,
+      "old": "word_75092",
+      "new": "LBZBoss2SK_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Define six WORD palette destinationhandles."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "original_line": 197,
+      "old": "word_7509E",
+      "new": "LBZBoss2SK_HitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Define original and flash six-color banks."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "ObjDat3_750C2",
+      "new": "LBZBoss2SK_BodyPartAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define independent full resources for frame0attachment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "ObjDat3_750CE",
+      "new": "LBZBoss2SK_PrimaryArmAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define independent full resources for orbitarm."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 19,
+      "old": "word_750DA",
+      "new": "LBZBoss2SK_ArmSegmentAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define inherited-map/art rawsection defaults."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 22,
+      "old": "word_750E0",
+      "new": "LBZBoss2SK_SecondaryArmAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define inherited-resource small armfollower."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 25,
+      "old": "ObjDat3_750E6",
+      "new": "LBZBoss2SK_CoverAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define independent full cover resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 30,
+      "old": "ObjDat3_750F2",
+      "new": "LBZBoss2SK_FlashVisualAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define palette0 flashing visual resources."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 35,
+      "old": "ObjDat3_750FE",
+      "new": "LBZBoss2SK_BodyFragmentAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define five full-resource defeatpieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 40,
+      "old": "ObjDat3_7510A",
+      "new": "LBZBoss2SK_DroppedRelayAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define dropped relay using firstbossmapping."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 45,
+      "old": "ObjDat3_75116",
+      "new": "LBZBoss2SK_DefeatUnderlayAttributes",
+      "profiles": ["sk"],
+      "meaning": "Define defeatunderlay using firstbossmapping."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 50,
+      "old": "ChildObjDat_75122",
+      "new": "LBZBoss2SK_BodyPartChildren",
+      "profiles": ["sk"],
+      "meaning": "Define four distinct normalbodyrequests."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 60,
+      "old": "ChildObjDat_7513C",
+      "new": "LBZBoss2SK_TouchProxyChild",
+      "profiles": ["sk"],
+      "meaning": "Define one invisible rootcontactrequest."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 64,
+      "old": "ChildObjDat_75144",
+      "new": "LBZBoss2SK_PrimaryArmChildren",
+      "profiles": ["sk"],
+      "meaning": "Define four normal armgrandchildren."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 74,
+      "old": "ChildObjDat_7515E",
+      "new": "LBZBoss2SK_DefeatFragmentChildren",
+      "profiles": ["sk"],
+      "meaning": "Define five defeatbreakup children."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 86,
+      "old": "ChildObjDat_7517E",
+      "new": "LBZBoss2SK_DroppedRelayChild",
+      "profiles": ["sk"],
+      "meaning": "Define one dropped scene-relay child."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 90,
+      "old": "ChildObjDat_75186",
+      "new": "LBZBoss2SK_DefeatUnderlayChild",
+      "profiles": ["sk"],
+      "meaning": "Define one defeatunderlay child."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 94,
+      "old": "ChildObjDat_7518E",
+      "new": "LBZBoss2SK_RelayExplosionControllerChild",
+      "profiles": ["sk"],
+      "meaning": "Define one repeated simple explosioncontrollerrequest."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 97,
+      "old": "byte_75194",
+      "new": "LBZBoss2SK_ArmSegmentDefaultAnim",
+      "profiles": ["sk"],
+      "meaning": "Define default section uniformanimation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 99,
+      "old": "byte_7519C",
+      "new": "LBZBoss2SK_ArmSegmentAlternateAnim",
+      "profiles": ["sk"],
+      "meaning": "Define nonzero section uniformanimation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "original_line": 101,
+      "old": "byte_751A4",
+      "new": "LBZBoss2SK_UnusedSectionCallbackAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe stored S3-only section stream without SK caller."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 22,
+      "old": "Frame_364ABA",
+      "new": "LBZFinalBoss2S3_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 33,
+      "old": "Frame_364AF8",
+      "new": "LBZFinalBoss2S3_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 36,
+      "old": "Frame_364B06",
+      "new": "LBZFinalBoss2S3_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 39,
+      "old": "Frame_364B14",
+      "new": "LBZFinalBoss2S3_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 41,
+      "old": "Frame_364B1C",
+      "new": "LBZFinalBoss2S3_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 44,
+      "old": "Frame_364B2A",
+      "new": "LBZFinalBoss2S3_MapFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 47,
+      "old": "Frame_364B38",
+      "new": "LBZFinalBoss2S3_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 52,
+      "old": "Frame_364B52",
+      "new": "LBZFinalBoss2S3_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 55,
+      "old": "Frame_364B60",
+      "new": "LBZFinalBoss2S3_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 58,
+      "old": "Frame_364B6E",
+      "new": "LBZFinalBoss2S3_MapFrame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 61,
+      "old": "Frame_364B7C",
+      "new": "LBZFinalBoss2S3_MapFrame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 66,
+      "old": "Frame_364B96",
+      "new": "LBZFinalBoss2S3_MapFrame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 69,
+      "old": "Frame_364BA4",
+      "new": "LBZFinalBoss2S3_MapFrame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 71,
+      "old": "Frame_364BAC",
+      "new": "LBZFinalBoss2S3_MapFrame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 75,
+      "old": "Frame_364BC0",
+      "new": "LBZFinalBoss2S3_MapFrame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 78,
+      "old": "Frame_364BCE",
+      "new": "LBZFinalBoss2S3_MapFrame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 80,
+      "old": "Frame_364BD6",
+      "new": "LBZFinalBoss2S3_MapFrame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "original_line": 83,
+      "old": "Frame_364BE4",
+      "new": "LBZFinalBoss2S3_MapFrame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss2S3 physical mapping body at verified slot11 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "tokens": [
+        [1, 0, 0, ""],
+        [2, 1, 166, ""],
+        [4, 2, 1, ""],
+        [5, 0, 1, ""],
+        [9, 0, 2, ""],
+        [12, 1, 3, ""],
+        [13, 1, 3, ""],
+        [16, 0, 3, ""],
+        [17, 1, 4, ""],
+        [17, 3, 3, ""],
+        [18, 1, 5, ""],
+        [18, 3, 3, ""],
+        [19, 1, 7, ""],
+        [19, 3, 3, ""],
+        [20, 0, 4, ""],
+        [21, 1, 167, ""],
+        [27, 1, 180, ""],
+        [29, 0, 5, ""],
+        [32, 1, 6, ""],
+        [36, 0, 6, ""],
+        [39, 0, 7, ""],
+        [42, 1, 64, ""],
+        [44, 1, 10, ""],
+        [50, 1, 8, ""],
+        [52, 1, 10, ""],
+        [55, 1, 10, ""],
+        [56, 1, 9, ""],
+        [57, 0, 8, ""],
+        [60, 1, 10, ""],
+        [61, 0, 9, ""],
+        [63, 0, 10, ""],
+        [67, 0, 11, ""],
+        [68, 1, 169, ""],
+        [70, 2, 12, ""],
+        [78, 0, 12, ""],
+        [89, 0, 13, ""],
+        [90, 1, 168, ""],
+        [94, 2, 14, ""],
+        [95, 2, 188, ""],
+        [97, 1, 14, ""],
+        [100, 2, 189, ""],
+        [101, 0, 14, ""],
+        [103, 0, 15, ""],
+        [108, 1, 16, ""],
+        [109, 2, 17, ""],
+        [112, 1, 16, ""],
+        [115, 0, 16, ""],
+        [118, 0, 17, ""],
+        [122, 1, 18, ""],
+        [123, 2, 15, ""],
+        [125, 1, 18, ""],
+        [127, 0, 18, ""],
+        [130, 0, 19, ""],
+        [131, 1, 170, ""],
+        [133, 2, 20, ""],
+        [134, 0, 20, ""],
+        [138, 0, 21, ""],
+        [139, 1, 171, ""],
+        [141, 2, 22, ""],
+        [142, 0, 22, ""],
+        [148, 1, 23, ""],
+        [150, 1, 64, ""],
+        [152, 0, 23, ""],
+        [154, 0, 24, ""],
+        [155, 2, 25, ""],
+        [157, 0, 25, ""],
+        [161, 1, 23, ""],
+        [163, 0, 26, ""],
+        [164, 2, 27, ""],
+        [167, 0, 27, ""],
+        [171, 1, 29, ""],
+        [173, 1, 64, ""],
+        [175, 1, 64, ""],
+        [176, 1, 30, ""],
+        [179, 1, 28, ""],
+        [182, 1, 28, ""],
+        [184, 1, 31, ""],
+        [185, 0, 28, ""],
+        [187, 0, 29, ""],
+        [190, 0, 30, ""],
+        [192, 0, 31, ""],
+        [193, 2, 32, ""],
+        [198, 2, 95, ""],
+        [206, 0, 32, ""],
+        [209, 1, 33, ""],
+        [211, 1, 23, ""],
+        [217, 0, 33, ""],
+        [218, 2, 34, ""],
+        [220, 0, 34, ""],
+        [222, 1, 35, ""],
+        [224, 0, 35, ""],
+        [225, 2, 27, ""],
+        [227, 0, 36, ""],
+        [228, 1, 172, ""],
+        [240, 0, 37, ""],
+        [241, 2, 39, ""],
+        [247, 1, 38, ""],
+        [249, 0, 38, ""],
+        [252, 2, 41, ""],
+        [253, 0, 39, ""],
+        [255, 1, 40, ""],
+        [258, 0, 40, ""],
+        [261, 0, 41, ""],
+        [265, 2, 42, ""],
+        [267, 0, 42, ""],
+        [270, 1, 43, ""],
+        [274, 0, 43, ""],
+        [276, 1, 44, ""],
+        [278, 1, 44, ""],
+        [279, 2, 45, ""],
+        [287, 0, 44, ""],
+        [289, 0, 45, ""],
+        [291, 1, 47, ""],
+        [294, 1, 46, ""],
+        [296, 0, 46, ""],
+        [298, 1, 48, ""],
+        [302, 1, 47, ""],
+        [303, 2, 52, ""],
+        [304, 0, 47, ""],
+        [306, 0, 48, ""],
+        [307, 2, 49, ""],
+        [309, 0, 49, ""],
+        [311, 1, 50, ""],
+        [313, 0, 50, ""],
+        [318, 1, 51, ""],
+        [319, 2, 133, ""],
+        [321, 0, 51, ""],
+        [322, 1, 183, ""],
+        [325, 0, 52, ""],
+        [326, 1, 173, ""],
+        [331, 1, 53, ""],
+        [342, 0, 53, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "tokens": [
+        [9, 1, 54, ""],
+        [10, 1, 55, ""],
+        [11, 1, 59, ""],
+        [12, 1, 61, ""],
+        [13, 1, 59, ""],
+        [14, 1, 67, ""],
+        [15, 1, 74, ""],
+        [16, 1, 76, ""],
+        [17, 1, 78, ""],
+        [18, 1, 80, ""],
+        [19, 1, 83, ""],
+        [20, 1, 86, ""],
+        [21, 1, 88, ""],
+        [22, 1, 90, ""],
+        [23, 1, 92, ""],
+        [24, 1, 94, ""],
+        [25, 1, 96, ""],
+        [26, 1, 98, ""],
+        [27, 1, 101, ""],
+        [28, 1, 103, ""],
+        [29, 1, 105, ""],
+        [30, 1, 108, ""],
+        [31, 0, 54, ""],
+        [44, 0, 55, ""],
+        [49, 1, 56, ""],
+        [51, 0, 56, ""],
+        [54, 2, 60, ""],
+        [56, 1, 57, ""],
+        [59, 0, 57, ""],
+        [61, 1, 58, ""],
+        [62, 2, 133, ""],
+        [63, 0, 58, ""],
+        [65, 0, 59, ""],
+        [67, 0, 60, ""],
+        [70, 1, 178, ""],
+        [72, 0, 61, ""],
+        [77, 1, 62, ""],
+        [79, 0, 62, ""],
+        [84, 1, 179, ""],
+        [86, 0, 63, ""],
+        [89, 2, 65, ""],
+        [90, 0, 64, ""],
+        [92, 0, 65, ""],
+        [97, 1, 66, ""],
+        [102, 2, 63, ""],
+        [103, 1, 199, ""],
+        [104, 0, 66, ""],
+        [108, 2, 75, ""],
+        [110, 1, 203, ""],
+        [111, 0, 67, ""],
+        [113, 1, 68, ""],
+        [114, 1, 68, ""],
+        [117, 0, 68, ""],
+        [118, 1, 70, ""],
+        [118, 3, 68, ""],
+        [119, 1, 69, ""],
+        [119, 3, 68, ""],
+        [120, 1, 71, ""],
+        [120, 3, 68, ""],
+        [121, 1, 70, ""],
+        [121, 3, 68, ""],
+        [122, 1, 73, ""],
+        [122, 3, 68, ""],
+        [123, 0, 69, ""],
+        [125, 0, 70, ""],
+        [127, 0, 71, ""],
+        [131, 1, 72, ""],
+        [133, 0, 72, ""],
+        [135, 0, 73, ""],
+        [138, 0, 74, ""],
+        [144, 0, 75, ""],
+        [148, 2, 77, ""],
+        [150, 0, 76, ""],
+        [152, 0, 77, ""],
+        [156, 0, 78, ""],
+        [161, 1, 79, ""],
+        [163, 0, 79, ""],
+        [167, 0, 80, ""],
+        [171, 1, 81, ""],
+        [175, 1, 82, ""],
+        [176, 0, 81, ""],
+        [178, 0, 82, ""],
+        [181, 0, 83, ""],
+        [185, 1, 84, ""],
+        [189, 1, 85, ""],
+        [190, 0, 84, ""],
+        [192, 0, 85, ""],
+        [197, 2, 87, ""],
+        [199, 0, 86, ""],
+        [201, 0, 87, ""],
+        [203, 2, 89, ""],
+        [204, 1, 203, ""],
+        [205, 0, 88, ""],
+        [211, 0, 89, ""],
+        [214, 2, 91, ""],
+        [216, 0, 90, ""],
+        [218, 0, 91, ""],
+        [223, 0, 92, ""],
+        [228, 1, 93, ""],
+        [230, 0, 93, ""],
+        [231, 1, 63, ""],
+        [232, 0, 94, ""],
+        [234, 0, 95, ""],
+        [239, 0, 96, ""],
+        [244, 1, 97, ""],
+        [246, 0, 97, ""],
+        [249, 2, 99, ""],
+        [251, 0, 98, ""],
+        [253, 0, 99, ""],
+        [263, 1, 100, ""],
+        [266, 0, 100, ""],
+        [270, 0, 101, ""],
+        [274, 1, 102, ""],
+        [277, 0, 102, ""],
+        [285, 0, 103, ""],
+        [288, 1, 104, ""],
+        [290, 0, 104, ""],
+        [293, 2, 106, ""],
+        [295, 0, 105, ""],
+        [297, 0, 106, ""],
+        [304, 1, 107, ""],
+        [306, 0, 107, ""],
+        [315, 0, 108, ""],
+        [318, 1, 63, ""],
+        [320, 0, 109, ""],
+        [321, 2, 110, ""],
+        [324, 1, 181, ""],
+        [326, 0, 110, ""],
+        [333, 1, 111, ""],
+        [334, 2, 112, ""],
+        [344, 0, 111, ""],
+        [346, 0, 112, ""],
+        [349, 1, 115, ""],
+        [354, 1, 113, ""],
+        [356, 0, 113, ""],
+        [358, 1, 116, ""],
+        [361, 1, 114, ""],
+        [363, 0, 114, ""],
+        [365, 0, 115, ""],
+        [367, 0, 116, ""],
+        [368, 2, 118, ""],
+        [378, 1, 117, ""],
+        [379, 2, 136, ""],
+        [383, 0, 117, ""],
+        [384, 1, 182, ""],
+        [386, 0, 118, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "tokens": [
+        [1, 0, 119, ""],
+        [2, 1, 174, ""],
+        [4, 2, 123, ""],
+        [7, 1, 120, ""],
+        [8, 2, 125, ""],
+        [9, 0, 120, ""],
+        [10, 1, 122, ""],
+        [11, 1, 121, ""],
+        [17, 0, 121, ""],
+        [26, 0, 122, ""],
+        [35, 0, 123, ""],
+        [39, 1, 124, ""],
+        [40, 1, 184, ""],
+        [50, 0, 124, ""],
+        [54, 1, 127, ""],
+        [55, 0, 125, ""],
+        [62, 1, 126, ""],
+        [66, 0, 126, ""],
+        [68, 0, 127, ""],
+        [69, 1, 186, ""],
+        [71, 1, 64, ""],
+        [76, 0, 128, ""],
+        [78, 3, 128, ""],
+        [79, 2, 130, ""],
+        [86, 1, 129, ""],
+        [89, 0, 129, ""],
+        [93, 0, 130, ""],
+        [96, 1, 131, ""],
+        [98, 1, 187, ""],
+        [100, 1, 131, ""],
+        [102, 2, 132, ""],
+        [103, 0, 131, ""],
+        [105, 0, 132, ""],
+        [108, 1, 64, ""],
+        [111, 0, 133, ""],
+        [112, 2, 135, ""],
+        [115, 1, 134, ""],
+        [122, 0, 134, ""],
+        [125, 0, 135, ""],
+        [127, 0, 136, ""],
+        [129, 1, 64, ""],
+        [130, 2, 137, ""],
+        [131, 2, 138, ""],
+        [136, 0, 137, ""],
+        [137, 1, 191, ""],
+        [140, 0, 138, ""],
+        [141, 2, 139, ""],
+        [142, 0, 139, ""],
+        [144, 1, 64, ""],
+        [145, 2, 140, ""],
+        [146, 2, 141, ""],
+        [149, 0, 140, ""],
+        [150, 1, 192, ""],
+        [153, 0, 141, ""],
+        [154, 2, 142, ""],
+        [156, 2, 143, ""],
+        [163, 1, 193, ""],
+        [165, 0, 142, ""],
+        [170, 0, 143, ""],
+        [171, 2, 144, ""],
+        [172, 0, 144, ""],
+        [173, 1, 177, ""],
+        [183, 1, 146, ""],
+        [184, 1, 147, ""],
+        [186, 1, 145, ""],
+        [188, 0, 145, ""],
+        [190, 0, 146, ""],
+        [192, 0, 147, ""],
+        [193, 1, 148, ""],
+        [196, 0, 148, ""],
+        [197, 1, 149, ""],
+        [198, 1, 153, ""],
+        [199, 1, 154, ""],
+        [200, 1, 159, ""],
+        [201, 0, 149, ""],
+        [202, 2, 150, ""],
+        [208, 0, 150, ""],
+        [210, 1, 151, ""],
+        [214, 2, 152, ""],
+        [216, 0, 151, ""],
+        [218, 0, 152, ""],
+        [221, 0, 153, ""],
+        [222, 2, 150, ""],
+        [228, 1, 150, ""],
+        [229, 0, 154, ""],
+        [230, 2, 155, ""],
+        [237, 0, 155, ""],
+        [245, 1, 156, ""],
+        [247, 0, 156, ""],
+        [248, 2, 157, ""],
+        [258, 0, 157, ""],
+        [263, 1, 158, ""],
+        [266, 2, 152, ""],
+        [267, 0, 158, ""],
+        [269, 0, 159, ""],
+        [270, 2, 160, ""],
+        [278, 0, 160, ""],
+        [286, 1, 156, ""],
+        [288, 0, 161, ""],
+        [289, 1, 175, ""],
+        [291, 2, 162, ""],
+        [295, 1, 185, ""],
+        [297, 0, 162, ""],
+        [300, 1, 163, ""],
+        [309, 0, 163, ""],
+        [313, 0, 164, ""],
+        [314, 1, 176, ""],
+        [316, 2, 165, ""],
+        [317, 2, 190, ""],
+        [320, 0, 165, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
+      "tokens": [
+        [6, 0, 166, ""],
+        [11, 0, 167, ""],
+        [16, 0, 168, ""],
+        [19, 0, 169, ""],
+        [22, 0, 170, ""],
+        [27, 0, 171, ""],
+        [32, 0, 172, ""],
+        [37, 0, 173, ""],
+        [42, 0, 174, ""],
+        [47, 0, 175, ""],
+        [52, 0, 176, ""],
+        [62, 0, 177, ""],
+        [67, 0, 178, ""],
+        [69, 1, 2, ""],
+        [71, 1, 0, ""],
+        [73, 1, 19, ""],
+        [75, 1, 21, ""],
+        [77, 0, 179, ""],
+        [79, 1, 24, ""],
+        [81, 0, 180, ""],
+        [83, 1, 13, ""],
+        [85, 1, 13, ""],
+        [87, 1, 11, ""],
+        [89, 1, 26, ""],
+        [91, 0, 181, ""],
+        [93, 1, 36, ""],
+        [95, 1, 36, ""],
+        [97, 1, 36, ""],
+        [99, 1, 36, ""],
+        [101, 1, 36, ""],
+        [103, 0, 182, ""],
+        [105, 1, 37, ""],
+        [106, 0, 183, ""],
+        [108, 1, 119, ""],
+        [110, 1, 119, ""],
+        [112, 1, 119, ""],
+        [114, 1, 119, ""],
+        [116, 1, 119, ""],
+        [118, 1, 119, ""],
+        [120, 1, 119, ""],
+        [122, 0, 184, ""],
+        [124, 1, 161, ""],
+        [125, 0, 185, ""],
+        [127, 1, 164, ""],
+        [128, 0, 186, ""],
+        [131, 0, 187, ""],
+        [134, 0, 188, ""],
+        [136, 0, 189, ""],
+        [138, 0, 190, ""],
+        [140, 0, 191, ""],
+        [146, 0, 192, ""],
+        [158, 0, 193, ""],
+        [159, 1, 194, ""],
+        [160, 1, 195, ""],
+        [161, 0, 194, ""],
+        [191, 0, 195, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "tokens": [
+        [4, 1, 196, ""],
+        [8, 0, 196, ""],
+        [15, 1, 197, ""],
+        [17, 0, 197, ""],
+        [22, 1, 198, ""],
+        [24, 0, 198, ""],
+        [39, 0, 199, ""],
+        [47, 1, 200, ""],
+        [50, 0, 200, ""],
+        [55, 1, 201, ""],
+        [58, 1, 202, ""],
+        [61, 0, 201, ""],
+        [63, 0, 202, ""],
+        [65, 0, 203, ""],
+        [68, 1, 204, ""],
+        [70, 0, 204, ""],
+        [80, 1, 205, ""],
+        [83, 1, 206, ""],
+        [84, 1, 207, ""],
+        [85, 0, 205, ""],
+        [88, 1, 207, ""],
+        [89, 0, 206, ""],
+        [92, 0, 207, ""],
+        [96, 1, 211, ""],
+        [98, 1, 211, ""],
+        [100, 1, 212, ""],
+        [102, 1, 209, ""],
+        [104, 1, 208, ""],
+        [106, 0, 208, ""],
+        [112, 0, 209, ""],
+        [116, 1, 210, ""],
+        [118, 0, 210, ""],
+        [121, 1, 211, ""],
+        [126, 0, 211, ""],
+        [128, 0, 212, ""],
+        [130, 2, 109, ""],
+        [134, 1, 213, ""],
+        [136, 0, 213, ""],
+        [138, 1, 214, ""],
+        [140, 0, 214, ""],
+        [143, 1, 215, ""],
+        [144, 1, 216, ""],
+        [146, 0, 215, ""],
+        [149, 0, 216, ""],
+        [170, 1, 217, ""],
+        [172, 0, 217, ""],
+        [176, 1, 218, ""],
+        [178, 0, 218, ""],
+        [196, 1, 219, ""],
+        [201, 1, 221, ""],
+        [204, 1, 222, ""],
+        [206, 1, 223, ""],
+        [207, 0, 219, ""],
+        [209, 1, 220, ""],
+        [213, 1, 220, ""],
+        [216, 0, 220, ""],
+        [218, 0, 221, ""],
+        [220, 0, 222, ""],
+        [228, 0, 223, ""],
+        [238, 1, 225, ""],
+        [241, 0, 224, ""],
+        [243, 3, 224, ""],
+        [245, 0, 225, ""],
+        [252, 1, 226, ""],
+        [261, 1, 227, ""],
+        [265, 1, 226, ""],
+        [267, 0, 226, ""],
+        [269, 0, 227, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
+      "tokens": [
+        [1, 0, 228, ""],
+        [2, 1, 374, ""],
+        [4, 2, 229, ""],
+        [5, 0, 229, ""],
+        [9, 0, 230, ""],
+        [12, 1, 231, ""],
+        [13, 1, 231, ""],
+        [16, 0, 231, ""],
+        [17, 1, 232, ""],
+        [17, 3, 231, ""],
+        [18, 1, 233, ""],
+        [18, 3, 231, ""],
+        [19, 1, 235, ""],
+        [19, 3, 231, ""],
+        [20, 0, 232, ""],
+        [21, 1, 375, ""],
+        [27, 1, 385, ""],
+        [29, 0, 233, ""],
+        [32, 1, 234, ""],
+        [36, 0, 234, ""],
+        [39, 0, 235, ""],
+        [42, 1, 285, ""],
+        [44, 1, 238, ""],
+        [50, 1, 236, ""],
+        [52, 1, 238, ""],
+        [55, 1, 238, ""],
+        [56, 1, 237, ""],
+        [57, 0, 236, ""],
+        [60, 1, 238, ""],
+        [61, 0, 237, ""],
+        [63, 0, 238, ""],
+        [67, 0, 239, ""],
+        [68, 1, 377, ""],
+        [70, 2, 240, ""],
+        [78, 0, 240, ""],
+        [89, 0, 241, ""],
+        [90, 1, 376, ""],
+        [94, 2, 242, ""],
+        [95, 2, 390, ""],
+        [97, 1, 242, ""],
+        [100, 2, 391, ""],
+        [101, 0, 242, ""],
+        [103, 0, 243, ""],
+        [108, 1, 244, ""],
+        [109, 2, 245, ""],
+        [112, 1, 244, ""],
+        [115, 0, 244, ""],
+        [118, 0, 245, ""],
+        [122, 1, 246, ""],
+        [123, 2, 243, ""],
+        [125, 1, 246, ""],
+        [127, 0, 246, ""],
+        [130, 0, 247, ""],
+        [131, 1, 378, ""],
+        [133, 2, 248, ""],
+        [134, 0, 248, ""],
+        [138, 0, 249, ""],
+        [139, 1, 379, ""],
+        [141, 2, 250, ""],
+        [142, 0, 250, ""],
+        [148, 1, 251, ""],
+        [150, 1, 285, ""],
+        [152, 0, 251, ""],
+        [154, 0, 252, ""],
+        [155, 2, 253, ""],
+        [157, 0, 253, ""],
+        [161, 1, 251, ""],
+        [163, 0, 254, ""],
+        [164, 2, 255, ""],
+        [167, 0, 255, ""],
+        [171, 1, 257, ""],
+        [173, 1, 285, ""],
+        [175, 1, 285, ""],
+        [176, 1, 258, ""],
+        [179, 1, 256, ""],
+        [182, 1, 256, ""],
+        [184, 1, 259, ""],
+        [185, 0, 256, ""],
+        [187, 0, 257, ""],
+        [190, 0, 258, ""],
+        [192, 0, 259, ""],
+        [193, 2, 260, ""],
+        [198, 2, 316, ""],
+        [206, 0, 260, ""],
+        [209, 1, 261, ""],
+        [211, 1, 251, ""],
+        [217, 0, 261, ""],
+        [218, 2, 262, ""],
+        [220, 0, 262, ""],
+        [222, 1, 263, ""],
+        [224, 0, 263, ""],
+        [225, 2, 255, ""],
+        [227, 0, 264, ""],
+        [228, 1, 380, ""],
+        [240, 0, 265, ""],
+        [243, 1, 266, ""],
+        [244, 1, 266, ""],
+        [246, 0, 266, ""],
+        [247, 1, 267, ""],
+        [247, 3, 266, ""],
+        [248, 1, 268, ""],
+        [248, 3, 266, ""],
+        [249, 1, 271, ""],
+        [249, 3, 266, ""],
+        [250, 0, 267, ""],
+        [251, 1, 381, ""],
+        [254, 2, 269, ""],
+        [256, 0, 268, ""],
+        [259, 1, 285, ""],
+        [261, 0, 269, ""],
+        [264, 1, 270, ""],
+        [269, 0, 270, ""],
+        [270, 2, 271, ""],
+        [283, 0, 271, ""],
+        [287, 1, 285, ""],
+        [289, 1, 272, ""],
+        [290, 1, 389, ""],
+        [292, 0, 272, ""],
+        [294, 0, 273, ""],
+        [295, 1, 382, ""],
+        [297, 2, 274, ""],
+        [299, 0, 274, ""],
+        [302, 0, 275, ""],
+        [305, 1, 278, ""],
+        [310, 2, 277, ""],
+        [313, 1, 276, ""],
+        [315, 0, 276, ""],
+        [317, 0, 277, ""],
+        [320, 0, 278, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "tokens": [
+        [9, 1, 279, ""],
+        [10, 1, 280, ""],
+        [11, 1, 280, ""],
+        [12, 1, 282, ""],
+        [13, 1, 280, ""],
+        [14, 1, 288, ""],
+        [15, 1, 295, ""],
+        [16, 1, 297, ""],
+        [17, 1, 299, ""],
+        [18, 1, 301, ""],
+        [19, 1, 304, ""],
+        [20, 1, 307, ""],
+        [21, 1, 309, ""],
+        [22, 1, 311, ""],
+        [23, 1, 313, ""],
+        [24, 1, 315, ""],
+        [25, 1, 317, ""],
+        [26, 1, 319, ""],
+        [27, 1, 322, ""],
+        [28, 1, 324, ""],
+        [29, 1, 326, ""],
+        [30, 1, 330, ""],
+        [31, 0, 279, ""],
+        [44, 2, 281, ""],
+        [52, 0, 280, ""],
+        [54, 0, 281, ""],
+        [57, 1, 383, ""],
+        [59, 0, 282, ""],
+        [64, 1, 283, ""],
+        [66, 0, 283, ""],
+        [71, 1, 384, ""],
+        [73, 0, 284, ""],
+        [76, 2, 286, ""],
+        [77, 0, 285, ""],
+        [79, 0, 286, ""],
+        [84, 1, 287, ""],
+        [89, 2, 284, ""],
+        [90, 1, 356, ""],
+        [91, 0, 287, ""],
+        [95, 2, 296, ""],
+        [97, 1, 360, ""],
+        [98, 0, 288, ""],
+        [100, 1, 289, ""],
+        [101, 1, 289, ""],
+        [104, 0, 289, ""],
+        [105, 1, 291, ""],
+        [105, 3, 289, ""],
+        [106, 1, 290, ""],
+        [106, 3, 289, ""],
+        [107, 1, 292, ""],
+        [107, 3, 289, ""],
+        [108, 1, 291, ""],
+        [108, 3, 289, ""],
+        [109, 1, 294, ""],
+        [109, 3, 289, ""],
+        [110, 0, 290, ""],
+        [112, 0, 291, ""],
+        [114, 0, 292, ""],
+        [118, 1, 293, ""],
+        [120, 0, 293, ""],
+        [122, 0, 294, ""],
+        [125, 0, 295, ""],
+        [131, 0, 296, ""],
+        [135, 2, 298, ""],
+        [137, 0, 297, ""],
+        [139, 0, 298, ""],
+        [143, 0, 299, ""],
+        [148, 1, 300, ""],
+        [150, 0, 300, ""],
+        [154, 0, 301, ""],
+        [158, 1, 302, ""],
+        [162, 1, 303, ""],
+        [163, 0, 302, ""],
+        [165, 0, 303, ""],
+        [168, 0, 304, ""],
+        [172, 1, 305, ""],
+        [176, 1, 306, ""],
+        [177, 0, 305, ""],
+        [179, 0, 306, ""],
+        [184, 2, 308, ""],
+        [186, 0, 307, ""],
+        [188, 0, 308, ""],
+        [190, 2, 310, ""],
+        [191, 1, 360, ""],
+        [192, 0, 309, ""],
+        [198, 0, 310, ""],
+        [201, 2, 312, ""],
+        [203, 0, 311, ""],
+        [205, 0, 312, ""],
+        [210, 0, 313, ""],
+        [215, 1, 314, ""],
+        [217, 0, 314, ""],
+        [218, 1, 284, ""],
+        [219, 0, 315, ""],
+        [221, 0, 316, ""],
+        [226, 0, 317, ""],
+        [231, 1, 318, ""],
+        [233, 0, 318, ""],
+        [236, 2, 320, ""],
+        [238, 0, 319, ""],
+        [240, 0, 320, ""],
+        [250, 1, 321, ""],
+        [253, 0, 321, ""],
+        [257, 0, 322, ""],
+        [261, 1, 323, ""],
+        [264, 0, 323, ""],
+        [272, 0, 324, ""],
+        [275, 1, 325, ""],
+        [277, 0, 325, ""],
+        [280, 2, 327, ""],
+        [282, 0, 326, ""],
+        [284, 0, 327, ""],
+        [291, 1, 328, ""],
+        [293, 0, 328, ""],
+        [298, 1, 329, ""],
+        [304, 0, 329, ""],
+        [318, 0, 330, ""],
+        [321, 1, 284, ""],
+        [323, 0, 331, ""],
+        [324, 2, 332, ""],
+        [327, 1, 386, ""],
+        [329, 0, 332, ""],
+        [336, 1, 333, ""],
+        [338, 0, 333, ""],
+        [339, 2, 334, ""],
+        [347, 0, 334, ""],
+        [349, 1, 285, ""],
+        [351, 1, 285, ""],
+        [352, 2, 335, ""],
+        [358, 0, 335, ""],
+        [364, 1, 336, ""],
+        [367, 0, 336, ""],
+        [370, 1, 285, ""],
+        [371, 2, 337, ""],
+        [384, 0, 337, ""],
+        [391, 1, 338, ""],
+        [394, 0, 338, ""],
+        [395, 2, 339, ""],
+        [401, 0, 339, ""],
+        [410, 1, 340, ""],
+        [413, 0, 340, ""],
+        [417, 1, 341, ""],
+        [419, 0, 341, ""],
+        [421, 2, 342, ""],
+        [423, 2, 343, ""],
+        [425, 1, 387, ""],
+        [428, 0, 342, ""],
+        [431, 0, 343, ""],
+        [432, 2, 344, ""],
+        [435, 0, 344, ""],
+        [442, 1, 345, ""],
+        [444, 0, 345, ""],
+        [445, 2, 346, ""],
+        [452, 0, 346, ""],
+        [454, 1, 347, ""],
+        [455, 2, 348, ""],
+        [457, 0, 347, ""],
+        [459, 0, 348, ""],
+        [461, 1, 349, ""],
+        [462, 2, 350, ""],
+        [473, 0, 349, ""],
+        [475, 0, 350, ""],
+        [481, 1, 352, ""],
+        [486, 1, 351, ""],
+        [488, 0, 351, ""],
+        [491, 0, 352, ""],
+        [495, 1, 285, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/motion_helpers.s",
+      "tokens": [
+        [4, 1, 353, ""],
+        [8, 0, 353, ""],
+        [15, 1, 354, ""],
+        [17, 0, 354, ""],
+        [22, 1, 355, ""],
+        [24, 0, 355, ""],
+        [39, 0, 356, ""],
+        [47, 1, 357, ""],
+        [50, 0, 357, ""],
+        [55, 1, 358, ""],
+        [58, 1, 359, ""],
+        [61, 0, 358, ""],
+        [63, 0, 359, ""],
+        [65, 0, 360, ""],
+        [68, 1, 361, ""],
+        [70, 0, 361, ""],
+        [80, 1, 362, ""],
+        [83, 1, 363, ""],
+        [84, 1, 364, ""],
+        [85, 0, 362, ""],
+        [88, 1, 364, ""],
+        [89, 0, 363, ""],
+        [92, 0, 364, ""],
+        [96, 1, 368, ""],
+        [98, 1, 368, ""],
+        [100, 1, 369, ""],
+        [102, 1, 366, ""],
+        [104, 1, 365, ""],
+        [106, 0, 365, ""],
+        [112, 0, 366, ""],
+        [116, 1, 367, ""],
+        [118, 0, 367, ""],
+        [121, 1, 368, ""],
+        [126, 0, 368, ""],
+        [128, 0, 369, ""],
+        [130, 2, 331, ""],
+        [134, 1, 370, ""],
+        [136, 0, 370, ""],
+        [138, 1, 371, ""],
+        [140, 0, 371, ""],
+        [141, 1, 388, ""],
+        [144, 1, 372, ""],
+        [145, 1, 373, ""],
+        [147, 0, 372, ""],
+        [150, 0, 373, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 374, ""],
+        [11, 0, 375, ""],
+        [16, 0, 376, ""],
+        [19, 0, 377, ""],
+        [22, 0, 378, ""],
+        [27, 0, 379, ""],
+        [32, 0, 380, ""],
+        [37, 0, 381, ""],
+        [42, 0, 382, ""],
+        [47, 0, 383, ""],
+        [49, 1, 230, ""],
+        [51, 1, 228, ""],
+        [53, 1, 247, ""],
+        [55, 1, 249, ""],
+        [57, 0, 384, ""],
+        [59, 1, 252, ""],
+        [61, 0, 385, ""],
+        [63, 1, 241, ""],
+        [65, 1, 241, ""],
+        [67, 1, 239, ""],
+        [69, 1, 254, ""],
+        [71, 0, 386, ""],
+        [73, 1, 264, ""],
+        [75, 1, 264, ""],
+        [77, 1, 264, ""],
+        [79, 1, 264, ""],
+        [81, 1, 264, ""],
+        [83, 0, 387, ""],
+        [85, 1, 265, ""],
+        [87, 0, 388, ""],
+        [89, 1, 273, ""],
+        [91, 0, 389, ""],
+        [93, 1, 275, ""],
+        [94, 0, 390, ""],
+        [96, 0, 391, ""],
+        [98, 0, 392, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_2.s",
+      "tokens": [
+        [2, 1, 393, ""],
+        [3, 1, 394, ""],
+        [4, 1, 395, ""],
+        [5, 1, 396, ""],
+        [6, 1, 397, ""],
+        [7, 1, 398, ""],
+        [8, 1, 399, ""],
+        [9, 1, 400, ""],
+        [10, 1, 401, ""],
+        [11, 1, 402, ""],
+        [12, 1, 403, ""],
+        [13, 1, 404, ""],
+        [14, 1, 405, ""],
+        [15, 1, 406, ""],
+        [16, 1, 407, ""],
+        [17, 1, 408, ""],
+        [18, 1, 409, ""],
+        [19, 1, 410, ""],
+        [20, 0, 393, ""],
+        [31, 0, 394, ""],
+        [34, 0, 395, ""],
+        [37, 0, 396, ""],
+        [39, 0, 397, ""],
+        [42, 0, 398, ""],
+        [45, 0, 399, ""],
+        [50, 0, 400, ""],
+        [53, 0, 401, ""],
+        [56, 0, 402, ""],
+        [59, 0, 403, ""],
+        [64, 0, 404, ""],
+        [67, 0, 405, ""],
+        [69, 0, 406, ""],
+        [73, 0, 407, ""],
+        [76, 0, 408, ""],
+        [78, 0, 409, ""],
+        [81, 0, 410, ""]
+      ]
+    }
+  ]
+}

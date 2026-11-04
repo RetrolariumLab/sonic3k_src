@@ -1203,9 +1203,15 @@
       "commits": ["fb9c9e200fc884538c73c3e91e3342193c28ae0d"]
     },
     {
-      "id": "current-shorten-43-boss-lbz-final-1",
+      "id": "change-e6cc1e0b8c61",
       "kind": "source_or_tooling",
       "summary": "Apply 302 reviewed short labels for boss lbz final 1.",
+      "commits": ["e6cc1e0b8c612920a76ad21abe878964f1e8c4b8"]
+    },
+    {
+      "id": "current-shorten-44-boss-lbz-final-2",
+      "kind": "source_or_tooling",
+      "summary": "Apply 387 reviewed short labels for boss lbz final 2.",
       "commits": ["release-commit"]
     }
   ],

@@ -8,53 +8,53 @@ ObjDat_LBZFinalBoss2:
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,0)
                 dc.w    $280
                 dc.b    $1C, $20,   5,   0
-ObjDat3_51F24:
+LBZBoss2S3_BodyPartAttributes:
                 dc.l    Map_LBZFinalBoss2
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,1,0)
                 dc.w    $200
                 dc.b    $28, $28,   0,   0
-ObjDat3_51F30:
+LBZBoss2S3_PrimaryArmAttributes:
                 dc.l    Map_LBZFinalBoss2
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,1,0)
                 dc.w    $180
                 dc.b    $20, $10,   2,   0
-word_51F3C:
+LBZBoss2S3_ArmSegmentAttributes:
                 dc.w    $80
                 dc.b    $14, $14,   4,   0
-word_51F42:
+LBZBoss2S3_SecondaryArmAttributes:
                 dc.w    $180
                 dc.b    8,   8,   3,   0
-ObjDat3_51F48:
+LBZBoss2S3_CoverAttributes:
                 dc.l    Map_LBZFinalBoss2
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,1,0)
                 dc.w    $300
                 dc.b    $14,  $C,   1,   0
-ObjDat3_51F54:
+LBZBoss2S3_TilePartAttributes:
                 dc.l    Map_LBZFinalBoss2
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,0,0)
                 dc.w    $300
                 dc.b    $C,  $C,  $C,   0
-ObjDat3_51F60:
+LBZBoss2S3_BodyFragmentAttributes:
                 dc.l    Map_LBZFinalBoss2
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,1,1)
                 dc.w    $100
                 dc.b    $10, $14,  $D,   0
-ObjDat3_51F6C:
+LBZBoss2S3_FallingDebrisAttributes:
                 dc.l    Map_LBZDeathEggSmall
                 dc.w    make_art_tile(ArtTile_LBZ2DeathEggSmall,2,0)
                 dc.w    $300
                 dc.b    $C,  $C,   7,   0
-ObjDat3_51F78:
+LBZBoss2S3_DeathEggPieceAttributes:
                 dc.l    Map_LBZDeathEggSmall
                 dc.w    make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
                 dc.w    $380
                 dc.b    $18, $18,   0,   0
-ObjDat3_51F84:
+LBZBoss2S3_SparkleAttributes:
                 dc.l    Map_LBZDeathEggSmall
                 dc.w    make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
                 dc.w    $300
                 dc.b    4,   4,   3,   0
-ObjDat3_51F90:
+LBZBoss2S3_SparkleTrailAttributes:
                 dc.l    Map_LBZDeathEggSmall
                 dc.w    make_art_tile(ArtTile_LBZ2DeathEggSmall,1,0)
                 dc.w    $300
@@ -64,91 +64,91 @@ ObjDat_LBZ2UnusedRobotnik:
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss2,0,0)
                 dc.w    $300
                 dc.b    $20, $20,   0,   0
-ObjDat3_51FA8:
+LBZBoss2S3_EndingPoseAttributes:
                 dc.l    Map_SonicTailsEndPoses
                 dc.w    make_art_tile(ArtTile_Ending_S3EndPose,0,1)
                 dc.w    $300
                 dc.b    $40, $40,   0,   0
-ChildObjDat_51FB4:
+LBZBoss2S3_BodyPartChildren:
                 dc.w    4-1
-                dc.l    loc_511E8
+                dc.l    LBZBoss2S3_ArmDispatchAndDraw
                 dc.b    $14, $24
-                dc.l    loc_511CE
+                dc.l    LBZBoss2S3_InitBodyPartAndFollow
                 dc.b    $C,-$14
-                dc.l    loc_51392
+                dc.l    LBZBoss2S3_InitCoverAndFollow
                 dc.b    0,-$18
-                dc.l    loc_513AC
+                dc.l    LBZBoss2S3_InitCollisionFlashVisual
                 dc.b    $38,-$14
-ChildObjDat_51FCE:
+LBZBoss2S3_TouchProxyChild:
                 dc.w    1-1
-                dc.l    loc_513E8
+                dc.l    LBZBoss2S3_InitInvisibleTouchProxy
                 dc.b    4,-$34
-ChildObjDat_51FD6:
+LBZBoss2S3_PrimaryArmChildren:
                 dc.w    4-1
-                dc.l    loc_512FC
+                dc.l    LBZBoss2S3_InitSegmentAndCacheBoss
                 dc.b    -$2A,  -2
-                dc.l    loc_512FC
+                dc.l    LBZBoss2S3_InitSegmentAndCacheBoss
                 dc.b    -$4A,  -2
-                dc.l    loc_512A6
+                dc.l    LBZBoss2S3_InitFollowerAndReparent
                 dc.b    0,   0
-                dc.l    loc_5140A
+                dc.l    LBZBoss2S3_CaptureProbeCacheBoss
                 dc.b    -$40,  -2
-ChildObjDat_51FF0:
+LBZBoss2S3_DefeatFragmentChildren:
                 dc.w    5-1
-                dc.l    loc_514F6
+                dc.l    LBZBoss2S3_InitBodyFragment
                 dc.b    -$C,-$2C
-                dc.l    loc_514F6
+                dc.l    LBZBoss2S3_InitBodyFragment
                 dc.b    $14,-$2C
-                dc.l    loc_514F6
+                dc.l    LBZBoss2S3_InitBodyFragment
                 dc.b    $2C,-$18
-                dc.l    loc_514F6
+                dc.l    LBZBoss2S3_InitBodyFragment
                 dc.b    -$C,  -4
-                dc.l    loc_514F6
+                dc.l    LBZBoss2S3_InitBodyFragment
                 dc.b    $14,  -4
-ChildObjDat_52010:
+LBZBoss2S3_EndingBurstChildren:
                 dc.w    2-1
-                dc.l    loc_51524
-ChildObjDat_52016:
+                dc.l    LBZBoss2S3_InitExplosionTravel
+LBZBoss2S3_DeathEggPieceChildren:
                 dc.w    7-1
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    0,   0
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    -$10, $28
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    -$70,   0
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    -$48, $28
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    $18, $10
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    -$24,  -8
-                dc.l    loc_516A4
+                dc.l    LBZBoss2S3_InitDeathEggPiece
                 dc.b    -$50, $1C
-ChildObjDat_52042:
+LBZBoss2S3_DeathEggSparkleChild:
                 dc.w    1-1
-                dc.l    loc_51AB8
-ChildObjDat_52048:
+                dc.l    LBZBoss2S3_InitSparkleAndTryTrail
+LBZBoss2S3_SparkleTrailChild:
                 dc.w    1-1
-                dc.l    loc_51B18
-ChildObjDat_5204E:
+                dc.l    LBZBoss2S3_InitFallingSparkleTrail
+LBZBoss2S3_EndingWhiteFadeChild:
                 dc.w    1-1
                 dc.l    S3PalEffect_InitWhitePasses
-ChildObjDat_52054:
+LBZBoss2S3_EndingTargetFadeChild:
                 dc.w    1-1
                 dc.l    S3PalEffect_InitTargetPasses
-byte_5205A:
+LBZBoss2S3_ArmSegmentDefaultAnim:
                 dc.b    9,   7,   4,   5,   6,   5,   4, $FC
-byte_52062:
+LBZBoss2S3_ArmSegmentAlternateAnim:
                 dc.b    9,  $B,   8,   9,  $A,   9,   8, $FC
-byte_5206A:
+LBZBoss2S3_SparkleTrailDeleteAnim:
                 dc.b    2,   4,   4,   5,   6, $F4
-byte_52070:
+LBZBoss2S3_EndingFirstExternalAnim:
                 dc.b    5, $C4
                 dc.b    0, $55
                 dc.b    0, $59
                 dc.b    1, $5A
                 dc.b    1, $FF
-byte_5207A:
+LBZBoss2S3_EndingSecondExternalAnim:
                 dc.b    7, $5A
                 dc.b    1, $5A
                 dc.b    1, $5A
@@ -160,10 +160,10 @@ byte_5207A:
                 dc.b    0, $57
                 dc.b    0, $57
                 dc.b    0, $FF
-off_52090:
-                dc.l    byte_52098
-                dc.l    byte_520D2
-byte_52098:
+LBZBoss2S3_EndingAnimByCharacter:
+                dc.l    LBZBoss2S3_EndingSonicExternalAnim
+                dc.l    LBZBoss2S3_EndingTailsExternalAnim
+LBZBoss2S3_EndingSonicExternalAnim:
                 dc.b    $F, $B1
                 dc.b    0, $B2
                 dc.b    0, $B1
@@ -193,7 +193,7 @@ byte_52098:
                 dc.b    0, $B1
                 dc.b    0, $B2
                 dc.b    0, $FF
-byte_520D2:
+LBZBoss2S3_EndingTailsExternalAnim:
                 dc.b    $7F, $A6
                 dc.b    0, $A6
                 dc.b    0, $A6
