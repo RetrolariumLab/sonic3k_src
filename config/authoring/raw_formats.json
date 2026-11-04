@@ -101,51 +101,51 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
-      "sha256": "657d377b0bcd175aebdfc4929585ba82cde91030c900d8bcc83c4adcdd10237c"
+      "sha256": "6989d8e6352701c281346ced2977a4bc485ba7b000a7a62e8664bb408a6eb475"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
-      "sha256": "d9f64dd2d2f6f785cf365fbf4b60c5e0d9b47b2c9174b2865736ed7b60013e89"
+      "sha256": "fa4691b6c6c5cea819c280ea1798beb34b551348e3740128b392481edcd55c39"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "d6872d996cec7c50e19b8b53475c5483e77255f27f74a6b66847325117746c30"
+      "sha256": "ff89988ea233953a359bf9f1757f5838995470b2a71d56ae5c87d9120e6d4756"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
-      "sha256": "fbd5e55999478dba547a8fd71e6506b7825d1d073721951ac5ee0324c6f143ab"
+      "sha256": "2af5b205bf5898836e5b8f0843a6b1582c974ad11c5742aafd7b9f83baf36432"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
-      "sha256": "bcb2a50dc7cf69c445fad49d34eac521bc265099e32aad22dfae008352a2a417"
+      "sha256": "2b8940aefcecc3672eb640a829939c3e0303f9851140e2628393bc69a7641d86"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
-      "sha256": "9d1b077a0a43545510fdaca87eb8e796fe5e1420bb68b93f253b07d43b9165ac"
+      "sha256": "109b361634191bfad0b8d9747bbc156685ddc90dfc3a5da783e23b7a55cb6085"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
-      "sha256": "b4284f725061e19d76e1d5c1ed062bd9f8e3e2a9df5f4496dfb67833c16ecd8f"
+      "sha256": "e2ff5261680b68df3f7e1c531d0050c64297dd2c5788fbe7e724b261a3675c01"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/s3/object_catalog.s",
-      "sha256": "b53e59fd4bb4a8d80900ae2c89b423e131d88f0ce0d80ae02dfa6add72e15121"
+      "sha256": "f39adbda26daa60562b1da2af8bb8673f46cfdfbd6e98e8365ac196b76ce91b2"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
-      "sha256": "277d4337103ded18ee454e9bdd276847911450900224c6f6f9aa54747ca74d84"
+      "sha256": "6327ce7aafc54166a8423e5da74ec16dfd61ee47e0ead22748c2f384fa7eb4b1"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
-      "sha256": "cc678e3f0dfa1af92cb09e584ab07fc840d06e8135f9abef4e0e99e629dc0e1e"
+      "sha256": "dd2f6abd813c019407bc446c6b875b80aa996143091669d9a775504b2b65ca9e"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
-      "sha256": "af235a2585e5c1e7a25da181c1ffc6154c6e47bcaf0855326d03cdc13716e7a3"
+      "sha256": "481bcb2b2393fd7b9213111798d119a0362d0560c4119f6d78069fb10a8d7596"
     },
     {
       "path": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
-      "sha256": "f3b55e7f2431292887c898093e553cc1f3f84699cb288ff9d2f43a8f304a63f2"
+      "sha256": "1c1082103416826f64c7fe7b7421cd5c85e557e1d8d06c3092aaad9e1b4e02dd"
     },
     {
       "path": "src/objects/bosses/common/s3/robotnik_heads.s",
@@ -1728,13 +1728,13 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
-      "symbol": "byte_4C8E4",
-      "scope": "byte_4C8E4",
+      "symbol": "CNZBossMagnet_RawFrameDelayScript",
+      "scope": "CNZBossMagnet_RawFrameDelayScript",
       "first_line": 66,
       "last_line": 99,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 58,
-      "declarations_sha256": "326a6a4a761deef9cc57fda740f285a17747c4afce4c7acda26ee2c55573cfc0",
+      "declarations_sha256": "0c49091e5444e14c9f49de494b4cd5885ee609594b09f3f5ac430bc8fb5e6b60",
       "entries": [
         [0, "pairs"],
         [15, "pairs"],
@@ -1744,18 +1744,24 @@
         [54, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_4C8E4", "byte_4C8F3", "byte_4C902", "byte_4C908", "byte_4C911"],
+      "members": [
+        "CNZBossMagnet_RawFrameDelayScript",
+        "CNZBossCore_RawFrameDelayScript",
+        "CNZBossS3_CallbackAnimation",
+        "CNZBossS3_LegacyShortDelayAnim",
+        "CNZBossS3_LegacyLongDelayAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_6EE0E",
-      "scope": "byte_6EE0E",
+      "symbol": "CNZBossMagnet_RawFrameDelayScript",
+      "scope": "CNZBossMagnet_RawFrameDelayScript",
       "first_line": 66,
       "last_line": 99,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 58,
-      "declarations_sha256": "8c9f3b42984e23043c477db2a3272a72f0f3e6cbba3fa087e3dff74f180efb98",
+      "declarations_sha256": "84ca891ff5abd1daf6c2a201273b120695527ee7a80926eaeeea416c344e8b79",
       "entries": [
         [0, "pairs"],
         [15, "pairs"],
@@ -1765,7 +1771,13 @@
         [54, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_6EE0E", "byte_6EE1D", "byte_6EE2C", "byte_6EE32", "byte_6EE3B"],
+      "members": [
+        "CNZBossMagnet_RawFrameDelayScript",
+        "CNZBossCore_RawFrameDelayScript",
+        "CNZBossSK_CallbackAnimation",
+        "CNZBossSK_LegacyShortDelayAnim",
+        "CNZBossSK_LegacyLongDelayAnim"
+      ],
       "stored_markers": []
     },
     {

@@ -41,7 +41,7 @@ Child1_CNZMinibossTimedSparks:
                 dc.l    Obj_CNZMinibossTimedSparks
                 dc.b    $14, $18
                 dc.w    1-1
-                dc.l    loc_6DEDE
+                dc.l    CNZMiniSK_InitAuxiliaryTouchActor
                 dc.b    0,  -4
 Child1_CNZCoilOpenSparks:
                 dc.w    3-1
@@ -147,7 +147,7 @@ PalSPtr_CNZMinibossOpen:
                 palscriptdata 3, $020
                 palscriptrept
 ; ---------------------------------------------------------------------------
-word_6E46E:
+CNZEndBoss_ActivationCameraBounds:
                 dc.w    0,  $300, $4660, $4860
-word_6E476:
+CNZEndBoss_ArenaTransitionBounds:
                 dc.w    $240,  $240, $4760, $47E0

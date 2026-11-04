@@ -1,0 +1,3848 @@
+{
+  "schema_version": 1,
+  "packet": "39-boss-cnz",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 25,
+      "old": "word_4BFEC",
+      "new": "CNZEndBoss_ActivationCameraBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four WORD bounds used to gate the S3 boss initializer on camera location."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 29,
+      "old": "loc_4BFF4",
+      "new": "CNZEndBoss_WaitForArenaAndMusic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Delegate the CNZ pre-battle actor update to the shared arena/music readiness protocol."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 33,
+      "old": "loc_4BFFA",
+      "new": "CNZEndBoss_InstallBattleUpdate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install the steady CNZ battle update after the shared readiness callback completes."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 36,
+      "old": "locret_4C000",
+      "new": "CNZEndBoss_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from callback installation or one of the existing early-exit branches in the CNZ battle logic."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 40,
+      "old": "loc_4C002",
+      "new": "CNZBossS3_BattleDispatchAndInteract",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Dispatch the current CNZ boss routine, then update magnet/player interaction, hits and sprite collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 49,
+      "old": "off_4C01C",
+      "new": "CNZEndBoss_StateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Eight relative WORD offsets for the CNZ boss state dispatcher."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 60,
+      "old": "loc_4C02C",
+      "new": "CNZEndBoss_InitializeBattleActors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the active battle actor and its coordinated ship, dropped core and magnets."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 74,
+      "old": "loc_4C06A",
+      "new": "CNZEndBoss_CreateCoreAndMagnetChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Continue battle initialization with the core and repeated magnet child records."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 81,
+      "old": "loc_4C07A",
+      "new": "CNZEndBoss_HoverDuringInitialDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move and bob during the initial timer before entering pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 87,
+      "old": "loc_4C088",
+      "new": "CNZEndBoss_ResetSwingAndBeginPursuit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reinitialize bobbing when returning from core retrieval, then enter timed pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 90,
+      "old": "loc_4C08C",
+      "new": "CNZEndBoss_BeginTimedPlayerPursuit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the timed horizontal player-following state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 97,
+      "old": "loc_4C0A2",
+      "new": "CNZBossS3_PursueNearestPlayerX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose horizontal pursuit direction toward the nearer player outside the original dead zone."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 109,
+      "old": "loc_4C0C6",
+      "new": "CNZEndBoss_StorePursuitXVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit the already selected pursuit velocity before the shared motion tail."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 112,
+      "old": "loc_4C0CA",
+      "new": "CNZEndBoss_BobMoveAndWaitForCoreDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared movement/timer tail of horizontal pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 116,
+      "old": "loc_4C0D0",
+      "new": "CNZEndBoss_RequestCoreDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "End pursuit and signal the attached core to drop."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 123,
+      "old": "loc_4C0E2",
+      "new": "CNZEndBoss_HoverUntilCoreSettles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Keep bobbing while the dropped core has not reported settling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 131,
+      "old": "loc_4C0F6",
+      "new": "CNZEndBoss_BeginCoreHorizontalAlignment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch from drop waiting to alignment over the settled core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 137,
+      "old": "loc_4C102",
+      "new": "CNZEndBoss_AlignHorizontallyOverCore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Bob and move the boss one pixel toward the settled core X coordinate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 151,
+      "old": "loc_4C12A",
+      "new": "CNZEndBoss_StepLeftTowardCore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move left by one pixel while horizontally aligning with the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 158,
+      "old": "loc_4C138",
+      "new": "CNZEndBoss_BeginMagnetActivationDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start the timed magnet sequence after reaching the core X coordinate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 166,
+      "old": "loc_4C154",
+      "new": "CNZEndBoss_WaitForMagnetPhaseCallback",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run the timer callback chain while the magnet sequence is active."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 170,
+      "old": "loc_4C158",
+      "new": "CNZBossS3_EnableMagnetAndSpawnSparks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Enable the boss attraction field and spawn its two electric effects."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 178,
+      "old": "loc_4C174",
+      "new": "CNZBossS3_StopMagnetAndBeginRelease",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Disable attraction and start the release delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 186,
+      "old": "loc_4C190",
+      "new": "CNZEndBoss_BeginCoreRetrievalDescent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Leave the timed magnet chain and begin moving down toward the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 193,
+      "old": "loc_4C1A4",
+      "new": "CNZEndBoss_DescendTowardCore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Lower the boss toward twenty pixels above the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 205,
+      "old": "loc_4C1C0",
+      "new": "CNZEndBoss_BeginAscentWithCore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Signal core reattachment and start ascent after the lowering threshold."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 211,
+      "old": "loc_4C1CE",
+      "new": "CNZEndBoss_AscendToSavedHoverHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Raise the boss one pixel per update toward its original Y."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 220,
+      "old": "loc_4C1E0",
+      "new": "CNZBossS3_ClampHoverAndResumePursuit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Restore the exact saved hover height before restarting the attack cycle."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 225,
+      "old": "loc_4C1EA",
+      "new": "CNZEndBoss_BeginDefeatBreakup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start S3 defeat breakup and music fade with an explicit delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 237,
+      "old": "loc_4C21A",
+      "new": "CNZEndBoss_OpenArenaExitAfterDefeat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start the S3 post-defeat camera extension."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 247,
+      "old": "loc_4C240",
+      "new": "CNZBossS3_RestoreControlsForExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait for S3 camera-limit extension to finish, then restore both players and advance bounds."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 264,
+      "old": "loc_4C28C",
+      "new": "CNZBossS3_SpawnCannonAtExitGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attempt to spawn the post-boss exit cannon once Player1 reaches X0x4A30."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 278,
+      "old": "locret_4C2C8",
+      "new": "CNZEndBoss_ReturnFromExitCannonAttempt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared return for the exit cannon threshold and allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 282,
+      "old": "loc_4C2CA",
+      "new": "CNZEndBoss_WaitForExitCannonOccupancy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait for S3 exit cannon occupancy before beginning the launch delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 294,
+      "old": "loc_4C2F4",
+      "new": "CNZBossS3_TriggerTimedCannonJump",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Inject a jump when the post-entry delay has expired and the cannon points at angle0x12."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 306,
+      "old": "loc_4C31C",
+      "new": "CNZBossS3_StartIceCapAtScreenTop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start level0x500 when Player1 has risen to the camera top margin."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 316,
+      "old": "loc_4C33C",
+      "new": "CNZBossCore_DispatchStateAndHandleDefeat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Update the dropped core state, parent defeat response and sprite contacts."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 324,
+      "old": "off_4C352",
+      "new": "CNZBossCore_StateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Six relative WORD state offsets for the boss core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 333,
+      "old": "loc_4C35E",
+      "new": "CNZBossCore_Initialize",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the dropped core descriptor, floor radius and animation pointer."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 341,
+      "old": "loc_4C376",
+      "new": "CNZBossCore_FollowParentUntilDropRequest",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow the parent attachment point until it requests a core drop."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 349,
+      "old": "loc_4C388",
+      "new": "CNZBossCore_BeginDropTowardNearestPlayer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch the core to gravity movement with floor-bounce callback."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 358,
+      "old": "loc_4C3A4",
+      "new": "CNZBossCore_StoreDropXVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Store the horizontal velocity chosen for a dropped core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 363,
+      "old": "loc_4C3AA",
+      "new": "CNZBossCore_FallAndCheckFloor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move the dropped core under gravity and test floor contact only during descent."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 370,
+      "old": "loc_4C3BC",
+      "new": "CNZBossCore_BounceOrReportSettled",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Handle core floor impact with a diminishing bounce or settling report."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 382,
+      "old": "loc_4C3D8",
+      "new": "CNZBossCore_ReportSettledToParent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Expose the settled core pointer to the boss and clear its drop-wait flag."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 390,
+      "old": "loc_4C3EE",
+      "new": "CNZBossCore_WaitForMagnetActivation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait until parent bit3 starts the activation phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 397,
+      "old": "loc_4C3FC",
+      "new": "CNZBossCore_BeginActivationAnimation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the core activation animation state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 402,
+      "old": "loc_4C404",
+      "new": "CNZBossCore_AnimateWhileParentActive",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate the core while the parent magnet phase bit is set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 409,
+      "old": "loc_4C414",
+      "new": "CNZBossS3_EndActivationAndResetAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Restore the inactive core frame and prepare for reattachment."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 415,
+      "old": "loc_4C424",
+      "new": "CNZBossCore_ConsumeReattachmentSignal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait for and consume the parent signal used for reattachment."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 422,
+      "old": "loc_4C432",
+      "new": "CNZBossCore_ResumeParentAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return the core to the parent-following state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 427,
+      "old": "loc_4C43A",
+      "new": "CNZBossCoreFragment_Initialize",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a core fragment spawned on parent defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 435,
+      "old": "loc_4C454",
+      "new": "CNZBossCoreFragment_SetIndexedVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the core fragment velocity group."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 440,
+      "old": "loc_4C45C",
+      "new": "CNZBossS3_OrbitDispatchAndMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Dispatch a magnet child, project its orbital position, and update frame/depth/defeat handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 452,
+      "old": "off_4C484",
+      "new": "CNZBossMagnet_StateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Seven relative WORD offsets for magnet initialization and phase control."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 462,
+      "old": "loc_4C492",
+      "new": "CNZBossS3_InitOrbitPhaseAndAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a magnet child phase from its sequential subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 472,
+      "old": "loc_4C4AE",
+      "new": "CNZBossMagnet_WaitForParentActivation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait for parent+0x38 bit3 before spinning up."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 479,
+      "old": "loc_4C4BC",
+      "new": "CNZBossMagnet_BeginAcceleration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start magnet acceleration and save the phase to restore later."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 488,
+      "old": "loc_4C4DE",
+      "new": "CNZBossS3_AccelerateBeforeAttraction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance magnet phase with a periodically increasing rate until parent attraction is enabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 498,
+      "old": "loc_4C4FA",
+      "new": "CNZBossS3_SpawnElectricChildAndHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Spawn the magnet electric child and switch to sustained attraction."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 506,
+      "old": "loc_4C510",
+      "new": "CNZBossMagnet_IncreasePhaseRate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Timer callback that raises magnet angular rate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 512,
+      "old": "loc_4C51C",
+      "new": "CNZBossMagnet_SustainAttractionSpin",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Maintain phase movement while parent attraction bit2 stays set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 521,
+      "old": "loc_4C534",
+      "new": "CNZBossMagnet_BeginDeceleration",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start the magnet slowdown after attraction ends."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 529,
+      "old": "loc_4C550",
+      "new": "CNZBossMagnet_DecelerateWithTimer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Continue phase updates and animation while waiting for slowdown callbacks."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 536,
+      "old": "loc_4C560",
+      "new": "CNZBossMagnet_DecreasePhaseRateOrFinish",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Timer callback that decreases angular rate until it reaches one."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 544,
+      "old": "loc_4C574",
+      "new": "CNZBossMagnet_BeginSavedPhaseReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finish deceleration and select unit-step phase return."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 550,
+      "old": "loc_4C582",
+      "new": "CNZBossMagnet_ReturnToSavedPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance phase at one step per update until the saved starting phase is reached."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 560,
+      "old": "loc_4C598",
+      "new": "CNZBossMagnet_WaitAtSavedPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the magnet state that waits for parent deactivation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 565,
+      "old": "loc_4C5A0",
+      "new": "CNZBossS3_AnimateUntilParentStops",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Keep animating at the saved phase while parent bit3 remains set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 572,
+      "old": "loc_4C5B0",
+      "new": "CNZBossMagnet_ResetForNextActivation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Restore the magnet inactive frame and activation-wait state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 576,
+      "old": "loc_4C5BC",
+      "new": "CNZBossChildren_ResetRawAnimationCursor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Clear the raw animation cursor and timer for magnet/core reset paths."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 582,
+      "old": "loc_4C5C6",
+      "new": "CNZBossElectricEffect_Initialize",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize S3 boss/magnet electric effect and its subtype-delayed updater."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 594,
+      "old": "loc_4C5F6",
+      "new": "CNZBossS3_InstallActiveFollow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install the normal electric effect updater and check parent lifetime."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 599,
+      "old": "loc_4C600",
+      "new": "CNZBossS3_ActiveFollowAnimateTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Update the attached electric effect with sound, animation and contact handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 608,
+      "old": "loc_4C618",
+      "new": "CNZBossS3_CycleFrameNineFlips",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animation callback that holds frame9 and cycles the two render flip bits."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 630,
+      "old": "loc_4C666",
+      "new": "CNZBossS3_SelectLegacyShortAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select the retained legacy subtype-zero animation script."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 633,
+      "old": "loc_4C66E",
+      "new": "CNZBossS3_InstallLegacyFollow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install the retained alternate electric effect updater."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 638,
+      "old": "loc_4C678",
+      "new": "CNZBossS3_LegacyFollowAndAnimate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retained alternate electric updater using per-frame delays."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "original_line": 645,
+      "old": "loc_4C688",
+      "new": "CNZBossShellFragment_InitializeAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the two outer boss shell fragments after defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 14,
+      "old": "locret_4C6C8",
+      "new": "CNZBossMagnet_ReturnAfterDepthSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared return after magnet sprite-priority selection."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 27,
+      "old": "loc_4C6DC",
+      "new": "CNZBossMagnet_FindPhaseFrameBand",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Loop over five upper-bound/frame pairs for the magnet phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 35,
+      "old": "loc_4C6E8",
+      "new": "CNZBossMagnet_ApplyPhaseBandFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply the frame byte of the first matching magnet phase band."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 38,
+      "old": "locret_4C6EC",
+      "new": "CNZBossS3_PhaseFrameReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return without further magnet frame changes."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 43,
+      "old": "byte_4C6EE",
+      "new": "CNZBossMagnet_PhaseFrameBands",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Five BYTE upper-bound/frame pairs for magnet phase projection."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 62,
+      "old": "loc_4C70E",
+      "new": "CNZBossElectricEffect_DeleteForParentEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Delete an electric child when its parent has ended the effect or entered defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 74,
+      "old": "loc_4C71E",
+      "new": "CNZEndBoss_ApplyAttractionToBothPlayers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run player attraction for Player1 and Player2 while boss field bit2 is enabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 89,
+      "old": "loc_4C738",
+      "new": "CNZBossS3_QuantizeMagnetDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Bucket absolute player distance for the attraction displacement table."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 95,
+      "old": "loc_4C746",
+      "new": "CNZBossS3_LoadSignedMagnetPull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Load and orient the player attraction displacement for the selected distance bucket."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 102,
+      "old": "loc_4C752",
+      "new": "CNZEndBoss_ApplyAttractionXDisplacement",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply the selected signed fixed-point attraction directly to player X."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 108,
+      "old": "dword_4C758",
+      "new": "CNZBossS3_MagnetPullByDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Eight LONG fixed-point X displacements indexed by64-pixel distance bands."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 133,
+      "old": "loc_4C79C",
+      "new": "CNZEndBoss_SelectHitFlashPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Continue or start the hit-flash palette update while collision is disabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 140,
+      "old": "loc_4C7AE",
+      "new": "CNZEndBoss_CopyHitFlashAndCountDown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy four selected hit-flash colors and finish invulnerability when timer expires."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 149,
+      "old": "locret_4C7CE",
+      "new": "CNZEndBoss_ReturnFromHitOrDefeatCheck",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared return for no collision event and ongoing or completed hit flash."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 153,
+      "old": "loc_4C7D0",
+      "new": "CNZEndBoss_InstallDefeatWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Install the engine-specific wait before CNZ boss breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 160,
+      "old": "word_4C7E4",
+      "new": "CNZEndBoss_HitFlashPaletteDestinations",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Four destination RAM WORD addresses for the boss hit-flash colors."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 162,
+      "old": "word_4C7EC",
+      "new": "CNZEndBoss_HitFlashColorSets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two sets of four palette WORD colors selected by hit-timer parity."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 174,
+      "old": "loc_4C80C",
+      "new": "CNZBossCore_CheckParentBreakupFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Test the parent breakup signal after any status-based collision suppression."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 180,
+      "old": "loc_4C816",
+      "new": "CNZBossCore_SpawnDefeatFragments",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Replace the core actor by deletion and attempt to create two core fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 194,
+      "old": "loc_4C834",
+      "new": "CNZBossMagnet_CheckParentBreakupFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Test the parent breakup signal after optional magnet collision suppression."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "original_line": 200,
+      "old": "loc_4C83E",
+      "new": "CNZBossMagnet_DetachIntoDefeatMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Detach a magnet into the existing flicker/movement actor on boss breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 15,
+      "old": "ObjDat3_4C872",
+      "new": "CNZBossCore_Attributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full12-byte object attributes for the dropped core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 20,
+      "old": "word_4C87E",
+      "new": "CNZBossCoreFragment_PartialAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Six-byte attributes3 record for core fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 23,
+      "old": "word_4C884",
+      "new": "CNZBossShellFragment_PartialAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Six-byte attributes3 record for outer boss fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 26,
+      "old": "ObjDat3_4C88A",
+      "new": "CNZBossMagnet_Attributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full12-byte attributes for magnet orbiting children."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 31,
+      "old": "ObjDat3_4C896",
+      "new": "CNZBossElectricEffect_Attributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full12-byte attributes shared by active and retained alternate electric effects."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 36,
+      "old": "ChildObjDat_4C8A2",
+      "new": "CNZEndBoss_CoreChildRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Child1 record that creates one attached core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 40,
+      "old": "ChildObjDat_4C8AA",
+      "new": "CNZEndBoss_RepeatedMagnetChildRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Repeated-child record that creates four magnets from one shared entry."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 44,
+      "old": "ChildObjDat_4C8B2",
+      "new": "CNZBossMagnet_ElectricChildRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Child1 record for one electric effect below a magnet."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 48,
+      "old": "ChildObjDat_4C8BA",
+      "new": "CNZEndBoss_ElectricPairChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two child1 electric effect records beneath the main boss."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 54,
+      "old": "ChildObjDat_4C8C8",
+      "new": "CNZBossCore_FragmentChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two child1 core-fragment records on core breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 60,
+      "old": "ChildObjDat_4C8D6",
+      "new": "CNZEndBoss_ShellFragmentChildRecords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two child1 shell-fragment records for boss defeat breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 66,
+      "old": "byte_4C8E4",
+      "new": "CNZBossMagnet_RawFrameDelayScript",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Per-frame-delay raw animation stream for magnet children."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 75,
+      "old": "byte_4C8F3",
+      "new": "CNZBossCore_RawFrameDelayScript",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Per-frame-delay raw animation stream used while the dropped core is active."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_4C902",
+      "new": "CNZBossS3_CallbackAnimation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniform-delay raw animation stream ending with the electric flip callback."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 86,
+      "old": "byte_4C908",
+      "new": "CNZBossS3_LegacyShortDelayAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retained alternate electric frame/delay stream with the shorter initial delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "original_line": 92,
+      "old": "byte_4C911",
+      "new": "CNZBossS3_LegacyLongDelayAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retained alternate electric frame/delay stream with the longer initial delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 20,
+      "old": "loc_6E4B8",
+      "new": "CNZEndBoss_WaitForArenaAndMusic",
+      "profiles": ["sk"],
+      "meaning": "Delegate the CNZ pre-battle actor update to the shared arena/music readiness protocol."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 24,
+      "old": "loc_6E4BE",
+      "new": "CNZEndBoss_InstallBattleUpdate",
+      "profiles": ["sk"],
+      "meaning": "Install the steady CNZ battle update after the shared readiness callback completes."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 27,
+      "old": "locret_6E4C4",
+      "new": "CNZEndBoss_Return",
+      "profiles": ["sk"],
+      "meaning": "Return from callback installation or one of the existing early-exit branches in the CNZ battle logic."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 31,
+      "old": "loc_6E4C6",
+      "new": "CNZBossSK_BattleDispatchAndInteract",
+      "profiles": ["sk"],
+      "meaning": "Dispatch the current CNZ boss routine, then update magnet/player interaction, hits and sprite collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 40,
+      "old": "off_6E4E2",
+      "new": "CNZEndBoss_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eight relative WORD offsets for the CNZ boss state dispatcher."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 51,
+      "old": "loc_6E4F2",
+      "new": "CNZEndBoss_InitializeBattleActors",
+      "profiles": ["sk"],
+      "meaning": "Initialize the active battle actor and its coordinated ship, dropped core and magnets."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 65,
+      "old": "loc_6E534",
+      "new": "CNZEndBoss_CreateCoreAndMagnetChildren",
+      "profiles": ["sk"],
+      "meaning": "Continue battle initialization with the core and repeated magnet child records."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 72,
+      "old": "loc_6E548",
+      "new": "CNZEndBoss_HoverDuringInitialDelay",
+      "profiles": ["sk"],
+      "meaning": "Move and bob during the initial timer before entering pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 78,
+      "old": "loc_6E55A",
+      "new": "CNZEndBoss_ResetSwingAndBeginPursuit",
+      "profiles": ["sk"],
+      "meaning": "Reinitialize bobbing when returning from core retrieval, then enter timed pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 81,
+      "old": "loc_6E55E",
+      "new": "CNZEndBoss_BeginTimedPlayerPursuit",
+      "profiles": ["sk"],
+      "meaning": "Select the timed horizontal player-following state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 88,
+      "old": "loc_6E574",
+      "new": "CNZBossSK_PursueNearestPlayerX",
+      "profiles": ["sk"],
+      "meaning": "Choose horizontal pursuit direction toward the nearer player outside the original dead zone."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 100,
+      "old": "loc_6E59A",
+      "new": "CNZEndBoss_StorePursuitXVelocity",
+      "profiles": ["sk"],
+      "meaning": "Commit the already selected pursuit velocity before the shared motion tail."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 103,
+      "old": "loc_6E59E",
+      "new": "CNZEndBoss_BobMoveAndWaitForCoreDrop",
+      "profiles": ["sk"],
+      "meaning": "Shared movement/timer tail of horizontal pursuit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 107,
+      "old": "loc_6E5A4",
+      "new": "CNZEndBoss_RequestCoreDrop",
+      "profiles": ["sk"],
+      "meaning": "End pursuit and signal the attached core to drop."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 114,
+      "old": "loc_6E5B6",
+      "new": "CNZEndBoss_HoverUntilCoreSettles",
+      "profiles": ["sk"],
+      "meaning": "Keep bobbing while the dropped core has not reported settling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 122,
+      "old": "loc_6E5CC",
+      "new": "CNZEndBoss_BeginCoreHorizontalAlignment",
+      "profiles": ["sk"],
+      "meaning": "Switch from drop waiting to alignment over the settled core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 128,
+      "old": "loc_6E5D8",
+      "new": "CNZEndBoss_AlignHorizontallyOverCore",
+      "profiles": ["sk"],
+      "meaning": "Bob and move the boss one pixel toward the settled core X coordinate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 142,
+      "old": "loc_6E602",
+      "new": "CNZEndBoss_StepLeftTowardCore",
+      "profiles": ["sk"],
+      "meaning": "Move left by one pixel while horizontally aligning with the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 149,
+      "old": "loc_6E610",
+      "new": "CNZEndBoss_BeginMagnetActivationDelay",
+      "profiles": ["sk"],
+      "meaning": "Start the timed magnet sequence after reaching the core X coordinate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 157,
+      "old": "loc_6E62C",
+      "new": "CNZEndBoss_WaitForMagnetPhaseCallback",
+      "profiles": ["sk"],
+      "meaning": "Run the timer callback chain while the magnet sequence is active."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 161,
+      "old": "loc_6E632",
+      "new": "CNZBossSK_EnableMagnetAndSpawnSparks",
+      "profiles": ["sk"],
+      "meaning": "Enable the boss attraction field and spawn its two electric effects."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 169,
+      "old": "loc_6E650",
+      "new": "CNZBossSK_StopMagnetAndBeginRelease",
+      "profiles": ["sk"],
+      "meaning": "Disable attraction and start the release delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 177,
+      "old": "loc_6E66C",
+      "new": "CNZEndBoss_BeginCoreRetrievalDescent",
+      "profiles": ["sk"],
+      "meaning": "Leave the timed magnet chain and begin moving down toward the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 184,
+      "old": "loc_6E680",
+      "new": "CNZEndBoss_DescendTowardCore",
+      "profiles": ["sk"],
+      "meaning": "Lower the boss toward twenty pixels above the core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 196,
+      "old": "loc_6E69C",
+      "new": "CNZEndBoss_BeginAscentWithCore",
+      "profiles": ["sk"],
+      "meaning": "Signal core reattachment and start ascent after the lowering threshold."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 202,
+      "old": "loc_6E6AA",
+      "new": "CNZEndBoss_AscendToSavedHoverHeight",
+      "profiles": ["sk"],
+      "meaning": "Raise the boss one pixel per update toward its original Y."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 211,
+      "old": "loc_6E6BC",
+      "new": "CNZBossSK_ClampHoverAndResumePursuit",
+      "profiles": ["sk"],
+      "meaning": "Restore the exact saved hover height before restarting the attack cycle."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 216,
+      "old": "loc_6E6C6",
+      "new": "CNZEndBoss_BeginDefeatBreakup",
+      "profiles": ["sk"],
+      "meaning": "Start S&K defeat breakup after the existing fade/music wait chain."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 224,
+      "old": "loc_6E6E4",
+      "new": "CNZEndBoss_OpenArenaExitAfterDefeat",
+      "profiles": ["sk"],
+      "meaning": "Start the S&K post-defeat camera extension and attempt to spawn the capsule."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 237,
+      "old": "loc_6E718",
+      "new": "CNZBossSK_SpawnArenaExitCamera",
+      "profiles": ["sk"],
+      "meaning": "Shared continuation after the S&K EggCapsule allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 242,
+      "old": "loc_6E724",
+      "new": "CNZBossSK_RestoreControlsForExit",
+      "profiles": ["sk"],
+      "meaning": "Wait for S&K camera-limit extension, restore both players/music and advance bounds."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 261,
+      "old": "loc_6E778",
+      "new": "CNZBossSK_SpawnCannonAtExitGate",
+      "profiles": ["sk"],
+      "meaning": "Attempt to spawn the post-boss exit cannon once Player1 reaches X0x4A30."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 275,
+      "old": "locret_6E7B4",
+      "new": "CNZEndBoss_ReturnFromExitCannonAttempt",
+      "profiles": ["sk"],
+      "meaning": "Shared return for the exit cannon threshold and allocation attempt."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 279,
+      "old": "loc_6E7B6",
+      "new": "CNZEndBoss_WaitForExitCannonOccupancy",
+      "profiles": ["sk"],
+      "meaning": "Wait for S&K exit cannon occupancy, begin launch delay and lock input."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 292,
+      "old": "loc_6E7E4",
+      "new": "CNZBossSK_TriggerTimedCannonJump",
+      "profiles": ["sk"],
+      "meaning": "Inject a jump when the post-entry delay has expired and the cannon points at angle0x12."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 304,
+      "old": "loc_6E80C",
+      "new": "CNZBossSK_StartIceCapAtScreenTop",
+      "profiles": ["sk"],
+      "meaning": "Start level0x500 when Player1 has risen to the camera top margin."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 314,
+      "old": "loc_6E82C",
+      "new": "CNZBossCore_DispatchStateAndHandleDefeat",
+      "profiles": ["sk"],
+      "meaning": "Update the dropped core state, parent defeat response and sprite contacts."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 322,
+      "old": "off_6E844",
+      "new": "CNZBossCore_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD state offsets for the boss core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 331,
+      "old": "loc_6E850",
+      "new": "CNZBossCore_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the dropped core descriptor, floor radius and animation pointer."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 339,
+      "old": "loc_6E86A",
+      "new": "CNZBossCore_FollowParentUntilDropRequest",
+      "profiles": ["sk"],
+      "meaning": "Follow the parent attachment point until it requests a core drop."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 347,
+      "old": "loc_6E87E",
+      "new": "CNZBossCore_BeginDropTowardNearestPlayer",
+      "profiles": ["sk"],
+      "meaning": "Switch the core to gravity movement with floor-bounce callback."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 356,
+      "old": "loc_6E89C",
+      "new": "CNZBossCore_StoreDropXVelocity",
+      "profiles": ["sk"],
+      "meaning": "Store the horizontal velocity chosen for a dropped core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 361,
+      "old": "loc_6E8A2",
+      "new": "CNZBossCore_FallAndCheckFloor",
+      "profiles": ["sk"],
+      "meaning": "Move the dropped core under gravity and test floor contact only during descent."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 368,
+      "old": "loc_6E8B6",
+      "new": "CNZBossCore_BounceOrReportSettled",
+      "profiles": ["sk"],
+      "meaning": "Handle core floor impact with a diminishing bounce or settling report."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 380,
+      "old": "loc_6E8D2",
+      "new": "CNZBossCore_ReportSettledToParent",
+      "profiles": ["sk"],
+      "meaning": "Expose the settled core pointer to the boss and clear its drop-wait flag."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 388,
+      "old": "loc_6E8E8",
+      "new": "CNZBossCore_WaitForMagnetActivation",
+      "profiles": ["sk"],
+      "meaning": "Wait until parent bit3 starts the activation phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 395,
+      "old": "loc_6E8F6",
+      "new": "CNZBossCore_BeginActivationAnimation",
+      "profiles": ["sk"],
+      "meaning": "Select the core activation animation state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 400,
+      "old": "loc_6E8FE",
+      "new": "CNZBossCore_AnimateWhileParentActive",
+      "profiles": ["sk"],
+      "meaning": "Animate the core while the parent magnet phase bit is set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 407,
+      "old": "loc_6E910",
+      "new": "CNZBossSK_EndActivationAndResetAnim",
+      "profiles": ["sk"],
+      "meaning": "Restore the inactive core frame and prepare for reattachment."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 413,
+      "old": "loc_6E920",
+      "new": "CNZBossCore_ConsumeReattachmentSignal",
+      "profiles": ["sk"],
+      "meaning": "Wait for and consume the parent signal used for reattachment."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 420,
+      "old": "loc_6E92E",
+      "new": "CNZBossCore_ResumeParentAttachment",
+      "profiles": ["sk"],
+      "meaning": "Return the core to the parent-following state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 425,
+      "old": "loc_6E936",
+      "new": "CNZBossCoreFragment_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize a core fragment spawned on parent defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 433,
+      "old": "loc_6E952",
+      "new": "CNZBossCoreFragment_SetIndexedVelocity",
+      "profiles": ["sk"],
+      "meaning": "Select the core fragment velocity group."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 438,
+      "old": "loc_6E95A",
+      "new": "CNZBossSK_OrbitDispatchAndMove",
+      "profiles": ["sk"],
+      "meaning": "Dispatch a magnet child, project its orbital position, and update frame/depth/defeat handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 450,
+      "old": "off_6E986",
+      "new": "CNZBossMagnet_StateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Seven relative WORD offsets for magnet initialization and phase control."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 460,
+      "old": "loc_6E994",
+      "new": "CNZBossSK_InitOrbitPhaseAndAnim",
+      "profiles": ["sk"],
+      "meaning": "Initialize a magnet child phase from its sequential subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 470,
+      "old": "loc_6E9B2",
+      "new": "CNZBossMagnet_WaitForParentActivation",
+      "profiles": ["sk"],
+      "meaning": "Wait for parent+0x38 bit3 before spinning up."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 477,
+      "old": "loc_6E9C0",
+      "new": "CNZBossMagnet_BeginAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Start magnet acceleration and save the phase to restore later."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 486,
+      "old": "loc_6E9E2",
+      "new": "CNZBossSK_AccelerateBeforeAttraction",
+      "profiles": ["sk"],
+      "meaning": "Advance magnet phase with a periodically increasing rate until parent attraction is enabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 496,
+      "old": "loc_6EA02",
+      "new": "CNZBossSK_SpawnElectricChildAndHold",
+      "profiles": ["sk"],
+      "meaning": "Spawn the magnet electric child and switch to sustained attraction."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 504,
+      "old": "loc_6EA1A",
+      "new": "CNZBossMagnet_IncreasePhaseRate",
+      "profiles": ["sk"],
+      "meaning": "Timer callback that raises magnet angular rate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 510,
+      "old": "loc_6EA26",
+      "new": "CNZBossMagnet_SustainAttractionSpin",
+      "profiles": ["sk"],
+      "meaning": "Maintain phase movement while parent attraction bit2 stays set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 519,
+      "old": "loc_6EA40",
+      "new": "CNZBossMagnet_BeginDeceleration",
+      "profiles": ["sk"],
+      "meaning": "Start the magnet slowdown after attraction ends."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 527,
+      "old": "loc_6EA5C",
+      "new": "CNZBossMagnet_DecelerateWithTimer",
+      "profiles": ["sk"],
+      "meaning": "Continue phase updates and animation while waiting for slowdown callbacks."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 534,
+      "old": "loc_6EA70",
+      "new": "CNZBossMagnet_DecreasePhaseRateOrFinish",
+      "profiles": ["sk"],
+      "meaning": "Timer callback that decreases angular rate until it reaches one."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 542,
+      "old": "loc_6EA84",
+      "new": "CNZBossMagnet_BeginSavedPhaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish deceleration and select unit-step phase return."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 548,
+      "old": "loc_6EA92",
+      "new": "CNZBossMagnet_ReturnToSavedPhase",
+      "profiles": ["sk"],
+      "meaning": "Advance phase at one step per update until the saved starting phase is reached."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 558,
+      "old": "loc_6EAAA",
+      "new": "CNZBossMagnet_WaitAtSavedPhase",
+      "profiles": ["sk"],
+      "meaning": "Select the magnet state that waits for parent deactivation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 563,
+      "old": "loc_6EAB2",
+      "new": "CNZBossSK_AnimateUntilParentStops",
+      "profiles": ["sk"],
+      "meaning": "Keep animating at the saved phase while parent bit3 remains set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 570,
+      "old": "loc_6EAC4",
+      "new": "CNZBossMagnet_ResetForNextActivation",
+      "profiles": ["sk"],
+      "meaning": "Restore the magnet inactive frame and activation-wait state."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 574,
+      "old": "loc_6EAD0",
+      "new": "CNZBossChildren_ResetRawAnimationCursor",
+      "profiles": ["sk"],
+      "meaning": "Clear the raw animation cursor and timer for magnet/core reset paths."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 580,
+      "old": "loc_6EADA",
+      "new": "CNZBossElectricEffect_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize S&K boss/magnet electric effect and its subtype-delayed updater."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 592,
+      "old": "loc_6EB0C",
+      "new": "CNZBossSK_InstallActiveFollow",
+      "profiles": ["sk"],
+      "meaning": "Install the normal electric effect updater and check parent lifetime."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 597,
+      "old": "loc_6EB16",
+      "new": "CNZBossSK_ActiveFollowAnimateTouch",
+      "profiles": ["sk"],
+      "meaning": "Update the attached electric effect with sound, animation and contact handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 606,
+      "old": "loc_6EB34",
+      "new": "CNZBossSK_CycleFrameNineFlips",
+      "profiles": ["sk"],
+      "meaning": "Animation callback that holds frame9 and cycles the two render flip bits."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 628,
+      "old": "loc_6EB84",
+      "new": "CNZBossSK_SelectLegacyShortAnim",
+      "profiles": ["sk"],
+      "meaning": "Select the retained legacy subtype-zero animation script."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 631,
+      "old": "loc_6EB8C",
+      "new": "CNZBossSK_InstallLegacyFollow",
+      "profiles": ["sk"],
+      "meaning": "Install the retained alternate electric effect updater."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 636,
+      "old": "loc_6EB96",
+      "new": "CNZBossSK_LegacyFollowAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "Retained alternate electric updater using per-frame delays."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "original_line": 643,
+      "old": "loc_6EBAC",
+      "new": "CNZBossShellFragment_InitializeAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Initialize the two outer boss shell fragments after defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 14,
+      "old": "locret_6EBEE",
+      "new": "CNZBossMagnet_ReturnAfterDepthSelection",
+      "profiles": ["sk"],
+      "meaning": "Shared return after magnet sprite-priority selection."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 27,
+      "old": "loc_6EC02",
+      "new": "CNZBossMagnet_FindPhaseFrameBand",
+      "profiles": ["sk"],
+      "meaning": "Loop over five upper-bound/frame pairs for the magnet phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 35,
+      "old": "loc_6EC0E",
+      "new": "CNZBossMagnet_ApplyPhaseBandFrame",
+      "profiles": ["sk"],
+      "meaning": "Apply the frame byte of the first matching magnet phase band."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 38,
+      "old": "locret_6EC12",
+      "new": "CNZBossSK_PhaseFrameReturn",
+      "profiles": ["sk"],
+      "meaning": "Return without further magnet frame changes."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 43,
+      "old": "byte_6EC14",
+      "new": "CNZBossMagnet_PhaseFrameBands",
+      "profiles": ["sk"],
+      "meaning": "Five BYTE upper-bound/frame pairs for magnet phase projection."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 62,
+      "old": "loc_6EC34",
+      "new": "CNZBossElectricEffect_DeleteForParentEnd",
+      "profiles": ["sk"],
+      "meaning": "Delete an electric child when its parent has ended the effect or entered defeat."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 74,
+      "old": "loc_6EC44",
+      "new": "CNZEndBoss_ApplyAttractionToBothPlayers",
+      "profiles": ["sk"],
+      "meaning": "Run player attraction for Player1 and Player2 while boss field bit2 is enabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 89,
+      "old": "loc_6EC5E",
+      "new": "CNZBossSK_QuantizeMagnetDistance",
+      "profiles": ["sk"],
+      "meaning": "Bucket absolute player distance for the attraction displacement table."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 95,
+      "old": "loc_6EC6C",
+      "new": "CNZBossSK_LoadSignedMagnetPull",
+      "profiles": ["sk"],
+      "meaning": "Load and orient the player attraction displacement for the selected distance bucket."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 102,
+      "old": "loc_6EC78",
+      "new": "CNZEndBoss_ApplyAttractionXDisplacement",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected signed fixed-point attraction directly to player X."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 108,
+      "old": "dword_6EC7E",
+      "new": "CNZBossSK_MagnetPullByDistance",
+      "profiles": ["sk"],
+      "meaning": "Eight LONG fixed-point X displacements indexed by64-pixel distance bands."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 133,
+      "old": "loc_6ECC2",
+      "new": "CNZEndBoss_SelectHitFlashPalette",
+      "profiles": ["sk"],
+      "meaning": "Continue or start the hit-flash palette update while collision is disabled."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 140,
+      "old": "loc_6ECD4",
+      "new": "CNZEndBoss_CopyHitFlashAndCountDown",
+      "profiles": ["sk"],
+      "meaning": "Copy four selected hit-flash colors and finish invulnerability when timer expires."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 149,
+      "old": "locret_6ECF4",
+      "new": "CNZEndBoss_ReturnFromHitOrDefeatCheck",
+      "profiles": ["sk"],
+      "meaning": "Shared return for no collision event and ongoing or completed hit flash."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 153,
+      "old": "loc_6ECF6",
+      "new": "CNZEndBoss_InstallDefeatWait",
+      "profiles": ["sk"],
+      "meaning": "Install the engine-specific wait before CNZ boss breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 160,
+      "old": "word_6ED0A",
+      "new": "CNZEndBoss_HitFlashPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Four destination RAM WORD addresses for the boss hit-flash colors."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 162,
+      "old": "word_6ED12",
+      "new": "CNZEndBoss_HitFlashColorSets",
+      "profiles": ["sk"],
+      "meaning": "Two sets of four palette WORD colors selected by hit-timer parity."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 174,
+      "old": "loc_6ED32",
+      "new": "CNZBossCore_CheckParentBreakupFlag",
+      "profiles": ["sk"],
+      "meaning": "Test the parent breakup signal after any status-based collision suppression."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 180,
+      "old": "loc_6ED3C",
+      "new": "CNZBossCore_SpawnDefeatFragments",
+      "profiles": ["sk"],
+      "meaning": "Replace the core actor by deletion and attempt to create two core fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 194,
+      "old": "loc_6ED5C",
+      "new": "CNZBossMagnet_CheckParentBreakupFlag",
+      "profiles": ["sk"],
+      "meaning": "Test the parent breakup signal after optional magnet collision suppression."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "original_line": 200,
+      "old": "loc_6ED66",
+      "new": "CNZBossMagnet_DetachIntoDefeatMotion",
+      "profiles": ["sk"],
+      "meaning": "Detach a magnet into the existing flicker/movement actor on boss breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 15,
+      "old": "ObjDat3_6ED9C",
+      "new": "CNZBossCore_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full12-byte object attributes for the dropped core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 20,
+      "old": "word_6EDA8",
+      "new": "CNZBossCoreFragment_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte attributes3 record for core fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 23,
+      "old": "word_6EDAE",
+      "new": "CNZBossShellFragment_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte attributes3 record for outer boss fragments."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 26,
+      "old": "ObjDat3_6EDB4",
+      "new": "CNZBossMagnet_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full12-byte attributes for magnet orbiting children."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 31,
+      "old": "ObjDat3_6EDC0",
+      "new": "CNZBossElectricEffect_Attributes",
+      "profiles": ["sk"],
+      "meaning": "Full12-byte attributes shared by active and retained alternate electric effects."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 36,
+      "old": "ChildObjDat_6EDCC",
+      "new": "CNZEndBoss_CoreChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Child1 record that creates one attached core."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 40,
+      "old": "ChildObjDat_6EDD4",
+      "new": "CNZEndBoss_RepeatedMagnetChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Repeated-child record that creates four magnets from one shared entry."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 44,
+      "old": "ChildObjDat_6EDDC",
+      "new": "CNZBossMagnet_ElectricChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Child1 record for one electric effect below a magnet."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 48,
+      "old": "ChildObjDat_6EDE4",
+      "new": "CNZEndBoss_ElectricPairChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Two child1 electric effect records beneath the main boss."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 54,
+      "old": "ChildObjDat_6EDF2",
+      "new": "CNZBossCore_FragmentChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Two child1 core-fragment records on core breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 60,
+      "old": "ChildObjDat_6EE00",
+      "new": "CNZEndBoss_ShellFragmentChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Two child1 shell-fragment records for boss defeat breakup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 66,
+      "old": "byte_6EE0E",
+      "new": "CNZBossMagnet_RawFrameDelayScript",
+      "profiles": ["sk"],
+      "meaning": "Per-frame-delay raw animation stream for magnet children."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "byte_6EE1D",
+      "new": "CNZBossCore_RawFrameDelayScript",
+      "profiles": ["sk"],
+      "meaning": "Per-frame-delay raw animation stream used while the dropped core is active."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_6EE2C",
+      "new": "CNZBossSK_CallbackAnimation",
+      "profiles": ["sk"],
+      "meaning": "Uniform-delay raw animation stream ending with the electric flip callback."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 86,
+      "old": "byte_6EE32",
+      "new": "CNZBossSK_LegacyShortDelayAnim",
+      "profiles": ["sk"],
+      "meaning": "Retained alternate electric frame/delay stream with the shorter initial delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "original_line": 92,
+      "old": "byte_6EE3B",
+      "new": "CNZBossSK_LegacyLongDelayAnim",
+      "profiles": ["sk"],
+      "meaning": "Retained alternate electric frame/delay stream with the longer initial delay."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 34,
+      "old": "loc_4BA9E",
+      "new": "CNZMiniS3_ClosedCoilTickStun",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance the closed coil contact latch and eventually restore its collision BYTE."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 40,
+      "old": "loc_4BAB2",
+      "new": "CNZMiniS3_ClosedCoilResetTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Maintain the coil ordinary collision property and register its current hitbox."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 45,
+      "old": "loc_4BABE",
+      "new": "CNZMiniS3_CoilBeginOpenTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch coil collision policy when the parent opens."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 51,
+      "old": "loc_4BACC",
+      "new": "CNZMiniS3_DeleteCoilOrSpark",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared immediate deletion entry for coil and open-spark actors."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 65,
+      "old": "loc_4BAF2",
+      "new": "CNZMiniS3_InitAuxiliaryTouchActor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a separate parent-following actor with AA collision."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 71,
+      "old": "loc_4BB00",
+      "new": "CNZMiniS3_AuxiliaryFollowAndTouch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow the auxiliary collision actor parent and register touch without drawing."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 88,
+      "old": "locret_4BB42",
+      "new": "CNZMiniS3_TimedSparkInitReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after timed-spark attributes, protection-bit and raw-pointer setup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 117,
+      "old": "off_4BB94",
+      "new": "CNZMiniS3_OpenSparkAnimationPointers",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Three LONG raw frame-delay pointers selected by even spark subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 142,
+      "old": "loc_4BBE6",
+      "new": "CNZMiniS3_WallBounceSetDeleteCallback",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finish initializing the fixed-X wall bounce effect raw animation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "original_line": 161,
+      "old": "byte_4BC26",
+      "new": "CNZMiniS3_DebrisPlacementOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Nine signed BYTE debris offsets indexed directly by even subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 13,
+      "old": "loc_4B5B4",
+      "new": "CNZMiniS3_LockArenaAndFadeMusic",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Lock arena bounds after unsigned camera X reaches31E0 hex."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 41,
+      "old": "locret_4B628",
+      "new": "CNZMiniS3_SharedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared RTS for miniboss setup and coil/top countdown gates."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 142,
+      "old": "loc_4B754",
+      "new": "CNZMiniS3_CloseCoilAfterTopHit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Begin closing once boss status6 reports a true top hit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 161,
+      "old": "loc_4B784",
+      "new": "CNZMiniS3_ResumeAfterLoweringPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Restore the previously saved routine after the block-clear lowering pause."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 220,
+      "old": "loc_4B82C",
+      "new": "CNZMiniS3_TopBeginSpinUp",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Switch the attached top into its accelerating animation phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 268,
+      "old": "loc_4B8CC",
+      "new": "CNZMiniS3_TopCheckLeftContacts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Check left-moving top against a wall, fixed left arena edge and boss geometry."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 281,
+      "old": "loc_4B8F6",
+      "new": "CNZMiniS3_TopCheckBounceAndFloor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "After horizontal checks process rolling-player bounce and vertical travel."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 303,
+      "old": "loc_4B93A",
+      "new": "CNZMiniS3_TopCheckCeilingAndBoss",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Check upward-moving top against ceiling penetration and inclusive upper limits."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 319,
+      "old": "loc_4B968",
+      "new": "CNZMiniS3_TopSpawnWallBounceEffect",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Try one normal wall bounce effect before changing top horizontal direction."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 327,
+      "old": "loc_4B97E",
+      "new": "CNZMiniS3_TopReflectXAndChooseImpact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reverse horizontal top velocity and prepare the struck-side sample offset."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 333,
+      "old": "loc_4B988",
+      "new": "CNZMiniS3_TopPublishWallImpact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Publish an interior horizontal block-hit point for the screen event."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 343,
+      "old": "locret_4B9A6",
+      "new": "CNZMiniS3_TopBlockImpactReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared return for block-event geometry rejection and successful horizontal event work."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 347,
+      "old": "loc_4B9A8",
+      "new": "CNZMiniS3_TopReflectAtSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reverse X for fixed horizontal arena bounds or sampled boss contact."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 352,
+      "old": "loc_4B9AE",
+      "new": "CNZMiniS3_TopReflectYAndChooseImpact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reflect vertical top speed and choose the prior vertical travel-side sample."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 359,
+      "old": "loc_4B9BC",
+      "new": "CNZMiniS3_TopPublishVerticalImpact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Publish a vertical block-hit point using the literal original Y upper bound."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 375,
+      "old": "loc_4B9E6",
+      "new": "CNZMiniS3_TopReflectAtVerticalContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reverse Y after a successful player bounce, camera/fixed vertical edge or boss-point hit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 380,
+      "old": "loc_4B9EC",
+      "new": "CNZMiniS3_TopBreakUpOnBossDefeat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retire the top when its parent status7 is set, retaining unchecked allocation-result write."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "original_line": 404,
+      "old": "locret_4BA3A",
+      "new": "CNZMiniS3_BlockExplosionSpawnReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from optional centered block explosion creation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 33,
+      "old": "loc_4BCA0",
+      "new": "CNZMiniS3_TickPlayerTouchSuppression",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance boss ordinary-contact suppression and restore its saved collision."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 39,
+      "old": "locret_4BCB2",
+      "new": "CNZMiniS3_PlayerTouchUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after ordinary player-hit policy gate or timer."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 57,
+      "old": "loc_4BCDA",
+      "new": "CNZMiniS3_TopHitChooseFlashRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select normal versus alternate flash colors while the top-hit latch is set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 63,
+      "old": "loc_4BCE8",
+      "new": "CNZMiniS3_TopHitCopyColorsAndTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy five colors and finish top-hit recovery."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 70,
+      "old": "locret_4BCFC",
+      "new": "CNZMiniS3_TopHitFlashReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return when no top hit is pending or after recovery handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 98,
+      "old": "word_4BD48",
+      "new": "CNZMiniS3_TopHitPaletteDestinations",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Five palette destination WORD addresses for top-hit recovery flash."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 101,
+      "old": "word_4BD52",
+      "new": "CNZMiniS3_TopHitPaletteColorRows",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two disjoint five-WORD color rows selected by recovery parity."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 124,
+      "old": "locret_4BD98",
+      "new": "CNZMiniS3_BlockLoweringCheckReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after detecting whether the cleared-block row amount changed."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 168,
+      "old": "loc_4BDFA",
+      "new": "CNZMiniS3_TopCheckRollerMovingLeft",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "For a negative-X rolling player compare the top horizontal sign."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 172,
+      "old": "loc_4BE00",
+      "new": "CNZMiniS3_TopReflectOpposedX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reverse top horizontal velocity when its sign category opposes the rising roller."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 175,
+      "old": "loc_4BE04",
+      "new": "CNZMiniS3_TopCheckBounceY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose whether caller should reflect the top vertical component."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 180,
+      "old": "locret_4BE0E",
+      "new": "CNZMiniS3_TopBounceAcceptedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return with an accepted bounce result or after the first-player wrapper gate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 184,
+      "old": "loc_4BE10",
+      "new": "CNZMiniS3_TopBounceReject",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return no vertical-bounce request from the rising-roller helper."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 209,
+      "old": "loc_4BE3C",
+      "new": "CNZMiniS3_TopChooseCoilBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Try the coil geometry after the wider base rectangle misses."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 215,
+      "old": "loc_4BE4C",
+      "new": "CNZMiniS3_TopCheckCoilBounds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Test the supplied top sample point against selected parent-relative coil bounds."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 231,
+      "old": "loc_4BE6C",
+      "new": "CNZMiniS3_TopRejectBossContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return a zero D2/Z-set result for a missed boss sample point."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 236,
+      "old": "loc_4BE70",
+      "new": "CNZMiniS3_TopLatchOpenCoilHit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Set the true top-hit latch for any accepted base/coil sample while open."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "original_line": 241,
+      "old": "loc_4BE7C",
+      "new": "CNZMiniS3_TopAcceptBossContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return D2=1/Z-clear for either accepted base or coil point."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 34,
+      "old": "loc_6DE88",
+      "new": "CNZMiniSK_ClosedCoilTickStun",
+      "profiles": ["sk"],
+      "meaning": "Advance the closed coil contact latch and eventually restore its collision BYTE."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 40,
+      "old": "loc_6DE9C",
+      "new": "CNZMiniSK_ClosedCoilResetTouch",
+      "profiles": ["sk"],
+      "meaning": "Maintain the coil ordinary collision property and register its current hitbox."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 45,
+      "old": "loc_6DEA8",
+      "new": "CNZMiniSK_CoilBeginOpenTouch",
+      "profiles": ["sk"],
+      "meaning": "Switch coil collision policy when the parent opens."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 51,
+      "old": "loc_6DEB6",
+      "new": "CNZMiniSK_DeleteCoilOrSpark",
+      "profiles": ["sk"],
+      "meaning": "Shared immediate deletion entry for coil and open-spark actors."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 65,
+      "old": "loc_6DEDE",
+      "new": "CNZMiniSK_InitAuxiliaryTouchActor",
+      "profiles": ["sk"],
+      "meaning": "Initialize a separate parent-following actor with AA collision."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 71,
+      "old": "loc_6DEEC",
+      "new": "CNZMiniSK_AuxiliaryFollowAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Follow the auxiliary collision actor parent and register touch without drawing."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 88,
+      "old": "locret_6DF32",
+      "new": "CNZMiniSK_TimedSparkInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after timed-spark attributes, protection-bit and raw-pointer setup."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 117,
+      "old": "off_6DF88",
+      "new": "CNZMiniSK_OpenSparkAnimationPointers",
+      "profiles": ["sk"],
+      "meaning": "Three LONG raw frame-delay pointers selected by even spark subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 142,
+      "old": "loc_6DFDE",
+      "new": "CNZMiniSK_WallBounceSetDeleteCallback",
+      "profiles": ["sk"],
+      "meaning": "Finish initializing the fixed-X wall bounce effect raw animation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "original_line": 161,
+      "old": "byte_6E022",
+      "new": "CNZMiniSK_DebrisPlacementOffsets",
+      "profiles": ["sk"],
+      "meaning": "Nine signed BYTE debris offsets indexed directly by even subtype."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 13,
+      "old": "loc_6D9A8",
+      "new": "CNZMiniSK_LockArenaAndFadeMusic",
+      "profiles": ["sk"],
+      "meaning": "Lock arena bounds after unsigned camera X reaches31E0 hex."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 42,
+      "old": "locret_6DA22",
+      "new": "CNZMiniSK_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared RTS for miniboss setup and coil/top countdown gates."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 143,
+      "old": "loc_6DB4E",
+      "new": "CNZMiniSK_CloseCoilAfterTopHit",
+      "profiles": ["sk"],
+      "meaning": "Begin closing once boss status6 reports a true top hit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 162,
+      "old": "loc_6DB7E",
+      "new": "CNZMiniSK_ResumeAfterLoweringPause",
+      "profiles": ["sk"],
+      "meaning": "Restore the previously saved routine after the block-clear lowering pause."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 216,
+      "old": "loc_6DC10",
+      "new": "CNZMiniSK_TopBeginSpinUp",
+      "profiles": ["sk"],
+      "meaning": "Switch the attached top into its accelerating animation phase."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 264,
+      "old": "loc_6DCB0",
+      "new": "CNZMiniSK_TopCheckLeftContacts",
+      "profiles": ["sk"],
+      "meaning": "Check left-moving top against a wall, fixed left arena edge and boss geometry."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 277,
+      "old": "loc_6DCDA",
+      "new": "CNZMiniSK_TopCheckBounceAndFloor",
+      "profiles": ["sk"],
+      "meaning": "After horizontal checks process rolling-player bounce and vertical travel."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 299,
+      "old": "loc_6DD1E",
+      "new": "CNZMiniSK_TopCheckCeilingAndBoss",
+      "profiles": ["sk"],
+      "meaning": "Check upward-moving top against ceiling penetration and inclusive upper limits."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 315,
+      "old": "loc_6DD4C",
+      "new": "CNZMiniSK_TopSpawnWallBounceEffect",
+      "profiles": ["sk"],
+      "meaning": "Try one normal wall bounce effect before changing top horizontal direction."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 323,
+      "old": "loc_6DD64",
+      "new": "CNZMiniSK_TopReflectXAndChooseImpact",
+      "profiles": ["sk"],
+      "meaning": "Reverse horizontal top velocity and prepare the struck-side sample offset."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 329,
+      "old": "loc_6DD6E",
+      "new": "CNZMiniSK_TopPublishWallImpact",
+      "profiles": ["sk"],
+      "meaning": "Publish an interior horizontal block-hit point for the screen event."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 339,
+      "old": "locret_6DD8C",
+      "new": "CNZMiniSK_TopBlockImpactReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for block-event geometry rejection and successful horizontal event work."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 343,
+      "old": "loc_6DD8E",
+      "new": "CNZMiniSK_TopReflectAtSide",
+      "profiles": ["sk"],
+      "meaning": "Reverse X for fixed horizontal arena bounds or sampled boss contact."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 348,
+      "old": "loc_6DD94",
+      "new": "CNZMiniSK_TopReflectYAndChooseImpact",
+      "profiles": ["sk"],
+      "meaning": "Reflect vertical top speed and choose the prior vertical travel-side sample."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 355,
+      "old": "loc_6DDA2",
+      "new": "CNZMiniSK_TopPublishVerticalImpact",
+      "profiles": ["sk"],
+      "meaning": "Publish a vertical block-hit point using the literal original Y upper bound."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 371,
+      "old": "loc_6DDCC",
+      "new": "CNZMiniSK_TopReflectAtVerticalContact",
+      "profiles": ["sk"],
+      "meaning": "Reverse Y after a successful player bounce, camera/fixed vertical edge or boss-point hit."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 376,
+      "old": "loc_6DDD2",
+      "new": "CNZMiniSK_TopBreakUpOnBossDefeat",
+      "profiles": ["sk"],
+      "meaning": "Retire the top when its parent status7 is set, retaining unchecked allocation-result write."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "original_line": 400,
+      "old": "locret_6DE24",
+      "new": "CNZMiniSK_BlockExplosionSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from optional centered block explosion creation."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 33,
+      "old": "loc_6E09C",
+      "new": "CNZMiniSK_TickPlayerTouchSuppression",
+      "profiles": ["sk"],
+      "meaning": "Advance boss ordinary-contact suppression and restore its saved collision."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 39,
+      "old": "locret_6E0AE",
+      "new": "CNZMiniSK_PlayerTouchUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after ordinary player-hit policy gate or timer."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 57,
+      "old": "loc_6E0D6",
+      "new": "CNZMiniSK_TopHitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Select normal versus alternate flash colors while the top-hit latch is set."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 63,
+      "old": "loc_6E0E4",
+      "new": "CNZMiniSK_TopHitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Copy five colors and finish top-hit recovery."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 70,
+      "old": "locret_6E0F8",
+      "new": "CNZMiniSK_TopHitFlashReturn",
+      "profiles": ["sk"],
+      "meaning": "Return when no top hit is pending or after recovery handling."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 98,
+      "old": "word_6E146",
+      "new": "CNZMiniSK_TopHitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Five palette destination WORD addresses for top-hit recovery flash."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 101,
+      "old": "word_6E150",
+      "new": "CNZMiniSK_TopHitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two disjoint five-WORD color rows selected by recovery parity."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 124,
+      "old": "locret_6E198",
+      "new": "CNZMiniSK_BlockLoweringCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after detecting whether the cleared-block row amount changed."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 168,
+      "old": "loc_6E1FA",
+      "new": "CNZMiniSK_TopCheckRollerMovingLeft",
+      "profiles": ["sk"],
+      "meaning": "For a negative-X rolling player compare the top horizontal sign."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 172,
+      "old": "loc_6E200",
+      "new": "CNZMiniSK_TopReflectOpposedX",
+      "profiles": ["sk"],
+      "meaning": "Reverse top horizontal velocity when its sign category opposes the rising roller."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 175,
+      "old": "loc_6E204",
+      "new": "CNZMiniSK_TopCheckBounceY",
+      "profiles": ["sk"],
+      "meaning": "Choose whether caller should reflect the top vertical component."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 180,
+      "old": "locret_6E20E",
+      "new": "CNZMiniSK_TopBounceAcceptedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return with an accepted bounce result or after the first-player wrapper gate."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 184,
+      "old": "loc_6E210",
+      "new": "CNZMiniSK_TopBounceReject",
+      "profiles": ["sk"],
+      "meaning": "Return no vertical-bounce request from the rising-roller helper."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 209,
+      "old": "loc_6E23C",
+      "new": "CNZMiniSK_TopChooseCoilBounds",
+      "profiles": ["sk"],
+      "meaning": "Try the coil geometry after the wider base rectangle misses."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 215,
+      "old": "loc_6E24C",
+      "new": "CNZMiniSK_TopCheckCoilBounds",
+      "profiles": ["sk"],
+      "meaning": "Test the supplied top sample point against selected parent-relative coil bounds."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 231,
+      "old": "loc_6E26C",
+      "new": "CNZMiniSK_TopRejectBossContact",
+      "profiles": ["sk"],
+      "meaning": "Return a zero D2/Z-set result for a missed boss sample point."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 236,
+      "old": "loc_6E270",
+      "new": "CNZMiniSK_TopLatchOpenCoilHit",
+      "profiles": ["sk"],
+      "meaning": "Set the true top-hit latch for any accepted base/coil sample while open."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "original_line": 241,
+      "old": "loc_6E27C",
+      "new": "CNZMiniSK_TopAcceptBossContact",
+      "profiles": ["sk"],
+      "meaning": "Return D2=1/Z-clear for either accepted base or coil point."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "original_line": 150,
+      "old": "word_6E46E",
+      "new": "CNZEndBoss_ActivationCameraBounds",
+      "profiles": ["sk"],
+      "meaning": "S&K camera activation bounds for the end boss, stored in the neighboring catalog."
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "original_line": 152,
+      "old": "word_6E476",
+      "new": "CNZEndBoss_ArenaTransitionBounds",
+      "profiles": ["sk"],
+      "meaning": "S&K target arena bounds for the shared boss camera/music transition."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 17,
+      "old": "Frame_3609C4",
+      "new": "CNZEndBossS3_MapSlot00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector0."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 24,
+      "old": "Frame_3609EA",
+      "new": "CNZEndBossS3_MapSlot01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector1."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 27,
+      "old": "Frame_3609F8",
+      "new": "CNZEndBossS3_MapSlot02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector2."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 30,
+      "old": "Frame_360A06",
+      "new": "CNZEndBossS3_MapSlot03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector3."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 33,
+      "old": "Frame_360A14",
+      "new": "CNZEndBossS3_MapSlot04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector4."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 36,
+      "old": "Frame_360A22",
+      "new": "CNZEndBossS3_MapSlot05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector5."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 41,
+      "old": "Frame_360A3C",
+      "new": "CNZEndBossS3_MapSlot06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector6."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 48,
+      "old": "Frame_360A62",
+      "new": "CNZEndBossS3_MapSlot07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector7."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 55,
+      "old": "Frame_360A88",
+      "new": "CNZEndBossS3_MapSlot08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector8."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 58,
+      "old": "Frame_360A96",
+      "new": "CNZEndBossS3_MapSlot09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selector9."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 59,
+      "old": "Frame_360A98",
+      "new": "CNZEndBossS3_MapSlot0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selectorA."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 61,
+      "old": "Frame_360AA0",
+      "new": "CNZEndBossS3_MapSlot0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selectorB."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "original_line": 65,
+      "old": "Frame_360AB4",
+      "new": "CNZEndBossS3_MapSlot0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "CNZEndBossS3 actual mapping geometry at selectorC."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 26,
+      "old": "Frame_362F00",
+      "new": "CNZMiniboss_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 33,
+      "old": "Frame_362F26",
+      "new": "CNZMiniboss_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 50,
+      "old": "Frame_362F88",
+      "new": "CNZMiniboss_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 67,
+      "old": "Frame_362FEA",
+      "new": "CNZMiniboss_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 84,
+      "old": "Frame_36304C",
+      "new": "CNZMiniboss_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 101,
+      "old": "Frame_3630AE",
+      "new": "CNZMiniboss_MapFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 118,
+      "old": "Frame_363110",
+      "new": "CNZMiniboss_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 135,
+      "old": "Frame_363172",
+      "new": "CNZMiniboss_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 139,
+      "old": "Frame_363186",
+      "new": "CNZMiniboss_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 143,
+      "old": "Frame_36319A",
+      "new": "CNZMiniboss_MapFrame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 147,
+      "old": "Frame_3631AE",
+      "new": "CNZMiniboss_MapFrame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 150,
+      "old": "Frame_3631BC",
+      "new": "CNZMiniboss_MapFrame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 153,
+      "old": "Frame_3631CA",
+      "new": "CNZMiniboss_MapFrame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 155,
+      "old": "Frame_3631D2",
+      "new": "CNZMiniboss_MapFrame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 157,
+      "old": "Frame_3631DA",
+      "new": "CNZMiniboss_MapFrame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 159,
+      "old": "Frame_3631E2",
+      "new": "CNZMiniboss_MapFrame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 162,
+      "old": "Frame_3631F0",
+      "new": "CNZMiniboss_MapFrame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 165,
+      "old": "Frame_3631FE",
+      "new": "CNZMiniboss_MapFrame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 166,
+      "old": "Frame_363200",
+      "new": "CNZMiniboss_MapFrame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 168,
+      "old": "Frame_363208",
+      "new": "CNZMiniboss_MapFrame13",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 170,
+      "old": "Frame_363210",
+      "new": "CNZMiniboss_MapFrame14",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "original_line": 173,
+      "old": "Frame_36321E",
+      "new": "CNZMiniboss_MapFrame15",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "S3 CNZ miniboss mapping frame at verified index 15 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "tokens": [
+        [2, 1, 0, ""],
+        [4, 2, 1, ""],
+        [14, 2, 2, ""],
+        [19, 0, 0, ""],
+        [21, 0, 1, ""],
+        [23, 0, 2, ""],
+        [24, 2, 4, ""],
+        [25, 0, 3, ""],
+        [27, 0, 4, ""],
+        [30, 1, 5, ""],
+        [31, 1, 5, ""],
+        [35, 0, 5, ""],
+        [36, 1, 6, ""],
+        [36, 3, 5, ""],
+        [37, 1, 8, ""],
+        [37, 3, 5, ""],
+        [38, 1, 11, ""],
+        [38, 3, 5, ""],
+        [39, 1, 15, ""],
+        [39, 3, 5, ""],
+        [40, 1, 17, ""],
+        [40, 3, 5, ""],
+        [41, 1, 20, ""],
+        [41, 3, 5, ""],
+        [42, 1, 24, ""],
+        [42, 3, 5, ""],
+        [43, 1, 26, ""],
+        [43, 3, 5, ""],
+        [44, 0, 6, ""],
+        [50, 2, 10, ""],
+        [55, 1, 7, ""],
+        [57, 0, 7, ""],
+        [58, 1, 105, ""],
+        [60, 1, 106, ""],
+        [62, 0, 8, ""],
+        [66, 0, 9, ""],
+        [68, 0, 10, ""],
+        [71, 2, 14, ""],
+        [73, 0, 11, ""],
+        [77, 1, 13, ""],
+        [81, 1, 12, ""],
+        [84, 0, 12, ""],
+        [86, 0, 13, ""],
+        [88, 0, 14, ""],
+        [93, 0, 15, ""],
+        [97, 1, 16, ""],
+        [99, 0, 16, ""],
+        [103, 0, 17, ""],
+        [109, 1, 19, ""],
+        [110, 1, 18, ""],
+        [115, 0, 18, ""],
+        [120, 0, 19, ""],
+        [124, 2, 21, ""],
+        [126, 0, 20, ""],
+        [128, 0, 21, ""],
+        [131, 2, 22, ""],
+        [132, 1, 108, ""],
+        [134, 0, 22, ""],
+        [138, 2, 23, ""],
+        [140, 0, 23, ""],
+        [145, 0, 24, ""],
+        [152, 1, 25, ""],
+        [155, 0, 25, ""],
+        [159, 0, 26, ""],
+        [163, 1, 27, ""],
+        [166, 0, 27, ""],
+        [168, 1, 9, ""],
+        [169, 0, 28, ""],
+        [174, 2, 29, ""],
+        [177, 1, 110, ""],
+        [179, 0, 29, ""],
+        [180, 2, 30, ""],
+        [187, 0, 30, ""],
+        [190, 1, 3, ""],
+        [191, 2, 31, ""],
+        [202, 0, 31, ""],
+        [204, 1, 32, ""],
+        [205, 2, 33, ""],
+        [210, 1, 32, ""],
+        [215, 0, 32, ""],
+        [217, 0, 33, ""],
+        [221, 1, 3, ""],
+        [222, 2, 34, ""],
+        [227, 0, 34, ""],
+        [229, 1, 3, ""],
+        [232, 1, 3, ""],
+        [233, 2, 35, ""],
+        [237, 0, 35, ""],
+        [241, 1, 3, ""],
+        [245, 0, 36, ""],
+        [248, 1, 37, ""],
+        [249, 1, 37, ""],
+        [252, 0, 37, ""],
+        [253, 1, 38, ""],
+        [253, 3, 37, ""],
+        [254, 1, 39, ""],
+        [254, 3, 37, ""],
+        [255, 1, 42, ""],
+        [255, 3, 37, ""],
+        [256, 1, 45, ""],
+        [256, 3, 37, ""],
+        [257, 1, 47, ""],
+        [257, 3, 37, ""],
+        [258, 1, 49, ""],
+        [258, 3, 37, ""],
+        [259, 0, 38, ""],
+        [260, 1, 100, ""],
+        [263, 2, 112, ""],
+        [265, 0, 39, ""],
+        [269, 1, 40, ""],
+        [271, 0, 40, ""],
+        [273, 2, 43, ""],
+        [277, 1, 41, ""],
+        [279, 0, 41, ""],
+        [282, 0, 42, ""],
+        [285, 1, 3, ""],
+        [287, 0, 43, ""],
+        [292, 1, 44, ""],
+        [297, 0, 44, ""],
+        [303, 0, 45, ""],
+        [306, 1, 46, ""],
+        [308, 0, 46, ""],
+        [311, 0, 47, ""],
+        [314, 1, 48, ""],
+        [316, 0, 48, ""],
+        [319, 1, 70, ""],
+        [320, 0, 49, ""],
+        [323, 1, 50, ""],
+        [325, 0, 50, ""],
+        [328, 0, 51, ""],
+        [329, 1, 101, ""],
+        [333, 1, 52, ""],
+        [335, 0, 52, ""],
+        [338, 0, 53, ""],
+        [341, 1, 54, ""],
+        [342, 1, 54, ""],
+        [349, 0, 54, ""],
+        [350, 1, 55, ""],
+        [350, 3, 54, ""],
+        [351, 1, 56, ""],
+        [351, 3, 54, ""],
+        [352, 1, 58, ""],
+        [352, 3, 54, ""],
+        [353, 1, 61, ""],
+        [353, 3, 54, ""],
+        [354, 1, 63, ""],
+        [354, 3, 54, ""],
+        [355, 1, 66, ""],
+        [355, 3, 54, ""],
+        [356, 1, 68, ""],
+        [356, 3, 54, ""],
+        [357, 0, 55, ""],
+        [358, 1, 103, ""],
+        [363, 2, 111, ""],
+        [365, 0, 56, ""],
+        [368, 1, 57, ""],
+        [370, 0, 57, ""],
+        [374, 2, 60, ""],
+        [377, 0, 58, ""],
+        [380, 1, 59, ""],
+        [385, 0, 59, ""],
+        [387, 1, 107, ""],
+        [391, 0, 60, ""],
+        [395, 0, 61, ""],
+        [398, 1, 62, ""],
+        [402, 0, 62, ""],
+        [406, 2, 64, ""],
+        [408, 0, 63, ""],
+        [413, 0, 64, ""],
+        [415, 1, 65, ""],
+        [419, 0, 65, ""],
+        [423, 0, 66, ""],
+        [429, 1, 67, ""],
+        [431, 0, 67, ""],
+        [434, 0, 68, ""],
+        [437, 1, 69, ""],
+        [439, 0, 69, ""],
+        [442, 0, 70, ""],
+        [446, 0, 71, ""],
+        [447, 1, 104, ""],
+        [450, 2, 113, ""],
+        [451, 2, 74, ""],
+        [453, 1, 72, ""],
+        [454, 2, 72, ""],
+        [456, 0, 72, ""],
+        [457, 2, 73, ""],
+        [459, 0, 73, ""],
+        [466, 0, 74, ""],
+        [475, 1, 104, ""],
+        [478, 2, 74, ""],
+        [480, 1, 75, ""],
+        [481, 2, 115, ""],
+        [482, 2, 76, ""],
+        [484, 0, 75, ""],
+        [485, 2, 114, ""],
+        [486, 0, 76, ""],
+        [487, 2, 77, ""],
+        [489, 0, 77, ""],
+        [494, 0, 78, ""],
+        [495, 1, 102, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
+      "tokens": [
+        [5, 1, 79, ""],
+        [7, 0, 79, ""],
+        [11, 1, 82, ""],
+        [13, 1, 83, ""],
+        [15, 0, 80, ""],
+        [17, 1, 81, ""],
+        [19, 3, 80, ""],
+        [21, 0, 81, ""],
+        [23, 0, 82, ""],
+        [25, 0, 83, ""],
+        [35, 1, 84, ""],
+        [37, 1, 84, ""],
+        [39, 0, 84, ""],
+        [43, 1, 85, ""],
+        [45, 0, 85, ""],
+        [53, 1, 86, ""],
+        [55, 0, 86, ""],
+        [58, 1, 87, ""],
+        [60, 0, 87, ""],
+        [62, 1, 89, ""],
+        [64, 1, 88, ""],
+        [66, 0, 88, ""],
+        [69, 0, 89, ""],
+        [80, 1, 92, ""],
+        [82, 1, 92, ""],
+        [84, 1, 93, ""],
+        [86, 1, 90, ""],
+        [90, 0, 90, ""],
+        [94, 1, 91, ""],
+        [96, 0, 91, ""],
+        [97, 1, 94, ""],
+        [98, 1, 95, ""],
+        [101, 1, 92, ""],
+        [104, 0, 92, ""],
+        [106, 0, 93, ""],
+        [108, 2, 28, ""],
+        [110, 0, 94, ""],
+        [112, 0, 95, ""],
+        [118, 1, 96, ""],
+        [120, 0, 96, ""],
+        [122, 1, 97, ""],
+        [124, 0, 97, ""],
+        [126, 1, 109, ""],
+        [131, 1, 98, ""],
+        [133, 0, 98, ""],
+        [135, 1, 99, ""],
+        [137, 0, 99, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
+      "tokens": [
+        [10, 0, 100, ""],
+        [15, 0, 101, ""],
+        [18, 0, 102, ""],
+        [21, 0, 103, ""],
+        [26, 0, 104, ""],
+        [31, 0, 105, ""],
+        [33, 1, 36, ""],
+        [35, 0, 106, ""],
+        [37, 1, 53, ""],
+        [39, 0, 107, ""],
+        [41, 1, 71, ""],
+        [43, 0, 108, ""],
+        [45, 1, 71, ""],
+        [47, 1, 71, ""],
+        [49, 0, 109, ""],
+        [51, 1, 51, ""],
+        [53, 1, 51, ""],
+        [55, 0, 110, ""],
+        [57, 1, 78, ""],
+        [59, 1, 78, ""],
+        [61, 0, 111, ""],
+        [70, 0, 112, ""],
+        [79, 0, 113, ""],
+        [81, 0, 114, ""],
+        [87, 0, 115, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [2, 1, 324, ""],
+        [4, 2, 116, ""],
+        [5, 2, 117, ""],
+        [6, 1, 325, ""],
+        [13, 0, 116, ""],
+        [15, 0, 117, ""],
+        [16, 2, 119, ""],
+        [17, 0, 118, ""],
+        [19, 0, 119, ""],
+        [22, 1, 120, ""],
+        [23, 1, 120, ""],
+        [27, 0, 120, ""],
+        [28, 1, 121, ""],
+        [28, 3, 120, ""],
+        [29, 1, 123, ""],
+        [29, 3, 120, ""],
+        [30, 1, 126, ""],
+        [30, 3, 120, ""],
+        [31, 1, 130, ""],
+        [31, 3, 120, ""],
+        [32, 1, 132, ""],
+        [32, 3, 120, ""],
+        [33, 1, 135, ""],
+        [33, 3, 120, ""],
+        [34, 1, 139, ""],
+        [34, 3, 120, ""],
+        [35, 1, 141, ""],
+        [35, 3, 120, ""],
+        [36, 0, 121, ""],
+        [42, 2, 125, ""],
+        [47, 1, 122, ""],
+        [49, 0, 122, ""],
+        [50, 1, 221, ""],
+        [52, 1, 222, ""],
+        [54, 0, 123, ""],
+        [58, 0, 124, ""],
+        [60, 0, 125, ""],
+        [63, 2, 129, ""],
+        [65, 0, 126, ""],
+        [69, 1, 128, ""],
+        [73, 1, 127, ""],
+        [76, 0, 127, ""],
+        [78, 0, 128, ""],
+        [80, 0, 129, ""],
+        [85, 0, 130, ""],
+        [89, 1, 131, ""],
+        [91, 0, 131, ""],
+        [95, 0, 132, ""],
+        [101, 1, 134, ""],
+        [102, 1, 133, ""],
+        [107, 0, 133, ""],
+        [112, 0, 134, ""],
+        [116, 2, 136, ""],
+        [118, 0, 135, ""],
+        [120, 0, 136, ""],
+        [123, 2, 137, ""],
+        [124, 1, 224, ""],
+        [126, 0, 137, ""],
+        [130, 2, 138, ""],
+        [132, 0, 138, ""],
+        [137, 0, 139, ""],
+        [144, 1, 140, ""],
+        [147, 0, 140, ""],
+        [151, 0, 141, ""],
+        [155, 1, 142, ""],
+        [158, 0, 142, ""],
+        [160, 1, 124, ""],
+        [161, 0, 143, ""],
+        [164, 2, 144, ""],
+        [165, 1, 226, ""],
+        [167, 0, 144, ""],
+        [168, 2, 146, ""],
+        [175, 1, 145, ""],
+        [179, 0, 145, ""],
+        [182, 0, 146, ""],
+        [185, 1, 118, ""],
+        [186, 2, 147, ""],
+        [199, 0, 147, ""],
+        [201, 1, 148, ""],
+        [202, 2, 149, ""],
+        [207, 1, 148, ""],
+        [212, 0, 148, ""],
+        [214, 0, 149, ""],
+        [218, 1, 118, ""],
+        [219, 2, 150, ""],
+        [225, 0, 150, ""],
+        [227, 1, 118, ""],
+        [230, 1, 118, ""],
+        [231, 2, 151, ""],
+        [235, 0, 151, ""],
+        [239, 1, 118, ""],
+        [243, 0, 152, ""],
+        [246, 1, 153, ""],
+        [247, 1, 153, ""],
+        [250, 0, 153, ""],
+        [251, 1, 154, ""],
+        [251, 3, 153, ""],
+        [252, 1, 155, ""],
+        [252, 3, 153, ""],
+        [253, 1, 158, ""],
+        [253, 3, 153, ""],
+        [254, 1, 161, ""],
+        [254, 3, 153, ""],
+        [255, 1, 163, ""],
+        [255, 3, 153, ""],
+        [256, 1, 165, ""],
+        [256, 3, 153, ""],
+        [257, 0, 154, ""],
+        [258, 1, 216, ""],
+        [261, 2, 228, ""],
+        [263, 0, 155, ""],
+        [267, 1, 156, ""],
+        [269, 0, 156, ""],
+        [271, 2, 159, ""],
+        [275, 1, 157, ""],
+        [277, 0, 157, ""],
+        [280, 0, 158, ""],
+        [283, 1, 118, ""],
+        [285, 0, 159, ""],
+        [290, 1, 160, ""],
+        [295, 0, 160, ""],
+        [301, 0, 161, ""],
+        [304, 1, 162, ""],
+        [306, 0, 162, ""],
+        [309, 0, 163, ""],
+        [312, 1, 164, ""],
+        [314, 0, 164, ""],
+        [317, 1, 186, ""],
+        [318, 0, 165, ""],
+        [321, 1, 166, ""],
+        [323, 0, 166, ""],
+        [326, 0, 167, ""],
+        [327, 1, 217, ""],
+        [331, 1, 168, ""],
+        [333, 0, 168, ""],
+        [336, 0, 169, ""],
+        [339, 1, 170, ""],
+        [340, 1, 170, ""],
+        [347, 0, 170, ""],
+        [348, 1, 171, ""],
+        [348, 3, 170, ""],
+        [349, 1, 172, ""],
+        [349, 3, 170, ""],
+        [350, 1, 174, ""],
+        [350, 3, 170, ""],
+        [351, 1, 177, ""],
+        [351, 3, 170, ""],
+        [352, 1, 179, ""],
+        [352, 3, 170, ""],
+        [353, 1, 182, ""],
+        [353, 3, 170, ""],
+        [354, 1, 184, ""],
+        [354, 3, 170, ""],
+        [355, 0, 171, ""],
+        [356, 1, 219, ""],
+        [361, 2, 227, ""],
+        [363, 0, 172, ""],
+        [366, 1, 173, ""],
+        [368, 0, 173, ""],
+        [372, 2, 176, ""],
+        [375, 0, 174, ""],
+        [378, 1, 175, ""],
+        [383, 0, 175, ""],
+        [385, 1, 223, ""],
+        [389, 0, 176, ""],
+        [393, 0, 177, ""],
+        [396, 1, 178, ""],
+        [400, 0, 178, ""],
+        [404, 2, 180, ""],
+        [406, 0, 179, ""],
+        [411, 0, 180, ""],
+        [413, 1, 181, ""],
+        [417, 0, 181, ""],
+        [421, 0, 182, ""],
+        [427, 1, 183, ""],
+        [429, 0, 183, ""],
+        [432, 0, 184, ""],
+        [435, 1, 185, ""],
+        [437, 0, 185, ""],
+        [440, 0, 186, ""],
+        [444, 0, 187, ""],
+        [445, 1, 220, ""],
+        [448, 2, 229, ""],
+        [449, 2, 190, ""],
+        [451, 1, 188, ""],
+        [452, 2, 188, ""],
+        [454, 0, 188, ""],
+        [455, 2, 189, ""],
+        [457, 0, 189, ""],
+        [464, 0, 190, ""],
+        [473, 1, 220, ""],
+        [476, 2, 190, ""],
+        [478, 1, 191, ""],
+        [479, 2, 231, ""],
+        [480, 2, 192, ""],
+        [482, 0, 191, ""],
+        [483, 2, 230, ""],
+        [484, 0, 192, ""],
+        [485, 2, 193, ""],
+        [487, 0, 193, ""],
+        [492, 0, 194, ""],
+        [493, 1, 218, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [5, 1, 195, ""],
+        [7, 0, 195, ""],
+        [11, 1, 198, ""],
+        [13, 1, 199, ""],
+        [15, 0, 196, ""],
+        [17, 1, 197, ""],
+        [19, 3, 196, ""],
+        [21, 0, 197, ""],
+        [23, 0, 198, ""],
+        [25, 0, 199, ""],
+        [35, 1, 200, ""],
+        [37, 1, 200, ""],
+        [39, 0, 200, ""],
+        [43, 1, 201, ""],
+        [45, 0, 201, ""],
+        [53, 1, 202, ""],
+        [55, 0, 202, ""],
+        [58, 1, 203, ""],
+        [60, 0, 203, ""],
+        [62, 1, 205, ""],
+        [64, 1, 204, ""],
+        [66, 0, 204, ""],
+        [69, 0, 205, ""],
+        [80, 1, 208, ""],
+        [82, 1, 208, ""],
+        [84, 1, 209, ""],
+        [86, 1, 206, ""],
+        [90, 0, 206, ""],
+        [94, 1, 207, ""],
+        [96, 0, 207, ""],
+        [97, 1, 210, ""],
+        [98, 1, 211, ""],
+        [101, 1, 208, ""],
+        [104, 0, 208, ""],
+        [106, 0, 209, ""],
+        [108, 2, 143, ""],
+        [110, 0, 210, ""],
+        [112, 0, 211, ""],
+        [118, 1, 212, ""],
+        [120, 0, 212, ""],
+        [122, 1, 213, ""],
+        [124, 0, 213, ""],
+        [126, 1, 225, ""],
+        [131, 1, 214, ""],
+        [133, 0, 214, ""],
+        [135, 1, 215, ""],
+        [137, 0, 215, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
+      "tokens": [
+        [10, 0, 216, ""],
+        [15, 0, 217, ""],
+        [18, 0, 218, ""],
+        [21, 0, 219, ""],
+        [26, 0, 220, ""],
+        [31, 0, 221, ""],
+        [33, 1, 152, ""],
+        [35, 0, 222, ""],
+        [37, 1, 169, ""],
+        [39, 0, 223, ""],
+        [41, 1, 187, ""],
+        [43, 0, 224, ""],
+        [45, 1, 187, ""],
+        [47, 1, 187, ""],
+        [49, 0, 225, ""],
+        [51, 1, 167, ""],
+        [53, 1, 167, ""],
+        [55, 0, 226, ""],
+        [57, 1, 194, ""],
+        [59, 1, 194, ""],
+        [61, 0, 227, ""],
+        [70, 0, 228, ""],
+        [79, 0, 229, ""],
+        [81, 0, 230, ""],
+        [87, 0, 231, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/coil_and_sparks.s",
+      "tokens": [
+        [10, 1, 235, ""],
+        [12, 1, 234, ""],
+        [16, 1, 233, ""],
+        [18, 1, 232, ""],
+        [21, 1, 232, ""],
+        [25, 0, 232, ""],
+        [27, 1, 243, ""],
+        [30, 0, 233, ""],
+        [33, 0, 234, ""],
+        [37, 0, 235, ""],
+        [43, 1, 235, ""],
+        [47, 0, 236, ""],
+        [48, 2, 237, ""],
+        [51, 0, 237, ""],
+        [62, 1, 238, ""],
+        [65, 0, 238, ""],
+        [85, 1, 239, ""],
+        [87, 0, 239, ""],
+        [94, 1, 235, ""],
+        [105, 1, 240, ""],
+        [107, 0, 240, ""],
+        [117, 1, 241, ""],
+        [123, 0, 241, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "tokens": [
+        [4, 1, 242, ""],
+        [6, 0, 242, ""],
+        [29, 1, 243, ""],
+        [31, 0, 243, ""],
+        [106, 1, 244, ""],
+        [108, 0, 244, ""],
+        [119, 1, 245, ""],
+        [121, 0, 245, ""],
+        [163, 1, 246, ""],
+        [165, 0, 246, ""],
+        [182, 1, 258, ""],
+        [192, 1, 247, ""],
+        [196, 1, 250, ""],
+        [200, 1, 254, ""],
+        [203, 1, 254, ""],
+        [204, 1, 248, ""],
+        [205, 0, 247, ""],
+        [209, 1, 250, ""],
+        [213, 1, 254, ""],
+        [216, 1, 254, ""],
+        [217, 0, 248, ""],
+        [219, 1, 257, ""],
+        [221, 1, 249, ""],
+        [224, 1, 255, ""],
+        [231, 1, 257, ""],
+        [233, 1, 257, ""],
+        [235, 1, 257, ""],
+        [237, 0, 249, ""],
+        [240, 1, 255, ""],
+        [245, 1, 257, ""],
+        [247, 1, 257, ""],
+        [249, 1, 257, ""],
+        [251, 0, 250, ""],
+        [254, 1, 251, ""],
+        [256, 1, 251, ""],
+        [258, 0, 251, ""],
+        [261, 1, 252, ""],
+        [263, 0, 252, ""],
+        [266, 1, 253, ""],
+        [268, 1, 253, ""],
+        [272, 0, 253, ""],
+        [274, 0, 254, ""],
+        [277, 0, 255, ""],
+        [281, 1, 256, ""],
+        [283, 0, 256, ""],
+        [286, 1, 253, ""],
+        [288, 1, 253, ""],
+        [290, 1, 253, ""],
+        [292, 1, 253, ""],
+        [297, 0, 257, ""],
+        [300, 0, 258, ""],
+        [310, 1, 259, ""],
+        [320, 0, 259, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/motion_and_collision.s",
+      "tokens": [
+        [10, 1, 261, ""],
+        [12, 1, 260, ""],
+        [16, 1, 260, ""],
+        [24, 0, 260, ""],
+        [26, 1, 261, ""],
+        [29, 0, 261, ""],
+        [33, 1, 264, ""],
+        [35, 1, 262, ""],
+        [42, 0, 262, ""],
+        [45, 1, 263, ""],
+        [47, 0, 263, ""],
+        [50, 1, 264, ""],
+        [53, 0, 264, ""],
+        [65, 1, 265, ""],
+        [66, 1, 266, ""],
+        [72, 0, 265, ""],
+        [75, 0, 266, ""],
+        [87, 1, 267, ""],
+        [92, 0, 267, ""],
+        [97, 1, 271, ""],
+        [101, 1, 272, ""],
+        [103, 1, 272, ""],
+        [110, 1, 272, ""],
+        [113, 1, 272, ""],
+        [117, 1, 272, ""],
+        [120, 1, 272, ""],
+        [122, 1, 268, ""],
+        [124, 1, 270, ""],
+        [125, 1, 269, ""],
+        [126, 0, 268, ""],
+        [128, 1, 270, ""],
+        [129, 0, 269, ""],
+        [131, 0, 270, ""],
+        [133, 1, 272, ""],
+        [135, 0, 271, ""],
+        [137, 0, 272, ""],
+        [146, 1, 273, ""],
+        [149, 1, 273, ""],
+        [153, 1, 273, ""],
+        [156, 1, 276, ""],
+        [157, 0, 273, ""],
+        [160, 1, 274, ""],
+        [162, 0, 274, ""],
+        [166, 1, 275, ""],
+        [169, 1, 275, ""],
+        [173, 1, 275, ""],
+        [176, 1, 276, ""],
+        [177, 0, 275, ""],
+        [180, 0, 276, ""],
+        [182, 1, 277, ""],
+        [184, 0, 277, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/object_catalog.s",
+      "tokens": [[39, 1, 236, ""]]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/coil_and_sparks.s",
+      "tokens": [
+        [10, 1, 281, ""],
+        [12, 1, 280, ""],
+        [16, 1, 279, ""],
+        [18, 1, 278, ""],
+        [21, 1, 278, ""],
+        [25, 0, 278, ""],
+        [27, 1, 289, ""],
+        [30, 0, 279, ""],
+        [33, 0, 280, ""],
+        [37, 0, 281, ""],
+        [43, 1, 281, ""],
+        [47, 0, 282, ""],
+        [48, 2, 283, ""],
+        [51, 0, 283, ""],
+        [62, 1, 284, ""],
+        [65, 0, 284, ""],
+        [85, 1, 285, ""],
+        [87, 0, 285, ""],
+        [94, 1, 281, ""],
+        [105, 1, 286, ""],
+        [107, 0, 286, ""],
+        [117, 1, 287, ""],
+        [123, 0, 287, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "tokens": [
+        [4, 1, 288, ""],
+        [6, 0, 288, ""],
+        [30, 1, 289, ""],
+        [32, 0, 289, ""],
+        [107, 1, 290, ""],
+        [109, 0, 290, ""],
+        [120, 1, 291, ""],
+        [122, 0, 291, ""],
+        [159, 1, 292, ""],
+        [161, 0, 292, ""],
+        [178, 1, 304, ""],
+        [188, 1, 293, ""],
+        [192, 1, 296, ""],
+        [196, 1, 300, ""],
+        [199, 1, 300, ""],
+        [200, 1, 294, ""],
+        [201, 0, 293, ""],
+        [205, 1, 296, ""],
+        [209, 1, 300, ""],
+        [212, 1, 300, ""],
+        [213, 0, 294, ""],
+        [215, 1, 303, ""],
+        [217, 1, 295, ""],
+        [220, 1, 301, ""],
+        [227, 1, 303, ""],
+        [229, 1, 303, ""],
+        [231, 1, 303, ""],
+        [233, 0, 295, ""],
+        [236, 1, 301, ""],
+        [241, 1, 303, ""],
+        [243, 1, 303, ""],
+        [245, 1, 303, ""],
+        [247, 0, 296, ""],
+        [250, 1, 297, ""],
+        [252, 1, 297, ""],
+        [254, 0, 297, ""],
+        [257, 1, 298, ""],
+        [259, 0, 298, ""],
+        [262, 1, 299, ""],
+        [264, 1, 299, ""],
+        [268, 0, 299, ""],
+        [270, 0, 300, ""],
+        [273, 0, 301, ""],
+        [277, 1, 302, ""],
+        [279, 0, 302, ""],
+        [282, 1, 299, ""],
+        [284, 1, 299, ""],
+        [286, 1, 299, ""],
+        [288, 1, 299, ""],
+        [293, 0, 303, ""],
+        [296, 0, 304, ""],
+        [306, 1, 305, ""],
+        [316, 0, 305, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/motion_and_collision.s",
+      "tokens": [
+        [10, 1, 307, ""],
+        [12, 1, 306, ""],
+        [16, 1, 306, ""],
+        [24, 0, 306, ""],
+        [26, 1, 307, ""],
+        [29, 0, 307, ""],
+        [33, 1, 310, ""],
+        [35, 1, 308, ""],
+        [42, 0, 308, ""],
+        [45, 1, 309, ""],
+        [47, 0, 309, ""],
+        [50, 1, 310, ""],
+        [53, 0, 310, ""],
+        [65, 1, 311, ""],
+        [66, 1, 312, ""],
+        [72, 0, 311, ""],
+        [75, 0, 312, ""],
+        [87, 1, 313, ""],
+        [92, 0, 313, ""],
+        [97, 1, 317, ""],
+        [101, 1, 318, ""],
+        [103, 1, 318, ""],
+        [110, 1, 318, ""],
+        [113, 1, 318, ""],
+        [117, 1, 318, ""],
+        [120, 1, 318, ""],
+        [122, 1, 314, ""],
+        [124, 1, 316, ""],
+        [125, 1, 315, ""],
+        [126, 0, 314, ""],
+        [128, 1, 316, ""],
+        [129, 0, 315, ""],
+        [131, 0, 316, ""],
+        [133, 1, 318, ""],
+        [135, 0, 317, ""],
+        [137, 0, 318, ""],
+        [146, 1, 319, ""],
+        [149, 1, 319, ""],
+        [153, 1, 319, ""],
+        [156, 1, 322, ""],
+        [157, 0, 319, ""],
+        [160, 1, 320, ""],
+        [162, 0, 320, ""],
+        [166, 1, 321, ""],
+        [169, 1, 321, ""],
+        [173, 1, 321, ""],
+        [176, 1, 322, ""],
+        [177, 0, 321, ""],
+        [180, 0, 322, ""],
+        [182, 1, 323, ""],
+        [184, 0, 323, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/object_catalog.s",
+      "tokens": [
+        [39, 1, 282, ""],
+        [142, 0, 324, ""],
+        [144, 0, 325, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/end_boss.s",
+      "tokens": [
+        [2, 1, 326, ""],
+        [3, 1, 327, ""],
+        [4, 1, 328, ""],
+        [5, 1, 329, ""],
+        [6, 1, 330, ""],
+        [7, 1, 331, ""],
+        [8, 1, 332, ""],
+        [9, 1, 333, ""],
+        [10, 1, 334, ""],
+        [11, 1, 335, ""],
+        [12, 1, 336, ""],
+        [13, 1, 337, ""],
+        [14, 1, 338, ""],
+        [15, 0, 326, ""],
+        [22, 0, 327, ""],
+        [25, 0, 328, ""],
+        [28, 0, 329, ""],
+        [31, 0, 330, ""],
+        [34, 0, 331, ""],
+        [39, 0, 332, ""],
+        [46, 0, 333, ""],
+        [53, 0, 334, ""],
+        [56, 0, 335, ""],
+        [57, 0, 336, ""],
+        [59, 0, 337, ""],
+        [63, 0, 338, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/cnz/mappings/miniboss.s",
+      "tokens": [
+        [2, 1, 339, ""],
+        [3, 1, 340, ""],
+        [4, 1, 341, ""],
+        [5, 1, 342, ""],
+        [6, 1, 343, ""],
+        [7, 1, 344, ""],
+        [8, 1, 345, ""],
+        [9, 1, 346, ""],
+        [10, 1, 347, ""],
+        [11, 1, 348, ""],
+        [12, 1, 349, ""],
+        [13, 1, 350, ""],
+        [14, 1, 351, ""],
+        [15, 1, 352, ""],
+        [16, 1, 353, ""],
+        [17, 1, 354, ""],
+        [18, 1, 355, ""],
+        [19, 1, 356, ""],
+        [20, 1, 357, ""],
+        [21, 1, 358, ""],
+        [22, 1, 359, ""],
+        [23, 1, 360, ""],
+        [24, 0, 339, ""],
+        [31, 0, 340, ""],
+        [48, 0, 341, ""],
+        [65, 0, 342, ""],
+        [82, 0, 343, ""],
+        [99, 0, 344, ""],
+        [116, 0, 345, ""],
+        [133, 0, 346, ""],
+        [137, 0, 347, ""],
+        [141, 0, 348, ""],
+        [145, 0, 349, ""],
+        [148, 0, 350, ""],
+        [151, 0, 351, ""],
+        [153, 0, 352, ""],
+        [155, 0, 353, ""],
+        [157, 0, 354, ""],
+        [160, 0, 355, ""],
+        [163, 0, 356, ""],
+        [164, 0, 357, ""],
+        [166, 0, 358, ""],
+        [168, 0, 359, ""],
+        [171, 0, 360, ""]
+      ]
+    }
+  ]
+}

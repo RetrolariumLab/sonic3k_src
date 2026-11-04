@@ -4,11 +4,11 @@
 ; ---------------------------------------------------------------------------
 
 Obj_CNZEndBoss:
-                lea     word_6E46E(pc),a1
+                lea     CNZEndBoss_ActivationCameraBounds(pc),a1
                 jsr     (Check_CameraInRange).l
-                move.l  #loc_6E4B8,(a0)
-                move.l  #loc_6E4BE,$34(a0)
-                lea     word_6E476(pc),a1
+                move.l  #CNZEndBoss_WaitForArenaAndMusic,(a0)
+                move.l  #CNZEndBoss_InstallBattleUpdate,$34(a0)
+                lea     CNZEndBoss_ArenaTransitionBounds(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
                 moveq   #PLCID_6E,d0
@@ -17,233 +17,233 @@ Obj_CNZEndBoss:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_6E4B8:
+CNZEndBoss_WaitForArenaAndMusic:
                 jmp     (SKEndCamera_TickAndSaveMusic).l
 ; ---------------------------------------------------------------------------
 
-loc_6E4BE:
-                move.l  #loc_6E4C6,(a0)
+CNZEndBoss_InstallBattleUpdate:
+                move.l  #CNZBossSK_BattleDispatchAndInteract,(a0)
 
-locret_6E4C4:
+CNZEndBoss_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E4C6:
+CNZBossSK_BattleDispatchAndInteract:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6E4E2(pc,d0.w),d1
-                jsr     off_6E4E2(pc,d1.w)
+                move.w  CNZEndBoss_StateOffsets(pc,d0.w),d1
+                jsr     CNZEndBoss_StateOffsets(pc,d1.w)
                 bsr.w   PullBothPlayersWithCNZBossMagnet
                 bsr.w   HandleCNZEndBossFourColorHitOrDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6E4E2:
-                dc.w    loc_6E4F2-off_6E4E2
-                dc.w    loc_6E548-off_6E4E2
-                dc.w    loc_6E574-off_6E4E2
-                dc.w    loc_6E5B6-off_6E4E2
-                dc.w    loc_6E5D8-off_6E4E2
-                dc.w    loc_6E62C-off_6E4E2
-                dc.w    loc_6E680-off_6E4E2
-                dc.w    loc_6E6AA-off_6E4E2
+CNZEndBoss_StateOffsets:
+                dc.w    CNZEndBoss_InitializeBattleActors-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_HoverDuringInitialDelay-CNZEndBoss_StateOffsets
+                dc.w    CNZBossSK_PursueNearestPlayerX-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_HoverUntilCoreSettles-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_AlignHorizontallyOverCore-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_WaitForMagnetPhaseCallback-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_DescendTowardCore-CNZEndBoss_StateOffsets
+                dc.w    CNZEndBoss_AscendToSavedHoverHeight-CNZEndBoss_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6E4F2:
+CNZEndBoss_InitializeBattleActors:
                 lea     ObjDat_CNZEndBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
                 move.w  y_pos(a0),$3A(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6E55E,$34(a0)
+                move.l  #CNZEndBoss_BeginTimedPlayerPursuit,$34(a0)
                 move.w  #-$100,x_vel(a0)
                 jsr     Swing_Setup1(pc)
                 lea     (Child1_MakeRoboShip4).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6E534
+                bne.s   CNZEndBoss_CreateCoreAndMagnetChildren
                 move.b  #9,subtype(a1)
 
-loc_6E534:
-                lea     ChildObjDat_6EDCC(pc),a2
+CNZEndBoss_CreateCoreAndMagnetChildren:
+                lea     CNZEndBoss_CoreChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_6EDD4(pc),a2
+                lea     CNZEndBoss_RepeatedMagnetChildRecord(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_6E548:
+CNZEndBoss_HoverDuringInitialDelay:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6E55A:
+CNZEndBoss_ResetSwingAndBeginPursuit:
                 jsr     Swing_Setup1(pc)
 
-loc_6E55E:
+CNZEndBoss_BeginTimedPlayerPursuit:
                 move.b  #4,routine(a0)
                 move.w  #3*60,$2E(a0)
-                move.l  #loc_6E5A4,$34(a0)
+                move.l  #CNZEndBoss_RequestCoreDrop,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E574:
+CNZBossSK_PursueNearestPlayerX:
                 jsr     (Find_SonicTails).l
                 addi.w  #$10,d2
                 cmpi.w  #$20,d2
-                blo.s   loc_6E59E
+                blo.s   CNZEndBoss_BobMoveAndWaitForCoreDrop
                 move.w  #$100,d1
                 bset    #0,render_flags(a0)
                 tst.w   d0
-                bne.s   loc_6E59A
+                bne.s   CNZEndBoss_StorePursuitXVelocity
                 neg.w   d1
                 bclr    #0,render_flags(a0)
 
-loc_6E59A:
+CNZEndBoss_StorePursuitXVelocity:
                 move.w  d1,x_vel(a0)
 
-loc_6E59E:
+CNZEndBoss_BobMoveAndWaitForCoreDrop:
                 jmp     (Swing_MoveWaitNoFall).l
 ; ---------------------------------------------------------------------------
 
-loc_6E5A4:
+CNZEndBoss_RequestCoreDrop:
                 move.b  #6,routine(a0)
                 bset    #1,$38(a0)
                 clr.w   x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E5B6:
+CNZEndBoss_HoverUntilCoreSettles:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 btst    #1,$38(a0)
-                beq.s   loc_6E5CC
+                beq.s   CNZEndBoss_BeginCoreHorizontalAlignment
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E5CC:
+CNZEndBoss_BeginCoreHorizontalAlignment:
                 move.b  #8,routine(a0)
                 clr.w   x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E5D8:
+CNZEndBoss_AlignHorizontallyOverCore:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 move.w  x_pos(a0),d0
                 movea.w $44(a0),a1
                 cmp.w   x_pos(a1),d0
-                beq.s   loc_6E610
-                bhi.s   loc_6E602
+                beq.s   CNZEndBoss_BeginMagnetActivationDelay
+                bhi.s   CNZEndBoss_StepLeftTowardCore
                 addq.w  #1,d0
                 move.w  d0,x_pos(a0)
                 bset    #0,render_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E602:
+CNZEndBoss_StepLeftTowardCore:
                 subq.w  #1,d0
                 bclr    #0,render_flags(a0)
                 move.w  d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E610:
+CNZEndBoss_BeginMagnetActivationDelay:
                 move.b  #$A,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$BF,$2E(a0)
-                move.l  #loc_6E632,$34(a0)
+                move.l  #CNZBossSK_EnableMagnetAndSpawnSparks,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E62C:
+CNZEndBoss_WaitForMagnetPhaseCallback:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6E632:
+CNZBossSK_EnableMagnetAndSpawnSparks:
                 bset    #2,$38(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_6E650,$34(a0)
-                lea     ChildObjDat_6EDE4(pc),a2
+                move.l  #CNZBossSK_StopMagnetAndBeginRelease,$34(a0)
+                lea     CNZEndBoss_ElectricPairChildRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6E650:
+CNZBossSK_StopMagnetAndBeginRelease:
                 bclr    #2,$38(a0)
                 bset    #7,$38(a0)
                 move.w  #$FF,$2E(a0)
-                move.l  #loc_6E66C,$34(a0)
+                move.l  #CNZEndBoss_BeginCoreRetrievalDescent,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E66C:
+CNZEndBoss_BeginCoreRetrievalDescent:
                 move.b  #$C,routine(a0)
                 bclr    #3,$38(a0)
                 bclr    #7,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E680:
+CNZEndBoss_DescendTowardCore:
                 move.w  y_pos(a0),d0
                 addq.w  #1,d0
                 movea.w $44(a0),a1
                 move.w  y_pos(a1),d1
                 subi.w  #$14,d1
                 cmp.w   d1,d0
-                bhs.s   loc_6E69C
+                bhs.s   CNZEndBoss_BeginAscentWithCore
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E69C:
+CNZEndBoss_BeginAscentWithCore:
                 move.b  #$E,routine(a0)
                 bset    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E6AA:
+CNZEndBoss_AscendToSavedHoverHeight:
                 move.w  y_pos(a0),d0
                 subq.w  #1,d0
                 cmp.w   $3A(a0),d0
-                bls.s   loc_6E6BC
+                bls.s   CNZBossSK_ClampHoverAndResumePursuit
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E6BC:
+CNZBossSK_ClampHoverAndResumePursuit:
                 move.w  $3A(a0),y_pos(a0)
-                bra.w   loc_6E55A
+                bra.w   CNZEndBoss_ResetSwingAndBeginPursuit
 ; ---------------------------------------------------------------------------
 
-loc_6E6C6:
+CNZEndBoss_BeginDefeatBreakup:
                 move.l  #Obj_Wait,(a0)
                 bset    #4,$38(a0)
-                move.l  #loc_6E6E4,$34(a0)
-                lea     ChildObjDat_6EE00(pc),a2
+                move.l  #CNZEndBoss_OpenArenaExitAfterDefeat,$34(a0)
+                lea     CNZEndBoss_ShellFragmentChildRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6E6E4:
-                move.l  #loc_6E724,(a0)
+CNZEndBoss_OpenArenaExitAfterDefeat:
+                move.l  #CNZBossSK_RestoreControlsForExit,(a0)
                 st      (_unkFAA8).w
                 clr.b   (Boss_flag).w
                 move.w  (_unkFAB4).w,d0
                 addi.w  #$190,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_6E718
+                bne.s   CNZBossSK_SpawnArenaExitCamera
                 move.l  #Obj_EggCapsule,(a1)
                 move.w  #$4990,x_pos(a1)
                 move.w  #$2E0,y_pos(a1)
 
-loc_6E718:
+CNZBossSK_SpawnArenaExitCamera:
                 lea     (Child6_IncLevX).l,a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_6E724:
+CNZBossSK_RestoreControlsForExit:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 tst.b   (_unkFAA8).w
-                bne.w   locret_6E4C4
-                move.l  #loc_6E778,(a0)
+                bne.w   CNZEndBoss_Return
+                move.l  #CNZBossSK_SpawnCannonAtExitGate,(a0)
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
@@ -258,30 +258,30 @@ loc_6E724:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_6E778:
+CNZBossSK_SpawnCannonAtExitGate:
                 cmpi.w  #$4A30,(Player_1+x_pos).w
-                blo.s   locret_6E7B4
-                move.l  #loc_6E7B6,(a0)
+                blo.s   CNZEndBoss_ReturnFromExitCannonAttempt
+                move.l  #CNZEndBoss_WaitForExitCannonOccupancy,(a0)
                 lea     (ArtKosM_BadnikExplosion).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Explosion),d2
                 jsr     (Queue_Kos_Module).l
                 jsr     (AllocateObject).l
-                bne.s   locret_6E7B4
+                bne.s   CNZEndBoss_ReturnFromExitCannonAttempt
                 move.w  a1,$44(a0)
                 move.l  #Obj_CNZCannon,(a1)
                 move.w  #$4B20,x_pos(a1)
                 move.w  #$2A8,y_pos(a1)
 
-locret_6E7B4:
+CNZEndBoss_ReturnFromExitCannonAttempt:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E7B6:
+CNZEndBoss_WaitForExitCannonOccupancy:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 movea.w $44(a0),a1
                 cmpi.b  #1,$30(a1)
-                bne.w   locret_6E4C4
-                move.l  #loc_6E7E4,(a0)
+                bne.w   CNZEndBoss_Return
+                move.l  #CNZBossSK_TriggerTimedCannonJump,(a0)
                 move.w  #$200,d0
                 move.w  d0,(Camera_target_max_Y_pos).w
                 move.w  #$BF,$2E(a0)
@@ -289,95 +289,95 @@ loc_6E7B6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E7E4:
+CNZBossSK_TriggerTimedCannonJump:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_6E4C4
+                bpl.w   CNZEndBoss_Return
                 movea.w $44(a0),a1
                 cmpi.b  #$12,angle(a1)
-                bne.w   locret_6E4C4
-                move.l  #loc_6E80C,(a0)
+                bne.w   CNZEndBoss_Return
+                move.l  #CNZBossSK_StartIceCapAtScreenTop,(a0)
                 move.w  #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E80C:
+CNZBossSK_StartIceCapAtScreenTop:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$20,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                blo.w   locret_6E4C4
+                blo.w   CNZEndBoss_Return
                 move.w  #$500,d0
                 jsr     (StartNewLevel).l
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_6E82C:
+CNZBossCore_DispatchStateAndHandleDefeat:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6E844(pc,d0.w),d1
-                jsr     off_6E844(pc,d1.w)
+                move.w  CNZBossCore_StateOffsets(pc,d0.w),d1
+                jsr     CNZBossCore_StateOffsets(pc,d1.w)
                 bsr.w   BreakCNZBossDroppedCoreWhenParentDefeats
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6E844:
-                dc.w    loc_6E850-off_6E844
-                dc.w    loc_6E86A-off_6E844
-                dc.w    loc_6E8A2-off_6E844
-                dc.w    loc_6E8E8-off_6E844
-                dc.w    loc_6E8FE-off_6E844
-                dc.w    loc_6E920-off_6E844
+CNZBossCore_StateOffsets:
+                dc.w    CNZBossCore_Initialize-CNZBossCore_StateOffsets
+                dc.w    CNZBossCore_FollowParentUntilDropRequest-CNZBossCore_StateOffsets
+                dc.w    CNZBossCore_FallAndCheckFloor-CNZBossCore_StateOffsets
+                dc.w    CNZBossCore_WaitForMagnetActivation-CNZBossCore_StateOffsets
+                dc.w    CNZBossCore_AnimateWhileParentActive-CNZBossCore_StateOffsets
+                dc.w    CNZBossCore_ConsumeReattachmentSignal-CNZBossCore_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6E850:
-                lea     ObjDat3_6ED9C(pc),a1
+CNZBossCore_Initialize:
+                lea     CNZBossCore_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$10,y_radius(a0)
-                move.l  #byte_6EE1D,$30(a0)
+                move.l  #CNZBossCore_RawFrameDelayScript,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E86A:
+CNZBossCore_FollowParentUntilDropRequest:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_6E87E
+                bne.s   CNZBossCore_BeginDropTowardNearestPlayer
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E87E:
+CNZBossCore_BeginDropTowardNearestPlayer:
                 move.b  #4,routine(a0)
-                move.l  #loc_6E8B6,$34(a0)
+                move.l  #CNZBossCore_BounceOrReportSettled,$34(a0)
                 jsr     (Find_SonicTails).l
                 move.w  #$100,d1
                 tst.w   d0
-                bne.s   loc_6E89C
+                bne.s   CNZBossCore_StoreDropXVelocity
                 neg.w   d1
 
-loc_6E89C:
+CNZBossCore_StoreDropXVelocity:
                 move.w  d1,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E8A2:
+CNZBossCore_FallAndCheckFloor:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_6E4C4
+                bmi.w   CNZEndBoss_Return
                 jmp     (ObjHitFloor_DoRoutine).l
 ; ---------------------------------------------------------------------------
 
-loc_6E8B6:
+CNZBossCore_BounceOrReportSettled:
                 moveq   #signextendB(sfx_FloorThump),d0
                 jsr     (Play_SFX).l
                 move.w  y_vel(a0),d0
                 cmpi.w  #$80,d0
-                blo.s   loc_6E8D2
+                blo.s   CNZBossCore_ReportSettledToParent
                 asr.w   #1,d0
                 neg.w   d0
                 move.w  d0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E8D2:
+CNZBossCore_ReportSettledToParent:
                 move.b  #6,routine(a0)
                 movea.w parent3(a0),a1
                 move.w  a0,$44(a1)
@@ -385,61 +385,61 @@ loc_6E8D2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E8E8:
+CNZBossCore_WaitForMagnetActivation:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_6E8F6
+                bne.s   CNZBossCore_BeginActivationAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E8F6:
+CNZBossCore_BeginActivationAnimation:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E8FE:
+CNZBossCore_AnimateWhileParentActive:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_6E910
+                beq.s   CNZBossSK_EndActivationAndResetAnim
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6E910:
+CNZBossSK_EndActivationAndResetAnim:
                 move.b  #$A,routine(a0)
                 move.b  #4,mapping_frame(a0)
-                bra.w   loc_6EAD0
+                bra.w   CNZBossChildren_ResetRawAnimationCursor
 ; ---------------------------------------------------------------------------
 
-loc_6E920:
+CNZBossCore_ConsumeReattachmentSignal:
                 movea.w parent3(a0),a1
                 bclr    #3,$38(a1)
-                bne.s   loc_6E92E
+                bne.s   CNZBossCore_ResumeParentAttachment
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E92E:
+CNZBossCore_ResumeParentAttachment:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E936:
-                lea     word_6EDA8(pc),a1
+CNZBossCoreFragment_Initialize:
+                lea     CNZBossCoreFragment_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_6E952
+                beq.s   CNZBossCoreFragment_SetIndexedVelocity
                 bset    #0,render_flags(a0)
 
-loc_6E952:
+CNZBossCoreFragment_SetIndexedVelocity:
                 moveq   #8,d0
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_6E95A:
+CNZBossSK_OrbitDispatchAndMove:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6E986(pc,d0.w),d1
-                jsr     off_6E986(pc,d1.w)
+                move.w  CNZBossMagnet_StateOffsets(pc,d0.w),d1
+                jsr     CNZBossMagnet_StateOffsets(pc,d1.w)
                 lea     (CNZEndBossMagnet_AngleX).l,a1
                 jsr     (MoveSprite_AngleXLookupOffset).l
                 bsr.w   SetCNZBossMagnetDepthFromPhase
@@ -447,154 +447,154 @@ loc_6E95A:
                 bsr.w   DetachCNZBossMagnetAfterParentDefeat
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6E986:
-                dc.w    loc_6E994-off_6E986
-                dc.w    loc_6E9B2-off_6E986
-                dc.w    loc_6E9E2-off_6E986
-                dc.w    loc_6EA26-off_6E986
-                dc.w    loc_6EA5C-off_6E986
-                dc.w    loc_6EA92-off_6E986
-                dc.w    loc_6EAB2-off_6E986
+CNZBossMagnet_StateOffsets:
+                dc.w    CNZBossSK_InitOrbitPhaseAndAnim-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossMagnet_WaitForParentActivation-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossSK_AccelerateBeforeAttraction-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossMagnet_SustainAttractionSpin-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossMagnet_DecelerateWithTimer-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossMagnet_ReturnToSavedPhase-CNZBossMagnet_StateOffsets
+                dc.w    CNZBossSK_AnimateUntilParentStops-CNZBossMagnet_StateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6E994:
-                lea     ObjDat3_6EDB4(pc),a1
+CNZBossSK_InitOrbitPhaseAndAnim:
+                lea     CNZBossMagnet_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  subtype(a0),d0
                 lsl.b   #5,d0
                 move.b  d0,$3C(a0)
-                move.l  #byte_6EE0E,$30(a0)
+                move.l  #CNZBossMagnet_RawFrameDelayScript,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E9B2:
+CNZBossMagnet_WaitForParentActivation:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_6E9C0
+                bne.s   CNZBossMagnet_BeginAcceleration
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E9C0:
+CNZBossMagnet_BeginAcceleration:
                 move.b  #4,routine(a0)
                 move.b  #1,$40(a0)
                 move.w  #$40,$2E(a0)
-                move.l  #loc_6EA1A,$34(a0)
+                move.l  #CNZBossMagnet_IncreasePhaseRate,$34(a0)
                 move.b  $3C(a0),$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E9E2:
+CNZBossSK_AccelerateBeforeAttraction:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_6EA02
+                bne.s   CNZBossSK_SpawnElectricChildAndHold
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6EA02:
+CNZBossSK_SpawnElectricChildAndHold:
                 move.b  #6,routine(a0)
-                lea     ChildObjDat_6EDDC(pc),a2
+                lea     CNZBossMagnet_ElectricChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.b  subtype(a0),subtype(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA1A:
+CNZBossMagnet_IncreasePhaseRate:
                 addq.b  #1,$40(a0)
                 move.w  #$40,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA26:
+CNZBossMagnet_SustainAttractionSpin:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_6EA40
+                beq.s   CNZBossMagnet_BeginDeceleration
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6EA40:
+CNZBossMagnet_BeginDeceleration:
                 move.b  #8,routine(a0)
                 bset    #7,$38(a0)
                 move.w  #$40,$2E(a0)
-                move.l  #loc_6EA70,$34(a0)
+                move.l  #CNZBossMagnet_DecreasePhaseRateOrFinish,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA5C:
+CNZBossMagnet_DecelerateWithTimer:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6EA70:
+CNZBossMagnet_DecreasePhaseRateOrFinish:
                 cmpi.b  #1,$40(a0)
-                beq.s   loc_6EA84
+                beq.s   CNZBossMagnet_BeginSavedPhaseReturn
                 subq.b  #1,$40(a0)
                 move.w  #$40,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA84:
+CNZBossMagnet_BeginSavedPhaseReturn:
                 move.b  #$A,routine(a0)
                 bclr    #7,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA92:
+CNZBossMagnet_ReturnToSavedPhase:
                 jsr     (Animate_RawMultiDelay).l
                 move.b  $3C(a0),d0
                 addq.b  #1,d0
                 move.b  d0,$3C(a0)
                 cmp.b   $3A(a0),d0
-                beq.s   loc_6EAAA
+                beq.s   CNZBossMagnet_WaitAtSavedPhase
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EAAA:
+CNZBossMagnet_WaitAtSavedPhase:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EAB2:
+CNZBossSK_AnimateUntilParentStops:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_6EAC4
+                beq.s   CNZBossMagnet_ResetForNextActivation
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_6EAC4:
+CNZBossMagnet_ResetForNextActivation:
                 move.b  #2,routine(a0)
                 move.b  #1,mapping_frame(a0)
 
-loc_6EAD0:
+CNZBossChildren_ResetRawAnimationCursor:
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EADA:
-                lea     ObjDat3_6EDC0(pc),a1
+CNZBossElectricEffect_Initialize:
+                lea     CNZBossElectricEffect_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #5,shield_reaction(a0)
-                move.l  #byte_6EE2C,$30(a0)
-                move.l  #loc_6EB34,$34(a0)
+                move.l  #CNZBossSK_CallbackAnimation,$30(a0)
+                move.l  #CNZBossSK_CycleFrameNineFlips,$34(a0)
                 btst    #1,subtype(a0)
-                beq.s   loc_6EB0C
-                move.l  #loc_6EB0C,(a0)
+                beq.s   CNZBossSK_InstallActiveFollow
+                move.l  #CNZBossSK_InstallActiveFollow,(a0)
                 bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
-loc_6EB0C:
-                move.l  #loc_6EB16,(a0)
+CNZBossSK_InstallActiveFollow:
+                move.l  #CNZBossSK_ActiveFollowAnimateTouch,(a0)
                 bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
-loc_6EB16:
+CNZBossSK_ActiveFollowAnimateTouch:
                 moveq   #signextendB(sfx_GravityMachine),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Refresh_ChildPosition).l
@@ -603,7 +603,7 @@ loc_6EB16:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6EB34:
+CNZBossSK_CycleFrameNineFlips:
                 move.b  #9,mapping_frame(a0)
                 move.b  $39(a0),d0
                 addq.b  #1,d0
@@ -614,34 +614,34 @@ loc_6EB34:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
-                lea     ObjDat3_6EDC0(pc),a1
+                lea     CNZBossElectricEffect_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #5,shield_reaction(a0)
-                move.l  #loc_6EB34,$34(a0)
+                move.l  #CNZBossSK_CycleFrameNineFlips,$34(a0)
                 move.b  subtype(a0),d0
-                beq.s   loc_6EB84
-                move.l  #byte_6EE3B,$30(a0)
-                move.l  #loc_6EB8C,(a0)
+                beq.s   CNZBossSK_SelectLegacyShortAnim
+                move.l  #CNZBossSK_LegacyLongDelayAnim,$30(a0)
+                move.l  #CNZBossSK_InstallLegacyFollow,(a0)
                 bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
-loc_6EB84:
-                move.l  #byte_6EE32,$30(a0)
+CNZBossSK_SelectLegacyShortAnim:
+                move.l  #CNZBossSK_LegacyShortDelayAnim,$30(a0)
 
-loc_6EB8C:
-                move.l  #loc_6EB96,(a0)
+CNZBossSK_InstallLegacyFollow:
+                move.l  #CNZBossSK_LegacyFollowAndAnimate,(a0)
                 bra.w   CNZBossSpark_TryDelete
 ; ---------------------------------------------------------------------------
 
-loc_6EB96:
+CNZBossSK_LegacyFollowAndAnimate:
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Animate_RawMultiDelay).l
                 bsr.w   CNZBossSpark_TryDelete
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6EBAC:
-                lea     word_6EDAE(pc),a1
+CNZBossShellFragment_InitializeAndDraw:
+                lea     CNZBossShellFragment_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 move.b  subtype(a0),d0
@@ -651,4 +651,4 @@ loc_6EBAC:
                 moveq   #0,d0
                 jsr     (Set_IndexedVelocity).l
                 jmp     (Draw_Sprite).l
-; End of function loc_6EB34
+; End of function CNZBossSK_CycleFrameNineFlips

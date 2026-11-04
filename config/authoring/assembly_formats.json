@@ -85922,22 +85922,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 286
       },
-      "declarations_sha256": "d45c865747e59c59ec0e737a65ab65234513dd70d011e96e450464d6e09dd5b9",
+      "declarations_sha256": "63f110fc2cf878051f84f48d15a44e475c5edecb1c35d682acd8fdfee756ae45",
       "labels": {
         "Map_CNZEndBoss_": 0,
-        "Frame_3609C4": 26,
-        "Frame_3609EA": 64,
-        "Frame_3609F8": 78,
-        "Frame_360A06": 92,
-        "Frame_360A14": 106,
-        "Frame_360A22": 120,
-        "Frame_360A3C": 146,
-        "Frame_360A62": 184,
-        "Frame_360A88": 222,
-        "Frame_360A96": 236,
-        "Frame_360A98": 238,
-        "Frame_360AA0": 246,
-        "Frame_360AB4": 266
+        "CNZEndBossS3_MapSlot00": 26,
+        "CNZEndBossS3_MapSlot01": 64,
+        "CNZEndBossS3_MapSlot02": 78,
+        "CNZEndBossS3_MapSlot03": 92,
+        "CNZEndBossS3_MapSlot04": 106,
+        "CNZEndBossS3_MapSlot05": 120,
+        "CNZEndBossS3_MapSlot06": 146,
+        "CNZEndBossS3_MapSlot07": 184,
+        "CNZEndBossS3_MapSlot08": 222,
+        "CNZEndBossS3_MapSlot09": 236,
+        "CNZEndBossS3_MapSlot0A": 238,
+        "CNZEndBossS3_MapSlot0B": 246,
+        "CNZEndBossS3_MapSlot0C": 266
       },
       "external_symbols": [],
       "blocks": [
@@ -85945,91 +85945,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3609C4",
+          "target": "CNZEndBossS3_MapSlot00",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3609EA",
+          "target": "CNZEndBossS3_MapSlot01",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3609F8",
+          "target": "CNZEndBossS3_MapSlot02",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A06",
+          "target": "CNZEndBossS3_MapSlot03",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A14",
+          "target": "CNZEndBossS3_MapSlot04",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A22",
+          "target": "CNZEndBossS3_MapSlot05",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A3C",
+          "target": "CNZEndBossS3_MapSlot06",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A62",
+          "target": "CNZEndBossS3_MapSlot07",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A88",
+          "target": "CNZEndBossS3_MapSlot08",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A96",
+          "target": "CNZEndBossS3_MapSlot09",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360A98",
+          "target": "CNZEndBossS3_MapSlot0A",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360AA0",
+          "target": "CNZEndBossS3_MapSlot0B",
           "base": "Map_CNZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360AB4",
+          "target": "CNZEndBossS3_MapSlot0C",
           "base": "Map_CNZEndBoss_"
         },
         {
@@ -86248,31 +86248,31 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 856
       },
-      "declarations_sha256": "c3dc528f481a01b151121d9a53d599a5c2fd59cbc6abb6e862254192d376807d",
+      "declarations_sha256": "afa3cc29b1b63692a6a6b0cb992d24822a0e0e1e5d7d9187425146a1350c86ab",
       "labels": {
         "Map_CNZMiniboss_": 0,
-        "Frame_362F00": 44,
-        "Frame_362F26": 82,
-        "Frame_362F88": 180,
-        "Frame_362FEA": 278,
-        "Frame_36304C": 376,
-        "Frame_3630AE": 474,
-        "Frame_363110": 572,
-        "Frame_363172": 670,
-        "Frame_363186": 690,
-        "Frame_36319A": 710,
-        "Frame_3631AE": 730,
-        "Frame_3631BC": 744,
-        "Frame_3631CA": 758,
-        "Frame_3631D2": 766,
-        "Frame_3631DA": 774,
-        "Frame_3631E2": 782,
-        "Frame_3631F0": 796,
-        "Frame_3631FE": 810,
-        "Frame_363200": 812,
-        "Frame_363208": 820,
-        "Frame_363210": 828,
-        "Frame_36321E": 842
+        "CNZMiniboss_MapFrame00": 44,
+        "CNZMiniboss_MapFrame01": 82,
+        "CNZMiniboss_MapFrame02": 180,
+        "CNZMiniboss_MapFrame03": 278,
+        "CNZMiniboss_MapFrame04": 376,
+        "CNZMiniboss_MapFrame05": 474,
+        "CNZMiniboss_MapFrame06": 572,
+        "CNZMiniboss_MapFrame07": 670,
+        "CNZMiniboss_MapFrame08": 690,
+        "CNZMiniboss_MapFrame09": 710,
+        "CNZMiniboss_MapFrame0A": 730,
+        "CNZMiniboss_MapFrame0B": 744,
+        "CNZMiniboss_MapFrame0C": 758,
+        "CNZMiniboss_MapFrame0D": 766,
+        "CNZMiniboss_MapFrame0E": 774,
+        "CNZMiniboss_MapFrame0F": 782,
+        "CNZMiniboss_MapFrame10": 796,
+        "CNZMiniboss_MapFrame11": 810,
+        "CNZMiniboss_MapFrame12": 812,
+        "CNZMiniboss_MapFrame13": 820,
+        "CNZMiniboss_MapFrame14": 828,
+        "CNZMiniboss_MapFrame15": 842
       },
       "external_symbols": [],
       "blocks": [
@@ -86280,154 +86280,154 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362F00",
+          "target": "CNZMiniboss_MapFrame00",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362F26",
+          "target": "CNZMiniboss_MapFrame01",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362F88",
+          "target": "CNZMiniboss_MapFrame02",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362FEA",
+          "target": "CNZMiniboss_MapFrame03",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36304C",
+          "target": "CNZMiniboss_MapFrame04",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3630AE",
+          "target": "CNZMiniboss_MapFrame05",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363110",
+          "target": "CNZMiniboss_MapFrame06",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363172",
+          "target": "CNZMiniboss_MapFrame07",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363186",
+          "target": "CNZMiniboss_MapFrame08",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36319A",
+          "target": "CNZMiniboss_MapFrame09",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631AE",
+          "target": "CNZMiniboss_MapFrame0A",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631BC",
+          "target": "CNZMiniboss_MapFrame0B",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631CA",
+          "target": "CNZMiniboss_MapFrame0C",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631D2",
+          "target": "CNZMiniboss_MapFrame0D",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631DA",
+          "target": "CNZMiniboss_MapFrame0E",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631E2",
+          "target": "CNZMiniboss_MapFrame0F",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631F0",
+          "target": "CNZMiniboss_MapFrame10",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3631FE",
+          "target": "CNZMiniboss_MapFrame11",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363200",
+          "target": "CNZMiniboss_MapFrame12",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363208",
+          "target": "CNZMiniboss_MapFrame13",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_363210",
+          "target": "CNZMiniboss_MapFrame14",
           "base": "Map_CNZMiniboss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36321E",
+          "target": "CNZMiniboss_MapFrame15",
           "base": "Map_CNZMiniboss_"
         },
         {

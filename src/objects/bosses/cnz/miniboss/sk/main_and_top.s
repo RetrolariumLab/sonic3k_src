@@ -6,11 +6,11 @@
 Obj_CNZMiniboss:
                 move.w  #$31E0,d0
                 cmp.w   (Camera_X_pos).w,d0             ; Wait for Player to get in range
-                bls.s   loc_6D9A8
+                bls.s   CNZMiniSK_LockArenaAndFadeMusic
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6D9A8:
+CNZMiniSK_LockArenaAndFadeMusic:
                 move.w  (Camera_max_X_pos).w,(Camera_stored_max_X_pos).w  ; X end to FFFA92
                 move.w  #$1C0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_min_X_pos).w         ; Set X start
@@ -36,10 +36,10 @@ Obj_CNZMinibossGo:
                 jsr     (Play_Music).l                  ; Play miniboss music
                 move.b  #mus_Miniboss,(Current_music+1).w
                 jsr     (AllocateObject).l
-                bne.s   locret_6DA22
+                bne.s   CNZMiniSK_SharedReturn
                 move.l  #Obj_CNZMinibossScrollControl,(a1)
 
-locret_6DA22:
+CNZMiniSK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -136,11 +136,11 @@ Obj_CNZMinibossOpenGo:
 
 Obj_CNZMinibossWaitHit:
                 btst    #6,status(a0)
-                bne.s   loc_6DB4E
+                bne.s   CNZMiniSK_CloseCoilAfterTopHit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DB4E:
+CNZMiniSK_CloseCoilAfterTopHit:
                 move.b  #$C,routine(a0)
                 bclr    #6,$38(a0)
                 move.l  #AniRaw_CNZMinibossClosing,$30(a0)
@@ -155,11 +155,11 @@ Obj_CNZMinibossClosing:
 Obj_CNZMinibossLower2:
                 addq.w  #1,y_pos(a0)
                 subq.b  #1,$43(a0)
-                bmi.s   loc_6DB7E
+                bmi.s   CNZMiniSK_ResumeAfterLoweringPause
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DB7E:
+CNZMiniSK_ResumeAfterLoweringPause:
                 move.b  $42(a0),routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -209,11 +209,11 @@ Obj_CNZMinibossTopInit:
 Obj_CNZMinibossTopWait:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_6DC10                       ; Wait for signal from main boss
+                bne.s   CNZMiniSK_TopBeginSpinUp        ; Wait for signal from main boss
                 jmp     (Refresh_ChildPosition).l
 ; ---------------------------------------------------------------------------
 
-loc_6DC10:
+CNZMiniSK_TopBeginSpinUp:
                 move.b  #4,routine(a0)
                 move.l  #AniRaw_CNZMinibossTop,$30(a0)
                 move.l  #Obj_CNZMinibossTopGo,$34(a0)
@@ -236,7 +236,7 @@ Obj_CNZMinibossTopGo:
 Obj_CNZMinibossTopMain:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.w   loc_6DDD2                       ; If parent has been destroyed, destroy this object
+                bne.w   CNZMiniSK_TopBreakUpOnBossDefeat  ; If parent has been destroyed, destroy this object
                 move.w  x_pos(a0),-(sp)
                 jsr     (MoveSprite2).l
                 moveq   #$13,d1
@@ -246,134 +246,135 @@ Obj_CNZMinibossTopMain:
                 jsr     (SolidObjectFull).l
                 jsr     (Animate_Raw).l
                 tst.w   x_vel(a0)
-                bmi.s   loc_6DCB0
+                bmi.s   CNZMiniSK_TopCheckLeftContacts
                 moveq   #$10,d3                         ; If moving to the right
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.w   loc_6DD4C                       ; Reverse direction if block is hit from side
+                bmi.w   CNZMiniSK_TopSpawnWallBounceEffect  ; Reverse direction if block is hit from side
                 move.w  x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$3380,d0
-                bhs.w   loc_6DD8E                       ; Reverse direction if edge of screen is hit
+                bhs.w   CNZMiniSK_TopReflectAtSide      ; Reverse direction if edge of screen is hit
                 move.w  y_pos(a0),d1
                 bsr.w   CNZMinibossTop_CheckHitBase
-                bne.w   loc_6DD8E                       ; Reverse direction if miniboss base was hit
-                bra.w   loc_6DCDA
+                bne.w   CNZMiniSK_TopReflectAtSide      ; Reverse direction if miniboss base was hit
+                bra.w   CNZMiniSK_TopCheckBounceAndFloor
 ; ---------------------------------------------------------------------------
 
-loc_6DCB0:
+CNZMiniSK_TopCheckLeftContacts:
                 moveq   #-$10,d3                        ; If moving to the left
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bmi.w   loc_6DD4C                       ; Reverse direction if wall was hit
+                bmi.w   CNZMiniSK_TopSpawnWallBounceEffect  ; Reverse direction if wall was hit
                 move.w  x_pos(a0),d0
                 subi.w  #$10,d0
                 cmpi.w  #$3200,d0
-                blo.w   loc_6DD8E                       ; Reverse direction if edge of screen is hit
+                blo.w   CNZMiniSK_TopReflectAtSide      ; Reverse direction if edge of screen is hit
                 move.w  y_pos(a0),d1
                 bsr.w   CNZMinibossTop_CheckHitBase
-                bne.w   loc_6DD8E                       ; Reverse direction if miniboss base was hit
+                bne.w   CNZMiniSK_TopReflectAtSide      ; Reverse direction if miniboss base was hit
 
-loc_6DCDA:
+CNZMiniSK_TopCheckBounceAndFloor:
                 bsr.w   CNZMinibossTop_CheckPlayerBounce
-                bne.w   loc_6DDCC                       ; If bounce was detected, reverse direction
+                bne.w   CNZMiniSK_TopReflectAtVerticalContact  ; If bounce was detected, reverse direction
                 tst.w   y_vel(a0)
-                bmi.s   loc_6DD1E
+                bmi.s   CNZMiniSK_TopCheckCeilingAndBoss
                 jsr     (ObjCheckFloorDist).l           ; If moving downward, check for hitting the blocks
                 tst.w   d1
-                bmi.w   loc_6DD94                       ; If hit, reverse direction
+                bmi.w   CNZMiniSK_TopReflectYAndChooseImpact  ; If hit, reverse direction
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 addq.w  #8,d1
                 move.w  (Camera_Y_pos).w,d2
                 addi.w  #$E0,d2
                 cmp.w   d2,d1
-                bhs.w   loc_6DDCC                       ; If bottom of screen was hit, bounce
+                bhs.w   CNZMiniSK_TopReflectAtVerticalContact  ; If bottom of screen was hit, bounce
                 cmpi.w  #$380,d1
-                bhi.w   loc_6DDCC                       ; Maximum lower bound is $380
+                bhi.w   CNZMiniSK_TopReflectAtVerticalContact  ; Maximum lower bound is $380
                 bsr.w   CNZMinibossTop_CheckHitBase
-                bne.w   loc_6DDCC                       ; If base was hit, bounce
+                bne.w   CNZMiniSK_TopReflectAtVerticalContact  ; If base was hit, bounce
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DD1E:
+CNZMiniSK_TopCheckCeilingAndBoss:
                 jsr     (ObjCheckCeilingDist).l         ; If moving upward, check for hitting the blocks from below
                 tst.w   d1
-                bmi.s   loc_6DD94                       ; If hit, reverse direction
+                bmi.s   CNZMiniSK_TopReflectYAndChooseImpact  ; If hit, reverse direction
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 subq.w  #8,d1
                 cmp.w   (Camera_Y_pos).w,d1
-                bls.w   loc_6DDCC                       ; If top of screen was hit, bounce
+                bls.w   CNZMiniSK_TopReflectAtVerticalContact  ; If top of screen was hit, bounce
                 cmpi.w  #$240,d1
-                bls.w   loc_6DDCC                       ; Maximum upper bound is $240
+                bls.w   CNZMiniSK_TopReflectAtVerticalContact  ; Maximum upper bound is $240
                 bsr.w   CNZMinibossTop_CheckHitBase
-                bne.w   loc_6DDCC                       ; If base was hit, bounce
+                bne.w   CNZMiniSK_TopReflectAtVerticalContact  ; If base was hit, bounce
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DD4C:
+CNZMiniSK_TopSpawnWallBounceEffect:
                 lea     Child1_CNZBounceEffect(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6DD64
+                bne.s   CNZMiniSK_TopReflectXAndChooseImpact
                 tst.w   x_vel(a0)
-                bmi.s   loc_6DD64
+                bmi.s   CNZMiniSK_TopReflectXAndChooseImpact
                 bset    #0,render_flags(a1)
 
-loc_6DD64:
+CNZMiniSK_TopReflectXAndChooseImpact:
                 moveq   #$10,d0
                 neg.w   x_vel(a0)                       ; Change direction
-                bmi.s   loc_6DD6E
+                bmi.s   CNZMiniSK_TopPublishWallImpact
                 neg.w   d0
 
-loc_6DD6E:
+CNZMiniSK_TopPublishWallImpact:
                 add.w   x_pos(a0),d0
                 cmpi.w  #$3200,d0
-                bls.s   locret_6DD8C
+                bls.s   CNZMiniSK_TopBlockImpactReturn
                 cmpi.w  #$3380,d0
-                bhs.s   locret_6DD8C                    ; If the walls were hit somehow, don't do anything
+                bhs.s   CNZMiniSK_TopBlockImpactReturn  ; If the walls were hit somehow, don't do anything
                 move.w  d0,(Events_bg+$00).w
                 move.w  y_pos(a0),(Events_bg+$02).w     ; Move X/Y positions into special variables for removing the blocks from the level layout
                 bsr.w   CNZMiniboss_BlockExplosion
 
-locret_6DD8C:
+CNZMiniSK_TopBlockImpactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DD8E:
+CNZMiniSK_TopReflectAtSide:
                 neg.w   x_vel(a0)                       ; Simple direction switch
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DD94:
+CNZMiniSK_TopReflectYAndChooseImpact:
                 move.w  x_pos(a0),d0
                 moveq   #8,d1
                 neg.w   y_vel(a0)
-                bmi.s   loc_6DDA2
+                bmi.s   CNZMiniSK_TopPublishVerticalImpact
                 neg.w   d1
 
-loc_6DDA2:
+; The upper Y comparison uses $3380, the same constant as the upper X comparison
+CNZMiniSK_TopPublishVerticalImpact:
                 add.w   y_pos(a0),d1
                 cmpi.w  #$3200,d0
-                bls.s   locret_6DD8C
+                bls.s   CNZMiniSK_TopBlockImpactReturn
                 cmpi.w  #$3380,d0
-                bhs.s   locret_6DD8C
+                bhs.s   CNZMiniSK_TopBlockImpactReturn
                 cmpi.w  #$300,d1
-                blo.s   locret_6DD8C
+                blo.s   CNZMiniSK_TopBlockImpactReturn
                 cmpi.w  #$3380,d1
-                bhs.s   locret_6DD8C
+                bhs.s   CNZMiniSK_TopBlockImpactReturn
                 move.w  d0,(Events_bg+$00).w            ; Move X/Y positions into special variables see above
                 move.w  d1,(Events_bg+$02).w
                 bsr.w   CNZMiniboss_BlockExplosion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DDCC:
+CNZMiniSK_TopReflectAtVerticalContact:
                 neg.w   y_vel(a0)                       ; Simple direction switch
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6DDD2:
+CNZMiniSK_TopBreakUpOnBossDefeat:
                 lea     Child1_CNZMinibossExplosion(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.b  #6,subtype(a1)
@@ -386,7 +387,7 @@ loc_6DDD2:
 CNZMiniboss_BlockExplosion:
                 lea     Child1_CNZMinibossExplosion(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_6DE24
+                bne.s   CNZMiniSK_BlockExplosionSpawnReturn
                 move.b  #6,subtype(a1)
                 move.w  (Events_bg+$00).w,d0
                 andi.w  #$FFE0,d0
@@ -397,6 +398,6 @@ CNZMiniboss_BlockExplosion:
                 addi.w  #$10,d0
                 move.w  d0,y_pos(a1)
 
-locret_6DE24:
+CNZMiniSK_BlockExplosionSpawnReturn:
                 rts
 ; End of function CNZMiniboss_BlockExplosion

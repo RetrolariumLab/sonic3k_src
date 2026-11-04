@@ -15,13 +15,13 @@ SetUp_CNZMinibossSwing:
 
 CNZMiniboss_CheckPlayerHit:
                 tst.b   collision_flags(a0)
-                bne.s   locret_4BCB2
+                bne.s   CNZMiniS3_PlayerTouchUpdateReturn
                 bset    #2,$38(a0)                      ; If boss was hit by Sonic, set flag
-                bne.s   loc_4BCA0                       ; If already set earlier, skip ahead
+                bne.s   CNZMiniS3_TickPlayerTouchSuppression  ; If already set earlier, skip ahead
                 addq.b  #1,collision_property(a0)       ; Don't allow hit to affect him
                 move.b  #$10,$3A(a0)
                 bset    #3,$38(a0)
-                bne.s   loc_4BCA0
+                bne.s   CNZMiniS3_TickPlayerTouchSuppression
                 move.b  #8,routine(a0)
                 move.l  #AniRaw_CNZMinibossOpening,$30(a0)
                 move.l  #Obj_CNZMinibossOpenGo,$34(a0)  ; Set boss to opening animation/routine
@@ -30,13 +30,13 @@ CNZMiniboss_CheckPlayerHit:
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
 
-loc_4BCA0:
+CNZMiniS3_TickPlayerTouchSuppression:
                 subq.b  #1,$3A(a0)
-                bpl.s   locret_4BCB2
+                bpl.s   CNZMiniS3_PlayerTouchUpdateReturn
                 bclr    #2,$38(a0)
                 move.b  $25(a0),collision_flags(a0)     ; Restore collision after 16 frames at most while opening
 
-locret_4BCB2:
+CNZMiniS3_PlayerTouchUpdateReturn:
                 rts
 ; End of function CNZMiniboss_CheckPlayerHit
 
@@ -44,9 +44,9 @@ locret_4BCB2:
 
 CNZMiniboss_CheckTopHit:
                 tst.b   $44(a0)
-                beq.s   locret_4BCFC                    ; If not hit by top, don't bother
+                beq.s   CNZMiniS3_TopHitFlashReturn     ; If not hit by top, don't bother
                 tst.b   $20(a0)
-                bne.s   loc_4BCDA
+                bne.s   CNZMiniS3_TopHitChooseFlashRow
                 subq.b  #1,$45(a0)                      ; Subtract 1 from ACTUAL hit count
                 beq.s   CNZMiniboss_BossDefeated
                 bset    #6,status(a0)                   ; Set to indicate in hit stun
@@ -54,20 +54,20 @@ CNZMiniboss_CheckTopHit:
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l                    ; Play hit sound
 
-loc_4BCDA:
+CNZMiniS3_TopHitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_4BCE8
+                bne.s   CNZMiniS3_TopHitCopyColorsAndTick
                 addi.w  #2*5,d0
 
-loc_4BCE8:
+CNZMiniS3_TopHitCopyColorsAndTick:
                 bsr.w   CNZMiniboss_BossFlash           ; Do the boss flash
                 subq.b  #1,$20(a0)
-                bne.s   locret_4BCFC
+                bne.s   CNZMiniS3_TopHitFlashReturn
                 bclr    #6,status(a0)
                 clr.b   $44(a0)
 
-locret_4BCFC:
+CNZMiniS3_TopHitFlashReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -85,8 +85,8 @@ CNZMiniboss_BossDefeated:
 ; =============== S U B R O U T I N E =======================================
 
 CNZMiniboss_BossFlash:
-                lea     word_4BD48(pc),a1
-                lea     word_4BD52(pc,d0.w),a2
+                lea     CNZMiniS3_TopHitPaletteDestinations(pc),a1
+                lea     CNZMiniS3_TopHitPaletteColorRows(pc,d0.w),a2
                 rept    5
                 movea.w (a1)+,a3
                 move.w  (a2)+,(a3)+
@@ -95,10 +95,10 @@ CNZMiniboss_BossFlash:
 ; End of function CNZMiniboss_BossFlash
 
 ; ---------------------------------------------------------------------------
-word_4BD48:
+CNZMiniS3_TopHitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$04, Normal_palette_line_2+$06, Normal_palette_line_2+$08
                 dc.w    Normal_palette_line_2+$0E, Normal_palette_line_2+$1C
-word_4BD52:
+CNZMiniS3_TopHitPaletteColorRows:
                 dc.w    $6E0,  $280,   $40,   $28,  $642
                 dc.w    $888,  $AAA,  $CCC,  $888,  $AAA
 ; ---------------------------------------------------------------------------
@@ -115,13 +115,13 @@ CNZMiniboss_MakeTimedSparks:
 CNZMiniboss_MoveDown:
                 move.w  (Events_bg+$04).w,d0
                 cmp.w   $3C(a0),d0
-                beq.s   locret_4BD98
+                beq.s   CNZMiniS3_BlockLoweringCheckReturn
                 move.w  d0,$3C(a0)
                 move.b  routine(a0),$42(a0)
                 move.b  #$E,routine(a0)
                 move.b  #$1F,$43(a0)
 
-locret_4BD98:
+CNZMiniS3_BlockLoweringCheckReturn:
                 rts
 ; End of function CNZMiniboss_MoveDown
 
@@ -130,7 +130,7 @@ locret_4BD98:
 CNZMinibossTop_CheckPlayerBounce:
                 lea     (Player_1).w,a1
                 bsr.w   ReflectCNZMinibossTopForRisingRoller
-                bne.s   locret_4BE0E
+                bne.s   CNZMiniS3_TopBounceAcceptedReturn
                 lea     (Player_2).w,a1
 ; End of function CNZMinibossTop_CheckPlayerBounce
 
@@ -138,50 +138,51 @@ CNZMinibossTop_CheckPlayerBounce:
 
 ReflectCNZMinibossTopForRisingRoller:
                 tst.w   y_vel(a1)
-                bpl.s   loc_4BE10                       ; If player is moving downward, don't bother
+                bpl.s   CNZMiniS3_TopBounceReject       ; If player is moving downward, don't bother
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_4BE10                       ; If player is not in rolling animation, don't bother
+                bne.s   CNZMiniS3_TopBounceReject       ; If player is not in rolling animation, don't bother
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 addi.w  #$C,d1
                 move.w  x_pos(a1),d2
                 subi.w  #$10,d2
                 cmp.w   d2,d0
-                blo.s   loc_4BE10                       ; If player is not within X range, don't bother
+                blo.s   CNZMiniS3_TopBounceReject       ; If player is not within X range, don't bother
                 addi.w  #$20,d2
                 cmp.w   d2,d0
-                bhs.s   loc_4BE10                       ; See above
+                bhs.s   CNZMiniS3_TopBounceReject       ; See above
                 move.w  y_pos(a1),d2
                 subi.w  #$10,d2
                 cmp.w   d2,d1
-                blo.s   loc_4BE10                       ; If player is not within Y range, don't bother
+                blo.s   CNZMiniS3_TopBounceReject       ; If player is not within Y range, don't bother
                 addi.w  #$20,d2
                 cmp.w   d2,d1
-                bhs.s   loc_4BE10                       ; See above
+                bhs.s   CNZMiniS3_TopBounceReject       ; See above
                 tst.w   x_vel(a1)
-                bmi.s   loc_4BDFA
+                bmi.s   CNZMiniS3_TopCheckRollerMovingLeft
                 tst.w   x_vel(a0)
-                bpl.s   loc_4BE04                       ; If player and top are moving the same direction, don't need to reverse X direction
-                bra.w   loc_4BE00
+                bpl.s   CNZMiniS3_TopCheckBounceY       ; If player and top are moving the same direction, don't need to reverse X direction
+                bra.w   CNZMiniS3_TopReflectOpposedX
 ; ---------------------------------------------------------------------------
 
-loc_4BDFA:
+CNZMiniS3_TopCheckRollerMovingLeft:
                 tst.w   x_vel(a0)
-                bmi.s   loc_4BE04                       ; If player and top are moving the same direction, don't need to reverse X direction
+                bmi.s   CNZMiniS3_TopCheckBounceY       ; If player and top are moving the same direction, don't need to reverse X direction
 
-loc_4BE00:
+CNZMiniS3_TopReflectOpposedX:
                 neg.w   x_vel(a0)                       ; If moving in opposite directions, reverse
 
-loc_4BE04:
+; Report a bounce only when the top's vertical velocity is nonnegative
+CNZMiniS3_TopCheckBounceY:
                 tst.w   y_vel(a0)
-                bmi.w   loc_4BE10
+                bmi.w   CNZMiniS3_TopBounceReject
                 moveq   #1,d0                           ; If top is moving downward on collision, set collision flag
 
-locret_4BE0E:
+CNZMiniS3_TopBounceAcceptedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BE10:
+CNZMiniS3_TopBounceReject:
                 moveq   #0,d0
                 rts
 ; End of function ReflectCNZMinibossTopForRisingRoller
@@ -194,51 +195,52 @@ CNZMinibossTop_CheckHitBase:
                 move.w  x_pos(a1),d2
                 add.w   (a2)+,d2
                 cmp.w   d2,d0
-                blo.s   loc_4BE3C
+                blo.s   CNZMiniS3_TopChooseCoilBounds
                 add.w   (a2)+,d2
                 cmp.w   d2,d0
-                bhs.s   loc_4BE3C
+                bhs.s   CNZMiniS3_TopChooseCoilBounds
                 move.w  y_pos(a1),d2
                 add.w   (a2)+,d2
                 cmp.w   d2,d1
-                blo.s   loc_4BE3C
+                blo.s   CNZMiniS3_TopChooseCoilBounds
                 add.w   (a2)+,d2
                 cmp.w   d2,d1
-                blo.s   loc_4BE70
+                blo.s   CNZMiniS3_TopLatchOpenCoilHit
 
-loc_4BE3C:
+CNZMiniS3_TopChooseCoilBounds:
                 lea     CNZMiniboss_CoilRange(pc),a2    ; Then it's the coil, different ranges depending on open or close state
                 btst    #6,$38(a1)
-                beq.s   loc_4BE4C
+                beq.s   CNZMiniS3_TopCheckCoilBounds
                 lea     CNZMiniboss_CoilOpenRange(pc),a2
 
-loc_4BE4C:
+CNZMiniS3_TopCheckCoilBounds:
                 move.w  x_pos(a1),d2
                 add.w   (a2)+,d2
                 cmp.w   d2,d0
-                blo.s   loc_4BE6C
+                blo.s   CNZMiniS3_TopRejectBossContact
                 add.w   (a2)+,d2
                 cmp.w   d2,d0
-                bhs.s   loc_4BE6C
+                bhs.s   CNZMiniS3_TopRejectBossContact
                 move.w  y_pos(a1),d2
                 add.w   (a2)+,d2
                 cmp.w   d2,d1
-                blo.s   loc_4BE6C
+                blo.s   CNZMiniS3_TopRejectBossContact
                 add.w   (a2)+,d2
                 cmp.w   d2,d1
-                blo.s   loc_4BE70
+                blo.s   CNZMiniS3_TopLatchOpenCoilHit
 
-loc_4BE6C:
+CNZMiniS3_TopRejectBossContact:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BE70:
+; Contact is reported for either coil pose. Only the open coil takes the hit
+CNZMiniS3_TopLatchOpenCoilHit:
                 btst    #6,$38(a1)
-                beq.s   loc_4BE7C
+                beq.s   CNZMiniS3_TopAcceptBossContact
                 st      $44(a1)                         ; Only set hit state if coil was open to begin with
 
-loc_4BE7C:
+CNZMiniS3_TopAcceptBossContact:
                 moveq   #1,d2
                 rts
 ; End of function CNZMinibossTop_CheckHitBase

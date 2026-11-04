@@ -8,10 +8,10 @@ SetCNZBossMagnetDepthFromPhase:
                 move.b  $3C(a0),d0
                 move.w  #$200,priority(a0)
                 addi.b  #$40,d0
-                bpl.s   locret_6EBEE
+                bpl.s   CNZBossMagnet_ReturnAfterDepthSelection
                 move.w  #$280,priority(a0)
 
-locret_6EBEE:
+CNZBossMagnet_ReturnAfterDepthSelection:
                 rts
 ; End of function SetCNZBossMagnetDepthFromPhase
 
@@ -19,28 +19,28 @@ locret_6EBEE:
 
 SelectCNZBossMagnetPhaseFrame:
                 cmpi.b  #3,mapping_frame(a0)
-                beq.s   locret_6EC12
+                beq.s   CNZBossSK_PhaseFrameReturn
                 move.b  $3C(a0),d0
-                lea     byte_6EC14(pc),a1
+                lea     CNZBossMagnet_PhaseFrameBands(pc),a1
                 moveq   #5-1,d6
 
-loc_6EC02:
+CNZBossMagnet_FindPhaseFrameBand:
                 cmp.b   (a1)+,d0
-                blo.s   loc_6EC0E
+                blo.s   CNZBossMagnet_ApplyPhaseBandFrame
                 addq.w  #1,a1
-                dbf     d6,loc_6EC02
+                dbf     d6,CNZBossMagnet_FindPhaseFrameBand
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EC0E:
+CNZBossMagnet_ApplyPhaseBandFrame:
                 move.b  (a1)+,mapping_frame(a0)
 
-locret_6EC12:
+CNZBossSK_PhaseFrameReturn:
                 rts
 ; End of function SelectCNZBossMagnetPhaseFrame
 
 ; ---------------------------------------------------------------------------
-byte_6EC14:
+CNZBossMagnet_PhaseFrameBands:
                 dc.b    $30,   1
                 dc.b    $58,   8
                 dc.b    $A8,   2
@@ -54,13 +54,13 @@ byte_6EC14:
 CNZBossSpark_TryDelete:
                 movea.w parent3(a0),a1
                 btst    #7,$38(a1)
-                bne.s   loc_6EC34
+                bne.s   CNZBossElectricEffect_DeleteForParentEnd
                 btst    #7,status(a1)
-                bne.s   loc_6EC34
+                bne.s   CNZBossElectricEffect_DeleteForParentEnd
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EC34:
+CNZBossElectricEffect_DeleteForParentEnd:
                 jmp     (Go_Delete_Sprite).l
 ; End of function CNZBossSpark_TryDelete
 
@@ -68,11 +68,11 @@ loc_6EC34:
 
 PullBothPlayersWithCNZBossMagnet:
                 btst    #2,$38(a0)
-                bne.s   loc_6EC44
+                bne.s   CNZEndBoss_ApplyAttractionToBothPlayers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EC44:
+CNZEndBoss_ApplyAttractionToBothPlayers:
                 lea     (Player_1).w,a1
                 bsr.w   DisplacePlayerTowardCNZBossMagnet
                 lea     (Player_2).w,a1
@@ -84,29 +84,30 @@ DisplacePlayerTowardCNZBossMagnet:
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
                 spl     d1
-                bpl.s   loc_6EC5E
+                bpl.s   CNZBossSK_QuantizeMagnetDistance
                 neg.w   d0
 
-loc_6EC5E:
+; Quantize in $40-pixel steps and clamp at $1C0 before indexing the displacement table
+CNZBossSK_QuantizeMagnetDistance:
                 andi.w  #$FFC0,d0
                 cmpi.w  #$1C0,d0
-                blo.s   loc_6EC6C
+                blo.s   CNZBossSK_LoadSignedMagnetPull
                 move.w  #$1C0,d0
 
-loc_6EC6C:
+CNZBossSK_LoadSignedMagnetPull:
                 lsr.w   #4,d0
-                move.l  dword_6EC7E(pc,d0.w),d2
+                move.l  CNZBossSK_MagnetPullByDistance(pc,d0.w),d2
                 tst.b   d1
-                bne.s   loc_6EC78
+                bne.s   CNZEndBoss_ApplyAttractionXDisplacement
                 neg.l   d2
 
-loc_6EC78:
+CNZEndBoss_ApplyAttractionXDisplacement:
                 add.l   d2,x_pos(a1)
                 rts
 ; End of function DisplacePlayerTowardCNZBossMagnet
 
 ; ---------------------------------------------------------------------------
-dword_6EC7E:
+CNZBossSK_MagnetPullByDistance:
                 dc.l    $28000
                 dc.l    $20000
                 dc.l    $1C000
@@ -120,47 +121,47 @@ dword_6EC7E:
 
 HandleCNZEndBossFourColorHitOrDefeat:
                 tst.l   (a0)
-                beq.s   locret_6ECF4
+                beq.s   CNZEndBoss_ReturnFromHitOrDefeatCheck
                 tst.b   collision_flags(a0)
-                bne.s   locret_6ECF4
+                bne.s   CNZEndBoss_ReturnFromHitOrDefeatCheck
                 tst.b   collision_property(a0)
-                beq.s   loc_6ECF6
+                beq.s   CNZEndBoss_InstallDefeatWait
                 tst.b   $20(a0)
-                bne.s   loc_6ECC2
+                bne.s   CNZEndBoss_SelectHitFlashPalette
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_6ECC2:
+CNZEndBoss_SelectHitFlashPalette:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_6ECD4
+                bne.s   CNZEndBoss_CopyHitFlashAndCountDown
                 addq.w  #2*4,d0
 
-loc_6ECD4:
-                lea     word_6ED0A(pc),a1
-                lea     word_6ED12(pc,d0.w),a2
+CNZEndBoss_CopyHitFlashAndCountDown:
+                lea     CNZEndBoss_HitFlashPaletteDestinations(pc),a1
+                lea     CNZEndBoss_HitFlashColorSets(pc,d0.w),a2
                 jsr     (CopyWordData_4).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_6ECF4
+                bne.s   CNZEndBoss_ReturnFromHitOrDefeatCheck
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_6ECF4:
+CNZEndBoss_ReturnFromHitOrDefeatCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6ECF6:
+CNZEndBoss_InstallDefeatWait:
                 move.l  #Wait_FadeToLevelMusic,(a0)
-                move.l  #loc_6E6C6,$34(a0)
+                move.l  #CNZEndBoss_BeginDefeatBreakup,$34(a0)
                 jmp     (BossDefeated_StopTimer).l
 ; End of function HandleCNZEndBossFourColorHitOrDefeat
 
 ; ---------------------------------------------------------------------------
-word_6ED0A:
+CNZEndBoss_HitFlashPaletteDestinations:
                 dc.w    Normal_palette_line_2+$12, Normal_palette_line_2+$14, Normal_palette_line_2+$16, Normal_palette_line_2+$1C
-word_6ED12:
+CNZEndBoss_HitFlashColorSets:
                 dc.w    $60,   $20,   $20,  $640
                 dc.w    $888,  $EEE,  $EEE,  $AAA
 
@@ -169,18 +170,18 @@ word_6ED12:
 BreakCNZBossDroppedCoreWhenParentDefeats:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_6ED32
+                beq.s   CNZBossCore_CheckParentBreakupFlag
                 clr.b   collision_flags(a0)
 
-loc_6ED32:
+CNZBossCore_CheckParentBreakupFlag:
                 btst    #4,$38(a1)
-                bne.s   loc_6ED3C
+                bne.s   CNZBossCore_SpawnDefeatFragments
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6ED3C:
+CNZBossCore_SpawnDefeatFragments:
                 move.l  #Delete_Current_Sprite,(a0)
-                lea     ChildObjDat_6EDF2(pc),a2
+                lea     CNZBossCore_FragmentChildRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function BreakCNZBossDroppedCoreWhenParentDefeats
 
@@ -189,16 +190,16 @@ loc_6ED3C:
 DetachCNZBossMagnetAfterParentDefeat:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_6ED5C
+                beq.s   CNZBossMagnet_CheckParentBreakupFlag
                 clr.b   collision_flags(a0)
 
-loc_6ED5C:
+CNZBossMagnet_CheckParentBreakupFlag:
                 btst    #4,$38(a1)
-                bne.s   loc_6ED66
+                bne.s   CNZBossMagnet_DetachIntoDefeatMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6ED66:
+CNZBossMagnet_DetachIntoDefeatMotion:
                 bset    #7,status(a0)
                 move.b  #1,mapping_frame(a0)
                 clr.b   collision_flags(a0)

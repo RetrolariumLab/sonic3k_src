@@ -41,7 +41,7 @@ Child1_CNZMinibossTimedSparks:
                 dc.l    Obj_CNZMinibossTimedSparks
                 dc.b    $14, $18
                 dc.w    1-1
-                dc.l    loc_4BAF2
+                dc.l    CNZMiniS3_InitAuxiliaryTouchActor
                 dc.b    0,  -4
 Child1_CNZCoilOpenSparks:
                 dc.w    3-1

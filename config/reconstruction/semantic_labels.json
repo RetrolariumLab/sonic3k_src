@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 24154,
+  "applied_targets": 24515,
   "packets": [
     {
       "id": "01-audio",
@@ -5271,7 +5271,7 @@
     },
     {
       "id": "39-boss-cnz",
-      "state": "pending",
+      "state": "applied",
       "target_count": 361,
       "scope_sha256": "ba08d7a73848bdc0b438cd8405f58962eea7343fab72f3d1ed10f3adb0e2144c",
       "registry": "config/reconstruction/semantic_labels/39-boss-cnz.json",
@@ -5337,7 +5337,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us"]
         }
       ],
-      "destination_sha256": "16273d0e68caa82190b3952b4f3317b950f3214b9ba3dcde1f48094b24cba463"
+      "destination_sha256": "64798f0071091fae27ec4d69af4588053ea930b86e6a666a540494d21a25de1b"
     },
     {
       "id": "40-boss-fbz",
@@ -7455,6 +7455,7 @@
     "35b-enemies-sk",
     "36-boss-aiz",
     "37-boss-hcz",
-    "38-boss-mgz"
+    "38-boss-mgz",
+    "39-boss-cnz"
   ]
 }

@@ -15,40 +15,40 @@ Obj_CNZMinibossCoil:
 Obj_CNZMinibossCoilClose:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4BACC
+                bne.s   CNZMiniS3_DeleteCoilOrSpark
                 btst    #6,$38(a1)
-                bne.s   loc_4BABE
+                bne.s   CNZMiniS3_CoilBeginOpenTouch
                 jsr     (Refresh_ChildPosition).l       ; If base is not open
                 movea.w parent3(a0),a1
                 tst.b   collision_flags(a0)
-                bne.s   loc_4BAB2                       ; Skip if collision is set
+                bne.s   CNZMiniS3_ClosedCoilResetTouch  ; Skip if collision is set
                 bset    #2,$38(a0)
-                bne.s   loc_4BA9E                       ; If $38 already set, branch
+                bne.s   CNZMiniS3_ClosedCoilTickStun    ; If $38 already set, branch
                 move.b  #$10,$3A(a0)
                 btst    #2,$38(a1)
-                bne.s   loc_4BA9E                       ; If base has been stunned already, branch
+                bne.s   CNZMiniS3_ClosedCoilTickStun    ; If base has been stunned already, branch
                 move.b  collision_flags(a1),$25(a1)     ; Backup parent collision
                 clr.b   collision_flags(a1)             ; Unset parent collision
                 subq.b  #1,collision_property(a1)       ; Remove a hit
 
-loc_4BA9E:
+CNZMiniS3_ClosedCoilTickStun:
                 subq.b  #1,$3A(a0)
-                bpl.w   locret_4B628
+                bpl.w   CNZMiniS3_SharedReturn
                 bclr    #2,$38(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-loc_4BAB2:
+CNZMiniS3_ClosedCoilResetTouch:
                 move.b  #$70,collision_property(a0)
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_4BABE:
+CNZMiniS3_CoilBeginOpenTouch:
                 move.l  #Obj_CNZMinibossCoilOpen,(a0)
                 move.b  #$A9,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BACC:
+CNZMiniS3_DeleteCoilOrSpark:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -56,19 +56,19 @@ Obj_CNZMinibossCoilOpen:
                 jsr     Refresh_ChildPosition(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4BACC
+                bne.s   CNZMiniS3_DeleteCoilOrSpark
                 btst    #6,$38(a1)
                 beq.w   Obj_CNZMinibossCoil
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
-loc_4BAF2:
-                move.l  #loc_4BB00,(a0)
+CNZMiniS3_InitAuxiliaryTouchActor:
+                move.l  #CNZMiniS3_AuxiliaryFollowAndTouch,(a0)
                 move.b  #$AA,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4BB00:
+CNZMiniS3_AuxiliaryFollowAndTouch:
                 jsr     Refresh_ChildPosition(pc)
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
@@ -81,11 +81,11 @@ Obj_CNZMinibossTimedSparks:
                 move.l  #Obj_CNZMinibossTimedSparksGo,$34(a0)
                 move.l  #AniRaw_CNZMinibossTimedSparkLeft,$30(a0)
                 tst.b   subtype(a0)
-                beq.s   locret_4BB42
+                beq.s   CNZMiniS3_TimedSparkInitReturn
                 move.l  #AniRaw_CNZMinibossTimedSparkRight,$30(a0)
                 move.w  #2,$2E(a0)
 
-locret_4BB42:
+CNZMiniS3_TimedSparkInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -111,10 +111,10 @@ Obj_CNZMinibossSparks:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                move.l  off_4BB94(pc,d0.w),$30(a0)
+                move.l  CNZMiniS3_OpenSparkAnimationPointers(pc,d0.w),$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
-off_4BB94:
+CNZMiniS3_OpenSparkAnimationPointers:
                 dc.l    AniRaw_CNZMinibossSparks1
                 dc.l    AniRaw_CNZMinibossSparks2
                 dc.l    AniRaw_CNZMinibossSparks3
@@ -123,7 +123,7 @@ off_4BB94:
 Obj_CNZMinibossSparksMain:
                 movea.w parent3(a0),a1
                 btst    #6,$38(a1)
-                beq.w   loc_4BACC
+                beq.w   CNZMiniS3_DeleteCoilOrSpark
                 jsr     Refresh_ChildPosition(pc)
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Child_DrawTouch_Sprite).l
@@ -136,10 +136,10 @@ Obj_CNZMinibossBounceEffect:
                 move.l  #AnimateRaw_DrawTouch,(a0)
                 move.w  #$3208,x_pos(a0)
                 btst    #0,render_flags(a0)
-                beq.s   loc_4BBE6
+                beq.s   CNZMiniS3_WallBounceSetDeleteCallback
                 move.w  #$3378,x_pos(a0)
 
-loc_4BBE6:
+CNZMiniS3_WallBounceSetDeleteCallback:
                 move.l  #AniRaw_CNZMBossBoundEffect,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
@@ -151,14 +151,14 @@ Obj_CNZMinibossDebris:
                 move.l  #Obj_FlickerMove,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  byte_4BC26(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  CNZMiniS3_DebrisPlacementOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 lsr.w   #1,d0
                 move.b  CNZMinibossDebris_Frames(pc,d0.w),mapping_frame(a0)
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
-byte_4BC26:
+CNZMiniS3_DebrisPlacementOffsets:
                 dc.b    -$10,   0
                 dc.b    $10,   0
                 dc.b    0, $14

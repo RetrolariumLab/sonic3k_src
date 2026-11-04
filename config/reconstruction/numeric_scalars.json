@@ -12,7 +12,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$28000",
       "count": 1,
@@ -21,7 +21,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$20000",
       "count": 1,
@@ -30,7 +30,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$1C000",
       "count": 1,
@@ -39,7 +39,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$18000",
       "count": 1,
@@ -48,7 +48,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$14000",
       "count": 1,
@@ -57,7 +57,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$10000",
       "count": 1,
@@ -66,7 +66,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$C000",
       "count": 1,
@@ -75,7 +75,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/motion_helpers.s",
-      "owner": "dword_4C758",
+      "owner": "CNZBossS3_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$8000",
       "count": 1,
@@ -129,7 +129,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$28000",
       "count": 1,
@@ -138,7 +138,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$20000",
       "count": 1,
@@ -147,7 +147,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$1C000",
       "count": 1,
@@ -156,7 +156,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$18000",
       "count": 1,
@@ -165,7 +165,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$14000",
       "count": 1,
@@ -174,7 +174,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$10000",
       "count": 1,
@@ -183,7 +183,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$C000",
       "count": 1,
@@ -192,7 +192,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/motion_helpers.s",
-      "owner": "dword_6EC7E",
+      "owner": "CNZBossSK_MagnetPullByDistance",
       "kind": "rom-range-long",
       "operand": "$8000",
       "count": 1,

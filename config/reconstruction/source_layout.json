@@ -14637,7 +14637,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_4C688",
+          "name": "CNZBossShellFragment_InitializeAndDraw",
           "kind": "terminal-tail",
           "reason": "The complete final debris actor ends in a drawing-service tail call and contains no original independent return boundary.",
           "origin_first_line": 3827,
@@ -14675,7 +14675,7 @@
       "responsibility": "Carnival Night end-boss movement, collision, attack and child positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 208,
+      "physical_lines": 209,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -14772,7 +14772,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6EB34",
+          "name": "CNZBossSK_CycleFrameNineFlips",
           "kind": "terminal-tail",
           "reason": "Keep the final Carnival Night rendering callback return, retained unused initialization and defeat effect tails together; the anonymous code following its return had no original independent boundary.",
           "origin_first_line": 11326,
@@ -14800,7 +14800,7 @@
       "responsibility": "Carnival Night end-boss movement, collision, attack and child positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 208,
+      "physical_lines": 209,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -14910,7 +14910,7 @@
       "responsibility": "Carnival Night miniboss battle controller, top actor and block explosion state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 406,
+      "physical_lines": 407,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -14950,7 +14950,7 @@
       "responsibility": "Carnival Night miniboss swing, collision, defeat, palette and player response helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 244,
+      "physical_lines": 246,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -15070,7 +15070,7 @@
       "responsibility": "Carnival Night miniboss battle controller, top actor and block explosion state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 402,
+      "physical_lines": 403,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -15100,7 +15100,7 @@
       "responsibility": "Carnival Night miniboss swing, collision, defeat, palette and player response helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 244,
+      "physical_lines": 246,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",

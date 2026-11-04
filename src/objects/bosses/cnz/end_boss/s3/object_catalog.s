@@ -12,58 +12,58 @@ ObjDat_CNZEndBoss:
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,1)
                 dc.w    $280
                 dc.b    $20, $20,   5,   0
-ObjDat3_4C872:
+CNZBossCore_Attributes:
                 dc.l    Map_CNZEndBoss
                 dc.w    make_art_tile(ArtTile_CNZEndBoss,1,0)
                 dc.w    $280
                 dc.b    $10, $10,   4, $8B
-word_4C87E:
+CNZBossCoreFragment_PartialAttributes:
                 dc.w    $280
                 dc.b    8, $10,  $A,   0
-word_4C884:
+CNZBossShellFragment_PartialAttributes:
                 dc.w    $280
                 dc.b    $14, $14,   0,   0
-ObjDat3_4C88A:
+CNZBossMagnet_Attributes:
                 dc.l    Map_CNZEndBoss
                 dc.w    make_art_tile(ArtTile_CNZEndBoss,1,0)
                 dc.w    $200
                 dc.b    8, $10,   1, $9E
-ObjDat3_4C896:
+CNZBossElectricEffect_Attributes:
                 dc.l    Map_CNZEndBoss
                 dc.w    make_art_tile(ArtTile_CNZEndBoss,1,0)
                 dc.w    $80
                 dc.b    $10, $40,   6, $AB
-ChildObjDat_4C8A2:
+CNZEndBoss_CoreChildRecord:
                 dc.w    1-1
-                dc.l    loc_4C33C
+                dc.l    CNZBossCore_DispatchStateAndHandleDefeat
                 dc.b    0, $14
-ChildObjDat_4C8AA:
+CNZEndBoss_RepeatedMagnetChildRecord:
                 dc.w    4-1
-                dc.l    loc_4C45C
+                dc.l    CNZBossS3_OrbitDispatchAndMove
                 dc.b    0,   8
-ChildObjDat_4C8B2:
+CNZBossMagnet_ElectricChildRecord:
                 dc.w    1-1
-                dc.l    loc_4C5C6
+                dc.l    CNZBossElectricEffect_Initialize
                 dc.b    0, $4C
-ChildObjDat_4C8BA:
+CNZEndBoss_ElectricPairChildRecords:
                 dc.w    2-1
-                dc.l    loc_4C5C6
+                dc.l    CNZBossElectricEffect_Initialize
                 dc.b    -$C, $54
-                dc.l    loc_4C5C6
+                dc.l    CNZBossElectricEffect_Initialize
                 dc.b    $C, $54
-ChildObjDat_4C8C8:
+CNZBossCore_FragmentChildRecords:
                 dc.w    2-1
-                dc.l    loc_4C43A
+                dc.l    CNZBossCoreFragment_Initialize
                 dc.b    -8,   0
-                dc.l    loc_4C43A
+                dc.l    CNZBossCoreFragment_Initialize
                 dc.b    8,   0
-ChildObjDat_4C8D6:
+CNZEndBoss_ShellFragmentChildRecords:
                 dc.w    2-1
-                dc.l    loc_4C688
+                dc.l    CNZBossShellFragment_InitializeAndDraw
                 dc.b    -$14,   0
-                dc.l    loc_4C688
+                dc.l    CNZBossShellFragment_InitializeAndDraw
                 dc.b    $14,   0
-byte_4C8E4:
+CNZBossMagnet_RawFrameDelayScript:
                 dc.b    1,   0
                 dc.b    3,   0
                 dc.b    1,   0
@@ -72,7 +72,7 @@ byte_4C8E4:
                 dc.b    3,   0
                 dc.b    1,   9
                 dc.b    $FC
-byte_4C8F3:
+CNZBossCore_RawFrameDelayScript:
                 dc.b    4,   0
                 dc.b    5,   0
                 dc.b    4,   0
@@ -81,15 +81,15 @@ byte_4C8F3:
                 dc.b    5,   0
                 dc.b    4,   9
                 dc.b    $FC
-byte_4C902:
+CNZBossS3_CallbackAnimation:
                 dc.b    0,   9,   6,   9,   7, $F4
-byte_4C908:
+CNZBossS3_LegacyShortDelayAnim:
                 dc.b    9, $1F
                 dc.b    6,   0
                 dc.b    9,   2
                 dc.b    7,   0
                 dc.b    $FC
-byte_4C911:
+CNZBossS3_LegacyLongDelayAnim:
                 dc.b    9, $24
                 dc.b    6,   0
                 dc.b    9,   2

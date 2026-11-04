@@ -1173,9 +1173,15 @@
       "commits": ["c0155a19c6cd780754ab56ae3ffe4a09051405d3"]
     },
     {
-      "id": "current-shorten-38-boss-mgz",
+      "id": "change-0000f2f02619",
       "kind": "source_or_tooling",
       "summary": "Apply 664 reviewed short labels for boss mgz.",
+      "commits": ["0000f2f0261923e57bf74f70d915104d0cccbef8"]
+    },
+    {
+      "id": "current-shorten-39-boss-cnz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 149 reviewed short labels for boss cnz.",
       "commits": ["release-commit"]
     }
   ],
