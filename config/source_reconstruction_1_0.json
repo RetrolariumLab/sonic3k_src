@@ -1137,9 +1137,15 @@
       "commits": ["42f3a3301e5f4f967b24fa50c7fb8e31b0780fe2"]
     },
     {
-      "id": "current-shorten-33-zone-ssz",
+      "id": "change-4a96cd734ab4",
       "kind": "source_or_tooling",
       "summary": "Apply 465 reviewed short labels for ssz.",
+      "commits": ["4a96cd734ab4de27db5ec4017f245b83209de2de"]
+    },
+    {
+      "id": "current-shorten-34-zone-dez",
+      "kind": "source_or_tooling",
+      "summary": "Apply 405 reviewed short labels for dez.",
       "commits": ["release-commit"]
     }
   ],

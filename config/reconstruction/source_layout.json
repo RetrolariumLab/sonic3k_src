@@ -8298,7 +8298,7 @@
       "responsibility": "Death Egg act-three screen and background events, deformation and coordinated scene actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 560,
+      "physical_lines": 562,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -58486,7 +58486,7 @@
       "responsibility": "Gravity hub player contact, directional control and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 156,
+      "physical_lines": 157,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -58766,7 +58766,7 @@
       "responsibility": "Lift pad motion, player contact, transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 231,
+      "physical_lines": 232,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -58926,7 +58926,7 @@
       "responsibility": "Teleporter player capture, path state, transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 259,
+      "physical_lines": 260,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -58961,7 +58961,7 @@
       "responsibility": "Tilting bridge coordination, motion and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 149,
+      "physical_lines": 150,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -59006,7 +59006,7 @@
       "responsibility": "Torpedo launcher activation, projectile creation and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 84,
+      "physical_lines": 85,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -59051,7 +59051,7 @@
       "responsibility": "Tunnel movement control, path state, transition-ring spawning and transport effects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 431,
+      "physical_lines": 432,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -59091,7 +59091,7 @@
       "responsibility": "Tunnel launcher capture, launch countdown, player transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 182,
+      "physical_lines": 183,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",

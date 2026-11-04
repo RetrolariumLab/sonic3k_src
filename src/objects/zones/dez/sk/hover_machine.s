@@ -12,8 +12,8 @@ Obj_DEZHoverMachine:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$280,priority(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_494D4
-                move.l  #loc_494EA,(a1)
+                bne.w   SKDEZHover_InitRootAnimation
+                move.l  #SKDEZHover_SelectFieldPriority,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -28,22 +28,22 @@ Obj_DEZHoverMachine:
                 move.w  y_pos(a0),d3
                 move.w  d3,y_pos(a1)
 
-loc_494D4:
-                move.l  #loc_494DA,(a0)
+SKDEZHover_InitRootAnimation:
+                move.l  #SKDEZHover_ToggleRootFrame,(a0)
 
-loc_494DA:
+SKDEZHover_ToggleRootFrame:
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #1,mapping_frame(a0)
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_494EA:
+SKDEZHover_SelectFieldPriority:
                 move.w  #$200,priority(a0)
                 move.b  angle(a0),d0
-                bpl.s   loc_494FC
+                bpl.s   SKDEZHover_MoveFieldAndLiftPlayers
                 move.w  #$300,priority(a0)
 
-loc_494FC:
+SKDEZHover_MoveFieldAndLiftPlayers:
                 addq.b  #2,angle(a0)
                 jsr     (GetSineCosine).l
                 asr.w   #3,d1
@@ -63,7 +63,7 @@ ApplyDezHoverMachineFieldToPlayer:
                 sub.w   x_pos(a0),d0
                 addi.w  #$40,d0
                 cmpi.w  #$80,d0
-                bhs.w   locret_495D6
+                bhs.w   SKDEZHover_LiftReturn
                 jsr     (GetSineCosine).l
                 asr.w   #2,d0
                 addi.w  #$20,d0
@@ -74,17 +74,17 @@ ApplyDezHoverMachineFieldToPlayer:
                 sub.w   y_pos(a0),d1
                 add.w   d0,d1
                 cmp.w   d2,d1
-                bhs.s   locret_495D6
+                bhs.s   SKDEZHover_LiftReturn
                 cmpi.b  #4,routine(a1)
-                bhs.w   locret_495D6
+                bhs.w   SKDEZHover_LiftReturn
                 tst.b   object_control(a1)
-                bne.s   locret_495D6
+                bne.s   SKDEZHover_LiftReturn
                 sub.w   d0,d1
-                bcs.s   loc_49578
+                bcs.s   SKDEZHover_ApplyLiftAndResetAirState
                 not.w   d1
                 add.w   d1,d1
 
-loc_49578:
+SKDEZHover_ApplyLiftAndResetAirState:
                 add.w   d0,d1
                 neg.w   d1
                 asr.w   #4,d1
@@ -97,19 +97,19 @@ loc_49578:
                 move.w  #1,ground_vel(a1)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_495B8
+                bne.s   SKDEZHover_TryStartPlayerFlip
                 moveq   #signextendB(sfx_MagneticSpike),d0
                 jsr     (Play_SFX).l
 
-loc_495B8:
+SKDEZHover_TryStartPlayerFlip:
                 tst.b   flip_angle(a1)
-                bne.s   locret_495D6
+                bne.s   SKDEZHover_LiftReturn
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #$7F,flips_remaining(a1)
                 move.b  #8,flip_speed(a1)
 
-locret_495D6:
+SKDEZHover_LiftReturn:
                 rts
 ; End of function ApplyDezHoverMachineFieldToPlayer
 

@@ -13,7 +13,7 @@ Obj_DEZLiftPad:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_47422
+                bne.w   SKDEZLiftPad_InitLiftMotion
                 move.l  #Draw_Sprite,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
@@ -32,23 +32,24 @@ Obj_DEZLiftPad:
                 move.w  d1,mainspr_childsprites(a1)
                 subq.w  #1,d1
 
-loc_47406:
+; The loop assumes the subtype's segment count is nonzero
+SKDEZLiftPad_InitArmSegments:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #1,(a2)+
-                dbf     d1,loc_47406
+                dbf     d1,SKDEZLiftPad_InitArmSegments
                 move.b  #2,sub2_mapframe(a1)
                 move.b  #1,mapping_frame(a1)
                 move.w  a1,$3E(a0)
 
-loc_47422:
+SKDEZLiftPad_InitLiftMotion:
                 move.w  #0,angle(a0)
                 move.w  #0,$32(a0)
                 move.b  #-1,$36(a0)
                 andi.b  #$F0,subtype(a0)
-                move.l  #loc_47440,(a0)
+                move.l  #SKDEZLiftPad_MoveAndCheckTopSolid,(a0)
 
-loc_47440:
+SKDEZLiftPad_MoveAndCheckTopSolid:
                 move.w  x_pos(a0),-(sp)
                 bsr.w   PositionDezLiftPadAndArmSegments
                 move.w  #$18,d1
@@ -59,17 +60,17 @@ loc_47440:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_47472
+                bhi.w   SKDEZLiftPad_ClearPlacementRespawn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47472:
+SKDEZLiftPad_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_4747E
+                beq.s   SKDEZLiftPad_DeleteArmAndRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_4747E:
+SKDEZLiftPad_DeleteArmAndRoot:
                 movea.w $3E(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 jmp     (Delete_Current_Sprite).l
@@ -81,32 +82,32 @@ PositionDezLiftPadAndArmSegments:
                 moveq   #0,d1
                 bsr.w   AdvanceDezLiftPadAngularMotion
                 cmp.b   $36(a0),d0
-                beq.w   locret_47578
+                beq.w   SKDEZLiftPad_GeometryReturn
                 move.b  d0,$36(a0)
                 btst    #4,subtype(a0)
-                beq.s   loc_474BC
+                beq.s   SKDEZLiftPad_TryRemapLiftPhase
                 neg.w   d0
                 btst    #5,subtype(a0)
-                beq.s   loc_474CA
+                beq.s   SKDEZLiftPad_RotateAndReflectPhase
                 neg.w   d0
                 addi.w  #$C0,d0
-                bra.s   loc_474CA
+                bra.s   SKDEZLiftPad_RotateAndReflectPhase
 ; ---------------------------------------------------------------------------
 
-loc_474BC:
+SKDEZLiftPad_TryRemapLiftPhase:
                 btst    #5,subtype(a0)
-                beq.s   loc_474CA
+                beq.s   SKDEZLiftPad_RotateAndReflectPhase
                 neg.w   d0
                 addi.w  #$40,d0
 
-loc_474CA:
+SKDEZLiftPad_RotateAndReflectPhase:
                 addi.w  #$80,d0
                 btst    #0,status(a0)
-                beq.s   loc_474DC
+                beq.s   SKDEZLiftPad_CalcArmSegmentStep
                 neg.w   d0
                 addi.w  #$80,d0
 
-loc_474DC:
+SKDEZLiftPad_CalcArmSegmentStep:
                 jsr     (GetSineCosine).l
                 move.w  $46(a0),d2
                 move.w  $44(a0),d3
@@ -114,7 +115,7 @@ loc_474DC:
                 movea.w $3E(a0),a1
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #2,d6
-                bcs.w   locret_47578
+                bcs.w   SKDEZLiftPad_GeometryReturn
                 swap    d0
                 swap    d1
                 asr.l   #4,d0
@@ -123,7 +124,7 @@ loc_474DC:
                 move.l  d1,d5
                 lea     sub3_x_pos(a1),a2
 
-loc_4750A:
+SKDEZLiftPad_PlaceArmSegments:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -135,7 +136,7 @@ loc_4750A:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_4750A
+                dbf     d6,SKDEZLiftPad_PlaceArmSegments
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -157,13 +158,13 @@ loc_4750A:
                 move.w  d4,y_pos(a0)
                 subi.w  #$20,d5
                 btst    #0,status(a0)
-                beq.s   loc_47574
+                beq.s   SKDEZLiftPad_StoreLiftEndpointX
                 addi.w  #$40,d5
 
-loc_47574:
+SKDEZLiftPad_StoreLiftEndpointX:
                 move.w  d5,x_pos(a0)
 
-locret_47578:
+SKDEZLiftPad_GeometryReturn:
                 rts
 ; End of function PositionDezLiftPadAndArmSegments
 
@@ -171,57 +172,57 @@ locret_47578:
 
 AdvanceDezLiftPadAngularMotion:
                 tst.w   $34(a0)
-                beq.s   loc_47592
+                beq.s   SKDEZLiftPad_TryStartCycleFromP1
                 btst    #p1_standing_bit,status(a0)
-                bne.w   loc_4760E
+                bne.w   SKDEZLiftPad_ReturnAngleHighByte
                 subq.w  #1,$34(a0)
-                bra.w   loc_4760E
+                bra.w   SKDEZLiftPad_ReturnAngleHighByte
 ; ---------------------------------------------------------------------------
 
-loc_47592:
+SKDEZLiftPad_TryStartCycleFromP1:
                 tst.b   $31(a0)
-                bne.s   loc_475B6
+                bne.s   SKDEZLiftPad_StepAngularAcceleration
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_4760E
+                beq.s   SKDEZLiftPad_ReturnAngleHighByte
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_4760E
+                bne.w   SKDEZLiftPad_ReturnAngleHighByte
                 move.b  #1,$31(a0)
                 moveq   #signextendB(sfx_GravityLift),d0
                 jsr     (Play_SFX).l
 
-loc_475B6:
+SKDEZLiftPad_StepAngularAcceleration:
                 tst.b   $30(a0)
-                bne.s   loc_475E6
+                bne.s   SKDEZLiftPad_StepAngularDeceleration
                 move.w  $32(a0),d0
                 addi.w  #8,d0
                 move.w  d0,$32(a0)
                 add.w   d0,angle(a0)
                 tst.w   d0
-                bne.s   loc_475D6
+                bne.s   SKDEZLiftPad_TryBeginDeceleration
                 move.b  #0,$31(a0)
 
-loc_475D6:
+SKDEZLiftPad_TryBeginDeceleration:
                 cmpi.b  #$20,angle(a0)
-                blo.s   loc_4760E
+                blo.s   SKDEZLiftPad_ReturnAngleHighByte
                 move.b  #1,$30(a0)
-                bra.s   loc_4760E
+                bra.s   SKDEZLiftPad_ReturnAngleHighByte
 ; ---------------------------------------------------------------------------
 
-loc_475E6:
+SKDEZLiftPad_StepAngularDeceleration:
                 move.w  $32(a0),d0
                 subi.w  #8,d0
                 move.w  d0,$32(a0)
                 add.w   d0,angle(a0)
                 tst.w   d0
-                bne.s   loc_47600
+                bne.s   SKDEZLiftPad_TryResumeAcceleration
                 move.w  #30,$34(a0)
 
-loc_47600:
+SKDEZLiftPad_TryResumeAcceleration:
                 cmpi.b  #$20,angle(a0)
-                bhs.s   loc_4760E
+                bhs.s   SKDEZLiftPad_ReturnAngleHighByte
                 move.b  #0,$30(a0)
 
-loc_4760E:
+SKDEZLiftPad_ReturnAngleHighByte:
                 move.b  angle(a0),d0
                 rts
 ; End of function AdvanceDezLiftPadAngularMotion

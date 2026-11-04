@@ -17,19 +17,19 @@ Obj_DEZTunnelLauncher:
                 move.w  x_pos(a0),d2
                 addi.w  #$38,d2
                 btst    #0,status(a0)
-                beq.s   loc_48242
+                beq.s   SKDEZTunnelLaunch_PlaceCountdownDisplay
                 subi.w  #2*$38,d2
 
-loc_48242:
+SKDEZTunnelLaunch_PlaceCountdownDisplay:
                 move.w  d2,(a2)+
                 move.w  y_pos(a0),d3
                 subi.w  #$2C,d3
                 btst    #1,status(a0)
-                beq.s   loc_4825E
+                beq.s   SKDEZTunnelLaunch_InitCountdownDisplay
                 addi.w  #2*$2C,d3
                 bset    #0,render_flags(a0)
 
-loc_4825E:
+SKDEZTunnelLaunch_InitCountdownDisplay:
                 move.w  d3,(a2)+
                 move.w  #0,(a2)+
                 move.b  #0,mapping_frame(a0)
@@ -43,24 +43,24 @@ Obj_DEZTunnelLauncher_Main:
                 lea     (Player_2).w,a1
                 bsr.w   CapturePlayerForDezLightTunnel
                 tst.w   $2E(a0)
-                beq.w   loc_48316
+                beq.w   SKDEZTunnelLaunch_DrawLauncher
                 subq.b  #1,$2E(a0)
-                bne.s   loc_482F4
+                bne.s   SKDEZTunnelLaunch_TickLauncherFrame
                 move.b  #60,$2E(a0)
                 tst.b   $2F(a0)
-                beq.s   loc_482F4
+                beq.s   SKDEZTunnelLaunch_TickLauncherFrame
                 subq.b  #1,$2F(a0)
                 moveq   #signextendB(sfx_LaunchGo),d0
                 cmpi.b  #7,$2F(a0)
-                beq.s   loc_482B2
+                beq.s   SKDEZTunnelLaunch_BeepAndTrySpawnControl
                 moveq   #signextendB(sfx_LaunchReady),d0
 
-loc_482B2:
+SKDEZTunnelLaunch_BeepAndTrySpawnControl:
                 jsr     (Play_SFX).l
                 cmpi.b  #7,$2F(a0)
-                bne.s   loc_482F4
+                bne.s   SKDEZTunnelLaunch_TickLauncherFrame
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_482EE
+                bne.w   SKDEZTunnelLaunch_BeginFinalCountdown
                 move.l  #Obj_DEZTunnelControl,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -68,50 +68,51 @@ loc_482B2:
                 move.b  $30(a0),$30(a1)
                 move.b  $38(a0),$38(a1)
 
-loc_482EE:
+; Start the final countdown even if the tunnel controller could not be allocated
+SKDEZTunnelLaunch_BeginFinalCountdown:
                 move.l  #Obj_DEZTunnelLauncher_Countdown,(a0)
 
-loc_482F4:
+SKDEZTunnelLaunch_TickLauncherFrame:
                 subq.b  #1,mapping_frame(a0)
-                bne.s   loc_48300
+                bne.s   SKDEZTunnelLaunch_BlinkCountdownDigit
                 move.b  #2,mapping_frame(a0)
 
-loc_48300:
+SKDEZTunnelLaunch_BlinkCountdownDigit:
                 move.b  #0,sub2_mapframe(a0)
                 move.b  $2E(a0),d0
                 andi.b  #1,d0
-                beq.s   loc_48316
+                beq.s   SKDEZTunnelLaunch_DrawLauncher
                 move.b  $2F(a0),sub2_mapframe(a0)
 
-loc_48316:
+SKDEZTunnelLaunch_DrawLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
 Obj_DEZTunnelLauncher_Countdown:
                 subq.b  #1,$2E(a0)
-                bne.s   loc_48348
+                bne.s   SKDEZTunnelLaunch_BlinkFinalDigit
                 move.w  #0,$2E(a0)
                 move.b  #0,mapping_frame(a0)
                 move.b  #0,sub2_mapframe(a0)
                 move.b  #0,$30(a0)
                 move.b  #0,$38(a0)
                 move.l  #Obj_DEZTunnelLauncher_Main,(a0)
-                bra.s   loc_4836A
+                bra.s   SKDEZTunnelLaunch_DrawFinalCountdown
 ; ---------------------------------------------------------------------------
 
-loc_48348:
+SKDEZTunnelLaunch_BlinkFinalDigit:
                 move.b  #0,sub2_mapframe(a0)
                 move.b  $2E(a0),d0
                 andi.b  #1,d0
-                beq.s   loc_4835E
+                beq.s   SKDEZTunnelLaunch_TickFinalFrame
                 move.b  $2F(a0),sub2_mapframe(a0)
 
-loc_4835E:
+SKDEZTunnelLaunch_TickFinalFrame:
                 cmpi.b  #6,mapping_frame(a0)
-                beq.s   loc_4836A
+                beq.s   SKDEZTunnelLaunch_DrawFinalCountdown
                 addq.b  #1,mapping_frame(a0)
 
-loc_4836A:
+SKDEZTunnelLaunch_DrawFinalCountdown:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -127,16 +128,16 @@ CapturePlayerForDezLightTunnel:
                 sub.w   x_pos(a0),d0
                 addq.w  #8,d0
                 cmpi.w  #$10,d0
-                bhs.w   locret_48422
+                bhs.w   SKDEZTunnelLaunch_CaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_48422
+                bhs.w   SKDEZTunnelLaunch_CaptureReturn
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_48422
+                bne.w   SKDEZTunnelLaunch_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_48422
+                bne.s   SKDEZTunnelLaunch_CaptureReturn
                 move.w  x_pos(a0),x_pos(a1)
                 move.b  status(a0),d0
                 andi.b  #1,d0
@@ -150,30 +151,30 @@ CapturePlayerForDezLightTunnel:
                 move.b  #9,anim(a1)
                 move.b  #2,dezTunnel_routine(a4)
                 tst.b   $2F(a0)
-                bne.s   locret_48422
+                bne.s   SKDEZTunnelLaunch_CaptureReturn
                 moveq   #signextendB(sfx_LaunchGrab),d0
                 jsr     (Play_SFX).l
                 cmpa.w  #Player_1,a1
-                bne.s   loc_48410
+                bne.s   SKDEZTunnelLaunch_ArmP2WithoutDigit
                 move.w  #$3C0A,$2E(a0)
                 move.b  #$A,sub2_mapframe(a0)
                 moveq   #signextendB(sfx_LaunchReady),d0
                 jsr     (Play_SFX).l
                 tst.b   mapping_frame(a0)
-                bne.s   locret_4840E
+                bne.s   SKDEZTunnelLaunch_P1ArmingReturn
                 move.b  #7,mapping_frame(a0)
 
-locret_4840E:
+SKDEZTunnelLaunch_P1ArmingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48410:
+SKDEZTunnelLaunch_ArmP2WithoutDigit:
                 move.w  #$3C00,$2E(a0)
                 tst.b   mapping_frame(a0)
-                bne.s   locret_48422
+                bne.s   SKDEZTunnelLaunch_CaptureReturn
                 move.b  #7,mapping_frame(a0)
 
-locret_48422:
+SKDEZTunnelLaunch_CaptureReturn:
                 rts
 ; End of function CapturePlayerForDezLightTunnel
 

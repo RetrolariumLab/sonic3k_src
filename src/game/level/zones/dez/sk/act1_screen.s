@@ -10,14 +10,14 @@ DEZ1_ScreenInit:
 
 DEZ1_ScreenEvent:
                 tst.w   (Events_fg_4).w
-                beq.s   loc_59378
+                beq.s   SKDEZ1Events_DrawForeground
                 clr.w   (Events_fg_4).w
                 movea.w $14(a3),a1
                 move.b  #$BD,$6E(a1)
                 jmp     (Refresh_PlaneScreenDirect).l
 ; ---------------------------------------------------------------------------
 
-loc_59378:
+SKDEZ1Events_DrawForeground:
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
 
@@ -35,14 +35,14 @@ DEZ1_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 DEZ1_BackgroundEvent_Index:
-                bra.w   loc_593A8
+                bra.w   SKDEZ1Events_TryQueueAct2Resources
 ; ---------------------------------------------------------------------------
-                bra.w   loc_593EC
+                bra.w   SKDEZ1Events_WaitForArtAndEnterAct2
 ; ---------------------------------------------------------------------------
 
-loc_593A8:
+SKDEZ1Events_TryQueueAct2Resources:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_593E6
+                beq.s   SKDEZ1Events_ApplyInitialPlainScroll
                 clr.w   (Events_fg_5).w
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (DEZ2_16x16_Secondary_Kos).l,a1
@@ -56,13 +56,13 @@ loc_593A8:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_593E6:
+SKDEZ1Events_ApplyInitialPlainScroll:
                 jmp     (PlainDeformation).l
 ; ---------------------------------------------------------------------------
 
-loc_593EC:
+SKDEZ1Events_WaitForArtAndEnterAct2:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_59488
+                bne.w   SKDEZ1Events_ApplyTransitionPlainScroll
                 move.w  #$B01,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -77,9 +77,9 @@ loc_593EC:
                 lea     (Pal_DEZ2+$20).l,a1
                 moveq   #bytesToLcnt($40),d0
 
-loc_59430:
+SKDEZ1Events_CopyPaletteAndRebaseAct2:
                 move.l  (a1)+,(a0)+
-                dbf     d0,loc_59430
+                dbf     d0,SKDEZ1Events_CopyPaletteAndRebaseAct2
                 movem.l (sp)+,d7-a0/a2-a3
                 move.w  #$3600,d0
                 move.w  #-$400,d1
@@ -100,6 +100,6 @@ loc_59430:
                 jsr     (Reset_TileOffsetPositionActual).l
                 clr.w   (Events_routine_bg).w
 
-loc_59488:
+SKDEZ1Events_ApplyTransitionPlainScroll:
                 jmp     (PlainDeformation).l
 ; End of function DEZ1_ScreenInit

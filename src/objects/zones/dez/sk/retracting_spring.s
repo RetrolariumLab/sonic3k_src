@@ -2,7 +2,7 @@
 ; Responsibility: Retracting spring timing, extension and player launch response
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-word_4808A:
+SKDEZRetractSpring_LaunchSpeeds:
                 dc.w    -$1000
                 dc.w    -$A00
 ; ---------------------------------------------------------------------------
@@ -18,54 +18,54 @@ Obj_DEZRetractingSpring:
                 move.w  #$20,$32(a0)
                 move.b  subtype(a0),d0
                 andi.w  #2,d0
-                move.w  word_4808A(pc,d0.w),$30(a0)
-                move.l  #loc_480D4,(a0)
+                move.w  SKDEZRetractSpring_LaunchSpeeds(pc,d0.w),$30(a0)
+                move.l  #SKDEZRetractSpring_CheckP1Height,(a0)
 
-loc_480D4:
+SKDEZRetractSpring_CheckP1Height:
                 move.w  (Player_1+y_pos).w,d0
                 sub.w   y_pos(a0),d0
-                bcs.s   loc_48102
+                bcs.s   SKDEZRetractSpring_TryRetractAboveBand
                 cmpi.w  #$20,d0
-                blt.s   loc_48124
+                blt.s   SKDEZRetractSpring_SelectFacingOffset
                 move.w  $32(a0),d1
                 cmp.w   $34(a0),d1
-                beq.s   loc_48124
+                beq.s   SKDEZRetractSpring_SelectFacingOffset
                 tst.w   $34(a0)
-                bne.s   loc_480FC
+                bne.s   SKDEZRetractSpring_ExtendSpring
                 moveq   #signextendB(sfx_SpringLatch),d0
                 jsr     (Play_SFX).l
 
-loc_480FC:
+SKDEZRetractSpring_ExtendSpring:
                 addq.w  #8,$34(a0)
-                bra.s   loc_48124
+                bra.s   SKDEZRetractSpring_SelectFacingOffset
 ; ---------------------------------------------------------------------------
 
-loc_48102:
+SKDEZRetractSpring_TryRetractAboveBand:
                 cmpi.w  #-$20,d0
-                bge.s   loc_48124
+                bge.s   SKDEZRetractSpring_SelectFacingOffset
                 tst.w   $34(a0)
-                beq.s   loc_48124
+                beq.s   SKDEZRetractSpring_SelectFacingOffset
                 move.w  $32(a0),d1
                 cmp.w   $34(a0),d1
-                bne.s   loc_48120
+                bne.s   SKDEZRetractSpring_RetractSpring
                 moveq   #signextendB(sfx_SpringLatch),d0
                 jsr     (Play_SFX).l
 
-loc_48120:
+SKDEZRetractSpring_RetractSpring:
                 subq.w  #8,$34(a0)
 
-loc_48124:
+SKDEZRetractSpring_SelectFacingOffset:
                 move.w  $34(a0),d0
                 btst    #0,status(a0)
-                bne.s   loc_48132
+                bne.s   SKDEZRetractSpring_TryReflectXOffset
                 neg.w   d0
 
-loc_48132:
+SKDEZRetractSpring_TryReflectXOffset:
                 btst    #1,status(a0)
-                beq.s   loc_4813C
+                beq.s   SKDEZRetractSpring_PlaceAndCheckP1
                 neg.w   d0
 
-loc_4813C:
+SKDEZRetractSpring_PlaceAndCheckP1:
                 add.w   $44(a0),d0
                 move.w  d0,x_pos(a0)
                 moveq   #0,d1
@@ -77,19 +77,19 @@ loc_4813C:
                 movem.l d1-d4,-(sp)
                 jsr     (SolidObjectTop_1P).l
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_4816E
+                beq.s   SKDEZRetractSpring_RestoreShapeCheckP2
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_4816E:
+SKDEZRetractSpring_RestoreShapeCheckP2:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 jsr     (SolidObjectTop_1P).l
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_4818C
+                beq.s   SKDEZRetractSpring_AnimateAndCull
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_4818C:
+SKDEZRetractSpring_AnimateAndCull:
                 lea     (Ani_DEZRetractingSpring).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $44(a0),d0

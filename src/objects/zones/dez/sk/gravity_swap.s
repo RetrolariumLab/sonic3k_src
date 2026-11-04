@@ -8,13 +8,13 @@ Obj_DEZGravitySwap:
                 move.w  x_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_4920E
+                bhs.s   SKDEZGravSwap_InitP1Crossing
                 move.b  #1,$32(a0)
 
-loc_4920E:
-                move.l  #loc_49214,(a0)
+SKDEZGravSwap_InitP1Crossing:
+                move.l  #SKDEZGravSwap_UpdateP1Crossing,(a0)
 
-loc_49214:
+SKDEZGravSwap_UpdateP1Crossing:
                 move.w  x_pos(a0),d1
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
@@ -25,9 +25,9 @@ loc_49214:
 
 SetDezGravityOnPlayerCrossing:
                 tst.b   (a2)+
-                bne.w   loc_49270
+                bne.w   SKDEZGravSwap_LatchLeftAndSetGravity
                 cmp.w   x_pos(a1),d1
-                bhi.s   locret_4926E
+                bhi.s   SKDEZGravSwap_CrossingReturn
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -36,23 +36,23 @@ SetDezGravityOnPlayerCrossing:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.s   locret_4926E
+                blt.s   SKDEZGravSwap_CrossingReturn
                 cmp.w   d3,d4
-                bge.s   locret_4926E
+                bge.s   SKDEZGravSwap_CrossingReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4926E
+                bne.s   SKDEZGravSwap_CrossingReturn
                 move.b  #0,(Reverse_gravity_flag).w
                 btst    #0,render_flags(a0)
-                bne.s   locret_4926E
+                bne.s   SKDEZGravSwap_CrossingReturn
                 move.b  #1,(Reverse_gravity_flag).w
 
-locret_4926E:
+SKDEZGravSwap_CrossingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49270:
+SKDEZGravSwap_LatchLeftAndSetGravity:
                 cmp.w   x_pos(a1),d1
-                bls.s   locret_4926E
+                bls.s   SKDEZGravSwap_CrossingReturn
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -61,14 +61,14 @@ loc_49270:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.s   locret_4926E
+                blt.s   SKDEZGravSwap_CrossingReturn
                 cmp.w   d3,d4
-                bge.s   locret_4926E
+                bge.s   SKDEZGravSwap_CrossingReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4926E
+                bne.s   SKDEZGravSwap_CrossingReturn
                 move.b  #0,(Reverse_gravity_flag).w
                 btst    #0,render_flags(a0)
-                beq.s   locret_4926E
+                beq.s   SKDEZGravSwap_CrossingReturn
                 move.b  #1,(Reverse_gravity_flag).w
                 rts
 ; End of function SetDezGravityOnPlayerCrossing

@@ -1,0 +1,4987 @@
+{
+  "schema_version": 1,
+  "packet": "34-zone-dez",
+  "mappings": [
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 20,
+      "old": "loc_59378",
+      "new": "SKDEZ1Events_DrawForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_DrawForegroundWhenChunkPatchSignalZero"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 43,
+      "old": "loc_593A8",
+      "new": "SKDEZ1Events_TryQueueAct2Resources",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_ConsumeActTransitionSignalAndQueueDez2BlocksArtAndPlc"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 59,
+      "old": "loc_593E6",
+      "new": "SKDEZ1Events_ApplyInitialPlainScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_TailPlainBackgroundAfterOptionalResourceQueue"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 63,
+      "old": "loc_593EC",
+      "new": "SKDEZ1Events_WaitForArtAndEnterAct2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_WaitForModuleByteThenReloadActTwoAndPreparePaletteCopy"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 80,
+      "old": "loc_59430",
+      "new": "SKDEZ1Events_CopyPaletteAndRebaseAct2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_CopyDez2LowerPaletteThenRebasePlayersObjectsAndCamera"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "original_line": 103,
+      "old": "loc_59488",
+      "new": "SKDEZ1Events_ApplyTransitionPlainScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ1Events_TailPlainScrollDuringModuleWaitOrAfterActRebase"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 25,
+      "old": "loc_594B4",
+      "new": "SKDEZ2Events_TryApplyFirstLayoutPatch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_ConsumeFirstForegroundSignalPatchThreeChunksAndAdvance"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 38,
+      "old": "loc_594DA",
+      "new": "SKDEZ2Events_TryApplySecondLayoutPatch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_ConsumeSecondForegroundSignalPatchSingleChunkAndAdvance"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 48,
+      "old": "loc_594F8",
+      "new": "SKDEZ2Events_DrawForeground",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_DrawForegroundWhileWaitingOrAfterPatchStages"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 74,
+      "old": "loc_59532",
+      "new": "SKDEZ2Events_BeginStaticBackgroundRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_AlignStaticBackgroundAndArmBottomUpTransition"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 84,
+      "old": "loc_59556",
+      "new": "SKDEZ2Events_RedrawBackgroundBottomUp",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_DrawBottomUpFromSourceZeroAndAdvanceOnNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "original_line": 91,
+      "old": "loc_59566",
+      "new": "SKDEZ2Events_ApplyStaticPlainScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ2Events_TailPlainScrollForStaticBackgroundAndTransition"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 28,
+      "old": "loc_5A3FA",
+      "new": "SKDEZ3Events_ClearLayoutAndSpawnActors",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ClearRemainingLayoutWorkspaceThenAttemptThreeActorPrefix"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 47,
+      "old": "loc_5A442",
+      "new": "SKDEZ3Events_InitBossPlaneAndRefresh",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_CommitInitialBossPlaneOffsetAndRefreshEnvironmentAfterAnyActorOutcome"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 79,
+      "old": "loc_5A49A",
+      "new": "SKDEZ3Events_TryRestoreSavedRings",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_RestoreSavedActThreeRingsOnlyWhenSavedWordNonzero"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 86,
+      "old": "loc_5A4AE",
+      "new": "SKDEZ3Events_TryRestoreSavedTimer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_RestoreSavedActThreeTimerOnlyWhenSavedLongNonzero"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 93,
+      "old": "loc_5A4C0",
+      "new": "SKDEZ3Events_AdvanceForegroundState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_AdvanceForegroundStateAndFallIntoEnvironmentDraw"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 96,
+      "old": "loc_5A4C4",
+      "new": "SKDEZ3Events_DrawEnvironmentAndTryRepair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_DrawEnvironmentBandsAndConsumeTwoRowRepairMailbox"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 111,
+      "old": "loc_5A4F0",
+      "new": "SKDEZ3Events_RedrawEnvironmentRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_RepairTwoEnvironmentRowsAtY01E0And01F0"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 118,
+      "old": "locret_5A506",
+      "new": "SKDEZ3Events_EnvironmentDrawReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ReturnAfterEnvironmentBandDrawAndOptionalRowRepair"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 176,
+      "old": "loc_5A57C",
+      "new": "SKDEZ3Events_TryRefreshBossPlane",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ConsumeFirstBossSignalPatchLayoutAndRefreshBossPlane"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 191,
+      "old": "loc_5A5B0",
+      "new": "SKDEZ3Events_TrySpawnRumbleActor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_RetryRumbleProducerAllocationWhileShakeWordNonzero"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 202,
+      "old": "loc_5A5DC",
+      "new": "SKDEZ3Events_DrawAfterRumbleAttempt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_JoinBossPlaneDrawAfterRumbleProducerAllocationOutcome"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 206,
+      "old": "loc_5A5E0",
+      "new": "SKDEZ3Events_TryBeginFirstPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ArmFirstBossPlaneRedrawWhenOffsetLeaves06C0"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 215,
+      "old": "loc_5A606",
+      "new": "SKDEZ3Events_StepFirstPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_StepFirstRedrawThenTestNextOffsetGateInSameCall"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 223,
+      "old": "loc_5A61A",
+      "new": "SKDEZ3Events_TryBeginSecondPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ArmSecondRedrawWhenOffsetLeaves02C0AndAttemptFloorProducer"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 239,
+      "old": "loc_5A65E",
+      "new": "SKDEZ3Events_AdvanceAfterFloorSpawn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_AdvanceSecondRedrawStateRegardlessProducerAllocation"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 242,
+      "old": "loc_5A662",
+      "new": "SKDEZ3Events_StepSecondPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_StepSecondRedrawThenEnterAnimatedLayoutGateInSameCall"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 250,
+      "old": "loc_5A676",
+      "new": "SKDEZ3Events_SelectFinalRedrawOrAnimate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ChooseZeroOffsetFinalRedrawOrLaserAndLayoutSignalUpdate"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 261,
+      "old": "loc_5A696",
+      "new": "SKDEZ3Events_ChunkCycleBranches",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_FourExecutableShortBranchesForRepeatingChunkPairCycle"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 271,
+      "old": "loc_5A69E",
+      "new": "SKDEZ3Events_SelectChunkPair0603",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_SelectChunkPair0603ForFirstAndThirdAnimationPhases"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 276,
+      "old": "loc_5A6A4",
+      "new": "SKDEZ3Events_SelectChunkPair0903",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_SelectChunkPair0903ForSecondAnimationPhase"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 281,
+      "old": "loc_5A6AA",
+      "new": "SKDEZ3Events_SelectChunkPair0807AndWrap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_SelectChunkPair0807AndResetPhaseBeforeIncrement"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 285,
+      "old": "loc_5A6B4",
+      "new": "SKDEZ3Events_ApplyNextChunkPair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_AdvanceChunkCyclePatchTwoRowsAndPrepareBoundedTenRowDraw"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 300,
+      "old": "loc_5A6E2",
+      "new": "SKDEZ3Events_RedrawChunkCycleRows",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_DrawUpToTenChunkAnimationRowsWithPostDrawUpperYGate"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 309,
+      "old": "loc_5A6FC",
+      "new": "SKDEZ3Events_DrawAfterChunkCycle",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_JoinOrdinaryBossPlaneDrawAfterChunkAnimationRows"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 313,
+      "old": "loc_5A6FE",
+      "new": "SKDEZ3Events_BeginFinalPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ArmFinalRedrawWhenBossPlaneOffsetWordZero"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 320,
+      "old": "loc_5A71A",
+      "new": "SKDEZ3Events_StepFinalPlaneRedraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_StepFinalRedrawAndAdvanceOnNegativeCount"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 328,
+      "old": "loc_5A72E",
+      "new": "SKDEZ3Events_DrawBossPlane",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_DrawBossPlaneBeforeSwappedPlaneScrollComposition"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 331,
+      "old": "loc_5A734",
+      "new": "SKDEZ3Events_BindSwappedPlaneScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_BindTwoSpanEnvironmentScrollAndChooseCachedBossPlaneX"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 340,
+      "old": "loc_5A74E",
+      "new": "SKDEZ3Events_ApplySwappedPlaneScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_Compose224ScrollLongsSwapVerticalWordsAndDiscardCallbackReturn"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 358,
+      "old": "loc_5A77C",
+      "new": "SKDEZ3Events_CalcBossPlaneX",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ComputeBossPlaneXFromCameraMinusBossAnchorPlusPhaseOffset"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 363,
+      "old": "loc_5A788",
+      "new": "SKDEZ3Events_ApplyBossPlaneXY",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_StoreBossPlaneXAndComputeYFromEnvironmentMinusBossAnchor"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 387,
+      "old": "locret_5A7C6",
+      "new": "SKDEZ3Events_LaserDmaReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKDEZ3Events_ReturnAfterUnchangedOrAttemptedLaserDmaWindow"
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 393,
+      "old": "Obj_5A7C8",
+      "new": "DEZ3FloorSpan_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the broad invisible floor collision span during Death Egg act3."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 401,
+      "old": "loc_5A7EC",
+      "new": "DEZ3FloorSpan_DeleteOutsideAct3Zone",
+      "profiles": ["sk"],
+      "meaning": "Delete the floor-span controller when Current_zone is no longer0x17."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 407,
+      "old": "loc_5A7FA",
+      "new": "SKDEZ3Events_TrySpawnCollapseColumn",
+      "profiles": ["sk"],
+      "meaning": "Consume one pending floor-column collapse request and attempt a falling block."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 423,
+      "old": "loc_5A82C",
+      "new": "DEZ3FloorSpan_AdvanceCollapseFrontier",
+      "profiles": ["sk"],
+      "meaning": "Advance the consumed collapse frontier and adjust broad floor span."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 430,
+      "old": "loc_5A83C",
+      "new": "SKDEZ3Events_SelectCoarseFloorStep",
+      "profiles": ["sk"],
+      "meaning": "Adjust floor-span X when the32-pixel coarse camera column changes."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 442,
+      "old": "loc_5A858",
+      "new": "DEZ3FloorSpan_ApplyOneColumnXStep",
+      "profiles": ["sk"],
+      "meaning": "Apply the selected plus/minus32-pixel floor-span shift."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 445,
+      "old": "loc_5A85C",
+      "new": "DEZ3FloorSpan_StoreCoarseCameraColumn",
+      "profiles": ["sk"],
+      "meaning": "Cache the new aligned camera X without changing collision width."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 448,
+      "old": "loc_5A860",
+      "new": "DEZ3FloorSpan_ApplySolidTopCollision",
+      "profiles": ["sk"],
+      "meaning": "Apply the broad floor-span solid-top collision."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 456,
+      "old": "Obj_5A872",
+      "new": "DEZ3FallingFloorBlock_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize a falling solid floor block for one requested collapse column."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 470,
+      "old": "loc_5A8B2",
+      "new": "SKDEZ3Events_RelocateOffscreenFloorBlock",
+      "profiles": ["sk"],
+      "meaning": "Relocate a falling block beyond the coarse-back camera edge when not marked rendered."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 477,
+      "old": "loc_5A8C4",
+      "new": "SKDEZ3Events_MoveFloorBlockAndCheckTop",
+      "profiles": ["sk"],
+      "meaning": "Move a falling floor block, add its specific gravity and update player collision."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 488,
+      "old": "Obj_5A8E6",
+      "new": "DEZ3InitialLeftFloor_Initialize",
+      "profiles": ["sk"],
+      "meaning": "Initialize the initial small left-hand solid floor at the act3 entry."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 495,
+      "old": "loc_5A904",
+      "new": "SKDEZ3Events_CheckInitialFloorLifetime",
+      "profiles": ["sk"],
+      "meaning": "Retain the left floor only while the boss-plane event offset is0x6C0."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 501,
+      "old": "loc_5A912",
+      "new": "SKDEZ3Events_CheckInitialFloorSolid",
+      "profiles": ["sk"],
+      "meaning": "Apply the left entry floor collision."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 509,
+      "old": "Obj_5A922",
+      "new": "SKDEZ3Events_EmitTimedFloorColumns",
+      "profiles": ["sk"],
+      "meaning": "Emit a fixed number of floor collapse-column requests on a WORD timer."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 521,
+      "old": "locret_5A94A",
+      "new": "SKDEZ3Events_TimedColumnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return while waiting for next timed floor request or remaining columns."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 525,
+      "old": "Obj_5A94C",
+      "new": "SKDEZ3Events_CheckAct3EmitterLifetime",
+      "profiles": ["sk"],
+      "meaning": "Keep the camera/boss-proximity collapse emitter only in zone0x17."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 531,
+      "old": "loc_5A95A",
+      "new": "SKDEZ3Events_CheckCameraColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Emit collapse requests as the camera approaches each column after boss-plane offset clears."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 543,
+      "old": "loc_5A97C",
+      "new": "SKDEZ3Events_CheckBossColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Emit delayed column requests while the boss-plane actor remains near the top."
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "original_line": 556,
+      "old": "locret_5A9AA",
+      "new": "SKDEZ3Events_ProximityColumnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from camera/boss floor-column proximity checks."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/act3/mappings/blocks.s",
+      "original_line": 8,
+      "old": "word_5A9B4",
+      "new": "DEZMap_Act3Blocks_InitialColumnPattern",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Act3Blocks InitialColumnPattern mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/act3/mappings/blocks.s",
+      "original_line": 13,
+      "old": "word_5A9CE",
+      "new": "DEZ3BlockMap_MiddleColumn",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Act3Blocks SharedMiddleColumnPattern mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/act3/mappings/blocks.s",
+      "original_line": 18,
+      "old": "word_5A9E8",
+      "new": "DEZMap_Act3Blocks_LastColumnPattern",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Act3Blocks LastColumnPattern mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/conveyor_pad.s",
+      "original_line": 7,
+      "old": "byte_47BFA",
+      "new": "DEZAni_ConveyorPad_Forward123Loop",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ ConveyorPad Forward123Loop STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/conveyor_pad.s",
+      "original_line": 8,
+      "old": "byte_47BFF",
+      "new": "DEZAni_ConveyorPad_Reverse321Loop",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ ConveyorPad Reverse321Loop STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/conveyor_pad.s",
+      "original_line": 9,
+      "old": "byte_47C04",
+      "new": "DEZAni_ConveyorPad_IdleFrameOneLoop",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ ConveyorPad IdleFrameOneLoop STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/lightning.s",
+      "original_line": 5,
+      "old": "byte_47928",
+      "new": "DEZLightningAni_PulseAndAdvance",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ Lightning Pulse1234AndRoutineEvent STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/retracting_spring.s",
+      "original_line": 6,
+      "old": "byte_481A6",
+      "new": "DEZAni_RetractingSpring_IdleZeroLoop",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ RetractingSpring IdleZeroLoop STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/retracting_spring.s",
+      "original_line": 7,
+      "old": "byte_481A9",
+      "new": "DEZRetractSpringAni_LaunchThenIdle",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ RetractingSpring Launch100222222ThenIdle STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 20,
+      "old": "byte_488E2",
+      "new": "DEZTransportRingAni_NormalHold0",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldZero STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 21,
+      "old": "byte_488F4",
+      "new": "DEZTransportRingAni_NormalHold7",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldSeven STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 22,
+      "old": "byte_48906",
+      "new": "DEZTransportRingAni_NormalHold8",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldEight STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 23,
+      "old": "byte_48918",
+      "new": "DEZTransportRingAni_NormalHold9",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldNine STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 24,
+      "old": "byte_4892A",
+      "new": "DEZAni_TransporterRing_NormalBankHoldTen",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldTen STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 25,
+      "old": "byte_4893C",
+      "new": "DEZTransportRingAni_NormalHoldB",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldEleven STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 26,
+      "old": "byte_4894E",
+      "new": "DEZTransportRingAni_NormalHoldC",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldTwelve STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 27,
+      "old": "byte_48960",
+      "new": "DEZTransportRingAni_NormalHoldD",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing NormalBankHoldThirteen STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 28,
+      "old": "byte_48972",
+      "new": "DEZAni_TransporterRing_SineBankHoldZero",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing SineBankHoldZero STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 29,
+      "old": "byte_48984",
+      "new": "DEZTransportRingAni_SineHold1",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing SineBankHoldOneAliasesNineAndFifteen STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 30,
+      "old": "byte_48996",
+      "new": "DEZTransportRingAni_SineHold2",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing SineBankHoldTwoAliasesTenAndFourteen STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "original_line": 31,
+      "old": "byte_489A8",
+      "new": "DEZTransportRingAni_SineHold3",
+      "profiles": ["sk"],
+      "meaning": "Define the DEZ TransporterRing SineBankHoldThreeAliasesElevenThroughThirteen STANDARD script."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/bumper_wall.s",
+      "original_line": 5,
+      "old": "word_498C4",
+      "new": "DEZMap_BumperWall_OnlyTwoPieceBody",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ BumperWall OnlyTwoPieceBody mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 9,
+      "old": "word_47C12",
+      "new": "DEZConveyorPadMap_NarrowSharedPhase",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad NarrowPhaseOneAndZeroAlias mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 18,
+      "old": "word_47C44",
+      "new": "DEZMap_ConveyorPad_NarrowPhaseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad NarrowPhaseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 27,
+      "old": "word_47C76",
+      "new": "DEZMap_ConveyorPad_NarrowPhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad NarrowPhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 42,
+      "old": "word_47CB0",
+      "new": "DEZConveyorPadMap_WidePhaseAndPreview",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad WidePhaseOneAndCrossBasePreview mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 59,
+      "old": "word_47D12",
+      "new": "DEZMap_ConveyorPad_WidePhaseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad WidePhaseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "original_line": 76,
+      "old": "word_47D74",
+      "new": "DEZMap_ConveyorPad_WidePhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ ConveyorPad WidePhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
+      "original_line": 8,
+      "old": "word_48000",
+      "new": "DEZMap_EnergyBridge_StraightPhaseZero",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge StraightPhaseZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
+      "original_line": 11,
+      "old": "word_4800E",
+      "new": "DEZMap_EnergyBridge_StraightPhaseOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge StraightPhaseOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
+      "original_line": 14,
+      "old": "word_4801C",
+      "new": "DEZMap_EnergyBridge_StraightPhaseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge StraightPhaseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
+      "original_line": 17,
+      "old": "word_4802A",
+      "new": "DEZMap_EnergyBridge_StraightPhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge StraightPhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
+      "original_line": 8,
+      "old": "word_48040",
+      "new": "DEZMap_EnergyBridge_CurvedPhaseZero",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge CurvedPhaseZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
+      "original_line": 12,
+      "old": "word_48054",
+      "new": "DEZMap_EnergyBridge_CurvedPhaseOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge CurvedPhaseOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
+      "original_line": 16,
+      "old": "word_48068",
+      "new": "DEZMap_EnergyBridge_CurvedPhaseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge CurvedPhaseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
+      "original_line": 20,
+      "old": "word_4807C",
+      "new": "DEZMap_EnergyBridge_CurvedPhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ EnergyBridge CurvedPhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/floating_platform.s",
+      "original_line": 6,
+      "old": "word_25ACE",
+      "new": "DEZMap_FloatingPlatform_TwoPiecePhase",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ FloatingPlatform TwoPiecePhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/floating_platform.s",
+      "original_line": 9,
+      "old": "word_25ADC",
+      "new": "DEZFloatPlatMap_WithCenterPiece",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ FloatingPlatform ThreePiecePhaseWithCenterPiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
+      "original_line": 9,
+      "old": "word_49A76",
+      "new": "DEZGravPuzzleMap_PuzzleBody",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravityPuzzle OrdinarySixPieceBody mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
+      "original_line": 16,
+      "old": "word_49A9C",
+      "new": "DEZGravPuzzleMap_LeftMarker",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravityPuzzle LeftMarkerSinglePiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
+      "original_line": 18,
+      "old": "word_49AA4",
+      "new": "DEZGravPuzzleMap_RightMarker",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravityPuzzle RightMarkerSinglePiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
+      "original_line": 20,
+      "old": "word_49AAC",
+      "new": "DEZGravPuzzleMap_SharedInactiveFrame",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravityPuzzle InactiveBlankAliases mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_switch.s",
+      "original_line": 6,
+      "old": "word_48BEE",
+      "new": "DEZMap_GravitySwitch_RestFourPieces",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravitySwitch RestFourPieces mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_switch.s",
+      "original_line": 11,
+      "old": "word_48C08",
+      "new": "DEZMap_GravitySwitch_PressedTwoPieces",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ GravitySwitch PressedTwoPieces mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hang_carrier.s",
+      "original_line": 5,
+      "old": "word_47180",
+      "new": "DEZMap_HangCarrier_OnlyFourPieceShape",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ HangCarrier OnlyFourPieceShape mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hover_machine.s",
+      "original_line": 7,
+      "old": "word_495DE",
+      "new": "DEZMap_HoverMachine_RootPhaseZero",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ HoverMachine RootPhaseZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hover_machine.s",
+      "original_line": 10,
+      "old": "word_495EC",
+      "new": "DEZMap_HoverMachine_RootPhaseOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ HoverMachine RootPhaseOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hover_machine.s",
+      "original_line": 13,
+      "old": "word_495FA",
+      "new": "DEZHoverMap_FieldActor",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ HoverMachine IndependentFieldActor mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lift_pad.s",
+      "original_line": 7,
+      "old": "word_4761A",
+      "new": "DEZMap_LiftPad_OrdinaryRootThreePieces",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ LiftPad OrdinaryRootThreePieces mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lift_pad.s",
+      "original_line": 11,
+      "old": "word_4762E",
+      "new": "DEZMap_LiftPad_ArmLinkAndHelperMain",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ LiftPad ArmLinkAndHelperMain mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lift_pad.s",
+      "original_line": 13,
+      "old": "word_47636",
+      "new": "DEZMap_LiftPad_FirstEmbeddedArmPiece",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ LiftPad FirstEmbeddedArmPiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "original_line": 9,
+      "old": "word_47938",
+      "new": "DEZMap_Lightning_BlankBetweenPulses",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Lightning BlankBetweenPulses mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "original_line": 10,
+      "old": "word_4793A",
+      "new": "DEZMap_Lightning_PulsePhaseOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Lightning PulsePhaseOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "original_line": 12,
+      "old": "word_47942",
+      "new": "DEZMap_Lightning_PulsePhaseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Lightning PulsePhaseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "original_line": 14,
+      "old": "word_4794A",
+      "new": "DEZMap_Lightning_TouchQueuedPhaseThree",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Lightning TouchQueuedPhaseThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "original_line": 17,
+      "old": "word_47958",
+      "new": "DEZMap_Lightning_PulsePhaseFour",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ Lightning PulsePhaseFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/retracting_spring.s",
+      "original_line": 7,
+      "old": "word_481BC",
+      "new": "DEZMap_RetractingSpring_IdleThreePieces",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ RetractingSpring IdleThreePieces mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/retracting_spring.s",
+      "original_line": 11,
+      "old": "word_481D0",
+      "new": "DEZRetractSpringMap_LaunchStart",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ RetractingSpring LaunchFirstTwoPiecePhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/retracting_spring.s",
+      "original_line": 14,
+      "old": "word_481DE",
+      "new": "DEZRetractSpringMap_LaunchExtended",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ RetractingSpring LaunchExtendedThreePiecePhase mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tilting_bridge.s",
+      "original_line": 5,
+      "old": "word_46F7C",
+      "new": "DEZBridgeStairMap_SharedBlock",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TiltingBridgeAndStaircase SharedSinglePiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 14,
+      "old": "word_472BC",
+      "new": "DEZTorpedoMap_ReloadFrame0",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadFinalXMinusEight mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 18,
+      "old": "word_472D0",
+      "new": "DEZTorpedoMap_ReloadFrame1",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepOneXMinusSeven mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 22,
+      "old": "word_472E4",
+      "new": "DEZTorpedoMap_ReloadFrame2",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepTwoXMinusSix mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 26,
+      "old": "word_472F8",
+      "new": "DEZTorpedoMap_ReloadFrame3",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepThreeXMinusFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 30,
+      "old": "word_4730C",
+      "new": "DEZTorpedoMap_ReloadFrame4",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepFourXMinusFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 34,
+      "old": "word_47320",
+      "new": "DEZTorpedoMap_ReloadFrame5",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepFiveXMinusThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 38,
+      "old": "word_47334",
+      "new": "DEZTorpedoMap_ReloadFrame6",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepSixXMinusTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 42,
+      "old": "word_47348",
+      "new": "DEZTorpedoMap_ReloadFrame7",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher ReloadStepSevenXMinusOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 46,
+      "old": "word_4735C",
+      "new": "DEZTorpedoMap_ReloadFrame8",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher InitialReloadStepEightXZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "original_line": 50,
+      "old": "word_47370",
+      "new": "DEZTorpedoMap_ProjectileFrame",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TorpedoLauncher SeparateProjectileSinglePiece mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 18,
+      "old": "word_489E8",
+      "new": "DEZMap_TransporterRing_HoldShapeZero",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing HoldShapeZero mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 21,
+      "old": "word_489F6",
+      "new": "DEZMap_TransporterRing_HoldShapeOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing HoldShapeOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 24,
+      "old": "word_48A04",
+      "new": "DEZMap_TransporterRing_HoldShapeTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing HoldShapeTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 27,
+      "old": "word_48A12",
+      "new": "DEZTransportRingMap_SharedHoldFrames34",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing HoldShapesThreeAndFourAlias mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 32,
+      "old": "word_48A2C",
+      "new": "DEZMap_TransporterRing_TransitionFive",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing TransitionFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 34,
+      "old": "word_48A34",
+      "new": "DEZMap_TransporterRing_TransitionSix",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing TransitionSix mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 36,
+      "old": "word_48A3C",
+      "new": "DEZTransportRingMap_NormalFrame7",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeSeven mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 39,
+      "old": "word_48A4A",
+      "new": "DEZTransportRingMap_NormalFrame8",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeEight mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 43,
+      "old": "word_48A5E",
+      "new": "DEZTransportRingMap_NormalFrame9",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeNine mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 46,
+      "old": "word_48A6C",
+      "new": "DEZTransportRingMap_NormalFrameA",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeTen mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 49,
+      "old": "word_48A7A",
+      "new": "DEZTransportRingMap_NormalFrameB",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeEleven mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 52,
+      "old": "word_48A88",
+      "new": "DEZTransportRingMap_NormalFrameC",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeTwelve mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "original_line": 56,
+      "old": "word_48A9C",
+      "new": "DEZTransportRingMap_NormalFrameD",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TransporterRing NormalDirectionShapeThirteen mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 15,
+      "old": "word_4843A",
+      "new": "DEZTunnelLaunchMap_Blank",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher BlankMainAndIndicator mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 16,
+      "old": "word_4843C",
+      "new": "DEZMap_TunnelLauncher_MainPulseOne",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainPulseOne mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 19,
+      "old": "word_4844A",
+      "new": "DEZMap_TunnelLauncher_MainPulseTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainPulseTwo mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 22,
+      "old": "word_48458",
+      "new": "DEZTunnelLaunchMap_DescentFrame3",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainDescentFrameThree mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 25,
+      "old": "word_48466",
+      "new": "DEZTunnelLaunchMap_DescentFrame4",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainDescentFrameFour mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 28,
+      "old": "word_48474",
+      "new": "DEZTunnelLaunchMap_DescentFrame5",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainDescentFrameFive mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 31,
+      "old": "word_48482",
+      "new": "DEZTunnelLaunchMap_DescentFrame6",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher MainDescentFrameSix mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 34,
+      "old": "word_48490",
+      "new": "DEZTunnelLaunchMap_CountdownFrame7",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher CountdownIndicatorSeven mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 36,
+      "old": "word_48498",
+      "new": "DEZTunnelLaunchMap_CountdownFrame8",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher CountdownIndicatorEight mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 38,
+      "old": "word_484A0",
+      "new": "DEZTunnelLaunchMap_CountdownFrame9",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher CountdownIndicatorNine mapping body."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "original_line": 40,
+      "old": "word_484A8",
+      "new": "DEZTunnelLaunchMap_CountdownFrame10",
+      "profiles": ["sk"],
+      "meaning": "Describe the DEZ TunnelLauncher CountdownIndicatorTen mapping body."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 23,
+      "old": "loc_497A6",
+      "new": "SKDEZBumperWall_InitVisibleBumper",
+      "profiles": ["sk"],
+      "meaning": "Select subtype-zero bumper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 28,
+      "old": "loc_497AE",
+      "new": "SKDEZBumperWall_InitPuzzleBumper",
+      "profiles": ["sk"],
+      "meaning": "Select negative-subtype bumper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 31,
+      "old": "loc_497B4",
+      "new": "SKDEZBumperWall_TryRemoveSolvedBumper",
+      "profiles": ["sk"],
+      "meaning": "Poll six puzzle completion bits."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 36,
+      "old": "loc_497C2",
+      "new": "SKDEZBumperWall_CheckVisibleBumperSolid",
+      "profiles": ["sk"],
+      "meaning": "Poll fixed-size bumper collision."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 52,
+      "old": "loc_497F0",
+      "new": "SKDEZBumperWall_TryBounceP2Visible",
+      "profiles": ["sk"],
+      "meaning": "Consume P2 side-contact mask."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 59,
+      "old": "loc_497FE",
+      "new": "SKDEZBumperWall_DrawVisibleBumper",
+      "profiles": ["sk"],
+      "meaning": "Finish visible bumper collision."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 63,
+      "old": "loc_49804",
+      "new": "SKDEZBumperWall_CheckInvisibleSolid",
+      "profiles": ["sk"],
+      "meaning": "Poll positive-subtype bumper controller."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 81,
+      "old": "loc_49834",
+      "new": "SKDEZBumperWall_TryBounceP2Invisible",
+      "profiles": ["sk"],
+      "meaning": "Consume variable-height P2 contact."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 88,
+      "old": "loc_49842",
+      "new": "SKDEZBumperWall_CullInvisibleBumper",
+      "profiles": ["sk"],
+      "meaning": "Finish variable-height bumper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 97,
+      "old": "loc_49850",
+      "new": "SKDEZBumperWall_LaunchAwayFromBumper",
+      "profiles": ["sk"],
+      "meaning": "Apply shared bumper or puzzle rebound."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 106,
+      "old": "loc_49870",
+      "new": "SKDEZBumperWall_ClearPushAndSetAirborne",
+      "profiles": ["sk"],
+      "meaning": "Complete common rebound state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 118,
+      "old": "loc_498A2",
+      "new": "SKDEZBumperWall_StartContinuousFlip",
+      "profiles": ["sk"],
+      "meaning": "Set rebound animation and flip rate."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "original_line": 126,
+      "old": "locret_498C0",
+      "new": "SKDEZBumperWall_BounceReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish common rebound."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "original_line": 18,
+      "old": "loc_4783C",
+      "new": "SKDEZBelt_InitBeltTransport",
+      "profiles": ["sk"],
+      "meaning": "Complete belt geometry setup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "original_line": 21,
+      "old": "loc_47842",
+      "new": "SKDEZBelt_CarryGroundedPlayers",
+      "profiles": ["sk"],
+      "meaning": "Apply invisible belt field."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "original_line": 48,
+      "old": "loc_4788C",
+      "new": "SKDEZBelt_ApplyBeltStep",
+      "profiles": ["sk"],
+      "meaning": "Apply upper-or-lower belt direction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "original_line": 51,
+      "old": "locret_47890",
+      "new": "SKDEZBelt_TransportReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish one player's belt test."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 30,
+      "old": "loc_479D0",
+      "new": "SKDEZConveyorPad_InitWidePad",
+      "profiles": ["sk"],
+      "meaning": "Configure nonzero travel-length pad."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 36,
+      "old": "loc_479EA",
+      "new": "SKDEZConveyorPad_InitRiderWait",
+      "profiles": ["sk"],
+      "meaning": "Finish conveyor-pad initialization."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 39,
+      "old": "loc_479F0",
+      "new": "SKDEZConveyorPad_TryActivateFromRiders",
+      "profiles": ["sk"],
+      "meaning": "Poll first rider on waiting pad."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 49,
+      "old": "loc_47A12",
+      "new": "SKDEZConveyorPad_DrawWaitingPad",
+      "profiles": ["sk"],
+      "meaning": "Finish waiting activation poll."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 53,
+      "old": "loc_47A14",
+      "new": "SKDEZConveyorPad_TickVerticalTravel",
+      "profiles": ["sk"],
+      "meaning": "Move activated nonzero-subtype pad."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 65,
+      "old": "loc_47A38",
+      "new": "SKDEZConveyorPad_CarryAndCheckNewRider",
+      "profiles": ["sk"],
+      "meaning": "Update active pad rider direction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 76,
+      "old": "loc_47A58",
+      "new": "SKDEZConveyorPad_AnimateAndCheckSolid",
+      "profiles": ["sk"],
+      "meaning": "Finish waiting or vertical pad update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 110,
+      "old": "loc_47AA6",
+      "new": "SKDEZConveyorPad_AdjustCarryForGravity",
+      "profiles": ["sk"],
+      "meaning": "Select standing-player transport sign."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 115,
+      "old": "loc_47AAE",
+      "new": "SKDEZConveyorPad_ApplyRiderCarry",
+      "profiles": ["sk"],
+      "meaning": "Apply conveyor-pad rider step."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 118,
+      "old": "locret_47AB2",
+      "new": "SKDEZConveyorPad_RiderCarryReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish one rider carry."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 124,
+      "old": "loc_47AB4",
+      "new": "SKDEZConveyorPad_UpdateFloorPad",
+      "profiles": ["sk"],
+      "meaning": "Update subtype-zero moving pad."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 132,
+      "old": "loc_47AC6",
+      "new": "SKDEZConveyorPad_MoveAndCheckLeftWall",
+      "profiles": ["sk"],
+      "meaning": "Apply floor-pad horizontal step."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 141,
+      "old": "loc_47AE0",
+      "new": "SKDEZConveyorPad_CheckRightWall",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal wall constraints."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 149,
+      "old": "loc_47AF6",
+      "new": "SKDEZConveyorPad_TryReverseForNewRider",
+      "profiles": ["sk"],
+      "meaning": "Poll prior standing transitions."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 159,
+      "old": "loc_47B12",
+      "new": "SKDEZConveyorPad_AnimateAndCheckMoving",
+      "profiles": ["sk"],
+      "meaning": "Finish floor-pad collision and sound."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 179,
+      "old": "loc_47B52",
+      "new": "SKDEZConveyorPad_DrawFloorPad",
+      "profiles": ["sk"],
+      "meaning": "Finish subtype-zero pad update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 195,
+      "old": "locret_47B7A",
+      "new": "SKDEZConveyorPad_FloorProbeReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish initial floor approach."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 199,
+      "old": "loc_47B7C",
+      "new": "SKDEZConveyorPad_FollowFloorOrFall",
+      "profiles": ["sk"],
+      "meaning": "Dispatch noninitial floor motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 214,
+      "old": "loc_47BA6",
+      "new": "SKDEZConveyorPad_TryFollowFloor",
+      "profiles": ["sk"],
+      "meaning": "Apply selected pad floor distance."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 221,
+      "old": "loc_47BB2",
+      "new": "SKDEZConveyorPad_BeginFalling",
+      "profiles": ["sk"],
+      "meaning": "Leave surface-following state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 226,
+      "old": "loc_47BBA",
+      "new": "SKDEZConveyorPad_FallAndCheckCameraDepth",
+      "profiles": ["sk"],
+      "meaning": "Advance gravity pad state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 237,
+      "old": "loc_47BD8",
+      "new": "SKDEZConveyorPad_TryLandOnFloor",
+      "profiles": ["sk"],
+      "meaning": "Poll falling pad terrain."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 245,
+      "old": "locret_47BF2",
+      "new": "SKDEZConveyorPad_FallReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish falling pad helper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "original_line": 255,
+      "old": "word_47DD6",
+      "new": "SKDEZConveyorPad_BridgePeriodMasks",
+      "profiles": ["sk"],
+      "meaning": "Store shared bridge timing masks."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 21,
+      "old": "loc_47E5C",
+      "new": "SKDEZEnergyBridge_InitStraightWait",
+      "profiles": ["sk"],
+      "meaning": "Select initially inactive straight bridge."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 24,
+      "old": "loc_47E62",
+      "new": "SKDEZEnergyBridge_WaitStraightPhaseZero",
+      "profiles": ["sk"],
+      "meaning": "Poll straight-bridge activation phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 32,
+      "old": "loc_47E76",
+      "new": "SKDEZEnergyBridge_ActivateStraightBridge",
+      "profiles": ["sk"],
+      "meaning": "Activate straight bridge."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 40,
+      "old": "loc_47E8C",
+      "new": "SKDEZEnergyBridge_TickStraightAndDetach",
+      "profiles": ["sk"],
+      "meaning": "Update straight bridge lifetime."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 53,
+      "old": "loc_47EAA",
+      "new": "SKDEZEnergyBridge_CheckStraightTopSolid",
+      "profiles": ["sk"],
+      "meaning": "Maintain straight bridge support."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 60,
+      "old": "loc_47EBE",
+      "new": "SKDEZEnergyBridge_AnimateStraightAndZap",
+      "profiles": ["sk"],
+      "meaning": "Animate straight bridge by global phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 72,
+      "old": "loc_47EE2",
+      "new": "SKDEZEnergyBridge_DrawStraightBridge",
+      "profiles": ["sk"],
+      "meaning": "Finish active straight-bridge update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 83,
+      "old": "locret_47EFA",
+      "new": "SKDEZEnergyBridge_DetachReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish straight bridge release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 102,
+      "old": "loc_47F26",
+      "new": "SKDEZEnergyBridge_InitCurvedWait",
+      "profiles": ["sk"],
+      "meaning": "Select initially inactive curved bridge."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 105,
+      "old": "loc_47F2C",
+      "new": "SKDEZEnergyBridge_WaitCurvedPhaseZero",
+      "profiles": ["sk"],
+      "meaning": "Poll curved bridge activation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 113,
+      "old": "loc_47F40",
+      "new": "SKDEZEnergyBridge_ActivateCurvedBridge",
+      "profiles": ["sk"],
+      "meaning": "Activate curved bridge."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 121,
+      "old": "loc_47F56",
+      "new": "SKDEZEnergyBridge_TickCurvedLifetime",
+      "profiles": ["sk"],
+      "meaning": "Count curved bridge active time."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 126,
+      "old": "loc_47F62",
+      "new": "SKDEZEnergyBridge_UpdateCurvedLayers",
+      "profiles": ["sk"],
+      "meaning": "Apply active curved bridge region."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 144,
+      "old": "loc_47F96",
+      "new": "SKDEZEnergyBridge_DrawCurvedBridge",
+      "profiles": ["sk"],
+      "meaning": "Finish curved bridge active continuation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 168,
+      "old": "loc_47FD8",
+      "new": "SKDEZEnergyBridge_TryReleaseCurvedRider",
+      "profiles": ["sk"],
+      "meaning": "Leave curved bridge collision-layer region."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 175,
+      "old": "loc_47FEA",
+      "new": "SKDEZEnergyBridge_RestoreDefaultLayers",
+      "profiles": ["sk"],
+      "meaning": "Finish recorded curved bridge exit."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "original_line": 179,
+      "old": "locret_47FF6",
+      "new": "SKDEZEnergyBridge_LayerUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish curved player layer pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/floating_platform.s",
+      "original_line": 23,
+      "old": "loc_25A7E",
+      "new": "SKDEZFloatPlat_MoveAndCheckSolid",
+      "profiles": ["sk"],
+      "meaning": "Update DEZ floating platform."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/floating_platform.s",
+      "original_line": 41,
+      "old": "word_25AB8",
+      "new": "SKDEZFloatPlat_LRZMotionOffsets",
+      "profiles": ["sk"],
+      "meaning": "Select DEZ platform motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 49,
+      "old": "locret_49346",
+      "new": "SKDEZGravHub_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish idle hub player poll."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 53,
+      "old": "loc_49348",
+      "new": "SKDEZGravHub_CenterOrReleaseRider",
+      "profiles": ["sk"],
+      "meaning": "Dispatch captured hub state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 63,
+      "old": "loc_49360",
+      "new": "SKDEZGravHub_TrySnapRiderX",
+      "profiles": ["sk"],
+      "meaning": "Complete horizontal centering decision."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 70,
+      "old": "loc_49372",
+      "new": "SKDEZGravHub_StepXAndMeasureY",
+      "profiles": ["sk"],
+      "meaning": "Center captured player vertically."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 79,
+      "old": "loc_49386",
+      "new": "SKDEZGravHub_TrySnapRiderY",
+      "profiles": ["sk"],
+      "meaning": "Complete vertical centering decision."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 86,
+      "old": "loc_49398",
+      "new": "SKDEZGravHub_StepRiderY",
+      "profiles": ["sk"],
+      "meaning": "Finish hub centering motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 89,
+      "old": "loc_4939C",
+      "new": "SKDEZGravHub_TickHumAndAnimateRider",
+      "profiles": ["sk"],
+      "meaning": "Update controlled or departing hub player."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 96,
+      "old": "loc_493AE",
+      "new": "SKDEZGravHub_TickRiderPoseCounter",
+      "profiles": ["sk"],
+      "meaning": "Advance hub player graphics cursor."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 104,
+      "old": "loc_493C6",
+      "new": "SKDEZGravHub_ApplyRiderPose",
+      "profiles": ["sk"],
+      "meaning": "Apply old hub timer frame."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 111,
+      "old": "RawAni_493DA",
+      "new": "SKDEZGravHub_RiderFrames",
+      "profiles": ["sk"],
+      "meaning": "Store controlled-player frame sequence."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 117,
+      "old": "loc_493F2",
+      "new": "SKDEZGravHub_CheckDirectionOrDeparture",
+      "profiles": ["sk"],
+      "meaning": "Dispatch centered or launched hub player."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 125,
+      "old": "loc_49408",
+      "new": "SKDEZGravHub_LaunchInFirstDirection",
+      "profiles": ["sk"],
+      "meaning": "Select hub launch velocity record."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 134,
+      "old": "word_49420",
+      "new": "SKDEZGravHub_LaunchVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Store four directional velocity pairs."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 141,
+      "old": "loc_49430",
+      "new": "SKDEZGravHub_CheckDepartureBounds",
+      "profiles": ["sk"],
+      "meaning": "Monitor launched player's region."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "original_line": 153,
+      "old": "loc_49456",
+      "new": "SKDEZGravHub_ResetRiderState",
+      "profiles": ["sk"],
+      "meaning": "Allow later hub recapture."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 35,
+      "old": "loc_4995C",
+      "new": "SKDEZGravPuzzle_InitCompositePanel",
+      "profiles": ["sk"],
+      "meaning": "Build independent puzzle panel visual."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 50,
+      "old": "loc_49978",
+      "new": "SKDEZGravPuzzle_NextPanelOrSaveHandle",
+      "profiles": ["sk"],
+      "meaning": "Advance panel construction loop."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 54,
+      "old": "loc_49980",
+      "new": "SKDEZGravPuzzle_InitPuzzleUpdate",
+      "profiles": ["sk"],
+      "meaning": "Finish puzzle resource allocation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 57,
+      "old": "loc_49986",
+      "new": "SKDEZGravPuzzle_BobAndPlacePanels",
+      "profiles": ["sk"],
+      "meaning": "Update puzzle integer Y and display."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 69,
+      "old": "loc_499AC",
+      "new": "SKDEZGravPuzzle_SetPanelY",
+      "profiles": ["sk"],
+      "meaning": "Move six embedded panel Ys."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 93,
+      "old": "loc_499EC",
+      "new": "SKDEZGravPuzzle_MarkAndBounceP2",
+      "profiles": ["sk"],
+      "meaning": "Process puzzle P2 side contact."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 101,
+      "old": "loc_499FC",
+      "new": "SKDEZGravPuzzle_DrawPuzzleRoot",
+      "profiles": ["sk"],
+      "meaning": "Finish puzzle collision update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 121,
+      "old": "loc_49A1C",
+      "new": "SKDEZGravPuzzle_ClampPanelMinY",
+      "profiles": ["sk"],
+      "meaning": "Classify touched panel vertical band."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 128,
+      "old": "loc_49A2C",
+      "new": "SKDEZGravPuzzle_ClampPanelMaxY",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical panel selection bounds."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 133,
+      "old": "loc_49A34",
+      "new": "SKDEZGravPuzzle_MarkPanelAndSetFrame",
+      "profiles": ["sk"],
+      "meaning": "Commit one puzzle panel contact."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 147,
+      "old": "locret_49A58",
+      "new": "SKDEZGravPuzzle_MarkPanelReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish panel persistence update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "original_line": 152,
+      "old": "byte_49A5A",
+      "new": "SKDEZGravPuzzle_PanelOffsetFrameTriplets",
+      "profiles": ["sk"],
+      "meaning": "Store puzzle panel geometry and initial frames."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 24,
+      "old": "loc_49638",
+      "new": "SKDEZGravRoom_ClearPlacementRespawn",
+      "profiles": ["sk"],
+      "meaning": "Retire invisible gravity room."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 30,
+      "old": "loc_49644",
+      "new": "SKDEZGravRoom_DeleteRoom",
+      "profiles": ["sk"],
+      "meaning": "Finish gravity-room deletion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 59,
+      "old": "locret_496A6",
+      "new": "SKDEZGravRoom_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish inactive player region test."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 63,
+      "old": "loc_496A8",
+      "new": "SKDEZGravRoom_CheckRiderXBounds",
+      "profiles": ["sk"],
+      "meaning": "Poll captured-room exit."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 71,
+      "old": "loc_496BC",
+      "new": "SKDEZGravRoom_ReleaseRider",
+      "profiles": ["sk"],
+      "meaning": "End room capture."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 77,
+      "old": "loc_496C8",
+      "new": "SKDEZGravRoom_AccelRightAndTryUp",
+      "profiles": ["sk"],
+      "meaning": "Update controlled room velocities."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 94,
+      "old": "loc_496F2",
+      "new": "SKDEZGravRoom_TryApplyDownInput",
+      "profiles": ["sk"],
+      "meaning": "Apply held downward acceleration."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 105,
+      "old": "loc_49706",
+      "new": "SKDEZGravRoom_StoreYSpeedAndSelectDrag",
+      "profiles": ["sk"],
+      "meaning": "Apply room vertical damping."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 116,
+      "old": "loc_4971E",
+      "new": "SKDEZGravRoom_StoreDampedPositiveY",
+      "profiles": ["sk"],
+      "meaning": "Finish positive quotient damping."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 121,
+      "old": "loc_49724",
+      "new": "SKDEZGravRoom_DampNegativeY",
+      "profiles": ["sk"],
+      "meaning": "Handle negative ASR 5 quotient."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 126,
+      "old": "loc_4972C",
+      "new": "SKDEZGravRoom_StoreDampedNegativeY",
+      "profiles": ["sk"],
+      "meaning": "Finish negative quotient branch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 129,
+      "old": "loc_49730",
+      "new": "SKDEZGravRoom_MoveRiderAndCheckTerrain",
+      "profiles": ["sk"],
+      "meaning": "Apply controlled room player motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "original_line": 143,
+      "old": "locret_49764",
+      "new": "SKDEZGravRoom_RiderUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish captured room update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_swap.s",
+      "original_line": 14,
+      "old": "loc_4920E",
+      "new": "SKDEZGravSwap_InitP1Crossing",
+      "profiles": ["sk"],
+      "meaning": "Finish invisible crossing setup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_swap.s",
+      "original_line": 17,
+      "old": "loc_49214",
+      "new": "SKDEZGravSwap_UpdateP1Crossing",
+      "profiles": ["sk"],
+      "meaning": "Run invisible gravity setter."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_swap.s",
+      "original_line": 49,
+      "old": "locret_4926E",
+      "new": "SKDEZGravSwap_CrossingReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish crossing test."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_swap.s",
+      "original_line": 53,
+      "old": "loc_49270",
+      "new": "SKDEZGravSwap_LatchLeftAndSetGravity",
+      "profiles": ["sk"],
+      "meaning": "Process previously-right player crossing left."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 15,
+      "old": "loc_48AD6",
+      "new": "SKDEZGravSwitch_CheckSolidAndTryPress",
+      "profiles": ["sk"],
+      "meaning": "Poll gravity switch contact."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 33,
+      "old": "loc_48B16",
+      "new": "SKDEZGravSwitch_MoveAndResetPlayers",
+      "profiles": ["sk"],
+      "meaning": "Commit gravity switch press."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 46,
+      "old": "loc_48B3A",
+      "new": "SKDEZGravSwitch_DrawIdleSwitch",
+      "profiles": ["sk"],
+      "meaning": "Finish activation update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 69,
+      "old": "locret_48B7C",
+      "new": "SKDEZGravSwitch_PlayerResetReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish switch player reset."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 75,
+      "old": "loc_48B7E",
+      "new": "SKDEZGravSwitch_TickPressAndToggle",
+      "profiles": ["sk"],
+      "meaning": "Count gravity-switch initial delay."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 82,
+      "old": "loc_48B96",
+      "new": "SKDEZGravSwitch_DrawPressDelay",
+      "profiles": ["sk"],
+      "meaning": "Finish toggle delay."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 86,
+      "old": "loc_48B9C",
+      "new": "SKDEZGravSwitch_HoldPressedUnderP1",
+      "profiles": ["sk"],
+      "meaning": "Poll pressed switch solidity."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 98,
+      "old": "loc_48BC2",
+      "new": "SKDEZGravSwitch_TickReturnDelay",
+      "profiles": ["sk"],
+      "meaning": "Return switch after unoccupied delay."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 107,
+      "old": "loc_48BDA",
+      "new": "SKDEZGravSwitch_ReturnAndRearmSwitch",
+      "profiles": ["sk"],
+      "meaning": "Restore gravity switch root position."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "original_line": 111,
+      "old": "loc_48BE4",
+      "new": "SKDEZGravSwitch_DrawHeldSwitch",
+      "profiles": ["sk"],
+      "meaning": "Finish gravity switch hold state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 16,
+      "old": "loc_48EC8",
+      "new": "SKDEZGravTube_InitHorizontalHalfLength",
+      "profiles": ["sk"],
+      "meaning": "Configure nonnegative-subtype gravity tube."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 25,
+      "old": "loc_48EE2",
+      "new": "SKDEZGravTube_InitHorizontalHeight",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal tube initialization."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 29,
+      "old": "loc_48EEC",
+      "new": "SKDEZGravTube_UpdateHorizontalRiders",
+      "profiles": ["sk"],
+      "meaning": "Run horizontal tube player states."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 75,
+      "old": "loc_48F6A",
+      "new": "SKDEZGravTube_GetNarrowEntryPhase",
+      "profiles": ["sk"],
+      "meaning": "Select initial horizontal tube phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 78,
+      "old": "loc_48F6E",
+      "new": "SKDEZGravTube_InitHorizontalRider",
+      "profiles": ["sk"],
+      "meaning": "Complete horizontal attachment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 87,
+      "old": "locret_48F8E",
+      "new": "SKDEZGravTube_HorizontalCaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal player tube pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 90,
+      "old": "byte_48F90",
+      "new": "SKDEZGravTube_NarrowEntryPhases",
+      "profiles": ["sk"],
+      "meaning": "Store eight narrow entry phases."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 92,
+      "old": "byte_48F98",
+      "new": "SKDEZGravTube_WideEntryPhases",
+      "profiles": ["sk"],
+      "meaning": "Store twelve wide entry phases."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 97,
+      "old": "loc_48FA4",
+      "new": "SKDEZGravTube_CheckHorizontalExit",
+      "profiles": ["sk"],
+      "meaning": "Poll previously recorded horizontal rider."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 106,
+      "old": "loc_48FBA",
+      "new": "SKDEZGravTube_DetachHorizontalRider",
+      "profiles": ["sk"],
+      "meaning": "Release horizontal tube rider."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 121,
+      "old": "locret_48FF4",
+      "new": "SKDEZGravTube_HorizontalDetachReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal tube exit."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 125,
+      "old": "loc_48FF6",
+      "new": "SKDEZGravTube_StopYAndDetach",
+      "profiles": ["sk"],
+      "meaning": "Handle player already airborne in tube."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 130,
+      "old": "loc_48FFE",
+      "new": "SKDEZGravTube_PlaceHorizontalRider",
+      "profiles": ["sk"],
+      "meaning": "Constrain horizontal tube rider."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 142,
+      "old": "loc_49022",
+      "new": "SKDEZGravTube_ApplyYAndStepPhase",
+      "profiles": ["sk"],
+      "meaning": "Update horizontal rider orientation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 156,
+      "old": "loc_4904A",
+      "new": "SKDEZGravTube_TryFlipRenderY",
+      "profiles": ["sk"],
+      "meaning": "Apply gravity-relative tube flip."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 161,
+      "old": "loc_49056",
+      "new": "SKDEZGravTube_TryPlayHorizontalHum",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal constrained movement."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 168,
+      "old": "locret_49068",
+      "new": "SKDEZGravTube_HorizontalMotionReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal occupied pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 174,
+      "old": "loc_4906A",
+      "new": "SKDEZGravTube_UpdateVerticalRiders",
+      "profiles": ["sk"],
+      "meaning": "Run vertical tube P1/P2 states."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 223,
+      "old": "loc_49102",
+      "new": "SKDEZGravTube_SetVerticalEntrySpeed",
+      "profiles": ["sk"],
+      "meaning": "Convert captured vertical motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 232,
+      "old": "loc_49120",
+      "new": "SKDEZGravTube_InitVerticalRider",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical tube capture."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 241,
+      "old": "locret_49140",
+      "new": "SKDEZGravTube_VerticalCaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical tube helper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 245,
+      "old": "loc_49142",
+      "new": "SKDEZGravTube_CheckVerticalExit",
+      "profiles": ["sk"],
+      "meaning": "Poll occupied vertical tube extent."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 261,
+      "old": "loc_4917A",
+      "new": "SKDEZGravTube_SetVerticalRiderFlip",
+      "profiles": ["sk"],
+      "meaning": "Continue owned vertical rider."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 269,
+      "old": "loc_49194",
+      "new": "SKDEZGravTube_PlaceVerticalRiderAndPose",
+      "profiles": ["sk"],
+      "meaning": "Advance vertical tube orbit and graphics."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 288,
+      "old": "loc_491CE",
+      "new": "SKDEZGravTube_UploadVerticalRiderPose",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical tube graphics."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "original_line": 295,
+      "old": "RawAni_491DA",
+      "new": "SKDEZGravTube_VerticalRiderFrames",
+      "profiles": ["sk"],
+      "meaning": "Store vertical orbit player frame lookup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 20,
+      "old": "loc_46FC2",
+      "new": "SKDEZHangCarrier_TryRiseWithP1",
+      "profiles": ["sk"],
+      "meaning": "Poll initial hanging-carrier activation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 25,
+      "old": "loc_46FCE",
+      "new": "SKDEZHangCarrier_UpdateRidersAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Run carrier attachment states."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 37,
+      "old": "loc_46FF2",
+      "new": "SKDEZHangCarrier_RiseAndCheckCeiling",
+      "profiles": ["sk"],
+      "meaning": "Advance rising carrier."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 50,
+      "old": "loc_47024",
+      "new": "SKDEZHangCarrier_BeginHorizontalTravel",
+      "profiles": ["sk"],
+      "meaning": "Select carrier ceiling travel."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 53,
+      "old": "loc_4702A",
+      "new": "SKDEZHangCarrier_UpdateRidersAfterRise",
+      "profiles": ["sk"],
+      "meaning": "Finish current rising carrier step."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 57,
+      "old": "loc_4702C",
+      "new": "SKDEZHangCarrier_TickHorizontalTravel",
+      "profiles": ["sk"],
+      "meaning": "Advance post-ceiling travel."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 82,
+      "old": "loc_47074",
+      "new": "SKDEZHangCarrier_TrySetJumpLeft",
+      "profiles": ["sk"],
+      "meaning": "Complete carrier jump detachment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 87,
+      "old": "loc_47080",
+      "new": "SKDEZHangCarrier_TrySetJumpRight",
+      "profiles": ["sk"],
+      "meaning": "Resolve opposing carrier jump directions."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 92,
+      "old": "loc_4708C",
+      "new": "SKDEZHangCarrier_ReleaseWithRollingJump",
+      "profiles": ["sk"],
+      "meaning": "Complete jump release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 105,
+      "old": "loc_470C4",
+      "new": "SKDEZHangCarrier_ReleaseInvalidRider",
+      "profiles": ["sk"],
+      "meaning": "Abort carrier attachment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 112,
+      "old": "loc_470D2",
+      "new": "SKDEZHangCarrier_CarryRiderBelowGrip",
+      "profiles": ["sk"],
+      "meaning": "Position attached carrier rider."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 122,
+      "old": "locret_470F6",
+      "new": "SKDEZHangCarrier_FollowReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish occupied carrier pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 126,
+      "old": "loc_470F8",
+      "new": "SKDEZHangCarrier_TickRecaptureCooldown",
+      "profiles": ["sk"],
+      "meaning": "Poll inactive rider slot."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 133,
+      "old": "loc_47104",
+      "new": "SKDEZHangCarrier_TryCaptureRider",
+      "profiles": ["sk"],
+      "meaning": "Attach hanging player."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "original_line": 163,
+      "old": "locret_4717C",
+      "new": "SKDEZHangCarrier_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish idle carrier pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 31,
+      "old": "loc_494D4",
+      "new": "SKDEZHover_InitRootAnimation",
+      "profiles": ["sk"],
+      "meaning": "Finish hover-machine construction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 34,
+      "old": "loc_494DA",
+      "new": "SKDEZHover_ToggleRootFrame",
+      "profiles": ["sk"],
+      "meaning": "Animate hover-machine housing."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 40,
+      "old": "loc_494EA",
+      "new": "SKDEZHover_SelectFieldPriority",
+      "profiles": ["sk"],
+      "meaning": "Update independent hover field."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 46,
+      "old": "loc_494FC",
+      "new": "SKDEZHover_MoveFieldAndLiftPlayers",
+      "profiles": ["sk"],
+      "meaning": "Advance hover-field phase and interaction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 87,
+      "old": "loc_49578",
+      "new": "SKDEZHover_ApplyLiftAndResetAirState",
+      "profiles": ["sk"],
+      "meaning": "Move player within hover field."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 104,
+      "old": "loc_495B8",
+      "new": "SKDEZHover_TryStartPlayerFlip",
+      "profiles": ["sk"],
+      "meaning": "Finish hover-field player response."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "original_line": 112,
+      "old": "locret_495D6",
+      "new": "SKDEZHover_LiftReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish field player pass."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 35,
+      "old": "loc_47406",
+      "new": "SKDEZLiftPad_InitArmSegments",
+      "profiles": ["sk"],
+      "meaning": "Build lift arm visual."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 44,
+      "old": "loc_47422",
+      "new": "SKDEZLiftPad_InitLiftMotion",
+      "profiles": ["sk"],
+      "meaning": "Finish lift initialization after allocation result."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 51,
+      "old": "loc_47440",
+      "new": "SKDEZLiftPad_MoveAndCheckTopSolid",
+      "profiles": ["sk"],
+      "meaning": "Update lift root and riders."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 66,
+      "old": "loc_47472",
+      "new": "SKDEZLiftPad_ClearPlacementRespawn",
+      "profiles": ["sk"],
+      "meaning": "Retire out-of-range lift assembly."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 72,
+      "old": "loc_4747E",
+      "new": "SKDEZLiftPad_DeleteArmAndRoot",
+      "profiles": ["sk"],
+      "meaning": "Delete coupled lift objects."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 96,
+      "old": "loc_474BC",
+      "new": "SKDEZLiftPad_TryRemapLiftPhase",
+      "profiles": ["sk"],
+      "meaning": "Select alternate lift orientation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 102,
+      "old": "loc_474CA",
+      "new": "SKDEZLiftPad_RotateAndReflectPhase",
+      "profiles": ["sk"],
+      "meaning": "Finish lift angle remapping."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 109,
+      "old": "loc_474DC",
+      "new": "SKDEZLiftPad_CalcArmSegmentStep",
+      "profiles": ["sk"],
+      "meaning": "Set lift segment placement vectors."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 126,
+      "old": "loc_4750A",
+      "new": "SKDEZLiftPad_PlaceArmSegments",
+      "profiles": ["sk"],
+      "meaning": "Update arm geometry and endpoint."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 163,
+      "old": "loc_47574",
+      "new": "SKDEZLiftPad_StoreLiftEndpointX",
+      "profiles": ["sk"],
+      "meaning": "Finish lift root position."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 166,
+      "old": "locret_47578",
+      "new": "SKDEZLiftPad_GeometryReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish lift placement helper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 181,
+      "old": "loc_47592",
+      "new": "SKDEZLiftPad_TryStartCycleFromP1",
+      "profiles": ["sk"],
+      "meaning": "Select lift cycle start."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 192,
+      "old": "loc_475B6",
+      "new": "SKDEZLiftPad_StepAngularAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Update first angular half-cycle."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 203,
+      "old": "loc_475D6",
+      "new": "SKDEZLiftPad_TryBeginDeceleration",
+      "profiles": ["sk"],
+      "meaning": "Finish forward half-cycle."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 210,
+      "old": "loc_475E6",
+      "new": "SKDEZLiftPad_StepAngularDeceleration",
+      "profiles": ["sk"],
+      "meaning": "Update reverse angular half-cycle."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 219,
+      "old": "loc_47600",
+      "new": "SKDEZLiftPad_TryResumeAcceleration",
+      "profiles": ["sk"],
+      "meaning": "Select next angular half-cycle."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "original_line": 224,
+      "old": "loc_4760E",
+      "new": "SKDEZLiftPad_ReturnAngleHighByte",
+      "profiles": ["sk"],
+      "meaning": "Emit current lift phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 16,
+      "old": "loc_478BE",
+      "new": "SKDEZLightning_TryPlayPulseSound",
+      "profiles": ["sk"],
+      "meaning": "Restart lightning flash."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 22,
+      "old": "loc_478CC",
+      "new": "SKDEZLightning_InitPulseAndReloadDelay",
+      "profiles": ["sk"],
+      "meaning": "Initialize flash timing."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 29,
+      "old": "loc_478E2",
+      "new": "SKDEZLightning_AnimatePulseAndTryIdle",
+      "profiles": ["sk"],
+      "meaning": "Update active lightning."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 38,
+      "old": "loc_47906",
+      "new": "SKDEZLightning_CheckFrame3Contact",
+      "profiles": ["sk"],
+      "meaning": "Select flash collision wrapper."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 44,
+      "old": "loc_47914",
+      "new": "SKDEZLightning_DrawNoncontactFrame",
+      "profiles": ["sk"],
+      "meaning": "Finish safe flash frame."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "original_line": 48,
+      "old": "loc_4791A",
+      "new": "SKDEZLightning_TickIdleDelay",
+      "profiles": ["sk"],
+      "meaning": "Count lightning idle interval."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 5,
+      "old": "word_4808A",
+      "new": "SKDEZRetractSpring_LaunchSpeeds",
+      "profiles": ["sk"],
+      "meaning": "Store two upward launch velocities."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 24,
+      "old": "loc_480D4",
+      "new": "SKDEZRetractSpring_CheckP1Height",
+      "profiles": ["sk"],
+      "meaning": "Poll retracting spring extension."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 38,
+      "old": "loc_480FC",
+      "new": "SKDEZRetractSpring_ExtendSpring",
+      "profiles": ["sk"],
+      "meaning": "Advance retracting spring outward."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 43,
+      "old": "loc_48102",
+      "new": "SKDEZRetractSpring_TryRetractAboveBand",
+      "profiles": ["sk"],
+      "meaning": "Poll upper first-player region."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 54,
+      "old": "loc_48120",
+      "new": "SKDEZRetractSpring_RetractSpring",
+      "profiles": ["sk"],
+      "meaning": "Advance retracting spring inward."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 57,
+      "old": "loc_48124",
+      "new": "SKDEZRetractSpring_SelectFacingOffset",
+      "profiles": ["sk"],
+      "meaning": "Compute spring rootX offset."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 63,
+      "old": "loc_48132",
+      "new": "SKDEZRetractSpring_TryReflectXOffset",
+      "profiles": ["sk"],
+      "meaning": "Complete spring offset orientation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 68,
+      "old": "loc_4813C",
+      "new": "SKDEZRetractSpring_PlaceAndCheckP1",
+      "profiles": ["sk"],
+      "meaning": "Launch P1 on recorded standing."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 83,
+      "old": "loc_4816E",
+      "new": "SKDEZRetractSpring_RestoreShapeCheckP2",
+      "profiles": ["sk"],
+      "meaning": "Launch P2 independently."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "original_line": 92,
+      "old": "loc_4818C",
+      "new": "SKDEZRetractSpring_AnimateAndCull",
+      "profiles": ["sk"],
+      "meaning": "Finish retracting spring update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 14,
+      "old": "loc_47658",
+      "new": "SKDEZStairs_TryMirrorStairs",
+      "profiles": ["sk"],
+      "meaning": "Adjust staircase graphics orientation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 19,
+      "old": "loc_47666",
+      "new": "SKDEZStairs_SelectOffsetSlotOrder",
+      "profiles": ["sk"],
+      "meaning": "Select shared root displacement slots."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 27,
+      "old": "loc_47676",
+      "new": "SKDEZStairs_BeginBlockSetup",
+      "profiles": ["sk"],
+      "meaning": "Begin staircase construction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 34,
+      "old": "loc_47680",
+      "new": "SKDEZStairs_TryAllocNextBlock",
+      "profiles": ["sk"],
+      "meaning": "Build staircase allocation prefix."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 39,
+      "old": "loc_47690",
+      "new": "SKDEZStairs_InitBlockAndOffsetSlot",
+      "profiles": ["sk"],
+      "meaning": "Configure one root-or-child block."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 57,
+      "old": "loc_476E4",
+      "new": "SKDEZStairs_InitRootPhaseDispatch",
+      "profiles": ["sk"],
+      "meaning": "Complete staircase allocation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 60,
+      "old": "loc_476EA",
+      "new": "SKDEZStairs_DispatchPhase",
+      "profiles": ["sk"],
+      "meaning": "Update shared staircase offsets."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 68,
+      "old": "loc_476FE",
+      "new": "SKDEZStairs_PlaceBlockAndCollectContacts",
+      "profiles": ["sk"],
+      "meaning": "Update one staircase block."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 85,
+      "old": "off_4773A",
+      "new": "SKDEZStairs_PhaseOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store subtype phase dispatch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 96,
+      "old": "loc_4774A",
+      "new": "SKDEZStairs_WaitForSideContact",
+      "profiles": ["sk"],
+      "meaning": "Poll staircase side-contact latch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 104,
+      "old": "locret_47760",
+      "new": "SKDEZStairs_SideDelayReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish side-triggered stair wait."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 108,
+      "old": "loc_47762",
+      "new": "SKDEZStairs_TickSideContactDelay",
+      "profiles": ["sk"],
+      "meaning": "Count side-triggered staircase delay."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 116,
+      "old": "loc_47774",
+      "new": "SKDEZStairs_WaitForTopContact",
+      "profiles": ["sk"],
+      "meaning": "Poll staircase top-contact latch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 124,
+      "old": "locret_4778A",
+      "new": "SKDEZStairs_TopWaitReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish top-triggered stair wait."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 128,
+      "old": "loc_4778C",
+      "new": "SKDEZStairs_TickTopContactDelay",
+      "profiles": ["sk"],
+      "meaning": "Update top-triggered delay."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 136,
+      "old": "loc_4779E",
+      "new": "SKDEZStairs_WriteShakeOffsets",
+      "profiles": ["sk"],
+      "meaning": "Generate four staircase offsets."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 151,
+      "old": "loc_477C2",
+      "new": "SKDEZStairs_LowerStepOffsets",
+      "profiles": ["sk"],
+      "meaning": "Update lowering stair phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 171,
+      "old": "locret_477EA",
+      "new": "SKDEZStairs_LoweringReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish lower staircase phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 175,
+      "old": "loc_477EC",
+      "new": "SKDEZStairs_RaiseStepOffsets",
+      "profiles": ["sk"],
+      "meaning": "Update raising stair phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "original_line": 195,
+      "old": "locret_47814",
+      "new": "SKDEZStairs_RaisingReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish raise staircase phase."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 25,
+      "old": "off_48C3C",
+      "new": "SKDEZTeleporter_RiderStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store per-player teleporter state dispatch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 32,
+      "old": "loc_48C44",
+      "new": "SKDEZTeleporter_CheckCaptureX",
+      "profiles": ["sk"],
+      "meaning": "Begin idle teleporter capture."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 42,
+      "old": "loc_48C62",
+      "new": "SKDEZTeleporter_CheckRiderEligibility",
+      "profiles": ["sk"],
+      "meaning": "Complete capture eligibility."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 64,
+      "old": "loc_48CB0",
+      "new": "SKDEZTeleporter_CaptureAndUnrollRider",
+      "profiles": ["sk"],
+      "meaning": "Start controlled teleporter spin."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 86,
+      "old": "loc_48D0C",
+      "new": "SKDEZTeleporter_ApplyUnrollY",
+      "profiles": ["sk"],
+      "meaning": "Adjust teleporter entry Y."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 89,
+      "old": "loc_48D10",
+      "new": "SKDEZTeleporter_InitSpinPhase",
+      "profiles": ["sk"],
+      "meaning": "Initialize teleporter spin record."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 96,
+      "old": "loc_48D26",
+      "new": "SKDEZTeleporter_ClearSpinSpeed",
+      "profiles": ["sk"],
+      "meaning": "Finish teleporter entry record."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 99,
+      "old": "locret_48D2A",
+      "new": "SKDEZTeleporter_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish idle teleporter state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 103,
+      "old": "loc_48D2C",
+      "new": "SKDEZTeleporter_AccelSpinAndTryTransit",
+      "profiles": ["sk"],
+      "meaning": "Update controlled spin-up."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 117,
+      "old": "loc_48D58",
+      "new": "SKDEZTeleporter_BeginTransit",
+      "profiles": ["sk"],
+      "meaning": "Finish exact spin-speed transition."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 123,
+      "old": "loc_48D66",
+      "new": "SKDEZTeleporter_StepSpinPhase",
+      "profiles": ["sk"],
+      "meaning": "Run shared spin graphics step."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 130,
+      "old": "loc_48D78",
+      "new": "SKDEZTeleporter_StorePhaseAndSelectPose",
+      "profiles": ["sk"],
+      "meaning": "Select teleporter player frame."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 141,
+      "old": "loc_48D9C",
+      "new": "SKDEZTeleporter_ApplyFlipAndUploadPose",
+      "profiles": ["sk"],
+      "meaning": "Finish spin frame update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 150,
+      "old": "RawAni_48DB2",
+      "new": "SKDEZTeleporter_RiderSpinFrames",
+      "profiles": ["sk"],
+      "meaning": "Store teleporter spin frame lookup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 152,
+      "old": "byte_48DBE",
+      "new": "SKDEZTeleporter_RiderSpinFlipBits",
+      "profiles": ["sk"],
+      "meaning": "Store spin phase flip lookup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 157,
+      "old": "loc_48DCA",
+      "new": "SKDEZTeleporter_TrySetGravityAtMidpoint",
+      "profiles": ["sk"],
+      "meaning": "Update teleporter vertical transit."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 171,
+      "old": "loc_48DF2",
+      "new": "SKDEZTeleporter_ApplyTargetGravity",
+      "profiles": ["sk"],
+      "meaning": "Write teleporter global gravity choice."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 174,
+      "old": "loc_48DF6",
+      "new": "SKDEZTeleporter_SetTransitInvuln",
+      "profiles": ["sk"],
+      "meaning": "Set transient player invulnerability BYTE."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 184,
+      "old": "loc_48E10",
+      "new": "SKDEZTeleporter_StepTransitOrRelease",
+      "profiles": ["sk"],
+      "meaning": "Advance transit or select release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 196,
+      "old": "loc_48E2C",
+      "new": "SKDEZTeleporter_ReleaseAndSelectOffset",
+      "profiles": ["sk"],
+      "meaning": "End vertical transit."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 205,
+      "old": "loc_48E44",
+      "new": "SKDEZTeleporter_SelectNegativeExitOffset",
+      "profiles": ["sk"],
+      "meaning": "Dispatch gravity/vertical orientation release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 216,
+      "old": "loc_48E60",
+      "new": "SKDEZTeleporter_TryOverrideNegativeExit",
+      "profiles": ["sk"],
+      "meaning": "Finish negative-subtype flipped-root release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 223,
+      "old": "loc_48E6A",
+      "new": "SKDEZTeleporter_SelectPositiveExitOffset",
+      "profiles": ["sk"],
+      "meaning": "Handle nonnegative subtype endpoint."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 231,
+      "old": "loc_48E7E",
+      "new": "SKDEZTeleporter_TryOverridePositiveExit",
+      "profiles": ["sk"],
+      "meaning": "Finish nonnegative unflipped-root release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 238,
+      "old": "loc_48E88",
+      "new": "SKDEZTeleporter_CheckCommonExitOffset",
+      "profiles": ["sk"],
+      "meaning": "Gate direct character base offset."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 242,
+      "old": "loc_48E8E",
+      "new": "SKDEZTeleporter_ApplyReleaseY",
+      "profiles": ["sk"],
+      "meaning": "Apply release correction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 245,
+      "old": "locret_48E92",
+      "new": "SKDEZTeleporter_ReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish transit release."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 249,
+      "old": "loc_48E94",
+      "new": "SKDEZTeleporter_TryRearmAfterDeparture",
+      "profiles": ["sk"],
+      "meaning": "Monitor released player distance."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "original_line": 258,
+      "old": "locret_48EAC",
+      "new": "SKDEZTeleporter_DepartureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish final teleporter state."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 16,
+      "old": "loc_46DB2",
+      "new": "SKDEZTiltBridge_TryAllocNextSegment",
+      "profiles": ["sk"],
+      "meaning": "Construct bridge allocation prefix."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 20,
+      "old": "loc_46DBC",
+      "new": "SKDEZTiltBridge_InitSegmentAndRootLink",
+      "profiles": ["sk"],
+      "meaning": "Configure root or child bridge block."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 39,
+      "old": "loc_46E16",
+      "new": "SKDEZTiltBridge_InitRootUpdate",
+      "profiles": ["sk"],
+      "meaning": "Finish bridge allocation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 42,
+      "old": "loc_46E1C",
+      "new": "SKDEZTiltBridge_SaveRidersAndCheckTilt",
+      "profiles": ["sk"],
+      "meaning": "Update shared bridge inputs."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 52,
+      "old": "loc_46E40",
+      "new": "SKDEZTiltBridge_TryLatchBridgeBreak",
+      "profiles": ["sk"],
+      "meaning": "Commit bridge collapse request."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 57,
+      "old": "loc_46E4C",
+      "new": "SKDEZTiltBridge_GetP1Influence",
+      "profiles": ["sk"],
+      "meaning": "Compute segment deflection acceleration."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 68,
+      "old": "loc_46E68",
+      "new": "SKDEZTiltBridge_GetP2Influence",
+      "profiles": ["sk"],
+      "meaning": "Add P2 bridge influence."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 78,
+      "old": "loc_46E80",
+      "new": "SKDEZTiltBridge_MoveSegmentAndTrackP1",
+      "profiles": ["sk"],
+      "meaning": "Move one bridge segment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 88,
+      "old": "loc_46E9E",
+      "new": "SKDEZTiltBridge_TryTrackP2",
+      "profiles": ["sk"],
+      "meaning": "Store current P2 support marker."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 93,
+      "old": "loc_46EAC",
+      "new": "SKDEZTiltBridge_TryScheduleSegmentBreak",
+      "profiles": ["sk"],
+      "meaning": "Select bridge break callback."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 98,
+      "old": "loc_46EB8",
+      "new": "SKDEZTiltBridge_CheckSolidAndCull",
+      "profiles": ["sk"],
+      "meaning": "Finish current tilting segment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 107,
+      "old": "byte_46ED8",
+      "new": "SKDEZTiltBridge_RiderInfluenceTable",
+      "profiles": ["sk"],
+      "meaning": "Store rider/segment coupling matrix."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 119,
+      "old": "loc_46F18",
+      "new": "SKDEZTiltBridge_BeginSegmentFall",
+      "profiles": ["sk"],
+      "meaning": "Initialize collapsed segment motion."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 125,
+      "old": "loc_46F28",
+      "new": "SKDEZTiltBridge_FallAndCheckCameraDepth",
+      "profiles": ["sk"],
+      "meaning": "Advance broken bridge segment."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "original_line": 137,
+      "old": "loc_46F54",
+      "new": "SKDEZTiltBridge_CheckSolidAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Finish collapsed segment update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 20,
+      "old": "loc_471D6",
+      "new": "SKDEZTorpedo_TickVisibleLaunchDelay",
+      "profiles": ["sk"],
+      "meaning": "Emit horizontal torpedo."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 44,
+      "old": "loc_4724A",
+      "new": "SKDEZTorpedo_PlayLaunchSound",
+      "profiles": ["sk"],
+      "meaning": "Finish successful torpedo construction."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 48,
+      "old": "loc_47252",
+      "new": "SKDEZTorpedo_BeginRecoil",
+      "profiles": ["sk"],
+      "meaning": "Begin launcher recoil animation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 55,
+      "old": "loc_47266",
+      "new": "SKDEZTorpedo_DrawIdleLauncher",
+      "profiles": ["sk"],
+      "meaning": "Finish waiting launcher."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 59,
+      "old": "loc_4726C",
+      "new": "SKDEZTorpedo_TickRecoilFrames",
+      "profiles": ["sk"],
+      "meaning": "Animate launch recoil."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 67,
+      "old": "loc_47284",
+      "new": "SKDEZTorpedo_DrawRecoilingLauncher",
+      "profiles": ["sk"],
+      "meaning": "Finish recoil update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 71,
+      "old": "loc_4728A",
+      "new": "SKDEZTorpedo_MoveVisibleTorpedo",
+      "profiles": ["sk"],
+      "meaning": "Update independent torpedo."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "original_line": 79,
+      "old": "loc_472A2",
+      "new": "SKDEZTorpedo_DeleteTorpedo",
+      "profiles": ["sk"],
+      "meaning": "Retire torpedo."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 17,
+      "old": "loc_484E2",
+      "new": "SKDEZTunnelCtrl_InitTunnelControl",
+      "profiles": ["sk"],
+      "meaning": "Finish tunnel controller allocation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 36,
+      "old": "loc_48512",
+      "new": "SKDEZTunnelCtrl_CullWhenBothInactive",
+      "profiles": ["sk"],
+      "meaning": "Finish controller actor passes."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 49,
+      "old": "off_48524",
+      "new": "SKDEZTunnelCtrl_RiderStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Store tunnel state dispatch."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 86,
+      "old": "locret_48590",
+      "new": "SKDEZTunnelCtrl_SetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish delayed actor setup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 113,
+      "old": "loc_485D0",
+      "new": "SKDEZTunnelCtrl_DecodeCurveAndCenter",
+      "profiles": ["sk"],
+      "meaning": "Enter encoded curve waypoint."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 136,
+      "old": "locret_48616",
+      "new": "SKDEZTunnelCtrl_CurveInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish curve marker decoding."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 218,
+      "old": "loc_486BE",
+      "new": "SKDEZTunnelCtrl_StepCircleAngle",
+      "profiles": ["sk"],
+      "meaning": "Continue tunnel circular path."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 257,
+      "old": "loc_48726",
+      "new": "SKDEZTunnelCtrl_StepSineAngle",
+      "profiles": ["sk"],
+      "meaning": "Continue tunnel sine path."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 291,
+      "old": "loc_48772",
+      "new": "SKDEZTunnelCtrl_GetWaypointYDistance",
+      "profiles": ["sk"],
+      "meaning": "Choose signed tunnel segment velocity."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 299,
+      "old": "loc_48780",
+      "new": "SKDEZTunnelCtrl_ChooseDominantAxis",
+      "profiles": ["sk"],
+      "meaning": "Compute straight segment duration and speeds."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 314,
+      "old": "loc_4879E",
+      "new": "SKDEZTunnelCtrl_StoreYDominantSpeeds",
+      "profiles": ["sk"],
+      "meaning": "Complete vertical-dominant setup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 321,
+      "old": "loc_487AC",
+      "new": "SKDEZTunnelCtrl_StoreYTravelTimer",
+      "profiles": ["sk"],
+      "meaning": "Finish vertical-dominant duration."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 340,
+      "old": "loc_487CE",
+      "new": "SKDEZTunnelCtrl_StoreXDominantSpeeds",
+      "profiles": ["sk"],
+      "meaning": "Complete horizontal-dominant setup."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 347,
+      "old": "loc_487DC",
+      "new": "SKDEZTunnelCtrl_StoreXTravelTimer",
+      "profiles": ["sk"],
+      "meaning": "Finish horizontal-dominant duration."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 402,
+      "old": "loc_4888E",
+      "new": "SKDEZTunnelCtrl_PlayRingSpawnSound",
+      "profiles": ["sk"],
+      "meaning": "Finish periodic ring emission attempt."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 406,
+      "old": "loc_48896",
+      "new": "SKDEZTunnelCtrl_CheckRiderControl",
+      "profiles": ["sk"],
+      "meaning": "Poll independent spawner lifetime."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 412,
+      "old": "loc_4889E",
+      "new": "SKDEZTunnelCtrl_DeleteRingSpawner",
+      "profiles": ["sk"],
+      "meaning": "Retire path actor spawner."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "original_line": 424,
+      "old": "loc_488BC",
+      "new": "SKDEZTunnelCtrl_DrawTransportRing",
+      "profiles": ["sk"],
+      "meaning": "Finish independent ring animation."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 23,
+      "old": "loc_48242",
+      "new": "SKDEZTunnelLaunch_PlaceCountdownDisplay",
+      "profiles": ["sk"],
+      "meaning": "Initialize launcher embedded display."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 32,
+      "old": "loc_4825E",
+      "new": "SKDEZTunnelLaunch_InitCountdownDisplay",
+      "profiles": ["sk"],
+      "meaning": "Finish launcher display initialization."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 58,
+      "old": "loc_482B2",
+      "new": "SKDEZTunnelLaunch_BeepAndTrySpawnControl",
+      "profiles": ["sk"],
+      "meaning": "Advance launch countdown event."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 71,
+      "old": "loc_482EE",
+      "new": "SKDEZTunnelLaunch_BeginFinalCountdown",
+      "profiles": ["sk"],
+      "meaning": "Commit launch event."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 74,
+      "old": "loc_482F4",
+      "new": "SKDEZTunnelLaunch_TickLauncherFrame",
+      "profiles": ["sk"],
+      "meaning": "Animate waiting launch housing."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 79,
+      "old": "loc_48300",
+      "new": "SKDEZTunnelLaunch_BlinkCountdownDigit",
+      "profiles": ["sk"],
+      "meaning": "Update countdown display."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 86,
+      "old": "loc_48316",
+      "new": "SKDEZTunnelLaunch_DrawLauncher",
+      "profiles": ["sk"],
+      "meaning": "Finish launcher main update."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 102,
+      "old": "loc_48348",
+      "new": "SKDEZTunnelLaunch_BlinkFinalDigit",
+      "profiles": ["sk"],
+      "meaning": "Update post-launch display."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 109,
+      "old": "loc_4835E",
+      "new": "SKDEZTunnelLaunch_TickFinalFrame",
+      "profiles": ["sk"],
+      "meaning": "Animate post-launch housing."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 114,
+      "old": "loc_4836A",
+      "new": "SKDEZTunnelLaunch_DrawFinalCountdown",
+      "profiles": ["sk"],
+      "meaning": "Finish launcher's final countdown."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 166,
+      "old": "locret_4840E",
+      "new": "SKDEZTunnelLaunch_P1ArmingReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish P1 launcher capture."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 170,
+      "old": "loc_48410",
+      "new": "SKDEZTunnelLaunch_ArmP2WithoutDigit",
+      "profiles": ["sk"],
+      "meaning": "Handle P2 capture when digitZero."
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "original_line": 176,
+      "old": "locret_48422",
+      "new": "SKDEZTunnelLaunch_CaptureReturn",
+      "profiles": ["sk"],
+      "meaning": "Finish one player's launcher poll."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/zones/dez/sk/act1_screen.s",
+      "tokens": [
+        [6, 1, 0, ""],
+        [11, 0, 0, ""],
+        [23, 1, 1, ""],
+        [24, 1, 3, ""],
+        [25, 0, 1, ""],
+        [27, 1, 2, ""],
+        [40, 0, 2, ""],
+        [42, 0, 3, ""],
+        [44, 1, 5, ""],
+        [58, 0, 4, ""],
+        [60, 3, 4, ""],
+        [80, 0, 5, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act2_screen.s",
+      "tokens": [
+        [9, 1, 6, ""],
+        [10, 1, 7, ""],
+        [11, 1, 8, ""],
+        [12, 0, 6, ""],
+        [14, 1, 8, ""],
+        [23, 0, 7, ""],
+        [25, 1, 8, ""],
+        [31, 0, 8, ""],
+        [44, 1, 9, ""],
+        [45, 1, 10, ""],
+        [46, 1, 11, ""],
+        [47, 0, 9, ""],
+        [56, 0, 10, ""],
+        [60, 1, 11, ""],
+        [62, 0, 11, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "tokens": [
+        [22, 0, 12, ""],
+        [24, 3, 12, ""],
+        [26, 1, 13, ""],
+        [27, 2, 44, ""],
+        [29, 1, 13, ""],
+        [30, 2, 55, ""],
+        [32, 1, 13, ""],
+        [40, 0, 13, ""],
+        [63, 1, 14, ""],
+        [64, 1, 17, ""],
+        [65, 0, 14, ""],
+        [67, 1, 15, ""],
+        [71, 0, 15, ""],
+        [73, 1, 16, ""],
+        [77, 0, 16, ""],
+        [79, 0, 17, ""],
+        [87, 1, 19, ""],
+        [93, 0, 18, ""],
+        [98, 3, 18, ""],
+        [99, 0, 19, ""],
+        [118, 1, 39, ""],
+        [126, 1, 20, ""],
+        [127, 1, 21, ""],
+        [128, 1, 23, ""],
+        [129, 1, 24, ""],
+        [130, 1, 25, ""],
+        [131, 1, 27, ""],
+        [132, 1, 28, ""],
+        [133, 1, 37, ""],
+        [134, 1, 38, ""],
+        [135, 0, 20, ""],
+        [138, 1, 38, ""],
+        [147, 1, 39, ""],
+        [148, 0, 21, ""],
+        [150, 1, 38, ""],
+        [152, 1, 22, ""],
+        [153, 2, 58, ""],
+        [158, 0, 22, ""],
+        [159, 1, 38, ""],
+        [160, 0, 23, ""],
+        [162, 1, 38, ""],
+        [168, 0, 24, ""],
+        [172, 1, 25, ""],
+        [175, 0, 25, ""],
+        [177, 1, 38, ""],
+        [183, 1, 26, ""],
+        [184, 2, 60, ""],
+        [190, 0, 26, ""],
+        [192, 0, 27, ""],
+        [196, 1, 28, ""],
+        [199, 0, 28, ""],
+        [201, 1, 36, ""],
+        [204, 1, 38, ""],
+        [207, 1, 29, ""],
+        [208, 0, 29, ""],
+        [209, 1, 30, ""],
+        [210, 1, 31, ""],
+        [211, 1, 30, ""],
+        [212, 1, 32, ""],
+        [213, 0, 30, ""],
+        [215, 1, 33, ""],
+        [216, 0, 31, ""],
+        [218, 1, 33, ""],
+        [219, 0, 32, ""],
+        [222, 0, 33, ""],
+        [236, 0, 34, ""],
+        [242, 1, 35, ""],
+        [243, 3, 34, ""],
+        [244, 0, 35, ""],
+        [245, 1, 38, ""],
+        [246, 0, 36, ""],
+        [252, 0, 37, ""],
+        [256, 1, 38, ""],
+        [259, 0, 38, ""],
+        [261, 0, 39, ""],
+        [267, 1, 40, ""],
+        [269, 0, 40, ""],
+        [279, 1, 41, ""],
+        [281, 1, 42, ""],
+        [282, 0, 41, ""],
+        [286, 0, 42, ""],
+        [297, 1, 43, ""],
+        [305, 0, 43, ""],
+        [307, 0, 44, ""],
+        [308, 2, 45, ""],
+        [314, 0, 45, ""],
+        [316, 1, 46, ""],
+        [318, 0, 46, ""],
+        [320, 1, 48, ""],
+        [323, 1, 48, ""],
+        [325, 1, 47, ""],
+        [326, 2, 52, ""],
+        [331, 1, 47, ""],
+        [333, 0, 47, ""],
+        [337, 1, 48, ""],
+        [339, 0, 48, ""],
+        [345, 1, 51, ""],
+        [346, 1, 49, ""],
+        [348, 1, 50, ""],
+        [350, 0, 49, ""],
+        [352, 0, 50, ""],
+        [354, 0, 51, ""],
+        [360, 0, 52, ""],
+        [361, 2, 53, ""],
+        [373, 0, 53, ""],
+        [375, 1, 54, ""],
+        [379, 0, 54, ""],
+        [388, 0, 55, ""],
+        [389, 2, 56, ""],
+        [394, 0, 56, ""],
+        [396, 1, 57, ""],
+        [398, 0, 57, ""],
+        [404, 0, 58, ""],
+        [406, 1, 59, ""],
+        [411, 1, 59, ""],
+        [414, 0, 59, ""],
+        [416, 0, 60, ""],
+        [418, 1, 61, ""],
+        [420, 0, 61, ""],
+        [422, 1, 62, ""],
+        [426, 1, 63, ""],
+        [429, 1, 63, ""],
+        [430, 0, 62, ""],
+        [432, 1, 63, ""],
+        [434, 1, 63, ""],
+        [438, 1, 63, ""],
+        [442, 0, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/act3/mappings/blocks.s",
+      "tokens": [
+        [2, 1, 64, ""],
+        [3, 1, 65, ""],
+        [4, 1, 65, ""],
+        [5, 1, 66, ""],
+        [6, 0, 64, ""],
+        [11, 0, 65, ""],
+        [16, 0, 66, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/conveyor_pad.s",
+      "tokens": [
+        [2, 1, 67, ""],
+        [3, 1, 68, ""],
+        [4, 1, 69, ""],
+        [5, 0, 67, ""],
+        [6, 0, 68, ""],
+        [7, 0, 69, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/lightning.s",
+      "tokens": [
+        [2, 1, 70, ""],
+        [3, 0, 70, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/retracting_spring.s",
+      "tokens": [
+        [2, 1, 71, ""],
+        [3, 1, 72, ""],
+        [4, 0, 71, ""],
+        [5, 0, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/animations/transporter_rings.s",
+      "tokens": [
+        [2, 1, 73, ""],
+        [3, 1, 74, ""],
+        [4, 1, 75, ""],
+        [5, 1, 76, ""],
+        [6, 1, 77, ""],
+        [7, 1, 78, ""],
+        [8, 1, 79, ""],
+        [9, 1, 80, ""],
+        [10, 1, 81, ""],
+        [11, 1, 82, ""],
+        [12, 1, 83, ""],
+        [13, 1, 84, ""],
+        [14, 1, 84, ""],
+        [15, 1, 84, ""],
+        [16, 1, 83, ""],
+        [17, 1, 82, ""],
+        [18, 0, 73, ""],
+        [19, 0, 74, ""],
+        [20, 0, 75, ""],
+        [21, 0, 76, ""],
+        [22, 0, 77, ""],
+        [23, 0, 78, ""],
+        [24, 0, 79, ""],
+        [25, 0, 80, ""],
+        [26, 0, 81, ""],
+        [27, 0, 82, ""],
+        [28, 0, 83, ""],
+        [29, 0, 84, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/bumper_wall.s",
+      "tokens": [
+        [2, 1, 85, ""],
+        [3, 0, 85, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/conveyor_pad.s",
+      "tokens": [
+        [2, 1, 86, ""],
+        [3, 1, 86, ""],
+        [4, 1, 87, ""],
+        [5, 1, 88, ""],
+        [6, 1, 89, ""],
+        [7, 0, 86, ""],
+        [16, 0, 87, ""],
+        [25, 0, 88, ""],
+        [36, 1, 89, ""],
+        [37, 1, 89, ""],
+        [38, 1, 90, ""],
+        [39, 1, 91, ""],
+        [40, 0, 89, ""],
+        [57, 0, 90, ""],
+        [74, 0, 91, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge.s",
+      "tokens": [
+        [2, 1, 92, ""],
+        [3, 1, 93, ""],
+        [4, 1, 94, ""],
+        [5, 1, 95, ""],
+        [6, 0, 92, ""],
+        [9, 0, 93, ""],
+        [12, 0, 94, ""],
+        [15, 0, 95, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/energy_bridge_curved.s",
+      "tokens": [
+        [2, 1, 96, ""],
+        [3, 1, 97, ""],
+        [4, 1, 98, ""],
+        [5, 1, 99, ""],
+        [6, 0, 96, ""],
+        [10, 0, 97, ""],
+        [14, 0, 98, ""],
+        [18, 0, 99, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/floating_platform.s",
+      "tokens": [
+        [2, 1, 100, ""],
+        [3, 1, 101, ""],
+        [4, 0, 100, ""],
+        [7, 0, 101, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_puzzle.s",
+      "tokens": [
+        [2, 1, 102, ""],
+        [3, 1, 103, ""],
+        [4, 1, 104, ""],
+        [5, 1, 105, ""],
+        [6, 1, 105, ""],
+        [7, 0, 102, ""],
+        [14, 0, 103, ""],
+        [16, 0, 104, ""],
+        [18, 0, 105, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/gravity_switch.s",
+      "tokens": [
+        [2, 1, 106, ""],
+        [3, 1, 107, ""],
+        [4, 0, 106, ""],
+        [9, 0, 107, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hang_carrier.s",
+      "tokens": [
+        [2, 1, 108, ""],
+        [3, 0, 108, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/hover_machine.s",
+      "tokens": [
+        [2, 1, 109, ""],
+        [3, 1, 110, ""],
+        [4, 1, 111, ""],
+        [5, 0, 109, ""],
+        [8, 0, 110, ""],
+        [11, 0, 111, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lift_pad.s",
+      "tokens": [
+        [2, 1, 112, ""],
+        [3, 1, 113, ""],
+        [4, 1, 114, ""],
+        [5, 0, 112, ""],
+        [9, 0, 113, ""],
+        [11, 0, 114, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/lightning.s",
+      "tokens": [
+        [2, 1, 115, ""],
+        [3, 1, 116, ""],
+        [4, 1, 117, ""],
+        [5, 1, 118, ""],
+        [6, 1, 119, ""],
+        [7, 0, 115, ""],
+        [8, 0, 116, ""],
+        [10, 0, 117, ""],
+        [12, 0, 118, ""],
+        [15, 0, 119, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/retracting_spring.s",
+      "tokens": [
+        [2, 1, 120, ""],
+        [3, 1, 121, ""],
+        [4, 1, 122, ""],
+        [5, 0, 120, ""],
+        [9, 0, 121, ""],
+        [12, 0, 122, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tilting_bridge.s",
+      "tokens": [
+        [2, 1, 123, ""],
+        [3, 0, 123, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/torpedo_launcher.s",
+      "tokens": [
+        [2, 1, 124, ""],
+        [3, 1, 125, ""],
+        [4, 1, 126, ""],
+        [5, 1, 127, ""],
+        [6, 1, 128, ""],
+        [7, 1, 129, ""],
+        [8, 1, 130, ""],
+        [9, 1, 131, ""],
+        [10, 1, 132, ""],
+        [11, 1, 133, ""],
+        [12, 0, 124, ""],
+        [16, 0, 125, ""],
+        [20, 0, 126, ""],
+        [24, 0, 127, ""],
+        [28, 0, 128, ""],
+        [32, 0, 129, ""],
+        [36, 0, 130, ""],
+        [40, 0, 131, ""],
+        [44, 0, 132, ""],
+        [48, 0, 133, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/transporter_rings.s",
+      "tokens": [
+        [2, 1, 134, ""],
+        [3, 1, 135, ""],
+        [4, 1, 136, ""],
+        [5, 1, 137, ""],
+        [6, 1, 137, ""],
+        [7, 1, 138, ""],
+        [8, 1, 139, ""],
+        [9, 1, 140, ""],
+        [10, 1, 141, ""],
+        [11, 1, 142, ""],
+        [12, 1, 143, ""],
+        [13, 1, 144, ""],
+        [14, 1, 145, ""],
+        [15, 1, 146, ""],
+        [16, 0, 134, ""],
+        [19, 0, 135, ""],
+        [22, 0, 136, ""],
+        [25, 0, 137, ""],
+        [30, 0, 138, ""],
+        [32, 0, 139, ""],
+        [34, 0, 140, ""],
+        [37, 0, 141, ""],
+        [41, 0, 142, ""],
+        [44, 0, 143, ""],
+        [47, 0, 144, ""],
+        [50, 0, 145, ""],
+        [54, 0, 146, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/tunnel_launcher.s",
+      "tokens": [
+        [2, 1, 147, ""],
+        [3, 1, 148, ""],
+        [4, 1, 149, ""],
+        [5, 1, 150, ""],
+        [6, 1, 151, ""],
+        [7, 1, 152, ""],
+        [8, 1, 153, ""],
+        [9, 1, 154, ""],
+        [10, 1, 155, ""],
+        [11, 1, 156, ""],
+        [12, 1, 157, ""],
+        [13, 0, 147, ""],
+        [14, 0, 148, ""],
+        [17, 0, 149, ""],
+        [20, 0, 150, ""],
+        [23, 0, 151, ""],
+        [26, 0, 152, ""],
+        [29, 0, 153, ""],
+        [32, 0, 154, ""],
+        [34, 0, 155, ""],
+        [36, 0, 156, ""],
+        [38, 0, 157, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/bumper_wall.s",
+      "tokens": [
+        [9, 1, 158, ""],
+        [10, 1, 159, ""],
+        [13, 2, 164, ""],
+        [14, 1, 164, ""],
+        [15, 0, 158, ""],
+        [16, 2, 161, ""],
+        [17, 1, 161, ""],
+        [18, 0, 159, ""],
+        [19, 2, 160, ""],
+        [20, 0, 160, ""],
+        [22, 1, 161, ""],
+        [24, 0, 161, ""],
+        [32, 1, 163, ""],
+        [35, 1, 162, ""],
+        [39, 0, 162, ""],
+        [41, 1, 163, ""],
+        [45, 0, 163, ""],
+        [47, 0, 164, ""],
+        [57, 1, 166, ""],
+        [60, 1, 165, ""],
+        [64, 0, 165, ""],
+        [66, 1, 166, ""],
+        [70, 0, 166, ""],
+        [75, 0, 167, ""],
+        [80, 1, 168, ""],
+        [83, 0, 168, ""],
+        [92, 1, 169, ""],
+        [94, 0, 169, ""],
+        [99, 1, 170, ""],
+        [101, 0, 170, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_belt.s",
+      "tokens": [
+        [10, 1, 171, ""],
+        [12, 0, 171, ""],
+        [13, 2, 172, ""],
+        [14, 0, 172, ""],
+        [25, 1, 174, ""],
+        [30, 1, 174, ""],
+        [32, 1, 174, ""],
+        [35, 1, 173, ""],
+        [37, 0, 173, ""],
+        [39, 0, 174, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/conveyor_pad.s",
+      "tokens": [
+        [18, 1, 176, ""],
+        [22, 1, 175, ""],
+        [24, 0, 175, ""],
+        [29, 0, 176, ""],
+        [30, 2, 177, ""],
+        [31, 0, 177, ""],
+        [34, 1, 178, ""],
+        [36, 2, 179, ""],
+        [38, 1, 178, ""],
+        [39, 2, 185, ""],
+        [40, 0, 178, ""],
+        [41, 1, 181, ""],
+        [42, 0, 179, ""],
+        [44, 1, 180, ""],
+        [50, 1, 180, ""],
+        [53, 0, 180, ""],
+        [61, 1, 181, ""],
+        [63, 0, 181, ""],
+        [84, 1, 184, ""],
+        [87, 1, 182, ""],
+        [89, 0, 182, ""],
+        [91, 1, 183, ""],
+        [93, 0, 183, ""],
+        [95, 0, 184, ""],
+        [97, 0, 185, ""],
+        [102, 1, 186, ""],
+        [104, 0, 186, ""],
+        [109, 1, 187, ""],
+        [112, 0, 187, ""],
+        [116, 1, 188, ""],
+        [119, 0, 188, ""],
+        [126, 1, 189, ""],
+        [128, 0, 189, ""],
+        [141, 1, 190, ""],
+        [144, 1, 190, ""],
+        [147, 0, 190, ""],
+        [151, 1, 192, ""],
+        [156, 1, 191, ""],
+        [159, 0, 191, ""],
+        [161, 0, 192, ""],
+        [163, 1, 195, ""],
+        [173, 1, 193, ""],
+        [175, 0, 193, ""],
+        [177, 1, 194, ""],
+        [180, 0, 194, ""],
+        [183, 0, 195, ""],
+        [188, 1, 196, ""],
+        [192, 0, 196, ""],
+        [195, 1, 197, ""],
+        [199, 0, 197, ""],
+        [205, 0, 198, ""],
+        [218, 1, 198, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/energy_bridges.s",
+      "tokens": [
+        [8, 1, 199, ""],
+        [11, 2, 202, ""],
+        [12, 1, 202, ""],
+        [13, 0, 199, ""],
+        [14, 2, 200, ""],
+        [15, 0, 200, ""],
+        [19, 1, 201, ""],
+        [21, 0, 201, ""],
+        [27, 2, 202, ""],
+        [28, 0, 202, ""],
+        [30, 1, 203, ""],
+        [37, 2, 200, ""],
+        [38, 1, 204, ""],
+        [39, 0, 203, ""],
+        [45, 0, 204, ""],
+        [50, 1, 205, ""],
+        [53, 1, 205, ""],
+        [56, 0, 205, ""],
+        [60, 1, 206, ""],
+        [63, 0, 206, ""],
+        [71, 1, 207, ""],
+        [74, 2, 210, ""],
+        [75, 1, 210, ""],
+        [76, 0, 207, ""],
+        [77, 2, 208, ""],
+        [78, 0, 208, ""],
+        [82, 1, 209, ""],
+        [84, 0, 209, ""],
+        [90, 2, 210, ""],
+        [91, 0, 210, ""],
+        [93, 1, 211, ""],
+        [94, 2, 208, ""],
+        [95, 0, 211, ""],
+        [106, 1, 212, ""],
+        [109, 1, 212, ""],
+        [112, 0, 212, ""],
+        [116, 1, 213, ""],
+        [121, 1, 213, ""],
+        [126, 1, 213, ""],
+        [131, 0, 213, ""],
+        [133, 1, 215, ""],
+        [135, 1, 214, ""],
+        [137, 0, 214, ""],
+        [140, 0, 215, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/floating_platform.s",
+      "tokens": [
+        [13, 1, 217, ""],
+        [14, 1, 217, ""],
+        [16, 2, 216, ""],
+        [17, 0, 216, ""],
+        [34, 0, 217, ""],
+        [35, 3, 217, ""],
+        [36, 3, 217, ""],
+        [37, 3, 217, ""],
+        [38, 3, 217, ""],
+        [39, 3, 217, ""],
+        [40, 3, 217, ""],
+        [41, 3, 217, ""],
+        [42, 3, 217, ""],
+        [43, 3, 217, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_hub.s",
+      "tokens": [
+        [13, 1, 219, ""],
+        [18, 1, 218, ""],
+        [23, 1, 218, ""],
+        [25, 1, 218, ""],
+        [27, 1, 218, ""],
+        [29, 1, 218, ""],
+        [39, 0, 218, ""],
+        [41, 0, 219, ""],
+        [43, 1, 228, ""],
+        [47, 1, 220, ""],
+        [50, 0, 220, ""],
+        [52, 1, 221, ""],
+        [56, 0, 221, ""],
+        [61, 1, 222, ""],
+        [64, 0, 222, ""],
+        [66, 1, 223, ""],
+        [70, 0, 223, ""],
+        [72, 0, 224, ""],
+        [75, 1, 225, ""],
+        [78, 0, 225, ""],
+        [83, 1, 226, ""],
+        [85, 0, 226, ""],
+        [87, 1, 227, ""],
+        [91, 0, 227, ""],
+        [95, 0, 228, ""],
+        [97, 1, 231, ""],
+        [99, 1, 224, ""],
+        [101, 2, 230, ""],
+        [102, 0, 229, ""],
+        [105, 1, 229, ""],
+        [109, 1, 224, ""],
+        [110, 0, 230, ""],
+        [115, 0, 231, ""],
+        [120, 1, 232, ""],
+        [125, 1, 224, ""],
+        [126, 0, 232, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_puzzle.s",
+      "tokens": [
+        [10, 1, 235, ""],
+        [25, 1, 244, ""],
+        [29, 0, 233, ""],
+        [41, 1, 234, ""],
+        [43, 0, 234, ""],
+        [44, 3, 233, ""],
+        [46, 0, 235, ""],
+        [47, 2, 236, ""],
+        [48, 0, 236, ""],
+        [57, 1, 244, ""],
+        [59, 0, 237, ""],
+        [66, 3, 237, ""],
+        [74, 1, 239, ""],
+        [77, 1, 238, ""],
+        [82, 0, 238, ""],
+        [84, 1, 239, ""],
+        [89, 0, 239, ""],
+        [94, 1, 167, ""],
+        [99, 1, 240, ""],
+        [101, 0, 240, ""],
+        [105, 1, 241, ""],
+        [107, 0, 241, ""],
+        [109, 1, 242, ""],
+        [111, 0, 242, ""],
+        [122, 1, 243, ""],
+        [124, 0, 243, ""],
+        [126, 0, 244, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_room.s",
+      "tokens": [
+        [15, 1, 245, ""],
+        [17, 0, 245, ""],
+        [19, 1, 246, ""],
+        [22, 0, 246, ""],
+        [26, 1, 248, ""],
+        [30, 1, 247, ""],
+        [35, 1, 247, ""],
+        [37, 1, 247, ""],
+        [47, 0, 247, ""],
+        [49, 0, 248, ""],
+        [51, 1, 249, ""],
+        [55, 1, 250, ""],
+        [56, 0, 249, ""],
+        [60, 0, 250, ""],
+        [66, 1, 251, ""],
+        [71, 1, 251, ""],
+        [74, 1, 251, ""],
+        [76, 0, 251, ""],
+        [78, 1, 252, ""],
+        [81, 1, 252, ""],
+        [84, 1, 252, ""],
+        [86, 0, 252, ""],
+        [91, 1, 256, ""],
+        [92, 1, 254, ""],
+        [94, 1, 253, ""],
+        [96, 0, 253, ""],
+        [98, 1, 256, ""],
+        [99, 0, 254, ""],
+        [101, 1, 255, ""],
+        [103, 0, 255, ""],
+        [105, 0, 256, ""],
+        [115, 1, 257, ""],
+        [118, 0, 257, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_swap.s",
+      "tokens": [
+        [6, 1, 258, ""],
+        [8, 0, 258, ""],
+        [9, 2, 259, ""],
+        [10, 0, 259, ""],
+        [18, 1, 261, ""],
+        [20, 1, 260, ""],
+        [29, 1, 260, ""],
+        [31, 1, 260, ""],
+        [33, 1, 260, ""],
+        [36, 1, 260, ""],
+        [38, 0, 260, ""],
+        [40, 0, 261, ""],
+        [42, 1, 260, ""],
+        [51, 1, 260, ""],
+        [53, 1, 260, ""],
+        [55, 1, 260, ""],
+        [58, 1, 260, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_switch.s",
+      "tokens": [
+        [8, 2, 262, ""],
+        [9, 0, 262, ""],
+        [18, 1, 264, ""],
+        [20, 2, 266, ""],
+        [24, 1, 263, ""],
+        [26, 0, 263, ""],
+        [38, 0, 264, ""],
+        [42, 1, 265, ""],
+        [55, 1, 265, ""],
+        [57, 0, 265, ""],
+        [59, 0, 266, ""],
+        [61, 1, 267, ""],
+        [64, 2, 268, ""],
+        [65, 0, 267, ""],
+        [67, 0, 268, ""],
+        [74, 1, 269, ""],
+        [76, 1, 271, ""],
+        [77, 0, 269, ""],
+        [79, 1, 271, ""],
+        [83, 1, 270, ""],
+        [85, 0, 270, ""],
+        [87, 2, 262, ""],
+        [88, 0, 271, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "tokens": [
+        [3, 1, 272, ""],
+        [7, 2, 289, ""],
+        [8, 1, 289, ""],
+        [9, 0, 272, ""],
+        [15, 1, 273, ""],
+        [17, 0, 273, ""],
+        [19, 2, 274, ""],
+        [20, 0, 274, ""],
+        [35, 1, 280, ""],
+        [40, 1, 277, ""],
+        [47, 1, 277, ""],
+        [49, 1, 277, ""],
+        [51, 1, 277, ""],
+        [57, 1, 275, ""],
+        [59, 1, 279, ""],
+        [60, 1, 276, ""],
+        [61, 0, 275, ""],
+        [62, 1, 278, ""],
+        [63, 0, 276, ""],
+        [69, 1, 277, ""],
+        [71, 0, 277, ""],
+        [73, 0, 278, ""],
+        [75, 0, 279, ""],
+        [78, 0, 280, ""],
+        [80, 1, 283, ""],
+        [85, 1, 284, ""],
+        [86, 0, 281, ""],
+        [93, 1, 282, ""],
+        [100, 0, 282, ""],
+        [102, 0, 283, ""],
+        [104, 1, 281, ""],
+        [105, 0, 284, ""],
+        [107, 1, 277, ""],
+        [113, 1, 285, ""],
+        [116, 0, 285, ""],
+        [126, 1, 286, ""],
+        [129, 0, 286, ""],
+        [131, 1, 287, ""],
+        [133, 0, 287, ""],
+        [136, 1, 288, ""],
+        [139, 0, 288, ""],
+        [141, 0, 289, ""],
+        [156, 1, 293, ""],
+        [161, 1, 292, ""],
+        [166, 1, 292, ""],
+        [168, 1, 292, ""],
+        [170, 1, 292, ""],
+        [172, 1, 292, ""],
+        [182, 1, 290, ""],
+        [184, 0, 290, ""],
+        [189, 1, 291, ""],
+        [192, 0, 291, ""],
+        [198, 1, 293, ""],
+        [199, 0, 292, ""],
+        [201, 0, 293, ""],
+        [206, 1, 294, ""],
+        [215, 0, 294, ""],
+        [217, 1, 292, ""],
+        [220, 1, 295, ""],
+        [222, 0, 295, ""],
+        [234, 1, 297, ""],
+        [237, 1, 296, ""],
+        [240, 0, 296, ""],
+        [244, 0, 297, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hanging_carrier.s",
+      "tokens": [
+        [13, 2, 298, ""],
+        [14, 0, 298, ""],
+        [16, 1, 299, ""],
+        [17, 2, 300, ""],
+        [18, 0, 299, ""],
+        [28, 0, 300, ""],
+        [33, 1, 302, ""],
+        [38, 1, 301, ""],
+        [40, 0, 301, ""],
+        [41, 2, 303, ""],
+        [42, 0, 302, ""],
+        [43, 1, 299, ""],
+        [44, 0, 303, ""],
+        [46, 1, 299, ""],
+        [49, 1, 299, ""],
+        [52, 1, 310, ""],
+        [54, 1, 307, ""],
+        [56, 1, 307, ""],
+        [58, 1, 308, ""],
+        [63, 1, 304, ""],
+        [65, 0, 304, ""],
+        [67, 1, 305, ""],
+        [69, 0, 305, ""],
+        [71, 1, 306, ""],
+        [73, 0, 306, ""],
+        [84, 0, 307, ""],
+        [89, 0, 308, ""],
+        [95, 1, 309, ""],
+        [98, 0, 309, ""],
+        [100, 0, 310, ""],
+        [102, 1, 311, ""],
+        [105, 0, 311, ""],
+        [110, 1, 312, ""],
+        [115, 1, 312, ""],
+        [117, 1, 312, ""],
+        [119, 1, 312, ""],
+        [121, 1, 312, ""],
+        [134, 0, 312, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/hover_machine.s",
+      "tokens": [
+        [9, 1, 313, ""],
+        [10, 2, 315, ""],
+        [24, 0, 313, ""],
+        [25, 2, 314, ""],
+        [26, 0, 314, ""],
+        [30, 0, 315, ""],
+        [33, 1, 316, ""],
+        [35, 0, 316, ""],
+        [52, 1, 319, ""],
+        [63, 1, 319, ""],
+        [65, 1, 319, ""],
+        [67, 1, 319, ""],
+        [69, 1, 317, ""],
+        [72, 0, 317, ""],
+        [85, 1, 318, ""],
+        [88, 0, 318, ""],
+        [90, 1, 319, ""],
+        [95, 0, 319, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lift_pad.s",
+      "tokens": [
+        [11, 1, 321, ""],
+        [29, 0, 320, ""],
+        [33, 3, 320, ""],
+        [37, 0, 321, ""],
+        [42, 2, 322, ""],
+        [43, 0, 322, ""],
+        [54, 1, 323, ""],
+        [56, 0, 323, ""],
+        [58, 1, 324, ""],
+        [61, 0, 324, ""],
+        [70, 1, 330, ""],
+        [73, 1, 325, ""],
+        [76, 1, 326, ""],
+        [79, 1, 326, ""],
+        [80, 0, 325, ""],
+        [82, 1, 326, ""],
+        [85, 0, 326, ""],
+        [88, 1, 327, ""],
+        [91, 0, 327, ""],
+        [99, 1, 330, ""],
+        [107, 0, 328, ""],
+        [119, 3, 328, ""],
+        [141, 1, 329, ""],
+        [143, 0, 329, ""],
+        [145, 0, 330, ""],
+        [149, 1, 331, ""],
+        [151, 1, 336, ""],
+        [153, 1, 336, ""],
+        [154, 0, 331, ""],
+        [156, 1, 332, ""],
+        [158, 1, 336, ""],
+        [160, 1, 336, ""],
+        [164, 0, 332, ""],
+        [166, 1, 334, ""],
+        [172, 1, 333, ""],
+        [174, 0, 333, ""],
+        [176, 1, 336, ""],
+        [178, 1, 336, ""],
+        [179, 0, 334, ""],
+        [185, 1, 335, ""],
+        [187, 0, 335, ""],
+        [189, 1, 336, ""],
+        [191, 0, 336, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/lightning.s",
+      "tokens": [
+        [9, 0, 337, ""],
+        [11, 1, 338, ""],
+        [14, 0, 338, ""],
+        [19, 2, 339, ""],
+        [20, 0, 339, ""],
+        [24, 1, 340, ""],
+        [27, 2, 342, ""],
+        [28, 0, 340, ""],
+        [30, 1, 341, ""],
+        [32, 0, 341, ""],
+        [34, 0, 342, ""],
+        [36, 1, 337, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/retracting_spring.s",
+      "tokens": [
+        [1, 0, 343, ""],
+        [15, 1, 343, ""],
+        [16, 2, 344, ""],
+        [17, 0, 344, ""],
+        [20, 1, 346, ""],
+        [22, 1, 348, ""],
+        [25, 1, 348, ""],
+        [27, 1, 345, ""],
+        [30, 0, 345, ""],
+        [32, 1, 348, ""],
+        [33, 0, 346, ""],
+        [35, 1, 348, ""],
+        [37, 1, 348, ""],
+        [40, 1, 347, ""],
+        [43, 0, 347, ""],
+        [45, 0, 348, ""],
+        [48, 1, 349, ""],
+        [50, 0, 349, ""],
+        [52, 1, 350, ""],
+        [54, 0, 350, ""],
+        [66, 1, 351, ""],
+        [68, 0, 351, ""],
+        [74, 1, 352, ""],
+        [76, 0, 352, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/staircase.s",
+      "tokens": [
+        [6, 1, 353, ""],
+        [8, 0, 353, ""],
+        [10, 1, 354, ""],
+        [12, 0, 354, ""],
+        [16, 1, 355, ""],
+        [19, 0, 355, ""],
+        [23, 1, 357, ""],
+        [24, 0, 356, ""],
+        [26, 1, 358, ""],
+        [27, 2, 360, ""],
+        [28, 0, 357, ""],
+        [44, 3, 356, ""],
+        [45, 0, 358, ""],
+        [46, 2, 359, ""],
+        [47, 0, 359, ""],
+        [52, 1, 361, ""],
+        [53, 1, 361, ""],
+        [54, 0, 360, ""],
+        [70, 0, 361, ""],
+        [71, 1, 362, ""],
+        [71, 3, 361, ""],
+        [72, 1, 369, ""],
+        [72, 3, 361, ""],
+        [73, 1, 365, ""],
+        [73, 3, 361, ""],
+        [74, 1, 369, ""],
+        [74, 3, 361, ""],
+        [75, 1, 362, ""],
+        [75, 3, 361, ""],
+        [76, 1, 371, ""],
+        [76, 3, 361, ""],
+        [77, 1, 365, ""],
+        [77, 3, 361, ""],
+        [78, 1, 371, ""],
+        [78, 3, 361, ""],
+        [79, 0, 362, ""],
+        [81, 1, 364, ""],
+        [84, 1, 363, ""],
+        [86, 0, 363, ""],
+        [88, 0, 364, ""],
+        [90, 1, 363, ""],
+        [94, 0, 365, ""],
+        [96, 1, 367, ""],
+        [99, 1, 366, ""],
+        [101, 0, 366, ""],
+        [103, 0, 367, ""],
+        [105, 1, 368, ""],
+        [109, 0, 368, ""],
+        [122, 0, 369, ""],
+        [125, 1, 370, ""],
+        [141, 0, 370, ""],
+        [143, 0, 371, ""],
+        [146, 1, 372, ""],
+        [162, 0, 372, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "tokens": [
+        [12, 1, 373, ""],
+        [13, 1, 373, ""],
+        [14, 0, 373, ""],
+        [15, 1, 374, ""],
+        [15, 3, 373, ""],
+        [16, 1, 381, ""],
+        [16, 3, 373, ""],
+        [17, 1, 388, ""],
+        [17, 3, 373, ""],
+        [18, 1, 400, ""],
+        [18, 3, 373, ""],
+        [19, 0, 374, ""],
+        [21, 1, 380, ""],
+        [26, 1, 375, ""],
+        [28, 0, 375, ""],
+        [30, 1, 380, ""],
+        [35, 1, 380, ""],
+        [37, 1, 380, ""],
+        [39, 1, 380, ""],
+        [41, 1, 380, ""],
+        [44, 1, 376, ""],
+        [48, 1, 380, ""],
+        [49, 0, 376, ""],
+        [61, 1, 378, ""],
+        [68, 1, 377, ""],
+        [70, 0, 377, ""],
+        [72, 0, 378, ""],
+        [76, 1, 379, ""],
+        [78, 0, 379, ""],
+        [80, 0, 380, ""],
+        [82, 0, 381, ""],
+        [85, 1, 383, ""],
+        [93, 1, 382, ""],
+        [95, 0, 382, ""],
+        [100, 0, 383, ""],
+        [104, 1, 384, ""],
+        [106, 0, 384, ""],
+        [110, 1, 386, ""],
+        [112, 1, 387, ""],
+        [114, 1, 385, ""],
+        [116, 0, 385, ""],
+        [124, 0, 386, ""],
+        [126, 0, 387, ""],
+        [129, 0, 388, ""],
+        [133, 1, 390, ""],
+        [135, 1, 390, ""],
+        [140, 1, 389, ""],
+        [142, 0, 389, ""],
+        [144, 0, 390, ""],
+        [147, 1, 391, ""],
+        [151, 1, 391, ""],
+        [153, 0, 391, ""],
+        [155, 1, 392, ""],
+        [162, 1, 383, ""],
+        [163, 0, 392, ""],
+        [169, 1, 393, ""],
+        [171, 0, 393, ""],
+        [173, 1, 395, ""],
+        [176, 1, 397, ""],
+        [179, 1, 394, ""],
+        [181, 0, 394, ""],
+        [183, 1, 398, ""],
+        [185, 1, 398, ""],
+        [186, 0, 395, ""],
+        [188, 1, 397, ""],
+        [191, 1, 396, ""],
+        [193, 0, 396, ""],
+        [195, 1, 398, ""],
+        [197, 1, 398, ""],
+        [198, 0, 397, ""],
+        [200, 1, 399, ""],
+        [201, 0, 398, ""],
+        [203, 0, 399, ""],
+        [205, 0, 400, ""],
+        [210, 1, 401, ""],
+        [213, 0, 401, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tilting_bridge.s",
+      "tokens": [
+        [8, 1, 403, ""],
+        [9, 0, 402, ""],
+        [11, 1, 404, ""],
+        [12, 0, 403, ""],
+        [13, 2, 407, ""],
+        [29, 3, 402, ""],
+        [30, 0, 404, ""],
+        [31, 2, 405, ""],
+        [32, 0, 405, ""],
+        [39, 1, 406, ""],
+        [41, 0, 406, ""],
+        [43, 1, 407, ""],
+        [45, 0, 407, ""],
+        [48, 1, 408, ""],
+        [52, 1, 413, ""],
+        [55, 0, 408, ""],
+        [57, 1, 409, ""],
+        [61, 1, 413, ""],
+        [64, 0, 409, ""],
+        [71, 1, 410, ""],
+        [73, 0, 410, ""],
+        [75, 1, 411, ""],
+        [77, 0, 411, ""],
+        [79, 1, 412, ""],
+        [80, 2, 414, ""],
+        [81, 0, 412, ""],
+        [89, 0, 413, ""],
+        [99, 0, 414, ""],
+        [103, 2, 415, ""],
+        [104, 0, 415, ""],
+        [112, 1, 416, ""],
+        [115, 0, 416, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/torpedo_launcher.s",
+      "tokens": [
+        [13, 2, 417, ""],
+        [14, 0, 417, ""],
+        [16, 1, 420, ""],
+        [18, 1, 420, ""],
+        [21, 1, 419, ""],
+        [22, 2, 423, ""],
+        [35, 1, 418, ""],
+        [37, 0, 418, ""],
+        [40, 0, 419, ""],
+        [41, 2, 421, ""],
+        [44, 1, 421, ""],
+        [45, 0, 420, ""],
+        [47, 0, 421, ""],
+        [49, 1, 422, ""],
+        [52, 1, 422, ""],
+        [53, 2, 417, ""],
+        [54, 0, 422, ""],
+        [56, 0, 423, ""],
+        [58, 1, 424, ""],
+        [62, 0, 424, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_control.s",
+      "tokens": [
+        [5, 1, 425, ""],
+        [11, 0, 425, ""],
+        [25, 1, 426, ""],
+        [27, 0, 426, ""],
+        [32, 1, 427, ""],
+        [33, 1, 427, ""],
+        [34, 0, 427, ""],
+        [35, 3, 427, ""],
+        [36, 3, 427, ""],
+        [37, 3, 427, ""],
+        [38, 3, 427, ""],
+        [39, 3, 427, ""],
+        [40, 3, 427, ""],
+        [41, 3, 427, ""],
+        [46, 1, 428, ""],
+        [58, 1, 428, ""],
+        [60, 1, 428, ""],
+        [65, 0, 428, ""],
+        [84, 1, 429, ""],
+        [88, 0, 429, ""],
+        [108, 1, 430, ""],
+        [110, 0, 430, ""],
+        [174, 1, 431, ""],
+        [178, 0, 431, ""],
+        [205, 1, 432, ""],
+        [210, 0, 432, ""],
+        [236, 1, 433, ""],
+        [239, 0, 433, ""],
+        [243, 1, 434, ""],
+        [246, 0, 434, ""],
+        [257, 1, 435, ""],
+        [260, 0, 435, ""],
+        [264, 1, 436, ""],
+        [266, 0, 436, ""],
+        [279, 1, 437, ""],
+        [282, 0, 437, ""],
+        [286, 1, 438, ""],
+        [288, 0, 438, ""],
+        [297, 1, 440, ""],
+        [300, 1, 439, ""],
+        [325, 1, 439, ""],
+        [334, 0, 439, ""],
+        [337, 0, 440, ""],
+        [339, 1, 441, ""],
+        [341, 0, 441, ""],
+        [347, 1, 442, ""],
+        [349, 0, 442, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/tunnel_launcher.s",
+      "tokens": [
+        [15, 1, 443, ""],
+        [17, 0, 443, ""],
+        [22, 1, 444, ""],
+        [25, 0, 444, ""],
+        [38, 1, 449, ""],
+        [40, 1, 447, ""],
+        [43, 1, 447, ""],
+        [47, 1, 445, ""],
+        [49, 0, 445, ""],
+        [52, 1, 447, ""],
+        [54, 1, 446, ""],
+        [61, 0, 446, ""],
+        [63, 0, 447, ""],
+        [65, 1, 448, ""],
+        [67, 0, 448, ""],
+        [71, 1, 449, ""],
+        [73, 0, 449, ""],
+        [77, 1, 450, ""],
+        [84, 1, 452, ""],
+        [85, 0, 450, ""],
+        [89, 1, 451, ""],
+        [91, 0, 451, ""],
+        [93, 1, 452, ""],
+        [95, 0, 452, ""],
+        [107, 1, 455, ""],
+        [112, 1, 455, ""],
+        [114, 1, 455, ""],
+        [116, 1, 455, ""],
+        [130, 1, 455, ""],
+        [134, 1, 454, ""],
+        [140, 1, 453, ""],
+        [142, 0, 453, ""],
+        [144, 0, 454, ""],
+        [147, 1, 455, ""],
+        [149, 0, 455, ""]
+      ]
+    }
+  ]
+}

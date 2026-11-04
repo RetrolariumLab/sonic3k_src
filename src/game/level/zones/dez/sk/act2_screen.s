@@ -15,16 +15,16 @@ DEZ2_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 DEZ2_ScreenEvent_Index:
-                bra.w   loc_594B4
+                bra.w   SKDEZ2Events_TryApplyFirstLayoutPatch
 ; ---------------------------------------------------------------------------
-                bra.w   loc_594DA
+                bra.w   SKDEZ2Events_TryApplySecondLayoutPatch
 ; ---------------------------------------------------------------------------
-                bra.w   loc_594F8
+                bra.w   SKDEZ2Events_DrawForeground
 ; ---------------------------------------------------------------------------
 
-loc_594B4:
+SKDEZ2Events_TryApplyFirstLayoutPatch:
                 tst.w   (Events_fg_4).w
-                beq.s   loc_594F8
+                beq.s   SKDEZ2Events_DrawForeground
                 clr.w   (Events_fg_4).w
                 movea.w $38(a3),a1
                 addq.w  #1,a1
@@ -35,9 +35,9 @@ loc_594B4:
                 jmp     (Refresh_PlaneScreenDirect).l
 ; ---------------------------------------------------------------------------
 
-loc_594DA:
+SKDEZ2Events_TryApplySecondLayoutPatch:
                 tst.w   (Events_fg_4).w
-                beq.s   loc_594F8
+                beq.s   SKDEZ2Events_DrawForeground
                 clr.w   (Events_fg_4).w
                 movea.w $18(a3),a1
                 move.b  #$BC,$6B(a1)
@@ -45,7 +45,7 @@ loc_594DA:
                 jmp     (Refresh_PlaneScreenDirect).l
 ; ---------------------------------------------------------------------------
 
-loc_594F8:
+SKDEZ2Events_DrawForeground:
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
 
@@ -64,14 +64,14 @@ DEZ2_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 DEZ2_BackgroundEvent_Index:
-                bra.w   loc_59532
+                bra.w   SKDEZ2Events_BeginStaticBackgroundRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_59556
+                bra.w   SKDEZ2Events_RedrawBackgroundBottomUp
 ; ---------------------------------------------------------------------------
-                bra.w   loc_59566
+                bra.w   SKDEZ2Events_ApplyStaticPlainScroll
 ; ---------------------------------------------------------------------------
 
-loc_59532:
+SKDEZ2Events_BeginStaticBackgroundRedraw:
                 clr.w   (Camera_X_pos_BG_copy).w
                 clr.w   (Camera_Y_pos_BG_copy).w
                 jsr     (Reset_TileOffsetPositionEff).l
@@ -81,13 +81,13 @@ loc_59532:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_59556:
+SKDEZ2Events_RedrawBackgroundBottomUp:
                 moveq   #0,d1
                 moveq   #0,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_59566
+                bpl.s   SKDEZ2Events_ApplyStaticPlainScroll
                 addq.w  #4,(Events_routine_bg).w
 
-loc_59566:
+SKDEZ2Events_ApplyStaticPlainScroll:
                 jmp     (PlainDeformation).l
 ; End of function DEZ2_ScreenInit

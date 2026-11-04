@@ -15,12 +15,12 @@ Obj_DEZFloatingPlatform:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 add.w   d0,d0
-                move.w  word_25AB8(pc,d0.w),d0
-                lea     word_25AB8(pc,d0.w),a1
+                move.w  SKDEZFloatPlat_LRZMotionOffsets(pc,d0.w),d0
+                lea     SKDEZFloatPlat_LRZMotionOffsets(pc,d0.w),a1
                 move.l  a1,$42(a0)
-                move.l  #loc_25A7E,(a0)
+                move.l  #SKDEZFloatPlat_MoveAndCheckSolid,(a0)
 
-loc_25A7E:
+SKDEZFloatPlat_MoveAndCheckSolid:
                 move.w  x_pos(a0),-(sp)
                 movea.l $42(a0),a1
                 jsr     (a1)
@@ -38,16 +38,16 @@ loc_25A7E:
                 move.w  $30(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
-word_25AB8:
-                dc.w    SKLRZMovingSolid_Stationary-word_25AB8
-                dc.w    SKLRZMovingSolid_OscillateX64-word_25AB8
-                dc.w    SKLRZMovingSolid_OscillateX128-word_25AB8
-                dc.w    SKLRZMovingSolid_AccelOscillateX96-word_25AB8
-                dc.w    SKLRZMovingSolid_OscillateY64-word_25AB8
-                dc.w    SKLRZMovingSolid_OscillateY128-word_25AB8
-                dc.w    SKLRZMovingSolid_AccelOscillateY96-word_25AB8
-                dc.w    SKLRZMovingSolid_AccelOscillateX128-word_25AB8
-                dc.w    SKLRZMovingSolid_AccelOscillateY128-word_25AB8
+SKDEZFloatPlat_LRZMotionOffsets:
+                dc.w    SKLRZMovingSolid_Stationary-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateX64-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateX128-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateX96-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateY64-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_OscillateY128-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateY96-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateX128-SKDEZFloatPlat_LRZMotionOffsets
+                dc.w    SKLRZMovingSolid_AccelOscillateY128-SKDEZFloatPlat_LRZMotionOffsets
 ; ---------------------------------------------------------------------------
 Map_DEZFloatingPlatform:
                 include "src/objects/shared/zones/dez/mappings/floating_platform.s"

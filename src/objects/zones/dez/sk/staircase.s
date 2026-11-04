@@ -8,35 +8,35 @@ Obj_DEZStaircase:
                 move.b  subtype(a0),d0
                 andi.w  #7,d0
                 cmpi.w  #4,d0
-                blo.s   loc_47658
+                blo.s   SKDEZStairs_TryMirrorStairs
                 bchg    #0,render_flags(a0)
 
-loc_47658:
+SKDEZStairs_TryMirrorStairs:
                 btst    #1,render_flags(a0)
-                beq.s   loc_47666
+                beq.s   SKDEZStairs_SelectOffsetSlotOrder
                 bchg    #0,render_flags(a0)
 
-loc_47666:
+SKDEZStairs_SelectOffsetSlotOrder:
                 moveq   #$34,d3
                 moveq   #2,d4
                 btst    #0,status(a0)
-                beq.s   loc_47676
+                beq.s   SKDEZStairs_BeginBlockSetup
                 moveq   #$3A,d3
                 moveq   #-2,d4
 
-loc_47676:
+SKDEZStairs_BeginBlockSetup:
                 move.w  x_pos(a0),d2
                 movea.l a0,a1
                 moveq   #3,d1
-                bra.s   loc_47690
+                bra.s   SKDEZStairs_InitBlockAndOffsetSlot
 ; ---------------------------------------------------------------------------
 
-loc_47680:
+SKDEZStairs_TryAllocNextBlock:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_476E4
-                move.l  #loc_476FE,(a1)
+                bne.w   SKDEZStairs_InitRootPhaseDispatch
+                move.l  #SKDEZStairs_PlaceBlockAndCollectContacts,(a1)
 
-loc_47690:
+SKDEZStairs_InitBlockAndOffsetSlot:
                 move.l  #Map_DEZTiltingBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_DEZMisc+$133,1,0),art_tile(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -52,20 +52,20 @@ loc_47690:
                 move.b  d3,$33(a1)
                 move.w  a0,$3E(a1)
                 add.b   d4,d3
-                dbf     d1,loc_47680
+                dbf     d1,SKDEZStairs_TryAllocNextBlock
 
-loc_476E4:
-                move.l  #loc_476EA,(a0)
+SKDEZStairs_InitRootPhaseDispatch:
+                move.l  #SKDEZStairs_DispatchPhase,(a0)
 
-loc_476EA:
+SKDEZStairs_DispatchPhase:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 andi.w  #7,d0
                 add.w   d0,d0
-                move.w  off_4773A(pc,d0.w),d1
-                jsr     off_4773A(pc,d1.w)
+                move.w  SKDEZStairs_PhaseOffsets(pc,d0.w),d1
+                jsr     SKDEZStairs_PhaseOffsets(pc,d1.w)
 
-loc_476FE:
+SKDEZStairs_PlaceBlockAndCollectContacts:
                 movea.w $3E(a0),a2
                 moveq   #0,d0
                 move.b  $33(a0),d0
@@ -82,58 +82,58 @@ loc_476FE:
                 move.w  $44(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
-off_4773A:
-                dc.w    loc_4774A-off_4773A
-                dc.w    loc_477C2-off_4773A
-                dc.w    loc_47774-off_4773A
-                dc.w    loc_477C2-off_4773A
-                dc.w    loc_4774A-off_4773A
-                dc.w    loc_477EC-off_4773A
-                dc.w    loc_47774-off_4773A
-                dc.w    loc_477EC-off_4773A
+SKDEZStairs_PhaseOffsets:
+                dc.w    SKDEZStairs_WaitForSideContact-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_LowerStepOffsets-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_WaitForTopContact-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_LowerStepOffsets-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_WaitForSideContact-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_RaiseStepOffsets-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_WaitForTopContact-SKDEZStairs_PhaseOffsets
+                dc.w    SKDEZStairs_RaiseStepOffsets-SKDEZStairs_PhaseOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4774A:
+SKDEZStairs_WaitForSideContact:
                 tst.w   $30(a0)
-                bne.s   loc_47762
+                bne.s   SKDEZStairs_TickSideContactDelay
                 move.b  $32(a0),d0
                 andi.b  #$30,d0
-                beq.s   locret_47760
+                beq.s   SKDEZStairs_SideDelayReturn
                 move.w  #30,$30(a0)
 
-locret_47760:
+SKDEZStairs_SideDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47762:
+SKDEZStairs_TickSideContactDelay:
                 subq.w  #1,$30(a0)
-                bne.s   locret_47760
+                bne.s   SKDEZStairs_SideDelayReturn
                 addq.b  #1,subtype(a0)
                 moveq   #signextendB(sfx_FanBig),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_47774:
+SKDEZStairs_WaitForTopContact:
                 tst.w   $30(a0)
-                bne.s   loc_4778C
+                bne.s   SKDEZStairs_TickTopContactDelay
                 move.b  $32(a0),d0
                 andi.b  #$C,d0
-                beq.s   locret_4778A
+                beq.s   SKDEZStairs_TopWaitReturn
                 move.w  #$3C,$30(a0)
 
-locret_4778A:
+SKDEZStairs_TopWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4778C:
+SKDEZStairs_TickTopContactDelay:
                 subq.w  #1,$30(a0)
-                bne.s   loc_4779E
+                bne.s   SKDEZStairs_WriteShakeOffsets
                 addq.b  #1,subtype(a0)
                 moveq   #signextendB(sfx_FanBig),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_4779E:
+SKDEZStairs_WriteShakeOffsets:
                 lea     $34(a0),a1
                 move.w  $30(a0),d0
                 lsr.b   #2,d0
@@ -148,10 +148,10 @@ loc_4779E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_477C2:
+SKDEZStairs_LowerStepOffsets:
                 lea     $34(a0),a1
                 cmpi.w  #$80,(a1)
-                beq.s   locret_477EA
+                beq.s   SKDEZStairs_LoweringReturn
                 addq.w  #1,(a1)
                 moveq   #0,d1
                 move.w  (a1)+,d1
@@ -168,14 +168,14 @@ loc_477C2:
                 move.w  d2,(a1)+
                 move.w  d1,(a1)+
 
-locret_477EA:
+SKDEZStairs_LoweringReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_477EC:
+SKDEZStairs_RaiseStepOffsets:
                 lea     $34(a0),a1
                 cmpi.w  #-$80,(a1)
-                beq.s   locret_47814
+                beq.s   SKDEZStairs_RaisingReturn
                 subq.w  #1,(a1)
                 moveq   #0,d1
                 move.w  (a1)+,d1
@@ -192,5 +192,5 @@ loc_477EC:
                 move.w  d2,(a1)+
                 move.w  d1,(a1)+
 
-locret_47814:
+SKDEZStairs_RaisingReturn:
                 rts

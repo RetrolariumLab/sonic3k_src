@@ -1205,15 +1205,15 @@
     },
     {
       "path": "src/objects/zones/dez/sk/gravity_hub.s",
-      "sha256": "e99d26e70038ef4482e2e9ff9a2964ddd7866f4402fc1b033c9410fd7a24ac13"
+      "sha256": "ddaf261547b061f04d1b45e8af7ada88aca788fa519b3493925635453214d870"
     },
     {
       "path": "src/objects/zones/dez/sk/gravity_tube.s",
-      "sha256": "11666a2044ac5f7aa7ee1d2ea1d45c9a1dc131dbb0ebe71a279c1d629e29a3b1"
+      "sha256": "c56bd5a6ab1dd7158b50c5a26cc4b5c46134cc077086a0ceaca5a2278dadec6b"
     },
     {
       "path": "src/objects/zones/dez/sk/teleporter.s",
-      "sha256": "0d8ef0f2146908340b54ca4e576a91f15bab352f25ab124b38753dff47c31b0e"
+      "sha256": "4348345f2e5d42d7d30e155023698fef61a34492e51db175257909a86937362c"
     },
     {
       "path": "src/objects/zones/fbz/sk/chain_link.s",
@@ -5310,44 +5310,44 @@
     },
     {
       "path": "src/objects/zones/dez/sk/gravity_hub.s",
-      "symbol": "RawAni_493DA",
-      "scope": "RawAni_493DA",
+      "symbol": "SKDEZGravHub_RiderFrames",
+      "scope": "SKDEZGravHub_RiderFrames",
       "first_line": 111,
       "last_line": 114,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "071aae376ac0c1f28dd379bf6404f4d657a77a3273c2b8c42a8dfa5a574383c8",
+      "declarations_sha256": "275ed1388d1b5e67df42f0b169450489a7ac21133c03f93bc46bf0ca2ac3377f",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_493DA"],
+      "members": ["SKDEZGravHub_RiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/dez/sk/gravity_tube.s",
-      "symbol": "RawAni_491DA",
-      "scope": "RawAni_491DA",
+      "symbol": "SKDEZGravTube_VerticalRiderFrames",
+      "scope": "SKDEZGravTube_VerticalRiderFrames",
       "first_line": 295,
       "last_line": 298,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "ba3dc9edd656b9d2f9b053d6a8c5f550388e382b666799489744a1b20dcba16c",
+      "declarations_sha256": "2671719fbdbd273f9ddeba740ab722979dc98c55a55017567956872a866cf7f8",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_491DA"],
+      "members": ["SKDEZGravTube_VerticalRiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/dez/sk/teleporter.s",
-      "symbol": "RawAni_48DB2",
-      "scope": "RawAni_48DB2",
+      "symbol": "SKDEZTeleporter_RiderSpinFrames",
+      "scope": "SKDEZTeleporter_RiderSpinFrames",
       "first_line": 150,
       "last_line": 151,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "754a2e20984887325dd72ae6c9e42710ac9188d32d500de2b9274e61a82926bb",
+      "declarations_sha256": "827170a83401d14ea2705c14e4087d720018e040ec1d8987a0b8ac5f95845aca",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_48DB2"],
+      "members": ["SKDEZTeleporter_RiderSpinFrames"],
       "stored_markers": []
     },
     {

@@ -5,28 +5,28 @@
 
 Obj_DEZGravityTube:
                 move.b  subtype(a0),d0
-                bpl.s   loc_48EC8
+                bpl.s   SKDEZGravTube_InitHorizontalHalfLength
                 andi.w  #$3F,d0
                 lsl.w   #3,d0
                 move.w  d0,$30(a0)
-                move.l  #loc_4906A,(a0)
-                bra.w   loc_4906A
+                move.l  #SKDEZGravTube_UpdateVerticalRiders,(a0)
+                bra.w   SKDEZGravTube_UpdateVerticalRiders
 ; ---------------------------------------------------------------------------
 
-loc_48EC8:
+SKDEZGravTube_InitHorizontalHalfLength:
                 andi.w  #$3F,d0
                 lsl.w   #3,d0
                 move.w  d0,$30(a0)
                 move.w  #$20,d0
                 btst    #6,subtype(a0)
-                beq.s   loc_48EE2
+                beq.s   SKDEZGravTube_InitHorizontalHeight
                 move.w  #$60,d0
 
-loc_48EE2:
+SKDEZGravTube_InitHorizontalHeight:
                 move.w  d0,$32(a0)
-                move.l  #loc_48EEC,(a0)
+                move.l  #SKDEZGravTube_UpdateHorizontalRiders,(a0)
 
-loc_48EEC:
+SKDEZGravTube_UpdateHorizontalRiders:
                 move.w  $30(a0),d4
                 move.w  d4,d5
                 add.w   d5,d5
@@ -44,73 +44,73 @@ loc_48EEC:
 
 UpdatePlayerInDezHorizontalGravityTube:
                 btst    d6,status(a0)
-                bne.w   loc_48FA4
+                bne.w   SKDEZGravTube_CheckHorizontalExit
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d4,d0
                 cmp.w   d5,d0
-                bhs.w   locret_48F8E
+                bhs.w   SKDEZGravTube_HorizontalCaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 move.w  $32(a0),d0
                 add.w   d0,d1
                 add.w   d0,d0
                 cmp.w   d0,d1
-                bhs.w   locret_48F8E
+                bhs.w   SKDEZGravTube_HorizontalCaptureReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_48F8E
+                bhs.s   SKDEZGravTube_HorizontalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_48F8E
+                bne.s   SKDEZGravTube_HorizontalCaptureReturn
                 move.w  d1,-(sp)
                 jsr     (RideObject_SetRide).l
                 move.w  (sp)+,d1
                 lsr.w   #3,d1
                 btst    #6,subtype(a0)
-                beq.s   loc_48F6A
+                beq.s   SKDEZGravTube_GetNarrowEntryPhase
                 lsr.w   #1,d1
-                move.b  byte_48F98(pc,d1.w),d1
-                bra.s   loc_48F6E
+                move.b  SKDEZGravTube_WideEntryPhases(pc,d1.w),d1
+                bra.s   SKDEZGravTube_InitHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_48F6A:
-                move.b  byte_48F90(pc,d1.w),d1
+SKDEZGravTube_GetNarrowEntryPhase:
+                move.b  SKDEZGravTube_NarrowEntryPhases(pc,d1.w),d1
 
-loc_48F6E:
+SKDEZGravTube_InitHorizontalRider:
                 move.b  d1,(a2)
                 move.b  #0,2(a2)
                 move.b  #$80,flip_type(a1)
                 move.w  #1,anim(a1)
                 tst.w   ground_vel(a1)
-                bne.s   locret_48F8E
+                bne.s   SKDEZGravTube_HorizontalCaptureReturn
                 move.w  #1,ground_vel(a1)
 
-locret_48F8E:
+SKDEZGravTube_HorizontalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_48F90:
+SKDEZGravTube_NarrowEntryPhases:
                 dc.b    $80, $80, $80, $40, $40,   0,   0,   0
-byte_48F98:
+SKDEZGravTube_WideEntryPhases:
                 dc.b    $80, $80, $70, $60, $50, $40, $40, $30, $20, $10,   0,   0
                 even
 ; ---------------------------------------------------------------------------
 
-loc_48FA4:
+SKDEZGravTube_CheckHorizontalExit:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_48FF6
+                bne.s   SKDEZGravTube_StopYAndDetach
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d4,d0
                 cmp.w   d5,d0
-                blo.s   loc_48FFE
+                blo.s   SKDEZGravTube_PlaceHorizontalRider
 
-loc_48FBA:
+SKDEZGravTube_DetachHorizontalRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 bset    #Status_InAir,status(a1)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   locret_48FF4
+                beq.s   SKDEZGravTube_HorizontalDetachReturn
                 move.b  flip_angle(a1),d0
                 addi.b  #$40,d0
                 neg.b   d0
@@ -118,28 +118,28 @@ loc_48FBA:
                 move.b  d0,flip_angle(a1)
                 eori.b  #2,render_flags(a1)
 
-locret_48FF4:
+SKDEZGravTube_HorizontalDetachReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48FF6:
+SKDEZGravTube_StopYAndDetach:
                 move.w  #0,y_vel(a1)
-                bra.s   loc_48FBA
+                bra.s   SKDEZGravTube_DetachHorizontalRider
 ; ---------------------------------------------------------------------------
 
-loc_48FFE:
+SKDEZGravTube_PlaceHorizontalRider:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_48F8E
+                beq.s   SKDEZGravTube_HorizontalCaptureReturn
                 move.b  (a2),d0
                 jsr     (GetSineCosine).l
                 moveq   #8,d3
                 move.w  #$1000,d0
                 btst    #6,subtype(a0)
-                beq.s   loc_49022
+                beq.s   SKDEZGravTube_ApplyYAndStepPhase
                 move.w  #$5000,d0
                 moveq   #4,d3
 
-loc_49022:
+SKDEZGravTube_ApplyYAndStepPhase:
                 muls.w  d0,d1
                 swap    d1
                 move.w  y_pos(a0),d2
@@ -149,29 +149,29 @@ loc_49022:
                 move.b  d0,flip_angle(a1)
                 add.b   d3,(a2)
                 tst.w   ground_vel(a1)
-                bne.s   loc_4904A
+                bne.s   SKDEZGravTube_TryFlipRenderY
                 move.w  #1,ground_vel(a1)
                 move.w  #1,anim(a1)                     ; and prev_anim
 
-loc_4904A:
+SKDEZGravTube_TryFlipRenderY:
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_49056
+                beq.s   SKDEZGravTube_TryPlayHorizontalHum
                 eori.b  #2,render_flags(a1)
 
-loc_49056:
+SKDEZGravTube_TryPlayHorizontalHum:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_49068
+                bne.s   SKDEZGravTube_HorizontalMotionReturn
                 moveq   #signextendB(sfx_GravityTunnel),d0
                 jsr     (Play_SFX).l
 
-locret_49068:
+SKDEZGravTube_HorizontalMotionReturn:
                 rts
 ; End of function UpdatePlayerInDezHorizontalGravityTube
 
 ; ---------------------------------------------------------------------------
 
-loc_4906A:
+SKDEZGravTube_UpdateVerticalRiders:
                 move.w  $30(a0),d4
                 move.w  d4,d5
                 add.w   d5,d5
@@ -191,23 +191,23 @@ loc_4906A:
 
 UpdatePlayerInDezVerticalGravityTube:
                 btst    d6,status(a0)
-                bne.w   loc_49142
+                bne.w   SKDEZGravTube_CheckVerticalExit
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$20,d0
                 cmpi.w  #$40,d0
-                bhs.w   locret_49140
+                bhs.w   SKDEZGravTube_VerticalCaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 add.w   d4,d1
                 cmp.w   d5,d1
-                bhs.w   locret_49140
+                bhs.w   SKDEZGravTube_VerticalCaptureReturn
                 cmpi.b  #6,routine(a1)
-                bhs.w   locret_49140
+                bhs.w   SKDEZGravTube_VerticalCaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_49140
+                bne.w   SKDEZGravTube_VerticalCaptureReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_49140
+                bmi.s   SKDEZGravTube_VerticalCaptureReturn
                 move.w  d0,-(sp)
                 jsr     (AttachPlayerToScriptedRideObject).l
                 move.w  (sp)+,d1
@@ -217,37 +217,37 @@ UpdatePlayerInDezVerticalGravityTube:
                 move.b  #0,(a2)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bcc.s   loc_49102
+                bcc.s   SKDEZGravTube_SetVerticalEntrySpeed
                 move.b  #$80,(a2)
 
-loc_49102:
+SKDEZGravTube_SetVerticalEntrySpeed:
                 move.w  y_vel(a1),ground_vel(a1)
                 neg.w   ground_vel(a1)
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
-                bcc.s   loc_49120
+                bcc.s   SKDEZGravTube_InitVerticalRider
                 move.b  #$40,angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_49120:
+SKDEZGravTube_InitVerticalRider:
                 bset    #6,object_control(a1)
                 bset    #1,object_control(a1)
                 move.w  #1,anim(a1)
                 move.b  #0,flip_angle(a1)
                 move.b  #0,2(a2)
-                bra.s   loc_49142
+                bra.s   SKDEZGravTube_CheckVerticalExit
 ; ---------------------------------------------------------------------------
 
-locret_49140:
+SKDEZGravTube_VerticalCaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49142:
+SKDEZGravTube_CheckVerticalExit:
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 add.w   d4,d1
                 cmp.w   d5,d1
-                blo.s   loc_4917A
+                blo.s   SKDEZGravTube_SetVerticalRiderFlip
                 move.b  #0,object_control(a1)
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
@@ -258,15 +258,15 @@ loc_49142:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4917A:
+SKDEZGravTube_SetVerticalRiderFlip:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_49140
+                beq.s   SKDEZGravTube_VerticalCaptureReturn
                 bclr    #1,render_flags(a1)
                 tst.w   y_vel(a1)
-                bmi.s   loc_49194
+                bmi.s   SKDEZGravTube_PlaceVerticalRiderAndPose
                 bset    #1,render_flags(a1)
 
-loc_49194:
+SKDEZGravTube_PlaceVerticalRiderAndPose:
                 move.b  (a2),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$1000,d1
@@ -278,21 +278,21 @@ loc_49194:
                 move.b  (a2),d2
                 addq.b  #8,(a2)
                 divu.w  #$B,d2
-                move.b  RawAni_491DA(pc,d2.w),mapping_frame(a1)
+                move.b  SKDEZGravTube_VerticalRiderFrames(pc,d2.w),mapping_frame(a1)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_491CE
+                bne.s   SKDEZGravTube_UploadVerticalRiderPose
                 moveq   #signextendB(sfx_GravityTunnel),d0
                 jsr     (Play_SFX).l
 
-loc_491CE:
+SKDEZGravTube_UploadVerticalRiderPose:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
 ; End of function UpdatePlayerInDezVerticalGravityTube
 
 ; ---------------------------------------------------------------------------
-RawAni_491DA:
+SKDEZGravTube_VerticalRiderFrames:
                 dc.b    $6D, $6D, $6E, $6E, $6F, $6F, $70, $70, $71, $71, $72, $72, $73, $73, $74, $74, $75, $75, $76, $76
                 dc.b    $77, $77, $6C, $6C, $6D, $6D
                 even

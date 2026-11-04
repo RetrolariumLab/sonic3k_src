@@ -17,35 +17,35 @@ Obj_DEZGravityRoom:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$680,d0
-                bhi.w   loc_49638
+                bhi.w   SKDEZGravRoom_ClearPlacementRespawn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_49638:
+SKDEZGravRoom_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_49644
+                beq.s   SKDEZGravRoom_DeleteRoom
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_49644:
+SKDEZGravRoom_DeleteRoom:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerInDezGravityRoom:
                 tst.b   (a2)
-                bne.s   loc_496A8
+                bne.s   SKDEZGravRoom_CheckRiderXBounds
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$500,d0
-                bhs.s   locret_496A6
+                bhs.s   SKDEZGravRoom_CaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$140,d0
                 cmpi.w  #$280,d0
-                bhs.s   locret_496A6
+                bhs.s   SKDEZGravRoom_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_496A6
+                bne.s   SKDEZGravRoom_CaptureReturn
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #-1,flips_remaining(a1)
@@ -56,77 +56,77 @@ UpdatePlayerInDezGravityRoom:
                 move.b  #1,object_control(a1)
                 move.b  #1,(a2)
 
-locret_496A6:
+SKDEZGravRoom_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_496A8:
+SKDEZGravRoom_CheckRiderXBounds:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_496BC
+                bne.s   SKDEZGravRoom_ReleaseRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$500,d0
-                blo.s   loc_496C8
+                blo.s   SKDEZGravRoom_AccelRightAndTryUp
 
-loc_496BC:
+SKDEZGravRoom_ReleaseRider:
                 move.b  #0,object_control(a1)
                 move.b  #0,(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_496C8:
+SKDEZGravRoom_AccelRightAndTryUp:
                 addi.w  #$38,x_vel(a1)
                 move.w  #$600,d6
                 move.w  #$18,d5
                 move.w  y_vel(a1),d0
                 btst    #button_up+8,d4
-                beq.s   loc_496F2
+                beq.s   SKDEZGravRoom_TryApplyDownInput
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_496F2
+                bgt.s   SKDEZGravRoom_TryApplyDownInput
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_496F2
+                ble.s   SKDEZGravRoom_TryApplyDownInput
                 move.w  d1,d0
 
-loc_496F2:
+SKDEZGravRoom_TryApplyDownInput:
                 btst    #button_down+8,d4
-                beq.s   loc_49706
+                beq.s   SKDEZGravRoom_StoreYSpeedAndSelectDrag
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_49706
+                blt.s   SKDEZGravRoom_StoreYSpeedAndSelectDrag
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_49706
+                bge.s   SKDEZGravRoom_StoreYSpeedAndSelectDrag
                 move.w  d6,d0
 
-loc_49706:
+SKDEZGravRoom_StoreYSpeedAndSelectDrag:
                 move.w  d0,y_vel(a1)
                 move.w  y_vel(a1),d0
                 move.w  d0,d1
                 asr.w   #5,d1
-                beq.s   loc_49730
-                bmi.s   loc_49724
+                beq.s   SKDEZGravRoom_MoveRiderAndCheckTerrain
+                bmi.s   SKDEZGravRoom_DampNegativeY
                 sub.w   d1,d0
-                bcc.s   loc_4971E
+                bcc.s   SKDEZGravRoom_StoreDampedPositiveY
                 move.w  #0,d0
 
-loc_4971E:
+SKDEZGravRoom_StoreDampedPositiveY:
                 move.w  d0,y_vel(a1)
-                bra.s   loc_49730
+                bra.s   SKDEZGravRoom_MoveRiderAndCheckTerrain
 ; ---------------------------------------------------------------------------
 
-loc_49724:
+SKDEZGravRoom_DampNegativeY:
                 sub.w   d1,d0
-                bcs.s   loc_4972C
+                bcs.s   SKDEZGravRoom_StoreDampedNegativeY
                 move.w  #0,d0
 
-loc_4972C:
+SKDEZGravRoom_StoreDampedNegativeY:
                 move.w  d0,y_vel(a1)
 
-loc_49730:
+SKDEZGravRoom_MoveRiderAndCheckTerrain:
                 movem.l d0-a6,-(sp)
                 movea.l a1,a0
                 jsr     (MoveSprite2).l
@@ -136,10 +136,10 @@ loc_49730:
                 bset    #Status_InAir,status(a1)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_49764
+                bne.s   SKDEZGravRoom_RiderUpdateReturn
                 moveq   #signextendB(sfx_TurbineHum),d0
                 jsr     (Play_SFX).l
 
-locret_49764:
+SKDEZGravRoom_RiderUpdateReturn:
                 rts
 ; End of function UpdatePlayerInDezGravityRoom

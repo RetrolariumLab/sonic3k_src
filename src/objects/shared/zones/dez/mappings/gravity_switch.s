@@ -1,13 +1,13 @@
 ; Data owner: objects/shared/zones/dez
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_DEZGravitySwitch_:
-                dc.w    word_48BEE-Map_DEZGravitySwitch_
-                dc.w    word_48C08-Map_DEZGravitySwitch_
-word_48BEE:     dc.w    4
+                dc.w    DEZMap_GravitySwitch_RestFourPieces-Map_DEZGravitySwitch_
+                dc.w    DEZMap_GravitySwitch_PressedTwoPieces-Map_DEZGravitySwitch_
+DEZMap_GravitySwitch_RestFourPieces:    dc.w    4
                 dc.b    $F8,   4,   0,   0, $FF, $F0
                 dc.b    $F8,   4,   8,   0,   0,   0
                 dc.b    0,   4,   0,   2, $FF, $F0
                 dc.b    0,   4,   8,   2,   0,   0
-word_48C08:     dc.w    2
+DEZMap_GravitySwitch_PressedTwoPieces:  dc.w    2
                 dc.b    $F8,   4,   0,   0, $FF, $F0
                 dc.b    $F8,   4,   8,   0,   0,   0

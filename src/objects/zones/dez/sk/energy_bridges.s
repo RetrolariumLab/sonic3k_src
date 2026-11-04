@@ -11,76 +11,76 @@ Obj_DEZEnergyBridge:
                 bset    #7,status(a0)
                 bsr.s   InitializeDezEnergyBridgeTiming
                 sub.w   d1,d0
-                bcc.s   loc_47E5C
+                bcc.s   SKDEZEnergyBridge_InitStraightWait
                 neg.w   d0
                 move.w  d0,$34(a0)
-                move.l  #loc_47E8C,(a0)
-                bra.s   loc_47E8C
+                move.l  #SKDEZEnergyBridge_TickStraightAndDetach,(a0)
+                bra.s   SKDEZEnergyBridge_TickStraightAndDetach
 ; ---------------------------------------------------------------------------
 
-loc_47E5C:
-                move.l  #loc_47E62,(a0)
+SKDEZEnergyBridge_InitStraightWait:
+                move.l  #SKDEZEnergyBridge_WaitStraightPhaseZero,(a0)
 
-loc_47E62:
+SKDEZEnergyBridge_WaitStraightPhaseZero:
                 move.w  (Level_frame_counter).w,d0
                 add.w   $30(a0),d0
                 and.w   $32(a0),d0
-                beq.s   loc_47E76
+                beq.s   SKDEZEnergyBridge_ActivateStraightBridge
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_47E76:
+SKDEZEnergyBridge_ActivateStraightBridge:
                 move.b  subtype(a0),d0
                 andi.b  #3,d0
                 addq.b  #2,d0
                 lsl.w   #5,d0
                 move.w  d0,$34(a0)
-                move.l  #loc_47E8C,(a0)
+                move.l  #SKDEZEnergyBridge_TickStraightAndDetach,(a0)
 
-loc_47E8C:
+SKDEZEnergyBridge_TickStraightAndDetach:
                 subq.w  #1,$34(a0)
-                bne.s   loc_47EAA
+                bne.s   SKDEZEnergyBridge_CheckStraightTopSolid
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   DetachPlayerFromExpiredDezEnergyBridge
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.s   DetachPlayerFromExpiredDezEnergyBridge
-                move.l  #loc_47E62,(a0)
-                bra.s   loc_47EBE
+                move.l  #SKDEZEnergyBridge_WaitStraightPhaseZero,(a0)
+                bra.s   SKDEZEnergyBridge_AnimateStraightAndZap
 ; ---------------------------------------------------------------------------
 
-loc_47EAA:
+SKDEZEnergyBridge_CheckStraightTopSolid:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #9,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
 
-loc_47EBE:
+SKDEZEnergyBridge_AnimateStraightAndZap:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
                 move.b  d0,mapping_frame(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_47EE2
+                bpl.s   SKDEZEnergyBridge_DrawStraightBridge
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   loc_47EE2
+                bne.s   SKDEZEnergyBridge_DrawStraightBridge
                 moveq   #signextendB(sfx_EnergyZap),d0
                 jsr     (Play_SFX).l
 
-loc_47EE2:
+SKDEZEnergyBridge_DrawStraightBridge:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 DetachPlayerFromExpiredDezEnergyBridge:
                 bclr    d6,status(a0)
-                beq.s   locret_47EFA
+                beq.s   SKDEZEnergyBridge_DetachReturn
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-locret_47EFA:
+SKDEZEnergyBridge_DetachReturn:
                 rts
 ; End of function DetachPlayerFromExpiredDezEnergyBridge
 
@@ -92,38 +92,38 @@ Obj_DEZEnergyBridgeCurved:
                 move.b  #$30,height_pixels(a0)
                 bsr.w   InitializeDezEnergyBridgeTiming
                 sub.w   d1,d0
-                bcc.s   loc_47F26
+                bcc.s   SKDEZEnergyBridge_InitCurvedWait
                 neg.w   d0
                 move.w  d0,$34(a0)
-                move.l  #loc_47F56,(a0)
-                bra.s   loc_47F56
+                move.l  #SKDEZEnergyBridge_TickCurvedLifetime,(a0)
+                bra.s   SKDEZEnergyBridge_TickCurvedLifetime
 ; ---------------------------------------------------------------------------
 
-loc_47F26:
-                move.l  #loc_47F2C,(a0)
+SKDEZEnergyBridge_InitCurvedWait:
+                move.l  #SKDEZEnergyBridge_WaitCurvedPhaseZero,(a0)
 
-loc_47F2C:
+SKDEZEnergyBridge_WaitCurvedPhaseZero:
                 move.w  (Level_frame_counter).w,d0
                 add.w   $30(a0),d0
                 and.w   $32(a0),d0
-                beq.s   loc_47F40
+                beq.s   SKDEZEnergyBridge_ActivateCurvedBridge
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_47F40:
+SKDEZEnergyBridge_ActivateCurvedBridge:
                 move.b  subtype(a0),d0
                 andi.b  #3,d0
                 addq.b  #2,d0
                 lsl.w   #5,d0
                 move.w  d0,$34(a0)
-                move.l  #loc_47F56,(a0)
+                move.l  #SKDEZEnergyBridge_TickCurvedLifetime,(a0)
 
-loc_47F56:
+SKDEZEnergyBridge_TickCurvedLifetime:
                 subq.w  #1,$34(a0)
-                bne.s   loc_47F62
-                move.l  #loc_47F2C,(a0)
+                bne.s   SKDEZEnergyBridge_UpdateCurvedLayers
+                move.l  #SKDEZEnergyBridge_WaitCurvedPhaseZero,(a0)
 
-loc_47F62:
+SKDEZEnergyBridge_UpdateCurvedLayers:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   DEZCurvedBridge_UpdatePlayerLayer
@@ -134,49 +134,49 @@ loc_47F62:
                 andi.b  #3,d0
                 move.b  d0,mapping_frame(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_47F96
+                bpl.s   SKDEZEnergyBridge_DrawCurvedBridge
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   loc_47F96
+                bne.s   SKDEZEnergyBridge_DrawCurvedBridge
                 moveq   #signextendB(sfx_EnergyZap),d0
                 jsr     (Play_SFX).l
 
-loc_47F96:
+SKDEZEnergyBridge_DrawCurvedBridge:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 DEZCurvedBridge_UpdatePlayerLayer:
                 tst.w   $34(a0)
-                beq.s   loc_47FD8
+                beq.s   SKDEZEnergyBridge_TryReleaseCurvedRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$50,d0
                 cmpi.w  #$A0,d0
-                bhs.s   loc_47FD8
+                bhs.s   SKDEZEnergyBridge_TryReleaseCurvedRider
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$30,d0
                 cmpi.w  #$60,d0
-                bhs.s   loc_47FD8
+                bhs.s   SKDEZEnergyBridge_TryReleaseCurvedRider
                 bset    d6,status(a0)
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47FD8:
+SKDEZEnergyBridge_TryReleaseCurvedRider:
                 bclr    d6,status(a0)
-                beq.s   locret_47FF6
+                beq.s   SKDEZEnergyBridge_LayerUpdateReturn
                 tst.w   $34(a0)
-                bne.s   loc_47FEA
+                bne.s   SKDEZEnergyBridge_RestoreDefaultLayers
                 bset    #Status_InAir,status(a1)
 
-loc_47FEA:
+SKDEZEnergyBridge_RestoreDefaultLayers:
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-locret_47FF6:
+SKDEZEnergyBridge_LayerUpdateReturn:
                 rts
 ; End of function DEZCurvedBridge_UpdatePlayerLayer
 

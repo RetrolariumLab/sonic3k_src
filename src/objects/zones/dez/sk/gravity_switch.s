@@ -10,9 +10,9 @@ Obj_DEZGravitySwitch:
                 move.b  #$10,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_48AD6,(a0)
+                move.l  #SKDEZGravSwitch_CheckSolidAndTryPress,(a0)
 
-loc_48AD6:
+SKDEZGravSwitch_CheckSolidAndTryPress:
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #9,d3
@@ -21,16 +21,16 @@ loc_48AD6:
                 swap    d6
                 move.w  d6,d0
                 andi.w  #$14,d0
-                beq.w   loc_48B3A
+                beq.w   SKDEZGravSwitch_DrawIdleSwitch
                 move.b  #1,mapping_frame(a0)
-                move.l  #loc_48B7E,(a0)
+                move.l  #SKDEZGravSwitch_TickPressAndToggle,(a0)
                 move.w  #3,$30(a0)
                 moveq   #8,d0
                 btst    #1,render_flags(a0)
-                beq.s   loc_48B16
+                beq.s   SKDEZGravSwitch_MoveAndResetPlayers
                 neg.w   d0
 
-loc_48B16:
+SKDEZGravSwitch_MoveAndResetPlayers:
                 add.w   d0,y_pos(a0)
                 lea     (Player_1).w,a1
                 move.w  d6,d2
@@ -43,14 +43,14 @@ loc_48B16:
                 moveq   #signextendB(sfx_Transporter),d0
                 jsr     (Play_SFX).l
 
-loc_48B3A:
+SKDEZGravSwitch_DrawIdleSwitch:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ResetFreePlayerForDezGravitySwitch:
                 tst.b   object_control(a1)
-                bne.s   locret_48B7C
+                bne.s   SKDEZGravSwitch_PlayerResetReturn
                 moveq   #0,d1
                 move.b  d1,anim(a1)
                 move.b  d1,flip_type(a1)
@@ -63,52 +63,52 @@ ResetFreePlayerForDezGravitySwitch:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 and.w   d3,d2
-                beq.s   locret_48B7C
+                beq.s   SKDEZGravSwitch_PlayerResetReturn
                 add.w   d0,y_pos(a1)
 
-locret_48B7C:
+SKDEZGravSwitch_PlayerResetReturn:
                 rts
 ; End of function ResetFreePlayerForDezGravitySwitch
 
 ; ---------------------------------------------------------------------------
 
-loc_48B7E:
+SKDEZGravSwitch_TickPressAndToggle:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_48B96
+                bpl.s   SKDEZGravSwitch_DrawPressDelay
                 move.w  #20-1,$30(a0)
                 eori.b  #1,(Reverse_gravity_flag).w
-                move.l  #loc_48B9C,(a0)
+                move.l  #SKDEZGravSwitch_HoldPressedUnderP1,(a0)
 
-loc_48B96:
+SKDEZGravSwitch_DrawPressDelay:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_48B9C:
+SKDEZGravSwitch_HoldPressedUnderP1:
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #9,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 btst    #Status_OnObj,status(a0)
-                beq.s   loc_48BC2
+                beq.s   SKDEZGravSwitch_TickReturnDelay
                 move.w  #0,$30(a0)
-                bra.s   loc_48BE4
+                bra.s   SKDEZGravSwitch_DrawHeldSwitch
 ; ---------------------------------------------------------------------------
 
-loc_48BC2:
+SKDEZGravSwitch_TickReturnDelay:
                 subq.w  #1,$30(a0)
-                bpl.s   loc_48BE4
+                bpl.s   SKDEZGravSwitch_DrawHeldSwitch
                 move.b  #0,mapping_frame(a0)
                 moveq   #8,d0
                 btst    #1,render_flags(a0)
-                beq.s   loc_48BDA
+                beq.s   SKDEZGravSwitch_ReturnAndRearmSwitch
                 neg.w   d0
 
-loc_48BDA:
+SKDEZGravSwitch_ReturnAndRearmSwitch:
                 sub.w   d0,y_pos(a0)
-                move.l  #loc_48AD6,(a0)
+                move.l  #SKDEZGravSwitch_CheckSolidAndTryPress,(a0)
 
-loc_48BE4:
+SKDEZGravSwitch_DrawHeldSwitch:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_DEZGravitySwitch:

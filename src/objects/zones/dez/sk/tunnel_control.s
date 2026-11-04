@@ -7,14 +7,14 @@ Obj_DEZTunnelControl:
                 move.b  #$A,$31(a0)
                 move.b  #$A,$39(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_484E2
+                bne.w   SKDEZTunnelCtrl_InitTunnelControl
                 move.l  #Obj_DEZTransRingSpawner,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  a1,objoff_2E(a0)
                 move.b  #2,$40(a0)
 
-loc_484E2:
+SKDEZTunnelCtrl_InitTunnelControl:
                 move.l  #Obj_DEZTunnelControl_Main,(a0)
 
 Obj_DEZTunnelControl_Main:
@@ -29,11 +29,11 @@ Obj_DEZTunnelControl_Main:
                 bsr.s   AdvanceDezLightTunnelActor
                 move.b  $30(a0),d0
                 add.b   $38(a0),d0
-                beq.s   loc_48512
+                beq.s   SKDEZTunnelCtrl_CullWhenBothInactive
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_48512:
+SKDEZTunnelCtrl_CullWhenBothInactive:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -41,19 +41,19 @@ loc_48512:
 AdvanceDezLightTunnelActor:
                 moveq   #0,d0
                 move.b  dezTunnel_routine(a4),d0
-                move.w  off_48524(pc,d0.w),d0
-                jmp     off_48524(pc,d0.w)
+                move.w  SKDEZTunnelCtrl_RiderStateOffsets(pc,d0.w),d0
+                jmp     SKDEZTunnelCtrl_RiderStateOffsets(pc,d0.w)
 ; End of function AdvanceDezLightTunnelActor
 
 ; ---------------------------------------------------------------------------
-off_48524:
-                dc.w    DEZTunnelControl_Done-off_48524
-                dc.w    DEZTunnelControl_Setup-off_48524
-                dc.w    DEZTunnelControl_Normal-off_48524
-                dc.w    DEZTunnelControl_CircleLarge-off_48524
-                dc.w    DEZTunnelControl_CircleSmall-off_48524
-                dc.w    DEZTunnelControl_SineDown-off_48524
-                dc.w    DEZTunnelControl_SineUp-off_48524
+SKDEZTunnelCtrl_RiderStateOffsets:
+                dc.w    DEZTunnelControl_Done-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_Setup-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_Normal-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_CircleLarge-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_CircleSmall-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_SineDown-SKDEZTunnelCtrl_RiderStateOffsets
+                dc.w    DEZTunnelControl_SineUp-SKDEZTunnelCtrl_RiderStateOffsets
 ; ---------------------------------------------------------------------------
 
 DEZTunnelControl_Done:
@@ -62,7 +62,7 @@ DEZTunnelControl_Done:
 
 DEZTunnelControl_Setup:
                 subq.b  #1,dezTunnel_timer(a4)
-                bpl.s   locret_48590
+                bpl.s   SKDEZTunnelCtrl_SetupReturn
                 addq.b  #2,dezTunnel_routine(a4)
                 move.b  #2,anim(a1)
                 clr.b   jumping(a1)
@@ -74,16 +74,16 @@ DEZTunnelControl_Setup:
                 bset    #1,status(a1)
                 bsr.w   DEZLightTunnel_LoadPathData
                 cmpi.l  #Obj_DEZTransRingSpawner,(a1)
-                beq.s   locret_48590
+                beq.s   SKDEZTunnelCtrl_SetupReturn
                 cmpi.l  #Obj_DEZTransRingSpawner_Main,(a1)
-                beq.s   locret_48590
+                beq.s   SKDEZTunnelCtrl_SetupReturn
                 move.b  #$96,mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 jmp     (Perform_Player_DPLC).l
 ; ---------------------------------------------------------------------------
 
-locret_48590:
+SKDEZTunnelCtrl_SetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -105,12 +105,12 @@ DEZTunnelControl_ReadWaypoint:
                 move.b  (a2)+,d4
                 andi.w  #$7F,d4
                 cmpi.l  #Obj_DEZTransRingSpawner_Main,(a1)
-                bne.s   loc_485D0
+                bne.s   SKDEZTunnelCtrl_DecodeCurveAndCenter
                 moveq   #0,d0
                 move.b  DEZTunnelControl_WaitTimers(pc,d4.w),d0
                 move.w  d0,objoff_30(a1)
 
-loc_485D0:
+SKDEZTunnelCtrl_DecodeCurveAndCenter:
                 add.b   d4,d4
                 move.w  DEZTunnelControl_ScaleFactors(pc,d4.w),d2
                 addq.b  #2,d4
@@ -130,10 +130,10 @@ loc_485D0:
                 add.w   y_pos(a1),d1
                 move.w  d1,$16(a1)
                 cmpi.b  #$A,dezTunnel_routine(a4)
-                blo.s   locret_48616
+                blo.s   SKDEZTunnelCtrl_CurveInitReturn
                 move.w  y_pos(a1),$16(a1)
 
-locret_48616:
+SKDEZTunnelCtrl_CurveInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 DEZTunnelControl_ScaleFactors:
@@ -209,13 +209,13 @@ DEZTunnelControl_DoCircle:
                 move.w  (a2)+,d4
                 move.w  (a2)+,d5
                 cmp.b   dezTunnel_angle(a4),d5
-                bne.s   loc_486BE
+                bne.s   SKDEZTunnelCtrl_StepCircleAngle
                 move.b  #4,dezTunnel_routine(a4)
                 move.l  a2,dezTunnel_currentWaypoint(a4)
                 bra.w   DEZTunnelControl_ReadWaypoint
 ; ---------------------------------------------------------------------------
 
-loc_486BE:
+SKDEZTunnelCtrl_StepCircleAngle:
                 add.b   d4,dezTunnel_angle(a4)
                 rts
 ; ---------------------------------------------------------------------------
@@ -247,14 +247,14 @@ DEZTunnelControl_DoSine:
                 move.w  (a2)+,d4
                 move.w  (a2)+,d5
                 cmp.b   dezTunnel_angle(a4),d5
-                bne.s   loc_48726
+                bne.s   SKDEZTunnelCtrl_StepSineAngle
                 move.b  #4,dezTunnel_routine(a4)
                 move.w  #0,angle(a1)
                 move.l  a2,dezTunnel_currentWaypoint(a4)
                 bra.w   DEZTunnelControl_ReadWaypoint
 ; ---------------------------------------------------------------------------
 
-loc_48726:
+SKDEZTunnelCtrl_StepSineAngle:
                 add.b   d4,dezTunnel_angle(a4)
                 rts
 
@@ -284,19 +284,19 @@ DEZLightTunnel_SetupWaypoint:
                 move.w  d2,d3
                 move.w  d4,d0
                 sub.w   x_pos(a1),d0
-                bge.s   loc_48772
+                bge.s   SKDEZTunnelCtrl_GetWaypointYDistance
                 neg.w   d0
                 neg.w   d2
 
-loc_48772:
+SKDEZTunnelCtrl_GetWaypointYDistance:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a1),d1
-                bge.s   loc_48780
+                bge.s   SKDEZTunnelCtrl_ChooseDominantAxis
                 neg.w   d1
                 neg.w   d3
 
-loc_48780:
+SKDEZTunnelCtrl_ChooseDominantAxis:
                 cmp.w   d0,d1
                 blo.s   DEZLightTunnel_SetupHorizontal
                 moveq   #0,d1
@@ -307,18 +307,18 @@ loc_48780:
                 moveq   #0,d0
                 move.w  d4,d0
                 sub.w   x_pos(a1),d0
-                beq.s   loc_4879E
+                beq.s   SKDEZTunnelCtrl_StoreYDominantSpeeds
                 swap    d0
                 divs.w  d1,d0
 
-loc_4879E:
+SKDEZTunnelCtrl_StoreYDominantSpeeds:
                 move.w  d0,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 tst.w   d1
-                bpl.s   loc_487AC
+                bpl.s   SKDEZTunnelCtrl_StoreYTravelTimer
                 neg.w   d1
 
-loc_487AC:
+SKDEZTunnelCtrl_StoreYTravelTimer:
                 lsr.w   #8,d1
                 move.b  d1,dezTunnel_timer(a4)
                 rts
@@ -333,18 +333,18 @@ DEZLightTunnel_SetupHorizontal:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a1),d1
-                beq.s   loc_487CE
+                beq.s   SKDEZTunnelCtrl_StoreXDominantSpeeds
                 swap    d1
                 divs.w  d0,d1
 
-loc_487CE:
+SKDEZTunnelCtrl_StoreXDominantSpeeds:
                 move.w  d1,y_vel(a1)
                 move.w  d2,x_vel(a1)
                 tst.w   d0
-                bpl.s   loc_487DC
+                bpl.s   SKDEZTunnelCtrl_StoreXTravelTimer
                 neg.w   d0
 
-loc_487DC:
+SKDEZTunnelCtrl_StoreXTravelTimer:
                 lsr.w   #8,d0
                 move.b  d0,dezTunnel_timer(a4)
                 rts
@@ -358,10 +358,10 @@ Obj_DEZTransRingSpawner:
 
 Obj_DEZTransRingSpawner_Main:
                 subq.w  #1,objoff_30(a0)
-                bpl.w   loc_48896
+                bpl.w   SKDEZTunnelCtrl_CheckRiderControl
                 move.w  #1,objoff_30(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_4888E
+                bne.w   SKDEZTunnelCtrl_PlayRingSpawnSound
                 move.l  #Obj_DEZTransRing,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -387,7 +387,7 @@ DEZTransRing_SineAnim:
                 andi.b  #7,d1
                 addq.b  #8,d1
                 move.b  d1,anim(a1)
-                bra.s   loc_4888E
+                bra.s   SKDEZTunnelCtrl_PlayRingSpawnSound
 ; ---------------------------------------------------------------------------
 
 DEZTransRing_NormalAnim:
@@ -399,17 +399,18 @@ DEZTransRing_NormalAnim:
                 andi.b  #7,d0
                 move.b  d0,anim(a1)
 
-loc_4888E:
+; Play the tunnel sound even when allocating its ring failed
+SKDEZTunnelCtrl_PlayRingSpawnSound:
                 moveq   #signextendB(sfx_LightTunnel),d0
                 jsr     (Play_SFX).l
 
-loc_48896:
+SKDEZTunnelCtrl_CheckRiderControl:
                 tst.b   object_control(a0)
-                beq.s   loc_4889E
+                beq.s   SKDEZTunnelCtrl_DeleteRingSpawner
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4889E:
+SKDEZTunnelCtrl_DeleteRingSpawner:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -417,11 +418,11 @@ Obj_DEZTransRing:
                 lea     (Ani_DEZTransRings).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_488BC
+                beq.s   SKDEZTunnelCtrl_DrawTransportRing
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_488BC:
+SKDEZTunnelCtrl_DrawTransportRing:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_DEZTransRings:

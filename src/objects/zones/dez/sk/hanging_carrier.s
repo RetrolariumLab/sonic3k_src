@@ -15,14 +15,14 @@ Obj_DEZHangCarrier:
                 move.b  subtype(a0),d0
                 lsl.w   #2,d0
                 move.w  d0,$34(a0)
-                move.l  #loc_46FC2,(a0)
+                move.l  #SKDEZHangCarrier_TryRiseWithP1,(a0)
 
-loc_46FC2:
+SKDEZHangCarrier_TryRiseWithP1:
                 tst.b   $30(a0)
-                beq.s   loc_46FCE
-                move.l  #loc_46FF2,(a0)
+                beq.s   SKDEZHangCarrier_UpdateRidersAndDraw
+                move.l  #SKDEZHangCarrier_RiseAndCheckCeiling,(a0)
 
-loc_46FCE:
+SKDEZHangCarrier_UpdateRidersAndDraw:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -34,62 +34,62 @@ loc_46FCE:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_46FF2:
+SKDEZHangCarrier_RiseAndCheckCeiling:
                 jsr     (MoveSprite2).l
                 subi.w  #8,y_vel(a0)
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   loc_4702A
+                bpl.s   SKDEZHangCarrier_UpdateRidersAfterRise
                 sub.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #$200,x_vel(a0)
                 btst    #0,status(a0)
-                beq.s   loc_47024
+                beq.s   SKDEZHangCarrier_BeginHorizontalTravel
                 neg.w   x_vel(a0)
 
-loc_47024:
-                move.l  #loc_4702C,(a0)
+SKDEZHangCarrier_BeginHorizontalTravel:
+                move.l  #SKDEZHangCarrier_TickHorizontalTravel,(a0)
 
-loc_4702A:
-                bra.s   loc_46FCE
+SKDEZHangCarrier_UpdateRidersAfterRise:
+                bra.s   SKDEZHangCarrier_UpdateRidersAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_4702C:
+SKDEZHangCarrier_TickHorizontalTravel:
                 tst.w   $34(a0)
-                beq.s   loc_46FCE
+                beq.s   SKDEZHangCarrier_UpdateRidersAndDraw
                 subq.w  #1,$34(a0)
                 jsr     (MoveSprite2).l
-                bra.s   loc_46FCE
+                bra.s   SKDEZHangCarrier_UpdateRidersAndDraw
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnDezHangingCarrier:
                 tst.b   (a2)
-                beq.w   loc_470F8
+                beq.w   SKDEZHangCarrier_TickRecaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_470C4
+                bpl.s   SKDEZHangCarrier_ReleaseInvalidRider
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_470C4
+                bhs.s   SKDEZHangCarrier_ReleaseInvalidRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_470D2
+                beq.w   SKDEZHangCarrier_CarryRiderBelowGrip
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #18,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_47074
+                beq.w   SKDEZHangCarrier_TrySetJumpLeft
                 move.b  #60,2(a2)
 
-loc_47074:
+SKDEZHangCarrier_TrySetJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_47080
+                beq.s   SKDEZHangCarrier_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_47080:
+SKDEZHangCarrier_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_4708C
+                beq.s   SKDEZHangCarrier_ReleaseWithRollingJump
                 move.w  #$200,x_vel(a1)
 
-loc_4708C:
+SKDEZHangCarrier_ReleaseWithRollingJump:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -102,51 +102,51 @@ loc_4708C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_470C4:
+SKDEZHangCarrier_ReleaseInvalidRider:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_470D2:
+SKDEZHangCarrier_CarryRiderBelowGrip:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$28,y_pos(a1)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_470F6
+                bne.s   SKDEZHangCarrier_FollowReturn
                 moveq   #signextendB(sfx_Rising),d0
                 jsr     (Play_SFX).l
 
-locret_470F6:
+SKDEZHangCarrier_FollowReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_470F8:
+SKDEZHangCarrier_TickRecaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_47104
+                beq.s   SKDEZHangCarrier_TryCaptureRider
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47104:
+SKDEZHangCarrier_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_4717C
+                bhs.w   SKDEZHangCarrier_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$28,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_4717C
+                bhs.w   SKDEZHangCarrier_CaptureReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_4717C
+                bmi.s   SKDEZHangCarrier_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_4717C
+                bhs.s   SKDEZHangCarrier_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4717C
+                bne.s   SKDEZHangCarrier_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -160,7 +160,7 @@ loc_47104:
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-locret_4717C:
+SKDEZHangCarrier_CaptureReturn:
                 rts
 ; End of function UpdatePlayerOnDezHangingCarrier
 

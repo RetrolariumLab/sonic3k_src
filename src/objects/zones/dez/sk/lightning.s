@@ -13,41 +13,41 @@ Obj_DEZLightning:
                 move.w  #$280,priority(a0)
                 move.b  #$9F,collision_flags(a0)
 
-loc_478BE:
+SKDEZLightning_TryPlayPulseSound:
                 tst.b   render_flags(a0)
-                bpl.s   loc_478CC
+                bpl.s   SKDEZLightning_InitPulseAndReloadDelay
                 moveq   #signextendB(sfx_Lightning),d0
                 jsr     (Play_SFX).l
 
-loc_478CC:
+SKDEZLightning_InitPulseAndReloadDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,$30(a0)
                 move.w  #1,anim(a0)                     ; and prev_anim
-                move.l  #loc_478E2,(a0)
+                move.l  #SKDEZLightning_AnimatePulseAndTryIdle,(a0)
 
-loc_478E2:
+SKDEZLightning_AnimatePulseAndTryIdle:
                 lea     (Ani_DEZLightning).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                beq.s   loc_47906
+                beq.s   SKDEZLightning_CheckFrame3Contact
                 move.b  #0,routine(a0)
                 move.b  #0,mapping_frame(a0)
-                move.l  #loc_4791A,(a0)
+                move.l  #SKDEZLightning_TickIdleDelay,(a0)
 
-loc_47906:
+SKDEZLightning_CheckFrame3Contact:
                 cmpi.b  #3,mapping_frame(a0)
-                bne.s   loc_47914
+                bne.s   SKDEZLightning_DrawNoncontactFrame
                 jmp     (Sprite_CheckDeleteTouch3).l
 ; ---------------------------------------------------------------------------
 
-loc_47914:
+SKDEZLightning_DrawNoncontactFrame:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_4791A:
+SKDEZLightning_TickIdleDelay:
                 subq.w  #1,$30(a0)
-                bmi.s   loc_478BE
+                bmi.s   SKDEZLightning_TryPlayPulseSound
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Ani_DEZLightning:

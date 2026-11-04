@@ -25,17 +25,17 @@ DEZ3_ScreenInit:
                 move.w  #$1000-1,d1
                 sub.w   d0,d1
 
-loc_5A3FA:
+SKDEZ3Events_ClearLayoutAndSpawnActors:
                 clr.b   (a1)+
-                dbf     d1,loc_5A3FA
+                dbf     d1,SKDEZ3Events_ClearLayoutAndSpawnActors
                 jsr     (AllocateObject).l
-                bne.s   loc_5A442
-                move.l  #Obj_5A7C8,(a1)
+                bne.s   SKDEZ3Events_InitBossPlaneAndRefresh
+                move.l  #DEZ3FloorSpan_Initialize,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_5A442
-                move.l  #Obj_5A8E6,(a1)
+                bne.s   SKDEZ3Events_InitBossPlaneAndRefresh
+                move.l  #DEZ3InitialLeftFloor_Initialize,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_5A442
+                bne.s   SKDEZ3Events_InitBossPlaneAndRefresh
                 move.l  #Obj_DEZ3_Boss,(a1)
                 move.w  #$3C0,d0
                 move.w  #$F8,d1
@@ -44,7 +44,8 @@ loc_5A3FA:
                 move.w  d0,(Events_bg+$02).w
                 move.w  d1,(Events_bg+$04).w
 
-loc_5A442:
+; Refresh the arena even if allocation stopped after only a prefix of its initial actors
+SKDEZ3Events_InitBossPlaneAndRefresh:
                 move.w  #$6C0,(Events_bg+$00).w
                 st      (Scroll_lock).w
                 move.w  #$80,d0
@@ -71,29 +72,29 @@ DEZ3_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 DEZ3_ScreenEvent_Index:
-                bra.w   loc_5A49A
+                bra.w   SKDEZ3Events_TryRestoreSavedRings
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A4C4
+                bra.w   SKDEZ3Events_DrawEnvironmentAndTryRepair
 ; ---------------------------------------------------------------------------
 
-loc_5A49A:
+SKDEZ3Events_TryRestoreSavedRings:
                 move.w  (Act3_ring_count).w,d0
-                beq.s   loc_5A4AE
+                beq.s   SKDEZ3Events_TryRestoreSavedTimer
                 clr.w   (Act3_ring_count).w
                 move.w  d0,(Ring_count).w
                 move.b  #1,(Update_HUD_ring_count).w
 
-loc_5A4AE:
+SKDEZ3Events_TryRestoreSavedTimer:
                 move.l  (Act3_timer).w,d0
-                beq.s   loc_5A4C0
+                beq.s   SKDEZ3Events_AdvanceForegroundState
                 clr.l   (Act3_timer).w
                 move.l  d0,(Timer).w
                 st      (Update_HUD_timer).w
 
-loc_5A4C0:
+SKDEZ3Events_AdvanceForegroundState:
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5A4C4:
+SKDEZ3Events_DrawEnvironmentAndTryRepair:
                 jsr     PrepareDez3EnvironmentPlaneScroll(pc)
                 lea     DEZ3_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a6
@@ -101,21 +102,21 @@ loc_5A4C4:
                 move.w  (Camera_Y_pos_rounded).w,d6
                 jsr     (Draw_BGNoVert).l
                 move.w  (Events_bg+$06).w,d1
-                beq.s   locret_5A506
+                beq.s   SKDEZ3Events_EnvironmentDrawReturn
                 clr.w   (Events_bg+$06).w
                 move.w  #$1E0,d0
                 and.w   d0,d1
                 moveq   #2,d6
                 moveq   #2-1,d2
 
-loc_5A4F0:
+SKDEZ3Events_RedrawEnvironmentRows:
                 movem.w d0-d2/d6,-(sp)
                 jsr     (Setup_TileRowDraw).l
                 movem.w (sp)+,d0-d2/d6
                 addi.w  #$10,d0
-                dbf     d2,loc_5A4F0
+                dbf     d2,SKDEZ3Events_RedrawEnvironmentRows
 
-locret_5A506:
+SKDEZ3Events_EnvironmentDrawReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -142,7 +143,7 @@ DEZ3_BackgroundInit:
                 jsr     ComputeDez3BossPlaneScroll(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 jsr     (Refresh_PlaneFull).l
-                bra.w   loc_5A734
+                bra.w   SKDEZ3Events_BindSwappedPlaneScroll
 ; ---------------------------------------------------------------------------
 
 DEZ3_BackgroundEvent:
@@ -154,29 +155,29 @@ DEZ3_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 DEZ3_BackgroundEvent_Index:
-                bra.w   loc_5A57C
+                bra.w   SKDEZ3Events_TryRefreshBossPlane
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A5B0
+                bra.w   SKDEZ3Events_TrySpawnRumbleActor
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A5E0
+                bra.w   SKDEZ3Events_TryBeginFirstPlaneRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A606
+                bra.w   SKDEZ3Events_StepFirstPlaneRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A61A
+                bra.w   SKDEZ3Events_TryBeginSecondPlaneRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A662
+                bra.w   SKDEZ3Events_StepSecondPlaneRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A676
+                bra.w   SKDEZ3Events_SelectFinalRedrawOrAnimate
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A71A
+                bra.w   SKDEZ3Events_StepFinalPlaneRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5A72E
+                bra.w   SKDEZ3Events_DrawBossPlane
 ; ---------------------------------------------------------------------------
 
-loc_5A57C:
+SKDEZ3Events_TryRefreshBossPlane:
                 move.b  #1,(Update_HUD_life_count).w
                 tst.w   (Events_fg_5).w
-                beq.w   loc_5A72E
+                beq.w   SKDEZ3Events_DrawBossPlane
                 clr.w   (Events_fg_5).w
                 movea.w 8(a3),a1
                 move.b  #$1A,$D(a1)
@@ -185,104 +186,104 @@ loc_5A57C:
                 moveq   #$15,d6
                 jsr     (Refresh_PlaneDirect).l
                 addq.w  #4,(Events_routine_bg).w
-                bra.w   loc_5A734
+                bra.w   SKDEZ3Events_BindSwappedPlaneScroll
 ; ---------------------------------------------------------------------------
 
-loc_5A5B0:
+SKDEZ3Events_TrySpawnRumbleActor:
                 tst.w   (Screen_shake_flag).w
-                beq.w   loc_5A72E
+                beq.w   SKDEZ3Events_DrawBossPlane
                 jsr     (AllocateObject).l
-                bne.s   loc_5A5DC
-                move.l  #Obj_5A922,(a1)
+                bne.s   SKDEZ3Events_DrawAfterRumbleAttempt
+                move.l  #SKDEZ3Events_EmitTimedFloorColumns,(a1)
                 move.w  #$13,$2E(a1)
                 move.w  #$2D0,$30(a1)
                 move.w  #$2C0,(Events_bg+$16).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A5DC:
-                bra.w   loc_5A72E
+SKDEZ3Events_DrawAfterRumbleAttempt:
+                bra.w   SKDEZ3Events_DrawBossPlane
 ; ---------------------------------------------------------------------------
 
-loc_5A5E0:
+SKDEZ3Events_TryBeginFirstPlaneRedraw:
                 cmpi.w  #$6C0,(Events_bg+$00).w
-                beq.w   loc_5A72E
+                beq.w   SKDEZ3Events_DrawBossPlane
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 move.w  (_unkEE8E).w,(Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A606:
+SKDEZ3Events_StepFirstPlaneRedraw:
                 moveq   #0,d1
                 moveq   #0,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5A61A
+                bpl.s   SKDEZ3Events_TryBeginSecondPlaneRedraw
                 clr.w   (Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A61A:
+SKDEZ3Events_TryBeginSecondPlaneRedraw:
                 cmpi.w  #$2C0,(Events_bg+$00).w
-                beq.w   loc_5A72E
+                beq.w   SKDEZ3Events_DrawBossPlane
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 move.w  (_unkEE8E).w,(Events_bg+$0C).w
                 jsr     (AllocateObject).l
-                bne.s   loc_5A65E
-                move.l  #Obj_5A94C,(a1)
+                bne.s   SKDEZ3Events_AdvanceAfterFloorSpawn
+                move.l  #SKDEZ3Events_CheckAct3EmitterLifetime,(a1)
                 move.w  (Camera_X_pos_copy).w,d0
                 andi.w  #$FFE0,d0
                 move.w  d0,(Events_bg+$16).w
                 subi.w  #$10,d0
                 move.w  d0,$30(a1)
 
-loc_5A65E:
+SKDEZ3Events_AdvanceAfterFloorSpawn:
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A662:
+SKDEZ3Events_StepSecondPlaneRedraw:
                 moveq   #0,d1
                 moveq   #0,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5A676
+                bpl.s   SKDEZ3Events_SelectFinalRedrawOrAnimate
                 clr.w   (Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A676:
+SKDEZ3Events_SelectFinalRedrawOrAnimate:
                 tst.w   (Events_bg+$00).w
-                beq.w   loc_5A6FE
+                beq.w   SKDEZ3Events_BeginFinalPlaneRedraw
                 jsr     QueueChangedDez3LaserArtWindow(pc)
                 tst.w   (Events_fg_5).w
-                beq.w   loc_5A72E
+                beq.w   SKDEZ3Events_DrawBossPlane
                 clr.w   (Events_fg_5).w
                 move.w  (Events_bg+$0A).w,d0
-                jmp     loc_5A696(pc,d0.w)
+                jmp     SKDEZ3Events_ChunkCycleBranches(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_5A696:
-                bra.s   loc_5A69E
+SKDEZ3Events_ChunkCycleBranches:
+                bra.s   SKDEZ3Events_SelectChunkPair0603
 ; ---------------------------------------------------------------------------
-                bra.s   loc_5A6A4
+                bra.s   SKDEZ3Events_SelectChunkPair0903
 ; ---------------------------------------------------------------------------
-                bra.s   loc_5A69E
+                bra.s   SKDEZ3Events_SelectChunkPair0603
 ; ---------------------------------------------------------------------------
-                bra.s   loc_5A6AA
+                bra.s   SKDEZ3Events_SelectChunkPair0807AndWrap
 ; ---------------------------------------------------------------------------
 
-loc_5A69E:
+SKDEZ3Events_SelectChunkPair0603:
                 move.w  #$603,d0
-                bra.s   loc_5A6B4
+                bra.s   SKDEZ3Events_ApplyNextChunkPair
 ; ---------------------------------------------------------------------------
 
-loc_5A6A4:
+SKDEZ3Events_SelectChunkPair0903:
                 move.w  #$903,d0
-                bra.s   loc_5A6B4
+                bra.s   SKDEZ3Events_ApplyNextChunkPair
 ; ---------------------------------------------------------------------------
 
-loc_5A6AA:
+SKDEZ3Events_SelectChunkPair0807AndWrap:
                 move.w  #$807,d0
                 move.w  #-2,(Events_bg+$0A).w
 
-loc_5A6B4:
+SKDEZ3Events_ApplyNextChunkPair:
                 addq.w  #2,(Events_bg+$0A).w
                 movea.w 8(a3),a1
                 move.b  d0,$E(a1)
@@ -297,47 +298,48 @@ loc_5A6B4:
                 andi.w  #$FFF0,d3
                 addi.w  #$E0,d3
 
-loc_5A6E2:
+SKDEZ3Events_RedrawChunkCycleRows:
                 movem.w d0-d3/d6,-(sp)
                 jsr     (Setup_TileRowDraw).l
                 movem.w (sp)+,d0-d3/d6
                 addi.w  #$10,d0
                 cmp.w   d3,d0
-                bhi.s   loc_5A6FC
-                dbf     d2,loc_5A6E2
+                bhi.s   SKDEZ3Events_DrawAfterChunkCycle
+                dbf     d2,SKDEZ3Events_RedrawChunkCycleRows
 
-loc_5A6FC:
-                bra.s   loc_5A72E
+SKDEZ3Events_DrawAfterChunkCycle:
+                bra.s   SKDEZ3Events_DrawBossPlane
 ; ---------------------------------------------------------------------------
 
-loc_5A6FE:
+SKDEZ3Events_BeginFinalPlaneRedraw:
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 move.w  (_unkEE8E).w,(Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A71A:
+SKDEZ3Events_StepFinalPlaneRedraw:
                 moveq   #0,d1
                 moveq   #0,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5A72E
+                bpl.s   SKDEZ3Events_DrawBossPlane
                 clr.w   (Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_5A72E:
+SKDEZ3Events_DrawBossPlane:
                 jsr     (DrawBGAsYouMove).l
 
-loc_5A734:
+SKDEZ3Events_BindSwappedPlaneScroll:
                 lea     DEZ3_BGDrawArray(pc),a4
                 lea     (HScroll_table+$008).w,a5
                 lea     (H_scroll_buffer).w,a1
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (Events_bg+$0C).w,d3
-                bne.s   loc_5A74E
+                bne.s   SKDEZ3Events_ApplySwappedPlaneScroll
                 move.w  (Camera_X_pos_BG_copy).w,d3
 
-loc_5A74E:
+; Swap the vertical scroll words between planes and skip the caller's remaining screen event
+SKDEZ3Events_ApplySwappedPlaneScroll:
                 move.w  #$E0-1,d1
                 jsr     (ApplyDeformation2).l
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value).w
@@ -350,17 +352,17 @@ loc_5A74E:
 ComputeDez3BossPlaneScroll:
                 move.w  (Camera_X_pos_BG_copy).w,(_unkEE8E).w
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_5A77C
+                bne.s   SKDEZ3Events_CalcBossPlaneX
                 moveq   #0,d0
-                bra.s   loc_5A788
+                bra.s   SKDEZ3Events_ApplyBossPlaneXY
 ; ---------------------------------------------------------------------------
 
-loc_5A77C:
+SKDEZ3Events_CalcBossPlaneX:
                 move.w  (Camera_X_pos_copy).w,d0
                 sub.w   (Events_bg+$02).w,d0
                 add.w   (Events_bg+$00).w,d0
 
-loc_5A788:
+SKDEZ3Events_ApplyBossPlaneXY:
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  (Camera_Y_pos_copy).w,d0
                 sub.w   (Events_bg+$04).w,d0
@@ -375,7 +377,7 @@ QueueChangedDez3LaserArtWindow:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 cmp.w   (Events_bg+$12).w,d1
-                beq.s   locret_5A7C6
+                beq.s   SKDEZ3Events_LaserDmaReturn
                 move.w  d1,(Events_bg+$12).w
                 addq.w  #2,d1
                 lsl.w   #2,d1
@@ -384,68 +386,68 @@ QueueChangedDez3LaserArtWindow:
                 move.w  #$40,d3
                 jsr     (Add_To_DMA_Queue).l
 
-locret_5A7C6:
+SKDEZ3Events_LaserDmaReturn:
                 rts
 ; End of function QueueChangedDez3LaserArtWindow
 
 ; ---------------------------------------------------------------------------
 
-Obj_5A7C8:
-                move.l  #loc_5A7EC,(a0)
+DEZ3FloorSpan_Initialize:
+                move.l  #DEZ3FloorSpan_DeleteOutsideAct3Zone,(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$130,x_pos(a0)
                 move.w  #$F0,y_pos(a0)
                 bset    #7,status(a0)
                 move.w  #$80,$2E(a0)
 
-loc_5A7EC:
+DEZ3FloorSpan_DeleteOutsideAct3Zone:
                 cmpi.b  #$17,(Current_zone).w
-                beq.s   loc_5A7FA
+                beq.s   SKDEZ3Events_TrySpawnCollapseColumn
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5A7FA:
+SKDEZ3Events_TrySpawnCollapseColumn:
                 move.w  (Events_bg+$08).w,d1
-                beq.s   loc_5A83C
+                beq.s   SKDEZ3Events_SelectCoarseFloorStep
                 clr.w   (Events_bg+$08).w
                 cmp.w   (Events_bg+$16).w,d1
-                blo.s   loc_5A83C
+                blo.s   SKDEZ3Events_SelectCoarseFloorStep
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_5A82C
-                move.l  #Obj_5A872,(a1)
+                bne.s   DEZ3FloorSpan_AdvanceCollapseFrontier
+                move.l  #DEZ3FallingFloorBlock_Initialize,(a1)
                 move.w  d1,x_pos(a1)
                 move.w  $2E(a0),d2
                 subi.w  #$20,d2
                 cmp.w   d1,d2
-                bhi.s   loc_5A82C
+                bhi.s   DEZ3FloorSpan_AdvanceCollapseFrontier
                 move.w  d1,(Events_bg+$06).w
 
-loc_5A82C:
+DEZ3FloorSpan_AdvanceCollapseFrontier:
                 moveq   #$20,d0
                 add.w   d0,(Events_bg+$16).w
                 cmp.w   $2E(a0),d1
-                blo.s   loc_5A83C
+                blo.s   SKDEZ3Events_SelectCoarseFloorStep
                 add.w   d0,x_pos(a0)
 
-loc_5A83C:
+SKDEZ3Events_SelectCoarseFloorStep:
                 moveq   #-$20,d1
                 move.w  (Camera_X_pos_copy).w,d0
                 andi.w  #$FFE0,d0
                 move.w  $2E(a0),d2
                 cmp.w   d2,d0
-                beq.s   loc_5A860
-                bcs.s   loc_5A858
+                beq.s   DEZ3FloorSpan_ApplySolidTopCollision
+                bcs.s   DEZ3FloorSpan_ApplyOneColumnXStep
                 cmp.w   (Events_bg+$16).w,d2
-                blo.s   loc_5A85C
+                blo.s   DEZ3FloorSpan_StoreCoarseCameraColumn
                 neg.w   d1
 
-loc_5A858:
+DEZ3FloorSpan_ApplyOneColumnXStep:
                 add.w   d1,x_pos(a0)
 
-loc_5A85C:
+DEZ3FloorSpan_StoreCoarseCameraColumn:
                 move.w  d0,$2E(a0)
 
-loc_5A860:
+DEZ3FloorSpan_ApplySolidTopCollision:
                 move.w  #$B0,d1
                 moveq   #$10,d2
                 moveq   #$10,d3
@@ -453,8 +455,8 @@ loc_5A860:
                 jmp     (SolidObjectTop).l
 ; ---------------------------------------------------------------------------
 
-Obj_5A872:
-                move.l  #loc_5A8B2,(a0)
+DEZ3FallingFloorBlock_Initialize:
+                move.l  #SKDEZ3Events_RelocateOffscreenFloorBlock,(a0)
                 move.b  #$84,render_flags(a0)
                 move.b  #$10,height_pixels(a0)
                 move.b  #$C,width_pixels(a0)
@@ -467,14 +469,14 @@ Obj_5A872:
                 lsr.w   #5,d0
                 move.b  d0,mapping_frame(a0)
 
-loc_5A8B2:
+SKDEZ3Events_RelocateOffscreenFloorBlock:
                 tst.b   render_flags(a0)
-                bmi.s   loc_5A8C4
+                bmi.s   SKDEZ3Events_MoveFloorBlockAndCheckTop
                 move.w  (Camera_X_pos_coarse_back).w,d0
                 addi.w  #$400,d0
                 move.w  d0,x_pos(a0)
 
-loc_5A8C4:
+SKDEZ3Events_MoveFloorBlockAndCheckTop:
                 jsr     (MoveSprite2).l
                 addi.w  #$1A,y_vel(a0)
                 moveq   #$10,d1
@@ -485,20 +487,20 @@ loc_5A8C4:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-Obj_5A8E6:
-                move.l  #loc_5A904,(a0)
+DEZ3InitialLeftFloor_Initialize:
+                move.l  #SKDEZ3Events_CheckInitialFloorLifetime,(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$40,x_pos(a0)
                 move.w  #$F0,y_pos(a0)
                 bset    #7,status(a0)
 
-loc_5A904:
+SKDEZ3Events_CheckInitialFloorLifetime:
                 cmpi.w  #$6C0,(Events_bg+$00).w
-                beq.s   loc_5A912
+                beq.s   SKDEZ3Events_CheckInitialFloorSolid
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5A912:
+SKDEZ3Events_CheckInitialFloorSolid:
                 moveq   #$40,d1
                 moveq   #$10,d2
                 moveq   #$10,d3
@@ -506,54 +508,54 @@ loc_5A912:
                 jmp     (SolidObjectTop).l
 ; ---------------------------------------------------------------------------
 
-Obj_5A922:
+SKDEZ3Events_EmitTimedFloorColumns:
                 subq.w  #1,$32(a0)
-                bpl.s   locret_5A94A
+                bpl.s   SKDEZ3Events_TimedColumnReturn
                 move.w  #$10-1,$32(a0)
                 move.w  $30(a0),(Events_bg+$08).w
                 addi.w  #$20,$30(a0)
                 subq.w  #1,$2E(a0)
-                bne.s   locret_5A94A
+                bne.s   SKDEZ3Events_TimedColumnReturn
                 clr.w   (Screen_shake_flag).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_5A94A:
+SKDEZ3Events_TimedColumnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_5A94C:
+SKDEZ3Events_CheckAct3EmitterLifetime:
                 cmpi.b  #$17,(Current_zone).w
-                beq.s   loc_5A95A
+                beq.s   SKDEZ3Events_CheckCameraColumnDistance
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5A95A:
+SKDEZ3Events_CheckCameraColumnDistance:
                 tst.w   (Events_bg+$00).w
-                bne.s   loc_5A97C
+                bne.s   SKDEZ3Events_CheckBossColumnDistance
                 move.w  (Camera_X_pos_copy).w,d0
                 addi.w  #$9C,d0
                 cmp.w   $30(a0),d0
-                blo.s   locret_5A9AA
+                blo.s   SKDEZ3Events_ProximityColumnReturn
                 move.w  $30(a0),(Events_bg+$08).w
                 addi.w  #$20,$30(a0)
-                bra.s   locret_5A9AA
+                bra.s   SKDEZ3Events_ProximityColumnReturn
 ; ---------------------------------------------------------------------------
 
-loc_5A97C:
+SKDEZ3Events_CheckBossColumnDistance:
                 cmpi.w  #$110,(Events_bg+$04).w
-                bhs.s   locret_5A9AA
+                bhs.s   SKDEZ3Events_ProximityColumnReturn
                 subq.w  #1,$32(a0)
-                bpl.s   locret_5A9AA
+                bpl.s   SKDEZ3Events_ProximityColumnReturn
                 move.w  (Events_bg+$02).w,d0
                 addi.w  #$90,d0
                 cmp.w   $30(a0),d0
-                blo.s   locret_5A9AA
+                blo.s   SKDEZ3Events_ProximityColumnReturn
                 move.w  $30(a0),(Events_bg+$08).w
                 addi.w  #$20,$30(a0)
                 move.w  #$D,$32(a0)
 
-locret_5A9AA:
+SKDEZ3Events_ProximityColumnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_DEZ3Blocks:

@@ -1,12 +1,12 @@
 ; Data owner: objects/shared/zones/dez
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_DEZConveyorPad_:
-                dc.w    word_47C12-Map_DEZConveyorPad_
-                dc.w    word_47C12-Map_DEZConveyorPad_
-                dc.w    word_47C44-Map_DEZConveyorPad_
-                dc.w    word_47C76-Map_DEZConveyorPad_
-                dc.w    word_47CB0-Map_DEZConveyorPad_
-word_47C12:     dc.w    8
+                dc.w    DEZConveyorPadMap_NarrowSharedPhase-Map_DEZConveyorPad_
+                dc.w    DEZConveyorPadMap_NarrowSharedPhase-Map_DEZConveyorPad_
+                dc.w    DEZMap_ConveyorPad_NarrowPhaseTwo-Map_DEZConveyorPad_
+                dc.w    DEZMap_ConveyorPad_NarrowPhaseThree-Map_DEZConveyorPad_
+                dc.w    DEZConveyorPadMap_WidePhaseAndPreview-Map_DEZConveyorPad_
+DEZConveyorPadMap_NarrowSharedPhase:    dc.w    8
                 dc.b    $F0,  $D,   0, $68, $FF, $C0
                 dc.b    $F0,  $D,   0, $70, $FF, $E0
                 dc.b    $F0,  $D,   8, $70,   0,   0
@@ -15,7 +15,7 @@ word_47C12:     dc.w    8
                 dc.b    0,  $D, $18, $10, $FF, $E0
                 dc.b    0,  $D, $18,   8,   0,   0
                 dc.b    0,  $D, $18,   0,   0, $20
-word_47C44:     dc.w    8
+DEZMap_ConveyorPad_NarrowPhaseTwo:  dc.w    8
                 dc.b    $F0,  $D,   0, $68, $FF, $C0
                 dc.b    $F0,  $D,   0, $70, $FF, $E0
                 dc.b    $F0,  $D,   8, $70,   0,   0
@@ -24,7 +24,7 @@ word_47C44:     dc.w    8
                 dc.b    0,  $D, $18, $30, $FF, $E0
                 dc.b    0,  $D, $18, $28,   0,   0
                 dc.b    0,  $D, $18, $20,   0, $20
-word_47C76:     dc.w    8
+DEZMap_ConveyorPad_NarrowPhaseThree:    dc.w    8
                 dc.b    $F0,  $D,   0, $68, $FF, $C0
                 dc.b    $F0,  $D,   0, $70, $FF, $E0
                 dc.b    $F0,  $D,   8, $70,   0,   0
@@ -35,11 +35,11 @@ word_47C76:     dc.w    8
                 dc.b    0,  $D, $18, $40,   0, $20
 Map_DEZConveyorPad2:
 Map_DEZConveyorPad2_:
-                dc.w    word_47CB0-Map_DEZConveyorPad2_
-                dc.w    word_47CB0-Map_DEZConveyorPad2_
-                dc.w    word_47D12-Map_DEZConveyorPad2_
-                dc.w    word_47D74-Map_DEZConveyorPad2_
-word_47CB0:     dc.w    $10
+                dc.w    DEZConveyorPadMap_WidePhaseAndPreview-Map_DEZConveyorPad2_
+                dc.w    DEZConveyorPadMap_WidePhaseAndPreview-Map_DEZConveyorPad2_
+                dc.w    DEZMap_ConveyorPad_WidePhaseTwo-Map_DEZConveyorPad2_
+                dc.w    DEZMap_ConveyorPad_WidePhaseThree-Map_DEZConveyorPad2_
+DEZConveyorPadMap_WidePhaseAndPreview:  dc.w    $10
                 dc.b    $F0,  $D,   0,   0, $FF, $80
                 dc.b    $F0,  $D,   0,   8, $FF, $A0
                 dc.b    $F0,  $D,   0, $10, $FF, $C0
@@ -56,7 +56,7 @@ word_47CB0:     dc.w    $10
                 dc.b    0,  $D, $18, $10,   0, $20
                 dc.b    0,  $D, $18,   8,   0, $40
                 dc.b    0,  $D, $18,   0,   0, $60
-word_47D12:     dc.w    $10
+DEZMap_ConveyorPad_WidePhaseTwo:    dc.w    $10
                 dc.b    $F0,  $D,   0, $20, $FF, $80
                 dc.b    $F0,  $D,   0, $28, $FF, $A0
                 dc.b    $F0,  $D,   0, $30, $FF, $C0
@@ -73,7 +73,7 @@ word_47D12:     dc.w    $10
                 dc.b    0,  $D, $18, $30,   0, $20
                 dc.b    0,  $D, $18, $28,   0, $40
                 dc.b    0,  $D, $18, $20,   0, $60
-word_47D74:     dc.w    $10
+DEZMap_ConveyorPad_WidePhaseThree:  dc.w    $10
                 dc.b    $F0,  $D,   0, $40, $FF, $80
                 dc.b    $F0,  $D,   0, $48, $FF, $A0
                 dc.b    $F0,  $D,   0, $50, $FF, $C0

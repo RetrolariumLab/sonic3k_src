@@ -20,49 +20,49 @@ Obj_DEZConveyorPad:
                 move.w  #1,$34(a0)
                 move.b  subtype(a0),d0
                 andi.w  #$7F,d0
-                beq.s   loc_479EA
+                beq.s   SKDEZConveyorPad_InitRiderWait
                 lsl.w   #3,d0
                 move.w  d0,$32(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_479D0
+                bpl.s   SKDEZConveyorPad_InitWidePad
                 neg.w   $34(a0)
 
-loc_479D0:
+SKDEZConveyorPad_InitWidePad:
                 move.l  #Map_DEZConveyorPad2,mappings(a0)
                 move.b  #$80,width_pixels(a0)
                 bset    #6,render_flags(a0)
                 move.w  #0,mainspr_childsprites(a0)
 
-loc_479EA:
-                move.l  #loc_479F0,(a0)
+SKDEZConveyorPad_InitRiderWait:
+                move.l  #SKDEZConveyorPad_TryActivateFromRiders,(a0)
 
-loc_479F0:
+SKDEZConveyorPad_TryActivateFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_47A12
+                beq.s   SKDEZConveyorPad_DrawWaitingPad
                 move.b  $31(a0),anim(a0)
-                move.l  #loc_47A14,(a0)
+                move.l  #SKDEZConveyorPad_TickVerticalTravel,(a0)
                 tst.b   subtype(a0)
-                bne.s   loc_47A12
-                move.l  #loc_47AB4,(a0)
+                bne.s   SKDEZConveyorPad_DrawWaitingPad
+                move.l  #SKDEZConveyorPad_UpdateFloorPad,(a0)
 
-loc_47A12:
-                bra.s   loc_47A58
+SKDEZConveyorPad_DrawWaitingPad:
+                bra.s   SKDEZConveyorPad_AnimateAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_47A14:
+SKDEZConveyorPad_TickVerticalTravel:
                 tst.w   $32(a0)
-                beq.s   loc_47A38
+                beq.s   SKDEZConveyorPad_CarryAndCheckNewRider
                 subq.w  #1,$32(a0)
                 move.w  $34(a0),d0
                 add.w   d0,y_pos(a0)
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_47A38
+                bne.s   SKDEZConveyorPad_CarryAndCheckNewRider
                 moveq   #signextendB(sfx_ConveyorPlatform),d0
                 jsr     (Play_SFX).l
 
-loc_47A38:
+SKDEZConveyorPad_CarryAndCheckNewRider:
                 bsr.w   CarryPlayersOnDezConveyorPad
                 move.b  status(a0),d0
                 move.b  $30(a0),d1
@@ -70,10 +70,10 @@ loc_47A38:
                 eor.b   d0,d1
                 and.b   d0,d1
                 andi.b  #standing_mask,d1
-                beq.s   loc_47A58
+                beq.s   SKDEZConveyorPad_AnimateAndCheckSolid
                 bchg    #0,anim(a0)
 
-loc_47A58:
+SKDEZConveyorPad_AnimateAndCheckSolid:
                 lea     (Ani_DEZConveyorPad).l,a1
                 jsr     (Animate_Sprite).l
                 moveq   #0,d1
@@ -101,62 +101,62 @@ CarryPlayersOnDezConveyorPad:
 
 CarryStandingPlayerOnDezConveyorPad:
                 btst    d6,status(a0)
-                beq.s   locret_47AB2
+                beq.s   SKDEZConveyorPad_RiderCarryReturn
                 moveq   #2,d0
                 tst.b   anim(a0)
-                beq.s   loc_47AA6
+                beq.s   SKDEZConveyorPad_AdjustCarryForGravity
                 neg.w   d0
 
-loc_47AA6:
+SKDEZConveyorPad_AdjustCarryForGravity:
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_47AAE
+                beq.s   SKDEZConveyorPad_ApplyRiderCarry
                 neg.w   d0
 
-loc_47AAE:
+SKDEZConveyorPad_ApplyRiderCarry:
                 add.w   d0,x_pos(a1)
 
-locret_47AB2:
+SKDEZConveyorPad_RiderCarryReturn:
                 rts
 ; End of function CarryStandingPlayerOnDezConveyorPad
 
 ; ---------------------------------------------------------------------------
 
-loc_47AB4:
+SKDEZConveyorPad_UpdateFloorPad:
                 move.w  x_pos(a0),-(sp)
                 bsr.w   UpdateDezConveyorPadFloorMotion
                 moveq   #1,d0
                 tst.b   anim(a0)
-                beq.s   loc_47AC6
+                beq.s   SKDEZConveyorPad_MoveAndCheckLeftWall
                 neg.w   d0
 
-loc_47AC6:
+SKDEZConveyorPad_MoveAndCheckLeftWall:
                 add.w   d0,x_pos(a0)
                 moveq   #-$40,d3
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bpl.s   loc_47AE0
+                bpl.s   SKDEZConveyorPad_CheckRightWall
                 sub.w   d1,x_pos(a0)
                 bchg    #0,anim(a0)
 
-loc_47AE0:
+SKDEZConveyorPad_CheckRightWall:
                 moveq   #$40,d3
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bpl.s   loc_47AF6
+                bpl.s   SKDEZConveyorPad_TryReverseForNewRider
                 add.w   d1,x_pos(a0)
                 bchg    #0,anim(a0)
 
-loc_47AF6:
+SKDEZConveyorPad_TryReverseForNewRider:
                 move.b  status(a0),d0
                 move.b  $30(a0),d1
                 move.b  d0,$30(a0)
                 eor.b   d0,d1
                 and.b   d0,d1
                 andi.b  #standing_mask,d1
-                beq.s   loc_47B12
+                beq.s   SKDEZConveyorPad_AnimateAndCheckMoving
                 bchg    #0,anim(a0)
 
-loc_47B12:
+SKDEZConveyorPad_AnimateAndCheckMoving:
                 move.w  (sp)+,d4
                 lea     (Ani_DEZConveyorPad).l,a1
                 jsr     (Animate_Sprite).l
@@ -169,36 +169,36 @@ loc_47B12:
                 addq.w  #1,d3
                 jsr     (SolidObjectFull).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_47B52
+                bpl.s   SKDEZConveyorPad_DrawFloorPad
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_47B52
+                bne.s   SKDEZConveyorPad_DrawFloorPad
                 moveq   #signextendB(sfx_ConveyorPlatform),d0
                 jsr     (Play_SFX).l
 
-loc_47B52:
+SKDEZConveyorPad_DrawFloorPad:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateDezConveyorPadFloorMotion:
                 move.w  $36(a0),d0
-                bne.s   loc_47B7C
+                bne.s   SKDEZConveyorPad_FollowFloorOrFall
                 move.w  $34(a0),d0
                 add.w   d0,y_pos(a0)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_47B7A
+                bpl.s   SKDEZConveyorPad_FloorProbeReturn
                 add.w   d1,y_pos(a0)
                 move.w  #1,$36(a0)
 
-locret_47B7A:
+SKDEZConveyorPad_FloorProbeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47B7C:
+SKDEZConveyorPad_FollowFloorOrFall:
                 subq.w  #1,d0
-                bne.s   loc_47BBA
+                bne.s   SKDEZConveyorPad_FallAndCheckCameraDepth
                 move.w  x_pos(a0),d3
                 subi.w  #$30,d3
                 jsr     (ObjCheckFloorDist2).l
@@ -208,41 +208,41 @@ loc_47B7C:
                 jsr     (ObjCheckFloorDist2).l
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   loc_47BA6
+                ble.s   SKDEZConveyorPad_TryFollowFloor
                 move.w  d0,d1
 
-loc_47BA6:
+SKDEZConveyorPad_TryFollowFloor:
                 cmpi.w  #$E,d1
-                bgt.s   loc_47BB2
+                bgt.s   SKDEZConveyorPad_BeginFalling
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47BB2:
+SKDEZConveyorPad_BeginFalling:
                 move.w  #2,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47BBA:
+SKDEZConveyorPad_FallAndCheckCameraDepth:
                 jsr     (MoveSprite).l
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$120,d0
                 cmp.w   y_pos(a0),d0
-                bgt.s   loc_47BD8
+                bgt.s   SKDEZConveyorPad_TryLandOnFloor
                 move.w  #$7F00,d4
                 move.w  d4,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47BD8:
+SKDEZConveyorPad_TryLandOnFloor:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_47BF2
+                bpl.s   SKDEZConveyorPad_FallReturn
                 add.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #1,$36(a0)
 
-locret_47BF2:
+SKDEZConveyorPad_FallReturn:
                 rts
 ; End of function UpdateDezConveyorPadFloorMotion
 
@@ -252,7 +252,7 @@ Ani_DEZConveyorPad:
 Map_DEZConveyorPad:
                 include "src/objects/shared/zones/dez/mappings/conveyor_pad.s"
 ; ---------------------------------------------------------------------------
-word_47DD6:
+SKDEZConveyorPad_BridgePeriodMasks:
                 dc.w    $7F
                 dc.w    $FF
                 dc.w    $1FF
@@ -268,7 +268,7 @@ InitializeDezEnergyBridgeTiming:
                 move.b  d0,d1
                 andi.w  #$C,d0
                 lsr.w   #1,d0
-                move.w  word_47DD6(pc,d0.w),d0
+                move.w  SKDEZConveyorPad_BridgePeriodMasks(pc,d0.w),d0
                 move.w  d0,$32(a0)
                 addq.w  #1,d0
                 lsr.w   #4,d0

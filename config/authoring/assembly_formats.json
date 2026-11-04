@@ -87583,12 +87583,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "cfd7cb849f0cf3b96d745dbd79262867cde330946e59e9808bf6741728c60691",
+      "declarations_sha256": "b6679ca524e299fbbe4bfbb8c8d130e665724a748d92fb58e3b1e9b9b4911ffe",
       "labels": {
         "Ani_DEZConveyorPad_": 0,
-        "byte_47BFA": 6,
-        "byte_47BFF": 11,
-        "byte_47C04": 16
+        "DEZAni_ConveyorPad_Forward123Loop": 6,
+        "DEZAni_ConveyorPad_Reverse321Loop": 11,
+        "DEZAni_ConveyorPad_IdleFrameOneLoop": 16
       },
       "external_symbols": [],
       "blocks": [
@@ -87596,21 +87596,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_47BFA",
+          "target": "DEZAni_ConveyorPad_Forward123Loop",
           "base": "Ani_DEZConveyorPad_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_47BFF",
+          "target": "DEZAni_ConveyorPad_Reverse321Loop",
           "base": "Ani_DEZConveyorPad_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_47C04",
+          "target": "DEZAni_ConveyorPad_IdleFrameOneLoop",
           "base": "Ani_DEZConveyorPad_"
         },
         {
@@ -87647,10 +87647,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "87c3914ee157c53c8d5eecf69742adfd4aea366e6778793adc481eb7d26b74ff",
+      "declarations_sha256": "487b4be519ecd2ef9195a9fad31bf7d85dfa8a5494ee5b4fd1cedd76ad0b0737",
       "labels": {
         "Ani_DEZLightning_": 0,
-        "byte_47928": 2
+        "DEZLightningAni_PulseAndAdvance": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -87658,7 +87658,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_47928",
+          "target": "DEZLightningAni_PulseAndAdvance",
           "base": "Ani_DEZLightning_"
         },
         {
@@ -87678,11 +87678,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "f3eace7ebf2a773df851d7c1122687cad74dee524b3c259a9c500592f287c279",
+      "declarations_sha256": "d31c39c7748486d8852777a7597dfe982c00b8e7cc8769beee921c0721d51ff5",
       "labels": {
         "Ani_DEZRetractingSpring_": 0,
-        "byte_481A6": 4,
-        "byte_481A9": 7
+        "DEZAni_RetractingSpring_IdleZeroLoop": 4,
+        "DEZRetractSpringAni_LaunchThenIdle": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -87690,14 +87690,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_481A6",
+          "target": "DEZAni_RetractingSpring_IdleZeroLoop",
           "base": "Ani_DEZRetractingSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_481A9",
+          "target": "DEZRetractSpringAni_LaunchThenIdle",
           "base": "Ani_DEZRetractingSpring_"
         },
         {
@@ -87728,21 +87728,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 266
       },
-      "declarations_sha256": "be49592ff186eaeccf6850eaef75245b0861ff704d655a4db7d832a1d4ecd4ec",
+      "declarations_sha256": "966101a7fd45384c0153ae74b79b0a36aa55b858eca6cb9c411ad590c0065d1d",
       "labels": {
         "Ani_DEZTransRings_": 0,
-        "byte_488E2": 32,
-        "byte_488F4": 50,
-        "byte_48906": 68,
-        "byte_48918": 86,
-        "byte_4892A": 104,
-        "byte_4893C": 122,
-        "byte_4894E": 140,
-        "byte_48960": 158,
-        "byte_48972": 176,
-        "byte_48984": 194,
-        "byte_48996": 212,
-        "byte_489A8": 230
+        "DEZTransportRingAni_NormalHold0": 32,
+        "DEZTransportRingAni_NormalHold7": 50,
+        "DEZTransportRingAni_NormalHold8": 68,
+        "DEZTransportRingAni_NormalHold9": 86,
+        "DEZAni_TransporterRing_NormalBankHoldTen": 104,
+        "DEZTransportRingAni_NormalHoldB": 122,
+        "DEZTransportRingAni_NormalHoldC": 140,
+        "DEZTransportRingAni_NormalHoldD": 158,
+        "DEZAni_TransporterRing_SineBankHoldZero": 176,
+        "DEZTransportRingAni_SineHold1": 194,
+        "DEZTransportRingAni_SineHold2": 212,
+        "DEZTransportRingAni_SineHold3": 230
       },
       "external_symbols": [],
       "blocks": [
@@ -87750,112 +87750,112 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_488E2",
+          "target": "DEZTransportRingAni_NormalHold0",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_488F4",
+          "target": "DEZTransportRingAni_NormalHold7",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48906",
+          "target": "DEZTransportRingAni_NormalHold8",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48918",
+          "target": "DEZTransportRingAni_NormalHold9",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4892A",
+          "target": "DEZAni_TransporterRing_NormalBankHoldTen",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4893C",
+          "target": "DEZTransportRingAni_NormalHoldB",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4894E",
+          "target": "DEZTransportRingAni_NormalHoldC",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48960",
+          "target": "DEZTransportRingAni_NormalHoldD",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48972",
+          "target": "DEZAni_TransporterRing_SineBankHoldZero",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48984",
+          "target": "DEZTransportRingAni_SineHold1",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48996",
+          "target": "DEZTransportRingAni_SineHold2",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_489A8",
+          "target": "DEZTransportRingAni_SineHold3",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_489A8",
+          "target": "DEZTransportRingAni_SineHold3",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_489A8",
+          "target": "DEZTransportRingAni_SineHold3",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48996",
+          "target": "DEZTransportRingAni_SineHold2",
           "base": "Ani_DEZTransRings_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_48984",
+          "target": "DEZTransportRingAni_SineHold1",
           "base": "Ani_DEZTransRings_"
         },
         {
@@ -87941,12 +87941,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 86
       },
-      "declarations_sha256": "ca094e4d52a96c6624e7fa584ad961715eb13ad0a245dd387c29d31aa8f912c4",
+      "declarations_sha256": "db86f3bde58a8d91dc90d32f5bf5d13850b2f64ef388503a94c2f4976abe209d",
       "labels": {
         "Map_DEZ3Blocks_": 0,
-        "word_5A9B4": 8,
-        "word_5A9CE": 34,
-        "word_5A9E8": 60
+        "DEZMap_Act3Blocks_InitialColumnPattern": 8,
+        "DEZ3BlockMap_MiddleColumn": 34,
+        "DEZMap_Act3Blocks_LastColumnPattern": 60
       },
       "external_symbols": [],
       "blocks": [
@@ -87954,28 +87954,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5A9B4",
+          "target": "DEZMap_Act3Blocks_InitialColumnPattern",
           "base": "Map_DEZ3Blocks_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5A9CE",
+          "target": "DEZ3BlockMap_MiddleColumn",
           "base": "Map_DEZ3Blocks_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5A9CE",
+          "target": "DEZ3BlockMap_MiddleColumn",
           "base": "Map_DEZ3Blocks_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5A9E8",
+          "target": "DEZMap_Act3Blocks_LastColumnPattern",
           "base": "Map_DEZ3Blocks_"
         },
         {
@@ -88004,10 +88004,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "57f347717ea8407dbb9c26ed4e06847bfe7e7520e3af05e7c9280ad24c3f4e26",
+      "declarations_sha256": "8f49060cf628d5b720a0651b2dc68e6dad78c622cd9d4a1169bf3d8782007c7f",
       "labels": {
         "Map_DEZBumperWall_": 0,
-        "word_498C4": 2
+        "DEZMap_BumperWall_OnlyTwoPieceBody": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -88015,7 +88015,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_498C4",
+          "target": "DEZMap_BumperWall_OnlyTwoPieceBody",
           "base": "Map_DEZBumperWall_"
         },
         {
@@ -88034,17 +88034,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 462
       },
-      "declarations_sha256": "809a7947b0a56dd848b3dcd4608553e875a5f54fcd4cfad54a41aa6328a0c9bc",
+      "declarations_sha256": "fdb107ab641fa1abf608a23e951645f0901c00e8b4e6f3af705d59fd42fae5d0",
       "labels": {
         "Map_DEZConveyorPad_": 0,
-        "word_47C12": 10,
-        "word_47C44": 60,
-        "word_47C76": 110,
+        "DEZConveyorPadMap_NarrowSharedPhase": 10,
+        "DEZMap_ConveyorPad_NarrowPhaseTwo": 60,
+        "DEZMap_ConveyorPad_NarrowPhaseThree": 110,
         "Map_DEZConveyorPad2": 160,
         "Map_DEZConveyorPad2_": 160,
-        "word_47CB0": 168,
-        "word_47D12": 266,
-        "word_47D74": 364
+        "DEZConveyorPadMap_WidePhaseAndPreview": 168,
+        "DEZMap_ConveyorPad_WidePhaseTwo": 266,
+        "DEZMap_ConveyorPad_WidePhaseThree": 364
       },
       "external_symbols": [],
       "blocks": [
@@ -88052,35 +88052,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47C12",
+          "target": "DEZConveyorPadMap_NarrowSharedPhase",
           "base": "Map_DEZConveyorPad_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47C12",
+          "target": "DEZConveyorPadMap_NarrowSharedPhase",
           "base": "Map_DEZConveyorPad_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47C44",
+          "target": "DEZMap_ConveyorPad_NarrowPhaseTwo",
           "base": "Map_DEZConveyorPad_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47C76",
+          "target": "DEZMap_ConveyorPad_NarrowPhaseThree",
           "base": "Map_DEZConveyorPad_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47CB0",
+          "target": "DEZConveyorPadMap_WidePhaseAndPreview",
           "base": "Map_DEZConveyorPad_"
         },
         {
@@ -88102,28 +88102,28 @@
           "offset": 160,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47CB0",
+          "target": "DEZConveyorPadMap_WidePhaseAndPreview",
           "base": "Map_DEZConveyorPad2_"
         },
         {
           "offset": 162,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47CB0",
+          "target": "DEZConveyorPadMap_WidePhaseAndPreview",
           "base": "Map_DEZConveyorPad2_"
         },
         {
           "offset": 164,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47D12",
+          "target": "DEZMap_ConveyorPad_WidePhaseTwo",
           "base": "Map_DEZConveyorPad2_"
         },
         {
           "offset": 166,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47D74",
+          "target": "DEZMap_ConveyorPad_WidePhaseThree",
           "base": "Map_DEZConveyorPad2_"
         },
         {
@@ -88689,13 +88689,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "cd7be29d7c18961ae63c5a0d0ae3edf2d7513b908ecbed6749d57cef0e34e5f4",
+      "declarations_sha256": "66c79f08ce3bed147679676e6ac68818978c90280a45456a997facdcd48956b6",
       "labels": {
         "Map_DEZEnergyBridge_": 0,
-        "word_48000": 8,
-        "word_4800E": 22,
-        "word_4801C": 36,
-        "word_4802A": 50
+        "DEZMap_EnergyBridge_StraightPhaseZero": 8,
+        "DEZMap_EnergyBridge_StraightPhaseOne": 22,
+        "DEZMap_EnergyBridge_StraightPhaseTwo": 36,
+        "DEZMap_EnergyBridge_StraightPhaseThree": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -88703,28 +88703,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48000",
+          "target": "DEZMap_EnergyBridge_StraightPhaseZero",
           "base": "Map_DEZEnergyBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4800E",
+          "target": "DEZMap_EnergyBridge_StraightPhaseOne",
           "base": "Map_DEZEnergyBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4801C",
+          "target": "DEZMap_EnergyBridge_StraightPhaseTwo",
           "base": "Map_DEZEnergyBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4802A",
+          "target": "DEZMap_EnergyBridge_StraightPhaseThree",
           "base": "Map_DEZEnergyBridge_"
         },
         {
@@ -88758,13 +88758,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 82
       },
-      "declarations_sha256": "e7def5883cecf405b79a26e5b59b00c7b0cf3ef0ba4cd3de6559a204da72dfff",
+      "declarations_sha256": "50d0cf4ec6a5cdd034f1ff0c726cb3b7fc33bdc4d17f3ddb67b737a5975ff486",
       "labels": {
         "Map_DEZEnergyBridgeCurved_": 0,
-        "word_48040": 8,
-        "word_48054": 28,
-        "word_48068": 48,
-        "word_4807C": 68
+        "DEZMap_EnergyBridge_CurvedPhaseZero": 8,
+        "DEZMap_EnergyBridge_CurvedPhaseOne": 28,
+        "DEZMap_EnergyBridge_CurvedPhaseTwo": 48,
+        "DEZMap_EnergyBridge_CurvedPhaseThree": 68
       },
       "external_symbols": [],
       "blocks": [
@@ -88772,28 +88772,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48040",
+          "target": "DEZMap_EnergyBridge_CurvedPhaseZero",
           "base": "Map_DEZEnergyBridgeCurved_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48054",
+          "target": "DEZMap_EnergyBridge_CurvedPhaseOne",
           "base": "Map_DEZEnergyBridgeCurved_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48068",
+          "target": "DEZMap_EnergyBridge_CurvedPhaseTwo",
           "base": "Map_DEZEnergyBridgeCurved_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4807C",
+          "target": "DEZMap_EnergyBridge_CurvedPhaseThree",
           "base": "Map_DEZEnergyBridgeCurved_"
         },
         {
@@ -89353,11 +89353,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "2573e80fefdb2c4fc8542f1165cf00aed68f838c24582b4ba5c14d70d8f836f0",
+      "declarations_sha256": "95e3df46cf4c1dd01d7525d3688eca3bb63ebc914befcb1b553be049beda5c83",
       "labels": {
         "Map_DEZFloatingPlatform_": 0,
-        "word_25ACE": 4,
-        "word_25ADC": 18
+        "DEZMap_FloatingPlatform_TwoPiecePhase": 4,
+        "DEZFloatPlatMap_WithCenterPiece": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -89365,14 +89365,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_25ACE",
+          "target": "DEZMap_FloatingPlatform_TwoPiecePhase",
           "base": "Map_DEZFloatingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_25ADC",
+          "target": "DEZFloatPlatMap_WithCenterPiece",
           "base": "Map_DEZFloatingPlatform_"
         },
         {
@@ -89396,13 +89396,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "19a29d31df3ef6484504cc5a51ba4d2ad1866a2d6b32ab37ad30d003b8f3699e",
+      "declarations_sha256": "6c06e4c9e7815426e83ad48ad84100c66839e6b302c25e4ea218e473ff595ab4",
       "labels": {
         "Map_DEZGravityPuzzle_": 0,
-        "word_49A76": 10,
-        "word_49A9C": 48,
-        "word_49AA4": 56,
-        "word_49AAC": 64
+        "DEZGravPuzzleMap_PuzzleBody": 10,
+        "DEZGravPuzzleMap_LeftMarker": 48,
+        "DEZGravPuzzleMap_RightMarker": 56,
+        "DEZGravPuzzleMap_SharedInactiveFrame": 64
       },
       "external_symbols": [],
       "blocks": [
@@ -89410,35 +89410,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49A76",
+          "target": "DEZGravPuzzleMap_PuzzleBody",
           "base": "Map_DEZGravityPuzzle_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49A9C",
+          "target": "DEZGravPuzzleMap_LeftMarker",
           "base": "Map_DEZGravityPuzzle_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49AA4",
+          "target": "DEZGravPuzzleMap_RightMarker",
           "base": "Map_DEZGravityPuzzle_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49AAC",
+          "target": "DEZGravPuzzleMap_SharedInactiveFrame",
           "base": "Map_DEZGravityPuzzle_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49AAC",
+          "target": "DEZGravPuzzleMap_SharedInactiveFrame",
           "base": "Map_DEZGravityPuzzle_"
         },
         {
@@ -89472,11 +89472,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "6e15f800d4b7dad340cd62b05e2700a96ef8eaf077d72749936c707d3c2e6634",
+      "declarations_sha256": "5cd6159a172a1ef4086e4330288af6f4bc4d0563eaf9af86a7a47b605f7e5796",
       "labels": {
         "Map_DEZGravitySwitch_": 0,
-        "word_48BEE": 4,
-        "word_48C08": 30
+        "DEZMap_GravitySwitch_RestFourPieces": 4,
+        "DEZMap_GravitySwitch_PressedTwoPieces": 30
       },
       "external_symbols": [],
       "blocks": [
@@ -89484,14 +89484,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48BEE",
+          "target": "DEZMap_GravitySwitch_RestFourPieces",
           "base": "Map_DEZGravitySwitch_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48C08",
+          "target": "DEZMap_GravitySwitch_PressedTwoPieces",
           "base": "Map_DEZGravitySwitch_"
         },
         {
@@ -89515,10 +89515,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "d709f00780d1f83b146e1529028e6948c062e878b8325c64a6ec1e9b70b65a70",
+      "declarations_sha256": "f7889136e3c28435daf8df46b5be30ce3ccada4ea1f60a6f1abb449f71f1a33c",
       "labels": {
         "Map_DEZHangCarrier_": 0,
-        "word_47180": 2
+        "DEZMap_HangCarrier_OnlyFourPieceShape": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -89526,7 +89526,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47180",
+          "target": "DEZMap_HangCarrier_OnlyFourPieceShape",
           "base": "Map_DEZHangCarrier_"
         },
         {
@@ -89545,12 +89545,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "d158fa2f00b7382ea070e6b1c6814b3fac379d8127f4218702139ca992a05d09",
+      "declarations_sha256": "f61e4f59784d3ad27387e3afe8d7ae4f1af70facc74072671059e38916a8e8b9",
       "labels": {
         "Map_DEZHoverMachine_": 0,
-        "word_495DE": 6,
-        "word_495EC": 20,
-        "word_495FA": 34
+        "DEZMap_HoverMachine_RootPhaseZero": 6,
+        "DEZMap_HoverMachine_RootPhaseOne": 20,
+        "DEZHoverMap_FieldActor": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -89558,21 +89558,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_495DE",
+          "target": "DEZMap_HoverMachine_RootPhaseZero",
           "base": "Map_DEZHoverMachine_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_495EC",
+          "target": "DEZMap_HoverMachine_RootPhaseOne",
           "base": "Map_DEZHoverMachine_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_495FA",
+          "target": "DEZHoverMap_FieldActor",
           "base": "Map_DEZHoverMachine_"
         },
         {
@@ -89601,12 +89601,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "d46ee7093df740ecf2e2720314c14d750656984046e0b2c46595739c21199a86",
+      "declarations_sha256": "4a39bdc07bc458ee414614bdc371bd7e3410266c78bf15e773a4a2b5ef1b372c",
       "labels": {
         "Map_DEZLiftPad_": 0,
-        "word_4761A": 6,
-        "word_4762E": 26,
-        "word_47636": 34
+        "DEZMap_LiftPad_OrdinaryRootThreePieces": 6,
+        "DEZMap_LiftPad_ArmLinkAndHelperMain": 26,
+        "DEZMap_LiftPad_FirstEmbeddedArmPiece": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -89614,21 +89614,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4761A",
+          "target": "DEZMap_LiftPad_OrdinaryRootThreePieces",
           "base": "Map_DEZLiftPad_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4762E",
+          "target": "DEZMap_LiftPad_ArmLinkAndHelperMain",
           "base": "Map_DEZLiftPad_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47636",
+          "target": "DEZMap_LiftPad_FirstEmbeddedArmPiece",
           "base": "Map_DEZLiftPad_"
         },
         {
@@ -89657,14 +89657,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 56
       },
-      "declarations_sha256": "c7943a1aaf61a10c2d47837742519e25f0c21a8e5fe24f1a4a4129c3b24786b6",
+      "declarations_sha256": "584ba6f4386e7ef94016c30892283f1644d62d3835474c3ec11b5276e2876000",
       "labels": {
         "Map_DEZLightning_": 0,
-        "word_47938": 10,
-        "word_4793A": 12,
-        "word_47942": 20,
-        "word_4794A": 28,
-        "word_47958": 42
+        "DEZMap_Lightning_BlankBetweenPulses": 10,
+        "DEZMap_Lightning_PulsePhaseOne": 12,
+        "DEZMap_Lightning_PulsePhaseTwo": 20,
+        "DEZMap_Lightning_TouchQueuedPhaseThree": 28,
+        "DEZMap_Lightning_PulsePhaseFour": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -89672,35 +89672,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47938",
+          "target": "DEZMap_Lightning_BlankBetweenPulses",
           "base": "Map_DEZLightning_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4793A",
+          "target": "DEZMap_Lightning_PulsePhaseOne",
           "base": "Map_DEZLightning_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47942",
+          "target": "DEZMap_Lightning_PulsePhaseTwo",
           "base": "Map_DEZLightning_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4794A",
+          "target": "DEZMap_Lightning_TouchQueuedPhaseThree",
           "base": "Map_DEZLightning_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47958",
+          "target": "DEZMap_Lightning_PulsePhaseFour",
           "base": "Map_DEZLightning_"
         },
         {
@@ -90263,12 +90263,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 60
       },
-      "declarations_sha256": "cef852213633d322f394b2e09941f3c87508cf2056a092e0d6551e2308da7eed",
+      "declarations_sha256": "d845e05438d8a8490169295f0f0580ffb6230e44bebe537bc603fa149d1c50d3",
       "labels": {
         "Map_DEZRetractingSpring_": 0,
-        "word_481BC": 6,
-        "word_481D0": 26,
-        "word_481DE": 40
+        "DEZMap_RetractingSpring_IdleThreePieces": 6,
+        "DEZRetractSpringMap_LaunchStart": 26,
+        "DEZRetractSpringMap_LaunchExtended": 40
       },
       "external_symbols": [],
       "blocks": [
@@ -90276,21 +90276,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_481BC",
+          "target": "DEZMap_RetractingSpring_IdleThreePieces",
           "base": "Map_DEZRetractingSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_481D0",
+          "target": "DEZRetractSpringMap_LaunchStart",
           "base": "Map_DEZRetractingSpring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_481DE",
+          "target": "DEZRetractSpringMap_LaunchExtended",
           "base": "Map_DEZRetractingSpring_"
         },
         {
@@ -90319,10 +90319,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "a7f55f8e5cebb78617fd63d845e86a3a0e3e17721bb6634282419e085ac0f34f",
+      "declarations_sha256": "eab790b57bf5ffb3ae8e4cd3657db66a182186e0c8ab858959867923d35018b4",
       "labels": {
         "Map_DEZTiltingBridge_": 0,
-        "word_46F7C": 2
+        "DEZBridgeStairMap_SharedBlock": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -90330,7 +90330,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46F7C",
+          "target": "DEZBridgeStairMap_SharedBlock",
           "base": "Map_DEZTiltingBridge_"
         },
         {
@@ -90349,19 +90349,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 208
       },
-      "declarations_sha256": "1ec3095d653c27c7a0c488ca27e073224e99d115000b2cc1b9e992fb17c2cc8a",
+      "declarations_sha256": "cc82d7bd11dd2d67ff696e314a57a4c34dc76186a5f09e6ab26ee5ade2b03512",
       "labels": {
         "Map_TorpedoLauncher_": 0,
-        "word_472BC": 20,
-        "word_472D0": 40,
-        "word_472E4": 60,
-        "word_472F8": 80,
-        "word_4730C": 100,
-        "word_47320": 120,
-        "word_47334": 140,
-        "word_47348": 160,
-        "word_4735C": 180,
-        "word_47370": 200
+        "DEZTorpedoMap_ReloadFrame0": 20,
+        "DEZTorpedoMap_ReloadFrame1": 40,
+        "DEZTorpedoMap_ReloadFrame2": 60,
+        "DEZTorpedoMap_ReloadFrame3": 80,
+        "DEZTorpedoMap_ReloadFrame4": 100,
+        "DEZTorpedoMap_ReloadFrame5": 120,
+        "DEZTorpedoMap_ReloadFrame6": 140,
+        "DEZTorpedoMap_ReloadFrame7": 160,
+        "DEZTorpedoMap_ReloadFrame8": 180,
+        "DEZTorpedoMap_ProjectileFrame": 200
       },
       "external_symbols": [],
       "blocks": [
@@ -90369,70 +90369,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_472BC",
+          "target": "DEZTorpedoMap_ReloadFrame0",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_472D0",
+          "target": "DEZTorpedoMap_ReloadFrame1",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_472E4",
+          "target": "DEZTorpedoMap_ReloadFrame2",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_472F8",
+          "target": "DEZTorpedoMap_ReloadFrame3",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4730C",
+          "target": "DEZTorpedoMap_ReloadFrame4",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47320",
+          "target": "DEZTorpedoMap_ReloadFrame5",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47334",
+          "target": "DEZTorpedoMap_ReloadFrame6",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47348",
+          "target": "DEZTorpedoMap_ReloadFrame7",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4735C",
+          "target": "DEZTorpedoMap_ReloadFrame8",
           "base": "Map_TorpedoLauncher_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_47370",
+          "target": "DEZTorpedoMap_ProjectileFrame",
           "base": "Map_TorpedoLauncher_"
         },
         {
@@ -90496,22 +90496,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 222
       },
-      "declarations_sha256": "2f857538295553db0151a0ea668366204d15c8927048754976a579cd3990360e",
+      "declarations_sha256": "165194007b2894e690bb3c377a6fd8fa3b3f1d3337636f9016ca5d8a1e8f70e3",
       "labels": {
         "Map_DEZTransRings_": 0,
-        "word_489E8": 28,
-        "word_489F6": 42,
-        "word_48A04": 56,
-        "word_48A12": 70,
-        "word_48A2C": 96,
-        "word_48A34": 104,
-        "word_48A3C": 112,
-        "word_48A4A": 126,
-        "word_48A5E": 146,
-        "word_48A6C": 160,
-        "word_48A7A": 174,
-        "word_48A88": 188,
-        "word_48A9C": 208
+        "DEZMap_TransporterRing_HoldShapeZero": 28,
+        "DEZMap_TransporterRing_HoldShapeOne": 42,
+        "DEZMap_TransporterRing_HoldShapeTwo": 56,
+        "DEZTransportRingMap_SharedHoldFrames34": 70,
+        "DEZMap_TransporterRing_TransitionFive": 96,
+        "DEZMap_TransporterRing_TransitionSix": 104,
+        "DEZTransportRingMap_NormalFrame7": 112,
+        "DEZTransportRingMap_NormalFrame8": 126,
+        "DEZTransportRingMap_NormalFrame9": 146,
+        "DEZTransportRingMap_NormalFrameA": 160,
+        "DEZTransportRingMap_NormalFrameB": 174,
+        "DEZTransportRingMap_NormalFrameC": 188,
+        "DEZTransportRingMap_NormalFrameD": 208
       },
       "external_symbols": [],
       "blocks": [
@@ -90519,98 +90519,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_489E8",
+          "target": "DEZMap_TransporterRing_HoldShapeZero",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_489F6",
+          "target": "DEZMap_TransporterRing_HoldShapeOne",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A04",
+          "target": "DEZMap_TransporterRing_HoldShapeTwo",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A12",
+          "target": "DEZTransportRingMap_SharedHoldFrames34",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A12",
+          "target": "DEZTransportRingMap_SharedHoldFrames34",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A2C",
+          "target": "DEZMap_TransporterRing_TransitionFive",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A34",
+          "target": "DEZMap_TransporterRing_TransitionSix",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A3C",
+          "target": "DEZTransportRingMap_NormalFrame7",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A4A",
+          "target": "DEZTransportRingMap_NormalFrame8",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A5E",
+          "target": "DEZTransportRingMap_NormalFrame9",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A6C",
+          "target": "DEZTransportRingMap_NormalFrameA",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A7A",
+          "target": "DEZTransportRingMap_NormalFrameB",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A88",
+          "target": "DEZTransportRingMap_NormalFrameC",
           "base": "Map_DEZTransRings_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48A9C",
+          "target": "DEZTransportRingMap_NormalFrameD",
           "base": "Map_DEZTransRings_"
         },
         {
@@ -90689,20 +90689,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 140
       },
-      "declarations_sha256": "adee7bc3fc896eb21ffefed4a9cb80cb3ee1c8b304699fa260dacff97c4d09e5",
+      "declarations_sha256": "0e228862333261d19443692f209d0e6f6f9bafdda1954a65a98e79564dd13566",
       "labels": {
         "Map_DEZTunnelLauncher_": 0,
-        "word_4843A": 22,
-        "word_4843C": 24,
-        "word_4844A": 38,
-        "word_48458": 52,
-        "word_48466": 66,
-        "word_48474": 80,
-        "word_48482": 94,
-        "word_48490": 108,
-        "word_48498": 116,
-        "word_484A0": 124,
-        "word_484A8": 132
+        "DEZTunnelLaunchMap_Blank": 22,
+        "DEZMap_TunnelLauncher_MainPulseOne": 24,
+        "DEZMap_TunnelLauncher_MainPulseTwo": 38,
+        "DEZTunnelLaunchMap_DescentFrame3": 52,
+        "DEZTunnelLaunchMap_DescentFrame4": 66,
+        "DEZTunnelLaunchMap_DescentFrame5": 80,
+        "DEZTunnelLaunchMap_DescentFrame6": 94,
+        "DEZTunnelLaunchMap_CountdownFrame7": 108,
+        "DEZTunnelLaunchMap_CountdownFrame8": 116,
+        "DEZTunnelLaunchMap_CountdownFrame9": 124,
+        "DEZTunnelLaunchMap_CountdownFrame10": 132
       },
       "external_symbols": [],
       "blocks": [
@@ -90710,77 +90710,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4843A",
+          "target": "DEZTunnelLaunchMap_Blank",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4843C",
+          "target": "DEZMap_TunnelLauncher_MainPulseOne",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4844A",
+          "target": "DEZMap_TunnelLauncher_MainPulseTwo",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48458",
+          "target": "DEZTunnelLaunchMap_DescentFrame3",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48466",
+          "target": "DEZTunnelLaunchMap_DescentFrame4",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48474",
+          "target": "DEZTunnelLaunchMap_DescentFrame5",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48482",
+          "target": "DEZTunnelLaunchMap_DescentFrame6",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48490",
+          "target": "DEZTunnelLaunchMap_CountdownFrame7",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_48498",
+          "target": "DEZTunnelLaunchMap_CountdownFrame8",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_484A0",
+          "target": "DEZTunnelLaunchMap_CountdownFrame9",
           "base": "Map_DEZTunnelLauncher_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_484A8",
+          "target": "DEZTunnelLaunchMap_CountdownFrame10",
           "base": "Map_DEZTunnelLauncher_"
         },
         {

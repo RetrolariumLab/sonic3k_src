@@ -10,15 +10,15 @@ Obj_DEZTiltingBridge:
                 moveq   #8-1,d1
                 movea.l a0,a1
                 moveq   #1,d4
-                bra.s   loc_46DBC
+                bra.s   SKDEZTiltBridge_InitSegmentAndRootLink
 ; ---------------------------------------------------------------------------
 
-loc_46DB2:
+SKDEZTiltBridge_TryAllocNextSegment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_46E16
+                bne.w   SKDEZTiltBridge_InitRootUpdate
 
-loc_46DBC:
-                move.l  #loc_46E4C,(a1)
+SKDEZTiltBridge_InitSegmentAndRootLink:
+                move.l  #SKDEZTiltBridge_GetP1Influence,(a1)
                 move.w  d2,x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  $44(a0),$44(a1)
@@ -34,68 +34,68 @@ loc_46DBC:
                 move.w  d4,$38(a1)
                 addq.w  #1,d4
                 addi.w  #$20,d2
-                dbf     d1,loc_46DB2
+                dbf     d1,SKDEZTiltBridge_TryAllocNextSegment
 
-loc_46E16:
-                move.l  #loc_46E1C,(a0)
+SKDEZTiltBridge_InitRootUpdate:
+                move.l  #SKDEZTiltBridge_SaveRidersAndCheckTilt,(a0)
 
-loc_46E1C:
+SKDEZTiltBridge_SaveRidersAndCheckTilt:
                 move.w  $34(a0),$30(a0)
                 move.w  $36(a0),$32(a0)
                 move.w  #0,$34(a0)
                 move.w  #0,$36(a0)
                 move.w  y_pos(a0),d0
                 sub.w   $46(a0),d0
-                bpl.s   loc_46E40
+                bpl.s   SKDEZTiltBridge_TryLatchBridgeBreak
                 neg.w   d0
 
-loc_46E40:
+SKDEZTiltBridge_TryLatchBridgeBreak:
                 cmpi.w  #$70,d0
-                blo.s   loc_46E4C
+                blo.s   SKDEZTiltBridge_GetP1Influence
                 move.b  #1,$2E(a0)
 
-loc_46E4C:
+SKDEZTiltBridge_GetP1Influence:
                 movea.w $3E(a0),a1
                 move.w  $30(a1),d0
-                beq.s   loc_46E68
+                beq.s   SKDEZTiltBridge_GetP2Influence
                 lsl.w   #3,d0
                 add.w   $38(a0),d0
                 subi.w  #9,d0
-                move.b  byte_46ED8(pc,d0.w),d0
+                move.b  SKDEZTiltBridge_RiderInfluenceTable(pc,d0.w),d0
                 ext.w   d0
                 add.w   d0,d0
 
-loc_46E68:
+SKDEZTiltBridge_GetP2Influence:
                 move.w  $32(a1),d1
-                beq.s   loc_46E80
+                beq.s   SKDEZTiltBridge_MoveSegmentAndTrackP1
                 lsl.w   #3,d1
                 add.w   $38(a0),d1
                 subi.w  #9,d1
-                move.b  byte_46ED8(pc,d1.w),d1
+                move.b  SKDEZTiltBridge_RiderInfluenceTable(pc,d1.w),d1
                 ext.w   d1
                 add.w   d1,d1
 
-loc_46E80:
+SKDEZTiltBridge_MoveSegmentAndTrackP1:
                 add.w   d1,d0
                 ext.l   d0
                 add.l   d0,$3A(a0)
                 move.l  $3A(a0),d0
                 add.l   d0,y_pos(a0)
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_46E9E
+                beq.s   SKDEZTiltBridge_TryTrackP2
                 move.w  $38(a0),$34(a1)
 
-loc_46E9E:
+SKDEZTiltBridge_TryTrackP2:
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_46EAC
+                beq.s   SKDEZTiltBridge_TryScheduleSegmentBreak
                 move.w  $38(a0),$36(a1)
 
-loc_46EAC:
+SKDEZTiltBridge_TryScheduleSegmentBreak:
                 tst.b   $2E(a1)
-                beq.s   loc_46EB8
-                move.l  #loc_46F18,(a0)
+                beq.s   SKDEZTiltBridge_CheckSolidAndCull
+                move.l  #SKDEZTiltBridge_BeginSegmentFall,(a0)
 
-loc_46EB8:
+SKDEZTiltBridge_CheckSolidAndCull:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  #$11,d3
@@ -104,7 +104,8 @@ loc_46EB8:
                 move.w  $44(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
-byte_46ED8:
+; Each rider's segment selects one row of eight signed accelerations
+SKDEZTiltBridge_RiderInfluenceTable:
                 dc.b    $70, $50, $30, $10,-$10,-$30,-$50,-$70
                 dc.b    $54, $3C, $24,  $C, -$C,-$24,-$3C,-$54
                 dc.b    $38, $28, $18,   8,  -8,-$18,-$28,-$38
@@ -116,13 +117,13 @@ byte_46ED8:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_46F18:
+SKDEZTiltBridge_BeginSegmentFall:
                 move.l  $3A(a0),d0
                 asl.l   #2,d0
                 move.l  d0,$3A(a0)
-                move.l  #loc_46F28,(a0)
+                move.l  #SKDEZTiltBridge_FallAndCheckCameraDepth,(a0)
 
-loc_46F28:
+SKDEZTiltBridge_FallAndCheckCameraDepth:
                 move.l  #$1000,d0
                 add.l   d0,$3A(a0)
                 move.l  $3A(a0),d0
@@ -130,11 +131,11 @@ loc_46F28:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$110,d0
                 cmp.w   y_pos(a0),d0
-                bgt.s   loc_46F54
+                bgt.s   SKDEZTiltBridge_CheckSolidAndRelease
                 move.w  #$7F00,x_pos(a0)
                 move.w  #$7F00,$44(a0)
 
-loc_46F54:
+SKDEZTiltBridge_CheckSolidAndRelease:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  #$11,d3
