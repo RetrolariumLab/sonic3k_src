@@ -4,44 +4,44 @@
 Player_AnglePos:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_EC42
+                beq.s   SKCollision_BypassTerrainAttachmentForObjectRider
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_EC42:
+SKCollision_BypassTerrainAttachmentForObjectRider:
                 move.b  top_solid_bit(a0),d5
                 btst    #Status_OnObj,status(a0)
-                beq.s   loc_EC5A
+                beq.s   SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant
                 moveq   #0,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EC5A:
+SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant:
                 moveq   #3,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
-                bpl.s   loc_EC7C
+                bpl.s   SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf
                 move.b  angle(a0),d0
-                bpl.s   loc_EC76
+                bpl.s   SKCollision_CompleteNegativeHalfAttachmentQuadrantBias
                 subq.b  #1,d0
 
-loc_EC76:
+SKCollision_CompleteNegativeHalfAttachmentQuadrantBias:
                 addi.b  #$20,d0
-                bra.s   loc_EC88
+                bra.s   SKCollision_DispatchAttachmentAxisAndProbeFloorCorners
 ; ---------------------------------------------------------------------------
 
-loc_EC7C:
+SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf:
                 move.b  angle(a0),d0
-                bpl.s   loc_EC84
+                bpl.s   SKCollision_AddLowerHalfAttachmentQuadrantBias
                 addq.b  #1,d0
 
-loc_EC84:
+SKCollision_AddLowerHalfAttachmentQuadrantBias:
                 addi.b  #$1F,d0
 
-loc_EC88:
+SKCollision_DispatchAttachmentAxisAndProbeFloorCorners:
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
                 beq.w   Player_WalkVertL
@@ -80,39 +80,39 @@ loc_EC88:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_ED12
-                bpl.s   loc_ED14
+                beq.s   SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection
+                bpl.s   SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_ED12
+                blt.s   SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection
                 add.w   d1,y_pos(a0)
 
-locret_ED12:
+SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_ED14:
+SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_ED32
+                bne.s   SKCollision_SnapFloorAttachmentByFullWordDistance
                 move.b  x_vel(a0),d0
-                bpl.s   loc_ED22
+                bpl.s   SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed
                 neg.b   d0
 
-loc_ED22:
+SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_ED2E
+                blo.s   SKCollision_CompareFloorGapLowByteAgainstAllowance
                 move.b  #$E,d0
 
-loc_ED2E:
+SKCollision_CompareFloorGapLowByteAgainstAllowance:
                 cmp.b   d0,d1
-                bgt.s   loc_ED38
+                bgt.s   SKCollision_DetachFromFloorAndRestartAnimation
 
-loc_ED32:
+SKCollision_SnapFloorAttachmentByFullWordDistance:
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_ED38:
+SKCollision_DetachFromFloorAndRestartAnimation:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -125,27 +125,27 @@ Player_Angle:
                 move.w  d0,d3
                 move.b  (Secondary_Angle).w,d2
                 cmp.w   d0,d1
-                ble.s   loc_ED5E
+                ble.s   SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex
                 move.b  (Primary_Angle).w,d2
                 move.w  d1,d3
                 move.w  d0,d1
 
-loc_ED5E:
+SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex:
                 btst    #0,d2
-                bne.s   loc_ED7A
+                bne.s   SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt
                 move.b  d2,d0
                 sub.b   angle(a0),d0
-                bpl.s   loc_ED6E
+                bpl.s   SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize
                 neg.b   d0
 
-loc_ED6E:
+SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize:
                 cmpi.b  #$20,d0
-                bhs.s   loc_ED7A
+                bhs.s   SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt
                 move.b  d2,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_ED7A:
+SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt:
                 move.b  angle(a0),d2
                 addi.b  #$20,d2
                 andi.b  #$C0,d2
@@ -187,55 +187,55 @@ Player_WalkVertR:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_EE00
-                bpl.s   loc_EE22
+                beq.s   SKCollision_ReturnRightWallAttachment
+                bpl.s   SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte
                 cmpi.w  #-$E,d1
-                blt.s   loc_EE0E
+                blt.s   SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero
                 tst.b   $41(a0)
-                bne.s   loc_EE02
+                bne.s   SKCollision_CountDownRightWallDeepOverlapRetry
                 add.w   d1,x_pos(a0)
 
-locret_EE00:
+SKCollision_ReturnRightWallAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EE02:
+SKCollision_CountDownRightWallDeepOverlapRetry:
                 subq.b  #1,$41(a0)
                 move.b  #$C0,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EE0E:
+SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero:
                 tst.w   (Current_zone_and_act).w
-                bne.s   locret_EE00
+                bne.s   SKCollision_ReturnRightWallAttachment
                 move.b  #$C0,angle(a0)
                 move.b  #3,$41(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EE22:
+SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_EE40
+                bne.s   SKCollision_SnapRightWallAttachmentByWordDistance
                 move.b  y_vel(a0),d0
-                bpl.s   loc_EE30
+                bpl.s   SKCollision_ClampRightWallGapAllowanceByte
                 neg.b   d0
 
-loc_EE30:
+SKCollision_ClampRightWallGapAllowanceByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_EE3C
+                blo.s   SKCollision_CompareRightWallGapLowByte
                 move.b  #$E,d0
 
-loc_EE3C:
+SKCollision_CompareRightWallGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   loc_EE46
+                bgt.s   SKCollision_DetachFromRightWallAndRestartAnimation
 
-loc_EE40:
+SKCollision_SnapRightWallAttachmentByWordDistance:
                 add.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EE46:
+SKCollision_DetachFromRightWallAndRestartAnimation:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -275,39 +275,39 @@ Player_WalkCeiling:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_EECE
-                bpl.s   loc_EED0
+                beq.s   SKCollision_ReturnCeilingAttachment
+                bpl.s   SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_EECE
+                blt.s   SKCollision_ReturnCeilingAttachment
                 sub.w   d1,y_pos(a0)
 
-locret_EECE:
+SKCollision_ReturnCeilingAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EED0:
+SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_EEEE
+                bne.s   SKCollision_SnapCeilingAttachmentByWordDistance
                 move.b  x_vel(a0),d0
-                bpl.s   loc_EEDE
+                bpl.s   SKCollision_ClampCeilingGapAllowanceByte
                 neg.b   d0
 
-loc_EEDE:
+SKCollision_ClampCeilingGapAllowanceByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_EEEA
+                blo.s   SKCollision_CompareCeilingGapLowByte
                 move.b  #$E,d0
 
-loc_EEEA:
+SKCollision_CompareCeilingGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   loc_EEF4
+                bgt.s   SKCollision_DetachFromCeilingAndRestartAnimation
 
-loc_EEEE:
+SKCollision_SnapCeilingAttachmentByWordDistance:
                 sub.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EEF4:
+SKCollision_DetachFromCeilingAndRestartAnimation:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -347,39 +347,39 @@ Player_WalkVertL:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_EF7C
-                bpl.s   loc_EF7E
+                beq.s   SKCollision_ReturnLeftWallAttachment
+                bpl.s   SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_EF7C
+                blt.s   SKCollision_ReturnLeftWallAttachment
                 sub.w   d1,x_pos(a0)
 
-locret_EF7C:
+SKCollision_ReturnLeftWallAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EF7E:
+SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_EF9C
+                bne.s   SKCollision_SnapLeftWallAttachmentByWordDistance
                 move.b  y_vel(a0),d0
-                bpl.s   loc_EF8C
+                bpl.s   SKCollision_ClampLeftWallGapAllowanceByte
                 neg.b   d0
 
-loc_EF8C:
+SKCollision_ClampLeftWallGapAllowanceByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_EF98
+                blo.s   SKCollision_CompareLeftWallGapLowByte
                 move.b  #$E,d0
 
-loc_EF98:
+SKCollision_CompareLeftWallGapLowByte:
                 cmp.b   d0,d1
-                bgt.s   loc_EFA2
+                bgt.s   SKCollision_DetachFromLeftWallAndRestartAnimation
 
-loc_EF9C:
+SKCollision_SnapLeftWallAttachmentByWordDistance:
                 sub.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EFA2:
+SKCollision_DetachFromLeftWallAndRestartAnimation:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)

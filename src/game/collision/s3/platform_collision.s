@@ -6,17 +6,17 @@
 
 SolidObjSloped2:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_1BF86
+                beq.s   S3Collision_ReturnFromStandingSlopeCarry
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 lsr.w   #1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_1BF66
+                beq.s   S3Collision_SnapStandingRiderToIndexedSlopeAndCarryX
                 not.w   d0
                 add.w   d1,d0
 
-loc_1BF66:
+S3Collision_SnapStandingRiderToIndexedSlopeAndCarryX:
                 move.b  (a2,d0.w),d1
                 ext.w   d1
                 move.w  y_pos(a0),d0
@@ -28,7 +28,7 @@ loc_1BF66:
                 sub.w   x_pos(a0),d2
                 sub.w   d2,x_pos(a1)
 
-locret_1BF86:
+S3Collision_ReturnFromStandingSlopeCarry:
                 rts
 ; End of function SolidObjSloped2
 
@@ -36,18 +36,18 @@ locret_1BF86:
 
 SolidObjSloped4:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_1BF86
+                beq.s   S3Collision_ReturnFromStandingSlopeCarry
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_1BFA6
+                beq.s   S3Collision_AlignFullResolutionSlopeSampleToEvenByte
                 not.w   d0
                 add.w   d1,d0
 
-loc_1BFA6:
+S3Collision_AlignFullResolutionSlopeSampleToEvenByte:
                 andi.w  #$FFFE,d0
-                bra.s   loc_1BF66
+                bra.s   S3Collision_SnapStandingRiderToIndexedSlopeAndCarryX
 ; End of function SolidObjSloped4
 
 ; =============== S U B R O U T I N E =======================================
@@ -66,19 +66,19 @@ SolidObjectTop:
 
 SolidObjectTop_1P:
                 btst    d6,status(a0)
-                beq.w   loc_1C0DC
+                beq.w   S3Collision_TestNewFlatTopLandingHorizontalSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BFE6
+                bne.s   S3Collision_ReleaseFlatTopRiderOutsideSpanOrInAir
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BFE6
+                bmi.s   S3Collision_ReleaseFlatTopRiderOutsideSpanOrInAir
                 cmp.w   d2,d0
-                blo.s   loc_1BFFA
+                blo.s   S3Collision_CarryExistingFlatTopRider
 
-loc_1BFE6:
+S3Collision_ReleaseFlatTopRiderOutsideSpanOrInAir:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -86,7 +86,7 @@ loc_1BFE6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BFFA:
+S3Collision_CarryExistingFlatTopRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -113,15 +113,15 @@ SolidObjectTopSloped2_1P:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1C03E
+                bne.s   S3Collision_ReleaseIndexedSlopeRiderOutsideSpanOrInAir
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1C03E
+                bmi.s   S3Collision_ReleaseIndexedSlopeRiderOutsideSpanOrInAir
                 cmp.w   d2,d0
-                blo.s   loc_1C052
+                blo.s   S3Collision_CarryExistingIndexedSlopeRider
 
-loc_1C03E:
+S3Collision_ReleaseIndexedSlopeRiderOutsideSpanOrInAir:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -129,7 +129,7 @@ loc_1C03E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C052:
+S3Collision_CarryExistingIndexedSlopeRider:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 moveq   #0,d4
@@ -152,35 +152,35 @@ SolidObjectTopSloped:
 
 SolidObjectTopSloped_1P:
                 btst    d6,status(a0)
-                bne.s   loc_1C084
+                bne.s   S3Collision_ValidateExistingSlopedTopRiderSpan
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_1C0B0
-                bra.w   loc_1C0DC
+                bne.s   S3Collision_ReturnNoNewPlatformContact
+                bra.w   S3Collision_TestNewFlatTopLandingHorizontalSpan
 ; ---------------------------------------------------------------------------
 
-loc_1C084:
+S3Collision_ValidateExistingSlopedTopRiderSpan:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1C0A0
+                bne.s   S3Collision_ReleaseSlopedTopRiderFlags
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1C0A0
+                bmi.s   S3Collision_ReleaseSlopedTopRiderFlags
                 cmp.w   d2,d0
-                blo.s   loc_1C0B4
+                blo.s   S3Collision_CarryExistingSlopedTopRiderWithoutSlopeLookup
 
-loc_1C0A0:
+S3Collision_ReleaseSlopedTopRiderFlags:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
 
-loc_1C0B0:
+S3Collision_ReturnNoNewPlatformContact:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C0B4:
+S3Collision_CarryExistingSlopedTopRiderWithoutSlopeLookup:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -191,45 +191,45 @@ loc_1C0B4:
 
 TryLandPlayerOnPlatformSpan:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 cmp.w   d2,d0
-                bhs.w   locret_1C17A
-                bra.s   loc_1C0FA
+                bhs.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
+                bra.s   S3Collision_ComputePlatformTopForLanding
 ; ---------------------------------------------------------------------------
 
-loc_1C0DC:
+S3Collision_TestNewFlatTopLandingHorizontalSpan:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.w   locret_1C17A
+                bhs.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
 
-loc_1C0FA:
+S3Collision_ComputePlatformTopForLanding:
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
 
-loc_1C100:
+S3Collision_TestPlatformLandingWindowAndSnapRider:
                 move.w  y_pos(a1),d2
                 move.b  y_radius(a1),d1
                 ext.w   d1
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.w   locret_1C17A
+                bhi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 cmpi.w  #-$10,d0
-                blo.w   locret_1C17A
+                blo.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 tst.b   object_control(a1)
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 cmpi.b  #6,routine(a1)
-                bhs.w   locret_1C17A
+                bhs.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
@@ -239,11 +239,11 @@ loc_1C100:
 
 RideObject_SetRide:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_1C146
+                beq.s   S3Collision_BindRiderHandleAndStandingFlags
                 movea.w interact(a1),a3
                 bclr    d6,status(a3)
 
-loc_1C146:
+S3Collision_BindRiderHandleAndStandingFlags:
                 move.w  a0,interact(a1)
                 move.b  #0,angle(a1)
                 move.w  #0,y_vel(a1)
@@ -251,13 +251,13 @@ loc_1C146:
                 bset    #Status_OnObj,status(a1)
                 bset    d6,status(a0)
                 bclr    #Status_InAir,status(a1)
-                beq.s   locret_1C17A
+                beq.s   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 jsr     (Player_TouchFloor).l
                 movea.l (sp)+,a0
 
-locret_1C17A:
+S3Collision_ReturnFromPlatformLandingOrRejectedContact:
                 rts
 ; End of function RideObject_SetRide
 
@@ -265,60 +265,60 @@ locret_1C17A:
 
 SolidObjCheckSloped2:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1C17A
+                bmi.w   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_1C17A
+                bmi.s   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.s   locret_1C17A
+                bhs.s   S3Collision_ReturnFromPlatformLandingOrRejectedContact
                 btst    #0,render_flags(a0)
-                beq.s   loc_1C1A2
+                beq.s   S3Collision_SampleHalfResolutionSlopeForNewLanding
                 not.w   d0
                 add.w   d1,d0
 
-loc_1C1A2:
+S3Collision_SampleHalfResolutionSlopeForNewLanding:
                 lsr.w   #1,d0
                 move.b  (a2,d0.w),d3
                 ext.w   d3
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                bra.w   loc_1C100
+                bra.w   S3Collision_TestPlatformLandingWindowAndSnapRider
 
 ; =============== S U B R O U T I N E =======================================
 
 CheckPlayerReleaseFromObj:
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_1C1E2
+                beq.s   S3Collision_CheckSecondaryRiderForTerrainRelease
                 jsr     (SonicOnObjHitFloor).l
                 tst.w   d1
-                beq.s   loc_1C1CC
-                bpl.s   loc_1C1E2
+                beq.s   S3Collision_ReleasePrimaryRiderForNonpositiveTerrainGap
+                bpl.s   S3Collision_CheckSecondaryRiderForTerrainRelease
 
-loc_1C1CC:
+S3Collision_ReleasePrimaryRiderForNonpositiveTerrainGap:
                 lea     (Player_1).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #p1_standing_bit,status(a0)
 
-loc_1C1E2:
+S3Collision_CheckSecondaryRiderForTerrainRelease:
                 lea     (Player_2).w,a1
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_1C210
+                beq.s   S3Collision_ReturnAfterBothRiderReleaseChecks
                 jsr     (SonicOnObjHitFloor).l
                 tst.w   d1
-                beq.s   loc_1C1FA
-                bpl.s   loc_1C210
+                beq.s   S3Collision_ReleaseSecondaryRiderForNonpositiveTerrainGap
+                bpl.s   S3Collision_ReturnAfterBothRiderReleaseChecks
 
-loc_1C1FA:
+S3Collision_ReleaseSecondaryRiderForNonpositiveTerrainGap:
                 lea     (Player_2).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #p2_standing_bit,status(a0)
 
-loc_1C210:
+S3Collision_ReturnAfterBothRiderReleaseChecks:
                 moveq   #0,d4
                 rts
 ; End of function CheckPlayerReleaseFromObj

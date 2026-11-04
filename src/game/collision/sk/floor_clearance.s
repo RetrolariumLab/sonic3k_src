@@ -13,10 +13,10 @@
 CalcRoomOverHead:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_F742
+                beq.s   SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_F742:
+SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant:
                 move.b  lrb_solid_bit(a0),d5
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
@@ -39,10 +39,10 @@ loc_F742:
 Sonic_CheckFloor:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_F782
+                beq.s   SKCollision_ProbeBothBottomCornersOnSelectedTopLayer
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_F782:
+SKCollision_ProbeBothBottomCornersOnSelectedTopLayer:
                 move.b  top_solid_bit(a0),d5
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
@@ -74,19 +74,19 @@ loc_F782:
                 move.w  (sp)+,d0
                 move.b  #0,d2
 
-loc_F7E2:
+SKCollision_SelectNearerCornerDistanceAndItsAngle:
                 move.b  (Secondary_Angle).w,d3
                 cmp.w   d0,d1
-                ble.s   loc_F7F0
+                ble.s   SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback
                 move.b  (Primary_Angle).w,d3
                 exg     d0,d1
 
-loc_F7F0:
+SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback:
                 btst    #0,d3
-                beq.s   locret_F7F8
+                beq.s   SKCollision_ReturnSelectedCornerClearanceAndAngle
                 move.b  d2,d3
 
-locret_F7F8:
+SKCollision_ReturnSelectedCornerClearanceAndAngle:
                 rts
 ; End of function Sonic_CheckFloor
 
@@ -115,13 +115,13 @@ CheckFloorDist_Part2:
 
 ; d2 what to use as angle if (Primary_Angle).w is odd
 ; returns angle in d3, or value in d2 if angle was odd
-loc_F81A:
+SKCollision_ReadPrimaryProbeAngleWithOddFallback:
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_F826
+                beq.s   SKCollision_ReturnSingleProbeClearanceAngle
                 move.b  d2,d3
 
-locret_F826:
+SKCollision_ReturnSingleProbeClearanceAngle:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ ProbeFloorWithXRadiusOffset:
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
-                bra.s   loc_F81A
+                bra.s   SKCollision_ReadPrimaryProbeAngleWithOddFallback
 ; End of function ProbeFloorWithXRadiusOffset
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,10 +146,10 @@ CheckPlayerBodyFloorClearance:
                 subq.w  #4,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
-                beq.s   loc_F864
+                beq.s   SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_F864:
+SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -160,10 +160,10 @@ loc_F864:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_F892
+                beq.s   SKCollision_ReturnPlayerBodyFloorProbe
                 move.b  #0,d3
 
-locret_F892:
+SKCollision_ReturnPlayerBodyFloorProbe:
                 rts
 ; End of function CheckPlayerBodyFloorClearance
 
@@ -182,10 +182,10 @@ ChkFloorEdge_Part2:
 ChkFloorEdge_Part3:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_F8BA
+                beq.s   SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_F8BA:
+SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -196,10 +196,10 @@ loc_F8BA:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_F8E8
+                beq.s   SKCollision_ReturnActorFloorEdgeDistance
                 move.b  #0,d3
 
-locret_F8E8:
+SKCollision_ReturnActorFloorEdgeDistance:
                 rts
 ; End of function ChkFloorEdge_Part3
 
@@ -214,10 +214,10 @@ SonicOnObjHitFloor:
                 add.w   d0,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   loc_F910
+                beq.s   SKCollision_ProbeRidingPlayerFloorUsingA1Actor
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_F910:
+SKCollision_ProbeRidingPlayerFloorUsingA1Actor:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -226,10 +226,10 @@ loc_F910:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_F936
+                beq.s   SKCollision_ReturnRidingPlayerFloorContactProbe
                 move.b  #0,d3
 
-locret_F936:
+SKCollision_ReturnRidingPlayerFloorContactProbe:
                 rts
 ; End of function SonicOnObjHitFloor
 
@@ -256,10 +256,10 @@ ObjCheckFloorDist2:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_F96C
+                beq.s   SKCollision_ReturnObjectBottomFloorDistance
                 move.b  #0,d3
 
-locret_F96C:
+SKCollision_ReturnObjectBottomFloorDistance:
                 rts
 ; End of function ObjCheckFloorDist
 

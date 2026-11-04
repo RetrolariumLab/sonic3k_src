@@ -63,7 +63,7 @@ Touch_NoInstaShield:
 Touch_Process:
                 lea     (Collision_response_list).w,a4
                 move.w  (a4)+,d6                        ; Get number of objects queued
-                beq.s   locret_FF1C                     ; If there are none, return
+                beq.s   SKCollision_ReturnNormalTouchListScan  ; If there are none, return
 
 Touch_Loop:
                 movea.w (a4)+,a1                        ; Get address of first object's RAM
@@ -75,7 +75,7 @@ Touch_NextObj:
                 bne.s   Touch_Loop                      ; If there are still objects left, loop
                 moveq   #0,d0
 
-locret_FF1C:
+SKCollision_ReturnNormalTouchListScan:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -472,80 +472,80 @@ Touch_Hurt:
 HurtCharacter:
                 move.w  (Ring_count).w,d0
                 cmpa.w  #Player_1,a0
-                beq.s   loc_102A8
+                beq.s   SKCollision_ChooseShieldTertiaryRingsAndAttemptSpillAllocation
                 tst.w   (Competition_mode).w
-                beq.s   loc_102E0
+                beq.s   SKCollision_EnterHurtStateAndSeedWaterDependentKnockback
                 move.w  (Ring_count_P2).w,d0
 
-loc_102A8:
+SKCollision_ChooseShieldTertiaryRingsAndAttemptSpillAllocation:
                 btst    #0,status_secondary(a0)
-                bne.s   loc_102DA
+                bne.s   SKCollision_StripShieldAndElementalShieldBitsBeforeHurt
                 tst.b   status_tertiary(a0)
-                bmi.s   loc_102E0
+                bmi.s   SKCollision_EnterHurtStateAndSeedWaterDependentKnockback
                 tst.w   d0
-                beq.w   loc_10350
+                beq.w   SKCollision_SelectFatalContactSoundFromHazardCodeInterval
                 jsr     (AllocateObject).l
-                bne.s   loc_102DA
+                bne.s   SKCollision_StripShieldAndElementalShieldBitsBeforeHurt
                 move.l  #Obj_Bouncing_Ring,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  a0,$3E(a1)
 
-loc_102DA:
+SKCollision_StripShieldAndElementalShieldBitsBeforeHurt:
                 andi.b  #$8E,status_secondary(a0)
 
-loc_102E0:
+SKCollision_EnterHurtStateAndSeedWaterDependentKnockback:
                 move.b  #4,routine(a0)
                 jsr     (Player_TouchFloor).l
                 bset    #Status_InAir,status(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #-$200,x_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_10312
+                beq.s   SKCollision_OrientHurtHorizontalKnockbackAwayFromHazard
                 move.w  #-$200,y_vel(a0)
                 move.w  #-$100,x_vel(a0)
 
-loc_10312:
+SKCollision_OrientHurtHorizontalKnockbackAwayFromHazard:
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a2),d0
-                blo.s   loc_10320
+                blo.s   SKCollision_SetHurtAnimationTimerAndSelectSpikeIntervalSound
                 neg.w   x_vel(a0)
 
-loc_10320:
+SKCollision_SetHurtAnimationTimerAndSelectSpikeIntervalSound:
                 move.w  #0,ground_vel(a0)
                 move.b  #$1A,anim(a0)
                 move.b  #120,invulnerability_timer(a0)
                 moveq   #signextendB(sfx_Death),d0
                 cmpi.l  #Obj_Spikes,(a2)
-                blo.s   loc_10346
+                blo.s   SKCollision_PlayHurtSoundAndReturnMinusOne
                 cmpi.l  #HurtPlayerFromSolidHazard,(a2)
-                bhs.s   loc_10346
+                bhs.s   SKCollision_PlayHurtSoundAndReturnMinusOne
                 moveq   #signextendB(sfx_SpikeHit),d0
 
-loc_10346:
+SKCollision_PlayHurtSoundAndReturnMinusOne:
                 jsr     (Play_SFX).l
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10350:
+SKCollision_SelectFatalContactSoundFromHazardCodeInterval:
                 moveq   #signextendB(sfx_Death),d0
                 cmpi.l  #Obj_Spikes,(a2)
-                blo.s   loc_10364
+                blo.s   SKCollision_RouteRinglessFatalContactToDeathCommit
                 cmpi.l  #HurtPlayerFromSolidHazard,(a2)
-                bhs.s   loc_10364
+                bhs.s   SKCollision_RouteRinglessFatalContactToDeathCommit
                 moveq   #signextendB(sfx_SpikeHit),d0
 
-loc_10364:
-                bra.s   loc_1036E
+SKCollision_RouteRinglessFatalContactToDeathCommit:
+                bra.s   SKCollision_CommitDeathStateCleanupAndUpwardLaunch
 ; ---------------------------------------------------------------------------
 
 Kill_Character:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_103B6
+                bne.s   SKCollision_ReturnMinusOneAfterDeathOrDebugKillBypass
                 moveq   #signextendB(sfx_Death),d0
 
-loc_1036E:
+SKCollision_CommitDeathStateCleanupAndUpwardLaunch:
                 clr.b   status_secondary(a0)
                 clr.b   status_tertiary(a0)
                 move.b  #6,routine(a0)
@@ -561,7 +561,7 @@ loc_1036E:
                 bset    #7,art_tile(a0)
                 jsr     (Play_SFX).l
 
-loc_103B6:
+SKCollision_ReturnMinusOneAfterDeathOrDebugKillBypass:
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
@@ -570,27 +570,27 @@ Touch_Special:
                 move.b  collision_flags(a1),d1          ; Get collision_flags
                 andi.b  #$3F,d1                         ; Get only collision size (but that doesn't seems to be its use here)
                 cmpi.b  #7,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #6,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$A,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$C,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$15,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$16,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$17,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$18,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 cmpi.b  #$21,d1
-                beq.s   loc_103FA
+                beq.s   SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_103FA:
+SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity:
                 move.w  a0,d1                           ; Get RAM address of what object hit this
                 subi.w  #Object_RAM,d1
                 beq.s   .ismaincharacter                ; If the main character hit it, branch
@@ -619,7 +619,7 @@ Add_SpriteToCollisionResponseList:
 ShieldTouchResponse:
                 move.b  status_secondary(a0),d0
                 andi.b  #$71,d0                         ; Does the player have any shields?
-                beq.s   locret_1045C
+                beq.s   SKCollision_ReturnShieldTouchScanWithoutDeflection
                 move.w  x_pos(a0),d2                    ; Get player's x_pos
                 move.w  y_pos(a0),d3                    ; Get player's y_pos
                 subi.w  #$18,d2                         ; Subtract width of shield
@@ -628,7 +628,7 @@ ShieldTouchResponse:
                 move.w  #$30,d5                         ; Player's height
                 lea     (Collision_response_list).w,a4
                 move.w  (a4)+,d6                        ; Get number of objects queued
-                beq.s   locret_1045C                    ; If there are none, return
+                beq.s   SKCollision_ReturnShieldTouchScanWithoutDeflection  ; If there are none, return
 
 ShieldTouch_Loop:
                 movea.w (a4)+,a1                        ; Get address of first object's RAM
@@ -641,7 +641,7 @@ ShieldTouch_NextObj:
                 subq.w  #2,d6                           ; Count the object as done
                 bne.s   ShieldTouch_Loop                ; If there are still objects left, loop
 
-locret_1045C:
+SKCollision_ReturnShieldTouchScanWithoutDeflection:
                 rts
 ; ---------------------------------------------------------------------------
 

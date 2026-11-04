@@ -4,44 +4,44 @@
 Player_AnglePos:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_FFB8
+                beq.s   S3Collision_ChooseObjectStandingOrTerrainAngleAttachment
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_FFB8:
+S3Collision_ChooseObjectStandingOrTerrainAngleAttachment:
                 move.b  top_solid_bit(a0),d5
                 btst    #Status_OnObj,status(a0)
-                beq.s   loc_FFD0
+                beq.s   S3Collision_SeedUnknownAnglesAndRoundAttachmentQuadrant
                 moveq   #0,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_FFD0:
+S3Collision_SeedUnknownAnglesAndRoundAttachmentQuadrant:
                 moveq   #3,d0
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
-                bpl.s   loc_FFF2
+                bpl.s   S3Collision_AdjustOppositeAttachmentAngleBoundary
                 move.b  angle(a0),d0
-                bpl.s   loc_FFEC
+                bpl.s   S3Collision_ApplyTwentyBiasForAttachmentBoundary
                 subq.b  #1,d0
 
-loc_FFEC:
+S3Collision_ApplyTwentyBiasForAttachmentBoundary:
                 addi.b  #$20,d0
-                bra.s   loc_FFFE
+                bra.s   S3Collision_DispatchAttachmentAxisOrProbeBothFeet
 ; ---------------------------------------------------------------------------
 
-loc_FFF2:
+S3Collision_AdjustOppositeAttachmentAngleBoundary:
                 move.b  angle(a0),d0
-                bpl.s   loc_FFFA
+                bpl.s   S3Collision_ApplyOneLessThanQuadrantAttachmentBias
                 addq.b  #1,d0
 
-loc_FFFA:
+S3Collision_ApplyOneLessThanQuadrantAttachmentBias:
                 addi.b  #$1F,d0
 
-loc_FFFE:
+S3Collision_DispatchAttachmentAxisOrProbeBothFeet:
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
                 beq.w   Player_WalkVertL
@@ -80,39 +80,39 @@ loc_FFFE:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_10088
-                bpl.s   loc_1008A
+                beq.s   S3Collision_ReturnWithoutFurtherFloorAttachmentCorrection
+                bpl.s   S3Collision_GatePositiveFloorGapByConvexOrXSpeedByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_10088
+                blt.s   S3Collision_ReturnWithoutFurtherFloorAttachmentCorrection
                 add.w   d1,y_pos(a0)
 
-locret_10088:
+S3Collision_ReturnWithoutFurtherFloorAttachmentCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1008A:
+S3Collision_GatePositiveFloorGapByConvexOrXSpeedByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_100A8
+                bne.s   S3Collision_ApplyPositiveFloorAttachmentGap
                 move.b  x_vel(a0),d0
-                bpl.s   loc_10098
+                bpl.s   S3Collision_ComputeFloorGapAllowanceFromXVelocityHighByte
                 neg.b   d0
 
-loc_10098:
+S3Collision_ComputeFloorGapAllowanceFromXVelocityHighByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_100A4
+                blo.s   S3Collision_CompareFloorGapLowByteAgainstAllowance
                 move.b  #$E,d0
 
-loc_100A4:
+S3Collision_CompareFloorGapLowByteAgainstAllowance:
                 cmp.b   d0,d1
-                bgt.s   loc_100AE
+                bgt.s   S3Collision_DetachPlayerFromFloorAttachment
 
-loc_100A8:
+S3Collision_ApplyPositiveFloorAttachmentGap:
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_100AE:
+S3Collision_DetachPlayerFromFloorAttachment:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -125,27 +125,27 @@ Player_Angle:
                 move.w  d0,d3
                 move.b  (Secondary_Angle).w,d2
                 cmp.w   d0,d1
-                ble.s   loc_100D4
+                ble.s   S3Collision_ValidateSelectedTerrainAngleAgainstCurrentAngle
                 move.b  (Primary_Angle).w,d2
                 move.w  d1,d3
                 move.w  d0,d1
 
-loc_100D4:
+S3Collision_ValidateSelectedTerrainAngleAgainstCurrentAngle:
                 btst    #0,d2
-                bne.s   loc_100F0
+                bne.s   S3Collision_QuantizeCurrentAngleAfterInvalidTerrainAngle
                 move.b  d2,d0
                 sub.b   angle(a0),d0
-                bpl.s   loc_100E4
+                bpl.s   S3Collision_AcceptSmallTerrainAngleDifferenceOrQuantize
                 neg.b   d0
 
-loc_100E4:
+S3Collision_AcceptSmallTerrainAngleDifferenceOrQuantize:
                 cmpi.b  #$20,d0
-                bhs.s   loc_100F0
+                bhs.s   S3Collision_QuantizeCurrentAngleAfterInvalidTerrainAngle
                 move.b  d2,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_100F0:
+S3Collision_QuantizeCurrentAngleAfterInvalidTerrainAngle:
                 move.b  angle(a0),d2
                 addi.b  #$20,d2
                 andi.b  #$C0,d2
@@ -187,55 +187,55 @@ Player_WalkVertR:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_10176
-                bpl.s   loc_10198
+                beq.s   S3Collision_ReturnRightWallAttachmentWithoutFurtherCorrection
+                bpl.s   S3Collision_GatePositiveRightWallGapByConvexOrYSpeedByte
                 cmpi.w  #-$E,d1
-                blt.s   loc_10184
+                blt.s   S3Collision_ArmRightWallAngleHoldOnlyInFirstAct
                 tst.b   $41(a0)
-                bne.s   loc_10178
+                bne.s   S3Collision_ConsumeRightWallSpecialAngleHoldByte
                 add.w   d1,x_pos(a0)
 
-locret_10176:
+S3Collision_ReturnRightWallAttachmentWithoutFurtherCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10178:
+S3Collision_ConsumeRightWallSpecialAngleHoldByte:
                 subq.b  #1,$41(a0)
                 move.b  #$C0,angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10184:
+S3Collision_ArmRightWallAngleHoldOnlyInFirstAct:
                 tst.w   (Current_zone_and_act).w
-                bne.s   locret_10176
+                bne.s   S3Collision_ReturnRightWallAttachmentWithoutFurtherCorrection
                 move.b  #$C0,angle(a0)
                 move.b  #3,$41(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10198:
+S3Collision_GatePositiveRightWallGapByConvexOrYSpeedByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_101B6
+                bne.s   S3Collision_ApplyPositiveRightWallAttachmentGap
                 move.b  y_vel(a0),d0
-                bpl.s   loc_101A6
+                bpl.s   S3Collision_ComputeRightWallGapAllowanceFromYVelocityHighByte
                 neg.b   d0
 
-loc_101A6:
+S3Collision_ComputeRightWallGapAllowanceFromYVelocityHighByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_101B2
+                blo.s   S3Collision_CompareRightWallGapLowByteAgainstAllowance
                 move.b  #$E,d0
 
-loc_101B2:
+S3Collision_CompareRightWallGapLowByteAgainstAllowance:
                 cmp.b   d0,d1
-                bgt.s   loc_101BC
+                bgt.s   S3Collision_DetachPlayerFromRightWallAttachment
 
-loc_101B6:
+S3Collision_ApplyPositiveRightWallAttachmentGap:
                 add.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_101BC:
+S3Collision_DetachPlayerFromRightWallAttachment:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -275,39 +275,39 @@ Player_WalkCeiling:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_10244
-                bpl.s   loc_10246
+                beq.s   S3Collision_ReturnCeilingAttachmentWithoutFurtherCorrection
+                bpl.s   S3Collision_GatePositiveCeilingGapByConvexOrXSpeedByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_10244
+                blt.s   S3Collision_ReturnCeilingAttachmentWithoutFurtherCorrection
                 sub.w   d1,y_pos(a0)
 
-locret_10244:
+S3Collision_ReturnCeilingAttachmentWithoutFurtherCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10246:
+S3Collision_GatePositiveCeilingGapByConvexOrXSpeedByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_10264
+                bne.s   S3Collision_ApplyPositiveCeilingAttachmentGap
                 move.b  x_vel(a0),d0
-                bpl.s   loc_10254
+                bpl.s   S3Collision_ComputeCeilingGapAllowanceFromXVelocityHighByte
                 neg.b   d0
 
-loc_10254:
+S3Collision_ComputeCeilingGapAllowanceFromXVelocityHighByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_10260
+                blo.s   S3Collision_CompareCeilingGapLowByteAgainstAllowance
                 move.b  #$E,d0
 
-loc_10260:
+S3Collision_CompareCeilingGapLowByteAgainstAllowance:
                 cmp.b   d0,d1
-                bgt.s   loc_1026A
+                bgt.s   S3Collision_DetachPlayerFromCeilingAttachment
 
-loc_10264:
+S3Collision_ApplyPositiveCeilingAttachmentGap:
                 sub.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1026A:
+S3Collision_DetachPlayerFromCeilingAttachment:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
@@ -347,39 +347,39 @@ Player_WalkVertL:
                 move.w  (sp)+,d0
                 bsr.w   Player_Angle
                 tst.w   d1
-                beq.s   locret_102F2
-                bpl.s   loc_102F4
+                beq.s   S3Collision_ReturnLeftWallAttachmentWithoutFurtherCorrection
+                bpl.s   S3Collision_GatePositiveLeftWallGapByConvexOrYSpeedByte
                 cmpi.w  #-$E,d1
-                blt.s   locret_102F2
+                blt.s   S3Collision_ReturnLeftWallAttachmentWithoutFurtherCorrection
                 sub.w   d1,x_pos(a0)
 
-locret_102F2:
+S3Collision_ReturnLeftWallAttachmentWithoutFurtherCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_102F4:
+S3Collision_GatePositiveLeftWallGapByConvexOrYSpeedByte:
                 tst.b   stick_to_convex(a0)
-                bne.s   loc_10312
+                bne.s   S3Collision_ApplyPositiveLeftWallAttachmentGap
                 move.b  y_vel(a0),d0
-                bpl.s   loc_10302
+                bpl.s   S3Collision_ComputeLeftWallGapAllowanceFromYVelocityHighByte
                 neg.b   d0
 
-loc_10302:
+S3Collision_ComputeLeftWallGapAllowanceFromYVelocityHighByte:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_1030E
+                blo.s   S3Collision_CompareLeftWallGapLowByteAgainstAllowance
                 move.b  #$E,d0
 
-loc_1030E:
+S3Collision_CompareLeftWallGapLowByteAgainstAllowance:
                 cmp.b   d0,d1
-                bgt.s   loc_10318
+                bgt.s   S3Collision_DetachPlayerFromLeftWallAttachment
 
-loc_10312:
+S3Collision_ApplyPositiveLeftWallAttachmentGap:
                 sub.w   d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10318:
+S3Collision_DetachPlayerFromLeftWallAttachment:
                 bset    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)

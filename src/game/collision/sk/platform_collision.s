@@ -6,35 +6,35 @@
 
 SolidObjSloped:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_1E280
+                beq.s   SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E23E
+                beq.s   SKCollision_RouteFullResolutionSlopedRiderToHeightSample
                 not.w   d0
                 add.w   d1,d0
                 add.w   d1,d0
 
-loc_1E23E:
-                bra.s   loc_1E260
+SKCollision_RouteFullResolutionSlopedRiderToHeightSample:
+                bra.s   SKCollision_SnapSlopedRiderAndCarryHorizontalDelta
 ; End of function SolidObjSloped
 
 ; =============== S U B R O U T I N E =======================================
 
 SolidObjSloped2:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_1E280
+                beq.s   SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 lsr.w   #1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E260
+                beq.s   SKCollision_SnapSlopedRiderAndCarryHorizontalDelta
                 not.w   d0
                 add.w   d1,d0
 
-loc_1E260:
+SKCollision_SnapSlopedRiderAndCarryHorizontalDelta:
                 move.b  (a2,d0.w),d1
                 ext.w   d1
                 move.w  y_pos(a0),d0
@@ -46,7 +46,7 @@ loc_1E260:
                 sub.w   x_pos(a0),d2
                 sub.w   d2,x_pos(a1)
 
-locret_1E280:
+SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag:
                 rts
 ; End of function SolidObjSloped2
 
@@ -54,18 +54,18 @@ locret_1E280:
 
 SolidObjSloped4:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_1E280
+                beq.s   SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E2A0
+                beq.s   SKCollision_AlignDualProfileRiderIndexToEvenByte
                 not.w   d0
                 add.w   d1,d0
 
-loc_1E2A0:
+SKCollision_AlignDualProfileRiderIndexToEvenByte:
                 andi.w  #$FFFE,d0
-                bra.s   loc_1E260
+                bra.s   SKCollision_SnapSlopedRiderAndCarryHorizontalDelta
 ; End of function SolidObjSloped4
 
 ; =============== S U B R O U T I N E =======================================
@@ -84,19 +84,19 @@ SolidObjectTop:
 
 SolidObjectTop_1P:
                 btst    d6,status(a0)
-                beq.w   loc_1E42E
+                beq.w   SKCollision_TestNewFlatTopLandingVelocityAndHorizontalSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1E2E0
+                bne.s   SKCollision_DetachFlatTopRiderAndMarkAirborne
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1E2E0
+                bmi.s   SKCollision_DetachFlatTopRiderAndMarkAirborne
                 cmp.w   d2,d0
-                blo.s   loc_1E2F4
+                blo.s   SKCollision_CarryExistingFlatTopRider
 
-loc_1E2E0:
+SKCollision_DetachFlatTopRiderAndMarkAirborne:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -104,7 +104,7 @@ loc_1E2E0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E2F4:
+SKCollision_CarryExistingFlatTopRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -131,15 +131,15 @@ SolidObjectTopSloped2_1P:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1E338
+                bne.s   SKCollision_DetachHalfResolutionSlopeRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1E338
+                bmi.s   SKCollision_DetachHalfResolutionSlopeRider
                 cmp.w   d2,d0
-                blo.s   loc_1E34C
+                blo.s   SKCollision_MoveExistingHalfResolutionSlopeRider
 
-loc_1E338:
+SKCollision_DetachHalfResolutionSlopeRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -147,7 +147,7 @@ loc_1E338:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E34C:
+SKCollision_MoveExistingHalfResolutionSlopeRider:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 moveq   #0,d4
@@ -174,15 +174,15 @@ SolidObjectTopSloped_1P:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1E390
+                bne.s   SKCollision_DetachFullResolutionSlopeRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1E390
+                bmi.s   SKCollision_DetachFullResolutionSlopeRider
                 cmp.w   d2,d0
-                blo.s   loc_1E3A4
+                blo.s   SKCollision_MoveExistingFullResolutionSlopeRider
 
-loc_1E390:
+SKCollision_DetachFullResolutionSlopeRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -190,7 +190,7 @@ loc_1E390:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E3A4:
+SKCollision_MoveExistingFullResolutionSlopeRider:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped
                 moveq   #0,d4
@@ -211,35 +211,35 @@ loc_1E3A4:
 
 CollidePlayerWithUnclaimedFlatPlatform:
                 btst    d6,status(a0)
-                bne.s   loc_1E3D6
+                bne.s   SKCollision_ValidateExistingRiderInUnclaimedFlatVariant
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_1E402
-                bra.w   loc_1E42E
+                bne.s   SKCollision_ReturnUnclaimedFlatVariantWithoutReportedCollision
+                bra.w   SKCollision_TestNewFlatTopLandingVelocityAndHorizontalSpan
 ; ---------------------------------------------------------------------------
 
-loc_1E3D6:
+SKCollision_ValidateExistingRiderInUnclaimedFlatVariant:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1E3F2
+                bne.s   SKCollision_DetachUnclaimedFlatVariantRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1E3F2
+                bmi.s   SKCollision_DetachUnclaimedFlatVariantRider
                 cmp.w   d2,d0
-                blo.s   loc_1E406
+                blo.s   SKCollision_CarryUnclaimedFlatVariantExistingRider
 
-loc_1E3F2:
+SKCollision_DetachUnclaimedFlatVariantRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
 
-loc_1E402:
+SKCollision_ReturnUnclaimedFlatVariantWithoutReportedCollision:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E406:
+SKCollision_CarryUnclaimedFlatVariantExistingRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -250,47 +250,47 @@ loc_1E406:
 
 TryLandPlayerOnPlatformSpan:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 cmp.w   d2,d0
-                bhs.w   locret_1E4D4
-                bra.s   loc_1E44C
+                bhs.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
+                bra.s   SKCollision_SelectNormalOrReverseGravityFlatTopSurface
 ; ---------------------------------------------------------------------------
 
-loc_1E42E:
+SKCollision_TestNewFlatTopLandingVelocityAndHorizontalSpan:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.w   locret_1E4D4
+                bhs.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
 
-loc_1E44C:
+SKCollision_SelectNormalOrReverseGravityFlatTopSurface:
                 tst.b   (Reverse_gravity_flag).w
-                bne.w   loc_1E4D6
+                bne.w   SKCollision_LandOnReverseGravityFlatSurface
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
 
-loc_1E45A:
+SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow:
                 move.w  y_pos(a1),d2
                 move.b  y_radius(a1),d1
                 ext.w   d1
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.w   locret_1E4D4
+                bhi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 cmpi.w  #-$10,d0
-                blo.w   locret_1E4D4
+                blo.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 tst.b   object_control(a1)
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 cmpi.b  #6,routine(a1)
-                bhs.w   locret_1E4D4
+                bhs.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 add.w   d0,d2
                 addq.w  #3,d2
                 move.w  d2,y_pos(a1)
@@ -300,11 +300,11 @@ loc_1E45A:
 
 RideObject_SetRide:
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_1E4A0
+                beq.s   SKCollision_InstallRidePointerAndConditionalCharacterLandingCleanup
                 movea.w interact(a1),a3
                 bclr    d6,status(a3)
 
-loc_1E4A0:
+SKCollision_InstallRidePointerAndConditionalCharacterLandingCleanup:
                 move.w  a0,interact(a1)
                 move.b  #0,angle(a1)
                 move.w  #0,y_vel(a1)
@@ -312,19 +312,19 @@ loc_1E4A0:
                 bset    #Status_OnObj,status(a1)
                 bset    d6,status(a0)
                 bclr    #Status_InAir,status(a1)
-                beq.s   locret_1E4D4
+                beq.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 jsr     (Player_TouchFloor).l
                 movea.l (sp)+,a0
 
-locret_1E4D4:
+SKCollision_ReturnPlatformLandingOrRejectedProbe:
                 rts
 ; End of function RideObject_SetRide
 
 ; ---------------------------------------------------------------------------
 
-loc_1E4D6:
+SKCollision_LandOnReverseGravityFlatSurface:
                 move.w  y_pos(a0),d0
                 add.w   d3,d0
                 move.w  y_pos(a1),d2
@@ -334,13 +334,13 @@ loc_1E4D6:
                 add.w   d2,d1
                 subq.w  #4,d1
                 sub.w   d0,d1
-                bhi.s   locret_1E4D4
+                bhi.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 cmpi.w  #-$10,d1
-                blo.s   locret_1E4D4
+                blo.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 tst.b   object_control(a1)
-                bmi.s   locret_1E4D4
+                bmi.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_1E4D4
+                bhs.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 sub.w   d1,d2
                 subq.w  #4,d2
                 move.w  d2,y_pos(a1)
@@ -349,83 +349,83 @@ loc_1E4D6:
 
 SolidObjCheckSloped2:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_1E4D4
+                bmi.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.s   locret_1E4D4
+                bhs.s   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E534
+                beq.s   SKCollision_SampleHalfResolutionNewSlopeSurface
                 not.w   d0
                 add.w   d1,d0
 
-loc_1E534:
+SKCollision_SampleHalfResolutionNewSlopeSurface:
                 lsr.w   #1,d0
                 move.b  (a2,d0.w),d3
                 ext.w   d3
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                bra.w   loc_1E45A
+                bra.w   SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow
 ; ---------------------------------------------------------------------------
 
 SolidObjCheckSloped:
                 tst.w   y_vel(a1)
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   locret_1E4D4
+                bmi.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 add.w   d1,d1
                 cmp.w   d1,d0
-                bhs.w   locret_1E4D4
+                bhs.w   SKCollision_ReturnPlatformLandingOrRejectedProbe
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E570
+                beq.s   SKCollision_SampleFullResolutionNewSlopeSurface
                 not.w   d0
                 add.w   d1,d0
 
-loc_1E570:
+SKCollision_SampleFullResolutionNewSlopeSurface:
                 move.b  (a2,d0.w),d3
                 ext.w   d3
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                bra.w   loc_1E45A
+                bra.w   SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow
 
 ; =============== S U B R O U T I N E =======================================
 
 CheckPlayerReleaseFromObj:
                 lea     (Player_1).w,a1
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_1E5AE
+                beq.s   SKCollision_TestPlayerTwoRiderAgainstTerrainForRelease
                 jsr     (SonicOnObjHitFloor).l
                 tst.w   d1
-                beq.s   loc_1E598
-                bpl.s   loc_1E5AE
+                beq.s   SKCollision_ReleasePlayerOneRiderWhenTerrainDistanceNonpositive
+                bpl.s   SKCollision_TestPlayerTwoRiderAgainstTerrainForRelease
 
-loc_1E598:
+SKCollision_ReleasePlayerOneRiderWhenTerrainDistanceNonpositive:
                 lea     (Player_1).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #p1_standing_bit,status(a0)
 
-loc_1E5AE:
+SKCollision_TestPlayerTwoRiderAgainstTerrainForRelease:
                 lea     (Player_2).w,a1
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_1E5DC
+                beq.s   SKCollision_ReturnRiderReleaseCheckWithZeroD4
                 jsr     (SonicOnObjHitFloor).l
                 tst.w   d1
-                beq.s   loc_1E5C6
-                bpl.s   loc_1E5DC
+                beq.s   SKCollision_ReleasePlayerTwoRiderWhenTerrainDistanceNonpositive
+                bpl.s   SKCollision_ReturnRiderReleaseCheckWithZeroD4
 
-loc_1E5C6:
+SKCollision_ReleasePlayerTwoRiderWhenTerrainDistanceNonpositive:
                 lea     (Player_2).w,a1
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    #p2_standing_bit,status(a0)
 
-loc_1E5DC:
+SKCollision_ReturnRiderReleaseCheckWithZeroD4:
                 moveq   #0,d4
                 rts
 ; End of function CheckPlayerReleaseFromObj

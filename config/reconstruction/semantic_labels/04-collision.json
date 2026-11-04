@@ -1,0 +1,4123 @@
+{
+  "schema_version": 1,
+  "packet": "04-collision",
+  "mappings": [
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 19,
+      "old": "loc_10A9E",
+      "new": "S3Collision_DispatchOverheadProbeFromRoundedSpineAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DispatchOverheadProbeFromRoundedSpineAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 45,
+      "old": "loc_10ADE",
+      "new": "S3Collision_ProbeBothFeetUsingTopSolidity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeBothFeetUsingTopSolidity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 77,
+      "old": "loc_10B3E",
+      "new": "S3Collision_SelectSmallerPairedClearanceAndItsAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SelectSmallerPairedClearanceAndItsAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 84,
+      "old": "loc_10B4C",
+      "new": "S3Collision_ReplaceOddPairedClearanceAngleWithAxis",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReplaceOddPairedClearanceAngleWithAxis from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 89,
+      "old": "locret_10B54",
+      "new": "S3Collision_ReturnPairedClearanceDistanceAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnPairedClearanceDistanceAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 118,
+      "old": "loc_10B76",
+      "new": "S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 124,
+      "old": "locret_10B82",
+      "new": "S3Collision_ReturnPrimaryClearanceDistanceAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnPrimaryClearanceDistanceAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 152,
+      "old": "loc_10BC0",
+      "new": "S3Collision_ProbeBodyFloorUsingSideSolidity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeBodyFloorUsingSideSolidity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 166,
+      "old": "locret_10BEE",
+      "new": "S3Collision_ReturnBodyFloorClearanceAfterAddressRestore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnBodyFloorClearanceAfterAddressRestore from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 188,
+      "old": "loc_10C16",
+      "new": "S3Collision_ProbeFloorEdgeUsingTopSolidity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeFloorEdgeUsingTopSolidity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 202,
+      "old": "locret_10C44",
+      "new": "S3Collision_ReturnFloorEdgeProbeAfterAddressRestore",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFloorEdgeProbeAfterAddressRestore from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 220,
+      "old": "loc_10C6C",
+      "new": "S3Collision_ProbeA1RiderFeetUsingTopSolidity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeA1RiderFeetUsingTopSolidity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 232,
+      "old": "locret_10C92",
+      "new": "S3Collision_ReturnA1RiderFloorDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnA1RiderFloorDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "original_line": 262,
+      "old": "locret_10CC8",
+      "new": "S3Collision_ReturnObjectFloorDistanceAndFilteredAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnObjectFloorDistanceAndFilteredAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 96,
+      "old": "locret_105D8",
+      "new": "S3Collision_ReturnSelectedForegroundOrBackgroundFloorDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnSelectedForegroundOrBackgroundFloorDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 111,
+      "old": "loc_105EA",
+      "new": "S3Collision_SampleForwardFloorNeighborForMissingShape",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleForwardFloorNeighborForMissingShape from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 119,
+      "old": "loc_105F8",
+      "new": "S3Collision_LoadNeighborAwareFloorShapeAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_LoadNeighborAwareFloorShapeAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 133,
+      "old": "loc_1061C",
+      "new": "S3Collision_TransformNeighborAwareFloorAngleForYFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TransformNeighborAwareFloorAngleForYFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 140,
+      "old": "loc_1062C",
+      "new": "S3Collision_ReadNeighborAwareFloorHeightWithEffectiveFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReadNeighborAwareFloorHeightWithEffectiveFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 151,
+      "old": "loc_10648",
+      "new": "S3Collision_ResolveNeighborAwareFloorHeightCase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveNeighborAwareFloorHeightCase from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 165,
+      "old": "loc_10664",
+      "new": "S3Collision_TestNegativeFloorProfileAgainstYFraction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestNegativeFloorProfileAgainstYFraction from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 171,
+      "old": "loc_10670",
+      "new": "S3Collision_SampleBackwardFloorNeighborAndSubtractBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleBackwardFloorNeighborAndSubtractBlock from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 190,
+      "old": "loc_1068E",
+      "new": "S3Collision_ReturnSingleBlockFloorEmptyDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnSingleBlockFloorEmptyDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 198,
+      "old": "loc_1069C",
+      "new": "S3Collision_LoadSingleBlockFloorShapeAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_LoadSingleBlockFloorShapeAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 212,
+      "old": "loc_106C0",
+      "new": "S3Collision_TransformSingleBlockFloorAngleForYFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TransformSingleBlockFloorAngleForYFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 219,
+      "old": "loc_106D0",
+      "new": "S3Collision_ReadSingleBlockFloorHeightWithEffectiveFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReadSingleBlockFloorHeightWithEffectiveFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 230,
+      "old": "loc_106EC",
+      "new": "S3Collision_ResolveSingleBlockFloorHeightCase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveSingleBlockFloorHeightCase from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 242,
+      "old": "loc_10702",
+      "new": "S3Collision_ReturnOrRejectNegativeSingleBlockFloorProfile",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnOrRejectNegativeSingleBlockFloorProfile from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 272,
+      "old": "locret_1074A",
+      "new": "S3Collision_ReturnSelectedRingFloorLayerDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnSelectedRingFloorLayerDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 286,
+      "old": "loc_1075C",
+      "new": "S3Collision_ReturnRingFloorMissingShapeSentinel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnRingFloorMissingShapeSentinel from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 291,
+      "old": "loc_10762",
+      "new": "S3Collision_LoadRingFloorShapeAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_LoadRingFloorShapeAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 305,
+      "old": "loc_10786",
+      "new": "S3Collision_TransformRingFloorAngleForYFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TransformRingFloorAngleForYFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 312,
+      "old": "loc_10796",
+      "new": "S3Collision_ReadRingFloorHeightWithEffectiveFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReadRingFloorHeightWithEffectiveFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 323,
+      "old": "loc_107B2",
+      "new": "S3Collision_ResolveRingFloorHeightCase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveRingFloorHeightCase from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 337,
+      "old": "loc_107CE",
+      "new": "S3Collision_TestNegativeRingFloorProfileAgainstYFraction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestNegativeRingFloorProfileAgainstYFraction from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "original_line": 343,
+      "old": "loc_107DA",
+      "new": "S3Collision_SampleBackwardBlockForRingFloor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleBackwardBlockForRingFloor from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 78,
+      "old": "locret_111F6",
+      "new": "S3Collision_ReturnFromEmptyOrExhaustedTouchQueue",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFromEmptyOrExhaustedTouchQueue from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 399,
+      "old": "loc_114CC",
+      "new": "S3Collision_ApplyShieldRingOrTertiaryHurtResourceGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyShieldRingOrTertiaryHurtResourceGate from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 413,
+      "old": "loc_114FE",
+      "new": "S3Collision_MaskSecondaryPowerBitsBeforeHurt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_MaskSecondaryPowerBitsBeforeHurt from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 416,
+      "old": "loc_11504",
+      "new": "S3Collision_EnterHurtAndChooseWaterKnockback",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_EnterHurtAndChooseWaterKnockback from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 427,
+      "old": "loc_11536",
+      "new": "S3Collision_ChooseHurtHorizontalDirectionFromSourceX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseHurtHorizontalDirectionFromSourceX from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 433,
+      "old": "loc_11544",
+      "new": "S3Collision_CommitHurtAnimationTimerSoundAndFailureValue",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CommitHurtAnimationTimerSoundAndFailureValue from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 459,
+      "old": "loc_115A8",
+      "new": "S3Collision_ReturnDeathFailureValueIncludingPlacementBypass",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnDeathFailureValueIncludingPlacementBypass from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 488,
+      "old": "loc_115EC",
+      "new": "S3Collision_IncrementSpecialContactPropertyByActorWordOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_IncrementSpecialContactPropertyByActorWordOffset from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "original_line": 539,
+      "old": "locret_1164E",
+      "new": "S3Collision_ReturnFromShieldContactFilterOrExhaustedQueue",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFromShieldContactFilterOrExhaustedQueue from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 19,
+      "old": "loc_1BF66",
+      "new": "S3Collision_SnapStandingRiderToIndexedSlopeAndCarryX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SnapStandingRiderToIndexedSlopeAndCarryX from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 31,
+      "old": "locret_1BF86",
+      "new": "S3Collision_ReturnFromStandingSlopeCarry",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFromStandingSlopeCarry from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 48,
+      "old": "loc_1BFA6",
+      "new": "S3Collision_AlignFullResolutionSlopeSampleToEvenByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AlignFullResolutionSlopeSampleToEvenByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 81,
+      "old": "loc_1BFE6",
+      "new": "S3Collision_ReleaseFlatTopRiderOutsideSpanOrInAir",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseFlatTopRiderOutsideSpanOrInAir from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 89,
+      "old": "loc_1BFFA",
+      "new": "S3Collision_CarryExistingFlatTopRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryExistingFlatTopRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 124,
+      "old": "loc_1C03E",
+      "new": "S3Collision_ReleaseIndexedSlopeRiderOutsideSpanOrInAir",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseIndexedSlopeRiderOutsideSpanOrInAir from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 132,
+      "old": "loc_1C052",
+      "new": "S3Collision_CarryExistingIndexedSlopeRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryExistingIndexedSlopeRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 161,
+      "old": "loc_1C084",
+      "new": "S3Collision_ValidateExistingSlopedTopRiderSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ValidateExistingSlopedTopRiderSpan from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 173,
+      "old": "loc_1C0A0",
+      "new": "S3Collision_ReleaseSlopedTopRiderFlags",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseSlopedTopRiderFlags from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 178,
+      "old": "loc_1C0B0",
+      "new": "S3Collision_ReturnNoNewPlatformContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnNoNewPlatformContact from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 183,
+      "old": "loc_1C0B4",
+      "new": "S3Collision_CarryExistingSlopedTopRiderWithoutSlopeLookup",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryExistingSlopedTopRiderWithoutSlopeLookup from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 204,
+      "old": "loc_1C0DC",
+      "new": "S3Collision_TestNewFlatTopLandingHorizontalSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestNewFlatTopLandingHorizontalSpan from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 215,
+      "old": "loc_1C0FA",
+      "new": "S3Collision_ComputePlatformTopForLanding",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ComputePlatformTopForLanding from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 219,
+      "old": "loc_1C100",
+      "new": "S3Collision_TestPlatformLandingWindowAndSnapRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestPlatformLandingWindowAndSnapRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 246,
+      "old": "loc_1C146",
+      "new": "S3Collision_BindRiderHandleAndStandingFlags",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_BindRiderHandleAndStandingFlags from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 260,
+      "old": "locret_1C17A",
+      "new": "S3Collision_ReturnFromPlatformLandingOrRejectedContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFromPlatformLandingOrRejectedContact from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 281,
+      "old": "loc_1C1A2",
+      "new": "S3Collision_SampleHalfResolutionSlopeForNewLanding",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleHalfResolutionSlopeForNewLanding from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 300,
+      "old": "loc_1C1CC",
+      "new": "S3Collision_ReleasePrimaryRiderForNonpositiveTerrainGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleasePrimaryRiderForNonpositiveTerrainGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 306,
+      "old": "loc_1C1E2",
+      "new": "S3Collision_CheckSecondaryRiderForTerrainRelease",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CheckSecondaryRiderForTerrainRelease from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 315,
+      "old": "loc_1C1FA",
+      "new": "S3Collision_ReleaseSecondaryRiderForNonpositiveTerrainGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseSecondaryRiderForNonpositiveTerrainGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "original_line": 321,
+      "old": "loc_1C210",
+      "new": "S3Collision_ReturnAfterBothRiderReleaseChecks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnAfterBothRiderReleaseChecks from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 35,
+      "old": "loc_1BA4E",
+      "new": "S3Collision_ReleaseFullRectangleRiderOutsideSpanOrInAir",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseFullRectangleRiderOutsideSpanOrInAir from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 43,
+      "old": "loc_1BA62",
+      "new": "S3Collision_CarryExistingFullRectangleRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryExistingFullRectangleRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 48,
+      "old": "locret_1BA6A",
+      "new": "S3Collision_ReturnFromFullSolidOrInvisibleSecondaryGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnFromFullSolidOrInvisibleSecondaryGate from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 80,
+      "old": "loc_1BAA6",
+      "new": "S3Collision_ReleaseFullSolidSecondVariantRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseFullSolidSecondVariantRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 88,
+      "old": "loc_1BABA",
+      "new": "S3Collision_CarryFullSolidSecondVariantRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryFullSolidSecondVariantRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 123,
+      "old": "loc_1BAFE",
+      "new": "S3Collision_ReleaseHeightProfileRiderOutsideSpanOrInAir",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseHeightProfileRiderOutsideSpanOrInAir from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 131,
+      "old": "loc_1BB12",
+      "new": "S3Collision_CarryHeightProfileRiderAndMarkStandingResult",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryHeightProfileRiderAndMarkStandingResult from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 168,
+      "old": "loc_1BB5E",
+      "new": "S3Collision_ReleaseDualHeightProfileRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseDualHeightProfileRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 176,
+      "old": "loc_1BB72",
+      "new": "S3Collision_CarryDualHeightProfileRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryDualHeightProfileRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 211,
+      "old": "loc_1BBB6",
+      "new": "S3Collision_ReleaseHeightProfileRiderWithoutSettingAir",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseHeightProfileRiderWithoutSettingAir from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 218,
+      "old": "loc_1BBC4",
+      "new": "S3Collision_CarryKeepAirHeightProfileAndMarkResult",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryKeepAirHeightProfileAndMarkResult from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 255,
+      "old": "loc_1BC0E",
+      "new": "S3Collision_ReleaseOffsetRectangleRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReleaseOffsetRectangleRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 263,
+      "old": "loc_1BC22",
+      "new": "S3Collision_SnapOffsetRectangleRiderAndCarryX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SnapOffsetRectangleRiderAndCarryX from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 277,
+      "old": "loc_1BC42",
+      "new": "S3Collision_TestUnboundOffsetRectangleOverlap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestUnboundOffsetRectangleOverlap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 303,
+      "old": "loc_1BC84",
+      "new": "S3Collision_TestUnboundHeightProfileHorizontalSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestUnboundHeightProfileHorizontalSpan from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 318,
+      "old": "loc_1BCAA",
+      "new": "S3Collision_BuildOverlapFromRelativeHeightProfileDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_BuildOverlapFromRelativeHeightProfileDelta from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 340,
+      "old": "loc_1BCDE",
+      "new": "S3Collision_TestUnboundDualHeightProfileSpan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestUnboundDualHeightProfileSpan from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 355,
+      "old": "loc_1BD04",
+      "new": "S3Collision_BuildOverlapFromTwoAdjacentHeightBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_BuildOverlapFromTwoAdjacentHeightBytes from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 378,
+      "old": "loc_1BD3E",
+      "new": "S3Collision_RequireVisibleObjectForFirstFullSolidVariant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_RequireVisibleObjectForFirstFullSolidVariant from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 407,
+      "old": "loc_1BD8A",
+      "new": "S3Collision_ChooseHorizontalAndVerticalResolutionDepths",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseHorizontalAndVerticalResolutionDepths from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 422,
+      "old": "loc_1BDB2",
+      "new": "S3Collision_ChooseVerticalCorrectionAndMagnitude",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseVerticalCorrectionAndMagnitude from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 431,
+      "old": "loc_1BDC0",
+      "new": "S3Collision_ChooseResolutionAxisByPenetrationMagnitude",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseResolutionAxisByPenetrationMagnitude from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 435,
+      "old": "loc_1BDC6",
+      "new": "S3Collision_ResolveSideContactVelocityDirection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveSideContactVelocityDirection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 446,
+      "old": "loc_1BDDC",
+      "new": "S3Collision_CheckNegativeSideContactVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CheckNegativeSideContactVelocity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 450,
+      "old": "loc_1BDE2",
+      "new": "S3Collision_StopHorizontalMotionForBlockingSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_StopHorizontalMotionForBlockingSide from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 457,
+      "old": "loc_1BDFA",
+      "new": "S3Collision_CorrectHorizontalOverlapAndSetSideResult",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CorrectHorizontalOverlapAndSetSideResult from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 472,
+      "old": "loc_1BE20",
+      "new": "S3Collision_ClearAirbornePushAndMarkSideContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ClearAirbornePushAndMarkSideContact from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 481,
+      "old": "loc_1BE2E",
+      "new": "S3Collision_CleanUpPriorPushWhenNoSolidOverlap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CleanUpPriorPushWhenNoSolidOverlap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 499,
+      "old": "loc_1BE54",
+      "new": "S3Collision_ReturnNoSolidResolutionResult",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnNoSolidResolutionResult from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 506,
+      "old": "loc_1BE58",
+      "new": "S3Collision_SelectUndersideOrShallowTopResolution",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SelectUndersideOrShallowTopResolution from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 514,
+      "old": "loc_1BE64",
+      "new": "S3Collision_ResolveUndersideByAirAndVerticalVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveUndersideByAirAndVerticalVelocity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 525,
+      "old": "loc_1BE7A",
+      "new": "S3Collision_ZeroGroundSpeedBeforeAirborneUndersideCorrection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ZeroGroundSpeedBeforeAirborneUndersideCorrection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 528,
+      "old": "loc_1BE80",
+      "new": "S3Collision_CorrectUndersideYAndStopVerticalVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CorrectUndersideYAndStopVerticalVelocity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 532,
+      "old": "loc_1BE8A",
+      "new": "S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 537,
+      "old": "loc_1BE96",
+      "new": "S3Collision_ReturnUndersideContactResult",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnUndersideContactResult from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 545,
+      "old": "loc_1BEA2",
+      "new": "S3Collision_MeasureHorizontalDepthForGroundedCrush",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_MeasureHorizontalDepthForGroundedCrush from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 552,
+      "old": "loc_1BEB0",
+      "new": "S3Collision_ChooseShallowSideOrInvokeCrushDeath",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseShallowSideOrInvokeCrushDeath from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 566,
+      "old": "loc_1BED0",
+      "new": "S3Collision_ResolveShallowTopOverlapAndAttachDescendingRider",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveShallowTopOverlapAndAttachDescendingRider from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 589,
+      "old": "loc_1BF08",
+      "new": "S3Collision_ReturnRejectedOrAscendingTopContact",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnRejectedOrAscendingTopContact from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 604,
+      "old": "loc_1BF1C",
+      "new": "S3Collision_CarryRiderAtPreparedPlatformTop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CarryRiderAtPreparedPlatformTop from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "original_line": 618,
+      "old": "locret_1BF44",
+      "new": "S3Collision_ReturnMovingPlatformCarryOrRefusal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnMovingPlatformCarryOrRefusal from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 10,
+      "old": "loc_FFB8",
+      "new": "S3Collision_ChooseObjectStandingOrTerrainAngleAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ChooseObjectStandingOrTerrainAngleAttachment from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 20,
+      "old": "loc_FFD0",
+      "new": "S3Collision_SeedUnknownAnglesAndRoundAttachmentQuadrant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SeedUnknownAnglesAndRoundAttachmentQuadrant from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 31,
+      "old": "loc_FFEC",
+      "new": "S3Collision_ApplyTwentyBiasForAttachmentBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyTwentyBiasForAttachmentBoundary from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 36,
+      "old": "loc_FFF2",
+      "new": "S3Collision_AdjustOppositeAttachmentAngleBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AdjustOppositeAttachmentAngleBoundary from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 41,
+      "old": "loc_FFFA",
+      "new": "S3Collision_ApplyOneLessThanQuadrantAttachmentBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyOneLessThanQuadrantAttachmentBias from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 44,
+      "old": "loc_FFFE",
+      "new": "S3Collision_DispatchAttachmentAxisOrProbeBothFeet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DispatchAttachmentAxisOrProbeBothFeet from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 89,
+      "old": "locret_10088",
+      "new": "S3Collision_ReturnWithoutFurtherFloorAttachmentCorrection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnWithoutFurtherFloorAttachmentCorrection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 93,
+      "old": "loc_1008A",
+      "new": "S3Collision_GatePositiveFloorGapByConvexOrXSpeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_GatePositiveFloorGapByConvexOrXSpeedByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 100,
+      "old": "loc_10098",
+      "new": "S3Collision_ComputeFloorGapAllowanceFromXVelocityHighByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ComputeFloorGapAllowanceFromXVelocityHighByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 106,
+      "old": "loc_100A4",
+      "new": "S3Collision_CompareFloorGapLowByteAgainstAllowance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CompareFloorGapLowByteAgainstAllowance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 110,
+      "old": "loc_100A8",
+      "new": "S3Collision_ApplyPositiveFloorAttachmentGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyPositiveFloorAttachmentGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 115,
+      "old": "loc_100AE",
+      "new": "S3Collision_DetachPlayerFromFloorAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DetachPlayerFromFloorAttachment from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 133,
+      "old": "loc_100D4",
+      "new": "S3Collision_ValidateSelectedTerrainAngleAgainstCurrentAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ValidateSelectedTerrainAngleAgainstCurrentAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 141,
+      "old": "loc_100E4",
+      "new": "S3Collision_AcceptSmallTerrainAngleDifferenceOrQuantize",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AcceptSmallTerrainAngleDifferenceOrQuantize from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 148,
+      "old": "loc_100F0",
+      "new": "S3Collision_QuantizeCurrentAngleAfterInvalidTerrainAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_QuantizeCurrentAngleAfterInvalidTerrainAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 198,
+      "old": "locret_10176",
+      "new": "S3Collision_ReturnRightWallAttachmentWithoutFurtherCorrection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnRightWallAttachmentWithoutFurtherCorrection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 202,
+      "old": "loc_10178",
+      "new": "S3Collision_ConsumeRightWallSpecialAngleHoldByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ConsumeRightWallSpecialAngleHoldByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 208,
+      "old": "loc_10184",
+      "new": "S3Collision_ArmRightWallAngleHoldOnlyInFirstAct",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ArmRightWallAngleHoldOnlyInFirstAct from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 216,
+      "old": "loc_10198",
+      "new": "S3Collision_GatePositiveRightWallGapByConvexOrYSpeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_GatePositiveRightWallGapByConvexOrYSpeedByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 223,
+      "old": "loc_101A6",
+      "new": "S3Collision_ComputeRightWallGapAllowanceFromYVelocityHighByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ComputeRightWallGapAllowanceFromYVelocityHighByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 229,
+      "old": "loc_101B2",
+      "new": "S3Collision_CompareRightWallGapLowByteAgainstAllowance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CompareRightWallGapLowByteAgainstAllowance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 233,
+      "old": "loc_101B6",
+      "new": "S3Collision_ApplyPositiveRightWallAttachmentGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyPositiveRightWallAttachmentGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 238,
+      "old": "loc_101BC",
+      "new": "S3Collision_DetachPlayerFromRightWallAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DetachPlayerFromRightWallAttachment from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 284,
+      "old": "locret_10244",
+      "new": "S3Collision_ReturnCeilingAttachmentWithoutFurtherCorrection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnCeilingAttachmentWithoutFurtherCorrection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 288,
+      "old": "loc_10246",
+      "new": "S3Collision_GatePositiveCeilingGapByConvexOrXSpeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_GatePositiveCeilingGapByConvexOrXSpeedByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 295,
+      "old": "loc_10254",
+      "new": "S3Collision_ComputeCeilingGapAllowanceFromXVelocityHighByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ComputeCeilingGapAllowanceFromXVelocityHighByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 301,
+      "old": "loc_10260",
+      "new": "S3Collision_CompareCeilingGapLowByteAgainstAllowance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CompareCeilingGapLowByteAgainstAllowance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 305,
+      "old": "loc_10264",
+      "new": "S3Collision_ApplyPositiveCeilingAttachmentGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyPositiveCeilingAttachmentGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 310,
+      "old": "loc_1026A",
+      "new": "S3Collision_DetachPlayerFromCeilingAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DetachPlayerFromCeilingAttachment from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 356,
+      "old": "locret_102F2",
+      "new": "S3Collision_ReturnLeftWallAttachmentWithoutFurtherCorrection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnLeftWallAttachmentWithoutFurtherCorrection from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 360,
+      "old": "loc_102F4",
+      "new": "S3Collision_GatePositiveLeftWallGapByConvexOrYSpeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_GatePositiveLeftWallGapByConvexOrYSpeedByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 367,
+      "old": "loc_10302",
+      "new": "S3Collision_ComputeLeftWallGapAllowanceFromYVelocityHighByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ComputeLeftWallGapAllowanceFromYVelocityHighByte from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 373,
+      "old": "loc_1030E",
+      "new": "S3Collision_CompareLeftWallGapLowByteAgainstAllowance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_CompareLeftWallGapLowByteAgainstAllowance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 377,
+      "old": "loc_10312",
+      "new": "S3Collision_ApplyPositiveLeftWallAttachmentGap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ApplyPositiveLeftWallAttachmentGap from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "original_line": 382,
+      "old": "loc_10318",
+      "new": "S3Collision_DetachPlayerFromLeftWallAttachment",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DetachPlayerFromLeftWallAttachment from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 82,
+      "old": "loc_10DE4",
+      "new": "S3Collision_ProbeRightWallWithFixedTenPixelOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeRightWallWithFixedTenPixelOffset from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 92,
+      "old": "loc_10E00",
+      "new": "S3Collision_ProbeRightWallWithHorizontalRadius",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeRightWallWithHorizontalRadius from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 120,
+      "old": "locret_10E4C",
+      "new": "S3Collision_ReturnObjectRightWallDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnObjectRightWallDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 250,
+      "old": "locret_10FA4",
+      "new": "S3Collision_ReturnObjectCeilingDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnObjectCeilingDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 335,
+      "old": "loc_11084",
+      "new": "S3Collision_ProbeLeftWallWithFixedTenPixelOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeLeftWallWithFixedTenPixelOffset from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 346,
+      "old": "loc_110A4",
+      "new": "S3Collision_ProbeLeftWallWithHorizontalRadius",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeLeftWallWithHorizontalRadius from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 367,
+      "old": "loc_110DC",
+      "new": "S3Collision_ProbeLeftWallUsingVerticalRadiusAndSideSolidity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ProbeLeftWallUsingVerticalRadiusAndSideSolidity from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 385,
+      "old": "locret_11116",
+      "new": "S3Collision_ReturnVerticalRadiusLeftWallDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnVerticalRadiusLeftWallDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "original_line": 407,
+      "old": "locret_11144",
+      "new": "S3Collision_ReturnObjectLeftWallDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnObjectLeftWallDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 22,
+      "old": "loc_1080E",
+      "new": "S3Collision_SubtractBackgroundCameraXForPositiveWallStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SubtractBackgroundCameraXForPositiveWallStep from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 25,
+      "old": "loc_10812",
+      "new": "S3Collision_SampleBackgroundWallAfterCameraTranslation",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleBackgroundWallAfterCameraTranslation from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 37,
+      "old": "loc_10830",
+      "new": "S3Collision_RestoreWallXAfterPositiveBackgroundStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_RestoreWallXAfterPositiveBackgroundStep from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 40,
+      "old": "loc_10834",
+      "new": "S3Collision_RestoreWallYAndChooseCloserLayer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_RestoreWallYAndChooseCloserLayer from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 48,
+      "old": "locret_10844",
+      "new": "S3Collision_ReturnSelectedWallLayerDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnSelectedWallLayerDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 63,
+      "old": "loc_10856",
+      "new": "S3Collision_SampleForwardWallNeighborForMissingShape",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleForwardWallNeighborForMissingShape from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 71,
+      "old": "loc_10864",
+      "new": "S3Collision_LoadNeighborAwareWallShapeAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_LoadNeighborAwareWallShapeAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 87,
+      "old": "loc_10890",
+      "new": "S3Collision_TransformNeighborAwareWallAngleForXFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TransformNeighborAwareWallAngleForXFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 92,
+      "old": "loc_10898",
+      "new": "S3Collision_ReadNeighborAwareRotatedWallHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReadNeighborAwareRotatedWallHeight from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 103,
+      "old": "loc_108B4",
+      "new": "S3Collision_ResolveNeighborAwareWallHeightCase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveNeighborAwareWallHeightCase from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 117,
+      "old": "loc_108D0",
+      "new": "S3Collision_TestNegativeWallProfileAgainstXFraction",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TestNegativeWallProfileAgainstXFraction from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 123,
+      "old": "loc_108DC",
+      "new": "S3Collision_SampleBackwardWallNeighborAndSubtractBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_SampleBackwardWallNeighborAndSubtractBlock from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 142,
+      "old": "loc_108FA",
+      "new": "S3Collision_ReturnSingleBlockWallEmptyDistance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnSingleBlockWallEmptyDistance from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 150,
+      "old": "loc_10908",
+      "new": "S3Collision_LoadSingleBlockWallShapeAndAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_LoadSingleBlockWallShapeAndAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 166,
+      "old": "loc_10934",
+      "new": "S3Collision_TransformSingleBlockWallAngleForXFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_TransformSingleBlockWallAngleForXFlip from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 171,
+      "old": "loc_1093C",
+      "new": "S3Collision_ReadSingleBlockRotatedWallHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReadSingleBlockRotatedWallHeight from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 182,
+      "old": "loc_10958",
+      "new": "S3Collision_ResolveSingleBlockWallHeightCase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ResolveSingleBlockWallHeightCase from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 194,
+      "old": "loc_1096E",
+      "new": "S3Collision_ReturnOrRejectNegativeSingleBlockWallProfile",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_ReturnOrRejectNegativeSingleBlockWallProfile from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 219,
+      "old": "loc_1099C",
+      "new": "S3Collision_PredictFixedLookaheadPositionAndQuantizeProbeAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_PredictFixedLookaheadPositionAndQuantizeProbeAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 242,
+      "old": "loc_109D6",
+      "new": "S3Collision_RoundFixedProbeNegativeBoundaryWithTwenty",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_RoundFixedProbeNegativeBoundaryWithTwenty from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 247,
+      "old": "loc_109DC",
+      "new": "S3Collision_AdjustFixedProbeOppositeAngleBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AdjustFixedProbeOppositeAngleBoundary from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 252,
+      "old": "loc_109E2",
+      "new": "S3Collision_AddFixedProbeOneLessThanQuadrantBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AddFixedProbeOneLessThanQuadrantBias from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 255,
+      "old": "loc_109E6",
+      "new": "S3Collision_DispatchFixedPredictedSurfaceQuadrant",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DispatchFixedPredictedSurfaceQuadrant from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 266,
+      "old": "loc_10A04",
+      "new": "S3Collision_DispatchFixedPredictedWallSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DispatchFixedPredictedWallSide from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 280,
+      "old": "loc_10A24",
+      "new": "S3Collision_PredictBodyRadiusPositionAndQuantizeProbeAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_PredictBodyRadiusPositionAndQuantizeProbeAngle from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 303,
+      "old": "loc_10A5E",
+      "new": "S3Collision_RoundRadiusProbeNegativeBoundaryWithTwenty",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_RoundRadiusProbeNegativeBoundaryWithTwenty from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 308,
+      "old": "loc_10A64",
+      "new": "S3Collision_AdjustRadiusProbeOppositeAngleBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AdjustRadiusProbeOppositeAngleBoundary from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 313,
+      "old": "loc_10A6A",
+      "new": "S3Collision_AddRadiusProbeOneLessThanQuadrantBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_AddRadiusProbeOneLessThanQuadrantBias from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "original_line": 316,
+      "old": "loc_10A6E",
+      "new": "S3Collision_DispatchPredictedSurfaceUsingBodyRadius",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Collision_DispatchPredictedSurfaceUsingBodyRadius from this manually reviewed physical S3 collision entry."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 19,
+      "old": "loc_F742",
+      "new": "SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SelectOverheadSolidityAndDispatchRoundedSpineQuadrant."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 45,
+      "old": "loc_F782",
+      "new": "SKCollision_ProbeBothBottomCornersOnSelectedTopLayer",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeBothBottomCornersOnSelectedTopLayer."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 77,
+      "old": "loc_F7E2",
+      "new": "SKCollision_SelectNearerCornerDistanceAndItsAngle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SelectNearerCornerDistanceAndItsAngle."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 84,
+      "old": "loc_F7F0",
+      "new": "SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReplaceOddSelectedSurfaceAngleWithCallerFallback."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 89,
+      "old": "locret_F7F8",
+      "new": "SKCollision_ReturnSelectedCornerClearanceAndAngle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnSelectedCornerClearanceAndAngle."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 118,
+      "old": "loc_F81A",
+      "new": "SKCollision_ReadPrimaryProbeAngleWithOddFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadPrimaryProbeAngleWithOddFallback."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 124,
+      "old": "locret_F826",
+      "new": "SKCollision_ReturnSingleProbeClearanceAngle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnSingleProbeClearanceAngle."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 152,
+      "old": "loc_F864",
+      "new": "SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbePlayerBodyAtYMinusFourWithLayerAndSavedAddressRegisters."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 166,
+      "old": "locret_F892",
+      "new": "SKCollision_ReturnPlayerBodyFloorProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnPlayerBodyFloorProbe."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 188,
+      "old": "loc_F8BA",
+      "new": "SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeActorFloorEdgeWithSavedAddressRegisters."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 202,
+      "old": "locret_F8E8",
+      "new": "SKCollision_ReturnActorFloorEdgeDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnActorFloorEdgeDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 220,
+      "old": "loc_F910",
+      "new": "SKCollision_ProbeRidingPlayerFloorUsingA1Actor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeRidingPlayerFloorUsingA1Actor."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 232,
+      "old": "locret_F936",
+      "new": "SKCollision_ReturnRidingPlayerFloorContactProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnRidingPlayerFloorContactProbe."
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "original_line": 262,
+      "old": "locret_F96C",
+      "new": "SKCollision_ReturnObjectBottomFloorDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnObjectBottomFloorDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 96,
+      "old": "locret_F262",
+      "new": "SKCollision_ReturnNearerForegroundBackgroundFloorSample",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnNearerForegroundBackgroundFloorSample."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 111,
+      "old": "loc_F274",
+      "new": "SKCollision_SampleForwardNeighborForEmptyFloorBlock",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleForwardNeighborForEmptyFloorBlock."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 119,
+      "old": "loc_F282",
+      "new": "SKCollision_ReadInterleavedFloorCollisionIndexAndHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadInterleavedFloorCollisionIndexAndHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 134,
+      "old": "loc_F2AA",
+      "new": "SKCollision_TransformFloorAngleForVerticalBlockFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TransformFloorAngleForVerticalBlockFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 141,
+      "old": "loc_F2BA",
+      "new": "SKCollision_ReadSignedFloorColumnHeightAndApplyEffectiveVerticalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSignedFloorColumnHeightAndApplyEffectiveVerticalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 152,
+      "old": "loc_F2D6",
+      "new": "SKCollision_ClassifyFloorHeightAndComputePartialColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClassifyFloorHeightAndComputePartialColumnDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 166,
+      "old": "loc_F2F2",
+      "new": "SKCollision_TestNegativeFloorColumnAgainstWithinBlockY",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestNegativeFloorColumnAgainstWithinBlockY."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 172,
+      "old": "loc_F2FE",
+      "new": "SKCollision_SampleBackwardNeighborForFullOrOverlappedFloorColumn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleBackwardNeighborForFullOrOverlappedFloorColumn."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 191,
+      "old": "loc_F31C",
+      "new": "SKCollision_ReturnEmptySingleFloorBlockDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnEmptySingleFloorBlockDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 199,
+      "old": "loc_F32A",
+      "new": "SKCollision_ReadSingleFloorCollisionIndexAndHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSingleFloorCollisionIndexAndHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 214,
+      "old": "loc_F352",
+      "new": "SKCollision_TransformSingleFloorAngleForVerticalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TransformSingleFloorAngleForVerticalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 221,
+      "old": "loc_F362",
+      "new": "SKCollision_ReadSingleFloorHeightWithEffectiveFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSingleFloorHeightWithEffectiveFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 232,
+      "old": "loc_F37E",
+      "new": "SKCollision_ComputeSingleFloorDistanceFromSignedHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeSingleFloorDistanceFromSignedHeight."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 244,
+      "old": "loc_F394",
+      "new": "SKCollision_ResolveNegativeSingleFloorColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ResolveNegativeSingleFloorColumnDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 274,
+      "old": "locret_F3DC",
+      "new": "SKCollision_ReturnNearerRingFloorSample",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnNearerRingFloorSample."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 288,
+      "old": "loc_F3EE",
+      "new": "SKCollision_ReturnRingEmptyBlockDistanceSixteen",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnRingEmptyBlockDistanceSixteen."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 293,
+      "old": "loc_F3F4",
+      "new": "SKCollision_ReadRingFloorIndexAndHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadRingFloorIndexAndHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 308,
+      "old": "loc_F41C",
+      "new": "SKCollision_TransformRingFloorAngleForVerticalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TransformRingFloorAngleForVerticalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 315,
+      "old": "loc_F42C",
+      "new": "SKCollision_ReadRingFloorHeightWithEffectiveVerticalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadRingFloorHeightWithEffectiveVerticalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 326,
+      "old": "loc_F448",
+      "new": "SKCollision_ClassifyRingFloorColumnAndPartialDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClassifyRingFloorColumnAndPartialDistance."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 340,
+      "old": "loc_F464",
+      "new": "SKCollision_TestRingNegativeColumnForFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestRingNegativeColumnForFallback."
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "original_line": 346,
+      "old": "loc_F470",
+      "new": "SKCollision_ProbeBackwardFloorNeighborForRing",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeBackwardFloorNeighborForRing."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 78,
+      "old": "locret_FF1C",
+      "new": "SKCollision_ReturnNormalTouchListScan",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnNormalTouchListScan."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 480,
+      "old": "loc_102A8",
+      "new": "SKCollision_ChooseShieldTertiaryRingsAndAttemptSpillAllocation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ChooseShieldTertiaryRingsAndAttemptSpillAllocation."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 494,
+      "old": "loc_102DA",
+      "new": "SKCollision_StripShieldAndElementalShieldBitsBeforeHurt",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_StripShieldAndElementalShieldBitsBeforeHurt."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 497,
+      "old": "loc_102E0",
+      "new": "SKCollision_EnterHurtStateAndSeedWaterDependentKnockback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_EnterHurtStateAndSeedWaterDependentKnockback."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 508,
+      "old": "loc_10312",
+      "new": "SKCollision_OrientHurtHorizontalKnockbackAwayFromHazard",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_OrientHurtHorizontalKnockbackAwayFromHazard."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 514,
+      "old": "loc_10320",
+      "new": "SKCollision_SetHurtAnimationTimerAndSelectSpikeIntervalSound",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SetHurtAnimationTimerAndSelectSpikeIntervalSound."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 525,
+      "old": "loc_10346",
+      "new": "SKCollision_PlayHurtSoundAndReturnMinusOne",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_PlayHurtSoundAndReturnMinusOne."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 531,
+      "old": "loc_10350",
+      "new": "SKCollision_SelectFatalContactSoundFromHazardCodeInterval",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SelectFatalContactSoundFromHazardCodeInterval."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 539,
+      "old": "loc_10364",
+      "new": "SKCollision_RouteRinglessFatalContactToDeathCommit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_RouteRinglessFatalContactToDeathCommit."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 548,
+      "old": "loc_1036E",
+      "new": "SKCollision_CommitDeathStateCleanupAndUpwardLaunch",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CommitDeathStateCleanupAndUpwardLaunch."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 564,
+      "old": "loc_103B6",
+      "new": "SKCollision_ReturnMinusOneAfterDeathOrDebugKillBypass",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnMinusOneAfterDeathOrDebugKillBypass."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 593,
+      "old": "loc_103FA",
+      "new": "SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_IncrementSpecialTouchPropertyByActorWordIdentity."
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "original_line": 644,
+      "old": "locret_1045C",
+      "new": "SKCollision_ReturnShieldTouchScanWithoutDeflection",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnShieldTouchScanWithoutDeflection."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 19,
+      "old": "loc_1E23E",
+      "new": "SKCollision_RouteFullResolutionSlopedRiderToHeightSample",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_RouteFullResolutionSlopedRiderToHeightSample."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 37,
+      "old": "loc_1E260",
+      "new": "SKCollision_SnapSlopedRiderAndCarryHorizontalDelta",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapSlopedRiderAndCarryHorizontalDelta."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 49,
+      "old": "locret_1E280",
+      "new": "SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnSlopedMoverOrMissingOnObjectFlag."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 66,
+      "old": "loc_1E2A0",
+      "new": "SKCollision_AlignDualProfileRiderIndexToEvenByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AlignDualProfileRiderIndexToEvenByte."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 99,
+      "old": "loc_1E2E0",
+      "new": "SKCollision_DetachFlatTopRiderAndMarkAirborne",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFlatTopRiderAndMarkAirborne."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 107,
+      "old": "loc_1E2F4",
+      "new": "SKCollision_CarryExistingFlatTopRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryExistingFlatTopRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 142,
+      "old": "loc_1E338",
+      "new": "SKCollision_DetachHalfResolutionSlopeRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachHalfResolutionSlopeRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 150,
+      "old": "loc_1E34C",
+      "new": "SKCollision_MoveExistingHalfResolutionSlopeRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_MoveExistingHalfResolutionSlopeRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 185,
+      "old": "loc_1E390",
+      "new": "SKCollision_DetachFullResolutionSlopeRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFullResolutionSlopeRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 193,
+      "old": "loc_1E3A4",
+      "new": "SKCollision_MoveExistingFullResolutionSlopeRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_MoveExistingFullResolutionSlopeRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 220,
+      "old": "loc_1E3D6",
+      "new": "SKCollision_ValidateExistingRiderInUnclaimedFlatVariant",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ValidateExistingRiderInUnclaimedFlatVariant."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 232,
+      "old": "loc_1E3F2",
+      "new": "SKCollision_DetachUnclaimedFlatVariantRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachUnclaimedFlatVariantRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 237,
+      "old": "loc_1E402",
+      "new": "SKCollision_ReturnUnclaimedFlatVariantWithoutReportedCollision",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnUnclaimedFlatVariantWithoutReportedCollision."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 242,
+      "old": "loc_1E406",
+      "new": "SKCollision_CarryUnclaimedFlatVariantExistingRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryUnclaimedFlatVariantExistingRider."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 263,
+      "old": "loc_1E42E",
+      "new": "SKCollision_TestNewFlatTopLandingVelocityAndHorizontalSpan",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestNewFlatTopLandingVelocityAndHorizontalSpan."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 274,
+      "old": "loc_1E44C",
+      "new": "SKCollision_SelectNormalOrReverseGravityFlatTopSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SelectNormalOrReverseGravityFlatTopSurface."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 280,
+      "old": "loc_1E45A",
+      "new": "SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_LandAtCallerComputedTopWithinUnsignedPenetrationWindow."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 307,
+      "old": "loc_1E4A0",
+      "new": "SKCollision_InstallRidePointerAndConditionalCharacterLandingCleanup",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_InstallRidePointerAndConditionalCharacterLandingCleanup."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 321,
+      "old": "locret_1E4D4",
+      "new": "SKCollision_ReturnPlatformLandingOrRejectedProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnPlatformLandingOrRejectedProbe."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 327,
+      "old": "loc_1E4D6",
+      "new": "SKCollision_LandOnReverseGravityFlatSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_LandOnReverseGravityFlatSurface."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 365,
+      "old": "loc_1E534",
+      "new": "SKCollision_SampleHalfResolutionNewSlopeSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleHalfResolutionNewSlopeSurface."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 389,
+      "old": "loc_1E570",
+      "new": "SKCollision_SampleFullResolutionNewSlopeSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleFullResolutionNewSlopeSurface."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 407,
+      "old": "loc_1E598",
+      "new": "SKCollision_ReleasePlayerOneRiderWhenTerrainDistanceNonpositive",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReleasePlayerOneRiderWhenTerrainDistanceNonpositive."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 413,
+      "old": "loc_1E5AE",
+      "new": "SKCollision_TestPlayerTwoRiderAgainstTerrainForRelease",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestPlayerTwoRiderAgainstTerrainForRelease."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 422,
+      "old": "loc_1E5C6",
+      "new": "SKCollision_ReleasePlayerTwoRiderWhenTerrainDistanceNonpositive",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReleasePlayerTwoRiderWhenTerrainDistanceNonpositive."
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "original_line": 428,
+      "old": "loc_1E5DC",
+      "new": "SKCollision_ReturnRiderReleaseCheckWithZeroD4",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnRiderReleaseCheckWithZeroD4."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 35,
+      "old": "loc_1DC98",
+      "new": "SKCollision_DetachFullSolidRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFullSolidRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 43,
+      "old": "loc_1DCAC",
+      "new": "SKCollision_CarryExistingFullSolidRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryExistingFullSolidRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 48,
+      "old": "locret_1DCB4",
+      "new": "SKCollision_ReturnFullSolidCarryOrInvisiblePlayerTwoSkip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnFullSolidCarryOrInvisiblePlayerTwoSkip."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 80,
+      "old": "loc_1DCF0",
+      "new": "SKCollision_DetachFullSolidWithoutVisibilityGateRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFullSolidWithoutVisibilityGateRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 88,
+      "old": "loc_1DD04",
+      "new": "SKCollision_CarryFullSolidWithoutVisibilityGateRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryFullSolidWithoutVisibilityGateRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 123,
+      "old": "loc_1DD48",
+      "new": "SKCollision_DetachHalfResolutionHeightProfileRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachHalfResolutionHeightProfileRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 131,
+      "old": "loc_1DD5C",
+      "new": "SKCollision_CarryHeightProfileRiderAndAccumulateTopContactBit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryHeightProfileRiderAndAccumulateTopContactBit."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 168,
+      "old": "loc_1DDA8",
+      "new": "SKCollision_DetachDualHeightProfileRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachDualHeightProfileRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 176,
+      "old": "loc_1DDBC",
+      "new": "SKCollision_CarryDualHeightProfileRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryDualHeightProfileRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 211,
+      "old": "loc_1DE00",
+      "new": "SKCollision_DetachHeightProfileRiderKeepingAirState",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachHeightProfileRiderKeepingAirState."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 218,
+      "old": "loc_1DE0E",
+      "new": "SKCollision_CarryKeepAirStateProfileRiderAndSetTopResult",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CarryKeepAirStateProfileRiderAndSetTopResult."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 255,
+      "old": "loc_1DE58",
+      "new": "SKCollision_DetachOffsetFullSolidRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachOffsetFullSolidRider."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 263,
+      "old": "loc_1DE6C",
+      "new": "SKCollision_SnapOffsetSolidRiderAndApplyHorizontalCarry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapOffsetSolidRiderAndApplyHorizontalCarry."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 277,
+      "old": "loc_1DE8C",
+      "new": "SKCollision_BuildOffsetSolidNewContactOverlap",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_BuildOffsetSolidNewContactOverlap."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 303,
+      "old": "loc_1DECE",
+      "new": "SKCollision_BuildHalfResolutionHeightProfileNewContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_BuildHalfResolutionHeightProfileNewContact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 318,
+      "old": "loc_1DEF4",
+      "new": "SKCollision_ComputeRelativeHeightProfileOverlapFromByteDifference",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeRelativeHeightProfileOverlapFromByteDifference."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 340,
+      "old": "loc_1DF28",
+      "new": "SKCollision_BuildDualHeightProfileNewContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_BuildDualHeightProfileNewContact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 355,
+      "old": "loc_1DF4E",
+      "new": "SKCollision_ReadDualProfileTopAndExtentAndTestVerticalOverlap",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadDualProfileTopAndExtentAndTestVerticalOverlap."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 378,
+      "old": "loc_1DF88",
+      "new": "SKCollision_RequireRootNegativeRenderFlagForNewFullSolidContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_RequireRootNegativeRenderFlagForNewFullSolidContact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 410,
+      "old": "loc_1DFD6",
+      "new": "SKCollision_ComputeNormalGravitySolidVerticalOverlapWithTwelveBitWrap",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeNormalGravitySolidVerticalOverlapWithTwelveBitWrap."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 426,
+      "old": "loc_1DFFE",
+      "new": "SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_GateSolidResponseAndChooseNearestHorizontalBoundary."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 441,
+      "old": "loc_1E026",
+      "new": "SKCollision_ChooseNearestVerticalBoundaryForSolidResponse",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ChooseNearestVerticalBoundaryForSolidResponse."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 450,
+      "old": "loc_1E034",
+      "new": "SKCollision_SelectVerticalResponseForShallowerOrFourPixelContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SelectVerticalResponseForShallowerOrFourPixelContact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 456,
+      "old": "loc_1E042",
+      "new": "SKCollision_ChooseSideCollisionVelocityStopByCorrectionSign",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ChooseSideCollisionVelocityStopByCorrectionSign."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 465,
+      "old": "loc_1E050",
+      "new": "SKCollision_TestNegativeSideCorrectionAgainstHorizontalVelocity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestNegativeSideCorrectionAgainstHorizontalVelocity."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 469,
+      "old": "loc_1E056",
+      "new": "SKCollision_StopHorizontalMotionAndFlagTertiarySideImpact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_StopHorizontalMotionAndFlagTertiarySideImpact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 476,
+      "old": "loc_1E06E",
+      "new": "SKCollision_ApplySidePositionCorrectionAndGroundedPushContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ApplySidePositionCorrectionAndGroundedPushContact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 491,
+      "old": "loc_1E094",
+      "new": "SKCollision_ClearAirbornePushAndReportSideCollision",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClearAirbornePushAndReportSideCollision."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 500,
+      "old": "loc_1E0A2",
+      "new": "SKCollision_ClearStalePushAndSelectWalkingWordAnimation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClearStalePushAndSelectWalkingWordAnimation."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 520,
+      "old": "loc_1E0D0",
+      "new": "SKCollision_ReturnSolidNoReportedCollision",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnSolidNoReportedCollision."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 527,
+      "old": "loc_1E0D4",
+      "new": "SKCollision_ClassifyVerticalSolidContactBySignedCorrectionAndSixteenPixels",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClassifyVerticalSolidContactBySignedCorrectionAndSixteenPixels."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 535,
+      "old": "loc_1E0E0",
+      "new": "SKCollision_ResolveUndersideByAirborneAndVerticalVelocity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ResolveUndersideByAirborneAndVerticalVelocity."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 546,
+      "old": "loc_1E0F6",
+      "new": "SKCollision_ZeroAirborneGroundSpeedBeforeUndersideCorrection",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ZeroAirborneGroundSpeedBeforeUndersideCorrection."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 549,
+      "old": "loc_1E0FC",
+      "new": "SKCollision_ReflectUndersideCorrectionForReverseGravity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReflectUndersideCorrectionForReverseGravity."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 554,
+      "old": "loc_1E104",
+      "new": "SKCollision_ApplyUndersideYCorrectionAndStopVerticalSpeed",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ApplyUndersideYCorrectionAndStopVerticalSpeed."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 558,
+      "old": "loc_1E10E",
+      "new": "SKCollision_FlagTertiaryUndersideImpact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_FlagTertiaryUndersideImpact."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 563,
+      "old": "loc_1E11A",
+      "new": "SKCollision_AccumulateUndersideContactAndReturnMinusTwo",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AccumulateUndersideContactAndReturnMinusTwo."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 571,
+      "old": "loc_1E126",
+      "new": "SKCollision_TestZeroVerticalSpeedGroundedCrushLateralDepth",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestZeroVerticalSpeedGroundedCrushLateralDepth."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 578,
+      "old": "loc_1E134",
+      "new": "SKCollision_KillCrushedPlayerUnlessNearHorizontalEdge",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_KillCrushedPlayerUnlessNearHorizontalEdge."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 592,
+      "old": "loc_1E154",
+      "new": "SKCollision_ValidateTopContactUsingVisualWidthBeforeSnap",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ValidateTopContactUsingVisualWidthBeforeSnap."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 609,
+      "old": "loc_1E17E",
+      "new": "SKCollision_SnapTopContactAndAttachOnlyForNonnegativeVerticalVelocity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapTopContactAndAttachOnlyForNonnegativeVerticalVelocity."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 621,
+      "old": "loc_1E198",
+      "new": "SKCollision_ReturnRejectedTopContactWithZeroD4",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnRejectedTopContactWithZeroD4."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 635,
+      "old": "loc_1E1AA",
+      "new": "SKCollision_ComputeReverseGravityFlatRiderSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeReverseGravityFlatRiderSurface."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 648,
+      "old": "loc_1E1C2",
+      "new": "SKCollision_ComputeRetainedFixedNinePixelNormalRiderSurface",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeRetainedFixedNinePixelNormalRiderSurface."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 652,
+      "old": "loc_1E1CA",
+      "new": "SKCollision_MoveFlatRiderAboveSurfaceWithControlAndDebugGates",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_MoveFlatRiderAboveSurfaceWithControlAndDebugGates."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 666,
+      "old": "locret_1E1F2",
+      "new": "SKCollision_ReturnNormalGravityFlatRiderMover",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnNormalGravityFlatRiderMover."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 670,
+      "old": "loc_1E1F4",
+      "new": "SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_MoveFlatRiderBelowSurfaceForReverseGravity."
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "original_line": 684,
+      "old": "locret_1E21C",
+      "new": "SKCollision_ReturnReverseGravityFlatRiderMover",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnReverseGravityFlatRiderMover."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 10,
+      "old": "loc_EC42",
+      "new": "SKCollision_BypassTerrainAttachmentForObjectRider",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_BypassTerrainAttachmentForObjectRider."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 20,
+      "old": "loc_EC5A",
+      "new": "SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SeedUnresolvedAnglesAndRoundAttachmentQuadrant."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 31,
+      "old": "loc_EC76",
+      "new": "SKCollision_CompleteNegativeHalfAttachmentQuadrantBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CompleteNegativeHalfAttachmentQuadrantBias."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 36,
+      "old": "loc_EC7C",
+      "new": "SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AdjustNegativeAngleInNonnegativeAttachmentBiasHalf."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 41,
+      "old": "loc_EC84",
+      "new": "SKCollision_AddLowerHalfAttachmentQuadrantBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AddLowerHalfAttachmentQuadrantBias."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 44,
+      "old": "loc_EC88",
+      "new": "SKCollision_DispatchAttachmentAxisAndProbeFloorCorners",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DispatchAttachmentAxisAndProbeFloorCorners."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 89,
+      "old": "locret_ED12",
+      "new": "SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnFloorAttachmentWithoutFurtherCorrection."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 93,
+      "old": "loc_ED14",
+      "new": "SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestFloorGapAgainstConvexOverrideAndHorizontalSpeedHighByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 100,
+      "old": "loc_ED22",
+      "new": "SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClampFloorAttachmentGapAllowanceFromByteSpeed."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 106,
+      "old": "loc_ED2E",
+      "new": "SKCollision_CompareFloorGapLowByteAgainstAllowance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CompareFloorGapLowByteAgainstAllowance."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 110,
+      "old": "loc_ED32",
+      "new": "SKCollision_SnapFloorAttachmentByFullWordDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapFloorAttachmentByFullWordDistance."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 115,
+      "old": "loc_ED38",
+      "new": "SKCollision_DetachFromFloorAndRestartAnimation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFromFloorAndRestartAnimation."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 133,
+      "old": "loc_ED5E",
+      "new": "SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AcceptSelectedSurfaceAngleOnlyWithinByteDeltaTwentyHex."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 141,
+      "old": "loc_ED6E",
+      "new": "SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ApplySurfaceAngleDeltaThresholdOrQuantize."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 148,
+      "old": "loc_ED7A",
+      "new": "SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_QuantizeExistingAngleWhenSampleOddOrAbrupt."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 198,
+      "old": "locret_EE00",
+      "new": "SKCollision_ReturnRightWallAttachment",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnRightWallAttachment."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 202,
+      "old": "loc_EE02",
+      "new": "SKCollision_CountDownRightWallDeepOverlapRetry",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CountDownRightWallDeepOverlapRetry."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 208,
+      "old": "loc_EE0E",
+      "new": "SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ArmRightWallDeepOverlapRetryOnlyInZoneActZero."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 216,
+      "old": "loc_EE22",
+      "new": "SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestRightWallGapAgainstConvexOrVerticalSpeedHighByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 223,
+      "old": "loc_EE30",
+      "new": "SKCollision_ClampRightWallGapAllowanceByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClampRightWallGapAllowanceByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 229,
+      "old": "loc_EE3C",
+      "new": "SKCollision_CompareRightWallGapLowByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CompareRightWallGapLowByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 233,
+      "old": "loc_EE40",
+      "new": "SKCollision_SnapRightWallAttachmentByWordDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapRightWallAttachmentByWordDistance."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 238,
+      "old": "loc_EE46",
+      "new": "SKCollision_DetachFromRightWallAndRestartAnimation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFromRightWallAndRestartAnimation."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 284,
+      "old": "locret_EECE",
+      "new": "SKCollision_ReturnCeilingAttachment",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnCeilingAttachment."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 288,
+      "old": "loc_EED0",
+      "new": "SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestCeilingGapAgainstConvexOrHorizontalSpeedHighByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 295,
+      "old": "loc_EEDE",
+      "new": "SKCollision_ClampCeilingGapAllowanceByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClampCeilingGapAllowanceByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 301,
+      "old": "loc_EEEA",
+      "new": "SKCollision_CompareCeilingGapLowByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CompareCeilingGapLowByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 305,
+      "old": "loc_EEEE",
+      "new": "SKCollision_SnapCeilingAttachmentByWordDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapCeilingAttachmentByWordDistance."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 310,
+      "old": "loc_EEF4",
+      "new": "SKCollision_DetachFromCeilingAndRestartAnimation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFromCeilingAndRestartAnimation."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 356,
+      "old": "locret_EF7C",
+      "new": "SKCollision_ReturnLeftWallAttachment",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnLeftWallAttachment."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 360,
+      "old": "loc_EF7E",
+      "new": "SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestLeftWallGapAgainstConvexOrVerticalSpeedHighByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 367,
+      "old": "loc_EF8C",
+      "new": "SKCollision_ClampLeftWallGapAllowanceByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClampLeftWallGapAllowanceByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 373,
+      "old": "loc_EF98",
+      "new": "SKCollision_CompareLeftWallGapLowByte",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_CompareLeftWallGapLowByte."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 377,
+      "old": "loc_EF9C",
+      "new": "SKCollision_SnapLeftWallAttachmentByWordDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SnapLeftWallAttachmentByWordDistance."
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "original_line": 382,
+      "old": "loc_EFA2",
+      "new": "SKCollision_DetachFromLeftWallAndRestartAnimation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DetachFromLeftWallAndRestartAnimation."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 82,
+      "old": "loc_FA88",
+      "new": "SKCollision_ProbeRightWallAtFixedTenPixelOffset",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeRightWallAtFixedTenPixelOffset."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 92,
+      "old": "loc_FAA4",
+      "new": "SKCollision_ProbeRightWallAtSignedBodyXRadius",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeRightWallAtSignedBodyXRadius."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 120,
+      "old": "locret_FAF0",
+      "new": "SKCollision_ReturnObjectRightWallProbeWithAngleFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnObjectRightWallProbeWithAngleFallback."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 250,
+      "old": "locret_FC48",
+      "new": "SKCollision_ReturnObjectCeilingProbeWithAngleFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnObjectCeilingProbeWithAngleFallback."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 270,
+      "old": "loc_FC70",
+      "new": "SKCollision_ProbeReverseGravityFloorEdgeAtCeilingCoordinates",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeReverseGravityFloorEdgeAtCeilingCoordinates."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 284,
+      "old": "locret_FC9E",
+      "new": "SKCollision_ReturnReverseGravityFloorEdgeProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnReverseGravityFloorEdgeProbe."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 387,
+      "old": "loc_FDA8",
+      "new": "SKCollision_ProbeLeftWallAtFixedTenPixelOffset",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeLeftWallAtFixedTenPixelOffset."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 398,
+      "old": "loc_FDC8",
+      "new": "SKCollision_ProbeLeftWallAtSignedBodyXRadius",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeLeftWallAtSignedBodyXRadius."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 419,
+      "old": "loc_FE00",
+      "new": "SKCollision_ProbeLeftWallUsingBodyYRadiusAndSelectedLayer",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeLeftWallUsingBodyYRadiusAndSelectedLayer."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 437,
+      "old": "locret_FE3A",
+      "new": "SKCollision_ReturnLeftWallYRadiusProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnLeftWallYRadiusProbe."
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "original_line": 460,
+      "old": "locret_FE6C",
+      "new": "SKCollision_ReturnObjectLeftWallProbeWithAngleFallback",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnObjectLeftWallProbeWithAngleFallback."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 22,
+      "old": "loc_F4A4",
+      "new": "SKCollision_ShiftPositiveDirectionWallSampleIntoBackgroundX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ShiftPositiveDirectionWallSampleIntoBackgroundX."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 25,
+      "old": "loc_F4A8",
+      "new": "SKCollision_ProbeBackgroundWallAfterDirectionAwareXShift",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ProbeBackgroundWallAfterDirectionAwareXShift."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 37,
+      "old": "loc_F4C6",
+      "new": "SKCollision_RestorePositiveDirectionWallSampleX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_RestorePositiveDirectionWallSampleX."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 40,
+      "old": "loc_F4CA",
+      "new": "SKCollision_RestoreWallYAndSelectNearerLayer",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_RestoreWallYAndSelectNearerLayer."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 48,
+      "old": "locret_F4DA",
+      "new": "SKCollision_ReturnForegroundOrSelectedBackgroundWallDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnForegroundOrSelectedBackgroundWallDistance."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 63,
+      "old": "loc_F4EC",
+      "new": "SKCollision_SampleForwardNeighborForEmptyWallBlock",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleForwardNeighborForEmptyWallBlock."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 71,
+      "old": "loc_F4FA",
+      "new": "SKCollision_ReadWallCollisionByteAndVerticalFlipOfSample",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadWallCollisionByteAndVerticalFlipOfSample."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 88,
+      "old": "loc_F52A",
+      "new": "SKCollision_TransformWallAngleForHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TransformWallAngleForHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 93,
+      "old": "loc_F532",
+      "new": "SKCollision_ReadSignedRotatedHeightAndEffectiveHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSignedRotatedHeightAndEffectiveHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 104,
+      "old": "loc_F54E",
+      "new": "SKCollision_ClassifyWallHeightAndPartialColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ClassifyWallHeightAndPartialColumnDistance."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 118,
+      "old": "loc_F56A",
+      "new": "SKCollision_TestNegativeWallColumnAgainstWithinBlockX",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TestNegativeWallColumnAgainstWithinBlockX."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 124,
+      "old": "loc_F576",
+      "new": "SKCollision_SampleBackwardNeighborForFullWallColumn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_SampleBackwardNeighborForFullWallColumn."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 143,
+      "old": "loc_F594",
+      "new": "SKCollision_ReturnEmptySingleWallBlockDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReturnEmptySingleWallBlockDistance."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 151,
+      "old": "loc_F5A2",
+      "new": "SKCollision_ReadSingleWallIndexAndVerticalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSingleWallIndexAndVerticalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 168,
+      "old": "loc_F5D2",
+      "new": "SKCollision_TransformSingleWallAngleForHorizontalFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_TransformSingleWallAngleForHorizontalFlip."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 173,
+      "old": "loc_F5DA",
+      "new": "SKCollision_ReadSingleWallRotatedHeightWithEffectiveFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ReadSingleWallRotatedHeightWithEffectiveFlip."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 184,
+      "old": "loc_F5F6",
+      "new": "SKCollision_ComputeSingleWallDistanceFromSignedHeight",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ComputeSingleWallDistanceFromSignedHeight."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 196,
+      "old": "loc_F60C",
+      "new": "SKCollision_ResolveNegativeSingleWallColumnDistance",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_ResolveNegativeSingleWallColumnDistance."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 215,
+      "old": "loc_F638",
+      "new": "SKCollision_PredictFixedLookaheadPositionFromFullFractionalCoordinates",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_PredictFixedLookaheadPositionFromFullFractionalCoordinates."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 228,
+      "old": "loc_F65A",
+      "new": "SKCollision_FinishGravityAdjustedFixedLookaheadAndRoundDirection",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_FinishGravityAdjustedFixedLookaheadAndRoundDirection."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 243,
+      "old": "loc_F67A",
+      "new": "SKCollision_FinishUpperHalfFixedLookaheadAngleBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_FinishUpperHalfFixedLookaheadAngleBias."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 248,
+      "old": "loc_F680",
+      "new": "SKCollision_AdjustNegativeDirectionInLowerFixedLookaheadHalf",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AdjustNegativeDirectionInLowerFixedLookaheadHalf."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 253,
+      "old": "loc_F686",
+      "new": "SKCollision_AddLowerHalfFixedLookaheadDirectionBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AddLowerHalfFixedLookaheadDirectionBias."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 256,
+      "old": "loc_F68A",
+      "new": "SKCollision_DispatchFixedLookaheadFloorCeilingOrWall",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DispatchFixedLookaheadFloorCeilingOrWall."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 267,
+      "old": "loc_F6A8",
+      "new": "SKCollision_DispatchFixedLookaheadWallByQuadrant",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DispatchFixedLookaheadWallByQuadrant."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 281,
+      "old": "loc_F6C8",
+      "new": "SKCollision_PredictBodyRadiusLookaheadWithoutReverseYAdjustment",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_PredictBodyRadiusLookaheadWithoutReverseYAdjustment."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 304,
+      "old": "loc_F702",
+      "new": "SKCollision_FinishUpperHalfBodyRadiusDirectionBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_FinishUpperHalfBodyRadiusDirectionBias."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 309,
+      "old": "loc_F708",
+      "new": "SKCollision_AdjustNegativeDirectionInLowerBodyRadiusHalf",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AdjustNegativeDirectionInLowerBodyRadiusHalf."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 314,
+      "old": "loc_F70E",
+      "new": "SKCollision_AddLowerHalfBodyRadiusDirectionBias",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_AddLowerHalfBodyRadiusDirectionBias."
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "original_line": 317,
+      "old": "loc_F712",
+      "new": "SKCollision_DispatchPredictedBodyRadiusSurfaceProbe",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed CODE SKCollision_DispatchPredictedBodyRadiusSurfaceProbe."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/collision/s3/floor_clearance.s",
+      "tokens": [
+        [4, 1, 0, ""],
+        [6, 0, 0, ""],
+        [21, 1, 1, ""],
+        [23, 0, 1, ""],
+        [54, 0, 2, ""],
+        [57, 1, 3, ""],
+        [60, 0, 3, ""],
+        [62, 1, 4, ""],
+        [64, 0, 4, ""],
+        [76, 0, 5, ""],
+        [79, 1, 6, ""],
+        [81, 0, 6, ""],
+        [92, 1, 5, ""],
+        [99, 1, 7, ""],
+        [101, 0, 7, ""],
+        [112, 1, 8, ""],
+        [114, 0, 8, ""],
+        [127, 1, 9, ""],
+        [129, 0, 9, ""],
+        [140, 1, 10, ""],
+        [142, 0, 10, ""],
+        [153, 1, 11, ""],
+        [155, 0, 11, ""],
+        [164, 1, 12, ""],
+        [166, 0, 12, ""],
+        [183, 1, 13, ""],
+        [185, 0, 13, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/floor_probes.s",
+      "tokens": [
+        [81, 1, 14, ""],
+        [84, 0, 14, ""],
+        [91, 1, 15, ""],
+        [93, 1, 16, ""],
+        [94, 0, 15, ""],
+        [100, 0, 16, ""],
+        [104, 1, 15, ""],
+        [110, 1, 17, ""],
+        [113, 0, 17, ""],
+        [115, 1, 18, ""],
+        [119, 0, 18, ""],
+        [127, 1, 19, ""],
+        [129, 0, 19, ""],
+        [131, 1, 15, ""],
+        [132, 1, 20, ""],
+        [134, 1, 21, ""],
+        [141, 0, 20, ""],
+        [145, 1, 15, ""],
+        [146, 0, 21, ""],
+        [157, 1, 22, ""],
+        [159, 1, 23, ""],
+        [160, 0, 22, ""],
+        [166, 0, 23, ""],
+        [170, 1, 22, ""],
+        [176, 1, 24, ""],
+        [179, 0, 24, ""],
+        [181, 1, 25, ""],
+        [185, 0, 25, ""],
+        [193, 1, 26, ""],
+        [195, 0, 26, ""],
+        [197, 1, 22, ""],
+        [198, 1, 27, ""],
+        [205, 0, 27, ""],
+        [209, 1, 22, ""],
+        [227, 1, 28, ""],
+        [230, 0, 28, ""],
+        [237, 1, 29, ""],
+        [239, 1, 30, ""],
+        [240, 0, 29, ""],
+        [243, 0, 30, ""],
+        [247, 1, 29, ""],
+        [253, 1, 31, ""],
+        [256, 0, 31, ""],
+        [258, 1, 32, ""],
+        [262, 0, 32, ""],
+        [270, 1, 33, ""],
+        [272, 0, 33, ""],
+        [274, 1, 29, ""],
+        [275, 1, 34, ""],
+        [277, 1, 35, ""],
+        [284, 0, 34, ""],
+        [288, 1, 29, ""],
+        [289, 0, 35, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/object_touch_response.s",
+      "tokens": [
+        [54, 1, 36, ""],
+        [63, 0, 36, ""],
+        [315, 1, 37, ""],
+        [317, 1, 39, ""],
+        [319, 0, 37, ""],
+        [321, 1, 38, ""],
+        [323, 1, 39, ""],
+        [327, 1, 38, ""],
+        [332, 0, 38, ""],
+        [334, 0, 39, ""],
+        [341, 1, 40, ""],
+        [344, 0, 40, ""],
+        [347, 1, 41, ""],
+        [349, 0, 41, ""],
+        [359, 1, 42, ""],
+        [372, 0, 42, ""],
+        [379, 1, 43, ""],
+        [381, 1, 43, ""],
+        [383, 1, 43, ""],
+        [385, 1, 43, ""],
+        [387, 1, 43, ""],
+        [389, 1, 43, ""],
+        [391, 1, 43, ""],
+        [393, 1, 43, ""],
+        [395, 1, 43, ""],
+        [397, 0, 43, ""],
+        [417, 1, 44, ""],
+        [426, 1, 44, ""],
+        [436, 0, 44, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/platform_collision.s",
+      "tokens": [
+        [3, 1, 46, ""],
+        [9, 1, 45, ""],
+        [12, 0, 45, ""],
+        [23, 0, 46, ""],
+        [27, 1, 46, ""],
+        [32, 1, 47, ""],
+        [35, 0, 47, ""],
+        [37, 1, 45, ""],
+        [48, 1, 56, ""],
+        [52, 1, 48, ""],
+        [56, 1, 48, ""],
+        [58, 1, 49, ""],
+        [59, 0, 48, ""],
+        [65, 0, 49, ""],
+        [84, 1, 50, ""],
+        [88, 1, 50, ""],
+        [90, 1, 51, ""],
+        [91, 0, 50, ""],
+        [97, 0, 51, ""],
+        [112, 1, 52, ""],
+        [114, 1, 54, ""],
+        [115, 1, 56, ""],
+        [116, 0, 52, ""],
+        [120, 1, 53, ""],
+        [124, 1, 53, ""],
+        [126, 1, 55, ""],
+        [127, 0, 53, ""],
+        [131, 0, 54, ""],
+        [134, 0, 55, ""],
+        [141, 1, 60, ""],
+        [145, 1, 60, ""],
+        [147, 1, 60, ""],
+        [148, 1, 57, ""],
+        [149, 0, 56, ""],
+        [151, 1, 60, ""],
+        [155, 1, 60, ""],
+        [158, 1, 60, ""],
+        [159, 0, 57, ""],
+        [162, 0, 58, ""],
+        [169, 1, 60, ""],
+        [171, 1, 60, ""],
+        [173, 1, 60, ""],
+        [175, 1, 60, ""],
+        [181, 1, 59, ""],
+        [184, 0, 59, ""],
+        [192, 1, 60, ""],
+        [197, 0, 60, ""],
+        [201, 1, 60, ""],
+        [205, 1, 60, ""],
+        [208, 1, 60, ""],
+        [210, 1, 61, ""],
+        [213, 0, 61, ""],
+        [219, 1, 58, ""],
+        [223, 1, 63, ""],
+        [226, 1, 62, ""],
+        [227, 1, 63, ""],
+        [228, 0, 62, ""],
+        [233, 0, 63, ""],
+        [236, 1, 65, ""],
+        [239, 1, 64, ""],
+        [240, 1, 65, ""],
+        [241, 0, 64, ""],
+        [246, 0, 65, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/solid_rectangles.s",
+      "tokens": [
+        [9, 1, 68, ""],
+        [13, 1, 84, ""],
+        [17, 1, 66, ""],
+        [21, 1, 66, ""],
+        [23, 1, 67, ""],
+        [24, 0, 66, ""],
+        [30, 0, 67, ""],
+        [34, 0, 68, ""],
+        [50, 1, 69, ""],
+        [54, 1, 69, ""],
+        [56, 1, 70, ""],
+        [57, 0, 69, ""],
+        [63, 0, 70, ""],
+        [78, 1, 80, ""],
+        [82, 1, 71, ""],
+        [86, 1, 71, ""],
+        [88, 1, 72, ""],
+        [89, 0, 71, ""],
+        [95, 0, 72, ""],
+        [112, 1, 82, ""],
+        [116, 1, 73, ""],
+        [120, 1, 73, ""],
+        [122, 1, 74, ""],
+        [123, 0, 73, ""],
+        [129, 0, 74, ""],
+        [144, 1, 80, ""],
+        [148, 1, 75, ""],
+        [152, 1, 75, ""],
+        [154, 1, 76, ""],
+        [155, 0, 75, ""],
+        [160, 0, 76, ""],
+        [178, 1, 79, ""],
+        [180, 1, 77, ""],
+        [184, 1, 77, ""],
+        [187, 1, 78, ""],
+        [188, 0, 77, ""],
+        [194, 0, 78, ""],
+        [206, 0, 79, ""],
+        [210, 1, 93, ""],
+        [214, 1, 93, ""],
+        [224, 1, 93, ""],
+        [228, 1, 93, ""],
+        [229, 1, 85, ""],
+        [230, 0, 80, ""],
+        [234, 1, 93, ""],
+        [238, 1, 93, ""],
+        [241, 1, 81, ""],
+        [244, 0, 81, ""],
+        [258, 1, 93, ""],
+        [262, 1, 93, ""],
+        [263, 1, 85, ""],
+        [264, 0, 82, ""],
+        [268, 1, 93, ""],
+        [272, 1, 93, ""],
+        [275, 1, 83, ""],
+        [278, 0, 83, ""],
+        [292, 1, 93, ""],
+        [297, 1, 93, ""],
+        [298, 1, 85, ""],
+        [299, 0, 84, ""],
+        [301, 1, 93, ""],
+        [306, 1, 93, ""],
+        [310, 1, 93, ""],
+        [321, 1, 93, ""],
+        [325, 1, 93, ""],
+        [326, 0, 85, ""],
+        [328, 1, 93, ""],
+        [330, 1, 94, ""],
+        [332, 1, 94, ""],
+        [335, 1, 86, ""],
+        [340, 0, 86, ""],
+        [343, 1, 87, ""],
+        [348, 0, 87, ""],
+        [350, 1, 95, ""],
+        [351, 0, 88, ""],
+        [353, 1, 95, ""],
+        [355, 1, 91, ""],
+        [356, 1, 89, ""],
+        [358, 1, 91, ""],
+        [359, 1, 90, ""],
+        [360, 0, 89, ""],
+        [362, 1, 91, ""],
+        [363, 0, 90, ""],
+        [367, 1, 91, ""],
+        [369, 0, 91, ""],
+        [372, 1, 92, ""],
+        [382, 0, 92, ""],
+        [389, 0, 93, ""],
+        [393, 1, 94, ""],
+        [402, 0, 94, ""],
+        [405, 0, 95, ""],
+        [407, 1, 96, ""],
+        [409, 1, 103, ""],
+        [410, 1, 93, ""],
+        [411, 0, 96, ""],
+        [413, 1, 97, ""],
+        [415, 1, 101, ""],
+        [416, 1, 99, ""],
+        [418, 1, 99, ""],
+        [419, 1, 98, ""],
+        [420, 0, 97, ""],
+        [422, 0, 98, ""],
+        [425, 0, 99, ""],
+        [427, 1, 100, ""],
+        [429, 0, 100, ""],
+        [435, 0, 101, ""],
+        [437, 1, 99, ""],
+        [439, 1, 102, ""],
+        [441, 0, 102, ""],
+        [443, 1, 88, ""],
+        [453, 0, 103, ""],
+        [461, 1, 104, ""],
+        [463, 1, 104, ""],
+        [467, 1, 104, ""],
+        [474, 0, 104, ""],
+        [480, 1, 105, ""],
+        [483, 0, 105, ""],
+        [485, 1, 106, ""],
+        [487, 1, 106, ""],
+        [489, 1, 106, ""],
+        [496, 0, 106, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/surface_attachment.s",
+      "tokens": [
+        [4, 1, 107, ""],
+        [6, 0, 107, ""],
+        [9, 1, 108, ""],
+        [14, 0, 108, ""],
+        [20, 1, 110, ""],
+        [22, 1, 109, ""],
+        [24, 0, 109, ""],
+        [26, 1, 112, ""],
+        [27, 0, 110, ""],
+        [29, 1, 111, ""],
+        [31, 0, 111, ""],
+        [33, 0, 112, ""],
+        [72, 1, 113, ""],
+        [73, 1, 114, ""],
+        [75, 1, 113, ""],
+        [77, 0, 113, ""],
+        [79, 0, 114, ""],
+        [81, 1, 117, ""],
+        [83, 1, 115, ""],
+        [85, 0, 115, ""],
+        [88, 1, 116, ""],
+        [90, 0, 116, ""],
+        [92, 1, 118, ""],
+        [93, 0, 117, ""],
+        [96, 0, 118, ""],
+        [105, 1, 119, ""],
+        [109, 0, 119, ""],
+        [111, 1, 121, ""],
+        [114, 1, 120, ""],
+        [116, 0, 120, ""],
+        [118, 1, 121, ""],
+        [121, 0, 121, ""],
+        [159, 1, 122, ""],
+        [160, 1, 125, ""],
+        [162, 1, 124, ""],
+        [164, 1, 123, ""],
+        [166, 0, 122, ""],
+        [168, 0, 123, ""],
+        [172, 0, 124, ""],
+        [174, 1, 122, ""],
+        [178, 0, 125, ""],
+        [180, 1, 128, ""],
+        [182, 1, 126, ""],
+        [184, 0, 126, ""],
+        [187, 1, 127, ""],
+        [189, 0, 127, ""],
+        [191, 1, 129, ""],
+        [192, 0, 128, ""],
+        [195, 0, 129, ""],
+        [233, 1, 130, ""],
+        [234, 1, 131, ""],
+        [236, 1, 130, ""],
+        [238, 0, 130, ""],
+        [240, 0, 131, ""],
+        [242, 1, 134, ""],
+        [244, 1, 132, ""],
+        [246, 0, 132, ""],
+        [249, 1, 133, ""],
+        [251, 0, 133, ""],
+        [253, 1, 135, ""],
+        [254, 0, 134, ""],
+        [257, 0, 135, ""],
+        [295, 1, 136, ""],
+        [296, 1, 137, ""],
+        [298, 1, 136, ""],
+        [300, 0, 136, ""],
+        [302, 0, 137, ""],
+        [304, 1, 140, ""],
+        [306, 1, 138, ""],
+        [308, 0, 138, ""],
+        [311, 1, 139, ""],
+        [313, 0, 139, ""],
+        [315, 1, 141, ""],
+        [316, 0, 140, ""],
+        [319, 0, 141, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/surface_clearance.s",
+      "tokens": [
+        [31, 1, 2, ""],
+        [62, 1, 2, ""],
+        [67, 1, 143, ""],
+        [68, 0, 142, ""],
+        [75, 1, 5, ""],
+        [76, 0, 143, ""],
+        [85, 1, 5, ""],
+        [97, 1, 144, ""],
+        [99, 0, 144, ""],
+        [133, 1, 2, ""],
+        [168, 1, 2, ""],
+        [180, 1, 5, ""],
+        [191, 1, 5, ""],
+        [207, 1, 145, ""],
+        [209, 0, 145, ""],
+        [243, 1, 2, ""],
+        [276, 1, 2, ""],
+        [281, 1, 147, ""],
+        [282, 0, 146, ""],
+        [290, 1, 5, ""],
+        [291, 0, 147, ""],
+        [301, 1, 5, ""],
+        [305, 1, 148, ""],
+        [307, 0, 148, ""],
+        [322, 1, 149, ""],
+        [324, 0, 149, ""],
+        [338, 1, 150, ""],
+        [340, 0, 150, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/s3/wall_probes.s",
+      "tokens": [
+        [9, 1, 151, ""],
+        [13, 1, 152, ""],
+        [14, 0, 151, ""],
+        [16, 0, 152, ""],
+        [21, 1, 153, ""],
+        [25, 1, 154, ""],
+        [26, 0, 153, ""],
+        [28, 0, 154, ""],
+        [32, 1, 155, ""],
+        [35, 0, 155, ""],
+        [42, 1, 156, ""],
+        [44, 1, 157, ""],
+        [45, 0, 156, ""],
+        [51, 0, 157, ""],
+        [55, 1, 156, ""],
+        [61, 1, 158, ""],
+        [66, 0, 158, ""],
+        [68, 1, 159, ""],
+        [70, 0, 159, ""],
+        [78, 1, 160, ""],
+        [80, 0, 160, ""],
+        [82, 1, 156, ""],
+        [83, 1, 161, ""],
+        [85, 1, 162, ""],
+        [92, 0, 161, ""],
+        [96, 1, 156, ""],
+        [97, 0, 162, ""],
+        [108, 1, 163, ""],
+        [110, 1, 164, ""],
+        [111, 0, 163, ""],
+        [117, 0, 164, ""],
+        [121, 1, 163, ""],
+        [127, 1, 165, ""],
+        [132, 0, 165, ""],
+        [134, 1, 166, ""],
+        [136, 0, 166, ""],
+        [144, 1, 167, ""],
+        [146, 0, 167, ""],
+        [148, 1, 163, ""],
+        [149, 1, 168, ""],
+        [156, 0, 168, ""],
+        [160, 1, 163, ""],
+        [170, 1, 169, ""],
+        [172, 0, 169, ""],
+        [190, 1, 171, ""],
+        [192, 1, 170, ""],
+        [194, 0, 170, ""],
+        [196, 1, 173, ""],
+        [197, 0, 171, ""],
+        [199, 1, 172, ""],
+        [201, 0, 172, ""],
+        [203, 0, 173, ""],
+        [209, 1, 174, ""],
+        [211, 1, 174, ""],
+        [213, 0, 174, ""],
+        [215, 1, 146, ""],
+        [216, 1, 142, ""],
+        [220, 1, 175, ""],
+        [222, 0, 175, ""],
+        [240, 1, 177, ""],
+        [242, 1, 176, ""],
+        [244, 0, 176, ""],
+        [246, 1, 179, ""],
+        [247, 0, 177, ""],
+        [249, 1, 178, ""],
+        [251, 0, 178, ""],
+        [253, 0, 179, ""],
+        [259, 1, 147, ""],
+        [260, 1, 143, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/floor_clearance.s",
+      "tokens": [
+        [4, 1, 180, ""],
+        [6, 0, 180, ""],
+        [21, 1, 181, ""],
+        [23, 0, 181, ""],
+        [54, 0, 182, ""],
+        [57, 1, 183, ""],
+        [60, 0, 183, ""],
+        [62, 1, 184, ""],
+        [64, 0, 184, ""],
+        [76, 0, 185, ""],
+        [79, 1, 186, ""],
+        [81, 0, 186, ""],
+        [92, 1, 185, ""],
+        [99, 1, 187, ""],
+        [101, 0, 187, ""],
+        [112, 1, 188, ""],
+        [114, 0, 188, ""],
+        [127, 1, 189, ""],
+        [129, 0, 189, ""],
+        [140, 1, 190, ""],
+        [142, 0, 190, ""],
+        [153, 1, 191, ""],
+        [155, 0, 191, ""],
+        [164, 1, 192, ""],
+        [166, 0, 192, ""],
+        [183, 1, 193, ""],
+        [185, 0, 193, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/floor_probes.s",
+      "tokens": [
+        [81, 1, 194, ""],
+        [84, 0, 194, ""],
+        [91, 1, 195, ""],
+        [93, 1, 196, ""],
+        [94, 0, 195, ""],
+        [100, 0, 196, ""],
+        [105, 1, 195, ""],
+        [111, 1, 197, ""],
+        [114, 0, 197, ""],
+        [116, 1, 198, ""],
+        [120, 0, 198, ""],
+        [128, 1, 199, ""],
+        [130, 0, 199, ""],
+        [132, 1, 195, ""],
+        [133, 1, 200, ""],
+        [135, 1, 201, ""],
+        [142, 0, 200, ""],
+        [146, 1, 195, ""],
+        [147, 0, 201, ""],
+        [158, 1, 202, ""],
+        [160, 1, 203, ""],
+        [161, 0, 202, ""],
+        [167, 0, 203, ""],
+        [172, 1, 202, ""],
+        [178, 1, 204, ""],
+        [181, 0, 204, ""],
+        [183, 1, 205, ""],
+        [187, 0, 205, ""],
+        [195, 1, 206, ""],
+        [197, 0, 206, ""],
+        [199, 1, 202, ""],
+        [200, 1, 207, ""],
+        [207, 0, 207, ""],
+        [211, 1, 202, ""],
+        [229, 1, 208, ""],
+        [232, 0, 208, ""],
+        [239, 1, 209, ""],
+        [241, 1, 210, ""],
+        [242, 0, 209, ""],
+        [245, 0, 210, ""],
+        [250, 1, 209, ""],
+        [256, 1, 211, ""],
+        [259, 0, 211, ""],
+        [261, 1, 212, ""],
+        [265, 0, 212, ""],
+        [273, 1, 213, ""],
+        [275, 0, 213, ""],
+        [277, 1, 209, ""],
+        [278, 1, 214, ""],
+        [280, 1, 215, ""],
+        [287, 0, 214, ""],
+        [291, 1, 209, ""],
+        [292, 0, 215, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/object_touch_response.s",
+      "tokens": [
+        [54, 1, 216, ""],
+        [63, 0, 216, ""],
+        [377, 1, 217, ""],
+        [379, 1, 219, ""],
+        [381, 0, 217, ""],
+        [383, 1, 218, ""],
+        [385, 1, 219, ""],
+        [387, 1, 223, ""],
+        [389, 1, 218, ""],
+        [394, 0, 218, ""],
+        [396, 0, 219, ""],
+        [403, 1, 220, ""],
+        [406, 0, 220, ""],
+        [409, 1, 221, ""],
+        [411, 0, 221, ""],
+        [417, 1, 222, ""],
+        [419, 1, 222, ""],
+        [421, 0, 222, ""],
+        [425, 0, 223, ""],
+        [428, 1, 224, ""],
+        [430, 1, 224, ""],
+        [432, 0, 224, ""],
+        [433, 1, 225, ""],
+        [436, 1, 226, ""],
+        [438, 0, 225, ""],
+        [453, 0, 226, ""],
+        [460, 1, 227, ""],
+        [462, 1, 227, ""],
+        [464, 1, 227, ""],
+        [466, 1, 227, ""],
+        [468, 1, 227, ""],
+        [470, 1, 227, ""],
+        [472, 1, 227, ""],
+        [474, 1, 227, ""],
+        [476, 1, 227, ""],
+        [478, 0, 227, ""],
+        [498, 1, 228, ""],
+        [507, 1, 228, ""],
+        [517, 0, 228, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/platform_collision.s",
+      "tokens": [
+        [3, 1, 231, ""],
+        [8, 1, 229, ""],
+        [12, 0, 229, ""],
+        [13, 1, 230, ""],
+        [16, 1, 231, ""],
+        [22, 1, 230, ""],
+        [25, 0, 230, ""],
+        [36, 0, 231, ""],
+        [40, 1, 231, ""],
+        [45, 1, 232, ""],
+        [48, 0, 232, ""],
+        [50, 1, 230, ""],
+        [61, 1, 243, ""],
+        [65, 1, 233, ""],
+        [69, 1, 233, ""],
+        [71, 1, 234, ""],
+        [72, 0, 233, ""],
+        [78, 0, 234, ""],
+        [97, 1, 235, ""],
+        [101, 1, 235, ""],
+        [103, 1, 236, ""],
+        [104, 0, 235, ""],
+        [110, 0, 236, ""],
+        [129, 1, 237, ""],
+        [133, 1, 237, ""],
+        [135, 1, 238, ""],
+        [136, 0, 237, ""],
+        [142, 0, 238, ""],
+        [156, 1, 239, ""],
+        [158, 1, 241, ""],
+        [159, 1, 243, ""],
+        [160, 0, 239, ""],
+        [164, 1, 240, ""],
+        [168, 1, 240, ""],
+        [170, 1, 242, ""],
+        [171, 0, 240, ""],
+        [175, 0, 241, ""],
+        [178, 0, 242, ""],
+        [185, 1, 247, ""],
+        [189, 1, 247, ""],
+        [191, 1, 247, ""],
+        [192, 1, 244, ""],
+        [193, 0, 243, ""],
+        [195, 1, 247, ""],
+        [199, 1, 247, ""],
+        [202, 1, 247, ""],
+        [203, 0, 244, ""],
+        [205, 1, 248, ""],
+        [208, 0, 245, ""],
+        [215, 1, 247, ""],
+        [217, 1, 247, ""],
+        [219, 1, 247, ""],
+        [221, 1, 247, ""],
+        [227, 1, 246, ""],
+        [230, 0, 246, ""],
+        [238, 1, 247, ""],
+        [243, 0, 247, ""],
+        [245, 0, 248, ""],
+        [255, 1, 247, ""],
+        [257, 1, 247, ""],
+        [259, 1, 247, ""],
+        [261, 1, 247, ""],
+        [268, 1, 247, ""],
+        [272, 1, 247, ""],
+        [275, 1, 247, ""],
+        [277, 1, 249, ""],
+        [280, 0, 249, ""],
+        [286, 1, 245, ""],
+        [289, 1, 247, ""],
+        [293, 1, 247, ""],
+        [296, 1, 247, ""],
+        [298, 1, 250, ""],
+        [301, 0, 250, ""],
+        [306, 1, 245, ""],
+        [310, 1, 252, ""],
+        [313, 1, 251, ""],
+        [314, 1, 252, ""],
+        [315, 0, 251, ""],
+        [320, 0, 252, ""],
+        [323, 1, 254, ""],
+        [326, 1, 253, ""],
+        [327, 1, 254, ""],
+        [328, 0, 253, ""],
+        [333, 0, 254, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/solid_rectangles.s",
+      "tokens": [
+        [9, 1, 257, ""],
+        [13, 1, 273, ""],
+        [17, 1, 255, ""],
+        [21, 1, 255, ""],
+        [23, 1, 256, ""],
+        [24, 0, 255, ""],
+        [30, 0, 256, ""],
+        [34, 0, 257, ""],
+        [50, 1, 258, ""],
+        [54, 1, 258, ""],
+        [56, 1, 259, ""],
+        [57, 0, 258, ""],
+        [63, 0, 259, ""],
+        [78, 1, 269, ""],
+        [82, 1, 260, ""],
+        [86, 1, 260, ""],
+        [88, 1, 261, ""],
+        [89, 0, 260, ""],
+        [95, 0, 261, ""],
+        [112, 1, 271, ""],
+        [116, 1, 262, ""],
+        [120, 1, 262, ""],
+        [122, 1, 263, ""],
+        [123, 0, 262, ""],
+        [129, 0, 263, ""],
+        [144, 1, 269, ""],
+        [148, 1, 264, ""],
+        [152, 1, 264, ""],
+        [154, 1, 265, ""],
+        [155, 0, 264, ""],
+        [160, 0, 265, ""],
+        [178, 1, 268, ""],
+        [180, 1, 266, ""],
+        [184, 1, 266, ""],
+        [187, 1, 267, ""],
+        [188, 0, 266, ""],
+        [194, 0, 267, ""],
+        [206, 0, 268, ""],
+        [210, 1, 283, ""],
+        [214, 1, 283, ""],
+        [224, 1, 283, ""],
+        [228, 1, 283, ""],
+        [229, 1, 275, ""],
+        [230, 0, 269, ""],
+        [234, 1, 283, ""],
+        [238, 1, 283, ""],
+        [241, 1, 270, ""],
+        [244, 0, 270, ""],
+        [258, 1, 283, ""],
+        [262, 1, 283, ""],
+        [263, 1, 275, ""],
+        [264, 0, 271, ""],
+        [268, 1, 283, ""],
+        [272, 1, 283, ""],
+        [275, 1, 272, ""],
+        [278, 0, 272, ""],
+        [292, 1, 283, ""],
+        [297, 1, 283, ""],
+        [298, 1, 275, ""],
+        [299, 0, 273, ""],
+        [301, 1, 283, ""],
+        [309, 1, 283, ""],
+        [311, 1, 274, ""],
+        [326, 1, 283, ""],
+        [327, 1, 275, ""],
+        [328, 0, 274, ""],
+        [342, 1, 283, ""],
+        [343, 0, 275, ""],
+        [345, 1, 283, ""],
+        [347, 1, 284, ""],
+        [349, 1, 284, ""],
+        [352, 1, 276, ""],
+        [357, 0, 276, ""],
+        [360, 1, 277, ""],
+        [365, 0, 277, ""],
+        [367, 1, 285, ""],
+        [369, 1, 285, ""],
+        [370, 0, 278, ""],
+        [372, 1, 281, ""],
+        [373, 1, 279, ""],
+        [375, 1, 281, ""],
+        [376, 1, 280, ""],
+        [377, 0, 279, ""],
+        [379, 1, 281, ""],
+        [380, 0, 280, ""],
+        [384, 1, 281, ""],
+        [386, 0, 281, ""],
+        [389, 1, 282, ""],
+        [399, 0, 282, ""],
+        [406, 0, 283, ""],
+        [410, 1, 284, ""],
+        [421, 0, 284, ""],
+        [424, 0, 285, ""],
+        [426, 1, 286, ""],
+        [428, 1, 294, ""],
+        [429, 1, 283, ""],
+        [430, 0, 286, ""],
+        [432, 1, 287, ""],
+        [434, 1, 292, ""],
+        [435, 1, 290, ""],
+        [437, 1, 290, ""],
+        [438, 1, 288, ""],
+        [439, 0, 287, ""],
+        [441, 0, 288, ""],
+        [443, 1, 289, ""],
+        [445, 0, 289, ""],
+        [448, 0, 290, ""],
+        [450, 1, 291, ""],
+        [452, 0, 291, ""],
+        [458, 0, 292, ""],
+        [460, 1, 290, ""],
+        [462, 1, 293, ""],
+        [464, 0, 293, ""],
+        [466, 1, 278, ""],
+        [476, 0, 294, ""],
+        [484, 1, 296, ""],
+        [486, 1, 296, ""],
+        [489, 1, 295, ""],
+        [492, 0, 295, ""],
+        [495, 1, 296, ""],
+        [502, 0, 296, ""],
+        [507, 1, 297, ""],
+        [510, 1, 299, ""],
+        [511, 0, 297, ""],
+        [514, 1, 301, ""],
+        [516, 1, 298, ""],
+        [519, 1, 301, ""],
+        [520, 0, 298, ""],
+        [523, 0, 299, ""],
+        [525, 1, 300, ""],
+        [527, 1, 300, ""],
+        [529, 1, 300, ""],
+        [536, 0, 300, ""],
+        [538, 0, 301, ""],
+        [540, 1, 302, ""],
+        [542, 1, 302, ""],
+        [544, 1, 302, ""],
+        [551, 0, 302, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/surface_attachment.s",
+      "tokens": [
+        [4, 1, 303, ""],
+        [6, 0, 303, ""],
+        [9, 1, 304, ""],
+        [14, 0, 304, ""],
+        [20, 1, 306, ""],
+        [22, 1, 305, ""],
+        [24, 0, 305, ""],
+        [26, 1, 308, ""],
+        [27, 0, 306, ""],
+        [29, 1, 307, ""],
+        [31, 0, 307, ""],
+        [33, 0, 308, ""],
+        [72, 1, 309, ""],
+        [73, 1, 310, ""],
+        [75, 1, 309, ""],
+        [77, 0, 309, ""],
+        [79, 0, 310, ""],
+        [81, 1, 313, ""],
+        [83, 1, 311, ""],
+        [85, 0, 311, ""],
+        [88, 1, 312, ""],
+        [90, 0, 312, ""],
+        [92, 1, 314, ""],
+        [93, 0, 313, ""],
+        [96, 0, 314, ""],
+        [105, 1, 315, ""],
+        [109, 0, 315, ""],
+        [111, 1, 317, ""],
+        [114, 1, 316, ""],
+        [116, 0, 316, ""],
+        [118, 1, 317, ""],
+        [121, 0, 317, ""],
+        [159, 1, 318, ""],
+        [160, 1, 321, ""],
+        [162, 1, 320, ""],
+        [164, 1, 319, ""],
+        [166, 0, 318, ""],
+        [168, 0, 319, ""],
+        [172, 0, 320, ""],
+        [174, 1, 318, ""],
+        [178, 0, 321, ""],
+        [180, 1, 324, ""],
+        [182, 1, 322, ""],
+        [184, 0, 322, ""],
+        [187, 1, 323, ""],
+        [189, 0, 323, ""],
+        [191, 1, 325, ""],
+        [192, 0, 324, ""],
+        [195, 0, 325, ""],
+        [233, 1, 326, ""],
+        [234, 1, 327, ""],
+        [236, 1, 326, ""],
+        [238, 0, 326, ""],
+        [240, 0, 327, ""],
+        [242, 1, 330, ""],
+        [244, 1, 328, ""],
+        [246, 0, 328, ""],
+        [249, 1, 329, ""],
+        [251, 0, 329, ""],
+        [253, 1, 331, ""],
+        [254, 0, 330, ""],
+        [257, 0, 331, ""],
+        [295, 1, 332, ""],
+        [296, 1, 333, ""],
+        [298, 1, 332, ""],
+        [300, 0, 332, ""],
+        [302, 0, 333, ""],
+        [304, 1, 336, ""],
+        [306, 1, 334, ""],
+        [308, 0, 334, ""],
+        [311, 1, 335, ""],
+        [313, 0, 335, ""],
+        [315, 1, 337, ""],
+        [316, 0, 336, ""],
+        [319, 0, 337, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/surface_clearance.s",
+      "tokens": [
+        [31, 1, 182, ""],
+        [62, 1, 182, ""],
+        [67, 1, 339, ""],
+        [68, 0, 338, ""],
+        [75, 1, 185, ""],
+        [76, 0, 339, ""],
+        [85, 1, 185, ""],
+        [97, 1, 340, ""],
+        [99, 0, 340, ""],
+        [133, 1, 182, ""],
+        [168, 1, 182, ""],
+        [180, 1, 185, ""],
+        [191, 1, 185, ""],
+        [207, 1, 341, ""],
+        [209, 0, 341, ""],
+        [221, 1, 342, ""],
+        [223, 0, 342, ""],
+        [234, 1, 343, ""],
+        [236, 0, 343, ""],
+        [283, 1, 182, ""],
+        [316, 1, 182, ""],
+        [321, 1, 345, ""],
+        [322, 0, 344, ""],
+        [330, 1, 185, ""],
+        [331, 0, 345, ""],
+        [341, 1, 185, ""],
+        [345, 1, 346, ""],
+        [347, 0, 346, ""],
+        [362, 1, 347, ""],
+        [364, 0, 347, ""],
+        [379, 1, 348, ""],
+        [381, 0, 348, ""]
+      ]
+    },
+    {
+      "source": "src/game/collision/sk/wall_probes.s",
+      "tokens": [
+        [9, 1, 349, ""],
+        [13, 1, 350, ""],
+        [14, 0, 349, ""],
+        [16, 0, 350, ""],
+        [21, 1, 351, ""],
+        [25, 1, 352, ""],
+        [26, 0, 351, ""],
+        [28, 0, 352, ""],
+        [32, 1, 353, ""],
+        [35, 0, 353, ""],
+        [42, 1, 354, ""],
+        [44, 1, 355, ""],
+        [45, 0, 354, ""],
+        [51, 0, 355, ""],
+        [56, 1, 354, ""],
+        [62, 1, 356, ""],
+        [67, 0, 356, ""],
+        [69, 1, 357, ""],
+        [71, 0, 357, ""],
+        [79, 1, 358, ""],
+        [81, 0, 358, ""],
+        [83, 1, 354, ""],
+        [84, 1, 359, ""],
+        [86, 1, 360, ""],
+        [93, 0, 359, ""],
+        [97, 1, 354, ""],
+        [98, 0, 360, ""],
+        [109, 1, 361, ""],
+        [111, 1, 362, ""],
+        [112, 0, 361, ""],
+        [118, 0, 362, ""],
+        [123, 1, 361, ""],
+        [129, 1, 363, ""],
+        [134, 0, 363, ""],
+        [136, 1, 364, ""],
+        [138, 0, 364, ""],
+        [146, 1, 365, ""],
+        [148, 0, 365, ""],
+        [150, 1, 361, ""],
+        [151, 1, 366, ""],
+        [158, 0, 366, ""],
+        [162, 1, 361, ""],
+        [170, 1, 367, ""],
+        [172, 0, 367, ""],
+        [182, 1, 368, ""],
+        [184, 0, 368, ""],
+        [194, 1, 370, ""],
+        [196, 1, 369, ""],
+        [198, 0, 369, ""],
+        [200, 1, 372, ""],
+        [201, 0, 370, ""],
+        [203, 1, 371, ""],
+        [205, 0, 371, ""],
+        [207, 0, 372, ""],
+        [213, 1, 373, ""],
+        [215, 1, 373, ""],
+        [217, 0, 373, ""],
+        [219, 1, 344, ""],
+        [220, 1, 338, ""],
+        [224, 1, 374, ""],
+        [226, 0, 374, ""],
+        [244, 1, 376, ""],
+        [246, 1, 375, ""],
+        [248, 0, 375, ""],
+        [250, 1, 378, ""],
+        [251, 0, 376, ""],
+        [253, 1, 377, ""],
+        [255, 0, 377, ""],
+        [257, 0, 378, ""],
+        [263, 1, 345, ""],
+        [264, 1, 339, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/knuckles/sk/glide_and_climbing.s",
+      "tokens": [
+        [522, 1, 339, ""],
+        [526, 1, 345, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/tension_bridge/s3/bending_and_collision.s",
+      "tokens": [[171, 2, 58, ""]]
+    },
+    {
+      "source": "src/objects/shared/tension_bridge/sk/bending_and_collision.s",
+      "tokens": [[171, 2, 245, ""]]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/curled_vine.s",
+      "tokens": [[184, 2, 245, ""]]
+    }
+  ]
+}

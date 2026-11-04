@@ -12,40 +12,40 @@ FindWall:
                 move.b  (a4),Primary_Angle_save-Primary_Angle(a4)
                 move.w  d1,-(sp)
                 move.w  a3,d0
-                bpl.s   loc_1080E
+                bpl.s   S3Collision_SubtractBackgroundCameraXForPositiveWallStep
                 eori.w  #$F,d3
                 sub.w   (Camera_X_diff).w,d3
                 eori.w  #$F,d3
-                bra.s   loc_10812
+                bra.s   S3Collision_SampleBackgroundWallAfterCameraTranslation
 ; ---------------------------------------------------------------------------
 
-loc_1080E:
+S3Collision_SubtractBackgroundCameraXForPositiveWallStep:
                 sub.w   (Camera_X_diff).w,d3
 
-loc_10812:
+S3Collision_SampleBackgroundWallAfterCameraTranslation:
                 sub.w   (Camera_Y_diff).w,d2
                 lea     (Find_Tile_BG).l,a5
                 bsr.s   SampleWallDistanceWithNeighbor
                 move.w  a3,d0
-                bpl.s   loc_10830
+                bpl.s   S3Collision_RestoreWallXAfterPositiveBackgroundStep
                 eori.w  #$F,d3
                 add.w   (Camera_X_diff).w,d3
                 eori.w  #$F,d3
-                bra.s   loc_10834
+                bra.s   S3Collision_RestoreWallYAndChooseCloserLayer
 ; ---------------------------------------------------------------------------
 
-loc_10830:
+S3Collision_RestoreWallXAfterPositiveBackgroundStep:
                 add.w   (Camera_X_diff).w,d3
 
-loc_10834:
+S3Collision_RestoreWallYAndChooseCloserLayer:
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   locret_10844
+                ble.s   S3Collision_ReturnSelectedWallLayerDistance
                 move.b  Primary_Angle_save-Primary_Angle(a4),(a4)
                 move.w  d0,d1
 
-locret_10844:
+S3Collision_ReturnSelectedWallLayerDistance:
                 rts
 ; End of function FindWall
 
@@ -56,11 +56,11 @@ SampleWallDistanceWithNeighbor:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   loc_10856
+                beq.s   S3Collision_SampleForwardWallNeighborForMissingShape
                 btst    d5,d4
-                bne.s   loc_10864
+                bne.s   S3Collision_LoadNeighborAwareWallShapeAndAngle
 
-loc_10856:
+S3Collision_SampleForwardWallNeighborForMissingShape:
                 add.w   a3,d3
                 bsr.w   SampleSingleBlockWallDistance
                 sub.w   a3,d3
@@ -68,28 +68,28 @@ loc_10856:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10864:
+S3Collision_LoadNeighborAwareWallShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.w  (a2,d0.w),d0
-                beq.s   loc_10856
+                beq.s   S3Collision_SampleForwardWallNeighborForMissingShape
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d2,d1
                 btst    #$B,d4
-                beq.s   loc_10890
+                beq.s   S3Collision_TransformNeighborAwareWallAngleForXFlip
                 not.w   d1
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-loc_10890:
+S3Collision_TransformNeighborAwareWallAngleForXFlip:
                 btst    #$A,d4
-                beq.s   loc_10898
+                beq.s   S3Collision_ReadNeighborAwareRotatedWallHeight
                 neg.b   (a4)
 
-loc_10898:
+S3Collision_ReadNeighborAwareRotatedWallHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMapsRot).l,a2
@@ -97,15 +97,15 @@ loc_10898:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$A,d4
-                beq.s   loc_108B4
+                beq.s   S3Collision_ResolveNeighborAwareWallHeightCase
                 neg.w   d0
 
-loc_108B4:
+S3Collision_ResolveNeighborAwareWallHeightCase:
                 tst.w   d0
-                beq.s   loc_10856
-                bmi.s   loc_108D0
+                beq.s   S3Collision_SampleForwardWallNeighborForMissingShape
+                bmi.s   S3Collision_TestNegativeWallProfileAgainstXFraction
                 cmpi.b  #$10,d0
-                beq.s   loc_108DC
+                beq.s   S3Collision_SampleBackwardWallNeighborAndSubtractBlock
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -114,13 +114,13 @@ loc_108B4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_108D0:
+S3Collision_TestNegativeWallProfileAgainstXFraction:
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   loc_10856
+                bpl.w   S3Collision_SampleForwardWallNeighborForMissingShape
 
-loc_108DC:
+S3Collision_SampleBackwardWallNeighborAndSubtractBlock:
                 sub.w   a3,d3
                 bsr.w   SampleSingleBlockWallDistance
                 add.w   a3,d3
@@ -135,11 +135,11 @@ SampleSingleBlockWallDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   loc_108FA
+                beq.s   S3Collision_ReturnSingleBlockWallEmptyDistance
                 btst    d5,d4
-                bne.s   loc_10908
+                bne.s   S3Collision_LoadSingleBlockWallShapeAndAngle
 
-loc_108FA:
+S3Collision_ReturnSingleBlockWallEmptyDistance:
                 move.w  #$F,d1
                 move.w  d3,d0
                 andi.w  #$F,d0
@@ -147,28 +147,28 @@ loc_108FA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10908:
+S3Collision_LoadSingleBlockWallShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.w  (a2,d0.w),d0
-                beq.s   loc_108FA
+                beq.s   S3Collision_ReturnSingleBlockWallEmptyDistance
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d2,d1
                 btst    #$B,d4
-                beq.s   loc_10934
+                beq.s   S3Collision_TransformSingleBlockWallAngleForXFlip
                 not.w   d1
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-loc_10934:
+S3Collision_TransformSingleBlockWallAngleForXFlip:
                 btst    #$A,d4
-                beq.s   loc_1093C
+                beq.s   S3Collision_ReadSingleBlockRotatedWallHeight
                 neg.b   (a4)
 
-loc_1093C:
+S3Collision_ReadSingleBlockRotatedWallHeight:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMapsRot).l,a2
@@ -176,13 +176,13 @@ loc_1093C:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$A,d4
-                beq.s   loc_10958
+                beq.s   S3Collision_ResolveSingleBlockWallHeightCase
                 neg.w   d0
 
-loc_10958:
+S3Collision_ResolveSingleBlockWallHeightCase:
                 tst.w   d0
-                beq.s   loc_108FA
-                bmi.s   loc_1096E
+                beq.s   S3Collision_ReturnSingleBlockWallEmptyDistance
+                bmi.s   S3Collision_ReturnOrRejectNegativeSingleBlockWallProfile
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -191,11 +191,11 @@ loc_10958:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1096E:
+S3Collision_ReturnOrRejectNegativeSingleBlockWallProfile:
                 move.w  d3,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   loc_108FA
+                bpl.w   S3Collision_ReturnSingleBlockWallEmptyDistance
                 not.w   d1
                 rts
 ; End of function SampleSingleBlockWallDistance
@@ -213,10 +213,10 @@ ProbeNextSurfaceWithFixedLookahead:
                 bne.w   ProbeNextSurfaceWithBodyRadius
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_1099C
+                beq.s   S3Collision_PredictFixedLookaheadPositionAndQuantizeProbeAngle
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_1099C:
+S3Collision_PredictFixedLookaheadPositionAndQuantizeProbeAngle:
                 move.b  lrb_solid_bit(a0),d5
                 move.l  x_pos(a0),d3
                 move.l  y_pos(a0),d2
@@ -234,39 +234,39 @@ loc_1099C:
                 move.b  d0,(Secondary_Angle).w
                 move.b  d0,d1
                 addi.b  #$20,d0
-                bpl.s   loc_109DC
+                bpl.s   S3Collision_AdjustFixedProbeOppositeAngleBoundary
                 move.b  d1,d0
-                bpl.s   loc_109D6
+                bpl.s   S3Collision_RoundFixedProbeNegativeBoundaryWithTwenty
                 subq.b  #1,d0
 
-loc_109D6:
+S3Collision_RoundFixedProbeNegativeBoundaryWithTwenty:
                 addi.b  #$20,d0
-                bra.s   loc_109E6
+                bra.s   S3Collision_DispatchFixedPredictedSurfaceQuadrant
 ; ---------------------------------------------------------------------------
 
-loc_109DC:
+S3Collision_AdjustFixedProbeOppositeAngleBoundary:
                 move.b  d1,d0
-                bpl.s   loc_109E2
+                bpl.s   S3Collision_AddFixedProbeOneLessThanQuadrantBias
                 addq.b  #1,d0
 
-loc_109E2:
+S3Collision_AddFixedProbeOneLessThanQuadrantBias:
                 addi.b  #$1F,d0
 
-loc_109E6:
+S3Collision_DispatchFixedPredictedSurfaceQuadrant:
                 andi.b  #$C0,d0
                 beq.w   CheckFloorDist_Part2
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_Part2
                 tst.w   (Competition_mode).w
-                bne.s   loc_10A04
+                bne.s   S3Collision_DispatchFixedPredictedWallSide
                 andi.b  #$38,d1
-                bne.s   loc_10A04
+                bne.s   S3Collision_DispatchFixedPredictedWallSide
                 addq.w  #8,d2
 
-loc_10A04:
+S3Collision_DispatchFixedPredictedWallSide:
                 cmpi.b  #$40,d0
-                beq.w   loc_11084
-                bra.w   loc_10DE4
+                beq.w   S3Collision_ProbeLeftWallWithFixedTenPixelOffset
+                bra.w   S3Collision_ProbeRightWallWithFixedTenPixelOffset
 ; End of function ProbeNextSurfaceWithFixedLookahead
 
 ; =============== S U B R O U T I N E =======================================
@@ -274,10 +274,10 @@ loc_10A04:
 ProbeNextSurfaceWithBodyRadius:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_10A24
+                beq.s   S3Collision_PredictBodyRadiusPositionAndQuantizeProbeAngle
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10A24:
+S3Collision_PredictBodyRadiusPositionAndQuantizeProbeAngle:
                 move.b  lrb_solid_bit(a0),d5
                 move.l  x_pos(a0),d3
                 move.l  y_pos(a0),d2
@@ -295,30 +295,30 @@ loc_10A24:
                 move.b  d0,(Secondary_Angle).w
                 move.b  d0,d1
                 addi.b  #$20,d0
-                bpl.s   loc_10A64
+                bpl.s   S3Collision_AdjustRadiusProbeOppositeAngleBoundary
                 move.b  d1,d0
-                bpl.s   loc_10A5E
+                bpl.s   S3Collision_RoundRadiusProbeNegativeBoundaryWithTwenty
                 subq.b  #1,d0
 
-loc_10A5E:
+S3Collision_RoundRadiusProbeNegativeBoundaryWithTwenty:
                 addi.b  #$20,d0
-                bra.s   loc_10A6E
+                bra.s   S3Collision_DispatchPredictedSurfaceUsingBodyRadius
 ; ---------------------------------------------------------------------------
 
-loc_10A64:
+S3Collision_AdjustRadiusProbeOppositeAngleBoundary:
                 move.b  d1,d0
-                bpl.s   loc_10A6A
+                bpl.s   S3Collision_AddRadiusProbeOneLessThanQuadrantBias
                 addq.b  #1,d0
 
-loc_10A6A:
+S3Collision_AddRadiusProbeOneLessThanQuadrantBias:
                 addi.b  #$1F,d0
 
-loc_10A6E:
+S3Collision_DispatchPredictedSurfaceUsingBodyRadius:
                 andi.b  #$C0,d0
                 beq.w   ProbeFloorWithXRadiusOffset
                 cmpi.b  #$80,d0
                 beq.w   CheckCeilingDist_WithRadius
                 cmpi.b  #$40,d0
-                beq.w   loc_110A4
-                bra.w   loc_10E00
+                beq.w   S3Collision_ProbeLeftWallWithHorizontalRadius
+                bra.w   S3Collision_ProbeRightWallWithHorizontalRadius
 ; End of function ProbeNextSurfaceWithBodyRadius

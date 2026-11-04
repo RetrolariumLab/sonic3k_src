@@ -12,7 +12,7 @@ SolidObjectFull:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
-                bpl.w   locret_1BA6A
+                bpl.w   S3Collision_ReturnFromFullSolidOrInvisibleSecondaryGate
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
 ; End of function SolidObjectFull
 
@@ -20,19 +20,19 @@ SolidObjectFull:
 
 SolidObjectFull_1P:
                 btst    d6,status(a0)
-                beq.w   loc_1BD3E
+                beq.w   S3Collision_RequireVisibleObjectForFirstFullSolidVariant
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BA4E
+                bne.s   S3Collision_ReleaseFullRectangleRiderOutsideSpanOrInAir
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BA4E
+                bmi.s   S3Collision_ReleaseFullRectangleRiderOutsideSpanOrInAir
                 cmp.w   d2,d0
-                blo.s   loc_1BA62
+                blo.s   S3Collision_CarryExistingFullRectangleRider
 
-loc_1BA4E:
+S3Collision_ReleaseFullRectangleRiderOutsideSpanOrInAir:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -40,12 +40,12 @@ loc_1BA4E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BA62:
+S3Collision_CarryExistingFullRectangleRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
 
-locret_1BA6A:
+S3Collision_ReturnFromFullSolidOrInvisibleSecondaryGate:
                 rts
 ; End of function SolidObjectFull_1P
 
@@ -69,15 +69,15 @@ SolidObjectFull2_1P:
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BAA6
+                bne.s   S3Collision_ReleaseFullSolidSecondVariantRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BAA6
+                bmi.s   S3Collision_ReleaseFullSolidSecondVariantRider
                 cmp.w   d2,d0
-                blo.s   loc_1BABA
+                blo.s   S3Collision_CarryFullSolidSecondVariantRider
 
-loc_1BAA6:
+S3Collision_ReleaseFullSolidSecondVariantRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -85,7 +85,7 @@ loc_1BAA6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BABA:
+S3Collision_CarryFullSolidSecondVariantRider:
                 move.w  d4,d2
                 bsr.w   MvSonicOnPtfm
                 moveq   #0,d4
@@ -108,19 +108,19 @@ CollidePlayersWithHeightProfileSolid:
 
 CollidePlayerWithHeightProfileSolid:
                 btst    d6,status(a0)
-                beq.w   loc_1BC84
+                beq.w   S3Collision_TestUnboundHeightProfileHorizontalSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BAFE
+                bne.s   S3Collision_ReleaseHeightProfileRiderOutsideSpanOrInAir
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BAFE
+                bmi.s   S3Collision_ReleaseHeightProfileRiderOutsideSpanOrInAir
                 cmp.w   d2,d0
-                blo.s   loc_1BB12
+                blo.s   S3Collision_CarryHeightProfileRiderAndMarkStandingResult
 
-loc_1BAFE:
+S3Collision_ReleaseHeightProfileRiderOutsideSpanOrInAir:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -128,7 +128,7 @@ loc_1BAFE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BB12:
+S3Collision_CarryHeightProfileRiderAndMarkStandingResult:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 move.w  d6,d4
@@ -153,19 +153,19 @@ loc_1BB12:
 
 CollidePlayerWithDualHeightProfileSolid:
                 btst    d6,status(a0)
-                beq.w   loc_1BCDE
+                beq.w   S3Collision_TestUnboundDualHeightProfileSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BB5E
+                bne.s   S3Collision_ReleaseDualHeightProfileRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BB5E
+                bmi.s   S3Collision_ReleaseDualHeightProfileRider
                 cmp.w   d2,d0
-                blo.s   loc_1BB72
+                blo.s   S3Collision_CarryDualHeightProfileRider
 
-loc_1BB5E:
+S3Collision_ReleaseDualHeightProfileRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -173,7 +173,7 @@ loc_1BB5E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BB72:
+S3Collision_CarryDualHeightProfileRider:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped4
                 moveq   #0,d4
@@ -196,26 +196,26 @@ CollidePlayersWithHeightProfileKeepAirState:
 
 CollidePlayerWithHeightProfileKeepAirState:
                 btst    d6,status(a0)
-                beq.w   loc_1BC84
+                beq.w   S3Collision_TestUnboundHeightProfileHorizontalSpan
                 move.w  d1,d2
                 add.w   d2,d2
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BBB6
+                bne.s   S3Collision_ReleaseHeightProfileRiderWithoutSettingAir
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BBB6
+                bmi.s   S3Collision_ReleaseHeightProfileRiderWithoutSettingAir
                 cmp.w   d2,d0
-                blo.s   loc_1BBC4
+                blo.s   S3Collision_CarryKeepAirHeightProfileAndMarkResult
 
-loc_1BBB6:
+S3Collision_ReleaseHeightProfileRiderWithoutSettingAir:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BBC4:
+S3Collision_CarryKeepAirHeightProfileAndMarkResult:
                 move.w  d4,d2
                 bsr.w   SolidObjSloped2
                 move.w  d6,d4
@@ -241,18 +241,18 @@ SolidObjectFull_Offset:
 
 SolidObjectFull_Offset_1P:
                 btst    d6,status(a0)
-                beq.w   loc_1BC42
+                beq.w   S3Collision_TestUnboundOffsetRectangleOverlap
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BC0E
+                bne.s   S3Collision_ReleaseOffsetRectangleRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_1BC0E
+                bmi.s   S3Collision_ReleaseOffsetRectangleRider
                 add.w   d1,d1
                 cmp.w   d1,d0
-                blo.s   loc_1BC22
+                blo.s   S3Collision_SnapOffsetRectangleRiderAndCarryX
 
-loc_1BC0E:
+S3Collision_ReleaseOffsetRectangleRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -260,7 +260,7 @@ loc_1BC0E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BC22:
+S3Collision_SnapOffsetRectangleRiderAndCarryX:
                 move.w  y_pos(a0),d0
                 sub.w   d2,d0
                 add.w   d3,d0
@@ -274,15 +274,15 @@ loc_1BC22:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BC42:
+S3Collision_TestUnboundOffsetRectangleOverlap:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d1,d4
                 add.w   d4,d4
                 cmp.w   d4,d0
-                bhi.w   loc_1BE2E
+                bhi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  y_pos(a0),d5
                 add.w   d3,d5
                 move.b  y_radius(a1),d3
@@ -292,30 +292,30 @@ loc_1BC42:
                 sub.w   d5,d3
                 addq.w  #4,d3
                 add.w   d2,d3
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d2,d4
                 add.w   d4,d4
                 cmp.w   d4,d3
-                bhs.w   loc_1BE2E
-                bra.w   loc_1BD8A
+                bhs.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
+                bra.w   S3Collision_ChooseHorizontalAndVerticalResolutionDepths
 ; ---------------------------------------------------------------------------
 
-loc_1BC84:
+S3Collision_TestUnboundHeightProfileHorizontalSpan:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   loc_1BE2E
+                bhi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d0,d5
                 btst    #0,render_flags(a0)
-                beq.s   loc_1BCAA
+                beq.s   S3Collision_BuildOverlapFromRelativeHeightProfileDelta
                 not.w   d5
                 add.w   d3,d5
 
-loc_1BCAA:
+S3Collision_BuildOverlapFromRelativeHeightProfileDelta:
                 lsr.w   #1,d5
                 move.b  (a2,d5.w),d3
                 sub.b   (a2),d3
@@ -329,30 +329,30 @@ loc_1BCAA:
                 sub.w   d5,d3
                 addq.w  #4,d3
                 add.w   d2,d3
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d2,d4
                 add.w   d4,d4
                 cmp.w   d4,d3
-                bhs.w   loc_1BE2E
-                bra.w   loc_1BD8A
+                bhs.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
+                bra.w   S3Collision_ChooseHorizontalAndVerticalResolutionDepths
 ; ---------------------------------------------------------------------------
 
-loc_1BCDE:
+S3Collision_TestUnboundDualHeightProfileSpan:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   loc_1BE2E
+                bhi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d0,d5
                 btst    #0,render_flags(a0)
-                beq.s   loc_1BD04
+                beq.s   S3Collision_BuildOverlapFromTwoAdjacentHeightBytes
                 not.w   d5
                 add.w   d3,d5
 
-loc_1BD04:
+S3Collision_BuildOverlapFromTwoAdjacentHeightBytes:
                 andi.w  #$FFFE,d5
                 move.b  (a2,d5.w),d3
                 move.b  1(a2,d5.w),d2
@@ -366,28 +366,28 @@ loc_1BD04:
                 ext.w   d5
                 add.w   d5,d3
                 addq.w  #4,d3
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 add.w   d5,d2
                 move.w  d2,d4
                 add.w   d5,d4
                 cmp.w   d4,d3
-                bhs.w   loc_1BE2E
-                bra.w   loc_1BD8A
+                bhs.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
+                bra.w   S3Collision_ChooseHorizontalAndVerticalResolutionDepths
 ; ---------------------------------------------------------------------------
 
-loc_1BD3E:
+S3Collision_RequireVisibleObjectForFirstFullSolidVariant:
                 tst.b   render_flags(a0)
-                bpl.w   loc_1BE2E
+                bpl.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
 
 SolidObject_cont:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.w  d1,d3
                 add.w   d3,d3
                 cmp.w   d3,d0
-                bhi.w   loc_1BE2E
+                bhi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 move.b  default_y_radius(a1),d4
                 ext.w   d4
                 add.w   d2,d4
@@ -398,66 +398,66 @@ SolidObject_cont:
                 sub.w   y_pos(a0),d3
                 addq.w  #4,d3
                 add.w   d2,d3
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 andi.w  #$FFF,d3
                 add.w   d2,d4
                 cmp.w   d4,d3
-                bhs.w   loc_1BE2E
+                bhs.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
 
-loc_1BD8A:
+S3Collision_ChooseHorizontalAndVerticalResolutionDepths:
                 tst.b   object_control(a1)
-                bmi.w   loc_1BE2E
+                bmi.w   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
                 cmpi.b  #6,routine(a1)
-                bhs.w   loc_1BE54
+                bhs.w   S3Collision_ReturnNoSolidResolutionResult
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1BE54
+                bne.w   S3Collision_ReturnNoSolidResolutionResult
                 move.w  d0,d5
                 cmp.w   d0,d1
-                bhs.s   loc_1BDB2
+                bhs.s   S3Collision_ChooseVerticalCorrectionAndMagnitude
                 add.w   d1,d1
                 sub.w   d1,d0
                 move.w  d0,d5
                 neg.w   d5
 
-loc_1BDB2:
+S3Collision_ChooseVerticalCorrectionAndMagnitude:
                 move.w  d3,d1
                 cmp.w   d3,d2
-                bhs.s   loc_1BDC0
+                bhs.s   S3Collision_ChooseResolutionAxisByPenetrationMagnitude
                 subq.w  #4,d3
                 sub.w   d4,d3
                 move.w  d3,d1
                 neg.w   d1
 
-loc_1BDC0:
+S3Collision_ChooseResolutionAxisByPenetrationMagnitude:
                 cmp.w   d1,d5
-                bhi.w   loc_1BE58
+                bhi.w   S3Collision_SelectUndersideOrShallowTopResolution
 
-loc_1BDC6:
+S3Collision_ResolveSideContactVelocityDirection:
                 cmpi.w  #4,d1
-                bls.w   loc_1BE58
+                bls.w   S3Collision_SelectUndersideOrShallowTopResolution
                 tst.w   d0
-                beq.s   loc_1BDFA
-                bmi.s   loc_1BDDC
+                beq.s   S3Collision_CorrectHorizontalOverlapAndSetSideResult
+                bmi.s   S3Collision_CheckNegativeSideContactVelocity
                 tst.w   x_vel(a1)
-                bmi.s   loc_1BDFA
-                bra.s   loc_1BDE2
+                bmi.s   S3Collision_CorrectHorizontalOverlapAndSetSideResult
+                bra.s   S3Collision_StopHorizontalMotionForBlockingSide
 ; ---------------------------------------------------------------------------
 
-loc_1BDDC:
+S3Collision_CheckNegativeSideContactVelocity:
                 tst.w   x_vel(a1)
-                bpl.s   loc_1BDFA
+                bpl.s   S3Collision_CorrectHorizontalOverlapAndSetSideResult
 
-loc_1BDE2:
+S3Collision_StopHorizontalMotionForBlockingSide:
                 move.w  #0,ground_vel(a1)
                 move.w  #0,x_vel(a1)
                 tst.b   status_tertiary(a1)
-                bpl.s   loc_1BDFA
+                bpl.s   S3Collision_CorrectHorizontalOverlapAndSetSideResult
                 bset    #6,status_tertiary(a1)
 
-loc_1BDFA:
+S3Collision_CorrectHorizontalOverlapAndSetSideResult:
                 sub.w   d0,x_pos(a1)
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BE20
+                bne.s   S3Collision_ClearAirbornePushAndMarkSideContact
                 move.l  d6,d4
                 addq.b  #pushing_bit_delta,d4
                 bset    d4,status(a0)
@@ -469,7 +469,7 @@ loc_1BDFA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BE20:
+S3Collision_ClearAirbornePushAndMarkSideContact:
                 bsr.s   ClearPlayerPushingSolid
                 move.w  d6,d4
                 addi.b  #$D,d4
@@ -478,11 +478,11 @@ loc_1BE20:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BE2E:
+S3Collision_CleanUpPriorPushWhenNoSolidOverlap:
                 move.l  d6,d4
                 addq.b  #pushing_bit_delta,d4
                 btst    d4,status(a0)
-                beq.s   loc_1BE54
+                beq.s   S3Collision_ReturnNoSolidResolutionResult
                 cmpi.b  #2,anim(a1)
                 beq.s   ClearPlayerPushingSolid
                 move.w  #1,anim(a1)
@@ -496,45 +496,45 @@ ClearPlayerPushingSolid:
                 bclr    d4,status(a0)
                 bclr    #Status_Push,status(a1)
 
-loc_1BE54:
+S3Collision_ReturnNoSolidResolutionResult:
                 moveq   #0,d4
                 rts
 ; End of function ClearPlayerPushingSolid
 
 ; ---------------------------------------------------------------------------
 
-loc_1BE58:
+S3Collision_SelectUndersideOrShallowTopResolution:
                 tst.w   d3
-                bmi.s   loc_1BE64
+                bmi.s   S3Collision_ResolveUndersideByAirAndVerticalVelocity
                 cmpi.w  #$10,d3
-                blo.s   loc_1BED0
-                bra.s   loc_1BE2E
+                blo.s   S3Collision_ResolveShallowTopOverlapAndAttachDescendingRider
+                bra.s   S3Collision_CleanUpPriorPushWhenNoSolidOverlap
 ; ---------------------------------------------------------------------------
 
-loc_1BE64:
+S3Collision_ResolveUndersideByAirAndVerticalVelocity:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BE7A
+                bne.s   S3Collision_ZeroGroundSpeedBeforeAirborneUndersideCorrection
                 tst.w   y_vel(a1)
-                beq.s   loc_1BEA2
-                bpl.s   loc_1BE8A
+                beq.s   S3Collision_MeasureHorizontalDepthForGroundedCrush
+                bpl.s   S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative
                 tst.w   d3
-                bpl.s   loc_1BE8A
-                bra.s   loc_1BE80
+                bpl.s   S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative
+                bra.s   S3Collision_CorrectUndersideYAndStopVerticalVelocity
 ; ---------------------------------------------------------------------------
 
-loc_1BE7A:
+S3Collision_ZeroGroundSpeedBeforeAirborneUndersideCorrection:
                 move.w  #0,ground_vel(a1)
 
-loc_1BE80:
+S3Collision_CorrectUndersideYAndStopVerticalVelocity:
                 sub.w   d3,y_pos(a1)
                 move.w  #0,y_vel(a1)
 
-loc_1BE8A:
+S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative:
                 tst.b   status_tertiary(a1)
-                bpl.s   loc_1BE96
+                bpl.s   S3Collision_ReturnUndersideContactResult
                 bset    #5,status_tertiary(a1)
 
-loc_1BE96:
+S3Collision_ReturnUndersideContactResult:
                 move.w  d6,d4
                 addi.b  #$F,d4
                 bset    d4,d6
@@ -542,16 +542,16 @@ loc_1BE96:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BEA2:
+S3Collision_MeasureHorizontalDepthForGroundedCrush:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_1BE8A
+                bne.s   S3Collision_MarkSpecialUndersideResponseWhenTertiaryNegative
                 move.w  d0,d4
-                bpl.s   loc_1BEB0
+                bpl.s   S3Collision_ChooseShallowSideOrInvokeCrushDeath
                 neg.w   d4
 
-loc_1BEB0:
+S3Collision_ChooseShallowSideOrInvokeCrushDeath:
                 cmpi.w  #$10,d4
-                blo.w   loc_1BDC6
+                blo.w   S3Collision_ResolveSideContactVelocityDirection
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 jsr     (Kill_Character).l
@@ -563,7 +563,7 @@ loc_1BEB0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BED0:
+S3Collision_ResolveShallowTopOverlapAndAttachDescendingRider:
                 subq.w  #4,d3
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
@@ -571,13 +571,13 @@ loc_1BED0:
                 add.w   d2,d2
                 add.w   x_pos(a1),d1
                 sub.w   x_pos(a0),d1
-                bmi.s   loc_1BF08
+                bmi.s   S3Collision_ReturnRejectedOrAscendingTopContact
                 cmp.w   d2,d1
-                bhs.s   loc_1BF08
+                bhs.s   S3Collision_ReturnRejectedOrAscendingTopContact
                 sub.w   d3,y_pos(a1)
                 subq.w  #1,y_pos(a1)
                 tst.w   y_vel(a1)
-                bmi.s   loc_1BF08
+                bmi.s   S3Collision_ReturnRejectedOrAscendingTopContact
                 bsr.w   RideObject_SetRide
                 move.w  d6,d4
                 addi.b  #$11,d4
@@ -586,7 +586,7 @@ loc_1BED0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1BF08:
+S3Collision_ReturnRejectedOrAscendingTopContact:
                 moveq   #0,d4
                 rts
 
@@ -595,19 +595,19 @@ loc_1BF08:
 MvSonicOnPtfm:
                 move.w  y_pos(a0),d0
                 sub.w   d3,d0
-                bra.s   loc_1BF1C
+                bra.s   S3Collision_CarryRiderAtPreparedPlatformTop
 ; ---------------------------------------------------------------------------
 ; unused leftover from Sonic 1/2
                 move.w  y_pos(a0),d0
                 subi.w  #9,d0
 
-loc_1BF1C:
+S3Collision_CarryRiderAtPreparedPlatformTop:
                 tst.b   object_control(a1)
-                bmi.s   locret_1BF44
+                bmi.s   S3Collision_ReturnMovingPlatformCarryOrRefusal
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_1BF44
+                bhs.s   S3Collision_ReturnMovingPlatformCarryOrRefusal
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_1BF44
+                bne.s   S3Collision_ReturnMovingPlatformCarryOrRefusal
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
                 sub.w   d1,d0
@@ -615,6 +615,6 @@ loc_1BF1C:
                 sub.w   x_pos(a0),d2
                 sub.w   d2,x_pos(a1)
 
-locret_1BF44:
+S3Collision_ReturnMovingPlatformCarryOrRefusal:
                 rts
 ; End of function MvSonicOnPtfm

@@ -13,10 +13,10 @@
 CalcRoomOverHead:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_10A9E
+                beq.s   S3Collision_DispatchOverheadProbeFromRoundedSpineAngle
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10A9E:
+S3Collision_DispatchOverheadProbeFromRoundedSpineAngle:
                 move.b  lrb_solid_bit(a0),d5
                 move.b  d0,(Primary_Angle).w
                 move.b  d0,(Secondary_Angle).w
@@ -39,10 +39,10 @@ loc_10A9E:
 Sonic_CheckFloor:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_10ADE
+                beq.s   S3Collision_ProbeBothFeetUsingTopSolidity
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10ADE:
+S3Collision_ProbeBothFeetUsingTopSolidity:
                 move.b  top_solid_bit(a0),d5
                 move.w  y_pos(a0),d2
                 move.w  x_pos(a0),d3
@@ -74,19 +74,19 @@ loc_10ADE:
                 move.w  (sp)+,d0
                 move.b  #0,d2
 
-loc_10B3E:
+S3Collision_SelectSmallerPairedClearanceAndItsAngle:
                 move.b  (Secondary_Angle).w,d3
                 cmp.w   d0,d1
-                ble.s   loc_10B4C
+                ble.s   S3Collision_ReplaceOddPairedClearanceAngleWithAxis
                 move.b  (Primary_Angle).w,d3
                 exg     d0,d1
 
-loc_10B4C:
+S3Collision_ReplaceOddPairedClearanceAngleWithAxis:
                 btst    #0,d3
-                beq.s   locret_10B54
+                beq.s   S3Collision_ReturnPairedClearanceDistanceAndAngle
                 move.b  d2,d3
 
-locret_10B54:
+S3Collision_ReturnPairedClearanceDistanceAndAngle:
                 rts
 ; End of function Sonic_CheckFloor
 
@@ -115,13 +115,13 @@ CheckFloorDist_Part2:
 
 ; d2 what to use as angle if (Primary_Angle).w is odd
 ; returns angle in d3, or value in d2 if angle was odd
-loc_10B76:
+S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis:
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_10B82
+                beq.s   S3Collision_ReturnPrimaryClearanceDistanceAndAngle
                 move.b  d2,d3
 
-locret_10B82:
+S3Collision_ReturnPrimaryClearanceDistanceAndAngle:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -135,7 +135,7 @@ ProbeFloorWithXRadiusOffset:
                 move.w  #0,d6
                 bsr.w   FindFloor
                 move.b  #0,d2
-                bra.s   loc_10B76
+                bra.s   S3Collision_ReplaceOddPrimaryClearanceAngleWithAxis
 ; End of function ProbeFloorWithXRadiusOffset
 
 ; =============== S U B R O U T I N E =======================================
@@ -146,10 +146,10 @@ CheckPlayerBodyFloorClearance:
                 subq.w  #4,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$D,lrb_solid_bit(a0)
-                beq.s   loc_10BC0
+                beq.s   S3Collision_ProbeBodyFloorUsingSideSolidity
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10BC0:
+S3Collision_ProbeBodyFloorUsingSideSolidity:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -160,10 +160,10 @@ loc_10BC0:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_10BEE
+                beq.s   S3Collision_ReturnBodyFloorClearanceAfterAddressRestore
                 move.b  #0,d3
 
-locret_10BEE:
+S3Collision_ReturnBodyFloorClearanceAfterAddressRestore:
                 rts
 ; End of function CheckPlayerBodyFloorClearance
 
@@ -182,10 +182,10 @@ ChkFloorEdge_Part2:
 ChkFloorEdge_Part3:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_10C16
+                beq.s   S3Collision_ProbeFloorEdgeUsingTopSolidity
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10C16:
+S3Collision_ProbeFloorEdgeUsingTopSolidity:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -196,10 +196,10 @@ loc_10C16:
                 movem.l (sp)+,a4-a6
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_10C44
+                beq.s   S3Collision_ReturnFloorEdgeProbeAfterAddressRestore
                 move.b  #0,d3
 
-locret_10C44:
+S3Collision_ReturnFloorEdgeProbeAfterAddressRestore:
                 rts
 ; End of function ChkFloorEdge
 
@@ -214,10 +214,10 @@ SonicOnObjHitFloor:
                 add.w   d0,d2
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   loc_10C6C
+                beq.s   S3Collision_ProbeA1RiderFeetUsingTopSolidity
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_10C6C:
+S3Collision_ProbeA1RiderFeetUsingTopSolidity:
                 lea     (Primary_Angle).w,a4
                 move.b  #0,(a4)
                 movea.w #Collision_Scan_Step,a3
@@ -226,10 +226,10 @@ loc_10C6C:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_10C92
+                beq.s   S3Collision_ReturnA1RiderFloorDistance
                 move.b  #0,d3
 
-locret_10C92:
+S3Collision_ReturnA1RiderFloorDistance:
                 rts
 ; End of function SonicOnObjHitFloor
 
@@ -256,10 +256,10 @@ ObjCheckFloorDist2:
                 bsr.w   FindFloor
                 move.b  (Primary_Angle).w,d3
                 btst    #0,d3
-                beq.s   locret_10CC8
+                beq.s   S3Collision_ReturnObjectFloorDistanceAndFilteredAngle
                 move.b  #0,d3
 
-locret_10CC8:
+S3Collision_ReturnObjectFloorDistanceAndFilteredAngle:
                 rts
 ; End of function ObjCheckFloorDist
 

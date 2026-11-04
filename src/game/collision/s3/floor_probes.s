@@ -89,11 +89,11 @@ FindFloor:
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   locret_105D8
+                ble.s   S3Collision_ReturnSelectedForegroundOrBackgroundFloorDistance
                 move.b  Primary_Angle_save-Primary_Angle(a4),(a4)
                 move.w  d0,d1
 
-locret_105D8:
+S3Collision_ReturnSelectedForegroundOrBackgroundFloorDistance:
                 rts
 ; End of function FindFloor
 
@@ -104,11 +104,11 @@ SampleFloorDistanceWithNeighbor:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   loc_105EA
+                beq.s   S3Collision_SampleForwardFloorNeighborForMissingShape
                 btst    d5,d4
-                bne.s   loc_105F8
+                bne.s   S3Collision_LoadNeighborAwareFloorShapeAndAngle
 
-loc_105EA:
+S3Collision_SampleForwardFloorNeighborForMissingShape:
                 add.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 sub.w   a3,d2
@@ -116,28 +116,28 @@ loc_105EA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_105F8:
+S3Collision_LoadNeighborAwareFloorShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.w  (a2,d0.w),d0
-                beq.s   loc_105EA
+                beq.s   S3Collision_SampleForwardFloorNeighborForMissingShape
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   loc_1061C
+                beq.s   S3Collision_TransformNeighborAwareFloorAngleForYFlip
                 not.w   d1
                 neg.b   (a4)
 
-loc_1061C:
+S3Collision_TransformNeighborAwareFloorAngleForYFlip:
                 btst    #$B,d4
-                beq.s   loc_1062C
+                beq.s   S3Collision_ReadNeighborAwareFloorHeightWithEffectiveFlip
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-loc_1062C:
+S3Collision_ReadNeighborAwareFloorHeightWithEffectiveFlip:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -145,15 +145,15 @@ loc_1062C:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   loc_10648
+                beq.s   S3Collision_ResolveNeighborAwareFloorHeightCase
                 neg.w   d0
 
-loc_10648:
+S3Collision_ResolveNeighborAwareFloorHeightCase:
                 tst.w   d0
-                beq.s   loc_105EA
-                bmi.s   loc_10664
+                beq.s   S3Collision_SampleForwardFloorNeighborForMissingShape
+                bmi.s   S3Collision_TestNegativeFloorProfileAgainstYFraction
                 cmpi.b  #$10,d0
-                beq.s   loc_10670
+                beq.s   S3Collision_SampleBackwardFloorNeighborAndSubtractBlock
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -162,13 +162,13 @@ loc_10648:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10664:
+S3Collision_TestNegativeFloorProfileAgainstYFraction:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   loc_105EA
+                bpl.w   S3Collision_SampleForwardFloorNeighborForMissingShape
 
-loc_10670:
+S3Collision_SampleBackwardFloorNeighborAndSubtractBlock:
                 sub.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2
@@ -183,11 +183,11 @@ SampleSingleBlockFloorDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   loc_1068E
+                beq.s   S3Collision_ReturnSingleBlockFloorEmptyDistance
                 btst    d5,d4
-                bne.s   loc_1069C
+                bne.s   S3Collision_LoadSingleBlockFloorShapeAndAngle
 
-loc_1068E:
+S3Collision_ReturnSingleBlockFloorEmptyDistance:
                 move.w  #$F,d1
                 move.w  d2,d0
                 andi.w  #$F,d0
@@ -195,28 +195,28 @@ loc_1068E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1069C:
+S3Collision_LoadSingleBlockFloorShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.w  (a2,d0.w),d0
-                beq.s   loc_1068E
+                beq.s   S3Collision_ReturnSingleBlockFloorEmptyDistance
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   loc_106C0
+                beq.s   S3Collision_TransformSingleBlockFloorAngleForYFlip
                 not.w   d1
                 neg.b   (a4)
 
-loc_106C0:
+S3Collision_TransformSingleBlockFloorAngleForYFlip:
                 btst    #$B,d4
-                beq.s   loc_106D0
+                beq.s   S3Collision_ReadSingleBlockFloorHeightWithEffectiveFlip
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-loc_106D0:
+S3Collision_ReadSingleBlockFloorHeightWithEffectiveFlip:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -224,13 +224,13 @@ loc_106D0:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   loc_106EC
+                beq.s   S3Collision_ResolveSingleBlockFloorHeightCase
                 neg.w   d0
 
-loc_106EC:
+S3Collision_ResolveSingleBlockFloorHeightCase:
                 tst.w   d0
-                beq.s   loc_1068E
-                bmi.s   loc_10702
+                beq.s   S3Collision_ReturnSingleBlockFloorEmptyDistance
+                bmi.s   S3Collision_ReturnOrRejectNegativeSingleBlockFloorProfile
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -239,11 +239,11 @@ loc_106EC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10702:
+S3Collision_ReturnOrRejectNegativeSingleBlockFloorProfile:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   loc_1068E
+                bpl.w   S3Collision_ReturnSingleBlockFloorEmptyDistance
                 not.w   d1
                 rts
 ; End of function SampleSingleBlockFloorDistance
@@ -265,11 +265,11 @@ Ring_FindFloor:
                 add.w   (Camera_Y_diff).w,d2
                 move.w  (sp)+,d0
                 cmp.w   d0,d1
-                ble.s   locret_1074A
+                ble.s   S3Collision_ReturnSelectedRingFloorLayerDistance
                 move.b  Primary_Angle_save-Primary_Angle(a4),(a4)
                 move.w  d0,d1
 
-locret_1074A:
+S3Collision_ReturnSelectedRingFloorLayerDistance:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -279,37 +279,37 @@ SampleRingFloorDistance:
                 move.w  (a1),d0
                 move.w  d0,d4
                 andi.w  #$3FF,d0
-                beq.s   loc_1075C
+                beq.s   S3Collision_ReturnRingFloorMissingShapeSentinel
                 btst    d5,d4
-                bne.s   loc_10762
+                bne.s   S3Collision_LoadRingFloorShapeAndAngle
 
-loc_1075C:
+S3Collision_ReturnRingFloorMissingShapeSentinel:
                 move.w  #$10,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_10762:
+S3Collision_LoadRingFloorShapeAndAngle:
                 movea.l (Collision_addr).w,a2
                 add.w   d0,d0
                 move.w  (a2,d0.w),d0
-                beq.s   loc_1075C
+                beq.s   S3Collision_ReturnRingFloorMissingShapeSentinel
                 lea     (AngleArray).l,a2
                 move.b  (a2,d0.w),(a4)
                 lsl.w   #4,d0
                 move.w  d3,d1
                 btst    #$A,d4
-                beq.s   loc_10786
+                beq.s   S3Collision_TransformRingFloorAngleForYFlip
                 not.w   d1
                 neg.b   (a4)
 
-loc_10786:
+S3Collision_TransformRingFloorAngleForYFlip:
                 btst    #$B,d4
-                beq.s   loc_10796
+                beq.s   S3Collision_ReadRingFloorHeightWithEffectiveFlip
                 addi.b  #$40,(a4)
                 neg.b   (a4)
                 subi.b  #$40,(a4)
 
-loc_10796:
+S3Collision_ReadRingFloorHeightWithEffectiveFlip:
                 andi.w  #$F,d1
                 add.w   d0,d1
                 lea     (HeightMaps).l,a2
@@ -317,15 +317,15 @@ loc_10796:
                 ext.w   d0
                 eor.w   d6,d4
                 btst    #$B,d4
-                beq.s   loc_107B2
+                beq.s   S3Collision_ResolveRingFloorHeightCase
                 neg.w   d0
 
-loc_107B2:
+S3Collision_ResolveRingFloorHeightCase:
                 tst.w   d0
-                beq.s   loc_1075C
-                bmi.s   loc_107CE
+                beq.s   S3Collision_ReturnRingFloorMissingShapeSentinel
+                bmi.s   S3Collision_TestNegativeRingFloorProfileAgainstYFraction
                 cmpi.b  #$10,d0
-                beq.s   loc_107DA
+                beq.s   S3Collision_SampleBackwardBlockForRingFloor
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
@@ -334,13 +334,13 @@ loc_107B2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_107CE:
+S3Collision_TestNegativeRingFloorProfileAgainstYFraction:
                 move.w  d2,d1
                 andi.w  #$F,d1
                 add.w   d1,d0
-                bpl.w   loc_1075C
+                bpl.w   S3Collision_ReturnRingFloorMissingShapeSentinel
 
-loc_107DA:
+S3Collision_SampleBackwardBlockForRingFloor:
                 sub.w   a3,d2
                 bsr.w   SampleSingleBlockFloorDistance
                 add.w   a3,d2
