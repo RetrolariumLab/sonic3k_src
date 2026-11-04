@@ -152,14 +152,14 @@ loc_8BC52:
 ; ---------------------------------------------------------------------------
 
 loc_8BC6C:
-                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
+                bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
                 blt.w   loc_8BBF4
                 cmpi.w  #$C,d1
                 bge.s   loc_8BC08
                 add.w   d1,y_pos(a0)
                 bsr.w   SetPenguinatorSlidingPoseFromFloorAngle
-                bsr.w   EmitPenguinatorSkidSoundAndSnowdustByCountdown
+                bsr.w   Penguinator_TrySkidSoundAndDust
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -176,7 +176,7 @@ loc_8BC94:
 ; ---------------------------------------------------------------------------
 
 loc_8BCBA:
-                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
+                bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
                 blt.w   loc_8BBF4
                 cmpi.w  #$C,d1
@@ -199,7 +199,7 @@ loc_8BCF4:
                 add.w   $40(a0),d0
                 move.w  d0,x_vel(a0)
                 beq.s   loc_8BD1C
-                bsr.w   ProbePenguinatorFloorAtNextHorizontalPosition
+                bsr.w   Penguinator_ProbeFloorAhead
                 cmpi.w  #-2,d1
                 blt.s   loc_8BD1C
                 cmpi.w  #$C,d1
@@ -250,14 +250,14 @@ loc_8BD7A:
 
 ; =============== S U B R O U T I N E =======================================
 
-ProbePenguinatorFloorAtNextHorizontalPosition:
+Penguinator_ProbeFloorAhead:
                 move.w  x_vel(a0),d3
                 ext.l   d3
                 lsl.l   #8,d3
                 add.l   x_pos(a0),d3
                 swap    d3
                 jmp     (ObjCheckFloorDist2).l
-; End of function ProbePenguinatorFloorAtNextHorizontalPosition
+; End of function Penguinator_ProbeFloorAhead
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -281,7 +281,8 @@ RawAni_8BDB2:
 
 ; =============== S U B R O U T I N E =======================================
 
-EmitPenguinatorSkidSoundAndSnowdustByCountdown:
+; Play the sound and try one attached snowdust actor when the slide countdown is divisible by four
+Penguinator_TrySkidSoundAndDust:
                 move.w  $2E(a0),d0
                 andi.w  #3,d0
                 bne.s   locret_8BD6A
@@ -289,7 +290,7 @@ EmitPenguinatorSkidSoundAndSnowdustByCountdown:
                 jsr     (Play_SFX).l
                 lea     ChildObjDat_8BDFA(pc),a2
                 jmp     CreateChild1_Normal(pc)
-; End of function EmitPenguinatorSkidSoundAndSnowdustByCountdown
+; End of function Penguinator_TrySkidSoundAndDust
 
 ; ---------------------------------------------------------------------------
 ObjSlot_Penguinator:

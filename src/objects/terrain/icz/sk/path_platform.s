@@ -142,7 +142,7 @@ loc_8A066:
                 ext.w   d3
                 asr.w   #1,d3
                 add.w   d3,d0
-                bsr.w   AcceptIczPlatformHorizontalVelocityInRange
+                bsr.w   ICZPathPlatform_TrySetXVel
 
 loc_8A07C:
                 tst.w   x_vel(a0)
@@ -164,7 +164,7 @@ loc_8A090:
 
 loc_8A09E:
                 move.b  #$A,routine(a0)
-                bsr.w   SetIczPlatformDepartureYVelocityFromAngle
+                bsr.w   ICZPathPlatform_SetDepartureYVel
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -199,7 +199,7 @@ loc_8A0F4:
 ; ---------------------------------------------------------------------------
 
 loc_8A11C:
-                bsr.w   ApplyIczPlatformGravityWithinVelocityRange
+                bsr.w   ICZPathPlatform_TryApplyGravity
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1

@@ -212,7 +212,7 @@ loc_5008:
 
 loc_501A:
                 move.b  (P1_character).w,d0
-                bsr.s   S3CompSelectTailsOrFallbackSonicPlayerHandler
+                bsr.s   S3Comp_SelectPlayerHandler
                 move.l  d1,(Player_1).w
                 move.b  (P1_character).w,(Player_1+character_id).w
                 move.w  (Player_1+x_pos).w,(Player_2+x_pos).w
@@ -221,7 +221,7 @@ loc_501A:
                 tst.b   (Not_ghost_flag).w
                 beq.s   loc_505C
                 move.b  (P2_character).w,d0
-                bsr.s   S3CompSelectTailsOrFallbackSonicPlayerHandler
+                bsr.s   S3Comp_SelectPlayerHandler
                 move.l  d1,(Player_2).w
                 move.b  (P2_character).w,(Player_2+character_id).w
                 move.l  #Obj_DashDust2P,(Dust_P2).w
@@ -232,7 +232,8 @@ loc_505C:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompSelectTailsOrFallbackSonicPlayerHandler:
+; Character byte 1 selects Tails2P. Every other value selects Sonic2P
+S3Comp_SelectPlayerHandler:
                 tst.b   d0
                 bne.s   loc_5068
                 move.l  #Obj_Sonic2P,d1
@@ -247,7 +248,7 @@ loc_5068:
 loc_5074:
                 move.l  #Obj_Sonic2P,d1
                 rts
-; End of function S3CompSelectTailsOrFallbackSonicPlayerHandler
+; End of function S3Comp_SelectPlayerHandler
 
 ; ---------------------------------------------------------------------------
 

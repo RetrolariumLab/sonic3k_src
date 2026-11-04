@@ -255,7 +255,7 @@ locret_3820E:
 
 ; =============== S U B R O U T I N E =======================================
 
-AnimateTensionBridgeSegmentsUnderMovingRiders:
+TensionBridge_AnimateRiddenBoards:
                 movea.l $30(a0),a1
                 lea     sub2_mapframe(a1),a1
                 movea.l $34(a0),a2
@@ -305,7 +305,7 @@ loc_38278:
 loc_38286:
                 dbf     d1,loc_38268
                 rts
-; End of function AnimateTensionBridgeSegmentsUnderMovingRiders
+; End of function TensionBridge_AnimateRiddenBoards
 
 ; =============== S U B R O U T I N E =======================================
 

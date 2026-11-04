@@ -420,7 +420,7 @@ loc_89CE2:
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #loc_89D02,(a0)
                 move.b  #8,y_radius(a0)
-                bsr.w   InitializeFbzCapsuleAnimalLaunchAndSpecies
+                bsr.w   FBZCapsuleAnimal_InitRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -523,7 +523,8 @@ loc_89DDE:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeFbzCapsuleAnimalLaunchAndSpecies:
+; Use subtype and zone for the species, upward and outward launch and staggered delay
+FBZCapsuleAnimal_InitRelease:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -563,7 +564,7 @@ loc_89E54:
 
 locret_89E6A:
                 rts
-; End of function InitializeFbzCapsuleAnimalLaunchAndSpecies
+; End of function FBZCapsuleAnimal_InitRelease
 
 ; ---------------------------------------------------------------------------
 word_89E6C:

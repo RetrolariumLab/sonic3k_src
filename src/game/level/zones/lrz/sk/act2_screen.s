@@ -22,7 +22,7 @@ LRZ2_BackgroundInit:
 
 loc_56FD2:
                 move.w  #8,(Events_routine_bg).w
-                jsr     BuildLrz2ParallaxAndPositionDeathEggBackdrop(pc)
+                jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
@@ -51,7 +51,7 @@ loc_5700C:
                 move.w  a1,(Events_bg+$06).w
 
 loc_5701E:
-                jsr     BuildLrz2ParallaxAndPositionDeathEggBackdrop(pc)
+                jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -62,7 +62,7 @@ loc_5701E:
 ; ---------------------------------------------------------------------------
 
 loc_57040:
-                jsr     BuildLrz2ParallaxAndPositionDeathEggBackdrop(pc)
+                jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
 
 loc_57044:
                 moveq   #0,d1
@@ -74,7 +74,7 @@ loc_57044:
 ; ---------------------------------------------------------------------------
 
 loc_57058:
-                jsr     BuildLrz2ParallaxAndPositionDeathEggBackdrop(pc)
+                jsr     LRZ2_BuildParallaxAndPlaceDeathEgg(pc)
 
 loc_5705C:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -89,7 +89,8 @@ loc_5705C:
 
 ; =============== S U B R O U T I N E =======================================
 
-BuildLrz2ParallaxAndPositionDeathEggBackdrop:
+; Build thirteen scroll bands and position the optional Death Egg actor using the effective background coordinates
+LRZ2_BuildParallaxAndPlaceDeathEgg:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (Screen_shake_offset).w,d1
                 sub.w   d1,d0
@@ -157,7 +158,7 @@ loc_5710C:
 
 locret_5711C:
                 rts
-; End of function BuildLrz2ParallaxAndPositionDeathEggBackdrop
+; End of function LRZ2_BuildParallaxAndPlaceDeathEgg
 
 ; ---------------------------------------------------------------------------
 

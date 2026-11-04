@@ -98,7 +98,7 @@ loc_34D1E:
                 muls.w  ground_vel(a0),d0
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
-                bsr.s   LimitTopPlatformVelocityByPredictedTerrain
+                bsr.s   MGZTopPlatform_LimitVelByTerrain
                 jsr     (MoveSprite2).l
                 tst.b   $2D(a0)
                 bne.s   loc_34D4E
@@ -145,7 +145,7 @@ loc_34DB6:
 
 ; =============== S U B R O U T I N E =======================================
 
-LimitTopPlatformVelocityByPredictedTerrain:
+MGZTopPlatform_LimitVelByTerrain:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
                 beq.s   locret_34E36
@@ -207,7 +207,7 @@ loc_34E3E:
 loc_34E68:
                 add.w   d1,y_vel(a0)
                 rts
-; End of function LimitTopPlatformVelocityByPredictedTerrain
+; End of function MGZTopPlatform_LimitVelByTerrain
 
 ; =============== S U B R O U T I N E =======================================
 

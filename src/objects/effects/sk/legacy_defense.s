@@ -115,12 +115,12 @@ loc_188B0:
                 addq.w  #1,$38(a0)
                 lea     byte_189A0(pc),a6
                 move.b  $34(a0),d6
-                jsr     InvincibilityOrbitSKTranslateSignedOffsetPair(pc)
+                jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
                 addi.w  #$20,d6
-                jsr     InvincibilityOrbitSKTranslateSignedOffsetPair(pc)
+                jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
@@ -174,13 +174,13 @@ loc_18946:
                 addq.w  #1,$38(a0)
                 lea     byte_189A0(pc),a6
                 move.b  $34(a0),d6
-                jsr     InvincibilityOrbitSKTranslateSignedOffsetPair(pc)
+                jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
                 addi.w  #$20,d6
                 swap    d5
-                jsr     InvincibilityOrbitSKTranslateSignedOffsetPair(pc)
+                jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  d5,(a2)+
@@ -195,7 +195,8 @@ loc_18982:
 
 ; =============== S U B R O U T I N E =======================================
 
-InvincibilityOrbitSKTranslateSignedOffsetPair:
+; Use one of 32 signed byte pairs and add it to the caller's current or historical player position
+SKInvincibilityOrbit_AddOffset:
                 andi.w  #$3E,d6
                 move.b  (a6,d6.w),d2
                 move.b  1(a6,d6.w),d3
@@ -204,7 +205,7 @@ InvincibilityOrbitSKTranslateSignedOffsetPair:
                 add.w   d0,d2
                 add.w   d1,d3
                 rts
-; End of function InvincibilityOrbitSKTranslateSignedOffsetPair
+; End of function SKInvincibilityOrbit_AddOffset
 
 ; ---------------------------------------------------------------------------
 byte_189A0:

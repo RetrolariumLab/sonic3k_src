@@ -45,7 +45,8 @@ loc_86452:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKPositionMultiSpriteChildrenFromSignedBytePairs:
+; Add signed byte offset pairs to the parent position and mirror X when requested
+SKMultiSprite_PositionChildren:
                 lea     sub2_x_pos(a0),a2
                 move.w  mainspr_childsprites(a0),d0
                 subq.w  #1,d0
@@ -69,4 +70,4 @@ loc_86478:
                 addq.w  #2,a2
                 dbf     d0,loc_8646A
                 rts
-; End of function SKPositionMultiSpriteChildrenFromSignedBytePairs
+; End of function SKMultiSprite_PositionChildren

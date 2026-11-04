@@ -126,10 +126,10 @@ loc_47F56:
 loc_47F62:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
-                bsr.s   SelectPlayerCollisionLayerForDezCurvedBridge
+                bsr.s   DEZCurvedBridge_UpdatePlayerLayer
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
-                bsr.s   SelectPlayerCollisionLayerForDezCurvedBridge
+                bsr.s   DEZCurvedBridge_UpdatePlayerLayer
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #3,d0
                 move.b  d0,mapping_frame(a0)
@@ -146,7 +146,7 @@ loc_47F96:
 
 ; =============== S U B R O U T I N E =======================================
 
-SelectPlayerCollisionLayerForDezCurvedBridge:
+DEZCurvedBridge_UpdatePlayerLayer:
                 tst.w   $34(a0)
                 beq.s   loc_47FD8
                 move.w  x_pos(a1),d0
@@ -178,7 +178,7 @@ loc_47FEA:
 
 locret_47FF6:
                 rts
-; End of function SelectPlayerCollisionLayerForDezCurvedBridge
+; End of function DEZCurvedBridge_UpdatePlayerLayer
 
 ; ---------------------------------------------------------------------------
 Map_DEZEnergyBridge:

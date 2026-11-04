@@ -34,7 +34,7 @@ locret_55D88:
 ; ---------------------------------------------------------------------------
 
 loc_55D8A:
-                bsr.w   ResolveMegaChopperLatchedContactAndAttachment
+                bsr.w   MegaChopper_ResolveLatchedContact
                 jsr     Animate_Raw(pc)
                 jsr     Find_SonicTails(pc)
                 move.b  (V_int_run_count+3).w,d4
@@ -81,7 +81,7 @@ loc_55DF6:
 ; ---------------------------------------------------------------------------
 
 loc_55E02:
-                bsr.w   ResolveMegaChopperLatchedContactAndAttachment
+                bsr.w   MegaChopper_ResolveLatchedContact
                 jsr     Animate_Raw(pc)
                 tst.w   y_vel(a0)
                 bmi.s   loc_55E30
@@ -178,7 +178,8 @@ loc_55F0C:
                 rts
 ; ---------------------------------------------------------------------------
 
-ResolveMegaChopperLatchedContactAndAttachment:
+; Consume the latch, then check whether to mark defeat or initialize attachment offsets and controller state
+MegaChopper_ResolveLatchedContact:
                 move.b  collision_property(a0),d0
                 beq.w   locret_55D88
                 clr.b   collision_property(a0)

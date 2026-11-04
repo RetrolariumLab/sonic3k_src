@@ -20,7 +20,7 @@ Handle_Onscreen_Water_Height:
                 bne.s   loc_6C52
                 cmpi.b  #6,(Player_1+routine).w
                 bhs.s   loc_6C52
-                bsr.w   SKHCZApplyRectangularWaterTunnelCurrentsToPlayers
+                bsr.w   SKHCZ_ApplyWaterTunnelCurrents
                 bsr.w   DynamicWaterHeight
 
 loc_6C52:
@@ -58,7 +58,7 @@ loc_6C98:
                 move.b  d0,(H_int_counter).w
 
 loc_6C9C:
-                bsr.w   SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers
+                bsr.w   SKSurface_DispatchBothPlayers
                 rts
 ; End of function Handle_Onscreen_Water_Height
 
@@ -114,7 +114,7 @@ loc_6D22:
                 move.b  d0,(H_int_counter).w
 
 loc_6D26:
-                bsr.w   SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers
+                bsr.w   SKSurface_DispatchBothPlayers
                 rts
 ; ---------------------------------------------------------------------------
 StartingWaterHeights:

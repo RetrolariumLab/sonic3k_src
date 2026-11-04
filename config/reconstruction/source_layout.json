@@ -5413,7 +5413,7 @@
       "responsibility": "Ending background event program, scroll deformation and private sky palette.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 265,
+      "physical_lines": 267,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -5448,7 +5448,7 @@
       "responsibility": "Ending foreground screen initialization, event sequence and camera tracking.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 347,
       "origin": {
         "commit": "3781cfe8dc7be8a643e3c8008d01d2a2e4a2ca2e",
         "path": "sonic3k.s",
@@ -6233,7 +6233,7 @@
       "responsibility": "Active-character loading, level-owned HUD and power-up creation, and player spawn setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 262,
+      "physical_lines": 263,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "s3.s",
@@ -6633,7 +6633,7 @@
       "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 329,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "s3.s",
@@ -7253,7 +7253,7 @@
       "responsibility": "New-level transition actor, player state preparation and restart control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 72,
+      "physical_lines": 73,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -7348,7 +7348,7 @@
       "responsibility": "Active-character loading, level-owned HUD and power-up creation, and player spawn setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 370,
+      "physical_lines": 371,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",
@@ -7683,7 +7683,7 @@
       "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 475,
+      "physical_lines": 480,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",
@@ -9088,7 +9088,7 @@
       "responsibility": "Lava Reef act-two screen and background initialization, event dispatch and deformation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 201,
+      "physical_lines": 202,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9433,7 +9433,7 @@
       "responsibility": "Mushroom Hill act-one screen and background initialization, events and deformation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 242,
+      "physical_lines": 243,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9603,7 +9603,7 @@
       "responsibility": "Sandopolis act-one screen and background initialization, event control, deformation and private sequence data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 645,
+      "physical_lines": 646,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9668,7 +9668,7 @@
       "responsibility": "Sandopolis act-two screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 89,
+      "physical_lines": 90,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9738,7 +9738,7 @@
       "responsibility": "Sky Sanctuary act-one background initialization, events, deformation and private geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 375,
+      "physical_lines": 376,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9833,7 +9833,7 @@
       "responsibility": "Sky Sanctuary act-one screen initialization, event dispatch and progression control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 530,
+      "physical_lines": 532,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -20155,7 +20155,7 @@
       "responsibility": "Checkpoint post activation, star sprites, saved player state and restart support.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 403,
+      "physical_lines": 405,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -20195,7 +20195,7 @@
       "responsibility": "Checkpoint post activation, star sprites, saved player state and restart support.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 455,
+      "physical_lines": 458,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -22282,7 +22282,7 @@
       "responsibility": "Sphere test object setup, projected motion, sprite display and experimental sphere mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 532,
+      "physical_lines": 534,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -22478,7 +22478,7 @@
       "responsibility": "Preserved legacy shield, invincibility particles and their animation and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 256,
+      "physical_lines": 257,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -22568,7 +22568,7 @@
       "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 535,
+      "physical_lines": 536,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -22744,7 +22744,7 @@
       "responsibility": "Preserved legacy shield, invincibility particles and their animation and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 260,
+      "physical_lines": 261,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -22844,7 +22844,7 @@
       "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 677,
+      "physical_lines": 678,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -23584,7 +23584,7 @@
       "responsibility": "Monkey Dude patrol and projectile states, helper callbacks and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 616,
+      "physical_lines": 618,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -23699,7 +23699,7 @@
       "responsibility": "Monkey Dude patrol and projectile states, helper callbacks and private child data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 616,
+      "physical_lines": 618,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -23964,7 +23964,7 @@
       "responsibility": "Blaster attack and projectile state machines, movement helpers and child resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 253,
+      "physical_lines": 254,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24089,7 +24089,7 @@
       "responsibility": "Blaster attack and projectile state machines, movement helpers and child resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 301,
+      "physical_lines": 302,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24119,7 +24119,7 @@
       "responsibility": "Techno Squeek movement and attack states with private child and object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 648,
+      "physical_lines": 649,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24339,7 +24339,7 @@
       "responsibility": "Mega Chopper swimming, player attachment, damage and private animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 302,
+      "physical_lines": 303,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24709,7 +24709,7 @@
       "responsibility": "Penguinator sliding or attack states, snowdust effect actors and private pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 326,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24749,7 +24749,7 @@
       "responsibility": "Snale Blaster locomotion and projectile states with private child or object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 347,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24789,7 +24789,7 @@
       "responsibility": "Star Pointer enemy and child motion with private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 155,
+      "physical_lines": 156,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24834,7 +24834,7 @@
       "responsibility": "Penguinator sliding or attack states, snowdust effect actors and private pattern resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 326,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24864,7 +24864,7 @@
       "responsibility": "Snale Blaster locomotion and projectile states with private child or object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 347,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24894,7 +24894,7 @@
       "responsibility": "Star Pointer enemy and child motion with private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 155,
+      "physical_lines": 156,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -25539,7 +25539,7 @@
       "responsibility": "Cluckoid enemy movement, projectiles, helper callbacks and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 345,
+      "physical_lines": 346,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25829,7 +25829,7 @@
       "responsibility": "Skorp enemy attack states, linked children, helper callbacks and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 450,
+      "physical_lines": 451,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -29684,7 +29684,7 @@
       "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 283,
+      "physical_lines": 285,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "s3.s",
@@ -29794,7 +29794,7 @@
       "responsibility": "Ring manager initialization, camera-window streaming, player collection and attraction response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 392,
+      "physical_lines": 394,
       "origin": {
         "commit": "51dd17a1026eb80adef8e51afed7d40f3d009d45",
         "path": "sonic3k.s",
@@ -38764,7 +38764,7 @@
       "responsibility": "Invisible horizontal and vertical harmful regions, product-specific shock or lava reactions and shared player contact geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 341,
+      "physical_lines": 342,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "sonic3k.s",
@@ -55065,7 +55065,7 @@
       "responsibility": "IceCap breakable wall and ice-block behavior, collision helpers and private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 215,
+      "physical_lines": 218,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55380,7 +55380,7 @@
       "responsibility": "IceCap segmented column movement, collision and private child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 165,
+      "physical_lines": 166,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55425,7 +55425,7 @@
       "responsibility": "IceCap snow-pile controller, thrown snow, child helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 343,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55510,7 +55510,7 @@
       "responsibility": "IceCap swinging platform states, linked children, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 546,
+      "physical_lines": 550,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55550,7 +55550,7 @@
       "responsibility": "IceCap tension platform mechanics, collision helpers and private child construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 277,
+      "physical_lines": 281,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -55595,7 +55595,7 @@
       "responsibility": "IceCap breakable wall and ice-block behavior, collision helpers and private construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 228,
+      "physical_lines": 231,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55840,7 +55840,7 @@
       "responsibility": "IceCap segmented column movement, collision and private child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 181,
+      "physical_lines": 182,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55875,7 +55875,7 @@
       "responsibility": "IceCap snow-pile controller, thrown snow, child helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 342,
+      "physical_lines": 343,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55940,7 +55940,7 @@
       "responsibility": "IceCap swinging platform states, linked children, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 546,
+      "physical_lines": 550,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -55970,7 +55970,7 @@
       "responsibility": "IceCap tension platform mechanics, collision helpers and private child construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 277,
+      "physical_lines": 281,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -61196,7 +61196,7 @@
       "responsibility": "Hidden Palace special-stage selection, transition, hub state and common emerald control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 613,
+      "physical_lines": 614,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -63481,7 +63481,7 @@
       "responsibility": "Shooting trigger activation, projectile behavior and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 104,
+      "physical_lines": 105,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65131,7 +65131,7 @@
       "responsibility": "Mushroom parachute movement, player contact and descent control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 330,
+      "physical_lines": 331,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -66111,7 +66111,7 @@
       "responsibility": "Bouncy cloud contact, deformation, player response and movement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 272,
+      "physical_lines": 273,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",

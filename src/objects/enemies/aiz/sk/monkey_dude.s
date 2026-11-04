@@ -316,7 +316,7 @@ off_87432:
 
 loc_87438:
                 moveq   #2,d1
-                bsr.w   ActivateMonkeyArmLinkWhenPredecessorSignals
+                bsr.w   MonkeyArmLink_TryEnterAttack
 
 loc_8743E:
                 bra.w   loc_8754C
@@ -324,7 +324,7 @@ loc_8743E:
 
 loc_87442:
                 moveq   #4,d1
-                bsr.w   AdvanceMonkeyArmLinkWhenPredecessorFlagClears
+                bsr.w   MonkeyArmLink_TryLeaveAttack
                 bra.w   loc_8754C
 ; ---------------------------------------------------------------------------
 
@@ -344,7 +344,7 @@ off_87462:
 
 loc_87468:
                 moveq   #2,d1
-                bsr.w   ActivateMonkeyArmLinkWhenPredecessorSignals
+                bsr.w   MonkeyArmLink_TryEnterAttack
 
 loc_8746E:
                 bra.w   loc_8754C
@@ -353,7 +353,7 @@ loc_8746E:
 loc_87472:
                 bsr.w   TryThrowMonkeyDudeProjectileAtArmPhase
                 moveq   #4,d1
-                bsr.w   AdvanceMonkeyArmLinkWhenPredecessorFlagClears
+                bsr.w   MonkeyArmLink_TryLeaveAttack
                 bra.w   loc_8754C
 ; ---------------------------------------------------------------------------
 
@@ -468,7 +468,8 @@ loc_87562:
 
 ; =============== S U B R O U T I N E =======================================
 
-ActivateMonkeyArmLinkWhenPredecessorSignals:
+; On the predecessor's attack flag, enter the supplied state, halve the follow interval and propagate the angle immediately
+MonkeyArmLink_TryEnterAttack:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 beq.s   locret_87590
@@ -481,11 +482,12 @@ ActivateMonkeyArmLinkWhenPredecessorSignals:
 
 locret_87590:
                 rts
-; End of function ActivateMonkeyArmLinkWhenPredecessorSignals
+; End of function MonkeyArmLink_TryEnterAttack
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceMonkeyArmLinkWhenPredecessorFlagClears:
+; When the predecessor clears its flag, enter the supplied state, double the follow interval and propagate immediately
+MonkeyArmLink_TryLeaveAttack:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
                 bne.s   locret_875B2
@@ -497,7 +499,7 @@ AdvanceMonkeyArmLinkWhenPredecessorFlagClears:
 
 locret_875B2:
                 rts
-; End of function AdvanceMonkeyArmLinkWhenPredecessorFlagClears
+; End of function MonkeyArmLink_TryLeaveAttack
 
 ; =============== S U B R O U T I N E =======================================
 

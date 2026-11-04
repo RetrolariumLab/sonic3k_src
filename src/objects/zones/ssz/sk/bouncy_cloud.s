@@ -62,18 +62,19 @@ loc_45142:
                 lea     (Player_1).w,a1
                 lea     $38(a0),a2
                 moveq   #p1_standing_bit,d6
-                bsr.s   UpdateSszCloudPlayerCompressionBounceAndSpin
+                bsr.s   SSZCloud_UpdateBounceAndSpin
                 lea     (Player_2).w,a1
                 lea     $40(a0),a2
                 moveq   #p2_standing_bit,d6
-                bsr.s   UpdateSszCloudPlayerCompressionBounceAndSpin
+                bsr.s   SSZCloud_UpdateBounceAndSpin
                 lea     Ani_SSZBouncyCloud(pc),a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateSszCloudPlayerCompressionBounceAndSpin:
+; Top contact starts the synchronized compression delay. After launch, track angle and recoil
+SSZCloud_UpdateBounceAndSpin:
                 moveq   #$20,d1
                 moveq   #$10,d2
                 moveq   #0,d3
@@ -213,7 +214,7 @@ loc_452D6:
 
 locret_452D8:
                 rts
-; End of function UpdateSszCloudPlayerCompressionBounceAndSpin
+; End of function SSZCloud_UpdateBounceAndSpin
 
 ; ---------------------------------------------------------------------------
 

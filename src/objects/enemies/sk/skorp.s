@@ -233,7 +233,7 @@ loc_8E88C:
                 move.b  #$C,routine(a0)
                 move.w  #$F,$2E(a0)
                 move.l  #loc_8E8CA,$34(a0)
-                bsr.w   SetSkorpTailLinkLungeVelocityTowardSnapshot
+                bsr.w   SkorpTailLink_AimLungeAtSnapshot
                 move.b  #$80,d0
 
 loc_8E8B2:
@@ -337,7 +337,8 @@ byte_8E992:
 
 ; =============== S U B R O U T I N E =======================================
 
-SetSkorpTailLinkLungeVelocityTowardSnapshot:
+; Use the root's saved player position and scale the launch by link index
+SkorpTailLink_AimLungeAtSnapshot:
                 movea.w $44(a0),a1
                 move.w  $3E(a1),d0
                 sub.w   x_pos(a0),d0
@@ -357,7 +358,7 @@ loc_8E9C4:
                 move.b  subtype(a0),d4
                 move.w  off_8E9D2(pc,d4.w),d4
                 jmp     off_8E9D2(pc,d4.w)
-; End of function SetSkorpTailLinkLungeVelocityTowardSnapshot
+; End of function SkorpTailLink_AimLungeAtSnapshot
 
 ; ---------------------------------------------------------------------------
 off_8E9D2:

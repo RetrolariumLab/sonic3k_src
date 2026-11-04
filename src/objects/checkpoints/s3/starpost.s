@@ -44,12 +44,13 @@ loc_2C488:
                 bne.w   loc_2C56E
                 lea     (Player_1).w,a3
                 move.b  (Last_star_post_hit).w,d1
-                bsr.s   StarpostS3ActivateNewPostForP1AndSaveCheckpoint
+                bsr.s   S3Starpost_TryActivateForP1
                 bra.w   loc_2C56E
 
 ; =============== S U B R O U T I N E =======================================
 
-StarpostS3ActivateNewPostForP1AndSaveCheckpoint:
+; Only a higher-numbered post can activate. Record the restart snapshot and start the available spin or bonus stars
+S3Starpost_TryActivateForP1:
                 andi.b  #$7F,d1
                 move.b  subtype(a0),d2
                 andi.b  #$7F,d2
@@ -89,7 +90,7 @@ StarpostS3ActivateNewPostForP1AndSaveCheckpoint:
 
 loc_2C546:
                 move.b  #1,anim(a0)
-                bsr.w   StarpostS3SavePostCoordinatesAndFullLevelSnapshot
+                bsr.w   S3Starpost_SaveCheckpoint
                 move.b  #4,routine(a0)
                 movea.w respawn_addr(a0),a2
                 bset    #0,(a2)
@@ -105,7 +106,7 @@ loc_2C560:
 
 locret_2C56C:
                 rts
-; End of function StarpostS3ActivateNewPostForP1AndSaveCheckpoint
+; End of function S3Starpost_TryActivateForP1
 
 ; ---------------------------------------------------------------------------
 
@@ -145,11 +146,12 @@ loc_2C5A4:
 
 ; =============== S U B R O U T I N E =======================================
 
-StarpostS3SavePostCoordinatesAndFullLevelSnapshot:
+; Write the post ID and position, then fall through to Save_Level_Data for the full restart snapshot
+S3Starpost_SaveCheckpoint:
                 move.b  subtype(a0),(Last_star_post_hit).w
                 move.w  x_pos(a0),(Saved_X_pos).w
                 move.w  y_pos(a0),(Saved_Y_pos).w
-; End of function StarpostS3SavePostCoordinatesAndFullLevelSnapshot
+; End of function S3Starpost_SaveCheckpoint
 
 ; =============== S U B R O U T I N E =======================================
 

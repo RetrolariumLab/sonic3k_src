@@ -94,7 +94,8 @@ loc_8A344:
 
 ; =============== S U B R O U T I N E =======================================
 
-AcceptIczPlatformHorizontalVelocityInRange:
+; Accept the signed candidate only within inclusive -$C00 to $C00
+ICZPathPlatform_TrySetXVel:
                 cmpi.w  #-$C00,d0
                 blt.s   locret_8A36A
                 cmpi.w  #$C00,d0
@@ -103,11 +104,12 @@ AcceptIczPlatformHorizontalVelocityInRange:
 
 locret_8A36A:
                 rts
-; End of function AcceptIczPlatformHorizontalVelocityInRange
+; End of function ICZPathPlatform_TrySetXVel
 
 ; =============== S U B R O U T I N E =======================================
 
-ApplyIczPlatformGravityWithinVelocityRange:
+; Add $38 to Y velocity only if the result remains within inclusive -$C00 to $C00
+ICZPathPlatform_TryApplyGravity:
                 move.w  y_vel(a0),d0
                 addi.w  #$38,d0
                 cmpi.w  #-$C00,d0
@@ -118,11 +120,12 @@ ApplyIczPlatformGravityWithinVelocityRange:
 
 locret_8A384:
                 rts
-; End of function ApplyIczPlatformGravityWithinVelocityRange
+; End of function ICZPathPlatform_TryApplyGravity
 
 ; =============== S U B R O U T I N E =======================================
 
-SetIczPlatformDepartureYVelocityFromAngle:
+; Use the absolute horizontal speed and the quantized saved floor angle
+ICZPathPlatform_SetDepartureYVel:
                 move.b  angle(a0),d3
                 lsr.b   #3,d3
                 andi.w  #$E,d3
@@ -133,7 +136,7 @@ SetIczPlatformDepartureYVelocityFromAngle:
 loc_8A398:
                 move.w  off_8A3A0(pc,d3.w),d0
                 jmp     off_8A3A0(pc,d0.w)
-; End of function SetIczPlatformDepartureYVelocityFromAngle
+; End of function ICZPathPlatform_SetDepartureYVel
 
 ; ---------------------------------------------------------------------------
 off_8A3A0:

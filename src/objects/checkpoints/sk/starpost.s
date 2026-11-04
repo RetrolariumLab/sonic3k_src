@@ -44,12 +44,13 @@ loc_2D012:
                 bne.w   loc_2D0F8
                 lea     (Player_1).w,a3
                 move.b  (Last_star_post_hit).w,d1
-                bsr.s   StarpostSKActivateNewPostForP1AndSaveCheckpoint
+                bsr.s   SKStarpost_TryActivateForP1
                 bra.w   loc_2D0F8
 
 ; =============== S U B R O U T I N E =======================================
 
-StarpostSKActivateNewPostForP1AndSaveCheckpoint:
+; Only a higher-numbered post can activate. Record the restart snapshot and start the available spin or bonus stars
+SKStarpost_TryActivateForP1:
                 andi.b  #$7F,d1
                 move.b  subtype(a0),d2
                 andi.b  #$7F,d2
@@ -85,11 +86,11 @@ StarpostSKActivateNewPostForP1AndSaveCheckpoint:
                 move.w  a0,$3E(a1)
                 cmpi.w  #20,(Ring_count).w
                 blo.s   loc_2D0D0
-                bsr.w   StarpostSKSpawnBonusEntryStarQuartetAndQueueSelectedArt
+                bsr.w   SKStarpost_SpawnBonusStarsAndArt
 
 loc_2D0D0:
                 move.b  #1,anim(a0)
-                bsr.w   StarpostSKSavePostCoordinatesAndFullLevelSnapshot
+                bsr.w   SKStarpost_SaveCheckpoint
                 move.b  #4,routine(a0)
                 movea.w respawn_addr(a0),a2
                 bset    #0,(a2)
@@ -105,7 +106,7 @@ loc_2D0EA:
 
 locret_2D0F6:
                 rts
-; End of function StarpostSKActivateNewPostForP1AndSaveCheckpoint
+; End of function SKStarpost_TryActivateForP1
 
 ; ---------------------------------------------------------------------------
 
@@ -145,11 +146,12 @@ loc_2D12E:
 
 ; =============== S U B R O U T I N E =======================================
 
-StarpostSKSavePostCoordinatesAndFullLevelSnapshot:
+; Write the post ID and position, then fall through to Save_Level_Data for the full restart snapshot
+SKStarpost_SaveCheckpoint:
                 move.b  subtype(a0),(Last_star_post_hit).w
                 move.w  x_pos(a0),(Saved_X_pos).w
                 move.w  y_pos(a0),(Saved_Y_pos).w
-; End of function StarpostSKSavePostCoordinatesAndFullLevelSnapshot
+; End of function SKStarpost_SaveCheckpoint
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -268,7 +270,8 @@ Map_StarpostStars:
 
 ; =============== S U B R O U T I N E =======================================
 
-StarpostSKSpawnBonusEntryStarQuartetAndQueueSelectedArt:
+; Try to allocate a four-phase ring and queue art for the bonus stage selected by the ring count
+SKStarpost_SpawnBonusStarsAndArt:
                 moveq   #4-1,d1
                 moveq   #0,d2
 
@@ -322,7 +325,7 @@ loc_2D454:
 loc_2D474:
                 move.w  #tiles_to_bytes(ArtTile_StarPost+8),d2
                 jmp     (Queue_Kos_Module).l
-; End of function StarpostSKSpawnBonusEntryStarQuartetAndQueueSelectedArt
+; End of function SKStarpost_SpawnBonusStarsAndArt
 
 ; ---------------------------------------------------------------------------
 

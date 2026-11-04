@@ -45,7 +45,7 @@ loc_5728A:
 ; ---------------------------------------------------------------------------
 
 loc_572B2:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
                 bhs.s   loc_572CE
@@ -82,7 +82,7 @@ loc_57306:
 ; ---------------------------------------------------------------------------
 
 loc_5731C:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -107,7 +107,7 @@ loc_57344:
 ; ---------------------------------------------------------------------------
 
 loc_57362:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 lea     byte_574A4(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
@@ -181,7 +181,8 @@ loc_57402:
 
 ; =============== S U B R O U T I N E =======================================
 
-SuspendBlasterGroundRoutineForCeilingRetreat:
+; The local enable and engine-specific global must both allow retreat. Save the ground state and X velocity
+Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
                 beq.s   locret_57436
                 tst.b   (_unkFAA2).w
@@ -193,7 +194,7 @@ SuspendBlasterGroundRoutineForCeilingRetreat:
 
 locret_57436:
                 rts
-; End of function SuspendBlasterGroundRoutineForCeilingRetreat
+; End of function Blaster_TryRetreatToCeiling
 
 ; ---------------------------------------------------------------------------
 ObjDat_Blaster:

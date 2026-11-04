@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 108
+    "commit_count": 109
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -695,9 +695,15 @@
       "commits": ["0a91577701fc50b7d805997ec3d9b243e3a81f75"]
     },
     {
-      "id": "current-shorten-L01-bosses",
+      "id": "change-6dd8c3fff22c",
       "kind": "source_or_tooling",
       "summary": "Shorten 136 earlier boss procedure names and preserve their historical token and profile binding.",
+      "commits": ["6dd8c3fff22cdb0a74b880ce71eed6deac2e4926"]
+    },
+    {
+      "id": "current-shorten-L02-world",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 93 earlier level, object and terrain procedure names with exact source bindings.",
       "commits": ["release-commit"]
     }
   ],

@@ -229,7 +229,7 @@ loc_58F00:
                 jsr     SetUp_ObjAttributes2(pc)
                 move.l  #loc_58F1E,(a0)
                 move.l  #loc_58F28,$34(a0)
-                bsr.w   InitializeIczSnowFragmentLaunchFromPlayerFacing
+                bsr.w   ICZSnowFragment_InitLaunch
                 jsr     Refresh_ChildPositionAdjusted(pc)
 
 loc_58F1E:
@@ -248,7 +248,8 @@ loc_58F30:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeIczSnowFragmentLaunchFromPlayerFacing:
+; Set the wait and indexed launch speeds. If the recorded player faces left, mirror both actors and negate the fragment's X velocity
+ICZSnowFragment_InitLaunch:
                 movea.w parent3(a0),a1
                 move.w  $44(a1),d0
                 beq.s   locret_58F72
@@ -267,7 +268,7 @@ InitializeIczSnowFragmentLaunchFromPlayerFacing:
 
 locret_58F72:
                 rts
-; End of function InitializeIczSnowFragmentLaunchFromPlayerFacing
+; End of function ICZSnowFragment_InitLaunch
 
 ; ---------------------------------------------------------------------------
 word_58F74:

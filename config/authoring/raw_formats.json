@@ -609,7 +609,7 @@
     },
     {
       "path": "src/objects/effects/s3/legacy_defense.s",
-      "sha256": "564c8eda9281be0d69109db1588ed9ec82f84f8fc9f9f8190e4ac1521e6f2a02"
+      "sha256": "1ea1ea7167fdb7b2e788db2044a758321a0b88b48e704e9f9830a74f9de940e1"
     },
     {
       "path": "src/objects/effects/sk/boss_explosions.s",
@@ -617,7 +617,7 @@
     },
     {
       "path": "src/objects/effects/sk/legacy_defense.s",
-      "sha256": "50771bada8fd37781c1860d4b185925fc5db29c367890a29f40662fb09668ef2"
+      "sha256": "e3825720ee39144fedae923ed897565d15fde45b82b3550e17445c963efd5431"
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
@@ -661,7 +661,7 @@
     },
     {
       "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
-      "sha256": "9b8e88554637d3a2b19af21443cdf6e6fed66d84f7a500c409659bfe1ed2890c"
+      "sha256": "78455e0a5750d9a7775c94fe41f1f0cac339e55d6b50f895525292677b6fba40"
     },
     {
       "path": "src/objects/enemies/aiz/s3/rhinobot.s",
@@ -673,7 +673,7 @@
     },
     {
       "path": "src/objects/enemies/aiz/sk/monkey_dude.s",
-      "sha256": "7fcdee14b881218c530b8dc1f59b8feed53b0b5e7cc0f8ed60d4656983d8034c"
+      "sha256": "3d0f741ffab9966e17f41e865025d3dbecb80fc2e49e40b02a0bab82ab527030"
     },
     {
       "path": "src/objects/enemies/aiz/sk/rhinobot.s",
@@ -701,7 +701,7 @@
     },
     {
       "path": "src/objects/enemies/fbz/s3/blaster.s",
-      "sha256": "a373baec96ff9d90094657f11b1949aba3482a62d4fe07fdf972272123d1b087"
+      "sha256": "1751669d2e8b40f1045e1f48713cccc5f48454d6c091a1de4c8d79a92f390b03"
     },
     {
       "path": "src/objects/enemies/fbz/s3/techno_squeek.s",
@@ -713,11 +713,11 @@
     },
     {
       "path": "src/objects/enemies/fbz/sk/blaster.s",
-      "sha256": "d7652b01d89414695992d1a464b4df7f360e7a14385c3abb0ca3df06299bc0f2"
+      "sha256": "1aa5eda6dfa5f92e38872574d8cf93d5eeaba6d71b9efb89c5b23f0c11cf25b2"
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "sha256": "b2160e52865cd09501339e048d3b4a10c90093c25dd0bc46a78fcf6368521621"
+      "sha256": "fc6e331ae7c1e9d3f6446507a76388d3e0a9fa9026af397fc122e5ac2fcb1ef5"
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
@@ -737,7 +737,7 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
-      "sha256": "820588f272ddf3e812ce093ded7be9d7d03892002b970926569d922dcb804cd9"
+      "sha256": "a2c49bbd4649f2264790eebadd416cddbdddec06e3d1f777814976cde0357f42"
     },
     {
       "path": "src/objects/enemies/hcz/s3/poindexter.s",
@@ -777,27 +777,27 @@
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
-      "sha256": "8412c532513497b8b50809b9c108487a57bf77c76a45aa741de4d5478b70424a"
+      "sha256": "6b37e459d9fce0ae9f15285d41fff163c323cf29d0b7129d183d311e55d3f44c"
     },
     {
       "path": "src/objects/enemies/icz/s3/snale_blaster.s",
-      "sha256": "1d80a8882d2293c7279a6a6ccf4a521832eacfbdfa8ca1c4215344dc68f031f9"
+      "sha256": "01949dd32fba743975fa44525dd5eba854d5a4f4ab8f01e88c8cedfe1f24b164"
     },
     {
       "path": "src/objects/enemies/icz/s3/star_pointer.s",
-      "sha256": "d385f0f3af3610911801386ac2df6233e9367fd25b2f51de97609f76ee048cc5"
+      "sha256": "855e078567880b3d79186b78a3fa1396b6509229610f791c38a33027e2c017c3"
     },
     {
       "path": "src/objects/enemies/icz/sk/penguinator.s",
-      "sha256": "58cb6152d4f7aecc78b6f2ee5a5fe00c761f12f157c74cd864de702266c6de18"
+      "sha256": "f033a47084287428c1103780b2ac4b725f8457c7bfbad9eb7e55618c5ff918f9"
     },
     {
       "path": "src/objects/enemies/icz/sk/snale_blaster.s",
-      "sha256": "019ff567c0ef7db0464fcfbc595993000645d7387916f3c0610dfd2290cee076"
+      "sha256": "1408a3f75828265133376b90aa96870a0cad18acfb59da135350532796f04bba"
     },
     {
       "path": "src/objects/enemies/icz/sk/star_pointer.s",
-      "sha256": "4dcdd2fec748a8a39aa48378db0d31383770afa261c5d6d03074decd375d3844"
+      "sha256": "ecace3fc17cfb55f19b8dc9146c430131f6fd7f373cb0069bda3bb551b5be36b"
     },
     {
       "path": "src/objects/enemies/lbz/s3/corkey.s",
@@ -857,7 +857,7 @@
     },
     {
       "path": "src/objects/enemies/sk/cluckoid.s",
-      "sha256": "8db5676955719b69524d03edf2b6544ed7472d5a10b78ec83f589bcd8ec28459"
+      "sha256": "b4db2fb990eea6eddb900721ddfbe43f989ce4d2f230334ca03facb29477b6af"
     },
     {
       "path": "src/objects/enemies/sk/dragonfly.s",
@@ -889,7 +889,7 @@
     },
     {
       "path": "src/objects/enemies/sk/skorp.s",
-      "sha256": "c9b57748000a3935e89ce31412a563b9cb4b0f10cd45e105c1cc2ae6d4b80371"
+      "sha256": "aecbcfb88a1867f130f0796419011846812a99c011cea8b8c4107d2560efe4d5"
     },
     {
       "path": "src/objects/enemies/sk/toxomister.s",
@@ -1109,7 +1109,7 @@
     },
     {
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
-      "sha256": "c61683fd3c75d0190616048c3333cb8ef8c03a31860227821e737eab3678122b"
+      "sha256": "d5ee70b5a41a092fafc87eb949114095dffb59c67865e5e3042a67fa6e8f93d3"
     },
     {
       "path": "src/objects/terrain/icz/s3/freezer.s",
@@ -1121,11 +1121,11 @@
     },
     {
       "path": "src/objects/terrain/icz/s3/path_platform.s",
-      "sha256": "f7daed0465de5652d722a9c2ee350cef3aa3731da5628bc00a1b6058362cb976"
+      "sha256": "f0b324146bc6e529e858126eeebe03ed4b1308053162cf689475084b1af0089b"
     },
     {
       "path": "src/objects/terrain/icz/s3/snow_pile.s",
-      "sha256": "b5f4841579da8affd9c1a44bfb0fe965918bf4d3d9114c0734512374e68b849a"
+      "sha256": "df136bd253604c3e265ae1862932cb9fc082ee220e3f937547b18a842b8d0fac"
     },
     {
       "path": "src/objects/terrain/icz/s3/stalactite.s",
@@ -1133,7 +1133,7 @@
     },
     {
       "path": "src/objects/terrain/icz/sk/breakable_ice.s",
-      "sha256": "8a299a89f5959e66e3d6c53e2214125ec65c47a1835a60ca4420a39f31bf23e6"
+      "sha256": "90daf8b11f550ffb6b5d45575db73f2f7feb71e4e7a6e657a413896d74e830f9"
     },
     {
       "path": "src/objects/terrain/icz/sk/freezer.s",
@@ -1145,11 +1145,11 @@
     },
     {
       "path": "src/objects/terrain/icz/sk/path_platform.s",
-      "sha256": "6abda9d49157624b5cc743f8af36d8b0595c0c58328f13dad5e2ecf92bdad5ab"
+      "sha256": "9bb257cafcdf11b4612eb88098881d4ec3d75243bef4f8412db8b89fc989669c"
     },
     {
       "path": "src/objects/terrain/icz/sk/snow_pile.s",
-      "sha256": "011cfafe3711a4d2100fe72db99b40f2a6b5209d812a3a2bf07cd8cfb983f86c"
+      "sha256": "c9ad2e531ba77ed5f4c6dd986a9832d866bdbc36bb2c8df1ede1d1958a70ee6c"
     },
     {
       "path": "src/objects/terrain/icz/sk/stalactite.s",
@@ -1237,7 +1237,7 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/special_stage_control.s",
-      "sha256": "66d265977349c640a665b3cf7e0590f446552f43ac878cc6a873a3a18df7a521"
+      "sha256": "f17c6f5aa8a307f591a11df2ace477bf67e66507f7681d3bc774d9fa1ee95b6c"
     },
     {
       "path": "src/objects/zones/lbz/s3/ride_grapple.s",
@@ -1285,7 +1285,7 @@
     },
     {
       "path": "src/objects/zones/mhz/sk/mushroom_parachute.s",
-      "sha256": "fd9badd4789443813259172355ffb4459f6ab79ff3b319293e9681162478bf1e"
+      "sha256": "530404ff911a189fcda1193fa42ec957b34d605eb8c855be4e726e58e35f9dec"
     },
     {
       "path": "src/objects/zones/mhz/sk/swing_vine.s",
@@ -3407,8 +3407,8 @@
       "path": "src/objects/effects/s3/legacy_defense.s",
       "symbol": "byte_17760",
       "scope": "byte_17760",
-      "first_line": 239,
-      "last_line": 250,
+      "first_line": 240,
+      "last_line": 251,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 84,
       "declarations_sha256": "6cbfba97a27fe14dee1e9e77d8047aeec4fbfcbe88fd51a0620a9d3dbacb035e",
@@ -3440,8 +3440,8 @@
       "path": "src/objects/effects/sk/legacy_defense.s",
       "symbol": "byte_189E0",
       "scope": "byte_189E0",
-      "first_line": 243,
-      "last_line": 254,
+      "first_line": 244,
+      "last_line": 255,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 84,
       "declarations_sha256": "c3917ca86ad0bf0f8592100565369999e2803ca6da2bc66259c2266824354be1",
@@ -3557,8 +3557,8 @@
       "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
       "symbol": "byte_554B0",
       "scope": "byte_554B0",
-      "first_line": 600,
-      "last_line": 616,
+      "first_line": 602,
+      "last_line": 618,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 22,
       "declarations_sha256": "b192f6c5738a84b6268c0efd1ffa09f7f48cfe1302704a66268deabcf5e46f46",
@@ -3606,8 +3606,8 @@
       "path": "src/objects/enemies/aiz/sk/monkey_dude.s",
       "symbol": "byte_876B4",
       "scope": "byte_876B4",
-      "first_line": 600,
-      "last_line": 616,
+      "first_line": 602,
+      "last_line": 618,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
       "declarations_sha256": "c0233a359857183f070f4fab0fa50105d97df717172bf2d84508bfd9b9785347",
@@ -3730,8 +3730,8 @@
       "path": "src/objects/enemies/fbz/s3/blaster.s",
       "symbol": "byte_5749A",
       "scope": "byte_5749A",
-      "first_line": 237,
-      "last_line": 253,
+      "first_line": 238,
+      "last_line": 254,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 30,
       "declarations_sha256": "8028789d831a19d2b0903479c2948138a7918b103ce90d131526164daa382d46",
@@ -3799,8 +3799,8 @@
       "path": "src/objects/enemies/fbz/sk/blaster.s",
       "symbol": "byte_8975E",
       "scope": "byte_8975E",
-      "first_line": 283,
-      "last_line": 299,
+      "first_line": 284,
+      "last_line": 300,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 30,
       "declarations_sha256": "f8dc9b10ce99d23761ace3d7fe4498a72fe16b29da8ae5b23edb433b14e80ea4",
@@ -3913,8 +3913,8 @@
       "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
       "symbol": "AniRaw_MegaChopper",
       "scope": "AniRaw_MegaChopper",
-      "first_line": 300,
-      "last_line": 302,
+      "first_line": 301,
+      "last_line": 303,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
       "declarations_sha256": "64381e9107e0cc8014bed328e48218fa646e8ae09a32d9692ea93df57c3c05b6",
@@ -4083,8 +4083,8 @@
       "path": "src/objects/enemies/icz/s3/penguinator.s",
       "symbol": "byte_595A2",
       "scope": "byte_595A2",
-      "first_line": 314,
-      "last_line": 325,
+      "first_line": 315,
+      "last_line": 326,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 36,
       "declarations_sha256": "6b00d2927731703fae5b97befb24d502ef0f8575913b260b49241720b743c1dd",
@@ -4102,8 +4102,8 @@
       "path": "src/objects/enemies/icz/s3/snale_blaster.s",
       "symbol": "byte_59A48",
       "scope": "byte_59A48",
-      "first_line": 321,
-      "last_line": 346,
+      "first_line": 322,
+      "last_line": 347,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 44,
       "declarations_sha256": "801fe19618d1eefb1bfd324f1911d799adc5ae2ce4be2075939262b9d2095936",
@@ -4122,8 +4122,8 @@
       "path": "src/objects/enemies/icz/s3/star_pointer.s",
       "symbol": "byte_59740",
       "scope": "byte_59740",
-      "first_line": 153,
-      "last_line": 155,
+      "first_line": 154,
+      "last_line": 156,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
       "declarations_sha256": "186e632284672a36b6c1bc5753b26ee01c46dab06c48b154a746f60a5ac378b9",
@@ -4150,8 +4150,8 @@
       "path": "src/objects/enemies/icz/sk/penguinator.s",
       "symbol": "byte_8BE0A",
       "scope": "byte_8BE0A",
-      "first_line": 314,
-      "last_line": 325,
+      "first_line": 315,
+      "last_line": 326,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 36,
       "declarations_sha256": "679f4d0e6fc24939cb4f1f1d1292039632bbbc14fc89a7e189b3585461feca8b",
@@ -4169,8 +4169,8 @@
       "path": "src/objects/enemies/icz/sk/snale_blaster.s",
       "symbol": "byte_8C2B6",
       "scope": "byte_8C2B6",
-      "first_line": 321,
-      "last_line": 346,
+      "first_line": 322,
+      "last_line": 347,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 44,
       "declarations_sha256": "079e2b53710b691eaee8700ccf672ccf4ff17bf8d970e44a9a3e02da2e23defc",
@@ -4189,8 +4189,8 @@
       "path": "src/objects/enemies/icz/sk/star_pointer.s",
       "symbol": "byte_8BFA8",
       "scope": "byte_8BFA8",
-      "first_line": 153,
-      "last_line": 155,
+      "first_line": 154,
+      "last_line": 156,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
       "declarations_sha256": "736c84a3757d8818e9276cf024308833f4af164697d1c0638a8e3b5c69be0321",
@@ -4465,8 +4465,8 @@
       "path": "src/objects/enemies/sk/cluckoid.s",
       "symbol": "byte_8E418",
       "scope": "byte_8E418",
-      "first_line": 289,
-      "last_line": 306,
+      "first_line": 290,
+      "last_line": 307,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 32,
       "declarations_sha256": "c06f2e36031446899774bb639b3b1720e5be5afbafb0c863128d1c458d0ebcac",
@@ -4602,8 +4602,8 @@
       "path": "src/objects/enemies/sk/skorp.s",
       "symbol": "byte_8EA60",
       "scope": "byte_8EA60",
-      "first_line": 448,
-      "last_line": 450,
+      "first_line": 449,
+      "last_line": 451,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
       "declarations_sha256": "342cbf11988b85780504385801cbbd222b54247ac65e27d61d48f84fe4731b0d",
@@ -4861,8 +4861,8 @@
       "path": "src/objects/terrain/icz/s3/breakable_ice.s",
       "symbol": "byte_57C48",
       "scope": "byte_57C48",
-      "first_line": 211,
-      "last_line": 215,
+      "first_line": 214,
+      "last_line": 218,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
       "declarations_sha256": "75842b79b933c54f09e93558bedbb9b3df27c22a957c365b5b25c66232a0a9af",
@@ -4910,8 +4910,8 @@
       "path": "src/objects/terrain/icz/sk/breakable_ice.s",
       "symbol": "byte_8A43E",
       "scope": "byte_8A43E",
-      "first_line": 224,
-      "last_line": 228,
+      "first_line": 227,
+      "last_line": 231,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
       "declarations_sha256": "99e2545f1518bbc23969d5b047be822aa7f33b3117ce4711093c5d7b9da6d8a7",

@@ -31,7 +31,7 @@ EndingInitializeGentleVerticalSwing:
 
 EndingTornadoPositionTwoSubSpritesAndCycleTheirFrames:
                 lea     byte_6006E(pc),a1
-                jsr     (SKPositionMultiSpriteChildrenFromSignedBytePairs).l
+                jsr     (SKMultiSprite_PositionChildren).l
                 moveq   #0,d0
                 move.b  $44(a0),d0
                 addq.b  #1,d0

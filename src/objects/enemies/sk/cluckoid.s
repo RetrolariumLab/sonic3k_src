@@ -86,7 +86,7 @@ loc_8E236:
                 lea     ObjDat3_8E3F6(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_8E250,(a0)
-                bsr.w   InitializeCluckoidBreathParticleFromSpawnTables
+                bsr.w   CluckoidBreath_InitParticle
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -156,7 +156,8 @@ EmitCluckoidBreathParticleOnVblankPhase:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeCluckoidBreathParticleFromSpawnTables:
+; Use parent subtype and both halves of the random result. A suppressed table entry deletes the particle
+CluckoidBreath_InitParticle:
                 jsr     (Random_Number).l
                 movea.w parent3(a0),a1
                 move.w  d0,d1
@@ -201,7 +202,7 @@ loc_8E34A:
 loc_8E35C:
                 addq.w  #4,sp
                 jmp     (Delete_Current_Sprite).l
-; End of function InitializeCluckoidBreathParticleFromSpawnTables
+; End of function CluckoidBreath_InitParticle
 
 ; ---------------------------------------------------------------------------
 word_8E364:

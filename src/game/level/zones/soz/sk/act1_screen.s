@@ -126,7 +126,7 @@ loc_55B70:
                 bhs.s   loc_55BB4
 
 loc_55B9E:
-                jsr     AdvanceSoz1PyramidRiseAndPositionBackground(pc)
+                jsr     SOZ1_UpdatePyramidRise(pc)
 
 loc_55BA2:
                 jsr     (DrawBGAsYouMove).l
@@ -163,7 +163,7 @@ loc_55BE0:
                 bmi.s   loc_55C10
 
 loc_55BFE:
-                jsr     AdvanceSoz1PyramidRiseAndPositionBackground(pc)
+                jsr     SOZ1_UpdatePyramidRise(pc)
                 jsr     (DrawBGAsYouMove).l
                 jsr     ApplySoz1PyramidDoorChunkRequest(pc)
                 jmp     ComposeSoz1PyramidPairedHeatScroll(pc)
@@ -305,7 +305,8 @@ loc_55D86:
 
 ; =============== S U B R O U T I N E =======================================
 
-AdvanceSoz1PyramidRiseAndPositionBackground:
+; Advance on three out of four updates during continuous shake. Always apply the background position and rumble
+SOZ1_UpdatePyramidRise:
                 tst.w   (Screen_shake_flag).w
                 bpl.s   PositionSoz1PyramidBackgroundAndRumble
                 move.w  (Level_frame_counter).w,d0
@@ -315,7 +316,7 @@ AdvanceSoz1PyramidRiseAndPositionBackground:
                 cmpi.w  #$280,(_unkEE9C).w
                 blt.s   PositionSoz1PyramidBackgroundAndRumble
                 move.w  #8,(Screen_shake_flag).w
-; End of function AdvanceSoz1PyramidRiseAndPositionBackground
+; End of function SOZ1_UpdatePyramidRise
 
 ; =============== S U B R O U T I N E =======================================
 

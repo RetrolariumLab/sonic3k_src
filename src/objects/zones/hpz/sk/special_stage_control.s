@@ -446,7 +446,7 @@ loc_90DFC:
                 move.l  #loc_90E1C,(a0)
                 bset    #7,render_flags(a0)
                 move.w  #$7F,$2E(a0)
-                bsr.w   InitializeHpzChaosEmeraldConversionParticle
+                bsr.w   HPZEmeraldConvert_InitParticle
 
 loc_90E1C:
                 move.w  $3A(a0),d0
@@ -548,7 +548,8 @@ RawAni_90F06:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeHpzChaosEmeraldConversionParticle:
+; Select phase, velocity and art by color. If conversion is unnecessary, mark completion and delete the particle
+HPZEmeraldConvert_InitParticle:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
@@ -579,7 +580,7 @@ loc_90F54:
                 bset    d0,$27(a1)
                 addq.w  #4,sp
                 jmp     (Delete_Current_Sprite).l
-; End of function InitializeHpzChaosEmeraldConversionParticle
+; End of function HPZEmeraldConvert_InitParticle
 
 ; ---------------------------------------------------------------------------
 byte_90F64:

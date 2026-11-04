@@ -62,11 +62,11 @@ loc_8ABC2:
                 tst.b   subtype(a0)
                 bne.s   loc_8ABF4
                 lea     (Player_1).w,a1
-                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
+                bsr.w   ICZColumn_TryBreakBaseOnRoll
                 lea     (Player_2).w,a1
                 swap    d0
                 addq.b  #p2_pushing_bit-p1_pushing_bit,d1
-                bsr.w   BreakIczColumnSegmentForFastRollingPlayer
+                bsr.w   ICZColumn_TryBreakBaseOnRoll
 
 loc_8ABF4:
                 bra.w   loc_8ACCE
@@ -125,7 +125,8 @@ CollideIczColumnSegmentAsSolidRectangle:
 
 ; =============== S U B R O U T I N E =======================================
 
-BreakIczColumnSegmentForFastRollingPlayer:
+; Require a pushing rolling player with saved speed magnitude of at least $600. On break, skip the caller's remaining update
+ICZColumn_TryBreakBaseOnRoll:
                 btst    d1,status(a0)
                 beq.s   locret_8ACCC
                 move.w  d0,d3
@@ -153,7 +154,7 @@ loc_8AC8E:
 
 locret_8ACCC:
                 rts
-; End of function BreakIczColumnSegmentForFastRollingPlayer
+; End of function ICZColumn_TryBreakBaseOnRoll
 
 ; ---------------------------------------------------------------------------
 

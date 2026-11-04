@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-SKHCZApplyRectangularWaterTunnelCurrentsToPlayers:
+; Select the tunnel flag for the player mode. The matched rectangle allows one-pixel steering across the current
+SKHCZ_ApplyWaterTunnelCurrents:
                 tst.w   (Debug_placement_mode).w
                 bne.w   locret_705A
                 cmpi.b  #1,(Current_zone).w
@@ -28,7 +29,7 @@ loc_6F82:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
                 moveq   #0,d5
-; End of function SKHCZApplyRectangularWaterTunnelCurrentsToPlayers
+; End of function SKHCZ_ApplyWaterTunnelCurrents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -140,7 +141,8 @@ HCZ2_WaterTunLocs:
 
 ; =============== S U B R O U T I N E =======================================
 
-SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers:
+; Dispatch forced ground motion for Hydrocity 2, IceCap 1 and Mushroom Hill
+SKSurface_DispatchBothPlayers:
                 cmpi.w  #$101,(Current_zone_and_act).w
                 beq.s   loc_716A
                 cmpi.w  #$500,(Current_zone_and_act).w
@@ -153,14 +155,15 @@ SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers:
 loc_716A:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
-                bsr.s   SKHCZ2ApplyNegativeGroundCurrentOnMatchingChunks
+                bsr.s   SKHCZ2_ApplyChunkGroundCurrent
                 lea     (Player_2).w,a1
                 move.b  (Ctrl_2_held_logical).w,d2
-; End of function SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers
+; End of function SKSurface_DispatchBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-SKHCZ2ApplyNegativeGroundCurrentOnMatchingChunks:
+; On the selected chunks, force inertia toward negative eight pixels per frame
+SKHCZ2_ApplyChunkGroundCurrent:
                 btst    #Status_InAir,status(a1)
                 bne.s   loc_71B8
                 cmpi.b  #$C,top_solid_bit(a1)
@@ -196,20 +199,21 @@ locret_71CA:
 loc_71CC:
                 moveq   #-8,d0
                 bra.w   loc_723E
-; End of function SKHCZ2ApplyNegativeGroundCurrentOnMatchingChunks
+; End of function SKHCZ2_ApplyChunkGroundCurrent
 
 ; ---------------------------------------------------------------------------
 
 loc_71D2:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
-                bsr.s   SKICZ1ApplyChunkSelectedGroundSkidInertia
+                bsr.s   SKICZ1_ApplyChunkGroundSkid
                 lea     (Player_2).w,a1
                 move.b  (Ctrl_2_held_logical).w,d2
 
 ; =============== S U B R O U T I N E =======================================
 
-SKICZ1ApplyChunkSelectedGroundSkidInertia:
+; The chunk selects the direction and target speed. A zero target takes the shared friction path
+SKICZ1_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
                 bne.s   loc_7220
                 btst    #Status_OnObj,status(a1)
@@ -325,20 +329,21 @@ loc_72EE:
                 move.w  d0,ground_vel(a1)
                 ori.b   #$80,status_secondary(a1)
                 rts
-; End of function SKICZ1ApplyChunkSelectedGroundSkidInertia
+; End of function SKICZ1_ApplyChunkGroundSkid
 
 ; ---------------------------------------------------------------------------
 
 loc_72FA:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_logical).w,d2
-                bsr.s   SKMHZApplyChunkAndHalfTileGroundSkidControl
+                bsr.s   SKMHZ_ApplyChunkGroundSkid
                 lea     (Player_2).w,a1
                 move.b  (Ctrl_2_logical).w,d2
 
 ; =============== S U B R O U T I N E =======================================
 
-SKMHZApplyChunkAndHalfTileGroundSkidControl:
+; Gate by chunk and half-chunk, with path-dependent direction. First entry brakes the player and reduces collision radii
+SKMHZ_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
                 bne.s   loc_734A
                 btst    #Status_OnObj,status(a1)
@@ -472,4 +477,4 @@ loc_747C:
                 beq.w   loc_7398
                 moveq   #8,d0
                 bra.w   loc_7398
-; End of function SKMHZApplyChunkAndHalfTileGroundSkidControl
+; End of function SKMHZ_ApplyChunkGroundSkid

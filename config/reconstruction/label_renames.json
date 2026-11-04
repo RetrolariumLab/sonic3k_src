@@ -724,7 +724,7 @@
       "source": "src/game/level/ending/sk/background.s",
       "original_line": 156,
       "old": "sub_5B092",
-      "new": "SKEndingClampInitialBackgroundYAndBuildCloudBands",
+      "new": "SKEnding_BuildInitialCloudBands",
       "profiles": ["sk"],
       "meaning": "Clamp initial ending background Y to0x120 and execute shared Sky Sanctuary eight-band cloud scrolling builder."
     },
@@ -732,7 +732,7 @@
       "source": "src/game/level/ending/sk/background.s",
       "original_line": 169,
       "old": "sub_5B0A8",
-      "new": "SKEndingBuildExpandingBackgroundBandsFromSceneX",
+      "new": "SKEnding_BuildExpandingBgBands",
       "profiles": ["sk"],
       "meaning": "Build ending background fine-scroll ramp and seven derived layer offsets from scene X plus slowly advancing phase."
     },
@@ -740,7 +740,7 @@
       "source": "src/game/level/ending/sk/background.s",
       "original_line": 210,
       "old": "sub_5B116",
-      "new": "SKEndingLoadSkyAndSSZColorsIntoNormalAndTargetPalettes",
+      "new": "SKEnding_LoadSkyColorsNowAndTarget",
       "profiles": ["sk"],
       "meaning": "Load sky palette line and SSZ2 colors into target and current palette lines2/3."
     },
@@ -748,7 +748,7 @@
       "source": "src/game/level/ending/sk/background.s",
       "original_line": 217,
       "old": "sub_5B11C",
-      "new": "SKEndingLoadSkyAndSSZColorsIntoTargetPalettes",
+      "new": "SKEnding_LoadSkyColorsToTarget",
       "profiles": ["sk"],
       "meaning": "Load sky palette line and SSZ2 colors into target palette lines2/3."
     },
@@ -756,7 +756,7 @@
       "source": "src/game/level/ending/sk/screen.s",
       "original_line": 337,
       "old": "sub_5AEEA",
-      "new": "SKEndingPublishSceneRelativeForegroundCamera",
+      "new": "SKEnding_PublishForegroundCamera",
       "profiles": ["sk"],
       "meaning": "Convert scene coordinates relative to remembered transition origins into foreground camera-copy integer coordinates."
     },
@@ -764,7 +764,7 @@
       "source": "src/game/level/s3/player_spawn.s",
       "original_line": 235,
       "old": "sub_505E",
-      "new": "S3CompSelectTailsOrFallbackSonicPlayerHandler",
+      "new": "S3Comp_SelectPlayerHandler",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Choose Tails2P object handler only for competition character BYTE1; choose Sonic2P for every other BYTE."
     },
@@ -772,7 +772,7 @@
       "source": "src/game/level/s3/water_tunnel_motion.s",
       "original_line": 7,
       "old": "sub_539A",
-      "new": "S3HCZApplyRectangularWaterTunnelCurrentsToPlayers",
+      "new": "S3HCZ_ApplyWaterTunnelCurrents",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Apply Hydrocity rectangle-table forced currents and perpendicular one-pixel input steering, selecting correct tunnel flags for current player mode."
     },
@@ -780,7 +780,7 @@
       "source": "src/game/level/s3/water_tunnel_motion.s",
       "original_line": 142,
       "old": "sub_5598",
-      "new": "S3DispatchHCZ2ICZ1SurfaceMotionForBothPlayers",
+      "new": "S3Surface_DispatchBothPlayers",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Dispatch chunk-based forced-ground-motion processing for Hydrocity act2, IceCap act1."
     },
@@ -788,7 +788,7 @@
       "source": "src/game/level/s3/water_tunnel_motion.s",
       "original_line": 160,
       "old": "sub_55BC",
-      "new": "S3HCZ2ApplyNegativeGroundCurrentOnMatchingChunks",
+      "new": "S3HCZ2_ApplyChunkGroundCurrent",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Force Hydrocity act2 ground inertia toward a negative8-pixel-per-frame band on ten designated layout chunks."
     },
@@ -796,7 +796,7 @@
       "source": "src/game/level/s3/water_tunnel_motion.s",
       "original_line": 209,
       "old": "sub_5624",
-      "new": "S3ICZ1ApplyChunkSelectedGroundSkidInertia",
+      "new": "S3ICZ1_ApplyChunkGroundSkid",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Select IceCap act1 forced ground-skid direction/speed band by layout chunk, with shared fixed-target and zero-target friction behavior."
     },
@@ -804,7 +804,7 @@
       "source": "src/game/level/sk/level_restart_actor.s",
       "original_line": 48,
       "old": "sub_86458",
-      "new": "SKPositionMultiSpriteChildrenFromSignedBytePairs",
+      "new": "SKMultiSprite_PositionChildren",
       "profiles": ["sk"],
       "meaning": "Update child-sprite absolute x/y WORDs from signed byte offset pairs, optionally mirroring X around parent."
     },
@@ -812,7 +812,7 @@
       "source": "src/game/level/sk/player_spawn.s",
       "original_line": 343,
       "old": "sub_6BD8",
-      "new": "SKCompSelectTailsOrFallbackSonicPlayerHandler",
+      "new": "SKComp_SelectPlayerHandler",
       "profiles": ["sk"],
       "meaning": "Choose Tails2P object handler only for competition character BYTE1; choose Sonic2P for every other BYTE."
     },
@@ -820,7 +820,7 @@
       "source": "src/game/level/sk/water_tunnel_motion.s",
       "original_line": 7,
       "old": "sub_6F4A",
-      "new": "SKHCZApplyRectangularWaterTunnelCurrentsToPlayers",
+      "new": "SKHCZ_ApplyWaterTunnelCurrents",
       "profiles": ["sk"],
       "meaning": "Apply Hydrocity rectangle-table forced currents and perpendicular one-pixel input steering, selecting correct tunnel flags for current player mode."
     },
@@ -828,7 +828,7 @@
       "source": "src/game/level/sk/water_tunnel_motion.s",
       "original_line": 143,
       "old": "sub_714E",
-      "new": "SKDispatchHCZ2ICZ1MHZSurfaceMotionForBothPlayers",
+      "new": "SKSurface_DispatchBothPlayers",
       "profiles": ["sk"],
       "meaning": "Dispatch chunk-based forced-ground-motion processing for Hydrocity act2, IceCap act1 and Mushroom Hill."
     },
@@ -836,7 +836,7 @@
       "source": "src/game/level/sk/water_tunnel_motion.s",
       "original_line": 163,
       "old": "sub_717C",
-      "new": "SKHCZ2ApplyNegativeGroundCurrentOnMatchingChunks",
+      "new": "SKHCZ2_ApplyChunkGroundCurrent",
       "profiles": ["sk"],
       "meaning": "Force Hydrocity act2 ground inertia toward a negative8-pixel-per-frame band on ten designated layout chunks."
     },
@@ -844,7 +844,7 @@
       "source": "src/game/level/sk/water_tunnel_motion.s",
       "original_line": 212,
       "old": "sub_71E4",
-      "new": "SKICZ1ApplyChunkSelectedGroundSkidInertia",
+      "new": "SKICZ1_ApplyChunkGroundSkid",
       "profiles": ["sk"],
       "meaning": "Select IceCap act1 forced ground-skid direction/speed band by layout chunk, with shared fixed-target and zero-target friction behavior."
     },
@@ -852,7 +852,7 @@
       "source": "src/game/level/sk/water_tunnel_motion.s",
       "original_line": 341,
       "old": "sub_730C",
-      "new": "SKMHZApplyChunkAndHalfTileGroundSkidControl",
+      "new": "SKMHZ_ApplyChunkGroundSkid",
       "profiles": ["sk"],
       "meaning": "Apply Mushroom Hill chunk-selected ground sliding, half-chunk gates and path-dependent direction, with first-entry braking and reduced collision radii."
     },
@@ -1060,7 +1060,7 @@
       "source": "src/game/level/zones/lrz/sk/act2_screen.s",
       "original_line": 92,
       "old": "sub_57082",
-      "new": "BuildLrz2ParallaxAndPositionDeathEggBackdrop",
+      "new": "LRZ2_BuildParallaxAndPlaceDeathEgg",
       "profiles": ["sk"],
       "meaning": "Build LRZ2 effective background coordinates and13 scroll bands, and position the optional Death Egg backdrop actor from the resulting parallax."
     },
@@ -1148,7 +1148,7 @@
       "source": "src/game/level/zones/mhz/sk/act1_screen.s",
       "original_line": 217,
       "old": "sub_54CF4",
-      "new": "OffsetMhzActTransitionObjectsAndRetireScenery",
+      "new": "MHZ_TranslateObjectsForAct2",
       "profiles": ["sk"],
       "meaning": "Translate active world-coordinate objects across the MHZ1-to-MHZ2 boundary and retire initialized static scenery whose old art/layout must be released."
     },
@@ -1220,7 +1220,7 @@
       "source": "src/game/level/zones/soz/sk/act1_screen.s",
       "original_line": 308,
       "old": "sub_55D94",
-      "new": "AdvanceSoz1PyramidRiseAndPositionBackground",
+      "new": "SOZ1_UpdatePyramidRise",
       "profiles": ["sk"],
       "meaning": "Advance the pyramid visual offset on three of every four updates during continuous shake, then always apply its background position/rumble helper."
     },
@@ -1332,7 +1332,7 @@
       "source": "src/game/level/zones/soz/sk/act2_screen_control.s",
       "original_line": 64,
       "old": "sub_5622C",
-      "new": "RestoreSoz2ForegroundSectionsFromTemplate",
+      "new": "SOZ2_RestoreForegroundFromTemplate",
       "profiles": ["sk"],
       "meaning": "Copy40 layout chunk indices from template columns into two foreground regions when loading or reopening the later SOZ2 route."
     },
@@ -1348,7 +1348,7 @@
       "source": "src/game/level/zones/ssz/sk/act1_background.s",
       "original_line": 233,
       "old": "sub_57A60",
-      "new": "BuildSsz1MiddleAltitudeBackgroundParallax",
+      "new": "SSZ1_BuildMidAltitudeParallax",
       "profiles": ["sk"],
       "meaning": "Compute SSZ1 middle-altitude background Y and thirty region scroll words with a shared slow drift accumulator."
     },
@@ -1396,7 +1396,7 @@
       "source": "src/game/level/zones/ssz/sk/act1_screen_control.s",
       "original_line": 235,
       "old": "sub_574DC",
-      "new": "UpdateSsz1EscapeForegroundCameraAndClouds",
+      "new": "SSZ1Escape_UpdateCameraAndClouds",
       "profiles": ["sk"],
       "meaning": "Maintain the separate foreground draw/vertical-scroll origin during the SSZ1 spiral escape, then update roaming clouds."
     },
@@ -1420,7 +1420,7 @@
       "source": "src/game/level/zones/ssz/sk/act1_screen_control.s",
       "original_line": 346,
       "old": "sub_575EA",
-      "new": "ControlSsz1RouteAndReplicaBossCameraGates",
+      "new": "SSZ1_UpdateRouteAndBossGates",
       "profiles": ["sk"],
       "meaning": "Update SSZ1 route camera limits, lock the two replica-boss arenas, spawn their bosses and latch the final-area camera bounds."
     },
@@ -5412,7 +5412,7 @@
       "source": "src/objects/checkpoints/s3/starpost.s",
       "original_line": 52,
       "old": "sub_2C49E",
-      "new": "StarpostS3ActivateNewPostForP1AndSaveCheckpoint",
+      "new": "S3Starpost_TryActivateForP1",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Activate a higher-numbered checkpoint when P1 is in its narrow trigger box, produce its optional spin/bonus stars, and save the full restart snapshot."
     },
@@ -5420,7 +5420,7 @@
       "source": "src/objects/checkpoints/s3/starpost.s",
       "original_line": 148,
       "old": "sub_2C5DA",
-      "new": "StarpostS3SavePostCoordinatesAndFullLevelSnapshot",
+      "new": "S3Starpost_SaveCheckpoint",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Record the checkpoint identifier/position, then fall through Save_Level_Data to capture complete primary restart state."
     },
@@ -5436,7 +5436,7 @@
       "source": "src/objects/checkpoints/sk/starpost.s",
       "original_line": 52,
       "old": "sub_2D028",
-      "new": "StarpostSKActivateNewPostForP1AndSaveCheckpoint",
+      "new": "SKStarpost_TryActivateForP1",
       "profiles": ["sk"],
       "meaning": "Activate a higher-numbered checkpoint when P1 is in its narrow trigger box, produce its optional spin/bonus stars, and save the full restart snapshot."
     },
@@ -5444,7 +5444,7 @@
       "source": "src/objects/checkpoints/sk/starpost.s",
       "original_line": 148,
       "old": "sub_2D164",
-      "new": "StarpostSKSavePostCoordinatesAndFullLevelSnapshot",
+      "new": "SKStarpost_SaveCheckpoint",
       "profiles": ["sk"],
       "meaning": "Record the checkpoint identifier/position, then fall through Save_Level_Data to capture complete primary restart state."
     },
@@ -5452,7 +5452,7 @@
       "source": "src/objects/checkpoints/sk/starpost.s",
       "original_line": 271,
       "old": "sub_2D3C8",
-      "new": "StarpostSKSpawnBonusEntryStarQuartetAndQueueSelectedArt",
+      "new": "SKStarpost_SpawnBonusStarsAndArt",
       "profiles": ["sk"],
       "meaning": "Attempt a four-phase checkpoint bonus-entry star ring and queue art matching the ring-count-selected bonus stage."
     },
@@ -5956,7 +5956,7 @@
       "source": "src/objects/development/s3/sphere_test.s",
       "original_line": 128,
       "old": "sub_23500",
-      "new": "SphereTestS3InitializeFourRingPointSpriteAndCenter",
+      "new": "S3SphereTest_InitFourRingPoint",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Initialize one sphere-test point display and its persistent projection center from the source object, leaving3D coordinates and execution role to caller."
     },
@@ -5972,7 +5972,7 @@
       "source": "src/objects/development/s3/sphere_test.s",
       "original_line": 248,
       "old": "sub_2366C",
-      "new": "SphereTestS3InitializeThreeRingPointSpriteAndCenter",
+      "new": "S3SphereTest_InitThreeRingPoint",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Initialize one sphere-test point display and its persistent projection center from the source object, leaving3D coordinates and execution role to caller."
     },
@@ -6036,7 +6036,7 @@
       "source": "src/objects/effects/s3/legacy_defense.s",
       "original_line": 194,
       "old": "sub_1770A",
-      "new": "InvincibilityOrbitS3TranslateSignedOffsetPair",
+      "new": "S3InvincibilityOrbit_AddOffset",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Look up one of32 signed XY orbit offsets and add it to a caller-provided live or history-based player position."
     },
@@ -6044,7 +6044,7 @@
       "source": "src/objects/effects/s3/transient_player_effects.s",
       "original_line": 418,
       "old": "sub_17F82",
-      "new": "SuperStarBurstS3SpawnSixteenMirroredRadialParticles",
+      "new": "S3SuperStarBurst_SpawnParticles",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Consume the Super-star burst request and attempt sixteen outward particles at P1 position in eight mirrored velocity pairs."
     },
@@ -6076,7 +6076,7 @@
       "source": "src/objects/effects/sk/legacy_defense.s",
       "original_line": 198,
       "old": "sub_1898A",
-      "new": "InvincibilityOrbitSKTranslateSignedOffsetPair",
+      "new": "SKInvincibilityOrbit_AddOffset",
       "profiles": ["sk"],
       "meaning": "Look up one of32 signed XY orbit offsets and add it to a caller-provided live or history-based player position."
     },
@@ -6084,7 +6084,7 @@
       "source": "src/objects/effects/sk/transient_player_effects.s",
       "original_line": 442,
       "old": "sub_19236",
-      "new": "SuperStarBurstSKSpawnSixteenMirroredRadialParticles",
+      "new": "SKSuperStarBurst_SpawnParticles",
       "profiles": ["sk"],
       "meaning": "Consume the Super-star burst request and attempt sixteen outward particles at P1 position in eight mirrored velocity pairs."
     },
@@ -6228,7 +6228,7 @@
       "source": "src/objects/enemies/aiz/s3/monkey_dude.s",
       "original_line": 471,
       "old": "sub_55366",
-      "new": "ActivateMonkeyArmLinkWhenPredecessorSignals",
+      "new": "MonkeyArmLink_TryEnterAttack",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Enter a caller-selected Monkey Dude link state when its predecessor attack flag is set,halving angle-follow interval and forcing immediate next propagation."
     },
@@ -6236,7 +6236,7 @@
       "source": "src/objects/enemies/aiz/s3/monkey_dude.s",
       "original_line": 488,
       "old": "sub_5538E",
-      "new": "AdvanceMonkeyArmLinkWhenPredecessorFlagClears",
+      "new": "MonkeyArmLink_TryLeaveAttack",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Advance a Monkey Dude link to a supplied routine after predecessor attack flag clears,double its follow interval and force immediate angle propagation."
     },
@@ -6316,7 +6316,7 @@
       "source": "src/objects/enemies/aiz/sk/monkey_dude.s",
       "original_line": 471,
       "old": "sub_8756A",
-      "new": "ActivateMonkeyArmLinkWhenPredecessorSignals",
+      "new": "MonkeyArmLink_TryEnterAttack",
       "profiles": ["sk"],
       "meaning": "Enter a caller-selected Monkey Dude link state when its predecessor attack flag is set,halving angle-follow interval and forcing immediate next propagation."
     },
@@ -6324,7 +6324,7 @@
       "source": "src/objects/enemies/aiz/sk/monkey_dude.s",
       "original_line": 488,
       "old": "sub_87592",
-      "new": "AdvanceMonkeyArmLinkWhenPredecessorFlagClears",
+      "new": "MonkeyArmLink_TryLeaveAttack",
       "profiles": ["sk"],
       "meaning": "Advance a Monkey Dude link to a supplied routine after predecessor attack flag clears,double its follow interval and force immediate angle propagation."
     },
@@ -6388,7 +6388,7 @@
       "source": "src/objects/enemies/fbz/s3/blaster.s",
       "original_line": 184,
       "old": "sub_57414",
-      "new": "SuspendBlasterGroundRoutineForCeilingRetreat",
+      "new": "Blaster_TryRetreatToCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Save Blaster ground-state/velocity and enter its upward ceiling-retreat phase when locally enabled and the engine-specific global byte is set."
     },
@@ -6396,7 +6396,7 @@
       "source": "src/objects/enemies/fbz/sk/blaster.s",
       "original_line": 229,
       "old": "sub_896D6",
-      "new": "SuspendBlasterGroundRoutineForCeilingRetreat",
+      "new": "Blaster_TryRetreatToCeiling",
       "profiles": ["sk"],
       "meaning": "Save Blaster ground-state/velocity and enter its upward ceiling-retreat phase when locally enabled and the engine-specific global byte is set."
     },
@@ -6420,7 +6420,7 @@
       "source": "src/objects/enemies/fbz/sk/techno_squeek.s",
       "original_line": 526,
       "old": "sub_89DEE",
-      "new": "InitializeFbzCapsuleAnimalLaunchAndSpecies",
+      "new": "FBZCapsuleAnimal_InitRelease",
       "profiles": ["sk"],
       "meaning": "Initialize a capsule-released animal type,upward bounce speed,staggered wait and outward horizontal launch from subtype and current zone."
     },
@@ -6452,7 +6452,7 @@
       "source": "src/objects/enemies/hcz/s3/mega_chopper.s",
       "original_line": 181,
       "old": "sub_55F18",
-      "new": "ResolveMegaChopperLatchedContactAndAttachment",
+      "new": "MegaChopper_ResolveLatchedContact",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Consume a Mega Chopper S3 contact latch,mark defeat for an attacking/invincible player or initialize attachment offsets and controller state."
     },
@@ -6516,7 +6516,7 @@
       "source": "src/objects/enemies/icz/s3/penguinator.s",
       "original_line": 253,
       "old": "sub_59520",
-      "new": "ProbePenguinatorFloorAtNextHorizontalPosition",
+      "new": "Penguinator_ProbeFloorAhead",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Probe floor clearance and slope beneath Penguinator at its predicted next horizontal position without moving the enemy."
     },
@@ -6532,7 +6532,7 @@
       "source": "src/objects/enemies/icz/s3/penguinator.s",
       "original_line": 284,
       "old": "sub_5955A",
-      "new": "EmitPenguinatorSkidSoundAndSnowdustByCountdown",
+      "new": "Penguinator_TrySkidSoundAndDust",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Emit Penguinator skid sound and request one attached snowdust actor when the slide countdown is divisible by four."
     },
@@ -6540,7 +6540,7 @@
       "source": "src/objects/enemies/icz/s3/snale_blaster.s",
       "original_line": 268,
       "old": "sub_599CE",
-      "new": "RetractSnaleBlasterForNearbyRollingPlayer",
+      "new": "SnaleBlaster_TryRetractNearRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Enter Snale Blaster defensive retraction when its horizontally nearest player is rolling within strict30-hex X/Y distances,skipping the rest of the current movement state."
     },
@@ -6548,7 +6548,7 @@
       "source": "src/objects/enemies/icz/s3/star_pointer.s",
       "original_line": 130,
       "old": "sub_59718",
-      "new": "RunStarPointerSpikeCallbackWhenCollisionCleared",
+      "new": "StarPointerSpike_CheckHitCallback",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Dispatch a Star Pointer spike stored callback when its collision byte has been cleared,entering its vanish/delete state as configured."
     },
@@ -6556,7 +6556,7 @@
       "source": "src/objects/enemies/icz/sk/penguinator.s",
       "original_line": 253,
       "old": "sub_8BD88",
-      "new": "ProbePenguinatorFloorAtNextHorizontalPosition",
+      "new": "Penguinator_ProbeFloorAhead",
       "profiles": ["sk"],
       "meaning": "Probe floor clearance and slope beneath Penguinator at its predicted next horizontal position without moving the enemy."
     },
@@ -6572,7 +6572,7 @@
       "source": "src/objects/enemies/icz/sk/penguinator.s",
       "original_line": 284,
       "old": "sub_8BDC2",
-      "new": "EmitPenguinatorSkidSoundAndSnowdustByCountdown",
+      "new": "Penguinator_TrySkidSoundAndDust",
       "profiles": ["sk"],
       "meaning": "Emit Penguinator skid sound and request one attached snowdust actor when the slide countdown is divisible by four."
     },
@@ -6580,7 +6580,7 @@
       "source": "src/objects/enemies/icz/sk/snale_blaster.s",
       "original_line": 268,
       "old": "sub_8C23C",
-      "new": "RetractSnaleBlasterForNearbyRollingPlayer",
+      "new": "SnaleBlaster_TryRetractNearRoll",
       "profiles": ["sk"],
       "meaning": "Enter Snale Blaster defensive retraction when its horizontally nearest player is rolling within strict30-hex X/Y distances,skipping the rest of the current movement state."
     },
@@ -6588,7 +6588,7 @@
       "source": "src/objects/enemies/icz/sk/star_pointer.s",
       "original_line": 130,
       "old": "sub_8BF80",
-      "new": "RunStarPointerSpikeCallbackWhenCollisionCleared",
+      "new": "StarPointerSpike_CheckHitCallback",
       "profiles": ["sk"],
       "meaning": "Dispatch a Star Pointer spike stored callback when its collision byte has been cleared,entering its vanish/delete state as configured."
     },
@@ -6668,7 +6668,7 @@
       "source": "src/objects/enemies/sk/cluckoid.s",
       "original_line": 159,
       "old": "sub_8E2EA",
-      "new": "InitializeCluckoidBreathParticleFromSpawnTables",
+      "new": "CluckoidBreath_InitParticle",
       "profiles": ["sk"],
       "meaning": "Configure one outward Cluckoid pollen/leaf particle from parent subtype and two halves of a random return value,or delete a suppressed table sample."
     },
@@ -6796,7 +6796,7 @@
       "source": "src/objects/enemies/sk/skorp.s",
       "original_line": 340,
       "old": "sub_8E9A4",
-      "new": "SetSkorpTailLinkLungeVelocityTowardSnapshot",
+      "new": "SkorpTailLink_AimLungeAtSnapshot",
       "profiles": ["sk"],
       "meaning": "Set each Skorp tail part lunge velocity toward the root stored player-position snapshot,scaled by link index."
     },
@@ -7604,7 +7604,7 @@
       "source": "src/objects/rings/s3/ring_runtime.s",
       "original_line": 220,
       "old": "sub_F78C",
-      "new": "LevelRingsS3CountPerfectPickupAndGiveP1Ring",
+      "new": "S3LevelRings_PickupForP1",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Decrement the level perfect-ring remainder and tail-award exactly one ordinary P1 ring through the existing ring reward service."
     },
@@ -7612,7 +7612,7 @@
       "source": "src/objects/rings/s3/ring_runtime.s",
       "original_line": 245,
       "old": "sub_F7C0",
-      "new": "LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings",
+      "new": "S3LevelRings_InitLayoutAndTotal",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Reset transient ring bookkeeping, optionally preserve consumed statuses, select current zone/act placement stream and initialize the perfect-ring total."
     },
@@ -7628,7 +7628,7 @@
       "source": "src/objects/rings/sk/ring_runtime.s",
       "original_line": 319,
       "old": "sub_EAE6",
-      "new": "LevelRingsSKCountPerfectPickupAndGiveP1Ring",
+      "new": "SKLevelRings_PickupForP1",
       "profiles": ["sk"],
       "meaning": "Decrement the level perfect-ring remainder and tail-award exactly one ordinary P1 ring through the existing ring reward service."
     },
@@ -7636,7 +7636,7 @@
       "source": "src/objects/rings/sk/ring_runtime.s",
       "original_line": 344,
       "old": "sub_EB1A",
-      "new": "LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings",
+      "new": "SKLevelRings_InitLayoutAndTotal",
       "profiles": ["sk"],
       "meaning": "Reset transient ring bookkeeping, optionally preserve consumed statuses, select current zone/act placement stream and initialize the perfect-ring total."
     },
@@ -8292,7 +8292,7 @@
       "source": "src/objects/shared/sk/damage_regions.s",
       "original_line": 167,
       "old": "sub_1F58C",
-      "new": "HurtPlayerUnlessInvisibleHazardImmunityMatches",
+      "new": "InvisibleHazard_TryHurtPlayer",
       "profiles": ["sk"],
       "meaning": "Filter a contact against configured player-status immunity bits before invoking the shared solid-hazard hurt response."
     },
@@ -8772,7 +8772,7 @@
       "source": "src/objects/shared/tension_bridge/s3/bending_and_collision.s",
       "original_line": 258,
       "old": "sub_38210",
-      "new": "AnimateTensionBridgeSegmentsUnderMovingRiders",
+      "new": "TensionBridge_AnimateRiddenBoards",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Start and advance individual ICZ bridge-board frame sequences beneath moving riders."
     },
@@ -8876,7 +8876,7 @@
       "source": "src/objects/shared/tension_bridge/sk/bending_and_collision.s",
       "original_line": 258,
       "old": "sub_38C12",
-      "new": "AnimateTensionBridgeSegmentsUnderMovingRiders",
+      "new": "TensionBridge_AnimateRiddenBoards",
       "profiles": ["sk"],
       "meaning": "Start and advance individual ICZ bridge-board frame sequences beneath moving riders."
     },
@@ -8916,7 +8916,7 @@
       "source": "src/objects/terrain/icz/s3/breakable_ice.s",
       "original_line": 90,
       "old": "sub_57B70",
-      "new": "AcceptIczPlatformHorizontalVelocityInRange",
+      "new": "ICZPathPlatform_TrySetXVel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Accept a candidate ICZ path-platform horizontal velocity only when its signed word lies within inclusive -C00..C00 hex."
     },
@@ -8924,7 +8924,7 @@
       "source": "src/objects/terrain/icz/s3/breakable_ice.s",
       "original_line": 103,
       "old": "sub_57B82",
-      "new": "ApplyIczPlatformGravityWithinVelocityRange",
+      "new": "ICZPathPlatform_TryApplyGravity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Apply38-hex gravity to an ICZ path platform only if the resulting signed Yvelocity remains within inclusive -C00..C00 hex."
     },
@@ -8932,7 +8932,7 @@
       "source": "src/objects/terrain/icz/s3/breakable_ice.s",
       "original_line": 118,
       "old": "sub_57B9C",
-      "new": "SetIczPlatformDepartureYVelocityFromAngle",
+      "new": "ICZPathPlatform_SetDepartureYVel",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Choose a downward Yvelocity from horizontal speed magnitude and a quantized saved floor angle when an ICZ platform leaves the floor."
     },
@@ -9004,7 +9004,7 @@
       "source": "src/objects/terrain/icz/s3/segment_column.s",
       "original_line": 112,
       "old": "sub_58438",
-      "new": "BreakIczColumnSegmentForFastRollingPlayer",
+      "new": "ICZColumn_TryBreakBaseOnRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Break an ICZ column base segment for a pushing rolling player with preserved speed magnitude at least600 hex, preserving source status-bit and nonlocal-return behavior."
     },
@@ -9020,7 +9020,7 @@
       "source": "src/objects/terrain/icz/s3/snow_pile.s",
       "original_line": 251,
       "old": "sub_58F38",
-      "new": "InitializeIczSnowFragmentLaunchFromPlayerFacing",
+      "new": "ICZSnowFragment_InitLaunch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Initialize a snow fragment wait and indexed XY launch velocity, reflecting fragment/parent horizontally when its recorded player faces left."
     },
@@ -9036,7 +9036,7 @@
       "source": "src/objects/terrain/icz/s3/swinging_platform.s",
       "original_line": 285,
       "old": "sub_5875A",
-      "new": "BuildIczSwingChainIntermediateSpritePositions",
+      "new": "ICZSwingChain_BuildLinkPositions",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Build seven packed XY sub-sprite positions between the ICZ swing-chain anchor and its parent platform using shift-approximated eighths."
     },
@@ -9060,7 +9060,7 @@
       "source": "src/objects/terrain/icz/s3/swinging_platform.s",
       "original_line": 422,
       "old": "sub_58838",
-      "new": "UpdateIczSwingLedgeCollisionAndRiderImpulse",
+      "new": "ICZSwingLedge_UpdateRiderImpulse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Compare prior/current main-ledge riders after solidity and offer the first eligible player a direction-sensitive swing impulse."
     },
@@ -9068,7 +9068,7 @@
       "source": "src/objects/terrain/icz/s3/swinging_platform.s",
       "original_line": 443,
       "old": "sub_58868",
-      "new": "StartIczPlatformSwingFromRiderHorizontalSpeed",
+      "new": "ICZSwingLedge_TryStartFromRider",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Convert an appropriately directed standing player horizontal speed into a bounded ICZ platform swing impulse and player speed adjustment."
     },
@@ -9076,7 +9076,7 @@
       "source": "src/objects/terrain/icz/s3/swinging_platform.s",
       "original_line": 494,
       "old": "sub_588CC",
-      "new": "SpawnIczSwingChainDebrisWhenPlatformDetaches",
+      "new": "ICZSwingChain_TryBreakOnDetach",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Request eight pieces from the swinging chain and mark its composite sprite for deferred deletion when the parent platform detaches."
     },
@@ -9084,7 +9084,7 @@
       "source": "src/objects/terrain/icz/s3/tension_platform.s",
       "original_line": 41,
       "old": "sub_59092",
-      "new": "InitializeIczTensionSideRopeSpritePositions",
+      "new": "ICZTensionRope_InitSideSprites",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Initialize two secondary sprite records for one side rope of the ICZ tension platform."
     },
@@ -9124,7 +9124,7 @@
       "source": "src/objects/terrain/icz/s3/tension_platform.s",
       "original_line": 185,
       "old": "sub_591B4",
-      "new": "UpdateIczTensionPlatformContactsAndImpulses",
+      "new": "ICZTension_UpdateRiderContacts",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Run top-only solidity,detect either player landing/leaving and update tension-platform rest height,activity and vertical momentum."
     },
@@ -9132,7 +9132,7 @@
       "source": "src/objects/terrain/icz/s3/tension_platform.s",
       "original_line": 224,
       "old": "sub_59216",
-      "new": "TransferPlayerVerticalImpulseToIczTensionPlatform",
+      "new": "ICZTension_TransferRiderYImpulse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Combine one changed rider contact with platform vertical momentum and apply exact word-rounded three-quarter damping."
     },
@@ -9140,7 +9140,7 @@
       "source": "src/objects/terrain/icz/s3/tension_platform.s",
       "original_line": 244,
       "old": "sub_59236",
-      "new": "SetIczTensionPlatformRestHeightFromRiderCount",
+      "new": "ICZTension_SetRestHeightFromRiders",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Set the tension-platform rest height eight pixels below its base per currently standing player."
     },
@@ -9148,7 +9148,7 @@
       "source": "src/objects/terrain/icz/sk/breakable_ice.s",
       "original_line": 97,
       "old": "sub_8A35A",
-      "new": "AcceptIczPlatformHorizontalVelocityInRange",
+      "new": "ICZPathPlatform_TrySetXVel",
       "profiles": ["sk"],
       "meaning": "Accept a candidate ICZ path-platform horizontal velocity only when its signed word lies within inclusive -C00..C00 hex."
     },
@@ -9156,7 +9156,7 @@
       "source": "src/objects/terrain/icz/sk/breakable_ice.s",
       "original_line": 110,
       "old": "sub_8A36C",
-      "new": "ApplyIczPlatformGravityWithinVelocityRange",
+      "new": "ICZPathPlatform_TryApplyGravity",
       "profiles": ["sk"],
       "meaning": "Apply38-hex gravity to an ICZ path platform only if the resulting signed Yvelocity remains within inclusive -C00..C00 hex."
     },
@@ -9164,7 +9164,7 @@
       "source": "src/objects/terrain/icz/sk/breakable_ice.s",
       "original_line": 125,
       "old": "sub_8A386",
-      "new": "SetIczPlatformDepartureYVelocityFromAngle",
+      "new": "ICZPathPlatform_SetDepartureYVel",
       "profiles": ["sk"],
       "meaning": "Choose a downward Yvelocity from horizontal speed magnitude and a quantized saved floor angle when an ICZ platform leaves the floor."
     },
@@ -9236,7 +9236,7 @@
       "source": "src/objects/terrain/icz/sk/segment_column.s",
       "original_line": 128,
       "old": "sub_8AC80",
-      "new": "BreakIczColumnSegmentForFastRollingPlayer",
+      "new": "ICZColumn_TryBreakBaseOnRoll",
       "profiles": ["sk"],
       "meaning": "Break an ICZ column base segment for a pushing rolling player with preserved speed magnitude at least600 hex, preserving source status-bit and nonlocal-return behavior."
     },
@@ -9252,7 +9252,7 @@
       "source": "src/objects/terrain/icz/sk/snow_pile.s",
       "original_line": 251,
       "old": "sub_8B7A0",
-      "new": "InitializeIczSnowFragmentLaunchFromPlayerFacing",
+      "new": "ICZSnowFragment_InitLaunch",
       "profiles": ["sk"],
       "meaning": "Initialize a snow fragment wait and indexed XY launch velocity, reflecting fragment/parent horizontally when its recorded player faces left."
     },
@@ -9268,7 +9268,7 @@
       "source": "src/objects/terrain/icz/sk/swinging_platform.s",
       "original_line": 285,
       "old": "sub_8AFA2",
-      "new": "BuildIczSwingChainIntermediateSpritePositions",
+      "new": "ICZSwingChain_BuildLinkPositions",
       "profiles": ["sk"],
       "meaning": "Build seven packed XY sub-sprite positions between the ICZ swing-chain anchor and its parent platform using shift-approximated eighths."
     },
@@ -9292,7 +9292,7 @@
       "source": "src/objects/terrain/icz/sk/swinging_platform.s",
       "original_line": 422,
       "old": "sub_8B080",
-      "new": "UpdateIczSwingLedgeCollisionAndRiderImpulse",
+      "new": "ICZSwingLedge_UpdateRiderImpulse",
       "profiles": ["sk"],
       "meaning": "Compare prior/current main-ledge riders after solidity and offer the first eligible player a direction-sensitive swing impulse."
     },
@@ -9300,7 +9300,7 @@
       "source": "src/objects/terrain/icz/sk/swinging_platform.s",
       "original_line": 443,
       "old": "sub_8B0B0",
-      "new": "StartIczPlatformSwingFromRiderHorizontalSpeed",
+      "new": "ICZSwingLedge_TryStartFromRider",
       "profiles": ["sk"],
       "meaning": "Convert an appropriately directed standing player horizontal speed into a bounded ICZ platform swing impulse and player speed adjustment."
     },
@@ -9308,7 +9308,7 @@
       "source": "src/objects/terrain/icz/sk/swinging_platform.s",
       "original_line": 494,
       "old": "sub_8B114",
-      "new": "SpawnIczSwingChainDebrisWhenPlatformDetaches",
+      "new": "ICZSwingChain_TryBreakOnDetach",
       "profiles": ["sk"],
       "meaning": "Request eight pieces from the swinging chain and mark its composite sprite for deferred deletion when the parent platform detaches."
     },
@@ -9316,7 +9316,7 @@
       "source": "src/objects/terrain/icz/sk/tension_platform.s",
       "original_line": 41,
       "old": "sub_8B8FA",
-      "new": "InitializeIczTensionSideRopeSpritePositions",
+      "new": "ICZTensionRope_InitSideSprites",
       "profiles": ["sk"],
       "meaning": "Initialize two secondary sprite records for one side rope of the ICZ tension platform."
     },
@@ -9356,7 +9356,7 @@
       "source": "src/objects/terrain/icz/sk/tension_platform.s",
       "original_line": 185,
       "old": "sub_8BA1C",
-      "new": "UpdateIczTensionPlatformContactsAndImpulses",
+      "new": "ICZTension_UpdateRiderContacts",
       "profiles": ["sk"],
       "meaning": "Run top-only solidity,detect either player landing/leaving and update tension-platform rest height,activity and vertical momentum."
     },
@@ -9364,7 +9364,7 @@
       "source": "src/objects/terrain/icz/sk/tension_platform.s",
       "original_line": 224,
       "old": "sub_8BA7E",
-      "new": "TransferPlayerVerticalImpulseToIczTensionPlatform",
+      "new": "ICZTension_TransferRiderYImpulse",
       "profiles": ["sk"],
       "meaning": "Combine one changed rider contact with platform vertical momentum and apply exact word-rounded three-quarter damping."
     },
@@ -9372,7 +9372,7 @@
       "source": "src/objects/terrain/icz/sk/tension_platform.s",
       "original_line": 244,
       "old": "sub_8BA9E",
-      "new": "SetIczTensionPlatformRestHeightFromRiderCount",
+      "new": "ICZTension_SetRestHeightFromRiders",
       "profiles": ["sk"],
       "meaning": "Set the tension-platform rest height eight pixels below its base per currently standing player."
     },
@@ -10020,7 +10020,7 @@
       "source": "src/objects/zones/dez/sk/energy_bridges.s",
       "original_line": 149,
       "old": "sub_47F9C",
-      "new": "SelectPlayerCollisionLayerForDezCurvedBridge",
+      "new": "DEZCurvedBridge_UpdatePlayerLayer",
       "profiles": ["sk"],
       "meaning": "Enable the curved bridge collision layer for an active player inside its region and restore the normal layer on exit."
     },
@@ -10684,7 +10684,7 @@
       "source": "src/objects/zones/hpz/sk/special_stage_control.s",
       "original_line": 551,
       "old": "sub_90F0A",
-      "new": "InitializeHpzChaosEmeraldConversionParticle",
+      "new": "HPZEmeraldConvert_InitParticle",
       "profiles": ["sk"],
       "meaning": "Normalize a conversion-particle color, select phase/launch/art, or mark it complete and delete when no conversion is needed."
     },
@@ -11220,7 +11220,7 @@
       "source": "src/objects/zones/lrz/sk/shooting_trigger.s",
       "original_line": 75,
       "old": "sub_42EC0",
-      "new": "ActivateLrzShootingTriggerFromRollingPlayer",
+      "new": "LRZShootingTrigger_TryActivateOnRoll",
       "profiles": ["sk"],
       "meaning": "Reverse a rolling-contact player, set a level-trigger bit and turn the shooting switch itself into an explosion."
     },
@@ -11444,7 +11444,7 @@
       "source": "src/objects/zones/mgz/top_platform/s3/state_and_riders.s",
       "original_line": 148,
       "old": "sub_34354",
-      "new": "LimitTopPlatformVelocityByPredictedTerrain",
+      "new": "MGZTopPlatform_LimitVelByTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Reduce a grounded MGZ top's velocity when its next movement would penetrate terrain."
     },
@@ -11532,7 +11532,7 @@
       "source": "src/objects/zones/mgz/top_platform/sk/state_and_riders.s",
       "original_line": 148,
       "old": "sub_34DBC",
-      "new": "LimitTopPlatformVelocityByPredictedTerrain",
+      "new": "MGZTopPlatform_LimitVelByTerrain",
       "profiles": ["sk"],
       "meaning": "Reduce a grounded MGZ top's velocity when its next movement would penetrate terrain."
     },
@@ -11684,7 +11684,7 @@
       "source": "src/objects/zones/mhz/sk/mushroom_parachute.s",
       "original_line": 272,
       "old": "sub_3F7E2",
-      "new": "UpdateMhzMushroomParachuteHeadingAndSpeed",
+      "new": "MHZParachute_SteerAndAdjustDescent",
       "profiles": ["sk"],
       "meaning": "Steer owner heading from P1 controls or settle it toward cardinal travel and adjust descent speed around80 hex."
     },
@@ -12036,7 +12036,7 @@
       "source": "src/objects/zones/ssz/sk/bouncy_cloud.s",
       "original_line": 76,
       "old": "sub_45170",
-      "new": "UpdateSszCloudPlayerCompressionBounceAndSpin",
+      "new": "SSZCloud_UpdateBounceAndSpin",
       "profiles": ["sk"],
       "meaning": "Perform cloud top contact, synchronized compression delay, player launch and post-launch angle/recoil tracking."
     },

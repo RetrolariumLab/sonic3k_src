@@ -360,7 +360,7 @@ loc_17EF0:
                 beq.w   loc_17F7C
                 tst.b   anim(a0)
                 beq.s   loc_17F02
-                bsr.w   SuperStarBurstS3SpawnSixteenMirroredRadialParticles
+                bsr.w   S3SuperStarBurst_SpawnParticles
 
 loc_17F02:
                 tst.b   $34(a0)
@@ -415,7 +415,8 @@ loc_17F7C:
 
 ; =============== S U B R O U T I N E =======================================
 
-SuperStarBurstS3SpawnSixteenMirroredRadialParticles:
+; Consume the burst request and try sixteen stars in eight mirrored velocity pairs at Player 1
+S3SuperStarBurst_SpawnParticles:
                 move.b  #0,anim(a0)
                 lea     (Player_1).w,a2
                 moveq   #$10-1,d5
@@ -458,7 +459,7 @@ loc_17FFA:
 
 locret_1800A:
                 rts
-; End of function SuperStarBurstS3SpawnSixteenMirroredRadialParticles
+; End of function S3SuperStarBurst_SpawnParticles
 
 ; ---------------------------------------------------------------------------
 

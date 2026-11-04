@@ -222,7 +222,7 @@ loc_37EC2:
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
-                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
+                bsr.w   TensionBridge_AnimateRiddenBoards
                 bra.w   loc_37E38
 ; ---------------------------------------------------------------------------
 
@@ -321,7 +321,7 @@ loc_37FA6:
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithSlopedTensionBridge
-                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
+                bsr.w   TensionBridge_AnimateRiddenBoards
                 bra.w   loc_37E38
 ; ---------------------------------------------------------------------------
 

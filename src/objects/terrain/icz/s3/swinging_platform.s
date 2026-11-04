@@ -180,7 +180,7 @@ loc_5865C:
                 move.l  #loc_5866A,(a0)
 
 loc_5866A:
-                bsr.w   UpdateIczSwingLedgeCollisionAndRiderImpulse
+                bsr.w   ICZSwingLedge_UpdateRiderImpulse
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -228,8 +228,8 @@ loc_586DA:
                 move.b  #8,mapping_frame(a0)
 
 loc_586EA:
-                bsr.w   SpawnIczSwingChainDebrisWhenPlatformDetaches
-                bsr.w   BuildIczSwingChainIntermediateSpritePositions
+                bsr.w   ICZSwingChain_TryBreakOnDetach
+                bsr.w   ICZSwingChain_BuildLinkPositions
                 jmp     Child_Draw_Sprite2(pc)
 ; ---------------------------------------------------------------------------
 
@@ -282,7 +282,8 @@ loc_58756:
 
 ; =============== S U B R O U T I N E =======================================
 
-BuildIczSwingChainIntermediateSpritePositions:
+; Place seven intermediate sub-sprites using shift-rounded eighths of the distance to the platform
+ICZSwingChain_BuildLinkPositions:
                 movea.w parent3(a0),a1
                 lea     sub2_x_pos(a0),a2
                 move.w  x_pos(a0),d0
@@ -307,7 +308,7 @@ loc_5877E:
                 addq.w  #2,d5
                 dbf     d6,loc_5877E
                 rts
-; End of function BuildIczSwingChainIntermediateSpritePositions
+; End of function ICZSwingChain_BuildLinkPositions
 
 ; ---------------------------------------------------------------------------
 off_58798:
@@ -419,7 +420,8 @@ RefreshAndCollideIczSwingSideLedge:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateIczSwingLedgeCollisionAndRiderImpulse:
+; Refresh solidity and compare the prior and current riders. Apply the swing impulse for the first eligible player
+ICZSwingLedge_UpdateRiderImpulse:
                 move.b  status(a0),$39(a0)
                 bsr.s   RefreshAndCollideIczSwingMainLedge
                 move.b  $39(a0),d0
@@ -429,18 +431,19 @@ UpdateIczSwingLedgeCollisionAndRiderImpulse:
                 movea.w parent3(a0),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d2
-                bsr.w   StartIczPlatformSwingFromRiderHorizontalSpeed
+                bsr.w   ICZSwingLedge_TryStartFromRider
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d2
-                bsr.w   StartIczPlatformSwingFromRiderHorizontalSpeed
+                bsr.w   ICZSwingLedge_TryStartFromRider
 
 locret_58866:
                 rts
-; End of function UpdateIczSwingLedgeCollisionAndRiderImpulse
+; End of function ICZSwingLedge_UpdateRiderImpulse
 
 ; =============== S U B R O U T I N E =======================================
 
-StartIczPlatformSwingFromRiderHorizontalSpeed:
+; A rider moving in the required direction supplies a bounded swing impulse and has their own speed adjusted
+ICZSwingLedge_TryStartFromRider:
                 btst    d2,d1
                 beq.s   locret_58866
                 move.w  x_vel(a1),d3
@@ -487,11 +490,12 @@ loc_588BA:
 
 locret_588CA:
                 rts
-; End of function StartIczPlatformSwingFromRiderHorizontalSpeed
+; End of function ICZSwingLedge_TryStartFromRider
 
 ; =============== S U B R O U T I N E =======================================
 
-SpawnIczSwingChainDebrisWhenPlatformDetaches:
+; When the parent detaches, request eight fragments and schedule composite sprite deletion
+ICZSwingChain_TryBreakOnDetach:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
                 beq.s   locret_588CA
@@ -500,7 +504,7 @@ SpawnIczSwingChainDebrisWhenPlatformDetaches:
                 lea     ChildObjDat_58930(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jmp     Go_Delete_Sprite_2(pc)
-; End of function SpawnIczSwingChainDebrisWhenPlatformDetaches
+; End of function ICZSwingChain_TryBreakOnDetach
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZSwingingPlatform:

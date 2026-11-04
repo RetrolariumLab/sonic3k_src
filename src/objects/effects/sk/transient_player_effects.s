@@ -384,7 +384,7 @@ loc_191A4:
                 beq.w   loc_19230
                 tst.b   anim(a0)
                 beq.s   loc_191B6
-                bsr.w   SuperStarBurstSKSpawnSixteenMirroredRadialParticles
+                bsr.w   SKSuperStarBurst_SpawnParticles
 
 loc_191B6:
                 tst.b   $34(a0)
@@ -439,7 +439,8 @@ loc_19230:
 
 ; =============== S U B R O U T I N E =======================================
 
-SuperStarBurstSKSpawnSixteenMirroredRadialParticles:
+; Consume the burst request and try sixteen stars in eight mirrored velocity pairs at Player 1
+SKSuperStarBurst_SpawnParticles:
                 move.b  #0,anim(a0)
                 lea     (Player_1).w,a2
                 moveq   #$10-1,d5
@@ -482,7 +483,7 @@ loc_192AE:
 
 locret_192BE:
                 rts
-; End of function SuperStarBurstSKSpawnSixteenMirroredRadialParticles
+; End of function SKSuperStarBurst_SpawnParticles
 
 ; ---------------------------------------------------------------------------
 

@@ -10,7 +10,7 @@ SOZ2_ScreenInit:
                 move.w  #8,(Events_routine_fg).w
                 cmpi.w  #$4E80,(Player_1+x_pos).w
                 blo.s   loc_561B0
-                jsr     RestoreSoz2ForegroundSectionsFromTemplate(pc)
+                jsr     SOZ2_RestoreForegroundFromTemplate(pc)
 
 loc_561B0:
                 jsr     (Reset_TileOffsetPositionActual).l
@@ -54,14 +54,15 @@ loc_5621A:
                 tst.w   (Events_fg_4).w
                 beq.s   loc_56226
                 clr.w   (Events_fg_4).w
-                bsr.s   RestoreSoz2ForegroundSectionsFromTemplate
+                bsr.s   SOZ2_RestoreForegroundFromTemplate
 
 loc_56226:
                 jmp     (DrawTilesAsYouMove).l
 
 ; =============== S U B R O U T I N E =======================================
 
-RestoreSoz2ForegroundSectionsFromTemplate:
+; Copy forty chunk indices from the template columns into two foreground regions
+SOZ2_RestoreForegroundFromTemplate:
                 movea.w $1C(a3),a1
                 lea     $AB(a1),a5
                 lea     $95(a1),a1
@@ -86,4 +87,4 @@ loc_56258:
                 adda.w  d0,a5
                 dbf     d1,loc_56256
                 rts
-; End of function RestoreSoz2ForegroundSectionsFromTemplate
+; End of function SOZ2_RestoreForegroundFromTemplate

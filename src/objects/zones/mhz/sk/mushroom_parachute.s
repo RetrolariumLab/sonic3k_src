@@ -33,7 +33,7 @@ loc_3F516:
 ; ---------------------------------------------------------------------------
 
 loc_3F51C:
-                bsr.w   UpdateMhzMushroomParachuteHeadingAndSpeed
+                bsr.w   MHZParachute_SteerAndAdjustDescent
                 jsr     (MoveSprite2).l
                 bsr.w   ResolveMhzMushroomParachuteSideWalls
                 bsr.s   UpdatePlayersOnMhzMushroomParachute
@@ -63,7 +63,7 @@ loc_3F56C:
 ; ---------------------------------------------------------------------------
 
 loc_3F572:
-                bsr.w   UpdateMhzMushroomParachuteHeadingAndSpeed
+                bsr.w   MHZParachute_SteerAndAdjustDescent
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
                 bmi.s   loc_3F5A4
@@ -269,7 +269,8 @@ locret_3F7E0:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateMhzMushroomParachuteHeadingAndSpeed:
+; Follow Player 1 steering or settle toward cardinal travel. Regulate vertical speed around $80
+MHZParachute_SteerAndAdjustDescent:
                 move.b  angle(a0),d0
                 tst.b   $30(a0)
                 beq.s   loc_3F818
@@ -323,7 +324,7 @@ loc_3F84A:
 
 locret_3F850:
                 rts
-; End of function UpdateMhzMushroomParachuteHeadingAndSpeed
+; End of function MHZParachute_SteerAndAdjustDescent
 
 ; ---------------------------------------------------------------------------
 Map_MHZMushroomParachute:

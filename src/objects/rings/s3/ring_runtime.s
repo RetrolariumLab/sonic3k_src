@@ -16,7 +16,7 @@ Load_Rings_Index:
 
 loc_F604:
                 addq.b  #2,(Rings_manager_routine).w
-                bsr.w   LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings
+                bsr.w   S3LevelRings_InitLayoutAndTotal
                 movea.l (Ring_start_addr_ROM).w,a1
                 lea     (Ring_status_table).w,a2
                 move.w  (Camera_X_pos).w,d4
@@ -196,7 +196,7 @@ loc_F764:
 
 loc_F76C:
                 move.w  #$604,(a4)
-                bsr.s   LevelRingsS3CountPerfectPickupAndGiveP1Ring
+                bsr.s   S3LevelRings_PickupForP1
                 lea     (Ring_consumption_table+2).w,a3
 
 loc_F776:
@@ -217,10 +217,11 @@ locret_F78A:
 
 ; =============== S U B R O U T I N E =======================================
 
-LevelRingsS3CountPerfectPickupAndGiveP1Ring:
+; Decrement the perfect-ring remainder before tail-calling the ordinary ring award
+S3LevelRings_PickupForP1:
                 subq.w  #1,(Perfect_rings_left).w
                 jmp     (GiveRing).l
-; End of function LevelRingsS3CountPerfectPickupAndGiveP1Ring
+; End of function S3LevelRings_PickupForP1
 
 ; ---------------------------------------------------------------------------
 
@@ -242,7 +243,8 @@ loc_F7BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings:
+; Select the current act's placement stream. Preserve consumed statuses when Respawn_table_keep is set
+S3LevelRings_InitLayoutAndTotal:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
                 bne.s   loc_F7D6
@@ -280,4 +282,4 @@ loc_F80A:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts
-; End of function LevelRingsS3ResetStatusSelectLayoutAndCountPerfectRings
+; End of function S3LevelRings_InitLayoutAndTotal

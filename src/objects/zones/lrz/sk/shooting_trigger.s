@@ -59,20 +59,21 @@ loc_42E84:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_42EAC
-                bsr.s   ActivateLrzShootingTriggerFromRollingPlayer
+                bsr.s   LRZShootingTrigger_TryActivateOnRoll
 
 loc_42EAC:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_42EBA
-                bsr.s   ActivateLrzShootingTriggerFromRollingPlayer
+                bsr.s   LRZShootingTrigger_TryActivateOnRoll
 
 loc_42EBA:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
-ActivateLrzShootingTriggerFromRollingPlayer:
+; Reverse the rolling player, set the level trigger bit and turn the switch into an explosion
+LRZShootingTrigger_TryActivateOnRoll:
                 cmpi.b  #2,anim(a1)
                 bne.s   locret_42EE6
                 neg.w   x_vel(a1)
@@ -85,7 +86,7 @@ ActivateLrzShootingTriggerFromRollingPlayer:
 
 locret_42EE6:
                 rts
-; End of function ActivateLrzShootingTriggerFromRollingPlayer
+; End of function LRZShootingTrigger_TryActivateOnRoll
 
 ; ---------------------------------------------------------------------------
 

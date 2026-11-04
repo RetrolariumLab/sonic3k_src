@@ -45,7 +45,7 @@ loc_894CA:
 ; ---------------------------------------------------------------------------
 
 loc_894F2:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 jsr     Find_SonicTails(pc)
                 tst.w   d1
                 bne.s   loc_89512
@@ -84,7 +84,7 @@ locret_89550:
 ; ---------------------------------------------------------------------------
 
 loc_89552:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
@@ -100,7 +100,7 @@ loc_8956A:
 ; ---------------------------------------------------------------------------
 
 loc_8957A:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 subq.b  #1,$39(a0)
                 bpl.w   locret_89550
                 move.b  #8,routine(a0)
@@ -112,7 +112,7 @@ loc_8957A:
 ; ---------------------------------------------------------------------------
 
 loc_895A4:
-                bsr.w   SuspendBlasterGroundRoutineForCeilingRetreat
+                bsr.w   Blaster_TryRetreatToCeiling
                 lea     byte_89768(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
@@ -226,7 +226,8 @@ loc_896CC:
 
 ; =============== S U B R O U T I N E =======================================
 
-SuspendBlasterGroundRoutineForCeilingRetreat:
+; The local enable and engine-specific global must both allow retreat. Save the ground state and X velocity
+Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
                 beq.s   locret_896FA
                 tst.b   (_unkF7C1).w
@@ -239,7 +240,7 @@ SuspendBlasterGroundRoutineForCeilingRetreat:
 
 locret_896FA:
                 rts
-; End of function SuspendBlasterGroundRoutineForCeilingRetreat
+; End of function Blaster_TryRetreatToCeiling
 
 ; ---------------------------------------------------------------------------
 ObjDat_Blaster:

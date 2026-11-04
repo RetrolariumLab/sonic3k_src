@@ -14,7 +14,7 @@ Obj_ICZTensionPlatform:
 
 loc_8B8B6:
                 bsr.w   StepIczTensionPlatformSpringMotion
-                bsr.w   UpdateIczTensionPlatformContactsAndImpulses
+                bsr.w   ICZTension_UpdateRiderContacts
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
@@ -29,7 +29,7 @@ loc_8B8C2:
 loc_8B8DC:
                 bset    #6,render_flags(a0)
                 move.w  #2,mainspr_childsprites(a0)
-                bsr.w   InitializeIczTensionSideRopeSpritePositions
+                bsr.w   ICZTensionRope_InitSideSprites
                 move.b  #8,mapping_frame(a0)
 
 loc_8B8F2:
@@ -38,7 +38,8 @@ loc_8B8F2:
 
 ; =============== S U B R O U T I N E =======================================
 
-InitializeIczTensionSideRopeSpritePositions:
+; Fill the two secondary sprite records for this side rope
+ICZTensionRope_InitSideSprites:
                 lea     sub2_x_pos(a0),a1
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
@@ -60,7 +61,7 @@ loc_8B91A:
                 addq.w  #2,d2
                 dbf     d3,loc_8B90A
                 rts
-; End of function InitializeIczTensionSideRopeSpritePositions
+; End of function ICZTensionRope_InitSideSprites
 
 ; ---------------------------------------------------------------------------
 word_8B92C:
@@ -182,7 +183,8 @@ locret_8BA1A:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateIczTensionPlatformContactsAndImpulses:
+; Use top-only solidity. A change in either rider's contact can update the rest height, activity and vertical momentum
+ICZTension_UpdateRiderContacts:
                 move.b  status(a0),$3A(a0)
                 move.w  (Player_1+y_vel).w,-(sp)
                 move.w  (Player_2+y_vel).w,-(sp)
@@ -198,14 +200,14 @@ UpdateIczTensionPlatformContactsAndImpulses:
                 eor.b   d1,d2
                 andi.b  #standing_mask,d2
                 beq.s   locret_8BA7C
-                bsr.w   SetIczTensionPlatformRestHeightFromRiderCount
+                bsr.w   ICZTension_SetRestHeightFromRiders
                 bset    #2,$38(a0)
                 clr.b   $39(a0)
                 moveq   #p1_standing_bit,d4
                 btst    d4,d2
                 beq.s   loc_8BA6C
                 lea     (Player_1).w,a1
-                bsr.w   TransferPlayerVerticalImpulseToIczTensionPlatform
+                bsr.w   ICZTension_TransferRiderYImpulse
 
 loc_8BA6C:
                 moveq   #p2_standing_bit,d4
@@ -213,15 +215,16 @@ loc_8BA6C:
                 beq.s   locret_8BA7C
                 swap    d0
                 lea     (Player_2).w,a1
-                bsr.w   TransferPlayerVerticalImpulseToIczTensionPlatform
+                bsr.w   ICZTension_TransferRiderYImpulse
 
 locret_8BA7C:
                 rts
-; End of function UpdateIczTensionPlatformContactsAndImpulses
+; End of function ICZTension_UpdateRiderContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-TransferPlayerVerticalImpulseToIczTensionPlatform:
+; Damp the signed word sum by subtracting its arithmetic shift right by two
+ICZTension_TransferRiderYImpulse:
                 move.w  y_vel(a0),d5
                 btst    d4,d1
                 bne.s   loc_8BA90
@@ -237,11 +240,12 @@ loc_8BA90:
                 sub.w   d6,d5
                 move.w  d5,y_vel(a0)
                 rts
-; End of function TransferPlayerVerticalImpulseToIczTensionPlatform
+; End of function ICZTension_TransferRiderYImpulse
 
 ; =============== S U B R O U T I N E =======================================
 
-SetIczTensionPlatformRestHeightFromRiderCount:
+; Set the rest height eight pixels below the base per standing player
+ICZTension_SetRestHeightFromRiders:
                 moveq   #0,d5
                 btst    #3,d1
                 beq.s   loc_8BAA8
@@ -257,7 +261,7 @@ loc_8BAB0:
                 add.w   d5,d3
                 move.w  d3,$32(a0)
                 rts
-; End of function SetIczTensionPlatformRestHeightFromRiderCount
+; End of function ICZTension_SetRestHeightFromRiders
 
 ; ---------------------------------------------------------------------------
 ObjDat_ICZTensionPlatform:

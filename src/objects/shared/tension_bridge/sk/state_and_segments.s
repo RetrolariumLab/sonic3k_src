@@ -228,7 +228,7 @@ loc_388C4:
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
-                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
+                bsr.w   TensionBridge_AnimateRiddenBoards
                 bra.w   loc_3883A
 ; ---------------------------------------------------------------------------
 
@@ -327,7 +327,7 @@ loc_389A8:
                 moveq   #8,d3
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithSlopedTensionBridge
-                bsr.w   AnimateTensionBridgeSegmentsUnderMovingRiders
+                bsr.w   TensionBridge_AnimateRiddenBoards
                 bra.w   loc_3883A
 ; ---------------------------------------------------------------------------
 

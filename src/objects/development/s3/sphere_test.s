@@ -38,7 +38,7 @@ S3SphereTest_SetFourRingPointHandler:
                 move.l  #Obj_EosianSphere,(a1)
 
 S3SphereTest_InitNegZRingPoint:
-                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitFourRingPoint
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
@@ -58,7 +58,7 @@ S3SphereTest_AllocPosZRingPoint:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3SphereTest_FinishFourRings
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitFourRingPoint
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
@@ -78,7 +78,7 @@ S3SphereTest_AllocPosXRingPoint:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3SphereTest_FinishFourRings
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitFourRingPoint
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
@@ -98,7 +98,7 @@ S3SphereTest_AllocNegXRingPoint:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3SphereTest_FinishFourRings
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   SphereTestS3InitializeFourRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitFourRingPoint
                 bsr.w   SphereTestS3SkipQuarterTurnSamples
                 move.w  d2,d0
                 addi.w  #$10,d2
@@ -127,7 +127,8 @@ S3SphereTest_CopyFourRingPal16Words:
 
 ; =============== S U B R O U T I N E =======================================
 
-SphereTestS3InitializeFourRingPointSpriteAndCenter:
+; Set up the sprite and store its projection center. The caller sets the 3D position and handler
+S3SphereTest_InitFourRingPoint:
                 move.b  #4,render_flags(a1)
                 move.b  #$10,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
@@ -139,7 +140,7 @@ SphereTestS3InitializeFourRingPointSpriteAndCenter:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  y_pos(a0),$32(a1)
                 rts
-; End of function SphereTestS3InitializeFourRingPointSpriteAndCenter
+; End of function S3SphereTest_InitFourRingPoint
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -183,7 +184,7 @@ S3SphereTest_SetThreeRingPointHandler:
                 move.l  #Obj_EosianSphere,(a1)
 
 S3SphereTest_InitZeroZRingPoint:
-                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitThreeRingPoint
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -202,7 +203,7 @@ S3SphereTest_AllocZeroXRingPoint:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3SphereTest_FinishThreeRings
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitThreeRingPoint
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -221,7 +222,7 @@ S3SphereTest_AllocZeroYRingPoint:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   S3SphereTest_FinishThreeRings
                 move.l  #Obj_EosianSphere,(a1)
-                bsr.w   SphereTestS3InitializeThreeRingPointSpriteAndCenter
+                bsr.w   S3SphereTest_InitThreeRingPoint
                 move.w  d2,d0
                 addi.w  #$10,d2
                 jsr     (GetSineCosine).l
@@ -249,7 +250,8 @@ S3SphereTest_CopyThreeRingPal16Words:
 
 ; =============== S U B R O U T I N E =======================================
 
-SphereTestS3InitializeThreeRingPointSpriteAndCenter:
+; Set up the sprite and store its projection center. The caller sets the 3D position and handler
+S3SphereTest_InitThreeRingPoint:
                 move.b  #4,render_flags(a1)
                 move.b  #$10,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
@@ -261,7 +263,7 @@ SphereTestS3InitializeThreeRingPointSpriteAndCenter:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  y_pos(a0),$32(a1)
                 rts
-; End of function SphereTestS3InitializeThreeRingPointSpriteAndCenter
+; End of function S3SphereTest_InitThreeRingPoint
 
 ; ---------------------------------------------------------------------------
 Pal_SphereTest:

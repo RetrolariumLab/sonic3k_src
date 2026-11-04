@@ -99,7 +99,7 @@ loc_8BF06:
                 move.w  #-8,$44(a0)
 
 loc_8BF3E:
-                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
+                bsr.w   StarPointerSpike_CheckHitCallback
                 moveq   #4,d2
                 jsr     MoveSprite_CircularSimple(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
@@ -110,7 +110,7 @@ loc_8BF4C:
                 movea.l $30(a0),a1
                 move.w  $44(a0),d3
                 jsr     (a1)
-                bsr.w   RunStarPointerSpikeCallbackWhenCollisionCleared
+                bsr.w   StarPointerSpike_CheckHitCallback
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
@@ -127,7 +127,8 @@ loc_8BF74:
 
 ; =============== S U B R O U T I N E =======================================
 
-RunStarPointerSpikeCallbackWhenCollisionCleared:
+; Run the stored callback when the collision byte is clear. The callback selects the vanish or deletion path
+StarPointerSpike_CheckHitCallback:
                 tst.b   collision_flags(a0)
                 bne.s   locret_8BF8C
                 movea.l $34(a0),a1
@@ -135,7 +136,7 @@ RunStarPointerSpikeCallbackWhenCollisionCleared:
 
 locret_8BF8C:
                 rts
-; End of function RunStarPointerSpikeCallbackWhenCollisionCleared
+; End of function StarPointerSpike_CheckHitCallback
 
 ; ---------------------------------------------------------------------------
 ObjDat_StarPointer:

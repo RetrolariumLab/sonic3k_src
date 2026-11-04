@@ -67,7 +67,7 @@ loc_597D6:
 loc_597EA:
                 move.b  #$1A,collision_flags(a0)
                 move.b  #$7F,collision_property(a0)
-                bsr.w   RetractSnaleBlasterForNearbyRollingPlayer
+                bsr.w   SnaleBlaster_TryRetractNearRoll
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
                 beq.s   locret_59820
@@ -265,7 +265,8 @@ loc_599C6:
 
 ; =============== S U B R O U T I N E =======================================
 
-RetractSnaleBlasterForNearbyRollingPlayer:
+; Require the horizontally nearest player to be rolling with both separations below $30. Skip the rest of the current movement state on success
+SnaleBlaster_TryRetractNearRoll:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$30,d2
                 bhs.s   locret_599E6
@@ -283,7 +284,7 @@ loc_599E8:
                 move.b  #3,mapping_frame(a0)
                 addq.w  #4,sp
                 rts
-; End of function RetractSnaleBlasterForNearbyRollingPlayer
+; End of function SnaleBlaster_TryRetractNearRoll
 
 ; ---------------------------------------------------------------------------
 ObjDat_SnaleBlaster:

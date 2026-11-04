@@ -74,7 +74,7 @@ SSZ1_ScreenEvent_Index:
 loc_572BA:
                 tst.b   (End_of_level_flag).w
                 bne.s   loc_572CE
-                jsr     ControlSsz1RouteAndReplicaBossCameraGates(pc)
+                jsr     SSZ1_UpdateRouteAndBossGates(pc)
                 jsr     PositionSsz1RoamingCloudSprites(pc)
                 jmp     (DrawTilesAsYouMove).l
 ; ---------------------------------------------------------------------------
@@ -163,7 +163,7 @@ loc_57360:
 loc_573E4:
                 move.l  (a5)+,(a1)+
                 dbf     d0,loc_573E4
-                jsr     UpdateSsz1EscapeForegroundCameraAndClouds(pc)
+                jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
                 move.w  (_unkEEEA).w,d0
                 move.w  d0,d1
                 andi.w  #$FFF0,d0
@@ -218,7 +218,7 @@ loc_574A0:
 ; ---------------------------------------------------------------------------
 
 loc_574B0:
-                jsr     UpdateSsz1EscapeForegroundCameraAndClouds(pc)
+                jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
                 lea     (_unkEEEA).w,a6
                 lea     (_unkEEF2).w,a5
                 move.w  (_unkEEEE).w,d1
@@ -232,7 +232,8 @@ loc_574B0:
 
 ; =============== S U B R O U T I N E =======================================
 
-UpdateSsz1EscapeForegroundCameraAndClouds:
+; Maintain the separate foreground draw and vertical-scroll origin during the spiral escape
+SSZ1Escape_UpdateCameraAndClouds:
                 move.w  (Camera_X_pos_copy).w,(_unkEEEA).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$110,d0
@@ -244,7 +245,7 @@ UpdateSsz1EscapeForegroundCameraAndClouds:
                 move.w  (_unkEEF6).w,d0
                 add.w   d0,(_unkEEEE).w
                 bra.s   PositionSsz1RoamingCloudSprites
-; End of function UpdateSsz1EscapeForegroundCameraAndClouds
+; End of function SSZ1Escape_UpdateCameraAndClouds
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -343,7 +344,8 @@ loc_575E4:
 
 ; =============== S U B R O U T I N E =======================================
 
-ControlSsz1RouteAndReplicaBossCameraGates:
+; Lock the two replica-boss arenas, spawn their bosses and latch the final area's camera bounds
+SSZ1_UpdateRouteAndBossGates:
                 tst.b   (Events_bg+$06).w
                 bne.w   locret_57788
                 cmpi.w  #$19A0,(Camera_X_pos).w
@@ -493,7 +495,7 @@ loc_5777E:
 
 locret_57788:
                 rts
-; End of function ControlSsz1RouteAndReplicaBossCameraGates
+; End of function SSZ1_UpdateRouteAndBossGates
 
 ; ---------------------------------------------------------------------------
 word_5778A:

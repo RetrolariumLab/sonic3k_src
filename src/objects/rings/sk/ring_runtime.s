@@ -17,7 +17,7 @@ Load_Rings_Index:
 
 loc_E8BE:
                 addq.b  #2,(Rings_manager_routine).w
-                bsr.w   LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings
+                bsr.w   SKLevelRings_InitLayoutAndTotal
                 cmpi.b  #$14,(Current_zone).w
                 beq.s   loc_E904
                 movea.l (Ring_start_addr_ROM).w,a1
@@ -295,7 +295,7 @@ loc_EABE:
 
 loc_EAC6:
                 move.w  #$604,(a4)
-                bsr.s   LevelRingsSKCountPerfectPickupAndGiveP1Ring
+                bsr.s   SKLevelRings_PickupForP1
                 lea     (Ring_consumption_list).w,a3
 
 loc_EAD0:
@@ -316,10 +316,11 @@ locret_EAE4:
 
 ; =============== S U B R O U T I N E =======================================
 
-LevelRingsSKCountPerfectPickupAndGiveP1Ring:
+; Decrement the perfect-ring remainder before tail-calling the ordinary ring award
+SKLevelRings_PickupForP1:
                 subq.w  #1,(Perfect_rings_left).w
                 jmp     (GiveRing).l
-; End of function LevelRingsSKCountPerfectPickupAndGiveP1Ring
+; End of function SKLevelRings_PickupForP1
 
 ; ---------------------------------------------------------------------------
 
@@ -341,7 +342,8 @@ loc_EB16:
 
 ; =============== S U B R O U T I N E =======================================
 
-LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings:
+; Select the current act's placement stream. Preserve consumed statuses when Respawn_table_keep is set
+SKLevelRings_InitLayoutAndTotal:
                 moveq   #0,d0
                 tst.b   (Respawn_table_keep).w
                 bne.s   loc_EB30
@@ -389,4 +391,4 @@ loc_EB7A:
                 move.w  d5,(Perfect_rings_left).w
                 move.w  #0,(Perfect_rings_flag).w
                 rts
-; End of function LevelRingsSKResetStatusSelectLayoutAndCountPerfectRings
+; End of function SKLevelRings_InitLayoutAndTotal

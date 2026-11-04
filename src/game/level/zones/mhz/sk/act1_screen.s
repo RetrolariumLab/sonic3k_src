@@ -129,7 +129,7 @@ MHZ1_BackgroundEvent:
                 moveq   #0,d1
                 sub.w   d0,(Player_1+x_pos).w
                 sub.w   d0,(Player_2+x_pos).w
-                jsr     OffsetMhzActTransitionObjectsAndRetireScenery(pc)
+                jsr     MHZ_TranslateObjectsForAct2(pc)
                 sub.w   d0,(Camera_X_pos).w
                 sub.w   d0,(Camera_X_pos_copy).w
                 move.w  (Camera_X_pos_copy).w,(Events_fg_0).w
@@ -214,7 +214,8 @@ loc_54CEE:
 
 ; =============== S U B R O U T I N E =======================================
 
-OffsetMhzActTransitionObjectsAndRetireScenery:
+; Translate active world-coordinate objects and retire initialized static scenery from the old layout
+MHZ_TranslateObjectsForAct2:
                 lea     (Dynamic_object_RAM+object_size).w,a1
                 moveq   #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d2
 
@@ -239,4 +240,4 @@ loc_54D26:
                 lea     next_object(a1),a1
                 dbf     d2,loc_54CFA
                 rts
-; End of function OffsetMhzActTransitionObjectsAndRetireScenery
+; End of function MHZ_TranslateObjectsForAct2

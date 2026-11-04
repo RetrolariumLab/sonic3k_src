@@ -41,7 +41,7 @@ loc_57854:
 
 loc_5786A:
                 move.w  #8,(Events_routine_bg).w
-                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
+                jsr     SSZ1_BuildMidAltitudeParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$1C00,d1
                 jsr     (Refresh_PlaneFull).l
@@ -74,7 +74,7 @@ loc_578AA:
                 bhs.s   loc_578EC
                 move.w  (Camera_X_pos_BG_copy).w,(Events_bg+$0C).w
                 move.w  (Camera_Y_pos_BG_copy).w,(Events_bg+$0E).w
-                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
+                jsr     SSZ1_BuildMidAltitudeParallax(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 addi.w  #$E0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
@@ -119,7 +119,7 @@ loc_57932:
 ; ---------------------------------------------------------------------------
 
 loc_57942:
-                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
+                jsr     SSZ1_BuildMidAltitudeParallax(pc)
 
 loc_57946:
                 move.w  #$1C00,d1
@@ -151,7 +151,7 @@ loc_57974:
 ; ---------------------------------------------------------------------------
 
 loc_57996:
-                jsr     BuildSsz1MiddleAltitudeBackgroundParallax(pc)
+                jsr     SSZ1_BuildMidAltitudeParallax(pc)
 
 loc_5799A:
                 lea     (Camera_Y_pos_BG_copy).w,a6
@@ -230,7 +230,8 @@ loc_57A4C:
 
 ; =============== S U B R O U T I N E =======================================
 
-BuildSsz1MiddleAltitudeBackgroundParallax:
+; Build thirty regional scroll words with a shared drift accumulator
+SSZ1_BuildMidAltitudeParallax:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (_unkEE9C).w,d1
                 asr.w   #1,d1
@@ -323,7 +324,7 @@ BuildSsz1MiddleAltitudeBackgroundParallax:
                 swap    d0
                 move.w  d0,$28(a1)
                 rts
-; End of function BuildSsz1MiddleAltitudeBackgroundParallax
+; End of function SSZ1_BuildMidAltitudeParallax
 
 ; ---------------------------------------------------------------------------
 

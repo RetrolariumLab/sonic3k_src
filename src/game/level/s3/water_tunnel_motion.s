@@ -4,7 +4,8 @@
 
 ; =============== S U B R O U T I N E =======================================
 
-S3HCZApplyRectangularWaterTunnelCurrentsToPlayers:
+; Select the tunnel flag for the player mode. The matched rectangle allows one-pixel steering across the current
+S3HCZ_ApplyWaterTunnelCurrents:
                 tst.w   (Debug_placement_mode).w
                 bne.w   locret_54A4
                 cmpi.b  #1,(Current_zone).w
@@ -28,7 +29,7 @@ loc_53D2:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
                 moveq   #0,d5
-; End of function S3HCZApplyRectangularWaterTunnelCurrentsToPlayers
+; End of function S3HCZ_ApplyWaterTunnelCurrents
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -139,7 +140,8 @@ HCZ2_WaterTunLocs:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3DispatchHCZ2ICZ1SurfaceMotionForBothPlayers:
+; Dispatch forced ground motion for Hydrocity 2 and IceCap 1
+S3Surface_DispatchBothPlayers:
                 cmpi.w  #$101,(Current_zone_and_act).w
                 beq.s   loc_55AA
                 cmpi.w  #$500,(Current_zone_and_act).w
@@ -150,14 +152,15 @@ S3DispatchHCZ2ICZ1SurfaceMotionForBothPlayers:
 loc_55AA:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
-                bsr.s   S3HCZ2ApplyNegativeGroundCurrentOnMatchingChunks
+                bsr.s   S3HCZ2_ApplyChunkGroundCurrent
                 lea     (Player_2).w,a1
                 move.b  (Ctrl_2_held_logical).w,d2
-; End of function S3DispatchHCZ2ICZ1SurfaceMotionForBothPlayers
+; End of function S3Surface_DispatchBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
 
-S3HCZ2ApplyNegativeGroundCurrentOnMatchingChunks:
+; On the selected chunks, force inertia toward negative eight pixels per frame
+S3HCZ2_ApplyChunkGroundCurrent:
                 btst    #Status_InAir,status(a1)
                 bne.s   loc_55F8
                 cmpi.b  #$C,top_solid_bit(a1)
@@ -193,20 +196,21 @@ locret_560A:
 loc_560C:
                 moveq   #-8,d0
                 bra.w   loc_567E
-; End of function S3HCZ2ApplyNegativeGroundCurrentOnMatchingChunks
+; End of function S3HCZ2_ApplyChunkGroundCurrent
 
 ; ---------------------------------------------------------------------------
 
 loc_5612:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
-                bsr.s   S3ICZ1ApplyChunkSelectedGroundSkidInertia
+                bsr.s   S3ICZ1_ApplyChunkGroundSkid
                 lea     (Player_2).w,a1
                 move.b  (Ctrl_2_held_logical).w,d2
 
 ; =============== S U B R O U T I N E =======================================
 
-S3ICZ1ApplyChunkSelectedGroundSkidInertia:
+; The chunk selects the direction and target speed. A zero target takes the shared friction path
+S3ICZ1_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
                 bne.s   loc_5660
                 btst    #Status_OnObj,status(a1)
@@ -322,4 +326,4 @@ loc_572E:
                 move.w  d0,ground_vel(a1)
                 ori.b   #$80,status_secondary(a1)
                 rts
-; End of function S3ICZ1ApplyChunkSelectedGroundSkidInertia
+; End of function S3ICZ1_ApplyChunkGroundSkid
