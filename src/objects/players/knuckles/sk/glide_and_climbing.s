@@ -11,10 +11,10 @@ Knux_Stand_Freespace:
                 bsr.w   Player_LevelBound
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_16872
+                beq.s   SKKnucklesAir_FinishStandingAirAngleAndTerrain
                 subi.w  #$28,y_vel(a0)
 
-loc_16872:
+SKKnucklesAir_FinishStandingAirAngleAndTerrain:
                 bsr.w   Player_JumpAngle
                 bsr.w   SonicKnux_DoLevelCollision
                 rts
@@ -26,14 +26,14 @@ Knux_Glide_Freespace:
                 jsr     (MoveSprite_TestGravity2).l
                 bsr.w   Knuckles_Glide
 
-locret_1688E:
+SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Knuckles_Glide:
                 move.b  double_jump_flag(a0),d0
-                beq.s   locret_1688E
+                beq.s   SKKnucklesGlide_ReturnAfterStateUpdateOrZeroFlag
                 cmpi.b  #2,d0
                 beq.w   Knuckles_Fall_From_Glide
                 cmpi.b  #3,d0
@@ -90,7 +90,7 @@ Knux_Gliding_HitFloor:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   loc_1693E
+                beq.s   SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust
 
                 move.w  ground_vel(a0),x_vel(a0)
                 move.w  #0,y_vel(a0)
@@ -98,7 +98,7 @@ Knux_Gliding_HitFloor:
                 bra.w   Knux_TouchFloor
 ; ---------------------------------------------------------------------------
 
-loc_1693E:
+SKKnucklesGlide_BeginFlatSectorSlideAndRequestDust:
                 move.b  #3,double_jump_flag(a0)
                 move.b  #$CC,mapping_frame(a0)
                 move.b  #$7F,anim_frame_timer(a0)

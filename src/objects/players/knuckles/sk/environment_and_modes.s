@@ -6,18 +6,18 @@
 
 Knuckles_Water:
                 tst.b   (Water_flag).w
-                bne.s   loc_166F6
+                bne.s   SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry
 
-locret_166F4:
+SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_166F6:
+SKKnucklesEnvironment_DetectSignedWaterSideAndCommitFirstEntry:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_1676E
+                bge.s   SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates
                 bset    #Status_Underwater,status(a0)
-                bne.s   locret_166F4
+                bne.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -28,26 +28,26 @@ loc_166F6:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_1674A
+                beq.s   SKKnucklesEnvironment_AttenuateEntryVelocityOnlyWithZeroObjectControl
                 move.w  #$400,Max_speed-Max_speed(a4)
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$60,Deceleration-Max_speed(a4)
 
-loc_1674A:
+SKKnucklesEnvironment_AttenuateEntryVelocityOnlyWithZeroObjectControl:
                 tst.b   object_control(a0)
-                bne.s   locret_166F4
+                bne.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 asr     x_vel(a0)
                 asr     y_vel(a0)
                 asr     y_vel(a0)
-                beq.s   locret_166F4
+                beq.s   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_1676E:
+SKKnucklesEnvironment_ClearUnderwaterStateAndRestoreExitRates:
                 bclr    #Status_Underwater,status(a0)
-                beq.w   locret_166F4
+                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -55,32 +55,32 @@ loc_1676E:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_167A8
+                beq.s   SKKnucklesEnvironment_ConditionallyDoubleExitVerticalVelocity
                 move.w  #$800,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$C0,Deceleration-Max_speed(a4)
 
-loc_167A8:
+SKKnucklesEnvironment_ConditionallyDoubleExitVerticalVelocity:
                 cmpi.b  #4,routine(a0)
-                beq.s   loc_167C4
+                beq.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
                 tst.b   object_control(a0)
-                bne.s   loc_167C4
+                bne.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   loc_167C4
+                blt.s   SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity
                 asl     y_vel(a0)
 
-loc_167C4:
+SKKnucklesEnvironment_GateExitSplashAndClampStrongUpwardVelocity:
                 cmpi.b  #$1C,anim(a0)
-                beq.w   locret_166F4
+                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 tst.w   y_vel(a0)
-                beq.w   locret_166F4
+                beq.w   SKKnucklesEnvironment_ReturnFromWaterStateOrSplashGate
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   loc_167EA
+                bgt.s   SKKnucklesEnvironment_RequestExitSplashSoundAfterVelocityClamp
                 move.w  #-$1000,y_vel(a0)
 
-loc_167EA:
+SKKnucklesEnvironment_RequestExitSplashSoundAfterVelocityClamp:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Knuckles_Water
@@ -98,24 +98,24 @@ Knux_Stand_Path:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_1684A
+                beq.s   SKKnucklesEnvironment_ReturnFromStandingGroundStepAfterBackgroundChecks
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_1683A
+                bpl.s   SKKnucklesEnvironment_ProbeRightBackgroundWallAfterLeftCorrection
                 sub.w   d1,x_pos(a0)
 
-loc_1683A:
+SKKnucklesEnvironment_ProbeRightBackgroundWallAfterLeftCorrection:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_16846
+                bpl.s   SKKnucklesEnvironment_RestoreRegistersAfterGroundBackgroundWallProbes
                 add.w   d1,x_pos(a0)
 
-loc_16846:
+SKKnucklesEnvironment_RestoreRegistersAfterGroundBackgroundWallProbes:
                 movem.l (sp)+,a4-a6
 
-locret_1684A:
+SKKnucklesEnvironment_ReturnFromStandingGroundStepAfterBackgroundChecks:
                 rts

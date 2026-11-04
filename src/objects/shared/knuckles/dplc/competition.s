@@ -1,152 +1,152 @@
 ; Data owner: objects/shared/knuckles
 ; Provenance and source range: config/reconstruction/source_layout.json
 PLC_Knuckles2P_:
-                dc.w    Frame_2A04FC-PLC_Knuckles2P_
-                dc.w    Frame_2A04FE-PLC_Knuckles2P_
-                dc.w    Frame_2A0502-PLC_Knuckles2P_
-                dc.w    Frame_2A0506-PLC_Knuckles2P_
-                dc.w    Frame_2A050A-PLC_Knuckles2P_
-                dc.w    Frame_2A050E-PLC_Knuckles2P_
-                dc.w    Frame_2A0512-PLC_Knuckles2P_
-                dc.w    Frame_2A0516-PLC_Knuckles2P_
-                dc.w    Frame_2A051A-PLC_Knuckles2P_
-                dc.w    Frame_2A051E-PLC_Knuckles2P_
-                dc.w    Frame_2A0522-PLC_Knuckles2P_
-                dc.w    Frame_2A0526-PLC_Knuckles2P_
-                dc.w    Frame_2A052A-PLC_Knuckles2P_
-                dc.w    Frame_2A052E-PLC_Knuckles2P_
-                dc.w    Frame_2A0532-PLC_Knuckles2P_
-                dc.w    Frame_2A0536-PLC_Knuckles2P_
-                dc.w    Frame_2A053A-PLC_Knuckles2P_
-                dc.w    Frame_2A053E-PLC_Knuckles2P_
-                dc.w    Frame_2A0542-PLC_Knuckles2P_
-                dc.w    Frame_2A0546-PLC_Knuckles2P_
-                dc.w    Frame_2A054A-PLC_Knuckles2P_
-                dc.w    Frame_2A054E-PLC_Knuckles2P_
-                dc.w    Frame_2A0552-PLC_Knuckles2P_
-                dc.w    Frame_2A0556-PLC_Knuckles2P_
-                dc.w    Frame_2A055A-PLC_Knuckles2P_
-                dc.w    Frame_2A055E-PLC_Knuckles2P_
-                dc.w    Frame_2A0562-PLC_Knuckles2P_
-                dc.w    Frame_2A0566-PLC_Knuckles2P_
-                dc.w    Frame_2A056A-PLC_Knuckles2P_
-                dc.w    Frame_2A056E-PLC_Knuckles2P_
-                dc.w    Frame_2A0572-PLC_Knuckles2P_
-                dc.w    Frame_2A0576-PLC_Knuckles2P_
-                dc.w    Frame_2A057A-PLC_Knuckles2P_
-                dc.w    Frame_2A057E-PLC_Knuckles2P_
-                dc.w    Frame_2A0582-PLC_Knuckles2P_
-                dc.w    Frame_2A0586-PLC_Knuckles2P_
-                dc.w    Frame_2A058A-PLC_Knuckles2P_
-                dc.w    Frame_2A058E-PLC_Knuckles2P_
-                dc.w    Frame_2A0592-PLC_Knuckles2P_
-                dc.w    Frame_2A0596-PLC_Knuckles2P_
-                dc.w    Frame_2A059A-PLC_Knuckles2P_
-                dc.w    Frame_2A059E-PLC_Knuckles2P_
-                dc.w    Frame_2A05A2-PLC_Knuckles2P_
-                dc.w    Frame_2A05A6-PLC_Knuckles2P_
-                dc.w    Frame_2A05AA-PLC_Knuckles2P_
-                dc.w    Frame_2A05AE-PLC_Knuckles2P_
-                dc.w    Frame_2A05B2-PLC_Knuckles2P_
-                dc.w    Frame_2A05B6-PLC_Knuckles2P_
-                dc.w    Frame_2A05BA-PLC_Knuckles2P_
-                dc.w    Frame_2A05BE-PLC_Knuckles2P_
-Frame_2A04FC:   dc.w    0
-Frame_2A04FE:   dc.w    1
+                dc.w    S3Knuckles2P_DplcFrame00-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame01-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame02-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame03-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame04-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame05-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame06-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame07-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame08-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame09-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0A-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0B-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0C-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0D-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0E-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame0F-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame10-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame11-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame12-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame13-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame14-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame15-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame16-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame17-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame18-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame19-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1A-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1B-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1C-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1D-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1E-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame1F-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame20-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame21-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame22-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame23-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame24-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame25-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame26-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame27-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame28-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame29-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2A-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2B-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2C-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2D-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2E-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame2F-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame30-PLC_Knuckles2P_
+                dc.w    S3Knuckles2P_DplcFrame31-PLC_Knuckles2P_
+S3Knuckles2P_DplcFrame00:   dc.w    0
+S3Knuckles2P_DplcFrame01:   dc.w    1
                 dc.w    $8000
-Frame_2A0502:   dc.w    1
+S3Knuckles2P_DplcFrame02:   dc.w    1
                 dc.w    $8009
-Frame_2A0506:   dc.w    1
+S3Knuckles2P_DplcFrame03:   dc.w    1
                 dc.w    $8012
-Frame_2A050A:   dc.w    1
+S3Knuckles2P_DplcFrame04:   dc.w    1
                 dc.w    $801B
-Frame_2A050E:   dc.w    1
+S3Knuckles2P_DplcFrame05:   dc.w    1
                 dc.w    $8024
-Frame_2A0512:   dc.w    1
+S3Knuckles2P_DplcFrame06:   dc.w    1
                 dc.w    $802D
-Frame_2A0516:   dc.w    1
+S3Knuckles2P_DplcFrame07:   dc.w    1
                 dc.w    $8036
-Frame_2A051A:   dc.w    1
+S3Knuckles2P_DplcFrame08:   dc.w    1
                 dc.w    $803F
-Frame_2A051E:   dc.w    1
+S3Knuckles2P_DplcFrame09:   dc.w    1
                 dc.w    $8048
-Frame_2A0522:   dc.w    1
+S3Knuckles2P_DplcFrame0A:   dc.w    1
                 dc.w    $8051
-Frame_2A0526:   dc.w    1
+S3Knuckles2P_DplcFrame0B:   dc.w    1
                 dc.w    $805A
-Frame_2A052A:   dc.w    1
+S3Knuckles2P_DplcFrame0C:   dc.w    1
                 dc.w    $8063
-Frame_2A052E:   dc.w    1
+S3Knuckles2P_DplcFrame0D:   dc.w    1
                 dc.w    $806C
-Frame_2A0532:   dc.w    1
+S3Knuckles2P_DplcFrame0E:   dc.w    1
                 dc.w    $8075
-Frame_2A0536:   dc.w    1
+S3Knuckles2P_DplcFrame0F:   dc.w    1
                 dc.w    $807E
-Frame_2A053A:   dc.w    1
+S3Knuckles2P_DplcFrame10:   dc.w    1
                 dc.w    $8087
-Frame_2A053E:   dc.w    1
+S3Knuckles2P_DplcFrame11:   dc.w    1
                 dc.w    $8090
-Frame_2A0542:   dc.w    1
+S3Knuckles2P_DplcFrame12:   dc.w    1
                 dc.w    $8099
-Frame_2A0546:   dc.w    1
+S3Knuckles2P_DplcFrame13:   dc.w    1
                 dc.w    $80A2
-Frame_2A054A:   dc.w    1
+S3Knuckles2P_DplcFrame14:   dc.w    1
                 dc.w    $80AB
-Frame_2A054E:   dc.w    1
+S3Knuckles2P_DplcFrame15:   dc.w    1
                 dc.w    $80B4
-Frame_2A0552:   dc.w    1
+S3Knuckles2P_DplcFrame16:   dc.w    1
                 dc.w    $80BD
-Frame_2A0556:   dc.w    1
+S3Knuckles2P_DplcFrame17:   dc.w    1
                 dc.w    $80C6
-Frame_2A055A:   dc.w    1
+S3Knuckles2P_DplcFrame18:   dc.w    1
                 dc.w    $80CF
-Frame_2A055E:   dc.w    1
+S3Knuckles2P_DplcFrame19:   dc.w    1
                 dc.w    $80D8
-Frame_2A0562:   dc.w    1
+S3Knuckles2P_DplcFrame1A:   dc.w    1
                 dc.w    $80E1
-Frame_2A0566:   dc.w    1
+S3Knuckles2P_DplcFrame1B:   dc.w    1
                 dc.w    $50EA
-Frame_2A056A:   dc.w    1
+S3Knuckles2P_DplcFrame1C:   dc.w    1
                 dc.w    $50F0
-Frame_2A056E:   dc.w    1
+S3Knuckles2P_DplcFrame1D:   dc.w    1
                 dc.w    $50F6
-Frame_2A0572:   dc.w    1
+S3Knuckles2P_DplcFrame1E:   dc.w    1
                 dc.w    $50FC
-Frame_2A0576:   dc.w    1
+S3Knuckles2P_DplcFrame1F:   dc.w    1
                 dc.w    $8102
-Frame_2A057A:   dc.w    1
+S3Knuckles2P_DplcFrame20:   dc.w    1
                 dc.w    $810B
-Frame_2A057E:   dc.w    1
+S3Knuckles2P_DplcFrame21:   dc.w    1
                 dc.w    $8114
-Frame_2A0582:   dc.w    1
+S3Knuckles2P_DplcFrame22:   dc.w    1
                 dc.w    $B11D
-Frame_2A0586:   dc.w    1
+S3Knuckles2P_DplcFrame23:   dc.w    1
                 dc.w    $5129
-Frame_2A058A:   dc.w    1
+S3Knuckles2P_DplcFrame24:   dc.w    1
                 dc.w    $512F
-Frame_2A058E:   dc.w    1
+S3Knuckles2P_DplcFrame25:   dc.w    1
                 dc.w    $8135
-Frame_2A0592:   dc.w    1
+S3Knuckles2P_DplcFrame26:   dc.w    1
                 dc.w    $813E
-Frame_2A0596:   dc.w    1
+S3Knuckles2P_DplcFrame27:   dc.w    1
                 dc.w    $8147
-Frame_2A059A:   dc.w    1
+S3Knuckles2P_DplcFrame28:   dc.w    1
                 dc.w    $8150
-Frame_2A059E:   dc.w    1
+S3Knuckles2P_DplcFrame29:   dc.w    1
                 dc.w    $8159
-Frame_2A05A2:   dc.w    1
+S3Knuckles2P_DplcFrame2A:   dc.w    1
                 dc.w    $8162
-Frame_2A05A6:   dc.w    1
+S3Knuckles2P_DplcFrame2B:   dc.w    1
                 dc.w    $31A0
-Frame_2A05AA:   dc.w    1
+S3Knuckles2P_DplcFrame2C:   dc.w    1
                 dc.w    $816B
-Frame_2A05AE:   dc.w    1
+S3Knuckles2P_DplcFrame2D:   dc.w    1
                 dc.w    $8174
-Frame_2A05B2:   dc.w    1
+S3Knuckles2P_DplcFrame2E:   dc.w    1
                 dc.w    $817D
-Frame_2A05B6:   dc.w    1
+S3Knuckles2P_DplcFrame2F:   dc.w    1
                 dc.w    $7186
-Frame_2A05BA:   dc.w    1
+S3Knuckles2P_DplcFrame30:   dc.w    1
                 dc.w    $518E
-Frame_2A05BE:   dc.w    1
+S3Knuckles2P_DplcFrame31:   dc.w    1
                 dc.w    $B194

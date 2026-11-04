@@ -7,28 +7,28 @@
 Knux_Jump:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   locret_177E0
+                beq.w   SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17732
+                beq.s   SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization
                 addi.b  #$40,d0
                 neg.b   d0
                 subi.b  #$40,d0
 
-loc_17732:
+SKKnucklesJump_ProbeOverheadAfterOptionalGravityAngleNormalization:
                 addi.b  #$80,d0
                 movem.l a4-a6,-(sp)
                 jsr     (CalcRoomOverHead).l
                 movem.l (sp)+,a4-a6
                 cmpi.w  #6,d1
-                blt.w   locret_177E0
+                blt.w   SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext
                 move.w  #$600,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_1775C
+                beq.s   SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn
                 move.w  #$300,d2
 
-loc_1775C:
+SKKnucklesJump_AddKnucklesJumpImpulseAndDiscardGroundReturn:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -49,7 +49,7 @@ loc_1775C:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                bne.s   loc_177E2
+                bne.s   SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -58,17 +58,17 @@ loc_1775C:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_177DC
+                beq.s   SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY
                 neg.w   d0
 
-loc_177DC:
+SKKnucklesJump_ApplySignedJumpRadiusDeltaToIntegerY:
                 sub.w   d0,y_pos(a0)
 
-locret_177E0:
+SKKnucklesJump_ReturnFromRejectedOrNewlyRollingJumpWithProperStackContext:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_177E2:
+SKKnucklesJump_MarkJumpStartedWhileAlreadyRolling:
                 bset    #Status_RollJump,status(a0)
                 rts
 ; End of function Knux_Jump
@@ -77,76 +77,76 @@ loc_177E2:
 
 Knux_JumpHeight:
                 tst.b   jumping(a0)
-                beq.s   loc_17818
+                beq.s   SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet
                 move.w  #-$400,d1
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_17800
+                beq.s   SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold
                 move.w  #-$200,d1
 
-loc_17800:
+SKKnucklesJump_TestGlideOrCapReleasedJumpAtSignedYThreshold:
                 cmp.w   y_vel(a0),d1
                 ble.w   Knux_Test_For_Glide
                 move.b  (Ctrl_1_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   locret_17816
+                bne.s   SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision
                 move.w  d1,y_vel(a0)
 
-locret_17816:
+SKKnucklesJump_ReturnAfterHeldOrReleasedJumpHeightDecision:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17818:
+SKKnucklesJump_CapNonJumpUpwardVelocityUnlessSpinFlagSet:
                 tst.b   spin_dash_flag(a0)
-                bne.s   locret_1782C
+                bne.s   SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption
                 cmpi.w  #-$FC0,y_vel(a0)
-                bge.s   locret_1782C
+                bge.s   SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption
                 move.w  #-$FC0,y_vel(a0)
 
-locret_1782C:
+SKKnucklesJump_ReturnAfterNonJumpVelocityCapOrSpinExemption:
                 rts
 ; ---------------------------------------------------------------------------
 
 Knux_Test_For_Glide:
                 tst.b   double_jump_flag(a0)
-                bne.w   locret_178CC
+                bne.w   SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   locret_178CC
+                beq.w   SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide
                 tst.b   (Super_Sonic_Knux_flag).w
-                bne.s   loc_1786C
+                bne.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
                 cmpi.b  #7,(Super_emerald_count).w
-                bhs.s   loc_1785E
+                bhs.s   SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer
                 cmpi.b  #7,(Chaos_emerald_count).w
-                blo.s   loc_1786C
+                blo.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
                 tst.b   (Emeralds_converted_flag).w
-                bne.s   loc_1786C
+                bne.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
 
-loc_1785E:
+SKKnucklesJump_GateSuperOrHyperTransformByRingsAndRunningHudTimer:
                 cmpi.w  #50,(Ring_count).w
-                blo.s   loc_1786C
+                blo.s   SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY
                 tst.b   (Update_HUD_timer).w
                 bne.s   Knux_Transform
 
-loc_1786C:
+SKKnucklesJump_EnterGlideWithTenPixelRadiiAndNonnegativeAdjustedY:
                 bclr    #Status_Roll,status(a0)
                 move.b  #$A,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 bclr    #Status_RollJump,status(a0)
                 move.b  #1,double_jump_flag(a0)
                 addi.w  #$200,y_vel(a0)
-                bpl.s   loc_17898
+                bpl.s   SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading
                 move.w  #0,y_vel(a0)
 
-loc_17898:
+SKKnucklesJump_InitializePositiveGlideMagnitudeAndFacingSignedHeading:
                 moveq   #0,d1
                 move.w  #$400,d0
                 move.w  d0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_178AE
+                beq.s   SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags
                 neg.w   d0
                 moveq   #-$80,d1
 
-loc_178AE:
+SKKnucklesJump_StoreGlideXHeadingClearBothAnglesAndInitializeContactFlags:
                 move.w  d0,x_vel(a0)
                 move.b  d1,double_jump_property(a0)
                 move.w  #0,angle(a0)
@@ -154,7 +154,7 @@ loc_178AE:
                 bset    #Status_InAir,(Gliding_collision_flags).w
                 bsr.w   Knuckles_Set_Gliding_Animation
 
-locret_178CC:
+SKKnucklesJump_ReturnAfterRejectedOrInitializedGlide:
                 rts
 ; ---------------------------------------------------------------------------
 

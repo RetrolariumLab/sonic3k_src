@@ -7,10 +7,10 @@
 Knux_DoLevelCollision_CheckRet:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_17952
+                beq.s   SKKnucklesGlideContact_DispatchByStoredVelocityQuadrantAndProbeFirstLeftWall
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_17952:
+SKKnucklesGlideContact_DispatchByStoredVelocityQuadrantAndProbeFirstLeftWall:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -18,180 +18,180 @@ loc_17952:
                 subi.b  #$20,d0
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
-                beq.w   loc_179DA
+                beq.w   SKKnucklesGlideContact_ProbeLeftWallForLeftwardVelocitySector
                 cmpi.b  #$80,d0
-                beq.w   loc_17A62
+                beq.w   SKKnucklesGlideContact_ProbeLeftWallForUpwardVelocitySector
                 cmpi.b  #$C0,d0
-                beq.w   loc_17AB0
+                beq.w   SKKnucklesGlideContact_ProbeRightWallForRightwardVelocitySector
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_1799C
+                bpl.s   SKKnucklesGlideContact_ProbeRightWallBeforeDefaultFloorQuery
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_1799C:
+SKKnucklesGlideContact_ProbeRightWallBeforeDefaultFloorQuery:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_179B4
+                bpl.s   SKKnucklesGlideContact_QueryDefaultGravityRelativeFloorAndGateNegativeDistance
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_179B4:
+SKKnucklesGlideContact_QueryDefaultGravityRelativeFloorAndGateNegativeDistance:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_179D8
+                bpl.s   SKKnucklesGlideContact_ReturnAfterDefaultFloorMissOrAppliedContact
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_179C4
+                beq.s   SKKnucklesGlideContact_ApplyDefaultFloorContactAndClearGlobalAirFlag
                 neg.w   d1
 
-loc_179C4:
+SKKnucklesGlideContact_ApplyDefaultFloorContactAndClearGlobalAirFlag:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 bclr    #Status_InAir,(Gliding_collision_flags).w
 
-locret_179D8:
+SKKnucklesGlideContact_ReturnAfterDefaultFloorMissOrAppliedContact:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_179DA:
+SKKnucklesGlideContact_ProbeLeftWallForLeftwardVelocitySector:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_179F2
+                bpl.s   SKKnucklesGlideContact_ChooseShallowLeftSectorCeilingOrOppositeWallProbe
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_179F2:
+SKKnucklesGlideContact_ChooseShallowLeftSectorCeilingOrOppositeWallProbe:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   loc_17A36
+                bpl.s   SKKnucklesGlideContact_GateLeftSectorFloorFallbackByNonnegativeYVelocity
                 neg.w   d1
                 cmpi.w  #$14,d1
-                bhs.s   loc_17A1C
+                bhs.s   SKKnucklesGlideContact_ProbeOppositeRightWallForDeepLeftSectorCeiling
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17A0A
+                beq.s   SKKnucklesGlideContact_CorrectShallowLeftSectorCeilingAndStopUpwardSpeed
                 neg.w   d1
 
-loc_17A0A:
+SKKnucklesGlideContact_CorrectShallowLeftSectorCeilingAndStopUpwardSpeed:
                 add.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_17A1A
+                bpl.s   SKKnucklesGlideContact_ReturnAfterShallowLeftSectorCeilingResponse
                 move.w  #0,y_vel(a0)
 
-locret_17A1A:
+SKKnucklesGlideContact_ReturnAfterShallowLeftSectorCeilingResponse:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17A1C:
+SKKnucklesGlideContact_ProbeOppositeRightWallForDeepLeftSectorCeiling:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   locret_17A34
+                bpl.s   SKKnucklesGlideContact_ReturnAfterDeepCeilingOppositeWallProbe
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-locret_17A34:
+SKKnucklesGlideContact_ReturnAfterDeepCeilingOppositeWallProbe:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17A36:
+SKKnucklesGlideContact_GateLeftSectorFloorFallbackByNonnegativeYVelocity:
                 tst.w   y_vel(a0)
-                bmi.s   locret_17A60
+                bmi.s   SKKnucklesGlideContact_ReturnAfterLeftSectorFloorGateOrAppliedContact
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_17A60
+                bpl.s   SKKnucklesGlideContact_ReturnAfterLeftSectorFloorGateOrAppliedContact
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17A4C
+                beq.s   SKKnucklesGlideContact_ApplyLeftSectorFloorContactAndClearGlobalAir
                 neg.w   d1
 
-loc_17A4C:
+SKKnucklesGlideContact_ApplyLeftSectorFloorContactAndClearGlobalAir:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 bclr    #Status_InAir,(Gliding_collision_flags).w
 
-locret_17A60:
+SKKnucklesGlideContact_ReturnAfterLeftSectorFloorGateOrAppliedContact:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17A62:
+SKKnucklesGlideContact_ProbeLeftWallForUpwardVelocitySector:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_17A7A
+                bpl.s   SKKnucklesGlideContact_ProbeRightWallBeforeUpwardSectorCeilingQuery
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_17A7A:
+SKKnucklesGlideContact_ProbeRightWallBeforeUpwardSectorCeilingQuery:
                 jsr     (CheckRightWallDist).l
                 tst.w   d1
-                bpl.s   loc_17A94
+                bpl.s   SKKnucklesGlideContact_QueryUpwardSectorCeilingAndAdjustDistanceForGravity
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_17A94:
+SKKnucklesGlideContact_QueryUpwardSectorCeilingAndAdjustDistanceForGravity:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_17AAE
+                bpl.s   SKKnucklesGlideContact_ReturnAfterUpwardSectorCeilingMissOrCorrection
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17AA4
+                beq.s   SKKnucklesGlideContact_ApplyUpwardSectorCeilingAndClearYVelocity
                 neg.w   d1
 
-loc_17AA4:
+SKKnucklesGlideContact_ApplyUpwardSectorCeilingAndClearYVelocity:
                 sub.w   d1,y_pos(a0)
                 move.w  #0,y_vel(a0)
 
-locret_17AAE:
+SKKnucklesGlideContact_ReturnAfterUpwardSectorCeilingMissOrCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17AB0:
+SKKnucklesGlideContact_ProbeRightWallForRightwardVelocitySector:
                 jsr     (CheckRightWallDist).l
                 tst.w   d1
-                bpl.s   loc_17ACA
+                bpl.s   SKKnucklesGlideContact_QueryRightSectorCeilingOrUseFloorFallback
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 bset    #Status_Push,(Gliding_collision_flags).w
 
-loc_17ACA:
+SKKnucklesGlideContact_QueryRightSectorCeilingOrUseFloorFallback:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   loc_17AEC
+                bpl.s   SKKnucklesGlideContact_GateRightSectorFloorFallbackByNonnegativeYVelocity
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17ADA
+                beq.s   SKKnucklesGlideContact_CorrectRightSectorCeilingAndClampOnlyNegativeYSpeed
                 neg.w   d1
 
-loc_17ADA:
+SKKnucklesGlideContact_CorrectRightSectorCeilingAndClampOnlyNegativeYSpeed:
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_17AEA
+                bpl.s   SKKnucklesGlideContact_ReturnAfterRightSectorCeilingResponse
                 move.w  #0,y_vel(a0)
 
-locret_17AEA:
+SKKnucklesGlideContact_ReturnAfterRightSectorCeilingResponse:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17AEC:
+SKKnucklesGlideContact_GateRightSectorFloorFallbackByNonnegativeYVelocity:
                 tst.w   y_vel(a0)
-                bmi.s   locret_17B16
+                bmi.s   SKKnucklesGlideContact_ReturnAfterRightSectorFloorGateOrContact
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_17B16
+                bpl.s   SKKnucklesGlideContact_ReturnAfterRightSectorFloorGateOrContact
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17B02
+                beq.s   SKKnucklesGlideContact_ApplyRightSectorFloorContactAndClearGlobalAir
                 neg.w   d1
 
-loc_17B02:
+SKKnucklesGlideContact_ApplyRightSectorFloorContactAndClearGlobalAir:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 bclr    #Status_InAir,(Gliding_collision_flags).w
 
-locret_17B16:
+SKKnucklesGlideContact_ReturnAfterRightSectorFloorGateOrContact:
                 rts
 ; End of function Knux_DoLevelCollision_CheckRet
 
@@ -200,7 +200,7 @@ locret_17B16:
 
 Knux_TouchFloor_Check_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_17B6A
+                bne.s   SKKnucklesLanding_ClearActorAirPushRollJumpAndGlideState
                 move.b  #0,anim(a0)
 ; End of function Knux_TouchFloor_Check_Spindash
 
@@ -211,27 +211,27 @@ Knux_TouchFloor:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                beq.s   loc_17B6A
+                beq.s   SKKnucklesLanding_ClearActorAirPushRollJumpAndGlideState
                 bclr    #Status_Roll,status(a0)
                 move.b  #0,anim(a0)
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17B56
+                beq.s   SKKnucklesLanding_AdjustUnrollYOffsetByGravityAndAngleHemisphere
                 neg.w   d0
 
-loc_17B56:
+SKKnucklesLanding_AdjustUnrollYOffsetByGravityAndAngleHemisphere:
                 move.w  d0,-(sp)
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bpl.s   loc_17B64
+                bpl.s   SKKnucklesLanding_ApplySavedUnrollYOffsetBeforeCommonLandingReset
                 neg.w   (sp)
 
-loc_17B64:
+SKKnucklesLanding_ApplySavedUnrollYOffsetBeforeCommonLandingReset:
                 move.w  (sp)+,d0
                 add.w   d0,y_pos(a0)
 
-loc_17B6A:
+SKKnucklesLanding_ClearActorAirPushRollJumpAndGlideState:
                 bclr    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 bclr    #Status_RollJump,status(a0)
@@ -243,39 +243,39 @@ loc_17B6A:
                 move.b  #0,scroll_delay_counter(a0)
                 move.b  #0,double_jump_flag(a0)
                 cmpi.b  #$20,anim(a0)
-                blo.s   locret_17BB4
+                blo.s   SKKnucklesLanding_ReturnAfterLandingResetAndOptionalSpecialAnimationClear
                 move.b  #0,anim(a0)
 
-locret_17BB4:
+SKKnucklesLanding_ReturnAfterLandingResetAndOptionalSpecialAnimationClear:
                 rts
 ; End of function Knux_TouchFloor
 
 ; ---------------------------------------------------------------------------
 
-loc_17BB6:
+SKKnucklesRecovery_EnterDebugBeforeHurtMotionOrContinueHurtState:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_17BD0
+                beq.s   SKKnucklesRecovery_MoveHurtWithOldVelocityThenApplyStoredGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_17BD0
+                beq.s   SKKnucklesRecovery_MoveHurtWithOldVelocityThenApplyStoredGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17BD0:
+SKKnucklesRecovery_MoveHurtWithOldVelocityThenApplyStoredGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_17BEA
+                beq.s   SKKnucklesRecovery_WrapHurtIntegerYAtSharedMinusHundredCameraMinimum
                 subi.w  #$20,y_vel(a0)
 
-loc_17BEA:
+SKKnucklesRecovery_WrapHurtIntegerYAtSharedMinusHundredCameraMinimum:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_17BFA
+                bne.s   SKKnucklesRecovery_ResolveHurtLandingThenBoundsHistoryAnimationAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_17BFA:
+SKKnucklesRecovery_ResolveHurtLandingThenBoundsHistoryAnimationAndDraw:
                 bsr.w   ResolveKnucklesHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
@@ -286,29 +286,29 @@ loc_17BFA:
 
 ResolveKnucklesHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   loc_17C3C
+                bne.s   SKKnucklesRecovery_ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_17C2E
+                bne.s   SKKnucklesRecovery_TestReverseGravityHurtDeathPlaneIncludingEquality
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   loc_17C82
-                bra.s   loc_17C3C
+                blt.w   SKKnucklesRecovery_TailKillAfterEnabledHurtDeathPlaneCrossing
+                bra.s   SKKnucklesRecovery_ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears
 ; ---------------------------------------------------------------------------
 
-loc_17C2E:
+SKKnucklesRecovery_TestReverseGravityHurtDeathPlaneIncludingEquality:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   loc_17C3C
-                bra.w   loc_17C82
+                blt.s   SKKnucklesRecovery_ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears
+                bra.w   SKKnucklesRecovery_TailKillAfterEnabledHurtDeathPlaneCrossing
 ; ---------------------------------------------------------------------------
 
-loc_17C3C:
+SKKnucklesRecovery_ProbeHurtTerrainAndRecoverControlWhenActorAirBitClears:
                 movem.l a4-a6,-(sp)
                 bsr.w   SonicKnux_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   locret_17C80
+                bne.s   SKKnucklesRecovery_ReturnAfterHurtTerrainHoldOrRecoveredState
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -320,27 +320,27 @@ loc_17C3C:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-locret_17C80:
+SKKnucklesRecovery_ReturnAfterHurtTerrainHoldOrRecoveredState:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17C82:
+SKKnucklesRecovery_TailKillAfterEnabledHurtDeathPlaneCrossing:
                 jmp     (Kill_Character).l
 ; End of function ResolveKnucklesHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-loc_17C88:
+SKKnucklesRecovery_EnterDebugBeforeDeathFinisherOrContinueDeathState:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_17CA2
+                beq.s   SKKnucklesRecovery_FinishDeathBeforeGravityMotionHistoryAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_17CA2
+                beq.s   SKKnucklesRecovery_FinishDeathBeforeGravityMotionHistoryAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17CA2:
+SKKnucklesRecovery_FinishDeathBeforeGravityMotionHistoryAndDraw:
                 bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
@@ -348,40 +348,40 @@ loc_17CA2:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_17CBA:
+SKKnucklesRecovery_CountNonzeroRestartDelayAndRequestLevelRestartAtZero:
                 tst.w   $3E(a0)
-                beq.s   locret_17CCC
+                beq.s   SKKnucklesRecovery_ReturnWhileRestartDelayHoldsOrRestartRequested
                 subq.w  #1,$3E(a0)
-                bne.s   locret_17CCC
+                bne.s   SKKnucklesRecovery_ReturnWhileRestartDelayHoldsOrRestartRequested
                 move.w  #1,(Restart_level_flag).w
 
-locret_17CCC:
+SKKnucklesRecovery_ReturnWhileRestartDelayHoldsOrRestartRequested:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17CCE:
+SKKnucklesRecovery_ResumeControlOnlyWhenBothPrimaryScrollAmountsAreZero:
                 tst.w   (H_scroll_amount).w
-                bne.s   loc_17CE0
+                bne.s   SKKnucklesRecovery_AnimateAndDrawDuringScrollWaitOrAfterRelease
                 tst.w   (V_scroll_amount).w
-                bne.s   loc_17CE0
+                bne.s   SKKnucklesRecovery_AnimateAndDrawDuringScrollWaitOrAfterRelease
                 move.b  #2,routine(a0)
 
-loc_17CE0:
+SKKnucklesRecovery_AnimateAndDrawDuringScrollWaitOrAfterRelease:
                 bsr.w   AnimateKnucklesApplyGravityFlipAndQueuePatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_17CEA:
+SKKnucklesRecovery_EnterDebugBeforeDrowningMotionOrContinueDrowning:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_17D04
+                beq.s   SKKnucklesRecovery_AdvanceDrowningWithOldVelocityAndTenHexGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_17D04
+                beq.s   SKKnucklesRecovery_AdvanceDrowningWithOldVelocityAndTenHexGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17D04:
+SKKnucklesRecovery_AdvanceDrowningWithOldVelocityAndTenHexGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -393,9 +393,9 @@ loc_17D04:
 AnimateKnucklesApplyGravityFlipAndQueuePatterns:
                 bsr.s   Animate_Knuckles
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_17D2C
+                beq.s   SKKnucklesRecovery_TailNormalPatternLoaderAfterAnimationAndGravityMirror
                 eori.b  #2,render_flags(a0)
 
-loc_17D2C:
+SKKnucklesRecovery_TailNormalPatternLoaderAfterAnimationAndGravityMirror:
                 bra.w   Knuckles_Load_PLC
 ; End of function AnimateKnucklesApplyGravityFlipAndQueuePatterns

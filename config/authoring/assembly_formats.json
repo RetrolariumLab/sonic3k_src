@@ -13604,257 +13604,257 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 2376
       },
-      "declarations_sha256": "a220a7b5e70317dd6701fc6feb2dd5d8d7c66bea30093d16296da165e7a2f99a",
+      "declarations_sha256": "886f1d590d7c58564f74fad4bb0de5430577e38b9cd945dd07758dc9feb47f3d",
       "labels": {
         "PLC_Knuckles_": 0,
-        "word_14BF00": 502,
-        "word_14BF02": 504,
-        "word_14BF0C": 514,
-        "word_14BF14": 522,
-        "word_14BF1C": 530,
-        "word_14BF22": 536,
-        "word_14BF2C": 546,
-        "word_14BF36": 556,
-        "word_14BF3E": 564,
-        "word_14BF48": 574,
-        "word_14BF50": 582,
-        "word_14BF58": 590,
-        "word_14BF60": 598,
-        "word_14BF6A": 608,
-        "word_14BF72": 616,
-        "word_14BF78": 622,
-        "word_14BF80": 630,
-        "word_14BF88": 638,
-        "word_14BF92": 648,
-        "word_14BF9C": 658,
-        "word_14BFA4": 666,
-        "word_14BFAA": 672,
-        "word_14BFB4": 682,
-        "word_14BFBE": 692,
-        "word_14BFC6": 700,
-        "word_14BFD0": 710,
-        "word_14BFD8": 718,
-        "word_14BFE0": 726,
-        "word_14BFE8": 734,
-        "word_14BFF0": 742,
-        "word_14BFF6": 748,
-        "word_14BFFC": 754,
-        "word_14C004": 762,
-        "word_14C00C": 770,
-        "word_14C012": 776,
-        "word_14C018": 782,
-        "word_14C01E": 788,
-        "word_14C024": 794,
-        "word_14C02E": 804,
-        "word_14C038": 814,
-        "word_14C040": 822,
-        "word_14C048": 830,
-        "word_14C04E": 836,
-        "word_14C054": 842,
-        "word_14C05A": 848,
-        "word_14C060": 854,
-        "word_14C06A": 864,
-        "word_14C074": 874,
-        "word_14C07C": 882,
-        "word_14C084": 890,
-        "word_14C08E": 900,
-        "word_14C094": 906,
-        "word_14C09C": 914,
-        "word_14C0A4": 922,
-        "word_14C0AC": 930,
-        "word_14C0B4": 938,
-        "word_14C0BA": 944,
-        "word_14C0C2": 952,
-        "word_14C0C8": 958,
-        "word_14C0CE": 964,
-        "word_14C0D6": 972,
-        "word_14C0DC": 978,
-        "word_14C0E2": 984,
-        "word_14C0EA": 992,
-        "word_14C0F0": 998,
-        "word_14C0F8": 1006,
-        "word_14C0FE": 1012,
-        "word_14C108": 1022,
-        "word_14C10E": 1028,
-        "word_14C112": 1032,
-        "word_14C11A": 1040,
-        "word_14C120": 1046,
-        "word_14C126": 1052,
-        "word_14C12C": 1058,
-        "word_14C134": 1066,
-        "word_14C13C": 1074,
-        "word_14C142": 1080,
-        "word_14C148": 1086,
-        "word_14C14C": 1090,
-        "word_14C154": 1098,
-        "word_14C15A": 1104,
-        "word_14C162": 1112,
-        "word_14C16A": 1120,
-        "word_14C172": 1128,
-        "word_14C17A": 1136,
-        "word_14C180": 1142,
-        "word_14C188": 1150,
-        "word_14C18E": 1156,
-        "word_14C194": 1162,
-        "word_14C19A": 1168,
-        "word_14C1A2": 1176,
-        "word_14C1A8": 1182,
-        "word_14C1AE": 1188,
-        "word_14C1B4": 1194,
-        "word_14C1BA": 1200,
-        "word_14C1C0": 1206,
-        "word_14C1C6": 1212,
-        "word_14C1CA": 1216,
-        "word_14C1CE": 1220,
-        "word_14C1D6": 1228,
-        "word_14C1DC": 1234,
-        "word_14C1E2": 1240,
-        "word_14C1E8": 1246,
-        "word_14C1EE": 1252,
-        "word_14C1F2": 1256,
-        "word_14C1F6": 1260,
-        "word_14C1FE": 1268,
-        "word_14C204": 1274,
-        "word_14C20A": 1280,
-        "word_14C212": 1288,
-        "word_14C218": 1294,
-        "word_14C220": 1302,
-        "word_14C22A": 1312,
-        "word_14C230": 1318,
-        "word_14C234": 1322,
-        "word_14C23A": 1328,
-        "word_14C242": 1336,
-        "word_14C248": 1342,
-        "word_14C24E": 1348,
-        "word_14C256": 1356,
-        "word_14C25C": 1362,
-        "word_14C264": 1370,
-        "word_14C26E": 1380,
-        "word_14C276": 1388,
-        "word_14C280": 1398,
-        "word_14C288": 1406,
-        "word_14C292": 1416,
-        "word_14C29A": 1424,
-        "word_14C2A4": 1434,
-        "word_14C2AC": 1442,
-        "word_14C2B6": 1452,
-        "word_14C2BE": 1460,
-        "word_14C2C4": 1466,
-        "word_14C2CE": 1476,
-        "word_14C2D8": 1486,
-        "word_14C2E0": 1494,
-        "word_14C2E8": 1502,
-        "word_14C2F0": 1510,
-        "word_14C2F8": 1518,
-        "word_14C300": 1526,
-        "word_14C308": 1534,
-        "word_14C310": 1542,
-        "word_14C31A": 1552,
-        "word_14C322": 1560,
-        "word_14C32A": 1568,
-        "word_14C334": 1578,
-        "word_14C33A": 1584,
-        "word_14C342": 1592,
-        "word_14C34A": 1600,
-        "word_14C354": 1610,
-        "word_14C35E": 1620,
-        "word_14C362": 1624,
-        "word_14C366": 1628,
-        "word_14C36A": 1632,
-        "word_14C36E": 1636,
-        "word_14C372": 1640,
-        "word_14C378": 1646,
-        "word_14C37E": 1652,
-        "word_14C384": 1658,
-        "word_14C38E": 1668,
-        "word_14C398": 1678,
-        "word_14C3A2": 1688,
-        "word_14C3AC": 1698,
-        "word_14C3B6": 1708,
-        "word_14C3C0": 1718,
-        "word_14C3CA": 1728,
-        "word_14C3D4": 1738,
-        "word_14C3DE": 1748,
-        "word_14C3E8": 1758,
-        "word_14C3F2": 1768,
-        "word_14C3FC": 1778,
-        "word_14C406": 1788,
-        "word_14C410": 1798,
-        "word_14C41A": 1808,
-        "word_14C424": 1818,
-        "word_14C42C": 1826,
-        "word_14C434": 1834,
-        "word_14C43C": 1842,
-        "word_14C442": 1848,
-        "word_14C44A": 1856,
-        "word_14C450": 1862,
-        "word_14C458": 1870,
-        "word_14C460": 1878,
-        "word_14C468": 1886,
-        "word_14C46E": 1892,
-        "word_14C472": 1896,
-        "word_14C478": 1902,
-        "word_14C480": 1910,
-        "word_14C484": 1914,
-        "word_14C488": 1918,
-        "word_14C492": 1928,
-        "word_14C498": 1934,
-        "word_14C4A0": 1942,
-        "word_14C4A8": 1950,
-        "word_14C4AE": 1956,
-        "word_14C4B2": 1960,
-        "word_14C4B8": 1966,
-        "word_14C4C0": 1974,
-        "word_14C4C6": 1980,
-        "word_14C4CE": 1988,
-        "word_14C4D2": 1992,
-        "word_14C4DA": 2000,
-        "word_14C4E0": 2006,
-        "word_14C4EA": 2016,
-        "word_14C4F4": 2026,
-        "word_14C4FE": 2036,
-        "word_14C506": 2044,
-        "word_14C510": 2054,
-        "word_14C51A": 2064,
-        "word_14C526": 2076,
-        "word_14C530": 2086,
-        "word_14C536": 2092,
-        "word_14C53C": 2098,
-        "word_14C542": 2104,
-        "word_14C548": 2110,
-        "word_14C54E": 2116,
-        "word_14C554": 2122,
-        "word_14C55E": 2132,
-        "word_14C56A": 2144,
-        "word_14C574": 2154,
-        "word_14C57E": 2164,
-        "word_14C586": 2172,
-        "word_14C58E": 2180,
-        "word_14C598": 2190,
-        "word_14C5A0": 2198,
-        "word_14C5A8": 2206,
-        "word_14C5AC": 2210,
-        "word_14C5B2": 2216,
-        "word_14C5B8": 2222,
-        "word_14C5C2": 2232,
-        "word_14C5C8": 2238,
-        "word_14C5D0": 2246,
-        "word_14C5D8": 2254,
-        "word_14C5E2": 2264,
-        "word_14C5EA": 2272,
-        "word_14C5F0": 2278,
-        "word_14C5F8": 2286,
-        "word_14C600": 2294,
-        "word_14C608": 2302,
-        "word_14C610": 2310,
-        "word_14C618": 2318,
-        "word_14C61E": 2324,
-        "word_14C624": 2330,
-        "word_14C62C": 2338,
-        "word_14C634": 2346,
-        "word_14C63A": 2352,
-        "word_14C644": 2362,
-        "word_14C64C": 2370
+        "SKKnucklesNormal_DplcFrame00": 502,
+        "SKKnucklesNormal_DplcFrame01": 504,
+        "SKKnucklesNormal_DplcFrame02": 514,
+        "SKKnucklesNormal_DplcFrame03": 522,
+        "SKKnucklesNormal_DplcFrame04": 530,
+        "SKKnucklesNormal_DplcFrame05": 536,
+        "SKKnucklesNormal_DplcFrame06": 546,
+        "SKKnucklesNormal_DplcFrame07": 556,
+        "SKKnucklesNormal_DplcFrame08": 564,
+        "SKKnucklesNormal_DplcFrame09": 574,
+        "SKKnucklesNormal_DplcFrame0A": 582,
+        "SKKnucklesNormal_DplcFrame0B": 590,
+        "SKKnucklesNormal_DplcFrame0C": 598,
+        "SKKnucklesNormal_DplcFrame0D": 608,
+        "SKKnucklesNormal_DplcFrame0E": 616,
+        "SKKnucklesNormal_DplcFrame0F": 622,
+        "SKKnucklesNormal_DplcFrame10": 630,
+        "SKKnucklesNormal_DplcFrame11": 638,
+        "SKKnucklesNormal_DplcFrame12": 648,
+        "SKKnucklesNormal_DplcFrame13": 658,
+        "SKKnucklesNormal_DplcFrame14": 666,
+        "SKKnucklesNormal_DplcFrame15": 672,
+        "SKKnucklesNormal_DplcFrame16": 682,
+        "SKKnucklesNormal_DplcFrame17": 692,
+        "SKKnucklesNormal_DplcFrame18": 700,
+        "SKKnucklesNormal_DplcFrame19": 710,
+        "SKKnucklesNormal_DplcFrame1A": 718,
+        "SKKnucklesNormal_DplcFrame1B": 726,
+        "SKKnucklesNormal_DplcFrame1C": 734,
+        "SKKnucklesNormal_DplcFrame1D": 742,
+        "SKKnucklesNormal_DplcFrame1E": 748,
+        "SKKnucklesNormal_DplcFrame1F": 754,
+        "SKKnucklesNormal_DplcFrame20": 762,
+        "SKKnucklesNormal_DplcFrame21": 770,
+        "SKKnucklesNormal_DplcFrame22": 776,
+        "SKKnucklesNormal_DplcFrame23": 782,
+        "SKKnucklesNormal_DplcFrame24": 788,
+        "SKKnucklesNormal_DplcFrame25": 794,
+        "SKKnucklesNormal_DplcFrame26": 804,
+        "SKKnucklesNormal_DplcFrame27": 814,
+        "SKKnucklesNormal_DplcFrame28": 822,
+        "SKKnucklesNormal_DplcFrame29": 830,
+        "SKKnucklesNormal_DplcFrame2A": 836,
+        "SKKnucklesNormal_DplcFrame2B": 842,
+        "SKKnucklesNormal_DplcFrame2C": 848,
+        "SKKnucklesNormal_DplcFrame2D": 854,
+        "SKKnucklesNormal_DplcFrame2E": 864,
+        "SKKnucklesNormal_DplcFrame2F": 874,
+        "SKKnucklesNormal_DplcFrame30": 882,
+        "SKKnucklesNormal_DplcFrame31": 890,
+        "SKKnucklesNormal_DplcFrame32": 900,
+        "SKKnucklesNormal_DplcFrame33": 906,
+        "SKKnucklesNormal_DplcFrame34": 914,
+        "SKKnucklesNormal_DplcFrame35": 922,
+        "SKKnucklesNormal_DplcFrame36": 930,
+        "SKKnucklesNormal_DplcFrame37": 938,
+        "SKKnucklesNormal_DplcFrame38": 944,
+        "SKKnucklesNormal_DplcFrame39": 952,
+        "SKKnucklesNormal_DplcFrame3A": 958,
+        "SKKnucklesNormal_DplcFrame3B": 964,
+        "SKKnucklesNormal_DplcFrame3C": 972,
+        "SKKnucklesNormal_DplcFrame3D": 978,
+        "SKKnucklesNormal_DplcFrame3E": 984,
+        "SKKnucklesNormal_DplcFrame3F": 992,
+        "SKKnucklesNormal_DplcFrame40": 998,
+        "SKKnucklesNormal_DplcFrame41": 1006,
+        "SKKnucklesNormal_DplcFrame42": 1012,
+        "SKKnucklesNormal_DplcFrame43": 1022,
+        "SKKnucklesNormal_DplcFrame44": 1028,
+        "SKKnucklesNormal_DplcFrame45": 1032,
+        "SKKnucklesNormal_DplcFrame46": 1040,
+        "SKKnucklesNormal_DplcFrame47": 1046,
+        "SKKnucklesNormal_DplcFrame48": 1052,
+        "SKKnucklesNormal_DplcFrame49": 1058,
+        "SKKnucklesNormal_DplcFrame4A": 1066,
+        "SKKnucklesNormal_DplcFrame4B": 1074,
+        "SKKnucklesNormal_DplcFrame4C": 1080,
+        "SKKnucklesNormal_DplcFrame4D": 1086,
+        "SKKnucklesNormal_DplcFrame4E": 1090,
+        "SKKnucklesNormal_DplcFrame4F": 1098,
+        "SKKnucklesNormal_DplcFrame50": 1104,
+        "SKKnucklesNormal_DplcFrame51": 1112,
+        "SKKnucklesNormal_DplcFrame52": 1120,
+        "SKKnucklesNormal_DplcFrame53": 1128,
+        "SKKnucklesNormal_DplcFrame54": 1136,
+        "SKKnucklesNormal_DplcFrame55": 1142,
+        "SKKnucklesNormal_DplcFrame56": 1150,
+        "SKKnucklesNormal_DplcFrame57": 1156,
+        "SKKnucklesNormal_DplcFrame58": 1162,
+        "SKKnucklesNormal_DplcFrame59": 1168,
+        "SKKnucklesNormal_DplcFrame5A": 1176,
+        "SKKnucklesNormal_DplcFrame5B": 1182,
+        "SKKnucklesNormal_DplcFrame5C": 1188,
+        "SKKnucklesNormal_DplcFrame5D": 1194,
+        "SKKnucklesNormal_DplcFrame5E": 1200,
+        "SKKnucklesNormal_DplcFrame5F": 1206,
+        "SKKnucklesNormal_DplcFrame60": 1212,
+        "SKKnucklesNormal_DplcFrame61": 1216,
+        "SKKnucklesNormal_DplcFrame62": 1220,
+        "SKKnucklesNormal_DplcFrame63": 1228,
+        "SKKnucklesNormal_DplcFrame64": 1234,
+        "SKKnucklesNormal_DplcFrame65": 1240,
+        "SKKnucklesNormal_DplcFrame66": 1246,
+        "SKKnucklesNormal_DplcFrame67": 1252,
+        "SKKnucklesNormal_DplcFrame68": 1256,
+        "SKKnucklesNormal_DplcFrame69": 1260,
+        "SKKnucklesNormal_DplcFrame6A": 1268,
+        "SKKnucklesNormal_DplcFrame6B": 1274,
+        "SKKnucklesNormal_DplcFrame6C": 1280,
+        "SKKnucklesNormal_DplcFrame6D": 1288,
+        "SKKnucklesNormal_DplcFrame6E": 1294,
+        "SKKnucklesNormal_DplcFrame6F": 1302,
+        "SKKnucklesNormal_DplcFrame70": 1312,
+        "SKKnucklesNormal_DplcFrame71": 1318,
+        "SKKnucklesNormal_DplcFrame72": 1322,
+        "SKKnucklesNormal_DplcFrame73": 1328,
+        "SKKnucklesNormal_DplcFrame74": 1336,
+        "SKKnucklesNormal_DplcFrame75": 1342,
+        "SKKnucklesNormal_DplcFrame76": 1348,
+        "SKKnucklesNormal_DplcFrame77": 1356,
+        "SKKnucklesNormal_DplcFrame78": 1362,
+        "SKKnucklesNormal_DplcFrame79": 1370,
+        "SKKnucklesNormal_DplcFrame7A": 1380,
+        "SKKnucklesNormal_DplcFrame7B": 1388,
+        "SKKnucklesNormal_DplcFrame7C": 1398,
+        "SKKnucklesNormal_DplcFrame7D": 1406,
+        "SKKnucklesNormal_DplcFrame7E": 1416,
+        "SKKnucklesNormal_DplcFrame7F": 1424,
+        "SKKnucklesNormal_DplcFrame80": 1434,
+        "SKKnucklesNormal_DplcFrame81": 1442,
+        "SKKnucklesNormal_DplcFrame82": 1452,
+        "SKKnucklesNormal_DplcFrame83": 1460,
+        "SKKnucklesNormal_DplcFrame84": 1466,
+        "SKKnucklesNormal_DplcFrame85": 1476,
+        "SKKnucklesNormal_DplcFrame86": 1486,
+        "SKKnucklesNormal_DplcFrame87": 1494,
+        "SKKnucklesNormal_DplcFrame88": 1502,
+        "SKKnucklesNormal_DplcFrame89": 1510,
+        "SKKnucklesNormal_DplcFrame8A": 1518,
+        "SKKnucklesNormal_DplcFrame8B": 1526,
+        "SKKnucklesNormal_DplcFrame8C": 1534,
+        "SKKnucklesNormal_DplcFrame8D": 1542,
+        "SKKnucklesNormal_DplcFrame8E": 1552,
+        "SKKnucklesNormal_DplcFrame8F": 1560,
+        "SKKnucklesNormal_DplcFrame90": 1568,
+        "SKKnucklesNormal_DplcFrame91": 1578,
+        "SKKnucklesNormal_DplcFrame92": 1584,
+        "SKKnucklesNormal_DplcFrame93": 1592,
+        "SKKnucklesNormal_DplcFrame94": 1600,
+        "SKKnucklesNormal_DplcFrame95": 1610,
+        "SKKnucklesNormal_DplcFrame96": 1620,
+        "SKKnucklesNormal_DplcFrame97": 1624,
+        "SKKnucklesNormal_DplcFrame98": 1628,
+        "SKKnucklesNormal_DplcFrame99": 1632,
+        "SKKnucklesNormal_DplcFrame9A": 1636,
+        "SKKnucklesNormal_DplcFrame9B": 1640,
+        "SKKnucklesNormal_DplcFrame9C": 1646,
+        "SKKnucklesNormal_DplcFrame9D": 1652,
+        "SKKnucklesNormal_DplcFrame9E": 1658,
+        "SKKnucklesNormal_DplcFrame9F": 1668,
+        "SKKnucklesNormal_DplcFrameA0": 1678,
+        "SKKnucklesNormal_DplcFrameA1": 1688,
+        "SKKnucklesNormal_DplcFrameA2": 1698,
+        "SKKnucklesNormal_DplcFrameA3": 1708,
+        "SKKnucklesNormal_DplcFrameA4": 1718,
+        "SKKnucklesNormal_DplcFrameA5": 1728,
+        "SKKnucklesNormal_DplcFrameA6": 1738,
+        "SKKnucklesNormal_DplcFrameA7": 1748,
+        "SKKnucklesNormal_DplcFrameA8": 1758,
+        "SKKnucklesNormal_DplcFrameA9": 1768,
+        "SKKnucklesNormal_DplcFrameAA": 1778,
+        "SKKnucklesNormal_DplcFrameAB": 1788,
+        "SKKnucklesNormal_DplcFrameAC": 1798,
+        "SKKnucklesNormal_DplcFrameAD": 1808,
+        "SKKnucklesNormal_DplcFrameAE": 1818,
+        "SKKnucklesNormal_DplcFrameAF": 1826,
+        "SKKnucklesNormal_DplcFrameB0": 1834,
+        "SKKnucklesNormal_DplcFrameB1": 1842,
+        "SKKnucklesNormal_DplcFrameB2": 1848,
+        "SKKnucklesNormal_DplcFrameB3": 1856,
+        "SKKnucklesNormal_DplcFrameB4": 1862,
+        "SKKnucklesNormal_DplcFrameB5": 1870,
+        "SKKnucklesNormal_DplcFrameB6": 1878,
+        "SKKnucklesNormal_DplcFrameB7": 1886,
+        "SKKnucklesNormal_DplcFrameB8": 1892,
+        "SKKnucklesNormal_DplcFrameB9": 1896,
+        "SKKnucklesNormal_DplcFrameBA": 1902,
+        "SKKnucklesNormal_DplcFrameBB": 1910,
+        "SKKnucklesNormal_DplcFrameBC": 1914,
+        "SKKnucklesNormal_DplcFrameBD": 1918,
+        "SKKnucklesNormal_DplcFrameBE": 1928,
+        "SKKnucklesNormal_DplcFrameBF": 1934,
+        "SKKnucklesNormal_DplcFrameC0": 1942,
+        "SKKnucklesNormal_DplcFrameC1": 1950,
+        "SKKnucklesNormal_DplcFrameC2": 1956,
+        "SKKnucklesNormal_DplcFrameC3": 1960,
+        "SKKnucklesNormal_DplcFrameC4": 1966,
+        "SKKnucklesNormal_DplcFrameC5": 1974,
+        "SKKnucklesNormal_DplcFrameC6": 1980,
+        "SKKnucklesNormal_DplcFrameC7": 1988,
+        "SKKnucklesNormal_DplcFrameC8": 1992,
+        "SKKnucklesNormal_DplcFrameC9": 2000,
+        "SKKnucklesNormal_DplcFrameCA": 2006,
+        "SKKnucklesNormal_DplcFrameCB": 2016,
+        "SKKnucklesNormal_DplcFrameCC": 2026,
+        "SKKnucklesNormal_DplcFrameCD": 2036,
+        "SKKnucklesNormal_DplcFrameCE": 2044,
+        "SKKnucklesNormal_DplcFrameCF": 2054,
+        "SKKnucklesNormal_DplcFrameD0": 2064,
+        "SKKnucklesNormal_DplcFrameD1": 2076,
+        "SKKnucklesNormal_DplcFrameD2": 2086,
+        "SKKnucklesNormal_DplcFrameD3": 2092,
+        "SKKnucklesNormal_DplcFrameD4": 2098,
+        "SKKnucklesNormal_DplcFrameD5": 2104,
+        "SKKnucklesNormal_DplcFrameD6": 2110,
+        "SKKnucklesNormal_DplcFrameD7": 2116,
+        "SKKnucklesNormal_DplcFrameD8": 2122,
+        "SKKnucklesNormal_DplcFrameD9": 2132,
+        "SKKnucklesNormal_DplcFrameDA": 2144,
+        "SKKnucklesNormal_DplcFrameDB": 2154,
+        "SKKnucklesNormal_DplcFrameDC": 2164,
+        "SKKnucklesNormal_DplcFrameDD": 2172,
+        "SKKnucklesNormal_DplcFrameDE": 2180,
+        "SKKnucklesNormal_DplcFrameDF": 2190,
+        "SKKnucklesNormal_DplcFrameE0": 2198,
+        "SKKnucklesNormal_DplcFrameE1": 2206,
+        "SKKnucklesNormal_DplcFrameE2": 2210,
+        "SKKnucklesNormal_DplcFrameE3": 2216,
+        "SKKnucklesNormal_DplcFrameE4": 2222,
+        "SKKnucklesNormal_DplcFrameE5": 2232,
+        "SKKnucklesNormal_DplcFrameE6": 2238,
+        "SKKnucklesNormal_DplcFrameE7": 2246,
+        "SKKnucklesNormal_DplcFrameE8": 2254,
+        "SKKnucklesNormal_DplcFrameE9": 2264,
+        "SKKnucklesNormal_DplcFrameEA": 2272,
+        "SKKnucklesNormal_DplcFrameEB": 2278,
+        "SKKnucklesNormal_DplcFrameEC": 2286,
+        "SKKnucklesNormal_DplcFrameED_EE": 2294,
+        "SKKnucklesNormal_DplcFrameEF": 2302,
+        "SKKnucklesNormal_DplcFrameF0": 2310,
+        "SKKnucklesNormal_DplcFrameF1_F3": 2318,
+        "SKKnucklesNormal_DplcFrameF2": 2324,
+        "SKKnucklesNormal_DplcFrameF4": 2330,
+        "SKKnucklesNormal_DplcFrameF5": 2338,
+        "SKKnucklesNormal_DplcFrameF6": 2346,
+        "SKKnucklesNormal_DplcFrameF7_F9": 2352,
+        "SKKnucklesNormal_DplcFrameF8": 2362,
+        "SKKnucklesNormal_DplcFrameFA": 2370
       },
       "external_symbols": [],
       "blocks": [
@@ -13862,1757 +13862,1757 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF00",
+          "target": "SKKnucklesNormal_DplcFrame00",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF02",
+          "target": "SKKnucklesNormal_DplcFrame01",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF0C",
+          "target": "SKKnucklesNormal_DplcFrame02",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF14",
+          "target": "SKKnucklesNormal_DplcFrame03",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF1C",
+          "target": "SKKnucklesNormal_DplcFrame04",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF22",
+          "target": "SKKnucklesNormal_DplcFrame05",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF2C",
+          "target": "SKKnucklesNormal_DplcFrame06",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF36",
+          "target": "SKKnucklesNormal_DplcFrame07",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF3E",
+          "target": "SKKnucklesNormal_DplcFrame08",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF48",
+          "target": "SKKnucklesNormal_DplcFrame09",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF50",
+          "target": "SKKnucklesNormal_DplcFrame0A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF58",
+          "target": "SKKnucklesNormal_DplcFrame0B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF60",
+          "target": "SKKnucklesNormal_DplcFrame0C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF6A",
+          "target": "SKKnucklesNormal_DplcFrame0D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF72",
+          "target": "SKKnucklesNormal_DplcFrame0E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF78",
+          "target": "SKKnucklesNormal_DplcFrame0F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF80",
+          "target": "SKKnucklesNormal_DplcFrame10",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF88",
+          "target": "SKKnucklesNormal_DplcFrame11",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF92",
+          "target": "SKKnucklesNormal_DplcFrame12",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BF9C",
+          "target": "SKKnucklesNormal_DplcFrame13",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFA4",
+          "target": "SKKnucklesNormal_DplcFrame14",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFAA",
+          "target": "SKKnucklesNormal_DplcFrame15",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFB4",
+          "target": "SKKnucklesNormal_DplcFrame16",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFBE",
+          "target": "SKKnucklesNormal_DplcFrame17",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFC6",
+          "target": "SKKnucklesNormal_DplcFrame18",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFD0",
+          "target": "SKKnucklesNormal_DplcFrame19",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFD8",
+          "target": "SKKnucklesNormal_DplcFrame1A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFE0",
+          "target": "SKKnucklesNormal_DplcFrame1B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFE8",
+          "target": "SKKnucklesNormal_DplcFrame1C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFF0",
+          "target": "SKKnucklesNormal_DplcFrame1D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFF6",
+          "target": "SKKnucklesNormal_DplcFrame1E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BFFC",
+          "target": "SKKnucklesNormal_DplcFrame1F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C004",
+          "target": "SKKnucklesNormal_DplcFrame20",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C00C",
+          "target": "SKKnucklesNormal_DplcFrame21",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C012",
+          "target": "SKKnucklesNormal_DplcFrame22",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C018",
+          "target": "SKKnucklesNormal_DplcFrame23",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C01E",
+          "target": "SKKnucklesNormal_DplcFrame24",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C024",
+          "target": "SKKnucklesNormal_DplcFrame25",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C02E",
+          "target": "SKKnucklesNormal_DplcFrame26",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C038",
+          "target": "SKKnucklesNormal_DplcFrame27",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C040",
+          "target": "SKKnucklesNormal_DplcFrame28",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C048",
+          "target": "SKKnucklesNormal_DplcFrame29",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C04E",
+          "target": "SKKnucklesNormal_DplcFrame2A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C054",
+          "target": "SKKnucklesNormal_DplcFrame2B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C05A",
+          "target": "SKKnucklesNormal_DplcFrame2C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C060",
+          "target": "SKKnucklesNormal_DplcFrame2D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C06A",
+          "target": "SKKnucklesNormal_DplcFrame2E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C074",
+          "target": "SKKnucklesNormal_DplcFrame2F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C07C",
+          "target": "SKKnucklesNormal_DplcFrame30",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C084",
+          "target": "SKKnucklesNormal_DplcFrame31",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C08E",
+          "target": "SKKnucklesNormal_DplcFrame32",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C094",
+          "target": "SKKnucklesNormal_DplcFrame33",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 104,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C09C",
+          "target": "SKKnucklesNormal_DplcFrame34",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 106,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0A4",
+          "target": "SKKnucklesNormal_DplcFrame35",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 108,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0AC",
+          "target": "SKKnucklesNormal_DplcFrame36",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 110,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0B4",
+          "target": "SKKnucklesNormal_DplcFrame37",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 112,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0BA",
+          "target": "SKKnucklesNormal_DplcFrame38",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 114,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0C2",
+          "target": "SKKnucklesNormal_DplcFrame39",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 116,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0C8",
+          "target": "SKKnucklesNormal_DplcFrame3A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 118,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0CE",
+          "target": "SKKnucklesNormal_DplcFrame3B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 120,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0D6",
+          "target": "SKKnucklesNormal_DplcFrame3C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 122,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0DC",
+          "target": "SKKnucklesNormal_DplcFrame3D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 124,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0E2",
+          "target": "SKKnucklesNormal_DplcFrame3E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 126,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0EA",
+          "target": "SKKnucklesNormal_DplcFrame3F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 128,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0F0",
+          "target": "SKKnucklesNormal_DplcFrame40",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 130,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0F8",
+          "target": "SKKnucklesNormal_DplcFrame41",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 132,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C0FE",
+          "target": "SKKnucklesNormal_DplcFrame42",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 134,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C108",
+          "target": "SKKnucklesNormal_DplcFrame43",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 136,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C10E",
+          "target": "SKKnucklesNormal_DplcFrame44",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 138,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C112",
+          "target": "SKKnucklesNormal_DplcFrame45",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 140,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C11A",
+          "target": "SKKnucklesNormal_DplcFrame46",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 142,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C120",
+          "target": "SKKnucklesNormal_DplcFrame47",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 144,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C126",
+          "target": "SKKnucklesNormal_DplcFrame48",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 146,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C12C",
+          "target": "SKKnucklesNormal_DplcFrame49",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 148,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C134",
+          "target": "SKKnucklesNormal_DplcFrame4A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 150,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C13C",
+          "target": "SKKnucklesNormal_DplcFrame4B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 152,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C142",
+          "target": "SKKnucklesNormal_DplcFrame4C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 154,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C148",
+          "target": "SKKnucklesNormal_DplcFrame4D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 156,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C14C",
+          "target": "SKKnucklesNormal_DplcFrame4E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 158,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C154",
+          "target": "SKKnucklesNormal_DplcFrame4F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 160,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C15A",
+          "target": "SKKnucklesNormal_DplcFrame50",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 162,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C162",
+          "target": "SKKnucklesNormal_DplcFrame51",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 164,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C16A",
+          "target": "SKKnucklesNormal_DplcFrame52",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 166,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C172",
+          "target": "SKKnucklesNormal_DplcFrame53",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 168,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C17A",
+          "target": "SKKnucklesNormal_DplcFrame54",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 170,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C180",
+          "target": "SKKnucklesNormal_DplcFrame55",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 172,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C188",
+          "target": "SKKnucklesNormal_DplcFrame56",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 174,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C18E",
+          "target": "SKKnucklesNormal_DplcFrame57",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 176,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C194",
+          "target": "SKKnucklesNormal_DplcFrame58",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 178,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C19A",
+          "target": "SKKnucklesNormal_DplcFrame59",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 180,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1A2",
+          "target": "SKKnucklesNormal_DplcFrame5A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 182,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1A8",
+          "target": "SKKnucklesNormal_DplcFrame5B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 184,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1AE",
+          "target": "SKKnucklesNormal_DplcFrame5C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 186,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1B4",
+          "target": "SKKnucklesNormal_DplcFrame5D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 188,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1BA",
+          "target": "SKKnucklesNormal_DplcFrame5E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 190,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1C0",
+          "target": "SKKnucklesNormal_DplcFrame5F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 192,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1C6",
+          "target": "SKKnucklesNormal_DplcFrame60",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 194,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1CA",
+          "target": "SKKnucklesNormal_DplcFrame61",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 196,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1CE",
+          "target": "SKKnucklesNormal_DplcFrame62",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 198,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1D6",
+          "target": "SKKnucklesNormal_DplcFrame63",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 200,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1DC",
+          "target": "SKKnucklesNormal_DplcFrame64",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 202,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1E2",
+          "target": "SKKnucklesNormal_DplcFrame65",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 204,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1E8",
+          "target": "SKKnucklesNormal_DplcFrame66",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 206,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1EE",
+          "target": "SKKnucklesNormal_DplcFrame67",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 208,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1F2",
+          "target": "SKKnucklesNormal_DplcFrame68",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 210,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1F6",
+          "target": "SKKnucklesNormal_DplcFrame69",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 212,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C1FE",
+          "target": "SKKnucklesNormal_DplcFrame6A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 214,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C204",
+          "target": "SKKnucklesNormal_DplcFrame6B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 216,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C20A",
+          "target": "SKKnucklesNormal_DplcFrame6C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 218,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C212",
+          "target": "SKKnucklesNormal_DplcFrame6D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 220,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C218",
+          "target": "SKKnucklesNormal_DplcFrame6E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 222,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C220",
+          "target": "SKKnucklesNormal_DplcFrame6F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 224,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C22A",
+          "target": "SKKnucklesNormal_DplcFrame70",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 226,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C230",
+          "target": "SKKnucklesNormal_DplcFrame71",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 228,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C234",
+          "target": "SKKnucklesNormal_DplcFrame72",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 230,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C23A",
+          "target": "SKKnucklesNormal_DplcFrame73",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 232,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C242",
+          "target": "SKKnucklesNormal_DplcFrame74",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 234,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C248",
+          "target": "SKKnucklesNormal_DplcFrame75",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 236,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C24E",
+          "target": "SKKnucklesNormal_DplcFrame76",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 238,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C256",
+          "target": "SKKnucklesNormal_DplcFrame77",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 240,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C25C",
+          "target": "SKKnucklesNormal_DplcFrame78",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 242,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C264",
+          "target": "SKKnucklesNormal_DplcFrame79",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 244,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C26E",
+          "target": "SKKnucklesNormal_DplcFrame7A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 246,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C276",
+          "target": "SKKnucklesNormal_DplcFrame7B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 248,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C280",
+          "target": "SKKnucklesNormal_DplcFrame7C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 250,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C288",
+          "target": "SKKnucklesNormal_DplcFrame7D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 252,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C292",
+          "target": "SKKnucklesNormal_DplcFrame7E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 254,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C29A",
+          "target": "SKKnucklesNormal_DplcFrame7F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 256,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2A4",
+          "target": "SKKnucklesNormal_DplcFrame80",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 258,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2AC",
+          "target": "SKKnucklesNormal_DplcFrame81",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 260,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2B6",
+          "target": "SKKnucklesNormal_DplcFrame82",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 262,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2BE",
+          "target": "SKKnucklesNormal_DplcFrame83",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 264,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2C4",
+          "target": "SKKnucklesNormal_DplcFrame84",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 266,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2CE",
+          "target": "SKKnucklesNormal_DplcFrame85",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 268,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2D8",
+          "target": "SKKnucklesNormal_DplcFrame86",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 270,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2E0",
+          "target": "SKKnucklesNormal_DplcFrame87",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 272,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2E8",
+          "target": "SKKnucklesNormal_DplcFrame88",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 274,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2F0",
+          "target": "SKKnucklesNormal_DplcFrame89",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 276,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C2F8",
+          "target": "SKKnucklesNormal_DplcFrame8A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 278,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C300",
+          "target": "SKKnucklesNormal_DplcFrame8B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 280,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C308",
+          "target": "SKKnucklesNormal_DplcFrame8C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 282,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C310",
+          "target": "SKKnucklesNormal_DplcFrame8D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 284,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C31A",
+          "target": "SKKnucklesNormal_DplcFrame8E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 286,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C322",
+          "target": "SKKnucklesNormal_DplcFrame8F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 288,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C32A",
+          "target": "SKKnucklesNormal_DplcFrame90",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 290,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C334",
+          "target": "SKKnucklesNormal_DplcFrame91",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 292,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C33A",
+          "target": "SKKnucklesNormal_DplcFrame92",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 294,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C342",
+          "target": "SKKnucklesNormal_DplcFrame93",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 296,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C34A",
+          "target": "SKKnucklesNormal_DplcFrame94",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 298,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C354",
+          "target": "SKKnucklesNormal_DplcFrame95",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 300,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C35E",
+          "target": "SKKnucklesNormal_DplcFrame96",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 302,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C362",
+          "target": "SKKnucklesNormal_DplcFrame97",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 304,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C366",
+          "target": "SKKnucklesNormal_DplcFrame98",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 306,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C36A",
+          "target": "SKKnucklesNormal_DplcFrame99",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 308,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C36E",
+          "target": "SKKnucklesNormal_DplcFrame9A",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 310,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C372",
+          "target": "SKKnucklesNormal_DplcFrame9B",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 312,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C378",
+          "target": "SKKnucklesNormal_DplcFrame9C",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 314,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C37E",
+          "target": "SKKnucklesNormal_DplcFrame9D",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 316,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C384",
+          "target": "SKKnucklesNormal_DplcFrame9E",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 318,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C38E",
+          "target": "SKKnucklesNormal_DplcFrame9F",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 320,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C398",
+          "target": "SKKnucklesNormal_DplcFrameA0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 322,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3A2",
+          "target": "SKKnucklesNormal_DplcFrameA1",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 324,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3AC",
+          "target": "SKKnucklesNormal_DplcFrameA2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 326,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3B6",
+          "target": "SKKnucklesNormal_DplcFrameA3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 328,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3C0",
+          "target": "SKKnucklesNormal_DplcFrameA4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 330,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3CA",
+          "target": "SKKnucklesNormal_DplcFrameA5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 332,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3D4",
+          "target": "SKKnucklesNormal_DplcFrameA6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 334,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3DE",
+          "target": "SKKnucklesNormal_DplcFrameA7",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 336,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3E8",
+          "target": "SKKnucklesNormal_DplcFrameA8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 338,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3F2",
+          "target": "SKKnucklesNormal_DplcFrameA9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 340,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C3FC",
+          "target": "SKKnucklesNormal_DplcFrameAA",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 342,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C406",
+          "target": "SKKnucklesNormal_DplcFrameAB",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 344,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C410",
+          "target": "SKKnucklesNormal_DplcFrameAC",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 346,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C41A",
+          "target": "SKKnucklesNormal_DplcFrameAD",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 348,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C424",
+          "target": "SKKnucklesNormal_DplcFrameAE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 350,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C42C",
+          "target": "SKKnucklesNormal_DplcFrameAF",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 352,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C434",
+          "target": "SKKnucklesNormal_DplcFrameB0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 354,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C43C",
+          "target": "SKKnucklesNormal_DplcFrameB1",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 356,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C442",
+          "target": "SKKnucklesNormal_DplcFrameB2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 358,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C44A",
+          "target": "SKKnucklesNormal_DplcFrameB3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 360,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C450",
+          "target": "SKKnucklesNormal_DplcFrameB4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 362,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C458",
+          "target": "SKKnucklesNormal_DplcFrameB5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 364,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C460",
+          "target": "SKKnucklesNormal_DplcFrameB6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 366,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C468",
+          "target": "SKKnucklesNormal_DplcFrameB7",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 368,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C46E",
+          "target": "SKKnucklesNormal_DplcFrameB8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 370,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C472",
+          "target": "SKKnucklesNormal_DplcFrameB9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 372,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C478",
+          "target": "SKKnucklesNormal_DplcFrameBA",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 374,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C480",
+          "target": "SKKnucklesNormal_DplcFrameBB",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 376,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C484",
+          "target": "SKKnucklesNormal_DplcFrameBC",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 378,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C488",
+          "target": "SKKnucklesNormal_DplcFrameBD",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 380,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C492",
+          "target": "SKKnucklesNormal_DplcFrameBE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 382,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C498",
+          "target": "SKKnucklesNormal_DplcFrameBF",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 384,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4A0",
+          "target": "SKKnucklesNormal_DplcFrameC0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 386,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4A8",
+          "target": "SKKnucklesNormal_DplcFrameC1",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 388,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4AE",
+          "target": "SKKnucklesNormal_DplcFrameC2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 390,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4B2",
+          "target": "SKKnucklesNormal_DplcFrameC3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 392,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4B8",
+          "target": "SKKnucklesNormal_DplcFrameC4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 394,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4C0",
+          "target": "SKKnucklesNormal_DplcFrameC5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 396,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4C6",
+          "target": "SKKnucklesNormal_DplcFrameC6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 398,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4CE",
+          "target": "SKKnucklesNormal_DplcFrameC7",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 400,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4D2",
+          "target": "SKKnucklesNormal_DplcFrameC8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 402,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4DA",
+          "target": "SKKnucklesNormal_DplcFrameC9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 404,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4E0",
+          "target": "SKKnucklesNormal_DplcFrameCA",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 406,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4EA",
+          "target": "SKKnucklesNormal_DplcFrameCB",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 408,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4F4",
+          "target": "SKKnucklesNormal_DplcFrameCC",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 410,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C4FE",
+          "target": "SKKnucklesNormal_DplcFrameCD",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 412,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C506",
+          "target": "SKKnucklesNormal_DplcFrameCE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 414,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C510",
+          "target": "SKKnucklesNormal_DplcFrameCF",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 416,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C51A",
+          "target": "SKKnucklesNormal_DplcFrameD0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 418,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C526",
+          "target": "SKKnucklesNormal_DplcFrameD1",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 420,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C530",
+          "target": "SKKnucklesNormal_DplcFrameD2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 422,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C536",
+          "target": "SKKnucklesNormal_DplcFrameD3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 424,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C53C",
+          "target": "SKKnucklesNormal_DplcFrameD4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 426,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C542",
+          "target": "SKKnucklesNormal_DplcFrameD5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 428,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C548",
+          "target": "SKKnucklesNormal_DplcFrameD6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 430,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C54E",
+          "target": "SKKnucklesNormal_DplcFrameD7",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 432,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C554",
+          "target": "SKKnucklesNormal_DplcFrameD8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 434,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C55E",
+          "target": "SKKnucklesNormal_DplcFrameD9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C56A",
+          "target": "SKKnucklesNormal_DplcFrameDA",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C574",
+          "target": "SKKnucklesNormal_DplcFrameDB",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C57E",
+          "target": "SKKnucklesNormal_DplcFrameDC",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C586",
+          "target": "SKKnucklesNormal_DplcFrameDD",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C58E",
+          "target": "SKKnucklesNormal_DplcFrameDE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C598",
+          "target": "SKKnucklesNormal_DplcFrameDF",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 448,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5A0",
+          "target": "SKKnucklesNormal_DplcFrameE0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 450,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5A8",
+          "target": "SKKnucklesNormal_DplcFrameE1",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 452,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5AC",
+          "target": "SKKnucklesNormal_DplcFrameE2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 454,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5B2",
+          "target": "SKKnucklesNormal_DplcFrameE3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 456,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5B8",
+          "target": "SKKnucklesNormal_DplcFrameE4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 458,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5C2",
+          "target": "SKKnucklesNormal_DplcFrameE5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 460,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5C8",
+          "target": "SKKnucklesNormal_DplcFrameE6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 462,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5D0",
+          "target": "SKKnucklesNormal_DplcFrameE7",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 464,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5D8",
+          "target": "SKKnucklesNormal_DplcFrameE8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 466,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5E2",
+          "target": "SKKnucklesNormal_DplcFrameE9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 468,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5EA",
+          "target": "SKKnucklesNormal_DplcFrameEA",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 470,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5F0",
+          "target": "SKKnucklesNormal_DplcFrameEB",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 472,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C5F8",
+          "target": "SKKnucklesNormal_DplcFrameEC",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 474,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C600",
+          "target": "SKKnucklesNormal_DplcFrameED_EE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 476,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C600",
+          "target": "SKKnucklesNormal_DplcFrameED_EE",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 478,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C608",
+          "target": "SKKnucklesNormal_DplcFrameEF",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 480,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C610",
+          "target": "SKKnucklesNormal_DplcFrameF0",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 482,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C618",
+          "target": "SKKnucklesNormal_DplcFrameF1_F3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 484,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C61E",
+          "target": "SKKnucklesNormal_DplcFrameF2",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 486,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C618",
+          "target": "SKKnucklesNormal_DplcFrameF1_F3",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 488,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C624",
+          "target": "SKKnucklesNormal_DplcFrameF4",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 490,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C62C",
+          "target": "SKKnucklesNormal_DplcFrameF5",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 492,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C634",
+          "target": "SKKnucklesNormal_DplcFrameF6",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 494,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C63A",
+          "target": "SKKnucklesNormal_DplcFrameF7_F9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 496,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C644",
+          "target": "SKKnucklesNormal_DplcFrameF8",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 498,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C63A",
+          "target": "SKKnucklesNormal_DplcFrameF7_F9",
           "base": "PLC_Knuckles_"
         },
         {
           "offset": 500,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14C64C",
+          "target": "SKKnucklesNormal_DplcFrameFA",
           "base": "PLC_Knuckles_"
         },
         {
@@ -16866,59 +16866,59 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 298
       },
-      "declarations_sha256": "3860f82819e0a8707798ccc858c5823ede44f25b64d435b5183d8b168e3eff61",
+      "declarations_sha256": "c442ebc0c9c8db8ff138f1e359ef6417dcf4ce80cfe5e8f58ed7cf5948a31785",
       "labels": {
         "PLC_Knuckles2P_": 0,
-        "Frame_2A04FC": 100,
-        "Frame_2A04FE": 102,
-        "Frame_2A0502": 106,
-        "Frame_2A0506": 110,
-        "Frame_2A050A": 114,
-        "Frame_2A050E": 118,
-        "Frame_2A0512": 122,
-        "Frame_2A0516": 126,
-        "Frame_2A051A": 130,
-        "Frame_2A051E": 134,
-        "Frame_2A0522": 138,
-        "Frame_2A0526": 142,
-        "Frame_2A052A": 146,
-        "Frame_2A052E": 150,
-        "Frame_2A0532": 154,
-        "Frame_2A0536": 158,
-        "Frame_2A053A": 162,
-        "Frame_2A053E": 166,
-        "Frame_2A0542": 170,
-        "Frame_2A0546": 174,
-        "Frame_2A054A": 178,
-        "Frame_2A054E": 182,
-        "Frame_2A0552": 186,
-        "Frame_2A0556": 190,
-        "Frame_2A055A": 194,
-        "Frame_2A055E": 198,
-        "Frame_2A0562": 202,
-        "Frame_2A0566": 206,
-        "Frame_2A056A": 210,
-        "Frame_2A056E": 214,
-        "Frame_2A0572": 218,
-        "Frame_2A0576": 222,
-        "Frame_2A057A": 226,
-        "Frame_2A057E": 230,
-        "Frame_2A0582": 234,
-        "Frame_2A0586": 238,
-        "Frame_2A058A": 242,
-        "Frame_2A058E": 246,
-        "Frame_2A0592": 250,
-        "Frame_2A0596": 254,
-        "Frame_2A059A": 258,
-        "Frame_2A059E": 262,
-        "Frame_2A05A2": 266,
-        "Frame_2A05A6": 270,
-        "Frame_2A05AA": 274,
-        "Frame_2A05AE": 278,
-        "Frame_2A05B2": 282,
-        "Frame_2A05B6": 286,
-        "Frame_2A05BA": 290,
-        "Frame_2A05BE": 294
+        "S3Knuckles2P_DplcFrame00": 100,
+        "S3Knuckles2P_DplcFrame01": 102,
+        "S3Knuckles2P_DplcFrame02": 106,
+        "S3Knuckles2P_DplcFrame03": 110,
+        "S3Knuckles2P_DplcFrame04": 114,
+        "S3Knuckles2P_DplcFrame05": 118,
+        "S3Knuckles2P_DplcFrame06": 122,
+        "S3Knuckles2P_DplcFrame07": 126,
+        "S3Knuckles2P_DplcFrame08": 130,
+        "S3Knuckles2P_DplcFrame09": 134,
+        "S3Knuckles2P_DplcFrame0A": 138,
+        "S3Knuckles2P_DplcFrame0B": 142,
+        "S3Knuckles2P_DplcFrame0C": 146,
+        "S3Knuckles2P_DplcFrame0D": 150,
+        "S3Knuckles2P_DplcFrame0E": 154,
+        "S3Knuckles2P_DplcFrame0F": 158,
+        "S3Knuckles2P_DplcFrame10": 162,
+        "S3Knuckles2P_DplcFrame11": 166,
+        "S3Knuckles2P_DplcFrame12": 170,
+        "S3Knuckles2P_DplcFrame13": 174,
+        "S3Knuckles2P_DplcFrame14": 178,
+        "S3Knuckles2P_DplcFrame15": 182,
+        "S3Knuckles2P_DplcFrame16": 186,
+        "S3Knuckles2P_DplcFrame17": 190,
+        "S3Knuckles2P_DplcFrame18": 194,
+        "S3Knuckles2P_DplcFrame19": 198,
+        "S3Knuckles2P_DplcFrame1A": 202,
+        "S3Knuckles2P_DplcFrame1B": 206,
+        "S3Knuckles2P_DplcFrame1C": 210,
+        "S3Knuckles2P_DplcFrame1D": 214,
+        "S3Knuckles2P_DplcFrame1E": 218,
+        "S3Knuckles2P_DplcFrame1F": 222,
+        "S3Knuckles2P_DplcFrame20": 226,
+        "S3Knuckles2P_DplcFrame21": 230,
+        "S3Knuckles2P_DplcFrame22": 234,
+        "S3Knuckles2P_DplcFrame23": 238,
+        "S3Knuckles2P_DplcFrame24": 242,
+        "S3Knuckles2P_DplcFrame25": 246,
+        "S3Knuckles2P_DplcFrame26": 250,
+        "S3Knuckles2P_DplcFrame27": 254,
+        "S3Knuckles2P_DplcFrame28": 258,
+        "S3Knuckles2P_DplcFrame29": 262,
+        "S3Knuckles2P_DplcFrame2A": 266,
+        "S3Knuckles2P_DplcFrame2B": 270,
+        "S3Knuckles2P_DplcFrame2C": 274,
+        "S3Knuckles2P_DplcFrame2D": 278,
+        "S3Knuckles2P_DplcFrame2E": 282,
+        "S3Knuckles2P_DplcFrame2F": 286,
+        "S3Knuckles2P_DplcFrame30": 290,
+        "S3Knuckles2P_DplcFrame31": 294
       },
       "external_symbols": [],
       "blocks": [
@@ -16926,350 +16926,350 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A04FC",
+          "target": "S3Knuckles2P_DplcFrame00",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A04FE",
+          "target": "S3Knuckles2P_DplcFrame01",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0502",
+          "target": "S3Knuckles2P_DplcFrame02",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0506",
+          "target": "S3Knuckles2P_DplcFrame03",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A050A",
+          "target": "S3Knuckles2P_DplcFrame04",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A050E",
+          "target": "S3Knuckles2P_DplcFrame05",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0512",
+          "target": "S3Knuckles2P_DplcFrame06",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0516",
+          "target": "S3Knuckles2P_DplcFrame07",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A051A",
+          "target": "S3Knuckles2P_DplcFrame08",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A051E",
+          "target": "S3Knuckles2P_DplcFrame09",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0522",
+          "target": "S3Knuckles2P_DplcFrame0A",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0526",
+          "target": "S3Knuckles2P_DplcFrame0B",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A052A",
+          "target": "S3Knuckles2P_DplcFrame0C",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A052E",
+          "target": "S3Knuckles2P_DplcFrame0D",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0532",
+          "target": "S3Knuckles2P_DplcFrame0E",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0536",
+          "target": "S3Knuckles2P_DplcFrame0F",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A053A",
+          "target": "S3Knuckles2P_DplcFrame10",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A053E",
+          "target": "S3Knuckles2P_DplcFrame11",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0542",
+          "target": "S3Knuckles2P_DplcFrame12",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0546",
+          "target": "S3Knuckles2P_DplcFrame13",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A054A",
+          "target": "S3Knuckles2P_DplcFrame14",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A054E",
+          "target": "S3Knuckles2P_DplcFrame15",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0552",
+          "target": "S3Knuckles2P_DplcFrame16",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0556",
+          "target": "S3Knuckles2P_DplcFrame17",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A055A",
+          "target": "S3Knuckles2P_DplcFrame18",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A055E",
+          "target": "S3Knuckles2P_DplcFrame19",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0562",
+          "target": "S3Knuckles2P_DplcFrame1A",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0566",
+          "target": "S3Knuckles2P_DplcFrame1B",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A056A",
+          "target": "S3Knuckles2P_DplcFrame1C",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A056E",
+          "target": "S3Knuckles2P_DplcFrame1D",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0572",
+          "target": "S3Knuckles2P_DplcFrame1E",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0576",
+          "target": "S3Knuckles2P_DplcFrame1F",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A057A",
+          "target": "S3Knuckles2P_DplcFrame20",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A057E",
+          "target": "S3Knuckles2P_DplcFrame21",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0582",
+          "target": "S3Knuckles2P_DplcFrame22",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0586",
+          "target": "S3Knuckles2P_DplcFrame23",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A058A",
+          "target": "S3Knuckles2P_DplcFrame24",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A058E",
+          "target": "S3Knuckles2P_DplcFrame25",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0592",
+          "target": "S3Knuckles2P_DplcFrame26",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0596",
+          "target": "S3Knuckles2P_DplcFrame27",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A059A",
+          "target": "S3Knuckles2P_DplcFrame28",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A059E",
+          "target": "S3Knuckles2P_DplcFrame29",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05A2",
+          "target": "S3Knuckles2P_DplcFrame2A",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05A6",
+          "target": "S3Knuckles2P_DplcFrame2B",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05AA",
+          "target": "S3Knuckles2P_DplcFrame2C",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05AE",
+          "target": "S3Knuckles2P_DplcFrame2D",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05B2",
+          "target": "S3Knuckles2P_DplcFrame2E",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05B6",
+          "target": "S3Knuckles2P_DplcFrame2F",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05BA",
+          "target": "S3Knuckles2P_DplcFrame30",
           "base": "PLC_Knuckles2P_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A05BE",
+          "target": "S3Knuckles2P_DplcFrame31",
           "base": "PLC_Knuckles2P_"
         },
         {
@@ -17533,259 +17533,259 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 5172
       },
-      "declarations_sha256": "8f8dfc061e5870c20831e9f68738f44247a15091ee972465f651b5f3f3b39215",
+      "declarations_sha256": "c9edfdca8a1a78e264f6f5047fe35e722c59462b6d8219d563a331c3c770400b",
       "labels": {
         "Map_Knuckles_": 0,
-        "word_14AACC": 502,
-        "word_14AACE": 504,
-        "word_14AAE8": 530,
-        "word_14AAFC": 550,
-        "word_14AB10": 570,
-        "word_14AB1E": 584,
-        "word_14AB38": 610,
-        "word_14AB52": 636,
-        "word_14AB66": 656,
-        "word_14AB80": 682,
-        "word_14AB94": 702,
-        "word_14ABA8": 722,
-        "word_14ABBC": 742,
-        "word_14ABD6": 768,
-        "word_14ABEA": 788,
-        "word_14ABF8": 802,
-        "word_14AC0C": 822,
-        "word_14AC20": 842,
-        "word_14AC3A": 868,
-        "word_14AC54": 894,
-        "word_14AC68": 914,
-        "word_14AC76": 928,
-        "word_14AC90": 954,
-        "word_14ACAA": 980,
-        "word_14ACBE": 1000,
-        "word_14ACD8": 1026,
-        "word_14ACEC": 1046,
-        "word_14AD00": 1066,
-        "word_14AD14": 1086,
-        "word_14AD28": 1106,
-        "word_14AD36": 1120,
-        "word_14AD44": 1134,
-        "word_14AD58": 1154,
-        "word_14AD6C": 1174,
-        "word_14AD7A": 1188,
-        "word_14AD88": 1202,
-        "word_14AD96": 1216,
-        "word_14ADA4": 1230,
-        "word_14ADBE": 1256,
-        "word_14ADD8": 1282,
-        "word_14ADEC": 1302,
-        "word_14AE00": 1322,
-        "word_14AE0E": 1336,
-        "word_14AE1C": 1350,
-        "word_14AE2A": 1364,
-        "word_14AE38": 1378,
-        "word_14AE52": 1404,
-        "word_14AE6C": 1430,
-        "word_14AE80": 1450,
-        "word_14AE94": 1470,
-        "word_14AEAE": 1496,
-        "word_14AEBC": 1510,
-        "word_14AED0": 1530,
-        "word_14AEE4": 1550,
-        "word_14AEF8": 1570,
-        "word_14AF0C": 1590,
-        "word_14AF1A": 1604,
-        "word_14AF2E": 1624,
-        "word_14AF3C": 1638,
-        "word_14AF4A": 1652,
-        "word_14AF5E": 1672,
-        "word_14AF6C": 1686,
-        "word_14AF7A": 1700,
-        "word_14AF8E": 1720,
-        "word_14AF9C": 1734,
-        "word_14AFB0": 1754,
-        "word_14AFBE": 1768,
-        "word_14AFD8": 1794,
-        "word_14AFE6": 1808,
-        "word_14AFEE": 1816,
-        "word_14B002": 1836,
-        "word_14B010": 1850,
-        "word_14B01E": 1864,
-        "word_14B02C": 1878,
-        "word_14B040": 1898,
-        "word_14B054": 1918,
-        "word_14B062": 1932,
-        "word_14B070": 1946,
-        "word_14B078": 1954,
-        "word_14B08C": 1974,
-        "word_14B09A": 1988,
-        "word_14B0AE": 2008,
-        "word_14B0C2": 2028,
-        "word_14B0D6": 2048,
-        "word_14B0EA": 2068,
-        "word_14B0F8": 2082,
-        "word_14B10C": 2102,
-        "word_14B11A": 2116,
-        "word_14B128": 2130,
-        "word_14B136": 2144,
-        "word_14B14A": 2164,
-        "word_14B158": 2178,
-        "word_14B166": 2192,
-        "word_14B174": 2206,
-        "word_14B182": 2220,
-        "word_14B190": 2234,
-        "word_14B19E": 2248,
-        "word_14B1A6": 2256,
-        "word_14B1AE": 2264,
-        "word_14B1C2": 2284,
-        "word_14B1D0": 2298,
-        "word_14B1DE": 2312,
-        "word_14B1EC": 2326,
-        "word_14B1FA": 2340,
-        "word_14B202": 2348,
-        "word_14B20A": 2356,
-        "word_14B21E": 2376,
-        "word_14B22C": 2390,
-        "word_14B23A": 2404,
-        "word_14B24E": 2424,
-        "word_14B25C": 2438,
-        "word_14B270": 2458,
-        "word_14B28A": 2484,
-        "word_14B298": 2498,
-        "word_14B2A0": 2506,
-        "word_14B2AE": 2520,
-        "word_14B2C2": 2540,
-        "word_14B2D0": 2554,
-        "word_14B2DE": 2568,
-        "word_14B2F2": 2588,
-        "word_14B300": 2602,
-        "word_14B314": 2622,
-        "word_14B32E": 2648,
-        "word_14B342": 2668,
-        "word_14B35C": 2694,
-        "word_14B370": 2714,
-        "word_14B38A": 2740,
-        "word_14B39E": 2760,
-        "word_14B3B8": 2786,
-        "word_14B3CC": 2806,
-        "word_14B3E6": 2832,
-        "word_14B3FA": 2852,
-        "word_14B408": 2866,
-        "word_14B422": 2892,
-        "word_14B43C": 2918,
-        "word_14B450": 2938,
-        "word_14B464": 2958,
-        "word_14B478": 2978,
-        "word_14B48C": 2998,
-        "word_14B4A0": 3018,
-        "word_14B4B4": 3038,
-        "word_14B4C8": 3058,
-        "word_14B4E2": 3084,
-        "word_14B4F6": 3104,
-        "word_14B50A": 3124,
-        "word_14B524": 3150,
-        "word_14B532": 3164,
-        "word_14B546": 3184,
-        "word_14B55A": 3204,
-        "word_14B574": 3230,
-        "word_14B58E": 3256,
-        "word_14B596": 3264,
-        "word_14B59E": 3272,
-        "word_14B5A6": 3280,
-        "word_14B5AE": 3288,
-        "word_14B5B6": 3296,
-        "word_14B5C4": 3310,
-        "word_14B5D2": 3324,
-        "word_14B5E0": 3338,
-        "word_14B5FA": 3364,
-        "word_14B614": 3390,
-        "word_14B62E": 3416,
-        "word_14B648": 3442,
-        "word_14B662": 3468,
-        "word_14B67C": 3494,
-        "word_14B696": 3520,
-        "word_14B6B0": 3546,
-        "word_14B6CA": 3572,
-        "word_14B6E4": 3598,
-        "word_14B6FE": 3624,
-        "word_14B718": 3650,
-        "word_14B732": 3676,
-        "word_14B74C": 3702,
-        "word_14B766": 3728,
-        "word_14B780": 3754,
-        "word_14B794": 3774,
-        "word_14B7A8": 3794,
-        "word_14B7BC": 3814,
-        "word_14B7CA": 3828,
-        "word_14B7DE": 3848,
-        "word_14B7EC": 3862,
-        "word_14B800": 3882,
-        "word_14B814": 3902,
-        "word_14B828": 3922,
-        "word_14B836": 3936,
-        "word_14B83E": 3944,
-        "word_14B84C": 3958,
-        "word_14B860": 3978,
-        "word_14B868": 3986,
-        "word_14B870": 3994,
-        "word_14B88A": 4020,
-        "word_14B898": 4034,
-        "word_14B8AC": 4054,
-        "word_14B8C0": 4074,
-        "word_14B8CE": 4088,
-        "word_14B8D6": 4096,
-        "word_14B8E4": 4110,
-        "word_14B8F8": 4130,
-        "word_14B906": 4144,
-        "word_14B91A": 4164,
-        "word_14B922": 4172,
-        "word_14B936": 4192,
-        "word_14B944": 4206,
-        "word_14B95E": 4232,
-        "word_14B978": 4258,
-        "word_14B992": 4284,
-        "word_14B9A6": 4304,
-        "word_14B9C0": 4330,
-        "word_14B9DA": 4356,
-        "word_14B9FA": 4388,
-        "word_14BA14": 4414,
-        "word_14BA22": 4428,
-        "word_14BA30": 4442,
-        "word_14BA3E": 4456,
-        "word_14BA4C": 4470,
-        "word_14BA5A": 4484,
-        "word_14BA68": 4498,
-        "word_14BA82": 4524,
-        "word_14BAA2": 4556,
-        "word_14BABC": 4582,
-        "word_14BAD6": 4608,
-        "word_14BAEA": 4628,
-        "word_14BAFE": 4648,
-        "word_14BB18": 4674,
-        "word_14BB2C": 4694,
-        "word_14BB40": 4714,
-        "word_14BB48": 4722,
-        "word_14BB56": 4736,
-        "word_14BB64": 4750,
-        "word_14BB7E": 4776,
-        "word_14BB8C": 4790,
-        "word_14BBA0": 4810,
-        "word_14BBB4": 4830,
-        "word_14BBCE": 4856,
-        "word_14BBE2": 4876,
-        "word_14BBF0": 4890,
-        "word_14BC04": 4910,
-        "word_14BC18": 4930,
-        "word_14BC2C": 4950,
-        "word_14BC40": 4970,
-        "word_14BC54": 4990,
-        "word_14BC62": 5004,
-        "word_14BC70": 5018,
-        "word_14BC7E": 5032,
-        "word_14BC92": 5052,
-        "word_14BCA6": 5072,
-        "word_14BCB4": 5086,
-        "word_14BCCE": 5112,
-        "word_14BCE2": 5132,
-        "word_14BCFC": 5158
+        "SKKnucklesNormal_MappingFrame00": 502,
+        "SKKnucklesNormal_MappingFrame01": 504,
+        "SKKnucklesNormal_MappingFrame02": 530,
+        "SKKnucklesNormal_MappingFrame03": 550,
+        "SKKnucklesNormal_MappingFrame04": 570,
+        "SKKnucklesNormal_MappingFrame05": 584,
+        "SKKnucklesNormal_MappingFrame06": 610,
+        "SKKnucklesNormal_MappingFrame07": 636,
+        "SKKnucklesNormal_MappingFrame08": 656,
+        "SKKnucklesNormal_MappingFrame09": 682,
+        "SKKnucklesNormal_MappingFrame0A": 702,
+        "SKKnucklesNormal_MappingFrame0B": 722,
+        "SKKnucklesNormal_MappingFrame0C": 742,
+        "SKKnucklesNormal_MappingFrame0D": 768,
+        "SKKnucklesNormal_MappingFrame0E": 788,
+        "SKKnucklesNormal_MappingFrame0F": 802,
+        "SKKnucklesNormal_MappingFrame10": 822,
+        "SKKnucklesNormal_MappingFrame11": 842,
+        "SKKnucklesNormal_MappingFrame12": 868,
+        "SKKnucklesNormal_MappingFrame13": 894,
+        "SKKnucklesNormal_MappingFrame14": 914,
+        "SKKnucklesNormal_MappingFrame15": 928,
+        "SKKnucklesNormal_MappingFrame16": 954,
+        "SKKnucklesNormal_MappingFrame17": 980,
+        "SKKnucklesNormal_MappingFrame18": 1000,
+        "SKKnucklesNormal_MappingFrame19": 1026,
+        "SKKnucklesNormal_MappingFrame1A": 1046,
+        "SKKnucklesNormal_MappingFrame1B": 1066,
+        "SKKnucklesNormal_MappingFrame1C": 1086,
+        "SKKnucklesNormal_MappingFrame1D": 1106,
+        "SKKnucklesNormal_MappingFrame1E": 1120,
+        "SKKnucklesNormal_MappingFrame1F": 1134,
+        "SKKnucklesNormal_MappingFrame20": 1154,
+        "SKKnucklesNormal_MappingFrame21": 1174,
+        "SKKnucklesNormal_MappingFrame22": 1188,
+        "SKKnucklesNormal_MappingFrame23": 1202,
+        "SKKnucklesNormal_MappingFrame24": 1216,
+        "SKKnucklesNormal_MappingFrame25": 1230,
+        "SKKnucklesNormal_MappingFrame26": 1256,
+        "SKKnucklesNormal_MappingFrame27": 1282,
+        "SKKnucklesNormal_MappingFrame28": 1302,
+        "SKKnucklesNormal_MappingFrame29": 1322,
+        "SKKnucklesNormal_MappingFrame2A": 1336,
+        "SKKnucklesNormal_MappingFrame2B": 1350,
+        "SKKnucklesNormal_MappingFrame2C": 1364,
+        "SKKnucklesNormal_MappingFrame2D": 1378,
+        "SKKnucklesNormal_MappingFrame2E": 1404,
+        "SKKnucklesNormal_MappingFrame2F": 1430,
+        "SKKnucklesNormal_MappingFrame30": 1450,
+        "SKKnucklesNormal_MappingFrame31": 1470,
+        "SKKnucklesNormal_MappingFrame32": 1496,
+        "SKKnucklesNormal_MappingFrame33": 1510,
+        "SKKnucklesNormal_MappingFrame34": 1530,
+        "SKKnucklesNormal_MappingFrame35": 1550,
+        "SKKnucklesNormal_MappingFrame36": 1570,
+        "SKKnucklesNormal_MappingFrame37": 1590,
+        "SKKnucklesNormal_MappingFrame38": 1604,
+        "SKKnucklesNormal_MappingFrame39": 1624,
+        "SKKnucklesNormal_MappingFrame3A": 1638,
+        "SKKnucklesNormal_MappingFrame3B": 1652,
+        "SKKnucklesNormal_MappingFrame3C": 1672,
+        "SKKnucklesNormal_MappingFrame3D": 1686,
+        "SKKnucklesNormal_MappingFrame3E": 1700,
+        "SKKnucklesNormal_MappingFrame3F": 1720,
+        "SKKnucklesNormal_MappingFrame40": 1734,
+        "SKKnucklesNormal_MappingFrame41": 1754,
+        "SKKnucklesNormal_MappingFrame42": 1768,
+        "SKKnucklesNormal_MappingFrame43": 1794,
+        "SKKnucklesNormal_MappingFrame44": 1808,
+        "SKKnucklesNormal_MappingFrame45": 1816,
+        "SKKnucklesNormal_MappingFrame46": 1836,
+        "SKKnucklesNormal_MappingFrame47": 1850,
+        "SKKnucklesNormal_MappingFrame48": 1864,
+        "SKKnucklesNormal_MappingFrame49": 1878,
+        "SKKnucklesNormal_MappingFrame4A": 1898,
+        "SKKnucklesNormal_MappingFrame4B": 1918,
+        "SKKnucklesNormal_MappingFrame4C": 1932,
+        "SKKnucklesNormal_MappingFrame4D": 1946,
+        "SKKnucklesNormal_MappingFrame4E": 1954,
+        "SKKnucklesNormal_MappingFrame4F": 1974,
+        "SKKnucklesNormal_MappingFrame50": 1988,
+        "SKKnucklesNormal_MappingFrame51": 2008,
+        "SKKnucklesNormal_MappingFrame52": 2028,
+        "SKKnucklesNormal_MappingFrame53": 2048,
+        "SKKnucklesNormal_MappingFrame54": 2068,
+        "SKKnucklesNormal_MappingFrame55": 2082,
+        "SKKnucklesNormal_MappingFrame56": 2102,
+        "SKKnucklesNormal_MappingFrame57": 2116,
+        "SKKnucklesNormal_MappingFrame58": 2130,
+        "SKKnucklesNormal_MappingFrame59": 2144,
+        "SKKnucklesNormal_MappingFrame5A": 2164,
+        "SKKnucklesNormal_MappingFrame5B": 2178,
+        "SKKnucklesNormal_MappingFrame5C": 2192,
+        "SKKnucklesNormal_MappingFrame5D": 2206,
+        "SKKnucklesNormal_MappingFrame5E": 2220,
+        "SKKnucklesNormal_MappingFrame5F": 2234,
+        "SKKnucklesNormal_MappingFrame60": 2248,
+        "SKKnucklesNormal_MappingFrame61": 2256,
+        "SKKnucklesNormal_MappingFrame62": 2264,
+        "SKKnucklesNormal_MappingFrame63": 2284,
+        "SKKnucklesNormal_MappingFrame64": 2298,
+        "SKKnucklesNormal_MappingFrame65": 2312,
+        "SKKnucklesNormal_MappingFrame66": 2326,
+        "SKKnucklesNormal_MappingFrame67": 2340,
+        "SKKnucklesNormal_MappingFrame68": 2348,
+        "SKKnucklesNormal_MappingFrame69": 2356,
+        "SKKnucklesNormal_MappingFrame6A": 2376,
+        "SKKnucklesNormal_MappingFrame6B": 2390,
+        "SKKnucklesNormal_MappingFrame6C": 2404,
+        "SKKnucklesNormal_MappingFrame6D": 2424,
+        "SKKnucklesNormal_MappingFrame6E": 2438,
+        "SKKnucklesNormal_MappingFrame6F": 2458,
+        "SKKnucklesNormal_MappingFrame70": 2484,
+        "SKKnucklesNormal_MappingFrame71": 2498,
+        "SKKnucklesNormal_MappingFrame72": 2506,
+        "SKKnucklesNormal_MappingFrame73": 2520,
+        "SKKnucklesNormal_MappingFrame74": 2540,
+        "SKKnucklesNormal_MappingFrame75": 2554,
+        "SKKnucklesNormal_MappingFrame76": 2568,
+        "SKKnucklesNormal_MappingFrame77": 2588,
+        "SKKnucklesNormal_MappingFrame78": 2602,
+        "SKKnucklesNormal_MappingFrame79": 2622,
+        "SKKnucklesNormal_MappingFrame7A": 2648,
+        "SKKnucklesNormal_MappingFrame7B": 2668,
+        "SKKnucklesNormal_MappingFrame7C": 2694,
+        "SKKnucklesNormal_MappingFrame7D": 2714,
+        "SKKnucklesNormal_MappingFrame7E": 2740,
+        "SKKnucklesNormal_MappingFrame7F": 2760,
+        "SKKnucklesNormal_MappingFrame80": 2786,
+        "SKKnucklesNormal_MappingFrame81": 2806,
+        "SKKnucklesNormal_MappingFrame82": 2832,
+        "SKKnucklesNormal_MappingFrame83": 2852,
+        "SKKnucklesNormal_MappingFrame84": 2866,
+        "SKKnucklesNormal_MappingFrame85": 2892,
+        "SKKnucklesNormal_MappingFrame86": 2918,
+        "SKKnucklesNormal_MappingFrame87": 2938,
+        "SKKnucklesNormal_MappingFrame88": 2958,
+        "SKKnucklesNormal_MappingFrame89": 2978,
+        "SKKnucklesNormal_MappingFrame8A": 2998,
+        "SKKnucklesNormal_MappingFrame8B": 3018,
+        "SKKnucklesNormal_MappingFrame8C": 3038,
+        "SKKnucklesNormal_MappingFrame8D": 3058,
+        "SKKnucklesNormal_MappingFrame8E": 3084,
+        "SKKnucklesNormal_MappingFrame8F": 3104,
+        "SKKnucklesNormal_MappingFrame90": 3124,
+        "SKKnucklesNormal_MappingFrame91": 3150,
+        "SKKnucklesNormal_MappingFrame92": 3164,
+        "SKKnucklesNormal_MappingFrame93": 3184,
+        "SKKnucklesNormal_MappingFrame94": 3204,
+        "SKKnucklesNormal_MappingFrame95": 3230,
+        "SKKnucklesNormal_MappingFrame96": 3256,
+        "SKKnucklesNormal_MappingFrame97": 3264,
+        "SKKnucklesNormal_MappingFrame98": 3272,
+        "SKKnucklesNormal_MappingFrame99": 3280,
+        "SKKnucklesNormal_MappingFrame9A": 3288,
+        "SKKnucklesNormal_MappingFrame9B": 3296,
+        "SKKnucklesNormal_MappingFrame9C": 3310,
+        "SKKnucklesNormal_MappingFrame9D": 3324,
+        "SKKnucklesNormal_MappingFrame9E": 3338,
+        "SKKnucklesNormal_MappingFrame9F": 3364,
+        "SKKnucklesNormal_MappingFrameA0": 3390,
+        "SKKnucklesNormal_MappingFrameA1": 3416,
+        "SKKnucklesNormal_MappingFrameA2": 3442,
+        "SKKnucklesNormal_MappingFrameA3": 3468,
+        "SKKnucklesNormal_MappingFrameA4": 3494,
+        "SKKnucklesNormal_MappingFrameA5": 3520,
+        "SKKnucklesNormal_MappingFrameA6": 3546,
+        "SKKnucklesNormal_MappingFrameA7": 3572,
+        "SKKnucklesNormal_MappingFrameA8": 3598,
+        "SKKnucklesNormal_MappingFrameA9": 3624,
+        "SKKnucklesNormal_MappingFrameAA": 3650,
+        "SKKnucklesNormal_MappingFrameAB": 3676,
+        "SKKnucklesNormal_MappingFrameAC": 3702,
+        "SKKnucklesNormal_MappingFrameAD": 3728,
+        "SKKnucklesNormal_MappingFrameAE": 3754,
+        "SKKnucklesNormal_MappingFrameAF": 3774,
+        "SKKnucklesNormal_MappingFrameB0": 3794,
+        "SKKnucklesNormal_MappingFrameB1": 3814,
+        "SKKnucklesNormal_MappingFrameB2": 3828,
+        "SKKnucklesNormal_MappingFrameB3": 3848,
+        "SKKnucklesNormal_MappingFrameB4": 3862,
+        "SKKnucklesNormal_MappingFrameB5": 3882,
+        "SKKnucklesNormal_MappingFrameB6": 3902,
+        "SKKnucklesNormal_MappingFrameB7": 3922,
+        "SKKnucklesNormal_MappingFrameB8": 3936,
+        "SKKnucklesNormal_MappingFrameB9": 3944,
+        "SKKnucklesNormal_MappingFrameBA": 3958,
+        "SKKnucklesNormal_MappingFrameBB": 3978,
+        "SKKnucklesNormal_MappingFrameBC": 3986,
+        "SKKnucklesNormal_MappingFrameBD": 3994,
+        "SKKnucklesNormal_MappingFrameBE": 4020,
+        "SKKnucklesNormal_MappingFrameBF": 4034,
+        "SKKnucklesNormal_MappingFrameC0": 4054,
+        "SKKnucklesNormal_MappingFrameC1": 4074,
+        "SKKnucklesNormal_MappingFrameC2": 4088,
+        "SKKnucklesNormal_MappingFrameC3": 4096,
+        "SKKnucklesNormal_MappingFrameC4": 4110,
+        "SKKnucklesNormal_MappingFrameC5": 4130,
+        "SKKnucklesNormal_MappingFrameC6": 4144,
+        "SKKnucklesNormal_MappingFrameC7": 4164,
+        "SKKnucklesNormal_MappingFrameC8": 4172,
+        "SKKnucklesNormal_MappingFrameC9": 4192,
+        "SKKnucklesNormal_MappingFrameCA": 4206,
+        "SKKnucklesNormal_MappingFrameCB": 4232,
+        "SKKnucklesNormal_MappingFrameCC": 4258,
+        "SKKnucklesNormal_MappingFrameCD": 4284,
+        "SKKnucklesNormal_MappingFrameCE": 4304,
+        "SKKnucklesNormal_MappingFrameCF": 4330,
+        "SKKnucklesNormal_MappingFrameD0": 4356,
+        "SKKnucklesNormal_MappingFrameD1": 4388,
+        "SKKnucklesNormal_MappingFrameD2": 4414,
+        "SKKnucklesNormal_MappingFrameD3": 4428,
+        "SKKnucklesNormal_MappingFrameD4": 4442,
+        "SKKnucklesNormal_MappingFrameD5": 4456,
+        "SKKnucklesNormal_MappingFrameD6": 4470,
+        "SKKnucklesNormal_MappingFrameD7": 4484,
+        "SKKnucklesNormal_MappingFrameD8": 4498,
+        "SKKnucklesNormal_MappingFrameD9": 4524,
+        "SKKnucklesNormal_MappingFrameDA": 4556,
+        "SKKnucklesNormal_MappingFrameDB": 4582,
+        "SKKnucklesNormal_MappingFrameDC": 4608,
+        "SKKnucklesNormal_MappingFrameDD": 4628,
+        "SKKnucklesNormal_MappingFrameDE": 4648,
+        "SKKnucklesNormal_MappingFrameDF": 4674,
+        "SKKnucklesNormal_MappingFrameE0": 4694,
+        "SKKnucklesNormal_MappingFrameE1": 4714,
+        "SKKnucklesNormal_MappingFrameE2": 4722,
+        "SKKnucklesNormal_MappingFrameE3": 4736,
+        "SKKnucklesNormal_MappingFrameE4": 4750,
+        "SKKnucklesNormal_MappingFrameE5": 4776,
+        "SKKnucklesNormal_MappingFrameE6": 4790,
+        "SKKnucklesNormal_MappingFrameE7": 4810,
+        "SKKnucklesNormal_MappingFrameE8": 4830,
+        "SKKnucklesNormal_MappingFrameE9": 4856,
+        "SKKnucklesNormal_MappingFrameEA": 4876,
+        "SKKnucklesNormal_MappingFrameEB": 4890,
+        "SKKnucklesNormal_MappingFrameEC": 4910,
+        "SKKnucklesNormal_MappingFrameED_EE": 4930,
+        "SKKnucklesNormal_MappingFrameEF": 4950,
+        "SKKnucklesNormal_MappingFrameF0": 4970,
+        "SKKnucklesNormal_MappingFrameF1": 4990,
+        "SKKnucklesNormal_MappingFrameF2": 5004,
+        "SKKnucklesNormal_MappingFrameF3": 5018,
+        "SKKnucklesNormal_MappingFrameF4": 5032,
+        "SKKnucklesNormal_MappingFrameF5": 5052,
+        "SKKnucklesNormal_MappingFrameF6": 5072,
+        "SKKnucklesNormal_MappingFrameF7": 5086,
+        "SKKnucklesNormal_MappingFrameF8": 5112,
+        "SKKnucklesNormal_MappingFrameF9": 5132,
+        "SKKnucklesNormal_MappingFrameFA": 5158
       },
       "external_symbols": [],
       "blocks": [
@@ -17793,1757 +17793,1757 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AACC",
+          "target": "SKKnucklesNormal_MappingFrame00",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AACE",
+          "target": "SKKnucklesNormal_MappingFrame01",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AAE8",
+          "target": "SKKnucklesNormal_MappingFrame02",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AAFC",
+          "target": "SKKnucklesNormal_MappingFrame03",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB10",
+          "target": "SKKnucklesNormal_MappingFrame04",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB1E",
+          "target": "SKKnucklesNormal_MappingFrame05",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB38",
+          "target": "SKKnucklesNormal_MappingFrame06",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB52",
+          "target": "SKKnucklesNormal_MappingFrame07",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB66",
+          "target": "SKKnucklesNormal_MappingFrame08",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB80",
+          "target": "SKKnucklesNormal_MappingFrame09",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AB94",
+          "target": "SKKnucklesNormal_MappingFrame0A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ABA8",
+          "target": "SKKnucklesNormal_MappingFrame0B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ABBC",
+          "target": "SKKnucklesNormal_MappingFrame0C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ABD6",
+          "target": "SKKnucklesNormal_MappingFrame0D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ABEA",
+          "target": "SKKnucklesNormal_MappingFrame0E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ABF8",
+          "target": "SKKnucklesNormal_MappingFrame0F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC0C",
+          "target": "SKKnucklesNormal_MappingFrame10",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC20",
+          "target": "SKKnucklesNormal_MappingFrame11",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC3A",
+          "target": "SKKnucklesNormal_MappingFrame12",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC54",
+          "target": "SKKnucklesNormal_MappingFrame13",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC68",
+          "target": "SKKnucklesNormal_MappingFrame14",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC76",
+          "target": "SKKnucklesNormal_MappingFrame15",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AC90",
+          "target": "SKKnucklesNormal_MappingFrame16",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ACAA",
+          "target": "SKKnucklesNormal_MappingFrame17",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ACBE",
+          "target": "SKKnucklesNormal_MappingFrame18",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ACD8",
+          "target": "SKKnucklesNormal_MappingFrame19",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ACEC",
+          "target": "SKKnucklesNormal_MappingFrame1A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD00",
+          "target": "SKKnucklesNormal_MappingFrame1B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD14",
+          "target": "SKKnucklesNormal_MappingFrame1C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD28",
+          "target": "SKKnucklesNormal_MappingFrame1D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD36",
+          "target": "SKKnucklesNormal_MappingFrame1E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD44",
+          "target": "SKKnucklesNormal_MappingFrame1F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD58",
+          "target": "SKKnucklesNormal_MappingFrame20",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD6C",
+          "target": "SKKnucklesNormal_MappingFrame21",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD7A",
+          "target": "SKKnucklesNormal_MappingFrame22",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD88",
+          "target": "SKKnucklesNormal_MappingFrame23",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AD96",
+          "target": "SKKnucklesNormal_MappingFrame24",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ADA4",
+          "target": "SKKnucklesNormal_MappingFrame25",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ADBE",
+          "target": "SKKnucklesNormal_MappingFrame26",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ADD8",
+          "target": "SKKnucklesNormal_MappingFrame27",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14ADEC",
+          "target": "SKKnucklesNormal_MappingFrame28",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE00",
+          "target": "SKKnucklesNormal_MappingFrame29",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE0E",
+          "target": "SKKnucklesNormal_MappingFrame2A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE1C",
+          "target": "SKKnucklesNormal_MappingFrame2B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE2A",
+          "target": "SKKnucklesNormal_MappingFrame2C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE38",
+          "target": "SKKnucklesNormal_MappingFrame2D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE52",
+          "target": "SKKnucklesNormal_MappingFrame2E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE6C",
+          "target": "SKKnucklesNormal_MappingFrame2F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE80",
+          "target": "SKKnucklesNormal_MappingFrame30",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AE94",
+          "target": "SKKnucklesNormal_MappingFrame31",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AEAE",
+          "target": "SKKnucklesNormal_MappingFrame32",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AEBC",
+          "target": "SKKnucklesNormal_MappingFrame33",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 104,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AED0",
+          "target": "SKKnucklesNormal_MappingFrame34",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 106,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AEE4",
+          "target": "SKKnucklesNormal_MappingFrame35",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 108,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AEF8",
+          "target": "SKKnucklesNormal_MappingFrame36",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 110,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF0C",
+          "target": "SKKnucklesNormal_MappingFrame37",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 112,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF1A",
+          "target": "SKKnucklesNormal_MappingFrame38",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 114,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF2E",
+          "target": "SKKnucklesNormal_MappingFrame39",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 116,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF3C",
+          "target": "SKKnucklesNormal_MappingFrame3A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 118,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF4A",
+          "target": "SKKnucklesNormal_MappingFrame3B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 120,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF5E",
+          "target": "SKKnucklesNormal_MappingFrame3C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 122,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF6C",
+          "target": "SKKnucklesNormal_MappingFrame3D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 124,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF7A",
+          "target": "SKKnucklesNormal_MappingFrame3E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 126,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF8E",
+          "target": "SKKnucklesNormal_MappingFrame3F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 128,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AF9C",
+          "target": "SKKnucklesNormal_MappingFrame40",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 130,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AFB0",
+          "target": "SKKnucklesNormal_MappingFrame41",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 132,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AFBE",
+          "target": "SKKnucklesNormal_MappingFrame42",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 134,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AFD8",
+          "target": "SKKnucklesNormal_MappingFrame43",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 136,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AFE6",
+          "target": "SKKnucklesNormal_MappingFrame44",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 138,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14AFEE",
+          "target": "SKKnucklesNormal_MappingFrame45",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 140,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B002",
+          "target": "SKKnucklesNormal_MappingFrame46",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 142,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B010",
+          "target": "SKKnucklesNormal_MappingFrame47",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 144,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B01E",
+          "target": "SKKnucklesNormal_MappingFrame48",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 146,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B02C",
+          "target": "SKKnucklesNormal_MappingFrame49",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 148,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B040",
+          "target": "SKKnucklesNormal_MappingFrame4A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 150,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B054",
+          "target": "SKKnucklesNormal_MappingFrame4B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 152,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B062",
+          "target": "SKKnucklesNormal_MappingFrame4C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 154,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B070",
+          "target": "SKKnucklesNormal_MappingFrame4D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 156,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B078",
+          "target": "SKKnucklesNormal_MappingFrame4E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 158,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B08C",
+          "target": "SKKnucklesNormal_MappingFrame4F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 160,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B09A",
+          "target": "SKKnucklesNormal_MappingFrame50",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 162,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B0AE",
+          "target": "SKKnucklesNormal_MappingFrame51",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 164,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B0C2",
+          "target": "SKKnucklesNormal_MappingFrame52",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 166,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B0D6",
+          "target": "SKKnucklesNormal_MappingFrame53",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 168,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B0EA",
+          "target": "SKKnucklesNormal_MappingFrame54",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 170,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B0F8",
+          "target": "SKKnucklesNormal_MappingFrame55",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 172,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B10C",
+          "target": "SKKnucklesNormal_MappingFrame56",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 174,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B11A",
+          "target": "SKKnucklesNormal_MappingFrame57",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 176,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B128",
+          "target": "SKKnucklesNormal_MappingFrame58",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 178,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B136",
+          "target": "SKKnucklesNormal_MappingFrame59",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 180,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B14A",
+          "target": "SKKnucklesNormal_MappingFrame5A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 182,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B158",
+          "target": "SKKnucklesNormal_MappingFrame5B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 184,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B166",
+          "target": "SKKnucklesNormal_MappingFrame5C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 186,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B174",
+          "target": "SKKnucklesNormal_MappingFrame5D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 188,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B182",
+          "target": "SKKnucklesNormal_MappingFrame5E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 190,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B190",
+          "target": "SKKnucklesNormal_MappingFrame5F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 192,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B19E",
+          "target": "SKKnucklesNormal_MappingFrame60",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 194,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1A6",
+          "target": "SKKnucklesNormal_MappingFrame61",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 196,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1AE",
+          "target": "SKKnucklesNormal_MappingFrame62",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 198,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1C2",
+          "target": "SKKnucklesNormal_MappingFrame63",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 200,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1D0",
+          "target": "SKKnucklesNormal_MappingFrame64",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 202,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1DE",
+          "target": "SKKnucklesNormal_MappingFrame65",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 204,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1EC",
+          "target": "SKKnucklesNormal_MappingFrame66",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 206,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B1FA",
+          "target": "SKKnucklesNormal_MappingFrame67",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 208,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B202",
+          "target": "SKKnucklesNormal_MappingFrame68",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 210,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B20A",
+          "target": "SKKnucklesNormal_MappingFrame69",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 212,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B21E",
+          "target": "SKKnucklesNormal_MappingFrame6A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 214,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B22C",
+          "target": "SKKnucklesNormal_MappingFrame6B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 216,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B23A",
+          "target": "SKKnucklesNormal_MappingFrame6C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 218,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B24E",
+          "target": "SKKnucklesNormal_MappingFrame6D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 220,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B25C",
+          "target": "SKKnucklesNormal_MappingFrame6E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 222,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B270",
+          "target": "SKKnucklesNormal_MappingFrame6F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 224,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B28A",
+          "target": "SKKnucklesNormal_MappingFrame70",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 226,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B298",
+          "target": "SKKnucklesNormal_MappingFrame71",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 228,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2A0",
+          "target": "SKKnucklesNormal_MappingFrame72",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 230,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2AE",
+          "target": "SKKnucklesNormal_MappingFrame73",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 232,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2C2",
+          "target": "SKKnucklesNormal_MappingFrame74",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 234,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2D0",
+          "target": "SKKnucklesNormal_MappingFrame75",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 236,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2DE",
+          "target": "SKKnucklesNormal_MappingFrame76",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 238,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B2F2",
+          "target": "SKKnucklesNormal_MappingFrame77",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 240,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B300",
+          "target": "SKKnucklesNormal_MappingFrame78",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 242,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B314",
+          "target": "SKKnucklesNormal_MappingFrame79",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 244,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B32E",
+          "target": "SKKnucklesNormal_MappingFrame7A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 246,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B342",
+          "target": "SKKnucklesNormal_MappingFrame7B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 248,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B35C",
+          "target": "SKKnucklesNormal_MappingFrame7C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 250,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B370",
+          "target": "SKKnucklesNormal_MappingFrame7D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 252,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B38A",
+          "target": "SKKnucklesNormal_MappingFrame7E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 254,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B39E",
+          "target": "SKKnucklesNormal_MappingFrame7F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 256,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B3B8",
+          "target": "SKKnucklesNormal_MappingFrame80",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 258,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B3CC",
+          "target": "SKKnucklesNormal_MappingFrame81",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 260,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B3E6",
+          "target": "SKKnucklesNormal_MappingFrame82",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 262,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B3FA",
+          "target": "SKKnucklesNormal_MappingFrame83",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 264,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B408",
+          "target": "SKKnucklesNormal_MappingFrame84",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 266,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B422",
+          "target": "SKKnucklesNormal_MappingFrame85",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 268,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B43C",
+          "target": "SKKnucklesNormal_MappingFrame86",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 270,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B450",
+          "target": "SKKnucklesNormal_MappingFrame87",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 272,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B464",
+          "target": "SKKnucklesNormal_MappingFrame88",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 274,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B478",
+          "target": "SKKnucklesNormal_MappingFrame89",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 276,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B48C",
+          "target": "SKKnucklesNormal_MappingFrame8A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 278,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B4A0",
+          "target": "SKKnucklesNormal_MappingFrame8B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 280,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B4B4",
+          "target": "SKKnucklesNormal_MappingFrame8C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 282,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B4C8",
+          "target": "SKKnucklesNormal_MappingFrame8D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 284,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B4E2",
+          "target": "SKKnucklesNormal_MappingFrame8E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 286,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B4F6",
+          "target": "SKKnucklesNormal_MappingFrame8F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 288,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B50A",
+          "target": "SKKnucklesNormal_MappingFrame90",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 290,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B524",
+          "target": "SKKnucklesNormal_MappingFrame91",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 292,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B532",
+          "target": "SKKnucklesNormal_MappingFrame92",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 294,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B546",
+          "target": "SKKnucklesNormal_MappingFrame93",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 296,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B55A",
+          "target": "SKKnucklesNormal_MappingFrame94",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 298,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B574",
+          "target": "SKKnucklesNormal_MappingFrame95",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 300,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B58E",
+          "target": "SKKnucklesNormal_MappingFrame96",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 302,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B596",
+          "target": "SKKnucklesNormal_MappingFrame97",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 304,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B59E",
+          "target": "SKKnucklesNormal_MappingFrame98",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 306,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5A6",
+          "target": "SKKnucklesNormal_MappingFrame99",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 308,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5AE",
+          "target": "SKKnucklesNormal_MappingFrame9A",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 310,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5B6",
+          "target": "SKKnucklesNormal_MappingFrame9B",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 312,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5C4",
+          "target": "SKKnucklesNormal_MappingFrame9C",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 314,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5D2",
+          "target": "SKKnucklesNormal_MappingFrame9D",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 316,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5E0",
+          "target": "SKKnucklesNormal_MappingFrame9E",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 318,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B5FA",
+          "target": "SKKnucklesNormal_MappingFrame9F",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 320,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B614",
+          "target": "SKKnucklesNormal_MappingFrameA0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 322,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B62E",
+          "target": "SKKnucklesNormal_MappingFrameA1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 324,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B648",
+          "target": "SKKnucklesNormal_MappingFrameA2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 326,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B662",
+          "target": "SKKnucklesNormal_MappingFrameA3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 328,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B67C",
+          "target": "SKKnucklesNormal_MappingFrameA4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 330,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B696",
+          "target": "SKKnucklesNormal_MappingFrameA5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 332,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B6B0",
+          "target": "SKKnucklesNormal_MappingFrameA6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 334,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B6CA",
+          "target": "SKKnucklesNormal_MappingFrameA7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 336,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B6E4",
+          "target": "SKKnucklesNormal_MappingFrameA8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 338,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B6FE",
+          "target": "SKKnucklesNormal_MappingFrameA9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 340,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B718",
+          "target": "SKKnucklesNormal_MappingFrameAA",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 342,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B732",
+          "target": "SKKnucklesNormal_MappingFrameAB",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 344,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B74C",
+          "target": "SKKnucklesNormal_MappingFrameAC",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 346,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B766",
+          "target": "SKKnucklesNormal_MappingFrameAD",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 348,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B780",
+          "target": "SKKnucklesNormal_MappingFrameAE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 350,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B794",
+          "target": "SKKnucklesNormal_MappingFrameAF",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 352,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B7A8",
+          "target": "SKKnucklesNormal_MappingFrameB0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 354,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B7BC",
+          "target": "SKKnucklesNormal_MappingFrameB1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 356,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B7CA",
+          "target": "SKKnucklesNormal_MappingFrameB2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 358,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B7DE",
+          "target": "SKKnucklesNormal_MappingFrameB3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 360,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B7EC",
+          "target": "SKKnucklesNormal_MappingFrameB4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 362,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B800",
+          "target": "SKKnucklesNormal_MappingFrameB5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 364,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B814",
+          "target": "SKKnucklesNormal_MappingFrameB6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 366,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B828",
+          "target": "SKKnucklesNormal_MappingFrameB7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 368,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B836",
+          "target": "SKKnucklesNormal_MappingFrameB8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 370,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B83E",
+          "target": "SKKnucklesNormal_MappingFrameB9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 372,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B84C",
+          "target": "SKKnucklesNormal_MappingFrameBA",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 374,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B860",
+          "target": "SKKnucklesNormal_MappingFrameBB",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 376,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B868",
+          "target": "SKKnucklesNormal_MappingFrameBC",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 378,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B870",
+          "target": "SKKnucklesNormal_MappingFrameBD",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 380,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B88A",
+          "target": "SKKnucklesNormal_MappingFrameBE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 382,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B898",
+          "target": "SKKnucklesNormal_MappingFrameBF",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 384,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8AC",
+          "target": "SKKnucklesNormal_MappingFrameC0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 386,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8C0",
+          "target": "SKKnucklesNormal_MappingFrameC1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 388,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8CE",
+          "target": "SKKnucklesNormal_MappingFrameC2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 390,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8D6",
+          "target": "SKKnucklesNormal_MappingFrameC3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 392,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8E4",
+          "target": "SKKnucklesNormal_MappingFrameC4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 394,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B8F8",
+          "target": "SKKnucklesNormal_MappingFrameC5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 396,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B906",
+          "target": "SKKnucklesNormal_MappingFrameC6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 398,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B91A",
+          "target": "SKKnucklesNormal_MappingFrameC7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 400,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B922",
+          "target": "SKKnucklesNormal_MappingFrameC8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 402,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B936",
+          "target": "SKKnucklesNormal_MappingFrameC9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 404,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B944",
+          "target": "SKKnucklesNormal_MappingFrameCA",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 406,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B95E",
+          "target": "SKKnucklesNormal_MappingFrameCB",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 408,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B978",
+          "target": "SKKnucklesNormal_MappingFrameCC",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 410,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B992",
+          "target": "SKKnucklesNormal_MappingFrameCD",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 412,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B9A6",
+          "target": "SKKnucklesNormal_MappingFrameCE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 414,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B9C0",
+          "target": "SKKnucklesNormal_MappingFrameCF",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 416,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B9DA",
+          "target": "SKKnucklesNormal_MappingFrameD0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 418,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14B9FA",
+          "target": "SKKnucklesNormal_MappingFrameD1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 420,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA14",
+          "target": "SKKnucklesNormal_MappingFrameD2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 422,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA22",
+          "target": "SKKnucklesNormal_MappingFrameD3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 424,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA30",
+          "target": "SKKnucklesNormal_MappingFrameD4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 426,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA3E",
+          "target": "SKKnucklesNormal_MappingFrameD5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 428,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA4C",
+          "target": "SKKnucklesNormal_MappingFrameD6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 430,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA5A",
+          "target": "SKKnucklesNormal_MappingFrameD7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 432,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA68",
+          "target": "SKKnucklesNormal_MappingFrameD8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 434,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BA82",
+          "target": "SKKnucklesNormal_MappingFrameD9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BAA2",
+          "target": "SKKnucklesNormal_MappingFrameDA",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BABC",
+          "target": "SKKnucklesNormal_MappingFrameDB",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BAD6",
+          "target": "SKKnucklesNormal_MappingFrameDC",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BAEA",
+          "target": "SKKnucklesNormal_MappingFrameDD",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BAFE",
+          "target": "SKKnucklesNormal_MappingFrameDE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB18",
+          "target": "SKKnucklesNormal_MappingFrameDF",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 448,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB2C",
+          "target": "SKKnucklesNormal_MappingFrameE0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 450,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB40",
+          "target": "SKKnucklesNormal_MappingFrameE1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 452,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB48",
+          "target": "SKKnucklesNormal_MappingFrameE2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 454,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB56",
+          "target": "SKKnucklesNormal_MappingFrameE3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 456,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB64",
+          "target": "SKKnucklesNormal_MappingFrameE4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 458,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB7E",
+          "target": "SKKnucklesNormal_MappingFrameE5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 460,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BB8C",
+          "target": "SKKnucklesNormal_MappingFrameE6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 462,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BBA0",
+          "target": "SKKnucklesNormal_MappingFrameE7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 464,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BBB4",
+          "target": "SKKnucklesNormal_MappingFrameE8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 466,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BBCE",
+          "target": "SKKnucklesNormal_MappingFrameE9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 468,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BBE2",
+          "target": "SKKnucklesNormal_MappingFrameEA",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 470,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BBF0",
+          "target": "SKKnucklesNormal_MappingFrameEB",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 472,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC04",
+          "target": "SKKnucklesNormal_MappingFrameEC",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 474,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC18",
+          "target": "SKKnucklesNormal_MappingFrameED_EE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 476,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC18",
+          "target": "SKKnucklesNormal_MappingFrameED_EE",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 478,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC2C",
+          "target": "SKKnucklesNormal_MappingFrameEF",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 480,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC40",
+          "target": "SKKnucklesNormal_MappingFrameF0",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 482,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC54",
+          "target": "SKKnucklesNormal_MappingFrameF1",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 484,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC62",
+          "target": "SKKnucklesNormal_MappingFrameF2",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 486,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC70",
+          "target": "SKKnucklesNormal_MappingFrameF3",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 488,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC7E",
+          "target": "SKKnucklesNormal_MappingFrameF4",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 490,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BC92",
+          "target": "SKKnucklesNormal_MappingFrameF5",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 492,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BCA6",
+          "target": "SKKnucklesNormal_MappingFrameF6",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 494,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BCB4",
+          "target": "SKKnucklesNormal_MappingFrameF7",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 496,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BCCE",
+          "target": "SKKnucklesNormal_MappingFrameF8",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 498,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BCE2",
+          "target": "SKKnucklesNormal_MappingFrameF9",
           "base": "Map_Knuckles_"
         },
         {
           "offset": 500,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_14BCFC",
+          "target": "SKKnucklesNormal_MappingFrameFA",
           "base": "Map_Knuckles_"
         },
         {
@@ -20807,59 +20807,59 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 494
       },
-      "declarations_sha256": "c028dbee5d4ef45edf4158073bb2dc02ce81a64faaaf15694ccd02673006d438",
+      "declarations_sha256": "5e1520385f9145d6fbe330eb394fede77e831edef24d6e4b9dc2af9ec2a44133",
       "labels": {
         "Map_Knuckles2P_": 0,
-        "Frame_2A030E": 100,
-        "Frame_2A0310": 102,
-        "Frame_2A0318": 110,
-        "Frame_2A0320": 118,
-        "Frame_2A0328": 126,
-        "Frame_2A0330": 134,
-        "Frame_2A0338": 142,
-        "Frame_2A0340": 150,
-        "Frame_2A0348": 158,
-        "Frame_2A0350": 166,
-        "Frame_2A0358": 174,
-        "Frame_2A0360": 182,
-        "Frame_2A0368": 190,
-        "Frame_2A0370": 198,
-        "Frame_2A0378": 206,
-        "Frame_2A0380": 214,
-        "Frame_2A0388": 222,
-        "Frame_2A0390": 230,
-        "Frame_2A0398": 238,
-        "Frame_2A03A0": 246,
-        "Frame_2A03A8": 254,
-        "Frame_2A03B0": 262,
-        "Frame_2A03B8": 270,
-        "Frame_2A03C0": 278,
-        "Frame_2A03C8": 286,
-        "Frame_2A03D0": 294,
-        "Frame_2A03D8": 302,
-        "Frame_2A03E0": 310,
-        "Frame_2A03E8": 318,
-        "Frame_2A03F0": 326,
-        "Frame_2A03F8": 334,
-        "Frame_2A0400": 342,
-        "Frame_2A0408": 350,
-        "Frame_2A0410": 358,
-        "Frame_2A0418": 366,
-        "Frame_2A0420": 374,
-        "Frame_2A0428": 382,
-        "Frame_2A0430": 390,
-        "Frame_2A0438": 398,
-        "Frame_2A0440": 406,
-        "Frame_2A0448": 414,
-        "Frame_2A0450": 422,
-        "Frame_2A0458": 430,
-        "Frame_2A0460": 438,
-        "Frame_2A0468": 446,
-        "Frame_2A0470": 454,
-        "Frame_2A0478": 462,
-        "Frame_2A0480": 470,
-        "Frame_2A0488": 478,
-        "Frame_2A0490": 486
+        "S3Knuckles2P_MappingFrame00": 100,
+        "S3Knuckles2P_MappingFrame01": 102,
+        "S3Knuckles2P_MappingFrame02": 110,
+        "S3Knuckles2P_MappingFrame03": 118,
+        "S3Knuckles2P_MappingFrame04": 126,
+        "S3Knuckles2P_MappingFrame05": 134,
+        "S3Knuckles2P_MappingFrame06": 142,
+        "S3Knuckles2P_MappingFrame07": 150,
+        "S3Knuckles2P_MappingFrame08": 158,
+        "S3Knuckles2P_MappingFrame09": 166,
+        "S3Knuckles2P_MappingFrame0A": 174,
+        "S3Knuckles2P_MappingFrame0B": 182,
+        "S3Knuckles2P_MappingFrame0C": 190,
+        "S3Knuckles2P_MappingFrame0D": 198,
+        "S3Knuckles2P_MappingFrame0E": 206,
+        "S3Knuckles2P_MappingFrame0F": 214,
+        "S3Knuckles2P_MappingFrame10": 222,
+        "S3Knuckles2P_MappingFrame11": 230,
+        "S3Knuckles2P_MappingFrame12": 238,
+        "S3Knuckles2P_MappingFrame13": 246,
+        "S3Knuckles2P_MappingFrame14": 254,
+        "S3Knuckles2P_MappingFrame15": 262,
+        "S3Knuckles2P_MappingFrame16": 270,
+        "S3Knuckles2P_MappingFrame17": 278,
+        "S3Knuckles2P_MappingFrame18": 286,
+        "S3Knuckles2P_MappingFrame19": 294,
+        "S3Knuckles2P_MappingFrame1A": 302,
+        "S3Knuckles2P_MappingFrame1B": 310,
+        "S3Knuckles2P_MappingFrame1C": 318,
+        "S3Knuckles2P_MappingFrame1D": 326,
+        "S3Knuckles2P_MappingFrame1E": 334,
+        "S3Knuckles2P_MappingFrame1F": 342,
+        "S3Knuckles2P_MappingFrame20": 350,
+        "S3Knuckles2P_MappingFrame21": 358,
+        "S3Knuckles2P_MappingFrame22": 366,
+        "S3Knuckles2P_MappingFrame23": 374,
+        "S3Knuckles2P_MappingFrame24": 382,
+        "S3Knuckles2P_MappingFrame25": 390,
+        "S3Knuckles2P_MappingFrame26": 398,
+        "S3Knuckles2P_MappingFrame27": 406,
+        "S3Knuckles2P_MappingFrame28": 414,
+        "S3Knuckles2P_MappingFrame29": 422,
+        "S3Knuckles2P_MappingFrame2A": 430,
+        "S3Knuckles2P_MappingFrame2B": 438,
+        "S3Knuckles2P_MappingFrame2C": 446,
+        "S3Knuckles2P_MappingFrame2D": 454,
+        "S3Knuckles2P_MappingFrame2E": 462,
+        "S3Knuckles2P_MappingFrame2F": 470,
+        "S3Knuckles2P_MappingFrame30": 478,
+        "S3Knuckles2P_MappingFrame31": 486
       },
       "external_symbols": [],
       "blocks": [
@@ -20867,350 +20867,350 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A030E",
+          "target": "S3Knuckles2P_MappingFrame00",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0310",
+          "target": "S3Knuckles2P_MappingFrame01",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0318",
+          "target": "S3Knuckles2P_MappingFrame02",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0320",
+          "target": "S3Knuckles2P_MappingFrame03",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0328",
+          "target": "S3Knuckles2P_MappingFrame04",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0330",
+          "target": "S3Knuckles2P_MappingFrame05",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0338",
+          "target": "S3Knuckles2P_MappingFrame06",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0340",
+          "target": "S3Knuckles2P_MappingFrame07",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0348",
+          "target": "S3Knuckles2P_MappingFrame08",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0350",
+          "target": "S3Knuckles2P_MappingFrame09",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0358",
+          "target": "S3Knuckles2P_MappingFrame0A",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0360",
+          "target": "S3Knuckles2P_MappingFrame0B",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0368",
+          "target": "S3Knuckles2P_MappingFrame0C",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0370",
+          "target": "S3Knuckles2P_MappingFrame0D",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0378",
+          "target": "S3Knuckles2P_MappingFrame0E",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0380",
+          "target": "S3Knuckles2P_MappingFrame0F",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0388",
+          "target": "S3Knuckles2P_MappingFrame10",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0390",
+          "target": "S3Knuckles2P_MappingFrame11",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0398",
+          "target": "S3Knuckles2P_MappingFrame12",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03A0",
+          "target": "S3Knuckles2P_MappingFrame13",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03A8",
+          "target": "S3Knuckles2P_MappingFrame14",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03B0",
+          "target": "S3Knuckles2P_MappingFrame15",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03B8",
+          "target": "S3Knuckles2P_MappingFrame16",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03C0",
+          "target": "S3Knuckles2P_MappingFrame17",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03C8",
+          "target": "S3Knuckles2P_MappingFrame18",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03D0",
+          "target": "S3Knuckles2P_MappingFrame19",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03D8",
+          "target": "S3Knuckles2P_MappingFrame1A",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03E0",
+          "target": "S3Knuckles2P_MappingFrame1B",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03E8",
+          "target": "S3Knuckles2P_MappingFrame1C",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03F0",
+          "target": "S3Knuckles2P_MappingFrame1D",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A03F8",
+          "target": "S3Knuckles2P_MappingFrame1E",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0400",
+          "target": "S3Knuckles2P_MappingFrame1F",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0408",
+          "target": "S3Knuckles2P_MappingFrame20",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0410",
+          "target": "S3Knuckles2P_MappingFrame21",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0418",
+          "target": "S3Knuckles2P_MappingFrame22",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0420",
+          "target": "S3Knuckles2P_MappingFrame23",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0428",
+          "target": "S3Knuckles2P_MappingFrame24",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0430",
+          "target": "S3Knuckles2P_MappingFrame25",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0438",
+          "target": "S3Knuckles2P_MappingFrame26",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0440",
+          "target": "S3Knuckles2P_MappingFrame27",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0448",
+          "target": "S3Knuckles2P_MappingFrame28",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0450",
+          "target": "S3Knuckles2P_MappingFrame29",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0458",
+          "target": "S3Knuckles2P_MappingFrame2A",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0460",
+          "target": "S3Knuckles2P_MappingFrame2B",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0468",
+          "target": "S3Knuckles2P_MappingFrame2C",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0470",
+          "target": "S3Knuckles2P_MappingFrame2D",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0478",
+          "target": "S3Knuckles2P_MappingFrame2E",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0480",
+          "target": "S3Knuckles2P_MappingFrame2F",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0488",
+          "target": "S3Knuckles2P_MappingFrame30",
           "base": "Map_Knuckles2P_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2A0490",
+          "target": "S3Knuckles2P_MappingFrame31",
           "base": "Map_Knuckles2P_"
         },
         {
@@ -21474,34 +21474,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 302
       },
-      "declarations_sha256": "2f12bc365f7f175beec2e93b5dd8f69bb6a900c7324daa5f4c4fd9b616e7d8e5",
+      "declarations_sha256": "8465062bec14dadb7d4ef66b1db2bd5b26947c5fa09b75fed54402a435b9173b",
       "labels": {
         "Map_SStageKnuckles_": 0,
         "PLC_SStageKnuckles": 24,
         "PLC_SStageKnuckles_": 24,
-        "word_AD332": 48,
-        "word_AD334": 50,
-        "word_AD348": 70,
-        "word_AD35C": 90,
-        "word_AD370": 110,
-        "word_AD37E": 124,
-        "word_AD392": 144,
-        "word_AD3A6": 164,
-        "word_AD3BA": 184,
-        "word_AD3CE": 204,
-        "word_AD3D6": 212,
-        "word_AD3DE": 220,
-        "word_AD3E6": 228,
-        "word_AD3EE": 236,
-        "word_AD3F6": 244,
-        "word_AD3FE": 252,
-        "word_AD404": 258,
-        "word_AD40C": 266,
-        "word_AD414": 274,
-        "word_AD41C": 282,
-        "word_AD424": 290,
-        "word_AD428": 294,
-        "word_AD42C": 298
+        "SpecialStageKnuckles_EmptyMappingAndDplcFrame00": 48,
+        "SpecialStageKnuckles_MappingFrame05": 50,
+        "SpecialStageKnuckles_MappingFrame04": 70,
+        "SpecialStageKnuckles_MappingFrame03": 90,
+        "SpecialStageKnuckles_MappingFrame02": 110,
+        "SpecialStageKnuckles_MappingFrame06": 124,
+        "SpecialStageKnuckles_MappingFrame07": 144,
+        "SpecialStageKnuckles_MappingFrame08": 164,
+        "SpecialStageKnuckles_MappingFrame01": 184,
+        "SpecialStageKnuckles_MappingFrame09": 204,
+        "SpecialStageKnuckles_MappingFrame0A": 212,
+        "SpecialStageKnuckles_MappingFrame0B": 220,
+        "SpecialStageKnuckles_DplcFrame05": 228,
+        "SpecialStageKnuckles_DplcFrame04": 236,
+        "SpecialStageKnuckles_DplcFrame03": 244,
+        "SpecialStageKnuckles_DplcFrame02": 252,
+        "SpecialStageKnuckles_DplcFrame06": 258,
+        "SpecialStageKnuckles_DplcFrame07": 266,
+        "SpecialStageKnuckles_DplcFrame08": 274,
+        "SpecialStageKnuckles_DplcFrame01": 282,
+        "SpecialStageKnuckles_DplcFrame09": 290,
+        "SpecialStageKnuckles_DplcFrame0A": 294,
+        "SpecialStageKnuckles_DplcFrame0B": 298
       },
       "external_symbols": [],
       "blocks": [
@@ -21509,168 +21509,168 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD332",
+          "target": "SpecialStageKnuckles_EmptyMappingAndDplcFrame00",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3BA",
+          "target": "SpecialStageKnuckles_MappingFrame01",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD370",
+          "target": "SpecialStageKnuckles_MappingFrame02",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD35C",
+          "target": "SpecialStageKnuckles_MappingFrame03",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD348",
+          "target": "SpecialStageKnuckles_MappingFrame04",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD334",
+          "target": "SpecialStageKnuckles_MappingFrame05",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD37E",
+          "target": "SpecialStageKnuckles_MappingFrame06",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD392",
+          "target": "SpecialStageKnuckles_MappingFrame07",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3A6",
+          "target": "SpecialStageKnuckles_MappingFrame08",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3CE",
+          "target": "SpecialStageKnuckles_MappingFrame09",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3D6",
+          "target": "SpecialStageKnuckles_MappingFrame0A",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3DE",
+          "target": "SpecialStageKnuckles_MappingFrame0B",
           "base": "Map_SStageKnuckles_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD332",
+          "target": "SpecialStageKnuckles_EmptyMappingAndDplcFrame00",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD41C",
+          "target": "SpecialStageKnuckles_DplcFrame01",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3FE",
+          "target": "SpecialStageKnuckles_DplcFrame02",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3F6",
+          "target": "SpecialStageKnuckles_DplcFrame03",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3EE",
+          "target": "SpecialStageKnuckles_DplcFrame04",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD3E6",
+          "target": "SpecialStageKnuckles_DplcFrame05",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD404",
+          "target": "SpecialStageKnuckles_DplcFrame06",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD40C",
+          "target": "SpecialStageKnuckles_DplcFrame07",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD414",
+          "target": "SpecialStageKnuckles_DplcFrame08",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD424",
+          "target": "SpecialStageKnuckles_DplcFrame09",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD428",
+          "target": "SpecialStageKnuckles_DplcFrame0A",
           "base": "PLC_SStageKnuckles_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_AD42C",
+          "target": "SpecialStageKnuckles_DplcFrame0B",
           "base": "PLC_SStageKnuckles_"
         },
         {

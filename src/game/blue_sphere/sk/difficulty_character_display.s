@@ -125,7 +125,7 @@ loc_4E2F0:
                 beq.s   loc_4E310
                 move.b  d0,$30(a0)
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
-                jsr     (loc_18122).l
+                jsr     (KnucklesQueueFramePatternsAtVRAMBase).l
 
 loc_4E310:
                 jmp     (Draw_Sprite).l

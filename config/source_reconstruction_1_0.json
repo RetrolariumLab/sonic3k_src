@@ -855,9 +855,15 @@
       "commits": ["fc2b2d76e9250e22363b8feda6580a15994b2416"]
     },
     {
-      "id": "current-semantic-07-player-tails",
+      "id": "change-3ddda56a5657",
       "kind": "source_or_tooling",
       "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 07-player-tails; retain exact reversible source proof and original ROM bytes.",
+      "commits": ["3ddda56a5657bf8d99877fe028fa7b8aa2546541"]
+    },
+    {
+      "id": "current-semantic-08-player-knuckles",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 08-player-knuckles; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],

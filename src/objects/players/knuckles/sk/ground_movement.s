@@ -9,32 +9,32 @@ Knux_InputAcceleration_Path:
                 move.w  Acceleration-Max_speed(a4),d5
                 move.w  Deceleration-Max_speed(a4),d4
                 tst.b   status_secondary(a0)
-                bmi.w   loc_17364
+                bmi.w   SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity
                 tst.w   move_lock(a0)
-                bne.w   loc_1731C
+                bne.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
                 btst    #button_left,(Ctrl_1_held_logical).w
-                beq.s   loc_17168
+                beq.s   SKKnucklesGround_ApplyRightGroundInputAfterLeftInput
                 bsr.w   KnucklesSKApplyGroundLeftInput
 
-loc_17168:
+SKKnucklesGround_ApplyRightGroundInputAfterLeftInput:
                 btst    #button_right,(Ctrl_1_held_logical).w
-                beq.s   loc_17174
+                beq.s   SKKnucklesGround_GateStationaryBalanceAndTwoPixelObjectEdges
                 bsr.w   KnucklesSKApplyGroundRightInput
 
-loc_17174:
+SKKnucklesGround_GateStationaryBalanceAndTwoPixelObjectEdges:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.w   loc_1731C
+                bne.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
                 tst.w   ground_vel(a0)
-                bne.w   loc_1731C
+                bne.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
                 bclr    #Status_Push,status(a0)
                 move.b  #5,anim(a0)
                 btst    #Status_OnObj,status(a0)
-                beq.w   loc_1722C
+                beq.w   SKKnucklesGround_ProbeTerrainBalanceAndPreferForwardTiltThree
                 movea.w interact(a0),a1
                 tst.b   status(a1)
-                bmi.w   loc_172A8
+                bmi.w   SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp
                 moveq   #0,d1
                 move.b  width_pixels(a1),d1
                 move.w  d1,d2
@@ -43,168 +43,168 @@ loc_17174:
                 add.w   x_pos(a0),d1
                 sub.w   x_pos(a1),d1
                 cmpi.w  #2,d1
-                blt.s   loc_171FE
+                blt.s   SKKnucklesGround_ChooseObjectLeftBalanceFromExistingFacing
                 cmp.w   d2,d1
-                bge.s   loc_171D0
-                bra.w   loc_172A8
+                bge.s   SKKnucklesGround_ChooseObjectRightBalanceFromExistingFacing
+                bra.w   SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp
 ; ---------------------------------------------------------------------------
 
-loc_171D0:
+SKKnucklesGround_ChooseObjectRightBalanceFromExistingFacing:
                 btst    #Status_Facing,status(a0)
-                bne.s   loc_171E2
+                bne.s   SKKnucklesGround_TurnRightAndResumeObjectBalanceAtFrameFour
                 move.b  #6,anim(a0)
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_171E2:
+SKKnucklesGround_TurnRightAndResumeObjectBalanceAtFrameFour:
                 bclr    #Status_Facing,status(a0)
                 move.b  #0,anim_frame_timer(a0)
                 move.b  #4,anim_frame(a0)
                 move.w  #(6<<8)|6,anim(a0)              ; and prev_anim
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_171FE:
+SKKnucklesGround_ChooseObjectLeftBalanceFromExistingFacing:
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_17210
+                beq.s   SKKnucklesGround_TurnLeftAndResumeObjectBalanceAtFrameFour
                 move.b  #6,anim(a0)
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_17210:
+SKKnucklesGround_TurnLeftAndResumeObjectBalanceAtFrameFour:
                 bset    #Status_Facing,status(a0)
                 move.b  #0,anim_frame_timer(a0)
                 move.b  #4,anim_frame(a0)
                 move.w  #(6<<8)|6,anim(a0)              ; and prev_anim
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_1722C:
+SKKnucklesGround_ProbeTerrainBalanceAndPreferForwardTiltThree:
                 move.w  x_pos(a0),d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.w   loc_172A8
+                blt.w   SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   loc_17272
+                bne.s   SKKnucklesGround_RequireRearTiltThreeForTerrainLeftBalance
                 btst    #Status_Facing,status(a0)
-                bne.s   loc_17256
+                bne.s   SKKnucklesGround_TurnRightAndResumeTerrainBalanceAtFrameFour
                 move.b  #6,anim(a0)
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_17256:
+SKKnucklesGround_TurnRightAndResumeTerrainBalanceAtFrameFour:
                 bclr    #Status_Facing,status(a0)
                 move.b  #0,anim_frame_timer(a0)
                 move.b  #4,anim_frame(a0)
                 move.w  #(6<<8)|6,anim(a0)              ; and prev_anim
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_17272:
+SKKnucklesGround_RequireRearTiltThreeForTerrainLeftBalance:
                 cmpi.b  #3,tilt(a0)
-                bne.s   loc_172A8
+                bne.s   SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_1728C
+                beq.s   SKKnucklesGround_TurnLeftAndResumeTerrainBalanceAtFrameFour
                 move.b  #6,anim(a0)
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_1728C:
+SKKnucklesGround_TurnLeftAndResumeTerrainBalanceAtFrameFour:
                 bset    #Status_Facing,status(a0)
                 move.b  #0,anim_frame_timer(a0)
                 move.b  #4,anim_frame(a0)
                 move.w  #(6<<8)|6,anim(a0)              ; and prev_anim
-                bra.w   loc_1731C
+                bra.w   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_172A8:
+SKKnucklesGround_PrioritizeDelayedDuckCameraOverLookUp:
                 btst    #button_down,(Ctrl_1_held_logical).w
-                beq.s   loc_172E2
+                beq.s   SKKnucklesGround_CheckDelayedLookUpOnlyWithoutDown
                 move.b  #8,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #2*60,scroll_delay_counter(a0)
-                blo.s   loc_17322
+                blo.s   SKKnucklesGround_RecoverCameraTargetTowardSixtyWithUnsignedComparison
                 move.b  #2*60,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_172D8
+                bne.s   SKKnucklesGround_RaiseReverseGravityDuckCameraTargetTowardD8
                 cmpi.w  #8,(a5)
-                beq.s   loc_1732E
+                beq.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
                 subq.w  #2,(a5)
-                bra.s   loc_1732E
+                bra.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
 ; ---------------------------------------------------------------------------
 
-loc_172D8:
+SKKnucklesGround_RaiseReverseGravityDuckCameraTargetTowardD8:
                 cmpi.w  #$D8,(a5)
-                beq.s   loc_1732E
+                beq.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
                 addq.w  #2,(a5)
-                bra.s   loc_1732E
+                bra.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
 ; ---------------------------------------------------------------------------
 
-loc_172E2:
+SKKnucklesGround_CheckDelayedLookUpOnlyWithoutDown:
                 btst    #button_up,(Ctrl_1_logical).w
-                beq.s   loc_1731C
+                beq.s   SKKnucklesGround_ResetLookDelayBeforeCameraRecovery
                 move.b  #7,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #2*60,scroll_delay_counter(a0)
-                blo.s   loc_17322
+                blo.s   SKKnucklesGround_RecoverCameraTargetTowardSixtyWithUnsignedComparison
                 move.b  #2*60,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_17312
+                bne.s   SKKnucklesGround_LowerReverseGravityLookUpTargetToward18
                 cmpi.w  #$C8,(a5)
-                beq.s   loc_1732E
+                beq.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
                 addq.w  #2,(a5)
-                bra.s   loc_1732E
+                bra.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
 ; ---------------------------------------------------------------------------
 
-loc_17312:
+SKKnucklesGround_LowerReverseGravityLookUpTargetToward18:
                 cmpi.w  #$18,(a5)
-                beq.s   loc_1732E
+                beq.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
                 subq.w  #2,(a5)
-                bra.s   loc_1732E
+                bra.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
 ; ---------------------------------------------------------------------------
 
-loc_1731C:
+SKKnucklesGround_ResetLookDelayBeforeCameraRecovery:
                 move.b  #0,scroll_delay_counter(a0)
 
-loc_17322:
+SKKnucklesGround_RecoverCameraTargetTowardSixtyWithUnsignedComparison:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_1732E
-                bcc.s   loc_1732C
+                beq.s   SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper
+                bcc.s   SKKnucklesGround_SubtractTwoFromVerticalCameraRecoveryTarget
                 addq.w  #4,(a5)
 
-loc_1732C:
+SKKnucklesGround_SubtractTwoFromVerticalCameraRecoveryTarget:
                 subq.w  #2,(a5)
 
-loc_1732E:
+SKKnucklesGround_OverrideNeutralGroundFrictionForSuperOrHyper:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_17338
+                beq.s   SKKnucklesGround_ApplyGroundFrictionOnlyWithoutHeldHorizontalDirections
                 move.w  #$C,d5
 
-loc_17338:
+SKKnucklesGround_ApplyGroundFrictionOnlyWithoutHeldHorizontalDirections:
                 move.b  (Ctrl_1_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   loc_17364
+                bne.s   SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity
                 move.w  ground_vel(a0),d0
-                beq.s   loc_17364
-                bmi.s   loc_17358
+                beq.s   SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity
+                bmi.s   SKKnucklesGround_ReduceNegativeGroundSpeedWithCarryClamp
                 sub.w   d5,d0
-                bcc.s   loc_17352
+                bcc.s   SKKnucklesGround_StorePositiveNeutralGroundFriction
                 move.w  #0,d0
 
-loc_17352:
+SKKnucklesGround_StorePositiveNeutralGroundFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_17364
+                bra.s   SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity
 ; ---------------------------------------------------------------------------
 
-loc_17358:
+SKKnucklesGround_ReduceNegativeGroundSpeedWithCarryClamp:
                 add.w   d5,d0
-                bcc.s   loc_17360
+                bcc.s   SKKnucklesGround_StoreNegativeNeutralGroundFriction
                 move.w  #0,d0
 
-loc_17360:
+SKKnucklesGround_StoreNegativeNeutralGroundFriction:
                 move.w  d0,ground_vel(a0)
 
-loc_17364:
+SKKnucklesGround_ProjectGroundSpeedIntoUnclampedWalkingVelocity:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -214,74 +214,74 @@ loc_17364:
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
 
-loc_17382:
+SKKnucklesGround_GateSharedWalkingAndRollingObstructionProbe:
                 btst    #6,object_control(a0)
-                bne.w   locret_17426
+                bne.w   SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction
                 move.b  angle(a0),d0
                 andi.b  #$3F,d0
-                beq.s   loc_173A2
+                beq.s   SKKnucklesGround_ChooseObstructionDirectionFromGroundSpeedSign
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bmi.w   locret_17426
+                bmi.w   SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction
 
-loc_173A2:
+SKKnucklesGround_ChooseObstructionDirectionFromGroundSpeedSign:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
-                beq.s   locret_17426
-                bmi.s   loc_173B0
+                beq.s   SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction
+                bmi.s   SKKnucklesGround_ProbeAheadAndRestoreRequestedDirectionBeforeResponse
                 neg.w   d1
 
-loc_173B0:
+SKKnucklesGround_ProbeAheadAndRestoreRequestedDirectionBeforeResponse:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
                 bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
-                bpl.s   locret_17426
+                bpl.s   SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction
                 asl.w   #8,d1
                 cmpi.b  #8,(Current_zone).w
-                bne.s   loc_173D2
+                bne.s   SKKnucklesGround_RoundSavedDirectionAndResolveVelocityObstruction
                 tst.b   d0
-                bpl.s   loc_173D2
+                bpl.s   SKKnucklesGround_RoundSavedDirectionAndResolveVelocityObstruction
                 subq.b  #1,d0
 
-loc_173D2:
+SKKnucklesGround_RoundSavedDirectionAndResolveVelocityObstruction:
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   loc_17422
+                beq.s   SKKnucklesGround_AddScaledFloorGapToYVelocity
                 cmpi.b  #$40,d0
-                beq.s   loc_17408
+                beq.s   SKKnucklesGround_ResolveLeftWallVelocityAndPushOnlyFacingLeft
                 cmpi.b  #$80,d0
-                beq.s   loc_17402
+                beq.s   SKKnucklesGround_SubtractScaledCeilingGapFromYVelocity
                 add.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                bne.s   locret_17400
+                bne.s   SKKnucklesGround_ReturnAfterHorizontalResponseAndFacingDependentPush
                 bset    #Status_Push,status(a0)
 
-locret_17400:
+SKKnucklesGround_ReturnAfterHorizontalResponseAndFacingDependentPush:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17402:
+SKKnucklesGround_SubtractScaledCeilingGapFromYVelocity:
                 sub.w   d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17408:
+SKKnucklesGround_ResolveLeftWallVelocityAndPushOnlyFacingLeft:
                 sub.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   locret_17400
+                beq.s   SKKnucklesGround_ReturnAfterHorizontalResponseAndFacingDependentPush
                 bset    #Status_Push,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17422:
+SKKnucklesGround_AddScaledFloorGapToYVelocity:
                 add.w   d1,y_vel(a0)
 
-locret_17426:
+SKKnucklesGround_ReturnAfterProjectionGateOrVerticalObstruction:
                 rts
 ; End of function Knux_InputAcceleration_Path
 
@@ -289,38 +289,38 @@ locret_17426:
 
 KnucklesSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_17430
-                bpl.s   loc_17462
+                beq.s   SKKnucklesGround_FaceLeftAndRestartMovementOnlyWhenFacingChanged
+                bpl.s   SKKnucklesGround_BrakePositiveGroundSpeedForLeftHeldInput
 
-loc_17430:
+SKKnucklesGround_FaceLeftAndRestartMovementOnlyWhenFacingChanged:
                 bset    #Status_Facing,status(a0)
-                bne.s   loc_17444
+                bne.s   SKKnucklesGround_AccelerateLeftWhilePreservingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_17444:
+SKKnucklesGround_AccelerateLeftWhilePreservingExistingOverspeed:
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_17456
+                bgt.s   SKKnucklesGround_CommitLeftAccelerationAndMovementAnimation
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_17456
+                ble.s   SKKnucklesGround_CommitLeftAccelerationAndMovementAnimation
                 move.w  d1,d0
 
-loc_17456:
+SKKnucklesGround_CommitLeftAccelerationAndMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17462:
+SKKnucklesGround_BrakePositiveGroundSpeedForLeftHeldInput:
                 sub.w   d4,d0
-                bcc.s   loc_1746A
+                bcc.s   SKKnucklesGround_StoreLeftBrakeThenTestSkidWithDestroyedLowByte
                 move.w  #-$80,d0
 
-loc_1746A:
+SKKnucklesGround_StoreLeftBrakeThenTestSkidWithDestroyedLowByte:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -330,21 +330,21 @@ loc_1746A:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_174B2
+                bne.s   SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest
                 cmpi.w  #$400,d0
-                blt.s   locret_174B2
+                blt.s   SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_174B2
+                bmi.s   SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bclr    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_174B2
+                blo.s   SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_174B2:
+SKKnucklesGround_ReturnAfterLeftSkidGateAndOptionalDustRequest:
                 rts
 ; End of function KnucklesSKApplyGroundLeftInput
 
@@ -352,33 +352,33 @@ locret_174B2:
 
 KnucklesSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_174E8
+                bmi.s   SKKnucklesGround_BrakeNegativeGroundSpeedForRightHeldInput
                 bclr    #Status_Facing,status(a0)
-                beq.s   loc_174CE
+                beq.s   SKKnucklesGround_AccelerateRightWhilePreservingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_174CE:
+SKKnucklesGround_AccelerateRightWhilePreservingExistingOverspeed:
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_174DC
+                blt.s   SKKnucklesGround_CommitRightAccelerationAndMovementAnimation
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_174DC
+                bge.s   SKKnucklesGround_CommitRightAccelerationAndMovementAnimation
                 move.w  d6,d0
 
-loc_174DC:
+SKKnucklesGround_CommitRightAccelerationAndMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_174E8:
+SKKnucklesGround_BrakeNegativeGroundSpeedForRightHeldInput:
                 add.w   d4,d0
-                bcc.s   loc_174F0
+                bcc.s   SKKnucklesGround_StoreRightBrakeThenTestSkidWithDestroyedLowByte
                 move.w  #$80,d0
 
-loc_174F0:
+SKKnucklesGround_StoreRightBrakeThenTestSkidWithDestroyedLowByte:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -388,20 +388,20 @@ loc_174F0:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_17538
+                bne.s   SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest
                 cmpi.w  #-$400,d0
-                bgt.s   locret_17538
+                bgt.s   SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_17538
+                bmi.s   SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bset    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_17538
+                blo.s   SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_17538:
+SKKnucklesGround_ReturnAfterRightSkidGateAndOptionalDustRequest:
                 rts
 ; End of function KnucklesSKApplyGroundRightInput
