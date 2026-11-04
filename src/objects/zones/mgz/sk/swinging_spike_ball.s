@@ -80,7 +80,7 @@ loc_341BC:
 
 loc_341F0:
                 move.w  $30(a0),d0
-                jmp     (loc_1B666).l
+                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
 ; ---------------------------------------------------------------------------
 
 loc_341FA:

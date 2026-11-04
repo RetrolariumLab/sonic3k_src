@@ -186,7 +186,7 @@ loc_8A0AA:
 
 loc_8A0EC:
                 jsr     Displace_PlayerOffObject(pc)
-                jmp     loc_85088(pc)
+                jmp     SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
 loc_8A0F4:

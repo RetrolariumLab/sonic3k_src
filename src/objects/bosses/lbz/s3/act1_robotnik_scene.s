@@ -258,7 +258,7 @@ loc_5A5A4:
 ; ---------------------------------------------------------------------------
 
 loc_5A5B8:
-                jmp     loc_5371C(pc)
+                jmp     S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
 loc_5A5BC:

@@ -142,7 +142,7 @@ loc_7EC24:
 loc_7EC3C:
                 jsr     Displace_PlayerOffObject(pc)
                 moveq   #0,d0
-                jmp     loc_849D8(pc)
+                jmp     SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw(pc)
 ; ---------------------------------------------------------------------------
 
 loc_7EC46:

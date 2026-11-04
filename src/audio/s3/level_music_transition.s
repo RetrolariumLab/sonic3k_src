@@ -11,7 +11,7 @@ Obj_Song_Fade_ToLevelMusic:
 
 S3LevelMusic_WaitForFadeThenRestoreLevelAndDelete:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_529CE
+                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 bsr.w   Restore_LevelMusic
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Obj_Song_Fade_Transition:
 
 S3LevelMusic_WaitForFadeThenPlaySubtypeAndDelete:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_529CE
+                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 move.b  subtype(a0),d0
                 jsr     (Play_Music).l
                 jmp     (Delete_Current_Sprite).l

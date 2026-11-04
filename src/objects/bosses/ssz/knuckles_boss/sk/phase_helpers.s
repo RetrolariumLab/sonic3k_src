@@ -107,7 +107,7 @@ loc_7C764:
                 moveq   #signextendB(sfx_BossLaser),d0
                 jsr     (Play_SFX).l
                 moveq   #2,d5
-                jmp     (loc_861C0).l
+                jmp     (SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve).l
 ; ---------------------------------------------------------------------------
 
 loc_7C77A:

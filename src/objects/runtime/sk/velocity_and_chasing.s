@@ -66,99 +66,99 @@ Obj_VelocityIndex:
 Find_SonicTails8Way:
                 bsr.w   Find_SonicTails                 ; This routine seems bugged slightly. Shouldn't the first two cmpi instructions look at d3 and not d2?
                 cmp.w   d2,d3
-                beq.s   loc_853E2
-                bhi.s   loc_853BC
+                beq.s   SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags
+                bhi.s   SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector
                 swap    d3                              ; If Y distance is closer to object
                 clr.w   d3
                 divu.w  d2,d3
                 tst.w   d0
-                beq.s   loc_853AE
+                beq.s   SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to right of object
-                blo.s   loc_853FE
+                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorTwo
                 tst.w   d0
-                beq.s   loc_853FA
-                bra.w   loc_85402
+                beq.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorThree
 ; ---------------------------------------------------------------------------
 
-loc_853AE:
+SKRuntimeVelocity_ClassifyXDominantLeftTargetUsingRawXThreshold:
                 cmpi.w  #$8000,d2                       ; If Y was closer and Sonic is to left of object
-                blo.s   loc_8540E
+                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorSix
                 tst.w   d1
-                bne.s   loc_8540A
-                bra.w   loc_85412
+                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorFive
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
 ; ---------------------------------------------------------------------------
 
-loc_853BC:
+SKRuntimeVelocity_ComputeYDominantDistanceRatioAndChooseUpperSector:
                 swap    d2                              ; If X distance is closer to object
                 clr.w   d2
                 divu.w  d3,d2
                 tst.w   d1
-                bne.s   loc_853D4
+                bne.s   SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio
                 cmpi.w  #$8000,d2
-                blo.s   loc_853F6
+                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorZero
                 tst.w   d0
-                bne.s   loc_853FA
-                bra.w   loc_85412
+                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
 ; ---------------------------------------------------------------------------
 
-loc_853D4:
+SKRuntimeVelocity_ChooseLowerSectorFromYDominantRatio:
                 cmpi.w  #$8000,d2
-                blo.s   loc_85406
+                blo.s   SKRuntimeVelocity_ReturnEightWaySelectorFour
                 tst.w   d0
-                bne.s   loc_85402
-                bra.w   loc_8540A
+                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorThree
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorFive
 ; ---------------------------------------------------------------------------
 
-loc_853E2:
+SKRuntimeVelocity_ClassifyEqualWordDistancesByTargetSideFlags:
                 tst.w   d0                              ; If X and Y distance are identical
-                beq.s   loc_853EE
+                beq.s   SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget
                 tst.w   d1
-                beq.s   loc_853FA
-                bra.w   loc_85402
+                beq.s   SKRuntimeVelocity_ReturnEightWaySelectorOne
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorThree
 ; ---------------------------------------------------------------------------
 
-loc_853EE:
+SKRuntimeVelocity_ChooseLeftEqualDistanceSectorIncludingCoincidentTarget:
                 tst.w   d1
-                bne.s   loc_8540A
-                bra.w   loc_85412
+                bne.s   SKRuntimeVelocity_ReturnEightWaySelectorFive
+                bra.w   SKRuntimeVelocity_ReturnEightWaySelectorSeven
 ; ---------------------------------------------------------------------------
 
-loc_853F6:
+SKRuntimeVelocity_ReturnEightWaySelectorZero:
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_853FA:
+SKRuntimeVelocity_ReturnEightWaySelectorOne:
                 moveq   #1,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_853FE:
+SKRuntimeVelocity_ReturnEightWaySelectorTwo:
                 moveq   #2,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85402:
+SKRuntimeVelocity_ReturnEightWaySelectorThree:
                 moveq   #3,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85406:
+SKRuntimeVelocity_ReturnEightWaySelectorFour:
                 moveq   #4,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8540A:
+SKRuntimeVelocity_ReturnEightWaySelectorFive:
                 moveq   #5,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8540E:
+SKRuntimeVelocity_ReturnEightWaySelectorSix:
                 moveq   #6,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85412:
+SKRuntimeVelocity_ReturnEightWaySelectorSeven:
                 moveq   #7,d4
                 rts
 ; End of function Find_SonicTails8Way
@@ -170,11 +170,11 @@ Set_VelocityXTrackSonic:
                 bsr.w   Find_OtherObject
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   loc_85430
+                beq.s   SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip
                 neg.w   d4
                 bset    #0,render_flags(a0)
 
-loc_85430:
+SKRuntimeVelocity_CommitCallerSignedHorizontalSpeedWithPlayerSideFlip:
                 move.w  d4,x_vel(a0)
                 rts
 ; End of function Set_VelocityXTrackSonic
@@ -188,42 +188,42 @@ Chase_Object:
                 move.w  x_pos(a0),d4
                 cmp.w   x_pos(a1),d4
                 seq     d5
-                beq.s   loc_8545E
-                bcs.s   loc_8544C
+                beq.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
+                bcs.s   SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate
                 neg.w   d1
 
-loc_8544C:
+SKRuntimeVelocity_AcceptOrRejectBothAxisChaseHorizontalCandidate:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   loc_8545E
+                blt.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
                 cmp.w   d0,d4
-                bgt.s   loc_8545E
+                bgt.s   SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte
                 move.w  d4,x_vel(a0)
 
-loc_8545E:
+SKRuntimeVelocity_CompareYAfterHorizontalChaseAndPreserveXEqualityByte:
                 move.w  y_pos(a0),d4
                 cmp.w   y_pos(a1),d4
-                beq.s   loc_85480
-                bcs.s   loc_8546C
+                beq.s   SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch
+                bcs.s   SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate
                 neg.w   d3
 
-loc_8546C:
+SKRuntimeVelocity_AcceptOrRejectBothAxisChaseVerticalCandidate:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   locret_8547E
+                blt.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
                 cmp.w   d0,d4
-                bgt.s   locret_8547E
+                bgt.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
                 move.w  d4,y_vel(a0)
 
-locret_8547E:
+SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85480:
+SKRuntimeVelocity_ClearBothChaseVelocitiesOnlyWhenBothIntegerAxesMatch:
                 tst.b   d5
-                beq.s   locret_8547E
+                beq.s   SKRuntimeVelocity_ReturnBothAxisChaseWithoutUniformCompletionFlags
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts
@@ -239,19 +239,19 @@ Chase_ObjectXOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   x_pos(a0),d3
-                bhs.s   loc_854A6
+                bhs.s   SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate
                 neg.w   d1
 
-loc_854A6:
+SKRuntimeVelocity_AcceptOrRejectXOnlyOffsetChaseCandidate:
                 move.w  x_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   locret_854B8
+                blt.s   SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
                 cmp.w   d0,d3
-                bgt.s   locret_854B8
+                bgt.s   SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags
                 move.w  d3,x_vel(a0)
 
-locret_854B8:
+SKRuntimeVelocity_ReturnXOnlyChaseWithNativeCandidateOrStoreFlags:
                 rts
 ; End of function Chase_ObjectXOnly
 
@@ -265,19 +265,19 @@ Chase_ObjectYOnly:
                 ext.w   d4
                 add.w   d4,d3
                 cmp.w   y_pos(a0),d3
-                bhs.s   loc_854D2
+                bhs.s   SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate
                 neg.w   d1
 
-loc_854D2:
+SKRuntimeVelocity_AcceptOrRejectYOnlyOffsetChaseCandidate:
                 move.w  y_vel(a0),d3
                 add.w   d1,d3
                 cmp.w   d2,d3
-                blt.s   locret_854E4
+                blt.s   SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
                 cmp.w   d0,d3
-                bgt.s   locret_854E4
+                bgt.s   SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags
                 move.w  d3,y_vel(a0)
 
-locret_854E4:
+SKRuntimeVelocity_ReturnYOnlyChaseWithNativeCandidateOrStoreFlags:
                 rts
 ; End of function Chase_ObjectYOnly
 
@@ -291,45 +291,45 @@ locret_854E4:
                 add.w   d4,d6
                 cmp.w   x_pos(a0),d6
                 seq     d5
-                beq.s   loc_85516
-                bcc.s   loc_85504
+                beq.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
+                bcc.s   SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate
                 neg.w   d1
 
-loc_85504:
+SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseXCandidate:
                 move.w  x_vel(a0),d4
                 add.w   d1,d4
                 cmp.w   d2,d4
-                blt.s   loc_85516
+                blt.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
                 cmp.w   d0,d4
-                bgt.s   loc_85516
+                bgt.s   SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte
                 move.w  d4,x_vel(a0)
 
-loc_85516:
+SKRuntimeVelocity_CompareOffsetTargetYAndCarrySavedXEqualityByte:
                 move.w  y_pos(a1),d6
                 move.b  child_dy(a0),d4
                 ext.w   d4
                 add.w   d4,d6
                 cmp.w   y_pos(a0),d6
-                beq.s   loc_85540
-                bcc.s   loc_8552C
+                beq.s   SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch
+                bcc.s   SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate
                 neg.w   d3
 
-loc_8552C:
+SKRuntimeVelocity_AcceptOrRejectOffsetBothAxisChaseYCandidate:
                 move.w  y_vel(a0),d4
                 add.w   d3,d4
                 cmp.w   d2,d4
-                blt.s   locret_8553E
+                blt.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
                 cmp.w   d0,d4
-                bgt.s   locret_8553E
+                bgt.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
                 move.w  d4,y_vel(a0)
 
-locret_8553E:
+SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85540:
+SKRuntimeVelocity_ClearOffsetChaseVelocitiesOnlyWhenBothWordTargetsMatch:
                 tst.b   d5
-                beq.s   locret_8553E
+                beq.s   SKRuntimeVelocity_ReturnOffsetBothAxisChaseWithNativeFlags
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 rts

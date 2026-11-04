@@ -133,7 +133,7 @@ loc_82B78:
 loc_82B84:
                 move.l  #Wait_Draw,(a0)
                 move.w  #3,$2E(a0)
-                move.l  #loc_85088,$34(a0)
+                move.l  #SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
                 bne.s   loc_82BAC

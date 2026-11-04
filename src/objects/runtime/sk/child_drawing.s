@@ -40,11 +40,11 @@ Child_AddToTouchList:
 Child_Remember_Draw_Sprite:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_84984
+                bne.s   SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_84984:
+SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion:
                 bsr.w   Remove_From_TrackingSlot
                 bra.w   Go_Delete_Sprite
 ; ---------------------------------------------------------------------------
@@ -52,38 +52,38 @@ loc_84984:
 Child_Draw_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_8499E
+                bne.s   SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8499E:
+SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_849C2
+                bne.s   SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag
                 btst    #7,status(a1)
-                bne.s   loc_849BC
+                bne.s   SKRuntimeChildren_DrawChildAfterParentStatusContactGate
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_849BC:
+SKRuntimeChildren_DrawChildAfterParentStatusContactGate:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_849C2:
+SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_Draw_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_849D8
+                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_849D8:
+SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw:
                 bset    #7,status(a0)
                 move.l  #Obj_FlickerMove,(a0)
                 clr.b   collision_flags(a0)
@@ -94,14 +94,14 @@ loc_849D8:
 Child_Draw_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_849D8
+                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_849D8
+                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -109,13 +109,13 @@ Child_DrawTouch_Sprite_FlickerMove:
 Child_DrawTouch_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_849D8
+                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 btst    #7,status(a1)
-                beq.s   loc_84A3C
+                beq.s   SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear
                 bset    #7,status(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_84A3C:
+SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l

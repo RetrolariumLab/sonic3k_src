@@ -393,7 +393,7 @@ loc_76E5C:
                 st      (Ctrl_1_locked).w
                 jsr     (AllocateObject).l
                 bne.s   loc_76E86
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 loc_76E86:
                 cmpi.w  #$43A0,(Player_1+x_pos).w
@@ -463,7 +463,7 @@ loc_76F24:
 ; ---------------------------------------------------------------------------
 
 loc_76F40:
-                jmp     (loc_849D8).l
+                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_76F46:

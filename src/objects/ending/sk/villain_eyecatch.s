@@ -64,7 +64,7 @@ loc_5F60C:
                 jsr     (AllocateObject).l
                 bne.s   loc_5F644
                 move.w  a1,parent3(a1)
-                move.l  #loc_862B4,(a1)
+                move.l  #SpriteMask_InitializeMappingsAndSubtype,(a1)
                 move.w  #$120,x_pos(a1)
                 move.w  #$124,y_pos(a1)
                 move.b  #$8A,subtype(a1)

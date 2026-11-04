@@ -19,7 +19,7 @@ SetUp_ObjAttributes3:
                 bset    #2,render_flags(a0)             ; Object uses world coordinates
                 addq.b  #2,routine(a0)                  ; Increase routine counter
 
-locret_8405E:
+SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit:
                 rts
 ; End of function SetUp_ObjAttributes
 
@@ -386,11 +386,11 @@ Refresh_ChildPositionAdjusted:
                 ext.w   d1
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_843D2
+                beq.s   SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-loc_843D2:
+SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0
@@ -398,11 +398,11 @@ loc_843D2:
                 ext.w   d1
                 bclr    #1,render_flags(a0)
                 btst    #1,render_flags(a1)
-                beq.s   loc_843F8
+                beq.s   SKRuntimeChildren_CommitAdjustedChildY
                 neg.w   d1
                 bset    #1,render_flags(a0)
 
-loc_843F8:
+SKRuntimeChildren_CommitAdjustedChildY:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 rts

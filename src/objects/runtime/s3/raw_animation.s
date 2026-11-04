@@ -12,29 +12,29 @@ Animate_Raw:
 
 Animate_RawNoSST:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_52CEA
+                bpl.s   S3RawAnimation_ReturnFromSingleDelayHoldOrFrameWrite
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.s   loc_52CEC
+                bmi.s   S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_52CEA:
+S3RawAnimation_ReturnFromSingleDelayHoldOrFrameWrite:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52CEC:
+S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn:
                 neg.b   d1
-                jsr     off_52CF8-4(pc,d1.w)
+                jsr     S3RawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 rts
 ; End of function Animate_RawNoSST
 
-off_52CF8:
+S3RawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback:
                 bra.w   AnimateRaw_Restart              ; FC
 ; ---------------------------------------------------------------------------
                 bra.w   AnimateRaw_Jump                 ; F8
@@ -64,23 +64,23 @@ AnimateRaw_CustomCode:
 Animate_RawAdjustFlipX:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_52D5A
+                bpl.s   S3RawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.s   loc_52CEC
+                bmi.s   S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 bclr    #6,d1
-                beq.s   loc_52D52
+                beq.s   S3RawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame
                 bchg    #0,render_flags(a0)
 
-loc_52D52:
+S3RawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame:
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_52D5A:
+S3RawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission:
                 rts
 ; End of function Animate_RawAdjustFlipX
 
@@ -89,23 +89,23 @@ locret_52D5A:
 Animate_RawAdjustFlipY:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_52D90
+                bpl.s   S3RawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.w   loc_52CEC
+                bmi.w   S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 bclr    #6,d1
-                beq.s   loc_52D88
+                beq.s   S3RawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame
                 bchg    #1,render_flags(a0)
 
-loc_52D88:
+S3RawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame:
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_52D90:
+S3RawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -115,54 +115,54 @@ Animate_RawMultiDelay:
 
 Animate_RawNoSSTMultiDelay:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_52DBE
+                bpl.s   S3RawAnimation_ReturnMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.s   loc_52DC2
+                bmi.s   S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52DBE:
+S3RawAnimation_ReturnMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52DC2:
+S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler:
                 neg.b   d1
-                jsr     off_52DCE-4(pc,d1.w)
+                jsr     S3RawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 rts
 ; End of function Animate_RawMultiDelay
 
-off_52DCE:
-                bra.w   loc_52DE8
+S3RawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback:
+                bra.w   S3RawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear
 ; ---------------------------------------------------------------------------
-                bra.w   loc_52DDA
+                bra.w   S3RawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer
 ; ---------------------------------------------------------------------------
-                bra.w   loc_52DF6
+                bra.w   S3RawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear
 ; ---------------------------------------------------------------------------
 
-loc_52DDA:
+S3RawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer:
                 move.b  1(a1,d0.w),d1
                 ext.w   d1
                 lea     (a1,d1.w),a1
                 move.l  a1,$30(a0)
 
-loc_52DE8:
+S3RawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear:
                 move.b  (a1),mapping_frame(a0)
                 move.b  1(a1),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52DF6:
+S3RawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear:
                 clr.b   anim_frame_timer(a0)
                 movea.l $34(a0),a1
                 jsr     (a1)
@@ -176,26 +176,26 @@ Animate_RawMultiDelayFlipX:
 
 Animate_RawNoSSTMultiDelayFlipX:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_52E3C
+                bpl.s   S3RawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.s   loc_52DC2
+                bmi.s   S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 bclr    #6,d1
-                beq.s   loc_52E2E
+                beq.s   S3RawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult
                 bchg    #0,render_flags(a0)
 
-loc_52E2E:
+S3RawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult:
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52E3C:
+S3RawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; End of function Animate_RawMultiDelayFlipX
@@ -205,26 +205,26 @@ loc_52E3C:
 Animate_RawMultiDelayFlipY:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_52E7A
+                bpl.s   S3RawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.w   loc_52DC2
+                bmi.w   S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 bclr    #6,d1
-                beq.s   loc_52E6C
+                beq.s   S3RawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult
                 bchg    #1,render_flags(a0)
 
-loc_52E6C:
+S3RawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult:
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52E7A:
+S3RawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; End of function Animate_RawMultiDelayFlipY
@@ -234,27 +234,27 @@ loc_52E7A:
 Animate_RawGetFaster:
                 movea.l $30(a0),a1
                 bset    #5,$38(a0)
-                bne.s   loc_52E92
+                bne.s   S3RawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker
                 move.b  (a1),$2E(a0)
                 clr.b   $2F(a0)
 
-loc_52E92:
+S3RawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_52ECA
+                bpl.s   S3RawAnimation_ReturnAcceleratingTimerHoldWithZeroResult
                 move.b  $2E(a0),d2
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
                 move.b  2(a1,d0.w),d1
-                bpl.s   loc_52EBA
+                bpl.s   S3RawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult
                 moveq   #0,d0
                 move.b  2(a1),d1
                 tst.b   d2
-                beq.s   loc_52ECE
+                beq.s   S3RawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold
                 subq.b  #1,d2
                 move.b  d2,$2E(a0)
 
-loc_52EBA:
+S3RawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
@@ -262,12 +262,12 @@ loc_52EBA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52ECA:
+S3RawAnimation_ReturnAcceleratingTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52ECE:
+S3RawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
@@ -275,13 +275,13 @@ loc_52ECE:
                 addq.b  #1,d0
                 move.b  d0,$2F(a0)
                 cmp.b   1(a1),d0
-                blo.s   loc_52EFA
+                blo.s   S3RawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback
                 bclr    #5,$38(a0)
                 clr.b   $2F(a0)
                 movea.l $34(a0),a2
                 jsr     (a2)
 
-loc_52EFA:
+S3RawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback:
                 moveq   #-1,d2
                 rts
 ; End of function Animate_RawGetFaster
@@ -291,40 +291,40 @@ loc_52EFA:
 Animate_RawGetSlower:
                 movea.l $30(a0),a1
                 bset    #5,$38(a0)
-                bne.s   loc_52F0E
+                bne.s   S3RawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker
                 clr.w   $2E(a0)
 
-loc_52F0E:
+S3RawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_52F42
+                bpl.s   S3RawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter
                 move.b  $2E(a0),d2
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
                 move.b  1(a1,d0.w),d1
-                bpl.s   loc_52F2E
+                bpl.s   S3RawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold
                 moveq   #0,d0
                 move.b  1(a1),d1
                 addq.b  #1,d2
 
-loc_52F2E:
+S3RawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
                 cmp.b   (a1),d2
-                bhs.s   loc_52F44
+                bhs.s   S3RawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback
                 move.b  d2,$2E(a0)
 
-locret_52F42:
+S3RawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52F44:
+S3RawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback:
                 move.b  $2F(a0),d0
                 addq.b  #1,d0
                 move.b  d0,$2F(a0)
                 cmp.b   1(a1),d0
-                blo.s   locret_52F42
+                blo.s   S3RawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter
                 bclr    #5,$38(a0)
                 clr.b   $2F(a0)
                 movea.l $34(a0),a2

@@ -251,7 +251,7 @@ loc_71E98:
 ; ---------------------------------------------------------------------------
 
 loc_71EBE:
-                jmp     (loc_849D8).l
+                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 off_71EC4:
                 dc.w    loc_71ECA-off_71EC4
@@ -321,7 +321,7 @@ loc_71F30:
 
 loc_71F68:
                 jsr     (Displace_PlayerOffObject).l
-                jmp     (loc_849D8).l
+                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 off_71F74:
                 dc.w    loc_71F7A-off_71F74

@@ -241,7 +241,7 @@ loc_4EF70:
                 moveq   #0,d0
                 movea.w parent3(a0),a1
                 tst.b   $3B(a1)
-                bne.w   loc_5312A
+                bne.w   S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_4EF96:
@@ -326,7 +326,7 @@ loc_4F010:
 
 loc_4F046:
                 jsr     Displace_PlayerOffObject(pc)
-                jmp     loc_5312A(pc)
+                jmp     S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw(pc)
 ; ---------------------------------------------------------------------------
 off_4F04E:
                 dc.w    loc_4F058-off_4F04E

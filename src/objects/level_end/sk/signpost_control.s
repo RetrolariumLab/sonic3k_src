@@ -54,7 +54,7 @@ Child6_EndSign:
 
 Obj_EndSignControlAwaitStart:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_8405E
+                bne.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 move.l  #Obj_EndSignControlDoStart,(a0)
                 jsr     Restore_PlayerControl(pc)
                 lea     (Player_2).w,a1
@@ -63,7 +63,7 @@ Obj_EndSignControlAwaitStart:
 
 Obj_EndSignControlDoStart:
                 tst.b   (End_of_level_flag).w           ; Wait for title card to finish
-                beq.w   locret_8405E
+                beq.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 jsr     Change_Act2Sizes(pc)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -186,7 +186,7 @@ loc_85D48:
                 move.b  $27(a0),d0
                 andi.b  #7,d0
                 cmpi.b  #7,d0
-                bne.w   locret_8405E
+                bne.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 clr.b   $27(a0)
                 clr.w   $1C(a0)
                 clr.b   $26(a0)

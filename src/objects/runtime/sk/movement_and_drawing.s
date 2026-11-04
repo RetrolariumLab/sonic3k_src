@@ -24,7 +24,7 @@ MoveSlowFall_AnimateRaw:
 Move_AnimateRaw_Wait:
                 jsr     (MoveSprite2).l
 
-loc_85652:
+SKRuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback:
                 jsr     Animate_Raw(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -39,29 +39,29 @@ Wait_Draw:
 
 Wait_FadeToLevelMusic:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_85674
+                bmi.s   SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_85674:
+SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController:
                 bclr    #7,render_flags(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_8568E
+                bne.s   SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-loc_8568E:
+SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
 
 Wait_NewDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_856A0
+                bmi.s   SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_856A0:
+SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation:
                 bclr    #7,render_flags(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 movea.l $34(a0),a1
@@ -74,7 +74,7 @@ MoveWaitTouch:
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_856C0:                                              ; used in S3, unused in S&K
+SKRuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact:  ; used in S3, unused in S&K
                 jsr     Refresh_ChildPosition(pc)
 
 AnimateRaw_DrawTouch:

@@ -241,7 +241,7 @@ loc_708AA:
                 jsr     (Restore_LevelMusic).l
                 jsr     (AllocateObject).l
                 bne.s   loc_708EE
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 loc_708EE:
                 move.w  #$1000,(Camera_target_max_Y_pos).w
@@ -267,7 +267,7 @@ PLCKosM_FBZEndBoss_Exit_End:
 loc_7092A:
                 cmpi.w  #$720,(Camera_Y_pos).w
                 bhs.s   loc_70938
-                jmp     (loc_86334).l
+                jmp     (SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord).l
 ; ---------------------------------------------------------------------------
 
 loc_70938:

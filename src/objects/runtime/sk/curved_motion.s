@@ -99,10 +99,10 @@ MoveSprite_CircularSimpleCheckFlip:
                 move.l  x_pos(a1),d2
                 move.l  y_pos(a1),d3
                 btst    #0,render_flags(a1)
-                beq.s   loc_84C9E
+                beq.s   SKRuntimeCurve_CommitParentFlippedFullPrecisionSimpleCircularPosition
                 neg.l   d0
 
-loc_84C9E:
+SKRuntimeCurve_CommitParentFlippedFullPrecisionSimpleCircularPosition:
                 add.l   d0,d2
                 add.l   d1,d3
                 move.l  d2,x_pos(a0)
@@ -223,10 +223,10 @@ MoveSprite_CircularLookup:
                 move.b  child_dx(a0),d4
                 ext.w   d4
                 btst    #0,render_flags(a0)
-                beq.s   loc_84DAA
+                beq.s   SKRuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant
                 neg.w   d4
 
-loc_84DAA:
+SKRuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant:
                 add.w   d4,d2
                 move.b  child_dy(a0),d4
                 ext.w   d4
@@ -237,10 +237,10 @@ loc_84DAA:
                 move.w  (a4,d1.w),d1
                 jsr     (a4,d1.w)
                 btst    #0,render_flags(a0)
-                beq.s   loc_84DCE
+                beq.s   SKRuntimeCurve_CommitChildCircularLookupIntegerCoordinates
                 neg.w   d5
 
-loc_84DCE:
+SKRuntimeCurve_CommitChildCircularLookupIntegerCoordinates:
                 add.w   d5,d2
                 add.w   d6,d3
                 move.w  d2,x_pos(a0)
@@ -271,33 +271,33 @@ MoveSprite_AngleYLookup:
 
 ; ---------------------------------------------------------------------------
 AngleY_LookupIndex:
-                dc.w    loc_84E16-AngleY_LookupIndex
-                dc.w    loc_84E1E-AngleY_LookupIndex
-                dc.w    loc_84E28-AngleY_LookupIndex
-                dc.w    loc_84E32-AngleY_LookupIndex
+                dc.w    SKRuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter-AngleY_LookupIndex
+                dc.w    SKRuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter-AngleY_LookupIndex
+                dc.w    SKRuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter-AngleY_LookupIndex
+                dc.w    SKRuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter-AngleY_LookupIndex
 ; ---------------------------------------------------------------------------
 
-loc_84E16:
+SKRuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84E1E:
+SKRuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84E28:
+SKRuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84E32:
+SKRuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 rts
@@ -316,51 +316,51 @@ MoveSprite_AngleXLookupOffset:
 
 ; ---------------------------------------------------------------------------
 AngleX_LookupIndex:
-                dc.w    loc_84E58-AngleX_LookupIndex
-                dc.w    loc_84E60-AngleX_LookupIndex
-                dc.w    loc_84E6C-AngleX_LookupIndex
-                dc.w    loc_84E7C-AngleX_LookupIndex
+                dc.w    SKRuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter-AngleX_LookupIndex
+                dc.w    SKRuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter-AngleX_LookupIndex
+                dc.w    SKRuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter-AngleX_LookupIndex
+                dc.w    SKRuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter-AngleX_LookupIndex
 ; ---------------------------------------------------------------------------
 
-loc_84E58:
+SKRuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter:
                 move.b  (a1,d0.w),d1
-                bra.w   loc_84E8C
+                bra.w   SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_84E60:
+SKRuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
-                bra.w   loc_84E8C
+                bra.w   SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_84E6C:
+SKRuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_84E8C
+                bra.w   SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_84E7C:
+SKRuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_84E8C
+                bra.w   SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_84E8C:
+SKRuntimeCurve_BuildParentOffsetCoordinatesForSampledX:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3
                 ext.w   d3
                 add.w   d3,d2
                 btst    #0,render_flags(a1)
-                beq.s   loc_84EA6
+                beq.s   SKRuntimeCurve_CommitSampleMirroredByParentFacingToIntegerOffsetPosition
                 neg.w   d1
 
-loc_84EA6:
+SKRuntimeCurve_CommitSampleMirroredByParentFacingToIntegerOffsetPosition:
                 add.w   d1,d2
                 move.w  d2,x_pos(a0)
                 move.w  y_pos(a1),d2
@@ -375,44 +375,44 @@ loc_84EA6:
                 move.b  d0,d1
                 rol.b   #3,d1
                 andi.w  #6,d1
-                move.w  off_84ED4(pc,d1.w),d2
-                jmp     off_84ED4(pc,d2.w)
+                move.w  SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d1.w),d2
+                jmp     SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d2.w)
 ; ---------------------------------------------------------------------------
-off_84ED4:
-                dc.w    loc_84EDC-off_84ED4
-                dc.w    loc_84EE4-off_84ED4
-                dc.w    loc_84EF0-off_84ED4
-                dc.w    loc_84F00-off_84ED4
+SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets:
+                dc.w    SKRuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup-SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    SKRuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter-SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    SKRuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter-SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    SKRuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter-SKRuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
 ; ---------------------------------------------------------------------------
 
-loc_84EDC:
+SKRuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup:
                 move.b  (a1,d0.w),d1
-                bra.w   loc_84F10
+                bra.w   SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_84EE4:
+SKRuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
-                bra.w   loc_84F10
+                bra.w   SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_84EF0:
+SKRuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_84F10
+                bra.w   SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_84F00:
+SKRuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_84F10
+                bra.w   SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 
-loc_84F10:
+SKRuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3

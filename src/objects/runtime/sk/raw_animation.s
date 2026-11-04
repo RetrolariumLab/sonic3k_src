@@ -12,29 +12,29 @@ Animate_Raw:
 
 Animate_RawNoSST:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_84426
+                bpl.s   SKRawAnimation_ReturnFromSingleDelayHoldOrFrameWrite
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.s   loc_84428
+                bmi.s   SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_84426:
+SKRawAnimation_ReturnFromSingleDelayHoldOrFrameWrite:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84428:
+SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn:
                 neg.b   d1
-                jsr     off_84434-4(pc,d1.w)
+                jsr     SKRawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 rts
 ; End of function Animate_RawNoSST
 
-off_84434:
+SKRawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback:
                 bra.w   AnimateRaw_Restart              ; FC
 ; ---------------------------------------------------------------------------
                 bra.w   AnimateRaw_Jump                 ; F8
@@ -64,23 +64,23 @@ AnimateRaw_CustomCode:
 Animate_RawAdjustFlipX:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_84496
+                bpl.s   SKRawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.s   loc_84428
+                bmi.s   SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 bclr    #6,d1
-                beq.s   loc_8448E
+                beq.s   SKRawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame
                 bchg    #0,render_flags(a0)
 
-loc_8448E:
+SKRawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame:
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_84496:
+SKRawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission:
                 rts
 ; End of function Animate_RawAdjustFlipX
 
@@ -89,48 +89,48 @@ locret_84496:
 Animate_RawAdjustFlipY:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_844CC
+                bpl.s   SKRawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  1(a1,d0.w),d1
-                bmi.w   loc_84428
+                bmi.w   SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn
                 bclr    #6,d1
-                beq.s   loc_844C4
+                beq.s   SKRawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame
                 bchg    #1,render_flags(a0)
 
-loc_844C4:
+SKRawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame:
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
 
-locret_844CC:
+SKRawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Animate_ExternalPlayerSprite:
                 subq.b  #1,anim_frame_timer(a1)
-                bpl.s   loc_84500
+                bpl.s   SKRawAnimation_TailLoadExternalPlayerPatternsAfterTimerHoldOrFramePair
                 move.b  (a2),anim_frame_timer(a1)
                 moveq   #0,d0
                 move.b  anim_frame(a1),d0
                 addq.b  #2,d0
                 move.b  d0,anim_frame(a1)
                 move.b  1(a2,d0.w),d1
-                beq.s   loc_84504
+                beq.s   SKRawAnimation_LoadExternalPlayerPatternsThenTailInvokeControllerCallback
                 move.b  d1,mapping_frame(a1)
                 bclr    #0,render_flags(a1)
                 tst.b   2(a2,d0.w)
-                beq.s   loc_84500
+                beq.s   SKRawAnimation_TailLoadExternalPlayerPatternsAfterTimerHoldOrFramePair
                 bset    #0,render_flags(a1)
 
-loc_84500:
+SKRawAnimation_TailLoadExternalPlayerPatternsAfterTimerHoldOrFramePair:
                 jmp     Player_Load_PLC2(pc)
 ; ---------------------------------------------------------------------------
 
-loc_84504:
+SKRawAnimation_LoadExternalPlayerPatternsThenTailInvokeControllerCallback:
                 jsr     Player_Load_PLC2(pc)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -146,7 +146,7 @@ Animate_RawCheckResult:
 
 Animate_RawNoSSTCheckResult:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_8453E
+                bpl.s   SKRawAnimation_ReturnEscapedSingleDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #1,d0
@@ -155,48 +155,48 @@ Animate_RawNoSSTCheckResult:
                 moveq   #0,d1
                 move.b  (a2)+,d1
                 cmpi.b  #-1,d1
-                beq.s   loc_84542
+                beq.s   SKRawAnimation_DecodeFfEscapedSingleCommandAndReturnMinusOneAfterCursorClear
                 move.b  (a1),anim_frame_timer(a0)
                 move.b  d1,mapping_frame(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8453E:
+SKRawAnimation_ReturnEscapedSingleDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84542:
+SKRawAnimation_DecodeFfEscapedSingleCommandAndReturnMinusOneAfterCursorClear:
                 move.b  (a2)+,d1
                 neg.b   d1
-                jsr     off_84552-4(pc,d1.w)
+                jsr     SKRawAnimation_EscapedSingleCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 moveq   #-1,d2
                 rts
 ; End of function Animate_RawNoSSTCheckResult
 
-off_84552:
-                bra.w   loc_8456A
+SKRawAnimation_EscapedSingleCommandBranchSlotsRestartJumpCallback:
+                bra.w   SKRawAnimation_ReloadEscapedSingleFirstFrameAndDelayBeforeMinusOneReturn
 ; ---------------------------------------------------------------------------
-                bra.w   loc_8455E
+                bra.w   SKRawAnimation_JumpEscapedSingleBySignedByteAndPublishPointer
 ; ---------------------------------------------------------------------------
-                bra.w   loc_84576
+                bra.w   SKRawAnimation_TailInvokeEscapedSingleCallbackBeforeOuterResultEpilogue
 ; ---------------------------------------------------------------------------
 
-loc_8455E:
+SKRawAnimation_JumpEscapedSingleBySignedByteAndPublishPointer:
                 move.b  (a2)+,d1
                 ext.w   d1
                 lea     (a1,d1.w),a1
                 move.l  a1,$30(a0)
 
-loc_8456A:
+SKRawAnimation_ReloadEscapedSingleFirstFrameAndDelayBeforeMinusOneReturn:
                 move.b  1(a1),mapping_frame(a0)
                 move.b  (a1),anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84576:
+SKRawAnimation_TailInvokeEscapedSingleCallbackBeforeOuterResultEpilogue:
                 clr.b   anim_frame_timer(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -226,54 +226,54 @@ Animate_RawMultiDelay:
 
 Animate_RawNoSSTMultiDelay:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_845C8
+                bpl.s   SKRawAnimation_ReturnMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.s   loc_845CC
+                bmi.s   SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_845C8:
+SKRawAnimation_ReturnMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_845CC:
+SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler:
                 neg.b   d1
-                jsr     off_845D8-4(pc,d1.w)
+                jsr     SKRawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 rts
 ; End of function Animate_RawMultiDelay
 
-off_845D8:
-                bra.w   loc_845F2
+SKRawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback:
+                bra.w   SKRawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear
 ; ---------------------------------------------------------------------------
-                bra.w   loc_845E4
+                bra.w   SKRawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer
 ; ---------------------------------------------------------------------------
-                bra.w   loc_84600
+                bra.w   SKRawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear
 ; ---------------------------------------------------------------------------
 
-loc_845E4:
+SKRawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer:
                 move.b  1(a1,d0.w),d1
                 ext.w   d1
                 lea     (a1,d1.w),a1
                 move.l  a1,$30(a0)
 
-loc_845F2:
+SKRawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear:
                 move.b  (a1),mapping_frame(a0)
                 move.b  1(a1),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84600:
+SKRawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear:
                 clr.b   anim_frame_timer(a0)
                 movea.l $34(a0),a1
                 jsr     (a1)
@@ -287,26 +287,26 @@ Animate_RawMultiDelayFlipX:
 
 Animate_RawNoSSTMultiDelayFlipX:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_84646
+                bpl.s   SKRawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.s   loc_845CC
+                bmi.s   SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 bclr    #6,d1
-                beq.s   loc_84638
+                beq.s   SKRawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult
                 bchg    #0,render_flags(a0)
 
-loc_84638:
+SKRawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult:
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84646:
+SKRawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; End of function Animate_RawMultiDelayFlipX
@@ -316,26 +316,26 @@ loc_84646:
 Animate_RawMultiDelayFlipY:
                 movea.l $30(a0),a1
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_84684
+                bpl.s   SKRawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
                 move.b  d0,anim_frame(a0)
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
-                bmi.w   loc_845CC
+                bmi.w   SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler
                 bclr    #6,d1
-                beq.s   loc_84676
+                beq.s   SKRawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult
                 bchg    #1,render_flags(a0)
 
-loc_84676:
+SKRawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult:
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84684:
+SKRawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; End of function Animate_RawMultiDelayFlipY
@@ -347,7 +347,7 @@ Animate_Raw2MultiDelay:
 
 Animate_Raw2NoSSTMultiDelay:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_846BA
+                bpl.s   SKRawAnimation_ReturnEscapedMultiDelayTimerHoldWithZeroResult
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.w  #2,d0
@@ -356,48 +356,48 @@ Animate_Raw2NoSSTMultiDelay:
                 moveq   #0,d1
                 move.b  (a2)+,d1
                 cmpi.b  #-1,d1
-                beq.s   loc_846BE
+                beq.s   SKRawAnimation_DecodeFfEscapedMultiCommandAndClearCursorAfterHandler
                 move.b  d1,mapping_frame(a0)
                 move.b  1(a1,d0.w),anim_frame_timer(a0)
                 moveq   #1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_846BA:
+SKRawAnimation_ReturnEscapedMultiDelayTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_846BE:
+SKRawAnimation_DecodeFfEscapedMultiCommandAndClearCursorAfterHandler:
                 move.b  (a2)+,d1
                 neg.b   d1
-                jsr     off_846CC-4(pc,d1.w)
+                jsr     SKRawAnimation_EscapedMultiDelayCommandBranchSlotsRestartJumpCallback-4(pc,d1.w)
                 clr.b   anim_frame(a0)
                 rts
 ; End of function Animate_Raw2MultiDelay
 
-off_846CC:
-                bra.w   loc_846E4
+SKRawAnimation_EscapedMultiDelayCommandBranchSlotsRestartJumpCallback:
+                bra.w   SKRawAnimation_EmitEscapedMultiFirstPairWithMinusOneBeforeOuterClear
 ; ---------------------------------------------------------------------------
-                bra.w   loc_846D8
+                bra.w   SKRawAnimation_JumpEscapedMultiBySignedByteAndPublishPointer
 ; ---------------------------------------------------------------------------
-                bra.w   loc_846F2
+                bra.w   SKRawAnimation_InvokeEscapedMultiCallbackThenMinusOneBeforeCursorClear
 ; ---------------------------------------------------------------------------
 
-loc_846D8:
+SKRawAnimation_JumpEscapedMultiBySignedByteAndPublishPointer:
                 move.b  (a2)+,d1
                 ext.w   d1
                 lea     (a1,d1.w),a1
                 move.l  a1,$30(a0)
 
-loc_846E4:
+SKRawAnimation_EmitEscapedMultiFirstPairWithMinusOneBeforeOuterClear:
                 move.b  (a1),mapping_frame(a0)
                 move.b  1(a1),anim_frame_timer(a0)
                 moveq   #-1,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_846F2:
+SKRawAnimation_InvokeEscapedMultiCallbackThenMinusOneBeforeCursorClear:
                 clr.b   anim_frame_timer(a0)
                 movea.l $34(a0),a1
                 jsr     (a1)
@@ -409,27 +409,27 @@ loc_846F2:
 Animate_RawGetFaster:
                 movea.l $30(a0),a1
                 bset    #5,$38(a0)
-                bne.s   loc_84714
+                bne.s   SKRawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker
                 move.b  (a1),$2E(a0)
                 clr.b   $2F(a0)
 
-loc_84714:
+SKRawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_8474C
+                bpl.s   SKRawAnimation_ReturnAcceleratingTimerHoldWithZeroResult
                 move.b  $2E(a0),d2
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
                 move.b  2(a1,d0.w),d1
-                bpl.s   loc_8473C
+                bpl.s   SKRawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult
                 moveq   #0,d0
                 move.b  2(a1),d1
                 tst.b   d2
-                beq.s   loc_84750
+                beq.s   SKRawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold
                 subq.b  #1,d2
                 move.b  d2,$2E(a0)
 
-loc_8473C:
+SKRawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
@@ -437,12 +437,12 @@ loc_8473C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8474C:
+SKRawAnimation_ReturnAcceleratingTimerHoldWithZeroResult:
                 moveq   #0,d2
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84750:
+SKRawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
@@ -450,13 +450,13 @@ loc_84750:
                 addq.b  #1,d0
                 move.b  d0,$2F(a0)
                 cmp.b   1(a1),d0
-                blo.s   loc_8477C
+                blo.s   SKRawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback
                 bclr    #5,$38(a0)
                 clr.b   $2F(a0)
                 movea.l $34(a0),a2
                 jsr     (a2)
 
-loc_8477C:
+SKRawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback:
                 moveq   #-1,d2
                 rts
 ; End of function Animate_RawGetFaster
@@ -466,40 +466,40 @@ loc_8477C:
 Animate_RawGetSlower:
                 movea.l $30(a0),a1
                 bset    #5,$38(a0)
-                bne.s   loc_84790
+                bne.s   SKRawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker
                 clr.w   $2E(a0)
 
-loc_84790:
+SKRawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_847C4
+                bpl.s   SKRawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter
                 move.b  $2E(a0),d2
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
                 move.b  1(a1,d0.w),d1
-                bpl.s   loc_847B0
+                bpl.s   SKRawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold
                 moveq   #0,d0
                 move.b  1(a1),d1
                 addq.b  #1,d2
 
-loc_847B0:
+SKRawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold:
                 move.b  d0,anim_frame(a0)
                 move.b  d1,mapping_frame(a0)
                 move.b  d2,anim_frame_timer(a0)
                 cmp.b   (a1),d2
-                bhs.s   loc_847C6
+                bhs.s   SKRawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback
                 move.b  d2,$2E(a0)
 
-locret_847C4:
+SKRawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_847C6:
+SKRawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback:
                 move.b  $2F(a0),d0
                 addq.b  #1,d0
                 move.b  d0,$2F(a0)
                 cmp.b   1(a1),d0
-                blo.s   locret_847C4
+                blo.s   SKRawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter
                 bclr    #5,$38(a0)
                 clr.b   $2F(a0)
                 movea.l $34(a0),a2

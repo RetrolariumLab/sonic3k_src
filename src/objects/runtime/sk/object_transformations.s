@@ -53,7 +53,7 @@ SetScaledObjectOriginFromCenter:
 
 ; ---------------------------------------------------------------------------
 
-loc_861C0:
+SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
@@ -65,60 +65,60 @@ loc_861C0:
 SetVelocityTowardPointByDominantAxis:
                 sub.w   x_pos(a0),d0
                 smi     d2
-                bpl.s   loc_861DA
+                bpl.s   SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude
                 neg.w   d0
 
-loc_861DA:
+SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude:
                 sub.w   y_pos(a0),d1
                 smi     d3
-                bpl.s   loc_861E4
+                bpl.s   SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath
                 neg.w   d1
 
-loc_861E4:
+SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath:
                 cmp.w   d1,d0
                 scs     d4
-                beq.s   loc_8621A
-                bcc.s   loc_861EE
+                beq.s   SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint
+                bcc.s   SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord
                 exg     d0,d1
 
-loc_861EE:
+SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord:
                 swap    d1
                 divu.w  d0,d1
 
-loc_861F2:
+SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient:
                 move.w  #$100,d0
                 lsl.w   d5,d0
                 moveq   #8,d6
                 sub.w   d5,d6
                 lsr.w   d6,d1
 
-loc_861FE:
+SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance:
                 tst.b   d4
-                beq.s   loc_86204
+                beq.s   SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign
                 exg     d0,d1
 
-loc_86204:
+SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign:
                 tst.b   d2
-                beq.s   loc_8620A
+                beq.s   SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign
                 neg.w   d0
 
-loc_8620A:
+SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign:
                 tst.b   d3
-                beq.s   loc_86210
+                beq.s   SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn
                 neg.w   d1
 
-loc_86210:
+SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn:
                 move.w  d0,x_vel(a0)
                 move.w  d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8621A:
+SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint:
                 tst.w   d0
-                beq.s   loc_861F2
+                beq.s   SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient
                 move.w  #$100,d0
                 lsl.w   d5,d0
                 move.w  #$100,d1
                 lsl.w   d5,d1
-                bra.s   loc_861FE
+                bra.s   SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance
 ; End of function SetVelocityTowardPointByDominantAxis

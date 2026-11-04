@@ -252,7 +252,7 @@ loc_8CE1C:
 ; ---------------------------------------------------------------------------
 
 loc_8CE30:
-                jmp     loc_85088(pc)
+                jmp     SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
 loc_8CE34:

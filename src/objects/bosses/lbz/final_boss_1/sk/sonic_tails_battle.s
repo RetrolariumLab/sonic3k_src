@@ -211,7 +211,7 @@ loc_72BBC:
                 clr.w   (Ctrl_1_logical).w
                 jsr     (AllocateObject).l
                 bne.s   loc_72BFA
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 loc_72BFA:
                 lea     (ArtKosM_LBZ2DeathEggSmall).l,a1

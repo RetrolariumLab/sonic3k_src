@@ -67,7 +67,7 @@ loc_4387E:
                 tst.b   $30(a0)
                 bne.s   loc_43892
                 move.w  $44(a0),d0
-                jmp     (loc_1B666).l
+                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
 ; ---------------------------------------------------------------------------
 
 loc_43892:
@@ -184,7 +184,7 @@ loc_439BC:
 loc_439DE:
                 subq.b  #2,angle(a0)
                 move.w  $44(a0),d0
-                jmp     (loc_1B666).l
+                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
 
 ; =============== S U B R O U T I N E =======================================
 

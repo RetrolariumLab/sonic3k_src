@@ -19,7 +19,7 @@ SetUp_ObjAttributes3:
                 bset    #2,render_flags(a0)             ; Object uses world coordinates
                 addq.b  #2,routine(a0)                  ; Increase routine counter
 
-locret_529CE:
+S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit:
                 rts
 ; End of function SetUp_ObjAttributes
 
@@ -317,11 +317,11 @@ Refresh_ChildPositionAdjusted:
                 ext.w   d1
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_52C96
+                beq.s   S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-loc_52C96:
+S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0
@@ -329,11 +329,11 @@ loc_52C96:
                 ext.w   d1
                 bclr    #1,render_flags(a0)
                 btst    #1,render_flags(a1)
-                beq.s   loc_52CBC
+                beq.s   S3RuntimeChildren_CommitAdjustedChildY
                 neg.w   d1
                 bset    #1,render_flags(a0)
 
-loc_52CBC:
+S3RuntimeChildren_CommitAdjustedChildY:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 rts

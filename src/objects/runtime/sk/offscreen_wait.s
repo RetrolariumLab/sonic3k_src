@@ -10,30 +10,30 @@ Obj_WaitOffscreen:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 move.l  (sp)+,$34(a0)
-                move.l  #loc_85AD2,(a0)
+                move.l  #SKRuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull,(a0)
 
-loc_85AD2:
+SKRuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull:
                 tst.b   render_flags(a0)
-                bmi.s   loc_85B02
+                bmi.s   SKRuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_85AF0
+                bhi.s   SKRuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_85AF0:
+SKRuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_85AFC
+                beq.s   SKRuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_85AFC:
+SKRuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_85B02:
+SKRuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation:
                 move.l  $34(a0),(a0)                    ; Restore normal object operation when onscreen
                 rts
 ; End of function Obj_WaitOffscreen

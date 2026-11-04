@@ -8,17 +8,17 @@ Sprite_OnScreen_Test:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1B5A0
+                bhi.w   SKRuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B5A0:
+SKRuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B5AC
+                beq.s   SKRuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B5AC:
+SKRuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
@@ -26,17 +26,17 @@ Sprite_OnScreen_Test2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1B5C4
+                bhi.w   SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B5C4:
+SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B5D0
+                beq.s   SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B5D0:
+SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot:
                 bra.w   Delete_Current_Sprite
 
 ; =============== S U B R O U T I N E =======================================
@@ -46,86 +46,86 @@ Delete_Sprite_If_Not_In_Range:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1B5EA
+                bhi.w   SKRuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B5EA:
+SKRuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B5F6
+                beq.s   SKRuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B5F6:
+SKRuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot:
                 bra.w   Delete_Current_Sprite
 ; End of function Delete_Sprite_If_Not_In_Range
 
 ; ---------------------------------------------------------------------------
 ; unused
                 tst.w   (Competition_mode).w
-                bne.s   loc_1B628
+                bne.s   SKRuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1B618
+                bhi.w   SKRuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B618:
+SKRuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B624
+                beq.s   SKRuntimeLifetime_LegacyNormalDrawCull_ClearSlot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B624:
+SKRuntimeLifetime_LegacyNormalDrawCull_ClearSlot:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B628:
+SKRuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF00,d0
                 move.w  d0,d1
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$300,d0
-                bhi.w   loc_1B642
+                bhi.w   SKRuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B642:
+SKRuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow:
                 sub.w   (_unkF7DC).w,d1
                 cmpi.w  #$300,d1
-                bhi.w   loc_1B652
+                bhi.w   SKRuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B652:
+SKRuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B65E
+                beq.s   SKRuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B65E:
+SKRuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
 Sprite_CheckDeleteTouch3:
                 move.w  x_pos(a0),d0
 
-loc_1B666:
+SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_1B680
+                bhi.w   SKRuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside
                 jsr     (Add_SpriteToCollisionResponseList).l
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_1B680:
+SKRuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_1B68C
+                beq.s   SKRuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1B68C:
+SKRuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull:
                 bra.w   Delete_Current_Sprite

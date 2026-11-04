@@ -10,34 +10,34 @@ Find_SonicTails:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   loc_53280
+                bpl.s   S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation
                 neg.w   d2
                 addq.w  #2,d0
 
-loc_53280:
+S3Runtime_FindPlayers_MeasureSecondHorizontalSeparation:
                 lea     (Player_2).w,a2
                 move.w  x_pos(a0),d3
                 sub.w   x_pos(a2),d3
-                bpl.s   loc_53292
+                bpl.s   S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie
                 neg.w   d3
                 addq.w  #2,d1
 
-loc_53292:
+S3Runtime_FindPlayers_ChooseUnsignedHorizontalMinimumWithP1Tie:
                 cmp.w   d3,d2
-                bls.s   loc_5329C
+                bls.s   S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation
                 movea.l a2,a1
                 move.w  d1,d0
                 move.w  d3,d2
 
-loc_5329C:
+S3Runtime_FindPlayers_MeasureSelectedVerticalSeparation:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   locret_532AC
+                bpl.s   S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes
                 neg.w   d3
                 addq.w  #2,d1
 
-locret_532AC:
+S3Runtime_FindPlayers_ReturnSelectedHandleSidesAndWordMagnitudes:
                 rts
 ; End of function Find_SonicTails
 
@@ -85,18 +85,18 @@ Find_OtherObject:
                 moveq   #0,d1                           ; d1 = 0 if other object is above calling object, 2 if below it
                 move.w  x_pos(a0),d2
                 sub.w   x_pos(a1),d2
-                bpl.s   loc_53300
+                bpl.s   S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign
                 neg.w   d2
                 addq.w  #2,d0
 
-loc_53300:
+S3Runtime_OtherTarget_MeasureVerticalSeparationAfterHorizontalSign:
                 moveq   #0,d1
                 move.w  y_pos(a0),d3
                 sub.w   y_pos(a1),d3
-                bpl.s   locret_53310
+                bpl.s   S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes
                 neg.w   d3
                 addq.w  #2,d1
 
-locret_53310:
+S3Runtime_OtherTarget_ReturnSidesAndWordMagnitudes:
                 rts
 ; End of function Find_OtherObject

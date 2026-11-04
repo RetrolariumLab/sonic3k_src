@@ -241,7 +241,7 @@ loc_778F2:
 loc_77936:
                 jsr     (AllocateObject).l
                 bne.s   loc_77944
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 loc_77944:
                 move.w  #-$100,(Camera_min_Y_pos).w
@@ -264,7 +264,7 @@ loc_77974:
                 lea     (Player_1).w,a1
                 cmpi.w  #$5468,x_pos(a1)
                 bhs.s   loc_77986
-                jmp     (loc_86334).l
+                jmp     (SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord).l
 ; ---------------------------------------------------------------------------
 
 loc_77986:
@@ -427,7 +427,7 @@ loc_77B50:
                 btst    #4,$38(a1)
                 beq.w   locret_77AF6
                 moveq   #0,d0
-                jmp     (loc_849D8).l
+                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_77B6C:
@@ -522,7 +522,7 @@ loc_77C32:
 loc_77C7A:
                 jsr     (Displace_PlayerOffObject).l
                 moveq   #0,d0
-                jmp     (loc_849D8).l
+                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_77C88:

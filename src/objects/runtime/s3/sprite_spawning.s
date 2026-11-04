@@ -13,95 +13,95 @@ Load_Sprites:
 ; ---------------------------------------------------------------------------
 
 Load_Sprites_Index:
-                bra.w   loc_19D0A
+                bra.w   S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear
 ; ---------------------------------------------------------------------------
-                bra.w   loc_19DD0
+                bra.w   S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
 ; ---------------------------------------------------------------------------
-                bra.w   loc_19DD0
+                bra.w   S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
 ; ---------------------------------------------------------------------------
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19D0A:
+S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear:
                 addq.b  #4,(Object_load_routine).w
                 tst.b   (Respawn_table_keep).w
-                bne.s   loc_19D24
+                bne.s   S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming
                 lea     (Object_respawn_table).w,a0
                 moveq   #0,d0
                 move.w  #bytesToLcnt($300),d1
 
-loc_19D1E:
+S3RuntimeSpawning_ClearMainRespawnTableByLongword:
                 move.l  d0,(a0)+
-                dbf     d1,loc_19D1E
+                dbf     d1,S3RuntimeSpawning_ClearMainRespawnTableByLongword
 
-loc_19D24:
+S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
                 lea     (SpriteLocPtrs).l,a0
                 movea.l (a0,d0.w),a0
                 cmpi.b  #$13,(Current_zone).w           ; Is this the Gumball Machine?
-                bcc.s   loc_19D44                       ; if so, branch
+                bcc.s   S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate  ; if so, branch
                 tst.w   (Competition_mode).w            ; Is Competition Mode active?
-                beq.s   loc_19D6C                       ; if not, branch
+                beq.s   S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase  ; if not, branch
 
-loc_19D44:
+S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate:
                 addq.b  #8,(Object_load_routine).w
                 jsr     AllocateObject(pc)
-                bne.s   loc_19D66
+                bne.s   S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
                 lea     (_unkF712).w,a3
                 lea     (Sprite_Listing).l,a4
                 move.w  #$800,d6
 
-loc_19D5C:
+S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure:
                 cmp.w   (a0),d6
-                bls.s   loc_19D66
+                bls.s   S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
                 jsr     CreateObjectFromLayoutRecord(pc)
-                beq.s   loc_19D5C
+                beq.s   S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure
 
-loc_19D66:
+S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization:
                 clr.w   (Camera_X_pos_coarse_back).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19D6C:
+S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase:
                 move.l  a0,(Object_load_addr_front).w
                 move.l  a0,(Object_load_addr_back).w
                 lea     (Object_respawn_table).w,a3
                 move.w  (Camera_X_pos).w,d6
                 subi.w  #$80,d6
-                bcc.s   loc_19D84
+                bcc.s   S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels
                 moveq   #0,d6
 
-loc_19D84:
+S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels:
                 andi.w  #$FF80,d6
                 movea.l (Object_load_addr_front).w,a0
 
-loc_19D8C:
+S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary:
                 cmp.w   (a0),d6
-                bls.s   loc_19D96
+                bls.s   S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   loc_19D8C
+                bra.s   S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary
 ; ---------------------------------------------------------------------------
 
-loc_19D96:
+S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 lea     (Object_respawn_table).w,a3
                 movea.l (Object_load_addr_back).w,a0
                 subi.w  #$80,d6
-                bcs.s   loc_19DB6
+                bcs.s   S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
 
-loc_19DAC:
+S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary:
                 cmp.w   (a0),d6
-                bls.s   loc_19DB6
+                bls.s   S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   loc_19DAC
+                bra.s   S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary
 ; ---------------------------------------------------------------------------
 
-loc_19DB6:
+S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 move.w  #-1,(Camera_X_pos_coarse).w
@@ -109,183 +109,183 @@ loc_19DB6:
                 andi.w  #$FF80,d0
                 move.w  d0,(Camera_Y_pos_coarse).w
 
-loc_19DD0:
+S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder:
                 move.w  (Camera_X_pos).w,d1
                 subi.w  #$80,d1
                 andi.w  #$FF80,d1
                 move.w  d1,(Camera_X_pos_coarse_back).w
                 lea     (Sprite_Listing).l,a4
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   loc_19E1A
-                lea     loc_1A010(pc),a6
+                bpl.s   S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge
+                lea     S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter(pc),a6
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   loc_19E0A
+                bpl.s   S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   loc_19E34
+                bra.s   S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
 ; ---------------------------------------------------------------------------
 
-loc_19E0A:
+S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow:
                 move.w  (Screen_Y_wrap_value).w,d0
                 addq.w  #1,d0
                 cmp.w   d0,d4
-                bls.s   loc_19E30
+                bls.s   S3RuntimeSpawning_SelectLinearVerticalRecordDecoder
                 and.w   (Screen_Y_wrap_value).w,d4
-                bra.s   loc_19E34
+                bra.s   S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
 ; ---------------------------------------------------------------------------
 
-loc_19E1A:
+S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge:
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   loc_19E30
+                bpl.s   S3RuntimeSpawning_SelectLinearVerticalRecordDecoder
                 moveq   #0,d3
 
-loc_19E30:
-                lea     loc_1A062(pc),a6
+S3RuntimeSpawning_SelectLinearVerticalRecordDecoder:
+                lea     S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter(pc),a6
 
-loc_19E34:
+S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange:
                 move.w  #$FFF,d5
                 move.w  (Camera_X_pos).w,d6
                 andi.w  #$FF80,d6
                 cmp.w   (Camera_X_pos_coarse).w,d6
-                beq.w   loc_19EEA
-                bge.s   loc_19EA2
+                beq.w   S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
+                bge.s   S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$80,d6
-                bcs.s   loc_19E78
+                bcs.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
                 jsr     AllocateObject(pc)
-                bne.s   loc_19E78
+                bne.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
 
-loc_19E62:
+S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion:
                 cmp.w   -6(a0),d6
-                bge.s   loc_19E78
+                bge.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
                 subq.w  #6,a0
                 subq.w  #1,a3
                 jsr     (a6)
-                bne.s   loc_19E74
+                bne.s   S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord
                 subq.w  #6,a0
-                bra.s   loc_19E62
+                bra.s   S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion
 ; ---------------------------------------------------------------------------
 
-loc_19E74:
+S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord:
                 addq.w  #6,a0
                 addq.w  #1,a3
 
-loc_19E78:
+S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$300,d6
 
-loc_19E8C:
+S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary:
                 cmp.w   -6(a0),d6
-                bgt.s   loc_19E98
+                bgt.s   S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan
                 subq.w  #6,a0
                 subq.w  #1,a3
-                bra.s   loc_19E8C
+                bra.s   S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary
 ; ---------------------------------------------------------------------------
 
-loc_19E98:
+S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
-                bra.s   loc_19EEA
+                bra.s   S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
 ; ---------------------------------------------------------------------------
 
-loc_19EA2:
+S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate:
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$280,d6
                 jsr     AllocateObject(pc)
-                bne.s   loc_19EC2
+                bne.s   S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
 
-loc_19EB8:
+S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary:
                 cmp.w   (a0),d6
-                bls.s   loc_19EC2
+                bls.s   S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
                 jsr     (a6)
                 addq.w  #1,a3
-                beq.s   loc_19EB8
+                beq.s   S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary
 
-loc_19EC2:
+S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$300,d6
-                bcs.s   loc_19EE2
+                bcs.s   S3RuntimeSpawning_CommitAdvancedBackCursor
 
-loc_19ED8:
+S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary:
                 cmp.w   (a0),d6
-                bls.s   loc_19EE2
+                bls.s   S3RuntimeSpawning_CommitAdvancedBackCursor
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   loc_19ED8
+                bra.s   S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary
 ; ---------------------------------------------------------------------------
 
-loc_19EE2:
+S3RuntimeSpawning_CommitAdvancedBackCursor:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
 
-loc_19EEA:
+S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange:
                 move.w  (Camera_Y_pos).w,d6
                 andi.w  #$FF80,d6
                 move.w  d6,d3
                 cmp.w   (Camera_Y_pos_coarse).w,d6
-                beq.w   loc_19FCA
-                bge.s   loc_19F26
+                beq.w   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bge.s   S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   loc_19F1C
+                bpl.s   S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled
                 tst.w   d6
-                bne.s   loc_19F10
+                bne.s   S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
                 cmpi.w  #$80,(Camera_Y_pos_coarse).w
-                bne.s   loc_19F38
+                bne.s   S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
 
-loc_19F10:
+S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask:
                 subi.w  #$80,d3
-                bpl.s   loc_19F52
+                bpl.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   loc_19F52
+                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
 ; ---------------------------------------------------------------------------
 
-loc_19F1C:
+S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled:
                 subi.w  #$80,d3
-                bmi.w   loc_19FCA
-                bra.s   loc_19F52
+                bmi.w   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
 ; ---------------------------------------------------------------------------
 
-loc_19F26:
+S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow:
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   loc_19F48
+                bpl.s   S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit
                 tst.w   (Camera_Y_pos_coarse).w
-                bne.s   loc_19F38
+                bne.s   S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
                 cmpi.w  #$80,d6
-                bne.s   loc_19F10
+                bne.s   S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
 
-loc_19F38:
+S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                blo.s   loc_19F52
+                blo.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   loc_19F52
+                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
 ; ---------------------------------------------------------------------------
 
-loc_19F48:
+S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                bhi.s   loc_19FCA
+                bhi.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
 
-loc_19F52:
+S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan:
                 jsr     AllocateObject(pc)
-                bne.s   loc_19FCA
+                bne.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
                 move.w  d3,d4
                 addi.w  #$80,d4
                 move.w  #$FFF,d5
@@ -293,18 +293,18 @@ loc_19F52:
                 movea.w (Object_respawn_index_back).w,a3
                 move.l  (Object_load_addr_front).w,d7
                 sub.l   a0,d7
-                beq.s   loc_19FCA
+                beq.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
                 addq.w  #2,a0
 
-loc_19F74:
+S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow:
                 tst.b   (a3)
-                bmi.s   loc_19FC2
+                bmi.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
                 move.w  (a0),d1
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   loc_19FC2
+                blo.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
                 cmp.w   d4,d1
-                bhi.s   loc_19FC2
+                bhi.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
                 bset    #7,(a3)
                 move.w  -2(a0),x_pos(a1)
                 move.w  (a0),d1
@@ -322,15 +322,15 @@ loc_19F74:
                 move.b  3(a0),subtype(a1)
                 move.w  a3,respawn_addr(a1)
                 jsr     CreateNewSprite4(pc)
-                bne.s   loc_19FCA
+                bne.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
 
-loc_19FC2:
+S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount:
                 addq.w  #6,a0
                 addq.w  #1,a3
                 subq.w  #6,d7
-                bne.s   loc_19F74
+                bne.s   S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow
 
-loc_19FCA:
+S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure:
                 move.w  d6,(Camera_Y_pos_coarse).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -362,33 +362,33 @@ CreateObjectFromLayoutRecord:
                 bra.w   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-loc_1A010:
+S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter:
                 tst.b   (a3)
-                bpl.s   loc_1A01A
+                bpl.s   S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A01A:
+S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   loc_1A032
+                bmi.s   S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation
                 and.w   d5,d1
                 cmp.w   d3,d1
-                bhs.s   loc_1A034
+                bhs.s   S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
                 cmp.w   d4,d1
-                bls.s   loc_1A034
+                bls.s   S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A032:
+S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation:
                 and.w   d5,d1
 
-loc_1A034:
+S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -405,35 +405,35 @@ loc_1A034:
                 bra.s   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-loc_1A062:
+S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter:
                 tst.b   (a3)
-                bpl.s   loc_1A06C
+                bpl.s   S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A06C:
+S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   loc_1A084
+                bmi.s   S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   loc_1A07E
+                blo.s   S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags
                 cmp.w   d4,d1
-                bls.s   loc_1A086
+                bls.s   S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch
 
-loc_1A07E:
+S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags:
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1A084:
+S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation:
                 and.w   d5,d1
 
-loc_1A086:
+S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -450,14 +450,14 @@ loc_1A086:
 
 CreateNewSprite4:
                 subq.w  #1,d0
-                bmi.s   locret_1A0C0
+                bmi.s   S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr
 
-loc_1A0B6:
+S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                dbeq    d0,loc_1A0B6
+                dbeq    d0,S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero
 
-locret_1A0C0:
+S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr:
                 rts
 ; End of function CreateObjectFromLayoutRecord
 
@@ -505,30 +505,30 @@ Clear_SpriteRingMem:
                 lea     (Dynamic_object_RAM).w,a1
                 moveq   #((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d1
 
-loc_1A154:
+S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                beq.s   loc_1A168
+                beq.s   S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
                 move.w  respawn_addr(a1),d0
-                beq.s   loc_1A168
+                beq.s   S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_1A168:
-                dbf     d1,loc_1A154
+S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount:
+                dbf     d1,S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
-                bcs.s   locret_1A18C
+                bcs.s   S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization
 
-loc_1A176:
+S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries:
                 move.w  (a2)+,d0
-                beq.s   loc_1A176
+                beq.s   S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
                 movea.w d0,a1
                 move.w  #-1,(a1)
                 clr.w   -2(a2)
                 subq.w  #1,(Ring_consumption_table).w
-                dbf     d1,loc_1A176
+                dbf     d1,S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
 
-locret_1A18C:
+S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization:
                 rts

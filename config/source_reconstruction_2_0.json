@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 85
+    "commit_count": 86
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -557,9 +557,15 @@
       "commits": ["7a3c691c39af68ebdfa2f28770c5421e55632fd6"]
     },
     {
-      "id": "current-semantic-02-system",
+      "id": "change-a00fc210503f",
       "kind": "source_or_tooling",
       "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 02-system; retain exact reversible source proof and original ROM bytes.",
+      "commits": ["a00fc210503f7586bcef3880e475994b0fbf27e4"]
+    },
+    {
+      "id": "current-semantic-03-object-runtime",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 03-object-runtime; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],

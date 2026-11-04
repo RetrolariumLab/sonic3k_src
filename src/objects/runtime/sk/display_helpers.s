@@ -29,11 +29,11 @@ MoveDraw_SpriteTimed2:
 
 TimedSprite_ScreenLock:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_84F88
+                bmi.s   SKRuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84F88:
+SKRuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion:
                 move.b  #1,(Boss_flag).w
                 bra.w   Go_Delete_Sprite_2
 ; End of function TimedSprite_ScreenLock
@@ -65,14 +65,14 @@ SetUp_ObjAttributesSlotted:
                 lea     (Slotted_object_bits).w,a2
                 adda.w  d5,a2                           ; Get the address of the array to use
                 move.b  (a2),d5
-                beq.s   loc_84FE4                       ; If array is clear, just make the object
+                beq.s   SKRuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail  ; If array is clear, just make the object
 
-loc_84FBC:
+SKRuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels:
                 lsr.b   #1,d5                           ; Check slot (each bit)
-                bcc.s   loc_84FE4                       ; If clear, make object
+                bcc.s   SKRuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail  ; If clear, make object
                 addq.w  #1,d0                           ; Increment bit number
                 add.w   d4,d3                           ; Add VRAM offset
-                dbf     d1,loc_84FBC                    ; Repeat max times
+                dbf     d1,SKRuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels  ; Repeat max times
                 moveq   #0,d0
                 move.l  d0,(a0)
                 move.l  d0,x_pos(a0)
@@ -84,7 +84,7 @@ loc_84FBC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84FE4:
+SKRuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail:
                 bset    d0,(a2)                         ; Turn this slot on
                 move.b  d0,ros_bit(a0)
                 move.w  a2,ros_addr(a0)                 ; Keep track of slot address and bit number

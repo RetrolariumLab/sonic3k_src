@@ -141,10 +141,10 @@ MoveSprite_CircularLookup:
                 move.b  child_dx(a0),d4
                 ext.w   d4
                 btst    #0,render_flags(a0)
-                beq.s   loc_53448
+                beq.s   S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant
                 neg.w   d4
 
-loc_53448:
+S3RuntimeCurve_AddChildOffsetsAndDispatchCircularLookupQuadrant:
                 add.w   d4,d2
                 move.b  child_dy(a0),d4
                 ext.w   d4
@@ -155,10 +155,10 @@ loc_53448:
                 move.w  (a4,d1.w),d1
                 jsr     (a4,d1.w)
                 btst    #0,render_flags(a0)
-                beq.s   loc_5346C
+                beq.s   S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates
                 neg.w   d5
 
-loc_5346C:
+S3RuntimeCurve_CommitChildCircularLookupIntegerCoordinates:
                 add.w   d5,d2
                 add.w   d6,d3
                 move.w  d2,x_pos(a0)
@@ -189,33 +189,33 @@ MoveSprite_AngleYLookup:
 
 ; ---------------------------------------------------------------------------
 AngleY_LookupIndex:
-                dc.w    loc_534B4-AngleY_LookupIndex
-                dc.w    loc_534BC-AngleY_LookupIndex
-                dc.w    loc_534C6-AngleY_LookupIndex
-                dc.w    loc_534D0-AngleY_LookupIndex
+                dc.w    S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter-AngleY_LookupIndex
+                dc.w    S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter-AngleY_LookupIndex
+                dc.w    S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter-AngleY_LookupIndex
+                dc.w    S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter-AngleY_LookupIndex
 ; ---------------------------------------------------------------------------
 
-loc_534B4:
+S3RuntimeCurve_SampleReversePositiveYForPhaseFirstQuarter:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_534BC:
+S3RuntimeCurve_SampleForwardNegativeYForPhaseSecondQuarter:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_534C6:
+S3RuntimeCurve_SampleReverseNegativeYForPhaseThirdQuarter:
                 moveq   #0,d1
                 move.b  (a3,d4.w),d1
                 neg.w   d1
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_534D0:
+S3RuntimeCurve_SampleForwardPositiveYForPhaseFourthQuarter:
                 moveq   #0,d1
                 move.b  (a2,d0.w),d1
                 rts
@@ -234,41 +234,41 @@ MoveSprite_AngleXLookupOffset:
 
 ; ---------------------------------------------------------------------------
 AngleX_LookupIndex:
-                dc.w    loc_534F6-AngleX_LookupIndex
-                dc.w    loc_534FE-AngleX_LookupIndex
-                dc.w    loc_5350A-AngleX_LookupIndex
-                dc.w    loc_5351A-AngleX_LookupIndex
+                dc.w    S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter-AngleX_LookupIndex
+                dc.w    S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter-AngleX_LookupIndex
+                dc.w    S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter-AngleX_LookupIndex
+                dc.w    S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter-AngleX_LookupIndex
 ; ---------------------------------------------------------------------------
 
-loc_534F6:
+S3RuntimeCurve_SampleForwardPositiveXForPhaseFirstQuarter:
                 move.b  (a1,d0.w),d1
-                bra.w   loc_5352A
+                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_534FE:
+S3RuntimeCurve_SampleReversePositiveXForPhaseSecondQuarter:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
-                bra.w   loc_5352A
+                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_5350A:
+S3RuntimeCurve_SampleForwardNegativeXForPhaseThirdQuarter:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_5352A
+                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_5351A:
+S3RuntimeCurve_SampleReverseNegativeXForPhaseFourthQuarter:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.b  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_5352A
+                bra.w   S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX
 ; ---------------------------------------------------------------------------
 
-loc_5352A:
+S3RuntimeCurve_BuildParentOffsetCoordinatesForSampledX:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3
@@ -288,45 +288,45 @@ loc_5352A:
                 move.b  d0,d1
                 rol.b   #3,d1
                 andi.w  #6,d1
-                move.w  off_53568(pc,d1.w),d2
-                jmp     off_53568(pc,d2.w)
+                move.w  S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d1.w),d2
+                jmp     S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets(pc,d2.w)
 ; ---------------------------------------------------------------------------
-off_53568:
-                dc.w    loc_53570-off_53568
-                dc.w    loc_53578-off_53568
-                dc.w    loc_53584-off_53568
-                dc.w    loc_53594-off_53568
+S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets:
+                dc.w    S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
+                dc.w    S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter-S3RuntimeCurve_MixedWidthYLookupQuarterRelativeWordOffsets
 ; ---------------------------------------------------------------------------
 
-loc_53570:
+S3RuntimeCurve_SampleByteForwardPositiveYInMixedWidthLookup:
                 move.b  (a1,d0.w),d1
-                bra.w   loc_535A4
+                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_53578:
+S3RuntimeCurve_SampleWordReverseYInMixedWidthSecondQuarter:
                 moveq   #$7F,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
-                bra.w   loc_535A4
+                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_53584:
+S3RuntimeCurve_SampleWordForwardNegativeYInMixedWidthThirdQuarter:
                 move.w  d0,d1
                 andi.w  #$3F,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_535A4
+                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_53594:
+S3RuntimeCurve_SampleWordReverseNegativeYInMixedWidthFourthQuarter:
                 move.w  #$FF,d1
                 sub.w   d0,d1
                 move.w  (a1,d1.w),d1
                 neg.w   d1
-                bra.w   loc_535A4
+                bra.w   S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY
 ; ---------------------------------------------------------------------------
 
-loc_535A4:
+S3RuntimeCurve_CommitParentOffsetXAndMixedWidthSampledY:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.b  child_dx(a0),d3

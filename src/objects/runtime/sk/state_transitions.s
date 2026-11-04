@@ -6,11 +6,11 @@
 
 Obj_Wait:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_84892
+                bmi.s   ObjectTransitionSK_Wait_InvokeExpiredTimerCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_84892:
+ObjectTransitionSK_Wait_InvokeExpiredTimerCallback:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function Obj_Wait
@@ -19,17 +19,17 @@ loc_84892:
 
 ObjHitFloor_DoRoutine:
                 tst.w   y_vel(a0)
-                bmi.s   locret_848AA
+                bmi.s   ObjectTransitionSK_Floor_ReturnWithoutContact
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_848AC
-                beq.s   loc_848AC
+                bmi.s   ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback
+                beq.s   ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback
 
-locret_848AA:
+ObjectTransitionSK_Floor_ReturnWithoutContact:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_848AC:
+ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback:
                 add.w   d1,y_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -45,15 +45,15 @@ ObjHitFloor2_DoRoutine:
                 swap    d3
                 jsr     (ObjCheckFloorDist2).l
                 cmpi.w  #-1,d1
-                blt.s   loc_848DE
+                blt.s   ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne
                 cmpi.w  #$C,d1
-                bge.s   loc_848DE
+                bge.s   ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne
                 add.w   d1,y_pos(a0)
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_848DE:
+ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne:
                 movea.l $34(a0),a1
                 jsr     (a1)
                 moveq   #1,d0
@@ -65,11 +65,11 @@ loc_848DE:
 ObjHitWall_DoRoutine:
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   loc_848F4
+                bmi.s   ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_848F4:
+ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -80,11 +80,11 @@ loc_848F4:
 ObjHitWall2_DoRoutine:
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bmi.s   loc_8490A
+                bmi.s   ObjectTransitionSK_LeftWall_AdjustXAndTailInvokeCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8490A:
+ObjectTransitionSK_LeftWall_AdjustXAndTailInvokeCallback:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)

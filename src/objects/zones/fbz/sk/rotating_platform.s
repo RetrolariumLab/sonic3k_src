@@ -115,7 +115,7 @@ loc_3B8C2:
 loc_3B90C:
                 add.b   d1,angle(a0)
                 move.w  $44(a0),d0
-                jmp     (loc_1B666).l
+                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
 ; ---------------------------------------------------------------------------
 Map_FBZRotatingPlatform:
                 include "src/objects/shared/zones/fbz/mappings/rotating_platform.s"

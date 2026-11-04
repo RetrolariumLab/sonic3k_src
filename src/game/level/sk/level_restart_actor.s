@@ -7,7 +7,7 @@ Obj_StartNewLevel:
                 lea     (Player_1).w,a1
                 lea     word_86426(pc),a2
                 jsr     (Check_InMyRange).l
-                beq.w   locret_8405E
+                beq.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 cmpi.w  #3,(Player_mode).w
                 bne.s   loc_86418
                 cmpi.b  #9,(Current_zone).w
@@ -35,7 +35,7 @@ loc_86438:
                 beq.s   loc_86452
                 move.b  (V_int_run_count+3).w,d1
                 andi.b  #$F,d1
-                bne.w   locret_8405E
+                bne.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 moveq   #signextendB(sfx_Rumble2),d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------

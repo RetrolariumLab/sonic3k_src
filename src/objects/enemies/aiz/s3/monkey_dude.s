@@ -41,7 +41,7 @@ loc_54FB0:
 ; ---------------------------------------------------------------------------
 
 loc_54FB8:
-                jmp     (loc_53CD6).l
+                jmp     (S3RuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback).l
 ; ---------------------------------------------------------------------------
 
 loc_54FBE:

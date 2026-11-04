@@ -17,7 +17,7 @@ Change_Act2Sizes:
                 move.w  d1,(Camera_stored_max_Y_pos).w  ; Put level sizes into the target size memory
                 move.w  d1,(Camera_target_max_Y_pos).w
                 cmpi.b  #$10,d0
-                beq.w   locret_529CE                    ; If we're in HCZ, don't immediately apply these changes. There's another event to do
+                beq.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit  ; If we're in HCZ, don't immediately apply these changes. There's another event to do
 ; End of function Change_Act2Sizes
 
 ; =============== S U B R O U T I N E =======================================

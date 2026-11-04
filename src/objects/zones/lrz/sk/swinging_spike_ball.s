@@ -64,7 +64,7 @@ loc_435E0:
                 move.b  $36(a0),d0
                 add.b   d0,$34(a0)
                 move.w  $44(a0),d0
-                jmp     (loc_1B666).l
+                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
 ; ---------------------------------------------------------------------------
 
 loc_435FE:

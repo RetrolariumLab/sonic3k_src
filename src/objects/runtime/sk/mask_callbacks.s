@@ -6,18 +6,18 @@
 Obj_SpriteMask:
                 bset    #2,render_flags(a0)
 
-loc_862B4:
+SpriteMask_InitializeMappingsAndSubtype:
                 clr.w   art_tile(a0)
                 move.l  #Map_SpriteMask,mappings(a0)
                 move.b  #$20,width_pixels(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.l  #loc_862FE,(a0)
+                move.l  #SpriteMask_SetGlobalFlagAndTestOnScreen,(a0)
                 btst    #3,d0
-                beq.s   loc_862DE
-                move.l  #loc_86308,(a0)
+                beq.s   SpriteMask_SelectHeightFrameAndPriority
+                move.l  #SpriteMask_DrawUntilParentFlagFive,(a0)
 
-loc_862DE:
+SpriteMask_SelectHeightFrameAndPriority:
                 move.w  d0,d1
                 andi.w  #$F0,d0
                 lsr.w   #2,d0
@@ -26,44 +26,44 @@ loc_862DE:
                 move.b  d0,mapping_frame(a0)
                 andi.w  #7,d1
                 add.w   d1,d1
-                move.w  word_86324(pc,d1.w),priority(a0)
+                move.w  SpriteMask_PriorityBySubtypeLowBits(pc,d1.w),priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_862FE:
+SpriteMask_SetGlobalFlagAndTestOnScreen:
                 st      (Spritemask_flag).w
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_86308:
+SpriteMask_DrawUntilParentFlagFive:
                 st      (Spritemask_flag).w
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.s   loc_8631E
+                bne.s   SpriteMask_DeleteForParentFlagFive
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8631E:
+SpriteMask_DeleteForParentFlagFive:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_86324:
+SpriteMask_PriorityBySubtypeLowBits:
                 dc.w    0,   $80,  $100,  $180,  $200,  $280,  $300,  $380
 ; ---------------------------------------------------------------------------
 
-loc_86334:
+SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord:
                 move.w  #(button_right_mask<<8)|button_right_mask,d0
                 tst.w   $2E(a0)
-                beq.s   loc_86346
+                beq.s   SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing
                 subq.w  #1,$2E(a0)
                 move.w  #((button_A_mask|button_right_mask)<<8)|button_right_mask,d0
 
-loc_86346:
+SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing:
                 btst    #5,(Player_1+status).w
-                beq.s   loc_86358
+                beq.s   SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord
                 move.w  #$1F,$2E(a0)
                 move.w  #((button_A_mask|button_right_mask)<<8)|(button_A_mask|button_right_mask),d0
 
-loc_86358:
+SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord:
                 move.w  d0,(Ctrl_1_logical).w
                 rts
 
@@ -88,7 +88,7 @@ FacePlayersTowardObject:
                 bsr.w   FacePlayerTowardObject
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
-                bpl.s   locret_863BE
+                bpl.s   SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip
 ; End of function FacePlayersTowardObject
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,33 +98,33 @@ FacePlayerTowardObject:
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 cmp.w   x_pos(a1),d0
-                bhs.s   locret_863BE
+                bhs.s   SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip
                 bset    #0,render_flags(a1)
                 bset    #Status_Facing,status(a1)
 
-locret_863BE:
+SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip:
                 rts
 ; End of function FacePlayerTowardObject
 
 ; ---------------------------------------------------------------------------
 
-loc_863C0:
+SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists:
                 tst.l   (Player_2).w
-                beq.s   loc_863E6
+                beq.s   SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock
                 move.b  #1,(Ctrl_2_locked).w
                 clr.w   (Tails_CPU_idle_timer).w
-                move.l  #loc_863D6,(a0)
+                move.l  #SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock,(a0)
 
-loc_863D6:
+SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock:
                 tst.b   (Ctrl_2_locked).w
-                beq.s   loc_863E2
+                beq.s   SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock
                 clr.w   (Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_863E2:
+SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock:
                 clr.w   (Ctrl_2).w
 
-loc_863E6:
+SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock:
                 jmp     (Delete_Current_Sprite).l
-; End of function loc_863C0
+; End of function SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists

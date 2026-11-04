@@ -14,7 +14,7 @@ Obj_EggCapsule:
                 moveq   #$18,d3
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull).l
-                jmp     loc_539C4(pc)
+                jmp     S3RuntimeLifetime_CapsuleCoarseCull_DrawOrSchedulePrivateFlagDeletion(pc)
 ; ---------------------------------------------------------------------------
 EggCapsule_Index:
                 dc.w    loc_54514-EggCapsule_Index

@@ -11,34 +11,34 @@ Draw_And_Touch_Sprite:
 Child_Draw_Sprite:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_530A4
+                bne.s   S3RuntimeChildren_ScheduleChildDeletionForParentStatus
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_530A4:
+S3RuntimeChildren_ScheduleChildDeletionForParentStatus:
                 bra.w   Go_Delete_Sprite
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_530C0
+                bne.s   S3RuntimeChildren_ScheduleTouchChildDeletionForParentStatus
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_530C0:
+S3RuntimeChildren_ScheduleTouchChildDeletionForParentStatus:
                 bra.w   Go_Delete_Sprite
 ; ---------------------------------------------------------------------------
 
 Child_Remember_Draw_Sprite:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_530D6
+                bne.s   S3RuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_530D6:
+S3RuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion:
                 bsr.w   Remove_From_TrackingSlot
                 bra.w   Go_Delete_Sprite
 ; ---------------------------------------------------------------------------
@@ -46,38 +46,38 @@ loc_530D6:
 Child_Draw_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_530F0
+                bne.s   S3RuntimeChildren_ScheduleChildDeletionForParentPrivateFlag
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_530F0:
+S3RuntimeChildren_ScheduleChildDeletionForParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_53114
+                bne.s   S3RuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag
                 btst    #7,status(a1)
-                bne.s   loc_5310E
+                bne.s   S3RuntimeChildren_DrawChildAfterParentStatusContactGate
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-loc_5310E:
+S3RuntimeChildren_DrawChildAfterParentStatusContactGate:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_53114:
+S3RuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_Draw_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_5312A
+                bne.s   S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5312A:
+S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw:
                 bset    #7,status(a0)
                 move.l  #Obj_FlickerMove,(a0)
                 clr.b   collision_flags(a0)
@@ -88,14 +88,14 @@ loc_5312A:
 Child_Draw_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_5312A
+                bne.s   S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_5312A
+                bne.s   S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -103,14 +103,14 @@ Child_DrawTouch_Sprite_FlickerMove:
 Child_DrawTouch_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_5312A
+                bne.s   S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
                 btst    #7,status(a1)
-                beq.s   loc_5318E
+                beq.s   S3RuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear
                 bset    #7,status(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_5318E:
+S3RuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; End of function Draw_And_Touch_Sprite

@@ -30841,7 +30841,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_863C0",
+          "name": "SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists",
           "kind": "terminal-tail",
           "reason": "Close the final second-player input-lock callback, conditional return and deletion tail after all earlier annotated helpers.",
           "origin_first_line": 5748,

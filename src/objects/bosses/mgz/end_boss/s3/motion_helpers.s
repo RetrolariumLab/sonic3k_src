@@ -441,7 +441,7 @@ loc_4B2A0:
 loc_4B2B6:
                 jsr     (Random_Number).l
                 andi.w  #$3C,d0
-                jmp     (loc_5312A).l
+                jmp     (S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
 
 ; =============== S U B R O U T I N E =======================================
 

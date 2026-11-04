@@ -13,7 +13,7 @@ Init_SpriteTable:
                 clr.l   (Current_sprite_table_page).w   ; Clears both Current_sprite_table_page and Sprite_table_page_flip_pending!
                 endif
                 tst.w   (Competition_mode).w
-                beq.s   loc_19162
+                beq.s   S3Runtime_SelectSinglePlayerHardwareSpriteTable
                 lea     (Sprite_table).w,a0
                 bsr.s   Init_SpriteTable2
                 bsr.s   Init_SpriteTable_2Player
@@ -26,7 +26,7 @@ Init_SpriteTable:
                 bra.s   Init_SpriteTable2
 ; ---------------------------------------------------------------------------
 
-loc_19162:
+S3Runtime_SelectSinglePlayerHardwareSpriteTable:
                 lea     (Sprite_table).w,a0
 ; End of function Init_SpriteTable
 
@@ -62,16 +62,16 @@ Init_SpriteTable_2Player:
 
 Process_Sprites:
                 tst.b   (Teleport_active_flag).w
-                bne.s   locret_191D0
+                bne.s   S3Runtime_ReturnAfterObjectRangeOrTeleportGate
                 lea     (Object_RAM).w,a0
                 tst.w   (Competition_mode).w
-                bne.s   loc_191BE
+                bne.s   S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
                 cmpi.b  #$C,(Player_1+routine).w
-                beq.s   loc_191BE
+                beq.s   S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_191D2
+                bhs.s   S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries
 
-loc_191BE:
+S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState:
                 moveq   #bytesToXcnt(Object_RAM_end-Object_RAM,object_size),d7
 ; End of function Process_Sprites
 
@@ -79,21 +79,21 @@ loc_191BE:
 
 ExecuteObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   loc_191C8
+                beq.s   S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode
                 movea.l d0,a1
                 jsr     (a1)
 
-loc_191C8:
+S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode:
                 lea     next_object(a0),a0
                 dbf     d7,ExecuteObjectSlotRange
 
-locret_191D0:
+S3Runtime_ReturnAfterObjectRangeOrTeleportGate:
                 rts
 ; End of function ExecuteObjectSlotRange
 
 ; ---------------------------------------------------------------------------
 
-loc_191D2:                                              ; this is broken?
+S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries:  ; this is broken?
                 moveq   #((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
                 bsr.s   ExecuteObjectSlotRange
                 moveq   #((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
@@ -105,12 +105,12 @@ loc_191D2:                                              ; this is broken?
 
 QueueVisibleObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   loc_191EC
+                beq.s   S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
                 tst.b   render_flags(a0)
-                bpl.s   loc_191EC
+                bpl.s   S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
                 jsr     Draw_Sprite(pc)
 
-loc_191EC:
+S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode:
                 lea     next_object(a0),a0
                 dbf     d7,QueueVisibleObjectSlotRange
                 rts
@@ -182,12 +182,12 @@ Draw_Sprite:
                 lea     (Sprite_table_input).w,a1
                 adda.w  priority(a0),a1
                 cmpi.w  #$7E,(a1)
-                bcc.s   locret_19254
+                bcc.s   S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection
                 addq.w  #2,(a1)
                 adda.w  (a1),a1
                 move.w  a0,(a1)
 
-locret_19254:
+S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection:
                 rts
 ; End of function Draw_Sprite
 
@@ -197,23 +197,23 @@ Animate_Sprite:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   loc_1926E
+                beq.s   S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-loc_1926E:
+S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   locret_192A4
+                bcc.s   S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),anim_frame_timer(a0)
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
-                bmi.s   loc_192A6
+                bmi.s   S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands
 
-loc_1928A:
+S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor:
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
                 andi.b  #3,d1
@@ -221,52 +221,52 @@ loc_1928A:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_192A4:
+S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_192A6:
+S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands:
                 addq.b  #1,d0                           ; Code FF - Repeat animation from beginning
-                bne.s   loc_192B6
+                bne.s   S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   loc_1928A
+                bra.s   S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
 ; ---------------------------------------------------------------------------
 
-loc_192B6:
+S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand:
                 addq.b  #1,d0                           ; Code FE - Repeat animation from earlier point
-                bne.s   loc_192CA
+                bne.s   S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   loc_1928A
+                bra.s   S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
 ; ---------------------------------------------------------------------------
 
-loc_192CA:
+S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand:
                 addq.b  #1,d0                           ; Code FD - Start new animation
-                bne.s   loc_192D6
+                bne.s   S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand
                 move.b  2(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_192D6:
+S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand:
                 addq.b  #1,d0                           ; Code FC - Increment routine counter
-                bne.s   loc_192E8
+                bne.s   S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_192E8:
+S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand:
                 addq.b  #1,d0                           ; Code FB - Move offscreen
-                bne.s   locret_192F4
+                bne.s   S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand
                 move.w  #$7F00,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_192F4:
+S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand:
                 rts
 ; End of function Animate_Sprite
 
@@ -276,23 +276,23 @@ Animate_SpriteIrregularDelay:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   loc_1930E
+                beq.s   S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-loc_1930E:
+S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   locret_19348
+                bcc.s   S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 add.w   d1,d1
                 move.b  (a1,d1.w),d0
-                bmi.s   loc_1934A
+                bmi.s   S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference
 
-loc_19328:
+S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor:
                 move.b  1(a1,d1.w),anim_frame_timer(a0)
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
@@ -301,45 +301,45 @@ loc_19328:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_19348:
+S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1934A:
+S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference:
                 addq.b  #1,d0
-                bne.s   loc_19358
+                bne.s   S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap
                 move.b  #0,anim_frame(a0)
                 move.b  (a1),d0
-                bra.s   loc_19328
+                bra.s   S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
 ; ---------------------------------------------------------------------------
 
-loc_19358:
+S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap:
                 addq.b  #1,d0
-                bne.s   loc_1936E
+                bne.s   S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand
                 move.b  1(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 add.w   d0,d0
                 sub.b   d0,d1
                 move.b  (a1,d1.w),d0
-                bra.s   loc_19328
+                bra.s   S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
 ; ---------------------------------------------------------------------------
 
-loc_1936E:
+S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand:
                 addq.b  #1,d0
-                bne.s   loc_1937A
+                bne.s   S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand
                 move.b  1(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1937A:
+S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand:
                 addq.b  #1,d0
-                bne.s   locret_1938C
+                bne.s   S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_1938C:
+S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand:
                 rts
 ; End of function Animate_SpriteIrregularDelay

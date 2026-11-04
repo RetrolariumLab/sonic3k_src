@@ -292,7 +292,7 @@ loc_64C70:
                 clr.w   (Ctrl_1_logical).w
                 jsr     (AllocateObject).l
                 bne.s   loc_64C9E
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 loc_64C9E:
                 move.w  #$300,(Camera_target_max_Y_pos).w
@@ -392,7 +392,7 @@ loc_64DAA:
                 st      (Ctrl_1_locked).w
                 jsr     (AllocateObject).l
                 bne.s   locret_64DCA
-                move.l  #loc_863C0,(a1)
+                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
 
 locret_64DCA:
                 rts

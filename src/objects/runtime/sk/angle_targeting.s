@@ -13,82 +13,82 @@ GetApproximateObjectBearing:
                 move.w  x_pos(a2),d0
                 move.w  y_pos(a2),d1
                 sub.w   x_pos(a1),d0
-                bpl.s   loc_86248
+                bpl.s   SKRuntime_Bearing_ExtractVerticalSignAfterHorizontalMagnitude
                 neg.w   d0
                 moveq   #8,d2
 
-loc_86248:
+SKRuntime_Bearing_ExtractVerticalSignAfterHorizontalMagnitude:
                 sub.w   y_pos(a1),d1
-                bpl.s   loc_86252
+                bpl.s   SKRuntime_Bearing_OrderUnsignedMinorAndMajorAxisMagnitudes
                 neg.w   d1
                 moveq   #4,d3
 
-loc_86252:
+SKRuntime_Bearing_OrderUnsignedMinorAndMajorAxisMagnitudes:
                 cmp.w   d0,d1
-                bhs.s   loc_8625A
+                bhs.s   SKRuntime_Bearing_DivideWordShiftedMinorAndDispatchQuadrant
                 exg     d0,d1
                 moveq   #2,d4
 
-loc_8625A:
+SKRuntime_Bearing_DivideWordShiftedMinorAndDispatchQuadrant:
                 tst.w   d1
-                beq.s   locret_8627E
+                beq.s   SKRuntime_Bearing_ReturnZeroOrPositiveXYVerticalRatio
                 lsl.w   #5,d0
                 divu.w  d1,d0
                 add.w   d2,d3
                 add.w   d3,d4
-                move.w  off_8626E(pc,d4.w),d4
-                jmp     off_8626E(pc,d4.w)
+                move.w  SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets(pc,d4.w),d4
+                jmp     SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets(pc,d4.w)
 ; ---------------------------------------------------------------------------
-off_8626E:
-                dc.w    locret_8627E-off_8626E
-                dc.w    loc_86280-off_8626E
-                dc.w    loc_86288-off_8626E
-                dc.w    loc_86290-off_8626E
-                dc.w    loc_86296-off_8626E
-                dc.w    loc_8629A-off_8626E
-                dc.w    loc_862A0-off_8626E
-                dc.w    loc_862A6-off_8626E
+SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets:
+                dc.w    SKRuntime_Bearing_ReturnZeroOrPositiveXYVerticalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_ComplementPositiveXYHorizontalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_ComplementNegativeYVerticalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_AddQuarterTurnForNegativeYHorizontalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_NegateNegativeXVerticalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_AddThreeQuarterTurnForNegativeXHorizontalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_AddHalfTurnForNegativeXYVerticalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
+                dc.w    SKRuntime_Bearing_ComplementNegativeXYHorizontalRatio-SKRuntime_Bearing_QuadrantMajorAxisHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-locret_8627E:
+SKRuntime_Bearing_ReturnZeroOrPositiveXYVerticalRatio:
                 rts
 ; End of function GetApproximateObjectBearing
 
 ; ---------------------------------------------------------------------------
 
-loc_86280:
+SKRuntime_Bearing_ComplementPositiveXYHorizontalRatio:
                 subi.w  #$40,d0
                 neg.w   d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_86288:
+SKRuntime_Bearing_ComplementNegativeYVerticalRatio:
                 subi.w  #$80,d0
                 neg.w   d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_86290:
+SKRuntime_Bearing_AddQuarterTurnForNegativeYHorizontalRatio:
                 addi.w  #$40,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_86296:
+SKRuntime_Bearing_NegateNegativeXVerticalRatio:
                 neg.w   d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8629A:
+SKRuntime_Bearing_AddThreeQuarterTurnForNegativeXHorizontalRatio:
                 addi.w  #$C0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_862A0:
+SKRuntime_Bearing_AddHalfTurnForNegativeXYVerticalRatio:
                 addi.w  #$80,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_862A6:
+SKRuntime_Bearing_ComplementNegativeXYHorizontalRatio:
                 subi.w  #$C0,d0
                 neg.w   d0
                 rts
