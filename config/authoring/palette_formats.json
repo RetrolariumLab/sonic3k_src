@@ -251,23 +251,23 @@
     },
     {
       "path": "src/objects/bosses/fbz/miniboss/s3/object_catalog.s",
-      "scope": "word_4D540",
+      "scope": "FBZMiniS3_WarningPaletteScript",
       "first_line": 85,
       "last_line": 90,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 24,
-      "declarations_sha256": "ea6dd08372075f1007b35e0fd8fe843a33b3cd27f5ffea9266de4d23ac6f9488",
+      "declarations_sha256": "3891635527797163e422e1e7d8d05a6ce872734dd518723b4c87057a61e75743",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": []
     },
     {
       "path": "src/objects/bosses/fbz/miniboss/sk/object_catalog.s",
-      "scope": "word_6FAE0",
+      "scope": "FBZMiniSK_WarningPaletteScript",
       "first_line": 68,
       "last_line": 73,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "d5c1fff3d578fc82b006adfb85a0df1070b50fb3fbd511ddccc7b68c9fabef54",
+      "declarations_sha256": "16e5716942518d381d1d0f01afcabc7b3b6b88e3ca969db5053e788d9c6d4b90",
       "external_symbols": ["Normal_palette", "Normal_palette_line_2"],
       "file_frames": []
     },

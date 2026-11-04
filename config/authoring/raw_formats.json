@@ -177,7 +177,7 @@
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
-      "sha256": "4471aea8648806b053804b7f765b697e378faa4ca4e3145090c2a6df976b5b08"
+      "sha256": "2b200b0ad523009f24294f6228763b5e158aff1865c203eff1bbbaae9c519790"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
@@ -213,27 +213,27 @@
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "dc54e88acf195adf6b99ae8a401f7fced6e5f6e08b52166c9ef9e74c9edbe4ae"
+      "sha256": "57c8324ac2e366586d2a74de2c881eba6a95f72d93b704e81f5ffa72b0cbe10e"
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/object_catalog.s",
-      "sha256": "ce20ac68bcfda9df04654714868f465f8b4bf522c8cc3745b0f7e687312585ff"
+      "sha256": "82fc867f651106864633be581a1aa0ead2d8a093a1ce5252e8438183f7e92b9f"
     },
     {
       "path": "src/objects/bosses/fbz/s3/act2_subboss.s",
-      "sha256": "5dd0871da5eaf2de29c2a4ab144b785fbba49c61442b930ce4f5af66faf0a1a7"
+      "sha256": "0cc8e315fda1ac626e432530fe8437b13da04c53df7e790e274d93836b7fa022"
     },
     {
       "path": "src/objects/bosses/fbz/s3/end_boss.s",
-      "sha256": "8c625a3d48d628df5bfb89f081a953e1ec964baf27a366ef505603e8bd0d4f58"
+      "sha256": "e4adb5cb99b3fd55dbb35e2607272d7f50a9bff2d7bee789d16cd7ef47a2d3c9"
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss.s",
-      "sha256": "225664087385c13c15d5ab6f90a641d46f540a85e783970bda12ebd8cd89b628"
+      "sha256": "0d63c42eb522d019794bca2dc6153c8f94099ff61074183dc53847cadf820cf7"
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss_resources.s",
-      "sha256": "2f24a3da633f8a6a96308eaea4aa2ba7534429da66d5b775a9de53d0efa526eb"
+      "sha256": "1e79b90108e8d06cf502ba362f9d86c7d08fd5486278664a633289126c813ea1"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/attacks_and_transition.s",
@@ -297,7 +297,7 @@
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
-      "sha256": "7c01d5e88287336d8c312e34947bc7c032ab77e5026f2f41ddec98e3a7f19f81"
+      "sha256": "d0cbce5a2018c041b79c44b2b39dbf1c90c15fcc4426078750b657a0e2b75a1d"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
@@ -2067,31 +2067,31 @@
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_70F3E",
-      "scope": "byte_70F3E",
+      "symbol": "FBZBossSK_FlameBodyAnimation",
+      "scope": "FBZBossSK_FlameBodyAnimation",
       "first_line": 80,
       "last_line": 116,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 64,
-      "declarations_sha256": "5056473fa9fe9564baffe490f8991e97fcdc5779878a2224757db1291a5d427e",
+      "declarations_sha256": "9d067382037326cb1ec7e0423906d886e7fcb31b694cbf752bfd99bb190d1969",
       "entries": [
         [0, "pairs"],
         [35, "pairs"],
         [50, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_70F3E", "byte_70F61", "byte_70F70"],
+      "members": ["FBZBossSK_FlameBodyAnimation", "FBZBossSK_FlameExplosionAnimation", "FBZBossSK_FlameAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/fbz/s3/act2_subboss.s",
-      "symbol": "byte_4DB54",
-      "scope": "byte_4DB54",
-      "first_line": 563,
-      "last_line": 588,
+      "symbol": "FBZAct2S3_OperatorIdleAnim",
+      "scope": "FBZAct2S3_OperatorIdleAnim",
+      "first_line": 564,
+      "last_line": 589,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 44,
-      "declarations_sha256": "0163b8721c22fb4faeb69c1f82723786811662135d88cd182d8fa257005ba7d2",
+      "declarations_sha256": "c4bfbcd389ce16bc889102aad8d160a3e924ed370f4431465febe7537598226f",
       "entries": [
         [0, "pairs"],
         [13, "accelerating"],
@@ -2100,36 +2100,42 @@
         [37, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_4DB54", "byte_4DB61", "byte_4DB66", "byte_4DB72", "byte_4DB79"],
+      "members": [
+        "FBZAct2S3_OperatorIdleAnim",
+        "FBZAct2S3_ChargeAccelerateAnim",
+        "FBZAct2S3_LaserFireAnim",
+        "FBZAct2S3_LaserRetractAnim",
+        "FBZAct2S3_OperatorRunAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/fbz/s3/end_boss.s",
-      "symbol": "byte_4E31E",
-      "scope": "byte_4E31E",
-      "first_line": 752,
-      "last_line": 788,
+      "symbol": "FBZBossS3_FlameBodyAnimation",
+      "scope": "FBZBossS3_FlameBodyAnimation",
+      "first_line": 753,
+      "last_line": 789,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 64,
-      "declarations_sha256": "ba427a327f937d333ca770f2b47cfa343f48be741de689e3da050cce1470cd6e",
+      "declarations_sha256": "2e4a68b31d5d9c11ad473392ca71e92253f045cc54026843fc8df2e8fbefe0af",
       "entries": [
         [0, "pairs"],
         [35, "pairs"],
         [50, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_4E31E", "byte_4E341", "byte_4E350"],
+      "members": ["FBZBossS3_FlameBodyAnimation", "FBZBossS3_FlameExplosionAnimation", "FBZBossS3_FlameAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss_resources.s",
-      "symbol": "byte_703F4",
-      "scope": "byte_703F4",
+      "symbol": "FBZAct2SK_OperatorIdleAnim",
+      "scope": "FBZAct2SK_OperatorIdleAnim",
       "first_line": 48,
       "last_line": 73,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 44,
-      "declarations_sha256": "c0160511ab78545029391b8ff4e8c5980294b8dd1287ca3e9871c0c8a2fa4985",
+      "declarations_sha256": "15d2f7562e686de358fdae14644c0c066a3bfe3e65d10c8e496b4dfa871bde59",
       "entries": [
         [0, "pairs"],
         [13, "accelerating"],
@@ -2138,7 +2144,13 @@
         [37, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_703F4", "byte_70401", "byte_70406", "byte_70412", "byte_70419"],
+      "members": [
+        "FBZAct2SK_OperatorIdleAnim",
+        "FBZAct2SK_ChargeAccelerateAnim",
+        "FBZAct2SK_LaserFireAnim",
+        "FBZAct2SK_LaserRetractAnim",
+        "FBZAct2SK_OperatorRunAnim"
+      ],
       "stored_markers": []
     },
     {

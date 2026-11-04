@@ -7,20 +7,20 @@
 ; Play the spike-ball sound at angle $00 or $80 with at least four wait ticks left
 FBZBoss_TryHalfTurnSound:
                 cmpi.w  #4,$2E(a0)
-                blo.s   locret_70C8C
+                blo.s   FBZBossSK_HalfTurnSoundReturn
                 move.b  $3C(a0),d0
                 andi.b  #$7F,d0
-                bne.s   locret_70C8C
+                bne.s   FBZBossSK_HalfTurnSoundReturn
                 moveq   #signextendB(sfx_SpikeBalls),d0
                 jsr     (Play_SFX).l
 
-locret_70C8C:
+FBZBossSK_HalfTurnSoundReturn:
                 rts
 ; End of function FBZBoss_TryHalfTurnSound
 
 ; ---------------------------------------------------------------------------
 
-loc_70C8E:
+FBZBossSK_ConnectorInterpolateXY:
                 movea.w $44(a0),a1
                 movea.w parent3(a0),a2
                 move.w  x_pos(a1),d0
@@ -42,14 +42,14 @@ loc_70C8E:
                 moveq   #$14,d3
                 bsr.w   PositionFBZEndBossConnectorAxisByQuarter
                 tst.b   $3C(a2)
-                beq.s   locret_70CDA
-                bmi.s   locret_70CDA
-                move.w  word_70CDC(pc,d4.w),priority(a0)
+                beq.s   FBZBossSK_ConnectorPhaseQueueReturn
+                bmi.s   FBZBossSK_ConnectorPhaseQueueReturn
+                move.w  FBZBossSK_ConnectorPhaseQueueWords(pc,d4.w),priority(a0)
 
-locret_70CDA:
+FBZBossSK_ConnectorPhaseQueueReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_70CDC:
+FBZBossSK_ConnectorPhaseQueueWords:
                 dc.w    $180
                 dc.w    $100
                 dc.w    $80
@@ -58,35 +58,35 @@ word_70CDC:
 ; =============== S U B R O U T I N E =======================================
 
 PositionFBZEndBossConnectorAxisByQuarter:
-                move.w  off_70CEC(pc,d4.w),d5
-                jmp     off_70CEC(pc,d5.w)
+                move.w  FBZBossSK_ConnectorFractionOffsets(pc,d4.w),d5
+                jmp     FBZBossSK_ConnectorFractionOffsets(pc,d5.w)
 ; End of function PositionFBZEndBossConnectorAxisByQuarter
 
 ; ---------------------------------------------------------------------------
-off_70CEC:
-                dc.w    loc_70CF4-off_70CEC
-                dc.w    loc_70CFA-off_70CEC
-                dc.w    loc_70D00-off_70CEC
-                dc.w    loc_70D08-off_70CEC
+FBZBossSK_ConnectorFractionOffsets:
+                dc.w    FBZBossSK_ConnectorQuarterDelta-FBZBossSK_ConnectorFractionOffsets
+                dc.w    FBZEndBossSK_Connector_HalfSignedDelta-FBZBossSK_ConnectorFractionOffsets
+                dc.w    FBZBossSK_ConnectorThreeQuarterDelta-FBZBossSK_ConnectorFractionOffsets
+                dc.w    FBZBossSK_ConnectorStoreInterpolatedAxis-FBZBossSK_ConnectorFractionOffsets
 ; ---------------------------------------------------------------------------
 
-loc_70CF4:
+FBZBossSK_ConnectorQuarterDelta:
                 asr.w   #2,d1
-                bra.w   loc_70D08
+                bra.w   FBZBossSK_ConnectorStoreInterpolatedAxis
 ; ---------------------------------------------------------------------------
 
-loc_70CFA:
+FBZEndBossSK_Connector_HalfSignedDelta:
                 asr.w   #1,d1
-                bra.w   loc_70D08
+                bra.w   FBZBossSK_ConnectorStoreInterpolatedAxis
 ; ---------------------------------------------------------------------------
 
-loc_70D00:
+FBZBossSK_ConnectorThreeQuarterDelta:
                 asr.w   #1,d1
                 move.w  d1,d0
                 asr.w   #1,d1
                 add.w   d0,d1
 
-loc_70D08:
+FBZBossSK_ConnectorStoreInterpolatedAxis:
                 add.w   d1,d2
                 move.w  d2,(a0,d3.w)
                 rts
@@ -96,18 +96,18 @@ loc_70D08:
 InitializeFBZEndBossFlameColumnPart:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_70D40(pc,d0.w),$2E(a0)
-                move.w  byte_70D52(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  FBZBossSK_FlamePartWaits(pc,d0.w),$2E(a0)
+                move.w  FBZBossSK_FlamePartOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
                 add.w   d0,d0
-                move.l  off_70D64(pc,d0.w),$30(a0)
-                movea.l off_70D88(pc,d0.w),a1
+                move.l  FBZBossSK_FlamePartAnimationPointers(pc,d0.w),$30(a0)
+                movea.l FBZBossSK_FlamePartAttributePointers(pc,d0.w),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #4,shield_reaction(a0)
                 jmp     (Refresh_ChildPosition).l
 ; End of function InitializeFBZEndBossFlameColumnPart
 
 ; ---------------------------------------------------------------------------
-word_70D40:
+FBZBossSK_FlamePartWaits:
                 dc.w    $50
                 dc.w    $4D
                 dc.w    $4A
@@ -117,7 +117,7 @@ word_70D40:
                 dc.w    $3E
                 dc.w    $3B
                 dc.w    0
-byte_70D52:
+FBZBossSK_FlamePartOffsets:
                 dc.b    0,-$68
                 dc.b    8,-$5C
                 dc.b    -8,-$5C
@@ -127,26 +127,26 @@ byte_70D52:
                 dc.b    0,-$1C
                 dc.b    0, -$C
                 dc.b    0,-$10
-off_70D64:
-                dc.l    byte_70F70
-                dc.l    byte_70F70
-                dc.l    byte_70F70
-                dc.l    byte_70F61
-                dc.l    byte_70F61
-                dc.l    byte_70F61
-                dc.l    byte_70F61
-                dc.l    byte_70F61
-                dc.l    byte_70F3E
-off_70D88:
-                dc.l    ObjDat3_70EC8
-                dc.l    ObjDat3_70EC8
-                dc.l    ObjDat3_70EC8
-                dc.l    ObjDat3_70EBC
-                dc.l    ObjDat3_70EBC
-                dc.l    ObjDat3_70EBC
-                dc.l    ObjDat3_70EBC
-                dc.l    ObjDat3_70EBC
-                dc.l    ObjDat3_70EB0
+FBZBossSK_FlamePartAnimationPointers:
+                dc.l    FBZBossSK_FlameAnimation
+                dc.l    FBZBossSK_FlameAnimation
+                dc.l    FBZBossSK_FlameAnimation
+                dc.l    FBZBossSK_FlameExplosionAnimation
+                dc.l    FBZBossSK_FlameExplosionAnimation
+                dc.l    FBZBossSK_FlameExplosionAnimation
+                dc.l    FBZBossSK_FlameExplosionAnimation
+                dc.l    FBZBossSK_FlameExplosionAnimation
+                dc.l    FBZBossSK_FlameBodyAnimation
+FBZBossSK_FlamePartAttributePointers:
+                dc.l    FBZBossSK_FlameAttributes
+                dc.l    FBZBossSK_FlameAttributes
+                dc.l    FBZBossSK_FlameAttributes
+                dc.l    FBZBossSK_FlameExplosionAttributes
+                dc.l    FBZBossSK_FlameExplosionAttributes
+                dc.l    FBZBossSK_FlameExplosionAttributes
+                dc.l    FBZBossSK_FlameExplosionAttributes
+                dc.l    FBZBossSK_FlameExplosionAttributes
+                dc.l    FBZBossSK_FlameBodyAttributes
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -166,20 +166,20 @@ CenterFBZEndBossXBetweenSupports:
 
 SetFBZEndBossBodyDepthFromPhase:
                 tst.b   $3C(a0)
-                beq.s   loc_70DEC
-                bmi.s   loc_70DDE
+                beq.s   FBZBossSK_DepthSetPriority
+                bmi.s   FBZBossSK_DepthClearPriority
                 bset    #7,art_tile(a0)
                 move.w  #0,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70DDE:
+FBZBossSK_DepthClearPriority:
                 bclr    #7,art_tile(a0)
                 move.w  #$300,priority(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70DEC:
+FBZBossSK_DepthSetPriority:
                 bset    #7,art_tile(a0)
                 move.w  #$300,priority(a0)
                 rts
@@ -189,8 +189,8 @@ loc_70DEC:
 
 SetFBZEndBossHingeDepthFromPhase:
                 tst.b   $3C(a0)
-                beq.s   loc_70DEC
-                bmi.s   loc_70DDE
+                beq.s   FBZBossSK_DepthSetPriority
+                bmi.s   FBZBossSK_DepthClearPriority
                 bset    #7,art_tile(a0)
                 move.w  #$200,priority(a0)
                 rts
@@ -200,45 +200,45 @@ SetFBZEndBossHingeDepthFromPhase:
 
 HandleFBZEndBossFourColorHitOrDefeat:
                 tst.l   (a0)
-                beq.s   locret_70E66
+                beq.s   FBZBossSK_HitUpdateReturn
                 tst.b   collision_flags(a0)
-                bne.s   locret_70E66
+                bne.s   FBZBossSK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.s   loc_70E68
+                beq.s   FBZBossSK_BeginScoredDefeatAlignment
                 tst.b   $20(a0)
-                bne.s   loc_70E34
+                bne.s   FBZBossSK_HitChooseFlashRow
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_70E34:
+FBZBossSK_HitChooseFlashRow:
                 bset    #6,status(a0)
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_70E46
+                bne.s   FBZBossSK_HitCopyColorsAndTick
                 addq.w  #2*4,d0
 
-loc_70E46:
-                lea     word_70E74(pc),a1
-                lea     word_70E7C(pc,d0.w),a2
+FBZBossSK_HitCopyColorsAndTick:
+                lea     FBZBossSK_HitPaletteDestinations(pc),a1
+                lea     FBZEndBossSK_Hit_TwoFourColorSourceRows(pc,d0.w),a2
                 jsr     (CopyWordData_4).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_70E66
+                bne.s   FBZBossSK_HitUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_70E66:
+FBZBossSK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70E68:
-                move.l  #loc_707F6,(a0)
+FBZBossSK_BeginScoredDefeatAlignment:
+                move.l  #FBZBossSK_DefeatAlignOrbitToZero,(a0)
                 jmp     (BossDefeated_StopTimer).l
 ; End of function HandleFBZEndBossFourColorHitOrDefeat
 
 ; ---------------------------------------------------------------------------
-word_70E74:
+FBZBossSK_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$06, Normal_palette_line_2+$08, Normal_palette_line_2+$12, Normal_palette_line_2+$1C
-word_70E7C:
+FBZEndBossSK_Hit_TwoFourColorSourceRows:
                 dc.w    $2A,   $26,   $20,  $644
                 dc.w    $888,  $AAA,  $EEE,  $AAA

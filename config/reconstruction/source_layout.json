@@ -15975,7 +15975,7 @@
       "responsibility": "Flying Battery end-boss controller, player attacks, attached actors and defeat sequence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 537,
+      "physical_lines": 539,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16115,7 +16115,7 @@
       "responsibility": "Flying Battery miniboss battle state, attacks and coordinated child actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 807,
+      "physical_lines": 809,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -16160,7 +16160,7 @@
       "responsibility": "Flying Battery miniboss motion, collision, hit response and child positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 356,
+      "physical_lines": 359,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -16240,7 +16240,7 @@
       "responsibility": "Flying Battery miniboss battle state, attacks and coordinated child actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 827,
+      "physical_lines": 829,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16275,7 +16275,7 @@
       "responsibility": "Flying Battery miniboss motion, collision, hit response and child positioning helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 355,
+      "physical_lines": 358,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -16335,7 +16335,7 @@
       "responsibility": "Flying Battery act-two subboss lifecycle, battle state, coordinated actors and resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 591,
+      "physical_lines": 592,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -16375,7 +16375,7 @@
       "responsibility": "Flying Battery end-boss lifecycle, attacks, child actors, helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 791,
+      "physical_lines": 792,
       "origin": {
         "commit": "995400f4b92884b1e428dc4a5225824813b45712",
         "path": "s3.s",
@@ -16420,7 +16420,7 @@
       "responsibility": "Flying Battery act-two subboss state machine, attack actors and collision or movement helpers with their private lookup constants.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 579,
+      "physical_lines": 581,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",

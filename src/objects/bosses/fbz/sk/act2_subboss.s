@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_FBZ2Subboss:
-                lea     word_6FCFC(pc),a1
+                lea     FBZMiniSK_ActTwoArenaCameraBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -14,14 +14,14 @@ Obj_FBZ2Subboss:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 FBZ2Subboss_Index:
-                dc.w    loc_6FD38-FBZ2Subboss_Index
-                dc.w    loc_6FDC0-FBZ2Subboss_Index
-                dc.w    loc_6FE00-FBZ2Subboss_Index
-                dc.w    loc_6FE22-FBZ2Subboss_Index
-                dc.w    loc_6FEB2-FBZ2Subboss_Index
+                dc.w    FBZAct2SK_InitBossAndArena-FBZ2Subboss_Index
+                dc.w    FBZAct2SK_WaitForPlayerXProximity-FBZ2Subboss_Index
+                dc.w    FBZAct2SK_MoveAndTickDescent-FBZ2Subboss_Index
+                dc.w    FBZAct2SK_TickChargeCycleWait-FBZ2Subboss_Index
+                dc.w    FBZAct2SK_ChaseUntilChargeReady-FBZ2Subboss_Index
 ; ---------------------------------------------------------------------------
 
-loc_6FD38:
+FBZAct2SK_InitBossAndArena:
                 lea     ObjDat_FBZ2Subboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$7F,collision_property(a0)
@@ -32,81 +32,82 @@ loc_6FD38:
                 move.w  #$5E0,(Camera_target_max_Y_pos).w
                 lea     PLC_FBZ2Subboss_SonicTails(pc),a1
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_6FD76
+                bne.s   FBZAct2SK_LoadArtAndTryMusicActor
                 lea     PLC_FBZ2Subboss_Knuckles(pc),a1
 
-loc_6FD76:
+FBZAct2SK_LoadArtAndTryMusicActor:
                 jsr     (Load_PLC_Raw).l
                 lea     Pal_FBZ2Subboss(pc),a1
                 jsr     (PalLoad_Line1).l
                 jsr     (AllocateObject).l
-                bne.s   loc_6FD9A
+                bne.s   FBZAct2SK_SpawnAttachmentAndMaskGroups
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_Miniboss,subtype(a1)
 
-loc_6FD9A:
-                lea     ChildObjDat_703D0(pc),a2
+FBZAct2SK_SpawnAttachmentAndMaskGroups:
+                lea     FBZAct2SK_SceneAttachmentChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_703DE(pc),a2
+                lea     FBZAct2SK_ParentFlagMaskChild(pc),a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_6FDB6
+                bne.s   FBZAct2SK_TryRepeatedCorners
                 move.b  #$49,subtype(a1)
 
-loc_6FDB6:
-                lea     ChildObjDat_703C8(pc),a2
+FBZAct2SK_TryRepeatedCorners:
+                lea     FBZAct2SK_CornerChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_6FDC0:
+; Require player one within $18 pixels horizontally before descending
+FBZAct2SK_WaitForPlayerXProximity:
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 cmpi.w  #$18,d2
-                blo.s   loc_6FDD2
+                blo.s   FBZAct2SK_BeginDescentAndTryBarriers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FDD2:
+FBZAct2SK_BeginDescentAndTryBarriers:
                 move.b  #4,routine(a0)
                 move.w  #$80,y_vel(a0)
                 move.w  #$37,$2E(a0)
-                move.l  #loc_6FE0C,$34(a0)
+                move.l  #FBZAct2SK_PauseBeforeFirstCharge,$34(a0)
 
-loc_6FDEC:
+FBZAct2SK_LatchBarrierSpawnAttempt:
                 bset    #7,$38(a0)
-                bne.w   locret_6FE20
-                lea     ChildObjDat_703E4(pc),a2
+                bne.w   FBZAct2SK_SharedReturn
+                lea     FBZAct2SK_SolidBarrierChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_6FE00:
+FBZAct2SK_MoveAndTickDescent:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6FE0C:
+FBZAct2SK_PauseBeforeFirstCharge:
                 move.b  #6,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_6FE3A,$34(a0)
+                move.l  #FBZAct2SK_SpawnChargeAndAimChase,$34(a0)
 
-locret_6FE20:
+FBZAct2SK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FE22:
+FBZAct2SK_TickChargeCycleWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6FE28:
+FBZAct2SK_TickCyclesOrBeginDefeat:
                 subq.b  #1,$39(a0)
-                bmi.s   loc_6FE6E
+                bmi.s   FBZAct2SK_BeginTimedDefeat
                 bset    #3,$38(a0)
                 bclr    #6,status(a0)
 
-loc_6FE3A:
+FBZAct2SK_SpawnChargeAndAimChase:
                 move.b  #8,routine(a0)
                 bclr    #1,$38(a0)
                 clr.w   y_vel(a0)
-                lea     ChildObjDat_703EC(pc),a2
+                lea     FBZAct2SK_ChargeChild(pc),a2
                 jsr     (CreateChild1_Normal).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -116,30 +117,30 @@ SetFBZAct2SubbossChaseVelocity:
                 jsr     (Find_OtherObject).l
                 move.w  #$100,d1
                 tst.w   d0
-                bne.s   loc_6FE68
+                bne.s   FBZAct2SK_StoreChaseXSpeed
                 neg.w   d1
 
-loc_6FE68:
+FBZAct2SK_StoreChaseXSpeed:
                 move.w  d1,x_vel(a0)
                 rts
 ; End of function SetFBZAct2SubbossChaseVelocity
 
 ; ---------------------------------------------------------------------------
 
-loc_6FE6E:
+FBZAct2SK_BeginTimedDefeat:
                 move.l  #Wait_Draw,(a0)
                 bset    #7,status(a0)
                 bset    #5,$38(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_6FF10,$34(a0)
+                move.l  #FBZAct2SK_ReleaseOperatorAfterDefeat,$34(a0)
                 lea     PLCKosM_FBZ2Subboss(pc),a6
                 move.w  (a6)+,d6
 
-loc_6FE94:
+FBZAct2SK_QueueDefeatCloudAndPillarArt:
                 movea.l (a6)+,a1
                 move.w  (a6)+,d2
                 jsr     (Queue_Kos_Module).l
-                dbf     d6,loc_6FE94
+                dbf     d6,FBZAct2SK_QueueDefeatCloudAndPillarArt
                 rts
 ; ---------------------------------------------------------------------------
 PLCKosM_FBZ2Subboss:    plrlistheader
@@ -148,128 +149,128 @@ PLCKosM_FBZ2Subboss:    plrlistheader
 PLCKosM_FBZ2Subboss_End:
 ; ---------------------------------------------------------------------------
 
-loc_6FEB2:
+FBZAct2SK_ChaseUntilChargeReady:
                 btst    #1,$38(a0)
-                bne.s   loc_6FEFA
+                bne.s   FBZAct2SK_PauseBeforeNextCycle
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_6FEC6
+                bne.s   FBZAct2SK_CheckChaseCornerBounds
                 bsr.s   SetFBZAct2SubbossChaseVelocity
 
-loc_6FEC6:
+FBZAct2SK_CheckChaseCornerBounds:
                 move.w  #$100,d0
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),d1
                 move.w  x_pos(a0),d2
                 addi.w  #$20,d1
                 cmp.w   d1,d2
-                blo.s   loc_6FEF0
+                blo.s   FBZAct2SK_StoreBoundaryRecoverySpeed
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d1
                 subi.w  #$20,d1
                 cmp.w   d1,d2
-                blo.s   loc_6FEF4
+                blo.s   FBZAct2SK_MoveChaseX
                 neg.w   d0
 
-loc_6FEF0:
+FBZAct2SK_StoreBoundaryRecoverySpeed:
                 move.w  d0,x_vel(a0)
 
-loc_6FEF4:
+FBZAct2SK_MoveChaseX:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6FEFA:
+FBZAct2SK_PauseBeforeNextCycle:
                 move.b  #6,routine(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6FE28,$34(a0)
+                move.l  #FBZAct2SK_TickCyclesOrBeginDefeat,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FF10:
+FBZAct2SK_ReleaseOperatorAfterDefeat:
                 bset    #4,$38(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_6FF34,$34(a0)
+                move.l  #FBZAct2SK_ReleaseBarriersAndClearBoss,$34(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_6FF32
+                bne.s   FBZAct2SK_DefeatMusicFadeSpawnReturn
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-locret_6FF32:
+FBZAct2SK_DefeatMusicFadeSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FF34:
+FBZAct2SK_ReleaseBarriersAndClearBoss:
                 bset    #2,$38(a0)
                 clr.b   (Boss_flag).w
-                move.l  #loc_6FF50,(a0)
+                move.l  #FBZAct2SK_LockCameraMinXAndCull,(a0)
                 lea     (PLC_Monitors).l,a1
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_6FF50:
+FBZAct2SK_LockCameraMinXAndCull:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_6FF5C:
-                lea     word_703A2(pc),a1
+FBZAct2SK_InitCornerAndRegister:
+                lea     FBZAct2SK_CornerAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_6FF70,(a0)
-                bra.w   loc_702EA
+                move.l  #FBZAct2SK_CornerCheckMoveRequest,(a0)
+                bra.w   FBZAct2SK_RegisterCornersAndPlace
 ; ---------------------------------------------------------------------------
 
-loc_6FF70:
+FBZAct2SK_CornerCheckMoveRequest:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_6FFB0
+                bne.s   FBZAct2SK_CornerCullAfterDefeat
                 btst    #1,subtype(a0)
-                bne.s   loc_6FFAA
+                bne.s   FBZAct2SK_CornerDraw
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_6FFAA
-                move.l  #loc_6FFB8,(a0)
+                beq.s   FBZAct2SK_CornerDraw
+                move.l  #FBZAct2SK_CornerMoveAndTickWait,(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6FFCA,$34(a0)
+                move.l  #FBZAct2SK_CornerFinishMove,$34(a0)
                 move.w  #$100,x_vel(a0)
 
-loc_6FFAA:
+FBZAct2SK_CornerDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6FFB0:
+FBZAct2SK_CornerCullAfterDefeat:
                 move.l  #Sprite_OnScreen_Test,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FFB8:
+FBZAct2SK_CornerMoveAndTickWait:
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6FFCA:
-                move.l  #loc_6FF70,(a0)
+FBZAct2SK_CornerFinishMove:
+                move.l  #FBZAct2SK_CornerCheckMoveRequest,(a0)
                 movea.w parent3(a0),a1
                 bclr    #3,$38(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FFDC:
-                lea     word_703A8(pc),a1
+FBZAct2SK_InitFixedCover:
+                lea     FBZAct2SK_FixedCoverAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_6FFFA,(a0)
+                move.l  #FBZAct2SK_FixedCoverDrawUntilDefeat,(a0)
                 addi.w  #$CC,x_pos(a0)
                 addi.w  #$7C,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FFFA:
+FBZAct2SK_FixedCoverDrawUntilDefeat:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_7000C
+                bne.s   FBZAct2SK_FixedCoverBreakAndExplode
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7000C:
+FBZAct2SK_FixedCoverBreakAndExplode:
                 move.l  #Sprite_OnScreen_Test,(a0)
                 move.b  #3,mapping_frame(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
@@ -277,43 +278,43 @@ loc_7000C:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7002A:
-                lea     ObjDat3_703BC(pc),a1
+FBZAct2SK_InitOperatorAndIdleAnim:
+                lea     FBZAct2SK_OperatorAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_70068,(a0)
-                move.l  #loc_700EA,$34(a0)
+                move.l  #FBZAct2SK_OperatorIdleAndCheckFeedback,(a0)
+                move.l  #FBZAct2SK_OperatorRunAndCull,$34(a0)
                 addi.w  #$D8,x_pos(a0)
                 addi.w  #$74,y_pos(a0)
-                move.l  #byte_703F4,$30(a0)
+                move.l  #FBZAct2SK_OperatorIdleAnim,$30(a0)
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   locret_70066
+                bne.s   FBZAct2SK_OperatorMappingSetupReturn
                 move.l  #Map_EggRoboStand,mappings(a0)
 
-locret_70066:
+FBZAct2SK_OperatorMappingSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70068:
+FBZAct2SK_OperatorIdleAndCheckFeedback:
                 jsr     (Animate_RawMultiDelay).l
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
-                beq.s   loc_70080
+                beq.s   FBZAct2SK_OperatorSelectDefeatPose
                 move.b  #2,mapping_frame(a0)
 
-loc_70080:
+FBZAct2SK_OperatorSelectDefeatPose:
                 btst    #7,status(a1)
-                beq.s   loc_70094
-                move.l  #loc_7009A,(a0)
+                beq.s   FBZAct2SK_OperatorDrawStanding
+                move.l  #FBZAct2SK_OperatorWaitThenBeginRun,(a0)
                 move.b  #3,mapping_frame(a0)
 
-loc_70094:
+FBZAct2SK_OperatorDrawStanding:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7009A:
+FBZAct2SK_OperatorWaitThenBeginRun:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.s   loc_700E4
+                beq.s   FBZAct2SK_OperatorDrawAfterWait
                 move.l  $34(a0),(a0)
                 subq.w  #4,y_pos(a0)
                 move.w  #$200,x_vel(a0)
@@ -324,55 +325,55 @@ loc_7009A:
                 clr.b   anim_frame(a0)
                 bset    #0,render_flags(a0)
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_700E4
+                bne.s   FBZAct2SK_OperatorDrawAfterWait
                 move.l  #Map_EggRoboRun,mappings(a0)
 
-loc_700E4:
+FBZAct2SK_OperatorDrawAfterWait:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_700EA:
+FBZAct2SK_OperatorRunAndCull:
                 tst.b   render_flags(a0)
-                bpl.s   loc_70106
-                lea     byte_70419(pc),a1
+                bpl.s   FBZAct2SK_OperatorRestoreArtAndDelete
+                lea     FBZAct2SK_OperatorRunAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_70106:
+FBZAct2SK_OperatorRestoreArtAndDelete:
                 lea     (PLC_MonitorsSpikesSprings).l,a1
                 jsr     (Load_PLC_Raw).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_70118:
-                lea     word_703AE(pc),a1
+FBZAct2SK_InitBarrierAndBindCorner:
+                lea     FBZAct2SK_BarrierAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_70152,(a0)
+                move.l  #FBZAct2SK_BarrierFollowSolidAndFlicker,(a0)
                 move.w  #$B0,d0
                 move.b  subtype(a0),d1
-                bne.s   loc_70134
+                bne.s   FBZAct2SK_BarrierChooseSideOffset
                 neg.w   d0
 
-loc_70134:
+FBZAct2SK_BarrierChooseSideOffset:
                 add.w   d0,x_pos(a0)
                 addi.w  #$60,y_pos(a0)
                 movea.w parent3(a0),a1
                 moveq   #$44,d0
                 tst.b   d1
-                beq.s   loc_7014A
+                beq.s   FBZAct2SK_BarrierStoreCornerHandle
                 moveq   #parent3,d0
 
-loc_7014A:
+FBZAct2SK_BarrierStoreCornerHandle:
                 move.w  (a1,d0.w),$44(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70152:
+FBZAct2SK_BarrierFollowSolidAndFlicker:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_7018C
+                bne.s   FBZAct2SK_DeleteReleasedBarrier
                 move.w  x_pos(a0),-(sp)
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -382,152 +383,153 @@ loc_70152:
                 move.w  (sp)+,d4
                 jsr     (SolidObjectFull).l
                 btst    #0,(V_int_run_count+3).w
-                bne.w   locret_6FE20
+                bne.w   FBZAct2SK_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7018C:
+FBZAct2SK_DeleteReleasedBarrier:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_70192:
-                lea     word_703B4(pc),a1
+FBZAct2SK_InitAcceleratingCharge:
+                lea     FBZAct2SK_ChargeAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_701B4,(a0)
-                move.l  #byte_70401,$30(a0)
-                move.l  #loc_701EE,$34(a0)
+                move.l  #FBZAct2SK_ChargeFollowAndAccelerate,(a0)
+                move.l  #FBZAct2SK_ChargeAccelerateAnim,$30(a0)
+                move.l  #FBZAct2SK_LaserBeginFire,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_701B4:
+FBZAct2SK_ChargeFollowAndAccelerate:
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Animate_RawGetFaster).l
                 tst.w   d2
-                beq.s   loc_701E8
-                bmi.s   loc_701D6
+                beq.s   FBZAct2SK_ChargeTouchAndDraw
+                bmi.s   FBZAct2SK_ChargeCheckReadyCount
                 cmpi.b  #4,$2E(a0)
-                bne.s   loc_701E8
+                bne.s   FBZAct2SK_ChargeTouchAndDraw
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
 
-loc_701D6:
+FBZAct2SK_ChargeCheckReadyCount:
                 cmpi.b  #$20,$2F(a0)
-                bne.s   loc_701E8
+                bne.s   FBZAct2SK_ChargeTouchAndDraw
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
 
-loc_701E8:
+FBZAct2SK_ChargeTouchAndDraw:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_701EE:
-                move.l  #loc_70220,(a0)
+FBZAct2SK_LaserBeginFire:
+                move.l  #FBZAct2SK_LaserSetTouchFromFrame,(a0)
                 move.b  #6,mapping_frame(a0)
-                move.l  #byte_70406,$30(a0)
+                move.l  #FBZAct2SK_LaserFireAnim,$30(a0)
                 addi.w  #$3C,y_pos(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_70262,$34(a0)
+                move.l  #FBZAct2SK_LaserPauseAndTryExplosion,$34(a0)
                 moveq   #signextendB(sfx_BossLaser),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70220:
+; Evaluate the existing frame before advancing the animation
+FBZAct2SK_LaserSetTouchFromFrame:
                 clr.b   collision_flags(a0)
                 cmpi.b  #8,mapping_frame(a0)
-                bne.s   loc_70232
+                bne.s   FBZAct2SK_LaserCheckPlayersHurt
                 move.b  #$AC,collision_flags(a0)
 
-loc_70232:
+FBZAct2SK_LaserCheckPlayersHurt:
                 lea     (Player_1).w,a2
                 cmpi.b  #4,routine(a2)
-                beq.s   loc_7024A
+                beq.s   FBZAct2SK_LaserLatchHurtFeedback
                 lea     (Player_2).w,a2
                 cmpi.b  #4,routine(a2)
-                bne.s   loc_70250
+                bne.s   FBZAct2SK_LaserAnimateAndWait
 
-loc_7024A:
+FBZAct2SK_LaserLatchHurtFeedback:
                 bset    #6,status(a0)
 
-loc_70250:
+FBZAct2SK_LaserAnimateAndWait:
                 jsr     (Animate_Raw).l
                 jsr     (Obj_Wait).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_70262:
-                move.l  #loc_70294,$34(a0)
+FBZAct2SK_LaserPauseAndTryExplosion:
+                move.l  #FBZAct2SK_LaserRetractAndReportMiss,$34(a0)
                 move.w  #$1F,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_7027E
+                bne.s   FBZAct2SK_LaserTryExplosionAfterShake
                 move.l  #SKLevel_InitializeScreenShakeRumbleActor,(a1)
 
-loc_7027E:
+FBZAct2SK_LaserTryExplosionAfterShake:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   locret_70292
+                bne.s   FBZAct2SK_LaserExplosionSpawnReturn
                 addi.w  #$60,y_pos(a1)
 
-locret_70292:
+FBZAct2SK_LaserExplosionSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_70294:
-                move.l  #byte_70412,$30(a0)
-                move.l  #loc_702C0,$34(a0)
+FBZAct2SK_LaserRetractAndReportMiss:
+                move.l  #FBZAct2SK_LaserRetractAnim,$30(a0)
+                move.l  #FBZAct2SK_LaserBeginFinalWait,$34(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 btst    #6,status(a0)
-                bne.s   locret_702BE
+                bne.s   FBZAct2SK_LaserMissCheckReturn
                 movea.w parent3(a0),a1
                 bset    #6,status(a1)
 
-locret_702BE:
+FBZAct2SK_LaserMissCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_702C0:
+FBZAct2SK_LaserBeginFinalWait:
                 move.l  #Obj_Wait,(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_702D6,$34(a0)
+                move.l  #FBZAct2SK_LaserCheckShakeAndDelete,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_702D6:
+FBZAct2SK_LaserCheckShakeAndDelete:
                 movea.w parent3(a0),a1
                 tst.b   $39(a1)
-                bmi.s   loc_702E4
+                bmi.s   FBZAct2SK_LaserQueueDeletion
                 clr.w   (Screen_shake_flag).w
 
-loc_702E4:
+FBZAct2SK_LaserQueueDeletion:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_702EA:
+FBZAct2SK_RegisterCornersAndPlace:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 cmpi.w  #4,d0
-                bhs.s   loc_7030C
+                bhs.s   FBZAct2SK_CornerApplySubtypeOffsets
                 moveq   #$44,d1
                 tst.b   d0
-                beq.s   loc_70302
+                beq.s   FBZAct2SK_CornerStoreParentAndFlip
                 moveq   #parent3,d1
 
-loc_70302:
+FBZAct2SK_CornerStoreParentAndFlip:
                 move.w  a0,(a1,d1.w)
                 bset    #1,render_flags(a0)
 
-loc_7030C:
+FBZAct2SK_CornerApplySubtypeOffsets:
                 add.w   d0,d0
-                lea     word_70320(pc,d0.w),a1
+                lea     FBZAct2SK_CornerPlacementOffsets(pc,d0.w),a1
                 move.w  (a1)+,d0
                 add.w   d0,x_pos(a0)
                 move.w  (a1)+,d0
                 add.w   d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_70320:
+FBZAct2SK_CornerPlacementOffsets:
                 dc.w    -$B0,   $18
                 dc.w    $B0,   $18
                 dc.w    -$B0,   $A8
@@ -537,21 +539,21 @@ word_70320:
 
 FlashAndResetFBZAct2SubbossHitState:
                 tst.b   collision_flags(a0)
-                bne.s   locret_70360
+                bne.s   FBZAct2SK_HitUpdateReturn
                 tst.b   $20(a0)
-                bne.s   loc_7034A
+                bne.s   FBZAct2SK_HitCopyColorsAndTick
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_7034A:
+FBZAct2SK_HitCopyColorsAndTick:
                 bsr.w   CopyFBZAct2SubbossFlashPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_70360
+                bne.s   FBZAct2SK_HitUpdateReturn
                 move.b  $25(a0),collision_flags(a0)
                 move.b  #$7F,collision_property(a0)
 
-locret_70360:
+FBZAct2SK_HitUpdateReturn:
                 rts
 ; End of function FlashAndResetFBZAct2SubbossHitState
 
@@ -560,20 +562,20 @@ locret_70360:
 CopyFBZAct2SubbossFlashPalette:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_70376
+                bne.s   FBZAct2SK_HitCopyPaletteRow
                 btst    #7,status(a0)
-                bne.s   loc_70376
+                bne.s   FBZAct2SK_HitCopyPaletteRow
                 addq.w  #2*3,d0
 
-loc_70376:
-                lea     word_70384(pc),a1
-                lea     word_7038A(pc,d0.w),a2
+FBZAct2SK_HitCopyPaletteRow:
+                lea     FBZAct2SK_HitPaletteDestinations(pc),a1
+                lea     FBZAct2SK_HitPaletteColorRows(pc,d0.w),a2
                 jmp     (CopyWordData_3).l
 ; End of function CopyFBZAct2SubbossFlashPalette
 
 ; ---------------------------------------------------------------------------
-word_70384:
+FBZAct2SK_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_7038A:
+FBZAct2SK_HitPaletteColorRows:
                 dc.w    $866,  $644,   $20
                 dc.w    $EEE,  $EEE,  $EEE

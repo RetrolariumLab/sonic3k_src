@@ -8,64 +8,64 @@ ObjDat_FBZMiniboss:
                 dc.w    make_art_tile(ArtTile_FBZMiniboss,1,1)
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-word_6FA40:
+FBZMiniSK_TrimAttributes:
                 dc.w    $100
                 dc.b    8,   8,   1,   0
-word_6FA46:
+FBZMiniSK_ArmRootAttributes:
                 dc.w    $300
                 dc.b    $18, $10,   5,   0
-word_6FA4C:
+FBZMiniSK_LinkAttributes:
                 dc.w    $280
                 dc.b    8,   8,   6,   0
-word_6FA52:
+FBZMiniSK_HandAttributes:
                 dc.w    $200
                 dc.b    $18, $18,   7,   0
-word_6FA58:
+FBZMiniSK_EyeAttributes:
                 dc.w    $100
                 dc.b    $10,   8,   8,   0
-word_6FA5E:
+FBZMiniSK_WarningAttributes:
                 dc.w    $180
                 dc.b    $10,   8, $11,   0
-word_6FA64:                                             ; used in S3, unused in S&K
+FBZMiniSK_TopButtonAttributes:                          ; used in S3, unused in S&K
                 dc.w    $280
                 dc.b    $10,   8,   4,   0
-ObjDat3_6FA6A:                                          ; unused
+FBZMiniSK_UnusedCapsuleAttributes:                      ; unused
                 dc.l    Map_EggCapsule
                 dc.w    make_art_tile(ArtTile_EggCapsule,0,1)
                 dc.w    $100
                 dc.b    8,   8,   0,   0
-ChildObjDat_6FA76:
+FBZMiniSK_MainBodyChildren:
                 dc.w    7-1
-                dc.l    loc_6F10E
+                dc.l    FBZMiniSK_TrimDispatchAndDraw
                 dc.b    -$10,  -8
-                dc.l    loc_6F10E
+                dc.l    FBZMiniSK_TrimDispatchAndDraw
                 dc.b    $10,  -8
-                dc.l    loc_6F10E
+                dc.l    FBZMiniSK_TrimDispatchAndDraw
                 dc.b    0,  -8
-                dc.l    loc_6EFDA
+                dc.l    FBZMiniSK_ButtonDispatchSolidAndCull
                 dc.b    0,-$24
-                dc.l    loc_6F060
+                dc.l    FBZMiniSK_EyeDispatchAndDraw
                 dc.b    0,  -8
-                dc.l    loc_6F178
+                dc.l    FBZMiniSK_ArmDispatchAndDraw
                 dc.b    0,   0
-                dc.l    loc_6F178
+                dc.l    FBZMiniSK_ArmDispatchAndDraw
                 dc.b    0,   0
-word_6FAA2:
+FBZMiniSK_LinkedArmChildren:
                 dc.w    5-1
-                dc.l    loc_6F3DE
-ChildObjDat_6FAA8:
+                dc.l    FBZMiniSK_LinkDispatchAndDraw
+FBZMiniSK_PaletteWarningChild:
                 dc.w    1-1
-                dc.l    loc_6F0CE
+                dc.l    FBZMiniSK_InitPaletteWarning
                 dc.b    0,  -8
-ChildObjDat_6FAB0:
+FBZMiniSK_ReleasedBodyChild:
                 dc.w    1-1
-                dc.l    loc_6F74C
+                dc.l    FBZMiniSK_InitReleasedBody
                 dc.b    3,   9,  $A,  $B,  $C,  $D,  $E,  $F, $10, $FC
                 even
 Pal_FBZMiniboss:
                 binclude "data/Levels/FBZ/Palettes/FBZ Miniboss.bin"
                 even
-word_6FAE0:     palscriptptr .header, .data
+FBZMiniSK_WarningPaletteScript: palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$1E, 1, 7-1
                 .data:  palscriptdata 1, $EEE
@@ -75,6 +75,6 @@ word_6FAE0:     palscriptptr .header, .data
 Map_FBZMiniboss:
                 include "src/objects/shared/zones/fbz/mappings/miniboss.s"
 ; ---------------------------------------------------------------------------
-word_6FCFC:
+FBZMiniSK_ActTwoArenaCameraBounds:
                 dc.w    $560,  $660, $2900, $2C00
                 dc.w    $5E0,  $5E0, $2900, $2900

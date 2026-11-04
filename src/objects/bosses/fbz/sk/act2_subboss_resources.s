@@ -6,46 +6,46 @@ ObjDat_FBZ2Subboss:
                 dc.w    make_art_tile(ArtTile_FBZ2Subboss,1,1)
                 dc.w    $280
                 dc.b    $20, $20,   0, $1C
-word_703A2:
+FBZAct2SK_CornerAttributes:
                 dc.w    $80
                 dc.b    8,   8,   1,   0
-word_703A8:
+FBZAct2SK_FixedCoverAttributes:
                 dc.w    $280
                 dc.b    $C, $14,   2,   0
-word_703AE:
+FBZAct2SK_BarrierAttributes:
                 dc.w    $80
                 dc.b    8, $60,   4,   0
-word_703B4:
+FBZAct2SK_ChargeAttributes:
                 dc.w    make_art_tile(ArtTile_FBZ2Subboss,1,1)
                 dc.w    $80
                 dc.b    $18,   4,   5,   0
-ObjDat3_703BC:
+FBZAct2SK_OperatorAttributes:
                 dc.l    Map_FBZRobotnikStand
                 dc.w    make_art_tile(ArtTile_FBZRobotnikStand,0,1)
                 dc.w    $280
                 dc.b    $20, $20,   0,   0
-ChildObjDat_703C8:
+FBZAct2SK_CornerChildren:
                 dc.w    4-1
-                dc.l    loc_6FF5C
+                dc.l    FBZAct2SK_InitCornerAndRegister
                 dc.b    0,   0
-ChildObjDat_703D0:
+FBZAct2SK_SceneAttachmentChildren:
                 dc.w    2-1
-                dc.l    loc_6FFDC
+                dc.l    FBZAct2SK_InitFixedCover
                 dc.b    0,   0
-                dc.l    loc_7002A
+                dc.l    FBZAct2SK_InitOperatorAndIdleAnim
                 dc.b    0,   0
-ChildObjDat_703DE:
+FBZAct2SK_ParentFlagMaskChild:
                 dc.w    1-1
                 dc.l    Obj_SpriteMask
-ChildObjDat_703E4:
+FBZAct2SK_SolidBarrierChildren:
                 dc.w    2-1
-                dc.l    loc_70118
+                dc.l    FBZAct2SK_InitBarrierAndBindCorner
                 dc.b    0,   0
-ChildObjDat_703EC:
+FBZAct2SK_ChargeChild:
                 dc.w    1-1
-                dc.l    loc_70192
+                dc.l    FBZAct2SK_InitAcceleratingCharge
                 dc.b    0,   8
-byte_703F4:
+FBZAct2SK_OperatorIdleAnim:
                 dc.b    0,   7
                 dc.b    1, $17
                 dc.b    0,   7
@@ -53,22 +53,22 @@ byte_703F4:
                 dc.b    0, $3F
                 dc.b    1,   7
                 dc.b    $FC
-byte_70401:
+FBZAct2SK_ChargeAccelerateAnim:
                 dc.b    $B, $40
                 dc.b    5,  $A
                 dc.b    $FC
-byte_70406:
+FBZAct2SK_LaserFireAnim:
                 dc.b    0,   6,   6,  $A,   7,  $A
-                dc.b    $F8, .jump-byte_70406
+                dc.b    $F8, .jump-FBZAct2SK_LaserFireAnim
 
                 .jump:
                 dc.b    0,   8,  $A, $FC
-byte_70412:
+FBZAct2SK_LaserRetractAnim:
                 dc.b    0,   7
                 dc.b    7,  $A
                 dc.b    6,  $A
                 dc.b    $F4
-byte_70419:
+FBZAct2SK_OperatorRunAnim:
                 dc.b    5,   0,   1,   2,   1, $FC
                 even
 Pal_FBZ2Subboss:

@@ -6,29 +6,29 @@ ObjDat_FBZEndBoss:
                 dc.w    make_art_tile(ArtTile_FBZEndBoss,1,1)
                 dc.w    $200
                 dc.b    $28, $18,   0, $16
-word_70E98:
+FBZBossSK_SupportAttributes:
                 dc.w    $280
                 dc.b    $10, $20,   1, $A3
-word_70E9E:
+FBZBossSK_ConnectorAttributes:
                 dc.w    $200
                 dc.b    8,   8,   2,   0
-word_70EA4:
+FBZBossSK_FlameRequesterAttributes:
                 dc.w    $180
                 dc.b    $C,   8,   3,   0
-word_70EAA:
+FBZBossSK_FragmentAttributes:
                 dc.w    $80
                 dc.b    $14, $10,   8,   0
-ObjDat3_70EB0:
+FBZBossSK_FlameBodyAttributes:
                 dc.l    Map_FBZEndBoss
                 dc.w    make_art_tile(ArtTile_FBZEndBoss,0,1)
                 dc.w    0
                 dc.b    4,   8,   4, $8B
-ObjDat3_70EBC:
+FBZBossSK_FlameExplosionAttributes:
                 dc.l    Map_BossExplosion
                 dc.w    make_art_tile(ArtTile_BossExplosion,0,1)
                 dc.w    0
                 dc.b    $10, $10,   0, $8B
-ObjDat3_70EC8:
+FBZBossSK_FlameAttributes:
                 dc.l    Map_FBZEndBossFlame
                 dc.w    make_art_tile(ArtTile_FBZEndBossFlame,0,1)
                 dc.w    0
@@ -38,46 +38,46 @@ ObjDat_FBZExitDoor:
                 dc.w    make_art_tile(ArtTile_FBZExitDoor,2,0)
                 dc.w    $80
                 dc.b    8, $20,   0, $D7
-ChildObjDat_70EE0:
+FBZBossSK_SupportAndFlameChildren:
                 dc.w    3-1
-                dc.l    loc_70948
+                dc.l    FBZBossSK_SupportDispatchAndDraw
                 dc.b    -$30, $48
-                dc.l    loc_70948
+                dc.l    FBZBossSK_SupportDispatchAndDraw
                 dc.b    $30, $48
-                dc.l    loc_70AFC
+                dc.l    FBZBossSK_InitFlameRequester
                 dc.b    0,-$28
-ChildObjDat_70EF4:
+FBZBossSK_SupportHingeChild:
                 dc.w    1-1
-                dc.l    loc_70A46
+                dc.l    FBZBossSK_InitHingeAndChooseSide
                 dc.b    0,-$20
-ChildObjDat_70EFC:
+FBZBossSK_HingeConnectorChildren:
                 dc.w    4-1
-                dc.l    loc_70AA2
+                dc.l    FBZBossSK_ConnectorDispatchAndDraw
                 dc.b    0,   0
-ChildObjDat_70F04:
+FBZBossSK_FlamePartChildren:
                 dc.w    9-1
-                dc.l    loc_70B8C
-ChildObjDat_70F0A:
+                dc.l    FBZBossSK_InitFlamePartAndDelay
+FBZBossSK_BodyFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_70BD0
+                dc.l    FBZBossSK_InitBodyFragment
                 dc.b    -$14,   8
-                dc.l    loc_70BD0
+                dc.l    FBZBossSK_InitBodyFragment
                 dc.b    $14,   8
-                dc.l    loc_70BD0
+                dc.l    FBZBossSK_InitBodyFragment
                 dc.b    -$10, $20
-                dc.l    loc_70BD0
+                dc.l    FBZBossSK_InitBodyFragment
                 dc.b    $10, $20
-ChildObjDat_70F24:
+FBZBossSK_SupportFragmentChildren:
                 dc.w    4-1
-                dc.l    loc_70BFE
+                dc.l    FBZBossSK_InitSupportFragment
                 dc.b    -8,-$10
-                dc.l    loc_70BFE
+                dc.l    FBZBossSK_InitSupportFragment
                 dc.b    8,-$10
-                dc.l    loc_70BFE
+                dc.l    FBZBossSK_InitSupportFragment
                 dc.b    -8, $10
-                dc.l    loc_70BFE
+                dc.l    FBZBossSK_InitSupportFragment
                 dc.b    8, $10
-byte_70F3E:
+FBZBossSK_FlameBodyAnimation:
                 dc.b    4,   3
                 dc.b    4,   3
                 dc.b    5,   3
@@ -96,7 +96,7 @@ byte_70F3E:
                 dc.b    6,   3
                 dc.b    7,   3
                 dc.b    $F4
-byte_70F61:
+FBZBossSK_FlameExplosionAnimation:
                 dc.b    0,   2
                 dc.b    0,   2
                 dc.b    1,   2
@@ -105,7 +105,7 @@ byte_70F61:
                 dc.b    4,   5
                 dc.b    5,   6
                 dc.b    $F4
-byte_70F70:
+FBZBossSK_FlameAnimation:
                 dc.b    0,   2
                 dc.b    0,   2
                 dc.b    1,   3
@@ -135,9 +135,9 @@ FBZEndBoss_CircleLookup2:
                 dc.b    $20, $20, $20, $20
                 even
 ; ---------------------------------------------------------------------------
-word_71142:
+FBZBossSK_ICZMinibossDefaultCamera:
                 dc.w    0,  $378,  $5F0,  $7F0
                 dc.w    $2B8,  $2B8,  $6F0,  $6F0
-word_71152:
+FBZBossSK_ICZMinibossAlternateCamera:
                 dc.w    $7C8,  $9C8,  $5F0,  $7F0
                 dc.w    $8C8,  $8C8,  $6F0,  $6F0

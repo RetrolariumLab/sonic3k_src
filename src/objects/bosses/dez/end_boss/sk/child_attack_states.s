@@ -249,7 +249,7 @@ loc_7F708:
 loc_7F71C:
                 lea     ObjDat3_7FC74(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_70068,(a0)
+                move.l  #FBZAct2SK_OperatorIdleAndCheckFeedback,(a0)
                 move.l  #loc_7F74C,$34(a0)
                 move.l  #byte_7FCE2,$30(a0)
                 move.w  #$3610,x_pos(a0)
@@ -269,7 +269,7 @@ loc_7F74C:
                 move.w  d1,x_pos(a0)
 
 loc_7F76A:
-                lea     (byte_70419).l,a1
+                lea     (FBZAct2SK_OperatorRunAnim).l,a1
                 jsr     (Animate_RawNoSST).l
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_OnScreen_Test).l

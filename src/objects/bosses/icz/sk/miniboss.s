@@ -6,10 +6,10 @@
 Obj_ICZMiniboss:
                 cmpi.w  #$501,(Apparent_zone_and_act).w
                 beq.s   loc_711AA
-                lea     word_71142(pc),a1
+                lea     FBZBossSK_ICZMinibossDefaultCamera(pc),a1
                 tst.b   subtype(a0)
                 beq.s   loc_71178
-                lea     word_71152(pc),a1
+                lea     FBZBossSK_ICZMinibossAlternateCamera(pc),a1
 
 loc_71178:
                 jsr     (Check_CameraInRange).l

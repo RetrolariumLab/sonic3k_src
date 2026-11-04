@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_FBZMiniboss:
-                lea     word_6EE98(pc),a1
+                lea     FBZMinibossSK_Root_CameraTriggerWords(pc),a1
                 jsr     (Check_CameraInRange).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -15,17 +15,17 @@ Obj_FBZMiniboss:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 FBZMiniboss_Index:
-                dc.w    loc_6EEA8-FBZMiniboss_Index
-                dc.w    loc_6EF0E-FBZMiniboss_Index
-                dc.w    loc_6EF32-FBZMiniboss_Index
-                dc.w    loc_6EF5A-FBZMiniboss_Index
-                dc.w    loc_6EF76-FBZMiniboss_Index
-word_6EE98:
+                dc.w    FBZMiniSK_InitMinibossAndChildren-FBZMiniboss_Index
+                dc.w    FBZMiniSK_WaitForArenaCamera-FBZMiniboss_Index
+                dc.w    FBZMiniSK_WaitForTopButton-FBZMiniboss_Index
+                dc.w    FBZMiniSK_TickMusicDelay-FBZMiniboss_Index
+                dc.w    FBZMiniSK_ConsumeWarningAndSpawn-FBZMiniboss_Index
+FBZMinibossSK_Root_CameraTriggerWords:
                 dc.w    $240,  $600, $2D20, $2F20
                 dc.w    $540,  $540, $2E20, $2E20
 ; ---------------------------------------------------------------------------
 
-loc_6EEA8:
+FBZMiniSK_InitMinibossAndChildren:
                 lea     ObjDat_FBZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #6,collision_property(a0)
@@ -34,7 +34,7 @@ loc_6EEA8:
                 move.w  (Camera_max_Y_pos).w,(Camera_stored_max_Y_pos).w
                 move.w  #$540,(Camera_target_max_Y_pos).w
                 move.w  #$2E20,$3A(a0)
-                move.l  #loc_6EF14,$34(a0)
+                move.l  #FBZMiniSK_LockArenaHorizontalBounds,$34(a0)
                 lea     (PLC_BossExplosion).l,a1
                 jsr     (Load_PLC_Raw).l
                 lea     (ArtKosM_FBZMiniboss).l,a1
@@ -42,15 +42,15 @@ loc_6EEA8:
                 jsr     (Queue_Kos_Module).l
                 lea     Pal_FBZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_6FA76(pc),a2
+                lea     FBZMiniSK_MainBodyChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6EF0E:
+FBZMiniSK_WaitForArenaCamera:
                 jmp     (SKEndCamera_TrackMinXAndCheckY).l
 ; ---------------------------------------------------------------------------
 
-loc_6EF14:
+FBZMiniSK_LockArenaHorizontalBounds:
                 move.b  #4,routine(a0)
                 move.w  (Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
                 move.w  $3A(a0),d0
@@ -60,28 +60,28 @@ loc_6EF14:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EF32:
+FBZMiniSK_WaitForTopButton:
                 btst    #0,$38(a0)
-                bne.s   loc_6EF3C
+                bne.s   FBZMiniSK_FadeMusicAndBeginDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EF3C:
+FBZMiniSK_FadeMusicAndBeginDelay:
                 move.b  #6,routine(a0)
-                move.l  #loc_6EF60,$34(a0)
+                move.l  #FBZMiniSK_StartMusicAndAttackPoll,$34(a0)
                 move.w  #2*60,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
 
-locret_6EF58:
+FBZMiniSK_SharedGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EF5A:
+FBZMiniSK_TickMusicDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6EF60:
+FBZMiniSK_StartMusicAndAttackPoll:
                 move.b  #8,routine(a0)
                 moveq   #signextendB(mus_Miniboss),d0
                 jsr     (Play_Music).l
@@ -89,30 +89,30 @@ loc_6EF60:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EF76:
+FBZMiniSK_ConsumeWarningAndSpawn:
                 bclr    #7,$38(a0)
-                beq.s   locret_6EF58
-                lea     ChildObjDat_6FAA8(pc),a2
+                beq.s   FBZMiniSK_SharedGateReturn
+                lea     FBZMiniSK_PaletteWarningChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6EF88:
+FBZMiniSK_DefeatSolidAndTickWait:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_6EF98
+                bmi.s   FBZMiniSK_DefeatTryMusicFade
                 bsr.w   FBZMini_SolidBodyOrCapsule
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6EF98:
+FBZMiniSK_DefeatTryMusicFade:
                 bclr    #7,render_flags(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_6EFB2
+                bne.s   FBZMiniSK_BeginDefeatRelease
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-loc_6EFB2:
+FBZMiniSK_BeginDefeatRelease:
                 jsr     (Obj_EndSignControl).l
-                lea     ChildObjDat_6FAB0(pc),a2
+                lea     FBZMiniSK_ReleasedBodyChild(pc),a2
                 jsr     (CreateChild6_Simple).l
                 lea     (FBZEggPrisonSK_FiveNormalAnimalRecords).l,a2
                 jsr     (CreateChild1_Normal).l
@@ -120,20 +120,20 @@ loc_6EFB2:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6EFDA:
+FBZMiniSK_ButtonDispatchSolidAndCull:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6EFF2(pc,d0.w),d1
-                jsr     off_6EFF2(pc,d1.w)
+                move.w  FBZMiniSK_ButtonStateOffsets(pc,d0.w),d1
+                jsr     FBZMiniSK_ButtonStateOffsets(pc,d1.w)
                 bsr.w   SolidifyFBZMinibossTopButton
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-off_6EFF2:
-                dc.w    loc_6EFF6-off_6EFF2
-                dc.w    loc_6F010-off_6EFF2
+FBZMiniSK_ButtonStateOffsets:
+                dc.w    FBZMiniSK_InitButtonAndRestHeight-FBZMiniSK_ButtonStateOffsets
+                dc.w    FBZMiniSK_ButtonUpdateOrDefeat-FBZMiniSK_ButtonStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6EFF6:
+FBZMiniSK_InitButtonAndRestHeight:
                 lea     (ObjDat_FBZSpringPlunger).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #$280,priority(a0)
@@ -141,81 +141,81 @@ loc_6EFF6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F010:
+FBZMiniSK_ButtonUpdateOrDefeat:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_6F04A
+                bne.s   FBZMiniSK_ButtonBeginDefeatedPose
                 move.w  $3E(a0),d0
                 btst    #3,status(a0)
-                bne.s   loc_6F03C
+                bne.s   FBZMiniSK_ButtonSignalPressAndLower
                 btst    #2,$38(a1)
-                bne.s   loc_6F03C
+                bne.s   FBZMiniSK_ButtonSignalPressAndLower
                 bclr    #0,$38(a1)
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F03C:
+FBZMiniSK_ButtonSignalPressAndLower:
                 bset    #0,$38(a1)
                 addq.w  #4,d0
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F04A:
-                move.l  #loc_6F056,(a0)
+FBZMiniSK_ButtonBeginDefeatedPose:
+                move.l  #FBZMiniSK_DefeatedButtonSolidAndCull,(a0)
                 addq.w  #8,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F056:
+FBZMiniSK_DefeatedButtonSolidAndCull:
                 bsr.w   SolidifyFBZMinibossTopButton
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_6F060:
+FBZMiniSK_EyeDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6F074(pc,d0.w),d1
-                jsr     off_6F074(pc,d1.w)
+                move.w  FBZMiniSK_EyeStateOffsets(pc,d0.w),d1
+                jsr     FBZMiniSK_EyeStateOffsets(pc,d1.w)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_6F074:
-                dc.w    loc_6F07C-off_6F074
-                dc.w    loc_6F086-off_6F074
-                dc.w    loc_6F0AA-off_6F074
-                dc.w    loc_6F0B8-off_6F074
+FBZMiniSK_EyeStateOffsets:
+                dc.w    FBZMiniSK_InitEye-FBZMiniSK_EyeStateOffsets
+                dc.w    FBZMinibossSK_Eye_WaitForRootButtonPress-FBZMiniSK_EyeStateOffsets
+                dc.w    FBZMiniSK_EyeTickActivationDelay-FBZMiniSK_EyeStateOffsets
+                dc.w    FBZMiniSK_EyeTrackTargetDirection-FBZMiniSK_EyeStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6F07C:
-                lea     word_6FA58(pc),a1
+FBZMiniSK_InitEye:
+                lea     FBZMiniSK_EyeAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes3).l
 ; ---------------------------------------------------------------------------
 
-loc_6F086:
+FBZMinibossSK_Eye_WaitForRootButtonPress:
                 movea.w parent3(a0),a1
                 btst    #0,$38(a1)
-                bne.s   loc_6F094
+                bne.s   FBZMiniSK_EyeBeginActivationDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F094:
+FBZMiniSK_EyeBeginActivationDelay:
                 move.b  #4,routine(a0)
                 move.w  #$40,$2E(a0)
-                move.l  #loc_6F0B0,$34(a0)
+                move.l  #FBZMiniSK_EyeBeginTracking,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F0AA:
+FBZMiniSK_EyeTickActivationDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F0B0:
+FBZMiniSK_EyeBeginTracking:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F0B8:
+FBZMiniSK_EyeTrackTargetDirection:
                 btst    #2,(V_int_run_count+3).w
                 jsr     (Find_SonicTails8Way).l
                 addi.w  #9,d4
@@ -223,12 +223,12 @@ loc_6F0B8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F0CE:
-                lea     word_6FA5E(pc),a1
+FBZMiniSK_InitPaletteWarning:
+                lea     FBZMiniSK_WarningAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_6F102,(a0)
+                move.l  #FBZMiniSK_WarningTickPaletteAndDraw,(a0)
                 move.w  #$EEE,(Normal_palette_line_2+$1E).w
-                lea     (word_6FAE0).l,a1
+                lea     (FBZMiniSK_WarningPaletteScript).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
@@ -237,27 +237,27 @@ loc_6F0CE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6F102:
+FBZMiniSK_WarningTickPaletteAndDraw:
                 jsr     (Run_PalRotationScript).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6F10E:
+FBZMiniSK_TrimDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6F122(pc,d0.w),d1
-                jsr     off_6F122(pc,d1.w)
+                move.w  FBZMiniSK_TrimStateOffsets(pc,d0.w),d1
+                jsr     FBZMiniSK_TrimStateOffsets(pc,d1.w)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_6F122:
-                dc.w    loc_6F12A-off_6F122
-                dc.w    loc_6F142-off_6F122
-                dc.w    loc_6F162-off_6F122
-                dc.w    locret_6F176-off_6F122
+FBZMiniSK_TrimStateOffsets:
+                dc.w    FBZMiniSK_InitTrimBySubtype-FBZMiniSK_TrimStateOffsets
+                dc.w    FBZMiniSK_TrimWaitForButton-FBZMiniSK_TrimStateOffsets
+                dc.w    FBZMiniSK_TrimMoveAndTickWait-FBZMiniSK_TrimStateOffsets
+                dc.w    FBZMiniSK_TrimFinalIdle-FBZMiniSK_TrimStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6F12A:
-                lea     word_6FA40(pc),a1
+FBZMiniSK_InitTrimBySubtype:
+                lea     FBZMiniSK_TrimAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  subtype(a0),d0
                 lsr.b   #1,d0
@@ -266,110 +266,110 @@ loc_6F12A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F142:
+FBZMiniSK_TrimWaitForButton:
                 movea.w parent3(a0),a1
                 btst    #0,$38(a1)
-                bne.s   loc_6F150
+                bne.s   FBZMiniSK_TrimBeginSeparation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F150:
+FBZMiniSK_TrimBeginSeparation:
                 move.b  #4,routine(a0)
-                move.l  #loc_6F16E,$34(a0)
-                bra.w   loc_6F7A6
+                move.l  #FBZMinibossSK_Trim_SelectFinalIdleState,$34(a0)
+                bra.w   FBZMiniSK_TrimLoadDelayAndVelocity
 ; ---------------------------------------------------------------------------
 
-loc_6F162:
+FBZMiniSK_TrimMoveAndTickWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F16E:
+FBZMinibossSK_Trim_SelectFinalIdleState:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_6F176:
+FBZMiniSK_TrimFinalIdle:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F178:
+FBZMiniSK_ArmDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6F190(pc,d0.w),d1
-                jsr     off_6F190(pc,d1.w)
+                move.w  FBZMiniSK_ArmStateOffsets(pc,d0.w),d1
+                jsr     FBZMiniSK_ArmStateOffsets(pc,d1.w)
                 bsr.w   EnterFBZMinibossArmParentDefeatWait
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6F190:
-                dc.w    loc_6F1A6-off_6F190
-                dc.w    loc_6F1D6-off_6F190
-                dc.w    loc_6F1F4-off_6F190
-                dc.w    loc_6F218-off_6F190
-                dc.w    loc_6F1F4-off_6F190
-                dc.w    loc_6F29E-off_6F190
-                dc.w    loc_6F338-off_6F190
-                dc.w    loc_6F1F4-off_6F190
-                dc.w    loc_6F378-off_6F190
-                dc.w    loc_6F384-off_6F190
-                dc.w    loc_6F1F4-off_6F190
+FBZMiniSK_ArmStateOffsets:
+                dc.w    FBZMiniSK_InitArmAndDeployment-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmWaitForButton-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmTickPhaseWait-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmMoveAndTickDeployment-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmTickPhaseWait-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmOscillateAndWait-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmWaitForSideExtension-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmTickPhaseWait-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmRestartAfterReturn-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmCheckPunchReady-FBZMiniSK_ArmStateOffsets
+                dc.w    FBZMiniSK_ArmTickPhaseWait-FBZMiniSK_ArmStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6F1A6:
-                lea     word_6FA46(pc),a1
+FBZMiniSK_InitArmAndDeployment:
+                lea     FBZMiniSK_ArmRootAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.w  #-$140,d0
                 subi.b  #$A,subtype(a0)
-                beq.s   loc_6F1CA
+                beq.s   FBZMiniSK_ArmStoreDeploySpeed
                 neg.w   d0
                 bset    #0,render_flags(a0)
                 move.w  #$3F,$2E(a0)
 
-loc_6F1CA:
+FBZMiniSK_ArmStoreDeploySpeed:
                 move.w  d0,x_vel(a0)
                 move.w  #-$D0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F1D6:
+FBZMiniSK_ArmWaitForButton:
                 movea.w parent3(a0),a1
                 btst    #0,$38(a1)
-                bne.s   loc_6F1E4
+                bne.s   FBZMiniSK_ArmBeginDeployDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F1E4:
+FBZMiniSK_ArmBeginDeployDelay:
                 move.b  #4,routine(a0)
-                move.l  #loc_6F1FA,$34(a0)
+                move.l  #FBZMiniSK_ArmSpawnLinksAndMove,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F1F4:
+FBZMiniSK_ArmTickPhaseWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F1FA:
+FBZMiniSK_ArmSpawnLinksAndMove:
                 move.b  #6,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6F224,$34(a0)
-                lea     word_6FAA2(pc),a2
+                move.l  #FBZMiniSK_ArmSignalLinkDeployment,$34(a0)
+                lea     FBZMiniSK_LinkedArmChildren(pc),a2
                 jmp     (CreateChild4_LinkListRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_6F218:
+FBZMiniSK_ArmMoveAndTickDeployment:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F224:
+FBZMiniSK_ArmSignalLinkDeployment:
                 move.b  #8,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6F240,$34(a0)
+                move.l  #FBZMiniSK_ArmBeginRestOscillation,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F240:
+FBZMiniSK_ArmBeginRestOscillation:
                 move.b  #$A,routine(a0)
                 bset    #2,$38(a0)
                 bclr    #3,$38(a0)
@@ -379,30 +379,30 @@ loc_6F240:
                 bclr    #6,$38(a1)
                 bclr    #6,$38(a0)
                 move.w  #2*60,$2E(a0)
-                move.l  #loc_6F2A8,$34(a0)
+                move.l  #FBZMiniSK_ArmChooseSelfHitOrPunch,$34(a0)
                 move.b  #-$60,$3C(a0)
                 move.b  #2,$40(a0)
                 btst    #0,render_flags(a0)
-                beq.s   locret_6F29C
+                beq.s   FBZMiniSK_ArmOscillationInitReturn
                 move.b  #$60,$3C(a0)
                 move.b  #-2,$40(a0)
 
-locret_6F29C:
+FBZMiniSK_ArmOscillationInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F29E:
+FBZMiniSK_ArmOscillateAndWait:
                 bsr.w   OscillateFBZMinibossArmAngle
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F2A8:
+FBZMiniSK_ArmChooseSelfHitOrPunch:
                 move.w  #$F0,$2E(a0)
                 movea.w parent3(a0),a1
                 btst    #0,$38(a1)
-                beq.s   loc_6F2E4
+                beq.s   FBZMiniSK_ArmCheckPunchPlayerSide
                 btst    #1,$38(a1)
-                bne.w   locret_6EF58
+                bne.w   FBZMiniSK_SharedGateReturn
                 move.b  #$C,routine(a0)
                 bclr    #2,$38(a0)
                 bset    #1,$38(a1)
@@ -411,25 +411,25 @@ loc_6F2A8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F2E4:
+FBZMiniSK_ArmCheckPunchPlayerSide:
                 btst    #6,$38(a1)
-                bne.w   locret_6EF58
+                bne.w   FBZMiniSK_SharedGateReturn
                 lea     (Player_1).w,a2
                 tst.b   $40(a2)
-                bne.w   locret_6EF58
+                bne.w   FBZMiniSK_SharedGateReturn
                 move.w  x_pos(a2),d0
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_6F30E
+                bhs.s   FBZMiniSK_ArmCheckRightSidePunch
                 btst    #0,render_flags(a0)
-                beq.s   loc_6F318
+                beq.s   FBZMiniSK_ArmRequestPunchAndWarn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F30E:
+FBZMiniSK_ArmCheckRightSidePunch:
                 btst    #0,render_flags(a0)
-                beq.w   locret_6EF58
+                beq.w   FBZMiniSK_SharedGateReturn
 
-loc_6F318:
+FBZMiniSK_ArmRequestPunchAndWarn:
                 move.b  #$12,routine(a0)
                 bclr    #2,$38(a0)
                 bset    #6,$38(a1)
@@ -438,21 +438,21 @@ loc_6F318:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F338:
+FBZMiniSK_ArmWaitForSideExtension:
                 btst    #3,$38(a0)
-                bne.s   loc_6F344
+                bne.s   FBZMiniSK_ArmBeginFoldDelay
                 bra.w   ExtendFBZMinibossArmToSideAngle
 ; ---------------------------------------------------------------------------
 
-loc_6F344:
+FBZMiniSK_ArmBeginFoldDelay:
                 move.b  #$E,routine(a0)
                 move.b  #2,$40(a0)
                 move.w  #$60,$2E(a0)
-                move.l  #loc_6F360,$34(a0)
+                move.l  #FBZMiniSK_ArmClearFoldAndWaitReturn,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F360:
+FBZMiniSK_ArmClearFoldAndWaitReturn:
                 move.b  #$10,routine(a0)
                 bclr    #3,$38(a0)
                 movea.w parent3(a0),a1
@@ -460,39 +460,39 @@ loc_6F360:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F378:
+FBZMiniSK_ArmRestartAfterReturn:
                 btst    #2,$38(a0)
-                bne.w   loc_6F240
+                bne.w   FBZMiniSK_ArmBeginRestOscillation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F384:
+FBZMiniSK_ArmCheckPunchReady:
                 bclr    #3,$38(a0)
-                bne.s   loc_6F38E
+                bne.s   FBZMiniSK_ArmBeginPunchDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F38E:
+FBZMiniSK_ArmBeginPunchDelay:
                 move.b  #$14,routine(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_6F3A4,$34(a0)
+                move.l  #FBZMiniSK_ArmSignalPunchTravel,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F3A4:
+FBZMiniSK_ArmSignalPunchTravel:
                 move.b  #$10,routine(a0)
                 bset    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F3B2:
+FBZMiniSK_DefeatedArmWaitAndDraw:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   loc_6F3C4
+                bne.s   FBZMiniSK_DefeatedArmBreakAway
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6F3C4:
+FBZMiniSK_DefeatedArmBreakAway:
                 move.l  #Obj_FlickerMove,(a0)
                 bset    #4,$38(a0)
                 move.w  #$3F,$2E(a0)
@@ -500,44 +500,44 @@ loc_6F3C4:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_6F3DE:
+FBZMiniSK_LinkDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_6F3F6(pc,d0.w),d1
-                jsr     off_6F3F6(pc,d1.w)
+                move.w  FBZMiniSK_LinkStateOffsets(pc,d0.w),d1
+                jsr     FBZMiniSK_LinkStateOffsets(pc,d1.w)
                 bsr.w   EnterFBZMinibossArmParentDefeatWait
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_6F3F6:
-                dc.w    loc_6F416-off_6F3F6
-                dc.w    loc_6F46A-off_6F3F6
-                dc.w    loc_6F4C0-off_6F3F6
-                dc.w    loc_6F4F6-off_6F3F6
-                dc.w    loc_6F53E-off_6F3F6
-                dc.w    loc_6F554-off_6F3F6
-                dc.w    loc_6F5B8-off_6F3F6
-                dc.w    loc_6F5E0-off_6F3F6
-                dc.w    loc_6F612-off_6F3F6
-                dc.w    loc_6F620-off_6F3F6
-                dc.w    loc_6F632-off_6F3F6
-                dc.w    loc_6F64E-off_6F3F6
-                dc.w    loc_6F67E-off_6F3F6
-                dc.w    loc_6F6A6-off_6F3F6
-                dc.w    loc_6F6E4-off_6F3F6
-                dc.w    loc_6F728-off_6F3F6
+FBZMiniSK_LinkStateOffsets:
+                dc.w    FBZMiniSK_InitLinkOrHand-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkFollowUntilDeployment-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkMoveAndTickDeployment-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkWaitForOscillation-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkTickOscillationStagger-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkOscillateAndCheckAttack-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkExtendAndSignalSide-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkWaitForPreviousSide-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMinibossSK_Link_WaitBeforeBodyFold-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkFoldForSelfHit-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkWaitForPreviousFold-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkReturnToRest-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkRaiseAndSignalVertical-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkWaitForPreviousPunch-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkInterpolatePunchAndWait-FBZMiniSK_LinkStateOffsets
+                dc.w    FBZMiniSK_LinkTickWaitAndReverse-FBZMiniSK_LinkStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_6F416:
+FBZMiniSK_InitLinkOrHand:
                 addq.b  #2,subtype(a0)
                 cmpi.b  #$A,subtype(a0)
-                beq.s   loc_6F432
-                lea     word_6FA4C(pc),a1
+                beq.s   FBZMiniSK_InitHandAndSetEndpoints
+                lea     FBZMiniSK_LinkAttributes(pc),a1
                 move.w  #4,$3E(a0)
                 jmp     (SetUp_ObjAttributes3).l
 ; ---------------------------------------------------------------------------
 
-loc_6F432:
-                lea     word_6FA52(pc),a1
+FBZMiniSK_InitHandAndSetEndpoints:
+                lea     FBZMiniSK_HandAttributes(pc),a1
                 move.w  #3,$3E(a0)
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #$86,collision_flags(a0)
@@ -552,59 +552,59 @@ loc_6F432:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F46A:
+FBZMiniSK_LinkFollowUntilDeployment:
                 jsr     (Refresh_ChildPosition).l
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_6F47E
+                bne.s   FBZMiniSK_LinkBeginDiagonalDeploy
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F47E:
+FBZMiniSK_LinkBeginDiagonalDeploy:
                 move.b  #4,routine(a0)
                 bset    #3,$38(a0)
                 bsr.w   SetFBZMinibossLinkDeploymentVelocity
                 move.w  #$F,$2E(a0)
-                move.l  #loc_6F4CC,$34(a0)
+                move.l  #FBZMiniSK_LinkStopAndSetDepth,$34(a0)
                 movea.w parent3(a0),a1
                 move.w  $30(a1),$30(a0)
                 move.w  $32(a1),$32(a0)
                 btst    #0,render_flags(a1)
-                beq.s   locret_6F4BE
+                beq.s   FBZMiniSK_LinkDeployFlipReturn
                 bset    #0,render_flags(a0)
                 neg.w   x_vel(a0)
 
-locret_6F4BE:
+FBZMiniSK_LinkDeployFlipReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F4C0:
+FBZMiniSK_LinkMoveAndTickDeployment:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F4CC:
+FBZMiniSK_LinkStopAndSetDepth:
                 move.b  #6,routine(a0)
                 bclr    #3,$38(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #$80,priority(a0)
                 cmpi.b  #$A,subtype(a0)
-                beq.s   locret_6F4F4
+                beq.s   FBZMiniSK_LinkDeployDepthReturn
                 move.w  #$180,priority(a0)
 
-locret_6F4F4:
+FBZMiniSK_LinkDeployDepthReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F4F6:
+FBZMiniSK_LinkWaitForOscillation:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_6F504
+                bne.s   FBZMiniSK_LinkCopyOscillationAndDelay
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F504:
+FBZMiniSK_LinkCopyOscillationAndDelay:
                 move.b  #8,routine(a0)
                 bset    #2,$38(a0)
                 bclr    #3,$38(a0)
@@ -619,209 +619,211 @@ loc_6F504:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F53E:
+FBZMiniSK_LinkTickOscillationStagger:
                 subq.b  #1,$3B(a0)
-                bpl.s   loc_6F54A
+                bpl.s   FBZMiniSK_LinkPlaceDuringStagger
                 move.b  #$A,routine(a0)
 
-loc_6F54A:
+FBZMiniSK_LinkPlaceDuringStagger:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F554:
+FBZMiniSK_LinkOscillateAndCheckAttack:
                 bsr.w   OscillateFBZMinibossArmAngle
                 move.w  $3E(a0),d2
                 jsr     (MoveSprite_CircularSimple).l
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_6F578
+                bne.s   FBZMiniSK_LinkAcceptSelfHitRequest
                 btst    #6,$38(a1)
-                bne.s   loc_6F58C
+                bne.s   FBZMiniSK_LinkAcceptPunchRequest
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F578:
+FBZMiniSK_LinkAcceptSelfHitRequest:
                 move.b  #$C,routine(a0)
                 bset    #1,$38(a0)
                 bclr    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F58C:
+; Only the hand snapshots the player's position for the punch
+FBZMiniSK_LinkAcceptPunchRequest:
                 move.b  #$18,routine(a0)
                 bset    #6,$38(a0)
                 bclr    #2,$38(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   locret_6F5B6
+                bne.s   FBZMiniSK_LinkPunchSetupReturn
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),$30(a0)
                 move.w  y_pos(a1),$32(a0)
 
-locret_6F5B6:
+FBZMiniSK_LinkPunchSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F5B8:
+FBZMiniSK_LinkExtendAndSignalSide:
                 bsr.w   ExtendFBZMinibossArmToSideAngle
-                beq.s   loc_6F5D6
+                beq.s   FBZMiniSK_LinkPlaceAfterSideExtension
                 move.b  #$E,routine(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_6F5D6
+                bne.s   FBZMiniSK_LinkPlaceAfterSideExtension
                 movea.w $44(a0),a1
                 bset    #3,$38(a1)
 
-loc_6F5D6:
+FBZMiniSK_LinkPlaceAfterSideExtension:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F5E0:
+FBZMiniSK_LinkWaitForPreviousSide:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_6F5F6
+                bne.s   FBZMiniSK_LinkBeginFoldDelay
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F5F6:
+FBZMiniSK_LinkBeginFoldDelay:
                 move.b  #$10,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_6F618,$34(a0)
+                move.l  #FBZMinibossSK_Link_SelectBodyFoldState,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F612:
+FBZMinibossSK_Link_WaitBeforeBodyFold:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F618:
+FBZMinibossSK_Link_SelectBodyFoldState:
                 move.b  #$12,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F620:
+FBZMiniSK_LinkFoldForSelfHit:
                 move.b  #$14,d4
                 bsr.w   FoldFBZMinibossLinksForBodyStrike
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F632:
+FBZMiniSK_LinkWaitForPreviousFold:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_6F640
+                beq.s   FBZMiniSK_LinkBeginRestReturn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F640:
+FBZMiniSK_LinkBeginRestReturn:
                 move.b  #$16,routine(a0)
                 bclr    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F64E:
+FBZMiniSK_LinkReturnToRest:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.w   loc_6F504
+                bne.w   FBZMiniSK_LinkCopyOscillationAndDelay
                 bsr.w   ReturnFBZMinibossArmToRestAngle
-                beq.s   loc_6F674
+                beq.s   FBZMiniSK_LinkPlaceAfterRestReturn
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_6F674
+                bne.s   FBZMiniSK_LinkPlaceAfterRestReturn
                 movea.w $44(a0),a1
                 bset    #2,$38(a1)
 
-loc_6F674:
+FBZMiniSK_LinkPlaceAfterRestReturn:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F67E:
+FBZMiniSK_LinkRaiseAndSignalVertical:
                 bsr.w   RaiseFBZMinibossArmToVerticalAngle
-                beq.s   loc_6F69C
+                beq.s   FBZMiniSK_LinkPlaceAfterVerticalRaise
                 move.b  #$1A,routine(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_6F69C
+                bne.s   FBZMiniSK_LinkPlaceAfterVerticalRaise
                 movea.w $44(a0),a1
                 bset    #3,$38(a1)
 
-loc_6F69C:
+FBZMiniSK_LinkPlaceAfterVerticalRaise:
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F6A6:
+FBZMiniSK_LinkWaitForPreviousPunch:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_6F6BC
+                bne.s   FBZMiniSK_LinkBeginPunchTravel
                 move.w  $3E(a0),d2
                 jmp     (MoveSprite_CircularSimple).l
 ; ---------------------------------------------------------------------------
 
-loc_6F6BC:
+FBZMiniSK_LinkBeginPunchTravel:
                 move.b  #$1C,routine(a0)
                 bset    #3,$38(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6F702,$34(a0)
+                move.l  #FBZMiniSK_LinkBeginPunchTurnaround,$34(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.w   locret_6EF58
-                bra.w   loc_6F91C
+                bne.w   FBZMiniSK_SharedGateReturn
+                bra.w   FBZMiniSK_HandAimAtSavedTarget
 ; ---------------------------------------------------------------------------
 
-loc_6F6E4:
+FBZMiniSK_LinkInterpolatePunchAndWait:
                 cmpi.b  #$A,subtype(a0)
-                beq.s   loc_6F6F6
+                beq.s   FBZMiniSK_HandMoveAndTickPunch
                 bsr.w   FBZMiniPunch_InterpolateLink
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F6F6:
+FBZMiniSK_HandMoveAndTickPunch:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6F702:
+FBZMiniSK_LinkBeginPunchTurnaround:
                 move.b  #$1E,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6F72E,$34(a0)
+                move.l  #FBZMiniSK_LinkReversePunchVelocity,$34(a0)
                 moveq   #signextendB(sfx_MechaLand),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F720:
+FBZMiniSK_LinkBeginRestAfterPunch:
                 move.b  #$16,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F728:
+; Fall through to the reversal even if the wait has yet to expire
+FBZMiniSK_LinkTickWaitAndReverse:
                 jsr     (Obj_Wait).l
 
-loc_6F72E:
+FBZMiniSK_LinkReversePunchVelocity:
                 move.b  #$1C,routine(a0)
                 neg.w   x_vel(a0)
                 neg.w   y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6F720,$34(a0)
+                move.l  #FBZMiniSK_LinkBeginRestAfterPunch,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F74C:
+FBZMiniSK_InitReleasedBody:
                 lea     (ObjDat_FBZEggPrison).l,a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_6F764,(a0)
+                move.l  #FBZMiniSK_ReleasedBodySolidAndCull,(a0)
                 move.b  #1,mapping_frame(a0)
 
-loc_6F764:
+FBZMiniSK_ReleasedBodySolidAndCull:
                 bsr.w   FBZMini_SolidBodyOrCapsule
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_6F780
+                bhi.s   FBZMiniSK_DeleteReleasedBody
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6F780:
+FBZMiniSK_DeleteReleasedBody:
                 jmp     (Delete_Current_Sprite).l

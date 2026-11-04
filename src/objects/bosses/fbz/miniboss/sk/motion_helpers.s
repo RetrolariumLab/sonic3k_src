@@ -24,21 +24,21 @@ SolidifyFBZMinibossTopButton:
 
 ; ---------------------------------------------------------------------------
 
-loc_6F7A6:
+FBZMiniSK_TrimLoadDelayAndVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_6F7C0(pc,d0.w),$2E(a0)
+                move.w  FBZMiniSK_TrimSeparationDelays(pc,d0.w),$2E(a0)
                 add.w   d0,d0
-                lea     word_6F7C6(pc,d0.w),a1
+                lea     FBZMiniSK_TrimVelocityFieldPairs(pc,d0.w),a1
                 move.w  (a1)+,d1
                 move.w  (a1)+,(a0,d1.w)
                 rts
 ; ---------------------------------------------------------------------------
-word_6F7C0:
+FBZMiniSK_TrimSeparationDelays:
                 dc.w    $20
                 dc.w    $20
                 dc.w    $40
-word_6F7C6:
+FBZMiniSK_TrimVelocityFieldPairs:
                 dc.w    x_vel,  -$40
                 dc.w    x_vel,   $40
                 dc.w    y_vel,   $40
@@ -48,14 +48,14 @@ word_6F7C6:
 SetFBZMinibossLinkDeploymentVelocity:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  word_6F7E6-2(pc,d0.w),d0
+                move.w  FBZMiniSK_LinkDeploymentVelocities-2(pc,d0.w),d0
                 move.w  d0,x_vel(a0)
                 move.w  d0,y_vel(a0)
                 rts
 ; End of function SetFBZMinibossLinkDeploymentVelocity
 
 ; ---------------------------------------------------------------------------
-word_6F7E6:
+FBZMiniSK_LinkDeploymentVelocities:
                 dc.w    -$C0
                 dc.w    -$180
                 dc.w    -$240
@@ -69,28 +69,28 @@ OscillateFBZMinibossArmAngle:
                 move.b  $3C(a0),d0
                 moveq   #0,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_6F802
+                beq.s   FBZMiniSK_OscillationChooseBound
                 addq.w  #2,d1
 
-loc_6F802:
+FBZMiniSK_OscillationChooseBound:
                 move.b  $40(a0),d2
-                bmi.s   loc_6F814
-                move.b  byte_6F82C(pc,d1.w),d3
+                bmi.s   FBZMiniSK_OscillationCheckLowerBound
+                move.b  FBZMiniSK_OscillationBoundsByFlip(pc,d1.w),d3
                 cmp.b   d3,d0
-                bhs.s   loc_6F81E
-                bra.w   loc_6F820
+                bhs.s   FBZMiniSK_OscillationReverseStep
+                bra.w   FBZMiniSK_OscillationStoreStepAndAngle
 ; ---------------------------------------------------------------------------
 
-loc_6F814:
+FBZMiniSK_OscillationCheckLowerBound:
                 addq.w  #1,d1
-                move.b  byte_6F82C(pc,d1.w),d3
+                move.b  FBZMiniSK_OscillationBoundsByFlip(pc,d1.w),d3
                 cmp.b   d3,d0
-                bhi.s   loc_6F820
+                bhi.s   FBZMiniSK_OscillationStoreStepAndAngle
 
-loc_6F81E:
+FBZMiniSK_OscillationReverseStep:
                 neg.b   d2
 
-loc_6F820:
+FBZMiniSK_OscillationStoreStepAndAngle:
                 move.b  d2,$40(a0)
                 add.b   d2,d0
                 move.b  d0,$3C(a0)
@@ -98,7 +98,7 @@ loc_6F820:
 ; End of function OscillateFBZMinibossArmAngle
 
 ; ---------------------------------------------------------------------------
-byte_6F82C:
+FBZMiniSK_OscillationBoundsByFlip:
                 dc.b    $B0
                 dc.b    $80
                 dc.b    $80
@@ -109,24 +109,24 @@ byte_6F82C:
 
 ExtendFBZMinibossArmToSideAngle:
                 btst    #0,render_flags(a0)
-                bne.s   loc_6F84A
+                bne.s   FBZMiniSK_SideAngleDecreaseFlipped
                 addq.b  #2,$3C(a0)
                 moveq   #-$40,d0
                 cmp.b   $3C(a0),d0
-                bhi.s   loc_6F856
+                bhi.s   FBZMiniSK_SideAnglePendingReturn
 
-loc_6F844:
+FBZMiniSK_SideAngleClampAndReturn:
                 move.b  d0,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F84A:
+FBZMiniSK_SideAngleDecreaseFlipped:
                 subq.b  #2,$3C(a0)
                 moveq   #$40,d0
                 cmp.b   $3C(a0),d0
-                bhs.s   loc_6F844
+                bhs.s   FBZMiniSK_SideAngleClampAndReturn
 
-loc_6F856:
+FBZMiniSK_SideAnglePendingReturn:
                 moveq   #0,d0
                 rts
 ; End of function ExtendFBZMinibossArmToSideAngle
@@ -142,40 +142,41 @@ FoldFBZMinibossLinksForBodyStrike:
                 move.b  d2,$40(a0)
                 lsr.w   #1,d1
                 btst    #0,render_flags(a0)
-                bne.s   loc_6F888
-                move.b  byte_6F8BE-1(pc,d1.w),d3
+                bne.s   FBZMiniSK_FoldAdvanceFlippedAngle
+                move.b  FBZMiniSK_FoldTargetsUnflipped-1(pc,d1.w),d3
                 sub.b   d2,d0
                 cmp.b   d3,d0
-                bls.s   loc_6F892
-                bra.w   loc_6F8B8
+                bls.s   FBZMiniSK_FoldClampAndSignalHit
+                bra.w   FBZMiniSK_FoldStoreAngle
 ; ---------------------------------------------------------------------------
 
-loc_6F888:
-                move.b  byte_6F8C3-1(pc,d1.w),d3
+FBZMiniSK_FoldAdvanceFlippedAngle:
+                move.b  FBZMiniSK_FoldTargetsFlipped-1(pc,d1.w),d3
                 add.b   d2,d0
                 cmp.b   d3,d0
-                blo.s   loc_6F8B8
+                blo.s   FBZMiniSK_FoldStoreAngle
 
-loc_6F892:
+; When the terminal link reaches its fold target, signal the miniboss to take the self-hit
+FBZMiniSK_FoldClampAndSignalHit:
                 move.b  d3,d0
                 move.b  d4,routine(a0)
                 addq.b  #2,$40(a0)
                 cmpi.b  #$A,subtype(a0)
-                bne.s   loc_6F8B8
+                bne.s   FBZMiniSK_FoldStoreAngle
                 movea.w $44(a0),a1
                 movea.w parent3(a1),a1
                 bset    #2,$38(a1)
                 bset    #6,$3A(a1)
 
-loc_6F8B8:
+FBZMiniSK_FoldStoreAngle:
                 move.b  d0,$3C(a0)
                 rts
 ; End of function FoldFBZMinibossLinksForBodyStrike
 
 ; ---------------------------------------------------------------------------
-byte_6F8BE:
+FBZMiniSK_FoldTargetsUnflipped:
                 dc.b    $A0, $88, $60, $48, $38
-byte_6F8C3:
+FBZMiniSK_FoldTargetsFlipped:
                 dc.b    $60, $78, $90, $B8, $CC
                 even
 
@@ -183,24 +184,24 @@ byte_6F8C3:
 
 ReturnFBZMinibossArmToRestAngle:
                 btst    #0,render_flags(a0)
-                bne.s   loc_6F8E2
+                bne.s   FBZMiniSK_RestAngleDecreaseFlipped
                 addq.b  #2,$3C(a0)
                 moveq   #-$60,d0
                 cmp.b   $3C(a0),d0
-                bhi.s   loc_6F8EE
+                bhi.s   FBZMiniSK_RestAnglePendingReturn
 
-loc_6F8DC:
+FBZMiniSK_RestAngleClampAndReturn:
                 move.b  d0,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F8E2:
+FBZMiniSK_RestAngleDecreaseFlipped:
                 subq.b  #2,$3C(a0)
                 moveq   #$60,d0
                 cmp.b   $3C(a0),d0
-                bhs.s   loc_6F8DC
+                bhs.s   FBZMiniSK_RestAngleClampAndReturn
 
-loc_6F8EE:
+FBZMiniSK_RestAnglePendingReturn:
                 moveq   #0,d0
                 rts
 ; End of function ReturnFBZMinibossArmToRestAngle
@@ -209,31 +210,31 @@ loc_6F8EE:
 
 RaiseFBZMinibossArmToVerticalAngle:
                 btst    #0,render_flags(a0)
-                bne.s   loc_6F90C
+                bne.s   FBZMiniSK_VerticalAngleIncreaseFlipped
                 subq.b  #2,$3C(a0)
                 moveq   #-$80,d0
                 cmp.b   $3C(a0),d0
-                blo.s   loc_6F918
+                blo.s   FBZMiniSK_VerticalAnglePendingReturn
 
-loc_6F906:
+FBZMiniSK_VerticalAngleClampAndReturn:
                 move.b  d0,$3C(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F90C:
+FBZMiniSK_VerticalAngleIncreaseFlipped:
                 addq.b  #2,$3C(a0)
                 moveq   #-$80,d0
                 cmp.b   $3C(a0),d0
-                blo.s   loc_6F906
+                blo.s   FBZMiniSK_VerticalAngleClampAndReturn
 
-loc_6F918:
+FBZMiniSK_VerticalAnglePendingReturn:
                 moveq   #0,d0
                 rts
 ; End of function RaiseFBZMinibossArmToVerticalAngle
 
 ; ---------------------------------------------------------------------------
 
-loc_6F91C:
+FBZMiniSK_HandAimAtSavedTarget:
                 move.w  $30(a0),d0
                 sub.w   x_pos(a0),d0
                 lsl.w   #3,d0
@@ -258,17 +259,18 @@ FBZMiniPunch_InterpolateLink:
                 move.w  x_pos(a2),d3
                 sub.w   d3,d0
                 smi     d1
-                bpl.s   loc_6F95C
+                bpl.s   FBZMiniSK_PunchScaleLinkX
                 neg.w   d0
 
-loc_6F95C:
+; Divide the absolute delta by five before multiplying by the link index
+FBZMiniSK_PunchScaleLinkX:
                 divu.w  #5,d0
                 mulu.w  d2,d0
                 tst.b   d1
-                beq.s   loc_6F968
+                beq.s   FBZMiniSK_PunchStoreXAndLoadY
                 neg.w   d0
 
-loc_6F968:
+FBZMiniSK_PunchStoreXAndLoadY:
                 add.w   d0,d3
                 move.w  d3,x_pos(a0)
                 moveq   #0,d0
@@ -276,17 +278,18 @@ loc_6F968:
                 move.w  y_pos(a2),d3
                 sub.w   d3,d0
                 smi     d1
-                bpl.s   loc_6F980
+                bpl.s   FBZMiniSK_PunchScaleLinkY
                 neg.w   d0
 
-loc_6F980:
+; Divide the absolute delta by five before multiplying by the link index
+FBZMiniSK_PunchScaleLinkY:
                 divu.w  #5,d0
                 mulu.w  d2,d0
                 tst.b   d1
-                beq.s   loc_6F98C
+                beq.s   FBZMiniSK_PunchStoreLinkY
                 neg.w   d0
 
-loc_6F98C:
+FBZMiniSK_PunchStoreLinkY:
                 add.w   d0,d3
                 move.w  d3,y_pos(a0)
                 rts
@@ -296,35 +299,35 @@ loc_6F98C:
 
 ProcessFBZMinibossArmSelfHitAndDefeat:
                 btst    #6,$3A(a0)
-                beq.s   locret_6F9DC
+                beq.s   FBZMiniSK_SelfHitUpdateReturn
                 tst.b   $20(a0)
-                bne.s   loc_6F9B6
+                bne.s   FBZMiniSK_SelfHitChooseFlashRow
                 subq.b  #1,collision_property(a0)
-                beq.s   loc_6F9DE
+                beq.s   FBZMiniSK_SelfHitBeginDefeat
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_6F9B6:
+FBZMiniSK_SelfHitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_6F9C2
+                bne.s   FBZMiniSK_SelfHitCopyColorsAndTick
                 addq.w  #2*4,d0
 
-loc_6F9C2:
-                lea     word_6F9FC(pc),a1
-                lea     word_6FA04(pc,d0.w),a2
+FBZMiniSK_SelfHitCopyColorsAndTick:
+                lea     FBZMiniSK_SelfHitPaletteDestinations(pc),a1
+                lea     FBZMiniSK_SelfHitPaletteColorRows(pc,d0.w),a2
                 jsr     (CopyWordData_4).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_6F9DC
+                bne.s   FBZMiniSK_SelfHitUpdateReturn
                 bclr    #6,$3A(a0)
 
-locret_6F9DC:
+FBZMiniSK_SelfHitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F9DE:
-                move.l  #loc_6EF88,(a0)
+FBZMiniSK_SelfHitBeginDefeat:
+                move.l  #FBZMiniSK_DefeatSolidAndTickWait,(a0)
                 bset    #7,status(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
@@ -332,9 +335,9 @@ loc_6F9DE:
 ; End of function ProcessFBZMinibossArmSelfHitAndDefeat
 
 ; ---------------------------------------------------------------------------
-word_6F9FC:
+FBZMiniSK_SelfHitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$04, Normal_palette_line_2+$08, Normal_palette_line_2+$16, Normal_palette_line_2+$1E
-word_6FA04:
+FBZMiniSK_SelfHitPaletteColorRows:
                 dc.w    $222,  $644,  $222,   $44
                 dc.w    $AAA,  $AAA,  $EEE,  $EEE
 
@@ -343,12 +346,12 @@ word_6FA04:
 EnterFBZMinibossArmParentDefeatWait:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_6FA22
+                bne.s   FBZMiniSK_ArmBeginDeathWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6FA22:
-                move.l  #loc_6F3B2,(a0)
+FBZMiniSK_ArmBeginDeathWait:
+                move.l  #FBZMiniSK_DefeatedArmWaitAndDraw,(a0)
                 bset    #7,status(a0)
                 clr.b   collision_flags(a0)
                 rts

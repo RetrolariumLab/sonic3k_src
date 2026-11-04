@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 145
+    "commit_count": 146
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -917,9 +917,15 @@
       "commits": ["0000f2f0261923e57bf74f70d915104d0cccbef8"]
     },
     {
-      "id": "current-shorten-39-boss-cnz",
+      "id": "change-5ce729012328",
       "kind": "source_or_tooling",
       "summary": "Apply 149 reviewed short labels for boss cnz.",
+      "commits": ["5ce72901232812164c50495733f491a99081e656"]
+    },
+    {
+      "id": "current-shorten-40-boss-fbz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 657 reviewed short labels for boss fbz.",
       "commits": ["release-commit"]
     }
   ],
