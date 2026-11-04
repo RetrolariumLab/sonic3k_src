@@ -78,7 +78,7 @@ Init_VDP:
                 move.w  d0,(a1)
                 dbf     d7,.clearCRAM
                 clr.l   (V_scroll_value).w
-                clr.l   (_unkF61A).w
+                clr.l   (DisplayResetWriteOnlyScrollPadding).w
                 move.l  d1,-(sp)
                 dmaFillVRAM 0,$0000,$10000              ; clear entire VRAM
                 move.l  (sp)+,d1
@@ -126,7 +126,7 @@ Clear_DisplayData_No2P:
 
 Clear_DisplayData_Cont:
                 clr.l   (V_scroll_value).w
-                clr.l   (_unkF61A).w
+                clr.l   (DisplayResetWriteOnlyScrollPadding).w
 ; Bug: this should be (Sprite_table_End-Sprite_table)
                 clearRAM Sprite_table,(Sprite_table_end-Sprite_table)+4
 ; Bug: this should be (Collision_response_list_End-H_scroll_buffer)

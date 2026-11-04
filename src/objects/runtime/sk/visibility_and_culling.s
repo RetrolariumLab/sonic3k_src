@@ -93,7 +93,7 @@ SKDualCull_CheckPrimaryWindow:
 ; ---------------------------------------------------------------------------
 
 SKDualCull_CheckSecondaryWindow:
-                sub.w   (_unkF7DC).w,d1
+                sub.w   (AlternateObjectCullCoarseXOrigin).w,d1
                 cmpi.w  #$300,d1
                 bhi.w   SKDualCull_ReleaseRespawn
                 bra.w   Draw_Sprite

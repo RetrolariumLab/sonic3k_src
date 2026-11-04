@@ -29,7 +29,7 @@ EndEmerald_InitMasterEmeraldAndOutcome:
                 bne.s   EndEmerald_SetAlternateAppearance
                 move.w  #make_art_tile(ArtTile_Ending_MasterEmerald,2,1),art_tile(a0)
                 move.w  #$280,priority(a0)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bpl.s   EndEmerald_MasterEmeraldInitReturn
                 move.b  #8,routine(a0)
                 move.w  #(2*60)-1,$2E(a0)
@@ -45,7 +45,7 @@ EndEmerald_SetAlternateAppearance:
 ; ---------------------------------------------------------------------------
 
 EndEmerald_WaitForBoardingSignal:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.s   EndingMasterEmerald_BeginLeftDownDrift
                 rts
 ; ---------------------------------------------------------------------------
@@ -56,7 +56,7 @@ EndingMasterEmerald_BeginLeftDownDrift:
                 move.w  #$100,y_vel(a0)
 
 EndEmerald_DriftUntilCarrierReady:
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 bne.s   EndEmerald_AttachToCarrier
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
@@ -99,10 +99,10 @@ EndingMasterEmerald_RiseUntilTopCutoff:
 ; ---------------------------------------------------------------------------
 
 EndEmerald_CycleAllSuperAccent:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndEmerald_AccentPaletteUpdateReturn
                 bmi.s   EndEmerald_AccentPaletteUpdateReturn
-                move.b  (_unkFAC1).w,d0
+                move.b  (EmeraldPresentationEnableAndPaletteRoute).w,d0
                 beq.s   EndEmerald_AccentPaletteUpdateReturn
                 lea     (SSZMasterEmeraldColorCycle_IndexedScript).l,a1
                 lea     (Normal_palette_line_3+$1C).w,a2
@@ -126,7 +126,7 @@ EndEmerald_InitCarrierPlaneExtension:
 ; ---------------------------------------------------------------------------
 
 EndEmerald_CarrierWaitForDeparture:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   EndEmerald_FollowParentBeforeDeparture
                 move.l  #EndEmerald_ShiftCarrierAndPublishHandle,(a0)
 
@@ -142,7 +142,7 @@ EndEmerald_ShiftCarrierAndPublishHandle:
                 cmpi.b  #-$74,d0
                 bgt.s   EndEmerald_RefreshShiftedCarrier
                 move.l  #EndEmerald_FollowUntilCarrierCutoff,(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
 
 EndEmerald_RefreshShiftedCarrier:
                 jsr     (Refresh_ChildPosition).l

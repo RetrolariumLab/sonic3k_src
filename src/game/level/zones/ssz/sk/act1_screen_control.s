@@ -25,8 +25,8 @@ SSZ1_ScreenInit:
                 st      (Scroll_lock).w
 
 SKSSZ1FG_ResetEscapeOffsets:
-                clr.w   (_unkEE98).w
-                clr.w   (_unkEE9C).w
+                clr.w   (SceneAuxiliaryXOrCompetitionTime).w
+                clr.w   (SceneAuxiliaryYOrVerticalMotion).w
                 lea     (HScroll_table+$1F6).w,a1
                 lea     (a1),a5
                 moveq   #5-1,d0
@@ -164,16 +164,16 @@ SKSSZ1FG_CopyEscapePaletteAndSetup:
                 move.l  (a5)+,(a1)+
                 dbf     d0,SKSSZ1FG_CopyEscapePaletteAndSetup
                 jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
-                move.w  (_unkEEEA).w,d0
+                move.w  (SszEscapeXOrSaveDigitTileBuffer).w,d0
                 move.w  d0,d1
                 andi.w  #$FFF0,d0
-                move.w  d0,(_unkEEF2).w
-                move.w  (_unkEEEE).w,d0
+                move.w  d0,(SszEscapeRoundedColumnAnchor).w
+                move.w  (SszEscapeYOrSaveLowerDigitTiles).w,d0
                 and.w   (Camera_Y_pos_mask).w,d0
-                move.w  d0,(_unkEEF4).w
-                st      (_unkEE98).w
-                clr.l   (_unkEEF6).w
-                clr.w   (_unkEEFA).w
+                move.w  d0,(SszEscapeRoundedRowAnchor).w
+                st      (SceneAuxiliaryXOrCompetitionTime).w
+                clr.l   (SszEscapeVerticalDriftAccumulator).w
+                clr.w   (SszDebrisClearRowVramRequest).w
                 jsr     (AllocateObject).l
                 bne.w   SKSSZ1FG_SignalRampReadyAndSetVInt
                 move.w  #$5A8,d1
@@ -220,14 +220,14 @@ SKSSZ1FG_SignalRampReadyAndSetVInt:
 
 SKSSZ1FG_DrawEscapeForeground:
                 jsr     SSZ1Escape_UpdateCameraAndClouds(pc)
-                lea     (_unkEEEA).w,a6
-                lea     (_unkEEF2).w,a5
-                move.w  (_unkEEEE).w,d1
+                lea     (SszEscapeXOrSaveDigitTileBuffer).w,a6
+                lea     (SszEscapeRoundedColumnAnchor).w,a5
+                move.w  (SszEscapeYOrSaveLowerDigitTiles).w,d1
                 moveq   #$F,d6
                 jsr     (Draw_TileColumn).l
-                lea     (_unkEEEE).w,a6
-                lea     (_unkEEF4).w,a5
-                move.w  (_unkEEEA).w,d1
+                lea     (SszEscapeYOrSaveLowerDigitTiles).w,a6
+                lea     (SszEscapeRoundedRowAnchor).w,a5
+                move.w  (SszEscapeXOrSaveDigitTileBuffer).w,d1
                 moveq   #$15,d6
                 jmp     (Draw_TileRow).l
 
@@ -235,16 +235,16 @@ SKSSZ1FG_DrawEscapeForeground:
 
 ; Maintain the separate foreground draw and vertical-scroll origin during the spiral escape
 SSZ1Escape_UpdateCameraAndClouds:
-                move.w  (Camera_X_pos_copy).w,(_unkEEEA).w
+                move.w  (Camera_X_pos_copy).w,(SszEscapeXOrSaveDigitTileBuffer).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$110,d0
                 asr.w   #2,d0
-                move.w  d0,(_unkEEEE).w
+                move.w  d0,(SszEscapeYOrSaveLowerDigitTiles).w
                 cmpi.w  #$110,(Camera_Y_pos).w
                 bne.w   PositionSsz1RoamingCloudSprites
-                addi.l  #$6000,(_unkEEF6).w
-                move.w  (_unkEEF6).w,d0
-                add.w   d0,(_unkEEEE).w
+                addi.l  #$6000,(SszEscapeVerticalDriftAccumulator).w
+                move.w  (SszEscapeVerticalDriftAccumulator).w,d0
+                add.w   d0,(SszEscapeYOrSaveLowerDigitTiles).w
                 bra.s   PositionSsz1RoamingCloudSprites
 ; End of function SSZ1Escape_UpdateCameraAndClouds
 
@@ -286,7 +286,7 @@ SKSSZ1FG_WriteStripYAndPlaceActor:
                 addq.w  #4,a5
                 addq.w  #2,a6
                 dbf     d2,SKSSZ1FG_SelectStripFallState
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 move.w  $10(a1),d0
                 subi.w  #$19A0,d0
                 lsr.w   #3,d0
@@ -310,7 +310,7 @@ PositionSsz1RoamingCloudSprites:
                 move.w  d0,d1
                 asr.w   #2,d1
                 add.w   d1,d0
-                move.w  (_unkEE9C).w,d1
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d1
                 move.w  d1,d2
                 asr.w   #2,d2
                 add.w   d2,d1

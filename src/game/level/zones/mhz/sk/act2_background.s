@@ -284,7 +284,7 @@ SKMHZ2BG_DrawChaseAndComposeScroll:
                 jsr     ComposeMhz2ShipAndBossPerspectiveScroll(pc)
                 cmpi.w  #$10,(Events_routine_fg).w
                 bne.s   SKMHZ2BG_ApplyScreenShake
-                move.w  (_unkEE9C).w,(V_scroll_value).w
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
 
@@ -499,10 +499,10 @@ SKMHZ2BG_WrapPlayersAndAdvancePhase:
 
 SKMHZ2BG_StorePhaseAndConsumeShipLatch:
                 move.b  (a1,d1.w),(Events_bg+$07).w
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   SKMHZ2BG_SetChaseCameraMaxX
                 st      (Events_bg+$0A).w
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
 
 SKMHZ2BG_SetChaseCameraMaxX:
                 move.w  d0,(Camera_max_X_pos).w
@@ -656,7 +656,7 @@ SKMHZ2BG_AccelerateShipAndSelectY:
                 addq.b  #1,$3C(a0)
                 addi.l  #$C0,$38(a0)
                 move.l  $38(a0),d0
-                sub.l   d0,(_unkEE98).w
+                sub.l   d0,(SceneAuxiliaryXOrCompetitionTime).w
                 tst.w   (Events_fg_4).w
                 beq.s   SKMHZ2BG_CalcShipVerticalSwing
                 cmpi.l  #$2800,$2E(a0)
@@ -675,14 +675,14 @@ SKMHZ2BG_CalcShipVerticalSwing:
                 jsr     (Gradual_SwingOffset).l
 
 SKMHZ2BG_StoreShipYAndCheckThreshold:
-                add.w   (_unkEEA2).w,d0
+                add.w   (SceneRowAnchorOrCompetitionWinCounts).w,d0
                 addq.w  #5,d0
-                move.w  d0,(_unkEE9C).w
-                tst.b   (_unkFAA9).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.s   SKMHZ2BG_TickShipSound
-                cmpi.w  #-$3E6,(_unkEE98).w
+                cmpi.w  #-$3E6,(SceneAuxiliaryXOrCompetitionTime).w
                 bgt.s   SKMHZ2BG_TickShipSound
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 st      (Events_fg_4).w
                 st      (Scroll_lock).w
 

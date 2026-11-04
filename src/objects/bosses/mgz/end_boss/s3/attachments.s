@@ -380,7 +380,7 @@ MGZBossS3_PassShotCheckCleanupY:
                 tst.b   d1
                 bne.s   MGZBossS3_PassShotCheckLowerPass
                 moveq   #$10,d1
-                btst    #1,(_unkFA83).w
+                btst    #1,(SceneTimerLowByteOrSecondAttackDone).w
                 bne.s   MGZBossS3_PassShotCheckUpperY
                 moveq   #$18,d1
 
@@ -395,7 +395,7 @@ MGZBossS3_PassShotQueueDeath:
 
 MGZBossS3_PassShotCheckLowerPass:
                 moveq   #$14,d1
-                btst    #1,(_unkFA8A+1).w
+                btst    #1,(DDZScrollAccelOrSceneMotion+1).w
                 bne.s   MGZBossS3_PassShotCheckLowerY
                 moveq   #$1C,d1
 

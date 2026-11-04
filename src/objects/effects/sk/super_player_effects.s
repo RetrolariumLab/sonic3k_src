@@ -290,13 +290,13 @@ Obj_SuperTailsBirds_FindTarget:
                 move.w  (a4)+,d6
                 beq.s   .return
                 moveq   #0,d0
-                addq.b  #2,(_unkF66C).w
-                cmp.b   (_unkF66C).w,d6
+                addq.b  #2,(SuperTailsTargetScanByteOffset).w
+                cmp.b   (SuperTailsTargetScanByteOffset).w,d6
                 bhi.s   .noreset
-                move.b  #0,(_unkF66C).w
+                move.b  #0,(SuperTailsTargetScanByteOffset).w
 
                 .noreset:
-                move.b  (_unkF66C).w,d0
+                move.b  (SuperTailsTargetScanByteOffset).w,d0
                 sub.w   d0,d6
                 lea     (a4,d0.w),a4
 

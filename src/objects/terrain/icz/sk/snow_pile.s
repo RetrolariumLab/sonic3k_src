@@ -128,7 +128,7 @@ SKICZSnowPile_TransitionGateBounds:
 
 ; Increment the live flake count before attempting allocation
 SKICZSnowPile_UpdateCameraSnowEmitter:
-                move.w  a0,(_unkFAAE).w
+                move.w  a0,(SceneActorOrWorldOffset).w
                 btst    #5,$38(a0)
                 bne.s   SKICZSnowPile_DeleteSnowEmitter
                 move.w  (Camera_X_pos_copy).w,x_pos(a0)

@@ -456,9 +456,9 @@ LBZBoss2SK_SpawnCapsuleAndInstallWait:
 ; ---------------------------------------------------------------------------
 
 LBZBoss2SK_WaitCapsuleAndFinishEvent:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   LBZBoss2SK_SharedReturn
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.w   LBZBoss2SK_SharedReturn
                 move.l  #LBZBoss2SK_ChoosePlayerAlignmentInput,(a0)
                 jsr     LBZFinalBoss_QueueShipAndExplosionArt(pc)
@@ -629,7 +629,7 @@ LBZBoss2SK_SetAlternateCarryFrame:
                 jsr     (Player_Load_PLC).l
 
 LBZBoss2SK_StartZoneAtExitHeight:
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 addi.w  #$200,d0
                 cmp.w   (Player_1+y_pos).w,d0
                 bhi.w   LBZBoss2SK_SharedReturn

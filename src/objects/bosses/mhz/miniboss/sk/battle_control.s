@@ -54,7 +54,7 @@ MHZMini_InitBossAndLinkedChildren:
                 subi.w  #$78,d0
                 move.w  d0,y_pos(a0)
                 move.b  #6,collision_property(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 move.b  #5,$42(a0)
                 move.l  (V_int_run_count).w,(RNG_seed).w
                 move.b  #1,(Boss_flag).w

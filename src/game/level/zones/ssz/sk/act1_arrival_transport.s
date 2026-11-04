@@ -185,7 +185,7 @@ SSZArrivalK_SwingActorAndSignalReady:
                 move.w  d0,y_pos(a1)
                 tst.l   $2E(a0)
                 bmi.s   SSZArrivalK_ArrivalWaitReturn
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 

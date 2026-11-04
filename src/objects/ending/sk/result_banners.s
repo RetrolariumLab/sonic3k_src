@@ -31,7 +31,7 @@ EndingSKBanner_PlacementPairs:
 ; ---------------------------------------------------------------------------
 
 EndBanner_DrawUntilHandoff:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.s   EndingBanner_DeleteAfterProgramHandoff
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -82,7 +82,7 @@ EndBanner_InitS3GraphicsProgram:
                 beq.s   EndBanner_PrepareS3PlacementAndPalette
                 move.l  #EndBanner_SignalExitAtTimer64,(a0)
                 move.w  #$4AF,$2E(a0)
-                bclr    #2,(_unkFAB8).w
+                bclr    #2,(SceneSyncFlagsOrMHZState).w
 
 EndBanner_PrepareS3PlacementAndPalette:
                 lea     EndingS3GraphicsBanner_PlacementPairs(pc),a1
@@ -118,7 +118,7 @@ EndingS3GraphicsBanner_PlacementPairs:
 EndBanner_SignalExitAtTimer64:
                 cmpi.w  #$40,$2E(a0)
                 bne.s   EndBanner_DrawUntilStartOrTimeout
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
 
 EndBanner_DrawUntilStartOrTimeout:
                 btst    #button_start,(Ctrl_1_held).w

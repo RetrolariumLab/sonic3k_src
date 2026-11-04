@@ -12,7 +12,7 @@ HPZShipCrane_InitOverlayAndBeam:
 ; ---------------------------------------------------------------------------
 
 HPZShipCrane_FollowShipUntilLowerSignal:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.s   HPZShipCrane_SaveOffsetAndBeginLowering
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
@@ -23,7 +23,7 @@ HPZShipCrane_SaveOffsetAndBeginLowering:
                 move.b  child_dy(a0),$3A(a0)
 
 HPZShipCrane_CheckEmeraldAndAdvancePhase:
-                move.w  (_unkFABA).w,d0
+                move.w  (HpzMasterEmeraldObjectAddress).w,d0
                 beq.s   HPZShipCrane_FollowShipAndDraw
                 movea.w d0,a1
                 move.w  y_pos(a1),d0
@@ -65,7 +65,7 @@ HPZShipCrane_RetractAndSignalOnUnderflow:
                 moveq   #0,d2
                 movea.w parent3(a0),a1
                 bset    #2,$38(a1)
-                movea.w (_unkFABA).w,a2
+                movea.w (HpzMasterEmeraldObjectAddress).w,a2
                 bset    #7,art_tile(a2)
 
 HPZShipCrane_StoreRetractPhaseAndOffset:
@@ -77,12 +77,12 @@ HPZShipCrane_StoreRetractPhaseAndOffset:
 
 HPZShipCrane_FollowShipAndCarryEmerald:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                move.w  (_unkFABA).w,d0
+                move.w  (HpzMasterEmeraldObjectAddress).w,d0
                 beq.s   HPZShipCrane_DrawAfterCarry
                 movea.w d0,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),d0
-                move.b  (_unkFABD).w,d1
+                move.b  (HPZEmeraldOffsetOrDDZDebugLo).w,d1
                 ext.w   d1
                 neg.w   d1
                 add.w   d1,d0

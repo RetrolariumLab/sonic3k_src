@@ -85,7 +85,7 @@ SKDrawbridge_StartTriggerWait:
                 move.l  #SKDrawbridge_TryStartRotation,(a0)
 
 SKDrawbridge_TryStartRotation:
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 beq.s   SKDrawbridge_CheckRotationPhase
                 tst.b   $36(a0)
                 bne.s   SKDrawbridge_CheckRotationPhase
@@ -130,7 +130,7 @@ SKDrawbridge_PlacePiecesAndCheckSolid:
 ; ---------------------------------------------------------------------------
 
 SKDrawbridge_TryCollapseBanks:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   SKDrawbridge_PickSolidRectangle
                 move.l  #SKDrawbridge_TickFinalRiderDelay,(a0)
                 move.b  #$E,$34(a0)

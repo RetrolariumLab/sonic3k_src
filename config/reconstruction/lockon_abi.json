@@ -10,12 +10,12 @@
       "target": "StartOfROM"
     },
     {
-      "external": "byte_200011",
+      "external": "Lockon_VectorReservedFirst",
       "target": "Vectors",
       "addend": 17
     },
     {
-      "external": "byte_2000BD",
+      "external": "Lockon_VectorReservedLast",
       "target": "Vectors",
       "addend": 189
     },
@@ -24,12 +24,12 @@
       "target": "Header"
     },
     {
-      "external": "SSMagic_TestLoc_200114",
+      "external": "Lockon_CopyrightEGProbe",
       "target": "Copyright",
       "addend": 4
     },
     {
-      "external": "SSMagic_TestLoc_20011A",
+      "external": "Lockon_CopyrightYearDigits",
       "target": "Copyright",
       "addend": 10
     },
@@ -39,7 +39,7 @@
       "addend": 12
     },
     {
-      "external": "SSMagic_TestLoc_200150",
+      "external": "Lockon_OverseasTitleParityByte",
       "target": "Overseas_Name"
     },
     {
@@ -47,16 +47,16 @@
       "target": "Serial_Number"
     },
     {
-      "external": "SSMagic_TestLoc_2001A4",
+      "external": "Lockon_ROMEndUpperWord",
       "target": "ROMEndLoc"
     },
     {
-      "external": "byte_200281",
+      "external": "Lockon_PostHeaderReservedFirst",
       "target": "Init_ClearVSRAM",
       "addend": 5
     },
     {
-      "external": "byte_20032D",
+      "external": "Lockon_PreCompPaletteReserved",
       "target": "CheckVDP",
       "addend": 35
     },
@@ -1493,12 +1493,12 @@
       "target": "ArtUnc_Knuckles2P"
     },
     {
-      "external": "byte_33F06E",
+      "external": "Lockon_Knux2PArtReserved150E",
       "target": "ArtUnc_Knuckles2P",
       "addend": 5390
     },
     {
-      "external": "byte_33F74C",
+      "external": "Lockon_Knux2PArtReserved1BEC",
       "target": "ArtUnc_Knuckles2P",
       "addend": 7148
     },

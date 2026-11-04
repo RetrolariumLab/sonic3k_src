@@ -35,7 +35,7 @@ OpeningAnimal_ChooseBounceVel:
                 move.w  d0,y_vel(a0)
                 swap    d0
                 move.w  #$100,d1
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 bne.s   SKScene_AnimalBounceLeft
                 bclr    #0,render_flags(a0)
                 move.w  x_pos(a0),d2
@@ -251,7 +251,7 @@ SSZKnucklesReactToCrouchingP1OnRight:
 ; =============== S U B R O U T I N E =======================================
 
 MoveSprite_SSZBGAdjust:
-                move.w  (_unkFA84).w,d0
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 add.w   d0,x_pos(a0)
                 move.w  $40(a0),d0
                 ext.l   d0
@@ -260,7 +260,7 @@ MoveSprite_SSZBGAdjust:
                 add.l   d0,d1
                 move.l  d1,y_vel(a0)
                 swap    d1
-                move.w  (_unkEE9C).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 asr.w   #2,d0
                 sub.w   d0,d1
                 move.w  d1,y_pos(a0)

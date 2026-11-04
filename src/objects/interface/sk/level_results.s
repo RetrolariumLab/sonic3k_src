@@ -210,7 +210,7 @@ SKLevelResults_FinishActOrStartNextTitle:
                 beq.s   SKLevelResults_SetAct2AndSelectTitle
 
 SKLevelResults_FinishAndDelete:
-                clr.b   (_unkFAA8).w                    ; Act 2 (or Sky Sanctuary or LRZ boss)
+                clr.b   (ActCompletionHandshake).w      ; Act 2 (or Sky Sanctuary or LRZ boss)
                 st      (End_of_level_flag).w           ; Stop level results flag and set title card finished flag
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -219,7 +219,7 @@ SKLevelResults_SetAct2AndSelectTitle:
                 move.b  #1,(Apparent_act).w             ; Change to act 2 if in act 1
                 clr.b   (Last_star_post_hit).w
                 clr.b   (Special_bonus_entry_flag).w
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 cmpi.b  #8,(Current_zone).w
                 beq.s   SKLevelResults_DeleteTitleException
                 cmpi.b  #$B,(Current_zone).w
@@ -372,7 +372,7 @@ SKLevelResults_ElementMoveReturn:
 ; =============== S U B R O U T I N E =======================================
 
 LevResults_GetDecimalScore:
-                clr.l   (_unkEF40_1).w
+                clr.l   (ResultsNumericAccumulator).w
                 lea     TimeBonus(pc),a1
                 moveq   #$10-1,d2
 
@@ -384,7 +384,7 @@ SKLevelResults_ReadBitOrSkipBcdWeight:
 ; ---------------------------------------------------------------------------
 
 SKLevelResults_AddPackedBcdWeight:
-                lea     (_unkEF44_2).w,a2
+                lea     (ResultsNumericAccumulatorEnd).w,a2
                 addi.w  #0,d0
                 abcd    -(a1),-(a2)
                 abcd    -(a1),-(a2)
@@ -392,7 +392,7 @@ SKLevelResults_AddPackedBcdWeight:
 
 SKLevelResults_FinishBcdConversion:
                 dbf     d2,SKLevelResults_ReadBitOrSkipBcdWeight
-                move.l  (_unkEF40_1).w,d1
+                move.l  (ResultsNumericAccumulator).w,d1
                 rts
 ; End of function LevResults_GetDecimalScore
 

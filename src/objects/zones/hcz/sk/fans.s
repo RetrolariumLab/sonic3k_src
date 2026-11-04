@@ -284,7 +284,7 @@ Obj_HCZLargeFan:
                 blo.s   SKFans_QueueLargeFanArt
 
 SKFans_LockAndCullInactiveLargeFan:
-                move.b  #3,(_unkF7C7).w
+                move.b  #3,(HczPlayerWaterTunnelBlockBits).w
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
@@ -318,7 +318,7 @@ SKFans_StepLargeFanDescent:
                 addq.w  #8,y_pos(a0)
                 subq.w  #1,$30(a0)
                 bne.s   SKFans_TryLargeFanSound
-                move.b  #0,(_unkF7C7).w
+                move.b  #0,(HczPlayerWaterTunnelBlockBits).w
 
 SKFans_TryLargeFanSound:
                 move.b  (Level_frame_counter+1).w,d0

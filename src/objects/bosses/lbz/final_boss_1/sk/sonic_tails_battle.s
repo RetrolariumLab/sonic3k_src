@@ -205,7 +205,7 @@ LBZBoss1SK_EndingRestoreAndLockInput:
                 bpl.w   LBZBoss1SK_SharedReturn
                 move.l  #LBZBoss1SK_EndingCenterGroundedPlayer,(a0)
                 bset    #5,$38(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
@@ -249,7 +249,7 @@ LBZBoss1SK_EndingCenteringReturn:
 
 LBZBoss1SK_EndingStopPlayerAndSpawnBurst:
                 move.l  #LBZBoss1SK_EndingTakeAnimationControl,(a0)
-                clr.b   (_unkFA88).w
+                clr.b   (EndingOutcomeOrBossSceneSignals).w
                 jsr     (Stop_Object).l
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -259,7 +259,7 @@ LBZBoss1SK_EndingStopPlayerAndSpawnBurst:
 ; ---------------------------------------------------------------------------
 
 LBZBoss1SK_EndingTakeAnimationControl:
-                btst    #0,(_unkFA88).w
+                btst    #0,(EndingOutcomeOrBossSceneSignals).w
                 beq.s   LBZBoss1SK_EndingAnimSetupReturn
                 move.l  #LBZBoss1SK_EndingAnimateBothPlayers,(a0)
                 move.l  #LBZBoss1SK_EndingInstallFallFlagPoll,$34(a0)
@@ -296,7 +296,7 @@ LBZBoss1SK_EndingInstallFallFlagPoll:
 ; ---------------------------------------------------------------------------
 
 LBZBoss1SK_EndingWaitDeathEggFall:
-                btst    #1,(_unkFA88).w
+                btst    #1,(EndingOutcomeOrBossSceneSignals).w
                 beq.s   LBZBoss1SK_EndingFallPollReturn
                 move.l  #LBZBoss1SK_EndingStartNextLevel,(a0)
                 st      (Events_fg_5).w
@@ -426,7 +426,7 @@ LBZBoss1SK_EndingTickLongPause:
 ; ---------------------------------------------------------------------------
 
 LBZBoss1SK_EndingSignalAnimAndSpawnEgg:
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 clr.b   $39(a0)
                 clr.w   $2E(a0)
                 lea     LBZBoss1SK_DeathEggPieceChildren(pc),a2
@@ -516,7 +516,7 @@ LBZBoss1SK_DeathEggCheckFallThreshold:
                 addi.w  #$80,d0
                 cmp.w   y_pos(a0),d0
                 bhs.s   LBZBoss1SK_DeathEggPieceMoveAndDraw
-                bset    #1,(_unkFA88).w
+                bset    #1,(EndingOutcomeOrBossSceneSignals).w
 
 LBZBoss1SK_DeathEggPieceMoveAndDraw:
                 jsr     (MoveSprite2).l

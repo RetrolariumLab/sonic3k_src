@@ -133,7 +133,7 @@ Obj_MHZ1CutsceneKnuckles:
                 bne.w   CutsceneKnux_Delete
                 lea     (Player_1).w,a1
                 moveq   #0,d0
-                move.b  (_unkFAB8).w,d0
+                move.b  (SceneSyncFlagsOrMHZState).w,d0
                 move.w  MHZ1CutsceneKnuckles_Index(pc,d0.w),d0
                 jmp     MHZ1CutsceneKnuckles_Index(pc,d0.w)
 ; ---------------------------------------------------------------------------
@@ -148,7 +148,7 @@ MHZ1CutsceneKnuckles_Index:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_StartControllerAndTryFollower:
-                move.b  #2,(_unkFAB8).w
+                move.b  #2,(SceneSyncFlagsOrMHZState).w
                 tst.l   (Player_2).w
                 beq.s   MHZ1Scene_CheckSelectedActorStopX
                 jsr     (AllocateObject).l
@@ -164,7 +164,7 @@ MHZ1Scene_CheckSelectedActorStopX:
 
 MHZ1Scene_ClampActorAndLockP1:
                 move.w  d0,x_pos(a1)
-                move.b  #4,(_unkFAB8).w
+                move.b  #4,(SceneSyncFlagsOrMHZState).w
                 bclr    #0,render_flags(a1)
                 bclr    #0,status(a1)
                 st      (Ctrl_1_locked).w
@@ -180,7 +180,7 @@ MHZ1Scene_WaitForGroundedP1:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_SetCameraCueDelay:
-                move.b  #6,(_unkFAB8).w
+                move.b  #6,(SceneSyncFlagsOrMHZState).w
                 move.w  #$20,$2E(a0)
 
 MHZ1Scene_TickForcedDownDelay:
@@ -190,7 +190,7 @@ MHZ1Scene_TickForcedDownDelay:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_LockScrollAndForceDown:
-                move.b  #8,(_unkFAB8).w
+                move.b  #8,(SceneSyncFlagsOrMHZState).w
                 st      (Scroll_lock).w
                 move.w  #(button_down_mask<<8)|button_down_mask,(Ctrl_1_logical).w
 
@@ -202,14 +202,14 @@ MHZ1Scene_PanCameraDownTo5B0:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_SetWaitingPhaseA:
-                move.b  #$A,(_unkFAB8).w
+                move.b  #$A,(SceneSyncFlagsOrMHZState).w
 
 MHZ1Scene_ControllerWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_ReleaseInputsAndSaveCheckpoint:
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
                 clr.b   (Scroll_lock).w
@@ -225,7 +225,7 @@ MHZ1Scene_ReleaseInputsAndSaveCheckpoint:
 
 MHZ1Scene_WaitBeforeLockingP2:
                 lea     (Player_2).w,a1
-                cmpi.b  #4,(_unkFAB8).w
+                cmpi.b  #4,(SceneSyncFlagsOrMHZState).w
                 bhs.s   MHZ1Scene_SetFollowerHelperXAndLockP2
                 move.w  #$371,d0
                 cmp.w   x_pos(a1),d0
@@ -242,9 +242,9 @@ MHZ1Scene_SetFollowerHelperXAndLockP2:
 
 MHZ1Scene_HoldOrResetFollowerControl:
                 lea     (Player_2).w,a1
-                move.b  (_unkFAB8).w,d0
+                move.b  (SceneSyncFlagsOrMHZState).w,d0
                 beq.s   MHZ1Scene_ReleaseP2AndDeleteHelper
-                cmpi.b  #4,(_unkFAB8).w
+                cmpi.b  #4,(SceneSyncFlagsOrMHZState).w
                 blo.s   MHZ1Scene_ResetFollowerWaitIfOffscreen
                 move.w  #$371,d0
                 cmp.w   x_pos(a1),d0
@@ -287,7 +287,7 @@ MHZ1Scene_DrawInitializedButton:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_WaitForPhaseAToSpawnActor:
-                cmpi.b  #$A,(_unkFAB8).w
+                cmpi.b  #$A,(SceneSyncFlagsOrMHZState).w
                 bhs.s   MHZ1Scene_QueueArtAndTryActorChild
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -303,7 +303,7 @@ MHZ1Scene_QueueArtAndTryActorChild:
                 move.b  #$1C,subtype(a1)
 
 MHZ1Scene_PressWhenActorEntersRange:
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   MHZ1Scene_DrawButtonAfterActorCheck
                 movea.w d0,a1
                 lea     SKSceneButton_KnucklesContactBounds(pc),a2
@@ -313,7 +313,7 @@ MHZ1Scene_PressWhenActorEntersRange:
                 move.w  #1,$2E(a0)
                 move.b  #1,mapping_frame(a0)
                 bset    #1,$38(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
@@ -335,7 +335,7 @@ MHZ1Scene_DrawAutoPressedButton:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_SignalReleaseAndReuseButton:
-                move.b  #$C,(_unkFAB8).w
+                move.b  #$C,(SceneSyncFlagsOrMHZState).w
                 move.l  #MHZ1Scene_TestStandingAndToggleDoor,(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -352,7 +352,7 @@ MHZ1Scene_TestStandingAndToggleDoor:
                 btst    #2,$38(a0)
                 bne.s   MHZ1Scene_DrawOrCullReusableButton
                 bset    #1,$38(a0)
-                not.b   (_unkFAA9).w
+                not.b   (SceneOutcomeOrActorReadySignal).w
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
@@ -425,7 +425,7 @@ MHZ1Scene_InitDoorAndLinkButton:
                 move.l  #MHZ1Scene_CheckDoorPulseAndAutoReset,(a0)
                 move.w  #$390,x_pos(a0)
                 move.w  #$620,y_pos(a0)
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   MHZ1Scene_CheckDoorPulseAndAutoReset
                 addi.w  #$40,y_pos(a0)
 
@@ -436,7 +436,7 @@ MHZ1Scene_CheckDoorPulseAndAutoReset:
                 jsr     (CutsceneKnucklesSolidTallWrapper).l
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   MHZ1Scene_DrawDoorIfParentActive
                 tst.w   d0
                 bne.s   MHZ1Scene_DrawDoorIfParentActive
@@ -450,14 +450,14 @@ MHZ1Scene_DrawDoorIfParentActive:
 ; ---------------------------------------------------------------------------
 
 MHZ1Scene_ClearDoorFlagForUpwardReset:
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
 
 MHZ1Scene_BeginDoorMoveAndMarkBusy:
                 move.l  #MHZ1Scene_MoveDoorAndResolveSolid,(a0)
                 movea.w parent3(a0),a1
                 bset    #2,$38(a1)
                 move.w  #$100,d0
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.s   MHZ1Scene_SetDoorDirectionAndDelay
                 neg.w   d0
 

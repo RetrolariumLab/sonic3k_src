@@ -347,7 +347,7 @@ SKLRZ3Events_SampleSlopeForColumns:
 ApplyLrz3HeatRippleOrPlainScroll:
                 tst.b   (End_of_level_flag).w
                 bne.s   SKLRZ3Events_ApplyPlainScroll
-                tst.b   (_unkFACD).w
+                tst.b   (CapsuleOpenedFlag).w
                 bne.s   SKLRZ3Events_ApplyPlainScroll
                 cmpi.w  #8,(Events_routine_fg).w
                 bhs.s   SKLRZ3Events_BindHeatWaveReaders
@@ -650,7 +650,7 @@ SKLRZ3Events_StoreDriftAndCheckP1:
                 bne.s   LRZ3HazardSurface_DisplacePrimaryRider
                 btst    #Status_FireShield,status_secondary(a1)
                 bne.s   LRZ3HazardSurface_DisplacePrimaryRider
-                tst.b   (_unkFACD).w
+                tst.b   (CapsuleOpenedFlag).w
                 bne.s   LRZ3HazardSurface_DisplacePrimaryRider
                 jsr     (HurtPlayerFromSolidHazard).l
 
@@ -664,7 +664,7 @@ LRZ3HazardSurface_CheckSecondaryHazard:
                 lea     (Player_2).w,a1
                 tst.b   (End_of_level_flag).w
                 bne.s   LRZ3HazardSurface_DisplaceSecondaryRider
-                tst.b   (_unkFACD).w
+                tst.b   (CapsuleOpenedFlag).w
                 bne.s   LRZ3HazardSurface_DisplaceSecondaryRider
                 jsr     (HurtPlayerFromSolidHazard).l
 

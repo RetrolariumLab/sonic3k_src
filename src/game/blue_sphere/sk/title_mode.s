@@ -240,11 +240,11 @@ BSTitle_MapDateAndPackSerialHeader:
                 andi.w  #$F,d0
                 lsl.w   #4,d6
                 or.b    d0,d6
-                move.b  (SSMagic_TestLoc_200150).l,d1
+                move.b  (Lockon_OverseasTitleParityByte).l,d1
                 andi.b  #1,d1
                 lsl.l   #1,d6
                 or.b    d1,d6
-                lea     (SSMagic_TestLoc_20011A).l,a1
+                lea     (Lockon_CopyrightYearDigits).l,a1
                 moveq   #0,d0
                 move.b  (a1)+,d0
                 subi.b  #$30,d0
@@ -260,13 +260,13 @@ BSTitle_MapDateAndPackSerialHeader:
                 andi.w  #$1F,d2
                 lsl.l   #5,d6
                 or.b    d2,d6
-                move.w  (SSMagic_TestLoc_2001A4).l,d0
+                move.w  (Lockon_ROMEndUpperWord).l,d0
                 lsr.b   #3,d0
                 andi.b  #3,d0
                 lsl.l   #2,d6
                 or.b    d0,d6
                 moveq   #0,d1
-                cmpi.w  #"EG",(SSMagic_TestLoc_200114).l
+                cmpi.w  #"EG",(Lockon_CopyrightEGProbe).l
                 beq.s   BSTitle_Finish27BitLevelAndResidues
                 moveq   #1,d1
 

@@ -24,10 +24,10 @@ EndingCloudField_CopyPaletteAndQueueArt:
 ; ---------------------------------------------------------------------------
 
 EndCloud_TickCadenceAndTrySpawn:
-                tst.b   (_unkFAB9).w
+                tst.b   (EndingCloudSpawnFrameMask).w
                 beq.w   EndingChild_DeleteCurrentActor
                 move.b  (V_int_run_count+3).w,d0
-                and.b   (_unkFAB9).w,d0
+                and.b   (EndingCloudSpawnFrameMask).w,d0
                 bne.w   EndingCloudField_ReturnFromSpawnAttempt
                 addq.b  #1,$39(a0)
                 jsr     (AllocateObject).l
@@ -35,7 +35,7 @@ EndCloud_TickCadenceAndTrySpawn:
                 jsr     (Random_Number).l
                 move.l  #EndingCloud_InitializeMappingAndPalette,(a1)
                 move.b  d0,subtype(a1)
-                move.w  (_unkFAC2).w,d2
+                move.w  (EndingCloudHorizontalBaseVelocity).w,d2
                 beq.s   EndCloud_ComputeRandomYVelocity
                 move.w  d0,d1
                 andi.w  #$3F,d1
@@ -48,7 +48,7 @@ EndCloud_StoreRandomXVelocity:
                 move.w  d1,x_vel(a1)
 
 EndCloud_ComputeRandomYVelocity:
-                move.w  (_unkFAC4).w,d3
+                move.w  (EndingCloudVerticalBaseVelocity).w,d3
                 beq.s   EndCloud_SelectSpawnEdgeAxis
                 move.l  d0,d1
                 swap    d1
@@ -132,7 +132,7 @@ EndingCloud_SetBoundsAndPriority:
                 move.b  #$10,height_pixels(a0)
 
 EndCloud_MoveXWithBaseVelocity:
-                move.w  (_unkFAC2).w,d0
+                move.w  (EndingCloudHorizontalBaseVelocity).w,d0
                 beq.s   EndCloud_MoveYWithBaseVelocity
                 move.w  x_vel(a0),d1
                 add.w   d0,d1
@@ -141,7 +141,7 @@ EndCloud_MoveXWithBaseVelocity:
                 add.l   d1,x_pos(a0)
 
 EndCloud_MoveYWithBaseVelocity:
-                move.w  (_unkFAC4).w,d2
+                move.w  (EndingCloudVerticalBaseVelocity).w,d2
                 beq.s   EndCloud_CullOutsideScreenWindow
                 move.w  y_vel(a0),d3
                 add.w   d2,d3

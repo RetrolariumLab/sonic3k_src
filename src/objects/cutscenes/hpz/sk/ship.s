@@ -6,7 +6,7 @@
 HPZShip_InitReferenceAndAttachments:
                 lea     SKHpzSszSceneShip_CoreAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.w  a0,(_unkFAAE).w
+                move.w  a0,(SceneActorOrWorldOffset).w
                 move.l  #HPZShip_WaitForCraneSignal,(a0)
                 bset    #0,render_flags(a0)
                 move.w  #$1640,x_pos(a0)
@@ -67,12 +67,12 @@ HPZShip_TickHitPauseAndDraw:
 ; ---------------------------------------------------------------------------
 
 HPZShip_CheckBothCranesReady:
-                move.b  (_unkFAB8).w,d0
+                move.b  (SceneSyncFlagsOrMHZState).w,d0
                 andi.b  #$C,d0
                 cmpi.b  #$C,d0
                 bne.s   HPZShip_SwingFlashAndDrawTouch
                 move.l  #HPZShip_WaitForDepartureAndSetSpeed,(a0)
-                bset    #4,(_unkFAB8).w
+                bset    #4,(SceneSyncFlagsOrMHZState).w
 
 HPZShip_SwingFlashAndDrawTouch:
                 jsr     (Swing_UpAndDown).l
@@ -84,7 +84,7 @@ HPZShip_SwingFlashAndDrawTouch:
 HPZShip_WaitForDepartureAndSetSpeed:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                btst    #5,(_unkFAB8).w
+                btst    #5,(SceneSyncFlagsOrMHZState).w
                 beq.s   HPZShip_FlashAndDrawDeparture
                 move.l  #HPZShip_MoveExitAndCheckCameraMargin,(a0)
                 move.w  #$190,x_vel(a0)
@@ -110,9 +110,9 @@ HPZShip_MoveExitAndCheckCameraMargin:
 
 HPZShip_DeleteEmeraldAndQueueWarp:
                 ori.b   #$30,$38(a0)
-                movea.w (_unkFABA).w,a1
+                movea.w (HpzMasterEmeraldObjectAddress).w,a1
                 jsr     (Delete_Referenced_Sprite).l
-                clr.w   (_unkFABA).w
+                clr.w   (HpzMasterEmeraldObjectAddress).w
                 clr.w   (Palette_cycle_counter1).w
                 lea     (ArtKosM_Teleporter).l,a1
                 move.w  #tiles_to_bytes(ArtTile_HPZTeleporter),d2

@@ -108,7 +108,7 @@ EndScenery_SelectPoseOutcomeGroup:
                 move.w  (Player_mode).w,d0
                 cmpi.w  #3,d0
                 bne.s   EndScenery_SelectPoseSubtypeColumn
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndScenery_SelectPoseSubtypeColumn
                 addq.w  #1,d0
 
@@ -313,7 +313,7 @@ EndScenery_AnimateAndProjectLiftDetail:
                 bsr.w   Ending_ProjectActorAndFlagOutside
 
 EndScenery_CheckLiftDetailWindow:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.s   EndingIslandLiftProjectedDetail_Delete
                 btst    #6,$38(a0)
                 bne.w   EndingScene_SharedReturn

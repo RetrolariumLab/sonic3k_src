@@ -6,7 +6,7 @@
 
 MHZ1_ScreenInit:
                 clr.w   (Events_bg+$16).w
-                clr.b   (_unkF7C1).w
+                clr.b   (ZoneMagnetOrLeafSelectionFlag).w
                 jsr     SelectMhz1CameraLeftLimit(pc)
                 tst.w   (SK_alone_flag).w
                 beq.s   SKMHZ1Events_RefreshInitialForeground

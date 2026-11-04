@@ -85,7 +85,7 @@ DDZMissile_CheckContactAndRetire:
                 bpl.s   DDZ_MissileTestSectorContact
                 tst.b   subtype(a0)
                 beq.s   DDZ_MissileTestSectorContact
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   DDZ_MissileTestSectorContact
                 movea.w d0,a1
                 tst.b   collision_flags(a1)
@@ -230,7 +230,7 @@ DDZ_HeavyShotPlayerContactBounds:
 
 ; Subtract three pixels per update from 16.16 speed, with a signed minimum of one pixel per update
 DDZFlight_ReduceScrollSpeed:
-                move.l  (_unkFA82).w,d0
+                move.l  (SceneTimerOrSharedMotionRecordBase).w,d0
                 move.l  #$10000,d1
                 subi.l  #$30000,d0
                 cmp.l   d1,d0
@@ -238,7 +238,7 @@ DDZFlight_ReduceScrollSpeed:
                 move.l  d1,d0
 
 DDZ_FlightStoreReducedScrollSpeed:
-                move.l  d0,(_unkFA82).w
+                move.l  d0,(SceneTimerOrSharedMotionRecordBase).w
                 rts
 ; End of function DDZFlight_ReduceScrollSpeed
 

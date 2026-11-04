@@ -29,8 +29,8 @@ ContinueScreen:
                 lea     (ArtNem_ContinueIcons).l,a0
                 jsr     (Nem_Decomp).l
                 clr.b   (Level_started_flag).w
-                clr.b   (_unkFAA9).w
-                clr.b   (_unkFA88).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
+                clr.b   (EndingOutcomeOrBossSceneSignals).w
                 clearRAM Player_1,(Kos_decomp_buffer-Player_1)
                 moveq   #0,d0
                 move.l  d0,(LRZ_rocks_addr_front).w
@@ -64,7 +64,7 @@ SKContinue_InstallControllerAndFade:
                 move.l  #ContinueKnuckles_SelectEntrance,(Reserved_object_3).w
                 lea     (Dynamic_object_RAM).w,a1
                 move.l  #SKContinue_InitCountdownAt10,(a1)
-                move.w  a1,(_unkFAA4).w
+                move.w  a1,(SceneControllerObjectAddress).w
                 move.l  #ContinueDecoration_InitCenterSprite,(Dynamic_object_RAM+object_size).w
                 bsr.w   Continue_InitExtraCountIcons
                 jsr     (Process_Sprites).l
@@ -85,7 +85,7 @@ SKContinue_RunUntilOutcome:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 jsr     (Process_Kos_Module_Queue).l
-                move.b  (_unkFAA9).w,d0
+                move.b  (SceneOutcomeOrActorReadySignal).w,d0
                 beq.s   SKContinue_RunUntilOutcome
                 subq.b  #1,d0
                 beq.s   SKContinue_ConsumeAndSaveStats
@@ -116,21 +116,21 @@ SKContinueScene_ReturnAfterContinueSave:
 
 SKContinue_InitCountdownAt10:
                 move.l  #SKContinue_CheckStartOrTick,(a0)
-                clr.w   (_unkFA82).w
-                move.b  #$A,(_unkFA84).w
+                clr.w   (SceneTimerOrSharedMotionRecordBase).w
+                move.b  #$A,(SceneCreditIndexOrBossMotionPlanAngle).w
 
 SKContinue_CheckStartOrTick:
                 btst    #button_start,(Ctrl_1_pressed).w
                 bne.s   SKContinue_LatchStartAndStopTimer
                 btst    #button_start,(Ctrl_2_pressed).w
                 bne.s   SKContinue_LatchStartAndStopTimer
-                subq.w  #1,(_unkFA82).w
+                subq.w  #1,(SceneTimerOrSharedMotionRecordBase).w
                 bpl.s   SKContinue_CountdownReturn
-                move.w  #60-1,(_unkFA82).w
-                move.b  (_unkFA84).w,d0
+                move.w  #60-1,(SceneTimerOrSharedMotionRecordBase).w
+                move.b  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 subq.b  #1,d0
                 bmi.s   SKContinue_SignalTimeout
-                move.b  d0,(_unkFA84).w
+                move.b  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 bsr.w   Continue_DrawCountdownToPlaneA
 
 SKContinue_CountdownReturn:
@@ -138,7 +138,7 @@ SKContinue_CountdownReturn:
 ; ---------------------------------------------------------------------------
 
 SKContinue_SignalTimeout:
-                move.b  #2,(_unkFAA9).w
+                move.b  #2,(SceneOutcomeOrActorReadySignal).w
                 rts
 ; ---------------------------------------------------------------------------
 

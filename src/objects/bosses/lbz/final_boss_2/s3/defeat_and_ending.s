@@ -132,7 +132,7 @@ LBZBoss2S3_WaitTargetThenSignalEnding:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
                 beq.w   LBZBoss2S3_SharedReturn
-                bset    #1,(_unkFA88).w
+                bset    #1,(EndingOutcomeOrBossSceneSignals).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -158,7 +158,7 @@ LBZBoss2S3_RunEndingPaletteScript:
 ; ---------------------------------------------------------------------------
 
 LBZBoss2S3_WaitAndTakeExternalAnim:
-                btst    #0,(_unkFA88).w
+                btst    #0,(EndingOutcomeOrBossSceneSignals).w
                 beq.w   LBZBoss2S3_SharedReturn
                 move.l  #LBZBoss2S3_AnimateFirstExternalPose,(a0)
                 move.l  #LBZBoss2S3_InstallSecondEventWait,$34(a0)
@@ -177,7 +177,7 @@ LBZBoss2S3_InstallSecondEventWait:
                 move.l  #LBZBoss2S3_WaitSecondEventAndResetAnim,(a0)
 
 LBZBoss2S3_WaitSecondEventAndResetAnim:
-                btst    #1,(_unkFA88).w
+                btst    #1,(EndingOutcomeOrBossSceneSignals).w
                 beq.w   LBZBoss2S3_SharedReturn
                 move.l  #LBZBoss2S3_AnimateSecondExternalPose,(a0)
                 move.l  #LBZBoss2S3_BeginCharacterTimedAnim,$34(a0)
@@ -219,7 +219,7 @@ LBZBoss2S3_InitEndingPoseByVariant:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 move.l  #Go_Delete_Sprite,(a1)
                 jsr     GetS3LBZEndingCharacterVariant(pc)
                 moveq   #0,d1

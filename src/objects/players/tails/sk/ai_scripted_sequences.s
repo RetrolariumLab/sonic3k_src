@@ -234,7 +234,7 @@ SKTailsScript_CheckDownForSlowFlaps:
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 tst.b   (Flying_carrying_Sonic_flag).w
                 beq.w   SKTailsScript_ChooseHoverOrChase
-                clr.b   (_unkFAAC).w
+                clr.b   (TailsChaseOrHPZAftermathLatch).w
                 btst    #button_down,(Ctrl_1_held).w
                 beq.s   SKTailsScript_CheckUpForFastFlaps
                 addq.b  #1,(Tails_CPU_auto_fly_timer).w
@@ -345,7 +345,7 @@ SKTailsScript_PrimaryFlyInReturn:
 ; ---------------------------------------------------------------------------
 
 SKTailsScript_ChooseHoverOrChase:
-                tst.b   (_unkFAAC).w
+                tst.b   (TailsChaseOrHPZAftermathLatch).w
                 bne.s   SKTailsScript_ChaseLeaderWithSavedAccel
                 lea     (Player_1).w,a1
                 tst.b   render_flags(a1)
@@ -372,7 +372,7 @@ SKTailsScript_AfterHoverPulse:
 ; ---------------------------------------------------------------------------
 
 SKTailsScript_LatchChaseAndMeasureY:
-                st      (_unkFAAC).w
+                st      (TailsChaseOrHPZAftermathLatch).w
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 bpl.s   SKTailsScript_StoreChaseYAccel

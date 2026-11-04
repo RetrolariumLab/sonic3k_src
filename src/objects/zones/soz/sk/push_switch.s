@@ -217,12 +217,12 @@ SKSOZPushSwitch_RetractionReturn:
 ; =============== S U B R O U T I N E =======================================
 
 PressSozSwitchWithRegisteredRock:
-                move.w  (_unkF7C4).w,d0
+                move.w  (SozRegisteredPushableRockAddress).w,d0
                 beq.w   SKSOZPushSwitch_RockPressureReturn
                 movea.w d0,a2
                 cmpi.l  #SKSOZPushRock_UpdateRegisteredRock,(a2)
                 beq.s   SKSOZPushSwitch_CheckRockContact
-                move.w  #0,(_unkF7C4).w
+                move.w  #0,(SozRegisteredPushableRockAddress).w
                 rts
 ; ---------------------------------------------------------------------------
 

@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
   "baseline_commit": "6005f6cc6bbb83995aed07030ed01ebcbd00cf8f",
-  "state": "in-progress",
+  "state": "complete",
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 35379,
+  "applied_targets": 35470,
   "packets": [
     {
       "id": "01-audio",
@@ -7395,7 +7395,7 @@
     },
     {
       "id": "67-memory",
-      "state": "pending",
+      "state": "applied",
       "target_count": 91,
       "scope_sha256": "39c027cd3c23f0b2b5a4a6282fccf664091cd82928c04d53647e3b5d483b0c16",
       "registry": "config/reconstruction/semantic_labels/67-memory.json",
@@ -7413,7 +7413,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
       ],
-      "destination_sha256": "2a8b468be40711f1f8204721cd11259cc0427de1e0a5921cb45e223f8e266457"
+      "destination_sha256": "947f47bc5750c33a28033aa07d3f02847f023fd65a0b8f1d0a696248408edba5"
     }
   ],
   "applied_order": [
@@ -7483,6 +7483,7 @@
     "63-bonus-pachinko",
     "64-bonus-slots",
     "65-cutscenes",
-    "66-ending"
+    "66-ending",
+    "67-memory"
   ]
 }

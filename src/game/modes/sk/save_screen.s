@@ -57,7 +57,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     (KosArt_To_VDP).l
-                move.l  #SKSram_SaveMenuVBlankReturn,(_unkEF44_1).w
+                move.l  #SKSram_SaveMenuVBlankReturn,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_SaveScreenMisc).l,a0    ; Decompress source
@@ -137,7 +137,7 @@ SKSaveMenu_DuplicateLoadedArtBlock:
                 dbf     d0,SKSaveMenu_DuplicateLoadedArtBlock
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
-                move.l  #SKSaveMenu_SelectSlotMapOnVBlank,(_unkEF44_1).w
+                move.l  #SKSaveMenu_SelectSlotMapOnVBlank,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 move.w  (VDP_reg_1_command).w,d0
@@ -397,7 +397,7 @@ SKSaveMenu_CountDecimalTens:
                 bcc.s   SKSaveMenu_CountDecimalTens
                 subq.w  #1,d1
                 addi.b  #$A,d0
-                lea     (_unkEEEA).w,a1
+                lea     (SszEscapeXOrSaveDigitTileBuffer).w,a1
                 lsl.w   #2,d1
                 bne.s   SKSaveMenu_WriteTwoByTwoDigitTiles
                 moveq   #$28,d1

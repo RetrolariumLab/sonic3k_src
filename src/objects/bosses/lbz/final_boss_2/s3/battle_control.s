@@ -444,7 +444,7 @@ LBZBoss2S3_SinkThenLockPlayerForEnding:
                 move.l  #LBZBoss2S3_EndingWaitGroundedAndCenter,(a0)
                 bclr    #7,render_flags(a0)
                 bset    #5,$38(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 move.b  #$80,(Player_1+object_control).w
@@ -484,7 +484,7 @@ LBZBoss2S3_EndingCenteringReturn:
 
 LBZBoss2S3_EndingStopAndTryPoseActor:
                 move.l  #LBZFinalBoss2S3_Ending_RootInertReturn,(a0)
-                clr.b   (_unkFA88).w
+                clr.b   (EndingOutcomeOrBossSceneSignals).w
                 clr.w   ground_vel(a1)
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)

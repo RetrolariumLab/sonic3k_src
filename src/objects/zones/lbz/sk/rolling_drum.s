@@ -14,11 +14,11 @@ Obj_LBZRollingDrum:
 
 SKLBZDrum_UpdateDrumRiders:
                 lea     (Player_1).w,a1
-                lea     (_unkF7B0+0).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+0).w,a2
                 moveq   #p1_standing_bit,d6
                 bsr.s   UpdatePlayerOnLbzRollingDrum
                 lea     (Player_2).w,a1
-                lea     (_unkF7B0+1).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+1).w,a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
                 bsr.s   UpdatePlayerOnLbzRollingDrum
                 jmp     (Delete_Sprite_If_Not_In_Range).l

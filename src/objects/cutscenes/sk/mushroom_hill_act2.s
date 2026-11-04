@@ -37,7 +37,7 @@ MHZ2Scene_InitBlowerAndCamera:
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.l  #MHZ2Scene_SetTargetAndLockControllers,$34(a0)
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w
-                move.w  (MHZ1Scene_Act2SplitXAndCameraTarget).l,(_unkFAB4).w
+                move.w  (MHZ1Scene_Act2SplitXAndCameraTarget).l,(SceneMinimumXOrEmeraldSelectionTail).w
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 st      (Events_bg+$16).w
                 lea     Pal_CutsceneKnux(pc),a1
@@ -48,7 +48,7 @@ MHZ2Scene_InitBlowerAndCamera:
 
 MHZ2Scene_TrackCameraMinimumToTarget:
                 move.w  (Camera_X_pos).w,d0
-                move.w  (_unkFAB4).w,d1
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d1
                 cmp.w   d1,d0
                 bhs.s   MHZ2Scene_SetTargetAndLockControllers
                 move.w  d0,(Camera_min_X_pos).w

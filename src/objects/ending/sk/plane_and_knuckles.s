@@ -22,7 +22,7 @@ EndKnux_InitPlaneEntrance:
                 jsr     (CreateChild6_Simple).l
                 lea     EndingPlaneBlinkDetail_ChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bclr    #0,(_unkFAB8).w
+                bclr    #0,(SceneSyncFlagsOrMHZState).w
                 jsr     (AllocateObject).l
                 bne.s   EndKnux_QueuePlaneEntranceArt
                 move.l  #EndingMasterEmerald_DispatchStateAndDraw,(a1)
@@ -42,7 +42,7 @@ EndKnux_TryAccentPaletteActor:
                 bne.s   EndKnux_FlyPlaneLeftThenSwitchActor
                 bset    #7,$38(a0)
                 bne.s   EndKnux_FlyPlaneLeftThenSwitchActor
-                st      (_unkFAC1).w
+                st      (EmeraldPresentationEnableAndPaletteRoute).w
                 jsr     (AllocateObject).l
                 bne.s   EndKnux_FlyPlaneLeftThenSwitchActor
                 move.l  #EndEmerald_CycleAllSuperAccent,(a1)
@@ -114,7 +114,7 @@ EndKnux_WaitThenSignalScene:
                 bpl.w   EndingScene_SharedReturn
                 move.b  #6,routine(a0)
                 st      (Events_fg_4).w
-                clr.b   (_unkFAC1).w
+                clr.b   (EmeraldPresentationEnableAndPaletteRoute).w
                 rts
 ; ---------------------------------------------------------------------------
 

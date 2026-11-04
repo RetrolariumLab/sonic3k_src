@@ -16,7 +16,7 @@ DDZ_AsteroidMoveOutsideDebug:
                 jsr     (MoveSprite2).l
 
 DDZ_AsteroidWrapAndCheckSuperContact:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   DDZ_AsteroidCullOrDraw
@@ -32,14 +32,14 @@ DDZ_AsteroidCullOrDraw:
 DDZ_AsteroidBreakAndKnockPlayer:
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
-                move.w  (_unkFA8E).w,d0
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d0
                 beq.s   DDZ_AsteroidReduceScrollSpeed
                 movea.w d0,a2
                 move.w  #-$400,x_vel(a2)
 
 ; The one-pixel floor uses an unsigned comparison after subtraction
 DDZ_AsteroidReduceScrollSpeed:
-                move.l  (_unkFA82).w,d0
+                move.l  (SceneTimerOrSharedMotionRecordBase).w,d0
                 move.l  #$10000,d1
                 sub.l   d1,d0
                 cmp.l   d1,d0
@@ -47,7 +47,7 @@ DDZ_AsteroidReduceScrollSpeed:
                 move.l  d1,d0
 
 DDZ_AsteroidStoreSpeedAndCheckSize:
-                move.l  d0,(_unkFA82).w
+                move.l  d0,(SceneTimerOrSharedMotionRecordBase).w
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
@@ -197,7 +197,7 @@ DDZ_InitAsteroidParticle:
                 move.l  #DDZ_AsteroidFragmentOtherAnim,$30(a0)
 
 DDZ_AsteroidParticleWrapAnimateCull:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 jsr     Animate_Raw(pc)
                 jsr     (MoveSprite2).l
@@ -218,7 +218,7 @@ DDZ_InitSuperStarTrailAndArt:
 DDZ_SuperStarTrailCycleSnapshots:
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.w   DDZ_MotionHelpersReturn
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #8,x_pos(a0)
                 subq.b  #1,anim_frame_timer(a0)
@@ -253,7 +253,7 @@ DDZ_InitHeavyLinearShot:
                 move.w  DDZ_HeavyLinearShotYVelocities(pc,d0.w),y_vel(a0)
                 lsl.w   #3,d1
                 move.w  d1,$2E(a0)
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -277,7 +277,7 @@ DDZ_HeavyLinearShotYVelocities:
 ; ---------------------------------------------------------------------------
 
 DDZ_HeavyLinearShotWaitAndAttach:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
                 bpl.w   DDZ_MotionHelpersReturn
@@ -315,9 +315,9 @@ DDZ_HeavyLinearShotAccelerateLeft:
 DDZ_HeavyLinearShotAnimateAndCollide:
                 lea     DDZ_HorizontalHeavyShotAnim(pc),a1
                 jsr     Animate_RawNoSST(pc)
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 bsr.w   DDZHeavyShot_CheckHitAndSlowFlight
                 jmp     Sprite_CheckDelete(pc)
@@ -365,7 +365,7 @@ DDZ_InitHeavyCurveShot:
                 move.w  #4,$2E(a0)
 
 DDZ_HeavyCurveShotSetCurveTimer:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
                 bpl.s   DDZ_HeavyCurveShotMoveDuringLaunch
@@ -379,7 +379,7 @@ DDZ_HeavyCurveShotSetCurveTimer:
 
 DDZ_HeavyCurveShotMoveDuringLaunch:
                 jsr     (MoveSprite2).l
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
@@ -389,7 +389,7 @@ DDZ_HeavyCurveShotMoveDuringLaunch:
 
 ; A negative Y-velocity candidate leaves the stored Y velocity unchanged
 DDZ_HeavyCurveShotWaitAndCurve:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #1,$2E(a0)
                 bpl.s   DDZ_HeavyCurveShotTryPuffEvery8Frames
@@ -410,7 +410,7 @@ DDZ_HeavyCurveShotTryPuffEvery8Frames:
 
 DDZ_HeavyCurveShotMoveAndCollide:
                 jsr     (MoveSprite2).l
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
                 bsr.w   DDZHeavyShot_CheckHitAndSlowFlight
                 jmp     Sprite_CheckDeleteXY(pc)
@@ -423,7 +423,7 @@ DDZ_InitHeavyCurveShotPuff:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$200,y_vel(a0)
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
@@ -438,9 +438,9 @@ DDZ_DefeatExplosionSelectScrollCarry:
                 movea.w parent3(a0),a1
                 tst.b   subtype(a1)
                 beq.s   DDZ_DefeatExplosionAnimateAndMove
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
 
 DDZ_DefeatExplosionAnimateAndMove:

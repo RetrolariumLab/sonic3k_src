@@ -129,7 +129,7 @@ S3MGZ2Screen_TryCreateCollapseSolids:
 S3MGZ2Screen_EnableCollapseVScroll:
                 st      (Screen_shake_flag).w           ; Turn quake on
                 clr.w   (Events_bg+$06).w
-                st      (_unkEEA2).w                    ; Turn on special VScroll VInt function
+                st      (SceneRowAnchorOrCompetitionWinCounts).w  ; Turn on special VScroll VInt function
                 move.w  #4,(Special_V_int_routine).w
 
 S3MGZ2Screen_BeginCollapseColumnUpdate:

@@ -99,7 +99,7 @@ HCZEndBossS3_Root_BobMoveThenWait:
 
 HCZBossS3_StartFanAndCheckDiveFlag:
                 bset    #3,$38(a0)
-                tst.b   (_unkFA80+1).w
+                tst.b   (BossSceneResetBaseAndRetainedGate+1).w
                 bne.s   HCZBossS3_BeginLongFanWait
                 move.b  #6,routine(a0)
                 move.w  #$80,y_vel(a0)
@@ -190,7 +190,7 @@ HCZBossS3_DefeatMoveWaitAndFlicker:
 HCZBossS3_OpenCameraAndPrepareFinish:
                 move.l  #HCZBossS3_WaitFinishAndRestorePlayers,(a0)
                 bclr    #7,render_flags(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 move.w  #$4230,(Camera_stored_max_X_pos).w
@@ -200,7 +200,7 @@ HCZBossS3_OpenCameraAndPrepareFinish:
 
 HCZBossS3_WaitFinishAndRestorePlayers:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   HCZBossS3_SharedReturn
                 clr.w   (Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w

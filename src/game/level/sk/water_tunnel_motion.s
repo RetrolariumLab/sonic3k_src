@@ -56,7 +56,7 @@ SKTunnel_TryTunnelRect:
                 bhs.s   SKTunnel_NextTunnelRectOrExit
                 cmpi.b  #4,routine(a1)
                 bhs.w   SKTunnel_ClearTunnelFlag
-                btst    d5,(_unkF7C7).w
+                btst    d5,(HczPlayerWaterTunnelBlockBits).w
                 bne.s   SKTunnel_NudgeYReturn
                 tst.b   object_control(a1)
                 bne.s   SKTunnel_ClearTunnelFlag

@@ -8,10 +8,10 @@ Tails_Carry_Sonic:
                 bhs.w   S3TailsCarry_ClearCarriedControl
                 btst    #Status_InAir,status(a1)
                 beq.w   S3TailsCarry_SetDropYSpeed
-                move.w  (_unkF744).w,d1
+                move.w  (TailsCarryPreviousHorizontalVelocity).w,d1
                 cmp.w   x_vel(a1),d1
                 bne.s   S3TailsCarry_SetDropYSpeed
-                move.w  (_unkF74C).w,d1
+                move.w  (TailsCarryPreviousVerticalVelocity).w,d1
                 cmp.w   y_vel(a1),d1
                 bne.s   S3TailsCarry_ClearJumpingOnRelease
                 tst.b   object_control(a1)
@@ -95,9 +95,9 @@ S3TailsCarry_StoreFrameAndLoadPatterns:
 
 S3TailsCarry_CopySpeedAndProbeTerrain:
                 move.w  x_vel(a0),(Player_1+x_vel).w
-                move.w  x_vel(a0),(_unkF744).w
+                move.w  x_vel(a0),(TailsCarryPreviousHorizontalVelocity).w
                 move.w  y_vel(a0),(Player_1+y_vel).w
-                move.w  y_vel(a0),(_unkF74C).w
+                move.w  y_vel(a0),(TailsCarryPreviousVerticalVelocity).w
                 movem.l d0-a6,-(sp)
                 lea     (Player_1).w,a0
                 bsr.w   Sonic_DoLevelCollision
@@ -166,9 +166,9 @@ TailsS3InitializeCarriedPlayerAttachment:
                 andi.b  #1,d0
                 or.b    d0,render_flags(a1)
                 or.b    d0,status(a1)
-                move.w  x_vel(a0),(_unkF744).w
+                move.w  x_vel(a0),(TailsCarryPreviousHorizontalVelocity).w
                 move.w  x_vel(a0),x_vel(a1)
-                move.w  y_vel(a0),(_unkF74C).w
+                move.w  y_vel(a0),(TailsCarryPreviousVerticalVelocity).w
                 move.w  y_vel(a0),y_vel(a1)
                 rts
 ; End of function TailsS3InitializeCarriedPlayerAttachment

@@ -120,7 +120,7 @@ SKLevel_ClearLevelRAMAndInitializeVideo:
                 clearRAM Lag_frame_count,(Nem_decomp_queue-Lag_frame_count)
                 clearRAM Tails_CPU_interact,(Sprite_table-Tails_CPU_interact)
                 clearRAM Oscillating_table,(AIZ_vine_angle-Oscillating_table)
-                clearRAM _unkFA80,(DMA_queue-_unkFA80)
+                clearRAM BossSceneResetBaseAndRetainedGate,(DMA_queue-BossSceneResetBaseAndRetainedGate)
                 jsr     (Init_SpriteTable).l
                 lea     (VDP_control_port).l,a6
                 move.w  #$8B03,(a6)
@@ -266,7 +266,7 @@ SKLevel_InitGeometryAndResources:
                 jsr     (Animate_Init).l
                 bsr.w   LoadSolids
                 bsr.w   Handle_Onscreen_Water_Height
-                move.w  (Ctrl_2).w,(_unkFF7C).w
+                move.w  (Ctrl_2).w,(DebugSpeedOrEntryPad2).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 move.w  #0,(Ctrl_1).w
@@ -467,21 +467,21 @@ SKLevel_TestRegularExitFadeTimer:
 ; ---------------------------------------------------------------------------
 
 SKLevel_ChooseCompetitionExtraStepRate:
-                move.w  #0,(_unkFF7E).w
+                move.w  #0,(LevelDebugSpeedAccumulatorStep).w
                 tst.b   (Debug_cheat_flag).w
                 beq.s   SKLevel_InitCompFadeAndFraction
-                move.b  (_unkFF7C).w,d0
+                move.b  (DebugSpeedOrEntryPad2).w,d0
                 cmpi.b  #$A0,d0
                 bne.s   SKLevel_InitCompFadeAndFraction
                 move.w  (Sound_test_sound).w,d0
                 lsl.w   #8,d0
-                move.w  d0,(_unkFF7E).w
+                move.w  d0,(LevelDebugSpeedAccumulatorStep).w
 
 SKLevel_InitCompFadeAndFraction:
                 move.w  #$40-1,(Palette_fade_info).w
                 jsr     (Pal_FillBlack).l
                 move.w  #$16,(Palette_fade_timer).w
-                move.w  #0,(_unkFF7C).w
+                move.w  #0,(DebugSpeedOrEntryPad2).w
                 bclr    #7,(Game_mode).w
 
 SKLevel_BeginCompetitionVideoFrame:
@@ -496,8 +496,8 @@ SKLevel_BeginCompetitionVideoFrame:
 
 ; Carry from the fractional accumulator admits another simulation step
 SKLevel_TryCompExtraStep:
-                move.w  (_unkFF7E).w,d0
-                add.w   d0,(_unkFF7C).w
+                move.w  (LevelDebugSpeedAccumulatorStep).w,d0
+                add.w   d0,(DebugSpeedOrEntryPad2).w
                 bcc.s   SKLevel_FinishCompStepsAndRender
                 bsr.w   Pause_Game
                 move.w  #$100,(Z80_bus_request).l       ; stop the Z80

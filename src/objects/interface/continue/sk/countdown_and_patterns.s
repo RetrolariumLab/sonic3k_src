@@ -6,7 +6,7 @@
 
 ; Build two two-row digits from the countdown nibbles and transfer them immediately
 Continue_DrawCountdownToPlaneA:
-                move.b  (_unkFA84).w,d0
+                move.b  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 move.b  d0,d1
                 andi.w  #$F0,d0
                 lsr.w   #3,d0

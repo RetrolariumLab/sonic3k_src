@@ -205,7 +205,7 @@ MGZMiniS3_ReappearAndTrySpire:
                 move.w  MGZMiniS3_ReappearCameraXOffsets(pc,d0.w),d1
                 add.w   d1,x_pos(a0)
                 subi.w  #$40,y_pos(a0)
-                tst.b   (_unkFA80+1).w
+                tst.b   (BossSceneResetBaseAndRetainedGate+1).w
                 beq.s   MGZMiniS3_ReappearReturn
                 move.w  d0,d3
                 lea     MGZMiniS3_MovingSpireChild(pc),a2
@@ -244,7 +244,7 @@ MGZMiniS3_TickDownTremorWait:
 MGZMiniS3_ChooseDownStepDuration:
                 move.b  #$E,routine(a0)
                 clr.w   (Screen_shake_flag).w
-                tst.b   (_unkFA80+1).w
+                tst.b   (BossSceneResetBaseAndRetainedGate+1).w
                 bne.s   MGZMiniS3_BeginShortDownStep
                 move.w  #$2F,$2E(a0)
                 move.l  #MGZMiniS3_BeginTimedUpStep,$34(a0)

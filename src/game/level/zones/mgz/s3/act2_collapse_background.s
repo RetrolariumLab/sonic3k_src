@@ -89,7 +89,7 @@ MGZ2_FGVScrollArray:
 MGZ2_BackgroundInit:
                 jsr     MGZ2_ClearBottomBG(pc)
                 move.w  #4,(Events_routine_bg).w        ; Use second background event
-                clr.w   (_unkEEA2).w                    ; Clear VScroll routine flag
+                clr.w   (SceneRowAnchorOrCompetitionWinCounts).w  ; Clear VScroll routine flag
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 cmpi.w  #$500,d1
@@ -340,7 +340,7 @@ MGZ2_ClearBottomBG:
 ; =============== S U B R O U T I N E =======================================
 
 MGZ2_BGEventTrigger:
-                tst.w   (_unkEEA2).w
+                tst.w   (SceneRowAnchorOrCompetitionWinCounts).w
                 beq.s   S3MGZ2Bg_DispatchP1Region
                 rts
 ; ---------------------------------------------------------------------------

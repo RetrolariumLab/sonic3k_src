@@ -17,7 +17,7 @@ PLC_CutsceneButton_End:
 ; ---------------------------------------------------------------------------
 
 S3SceneButton_CheckActorAndDispatchPress:
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   S3SceneButton_CheckVisibilityAfterPress
                 movea.w d0,a1
                 lea     S3SceneButton_ActorContactBounds(pc),a2
@@ -39,7 +39,7 @@ S3SceneButton_CheckActorAndDispatchPress:
                 bcc.s   S3SceneButton_CheckVisibilityAfterPress
                 move.l  #S3SceneButton_DrawPressedOrCull,(a0)
                 move.b  #1,mapping_frame(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 clr.w   respawn_addr(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -82,7 +82,7 @@ S3SceneButton_StartWaterShiftAndTryFlash:
                 addi.w  #$100,d0
                 move.w  d0,(Mean_water_level).w
                 move.w  #$350,(Target_water_level).w
-                st      (_unkFAA3).w
+                st      (ZoneButtonRequestOrBridgeReleaseSignal).w
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l

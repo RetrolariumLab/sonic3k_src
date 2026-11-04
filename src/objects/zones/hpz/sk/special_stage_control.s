@@ -108,13 +108,13 @@ HPZEntry_ReturnFromInitialBeamWait:
 ; ---------------------------------------------------------------------------
 
 HPZEntry_TryBuildConversionQueue:
-                bclr    #0,(_unkFAB8).w
+                bclr    #0,(SceneSyncFlagsOrMHZState).w
                 beq.w   HPZEntry_SharedStateReturn
                 lea     (Collected_emeralds_array).w,a1
                 lea     HPZEntry_ConversionColorScanOrder(pc),a2
-                lea     (_unkFA82).w,a3
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a3
                 lea     HPZEntry_CameraTargetsByEmeraldColor(pc),a4
-                lea     (_unkFAB0).w,a5
+                lea     (SceneMinimumYOrEmeraldSelectionBytes).w,a5
                 moveq   #0,d0
                 moveq   #0,d1
                 moveq   #0,d2
@@ -174,12 +174,12 @@ HPZEntry_SelectNextViewingTarget:
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 addq.b  #1,$39(a0)
-                lea     (_unkFAB0).w,a1
+                lea     (SceneMinimumYOrEmeraldSelectionBytes).w,a1
                 moveq   #0,d1
                 move.b  (a1,d0.w),d1
                 move.b  d1,$3C(a0)
                 add.w   d0,d0
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 move.w  (a1,d0.w),$3A(a0)
                 bne.s   HPZEntry_ApplyBothViewingPoses
                 move.l  #HPZEntry_ReleasePlayersAndWatchReturn,$34(a0)
@@ -379,7 +379,7 @@ HPZBeam_AnimateCompletionAndFlicker:
 ; ---------------------------------------------------------------------------
 
 HPZBeam_SignalDoneAndGrayChild:
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 move.w  $44(a0),d0
                 beq.s   HPZBeam_DeferDeletionAfterCompletion
                 movea.w d0,a1

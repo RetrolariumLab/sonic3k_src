@@ -58,13 +58,13 @@ LBZMiniS3_BeginSpinUpAndSignalCover:
                 move.b  #6,routine(a0)
                 bset    #1,$38(a0)
                 lea     (LBZMiniS3_RamAnimationSeed).l,a1
-                lea     (_unkFA82).w,a2
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a2
                 moveq   #6-1,d6
 
 LBZMiniS3_SeedSharedRamAnimation:
                 move.b  (a1)+,(a2)+
                 dbf     d6,LBZMiniS3_SeedSharedRamAnimation
-                move.l  #_unkFA82,$30(a0)
+                move.l  #SceneTimerOrSharedMotionRecordBase,$30(a0)
                 move.b  #$10,anim_frame_timer(a0)
                 move.l  #LBZMiniS3_ShortenRamAnimDelay,$34(a0)
 
@@ -80,7 +80,7 @@ LBZMiniS3_AnimateAndTickSpinUp:
 
 ; Decrease the shared animation delay until it reaches 2, then switch to pursuit
 LBZMiniS3_ShortenRamAnimDelay:
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 subq.b  #1,(a1)
                 cmpi.b  #2,(a1)
                 bhi.s   LBZMiniS3_ReloadSpinUpDelay

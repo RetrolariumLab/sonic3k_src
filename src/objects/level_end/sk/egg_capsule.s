@@ -72,7 +72,7 @@ SKCapsule_OpenAndSpawnEffects:
 SKEggCapsule_SpawnOpenChildren:
                 move.b  #1,mapping_frame(a0)
                 move.w  #$40,$2E(a0)
-                st      (_unkFACD).w
+                st      (CapsuleOpenedFlag).w
                 lea     SKCapsule_FiveReleasedFragmentChildList(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 lea     SKCapsule_NineAnimalRequests(pc),a2
@@ -202,7 +202,7 @@ SKEggCapsule_CheckLBZDeparture:
                 subi.w  #$60,d0
                 cmp.w   x_pos(a0),d0
                 blo.s   SKEggCapsule_StepLBZRetreat
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -346,7 +346,7 @@ SKEggCapsule_MoveAndBounceAnimal:
                 move.w  $3E(a0),y_vel(a0)
                 jsr     Find_SonicTails(pc)
                 move.w  #-$200,d1
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.s   SKEggCapsule_SetAnimalBounceXVel
                 tst.w   d0
                 beq.s   SKEggCapsule_SetAnimalBounceXVel
@@ -390,7 +390,7 @@ SKEggCapsule_ChaseP1OrLeaveLeft:
                 bsr.w   SKCapsuleAnimal_SteerTowardP1
                 jsr     (MoveSprite2).l
                 bsr.w   SKCapsuleAnimal_SetFacingFromXVel
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.s   SKEggCapsule_DrawAnimalAfterChase
                 move.l  #SKEggCapsule_MoveDepartingAnimalLeft,(a0)
                 bset    #0,render_flags(a0)
@@ -430,7 +430,7 @@ SKEggCapsule_P1ResultsReturn:
 ; =============== S U B R O U T I N E =======================================
 
 Check_TailsEndPose:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.w   SKEggCapsule_OpenReturn
                 cmpi.b  #3,(Current_zone).w
                 bne.s   SKEggCapsule_TryLatchP2EndPose

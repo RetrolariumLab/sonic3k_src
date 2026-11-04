@@ -61,10 +61,10 @@ EndingTornado_FirstSubSpriteFrameCycle:
                 even
 ; ---------------------------------------------------------------------------
 ; unused
-                move.l  d0,(_unkFA82).w
-                add.l   d0,(_unkEE98).w
-                move.l  d1,(_unkFA84).w
-                add.l   d1,(_unkEE9C).w
+                move.l  d0,(SceneTimerOrSharedMotionRecordBase).w
+                add.l   d0,(SceneAuxiliaryXOrCompetitionTime).w
+                move.l  d1,(SceneCreditIndexOrBossMotionPlanAngle).w
+                add.l   d1,(SceneAuxiliaryYOrVerticalMotion).w
                 rts
 
 ; =============== S U B R O U T I N E =======================================

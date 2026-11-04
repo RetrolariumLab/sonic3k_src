@@ -210,7 +210,7 @@ SKDEZ3Events_TryBeginFirstPlaneRedraw:
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
-                move.w  (_unkEE8E).w,(Events_bg+$0C).w
+                move.w  (BackgroundEffectPhaseOrSavedX).w,(Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
 SKDEZ3Events_StepFirstPlaneRedraw:
@@ -227,7 +227,7 @@ SKDEZ3Events_TryBeginSecondPlaneRedraw:
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
-                move.w  (_unkEE8E).w,(Events_bg+$0C).w
+                move.w  (BackgroundEffectPhaseOrSavedX).w,(Events_bg+$0C).w
                 jsr     (AllocateObject).l
                 bne.s   SKDEZ3Events_AdvanceAfterFloorSpawn
                 move.l  #SKDEZ3Events_CheckAct3EmitterLifetime,(a1)
@@ -315,7 +315,7 @@ SKDEZ3Events_BeginFinalPlaneRedraw:
                 jsr     (Reset_TileOffsetPositionEff).l
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
-                move.w  (_unkEE8E).w,(Events_bg+$0C).w
+                move.w  (BackgroundEffectPhaseOrSavedX).w,(Events_bg+$0C).w
                 addq.w  #4,(Events_routine_bg).w
 
 SKDEZ3Events_StepFinalPlaneRedraw:
@@ -350,7 +350,7 @@ SKDEZ3Events_ApplySwappedPlaneScroll:
 ; =============== S U B R O U T I N E =======================================
 
 ComputeDez3BossPlaneScroll:
-                move.w  (Camera_X_pos_BG_copy).w,(_unkEE8E).w
+                move.w  (Camera_X_pos_BG_copy).w,(BackgroundEffectPhaseOrSavedX).w
                 tst.w   (Events_bg+$00).w
                 bne.s   SKDEZ3Events_CalcBossPlaneX
                 moveq   #0,d0

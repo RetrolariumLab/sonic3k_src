@@ -36,9 +36,9 @@ DEZMiniboss_RunInitialCameraTransition:
 
 DEZMini_FinishCameraAndWidenBounds:
                 move.l  #DEZMini_AdvanceInitialHazardY,(a0)
-                addi.w  #$E0,(_unkFAB2).w
-                addi.w  #$40,(_unkFAB4).w
-                addi.w  #$100,(_unkFAB6).w
+                addi.w  #$E0,(SceneMaximumYOrEmeraldSelectionTail).w
+                addi.w  #$40,(SceneMinimumXOrEmeraldSelectionTail).w
+                addi.w  #$100,(SceneMaximumXOrEmeraldSelectionTail).w
 
 DEZMinibossAndScene_SharedReturn:
                 rts
@@ -432,12 +432,12 @@ DEZMini_SignalMaskAndStartEndSign:
 ; ---------------------------------------------------------------------------
 
 DEZMini_WaitForEndFlagSet:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.w   DEZMinibossAndScene_SharedReturn
                 move.l  #DEZMini_WaitForEndFlagClear,(a0)
 
 DEZMini_WaitForEndFlagClear:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   DEZMinibossAndScene_SharedReturn
                 move.l  #DEZMini_WalkPlayerTowardCenter,(a0)
                 st      (Ctrl_1_locked).w

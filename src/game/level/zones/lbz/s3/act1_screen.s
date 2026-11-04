@@ -500,7 +500,7 @@ LBZ1BGE_DoTransition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.l   (Events_bg+$00).w
                 clr.l   (Events_bg+$14).w
-                clr.w   (_unkEEA0).w
+                clr.w   (SceneColumnOrCompBlinkVRAM).w
                 clr.w   (Event_LBZ2_DeathEgg).w
                 move.w  #$40,(Events_bg+$10).w
                 cmpi.w  #$540,(Camera_Y_pos_copy).w

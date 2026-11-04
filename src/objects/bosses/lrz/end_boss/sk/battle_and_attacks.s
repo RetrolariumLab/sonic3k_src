@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LRZEndBoss:
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 move.l  #LRZEndBoss_WaitForArenaPlatformReady,(a0)
                 lea     (ArtKosM_LRZEndBoss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZEndBoss),d2
@@ -19,7 +19,7 @@ Obj_LRZEndBoss:
 ; ---------------------------------------------------------------------------
 
 LRZEndBoss_WaitForArenaPlatformReady:
-                btst    #0,(_unkFA88).w
+                btst    #0,(EndingOutcomeOrBossSceneSignals).w
                 beq.w   LRZBoss_SharedReturn
                 move.b  #1,(Boss_flag).w
                 move.l  #Obj_Wait,(a0)
@@ -93,7 +93,7 @@ LRZBoss_ClampLavaYAndArmShotCycle:
                 moveq   #-1,d0
 
 LRZBoss_SetStreamDirectionAndSpawn:
-                move.w  d0,(_unkFAA2).w
+                move.w  d0,(ZoneEventLatchOrBossReleaseSignal).w
                 move.w  d0,(Events_bg+$08).w
                 jsr     (AllocateObject).l
                 bne.s   LRZBoss_StreamControllerSpawnReturn
@@ -104,7 +104,7 @@ LRZBoss_StreamControllerSpawnReturn:
 ; ---------------------------------------------------------------------------
 
 LRZBoss_TickStreamAgeAndFollowLava:
-                addq.w  #1,(_unkFA84).w
+                addq.w  #1,(SceneCreditIndexOrBossMotionPlanAngle).w
                 bsr.w   MatchLRZLavaRiderHeightFromWorldXSample
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -129,7 +129,7 @@ LRZEndBoss_StartPostVolleyStreamHold:
 LRZBoss_StopPressureAndResetStream:
                 move.b  #6,routine(a0)
                 clr.b   (Events_bg+$09).w
-                clr.w   (_unkFA84).w
+                clr.w   (SceneCreditIndexOrBossMotionPlanAngle).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -138,7 +138,7 @@ LRZBoss_WaitPressureThenSubmerge:
                 tst.w   (Events_bg+$0A).w
                 bne.w   LRZBoss_SharedReturn
                 move.b  #8,routine(a0)
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 move.w  #$100,y_vel(a0)
                 move.w  #$3F,$2E(a0)
                 move.l  #LRZEndBoss_StartSubmergedPause,$34(a0)
@@ -187,7 +187,7 @@ LRZBoss_SignalAndSpawnInvertedCapsule:
                 move.l  #LRZBoss_WaitEndFlagAndRestoreRoute,(a0)
                 ori.b   #$30,$38(a0)
                 bclr    #7,render_flags(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (AllocateObject).l
                 bne.s   LRZBoss_TryCapsulePaletteActor
@@ -205,10 +205,10 @@ LRZEndBossDefeat_LoadEggCapsulePatterns:
 ; ---------------------------------------------------------------------------
 
 LRZBoss_WaitEndFlagAndRestoreRoute:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   LRZBoss_SharedReturn
                 move.l  #LRZEndBossCompletion_PermanentIdleReturn,(a0)
-                bset    #1,(_unkFA88).w
+                bset    #1,(EndingOutcomeOrBossSceneSignals).w
                 jsr     (AllocateObject).l
                 bne.s   LRZBoss_RestorePlayersAndOpenCamera
                 move.l  #Obj_Song_Fade_Transition,(a1)
@@ -243,7 +243,7 @@ LRZEndBossCompletion_PermanentIdleReturn:
 LRZBoss_InitStreamPlatformSpawner:
                 move.l  #LRZBoss_WaitPlatformSeparation,(a0)
                 move.w  #$9E0,d0
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 bmi.s   LRZBoss_StoreEdgeAndTryFirstPlatform
                 move.w  #$B60,d0
 
@@ -252,7 +252,7 @@ LRZBoss_StoreEdgeAndTryFirstPlatform:
                 bsr.w   LRZBossStream_SpawnPlatform
 
 LRZBoss_WaitPlatformSeparation:
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 beq.s   LRZBoss_DeleteCurrentActor
                 movea.w $44(a0),a1
                 move.w  x_pos(a1),d0
@@ -344,7 +344,7 @@ LRZBoss_ShotBeginLavaRide:
 
 LRZBoss_ShotCheckParentAndStream:
                 bsr.w   LRZBossShot_DeleteIfParentDefeated
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 bne.s   LRZBoss_ShotRideLavaAndCheckSelfHit
                 tst.b   render_flags(a0)
                 bpl.w   LRZBoss_DeleteCurrentActor

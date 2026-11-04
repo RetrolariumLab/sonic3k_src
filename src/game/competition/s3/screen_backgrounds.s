@@ -11,7 +11,7 @@ Comp_ScreenInit:
                 move.w  d0,(Events_fg_1).w
                 move.w  (Camera_X_pos_P2_copy).w,d0
                 move.w  d0,(Events_fg_2).w
-                move.w  d0,(_unkEEBA).w
+                move.w  d0,(S3CompetitionSecondPlayerParallaxX).w
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 lsl.w   #4,d0
@@ -21,7 +21,7 @@ Comp_ScreenInit:
                 move.w  (a1)+,(Screen_Y_wrap_value).w
                 move.w  (a1)+,(Camera_Y_pos_mask).w
                 move.w  (a1)+,(Layout_row_index_mask).w
-                move.w  (a1)+,(_unkEEB0).w
+                move.w  (a1)+,(CompetitionPairedPlaneCopyVramDelta).w
                 move.w  (a1)+,d0
                 move.w  (a1)+,d2
                 move.w  (a1)+,d6
@@ -195,7 +195,7 @@ ALZ_Deformation:
                 move.w  (Events_fg_1).w,d0
                 bsr.s   S3ALZ_BuildBandsAndAnimatedScroll
                 lea     (HScroll_table+$100).w,a1
-                move.w  (_unkEEBA).w,d0
+                move.w  (S3CompetitionSecondPlayerParallaxX).w,d0
                 bra.s   S3ALZ_BuildBandsAndAnimatedScroll
 ; End of function ALZ_Deformation
 
@@ -283,7 +283,7 @@ BPZ_Deformation:
                 move.w  (Events_fg_1).w,d0
                 bsr.s   S3BPZ_BuildReverseParallaxBands
                 lea     (HScroll_table+$10E).w,a1
-                move.w  (_unkEEBA).w,d0
+                move.w  (S3CompetitionSecondPlayerParallaxX).w,d0
                 bsr.s   S3BPZ_BuildReverseParallaxBands
 ; End of function BPZ_Deformation
 
@@ -330,7 +330,7 @@ DPZ_Deformation:
                 bsr.s   S3DPZ_ScaleForegroundXOffsets
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  d1,(Events_bg+$10).w
-                move.w  (_unkEEBA).w,d0
+                move.w  (S3CompetitionSecondPlayerParallaxX).w,d0
                 bsr.s   S3DPZ_ScaleForegroundXOffsets
                 move.w  d0,(Camera_X_pos_P2_BG_copy).w
                 move.w  d1,(Events_bg+$12).w
@@ -369,7 +369,7 @@ CGZ_Deformation:
                 move.w  (Events_fg_1).w,d0
                 bsr.s   S3CGZBuildFiveHorizontalParallaxBands
                 lea     (HScroll_table+$10A).w,a1
-                move.w  (_unkEEBA).w,d0
+                move.w  (S3CompetitionSecondPlayerParallaxX).w,d0
                 bsr.s   S3CGZBuildFiveHorizontalParallaxBands
 ; End of function CGZ_Deformation
 
@@ -425,7 +425,7 @@ EMZ_Deformation:
                 move.w  (Events_fg_1).w,d0
                 bsr.s   S3EMZBuildTenLayerParallaxOffsets
                 lea     (HScroll_table+$100).w,a1
-                move.w  (_unkEEBA).w,d0
+                move.w  (S3CompetitionSecondPlayerParallaxX).w,d0
                 bsr.s   S3EMZBuildTenLayerParallaxOffsets
 ; End of function EMZ_Deformation
 

@@ -34,7 +34,7 @@ LRZ2Scene_InitKnucklesAtBoulder:
 ; ---------------------------------------------------------------------------
 
 LRZ2Scene_StartReactionOnCameraCue:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.w   SKAIZScene_SharedSceneReturn
                 move.b  #4,routine(a0)
                 move.b  #$DE,mapping_frame(a0)
@@ -47,7 +47,7 @@ LRZ2Scene_AnimateHighFrameReaction:
 
 LRZ2Scene_SignalBoulderAndSetFinalAnim:
                 move.b  #6,routine(a0)
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
                 move.l  #LRZ2Scene_SelectFinalIdle,$34(a0)
                 lea     SKSceneAnim_LRZPostSignalReaction(pc),a1
                 jmp     (Set_Raw_Animation).l
@@ -118,7 +118,7 @@ LRZ2Scene_WaitGroundedAndUnlockCamera:
                 btst    #Status_InAir,status(a1)
                 bne.w   SKAIZScene_SharedSceneReturn
                 move.l  #LRZ2Scene_PanUpToY90,(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 move.w  #0,(Camera_min_X_pos).w
                 st      (Scroll_lock).w
                 clr.b   (Ctrl_1_locked).w
@@ -134,7 +134,7 @@ LRZ2Scene_PanUpToY90:
                 cmpi.w  #$90,d0
                 bhi.w   SKAIZScene_SharedSceneReturn
                 move.l  #LRZ2Scene_StartNextZoneAtY4C0,(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -161,7 +161,7 @@ LRZ2Scene_InitSelfParentedBoulder:
 ; ---------------------------------------------------------------------------
 
 LRZ2Scene_WaitForBoulderStartSignal:
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 beq.s   LRZ2Scene_DrawWaitingBoulder
                 move.l  #LRZ2Scene_RollAndCheckFloorGap,(a0)
                 move.w  #-$200,x_vel(a0)

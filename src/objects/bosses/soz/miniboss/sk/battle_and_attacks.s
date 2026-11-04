@@ -380,12 +380,12 @@ SOZMini_StartEndSign:
 ; ---------------------------------------------------------------------------
 
 SOZMini_WaitForSignActivation:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.w   SOZMini_SharedReturn
                 move.l  #SOZMini_WaitSignThenLockControls,(a0)
 
 SOZMini_WaitSignThenLockControls:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   SOZMini_SharedReturn
                 move.l  #SOZMini_WalkTowardAlignmentX,(a0)
                 lea     SOZMini_ExitCameraBoundsChildren(pc),a2

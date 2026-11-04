@@ -70,7 +70,7 @@ AIZMiniS3_BeginFightSwingWait:
 AIZMiniS3_DelayAndCheckBarrelRequest:
                 move.l  #AIZMiniS3_BeginFlameSwing,$34(a0)
                 move.w  #30,$2E(a0)
-                tst.b   (_unkFA80+1).w
+                tst.b   (BossSceneResetBaseAndRetainedGate+1).w
                 beq.w   AIZMiniS3_SharedReturn
                 bset    #1,$38(a0)
                 rts

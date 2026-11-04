@@ -16,7 +16,7 @@ HPZScenePlatform_ResolveSolidAndBreak:
                 moveq   #$20,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   HPZScenePlatform_DrawAfterSolidCheck
                 lea     SKSceneData_HPZPlatformFragmentChildren(pc),a2
                 jsr     (CreateChild6_Simple).l

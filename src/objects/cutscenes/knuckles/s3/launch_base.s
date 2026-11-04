@@ -110,7 +110,7 @@ S3LBZScene_WalkWhilePreviouslyVisible:
 ; ---------------------------------------------------------------------------
 
 S3LBZScene_ReleasePlayersAndCamera:
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
                 clr.b   (Player_1+object_control).w
                 clr.b   (Player_2+object_control).w
                 move.w  #$3B60,(Camera_stored_max_X_pos).w
@@ -154,7 +154,7 @@ S3LBZScene_DeleteRangeChild:
 
 ; Set the scene scratch flag and apply the pose to the selected player if still alive
 S3LBZScene_LockPlayerFacingRight:
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 movea.w d0,a1
                 cmpi.b  #6,routine(a1)
                 bhs.s   S3LBZScene_RangeChildReturn

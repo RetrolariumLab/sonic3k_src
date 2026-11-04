@@ -31,7 +31,7 @@ S3Credits:
                 clearRAM Sprite_table_input,(Sprite_table_input_end-Sprite_table_input)
                 clearRAM Player_1,(Kos_decomp_buffer-Player_1)
                 clearRAM RAM_start+$2000,$2000
-                clearRAM _unkFA80,(DMA_queue-_unkFA80)
+                clearRAM BossSceneResetBaseAndRetainedGate,(DMA_queue-BossSceneResetBaseAndRetainedGate)
                 clr.w   (DMA_queue).w
                 move.l  #DMA_queue,(DMA_queue_slot).w
                 clr.w   (Player_mode).w
@@ -39,12 +39,12 @@ S3Credits:
                 clr.w   (Results_screen_2P).w
                 clr.b   (Level_started_flag).w
                 clr.w   (Anim_Counters).w
-                clr.w   (_unkFF98).w
+                clr.w   (S3LegacyClearOnlyOverlayAlias).w
                 clr.w   (Competition_mode).w
                 clr.l   (Camera_X_pos).w
                 clr.l   (Camera_Y_pos).w
                 clr.l   (V_scroll_value).w
-                clr.l   (_unkF61A).w
+                clr.l   (DisplayResetWriteOnlyScrollPadding).w
                 jsr     (Init_SpriteTable).l
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_S3Fonts_SmallText),VRAM,WRITE),(VDP_control_port).l
                 lea     (ArtNem_S38x16Font).l,a0
@@ -71,7 +71,7 @@ S3Credits_CopyPaletteAndStartDisplay:
                 dbf     d6,S3Credits_CopyPaletteAndStartDisplay
                 moveq   #signextendB(mus_Credits3),d0
                 jsr     (Play_Music).l
-                move.w  #3*60,(_unkFA82).w
+                move.w  #3*60,(SceneTimerOrSharedMotionRecordBase).w
                 move.b  #VInt_ID_18,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 move.w  (VDP_reg_1_command).w,d0
@@ -96,7 +96,7 @@ S3Credits_RunUntilModeChanges:
 ; =============== S U B R O U T I N E =======================================
 
 S3Credits_DispatchDisplayState:
-                move.w  (_unkFA86).w,d0
+                move.w  (SceneCreditStateOrBossMotionPlanX).w,d0
                 move.w  S3Credits_PageStateOffsets(pc,d0.w),d0
                 jmp     S3Credits_PageStateOffsets(pc,d0.w)
 ; End of function S3Credits_DispatchDisplayState
@@ -109,18 +109,18 @@ S3Credits_PageStateOffsets:
 ; ---------------------------------------------------------------------------
 
 S3Credits_TickPageTimer:
-                subq.w  #1,(_unkFA82).w
+                subq.w  #1,(SceneTimerOrSharedMotionRecordBase).w
                 bmi.s   S3Credits_FadeToNextPageOrEyecatch
                 rts
 ; ---------------------------------------------------------------------------
 
 S3Credits_FadeToNextPageOrEyecatch:
-                move.w  #3*60,(_unkFA82).w
+                move.w  #3*60,(SceneTimerOrSharedMotionRecordBase).w
                 jsr     (Pal_FadeToBlack).l
                 clearRAM RAM_start+$2000,$1000
-                move.w  (_unkFA84).w,d0
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 addq.w  #2,d0
-                move.w  d0,(_unkFA84).w
+                move.w  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 lea     S3CreditsText_Main(pc),a1
                 move.w  (a1,d0.w),d0
                 beq.w   S3Credits_BeginEyecatchAndSelectColors
@@ -131,7 +131,7 @@ S3Credits_FadeToNextPageOrEyecatch:
                 jmp     (Pal_FadeFromBlack).l
 ; ---------------------------------------------------------------------------
 ; unused
-                move.w  #2,(_unkFA86).w
+                move.w  #2,(SceneCreditStateOrBossMotionPlanX).w
                 lea     S3CreditsText_Dummy(pc),a1
                 move.w  (a1),d0
                 adda.w  d0,a1
@@ -143,7 +143,7 @@ S3Credits_FadeToNextPageOrEyecatch:
 S3Credits_CopyAlternateTargetPalette:
                 move.l  (a1)+,(a2)+
                 dbf     d6,S3Credits_CopyAlternateTargetPalette
-                clr.w   (_unkFA84).w
+                clr.w   (SceneCreditIndexOrBossMotionPlanAngle).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -157,9 +157,9 @@ S3Credits_ScrollAltPageUntilByteWrap:
 ; ---------------------------------------------------------------------------
 
 S3Credits_AdvanceDummyAndSelectHalf:
-                move.w  (_unkFA84).w,d0
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 addq.w  #2,d0
-                move.w  d0,(_unkFA84).w
+                move.w  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 lea     (RAM_start+$2000).l,a2
                 btst    #1,d0
                 bne.s   S3Credits_Prepare4KHalfClear
@@ -182,7 +182,7 @@ S3Credits_ClearHalfAndDrawDummyPage:
 ; Select the logo palette only when the whole Chaos emerald word equals seven
 S3Credits_BeginEyecatchAndSelectColors:
                 jsr     (Pal_FadeToBlack).l
-                move.w  #4,(_unkFA86).w
+                move.w  #4,(SceneCreditStateOrBossMotionPlanX).w
                 lea     Pal_EndingEyecatchKnuckles(pc),a1
                 cmpi.w  #7,(Chaos_emerald_count).w
                 bne.s   S3Credits_PrepareLowerPaletteLines
@@ -196,7 +196,7 @@ S3Credits_CopyPaletteAndSelectActors:
                 move.l  (a1)+,(a2)+
                 dbf     d0,S3Credits_CopyPaletteAndSelectActors
                 clearRAM RAM_start+$2000,$2000
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 clr.l   (V_scroll_value).w
                 lea     Child6_EndingS3Logo(pc),a1
                 cmpi.w  #7,(Chaos_emerald_count).w
@@ -236,7 +236,7 @@ S3Credits_FinishedCreditsReturn:
 
 S3Credits_InitFallingLogoAndHandle:
                 move.l  #S3Credits_TickLogoDropDelay,(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 move.l  #Map_EndingGraphics,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Ending_Sprites,2,1),art_tile(a0)
                 move.w  #$280,priority(a0)
@@ -340,7 +340,7 @@ S3Credits_LatchLogoReadyAndDraw:
 
 ; When the main logo is ready, reset the side sprite's animation and store the caller's continuation as its handler
 S3Ending_TryResumeLogoAnimation:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #5,$38(a1)
                 beq.s   S3Credits_LogoReadyLatchReturn
                 clr.b   anim_frame_timer(a0)
@@ -535,7 +535,7 @@ S3Credits_DrawPageAndQueueUpload:
 S3Credits_DrawStringsAndUpload8K:
                 bsr.w   S3Credits_DrawPositionedText
                 dbf     d6,S3Credits_DrawStringsAndUpload8K
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 rts
 ; End of function S3Credits_DrawPageAndQueueUpload
 

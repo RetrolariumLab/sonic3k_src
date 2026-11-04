@@ -89,7 +89,7 @@ SKSSResults_QueueArtAndSetIdleVBlank:
                 lea     (ArtKosM_SSResults).l,a1
                 move.w  #tiles_to_bytes($523),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #SKLevelResults_SpecialVIntReturn,(_unkEF44_1).w
+                move.l  #SKLevelResults_SpecialVIntReturn,(MenuVInterruptCallbackPointer).w
 
 SKSSResults_WaitForBothArtQueues:
                 move.b  #VInt_ID_1E,(V_int_routine).w
@@ -179,12 +179,12 @@ SKSSResults_LoadHiddenPalaceBackground:
                 bne.s   SKSSResults_InstallCoordinatorAndDisplay
                 move.b  (Current_special_stage_2).w,d0
                 ori.b   #$80,d0
-                move.b  d0,(_unkFAC0).w
-                st      (_unkFAC1).w
+                move.b  d0,(HpzNewlyCompletedEmeraldMarker).w
+                st      (EmeraldPresentationEnableAndPaletteRoute).w
 
 SKSSResults_InstallCoordinatorAndDisplay:
                 jsr     (Init_SpriteTable).l
-                move.w  #$98,(_unkEF68).w
+                move.w  #$98,(SKSpecialResultsBonusArtTileOverride).w
                 st      (HPZ_special_stage_completed).w
                 move.l  #Obj_SpecialStage_Results,(Dynamic_object_RAM+(object_size*29)).w
                 move.w  (VDP_reg_1_command).w,d0

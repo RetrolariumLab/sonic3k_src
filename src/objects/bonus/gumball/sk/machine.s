@@ -7,7 +7,7 @@ Obj_GumballMachine:
                 lea     ObjDat_GumballMachine(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #SKGumball_DescendAndCheckActivation,(a0)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 subi.w  #$100,y_pos(a0)
                 move.w  y_pos(a0),$3A(a0)
                 st      (Disable_death_plane).w

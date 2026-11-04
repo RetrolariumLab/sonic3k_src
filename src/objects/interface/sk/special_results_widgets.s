@@ -7,7 +7,7 @@ SKSSResults_ReleasePaletteOnPriorArrival:
                 move.w  -$3A(a0),d0
                 cmp.w   -4(a0),d0
                 bne.s   SKSSResults_PriorArrivalWaitReturn
-                clr.b   (_unkFAC1).w
+                clr.b   (EmeraldPresentationEnableAndPaletteRoute).w
                 moveq   #signextendB(sfx_Perfect),d0
                 jsr     (Play_SFX).l
                 jmp     (Delete_Current_Sprite).l
@@ -70,7 +70,7 @@ SKSSResults_MoveAndReadPerfectBonus:
 
 SKSSResults_WriteSevenDigitsAndSetArt:
                 jsr     LevResults_DisplayScore(pc)
-                move.w  (_unkEF68).w,art_tile(a0)       ; this is not here in Sonic 3. _unkEF68 is always set to $98. What does this do?!?!?!
+                move.w  (SKSpecialResultsBonusArtTileOverride).w,art_tile(a0)  ; this is not here in Sonic 3. _unkEF68 is always set to $98. What does this do?!?!?!
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -411,7 +411,7 @@ SKSSResults_ProjectPairAndUpdateRadius:
 SKSSResults_SignalProjectionAndDelete:
                 movea.w $34(a0),a1
                 st      $31(a1)
-                clr.b   (_unkFAC0).w
+                clr.b   (HpzNewlyCompletedEmeraldMarker).w
                 bra.s   SKSSResults_DeleteFinishedProjection
 ; ---------------------------------------------------------------------------
 

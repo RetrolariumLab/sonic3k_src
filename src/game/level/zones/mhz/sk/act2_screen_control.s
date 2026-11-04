@@ -7,7 +7,7 @@
 MHZ2_ScreenInit:
                 move.w  #4,(Events_routine_fg).w
                 clr.w   (Events_bg+$16).w
-                st      (_unkF7C1).w
+                st      (ZoneMagnetOrLeafSelectionFlag).w
                 move.w  (Player_1+x_pos).w,d0
                 lea     Pal_MHZ2Gold(pc),a1
                 cmpi.w  #$2940,d0
@@ -19,7 +19,7 @@ MHZ2_ScreenInit:
                 cmpi.w  #$600,(Player_1+y_pos).w
                 blo.s   SKMHZ2FG_BindInitPaletteTargets
                 clr.b   (Events_bg+$04).w
-                clr.b   (_unkF7C1).w
+                clr.b   (ZoneMagnetOrLeafSelectionFlag).w
                 lea     (Pal_MHZ1+$20).l,a1
 
 SKMHZ2FG_BindInitPaletteTargets:
@@ -150,10 +150,10 @@ SKMHZ2FG_RedrawAndInitShip:
                 move.w  #$280,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
                 bpl.w   SKMHZ2FG_ShipSetupReturn
-                move.l  #$400000,(_unkEE98).w
+                move.l  #$400000,(SceneAuxiliaryXOrCompetitionTime).w
                 move.w  #$80,d0
-                move.w  d0,(_unkEEA2).w
-                move.w  d0,(_unkEE9C).w
+                move.w  d0,(SceneRowAnchorOrCompetitionWinCounts).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 jsr     UpdateMhz2ShipScrollCarryAndPropellers(pc)
                 lea     (HScroll_table).w,a1
                 move.w  (a1)+,d0
@@ -208,7 +208,7 @@ SKMHZ2FG_CarryPlayerAndDrawShipBands:
                 lea     MHZ2_BGDrawArray3(pc),a4
                 lea     (HScroll_table).w,a6
                 moveq   #2,d5
-                move.w  (_unkEEA2).w,d6
+                move.w  (SceneRowAnchorOrCompetitionWinCounts).w,d6
                 jsr     Draw_BGNoVert(pc)
                 lea     MHZ2_BGDrawArray2(pc),a4
                 lea     (HScroll_table+$004).w,a6
@@ -222,10 +222,10 @@ UpdateMhz2ShipScrollCarryAndPropellers:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  d0,(HScroll_table+$008).w
                 addi.w  #$1E0,d0
-                add.w   (_unkEE98).w,d0
+                add.w   (SceneAuxiliaryXOrCompetitionTime).w,d0
                 move.w  (HScroll_table).w,d2
                 move.w  d0,(HScroll_table).w
-                move.w  (_unkEE9C).w,d1
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d1
                 lea     (Player_1).w,a1
                 cmpi.b  #$81,object_control(a1)
                 bne.s   SKMHZ2FG_CacheShipYAndPlacePropellers
@@ -372,14 +372,14 @@ SKMHZ2FG_TryGoldPaletteBelowBoundary:
 
 SKMHZ2FG_SelectAct2Palette:
                 st      (Events_bg+$04).w
-                st      (_unkF7C1).w
+                st      (ZoneMagnetOrLeafSelectionFlag).w
                 lea     (Pal_MHZ2+$20).l,a1
                 bra.s   SKMHZ2FG_PrepareNormalPalette64ByteCopy
 ; ---------------------------------------------------------------------------
 
 SKMHZ2FG_SelectAct1Palette:
                 clr.w   (Events_bg+$04).w
-                clr.b   (_unkF7C1).w
+                clr.b   (ZoneMagnetOrLeafSelectionFlag).w
                 lea     (Pal_MHZ1+$20).l,a1
                 bra.s   SKMHZ2FG_PrepareNormalPalette64ByteCopy
 ; ---------------------------------------------------------------------------
@@ -387,7 +387,7 @@ SKMHZ2FG_SelectAct1Palette:
 ; Use the gold palette with the Act 2 leaf graphics selection
 SKMHZ2FG_SelectGoldPalette:
                 clr.w   (Events_bg+$04).w
-                st      (_unkF7C1).w
+                st      (ZoneMagnetOrLeafSelectionFlag).w
                 lea     Pal_MHZ2Gold(pc),a1
 
 SKMHZ2FG_PrepareNormalPalette64ByteCopy:

@@ -91,7 +91,7 @@ SKSSZ1BG_DrawOrdinaryAndSelectScroll:
                 jsr     (DrawBGAsYouMove).l
                 jsr     (PlainDeformation).l
                 jsr     (ShakeScreen_Setup).l
-                tst.w   (_unkEE98).w
+                tst.w   (SceneAuxiliaryXOrCompetitionTime).w
                 bne.s   SKSSZ1BG_TryAppendEscapePlaneCommand
                 lea     SKSSZ1FG_CollapseStripSpans(pc),a4
                 lea     (HScroll_table+$0BE).w,a5
@@ -99,9 +99,9 @@ SKSSZ1BG_DrawOrdinaryAndSelectScroll:
 ; ---------------------------------------------------------------------------
 
 SKSSZ1BG_TryAppendEscapePlaneCommand:
-                move.w  (_unkEEFA).w,d0
+                move.w  (SszDebrisClearRowVramRequest).w,d0
                 beq.s   SKSSZ1BG_ApplyEscapeVScroll
-                clr.w   (_unkEEFA).w
+                clr.w   (SszDebrisClearRowVramRequest).w
                 move.w  d0,(a0)+
                 move.w  #7,(a0)+
                 moveq   #$20-1,d0
@@ -113,7 +113,7 @@ SKSSZ1BG_WriteEscapePlaneFill:
 
 ; Skip the caller's remaining screen-event work after writing the private escape scroll
 SKSSZ1BG_ApplyEscapeVScroll:
-                move.w  (_unkEEEE).w,(V_scroll_value).w
+                move.w  (SszEscapeYOrSaveLowerDigitTiles).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
                 rts
@@ -202,7 +202,7 @@ SetSsz1OrdinaryBackgroundAlignment:
 SKSSZ1BG_AlignLeftWithBob:
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$160,d0
-                add.w   (_unkEE9C).w,d0
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_X_pos_copy).w,d0
                 addi.w  #$28,d0
@@ -234,7 +234,7 @@ SKSSZ1BG_AlignRightWithoutBob:
 ; Build thirty regional scroll words with a shared drift accumulator
 SSZ1_BuildMidAltitudeParallax:
                 move.w  (Camera_Y_pos_copy).w,d0
-                move.w  (_unkEE9C).w,d1
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d1
                 asr.w   #1,d1
                 add.w   d1,d0
                 and.w   (Screen_Y_wrap_value).w,d0
@@ -337,14 +337,14 @@ SKSSZ1BG_StepSharedBobOffset:
                 move.l  #$8000,d0
                 move.l  #$100,d1
                 jsr     (Gradual_SwingOffset).l
-                move.w  d0,(_unkEE9C).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 rts
 ; ---------------------------------------------------------------------------
 
 SKSSZ1BG_PlaceBobbingSlopedSolid:
                 bset    #7,status(a0)
                 move.w  y_vel(a0),d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  d0,y_pos(a0)
                 move.w  $2E(a0),d1
                 movea.l $30(a0),a2

@@ -11,7 +11,7 @@ Obj_DEZEndBoss:
                 lea     DEZEndBoss_TargetCameraBounds(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
                 jsr     Boss_BeginCameraTransition(pc)
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 moveq   #PLCID_76,d0
                 jsr     (Load_PLC).l
                 lea     (ArtKosM_DEZEndBoss).l,a1
@@ -177,7 +177,7 @@ DEZBoss_SpawnDefeatFxAndFadeMusic:
 ; ---------------------------------------------------------------------------
 
 DEZBoss_WaitRightEmitterAndRelease:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   DEZBoss_EmitterGateReturn
                 move.l  #DEZBoss_TickAftermathReleaseWait,(a0)
                 bset    #4,$38(a0)

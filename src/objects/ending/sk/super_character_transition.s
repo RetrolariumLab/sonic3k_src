@@ -42,7 +42,7 @@ EndingSuperTailsPaletteActor_Initialize:
                 jsr     (InstallSingleGlobalPaletteRotationScript).l
 
 EndPose_CycleSuperTailsUntilCleanup:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 jmp     (Run_PalRotationScript).l
 ; ---------------------------------------------------------------------------

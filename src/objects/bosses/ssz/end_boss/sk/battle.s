@@ -60,14 +60,14 @@ SSZMecha_InitActOneRollingArrival:
                 jsr     (CreateChild6_Simple).l
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$20,d0
-                move.w  d0,(_unkFAB4).w
+                move.w  d0,(SceneMinimumXOrEmeraldSelectionTail).w
                 addi.w  #$100,d0
-                move.w  d0,(_unkFAB6).w
+                move.w  d0,(SceneMaximumXOrEmeraldSelectionTail).w
                 addi.w  #$40,d0
                 move.w  d0,x_pos(a0)
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$30,d0
-                move.w  d0,(_unkFAB0).w
+                move.w  d0,(SceneMinimumYOrEmeraldSelectionBytes).w
                 addi.w  #$70,d0
                 move.w  d0,y_pos(a0)
 
@@ -93,18 +93,18 @@ SSZMecha_TryCollisionProxy:
 ; ---------------------------------------------------------------------------
 
 SSZMecha_WaitCameraAndBeginJump:
-                btst    #4,(_unkFAB8).w
+                btst    #4,(SceneSyncFlagsOrMHZState).w
                 beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.b  #$14,routine(a0)
                 move.b  #2,$3B(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$20,d0
-                move.w  d0,(_unkFAB4).w
+                move.w  d0,(SceneMinimumXOrEmeraldSelectionTail).w
                 addi.w  #$100,d0
-                move.w  d0,(_unkFAB6).w
+                move.w  d0,(SceneMaximumXOrEmeraldSelectionTail).w
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$30,d0
-                move.w  d0,(_unkFAB0).w
+                move.w  d0,(SceneMinimumYOrEmeraldSelectionBytes).w
                 bra.w   SSZMechaBattle_PrepareCyclicJumpScript
 ; ---------------------------------------------------------------------------
 
@@ -145,7 +145,7 @@ SSZMecha_RunRightUntilBoundary:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
                 move.w  x_pos(a0),d0
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 bhs.s   SSZMechaBattle_BeginRunEndDelay
                 rts
 ; ---------------------------------------------------------------------------
@@ -173,7 +173,7 @@ SSZMecha_StopAndBeginDropAnim:
                 jsr     (Random_Number).l
                 tst.w   d0
                 bmi.s   SSZMecha_BeginTurnAfterDrop
-                bclr    #4,(_unkFAB8).w
+                bclr    #4,(SceneSyncFlagsOrMHZState).w
                 bne.s   SSZMecha_BeginTurnAfterDrop
                 move.l  #SSZMecha_LandHoldFrame8Anim,$30(a0)
                 bclr    #3,$38(a0)
@@ -528,7 +528,7 @@ SSZMecha_LandAndChooseActOutcome:
                 tst.b   (Current_act).w
                 bne.s   SSZMecha_ChooseSuperRoundOrDefeat
                 move.b  #4,routine(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 bset    #5,$38(a0)
                 bclr    #3,$38(a0)
                 move.w  #(2*60)-1,$2E(a0)
@@ -660,7 +660,7 @@ SSZMecha_BeginDashAndOpenCamera:
                 addi.w  #$140,d0
                 move.w  d0,(Camera_max_X_pos).w
                 addi.w  #$100,d0
-                move.w  d0,(_unkFAB6).w
+                move.w  d0,(SceneMaximumXOrEmeraldSelectionTail).w
                 move.w  #$600,x_vel(a0)
                 clr.w   y_vel(a0)
                 jsr     (AllocateObject).l
@@ -679,7 +679,7 @@ SSZMecha_CameraAdvanceSpawnReturn:
 
 SSZMecha_DashToBrakeThreshold:
                 jsr     (MoveSprite2).l
-                move.w  (_unkFAB6).w,d0
+                move.w  (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 subi.w  #$AA,d0
                 cmp.w   x_pos(a0),d0
                 bls.s   SSZMecha_BeginBrakingAnimation
@@ -727,19 +727,19 @@ SSZMecha_SetSuperArenaAndLanding:
                 addi.w  #$A0,d0
                 move.w  d0,(Camera_min_X_pos).w
                 addi.w  #$10,d0
-                move.w  d0,(_unkFA82).w
+                move.w  d0,(SceneTimerOrSharedMotionRecordBase).w
                 addi.w  #$50,d0
-                move.w  d0,(_unkFA84).w
+                move.w  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 addi.w  #$50,d0
-                move.w  d0,(_unkFA86).w
+                move.w  d0,(SceneCreditStateOrBossMotionPlanX).w
                 addi.w  #$40,d0
-                move.w  d0,(_unkFA88).w
+                move.w  d0,(EndingOutcomeOrBossSceneSignals).w
                 addi.w  #$40,d0
-                move.w  d0,(_unkFA8A).w
+                move.w  d0,(DDZScrollAccelOrSceneMotion).w
                 addi.w  #$50,d0
-                move.w  d0,(_unkFA8C).w
+                move.w  d0,(SceneMotionAngleOrDDZAccelLo).w
                 addi.w  #$50,d0
-                move.w  d0,(_unkFA8E).w
+                move.w  d0,(DdzFlightControllerOrLowerMotionPlanX).w
                 move.b  #$16,routine(a0)
                 move.l  #SSZMecha_PrepareForcedApproach,$34(a0)
                 lea     SSZMecha_TransformLandingAnim(pc),a1
@@ -766,7 +766,7 @@ SSZMecha_AnimateAndSignalEmerald:
                 moveq   #signextendB(sfx_MechaTransform),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Run_PalRotationScript).l
-                bchg    #6,(_unkFAB8).w
+                bchg    #6,(SceneSyncFlagsOrMHZState).w
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
@@ -781,11 +781,11 @@ SSZMecha_PrepareForcedApproach:
 
 SSZMecha_ForceApproachAndStartBattle:
                 jsr     (Run_PalRotationScript).l
-                bchg    #6,(_unkFAB8).w
+                bchg    #6,(SceneSyncFlagsOrMHZState).w
                 move.w  #(button_right_mask<<8)|button_right_mask,(Ctrl_1_logical).w
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),d0
-                move.w  (_unkFA8A).w,d1
+                move.w  (DDZScrollAccelOrSceneMotion).w,d1
                 addi.w  #$10,d1
                 cmp.w   d1,d0
                 blo.w   SSZMechaBattleAndChildren_SharedReturn
@@ -847,7 +847,7 @@ SSZMecha_WaitWhiteFadeThenSave:
                 beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.l  #SSZMecha_WaitAndTryKnucklesEnding,(a0)
                 move.w  #(2*60)-1,$2E(a0)
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 st      (Events_fg_4+1).w
                 lea     (Player_1).w,a1
                 move.b  #$83,object_control(a1)

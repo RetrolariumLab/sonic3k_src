@@ -8,7 +8,7 @@ Obj_Ending:
                 move.b  routine(a0),d0
                 move.w  EndingCreditsPlayerScene_StateOffsets(pc,d0.w),d1
                 jsr     EndingCreditsPlayerScene_StateOffsets(pc,d1.w)
-                subq.w  #2,(_unkEE98).w
+                subq.w  #2,(SceneAuxiliaryXOrCompetitionTime).w
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -33,7 +33,7 @@ EndingCreditsPlayerScene_Initialize:
                 move.w  #$C0,x_pos(a0)
                 move.w  #$E0,y_pos(a0)
                 jsr     (Swing_Setup1).l
-                cmpi.b  #2,(_unkFA88).w
+                cmpi.b  #2,(EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndPlane_SetUpPlayerAndTailsTail
                 moveq   #signextendB(mus_CreditsK),d0
                 jsr     (Play_Music).l
@@ -59,7 +59,7 @@ EndPlane_SetPoseAndTryPlaneChild:
                 bset    #2,$38(a1)
 
 EndPlane_TryAnimalGroups:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_QueuePlaneAndAnimalArt
                 lea     EndingSwayingAnimals_SimpleChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
@@ -82,7 +82,7 @@ EndPlane_BobUntilCreditsSignal:
                 bclr    #2,(Tails_tails+render_flags).w
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                tst.b   (_unkFACC).w
+                tst.b   (EndingCreditsFinishedSignal).w
                 beq.w   EndingScene_SharedReturn
                 move.b  #4,routine(a0)
                 move.w  #$1F,$2E(a0)
@@ -109,7 +109,7 @@ EndPlane_WaitThenLaunchJump:
                 cmpi.w  #2,(Player_mode).w
                 beq.s   EndPlane_SavePoseOffsetAndQueueArt
                 moveq   #4,d0
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_SavePoseOffsetAndQueueArt
                 moveq   #8,d0
 
@@ -149,7 +149,7 @@ EndPlane_SelectPosePalette:
 EndPlane_CopyPaletteAndChooseTransform:
                 move.l  (a1)+,(a2)+
                 dbf     d0,EndPlane_CopyPaletteAndChooseTransform
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_BeginNormalPoseHold
                 bne.s   EndPlane_StartSuperTransform
                 cmpi.w  #2,(Player_mode).w
@@ -243,7 +243,7 @@ EndPlane_WaitThenSetReturnPose:
                 jsr     (AllocateObject).l
                 bne.s   EndPlane_ReturnPoseWaitReturn
                 move.l  #EndPose_InitPaletteActorBySubtype,(a1)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndPlane_ReturnPoseWaitReturn
                 move.b  #2,subtype(a1)
 
@@ -271,7 +271,7 @@ EndingCreditsPlayerScene_HoldFinalPose:
                 move.b  #$7F,(Palette_timer).w
 
 EndPlane_DrawUntilCleanup:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.s   EndingCreditsPlayerScene_DeleteOnCleanup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -308,7 +308,7 @@ EndingSwayingAnimal_InitialPositions:
 ; ---------------------------------------------------------------------------
 
 EndPlane_AnimateSwayAnimalAndTickDelay:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 lea     EndingSwayingAnimal_RawAnimation(pc),a1
                 jsr     (Animate_RawNoSST).l
@@ -322,7 +322,7 @@ EndPlane_DrawWaitingSwayAnimal:
 ; ---------------------------------------------------------------------------
 
 EndPlane_SwayAnimalMoveLeftAndReverse:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
@@ -341,7 +341,7 @@ EndingSwayingAnimal_DrawAfterLeftStep:
 ; ---------------------------------------------------------------------------
 
 EndPlane_SwayAnimalMoveRightPastOrigin:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
@@ -372,7 +372,7 @@ EndingJumpingAnimal_InitializeDelay:
 ; ---------------------------------------------------------------------------
 
 EndPlane_WaitAndRandomizeAnimalJump:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 subq.w  #1,$2E(a0)
                 bpl.s   EndPlane_AnimalLaunchWaitReturn
@@ -390,7 +390,7 @@ EndPlane_AnimalLaunchWaitReturn:
 ; ---------------------------------------------------------------------------
 
 EndPlane_MoveAnimalAndSetNextJump:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingChild_DeleteCurrentActor
                 jsr     (MoveSprite).l
                 clr.b   mapping_frame(a0)
@@ -411,7 +411,7 @@ EndPlane_DispatchKnuxPlaneAndDraw:
                 move.b  routine(a0),d0
                 move.w  VInt_TableFC(pc,d0.w),d1
                 jsr     VInt_TableFC(pc,d1.w)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndPlane_MirrorPlayerAndDraw
                 bmi.s   EndPlane_MirrorPlayerAndDraw
                 lea     (SSZMasterEmeraldColorCycle_IndexedScript).l,a1
@@ -444,7 +444,7 @@ EndingSSZKnucklesPlane_Initialize:
                 move.b  #$83,$2E(a1)
                 clr.b   mapping_frame(a1)
                 st      (Scroll_lock).w
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 clr.b   (Level_started_flag).w
                 clr.w   (Screen_shake_flag).w
                 clr.l   (Timer).w
@@ -458,7 +458,7 @@ EndingSSZKnucklesPlane_Initialize:
                 jsr     (CreateChild1_Normal).l
                 move.l  #EndData_SSZPlaneMissingOutcomeAnim,$30(a0)
                 bsr.w   Ending_InitEmeraldOutcome
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_PrepareTargetPalette
                 move.b  #4,mapping_frame(a0)
                 move.l  #EndData_SSZPlaneEmeraldHoldAnim,$30(a0)
@@ -467,7 +467,7 @@ EndingSSZKnucklesPlane_Initialize:
                 lea     (ArtKosM_EndingMasterEmerald).l,a1
                 move.w  #tiles_to_bytes(ArtTile_Ending_MasterEmerald),d2
                 jsr     (Queue_Kos_Module).l
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndPlane_PrepareTargetPalette
                 move.b  #1,(Update_HUD_timer).w
                 move.b  #-1,(Super_palette_status).w
@@ -517,7 +517,7 @@ EndingSSZKnucklesPlane_RiseUntilApex:
                 move.b  #6,routine(a0)
                 jsr     (Swing_Setup1).l
                 move.w  #(3*60)-1,$2E(a0)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_RiseUpdateReturn
                 lea     (EndData_SSZPlaneEmeraldApexAnim).l,a1
                 jsr     (Set_Raw_Animation).l
@@ -586,7 +586,7 @@ EndPlane_SwitchToSmallRightPlane:
                 move.b  #6,mapping_frame(a0)
                 bclr    #0,render_flags(a0)
                 bset    #4,$38(a0)
-                move.w  (_unkEE9C).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.w  #$448,d0
                 move.w  d0,y_pos(a0)
                 move.w  #$100,x_vel(a0)
@@ -606,7 +606,7 @@ EndPlane_FlyRightAndSignalBackground:
                 move.b  #$E,routine(a0)
                 clr.b   mapping_frame(a0)
                 st      (Events_fg_4).w
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_BackgroundSignalReturn
                 jsr     (AllocateObject).l
                 bne.s   EndPlane_BackgroundSignalReturn
@@ -617,11 +617,11 @@ EndPlane_BackgroundSignalReturn:
 ; ---------------------------------------------------------------------------
 
 EndPlane_WaitForBackgroundAlignment:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   EndPlane_BackgroundAlignmentReturn
                 move.b  #$10,routine(a0)
                 move.b  #$1A,mapping_frame(a0)
-                move.w  (_unkEE9C).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.w  #$448,d0
                 move.w  d0,y_pos(a0)
 
@@ -654,12 +654,12 @@ EndPlane_WaitThenTryCloudField:
 
 ; Set the scroll parameters even if the cloud actor allocation failed
 EndPlane_SetCloudParameters:
-                move.b  #$3F,(_unkFAB9).w
-                clr.w   (_unkFAC2).w
-                move.w  #-$80,(_unkFAC4).w
-                tst.b   (_unkFA88).w
+                move.b  #$3F,(EndingCloudSpawnFrameMask).w
+                clr.w   (EndingCloudHorizontalBaseVelocity).w
+                move.w  #-$80,(EndingCloudVerticalBaseVelocity).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndPlane_DeleteAfterCloudSetup
-                move.w  #$80,(_unkFAC4).w
+                move.w  #$80,(EndingCloudVerticalBaseVelocity).w
 
 EndPlane_DeleteAfterCloudSetup:
                 jmp     (Delete_Current_Sprite).l

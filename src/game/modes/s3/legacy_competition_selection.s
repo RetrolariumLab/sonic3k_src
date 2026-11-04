@@ -77,7 +77,7 @@ S3LegacyVersus_FillStripAndPrepFourBoxes:
                 clr.w   (Results_screen_2P).w
                 clr.b   (Level_started_flag).w
                 clr.w   (Anim_Counters).w
-                clr.w   (_unkFF98).w
+                clr.w   (S3LegacyClearOnlyOverlayAlias).w
                 lea     (AniPLC_SONICMILES).l,a2
                 jsr     (AnimateTiles_DoAniPLC).l
                 moveq   #PalID_S2Menu,d0

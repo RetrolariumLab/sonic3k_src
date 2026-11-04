@@ -270,7 +270,7 @@ HCZMiniS3_TransportWaitForP1Underwater:
                 btst    #Status_Underwater,status(a1)
                 beq.w   HCZMiniS3_SharedReturn
                 move.l  #HCZMiniS3_TransportMoveAndSyncPlayer,(a0)
-                clr.b   (_unkFAA2).w
+                clr.b   (ZoneEventLatchOrBossReleaseSignal).w
                 movea.w parent3(a0),a1
                 bset    #0,$38(a1)
                 move.b  #4,render_flags(a0)

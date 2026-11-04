@@ -86,7 +86,7 @@ SKHPZKnuckles_BeginRightwardRunStream:
 
 HPZKnux_AnimateAndWaitForShipReady:
                 jsr     (Animate_RawCheckResult).l
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.w   HPZKnux_LaunchRightJumpOnSignal
                 rts
 ; ---------------------------------------------------------------------------
@@ -101,7 +101,7 @@ HPZKnux_RelocateAndBeginShipScene:
                 bset    #7,art_tile(a0)
                 move.w  #$1620,x_pos(a0)
                 move.w  #$3AC,y_pos(a0)
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 clr.w   (Screen_shake_flag).w
                 jsr     (AllocateObject).l
                 bne.s   HPZKnux_TrySpawnShipAfterGuide
@@ -264,7 +264,7 @@ HPZKnux_BeginGrabHoldNearShip:
 HPZKnux_JumpAndCheckShipContact:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite).l
-                movea.w (_unkFAAE).w,a1
+                movea.w (SceneActorOrWorldOffset).w,a1
                 lea     HPZKnux_ShipContactBounds(pc),a2
                 jsr     (Check_InTheirRange).l
                 bne.s   HPZKnux_PauseShipAndLaunchRebound
@@ -276,7 +276,7 @@ HPZKnux_ShipContactBounds:
 
 HPZKnux_SignalApproachAndJumpToShip:
                 move.b  #$32,routine(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 move.w  #0,$44(a0)
                 move.l  #Map_Knuckles,mappings(a0)
                 move.b  #$9A,mapping_frame(a0)
@@ -328,7 +328,7 @@ HPZKnux_AccelerateTowardEmerald:
 HPZKnux_MoveAndCheckWrappedEmeraldX:
                 move.w  d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                movea.w (_unkFABA).w,a1
+                movea.w (HpzMasterEmeraldObjectAddress).w,a1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$30,d0
@@ -352,7 +352,7 @@ HPZKnux_ClampReboundAndResumeRun:
 HPZKnux_JumpAndCheckEmeraldContact:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite).l
-                movea.w (_unkFABA).w,a1
+                movea.w (HpzMasterEmeraldObjectAddress).w,a1
                 lea     HPZKnux_EmeraldGrabBounds(pc),a2
                 jsr     (Check_InTheirRange).l
                 bne.s   HPZKnux_SetGrabMapAndFollowEmerald
@@ -372,11 +372,11 @@ HPZKnux_JumpNearMasterEmerald:
 ; ---------------------------------------------------------------------------
 
 HPZKnux_CheckShipReleaseSignal:
-                btst    #4,(_unkFAB8).w
+                btst    #4,(SceneSyncFlagsOrMHZState).w
                 bne.s   HPZKnux_Begin60TickReleaseHold
 
 HPZKnux_FollowEmeraldAtLeftOffset:
-                movea.w (_unkFABA).w,a1
+                movea.w (HpzMasterEmeraldObjectAddress).w,a1
                 move.w  x_pos(a1),d0
                 subi.w  #$C,d0
                 move.w  d0,x_pos(a0)
@@ -448,7 +448,7 @@ HPZKnux_AnimatePostReleaseLanding:
 HPZKnux_LandReleaseAndSignalGuide:
                 add.w   d1,y_pos(a0)
                 move.b  #$40,routine(a0)
-                bset    #5,(_unkFAB8).w
+                bset    #5,(SceneSyncFlagsOrMHZState).w
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.l  #HPZKnux_FinishLandingAndWaitForGuide,$34(a0)

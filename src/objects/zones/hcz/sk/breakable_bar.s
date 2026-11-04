@@ -101,7 +101,7 @@ SKBreakableBar_TryReleaseVerticalRider:
                 beq.w   SKBreakableBar_VerticalGrabReturn
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
-                bclr    d2,(_unkF7C7).w
+                bclr    d2,(HczPlayerWaterTunnelBlockBits).w
                 andi.b  #$FE,object_control(a1)
                 btst    #6,subtype(a0)
                 bne.s   SKBreakableBar_VerticalReleaseReturn
@@ -163,7 +163,7 @@ SKBreakableBar_CommitVerticalGrab:
                 bclr    #Status_Facing,status(a1)
                 move.b  #$11,anim(a1)
                 move.b  #1,object_control(a1)
-                bset    d2,(_unkF7C7).w
+                bset    d2,(HczPlayerWaterTunnelBlockBits).w
                 move.b  #1,(a2)
 
 SKBreakableBar_VerticalGrabReturn:
@@ -183,7 +183,7 @@ SKBreakableBar_ReleaseVerticalP2:
                 andi.b  #$FE,(Player_2+object_control).w
 
 SKBreakableBar_SplitVerticalBar:
-                clr.b   (_unkF7C7).w
+                clr.b   (HczPlayerWaterTunnelBlockBits).w
                 clr.w   $32(a0)
                 move.l  #SKBreakableBar_WaitForFragmentMotion,(a0)
                 move.b  #3,mapping_frame(a0)
@@ -265,7 +265,7 @@ SKBreakableBar_TryReleaseHorizontalRider:
                 beq.w   SKBreakableBar_HorizontalGrabReturn
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
-                bclr    d2,(_unkF7C7).w
+                bclr    d2,(HczPlayerWaterTunnelBlockBits).w
                 andi.b  #$FE,object_control(a1)
                 btst    #6,subtype(a0)
                 bne.s   SKBreakableBar_HorizontalReleaseReturn
@@ -326,7 +326,7 @@ SKBreakableBar_CommitHorizontalGrab:
                 move.w  d0,y_pos(a1)
                 move.b  #$14,anim(a1)
                 move.b  #1,object_control(a1)
-                bset    d2,(_unkF7C7).w
+                bset    d2,(HczPlayerWaterTunnelBlockBits).w
                 move.b  #1,(a2)
 
 SKBreakableBar_HorizontalGrabReturn:
@@ -346,7 +346,7 @@ SKBreakableBar_ReleaseHorizontalP2:
                 andi.b  #$FE,(Player_2+object_control).w
 
 SKBreakableBar_SplitHorizontalBar:
-                clr.b   (_unkF7C7).w
+                clr.b   (HczPlayerWaterTunnelBlockBits).w
                 clr.w   $32(a0)
                 move.l  #SKBreakableBar_WaitForFragmentMotion,(a0)
                 move.b  #7,mapping_frame(a0)

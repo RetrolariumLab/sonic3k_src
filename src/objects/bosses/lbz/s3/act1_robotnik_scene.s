@@ -30,7 +30,7 @@ LBZSceneS3_InitRobotnikSceneAndBox:
                 lea     ObjDat_LBZ1Robotnik(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #-1,collision_property(a0)
-                st      (_unkFAAB).w
+                st      (LbzRobotnikSceneLoadedLatch).w
                 jsr     (Swing_Setup1).l
                 move.w  #$3820,(Camera_min_X_pos).w
                 move.w  #$3AE8,(Camera_max_X_pos).w
@@ -211,7 +211,7 @@ LBZSceneS3_ReleasePartsAndSpawnBoss:
 ; ---------------------------------------------------------------------------
 
 Obj_LBZMinibossBox:
-                tst.b   (_unkFAAB).w
+                tst.b   (LbzRobotnikSceneLoadedLatch).w
                 bne.s   LBZSceneS3_StandaloneBoxSetRangeCull
                 move.l  #LBZSceneS3_StandaloneBoxCheckPlayer,(a0)
                 move.w  #$3EA0,(Camera_max_X_pos).w

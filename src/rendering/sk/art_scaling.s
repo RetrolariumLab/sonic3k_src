@@ -6,7 +6,7 @@
 
 Init_ArtScaling:
                 moveq   #0,d1
-                move.w  d1,(_unkF740).w
+                move.w  d1,(ScaledArtAllocatedTileCount).w
                 movea.w d1,a0
                 movea.w d1,a1
                 movea.w d1,a2
@@ -73,7 +73,7 @@ SKScale_SetFrameAndTryReserveTiles:
                 move.b  d1,mapping_frame(a0)            ; Scale level correlates with mapping frame
                 add.w   d1,d1
                 move.w  SKScale_TileCountsByScale(pc,d1.w),d1
-                move.w  (_unkF740).w,d2
+                move.w  (ScaledArtAllocatedTileCount).w,d2
                 add.w   d1,d2
                 cmpi.w  #$80,d2
                 bhi.s   SKScale_HideOnReservationFailure
@@ -86,7 +86,7 @@ SKScale_SetFrameAndTryReserveTiles:
                 adda.w  d2,a2
                 bsr.s   ScaleArt_ResampleObjectFrame
                 movem.l (sp)+,d1/d5-a0/a2/a4
-                add.w   d1,(_unkF740).w
+                add.w   d1,(ScaledArtAllocatedTileCount).w
                 rts
 ; ---------------------------------------------------------------------------
 ; unused

@@ -97,11 +97,11 @@ DEZFinal_EscapeDebrisSpawnReturn:
 
 ; Advance X using the 16.16 speed accumulator, then set both horizontal limits from the integer result
 DEZEscape_AccelAndLockCameraX:
-                move.l  (_unkFA84).w,d0
+                move.l  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 addi.l  #$1000,d0
                 cmpi.l  #$40000,d0
                 bhi.s   DEZFinal_MoveAndLockEscapeCamera
-                move.l  d0,(_unkFA84).w
+                move.l  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
 
 DEZFinal_MoveAndLockEscapeCamera:
                 move.l  (Camera_X_pos).w,d1
@@ -277,7 +277,7 @@ DEZFinal_LockBattleCameraAtThreshold:
                 move.w  #$520,d1
                 cmp.w   d1,d0
                 blo.w   DEZFinalAttackActors_SharedReturn
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
                 move.w  d1,(Camera_min_X_pos).w
                 addi.w  #$A0,d1
                 move.w  d1,(Camera_max_X_pos).w

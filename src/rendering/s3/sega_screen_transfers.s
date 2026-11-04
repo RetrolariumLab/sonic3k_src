@@ -5,9 +5,9 @@
 ; =============== S U B R O U T I N E =======================================
 
 SegaScr_VInt:
-                move.w  (_unkF662).w,d0
+                move.w  (S3SegaVIntTransferRequest).w,d0
                 beq.w   S3SegaActor_WipeScaleTransferReturn
-                clr.w   (_unkF662).w
+                clr.w   (S3SegaVIntTransferRequest).w
                 move.w  SegaScr_VInt_Index-2(pc,d0.w),d0
                 jmp     SegaScr_VInt_Index(pc,d0.w)
 ; End of function SegaScr_VInt

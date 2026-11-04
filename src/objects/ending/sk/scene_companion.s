@@ -34,7 +34,7 @@ EndTornado_InitAlternateEntrance:
                 move.w  #$10B,d0
                 move.w  d0,y_pos(a0)
                 move.w  d0,$3A(a0)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndTornado_AdjustTailsAttachment
                 lea     EndingEmeraldCarrier_ChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
@@ -76,7 +76,7 @@ EndingTornado_ReturnFromApproachWait:
 ; ---------------------------------------------------------------------------
 
 EndTornado_ApproachAndBobUntilBoarded:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.s   EndingTornado_ResumeParentFollowing
                 addq.w  #2,x_pos(a0)
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase

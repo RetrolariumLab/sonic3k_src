@@ -25,7 +25,7 @@ Load_SOZ_Pushable_Rock_Track_Ride_Info:
                 move.l  a1,$36(a0)
                 tst.b   subtype(a0)
                 bpl.s   SKSOZPushRock_InitOrdinaryPush
-                move.w  a0,(_unkF7C4).w
+                move.w  a0,(SozRegisteredPushableRockAddress).w
                 move.l  #SKSOZPushRock_UpdateRegisteredRock,(a0)
                 bra.s   SKSOZPushRock_UpdateRegisteredRock
 ; ---------------------------------------------------------------------------

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 172
+    "commit_count": 173
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1079,9 +1079,15 @@
       "commits": ["ac59597c69e03eb2d59776bf0a6840fa578ef6c7"]
     },
     {
-      "id": "current-shorten-66-ending",
+      "id": "change-67435096ea49",
       "kind": "source_or_tooling",
       "summary": "Apply 766 reviewed short labels for ending.",
+      "commits": ["67435096ea492c4abb04a706cd420ebfb4584b12"]
+    },
+    {
+      "id": "current-shorten-67-memory",
+      "kind": "source_or_tooling",
+      "summary": "Apply 18 reviewed short labels for memory.",
       "commits": ["release-commit"]
     }
   ],

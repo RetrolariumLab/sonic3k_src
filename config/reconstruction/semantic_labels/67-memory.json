@@ -1,0 +1,3206 @@
+{
+  "schema_version": 1,
+  "packet": "67-memory",
+  "mappings": [
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 9,
+      "old": "byte_200011",
+      "new": "Lockon_VectorReservedFirst",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_VectorRemainderFirstReservedSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 10,
+      "old": "byte_2000BD",
+      "new": "Lockon_VectorReservedLast",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_VectorRemainderLastReservedSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 12,
+      "old": "SSMagic_TestLoc_200114",
+      "new": "Lockon_CopyrightEGProbe",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_HeaderCopyrightSignatureProbeSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 13,
+      "old": "SSMagic_TestLoc_20011A",
+      "new": "Lockon_CopyrightYearDigits",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_HeaderTwoDigitYearProbeSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 15,
+      "old": "SSMagic_TestLoc_200150",
+      "new": "Lockon_OverseasTitleParityByte",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_HeaderOverseasTitleParityProbeSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 18,
+      "old": "SSMagic_TestLoc_2001A4",
+      "new": "Lockon_ROMEndUpperWord",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_HeaderRomEndUpperWordBitProbeSpan"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 20,
+      "old": "byte_200281",
+      "new": "Lockon_PostHeaderReservedFirst",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_PostHeaderFirstUnreferencedReservation"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 21,
+      "old": "byte_20032D",
+      "new": "Lockon_PreCompPaletteReserved",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_PreCompetitionPaletteLastReservation"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 392,
+      "old": "byte_33F06E",
+      "new": "Lockon_Knux2PArtReserved150E",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_ExternalSpriteListTwentyFourAddressReservation"
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "original_line": 393,
+      "old": "byte_33F74C",
+      "new": "Lockon_Knux2PArtReserved1BEC",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockonDeclaration_ExternalSpriteListTwentyFiveAddressReservation"
+    },
+    {
+      "source": "src/memory/s3/overrides.inc",
+      "original_line": 33,
+      "old": "_unkE412",
+      "new": "S3SphereTestResetOnlyReservedWord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view S3SphereTestResetOnlyReservedWord."
+    },
+    {
+      "source": "src/memory/s3/overrides.inc",
+      "original_line": 34,
+      "old": "_unkE414",
+      "new": "S3SphereTestVerticalProjectionBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view S3SphereTestVerticalProjectionBias."
+    },
+    {
+      "source": "src/memory/s3/overrides.inc",
+      "original_line": 35,
+      "old": "_unkE416",
+      "new": "S3SphereTestDepthProjectionBias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view S3SphereTestDepthProjectionBias."
+    },
+    {
+      "source": "src/memory/s3/overrides.inc",
+      "original_line": 57,
+      "old": "_unkFF98",
+      "new": "S3LegacyClearOnlyOverlayAlias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Memory allocation or alias: S3LegacyClearOnlyOverlayAlias"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 34,
+      "old": "_unkA880",
+      "new": "SszCollapseStripCoordinateAlias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszCollapseStripCoordinateAlias"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 35,
+      "old": "_unkA8E0",
+      "new": "SszCollapseStripDelayAlias",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszCollapseStripDelayAlias"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 94,
+      "old": "_unkEE08",
+      "new": "LevelBoundsWriteOnlyClearByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: LevelBoundsWriteOnlyClearByte"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 164,
+      "old": "_unkEE8E",
+      "new": "BackgroundEffectPhaseOrSavedX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: BackgroundEffectPhaseOrSavedX"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 169,
+      "old": "_unkEE98",
+      "new": "SceneAuxiliaryXOrCompetitionTime",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneAuxiliaryXOrCompetitionTime"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 170,
+      "old": "_unkEE9C",
+      "new": "SceneAuxiliaryYOrVerticalMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneAuxiliaryYOrVerticalMotion"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 171,
+      "old": "_unkEEA0",
+      "new": "SceneColumnOrCompBlinkVRAM",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneColumnAnchorOrCompetitionBlinkAddress"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 172,
+      "old": "_unkEEA2",
+      "new": "SceneRowAnchorOrCompetitionWinCounts",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneRowAnchorOrCompetitionWinCounts"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 180,
+      "old": "_unkEEB0",
+      "new": "CompetitionPairedPlaneCopyVramDelta",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: CompetitionPairedPlaneCopyVramDelta"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 185,
+      "old": "_unkEEBA",
+      "new": "S3CompetitionSecondPlayerParallaxX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: S3CompetitionSecondPlayerParallaxX"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 202,
+      "old": "_unkEEEA",
+      "new": "SszEscapeXOrSaveDigitTileBuffer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszEscapeXOrSaveDigitTileBuffer"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 204,
+      "old": "_unkEEEE",
+      "new": "SszEscapeYOrSaveLowerDigitTiles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszEscapeYOrSaveLowerDigitTiles"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 206,
+      "old": "_unkEEF2",
+      "new": "SszEscapeRoundedColumnAnchor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszEscapeRoundedColumnAnchor"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 207,
+      "old": "_unkEEF4",
+      "new": "SszEscapeRoundedRowAnchor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszEscapeRoundedRowAnchor"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 208,
+      "old": "_unkEEF6",
+      "new": "SszEscapeVerticalDriftAccumulator",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszEscapeVerticalDriftAccumulator"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 209,
+      "old": "_unkEEFA",
+      "new": "SszDebrisClearRowVramRequest",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SszDebrisClearRowVramRequest"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 224,
+      "old": "_unkEF40_1",
+      "new": "ResultsNumericAccumulator",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view ResultsNumericAccumulator."
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 225,
+      "old": "_unkEF44_1",
+      "new": "MenuVInterruptCallbackPointer",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view MenuVInterruptCallbackPointer."
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 226,
+      "old": "_unkEF44_2",
+      "new": "ResultsNumericAccumulatorEnd",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view ResultsNumericAccumulatorEnd."
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 244,
+      "old": "_unkEF68",
+      "new": "SKSpecialResultsBonusArtTileOverride",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view SKSpecialResultsBonusArtTileOverride."
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 285,
+      "old": "_tempF608",
+      "new": "S3HInterruptTrampolineStorage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish actual RAM allocation/alias and source-consumer view S3HInterruptTrampolineStorage."
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 293,
+      "old": "_unkF61A",
+      "new": "DisplayResetWriteOnlyScrollPadding",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: DisplayResetWriteOnlyScrollPadding"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 330,
+      "old": "_unkF660",
+      "new": "CreditsDelayOrSegaCompletionLatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: CreditsDelayOrSegaCompletionLatch"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 331,
+      "old": "_unkF662",
+      "new": "S3SegaVIntTransferRequest",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: S3SegaVIntTransferRequest"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 341,
+      "old": "_unkF66C",
+      "new": "SuperTailsTargetScanByteOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SuperTailsTargetScanByteOffset"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 378,
+      "old": "_unkF712",
+      "new": "CompactSceneObjectRespawnBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: CompactSceneObjectRespawnBytes"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 385,
+      "old": "_unkF740",
+      "new": "ScaledArtAllocatedTileCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ScaledArtAllocatedTileCount"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 387,
+      "old": "_unkF744",
+      "new": "TailsCarryPreviousHorizontalVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: TailsCarryPreviousHorizontalVelocity"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 395,
+      "old": "_unkF74C",
+      "new": "TailsCarryPreviousVerticalVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: TailsCarryPreviousVerticalVelocity"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 423,
+      "old": "_unkF7B0",
+      "new": "PlayerTubeCageAndDrumAngleBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: PlayerTubeCageAndDrumAngleBytes"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 429,
+      "old": "_unkF7C1",
+      "new": "ZoneMagnetOrLeafSelectionFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ZoneMagnetOrLeafSelectionFlag"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 430,
+      "old": "_unkF7C2",
+      "new": "KnucklesLbzPipePlugWaterReleaseFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: KnucklesLbzPipePlugWaterReleaseFlag"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 432,
+      "old": "_unkF7C4",
+      "new": "SozRegisteredPushableRockAddress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SozRegisteredPushableRockAddress"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 434,
+      "old": "_unkF7C7",
+      "new": "HczPlayerWaterTunnelBlockBits",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: HczPlayerWaterTunnelBlockBits"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 445,
+      "old": "_unkF7DC",
+      "new": "AlternateObjectCullCoarseXOrigin",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: AlternateObjectCullCoarseXOrigin"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 453,
+      "old": "_unkFA80",
+      "new": "BossSceneResetBaseAndRetainedGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: BossSceneResetBaseAndRetainedGate"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 454,
+      "old": "_unkFA82",
+      "new": "SceneTimerOrSharedMotionRecordBase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneTimerOrSharedMotionRecordBase"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 455,
+      "old": "_unkFA83",
+      "new": "SceneTimerLowByteOrSecondAttackDone",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneTimerLowByteOrSecondAttackDone"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 456,
+      "old": "_unkFA84",
+      "new": "SceneCreditIndexOrBossMotionPlanAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneCreditIndexOrBossMotionPlanAngle"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 457,
+      "old": "_unkFA86",
+      "new": "SceneCreditStateOrBossMotionPlanX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneCreditStateOrBossMotionPlanX"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 458,
+      "old": "_unkFA88",
+      "new": "EndingOutcomeOrBossSceneSignals",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingOutcomeOrBossSceneSignals"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 459,
+      "old": "_unkFA89",
+      "new": "MechaSonicHeadDeleteOrOverlayLowByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: MechaSonicHeadDeleteOrOverlayLowByte"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 460,
+      "old": "_unkFA8A",
+      "new": "DDZScrollAccelOrSceneMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: DdzScrollAccelerationOrLowerMotionPlanBase"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 461,
+      "old": "_unkFA8C",
+      "new": "SceneMotionAngleOrDDZAccelLo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: LowerMotionPlanAngleOrScrollAccelerationLowWord"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 462,
+      "old": "_unkFA8E",
+      "new": "DdzFlightControllerOrLowerMotionPlanX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: DdzFlightControllerOrLowerMotionPlanX"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 463,
+      "old": "_unkFA90",
+      "new": "DdzFrameScrollDeltaOrLowerMotionPlanY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: DdzFrameScrollDeltaOrLowerMotionPlanY"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 470,
+      "old": "_unkFAA2",
+      "new": "ZoneEventLatchOrBossReleaseSignal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ZoneEventLatchOrBossReleaseSignal"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 471,
+      "old": "_unkFAA3",
+      "new": "ZoneButtonRequestOrBridgeReleaseSignal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ZoneButtonRequestOrBridgeReleaseSignal"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 472,
+      "old": "_unkFAA4",
+      "new": "SceneControllerObjectAddress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneControllerObjectAddress"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 474,
+      "old": "_unkFAA8",
+      "new": "ActCompletionHandshake",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ActCompletionHandshake"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 475,
+      "old": "_unkFAA9",
+      "new": "SceneOutcomeOrActorReadySignal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneOutcomeOrActorReadySignal"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 477,
+      "old": "_unkFAAB",
+      "new": "LbzRobotnikSceneLoadedLatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: LbzRobotnikSceneLoadedLatch"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 478,
+      "old": "_unkFAAC",
+      "new": "TailsChaseOrHPZAftermathLatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: ScriptedCompanionOrHpzAftermathPhaseLatch"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 480,
+      "old": "_unkFAAE",
+      "new": "SceneActorOrWorldOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneObjectAddressOrCreditsAndWorldOffset"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 481,
+      "old": "_unkFAB0",
+      "new": "SceneMinimumYOrEmeraldSelectionBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneMinimumYOrEmeraldSelectionBytes"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 482,
+      "old": "_unkFAB2",
+      "new": "SceneMaximumYOrEmeraldSelectionTail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneMaximumYOrEmeraldSelectionTail"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 483,
+      "old": "_unkFAB4",
+      "new": "SceneMinimumXOrEmeraldSelectionTail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneMinimumXOrEmeraldSelectionTail"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 484,
+      "old": "_unkFAB6",
+      "new": "SceneMaximumXOrEmeraldSelectionTail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneMaximumXOrEmeraldSelectionTail"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 485,
+      "old": "_unkFAB8",
+      "new": "SceneSyncFlagsOrMHZState",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SceneSynchronizationBitsOrMhzCutsceneState"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 486,
+      "old": "_unkFAB9",
+      "new": "EndingCloudSpawnFrameMask",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingCloudSpawnFrameMask"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 487,
+      "old": "_unkFABA",
+      "new": "HpzMasterEmeraldObjectAddress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: HpzMasterEmeraldObjectAddress"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 488,
+      "old": "_unkFABC",
+      "new": "DdzDebugSnapshotHighOrHpzSeedByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: DdzDebugSnapshotHighOrHpzSeedByte"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 489,
+      "old": "_unkFABD",
+      "new": "HPZEmeraldOffsetOrDDZDebugLo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: HpzEmeraldCarryYOffsetOrDdzDebugSnapshotLow"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 490,
+      "old": "_unkFABE",
+      "new": "SignpostLandingWriteOnlyLatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: SignpostLandingWriteOnlyLatch"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 492,
+      "old": "_unkFAC0",
+      "new": "HpzNewlyCompletedEmeraldMarker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: HpzNewlyCompletedEmeraldMarker"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 493,
+      "old": "_unkFAC1",
+      "new": "EmeraldPresentationEnableAndPaletteRoute",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EmeraldPresentationEnableAndPaletteRoute"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 494,
+      "old": "_unkFAC2",
+      "new": "EndingCloudHorizontalBaseVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingCloudHorizontalBaseVelocity"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 495,
+      "old": "_unkFAC4",
+      "new": "EndingCloudVerticalBaseVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingCloudVerticalBaseVelocity"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 497,
+      "old": "_unkFAC8",
+      "new": "EndingCreditsFixedPointScrollIncrement",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingCreditsFixedPointScrollIncrement"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 499,
+      "old": "_unkFACC",
+      "new": "EndingCreditsFinishedSignal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: EndingCreditsFinishedSignal"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 500,
+      "old": "_unkFACD",
+      "new": "CapsuleOpenedFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: CapsuleOpenedFlag"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 618,
+      "old": "_unkFEBE",
+      "new": "RingCollectionWriteOnlyStickyBit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: RingCollectionWriteOnlyStickyBit"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 665,
+      "old": "_unkFF7C",
+      "new": "DebugSpeedOrEntryPad2",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: LevelDebugSpeedAccumulatorOrEntryPadSnapshot"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 666,
+      "old": "_unkFF7E",
+      "new": "LevelDebugSpeedAccumulatorStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: LevelDebugSpeedAccumulatorStep"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 672,
+      "old": "_tempFF88",
+      "new": "S3LegacyVersusZoneActOverlayStorage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: S3LegacyVersusZoneActOverlayStorage"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 676,
+      "old": "_tempFF8C",
+      "new": "S3LegacyOptionsSelectionOverlayStorage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: S3LegacyOptionsSelectionOverlayStorage"
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "original_line": 683,
+      "old": "_tempFF98",
+      "new": "S3LegacyClearOnlyOverlayStorage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Memory allocation or alias: S3LegacyClearOnlyOverlayStorage"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/blue_sphere/sk/results_mode.s",
+      "tokens": [
+        [94, 1, 49, ""],
+        [94, 6, 49, ""]
+      ]
+    },
+    {
+      "source": "src/game/blue_sphere/sk/title_mode.s",
+      "tokens": [
+        [195, 2, 4, ""],
+        [199, 2, 3, ""],
+        [215, 2, 5, ""],
+        [221, 5, 2, ""]
+      ]
+    },
+    {
+      "source": "src/game/bonus/s3/gumball_screen.s",
+      "tokens": [[28, 2, 62, ""]]
+    },
+    {
+      "source": "src/game/competition/s3/screen_backgrounds.s",
+      "tokens": [
+        [8, 4, 23, ""],
+        [18, 7, 22, ""],
+        [157, 2, 23, ""],
+        [229, 2, 23, ""],
+        [262, 2, 23, ""],
+        [288, 2, 23, ""],
+        [328, 2, 23, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/ending/sk/background.s",
+      "tokens": [
+        [35, 4, 19, ""],
+        [116, 2, 19, ""],
+        [124, 2, 19, ""],
+        [125, 2, 18, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/ending/sk/screen.s",
+      "tokens": [
+        [14, 2, 18, ""],
+        [15, 2, 19, ""],
+        [43, 2, 18, ""],
+        [276, 2, 18, ""],
+        [280, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/bounds_catalog.s",
+      "tokens": [
+        [3, 2, 16, ""],
+        [9, 4, 36, ""],
+        [10, 4, 37, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "tokens": [[212, 2, 60, ""]]
+    },
+    {
+      "source": "src/game/level/s3/mode_and_attract.s",
+      "tokens": [
+        [79, 1, 49, ""],
+        [79, 6, 49, ""],
+        [176, 7, 86, ""],
+        [329, 5, 87, ""],
+        [332, 2, 86, ""],
+        [337, 4, 87, ""],
+        [342, 5, 86, ""],
+        [353, 2, 87, ""],
+        [354, 4, 86, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "tokens": [[43, 4, 47, ""]]
+    },
+    {
+      "source": "src/game/level/sk/bounds_catalog.s",
+      "tokens": [
+        [3, 2, 16, ""],
+        [9, 4, 36, ""],
+        [10, 4, 37, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "tokens": [
+        [203, 2, 60, ""],
+        [234, 2, 45, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/mode_and_attract.s",
+      "tokens": [
+        [102, 1, 49, ""],
+        [102, 6, 49, ""],
+        [235, 7, 86, ""],
+        [413, 5, 87, ""],
+        [416, 2, 86, ""],
+        [421, 4, 87, ""],
+        [426, 5, 86, ""],
+        [437, 2, 87, ""],
+        [438, 4, 86, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/screen_dispatch.s",
+      "tokens": [[14, 2, 78, ""]]
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "tokens": [[43, 4, 47, ""]]
+    },
+    {
+      "source": "src/game/level/zones/aiz/s3/act1_deformation.s",
+      "tokens": [
+        [168, 5, 17, ""],
+        [169, 2, 17, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/aiz/s3/act2_air_raid.s",
+      "tokens": [
+        [22, 9, 18, ""],
+        [23, 2, 18, ""],
+        [39, 2, 21, ""],
+        [40, 4, 19, ""],
+        [47, 2, 21, ""],
+        [48, 4, 19, ""],
+        [156, 2, 19, ""],
+        [163, 2, 18, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/aiz/s3/act2_deformation.s",
+      "tokens": [[116, 2, 18, ""]]
+    },
+    {
+      "source": "src/game/level/zones/aiz/s3/act2_screen_control.s",
+      "tokens": [
+        [37, 4, 18, ""],
+        [38, 2, 18, ""],
+        [42, 4, 19, ""],
+        [43, 4, 21, ""],
+        [58, 2, 18, ""],
+        [60, 2, 21, ""],
+        [268, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/aiz/sk/act2_air_raid.s",
+      "tokens": [
+        [22, 9, 18, ""],
+        [23, 2, 18, ""],
+        [39, 2, 21, ""],
+        [40, 4, 19, ""],
+        [47, 2, 21, ""],
+        [48, 4, 19, ""],
+        [156, 2, 19, ""],
+        [163, 2, 18, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/aiz/sk/act2_screen_control.s",
+      "tokens": [
+        [38, 4, 18, ""],
+        [39, 2, 18, ""],
+        [43, 4, 19, ""],
+        [44, 4, 21, ""],
+        [59, 2, 18, ""],
+        [61, 2, 21, ""],
+        [268, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ddz/sk/screen.s",
+      "tokens": [
+        [6, 2, 18, ""],
+        [7, 2, 20, ""],
+        [8, 2, 19, ""],
+        [9, 2, 21, ""],
+        [59, 4, 18, ""],
+        [60, 4, 19, ""],
+        [63, 2, 18, ""],
+        [64, 2, 20, ""],
+        [65, 2, 19, ""],
+        [68, 2, 19, ""],
+        [69, 2, 21, ""],
+        [70, 2, 18, ""],
+        [76, 2, 18, ""],
+        [77, 2, 19, ""],
+        [81, 4, 18, ""],
+        [85, 4, 19, ""],
+        [88, 2, 18, ""],
+        [91, 4, 20, ""],
+        [92, 2, 19, ""],
+        [94, 4, 21, ""],
+        [114, 2, 18, ""],
+        [118, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/dez/sk/act3_screen.s",
+      "tokens": [
+        [166, 2, 17, ""],
+        [181, 2, 17, ""],
+        [250, 2, 17, ""],
+        [277, 7, 17, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/fbz/sk/act2_background.s",
+      "tokens": [
+        [121, 2, 19, ""],
+        [122, 2, 19, ""],
+        [133, 2, 18, ""],
+        [134, 2, 18, ""],
+        [158, 2, 19, ""],
+        [162, 2, 18, ""],
+        [273, 6, 19, ""],
+        [274, 9, 18, ""],
+        [275, 7, 19, ""],
+        [277, 7, 19, ""],
+        [278, 8, 18, ""],
+        [320, 2, 18, ""],
+        [322, 2, 19, ""],
+        [341, 2, 18, ""],
+        [351, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/fbz/sk/act2_screen_control.s",
+      "tokens": [
+        [8, 2, 18, ""],
+        [9, 2, 19, ""],
+        [60, 2, 18, ""],
+        [61, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lbz/s3/act1_screen.s",
+      "tokens": [[400, 2, 20, ""]]
+    },
+    {
+      "source": "src/game/level/zones/lbz/s3/act2_deformation.s",
+      "tokens": [
+        [258, 2, 20, ""],
+        [260, 4, 20, ""],
+        [262, 2, 20, ""],
+        [264, 2, 20, ""],
+        [274, 2, 19, ""],
+        [446, 2, 21, ""],
+        [455, 2, 19, ""],
+        [481, 2, 21, ""],
+        [483, 8, 21, ""],
+        [486, 6, 19, ""],
+        [488, 8, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lbz/s3/act2_screen_control.s",
+      "tokens": [
+        [4, 2, 20, ""],
+        [118, 7, 21, ""],
+        [119, 9, 19, ""],
+        [141, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lbz/sk/act1_screen.s",
+      "tokens": [[350, 2, 20, ""]]
+    },
+    {
+      "source": "src/game/level/zones/lbz/sk/act2_deformation.s",
+      "tokens": [
+        [259, 2, 20, ""],
+        [261, 4, 20, ""],
+        [269, 2, 20, ""],
+        [271, 2, 20, ""],
+        [281, 2, 19, ""],
+        [451, 2, 21, ""],
+        [460, 2, 19, ""],
+        [486, 2, 21, ""],
+        [488, 8, 21, ""],
+        [491, 6, 19, ""],
+        [493, 8, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lbz/sk/act2_screen_control.s",
+      "tokens": [
+        [5, 2, 20, ""],
+        [137, 7, 21, ""],
+        [138, 9, 19, ""],
+        [160, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lrz/sk/act1_screen.s",
+      "tokens": [
+        [205, 2, 19, ""],
+        [299, 2, 19, ""],
+        [332, 4, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
+      "tokens": [
+        [24, 5, 72, ""],
+        [58, 5, 72, ""],
+        [236, 5, 72, ""],
+        [333, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/lrz/sk/act3_screen.s",
+      "tokens": [
+        [270, 2, 84, ""],
+        [516, 2, 84, ""],
+        [528, 2, 84, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mgz/s3/act1_screen.s",
+      "tokens": [[83, 2, 21, ""]]
+    },
+    {
+      "source": "src/game/level/zones/mgz/s3/act2_collapse_background.s",
+      "tokens": [
+        [81, 2, 21, ""],
+        [278, 2, 21, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mgz/s3/act2_screen_control.s",
+      "tokens": [[103, 2, 21, ""]]
+    },
+    {
+      "source": "src/game/level/zones/mgz/sk/act1_screen.s",
+      "tokens": [[83, 2, 21, ""]]
+    },
+    {
+      "source": "src/game/level/zones/mgz/sk/act2_collapse_background.s",
+      "tokens": [
+        [20, 2, 21, ""],
+        [130, 2, 21, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mgz/sk/act2_screen_control.s",
+      "tokens": [[109, 2, 21, ""]]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "tokens": [[3, 2, 44, ""]]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_background.s",
+      "tokens": [
+        [233, 2, 19, ""],
+        [416, 2, 64, ""],
+        [419, 2, 64, ""],
+        [538, 4, 18, ""],
+        [554, 2, 21, ""],
+        [556, 4, 19, ""],
+        [557, 2, 64, ""],
+        [559, 8, 18, ""],
+        [561, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/mhz/sk/act2_screen_control.s",
+      "tokens": [
+        [4, 2, 44, ""],
+        [16, 2, 44, ""],
+        [117, 11, 18, ""],
+        [119, 4, 21, ""],
+        [120, 4, 19, ""],
+        [169, 2, 21, ""],
+        [180, 2, 18, ""],
+        [183, 2, 19, ""],
+        [288, 2, 44, ""],
+        [293, 2, 44, ""],
+        [298, 2, 44, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/slots/sk/screen.s",
+      "tokens": [
+        [17, 4, 18, ""],
+        [19, 4, 20, ""],
+        [23, 4, 19, ""],
+        [25, 4, 21, ""],
+        [32, 2, 18, ""],
+        [37, 2, 19, ""],
+        [39, 2, 18, ""],
+        [40, 2, 20, ""],
+        [41, 2, 19, ""],
+        [44, 2, 19, ""],
+        [45, 2, 21, ""],
+        [46, 2, 18, ""],
+        [190, 2, 18, ""],
+        [194, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/soz/sk/act1_screen.s",
+      "tokens": [
+        [31, 6, 19, ""],
+        [256, 5, 19, ""],
+        [257, 8, 19, ""],
+        [272, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/soz/sk/act2_background.s",
+      "tokens": [
+        [117, 4, 19, ""],
+        [133, 8, 19, ""],
+        [149, 6, 19, ""],
+        [335, 2, 19, ""],
+        [600, 6, 19, ""],
+        [602, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act1_arrival_transport.s",
+      "tokens": [[156, 5, 72, ""]]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act1_background.s",
+      "tokens": [
+        [72, 2, 18, ""],
+        [78, 2, 29, ""],
+        [80, 2, 29, ""],
+        [89, 2, 25, ""],
+        [159, 2, 19, ""],
+        [182, 2, 19, ""],
+        [280, 4, 19, ""],
+        [285, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act1_ramp_debris.s",
+      "tokens": [
+        [2, 2, 18, ""],
+        [37, 4, 29, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act1_screen_control.s",
+      "tokens": [
+        [22, 2, 18, ""],
+        [23, 2, 19, ""],
+        [139, 2, 24, ""],
+        [142, 4, 26, ""],
+        [143, 2, 25, ""],
+        [145, 4, 27, ""],
+        [146, 2, 18, ""],
+        [147, 2, 28, ""],
+        [148, 2, 29, ""],
+        [190, 2, 24, ""],
+        [191, 2, 26, ""],
+        [192, 2, 25, ""],
+        [195, 2, 25, ""],
+        [196, 2, 27, ""],
+        [197, 2, 24, ""],
+        [201, 7, 24, ""],
+        [205, 4, 25, ""],
+        [208, 9, 28, ""],
+        [209, 2, 28, ""],
+        [210, 4, 25, ""],
+        [242, 2, 62, ""],
+        [262, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act2_background.s",
+      "tokens": [
+        [25, 2, 19, ""],
+        [147, 2, 19, ""],
+        [364, 8, 19, ""],
+        [393, 4, 19, ""],
+        [396, 2, 19, ""],
+        [406, 2, 64, ""],
+        [418, 4, 19, ""],
+        [421, 2, 19, ""],
+        [431, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/zones/ssz/sk/act2_screen_control.s",
+      "tokens": [
+        [102, 2, 67, ""],
+        [113, 2, 73, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/continue/sk/screen.s",
+      "tokens": [
+        [27, 2, 64, ""],
+        [28, 2, 54, ""],
+        [58, 4, 62, ""],
+        [78, 2, 64, ""],
+        [104, 2, 50, ""],
+        [105, 6, 52, ""],
+        [111, 5, 50, ""],
+        [113, 8, 50, ""],
+        [114, 2, 52, ""],
+        [117, 4, 52, ""],
+        [122, 5, 64, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/ending/sk/credits_sequence.s",
+      "tokens": [
+        [2, 2, 53, ""],
+        [11, 5, 53, ""],
+        [12, 2, 83, ""],
+        [15, 2, 67, ""],
+        [32, 5, 36, ""],
+        [34, 5, 53, ""],
+        [41, 2, 82, ""],
+        [58, 2, 67, ""],
+        [60, 2, 52, ""],
+        [80, 5, 52, ""],
+        [89, 5, 67, ""],
+        [90, 2, 52, ""],
+        [93, 5, 53, ""],
+        [96, 2, 83, ""],
+        [101, 2, 54, ""],
+        [109, 2, 73, ""],
+        [268, 2, 54, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/ending/sk/scroll_parameters.s",
+      "tokens": [
+        [19, 2, 54, ""],
+        [30, 4, 82, ""],
+        [32, 8, 36, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/competition_menu.s",
+      "tokens": [[39, 5, 31, ""]]
+    },
+    {
+      "source": "src/game/modes/s3/competition_player_selection.s",
+      "tokens": [[41, 5, 31, ""]]
+    },
+    {
+      "source": "src/game/modes/s3/competition_results.s",
+      "tokens": [
+        [44, 5, 31, ""],
+        [107, 2, 20, ""],
+        [115, 2, 18, ""],
+        [161, 2, 21, ""],
+        [162, 2, 21, ""],
+        [190, 4, 18, ""],
+        [191, 4, 20, ""],
+        [195, 2, 18, ""],
+        [198, 2, 20, ""],
+        [201, 4, 18, ""],
+        [202, 4, 20, ""],
+        [205, 2, 21, ""],
+        [212, 5, 21, ""],
+        [218, 5, 21, ""],
+        [219, 5, 21, ""],
+        [224, 5, 21, ""],
+        [238, 2, 20, ""],
+        [240, 2, 18, ""],
+        [264, 2, 30, ""],
+        [268, 2, 32, ""],
+        [289, 2, 30, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/competition_zone_selection.s",
+      "tokens": [
+        [59, 5, 31, ""],
+        [158, 5, 31, ""],
+        [302, 5, 31, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/continue_screen.s",
+      "tokens": [
+        [24, 2, 64, ""],
+        [25, 2, 54, ""],
+        [43, 4, 62, ""],
+        [61, 2, 64, ""],
+        [85, 2, 50, ""],
+        [86, 6, 52, ""],
+        [92, 5, 50, ""],
+        [94, 8, 50, ""],
+        [95, 2, 52, ""],
+        [98, 4, 52, ""],
+        [103, 5, 64, ""],
+        [120, 2, 62, ""],
+        [212, 2, 62, ""],
+        [267, 5, 64, ""],
+        [294, 2, 62, ""],
+        [355, 2, 52, ""],
+        [371, 5, 54, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/ending_credits.s",
+      "tokens": [
+        [27, 1, 49, ""],
+        [27, 6, 49, ""],
+        [35, 2, 13, ""],
+        [40, 2, 35, ""],
+        [66, 8, 50, ""],
+        [87, 2, 53, ""],
+        [95, 5, 50, ""],
+        [99, 8, 50, ""],
+        [102, 2, 52, ""],
+        [104, 4, 52, ""],
+        [113, 5, 53, ""],
+        [124, 2, 52, ""],
+        [134, 2, 52, ""],
+        [136, 4, 52, ""],
+        [154, 5, 53, ""],
+        [166, 5, 54, ""],
+        [199, 4, 62, ""],
+        [279, 2, 62, ""],
+        [431, 5, 54, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/legacy_competition_selection.s",
+      "tokens": [[76, 2, 13, ""]]
+    },
+    {
+      "source": "src/game/modes/s3/save_screen.s",
+      "tokens": [
+        [53, 5, 31, ""],
+        [103, 5, 31, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/time_attack_records.s",
+      "tokens": [
+        [55, 5, 31, ""],
+        [131, 2, 20, ""],
+        [139, 2, 18, ""],
+        [176, 2, 20, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "tokens": [
+        [96, 2, 36, ""],
+        [97, 2, 37, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_menu.s",
+      "tokens": [[39, 5, 31, ""]]
+    },
+    {
+      "source": "src/game/modes/sk/competition_player_selection.s",
+      "tokens": [[41, 5, 31, ""]]
+    },
+    {
+      "source": "src/game/modes/sk/competition_results.s",
+      "tokens": [
+        [44, 5, 31, ""],
+        [107, 2, 20, ""],
+        [115, 2, 18, ""],
+        [161, 2, 21, ""],
+        [162, 2, 21, ""],
+        [190, 4, 18, ""],
+        [191, 4, 20, ""],
+        [195, 2, 18, ""],
+        [198, 2, 20, ""],
+        [201, 4, 18, ""],
+        [202, 4, 20, ""],
+        [205, 2, 21, ""],
+        [212, 5, 21, ""],
+        [218, 5, 21, ""],
+        [219, 5, 21, ""],
+        [224, 5, 21, ""],
+        [238, 2, 20, ""],
+        [240, 2, 18, ""],
+        [264, 2, 30, ""],
+        [268, 2, 32, ""],
+        [289, 2, 30, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/competition_zone_selection.s",
+      "tokens": [
+        [59, 5, 31, ""],
+        [158, 5, 31, ""],
+        [302, 5, 31, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/save_screen.s",
+      "tokens": [
+        [55, 5, 31, ""],
+        [127, 5, 31, ""],
+        [338, 2, 24, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/time_attack_records.s",
+      "tokens": [
+        [55, 5, 31, ""],
+        [131, 2, 20, ""],
+        [139, 2, 18, ""],
+        [176, 2, 20, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "tokens": [
+        [118, 2, 36, ""],
+        [119, 2, 37, ""]
+      ]
+    },
+    {
+      "source": "src/game/special_stage/s3/results_mode.s",
+      "tokens": [[46, 5, 31, ""]]
+    },
+    {
+      "source": "src/game/special_stage/sk/results_mode.s",
+      "tokens": [
+        [80, 5, 31, ""],
+        [165, 4, 78, ""],
+        [166, 2, 79, ""],
+        [169, 7, 33, ""]
+      ]
+    },
+    {
+      "source": "src/memory/lockon/sonic3_exports.inc",
+      "tokens": [
+        [5, 0, 0, ""],
+        [6, 0, 1, ""],
+        [8, 0, 2, ""],
+        [9, 0, 3, ""],
+        [11, 0, 4, ""],
+        [14, 0, 5, ""],
+        [16, 0, 6, ""],
+        [17, 0, 7, ""],
+        [385, 0, 8, ""],
+        [386, 0, 9, ""]
+      ]
+    },
+    {
+      "source": "src/memory/s3/overrides.inc",
+      "tokens": [
+        [23, 0, 10, ""],
+        [24, 0, 11, ""],
+        [25, 0, 12, ""],
+        [29, 3, 34, ""],
+        [32, 1, 39, ""],
+        [40, 1, 88, ""],
+        [43, 3, 89, ""],
+        [44, 0, 13, ""],
+        [44, 3, 90, ""]
+      ]
+    },
+    {
+      "source": "src/memory/shared/ram.inc",
+      "tokens": [
+        [24, 0, 14, ""],
+        [25, 0, 15, ""],
+        [81, 0, 16, ""],
+        [151, 0, 17, ""],
+        [155, 0, 18, ""],
+        [156, 0, 19, ""],
+        [157, 0, 20, ""],
+        [158, 0, 21, ""],
+        [165, 0, 22, ""],
+        [170, 0, 23, ""],
+        [186, 0, 24, ""],
+        [188, 0, 25, ""],
+        [190, 0, 26, ""],
+        [191, 0, 27, ""],
+        [192, 0, 28, ""],
+        [193, 0, 29, ""],
+        [201, 0, 30, ""],
+        [202, 0, 31, ""],
+        [203, 0, 32, ""],
+        [221, 0, 33, ""],
+        [259, 0, 34, ""],
+        [266, 0, 35, ""],
+        [302, 0, 36, ""],
+        [303, 0, 37, ""],
+        [313, 0, 38, ""],
+        [348, 0, 39, ""],
+        [355, 0, 40, ""],
+        [357, 0, 41, ""],
+        [365, 0, 42, ""],
+        [392, 0, 43, ""],
+        [397, 0, 44, ""],
+        [398, 0, 45, ""],
+        [400, 0, 46, ""],
+        [402, 0, 47, ""],
+        [413, 0, 48, ""],
+        [420, 0, 49, ""],
+        [421, 0, 50, ""],
+        [422, 0, 51, ""],
+        [423, 0, 52, ""],
+        [424, 0, 53, ""],
+        [425, 0, 54, ""],
+        [426, 0, 55, ""],
+        [427, 0, 56, ""],
+        [428, 0, 57, ""],
+        [429, 0, 58, ""],
+        [430, 0, 59, ""],
+        [437, 0, 60, ""],
+        [438, 0, 61, ""],
+        [439, 0, 62, ""],
+        [441, 0, 63, ""],
+        [442, 0, 64, ""],
+        [444, 0, 65, ""],
+        [445, 0, 66, ""],
+        [447, 0, 67, ""],
+        [448, 0, 68, ""],
+        [449, 0, 69, ""],
+        [450, 0, 70, ""],
+        [451, 0, 71, ""],
+        [452, 0, 72, ""],
+        [453, 0, 73, ""],
+        [454, 0, 74, ""],
+        [455, 0, 75, ""],
+        [456, 0, 76, ""],
+        [457, 0, 77, ""],
+        [459, 0, 78, ""],
+        [460, 0, 79, ""],
+        [461, 0, 80, ""],
+        [462, 0, 81, ""],
+        [464, 0, 82, ""],
+        [466, 0, 83, ""],
+        [467, 0, 84, ""],
+        [576, 0, 85, ""],
+        [620, 0, 86, ""],
+        [621, 0, 87, ""],
+        [627, 0, 88, ""],
+        [631, 0, 89, ""],
+        [638, 0, 90, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "tokens": [[5, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "tokens": [[21, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_bumpers.s",
+      "tokens": [[52, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/bonus/s3/gumball_machine.s",
+      "tokens": [[5, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/bosses/aiz/end_boss/s3/main_control.s",
+      "tokens": [
+        [15, 2, 61, ""],
+        [128, 2, 60, ""],
+        [177, 2, 61, ""],
+        [188, 2, 63, ""],
+        [198, 2, 63, ""],
+        [201, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/aiz/end_boss/sk/attachments_and_attacks.s",
+      "tokens": [
+        [302, 2, 52, ""],
+        [310, 2, 53, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/aiz/end_boss/sk/main_control.s",
+      "tokens": [
+        [8, 2, 50, ""],
+        [13, 2, 50, ""],
+        [26, 2, 60, ""],
+        [27, 2, 61, ""],
+        [146, 2, 60, ""],
+        [177, 2, 52, ""],
+        [191, 2, 61, ""],
+        [199, 2, 63, ""],
+        [208, 2, 63, ""],
+        [221, 2, 52, ""],
+        [229, 2, 52, ""],
+        [264, 2, 53, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/aiz/s3/miniboss.s",
+      "tokens": [[53, 2, 49, ""]]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
+      "tokens": [
+        [181, 2, 63, ""],
+        [189, 2, 63, ""],
+        [192, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [169, 2, 63, ""],
+        [171, 2, 70, ""],
+        [184, 2, 63, ""],
+        [194, 2, 70, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/s3/main_and_top.s",
+      "tokens": [[126, 2, 63, ""]]
+    },
+    {
+      "source": "src/objects/bosses/cnz/miniboss/sk/main_and_top.s",
+      "tokens": [[127, 2, 63, ""]]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/asteroids.s",
+      "tokens": [
+        [12, 2, 67, ""],
+        [25, 2, 58, ""],
+        [30, 2, 50, ""],
+        [37, 4, 50, ""],
+        [176, 2, 67, ""],
+        [193, 2, 67, ""],
+        [224, 2, 67, ""],
+        [245, 2, 67, ""],
+        [277, 2, 59, ""],
+        [279, 2, 67, ""],
+        [317, 2, 67, ""],
+        [330, 2, 59, ""],
+        [337, 2, 67, ""],
+        [355, 2, 59, ""],
+        [366, 2, 67, ""],
+        [378, 2, 67, ""],
+        [380, 2, 59, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/battle_control.s",
+      "tokens": [
+        [2, 2, 67, ""],
+        [22, 5, 72, ""],
+        [66, 2, 62, ""],
+        [74, 8, 56, ""],
+        [154, 2, 58, ""],
+        [196, 8, 56, ""],
+        [197, 5, 72, ""],
+        [217, 2, 58, ""],
+        [228, 2, 58, ""],
+        [278, 2, 67, ""],
+        [284, 2, 59, ""],
+        [330, 2, 58, ""],
+        [392, 2, 67, ""],
+        [400, 2, 59, ""],
+        [460, 2, 67, ""],
+        [462, 2, 59, ""],
+        [477, 4, 62, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/defeat_helpers.s",
+      "tokens": [
+        [34, 2, 58, ""],
+        [59, 2, 58, ""],
+        [246, 2, 58, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/missile.s",
+      "tokens": [
+        [30, 2, 67, ""],
+        [136, 2, 67, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ddz/sk/tracking_helpers.s",
+      "tokens": [
+        [59, 2, 62, ""],
+        [168, 2, 50, ""],
+        [175, 4, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "tokens": [
+        [9, 2, 72, ""],
+        [136, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "tokens": [[277, 5, 72, ""]]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "tokens": [[287, 5, 72, ""]]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attached_control_actors.s",
+      "tokens": [
+        [14, 5, 72, ""],
+        [29, 2, 64, ""],
+        [35, 2, 64, ""],
+        [44, 2, 64, ""],
+        [53, 2, 64, ""],
+        [103, 5, 64, ""],
+        [112, 7, 64, ""],
+        [130, 5, 64, ""],
+        [132, 5, 64, ""],
+        [142, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
+      "tokens": [
+        [91, 2, 50, ""],
+        [94, 2, 51, ""],
+        [275, 5, 72, ""],
+        [288, 5, 72, ""],
+        [308, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/body_parts.s",
+      "tokens": [
+        [39, 2, 64, ""],
+        [51, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
+      "tokens": [
+        [88, 5, 72, ""],
+        [94, 5, 72, ""],
+        [106, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/motion_helpers.s",
+      "tokens": [
+        [68, 2, 52, ""],
+        [72, 4, 52, ""],
+        [197, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/final_boss/sk/stage_controller.s",
+      "tokens": [
+        [26, 4, 62, ""],
+        [27, 2, 52, ""],
+        [93, 5, 72, ""],
+        [119, 5, 72, ""],
+        [208, 6, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/battle_control.s",
+      "tokens": [
+        [30, 6, 69, ""],
+        [31, 7, 70, ""],
+        [32, 8, 71, ""],
+        [329, 2, 63, ""],
+        [333, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/child_attack_states.s",
+      "tokens": [[292, 2, 68, ""]]
+    },
+    {
+      "source": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
+      "tokens": [
+        [121, 2, 71, ""],
+        [125, 2, 70, ""],
+        [142, 2, 71, ""],
+        [146, 2, 70, ""],
+        [156, 2, 71, ""],
+        [160, 2, 70, ""],
+        [169, 2, 69, ""],
+        [173, 2, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/fbz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [169, 2, 63, ""],
+        [182, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/fbz/s3/end_boss.s",
+      "tokens": [
+        [126, 2, 63, ""],
+        [138, 2, 63, ""],
+        [140, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/hcz/end_boss/s3/main_and_chassis.s",
+      "tokens": [
+        [77, 2, 49, ""],
+        [147, 2, 63, ""],
+        [155, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/hcz/end_boss/sk/main_and_chassis.s",
+      "tokens": [
+        [138, 2, 63, ""],
+        [140, 2, 70, ""],
+        [164, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/hcz/miniboss/s3/engine_and_effects.s",
+      "tokens": [[212, 2, 60, ""]]
+    },
+    {
+      "source": "src/objects/bosses/hcz/miniboss/s3/main_and_loop.s",
+      "tokens": [
+        [231, 2, 60, ""],
+        [240, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/hcz/miniboss/sk/engine_and_effects.s",
+      "tokens": [[213, 2, 60, ""]]
+    },
+    {
+      "source": "src/objects/bosses/hcz/miniboss/sk/main_and_loop.s",
+      "tokens": [
+        [232, 2, 60, ""],
+        [241, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/icz/s3/end_boss.s",
+      "tokens": [
+        [120, 2, 63, ""],
+        [131, 2, 63, ""],
+        [133, 2, 63, ""],
+        [521, 2, 67, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/icz/s3/miniboss.s",
+      "tokens": [[171, 2, 67, ""]]
+    },
+    {
+      "source": "src/objects/bosses/icz/sk/end_boss.s",
+      "tokens": [
+        [116, 2, 63, ""],
+        [124, 2, 70, ""],
+        [134, 2, 63, ""],
+        [136, 2, 63, ""],
+        [533, 2, 67, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/icz/sk/miniboss.s",
+      "tokens": [
+        [128, 2, 70, ""],
+        [167, 2, 67, ""],
+        [398, 2, 68, ""],
+        [409, 2, 70, ""],
+        [561, 2, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "tokens": [[167, 2, 49, ""]]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "tokens": [
+        [8, 2, 60, ""],
+        [9, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "tokens": [
+        [159, 4, 62, ""],
+        [195, 2, 54, ""],
+        [203, 5, 54, ""],
+        [229, 5, 54, ""],
+        [330, 5, 54, ""],
+        [408, 5, 54, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
+      "tokens": [[314, 5, 54, ""]]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/battle_control.s",
+      "tokens": [
+        [337, 4, 62, ""],
+        [369, 2, 54, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/defeat_and_ending.s",
+      "tokens": [
+        [109, 5, 54, ""],
+        [128, 5, 54, ""],
+        [143, 5, 54, ""],
+        [178, 2, 62, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/s3/ending_helpers.s",
+      "tokens": [
+        [153, 2, 40, ""],
+        [161, 2, 40, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_2/sk/battle_control.s",
+      "tokens": [
+        [348, 2, 63, ""],
+        [350, 2, 60, ""],
+        [492, 2, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
+      "tokens": [
+        [25, 2, 65, ""],
+        [162, 2, 65, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
+      "tokens": [[70, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/bosses/lbz/s3/miniboss.s",
+      "tokens": [
+        [45, 2, 50, ""],
+        [50, 2, 50, ""],
+        [60, 2, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/sk/act1_robotnik_scene.s",
+      "tokens": [
+        [29, 2, 65, ""],
+        [165, 2, 65, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
+      "tokens": [[65, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/bosses/lbz/sk/miniboss.s",
+      "tokens": [
+        [45, 2, 50, ""],
+        [50, 2, 50, ""],
+        [60, 2, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lrz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [2, 4, 62, ""],
+        [15, 5, 54, ""],
+        [75, 4, 60, ""],
+        [83, 5, 52, ""],
+        [102, 2, 52, ""],
+        [109, 2, 61, ""],
+        [145, 2, 63, ""],
+        [159, 2, 63, ""],
+        [162, 5, 54, ""],
+        [190, 2, 61, ""],
+        [197, 2, 61, ""],
+        [267, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lrz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [29, 2, 52, ""],
+        [33, 2, 60, ""],
+        [77, 2, 61, ""],
+        [78, 2, 52, ""],
+        [99, 2, 62, ""],
+        [184, 2, 84, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lrz/end_boss/sk/platform.s",
+      "tokens": [
+        [23, 2, 62, ""],
+        [86, 2, 62, ""],
+        [92, 2, 64, ""],
+        [97, 2, 64, ""],
+        [111, 5, 54, ""],
+        [117, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
+      "tokens": [
+        [41, 7, 68, ""],
+        [42, 7, 69, ""],
+        [86, 2, 68, ""],
+        [170, 2, 69, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/s3/attachments.s",
+      "tokens": [
+        [294, 5, 51, ""],
+        [305, 5, 56, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/s3/battle_control.s",
+      "tokens": [
+        [266, 2, 50, ""],
+        [283, 2, 56, ""],
+        [308, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
+      "tokens": [
+        [199, 2, 50, ""],
+        [241, 2, 50, ""],
+        [251, 2, 56, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/s3/projectiles_and_defeat.s",
+      "tokens": [
+        [234, 2, 40, ""],
+        [242, 2, 40, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/sk/battle_control.s",
+      "tokens": [
+        [294, 2, 50, ""],
+        [318, 2, 56, ""],
+        [349, 2, 63, ""],
+        [357, 2, 70, ""],
+        [364, 2, 63, ""],
+        [367, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [200, 2, 50, ""],
+        [243, 2, 50, ""],
+        [253, 2, 56, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
+      "tokens": [
+        [161, 2, 49, ""],
+        [192, 2, 49, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mgz/sk/drilling_arrival.s",
+      "tokens": [[246, 2, 63, ""]]
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [12, 2, 64, ""],
+        [50, 2, 54, ""],
+        [166, 5, 54, ""],
+        [167, 2, 63, ""],
+        [196, 2, 63, ""],
+        [199, 2, 64, ""],
+        [281, 2, 64, ""],
+        [417, 2, 44, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [98, 2, 64, ""],
+        [126, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/battle_control.s",
+      "tokens": [[48, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/bosses/mhz/miniboss/sk/tree_actor.s",
+      "tokens": [
+        [6, 2, 62, ""],
+        [30, 2, 62, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/shared/sk/robotnik_heads.s",
+      "tokens": [[174, 2, 55, ""]]
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [22, 6, 50, ""],
+        [175, 2, 63, ""],
+        [181, 2, 63, ""],
+        [239, 5, 72, ""],
+        [278, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [18, 5, 50, ""],
+        [20, 8, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
+      "tokens": [
+        [292, 2, 63, ""],
+        [296, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/end_boss/sk/battle.s",
+      "tokens": [
+        [53, 4, 70, ""],
+        [55, 4, 71, ""],
+        [60, 4, 68, ""],
+        [82, 5, 72, ""],
+        [88, 4, 70, ""],
+        [90, 4, 71, ""],
+        [93, 4, 68, ""],
+        [124, 2, 71, ""],
+        [146, 5, 72, ""],
+        [427, 2, 63, ""],
+        [529, 4, 71, ""],
+        [544, 2, 71, ""],
+        [581, 4, 50, ""],
+        [583, 4, 52, ""],
+        [585, 4, 53, ""],
+        [587, 4, 54, ""],
+        [589, 4, 56, ""],
+        [591, 4, 57, ""],
+        [593, 4, 58, ""],
+        [615, 5, 72, ""],
+        [626, 5, 72, ""],
+        [630, 2, 56, ""],
+        [682, 2, 60, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/ghz/sk/battle.s",
+      "tokens": [
+        [19, 2, 54, ""],
+        [129, 2, 55, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
+      "tokens": [
+        [53, 5, 72, ""],
+        [65, 5, 72, ""],
+        [70, 2, 68, ""],
+        [112, 2, 50, ""],
+        [114, 2, 54, ""],
+        [116, 2, 58, ""],
+        [214, 2, 54, ""],
+        [231, 1, 56, ""],
+        [231, 3, 57, ""],
+        [231, 5, 58, ""],
+        [232, 1, 50, ""],
+        [232, 3, 52, ""],
+        [232, 5, 53, ""],
+        [263, 2, 54, ""],
+        [311, 2, 68, ""],
+        [320, 2, 54, ""],
+        [400, 2, 68, ""],
+        [485, 2, 71, ""],
+        [496, 2, 71, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/crane.s",
+      "tokens": [
+        [40, 5, 72, ""],
+        [44, 5, 72, ""],
+        [49, 5, 72, ""],
+        [54, 5, 72, ""],
+        [91, 4, 62, ""],
+        [97, 2, 62, ""],
+        [106, 5, 72, ""],
+        [110, 2, 62, ""],
+        [146, 2, 71, ""],
+        [182, 5, 72, ""],
+        [205, 5, 72, ""],
+        [237, 5, 72, ""],
+        [256, 5, 72, ""],
+        [265, 5, 72, ""],
+        [329, 2, 60, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
+      "tokens": [
+        [29, 2, 68, ""],
+        [146, 5, 72, ""],
+        [150, 2, 60, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/attachments_and_attacks.s",
+      "tokens": [
+        [60, 2, 50, ""],
+        [78, 2, 50, ""],
+        [101, 2, 55, ""],
+        [146, 2, 54, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/battle_control.s",
+      "tokens": [
+        [13, 2, 54, ""],
+        [68, 2, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/mtz/sk/orb_helpers.s",
+      "tokens": [
+        [108, 2, 54, ""],
+        [154, 2, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/motion_helpers.s",
+      "tokens": [
+        [97, 2, 71, ""],
+        [102, 2, 70, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/ssz/shared/sk/scene_transition_callbacks.s",
+      "tokens": [
+        [14, 2, 63, ""],
+        [73, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/aftermath.s",
+      "tokens": [
+        [2, 2, 66, ""],
+        [107, 2, 60, ""],
+        [141, 5, 72, ""],
+        [177, 5, 72, ""],
+        [264, 5, 72, ""],
+        [268, 5, 72, ""],
+        [302, 5, 72, ""],
+        [335, 2, 66, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/crane.s",
+      "tokens": [
+        [135, 4, 72, ""],
+        [139, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/encounter.s",
+      "tokens": [
+        [5, 4, 62, ""],
+        [50, 5, 72, ""],
+        [125, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/platforms.s",
+      "tokens": [[13, 2, 60, ""]]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/recovery.s",
+      "tokens": [
+        [65, 5, 72, ""],
+        [78, 2, 72, ""],
+        [206, 2, 67, ""],
+        [215, 5, 72, ""],
+        [257, 2, 74, ""],
+        [277, 2, 74, ""],
+        [292, 5, 72, ""],
+        [295, 2, 74, ""],
+        [349, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/ship.s",
+      "tokens": [
+        [4, 4, 67, ""],
+        [53, 2, 72, ""],
+        [58, 5, 72, ""],
+        [67, 5, 72, ""],
+        [88, 2, 74, ""],
+        [90, 2, 74, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/hpz/sk/ship_attachments.s",
+      "tokens": [
+        [8, 5, 72, ""],
+        [16, 2, 74, ""],
+        [53, 2, 74, ""],
+        [63, 2, 74, ""],
+        [68, 2, 76, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/knuckles/s3/angel_island.s",
+      "tokens": [[2, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/cutscenes/knuckles/s3/launch_base.s",
+      "tokens": [
+        [83, 2, 64, ""],
+        [117, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/s3/button.s",
+      "tokens": [
+        [12, 2, 62, ""],
+        [34, 2, 64, ""],
+        [67, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/angel_island.s",
+      "tokens": [[2, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/angel_island_plane.s",
+      "tokens": [[306, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/buttons.s",
+      "tokens": [
+        [14, 2, 62, ""],
+        [22, 2, 64, ""],
+        [55, 2, 61, ""],
+        [106, 2, 60, ""],
+        [108, 2, 60, ""],
+        [126, 2, 61, ""],
+        [128, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/launch_base.s",
+      "tokens": [
+        [85, 2, 64, ""],
+        [117, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/lava_reef.s",
+      "tokens": [
+        [27, 5, 72, ""],
+        [37, 5, 72, ""],
+        [92, 5, 72, ""],
+        [106, 5, 72, ""],
+        [127, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/movement_and_collision.s",
+      "tokens": [
+        [22, 5, 72, ""],
+        [184, 2, 52, ""],
+        [193, 2, 19, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/mushroom_hill_act1.s",
+      "tokens": [
+        [105, 2, 72, ""],
+        [117, 5, 72, ""],
+        [130, 5, 72, ""],
+        [142, 5, 72, ""],
+        [149, 5, 72, ""],
+        [158, 6, 72, ""],
+        [162, 2, 72, ""],
+        [176, 5, 72, ""],
+        [190, 2, 72, ""],
+        [192, 5, 72, ""],
+        [225, 6, 72, ""],
+        [238, 2, 62, ""],
+        [248, 2, 64, ""],
+        [264, 6, 72, ""],
+        [279, 2, 64, ""],
+        [335, 2, 64, ""],
+        [345, 2, 64, ""],
+        [356, 2, 64, ""],
+        [362, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/mushroom_hill_act2.s",
+      "tokens": [
+        [30, 7, 70, ""],
+        [39, 2, 70, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/opening.s",
+      "tokens": [
+        [65, 5, 72, ""],
+        [81, 5, 72, ""],
+        [91, 5, 72, ""],
+        [261, 5, 72, ""],
+        [281, 5, 72, ""],
+        [304, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/sky_sanctuary.s",
+      "tokens": [
+        [31, 2, 72, ""],
+        [44, 5, 72, ""],
+        [80, 5, 72, ""],
+        [231, 5, 72, ""],
+        [280, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/cutscenes/sk/state_and_patterns.s",
+      "tokens": [[18, 4, 52, ""]]
+    },
+    {
+      "source": "src/objects/development/s3/sphere_test.s",
+      "tokens": [
+        [17, 5, 10, ""],
+        [18, 5, 11, ""],
+        [19, 8, 12, ""],
+        [138, 5, 10, ""],
+        [139, 5, 11, ""],
+        [140, 8, 12, ""],
+        [228, 8, 12, ""],
+        [230, 5, 12, ""],
+        [234, 7, 12, ""],
+        [236, 5, 12, ""],
+        [275, 5, 11, ""],
+        [279, 5, 11, ""],
+        [315, 2, 12, ""],
+        [319, 2, 11, ""]
+      ]
+    },
+    {
+      "source": "src/objects/effects/sk/super_player_effects.s",
+      "tokens": [
+        [217, 5, 38, ""],
+        [218, 2, 38, ""],
+        [220, 5, 38, ""],
+        [222, 2, 38, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/character_poses.s",
+      "tokens": [
+        [31, 5, 72, ""],
+        [117, 2, 54, ""],
+        [126, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/child_motion.s",
+      "tokens": [
+        [42, 4, 50, ""],
+        [43, 4, 18, ""],
+        [44, 4, 52, ""],
+        [45, 4, 19, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/cloud_field.s",
+      "tokens": [
+        [18, 2, 73, ""],
+        [21, 2, 73, ""],
+        [29, 2, 80, ""],
+        [40, 2, 81, ""],
+        [109, 2, 80, ""],
+        [117, 2, 81, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/master_emerald.s",
+      "tokens": [
+        [24, 2, 54, ""],
+        [35, 5, 72, ""],
+        [43, 2, 62, ""],
+        [74, 2, 54, ""],
+        [77, 2, 79, ""],
+        [95, 5, 72, ""],
+        [108, 4, 62, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/plane_and_knuckles.s",
+      "tokens": [
+        [20, 5, 72, ""],
+        [37, 2, 79, ""],
+        [96, 2, 79, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/plane_scene.s",
+      "tokens": [
+        [6, 5, 18, ""],
+        [28, 5, 54, ""],
+        [51, 2, 54, ""],
+        [71, 2, 83, ""],
+        [96, 2, 54, ""],
+        [130, 2, 54, ""],
+        [205, 2, 54, ""],
+        [226, 5, 72, ""],
+        [256, 5, 72, ""],
+        [267, 5, 72, ""],
+        [283, 5, 72, ""],
+        [309, 5, 72, ""],
+        [324, 5, 72, ""],
+        [342, 2, 54, ""],
+        [371, 2, 72, ""],
+        [385, 2, 54, ""],
+        [394, 2, 54, ""],
+        [437, 2, 54, ""],
+        [497, 2, 19, ""],
+        [515, 2, 54, ""],
+        [523, 2, 64, ""],
+        [527, 2, 19, ""],
+        [552, 7, 73, ""],
+        [553, 2, 80, ""],
+        [554, 8, 81, ""],
+        [555, 2, 54, ""],
+        [557, 7, 81, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/result_banners.s",
+      "tokens": [
+        [24, 5, 72, ""],
+        [65, 5, 72, ""],
+        [94, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/result_selector.s",
+      "tokens": [
+        [19, 2, 54, ""],
+        [138, 5, 72, ""],
+        [157, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/scene_companion.s",
+      "tokens": [
+        [28, 2, 54, ""],
+        [59, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/scene_controller.s",
+      "tokens": [
+        [40, 2, 72, ""],
+        [52, 2, 54, ""],
+        [109, 5, 79, ""],
+        [114, 2, 19, ""],
+        [116, 4, 19, ""],
+        [124, 7, 73, ""],
+        [125, 9, 80, ""],
+        [126, 9, 81, ""],
+        [130, 2, 19, ""],
+        [132, 4, 19, ""],
+        [145, 2, 19, ""],
+        [147, 4, 19, ""],
+        [151, 5, 72, ""],
+        [172, 2, 54, ""],
+        [190, 5, 72, ""],
+        [196, 2, 54, ""],
+        [203, 2, 62, ""],
+        [213, 9, 81, ""],
+        [214, 2, 73, ""],
+        [230, 5, 18, ""],
+        [231, 5, 19, ""],
+        [239, 5, 18, ""],
+        [251, 5, 18, ""],
+        [263, 5, 18, ""],
+        [281, 2, 54, ""],
+        [318, 2, 54, ""],
+        [329, 2, 54, ""],
+        [343, 2, 54, ""],
+        [404, 2, 54, ""],
+        [411, 2, 79, ""],
+        [412, 2, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/scenery_and_creatures.s",
+      "tokens": [
+        [83, 2, 54, ""],
+        [246, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/sprite_helpers.s",
+      "tokens": [
+        [16, 2, 18, ""],
+        [22, 2, 19, ""],
+        [33, 2, 50, ""],
+        [44, 4, 54, ""]
+      ]
+    },
+    {
+      "source": "src/objects/ending/sk/super_character_transition.s",
+      "tokens": [[25, 5, 72, ""]]
+    },
+    {
+      "source": "src/objects/enemies/fbz/s3/blaster.s",
+      "tokens": [
+        [108, 2, 60, ""],
+        [141, 2, 60, ""]
+      ]
+    },
+    {
+      "source": "src/objects/enemies/fbz/sk/blaster.s",
+      "tokens": [
+        [110, 2, 44, ""],
+        [177, 2, 44, ""]
+      ]
+    },
+    {
+      "source": "src/objects/enemies/sk/egg_robo.s",
+      "tokens": [
+        [32, 2, 50, ""],
+        [34, 4, 50, ""],
+        [282, 2, 50, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/continue/sk/characters.s",
+      "tokens": [
+        [11, 2, 62, ""],
+        [116, 2, 62, ""],
+        [141, 5, 64, ""],
+        [154, 2, 62, ""],
+        [209, 5, 64, ""],
+        [237, 2, 62, ""],
+        [274, 2, 62, ""],
+        [284, 2, 62, ""],
+        [297, 5, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/continue/sk/countdown_and_patterns.s",
+      "tokens": [[2, 2, 52, ""]]
+    },
+    {
+      "source": "src/objects/interface/s3/level_results.s",
+      "tokens": [
+        [152, 2, 63, ""],
+        [159, 2, 63, ""],
+        [267, 2, 30, ""],
+        [276, 2, 32, ""],
+        [283, 2, 30, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "tokens": [
+        [35, 5, 37, ""],
+        [122, 5, 37, ""],
+        [164, 2, 36, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/sk/level_results.s",
+      "tokens": [
+        [173, 2, 63, ""],
+        [180, 2, 63, ""],
+        [295, 2, 30, ""],
+        [304, 2, 32, ""],
+        [311, 2, 30, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/sk/special_results_widgets.s",
+      "tokens": [
+        [5, 2, 79, ""],
+        [52, 2, 33, ""],
+        [318, 2, 78, ""]
+      ]
+    },
+    {
+      "source": "src/objects/level_end/s3/egg_capsule.s",
+      "tokens": [
+        [227, 2, 63, ""],
+        [262, 2, 63, ""],
+        [289, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/level_end/s3/signpost_control.s",
+      "tokens": [
+        [12, 2, 63, ""],
+        [40, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/level_end/sk/egg_capsule.s",
+      "tokens": [
+        [57, 2, 84, ""],
+        [160, 2, 60, ""],
+        [269, 2, 63, ""],
+        [304, 2, 63, ""],
+        [331, 2, 63, ""]
+      ]
+    },
+    {
+      "source": "src/objects/level_end/sk/signpost.s",
+      "tokens": [[91, 2, 77, ""]]
+    },
+    {
+      "source": "src/objects/level_end/sk/signpost_control.s",
+      "tokens": [
+        [12, 2, 63, ""],
+        [35, 2, 63, ""],
+        [103, 2, 68, ""],
+        [108, 2, 69, ""],
+        [114, 2, 68, ""],
+        [115, 2, 69, ""],
+        [123, 2, 70, ""],
+        [128, 2, 71, ""],
+        [134, 2, 70, ""],
+        [135, 2, 71, ""],
+        [157, 7, 68, ""],
+        [158, 7, 69, ""],
+        [159, 7, 70, ""],
+        [160, 7, 71, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_controller.s",
+      "tokens": [
+        [7, 2, 75, ""],
+        [9, 4, 75, ""],
+        [18, 5, 72, ""],
+        [23, 4, 53, ""],
+        [61, 4, 58, ""],
+        [66, 10, 50, ""],
+        [67, 8, 56, ""],
+        [80, 2, 68, ""],
+        [158, 5, 72, ""],
+        [165, 2, 67, ""],
+        [184, 4, 67, ""],
+        [190, 2, 75, ""],
+        [192, 4, 75, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/ddz/sk/flight_helpers.s",
+      "tokens": [
+        [25, 2, 50, ""],
+        [137, 2, 70, ""],
+        [141, 2, 71, ""],
+        [159, 2, 68, ""],
+        [163, 2, 69, ""],
+        [173, 2, 50, ""],
+        [174, 2, 56, ""],
+        [176, 2, 58, ""],
+        [195, 4, 50, ""],
+        [211, 4, 59, ""],
+        [217, 2, 50, ""],
+        [218, 2, 56, ""],
+        [221, 4, 50, ""],
+        [223, 2, 53, ""],
+        [226, 4, 53, ""],
+        [232, 4, 59, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/tails/s3/ai_scripted_sequences.s",
+      "tokens": [
+        [178, 2, 66, ""],
+        [269, 2, 66, ""],
+        [291, 2, 66, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/tails/s3/carrying.s",
+      "tokens": [
+        [8, 2, 41, ""],
+        [11, 2, 42, ""],
+        [82, 7, 41, ""],
+        [84, 7, 42, ""],
+        [144, 7, 41, ""],
+        [146, 7, 42, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/tails/sk/ai_scripted_sequences.s",
+      "tokens": [
+        [183, 2, 66, ""],
+        [274, 2, 66, ""],
+        [296, 2, 66, ""]
+      ]
+    },
+    {
+      "source": "src/objects/players/tails/sk/carrying.s",
+      "tokens": [
+        [8, 2, 41, ""],
+        [11, 2, 42, ""],
+        [90, 7, 41, ""],
+        [92, 7, 42, ""],
+        [156, 7, 41, ""],
+        [158, 7, 42, ""]
+      ]
+    },
+    {
+      "source": "src/objects/rings/s3/ring_objects.s",
+      "tokens": [[74, 5, 85, ""]]
+    },
+    {
+      "source": "src/objects/rings/sk/ring_objects.s",
+      "tokens": [[74, 5, 85, ""]]
+    },
+    {
+      "source": "src/objects/runtime/s3/sprite_spawning.s",
+      "tokens": [[34, 2, 39, ""]]
+    },
+    {
+      "source": "src/objects/runtime/s3/visibility_and_culling.s",
+      "tokens": [[66, 2, 48, ""]]
+    },
+    {
+      "source": "src/objects/runtime/sk/object_transformations.s",
+      "tokens": [
+        [2, 2, 40, ""],
+        [10, 2, 40, ""]
+      ]
+    },
+    {
+      "source": "src/objects/runtime/sk/sprite_spawning.s",
+      "tokens": [[52, 2, 39, ""]]
+    },
+    {
+      "source": "src/objects/runtime/sk/visibility_and_culling.s",
+      "tokens": [[66, 2, 48, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/s3/breakable_ice.s",
+      "tokens": [[12, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/s3/path_platform.s",
+      "tokens": [[33, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/s3/snow_pile.s",
+      "tokens": [[95, 4, 67, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/sk/breakable_ice.s",
+      "tokens": [[18, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/sk/path_platform.s",
+      "tokens": [[33, 4, 62, ""]]
+    },
+    {
+      "source": "src/objects/terrain/icz/sk/snow_pile.s",
+      "tokens": [[95, 4, 67, ""]]
+    },
+    {
+      "source": "src/objects/zones/aiz/s3/collapsing_log_bridge.s",
+      "tokens": [[121, 2, 60, ""]]
+    },
+    {
+      "source": "src/objects/zones/aiz/s3/drawbridge.s",
+      "tokens": [
+        [77, 2, 61, ""],
+        [114, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/aiz/s3/plane_intro.s",
+      "tokens": [[306, 2, 62, ""]]
+    },
+    {
+      "source": "src/objects/zones/aiz/sk/collapsing_log_bridge.s",
+      "tokens": [[121, 2, 60, ""]]
+    },
+    {
+      "source": "src/objects/zones/aiz/sk/drawbridge.s",
+      "tokens": [
+        [77, 2, 61, ""],
+        [114, 2, 64, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/cnz/s3/water_level_controls.s",
+      "tokens": [
+        [17, 2, 60, ""],
+        [19, 2, 60, ""],
+        [41, 2, 61, ""],
+        [43, 2, 61, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/gravity_tube.s",
+      "tokens": [
+        [25, 2, 43, ""],
+        [29, 2, 43, ""],
+        [146, 2, 43, ""],
+        [150, 2, 43, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/dez/sk/teleporter.s",
+      "tokens": [[40, 5, 72, ""]]
+    },
+    {
+      "source": "src/objects/zones/fbz/sk/magnetic_platform.s",
+      "tokens": [
+        [56, 2, 44, ""],
+        [84, 2, 44, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/fbz/sk/magnetic_spike_ball.s",
+      "tokens": [
+        [46, 2, 44, ""],
+        [61, 2, 44, ""],
+        [67, 2, 44, ""],
+        [86, 2, 44, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/fbz/sk/wire_cages.s",
+      "tokens": [
+        [19, 2, 43, ""],
+        [23, 2, 43, ""],
+        [128, 2, 43, ""],
+        [132, 2, 43, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/s3/breakable_bar.s",
+      "tokens": [
+        [89, 4, 47, ""],
+        [143, 4, 47, ""],
+        [156, 2, 47, ""],
+        [226, 4, 47, ""],
+        [279, 4, 47, ""],
+        [292, 2, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/s3/fans.s",
+      "tokens": [
+        [245, 5, 47, ""],
+        [273, 5, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/s3/water_objects.s",
+      "tokens": [
+        [273, 5, 47, ""],
+        [281, 5, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/sk/breakable_bar.s",
+      "tokens": [
+        [89, 4, 47, ""],
+        [143, 4, 47, ""],
+        [156, 2, 47, ""],
+        [226, 4, 47, ""],
+        [279, 4, 47, ""],
+        [292, 2, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/sk/fans.s",
+      "tokens": [
+        [245, 5, 47, ""],
+        [273, 5, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hcz/sk/water_objects.s",
+      "tokens": [
+        [273, 5, 47, ""],
+        [281, 5, 47, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/master_emerald.s",
+      "tokens": [
+        [5, 4, 74, ""],
+        [6, 8, 75, ""],
+        [7, 8, 76, ""],
+        [34, 2, 79, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/special_stage_control.s",
+      "tokens": [
+        [85, 5, 72, ""],
+        [89, 2, 50, ""],
+        [91, 2, 68, ""],
+        [141, 2, 68, ""],
+        [146, 2, 50, ""],
+        [306, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/hpz/sk/super_emerald.s",
+      "tokens": [[104, 2, 78, ""]]
+    },
+    {
+      "source": "src/objects/zones/lbz/s3/cup_elevator.s",
+      "tokens": [[437, 2, 64, ""]]
+    },
+    {
+      "source": "src/objects/zones/lbz/s3/rolling_drum.s",
+      "tokens": [
+        [11, 2, 43, ""],
+        [15, 2, 43, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/lbz/sk/cup_elevator.s",
+      "tokens": [[443, 2, 64, ""]]
+    },
+    {
+      "source": "src/objects/zones/lbz/sk/pipe_plug.s",
+      "tokens": [[82, 5, 45, ""]]
+    },
+    {
+      "source": "src/objects/zones/lbz/sk/rolling_drum.s",
+      "tokens": [
+        [11, 2, 43, ""],
+        [15, 2, 43, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/mhz/sk/pollen.s",
+      "tokens": [[106, 2, 44, ""]]
+    },
+    {
+      "source": "src/objects/zones/soz/sk/push_switch.s",
+      "tokens": [
+        [176, 2, 46, ""],
+        [181, 5, 46, ""]
+      ]
+    },
+    {
+      "source": "src/objects/zones/soz/sk/pushable_rock.s",
+      "tokens": [[21, 4, 46, ""]]
+    },
+    {
+      "source": "src/objects/zones/ssz/sk/teleporter_beam.s",
+      "tokens": [
+        [152, 4, 62, ""],
+        [186, 2, 62, ""],
+        [214, 5, 72, ""],
+        [277, 5, 72, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "tokens": [[227, 5, 44, ""]]
+    },
+    {
+      "source": "src/rendering/s3/art_scaling.s",
+      "tokens": [
+        [3, 4, 40, ""],
+        [62, 2, 40, ""],
+        [75, 4, 40, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/level_video_transfers.s",
+      "tokens": [[67, 2, 22, ""]]
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "tokens": [
+        [2, 2, 37, ""],
+        [4, 2, 37, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/tile_grid_drawing.s",
+      "tokens": [[336, 8, 22, ""]]
+    },
+    {
+      "source": "src/rendering/sk/art_scaling.s",
+      "tokens": [
+        [3, 4, 40, ""],
+        [62, 2, 40, ""],
+        [75, 4, 40, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/sk/level_video_transfers.s",
+      "tokens": [[72, 2, 22, ""]]
+    },
+    {
+      "source": "src/rendering/sk/tile_grid_drawing.s",
+      "tokens": [[336, 8, 22, ""]]
+    },
+    {
+      "source": "src/system/s3/device_services.s",
+      "tokens": [
+        [57, 2, 35, ""],
+        [95, 2, 35, ""]
+      ]
+    },
+    {
+      "source": "src/system/s3/video_interrupts.s",
+      "tokens": [
+        [245, 5, 54, ""],
+        [283, 2, 31, ""]
+      ]
+    },
+    {
+      "source": "src/system/sk/device_services.s",
+      "tokens": [
+        [55, 2, 35, ""],
+        [92, 2, 35, ""]
+      ]
+    },
+    {
+      "source": "src/system/sk/video_interrupts.s",
+      "tokens": [
+        [254, 5, 54, ""],
+        [295, 2, 31, ""]
+      ]
+    }
+  ]
+}

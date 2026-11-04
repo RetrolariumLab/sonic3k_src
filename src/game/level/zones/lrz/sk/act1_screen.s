@@ -252,7 +252,7 @@ SKLRZ1Events_WriteForwardParallaxBands:
 PositionLrz1LavaBackground:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$788,d0
-                add.w   (_unkEE9C).w,d0
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$1500,d0
@@ -382,7 +382,7 @@ SKLRZ1Events_InitLavaSurfaceActor:
                 move.w  #$1E80,x_pos(a0)
                 bset    #7,status(a0)
                 move.w  #-$4000,$34(a0)
-                clr.w   (_unkEE9C).w
+                clr.w   (SceneAuxiliaryYOrVerticalMotion).w
 
 LRZ1LavaSurface_DeleteWhenRegionInactive:
                 tst.w   (Events_bg+$00).w
@@ -424,7 +424,7 @@ SKLRZ1Events_ApplySurfaceAndCheckDamage:
                 move.l  d1,$32(a0)
                 move.l  d0,$2E(a0)
                 swap    d0
-                move.w  d0,(_unkEE9C).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 neg.w   d0
                 addi.w  #$988,d0
                 move.w  d0,y_pos(a0)

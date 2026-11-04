@@ -174,13 +174,13 @@ DEZMini_ReversePastArenaXBounds:
                 tst.w   x_vel(a0)
                 beq.s   DEZMini_ArenaReversalReturn
                 bmi.s   DEZMini_TestLeftOvershoot
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 bhi.s   DEZMini_ReverseXAtArenaBound
                 rts
 ; ---------------------------------------------------------------------------
 
 DEZMini_TestLeftOvershoot:
-                cmp.w   (_unkFAB4).w,d0
+                cmp.w   (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 bhs.s   DEZMini_ArenaReversalReturn
 
 DEZMini_ReverseXAtArenaBound:
@@ -205,13 +205,13 @@ DEZMini_SetPursuitDirection:
                 move.w  d1,x_vel(a0)
                 beq.s   DEZMini_PursuitBoundReturn
                 bmi.s   DEZMini_CheckLeftPursuitLimit
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 bhs.s   DEZMini_StopPursuitX
                 rts
 ; ---------------------------------------------------------------------------
 
 DEZMini_CheckLeftPursuitLimit:
-                cmp.w   (_unkFAB4).w,d0
+                cmp.w   (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 bhi.s   DEZMini_PursuitBoundReturn
 
 DEZMini_StopPursuitX:
@@ -227,13 +227,13 @@ DEZMini_PursuitBoundReturn:
                 tst.w   x_vel(a0)
                 beq.s   DEZMini_LegacyCheckYDirection
                 bmi.s   DEZMini_LegacyCheckLeftLimit
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 bhs.s   DEZMini_LegacyStopX
                 bra.w   DEZMini_LegacyCheckYDirection
 ; ---------------------------------------------------------------------------
 
 DEZMini_LegacyCheckLeftLimit:
-                cmp.w   (_unkFAB4).w,d0
+                cmp.w   (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 bhi.s   DEZMini_LegacyCheckYDirection
 
 DEZMini_LegacyStopX:
@@ -244,13 +244,13 @@ DEZMini_LegacyCheckYDirection:
                 tst.w   y_vel(a0)
                 beq.s   DEZMini_LegacyBoundsReturn
                 bmi.s   DEZMini_LegacyCheckTopLimit
-                cmp.w   (_unkFAB2).w,d0
+                cmp.w   (SceneMaximumYOrEmeraldSelectionTail).w,d0
                 bhs.s   DEZMini_LegacyStopY
                 bra.w   DEZMini_LegacyBoundsReturn
 ; ---------------------------------------------------------------------------
 
 DEZMini_LegacyCheckTopLimit:
-                cmp.w   (_unkFAB0).w,d0
+                cmp.w   (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 bhi.s   DEZMini_LegacyBoundsReturn
 
 DEZMini_LegacyStopY:

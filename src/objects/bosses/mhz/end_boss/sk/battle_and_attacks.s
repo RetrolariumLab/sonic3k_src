@@ -14,7 +14,7 @@ Obj_MHZEndBoss:
                 lea     ObjDat_MHZEndBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 clr.b   routine(a0)
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
                 lea     (ArtKosM_MHZEndBoss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MHZEndBoss),d2
                 jsr     (Queue_Kos_Module).l
@@ -57,7 +57,7 @@ MHZBoss_ResetHealthUntilWeatherSignal:
                 move.b  #$F,collision_flags(a0)
                 move.b  #9,collision_property(a0)
                 move.b  collision_flags(a0),$25(a0)
-                clr.b   (_unkFA88).w
+                clr.b   (EndingOutcomeOrBossSceneSignals).w
 
 MHZBoss_WaitWeatherAndArmRise:
                 btst    #2,$38(a0)
@@ -206,8 +206,8 @@ MHZBoss_FallThenSpawnCapsule:
                 cmp.w   y_pos(a0),d0
                 bhs.s   MHZEndBoss_DrawBreakupShipAfterDepthGate
                 move.l  #MHZBoss_AdvanceCameraToExitLock,(a0)
-                bset    #0,(_unkFA88).w
-                st      (_unkFAA8).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 bset    #5,$38(a0)
                 jsr     (PLCLoad_AnimalsAndExplosion).l
@@ -242,10 +242,10 @@ MHZEndBoss_CommitPostDefeatCameraX:
 ; ---------------------------------------------------------------------------
 
 MHZBoss_WaitCapsuleAndResetShip:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   MHZBoss_SharedReturn
                 move.l  #MHZEndBoss_WaitBeforeDepartureFlight,(a0)
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$40,d0
                 move.w  d0,x_pos(a0)
@@ -341,7 +341,7 @@ MHZEndBoss_StopPlayerAtDepartureWalkGate:
 MHZBoss_WaitBackgroundThenJump:
                 move.w  #(button_up_mask<<8)|button_up_mask,(Ctrl_1_logical).w
                 move.w  #(button_up_mask<<8)|button_up_mask,(Ctrl_2).w
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.w   MHZBoss_SharedReturn
                 move.l  #MHZBoss_WaitJumpApexAndGrab,(a0)
                 move.w  #(button_C_mask<<8)|button_C_mask,(Ctrl_1_logical).w
@@ -507,7 +507,7 @@ MHZBoss_TryBossMusicTransition:
 MHZBoss_TryWeatherExplosion:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                clr.b   (_unkF7C1).w
+                clr.b   (ZoneMagnetOrLeafSelectionFlag).w
                 rts
 ; ---------------------------------------------------------------------------
 

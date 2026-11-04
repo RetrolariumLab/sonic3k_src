@@ -103,7 +103,7 @@ BSResults_RebuildPerfectRevealScene:
                 jsr     (Play_Music).l
                 jsr     (Pal_FadeToBlack).l
                 bsr.w   BlueSphere_ResetVideoAndSceneRAM
-                clearRAM _unkFA80,(DMA_queue-_unkFA80)
+                clearRAM BossSceneResetBaseAndRetainedGate,(DMA_queue-BossSceneResetBaseAndRetainedGate)
                 lea     (Pal_SonicTails).l,a1
                 lea     (Target_palette).w,a2
                 moveq   #bytesToLcnt($20),d6

@@ -260,7 +260,7 @@ SKWater_HCZ1HeightByX:
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_HCZ2:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   SKWater_SelectHCZ2HeightTable
                 rts
 ; ---------------------------------------------------------------------------
@@ -303,7 +303,7 @@ DynamicWaterHeight_LBZ2:
 ; ---------------------------------------------------------------------------
 
 SKWater_LBZ2KnuxPickHeightSource:
-                tst.b   (_unkF7C2).w
+                tst.b   (KnucklesLbzPipePlugWaterReleaseFlag).w
                 bne.s   SKWater_LBZ2TrySetMeanHeight
                 lea     (SKWater_LBZ2KnuxHeightByX).l,a1
                 bra.s   SKWater_ReadCameraXForHeight

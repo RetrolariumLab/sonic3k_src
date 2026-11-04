@@ -181,9 +181,9 @@ HCZBossSK_DefeatMoveWaitAndFlicker:
 HCZBossSK_OpenCameraAndPrepareFinish:
                 move.l  #HCZBossSK_WaitFinishAndRestorePlayers,(a0)
                 bclr    #7,render_flags(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
-                move.w  (_unkFAB4).w,d0
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 addi.w  #$180,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 lea     (Child6_IncLevX).l,a2
@@ -213,7 +213,7 @@ HCZBossSK_KnucklesCapsuleSpawnReturn:
 
 HCZBossSK_WaitFinishAndRestorePlayers:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   HCZBossSK_SharedReturn
                 clr.w   (Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w

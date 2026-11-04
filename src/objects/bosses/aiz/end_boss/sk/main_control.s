@@ -12,13 +12,13 @@ Obj_AIZEndBoss:
 
 ; Copy the trigger X, arena X and exit Y selected for the current character
 AIZBossSK_CopyCharacterArenaBase:
-                lea     (_unkFA82).w,a2
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a2
                 move.w  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+                     ; Load relative positional data depending on the character
 
 Obj_AIZEndBossWait:
-                move.w  (_unkFA82).w,d0
+                move.w  (SceneTimerOrSharedMotionRecordBase).w,d0
                 cmp.w   (Camera_X_pos).w,d0
                 bls.s   AIZBossSK_LockCameraAndQueueBossArt  ; Only branch if Sonic has reached the boss area
                 rts
@@ -33,8 +33,8 @@ AIZBossSK_LockCameraAndQueueBossArt:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.b  #1,(Boss_flag).w                ; Lock the screen
-                clr.b   (_unkFAA2).w
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneEventLatchOrBossReleaseSignal).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 moveq   #PLCID_6B,d0
                 jsr     (Load_PLC).l                    ; Load Robotnik's ship and explosions
                 lea     (ArtKosM_AIZEndBoss).l,a1
@@ -186,7 +186,7 @@ AIZBossSK_BeginStationaryWait:
 ; ---------------------------------------------------------------------------
 
 AIZBossSK_SignalBridgeAndExtendWait:
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 move.w  #$8F,$2E(a0)
                 move.l  #AIZBossSK_BeginStationaryWait,$34(a0)
                 rts
@@ -227,7 +227,7 @@ AIZBossSK_ChooseHiddenTransitTarget:
 AIZBossSK_CheckTransitCameraMin:
                 move.w  (Camera_min_X_pos).w,d0
                 addq.w  #2,d0
-                cmp.w   (_unkFA84).w,d0
+                cmp.w   (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 bhi.s   AIZBossSK_AdvanceTransitCameraMax
                 move.w  d0,(Camera_min_X_pos).w
 
@@ -247,7 +247,7 @@ AIZBossSK_StopTransitAndReveal:
 
 AIZBossSK_BeginDefeatDebris:
                 move.l  #AIZBossSK_InstallCapsuleWatcher,$34(a0)
-                st      (_unkFAA3).w
+                st      (ZoneButtonRequestOrBridgeReleaseSignal).w
                 move.l  #Obj_Wait,(a0)
                 bset    #4,$38(a0)
                 lea     AIZBossSK_DefeatDebrisChildren(pc),a2
@@ -258,7 +258,7 @@ AIZBossSK_InstallCapsuleWatcher:
                 move.l  #AIZBossSK_WaitCapsuleAndOpenExit,(a0)
 
 AIZBossSK_SignalAndSpawnCapsule:
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 lea     (PLC_EggCapsule).l,a1
                 jsr     (Load_PLC_Raw).l
@@ -269,7 +269,7 @@ AIZBossSK_SignalAndSpawnCapsule:
 ; ---------------------------------------------------------------------------
 
 AIZBossSK_WaitCapsuleAndOpenExit:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   AIZBossSK_SharedReturn
                 move.l  #AIZBossSK_WalkPlayerToExitGate,(a0)
                 jsr     (Restore_PlayerControl).l
@@ -283,7 +283,7 @@ AIZBossSK_WaitCapsuleAndOpenExit:
                 move.l  #SKInput_LockP2IfActive,(a1)
 
 AIZBossSK_ExtendExitCameraMaxX:
-                move.w  (_unkFA84).w,d0
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 addi.w  #$158,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 lea     (Child6_IncLevX).l,a2
@@ -293,7 +293,7 @@ AIZBossSK_ExtendExitCameraMaxX:
 AIZBossSK_WalkPlayerToExitGate:
                 move.b  #5,(Flying_picking_Sonic_timer).w
                 lea     (Player_1).w,a1
-                move.w  (_unkFA84).w,d0
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 addi.w  #$1F8,d0
                 cmp.w   x_pos(a1),d0
                 bls.s   AIZBossSK_StopPlayerAndRouteExit
@@ -340,7 +340,7 @@ AIZBossSK_RefreshExitPickupDelay:
                 move.b  #5,(Flying_picking_Sonic_timer).w
 
 AIZBossSK_CheckExitHeightAndStartHCZ:
-                move.w  (_unkFA86).w,d0
+                move.w  (SceneCreditStateOrBossMotionPlanX).w,d0
                 addi.w  #$1E6,d0
                 cmp.w   (Player_1+y_pos).w,d0
                 bhi.w   AIZBossSK_SharedReturn

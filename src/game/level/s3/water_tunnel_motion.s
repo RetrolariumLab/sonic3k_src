@@ -56,7 +56,7 @@ S3Tunnel_TryTunnelRect:
                 bhs.s   S3Tunnel_NextTunnelRectOrExit
                 cmpi.b  #4,routine(a1)
                 bhs.w   S3Tunnel_ClearTunnelFlag
-                btst    d5,(_unkF7C7).w
+                btst    d5,(HczPlayerWaterTunnelBlockBits).w
                 bne.s   S3Tunnel_NudgeYReturn
                 tst.b   object_control(a1)
                 bne.s   S3Tunnel_ClearTunnelFlag

@@ -137,7 +137,7 @@ HPZSuper_WaitForBeamAndApplyGray:
 ; ---------------------------------------------------------------------------
 
 HPZSuper_CheckGlobalGrayColorOverride:
-                move.b  (_unkFAC0).w,d0
+                move.b  (HpzNewlyCompletedEmeraldMarker).w,d0
                 bpl.s   HPZSuper_SelectColoredOrParityFrame
                 bclr    #7,d0
                 cmp.b   subtype(a0),d0

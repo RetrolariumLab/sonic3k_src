@@ -20,9 +20,9 @@ S3SphereTest_BeginFourRings:
                 tst.w   (Sphere_test_address).w
                 bne.s   S3SphereTest_SetFourRingPointHandler
                 move.w  a0,(Sphere_test_address).w
-                move.w  #0,(_unkE412).w
-                move.w  #0,(_unkE414).w
-                move.w  #$200,(_unkE416).w
+                move.w  #0,(S3SphereTestResetOnlyReservedWord).w
+                move.w  #0,(S3SphereTestVerticalProjectionBias).w
+                move.w  #$200,(S3SphereTestDepthProjectionBias).w
                 move.w  #0,(SStage_scalar_index_0).w
                 move.w  #0,(SStage_scalar_index_1).w
                 move.w  #0,(SStage_scalar_index_2).w
@@ -166,9 +166,9 @@ S3SphereTest_BeginThreeOrthogonalRings:
                 tst.w   (Sphere_test_address).w
                 bne.s   S3SphereTest_SetThreeRingPointHandler
                 move.w  a0,(Sphere_test_address).w
-                move.w  #0,(_unkE412).w
-                move.w  #0,(_unkE414).w
-                move.w  #$200,(_unkE416).w
+                move.w  #0,(S3SphereTestResetOnlyReservedWord).w
+                move.w  #0,(S3SphereTestVerticalProjectionBias).w
+                move.w  #$200,(S3SphereTestDepthProjectionBias).w
                 move.w  #0,(SStage_scalar_index_0).w
                 move.w  #0,(SStage_scalar_index_1).w
                 move.w  #0,(SStage_scalar_index_2).w
@@ -275,16 +275,16 @@ Obj_SphereTest_Main:
                 move.b  (Ctrl_2).w,d1
                 btst    #button_A,d1
                 beq.s   S3SphereTest_ReduceDepthOnHeldC
-                cmpi.w  #$800,(_unkE416).w
+                cmpi.w  #$800,(S3SphereTestDepthProjectionBias).w
                 bcc.s   S3SphereTest_ReduceDepthOnHeldC
-                addq.w  #8,(_unkE416).w
+                addq.w  #8,(S3SphereTestDepthProjectionBias).w
 
 S3SphereTest_ReduceDepthOnHeldC:
                 btst    #button_C,d1
                 beq.s   S3SphereTest_SelectAngleControls
-                cmpi.w  #$81,(_unkE416).w
+                cmpi.w  #$81,(S3SphereTestDepthProjectionBias).w
                 bcs.s   S3SphereTest_SelectAngleControls
-                subq.w  #8,(_unkE416).w
+                subq.w  #8,(S3SphereTestDepthProjectionBias).w
 
 ; Holding Up, Right or B freezes the corresponding automatic angle
 S3SphereTest_SelectAngleControls:
@@ -335,12 +335,12 @@ S3SphereTest_ToggleModeOnStartPress:
 S3SphereTest_IncreaseYUnlessDown:
                 btst    #button_down,d1
                 bne.s   S3SphereTest_DecreaseYUnlessLeft
-                addq.w  #8,(_unkE414).w
+                addq.w  #8,(S3SphereTestVerticalProjectionBias).w
 
 S3SphereTest_DecreaseYUnlessLeft:
                 btst    #button_left,d1
                 bne.s   S3SphereTest_BuildScalarsAndProject
-                subq.w  #8,(_unkE414).w
+                subq.w  #8,(S3SphereTestVerticalProjectionBias).w
 
 S3SphereTest_BuildScalarsAndProject:
                 move.w  (SStage_scalar_index_2).w,d0
@@ -387,11 +387,11 @@ S3SphereTest_RotateAndProjectPoint:
                 move.w  $38(a0),d0
                 bsr.w   SphereTestS3RotateYZUsingScalarPair0
                 bsr.w   SphereTestS3RotateXZUsingScalarPair1
-                add.w   (_unkE416).w,d0
+                add.w   (S3SphereTestDepthProjectionBias).w,d0
                 cmpi.w  #$80,d0
                 blt.s   S3SphereTest_ProjectionReturn
                 bsr.w   SphereTestS3RotateXYUsingScalarPair2
-                add.w   (_unkE414).w,d2
+                add.w   (S3SphereTestVerticalProjectionBias).w,d2
                 bsr.w   SphereTestS3PerspectiveDivideXYByDepth
                 add.w   $30(a0),d1
                 move.w  d1,x_pos(a0)

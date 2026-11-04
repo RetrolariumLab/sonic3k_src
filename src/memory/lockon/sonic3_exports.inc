@@ -4,21 +4,22 @@
 
                 padding off
                 phase   $200000
-LockOnROM_Start:        ds.b    $11
-S3_Level_Solid_Data     EQU     $260000
-byte_200011:            ds.b    $AC
-byte_2000BD:            ds.b    $43
-LockonHeader:           ds.b    $14
-SSMagic_TestLoc_200114: ds.b    6
-SSMagic_TestLoc_20011A: ds.b    2
-LockonDate:             ds.b    $34
-SSMagic_TestLoc_200150: ds.b    $19
+LockOnROM_Start:                ds.b    $11
+S3_Level_Solid_Data             EQU     $260000
+Lockon_VectorReservedFirst:     ds.b    $AC
+Lockon_VectorReservedLast:      ds.b    $43
+LockonHeader:                   ds.b    $14
+Lockon_CopyrightEGProbe:        ds.b    6
+Lockon_CopyrightYearDigits:     ds.b    2
+LockonDate:                     ds.b    $34
+Lockon_OverseasTitleParityByte: ds.b    $19
                 ds.b    $17
-LockonSerialNumber:     ds.b    $24
-SSMagic_TestLoc_2001A4: ds.b    $51
+LockonSerialNumber: ds.b    $24
+; Blue Sphere packs bits 3 and 4 of this word into the generated header
+Lockon_ROMEndUpperWord: ds.b    $51
                 ds.b    $8C
-byte_200281:                        ds.b    $AC
-byte_20032D:                        ds.b    $94EB
+Lockon_PostHeaderReservedFirst:     ds.b    $AC
+Lockon_PreCompPaletteReserved:      ds.b    $94EB
 Pal_Competition1:                   ds.b    $A8
 Map_CompetitionObject:              ds.b    $870
 MapUnc_CompetitionNumbers:          ds.b    $42E
@@ -389,8 +390,8 @@ ArtUnc_Sonic2P:                 ds.b    $30C0
 ArtUnc_Tails2P:                 ds.b    $2DA0
 ArtUnc_Tails2P_Tail:            ds.b    $580
 ArtUnc_Knuckles2P:              ds.b    $150E
-byte_33F06E:                    ds.b    $6DE
-byte_33F74C:                    ds.b    $546C
+Lockon_Knux2PArtReserved150E:   ds.b    $6DE
+Lockon_Knux2PArtReserved1BEC:   ds.b    $546C
 Map_Tails_Tail:                 ds.b    $1BC
 PLC_Tails_Tail:                 ds.b    $10C
 ICZSnowboard_Slope1:            ds.b    $C8

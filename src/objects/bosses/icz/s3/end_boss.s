@@ -159,7 +159,7 @@ ICZBossS3_ReleasePartsAndSpawnDebris:
 
 ICZBossS3_SignalCapsuleAndReleaseCamera:
                 move.l  #ICZBossS3_RestorePlayersAndExitBounds,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 move.w  #$4390+$130,(Camera_stored_max_X_pos).w
@@ -173,9 +173,9 @@ ICZBossS3_DefeatCameraSpawnReturn:
 
 ICZBossS3_RestorePlayersAndExitBounds:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   ICZBossS3_SharedReturn
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     Restore_PlayerControl(pc)
                 lea     (Player_2).w,a1
                 jsr     Restore_PlayerControl2(pc)
@@ -663,7 +663,7 @@ ICZBossS3_HitUpdateReturn:
 ICZBossS3_BeginDefeatAndSignalSnow:
                 move.l  #Wait_Draw,(a0)
                 move.l  #ICZBossS3_ReleasePartsAndSpawnDebris,$34(a0)
-                movea.w (_unkFAAE).w,a1
+                movea.w (SceneActorOrWorldOffset).w,a1
                 cmpi.l  #S3ICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   ICZBossS3_StopTimerAndAwardScore
                 bset    #5,$38(a1)

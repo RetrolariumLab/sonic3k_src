@@ -161,7 +161,7 @@ FBZBossS3_SignalReleaseAndBreakUp:
 FBZBossS3_BeginPostBreakupWait:
                 move.l  #Obj_Wait,(a0)
                 bclr    #7,render_flags(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 move.w  #$7F,$2E(a0)
                 move.l  #FBZBossS3_BeginCapsuleAndCameraRelease,$34(a0)
                 jmp     (Restore_LevelMusic).l
@@ -177,9 +177,9 @@ FBZBossS3_BeginCapsuleAndCameraRelease:
 
 FBZBossS3_LockExitCameraAndRestore:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   FBZBossS3_SharedGateReturn
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     Restore_PlayerControl(pc)
                 lea     (Player_2).w,a1
                 jsr     Restore_PlayerControl2(pc)

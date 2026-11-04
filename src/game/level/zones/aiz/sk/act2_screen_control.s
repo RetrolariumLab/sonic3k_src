@@ -52,13 +52,13 @@ AIZ2SE_ShipRefresh:
                 bpl.w   SKAIZ2Screen_DrawShipForegroundStrip
                 move.w  #$4020,d0
                 move.w  d0,(HScroll_table+$1F6).w
-                move.w  d0,(_unkEE98).w
-                clr.w   (_unkEE98+2).w                  ; Set up secondary BG camera X
+                move.w  d0,(SceneAuxiliaryXOrCompetitionTime).w
+                clr.w   (SceneAuxiliaryXOrCompetitionTime+2).w  ; Set up secondary BG camera X
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$8F0,d0
                 and.w   (Camera_Y_pos_mask).w,d0
-                move.w  d0,(_unkEE9C).w
-                move.w  d0,(_unkEEA2).w                 ; Set up secondary BG camera Y
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
+                move.w  d0,(SceneRowAnchorOrCompetitionWinCounts).w  ; Set up secondary BG camera Y
                 jsr     (AllocateObject).l
                 bne.s   SKAIZ2Screen_BeginShipForeground
                 move.l  #Obj_AIZBattleship,(a1)         ; Start battleship sequence
@@ -76,9 +76,9 @@ AIZ2SE_ShipDraw:
                 bne.s   SKAIZ2Screen_BeginShipExitRefresh  ; Branch when battleship has gone off-screen
                 lea     AIZ2SE_BGShipDrawArray2(pc),a4
                 lea     (HScroll_table+$1F4).w,a6
-                move.w  (_unkEE98).w,(a6)
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,(a6)
                 moveq   #2,d5
-                move.w  (_unkEEA2).w,d6
+                move.w  (SceneRowAnchorOrCompetitionWinCounts).w,d6
                 jsr     Draw_BGNoVert(pc)
 
 SKAIZ2Screen_DrawShipForegroundStrip:
@@ -332,7 +332,7 @@ SKAIZ2Screen_DrawShipBg:
                 jsr     (AIZ2_ApplyDeform).l
                 tst.w   (Events_bg+$04).w
                 beq.s   SKAIZ2Screen_ApplyScreenShake
-                move.w  (_unkEE9C).w,(V_scroll_value).w  ; Use effective camera position rather than actual camera position
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,(V_scroll_value).w  ; Use effective camera position rather than actual camera position
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp                           ; Skip last part of ScreenEvents
 

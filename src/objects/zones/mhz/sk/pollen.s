@@ -128,7 +128,7 @@ SKMHZPollen_BurstVelocityBias:
 ; =============== S U B R O U T I N E =======================================
 
 SelectMhzPollenOrLeafGraphics:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 bne.s   SKMHZPollen_ChooseLeafVariant
                 move.l  #Map_MHZPollen,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MHZMisc+$21,3,1),art_tile(a1)

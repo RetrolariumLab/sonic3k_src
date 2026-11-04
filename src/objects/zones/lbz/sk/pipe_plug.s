@@ -96,7 +96,7 @@ SKLBZPipePlug_SelectSmashEffect:
                 beq.s   SKLBZPipePlug_BeginPlugFracture
                 cmpi.b  #$1F,d1
                 bne.s   SKLBZPipePlug_TrySpawnTunnel
-                move.b  #1,(_unkF7C2).w
+                move.b  #1,(KnucklesLbzPipePlugWaterReleaseFlag).w
                 move.w  #$660,(Target_water_level).w
                 tst.b   (Super_Sonic_Knux_flag).w
                 beq.s   SKLBZPipePlug_TrySpawnExhaust

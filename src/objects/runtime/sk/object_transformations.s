@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 Perform_Art_Scaling:
-                clr.w   (_unkF740).w
+                clr.w   (ScaledArtAllocatedTileCount).w
                 move.l  a0,-(sp)
                 jsr     Init_ArtScaling
                 movea.l (sp)+,a0
@@ -13,7 +13,7 @@ Perform_Art_Scaling:
                 move.w  art_tile(a0),d0
                 jsr     (TryBuildObjectScaledArt).l
                 movea.l (sp)+,a0
-                move.w  (_unkF740).w,d3
+                move.w  (ScaledArtAllocatedTileCount).w,d3
                 lsl.w   #4,d3
                 move.l  #Kos_decomp_buffer,d1
                 move.w  $3A(a0),d2

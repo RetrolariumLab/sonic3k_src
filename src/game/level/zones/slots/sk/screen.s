@@ -27,15 +27,15 @@ SlotsScreen_InitPrivateForegroundPos:
                 move.w  #$400,d1
                 sub.w   (Events_bg+$00).w,d1
                 add.w   (Camera_X_pos_copy).w,d1
-                move.w  d1,(_unkEE98).w
+                move.w  d1,(SceneAuxiliaryXOrCompetitionTime).w
                 andi.w  #$FFF0,d1
-                move.w  d1,(_unkEEA0).w
+                move.w  d1,(SceneColumnOrCompBlinkVRAM).w
                 move.w  #$400,d0
                 sub.w   (Events_bg+$02).w,d0
                 add.w   (Camera_Y_pos_copy).w,d0
-                move.w  d0,(_unkEE9C).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 and.w   (Camera_Y_pos_mask).w,d0
-                move.w  d0,(_unkEEA2).w
+                move.w  d0,(SceneRowAnchorOrCompetitionWinCounts).w
                 jmp     (Refresh_PlaneDirect).l
 ; ---------------------------------------------------------------------------
 
@@ -44,21 +44,21 @@ SlotsScreen_ApproachFGCenterAndDrawEdges:
                 move.w  #$400,d0
                 sub.w   (Events_bg+$00).w,d0
                 add.w   (Camera_X_pos_copy).w,d0
-                lea     (_unkEE98).w,a1
+                lea     (SceneAuxiliaryXOrCompetitionTime).w,a1
                 bsr.s   ApproachSlotsPlaneCoordinateByLimit
                 move.w  #$400,d0
                 sub.w   (Events_bg+$02).w,d0
                 add.w   (Camera_Y_pos_copy).w,d0
-                lea     (_unkEE9C).w,a1
+                lea     (SceneAuxiliaryYOrVerticalMotion).w,a1
                 bsr.s   ApproachSlotsPlaneCoordinateByLimit
-                lea     (_unkEE98).w,a6
-                lea     (_unkEEA0).w,a5
-                move.w  (_unkEE9C).w,d1
+                lea     (SceneAuxiliaryXOrCompetitionTime).w,a6
+                lea     (SceneColumnOrCompBlinkVRAM).w,a5
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d1
                 moveq   #$F,d6
                 jsr     (Draw_TileColumn).l
-                lea     (_unkEE9C).w,a6
-                lea     (_unkEEA2).w,a5
-                move.w  (_unkEE98).w,d1
+                lea     (SceneAuxiliaryYOrVerticalMotion).w,a6
+                lea     (SceneRowAnchorOrCompetitionWinCounts).w,a5
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d1
                 moveq   #$15,d6
                 jmp     (Draw_TileRow).l
 
@@ -237,11 +237,11 @@ SlotsScreen_Compose224ScrollRows:
                 lea     Slots_BGDeformArray(pc),a4
                 lea     (HScroll_table).w,a5
                 lea     (H_scroll_buffer).w,a1
-                move.w  (_unkEE98).w,d3
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d3
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 move.w  #$E0-1,d1
                 jsr     (ApplyDeformation2).l
-                move.w  (_unkEE9C).w,(V_scroll_value).w
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
                 addq.w  #4,sp
                 rts

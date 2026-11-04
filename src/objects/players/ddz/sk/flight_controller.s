@@ -9,9 +9,9 @@ DDZ_FlightDispatchAndLatchDebug:
                 move.b  routine(a0),d0
                 move.w  DDZFlightController_EntryStateOffsets(pc,d0.w),d1
                 jsr     DDZFlightController_EntryStateOffsets(pc,d1.w)
-                move.w  (_unkFABC).w,d0
+                move.w  (DdzDebugSnapshotHighOrHpzSeedByte).w,d0
                 move.w  (Debug_placement_mode).w,d1
-                move.w  d1,(_unkFABC).w
+                move.w  d1,(DdzDebugSnapshotHighOrHpzSeedByte).w
                 eor.w   d1,d0
                 beq.s   DDZ_FlightCameraOrVirtualScroll
                 bsr.w   HandleDDZFlightDebugModeTransition
@@ -21,12 +21,12 @@ DDZ_FlightCameraOrVirtualScroll:
                 bne.s   DDZ_FlightUpdateReturn
                 bsr.w   DDZFlight_AdvanceCameraAndCarry
                 bsr.w   DDZFlight_SyncPlayerAndTrackCamera
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   DDZ_FlightUpdateReturn
                 move.l  #DDZ_FlightUpdateVirtualBossStage,(a0)
                 bset    #3,$38(a0)
                 move.l  (Camera_X_pos).w,d0
-                move.l  d0,(_unkFA86).w
+                move.l  d0,(SceneCreditStateOrBossMotionPlanX).w
                 swap    d0
                 move.w  d0,(Camera_stored_min_X_pos).w
                 move.w  d0,(Camera_min_X_pos).w
@@ -76,13 +76,13 @@ DDZ_FlightDebugUnlockCameraX:
 
 DDZ_FlightInitEntryAndPlayer:
                 move.b  #2,routine(a0)
-                move.w  a0,(_unkFA8E).w
+                move.w  a0,(DdzFlightControllerOrLowerMotionPlanX).w
                 move.w  #$17,$2E(a0)
                 move.w  #$400,x_vel(a0)
                 st      (Scroll_lock).w
                 move.b  #1,(Boss_flag).w
-                move.l  #$10000,(_unkFA82).w
-                move.l  #$800,(_unkFA8A).w
+                move.l  #$10000,(SceneTimerOrSharedMotionRecordBase).w
+                move.l  #$800,(DDZScrollAccelOrSceneMotion).w
                 lea     (Player_1).w,a1
                 bset    #7,art_tile(a1)
                 move.b  #$81,object_control(a1)
@@ -95,7 +95,7 @@ DDZ_FlightInitEntryAndPlayer:
                 addi.w  #$20,d0
                 move.w  d0,y_pos(a0)
                 lea     DDZ_FlightInitialWindowBounds(pc),a1
-                lea     (_unkFAB0).w,a2
+                lea     (SceneMinimumYOrEmeraldSelectionBytes).w,a2
                 move.l  (a1)+,(a2)+
                 move.l  (a1)+,(a2)+
                 move.w  #0,(Camera_min_Y_pos).w
@@ -187,7 +187,7 @@ DDZ_FlightUpdateVirtualBossStage:
                 bsr.w   DDZFlight_IntegrateWithinView
                 bsr.w   DDZBoss_AdvanceVirtualScroll
                 bsr.w   DDZFlight_SyncPlayerAndTrackCamera
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.s   DDZ_FlightVirtualStageReturn
                 move.l  #DDZ_FlightRebaseFinalChaseCamera,(a0)
                 move.w  #$140,$3C(a0)
@@ -197,7 +197,7 @@ DDZ_FlightVirtualStageReturn:
 ; ---------------------------------------------------------------------------
 
 DDZ_FlightRebaseFinalChaseCamera:
-                clr.w   (_unkFAAE).w
+                clr.w   (SceneActorOrWorldOffset).w
                 move.w  (Camera_X_pos).w,d0
                 cmpi.w  #$7400,d0
                 blo.s   DDZ_FlightUpdateFinalChase
@@ -217,16 +217,16 @@ DDZ_FlightClearRingsAndSetWrapDelta:
                 andi.w  #$FF80,d0
                 move.w  d0,(Camera_X_pos_coarse_back).w
                 move.w  #$2000,d1
-                move.w  d1,(_unkFAAE).w
+                move.w  d1,(SceneActorOrWorldOffset).w
                 sub.w   d1,x_pos(a0)
 
 DDZ_FlightUpdateFinalChase:
                 bsr.w   DDZFlight_TryFailAfterSuperExpires
                 bsr.w   DDZFlight_ComputeInputAndHitVel
                 bsr.w   DDZFlight_IntegrateWithinView
-                move.w  (_unkFABC).w,d0
+                move.w  (DdzDebugSnapshotHighOrHpzSeedByte).w,d0
                 move.w  (Debug_placement_mode).w,d1
-                move.w  d1,(_unkFABC).w
+                move.w  d1,(DdzDebugSnapshotHighOrHpzSeedByte).w
                 eor.w   d1,d0
                 beq.s   DDZ_FlightAdvanceCameraOutsideDebug
                 bsr.w   HandleDDZFlightDebugModeTransition

@@ -31,7 +31,7 @@ SKLRZ3Scene_SceneWaitReturn:
 ; ---------------------------------------------------------------------------
 
 SKLRZ3Scene_WaitForFlashAndInitCarrier:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.s   SKLRZ3Scene_SceneWaitReturn
                 move.l  #SKLRZ3Scene_DispatchCarrierAndDraw,(a0)
                 clr.b   (Ctrl_1_locked).w
@@ -73,7 +73,7 @@ SKLRZ3Scene_MoveCarrierAndTickWait:
 
 SKLRZ3Scene_StopCarrierAndSignalLaunch:
                 move.b  #2,routine(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 clr.w   x_vel(a0)
                 move.w  #$BF,$2E(a0)
                 move.l  #SKLRZ3Scene_BeginCarrierDeparture,$34(a0)
@@ -299,7 +299,7 @@ SKLRZ3Scene_LaunchChildXSpeeds:
 ; ---------------------------------------------------------------------------
 
 SKLRZ3Scene_WaitAttachedForLaunch:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 bne.s   SKLRZ3Scene_TickAttachedLaunchDelay
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_And_Touch_Sprite).l
@@ -423,7 +423,7 @@ SKLRZ3Scene_WaitForPaletteEffect:
                 btst    #7,status(a1)
                 beq.w   SKLRZ3Scene_SceneWaitReturn
                 move.b  #1,(Palette_cycle_counters+$00).w
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 st      (Events_fg_4).w
                 moveq   #signextendB(sfx_SuperEmerald),d0
                 jsr     (Play_SFX).l

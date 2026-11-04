@@ -393,7 +393,7 @@ S3PlaneIntro_DrawMovingEmerald:
 ; ---------------------------------------------------------------------------
 
 S3PlaneIntro_WaitForKnuxPickup:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a1),d1
                 subq.w  #8,d0

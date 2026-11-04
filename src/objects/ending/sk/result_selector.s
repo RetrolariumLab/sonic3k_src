@@ -24,7 +24,7 @@ EndResults_SelectStandaloneOrLockOn:
                 addi.w  #$18,d1
 
 EndingResults_SelectEmeraldOutcomeStride:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndingResults_StartSelectedInitializer
                 beq.s   EndingResults_AddOutcomeRecordStride
                 addi.w  #8,d1
@@ -184,7 +184,7 @@ EndResults_TickDelayAndSignalExit:
                 bmi.s   EndingResults_AttemptFadeAndInstallWait
                 cmpi.w  #$40,$2E(a0)
                 bne.s   EndResults_ExitDelayReturn
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
 
 EndResults_ExitDelayReturn:
                 rts
@@ -208,7 +208,7 @@ EndResults_WaitFadeAndHandOff:
                 btst    #7,status(a1)
                 beq.w   EndingScene_SharedReturn
                 move.l  #EndingResults_NoOpAfterProgramHandoff,(a0)
-                bset    #3,(_unkFAB8).w
+                bset    #3,(SceneSyncFlagsOrMHZState).w
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; ---------------------------------------------------------------------------

@@ -166,7 +166,7 @@ CNZMiniSK_ResumeAfterLoweringPause:
 
 Obj_CNZMinibossEnd:
                 move.l  #Obj_Wait,(a0)
-                st      (_unkFAA8).w                    ; Set end of level flag
+                st      (ActCompletionHandshake).w      ; Set end of level flag
                 bset    #4,$38(a0)
                 move.l  #Obj_CNZMinibossEndGo,$34(a0)
                 lea     Child6_CNZMinibossMakeDebris(pc),a2

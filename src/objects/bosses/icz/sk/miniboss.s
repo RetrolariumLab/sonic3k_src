@@ -172,7 +172,7 @@ ICZMiniSK_RepeatArcOrReleaseOrbs:
                 bpl.s   ICZMiniSK_ReverseXAndBeginArc
                 move.b  #$E,routine(a0)
                 bset    #1,$38(a0)
-                move.w  (_unkFAB4).w,d0
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 addi.w  #$A0,d0
                 cmp.w   x_pos(a0),d0
                 scc     $43(a0)
@@ -227,7 +227,7 @@ ICZMiniSK_HoldBeforePaletteRestart:
 
 ICZMiniSK_StartSignAndStopSnow:
                 jsr     (Obj_EndSignControl).l
-                movea.w (_unkFAAE).w,a1
+                movea.w (SceneActorOrWorldOffset).w,a1
                 cmpi.l  #SKICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   ICZMiniSK_TryDefeatPaletteActor
                 bset    #5,$38(a1)
@@ -535,7 +535,7 @@ ICZMiniSK_TrimOffsetStepWaits:
 ; ---------------------------------------------------------------------------
 
 ICZMiniSK_OrbSetLowerSpawnBand:
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 addi.w  #$D8,d0
                 move.w  d0,y_pos(a0)
 
@@ -547,7 +547,7 @@ ICZMiniSK_OrbRandomizeLaneAndHeight:
                 andi.w  #7,d0
                 subq.w  #3,d0
                 add.w   d0,d2
-                move.w  (_unkFAB4).w,x_pos(a0)
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,x_pos(a0)
                 add.w   d2,x_pos(a0)
                 swap    d0
                 andi.w  #7,d0
@@ -733,7 +733,7 @@ ICZMiniSK_OrbDispersalVelocities:
 ; ---------------------------------------------------------------------------
 
 ICZMiniSK_OrbSetUpperSpawnBand:
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 subi.w  #$40,d0
                 move.w  d0,y_pos(a0)
                 bra.w   ICZMiniSK_OrbRandomizeLaneAndHeight

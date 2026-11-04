@@ -198,7 +198,7 @@ LBZBoss1S3_BeginScoredDefeatHandoff:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     CreateChild1_Normal(pc)
                 move.b  #4,subtype(a1)
-                tst.b   (_unkFA80+1).w
+                tst.b   (BossSceneResetBaseAndRetainedGate+1).w
                 bne.s   LBZBoss1S3_BeginAlternateExit
                 move.l  #LBZBoss1S3_DescendToHandoffHeight,(a0)
                 rts

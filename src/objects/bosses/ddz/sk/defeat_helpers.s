@@ -44,7 +44,7 @@ DDZ_ChaseCheckSuperHitOrFlash:
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bsr.w   DDZFlight_ReduceScrollSpeed
-                move.w  (_unkFA8E).w,d0
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d0
                 beq.s   DDZ_ChaseSelectFlashPalette
                 movea.w d0,a1
                 move.w  #-$1000,x_vel(a1)
@@ -74,7 +74,7 @@ DDZ_ChaseApplyDefeatState:
                 move.w  (Camera_Y_pos).w,d0
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  d0,(Camera_max_Y_pos).w
-                move.w  (_unkFA8E).w,d0
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d0
                 beq.s   DDZ_ChaseTrySpawnThreeBurstActor
                 movea.w d0,a1
                 bclr    #2,$38(a1)
@@ -299,7 +299,7 @@ DDZ_SelectUpperPlayerShotPattern:
 
 ; Combine held Right with the flight controller speed and reject candidates on or outside the camera-relative limits
 DDZBoss_StepXFromFlightInput:
-                movea.w (_unkFA8E).w,a1
+                movea.w (DdzFlightControllerOrLowerMotionPlanX).w,a1
                 move.b  x_vel(a1),d1
                 ext.w   d1
                 neg.w   d1

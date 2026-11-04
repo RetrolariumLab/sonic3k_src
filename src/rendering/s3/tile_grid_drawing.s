@@ -391,7 +391,7 @@ Setup_TileRowDraw_Competition:
                 move.w  d1,d2
                 asr.w   #4,d1
                 andi.w  #$E,d2
-                cmpi.w  #$100,(_unkEEB0).w
+                cmpi.w  #$100,(CompetitionPairedPlaneCopyVramDelta).w
                 beq.s   S3TileDraw_PickCompRowPitch32
                 moveq   #4,d3
                 move.w  #$1F80,d4

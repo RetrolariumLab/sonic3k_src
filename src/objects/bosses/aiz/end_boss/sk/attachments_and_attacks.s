@@ -403,7 +403,7 @@ AIZBossSK_ChooseNewTransitTarget:
                 beq.s   AIZBossSK_ChooseNewTransitTarget
                 lea     AIZBossSK_TransitTargetOffsets(pc,d0.w),a1
                 moveq   #0,d2
-                move.w  (_unkFA84).w,d2
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d2
                 add.w   (a1)+,d2
                 swap    d2
                 sub.l   x_pos(a0),d2
@@ -411,7 +411,7 @@ AIZBossSK_ChooseNewTransitTarget:
                 swap    d2
                 move.w  d2,x_vel(a0)
                 moveq   #0,d3
-                move.w  (_unkFA86).w,d3
+                move.w  (SceneCreditStateOrBossMotionPlanX).w,d3
                 add.w   (a1)+,d3
                 swap    d3
                 sub.l   y_pos(a0),d3

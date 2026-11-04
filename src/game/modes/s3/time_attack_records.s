@@ -55,7 +55,7 @@ TimeAttack_Records:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     KosArt_To_VDP(pc)
-                move.l  #S3SS_NoOpVBlankReturn,(_unkEF44_1).w
+                move.l  #S3SS_NoOpVBlankReturn,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_CompetitionLevel).l,a0  ; Decompress source
@@ -137,7 +137,7 @@ S3TimeRecords_RunFrameAndBlinkRecord:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
-                move.w  (_unkEEA0).w,d7
+                move.w  (SceneColumnOrCompBlinkVRAM).w,d7
                 beq.s   S3TimeRecords_Tick30FrameExitLockout
                 btst    #3,(Level_frame_counter+1).w
                 bne.s   S3TimeRecords_RedrawHighlightedTime
@@ -147,7 +147,7 @@ S3TimeRecords_RunFrameAndBlinkRecord:
 ; ---------------------------------------------------------------------------
 
 S3TimeRecords_RedrawHighlightedTime:
-                move.l  (_unkEE98).w,d6
+                move.l  (SceneAuxiliaryXOrCompetitionTime).w,d6
                 jsr     S3Comp_DrawPackedTime(pc)
 
 S3TimeRecords_Tick30FrameExitLockout:
@@ -193,7 +193,7 @@ S3Comp_DrawLapTimesAndTopRecords:
                 addi.w  #$180,d7
                 move.l  (a0)+,d6
                 jsr     S3Comp_DrawPackedTime(pc)
-                clr.w   (_unkEEA0).w
+                clr.w   (SceneColumnOrCompBlinkVRAM).w
                 rts
 ; End of function S3Comp_DrawLapTimesAndTopRecords
 

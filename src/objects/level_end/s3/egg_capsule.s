@@ -298,7 +298,7 @@ S3EggCapsule_MoveAndBounceAnimal:
                 move.w  $3E(a0),y_vel(a0)
                 jsr     Find_SonicTails(pc)
                 move.w  #-$200,d1
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.s   S3EggCapsule_SetAnimalBounceXVel
                 tst.w   d0
                 beq.s   S3EggCapsule_SetAnimalBounceXVel
@@ -342,7 +342,7 @@ S3EggCapsule_ChaseP1OrLeaveLeft:
                 bsr.w   S3CapsuleAnimal_SteerTowardP1
                 jsr     (MoveSprite2).l
                 bsr.w   S3CapsuleAnimal_SetFacingFromXVel
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.s   S3EggCapsule_DrawAnimalAfterChase
                 move.l  #S3EggCapsule_MoveDepartingAnimalLeft,(a0)
                 bset    #0,render_flags(a0)
@@ -382,7 +382,7 @@ S3EggCapsule_P1ResultsReturn:
 ; =============== S U B R O U T I N E =======================================
 
 Check_TailsEndPose:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 beq.w   S3EggCapsule_OpenReturn
                 cmpi.b  #3,(Current_zone).w
                 bne.s   S3EggCapsule_TryLatchP2EndPose

@@ -185,7 +185,7 @@ S3LevelResults_WaitElementsAndTickExit:
 S3LevelResults_FinishActOrStartNextTitle:
                 tst.b   (Apparent_act).w
                 beq.s   S3LevelResults_SetAct2AndSelectTitle
-                clr.b   (_unkFAA8).w                    ; Act 2
+                clr.b   (ActCompletionHandshake).w      ; Act 2
                 st      (End_of_level_flag).w           ; Stop level results flag and set title card finished flag
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -194,7 +194,7 @@ S3LevelResults_SetAct2AndSelectTitle:
                 move.b  #1,(Apparent_act).w             ; Change to act 2 if in act 1
                 clr.b   (Last_star_post_hit).w
                 clr.b   (Special_bonus_entry_flag).w
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 move.l  #Obj_TitleCard,(a0)             ; Change current object to title card
                 clr.b   routine(a0)
                 st      $3E(a0)
@@ -338,7 +338,7 @@ S3LevelResults_ElementMoveReturn:
 ; =============== S U B R O U T I N E =======================================
 
 LevResults_GetDecimalScore:
-                clr.l   (_unkEF40_1).w
+                clr.l   (ResultsNumericAccumulator).w
                 lea     TimeBonus(pc),a1
                 moveq   #$10-1,d2
 
@@ -350,7 +350,7 @@ S3LevelResults_ReadBitOrSkipBcdWeight:
 ; ---------------------------------------------------------------------------
 
 S3LevelResults_AddPackedBcdWeight:
-                lea     (_unkEF44_2).w,a2
+                lea     (ResultsNumericAccumulatorEnd).w,a2
                 addi.w  #0,d0
                 abcd    -(a1),-(a2)
                 abcd    -(a1),-(a2)
@@ -358,7 +358,7 @@ S3LevelResults_AddPackedBcdWeight:
 
 S3LevelResults_FinishBcdConversion:
                 dbf     d2,S3LevelResults_ReadBitOrSkipBcdWeight
-                move.l  (_unkEF40_1).w,d1
+                move.l  (ResultsNumericAccumulator).w,d1
                 rts
 ; End of function LevResults_GetDecimalScore
 

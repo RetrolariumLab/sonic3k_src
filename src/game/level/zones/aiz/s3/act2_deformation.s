@@ -132,7 +132,7 @@ S3AIZ2Deform_ApplyBgWaveAndCheckShip:
                 tst.w   (Events_bg+$04).w
                 beq.s   S3AIZ2Deform_WaveAndShipReturn
                 lea     (H_scroll_buffer).w,a1          ; This is for what I assume to be the flying battleship sequence
-                move.w  (_unkEE98).w,d0                 ; Nullifies the top 8 tiles worth of FG waviness for this effect
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d0  ; Nullifies the top 8 tiles worth of FG waviness for this effect
                 neg.w   d0                              ; And replaces it with position data from the second BG camera
                 moveq   #bytesToLcnt($40),d1
 

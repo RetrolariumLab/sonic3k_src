@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_CutsceneKnuckles:
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 movea.l CutsceneKnuckles_Index(pc,d0.w),a1

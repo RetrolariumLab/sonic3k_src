@@ -34,7 +34,7 @@
   "consumer_sources": [
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "f3f965c11b405675bf4182084d0787344ec7a4a6ac4f0b6de1cf809177f07429"
+      "sha256": "1328ca5ffeb1f3cede5f31d55f93c39d55a0d74bd3a8cccb457142803a864a11"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
@@ -42,11 +42,11 @@
     },
     {
       "path": "src/objects/ending/sk/master_emerald.s",
-      "sha256": "b0a5a5113daa095923ee3b7e1d0e581e4b89f34dc259053b477e7dd3cb115171"
+      "sha256": "f048b7f44676e870066d37a7b3d9464d4c5ee9441e24836553bcedbf7c5f864b"
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "81e04dd04c4907dbf55e66435e9aa6688304047b03675c8db7d3e02ab704ca9e"
+      "sha256": "a50c7e959c85f29cce35ed01aad8765237e3b7e67ad2d537bc794fd716c0d156"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
@@ -58,7 +58,7 @@
     },
     {
       "path": "src/objects/zones/hpz/sk/master_emerald.s",
-      "sha256": "7dd8c955891dfb27d3a251835b6b654bfb55879d81827ea57e7257ff727321dc"
+      "sha256": "16609f89ba553a4a24c309601ed949524b73808ff5b81785baea1a5fcda522a8"
     },
     {
       "path": "src/rendering/palettes/sk/rotation_script.s",

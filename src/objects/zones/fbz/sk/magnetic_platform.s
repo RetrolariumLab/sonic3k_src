@@ -63,7 +63,7 @@ SKFBZMagPlat_FallAndCheckFloor:
                 move.l  #SKFBZMagPlat_TrySwitchToRising,(a0)
 
 SKFBZMagPlat_TrySwitchToRising:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 beq.s   SKFBZMagPlat_FinishFallUpdate
                 move.l  #SKFBZMagPlat_RiseAndCheckHeight,(a0)
 
@@ -97,7 +97,7 @@ SKFBZMagPlat_TryStopAtCeiling:
                 move.l  #SKFBZMagPlat_WaitForMagnetOff,(a0)
 
 SKFBZMagPlat_WaitForMagnetOff:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 bne.s   SKFBZMagPlat_RebuildChainAndResolveSolid
                 move.b  #$F,y_radius(a0)
                 move.l  #SKFBZMagPlat_FallAndCheckFloor,(a0)

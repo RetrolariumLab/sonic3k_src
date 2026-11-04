@@ -231,7 +231,7 @@ Obj_MechaSonicHead:
 
 Obj_MechaSonicHeadMain:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                tst.b   (_unkFA89).w
+                tst.b   (MechaSonicHeadDeleteOrOverlayLowByte).w
                 bne.s   RobotnikSK_MechaHeadDeleteOnSceneFlag
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------

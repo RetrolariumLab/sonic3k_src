@@ -7,7 +7,7 @@ LBZ2_ScreenInit:
                 jsr     Adjust_LBZ2Layout(pc)
                 move.w  #4,(Events_routine_fg).w
                 clr.l   (Events_bg+$14).w
-                clr.w   (_unkEEA0).w
+                clr.w   (SceneColumnOrCompBlinkVRAM).w
                 clr.w   (Event_LBZ2_DeathEgg).w
                 clr.w   (Events_fg_3).w
                 bsr.s   LBZ2_LayoutMod
@@ -185,8 +185,8 @@ SKLBZ_ActTwoBeginDeathEggBackgroundPhase:
                 move.w  d0,(Camera_max_Y_pos).w         ; Y-end is $668
                 move.w  d0,(Camera_target_max_Y_pos).w
                 move.w  #$3C,(Events_bg+$0E).w
-                move.w  #$1E00,(_unkEEA2).w
-                move.l  #$6200,(_unkEE9C).w
+                move.w  #$1E00,(SceneRowAnchorOrCompetitionWinCounts).w
+                move.l  #$6200,(SceneAuxiliaryYOrVerticalMotion).w
                 st      (Scroll_lock).w
                 st      (Event_LBZ2_DeathEgg).w
                 addq.w  #4,(Events_routine_bg).w
@@ -212,7 +212,7 @@ SKLBZ2Screen_WaitForPlatformDescent:
                 tst.w   (Events_fg_5).w
                 beq.w   SKLBZ2Screen_DrawDeathEggBgAndShake
                 jsr     LBZ2_EndFallingAccel(pc)        ; When signaled, start the falling of the death egg platform
-                tst.w   (_unkEE9C).w
+                tst.w   (SceneAuxiliaryYOrVerticalMotion).w
                 bpl.w   SKLBZ2Screen_DrawDeathEggBgAndShake
                 clr.w   (Events_fg_5).w                 ; When movement starts going negative
                 move.w  #$1B,(Draw_delayed_rowcount).w

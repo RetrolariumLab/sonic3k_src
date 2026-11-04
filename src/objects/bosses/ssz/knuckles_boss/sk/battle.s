@@ -59,7 +59,7 @@ SSZKnucklesMecha_UpdateTransformation:
                 moveq   #signextendB(sfx_MechaTransform),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (Run_PalRotationScript).l
-                bchg    #6,(_unkFAB8).w
+                bchg    #6,(SceneSyncFlagsOrMHZState).w
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
@@ -75,14 +75,14 @@ SSZKnucklesMecha_LaunchRise:
                 move.b  #4,routine(a0)
                 clr.w   x_vel(a0)
                 move.w  #-$480,y_vel(a0)
-                bclr    #6,(_unkFAB8).w
+                bclr    #6,(SceneSyncFlagsOrMHZState).w
                 rts
 ; ---------------------------------------------------------------------------
 
 SSZKnucklesMecha_RiseToSavedHeight:
                 jsr     (Run_PalRotationScript).l
                 jsr     (MoveSprite_LightGravity).l
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 cmp.w   y_pos(a0),d0
                 bhs.s   SSZKnuxMecha_ClampRiseAndTransform
                 rts
@@ -137,11 +137,11 @@ SSZKnuxMecha_ChooseAttackByHealth:
 
 SSZKnuxMecha_ChooseOppositeDashEdge:
                 move.w  x_pos(a0),d0
-                move.w  (_unkFA82).w,d1
+                move.w  (SceneTimerOrSharedMotionRecordBase).w,d1
                 bclr    #0,render_flags(a0)
-                cmp.w   (_unkFA88).w,d0
+                cmp.w   (EndingOutcomeOrBossSceneSignals).w,d0
                 bhs.s   SSZKnucklesMecha_StoreDashTarget
-                move.w  (_unkFA8E).w,d1
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d1
                 bset    #0,render_flags(a0)
 
 SSZKnucklesMecha_StoreDashTarget:
@@ -265,7 +265,7 @@ SSZKnuxMecha_ClassifyPlayerForDash:
                 bsr.w   SSZMecha_ClassifyPlayerXRegion
                 move.b  d2,child_dy(a0)
                 move.w  x_pos(a0),d0
-                cmp.w   (_unkFA88).w,d0
+                cmp.w   (EndingOutcomeOrBossSceneSignals).w,d0
                 blo.s   SSZKnuxMecha_ChooseRegionDashTarget
                 not.b   d3
 
@@ -284,8 +284,8 @@ SSZKnuxMecha_AttackIndicesByRegion:
                 dc.b    4,   5,   6,   1,   2,   3
                 even
 SSZKnuxMecha_TargetPointersByRegion:
-                dc.w    _unkFA8A, _unkFA8C, _unkFA8E
-                dc.w    _unkFA82, _unkFA84, _unkFA86
+                dc.w    DDZScrollAccelOrSceneMotion, SceneMotionAngleOrDDZAccelLo, DdzFlightControllerOrLowerMotionPlanX
+                dc.w    SceneTimerOrSharedMotionRecordBase, SceneCreditIndexOrBossMotionPlanAngle, SceneCreditStateOrBossMotionPlanX
 ; ---------------------------------------------------------------------------
 
 SSZKnuxMecha_RunPaletteAndWaitDash:
@@ -322,7 +322,7 @@ SSZKnucklesMecha_ChooseRandomDiveOrHover:
                 clr.w   y_vel(a0)
                 move.w  x_pos(a0),d0
                 move.w  #-$80,d1
-                cmp.w   (_unkFA88).w,d0
+                cmp.w   (EndingOutcomeOrBossSceneSignals).w,d0
                 bhs.s   SSZKnuxMecha_BeginAcceleratingDiveFx
                 neg.w   d1
 
@@ -385,7 +385,7 @@ SSZKnuxMecha_RiseToSavedDiveHeight:
                 jsr     (Run_PalRotationScript).l
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 cmp.w   y_pos(a0),d0
                 bhs.s   SSZKnuxMecha_ChooseFacingReturnAnim
                 rts
@@ -396,7 +396,7 @@ SSZKnuxMecha_ChooseFacingReturnAnim:
                 move.l  #SSZKnuxMecha_ResetDashAndChooseEdge,$34(a0)
                 move.w  x_pos(a0),d0
                 bclr    #0,render_flags(a0)
-                cmp.w   (_unkFA88).w,d0
+                cmp.w   (EndingOutcomeOrBossSceneSignals).w,d0
                 bhs.s   SSZKnucklesMecha_InstallReturnAnimation
                 bset    #0,render_flags(a0)
 
@@ -500,7 +500,7 @@ SSZKnucklesMecha_UpdateHighReturnJump:
                 jsr     (Run_PalRotationScript).l
                 jsr     (Animate_RawMultiDelayFlipX).l
                 jsr     (MoveSprite_LightGravity).l
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 cmp.w   y_pos(a0),d0
                 bhs.s   SSZKnuxMecha_ClampReturnJumpAndReset
                 rts
@@ -610,7 +610,7 @@ SSZKnuxMecha_AimRollAtArenaTarget:
                 bset    #0,render_flags(a0)
                 move.w  #$400,d0
                 move.w  x_pos(a0),d1
-                cmp.w   (_unkFAB6).w,d1
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d1
                 blo.s   SSZKnucklesMecha_StoreRollingVelocity
                 bclr    #0,render_flags(a0)
                 neg.w   d0
@@ -624,7 +624,7 @@ SSZKnucklesMecha_StoreRollingVelocity:
 SSZKnucklesMecha_RollUntilTargetCrossing:
                 jsr     (Animate_RawMultiDelay).l
                 jsr     (MoveSprite2).l
-                move.w  (_unkFAB6).w,d0
+                move.w  (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 tst.w   x_vel(a0)
                 bmi.s   SSZKnucklesMecha_TestLeftwardRollTarget
                 cmp.w   x_pos(a0),d0

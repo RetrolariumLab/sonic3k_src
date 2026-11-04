@@ -357,7 +357,7 @@ VInt_18:
                 dma68kToVDP Sprite_table,$F800,Sprite_table_end-Sprite_table,VRAM
                 dma68kToVDP H_scroll_buffer,$F000,H_scroll_buffer_end-H_scroll_buffer,VRAM
 
-                bclr    #0,(_unkFA88).w
+                bclr    #0,(EndingOutcomeOrBossSceneSignals).w
                 beq.s   +
                 dma68kToVDP RAM_start+$2000,$C000,$2000,VRAM
 
@@ -412,7 +412,7 @@ VInt_1C:
 
 VInt_1E:
                 bsr.s   Do_ControllerPal
-                movea.l (_unkEF44_1).w,a0
+                movea.l (MenuVInterruptCallbackPointer).w,a0
                 jsr     (a0)
                 bsr.w   Process_Nem_Queue_2
                 jmp     (Set_Kos_Bookmark).l

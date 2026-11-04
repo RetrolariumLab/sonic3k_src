@@ -22,9 +22,9 @@ S3CNZWater_CheckCorkBroken:
 ; ---------------------------------------------------------------------------
 
 S3CNZWater_RaiseTargetOnce:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 bne.s   S3CNZWater_DeleteCorkTrigger
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 move.w  #$958,(Target_water_level).w
 
 S3CNZWater_DeleteCorkTrigger:
@@ -51,9 +51,9 @@ S3CNZWater_UpdateWaterButton:
                 andi.b  #standing_mask,d0
                 beq.s   S3CNZWater_DrawWaterButton
                 move.b  #1,mapping_frame(a0)
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 beq.s   S3CNZWater_DrawWaterButton
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 move.w  #$A58,(Target_water_level).w
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l

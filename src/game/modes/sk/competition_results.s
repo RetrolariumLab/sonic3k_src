@@ -44,7 +44,7 @@ Competition_Results:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     KosArt_To_VDP(pc)
-                move.l  #SKSS_NoOpVBlankReturn,(_unkEF44_1).w
+                move.l  #SKSS_NoOpVBlankReturn,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_CompetitionLevel).l,a0  ; Decompress source
@@ -112,7 +112,7 @@ SKCompResults_RunResultsAndBlinkWinner:
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 addq.w  #1,(Level_frame_counter).w
-                move.w  (_unkEEA0).w,d7
+                move.w  (SceneColumnOrCompBlinkVRAM).w,d7
                 beq.s   SKCompResults_Tick30FrameInputLockout
                 btst    #3,(Level_frame_counter+1).w
                 bne.s   SKCompResults_DrawWinningTotalNormal
@@ -122,7 +122,7 @@ SKCompResults_RunResultsAndBlinkWinner:
 ; ---------------------------------------------------------------------------
 
 SKCompResults_DrawWinningTotalNormal:
-                move.l  (_unkEE98).w,d6
+                move.l  (SceneAuxiliaryXOrCompetitionTime).w,d6
                 jsr     SKComp_DrawPackedTime(pc)
 
 SKCompResults_Tick30FrameInputLockout:
@@ -184,8 +184,8 @@ SKCompResults_StorePlayerIconFrame:
 
 CompetitionResults_UpdateWinLoseTieIcon:
                 move.w  #make_art_tile(ArtTile_Competition_Results,1,1),art_tile(a0)
-                move.b  (_unkEEA2).w,d0
-                move.b  (_unkEEA2+1).w,d1
+                move.b  (SceneRowAnchorOrCompetitionWinCounts).w,d0
+                move.b  (SceneRowAnchorOrCompetitionWinCounts+1).w,d1
                 tst.b   $2E(a0)
                 beq.s   SKCompResults_ComparePlayerWinCounts
                 exg     d0,d1
@@ -220,25 +220,25 @@ SKComp_BuildRaceResults:
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 jsr     SKComp_SumFivePackedTimes(pc)
                 move.w  #$C65A,d7
-                move.l  d6,(_unkEE98).w
-                move.w  d7,(_unkEEA0).w
+                move.l  d6,(SceneAuxiliaryXOrCompetitionTime).w
+                move.w  d7,(SceneColumnOrCompBlinkVRAM).w
                 jsr     SKComp_DrawPackedTime(pc)
                 jsr     SKComp_SumFivePackedTimes(pc)
                 move.w  #$CCDA,d7
-                cmp.l   (_unkEE98).w,d6
+                cmp.l   (SceneAuxiliaryXOrCompetitionTime).w,d6
                 bhi.s   SKCompResults_DrawP2TotalAndPrepRaceRows
                 bne.s   SKCompResults_BlinkP2TotalIfFaster
-                clr.w   (_unkEEA0).w
+                clr.w   (SceneColumnOrCompBlinkVRAM).w
                 bra.s   SKCompResults_DrawP2TotalAndPrepRaceRows
 ; ---------------------------------------------------------------------------
 
 SKCompResults_BlinkP2TotalIfFaster:
-                move.l  d6,(_unkEE98).w
-                move.w  d7,(_unkEEA0).w
+                move.l  d6,(SceneAuxiliaryXOrCompetitionTime).w
+                move.w  d7,(SceneColumnOrCompBlinkVRAM).w
 
 SKCompResults_DrawP2TotalAndPrepRaceRows:
                 jsr     SKComp_DrawPackedTime(pc)
-                clr.w   (_unkEEA2).w
+                clr.w   (SceneRowAnchorOrCompetitionWinCounts).w
                 lea     ((RAM_start+$7800)&$FFFFFF).l,a0
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$148,VRAM,WRITE),d5
                 moveq   #5-1,d7
@@ -246,21 +246,21 @@ SKCompResults_DrawP2TotalAndPrepRaceRows:
 SKCompResults_CompareTimesAndCountWins:
                 lea     (MapUnc_ResultsWin).l,a1
                 lea     (MapUnc_ResultsLose).l,a2
-                addq.b  #1,(_unkEEA2).w
+                addq.b  #1,(SceneRowAnchorOrCompetitionWinCounts).w
                 move.l  (a0)+,d0
                 cmp.l   x_pos(a0),d0
                 beq.s   SKCompResults_UseTieMapsWithoutWin
                 bcs.s   SKCompResults_UploadMapsAndPrepBlink
                 exg     a1,a2
-                subq.b  #1,(_unkEEA2).w
-                addq.b  #1,(_unkEEA2+1).w
+                subq.b  #1,(SceneRowAnchorOrCompetitionWinCounts).w
+                addq.b  #1,(SceneRowAnchorOrCompetitionWinCounts+1).w
                 bra.s   SKCompResults_UploadMapsAndPrepBlink
 ; ---------------------------------------------------------------------------
 
 SKCompResults_UseTieMapsWithoutWin:
                 lea     (MapUnc_ResultsTie).l,a1
                 movea.l a1,a2
-                subq.b  #1,(_unkEEA2).w
+                subq.b  #1,(SceneRowAnchorOrCompetitionWinCounts).w
 
 SKCompResults_UploadMapsAndPrepBlink:
                 move.l  d5,d0
@@ -275,9 +275,9 @@ SKCompResults_UploadMapsAndPrepBlink:
                 jsr     (Plane_Map_To_VRAM).l
                 addi.l  #$100<<16,d5
                 dbf     d7,SKCompResults_CompareTimesAndCountWins
-                move.w  (_unkEEA0).w,d7
+                move.w  (SceneColumnOrCompBlinkVRAM).w,d7
                 beq.s   SKCompResults_OutcomeRowsReturn
-                move.l  (_unkEE98).w,d6
+                move.l  (SceneAuxiliaryXOrCompetitionTime).w,d6
                 jsr     SKComp_DrawPackedTime(pc)
                 lea     (Plane_buffer).w,a0
                 lea     $20(a0),a1
@@ -313,12 +313,12 @@ SKCompResults_DrawFiveRaceTimes:
 
 ; Carry at 100 hundredths and 60 seconds. Cap the minutes at 99
 SKComp_SumFivePackedTimes:
-                clr.l   (_unkEF40_1).w
+                clr.l   (ResultsNumericAccumulator).w
                 moveq   #5-1,d7
 
 SKCompResults_AccumulateHundredths:
                 move.l  (a0)+,d6
-                lea     (_unkEF44_2).w,a1
+                lea     (ResultsNumericAccumulatorEnd).w,a1
                 add.b   d6,-(a1)
                 cmpi.b  #100,(a1)
                 blo.s   SKCompResults_AccumulateSeconds
@@ -342,7 +342,7 @@ SKCompResults_AccumulateMinutesCap99:
 
 SKCompResults_RepeatAndReturnPackedTotal:
                 dbf     d7,SKCompResults_AccumulateHundredths
-                move.l  (_unkEF40_1).w,d6
+                move.l  (ResultsNumericAccumulator).w,d6
                 rts
 ; End of function SKComp_SumFivePackedTimes
 

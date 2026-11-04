@@ -356,7 +356,7 @@ DEZBoss_SweepBeginRiseAndSignal:
                 move.w  #-2,y_vel(a0)
                 tst.b   subtype(a0)
                 bne.s   DEZBoss_SweepBoundaryReturn
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
 
 DEZBoss_SweepBoundaryReturn:
                 rts

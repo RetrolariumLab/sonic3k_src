@@ -22,7 +22,7 @@ SSZGHZBoss_PositionAndQueueArt:
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$40,d0
                 move.w  d0,y_pos(a0)
-                clr.w   (_unkFA88).w
+                clr.w   (EndingOutcomeOrBossSceneSignals).w
                 moveq   #PLCID_7B,d0
                 jsr     (Load_PLC).l
                 lea     (ArtKosM_SSZGHZMisc).l,a1
@@ -164,7 +164,7 @@ SSZGHZBoss_MoveAwayUntilExitTimer:
 SSZGHZ_FinishEncounterAndRestorePal:
                 clr.b   (Boss_flag).w
                 bset    #4,$38(a0)
-                st      (_unkFA89).w
+                st      (MechaSonicHeadDeleteOrOverlayLowByte).w
                 st      (Events_bg+$00).w
                 lea     (Target_palette_line_2).w,a1
                 lea     (Normal_palette_line_2).w,a2

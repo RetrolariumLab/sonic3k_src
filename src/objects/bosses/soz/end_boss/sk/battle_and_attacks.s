@@ -27,7 +27,7 @@ SOZBoss_InitShipAndBody:
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
                 move.w  y_pos(a0),$3A(a0)
-                move.w  #$C0,(_unkFA82).w
+                move.w  #$C0,(SceneTimerOrSharedMotionRecordBase).w
                 lea     (ArtKosM_SOZEndBoss).l,a1
                 move.w  #tiles_to_bytes(ArtTile_SOZEndBoss),d2
                 jsr     (Queue_Kos_Module).l
@@ -217,7 +217,7 @@ SOZBoss_MoveAndCheckRightExit:
 
 SOZBoss_HideShipAndWaitCapsule:
                 move.l  #SOZBoss_WaitCapsuleAndRestoreControls,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 ori.b   #$30,$38(a0)
                 bclr    #7,render_flags(a0)
                 rts
@@ -225,7 +225,7 @@ SOZBoss_HideShipAndWaitCapsule:
 
 SOZBoss_WaitCapsuleAndRestoreControls:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   SOZBoss_SharedActorReturn
                 move.l  #SOZBoss_HoldExitMaxYAndRoutePlayer,(a0)
                 jsr     (Restore_PlayerControl).l
@@ -295,7 +295,7 @@ SOZBoss_CarryPlayerToFallTrigger:
                 cmp.w   d1,d0
                 blo.s   SOZEndBoss_CopySelectedExitXToPlayerOnly
                 move.l  #SOZBoss_ClampUnsignedFallSpeed,(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  d1,d0
@@ -346,7 +346,7 @@ SOZBoss_StartLevelAtKnucklesExitX:
 ; ---------------------------------------------------------------------------
 
 SOZBoss_WaitFallAndTakeP2Control:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.w   SOZBoss_SharedActorReturn
                 move.l  #SOZBoss_SyncPartnerAboveP1,(a0)
                 lea     (Player_2).w,a1

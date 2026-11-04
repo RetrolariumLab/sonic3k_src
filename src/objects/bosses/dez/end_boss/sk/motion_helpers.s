@@ -385,7 +385,7 @@ DEZBoss_HitUpdateReturn:
 DEZBoss_BeginDefeatAndResetGravity:
                 move.l  #Wait_NewDelay,(a0)
                 bset    #7,status(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 move.l  #DEZBoss_BeginDefeatFall,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l

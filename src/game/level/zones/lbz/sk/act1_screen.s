@@ -428,7 +428,7 @@ LBZ1BGE_DoTransition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.l   (Events_bg+$00).w
                 clr.l   (Events_bg+$14).w
-                clr.w   (_unkEEA0).w
+                clr.w   (SceneColumnOrCompBlinkVRAM).w
                 clr.w   (Event_LBZ2_DeathEgg).w
                 clr.w   (Events_fg_3).w
                 move.w  #$40,(Events_bg+$10).w

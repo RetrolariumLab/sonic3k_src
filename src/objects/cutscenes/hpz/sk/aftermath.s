@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 HPZKnux_WaitForGuideRumbleSignal:
-                tst.b   (_unkFAAC).w
+                tst.b   (TailsChaseOrHPZAftermathLatch).w
                 bne.s   HPZKnux_StartRumbleAndExpandCamera
                 rts
 ; ---------------------------------------------------------------------------
@@ -145,7 +145,7 @@ HPZKnux_AnimateRetreatAndSignalPlatform:
                 beq.s   HPZKnux_RetreatPoseReturn
                 cmpi.b  #6,anim_frame(a0)
                 bne.w   HPZKnux_RetreatPoseReturn
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
 
@@ -188,7 +188,7 @@ HPZKnux_BeginLeftRunAfterRetreatPose:
 
 HPZKnux_AnimateTiredAndCheckDeparture:
                 jsr     (Animate_RawMultiDelay).l
-                btst    #6,(_unkFAB8).w
+                btst    #6,(SceneSyncFlagsOrMHZState).w
                 bne.w   HPZKnux_LaunchFinalJumpOnSignal
                 rts
 ; ---------------------------------------------------------------------------
@@ -233,7 +233,7 @@ HPZKnux_LaunchFinalJumpOnSignal:
 ; ---------------------------------------------------------------------------
 
 HPZKnux_AnimateTiredAndWaitForBeam:
-                btst    #7,(_unkFAB8).w
+                btst    #7,(SceneSyncFlagsOrMHZState).w
                 bne.s   HPZKnux_SetTerminalNormalMapAnim
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
@@ -339,14 +339,14 @@ HPZKnux_GuideScrollAndSignalShip:
                 cmpi.w  #$1580,d0
                 blo.s   SKHPZGuide_ReturnAfterStagingCameraStep
                 move.l  #HPZKnux_GuideWaitForApproach,(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
 
 SKHPZGuide_ReturnAfterStagingCameraStep:
                 rts
 ; ---------------------------------------------------------------------------
 
 HPZKnux_GuideWaitForApproach:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   HPZKnux_GuideApproachReturn
                 move.l  #HPZKnux_GuideCapP1RunSpeed,(a0)
                 lea     (Player_1).w,a1
@@ -387,7 +387,7 @@ HPZKnux_GuideCameraRunReturn:
 ; ---------------------------------------------------------------------------
 
 HPZKnux_GuideWaitForLandingAndLock:
-                btst    #5,(_unkFAB8).w
+                btst    #5,(SceneSyncFlagsOrMHZState).w
                 beq.s   HPZKnux_GuideLandingWaitReturn
                 move.l  #HPZKnux_GuideWaitForGroundedP1,(a0)
                 st      (Ctrl_1_locked).w
@@ -428,7 +428,7 @@ HPZKnux_GuideStopP1AndSignalRumble:
                 bhi.w   SKAIZScene_SharedSceneReturn
                 move.l  #HPZKnux_GuideWaitThenFaceP1Left,(a0)
                 move.w  #$3F,$2E(a0)
-                st      (_unkFAAC).w
+                st      (TailsChaseOrHPZAftermathLatch).w
                 clr.w   (Ctrl_1_logical).w
                 jsr     (Stop_Object).l
                 jmp     (Player_Load_PLC).l

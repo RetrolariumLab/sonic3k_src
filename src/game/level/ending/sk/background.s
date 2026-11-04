@@ -53,7 +53,7 @@ SKEndingBG_CopyColorsAndExpandScene:
                 dbf     d0,SKEndingBG_CopyColorsAndExpandScene
                 jsr     SKEnding_LoadSkyColorsNowAndTarget(pc)
                 move.w  #$220,d0
-                move.w  d0,(_unkEE9C).w
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 move.w  d0,(Camera_Y_pos_BG_rounded).w
                 addq.w  #4,(Events_routine_bg).w
 
@@ -155,7 +155,7 @@ SKEndingBG_FinishSSZRevealAndExpand:
 
 ; Clamp background Y to $120 before entering the shared Sky Sanctuary cloud-band builder
 SKEnding_BuildInitialCloudBands:
-                move.w  (_unkEE9C).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 cmpi.w  #$120,d0
                 bls.s   SKEndingBG_CapInitialYAndBuildClouds
                 move.w  #$120,d0
@@ -169,8 +169,8 @@ SKEndingBG_CapInitialYAndBuildClouds:
 
 ; Use scene X and the slow phase to build the fine-scroll ramp and seven derived layer offsets
 SKEnding_BuildExpandingBgBands:
-                move.w  (_unkEE9C).w,(Camera_Y_pos_BG_copy).w
-                move.w  (_unkEE98).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,(Camera_Y_pos_BG_copy).w
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d0
                 swap    d0
                 clr.w   d0
                 move.l  d0,d1

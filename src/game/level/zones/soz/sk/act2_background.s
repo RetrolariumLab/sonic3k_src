@@ -154,7 +154,7 @@ SKSOZ2BG_SelectRisingSandStage:
 
 SKSOZ2BG_SetSandOffsetAndStartScroll:
                 swap    d0
-                move.l  d0,(_unkEE9C).w
+                move.l  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 jsr     AlignSoz2RisingSandBackgroundCamera(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 subi.w  #$10,(Camera_Y_pos_BG_rounded).w
@@ -174,7 +174,7 @@ SKSOZ2BG_CheckFirstStageExit:
 SKSOZ2BG_CheckFirstStageLimit:
                 tst.w   (Events_fg_5).w
                 bne.s   SKSOZ2BG_StartSecondStageScroll
-                cmpi.w  #$400,(_unkEE9C).w
+                cmpi.w  #$400,(SceneAuxiliaryYOrVerticalMotion).w
                 blo.s   SKSOZ2BG_AlignFirstStageBackground
                 clr.w   (Special_events_routine).w
 
@@ -195,7 +195,7 @@ SKSOZ2BG_StartSecondStageScroll:
 SKSOZ2BG_CheckSecondStageExitAndLimit:
                 jsr     IsPlayerInSoz2RisingSandExitWindow(pc)
                 bne.s   SKSOZ2BG_CacheSandPositionAndRedraw
-                cmpi.w  #$A00,(_unkEE9C).w
+                cmpi.w  #$A00,(SceneAuxiliaryYOrVerticalMotion).w
                 blo.s   SKSOZ2BG_AlignSecondStageBackground
                 clr.w   (Special_events_routine).w
 
@@ -419,7 +419,7 @@ SetSoz2HalfSpeedBackgroundCoordinates:
 AlignSoz2RisingSandBackgroundCamera:
                 move.w  (Camera_Y_pos_copy).w,d0
                 addi.w  #$2E0,d0
-                add.w   (_unkEE9C).w,d0
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$1930,d0
@@ -756,9 +756,9 @@ SKSOZ2BG_OutsideSandExitReturnZero:
 
 SKSOZ2BG_StepSandCollisionOffset:
                 st      (Background_collision_flag).w
-                addi.l  #$A000,(_unkEE9C).w
+                addi.l  #$A000,(SceneAuxiliaryYOrVerticalMotion).w
                 move.w  #$2E0,d0
-                add.w   (_unkEE9C).w,d0
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 neg.w   d0
                 move.w  d0,(Camera_Y_diff).w
                 move.w  #$1930,(Camera_X_diff).w

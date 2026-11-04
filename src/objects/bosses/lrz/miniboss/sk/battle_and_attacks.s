@@ -53,8 +53,8 @@ LRZMini_InitBodyAndArmChains:
                 lea     ObjDat_LRZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #6,collision_property(a0)
-                move.w  #$7A8,(_unkFAB0).w
-                move.w  y_pos(a0),(_unkFAB2).w
+                move.w  #$7A8,(SceneMinimumYOrEmeraldSelectionBytes).w
+                move.w  y_pos(a0),(SceneMaximumYOrEmeraldSelectionTail).w
                 lea     LRZMinibossLeftArm_TwelveLinkTreeRecord(pc),a2
                 jsr     (CreateChild8_TreeListRepeated).l
                 lea     LRZMinibossRightArm_TwelveLinkTreeRecord(pc),a2
@@ -111,7 +111,7 @@ LRZMini_RiseAndTrackPlayer:
                 jsr     (Animate_RawMultiDelay).l
                 bsr.w   LRZMini_RetargetXVelEvery16
                 jsr     (MoveSprite2).l
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 cmp.w   y_pos(a0),d0
                 blo.w   LRZMini_SharedReturn
                 move.w  d0,y_pos(a0)
@@ -222,7 +222,7 @@ LRZMini_TickFlashAndDisableRetract:
 LRZMini_MoveWaitAndClampBaseline:
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
-                move.w  (_unkFAB2).w,d0
+                move.w  (SceneMaximumYOrEmeraldSelectionTail).w,d0
                 cmp.w   y_pos(a0),d0
                 bhi.s   LRZMini_BaselineUpdateReturn
                 move.w  d0,y_pos(a0)

@@ -20,7 +20,7 @@ SSZMecha_ResultsLandingCheckReturn:
 
 SSZMecha_RestoreControlsAfterResults:
                 jsr     (Check_TailsEndPose).l
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   SSZMechaBattleAndChildren_SharedReturn
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
@@ -94,6 +94,6 @@ SSZCraneSceneCamera_ClampUnlockAndSignal:
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
                 clr.b   (Scroll_lock).w
-                bset    #4,(_unkFAB8).w
+                bset    #4,(SceneSyncFlagsOrMHZState).w
                 jmp     (Delete_Current_Sprite).l
 ; End of function SSZMecha_RestoreControlsAfterResults

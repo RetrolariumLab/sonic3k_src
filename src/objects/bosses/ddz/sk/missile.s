@@ -38,7 +38,7 @@ DDZ_StraightMissilePlayDashOnce:
                 jsr     (Play_SFX).l
 
 DDZ_StraightMissileMoveAndCollide:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 subq.w  #2,x_pos(a0)
                 bsr.w   DDZMissile_CheckContactAndRetire
@@ -175,7 +175,7 @@ DDZ_InitMissileTrailPuff:
                 move.w  d1,y_vel(a0)
 
 DDZ_MissilePuffAnimateMoveAndCull:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 lea     DDZ_TrailPuffDeleteAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)

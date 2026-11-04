@@ -139,7 +139,7 @@ S3Blaster_StopAtCeiling:
 ; ---------------------------------------------------------------------------
 
 S3Blaster_WaitAtCeiling:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   S3Blaster_BeginFallFromCeiling
                 rts
 ; ---------------------------------------------------------------------------
@@ -186,7 +186,7 @@ S3Blaster_AnimateAndDrawMuzzle:
 Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
                 beq.s   S3Blaster_RetreatCheckReturn
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   S3Blaster_RetreatCheckReturn
                 move.b  routine(a0),$3D(a0)
                 move.b  #$A,routine(a0)

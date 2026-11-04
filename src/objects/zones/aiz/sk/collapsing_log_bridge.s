@@ -143,7 +143,7 @@ SKCollapseLog_DeleteLogFragment:
 ; ---------------------------------------------------------------------------
 
 SKCollapseLog_TrySplitFireBridge:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   SKCollapseLog_CheckFireTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2

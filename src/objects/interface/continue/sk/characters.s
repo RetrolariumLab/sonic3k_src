@@ -14,7 +14,7 @@ Obj_Continue_SonicWTails:
                 move.l  #ContinueSonicPair_WaitAndBlink,(a0)
 
 ContinueSonicPair_WaitAndBlink:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   ContinueSonicPair_InstallStateDispatch
                 move.b  #0,mapping_frame(a0)
@@ -148,7 +148,7 @@ ContinueSonicSolo_InitWaitingSprite:
                 move.w  #$120,y_pos(a0)
 
 ContinueSonicSolo_WaitForApproach:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #2,$38(a1)
                 bne.s   ContinueSonicSolo_SetExitPoseAndDelay
                 lea     ContinueSonicAlone_EscapedRawWaitLoop(pc),a1
@@ -182,7 +182,7 @@ ContinueSonicSolo_RunAndAnimate:
 
 ContinueSonicSolo_StopAndSignalAccept:
                 move.b  #8,routine(a0)
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 ContinueSonicAlone_TerminalStateReturn:
                 rts
@@ -199,7 +199,7 @@ Obj_Continue_TailsWSonic:
                 move.l  #ContinueTailsPair_WaitAndBlink,(a0)
 
 ContinueTailsPair_WaitAndBlink:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   ContinueTailsPair_InstallExitActors
                 move.b  #5,mapping_frame(a0)
@@ -267,7 +267,7 @@ ContinueTailsPair_RunAndSignalAccept:
                 addq.w  #6,x_pos(a0)
                 cmpi.w  #$1E0,x_pos(a0)
                 blo.s   ContinueTailsPair_AnimateRun
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 ContinueTailsPair_AnimateRun:
                 jmp     (Animate_Tails).l
@@ -304,7 +304,7 @@ ContinueKnuckles_InitWaitingSprite:
 
 ContinueKnuckles_TriggerEggRobo:
                 move.w  #$2F,$2E(a0)
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 beq.s   ContinueKnuckles_WaitThenInstallRun
                 move.l  #ContinueKnuckles_WaitThenInstallRun,(a0)
@@ -350,7 +350,7 @@ ContinueKnuckles_InitNativeMappings:
 ; ---------------------------------------------------------------------------
 
 ContinueKnuckles_WaitForStart:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   ContinueKnuckles_BeginRun
                 rts
@@ -363,7 +363,7 @@ ContinueKnuckles_RunAndReleaseSonic:
                 move.w  x_pos(a0),d0
                 addq.w  #6,d0
                 move.w  d0,x_pos(a0)
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 cmpi.w  #$120,d0
                 blo.s   ContinueKnuckles_AnimateOrStop
                 bset    #2,$38(a1)
@@ -379,7 +379,7 @@ ContinueKnuckles_StopAndSignalSolo:
                 move.b  #6,routine(a0)
                 cmpi.w  #3,(Player_mode).w
                 bne.s   ContinueKnuckles_TerminalStateReturn
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 ContinueKnuckles_TerminalStateReturn:
                 rts

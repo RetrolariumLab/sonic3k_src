@@ -369,7 +369,7 @@ DEZMini_InitBeamEndAndSide:
                 lea     DEZMini_BeamSideDetailAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #DEZMini_BeamEndFollowAndAnimate,(a0)
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 addi.w  #$B0,d0
                 move.w  d0,y_pos(a0)
                 moveq   #-$10,d0

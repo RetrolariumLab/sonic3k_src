@@ -38,7 +38,7 @@ EndingSonicPose_PlayerModeSignedOffsets:
 EndPose_AnimateSonicAndWaitForBanner:
                 lea     EndData_SonicPoseSignalWaitAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 beq.s   EndingSonicPose_DrawAfterSignalCheck
                 move.l  #EndPose_AnimateFinalSonicAndDraw,(a0)
                 lea     EndingSonicPose_FinalRawAnimation(pc),a1
@@ -145,7 +145,7 @@ EndingKnucklesSoloPose_Initialize:
 EndPose_CopyKnuxPaletteAndTryCycle:
                 move.l  (a1)+,(a2)+
                 dbf     d6,EndPose_CopyKnuxPaletteAndTryCycle
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 beq.s   EndPose_SoloPaletteSetupReturn
                 bmi.s   EndPose_SoloPaletteSetupReturn
                 jsr     (AllocateObject).l
@@ -157,7 +157,7 @@ EndPose_SoloPaletteSetupReturn:
 ; ---------------------------------------------------------------------------
 
 EndPose_AnimateKnuxUntilCleanup:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.w   EndingBanner_DeleteAfterProgramHandoff
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l

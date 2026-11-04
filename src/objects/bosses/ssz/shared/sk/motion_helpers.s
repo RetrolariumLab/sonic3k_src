@@ -134,14 +134,14 @@ SSZMecha_PlayerXRegionReturn:
 SSZMecha_CheckFacingArenaBound:
                 tst.w   x_vel(a0)
                 bmi.s   SSZMechaArenaBounds_TestLeftBoundary
-                move.w  (_unkFAB6).w,d0
+                move.w  (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 cmp.w   x_pos(a0),d0
                 bls.s   SSZMecha_RunArenaBoundCallback
                 rts
 ; ---------------------------------------------------------------------------
 
 SSZMechaArenaBounds_TestLeftBoundary:
-                move.w  (_unkFAB4).w,d0
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 cmp.w   x_pos(a0),d0
                 bhs.s   SSZMecha_RunArenaBoundCallback
                 rts

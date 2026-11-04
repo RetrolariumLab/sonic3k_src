@@ -41,9 +41,9 @@ SKEggRobo_ScaledFlightUnlockHover:
                 move.b  subtype(a0),d0
                 andi.w  #$F0,d0
                 lsr.w   #4,d0
-                move.w  (_unkFA82).w,d1
+                move.w  (SceneTimerOrSharedMotionRecordBase).w,d1
                 bset    d0,d1
-                move.w  d1,(_unkFA82).w
+                move.w  d1,(SceneTimerOrSharedMotionRecordBase).w
                 lea     (ArtKosM_EggRoboBadnik).l,a1
                 move.w  #tiles_to_bytes(ArtTile_EggRoboBadnik),d2
                 jsr     (Queue_Kos_Module).l
@@ -361,7 +361,7 @@ RequireEggRoboAppearanceGroupBit:
                 move.b  subtype(a0),d0
                 andi.w  #$F0,d0
                 lsr.w   #4,d0
-                move.w  (_unkFA82).w,d1
+                move.w  (SceneTimerOrSharedMotionRecordBase).w,d1
                 btst    d0,d1
                 bne.w   SKEggRobo_VariantSetupReturn
                 addq.w  #8,sp

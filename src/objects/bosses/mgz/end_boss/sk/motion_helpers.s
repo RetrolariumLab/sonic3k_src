@@ -250,7 +250,7 @@ LaunchMGZBossUpperDrillPassAndRecordPlan:
 MGZBossSK_SetUpperPassHeight:
                 move.w  (Camera_Y_pos).w,d3
                 addi.w  #8,d3
-                lea     (_unkFA82).w,a2
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a2
 
 MGZBossSK_RecordPassAndLaunchDrill:
                 move.w  (Camera_X_pos).w,d2
@@ -301,7 +301,7 @@ LaunchMGZBossLowerDrillPassFromUpperPlan:
                 move.w  d0,d1
                 andi.w  #1,d1
                 addq.w  #4,d1
-                move.w  (_unkFA82).w,d2
+                move.w  (SceneTimerOrSharedMotionRecordBase).w,d2
                 lsr.w   #1,d2
                 bset    #0,render_flags(a0)
                 move.b  MGZBossSK_LowerPassSideAdjustments(pc,d2.w),d3
@@ -312,7 +312,7 @@ LaunchMGZBossLowerDrillPassFromUpperPlan:
 MGZBossSK_ChooseLowerPassRecord:
                 add.b   d3,d1
                 move.w  #$F8,d3
-                lea     (_unkFA8A).w,a2
+                lea     (DDZScrollAccelOrSceneMotion).w,a2
                 bra.w   MGZBossSK_RecordPassAndLaunchDrill
 ; End of function LaunchMGZBossLowerDrillPassFromUpperPlan
 

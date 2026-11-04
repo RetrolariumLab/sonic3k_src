@@ -17,8 +17,8 @@ SKEndingFG_InitCameraAndSceneSky:
                 move.l  d0,(Camera_X_pos_copy).w
                 move.l  d0,(Camera_Y_pos).w
                 move.l  d0,(Camera_Y_pos_copy).w
-                clr.l   (_unkEE98).w
-                clr.l   (_unkEE9C).w
+                clr.l   (SceneAuxiliaryXOrCompetitionTime).w
+                clr.l   (SceneAuxiliaryYOrVerticalMotion).w
                 move.w  #$2B4,(Events_bg+$02).w
                 jsr     SKEnding_LoadSkyColorsToTarget(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
@@ -66,7 +66,7 @@ SKEndingFG_WaitForSignalAndSetOrigin:
                 tst.w   (Events_fg_4).w
                 beq.w   SKEndingFG_DrawWhileWaiting
                 clr.w   (Events_fg_4).w
-                move.w  (_unkEE98).w,(Events_bg+$00).w
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,(Events_bg+$00).w
                 jsr     SKEnding_PublishForegroundCamera(pc)
                 jsr     (Reset_TileOffsetPositionActual).l
                 addq.w  #4,(Events_routine_fg).w
@@ -336,11 +336,11 @@ SKEndingFG_DrawWhileWaiting:
 
 ; Subtract the saved transition origins and add $140 to X before writing the foreground camera copies
 SKEnding_PublishForegroundCamera:
-                move.w  (_unkEE98).w,d0
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d0
                 sub.w   (Events_bg+$00).w,d0
                 addi.w  #$140,d0
                 move.w  d0,(Camera_X_pos_copy).w
-                move.w  (_unkEE9C).w,d0
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 sub.w   (Events_bg+$02).w,d0
                 move.w  d0,(Camera_Y_pos_copy).w
                 rts

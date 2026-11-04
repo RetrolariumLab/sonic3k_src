@@ -21,7 +21,7 @@ DEZEscapeCrane_InitializeAttributes:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_CraneFollowUntilDefeat:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 bne.s   DEZFinal_CraneWaitThenDelete
                 jmp     (Refresh_ChildPositionAdjusted).l
 ; ---------------------------------------------------------------------------
@@ -42,7 +42,7 @@ DEZFinal_InitHeadHealthAndOffsets:
                 move.b  #8,collision_property(a0)
 
 DEZFinalHead_WaitHiddenForExposureMode:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.s   DEZFinalHead_InstallOpeningModeUpdater
                 bra.w   DEZFinalHead_TickFlashOrDefeat
 ; ---------------------------------------------------------------------------
@@ -51,7 +51,7 @@ DEZFinalHead_InstallOpeningModeUpdater:
                 move.l  #DEZFinal_HeadDrawUntilExposed,(a0)
 
 DEZFinal_HeadDrawUntilExposed:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bmi.s   DEZFinalHead_EnableVulnerableExposure
                 bsr.w   DEZFinalHead_TickFlashOrDefeat
                 bsr.w   DEZFinalChild_SetPosFromParent
@@ -63,7 +63,7 @@ DEZFinalHead_EnableVulnerableExposure:
                 move.b  #$16,collision_flags(a0)
 
 DEZFinal_HeadCheckExposedHits:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bpl.s   DEZFinalHead_InstallClosingModeUpdater
                 bsr.w   DEZFinalChild_SetPosFromParent
                 bsr.w   DEZFinalHead_ProcessHitOrDefeat
@@ -75,7 +75,7 @@ DEZFinalHead_InstallClosingModeUpdater:
                 move.l  #DEZFinalHead_ShowInactiveUntilModeClears,(a0)
 
 DEZFinalHead_ShowInactiveUntilModeClears:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   DEZFinalHead_ReturnToHiddenWait
                 bsr.w   DEZFinalChild_SetPosFromParent
                 bsr.w   DEZFinalHead_TickFlashOrDefeat
@@ -138,7 +138,7 @@ DEZFinal_InitExposureGraphic:
                 bset    #0,render_flags(a0)
                 move.w  #$7C,$42(a0)
                 move.w  #$28,$44(a0)
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 DEZFinal_OpenHeadAndTryBeam:
                 move.w  $44(a0),d0
@@ -148,7 +148,7 @@ DEZFinal_OpenHeadAndTryBeam:
                 blo.s   DEZFinal_DrawOpeningHead
                 move.l  #DEZFinal_WaitForBeamCompletion,(a0)
                 bset    #2,$38(a0)
-                move.b  #$80,(_unkFAA9).w
+                move.b  #$80,(SceneOutcomeOrActorReadySignal).w
                 st      (Events_fg_5).w
                 jsr     (AllocateObject).l
                 bne.s   DEZFinal_DrawOpeningHead
@@ -171,9 +171,9 @@ DEZFinal_WaitForBeamCompletion:
 DEZFinalHeadExposure_BeginClosingMode:
                 move.l  #DEZFinal_CloseHeadAndClearRequest,(a0)
                 move.w  #$80,$2E(a0)
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
                 st      (Events_fg_5).w
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 DEZFinal_CloseHeadAndClearRequest:
                 move.w  $44(a0),d0
@@ -184,7 +184,7 @@ DEZFinal_CloseHeadAndClearRequest:
                 movea.w parent3(a0),a1
                 bclr    #2,$38(a1)
                 clr.w   $1C(a1)
-                clr.b   (_unkFAA9).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
                 st      (Events_fg_5).w
                 jsr     (Go_Delete_Sprite).l
 

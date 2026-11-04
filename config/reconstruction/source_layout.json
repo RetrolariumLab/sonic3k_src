@@ -13324,7 +13324,7 @@
       "role": "memory",
       "status": "owned",
       "address_space": "declarations",
-      "physical_lines": 697,
+      "physical_lines": 698,
       "origin": {
         "commit": "d2e1c72c270435dca63d63a2a32f58f0af33e70d",
         "path": "Lockon S3/LockOn Pointers.s",
@@ -13468,7 +13468,7 @@
       "role": "memory",
       "status": "owned",
       "address_space": "declarations",
-      "physical_lines": 765,
+      "physical_lines": 772,
       "origin": {
         "commit": "5a299a8b29707c4a70e42a6860964cf3c1dc95f1",
         "path": "sonic3k.constants.s",

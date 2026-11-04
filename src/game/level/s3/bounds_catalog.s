@@ -6,14 +6,14 @@
 
 Get_LevelSizeStart:
                 clr.b   (Deform_lock).w
-                clr.b   (_unkEE08).w
+                clr.b   (LevelBoundsWriteOnlyClearByte).w
                 clr.b   (Scroll_lock).w
                 clr.b   (Scroll_lock_P2).w
                 clr.b   (Fast_V_scroll_flag).w
                 moveq   #0,d0
                 move.b  d0,(Dynamic_resize_routine).w
-                move.w  d0,(_unkF660).w
-                move.w  d0,(_unkF662).w
+                move.w  d0,(CreditsDelayOrSegaCompletionLatch).w
+                move.w  d0,(S3SegaVIntTransferRequest).w
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #4,d0

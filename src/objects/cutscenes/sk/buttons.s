@@ -19,7 +19,7 @@ PLC_CutsceneButton_End:
 ; ---------------------------------------------------------------------------
 
 SKSceneButton_CheckKnucklesAndDispatch:
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   SKSceneButton_DrawUnpressedOrDelete
                 movea.w d0,a1
                 lea     SKSceneButton_KnucklesContactBounds(pc),a2
@@ -27,7 +27,7 @@ SKSceneButton_CheckKnucklesAndDispatch:
                 beq.s   SKSceneButton_DrawUnpressedOrDelete
                 move.l  #SKSceneButton_DrawPressedOrCull,(a0)
                 move.b  #1,mapping_frame(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 clr.w   respawn_addr(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -70,7 +70,7 @@ SKSceneButton_StartWaterRiseAndTryGeyser:
                 addi.w  #$100,d0
                 move.w  d0,(Mean_water_level).w
                 move.w  #$350,(Target_water_level).w
-                st      (_unkFAA3).w
+                st      (ZoneButtonRequestOrBridgeReleaseSignal).w
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
@@ -131,9 +131,9 @@ SKSceneButton_CheckWaterCorkBreak:
 ; ---------------------------------------------------------------------------
 
 SKSceneButton_LowerWaterAfterCorkBreak:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 bne.s   SKSceneButton_DeleteCorkController
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 move.w  #$958,(Target_water_level).w
 
 SKSceneButton_DeleteCorkController:
@@ -156,9 +156,9 @@ SKSceneButton_ApplyStandingFrameAndRise:
                 andi.b  #standing_mask,d0
                 beq.s   SKSceneButton_DrawOrCullWaterButton
                 move.b  #1,mapping_frame(a0)
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 beq.s   SKSceneButton_DrawOrCullWaterButton
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 move.w  #$A58,(Target_water_level).w
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l

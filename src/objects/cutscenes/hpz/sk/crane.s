@@ -163,14 +163,14 @@ HPZCrane_FinishAlignmentAndSignal:
                 moveq   #3,d0
 
 HPZCrane_SetGroupReadyBit:
-                bset    d0,(_unkFAB8).w
+                bset    d0,(SceneSyncFlagsOrMHZState).w
 
 HPZCrane_DrawAfterAlignmentSignal:
                 bra.s   HPZCrane_SelectSegmentGeometry
 ; ---------------------------------------------------------------------------
 
 HPZCrane_WaitForShipHoldSignal:
-                btst    #4,(_unkFAB8).w
+                btst    #4,(SceneSyncFlagsOrMHZState).w
                 beq.s   HPZCrane_DrawWhileAwaitingHold
                 move.l  #HPZCrane_HoldPositionAndCheckFlicker,(a0)
                 move.w  #60-1,$2E(a0)

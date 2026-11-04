@@ -379,7 +379,7 @@ MGZBossSK_KnucklesBeginUpperPlan:
                 move.b  #8,routine(a0)
                 move.w  #$87,$2E(a0)
                 move.l  #MGZBossSK_KnucklesPauseBetweenPlans,$34(a0)
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 bra.w   MGZBossSK_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
@@ -413,7 +413,7 @@ MGZBossSK_KnucklesBeginLowerPlan:
                 move.w  #$9F,$2E(a0)
                 move.l  #MGZBossSK_KnucklesResetAfterPair,$34(a0)
                 move.b  #2,subtype(a0)
-                lea     (_unkFA8A).w,a1
+                lea     (DDZScrollAccelOrSceneMotion).w,a1
                 bra.w   MGZBossSK_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
@@ -456,7 +456,7 @@ MGZBossSK_BeginDefeatWaitAndFragments:
 
 MGZBossSK_SpawnCapsuleAndInstallWait:
                 move.l  #MGZBossSK_KnucklesWaitResultsAndLock,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (AllocateObject).l
                 bne.s   MGZBossSK_KnucklesExtendExitCamera
@@ -465,7 +465,7 @@ MGZBossSK_SpawnCapsuleAndInstallWait:
                 move.w  #$B0,y_pos(a1)
 
 MGZBossSK_KnucklesExtendExitCamera:
-                move.w  (_unkFAB4).w,d0
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 addi.w  #$118,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 lea     (Child6_IncLevX).l,a2
@@ -474,10 +474,10 @@ MGZBossSK_KnucklesExtendExitCamera:
 
 MGZBossSK_KnucklesWaitResultsAndLock:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   MGZArrivalSK_SharedReturn
                 move.l  #MGZBossSK_KnucklesRunToExitGate,(a0)
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     (Restore_PlayerControl).l
                 jsr     (Restore_LevelMusic).l
                 clr.w   (Ctrl_1_logical).w

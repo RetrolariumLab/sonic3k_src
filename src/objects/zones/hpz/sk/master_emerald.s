@@ -7,9 +7,9 @@ Obj_HPZMasterEmerald:
                 lea     ObjDat_HPZMasterEmerald(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #HPZMaster_UpdateVisiblePaletteAndTouch,(a0)
-                move.w  a0,(_unkFABA).w
-                move.b  #-$10,(_unkFABC).w
-                move.b  #-$18,(_unkFABD).w
+                move.w  a0,(HpzMasterEmeraldObjectAddress).w
+                move.b  #-$10,(DdzDebugSnapshotHighOrHpzSeedByte).w
+                move.b  #-$18,(HPZEmeraldOffsetOrDDZDebugLo).w
                 lea     (HPZMaster_TwoColorLocalPaletteSequence).l,a1
                 lea     (Palette_rotation_data).w,a2
                 move.l  (a1)+,(a2)+
@@ -40,7 +40,7 @@ HPZMaster_UpdateVisiblePaletteAndTouch:
 ; ---------------------------------------------------------------------------
 
 HPZMaster_TryCycleCompletedPalette:
-                tst.b   (_unkFAC1).w
+                tst.b   (EmeraldPresentationEnableAndPaletteRoute).w
                 bne.s   HPZMaster_QueueTouchAndRangeDraw
                 lea     HPZMaster_TwoColorLocalPaletteSequence(pc),a1
                 lea     (Normal_palette_line_4+$2).w,a2

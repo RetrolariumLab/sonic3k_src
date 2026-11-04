@@ -391,7 +391,7 @@ LBZBoss2S3_DebrisTickFinalWait:
 ; ---------------------------------------------------------------------------
 
 LBZBoss2S3_DebrisSignalEndingAndPalette:
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 clr.b   $39(a0)
                 clr.w   $2E(a0)
                 jsr     (AllocateObject).l

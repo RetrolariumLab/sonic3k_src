@@ -7,7 +7,7 @@ CutsceneKnux_HPZ:
                 movea.l a0,a1
                 move.l  #HPZKnux_CheckCameraAndBeginEncounter,(a1)
                 lea     (Dynamic_object_RAM+(object_size*45)).w,a2
-                move.w  a2,(_unkFAA4).w
+                move.w  a2,(SceneControllerObjectAddress).w
                 moveq   #bytesToWcnt(object_size),d0
 
 HPZKnux_CopyRelocatedActorAndDelete:
@@ -59,7 +59,7 @@ HPZKnux_CopyAndLoadScenePalette:
 ; ---------------------------------------------------------------------------
 
 HPZKnux_SignalCameraReadyAndDelete:
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -146,7 +146,7 @@ HPZKnux_AnimateIdleAndCountLoops:
                 jsr     (Animate_Raw2MultiDelay).l
                 tst.w   d2
                 bpl.s   HPZKnux_FaceTargetAndCheckRange
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.s   HPZKnux_FaceTargetAndCheckRange
                 move.b  $39(a0),d0
                 addq.b  #1,d0

@@ -27,7 +27,7 @@ SSZ2_BGDeformArray:
 ; ---------------------------------------------------------------------------
 
 SSZ2_BackgroundInit:
-                clr.l   (_unkEE9C).w
+                clr.l   (SceneAuxiliaryYOrVerticalMotion).w
                 jsr     BuildSsz2EndingStageScrollTables(pc)
                 jsr     (Reset_TileOffsetPositionEff).l
                 moveq   #0,d1
@@ -167,7 +167,7 @@ SKSSZ2BG_ReorderEarlyBands:
 SKSSZ2BG_CalcEarlyBackgroundY:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$320,d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  (Special_V_int_routine).w,d1
                 subq.w  #4,d1
                 beq.s   SKSSZ2BG_SetEarlyPosAndBindRamp
@@ -430,7 +430,7 @@ SKSSZ2BG_EndingMotionBranches:
 SKSSZ2BG_BobAndWaitForMotionSignal:
                 tst.w   (Special_V_int_routine).w
                 beq.w   SKSSZ2BG_EndingMotionReturn
-                addi.l  #$11B,(_unkEE9C).w
+                addi.l  #$11B,(SceneAuxiliaryYOrVerticalMotion).w
                 move.l  #$2000,d0
                 move.l  #$4A,d1
                 jsr     (Gradual_SwingOffset).l
@@ -464,10 +464,10 @@ SKSSZ2BG_AccelEmeraldMotion:
 
 SKSSZ2BG_StepEmeraldMotion:
                 move.l  $3A(a0),d0
-                sub.l   d0,(_unkEE9C).w
+                sub.l   d0,(SceneAuxiliaryYOrVerticalMotion).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$318,d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 cmpi.w  #$D0,d0
                 beq.s   SKSSZ2BG_SignalEmeraldAccentOnce
                 bcs.s   SKSSZ2BG_TryFinishEmeraldMotion
@@ -479,7 +479,7 @@ SKSSZ2BG_SignalEmeraldAccentOnce:
                 tst.b   $39(a0)
                 bne.s   SKSSZ2BG_TryFinishEmeraldMotion
                 st      $39(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
 
 SKSSZ2BG_TryFinishEmeraldMotion:
                 cmpi.w  #$2A0,(Camera_Y_pos).w
@@ -495,10 +495,10 @@ SKSSZ2BG_AccelOrdinaryMotion:
 
 SKSSZ2BG_StepOrdinaryMotion:
                 move.l  $3A(a0),d0
-                add.l   d0,(_unkEE9C).w
+                add.l   d0,(SceneAuxiliaryYOrVerticalMotion).w
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$318,d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 cmpi.w  #$D0,d0
                 beq.s   SKSSZ2BG_SignalOrdinaryAccentOnce
                 bcc.s   SKSSZ2BG_TryBeginFinalCameraMove
@@ -510,7 +510,7 @@ SKSSZ2BG_SignalOrdinaryAccentOnce:
                 tst.b   $39(a0)
                 bne.s   SKSSZ2BG_TryBeginFinalCameraMove
                 st      $39(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
 
 SKSSZ2BG_TryBeginFinalCameraMove:
                 cmpi.w  #$600,(Camera_Y_pos).w

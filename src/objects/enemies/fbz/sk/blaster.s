@@ -142,7 +142,7 @@ SKBlaster_CeilingProbeReturn:
 ; ---------------------------------------------------------------------------
 
 SKBlaster_WaitAtCeiling:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 bne.s   SKBlaster_CeilingHoldReturn
                 move.b  #$E,routine(a0)
 
@@ -231,7 +231,7 @@ SKBlaster_SetLandingSpeed:
 Blaster_TryRetreatToCeiling:
                 tst.b   $3C(a0)
                 beq.s   SKBlaster_RetreatCheckReturn
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 beq.s   SKBlaster_RetreatCheckReturn
                 move.b  routine(a0),$3D(a0)
                 move.b  #$A,routine(a0)

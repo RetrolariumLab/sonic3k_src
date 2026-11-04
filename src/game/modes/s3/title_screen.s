@@ -105,8 +105,8 @@ S3Title_CopyNextFadePaletteStep:
                 move.w  (a1)+,(a2)+
                 tst.w   -$E(a1)                         ; Wait for BG color to turn to black
                 bne.s   S3Title_CopyNextFadePaletteStep
-                clr.w   (_unkF660).w
-                clr.w   (_unkF662).w
+                clr.w   (CreditsDelayOrSegaCompletionLatch).w
+                clr.w   (S3SegaVIntTransferRequest).w
                 move.b  #-1,(Title_anim_buffer).w
                 move.b  #0,(Title_anim_delay).w
                 move.w  #1,(Title_anim_frame).w         ; Set initial variables for Sonic animation page flipping

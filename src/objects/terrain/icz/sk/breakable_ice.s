@@ -23,7 +23,7 @@ SKICZBreakIce_ResolveWallAndCheckBreak:
                 bne.s   SKICZBreakIce_ShatterWall
 
 SKICZBreakIce_CheckPlatformOverlap:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 cmpi.l  #Obj_ICZPathFollowPlatform_2,(a1)
                 bne.s   SKICZBreakIce_DrawIntactWall
                 move.w  x_pos(a1),d0

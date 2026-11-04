@@ -5,7 +5,7 @@
 ; =============== S U B R O U T I N E =======================================
 
 SKCredits_DispatchScrollState:
-                move.w  (_unkFA86).w,d0
+                move.w  (SceneCreditStateOrBossMotionPlanX).w,d0
                 move.w  SKCredits_ScrollStateOffsets(pc,d0.w),d0
                 jmp     SKCredits_ScrollStateOffsets(pc,d0.w)
 ; End of function SKCredits_DispatchScrollState
@@ -19,11 +19,11 @@ SKCredits_ScrollStateOffsets:
 ; ---------------------------------------------------------------------------
 
 SKCredits_InitScrollAndTryMusic:
-                addq.w  #2,(_unkFA86).w
-                clr.b   (_unkFACC).w
+                addq.w  #2,(SceneCreditStateOrBossMotionPlanX).w
+                clr.b   (EndingCreditsFinishedSignal).w
                 clr.l   (Camera_Y_pos).w
                 clr.l   (V_scroll_value).w
-                clr.w   (_unkFAAE).w
+                clr.w   (SceneActorOrWorldOffset).w
                 cmpi.w  #3,(Player_mode).w
                 bne.s   SKCredits_SelectParamsAndLoadFont
                 jsr     (AllocateObject).l
@@ -44,9 +44,9 @@ PLC_SKCredits_End:
 ; ---------------------------------------------------------------------------
 
 SKCredits_TickDelayThenQueuePose:
-                subq.w  #1,(_unkF660).w
+                subq.w  #1,(CreditsDelayOrSegaCompletionLatch).w
                 bpl.s   SKCredits_ScrollDelayReturn
-                addq.w  #2,(_unkFA86).w
+                addq.w  #2,(SceneCreditStateOrBossMotionPlanX).w
                 bsr.w   SKCredits_QueueEndingPoseArt
 
 SKCredits_ScrollDelayReturn:
@@ -56,7 +56,7 @@ SKCredits_ScrollDelayReturn:
 SKCredits_ScrollAndCheckTileCrossing:
                 move.l  (Camera_Y_pos).w,d0
                 move.l  d0,d1
-                add.l   (_unkFAC8).w,d0
+                add.l   (EndingCreditsFixedPointScrollIncrement).w,d0
                 move.l  d0,(Camera_Y_pos).w
                 swap    d0
                 swap    d1
@@ -74,9 +74,9 @@ SKCredits_ScrollAndCheckTileCrossing:
                 moveq   #8,d2
 
 SKCredits_SelectPartAndCheckTextRow:
-                add.w   (_unkFAAE).w,d2
+                add.w   (SceneActorOrWorldOffset).w,d2
                 movea.l SKCredits_CreditPartPointers(pc,d2.w),a1
-                move.w  (_unkFA84).w,d2
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d2
                 move.w  (a1,d2.w),d2
                 lea     (a1,d2.w),a1
                 move.w  (a1)+,d2
@@ -97,7 +97,7 @@ SKCredits_SelectPartAndCheckTextRow:
 SKCredits_UploadTwoRowsAndAdvance:
                 andi.w  #$FFE,d2
                 bsr.w   SKCredits_BuildAndUploadText
-                addq.w  #2,(_unkFA84).w
+                addq.w  #2,(SceneCreditIndexOrBossMotionPlanAngle).w
 
 SKCredits_ScrollTextUpdateReturn:
                 rts
@@ -110,23 +110,23 @@ SKCredits_CreditPartPointers:
 ; ---------------------------------------------------------------------------
 
 SKCredits_PartTransitionOffsets:
-                addq.w  #4,(_unkFAAE).w
-                clr.w   (_unkFA84).w
+                addq.w  #4,(SceneActorOrWorldOffset).w
+                clr.w   (SceneCreditIndexOrBossMotionPlanAngle).w
                 rts
 ; ---------------------------------------------------------------------------
 
 SKCredits_FinishCreditsAndSignalScene:
-                addq.w  #2,(_unkFA86).w
+                addq.w  #2,(SceneCreditStateOrBossMotionPlanX).w
                 clr.l   (Timer).w
                 st      (Events_fg_4).w
-                st      (_unkFACC).w
+                st      (EndingCreditsFinishedSignal).w
                 cmpi.w  #3,(Player_mode).w
                 beq.s   SKCredits_TryKnucklesHandoff
                 rts
 ; ---------------------------------------------------------------------------
 
 SKCredits_TryKnucklesHandoff:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   SKCredits_ClearKnucklesSceneLatch
                 jsr     (AllocateObject).l
                 bne.s   SKCredits_HandoffSpawnReturn
@@ -137,7 +137,7 @@ SKCredits_HandoffSpawnReturn:
 ; ---------------------------------------------------------------------------
 
 SKCredits_ClearKnucklesSceneLatch:
-                clr.b   (_unkFAB9).w
+                clr.b   (EndingCloudSpawnFrameMask).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -346,7 +346,7 @@ SKCredits_AddLockOnPoseStride:
                 addi.w  #$C,d1
 
 SKCredits_SelectCompletionPoseColumn:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   SKCredits_DispatchSelectedPoseLoader
                 beq.s   SKCredits_AddFinalPoseStride
                 addi.w  #4,d1

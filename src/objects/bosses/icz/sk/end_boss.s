@@ -155,7 +155,7 @@ ICZBossSK_ReleasePartsAndSpawnDebris:
 
 ICZBossSK_SignalCapsuleAndReleaseCamera:
                 move.l  #ICZBossSK_RestorePlayersAndExitBounds,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (AllocateObject).l
                 bne.s   ICZBossSK_SetDefeatCameraTarget
@@ -164,7 +164,7 @@ ICZBossSK_SignalCapsuleAndReleaseCamera:
                 move.w  #$6A3,y_pos(a1)
 
 ICZBossSK_SetDefeatCameraTarget:
-                move.w  (_unkFAB4).w,d0
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 addi.w  #$130,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
                 jsr     (AllocateObject).l
@@ -177,9 +177,9 @@ ICZBossSK_DefeatCameraSpawnReturn:
 
 ICZBossSK_RestorePlayersAndExitBounds:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   ICZBossSK_SharedReturn
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
@@ -674,7 +674,7 @@ ICZBossSK_HitUpdateReturn:
 ICZBossSK_BeginDefeatAndSignalSnow:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #ICZBossSK_ReleasePartsAndSpawnDebris,$34(a0)
-                movea.w (_unkFAAE).w,a1
+                movea.w (SceneActorOrWorldOffset).w,a1
                 cmpi.l  #SKICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   ICZBossSK_StopTimerAndAwardScore
                 bset    #5,$38(a1)

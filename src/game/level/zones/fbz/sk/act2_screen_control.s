@@ -10,8 +10,8 @@ FBZ2_ScreenInit:
                 move.w  #4,(Events_routine_fg).w        ; If screen X is past subboss battle, change screen event
                 move.w  d0,(Camera_min_X_pos).w
                 jsr     SetUp_FBZ2BossEvent(pc)
-                clr.l   (_unkEE98).w
-                clr.l   (_unkEE9C).w                    ; Clear BG camera offset
+                clr.l   (SceneAuxiliaryXOrCompetitionTime).w
+                clr.l   (SceneAuxiliaryYOrVerticalMotion).w  ; Clear BG camera offset
                 move.w  #VRAM_Plane_B_Name_Table,d7
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (ArtKosM_FBZCloud).l,a1
@@ -80,8 +80,8 @@ SKFBZ2FG_DrawAndTryStartBoss:
                 cmpi.w  #$2B30,(Camera_X_pos).w
                 blo.s   SKFBZ2FG_ScreenEventReturn
                 jsr     SetUp_FBZ2BossEvent(pc)         ; If Player passes certain point, set up the boss event
-                clr.l   (_unkEE98).w
-                clr.l   (_unkEE9C).w
+                clr.l   (SceneAuxiliaryXOrCompetitionTime).w
+                clr.l   (SceneAuxiliaryYOrVerticalMotion).w
                 addq.w  #4,(Events_routine_fg).w
 
 SKFBZ2FG_ScreenEventReturn:

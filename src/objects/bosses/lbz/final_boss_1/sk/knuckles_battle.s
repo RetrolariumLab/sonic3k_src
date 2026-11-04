@@ -10,8 +10,8 @@ Obj_LBZFinalBossKnux:
                 jsr     (Boss_BeginCameraTransition).l
                 move.l  #LBZBoss1SK_KnucklesTickCameraTransition,(a0)
                 move.l  #LBZBoss1SK_KnucklesInstallBossInit,$34(a0)
-                clr.b   (_unkFAA2).w
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneEventLatchOrBossReleaseSignal).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 moveq   #PLCID_71,d0
                 jsr     (Load_PLC).l
 

@@ -66,7 +66,7 @@ S3Gumball_LaunchAndConsumeTriangleCell:
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 clr.b   (a1,d0.w)
                 move.w  #$F,((RAM_start+$2020)&$FFFFFF).l
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 bset    #0,$38(a1)
                 moveq   #signextendB(sfx_Spring),d0
                 jsr     (Play_SFX).l

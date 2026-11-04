@@ -34,7 +34,7 @@ LRZBoss_WaitViewportAndTryPlatform:
                 move.w  #$37F,$2E(a1)
 
 LRZBoss_RepeatUntilBossAppears:
-                tst.w   (_unkFAA4).w
+                tst.w   (SceneControllerObjectAddress).w
                 bne.w   LRZBoss_ReleaseRidersAndDelete
                 subq.w  #1,$2E(a0)
                 bpl.w   LRZBoss_SharedReturn
@@ -119,18 +119,18 @@ LRZBoss_DescendAndCheckLifetime:
                 bmi.s   LRZBoss_ReleaseRidersAndDelete
 
 LRZBoss_CheckAndClaimArenaPlatform:
-                tst.w   (_unkFAA4).w
+                tst.w   (SceneControllerObjectAddress).w
                 beq.s   LRZPlatformShared_DrawCurrent
                 tst.b   render_flags(a0)
                 bpl.s   LRZBoss_ReleaseRidersAndDelete
                 tst.b   d0
                 bne.s   LRZPlatformShared_DrawCurrent
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.s   LRZPlatformShared_DrawCurrent
                 cmpi.w  #$612,y_pos(a0)
                 bhi.s   LRZPlatformShared_DrawCurrent
                 move.l  #LRZBoss_SignalBossAtArenaHeight,(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
 
 LRZPlatformShared_DrawCurrent:
                 jmp     (Draw_Sprite).l
@@ -150,7 +150,7 @@ LRZBoss_SignalBossAtArenaHeight:
                 cmpi.w  #$612,y_pos(a0)
                 blo.s   LRZPlatformShared_DrawCurrent
                 move.l  #LRZBoss_CheckShatterAndStream,(a0)
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 clr.w   y_vel(a0)
                 bset    #7,status(a0)
                 jmp     (Draw_Sprite).l
@@ -158,7 +158,7 @@ LRZBoss_SignalBossAtArenaHeight:
 
 LRZBoss_CheckShatterAndStream:
                 bsr.w   LRZBossPlatform_TryShatter
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 bne.s   LRZBoss_FollowLavaStreamAndSolid
                 tst.b   render_flags(a0)
                 bpl.w   LRZBoss_ReleaseRidersAndDelete

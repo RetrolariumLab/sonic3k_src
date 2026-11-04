@@ -19,7 +19,7 @@ AIZBossS3_LockCameraAndQueueBossArt:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.b  #1,(Boss_flag).w                ; Lock the screen
-                clr.b   (_unkFAA3).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 moveq   #PLCID_6B,d0
                 jsr     (Load_PLC).l                    ; Load Robotnik's ship and explosions
                 lea     (ArtKosM_AIZEndBoss).l,a1
@@ -163,7 +163,7 @@ AIZBossS3_BeginStationaryWait:
 ; ---------------------------------------------------------------------------
 
 AIZBossS3_SignalBridgeAndExtendWait:
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 move.w  #$8F,$2E(a0)
                 move.l  #AIZBossS3_BeginStationaryWait,$34(a0)
                 rts
@@ -228,7 +228,7 @@ AIZBossS3_StopTransitAndReveal:
 
 AIZBossS3_BeginDefeatDebris:
                 move.l  #AIZBossS3_InstallCapsuleWatcher,$34(a0)
-                st      (_unkFAA3).w
+                st      (ZoneButtonRequestOrBridgeReleaseSignal).w
                 move.l  #Obj_Wait,(a0)
                 bset    #4,$38(a0)
                 move.w  #$7F,$2E(a0)
@@ -242,7 +242,7 @@ AIZBossS3_InstallCapsuleWatcher:
                 move.l  #AIZBossS3_WaitCapsuleAndOpenExit,(a0)
 
 AIZBossS3_SignalAndSpawnCapsule:
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 lea     (PLC_EggCapsule).l,a1
@@ -254,10 +254,10 @@ AIZBossS3_SignalAndSpawnCapsule:
 ; ---------------------------------------------------------------------------
 
 AIZBossS3_WaitCapsuleAndOpenExit:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   AIZBossS3_SharedReturn
                 move.l  #AIZBossS3_WalkPlayerToExitGate,(a0)
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l

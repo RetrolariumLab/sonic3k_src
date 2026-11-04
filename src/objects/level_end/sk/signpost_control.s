@@ -20,7 +20,7 @@ Restore_PlayerControl2:
 
 Obj_EndSignControl:
                 move.l  #Obj_EndSignControlWait,(a0)
-                st      (_unkFAA8).w                    ; End of level is in effect
+                st      (ActCompletionHandshake).w      ; End of level is in effect
                 bset    #4,$38(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 move.l  #Obj_EndSignControlDoSign,$34(a0)
@@ -53,7 +53,7 @@ Child6_EndSign:
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignControlAwaitStart:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   SKReturn_AttrSetup
                 move.l  #Obj_EndSignControlDoStart,(a0)
                 jsr     Restore_PlayerControl(pc)
@@ -142,22 +142,22 @@ SKEndCamera_SelectYApproach:
                 move.w  (Camera_Y_pos).w,d0
                 tst.b   $27(a0)
                 bmi.s   SKEndCamera_WaitForYMargin
-                cmp.w   (_unkFAB0).w,d0
+                cmp.w   (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 bhs.s   SKEndCamera_LatchYBounds
                 move.w  d0,(Camera_min_Y_pos).w
                 bra.w   SKEndCamera_ApproachXFromLeft
 ; ---------------------------------------------------------------------------
 
 SKEndCamera_WaitForYMargin:
-                move.w  (_unkFAB2).w,d1
+                move.w  (SceneMaximumYOrEmeraldSelectionTail).w,d1
                 addi.w  #$60,d1
                 cmp.w   d1,d0
                 bhi.s   SKEndCamera_ApproachXFromLeft
 
 SKEndCamera_LatchYBounds:
                 bset    #1,$27(a0)
-                move.w  (_unkFAB0).w,(Camera_min_Y_pos).w
-                move.w  (_unkFAB2).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,(Camera_min_Y_pos).w
+                move.w  (SceneMaximumYOrEmeraldSelectionTail).w,d0
                 move.w  d0,(Camera_target_max_Y_pos).w
 
 SKEndCamera_ApproachXFromLeft:
@@ -166,14 +166,14 @@ SKEndCamera_ApproachXFromLeft:
                 move.w  (Camera_X_pos).w,d0
                 btst    #6,$27(a0)
                 bne.s   SKEndCamera_ApproachXFromRight
-                cmp.w   (_unkFAB4).w,d0
+                cmp.w   (SceneMinimumXOrEmeraldSelectionTail).w,d0
                 bhs.s   SKEndCamera_LatchXBounds
                 move.w  d0,(Camera_min_X_pos).w
                 bra.w   SKEndCamera_TryFinishJoin
 ; ---------------------------------------------------------------------------
 
 SKEndCamera_ApproachXFromRight:
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 bls.s   SKEndCamera_LatchXBounds
                 move.w  d0,(Camera_max_X_pos).w
                 bra.w   SKEndCamera_TryFinishJoin
@@ -181,8 +181,8 @@ SKEndCamera_ApproachXFromRight:
 
 SKEndCamera_LatchXBounds:
                 bset    #2,$27(a0)
-                move.w  (_unkFAB4).w,(Camera_min_X_pos).w
-                move.w  (_unkFAB6).w,(Camera_max_X_pos).w
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,(Camera_min_X_pos).w
+                move.w  (SceneMaximumXOrEmeraldSelectionTail).w,(Camera_max_X_pos).w
 
 ; Require all three latches, clear the scratch fields and tail-call the continuation
 SKEndCamera_TryFinishJoin:
@@ -212,9 +212,9 @@ SKEndCamera_SaveAndLoadBounds:
                 move.w  (Camera_target_max_Y_pos).w,(Camera_stored_max_Y_pos).w
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w
                 move.w  (Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
-                move.w  (a1)+,(_unkFAB0).w
-                move.w  (a1)+,(_unkFAB2).w
-                move.w  (a1)+,(_unkFAB4).w
-                move.w  (a1)+,(_unkFAB6).w
+                move.w  (a1)+,(SceneMinimumYOrEmeraldSelectionBytes).w
+                move.w  (a1)+,(SceneMaximumYOrEmeraldSelectionTail).w
+                move.w  (a1)+,(SceneMinimumXOrEmeraldSelectionTail).w
+                move.w  (a1)+,(SceneMaximumXOrEmeraldSelectionTail).w
                 rts
 ; End of function Boss_BeginCameraTransition

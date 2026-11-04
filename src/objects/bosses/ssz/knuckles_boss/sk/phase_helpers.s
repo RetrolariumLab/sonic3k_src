@@ -42,7 +42,7 @@ SSZKnuxMecha_LimitUpwardAcceleration:
 
 SSZSuperMecha_MoveAndTestReturnHeight:
                 jsr     (MoveSprite2).l
-                move.w  (_unkFAB0).w,d0
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d0
                 cmp.w   y_pos(a0),d0
                 bhs.s   SSZSuperMecha_ClampHeightAndResumeHover
                 rts
@@ -189,12 +189,12 @@ SSZKnuxMecha_EmeraldCycleAndUpdateFrame:
 
 SSZKnuxMecha_EmeraldSetFrameFromScene:
                 move.b  #0,mapping_frame(a0)
-                btst    #6,(_unkFAB8).w
+                btst    #6,(SceneSyncFlagsOrMHZState).w
                 beq.s   SSZKnuxMecha_EmeraldDrawOrDelete
                 move.b  #1,mapping_frame(a0)
 
 SSZKnuxMecha_EmeraldDrawOrDelete:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 bne.w   SSZMechaChildren_DeleteCurrent
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------

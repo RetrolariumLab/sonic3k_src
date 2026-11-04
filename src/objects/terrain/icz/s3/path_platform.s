@@ -40,7 +40,7 @@ ICZPathFollowPlatform_Index:
 S3ICZPathPlat_InitAndRegisterPlatform:
                 lea     ObjDat_ICZPathFollowPlatform(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 move.b  #$20,x_radius(a0)
                 move.b  #$12,y_radius(a0)
                 moveq   #0,d0

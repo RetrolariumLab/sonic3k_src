@@ -49,7 +49,7 @@ S3SSResults_QueueResultNameAndPanelArt:
                 lea     (ArtKosM_SSResults).l,a1
                 move.w  #tiles_to_bytes($001),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #S3LevelResults_SpecialVIntReturn,(_unkEF44_1).w
+                move.l  #S3LevelResults_SpecialVIntReturn,(MenuVInterruptCallbackPointer).w
 
 S3SSResults_WaitForGraphicsThenPrepHUD:
                 move.b  #VInt_ID_1E,(V_int_routine).w

@@ -296,14 +296,14 @@ S3LBZ2Egg_GrowBackgroundWrapBias:
                 addi.w  #$100,d3
                 addi.w  #$100,d4
                 bmi.s   S3LBZ2Egg_GrowBackgroundWrapBias
-                cmp.w   (_unkEEA0).w,d3
+                cmp.w   (SceneColumnOrCompBlinkVRAM).w,d3
                 blo.s   S3LBZ2Egg_ApplyBackgroundWrapBias
-                move.w  d3,(_unkEEA0).w
+                move.w  d3,(SceneColumnOrCompBlinkVRAM).w
 
 S3LBZ2Egg_ApplyBackgroundWrapBias:
-                add.w   (_unkEEA0).w,d0
+                add.w   (SceneColumnOrCompBlinkVRAM).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
-                tst.w   (_unkEEA0).w
+                tst.w   (SceneColumnOrCompBlinkVRAM).w
                 beq.s   S3LBZ2Egg_CheckWaterBandLevel
 
 S3LBZ_DeathEggReduceEffectiveYModuloPage:
@@ -317,7 +317,7 @@ S3LBZ_DeathEggPublishReducedBackgroundY:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
 
 S3LBZ2Egg_CheckWaterBandLevel:
-                tst.w   (_unkEE9C).w
+                tst.w   (SceneAuxiliaryYOrVerticalMotion).w
                 bmi.s   S3LBZ2Egg_DisableWaterBand
                 sub.w   d1,d2
                 bpl.s   S3LBZ2Egg_PrepareReverseUpperBand
@@ -515,7 +515,7 @@ S3LBZ_DeathEggLockVerticalMinimumAtLimit:
 S3LBZ2Egg_IntegratePrimaryMotion:
                 lea     (Events_bg+$02).w,a1
                 moveq   #0,d1
-                move.w  (_unkEEA2).w,d1                 ; Speed of Death Egg movement
+                move.w  (SceneRowAnchorOrCompetitionWinCounts).w,d1  ; Speed of Death Egg movement
                 add.l   d1,(a1)
                 move.w  (a1),d0
                 move.w  d0,d1
@@ -524,7 +524,7 @@ S3LBZ2Egg_IntegratePrimaryMotion:
                 move.w  #$2200,d1
                 tst.b   (Scroll_lock).w
                 bne.s   S3LBZ2Egg_IntegrateSecondaryMotion
-                move.l  (_unkEE9C).w,d1                 ; Get BG movement speed if edge of screen is reached
+                move.l  (SceneAuxiliaryYOrVerticalMotion).w,d1  ; Get BG movement speed if edge of screen is reached
 
 S3LBZ2Egg_IntegrateSecondaryMotion:
                 add.l   d1,4(a1)
@@ -558,16 +558,16 @@ S3LBZ_ReturnFromDeathEggScreenMotion:
 ; =============== S U B R O U T I N E =======================================
 
 LBZ2_EndFallingAccel:
-                tst.w   (_unkEEA2).w
+                tst.w   (SceneRowAnchorOrCompetitionWinCounts).w
                 beq.s   S3LBZ2Egg_AccelerateSecondaryFall
-                subi.w  #$100,(_unkEEA2).w
+                subi.w  #$100,(SceneRowAnchorOrCompetitionWinCounts).w
                 bra.s   S3LBZ_ReturnFromDeathEggFallAcceleration
 ; ---------------------------------------------------------------------------
 
 S3LBZ2Egg_AccelerateSecondaryFall:
-                cmpi.l  #$FFFE8000,(_unkEE9C).w
+                cmpi.l  #$FFFE8000,(SceneAuxiliaryYOrVerticalMotion).w
                 ble.s   S3LBZ_ReturnFromDeathEggFallAcceleration
-                subi.l  #$100,(_unkEE9C).w
+                subi.l  #$100,(SceneAuxiliaryYOrVerticalMotion).w
 
 S3LBZ_ReturnFromDeathEggFallAcceleration:
                 rts

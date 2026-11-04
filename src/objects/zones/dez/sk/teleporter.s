@@ -51,7 +51,7 @@ SKDEZTeleporter_CheckRiderEligibility:
                 bne.w   SKDEZTeleporter_CaptureReturn
                 btst    #Status_InAir,status(a1)
                 bne.w   SKDEZTeleporter_CaptureReturn
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.w   SKDEZTeleporter_CaptureReturn
                 movea.w interact(a1),a3
                 cmpi.l  #Obj_DEZTeleporter,(a3)

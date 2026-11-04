@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 SSZRampDebris_WaitForEscape:
-                tst.w   (_unkEE98).w
+                tst.w   (SceneAuxiliaryXOrCompetitionTime).w
                 bne.s   SSZRampDebris_InitializeRowProgression
                 rts
 ; ---------------------------------------------------------------------------
@@ -48,7 +48,7 @@ SSZRampDebris_SelectArtAndClearRow:
                 lsl.w   #4,d1
                 andi.w  #$F00,d1
                 addi.w  #-$2000,d1
-                move.w  d1,(_unkEEFA).w
+                move.w  d1,(SszDebrisClearRowVramRequest).w
                 lea     SSZRampDebris_RowTileAndShapeWords(pc),a2
                 cmpi.w  #$380,d0
                 blo.s   SSZRampDebris_PrepareEightColumnRow

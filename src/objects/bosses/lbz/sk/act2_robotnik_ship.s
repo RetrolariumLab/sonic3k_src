@@ -80,7 +80,7 @@ LBZShipSK_ApproachTargetAndSignalImpact:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 bsr.w   AttachPlayer1PositionToLBZRobotnikShip
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$50,d0

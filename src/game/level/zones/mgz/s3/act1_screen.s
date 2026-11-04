@@ -99,7 +99,7 @@ MGZ1BGE_Transition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.l   (Events_bg+$10).w
                 clr.w   (Events_bg+$14).w
-                clr.w   (_unkEEA2).w
+                clr.w   (SceneRowAnchorOrCompetitionWinCounts).w
                 clr.w   (Events_routine_bg).w           ; Clear flags/values used for BG stuff in act 2
 
 S3MGZ1Screen_DrawBgDuringActChange:

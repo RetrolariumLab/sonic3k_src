@@ -20,7 +20,7 @@ Restore_PlayerControl2:
 
 Obj_EndSignControl:
                 move.l  #Obj_EndSignControlWait,(a0)
-                st      (_unkFAA8).w                    ; End of level is in effect
+                st      (ActCompletionHandshake).w      ; End of level is in effect
                 bclr    #7,render_flags(a0)
                 bset    #4,$38(a0)
                 move.w  #$7F,$2E(a0)
@@ -58,7 +58,7 @@ Child6_EndSign:
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignControlAwaitStart:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   S3Return_AttrSetup
                 move.l  #Obj_EndSignControlDoStart,(a0)
                 jsr     Restore_PlayerControl(pc)

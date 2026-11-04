@@ -35,7 +35,7 @@ Gumball_ScreenEvent:
 
 Gumball_SetUpVScroll:
                 move.w  (Camera_Y_pos_copy).w,d0
-                movea.w (_unkFAA4).w,a5
+                movea.w (SceneControllerObjectAddress).w,a5
                 move.w  $14(a5),d1
                 subi.w  #$C8,d1
                 sub.w   d0,d1

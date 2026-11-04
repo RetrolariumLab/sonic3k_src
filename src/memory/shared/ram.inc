@@ -30,12 +30,12 @@ SStage_collision_response_list:     set     Block_table+$1400  ; $100 bytes ; sp
 SStage_blue_sphere_to_ring_queue:   set     Block_table+$1500  ; $100 bytes ; queue used by special stages to temporarily store the positions of blue spheres that have turned into rings
 SStage_red_sphere_dfs_walk_stack:   set     Block_table+$1600  ; $100 bytes ; stack of (direction index bounds, direction index, position) used by special stages
         ; as part of the red sphere DFS walk to check for loops of red spheres
-HScroll_table:          ds.b    $200                    ; array of background scroll positions for the level. WARNING: some references are before this label
-_unkA880:               set     HScroll_table+$80       ; used in SSZ screen/background events
-_unkA8E0:               set     HScroll_table+$E0       ; used in SSZ screen/background events
-Nem_code_table:         ds.b    $200                    ; code table is built up here and then used during decompression
-Sprite_table_input:     ds.b    $400                    ; 8 priority levels, $80 bytes per level
-Sprite_table_input_end: equ     *
+HScroll_table:                      ds.b    $200        ; array of background scroll positions for the level. WARNING: some references are before this label
+SszCollapseStripCoordinateAlias:    set     HScroll_table+$80  ; used in SSZ screen/background events
+SszCollapseStripDelayAlias:         set     HScroll_table+$E0  ; used in SSZ screen/background events
+Nem_code_table:                     ds.b    $200        ; code table is built up here and then used during decompression
+Sprite_table_input:                 ds.b    $400        ; 8 priority levels, $80 bytes per level
+Sprite_table_input_end:             equ     *
 
 Object_RAM:             equ     *                       ; $1FCC bytes ; $4A bytes per object, 110 objects
 Player_1:               ds.b    object_size             ; main character in 1 player mode, player 1 in Competition mode
@@ -86,12 +86,12 @@ Ring_status_table:      ds.b    $400                    ; 1 word per ring
 Ring_status_table_end:  equ     *
 Object_respawn_table:   ds.b    $300                    ; 1 byte per object, every object in the level gets an entry
 
-Camera_RAM:         equ     *                           ; various camera and scroll-related variables are stored here
-H_scroll_amount:    ds.w    1                           ; number of pixels camera scrolled horizontally in the last frame * $100
-V_scroll_amount:    ds.w    1                           ; number of pixels camera scrolled vertically in the last frame * $100
-H_scroll_amount_P2: ds.w    1
-V_scroll_amount_P2: ds.w    1
-_unkEE08:           ds.b    1                           ; this is actually unused
+Camera_RAM:                     equ     *               ; various camera and scroll-related variables are stored here
+H_scroll_amount:                ds.w    1               ; number of pixels camera scrolled horizontally in the last frame * $100
+V_scroll_amount:                ds.w    1               ; number of pixels camera scrolled vertically in the last frame * $100
+H_scroll_amount_P2:             ds.w    1
+V_scroll_amount_P2:             ds.w    1
+LevelBoundsWriteOnlyClearByte:  ds.b    1               ; this is actually unused
                 ds.b    1                               ; unused
 Scroll_lock:                ds.b    1                   ; if this is set scrolling routines aren't called
 Scroll_lock_P2:             ds.b    1
@@ -154,59 +154,60 @@ Camera_X_pos_P2_BG_copy:    ds.w    1                   ; this is used in compet
                 ds.w    1                               ; unused
 Camera_Y_pos_P2_BG_copy:    ds.w    1                   ; this is used in competition mode, and it acts as a copy of the y position for player 2's background
                 ds.w    1                               ; unused
-Camera_X_pos:           ds.l    1
-Camera_Y_pos:           ds.l    1
-Camera_X_pos_copy:      ds.l    1
-Camera_Y_pos_copy:      ds.l    1
-Camera_X_pos_rounded:   ds.w    1                       ; rounded down to the nearest block boundary ($10th pixel)
-Camera_Y_pos_rounded:   ds.w    1                       ; rounded down to the nearest block boundary ($10th pixel)
-Camera_X_pos_BG_copy:   ds.w    1
-_unkEE8E:               ds.w    1                       ; various uses in screen/background events and competition mode
+Camera_X_pos:                   ds.l    1
+Camera_Y_pos:                   ds.l    1
+Camera_X_pos_copy:              ds.l    1
+Camera_Y_pos_copy:              ds.l    1
+Camera_X_pos_rounded:           ds.w    1               ; rounded down to the nearest block boundary ($10th pixel)
+Camera_Y_pos_rounded:           ds.w    1               ; rounded down to the nearest block boundary ($10th pixel)
+Camera_X_pos_BG_copy:           ds.w    1
+BackgroundEffectPhaseOrSavedX:  ds.w    1               ; various uses in screen/background events and competition mode
 
-Camera_Y_pos_BG_copy:       ds.l    1
-Camera_X_pos_BG_rounded:    ds.w    1                   ; rounded down to the nearest block boundary ($10th pixel)
-Camera_Y_pos_BG_rounded:    ds.w    1                   ; rounded down to the nearest block boundary ($10th pixel)
-_unkEE98:                   ds.l    1                   ; various uses in screen/background events and competition mode
-_unkEE9C:                   ds.l    1                   ; various uses in screen/background events and competition mode
-_unkEEA0:                   ds.w    1                   ; various uses in screen/background events and competition mode
-_unkEEA2:                   ds.w    1                   ; various uses in screen/background events and competition mode
-Plane_double_update_flag:   ds.w    1                   ; set when two block are to be updated instead of one (i.e. the camera's scrolled by more than $10 pixels)
-Special_V_int_routine:      ds.w    1
-Screen_X_wrap_value:        ds.w    1                   ; set to $FFFF
-Screen_Y_wrap_value:        ds.w    1                   ; either $7FF or $FFF
-Camera_Y_pos_mask:          ds.w    1                   ; either $7F0 or $FF0
-Layout_row_index_mask:      ds.w    1                   ; either $3C or $7C
+Camera_Y_pos_BG_copy:               ds.l    1
+Camera_X_pos_BG_rounded:            ds.w    1           ; rounded down to the nearest block boundary ($10th pixel)
+Camera_Y_pos_BG_rounded:            ds.w    1           ; rounded down to the nearest block boundary ($10th pixel)
+SceneAuxiliaryXOrCompetitionTime:   ds.l    1           ; various uses in screen/background events and competition mode
+SceneAuxiliaryYOrVerticalMotion:    ds.l    1           ; various uses in screen/background events and competition mode
+; Level events use this as a column anchor. Competition results use it for the blinking time's VRAM destination
+SceneColumnOrCompBlinkVRAM:             ds.w    1       ; various uses in screen/background events and competition mode
+SceneRowAnchorOrCompetitionWinCounts:   ds.w    1       ; various uses in screen/background events and competition mode
+Plane_double_update_flag:               ds.w    1       ; set when two block are to be updated instead of one (i.e. the camera's scrolled by more than $10 pixels)
+Special_V_int_routine:                  ds.w    1
+Screen_X_wrap_value:                    ds.w    1       ; set to $FFFF
+Screen_Y_wrap_value:                    ds.w    1       ; either $7FF or $FFF
+Camera_Y_pos_mask:                      ds.w    1       ; either $7F0 or $FF0
+Layout_row_index_mask:                  ds.w    1       ; either $3C or $7C
 
-_unkEEB0:                   ds.w    1                   ; only ever set to $100 or $80, used in competition mode
-Special_events_routine:     ds.w    1                   ; routine counter for various special events. Used for example with LBZ2 Death Egg sequence
-Events_fg_0:                ds.w    1                   ; various flags used by screen events
-Events_fg_1:                ds.w    1                   ; various flags used by screen events
-Events_fg_2:                ds.w    1                   ; various flags used by screen events
-_unkEEBA:                   ds.w    1                   ; only used in Sonic 3, and only used in the competition mode
-Level_repeat_offset:        ds.w    1                   ; the number of pixels the screen was moved this frame, used to offset level objects horizontally. Used only for level repeat sections, such as AIZ airship
-Events_fg_3:                ds.w    1                   ; various flags used by screen events
-Events_routine_fg:          ds.w    1                   ; screen events routine counter
-Events_routine_bg:          ds.w    1                   ; background events routine counter
-Events_fg_4:                ds.w    1                   ; various flags used by screen events
-Events_fg_5:                ds.w    1                   ; various flags used by screen events
-Draw_delayed_position:      ds.w    1                   ; position to redraw screen from. Screen is reloaded 1 row at a time to avoid game lag
-Draw_delayed_rowcount:      ds.w    1                   ; number of rows for screen redrawing. Screen is reloaded 1 row at a time to avoid game lag
-Screen_shake_flag:          ds.w    1                   ; flag for enabling screen shake. Negative values cause screen to shake infinitely, positive values make the screen shake for a short amount of time
-Screen_shake_offset:        ds.w    1                   ; vertical offset when screen_shake_flag is enabled. This is added to camera position later
-Screen_shake_last_offset:   ds.w    1                   ; value of Screen_shake_offset for the previous frame
+CompetitionPairedPlaneCopyVramDelta:    ds.w    1       ; only ever set to $100 or $80, used in competition mode
+Special_events_routine:                 ds.w    1       ; routine counter for various special events. Used for example with LBZ2 Death Egg sequence
+Events_fg_0:                            ds.w    1       ; various flags used by screen events
+Events_fg_1:                            ds.w    1       ; various flags used by screen events
+Events_fg_2:                            ds.w    1       ; various flags used by screen events
+S3CompetitionSecondPlayerParallaxX:     ds.w    1       ; only used in Sonic 3, and only used in the competition mode
+Level_repeat_offset:                    ds.w    1       ; the number of pixels the screen was moved this frame, used to offset level objects horizontally. Used only for level repeat sections, such as AIZ airship
+Events_fg_3:                            ds.w    1       ; various flags used by screen events
+Events_routine_fg:                      ds.w    1       ; screen events routine counter
+Events_routine_bg:                      ds.w    1       ; background events routine counter
+Events_fg_4:                            ds.w    1       ; various flags used by screen events
+Events_fg_5:                            ds.w    1       ; various flags used by screen events
+Draw_delayed_position:                  ds.w    1       ; position to redraw screen from. Screen is reloaded 1 row at a time to avoid game lag
+Draw_delayed_rowcount:                  ds.w    1       ; number of rows for screen redrawing. Screen is reloaded 1 row at a time to avoid game lag
+Screen_shake_flag:                      ds.w    1       ; flag for enabling screen shake. Negative values cause screen to shake infinitely, positive values make the screen shake for a short amount of time
+Screen_shake_offset:                    ds.w    1       ; vertical offset when screen_shake_flag is enabled. This is added to camera position later
+Screen_shake_last_offset:               ds.w    1       ; value of Screen_shake_offset for the previous frame
 
-Events_bg:                  ds.b    $18                 ; $18 bytes ; various flags used by background events
-SStage_results_object_addr: equ     Events_bg+$E        ; word ; RAM address of the special stage results object
-FBZ_cloud_addr:             equ     *                   ; $14 bytes ; addresses for cloud objects in FBZ2
-Vscroll_buffer:             equ     *                   ; $50 bytes ; vertical scroll buffer used in various levels
-_unkEEEA:                   ds.w    1                   ; used in save screen to store VRAM addresses (4 word VRAM addresses), also used in SSZ screen events
+Events_bg:                          ds.b    $18         ; $18 bytes ; various flags used by background events
+SStage_results_object_addr:         equ     Events_bg+$E  ; word ; RAM address of the special stage results object
+FBZ_cloud_addr:                     equ     *           ; $14 bytes ; addresses for cloud objects in FBZ2
+Vscroll_buffer:                     equ     *           ; $50 bytes ; vertical scroll buffer used in various levels
+SszEscapeXOrSaveDigitTileBuffer:    ds.w    1           ; used in save screen to store VRAM addresses (4 word VRAM addresses), also used in SSZ screen events
                 ds.w    1                               ; used in some instances (see above)
-_unkEEEE:       ds.w    1                               ; used exclusively in SSZ background events code
+SszEscapeYOrSaveLowerDigitTiles:    ds.w    1           ; used exclusively in SSZ background events code
                 ds.w    1                               ; used in some instances (see above)
-_unkEEF2:       ds.w    1                               ; used exclusively in SSZ background events code
-_unkEEF4:       ds.w    1                               ; used exclusively in SSZ background events code
-_unkEEF6:       ds.l    1                               ; used exclusively in SSZ background events code
-_unkEEFA:       ds.w    1                               ; used exclusively in SSZ background events code
+SszEscapeRoundedColumnAnchor:       ds.w    1           ; used exclusively in SSZ background events code
+SszEscapeRoundedRowAnchor:          ds.w    1           ; used exclusively in SSZ background events code
+SszEscapeVerticalDriftAccumulator:  ds.l    1           ; used exclusively in SSZ background events code
+SszDebrisClearRowVramRequest:       ds.w    1           ; used exclusively in SSZ background events code
                 ds.b    4
 Camera_RAM_end: equ     *
 
@@ -220,31 +221,31 @@ Spritemask_flag:    ds.w    1                           ; when set, indicates th
 Current_sprite_table_page:      ds.w    1
 Sprite_table_page_flip_pending: ds.w    1
 
-Event_LBZ2_DeathEgg:        equ     *                   ; if set, Launch Base 2 Death Egg is currently rising
-_unkEF40_1:                 ds.l    1                   ; used as a part of calculating decimal scores
-_unkEF44_1:                 equ     *                   ; used as a jump pointer in vint 1E, unknown why this is used
-_unkEF44_2:                 ds.l    1                   ; used as a part of calculating decimal scores
-Competition_menu_selection: ds.b    1                   ; 0 = Grandprix, 1 = Matchrace, 2 = Timeattack. 3 = Exit
-Not_ghost_flag:             ds.b    1                   ; set if Player 2 in competition mode isn't a ghost of player 1
-Competition_menu_zone:      ds.b    1                   ; competition mode zone id. This is different from the zone order in game
-Dataselect_entry:           ds.b    1                   ; the selected save entry in data select menu. This includes no save and delete options, too
-Dataselect_nosave_player:   ds.w    1                   ; Player mode for NO SAVE option in data select menu
-Competition_menu_items:     ds.b    1                   ; 0 = Enabled, FF = Disabled
+Event_LBZ2_DeathEgg:            equ     *               ; if set, Launch Base 2 Death Egg is currently rising
+ResultsNumericAccumulator:      ds.l    1               ; used as a part of calculating decimal scores
+MenuVInterruptCallbackPointer:  equ     *               ; used as a jump pointer in vint 1E, unknown why this is used
+ResultsNumericAccumulatorEnd:   ds.l    1               ; used as a part of calculating decimal scores
+Competition_menu_selection:     ds.b    1               ; 0 = Grandprix, 1 = Matchrace, 2 = Timeattack. 3 = Exit
+Not_ghost_flag:                 ds.b    1               ; set if Player 2 in competition mode isn't a ghost of player 1
+Competition_menu_zone:          ds.b    1               ; competition mode zone id. This is different from the zone order in game
+Dataselect_entry:               ds.b    1               ; the selected save entry in data select menu. This includes no save and delete options, too
+Dataselect_nosave_player:       ds.w    1               ; Player mode for NO SAVE option in data select menu
+Competition_menu_items:         ds.b    1               ; 0 = Enabled, FF = Disabled
                 ds.b    1                               ; unused
 Demo_start_button:  ds.b    1                           ; keeps track of whether controller 1 has pressed the start button. May be used by the demo data itself
                 ds.b    1                               ; unused
 Demo_data_addr:             ds.l    1                   ; keeps getting incremented as the demo progresses
 SRAM_mask_interrupts_flag:  ds.w    1                   ; if this is set SRAM routines will mask all interrupts (by setting the SR to $2700)
                 ds.w    1                               ; unused
-Object_index_addr:              ds.l    1               ; points to either the object index for S3 levels or that for S&K levels
-Act3_ring_count:                ds.w    1               ; stores ring count during act 3 transition
-Act3_timer:                     ds.l    1               ; stores timer during act 3 transition
-Camera_Y_pos_coarse_back:       ds.w    1               ; Camera_Y_pos_coarse - $80
-Glide_screen_shake:             ds.w    1               ; alternate screen shaking flag only used when hyper knuckles hits a wall after gliding
-_unkEF68:                       ds.w    1               ; stores a tile used in special stage results screen, unknown purpose
-Special_stage_zone_and_act:     ds.w    1               ; stored zone and act during special stage results screen?
-HPZ_special_stage_completed:    ds.w    1               ; set if special stage was completed. This determines which cutscene to play when entering HPZS
-Current_special_stage_2:        ds.b    1               ; seems to be just a copy of Current_special_stage
+Object_index_addr:                      ds.l    1       ; points to either the object index for S3 levels or that for S&K levels
+Act3_ring_count:                        ds.w    1       ; stores ring count during act 3 transition
+Act3_timer:                             ds.l    1       ; stores timer during act 3 transition
+Camera_Y_pos_coarse_back:               ds.w    1       ; Camera_Y_pos_coarse - $80
+Glide_screen_shake:                     ds.w    1       ; alternate screen shaking flag only used when hyper knuckles hits a wall after gliding
+SKSpecialResultsBonusArtTileOverride:   ds.w    1       ; stores a tile used in special stage results screen, unknown purpose
+Special_stage_zone_and_act:             ds.w    1       ; stored zone and act during special stage results screen?
+HPZ_special_stage_completed:            ds.w    1       ; set if special stage was completed. This determines which cutscene to play when entering HPZS
+Current_special_stage_2:                ds.b    1       ; seems to be just a copy of Current_special_stage
                 ds.b    1                               ; unused
 HPZ_current_special_stage:  ds.b    1                   ; seems to be just a copy of Current_special_stage used specifically for HPZS
                 ds.b    1                               ; unused
@@ -273,36 +274,36 @@ VRAM_buffer:                ds.b    $80                 ; used to temporarily ho
 
 Game_mode:      ds.b    1
                 ds.b    1                               ; unused
-Ctrl_1_logical:         equ     *                       ; both held and pressed
-Ctrl_1_held_logical:    ds.b    1
-Ctrl_1_pressed_logical: ds.b    1
-Ctrl_1:                 equ     *                       ; both held and pressed
-Ctrl_1_held:            ds.b    1                       ; all held buttons
-Ctrl_1_pressed:         ds.b    1                       ; buttons being pressed newly this frame
-Ctrl_2:                 equ     *                       ; both held and pressed
-Ctrl_2_held:            ds.b    1
-Ctrl_2_pressed:         ds.b    1
-_tempF608:              ds.b    6                       ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+Ctrl_1_logical:                 equ     *               ; both held and pressed
+Ctrl_1_held_logical:            ds.b    1
+Ctrl_1_pressed_logical:         ds.b    1
+Ctrl_1:                         equ     *               ; both held and pressed
+Ctrl_1_held:                    ds.b    1               ; all held buttons
+Ctrl_1_pressed:                 ds.b    1               ; buttons being pressed newly this frame
+Ctrl_2:                         equ     *               ; both held and pressed
+Ctrl_2_held:                    ds.b    1
+Ctrl_2_pressed:                 ds.b    1
+S3HInterruptTrampolineStorage:  ds.b    6               ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
 
 VDP_reg_1_command:  ds.w    1                           ; AND the lower byte by $BF and write to VDP control port to disable display, OR by $40 to enable
                 ds.l    1                               ; unused
-Demo_timer:             ds.w    1                       ; the time left for a demo to start/run
-V_scroll_value:         equ     *                       ; both foreground and background
-V_scroll_value_FG:      ds.w    1
-V_scroll_value_BG:      ds.w    1
-_unkF61A:               ds.l    1                       ; unused
-V_scroll_value_P2:      equ     *
-V_scroll_value_FG_P2:   ds.w    1
-V_scroll_value_BG_P2:   ds.w    1
-Teleport_active_timer:  ds.b    1                       ; left over from Sonic 2
-Teleport_active_flag:   ds.b    1                       ; left over from Sonic 2
-H_int_counter_command:  ds.w    1                       ; contains a command to write to VDP register $0A (line interrupt counter)
-H_int_counter:          equ     H_int_counter_command+1  ; just the counter part of the command
-Palette_fade_info:      equ     *                       ; both index and count
-Palette_fade_index:     ds.b    1                       ; colour to start fading from
-Palette_fade_count:     ds.b    1                       ; the number of colours to fade
-Lag_frame_count:        ds.w    1                       ; more specifically, the number of times V-int routine 0 has run. Reset at the end of a normal frame
-V_int_routine:          ds.b    1
+Demo_timer:                         ds.w    1           ; the time left for a demo to start/run
+V_scroll_value:                     equ     *           ; both foreground and background
+V_scroll_value_FG:                  ds.w    1
+V_scroll_value_BG:                  ds.w    1
+DisplayResetWriteOnlyScrollPadding: ds.l    1           ; unused
+V_scroll_value_P2:                  equ     *
+V_scroll_value_FG_P2:               ds.w    1
+V_scroll_value_BG_P2:               ds.w    1
+Teleport_active_timer:              ds.b    1           ; left over from Sonic 2
+Teleport_active_flag:               ds.b    1           ; left over from Sonic 2
+H_int_counter_command:              ds.w    1           ; contains a command to write to VDP register $0A (line interrupt counter)
+H_int_counter:                      equ     H_int_counter_command+1  ; just the counter part of the command
+Palette_fade_info:                  equ     *           ; both index and count
+Palette_fade_index:                 ds.b    1           ; colour to start fading from
+Palette_fade_count:                 ds.b    1           ; the number of colours to fade
+Lag_frame_count:                    ds.w    1           ; more specifically, the number of times V-int routine 0 has run. Reset at the end of a normal frame
+V_int_routine:                      ds.b    1
                 ds.b    1                               ; unused
 Sprites_drawn:  ds.b    1                               ; used to ensure the sprite limit isn't exceeded
                 ds.b    1                               ; unused
@@ -316,29 +317,29 @@ DMA_trigger_word:   ds.w    1                           ; transferred from RAM t
                 ds.w    1                               ; unused
 H_int_flag:     ds.w    1                               ; unless this is set H-int will return immediately
 
-Water_level:                ds.w    1                   ; keeps fluctuating
-Mean_water_level:           ds.w    1                   ; the steady central value of the water level
-Target_water_level:         ds.w    1
-Water_speed:                ds.b    1                   ; this is added to or subtracted from Mean_water_level every frame till it reaches Target_water_level
-Water_entered_counter:      ds.b    1                   ; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
-Water_full_screen_flag:     ds.b    1                   ; set if water covers the entire screen (i.e. the underwater palette should be DMAed during V-int rather than the normal palette)
-Do_Updates_in_H_int:        ds.b    1                   ; if this is set Do_Updates will be called from H-int instead of V-int
-Palette_cycle_counters:     ds.b    $C                  ; various counters and variables for palette cycles
-Palette_frame:              ds.w    1
-Palette_timer:              ds.b    1
-Super_palette_status:       ds.b    1                   ; appears to be a flag for the palette's current status: '0' for 'off', '1' for 'fading', -1 for 'fading done'
-_unkF660:                   ds.w    1                   ; unused in Sonic 3 Alone, used for Credits in Sonic & Knuckles
-_unkF662:                   ds.w    1                   ; unused
-Background_collision_flag:  ds.b    1                   ; if set, background collision is enabled
-Disable_death_plane:        ds.b    1                   ; if set, going below the screen wont kill the player
-Hyper_Sonic_flash_timer:    ds.b    1                   ; used for Hyper Sonic's double jump move
-Super_Tails_flag:           ds.b    1
-Palette_frame_Tails:        ds.b    1                   ; Tails would use Palette_frame and Palette_timer, but they're reserved for his Super Flickies
-Palette_timer_Tails:        ds.b    1
-Ctrl_2_logical:             equ     *                   ; both held and pressed
-Ctrl_2_held_logical:        ds.b    1
-Ctrl_2_pressed_logical:     ds.b    1
-_unkF66C:                   ds.b    1
+Water_level:                        ds.w    1           ; keeps fluctuating
+Mean_water_level:                   ds.w    1           ; the steady central value of the water level
+Target_water_level:                 ds.w    1
+Water_speed:                        ds.b    1           ; this is added to or subtracted from Mean_water_level every frame till it reaches Target_water_level
+Water_entered_counter:              ds.b    1           ; incremented when entering and exiting water, read by the the floating AIZ spike log, cleared on level initialisation and dynamic events of certain levels
+Water_full_screen_flag:             ds.b    1           ; set if water covers the entire screen (i.e. the underwater palette should be DMAed during V-int rather than the normal palette)
+Do_Updates_in_H_int:                ds.b    1           ; if this is set Do_Updates will be called from H-int instead of V-int
+Palette_cycle_counters:             ds.b    $C          ; various counters and variables for palette cycles
+Palette_frame:                      ds.w    1
+Palette_timer:                      ds.b    1
+Super_palette_status:               ds.b    1           ; appears to be a flag for the palette's current status: '0' for 'off', '1' for 'fading', -1 for 'fading done'
+CreditsDelayOrSegaCompletionLatch:  ds.w    1           ; unused in Sonic 3 Alone, used for Credits in Sonic & Knuckles
+S3SegaVIntTransferRequest:          ds.w    1           ; unused
+Background_collision_flag:          ds.b    1           ; if set, background collision is enabled
+Disable_death_plane:                ds.b    1           ; if set, going below the screen wont kill the player
+Hyper_Sonic_flash_timer:            ds.b    1           ; used for Hyper Sonic's double jump move
+Super_Tails_flag:                   ds.b    1
+Palette_frame_Tails:                ds.b    1           ; Tails would use Palette_frame and Palette_timer, but they're reserved for his Super Flickies
+Palette_timer_Tails:                ds.b    1
+Ctrl_2_logical:                     equ     *           ; both held and pressed
+Ctrl_2_held_logical:                ds.b    1
+Ctrl_2_pressed_logical:             ds.b    1
+SuperTailsTargetScanByteOffset:     ds.b    1
                 ds.b    3                               ; unused
 Super_frame_count:  ds.w    1
                 ds.l    1                               ; unused
@@ -368,33 +369,33 @@ Tails_CPU_interact:     ds.w    1                       ; RAM address of the las
 Tails_CPU_idle_timer:   ds.w    1                       ; counts down while controller 2 is idle, when it reaches 0 the AI takes over
 Tails_CPU_flight_timer: ds.w    1                       ; counts up while Tails is respawning, when it reaches 300 he drops into the level
                 ds.w    1                               ; unused
-Tails_CPU_routine:          ds.w    1                   ; Tails' current AI routine in a Sonic and Tails game
-Tails_CPU_target_X:         ds.w    1                   ; Tails' target x-position
-Tails_CPU_target_Y:         ds.w    1                   ; Tails' target y-position
-Tails_CPU_auto_fly_timer:   ds.b    1                   ; counts up until AI Tails automatically flies up to maintain altitude, while grabbing Sonic in Marble Garden Act 2's boss
-Tails_CPU_auto_jump_flag:   ds.b    1                   ; set to #1 when AI Tails needs to jump of his own accord, regardless of whether Sonic jumped or not
-Rings_manager_routine:      ds.b    1
-Level_started_flag:         ds.b    1
-_unkF712:                   ds.b    $1C                 ; Gumball Machine and HPZ Emerald throne room object respawn table
-AIZ1_palette_cycle_flag:    ds.b    1                   ; selects which palette cycles are used in AIZ1
+Tails_CPU_routine:              ds.w    1               ; Tails' current AI routine in a Sonic and Tails game
+Tails_CPU_target_X:             ds.w    1               ; Tails' target x-position
+Tails_CPU_target_Y:             ds.w    1               ; Tails' target y-position
+Tails_CPU_auto_fly_timer:       ds.b    1               ; counts up until AI Tails automatically flies up to maintain altitude, while grabbing Sonic in Marble Garden Act 2's boss
+Tails_CPU_auto_jump_flag:       ds.b    1               ; set to #1 when AI Tails needs to jump of his own accord, regardless of whether Sonic jumped or not
+Rings_manager_routine:          ds.b    1
+Level_started_flag:             ds.b    1
+CompactSceneObjectRespawnBytes: ds.b    $1C             ; Gumball Machine and HPZ Emerald throne room object respawn table
+AIZ1_palette_cycle_flag:        ds.b    1               ; selects which palette cycles are used in AIZ1
                 ds.b    1                               ; unused
 Water_flag:     ds.b    1
                 ds.b    $D                              ; unused
-Flying_carrying_Sonic_flag: ds.b    1                   ; set when Tails carries Sonic in a Sonic and Tails game
-Flying_picking_Sonic_timer: ds.b    1                   ; until this is 0 Tails can't pick Sonic up
-_unkF740:                   ds.w    1
+Flying_carrying_Sonic_flag:     ds.b    1               ; set when Tails carries Sonic in a Sonic and Tails game
+Flying_picking_Sonic_timer:     ds.b    1               ; until this is 0 Tails can't pick Sonic up
+ScaledArtAllocatedTileCount:    ds.w    1
                 ds.w    1                               ; unused
-_unkF744:                   ds.w    1
-Tails_CPU_star_post_flag:   ds.b    1                   ; copy of Last_star_post_hit, sets Tails' starting behavior in a Sonic and Tails game
+TailsCarryPreviousHorizontalVelocity:   ds.w    1
+Tails_CPU_star_post_flag:               ds.b    1       ; copy of Last_star_post_hit, sets Tails' starting behavior in a Sonic and Tails game
                 ds.b    1                               ; unused
-Ctrl_1_title:                   equ     *               ; copy of Ctrl_1, used on the title screen
-Ctrl_1_held_title:              ds.b    1
-Ctrl_1_pressed_title:           ds.b    1
-Competition_lap_count_flag:     ds.b    1               ; flag to enable/disable lap counting in competition mode for player 1, 0 for enabled, 1 for disabled
-Competition_lap_count_flag_P2:  ds.b    1               ; flag to enable/disable lap counting in competition mode for player 2, 0 for enabled, 1 for disabled
-_unkF74C:                       ds.w    1
-Gliding_collision_flags:        ds.b    1
-Disable_wall_grab:              ds.b    1               ; if set, disables Knuckles wall grab
+Ctrl_1_title:                       equ     *           ; copy of Ctrl_1, used on the title screen
+Ctrl_1_held_title:                  ds.b    1
+Ctrl_1_pressed_title:               ds.b    1
+Competition_lap_count_flag:         ds.b    1           ; flag to enable/disable lap counting in competition mode for player 1, 0 for enabled, 1 for disabled
+Competition_lap_count_flag_P2:      ds.b    1           ; flag to enable/disable lap counting in competition mode for player 2, 0 for enabled, 1 for disabled
+TailsCarryPreviousVerticalVelocity: ds.w    1
+Gliding_collision_flags:            ds.b    1
+Disable_wall_grab:                  ds.b    1           ; if set, disables Knuckles wall grab
                 ds.b    $10                             ; unused
 Max_speed:          ds.w    1
 Acceleration:       ds.w    1
@@ -420,85 +421,90 @@ Collision_addr: ds.l    1                               ; points to the primary 
                 ds.b    $10                             ; unused
 Boss_flag:      ds.b    1                               ; set if a boss fight is going on
                 ds.b    5                               ; unused
-_unkF7B0:       ds.b    4
+PlayerTubeCageAndDrumAngleBytes:    ds.b    4
 
 Primary_collision_addr:     ds.l    1
 Secondary_collision_addr:   ds.l    1
                 ds.l    1                               ; unused
-MHZ_pollen_counter:     ds.b    1                       ; number of currently active pollen or leaves in MHZ
-_unkF7C1:               ds.b    1
-_unkF7C2:               ds.b    1
-SOZ_darkness_level:     ds.b    1
-_unkF7C4:               ds.w    1
-Reverse_gravity_flag:   ds.b    1
-_unkF7C7:               ds.b    1
-WindTunnel_flag:        ds.b    1
-WindTunnel_flag_P2:     ds.b    1
-Ctrl_1_locked:          ds.b    1
-Ctrl_2_locked:          ds.b    1
+MHZ_pollen_counter:                     ds.b    1       ; number of currently active pollen or leaves in MHZ
+ZoneMagnetOrLeafSelectionFlag:          ds.b    1
+KnucklesLbzPipePlugWaterReleaseFlag:    ds.b    1
+SOZ_darkness_level:                     ds.b    1
+SozRegisteredPushableRockAddress:       ds.w    1
+Reverse_gravity_flag:                   ds.b    1
+HczPlayerWaterTunnelBlockBits:          ds.b    1
+WindTunnel_flag:                        ds.b    1
+WindTunnel_flag_P2:                     ds.b    1
+Ctrl_1_locked:                          ds.b    1
+Ctrl_2_locked:                          ds.b    1
                 ds.l    1                               ; unused
 Chain_bonus_counter:    ds.w    1
 Time_bonus_countdown:   ds.w    1                       ; used on the results screen
 Ring_bonus_countdown:   ds.w    1                       ; used on the results screen
                 ds.l    1                               ; unused
-Camera_X_pos_coarse_back:   ds.w    1                   ; Camera_X_pos_coarse - $80
-_unkF7DC:                   ds.w    1
-Player_prev_frame_P2:       ds.b    1                   ; used by DPLC routines to detect whether a DMA transfer is required
-Player_prev_frame_P2_tail:  ds.b    1                   ; used by DPLC routines to detect whether a DMA transfer is required
-Level_trigger_array:        ds.b    $10                 ; used by buttons, etc
-Anim_Counters:              ds.b    $10                 ; each word stores data on animated level art, including duration and current frame
+Camera_X_pos_coarse_back:           ds.w    1           ; Camera_X_pos_coarse - $80
+AlternateObjectCullCoarseXOrigin:   ds.w    1
+Player_prev_frame_P2:               ds.b    1           ; used by DPLC routines to detect whether a DMA transfer is required
+Player_prev_frame_P2_tail:          ds.b    1           ; used by DPLC routines to detect whether a DMA transfer is required
+Level_trigger_array:                ds.b    $10         ; used by buttons, etc
+Anim_Counters:                      ds.b    $10         ; each word stores data on animated level art, including duration and current frame
 
-Sprite_table:               ds.b    $280
-Sprite_table_end:           equ     *
-_unkFA80:                   ds.w    1                   ; unused
-_unkFA82:                   ds.b    1
-_unkFA83:                   ds.b    1
-_unkFA84:                   ds.w    1
-_unkFA86:                   ds.w    1
-_unkFA88:                   ds.b    1
-_unkFA89:                   ds.b    1
-_unkFA8A:                   ds.w    1
-_unkFA8C:                   ds.w    1                   ; unused?
-_unkFA8E:                   ds.w    1
-_unkFA90:                   ds.w    1
-Camera_stored_max_X_pos:    ds.w    1                   ; the target camera maximum x-position
-Camera_stored_min_X_pos:    ds.w    1                   ; the target camera minimum x-position
-Camera_stored_min_Y_pos:    ds.w    1                   ; the target camera minimum y-position
-Camera_stored_max_Y_pos:    ds.w    1                   ; the target camera maximum y-position
-Slotted_object_bits:        ds.w    1                   ; bits to determine which slots are used for slotted objects
+Sprite_table:                           ds.b    $280
+Sprite_table_end:                       equ     *
+BossSceneResetBaseAndRetainedGate:      ds.w    1       ; unused
+SceneTimerOrSharedMotionRecordBase:     ds.b    1
+SceneTimerLowByteOrSecondAttackDone:    ds.b    1
+SceneCreditIndexOrBossMotionPlanAngle:  ds.w    1
+SceneCreditStateOrBossMotionPlanX:      ds.w    1
+EndingOutcomeOrBossSceneSignals:        ds.b    1
+MechaSonicHeadDeleteOrOverlayLowByte:   ds.b    1
+; This is the high word of DDZ scroll acceleration. MGZ uses it as the lower motion plan base, and SSZ uses it for an X threshold
+DDZScrollAccelOrSceneMotion:    ds.w    1
+; MGZ uses this word for the lower motion plan angle, SSZ for an X threshold, and DDZ as the low word of scroll acceleration
+SceneMotionAngleOrDDZAccelLo:           ds.w    1       ; unused?
+DdzFlightControllerOrLowerMotionPlanX:  ds.w    1
+DdzFrameScrollDeltaOrLowerMotionPlanY:  ds.w    1
+Camera_stored_max_X_pos:                ds.w    1       ; the target camera maximum x-position
+Camera_stored_min_X_pos:                ds.w    1       ; the target camera minimum x-position
+Camera_stored_min_Y_pos:                ds.w    1       ; the target camera minimum y-position
+Camera_stored_max_Y_pos:                ds.w    1       ; the target camera maximum y-position
+Slotted_object_bits:                    ds.w    1       ; bits to determine which slots are used for slotted objects
                 ds.b    6                               ; unused
-_unkFAA2:                   ds.b    1
-_unkFAA3:                   ds.b    1
-_unkFAA4:                   ds.w    1
-Signpost_addr:              ds.w    1                   ; address of the currently active signpost object. Hidden monitors use this for bouncing
-_unkFAA8:                   ds.b    1
-_unkFAA9:                   ds.b    1
-End_of_level_flag:          ds.b    1                   ; set if end of level is current active, for example after beating a boss
-_unkFAAB:                   ds.b    1
-_unkFAAC:                   ds.b    1
-Hyudoro_count:              ds.b    1
-_unkFAAE:                   ds.w    1
-_unkFAB0:                   ds.w    1
-_unkFAB2:                   ds.w    1
-_unkFAB4:                   ds.w    1
-_unkFAB6:                   ds.w    1
-_unkFAB8:                   ds.b    1
-_unkFAB9:                   ds.b    1
-_unkFABA:                   ds.w    1
-_unkFABC:                   ds.b    1
-_unkFABD:                   ds.b    1
-_unkFABE:                   ds.b    1                   ; unused?
-Palette_rotation_disable:   ds.b    1                   ; if set, palette rotation scripts are disabled
-_unkFAC0:                   ds.b    1
-_unkFAC1:                   ds.b    1
-_unkFAC2:                   ds.w    1
-_unkFAC4:                   ds.w    1
+ZoneEventLatchOrBossReleaseSignal:      ds.b    1
+ZoneButtonRequestOrBridgeReleaseSignal: ds.b    1
+SceneControllerObjectAddress:           ds.w    1
+Signpost_addr:                          ds.w    1       ; address of the currently active signpost object. Hidden monitors use this for bouncing
+ActCompletionHandshake:                 ds.b    1
+SceneOutcomeOrActorReadySignal:         ds.b    1
+End_of_level_flag:                      ds.b    1       ; set if end of level is current active, for example after beating a boss
+LbzRobotnikSceneLoadedLatch:            ds.b    1
+TailsChaseOrHPZAftermathLatch:          ds.b    1
+Hyudoro_count:                          ds.b    1
+; ICZ and HPZ store a word-sized actor handle. DDZ stores the wrap delta, and the credits use a row offset
+SceneActorOrWorldOffset:                ds.w    1
+SceneMinimumYOrEmeraldSelectionBytes:   ds.w    1
+SceneMaximumYOrEmeraldSelectionTail:    ds.w    1
+SceneMinimumXOrEmeraldSelectionTail:    ds.w    1
+SceneMaximumXOrEmeraldSelectionTail:    ds.w    1
+; Most scenes exchange synchronization bits here. The Mushroom Hill scene stores an even state index
+SceneSyncFlagsOrMHZState:           ds.b    1
+EndingCloudSpawnFrameMask:          ds.b    1
+HpzMasterEmeraldObjectAddress:      ds.w    1
+DdzDebugSnapshotHighOrHpzSeedByte:  ds.b    1
+; HPZ reads this as a signed carry Y offset. DDZ reads the whole debug snapshot word starting one byte earlier
+HPZEmeraldOffsetOrDDZDebugLo:               ds.b    1
+SignpostLandingWriteOnlyLatch:              ds.b    1   ; unused?
+Palette_rotation_disable:                   ds.b    1   ; if set, palette rotation scripts are disabled
+HpzNewlyCompletedEmeraldMarker:             ds.b    1
+EmeraldPresentationEnableAndPaletteRoute:   ds.b    1
+EndingCloudHorizontalBaseVelocity:          ds.w    1
+EndingCloudVerticalBaseVelocity:            ds.w    1
                 ds.w    1                               ; unused
-_unkFAC8:       ds.w    1
+EndingCreditsFixedPointScrollIncrement: ds.w    1
                 ds.w    1                               ; unused
-_unkFACC:           ds.b    1
-_unkFACD:           ds.b    1
-Pal_fade_delay2:    ds.w    1                           ; timer for palette fade from white routine
+EndingCreditsFinishedSignal:    ds.b    1
+CapsuleOpenedFlag:              ds.b    1
+Pal_fade_delay2:                ds.w    1               ; timer for palette fade from white routine
                 ds.b    $A                              ; unused
 Palette_rotation_custom:    ds.l    1                   ; custom routine for palette rotation scripts
 Palette_rotation_data:      ds.w    9                   ; data used by palette rotation scripts. Last word must always be 0
@@ -615,24 +621,24 @@ Ring_spill_anim_frame:                  ds.b    1
 Ring_spill_anim_accum:                  ds.w    1
 AIZ_vine_angle:                         ds.w    1       ; controls the angle of AIZ giant vines
                 ds.w    1                               ; unused
-_unkFEBE:               ds.b    1                       ; unused
-Extra_life_flags_P2:    ds.b    1
-Max_speed_P2:           ds.w    1
-Acceleration_P2:        ds.w    1
-Deceleration_P2:        ds.w    1
-Life_count_P2:          ds.b    1                       ; left over from Sonic 2
-Update_HUD_timer_P2:    ds.b    1                       ; used in competition mode
-Total_ring_count:       ds.w    1                       ; left over from Sonic 2
-Total_ring_count_P2:    ds.w    1                       ; left over from Sonic 2
-Monitors_broken:        ds.w    1                       ; left over from Sonic 2. Apparently Sonic 3 developers liked copypasting, since gaining a life from rings also increments this counter
-Monitors_broken_P2:     ds.w    1                       ; left over from Sonic 2
-Ring_count_P2:          ds.w    1                       ; left over from Sonic 2
-Timer_P2:               ds.l    1                       ; used in competition mode
-Timer_minute_P2:        equ     Timer_P2+1
-Timer_second_P2:        equ     Timer_P2+2
-Timer_frame_P2:         equ     Timer_P2+3              ; the second gets incremented when this reaches 60
-Score_P2:               ds.l    1                       ; left over from Sonic 2
-Competition_total_laps: ds.b    1                       ; total number of laps in competition mode (typically 5)
+RingCollectionWriteOnlyStickyBit:   ds.b    1           ; unused
+Extra_life_flags_P2:                ds.b    1
+Max_speed_P2:                       ds.w    1
+Acceleration_P2:                    ds.w    1
+Deceleration_P2:                    ds.w    1
+Life_count_P2:                      ds.b    1           ; left over from Sonic 2
+Update_HUD_timer_P2:                ds.b    1           ; used in competition mode
+Total_ring_count:                   ds.w    1           ; left over from Sonic 2
+Total_ring_count_P2:                ds.w    1           ; left over from Sonic 2
+Monitors_broken:                    ds.w    1           ; left over from Sonic 2. Apparently Sonic 3 developers liked copypasting, since gaining a life from rings also increments this counter
+Monitors_broken_P2:                 ds.w    1           ; left over from Sonic 2
+Ring_count_P2:                      ds.w    1           ; left over from Sonic 2
+Timer_P2:                           ds.l    1           ; used in competition mode
+Timer_minute_P2:                    equ     Timer_P2+1
+Timer_second_P2:                    equ     Timer_P2+2
+Timer_frame_P2:                     equ     Timer_P2+3  ; the second gets incremented when this reaches 60
+Score_P2:                           ds.l    1           ; left over from Sonic 2
+Competition_total_laps:             ds.b    1           ; total number of laps in competition mode (typically 5)
                 ds.b    1                               ; unused
 Competition_current_lap:    ds.b    1                   ; current lap number for player 1 in competition mode
 Competition_current_lap_2P: ds.b    1                   ; current lap number for player 2 in competition mode
@@ -662,27 +668,28 @@ Kos_module_destination: equ     Kos_module_queue+4      ; word ; the VRAM destin
 
 Kos_decomp_module_end:  equ     *
 
-_unkFF7C:               ds.w    1
-_unkFF7E:               ds.w    1
-Level_select_repeat:    ds.w    1                       ; delay counter for repeating the button press. Allows the menu move even when up/down is held down
-Level_select_option:    ds.w    1                       ; the current selected option in the level select
-Sound_test_sound:       ds.w    1
-Title_screen_option:    ds.b    1
+; Level entry snapshots controller two here. Debug movement later reuses the word as a speed accumulator
+DebugSpeedOrEntryPad2:          ds.w    1
+LevelDebugSpeedAccumulatorStep: ds.w    1
+Level_select_repeat:            ds.w    1               ; delay counter for repeating the button press. Allows the menu move even when up/down is held down
+Level_select_option:            ds.w    1               ; the current selected option in the level select
+Sound_test_sound:               ds.w    1
+Title_screen_option:            ds.b    1
                 ds.b    1                               ; unused
-_tempFF88:              ds.w    1                       ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
-Competition_settings:   equ     *                       ; both items and game type
-Competition_items:      ds.b    1                       ; 0 = Enabled, FF = Disabled
-Competition_type:       ds.b    1                       ; 0 = grand prix, 3 = match race, -1 = time attack
-_tempFF8C:              ds.b    1                       ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+S3LegacyVersusZoneActOverlayStorage:    ds.w    1       ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+Competition_settings:                   equ     *       ; both items and game type
+Competition_items:                      ds.b    1       ; 0 = Enabled, FF = Disabled
+Competition_type:                       ds.b    1       ; 0 = grand prix, 3 = match race, -1 = time attack
+S3LegacyOptionsSelectionOverlayStorage: ds.b    1       ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
                 ds.b    1                               ; unused
-Total_bonus_countup:            ds.w    1               ; the total points to be added due to various bonuses this frame in the end of level results screen
-Current_music:                  ds.w    1
-Collected_special_ring_array:   ds.l    1               ; each bit indicates a special stage entry ring in the current zone
-Saved2_status_secondary:        ds.b    1
-Respawn_table_keep:             ds.b    1               ; if set, respawn table is not reset during level load
-_tempFF98:                      ds.w    1               ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
-Saved_apparent_zone_and_act:    ds.w    1
-Saved2_apparent_zone_and_act:   ds.w    1
+Total_bonus_countup:                ds.w    1           ; the total points to be added due to various bonuses this frame in the end of level results screen
+Current_music:                      ds.w    1
+Collected_special_ring_array:       ds.l    1           ; each bit indicates a special stage entry ring in the current zone
+Saved2_status_secondary:            ds.b    1
+Respawn_table_keep:                 ds.b    1           ; if set, respawn table is not reset during level load
+S3LegacyClearOnlyOverlayStorage:    ds.w    1           ; this is used in Sonic 3 Alone, but unused in Sonic & Knuckles and Sonic 3 Complete
+Saved_apparent_zone_and_act:        ds.w    1
+Saved2_apparent_zone_and_act:       ds.w    1
                 ds.b    1                               ; unused
 
 Blue_spheres_header_flag:       ds.b    1               ; 0 = SEGA GENESIS, 1 = SEGA MEGA DRIVE

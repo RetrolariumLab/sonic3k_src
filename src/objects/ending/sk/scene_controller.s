@@ -48,7 +48,7 @@ EndScene_InitProxyAndPlayerOutcome:
                 move.b  #2,routine(a0)
                 bsr.w   Ending_InitEmeraldOutcome
                 st      (Scroll_lock).w
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 lea     (Player_1).w,a1
                 bclr    #2,render_flags(a1)
                 bset    #7,art_tile(a1)
@@ -60,7 +60,7 @@ EndScene_InitProxyAndPlayerOutcome:
                 cmpi.w  #2,(Player_mode).w
                 move.w  #$7FFF,(Super_frame_count).w
                 move.b  #1,(Update_HUD_timer).w
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.w   EndingScene_PlaceProxyTornadoAndEmerald
                 bne.s   EndScene_SelectSuperTailsOrHyperSonic
                 cmpi.w  #2,(Player_mode).w
@@ -127,15 +127,15 @@ EndScene_TryOutcomeAccentDuringRise:
                 bne.s   EndScene_ScrollUpAndTryCloudField
                 bset    #7,$38(a0)
                 bne.s   EndScene_ScrollUpAndTryCloudField
-                move.b  #1,(_unkFAC1).w
+                move.b  #1,(EmeraldPresentationEnableAndPaletteRoute).w
                 jsr     (AllocateObject).l
                 bne.s   EndScene_ScrollUpAndTryCloudField
                 move.l  #EndEmerald_CycleAllSuperAccent,(a1)
 
 EndScene_ScrollUpAndTryCloudField:
-                move.l  (_unkEE9C).w,d0
+                move.l  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.l  #$8000,d0
-                move.l  d0,(_unkEE9C).w
+                move.l  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 cmpi.l  #$800000,d0
                 blo.s   EndingScene_ReturnFromInitialRise
                 move.b  #4,routine(a0)
@@ -144,18 +144,18 @@ EndScene_ScrollUpAndTryCloudField:
                 move.l  #EndCloud_InitFieldPaletteAndArt,(a1)
 
 EndScene_EnableCloudsAndDiagonalMove:
-                move.b  #$1F,(_unkFAB9).w
-                move.w  #-$100,(_unkFAC2).w
-                move.w  #-$100,(_unkFAC4).w
+                move.b  #$1F,(EndingCloudSpawnFrameMask).w
+                move.w  #-$100,(EndingCloudHorizontalBaseVelocity).w
+                move.w  #-$100,(EndingCloudVerticalBaseVelocity).w
 
 EndingScene_ReturnFromInitialRise:
                 rts
 ; ---------------------------------------------------------------------------
 
 EndScene_ScrollUpAndSignalTornado:
-                move.l  (_unkEE9C).w,d0
+                move.l  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.l  #$8000,d0
-                move.l  d0,(_unkEE9C).w
+                move.l  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 cmpi.l  #$1000000,d0
                 blo.s   EndScene_ApproachSignalReturn
                 move.b  #6,routine(a0)
@@ -171,15 +171,15 @@ EndingScene_WaitForTornadoToReachProxy:
                 addi.w  #$20,d0
                 cmp.w   x_pos(a0),d0
                 bgt.s   EndingScene_AlignProxyAndSignalBoarding
-                move.l  (_unkEE9C).w,d0
+                move.l  (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.l  #$8000,d0
-                move.l  d0,(_unkEE9C).w
+                move.l  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 rts
 ; ---------------------------------------------------------------------------
 
 EndingScene_AlignProxyAndSignalBoarding:
                 move.b  #8,routine(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 move.w  #$20,$2E(a0)
                 moveq   #-$20,d0
                 move.b  d0,$42(a1)
@@ -201,7 +201,7 @@ EndScene_AlignProxyAndRestorePlayer:
                 move.w  d1,y_pos(a0)
                 move.w  d1,$3A(a0)
                 lea     (Player_1).w,a1
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndScene_SetBoardedPoseAndLoadArt
                 beq.s   EndScene_SetBoardedPoseAndLoadArt
                 move.b  #2,(Super_palette_status).w
@@ -221,14 +221,14 @@ EndScene_SetBoardedPoseAndLoadArt:
 EndScene_TickCarrierDepartureDelay:
                 subq.w  #1,$2E(a0)
                 bne.s   EndScene_MoveBoardedProxyAndCheckWait
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
 
 EndScene_MoveBoardedProxyAndCheckWait:
                 addq.w  #2,x_pos(a0)
                 cmpi.w  #$160,x_pos(a0)
                 blo.s   EndingScene_BobAfterBoardedMovement
                 move.b  #$A,routine(a0)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bpl.s   EndingScene_BobAfterBoardedMovement
                 move.b  #$C,routine(a0)
                 move.w  #(5*60)-1,$2E(a0)
@@ -238,7 +238,7 @@ EndingScene_BobAfterBoardedMovement:
 ; ---------------------------------------------------------------------------
 
 EndScene_BobUntilCarrierReady:
-                tst.w   (_unkFAA4).w
+                tst.w   (SceneControllerObjectAddress).w
                 bne.s   EndingScene_BeginBoardedHoldDelay
                 bra.w   EndingBobYFromSavedBaseAndByteSinePhase
 ; ---------------------------------------------------------------------------
@@ -251,8 +251,8 @@ EndScene_WaitThenStartIslandLift:
                 subq.w  #1,$2E(a0)
                 bpl.s   EndingScene_BobDuringIslandLiftStartWait
                 move.b  #$E,routine(a0)
-                move.w  #-$100,(_unkFAC4).w
-                clr.b   (_unkFAB9).w
+                move.w  #-$100,(EndingCloudVerticalBaseVelocity).w
+                clr.b   (EndingCloudSpawnFrameMask).w
                 move.w  #$BF,$2E(a0)
                 st      (Events_fg_5).w
                 lea     EndScene_LiftInitialDetailPositions(pc),a2
@@ -272,8 +272,8 @@ EndScene_LiftInitialDetailPositions:
 ; ---------------------------------------------------------------------------
 
 EndScene_ScrollDownRightDuringLift:
-                addq.w  #2,(_unkEE98).w
-                addq.w  #1,(_unkEE9C).w
+                addq.w  #2,(SceneAuxiliaryXOrCompetitionTime).w
+                addq.w  #1,(SceneAuxiliaryYOrVerticalMotion).w
                 subq.w  #1,$2E(a0)
                 bpl.s   EndScene_BobDuringDiagonalScroll
                 move.b  #$10,routine(a0)
@@ -284,7 +284,7 @@ EndScene_BobDuringDiagonalScroll:
 ; ---------------------------------------------------------------------------
 
 EndScene_ScrollRightDuringLiftHold:
-                addq.w  #2,(_unkEE98).w
+                addq.w  #2,(SceneAuxiliaryXOrCompetitionTime).w
                 subq.w  #1,$2E(a0)
                 bpl.s   EndScene_BobDuringHorizontalScroll
                 move.b  #$12,routine(a0)
@@ -300,7 +300,7 @@ EndScene_MoveLeftBeforeFGHandoff:
                 subq.w  #2,x_pos(a0)
 
 EndScene_ScrollAndSignalFGHandoff:
-                addq.w  #2,(_unkEE98).w
+                addq.w  #2,(SceneAuxiliaryXOrCompetitionTime).w
                 bsr.w   EndingBobYFromSavedBaseAndByteSinePhase
                 subq.w  #1,$2E(a0)
                 bpl.s   EndScene_FGHandoffWaitReturn
@@ -315,7 +315,7 @@ EndScene_FGHandoffWaitReturn:
 ; ---------------------------------------------------------------------------
 
 EndScene_WaitThenInitReturnPlane:
-                addq.w  #2,(_unkEE98).w
+                addq.w  #2,(SceneAuxiliaryXOrCompetitionTime).w
                 subq.w  #1,$2E(a0)
                 bpl.w   EndingScene_SharedReturn
                 move.b  #$16,routine(a0)
@@ -333,7 +333,7 @@ EndScene_WaitThenInitReturnPlane:
                 jsr     (CreateChild1_Normal).l
                 lea     EndingPlanePoseOffsetDetail_ChildRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.w   EndingScene_SharedReturn
                 lea     EndingPlaneWideDetail_ChildRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
@@ -377,7 +377,7 @@ EndScene_LoadSmallPlanePalAndChildren:
                 jsr     (PalLoad_Line1).l
                 lea     EndData_SmallPlaneCyclingChild(pc),a2
                 jsr     (CreateChild1_Normal).l
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.w   EndingScene_SharedReturn
                 lea     EndData_SmallPlaneOutcomeChild(pc),a2
                 jmp     (CreateChild1_Normal).l
@@ -390,7 +390,7 @@ EndingScene_FlySmallPlaneLeftToCenter:
                 move.b  #$1C,routine(a0)
                 move.w  #60-1,$2E(a0)
                 bset    #5,$38(a0)
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndScene_SmallPlaneApproachReturn
                 jsr     (AllocateObject).l
                 bne.s   EndScene_SmallPlaneApproachReturn
@@ -407,7 +407,7 @@ EndScene_WaitThenSpawnLiftEffects:
                 st      (Events_fg_4).w
                 cmpi.w  #3,(Player_mode).w
                 beq.s   EndScene_LiftEffectsSetupReturn
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndScene_LiftEffectsSetupReturn
                 lea     EndScene_LiftEffectProjectionPoints(pc),a2
                 moveq   #$41,d1
@@ -475,7 +475,7 @@ EndingScene_ReturnFromFinalLeftFlight:
 ; ---------------------------------------------------------------------------
 
 EndScene_WaitForFinalCameraOrFail:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   EndScene_FadeMusicClearFlagsAndDelete
                 cmpi.w  #$78,(Camera_Y_pos_copy).w
                 blo.w   EndingScene_SharedReturn
@@ -483,7 +483,7 @@ EndScene_WaitForFinalCameraOrFail:
 EndScene_FadeMusicClearFlagsAndDelete:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                clr.b   (_unkFAC1).w
-                clr.b   (_unkFAB8).w
+                clr.b   (EmeraldPresentationEnableAndPaletteRoute).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 st      (Events_fg_4).w
                 jmp     (Delete_Current_Sprite).l

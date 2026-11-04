@@ -55,7 +55,7 @@ SaveScreen:
                 lea     (RAM_start).l,a1                ; Decompress destination/Transfer source
                 movea.w #tiles_to_bytes(ArtTile_S3MenuBG),a2  ; Transfer destination
                 jsr     (KosArt_To_VDP).l
-                move.l  #S3Sram_SaveMenuVBlankReturn,(_unkEF44_1).w
+                move.l  #S3Sram_SaveMenuVBlankReturn,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 lea     (ArtKos_SaveScreenMisc).l,a0    ; Decompress source
@@ -109,7 +109,7 @@ S3SaveMenu_CopyCardTargetAndBlankNormal:
                 jsr     (Kos_Decomp).l
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
-                move.l  #S3SaveMenu_SelectSlotMapOnVBlank,(_unkEF44_1).w
+                move.l  #S3SaveMenu_SelectSlotMapOnVBlank,(MenuVInterruptCallbackPointer).w
                 move.b  #VInt_ID_1E,(V_int_routine).w
                 jsr     (Wait_VSync).l
                 move.w  (VDP_reg_1_command).w,d0

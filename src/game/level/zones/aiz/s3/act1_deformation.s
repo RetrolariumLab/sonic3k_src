@@ -201,8 +201,8 @@ S3AIZ1Deform_FireRiseReturn:
 AIZTrans_WavyFlame:
                 cmpi.b  #6,(Player_1+routine).w
                 bcc.s   S3AIZ1Deform_FlameVScrollReturn
-                addq.w  #6,(_unkEE8E).w
-                move.w  (_unkEE8E).w,d0
+                addq.w  #6,(BackgroundEffectPhaseOrSavedX).w
+                move.w  (BackgroundEffectPhaseOrSavedX).w,d0
                 andi.w  #$60,d0
                 addi.w  #$1000,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w

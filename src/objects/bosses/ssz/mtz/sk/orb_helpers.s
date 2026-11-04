@@ -145,7 +145,7 @@ SSZMTZOrb_HandleContactOrDefeat:
                 moveq   #0,d0
                 move.b  collision_property(a0),d0
                 bne.s   SSZMTZ_OrbCheckPlayerAttack
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bne.s   SSZMTZDetachedOrb_SelectPopState
                 rts
 ; ---------------------------------------------------------------------------
@@ -209,7 +209,7 @@ Boss_MoveObject:
 ; unused
                 moveq   #0,d6
                 movea.l a1,a4
-                lea     (_unkFA82).w,a2
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a2
                 lea     mapping_frame(a0),a3
                 tst.b   (a3)
                 bne.s   SSZMTZ_PackedAnimReadMainSlot

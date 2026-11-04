@@ -142,7 +142,7 @@ S3CollapseLog_DeleteLogFragment:
 ; ---------------------------------------------------------------------------
 
 S3CollapseLog_TrySplitFireBridge:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   S3CollapseLog_CheckFireTopSolid
                 move.b  $35(a0),$34(a0)
                 move.b  $36(a0),d2

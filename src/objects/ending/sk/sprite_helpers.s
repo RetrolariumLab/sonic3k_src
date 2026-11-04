@@ -25,13 +25,13 @@ Create_Continue_Sprite:
 Ending_ProjectActorAndFlagOutside:
                 bclr    #6,$38(a0)
                 move.w  $3A(a0),d0
-                sub.w   (_unkEE98).w,d0
+                sub.w   (SceneAuxiliaryXOrCompetitionTime).w,d0
                 addi.w  #$80,d0
                 move.w  d0,x_pos(a0)
                 cmpi.w  #$200,d0
                 bhs.s   EndingSceneProjection_MarkOutsideWindow
                 move.w  $3C(a0),d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 addi.w  #$80,d0
                 move.w  d0,y_pos(a0)
                 cmpi.w  #$200,d0
@@ -49,7 +49,7 @@ EndSprite_ProjectionWindowReturn:
 ; Clear eight bytes of scene scratch. Store -2 for incomplete, 0 for Chaos complete, or 2 for Super complete
 Ending_InitEmeraldOutcome:
                 moveq   #0,d0
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 move.l  d0,(a1)+
                 move.l  d0,(a1)+
                 moveq   #2,d0
@@ -61,7 +61,7 @@ Ending_InitEmeraldOutcome:
                 moveq   #-2,d0
 
 EndSprite_StoreEmeraldOutcome:
-                move.b  d0,(_unkFA88).w
+                move.b  d0,(EndingOutcomeOrBossSceneSignals).w
                 rts
 ; End of function Ending_InitEmeraldOutcome
 

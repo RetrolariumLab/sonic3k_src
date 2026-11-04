@@ -28,8 +28,8 @@ S3AIZAirRaid_CopyShipPalette:
                 dbf     d0,S3AIZAirRaid_CopyShipPalette
 
 Obj_AIZBattleshipMain:
-                subi.l  #$8800,(_unkEE98).w
-                move.w  (_unkEE98).w,d0
+                subi.l  #$8800,(SceneAuxiliaryXOrCompetitionTime).w
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d0
                 cmpi.w  #$3CDC,d0
                 bpl.s   S3AIZAirRaid_PickShipYMotion
                 move.l  #Obj_AIZ2BossSmall,(a0)
@@ -48,8 +48,8 @@ S3AIZAirRaid_PickShipYMotion:
                 bpl.s   S3AIZAirRaid_ApplyShipBob
                 neg.w   d0                              ; Move upwards as the battleship goes offscreen
                 asr.w   #1,d0
-                add.w   (_unkEEA2).w,d0
-                move.w  d0,(_unkEE9C).w
+                add.w   (SceneRowAnchorOrCompetitionWinCounts).w,d0
+                move.w  d0,(SceneAuxiliaryYOrVerticalMotion).w
                 bra.s   S3AIZAirRaid_TryShipSound
 ; ---------------------------------------------------------------------------
 
@@ -58,8 +58,8 @@ S3AIZAirRaid_ApplyShipBob:
                 andi.w  #$F,d1
                 lea     AIZBattleShip_BobbingMotion(pc),a1
                 move.b  (a1,d1.w),d1
-                add.w   (_unkEEA2).w,d1
-                move.w  d1,(_unkEE9C).w                 ; Get the bobbing motion delta, apply it to the second camera Y
+                add.w   (SceneRowAnchorOrCompetitionWinCounts).w,d1
+                move.w  d1,(SceneAuxiliaryYOrVerticalMotion).w  ; Get the bobbing motion delta, apply it to the second camera Y
 
 S3AIZAirRaid_TryShipSound:
                 move.w  (Level_frame_counter).w,d0
@@ -195,7 +195,7 @@ S3AIZAirRaid_BombDropReturn:
 
 Translate_Camera2ObjPosition:
                 move.w  $30(a0),d0
-                sub.w   (_unkEE9C).w,d0
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 add.w   (Camera_Y_pos_copy).w,d0
 
 Translate_Camera2ObjX:
@@ -203,7 +203,7 @@ Translate_Camera2ObjX:
                 add.w   (Screen_shake_offset).w,d0
                 move.w  d0,y_pos(a0)
                 move.w  $2E(a0),d0
-                sub.w   (_unkEE98).w,d0
+                sub.w   (SceneAuxiliaryXOrCompetitionTime).w,d0
                 add.w   (Camera_X_pos_copy).w,d0
                 move.w  d0,x_pos(a0)
                 rts

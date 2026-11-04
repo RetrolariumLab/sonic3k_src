@@ -109,7 +109,7 @@ DEZFinal_PursuitPositionReturn:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_SignalFirstEscapeDefeat:
-                bset    #3,(_unkFAB8).w
+                bset    #3,(SceneSyncFlagsOrMHZState).w
                 move.w  #$F,$2E(a0)
                 move.l  #DEZFinal_SignalSecondEscapeDefeat,$34(a0)
                 rts
@@ -117,7 +117,7 @@ DEZFinal_SignalFirstEscapeDefeat:
 
 DEZFinal_SignalSecondEscapeDefeat:
                 move.l  #DEZFinal_DepartToExplosionGate,(a0)
-                bset    #4,(_unkFAB8).w
+                bset    #4,(SceneSyncFlagsOrMHZState).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ DEZFinal_DepartToExplosionGate:
 
 DEZFinal_BeginExplosionSweep:
                 move.l  #DEZFinal_InitSweepAndTryEmitterOne,(a0)
-                bset    #5,(_unkFAB8).w
+                bset    #5,(SceneSyncFlagsOrMHZState).w
                 ori.b   #$30,$38(a0)
                 jsr     (AllocateObject).l
                 bne.s   DEZFinal_QueueEscapeExplosionArt

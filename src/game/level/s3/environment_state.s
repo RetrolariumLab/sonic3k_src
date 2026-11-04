@@ -276,7 +276,7 @@ S3Water_HCZ1HeightByX:
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_HCZ2:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 beq.s   S3Water_SelectHCZ2HeightTable
                 rts
 ; ---------------------------------------------------------------------------

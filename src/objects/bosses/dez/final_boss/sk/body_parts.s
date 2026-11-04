@@ -49,7 +49,7 @@ DEZFinal_EmeraldFollowWorld:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
                 bne.w   DEZFinal_DeleteCurrentActor
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   DEZFinal_EmeraldHideUntilSignal
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -66,7 +66,7 @@ DEZFinal_EmeraldCycleEscapePalette:
 
 DEZFinal_EmeraldFollowEscapeParent:
                 jsr     Refresh_ChildPosition(pc)
-                btst    #4,(_unkFAB8).w
+                btst    #4,(SceneSyncFlagsOrMHZState).w
                 beq.s   DEZFinal_EmeraldDrawAfterRelease
                 move.l  #DEZFinal_EmeraldCycleFallPalette,(a0)
 

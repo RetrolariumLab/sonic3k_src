@@ -325,7 +325,7 @@ Obj_HCZWaterRush:
                 move.w  a1,$3C(a0)
 
 S3HCZWater_InitRushTriggerWait:
-                move.b  #3,(_unkF7C7).w
+                move.b  #3,(HczPlayerWaterTunnelBlockBits).w
                 move.l  #S3HCZWater_TryActivateRush,(a0)
 
 S3HCZWater_TryActivateRush:
@@ -334,7 +334,7 @@ S3HCZWater_TryActivateRush:
                 move.b  #3,mapping_frame(a0)
                 move.b  #1,anim_frame_timer(a0)
                 move.l  #S3HCZWater_StepRushAnimAndMotion,(a0)
-                move.b  #0,(_unkF7C7).w
+                move.b  #0,(HczPlayerWaterTunnelBlockBits).w
                 move.b  #1,(Palette_cycle_counters+$00).w
 
 S3HCZWater_DrawWaitingRush:

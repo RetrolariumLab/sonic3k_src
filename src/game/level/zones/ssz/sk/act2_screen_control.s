@@ -127,7 +127,7 @@ SKSSZ2FG_DispatchCreditsAndSelectEnd:
 
 SKSSZ2FG_CycleEmeraldAccentAndWait:
                 jsr     CycleSsz2EmeraldEndingAccentPalette(pc)
-                tst.w   (_unkFAAE).w
+                tst.w   (SceneActorOrWorldOffset).w
                 beq.w   SKSSZ2FG_EndingForegroundReturn
                 move.w  #$14C0,d0
                 tst.w   (SK_alone_flag).w
@@ -139,7 +139,7 @@ SKSSZ2FG_TrySwitchEmeraldPanorama:
                 bne.w   SKSSZ2FG_EndingForegroundReturn
                 tst.w   (Events_routine_bg).w
                 bne.w   SKSSZ2FG_EndingForegroundReturn
-                clr.b   (_unkFAB9).w
+                clr.b   (EndingCloudSpawnFrameMask).w
                 move.w  (Camera_Y_pos_BG_copy).w,d0
                 addi.w  #$100,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w

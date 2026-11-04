@@ -43,7 +43,7 @@ SonicOnSegaScr_Init:
                 move.w  #$1E8,x_pos(a0)
                 move.w  #$F0,y_pos(a0)
                 move.w  #$B,$2E(a0)
-                move.w  #2,(_unkF662).w
+                move.w  #2,(S3SegaVIntTransferRequest).w
                 bset    #0,render_flags(a0)
                 bset    #0,status(a0)
                 lea     (H_scroll_buffer+$138).w,a1
@@ -142,7 +142,7 @@ S3SegaActor_TurnAndRequestRightWipe:
                 addq.b  #2,routine(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$B,$2E(a0)
-                move.w  #4,(_unkF662).w
+                move.w  #4,(S3SegaVIntTransferRequest).w
                 subi.w  #$28,x_pos(a0)
                 bchg    #0,render_flags(a0)
                 bchg    #0,status(a0)
@@ -196,7 +196,7 @@ S3SegaActor_StepFinalPaletteWipe:
 
 S3SegaActor_FinishWipeAndPlaySega:
                 addq.b  #2,routine(a0)
-                st      (_unkF660).w
+                st      (CreditsDelayOrSegaCompletionLatch).w
                 move.b  #cmd_S2SEGA,d0
                 jsr     (Play_SFX).l
 

@@ -30,18 +30,18 @@ SStage_red_sphere_dfs_walk_stack:   set     *           ; Sonic & Knuckles uses 
                 dephase
 
                 phase   Stat_table+$12
-_unkE412:               ds.w    1                       ; unused, but referenced in sphere test
-_unkE414:               ds.w    1                       ; used in sphere test
-_unkE416:               ds.w    1                       ; used in sphere test
-Sphere_test_address:    ds.w    1                       ; address of the sphere test object
+S3SphereTestResetOnlyReservedWord:  ds.w    1           ; unused, but referenced in sphere test
+S3SphereTestVerticalProjectionBias: ds.w    1           ; used in sphere test
+S3SphereTestDepthProjectionBias:    ds.w    1           ; used in sphere test
+Sphere_test_address:                ds.w    1           ; address of the sphere test object
 
 Save_pointer:   set     Competition_saved_data+$B8      ; long ; pointer to the active save slot in 1 player mode
 Saved_data:     set     Competition_saved_data+$CC      ; $34 bytes ; saved data from 1 player mode
-H_int_jump:     set     _tempF608                       ; 6 bytes ; contains an instruction to jump to the H-int handler
+H_int_jump:     set     S3HInterruptTrampolineStorage   ; 6 bytes ; contains an instruction to jump to the H-int handler
 H_int_addr:     set     H_int_jump+2                    ; long
                 dephase
 
-                phase   _unkF712+8
+                phase   CompactSceneObjectRespawnBytes+8
 CNZ_bumper_routine:             ds.b    1               ; left over from Sonic 2
 CNZ_bumper_unk:                 ds.b    1               ; left over from Sonic 2 ; set only, never used again
 CNZ_visible_bumpers_start:      ds.l    1               ; left over from Sonic 2
@@ -50,11 +50,11 @@ CNZ_Visible_bumpers_start_P2:   ds.l    1               ; left over from Sonic 2
 CNZ_Visible_bumpers_end_P2:     ds.l    1               ; left over from Sonic 2
                 dephase
 
-                phase   _tempFF88
-Current_zone_2P:    ds.b    1                           ; left over from Sonic 2
-Current_act_2P:     ds.b    1                           ; left over from Sonic 2
-Options_menu_box:   equ     _tempFF8C                   ; byte ; left over from Sonic 2
-_unkFF98:           equ     _tempFF98                   ; word ; unused
+                phase   S3LegacyVersusZoneActOverlayStorage
+Current_zone_2P:                ds.b    1               ; left over from Sonic 2
+Current_act_2P:                 ds.b    1               ; left over from Sonic 2
+Options_menu_box:               equ     S3LegacyOptionsSelectionOverlayStorage  ; byte ; left over from Sonic 2
+S3LegacyClearOnlyOverlayAlias:  equ     S3LegacyClearOnlyOverlayStorage  ; word ; unused
                 dephase
 
                 phase   Demo_mode_flag

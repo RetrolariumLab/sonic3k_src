@@ -27,7 +27,7 @@ SKCreditScroll_AddCharacterGroupStride:
                 addi.w  #6,d1
 
 SKCreditScroll_SelectSignedEndingOutcome:
-                tst.b   (_unkFA88).w
+                tst.b   (EndingOutcomeOrBossSceneSignals).w
                 bmi.s   SKCreditScroll_LoadSpeedAndDelay
                 beq.s   SKCreditScroll_AddZeroOutcomeOffset
                 addq.w  #2,d1
@@ -40,8 +40,8 @@ SKCreditScroll_LoadSpeedAndDelay:
                 moveq   #0,d0
                 move.w  (a1,d1.w),d0
                 lsl.l   #8,d0
-                move.l  d0,(_unkFAC8).w
+                move.l  d0,(EndingCreditsFixedPointScrollIncrement).w
                 lea     CreditsText_ScrollDelay(pc),a1
-                move.w  (a1,d1.w),(_unkF660).w
+                move.w  (a1,d1.w),(CreditsDelayOrSegaCompletionLatch).w
                 rts
 ; End of function SKCredits_SelectScrollSpeedAndDelay

@@ -129,7 +129,7 @@ MHZBoss_BeginOneHitEscape:
 
 MHZBoss_SetEscapeSpeedAndTryWatcher:
                 move.w  d0,x_vel(a0)
-                st      (_unkFAA9).w
+                st      (SceneOutcomeOrActorReadySignal).w
                 jsr     (AllocateObject).l
                 bne.s   MHZBoss_TryEscapeExplosion
                 move.l  #MHZBoss_WaitChaseAndTryP2Lock,(a1)
@@ -170,7 +170,7 @@ MHZBoss_WaitCameraAndLoadSpikeArt:
 ; ---------------------------------------------------------------------------
 
 MHZBoss_WaitChaseAndTryP2Lock:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.w   MHZBoss_SharedReturn
                 move.l  #MHZBoss_ResetPlayerAndWaitGround,(a0)
                 jsr     (AllocateObject).l

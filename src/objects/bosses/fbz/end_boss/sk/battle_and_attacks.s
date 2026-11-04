@@ -215,7 +215,7 @@ FBZBossSK_BeginPostBreakupWait:
 
 FBZBossSK_BeginCapsuleAndCameraRelease:
                 move.l  #FBZBossSK_LockExitCameraAndRestore,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (AllocateObject).l
                 bne.s   FBZBossSK_SetFirstExitCameraTarget
@@ -231,7 +231,7 @@ FBZBossSK_SetFirstExitCameraTarget:
 
 FBZBossSK_LockExitCameraAndRestore:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   FBZBossSK_SharedGateReturn
                 move.l  #FBZBossSK_ForceRightOrCheckExitY,(a0)
                 jsr     (Restore_PlayerControl).l

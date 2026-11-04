@@ -16,7 +16,7 @@ Obj_SSZMTZBoss:
                 move.b  #mus_EndBoss,subtype(a1)
 
 SSZMTZ_QueueArtAndSavePalette:
-                clr.w   (_unkFA88).w
+                clr.w   (EndingOutcomeOrBossSceneSignals).w
                 moveq   #PLCID_7B,d0
                 jsr     (Load_PLC).l
                 lea     (ArtKosM_SSZMTZOrbs).l,a1
@@ -81,7 +81,7 @@ SSZMTZ_InitShipAndOrbRing:
                 move.l  a0,$34(a1)
 
 SSZMTZ_SeedPackedAnimScratch:
-                lea     (_unkFA82).w,a2
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a2
                 move.b  #$10,(a2)+
                 move.b  #0,(a2)+
                 move.b  #3,(a2)+

@@ -31,9 +31,9 @@ SOZEndBoss_CatchUpSixWordMotionProfile:
 ; =============== S U B R O U T I N E =======================================
 
 TickSOZEndBossChargeAttackSpawnTimer:
-                subq.w  #1,(_unkFA82).w
+                subq.w  #1,(SceneTimerOrSharedMotionRecordBase).w
                 bpl.w   SOZBoss_SharedActorReturn
-                move.w  #$200,(_unkFA82).w
+                move.w  #$200,(SceneTimerOrSharedMotionRecordBase).w
                 moveq   #signextendB(sfx_Charging),d0
                 jsr     (Play_SFX).l
                 lea     SOZBoss_ChargeGeneratorChild(pc),a2

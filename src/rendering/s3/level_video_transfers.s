@@ -94,7 +94,7 @@ S3CompVInt_TryWritePlanePair:
                 move.w  d1,d4
                 bsr.s   VInt_VRAMWrite
                 move.w  d2,d0
-                add.w   (_unkEEB0).w,d0
+                add.w   (CompetitionPairedPlaneCopyVramDelta).w,d0
                 move.w  d4,d1
                 bsr.s   VInt_VRAMWrite
                 bra.s   S3CompVInt_TryWritePlanePair

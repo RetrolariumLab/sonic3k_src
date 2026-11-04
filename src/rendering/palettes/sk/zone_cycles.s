@@ -268,7 +268,7 @@ SKPalCNZ_Return:
 AnPal_FBZ:
                 tst.b   (Level_frame_counter+1).w
                 bne.s   SKPalFBZ_Return
-                bchg    #0,(_unkF7C1).w
+                bchg    #0,(ZoneMagnetOrLeafSelectionFlag).w
 
 SKPalFBZ_Return:
                 rts

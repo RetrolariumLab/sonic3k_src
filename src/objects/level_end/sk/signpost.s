@@ -112,7 +112,7 @@ Obj_EndSignLanded:
 
 SKSign_FinishLandingSpin:
                 move.b  #6,routine(a0)
-                st      (_unkFABE).w
+                st      (SignpostLandingWriteOnlyLatch).w
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)                       ; Null velocity
                 moveq   #0,d0

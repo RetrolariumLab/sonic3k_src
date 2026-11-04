@@ -9,7 +9,7 @@ Obj_MHZMinibossTree:
                 move.l  #MHZMini_TreeCheckBossOrReset,(a0)
 
 MHZMini_TreeCheckBossOrReset:
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   MHZMinibossTree_DrawOrCullHorizontally
                 movea.w d0,a1
                 cmpi.l  #Obj_MHZMiniboss,(a1)
@@ -37,7 +37,7 @@ MHZMini_InitLogHeightAndMotion:
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #MHZMini_LogAnimateAndTryBounce,(a0)
                 move.b  #$18,y_radius(a0)
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 moveq   #0,d2
                 move.b  $42(a1),d2
                 move.b  MHZMini_LogYOffsetsByTreeState(pc,d2.w),d3

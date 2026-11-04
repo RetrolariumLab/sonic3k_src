@@ -187,7 +187,7 @@ SKSSZBossPedestal_TrySpawnAtMaxCameraY:
                 jsr     (AllocateObject).l
                 bne.s   SKSSZBossPedestal_DrawAfterSpawnAttempt
                 move.l  #Obj_SSZEndBoss,(a1)
-                move.w  a1,(_unkFAA4).w
+                move.w  a1,(SceneControllerObjectAddress).w
                 move.w  a1,$30(a0)
                 st      $2E(a0)
 
@@ -230,7 +230,7 @@ SKHPZDepartSurface_DrawWaiting:
 
 SKHPZDepartSurface_RaiseDepartingActor:
                 jsr     CycleSszHpzTeleporterPalettePair(pc)
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 movea.w $3C(a0),a2
                 cmpi.b  #8,$46(a2)
                 blt.w   SKHPZDepartSurface_DrawCharging
@@ -263,7 +263,7 @@ SKHPZDepartSurface_RemoveActorAtFullBeam:
 ; ---------------------------------------------------------------------------
 
 SKHPZDepartSurface_SignalCapturePhase:
-                bset    #7,(_unkFAB8).w
+                bset    #7,(SceneSyncFlagsOrMHZState).w
 
 SKHPZDepartSurface_DrawCharging:
                 jmp     (Draw_Sprite).l
@@ -340,7 +340,7 @@ SKHPZDepartScene_TickBeamTriggerPhase:
                 bne.s   SKHPZDepartScene_TrySignalSurface
                 subq.b  #1,$2D(a0)
                 bne.s   SKHPZDepartScene_TryPanCamera
-                bset    #6,(_unkFAB8).w
+                bset    #6,(SceneSyncFlagsOrMHZState).w
                 move.w  #(2<<8)|60,subtype(a0)
                 bra.s   SKHPZDepartScene_TryPanCamera
 ; ---------------------------------------------------------------------------

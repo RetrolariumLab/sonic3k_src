@@ -155,8 +155,8 @@ SKFBZ2BG_DrawSwappedBossPlanes:
                 tst.w   (Events_bg+$06).w
                 beq.s   SKFBZ2BG_BossPlaneSwapReturn
                 clr.w   (Events_bg+$06).w               ; If boss has been loaded
-                move.w  (_unkEE9C).w,d0
-                clr.w   (_unkEE9C).w                    ; Get final Y offset and clear it
+                move.w  (SceneAuxiliaryYOrVerticalMotion).w,d0
+                clr.w   (SceneAuxiliaryYOrVerticalMotion).w  ; Get final Y offset and clear it
                 btst    #Status_InAir,(Player_1+status).w
                 beq.s   SKFBZ2BG_RebaseBossArea
                 add.w   d0,(Player_1+y_pos).w           ; If player is not on ground, adjust his Y position properly
@@ -168,8 +168,8 @@ SKFBZ2BG_RebaseBossArea:
                 add.w   d0,(Camera_min_Y_pos).w
                 add.w   d0,(Camera_max_Y_pos).w         ; Add offset to camera Ys
                 move.w  (Camera_max_Y_pos).w,(Camera_target_max_Y_pos).w
-                move.w  (_unkEE98).w,d0
-                clr.w   (_unkEE98).w
+                move.w  (SceneAuxiliaryXOrCompetitionTime).w,d0
+                clr.w   (SceneAuxiliaryXOrCompetitionTime).w
                 sub.w   d0,(Player_1+x_pos).w
                 sub.w   d0,(Player_2+x_pos).w           ; Adjust X position of players
                 sub.w   d0,(Camera_X_pos).w
@@ -199,11 +199,11 @@ SKFBZ2BG_BossPlaneSwapReturn:
 FBZ2_CloudDeform:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$300,d0
-                add.w   (_unkEE9C).w,d0                 ; Add camera BG Y to Y event offset
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0  ; Add camera BG Y to Y event offset
                 move.w  d0,(Camera_Y_pos_BG_copy).w     ; Make that the effective Y
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$2600,d0
-                sub.w   (_unkEE98).w,d0
+                sub.w   (SceneAuxiliaryXOrCompetitionTime).w,d0
                 move.w  d0,(Camera_X_pos_BG_copy).w     ; Do the same with the X values
                 lea     (HScroll_table).w,a1
                 lea     FBZ2_CloudDeformIndex(pc),a5
@@ -338,12 +338,12 @@ SKFBZ2BG_WaitToMoveBossArea:
 
 SKFBZ2BG_StepBossAreaOffsets:
                 st      (Background_collision_flag).w   ; Set BG collision on
-                addi.l  #$A000,(_unkEE9C).w
-                addi.l  #$7800,(_unkEE98).w             ; Move the extra BG camera by a set amount
-                cmpi.w  #$5D0,(_unkEE9C).w
+                addi.l  #$A000,(SceneAuxiliaryYOrVerticalMotion).w
+                addi.l  #$7800,(SceneAuxiliaryXOrCompetitionTime).w  ; Move the extra BG camera by a set amount
+                cmpi.w  #$5D0,(SceneAuxiliaryYOrVerticalMotion).w
                 blo.s   SKFBZ2BG_TryRaiseCameraMinX
-                move.w  #$5D0,(_unkEE9C).w              ; When BG has reached end point
-                move.w  #$45C,(_unkEE98).w
+                move.w  #$5D0,(SceneAuxiliaryYOrVerticalMotion).w  ; When BG has reached end point
+                move.w  #$45C,(SceneAuxiliaryXOrCompetitionTime).w
                 clr.b   (Background_collision_flag).w   ; Stop BG collision
                 move.l  #SKFBZ2BG_TryLockCameraY,(a0)
 
@@ -393,9 +393,9 @@ SKFBZ2BG_FinishBossAreaSetup:
 SKFBZ2BG_CalcArenaPlatformPosition:
                 move.w  x_pos(a0),d4
                 move.w  #$31C0,d0
-                add.w   (_unkEE98).w,d0
+                add.w   (SceneAuxiliaryXOrCompetitionTime).w,d0
                 move.w  #$690,d1
-                sub.w   (_unkEE9C).w,d1
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d1
 
 SKFBZ2BG_PlaceArenaPlatformAndSolid:
                 move.w  d0,x_pos(a0)
@@ -418,7 +418,7 @@ Obj_FBZBossPillar:
 
 Obj_FBZBossPillarMain:
                 move.w  #$2DE0,d4
-                add.w   (_unkEE98).w,d4
+                add.w   (SceneAuxiliaryXOrCompetitionTime).w,d4
                 move.w  d4,x_pos(a0)                    ; Move pillar to proper X area
                 move.w  d4,d0
                 move.w  d4,d1
@@ -429,7 +429,7 @@ Obj_FBZBossPillarMain:
 
 SKFBZ2BG_CheckPillarActivation:
                 move.w  #$580,d5
-                sub.w   (_unkEE9C).w,d5                 ; Get proper Y offset
+                sub.w   (SceneAuxiliaryYOrVerticalMotion).w,d5  ; Get proper Y offset
                 move.w  d5,d2
                 move.w  d5,d3
                 addi.w  #$80,d2

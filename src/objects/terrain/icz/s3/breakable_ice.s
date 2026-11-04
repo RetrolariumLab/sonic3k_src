@@ -16,7 +16,7 @@ S3ICZBreakIce_ResolveWallAndCheckBreak:
                 moveq   #$70,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 cmpi.l  #Obj_ICZPathFollowPlatform_2,(a1)
                 bne.s   S3ICZBreakIce_DrawIntactWall
                 move.w  x_pos(a1),d0

@@ -111,10 +111,10 @@ DEZFinal_ArmDispatchOrSignalDefeat:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_ArmChooseDefeatSide:
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 tst.b   subtype(a0)
                 beq.s   DEZFinal_ArmSignalDefeatAndDelete
-                lea     (_unkFA83).w,a1
+                lea     (SceneTimerLowByteOrSecondAttackDone).w,a1
 
 DEZFinal_ArmSignalDefeatAndDelete:
                 st      (a1)
@@ -344,7 +344,7 @@ DEZFinal_InitIntroPanel:
                 move.w  d0,y_pos(a0)
 
 DEZFinal_PanelWaitForRunner:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.s   DEZFinalIntroPanel_DrawWhileWaiting
                 move.l  #DEZFinal_PanelMoveAndTickDelay,(a0)
                 move.w  #$1F,$2E(a0)
@@ -362,7 +362,7 @@ DEZFinal_PanelMoveAndTickDelay:
 ; ---------------------------------------------------------------------------
 
 DEZFinalIntroPanel_SignalStageAndDelete:
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 st      (Events_fg_5).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -387,5 +387,5 @@ DEZFinalIntroRunner_AnimateAndMoveRight:
 ; ---------------------------------------------------------------------------
 
 DEZFinalIntroRunner_SignalPanelAndDelete:
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 jmp     (Delete_Current_Sprite).l

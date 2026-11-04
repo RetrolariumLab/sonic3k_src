@@ -56,7 +56,7 @@ SKFBZMagSpike_FallAndCheckFloor:
                 move.l  #SKFBZMagSpike_TrySwitchToRising,(a0)
 
 SKFBZMagSpike_TrySwitchToRising:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 beq.s   SKFBZMagSpike_DrawFallingBall
                 move.l  #SKFBZMagSpike_RiseAndCheckCeiling,(a0)
 
@@ -75,7 +75,7 @@ SKFBZMagSpike_RiseAndCheckCeiling:
                 move.l  #SKFBZMagSpike_TrySwitchToFalling,(a0)
 
 SKFBZMagSpike_TrySwitchToFalling:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 bne.s   SKFBZMagSpike_DrawRisingBall
                 move.l  #SKFBZMagSpike_FallAndCheckFloor,(a0)
 
@@ -84,7 +84,7 @@ SKFBZMagSpike_DrawRisingBall:
 ; ---------------------------------------------------------------------------
 
 SKFBZMagSpike_AnimateLargeMagnet:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 beq.s   SKFBZMagSpike_CullHiddenLargeMagnet
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #5,mapping_frame(a0)
@@ -109,7 +109,7 @@ SKFBZMagSpike_CullHiddenLargeMagnet:
 ; ---------------------------------------------------------------------------
 
 SKFBZMagSpike_AnimateCompactMagnet:
-                tst.b   (_unkF7C1).w
+                tst.b   (ZoneMagnetOrLeafSelectionFlag).w
                 beq.s   SKFBZMagSpike_CullHiddenCompactMagnet
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #7,mapping_frame(a0)

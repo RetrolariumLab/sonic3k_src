@@ -38,7 +38,7 @@ CutsceneKnux_SSZ_Index:
 SSZScene_InitSlottedKnuxAndFlags:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
-                clr.b   (_unkFAB8).w
+                clr.b   (SceneSyncFlagsOrMHZState).w
                 move.w  #$80,priority(a0)
                 lea     (Normal_palette_line_2).w,a1
                 lea     (Target_palette_line_2).w,a2
@@ -54,7 +54,7 @@ SSZScene_SavePaletteAndLoadScene:
 SSZScene_AnimateUntilArrivalSignal:
                 lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jsr     (Animate_RawNoSSTCheckResult).l
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 beq.w   SKAIZScene_SharedSceneReturn
                 move.b  #4,routine(a0)
                 move.b  #$56,mapping_frame(a0)
@@ -97,7 +97,7 @@ SSZScene_TickDelayAndSetTiredLoop:
 SSZScene_AnimateTiredUntilEggDone:
                 moveq   #signextendB(sfx_DeathEggRiseQuiet),d0
                 jsr     (Play_SFX_Continuous).l
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 bne.s   SSZScene_BeginTiredPoseWait
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
@@ -278,7 +278,7 @@ SSZScene_EmitAndMoveEggUntilSignal:
                 cmp.w   y_pos(a0),d0
                 bls.w   SKAIZScene_SharedSceneReturn
                 bset    #5,$38(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 lea     (Target_palette_line_4).w,a1
                 lea     (Normal_palette_line_4).w,a2
                 moveq   #bytesToLcnt($20),d6
@@ -341,7 +341,7 @@ SSZScene_InitBackgroundSpriteMask:
 
 SSZScene_ApplyMaskAndCheckRelease:
                 st      (Spritemask_flag).w
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 bne.s   SSZScene_DeleteReleasedMask
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jmp     (Draw_Sprite).l

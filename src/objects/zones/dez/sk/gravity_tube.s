@@ -31,11 +31,11 @@ SKDEZGravTube_UpdateHorizontalRiders:
                 move.w  d4,d5
                 add.w   d5,d5
                 lea     (Player_1).w,a1
-                lea     (_unkF7B0+0).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+0).w,a2
                 moveq   #p1_standing_bit,d6
                 bsr.s   UpdatePlayerInDezHorizontalGravityTube
                 lea     (Player_2).w,a1
-                lea     (_unkF7B0+1).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+1).w,a2
                 addq.b  #p2_standing_bit-p1_standing_bit,d6
                 bsr.s   UpdatePlayerInDezHorizontalGravityTube
                 jmp     (Delete_Sprite_If_Not_In_Range).l
@@ -176,11 +176,11 @@ SKDEZGravTube_UpdateVerticalRiders:
                 move.w  d4,d5
                 add.w   d5,d5
                 lea     (Player_1).w,a1
-                lea     (_unkF7B0+0).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+0).w,a2
                 moveq   #p1_standing_bit,d6
                 bsr.s   UpdatePlayerInDezVerticalGravityTube
                 lea     (Player_2).w,a1
-                lea     (_unkF7B0+1).w,a2
+                lea     (PlayerTubeCageAndDrumAngleBytes+1).w,a2
 ; Bug: if player 1 was riding the object, then d6 may have become dirty from
 ; a call to Perform_Player_DPLC, causing player 2 to behave erratically
                 addq.b  #p2_standing_bit-p1_standing_bit,d6

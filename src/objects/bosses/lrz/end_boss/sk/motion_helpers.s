@@ -43,11 +43,11 @@ LRZBoss_ShotSelfHitBounds:
 
 SetLRZLavaRiderHorizontalStreamVelocity:
                 move.w  (Events_bg+$0A).w,d0
-                move.w  (_unkFA84).w,d1
+                move.w  (SceneCreditIndexOrBossMotionPlanAngle).w,d1
                 lsr.w   #2,d1
                 add.w   d1,d0
                 add.w   d0,d0
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 bne.s   LRZBoss_LavaRiderStoreStreamSpeed
                 neg.w   d0
 
@@ -106,8 +106,8 @@ LRZEndBossHit_ReturnWithoutDefeat:
 LRZBoss_DefeatStopStreamAndExplode:
                 move.l  #LRZBoss_SinkDuringDefeat,(a0)
                 bset    #7,status(a0)
-                clr.b   (_unkFAA3).w
-                clr.w   (_unkFA84).w
+                clr.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
+                clr.w   (SceneCreditIndexOrBossMotionPlanAngle).w
                 st      (Events_fg_5).w
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
@@ -140,7 +140,7 @@ LRZEndBossHit_TwoFourColorSourceProfiles:
 
 ; Near the boss, spawn debris, detach riders and schedule deletion. Discard the return address to end this update
 LRZBossPlatform_TryShatter:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 tst.w   (a1)
                 beq.w   LRZBoss_SharedReturn
                 lea     LRZBoss_PlatformShatterBounds(pc),a2
@@ -246,7 +246,7 @@ LRZPlatformDebris_TenPackedVelocityPairs:
 ; ---------------------------------------------------------------------------
 
 LRZBoss_WaitCapsuleAndInitPalette:
-                tst.b   (_unkFACD).w
+                tst.b   (CapsuleOpenedFlag).w
                 beq.w   LRZBoss_SharedReturn
                 move.l  #LRZBoss_RunCapsulePalette,(a0)
                 lea     LRZMini_CompletionPaletteScript(pc),a1

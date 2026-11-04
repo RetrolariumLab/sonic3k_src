@@ -48,7 +48,7 @@ SKSOZ1Events_TryBeginPyramidRise:
                 tst.w   (Events_fg_5).w
                 beq.s   SKSOZ1Events_SelectCameraMaxY
                 clr.w   (Events_fg_5).w
-                move.w  #-8,(_unkEE9C).w
+                move.w  #-8,(SceneAuxiliaryYOrVerticalMotion).w
                 st      (Screen_shake_flag).w
                 jsr     PositionSoz1PyramidBackgroundAndRumble(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -314,8 +314,8 @@ SOZ1_UpdatePyramidRise:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
                 beq.s   PositionSoz1PyramidBackgroundAndRumble
-                addq.w  #1,(_unkEE9C).w
-                cmpi.w  #$280,(_unkEE9C).w
+                addq.w  #1,(SceneAuxiliaryYOrVerticalMotion).w
+                cmpi.w  #$280,(SceneAuxiliaryYOrVerticalMotion).w
                 blt.s   PositionSoz1PyramidBackgroundAndRumble
                 move.w  #8,(Screen_shake_flag).w
 ; End of function SOZ1_UpdatePyramidRise
@@ -335,7 +335,7 @@ PositionSoz1PyramidBackgroundAndRumble:
 SKSOZ1Events_SetPyramidBackgroundPos:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$900,d0
-                add.w   (_unkEE9C).w,d0
+                add.w   (SceneAuxiliaryYOrVerticalMotion).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_X_pos_copy).w,d0
                 subi.w  #$3CD0,d0

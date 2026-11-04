@@ -344,7 +344,7 @@ MGZBossS3_KnucklesBeginUpperPlan:
                 move.b  #$A,routine(a0)
                 move.w  #$7F,$2E(a0)
                 move.l  #MGZBossS3_KnucklesPauseBetweenPlans,$34(a0)
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 bra.w   MGZBossS3_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
@@ -369,7 +369,7 @@ MGZBossS3_KnucklesBeginLowerPlan:
                 move.w  #$9F,$2E(a0)
                 move.l  #MGZBossS3_KnucklesResetAfterPair,$34(a0)
                 move.b  #2,subtype(a0)
-                lea     (_unkFA8A).w,a1
+                lea     (DDZScrollAccelOrSceneMotion).w,a1
                 bra.w   MGZBossS3_ReplayDrillPlanAtHalfSpeed
 ; ---------------------------------------------------------------------------
 
@@ -402,7 +402,7 @@ MGZBossS3_SpawnCapsuleAndInstallWait:
 ; ---------------------------------------------------------------------------
 
 MGZBossS3_WaitCapsuleAndTryPalette:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   MGZArrivalS3_SharedReturn
                 move.l  #MGZBossS3_DefeatedBossIdle,(a0)
                 bset    #4,$38(a0)

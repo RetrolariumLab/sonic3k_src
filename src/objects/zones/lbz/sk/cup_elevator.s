@@ -553,7 +553,7 @@ SKLBZCupLift_CarryOrReleaseRider:
                 bhs.s   SKLBZCupLift_DetachAndStartCooldown  ; If player is in hit routine, branch
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
                 beq.w   SKLBZCupLift_PlaceRiderAndSetPriority  ; If jump hasn't been pressed, branch
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 bne.w   SKLBZCupLift_PlaceRiderAndSetPriority  ; If controller is disabled, branch
                 move.w  #$100,priority(a1)              ; Reset character priority
                 clr.b   object_control(a1)              ; Sonic is under player control once more

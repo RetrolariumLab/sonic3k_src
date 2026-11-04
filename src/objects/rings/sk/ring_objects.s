@@ -98,7 +98,7 @@ SKRingReward_TryIncrementP2:
 SKRingReward_SelectP2CreditPath:
                 tst.w   (Competition_mode).w
                 beq.s   GiveRing_1P
-                ori.b   #1,(_unkFEBE).w
+                ori.b   #1,(RingCollectionWriteOnlyStickyBit).w
                 move.w  #sfx_RingRight,d0
                 cmpi.w  #100,(Ring_count_P2).w
                 blo.s   SKRings_RequestCompetitionP2RingSound

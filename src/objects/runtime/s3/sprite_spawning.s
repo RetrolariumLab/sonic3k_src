@@ -50,7 +50,7 @@ S3Spawn_BeginOnePassPreload:
                 addq.b  #8,(Object_load_routine).w
                 jsr     AllocateObject(pc)
                 bne.s   S3Spawn_FinishPreload
-                lea     (_unkF712).w,a3
+                lea     (CompactSceneObjectRespawnBytes).w,a3
                 lea     (Sprite_Listing).l,a4
                 move.w  #$800,d6
 

@@ -85,7 +85,7 @@ S3Drawbridge_StartTriggerWait:
                 move.l  #S3Drawbridge_TryStartRotation,(a0)
 
 S3Drawbridge_TryStartRotation:
-                tst.b   (_unkFAA3).w
+                tst.b   (ZoneButtonRequestOrBridgeReleaseSignal).w
                 beq.s   S3Drawbridge_CheckRotationPhase
                 tst.b   $36(a0)
                 bne.s   S3Drawbridge_CheckRotationPhase
@@ -130,7 +130,7 @@ S3Drawbridge_PlacePiecesAndCheckSolid:
 ; ---------------------------------------------------------------------------
 
 S3Drawbridge_TryCollapseBanks:
-                tst.b   (_unkFAA9).w
+                tst.b   (SceneOutcomeOrActorReadySignal).w
                 beq.s   S3Drawbridge_PickSolidRectangle
                 move.l  #S3Drawbridge_TickFinalRiderDelay,(a0)
                 move.b  #$E,$34(a0)

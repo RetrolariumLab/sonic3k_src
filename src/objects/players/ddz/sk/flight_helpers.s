@@ -37,7 +37,7 @@ DDZFlight_ComputeInputAndHitVel:
                 blo.s   DDZ_FlightApplyHorizontalDrag
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                move.l  (_unkFA82).w,d2
+                move.l  (SceneTimerOrSharedMotionRecordBase).w,d2
                 lsr.l   #8,d2
                 neg.w   d2
                 moveq   #0,d3
@@ -171,11 +171,11 @@ DDZFlight_IntegrateWithinView:
                 lsl.l   #8,d2
                 add.l   d2,d0
                 swap    d0
-                move.w  (_unkFAB4).w,d4
+                move.w  (SceneMinimumXOrEmeraldSelectionTail).w,d4
                 add.w   d4,d1
                 cmp.w   d1,d0
                 blo.s   DDZ_FlightIntegrateYWithinWindow
-                move.w  (_unkFAB6).w,d5
+                move.w  (SceneMaximumXOrEmeraldSelectionTail).w,d5
                 sub.w   d4,d5
                 add.w   d5,d1
                 bset    #1,$38(a0)
@@ -194,11 +194,11 @@ DDZ_FlightIntegrateYWithinWindow:
                 lsl.l   #8,d3
                 add.l   d3,d0
                 swap    d0
-                move.w  (_unkFAB0).w,d4
+                move.w  (SceneMinimumYOrEmeraldSelectionBytes).w,d4
                 add.w   d4,d1
                 cmp.w   d1,d0
                 blo.s   DDZ_FlightIntegrateWindowReturn
-                move.w  (_unkFAB2).w,d5
+                move.w  (SceneMaximumYOrEmeraldSelectionTail).w,d5
                 sub.w   d4,d5
                 add.w   d5,d1
                 cmp.w   d1,d0
@@ -214,10 +214,10 @@ DDZ_FlightIntegrateWindowReturn:
 
 ; Apply accumulated scroll speed and right-edge boost, update X limits and carry the controller by the integer camera delta
 DDZFlight_AdvanceCameraAndCarry:
-                move.l  (_unkFA82).w,d0
-                add.l   (_unkFA8A).w,d0
+                move.l  (SceneTimerOrSharedMotionRecordBase).w,d0
+                add.l   (DDZScrollAccelOrSceneMotion).w,d0
                 move.l  #$60000,d2
-                move.w  (_unkFA8E).w,d1
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d1
                 beq.s   DDZ_FlightClampScrollCandidate
                 movea.w d1,a1
                 btst    #1,$38(a1)
@@ -238,7 +238,7 @@ DDZ_FlightClampScrollCandidate:
 DDZ_FlightStoreSpeedAboveOnePixel:
                 cmpi.l  #$10000,d0
                 ble.s   DDZ_FlightAdvanceCameraAndCarryActor
-                move.l  d0,(_unkFA82).w
+                move.l  d0,(SceneTimerOrSharedMotionRecordBase).w
 
 DDZ_FlightAdvanceCameraAndCarryActor:
                 move.l  (Camera_X_pos).w,d1
@@ -255,7 +255,7 @@ DDZ_FlightAdvanceCameraAndCarryActor:
                 add.w   d1,d3
                 move.w  d3,(Camera_max_X_pos).w
                 sub.w   d2,d1
-                move.w  d1,(_unkFA90).w
+                move.w  d1,(DdzFrameScrollDeltaOrLowerMotionPlanY).w
                 move.w  x_pos(a0),d2
                 add.w   d1,d2
                 move.w  d2,x_pos(a0)
@@ -266,24 +266,24 @@ DDZ_FlightAdvanceCameraAndCarryActor:
 
 ; Keep the actual camera fixed and publish the integer delta from a separate 16.16 world accumulator
 DDZBoss_AdvanceVirtualScroll:
-                move.l  (_unkFA82).w,d0
-                add.l   (_unkFA8A).w,d0
+                move.l  (SceneTimerOrSharedMotionRecordBase).w,d0
+                add.l   (DDZScrollAccelOrSceneMotion).w,d0
                 cmpi.l  #$60000,d0
                 bhi.s   DDZ_FlightApplyVirtualScrollDelta
-                move.l  d0,(_unkFA82).w
+                move.l  d0,(SceneTimerOrSharedMotionRecordBase).w
 
 ; Use the candidate even when it is too small to store as persistent scroll speed
 DDZ_FlightApplyVirtualScrollDelta:
-                move.l  (_unkFA86).w,d1
+                move.l  (SceneCreditStateOrBossMotionPlanX).w,d1
                 move.l  d1,d2
                 add.l   d0,d1
-                move.l  d1,(_unkFA86).w
+                move.l  d1,(SceneCreditStateOrBossMotionPlanX).w
                 swap    d0
                 add.w   d0,(Events_bg+$06).w
                 swap    d1
                 swap    d2
                 sub.w   d2,d1
-                move.w  d1,(_unkFA90).w
+                move.w  d1,(DdzFrameScrollDeltaOrLowerMotionPlanY).w
                 rts
 ; End of function DDZBoss_AdvanceVirtualScroll
 

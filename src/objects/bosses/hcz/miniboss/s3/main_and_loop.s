@@ -299,7 +299,7 @@ HCZMiniS3_RiseToBaselineAndRelane:
 ; ---------------------------------------------------------------------------
 
 HCZMiniS3_FreezeWaterAndTryExit:
-                st      (_unkFAA2).w
+                st      (ZoneEventLatchOrBossReleaseSignal).w
                 jsr     (Obj_EndSignControl).l
                 jsr     (AllocateObject).l
                 bne.s   HCZMiniS3_SpawnDefeatFragments
@@ -311,7 +311,7 @@ HCZMiniS3_SpawnDefeatFragments:
 ; ---------------------------------------------------------------------------
 
 HCZMiniS3_WaitResultsAndLockInputs:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   HCZMiniS3_SharedReturn
                 move.l  #HCZMiniS3_SelectExitTransportGroup,(a0)
                 clr.w   (Ctrl_1_logical).w

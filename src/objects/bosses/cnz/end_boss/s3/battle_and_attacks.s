@@ -236,7 +236,7 @@ CNZEndBoss_BeginDefeatBreakup:
 
 CNZEndBoss_OpenArenaExitAfterDefeat:
                 move.l  #CNZBossS3_RestoreControlsForExit,(a0)
-                st      (_unkFAA8).w
+                st      (ActCompletionHandshake).w
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 move.w  #$48F0,(Camera_stored_max_X_pos).w
@@ -246,10 +246,10 @@ CNZEndBoss_OpenArenaExitAfterDefeat:
 
 CNZBossS3_RestoreControlsForExit:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   CNZEndBoss_Return
                 move.l  #CNZBossS3_SpawnCannonAtExitGate,(a0)
-                clr.b   (_unkFAA8).w
+                clr.b   (ActCompletionHandshake).w
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l

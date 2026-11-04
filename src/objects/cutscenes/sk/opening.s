@@ -81,7 +81,7 @@ KnuxOpening_CopyBombPalette:
 ; ---------------------------------------------------------------------------
 
 KnuxOpening_WaitForImpactOrSpawnTimer:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.s   KnuxOpening_BeginImpactReaction
                 subq.w  #1,$2E(a0)
                 bne.s   KnuxOpening_AnimateIdleAfterBombAttempt
@@ -102,7 +102,7 @@ KnuxOpening_BeginImpactReaction:
 ; ---------------------------------------------------------------------------
 
 KnuxOpening_AnimateUntilExplosion:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 bne.s   KnuxOpening_SetNormalArtAndDrift
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
@@ -115,7 +115,7 @@ KnuxOpening_SetNormalArtAndDrift:
                 move.w  #-$100,y_vel(a0)
 
 KnuxOpening_DriftUntilPaletteReady:
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 bne.s   KnuxOpening_SetGrabArtAndStartFall
                 addi.w  #8,y_vel(a0)
                 jmp     (MoveSprite2).l
@@ -314,7 +314,7 @@ KnuxOpening_BounceVisibleBombAndArm:
                 tst.w   d1
                 bpl.s   KnuxOpening_DrawBombAfterBounceCheck
                 add.w   d1,y_pos(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 moveq   #signextendB(sfx_FloorThump),d0
                 jsr     (Play_SFX).l
                 move.w  y_vel(a0),d0
@@ -337,7 +337,7 @@ KnuxOpening_TickBombAndBeginExplosion:
                 bpl.s   KnuxOpening_DrawBombDuringCountdown
                 move.l  #KnuxOpening_WaitForFlashAndSignalRelease,(a0)
                 bset    #7,status(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 moveq   #signextendB(sfx_MissileExplode),d0
                 jsr     (Play_SFX).l
                 lea     (Normal_palette).w,a1
@@ -365,7 +365,7 @@ KnuxOpening_WaitForFlashAndSignalRelease:
                 movea.w $44(a0),a1
                 btst    #5,$38(a1)
                 beq.w   SKAIZScene_SharedSceneReturn
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
                 jsr     (AllocateObject).l
                 bne.s   KnuxOpening_PrepSSZReleasePalette
                 move.l  #KnuxOpening_InitEggRoboExitAndArt,(a1)

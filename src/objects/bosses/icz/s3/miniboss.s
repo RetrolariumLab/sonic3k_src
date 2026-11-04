@@ -231,7 +231,7 @@ ICZMiniS3_HoldBeforePaletteRestart:
 
 ICZMiniS3_StartSignAndStopSnow:
                 jsr     (Obj_EndSignControl).l
-                movea.w (_unkFAAE).w,a1
+                movea.w (SceneActorOrWorldOffset).w,a1
                 cmpi.l  #S3ICZSnowPile_UpdateCameraSnowEmitter,(a1)
                 bne.s   ICZMiniS3_TryDefeatPaletteActor
                 bset    #5,$38(a1)

@@ -80,7 +80,7 @@ SSZMTZBoss_CheckHitOrbRelease:
                 cmpi.b  #$1F,$1C(a0)
                 bne.s   SSZMTZ_HitCheckPlayersHurt
                 st      $39(a0)
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 andi.b  #$F0,2(a1)
                 ori.b   #5,2(a1)
                 tst.b   $3C(a0)
@@ -102,7 +102,7 @@ SSZMTZ_HitCheckPlayersHurt:
                 bne.s   SSZMTZ_HitPlayerCheckReturn
 
 SSZMTZ_HitRequestLegacyAnim:
-                lea     (_unkFA82).w,a1
+                lea     (SceneTimerOrSharedMotionRecordBase).w,a1
                 move.b  2(a1),d0
                 andi.b  #$F,d0
                 cmpi.b  #4,d0
@@ -134,7 +134,7 @@ SSZMTZ_DefeatMoveAndTickExit:
 SSZMTZ_DefeatSignalAndRestorePal:
                 clr.b   (Boss_flag).w
                 bset    #4,$38(a0)
-                st      (_unkFA89).w
+                st      (MechaSonicHeadDeleteOrOverlayLowByte).w
                 st      (Events_bg+$02).w
                 lea     (Target_palette_line_2).w,a1
                 lea     (Normal_palette_line_2).w,a2
@@ -192,7 +192,7 @@ SSZMTZ_HitUpdateReturn:
 SSZMTZ_BeginDefeatFadeAndExplosion:
                 move.l  #Wait_FadeToLevelMusic,(a0)
                 move.l  #SSZMTZDefeat_BeginRightwardDeparture,$34(a0)
-                st      (_unkFA88).w
+                st      (EndingOutcomeOrBossSceneSignals).w
                 clr.b   $38(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l

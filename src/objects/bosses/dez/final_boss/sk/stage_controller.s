@@ -31,8 +31,8 @@ DEZ3_Boss_Index:
 DEZFinal_InitWorldIntroAndActors:
                 move.b  #2,routine(a0)
                 bset    #2,render_flags(a0)
-                move.w  a0,(_unkFAA4).w
-                clr.l   (_unkFA84).w
+                move.w  a0,(SceneControllerObjectAddress).w
+                clr.l   (SceneCreditIndexOrBossMotionPlanAngle).w
                 lea     (ArtKosM_DEZFinalBossMisc).l,a1
                 move.w  #tiles_to_bytes(ArtTile_DEZFinalBossMisc),d2
                 jsr     (Queue_Kos_Module).l
@@ -128,7 +128,7 @@ DEZFinal_IntroPlayerStopReturn:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_WaitForIntroDetail:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   DEZFinal_IntroReleaseReturn
                 move.b  #8,routine(a0)
                 move.w  #$BF,$2E(a0)
@@ -161,7 +161,7 @@ DEZFinalWorld_ReturnAfterRiseTimerUpdate:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_WaitCameraAndSpawnBattle:
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 beq.s   DEZFinal_BattleSetupGateReturn
                 move.b  #$C,routine(a0)
                 move.w  y_pos(a0),$3A(a0)
@@ -284,7 +284,7 @@ DEZFinalWorld_RequestArmAttackAndWait:
 ; ---------------------------------------------------------------------------
 
 DEZFinal_WaitArmsOrBeginReposition:
-                cmpi.w  #-1,(_unkFA82).w
+                cmpi.w  #-1,(SceneTimerOrSharedMotionRecordBase).w
                 beq.s   DEZFinal_BeginArmDefeatReposition
                 btst    #1,$38(a0)
                 beq.w   DEZFinal_ChooseHopFromPlayerRegion

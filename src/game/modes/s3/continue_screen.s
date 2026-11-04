@@ -27,8 +27,8 @@ ContinueScreen:
                 lea     (ArtNem_ContinueIcons).l,a0
                 jsr     (Nem_Decomp).l
                 clr.b   (Level_started_flag).w
-                clr.b   (_unkFAA9).w
-                clr.b   (_unkFA88).w
+                clr.b   (SceneOutcomeOrActorReadySignal).w
+                clr.b   (EndingOutcomeOrBossSceneSignals).w
                 clearRAM Player_1,(Kos_decomp_buffer-Player_1)
                 clearRAM (RAM_start+$2000),$2000
                 jsr     (Init_SpriteTable).l
@@ -47,7 +47,7 @@ S3Continue_CopyPaletteAndInstallActors:
                 move.l  #S3Continue_KnucklesDispatchAndDraw,(Reserved_object_3).w
                 lea     (Dynamic_object_RAM).w,a1
                 move.l  #S3Continue_InitCountdownAt10,(a1)
-                move.w  a1,(_unkFAA4).w
+                move.w  a1,(SceneControllerObjectAddress).w
                 move.l  #S3Continue_InitStaticEmblem,(Dynamic_object_RAM+object_size).w
                 bsr.w   S3Continue_InitRemainingLifeIcons
                 jsr     (Process_Sprites).l
@@ -66,7 +66,7 @@ S3Continue_RunUntilOutcome:
                 jsr     (Wait_VSync).l
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
-                move.b  (_unkFAA9).w,d0
+                move.b  (SceneOutcomeOrActorReadySignal).w,d0
                 beq.s   S3Continue_RunUntilOutcome
                 subq.b  #1,d0
                 beq.s   S3Continue_RestoreStatsAndConsume
@@ -95,21 +95,21 @@ S3Continue_SetupOrIconReturn:
 
 S3Continue_InitCountdownAt10:
                 move.l  #S3Continue_CheckStartOrTick,(a0)
-                clr.w   (_unkFA82).w
-                move.b  #$A,(_unkFA84).w
+                clr.w   (SceneTimerOrSharedMotionRecordBase).w
+                move.b  #$A,(SceneCreditIndexOrBossMotionPlanAngle).w
 
 S3Continue_CheckStartOrTick:
                 btst    #button_start,(Ctrl_1_pressed).w
                 bne.s   S3Continue_LatchStartAndStopTimer
                 btst    #button_start,(Ctrl_2_pressed).w
                 bne.s   S3Continue_LatchStartAndStopTimer
-                subq.w  #1,(_unkFA82).w
+                subq.w  #1,(SceneTimerOrSharedMotionRecordBase).w
                 bpl.s   S3Continue_CountdownReturn
-                move.w  #60-1,(_unkFA82).w
-                move.b  (_unkFA84).w,d0
+                move.w  #60-1,(SceneTimerOrSharedMotionRecordBase).w
+                move.b  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 subq.b  #1,d0
                 bmi.s   S3Continue_SignalTimeout
-                move.b  d0,(_unkFA84).w
+                move.b  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 bsr.w   S3Continue_DrawTimerAndQueueUpload
 
 S3Continue_CountdownReturn:
@@ -117,7 +117,7 @@ S3Continue_CountdownReturn:
 ; ---------------------------------------------------------------------------
 
 S3Continue_SignalTimeout:
-                move.b  #2,(_unkFAA9).w
+                move.b  #2,(SceneOutcomeOrActorReadySignal).w
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -140,7 +140,7 @@ Obj_Continue_SonicWTails:
                 move.l  #S3Continue_SonicWaitAndBlink,(a0)
 
 S3Continue_SonicWaitAndBlink:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   S3Continue_SonicEnterStateDispatch
                 move.b  #0,mapping_frame(a0)
@@ -259,7 +259,7 @@ Obj_Continue_TailsWSonic:
                 move.l  #S3Continue_TailsWaitAndBlink,(a0)
 
 S3Continue_TailsWaitAndBlink:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   S3Continue_TailsInstallExitActors
                 move.b  #5,mapping_frame(a0)
@@ -327,7 +327,7 @@ S3Continue_TailsRunAndSignalAccept:
                 addq.w  #6,x_pos(a0)
                 cmpi.w  #$1E0,x_pos(a0)
                 blo.s   S3Continue_TailsAnimateRun
-                move.b  #1,(_unkFAA9).w
+                move.b  #1,(SceneOutcomeOrActorReadySignal).w
 
 S3Continue_TailsAnimateRun:
                 jmp     (Animate_Tails).l
@@ -363,7 +363,7 @@ S3Continue_InitKnucklesExitSprite:
                 move.w  #$120,y_pos(a0)
 
 S3Continue_KnucklesWaitForStart:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 btst    #3,$38(a1)
                 bne.s   S3Continue_KnucklesBeginRun
                 rts
@@ -444,7 +444,7 @@ ContinueTailsIconChild_AnimateAndDraw:
 
 ; Use the two countdown nibbles as two-tile-high digits and request a V-int upload
 S3Continue_DrawTimerAndQueueUpload:
-                move.b  (_unkFA84).w,d0
+                move.b  (SceneCreditIndexOrBossMotionPlanAngle).w,d0
                 move.b  d0,d1
                 andi.w  #$F0,d0
                 lsr.w   #3,d0
@@ -460,7 +460,7 @@ S3Continue_DrawTimerAndQueueUpload:
                 move.w  d1,2(a1)
                 addq.w  #1,d1
                 move.w  d1,$82(a1)
-                bset    #0,(_unkFA88).w
+                bset    #0,(EndingOutcomeOrBossSceneSignals).w
                 rts
 ; End of function S3Continue_DrawTimerAndQueueUpload
 

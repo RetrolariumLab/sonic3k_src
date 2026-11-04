@@ -16,7 +16,7 @@ LevelSetup:
                 clr.l   (Plane_buffer_2_addr).w
                 clr.l   (Glide_screen_shake).w
                 clr.w   (HPZ_special_stage_completed).w
-                clr.w   (_unkFAC0).w
+                clr.w   (HpzNewlyCompletedEmeraldMarker).w
                 clr.w   (HPZ_current_special_stage).w
                 clr.w   (Palette_fade_timer).w
                 clr.l   (Events_bg+$00).w

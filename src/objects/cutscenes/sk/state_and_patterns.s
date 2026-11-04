@@ -26,7 +26,7 @@ SKSszCutscene_StoreHalfSignedCameraDelta:
                 move.w  d0,$3A(a0)
                 sub.w   d1,d0
                 asr.w   #1,d0
-                move.w  d0,(_unkFA84).w
+                move.w  d0,(SceneCreditIndexOrBossMotionPlanAngle).w
                 rts
 
 ; =============== S U B R O U T I N E =======================================

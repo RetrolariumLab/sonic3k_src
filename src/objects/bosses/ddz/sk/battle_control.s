@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_DDZEndBoss:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -27,7 +27,7 @@ DDZEndBoss_Index:
 
 DDZ_InitBossPhase1AndAttachments:
                 move.b  #2,routine(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
                 move.w  #$200,(Events_bg+$00).w
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$140,d0
@@ -77,7 +77,7 @@ DDZ_Phase1ChaseUntilTargetDefeated:
                 move.w  #$160,d2
                 move.w  #$130,d3
                 bsr.w   DDZBoss_StepXFromFlightInput
-                move.w  (_unkFAA4).w,d0
+                move.w  (SceneControllerObjectAddress).w,d0
                 beq.s   DDZ_Phase1ChaseReturn
                 movea.w d0,a1
                 btst    #7,status(a1)
@@ -85,7 +85,7 @@ DDZ_Phase1ChaseUntilTargetDefeated:
                 move.b  #6,routine(a0)
                 bset    #7,status(a0)
                 move.w  #(5*60)-1,$2E(a0)
-                move.l  #-$20,(_unkFA8A).w
+                move.l  #-$20,(DDZScrollAccelOrSceneMotion).w
                 jsr     (AllocateObject).l
                 bne.s   DDZ_Phase1ChaseReturn
                 move.l  #DDZ_Phase1UpdateTenBurstSequence,(a1)
@@ -178,7 +178,7 @@ DDZ_WaitAndResetForPhase2Entrance:
                 move.b  #$C,routine(a0)
                 bclr    #7,status(a0)
                 andi.b  #$CF,$38(a0)
-                move.w  (_unkFA8E).w,d0
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d0
                 beq.s   DDZ_Phase2LockCameraAndSpawnParts
                 movea.w d0,a1
                 andi.b  #$F3,$38(a1)
@@ -224,8 +224,8 @@ DDZ_Phase2EnterAndBeginFinalChase:
                 bhi.s   DDZ_Phase2EntranceReturn
                 move.b  #$E,routine(a0)
                 bclr    #4,$38(a0)
-                move.l  #$800,(_unkFA8A).w
-                bset    #0,(_unkFAB8).w
+                move.l  #$800,(DDZScrollAccelOrSceneMotion).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
                 move.b  #7,collision_property(a0)
                 clr.w   $2E(a0)
                 clr.w   x_vel(a0)
@@ -247,7 +247,7 @@ DDZBoss_SetSecondStageMaximumYTarget:
                 move.l  #Obj_IncLevEndYGradual,(a1)
 
 DDZ_EnableFlightForFinalChase:
-                move.w  (_unkFA8E).w,d0
+                move.w  (DdzFlightControllerOrLowerMotionPlanX).w,d0
                 beq.s   DDZ_Phase2EntranceReturn
                 movea.w d0,a1
                 bset    #2,$38(a1)
@@ -261,7 +261,7 @@ DDZ_FinalChaseSwingAndReadRecoil:
                 jsr     (MoveSprite2).l
                 move.w  #$40,d2
                 move.w  #$60,d3
-                movea.w (_unkFA8E).w,a1
+                movea.w (DdzFlightControllerOrLowerMotionPlanX).w,a1
                 move.b  x_vel(a1),d1
                 bmi.s   DDZ_FinalChaseAdjustXWithoutRight
                 moveq   #0,d1
@@ -323,13 +323,13 @@ DDZ_FinalChaseStoreXSpawnAndHitCheck:
 ; ---------------------------------------------------------------------------
 
 DDZ_FinalDefeatDispatchAndCarry:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  DDZBoss_FinalDefeatStateOffsets(pc,d0.w),d1
                 jsr     DDZBoss_FinalDefeatStateOffsets(pc,d1.w)
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
                 move.w  x_pos(a0),(Events_bg+$02).w
                 move.w  y_pos(a0),(Events_bg+$04).w
@@ -385,7 +385,7 @@ DDZ_FinalDefeatFallReturn:
 ; ---------------------------------------------------------------------------
 
 DDZ_FinalDefeatCarryPlayerUntilFade:
-                movea.w (_unkFA8E).w,a1
+                movea.w (DdzFlightControllerOrLowerMotionPlanX).w,a1
                 addq.w  #8,x_pos(a1)
                 addi.w  #$10,y_vel(a0)
                 jsr     (MoveSprite2).l
@@ -460,7 +460,7 @@ DDZ_MasterEmeraldBeginReleasedScroll:
                 move.l  #DDZ_MasterEmeraldClampReleasedX,(a0)
 
 DDZ_MasterEmeraldClampReleasedX:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),d0
@@ -469,7 +469,7 @@ DDZ_MasterEmeraldClampReleasedX:
                 move.w  d0,x_pos(a0)
 
 DDZ_MasterEmeraldCarryAndDraw:
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -539,9 +539,9 @@ DDZ_Phase2PartDetachedVelocities:
 ; ---------------------------------------------------------------------------
 
 DDZ_Phase2PartCarryAndFlicker:
-                move.w  (_unkFAAE).w,d0
+                move.w  (SceneActorOrWorldOffset).w,d0
                 sub.w   d0,x_pos(a0)
-                move.w  (_unkFA90).w,d0
+                move.w  (DdzFrameScrollDeltaOrLowerMotionPlanY).w,d0
                 add.w   d0,x_pos(a0)
                 jmp     Obj_FlickerMove(pc)
 ; ---------------------------------------------------------------------------
@@ -561,7 +561,7 @@ DDZFirstStageHitTarget_StateOffsets:
 DDZ_InitPhase1TargetHandleAndHealth:
                 lea     DDZFirstPhaseVulnerableBody_Attributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.w  a0,(_unkFAA4).w
+                move.w  a0,(SceneControllerObjectAddress).w
                 move.w  #$C0,$42(a0)
                 move.w  #$4B,$44(a0)
                 move.b  #7,collision_property(a0)

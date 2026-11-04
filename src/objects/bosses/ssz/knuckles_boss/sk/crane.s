@@ -48,26 +48,26 @@ SSZCrane_MoveLeftToDeployClaw:
                 bhs.s   SSZKnucklesCraneShip_DrawEntryMotion
                 move.l  #SSZCrane_CheckClawLowered,(a0)
                 clr.w   x_vel(a0)
-                bset    #0,(_unkFAB8).w
+                bset    #0,(SceneSyncFlagsOrMHZState).w
 
 SSZKnucklesCraneShip_DrawEntryMotion:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 SSZCrane_CheckClawLowered:
-                btst    #1,(_unkFAB8).w
+                btst    #1,(SceneSyncFlagsOrMHZState).w
                 beq.s   SSZCrane_CheckPlayerCaptured
                 move.l  #SSZCrane_CheckPlayerCaptured,(a0)
                 move.w  #-$80,x_vel(a0)
 
 SSZCrane_CheckPlayerCaptured:
-                btst    #2,(_unkFAB8).w
+                btst    #2,(SceneSyncFlagsOrMHZState).w
                 beq.s   SSZCrane_CheckClawRetracted
                 move.l  #SSZCrane_CheckClawRetracted,(a0)
                 clr.w   x_vel(a0)
 
 SSZCrane_CheckClawRetracted:
-                btst    #3,(_unkFAB8).w
+                btst    #3,(SceneSyncFlagsOrMHZState).w
                 beq.s   SSZCrane_BobMoveAndDraw
                 move.l  #SSZCrane_ReturnRightAndDelayBoss,(a0)
                 move.w  #$80,x_vel(a0)
@@ -113,7 +113,7 @@ SSZCrane_TryBossAtCameraGate:
 
 ; Preserve the original path that stores the returned handle without a separate allocation check
 SSZCrane_StoreBossHandle:
-                move.w  a1,(_unkFAA4).w
+                move.w  a1,(SceneControllerObjectAddress).w
 
 SSZCrane_BobAndDrawDuringBossDelay:
                 jsr     Swing_UpAndDown(pc)
@@ -122,7 +122,7 @@ SSZCrane_BobAndDrawDuringBossDelay:
 ; ---------------------------------------------------------------------------
 
 SSZCrane_CheckPlayerReleaseRange:
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 lea     SSZCrane_PlayerReleaseBounds(pc),a2
                 jsr     (Check_InMyRange).l
                 beq.s   SSZCrane_MoveAndCheckBreakupRange
@@ -132,12 +132,12 @@ SSZCrane_CheckPlayerReleaseRange:
                 move.l  #SSZCrane_InitPlayerTransfer,(a1)
 
 SSZCrane_SignalPlayerRelease:
-                bset    #5,(_unkFAB8).w
+                bset    #5,(SceneSyncFlagsOrMHZState).w
 
 SSZCrane_MoveAndCheckBreakupRange:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                movea.w (_unkFAA4).w,a1
+                movea.w (SceneControllerObjectAddress).w,a1
                 lea     SSZCrane_ShipBreakupBounds(pc),a2
                 jsr     (Check_InMyRange).l
                 beq.s   SSZCrane_DrawAfterRangeChecks
@@ -180,7 +180,7 @@ SSZCrane_TransferMoveToRightBound:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  x_pos(a0),d0
-                cmp.w   (_unkFAB6).w,d0
+                cmp.w   (SceneMaximumXOrEmeraldSelectionTail).w,d0
                 blo.w   SSZMechaBattleAndChildren_SharedReturn
                 move.l  #SSZCrane_TransferTickPoseChange,(a0)
                 move.w  #6,$2E(a0)
@@ -223,7 +223,7 @@ SSZCrane_InitClawAndDetails:
 ; ---------------------------------------------------------------------------
 
 SSZCrane_ClawFollowUntilDeploy:
-                btst    #0,(_unkFAB8).w
+                btst    #0,(SceneSyncFlagsOrMHZState).w
                 bne.s   SSZCrane_ClawSaveBaseline
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
@@ -251,7 +251,7 @@ SSZCrane_ClawLowerTowardPlayer:
 
 SSZCrane_ClawSignalLowered:
                 move.l  #SSZCrane_ClawCalcLengthToPlayer,(a0)
-                bset    #1,(_unkFAB8).w
+                bset    #1,(SceneSyncFlagsOrMHZState).w
 
 SSZCrane_ClawCalcLengthToPlayer:
                 move.b  $3A(a0),d0
@@ -287,7 +287,7 @@ SSZCrane_ClawCheckCaptureXRange:
 
 SSZCrane_ClawCaptureAndRetract:
                 move.l  #SSZCrane_ClawRetractToBase,(a0)
-                bset    #2,(_unkFAB8).w
+                bset    #2,(SceneSyncFlagsOrMHZState).w
                 move.b  #2,mapping_frame(a0)
                 move.b  #$83,object_control(a1)
                 move.b  #$CB,mapping_frame(a1)
@@ -309,7 +309,7 @@ SSZCrane_ClawRetractToBase:
                 subq.b  #1,d0
                 bpl.s   SSZCrane_ClawStoreRetractedOffset
                 move.l  #SSZCrane_ClawFollowAndCarryPlayer,(a0)
-                bset    #3,(_unkFAB8).w
+                bset    #3,(SceneSyncFlagsOrMHZState).w
                 moveq   #0,d0
 
 SSZCrane_ClawStoreRetractedOffset:
@@ -320,7 +320,7 @@ SSZCrane_ClawStoreRetractedOffset:
 
 SSZCrane_ClawFollowAndCarryPlayer:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                btst    #5,(_unkFAB8).w
+                btst    #5,(SceneSyncFlagsOrMHZState).w
                 bne.s   SSZCrane_ClawDraw
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),x_pos(a1)
@@ -397,7 +397,7 @@ SSZCrane_FinalDebrisPositionOffsets:
 ; ---------------------------------------------------------------------------
 
 SSZCrane_FinalDebrisFlickerUntilExit:
-                tst.b   (_unkFAA2).w
+                tst.b   (ZoneEventLatchOrBossReleaseSignal).w
                 bne.s   SSZMechaFinalDebris_DeleteForSceneExit
                 jmp     (Obj_FlickerMove).l
 ; ---------------------------------------------------------------------------

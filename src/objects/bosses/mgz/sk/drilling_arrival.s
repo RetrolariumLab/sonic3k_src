@@ -318,7 +318,7 @@ MGZArrivalSK_InstallCapsuleWait:
 ; ---------------------------------------------------------------------------
 
 MGZArrivalSK_WaitCapsuleAndTryPalette:
-                tst.b   (_unkFAA8).w
+                tst.b   (ActCompletionHandshake).w
                 bne.w   MGZArrivalSK_SharedReturn
                 move.l  #MGZArrivalSK_DefeatedDrillIdle,(a0)
                 bset    #4,$38(a0)
