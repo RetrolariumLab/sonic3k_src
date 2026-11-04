@@ -49,7 +49,7 @@ loc_2D2DE:
                 lea     (ArtKosM_SSResults).l,a1
                 move.w  #tiles_to_bytes($001),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #locret_2D216,(_unkEF44_1).w
+                move.l  #S3LevelResults_SpecialVIntReturn,(_unkEF44_1).w
 
 loc_2D300:
                 move.b  #VInt_ID_1E,(V_int_routine).w

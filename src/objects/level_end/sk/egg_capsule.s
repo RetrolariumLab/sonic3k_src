@@ -17,28 +17,28 @@ Obj_EggCapsule:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 EggCapsule_Index:
-                dc.w    loc_8657A-EggCapsule_Index
-                dc.w    loc_865D0-EggCapsule_Index
-                dc.w    loc_8661E-EggCapsule_Index
-                dc.w    loc_86626-EggCapsule_Index
-                dc.w    loc_8662A-EggCapsule_Index
-                dc.w    loc_866BA-EggCapsule_Index
-                dc.w    loc_866CC-EggCapsule_Index
-                dc.w    loc_866DA-EggCapsule_Index
-                dc.w    loc_866EC-EggCapsule_Index
-                dc.w    loc_86716-EggCapsule_Index
+                dc.w    SKEggCapsule_InitAndChooseChildren-EggCapsule_Index
+                dc.w    SKEggCapsule_TryOpenFromGroundButton-EggCapsule_Index
+                dc.w    SKEggCapsule_WaitForGroundResults-EggCapsule_Index
+                dc.w    SKEggCapsule_TryGroundP2EndPose-EggCapsule_Index
+                dc.w    SKEggCapsule_CheckFloatXBounds-EggCapsule_Index
+                dc.w    SKEggCapsule_TryP1ResultsAndSwing-EggCapsule_Index
+                dc.w    SKEggCapsule_TryP2PoseAndSwing-EggCapsule_Index
+                dc.w    SKEggCapsule_TryCarryResultsAndSwing-EggCapsule_Index
+                dc.w    SKEggCapsule_TryLBZResults-EggCapsule_Index
+                dc.w    SKEggCapsule_TryP2PoseAndRetreat-EggCapsule_Index
 ; ---------------------------------------------------------------------------
 
-loc_8657A:
+SKEggCapsule_InitAndChooseChildren:
                 lea     ObjDat_EggCapsule(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 btst    #1,render_flags(a0)
-                bne.s   loc_86592
-                lea     ChildObjDat_86B5C(pc),a2
+                bne.s   SKEggCapsule_InitFloatingAtCamera
+                lea     SKCapsule_GroundButtonChildList(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_86592:
+SKEggCapsule_InitFloatingAtCamera:
                 move.b  #8,routine(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
@@ -49,15 +49,15 @@ loc_86592:
                 move.w  d0,y_pos(a0)
                 move.w  #1,$3A(a0)
                 jsr     (Swing_Setup1).l
-                lea     ChildObjDat_86B64(pc),a2
+                lea     SKCapsule_InvertedButtonChildList(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_86B6C(pc),a2
+                lea     SKCapsule_TwoAnimatedFollowerChildList(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_865D0:
+SKEggCapsule_TryOpenFromGroundButton:
                 btst    #1,$38(a0)
-                beq.s   locret_8661C
+                beq.s   SKEggCapsule_OpenReturn
                 move.b  #4,routine(a0)
 
 ; =============== S U B R O U T I N E =======================================
@@ -65,84 +65,86 @@ loc_865D0:
 ; Set the opened state, conditionally lock Player 2 input and request fragments, animals and an explosion
 SKCapsule_OpenAndSpawnEffects:
                 cmpi.b  #2,(Current_zone).w
-                beq.s   loc_865EA
+                beq.s   SKEggCapsule_SpawnOpenChildren
                 st      (Ctrl_2_locked).w
 
-loc_865EA:
+; Write subtype 8 through a1 immediately after requesting the explosion
+SKEggCapsule_SpawnOpenChildren:
                 move.b  #1,mapping_frame(a0)
                 move.w  #$40,$2E(a0)
                 st      (_unkFACD).w
-                lea     ChildObjDat_86B7A(pc),a2
+                lea     SKCapsule_FiveReleasedFragmentChildList(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     ChildObjDat_86B9A(pc),a2
+                lea     SKCapsule_NineAnimalRequests(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild1_Normal).l
                 move.b  #8,subtype(a1)
 
-locret_8661C:
+SKEggCapsule_OpenReturn:
                 rts
 ; End of function SKCapsule_OpenAndSpawnEffects
 
 ; ---------------------------------------------------------------------------
 
-loc_8661E:
+SKEggCapsule_WaitForGroundResults:
                 move.b  #6,d0
                 bra.w   SKCapsule_TryResultsOnLanding
 ; ---------------------------------------------------------------------------
 
-loc_86626:
+SKEggCapsule_TryGroundP2EndPose:
                 bra.w   Check_TailsEndPose
 ; ---------------------------------------------------------------------------
 
-loc_8662A:
+SKEggCapsule_CheckFloatXBounds:
                 move.w  (Camera_X_pos).w,d0
                 move.w  $3A(a0),d1
-                bmi.s   loc_86642
+                bmi.s   SKEggCapsule_CheckFloatLeftBound
                 addi.w  #$110,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8664C
-                bra.w   loc_8664E
+                blo.s   SKEggCapsule_ReverseFloatXStep
+                bra.w   SKEggCapsule_StepFloatXAndPickY
 ; ---------------------------------------------------------------------------
 
-loc_86642:
+SKEggCapsule_CheckFloatLeftBound:
                 addi.w  #$30,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8664E
+                blo.s   SKEggCapsule_StepFloatXAndPickY
 
-loc_8664C:
+SKEggCapsule_ReverseFloatXStep:
                 neg.w   d1
 
-loc_8664E:
+SKEggCapsule_StepFloatXAndPickY:
                 move.w  d1,$3A(a0)
                 add.w   d1,x_pos(a0)
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$40,d0
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_8666A
+                bne.s   SKEggCapsule_PickFloatYDrift
                 subi.w  #$20,d0
 
-loc_8666A:
+; Drift a quarter pixel per update. At the target Y, take the upward step
+SKEggCapsule_PickFloatYDrift:
                 move.l  #$4000,d1
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_86678
+                bhi.s   SKEggCapsule_DriftAndCheckOpenLatch
                 neg.l   d1
 
-loc_86678:
+SKEggCapsule_DriftAndCheckOpenLatch:
                 add.l   d1,y_pos(a0)
                 btst    #1,$38(a0)
-                beq.s   loc_86698
+                beq.s   SKEggCapsule_SwingAndMoveFloat
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
-                move.b  byte_866A2(pc,d0.w),routine(a0)
+                move.b  SKEggCapsule_FloatStateByZone(pc,d0.w),routine(a0)
                 move.w  a1,$44(a0)
                 bsr.w   SKCapsule_OpenAndSpawnEffects
 
-loc_86698:
+SKEggCapsule_SwingAndMoveFloat:
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
-byte_866A2:
+SKEggCapsule_FloatStateByZone:
                 dc.b    $A
                 dc.b    $A
                 dc.b    $E
@@ -170,132 +172,133 @@ byte_866A2:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_866BA:
+SKEggCapsule_TryP1ResultsAndSwing:
                 move.b  #$C,d0
                 bsr.w   SKCapsule_TryResultsOnLanding
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_866CC:
+SKEggCapsule_TryP2PoseAndSwing:
                 bsr.w   Check_TailsEndPose
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_866DA:
+SKEggCapsule_TryCarryResultsAndSwing:
                 move.b  #$C,d0
                 bsr.w   SKCapsule_TryAirborneResults
                 jsr     Swing_UpAndDown(pc)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_866EC:
+SKEggCapsule_TryLBZResults:
                 move.b  #$12,d0
                 bsr.w   SKCapsule_TryResultsOnLanding
 
-loc_866F4:
+SKEggCapsule_CheckLBZDeparture:
                 jsr     Swing_UpAndDown(pc)
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$60,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_8670C
+                blo.s   SKEggCapsule_StepLBZRetreat
                 st      (_unkFAA2).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8670C:
+SKEggCapsule_StepLBZRetreat:
                 subq.w  #2,x_pos(a0)
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_86716:
+SKEggCapsule_TryP2PoseAndRetreat:
                 bsr.w   Check_TailsEndPose
-                bra.s   loc_866F4
+                bra.s   SKEggCapsule_CheckLBZDeparture
 ; ---------------------------------------------------------------------------
 
-loc_8671C:
-                move.l  #loc_8672A,(a0)
-                lea     word_86B3E(pc),a1
+SKEggCapsule_InitGroundButton:
+                move.l  #SKEggCapsule_CheckGroundButtonPress,(a0)
+                lea     SKCapsule_SharedButtonPartialAttributes(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8672A:
+SKEggCapsule_CheckGroundButtonPress:
                 jsr     (SKCapsule_CollideButtonOrPlunger).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   loc_86750
-                move.l  #loc_86754,(a0)
+                beq.s   SKEggCapsule_DrawGroundButton
+                move.l  #SKEggCapsule_DrawPressedGroundButton,(a0)
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
                 move.b  #$C,mapping_frame(a0)
 
-loc_86750:
+SKEggCapsule_DrawGroundButton:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_86754:
+SKEggCapsule_DrawPressedGroundButton:
                 bsr.w   SKCapsule_CollideButtonOrPlunger
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8675C:
-                move.l  #loc_86770,(a0)
+SKEggCapsule_InitInvertedPlunger:
+                move.l  #SKEggCapsule_CheckInvertedPlungerPress,(a0)
                 bset    #1,render_flags(a0)
-                lea     word_86B3E(pc),a1
+                lea     SKCapsule_SharedButtonPartialAttributes(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_86770:
+SKEggCapsule_CheckInvertedPlungerPress:
                 jsr     Refresh_ChildPosition(pc)
                 bsr.w   CapsuleSKResolveInvertedButtonSolid
-                lea     word_867C2(pc),a1
+                lea     SKEggCapsule_PlungerPlayerRect(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   loc_867BE
+                beq.s   SKEggCapsule_DrawInvertedPlunger
                 tst.w   d0
-                beq.s   loc_867A0
+                beq.s   SKEggCapsule_TryPackedP2PlungerHit
                 movea.w d0,a1
                 tst.w   y_vel(a1)
-                bpl.s   loc_867A0
+                bpl.s   SKEggCapsule_TryPackedP2PlungerHit
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_867AA
+                beq.s   SKEggCapsule_LatchPlungerAndShift
                 cmpi.b  #1,character_id(a1)
-                beq.s   loc_867AA
+                beq.s   SKEggCapsule_LatchPlungerAndShift
 
-loc_867A0:
+; Swap the packed handles and test Y velocity through the upper handle directly
+SKEggCapsule_TryPackedP2PlungerHit:
                 swap    d0
                 movea.w d0,a1
                 tst.w   y_vel(a1)
-                bpl.s   loc_867BE
+                bpl.s   SKEggCapsule_DrawInvertedPlunger
 
-loc_867AA:
-                move.l  #loc_867CA,(a0)
+SKEggCapsule_LatchPlungerAndShift:
+                move.l  #SKEggCapsule_UpdatePressedPlunger,(a0)
                 subq.b  #8,child_dy(a0)
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
 
-loc_867BE:
+SKEggCapsule_DrawInvertedPlunger:
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-word_867C2:
+SKEggCapsule_PlungerPlayerRect:
                 dc.w    -$1A,   $34,  -$1C,   $38
 ; ---------------------------------------------------------------------------
 
-loc_867CA:
+SKEggCapsule_UpdatePressedPlunger:
                 jsr     Refresh_ChildPosition(pc)
                 bsr.w   CapsuleSKResolveInvertedButtonSolid
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_867D6:
-                lea     ObjDat3_86B44(pc),a1
+SKEggCapsule_InitFragmentArt:
+                lea     SKCapsule_ReleasedFragmentFullAttributes(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 cmpi.w  #$400,(Current_zone_and_act).w
-                bne.s   loc_867EC
+                bne.s   SKEggCapsule_StartFragmentFlicker
                 move.w  #make_art_tile(ArtTile_EggCapsule-$46,0,0),art_tile(a0)
 
-loc_867EC:
+SKEggCapsule_StartFragmentFlicker:
                 move.l  #Obj_FlickerMove,(a0)
                 bsr.w   CapsuleSKSelectFragmentFrameFromSubtype
                 moveq   #4,d0
@@ -303,79 +306,80 @@ loc_867EC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_86802:
-                lea     word_86B56(pc),a1
+SKEggCapsule_InitAnimatedFollower:
+                lea     SKCapsule_AnimatedFollowerAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_86810,(a0)
+                move.l  #SKEggCapsule_AnimateFollower,(a0)
 
-loc_86810:
+SKEggCapsule_AnimateFollower:
                 jsr     Refresh_ChildPosition(pc)
-                lea     byte_86BF6(pc),a1
+                lea     SKCapsule_AnimatedFollowerRawLoop(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_86820:
-                lea     word_86B50(pc),a1
+SKEggCapsule_InitFreedAnimal:
+                lea     SKCapsule_FreedAnimalPartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8683E,(a0)
+                move.l  #SKEggCapsule_WaitForGroundAnimal,(a0)
                 move.b  #8,y_radius(a0)
                 bsr.w   SKCapsuleAnimal_InitRelease
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8683E:
+SKEggCapsule_WaitForGroundAnimal:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_86850
-                move.l  #loc_86854,(a0)
+                bpl.s   SKEggCapsule_DrawWaitingGroundAnimal
+                move.l  #SKEggCapsule_MoveAndBounceAnimal,(a0)
                 move.w  #$80,priority(a0)
 
-loc_86850:
+SKEggCapsule_DrawWaitingGroundAnimal:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_86854:
+SKEggCapsule_MoveAndBounceAnimal:
                 jsr     MoveSprite_LightGravity(pc)
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_86888
+                bpl.s   SKEggCapsule_PickAnimalFrame
                 add.w   d1,y_pos(a0)
                 move.w  $3E(a0),y_vel(a0)
                 jsr     Find_SonicTails(pc)
                 move.w  #-$200,d1
                 tst.b   (_unkFAA8).w
-                beq.s   loc_86880
+                beq.s   SKEggCapsule_SetAnimalBounceXVel
                 tst.w   d0
-                beq.s   loc_86880
+                beq.s   SKEggCapsule_SetAnimalBounceXVel
                 neg.w   d1
 
-loc_86880:
+SKEggCapsule_SetAnimalBounceXVel:
                 move.w  d1,x_vel(a0)
                 bsr.w   SKCapsuleAnimal_SetFacingFromXVel
 
-loc_86888:
+; V-int count bit 3 set selects frame 0. Clear selects frame 1
+SKEggCapsule_PickAnimalFrame:
                 moveq   #0,d0
                 btst    #3,(V_int_run_count+3).w
-                bne.s   loc_86894
+                bne.s   SKEggCapsule_StoreAndDrawAnimalFrame
                 moveq   #1,d0
 
-loc_86894:
+SKEggCapsule_StoreAndDrawAnimalFrame:
                 move.b  d0,mapping_frame(a0)
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8689C:
+SKEggCapsule_WaitWithFloatingParent:
                 jsr     Refresh_ChildPosition(pc)
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_868B2
-                move.l  #loc_868B6,(a0)
+                bpl.s   SKEggCapsule_DrawWaitingFloatAnimal
+                move.l  #SKEggCapsule_ChaseP1OrLeaveLeft,(a0)
                 move.w  #$80,priority(a0)
 
-loc_868B2:
+SKEggCapsule_DrawWaitingFloatAnimal:
                 jmp     Sprite_CheckDelete(pc)
 ; ---------------------------------------------------------------------------
 
-loc_868B6:
+SKEggCapsule_ChaseP1OrLeaveLeft:
                 lea     (Player_1).w,a1
                 move.w  #$300,d0
                 move.w  #$100,d1
@@ -387,38 +391,39 @@ loc_868B6:
                 jsr     (MoveSprite2).l
                 bsr.w   SKCapsuleAnimal_SetFacingFromXVel
                 tst.b   (_unkFAA8).w
-                bne.s   loc_868F0
-                move.l  #loc_868F2,(a0)
+                bne.s   SKEggCapsule_DrawAnimalAfterChase
+                move.l  #SKEggCapsule_MoveDepartingAnimalLeft,(a0)
                 bset    #0,render_flags(a0)
 
-loc_868F0:
-                bra.s   loc_86888
+SKEggCapsule_DrawAnimalAfterChase:
+                bra.s   SKEggCapsule_PickAnimalFrame
 ; ---------------------------------------------------------------------------
 
-loc_868F2:
+; Subtract two pixels from the integer X position without integrating velocity
+SKEggCapsule_MoveDepartingAnimalLeft:
                 subq.w  #2,x_pos(a0)
-                bra.s   loc_86888
+                bra.s   SKEggCapsule_PickAnimalFrame
 
 ; =============== S U B R O U T I N E =======================================
 
 ; After the opening delay, check Player 1 landing, freeze the ending pose and attempt the results actor once
 SKCapsule_TryResultsOnLanding:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_86930
+                bpl.s   SKEggCapsule_P1ResultsReturn
                 lea     (Player_1).w,a1
                 btst    #7,status(a1)
-                bne.s   locret_86930
+                bne.s   SKEggCapsule_P1ResultsReturn
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_86930
+                bne.s   SKEggCapsule_P1ResultsReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_86930
+                bhs.s   SKEggCapsule_P1ResultsReturn
                 move.b  d0,routine(a0)
                 bsr.w   Set_PlayerEndingPose
                 jsr     (AllocateObject).l
-                bne.s   locret_86930
+                bne.s   SKEggCapsule_P1ResultsReturn
                 move.l  #Obj_LevelResults,(a1)
 
-locret_86930:
+SKEggCapsule_P1ResultsReturn:
                 rts
 ; End of function SKCapsule_TryResultsOnLanding
 
@@ -426,22 +431,22 @@ locret_86930:
 
 Check_TailsEndPose:
                 tst.b   (_unkFAA8).w
-                beq.w   locret_8661C
+                beq.w   SKEggCapsule_OpenReturn
                 cmpi.b  #3,(Current_zone).w
-                bne.s   loc_8694A
+                bne.s   SKEggCapsule_TryLatchP2EndPose
                 lea     (Player_1).w,a1
                 bsr.w   Set_PlayerEndingPose
 
-loc_8694A:
+SKEggCapsule_TryLatchP2EndPose:
                 btst    #7,$38(a0)
-                bne.w   locret_8661C
+                bne.w   SKEggCapsule_OpenReturn
                 lea     (Player_2).w,a1
                 btst    #7,status(a1)
-                bne.w   locret_8661C
+                bne.w   SKEggCapsule_OpenReturn
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_8661C
+                bne.w   SKEggCapsule_OpenReturn
                 cmpi.b  #6,routine(a1)
-                bhs.w   locret_8661C
+                bhs.w   SKEggCapsule_OpenReturn
                 bset    #7,$38(a0)
                 clr.b   (Ctrl_2_locked).w
                 jmp     Set_PlayerEndingPose(pc)
@@ -452,28 +457,28 @@ loc_8694A:
 ; After the wait, visible live Player 1 Tails or a carried Player 1 can start results before the grounded ending pose
 SKCapsule_TryAirborneResults:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_869C4
+                bpl.s   SKEggCapsule_CarryResultsReturn
                 lea     (Player_1).w,a1
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_869C4
+                bhs.s   SKEggCapsule_CarryResultsReturn
                 tst.b   render_flags(a1)
-                bpl.s   locret_869C4
+                bpl.s   SKEggCapsule_CarryResultsReturn
                 cmpi.b  #1,$38(a1)
-                beq.s   loc_869AA
+                beq.s   SKEggCapsule_StartCarryResultsAndDrift
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   locret_869C4
+                beq.s   SKEggCapsule_CarryResultsReturn
 
-loc_869AA:
+SKEggCapsule_StartCarryResultsAndDrift:
                 move.w  #-$100,x_vel(a0)
                 move.b  d0,routine(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_869C2
+                bne.s   SKEggCapsule_CarryResultsReturnOne
                 move.l  #Obj_LevelResults,(a1)
 
-loc_869C2:
+SKEggCapsule_CarryResultsReturnOne:
                 moveq   #1,d0
 
-locret_869C4:
+SKEggCapsule_CarryResultsReturn:
                 rts
 ; End of function SKCapsule_TryAirborneResults
 
@@ -500,37 +505,40 @@ SKCapsuleAnimal_SteerTowardP1:
                 move.w  x_pos(a1),d6
                 add.w   d3,d6
                 cmp.w   x_pos(a0),d6
-                bhs.s   loc_86A06
+                bhs.s   SKEggCapsule_CheckChaseXVel
                 neg.w   d2
 
-loc_86A06:
+; Negate d0 for the lower bound only after the upper check passes
+SKEggCapsule_CheckChaseXVel:
                 move.w  x_vel(a0),d6
                 add.w   d2,d6
                 cmp.w   d0,d6
-                bgt.s   loc_86A1A
+                bgt.s   SKEggCapsule_PickChaseYAccel
                 neg.w   d0
                 cmp.w   d0,d6
-                blt.s   loc_86A1A
+                blt.s   SKEggCapsule_PickChaseYAccel
                 move.w  d6,x_vel(a0)
 
-loc_86A1A:
+; A retry starts here with d5 and d1 as left by the prior attempt
+SKEggCapsule_PickChaseYAccel:
                 move.w  y_pos(a1),d6
                 add.w   d4,d6
                 cmp.w   y_pos(a0),d6
-                bhs.s   loc_86A28
+                bhs.s   SKEggCapsule_CheckChaseYVel
                 neg.w   d5
 
-loc_86A28:
+; An upper overflow returns. A lower overflow retries target-side selection
+SKEggCapsule_CheckChaseYVel:
                 move.w  y_vel(a0),d6
                 add.w   d5,d6
                 cmp.w   d1,d6
-                bgt.s   locret_86A3C
+                bgt.s   SKEggCapsule_ChaseYVelReturn
                 neg.w   d1
                 cmp.w   d1,d6
-                blt.s   loc_86A1A
+                blt.s   SKEggCapsule_PickChaseYAccel
                 move.w  d6,y_vel(a0)
 
-locret_86A3C:
+SKEggCapsule_ChaseYVelReturn:
                 rts
 ; End of function SKCapsuleAnimal_SteerTowardP1
 
@@ -561,12 +569,12 @@ CapsuleSKSelectFragmentFrameFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsr.w   #1,d0
-                move.b  byte_86A74(pc,d0.w),mapping_frame(a0)
+                move.b  SKEggCapsule_FragmentFrameSelectorBytes(pc,d0.w),mapping_frame(a0)
                 rts
 ; End of function CapsuleSKSelectFragmentFrameFromSubtype
 
 ; ---------------------------------------------------------------------------
-byte_86A74:
+SKEggCapsule_FragmentFrameSelectorBytes:
                 dc.b    2,   3,  $A,   4,  $B
                 even
 
@@ -578,26 +586,26 @@ SKCapsuleAnimal_InitRelease:
                 move.b  subtype(a0),d0
                 move.w  d0,d1
                 andi.w  #6,d0
-                lea     word_86B0E(pc),a1
+                lea     SKEggCapsule_AnimalBounceYVel(pc),a1
                 move.w  (a1,d0.w),d2
                 move.w  d2,y_vel(a0)
                 move.w  d2,$3E(a0)
                 movea.w parent3(a0),a1
                 btst    #1,render_flags(a1)
-                beq.s   loc_86AB0
-                move.l  #loc_8689C,(a0)
+                beq.s   SKEggCapsule_PickAnimalArtIndex
+                move.l  #SKEggCapsule_WaitWithFloatingParent,(a0)
                 addq.b  #8,child_dy(a0)
                 clr.w   y_vel(a0)
 
-loc_86AB0:
+SKEggCapsule_PickAnimalArtIndex:
                 andi.w  #2,d0
                 move.w  d0,d2
                 cmpi.w  #$400,(Current_zone_and_act).w
-                bne.s   loc_86AC0
+                bne.s   SKEggCapsule_LoadAnimalArtAndDelay
                 addq.w  #4,d2
 
-loc_86AC0:
-                move.w  word_86B16(pc,d2.w),art_tile(a0)
+SKEggCapsule_LoadAnimalArtAndDelay:
+                move.w  SKEggCapsule_AnimalArtTiles(pc,d2.w),art_tile(a0)
                 moveq   #0,d2
                 move.b  (Current_zone).w,d2
                 add.w   d2,d2
@@ -614,19 +622,19 @@ loc_86AC0:
                 move.w  x_pos(a0),d0
                 move.w  #$200,d1
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_86B04
+                bhs.s   SKEggCapsule_SetInitialAnimalXVel
                 neg.w   d1
 
-loc_86B04:
+SKEggCapsule_SetInitialAnimalXVel:
                 move.w  d1,x_vel(a0)
                 bsr.w   SKCapsuleAnimal_SetFacingFromXVel
                 rts
 ; End of function SKCapsuleAnimal_InitRelease
 
 ; ---------------------------------------------------------------------------
-word_86B0E:
+SKEggCapsule_AnimalBounceYVel:
                 dc.w    -$380, -$300, -$280, -$200
-word_86B16:
+SKEggCapsule_AnimalArtTiles:
                 dc.w    make_art_tile(ArtTile_Animals1,0,1)
                 dc.w    make_art_tile(ArtTile_Animals2,0,1)
                 dc.w    make_art_tile(ArtTile_FBZAnimals1,0,1)
@@ -637,9 +645,9 @@ word_86B16:
 SKCapsuleAnimal_SetFacingFromXVel:
                 bclr    #0,render_flags(a0)
                 tst.w   x_vel(a0)
-                bpl.s   locret_86B30
+                bpl.s   SKEggCapsule_AnimalFacingReturn
                 bset    #0,render_flags(a0)
 
-locret_86B30:
+SKEggCapsule_AnimalFacingReturn:
                 rts
 ; End of function SKCapsuleAnimal_SetFacingFromXVel

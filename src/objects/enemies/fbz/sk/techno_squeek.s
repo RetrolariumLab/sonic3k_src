@@ -374,13 +374,13 @@ loc_89C54:
 ; ---------------------------------------------------------------------------
 
 loc_89C5C:
-                lea     (word_86B3E).l,a1
+                lea     (SKCapsule_SharedButtonPartialAttributes).l,a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8672A,(a0)
+                move.l  #SKEggCapsule_CheckGroundButtonPress,(a0)
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
                 beq.s   locret_89C84
-                move.l  #loc_86754,(a0)
+                move.l  #SKEggCapsule_DrawPressedGroundButton,(a0)
                 move.b  #$C,mapping_frame(a0)
 
 locret_89C84:

@@ -9,7 +9,7 @@ Obj_MHZEndBoss:
                 move.l  #loc_75FD4,(a0)
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 move.b  #1,(Boss_flag).w
-                jsr     (loc_85D7E).l
+                jsr     (SKEndCamera_SaveAndLoadBounds).l
                 addi.w  #$C0,x_pos(a0)
                 lea     ObjDat_MHZEndBoss(pc),a1
                 jsr     (SetUp_ObjAttributes).l

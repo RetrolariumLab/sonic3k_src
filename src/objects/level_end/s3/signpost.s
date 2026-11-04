@@ -28,10 +28,10 @@ Obj_EndSignInit:
                 move.b  #$1E,y_radius(a0)
                 move.l  #AniRaw_EndSigns,$30(a0)
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_523FA
+                bne.s   S3Sign_InitAboveCamera
                 move.w  #$3EC0,x_pos(a0)
 
-loc_523FA:
+S3Sign_InitAboveCamera:
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$20,d0
                 move.w  d0,y_pos(a0)                    ; Place vertical position at top of screen
@@ -44,11 +44,11 @@ loc_523FA:
 Obj_EndSignFall:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   loc_52428
+                bne.s   S3Sign_UpdateFall
                 lea     Child6_EndSignSparkle(pc),a2    ; Create a signpost sparkle every 4 frames
                 jsr     CreateChild6_Simple(pc)
 
-loc_52428:
+S3Sign_UpdateFall:
                 bsr.w   EndSign_CheckPlayerHit
                 addi.w  #$C,y_vel(a0)
                 jsr     (MoveSprite2).l                 ; Move downward
@@ -56,36 +56,37 @@ loc_52428:
                 jsr     Animate_Raw(pc)
                 move.w  (Camera_Y_pos).w,d0
                 cmpi.b  #6,(Current_zone).w
-                bne.s   loc_52450
+                bne.s   S3Sign_CheckLanding
                 addi.w  #$60,d0
 
-loc_52450:
+; Require the screen height threshold, nonnegative Y velocity and a negative floor gap
+S3Sign_CheckLanding:
                 cmp.w   y_pos(a0),d0
-                bhi.s   locret_5247C                    ; Ensure that signpost can't land if too far up the screen itself
+                bhi.s   S3Sign_FallReturn               ; Ensure that signpost can't land if too far up the screen itself
                 tst.w   y_vel(a0)
-                bmi.s   locret_5247C                    ; And also when the signpost is still moving up
+                bmi.s   S3Sign_FallReturn               ; And also when the signpost is still moving up
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_5247C
+                bpl.s   S3Sign_FallReturn
                 add.w   d1,y_pos(a0)
                 move.b  #4,routine(a0)                  ; If signpost has landed
                 bset    #0,$38(a0)
                 move.w  #$40,$2E(a0)
 
-locret_5247C:
+S3Sign_FallReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignLanded:
                 btst    #0,$38(a0)
-                beq.s   loc_524AA
+                beq.s   S3Sign_ResumeFallAfterReveal
                 jsr     Animate_Raw(pc)
                 subq.w  #1,$2E(a0)                      ; Keep animating while landing for X amount of frames
-                bmi.s   loc_52492
+                bmi.s   S3Sign_FinishLandingSpin
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52492:
+S3Sign_FinishLandingSpin:
                 move.b  #6,routine(a0)
                 moveq   #0,d0
                 move.b  (Player_mode+1).w,d0            ; Get current character "mode"
@@ -94,7 +95,7 @@ loc_52492:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_524AA:
+S3Sign_ResumeFallAfterReveal:
                 move.b  #2,routine(a0)                  ; If a hidden monitor was hit, bounce ths signpost again
                 move.b  #$20,$20(a0)
                 move.w  #-$200,y_vel(a0)
@@ -108,14 +109,14 @@ FrameArray_EndSign:
 Obj_EndSignResults:
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_524E6                    ; If player is not standing on the ground, wait until he is
+                bne.s   S3Sign_ResultsReturn            ; If player is not standing on the ground, wait until he is
                 move.b  #8,routine(a0)
                 jsr     Set_PlayerEndingPose(pc)
                 jsr     (AllocateObject).l
-                bne.s   locret_524E6
+                bne.s   S3Sign_ResultsReturn
                 move.l  #Obj_LevelResults,(a1)
 
-locret_524E6:
+S3Sign_ResultsReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -124,11 +125,11 @@ Obj_EndSignAfter:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_52500
+                bhi.s   S3Sign_RestoreArtAndRetire
                 jmp     (Check_TailsEndPose).l
 ; ---------------------------------------------------------------------------
 
-loc_52500:
+S3Sign_RestoreArtAndRetire:
                 lea     PLC_SpikesSprings(pc),a1
                 jsr     (Load_PLC_Raw).l
                 jsr     Remove_From_TrackingSlot(pc)
@@ -156,16 +157,16 @@ Obj_SignpostSparkleMain:
                 move.w  #$400,d0
                 move.w  x_pos(a0),d1
                 cmp.w   $3A(a0),d1
-                blo.s   loc_52564
+                blo.s   S3SignSparkle_AccelAndPickPriority
                 neg.w   d0
 
-loc_52564:
+S3SignSparkle_AccelAndPickPriority:
                 move.w  #$80,d1
                 add.w   d0,x_vel(a0)                    ; Do rotation around sign
-                bpl.s   loc_52572
+                bpl.s   S3SignSparkle_MoveAnimateAndDraw
                 move.w  #$180,d1
 
-loc_52572:
+S3SignSparkle_MoveAnimateAndDraw:
                 move.w  d1,priority(a0)
                 jsr     (MoveSprite2).l
                 lea     AniRaw_SignpostSparkle(pc),a1
@@ -188,22 +189,23 @@ Obj_SignpostStubMain:
 
 EndSign_CheckPlayerHit:
                 tst.b   $20(a0)
-                bne.s   loc_5260E
+                bne.s   S3Sign_TickHitCooldown
                 lea     EndSign_Range(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_52612                    ; If neither player is in range, don't do anything
+                beq.s   S3Sign_HitReturn                ; If neither player is in range, don't do anything
                 tst.w   d0                              ; Is Sonic?
-                beq.s   loc_525C0                       ; If it's not Sonic, branch
+                beq.s   S3Sign_TryPackedP2Hit           ; If it's not Sonic, branch
 
 ; Bug: After returning from the subroutine, the address of the characters in d0
 ; will be corrupted and the check will not work correctly
                 bsr.w   S3EndSign_TryScoreRollingHit
 
-loc_525C0:
+; Swap d0 after the primary hit call. That call can overwrite the packed pointer value
+S3Sign_TryPackedP2Hit:
                 swap    d0                              ; Get Tails address
                 tst.w   d0                              ; Is Tails?
-                beq.s   locret_52612                    ; If it's not Tails, branch
+                beq.s   S3Sign_HitReturn                ; If it's not Tails, branch
 ; End of function EndSign_CheckPlayerHit
 
 ; =============== S U B R O U T I N E =======================================
@@ -212,16 +214,16 @@ loc_525C0:
 S3EndSign_TryScoreRollingHit:
                 movea.w d0,a1                           ; This can be done up to twice depending on who hit the signpost
                 cmpi.b  #2,anim(a1)
-                bne.s   locret_52612                    ; only go on if Player is currently jumping
+                bne.s   S3Sign_HitReturn                ; only go on if Player is currently jumping
                 tst.w   y_vel(a1)
-                bpl.s   locret_52612                    ; And if he's actually moving upwards
+                bpl.s   S3Sign_HitReturn                ; And if he's actually moving upwards
                 move.b  #$20,$20(a0)                    ; Set delay for when it checks for the next hit
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bne.s   loc_525E8
+                bne.s   S3Sign_BounceAndAwardScore
                 moveq   #8,d0
 
-loc_525E8:
+S3Sign_BounceAndAwardScore:
                 lsl.w   #4,d0
                 move.w  d0,x_vel(a0)                    ; Modify strength of X velocity based on how far to the left/right player is
                 move.w  #-$200,y_vel(a0)                ; New vertical velocity is always the same
@@ -234,10 +236,10 @@ loc_525E8:
                 jmp     (HUD_AddToScore).l              ; Add 100 points whenever hit
 ; ---------------------------------------------------------------------------
 
-loc_5260E:
+S3Sign_TickHitCooldown:
                 subq.b  #1,$20(a0)
 
-locret_52612:
+S3Sign_HitReturn:
                 rts
 ; End of function S3EndSign_TryScoreRollingHit
 
@@ -250,30 +252,30 @@ EndSign_Range:
 EndSign_CheckWall:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_5263E
+                bmi.s   S3Sign_CheckLeftMarginAndWall
                 addi.w  #$128,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_52654
+                blo.s   S3Sign_ReverseXVel
                 moveq   #$20,d3
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   loc_52654
+                bmi.s   S3Sign_ReverseXVel
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5263E:
+S3Sign_CheckLeftMarginAndWall:
                 addi.w  #$18,d0
                 cmp.w   x_pos(a0),d0
-                bhi.s   loc_52654
+                bhi.s   S3Sign_ReverseXVel
                 moveq   #-$20,d3
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bpl.s   locret_52658
+                bpl.s   S3Sign_WallCheckReturn
 
-loc_52654:
+S3Sign_ReverseXVel:
                 neg.w   x_vel(a0)
 
-locret_52658:
+S3Sign_WallCheckReturn:
                 rts
 ; End of function EndSign_CheckWall
 

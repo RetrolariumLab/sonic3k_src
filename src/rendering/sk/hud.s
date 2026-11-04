@@ -11,39 +11,39 @@ Render_HUD_P1:
 
 Render_HUD:
                 cmpi.b  #$16,(Current_zone).w
-                bhs.s   loc_DB68
+                bhs.s   SKHUD_SelectFullHudFlashFrame
                 cmpi.b  #$13,(Current_zone).w
-                blo.s   loc_DB68
+                blo.s   SKHUD_SelectFullHudFlashFrame
                 moveq   #8,d4
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_DB84
+                bne.s   SKHUD_AdvanceSignedHudSlideByte
                 tst.w   (Ring_count).w
-                bne.s   loc_DB84
+                bne.s   SKHUD_AdvanceSignedHudSlideByte
                 addq.w  #2,d4
-                bra.s   loc_DB84
+                bra.s   SKHUD_AdvanceSignedHudSlideByte
 ; ---------------------------------------------------------------------------
 
-loc_DB68:
+SKHUD_SelectFullHudFlashFrame:
                 moveq   #0,d4
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_DB84
+                bne.s   SKHUD_AdvanceSignedHudSlideByte
                 tst.w   (Ring_count).w
-                bne.s   loc_DB7A
+                bne.s   SKHUD_AddMinuteNineFlashFrameOffset
                 addq.w  #2,d4
 
-loc_DB7A:
+SKHUD_AddMinuteNineFlashFrameOffset:
                 cmpi.b  #9,(Timer_minute).w
-                bne.s   loc_DB84
+                bne.s   SKHUD_AdvanceSignedHudSlideByte
                 addq.w  #4,d4
 
-loc_DB84:
+SKHUD_AdvanceSignedHudSlideByte:
                 move.b  (Level_started_flag).w,d0
                 ext.w   d0
-                bpl.s   loc_DB92
+                bpl.s   SKHUD_EmitMappingAtSlideX
                 addq.w  #8,d0
                 move.b  d0,(Level_started_flag).w
 
-loc_DB92:
+SKHUD_EmitMappingAtSlideX:
                 addi.w  #$8F,d0
                 move.w  #$108,d1
                 move.w  #make_art_tile(ArtTile_Ring+$E,0,1),d5
@@ -51,11 +51,11 @@ loc_DB92:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   locret_DBB2
+                bmi.s   SKHUD_ReturnWithoutHudMappingPieces
                 jmp     (RenderMappingPieces).l
 ; ---------------------------------------------------------------------------
 
-locret_DBB2:
+SKHUD_ReturnWithoutHudMappingPieces:
                 rts
 ; End of function Render_HUD
 
@@ -100,57 +100,57 @@ UpdateHUD:
                 nop
                 lea     (VDP_data_port).l,a6
                 tst.w   (Competition_mode).w
-                bne.w   loc_DE7E
+                bne.w   SKHUD_TryDrawCompDebugCoords
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_DDF4
+                bne.w   SKHUD_UpdateDebugCoordsAndRings
                 tst.b   (Update_HUD_score).w
-                beq.s   loc_DD36
+                beq.s   SKHUD_CheckRingDigitUpdateFlag
                 clr.b   (Update_HUD_score).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$28),VRAM,WRITE),d0
                 move.l  (Score).w,d1
                 bsr.w   DrawSixDigitNumber
 
-loc_DD36:
+SKHUD_CheckRingDigitUpdateFlag:
                 tst.b   (Update_HUD_ring_count).w
-                beq.s   loc_DD56
-                bpl.s   loc_DD42
+                beq.s   SKHUD_SelectForcedOrRunningTimerUpdate
+                bpl.s   SKHUD_UploadChangedRingCountDigits
                 bsr.w   HUD_DrawZeroRings
 
-loc_DD42:
+SKHUD_UploadChangedRingCountDigits:
                 clr.b   (Update_HUD_ring_count).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Ring_count).w,d1
                 bsr.w   DrawThreeDigitNumber
 
-loc_DD56:
+SKHUD_SelectForcedOrRunningTimerUpdate:
                 tst.b   (Update_HUD_timer).w
-                bpl.s   loc_DD64
+                bpl.s   SKHUD_AdvanceEnabledUnpausedHudTimer
                 move.b  #1,(Update_HUD_timer).w
-                bra.s   loc_DD9E
+                bra.s   SKHUD_UploadMinuteAndSecondDigits
 ; ---------------------------------------------------------------------------
 
-loc_DD64:
-                beq.s   loc_DDBE
+SKHUD_AdvanceEnabledUnpausedHudTimer:
+                beq.s   SKHUD_CheckAndUploadChangedLifeCount
                 tst.w   (Game_paused).w
-                bne.s   loc_DDBE
+                bne.s   SKHUD_CheckAndUploadChangedLifeCount
                 lea     (Timer).w,a1
                 cmpi.l  #(9<<16)|(59<<8)|59,(a1)+
                 beq.w   UpdateHUD_TimeOver
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_DDBE
+                blo.s   SKHUD_CheckAndUploadChangedLifeCount
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_DD9E
+                blo.s   SKHUD_UploadMinuteAndSecondDigits
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #9,(a1)
-                blo.s   loc_DD9E
+                blo.s   SKHUD_UploadMinuteAndSecondDigits
                 move.b  #9,(a1)
 
-loc_DD9E:
+SKHUD_UploadMinuteAndSecondDigits:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.b  (Timer_minute).w,d1
@@ -160,13 +160,13 @@ loc_DD9E:
                 move.b  (Timer_second).w,d1
                 bsr.w   DrawTwoDigitNumber
 
-loc_DDBE:
+SKHUD_CheckAndUploadChangedLifeCount:
                 tst.b   (Update_HUD_life_count).w
-                beq.s   locret_DDCC
+                beq.s   SKHUD_ReturnAfterNormalHudUpdate
                 clr.b   (Update_HUD_life_count).w
                 bsr.w   HUD_Lives
 
-locret_DDCC:
+SKHUD_ReturnAfterNormalHudUpdate:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -174,32 +174,32 @@ UpdateHUD_TimeOver:
                 clr.b   (Update_HUD_timer).w
                 lea     (Player_1).w,a0
                 cmpi.b  #6,routine(a0)
-                bhs.s   loc_DDEC
+                bhs.s   SKHUD_SetTimeOverFlagAndReturn
                 cmpi.b  #$15,(Current_zone).w
-                beq.s   loc_DDEC
+                beq.s   SKHUD_SetTimeOverFlagAndReturn
                 movea.l a0,a2
                 bsr.w   Kill_Character
 
-loc_DDEC:
+SKHUD_SetTimeOverFlagAndReturn:
                 move.b  #1,(Time_over_flag).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_DDF4:
+SKHUD_UpdateDebugCoordsAndRings:
                 bsr.w   HUD_Debug
                 tst.b   (Update_HUD_ring_count).w
-                beq.s   loc_DE18
-                bpl.s   loc_DE04
+                beq.s   SKHUD_UploadLagAndSpriteDebugNumbers
+                bpl.s   SKHUD_UploadDebugModeChangedRingDigits
                 bsr.w   HUD_DrawZeroRings
 
-loc_DE04:
+SKHUD_UploadDebugModeChangedRingDigits:
                 clr.b   (Update_HUD_ring_count).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Ring_count).w,d1
                 bsr.w   DrawThreeDigitNumber
 
-loc_DE18:
+SKHUD_UploadLagAndSpriteDebugNumbers:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Lag_frame_count).w,d1
@@ -209,34 +209,34 @@ loc_DE18:
                 move.b  (Sprites_drawn).w,d1
                 bsr.w   DrawTwoDigitNumber
                 tst.b   (Update_HUD_life_count).w
-                beq.s   loc_DE46
+                beq.s   SKHUD_AdvanceDebugTimer
                 clr.b   (Update_HUD_life_count).w
                 bsr.w   HUD_Lives
 
-loc_DE46:
+SKHUD_AdvanceDebugTimer:
                 tst.w   (Game_paused).w
-                bne.s   locret_DE7C
+                bne.s   SKHUD_ReturnAfterDebugTimerUpdate
                 lea     (Timer).w,a1
                 cmpi.l  #(9<<16)|(59<<8)|59,(a1)+
                 nop
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   locret_DE7C
+                blo.s   SKHUD_ReturnAfterDebugTimerUpdate
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   locret_DE7C
+                blo.s   SKHUD_ReturnAfterDebugTimerUpdate
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #9,(a1)
-                blo.s   locret_DE7C
+                blo.s   SKHUD_ReturnAfterDebugTimerUpdate
                 move.b  #9,(a1)
 
-locret_DE7C:
+SKHUD_ReturnAfterDebugTimerUpdate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_DE7E:
+SKHUD_TryDrawCompDebugCoords:
                 tst.w   (Debug_mode_flag).w
                 bne.w   HUD_Debug
                 rts
@@ -248,7 +248,7 @@ HUD_DrawZeroRings:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),(VDP_control_port).l
                 lea     HUD_Zero_Rings(pc),a2
                 move.w  #3-1,d2
-                bra.s   loc_DEBE
+                bra.s   SKHUD_BeginInitialOrZeroRingGlyphCopy
 ; End of function HUD_DrawZeroRings
 
 ; =============== S U B R O U T I N E =======================================
@@ -257,38 +257,38 @@ HUD_DrawInitial:
                 lea     (VDP_data_port).l,a6
                 bsr.w   HUD_Lives
                 tst.w   (Competition_mode).w
-                bne.s   locret_DEEA
+                bne.s   SKHUD_InitHudReturn
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$26),VRAM,WRITE),(VDP_control_port).l
                 lea     HUD_Initial_Parts(pc),a2
                 move.w  #$F-1,d2
 
-loc_DEBE:
+SKHUD_BeginInitialOrZeroRingGlyphCopy:
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_DEC2:
+SKHUD_ReadNextInitialGlyphOrBlankCode:
                 move.w  #$10-1,d1
                 move.b  (a2)+,d0
-                bmi.s   loc_DEDE
+                bmi.s   SKHUD_WriteBlankInitialGlyphLongwords
                 ext.w   d0
                 lsl.w   #5,d0
                 lea     (a1,d0.w),a3
 
-loc_DED2:
+SKHUD_CopyInitialGlyphLongwords:
                 move.l  (a3)+,(a6)
-                dbf     d1,loc_DED2
+                dbf     d1,SKHUD_CopyInitialGlyphLongwords
 
-loc_DED8:
-                dbf     d2,loc_DEC2
+SKHUD_AdvanceInitialGlyphCodeCount:
+                dbf     d2,SKHUD_ReadNextInitialGlyphOrBlankCode
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_DEDE:
+SKHUD_WriteBlankInitialGlyphLongwords:
                 move.l  #0,(a6)
-                dbf     d1,loc_DEDE
-                bra.s   loc_DED8
+                dbf     d1,SKHUD_WriteBlankInitialGlyphLongwords
+                bra.s   SKHUD_AdvanceInitialGlyphCodeCount
 ; ---------------------------------------------------------------------------
 
-locret_DEEA:
+SKHUD_InitHudReturn:
                 rts
 ; End of function HUD_DrawInitial
 
@@ -335,22 +335,22 @@ HUD_WriteDebugCoordinatePair:
                 moveq   #8-1,d6
                 lea     (ArtUnc_DebugDigits).l,a1
 
-loc_DF24:
+SKHUD_RotateAndDecodeNextDebugWordNibble:
                 rol.w   #4,d1
                 move.w  d1,d2
                 andi.w  #$F,d2
                 cmpi.w  #$A,d2
-                blo.s   loc_DF36
+                blo.s   SKHUD_CopyDebugGlyphAndSwapWords
                 addi.w  #7,d2
 
-loc_DF36:
+SKHUD_CopyDebugGlyphAndSwapWords:
                 lsl.w   #5,d2
                 lea     (a1,d2.w),a3
                 rept    8
                 move.l  (a3)+,(a6)
                 endm
                 swap    d1
-                dbf     d6,loc_DF24
+                dbf     d6,SKHUD_RotateAndDecodeNextDebugWordNibble
                 rts
 ; End of function HUD_WriteDebugCoordinatePair
 
@@ -377,41 +377,41 @@ loc_DF36:
 ; =============== S U B R O U T I N E =======================================
 
 DrawThreeDigitNumber:
-                lea     (dword_E04C).l,a2
+                lea     (HUD_DecimalDivisorsFromHundreds).l,a2
                 moveq   #3-1,d6
-                bra.s   loc_DF92
+                bra.s   SKHUD_BeginSuppressedDecimalUpload
 ; End of function DrawThreeDigitNumber
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawSixDigitNumber:
-                lea     (dword_E040).l,a2
+                lea     (HUD_DecimalDivisorsFromHundredThousands).l,a2
                 moveq   #6-1,d6
 
-loc_DF92:
+SKHUD_BeginSuppressedDecimalUpload:
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_DF98:
+SKHUD_ReadNextDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_DF9C:
+SKHUD_CountDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_DFA4
+                bcs.s   SKHUD_RestoreRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_DF9C
+                bra.s   SKHUD_CountDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_DFA4:
+SKHUD_RestoreRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_DFAE
+                beq.s   SKHUD_TryUploadDecimalGlyph
                 move.w  #1,d4
 
-loc_DFAE:
+SKHUD_TryUploadDecimalGlyph:
                 tst.w   d4
-                beq.s   loc_DFDC
+                beq.s   SKHUD_AdvanceDecimalVramSlot
                 lsl.w   #6,d2
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 lea     (a1,d2.w),a3
@@ -419,9 +419,10 @@ loc_DFAE:
                 move.l  (a3)+,(a6)
                 endm
 
-loc_DFDC:
+; Advance the destination even when the leading glyph is suppressed
+SKHUD_AdvanceDecimalVramSlot:
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_DF98
+                dbf     d6,SKHUD_ReadNextDecimalDivisor
                 rts
 ; End of function DrawSixDigitNumber
 
@@ -430,75 +431,75 @@ loc_DFDC:
 ; ContScrCounter:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$40),VRAM,WRITE),(VDP_control_port).l
                 lea     (VDP_data_port).l,a6
-                lea     (dword_E050).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_E006:
+SKHUD_ReadLegacyCounterDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_E00A:
+SKHUD_CountLegacyCounterDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_E012
+                bcs.s   SKHUD_CopyLegacyCounterGlyphSequentially
                 addq.w  #1,d2
-                bra.s   loc_E00A
+                bra.s   SKHUD_CountLegacyCounterDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_E012:
+SKHUD_CopyLegacyCounterGlyphSequentially:
                 add.l   d3,d1
                 lsl.w   #6,d2
                 lea     (a1,d2.w),a3
                 rept    16
                 move.l  (a3)+,(a6)
                 endm
-                dbf     d6,loc_E006
+                dbf     d6,SKHUD_ReadLegacyCounterDecimalDivisor
                 rts
 ; ---------------------------------------------------------------------------
-dword_E040:     dc.l    100000
+HUD_DecimalDivisorsFromHundredThousands:    dc.l    100000
                 dc.l    10000
-dword_E048:     dc.l    1000
-dword_E04C:     dc.l    100
-dword_E050:     dc.l    10
-dword_E054:     dc.l    1
+HUD_DecimalDivisorsFromThousands:   dc.l    1000
+HUD_DecimalDivisorsFromHundreds:    dc.l    100
+HUD_DecimalDivisorsFromTens:        dc.l    10
+HUD_DecimalDivisorsFromOnes:        dc.l    1
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawSingleDigitNumber:
-                lea     (dword_E054).l,a2
+                lea     (HUD_DecimalDivisorsFromOnes).l,a2
                 moveq   #1-1,d6
-                bra.s   loc_E06A
+                bra.s   SKHUD_BeginAlwaysDrawnShortDecimalUpload
 ; End of function DrawSingleDigitNumber
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawTwoDigitNumber:
-                lea     (dword_E050).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
 
-loc_E06A:
+SKHUD_BeginAlwaysDrawnShortDecimalUpload:
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_E070:
+SKHUD_ReadShortDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_E074:
+SKHUD_CountShortDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_E07C
+                bcs.s   SKHUD_RestoreShortRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_E074
+                bra.s   SKHUD_CountShortDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_E07C:
+SKHUD_RestoreShortRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_E086
+                beq.s   SKHUD_CopyShortDecimalGlyphIncludingZero
                 move.w  #1,d4
 
-loc_E086:
+SKHUD_CopyShortDecimalGlyphIncludingZero:
                 lsl.w   #6,d2
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 lea     (a1,d2.w),a3
@@ -506,56 +507,56 @@ loc_E086:
                 move.l  (a3)+,(a6)
                 endm
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_E070
+                dbf     d6,SKHUD_ReadShortDecimalDivisor
                 rts
 ; End of function DrawTwoDigitNumber
 
 ; ---------------------------------------------------------------------------
 ; unused leftover from Sonic 2
 ; Hud_TimeRingBonus:
-                lea     (dword_E048).l,a2
+                lea     (HUD_DecimalDivisorsFromThousands).l,a2
                 moveq   #4-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_E0CA:
+SKHUD_ReadLegacyBonusDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_E0CE:
+SKHUD_CountLegacyBonusDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_E0D6
+                bcs.s   SKHUD_RestoreBonusRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_E0CE
+                bra.s   SKHUD_CountLegacyBonusDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_E0D6:
+SKHUD_RestoreBonusRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_E0E0
+                beq.s   SKHUD_CopyLegacyBonusGlyphOrChooseBlank
                 move.w  #1,d4
 
-loc_E0E0:
+SKHUD_CopyLegacyBonusGlyphOrChooseBlank:
                 tst.w   d4
-                beq.s   loc_E110
+                beq.s   SKHUD_BeginBlankLegacyBonusGlyph
                 lsl.w   #6,d2
                 lea     (a1,d2.w),a3
                 rept    16
                 move.l  (a3)+,(a6)
                 endm
 
-loc_E10A:
-                dbf     d6,loc_E0CA
+SKHUD_AdvanceLegacyBonusDigitCount:
+                dbf     d6,SKHUD_ReadLegacyBonusDecimalDivisor
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_E110:
+SKHUD_BeginBlankLegacyBonusGlyph:
                 moveq   #$10-1,d5
 
-loc_E112:
+SKHUD_WriteBlankLegacyBonusLongwords:
                 move.l  #0,(a6)
-                dbf     d5,loc_E112
-                bra.s   loc_E10A
+                dbf     d5,SKHUD_WriteBlankLegacyBonusLongwords
+                bra.s   SKHUD_AdvanceLegacyBonusDigitCount
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -563,55 +564,55 @@ HUD_Lives:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_PlayerLifeIcon+9),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.b  (Life_count).w,d1
-                lea     (dword_E050).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_LivesDigits(pc),a1
 
-loc_E138:
+SKHUD_ProgramLifeDigitVramAndReadDivisor:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_E140:
+SKHUD_CountLifeDigitQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_E148
+                bcs.s   SKHUD_RestoreLifeRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_E140
+                bra.s   SKHUD_CountLifeDigitQuotient
 ; ---------------------------------------------------------------------------
 
-loc_E148:
+SKHUD_RestoreLifeRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_E152
+                beq.s   SKHUD_SelectLifeGlyphOrLeadingBlank
                 move.w  #1,d4
 
-loc_E152:
+SKHUD_SelectLifeGlyphOrLeadingBlank:
                 tst.w   d4
-                beq.s   loc_E178
+                beq.s   SKHUD_ForceZeroLifeUnitsOrBlankTens
 
-loc_E156:
+SKHUD_CopyOneTileLifeGlyph:
                 lsl.w   #5,d2
                 lea     (a1,d2.w),a3
                 rept    8
                 move.l  (a3)+,(a6)
                 endm
 
-loc_E16C:
+SKHUD_AdvanceLifeVramSlotAndDigitCount:
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_E138
+                dbf     d6,SKHUD_ProgramLifeDigitVramAndReadDivisor
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_E178:
+SKHUD_ForceZeroLifeUnitsOrBlankTens:
                 tst.w   d6
-                beq.s   loc_E156
+                beq.s   SKHUD_CopyOneTileLifeGlyph
                 moveq   #8-1,d5
 
-loc_E17E:
+SKHUD_WriteBlankLifeTensLongwords:
                 move.l  #0,(a6)
-                dbf     d5,loc_E17E
-                bra.s   loc_E16C
+                dbf     d5,SKHUD_WriteBlankLifeTensLongwords
+                bra.s   SKHUD_AdvanceLifeVramSlotAndDigitCount
 ; End of function HUD_Lives
 
 ; ---------------------------------------------------------------------------

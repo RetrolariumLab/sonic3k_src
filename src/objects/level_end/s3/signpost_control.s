@@ -81,19 +81,20 @@ Obj_EndSignControlDoStart:
 Check_CameraInRange:
                 move.w  (Camera_Y_pos).w,d0
                 cmp.w   (a1)+,d0
-                blo.s   loc_54198
+                blo.s   S3EndCamera_CullAndSkipCaller
                 cmp.w   (a1)+,d0
-                bhi.s   loc_54198
+                bhi.s   S3EndCamera_CullAndSkipCaller
                 move.w  (Camera_X_pos).w,d1
                 cmp.w   (a1)+,d1
-                blo.s   loc_54198
+                blo.s   S3EndCamera_CullAndSkipCaller
                 cmp.w   (a1)+,d1
-                bhi.s   loc_54198
+                bhi.s   S3EndCamera_CullAndSkipCaller
                 move.l  (sp),(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_54198:
+; Discard the return address when the activation check misses
+S3EndCamera_CullAndSkipCaller:
                 jsr     (Delete_Sprite_If_Not_In_Range).l
                 addq.w  #4,sp
                 rts
@@ -101,50 +102,51 @@ loc_54198:
 
 ; ---------------------------------------------------------------------------
 
-loc_541A2:
+S3EndCamera_TrackMinXAndCheckY:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 move.w  (Camera_target_max_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                blo.s   locret_541C6
+                blo.s   S3EndCamera_LockReturn
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  $3A(a0),d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   locret_541C6
+                bhi.s   S3EndCamera_LockReturn
                 movea.l $34(a0),a1
                 jsr     (a1)
 
-locret_541C6:
+S3EndCamera_LockReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_541C8:
+S3EndCamera_TickMusicDelay:
                 btst    #0,$38(a0)
-                bne.s   loc_541E6
+                bne.s   S3EndCamera_TryLatchExactY
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_541E6
+                bpl.s   S3EndCamera_TryLatchExactY
                 move.b  $26(a0),d0
                 jsr     (Play_Music).l
                 bset    #0,$38(a0)
 
-loc_541E6:
+S3EndCamera_TryLatchExactY:
                 btst    #1,$38(a0)
-                bne.s   loc_54202
+                bne.s   S3EndCamera_TrackMinXToTarget
                 move.w  (Camera_target_max_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                bne.s   loc_54202
+                bne.s   S3EndCamera_TrackMinXToTarget
                 move.w  d0,(Camera_min_Y_pos).w
                 bset    #1,$38(a0)
 
-loc_54202:
+S3EndCamera_TrackMinXToTarget:
                 btst    #2,$38(a0)
-                bne.s   loc_54220
+                bne.s   S3EndCamera_TryFinishJoin
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 move.w  $1C(a0),d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   loc_54220
+                bhi.s   S3EndCamera_TryFinishJoin
                 bset    #2,$38(a0)
 
-loc_54220:
+; Require all three latches, clear the scratch fields and tail-call the continuation
+S3EndCamera_TryFinishJoin:
                 move.b  $38(a0),d0
                 andi.b  #7,d0
                 cmpi.b  #7,d0

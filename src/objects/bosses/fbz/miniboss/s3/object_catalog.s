@@ -67,15 +67,15 @@ ChildObjDat_4D4F0:
                 dc.l    loc_4D188
 ChildObjDat_4D4F6:
                 dc.w    5-1
-                dc.l    loc_54776
+                dc.l    S3EggCapsule_InitFreedAnimal
                 dc.b    0,  -4
-                dc.l    loc_54776
+                dc.l    S3EggCapsule_InitFreedAnimal
                 dc.b    $10,  -4
-                dc.l    loc_54776
+                dc.l    S3EggCapsule_InitFreedAnimal
                 dc.b    -$10,  -4
-                dc.l    loc_54776
+                dc.l    S3EggCapsule_InitFreedAnimal
                 dc.b    $1C,  -4
-                dc.l    loc_54776
+                dc.l    S3EggCapsule_InitFreedAnimal
                 dc.b    -$1C,  -4
                 dc.b    3,   9,  $A,  $B,  $C,  $D,  $E,  $F, $10, $FC
                 even

@@ -34,7 +34,7 @@ loc_622E4:
                 move.l  #loc_6233E,$34(a0)
                 lea     word_62296(pc),a1
                 move.b  #mus_Knuckles,boss_saved_mus(a0)
-                jsr     (loc_85D70).l
+                jsr     (SKEndCamera_FadeAndStartDelay).l
                 lea     (Normal_palette_line_2).w,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
@@ -50,7 +50,7 @@ loc_62318:
 
 loc_62332:
                 jsr     (Animate_Raw).l
-                jmp     (loc_85CA4).l
+                jmp     (SKEndCamera_TickAndSaveMusic).l
 ; ---------------------------------------------------------------------------
 
 loc_6233E:

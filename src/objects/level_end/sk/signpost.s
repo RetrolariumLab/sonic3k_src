@@ -24,19 +24,19 @@ Obj_EndSignInit:
                 lea     ObjSlot_EndSigns(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 btst    #7,(Player_1+art_tile).w
-                beq.s   loc_837EE
+                beq.s   SKSign_InitPointerAndModeAnim
                 bset    #7,art_tile(a0)                 ; Signs have same priority as Sonic
 
-loc_837EE:
+SKSign_InitPointerAndModeAnim:
                 move.w  a0,(Signpost_addr).w            ; Put RAM address here for use by hidden monitor object
                 move.b  #$18,x_radius(a0)
                 move.b  #$1E,y_radius(a0)
                 move.l  #AniRaw_EndSigns1,$30(a0)
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_83816
+                bne.s   SKSign_InitAboveCamera
                 move.l  #AniRaw_EndSigns2,$30(a0)
 
-loc_83816:
+SKSign_InitAboveCamera:
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$20,d0
                 move.w  d0,y_pos(a0)                    ; Place vertical position at top of screen
@@ -49,11 +49,11 @@ loc_83816:
 Obj_EndSignFall:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   loc_83844
+                bne.s   SKSign_UpdateFall
                 lea     Child6_EndSignSparkle(pc),a2    ; Create a signpost sparkle every 4 frames
                 jsr     CreateChild6_Simple(pc)
 
-loc_83844:
+SKSign_UpdateFall:
                 bsr.w   EndSign_CheckPlayerHit
                 addi.w  #$C,y_vel(a0)
                 jsr     (MoveSprite2).l                 ; Move downward
@@ -62,54 +62,55 @@ loc_83844:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$50,d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   locret_838BC                    ; Ensure that signpost can't land if too far up the screen itself
+                bhi.s   SKSign_FallReturn               ; Ensure that signpost can't land if too far up the screen itself
                 tst.w   y_vel(a0)
-                bmi.s   locret_838BC                    ; And also when the signpost is still moving up
+                bmi.s   SKSign_FallReturn               ; And also when the signpost is still moving up
                 cmpi.b  #8,(Current_zone).w
-                bne.s   loc_8389C
+                bne.s   SKSign_TryFloorLanding
                 moveq   #0,d0                           ; Special code for handling the landing on Sandopolis 1's sand
                 cmpi.w  #$4210,x_pos(a0)
-                blo.s   loc_83884
+                blo.s   SKSignSand_TryChangePriority
                 moveq   #2,d0
 
-loc_83884:
+SKSignSand_TryChangePriority:
                 cmp.w   $3E(a0),d0
-                beq.s   loc_83894
+                beq.s   SKSignSand_CheckLandingHeight
                 move.w  d0,$3E(a0)
-                move.w  word_838BE(pc,d0.w),priority(a0)
+                move.w  SKLevelEnd_SignSandSideDrawPriorities(pc,d0.w),priority(a0)
 
-loc_83894:
+; Land at unsigned Y $9F2 or later using the current Y
+SKSignSand_CheckLandingHeight:
                 cmpi.w  #$9F2,y_pos(a0)
-                bhs.s   loc_838AA
+                bhs.s   SKSign_BeginSpinSettle
 
-loc_8389C:
+SKSign_TryFloorLanding:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_838BC
+                bpl.s   SKSign_FallReturn
                 add.w   d1,y_pos(a0)
 
-loc_838AA:
+SKSign_BeginSpinSettle:
                 move.b  #4,routine(a0)                  ; If signpost has landed
                 bset    #0,$38(a0)
                 move.w  #$40,$2E(a0)
 
-locret_838BC:
+SKSign_FallReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_838BE:
+SKLevelEnd_SignSandSideDrawPriorities:
                 dc.w    $180,  $300
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignLanded:
                 btst    #0,$38(a0)
-                beq.s   loc_838FA
+                beq.s   SKSign_ResumeFallAfterReveal
                 jsr     Animate_Raw(pc)
                 subq.w  #1,$2E(a0)                      ; Keep animating while landing for X amount of frames
-                bmi.s   loc_838D6
+                bmi.s   SKSign_FinishLandingSpin
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_838D6:
+SKSign_FinishLandingSpin:
                 move.b  #6,routine(a0)
                 st      (_unkFABE).w
                 clr.w   x_vel(a0)
@@ -121,7 +122,7 @@ loc_838D6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_838FA:
+SKSign_ResumeFallAfterReveal:
                 move.b  #2,routine(a0)                  ; If a hidden monitor was hit, bounce ths signpost again
                 move.b  #$20,$20(a0)
                 move.w  #-$200,y_vel(a0)
@@ -135,49 +136,49 @@ FrameArray_EndSign:
 Obj_EndSignResults:
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_83936                    ; If player is not standing on the ground, wait until he is
+                bne.s   SKSign_ResultsReturn            ; If player is not standing on the ground, wait until he is
                 move.b  #8,routine(a0)
                 jsr     Set_PlayerEndingPose(pc)
                 jsr     (AllocateObject).l
-                bne.s   locret_83936
+                bne.s   SKSign_ResultsReturn
                 move.l  #Obj_LevelResults,(a1)
 
-locret_83936:
+SKSign_ResultsReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_EndSignAfter:
                 cmpi.b  #$B,(Current_zone).w
-                bne.s   loc_8395A
+                bne.s   SKSignAfter_StopVerticalMotion
                 jsr     (ObjCheckFloorDist).l           ; If Death Egg Zone, then check if there's still a floor
                 tst.w   d1
-                beq.s   loc_83956
-                bmi.s   loc_83956
+                beq.s   SKSignAfter_CorrectFloorGap
+                bmi.s   SKSignAfter_CorrectFloorGap
                 jsr     (MoveSprite).l                  ; Move sprite if there's no floor
-                bra.w   loc_8395E
+                bra.w   SKSignAfter_CullOrPoseP2
 ; ---------------------------------------------------------------------------
 
-loc_83956:
+SKSignAfter_CorrectFloorGap:
                 add.w   d1,y_pos(a0)
 
-loc_8395A:
+SKSignAfter_StopVerticalMotion:
                 clr.w   y_vel(a0)                       ; Null vertical velocity
 
-loc_8395E:
+SKSignAfter_CullOrPoseP2:
                 move.w  x_pos(a0),d0                    ; Check for whether signpost goes out of range
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_83988
+                bhi.s   SKSign_RestoreArtAndRetire
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bhi.s   loc_83988
+                bhi.s   SKSign_RestoreArtAndRetire
                 jmp     (Check_TailsEndPose).l
 ; ---------------------------------------------------------------------------
 
-loc_83988:
+SKSign_RestoreArtAndRetire:
                 lea     PLC_SpikesSprings(pc),a1
                 jsr     (Load_PLC_Raw).l
                 jsr     Remove_From_TrackingSlot(pc)
@@ -192,10 +193,10 @@ Obj_SignpostSparkle:
                 lea     ObjDat_SignpostSparkle(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 btst    #7,(Player_1+art_tile).w
-                beq.s   loc_839B8
+                beq.s   SKSignSparkle_InitRandomAnchor
                 bset    #7,art_tile(a0)
 
-loc_839B8:
+SKSignSparkle_InitRandomAnchor:
                 move.l  #Obj_SignpostSparkleMain,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$1F,d0
@@ -210,16 +211,16 @@ Obj_SignpostSparkleMain:
                 move.w  #$400,d0
                 move.w  x_pos(a0),d1
                 cmp.w   $3A(a0),d1
-                blo.s   loc_839FA
+                blo.s   SKSignSparkle_AccelAndPickPriority
                 neg.w   d0
 
-loc_839FA:
+SKSignSparkle_AccelAndPickPriority:
                 move.w  #$280,d1
                 add.w   d0,x_vel(a0)                    ; Do rotation around sign
-                bpl.s   loc_83A08
+                bpl.s   SKSignSparkle_MoveAnimateAndDraw
                 move.w  #$380,d1
 
-loc_83A08:
+SKSignSparkle_MoveAnimateAndDraw:
                 move.w  d1,priority(a0)
                 jsr     (MoveSprite2).l
                 lea     AniRaw_SignpostSparkle(pc),a1
@@ -245,22 +246,23 @@ Obj_SignpostStubMain:
 
 EndSign_CheckPlayerHit:
                 tst.b   $20(a0)
-                bne.s   loc_83AB8
+                bne.s   SKSign_TickHitCooldown
                 lea     EndSign_Range(pc),a1
                 jsr     Check_PlayerInRange(pc)
                 tst.l   d0
-                beq.s   locret_83ABC                    ; If neither player is in range, don't do anything
+                beq.s   SKSign_HitReturn                ; If neither player is in range, don't do anything
                 tst.w   d0                              ; Is Sonic?
-                beq.s   loc_83A6A                       ; If it's not Sonic, branch
+                beq.s   SKSign_TryPackedP2Hit           ; If it's not Sonic, branch
 
 ; Bug: After returning from the subroutine, the address of the characters in d0
 ; will be corrupted and the check will not work correctly
                 bsr.w   SKEndSign_TryScoreRollingHit
 
-loc_83A6A:
+; Swap d0 after the primary hit call. That call can overwrite the packed pointer value
+SKSign_TryPackedP2Hit:
                 swap    d0                              ; Get Tails address
                 tst.w   d0                              ; Is Tails?
-                beq.s   locret_83ABC                    ; If it's not Tails, branch
+                beq.s   SKSign_HitReturn                ; If it's not Tails, branch
 ; End of function EndSign_CheckPlayerHit
 
 ; =============== S U B R O U T I N E =======================================
@@ -269,16 +271,16 @@ loc_83A6A:
 SKEndSign_TryScoreRollingHit:
                 movea.w d0,a1                           ; This can be done up to twice depending on who hit the signpost
                 cmpi.b  #2,anim(a1)
-                bne.s   locret_83ABC                    ; only go on if Player is currently jumping
+                bne.s   SKSign_HitReturn                ; only go on if Player is currently jumping
                 tst.w   y_vel(a1)
-                bpl.s   locret_83ABC                    ; And if he's actually moving upwards
+                bpl.s   SKSign_HitReturn                ; And if he's actually moving upwards
                 move.b  #$20,$20(a0)                    ; Set delay for when it checks for the next hit
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bne.s   loc_83A92
+                bne.s   SKSign_BounceAndAwardScore
                 moveq   #8,d0
 
-loc_83A92:
+SKSign_BounceAndAwardScore:
                 lsl.w   #4,d0
                 move.w  d0,x_vel(a0)                    ; Modify strength of X velocity based on how far to the left/right player is
                 move.w  #-$200,y_vel(a0)                ; New vertical velocity is always the same
@@ -291,10 +293,10 @@ loc_83A92:
                 jmp     (HUD_AddToScore).l              ; Add 100 points whenever hit
 ; ---------------------------------------------------------------------------
 
-loc_83AB8:
+SKSign_TickHitCooldown:
                 subq.b  #1,$20(a0)
 
-locret_83ABC:
+SKSign_HitReturn:
                 rts
 ; End of function SKEndSign_TryScoreRollingHit
 
@@ -307,30 +309,30 @@ EndSign_Range:
 EndSign_CheckWall:
                 move.w  (Camera_X_pos).w,d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_83AE8
+                bmi.s   SKSign_CheckLeftMarginAndWall
                 addi.w  #$128,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_83AFE
+                blo.s   SKSign_ReverseXVel
                 moveq   #$20,d3
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   loc_83AFE
+                bmi.s   SKSign_ReverseXVel
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_83AE8:
+SKSign_CheckLeftMarginAndWall:
                 addi.w  #$18,d0
                 cmp.w   x_pos(a0),d0
-                bhi.s   loc_83AFE
+                bhi.s   SKSign_ReverseXVel
                 moveq   #-$20,d3
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bpl.s   locret_83B02
+                bpl.s   SKSign_WallCheckReturn
 
-loc_83AFE:
+SKSign_ReverseXVel:
                 neg.w   x_vel(a0)
 
-locret_83B02:
+SKSign_WallCheckReturn:
                 rts
 ; End of function EndSign_CheckWall
 

@@ -84,12 +84,12 @@ return:
 
 ; loc_8F438:
 SOZ_capsule_switch:
-                lea     (word_86B3E).l,a1
+                lea     (SKCapsule_SharedButtonPartialAttributes).l,a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_8672A,(a0)
+                move.l  #SKEggCapsule_CheckGroundButtonPress,(a0)
                 tst.b   (Last_star_post_hit).w
                 beq.s   .ret
-                move.l  #loc_86754,(a0)
+                move.l  #SKEggCapsule_DrawPressedGroundButton,(a0)
                 move.b  #$C,mapping_frame(a0)
 
 ; locret_8F45C:

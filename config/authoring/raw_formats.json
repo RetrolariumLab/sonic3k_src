@@ -101,7 +101,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
-      "sha256": "b3bfbf68e6d4dec0a46e58b4ceb98858b4768e373084c5592707c2cfacee6eb5"
+      "sha256": "657d377b0bcd175aebdfc4929585ba82cde91030c900d8bcc83c4adcdd10237c"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/object_catalog.s",
@@ -109,7 +109,7 @@
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "c57dcf31b99d2fe47454611972d45b311907d17dbb24e18fbaed237d88b87e87"
+      "sha256": "d6872d996cec7c50e19b8b53475c5483e77255f27f74a6b66847325117746c30"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/sk/object_catalog.s",
@@ -173,7 +173,7 @@
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
-      "sha256": "3263d0f67f44d72c05b0771ce8d854c0f8a1aaf2e1e018e1e7edbaee0a5feb2a"
+      "sha256": "ec40b3662e523595b7c6caf077d01387bd9b36cef5a4286a7c9a809e5b751fee"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
@@ -241,7 +241,7 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/main_and_chassis.s",
-      "sha256": "b9ec6db0ff8c69eff16fcdbd6d4506e25e843b123d6a6015971f8e136cab7516"
+      "sha256": "16861ca78d972ea11059520f1a77fc2e9ce8631409a518832b3467994ee31897"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/s3/object_catalog.s",
@@ -253,7 +253,7 @@
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/main_and_chassis.s",
-      "sha256": "52bae2b12e0704e82ba333167488e25a0d30754820a68f2b01a59079c9d2b9aa"
+      "sha256": "8bc3f70b94c4aceb28a3a2500f6db6c7d65ceead42aeccfa8b24edcd3efb407f"
     },
     {
       "path": "src/objects/bosses/hcz/end_boss/sk/object_catalog.s",
@@ -285,23 +285,23 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "sha256": "f370e7a24cf33cfbaa2ed6edaf3f1596296f602c0ffbdce6447a99645aa25833"
+      "sha256": "cc44d80778e0c2144ed1e56dc450f90e4c2700e3fca098b56f7179da3949875f"
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
-      "sha256": "73737278580704762bf605fb1961ccfcc33fe3c0ec4b1bc16e2b944da8c6cbce"
+      "sha256": "d3fe0454b2b7fa9f3774db22f2e588e9dfcead0b8e4ffbc24e91f74277750763"
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "sha256": "9b6f30ba922b8fb23de1788b292081582741455dbc72df4a49b274f49a2680db"
+      "sha256": "e4faf3d0db830f477ec98e17873bb15d8c1abb9b65bd6796a116792f1df76205"
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
-      "sha256": "b769e0f5accbe8b23c93ccfdff8103e5dc3b3e2d018453231e423e662994d494"
+      "sha256": "dafc3bdaf97c17e5df359b8a674572db069448616d744c793c2f750698f4461c"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "fab9d8c53a0ddfb15cb42c70eedc416cc52c1146d6ca92f2daee808d501afe60"
+      "sha256": "7cf7dd2d1ef4d4d581b985dab61c64f09f88fae89d6933f1bace25202ac33332"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/object_catalog.s",
@@ -317,7 +317,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
-      "sha256": "1d0eedf837e5587ec3f579e4053fe3b654211de791147873eb6e004988a10fad"
+      "sha256": "8652b5b33aa51c9ff6622c3dd8c2b698765a66f7109a87bea981666dd1bc6665"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
@@ -357,7 +357,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/s3/end_boss.s",
-      "sha256": "cf8d58553aba68423b1a4cc7280fcbc3adc63dd9bd23215d11299e73d8272729"
+      "sha256": "3b013ce2d349c31819d4a4cf515e2474c90f12d4be3b8a41fe0bf64f7badb4b5"
     },
     {
       "path": "src/objects/bosses/lbz/s3/miniboss.s",
@@ -393,7 +393,7 @@
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "597a3e296f54c95f0b52c332aef1ec4d94eb34e931f879a2115b81ceb7415f88"
+      "sha256": "d61292270fce32957274f8bc80fb1302ee585deb7a3c5570b3d044d18a70f18c"
     },
     {
       "path": "src/objects/bosses/lrz/miniboss/sk/object_catalog.s",
@@ -437,7 +437,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/s3/tunnelbot_and_battle.s",
-      "sha256": "eceee42942bbc9380fcb517ad305e8e7a161db5986d849adab22c674504f20e8"
+      "sha256": "a3dc11490032d1b444b9c847698e707147548e2a18203169b8c56ed132041238"
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/object_catalog.s",
@@ -445,11 +445,11 @@
     },
     {
       "path": "src/objects/bosses/mgz/miniboss/sk/tunnelbot_and_battle.s",
-      "sha256": "fd9424ff5f3486bc89e096f49253104280cbf6eb2238aeacac6b0e6d7a978cf8"
+      "sha256": "5bed04bb04b3b7361a83fc6ba9e14f72ff5a3508af74bf9734d4446ba0a55e66"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "bee5cfdcc79e10856e28c8436263ef4aa08b2f8aba9e9e5a20cca5bc577bb9f9"
+      "sha256": "98d6234a5aff90d03b90b89f4ee12707bf46669cd20be95df7a4e1629263f376"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
@@ -529,7 +529,7 @@
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/encounter.s",
-      "sha256": "617c62e55e6711754d7e0dc531c92d6f6aa7f0dd0b8e336431adb2ac1d342594"
+      "sha256": "ccdb1579de64a1d1776fbf74273c153120552ecd9e20e89911799f40bb12daca"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/platforms.s",
@@ -545,7 +545,7 @@
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/carnival_night.s",
-      "sha256": "1d11e1ec91d7b4d44033a98ba868108a046749b191bd00dddeb83971a248a25b"
+      "sha256": "6cf19e2af71ea336945aa6345932f04ec336060709affdab317f2bbe400eae40"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/hydrocity.s",
@@ -569,7 +569,7 @@
     },
     {
       "path": "src/objects/cutscenes/sk/carnival_encounters.s",
-      "sha256": "73b062d7590a07801af0cd5e723c6e524c23a2f6c1d3687c8b1b3a3a8a44f9f4"
+      "sha256": "e256bc1813b26ff2065350b385d91e87515006a1b79666c8012ca9c1ed2e66a8"
     },
     {
       "path": "src/objects/cutscenes/sk/hydrocity.s",
@@ -717,7 +717,7 @@
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "sha256": "2de2b2ded0224bada837f22643e5220a8fa4cd3b2797d9b9f023bc33e787f9bc"
+      "sha256": "7b2dccf70666f6e2ea606b71138a8b45f455f43ac054bf6ca726bfc7b9bf8602"
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
@@ -909,27 +909,27 @@
     },
     {
       "path": "src/objects/level_end/s3/capsule_resources.s",
-      "sha256": "36908aefbd62a50333ac88f514519f1e9277c76fe79fd52a6edd38ac8c6ccd83"
+      "sha256": "975d4284264d162b47db780a256e317ad3305c3473e2791bc4904e5c651546eb"
     },
     {
       "path": "src/objects/level_end/s3/egg_capsule.s",
-      "sha256": "51e2ba650b4316fca0d1532951dea35b303d10b64df80d0ae39b2126292023ee"
+      "sha256": "2b2169fa85b5897b07f157d0353083c810a0102eb9355dc272c4006a3222bfdf"
     },
     {
       "path": "src/objects/level_end/s3/signpost.s",
-      "sha256": "58b8380c12bbbd8fcf8d34cfa31eda5c52dc303138fd9be809f9ea0d4870ff3a"
+      "sha256": "932a6c8ecaf86f713dba0da778b1c0261330e3e2f27915ff7caa22fc7057cbfa"
     },
     {
       "path": "src/objects/level_end/sk/capsule_resources.s",
-      "sha256": "720cbb0fda2bfc3187d08b6004f87c872c32ae9fc87797822283f366dcf71040"
+      "sha256": "b2e6e77a29ba2b9ba081e7015f938b83ddb53bdec14125f0729dac807e22e454"
     },
     {
       "path": "src/objects/level_end/sk/egg_capsule.s",
-      "sha256": "dc57ce178dc0021baddef35bacd7c7ffa0b16b17458d4b18493e0adca394450d"
+      "sha256": "dba261f4b6578d43f4be5b5cc164c41758c992435ba161d0f220435156caf189"
     },
     {
       "path": "src/objects/level_end/sk/signpost.s",
-      "sha256": "b1ee4a90feca80c58bed9f98ed27f2a894be1eac7667be94d605924bbd721740"
+      "sha256": "a536c777061b54982592d3e632108defbc8a645a65fbb06e58f44cd63b29d000"
     },
     {
       "path": "src/objects/players/knuckles/sk/glide_motion.s",
@@ -1297,7 +1297,7 @@
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
-      "sha256": "d96321a81478c1f4201ee5e330729d6cdaa23c65151ce64cadabb0191bbd9b93"
+      "sha256": "766538b7e935124cfa80f208bbacf9ce817f0829f1ab1729904407db90d82cd7"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_controller.s",
@@ -4674,38 +4674,38 @@
     },
     {
       "path": "src/objects/level_end/s3/capsule_resources.s",
-      "symbol": "byte_54B40",
-      "scope": "byte_54B40",
-      "first_line": 83,
-      "last_line": 85,
+      "symbol": "S3Capsule_AnimatedFollowerRawLoop",
+      "scope": "S3Capsule_AnimatedFollowerRawLoop",
+      "first_line": 84,
+      "last_line": 86,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "d92ac7164831c0ad73a3a16ff0eafaaa72e8f5f4e8bb3341369118199f6a04c0",
+      "declarations_sha256": "8706d517e5fa2eb7e030c5ae21f37fa7f2ae098c62414af57c9cfdeb97481da8",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_54B40"],
+      "members": ["S3Capsule_AnimatedFollowerRawLoop"],
       "stored_markers": []
     },
     {
       "path": "src/objects/level_end/s3/egg_capsule.s",
-      "symbol": "byte_549BE",
-      "scope": "byte_549BE",
-      "first_line": 518,
-      "last_line": 520,
+      "symbol": "S3EggCapsule_FragmentFrameSelectorBytes",
+      "scope": "S3EggCapsule_FragmentFrameSelectorBytes",
+      "first_line": 528,
+      "last_line": 530,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "d9760f7f223905dd28da0d62a2800e8db40af4014905d2eb4af3301a32e88990",
+      "declarations_sha256": "6bd13d65c3ffe1474bf539071f57654cfbb2044821b10548f9b8a3770b259602",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_549BE"],
+      "members": ["S3EggCapsule_FragmentFrameSelectorBytes"],
       "stored_markers": []
     },
     {
       "path": "src/objects/level_end/s3/signpost.s",
       "symbol": "FrameArray_EndSign",
       "scope": "FrameArray_EndSign",
-      "first_line": 103,
-      "last_line": 105,
+      "first_line": 104,
+      "last_line": 106,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
       "declarations_sha256": "906de82ac1385db5f6f67a067017a6dcb6e52e232a025f490643645ba0c288ea",
@@ -4718,8 +4718,8 @@
       "path": "src/objects/level_end/s3/signpost.s",
       "symbol": "AniRaw_EndSigns",
       "scope": "AniRaw_EndSigns",
-      "first_line": 311,
-      "last_line": 315,
+      "first_line": 313,
+      "last_line": 317,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 24,
       "declarations_sha256": "80ac9d375a862d034cb24da9e36b8399c54c155fc0a671d02bdb1063ed4381b3",
@@ -4733,38 +4733,38 @@
     },
     {
       "path": "src/objects/level_end/sk/capsule_resources.s",
-      "symbol": "byte_86BF6",
-      "scope": "byte_86BF6",
-      "first_line": 83,
-      "last_line": 85,
+      "symbol": "SKCapsule_AnimatedFollowerRawLoop",
+      "scope": "SKCapsule_AnimatedFollowerRawLoop",
+      "first_line": 84,
+      "last_line": 86,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "9402218de43fdd9e98e14ac6af232a3c07694bea7fdc4cb215afe16a0455b225",
+      "declarations_sha256": "07321ab83c6486b38ce763ad3ca0e37f74083530c589fc6a160eb6508b241ec0",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_86BF6"],
+      "members": ["SKCapsule_AnimatedFollowerRawLoop"],
       "stored_markers": []
     },
     {
       "path": "src/objects/level_end/sk/egg_capsule.s",
-      "symbol": "byte_86A74",
-      "scope": "byte_86A74",
-      "first_line": 569,
-      "last_line": 571,
+      "symbol": "SKEggCapsule_FragmentFrameSelectorBytes",
+      "scope": "SKEggCapsule_FragmentFrameSelectorBytes",
+      "first_line": 577,
+      "last_line": 579,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "64f0943cdad13cb36a71dbb47ec724c1ddf64d4c72f91108e4584019572800c1",
+      "declarations_sha256": "be63f1115950043cdfd18d345e1a52f60333be28204dae3adad7fff2f2f72251",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_86A74"],
+      "members": ["SKEggCapsule_FragmentFrameSelectorBytes"],
       "stored_markers": []
     },
     {
       "path": "src/objects/level_end/sk/signpost.s",
       "symbol": "FrameArray_EndSign",
       "scope": "FrameArray_EndSign",
-      "first_line": 130,
-      "last_line": 132,
+      "first_line": 131,
+      "last_line": 133,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
       "declarations_sha256": "906de82ac1385db5f6f67a067017a6dcb6e52e232a025f490643645ba0c288ea",
@@ -4777,8 +4777,8 @@
       "path": "src/objects/level_end/sk/signpost.s",
       "symbol": "AniRaw_EndSigns1",
       "scope": "AniRaw_EndSigns1",
-      "first_line": 368,
-      "last_line": 374,
+      "first_line": 370,
+      "last_line": 376,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 34,
       "declarations_sha256": "2ac22bea90584a2a93b30b9f425e8ec6aa0f7ff788904a188bf75664d26131b6",

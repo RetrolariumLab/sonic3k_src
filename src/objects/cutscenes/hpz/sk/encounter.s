@@ -24,7 +24,7 @@ loc_63D1A:
                 jsr     (Boss_BeginCameraTransition).l
                 jsr     (AllocateObject).l
                 bne.s   loc_63D5C
-                move.l  #loc_85CA4,(a1)
+                move.l  #SKEndCamera_TickAndSaveMusic,(a1)
                 move.l  #loc_63DD4,$34(a1)
                 move.b  #mus_Knuckles,boss_saved_mus(a1)
                 move.w  #2*60,$2E(a1)

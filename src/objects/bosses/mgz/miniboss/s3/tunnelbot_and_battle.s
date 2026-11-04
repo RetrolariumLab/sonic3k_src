@@ -155,7 +155,7 @@ loc_563E8:
 loc_563F0:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                jmp     (loc_541A2).l
+                jmp     (S3EndCamera_TrackMinXAndCheckY).l
 ; ---------------------------------------------------------------------------
 
 loc_56402:

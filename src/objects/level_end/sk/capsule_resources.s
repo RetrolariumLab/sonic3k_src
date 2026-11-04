@@ -8,79 +8,80 @@ ObjDat_EggCapsule:
                 dc.w    make_art_tile(ArtTile_EggCapsule,0,1)
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-word_86B3E:
+SKCapsule_SharedButtonPartialAttributes:
                 dc.w    $200
                 dc.b    $10,   8,   5,   0
-ObjDat3_86B44:
+SKCapsule_ReleasedFragmentFullAttributes:
                 dc.l    Map_EggCapsule
                 dc.w    make_art_tile(ArtTile_EggCapsule,0,1)
                 dc.w    $180
                 dc.b    $C,  $C,   0,   0
-word_86B50:
+SKCapsule_FreedAnimalPartialAttributes:
                 dc.w    $280
                 dc.b    8,   8,   2,   0
-word_86B56:
+SKCapsule_AnimatedFollowerAttrs:
                 dc.w    $200
                 dc.b    $14,   4,   6,   0
-ChildObjDat_86B5C:
+SKCapsule_GroundButtonChildList:
                 dc.w    1-1
-                dc.l    loc_8671C
+                dc.l    SKEggCapsule_InitGroundButton
                 dc.b    0,-$24
-ChildObjDat_86B64:
+SKCapsule_InvertedButtonChildList:
                 dc.w    1-1
-                dc.l    loc_8675C
+                dc.l    SKEggCapsule_InitInvertedPlunger
                 dc.b    0, $24
-ChildObjDat_86B6C:
+SKCapsule_TwoAnimatedFollowerChildList:
                 dc.w    2-1
-                dc.l    loc_86802
+                dc.l    SKEggCapsule_InitAnimatedFollower
                 dc.b    -$14,-$24
-                dc.l    loc_86802
+                dc.l    SKEggCapsule_InitAnimatedFollower
                 dc.b    $14,-$24
-ChildObjDat_86B7A:
+SKCapsule_FiveReleasedFragmentChildList:
                 dc.w    5-1
-                dc.l    loc_867D6
+                dc.l    SKEggCapsule_InitFragmentArt
                 dc.b    0,  -8
-                dc.l    loc_867D6
+                dc.l    SKEggCapsule_InitFragmentArt
                 dc.b    -$10,  -8
-                dc.l    loc_867D6
+                dc.l    SKEggCapsule_InitFragmentArt
                 dc.b    $10,  -8
-                dc.l    loc_867D6
+                dc.l    SKEggCapsule_InitFragmentArt
                 dc.b    -$18,  -8
-                dc.l    loc_867D6
+                dc.l    SKEggCapsule_InitFragmentArt
                 dc.b    $18,  -8
-ChildObjDat_86B9A:
+; The count admits nine requests. Six trailing entries remain in the source data
+SKCapsule_NineAnimalRequests:
                 dc.w    9-1                             ; 15 entries are defined below
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    0,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -8,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    8,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    $10,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -$10,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -$18,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    $18,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -4,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    4,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    $C,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -$C,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -$14,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    $14,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    $1C,  -4
-                dc.l    loc_86820
+                dc.l    SKEggCapsule_InitFreedAnimal
                 dc.b    -$1C,  -4
-byte_86BF6:
+SKCapsule_AnimatedFollowerRawLoop:
                 dc.b    0,   6,   7,   8,   9, $FC
                 even
 Map_EggCapsule:

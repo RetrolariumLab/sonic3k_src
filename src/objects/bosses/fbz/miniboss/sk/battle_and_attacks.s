@@ -47,7 +47,7 @@ loc_6EEA8:
 ; ---------------------------------------------------------------------------
 
 loc_6EF0E:
-                jmp     (loc_85C7E).l
+                jmp     (SKEndCamera_TrackMinXAndCheckY).l
 ; ---------------------------------------------------------------------------
 
 loc_6EF14:
@@ -116,7 +116,7 @@ loc_6EFB2:
                 jsr     (CreateChild6_Simple).l
                 lea     (ChildObjDat_89ED0).l,a2
                 jsr     (CreateChild1_Normal).l
-                lea     (ChildObjDat_86B7A).l,a2
+                lea     (SKCapsule_FiveReleasedFragmentChildList).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 118
+    "commit_count": 119
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -755,9 +755,15 @@
       "commits": ["c0e89d6627a2f5ef828419eb47ef3a6af15e5d02"]
     },
     {
-      "id": "current-shorten-13-effects",
+      "id": "change-7f9f5935d46b",
       "kind": "source_or_tooling",
       "summary": "Apply 325 reviewed short labels for effects.",
+      "commits": ["7f9f5935d46b26627abcef18a9811077e49eacc8"]
+    },
+    {
+      "id": "current-shorten-14-level-results",
+      "kind": "source_or_tooling",
+      "summary": "Apply 367 reviewed short labels for level results.",
       "commits": ["release-commit"]
     }
   ],

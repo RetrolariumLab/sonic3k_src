@@ -3,7 +3,7 @@
   "exceptions": [
     {
       "path": "src/rendering/s3/hud.s",
-      "owner": "dword_ED88",
+      "owner": "HUD_DecimalDivisorsFromHundredThousands",
       "kind": "rom-range-long",
       "operand": "100000",
       "count": 1,
@@ -84,7 +84,7 @@
     },
     {
       "path": "src/rendering/sk/hud.s",
-      "owner": "dword_E040",
+      "owner": "HUD_DecimalDivisorsFromHundredThousands",
       "kind": "rom-range-long",
       "operand": "100000",
       "count": 1,

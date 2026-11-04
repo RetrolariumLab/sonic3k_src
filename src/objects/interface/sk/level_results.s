@@ -25,34 +25,34 @@ Obj_LevelResultsInit:
                 lea     (ArtKosM_TitleCardNum2).l,a1
                 moveq   #-1,d0
                 cmpi.w  #$1600,(Current_zone_and_act).w
-                beq.s   loc_2DB1C                       ; If this is the LRZ2 boss, use the 2 digit
+                beq.s   SKLevelResults_QueueActAndPickCharArt  ; If this is the LRZ2 boss, use the 2 digit
                 tst.b   (Apparent_act).w
-                bne.s   loc_2DB1C
+                bne.s   SKLevelResults_QueueActAndPickCharArt
                 lea     (ArtKosM_TitleCardNum1).l,a1    ; Otherwise, use the 1 digit if internal act number is 0
                 moveq   #0,d0
 
-loc_2DB1C:
+SKLevelResults_QueueActAndPickCharArt:
                 move.w  d0,subtype(a0)
                 move.w  #tiles_to_bytes($568),d2
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_ResultsSONIC).l,a1     ; Select character name to use based on character of course
                 cmpi.w  #1,(Player_mode).w
-                bls.s   loc_2DB58
+                bls.s   SKLevelResults_SelectCharArtDest
                 lea     (ArtKosM_ResultsKNUCKLES).l,a1
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_2DB58
+                beq.s   SKLevelResults_SelectCharArtDest
                 lea     (ArtKosM_ResultsMILES).l,a1
                 tst.b   (Graphics_flags).w
-                bpl.s   loc_2DB58
+                bpl.s   SKLevelResults_SelectCharArtDest
                 lea     (ArtKosM_ResultsTAILS).l,a1
 
-loc_2DB58:
+SKLevelResults_SelectCharArtDest:
                 move.w  #tiles_to_bytes($578),d2
                 tst.w   subtype(a0)
-                beq.s   loc_2DB66
+                beq.s   SKLevelResults_QueueCharArtAndGetSeconds
                 move.w  #tiles_to_bytes($5A0),d2
 
-loc_2DB66:
+SKLevelResults_QueueCharArtAndGetSeconds:
                 jsr     (Queue_Kos_Module).l            ; Load character name graphics
                 clr.b   (Update_HUD_timer).w            ; Ensure timer isn't being updated currently
                 moveq   #0,d0
@@ -62,24 +62,25 @@ loc_2DB66:
                 move.b  (Timer_second).w,d1
                 add.w   d1,d0
                 cmpi.w  #9+59*10,d0
-                bne.s   loc_2DB90
+                bne.s   SKLevelResults_ClampTimeBonusBand
                 move.w  #10000,(Time_bonus_countdown).w  ; If clock is at 9:59, give an automatic 100000 point time bonus
-                bra.s   loc_2DBA8
+                bra.s   SKLevelResults_InitRingBonusAndWait
 ; ---------------------------------------------------------------------------
 
-loc_2DB90:
+; Divide by 30 seconds and cap the table index at seven
+SKLevelResults_ClampTimeBonusBand:
                 divu.w  #30,d0                          ; Divide time by 30
                 moveq   #7,d1
                 cmp.w   d1,d0                           ; If result is above 7, make it 7
-                blo.s   loc_2DB9C
+                blo.s   SKLevelResults_ReadTimeBonus
                 move.w  d1,d0
 
-loc_2DB9C:
+SKLevelResults_ReadTimeBonus:
                 add.w   d0,d0
                 lea     TimeBonus(pc),a1
                 move.w  (a1,d0.w),(Time_bonus_countdown).w  ; Get the time bonus
 
-loc_2DBA8:
+SKLevelResults_InitRingBonusAndWait:
                 move.w  (Ring_count).w,d0
                 mulu.w  #10,d0
                 move.w  d0,(Ring_bonus_countdown).w     ; Get the ring bonus
@@ -92,13 +93,14 @@ loc_2DBA8:
 
 Obj_LevelResultsCreate:
                 tst.b   (Kos_modules_left).w
-                bne.s   locret_2DC34                    ; Don't load the objects until the art has been loaded
+                bne.s   SKLevelResults_CreateReturn     ; Don't load the objects until the art has been loaded
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_2DC34
+                bne.s   SKLevelResults_CreateReturn
                 lea     ObjArray_LevResults(pc),a2
                 moveq   #$C-1,d1                        ; Make 12 objects
 
-loc_2DBDE:
+; Initialize from the fourteen-byte element record
+SKLevelResults_InitElementAndFindSlot:
                 move.l  (a2)+,(a1)
                 move.w  (a2)+,$46(a1)
                 move.w  (a2)+,x_pos(a1)
@@ -112,156 +114,157 @@ loc_2DBDE:
                 move.l  #Map_Results,mappings(a1)
                 move.w  a0,parent2(a1)
                 jsr     (CreateNewSprite4).l
-                dbne    d1,loc_2DBDE
+                dbne    d1,SKLevelResults_InitElementAndFindSlot
                 addq.b  #2,routine(a0)
                 tst.b   (Apparent_act).w
-                bne.s   locret_2DC34                    ; If this is act 2, branch
+                bne.s   SKLevelResults_CreateReturn     ; If this is act 2, branch
                 move.b  (Apparent_zone).w,d0
-                beq.s   locret_2DC34                    ; If this is Angel Island, branch
+                beq.s   SKLevelResults_CreateReturn     ; If this is Angel Island, branch
                 cmpi.b  #5,d0
-                beq.s   locret_2DC34                    ; If this is Ice Cap Zone, branch
+                beq.s   SKLevelResults_CreateReturn     ; If this is Ice Cap Zone, branch
                 st      (Events_fg_5).w                 ; Set the background event flag for the given level (presumably for transitions)
 
-locret_2DC34:
+SKLevelResults_CreateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_LevelResultsWait:
                 tst.w   $2E(a0)
-                beq.s   loc_2DC5C
+                beq.s   SKLevelResults_BeginTallyAndTickTime
                 subq.w  #1,$2E(a0)
                 cmpi.w  #289,$2E(a0)
-                bne.s   locret_2DC9E                    ; Play after eh, a second or so
+                bne.s   SKLevelResults_TallyReturn      ; Play after eh, a second or so
                 move.b  #30,(Player_1+air_left).w       ; Reset air for Hydrocity
                 move.b  #30,(Player_2+air_left).w
                 moveq   #signextendB(mus_GotThroughAct),d0
                 jmp     (Play_Music).l                  ; Play level complete theme
 ; ---------------------------------------------------------------------------
 
-loc_2DC5C:
+SKLevelResults_BeginTallyAndTickTime:
                 moveq   #0,d0
                 tst.w   (Time_bonus_countdown).w
-                beq.s   loc_2DC6E
+                beq.s   SKLevelResults_TickRingBonus
                 addi.w  #10,d0
                 subi.w  #10,(Time_bonus_countdown).w    ; Get 100 points from the time bonus
 
-loc_2DC6E:
+SKLevelResults_TickRingBonus:
                 tst.w   (Ring_bonus_countdown).w
-                beq.s   loc_2DC7E
+                beq.s   SKLevelResults_AddTallyScoreAndTrySound
                 addi.w  #10,d0
                 subi.w  #10,(Ring_bonus_countdown).w    ; Get 100 points from the ring bonus
 
-loc_2DC7E:
+SKLevelResults_AddTallyScoreAndTrySound:
                 add.w   d0,(Total_bonus_countup).w      ; Add to total score for level
                 tst.w   d0
-                beq.s   loc_2DCA0                       ; Branch once score has finished counting down
+                beq.s   SKLevelResults_PlayRegisterAndBeginSave  ; Branch once score has finished counting down
                 jsr     (HUD_AddToScore).l              ; Add to actual score
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                bne.s   locret_2DC9E
+                bne.s   SKLevelResults_TallyReturn
                 moveq   #signextendB(sfx_Switch),d0     ; Every four frames, play the score countdown sound
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-locret_2DC9E:
+SKLevelResults_TallyReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2DCA0:
+SKLevelResults_PlayRegisterAndBeginSave:
                 moveq   #signextendB(sfx_Register),d0   ; Play the cash register sound
                 jsr     (Play_SFX).l
                 cmpi.w  #$A00,(Current_zone_and_act).w
-                beq.s   loc_2DCB6
+                beq.s   SKLevelResults_TryMaskedSave
                 tst.w   subtype(a0)
-                beq.s   loc_2DCC0
+                beq.s   SKLevelResults_StartPostTallyWait
 
-loc_2DCB6:
+SKLevelResults_TryMaskedSave:
                 st      (SRAM_mask_interrupts_flag).w   ; If in act 2 or Sky Sanctuary, save the game
                 jsr     (SaveGame).l
 
-loc_2DCC0:
+; Set the timer to 90 and decrement it on the same update
+SKLevelResults_StartPostTallyWait:
                 move.w  #90,$2E(a0)                     ; Set wait amount
                 addq.b  #2,routine(a0)
 
 Obj_LevelResultsWait2:
                 tst.w   $2E(a0)
-                beq.s   loc_2DCD6
+                beq.s   SKLevelResults_WaitElementsAndTickExit
                 subq.w  #1,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2DCD6:
+SKLevelResults_WaitElementsAndTickExit:
                 tst.w   $30(a0)                         ; Wait for title screen objects to disappear
-                beq.s   loc_2DCE2
+                beq.s   SKLevelResults_FinishActOrStartNextTitle
                 addq.w  #1,$32(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2DCE2:
+SKLevelResults_FinishActOrStartNextTitle:
                 move.b  (Current_zone).w,d0
                 cmpi.b  #$A,d0
-                beq.s   loc_2DCF8
+                beq.s   SKLevelResults_FinishAndDelete
                 cmpi.b  #$16,d0
-                beq.s   loc_2DCF8
+                beq.s   SKLevelResults_FinishAndDelete
                 tst.b   (Apparent_act).w
-                beq.s   loc_2DD06
+                beq.s   SKLevelResults_SetAct2AndSelectTitle
 
-loc_2DCF8:
+SKLevelResults_FinishAndDelete:
                 clr.b   (_unkFAA8).w                    ; Act 2 (or Sky Sanctuary or LRZ boss)
                 st      (End_of_level_flag).w           ; Stop level results flag and set title card finished flag
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2DD06:
+SKLevelResults_SetAct2AndSelectTitle:
                 move.b  #1,(Apparent_act).w             ; Change to act 2 if in act 1
                 clr.b   (Last_star_post_hit).w
                 clr.b   (Special_bonus_entry_flag).w
                 clr.b   (_unkFAA8).w
                 cmpi.b  #8,(Current_zone).w
-                beq.s   loc_2DD38
+                beq.s   SKLevelResults_DeleteTitleException
                 cmpi.b  #$B,(Current_zone).w
-                beq.s   loc_2DD38                       ; Neither Sandopolis 1 nor Death Egg 1 immediately show title cards
+                beq.s   SKLevelResults_DeleteTitleException  ; Neither Sandopolis 1 nor Death Egg 1 immediately show title cards
                 move.l  #Obj_TitleCard,(a0)             ; Change current object to title card
                 clr.b   routine(a0)
                 st      $3E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2DD38:
+SKLevelResults_DeleteTitleException:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Obj_LevResultsCharName:
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_2DD62
+                beq.s   SKLevelResults_AdjustTailsNameForRegion
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_2DD7E
+                bne.s   SKLevelResults_SelectCharArtOffset
                 addq.b  #3,mapping_frame(a0)            ; Knuckles frame
                 moveq   #$30,d0
                 sub.w   d0,x_pos(a0)
                 sub.w   d0,$46(a0)                      ; Sprite is offset slightly to the left
                 add.b   d0,width_pixels(a0)             ; Increase width by said amount
-                bra.s   loc_2DD7E
+                bra.s   SKLevelResults_SelectCharArtOffset
 ; ---------------------------------------------------------------------------
 
-loc_2DD62:
+SKLevelResults_AdjustTailsNameForRegion:
                 addq.b  #1,mapping_frame(a0)            ; Miles frame
                 tst.b   (Graphics_flags).w
-                bpl.s   loc_2DD7E
+                bpl.s   SKLevelResults_SelectCharArtOffset
                 addq.b  #1,mapping_frame(a0)            ; Tails frame
                 moveq   #8,d0
                 add.w   d0,x_pos(a0)
                 add.w   d0,$46(a0)
                 sub.b   d0,width_pixels(a0)             ; Offset like above
 
-loc_2DD7E:
+SKLevelResults_SelectCharArtOffset:
                 moveq   #0,d0
                 movea.w parent2(a0),a1
                 tst.w   subtype(a1)
-                beq.s   loc_2DD8E
+                beq.s   SKLevelResults_SetArtAndEnterGeneral
                 move.w  #$28,d0
 
-loc_2DD8E:
+SKLevelResults_SetArtAndEnterGeneral:
                 move.w  d0,art_tile(a0)                 ; Offset VRAM depending on act number
                 move.l  #Obj_LevResultsGeneral,(a0)
 
@@ -273,20 +276,20 @@ Obj_LevResultsGeneral:
 Obj_LevelResultsTimeBonus:
                 jsr     LevelResults_MoveElement(pc)
                 move.w  (Time_bonus_countdown).w,d0
-                bra.s   loc_2DDBE
+                bra.s   SKLevelResults_BuildAndDrawDigits
 ; ---------------------------------------------------------------------------
 
 Obj_LevelResultsRingBonus:
                 jsr     LevelResults_MoveElement(pc)
                 move.w  (Ring_bonus_countdown).w,d0
-                bra.s   loc_2DDBE
+                bra.s   SKLevelResults_BuildAndDrawDigits
 ; ---------------------------------------------------------------------------
 
 Obj_LevelResultsTotal:
                 jsr     LevelResults_MoveElement(pc)
                 move.w  (Total_bonus_countup).w,d0
 
-loc_2DDBE:
+SKLevelResults_BuildAndDrawDigits:
                 bsr.s   LevResults_DisplayScore
                 jmp     (Draw_Sprite).l
 
@@ -303,21 +306,21 @@ LevResults_DisplayScore:
                 moveq   #0,d4
                 moveq   #7-1,d5
 
-loc_2DDE6:
+SKLevelResults_SetDigitPosAndReadNibble:
                 move.w  d2,(a1)+
                 move.w  d3,(a1)+
                 addq.w  #1,a1
                 rol.l   #4,d1
                 move.w  d1,d0
                 andi.w  #$F,d0
-                beq.s   loc_2DDF8
+                beq.s   SKLevelResults_StoreDigitFrameAndStep
                 moveq   #1,d4
 
-loc_2DDF8:
+SKLevelResults_StoreDigitFrameAndStep:
                 add.w   d4,d0
                 move.b  d0,(a1)+
                 addq.w  #8,d2
-                dbf     d5,loc_2DDE6
+                dbf     d5,SKLevelResults_SetDigitPosAndReadNibble
                 rts
 ; End of function LevResults_DisplayScore
 
@@ -326,42 +329,43 @@ loc_2DDF8:
 LevelResults_MoveElement:
                 movea.w parent2(a0),a1
                 move.w  $32(a1),d0
-                beq.s   loc_2DE38
+                beq.s   SKLevelResults_ApproachTargetInStepsOf16
                 tst.b   render_flags(a0)
-                bmi.s   loc_2DE20
+                bmi.s   SKLevelResults_TryExitAtQueueRank
                 subq.w  #1,$30(a1)                      ; If offscreen, subtract from number of elements and delete
                 addq.w  #4,sp
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2DE20:
+; Use the low byte of the parent exit queue for the rank comparison
+SKLevelResults_TryExitAtQueueRank:
                 cmp.b   $28(a0),d0                      ; Level element moving out. Test if value of parent queue matches given queue value
-                blo.s   locret_2DE4E
+                blo.s   SKLevelResults_ElementMoveReturn
                 move.w  #-$20,d0                        ; If so, move out
                 tst.b   routine(a0)
-                beq.s   loc_2DE32
+                beq.s   SKLevelResults_AddExitXDelta
                 neg.w   d0                              ; Change direction depending on where it came from
 
-loc_2DE32:
+SKLevelResults_AddExitXDelta:
                 add.w   x_pos(a0),d0
-                bra.s   loc_2DE4A
+                bra.s   SKLevelResults_StoreElementX
 ; ---------------------------------------------------------------------------
 
-loc_2DE38:
+SKLevelResults_ApproachTargetInStepsOf16:
                 moveq   #$10,d1                         ; Level element moving in
                 move.w  x_pos(a0),d0
                 cmp.w   $46(a0),d0
-                beq.s   loc_2DE4A                       ; If X position has reached destination, don't do anything else
-                blt.s   loc_2DE48                       ; See which direction it needs to go
+                beq.s   SKLevelResults_StoreElementX    ; If X position has reached destination, don't do anything else
+                blt.s   SKLevelResults_AddEntranceXDelta  ; See which direction it needs to go
                 neg.w   d1
 
-loc_2DE48:
+SKLevelResults_AddEntranceXDelta:
                 add.w   d1,d0                           ; Add speed to X amount
 
-loc_2DE4A:
+SKLevelResults_StoreElementX:
                 move.w  d0,x_pos(a0)
 
-locret_2DE4E:
+SKLevelResults_ElementMoveReturn:
                 rts
 ; End of function LevelResults_MoveElement
 
@@ -372,22 +376,22 @@ LevResults_GetDecimalScore:
                 lea     TimeBonus(pc),a1
                 moveq   #$10-1,d2
 
-loc_2DE5A:
+SKLevelResults_ReadBitOrSkipBcdWeight:
                 ror.w   #1,d0
-                bcs.s   loc_2DE62
+                bcs.s   SKLevelResults_AddPackedBcdWeight
                 subq.w  #3,a1
-                bra.s   loc_2DE70
+                bra.s   SKLevelResults_FinishBcdConversion
 ; ---------------------------------------------------------------------------
 
-loc_2DE62:
+SKLevelResults_AddPackedBcdWeight:
                 lea     (_unkEF44_2).w,a2
                 addi.w  #0,d0
                 abcd    -(a1),-(a2)
                 abcd    -(a1),-(a2)
                 abcd    -(a1),-(a2)
 
-loc_2DE70:
-                dbf     d2,loc_2DE5A
+SKLevelResults_FinishBcdConversion:
+                dbf     d2,SKLevelResults_ReadBitOrSkipBcdWeight
                 move.l  (_unkEF40_1).w,d1
                 rts
 ; End of function LevResults_GetDecimalScore
@@ -505,5 +509,5 @@ ObjArray_LevResults:
                 dc.w    9
 ; ---------------------------------------------------------------------------
 
-locret_2DF62:
+SKLevelResults_SpecialVIntReturn:
                 rts

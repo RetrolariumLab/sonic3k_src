@@ -11,37 +11,37 @@ Render_HUD_P1:
 
 Render_HUD:
                 cmpi.b  #$13,(Current_zone).w
-                blo.s   loc_E8E4
+                blo.s   S3HUD_SelectFullHudFlashFrame
                 moveq   #8,d4
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_E900
+                bne.s   S3HUD_AdvanceSignedHudSlideByte
                 tst.w   (Ring_count).w
-                bne.s   loc_E900
+                bne.s   S3HUD_AdvanceSignedHudSlideByte
                 addq.w  #2,d4
-                bra.s   loc_E900
+                bra.s   S3HUD_AdvanceSignedHudSlideByte
 ; ---------------------------------------------------------------------------
 
-loc_E8E4:
+S3HUD_SelectFullHudFlashFrame:
                 moveq   #0,d4
                 btst    #3,(Level_frame_counter+1).w
-                bne.s   loc_E900
+                bne.s   S3HUD_AdvanceSignedHudSlideByte
                 tst.w   (Ring_count).w
-                bne.s   loc_E8F6
+                bne.s   S3HUD_AddMinuteNineFlashFrameOffset
                 addq.w  #2,d4
 
-loc_E8F6:
+S3HUD_AddMinuteNineFlashFrameOffset:
                 cmpi.b  #9,(Timer_minute).w
-                bne.s   loc_E900
+                bne.s   S3HUD_AdvanceSignedHudSlideByte
                 addq.w  #4,d4
 
-loc_E900:
+S3HUD_AdvanceSignedHudSlideByte:
                 move.b  (Level_started_flag).w,d0
                 ext.w   d0
-                bpl.s   loc_E90E
+                bpl.s   S3HUD_EmitMappingAtSlideX
                 addq.w  #8,d0
                 move.b  d0,(Level_started_flag).w
 
-loc_E90E:
+S3HUD_EmitMappingAtSlideX:
                 addi.w  #$8F,d0
                 move.w  #$108,d1
                 move.w  #make_art_tile(ArtTile_Ring+$E,0,1),d5
@@ -49,11 +49,11 @@ loc_E90E:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   locret_E92E
+                bmi.s   S3HUD_ReturnWithoutHudMappingPieces
                 jmp     (RenderMappingPieces).l
 ; ---------------------------------------------------------------------------
 
-locret_E92E:
+S3HUD_ReturnWithoutHudMappingPieces:
                 rts
 ; End of function Render_HUD
 
@@ -98,57 +98,57 @@ UpdateHUD:
                 nop
                 lea     (VDP_data_port).l,a6
                 tst.w   (Competition_mode).w
-                bne.w   loc_EBF2
+                bne.w   S3HUD_TryDrawCompDebugCoords
                 tst.w   (Debug_mode_flag).w
-                bne.w   loc_EB68
+                bne.w   S3HUD_UpdateDebugCoordsAndRings
                 tst.b   (Update_HUD_score).w
-                beq.s   loc_EAB2
+                beq.s   S3HUD_CheckRingDigitUpdateFlag
                 clr.b   (Update_HUD_score).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$28),VRAM,WRITE),d0
                 move.l  (Score).w,d1
                 bsr.w   DrawSixDigitNumber
 
-loc_EAB2:
+S3HUD_CheckRingDigitUpdateFlag:
                 tst.b   (Update_HUD_ring_count).w
-                beq.s   loc_EAD2
-                bpl.s   loc_EABE
+                beq.s   S3HUD_SelectForcedOrRunningTimerUpdate
+                bpl.s   S3HUD_UploadChangedRingCountDigits
                 bsr.w   HUD_DrawZeroRings
 
-loc_EABE:
+S3HUD_UploadChangedRingCountDigits:
                 clr.b   (Update_HUD_ring_count).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Ring_count).w,d1
                 bsr.w   DrawThreeDigitNumber
 
-loc_EAD2:
+S3HUD_SelectForcedOrRunningTimerUpdate:
                 tst.b   (Update_HUD_timer).w
-                bpl.s   loc_EAE0
+                bpl.s   S3HUD_AdvanceEnabledUnpausedHudTimer
                 move.b  #1,(Update_HUD_timer).w
-                bra.s   loc_EB1A
+                bra.s   S3HUD_UploadMinuteAndSecondDigits
 ; ---------------------------------------------------------------------------
 
-loc_EAE0:
-                beq.s   loc_EB3A
+S3HUD_AdvanceEnabledUnpausedHudTimer:
+                beq.s   S3HUD_CheckAndUploadChangedLifeCount
                 tst.w   (Game_paused).w
-                bne.s   loc_EB3A
+                bne.s   S3HUD_CheckAndUploadChangedLifeCount
                 lea     (Timer).w,a1
                 cmpi.l  #(9<<16)|(59<<8)|59,(a1)+
                 beq.w   UpdateHUD_TimeOver
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_EB3A
+                blo.s   S3HUD_CheckAndUploadChangedLifeCount
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   loc_EB1A
+                blo.s   S3HUD_UploadMinuteAndSecondDigits
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #9,(a1)
-                blo.s   loc_EB1A
+                blo.s   S3HUD_UploadMinuteAndSecondDigits
                 move.b  #9,(a1)
 
-loc_EB1A:
+S3HUD_UploadMinuteAndSecondDigits:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.b  (Timer_minute).w,d1
@@ -158,13 +158,13 @@ loc_EB1A:
                 move.b  (Timer_second).w,d1
                 bsr.w   DrawTwoDigitNumber
 
-loc_EB3A:
+S3HUD_CheckAndUploadChangedLifeCount:
                 tst.b   (Update_HUD_life_count).w
-                beq.s   locret_EB48
+                beq.s   S3HUD_ReturnAfterNormalHudUpdate
                 clr.b   (Update_HUD_life_count).w
                 bsr.w   HUD_Lives
 
-locret_EB48:
+S3HUD_ReturnAfterNormalHudUpdate:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -172,30 +172,30 @@ UpdateHUD_TimeOver:
                 clr.b   (Update_HUD_timer).w
                 lea     (Player_1).w,a0
                 cmpi.b  #6,routine(a0)
-                bhs.s   loc_EB60
+                bhs.s   S3HUD_SetTimeOverFlagAndReturn
                 movea.l a0,a2
                 bsr.w   Kill_Character
 
-loc_EB60:
+S3HUD_SetTimeOverFlagAndReturn:
                 move.b  #1,(Time_over_flag).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EB68:
+S3HUD_UpdateDebugCoordsAndRings:
                 bsr.w   HUD_Debug
                 tst.b   (Update_HUD_ring_count).w
-                beq.s   loc_EB8C
-                bpl.s   loc_EB78
+                beq.s   S3HUD_UploadLagAndSpriteDebugNumbers
+                bpl.s   S3HUD_UploadDebugModeChangedRingDigits
                 bsr.w   HUD_DrawZeroRings
 
-loc_EB78:
+S3HUD_UploadDebugModeChangedRingDigits:
                 clr.b   (Update_HUD_ring_count).w
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Ring_count).w,d1
                 bsr.w   DrawThreeDigitNumber
 
-loc_EB8C:
+S3HUD_UploadLagAndSpriteDebugNumbers:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$36),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.w  (Lag_frame_count).w,d1
@@ -205,34 +205,34 @@ loc_EB8C:
                 move.b  (Sprites_drawn).w,d1
                 bsr.w   DrawTwoDigitNumber
                 tst.b   (Update_HUD_life_count).w
-                beq.s   loc_EBBA
+                beq.s   S3HUD_AdvanceDebugTimer
                 clr.b   (Update_HUD_life_count).w
                 bsr.w   HUD_Lives
 
-loc_EBBA:
+S3HUD_AdvanceDebugTimer:
                 tst.w   (Game_paused).w
-                bne.s   locret_EBF0
+                bne.s   S3HUD_ReturnAfterDebugTimerUpdate
                 lea     (Timer).w,a1
                 cmpi.l  #(9<<16)|(59<<8)|59,(a1)+
                 nop
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   locret_EBF0
+                blo.s   S3HUD_ReturnAfterDebugTimerUpdate
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #60,(a1)
-                blo.s   locret_EBF0
+                blo.s   S3HUD_ReturnAfterDebugTimerUpdate
                 move.b  #0,(a1)
                 addq.b  #1,-(a1)
                 cmpi.b  #9,(a1)
-                blo.s   locret_EBF0
+                blo.s   S3HUD_ReturnAfterDebugTimerUpdate
                 move.b  #9,(a1)
 
-locret_EBF0:
+S3HUD_ReturnAfterDebugTimerUpdate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EBF2:
+S3HUD_TryDrawCompDebugCoords:
                 tst.w   (Debug_mode_flag).w
                 bne.w   HUD_Debug
                 rts
@@ -244,7 +244,7 @@ HUD_DrawZeroRings:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$3E),VRAM,WRITE),(VDP_control_port).l
                 lea     HUD_Zero_Rings(pc),a2
                 move.w  #3-1,d2
-                bra.s   loc_EC32
+                bra.s   S3HUD_BeginInitialOrZeroRingGlyphCopy
 ; End of function HUD_DrawZeroRings
 
 ; =============== S U B R O U T I N E =======================================
@@ -253,38 +253,38 @@ HUD_DrawInitial:
                 lea     (VDP_data_port).l,a6
                 bsr.w   HUD_Lives
                 tst.w   (Competition_mode).w
-                bne.s   locret_EC5E
+                bne.s   S3HUD_InitHudReturn
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$26),VRAM,WRITE),(VDP_control_port).l
                 lea     HUD_Initial_Parts(pc),a2
                 move.w  #$F-1,d2
 
-loc_EC32:
+S3HUD_BeginInitialOrZeroRingGlyphCopy:
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_EC36:
+S3HUD_ReadNextInitialGlyphOrBlankCode:
                 move.w  #$10-1,d1
                 move.b  (a2)+,d0
-                bmi.s   loc_EC52
+                bmi.s   S3HUD_WriteBlankInitialGlyphLongwords
                 ext.w   d0
                 lsl.w   #5,d0
                 lea     (a1,d0.w),a3
 
-loc_EC46:
+S3HUD_CopyInitialGlyphLongwords:
                 move.l  (a3)+,(a6)
-                dbf     d1,loc_EC46
+                dbf     d1,S3HUD_CopyInitialGlyphLongwords
 
-loc_EC4C:
-                dbf     d2,loc_EC36
+S3HUD_AdvanceInitialGlyphCodeCount:
+                dbf     d2,S3HUD_ReadNextInitialGlyphOrBlankCode
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EC52:
+S3HUD_WriteBlankInitialGlyphLongwords:
                 move.l  #0,(a6)
-                dbf     d1,loc_EC52
-                bra.s   loc_EC4C
+                dbf     d1,S3HUD_WriteBlankInitialGlyphLongwords
+                bra.s   S3HUD_AdvanceInitialGlyphCodeCount
 ; ---------------------------------------------------------------------------
 
-locret_EC5E:
+S3HUD_InitHudReturn:
                 rts
 ; End of function HUD_DrawInitial
 
@@ -331,63 +331,63 @@ HUD_WriteDebugCoordinatePair:
                 moveq   #8-1,d6
                 lea     (ArtUnc_DebugDigits).l,a1
 
-loc_EC98:
+S3HUD_RotateAndDecodeNextDebugWordNibble:
                 rol.w   #4,d1
                 move.w  d1,d2
                 andi.w  #$F,d2
                 cmpi.w  #$A,d2
-                blo.s   loc_ECAA
+                blo.s   S3HUD_CopyDebugGlyphAndSwapWords
                 addi.w  #7,d2
 
-loc_ECAA:
+S3HUD_CopyDebugGlyphAndSwapWords:
                 lsl.w   #5,d2
                 lea     (a1,d2.w),a3
                 rept    8
                 move.l  (a3)+,(a6)
                 endm
                 swap    d1
-                dbf     d6,loc_EC98
+                dbf     d6,S3HUD_RotateAndDecodeNextDebugWordNibble
                 rts
 ; End of function HUD_WriteDebugCoordinatePair
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawThreeDigitNumber:
-                lea     (dword_ED94).l,a2
+                lea     (HUD_DecimalDivisorsFromHundreds).l,a2
                 moveq   #3-1,d6
-                bra.s   loc_ECDA
+                bra.s   S3HUD_BeginSuppressedDecimalUpload
 ; End of function DrawThreeDigitNumber
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawSixDigitNumber:
-                lea     (dword_ED88).l,a2
+                lea     (HUD_DecimalDivisorsFromHundredThousands).l,a2
                 moveq   #6-1,d6
 
-loc_ECDA:
+S3HUD_BeginSuppressedDecimalUpload:
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_ECE0:
+S3HUD_ReadNextDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_ECE4:
+S3HUD_CountDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_ECEC
+                bcs.s   S3HUD_RestoreRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_ECE4
+                bra.s   S3HUD_CountDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_ECEC:
+S3HUD_RestoreRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_ECF6
+                beq.s   S3HUD_TryUploadDecimalGlyph
                 move.w  #1,d4
 
-loc_ECF6:
+S3HUD_TryUploadDecimalGlyph:
                 tst.w   d4
-                beq.s   loc_ED24
+                beq.s   S3HUD_AdvanceDecimalVramSlot
                 lsl.w   #6,d2
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 lea     (a1,d2.w),a3
@@ -395,9 +395,10 @@ loc_ECF6:
                 move.l  (a3)+,(a6)
                 endm
 
-loc_ED24:
+; Advance the destination even when the leading glyph is suppressed
+S3HUD_AdvanceDecimalVramSlot:
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_ECE0
+                dbf     d6,S3HUD_ReadNextDecimalDivisor
                 rts
 ; End of function DrawSixDigitNumber
 
@@ -406,75 +407,75 @@ loc_ED24:
 ; ContScrCounter:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Ring+$40),VRAM,WRITE),(VDP_control_port).l
                 lea     (VDP_data_port).l,a6
-                lea     (dword_ED98).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_ED4E:
+S3HUD_ReadLegacyCounterDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_ED52:
+S3HUD_CountLegacyCounterDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_ED5A
+                bcs.s   S3HUD_CopyLegacyCounterGlyphSequentially
                 addq.w  #1,d2
-                bra.s   loc_ED52
+                bra.s   S3HUD_CountLegacyCounterDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_ED5A:
+S3HUD_CopyLegacyCounterGlyphSequentially:
                 add.l   d3,d1
                 lsl.w   #6,d2
                 lea     (a1,d2.w),a3
                 rept    16
                 move.l  (a3)+,(a6)
                 endm
-                dbf     d6,loc_ED4E
+                dbf     d6,S3HUD_ReadLegacyCounterDecimalDivisor
                 rts
 ; ---------------------------------------------------------------------------
-dword_ED88:     dc.l    100000
+HUD_DecimalDivisorsFromHundredThousands:    dc.l    100000
                 dc.l    10000
-dword_ED90:     dc.l    1000
-dword_ED94:     dc.l    100
-dword_ED98:     dc.l    10
-dword_ED9C:     dc.l    1
+HUD_DecimalDivisorsFromThousands:   dc.l    1000
+HUD_DecimalDivisorsFromHundreds:    dc.l    100
+HUD_DecimalDivisorsFromTens:        dc.l    10
+HUD_DecimalDivisorsFromOnes:        dc.l    1
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawSingleDigitNumber:
-                lea     (dword_ED9C).l,a2
+                lea     (HUD_DecimalDivisorsFromOnes).l,a2
                 moveq   #1-1,d6
-                bra.s   loc_EDB2
+                bra.s   S3HUD_BeginAlwaysDrawnShortDecimalUpload
 ; End of function DrawSingleDigitNumber
 
 ; =============== S U B R O U T I N E =======================================
 
 DrawTwoDigitNumber:
-                lea     (dword_ED98).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
 
-loc_EDB2:
+S3HUD_BeginAlwaysDrawnShortDecimalUpload:
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_EDB8:
+S3HUD_ReadShortDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_EDBC:
+S3HUD_CountShortDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_EDC4
+                bcs.s   S3HUD_RestoreShortRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_EDBC
+                bra.s   S3HUD_CountShortDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_EDC4:
+S3HUD_RestoreShortRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_EDCE
+                beq.s   S3HUD_CopyShortDecimalGlyphIncludingZero
                 move.w  #1,d4
 
-loc_EDCE:
+S3HUD_CopyShortDecimalGlyphIncludingZero:
                 lsl.w   #6,d2
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 lea     (a1,d2.w),a3
@@ -482,56 +483,56 @@ loc_EDCE:
                 move.l  (a3)+,(a6)
                 endm
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_EDB8
+                dbf     d6,S3HUD_ReadShortDecimalDivisor
                 rts
 ; End of function DrawTwoDigitNumber
 
 ; ---------------------------------------------------------------------------
 ; unused leftover from Sonic 2
 ; Hud_TimeRingBonus:
-                lea     (dword_ED90).l,a2
+                lea     (HUD_DecimalDivisorsFromThousands).l,a2
                 moveq   #4-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_HUDDigits(pc),a1
 
-loc_EE12:
+S3HUD_ReadLegacyBonusDecimalDivisor:
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_EE16:
+S3HUD_CountLegacyBonusDecimalQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_EE1E
+                bcs.s   S3HUD_RestoreBonusRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_EE16
+                bra.s   S3HUD_CountLegacyBonusDecimalQuotient
 ; ---------------------------------------------------------------------------
 
-loc_EE1E:
+S3HUD_RestoreBonusRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_EE28
+                beq.s   S3HUD_CopyLegacyBonusGlyphOrChooseBlank
                 move.w  #1,d4
 
-loc_EE28:
+S3HUD_CopyLegacyBonusGlyphOrChooseBlank:
                 tst.w   d4
-                beq.s   loc_EE58
+                beq.s   S3HUD_BeginBlankLegacyBonusGlyph
                 lsl.w   #6,d2
                 lea     (a1,d2.w),a3
                 rept    16
                 move.l  (a3)+,(a6)
                 endm
 
-loc_EE52:
-                dbf     d6,loc_EE12
+S3HUD_AdvanceLegacyBonusDigitCount:
+                dbf     d6,S3HUD_ReadLegacyBonusDecimalDivisor
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EE58:
+S3HUD_BeginBlankLegacyBonusGlyph:
                 moveq   #$10-1,d5
 
-loc_EE5A:
+S3HUD_WriteBlankLegacyBonusLongwords:
                 move.l  #0,(a6)
-                dbf     d5,loc_EE5A
-                bra.s   loc_EE52
+                dbf     d5,S3HUD_WriteBlankLegacyBonusLongwords
+                bra.s   S3HUD_AdvanceLegacyBonusDigitCount
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -539,55 +540,55 @@ HUD_Lives:
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_PlayerLifeIcon+9),VRAM,WRITE),d0
                 moveq   #0,d1
                 move.b  (Life_count).w,d1
-                lea     (dword_ED98).l,a2
+                lea     (HUD_DecimalDivisorsFromTens).l,a2
                 moveq   #2-1,d6
                 moveq   #0,d4
                 lea     ArtUnc_LivesDigits(pc),a1
 
-loc_EE80:
+S3HUD_ProgramLifeDigitVramAndReadDivisor:
                 move.l  d0,VDP_control_port-VDP_data_port(a6)
                 moveq   #0,d2
                 move.l  (a2)+,d3
 
-loc_EE88:
+S3HUD_CountLifeDigitQuotient:
                 sub.l   d3,d1
-                bcs.s   loc_EE90
+                bcs.s   S3HUD_RestoreLifeRemainderAndLatch
                 addq.w  #1,d2
-                bra.s   loc_EE88
+                bra.s   S3HUD_CountLifeDigitQuotient
 ; ---------------------------------------------------------------------------
 
-loc_EE90:
+S3HUD_RestoreLifeRemainderAndLatch:
                 add.l   d3,d1
                 tst.w   d2
-                beq.s   loc_EE9A
+                beq.s   S3HUD_SelectLifeGlyphOrLeadingBlank
                 move.w  #1,d4
 
-loc_EE9A:
+S3HUD_SelectLifeGlyphOrLeadingBlank:
                 tst.w   d4
-                beq.s   loc_EEC0
+                beq.s   S3HUD_ForceZeroLifeUnitsOrBlankTens
 
-loc_EE9E:
+S3HUD_CopyOneTileLifeGlyph:
                 lsl.w   #5,d2
                 lea     (a1,d2.w),a3
                 rept    8
                 move.l  (a3)+,(a6)
                 endm
 
-loc_EEB4:
+S3HUD_AdvanceLifeVramSlotAndDigitCount:
                 addi.l  #$40<<16,d0
-                dbf     d6,loc_EE80
+                dbf     d6,S3HUD_ProgramLifeDigitVramAndReadDivisor
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_EEC0:
+S3HUD_ForceZeroLifeUnitsOrBlankTens:
                 tst.w   d6
-                beq.s   loc_EE9E
+                beq.s   S3HUD_CopyOneTileLifeGlyph
                 moveq   #8-1,d5
 
-loc_EEC6:
+S3HUD_WriteBlankLifeTensLongwords:
                 move.l  #0,(a6)
-                dbf     d5,loc_EEC6
-                bra.s   loc_EEB4
+                dbf     d5,S3HUD_WriteBlankLifeTensLongwords
+                bra.s   S3HUD_AdvanceLifeVramSlotAndDigitCount
 ; End of function HUD_Lives
 
 ; ---------------------------------------------------------------------------

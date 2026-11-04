@@ -89,7 +89,7 @@ loc_2E0A2:
                 lea     (ArtKosM_SSResults).l,a1
                 move.w  #tiles_to_bytes($523),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #locret_2DF62,(_unkEF44_1).w
+                move.l  #SKLevelResults_SpecialVIntReturn,(_unkEF44_1).w
 
 loc_2E0C4:
                 move.b  #VInt_ID_1E,(V_int_routine).w

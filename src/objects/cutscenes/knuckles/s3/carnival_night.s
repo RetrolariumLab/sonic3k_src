@@ -49,7 +49,7 @@ loc_44C36:
 
 loc_44CA2:
                 jsr     (Animate_Raw).l
-                jmp     (loc_541C8).l
+                jmp     (S3EndCamera_TickMusicDelay).l
 ; ---------------------------------------------------------------------------
 
 loc_44CAE:

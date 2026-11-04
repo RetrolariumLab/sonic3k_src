@@ -6,19 +6,19 @@
 GetS3LBZEndingCharacterVariant:
                 move.w  (Player_mode).w,d0
                 cmpi.w  #2,d0
-                beq.s   loc_543B2
+                beq.s   S3LevelEnd_EndingVariantReturnTailsIndex
                 cmpi.w  #7,(Chaos_emerald_count).w
-                beq.s   loc_543B6
+                beq.s   S3LevelEnd_ReturnAllEmeraldEnding
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_543B2:
+S3LevelEnd_EndingVariantReturnTailsIndex:
                 moveq   #1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_543B6:
+S3LevelEnd_ReturnAllEmeraldEnding:
                 moveq   #2,d0
                 rts
 

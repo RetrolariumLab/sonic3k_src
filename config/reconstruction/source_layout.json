@@ -26079,7 +26079,7 @@
       "responsibility": "Game-over text object creation, movement and lifetime.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 72,
+      "physical_lines": 73,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -26124,7 +26124,7 @@
       "responsibility": "Level-results presentation, timed score counting, decimal conversion, element movement and object catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 476,
+      "physical_lines": 479,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -26374,7 +26374,7 @@
       "responsibility": "Title-card initialization, coordinated banner and text sprites, act display and object catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 348,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -26414,7 +26414,7 @@
       "responsibility": "Game-over text object creation, movement and lifetime.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 78,
+      "physical_lines": 80,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26449,7 +26449,7 @@
       "responsibility": "Level-results presentation, timed score counting, decimal conversion, element movement and object catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 509,
+      "physical_lines": 513,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26609,7 +26609,7 @@
       "responsibility": "Title-card initialization, coordinated banner and text sprites, act display and object catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 412,
+      "physical_lines": 414,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -26834,7 +26834,7 @@
       "responsibility": "Egg capsule object attributes, release child construction records and animal animation data.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 85,
+      "physical_lines": 86,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -26874,7 +26874,7 @@
       "responsibility": "Egg capsule state machine, release children, ending poses and freed-animal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 594,
+      "physical_lines": 604,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -26914,7 +26914,7 @@
       "responsibility": "End-of-act signpost states, bounce detection, score sparkles, stub children and their private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 315,
+      "physical_lines": 317,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -26954,7 +26954,7 @@
       "responsibility": "Restore player control, create and sequence the end sign, and wait for camera transition conditions.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 156,
+      "physical_lines": 158,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -26999,7 +26999,7 @@
       "responsibility": "Egg capsule attributes, release child construction, animal animation and capsule mapping resources.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 87,
+      "physical_lines": 88,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -27029,7 +27029,7 @@
       "responsibility": "Egg capsule state machine, release children, ending poses and freed-animal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 645,
+      "physical_lines": 653,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -27059,7 +27059,7 @@
       "responsibility": "End-of-act signpost states, player hit tests, score sparkles, stub children and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 380,
+      "physical_lines": 382,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -27089,7 +27089,7 @@
       "responsibility": "Player control restoration, end-sign sequencing and camera transition checks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 217,
+      "physical_lines": 220,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -67831,7 +67831,7 @@
       "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 593,
+      "physical_lines": 594,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "s3.s",
@@ -68876,7 +68876,7 @@
       "responsibility": "One and two player HUD drawing, score, rings, time, lives and numeric glyph output.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 617,
+      "physical_lines": 618,
       "origin": {
         "commit": "6e2a91309b3ad31b3b927e20062c94aafc76515d",
         "path": "sonic3k.s",

@@ -76,31 +76,33 @@ Obj_EndSignControlDoStart:
 Check_CameraInRange:
                 move.w  (Camera_Y_pos).w,d0
                 cmp.w   (a1)+,d0
-                blo.s   loc_85C74
+                blo.s   SKEndCamera_CullAndSkipCaller
                 cmp.w   (a1)+,d0
-                bhi.s   loc_85C74
+                bhi.s   SKEndCamera_CullAndSkipCaller
                 move.w  (Camera_X_pos).w,d1
                 cmp.w   (a1)+,d1
-                blo.s   loc_85C74
+                blo.s   SKEndCamera_CullAndSkipCaller
                 cmp.w   (a1)+,d1
-                bhi.s   loc_85C74
+                bhi.s   SKEndCamera_CullAndSkipCaller
                 bclr    #7,$27(a0)
                 cmp.w   (a1),d0
-                bls.s   loc_85C5E
+                bls.s   SKEndCamera_SelectXApproach
                 bset    #7,$27(a0)
 
-loc_85C5E:
+SKEndCamera_SelectXApproach:
                 bclr    #6,$27(a0)
                 cmp.w   4(a1),d1
-                bls.s   loc_85C70
+                bls.s   SKEndCamera_SaveContinuation
                 bset    #6,$27(a0)
 
-loc_85C70:
+; Install the caller's return address as the object's next handler
+SKEndCamera_SaveContinuation:
                 move.l  (sp),(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85C74:
+; Discard the return address when the activation check misses
+SKEndCamera_CullAndSkipCaller:
                 jsr     (Delete_Sprite_If_Not_In_Range).l
                 addq.w  #4,sp
                 rts
@@ -108,81 +110,82 @@ loc_85C74:
 
 ; ---------------------------------------------------------------------------
 
-loc_85C7E:
+SKEndCamera_TrackMinXAndCheckY:
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 move.w  (Camera_target_max_Y_pos).w,d0
                 cmp.w   (Camera_max_Y_pos).w,d0
-                blo.s   locret_85CA2
+                blo.s   SKEndCamera_LockReturn
                 move.w  d0,(Camera_min_Y_pos).w
                 move.w  $3A(a0),d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   locret_85CA2
+                bhi.s   SKEndCamera_LockReturn
                 movea.l $34(a0),a1
                 jsr     (a1)
 
-locret_85CA2:
+SKEndCamera_LockReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_85CA4:
+SKEndCamera_TickAndSaveMusic:
                 btst    #0,$27(a0)
-                bne.s   loc_85CC6
+                bne.s   SKEndCamera_SelectYApproach
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_85CC6
+                bpl.s   SKEndCamera_SelectYApproach
                 move.b  boss_saved_mus(a0),d0
                 move.b  d0,(Current_music+1).w
                 jsr     (Play_Music).l
                 bset    #0,$27(a0)
 
-loc_85CC6:
+SKEndCamera_SelectYApproach:
                 btst    #1,$27(a0)
-                bne.s   loc_85D06
+                bne.s   SKEndCamera_ApproachXFromLeft
                 move.w  (Camera_Y_pos).w,d0
                 tst.b   $27(a0)
-                bmi.s   loc_85CE6
+                bmi.s   SKEndCamera_WaitForYMargin
                 cmp.w   (_unkFAB0).w,d0
-                bhs.s   loc_85CF2
+                bhs.s   SKEndCamera_LatchYBounds
                 move.w  d0,(Camera_min_Y_pos).w
-                bra.w   loc_85D06
+                bra.w   SKEndCamera_ApproachXFromLeft
 ; ---------------------------------------------------------------------------
 
-loc_85CE6:
+SKEndCamera_WaitForYMargin:
                 move.w  (_unkFAB2).w,d1
                 addi.w  #$60,d1
                 cmp.w   d1,d0
-                bhi.s   loc_85D06
+                bhi.s   SKEndCamera_ApproachXFromLeft
 
-loc_85CF2:
+SKEndCamera_LatchYBounds:
                 bset    #1,$27(a0)
                 move.w  (_unkFAB0).w,(Camera_min_Y_pos).w
                 move.w  (_unkFAB2).w,d0
                 move.w  d0,(Camera_target_max_Y_pos).w
 
-loc_85D06:
+SKEndCamera_ApproachXFromLeft:
                 btst    #2,$27(a0)
-                bne.s   loc_85D48
+                bne.s   SKEndCamera_TryFinishJoin
                 move.w  (Camera_X_pos).w,d0
                 btst    #6,$27(a0)
-                bne.s   loc_85D28
+                bne.s   SKEndCamera_ApproachXFromRight
                 cmp.w   (_unkFAB4).w,d0
-                bhs.s   loc_85D36
+                bhs.s   SKEndCamera_LatchXBounds
                 move.w  d0,(Camera_min_X_pos).w
-                bra.w   loc_85D48
+                bra.w   SKEndCamera_TryFinishJoin
 ; ---------------------------------------------------------------------------
 
-loc_85D28:
+SKEndCamera_ApproachXFromRight:
                 cmp.w   (_unkFAB6).w,d0
-                bls.s   loc_85D36
+                bls.s   SKEndCamera_LatchXBounds
                 move.w  d0,(Camera_max_X_pos).w
-                bra.w   loc_85D48
+                bra.w   SKEndCamera_TryFinishJoin
 ; ---------------------------------------------------------------------------
 
-loc_85D36:
+SKEndCamera_LatchXBounds:
                 bset    #2,$27(a0)
                 move.w  (_unkFAB4).w,(Camera_min_X_pos).w
                 move.w  (_unkFAB6).w,(Camera_max_X_pos).w
 
-loc_85D48:
+; Require all three latches, clear the scratch fields and tail-call the continuation
+SKEndCamera_TryFinishJoin:
                 move.b  $27(a0),d0
                 andi.b  #7,d0
                 cmpi.b  #7,d0
@@ -199,12 +202,12 @@ loc_85D48:
 Boss_BeginCameraTransition:
                 move.b  #1,(Boss_flag).w
 
-loc_85D70:
+SKEndCamera_FadeAndStartDelay:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
                 move.w  #2*60,$2E(a0)
 
-loc_85D7E:
+SKEndCamera_SaveAndLoadBounds:
                 move.w  (Camera_min_Y_pos).w,(Camera_stored_min_Y_pos).w
                 move.w  (Camera_target_max_Y_pos).w,(Camera_stored_max_Y_pos).w
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w

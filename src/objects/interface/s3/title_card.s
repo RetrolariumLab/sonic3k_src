@@ -18,23 +18,23 @@ TitleCard_Index:
 
 Obj_TitleCardInit:
                 cmpi.b  #$E,(Current_zone).w
-                blo.s   loc_2CA96                       ; If in any of the 2P stages, don't show title card
+                blo.s   S3TitleCard_QueueInitialPanelArt  ; If in any of the 2P stages, don't show title card
                 cmpi.b  #$12,(Current_zone).w
-                bhi.s   loc_2CA96
+                bhi.s   S3TitleCard_QueueInitialPanelArt
                 st      $44(a0)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2CA96:
+S3TitleCard_QueueInitialPanelArt:
                 lea     (ArtKosM_TitleCardRedAct).l,a1
                 move.w  #tiles_to_bytes($500),d2
                 jsr     (Queue_Kos_Module).l
                 lea     (ArtKosM_TitleCardNum1).l,a1
                 tst.b   (Apparent_act).w
-                beq.s   loc_2CAB8
+                beq.s   S3TitleCard_QueueActAndPickNameArt
                 lea     (ArtKosM_TitleCardNum2).l,a1
 
-loc_2CAB8:
+S3TitleCard_QueueActAndPickNameArt:
                 move.w  #tiles_to_bytes($53D),d2
                 jsr     (Queue_Kos_Module).l
                 lea     TitleCard_LevelGfx(pc),a1
@@ -53,21 +53,22 @@ loc_2CAB8:
 
 Obj_TitleCardCreate:
                 tst.b   (Kos_modules_left).w
-                bne.w   locret_2CB76                    ; Wait for KosM queue to clear
+                bne.w   S3TitleCard_CreateWaitReturn    ; Wait for KosM queue to clear
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_2CB76
+                bne.s   S3TitleCard_CreateWaitReturn
                 lea     ObjArray_TtlCardBonus(pc),a2
                 moveq   #1,d1
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   loc_2CB20
+                bhs.s   S3TitleCard_InitAndCountElement
                 lea     ObjArray_TtlCard(pc),a2
                 moveq   #3,d1
                 tst.b   $44(a0)
-                beq.s   loc_2CB20
+                beq.s   S3TitleCard_InitAndCountElement
                 lea     ObjArray_TtlCard2(pc),a2
                 moveq   #0,d1
 
-loc_2CB20:
+; The live-child count records only successful allocations
+S3TitleCard_InitAndCountElement:
                 addq.w  #1,$30(a0)
                 move.l  (a2)+,(a1)
                 move.w  (a2)+,$46(a1)
@@ -81,31 +82,31 @@ loc_2CB20:
                 move.l  #Map_TitleCard,mappings(a1)
                 move.w  a0,parent2(a1)
                 jsr     (CreateNewSprite4).l
-                dbne    d1,loc_2CB20
+                dbne    d1,S3TitleCard_InitAndCountElement
                 tst.b   $3E(a0)
-                beq.s   loc_2CB72
+                beq.s   S3TitleCard_BeginArrivalWait
                 cmpi.b  #6,(Apparent_zone).w
-                bne.s   loc_2CB72
+                bne.s   S3TitleCard_BeginArrivalWait
                 moveq   #PLCID_25,d0                    ; If title card is mid-level and it's in LBZ, load the LBZ 2 misc art
                 jsr     (Load_PLC).l
 
-loc_2CB72:
+S3TitleCard_BeginArrivalWait:
                 addq.b  #2,routine(a0)
 
-locret_2CB76:
+S3TitleCard_CreateWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_TitleCardWait:
                 tst.w   $34(a0)
-                beq.s   loc_2CB84
+                beq.s   S3TitleCard_ResetMidlevelCounters
                 clr.w   $34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2CB84:
+S3TitleCard_ResetMidlevelCounters:
                 tst.w   $3E(a0)
-                beq.s   loc_2CBC0
+                beq.s   S3TitleCard_ClearLoadingAndBeginHold
                 clr.l   (Timer).w                       ; If using in-level title card
                 clr.w   (Ring_count).w                  ; Reset HUD rings and timer
                 clr.w   (Total_ring_count).w            ; Reset number of collected rings
@@ -119,7 +120,7 @@ loc_2CB84:
                 move.b  #30,(Player_2+air_left).w       ; Reset air
                 jsr     (Restore_LevelMusic).l          ; Play music
 
-loc_2CBC0:
+S3TitleCard_ClearLoadingAndBeginHold:
                 clr.w   $48(a0)
                 addq.b  #2,routine(a0)
                 rts
@@ -127,67 +128,68 @@ loc_2CBC0:
 
 Obj_TitleCardWait2:
                 tst.w   $2E(a0)
-                beq.s   loc_2CBD6
+                beq.s   S3TitleCard_TickExitAndCheckChildren
                 subq.w  #1,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2CBD6:
+S3TitleCard_TickExitAndCheckChildren:
                 tst.w   $30(a0)
-                beq.s   loc_2CBE2
+                beq.s   S3TitleCard_SelectPostTitleResources
                 addq.w  #1,$32(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2CBE2:
+S3TitleCard_SelectPostTitleResources:
                 tst.b   $44(a0)
-                bne.s   loc_2CC12
+                bne.s   S3TitleCard_DeleteTitleParent
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   loc_2CC12
+                bhs.s   S3TitleCard_DeleteTitleParent
                 tst.w   $3E(a0)
-                beq.s   loc_2CBFC
+                beq.s   S3TitleCard_TryReloadSpikesAndSprings
                 st      (End_of_level_flag).w           ; If in-level, set end of title card flag. No need to reload PLCs
-                bra.s   loc_2CC08
+                bra.s   S3TitleCard_LoadEnemyAndAnimalArt
 ; ---------------------------------------------------------------------------
 
-loc_2CBFC:
+S3TitleCard_TryReloadSpikesAndSprings:
                 lea     (PLC_SpikesSprings).l,a1        ; Reload spikes
                 jsr     (Load_PLC_Raw).l
 
-loc_2CC08:
+S3TitleCard_LoadEnemyAndAnimalArt:
                 jsr     LoadEnemyArt(pc)                ; Load animals and enemies
                 jsr     (PLCLoad_AnimalsAndExplosion).l
 
-loc_2CC12:
+S3TitleCard_DeleteTitleParent:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Obj_TitleCardRedBanner:
                 movea.w parent2(a0),a1
                 move.w  $32(a1),d0
-                beq.s   loc_2CC40
+                beq.s   S3TitleCard_MoveBannerDownToTarget
                 tst.b   render_flags(a0)
-                bmi.s   loc_2CC32
+                bmi.s   S3TitleCard_MoveBannerUpAfterDelay
                 subq.w  #1,$30(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2CC32:
+; Use the low byte of the departure clock for the delay
+S3TitleCard_MoveBannerUpAfterDelay:
                 cmp.b   $28(a0),d0
-                blo.s   loc_2CC56
+                blo.s   S3TitleCard_SetBannerHeightAndDraw
                 subi.w  #$20,y_pos(a0)
-                bra.s   loc_2CC56
+                bra.s   S3TitleCard_SetBannerHeightAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_2CC40:
+S3TitleCard_MoveBannerDownToTarget:
                 move.w  y_pos(a0),d0
                 cmp.w   $46(a0),d0
-                beq.s   loc_2CC56
+                beq.s   S3TitleCard_SetBannerHeightAndDraw
                 addi.w  #$10,d0
                 move.w  d0,y_pos(a0)
                 st      $34(a1)
 
-loc_2CC56:
+S3TitleCard_SetBannerHeightAndDraw:
                 move.b  #$70,height_pixels(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -200,29 +202,29 @@ Obj_TitleCardName:
 Obj_TitleCardElement:
                 movea.w parent2(a0),a1
                 move.w  $32(a1),d0
-                beq.s   loc_2CC98
+                beq.s   S3TitleCard_MoveTextLeftToTarget
                 tst.b   render_flags(a0)
-                bmi.s   loc_2CC8A
+                bmi.s   S3TitleCard_MoveTextRightAfterDelay
                 subq.w  #1,$30(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2CC8A:
+S3TitleCard_MoveTextRightAfterDelay:
                 cmp.b   $28(a0),d0
-                blo.s   loc_2CCAE
+                blo.s   S3TitleCard_QueueGenericTitleElementDraw
                 addi.w  #$20,x_pos(a0)
-                bra.s   loc_2CCAE
+                bra.s   S3TitleCard_QueueGenericTitleElementDraw
 ; ---------------------------------------------------------------------------
 
-loc_2CC98:
+S3TitleCard_MoveTextLeftToTarget:
                 move.w  x_pos(a0),d0
                 cmp.w   $46(a0),d0
-                beq.s   loc_2CCAE
+                beq.s   S3TitleCard_QueueGenericTitleElementDraw
                 subi.w  #$10,d0
                 move.w  d0,x_pos(a0)
                 st      $34(a1)
 
-loc_2CCAE:
+S3TitleCard_QueueGenericTitleElementDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -230,11 +232,11 @@ Obj_TitleCardAct:
                 move.l  #Obj_TitleCardElement,(a0)
                 move.b  (Apparent_zone).w,d0
                 cmpi.b  #$A,d0
-                beq.s   loc_2CCCA
+                beq.s   S3TitleCard_AckAndDeleteSuppressedAct
                 cmpi.b  #$C,d0
                 bne.s   Obj_TitleCardElement
 
-loc_2CCCA:
+S3TitleCard_AckAndDeleteSuppressedAct:
                 movea.w parent2(a0),a1                  ; Sky Sanctuary and Doomsday do not have act numbers
                 subq.w  #1,$30(a1)
                 jmp     (Delete_Current_Sprite).l
@@ -244,29 +246,29 @@ Obj_TitleCardElement2:
                 clr.b   render_flags(a0)                ; I'm not entirely sure what this is used for
                 movea.w parent2(a0),a1
                 move.w  $32(a1),d0
-                beq.s   loc_2CD06
+                beq.s   S3TitleCard_MoveAltTitleLeftToTarget
                 cmpi.w  #$20C,x_pos(a0)
-                blo.s   loc_2CCF8
+                blo.s   S3TitleCard_MoveAltTitleRightAfterDelay
                 subq.w  #1,$30(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2CCF8:
+S3TitleCard_MoveAltTitleRightAfterDelay:
                 cmp.b   $28(a0),d0
-                blo.s   loc_2CD1C
+                blo.s   S3TitleCard_DrawAltTitle
                 addi.w  #$20,x_pos(a0)
-                bra.s   loc_2CD1C
+                bra.s   S3TitleCard_DrawAltTitle
 ; ---------------------------------------------------------------------------
 
-loc_2CD06:
+S3TitleCard_MoveAltTitleLeftToTarget:
                 move.w  x_pos(a0),d0
                 cmp.w   $46(a0),d0
-                beq.s   loc_2CD1C
+                beq.s   S3TitleCard_DrawAltTitle
                 subi.w  #$10,d0
                 move.w  d0,x_pos(a0)
                 st      $34(a1)
 
-loc_2CD1C:
+S3TitleCard_DrawAltTitle:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 TitleCard_LevelGfx:

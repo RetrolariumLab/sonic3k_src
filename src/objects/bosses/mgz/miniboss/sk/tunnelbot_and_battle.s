@@ -155,7 +155,7 @@ loc_885FC:
 loc_88604:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
-                jmp     (loc_85C7E).l
+                jmp     (SKEndCamera_TrackMinXAndCheckY).l
 ; ---------------------------------------------------------------------------
 
 loc_88616:

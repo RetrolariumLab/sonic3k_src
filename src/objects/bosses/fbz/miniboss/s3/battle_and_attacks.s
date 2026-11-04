@@ -43,7 +43,7 @@ loc_4C976:
 ; ---------------------------------------------------------------------------
 
 loc_4C9C4:
-                jmp     (loc_541A2).l
+                jmp     (S3EndCamera_TrackMinXAndCheckY).l
 ; ---------------------------------------------------------------------------
 
 loc_4C9CA:
@@ -96,7 +96,7 @@ loc_4CA30:
                 jsr     CreateChild6_Simple(pc)
                 lea     ChildObjDat_4D4F6(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                lea     (ChildObjDat_54AC4).l,a2
+                lea     (S3Capsule_FiveReleasedFragmentChildList).l,a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
