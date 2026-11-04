@@ -65,43 +65,43 @@ Osc_Data:
 
 OscillateNumDo:
                 tst.w   (Competition_mode).w
-                bne.s   loc_774A
+                bne.s   SKEnv_BeginOscillatorUpdates
                 cmpi.b  #6,(Player_1+routine).w
                 bhs.s   OscillateNumDo_Return
 
-loc_774A:
+SKEnv_BeginOscillatorUpdates:
                 lea     (Oscillating_table).w,a1
                 lea     (Osc_Data2).l,a2
                 move.w  (a1)+,d3
                 moveq   #bytesToLcnt(Osc_Data2_end-Osc_Data2),d1
 
-loc_7758:
+SKEnv_StepOscillator:
                 move.w  (a2)+,d2
                 move.w  (a2)+,d4
                 btst    d1,d3
-                bne.s   loc_7774
+                bne.s   SKEnv_StepOscillatorReverse
                 move.w  2(a1),d0
                 add.w   d2,d0
                 move.w  d0,2(a1)
                 add.w   d0,(a1)
                 cmp.b   (a1),d4
-                bhi.s   loc_7786
+                bhi.s   SKEnv_FinishOscillatorRecord
                 bset    d1,d3
-                bra.s   loc_7786
+                bra.s   SKEnv_FinishOscillatorRecord
 ; ---------------------------------------------------------------------------
 
-loc_7774:
+SKEnv_StepOscillatorReverse:
                 move.w  2(a1),d0
                 sub.w   d2,d0
                 move.w  d0,2(a1)
                 add.w   d0,(a1)
                 cmp.b   (a1),d4
-                bls.s   loc_7786
+                bls.s   SKEnv_FinishOscillatorRecord
                 bclr    d1,d3
 
-loc_7786:
+SKEnv_FinishOscillatorRecord:
                 addq.w  #4,a1
-                dbf     d1,loc_7758
+                dbf     d1,SKEnv_StepOscillator
                 move.w  d3,(Oscillating_table).w
 
 OscillateNumDo_Return:
@@ -132,14 +132,14 @@ Osc_Data2_end:
 
 ChangeRingFrame:
                 subq.b  #1,(Rings_frame_timer).w
-                bpl.s   loc_77E8
+                bpl.s   SKEnv_TryStepSpillRingAnim
                 move.b  #7,(Rings_frame_timer).w
                 addq.b  #1,(Rings_frame).w
                 andi.b  #3,(Rings_frame).w
 
-loc_77E8:
+SKEnv_TryStepSpillRingAnim:
                 tst.b   (Ring_spill_anim_counter).w
-                beq.s   loc_780A
+                beq.s   SKEnv_StepVineAngle
                 moveq   #0,d0
                 move.b  (Ring_spill_anim_counter).w,d0
                 add.w   (Ring_spill_anim_accum).w,d0
@@ -149,7 +149,7 @@ loc_77E8:
                 move.b  d0,(Ring_spill_anim_frame).w
                 subq.b  #1,(Ring_spill_anim_counter).w
 
-loc_780A:
+SKEnv_StepVineAngle:
                 addi.w  #$180,(AIZ_vine_angle).w
                 rts
 ; End of function ChangeRingFrame

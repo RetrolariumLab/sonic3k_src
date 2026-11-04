@@ -18,18 +18,18 @@ UpdateWaterSurface:
 ; ---------------------------------------------------------------------------
 ; unused leftover from Sonic 2
                 tst.b   (Water_flag).w
-                beq.s   locret_50DC
+                beq.s   S3Water_RetainedSurfaceReturn
                 move.w  (Camera_X_pos).w,d1
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_50D2
+                beq.s   S3Water_RetainedBiasSurface
                 addi.w  #$20,d1
 
-loc_50D2:
+S3Water_RetainedBiasSurface:
                 move.w  d1,d0
                 addi.w  #$60,d0
                 addi.w  #$120,d1
 
-locret_50DC:
+S3Water_RetainedSurfaceReturn:
                 rts
 ; End of function UpdateWaterSurface
 
@@ -37,49 +37,49 @@ locret_50DC:
 
 Handle_Onscreen_Water_Height:
                 tst.b   (Water_flag).w
-                beq.w   loc_5146
+                beq.w   S3Water_ApplyGroundSurfaceMotion
                 tst.b   (Deform_lock).w
-                bne.s   loc_50FC
+                bne.s   S3Water_SetCurrentFromMeanHeight
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_50FC
+                bhs.s   S3Water_SetCurrentFromMeanHeight
                 bsr.w   S3HCZ_ApplyWaterTunnelCurrents
                 bsr.w   DynamicWaterHeight
 
-loc_50FC:
+S3Water_SetCurrentFromMeanHeight:
                 clr.b   (Water_full_screen_flag).w
                 moveq   #0,d0
                 add.w   (Mean_water_level).w,d0
                 move.w  d0,(Water_level).w
                 cmpi.w  #$100,(Current_zone_and_act).w
-                bne.s   loc_511A
+                bne.s   S3Water_ClassifyCameraCoverage
                 cmpi.w  #$900,(Camera_X_pos).w
-                blo.s   loc_5130
+                blo.s   S3Water_DisableSplitAndReturn
 
-loc_511A:
+S3Water_ClassifyCameraCoverage:
                 move.w  (Water_level).w,d0
                 sub.w   (Camera_Y_pos).w,d0
-                beq.s   loc_512A
-                bcc.s   loc_5138
+                beq.s   S3Water_MarkFullScreenWater
+                bcc.s   S3Water_CapSplitCounter
                 tst.w   d0
-                bpl.s   loc_5138
+                bpl.s   S3Water_CapSplitCounter
 
-loc_512A:
+S3Water_MarkFullScreenWater:
                 move.b  #1,(Water_full_screen_flag).w
 
-loc_5130:
+S3Water_DisableSplitAndReturn:
                 move.b  #-1,(H_int_counter).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5138:
+S3Water_CapSplitCounter:
                 cmpi.w  #$DF,d0
-                blo.s   loc_5142
+                blo.s   S3Water_StoreSplitCounter
                 move.w  #$FF,d0
 
-loc_5142:
+S3Water_StoreSplitCounter:
                 move.b  d0,(H_int_counter).w
 
-loc_5146:
+S3Water_ApplyGroundSurfaceMotion:
                 bsr.w   S3Surface_DispatchBothPlayers
                 rts
 ; End of function Handle_Onscreen_Water_Height
@@ -90,52 +90,52 @@ loc_5146:
                 move.w  (Mean_water_level).w,(Water_level).w
                 move.l  #HInt3,(H_int_addr).w
                 cmpi.w  #$1000,(V_blank_cycles).w
-                blo.s   loc_516E
+                blo.s   S3Water_RetainedClassifyWrapSplit
                 move.l  #HInt4,(H_int_addr).w
 
-loc_516E:
+S3Water_RetainedClassifyWrapSplit:
                 move.w  (Water_level).w,d0
                 sub.w   (Camera_Y_pos).w,d0
-                beq.s   loc_5186
-                bcc.s   loc_51C2
+                beq.s   S3Water_RetainedMarkFullWater
+                bcc.s   S3Water_RetainedCapNormalSplit
                 tst.w   d0
-                bpl.s   loc_51C2
+                bpl.s   S3Water_RetainedCapNormalSplit
                 addi.w  #$1E0,d0
-                beq.s   loc_5186
-                bcs.s   loc_5194
+                beq.s   S3Water_RetainedMarkFullWater
+                bcs.s   S3Water_RetainedCapReverseSplit
 
-loc_5186:
+S3Water_RetainedMarkFullWater:
                 move.b  #1,(Water_full_screen_flag).w
                 move.b  #-1,(H_int_counter).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5194:
+S3Water_RetainedCapReverseSplit:
                 cmpi.w  #$DF,d0
-                blo.s   loc_519E
+                blo.s   S3Water_RetainedInstallReverseHInt
                 move.w  #$FF,d0
 
-loc_519E:
+S3Water_RetainedInstallReverseHInt:
                 move.b  d0,(H_int_counter).w
                 move.b  #1,(Water_full_screen_flag).w
                 move.l  #HInt5,(H_int_addr).w
                 cmpi.w  #$1000,(V_blank_cycles).w
-                blo.s   loc_51C0
+                blo.s   S3Water_RetainedJoinSurfaceMotion
                 move.l  #HInt6,(H_int_addr).w
 
-loc_51C0:
-                bra.s   loc_51D0
+S3Water_RetainedJoinSurfaceMotion:
+                bra.s   S3Water_RetainedApplySurfaceMotion
 ; ---------------------------------------------------------------------------
 
-loc_51C2:
+S3Water_RetainedCapNormalSplit:
                 cmpi.w  #$DF,d0
-                blo.s   loc_51CC
+                blo.s   S3Water_RetainedStoreNormalSplit
                 move.w  #$FF,d0
 
-loc_51CC:
+S3Water_RetainedStoreNormalSplit:
                 move.b  d0,(H_int_counter).w
 
-loc_51D0:
+S3Water_RetainedApplySurfaceMotion:
                 bsr.w   S3Surface_DispatchBothPlayers
                 rts
 ; ---------------------------------------------------------------------------
@@ -157,14 +157,14 @@ DynamicWaterHeight:
                 move.b  (Water_speed).w,d1
                 move.w  (Target_water_level).w,d0
                 sub.w   (Mean_water_level).w,d0
-                beq.s   locret_5244
-                bcc.s   loc_5240
+                beq.s   S3Water_StepHeightReturn
+                bcc.s   S3Water_StepMeanHeight
                 neg.w   d1
 
-loc_5240:
+S3Water_StepMeanHeight:
                 add.w   d1,(Mean_water_level).w
 
-locret_5244:
+S3Water_StepHeightReturn:
                 rts
 ; End of function DynamicWaterHeight
 
@@ -210,65 +210,65 @@ DynamicWaterHeight_AIZ1:
 
 DynamicWaterHeight_AIZ2:
                 cmpi.w  #$820,(Camera_target_max_Y_pos).w
-                beq.s   locret_5306
+                beq.s   S3Water_AIZ2_WaterEventReturn
                 cmpi.w  #$2440,(Camera_X_pos).w
-                bhs.s   loc_52AE
+                bhs.s   S3Water_AIZ2_TryLatchWaterTrigger
                 cmpi.w  #$618,(Target_water_level).w
-                bne.s   locret_5306
+                bne.s   S3Water_AIZ2_WaterEventReturn
                 move.w  #$528,(Target_water_level).w
                 move.b  #2,(Water_speed).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52AE:
+S3Water_AIZ2_TryLatchWaterTrigger:
                 tst.b   (Level_trigger_array).w
-                bne.s   loc_52C2
+                bne.s   S3Water_AIZ2_TryRaiseWater
                 cmpi.w  #$2850,(Camera_X_pos).w
-                blo.s   locret_5306
+                blo.s   S3Water_AIZ2_WaterEventReturn
                 move.b  #1,(Level_trigger_array).w
 
-loc_52C2:
+S3Water_AIZ2_TryRaiseWater:
                 cmpi.w  #$618,(Target_water_level).w
-                beq.s   locret_5306
+                beq.s   S3Water_AIZ2_WaterEventReturn
                 cmpi.w  #$2900,(Camera_X_pos).w
-                bhs.s   loc_52EC
+                bhs.s   S3Water_AIZ2_BeginLayoutClear
                 move.w  #-1,(Screen_shake_flag).w
                 jsr     (AllocateObject).l
-                bne.s   loc_52EC
-                move.l  #Obj_5308,(a1)
+                bne.s   S3Water_AIZ2_BeginLayoutClear
+                move.l  #ScreenShakeDelay_CountDownToStop,(a1)
                 move.b  #180,anim_frame_timer(a1)
 
-loc_52EC:
+S3Water_AIZ2_BeginLayoutClear:
                 lea     (Level_layout_main+$1C).w,a3
                 moveq   #4-1,d1
 
-loc_52F2:
+S3Water_AIZ2_ClearLayoutAndSetTarget:
                 movea.w (a3),a1
                 move.b  #0,$4E(a1)
                 addq.w  #4,a3
-                dbf     d1,loc_52F2
+                dbf     d1,S3Water_AIZ2_ClearLayoutAndSetTarget
                 move.w  #$618,(Target_water_level).w
 
-locret_5306:
+S3Water_AIZ2_WaterEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_5308:
+ScreenShakeDelay_CountDownToStop:
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_5310
+                beq.s   ScreenShakeDelay_ClearFlagAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5310:
+ScreenShakeDelay_ClearFlagAndDelete:
                 move.w  #0,(Screen_shake_flag).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_HCZ1:
-                lea     (word_5324).l,a1
-                bra.s   loc_537C
+                lea     (S3Water_HCZ1HeightByX).l,a1
+                bra.s   S3Water_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_5324:
+S3Water_HCZ1HeightByX:
                 dc.w    $8500,  $900
                 dc.w    $8680, $2A00
                 dc.w    $8680, $3500
@@ -277,15 +277,15 @@ word_5324:
 
 DynamicWaterHeight_HCZ2:
                 tst.b   (_unkFAA2).w
-                beq.s   loc_533C
+                beq.s   S3Water_SelectHCZ2HeightTable
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_533C:
-                lea     (word_5344).l,a1
-                bra.s   loc_537C
+S3Water_SelectHCZ2HeightTable:
+                lea     (S3Water_HCZ2HeightByX).l,a1
+                bra.s   S3Water_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_5344:
+S3Water_HCZ2HeightByX:
                 dc.w    $700, $3E00
                 dc.w    $7E0, $FFFF
 ; ---------------------------------------------------------------------------
@@ -295,10 +295,10 @@ DynamicWaterHeight_Null:
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_LBZ1:
-                lea     (word_5356).l,a1
-                bra.s   loc_537C
+                lea     (S3Water_LBZ1HeightByX).l,a1
+                bra.s   S3Water_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_5356:
+S3Water_LBZ1HeightByX:
                 dc.w    $8B00,  $E00
                 dc.w    $8A00, $1980
                 dc.w    $8A00, $2340
@@ -312,26 +312,27 @@ DynamicWaterHeight_Null2:
 
 DynamicWaterHeight_Ending:
                 cmpi.w  #$1DE0,(Camera_X_pos).w
-                blo.s   locret_537A
+                blo.s   S3Water_EndingHeightReturn
                 move.w  #$510,(Target_water_level).w
 
-locret_537A:
+S3Water_EndingHeightReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_537C:
+S3Water_ReadCameraXForHeight:
                 move.w  (Camera_X_pos).w,d0
 
-loc_5380:
+; Use the first record whose unsigned upper X bound includes the camera. Bit 15 of the height sets it immediately
+S3Water_FindHeightAtCameraX:
                 move.l  (a1)+,d1
                 cmp.w   d1,d0
-                bhi.s   loc_5380
+                bhi.s   S3Water_FindHeightAtCameraX
                 swap    d1
                 tst.w   d1
-                bpl.s   loc_5394
+                bpl.s   S3Water_StoreTargetHeight
                 andi.w  #$7FFF,d1
                 move.w  d1,(Mean_water_level).w
 
-loc_5394:
+S3Water_StoreTargetHeight:
                 move.w  d1,(Target_water_level).w
                 rts

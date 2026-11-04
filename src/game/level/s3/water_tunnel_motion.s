@@ -7,11 +7,11 @@
 ; Select the tunnel flag for the player mode. The matched rectangle allows one-pixel steering across the current
 S3HCZ_ApplyWaterTunnelCurrents:
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_54A4
+                bne.w   S3Tunnel_TunnelReturn
                 cmpi.b  #1,(Current_zone).w
-                bne.w   locret_54A4
+                bne.w   S3Tunnel_TunnelReturn
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_53D2
+                beq.s   S3Tunnel_BindSoloTailsTunnel
                 lea     (WindTunnel_flag).w,a3
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
@@ -24,7 +24,8 @@ S3HCZ_ApplyWaterTunnelCurrents:
                 bra.s   HCZ_WaterTunnels
 ; ---------------------------------------------------------------------------
 
-loc_53D2:
+; Mode 2 reads P1's actor and controls but uses the P2 tunnel flag
+S3Tunnel_BindSoloTailsTunnel:
                 lea     (WindTunnel_flag_P2).w,a3
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
@@ -36,29 +37,29 @@ loc_53D2:
 HCZ_WaterTunnels:
                 lea     (HCZ1_WaterTunLocs).l,a2
                 tst.b   (Current_act).w
-                beq.s   loc_53F2
+                beq.s   S3Tunnel_BeginTunnelScan
                 lea     (HCZ2_WaterTunLocs).l,a2
 
-loc_53F2:
+S3Tunnel_BeginTunnelScan:
                 move.w  (a2)+,d2
 
-loc_53F4:
+S3Tunnel_TryTunnelRect:
                 move.w  x_pos(a1),d0
                 cmp.w   (a2),d0
-                blo.w   loc_5490
+                blo.w   S3Tunnel_NextTunnelRectOrExit
                 cmp.w   4(a2),d0
-                bhs.w   loc_5490
+                bhs.w   S3Tunnel_NextTunnelRectOrExit
                 move.w  y_pos(a1),d1
                 cmp.w   2(a2),d1
-                blo.w   loc_5490
+                blo.w   S3Tunnel_NextTunnelRectOrExit
                 cmp.w   6(a2),d1
-                bhs.s   loc_5490
+                bhs.s   S3Tunnel_NextTunnelRectOrExit
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_54A2
+                bhs.w   S3Tunnel_ClearTunnelFlag
                 btst    d5,(_unkF7C7).w
-                bne.s   locret_5478
+                bne.s   S3Tunnel_NudgeYReturn
                 tst.b   object_control(a1)
-                bne.s   loc_54A2
+                bne.s   S3Tunnel_ClearTunnelFlag
                 move.b  #1,(a3)
                 move.w  8(a2),d0
                 move.w  d0,x_vel(a1)
@@ -73,45 +74,45 @@ loc_53F4:
                 move.b  #$F,anim(a1)
                 bset    #Status_InAir,status(a1)
                 tst.b   $C(a2)
-                bne.s   loc_547A
+                bne.s   S3Tunnel_TryNudgeLeft
                 btst    #button_up,d6
-                beq.s   loc_546E
+                beq.s   S3Tunnel_TryNudgeDown
                 subq.w  #1,y_pos(a1)
 
-loc_546E:
+S3Tunnel_TryNudgeDown:
                 btst    #button_down,d6
-                beq.s   locret_5478
+                beq.s   S3Tunnel_NudgeYReturn
                 addq.w  #1,y_pos(a1)
 
-locret_5478:
+S3Tunnel_NudgeYReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_547A:
+S3Tunnel_TryNudgeLeft:
                 btst    #button_left,d6
-                beq.s   loc_5484
+                beq.s   S3Tunnel_TryNudgeRight
                 subq.w  #1,x_pos(a1)
 
-loc_5484:
+S3Tunnel_TryNudgeRight:
                 btst    #button_right,d6
-                beq.s   locret_548E
+                beq.s   S3Tunnel_NudgeXReturn
                 addq.w  #1,x_pos(a1)
 
-locret_548E:
+S3Tunnel_NudgeXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5490:
+S3Tunnel_NextTunnelRectOrExit:
                 adda.w  #$E,a2
-                dbf     d2,loc_53F4
+                dbf     d2,S3Tunnel_TryTunnelRect
                 tst.b   (a3)
-                beq.s   locret_54A4
+                beq.s   S3Tunnel_TunnelReturn
                 move.b  #$1A,anim(a1)
 
-loc_54A2:
+S3Tunnel_ClearTunnelFlag:
                 clr.b   (a3)
 
-locret_54A4:
+S3Tunnel_TunnelReturn:
                 rts
 ; End of function HCZ_WaterTunnels
 
@@ -143,13 +144,13 @@ HCZ2_WaterTunLocs:
 ; Dispatch forced ground motion for Hydrocity 2 and IceCap 1
 S3Surface_DispatchBothPlayers:
                 cmpi.w  #$101,(Current_zone_and_act).w
-                beq.s   loc_55AA
+                beq.s   S3Ground_HCZ2_ApplyCurrentToBoth
                 cmpi.w  #$500,(Current_zone_and_act).w
-                beq.s   loc_5612
+                beq.s   S3Ground_ICZ1_ApplySkidToBoth
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55AA:
+S3Ground_HCZ2_ApplyCurrentToBoth:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
                 bsr.s   S3HCZ2_ApplyChunkGroundCurrent
@@ -162,9 +163,9 @@ loc_55AA:
 ; On the selected chunks, force inertia toward negative eight pixels per frame
 S3HCZ2_ApplyChunkGroundCurrent:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_55F8
+                bne.s   S3Ground_HCZ2_ReleaseCurrent
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   loc_55F8
+                beq.s   S3Ground_HCZ2_ReleaseCurrent
                 lea     (Level_layout_header).w,a2
                 move.w  y_pos(a1),d0
                 lsr.w   #5,d0
@@ -175,32 +176,32 @@ S3HCZ2_ApplyChunkGroundCurrent:
                 add.w   d1,d0
                 movea.w d0,a2
                 move.b  (a2),d0
-                lea     byte_574E(pc),a2
-                moveq   #(byte_574E-byte_5744)-1,d1
+                lea     S3Env_ICZ1SkidChunkIds(pc),a2
+                moveq   #(S3Env_ICZ1SkidChunkIds-S3Env_HCZ2CurrentChunkIds)-1,d1
 
-loc_55F0:
+S3Ground_HCZ2_FindCurrentChunk:
                 cmp.b   -(a2),d0
-                dbeq    d1,loc_55F0
-                beq.s   loc_560C
+                dbeq    d1,S3Ground_HCZ2_FindCurrentChunk
+                beq.s   S3Ground_HCZ2_SetLeftCurrentTarget
 
-loc_55F8:
+S3Ground_HCZ2_ReleaseCurrent:
                 tst.b   status_secondary(a1)
-                bpl.s   locret_560A
+                bpl.s   S3Ground_HCZ2_ReleaseReturn
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-locret_560A:
+S3Ground_HCZ2_ReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_560C:
+S3Ground_HCZ2_SetLeftCurrentTarget:
                 moveq   #-8,d0
-                bra.w   loc_567E
+                bra.w   S3Ground_StepTowardSpeedTarget
 ; End of function S3HCZ2_ApplyChunkGroundCurrent
 
 ; ---------------------------------------------------------------------------
 
-loc_5612:
+S3Ground_ICZ1_ApplySkidToBoth:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
                 bsr.s   S3ICZ1_ApplyChunkGroundSkid
@@ -212,9 +213,9 @@ loc_5612:
 ; The chunk selects the direction and target speed. A zero target takes the shared friction path
 S3ICZ1_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_5660
+                bne.s   S3Ground_ICZ1_ReleaseSkid
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_5660
+                bne.s   S3Ground_ICZ1_ReleaseSkid
                 lea     (Level_layout_header).w,a2
                 move.w  y_pos(a1),d0
                 lsr.w   #5,d0
@@ -226,103 +227,106 @@ S3ICZ1_ApplyChunkGroundSkid:
                 movea.w d0,a2
                 move.b  (a2),d0
                 lea     WaterTransition_AIZ1(pc),a2
-                moveq   #(WaterTransition_AIZ1-byte_574E)-1,d1
+                moveq   #(WaterTransition_AIZ1-S3Env_ICZ1SkidChunkIds)-1,d1
 
-loc_5658:
+S3Ground_ICZ1_FindSkidChunk:
                 cmp.b   -(a2),d0
-                dbeq    d1,loc_5658
-                beq.s   loc_5674
+                dbeq    d1,S3Ground_ICZ1_FindSkidChunk
+                beq.s   S3Ground_ICZ1_ReadSkidSpeedTarget
 
-loc_5660:
+S3Ground_ICZ1_ReleaseSkid:
                 tst.b   status_secondary(a1)
-                bpl.s   locret_5672
+                bpl.s   S3Ground_ICZ1_ReleaseReturn
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-locret_5672:
+S3Ground_ICZ1_ReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5674:
-                lea     (byte_573A).l,a2
+S3Ground_ICZ1_ReadSkidSpeedTarget:
+                lea     (S3Env_ICZChunkSpeedTargets).l,a2
                 move.b  (a2,d1.w),d0
 
-loc_567E:
-                beq.s   loc_56CA
+; The zero flag on entry selects the input-controlled path
+S3Ground_StepTowardSpeedTarget:
+                beq.s   S3Ground_TryInputLeft
                 move.b  ground_vel(a1),d1
                 tst.b   d0
-                bpl.s   loc_5694
+                bpl.s   S3Ground_TryIncreaseGroundSpeed
                 cmp.b   d0,d1
-                ble.s   loc_569E
+                ble.s   S3Ground_SetFacingFromOldSpeed
                 subi.w  #$40,ground_vel(a1)
-                bra.s   loc_569E
+                bra.s   S3Ground_SetFacingFromOldSpeed
 ; ---------------------------------------------------------------------------
 
-loc_5694:
+S3Ground_TryIncreaseGroundSpeed:
                 cmp.b   d0,d1
-                bge.s   loc_569E
+                bge.s   S3Ground_SetFacingFromOldSpeed
                 addi.w  #$40,ground_vel(a1)
 
-loc_569E:
+; Use the velocity high byte read before applying the speed step
+S3Ground_SetFacingFromOldSpeed:
                 bclr    #Status_Facing,status(a1)
                 tst.b   d1
-                bpl.s   loc_56AE
+                bpl.s   S3Ground_PickCurrentOrSkidAnim
                 bset    #Status_Facing,status(a1)
 
-loc_56AE:
+S3Ground_PickCurrentOrSkidAnim:
                 move.b  #$1B,anim(a1)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_56C2
+                bne.s   S3Ground_LatchInertiaAndReturn
                 move.b  #$19,anim(a1)
 
-loc_56C2:
+S3Ground_LatchInertiaAndReturn:
                 ori.b   #$80,status_secondary(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56CA:
+S3Ground_TryInputLeft:
                 move.w  #4,d1
                 move.w  ground_vel(a1),d0
                 btst    #button_left,d2
-                beq.s   loc_56EC
+                beq.s   S3Ground_TryInputRight
                 move.b  #0,anim(a1)
                 bset    #Status_Facing,status(a1)
                 sub.w   d1,d0
                 tst.w   d0
-                bpl.s   loc_56EC
+                bpl.s   S3Ground_TryInputRight
                 sub.w   d1,d0
 
-loc_56EC:
+S3Ground_TryInputRight:
                 btst    #button_right,d2
-                beq.s   loc_5706
+                beq.s   S3Ground_DecayUnforcedInertia
                 move.b  #0,anim(a1)
                 bclr    #Status_Facing,status(a1)
                 add.w   d1,d0
                 tst.w   d0
-                bmi.s   loc_5706
+                bmi.s   S3Ground_DecayUnforcedInertia
                 add.w   d1,d0
 
-loc_5706:
+S3Ground_DecayUnforcedInertia:
                 move.w  #4,d1
                 tst.w   d0
-                beq.s   loc_572E
-                bmi.s   loc_5720
+                beq.s   S3Ground_StoreInertiaAndLatch
+                bmi.s   S3Ground_DecayNegativeInertia
                 sub.w   d1,d0
-                bhi.s   loc_571E
+                bhi.s   S3Ground_CommitPositiveDecay
                 move.w  #0,d0
                 move.b  #5,anim(a1)
 
-loc_571E:
-                bra.s   loc_572E
+S3Ground_CommitPositiveDecay:
+                bra.s   S3Ground_StoreInertiaAndLatch
 ; ---------------------------------------------------------------------------
 
-loc_5720:
+; Keep the result only on BHI after the addition. Otherwise reset velocity and animation
+S3Ground_DecayNegativeInertia:
                 add.w   d1,d0
-                bhi.s   loc_572E
+                bhi.s   S3Ground_StoreInertiaAndLatch
                 move.w  #0,d0
                 move.b  #5,anim(a1)
 
-loc_572E:
+S3Ground_StoreInertiaAndLatch:
                 move.w  d0,ground_vel(a1)
                 ori.b   #$80,status_secondary(a1)
                 rts

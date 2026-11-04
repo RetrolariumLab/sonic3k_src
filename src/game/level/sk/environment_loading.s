@@ -6,16 +6,16 @@
 
 LoadLevelLoadBlock:
                 move.w  (Current_zone_and_act).w,d0
-                bne.s   loc_782A
+                bne.s   SKEnv_QueueLevelArtFromRecord
                 cmpi.w  #2,(Player_mode).w
-                bhs.s   loc_7826
+                bhs.s   SKEnv_SelectAIZMainLoadRecord
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_782A
+                beq.s   SKEnv_QueueLevelArtFromRecord
 
-loc_7826:
+SKEnv_SelectAIZMainLoadRecord:
                 move.w  #$D00,d0
 
-loc_782A:
+SKEnv_QueueLevelArtFromRecord:
                 ror.b   #1,d0
                 lsr.w   #4,d0
                 andi.w  #$1F8,d0
@@ -34,19 +34,19 @@ loc_782A:
                 move.l  (a4)+,d0
                 andi.l  #$FFFFFF,d0
                 cmp.l   d0,d7
-                beq.s   loc_7870
+                beq.s   SKEnv_WaitForLevelArtModules
                 movea.l d0,a1
                 move.w  d4,d2
                 jsr     (Queue_Kos_Module).l
 
-loc_7870:
+SKEnv_WaitForLevelArtModules:
                 move.b  #VInt_ID_C,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 bsr.w   Process_Nem_Queue_Init
                 jsr     (Process_Kos_Module_Queue).l
                 tst.b   (Kos_modules_left).w
-                bne.s   loc_7870
+                bne.s   SKEnv_WaitForLevelArtModules
                 rts
 ; End of function LoadLevelLoadBlock
 
@@ -54,27 +54,27 @@ loc_7870:
 
 CheckLevelForWater:
                 cmpi.w  #0,(Current_zone_and_act).w
-                beq.s   loc_78F2
+                beq.s   SKEnv_EnableWaterAndSetHInt
                 cmpi.w  #1,(Current_zone_and_act).w
-                bne.s   loc_78B2
+                bne.s   SKEnv_CheckHCZOrCNZWater
                 cmpi.w  #1,(Apparent_zone_and_act).w
-                bne.s   loc_78F2
+                bne.s   SKEnv_EnableWaterAndSetHInt
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_78F2
+                bne.s   SKEnv_EnableWaterAndSetHInt
 
-loc_78B2:
+SKEnv_CheckHCZOrCNZWater:
                 cmpi.b  #1,(Current_zone).w
-                beq.s   loc_78F2
+                beq.s   SKEnv_EnableWaterAndSetHInt
                 cmpi.w  #$301,(Current_zone_and_act).w
-                bne.s   loc_78CA
+                bne.s   SKEnv_CheckOtherWaterActs
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_78F2
+                bne.s   SKEnv_EnableWaterAndSetHInt
 
-loc_78CA:
+SKEnv_CheckOtherWaterActs:
                 cmpi.w  #$501,(Current_zone_and_act).w
-                beq.s   loc_78F2
+                beq.s   SKEnv_EnableWaterAndSetHInt
                 cmpi.w  #$601,(Current_zone_and_act).w
-                beq.s   loc_78F2
+                beq.s   SKEnv_EnableWaterAndSetHInt
                 move.w  #$1000,d0
                 move.w  d0,(Water_level).w
                 move.w  d0,(Mean_water_level).w
@@ -83,7 +83,7 @@ loc_78CA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_78F2:
+SKEnv_EnableWaterAndSetHInt:
                 move.b  #1,(Water_flag).w
                 move.w  #0,(Competition_mode).w
                 tst.b   (Water_flag).w
@@ -91,13 +91,13 @@ loc_78F2:
                 move.w  #$4EF9,(H_int_jump).w
                 move.l  #HInt2,(H_int_addr).w
                 cmpi.b  #1,(Current_zone).w
-                beq.s   loc_7932
+                beq.s   SKEnv_InitWaterHeightsAndTransition
                 move.l  #HInt3,(H_int_addr).w
                 cmpi.w  #$1000,(V_blank_cycles).w
-                blo.s   loc_7932
+                blo.s   SKEnv_InitWaterHeightsAndTransition
                 move.l  #HInt4,(H_int_addr).w
 
-loc_7932:
+SKEnv_InitWaterHeightsAndTransition:
                 move.l  #WaterTransition_AIZ1,(Water_palette_data_addr).w
                 moveq   #0,d0
                 move.w  (Current_zone_and_act).w,d0
@@ -118,58 +118,58 @@ loc_7932:
 
 LoadWaterPalette:
                 tst.b   (Water_flag).w
-                beq.w   locret_7A20
+                beq.w   SKEnv_WaterPaletteReturn
                 moveq   #PalID_AIZ_Water,d0
                 cmpi.w  #0,(Current_zone_and_act).w
-                beq.w   loc_7A00
+                beq.w   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_AIZ2_Water,d0
                 move.l  #WaterTransition_AIZ2,(Water_palette_data_addr).w
                 cmpi.w  #1,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_HCZ1_Water,d0
                 move.l  #WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
                 cmpi.w  #$100,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_HCZ2_Water,d0
                 move.l  #WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
                 cmpi.w  #$101,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_CNZ_Water,d0
                 move.l  #WaterTransition_CNZ2ICZ2,(Water_palette_data_addr).w
                 cmpi.w  #$301,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_ICZ2_Water,d0
                 move.l  #WaterTransition_CNZ2ICZ2,(Water_palette_data_addr).w
                 cmpi.w  #$501,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_LBZ_Water,d0
                 move.l  #WaterTransition_HCZLBZ1,(Water_palette_data_addr).w
                 cmpi.w  #$600,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 moveq   #PalID_LBZ2_Water,d0
                 move.l  #WaterTransition_LBZ2,(Water_palette_data_addr).w
                 cmpi.w  #$601,(Current_zone_and_act).w
-                beq.s   loc_7A00
+                beq.s   SKEnv_LoadWaterPaletteBanks
                 nop
 
-loc_7A00:
+SKEnv_LoadWaterPaletteBanks:
                 move.w  d0,d1
                 bsr.w   LoadPalette2
                 move.w  d1,d0
                 bsr.w   LoadPalette2_Immediate
                 tst.b   (Last_star_post_hit).w
-                beq.s   loc_7A18
+                beq.s   SKEnv_TryKnuxWaterColors
                 move.b  (Saved_water_full_screen_flag).w,(Water_full_screen_flag).w
 
-loc_7A18:
+SKEnv_TryKnuxWaterColors:
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_7A22
+                beq.s   SKEnv_CopyKnuxWaterTriplet
 
-locret_7A20:
+SKEnv_WaterPaletteReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7A22:
+SKEnv_CopyKnuxWaterTriplet:
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 move.w  d0,d1

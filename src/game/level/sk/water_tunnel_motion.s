@@ -7,11 +7,11 @@
 ; Select the tunnel flag for the player mode. The matched rectangle allows one-pixel steering across the current
 SKHCZ_ApplyWaterTunnelCurrents:
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_705A
+                bne.w   SKTunnel_TunnelReturn
                 cmpi.b  #1,(Current_zone).w
-                bne.w   locret_705A
+                bne.w   SKTunnel_TunnelReturn
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_6F82
+                beq.s   SKTunnel_BindSoloTailsTunnel
                 lea     (WindTunnel_flag).w,a3
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
@@ -24,7 +24,8 @@ SKHCZ_ApplyWaterTunnelCurrents:
                 bra.s   HCZ_WaterTunnels
 ; ---------------------------------------------------------------------------
 
-loc_6F82:
+; Mode 2 reads P1's actor and controls but uses the P2 tunnel flag
+SKTunnel_BindSoloTailsTunnel:
                 lea     (WindTunnel_flag_P2).w,a3
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d6
@@ -36,29 +37,29 @@ loc_6F82:
 HCZ_WaterTunnels:
                 lea     (HCZ1_WaterTunLocs).l,a2
                 tst.b   (Current_act).w
-                beq.s   loc_6FA2
+                beq.s   SKTunnel_BeginTunnelScan
                 lea     (HCZ2_WaterTunLocs).l,a2
 
-loc_6FA2:
+SKTunnel_BeginTunnelScan:
                 move.w  (a2)+,d2
 
-loc_6FA4:
+SKTunnel_TryTunnelRect:
                 move.w  x_pos(a1),d0
                 cmp.w   (a2),d0
-                blo.w   loc_7046
+                blo.w   SKTunnel_NextTunnelRectOrExit
                 cmp.w   4(a2),d0
-                bhs.w   loc_7046
+                bhs.w   SKTunnel_NextTunnelRectOrExit
                 move.w  y_pos(a1),d1
                 cmp.w   2(a2),d1
-                blo.w   loc_7046
+                blo.w   SKTunnel_NextTunnelRectOrExit
                 cmp.w   6(a2),d1
-                bhs.s   loc_7046
+                bhs.s   SKTunnel_NextTunnelRectOrExit
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_7058
+                bhs.w   SKTunnel_ClearTunnelFlag
                 btst    d5,(_unkF7C7).w
-                bne.s   locret_702E
+                bne.s   SKTunnel_NudgeYReturn
                 tst.b   object_control(a1)
-                bne.s   loc_7058
+                bne.s   SKTunnel_ClearTunnelFlag
                 move.b  #1,(a3)
                 move.w  8(a2),d0
                 move.w  d0,x_vel(a1)
@@ -74,45 +75,45 @@ loc_6FA4:
                 bset    #Status_InAir,status(a1)
                 move.b  #0,double_jump_flag(a1)
                 tst.b   $C(a2)
-                bne.s   loc_7030
+                bne.s   SKTunnel_TryNudgeLeft
                 btst    #button_up,d6
-                beq.s   loc_7024
+                beq.s   SKTunnel_TryNudgeDown
                 subq.w  #1,y_pos(a1)
 
-loc_7024:
+SKTunnel_TryNudgeDown:
                 btst    #button_down,d6
-                beq.s   locret_702E
+                beq.s   SKTunnel_NudgeYReturn
                 addq.w  #1,y_pos(a1)
 
-locret_702E:
+SKTunnel_NudgeYReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7030:
+SKTunnel_TryNudgeLeft:
                 btst    #button_left,d6
-                beq.s   loc_703A
+                beq.s   SKTunnel_TryNudgeRight
                 subq.w  #1,x_pos(a1)
 
-loc_703A:
+SKTunnel_TryNudgeRight:
                 btst    #button_right,d6
-                beq.s   locret_7044
+                beq.s   SKTunnel_NudgeXReturn
                 addq.w  #1,x_pos(a1)
 
-locret_7044:
+SKTunnel_NudgeXReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7046:
+SKTunnel_NextTunnelRectOrExit:
                 adda.w  #$E,a2
-                dbf     d2,loc_6FA4
+                dbf     d2,SKTunnel_TryTunnelRect
                 tst.b   (a3)
-                beq.s   locret_705A
+                beq.s   SKTunnel_TunnelReturn
                 move.b  #$1A,anim(a1)
 
-loc_7058:
+SKTunnel_ClearTunnelFlag:
                 clr.b   (a3)
 
-locret_705A:
+SKTunnel_TunnelReturn:
                 rts
 ; End of function HCZ_WaterTunnels
 
@@ -144,15 +145,15 @@ HCZ2_WaterTunLocs:
 ; Dispatch forced ground motion for Hydrocity 2, IceCap 1 and Mushroom Hill
 SKSurface_DispatchBothPlayers:
                 cmpi.w  #$101,(Current_zone_and_act).w
-                beq.s   loc_716A
+                beq.s   SKGround_HCZ2_ApplyCurrentToBoth
                 cmpi.w  #$500,(Current_zone_and_act).w
-                beq.s   loc_71D2
+                beq.s   SKGround_ICZ1_ApplySkidToBoth
                 cmpi.b  #8,(Current_zone).w
-                beq.w   loc_72FA
+                beq.w   SKSOZSkid_ApplyToBothPlayers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_716A:
+SKGround_HCZ2_ApplyCurrentToBoth:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
                 bsr.s   SKHCZ2_ApplyChunkGroundCurrent
@@ -165,9 +166,9 @@ loc_716A:
 ; On the selected chunks, force inertia toward negative eight pixels per frame
 SKHCZ2_ApplyChunkGroundCurrent:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_71B8
+                bne.s   SKGround_HCZ2_ReleaseCurrent
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.s   loc_71B8
+                beq.s   SKGround_HCZ2_ReleaseCurrent
                 lea     (Level_layout_header).w,a2
                 move.w  y_pos(a1),d0
                 lsr.w   #5,d0
@@ -178,32 +179,32 @@ SKHCZ2_ApplyChunkGroundCurrent:
                 add.w   d1,d0
                 movea.w d0,a2
                 move.b  (a2),d0
-                lea     byte_7498(pc),a2
-                moveq   #(byte_7498-byte_748E)-1,d1
+                lea     SKEnv_ICZ1SkidChunkIds(pc),a2
+                moveq   #(SKEnv_ICZ1SkidChunkIds-SKEnv_HCZ2CurrentChunkIds)-1,d1
 
-loc_71B0:
+SKGround_HCZ2_FindCurrentChunk:
                 cmp.b   -(a2),d0
-                dbeq    d1,loc_71B0
-                beq.s   loc_71CC
+                dbeq    d1,SKGround_HCZ2_FindCurrentChunk
+                beq.s   SKGround_HCZ2_SetLeftCurrentTarget
 
-loc_71B8:
+SKGround_HCZ2_ReleaseCurrent:
                 tst.b   status_secondary(a1)
-                bpl.s   locret_71CA
+                bpl.s   SKGround_HCZ2_ReleaseReturn
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-locret_71CA:
+SKGround_HCZ2_ReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_71CC:
+SKGround_HCZ2_SetLeftCurrentTarget:
                 moveq   #-8,d0
-                bra.w   loc_723E
+                bra.w   SKGround_StepTowardSpeedTarget
 ; End of function SKHCZ2_ApplyChunkGroundCurrent
 
 ; ---------------------------------------------------------------------------
 
-loc_71D2:
+SKGround_ICZ1_ApplySkidToBoth:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_held_logical).w,d2
                 bsr.s   SKICZ1_ApplyChunkGroundSkid
@@ -215,9 +216,9 @@ loc_71D2:
 ; The chunk selects the direction and target speed. A zero target takes the shared friction path
 SKICZ1_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_7220
+                bne.s   SKGround_ICZ1_ReleaseSkid
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_7220
+                bne.s   SKGround_ICZ1_ReleaseSkid
                 lea     (Level_layout_header).w,a2
                 move.w  y_pos(a1),d0
                 lsr.w   #5,d0
@@ -228,104 +229,107 @@ SKICZ1_ApplyChunkGroundSkid:
                 add.w   d1,d0
                 movea.w d0,a2
                 move.b  (a2),d0
-                lea     byte_74A2(pc),a2
-                moveq   #(byte_74A2-byte_7498)-1,d1
+                lea     SKEnv_ICZChunkSpeedTargets(pc),a2
+                moveq   #(SKEnv_ICZChunkSpeedTargets-SKEnv_ICZ1SkidChunkIds)-1,d1
 
-loc_7218:
+SKGround_ICZ1_FindSkidChunk:
                 cmp.b   -(a2),d0
-                dbeq    d1,loc_7218
-                beq.s   loc_7234
+                dbeq    d1,SKGround_ICZ1_FindSkidChunk
+                beq.s   SKGround_ICZ1_ReadSkidSpeedTarget
 
-loc_7220:
+SKGround_ICZ1_ReleaseSkid:
                 tst.b   status_secondary(a1)
-                bpl.s   locret_7232
+                bpl.s   SKGround_ICZ1_ReleaseReturn
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
 
-locret_7232:
+SKGround_ICZ1_ReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7234:
-                lea     (byte_74A2).l,a2
+SKGround_ICZ1_ReadSkidSpeedTarget:
+                lea     (SKEnv_ICZChunkSpeedTargets).l,a2
                 move.b  (a2,d1.w),d0
 
-loc_723E:
-                beq.s   loc_728A
+; The zero flag on entry selects the input-controlled path
+SKGround_StepTowardSpeedTarget:
+                beq.s   SKGround_TryInputLeft
                 move.b  ground_vel(a1),d1
                 tst.b   d0
-                bpl.s   loc_7254
+                bpl.s   SKGround_TryIncreaseGroundSpeed
                 cmp.b   d0,d1
-                ble.s   loc_725E
+                ble.s   SKGround_SetFacingFromOldSpeed
                 subi.w  #$40,ground_vel(a1)
-                bra.s   loc_725E
+                bra.s   SKGround_SetFacingFromOldSpeed
 ; ---------------------------------------------------------------------------
 
-loc_7254:
+SKGround_TryIncreaseGroundSpeed:
                 cmp.b   d0,d1
-                bge.s   loc_725E
+                bge.s   SKGround_SetFacingFromOldSpeed
                 addi.w  #$40,ground_vel(a1)
 
-loc_725E:
+; Use the velocity high byte read before applying the speed step
+SKGround_SetFacingFromOldSpeed:
                 bclr    #Status_Facing,status(a1)
                 tst.b   d1
-                bpl.s   loc_726E
+                bpl.s   SKGround_PickCurrentOrSkidAnim
                 bset    #Status_Facing,status(a1)
 
-loc_726E:
+SKGround_PickCurrentOrSkidAnim:
                 move.b  #$1B,anim(a1)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_7282
+                bne.s   SKGround_LatchInertiaAndReturn
                 move.b  #$19,anim(a1)
 
-loc_7282:
+SKGround_LatchInertiaAndReturn:
                 ori.b   #$80,status_secondary(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_728A:
+SKGround_TryInputLeft:
                 move.w  #4,d1
                 move.w  ground_vel(a1),d0
                 btst    #button_left,d2
-                beq.s   loc_72AC
+                beq.s   SKGround_TryInputRight
                 move.b  #0,anim(a1)
                 bset    #Status_Facing,status(a1)
                 sub.w   d1,d0
                 tst.w   d0
-                bpl.s   loc_72AC
+                bpl.s   SKGround_TryInputRight
                 sub.w   d1,d0
 
-loc_72AC:
+SKGround_TryInputRight:
                 btst    #button_right,d2
-                beq.s   loc_72C6
+                beq.s   SKGround_DecayUnforcedInertia
                 move.b  #0,anim(a1)
                 bclr    #Status_Facing,status(a1)
                 add.w   d1,d0
                 tst.w   d0
-                bmi.s   loc_72C6
+                bmi.s   SKGround_DecayUnforcedInertia
                 add.w   d1,d0
 
-loc_72C6:
+SKGround_DecayUnforcedInertia:
                 move.w  #4,d1
                 tst.w   d0
-                beq.s   loc_72EE
-                bmi.s   loc_72E0
+                beq.s   SKGround_StoreInertiaAndLatch
+                bmi.s   SKGround_DecayNegativeInertia
                 sub.w   d1,d0
-                bhi.s   loc_72DE
+                bhi.s   SKGround_CommitPositiveDecay
                 move.w  #0,d0
                 move.b  #5,anim(a1)
 
-loc_72DE:
-                bra.s   loc_72EE
+SKGround_CommitPositiveDecay:
+                bra.s   SKGround_StoreInertiaAndLatch
 ; ---------------------------------------------------------------------------
 
-loc_72E0:
+; Keep the result only on BHI after the addition. Otherwise reset velocity and animation
+SKGround_DecayNegativeInertia:
                 add.w   d1,d0
-                bhi.s   loc_72EE
+                bhi.s   SKGround_StoreInertiaAndLatch
                 move.w  #0,d0
                 move.b  #5,anim(a1)
 
-loc_72EE:
+SKGround_StoreInertiaAndLatch:
                 move.w  d0,ground_vel(a1)
                 ori.b   #$80,status_secondary(a1)
                 rts
@@ -333,7 +337,7 @@ loc_72EE:
 
 ; ---------------------------------------------------------------------------
 
-loc_72FA:
+SKSOZSkid_ApplyToBothPlayers:
                 lea     (Player_1).w,a1
                 move.b  (Ctrl_1_logical).w,d2
                 bsr.s   SKMHZ_ApplyChunkGroundSkid
@@ -345,9 +349,9 @@ loc_72FA:
 ; Gate by chunk and half-chunk, with path-dependent direction. First entry brakes the player and reduces collision radii
 SKMHZ_ApplyChunkGroundSkid:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_734A
+                bne.s   SKSOZSkid_ReleaseAndRestoreRadii
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_734A
+                bne.s   SKSOZSkid_ReleaseAndRestoreRadii
                 lea     (Level_layout_header).w,a2
                 moveq   #$14,d0
                 add.w   y_pos(a1),d0
@@ -359,78 +363,81 @@ SKMHZ_ApplyChunkGroundSkid:
                 add.w   d1,d0
                 movea.w d0,a2
                 move.b  (a2),d0
-                lea     byte_74BD(pc),a2
-                moveq   #(byte_74BD-byte_74AC)-1,d1
+                lea     SKEnv_SOZSkidAndRegionPairs(pc),a2
+                moveq   #(SKEnv_SOZSkidAndRegionPairs-SKEnvironment_SozGroundSkidChunkIdBytes)-1,d1
 
-loc_7342:
+SKSOZSkid_FindChunk:
                 cmp.b   -(a2),d0
-                dbeq    d1,loc_7342
-                beq.s   loc_7384
+                dbeq    d1,SKSOZSkid_FindChunk
+                beq.s   SKSOZSkid_ReadSpeedAndRegion
 
-loc_734A:
+SKSOZSkid_ReleaseAndRestoreRadii:
                 tst.b   status_secondary(a1)
-                bpl.s   locret_7382
+                bpl.s   SKSOZSkid_ReleaseReturn
                 move.w  #5,move_lock(a1)
                 andi.b  #$7F,status_secondary(a1)
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_7382
+                bne.s   SKSOZSkid_ReleaseReturn
                 move.b  default_y_radius(a1),y_radius(a1)
                 move.b  default_x_radius(a1),x_radius(a1)
                 bclr    #Status_Roll,status(a1)
                 bclr    #Status_RollJump,status(a1)
                 move.b  #0,anim(a1)
 
-locret_7382:
+SKSOZSkid_ReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7384:
+SKSOZSkid_ReadSpeedAndRegion:
                 add.w   d1,d1
-                lea     (byte_74BD).l,a2
+                lea     (SKEnv_SOZSkidAndRegionPairs).l,a2
                 move.b  (a2,d1.w),d0
                 move.b  1(a2,d1.w),d1
-                bne.w   loc_7448
+                bne.w   SKSOZSkid_TryLeftHalf
 
-loc_7398:
+; On first contact, damp opposing velocity and clear it for the -8 target
+SKSOZSkid_StepTowardNegative:
                 move.b  ground_vel(a1),d1
                 tst.b   d0
-                bpl.s   loc_73C8
+                bpl.s   SKSOZSkid_StepTowardPositive
                 cmp.b   d0,d1
-                ble.s   loc_73EE
+                ble.s   SKSOZSkid_UpdateFacing
                 subi.w  #$40,ground_vel(a1)
                 tst.b   status_secondary(a1)
-                bmi.s   loc_73EE
+                bmi.s   SKSOZSkid_UpdateFacing
                 tst.w   ground_vel(a1)
-                bmi.s   loc_73EE
+                bmi.s   SKSOZSkid_UpdateFacing
                 asr     ground_vel(a1)
                 cmpi.b  #-8,d0
-                bne.s   loc_73EE
+                bne.s   SKSOZSkid_UpdateFacing
                 move.w  #0,ground_vel(a1)
-                bra.s   loc_73EE
+                bra.s   SKSOZSkid_UpdateFacing
 ; ---------------------------------------------------------------------------
 
-loc_73C8:
+; On first contact, damp opposing velocity and clear it for the +8 target
+SKSOZSkid_StepTowardPositive:
                 cmp.b   d0,d1
-                bge.s   loc_73EE
+                bge.s   SKSOZSkid_UpdateFacing
                 addi.w  #$40,ground_vel(a1)
                 tst.b   status_secondary(a1)
-                bmi.s   loc_73EE
+                bmi.s   SKSOZSkid_UpdateFacing
                 tst.w   ground_vel(a1)
-                bpl.s   loc_73EE
+                bpl.s   SKSOZSkid_UpdateFacing
                 asr     ground_vel(a1)
                 cmpi.b  #8,d0
-                bne.s   loc_73EE
+                bne.s   SKSOZSkid_UpdateFacing
                 move.w  #0,ground_vel(a1)
 
-loc_73EE:
+; Use the old velocity high byte. Keep facing unchanged when it is zero
+SKSOZSkid_UpdateFacing:
                 tst.b   d1
-                beq.s   loc_7402
+                beq.s   SKSOZSkid_SetPoseAndSound
                 bclr    #Status_Facing,status(a1)
                 tst.b   d1
-                bpl.s   loc_7402
+                bpl.s   SKSOZSkid_SetPoseAndSound
                 bset    #Status_Facing,status(a1)
 
-loc_7402:
+SKSOZSkid_SetPoseAndSound:
                 move.b  #$19,anim(a1)
                 move.b  y_radius(a1),d0
                 subi.b  #$E,d0
@@ -443,38 +450,38 @@ loc_7402:
                 ori.b   #$80,status_secondary(a1)
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
-                bne.s   locret_7446
+                bne.s   SKSOZSkid_PoseReturn
                 moveq   #signextendB(sfx_SlideSkidQuiet),d0
                 jsr     (Play_SFX).l
 
-locret_7446:
+SKSOZSkid_PoseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7448:
+SKSOZSkid_TryLeftHalf:
                 cmpi.b  #1,d1
-                bne.s   loc_7462
+                bne.s   SKSOZSkid_TryRightHalf
                 move.w  x_pos(a1),d1
                 andi.w  #$7F,d1
                 cmpi.w  #$40,d1
-                blo.w   loc_7398
-                bra.w   loc_734A
+                blo.w   SKSOZSkid_StepTowardNegative
+                bra.w   SKSOZSkid_ReleaseAndRestoreRadii
 ; ---------------------------------------------------------------------------
 
-loc_7462:
+SKSOZSkid_TryRightHalf:
                 cmpi.b  #2,d1
-                bne.s   loc_747C
+                bne.s   SKSOZSkid_PickSpeedByPlane
                 move.w  x_pos(a1),d1
                 andi.w  #$7F,d1
                 cmpi.w  #$40,d1
-                bhs.w   loc_7398
-                bra.w   loc_734A
+                bhs.w   SKSOZSkid_StepTowardNegative
+                bra.w   SKSOZSkid_ReleaseAndRestoreRadii
 ; ---------------------------------------------------------------------------
 
-loc_747C:
+SKSOZSkid_PickSpeedByPlane:
                 moveq   #-8,d0
                 cmpi.b  #$C,top_solid_bit(a1)
-                beq.w   loc_7398
+                beq.w   SKSOZSkid_StepTowardNegative
                 moveq   #8,d0
-                bra.w   loc_7398
+                bra.w   SKSOZSkid_StepTowardNegative
 ; End of function SKMHZ_ApplyChunkGroundSkid

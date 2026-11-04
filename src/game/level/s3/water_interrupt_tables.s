@@ -3,11 +3,11 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-byte_573A:
+S3Env_ICZChunkSpeedTargets:
                 dc.b    $F8, $F8,   8,   8, $F4, $F4, $F4,  $C,  $C,  $C
-byte_5744:
+S3Env_HCZ2CurrentChunkIds:
                 dc.b    $1C, $72, $83, $84, $8B, $91, $9F, $A0, $A5, $A6
-byte_574E:
+S3Env_ICZ1SkidChunkIds:
                 dc.b    $2E, $C6, $33, $C5, $24, $2A, $44, $1F, $27, $2B
                 even
 ; ---------------------------------------------------------------------------

@@ -1,0 +1,2225 @@
+{
+  "schema_version": 1,
+  "packet": "22-level-environment",
+  "mappings": [
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 63,
+      "old": "loc_5958",
+      "new": "S3Env_BeginOscillatorUpdates",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_InitializeSixteenOscillatorUpdatesAfterPlayerGate"
+    },
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 69,
+      "old": "loc_5966",
+      "new": "S3Env_StepOscillator",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AddOscillatorAccelerationOnClearDirectionBit"
+    },
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 84,
+      "old": "loc_5982",
+      "new": "S3Env_StepOscillatorReverse",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SubtractOscillatorAccelerationOnSetDirectionBit"
+    },
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 93,
+      "old": "loc_5994",
+      "new": "S3Env_FinishOscillatorRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AdvanceOscillatorRecordAndStoreDirectionWord"
+    },
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 131,
+      "old": "loc_59F6",
+      "new": "S3Env_TryStepSpillRingAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_IntegrateSpillRingAnimationAccumulatorWhenCounterNonzero"
+    },
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "original_line": 143,
+      "old": "loc_5A18",
+      "new": "S3Env_StepVineAngle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AdvanceVineAngleAfterRingFrameWork"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 20,
+      "old": "loc_5E34",
+      "new": "S3Env_SelectAIZMainLoadRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SubstituteAizMainLevelDescriptorSelector"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 23,
+      "old": "loc_5E38",
+      "new": "S3Env_QueueLevelArtFromRecord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SelectTwentyFourByteLoadRecordAndQueueDistinctArtSources"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 47,
+      "old": "loc_5E7E",
+      "new": "S3Env_WaitForLevelArtModules",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_WaitForKosModuleIndicatorDuringLevelArtLoad"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 72,
+      "old": "loc_5EC8",
+      "new": "S3Env_EnableWaterAndSetHInt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_EnableWaterAndInstallNativeHorizontalInterruptSetup"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 76,
+      "old": "loc_5ED4",
+      "new": "S3Env_TryInstallWaterHInt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_TestExistingWaterFlagBeforeInstallingHorizontalHandler"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 88,
+      "old": "loc_5F08",
+      "new": "S3Env_InitWaterHeightsAndTransition",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_InitializeWaterHeightsAndDefaultTransitionPointer"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 143,
+      "old": "loc_5FD6",
+      "new": "S3Env_LoadWaterPaletteBanks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_LoadSelectedWaterPaletteBanksAndOptionalSavedCoverage"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 152,
+      "old": "locret_5FEE",
+      "new": "S3Env_WaterPaletteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromWaterPaletteGateOrCompletedLoad"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 169,
+      "old": "loc_6016",
+      "new": "S3Env_RetainedBindFirstRamCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedBindFirstRamBlockCopyFromBytePageIndex"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 176,
+      "old": "loc_602C",
+      "new": "S3Env_RetainedCopyFirstRamBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedCopyFirstRamBlockThenAdvanceSecondByteCursor"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 187,
+      "old": "loc_604C",
+      "new": "S3Env_RetainedBindSecondRamCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedBindSecondRamBlockCopyFromBytePageIndex"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 194,
+      "old": "loc_6062",
+      "new": "S3Env_RetainedCopySecondRamBlock",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedCopySecondRamBlockIntoRamScratch"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 198,
+      "old": "loc_6068",
+      "new": "S3Env_RetainedTryRefreshPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedRefreshPlaneOnlyAtTimerWordSix"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 203,
+      "old": "byte_6074",
+      "new": "S3Env_RetainedFirstCopyPages",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_RetainedFirstRamCopyPageIndexSequence"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 206,
+      "old": "byte_608E",
+      "new": "S3Env_RetainedSecondCopyPages",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_RetainedSecondRamCopyPageIndexSequence"
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "original_line": 219,
+      "old": "loc_6110",
+      "new": "S3Env_RetainedRefreshPlane",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedRefreshPlaneWithMaskedInterruptsAndSavedRegisters"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 27,
+      "old": "loc_50D2",
+      "new": "S3Water_RetainedBiasSurface",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedWaterSurfaceOffsetArithmeticJoin"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 32,
+      "old": "locret_50DC",
+      "new": "S3Water_RetainedSurfaceReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromRetainedSurfaceOffsetOrWaterGate"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 48,
+      "old": "loc_50FC",
+      "new": "S3Water_SetCurrentFromMeanHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_CopyMeanWaterHeightBeforeScreenCoverageTests"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 58,
+      "old": "loc_511A",
+      "new": "S3Water_ClassifyCameraCoverage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ClassifyWaterHeightRelativeToCameraUsingBorrowAndSign"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 66,
+      "old": "loc_512A",
+      "new": "S3Water_MarkFullScreenWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_MarkWaterAsFullScreenForZeroOrNegativeBorrowCase"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 69,
+      "old": "loc_5130",
+      "new": "S3Water_DisableSplitAndReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_DisableWaterSplitCounterAndReturnBeforeSurfaceDispatcher"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 74,
+      "old": "loc_5138",
+      "new": "S3Water_CapSplitCounter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ConvertWaterSplitBeyondUnsignedDfToFf"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 79,
+      "old": "loc_5142",
+      "new": "S3Water_StoreSplitCounter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_PublishWaterSplitCounterLowByte"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 82,
+      "old": "loc_5146",
+      "new": "S3Water_ApplyGroundSurfaceMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_DispatchNativeGroundSurfaceMotionAfterWaterGate"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 96,
+      "old": "loc_516E",
+      "new": "S3Water_RetainedClassifyWrapSplit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedWrapSplitClassifyWaterMinusCamera"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 107,
+      "old": "loc_5186",
+      "new": "S3Water_RetainedMarkFullWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedWrapSplitMarkFullCoverageAndDisableCounter"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 113,
+      "old": "loc_5194",
+      "new": "S3Water_RetainedCapReverseSplit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedReverseSplitMapUnsignedDfThreshold"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 118,
+      "old": "loc_519E",
+      "new": "S3Water_RetainedInstallReverseHInt",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedReverseSplitSelectHIntFiveOrSix"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 126,
+      "old": "loc_51C0",
+      "new": "S3Water_RetainedJoinSurfaceMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedReverseSplitJoinSurfaceDispatcher"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 130,
+      "old": "loc_51C2",
+      "new": "S3Water_RetainedCapNormalSplit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedOrdinarySplitMapUnsignedDfThreshold"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 135,
+      "old": "loc_51CC",
+      "new": "S3Water_RetainedStoreNormalSplit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedOrdinarySplitPublishCounter"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 138,
+      "old": "loc_51D0",
+      "new": "S3Water_RetainedApplySurfaceMotion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RetainedSplitTailCallsNativeSurfaceMotion"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 164,
+      "old": "loc_5240",
+      "new": "S3Water_StepMeanHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AdvanceMeanWaterByUnsignedSelectedSpeedDirection"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 167,
+      "old": "locret_5244",
+      "new": "S3Water_StepHeightReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromDynamicWaterEqualityOrSpeedStep"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 223,
+      "old": "loc_52AE",
+      "new": "S3Water_AIZ2_TryLatchWaterTrigger",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AizTwoLatchWaterTriggerAtUnsignedCameraThreshold"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 230,
+      "old": "loc_52C2",
+      "new": "S3Water_AIZ2_TryRaiseWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AizTwoRequestWaterRiseAndOptionalShakeController"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 241,
+      "old": "loc_52EC",
+      "new": "S3Water_AIZ2_BeginLayoutClear",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AizTwoPrepareFourLayoutPointerByteClears"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 245,
+      "old": "loc_52F2",
+      "new": "S3Water_AIZ2_ClearLayoutAndSetTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AizTwoClearFourIndirectLayoutBytesAndCommitTarget"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 252,
+      "old": "locret_5306",
+      "new": "S3Water_AIZ2_WaterEventReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AizTwoReturnAfterNativeWaterEventGates"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 256,
+      "old": "Obj_5308",
+      "new": "ScreenShakeDelay_CountDownToStop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Non-rendering delayed controller that stops screen shake after its BYTE countdown."
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 262,
+      "old": "loc_5310",
+      "new": "ScreenShakeDelay_ClearFlagAndDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Stop the screen shake and delete its expired timer controller."
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 271,
+      "old": "word_5324",
+      "new": "S3Water_HCZ1HeightByX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_HczOneCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 284,
+      "old": "loc_533C",
+      "new": "S3Water_SelectHCZ2HeightTable",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_BindHczTwoWaterHeightThresholdTable"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 288,
+      "old": "word_5344",
+      "new": "S3Water_HCZ2HeightByX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_HczTwoDefaultCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 301,
+      "old": "word_5356",
+      "new": "S3Water_LBZ1HeightByX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_LbzOneCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 318,
+      "old": "locret_537A",
+      "new": "S3Water_EndingHeightReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromEndingWaterCameraGateOrTargetWrite"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 322,
+      "old": "loc_537C",
+      "new": "S3Water_ReadCameraXForHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_LoadCameraXForWaterHeightPairScan"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 325,
+      "old": "loc_5380",
+      "new": "S3Water_FindHeightAtCameraX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ScanWaterHeightPairsWithUnsignedStrictGreaterTest"
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "original_line": 335,
+      "old": "loc_5394",
+      "new": "S3Water_StoreTargetHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_CommitSelectedWaterTargetWord"
+    },
+    {
+      "source": "src/game/level/s3/ring_awards.s",
+      "original_line": 17,
+      "old": "loc_544A0",
+      "new": "S3Level_CapLiveRingCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_CapLiveRingCount at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/ring_awards.s",
+      "original_line": 23,
+      "old": "loc_544A8",
+      "new": "S3Level_FlagRingsAndCheckLives",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_MarkHUDAndTestExtraLifeThresholds at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/ring_awards.s",
+      "original_line": 34,
+      "old": "loc_544C4",
+      "new": "S3Level_PlayRingSoundWithoutExtraLife",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_PlayRingSoundWithoutExtraLife at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/ring_awards.s",
+      "original_line": 39,
+      "old": "loc_544CC",
+      "new": "S3Level_IncrementLivesAndMonitorCounter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3Level_IncrementLivesAndMonitorCounter at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/s3/water_interrupt_tables.s",
+      "original_line": 6,
+      "old": "byte_573A",
+      "new": "S3Env_ICZChunkSpeedTargets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_IczChunkSignedGroundSpeedTargetBytes"
+    },
+    {
+      "source": "src/game/level/s3/water_interrupt_tables.s",
+      "original_line": 8,
+      "old": "byte_5744",
+      "new": "S3Env_HCZ2CurrentChunkIds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_HczTwoGroundCurrentChunkIdBytes"
+    },
+    {
+      "source": "src/game/level/s3/water_interrupt_tables.s",
+      "original_line": 10,
+      "old": "byte_574E",
+      "new": "S3Env_ICZ1SkidChunkIds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual DATA: S3Environment_IczOneSkidInertiaChunkIdBytes"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 26,
+      "old": "loc_53D2",
+      "new": "S3Tunnel_BindSoloTailsTunnel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SelectPlayerOneWithPlayerTwoTunnelFlagInModeTwo"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 41,
+      "old": "loc_53F2",
+      "new": "S3Tunnel_BeginTunnelScan",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_LoadHydrocityRectangleDbfCount"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 44,
+      "old": "loc_53F4",
+      "new": "S3Tunnel_TryTunnelRect",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_TestUnsignedWaterTunnelRectangleAndApplyVelocityStep"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 80,
+      "old": "loc_546E",
+      "new": "S3Tunnel_TryNudgeDown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ApplyDownNudgeAfterOptionalUpWaterTunnelNudge"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 85,
+      "old": "locret_5478",
+      "new": "S3Tunnel_NudgeYReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromYInfluenceOrSuppressedTunnelContact"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 89,
+      "old": "loc_547A",
+      "new": "S3Tunnel_TryNudgeLeft",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ApplyLeftNudgeForHighByteSelectedTunnelAxis"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 94,
+      "old": "loc_5484",
+      "new": "S3Tunnel_TryNudgeRight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ApplyRightNudgeAfterOptionalLeftTunnelNudge"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 99,
+      "old": "locret_548E",
+      "new": "S3Tunnel_NudgeXReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnAfterXInfluenceTunnelStep"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 103,
+      "old": "loc_5490",
+      "new": "S3Tunnel_NextTunnelRectOrExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_AdvanceRejectedTunnelRectangleThenRestoreExitAnimation"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 110,
+      "old": "loc_54A2",
+      "new": "S3Tunnel_ClearTunnelFlag",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ClearSelectedTunnelFlagWithoutResettingMotion"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 113,
+      "old": "locret_54A4",
+      "new": "S3Tunnel_TunnelReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromTunnelDebugZoneOrScanGate"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 150,
+      "old": "loc_55AA",
+      "new": "S3Ground_HCZ2_ApplyCurrentToBoth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RunHczTwoChunkGroundCurrentForBothFixedPlayers"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 178,
+      "old": "loc_55F0",
+      "new": "S3Ground_HCZ2_FindCurrentChunk",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SearchHczGroundCurrentChunkIdsBackward"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 183,
+      "old": "loc_55F8",
+      "new": "S3Ground_HCZ2_ReleaseCurrent",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReleaseHczGroundCurrentInertiaFlagWithMoveLock"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 189,
+      "old": "locret_560A",
+      "new": "S3Ground_HCZ2_ReleaseReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnFromHczCurrentReleaseGate"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 193,
+      "old": "loc_560C",
+      "new": "S3Ground_HCZ2_SetLeftCurrentTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SelectNegativeEightGroundCurrentBeforeSharedInertiaLogic"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 200,
+      "old": "loc_5612",
+      "new": "S3Ground_ICZ1_ApplySkidToBoth",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_RunIczOneChunkSelectedInertiaForBothPlayers"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 227,
+      "old": "loc_5658",
+      "new": "S3Ground_ICZ1_FindSkidChunk",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SearchIczChunkIdsBackwardAndRetainMatchingIndex"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 232,
+      "old": "loc_5660",
+      "new": "S3Ground_ICZ1_ReleaseSkid",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReleaseIczSkidInertiaFlagWithMoveLock"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 238,
+      "old": "locret_5672",
+      "new": "S3Ground_ICZ1_ReleaseReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ReturnAfterIczReleaseOrUnflaggedGate"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 242,
+      "old": "loc_5674",
+      "new": "S3Ground_ICZ1_ReadSkidSpeedTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_LoadIczSignedHighByteSpeedTargetByMatchedChunkIndex"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 246,
+      "old": "loc_567E",
+      "new": "S3Ground_StepTowardSpeedTarget",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_BranchOnIncomingZeroThenAdjustGroundVelocityTowardByteTarget"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 257,
+      "old": "loc_5694",
+      "new": "S3Ground_TryIncreaseGroundSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_IncreaseGroundVelocityWhenOldSignedHighByteBelowTarget"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 262,
+      "old": "loc_569E",
+      "new": "S3Ground_SetFacingFromOldSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ChooseFacingFromPreAdjustmentGroundVelocityHighByte"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 268,
+      "old": "loc_56AE",
+      "new": "S3Ground_PickCurrentOrSkidAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_SelectGroundCurrentOrIczSkidAnimation"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 274,
+      "old": "loc_56C2",
+      "new": "S3Ground_LatchInertiaAndReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_LatchInfiniteGroundInertiaFlagAndReturn"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 279,
+      "old": "loc_56CA",
+      "new": "S3Ground_TryInputLeft",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ApplyHeldLeftToZeroTargetInertiaPath"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 291,
+      "old": "loc_56EC",
+      "new": "S3Ground_TryInputRight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_ApplyHeldRightAfterLeftInZeroTargetInertiaPath"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 301,
+      "old": "loc_5706",
+      "new": "S3Ground_DecayUnforcedInertia",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_DecayZeroTargetInertiaUsingUnsignedBorrowSensitiveBranches"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 311,
+      "old": "loc_571E",
+      "new": "S3Ground_CommitPositiveDecay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_JoinZeroTargetGroundVelocityStoreAfterPositiveDecay"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 315,
+      "old": "loc_5720",
+      "new": "S3Ground_DecayNegativeInertia",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_DecayNegativeInertiaAndPreserveNativeAddCarryGate"
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "original_line": 321,
+      "old": "loc_572E",
+      "new": "S3Ground_StoreInertiaAndLatch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Environment_StoreZeroTargetInertiaWordAndLatchBitSeven"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 72,
+      "old": "loc_774A",
+      "new": "SKEnv_BeginOscillatorUpdates",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_InitializeSixteenOscillatorUpdatesAfterPlayerGate"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 78,
+      "old": "loc_7758",
+      "new": "SKEnv_StepOscillator",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AddOscillatorAccelerationOnClearDirectionBit"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 93,
+      "old": "loc_7774",
+      "new": "SKEnv_StepOscillatorReverse",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SubtractOscillatorAccelerationOnSetDirectionBit"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 102,
+      "old": "loc_7786",
+      "new": "SKEnv_FinishOscillatorRecord",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdvanceOscillatorRecordAndStoreDirectionWord"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 140,
+      "old": "loc_77E8",
+      "new": "SKEnv_TryStepSpillRingAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_IntegrateSpillRingAnimationAccumulatorWhenCounterNonzero"
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "original_line": 152,
+      "old": "loc_780A",
+      "new": "SKEnv_StepVineAngle",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdvanceVineAngleAfterRingFrameWork"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 15,
+      "old": "loc_7826",
+      "new": "SKEnv_SelectAIZMainLoadRecord",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SubstituteAizMainLevelDescriptorSelector"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 18,
+      "old": "loc_782A",
+      "new": "SKEnv_QueueLevelArtFromRecord",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectTwentyFourByteLoadRecordAndQueueDistinctArtSources"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 42,
+      "old": "loc_7870",
+      "new": "SKEnv_WaitForLevelArtModules",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_WaitForKosModuleIndicatorDuringLevelArtLoad"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 65,
+      "old": "loc_78B2",
+      "new": "SKEnv_CheckHCZOrCNZWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_CheckHczOrNonKnucklesCnzWaterEligibility"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 73,
+      "old": "loc_78CA",
+      "new": "SKEnv_CheckOtherWaterActs",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_EnableRemainingWaterActsOrInitializeDryLevelHeights"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 86,
+      "old": "loc_78F2",
+      "new": "SKEnv_EnableWaterAndSetHInt",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_EnableWaterAndInstallNativeHorizontalInterruptSetup"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 100,
+      "old": "loc_7932",
+      "new": "SKEnv_InitWaterHeightsAndTransition",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_InitializeWaterHeightsAndDefaultTransitionPointer"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 155,
+      "old": "loc_7A00",
+      "new": "SKEnv_LoadWaterPaletteBanks",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LoadSelectedWaterPaletteBanksAndOptionalSavedCoverage"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 164,
+      "old": "loc_7A18",
+      "new": "SKEnv_TryKnuxWaterColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectKnucklesWaterPalettePatchAfterBaseLoad"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 168,
+      "old": "locret_7A20",
+      "new": "SKEnv_WaterPaletteReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromWaterPaletteGateOrCompletedLoad"
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "original_line": 172,
+      "old": "loc_7A22",
+      "new": "SKEnv_CopyKnuxWaterTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_CopyZoneIndexedKnucklesWaterTripletToBothBanks"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 26,
+      "old": "loc_6C52",
+      "new": "SKWater_SetCurrentFromMeanHeight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_CopyMeanWaterHeightBeforeScreenCoverageTests"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 36,
+      "old": "loc_6C70",
+      "new": "SKWater_ClassifyCameraCoverage",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ClassifyWaterHeightRelativeToCameraUsingBorrowAndSign"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 44,
+      "old": "loc_6C80",
+      "new": "SKWater_MarkFullScreenWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_MarkWaterAsFullScreenForZeroOrNegativeBorrowCase"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 47,
+      "old": "loc_6C86",
+      "new": "SKWater_DisableSplitAndReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_DisableWaterSplitCounterAndReturnBeforeSurfaceDispatcher"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 52,
+      "old": "loc_6C8E",
+      "new": "SKWater_CapSplitCounter",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ConvertWaterSplitBeyondUnsignedDfToFf"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 57,
+      "old": "loc_6C98",
+      "new": "SKWater_StoreSplitCounter",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_PublishWaterSplitCounterLowByte"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 60,
+      "old": "loc_6C9C",
+      "new": "SKWater_ApplyGroundSurfaceMotion",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_DispatchNativeGroundSurfaceMotionAfterWaterGate"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 74,
+      "old": "loc_6CC4",
+      "new": "SKWater_RetainedClassifyWrapSplit",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedWrapSplitClassifyWaterMinusCamera"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 85,
+      "old": "loc_6CDC",
+      "new": "SKWater_RetainedMarkFullWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedWrapSplitMarkFullCoverageAndDisableCounter"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 91,
+      "old": "loc_6CEA",
+      "new": "SKWater_RetainedCapReverseSplit",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedReverseSplitMapUnsignedDfThreshold"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 96,
+      "old": "loc_6CF4",
+      "new": "SKWater_RetainedInstallReverseHInt",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedReverseSplitSelectHIntFiveOrSix"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 104,
+      "old": "loc_6D16",
+      "new": "SKWater_RetainedJoinSurfaceMotion",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedReverseSplitJoinSurfaceDispatcher"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 108,
+      "old": "loc_6D18",
+      "new": "SKWater_RetainedCapNormalSplit",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedOrdinarySplitMapUnsignedDfThreshold"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 113,
+      "old": "loc_6D22",
+      "new": "SKWater_RetainedStoreNormalSplit",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedOrdinarySplitPublishCounter"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 116,
+      "old": "loc_6D26",
+      "new": "SKWater_RetainedApplySurfaceMotion",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RetainedSplitTailCallsNativeSurfaceMotion"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 142,
+      "old": "loc_6D96",
+      "new": "SKWater_StepMeanHeight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdvanceMeanWaterByUnsignedSelectedSpeedDirection"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 145,
+      "old": "locret_6D9A",
+      "new": "SKWater_StepHeightReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromDynamicWaterEqualityOrSpeedStep"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 197,
+      "old": "loc_6DF6",
+      "new": "SKWater_AIZ2_TryLowerEarlyTarget",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoCheckEarlyCameraLowerWaterTarget"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 207,
+      "old": "loc_6E14",
+      "new": "SKWater_AIZ2_TryLatchWaterTrigger",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoLatchWaterTriggerAtUnsignedCameraThreshold"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 214,
+      "old": "loc_6E28",
+      "new": "SKWater_AIZ2_TryRaiseWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoRequestWaterRiseAndOptionalShakeController"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 225,
+      "old": "loc_6E52",
+      "new": "SKWater_AIZ2_BeginLayoutClear",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoPrepareFourLayoutPointerByteClears"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 229,
+      "old": "loc_6E58",
+      "new": "SKWater_AIZ2_ClearLayoutAndSetTarget",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoClearFourIndirectLayoutBytesAndCommitTarget"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 236,
+      "old": "locret_6E6C",
+      "new": "SKWater_AIZ2_WaterEventReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AizTwoReturnAfterNativeWaterEventGates"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 240,
+      "old": "Obj_6E6E",
+      "new": "ScreenShakeDelay_CountDownToStop",
+      "profiles": ["sk"],
+      "meaning": "Non-rendering delayed controller that stops screen shake after its BYTE countdown."
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 246,
+      "old": "loc_6E76",
+      "new": "ScreenShakeDelay_ClearFlagAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Stop the screen shake and delete its expired timer controller."
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 255,
+      "old": "word_6E8C",
+      "new": "SKWater_HCZ1HeightByX",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_HczOneCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 268,
+      "old": "loc_6EA4",
+      "new": "SKWater_SelectHCZ2HeightTable",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_BindHczTwoWaterHeightThresholdTable"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 275,
+      "old": "word_6EBA",
+      "new": "SKWater_HCZ2HeightByX",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_HczTwoDefaultCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 278,
+      "old": "word_6EC2",
+      "new": "SKWater_HCZ2KnuxHeightByX",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_HczTwoKnucklesCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 291,
+      "old": "word_6ED4",
+      "new": "SKWater_LBZ1HeightByX",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_LbzOneCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 305,
+      "old": "loc_6EF2",
+      "new": "SKWater_LBZ2KnuxPickHeightSource",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LbzTwoKnucklesSelectEventOverrideOrCameraTable"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 312,
+      "old": "loc_6F00",
+      "new": "SKWater_LBZ2TrySetMeanHeight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LbzTwoConditionallyReplaceMeanHeightFromCameraYGate"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 318,
+      "old": "locret_6F10",
+      "new": "SKWater_LBZ2MeanHeightReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LbzTwoReturnFromCameraYMeanOverride"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 321,
+      "old": "word_6F12",
+      "new": "SKWater_LBZ2KnuxHeightByX",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_LbzTwoKnucklesCameraWaterHeightWordPairs"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 335,
+      "old": "locret_6F2A",
+      "new": "SKWater_EndingHeightReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromEndingWaterCameraGateOrTargetWrite"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 339,
+      "old": "loc_6F2C",
+      "new": "SKWater_ReadCameraXForHeight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LoadCameraXForWaterHeightPairScan"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 342,
+      "old": "loc_6F30",
+      "new": "SKWater_FindHeightAtCameraX",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ScanWaterHeightPairsWithUnsignedStrictGreaterTest"
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "original_line": 352,
+      "old": "loc_6F44",
+      "new": "SKWater_StoreTargetHeight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_CommitSelectedWaterTargetWord"
+    },
+    {
+      "source": "src/game/level/sk/ring_awards.s",
+      "original_line": 17,
+      "old": "loc_8610E",
+      "new": "SKLevel_CapLiveRingCount",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_CapLiveRingCount at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/ring_awards.s",
+      "original_line": 23,
+      "old": "loc_86116",
+      "new": "SKLevel_FlagRingsAndCheckLives",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_MarkHUDAndTestExtraLifeThresholds at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/ring_awards.s",
+      "original_line": 34,
+      "old": "loc_86132",
+      "new": "SKLevel_PlayRingSoundWithoutExtraLife",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_PlayRingSoundWithoutExtraLife at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/ring_awards.s",
+      "original_line": 39,
+      "old": "loc_8613A",
+      "new": "SKLevel_IncrementLivesAndMonitorCounter",
+      "profiles": ["sk"],
+      "meaning": "Establish SKLevel_IncrementLivesAndMonitorCounter at this manually reviewed physical level-core entry."
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "original_line": 6,
+      "old": "byte_748E",
+      "new": "SKEnv_HCZ2CurrentChunkIds",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_HczTwoGroundCurrentChunkIdBytes"
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "original_line": 8,
+      "old": "byte_7498",
+      "new": "SKEnv_ICZ1SkidChunkIds",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_IczOneSkidInertiaChunkIdBytes"
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "original_line": 10,
+      "old": "byte_74A2",
+      "new": "SKEnv_ICZChunkSpeedTargets",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_IczChunkSignedGroundSpeedTargetBytes"
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "original_line": 12,
+      "old": "byte_74AC",
+      "new": "SKEnvironment_SozGroundSkidChunkIdBytes",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_SozGroundSkidChunkIdBytes"
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "original_line": 15,
+      "old": "byte_74BD",
+      "new": "SKEnv_SOZSkidAndRegionPairs",
+      "profiles": ["sk"],
+      "meaning": "Actual DATA: SKEnvironment_SozGroundSkidTargetAndSubregionSelectorBytePairs"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 26,
+      "old": "loc_6F82",
+      "new": "SKTunnel_BindSoloTailsTunnel",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectPlayerOneWithPlayerTwoTunnelFlagInModeTwo"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 41,
+      "old": "loc_6FA2",
+      "new": "SKTunnel_BeginTunnelScan",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LoadHydrocityRectangleDbfCount"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 44,
+      "old": "loc_6FA4",
+      "new": "SKTunnel_TryTunnelRect",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_TestUnsignedWaterTunnelRectangleAndApplyVelocityStep"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 81,
+      "old": "loc_7024",
+      "new": "SKTunnel_TryNudgeDown",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplyDownNudgeAfterOptionalUpWaterTunnelNudge"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 86,
+      "old": "locret_702E",
+      "new": "SKTunnel_NudgeYReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromYInfluenceOrSuppressedTunnelContact"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 90,
+      "old": "loc_7030",
+      "new": "SKTunnel_TryNudgeLeft",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplyLeftNudgeForHighByteSelectedTunnelAxis"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 95,
+      "old": "loc_703A",
+      "new": "SKTunnel_TryNudgeRight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplyRightNudgeAfterOptionalLeftTunnelNudge"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 100,
+      "old": "locret_7044",
+      "new": "SKTunnel_NudgeXReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnAfterXInfluenceTunnelStep"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 104,
+      "old": "loc_7046",
+      "new": "SKTunnel_NextTunnelRectOrExit",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdvanceRejectedTunnelRectangleThenRestoreExitAnimation"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 111,
+      "old": "loc_7058",
+      "new": "SKTunnel_ClearTunnelFlag",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ClearSelectedTunnelFlagWithoutResettingMotion"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 114,
+      "old": "locret_705A",
+      "new": "SKTunnel_TunnelReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromTunnelDebugZoneOrScanGate"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 153,
+      "old": "loc_716A",
+      "new": "SKGround_HCZ2_ApplyCurrentToBoth",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RunHczTwoChunkGroundCurrentForBothFixedPlayers"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 181,
+      "old": "loc_71B0",
+      "new": "SKGround_HCZ2_FindCurrentChunk",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SearchHczGroundCurrentChunkIdsBackward"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 186,
+      "old": "loc_71B8",
+      "new": "SKGround_HCZ2_ReleaseCurrent",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReleaseHczGroundCurrentInertiaFlagWithMoveLock"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 192,
+      "old": "locret_71CA",
+      "new": "SKGround_HCZ2_ReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromHczCurrentReleaseGate"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 196,
+      "old": "loc_71CC",
+      "new": "SKGround_HCZ2_SetLeftCurrentTarget",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectNegativeEightGroundCurrentBeforeSharedInertiaLogic"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 203,
+      "old": "loc_71D2",
+      "new": "SKGround_ICZ1_ApplySkidToBoth",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_RunIczOneChunkSelectedInertiaForBothPlayers"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 230,
+      "old": "loc_7218",
+      "new": "SKGround_ICZ1_FindSkidChunk",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SearchIczChunkIdsBackwardAndRetainMatchingIndex"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 235,
+      "old": "loc_7220",
+      "new": "SKGround_ICZ1_ReleaseSkid",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReleaseIczSkidInertiaFlagWithMoveLock"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 241,
+      "old": "locret_7232",
+      "new": "SKGround_ICZ1_ReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnAfterIczReleaseOrUnflaggedGate"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 245,
+      "old": "loc_7234",
+      "new": "SKGround_ICZ1_ReadSkidSpeedTarget",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LoadIczSignedHighByteSpeedTargetByMatchedChunkIndex"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 249,
+      "old": "loc_723E",
+      "new": "SKGround_StepTowardSpeedTarget",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_BranchOnIncomingZeroThenAdjustGroundVelocityTowardByteTarget"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 260,
+      "old": "loc_7254",
+      "new": "SKGround_TryIncreaseGroundSpeed",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_IncreaseGroundVelocityWhenOldSignedHighByteBelowTarget"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 265,
+      "old": "loc_725E",
+      "new": "SKGround_SetFacingFromOldSpeed",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ChooseFacingFromPreAdjustmentGroundVelocityHighByte"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 271,
+      "old": "loc_726E",
+      "new": "SKGround_PickCurrentOrSkidAnim",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectGroundCurrentOrIczSkidAnimation"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 277,
+      "old": "loc_7282",
+      "new": "SKGround_LatchInertiaAndReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LatchInfiniteGroundInertiaFlagAndReturn"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 282,
+      "old": "loc_728A",
+      "new": "SKGround_TryInputLeft",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplyHeldLeftToZeroTargetInertiaPath"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 294,
+      "old": "loc_72AC",
+      "new": "SKGround_TryInputRight",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplyHeldRightAfterLeftInZeroTargetInertiaPath"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 304,
+      "old": "loc_72C6",
+      "new": "SKGround_DecayUnforcedInertia",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_DecayZeroTargetInertiaUsingUnsignedBorrowSensitiveBranches"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 314,
+      "old": "loc_72DE",
+      "new": "SKGround_CommitPositiveDecay",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_JoinZeroTargetGroundVelocityStoreAfterPositiveDecay"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 318,
+      "old": "loc_72E0",
+      "new": "SKGround_DecayNegativeInertia",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_DecayNegativeInertiaAndPreserveNativeAddCarryGate"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 324,
+      "old": "loc_72EE",
+      "new": "SKGround_StoreInertiaAndLatch",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_StoreZeroTargetInertiaWordAndLatchBitSeven"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 332,
+      "old": "loc_72FA",
+      "new": "SKSOZSkid_ApplyToBothPlayers",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_DispatchSozChunkGroundSkidForBothFixedPlayers"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 360,
+      "old": "loc_7342",
+      "new": "SKSOZSkid_FindChunk",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SearchSozSkidChunksAtPlayerYPlusTwenty"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 365,
+      "old": "loc_734A",
+      "new": "SKSOZSkid_ReleaseAndRestoreRadii",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReleaseSozInertiaAndRestoreGroundedDefaultRadii"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 378,
+      "old": "locret_7382",
+      "new": "SKSOZSkid_ReleaseReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnFromSozSkidReleaseAndAirborneGates"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 382,
+      "old": "loc_7384",
+      "new": "SKSOZSkid_ReadSpeedAndRegion",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_LoadSozSpeedTargetAndSubregionSelectorByMatchedIndex"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 389,
+      "old": "loc_7398",
+      "new": "SKSOZSkid_StepTowardNegative",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdjustSozNegativeTargetWithFirstContactOppositionDamping"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 407,
+      "old": "loc_73C8",
+      "new": "SKSOZSkid_StepTowardPositive",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_AdjustSozPositiveTargetWithFirstContactOppositionDamping"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 420,
+      "old": "loc_73EE",
+      "new": "SKSOZSkid_UpdateFacing",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_UpdateSozFacingOnlyForNonzeroOldVelocityHighByte"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 428,
+      "old": "loc_7402",
+      "new": "SKSOZSkid_SetPoseAndSound",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ApplySozSkidPostureAndPeriodicQuietSound"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 445,
+      "old": "locret_7446",
+      "new": "SKSOZSkid_PoseReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_ReturnAfterSozPostureOrSoundGate"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 449,
+      "old": "loc_7448",
+      "new": "SKSOZSkid_TryLeftHalf",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_GateSozSelectorOneToLeftHalfOfChunk"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 459,
+      "old": "loc_7462",
+      "new": "SKSOZSkid_TryRightHalf",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_GateSozSelectorTwoToRightHalfOfChunk"
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "original_line": 469,
+      "old": "loc_747C",
+      "new": "SKSOZSkid_PickSpeedByPlane",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKEnvironment_SelectSozEightSpeedDirectionFromCollisionPlane"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/s3/collision_and_oscillation.s",
+      "tokens": [
+        [42, 1, 0, ""],
+        [45, 0, 0, ""],
+        [50, 0, 1, ""],
+        [54, 1, 2, ""],
+        [60, 1, 3, ""],
+        [62, 1, 3, ""],
+        [63, 0, 2, ""],
+        [69, 1, 3, ""],
+        [71, 0, 3, ""],
+        [73, 3, 1, ""],
+        [97, 1, 4, ""],
+        [101, 0, 4, ""],
+        [103, 1, 5, ""],
+        [112, 0, 5, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/environment_loading.s",
+      "tokens": [
+        [6, 1, 7, ""],
+        [8, 1, 6, ""],
+        [10, 1, 7, ""],
+        [11, 0, 6, ""],
+        [13, 0, 7, ""],
+        [32, 1, 8, ""],
+        [36, 0, 8, ""],
+        [43, 1, 8, ""],
+        [47, 1, 9, ""],
+        [49, 1, 9, ""],
+        [51, 1, 9, ""],
+        [53, 1, 9, ""],
+        [55, 1, 10, ""],
+        [56, 0, 9, ""],
+        [59, 0, 10, ""],
+        [65, 1, 11, ""],
+        [68, 1, 11, ""],
+        [70, 0, 11, ""],
+        [87, 1, 13, ""],
+        [90, 1, 12, ""],
+        [94, 1, 12, ""],
+        [98, 1, 12, ""],
+        [102, 1, 12, ""],
+        [106, 1, 12, ""],
+        [110, 1, 12, ""],
+        [114, 1, 12, ""],
+        [118, 1, 12, ""],
+        [120, 0, 12, ""],
+        [126, 1, 13, ""],
+        [128, 0, 13, ""],
+        [131, 1, 18, ""],
+        [136, 1, 19, ""],
+        [137, 1, 14, ""],
+        [139, 1, 19, ""],
+        [140, 0, 14, ""],
+        [146, 0, 15, ""],
+        [148, 3, 15, ""],
+        [152, 1, 20, ""],
+        [153, 1, 16, ""],
+        [155, 1, 20, ""],
+        [156, 0, 16, ""],
+        [162, 0, 17, ""],
+        [164, 3, 17, ""],
+        [165, 0, 18, ""],
+        [167, 1, 21, ""],
+        [169, 0, 19, ""],
+        [172, 0, 20, ""],
+        [183, 0, 21, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/environment_state.s",
+      "tokens": [
+        [10, 1, 23, ""],
+        [13, 1, 22, ""],
+        [15, 0, 22, ""],
+        [19, 0, 23, ""],
+        [23, 1, 30, ""],
+        [25, 1, 24, ""],
+        [27, 1, 24, ""],
+        [30, 0, 24, ""],
+        [36, 1, 25, ""],
+        [38, 1, 27, ""],
+        [39, 0, 25, ""],
+        [42, 1, 26, ""],
+        [43, 1, 28, ""],
+        [45, 1, 28, ""],
+        [46, 0, 26, ""],
+        [48, 0, 27, ""],
+        [51, 0, 28, ""],
+        [53, 1, 29, ""],
+        [55, 0, 29, ""],
+        [57, 0, 30, ""],
+        [64, 1, 31, ""],
+        [66, 0, 31, ""],
+        [69, 1, 32, ""],
+        [70, 1, 36, ""],
+        [72, 1, 36, ""],
+        [74, 1, 32, ""],
+        [75, 1, 33, ""],
+        [76, 0, 32, ""],
+        [80, 0, 33, ""],
+        [82, 1, 34, ""],
+        [84, 0, 34, ""],
+        [89, 1, 35, ""],
+        [91, 0, 35, ""],
+        [92, 1, 38, ""],
+        [93, 0, 36, ""],
+        [95, 1, 37, ""],
+        [97, 0, 37, ""],
+        [99, 0, 38, ""],
+        [117, 1, 40, ""],
+        [118, 1, 39, ""],
+        [120, 0, 39, ""],
+        [122, 0, 40, ""],
+        [161, 1, 45, ""],
+        [163, 1, 41, ""],
+        [165, 1, 45, ""],
+        [169, 0, 41, ""],
+        [171, 1, 42, ""],
+        [173, 1, 45, ""],
+        [175, 0, 42, ""],
+        [177, 1, 45, ""],
+        [179, 1, 43, ""],
+        [182, 1, 43, ""],
+        [183, 2, 46, ""],
+        [185, 0, 43, ""],
+        [188, 0, 44, ""],
+        [192, 3, 44, ""],
+        [194, 0, 45, ""],
+        [196, 0, 46, ""],
+        [198, 1, 47, ""],
+        [200, 0, 47, ""],
+        [204, 2, 48, ""],
+        [205, 1, 53, ""],
+        [206, 0, 48, ""],
+        [213, 1, 49, ""],
+        [215, 0, 49, ""],
+        [216, 2, 50, ""],
+        [217, 1, 53, ""],
+        [218, 0, 50, ""],
+        [224, 2, 51, ""],
+        [225, 1, 53, ""],
+        [226, 0, 51, ""],
+        [236, 1, 52, ""],
+        [238, 0, 52, ""],
+        [240, 0, 53, ""],
+        [242, 0, 54, ""],
+        [245, 1, 54, ""],
+        [248, 1, 55, ""],
+        [251, 0, 55, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/ring_awards.s",
+      "tokens": [
+        [9, 1, 56, ""],
+        [11, 0, 56, ""],
+        [14, 1, 57, ""],
+        [16, 0, 57, ""],
+        [19, 1, 58, ""],
+        [21, 1, 59, ""],
+        [23, 1, 58, ""],
+        [25, 1, 59, ""],
+        [26, 0, 58, ""],
+        [29, 0, 59, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/water_interrupt_tables.s",
+      "tokens": [
+        [1, 0, 60, ""],
+        [3, 0, 61, ""],
+        [5, 0, 62, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/s3/water_tunnel_motion.s",
+      "tokens": [
+        [3, 1, 73, ""],
+        [5, 1, 73, ""],
+        [7, 1, 63, ""],
+        [18, 0, 63, ""],
+        [26, 1, 64, ""],
+        [28, 0, 64, ""],
+        [30, 0, 65, ""],
+        [33, 1, 71, ""],
+        [35, 1, 71, ""],
+        [38, 1, 71, ""],
+        [40, 1, 71, ""],
+        [42, 1, 72, ""],
+        [44, 1, 67, ""],
+        [46, 1, 72, ""],
+        [61, 1, 68, ""],
+        [63, 1, 66, ""],
+        [65, 0, 66, ""],
+        [67, 1, 67, ""],
+        [69, 0, 67, ""],
+        [71, 0, 68, ""],
+        [73, 1, 69, ""],
+        [75, 0, 69, ""],
+        [77, 1, 70, ""],
+        [79, 0, 70, ""],
+        [81, 0, 71, ""],
+        [83, 3, 65, ""],
+        [85, 1, 73, ""],
+        [87, 0, 72, ""],
+        [89, 0, 73, ""],
+        [114, 1, 74, ""],
+        [116, 1, 79, ""],
+        [118, 0, 74, ""],
+        [126, 1, 76, ""],
+        [128, 1, 76, ""],
+        [139, 1, 62, ""],
+        [140, 3, 62, ""],
+        [140, 5, 61, ""],
+        [141, 0, 75, ""],
+        [143, 3, 75, ""],
+        [144, 1, 78, ""],
+        [145, 0, 76, ""],
+        [147, 1, 77, ""],
+        [150, 0, 77, ""],
+        [152, 0, 78, ""],
+        [154, 1, 84, ""],
+        [155, 0, 79, ""],
+        [163, 1, 81, ""],
+        [165, 1, 81, ""],
+        [177, 5, 62, ""],
+        [178, 0, 80, ""],
+        [180, 3, 80, ""],
+        [181, 1, 83, ""],
+        [182, 0, 81, ""],
+        [184, 1, 82, ""],
+        [187, 0, 82, ""],
+        [189, 0, 83, ""],
+        [190, 2, 60, ""],
+        [192, 0, 84, ""],
+        [193, 1, 89, ""],
+        [196, 1, 85, ""],
+        [198, 1, 86, ""],
+        [200, 1, 86, ""],
+        [201, 0, 85, ""],
+        [203, 1, 86, ""],
+        [205, 0, 86, ""],
+        [208, 1, 87, ""],
+        [210, 0, 87, ""],
+        [213, 1, 88, ""],
+        [215, 0, 88, ""],
+        [218, 0, 89, ""],
+        [222, 1, 90, ""],
+        [227, 1, 90, ""],
+        [229, 0, 90, ""],
+        [231, 1, 91, ""],
+        [236, 1, 91, ""],
+        [238, 0, 91, ""],
+        [241, 1, 94, ""],
+        [242, 1, 93, ""],
+        [244, 1, 92, ""],
+        [247, 0, 92, ""],
+        [248, 1, 94, ""],
+        [249, 0, 93, ""],
+        [251, 1, 94, ""],
+        [254, 0, 94, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/collision_and_oscillation.s",
+      "tokens": [
+        [49, 1, 95, ""],
+        [52, 0, 95, ""],
+        [57, 0, 96, ""],
+        [61, 1, 97, ""],
+        [67, 1, 98, ""],
+        [69, 1, 98, ""],
+        [70, 0, 97, ""],
+        [76, 1, 98, ""],
+        [78, 0, 98, ""],
+        [80, 3, 96, ""],
+        [104, 1, 99, ""],
+        [108, 0, 99, ""],
+        [110, 1, 100, ""],
+        [119, 0, 100, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/environment_loading.s",
+      "tokens": [
+        [3, 1, 102, ""],
+        [5, 1, 101, ""],
+        [7, 1, 102, ""],
+        [8, 0, 101, ""],
+        [10, 0, 102, ""],
+        [29, 1, 103, ""],
+        [33, 0, 103, ""],
+        [40, 1, 103, ""],
+        [44, 1, 106, ""],
+        [46, 1, 104, ""],
+        [48, 1, 106, ""],
+        [50, 1, 106, ""],
+        [51, 0, 104, ""],
+        [53, 1, 106, ""],
+        [55, 1, 105, ""],
+        [57, 1, 106, ""],
+        [58, 0, 105, ""],
+        [60, 1, 106, ""],
+        [62, 1, 106, ""],
+        [69, 0, 106, ""],
+        [77, 1, 107, ""],
+        [80, 1, 107, ""],
+        [82, 0, 107, ""],
+        [99, 1, 110, ""],
+        [102, 1, 108, ""],
+        [106, 1, 108, ""],
+        [110, 1, 108, ""],
+        [114, 1, 108, ""],
+        [118, 1, 108, ""],
+        [122, 1, 108, ""],
+        [126, 1, 108, ""],
+        [130, 1, 108, ""],
+        [132, 0, 108, ""],
+        [138, 1, 109, ""],
+        [140, 0, 109, ""],
+        [142, 1, 111, ""],
+        [143, 0, 110, ""],
+        [145, 0, 111, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/environment_state.s",
+      "tokens": [
+        [9, 1, 118, ""],
+        [11, 1, 112, ""],
+        [13, 1, 112, ""],
+        [16, 0, 112, ""],
+        [22, 1, 113, ""],
+        [24, 1, 115, ""],
+        [25, 0, 113, ""],
+        [28, 1, 114, ""],
+        [29, 1, 116, ""],
+        [31, 1, 116, ""],
+        [32, 0, 114, ""],
+        [34, 0, 115, ""],
+        [37, 0, 116, ""],
+        [39, 1, 117, ""],
+        [41, 0, 117, ""],
+        [43, 0, 118, ""],
+        [50, 1, 119, ""],
+        [52, 0, 119, ""],
+        [55, 1, 120, ""],
+        [56, 1, 124, ""],
+        [58, 1, 124, ""],
+        [60, 1, 120, ""],
+        [61, 1, 121, ""],
+        [62, 0, 120, ""],
+        [66, 0, 121, ""],
+        [68, 1, 122, ""],
+        [70, 0, 122, ""],
+        [75, 1, 123, ""],
+        [77, 0, 123, ""],
+        [78, 1, 126, ""],
+        [79, 0, 124, ""],
+        [81, 1, 125, ""],
+        [83, 0, 125, ""],
+        [85, 0, 126, ""],
+        [103, 1, 128, ""],
+        [104, 1, 127, ""],
+        [106, 0, 127, ""],
+        [108, 0, 128, ""],
+        [147, 1, 129, ""],
+        [149, 1, 134, ""],
+        [151, 1, 134, ""],
+        [152, 0, 129, ""],
+        [154, 1, 130, ""],
+        [156, 1, 134, ""],
+        [160, 0, 130, ""],
+        [162, 1, 131, ""],
+        [164, 1, 134, ""],
+        [166, 0, 131, ""],
+        [168, 1, 134, ""],
+        [170, 1, 132, ""],
+        [173, 1, 132, ""],
+        [174, 2, 135, ""],
+        [176, 0, 132, ""],
+        [179, 0, 133, ""],
+        [183, 3, 133, ""],
+        [185, 0, 134, ""],
+        [187, 0, 135, ""],
+        [189, 1, 136, ""],
+        [191, 0, 136, ""],
+        [195, 2, 137, ""],
+        [196, 1, 147, ""],
+        [197, 0, 137, ""],
+        [204, 1, 138, ""],
+        [206, 0, 138, ""],
+        [207, 2, 139, ""],
+        [209, 1, 147, ""],
+        [210, 2, 140, ""],
+        [211, 1, 147, ""],
+        [212, 0, 139, ""],
+        [215, 0, 140, ""],
+        [221, 2, 141, ""],
+        [222, 1, 147, ""],
+        [223, 0, 141, ""],
+        [231, 1, 142, ""],
+        [233, 0, 142, ""],
+        [235, 1, 143, ""],
+        [236, 2, 145, ""],
+        [237, 1, 147, ""],
+        [238, 0, 143, ""],
+        [241, 1, 144, ""],
+        [243, 0, 144, ""],
+        [245, 0, 145, ""],
+        [252, 1, 146, ""],
+        [254, 0, 146, ""],
+        [256, 0, 147, ""],
+        [258, 0, 148, ""],
+        [261, 1, 148, ""],
+        [264, 1, 149, ""],
+        [267, 0, 149, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/ring_awards.s",
+      "tokens": [
+        [9, 1, 150, ""],
+        [11, 0, 150, ""],
+        [14, 1, 151, ""],
+        [16, 0, 151, ""],
+        [19, 1, 152, ""],
+        [21, 1, 153, ""],
+        [23, 1, 152, ""],
+        [25, 1, 153, ""],
+        [26, 0, 152, ""],
+        [29, 0, 153, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/water_interrupt_tables.s",
+      "tokens": [
+        [1, 0, 154, ""],
+        [3, 0, 155, ""],
+        [5, 0, 156, ""],
+        [7, 0, 157, ""],
+        [10, 0, 158, ""]
+      ]
+    },
+    {
+      "source": "src/game/level/sk/water_tunnel_motion.s",
+      "tokens": [
+        [3, 1, 169, ""],
+        [5, 1, 169, ""],
+        [7, 1, 159, ""],
+        [18, 0, 159, ""],
+        [26, 1, 160, ""],
+        [28, 0, 160, ""],
+        [30, 0, 161, ""],
+        [33, 1, 167, ""],
+        [35, 1, 167, ""],
+        [38, 1, 167, ""],
+        [40, 1, 167, ""],
+        [42, 1, 168, ""],
+        [44, 1, 163, ""],
+        [46, 1, 168, ""],
+        [62, 1, 164, ""],
+        [64, 1, 162, ""],
+        [66, 0, 162, ""],
+        [68, 1, 163, ""],
+        [70, 0, 163, ""],
+        [72, 0, 164, ""],
+        [74, 1, 165, ""],
+        [76, 0, 165, ""],
+        [78, 1, 166, ""],
+        [80, 0, 166, ""],
+        [82, 0, 167, ""],
+        [84, 3, 161, ""],
+        [86, 1, 169, ""],
+        [88, 0, 168, ""],
+        [90, 0, 169, ""],
+        [115, 1, 170, ""],
+        [117, 1, 175, ""],
+        [119, 1, 191, ""],
+        [121, 0, 170, ""],
+        [129, 1, 172, ""],
+        [131, 1, 172, ""],
+        [142, 1, 155, ""],
+        [143, 3, 155, ""],
+        [143, 5, 154, ""],
+        [144, 0, 171, ""],
+        [146, 3, 171, ""],
+        [147, 1, 174, ""],
+        [148, 0, 172, ""],
+        [150, 1, 173, ""],
+        [153, 0, 173, ""],
+        [155, 0, 174, ""],
+        [157, 1, 180, ""],
+        [158, 0, 175, ""],
+        [166, 1, 177, ""],
+        [168, 1, 177, ""],
+        [179, 1, 156, ""],
+        [180, 3, 156, ""],
+        [180, 5, 155, ""],
+        [181, 0, 176, ""],
+        [183, 3, 176, ""],
+        [184, 1, 179, ""],
+        [185, 0, 177, ""],
+        [187, 1, 178, ""],
+        [190, 0, 178, ""],
+        [192, 0, 179, ""],
+        [193, 2, 156, ""],
+        [195, 0, 180, ""],
+        [196, 1, 185, ""],
+        [199, 1, 181, ""],
+        [201, 1, 182, ""],
+        [203, 1, 182, ""],
+        [204, 0, 181, ""],
+        [206, 1, 182, ""],
+        [208, 0, 182, ""],
+        [211, 1, 183, ""],
+        [213, 0, 183, ""],
+        [216, 1, 184, ""],
+        [218, 0, 184, ""],
+        [221, 0, 185, ""],
+        [225, 1, 186, ""],
+        [230, 1, 186, ""],
+        [232, 0, 186, ""],
+        [234, 1, 187, ""],
+        [239, 1, 187, ""],
+        [241, 0, 187, ""],
+        [244, 1, 190, ""],
+        [245, 1, 189, ""],
+        [247, 1, 188, ""],
+        [250, 0, 188, ""],
+        [251, 1, 190, ""],
+        [252, 0, 189, ""],
+        [254, 1, 190, ""],
+        [257, 0, 190, ""],
+        [261, 0, 191, ""],
+        [269, 1, 193, ""],
+        [271, 1, 193, ""],
+        [283, 1, 158, ""],
+        [284, 3, 158, ""],
+        [284, 5, 157, ""],
+        [285, 0, 192, ""],
+        [287, 3, 192, ""],
+        [288, 1, 195, ""],
+        [289, 0, 193, ""],
+        [291, 1, 194, ""],
+        [295, 1, 194, ""],
+        [301, 0, 194, ""],
+        [303, 0, 195, ""],
+        [305, 2, 158, ""],
+        [308, 1, 201, ""],
+        [309, 0, 196, ""],
+        [312, 1, 197, ""],
+        [314, 1, 198, ""],
+        [317, 1, 198, ""],
+        [319, 1, 198, ""],
+        [322, 1, 198, ""],
+        [324, 1, 198, ""],
+        [325, 0, 197, ""],
+        [327, 1, 198, ""],
+        [330, 1, 198, ""],
+        [332, 1, 198, ""],
+        [335, 1, 198, ""],
+        [337, 0, 198, ""],
+        [339, 1, 199, ""],
+        [342, 1, 199, ""],
+        [344, 0, 199, ""],
+        [357, 1, 200, ""],
+        [360, 0, 200, ""],
+        [362, 0, 201, ""],
+        [364, 1, 202, ""],
+        [368, 1, 196, ""],
+        [369, 1, 193, ""],
+        [370, 0, 202, ""],
+        [372, 1, 203, ""],
+        [376, 1, 196, ""],
+        [377, 1, 193, ""],
+        [378, 0, 203, ""],
+        [381, 1, 196, ""],
+        [383, 1, 196, ""]
+      ]
+    }
+  ]
+}

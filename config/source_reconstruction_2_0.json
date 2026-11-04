@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 126
+    "commit_count": 127
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -803,9 +803,15 @@
       "commits": ["1d0bab4b7a1180c2352fb0b66c2fd3f2b7707474"]
     },
     {
-      "id": "current-shorten-21-camera",
+      "id": "change-a6fe2a6b1097",
       "kind": "source_or_tooling",
       "summary": "Apply 254 reviewed short labels for camera.",
+      "commits": ["a6fe2a6b10979a9bb7ccd64b2b9fea461581f8c5"]
+    },
+    {
+      "id": "current-shorten-22-level-environment",
+      "kind": "source_or_tooling",
+      "summary": "Apply 193 reviewed short labels for level environment.",
       "commits": ["release-commit"]
     }
   ],

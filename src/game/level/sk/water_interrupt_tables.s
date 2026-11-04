@@ -3,16 +3,16 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-byte_748E:
+SKEnv_HCZ2CurrentChunkIds:
                 dc.b    $1C, $72, $83, $84, $8B, $91, $9F, $A0, $A5, $A6
-byte_7498:
+SKEnv_ICZ1SkidChunkIds:
                 dc.b    $2E, $C6, $33, $C5, $24, $2A, $44, $1F, $27, $2B
-byte_74A2:
+SKEnv_ICZChunkSpeedTargets:
                 dc.b    $F8, $F8,   8,   8, $F4, $F4, $F4,  $C,  $C,  $C
-byte_74AC:
+SKEnvironment_SozGroundSkidChunkIdBytes:
                 dc.b    $F, $13, $14, $15, $16, $17, $35, $6C, $6D, $76
                 dc.b    $77, $7E, $7F, $85, $8A, $8C, $90
-byte_74BD:
+SKEnv_SOZSkidAndRegionPairs:
                 dc.b    $F8,   0, $F8,   0, $FA,   1, $FA,   2, $F8,   0, $F8,   0, $F8,   0,   6,   1,   0,   3,   6,   2
                 dc.b    8,   0,   8,   0,   8,   0,   8,   0,   8,   0,   0,   3, $F8,   0,   0
                 even

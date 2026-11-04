@@ -15,49 +15,49 @@ Obj_ResetCollisionResponseList:
 
 Handle_Onscreen_Water_Height:
                 tst.b   (Water_flag).w
-                beq.w   loc_6C9C
+                beq.w   SKWater_ApplyGroundSurfaceMotion
                 tst.b   (Deform_lock).w
-                bne.s   loc_6C52
+                bne.s   SKWater_SetCurrentFromMeanHeight
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_6C52
+                bhs.s   SKWater_SetCurrentFromMeanHeight
                 bsr.w   SKHCZ_ApplyWaterTunnelCurrents
                 bsr.w   DynamicWaterHeight
 
-loc_6C52:
+SKWater_SetCurrentFromMeanHeight:
                 clr.b   (Water_full_screen_flag).w
                 moveq   #0,d0
                 add.w   (Mean_water_level).w,d0
                 move.w  d0,(Water_level).w
                 cmpi.w  #$100,(Current_zone_and_act).w
-                bne.s   loc_6C70
+                bne.s   SKWater_ClassifyCameraCoverage
                 cmpi.w  #$900,(Camera_X_pos).w
-                blo.s   loc_6C86
+                blo.s   SKWater_DisableSplitAndReturn
 
-loc_6C70:
+SKWater_ClassifyCameraCoverage:
                 move.w  (Water_level).w,d0
                 sub.w   (Camera_Y_pos).w,d0
-                beq.s   loc_6C80
-                bcc.s   loc_6C8E
+                beq.s   SKWater_MarkFullScreenWater
+                bcc.s   SKWater_CapSplitCounter
                 tst.w   d0
-                bpl.s   loc_6C8E
+                bpl.s   SKWater_CapSplitCounter
 
-loc_6C80:
+SKWater_MarkFullScreenWater:
                 move.b  #1,(Water_full_screen_flag).w
 
-loc_6C86:
+SKWater_DisableSplitAndReturn:
                 move.b  #-1,(H_int_counter).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6C8E:
+SKWater_CapSplitCounter:
                 cmpi.w  #$DF,d0
-                blo.s   loc_6C98
+                blo.s   SKWater_StoreSplitCounter
                 move.w  #$FF,d0
 
-loc_6C98:
+SKWater_StoreSplitCounter:
                 move.b  d0,(H_int_counter).w
 
-loc_6C9C:
+SKWater_ApplyGroundSurfaceMotion:
                 bsr.w   SKSurface_DispatchBothPlayers
                 rts
 ; End of function Handle_Onscreen_Water_Height
@@ -68,52 +68,52 @@ loc_6C9C:
                 move.w  (Mean_water_level).w,(Water_level).w
                 move.l  #HInt3,(H_int_addr).w
                 cmpi.w  #$1000,(V_blank_cycles).w
-                blo.s   loc_6CC4
+                blo.s   SKWater_RetainedClassifyWrapSplit
                 move.l  #HInt4,(H_int_addr).w
 
-loc_6CC4:
+SKWater_RetainedClassifyWrapSplit:
                 move.w  (Water_level).w,d0
                 sub.w   (Camera_Y_pos).w,d0
-                beq.s   loc_6CDC
-                bcc.s   loc_6D18
+                beq.s   SKWater_RetainedMarkFullWater
+                bcc.s   SKWater_RetainedCapNormalSplit
                 tst.w   d0
-                bpl.s   loc_6D18
+                bpl.s   SKWater_RetainedCapNormalSplit
                 addi.w  #$1E0,d0
-                beq.s   loc_6CDC
-                bcs.s   loc_6CEA
+                beq.s   SKWater_RetainedMarkFullWater
+                bcs.s   SKWater_RetainedCapReverseSplit
 
-loc_6CDC:
+SKWater_RetainedMarkFullWater:
                 move.b  #1,(Water_full_screen_flag).w
                 move.b  #-1,(H_int_counter).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6CEA:
+SKWater_RetainedCapReverseSplit:
                 cmpi.w  #$DF,d0
-                blo.s   loc_6CF4
+                blo.s   SKWater_RetainedInstallReverseHInt
                 move.w  #$FF,d0
 
-loc_6CF4:
+SKWater_RetainedInstallReverseHInt:
                 move.b  d0,(H_int_counter).w
                 move.b  #1,(Water_full_screen_flag).w
                 move.l  #HInt5,(H_int_addr).w
                 cmpi.w  #$1000,(V_blank_cycles).w
-                blo.s   loc_6D16
+                blo.s   SKWater_RetainedJoinSurfaceMotion
                 move.l  #HInt6,(H_int_addr).w
 
-loc_6D16:
-                bra.s   loc_6D26
+SKWater_RetainedJoinSurfaceMotion:
+                bra.s   SKWater_RetainedApplySurfaceMotion
 ; ---------------------------------------------------------------------------
 
-loc_6D18:
+SKWater_RetainedCapNormalSplit:
                 cmpi.w  #$DF,d0
-                blo.s   loc_6D22
+                blo.s   SKWater_RetainedStoreNormalSplit
                 move.w  #$FF,d0
 
-loc_6D22:
+SKWater_RetainedStoreNormalSplit:
                 move.b  d0,(H_int_counter).w
 
-loc_6D26:
+SKWater_RetainedApplySurfaceMotion:
                 bsr.w   SKSurface_DispatchBothPlayers
                 rts
 ; ---------------------------------------------------------------------------
@@ -135,14 +135,14 @@ DynamicWaterHeight:
                 move.b  (Water_speed).w,d1
                 move.w  (Target_water_level).w,d0
                 sub.w   (Mean_water_level).w,d0
-                beq.s   locret_6D9A
-                bcc.s   loc_6D96
+                beq.s   SKWater_StepHeightReturn
+                bcc.s   SKWater_StepMeanHeight
                 neg.w   d1
 
-loc_6D96:
+SKWater_StepMeanHeight:
                 add.w   d1,(Mean_water_level).w
 
-locret_6D9A:
+SKWater_StepHeightReturn:
                 rts
 ; End of function DynamicWaterHeight
 
@@ -188,71 +188,71 @@ DynamicWaterHeight_AIZ1:
 
 DynamicWaterHeight_AIZ2:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_6DF6
+                bne.s   SKWater_AIZ2_TryLowerEarlyTarget
                 cmpi.w  #$820,(Camera_target_max_Y_pos).w
-                beq.s   locret_6E6C
+                beq.s   SKWater_AIZ2_WaterEventReturn
                 cmpi.w  #$3B60,(Camera_X_pos).w
-                bhs.s   locret_6E6C
+                bhs.s   SKWater_AIZ2_WaterEventReturn
 
-loc_6DF6:
+SKWater_AIZ2_TryLowerEarlyTarget:
                 cmpi.w  #$2440,(Camera_X_pos).w
-                bhs.s   loc_6E14
+                bhs.s   SKWater_AIZ2_TryLatchWaterTrigger
                 cmpi.w  #$618,(Target_water_level).w
-                bne.s   locret_6E6C
+                bne.s   SKWater_AIZ2_WaterEventReturn
                 move.w  #$528,(Target_water_level).w
                 move.b  #2,(Water_speed).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E14:
+SKWater_AIZ2_TryLatchWaterTrigger:
                 tst.b   (Level_trigger_array).w
-                bne.s   loc_6E28
+                bne.s   SKWater_AIZ2_TryRaiseWater
                 cmpi.w  #$2850,(Camera_X_pos).w
-                blo.s   locret_6E6C
+                blo.s   SKWater_AIZ2_WaterEventReturn
                 move.b  #1,(Level_trigger_array).w
 
-loc_6E28:
+SKWater_AIZ2_TryRaiseWater:
                 cmpi.w  #$618,(Target_water_level).w
-                beq.s   locret_6E6C
+                beq.s   SKWater_AIZ2_WaterEventReturn
                 cmpi.w  #$2900,(Camera_X_pos).w
-                bhs.s   loc_6E52
+                bhs.s   SKWater_AIZ2_BeginLayoutClear
                 move.w  #-1,(Screen_shake_flag).w
                 jsr     (AllocateObject).l
-                bne.s   loc_6E52
-                move.l  #Obj_6E6E,(a1)
+                bne.s   SKWater_AIZ2_BeginLayoutClear
+                move.l  #ScreenShakeDelay_CountDownToStop,(a1)
                 move.b  #180,anim_frame_timer(a1)
 
-loc_6E52:
+SKWater_AIZ2_BeginLayoutClear:
                 lea     (Level_layout_main+$1C).w,a3
                 moveq   #4-1,d1
 
-loc_6E58:
+SKWater_AIZ2_ClearLayoutAndSetTarget:
                 movea.w (a3),a1
                 move.b  #0,$4E(a1)
                 addq.w  #4,a3
-                dbf     d1,loc_6E58
+                dbf     d1,SKWater_AIZ2_ClearLayoutAndSetTarget
                 move.w  #$618,(Target_water_level).w
 
-locret_6E6C:
+SKWater_AIZ2_WaterEventReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-Obj_6E6E:
+ScreenShakeDelay_CountDownToStop:
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_6E76
+                beq.s   ScreenShakeDelay_ClearFlagAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6E76:
+ScreenShakeDelay_ClearFlagAndDelete:
                 move.w  #0,(Screen_shake_flag).w
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_HCZ1:
-                lea     (word_6E8C).l,a1
-                bra.w   loc_6F2C
+                lea     (SKWater_HCZ1HeightByX).l,a1
+                bra.w   SKWater_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_6E8C:
+SKWater_HCZ1HeightByX:
                 dc.w    $8500,  $900
                 dc.w    $8680, $2A00
                 dc.w    $8680, $3500
@@ -261,21 +261,21 @@ word_6E8C:
 
 DynamicWaterHeight_HCZ2:
                 tst.b   (_unkFAA2).w
-                beq.s   loc_6EA4
+                beq.s   SKWater_SelectHCZ2HeightTable
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EA4:
-                lea     (word_6EBA).l,a1
+SKWater_SelectHCZ2HeightTable:
+                lea     (SKWater_HCZ2HeightByX).l,a1
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_6F2C
-                lea     (word_6EC2).l,a1
-                bra.s   loc_6F2C
+                bne.s   SKWater_ReadCameraXForHeight
+                lea     (SKWater_HCZ2KnuxHeightByX).l,a1
+                bra.s   SKWater_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_6EBA:
+SKWater_HCZ2HeightByX:
                 dc.w    $700, $3E00
                 dc.w    $7E0, $FFFF
-word_6EC2:
+SKWater_HCZ2KnuxHeightByX:
                 dc.w    $700, $4100
                 dc.w    $8360, $FFFF
 ; ---------------------------------------------------------------------------
@@ -285,10 +285,10 @@ DynamicWaterHeight_Null:
 ; ---------------------------------------------------------------------------
 
 DynamicWaterHeight_LBZ1:
-                lea     (word_6ED4).l,a1
-                bra.s   loc_6F2C
+                lea     (SKWater_LBZ1HeightByX).l,a1
+                bra.s   SKWater_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
-word_6ED4:
+SKWater_LBZ1HeightByX:
                 dc.w    $8B00,  $E00
                 dc.w    $8A00, $1980
                 dc.w    $8A00, $2340
@@ -298,27 +298,27 @@ word_6ED4:
 
 DynamicWaterHeight_LBZ2:
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_6EF2
+                beq.s   SKWater_LBZ2KnuxPickHeightSource
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6EF2:
+SKWater_LBZ2KnuxPickHeightSource:
                 tst.b   (_unkF7C2).w
-                bne.s   loc_6F00
-                lea     (word_6F12).l,a1
-                bra.s   loc_6F2C
+                bne.s   SKWater_LBZ2TrySetMeanHeight
+                lea     (SKWater_LBZ2KnuxHeightByX).l,a1
+                bra.s   SKWater_ReadCameraXForHeight
 ; ---------------------------------------------------------------------------
 
-loc_6F00:
+SKWater_LBZ2TrySetMeanHeight:
                 move.w  (Camera_Y_pos).w,d0
                 cmp.w   (Mean_water_level).w,d0
-                blo.s   locret_6F10
+                blo.s   SKWater_LBZ2MeanHeightReturn
                 move.w  #$660,(Mean_water_level).w
 
-locret_6F10:
+SKWater_LBZ2MeanHeightReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_6F12:
+SKWater_LBZ2KnuxHeightByX:
                 dc.w    $8FF0,  $D80
                 dc.w    $8B20, $FFFF
 ; ---------------------------------------------------------------------------
@@ -329,26 +329,27 @@ DynamicWaterHeight_Null2:
 
 DynamicWaterHeight_Ending:
                 cmpi.w  #$1DE0,(Camera_X_pos).w
-                blo.s   locret_6F2A
+                blo.s   SKWater_EndingHeightReturn
                 move.w  #$510,(Target_water_level).w
 
-locret_6F2A:
+SKWater_EndingHeightReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6F2C:
+SKWater_ReadCameraXForHeight:
                 move.w  (Camera_X_pos).w,d0
 
-loc_6F30:
+; Use the first record whose unsigned upper X bound includes the camera. Bit 15 of the height sets it immediately
+SKWater_FindHeightAtCameraX:
                 move.l  (a1)+,d1
                 cmp.w   d1,d0
-                bhi.s   loc_6F30
+                bhi.s   SKWater_FindHeightAtCameraX
                 swap    d1
                 tst.w   d1
-                bpl.s   loc_6F44
+                bpl.s   SKWater_StoreTargetHeight
                 andi.w  #$7FFF,d1
                 move.w  d1,(Mean_water_level).w
 
-loc_6F44:
+SKWater_StoreTargetHeight:
                 move.w  d1,(Target_water_level).w
                 rts

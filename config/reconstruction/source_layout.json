@@ -5948,7 +5948,7 @@
       "responsibility": "Competition environment palette, collision response reset, water surface height and dynamic water-level state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 337,
+      "physical_lines": 338,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "s3.s",
@@ -6633,7 +6633,7 @@
       "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 329,
+      "physical_lines": 333,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "s3.s",
@@ -7008,7 +7008,7 @@
       "responsibility": "Competition environment palette, collision response reset, water surface height and dynamic water-level state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 354,
+      "physical_lines": 355,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",
@@ -7683,7 +7683,7 @@
       "responsibility": "Hydrocity water tunnel detection, movement helpers and water-region player response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 480,
+      "physical_lines": 487,
       "origin": {
         "commit": "044fa85726fba075e5a128f8082b960b3c541e1a",
         "path": "sonic3k.s",

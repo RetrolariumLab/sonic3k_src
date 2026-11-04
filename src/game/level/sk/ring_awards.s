@@ -11,32 +11,32 @@ AddRings:
                 move.w  #999,d1
                 add.w   d0,(a5)
                 cmp.w   (a5),d1
-                bhs.s   loc_8610E
+                bhs.s   SKLevel_CapLiveRingCount
                 move.w  d1,(a5)
 
-loc_8610E:
+SKLevel_CapLiveRingCount:
                 add.w   d0,(a2)
                 cmp.w   (a2),d1
-                bhs.s   loc_86116
+                bhs.s   SKLevel_FlagRingsAndCheckLives
                 move.w  d1,(a2)
 
-loc_86116:
+SKLevel_FlagRingsAndCheckLives:
                 ori.b   #1,(a3)
                 cmpi.w  #100,(a2)
-                blo.s   loc_86132
+                blo.s   SKLevel_PlayRingSoundWithoutExtraLife
                 bset    #1,(a4)
-                beq.s   loc_8613A
+                beq.s   SKLevel_IncrementLivesAndMonitorCounter
                 cmpi.w  #200,(a2)
-                blo.s   loc_86132
+                blo.s   SKLevel_PlayRingSoundWithoutExtraLife
                 bset    #2,(a4)
-                beq.s   loc_8613A
+                beq.s   SKLevel_IncrementLivesAndMonitorCounter
 
-loc_86132:
+SKLevel_PlayRingSoundWithoutExtraLife:
                 moveq   #signextendB(sfx_RingRight),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_8613A:
+SKLevel_IncrementLivesAndMonitorCounter:
                 addq.w  #1,(Monitors_broken).w          ; Add an extra life
                 addq.b  #1,(Life_count).w
                 addq.b  #1,(Update_HUD_life_count).w
