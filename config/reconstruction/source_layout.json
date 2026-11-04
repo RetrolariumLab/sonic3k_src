@@ -25504,7 +25504,7 @@
       "responsibility": "Chainspike enemy, linked spike motion, collision helpers and private construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 299,
+      "physical_lines": 300,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25539,7 +25539,7 @@
       "responsibility": "Cluckoid enemy movement, projectiles, helper callbacks and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 346,
+      "physical_lines": 348,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25604,7 +25604,7 @@
       "responsibility": "EggRobo enemy controller, projectiles, motion or attack helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 451,
+      "physical_lines": 456,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25634,7 +25634,7 @@
       "responsibility": "Fireworm enemy, linked motion, attacks, collision and private object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 312,
+      "physical_lines": 314,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25699,7 +25699,7 @@
       "responsibility": "Madmole enemy controller, attacks, child motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 450,
+      "physical_lines": 453,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25729,7 +25729,7 @@
       "responsibility": "Mushmeanie enemy movement, interaction and private object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 215,
+      "physical_lines": 216,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25764,7 +25764,7 @@
       "responsibility": "Rockn enemy and attached rock actors, player contact, movement and private object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 310,
+      "physical_lines": 311,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25829,7 +25829,7 @@
       "responsibility": "Skorp enemy attack states, linked children, helper callbacks and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 451,
+      "physical_lines": 457,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25894,7 +25894,7 @@
       "responsibility": "Toxomister enemy, attack actors, movement helpers and private object resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 312,
+      "physical_lines": 316,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -25906,7 +25906,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_90002",
+          "name": "SKToxomister_CloudChooseFacingBurstX",
           "kind": "terminal-tail",
           "reason": "Keep the final indexed projectile velocity callback with its private table and mapping resources after the preceding original helper boundary.",
           "origin_first_line": 4541,

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 140
+    "commit_count": 141
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -887,9 +887,15 @@
       "commits": ["2b09f0d025de56de50499a233c46a4c17835731a"]
     },
     {
-      "id": "current-shorten-35-zone-hpz",
+      "id": "change-f347c32059e7",
       "kind": "source_or_tooling",
       "summary": "Apply 54 reviewed short labels for hpz.",
+      "commits": ["f347c32059e7a4c4027bbe841aee0bfe1e3ea84f"]
+    },
+    {
+      "id": "current-shorten-35b-enemies-sk",
+      "kind": "source_or_tooling",
+      "summary": "Apply 464 reviewed short labels for enemies sk.",
       "commits": ["release-commit"]
     }
   ],

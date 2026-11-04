@@ -1,15 +1,15 @@
 ; Data owner: objects/shared/fireworm
 ; Provenance and source range: config/reconstruction/source_layout.json
 DPLC_Fireworm_:
-                dc.w    word_8FAAE-DPLC_Fireworm_
-                dc.w    word_8FAB2-DPLC_Fireworm_
-                dc.w    word_8FAB6-DPLC_Fireworm_
-                dc.w    word_8FABA-DPLC_Fireworm_
-word_8FAAE:     dc.w    0
+                dc.w    FirewormShared_DPLCFrame00-DPLC_Fireworm_
+                dc.w    FirewormShared_DPLCFrame01-DPLC_Fireworm_
+                dc.w    FirewormShared_DPLCFrame02-DPLC_Fireworm_
+                dc.w    FirewormShared_DPLCFrame03-DPLC_Fireworm_
+FirewormShared_DPLCFrame00: dc.w    0
                 dc.w    $0003
-word_8FAB2:     dc.w    0
+FirewormShared_DPLCFrame01: dc.w    0
                 dc.w    $0045
-word_8FAB6:     dc.w    0
+FirewormShared_DPLCFrame02: dc.w    0
                 dc.w    $00A8
-word_8FABA:     dc.w    0
+FirewormShared_DPLCFrame03: dc.w    0
                 dc.w    $0138

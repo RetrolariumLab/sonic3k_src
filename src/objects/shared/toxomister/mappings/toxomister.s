@@ -1,30 +1,30 @@
 ; Data owner: objects/shared/toxomister
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Toxomister_:
-                dc.w    word_9009E-Map_Toxomister_
-                dc.w    word_900B8-Map_Toxomister_
-                dc.w    word_900C0-Map_Toxomister_
-                dc.w    word_900C8-Map_Toxomister_
-                dc.w    word_900D0-Map_Toxomister_
-                dc.w    word_900D8-Map_Toxomister_
-                dc.w    word_900E0-Map_Toxomister_
-                dc.w    word_900E8-Map_Toxomister_
-word_9009E:     dc.w    4
+                dc.w    ToxomisterSK_MapFrame00-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame01-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame02-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame03-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame04-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame05-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame06-Map_Toxomister_
+                dc.w    ToxomisterSK_MapFrame07-Map_Toxomister_
+ToxomisterSK_MapFrame00:    dc.w    4
                 dc.b    $F0,   1,   0,   4, $FF, $F8
                 dc.b    $F0,   1,   8,   4,   0,   0
                 dc.b    0,   1,   0,   4, $FF, $F8
                 dc.b    0,   1,   8,   4,   0,   0
-word_900B8:     dc.w    1
+ToxomisterSK_MapFrame01:    dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F8
-word_900C0:     dc.w    1
+ToxomisterSK_MapFrame02:    dc.w    1
                 dc.b    $FC,   0,   0,   6, $FF, $FC
-word_900C8:     dc.w    1
+ToxomisterSK_MapFrame03:    dc.w    1
                 dc.b    $FC,   0,   0,   7, $FF, $FC
-word_900D0:     dc.w    1
+ToxomisterSK_MapFrame04:    dc.w    1
                 dc.b    $F8,   5,   0,   8, $FF, $F8
-word_900D8:     dc.w    1
+ToxomisterSK_MapFrame05:    dc.w    1
                 dc.b    $F8,   5,   0,  $C, $FF, $F8
-word_900E0:     dc.w    1
+ToxomisterSK_MapFrame06:    dc.w    1
                 dc.b    $F8,   5,   0, $10, $FF, $F8
-word_900E8:     dc.w    1
+ToxomisterSK_MapFrame07:    dc.w    1
                 dc.b    $F8,   5,   0, $14, $FF, $F8

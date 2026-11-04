@@ -1,15 +1,15 @@
 ; Data owner: objects/shared/fireworm
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Fireworm_:
-                dc.w    word_8FAC6-Map_Fireworm_
-                dc.w    word_8FACE-Map_Fireworm_
-                dc.w    word_8FAD6-Map_Fireworm_
-                dc.w    word_8FADE-Map_Fireworm_
-word_8FAC6:     dc.w    1
+                dc.w    FirewormShared_MapFrame00-Map_Fireworm_
+                dc.w    FirewormShared_MapFrame01-Map_Fireworm_
+                dc.w    FirewormShared_MapFrame02-Map_Fireworm_
+                dc.w    FirewormShared_MapFrame03-Map_Fireworm_
+FirewormShared_MapFrame00:  dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F8
-word_8FACE:     dc.w    1
+FirewormShared_MapFrame01:  dc.w    1
                 dc.b    $F4,   6,   0,   0, $FF, $F8
-word_8FAD6:     dc.w    1
+FirewormShared_MapFrame02:  dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4
-word_8FADE:     dc.w    1
+FirewormShared_MapFrame03:  dc.w    1
                 dc.b    $F4,  $A,   0,   0, $FF, $F4

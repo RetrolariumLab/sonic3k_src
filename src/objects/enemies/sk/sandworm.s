@@ -12,105 +12,105 @@ Obj_Sandworm:
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 Sandworm_Index:
-                dc.w    loc_8EA88-Sandworm_Index
-                dc.w    loc_8EACC-Sandworm_Index
-                dc.w    loc_8EB2E-Sandworm_Index
-                dc.w    loc_8EACC-Sandworm_Index
+                dc.w    SKSandworm_InitHeadAndSpawnSegments-Sandworm_Index
+                dc.w    SKSandworm_TickLaunchWait-Sandworm_Index
+                dc.w    SKSandworm_MoveArcAndCheckSubmerge-Sandworm_Index
+                dc.w    SKSandworm_TickLaunchWait-Sandworm_Index
 ; ---------------------------------------------------------------------------
 
-loc_8EA88:
+SKSandworm_InitHeadAndSpawnSegments:
                 lea     ObjDat_Sandworm(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #7,$38(a0)
-                move.l  #byte_8ED8C,$30(a0)
-                lea     ChildObjDat_8ED66(pc),a2
+                move.l  #SandwormSK_Head_UniformFrameZeroTwoLoop,$30(a0)
+                lea     SandwormSK_Head_FiveSimpleSegmentRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_8EAAA:
+SKSandworm_InitLaunchWaitAndTrails:
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_8EAD2,$34(a0)
+                move.l  #SKSandworm_InitArcCollision,$34(a0)
                 btst    #7,$38(a0)
-                beq.w   locret_8EBE0
-                lea     ChildObjDat_8ED6C(pc),a2
+                beq.w   SKSandworm_ArcUpdateReturn
+                lea     SKSandworm_HeadTrailChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_8EACC:
+SKSandworm_TickLaunchWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8EAD2:
+SKSandworm_InitArcCollision:
                 move.b  #4,routine(a0)
                 move.b  #$8B,collision_flags(a0)
                 btst    #7,$38(a0)
-                beq.s   loc_8EAEC
+                beq.s   SKSandworm_SetArcOriginAndSpeed
                 move.b  #$B,collision_flags(a0)
 
-loc_8EAEC:
+SKSandworm_SetArcOriginAndSpeed:
                 move.w  y_pos(a0),$3A(a0)
                 move.w  #-$400,y_vel(a0)
                 moveq   #-$60,d0
                 move.w  #-$200,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_8EB0A
+                beq.s   SKSandworm_ShiftXAndTryHeadSplash
                 neg.w   d0
                 neg.w   d1
 
-loc_8EB0A:
+SKSandworm_ShiftXAndTryHeadSplash:
                 add.w   d0,x_pos(a0)
                 move.w  d1,x_vel(a0)
                 btst    #7,$38(a0)
-                beq.w   locret_8EBE0
+                beq.w   SKSandworm_ArcUpdateReturn
                 moveq   #signextendB(sfx_Splash2),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_8ED74(pc),a2
+                lea     SandwormSK_Head_ThreeNormalSplashRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8EB2E:
+SKSandworm_MoveArcAndCheckSubmerge:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite_LightGravity).l
                 move.w  $3A(a0),d0
                 cmp.w   y_pos(a0),d0
-                bhi.w   locret_8EBE0
+                bhi.w   SKSandworm_ArcUpdateReturn
                 move.b  #6,routine(a0)
                 clr.b   collision_flags(a0)
                 move.w  d0,y_pos(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_8EB7E,$34(a0)
+                move.l  #SKSandworm_TurnAndRearmLaunch,$34(a0)
                 btst    #7,$38(a0)
-                beq.w   locret_8EBE0
+                beq.w   SKSandworm_ArcUpdateReturn
                 moveq   #signextendB(sfx_Splash2),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_8ED74(pc),a2
+                lea     SandwormSK_Head_ThreeNormalSplashRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8EB7E:
+SKSandworm_TurnAndRearmLaunch:
                 move.b  #2,routine(a0)
                 bchg    #0,render_flags(a0)
-                bra.w   loc_8EAAA
+                bra.w   SKSandworm_InitLaunchWaitAndTrails
 ; ---------------------------------------------------------------------------
 
-loc_8EB8E:
+SKSandwormSeg_DispatchSegmentAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8EBA4(pc,d0.w),d1
-                jsr     off_8EBA4(pc,d1.w)
+                move.w  SKSandwormSeg_SegmentStateOffsets(pc,d0.w),d1
+                jsr     SKSandwormSeg_SegmentStateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_8EBA4:
-                dc.w    loc_8EBAC-off_8EBA4
-                dc.w    loc_8EACC-off_8EBA4
-                dc.w    loc_8EB2E-off_8EBA4
-                dc.w    loc_8EACC-off_8EBA4
+SKSandwormSeg_SegmentStateOffsets:
+                dc.w    SKSandwormSeg_InitSegmentAndDelay-SKSandwormSeg_SegmentStateOffsets
+                dc.w    SKSandworm_TickLaunchWait-SKSandwormSeg_SegmentStateOffsets
+                dc.w    SKSandworm_MoveArcAndCheckSubmerge-SKSandwormSeg_SegmentStateOffsets
+                dc.w    SKSandworm_TickLaunchWait-SKSandwormSeg_SegmentStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8EBAC:
-                lea     word_8ED60(pc),a1
+SKSandwormSeg_InitSegmentAndDelay:
+                lea     SKSandwormSeg_SegmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #byte_8ED90,$30(a0)
+                move.l  #SKSandwormSeg_SegmentAnimation,$30(a0)
                 jsr     (Change_FlipXUseParent).l
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -120,130 +120,130 @@ loc_8EBAC:
                 addq.w  #6,d0
                 subq.w  #1,d0
                 move.w  d0,$2E(a0)
-                move.l  #loc_8EAAA,$34(a0)
+                move.l  #SKSandworm_InitLaunchWaitAndTrails,$34(a0)
 
-locret_8EBE0:
+SKSandworm_ArcUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8EBE2:
-                lea     word_8ED50(pc),a1
+SKSandwormTrail_InitTrailAndSpacing:
+                lea     SandwormSK_Trail_ArtFirstAttributeRecord(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_8EC1C,(a0)
-                move.l  #loc_8EC22,$34(a0)
+                move.l  #SKSandwormTrail_TickHiddenDelay,(a0)
+                move.l  #SKSandwormTrail_BeginTrailRise,$34(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lsl.w   #2,d0
                 move.w  d0,d1
                 movea.w parent3(a0),a1
                 btst    #0,render_flags(a1)
-                bne.s   loc_8EC12
+                bne.s   SKSandwormTrail_ApplySpacingAndTick
                 neg.w   d0
 
-loc_8EC12:
+SKSandwormTrail_ApplySpacingAndTick:
                 add.w   d0,x_pos(a0)
                 subq.w  #1,d1
                 move.w  d1,$2E(a0)
 
-loc_8EC1C:
+SKSandwormTrail_TickHiddenDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8EC22:
-                move.l  #loc_8EC46,(a0)
-                move.l  #byte_8ED88,$30(a0)
+SKSandwormTrail_BeginTrailRise:
+                move.l  #SKSandwormTrail_MoveAndDrawTrail,(a0)
+                move.l  #SKSandwormTrail_TrailAnimation,$30(a0)
                 move.w  #-$80,y_vel(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_8EC5E,$34(a0)
+                move.l  #SKSandwormTrail_BeginTrailFall,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8EC46:
+SKSandwormTrail_MoveAndDrawTrail:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8EC5E:
+SKSandwormTrail_BeginTrailFall:
                 move.w  #$40,y_vel(a0)
                 move.w  #$1F,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8EC74:
+SKSandwormSplash_DispatchSplashAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8EC88(pc,d0.w),d1
-                jsr     off_8EC88(pc,d1.w)
+                move.w  SKSandwormSplash_SplashStateOffsets(pc,d0.w),d1
+                jsr     SKSandwormSplash_SplashStateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_8EC88:
-                dc.w    loc_8EC92-off_8EC88
-                dc.w    loc_8ECB0-off_8EC88
-                dc.w    loc_8ECDA-off_8EC88
-                dc.w    loc_8ED02-off_8EC88
-                dc.w    loc_8ED3E-off_8EC88
+SKSandwormSplash_SplashStateOffsets:
+                dc.w    SKSandwormSplash_InitSplashAndDelay-SKSandwormSplash_SplashStateOffsets
+                dc.w    SKSandwormSplash_TickSplashDelay-SKSandwormSplash_SplashStateOffsets
+                dc.w    SKSandwormSplash_MoveAndAnimateRise-SKSandwormSplash_SplashStateOffsets
+                dc.w    SKSandwormSplash_SelectBobStep-SKSandwormSplash_SplashStateOffsets
+                dc.w    SKSandwormSplash_AnimateSplashFade-SKSandwormSplash_SplashStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8EC92:
-                lea     word_8ED58(pc),a1
+SKSandwormSplash_InitSplashAndDelay:
+                lea     SKSandwormSplash_SplashAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.w  d0,$2E(a0)
-                move.l  #loc_8ECB6,$34(a0)
+                move.l  #SKSandwormSplash_BeginSplashRise,$34(a0)
 
-loc_8ECB0:
+SKSandwormSplash_TickSplashDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8ECB6:
+SKSandwormSplash_BeginSplashRise:
                 move.b  #4,routine(a0)
-                move.l  #byte_8ED94,$30(a0)
+                move.l  #SKSandwormSplash_RiseAnimation,$30(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #7,$2E(a0)
-                move.l  #loc_8ECEC,$34(a0)
+                move.l  #SKSandwormSplash_BeginSplashBob,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8ECDA:
+SKSandwormSplash_MoveAndAnimateRise:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8ECEC:
+SKSandwormSplash_BeginSplashBob:
                 move.b  #6,routine(a0)
                 move.w  #$17,$2E(a0)
-                move.l  #loc_8ED1E,$34(a0)
+                move.l  #SKSandwormSplash_BeginSplashFade,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8ED02:
+SKSandwormSplash_SelectBobStep:
                 moveq   #8,d0
                 btst    #0,$2F(a0)
-                bne.s   loc_8ED0E
+                bne.s   SKSandwormSplash_ApplyBobAndAnimate
                 neg.w   d0
 
-loc_8ED0E:
+SKSandwormSplash_ApplyBobAndAnimate:
                 add.w   d0,y_pos(a0)
                 jsr     (Animate_Raw).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8ED1E:
+SKSandwormSplash_BeginSplashFade:
                 move.b  #8,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
-                move.l  #byte_8ED98,$30(a0)
+                move.l  #SKSandwormSplash_FadeAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8ED3E:
+SKSandwormSplash_AnimateSplashFade:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 ObjDat_Sandworm:
@@ -251,41 +251,41 @@ ObjDat_Sandworm:
                 dc.w    make_art_tile(ArtTile_Sandworm,1,0)
                 dc.w    $280
                 dc.b    8,  $C,   0,   0
-word_8ED50:
+SandwormSK_Trail_ArtFirstAttributeRecord:
                 dc.w    make_art_tile(ArtTile_Sandworm,2,0)
                 dc.w    $200
                 dc.b    8,   4,   3,   0
-word_8ED58:
+SKSandwormSplash_SplashAttributes:
                 dc.w    make_art_tile(ArtTile_Sandworm,2,0)
                 dc.w    $200
                 dc.b    4, $10,   5,   0
-word_8ED60:
+SKSandwormSeg_SegmentAttributes:
                 dc.w    $280
                 dc.b    8,   8,   1,   0
-ChildObjDat_8ED66:
+SandwormSK_Head_FiveSimpleSegmentRecord:
                 dc.w    5-1
-                dc.l    loc_8EB8E
-ChildObjDat_8ED6C:
+                dc.l    SKSandwormSeg_DispatchSegmentAndDraw
+SKSandworm_HeadTrailChildren:
                 dc.w    8-1
-                dc.l    loc_8EBE2
+                dc.l    SKSandwormTrail_InitTrailAndSpacing
                 dc.b    0,  -8
-ChildObjDat_8ED74:
+SandwormSK_Head_ThreeNormalSplashRecords:
                 dc.w    3-1
-                dc.l    loc_8EC74
+                dc.l    SKSandwormSplash_DispatchSplashAndDraw
                 dc.b    0,   4
-                dc.l    loc_8EC74
+                dc.l    SKSandwormSplash_DispatchSplashAndDraw
                 dc.b    -4,   4
-                dc.l    loc_8EC74
+                dc.l    SKSandwormSplash_DispatchSplashAndDraw
                 dc.b    4,   4
-byte_8ED88:
+SKSandwormTrail_TrailAnimation:
                 dc.b    1,   3,   4, $FC
-byte_8ED8C:
+SandwormSK_Head_UniformFrameZeroTwoLoop:
                 dc.b    9,   0,   2, $FC
-byte_8ED90:
+SKSandwormSeg_SegmentAnimation:
                 dc.b    $7E,   1,   1, $FC
-byte_8ED94:
+SKSandwormSplash_RiseAnimation:
                 dc.b    1,   5,   6, $FC
-byte_8ED98:
+SKSandwormSplash_FadeAnimation:
                 dc.b    7,   3
                 dc.b    7,   3
                 dc.b    8,   5

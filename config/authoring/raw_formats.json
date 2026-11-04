@@ -597,7 +597,7 @@
     },
     {
       "path": "src/objects/cutscenes/sk/opening.s",
-      "sha256": "3bf6d4390bcf3149237d38b7ad931db3f339784aa685ad96729114664e54ba31"
+      "sha256": "82da7752582138216b7591d7f13b7837bad8f5a814a4c6f84f53ca35d6900658"
     },
     {
       "path": "src/objects/cutscenes/sk/sky_sanctuary.s",
@@ -849,51 +849,51 @@
     },
     {
       "path": "src/objects/enemies/sk/butterdroid.s",
-      "sha256": "502ae44b5ad0f5e537a2cb1d780c8c614ea808d953ba0ea6f0df622c830cbb60"
+      "sha256": "67a8d22d25b5f193cf3386e201074de7041989dd8259ce1e3045164675324074"
     },
     {
       "path": "src/objects/enemies/sk/chainspike.s",
-      "sha256": "f010c92a74b47e7f55cbbb591c3aa9ff422dae4a5b2d47f197a477d2982cbf52"
+      "sha256": "a0b68d622d0b402195003597d0598861941c74ba6ab07b17ce597e75c3d50c16"
     },
     {
       "path": "src/objects/enemies/sk/cluckoid.s",
-      "sha256": "8f143cb35ca438d4544198a494e72fce5bea866e60dc2823b405479dfcfcad88"
+      "sha256": "ef16eca14f33b8468d8d5a1ed903b9b0d2b53322eb76e8d6e68075637f672b17"
     },
     {
       "path": "src/objects/enemies/sk/dragonfly.s",
-      "sha256": "43185ad6c51f9eeecc29b012434f62b64f799171221133dd778ea96cbf5086a6"
+      "sha256": "893b41b19a037384b9ffb0fa81348e78a1a75b63cf66cac76895061705eae222"
     },
     {
       "path": "src/objects/enemies/sk/fireworm.s",
-      "sha256": "95cd941c836aeaa01bc4840ec0a9ebc11affaa72f6964e92369ebd94de00a6b4"
+      "sha256": "403b3450cc4a4aad96c1ebf3799993763795891c4515cffb5e0864411f82433a"
     },
     {
       "path": "src/objects/enemies/sk/iwamodoki.s",
-      "sha256": "0a74544a03bf83de05d612e4a316d9e530f5219ecea2f3c0cc90c5f490a5ff39"
+      "sha256": "e83a879ed71da5af4ea7501f484483427db530bbdc157729118520874b1afd87"
     },
     {
       "path": "src/objects/enemies/sk/madmole.s",
-      "sha256": "c60c7027c80c46cf82892d7ec0b89d625228b93567a21067a8e2672f66f9971d"
+      "sha256": "9fb6e2802c08d1feb5ad0c7f07b0b4a89ce0792c07ee48df09d407f7dd541784"
     },
     {
       "path": "src/objects/enemies/sk/mushmeanie.s",
-      "sha256": "0b8f88c1f8b3234259fc96eadcbd9a074c0e38cfc32673a5f69b94a0e71339d2"
+      "sha256": "eeb6912bd2bdbe0297bad679144c6589527b4e52dc7b24f4a55ecf6f9beb79f3"
     },
     {
       "path": "src/objects/enemies/sk/rockn.s",
-      "sha256": "eaf9bb840344dc7b71c1b492f53a3a04c7acfe896267e4ed70cd09345c85a17a"
+      "sha256": "053ddf33b065ff549baeeac60d53810a17d085b850e86f4cbd4275b75ac7ba88"
     },
     {
       "path": "src/objects/enemies/sk/sandworm.s",
-      "sha256": "263a029eaa674ee577c016d0fc78352098210a68b7ea848f03b686c9e8b7078c"
+      "sha256": "49dc79b542cafed74ea5251b354213895a62571e7d8807785e6b92aceb790b4e"
     },
     {
       "path": "src/objects/enemies/sk/skorp.s",
-      "sha256": "aecbcfb88a1867f130f0796419011846812a99c011cea8b8c4107d2560efe4d5"
+      "sha256": "0b03d59a28ec9560f90486d48e23032e7a1890a7c1ccae23a23c404a4800370d"
     },
     {
       "path": "src/objects/enemies/sk/toxomister.s",
-      "sha256": "902645d67917956a12b160d4281201574277c8881c3d1dedd82feb2684a3b377"
+      "sha256": "a35928307cdcb5f7dd33dff6f387050e2706e4c528da56bc2f6ebb1a62ce73a1"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_banner_portrait.s",
@@ -901,7 +901,7 @@
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",
-      "sha256": "e1cc8b80379be34337503b40ae1169e2b87636d19ef19dee60762af766c7f714"
+      "sha256": "e11d78706e9cd78c2ba7991f3d9b783101bbd6504e95680566f685b82976180e"
     },
     {
       "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
@@ -4516,30 +4516,30 @@
     },
     {
       "path": "src/objects/enemies/sk/chainspike.s",
-      "symbol": "RawAni_91ED4",
-      "scope": "RawAni_91ED4",
-      "first_line": 274,
-      "last_line": 276,
+      "symbol": "SKChainspikeSpike_DistanceFrames",
+      "scope": "SKChainspikeSpike_DistanceFrames",
+      "first_line": 275,
+      "last_line": 277,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "140048df4049f28103eddd5534c76dbe0d661e5da3c73f20c80b46bb58d06bc1",
+      "declarations_sha256": "21296e56016033b6f4ad584d7da2796403510d0bdfda570449b171bb42c978ba",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_91ED4"],
+      "members": ["SKChainspikeSpike_DistanceFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/chainspike.s",
-      "symbol": "byte_91F06",
-      "scope": "byte_91F06",
-      "first_line": 295,
-      "last_line": 299,
+      "symbol": "SKChainspike_AttackAnimation",
+      "scope": "SKChainspike_AttackAnimation",
+      "first_line": 296,
+      "last_line": 300,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "09dc691eb0ac28357c797be3c7c56b7ff6ea5ad3a412d4203f096a1b694a186b",
+      "declarations_sha256": "76141436123f6e3fd1e6713727e3cc1c6bbce0b9409f1025c08a6efd67b57e00",
       "entries": [[0, "accelerating"]],
       "external_symbols": [],
-      "members": ["byte_91F06"],
+      "members": ["SKChainspike_AttackAnimation"],
       "stored_markers": [
         {
           "offset": 5,
@@ -4550,130 +4550,138 @@
     },
     {
       "path": "src/objects/enemies/sk/cluckoid.s",
-      "symbol": "byte_8E418",
-      "scope": "byte_8E418",
-      "first_line": 290,
-      "last_line": 307,
+      "symbol": "SKCluckoid_BreathAnimation",
+      "scope": "SKCluckoid_BreathAnimation",
+      "first_line": 292,
+      "last_line": 309,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 32,
-      "declarations_sha256": "c06f2e36031446899774bb639b3b1720e5be5afbafb0c863128d1c458d0ebcac",
+      "declarations_sha256": "352fb2eaef0aeedf8b65598b9446e008a49328dc8b62e5bf6ba0774efc22669b",
       "entries": [[0, "pairs"]],
       "external_symbols": [],
-      "members": ["byte_8E418"],
+      "members": ["SKCluckoid_BreathAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/dragonfly.s",
-      "symbol": "byte_8DFBC",
-      "scope": "byte_8DFBC",
+      "symbol": "SKDragonflyWing_FlapAnimation",
+      "scope": "SKDragonflyWing_FlapAnimation",
       "first_line": 247,
       "last_line": 261,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 30,
-      "declarations_sha256": "8e429eae97889ef2379b882737fe85f257cf295afbcd121fdb4d7cc8329de34c",
+      "declarations_sha256": "6f779093ae3bf23cbdc90f27351cd7b87fe49674efb0a9e27f482f27c0725850",
       "entries": [
         [0, "fixed"],
         [6, "fixed"],
         [18, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8DFBC", "byte_8DFC2", "byte_8DFCE"],
+      "members": [
+        "SKDragonflyWing_FlapAnimation",
+        "SKDragonfly_TransformForwardAnim",
+        "SKDragonfly_TransformReverseAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/fireworm.s",
-      "symbol": "byte_8FA40",
-      "scope": "byte_8FA40",
-      "first_line": 288,
-      "last_line": 306,
+      "symbol": "SKFirewormMove_SwingAnimation",
+      "scope": "SKFirewormMove_SwingAnimation",
+      "first_line": 290,
+      "last_line": 308,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 28,
-      "declarations_sha256": "f87df38adbf951d00179edbd0ab40e310c6192c7a54c0a63f3aaf560572e12d3",
+      "declarations_sha256": "cf321dd0d480f87617525a66876beb5fcd241ef4d6560e6da2414ad5199b27c0",
       "entries": [
         [0, "pairs"],
         [13, "pairs-flip-x"],
         [22, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8FA40", "byte_8FA4D", "byte_8FA56"],
+      "members": [
+        "SKFirewormMove_SwingAnimation",
+        "FirewormSK_Mover_SuppliedFlipXTurnPairs",
+        "SKFirewormFlame_FlameAnimation"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/iwamodoki.s",
-      "symbol": "byte_8FC30",
-      "scope": "byte_8FC30",
+      "symbol": "SKIwamodoki_WarningAnimation",
+      "scope": "SKIwamodoki_WarningAnimation",
       "first_line": 121,
       "last_line": 170,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 96,
-      "declarations_sha256": "93a500b72afaf1afa685f624506d7171313260059142b4b6a9c3df00fa51990e",
+      "declarations_sha256": "f8e551e59c32683caa60fc6b6026d8137294d56671120feb1d188f383106501c",
       "entries": [
         [0, "pairs"],
         [87, "fixed"],
         [91, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8FC30", "byte_8FC87", "byte_8FC8B"],
+      "members": ["SKIwamodoki_WarningAnimation", "SKIwamodokiShard_Frames6And8", "SKIwamodokiShard_Frames7And9"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/madmole.s",
-      "symbol": "byte_8D9D8",
-      "scope": "byte_8D9D8",
-      "first_line": 442,
-      "last_line": 448,
+      "symbol": "SKMadmole_BodyFireAnimation",
+      "scope": "SKMadmole_BodyFireAnimation",
+      "first_line": 445,
+      "last_line": 451,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "a4f274250abb83cdcd811ed1663bf324775301b0ea7c4a741b5a9e64b79c2f5c",
+      "declarations_sha256": "94c1fc7d0e4e8eb5c20a8255450d206a3c4cd0ff04dcd64d471b387ada7ea859",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
         [15, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8D9D8", "byte_8D9DD", "byte_8D9E7"],
+      "members": ["SKMadmole_BodyFireAnimation", "SKMadmole_BodyDescentCueAnimation", "SKMadmole_AttackLoopAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/mushmeanie.s",
-      "symbol": "byte_8DCE6",
-      "scope": "byte_8DCE6",
-      "first_line": 201,
-      "last_line": 213,
+      "symbol": "SKMushmeanie_HopPrepAnimation",
+      "scope": "SKMushmeanie_HopPrepAnimation",
+      "first_line": 202,
+      "last_line": 214,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 18,
-      "declarations_sha256": "6e9a5ee4c5a93f89d72df8d1e7afd98f8a0cb77734e4746913a92be9fcac872e",
+      "declarations_sha256": "131291b50653a5b0adc324329bacdbf549e041271dc56eec05045ec46d1c9a51",
       "entries": [
         [0, "pairs"],
         [7, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8DCE6", "byte_8DCED"],
+      "members": ["SKMushmeanie_HopPrepAnimation", "SKMushmeanie_LandingAnimation"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/rockn.s",
-      "symbol": "byte_8F080",
-      "scope": "byte_8F080",
-      "first_line": 306,
-      "last_line": 308,
+      "symbol": "RocknSK_Body_UniformWalkingFrames",
+      "scope": "RocknSK_Body_UniformWalkingFrames",
+      "first_line": 307,
+      "last_line": 309,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "811cf838e4dfeb26c7573581a6fc80e920668fd17d4760e94e2a228acc76747a",
+      "declarations_sha256": "cd2a4e3d1c40b9b8f48deb22fe9234b8742c077d62cbb59fe2d1014c17a019a2",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_8F080"],
+      "members": ["RocknSK_Body_UniformWalkingFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/sandworm.s",
-      "symbol": "byte_8ED88",
-      "scope": "byte_8ED88",
+      "symbol": "SKSandwormTrail_TrailAnimation",
+      "scope": "SKSandwormTrail_TrailAnimation",
       "first_line": 280,
       "last_line": 293,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "3858110e0ee813d15db2b13fe3e473f5db6184e879a8af86cce1a900cabe36d4",
+      "declarations_sha256": "199e27837f535720b29ea7c4b2eae00c750d07ea1c2fd9d00313069eb1326c4a",
       "entries": [
         [0, "fixed"],
         [4, "fixed"],
@@ -4682,38 +4690,44 @@
         [16, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8ED88", "byte_8ED8C", "byte_8ED90", "byte_8ED94", "byte_8ED98"],
+      "members": [
+        "SKSandwormTrail_TrailAnimation",
+        "SandwormSK_Head_UniformFrameZeroTwoLoop",
+        "SKSandwormSeg_SegmentAnimation",
+        "SKSandwormSplash_RiseAnimation",
+        "SKSandwormSplash_FadeAnimation"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/skorp.s",
-      "symbol": "byte_8EA60",
-      "scope": "byte_8EA60",
-      "first_line": 449,
-      "last_line": 451,
+      "symbol": "SkorpSK_Body_UniformPatrolFrames",
+      "scope": "SkorpSK_Body_UniformPatrolFrames",
+      "first_line": 455,
+      "last_line": 457,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "342cbf11988b85780504385801cbbd222b54247ac65e27d61d48f84fe4731b0d",
+      "declarations_sha256": "8de3902344574356c60cb40e8a0ea0acd0157c1d04e7079c75bd640e2a43b7d1",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_8EA60"],
+      "members": ["SkorpSK_Body_UniformPatrolFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/sk/toxomister.s",
-      "symbol": "byte_90074",
-      "scope": "byte_90074",
-      "first_line": 304,
-      "last_line": 309,
+      "symbol": "SKToxomister_CloudExpandAndLoopAnim",
+      "scope": "SKToxomister_CloudExpandAndLoopAnim",
+      "first_line": 308,
+      "last_line": 313,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "46dbdac6b3864662fcb302fe97870d05f9806a1d089975a9698a4200b2c3336c",
+      "declarations_sha256": "25875dbca60f3c7d60655f6e8e76de6a48e22c03fc223926c989394b7763d33d",
       "entries": [
         [0, "fixed"],
         [17, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_90074", "byte_90085"],
+      "members": ["SKToxomister_CloudExpandAndLoopAnim", "SKToxomister_CloudShrinkAndDeleteAnim"],
       "stored_markers": []
     },
     {

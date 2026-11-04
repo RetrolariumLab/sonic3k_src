@@ -1,26 +1,26 @@
 ; Data owner: objects/shared/fireworm
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_FirewormSegments_:
-                dc.w    word_8FA9C-Map_FirewormSegments_
-                dc.w    word_8FA6C-Map_FirewormSegments_
-                dc.w    word_8FA74-Map_FirewormSegments_
-                dc.w    word_8FA7C-Map_FirewormSegments_
-                dc.w    word_8FA84-Map_FirewormSegments_
-                dc.w    word_8FA8C-Map_FirewormSegments_
-                dc.w    word_8FA94-Map_FirewormSegments_
-                dc.w    word_8FAA4-Map_FirewormSegments_
-word_8FA6C:     dc.w    1
+                dc.w    FirewormSegmentsShared_MapFrame00-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame01-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame02-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame03-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame04-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame05-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame06-Map_FirewormSegments_
+                dc.w    FirewormSegmentsShared_MapFrame07-Map_FirewormSegments_
+FirewormSegmentsShared_MapFrame01:  dc.w    1
                 dc.b    $F8,   5,   0,   0, $FF, $F8
-word_8FA74:     dc.w    1
+FirewormSegmentsShared_MapFrame02:  dc.w    1
                 dc.b    $F8,   5,   0,   4, $FF, $F8
-word_8FA7C:     dc.w    1
+FirewormSegmentsShared_MapFrame03:  dc.w    1
                 dc.b    $F8,   5,   0,   8, $FF, $F8
-word_8FA84:     dc.w    1
+FirewormSegmentsShared_MapFrame04:  dc.w    1
                 dc.b    $F8,   5,   0,  $C, $FF, $F8
-word_8FA8C:     dc.w    1
+FirewormSegmentsShared_MapFrame05:  dc.w    1
                 dc.b    $F8,   5,   0, $10, $FF, $F8
-word_8FA94:     dc.w    1
+FirewormSegmentsShared_MapFrame06:  dc.w    1
                 dc.b    $FC,   0,   0, $14, $FF, $FC
-word_8FA9C:     dc.w    1
+FirewormSegmentsShared_MapFrame00:  dc.w    1
                 dc.b    $EC,  $A,   0, $15, $FF, $F4
-word_8FAA4:     dc.w    0
+FirewormSegmentsShared_MapFrame07:  dc.w    0

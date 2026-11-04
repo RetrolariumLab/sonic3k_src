@@ -13,9 +13,9 @@ Obj_Iwamodoki:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_8FB2A
+                bhi.s   SKIwamodoki_ReleaseRidersAndCull
                 btst    #7,status(a0)
-                bne.s   loc_8FB36
+                bne.s   SKIwamodoki_ReleaseRidersOnDeath
                 moveq   #$17,d1
                 moveq   #$C,d2
                 moveq   #$B,d3
@@ -24,51 +24,51 @@ Obj_Iwamodoki:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8FB2A:
+SKIwamodoki_ReleaseRidersAndCull:
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (SKCull_ReleaseRespawnForStatusDelete).l
 ; ---------------------------------------------------------------------------
 
-loc_8FB36:
+SKIwamodoki_ReleaseRidersOnDeath:
                 jmp     (Displace_PlayerOffObject).l
 ; ---------------------------------------------------------------------------
 Iwamodoki_Index:
-                dc.w    loc_8FB42-Iwamodoki_Index
-                dc.w    loc_8FB4C-Iwamodoki_Index
-                dc.w    loc_8FB70-Iwamodoki_Index
+                dc.w    SKIwamodoki_InitSolidRock-Iwamodoki_Index
+                dc.w    SKIwamodoki_TryStartWarning-Iwamodoki_Index
+                dc.w    SKIwamodoki_AnimateWarning-Iwamodoki_Index
 ; ---------------------------------------------------------------------------
 
-loc_8FB42:
+SKIwamodoki_InitSolidRock:
                 lea     ObjDat_Iwamodoki(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_8FB4C:
+SKIwamodoki_TryStartWarning:
                 jsr     (Find_SonicTails).l
                 cmpi.w  #$40,d2
-                bhs.s   locret_8FB6E
+                bhs.s   SKIwamodoki_WarningSetupReturn
                 move.b  #4,routine(a0)
-                move.l  #byte_8FC30,$30(a0)
-                move.l  #loc_8FB76,$34(a0)
+                move.l  #SKIwamodoki_WarningAnimation,$30(a0)
+                move.l  #SKIwamodoki_ExplodeAndTrySpawnShards,$34(a0)
 
-locret_8FB6E:
+SKIwamodoki_WarningSetupReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8FB70:
+SKIwamodoki_AnimateWarning:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_8FB76:
+SKIwamodoki_ExplodeAndTrySpawnShards:
 ; Bug: When Iwamodoki explodes, 100 points is never actually given out
                 move.l  #Obj_Explosion,(a0)
                 bset    #7,status(a0)
                 clr.b   routine(a0)
-                lea     ChildObjDat_8FBD6(pc),a2
+                lea     SKIwamodoki_ShardChildren(pc),a2
                 jmp     (CreateChild2_Complex).l
 ; ---------------------------------------------------------------------------
 
-loc_8FB90:
+SKIwamodokiShard_InitShard:
                 movea.l $3E(a0),a1
                 jsr     (SetUp_ObjAttributes3).l
                 bset    #3,shield_reaction(a0)
@@ -80,7 +80,7 @@ loc_8FB90:
                 jmp     (Sprite_CheckDeleteTouchXY).l
 ; ---------------------------------------------------------------------------
 
-loc_8FBB8:
+SKIwamodokiShard_FallAndAnimate:
                 jsr     (MoveSprite).l
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
@@ -89,36 +89,36 @@ ObjDat_Iwamodoki:
                 dc.w    make_art_tile(ArtTile_Iwamodoki,0,0)
                 dc.w    $280
                 dc.b    $C,  $C,   0,   0
-word_8FBD0:
+IwamodokiSK_Shard_PartialAttributePrefix:
                 dc.w    $280
                 dc.b    8,   4,   0, $98
-ChildObjDat_8FBD6:
+SKIwamodoki_ShardChildren:
                 dc.w    4-1
-                dc.l    loc_8FB90
-                dc.l    word_8FBD0
-                dc.l    byte_8FC8B
-                dc.l    loc_8FBB8
+                dc.l    SKIwamodokiShard_InitShard
+                dc.l    IwamodokiSK_Shard_PartialAttributePrefix
+                dc.l    SKIwamodokiShard_Frames7And9
+                dc.l    SKIwamodokiShard_FallAndAnimate
                 dc.b    -4,   4
                 dc.w    -$400, -$200
-                dc.l    loc_8FB90
-                dc.l    word_8FBD0
-                dc.l    byte_8FC8B
-                dc.l    loc_8FBB8
+                dc.l    SKIwamodokiShard_InitShard
+                dc.l    IwamodokiSK_Shard_PartialAttributePrefix
+                dc.l    SKIwamodokiShard_Frames7And9
+                dc.l    SKIwamodokiShard_FallAndAnimate
                 dc.b    4,   4
                 dc.w    $400, -$200
-                dc.l    loc_8FB90
-                dc.l    word_8FBD0
-                dc.l    byte_8FC87
-                dc.l    loc_8FBB8
+                dc.l    SKIwamodokiShard_InitShard
+                dc.l    IwamodokiSK_Shard_PartialAttributePrefix
+                dc.l    SKIwamodokiShard_Frames6And8
+                dc.l    SKIwamodokiShard_FallAndAnimate
                 dc.b    -8,  -8
                 dc.w    -$200, -$400
-                dc.l    loc_8FB90
-                dc.l    word_8FBD0
-                dc.l    byte_8FC87
-                dc.l    loc_8FBB8
+                dc.l    SKIwamodokiShard_InitShard
+                dc.l    IwamodokiSK_Shard_PartialAttributePrefix
+                dc.l    SKIwamodokiShard_Frames6And8
+                dc.l    SKIwamodokiShard_FallAndAnimate
                 dc.b    8,  -8
                 dc.w    $200, -$400
-byte_8FC30:
+SKIwamodoki_WarningAnimation:
                 dc.b    0,   7
                 dc.b    1,   7
                 dc.b    2,   7
@@ -163,9 +163,9 @@ byte_8FC30:
                 dc.b    3,   0
                 dc.b    5, $1F
                 dc.b    $F4
-byte_8FC87:
+SKIwamodokiShard_Frames6And8:
                 dc.b    0,   6,   8, $FC
-byte_8FC8B:
+SKIwamodokiShard_Frames7And9:
                 dc.b    0,   7,   9, $FC
                 even
 Map_Iwamodoki:

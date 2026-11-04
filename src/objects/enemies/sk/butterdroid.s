@@ -14,25 +14,25 @@ Obj_Butterdroid:
                 jmp     (Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
 Butterdroid_Index:
-                dc.w    loc_8E0C6-Butterdroid_Index
-                dc.w    loc_8E0DA-Butterdroid_Index
+                dc.w    SKButterdroid_InitAndBindAnimation-Butterdroid_Index
+                dc.w    SKButterdroid_FaceNearestPlayer-Butterdroid_Index
 ; ---------------------------------------------------------------------------
 
-loc_8E0C6:
+SKButterdroid_InitAndBindAnimation:
                 lea     ObjSlot_Butterdroid(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.l  #AniRaw_Butterdroid,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8E0DA:
+SKButterdroid_FaceNearestPlayer:
                 jsr     (Find_SonicTails).l
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   loc_8E0F0
+                beq.s   SKButterdroid_ChaseAndAnimate
                 bset    #0,render_flags(a0)
 
-loc_8E0F0:
+SKButterdroid_ChaseAndAnimate:
                 move.w  #$100,d0
                 move.w  #4,d1
                 jsr     (Chase_Object).l

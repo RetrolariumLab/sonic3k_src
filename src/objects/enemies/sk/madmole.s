@@ -13,229 +13,230 @@ Obj_Madmole:
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 Madmole_Index:
-                dc.w    loc_8D5A6-Madmole_Index
-                dc.w    loc_8D5B0-Madmole_Index
-                dc.w    loc_8D5D4-Madmole_Index
-                dc.w    loc_8D5F4-Madmole_Index
+                dc.w    SKMadmole_InitBase-Madmole_Index
+                dc.w    SKMadmole_BaseCheckPlayerXRange-Madmole_Index
+                dc.w    SKMadmole_BaseWaitForBody-Madmole_Index
+                dc.w    SKMHZMadmole_Base_RunSpawnCooldownWait-Madmole_Index
 ; ---------------------------------------------------------------------------
 
-loc_8D5A6:
+SKMadmole_InitBase:
                 lea     ObjDat_Madmole(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_8D5B0:
+SKMadmole_BaseCheckPlayerXRange:
                 jsr     (Find_SonicTails).l
                 cmpi.w  #$A0,d2
-                blo.s   loc_8D5BE
+                blo.s   SKMadmole_BaseSpawnBody
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D5BE:
+SKMadmole_BaseSpawnBody:
                 move.b  #4,routine(a0)
                 bset    #1,$38(a0)
-                lea     ChildObjDat_8D9C0(pc),a2
+                lea     SKMadmole_BaseBodyChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8D5D4:
+SKMadmole_BaseWaitForBody:
                 btst    #1,$38(a0)
-                beq.s   loc_8D5DE
+                beq.s   SKMadmole_BaseStartSpawnCooldown
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D5DE:
+; The 60 preload expires after 61 calls to the wait routine
+SKMadmole_BaseStartSpawnCooldown:
                 move.b  #6,routine(a0)
                 move.w  #60,$2E(a0)
-                move.l  #loc_8D5FA,$34(a0)
+                move.l  #SKMHZMadmole_Base_RearmNearestPlayerPoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D5F4:
+SKMHZMadmole_Base_RunSpawnCooldownWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8D5FA:
+SKMHZMadmole_Base_RearmNearestPlayerPoll:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D602:
+SKMadmole_BodyDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8D616(pc,d0.w),d1
-                jsr     off_8D616(pc,d1.w)
+                move.w  SKMadmole_BodyStateOffsets(pc,d0.w),d1
+                jsr     SKMadmole_BodyStateOffsets(pc,d1.w)
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_8D616:
-                dc.w    loc_8D620-off_8D616
-                dc.w    loc_8D636-off_8D616
-                dc.w    loc_8D656-off_8D616
-                dc.w    loc_8D67A-off_8D616
-                dc.w    loc_8D6CA-off_8D616
+SKMadmole_BodyStateOffsets:
+                dc.w    SKMadmole_BodyInitRise-SKMadmole_BodyStateOffsets
+                dc.w    SKMadmole_BodyRiseAndFacePlayer-SKMadmole_BodyStateOffsets
+                dc.w    SKMadmole_BodyAimAtPlayer-SKMadmole_BodyStateOffsets
+                dc.w    SKMadmole_BodyAnimateAttack-SKMadmole_BodyStateOffsets
+                dc.w    SKMadmole_BodyDescendAndWait-SKMadmole_BodyStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8D620:
-                lea     word_8D9B4(pc),a1
+SKMadmole_BodyInitRise:
+                lea     SKMadmole_BodyAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.w  #-$100,y_vel(a0)
                 move.w  #$1F,$2E(a0)
 
-loc_8D636:
+SKMadmole_BodyRiseAndFacePlayer:
                 bsr.w   FaceMadmoleBodyTowardNearestPlayer
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8D648
+                bmi.s   SKMadmole_BodyStartAim
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D648:
+SKMadmole_BodyStartAim:
                 move.b  #4,routine(a0)
                 move.w  #$1F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D656:
+SKMadmole_BodyAimAtPlayer:
                 bsr.w   FaceMadmoleBodyTowardNearestPlayer
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_8D662
+                bmi.s   SKMadmole_BodyStartAttackAnimation
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D662:
+SKMadmole_BodyStartAttackAnimation:
                 move.b  #6,routine(a0)
-                move.l  #byte_8D9D8,$30(a0)
-                move.l  #loc_8D680,$34(a0)
+                move.l  #SKMadmole_BodyFireAnimation,$30(a0)
+                move.l  #SKMadmole_BodyFireAndSetDescentAnim,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D67A:
+SKMadmole_BodyAnimateAttack:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_8D680:
-                move.l  #byte_8D9DD,$30(a0)
-                move.l  #loc_8D6AE,$34(a0)
+SKMadmole_BodyFireAndSetDescentAnim:
+                move.l  #SKMadmole_BodyDescentCueAnimation,$30(a0)
+                move.l  #SKMadmole_BodyStartDescent,$34(a0)
                 moveq   #signextendB(sfx_SpikeMove),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_8D9C8(pc),a2
+                lea     SKMadmole_BodyAttackChildUnflipped(pc),a2
                 btst    #0,render_flags(a0)
-                beq.s   loc_8D6A8
-                lea     ChildObjDat_8D9D0(pc),a2
+                beq.s   SKMadmole_BodySpawnFacingAttack
+                lea     SKMadmole_BodyAttackChildFlipped(pc),a2
 
-loc_8D6A8:
+SKMadmole_BodySpawnFacingAttack:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8D6AE:
+SKMadmole_BodyStartDescent:
                 move.b  #8,routine(a0)
                 move.w  #$100,y_vel(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_8D6D6,$34(a0)
+                move.l  #SKMadmole_BodyClearBusyAndDelete,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D6CA:
+SKMadmole_BodyDescendAndWait:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_8D6D6:
+SKMadmole_BodyClearBusyAndDelete:
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8D6E6:
+SKMadmole_AttackDispatchCullAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8D73C(pc,d0.w),d1
-                jsr     off_8D73C(pc,d1.w)
+                move.w  SKMadmole_AttackStateOffsets(pc,d0.w),d1
+                jsr     SKMadmole_AttackStateOffsets(pc,d1.w)
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_8D724
+                bhi.s   SKMadmole_AttackReleasePlayerOnCull
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bhi.s   loc_8D724
+                bhi.s   SKMadmole_AttackReleasePlayerOnCull
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8D724:
+SKMadmole_AttackReleasePlayerOnCull:
                 move.w  $44(a0),d0
-                beq.s   loc_8D736
+                beq.s   SKMadmole_AttackDeleteOnCull
                 movea.w d0,a1
                 bset    #Status_InAir,status(a1)
                 clr.b   object_control(a1)
 
-loc_8D736:
+SKMadmole_AttackDeleteOnCull:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-off_8D73C:
-                dc.w    loc_8D746-off_8D73C
-                dc.w    loc_8D768-off_8D73C
-                dc.w    loc_8D778-off_8D73C
-                dc.w    loc_8D79C-off_8D73C
-                dc.w    loc_8D7A8-off_8D73C
+SKMadmole_AttackStateOffsets:
+                dc.w    SKMadmole_InitAttackAndRandomMotion-SKMadmole_AttackStateOffsets
+                dc.w    SKMadmole_FastAttackKnockBackAndMove-SKMadmole_AttackStateOffsets
+                dc.w    SKMadmole_BounceAttackCaptureAndMove-SKMadmole_AttackStateOffsets
+                dc.w    SKMadmole_ReleasedAttackMoveAndAnimate-SKMadmole_AttackStateOffsets
+                dc.w    SKMadmole_HeldPlayerFaceFromAttackX-SKMadmole_AttackStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8D746:
-                lea     word_8D9BA(pc),a1
+SKMadmole_InitAttackAndRandomMotion:
+                lea     SKMadmole_AttackAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #$18,x_radius(a0)
                 move.b  #8,y_radius(a0)
-                move.l  #byte_8D9E7,$30(a0)
-                bra.w   loc_8D89E
+                move.l  #SKMadmole_AttackLoopAnimation,$30(a0)
+                bra.w   SKMadmole_AttackChooseFastOrBounce
 ; ---------------------------------------------------------------------------
 
-loc_8D768:
+SKMadmole_FastAttackKnockBackAndMove:
                 bsr.w   KnockBackPlayerFromMadmoleFastAttack
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_8D778:
+SKMadmole_BounceAttackCaptureAndMove:
                 bsr.w   CapturePlayerWithMadmoleBouncingAttack
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_8D78E
+                bmi.s   SKMadmole_BounceAttackAnimate
                 jsr     (ObjHitFloor_DoRoutine).l
 
-loc_8D78E:
+SKMadmole_BounceAttackAnimate:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_8D794:
+SKMadmole_BounceAttackRebound:
                 move.w  #-$500,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D79C:
+SKMadmole_ReleasedAttackMoveAndAnimate:
                 jsr     (MoveSprite2).l
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_8D7A8:
+SKMadmole_HeldPlayerFaceFromAttackX:
                 movea.w $44(a0),a1
                 bclr    #0,render_flags(a1)
                 tst.w   x_vel(a0)
-                bmi.s   loc_8D7BE
+                bmi.s   SKMadmole_HeldPlayerCheckControl
                 bset    #0,render_flags(a1)
 
-loc_8D7BE:
+SKMadmole_HeldPlayerCheckControl:
                 tst.b   object_control(a1)
-                beq.s   loc_8D83E
+                beq.s   SKMadmole_AttackEnterReleasedState
                 moveq   #8,d1
                 move.w  x_pos(a0),d0
                 btst    #0,render_flags(a1)
-                bne.s   loc_8D7D4
+                bne.s   SKMadmole_HeldPlayerPositionAndProbe
                 neg.w   d1
 
-loc_8D7D4:
+SKMadmole_HeldPlayerPositionAndProbe:
                 add.w   d1,d0
                 move.w  d0,x_pos(a1)
                 move.w  y_pos(a0),d0
@@ -243,28 +244,29 @@ loc_8D7D4:
                 move.w  d0,y_pos(a1)
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   x_vel(a0)
-                bmi.s   loc_8D800
+                bmi.s   SKMadmole_HeldAttackProbeLeftWall
                 move.w  #$18,d3
                 jsr     (ObjCheckRightWallDist).l
-                bra.w   loc_8D80A
+                bra.w   SKMadmole_HeldAttackCheckWallAndFloor
 ; ---------------------------------------------------------------------------
 
-loc_8D800:
+SKMadmole_HeldAttackProbeLeftWall:
                 move.w  #-$18,d3
                 jsr     (ObjCheckLeftWallDist).l
 
-loc_8D80A:
+SKMadmole_HeldAttackCheckWallAndFloor:
                 tst.w   d1
-                bmi.s   loc_8D820
+                bmi.s   SKMadmole_HeldAttackWallRebound
                 tst.w   y_vel(a0)
-                bmi.s   loc_8D81A
+                bmi.s   SKMadmole_HeldAttackAnimate
                 jsr     (ObjHitFloor_DoRoutine).l
 
-loc_8D81A:
+SKMadmole_HeldAttackAnimate:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_8D820:
+; Give the player the reversed horizontal speed and leave half that speed on the attack object
+SKMadmole_HeldAttackWallRebound:
                 movea.w $44(a0),a1
                 move.w  x_vel(a0),d0
                 neg.w   d0
@@ -272,30 +274,31 @@ loc_8D820:
                 asr.w   #1,d0
                 move.w  d0,x_vel(a0)
 
-loc_8D834:
+SKMadmole_HeldPlayerRestoreControl:
                 bset    #Status_InAir,status(a1)
                 clr.b   object_control(a1)
 
-loc_8D83E:
+SKMadmole_AttackEnterReleasedState:
                 move.b  #6,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D846:
+; At a downward speed of at least 10 pixels per frame, release the player instead of bouncing
+SKMadmole_HeldAttackCheckFloorRelease:
                 cmpi.w  #$A00,y_vel(a0)
-                bge.s   loc_8D85E
+                bge.s   SKMadmole_HeldAttackFloorRelease
                 move.w  #-$500,y_vel(a0)
                 moveq   #signextendB(sfx_Flipper),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8D85E:
+SKMadmole_HeldAttackFloorRelease:
                 movea.w $44(a0),a1
                 move.w  #-$200,y_vel(a0)
                 move.w  #-$300,y_vel(a1)
                 move.w  x_vel(a0),x_vel(a1)
-                bra.s   loc_8D834
+                bra.s   SKMadmole_HeldPlayerRestoreControl
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -313,39 +316,39 @@ FaceMadmoleBodyTowardNearestPlayer:
                 jsr     (Find_SonicTails).l
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   locret_8D89C
+                beq.s   SKMadmole_BodyFacePlayerReturn
                 bset    #0,render_flags(a0)
 
-locret_8D89C:
+SKMadmole_BodyFacePlayerReturn:
                 rts
 ; End of function FaceMadmoleBodyTowardNearestPlayer
 
 ; ---------------------------------------------------------------------------
 
-loc_8D89E:
+SKMadmole_AttackChooseFastOrBounce:
                 jsr     (Random_Number).l
                 moveq   #0,d2
                 tst.b   d0
-                bpl.s   loc_8D8BA
+                bpl.s   SKMadmole_AttackLoadFacingVelocity
                 addq.w  #4,d2
                 move.b  #4,routine(a0)
-                move.l  #loc_8D794,$34(a0)
+                move.l  #SKMadmole_BounceAttackRebound,$34(a0)
 
-loc_8D8BA:
-                lea     word_8D8DE(pc,d2.w),a1
+SKMadmole_AttackLoadFacingVelocity:
+                lea     SKMadmole_AttackVelocityPairs(pc,d2.w),a1
                 move.w  (a1)+,d0
                 movea.w parent3(a0),a2
                 btst    #0,render_flags(a2)
-                beq.s   loc_8D8D4
+                beq.s   SKMadmole_AttackStoreVelocity
                 neg.w   d0
                 bset    #0,render_flags(a0)
 
-loc_8D8D4:
+SKMadmole_AttackStoreVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_8D8DE:
+SKMadmole_AttackVelocityPairs:
                 dc.w    -$600,     0
                 dc.w    -$380,  $200
 
@@ -353,16 +356,16 @@ word_8D8DE:
 
 KnockBackPlayerFromMadmoleFastAttack:
                 move.b  collision_property(a0),d0
-                beq.w   locret_8D942
+                beq.w   SKMadmole_FastAttackContactReturn
                 clr.b   collision_property(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                lea     word_8D944-2(pc,d0.w),a1
+                lea     SKMadmole_AttackContactPlayers-2(pc,d0.w),a1
                 movea.w (a1)+,a2
                 btst    #Status_Invincible,status_secondary(a2)
-                bne.s   locret_8D942
+                bne.s   SKMadmole_FastAttackContactReturn
                 tst.b   object_control(a2)
-                bne.s   locret_8D942
+                bne.s   SKMadmole_FastAttackContactReturn
                 move.w  a2,$44(a0)
                 move.b  #6,routine(a0)
                 moveq   #signextendB(sfx_Flipper),d0
@@ -376,12 +379,12 @@ KnockBackPlayerFromMadmoleFastAttack:
                 move.b  #$1A,anim(a2)
                 clr.b   spin_dash_flag(a2)
 
-locret_8D942:
+SKMadmole_FastAttackContactReturn:
                 rts
 ; End of function KnockBackPlayerFromMadmoleFastAttack
 
 ; ---------------------------------------------------------------------------
-word_8D944:
+SKMadmole_AttackContactPlayers:
                 dc.w    Player_1
                 dc.w    Player_2
                 dc.w    Player_2
@@ -390,20 +393,20 @@ word_8D944:
 
 CapturePlayerWithMadmoleBouncingAttack:
                 move.b  collision_property(a0),d0
-                beq.w   locret_8D9A6
+                beq.w   SKMadmole_BounceAttackContactReturn
                 clr.b   collision_property(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                lea     word_8D944-2(pc,d0.w),a1
+                lea     SKMadmole_AttackContactPlayers-2(pc,d0.w),a1
                 movea.w (a1)+,a2
                 btst    #Status_Invincible,status_secondary(a2)
-                bne.s   locret_8D9A6
+                bne.s   SKMadmole_BounceAttackContactReturn
                 tst.b   object_control(a2)
-                bne.s   locret_8D9A6
+                bne.s   SKMadmole_BounceAttackContactReturn
                 move.w  a2,$44(a0)
                 move.b  #8,routine(a0)
                 move.w  #0,priority(a0)
-                move.l  #loc_8D846,$34(a0)
+                move.l  #SKMadmole_HeldAttackCheckFloorRelease,$34(a0)
                 moveq   #signextendB(sfx_Flipper),d0
                 jsr     (Play_SFX).l
                 bset    #Status_InAir,status(a2)
@@ -411,7 +414,7 @@ CapturePlayerWithMadmoleBouncingAttack:
                 move.b  #$1A,anim(a2)
                 clr.b   spin_dash_flag(a2)
 
-locret_8D9A6:
+SKMadmole_BounceAttackContactReturn:
                 rts
 ; End of function CapturePlayerWithMadmoleBouncingAttack
 
@@ -421,29 +424,29 @@ ObjDat_Madmole:
                 dc.w    make_art_tile(ArtTile_Madmole,0,0)
                 dc.w    $280
                 dc.b    $18,   4,  $D,   0
-word_8D9B4:
+SKMadmole_BodyAttributes:
                 dc.w    $280
                 dc.b    $C,  $C,   0,  $B
-word_8D9BA:
+SKMadmole_AttackAttributes:
                 dc.w    $280
                 dc.b    8,   8,   5, $D8
-ChildObjDat_8D9C0:
+SKMadmole_BaseBodyChild:
                 dc.w    1-1
-                dc.l    loc_8D602
+                dc.l    SKMadmole_BodyDispatchAndDraw
                 dc.b    0, $10
-ChildObjDat_8D9C8:
+SKMadmole_BodyAttackChildUnflipped:
                 dc.w    1-1
-                dc.l    loc_8D6E6
+                dc.l    SKMadmole_AttackDispatchCullAndDraw
                 dc.b    -$E, -$C
-ChildObjDat_8D9D0:
+SKMadmole_BodyAttackChildFlipped:
                 dc.w    1-1
-                dc.l    loc_8D6E6
+                dc.l    SKMadmole_AttackDispatchCullAndDraw
                 dc.b    $E, -$C
-byte_8D9D8:
+SKMadmole_BodyFireAnimation:
                 dc.b    2,   0,   1,   2, $F4
-byte_8D9DD:
+SKMadmole_BodyDescentCueAnimation:
                 dc.b    2,   3,   3,   4,   4,   4,   4,   4,   4, $F4
-byte_8D9E7:
+SKMadmole_AttackLoopAnimation:
                 dc.b    2,   5,   6,   7,   8,   9,  $A,  $B,  $C, $FC
                 even
 Map_Madmole:

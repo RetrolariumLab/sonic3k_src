@@ -462,7 +462,7 @@ loc_639B6:
 ; ---------------------------------------------------------------------------
 
 loc_639C8:
-                lea     (ObjDat3_919A6).l,a1
+                lea     (EggRoboSK_Hover_FullAttributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #loc_63A16,(a0)
                 move.w  (Camera_X_pos).w,d0
@@ -473,7 +473,7 @@ loc_639C8:
                 move.w  d0,y_pos(a0)
                 moveq   #signextendB(mus_EndBoss),d0
                 jsr     (Play_Music).l
-                lea     (ChildObjDat_919D0).l,a2
+                lea     (SKEggRobo_HoverAttachmentChildren).l,a2
                 jsr     (CreateChild1_Normal).l
                 lea     (ArtKosM_EggRoboBadnik).l,a1
                 move.w  #tiles_to_bytes(ArtTile_EggRoboBadnik),d2

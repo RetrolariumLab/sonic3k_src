@@ -386,7 +386,7 @@ locret_5C970:
 ; ---------------------------------------------------------------------------
 
 loc_5C972:
-                lea     (ObjDat3_919A6).l,a1
+                lea     (EggRoboSK_Hover_FullAttributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 bclr    #2,render_flags(a0)
                 bset    #0,render_flags(a0)
@@ -395,7 +395,7 @@ loc_5C972:
                 move.w  #$F0,y_pos(a0)
                 move.w  #$600,x_vel(a0)
                 jsr     (Swing_Setup1).l
-                lea     (ChildObjDat_919D0).l,a2
+                lea     (SKEggRobo_HoverAttachmentChildren).l,a2
                 jsr     (CreateChild1_Normal).l
                 lea     (ArtKosM_EggRoboBadnik).l,a1
                 move.w  #tiles_to_bytes(ArtTile_EggRoboBadnik),d2

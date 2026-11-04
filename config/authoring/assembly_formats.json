@@ -5890,14 +5890,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "4291d95a5b50be7dc194bfea1854894a3a1c2afdfac5df8175d8d5fb7e15e048",
+      "declarations_sha256": "0f7db99e1fa3991b590d00eba4321d757437c8f60fb545e7da56654b2c83acec",
       "labels": {
         "DPLC_Butterdroid_": 0,
-        "word_8E16A": 10,
-        "word_8E16E": 14,
-        "word_8E172": 18,
-        "word_8E176": 22,
-        "word_8E17A": 26
+        "ButterdroidShared_DPLCFrame00": 10,
+        "ButterdroidShared_DPLCFrame01": 14,
+        "ButterdroidShared_DPLCFrame02": 18,
+        "ButterdroidShared_DPLCFrame03": 22,
+        "ButterdroidShared_DPLCFrame04": 26
       },
       "external_symbols": [],
       "blocks": [
@@ -5905,35 +5905,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E16A",
+          "target": "ButterdroidShared_DPLCFrame00",
           "base": "DPLC_Butterdroid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E16E",
+          "target": "ButterdroidShared_DPLCFrame01",
           "base": "DPLC_Butterdroid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E172",
+          "target": "ButterdroidShared_DPLCFrame02",
           "base": "DPLC_Butterdroid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E176",
+          "target": "ButterdroidShared_DPLCFrame03",
           "base": "DPLC_Butterdroid_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E17A",
+          "target": "ButterdroidShared_DPLCFrame04",
           "base": "DPLC_Butterdroid_"
         },
         {
@@ -5972,14 +5972,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "531a61c2a83c51e28a446dd3955dff8a51b3dfcdbdb9811d8ac077720cf68982",
+      "declarations_sha256": "697554e1ed1c89e1928d42aa9f7af2782dad49f5e245750a797247eb1669eaa8",
       "labels": {
         "Map_Butterdroid_": 0,
-        "word_8E138": 10,
-        "word_8E140": 18,
-        "word_8E148": 26,
-        "word_8E150": 34,
-        "word_8E158": 42
+        "ButterdroidShared_MapFrame00": 10,
+        "ButterdroidShared_MapFrame01": 18,
+        "ButterdroidShared_MapFrame02": 26,
+        "ButterdroidShared_MapFrame03": 34,
+        "ButterdroidShared_MapFrame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -5987,35 +5987,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E138",
+          "target": "ButterdroidShared_MapFrame00",
           "base": "Map_Butterdroid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E140",
+          "target": "ButterdroidShared_MapFrame01",
           "base": "Map_Butterdroid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E148",
+          "target": "ButterdroidShared_MapFrame02",
           "base": "Map_Butterdroid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E150",
+          "target": "ButterdroidShared_MapFrame03",
           "base": "Map_Butterdroid_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E158",
+          "target": "ButterdroidShared_MapFrame04",
           "base": "Map_Butterdroid_"
         },
         {
@@ -6205,17 +6205,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 170
       },
-      "declarations_sha256": "2f656205d1b85f539d59e9f8a7432b905e46ff36a89c103c6bc739a903dec4c3",
+      "declarations_sha256": "d56400723294b723eb2c477316f814af8ba94dab7a0e548235543481577bcc36",
       "labels": {
         "Map_Chainspike_": 0,
-        "word_184E9A": 16,
-        "word_184EAE": 36,
-        "word_184EB6": 44,
-        "word_184EBE": 52,
-        "word_184ED8": 78,
-        "word_184EE6": 92,
-        "word_184EFA": 112,
-        "word_184F14": 138
+        "ChainspikeSK_MapFrame00": 16,
+        "ChainspikeSK_MapFrame01": 36,
+        "ChainspikeSK_MapFrame02": 44,
+        "ChainspikeSK_MapFrame03": 52,
+        "ChainspikeSK_MapFrame04": 78,
+        "ChainspikeSK_MapFrame05": 92,
+        "ChainspikeSK_MapFrame06": 112,
+        "ChainspikeSK_MapFrame07": 138
       },
       "external_symbols": [],
       "blocks": [
@@ -6223,56 +6223,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184E9A",
+          "target": "ChainspikeSK_MapFrame00",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184EAE",
+          "target": "ChainspikeSK_MapFrame01",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184EB6",
+          "target": "ChainspikeSK_MapFrame02",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184EBE",
+          "target": "ChainspikeSK_MapFrame03",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184ED8",
+          "target": "ChainspikeSK_MapFrame04",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184EE6",
+          "target": "ChainspikeSK_MapFrame05",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184EFA",
+          "target": "ChainspikeSK_MapFrame06",
           "base": "Map_Chainspike_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F14",
+          "target": "ChainspikeSK_MapFrame07",
           "base": "Map_Chainspike_"
         },
         {
@@ -6659,23 +6659,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 126
       },
-      "declarations_sha256": "f1e8ade6f1b1ff1c38d4697aaf16972e2ccd80a33742f188e5763bf7da4e79dd",
+      "declarations_sha256": "2f39fee7ab36764e1301561d0b33a66a16a91bb5d0d84ce68c98313cd4850b4a",
       "labels": {
         "DPLC_Cluckoid_": 0,
-        "word_8E4D4": 28,
-        "word_8E4DC": 36,
-        "word_8E4E4": 44,
-        "word_8E4EC": 52,
-        "word_8E4F2": 58,
-        "word_8E4F8": 64,
-        "word_8E4FE": 70,
-        "word_8E506": 78,
-        "word_8E50E": 86,
-        "word_8E516": 94,
-        "word_8E51C": 100,
-        "word_8E522": 106,
-        "word_8E528": 112,
-        "word_8E52E": 118
+        "CluckoidShared_DPLCFrame00": 28,
+        "CluckoidShared_DPLCFrame01": 36,
+        "CluckoidShared_DPLCFrame02": 44,
+        "CluckoidShared_DPLCFrame03": 52,
+        "CluckoidShared_DPLCFrame04": 58,
+        "CluckoidShared_DPLCFrame05": 64,
+        "CluckoidShared_DPLCFrame06": 70,
+        "CluckoidShared_DPLCFrame07": 78,
+        "CluckoidShared_DPLCFrame08": 86,
+        "CluckoidShared_DPLCFrame09": 94,
+        "CluckoidShared_DPLCFrame0A": 100,
+        "CluckoidShared_DPLCFrame0B": 106,
+        "CluckoidShared_DPLCFrame0C": 112,
+        "CluckoidShared_DPLCFrame0D": 118
       },
       "external_symbols": [],
       "blocks": [
@@ -6683,98 +6683,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4D4",
+          "target": "CluckoidShared_DPLCFrame00",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4DC",
+          "target": "CluckoidShared_DPLCFrame01",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4E4",
+          "target": "CluckoidShared_DPLCFrame02",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4EC",
+          "target": "CluckoidShared_DPLCFrame03",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4F2",
+          "target": "CluckoidShared_DPLCFrame04",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4F8",
+          "target": "CluckoidShared_DPLCFrame05",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E4FE",
+          "target": "CluckoidShared_DPLCFrame06",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E506",
+          "target": "CluckoidShared_DPLCFrame07",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E50E",
+          "target": "CluckoidShared_DPLCFrame08",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E516",
+          "target": "CluckoidShared_DPLCFrame09",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E51C",
+          "target": "CluckoidShared_DPLCFrame0A",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E522",
+          "target": "CluckoidShared_DPLCFrame0B",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E528",
+          "target": "CluckoidShared_DPLCFrame0C",
           "base": "DPLC_Cluckoid_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E52E",
+          "target": "CluckoidShared_DPLCFrame0D",
           "base": "DPLC_Cluckoid_"
         },
         {
@@ -6858,23 +6858,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 266
       },
-      "declarations_sha256": "d4babbccac93b60350f24c36c8429237ddcc8228c58391315b33275bed54ce8d",
+      "declarations_sha256": "4cb3794e76d57366613a7231660b030f6c6d0ca87e1459a907c8857d8c7b451d",
       "labels": {
         "Map_Cluckoid_": 0,
-        "word_8E562": 28,
-        "word_8E576": 48,
-        "word_8E58A": 68,
-        "word_8E59E": 88,
-        "word_8E5AC": 102,
-        "word_8E5BA": 116,
-        "word_8E5C8": 130,
-        "word_8E5DC": 150,
-        "word_8E5F0": 170,
-        "word_8E604": 190,
-        "word_8E612": 204,
-        "word_8E620": 218,
-        "word_8E62E": 232,
-        "word_8E63C": 246
+        "CluckoidShared_MapFrame00": 28,
+        "CluckoidShared_MapFrame01": 48,
+        "CluckoidShared_MapFrame02": 68,
+        "CluckoidShared_MapFrame03": 88,
+        "CluckoidShared_MapFrame04": 102,
+        "CluckoidShared_MapFrame05": 116,
+        "CluckoidShared_MapFrame06": 130,
+        "CluckoidShared_MapFrame07": 150,
+        "CluckoidShared_MapFrame08": 170,
+        "CluckoidShared_MapFrame09": 190,
+        "CluckoidShared_MapFrame0A": 204,
+        "CluckoidShared_MapFrame0B": 218,
+        "CluckoidShared_MapFrame0C": 232,
+        "CluckoidShared_MapFrame0D": 246
       },
       "external_symbols": [],
       "blocks": [
@@ -6882,98 +6882,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E562",
+          "target": "CluckoidShared_MapFrame00",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E576",
+          "target": "CluckoidShared_MapFrame01",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E58A",
+          "target": "CluckoidShared_MapFrame02",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E59E",
+          "target": "CluckoidShared_MapFrame03",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E5AC",
+          "target": "CluckoidShared_MapFrame04",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E5BA",
+          "target": "CluckoidShared_MapFrame05",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E5C8",
+          "target": "CluckoidShared_MapFrame06",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E5DC",
+          "target": "CluckoidShared_MapFrame07",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E5F0",
+          "target": "CluckoidShared_MapFrame08",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E604",
+          "target": "CluckoidShared_MapFrame09",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E612",
+          "target": "CluckoidShared_MapFrame0A",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E620",
+          "target": "CluckoidShared_MapFrame0B",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E62E",
+          "target": "CluckoidShared_MapFrame0C",
           "base": "Map_Cluckoid_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E63C",
+          "target": "CluckoidShared_MapFrame0D",
           "base": "Map_Cluckoid_"
         },
         {
@@ -7057,10 +7057,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "1673309abb0051eee7995784ec8539219166789e552e63fce92a5121621b74b7",
+      "declarations_sha256": "fe9584398d6063a76ce971b277ec4faa39b91f257f595e124ca1b2f0fcaa6f2a",
       "labels": {
         "Map_CluckoidArrow_": 0,
-        "word_8E538": 2
+        "CluckoidArrowShared_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -7068,7 +7068,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E538",
+          "target": "CluckoidArrowShared_MapFrame00",
           "base": "Map_CluckoidArrow_"
         },
         {
@@ -8248,19 +8248,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 196
       },
-      "declarations_sha256": "7d5075917ced2702b2db06ba4425a9b58af63ce4d75db4025d28286e9b735903",
+      "declarations_sha256": "8ce4c611b45e4e0605fabbf778072b40b7931d766581621e22532ae6175becc6",
       "labels": {
         "Map_Dragonfly_": 0,
-        "word_8DFEE": 20,
-        "word_8E008": 46,
-        "word_8E022": 72,
-        "word_8E03C": 98,
-        "word_8E056": 124,
-        "word_8E070": 150,
-        "word_8E078": 158,
-        "word_8E080": 166,
-        "word_8E08E": 180,
-        "word_8E09C": 194
+        "DragonflyShared_MapFrame00": 20,
+        "DragonflyShared_MapFrame01": 46,
+        "DragonflyShared_MapFrame02": 72,
+        "DragonflyShared_MapFrame03": 98,
+        "DragonflyShared_MapFrame04": 124,
+        "DragonflyShared_MapFrame05": 150,
+        "DragonflyShared_MapFrame06": 158,
+        "DragonflyShared_MapFrame07": 166,
+        "DragonflyShared_MapFrame08": 180,
+        "DragonflyShared_MapFrame09": 194
       },
       "external_symbols": [],
       "blocks": [
@@ -8268,70 +8268,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DFEE",
+          "target": "DragonflyShared_MapFrame00",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E008",
+          "target": "DragonflyShared_MapFrame01",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E022",
+          "target": "DragonflyShared_MapFrame02",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E03C",
+          "target": "DragonflyShared_MapFrame03",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E056",
+          "target": "DragonflyShared_MapFrame04",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E070",
+          "target": "DragonflyShared_MapFrame05",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E078",
+          "target": "DragonflyShared_MapFrame06",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E080",
+          "target": "DragonflyShared_MapFrame07",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E08E",
+          "target": "DragonflyShared_MapFrame08",
           "base": "Map_Dragonfly_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8E09C",
+          "target": "DragonflyShared_MapFrame09",
           "base": "Map_Dragonfly_"
         },
         {
@@ -8754,17 +8754,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 134
       },
-      "declarations_sha256": "65420955a2561fdba67af7600eeecc23f5defcaa93dde5725fcbaee335c90f58",
+      "declarations_sha256": "01ec7ac473e9cf3ea052a12ed9ce8752cd3694a9e3495b298dcbf546b8b3379d",
       "labels": {
         "Map_EggRobo_": 0,
-        "word_184F44": 16,
-        "word_184F46": 18,
-        "word_184F60": 44,
-        "word_184F6E": 58,
-        "word_184F8E": 90,
-        "word_184F96": 98,
-        "word_184F9E": 106,
-        "word_184FAC": 120
+        "EggRoboBadnikSK_MapFrame00": 16,
+        "EggRoboBadnikSK_MapFrame01": 18,
+        "EggRoboBadnikSK_MapFrame02": 44,
+        "EggRoboBadnikSK_MapFrame03": 58,
+        "EggRoboBadnikSK_MapFrame04": 90,
+        "EggRoboBadnikSK_MapFrame05": 98,
+        "EggRoboBadnikSK_MapFrame06": 106,
+        "EggRoboBadnikSK_MapFrame07": 120
       },
       "external_symbols": [],
       "blocks": [
@@ -8772,56 +8772,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F44",
+          "target": "EggRoboBadnikSK_MapFrame00",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F46",
+          "target": "EggRoboBadnikSK_MapFrame01",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F60",
+          "target": "EggRoboBadnikSK_MapFrame02",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F6E",
+          "target": "EggRoboBadnikSK_MapFrame03",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F8E",
+          "target": "EggRoboBadnikSK_MapFrame04",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F96",
+          "target": "EggRoboBadnikSK_MapFrame05",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184F9E",
+          "target": "EggRoboBadnikSK_MapFrame06",
           "base": "Map_EggRobo_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184FAC",
+          "target": "EggRoboBadnikSK_MapFrame07",
           "base": "Map_EggRobo_"
         },
         {
@@ -8875,13 +8875,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "1ff599288aa05fab2ba18e49b9cea0ef127963ccb6b46472f5f0208e2a69ec92",
+      "declarations_sha256": "a7bbefde85568ad37be1e23c18cd3f701d286a8755268cab70b623238158bb0f",
       "labels": {
         "Map_EggRoboHead_": 0,
-        "word_681DC": 8,
-        "word_681E4": 16,
-        "word_681EC": 24,
-        "word_681F4": 32
+        "EggRoboHead_MapFrame00": 8,
+        "EggRoboHead_MapFrame01": 16,
+        "EggRoboHead_MapFrame02": 24,
+        "EggRoboHead_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -8889,28 +8889,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_681DC",
+          "target": "EggRoboHead_MapFrame00",
           "base": "Map_EggRoboHead_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_681E4",
+          "target": "EggRoboHead_MapFrame01",
           "base": "Map_EggRoboHead_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_681EC",
+          "target": "EggRoboHead_MapFrame02",
           "base": "Map_EggRoboHead_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_681F4",
+          "target": "EggRoboHead_MapFrame03",
           "base": "Map_EggRoboHead_"
         },
         {
@@ -8944,13 +8944,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 100
       },
-      "declarations_sha256": "2370e7c9189324fd3097156151a334beadbfd4640c3548aed70563bc90271603",
+      "declarations_sha256": "3afd9bbfc424bc4be794ab9a5d875aeab91b2af3dd8cd21af54188c46eca13d2",
       "labels": {
         "Map_EggRoboRun_": 0,
-        "word_186C28": 8,
-        "word_186C42": 34,
-        "word_186C56": 54,
-        "word_186C70": 80
+        "EggRoboRun_MapFrame00": 8,
+        "EggRoboRun_MapFrame01": 34,
+        "EggRoboRun_MapFrame02": 54,
+        "EggRoboRun_MapFrame03": 80
       },
       "external_symbols": [],
       "blocks": [
@@ -8958,28 +8958,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C28",
+          "target": "EggRoboRun_MapFrame00",
           "base": "Map_EggRoboRun_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C42",
+          "target": "EggRoboRun_MapFrame01",
           "base": "Map_EggRoboRun_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C56",
+          "target": "EggRoboRun_MapFrame02",
           "base": "Map_EggRoboRun_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C70",
+          "target": "EggRoboRun_MapFrame03",
           "base": "Map_EggRoboRun_"
         },
         {
@@ -9013,13 +9013,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "d21342d99745e4cfc7576ccec883c75d6acb5d736ae1460673436e6c685ad8c2",
+      "declarations_sha256": "279beafee730aa57efda958c2af9137f8c9c1872ab04898be62cea984874db79",
       "labels": {
         "Map_EggRoboStand_": 0,
-        "word_186BB8": 8,
-        "word_186BD2": 34,
-        "word_186BEC": 60,
-        "word_186C06": 86
+        "EggRoboStand_MapFrame00": 8,
+        "EggRoboStand_MapFrame01": 34,
+        "EggRoboStand_MapFrame02": 60,
+        "EggRoboStand_MapFrame03": 86
       },
       "external_symbols": [],
       "blocks": [
@@ -9027,28 +9027,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186BB8",
+          "target": "EggRoboStand_MapFrame00",
           "base": "Map_EggRoboStand_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186BD2",
+          "target": "EggRoboStand_MapFrame01",
           "base": "Map_EggRoboStand_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186BEC",
+          "target": "EggRoboStand_MapFrame02",
           "base": "Map_EggRoboStand_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C06",
+          "target": "EggRoboStand_MapFrame03",
           "base": "Map_EggRoboStand_"
         },
         {
@@ -9354,13 +9354,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 24
       },
-      "declarations_sha256": "2444f3f261cde3e9ceefb7f61076eac16dd94abf5b606cd2b73fd31eb8c8b162",
+      "declarations_sha256": "d1ac439ce7bf1d1f35d3aca081226add0e7b929a09b42c7b419b884ff7504dd5",
       "labels": {
         "DPLC_Fireworm_": 0,
-        "word_8FAAE": 8,
-        "word_8FAB2": 12,
-        "word_8FAB6": 16,
-        "word_8FABA": 20
+        "FirewormShared_DPLCFrame00": 8,
+        "FirewormShared_DPLCFrame01": 12,
+        "FirewormShared_DPLCFrame02": 16,
+        "FirewormShared_DPLCFrame03": 20
       },
       "external_symbols": [],
       "blocks": [
@@ -9368,28 +9368,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAAE",
+          "target": "FirewormShared_DPLCFrame00",
           "base": "DPLC_Fireworm_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAB2",
+          "target": "FirewormShared_DPLCFrame01",
           "base": "DPLC_Fireworm_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAB6",
+          "target": "FirewormShared_DPLCFrame02",
           "base": "DPLC_Fireworm_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FABA",
+          "target": "FirewormShared_DPLCFrame03",
           "base": "DPLC_Fireworm_"
         },
         {
@@ -9423,13 +9423,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "6fc01f715bfd0487afb5c964fef80520926a185bfce6b8a4f23de90a43d59819",
+      "declarations_sha256": "3500345a79eede811da8575d909bf0a69d12b4fbd86448b37ebe54bbdcf80a63",
       "labels": {
         "Map_Fireworm_": 0,
-        "word_8FAC6": 8,
-        "word_8FACE": 16,
-        "word_8FAD6": 24,
-        "word_8FADE": 32
+        "FirewormShared_MapFrame00": 8,
+        "FirewormShared_MapFrame01": 16,
+        "FirewormShared_MapFrame02": 24,
+        "FirewormShared_MapFrame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -9437,28 +9437,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAC6",
+          "target": "FirewormShared_MapFrame00",
           "base": "Map_Fireworm_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FACE",
+          "target": "FirewormShared_MapFrame01",
           "base": "Map_Fireworm_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAD6",
+          "target": "FirewormShared_MapFrame02",
           "base": "Map_Fireworm_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FADE",
+          "target": "FirewormShared_MapFrame03",
           "base": "Map_Fireworm_"
         },
         {
@@ -9492,17 +9492,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 74
       },
-      "declarations_sha256": "1634a4af4a906ea3a8ecaa9b130909a35257d196660d27d3961d9046f6542bdb",
+      "declarations_sha256": "67efbf2cb544fc905ebaa76229d302bca678129da460a4ad28d47a246b74e741",
       "labels": {
         "Map_FirewormSegments_": 0,
-        "word_8FA6C": 16,
-        "word_8FA74": 24,
-        "word_8FA7C": 32,
-        "word_8FA84": 40,
-        "word_8FA8C": 48,
-        "word_8FA94": 56,
-        "word_8FA9C": 64,
-        "word_8FAA4": 72
+        "FirewormSegmentsShared_MapFrame01": 16,
+        "FirewormSegmentsShared_MapFrame02": 24,
+        "FirewormSegmentsShared_MapFrame03": 32,
+        "FirewormSegmentsShared_MapFrame04": 40,
+        "FirewormSegmentsShared_MapFrame05": 48,
+        "FirewormSegmentsShared_MapFrame06": 56,
+        "FirewormSegmentsShared_MapFrame00": 64,
+        "FirewormSegmentsShared_MapFrame07": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -9510,56 +9510,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA9C",
+          "target": "FirewormSegmentsShared_MapFrame00",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA6C",
+          "target": "FirewormSegmentsShared_MapFrame01",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA74",
+          "target": "FirewormSegmentsShared_MapFrame02",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA7C",
+          "target": "FirewormSegmentsShared_MapFrame03",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA84",
+          "target": "FirewormSegmentsShared_MapFrame04",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA8C",
+          "target": "FirewormSegmentsShared_MapFrame05",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FA94",
+          "target": "FirewormSegmentsShared_MapFrame06",
           "base": "Map_FirewormSegments_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FAA4",
+          "target": "FirewormSegmentsShared_MapFrame07",
           "base": "Map_FirewormSegments_"
         },
         {
@@ -10357,19 +10357,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "4126228e1b48374a6257ca25ff87e6134a2ffb52cf999474180afd7ac9c5ba74",
+      "declarations_sha256": "8995e57ffc5452185d12b62d9518a7eddc19d2d6975bd37aadce2cc6d55eb083",
       "labels": {
         "Map_Iwamodoki_": 0,
-        "word_8FCA4": 20,
-        "word_8FCAC": 28,
-        "word_8FCC0": 48,
-        "word_8FCD4": 68,
-        "word_8FCE8": 88,
-        "word_8FCFC": 108,
-        "word_8FD10": 128,
-        "word_8FD18": 136,
-        "word_8FD20": 144,
-        "word_8FD28": 152
+        "IwamodokiSK_MapFrame00": 20,
+        "IwamodokiSK_MapFrame01": 28,
+        "IwamodokiSK_MapFrame02": 48,
+        "IwamodokiSK_MapFrame03": 68,
+        "IwamodokiSK_MapFrame04": 88,
+        "IwamodokiSK_MapFrame05": 108,
+        "IwamodokiSK_MapFrame06": 128,
+        "IwamodokiSK_MapFrame07": 136,
+        "IwamodokiSK_MapFrame08": 144,
+        "IwamodokiSK_MapFrame09": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -10377,70 +10377,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCA4",
+          "target": "IwamodokiSK_MapFrame00",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCAC",
+          "target": "IwamodokiSK_MapFrame01",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCC0",
+          "target": "IwamodokiSK_MapFrame02",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCD4",
+          "target": "IwamodokiSK_MapFrame03",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCE8",
+          "target": "IwamodokiSK_MapFrame04",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FCFC",
+          "target": "IwamodokiSK_MapFrame05",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FD10",
+          "target": "IwamodokiSK_MapFrame06",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FD18",
+          "target": "IwamodokiSK_MapFrame07",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FD20",
+          "target": "IwamodokiSK_MapFrame08",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8FD28",
+          "target": "IwamodokiSK_MapFrame09",
           "base": "Map_Iwamodoki_"
         },
         {
@@ -10504,19 +10504,19 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 160
       },
-      "declarations_sha256": "5c856eae2fbfdc397c238def8084b787ef642cd231410cb6d0c3f9bb78d9d9a3",
+      "declarations_sha256": "0f20253e4db1ab91aaa801c7235263347ee009ac5d955df57f408f7b723ad3e9",
       "labels": {
         "Map_Iwamodoki_": 0,
-        "word_1614E2": 20,
-        "word_1614EA": 28,
-        "word_1614FE": 48,
-        "word_161512": 68,
-        "word_161526": 88,
-        "word_16153A": 108,
-        "word_16154E": 128,
-        "word_161556": 136,
-        "word_16155E": 144,
-        "word_161566": 152
+        "IwamodokiS3Stored_MapFrame00": 20,
+        "IwamodokiS3Stored_MapFrame01": 28,
+        "IwamodokiS3Stored_MapFrame02": 48,
+        "IwamodokiS3Stored_MapFrame03": 68,
+        "IwamodokiS3Stored_MapFrame04": 88,
+        "IwamodokiS3Stored_MapFrame05": 108,
+        "IwamodokiS3Stored_MapFrame06": 128,
+        "IwamodokiS3Stored_MapFrame07": 136,
+        "IwamodokiS3Stored_MapFrame08": 144,
+        "IwamodokiS3Stored_MapFrame09": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -10524,70 +10524,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614E2",
+          "target": "IwamodokiS3Stored_MapFrame00",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614EA",
+          "target": "IwamodokiS3Stored_MapFrame01",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614FE",
+          "target": "IwamodokiS3Stored_MapFrame02",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161512",
+          "target": "IwamodokiS3Stored_MapFrame03",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161526",
+          "target": "IwamodokiS3Stored_MapFrame04",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16153A",
+          "target": "IwamodokiS3Stored_MapFrame05",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16154E",
+          "target": "IwamodokiS3Stored_MapFrame06",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161556",
+          "target": "IwamodokiS3Stored_MapFrame07",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16155E",
+          "target": "IwamodokiS3Stored_MapFrame08",
           "base": "Map_Iwamodoki_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161566",
+          "target": "IwamodokiS3Stored_MapFrame09",
           "base": "Map_Iwamodoki_"
         },
         {
@@ -23510,23 +23510,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 260
       },
-      "declarations_sha256": "e3441d99f617970f21d4d87c6d971d0838e0558ee886cba547c5948b63921f57",
+      "declarations_sha256": "ad348801d4e47f191caffeca1c660ced99c6f697b477bcb860b45686360f435c",
       "labels": {
         "Map_Madmole_": 0,
-        "word_8DA0E": 28,
-        "word_8DA2E": 60,
-        "word_8DA4E": 92,
-        "word_8DA6E": 124,
-        "word_8DA82": 144,
-        "word_8DA90": 158,
-        "word_8DA9E": 172,
-        "word_8DAA6": 180,
-        "word_8DAB4": 194,
-        "word_8DABC": 202,
-        "word_8DACA": 216,
-        "word_8DAD2": 224,
-        "word_8DAE0": 238,
-        "word_8DAE8": 246
+        "MadmoleSK_MapFrame00": 28,
+        "MadmoleSK_MapFrame01": 60,
+        "MadmoleSK_MapFrame02": 92,
+        "MadmoleSK_MapFrame03": 124,
+        "MadmoleSK_MapFrame04": 144,
+        "MadmoleSK_MapFrame05": 158,
+        "MadmoleSK_MapFrame06": 172,
+        "MadmoleSK_MapFrame07": 180,
+        "MadmoleSK_MapFrame08": 194,
+        "MadmoleSK_MapFrame09": 202,
+        "MadmoleSK_MapFrame0A": 216,
+        "MadmoleSK_MapFrame0B": 224,
+        "MadmoleSK_MapFrame0C": 238,
+        "MadmoleSK_MapFrame0D": 246
       },
       "external_symbols": [],
       "blocks": [
@@ -23534,98 +23534,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA0E",
+          "target": "MadmoleSK_MapFrame00",
           "base": "Map_Madmole_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA2E",
+          "target": "MadmoleSK_MapFrame01",
           "base": "Map_Madmole_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA4E",
+          "target": "MadmoleSK_MapFrame02",
           "base": "Map_Madmole_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA6E",
+          "target": "MadmoleSK_MapFrame03",
           "base": "Map_Madmole_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA82",
+          "target": "MadmoleSK_MapFrame04",
           "base": "Map_Madmole_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA90",
+          "target": "MadmoleSK_MapFrame05",
           "base": "Map_Madmole_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DA9E",
+          "target": "MadmoleSK_MapFrame06",
           "base": "Map_Madmole_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DAA6",
+          "target": "MadmoleSK_MapFrame07",
           "base": "Map_Madmole_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DAB4",
+          "target": "MadmoleSK_MapFrame08",
           "base": "Map_Madmole_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DABC",
+          "target": "MadmoleSK_MapFrame09",
           "base": "Map_Madmole_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DACA",
+          "target": "MadmoleSK_MapFrame0A",
           "base": "Map_Madmole_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DAD2",
+          "target": "MadmoleSK_MapFrame0B",
           "base": "Map_Madmole_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DAE0",
+          "target": "MadmoleSK_MapFrame0C",
           "base": "Map_Madmole_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DAE8",
+          "target": "MadmoleSK_MapFrame0D",
           "base": "Map_Madmole_"
         },
         {
@@ -23709,23 +23709,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 260
       },
-      "declarations_sha256": "afcc20adc2f9b48442eafb2f035a26eabc3664b697be6ba12b301705f4b0227a",
+      "declarations_sha256": "0aefd75e8722fd8662a862866d241ec5a144a35f034ac8c767f3cad5a12cded5",
       "labels": {
         "Map_Madmole_": 0,
-        "word_1613E6": 28,
-        "word_161406": 60,
-        "word_161426": 92,
-        "word_161446": 124,
-        "word_16145A": 144,
-        "word_161468": 158,
-        "word_161476": 172,
-        "word_16147E": 180,
-        "word_16148C": 194,
-        "word_161494": 202,
-        "word_1614A2": 216,
-        "word_1614AA": 224,
-        "word_1614B8": 238,
-        "word_1614C0": 246
+        "MadmoleS3Stored_MapFrame00": 28,
+        "MadmoleS3Stored_MapFrame01": 60,
+        "MadmoleS3Stored_MapFrame02": 92,
+        "MadmoleS3Stored_MapFrame03": 124,
+        "MadmoleS3Stored_MapFrame04": 144,
+        "MadmoleS3Stored_MapFrame05": 158,
+        "MadmoleS3Stored_MapFrame06": 172,
+        "MadmoleS3Stored_MapFrame07": 180,
+        "MadmoleS3Stored_MapFrame08": 194,
+        "MadmoleS3Stored_MapFrame09": 202,
+        "MadmoleS3Stored_MapFrame0A": 216,
+        "MadmoleS3Stored_MapFrame0B": 224,
+        "MadmoleS3Stored_MapFrame0C": 238,
+        "MadmoleS3Stored_MapFrame0D": 246
       },
       "external_symbols": [],
       "blocks": [
@@ -23733,98 +23733,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1613E6",
+          "target": "MadmoleS3Stored_MapFrame00",
           "base": "Map_Madmole_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161406",
+          "target": "MadmoleS3Stored_MapFrame01",
           "base": "Map_Madmole_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161426",
+          "target": "MadmoleS3Stored_MapFrame02",
           "base": "Map_Madmole_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161446",
+          "target": "MadmoleS3Stored_MapFrame03",
           "base": "Map_Madmole_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16145A",
+          "target": "MadmoleS3Stored_MapFrame04",
           "base": "Map_Madmole_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161468",
+          "target": "MadmoleS3Stored_MapFrame05",
           "base": "Map_Madmole_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161476",
+          "target": "MadmoleS3Stored_MapFrame06",
           "base": "Map_Madmole_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16147E",
+          "target": "MadmoleS3Stored_MapFrame07",
           "base": "Map_Madmole_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_16148C",
+          "target": "MadmoleS3Stored_MapFrame08",
           "base": "Map_Madmole_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_161494",
+          "target": "MadmoleS3Stored_MapFrame09",
           "base": "Map_Madmole_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614A2",
+          "target": "MadmoleS3Stored_MapFrame0A",
           "base": "Map_Madmole_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614AA",
+          "target": "MadmoleS3Stored_MapFrame0B",
           "base": "Map_Madmole_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614B8",
+          "target": "MadmoleS3Stored_MapFrame0C",
           "base": "Map_Madmole_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1614C0",
+          "target": "MadmoleS3Stored_MapFrame0D",
           "base": "Map_Madmole_"
         },
         {
@@ -25926,13 +25926,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 58
       },
-      "declarations_sha256": "13be97aaaf4bc3486289137b8e418229d02446e5187c37fed89dfc6d8648a9b0",
+      "declarations_sha256": "41a0c326dd09843cc4bfb70506a6df4b36d0e698b5a6b2db038c1bda7b771a5e",
       "labels": {
         "Map_Mushmeanie_": 0,
-        "word_8DD00": 8,
-        "word_8DD08": 16,
-        "word_8DD16": 30,
-        "word_8DD24": 44
+        "MushmeanieShared_MapFrame00": 8,
+        "MushmeanieShared_MapFrame01": 16,
+        "MushmeanieShared_MapFrame02": 30,
+        "MushmeanieShared_MapFrame03": 44
       },
       "external_symbols": [],
       "blocks": [
@@ -25940,28 +25940,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DD00",
+          "target": "MushmeanieShared_MapFrame00",
           "base": "Map_Mushmeanie_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DD08",
+          "target": "MushmeanieShared_MapFrame01",
           "base": "Map_Mushmeanie_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DD16",
+          "target": "MushmeanieShared_MapFrame02",
           "base": "Map_Mushmeanie_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8DD24",
+          "target": "MushmeanieShared_MapFrame03",
           "base": "Map_Mushmeanie_"
         },
         {
@@ -29189,14 +29189,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "463a891351973284c8a2a0b2f98a755fd15609bce3927a4820e88db9ec17f05c",
+      "declarations_sha256": "ee9e968e3182f039860f003ee30412a9d18ca4be7bd67bf00be5d856ea22e853",
       "labels": {
         "Map_Rockn_": 0,
-        "word_8F090": 10,
-        "word_8F098": 18,
-        "word_8F0A0": 26,
-        "word_8F0A8": 34,
-        "word_8F0B0": 42
+        "RocknSK_MapFrame00": 10,
+        "RocknSK_MapFrame01": 18,
+        "RocknSK_MapFrame02": 26,
+        "RocknSK_MapFrame03": 34,
+        "RocknSK_MapFrame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -29204,35 +29204,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F090",
+          "target": "RocknSK_MapFrame00",
           "base": "Map_Rockn_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F098",
+          "target": "RocknSK_MapFrame01",
           "base": "Map_Rockn_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F0A0",
+          "target": "RocknSK_MapFrame02",
           "base": "Map_Rockn_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F0A8",
+          "target": "RocknSK_MapFrame03",
           "base": "Map_Rockn_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F0B0",
+          "target": "RocknSK_MapFrame04",
           "base": "Map_Rockn_"
         },
         {
@@ -29271,18 +29271,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 90
       },
-      "declarations_sha256": "91bf5682100223f387fa0b391f67c765ff70a05b7bf3684698a875f1f3f83bab",
+      "declarations_sha256": "7dd971890ec234a29509c9dba81723bc6f7387b2797c196c764c11c965a69ad4",
       "labels": {
         "Map_Sandworm_": 0,
-        "word_186D22": 18,
-        "word_186D2A": 26,
-        "word_186D32": 34,
-        "word_186D3A": 42,
-        "word_186D42": 50,
-        "word_186D4A": 58,
-        "word_186D52": 66,
-        "word_186D5A": 74,
-        "word_186D62": 82
+        "SandwormSK_MapFrame00": 18,
+        "SandwormSK_MapFrame01": 26,
+        "SandwormSK_MapFrame02": 34,
+        "SandwormSK_MapFrame03": 42,
+        "SandwormSK_MapFrame04": 50,
+        "SandwormSK_MapFrame05": 58,
+        "SandwormSK_MapFrame06": 66,
+        "SandwormSK_MapFrame07": 74,
+        "SandwormSK_MapFrame08": 82
       },
       "external_symbols": [],
       "blocks": [
@@ -29290,63 +29290,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D22",
+          "target": "SandwormSK_MapFrame00",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D2A",
+          "target": "SandwormSK_MapFrame01",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D32",
+          "target": "SandwormSK_MapFrame02",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D3A",
+          "target": "SandwormSK_MapFrame03",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D42",
+          "target": "SandwormSK_MapFrame04",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D4A",
+          "target": "SandwormSK_MapFrame05",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D52",
+          "target": "SandwormSK_MapFrame06",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D5A",
+          "target": "SandwormSK_MapFrame07",
           "base": "Map_Sandworm_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D62",
+          "target": "SandwormSK_MapFrame08",
           "base": "Map_Sandworm_"
         },
         {
@@ -32108,14 +32108,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 140
       },
-      "declarations_sha256": "cfe7a5d4474cd3567108ad6a320c25cbbd8ab3cbfbd3ad9f7be6a1bdafc9d179",
+      "declarations_sha256": "1f431c3d8270cf258af1ff5b0156e06128d10da76723f84411c148af6ec404db",
       "labels": {
         "Map_Skorp_": 0,
-        "word_186C8E": 10,
-        "word_186CB4": 48,
-        "word_186CDA": 86,
-        "word_186D00": 124,
-        "word_186D08": 132
+        "SkorpSK_MapFrame00": 10,
+        "SkorpSK_MapFrame01": 48,
+        "SkorpSK_MapFrame02": 86,
+        "SkorpSK_MapFrame03": 124,
+        "SkorpSK_MapFrame04": 132
       },
       "external_symbols": [],
       "blocks": [
@@ -32123,35 +32123,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186C8E",
+          "target": "SkorpSK_MapFrame00",
           "base": "Map_Skorp_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186CB4",
+          "target": "SkorpSK_MapFrame01",
           "base": "Map_Skorp_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186CDA",
+          "target": "SkorpSK_MapFrame02",
           "base": "Map_Skorp_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D00",
+          "target": "SkorpSK_MapFrame03",
           "base": "Map_Skorp_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_186D08",
+          "target": "SkorpSK_MapFrame04",
           "base": "Map_Skorp_"
         },
         {
@@ -58101,13 +58101,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 46
       },
-      "declarations_sha256": "ef324e02ce71cbe9724f25664ec5e62883084d1be0bf6b77630756557960edcc",
+      "declarations_sha256": "df4bc10e194df5afb7a3de1432880de13db9f70d28f75dd148aa81c76a51d456",
       "labels": {
         "Map_Spikebonker_": 0,
-        "word_184E64": 8,
-        "word_184E72": 22,
-        "word_184E7A": 30,
-        "word_184E82": 38
+        "SpikebonkerSK_MapFrame00": 8,
+        "SpikebonkerSK_MapFrame01": 22,
+        "SpikebonkerSK_MapFrame02": 30,
+        "SpikebonkerSK_MapFrame03": 38
       },
       "external_symbols": [],
       "blocks": [
@@ -58115,28 +58115,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184E64",
+          "target": "SpikebonkerSK_MapFrame00",
           "base": "Map_Spikebonker_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184E72",
+          "target": "SpikebonkerSK_MapFrame01",
           "base": "Map_Spikebonker_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184E7A",
+          "target": "SpikebonkerSK_MapFrame02",
           "base": "Map_Spikebonker_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_184E82",
+          "target": "SpikebonkerSK_MapFrame03",
           "base": "Map_Spikebonker_"
         },
         {
@@ -77593,17 +77593,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 98
       },
-      "declarations_sha256": "aba2cff7a8aeaa9c19e1c68c54b5d0c92d1e5aa9163ad7b573653a9cccada147",
+      "declarations_sha256": "29367882594ac29f68b99f7a3f8a1b962f8f72b0a7735466e761c12c5f37b58b",
       "labels": {
         "Map_Toxomister_": 0,
-        "word_9009E": 16,
-        "word_900B8": 42,
-        "word_900C0": 50,
-        "word_900C8": 58,
-        "word_900D0": 66,
-        "word_900D8": 74,
-        "word_900E0": 82,
-        "word_900E8": 90
+        "ToxomisterSK_MapFrame00": 16,
+        "ToxomisterSK_MapFrame01": 42,
+        "ToxomisterSK_MapFrame02": 50,
+        "ToxomisterSK_MapFrame03": 58,
+        "ToxomisterSK_MapFrame04": 66,
+        "ToxomisterSK_MapFrame05": 74,
+        "ToxomisterSK_MapFrame06": 82,
+        "ToxomisterSK_MapFrame07": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -77611,56 +77611,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_9009E",
+          "target": "ToxomisterSK_MapFrame00",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900B8",
+          "target": "ToxomisterSK_MapFrame01",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900C0",
+          "target": "ToxomisterSK_MapFrame02",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900C8",
+          "target": "ToxomisterSK_MapFrame03",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900D0",
+          "target": "ToxomisterSK_MapFrame04",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900D8",
+          "target": "ToxomisterSK_MapFrame05",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900E0",
+          "target": "ToxomisterSK_MapFrame06",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_900E8",
+          "target": "ToxomisterSK_MapFrame07",
           "base": "Map_Toxomister_"
         },
         {
@@ -77714,17 +77714,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 98
       },
-      "declarations_sha256": "6f031f62924f4d448607d7b412731f35a99e9d52cdca3ec6029d1928b7ee28fe",
+      "declarations_sha256": "0d3d5bfd243e11bbc122001de58baa2d65046edf787137ea12c50b716bd0cb83",
       "labels": {
         "Map_Toxomister_": 0,
-        "word_160E20": 16,
-        "word_160E28": 24,
-        "word_160E42": 50,
-        "word_160E4A": 58,
-        "word_160E52": 66,
-        "word_160E5A": 74,
-        "word_160E62": 82,
-        "word_160E6A": 90
+        "ToxomisterS3Stored_MapFrame00": 16,
+        "ToxomisterS3Stored_MapFrame01": 24,
+        "ToxomisterS3Stored_MapFrame02": 50,
+        "ToxomisterS3Stored_MapFrame03": 58,
+        "ToxomisterS3Stored_MapFrame04": 66,
+        "ToxomisterS3Stored_MapFrame05": 74,
+        "ToxomisterS3Stored_MapFrame06": 82,
+        "ToxomisterS3Stored_MapFrame07": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -77732,56 +77732,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E20",
+          "target": "ToxomisterS3Stored_MapFrame00",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E28",
+          "target": "ToxomisterS3Stored_MapFrame01",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E42",
+          "target": "ToxomisterS3Stored_MapFrame02",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E4A",
+          "target": "ToxomisterS3Stored_MapFrame03",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E52",
+          "target": "ToxomisterS3Stored_MapFrame04",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E5A",
+          "target": "ToxomisterS3Stored_MapFrame05",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E62",
+          "target": "ToxomisterS3Stored_MapFrame06",
           "base": "Map_Toxomister_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_160E6A",
+          "target": "ToxomisterS3Stored_MapFrame07",
           "base": "Map_Toxomister_"
         },
         {
