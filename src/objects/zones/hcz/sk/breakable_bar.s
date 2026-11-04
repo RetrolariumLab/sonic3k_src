@@ -2,7 +2,7 @@
 ; Responsibility: Hydrocity breakable bar attachment, movement, breakage and shared player geometry
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_1ED1A:
+SKBreakableBar_AttrsBySubtype:
                 dc.b    $14, $28, $20,   0
                 dc.b    $24, $48, $30,   1
                 dc.b    $34, $68, $40,   2
@@ -22,9 +22,9 @@ Obj_HCZBreakableBar:
                 move.w  d0,$30(a0)
                 andi.w  #$30,d1
                 lsr.w   #2,d1
-                lea     byte_1ED1A(pc,d1.w),a1
+                lea     SKBreakableBar_AttrsBySubtype(pc,d1.w),a1
                 tst.b   subtype(a0)
-                bpl.s   loc_1ED8E
+                bpl.s   SKBreakableBar_InitVerticalBar
                 moveq   #0,d0
                 move.b  (a1)+,d0
                 move.w  d0,$36(a0)
@@ -35,11 +35,11 @@ Obj_HCZBreakableBar:
                 move.b  (a1)+,d0
                 addq.b  #4,d0
                 move.b  d0,mapping_frame(a0)
-                move.l  #loc_1EF64,(a0)
-                bra.w   loc_1EF64
+                move.l  #SKBreakableBar_TickHorizontalBreakTimer,(a0)
+                bra.w   SKBreakableBar_TickHorizontalBreakTimer
 ; ---------------------------------------------------------------------------
 
-loc_1ED8E:
+SKBreakableBar_InitVerticalBar:
                 moveq   #0,d0
                 move.b  (a1)+,d0
                 move.w  d0,$36(a0)
@@ -48,18 +48,18 @@ loc_1ED8E:
                 move.b  #4,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.b  (a1)+,mapping_frame(a0)
-                move.l  #loc_1EDB0,(a0)
+                move.l  #SKBreakableBar_TickVerticalBreakTimer,(a0)
 
-loc_1EDB0:
+SKBreakableBar_TickVerticalBreakTimer:
                 lea     $32(a0),a2
                 tst.w   $30(a0)
-                beq.s   loc_1EDC6
+                beq.s   SKBreakableBar_UpdateVerticalRiders
                 tst.w   (a2)
-                beq.s   loc_1EDC6
+                beq.s   SKBreakableBar_UpdateVerticalRiders
                 subq.w  #1,$30(a0)
-                beq.w   loc_1EEEC
+                beq.w   SKBreakableBar_ReleaseVerticalP1
 
-loc_1EDC6:
+SKBreakableBar_UpdateVerticalRiders:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d1
                 moveq   #0,d2
@@ -70,90 +70,91 @@ loc_1EDC6:
                 moveq   #1,d2
                 bsr.s   UpdatePlayerOnHczVerticalBreakableBar
                 tst.b   $3A(a0)
-                bne.w   loc_1EEEC
+                bne.w   SKBreakableBar_ReleaseVerticalP1
                 bra.w   Sprite_OnScreen_Test
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnHczVerticalBreakableBar:
                 tst.b   (a2)
-                beq.s   loc_1EE4E
+                beq.s   SKBreakableBar_TickVerticalRegrabDelay
                 move.w  y_pos(a0),d0
                 sub.w   $36(a0),d0
                 btst    #button_up+8,d1
-                beq.s   loc_1EE0C
+                beq.s   SKBreakableBar_TrySlideRiderDown
                 subq.w  #1,y_pos(a1)
                 cmp.w   y_pos(a1),d0
-                blo.s   loc_1EE0C
+                blo.s   SKBreakableBar_TrySlideRiderDown
                 move.w  d0,y_pos(a1)
 
-loc_1EE0C:
+SKBreakableBar_TrySlideRiderDown:
                 add.w   $38(a0),d0
                 btst    #button_down+8,d1
-                beq.s   loc_1EE24
+                beq.s   SKBreakableBar_TryReleaseVerticalRider
                 addq.w  #1,y_pos(a1)
                 cmp.w   y_pos(a1),d0
-                bhs.s   loc_1EE24
+                bhs.s   SKBreakableBar_TryReleaseVerticalRider
                 move.w  d0,y_pos(a1)
 
-loc_1EE24:
+SKBreakableBar_TryReleaseVerticalRider:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
-                beq.w   locret_1EEEA
+                beq.w   SKBreakableBar_VerticalGrabReturn
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 bclr    d2,(_unkF7C7).w
                 andi.b  #$FE,object_control(a1)
                 btst    #6,subtype(a0)
-                bne.s   locret_1EE4C
+                bne.s   SKBreakableBar_VerticalReleaseReturn
                 move.b  #1,$3A(a0)
 
-locret_1EE4C:
+SKBreakableBar_VerticalReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1EE4E:
+SKBreakableBar_TickVerticalRegrabDelay:
                 tst.b   2(a2)
-                beq.s   loc_1EE5A
+                beq.s   SKBreakableBar_TryGrabVerticalBar
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1EE5A:
+SKBreakableBar_TryGrabVerticalBar:
                 moveq   #0,d1
                 move.b  height_pixels(a0),d1
                 move.w  y_pos(a0),d0
                 sub.w   d1,d0
                 move.w  y_pos(a1),d2
                 cmp.w   d0,d2
-                blo.s   locret_1EEEA
+                blo.s   SKBreakableBar_VerticalGrabReturn
                 add.w   d1,d0
                 add.w   d1,d0
                 cmp.w   d0,d2
-                bhs.s   locret_1EEEA
+                bhs.s   SKBreakableBar_VerticalGrabReturn
                 move.w  x_pos(a0),d0
                 addi.w  #$14,d0
                 cmp.w   x_pos(a1),d0
-                bhs.s   locret_1EEEA
+                bhs.s   SKBreakableBar_VerticalGrabReturn
                 addi.w  #$10,d0
                 cmp.w   x_pos(a1),d0
-                blo.s   locret_1EEEA
+                blo.s   SKBreakableBar_VerticalGrabReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_1EEEA
+                bhs.s   SKBreakableBar_VerticalGrabReturn
                 tst.b   object_control(a1)
-                bne.s   locret_1EEEA
+                bne.s   SKBreakableBar_VerticalGrabReturn
                 move.w  y_pos(a0),d0
                 sub.w   $36(a0),d0
                 cmp.w   y_pos(a1),d0
-                blo.s   loc_1EEAE
+                blo.s   SKBreakableBar_ClampGrabToLowerEnd
                 move.w  d0,y_pos(a1)
 
-loc_1EEAE:
+SKBreakableBar_ClampGrabToLowerEnd:
                 add.w   $38(a0),d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   loc_1EEBC
+                bhs.s   SKBreakableBar_CommitVerticalGrab
                 move.w  d0,y_pos(a1)
 
-loc_1EEBC:
+; The global bit operation uses d2 after the capture check has replaced the player index with Y
+SKBreakableBar_CommitVerticalGrab:
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 move.w  x_pos(a0),d0
@@ -165,64 +166,64 @@ loc_1EEBC:
                 bset    d2,(_unkF7C7).w
                 move.b  #1,(a2)
 
-locret_1EEEA:
+SKBreakableBar_VerticalGrabReturn:
                 rts
 ; End of function UpdatePlayerOnHczVerticalBreakableBar
 
 ; ---------------------------------------------------------------------------
 
-loc_1EEEC:
+SKBreakableBar_ReleaseVerticalP1:
                 tst.b   $32(a0)
-                beq.s   loc_1EEF8
+                beq.s   SKBreakableBar_ReleaseVerticalP2
                 andi.b  #$FE,(Player_1+object_control).w
 
-loc_1EEF8:
+SKBreakableBar_ReleaseVerticalP2:
                 tst.b   $33(a0)
-                beq.s   loc_1EF04
+                beq.s   SKBreakableBar_SplitVerticalBar
                 andi.b  #$FE,(Player_2+object_control).w
 
-loc_1EF04:
+SKBreakableBar_SplitVerticalBar:
                 clr.b   (_unkF7C7).w
                 clr.w   $32(a0)
-                move.l  #loc_1EF3E,(a0)
+                move.l  #SKBreakableBar_WaitForFragmentMotion,(a0)
                 move.b  #3,mapping_frame(a0)
                 move.w  #$400,x_vel(a0)
                 move.w  #0,y_vel(a0)
-                lea     (word_1F108).l,a4
-                lea     (byte_1F0F0).l,a2
+                lea     (SKBreakableBar_VerticalFragmentOffsets).l,a4
+                lea     (SKBreakableBar_FragmentDelays).l,a2
                 moveq   #0,d1
                 move.b  height_pixels(a0),d1
                 lsr.w   #2,d1
                 subq.w  #1,d1
                 bsr.w   SplitHczBreakableBarIntoPieces
 
-loc_1EF3E:
+SKBreakableBar_WaitForFragmentMotion:
                 tst.b   $3F(a0)
-                beq.s   loc_1EF4A
+                beq.s   SKBreakableBar_MoveFragmentWithGravity
                 subq.b  #1,$3F(a0)
-                bra.s   loc_1EF56
+                bra.s   SKBreakableBar_DrawOrDeleteFragment
 ; ---------------------------------------------------------------------------
 
-loc_1EF4A:
+SKBreakableBar_MoveFragmentWithGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #8,y_vel(a0)
 
-loc_1EF56:
+SKBreakableBar_DrawOrDeleteFragment:
                 tst.b   render_flags(a0)
                 bpl.w   SKLavaMarker_ClearMarkerLoadedBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_1EF64:
+SKBreakableBar_TickHorizontalBreakTimer:
                 lea     $32(a0),a2
                 tst.w   $30(a0)
-                beq.s   loc_1EF7A
+                beq.s   SKBreakableBar_UpdateHorizontalRiders
                 tst.w   (a2)
-                beq.s   loc_1EF7A
+                beq.s   SKBreakableBar_UpdateHorizontalRiders
                 subq.w  #1,$30(a0)
-                beq.w   loc_1F09A
+                beq.w   SKBreakableBar_ReleaseHorizontalP1
 
-loc_1EF7A:
+SKBreakableBar_UpdateHorizontalRiders:
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d1
                 moveq   #0,d2
@@ -233,90 +234,91 @@ loc_1EF7A:
                 moveq   #1,d2
                 bsr.s   UpdatePlayerOnHczHorizontalBreakableBar
                 tst.b   $3A(a0)
-                bne.w   loc_1F09A
+                bne.w   SKBreakableBar_ReleaseHorizontalP1
                 bra.w   Sprite_OnScreen_Test
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnHczHorizontalBreakableBar:
                 tst.b   (a2)
-                beq.s   loc_1F002
+                beq.s   SKBreakableBar_TickHorizontalRegrabDelay
                 move.w  x_pos(a0),d0
                 sub.w   $36(a0),d0
                 btst    #button_left+8,d1
-                beq.s   loc_1EFC0
+                beq.s   SKBreakableBar_TrySlideRiderRight
                 subq.w  #1,x_pos(a1)
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_1EFC0
+                blo.s   SKBreakableBar_TrySlideRiderRight
                 move.w  d0,x_pos(a1)
 
-loc_1EFC0:
+SKBreakableBar_TrySlideRiderRight:
                 add.w   $38(a0),d0
                 btst    #button_right+8,d1
-                beq.s   loc_1EFD8
+                beq.s   SKBreakableBar_TryReleaseHorizontalRider
                 addq.w  #1,x_pos(a1)
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_1EFD8
+                bhs.s   SKBreakableBar_TryReleaseHorizontalRider
                 move.w  d0,x_pos(a1)
 
-loc_1EFD8:
+SKBreakableBar_TryReleaseHorizontalRider:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
-                beq.w   locret_1F098
+                beq.w   SKBreakableBar_HorizontalGrabReturn
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 bclr    d2,(_unkF7C7).w
                 andi.b  #$FE,object_control(a1)
                 btst    #6,subtype(a0)
-                bne.s   locret_1F000
+                bne.s   SKBreakableBar_HorizontalReleaseReturn
                 move.b  #1,$3A(a0)
 
-locret_1F000:
+SKBreakableBar_HorizontalReleaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F002:
+SKBreakableBar_TickHorizontalRegrabDelay:
                 tst.b   2(a2)
-                beq.s   loc_1F00E
+                beq.s   SKBreakableBar_TryGrabHorizontalBar
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1F00E:
+SKBreakableBar_TryGrabHorizontalBar:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  x_pos(a0),d0
                 sub.w   d1,d0
                 move.w  x_pos(a1),d2
                 cmp.w   d0,d2
-                blo.s   locret_1F098
+                blo.s   SKBreakableBar_HorizontalGrabReturn
                 add.w   d1,d0
                 add.w   d1,d0
                 cmp.w   d0,d2
-                bhs.s   locret_1F098
+                bhs.s   SKBreakableBar_HorizontalGrabReturn
                 move.w  y_pos(a0),d0
                 subi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   locret_1F098
+                bhs.s   SKBreakableBar_HorizontalGrabReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                blo.s   locret_1F098
+                blo.s   SKBreakableBar_HorizontalGrabReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_1F098
+                bhs.s   SKBreakableBar_HorizontalGrabReturn
                 tst.b   object_control(a1)
-                bne.s   locret_1F098
+                bne.s   SKBreakableBar_HorizontalGrabReturn
                 move.w  x_pos(a0),d0
                 sub.w   $36(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_1F062
+                blo.s   SKBreakableBar_ClampGrabToRightEnd
                 move.w  d0,x_pos(a1)
 
-loc_1F062:
+SKBreakableBar_ClampGrabToRightEnd:
                 add.w   $38(a0),d0
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_1F070
+                bhs.s   SKBreakableBar_CommitHorizontalGrab
                 move.w  d0,x_pos(a1)
 
-loc_1F070:
+; The global bit operation uses d2 after the capture check has replaced the player index with X
+SKBreakableBar_CommitHorizontalGrab:
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 move.w  y_pos(a0),d0
@@ -327,43 +329,43 @@ loc_1F070:
                 bset    d2,(_unkF7C7).w
                 move.b  #1,(a2)
 
-locret_1F098:
+SKBreakableBar_HorizontalGrabReturn:
                 rts
 ; End of function UpdatePlayerOnHczHorizontalBreakableBar
 
 ; ---------------------------------------------------------------------------
 
-loc_1F09A:
+SKBreakableBar_ReleaseHorizontalP1:
                 tst.b   $32(a0)
-                beq.s   loc_1F0A6
+                beq.s   SKBreakableBar_ReleaseHorizontalP2
                 andi.b  #$FE,(Player_1+object_control).w
 
-loc_1F0A6:
+SKBreakableBar_ReleaseHorizontalP2:
                 tst.b   $33(a0)
-                beq.s   loc_1F0B2
+                beq.s   SKBreakableBar_SplitHorizontalBar
                 andi.b  #$FE,(Player_2+object_control).w
 
-loc_1F0B2:
+SKBreakableBar_SplitHorizontalBar:
                 clr.b   (_unkF7C7).w
                 clr.w   $32(a0)
-                move.l  #loc_1EF3E,(a0)
+                move.l  #SKBreakableBar_WaitForFragmentMotion,(a0)
                 move.b  #7,mapping_frame(a0)
                 move.w  #0,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
-                lea     (word_1F148).l,a4
-                lea     (byte_1F0F0).l,a2
+                lea     (SKBreakableBar_HorizontalFragmentOffsets).l,a4
+                lea     (SKBreakableBar_FragmentDelays).l,a2
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 lsr.w   #2,d1
                 subq.w  #1,d1
                 bsr.w   SplitHczBreakableBarIntoPieces
-                bra.w   loc_1EF3E
+                bra.w   SKBreakableBar_WaitForFragmentMotion
 ; ---------------------------------------------------------------------------
-byte_1F0F0:
+SKBreakableBar_FragmentDelays:
                 dc.b    7,   5,   2,   0,   1,   3,   4,   6,   7,   5,   2,   0,   1,   3,   4,   6,   8,   9,  $A,  $B
                 dc.b    $C,  $D,  $E,  $F
                 even
-word_1F108:
+SKBreakableBar_VerticalFragmentOffsets:
                 dc.w    0,  -$1C
                 dc.w    0,  -$14
                 dc.w    0,   -$C
@@ -380,7 +382,7 @@ word_1F108:
                 dc.w    0,  -$34
                 dc.w    0,   $3C
                 dc.w    0,  -$3C
-word_1F148:
+SKBreakableBar_HorizontalFragmentOffsets:
                 dc.w    -$1C,     0
                 dc.w    -$14,     0
                 dc.w    -$C,     0
@@ -405,14 +407,14 @@ SplitHczBreakableBarIntoPieces:
                 move.w  y_pos(a0),d3
                 move.w  priority(a0),d4
                 movea.l a0,a1
-                bra.s   loc_1F1A0
+                bra.s   SKBreakableBar_InitFragmentAndAdvance
 ; ---------------------------------------------------------------------------
 
-loc_1F198:
+SKBreakableBar_TryAllocateNextFragment:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_1F1FA
+                bne.s   SKBreakableBar_PlayCollapseSound
 
-loc_1F1A0:
+SKBreakableBar_InitFragmentAndAdvance:
                 move.l  (a0),(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
@@ -432,9 +434,9 @@ loc_1F1A0:
                 move.w  x_vel(a0),x_vel(a1)
                 move.w  y_vel(a0),y_vel(a1)
                 move.b  (a2)+,$3F(a1)
-                dbf     d1,loc_1F198
+                dbf     d1,SKBreakableBar_TryAllocateNextFragment
 
-loc_1F1FA:
+SKBreakableBar_PlayCollapseSound:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
 ; End of function SplitHczBreakableBarIntoPieces

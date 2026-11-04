@@ -10,59 +10,60 @@ Obj_MegaChopper:
                 move.w  MegaChopper_Index(pc,d0.w),d1
                 jsr     MegaChopper_Index(pc,d1.w)
                 btst    #7,status(a0)
-                bne.s   loc_87F76
+                bne.s   SKMegaChopper_ScoreDefeatAndDraw
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 
-loc_87F76:
+SKMegaChopper_ScoreDefeatAndDraw:
                 jsr     EnemyDefeated(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 MegaChopper_Index:
-                dc.w    loc_87F88-MegaChopper_Index
-                dc.w    loc_87FAC-MegaChopper_Index
-                dc.w    loc_88024-MegaChopper_Index
-                dc.w    loc_88062-MegaChopper_Index
+                dc.w    SKMegaChopper_InitSwimmer-MegaChopper_Index
+                dc.w    SKMegaChopper_AnimateAndPickSwimMotion-MegaChopper_Index
+                dc.w    SKMegaChopper_UpdateLeap-MegaChopper_Index
+                dc.w    SKMegaChopper_PickAttachedFrame-MegaChopper_Index
 ; ---------------------------------------------------------------------------
 
-loc_87F88:
+; Consume the initial vertical flip and use it to select art priority
+SKMegaChopper_InitSwimmer:
                 lea     ObjDat_MegaChopper(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AniRaw_MegaChopper,$30(a0)
                 clr.w   child_dx(a0)                    ; and child_dy
                 bclr    #1,render_flags(a0)
-                beq.s   locret_87FAA
+                beq.s   SKMegaChopper_UpdateReturn
                 bset    #7,art_tile(a0)
 
-locret_87FAA:
+SKMegaChopper_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87FAC:
-                bsr.w   loc_8813A
+SKMegaChopper_AnimateAndPickSwimMotion:
+                bsr.w   SKMegaChopper_ResolveContact
                 jsr     Animate_Raw(pc)
                 jsr     Find_SonicTails(pc)
                 move.b  (V_int_run_count+3).w,d4
                 andi.b  #7,d4
-                bne.s   loc_87FCE
+                bne.s   SKMegaChopper_PickSwimOrLeap
                 moveq   #1,d4
                 tst.w   d1
-                bne.s   loc_87FCA
+                bne.s   SKMegaChopper_StepYTowardTarget
                 neg.w   d4
 
-loc_87FCA:
+SKMegaChopper_StepYTowardTarget:
                 add.w   d4,y_pos(a0)
 
-loc_87FCE:
+SKMegaChopper_PickSwimOrLeap:
                 move.w  y_pos(a0),d4
                 move.w  (Water_level).w,d5
                 addq.w  #8,d5
                 cmp.w   d5,d4
-                bhi.s   loc_87FE4
+                bhi.s   SKMegaChopper_SwimTowardTargetX
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_87FFC
+                beq.s   SKMegaChopper_PickLeapDirection
 
-loc_87FE4:
+SKMegaChopper_SwimTowardTargetX:
                 move.w  #$200,d0
                 move.w  #8,d1
                 jsr     (Chase_ObjectXOnly).l
@@ -70,70 +71,70 @@ loc_87FE4:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_87FFC:
+SKMegaChopper_PickLeapDirection:
                 move.b  #4,routine(a0)
                 move.w  #$200,d4
                 bset    #0,render_flags(a0)
                 tst.w   d0
-                bne.s   loc_88018
+                bne.s   SKMegaChopper_StoreLeapVelocity
                 neg.w   d4
                 bclr    #0,render_flags(a0)
 
-loc_88018:
+SKMegaChopper_StoreLeapVelocity:
                 move.w  d4,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88024:
-                bsr.w   loc_8813A
+SKMegaChopper_UpdateLeap:
+                bsr.w   SKMegaChopper_ResolveContact
                 jsr     Animate_Raw(pc)
                 tst.w   y_vel(a0)
-                bmi.s   loc_88052
+                bmi.s   SKMegaChopper_ApplyLeapGravity
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                blo.s   loc_88052
+                blo.s   SKMegaChopper_ApplyLeapGravity
                 move.w  y_vel(a0),d0
                 addi.w  #-$20,d0
                 move.w  d0,y_vel(a0)
-                beq.s   loc_88056
-                bmi.s   loc_88056
+                beq.s   SKMegaChopper_ResumeSwimming
+                bmi.s   SKMegaChopper_ResumeSwimming
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_88052:
+SKMegaChopper_ApplyLeapGravity:
                 jmp     MoveSprite_LightGravity(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88056:
+SKMegaChopper_ResumeSwimming:
                 move.b  #2,routine(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88062:
+SKMegaChopper_PickAttachedFrame:
                 move.b  #0,mapping_frame(a0)
                 btst    #2,(V_int_run_count+3).w
-                beq.s   loc_88076
+                beq.s   SKMegaChopper_CheckEscapeAndFilterInput
                 move.b  #2,mapping_frame(a0)
 
-loc_88076:
+SKMegaChopper_CheckEscapeAndFilterInput:
                 movea.w $44(a0),a1
                 cmpi.b  #4,routine(a1)
-                beq.w   loc_88108
+                beq.w   SKMegaChopper_ReleaseInputAndDetach
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_88108
+                beq.s   SKMegaChopper_ReleaseInputAndDetach
                 cmpi.b  #9,anim(a1)
-                beq.s   loc_88108
+                beq.s   SKMegaChopper_ReleaseInputAndDetach
                 jsr     Check_LRControllerShake(pc)
-                bne.s   loc_88108
+                bne.s   SKMegaChopper_ReleaseInputAndDetach
                 btst    #2,$38(a0)
-                beq.s   loc_880AE
+                beq.s   SKMegaChopper_FollowXAndCheckFacing
                 move.w  (Ctrl_1).w,d0
                 andi.w  #($8C<<8)|$8C,d0
                 move.w  d0,(Ctrl_1_logical).w
 
-loc_880AE:
+SKMegaChopper_FollowXAndCheckFacing:
                 move.w  x_pos(a1),d0
                 move.b  child_dx(a0),d1
                 ext.w   d1
@@ -142,73 +143,74 @@ loc_880AE:
                 move.b  render_flags(a1),d3
                 andi.b  #1,d3
                 eor.b   d2,d3
-                beq.s   loc_880DC
+                beq.s   SKMegaChopper_StoreXAndReadYOffset
                 bchg    #0,render_flags(a0)
                 bchg    #0,$38(a0)
                 neg.b   child_dx(a0)
 
-loc_880DC:
+SKMegaChopper_StoreXAndReadYOffset:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0
                 move.b  child_dy(a0),d1
                 ext.w   d1
-                bpl.s   loc_880FA
+                bpl.s   SKMegaChopper_StoreYAndDrainRings
                 cmpi.b  #8,anim(a1)
-                bne.s   loc_880FA
+                bne.s   SKMegaChopper_StoreYAndDrainRings
                 addi.w  #$10,d1
 
-loc_880FA:
+SKMegaChopper_StoreYAndDrainRings:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 bsr.w   DrainGlobalRingFromAttachedMegaChopper
-                beq.w   locret_87FAA
+                beq.w   SKMegaChopper_UpdateReturn
 
-loc_88108:
+; Clear the primary input lock only when this object owns it
+SKMegaChopper_ReleaseInputAndDetach:
                 bclr    #2,$38(a0)
-                beq.s   loc_88114
+                beq.s   SKMegaChopper_BeginDetachedFall
                 clr.b   (Ctrl_1_locked).w
 
-loc_88114:
+SKMegaChopper_BeginDetachedFall:
                 move.l  #MoveChkDel,(a0)
                 move.b  #2,mapping_frame(a0)
                 move.w  #$200,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_8812E
+                beq.s   SKMegaChopper_StoreDetachVelocity
                 neg.w   d0
 
-loc_8812E:
+SKMegaChopper_StoreDetachVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  #-$200,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8813A:
+SKMegaChopper_ResolveContact:
                 move.b  collision_property(a0),d0
-                beq.w   locret_87FAA
+                beq.w   SKMegaChopper_UpdateReturn
                 clr.b   collision_property(a0)
                 andi.w  #3,d0
                 move.w  d0,d2
                 lsl.w   #2,d0
-                lea     word_881EA-4(pc),a2
+                lea     SKMegaChopper_PlayerControlPairs-4(pc),a2
                 lea     (a2,d0.w),a2
                 movea.w (a2)+,a1
                 move.w  a1,$44(a0)
                 move.w  y_pos(a0),d1
                 sub.w   y_pos(a1),d1
                 cmpi.w  #-$10,d1
-                blt.w   locret_87FAA
+                blt.w   SKMegaChopper_UpdateReturn
                 cmpi.w  #$10,d1
-                bge.w   locret_87FAA
+                bge.w   SKMegaChopper_UpdateReturn
                 jsr     Check_PlayerAttack(pc)
-                bne.w   loc_881F6
+                bne.w   SKMegaChopper_MarkDefeated
                 cmpi.w  #1,d2
-                bne.s   loc_88190
+                bne.s   SKMegaChopper_AttachAndStartRingTimer
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 bset    #2,$38(a0)
 
-loc_88190:
+SKMegaChopper_AttachAndStartRingTimer:
                 movea.w (a2)+,a3
                 move.w  a3,$3E(a0)
                 move.w  (a3),parent3(a0)
@@ -220,28 +222,28 @@ loc_88190:
                 move.b  d0,child_dx(a0)
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                bpl.s   loc_881C8
+                bpl.s   SKMegaChopper_SaveYOffsetAndFacing
                 bset    #0,render_flags(a0)
 
-loc_881C8:
+SKMegaChopper_SaveYOffsetAndFacing:
                 move.w  y_pos(a0),d0
                 sub.w   y_pos(a1),d0
                 move.b  d0,child_dy(a0)
                 bclr    #0,$38(a0)
                 btst    #0,render_flags(a1)
-                beq.s   locret_881E8
+                beq.s   SKMegaChopper_AttachmentReturn
                 bset    #0,$38(a0)
 
-locret_881E8:
+SKMegaChopper_AttachmentReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_881EA:
+SKMegaChopper_PlayerControlPairs:
                 dc.w    Player_1, Ctrl_1
                 dc.w    Player_2, Ctrl_2
                 dc.w    Player_1, Ctrl_1
 ; ---------------------------------------------------------------------------
 
-loc_881F6:
+SKMegaChopper_MarkDefeated:
                 bset    #7,status(a0)
                 rts
 
@@ -249,41 +251,41 @@ loc_881F6:
 
 DrainGlobalRingFromAttachedMegaChopper:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_88246
+                bpl.s   SKMegaChopper_TryClearRingHudPulse
                 move.w  #60-1,$2E(a0)
                 ori.b   #1,(Update_HUD_ring_count).w
                 bset    #7,$38(a0)
                 move.w  (Ring_count).w,d0
                 subq.w  #1,d0
-                bmi.s   loc_88258
-                beq.s   loc_88230
+                bmi.s   SKMegaChopper_KillPlayerAtRingUnderflow
+                beq.s   SKMegaChopper_RequestFullRingHudUpdate
                 cmpi.w  #10,(Ring_count).w
-                beq.s   loc_88230
+                beq.s   SKMegaChopper_RequestFullRingHudUpdate
                 cmpi.w  #100,(Ring_count).w
-                bne.s   loc_88236
+                bne.s   SKMegaChopper_StoreRingsAndPlaySound
 
-loc_88230:
+SKMegaChopper_RequestFullRingHudUpdate:
                 ori.b   #$80,(Update_HUD_ring_count).w
 
-loc_88236:
+SKMegaChopper_StoreRingsAndPlaySound:
                 move.w  d0,(Ring_count).w
                 moveq   #signextendB(sfx_RingRight),d0
                 jsr     (Play_SFX).l
 
-loc_88242:
+SKMegaChopper_RingDrainReturnZero:
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88246:
+SKMegaChopper_TryClearRingHudPulse:
                 bclr    #7,$38(a0)
-                beq.s   loc_88242
+                beq.s   SKMegaChopper_RingDrainReturnZero
                 andi.b  #$FE,(Update_HUD_ring_count).w
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88258:
+SKMegaChopper_KillPlayerAtRingUnderflow:
                 movea.l a0,a2
                 movea.w $44(a0),a1
                 movea.l a1,a0

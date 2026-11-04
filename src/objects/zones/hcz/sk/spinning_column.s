@@ -21,13 +21,13 @@ Obj_HCZSpinningColumn:
                 move.w  d1,$40(a0)
                 move.w  #1,$42(a0)
                 cmpi.w  #$E0,d1
-                bne.s   loc_326B0
+                bne.s   SKSpinningColumn_StartActiveColumn
                 neg.w   $42(a0)
 
-loc_326B0:
-                move.l  #loc_326B6,(a0)
+SKSpinningColumn_StartActiveColumn:
+                move.l  #SKSpinningColumn_UpdateColumnAndRiders,(a0)
 
-loc_326B6:
+SKSpinningColumn_UpdateColumnAndRiders:
                 bsr.s   UpdateHczSpinningColumnMotion
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
@@ -45,13 +45,13 @@ loc_326B6:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_32708
+                bpl.s   SKSpinningColumn_CullOrDrawAtAnchor
                 move.b  #7,anim_frame_timer(a0)
                 subq.b  #1,mapping_frame(a0)
-                bcc.s   loc_32708
+                bcc.s   SKSpinningColumn_CullOrDrawAtAnchor
                 move.b  #2,mapping_frame(a0)
 
-loc_32708:
+SKSpinningColumn_CullOrDrawAtAnchor:
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 
@@ -59,62 +59,62 @@ loc_32708:
 
 UpdateHczSpinningColumnMotion:
                 move.w  $3A(a0),d0
-                move.w  off_3271E(pc,d0.w),d0
-                jmp     off_3271E(pc,d0.w)
+                move.w  SKSpinningColumn_MotionOffsets(pc,d0.w),d0
+                jmp     SKSpinningColumn_MotionOffsets(pc,d0.w)
 ; End of function UpdateHczSpinningColumnMotion
 
 ; ---------------------------------------------------------------------------
-off_3271E:
-                dc.w    locret_32724-off_3271E
-                dc.w    loc_32726-off_3271E
-                dc.w    loc_32766-off_3271E
+SKSpinningColumn_MotionOffsets:
+                dc.w    SKSpinningColumn_StationaryReturn-SKSpinningColumn_MotionOffsets
+                dc.w    SKSpinningColumn_StepHorizontalForward-SKSpinningColumn_MotionOffsets
+                dc.w    SKSpinningColumn_ReadVerticalOscillation-SKSpinningColumn_MotionOffsets
 ; ---------------------------------------------------------------------------
 
-locret_32724:
+SKSpinningColumn_StationaryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32726:
+SKSpinningColumn_StepHorizontalForward:
                 move.w  $42(a0),d1
-                bmi.s   loc_3273E
+                bmi.s   SKSpinningColumn_StepHorizontalBack
                 move.w  $40(a0),d0
                 add.w   d1,d0
                 cmpi.w  #$E0,d0
-                bne.s   loc_3273C
+                bne.s   SKSpinningColumn_JoinHorizontalStore
                 neg.w   $42(a0)
 
-loc_3273C:
-                bra.s   loc_3274A
+SKSpinningColumn_JoinHorizontalStore:
+                bra.s   SKSpinningColumn_StoreAndCenterXOffset
 ; ---------------------------------------------------------------------------
 
-loc_3273E:
+SKSpinningColumn_StepHorizontalBack:
                 move.w  $40(a0),d0
                 add.w   d1,d0
-                bne.s   loc_3274A
+                bne.s   SKSpinningColumn_StoreAndCenterXOffset
                 neg.w   $42(a0)
 
-loc_3274A:
+SKSpinningColumn_StoreAndCenterXOffset:
                 move.w  d0,$40(a0)
                 subi.w  #$70,d0
                 btst    #0,status(a0)
-                beq.s   loc_3275C
+                beq.s   SKSpinningColumn_ApplyXOffset
                 neg.w   d0
 
-loc_3275C:
+SKSpinningColumn_ApplyXOffset:
                 add.w   $2E(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32766:
+SKSpinningColumn_ReadVerticalOscillation:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 btst    #0,status(a0)
-                beq.s   loc_3277A
+                beq.s   SKSpinningColumn_ApplyYOffset
                 neg.w   d0
                 addi.w  #$80,d0
 
-loc_3277A:
+SKSpinningColumn_ApplyYOffset:
                 add.w   $30(a0),d0
                 move.w  d0,y_pos(a0)
                 rts
@@ -123,17 +123,17 @@ loc_3277A:
 
 UpdatePlayerOnHczSpinningColumn:
                 move.b  (a2),d0
-                bne.s   loc_327FC
+                bne.s   SKSpinningColumn_CheckAndPullInRider
                 btst    d6,status(a0)
-                beq.s   locret_327FA
+                beq.s   SKSpinningColumn_CaptureReturn
                 move.b  #0,1(a2)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bpl.s   loc_327A6
+                bpl.s   SKSpinningColumn_CaptureStandingRider
                 neg.w   d0
                 move.b  #$80,1(a2)
 
-loc_327A6:
+SKSpinningColumn_CaptureStandingRider:
                 move.b  d0,2(a2)
                 move.w  #0,x_vel(a1)
                 move.w  #0,y_vel(a1)
@@ -151,22 +151,22 @@ loc_327A6:
                 bra.w   loc_3260A
 ; ---------------------------------------------------------------------------
 
-locret_327FA:
+SKSpinningColumn_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_327FC:
+SKSpinningColumn_CheckAndPullInRider:
                 tst.b   render_flags(a1)
-                bpl.w   loc_328AC
+                bpl.w   SKSpinningColumn_ReleaseRider
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_328AC
+                bhs.w   SKSpinningColumn_ReleaseRider
                 btst    d6,status(a0)
-                beq.w   loc_328BE
+                beq.w   SKSpinningColumn_ClearRiderAttachment
                 tst.b   2(a2)
-                beq.s   loc_32820
+                beq.s   SKSpinningColumn_PositionTwistingRider
                 subq.b  #1,2(a2)
 
-loc_32820:
+SKSpinningColumn_PositionTwistingRider:
                 moveq   #0,d0
                 move.b  1(a2),d0
                 jsr     (GetSineCosine).l
@@ -182,17 +182,17 @@ loc_32820:
                 addq.b  #2,1(a2)
                 move.w  #0,ground_vel(a1)
                 move.w  y_vel(a0),d0
-                bpl.s   loc_3285A
+                bpl.s   SKSpinningColumn_TryBoostRiderSpeed
                 neg.w   d0
 
-loc_3285A:
+SKSpinningColumn_TryBoostRiderSpeed:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3286E
+                bne.s   SKSpinningColumn_TryJumpRelease
                 cmpi.w  #$480,d0
-                blo.s   loc_3286E
+                blo.s   SKSpinningColumn_TryJumpRelease
                 move.w  #$800,ground_vel(a1)
 
-loc_3286E:
+SKSpinningColumn_TryJumpRelease:
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d5
                 beq.w   loc_3260A
                 move.b  #1,jumping(a1)
@@ -205,12 +205,12 @@ loc_3286E:
                 move.w  #0,x_vel(a1)
                 move.w  #0,ground_vel(a1)
 
-loc_328AC:
+SKSpinningColumn_ReleaseRider:
                 bset    #Status_InAir,status(a1)
                 move.w  #$100,priority(a1)
                 move.b  #0,object_control(a1)
 
-loc_328BE:
+SKSpinningColumn_ClearRiderAttachment:
                 move.b  #0,(a2)
                 rts
 ; End of function UpdatePlayerOnHczSpinningColumn

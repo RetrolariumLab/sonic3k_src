@@ -16,18 +16,18 @@ Obj_HCZSnakeBlocks:
                 move.b  status(a0),$2E(a0)
                 moveq   #1,d0
                 move.b  subtype(a0),d1
-                bpl.s   loc_25706
+                bpl.s   SKSnakeBlocks_InitSquareMotion
                 neg.w   d0
 
-loc_25706:
+SKSnakeBlocks_InitSquareMotion:
                 move.b  d0,$40(a0)
                 andi.b  #$7F,d1
                 move.b  d1,angle(a0)
                 move.w  #$280,$42(a0)
                 move.w  x_pos(a0),$44(a0)
-                move.l  #loc_25724,(a0)
+                move.l  #SKSnakeBlocks_MoveAndCheckSolid,(a0)
 
-loc_25724:
+SKSnakeBlocks_MoveAndCheckSolid:
                 bsr.s   MoveHczSnakeBlockAlongSquare
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
@@ -42,57 +42,57 @@ loc_25724:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmp.w   $42(a0),d0
-                bhi.w   loc_2575E
+                bhi.w   SKSnakeBlocks_ClearRespawnBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2575E:
+SKSnakeBlocks_ClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2576A
+                beq.s   SKSnakeBlocks_DeleteOutsideAnchorRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2576A:
+SKSnakeBlocks_DeleteOutsideAnchorRange:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 MoveHczSnakeBlockAlongSquare:
                 move.b  $40(a0),d0
-                bpl.s   loc_2579A
+                bpl.s   SKSnakeBlocks_StepForwardPhase
                 add.b   d0,angle(a0)
-                bcs.s   loc_25786
+                bcs.s   SKSnakeBlocks_ClampReversePhase
                 subq.b  #1,$2E(a0)
                 andi.b  #3,$2E(a0)
 
-loc_25786:
+SKSnakeBlocks_ClampReversePhase:
                 move.w  #$40,d2
                 move.b  angle(a0),d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_257BC
+                bhs.s   SKSnakeBlocks_PlaceAlongTopEdge
                 move.b  #$80,d0
-                bra.s   loc_257BC
+                bra.s   SKSnakeBlocks_PlaceAlongTopEdge
 ; ---------------------------------------------------------------------------
 
-loc_2579A:
+SKSnakeBlocks_StepForwardPhase:
                 add.b   d0,angle(a0)
-                bne.s   loc_257AA
+                bne.s   SKSnakeBlocks_ClampForwardPhase
                 addq.b  #1,$2E(a0)
                 andi.b  #3,$2E(a0)
 
-loc_257AA:
+SKSnakeBlocks_ClampForwardPhase:
                 move.w  #$40,d2
                 move.b  angle(a0),d0
                 cmpi.b  #$80,d0
-                bhs.s   loc_257BC
+                bhs.s   SKSnakeBlocks_PlaceAlongTopEdge
                 move.b  #$80,d0
 
-loc_257BC:
+SKSnakeBlocks_PlaceAlongTopEdge:
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
                 move.b  $2E(a0),d3
                 andi.b  #3,d3
-                bne.s   loc_257E2
+                bne.s   SKSnakeBlocks_PlaceAlongRightEdge
                 add.w   $30(a0),d1
                 move.w  d1,x_pos(a0)
                 neg.w   d2
@@ -101,9 +101,9 @@ loc_257BC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_257E2:
+SKSnakeBlocks_PlaceAlongRightEdge:
                 subq.b  #1,d3
-                bne.s   loc_257F8
+                bne.s   SKSnakeBlocks_PlaceAlongBottomEdge
                 add.w   $34(a0),d1
                 move.w  d1,y_pos(a0)
                 add.w   $30(a0),d2
@@ -111,9 +111,9 @@ loc_257E2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_257F8:
+SKSnakeBlocks_PlaceAlongBottomEdge:
                 subq.b  #1,d3
-                bne.s   loc_25810
+                bne.s   SKSnakeBlocks_PlaceAlongLeftEdge
                 neg.w   d1
                 add.w   $30(a0),d1
                 move.w  d1,x_pos(a0)
@@ -122,7 +122,7 @@ loc_257F8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25810:
+SKSnakeBlocks_PlaceAlongLeftEdge:
                 neg.w   d1
                 add.w   $34(a0),d1
                 move.w  d1,y_pos(a0)

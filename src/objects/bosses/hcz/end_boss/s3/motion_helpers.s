@@ -471,7 +471,7 @@ loc_49AEE:
 ; ---------------------------------------------------------------------------
 
 SpawnS3HCZExitGeyserEightDebrisPieces:
-                lea     (byte_2EC7A).l,a3
+                lea     (S3HCZWater_VerticalDebrisRecords).l,a3
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #$80,d3
@@ -480,7 +480,7 @@ SpawnS3HCZExitGeyserEightDebrisPieces:
 loc_49B08:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_49B60
-                move.l  #loc_2E9AA,(a1)
+                move.l  #S3HCZWater_AnimateAirborneDebris,(a1)
                 move.l  #Map_HCZWaterWallDebris,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZCutsceneGeyser+$58,2,0),art_tile(a1)
                 move.b  #$84,render_flags(a1)

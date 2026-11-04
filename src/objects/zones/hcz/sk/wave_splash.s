@@ -16,17 +16,17 @@ Obj_HCZWaveSplash:
                 move.w  x_pos(a0),(a2)
                 addi.w  #$C0,(a2)+
                 move.w  y_pos(a0),(a2)+
-                move.l  #loc_1F244,(a0)
+                move.l  #SKWaveSplash_PickSurfaceX,(a0)
 
-loc_1F244:
+SKWaveSplash_PickSurfaceX:
                 move.w  (Camera_X_pos).w,d1
                 andi.w  #$FFE0,d1
                 addi.w  #$60,d1
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_1F25C
+                beq.s   SKWaveSplash_PlaceAtWaterline
                 addi.w  #$20,d1
 
-loc_1F25C:
+SKWaveSplash_PlaceAtWaterline:
                 move.w  d1,x_pos(a0)
                 move.w  (Water_level).w,d1
                 move.w  d1,y_pos(a0)
@@ -35,34 +35,34 @@ loc_1F25C:
                 addi.w  #$C0,(a2)+
                 move.w  y_pos(a0),(a2)+
                 tst.b   $32(a0)
-                bne.s   loc_1F296
+                bne.s   SKWaveSplash_CheckResumeFrames
                 tst.b   (Ctrl_1_pressed_logical).w
-                bmi.s   loc_1F28A
+                bmi.s   SKWaveSplash_EnterPausedFrames
                 tst.b   (Ctrl_2_pressed_logical).w
-                bpl.s   loc_1F2A6
+                bpl.s   SKWaveSplash_StepNormalFrames
 
-loc_1F28A:
+SKWaveSplash_EnterPausedFrames:
                 addq.b  #3,mapping_frame(a0)
                 move.b  #1,$32(a0)
-                bra.s   loc_1F2C4
+                bra.s   SKWaveSplash_SyncFrameAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_1F296:
+SKWaveSplash_CheckResumeFrames:
                 tst.w   (Game_paused).w
-                bne.s   loc_1F2C4
+                bne.s   SKWaveSplash_SyncFrameAndDraw
                 move.b  #0,$32(a0)
                 subq.b  #3,mapping_frame(a0)
 
-loc_1F2A6:
+SKWaveSplash_StepNormalFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1F2C4
+                bpl.s   SKWaveSplash_SyncFrameAndDraw
                 move.b  #9,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #4,mapping_frame(a0)
-                blo.s   loc_1F2C4
+                blo.s   SKWaveSplash_SyncFrameAndDraw
                 move.b  #1,mapping_frame(a0)
 
-loc_1F2C4:
+SKWaveSplash_SyncFrameAndDraw:
                 move.b  mapping_frame(a0),1(a2)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------

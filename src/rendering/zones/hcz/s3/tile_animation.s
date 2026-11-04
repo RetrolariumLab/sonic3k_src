@@ -5,27 +5,27 @@
 
 AnimateTiles_HCZ1:
                 tst.b   (Events_bg+$16).w
-                beq.s   loc_26BC2
+                beq.s   S3HCZTiles_BeginAct1WaterlineUpdate
                 rts
 ; ---------------------------------------------------------------------------
 ; This section determines which tiles to load at what position to simulate a
 ; waterline extending into the background
 ; ---------------------------------------------------------------------------
 
-loc_26BC2:
+S3HCZTiles_BeginAct1WaterlineUpdate:
                 lea     (Anim_Counters+4).w,a3
 
-loc_26BC6:
+S3HCZTiles_CheckWaterlineChange:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 cmp.w   (a3),d1
-                beq.w   loc_26CB4
+                beq.w   S3HCZTiles_RunWaterlineTailScripts
                 move.w  d1,(a3)
                 tst.w   d1
-                beq.w   loc_26CB8
-                bpl.w   loc_26C4C
+                beq.w   S3HCZTiles_RestoreBothTileRegions
+                bpl.w   S3HCZTiles_SetUpAboveWaterlineLookup
                 addi.w  #$60,d1
-                bcc.w   loc_26CB4
+                bcc.w   S3HCZTiles_RunWaterlineTailScripts
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -35,7 +35,7 @@ loc_26BC6:
                 adda.w  d1,a5
                 move.w  #$60-1,d1
 
-loc_26C00:
+S3HCZTiles_BuildBelowWaterlineTiles:
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 add.w   d0,d0
@@ -47,24 +47,24 @@ loc_26C00:
                 lea     $180(a4),a4
                 move.l  (a0),(a4)
                 lea     -$17C(a4),a4
-                dbf     d1,loc_26C00
+                dbf     d1,S3HCZTiles_BuildBelowWaterlineTiles
                 move.l  #Chunk_table+$7C00,d1
                 move.w  #tiles_to_bytes($2DC),d2
                 move.w  #$180,d3
                 jsr     (Add_To_DMA_Queue).l
                 tst.w   2(a3)
-                bmi.s   loc_26C48
+                bmi.s   S3HCZTiles_JoinScriptsAfterBelow
                 move.w  #-1,2(a3)
                 bsr.w   AniHCZ_FixLowerBG
 
-loc_26C48:
-                bra.w   loc_26CB4
+S3HCZTiles_JoinScriptsAfterBelow:
+                bra.w   S3HCZTiles_RunWaterlineTailScripts
 ; ---------------------------------------------------------------------------
 
-loc_26C4C:
+S3HCZTiles_SetUpAboveWaterlineLookup:
                 neg.w   d1
                 addi.w  #$60,d1
-                bcc.s   loc_26CB4
+                bcc.s   S3HCZTiles_RunWaterlineTailScripts
                 move.w  d1,d0
                 add.w   d1,d1
                 add.w   d0,d1
@@ -74,7 +74,7 @@ loc_26C4C:
                 adda.w  d1,a5
                 move.w  #$60-1,d1
 
-loc_26C6E:
+S3HCZTiles_BuildAboveWaterlineTiles:
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 add.w   d0,d0
@@ -86,21 +86,21 @@ loc_26C6E:
                 lea     $180(a4),a4
                 move.l  (a0),(a4)
                 lea     -$17C(a4),a4
-                dbf     d1,loc_26C6E
+                dbf     d1,S3HCZTiles_BuildAboveWaterlineTiles
                 move.l  #Chunk_table+$7C00,d1
                 move.w  #tiles_to_bytes($2F4),d2
                 move.w  #$180,d3
                 jsr     (Add_To_DMA_Queue).l
                 tst.w   2(a3)
-                beq.s   loc_26CB4
+                beq.s   S3HCZTiles_RunWaterlineTailScripts
                 move.w  #0,2(a3)
                 bsr.s   AniHCZ_FixUpperBG
 
-loc_26CB4:
+S3HCZTiles_RunWaterlineTailScripts:
                 bra.w   AnimateTiles_DoAniPLC
 ; ---------------------------------------------------------------------------
 
-loc_26CB8:
+S3HCZTiles_RestoreBothTileRegions:
                 move.w  #1,(a3)
                 bsr.s   AniHCZ_FixLowerBG
 
@@ -146,15 +146,15 @@ AniHCZ1_InitWaterlineTiles:
                 lea     (AniPLC_HCZ1).l,a2
                 lea     (Anim_Counters+4).w,a3
                 move.w  (Events_bg+$10).w,d1
-                beq.s   loc_26CB8
-                bpl.s   loc_26D56
+                beq.s   S3HCZTiles_RestoreBothTileRegions
+                bpl.s   S3HCZTiles_CheckAboveInitRange
                 addi.w  #$60,d1
-                bcc.s   loc_26D2C
+                bcc.s   S3HCZTiles_InitStaticBelowWaterline
                 bsr.s   AniHCZ_FixLowerBG
-                bra.w   loc_26BC6
+                bra.w   S3HCZTiles_CheckWaterlineChange
 ; ---------------------------------------------------------------------------
 
-loc_26D2C:
+S3HCZTiles_InitStaticBelowWaterline:
                 bsr.s   AniHCZ_FixLowerBG
                 move.l  #ArtUnc_AniHCZ1_WaterlineBelow,d1
                 move.w  #tiles_to_bytes($2DC),d2
@@ -166,15 +166,15 @@ loc_26D2C:
                 jmp     (Add_To_DMA_Queue).l
 ; ---------------------------------------------------------------------------
 
-loc_26D56:
+S3HCZTiles_CheckAboveInitRange:
                 neg.w   d1
                 addi.w  #$60,d1
-                bcc.s   loc_26D66
+                bcc.s   S3HCZTiles_InitStaticAboveWaterline
                 bsr.w   AniHCZ_FixUpperBG
-                bra.w   loc_26BC6
+                bra.w   S3HCZTiles_CheckWaterlineChange
 ; ---------------------------------------------------------------------------
 
-loc_26D66:
+S3HCZTiles_InitStaticAboveWaterline:
                 bsr.w   AniHCZ_FixUpperBG
                 move.l  #ArtUnc_AniHCZ1_WaterlineAbove,d1
                 move.w  #tiles_to_bytes($2F4),d2
@@ -194,7 +194,7 @@ AnimateTiles_HCZ2:
                 move.w  (Events_bg+$12).w,d1
                 andi.w  #$1F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_26DEE
+                beq.s   S3HCZTiles_AdvanceToAct2Channel2
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -205,7 +205,7 @@ AnimateTiles_HCZ2:
                 lsl.w   #2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26DF2(pc,d0.w),a4
+                lea     S3HCZTiles_Act2Channel1SplitCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniHCZ2_SmallBGLine).l,a0
                 move.w  #tiles_to_bytes($2D2),d4
                 add.l   a0,d1
@@ -218,14 +218,14 @@ AnimateTiles_HCZ2:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_26DEE
+                beq.s   S3HCZTiles_AdvanceToAct2Channel2
                 jsr     (Add_To_DMA_Queue).l
 
-loc_26DEE:
+S3HCZTiles_AdvanceToAct2Channel2:
                 addq.w  #2,a3
-                bra.s   loc_26E02
+                bra.s   S3HCZTiles_UpdateAct2Channel2
 ; ---------------------------------------------------------------------------
-word_26DF2:
+S3HCZTiles_Act2Channel1SplitCounts:
                 dc.w    $40
                 dc.w    0
                 dc.w    $30
@@ -236,12 +236,12 @@ word_26DF2:
                 dc.w    $30
 ; ---------------------------------------------------------------------------
 
-loc_26E02:
+S3HCZTiles_UpdateAct2Channel2:
                 moveq   #0,d1
                 move.w  (Events_bg+$12).w,d1
                 andi.w  #$1F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_26E5A
+                beq.s   S3HCZTiles_AdvanceToAct2Channel3
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -252,7 +252,7 @@ loc_26E02:
                 lsl.w   #3,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26E5E(pc,d0.w),a4
+                lea     S3HCZTiles_Act2Channel2SplitCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniHCZ2_2).l,a0
                 move.w  #tiles_to_bytes($2D6),d4
                 add.l   a0,d1
@@ -265,14 +265,14 @@ loc_26E02:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_26E5A
+                beq.s   S3HCZTiles_AdvanceToAct2Channel3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_26E5A:
+S3HCZTiles_AdvanceToAct2Channel3:
                 addq.w  #2,a3
-                bra.s   loc_26E6E
+                bra.s   S3HCZTiles_UpdateAct2Channel3
 ; ---------------------------------------------------------------------------
-word_26E5E:
+S3HCZTiles_Act2Channel2SplitCounts:
                 dc.w    $80
                 dc.w    0
                 dc.w    $60
@@ -283,12 +283,12 @@ word_26E5E:
                 dc.w    $60
 ; ---------------------------------------------------------------------------
 
-loc_26E6E:
+S3HCZTiles_UpdateAct2Channel3:
                 moveq   #0,d1
                 move.w  (Events_bg+$14).w,d1
                 andi.w  #$1F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_26EC6
+                beq.s   S3HCZTiles_AdvanceToAct2LargeChannel
                 move.b  d1,1(a3)
                 move.w  d1,d2
                 andi.w  #7,d1
@@ -299,7 +299,7 @@ loc_26E6E:
                 lsl.w   #4,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26ECA(pc,d0.w),a4
+                lea     S3HCZTiles_Act2Channel3SplitCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniHCZ2_3).l,a0
                 move.w  #tiles_to_bytes($2DE),d4
                 add.l   a0,d1
@@ -312,14 +312,14 @@ loc_26E6E:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_26EC6
+                beq.s   S3HCZTiles_AdvanceToAct2LargeChannel
                 jsr     (Add_To_DMA_Queue).l
 
-loc_26EC6:
+S3HCZTiles_AdvanceToAct2LargeChannel:
                 addq.w  #2,a3
-                bra.s   loc_26EDA
+                bra.s   S3HCZTiles_UpdateAct2LargeReverse
 ; ---------------------------------------------------------------------------
-word_26ECA:
+S3HCZTiles_Act2Channel3SplitCounts:
                 dc.w    $100
                 dc.w    0
                 dc.w    $C0
@@ -330,12 +330,12 @@ word_26ECA:
                 dc.w    $C0
 ; ---------------------------------------------------------------------------
 
-loc_26EDA:
+S3HCZTiles_UpdateAct2LargeReverse:
                 moveq   #0,d1
                 move.w  (Events_bg+$14).w,d1
                 andi.w  #$3F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_26F40
+                beq.s   S3HCZTiles_RunAct2TailScripts
                 move.b  d1,1(a3)
                 neg.w   d1
                 move.w  d1,d2
@@ -353,7 +353,7 @@ loc_26EDA:
                 add.w   d2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_26F46(pc,d0.w),a4
+                lea     S3HCZTiles_Act2LargeSplitCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniHCZ2_4).l,a0
                 move.w  #tiles_to_bytes($2EE),d4
                 add.l   a0,d1
@@ -366,14 +366,14 @@ loc_26EDA:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_26F40
+                beq.s   S3HCZTiles_RunAct2TailScripts
                 jsr     (Add_To_DMA_Queue).l
 
-loc_26F40:
+S3HCZTiles_RunAct2TailScripts:
                 addq.w  #2,a3
                 bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
-word_26F46:
+S3HCZTiles_Act2LargeSplitCounts:
                 dc.w    $300
                 dc.w    0
                 dc.w    $2A0

@@ -2,7 +2,7 @@
 ; Responsibility: Hydrocity solid block initialization and its shared solid/display tail calls
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_1CFEA:
+S3SolidBlock_SizeBySubtype:
                 dc.b    $10, $10
                 dc.b    $20, $10
                 dc.b    $30, $10
@@ -14,16 +14,16 @@ Obj_HCZBlock:
                 move.b  subtype(a0),d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                lea     byte_1CFEA(pc,d0.w),a1
+                lea     S3SolidBlock_SizeBySubtype(pc,d0.w),a1
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
                 move.l  #Map_HCZBlock,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZMisc+$A,2,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_1D02A,(a0)
+                move.l  #S3SolidBlock_CheckSolidAndDraw,(a0)
 
-loc_1D02A:
+S3SolidBlock_CheckSolidAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1

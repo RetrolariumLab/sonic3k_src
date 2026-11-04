@@ -16,8 +16,8 @@ Obj_HCZHandLauncher:
                 move.w  #$50,$30(a0)
                 bset    #7,status(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_30B52
-                move.l  #loc_30DEC,(a1)
+                bne.s   SKHandLauncher_StartActiveHand
+                move.l  #SKHandLauncher_PlaceAndCheckVisualChild,(a1)
                 move.l  #Map_HCZHandLauncher,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZMisc+$1A,1,0),art_tile(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -29,66 +29,66 @@ Obj_HCZHandLauncher:
                 move.w  y_pos(a0),y_pos(a1)
                 move.w  a0,$3C(a1)
 
-loc_30B52:
-                move.l  #loc_30B58,(a0)
+SKHandLauncher_StartActiveHand:
+                move.l  #SKHandLauncher_CheckEitherPlayerNear,(a0)
 
-loc_30B58:
+SKHandLauncher_CheckEitherPlayerNear:
                 move.w  x_pos(a0),d1
                 subi.w  #$20,d1
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   d1,d0
                 cmpi.w  #$40,d0
-                blo.s   loc_30B78
+                blo.s   SKHandLauncher_PickOccupiedMotion
                 move.w  (Player_2+x_pos).w,d0
                 sub.w   d1,d0
                 cmpi.w  #$40,d0
-                bhs.s   loc_30BD6
+                bhs.s   SKHandLauncher_ExtendEmptyHand
 
-loc_30B78:
+SKHandLauncher_PickOccupiedMotion:
                 tst.b   $34(a0)
-                beq.s   loc_30BB0
+                beq.s   SKHandLauncher_ReadyUnoccupiedHand
                 move.b  #7,mapping_frame(a0)
                 move.w  #$80,priority(a0)
                 tst.w   $36(a0)
-                beq.s   loc_30B96
+                beq.s   SKHandLauncher_CompressOccupiedHand
                 subq.w  #1,$36(a0)
-                bra.s   loc_30BD0
+                bra.s   SKHandLauncher_UpdateBothRiders
 ; ---------------------------------------------------------------------------
 
-loc_30B96:
+SKHandLauncher_CompressOccupiedHand:
                 tst.w   $30(a0)
-                beq.s   loc_30BA2
+                beq.s   SKHandLauncher_BeginLaunchHold
                 subq.w  #8,$30(a0)
-                bra.s   loc_30BD0
+                bra.s   SKHandLauncher_UpdateBothRiders
 ; ---------------------------------------------------------------------------
 
-loc_30BA2:
-                move.l  #loc_30C06,(a0)
+SKHandLauncher_BeginLaunchHold:
+                move.l  #SKHandLauncher_TickLaunchHold,(a0)
                 move.w  #60-1,$36(a0)
-                bra.s   loc_30BD0
+                bra.s   SKHandLauncher_UpdateBothRiders
 ; ---------------------------------------------------------------------------
 
-loc_30BB0:
+SKHandLauncher_ReadyUnoccupiedHand:
                 move.w  #20-1,$36(a0)
                 move.b  #6,mapping_frame(a0)
                 move.w  #$200,priority(a0)
                 cmpi.w  #$18,$30(a0)
-                bls.s   loc_30BD0
+                bls.s   SKHandLauncher_UpdateBothRiders
                 subq.w  #8,$30(a0)
-                bra.s   loc_30BE2
+                bra.s   SKHandLauncher_PlaceHandAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_30BD0:
+SKHandLauncher_UpdateBothRiders:
                 bsr.w   UpdatePlayersOnHczHand
-                bra.s   loc_30BE2
+                bra.s   SKHandLauncher_PlaceHandAndCheckSolid
 ; ---------------------------------------------------------------------------
 
-loc_30BD6:
+SKHandLauncher_ExtendEmptyHand:
                 cmpi.w  #$50,$30(a0)
-                beq.s   loc_30BE2
+                beq.s   SKHandLauncher_PlaceHandAndCheckSolid
                 addq.w  #8,$30(a0)
 
-loc_30BE2:
+SKHandLauncher_PlaceHandAndCheckSolid:
                 move.w  $30(a0),d0
                 add.w   $32(a0),d0
                 move.w  d0,y_pos(a0)
@@ -99,46 +99,46 @@ loc_30BE2:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_30C06:
+SKHandLauncher_TickLaunchHold:
                 tst.w   $36(a0)
-                beq.s   loc_30C16
+                beq.s   SKHandLauncher_TryFinishLaunch
                 subq.w  #1,$36(a0)
                 bsr.w   UpdatePlayersOnHczHand
-                bra.s   loc_30C50
+                bra.s   SKHandLauncher_PlaceLaunchingHand
 ; ---------------------------------------------------------------------------
 
-loc_30C16:
+SKHandLauncher_TryFinishLaunch:
                 cmpi.w  #$50,$30(a0)
-                bne.s   loc_30C34
+                bne.s   SKHandLauncher_TryLaunchRiders
                 move.b  #0,$34(a0)
-                move.l  #loc_30B58,(a0)
+                move.l  #SKHandLauncher_CheckEitherPlayerNear,(a0)
                 moveq   #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_30C50
+                bra.s   SKHandLauncher_PlaceLaunchingHand
 ; ---------------------------------------------------------------------------
 
-loc_30C34:
+SKHandLauncher_TryLaunchRiders:
                 cmpi.w  #$18,$30(a0)
-                bne.s   loc_30C4C
+                bne.s   SKHandLauncher_StepReturnOffset
                 bsr.w   LaunchPlayersFromHczHand
                 move.b  #6,mapping_frame(a0)
                 move.w  #$200,priority(a0)
 
-loc_30C4C:
+SKHandLauncher_StepReturnOffset:
                 addq.w  #8,$30(a0)
 
-loc_30C50:
+SKHandLauncher_PlaceLaunchingHand:
                 move.w  $30(a0),d0
                 add.w   $32(a0),d0
                 move.w  d0,y_pos(a0)
                 cmpi.w  #$18,$30(a0)
-                bhi.s   loc_30C76
+                bhi.s   SKHandLauncher_CullOrDrawHand
                 move.w  #$20,d1
                 move.w  #$11,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectTop).l
 
-loc_30C76:
+SKHandLauncher_CullOrDrawHand:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -155,16 +155,16 @@ LaunchPlayersFromHczHand:
 
 LaunchPlayerFromHczHand:
                 bclr    d6,$35(a0)
-                beq.s   loc_30CCC
+                beq.s   SKHandLauncher_TryReleaseUncapturedRider
                 move.w  #$1000,ground_vel(a1)
                 move.w  #$1000,x_vel(a1)
                 move.w  #0,y_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_30CB4
+                beq.s   SKHandLauncher_ClearLaunchedRiderFlags
                 neg.w   ground_vel(a1)
                 neg.w   x_vel(a1)
 
-loc_30CB4:
+SKHandLauncher_ClearLaunchedRiderFlags:
                 move.b  #0,anim(a1)
                 move.b  #0,object_control(a1)
                 bclr    #Status_OnObj,status(a1)
@@ -172,13 +172,13 @@ loc_30CB4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_30CCC:
+SKHandLauncher_TryReleaseUncapturedRider:
                 bclr    d6,status(a0)
-                beq.s   locret_30CDE
+                beq.s   SKHandLauncher_LaunchRiderReturn
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-locret_30CDE:
+SKHandLauncher_LaunchRiderReturn:
                 rts
 ; End of function LaunchPlayerFromHczHand
 
@@ -198,47 +198,47 @@ UpdatePlayersOnHczHand:
 
 UpdatePlayerOnHczHand:
                 btst    d6,$35(a0)
-                beq.s   loc_30D4E
+                beq.s   SKHandLauncher_CheckCenteredRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_30D4C
+                beq.s   SKHandLauncher_EscapeReturn
                 bclr    d6,$35(a0)
                 bclr    d6,status(a0)
                 move.w  #$800,ground_vel(a1)
                 move.w  #$800,x_vel(a1)
                 move.w  #-$400,y_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_30D2E
+                beq.s   SKHandLauncher_ReleaseEscapingRider
                 neg.w   ground_vel(a1)
                 neg.w   x_vel(a1)
 
-loc_30D2E:
+SKHandLauncher_ReleaseEscapingRider:
                 move.b  #0,object_control(a1)
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 tst.b   $35(a0)
-                bne.s   locret_30D4C
+                bne.s   SKHandLauncher_EscapeReturn
                 move.b  #0,$34(a0)
 
-locret_30D4C:
+SKHandLauncher_EscapeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_30D4E:
+SKHandLauncher_CheckCenteredRider:
                 btst    d6,status(a0)
-                beq.w   locret_30DEA
+                beq.w   SKHandLauncher_CaptureReturn
                 tst.b   $34(a0)
-                bne.s   loc_30D6E
+                bne.s   SKHandLauncher_TryCaptureRider
                 move.w  x_pos(a1),d0
                 addi.w  #8,d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #2*8,d0
-                bhs.s   locret_30DEA
+                bhs.s   SKHandLauncher_CaptureReturn
 
-loc_30D6E:
+SKHandLauncher_TryCaptureRider:
                 tst.b   object_control(a1)
-                bne.s   locret_30DEA
+                bne.s   SKHandLauncher_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_30DEA
+                bne.s   SKHandLauncher_CaptureReturn
                 bset    d6,$35(a0)
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
@@ -247,10 +247,10 @@ loc_30D6E:
                 move.b  #9,x_radius(a1)
                 bclr    #Status_Roll,status(a1)
                 cmpi.l  #Obj_Tails,(a1)
-                bne.s   loc_30DAC
+                bne.s   SKHandLauncher_InitCapturedRider
                 move.b  #$F,y_radius(a1)
 
-loc_30DAC:
+SKHandLauncher_InitCapturedRider:
                 move.b  #1,object_control(a1)
                 bclr    #Status_Push,status(a1)
                 move.w  x_pos(a0),x_pos(a1)
@@ -258,34 +258,34 @@ loc_30DAC:
                 move.w  #$1000,ground_vel(a1)
                 bclr    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                beq.s   loc_30DE4
+                beq.s   SKHandLauncher_MarkHandOccupied
                 addq.w  #2*2,x_pos(a1)
                 neg.w   ground_vel(a1)
                 bset    #Status_Facing,status(a1)
 
-loc_30DE4:
+SKHandLauncher_MarkHandOccupied:
                 move.b  #1,$34(a0)
 
-locret_30DEA:
+SKHandLauncher_CaptureReturn:
                 rts
 ; End of function UpdatePlayerOnHczHand
 
 ; ---------------------------------------------------------------------------
 
-loc_30DEC:
+SKHandLauncher_PlaceAndCheckVisualChild:
                 movea.w $3C(a0),a1
                 move.w  y_pos(a1),y_pos(a0)
                 cmpi.w  #$18,$30(a1)
-                bls.s   loc_30E00
+                bls.s   SKHandLauncher_AnimateVisualChild
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_30E00:
+SKHandLauncher_AnimateVisualChild:
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #6,mapping_frame(a0)
-                blo.s   loc_30E12
+                blo.s   SKHandLauncher_CullOrDrawVisualChild
                 move.b  #0,mapping_frame(a0)
 
-loc_30E12:
+SKHandLauncher_CullOrDrawVisualChild:
                 jmp     (Sprite_OnScreen_Test).l
-; End of function loc_30DEC
+; End of function SKHandLauncher_PlaceAndCheckVisualChild

@@ -15,17 +15,17 @@ Obj_HCZWaveSplash:
                 move.w  x_pos(a0),(a2)
                 addi.w  #$C0,(a2)+
                 move.w  y_pos(a0),(a2)+
-                move.l  #loc_1CEA4,(a0)
+                move.l  #S3WaveSplash_PickSurfaceX,(a0)
 
-loc_1CEA4:
+S3WaveSplash_PickSurfaceX:
                 move.w  (Camera_X_pos).w,d1
                 andi.w  #$FFE0,d1
                 addi.w  #$60,d1
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_1CEBC
+                beq.s   S3WaveSplash_PlaceAtWaterline
                 addi.w  #$20,d1
 
-loc_1CEBC:
+S3WaveSplash_PlaceAtWaterline:
                 move.w  d1,x_pos(a0)
                 move.w  (Water_level).w,d1
                 move.w  d1,y_pos(a0)
@@ -34,34 +34,34 @@ loc_1CEBC:
                 addi.w  #$C0,(a2)+
                 move.w  y_pos(a0),(a2)+
                 tst.b   $32(a0)
-                bne.s   loc_1CEF6
+                bne.s   S3WaveSplash_CheckResumeFrames
                 tst.b   (Ctrl_1_pressed_logical).w
-                bmi.s   loc_1CEEA
+                bmi.s   S3WaveSplash_EnterPausedFrames
                 tst.b   (Ctrl_2_pressed_logical).w
-                bpl.s   loc_1CF06
+                bpl.s   S3WaveSplash_StepNormalFrames
 
-loc_1CEEA:
+S3WaveSplash_EnterPausedFrames:
                 addq.b  #3,mapping_frame(a0)
                 move.b  #1,$32(a0)
-                bra.s   loc_1CF24
+                bra.s   S3WaveSplash_SyncFrameAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_1CEF6:
+S3WaveSplash_CheckResumeFrames:
                 tst.w   (Game_paused).w
-                bne.s   loc_1CF24
+                bne.s   S3WaveSplash_SyncFrameAndDraw
                 move.b  #0,$32(a0)
                 subq.b  #3,mapping_frame(a0)
 
-loc_1CF06:
+S3WaveSplash_StepNormalFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1CF24
+                bpl.s   S3WaveSplash_SyncFrameAndDraw
                 move.b  #9,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #4,mapping_frame(a0)
-                blo.s   loc_1CF24
+                blo.s   S3WaveSplash_SyncFrameAndDraw
                 move.b  #1,mapping_frame(a0)
 
-loc_1CF24:
+S3WaveSplash_SyncFrameAndDraw:
                 move.b  mapping_frame(a0),1(a2)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------

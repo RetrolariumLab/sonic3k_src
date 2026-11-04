@@ -12,93 +12,93 @@ Obj_TurboSpiker:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 TurboSpiker_Index:
-                dc.w    loc_559D2-TurboSpiker_Index
-                dc.w    loc_55A2E-TurboSpiker_Index
-                dc.w    loc_55A94-TurboSpiker_Index
-                dc.w    loc_55AB4-TurboSpiker_Index
-                dc.w    loc_55AD2-TurboSpiker_Index
-                dc.w    loc_55AE0-TurboSpiker_Index
-                dc.w    loc_55B06-TurboSpiker_Index
-                dc.w    loc_55B22-TurboSpiker_Index
+                dc.w    S3TurboSpiker_InitBodyAndPickHiddenMode-TurboSpiker_Index
+                dc.w    S3TurboSpiker_CheckTargetOrPatrol-TurboSpiker_Index
+                dc.w    HCZTurboSpikerS3_CountManualTurnPause-TurboSpiker_Index
+                dc.w    HCZTurboSpikerS3_CountRetreatChargePause-TurboSpiker_Index
+                dc.w    S3TurboSpiker_StepRushAndProbeFloor-TurboSpiker_Index
+                dc.w    S3TurboSpiker_WaitHiddenForPlayer-TurboSpiker_Index
+                dc.w    S3TurboSpiker_TickEmergenceDelay-TurboSpiker_Index
+                dc.w    HCZTurboSpikerS3_CountFinalEmergenceWait-TurboSpiker_Index
 ; ---------------------------------------------------------------------------
 
-loc_559D2:
+S3TurboSpiker_InitBodyAndPickHiddenMode:
                 lea     ObjDat_TurboSpiker(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 bclr    #1,render_flags(a0)
-                beq.s   loc_559F0
+                beq.s   S3TurboSpiker_InitPatrolAndTrySpike
                 move.b  #$A,routine(a0)
-                lea     ChildObjDat_55D04(pc),a2
+                lea     S3TurboSpiker_HiddenCoverRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_559F0:
+S3TurboSpiker_InitPatrolAndTrySpike:
                 move.b  #$10,x_radius(a0)
                 move.b  #$F,y_radius(a0)
-                move.l  #byte_55D0C,$30(a0)
+                move.l  #S3TurboSpiker_SlowBodyAnim,$30(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.w  d0,$2E(a0)
                 add.w   d0,d0
                 move.w  d0,$3C(a0)
-                move.l  #loc_55A58,$34(a0)
+                move.l  #S3TurboSpiker_StartTurnWait,$34(a0)
                 move.w  #-$80,d4
                 jsr     Set_VelocityXTrackSonic(pc)
-                lea     ChildObjDat_55CCC(pc),a2
+                lea     S3TurboSpiker_AttachedSpikeRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55A2E:
+S3TurboSpiker_CheckTargetOrPatrol:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
-                bhs.s   loc_55A46
+                bhs.s   S3TurboSpiker_StepPatrolAndProbeFloor
                 btst    #0,render_flags(a0)
-                beq.s   loc_55A42
+                beq.s   S3TurboSpiker_CheckAdjustedTargetSide
                 subq.w  #2,d0
 
-loc_55A42:
+S3TurboSpiker_CheckAdjustedTargetSide:
                 tst.w   d0
-                beq.s   loc_55A74
+                beq.s   S3TurboSpiker_StartRetreat
 
-loc_55A46:
+S3TurboSpiker_StepPatrolAndProbeFloor:
                 jsr     Animate_Raw(pc)
                 jsr     (MoveSprite2).l
                 jsr     Obj_Wait(pc)
                 jmp     ObjHitFloor2_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55A58:
+S3TurboSpiker_StartTurnWait:
                 move.b  routine(a0),d0
                 cmpi.b  #4,d0
-                beq.s   locret_55A72
+                beq.s   S3TurboSpiker_TurnOrTrailReturn
                 move.b  d0,$3A(a0)
                 move.b  #4,routine(a0)
                 move.w  #$F,$2E(a0)
 
-locret_55A72:
+S3TurboSpiker_TurnOrTrailReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55A74:
+S3TurboSpiker_StartRetreat:
                 move.b  #6,routine(a0)
                 move.w  #$F,$2E(a0)
                 move.w  #$200,d0
                 bchg    #0,render_flags(a0)
-                beq.s   loc_55A8E
+                beq.s   S3TurboSpiker_StoreRetreatVelocity
                 neg.w   d0
 
-loc_55A8E:
+S3TurboSpiker_StoreRetreatVelocity:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55A94:
+HCZTurboSpikerS3_CountManualTurnPause:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_55A9C
+                bmi.s   S3TurboSpiker_ReverseAndRestorePatrol
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55A9C:
+S3TurboSpiker_ReverseAndRestorePatrol:
                 move.b  $3A(a0),routine(a0)
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
@@ -106,120 +106,121 @@ loc_55A9C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55AB4:
+HCZTurboSpikerS3_CountRetreatChargePause:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_55ABC
+                bmi.s   S3TurboSpiker_ReleaseSpikeAndStartRush
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55ABC:
+S3TurboSpiker_ReleaseSpikeAndStartRush:
                 move.b  #8,routine(a0)
                 bset    #1,$38(a0)
-                move.l  #byte_55D11,$30(a0)
+                move.l  #S3TurboSpiker_FastBodyAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55AD2:
+S3TurboSpiker_StepRushAndProbeFloor:
                 jsr     Animate_Raw(pc)
                 jsr     (MoveSprite2).l
                 jmp     ObjHitFloor2_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55AE0:
+S3TurboSpiker_WaitHiddenForPlayer:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$60,d2
-                blo.s   loc_55AEC
+                blo.s   S3TurboSpiker_EmergeAndTrySplashes
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55AEC:
+S3TurboSpiker_EmergeAndTrySplashes:
                 move.b  #$C,routine(a0)
                 bset    #0,$38(a0)
                 move.w  #3,$2E(a0)
-                lea     ChildObjDat_55CE4(pc),a2
+                lea     S3TurboSpiker_EmergenceSplashRecords(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B06:
+S3TurboSpiker_TickEmergenceDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_55B0E
+                bmi.s   S3TurboSpiker_RaisePriorityAndWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55B0E:
+S3TurboSpiker_RaisePriorityAndWait:
                 move.b  #$E,routine(a0)
                 move.w  #$180,priority(a0)
                 move.w  #$F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55B22:
+HCZTurboSpikerS3_CountFinalEmergenceWait:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_55B2A
+                bmi.s   S3TurboSpiker_ResumePatrolAfterEmerge
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55B2A:
+S3TurboSpiker_ResumePatrolAfterEmerge:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55B32:
-                lea     word_55CA6(pc),a1
+S3TurboSpiker_InitAttachedSpike:
+                lea     HCZTurboSpikerS3_SpikePartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_55B44,(a0)
+                move.l  #S3TurboSpiker_FollowUntilSpikeRelease,(a0)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B44:
+S3TurboSpiker_FollowUntilSpikeRelease:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_55B58
+                bne.s   S3TurboSpiker_StartSpikeFlight
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B58:
-                move.l  #loc_55B8A,(a0)
+S3TurboSpiker_StartSpikeFlight:
+                move.l  #S3TurboSpiker_MoveAndDrawFlyingSpike,(a0)
                 move.w  #$100,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_55B6C
+                beq.s   S3TurboSpiker_LaunchSpikeAndTryTrail
                 neg.w   d0
 
-loc_55B6C:
+S3TurboSpiker_LaunchSpikeAndTryTrail:
                 move.w  d0,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 moveq   #signextendB(sfx_FloorLauncher),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_55CD4(pc),a2
+                lea     S3TurboSpiker_SpikeTrailRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B8A:
+S3TurboSpiker_MoveAndDrawFlyingSpike:
                 jsr     (MoveSprite2).l
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B94:
-                lea     word_55CAC(pc),a1
+S3TurboSpiker_InitSpikeTrail:
+                lea     HCZTurboSpikerS3_TrailPartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_55BA6,(a0)
+                move.l  #S3TurboSpiker_UpdateTrailAndTryPuff,(a0)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55BA6:
+; Draw based on the bit value before toggling it
+S3TurboSpiker_UpdateTrailAndTryPuff:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_55BCA
+                bne.s   S3TurboSpiker_DeleteTrailAfterSpike
                 bsr.w   SpawnTurboSpikerTrailPuffOnVblankPhase
                 bchg    #0,$38(a0)
-                beq.w   locret_55A72
+                beq.w   S3TurboSpiker_TurnOrTrailReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55BCA:
+S3TurboSpiker_DeleteTrailAfterSpike:
                 jmp     Go_Delete_Sprite(pc)
 
 ; =============== S U B R O U T I N E =======================================
@@ -227,10 +228,10 @@ loc_55BCA:
 SpawnTurboSpikerTrailPuffOnVblankPhase:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   locret_55BFE
-                lea     ChildObjDat_55CDC(pc),a2
+                bne.s   S3TurboSpiker_PuffSpawnReturn
+                lea     S3TurboSpiker_TrailPuffRecord(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                bne.s   locret_55BFE
+                bne.s   S3TurboSpiker_PuffSpawnReturn
                 jsr     (Random_Number).l
                 andi.w  #7,d0
                 subq.w  #3,d0
@@ -240,68 +241,69 @@ SpawnTurboSpikerTrailPuffOnVblankPhase:
                 subq.w  #3,d0
                 add.w   d0,y_pos(a1)
 
-locret_55BFE:
+S3TurboSpiker_PuffSpawnReturn:
                 rts
 ; End of function SpawnTurboSpikerTrailPuffOnVblankPhase
 
 ; ---------------------------------------------------------------------------
 
-loc_55C00:
-                lea     word_55CB2(pc),a1
+S3TurboSpiker_InitPuff:
+                lea     HCZTurboSpikerS3_PuffPartialAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_55C24,(a0)
-                move.l  #byte_55D16,$30(a0)
+                move.l  #S3TurboSpiker_AnimateAndDrawPuff,(a0)
+                move.l  #S3TurboSpiker_PuffAnim,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55C24:
+S3TurboSpiker_AnimateAndDrawPuff:
                 jsr     Animate_Raw(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55C2E:
-                lea     word_55CB8(pc),a1
+S3TurboSpiker_InitEmergenceSplash:
+                lea     S3TurboSpiker_SplashAttrs(pc),a1
                 jsr     SetUp_ObjAttributes2(pc)
-                move.l  #loc_55C4C,(a0)
+                move.l  #S3TurboSpiker_TickSplashDelay,(a0)
                 move.b  subtype(a0),$2F(a0)
                 moveq   #signextendB(sfx_Splash),d0
                 jsr     (Play_SFX).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55C4C:
+; Initialization writes the low byte. The countdown uses the full word
+S3TurboSpiker_TickSplashDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_55C54
+                bmi.s   S3TurboSpiker_StartSplashAnim
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55C54:
-                move.l  #loc_55C6C,(a0)
-                move.l  #byte_55D1D,$30(a0)
+S3TurboSpiker_StartSplashAnim:
+                move.l  #HCZTurboSpikerS3_SplashAnimateThenDraw,(a0)
+                move.l  #S3TurboSpiker_SplashAnim,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55C6C:
+HCZTurboSpikerS3_SplashAnimateThenDraw:
                 jsr     Animate_Raw(pc)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55C76:
-                move.l  #loc_55C84,(a0)
-                lea     ObjDat3_55CC0(pc),a1
+S3TurboSpiker_InitHiddenCover:
+                move.l  #S3TurboSpiker_DrawCoverUntilEmerge,(a0)
+                lea     S3TurboSpiker_HiddenCoverAttrs(pc),a1
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55C84:
+S3TurboSpiker_DrawCoverUntilEmerge:
                 movea.w parent3(a0),a1
                 btst    #0,$38(a1)
-                bne.s   loc_55C94
+                bne.s   S3TurboSpiker_DeleteCover
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55C94:
+S3TurboSpiker_DeleteCover:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 ObjDat_TurboSpiker:
@@ -309,59 +311,59 @@ ObjDat_TurboSpiker:
                 dc.w    make_art_tile(ArtTile_TurboSpiker,1,0)
                 dc.w    $280
                 dc.b    $20, $20,   0, $1A
-word_55CA6:
+HCZTurboSpikerS3_SpikePartialAttributes:
                 dc.w    $280
                 dc.b    8, $10,   3, $9E
-word_55CAC:
+HCZTurboSpikerS3_TrailPartialAttributes:
                 dc.w    $200
                 dc.b    4,   8,   4,   0
-word_55CB2:
+HCZTurboSpikerS3_PuffPartialAttributes:
                 dc.w    $280
                 dc.b    4,   4,   5,   0
-word_55CB8:
+S3TurboSpiker_SplashAttrs:
                 dc.w    make_art_tile(ArtTile_TurboSpiker,0,1)
                 dc.w    $200
                 dc.b    8,   8,   8,   0
-ObjDat3_55CC0:
+S3TurboSpiker_HiddenCoverAttrs:
                 dc.l    Map_TurboSpikerHidden
                 dc.w    make_art_tile($001,2,1)
                 dc.w    $180
                 dc.b    $10, $10,   0,   0
-ChildObjDat_55CCC:
+S3TurboSpiker_AttachedSpikeRecord:
                 dc.w    1-1
-                dc.l    loc_55B32
+                dc.l    S3TurboSpiker_InitAttachedSpike
                 dc.b    4,   0
-ChildObjDat_55CD4:
+S3TurboSpiker_SpikeTrailRecord:
                 dc.w    1-1
-                dc.l    loc_55B94
+                dc.l    S3TurboSpiker_InitSpikeTrail
                 dc.b    -4, $14
-ChildObjDat_55CDC:
+S3TurboSpiker_TrailPuffRecord:
                 dc.w    1-1
-                dc.l    loc_55C00
+                dc.l    S3TurboSpiker_InitPuff
                 dc.b    0,   4
-ChildObjDat_55CE4:
+S3TurboSpiker_EmergenceSplashRecords:
                 dc.w    5-1
-                dc.l    loc_55C2E
+                dc.l    S3TurboSpiker_InitEmergenceSplash
                 dc.b    4,  -8
-                dc.l    loc_55C2E
+                dc.l    S3TurboSpiker_InitEmergenceSplash
                 dc.b    -6,   0
-                dc.l    loc_55C2E
+                dc.l    S3TurboSpiker_InitEmergenceSplash
                 dc.b    6,   0
-                dc.l    loc_55C2E
+                dc.l    S3TurboSpiker_InitEmergenceSplash
                 dc.b    -8,   0
-                dc.l    loc_55C2E
+                dc.l    S3TurboSpiker_InitEmergenceSplash
                 dc.b    8,   0
-ChildObjDat_55D04:
+S3TurboSpiker_HiddenCoverRecord:
                 dc.w    1-1
-                dc.l    loc_55C76
+                dc.l    S3TurboSpiker_InitHiddenCover
                 dc.b    0,   0
-byte_55D0C:
+S3TurboSpiker_SlowBodyAnim:
                 dc.b    5,   0,   1,   2, $FC
-byte_55D11:
+S3TurboSpiker_FastBodyAnim:
                 dc.b    1,   0,   1,   2, $FC
-byte_55D16:
+S3TurboSpiker_PuffAnim:
                 dc.b    0,   5,   5,   5,   6,   7, $F4
-byte_55D1D:
+S3TurboSpiker_SplashAnim:
                 dc.b    1,   8,   9,  $A,  $B,  $C,  $D, $F4
                 even
 Map_TurboSpikerHidden:

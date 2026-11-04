@@ -20,15 +20,15 @@ HCZ1_BackgroundInit:
                 jsr     Refresh_PlaneFull(pc)
                 moveq   #$60,d0
                 cmp.w   (Events_bg+$10).w,d0
-                blt.s   loc_3C2BA
+                blt.s   S3HCZ1Screen_StoreWaterlineReloadLimit
                 neg.w   d0
                 cmp.w   (Events_bg+$10).w,d0
-                bgt.s   loc_3C2BE
+                bgt.s   S3HCZ1Screen_ApplyInitialScroll
 
-loc_3C2BA:
+S3HCZ1Screen_StoreWaterlineReloadLimit:
                 move.w  d0,(Events_bg+$10).w            ; Cap dynamic art reloading value at $60 either way
 
-loc_3C2BE:
+S3HCZ1Screen_ApplyInitialScroll:
                 lea     HCZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table).w,a5
                 jmp     ApplyDeformation(pc)
@@ -47,7 +47,7 @@ HCZ1_BackgroundEvent_Index:
 
 HCZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3C336
+                beq.s   S3HCZ1Screen_DrawBgAfterQueue
                 clr.w   (Events_fg_5).w                 ; Do transition
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (HCZ2_128x128_Secondary_Kos).l,a1
@@ -67,7 +67,7 @@ HCZ1BGE_Normal:
                 st      (Events_bg+$16).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_3C336:
+S3HCZ1Screen_DrawBgAfterQueue:
                 jsr     HCZ1_Deform(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -81,7 +81,7 @@ loc_3C336:
 
 HCZ1BGE_DoTransition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_3C3E6                       ; Don't do anything else until Kos queue has been cleared
+                bne.w   S3HCZ1Screen_DrawBgDuringActChange  ; Don't do anything else until Kos queue has been cleared
                 move.w  #$101,(Current_zone_and_act).w  ; Change the act
                 clr.b   (Dynamic_resize_routine).w      ; Reload resize routine counter
                 clr.b   (Object_load_routine).w         ; Reload sprite manager
@@ -114,7 +114,7 @@ HCZ1BGE_DoTransition:
                 jsr     Reset_TileOffsetPositionActual(pc)
                 clr.w   (Events_routine_bg).w
 
-loc_3C3E6:
+S3HCZ1Screen_DrawBgDuringActChange:
                 jsr     HCZ1_Deform(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
@@ -141,16 +141,16 @@ HCZ1_Deform:
                 swap    d0
                 clr.w   d0
                 tst.w   d2
-                beq.w   loc_3C4E2                       ; If equilibrium point, branch
+                beq.w   S3HCZ1Screen_BuildCoarseScrollBands  ; If equilibrium point, branch
                 move.l  d0,d1
                 move.l  d0,d3                           ; Set up deformation scroll value
                 asr.l   #7,d3
                 moveq   #$30-1,d4
                 cmpi.w  #-$60,d2
-                bgt.s   loc_3C45A
+                bgt.s   S3HCZ1Screen_SetUpPerspectiveReverse
                 lea     (HScroll_table+$01A).w,a1       ; If background is high enough that water line doesn't have to be messed with, just apply the standard formation to it
 
-loc_3C442:
+S3HCZ1Screen_WritePerspectiveForward:
                 swap    d1
                 move.w  d1,(a1)+
                 swap    d1
@@ -159,14 +159,14 @@ loc_3C442:
                 move.w  d1,(a1)+
                 swap    d1
                 sub.l   d3,d1
-                dbf     d4,loc_3C442
-                bra.w   loc_3C4E2                       ; Then finish it up
+                dbf     d4,S3HCZ1Screen_WritePerspectiveForward
+                bra.w   S3HCZ1Screen_BuildCoarseScrollBands  ; Then finish it up
 ; ---------------------------------------------------------------------------
 
-loc_3C45A:
+S3HCZ1Screen_SetUpPerspectiveReverse:
                 lea     (HScroll_table+$19A).w,a1
 
-loc_3C45E:
+S3HCZ1Screen_WritePerspectiveReverse:
                 swap    d1                              ; If background camera is lower, then apply water line deformation backwards
                 move.w  d1,-(a1)
                 swap    d1
@@ -175,14 +175,14 @@ loc_3C45E:
                 move.w  d1,-(a1)
                 swap    d1
                 sub.l   d3,d1
-                dbf     d4,loc_3C45E
+                dbf     d4,S3HCZ1Screen_WritePerspectiveReverse
                 cmpi.w  #$60,d2
-                bge.s   loc_3C4E2                       ; If background camera is low enough that water line doesn't need to be messed with, then end it
+                bge.s   S3HCZ1Screen_BuildCoarseScrollBands  ; If background camera is low enough that water line doesn't need to be messed with, then end it
                 lea     (HScroll_table+$0DA).w,a1
                 lea     (a1),a5
                 lea     (HCZ_WaterlineScroll_Data).l,a6
                 move.w  d2,d1
-                bmi.s   loc_3C4B6
+                bmi.s   S3HCZ1Screen_SetUpReverseRemap
                 move.w  d1,d3                           ; If waterline is displayed below water level
                 neg.w   d3
                 addi.w  #$60,d3
@@ -193,22 +193,22 @@ loc_3C45E:
                 subq.w  #1,d1
                 moveq   #0,d3
                 lsr.w   #1,d1
-                bcc.s   loc_3C4A8
+                bcc.s   S3HCZ1Screen_RemapForwardSecond
 
-loc_3C4A0:
+S3HCZ1Screen_RemapForwardFirst:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+
 
-loc_3C4A8:
+S3HCZ1Screen_RemapForwardSecond:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+                 ; Apply scroll data
-                dbf     d1,loc_3C4A0
-                bra.s   loc_3C4E2
+                dbf     d1,S3HCZ1Screen_RemapForwardFirst
+                bra.s   S3HCZ1Screen_BuildCoarseScrollBands
 ; ---------------------------------------------------------------------------
 
-loc_3C4B6:
+S3HCZ1Screen_SetUpReverseRemap:
                 move.w  d1,d3                           ; If waterline is displayed above water level
                 addi.w  #$60,d3
                 lsl.w   #5,d3
@@ -219,20 +219,20 @@ loc_3C4B6:
                 subq.w  #1,d1
                 moveq   #0,d3
                 lsr.w   #1,d1
-                bcc.s   loc_3C4D6
+                bcc.s   S3HCZ1Screen_RemapReverseSecond
 
-loc_3C4CE:
+S3HCZ1Screen_RemapReverseFirst:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),-(a1)
 
-loc_3C4D6:
+S3HCZ1Screen_RemapReverseSecond:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),-(a1)                 ; Apply scroll data
-                dbf     d1,loc_3C4CE
+                dbf     d1,S3HCZ1Screen_RemapReverseFirst
 
-loc_3C4E2:
+S3HCZ1Screen_BuildCoarseScrollBands:
                 move.l  d0,d1                           ; Get BG X again
                 asr.l   #2,d0
                 asr.l   #5,d1
@@ -273,43 +273,43 @@ loc_3C4E2:
                 move.w  d0,$19A(a1)
                 move.w  d0,d4
                 tst.w   d2
-                bpl.s   loc_3C570
+                bpl.s   S3HCZ1Screen_SetUpUpperScrollFill
                 lea     (HScroll_table+$0DA).w,a1       ; Water line above water
                 moveq   #$30-1,d0
 
-loc_3C556:
+S3HCZ1Screen_FillLowerScrollBand:
                 move.w  d4,(a1)+
                 move.w  d4,(a1)+
-                dbf     d0,loc_3C556
+                dbf     d0,S3HCZ1Screen_FillLowerScrollBand
                 moveq   #$60-1,d0
                 add.w   d2,d0
-                bmi.s   locret_3C58E
+                bmi.s   S3HCZ1Screen_DeformReturn
                 lea     (HScroll_table+$01A).w,a1
 
-loc_3C568:
+S3HCZ1Screen_FillUpperRemainder:
                 move.w  d3,(a1)+
-                dbf     d0,loc_3C568
-                bra.s   locret_3C58E
+                dbf     d0,S3HCZ1Screen_FillUpperRemainder
+                bra.s   S3HCZ1Screen_DeformReturn
 ; ---------------------------------------------------------------------------
 
-loc_3C570:
+S3HCZ1Screen_SetUpUpperScrollFill:
                 lea     (HScroll_table+$01A).w,a1       ; Water line below water
                 moveq   #$30-1,d0
 
-loc_3C576:
+S3HCZ1Screen_FillUpperScrollBand:
                 move.w  d3,(a1)+
                 move.w  d3,(a1)+
-                dbf     d0,loc_3C576
+                dbf     d0,S3HCZ1Screen_FillUpperScrollBand
                 moveq   #$60-1,d0
                 sub.w   d2,d0
-                bmi.s   locret_3C58E
+                bmi.s   S3HCZ1Screen_DeformReturn
                 lea     (HScroll_table+$19A).w,a1
 
-loc_3C588:
+S3HCZ1Screen_FillLowerRemainderReverse:
                 move.w  d4,-(a1)
-                dbf     d0,loc_3C588
+                dbf     d0,S3HCZ1Screen_FillLowerRemainderReverse
 
-locret_3C58E:
+S3HCZ1Screen_DeformReturn:
                 rts
 ; End of function HCZ1_Deform
 

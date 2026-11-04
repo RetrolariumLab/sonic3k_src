@@ -73,7 +73,7 @@ loc_397FA:
                 move.b  #2,object_control(a2)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_39836
-                move.l  #loc_393EE,(a1)
+                move.l  #SKSnowboard_InitSonicAndTrySnow,(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
                 move.w  x_vel(a2),x_vel(a1)

@@ -21,13 +21,13 @@ Obj_HCZSpinningColumn:
                 move.w  d1,$40(a0)
                 move.w  #1,$42(a0)
                 cmpi.w  #$E0,d1
-                bne.s   loc_318DA
+                bne.s   S3SpinningColumn_StartActiveColumn
                 neg.w   $42(a0)
 
-loc_318DA:
-                move.l  #loc_318E0,(a0)
+S3SpinningColumn_StartActiveColumn:
+                move.l  #S3SpinningColumn_UpdateColumnAndRiders,(a0)
 
-loc_318E0:
+S3SpinningColumn_UpdateColumnAndRiders:
                 bsr.s   UpdateHczSpinningColumnMotion
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
@@ -45,13 +45,13 @@ loc_318E0:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_31932
+                bpl.s   S3SpinningColumn_CullOrDrawAtAnchor
                 move.b  #7,anim_frame_timer(a0)
                 subq.b  #1,mapping_frame(a0)
-                bcc.s   loc_31932
+                bcc.s   S3SpinningColumn_CullOrDrawAtAnchor
                 move.b  #2,mapping_frame(a0)
 
-loc_31932:
+S3SpinningColumn_CullOrDrawAtAnchor:
                 move.w  $2E(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 
@@ -59,62 +59,62 @@ loc_31932:
 
 UpdateHczSpinningColumnMotion:
                 move.w  $3A(a0),d0
-                move.w  off_31948(pc,d0.w),d0
-                jmp     off_31948(pc,d0.w)
+                move.w  S3SpinningColumn_MotionOffsets(pc,d0.w),d0
+                jmp     S3SpinningColumn_MotionOffsets(pc,d0.w)
 ; End of function UpdateHczSpinningColumnMotion
 
 ; ---------------------------------------------------------------------------
-off_31948:
-                dc.w    locret_3194E-off_31948
-                dc.w    loc_31950-off_31948
-                dc.w    loc_31990-off_31948
+S3SpinningColumn_MotionOffsets:
+                dc.w    S3SpinningColumn_StationaryReturn-S3SpinningColumn_MotionOffsets
+                dc.w    S3SpinningColumn_StepHorizontalForward-S3SpinningColumn_MotionOffsets
+                dc.w    S3SpinningColumn_ReadVerticalOscillation-S3SpinningColumn_MotionOffsets
 ; ---------------------------------------------------------------------------
 
-locret_3194E:
+S3SpinningColumn_StationaryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31950:
+S3SpinningColumn_StepHorizontalForward:
                 move.w  $42(a0),d1
-                bmi.s   loc_31968
+                bmi.s   S3SpinningColumn_StepHorizontalBack
                 move.w  $40(a0),d0
                 add.w   d1,d0
                 cmpi.w  #$E0,d0
-                bne.s   loc_31966
+                bne.s   S3SpinningColumn_JoinHorizontalStore
                 neg.w   $42(a0)
 
-loc_31966:
-                bra.s   loc_31974
+S3SpinningColumn_JoinHorizontalStore:
+                bra.s   S3SpinningColumn_StoreAndCenterXOffset
 ; ---------------------------------------------------------------------------
 
-loc_31968:
+S3SpinningColumn_StepHorizontalBack:
                 move.w  $40(a0),d0
                 add.w   d1,d0
-                bne.s   loc_31974
+                bne.s   S3SpinningColumn_StoreAndCenterXOffset
                 neg.w   $42(a0)
 
-loc_31974:
+S3SpinningColumn_StoreAndCenterXOffset:
                 move.w  d0,$40(a0)
                 subi.w  #$70,d0
                 btst    #0,status(a0)
-                beq.s   loc_31986
+                beq.s   S3SpinningColumn_ApplyXOffset
                 neg.w   d0
 
-loc_31986:
+S3SpinningColumn_ApplyXOffset:
                 add.w   $2E(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31990:
+S3SpinningColumn_ReadVerticalOscillation:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 btst    #0,status(a0)
-                beq.s   loc_319A4
+                beq.s   S3SpinningColumn_ApplyYOffset
                 neg.w   d0
                 addi.w  #$80,d0
 
-loc_319A4:
+S3SpinningColumn_ApplyYOffset:
                 add.w   $30(a0),d0
                 move.w  d0,y_pos(a0)
                 rts
@@ -123,17 +123,17 @@ loc_319A4:
 
 UpdatePlayerOnHczSpinningColumn:
                 move.b  (a2),d0
-                bne.s   loc_31A26
+                bne.s   S3SpinningColumn_CheckAndPullInRider
                 btst    d6,status(a0)
-                beq.s   locret_31A24
+                beq.s   S3SpinningColumn_CaptureReturn
                 move.b  #0,1(a2)
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                bpl.s   loc_319D0
+                bpl.s   S3SpinningColumn_CaptureStandingRider
                 neg.w   d0
                 move.b  #$80,1(a2)
 
-loc_319D0:
+S3SpinningColumn_CaptureStandingRider:
                 move.b  d0,2(a2)
                 move.w  #0,x_vel(a1)
                 move.w  #0,y_vel(a1)
@@ -151,22 +151,22 @@ loc_319D0:
                 bra.w   loc_31764
 ; ---------------------------------------------------------------------------
 
-locret_31A24:
+S3SpinningColumn_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31A26:
+S3SpinningColumn_CheckAndPullInRider:
                 tst.b   render_flags(a1)
-                bpl.w   loc_31AD6
+                bpl.w   S3SpinningColumn_ReleaseRider
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_31AD6
+                bhs.w   S3SpinningColumn_ReleaseRider
                 btst    d6,status(a0)
-                beq.w   loc_31AE8
+                beq.w   S3SpinningColumn_ClearRiderAttachment
                 tst.b   2(a2)
-                beq.s   loc_31A4A
+                beq.s   S3SpinningColumn_PositionTwistingRider
                 subq.b  #1,2(a2)
 
-loc_31A4A:
+S3SpinningColumn_PositionTwistingRider:
                 moveq   #0,d0
                 move.b  1(a2),d0
                 jsr     (GetSineCosine).l
@@ -182,17 +182,17 @@ loc_31A4A:
                 addq.b  #2,1(a2)
                 move.w  #0,ground_vel(a1)
                 move.w  y_vel(a0),d0
-                bpl.s   loc_31A84
+                bpl.s   S3SpinningColumn_TryBoostRiderSpeed
                 neg.w   d0
 
-loc_31A84:
+S3SpinningColumn_TryBoostRiderSpeed:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_31A98
+                bne.s   S3SpinningColumn_TryJumpRelease
                 cmpi.w  #$480,d0
-                blo.s   loc_31A98
+                blo.s   S3SpinningColumn_TryJumpRelease
                 move.w  #$800,ground_vel(a1)
 
-loc_31A98:
+S3SpinningColumn_TryJumpRelease:
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d5
                 beq.w   loc_31764
                 move.b  #1,jumping(a1)
@@ -205,12 +205,12 @@ loc_31A98:
                 move.w  #0,x_vel(a1)
                 move.w  #0,ground_vel(a1)
 
-loc_31AD6:
+S3SpinningColumn_ReleaseRider:
                 bset    #Status_InAir,status(a1)
                 move.w  #$100,priority(a1)
                 move.b  #0,object_control(a1)
 
-loc_31AE8:
+S3SpinningColumn_ClearRiderAttachment:
                 move.b  #0,(a2)
                 rts
 ; End of function UpdatePlayerOnHczSpinningColumn

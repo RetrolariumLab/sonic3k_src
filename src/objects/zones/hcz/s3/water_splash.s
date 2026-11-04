@@ -5,14 +5,14 @@
 
 Obj_HCZWaterSplash:
                 tst.b   subtype(a0)
-                beq.s   loc_37A0A
+                beq.s   S3WaterSplash_InitOrdinarySplash
                 move.l  #Map_HCZWaterSplash2,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZ2WaterSplash2,0,0),art_tile(a0)
                 tst.b   (Current_act).w
-                beq.s   loc_379B4
+                beq.s   S3WaterSplash_InitSkimmingSplash
                 move.w  #make_art_tile(ArtTile_HCZ1WaterSplash2,0,0),art_tile(a0)
 
-loc_379B4:
+S3WaterSplash_InitSkimmingSplash:
                 ori.b   #4,render_flags(a0)
                 move.w  #$300,priority(a0)
                 move.b  #$A0,width_pixels(a0)
@@ -28,11 +28,11 @@ loc_379B4:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #(5<<8)|5,(a2)+
-                move.l  #loc_37A8A,(a0)
-                bra.w   loc_37A8A
+                move.l  #S3WaterSplash_TrackP1AndUpdateSkimmers,(a0)
+                bra.w   S3WaterSplash_TrackP1AndUpdateSkimmers
 ; ---------------------------------------------------------------------------
 
-loc_37A0A:
+S3WaterSplash_InitOrdinarySplash:
                 move.l  #Map_HCZWaterSplash,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZWaterSplash,2,0),art_tile(a0)
                 ori.b   #4,render_flags(a0)
@@ -40,22 +40,22 @@ loc_37A0A:
                 move.b  #$28,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 move.b  #-1,$30(a0)
-                move.l  #loc_37A3C,(a0)
+                move.l  #S3WaterSplash_StepOrdinaryFrames,(a0)
 
-loc_37A3C:
+S3WaterSplash_StepOrdinaryFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_37A52
+                bpl.s   S3WaterSplash_TryUploadOrdinaryArt
                 move.b  #7,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
 
-loc_37A52:
+S3WaterSplash_TryUploadOrdinaryArt:
                 tst.b   render_flags(a0)
-                bpl.s   loc_37A84
+                bpl.s   S3WaterSplash_CullOrDrawOrdinary
                 moveq   #0,d1
                 move.b  mapping_frame(a0),d1
                 cmp.b   $30(a0),d1
-                beq.s   loc_37A84
+                beq.s   S3WaterSplash_CullOrDrawOrdinary
                 move.b  d1,$30(a0)
                 lsl.w   #8,d1
                 move.w  d1,d0
@@ -66,37 +66,37 @@ loc_37A52:
                 move.w  #$180,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_37A84:
+S3WaterSplash_CullOrDrawOrdinary:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_37A8A:
+S3WaterSplash_TrackP1AndUpdateSkimmers:
                 move.w  (Player_1+x_pos).w,x_pos(a0)
                 move.w  (Water_level).w,y_pos(a0)
                 bsr.s   UpdateHczWaterSkimmingPlayers
                 tst.b   status(a0)
-                beq.s   loc_37AD0
+                beq.s   S3WaterSplash_PickSkimArtDestination
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #2,d0
                 andi.b  #$F,d0
-                bne.s   loc_37AB2
+                bne.s   S3WaterSplash_StepSkimmingArtBank
                 moveq   #signextendB(sfx_WaterSkid),d0
                 jsr     (Play_SFX).l
 
-loc_37AB2:
+S3WaterSplash_StepSkimmingArtBank:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_37AD0
+                bpl.s   S3WaterSplash_PickSkimArtDestination
                 move.b  #2,anim_frame_timer(a0)
                 addq.b  #1,$30(a0)
                 cmpi.b  #5,$30(a0)
-                blo.s   loc_37AD0
+                blo.s   S3WaterSplash_PickSkimArtDestination
                 move.b  #0,$30(a0)
 
-loc_37AD0:
+S3WaterSplash_PickSkimArtDestination:
                 moveq   #0,d1
                 move.b  $30(a0),d1
                 cmp.b   $31(a0),d1
-                beq.s   loc_37B06
+                beq.s   S3WaterSplash_CullOrDrawSkim
                 move.b  d1,$31(a0)
                 lsl.w   #7,d1
                 move.w  d1,d0
@@ -105,14 +105,14 @@ loc_37AD0:
                 addi.l  #ArtUnc_HCZWaterSplash2,d1
                 move.w  #tiles_to_bytes(ArtTile_HCZ2WaterSplash2),d2
                 tst.b   (Current_act).w
-                beq.s   loc_37AFC
+                beq.s   S3WaterSplash_QueueSkimArtDma
                 move.w  #tiles_to_bytes(ArtTile_HCZ1WaterSplash2),d2
 
-loc_37AFC:
+S3WaterSplash_QueueSkimArtDma:
                 move.w  #$C0,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_37B06:
+S3WaterSplash_CullOrDrawSkim:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -125,10 +125,10 @@ UpdateHczWaterSkimmingPlayers:
                 bsr.s   UpdatePlayerSkimmingHczWater
                 bclr    #0,render_flags(a0)
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_37B30
+                beq.s   S3WaterSplash_UpdateP2Skimming
                 bset    #0,render_flags(a0)
 
-loc_37B30:
+S3WaterSplash_UpdateP2Skimming:
                 lea     (Player_2).w,a1
                 lea     sub3_x_pos(a0),a2
                 moveq   #p2_standing_bit,d6
@@ -137,10 +137,10 @@ loc_37B30:
                 move.b  render_flags(a0),d0
                 add.b   status(a1),d0
                 andi.b  #1,d0
-                beq.s   locret_37B54
+                beq.s   S3WaterSplash_SkimmersReturn
                 move.b  #5,sub3_mapframe-sub3_x_pos(a2)
 
-locret_37B54:
+S3WaterSplash_SkimmersReturn:
                 rts
 ; End of function UpdateHczWaterSkimmingPlayers
 
@@ -148,93 +148,94 @@ locret_37B54:
 
 UpdatePlayerSkimmingHczWater:
                 btst    d6,status(a0)
-                bne.s   loc_37BAA
+                bne.s   S3WaterSplash_CheckJumpOrSkimHeight
                 tst.w   y_vel(a1)
-                bne.s   locret_37BA8
+                bne.s   S3WaterSplash_StartSkimReturn
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
                 add.w   y_pos(a1),d1
                 addq.w  #1,d1
                 cmp.w   (Water_level).w,d1
-                bne.s   locret_37BA8
+                bne.s   S3WaterSplash_StartSkimReturn
                 move.w  x_vel(a1),d0
-                bpl.s   loc_37B7C
+                bpl.s   S3WaterSplash_TryStartSkimming
                 neg.w   d0
 
-loc_37B7C:
+; Require an exact waterline contact and an absolute X speed of at least seven pixels per step
+S3WaterSplash_TryStartSkimming:
                 cmpi.w  #$700,d0
-                blo.s   locret_37BA8
+                blo.s   S3WaterSplash_StartSkimReturn
                 bset    d6,status(a0)
                 move.w  x_pos(a1),(a2)
                 move.w  (Water_level).w,sub2_y_pos-sub2_x_pos(a2)
                 move.b  #0,sub2_mapframe-sub2_x_pos(a2)
                 bclr    #Status_Facing,status(a1)
                 tst.w   x_vel(a1)
-                bpl.s   locret_37BA8
+                bpl.s   S3WaterSplash_StartSkimReturn
                 bset    #Status_Facing,status(a1)
 
-locret_37BA8:
+S3WaterSplash_StartSkimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37BAA:
+S3WaterSplash_CheckJumpOrSkimHeight:
                 move.w  d5,d0
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   loc_37C2A
+                bne.s   S3WaterSplash_JumpFromWaterAndHide
                 move.w  (Water_level).w,d0
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
                 sub.w   d1,d0
                 subq.w  #1,d0
                 cmp.w   y_pos(a1),d0
-                bhi.s   loc_37C1E
+                bhi.s   S3WaterSplash_EndSkimAndHideSplash
                 move.w  x_vel(a1),d1
-                bpl.s   loc_37BCE
+                bpl.s   S3WaterSplash_ClampSkimmerToWaterline
                 neg.w   d1
 
-loc_37BCE:
+S3WaterSplash_ClampSkimmerToWaterline:
                 cmpi.w  #$700,d1
-                blo.s   loc_37C1E
+                blo.s   S3WaterSplash_EndSkimAndHideSplash
                 move.w  d0,y_pos(a1)
                 move.w  #0,y_vel(a1)
                 move.w  x_pos(a1),(a2)
                 move.w  (Water_level).w,sub2_y_pos-sub2_x_pos(a2)
                 btst    #Status_InAir,status(a1)
-                beq.s   locret_37C28
+                beq.s   S3WaterSplash_ActiveSkimReturn
                 andi.w  #(button_left_mask|button_right_mask)<<8,d5
-                bne.s   locret_37C28
+                bne.s   S3WaterSplash_ActiveSkimReturn
                 move.w  #$C,d1
                 move.w  x_vel(a1),d0
-                beq.s   loc_37C1E
-                bmi.s   loc_37C10
+                beq.s   S3WaterSplash_EndSkimAndHideSplash
+                bmi.s   S3WaterSplash_SlowNegativeSkimmer
                 sub.w   d1,d0
-                bcc.s   loc_37C0A
+                bcc.s   S3WaterSplash_StorePositiveSkimSpeed
                 move.w  #0,d0
 
-loc_37C0A:
+S3WaterSplash_StorePositiveSkimSpeed:
                 move.w  d0,x_vel(a1)
-                bra.s   locret_37C28
+                bra.s   S3WaterSplash_ActiveSkimReturn
 ; ---------------------------------------------------------------------------
 
-loc_37C10:
+S3WaterSplash_SlowNegativeSkimmer:
                 add.w   d1,d0
-                bcc.s   loc_37C18
+                bcc.s   S3WaterSplash_StoreNegativeSkimSpeed
                 move.w  #0,d0
 
-loc_37C18:
+S3WaterSplash_StoreNegativeSkimSpeed:
                 move.w  d0,x_vel(a1)
-                bra.s   locret_37C28
+                bra.s   S3WaterSplash_ActiveSkimReturn
 ; ---------------------------------------------------------------------------
 
-loc_37C1E:
+S3WaterSplash_EndSkimAndHideSplash:
                 bclr    d6,status(a0)
                 move.b  #5,sub2_mapframe-sub2_x_pos(a2)
 
-locret_37C28:
+S3WaterSplash_ActiveSkimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37C2A:
+S3WaterSplash_JumpFromWaterAndHide:
                 bclr    d6,status(a0)
                 move.b  #5,sub2_mapframe-sub2_x_pos(a2)
                 move.w  #-$680,y_vel(a1)

@@ -14,12 +14,13 @@ Obj_Buggernaut_2:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Buggernaut_Index:
-                dc.w    loc_55828-Buggernaut_Index
-                dc.w    loc_5585A-Buggernaut_Index
-                dc.w    loc_55878-Buggernaut_Index
+                dc.w    S3Buggernaut_InitAdultAndTryBaby-Buggernaut_Index
+                dc.w    S3Buggernaut_TickAdultIdle-Buggernaut_Index
+                dc.w    S3Buggernaut_ChasePlayerAboveWater-Buggernaut_Index
 ; ---------------------------------------------------------------------------
 
-loc_55828:
+; Increment the count after the creation request regardless of its result
+S3Buggernaut_InitAdultAndTryBaby:
                 lea     ObjDat_Buggernaut(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AniRaw_Buggernaut,$30(a0)
@@ -27,30 +28,30 @@ loc_55828:
                 jsr     CreateChild1_Normal(pc)
                 addq.b  #1,$39(a0)
 
-loc_55844:
+S3Buggernaut_BeginAdultIdle:
                 move.b  #2,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_55862,$34(a0)
+                move.l  #S3Buggernaut_BeginAdultChase,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5585A:
+S3Buggernaut_TickAdultIdle:
                 jsr     Animate_Raw(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55862:
+S3Buggernaut_BeginAdultChase:
                 move.b  #4,routine(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_55844,$34(a0)
+                move.l  #S3Buggernaut_BeginAdultIdle,$34(a0)
 
-locret_55876:
+S3Buggernaut_AdultChaseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55878:
+S3Buggernaut_ChasePlayerAboveWater:
                 tst.b   render_flags(a0)
-                bpl.s   locret_55876
+                bpl.s   S3Buggernaut_AdultChaseReturn
                 jsr     Find_SonicTails(pc)
                 jsr     Change_FlipX(pc)
                 move.w  #$200,d0
@@ -70,33 +71,33 @@ Obj_Buggernaught_Baby:
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 Buggernaught_Baby_Index:
-                dc.w    loc_558BA-Buggernaught_Baby_Index
-                dc.w    loc_558CC-Buggernaught_Baby_Index
-                dc.w    loc_55932-Buggernaught_Baby_Index
+                dc.w    S3Buggernaut_InitBaby-Buggernaught_Baby_Index
+                dc.w    S3Buggernaut_AnimateAndCheckParent-Buggernaught_Baby_Index
+                dc.w    S3Buggernaut_UpdateOrphanFlight-Buggernaught_Baby_Index
 ; ---------------------------------------------------------------------------
 
-loc_558BA:
+S3Buggernaut_InitBaby:
                 lea     ObjDat3_Buggernaught_Baby(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #AniRaw_Buggernaut_Baby,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_558CC:
+S3Buggernaut_AnimateAndCheckParent:
                 jsr     Animate_Raw(pc)
                 movea.w parent3(a0),a1
                 cmpi.l  #Obj_Buggernaut_2,(a1)
-                beq.s   loc_558E2
+                beq.s   HCZBuggernautS3_BabyCopyLiveParentFacing
                 bsr.w   ReparentBuggernautBabyToAvailableAdult
-                beq.s   loc_5590A
+                beq.s   S3Buggernaut_PickOrphanEscape
 
-loc_558E2:
+HCZBuggernautS3_BabyCopyLiveParentFacing:
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   loc_558F6
+                beq.s   S3Buggernaut_ChaseParentAboveWater
                 bset    #0,render_flags(a0)
 
-loc_558F6:
+S3Buggernaut_ChaseParentAboveWater:
                 move.w  #$200,d0
                 moveq   #$20,d1
                 jsr     Chase_Object(pc)
@@ -104,22 +105,22 @@ loc_558F6:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_5590A:
+S3Buggernaut_PickOrphanEscape:
                 move.b  #4,routine(a0)
                 move.w  x_pos(a0),d0
                 move.w  #$200,d1
                 bset    #0,render_flags(a0)
                 cmp.w   (Player_1+x_pos).w,d0
-                bhs.s   loc_5592C
+                bhs.s   S3Buggernaut_StoreOrphanVelocity
                 neg.w   d1
                 bclr    #0,render_flags(a0)
 
-loc_5592C:
+S3Buggernaut_StoreOrphanVelocity:
                 move.w  d1,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55932:
+S3Buggernaut_UpdateOrphanFlight:
                 jsr     Animate_Raw(pc)
                 jmp     (MoveSprite2).l
 
@@ -129,22 +130,22 @@ ReparentBuggernautBabyToAvailableAdult:
                 lea     (Dynamic_object_RAM+object_size).w,a2
                 move.w  #((Breathing_bubbles)-(Dynamic_object_RAM+object_size))/object_size-1,d0
 
-loc_55944:
+S3Buggernaut_FindAdultForAdoption:
                 cmpi.l  #Obj_Buggernaut_2,(a2)
-                beq.s   loc_55958
+                beq.s   S3Buggernaut_TrySetAdoptiveParent
 
-loc_5594C:
+S3Buggernaut_NextAdoptionCandidate:
                 lea     next_object(a2),a2
-                dbf     d0,loc_55944
+                dbf     d0,S3Buggernaut_FindAdultForAdoption
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55958:
+S3Buggernaut_TrySetAdoptiveParent:
                 move.b  $39(a2),d1
                 addq.b  #1,d1
                 cmpi.b  #4,d1
-                bhi.s   loc_5594C
+                bhi.s   S3Buggernaut_NextAdoptionCandidate
                 move.b  d1,$39(a2)
                 move.w  a2,parent3(a0)
                 rts
@@ -157,10 +158,10 @@ KeepChasingBuggernautAboveWaterSurface:
                 move.w  (Water_level).w,d1
                 subi.w  #8,d1
                 cmp.w   d1,d0
-                blo.s   locret_55984
+                blo.s   S3Buggernaut_WaterAvoidanceReturn
                 move.w  #-$200,y_vel(a0)
 
-locret_55984:
+S3Buggernaut_WaterAvoidanceReturn:
                 rts
 ; End of function KeepChasingBuggernautAboveWaterSurface
 

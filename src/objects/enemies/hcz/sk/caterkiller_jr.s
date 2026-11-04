@@ -12,21 +12,21 @@ Obj_CaterKillerJr:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 CaterKillerJr_Index:
-                dc.w    loc_876EC-CaterKillerJr_Index
-                dc.w    loc_87728-CaterKillerJr_Index
-                dc.w    loc_87728-CaterKillerJr_Index
-                dc.w    loc_87758-CaterKillerJr_Index
-                dc.w    loc_8777A-CaterKillerJr_Index
+                dc.w    SKCaterkillerJr_InitRootAndTrySegments-CaterKillerJr_Index
+                dc.w    SKCaterkillerJr_StepSmallBob-CaterKillerJr_Index
+                dc.w    SKCaterkillerJr_StepSmallBob-CaterKillerJr_Index
+                dc.w    SKCaterkillerJr_TurnAtLargeBobReversal-CaterKillerJr_Index
+                dc.w    SKCaterkillerJr_FinishLargeBob-CaterKillerJr_Index
 ; ---------------------------------------------------------------------------
 
-loc_876EC:
+SKCaterkillerJr_InitRootAndTrySegments:
                 lea     ObjDat_CaterKillerJr(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  #-$100,x_vel(a0)
-                lea     ChildObjDat_87898(pc),a2
+                lea     SKCaterkillerJr_RepeatedSegmentRecord(pc),a2
                 jsr     CreateChild3_NormalRepeated(pc)
 
-loc_87702:
+SKCaterkillerJr_BeginSmallBob:
                 move.b  #4,routine(a0)
                 move.b  #3,$39(a0)
                 move.w  #$80,d0
@@ -37,14 +37,14 @@ loc_87702:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87728:
+SKCaterkillerJr_StepSmallBob:
                 jsr     Swing_UpAndDown_Count(pc)
-                bne.s   loc_87738
+                bne.s   SKCaterkillerJr_BeginLargeBob
                 jsr     (MoveSprite2).l
-                bra.w   loc_8783E
+                bra.w   SKCaterkillerJr_TryTickPeriodicEffect
 ; ---------------------------------------------------------------------------
 
-loc_87738:
+SKCaterkillerJr_BeginLargeBob:
                 move.b  #6,routine(a0)
                 move.w  #$100,d0
                 move.w  d0,$3E(a0)
@@ -54,71 +54,71 @@ loc_87738:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87758:
+SKCaterkillerJr_TurnAtLargeBobReversal:
                 jsr     Swing_UpAndDown(pc)
                 tst.w   d3
-                beq.s   loc_87770
+                beq.s   SKCaterkillerJr_MoveAndCheckEffect
                 move.b  #8,routine(a0)
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
 
-loc_87770:
+SKCaterkillerJr_MoveAndCheckEffect:
                 jsr     (MoveSprite2).l
-                bra.w   loc_8783E
+                bra.w   SKCaterkillerJr_TryTickPeriodicEffect
 ; ---------------------------------------------------------------------------
 
-loc_8777A:
+SKCaterkillerJr_FinishLargeBob:
                 jsr     Swing_UpAndDown(pc)
                 tst.w   d3
-                bne.s   loc_87702
+                bne.s   SKCaterkillerJr_BeginSmallBob
                 jsr     (MoveSprite2).l
-                bra.w   loc_8783E
+                bra.w   SKCaterkillerJr_TryTickPeriodicEffect
 ; ---------------------------------------------------------------------------
 
-loc_8778C:
+SKCaterkillerJr_UpdateSegment:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_877A2(pc,d0.w),d1
-                jsr     off_877A2(pc,d1.w)
+                move.w  SKCaterkillerJr_SegmentStateOffsets(pc,d0.w),d1
+                jsr     SKCaterkillerJr_SegmentStateOffsets(pc,d1.w)
                 moveq   #0,d0
                 jmp     (Child_DrawTouch_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
-off_877A2:
-                dc.w    loc_877AC-off_877A2
-                dc.w    loc_877D8-off_877A2
-                dc.w    loc_87728-off_877A2
-                dc.w    loc_87758-off_877A2
-                dc.w    loc_8777A-off_877A2
+SKCaterkillerJr_SegmentStateOffsets:
+                dc.w    SKCaterkillerJr_InitSegmentAttrsAndDelay-SKCaterkillerJr_SegmentStateOffsets
+                dc.w    SKCaterkillerJr_WaitSegmentStart-SKCaterkillerJr_SegmentStateOffsets
+                dc.w    SKCaterkillerJr_StepSmallBob-SKCaterkillerJr_SegmentStateOffsets
+                dc.w    SKCaterkillerJr_TurnAtLargeBobReversal-SKCaterkillerJr_SegmentStateOffsets
+                dc.w    SKCaterkillerJr_FinishLargeBob-SKCaterkillerJr_SegmentStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_877AC:
+SKCaterkillerJr_InitSegmentAttrsAndDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  off_877C6(pc,d0.w),d1
-                lea     off_877C6(pc,d1.w),a1
+                move.w  SKCaterkillerJr_SegmentAttrOffsets(pc,d0.w),d1
+                lea     SKCaterkillerJr_SegmentAttrOffsets(pc,d1.w),a1
                 lsr.w   #1,d0
-                move.b  byte_877D2(pc,d0.w),$2F(a0)
+                move.b  SKCaterkillerJr_SegmentStartDelays(pc,d0.w),$2F(a0)
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
-off_877C6:
-                dc.w    ObjDat3_8786E-off_877C6
-                dc.w    ObjDat3_8786E-off_877C6
-                dc.w    ObjDat3_8786E-off_877C6
-                dc.w    ObjDat3_8787A-off_877C6
-                dc.w    ObjDat3_87886-off_877C6
-                dc.w    ObjDat3_87886-off_877C6
-byte_877D2:
+SKCaterkillerJr_SegmentAttrOffsets:
+                dc.w    SKCaterkillerJr_LeadingSegmentAttrs-SKCaterkillerJr_SegmentAttrOffsets
+                dc.w    SKCaterkillerJr_LeadingSegmentAttrs-SKCaterkillerJr_SegmentAttrOffsets
+                dc.w    SKCaterkillerJr_LeadingSegmentAttrs-SKCaterkillerJr_SegmentAttrOffsets
+                dc.w    SKCaterkillerJr_FourthSegmentAttrs-SKCaterkillerJr_SegmentAttrOffsets
+                dc.w    SKCaterkillerJr_TailMonkeyDudeAttrs-SKCaterkillerJr_SegmentAttrOffsets
+                dc.w    SKCaterkillerJr_TailMonkeyDudeAttrs-SKCaterkillerJr_SegmentAttrOffsets
+SKCaterkillerJr_SegmentStartDelays:
                 dc.b    $B, $17, $23, $2F, $37, $3F
                 even
 ; ---------------------------------------------------------------------------
 
-loc_877D8:
+SKCaterkillerJr_WaitSegmentStart:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_877E0
+                bmi.s   SKCaterkillerJr_StartSegmentMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_877E0:
+SKCaterkillerJr_StartSegmentMotion:
                 move.b  #4,routine(a0)
                 moveq   #$40,d1
                 moveq   #0,d0
@@ -127,41 +127,41 @@ loc_877E0:
                 lsl.w   #2,d0
                 sub.w   d0,d1
                 move.w  d1,$2E(a0)
-                move.l  #loc_87854,$34(a0)
+                move.l  #SKCaterkillerJr_RearmAndTryEffect,$34(a0)
                 move.w  #-$100,x_vel(a0)
-                bra.w   loc_87702
+                bra.w   SKCaterkillerJr_BeginSmallBob
 ; ---------------------------------------------------------------------------
 
-loc_8780A:
-                lea     word_87892(pc),a1
+SKCaterkillerJr_InitAttachedEffect:
+                lea     SKCaterkillerJr_AttachedEffectAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_8782C,(a0)
+                move.l  #SKCaterkillerJr_UpdateAttachedEffect,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 bset    #4,shield_reaction(a0)
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8782C:
+SKCaterkillerJr_UpdateAttachedEffect:
                 jsr     Refresh_ChildPositionAdjusted(pc)
-                lea     byte_878A8(pc),a1
+                lea     SKCaterkillerJr_AttachedEffectAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_8783E:
-                cmpi.l  #loc_8778C,(a0)
-                bne.s   locret_87852
+SKCaterkillerJr_TryTickPeriodicEffect:
+                cmpi.l  #SKCaterkillerJr_UpdateSegment,(a0)
+                bne.s   SKCaterkillerJr_PeriodicEffectReturn
                 cmpi.b  #6,subtype(a0)
-                bhs.s   locret_87852
+                bhs.s   SKCaterkillerJr_PeriodicEffectReturn
                 jsr     Obj_Wait(pc)
 
-locret_87852:
+SKCaterkillerJr_PeriodicEffectReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_87854:
+SKCaterkillerJr_RearmAndTryEffect:
                 move.w  #$1A,$2E(a0)
-                lea     ChildObjDat_878A0(pc),a2
+                lea     SKCaterkillerJr_AttachedEffectRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 ObjDat_CaterKillerJr:
@@ -169,33 +169,33 @@ ObjDat_CaterKillerJr:
                 dc.w    make_art_tile(ArtTile_CaterkillerJr,1,1)
                 dc.w    $280
                 dc.b    8,   8,   0, $17
-ObjDat3_8786E:
+SKCaterkillerJr_LeadingSegmentAttrs:
                 dc.l    Map_CaterKillerJr
                 dc.w    make_art_tile(ArtTile_CaterkillerJr,1,1)
                 dc.w    $280
                 dc.b    8,  $C,   1, $97
-ObjDat3_8787A:
+SKCaterkillerJr_FourthSegmentAttrs:
                 dc.l    Map_CaterKillerJr
                 dc.w    make_art_tile(ArtTile_CaterkillerJr,1,1)
                 dc.w    $280
                 dc.b    8,   8,   2, $97
-ObjDat3_87886:
+SKCaterkillerJr_TailMonkeyDudeAttrs:
                 dc.l    Map_MonkeyDude
                 dc.w    make_art_tile(ArtTile_MonkeyDude,1,1)
                 dc.w    $280
                 dc.b    4,   4,   3, $98
-word_87892:
+SKCaterkillerJr_AttachedEffectAttrs:
                 dc.w    $200
                 dc.b    $10, $10,   3,   0
-ChildObjDat_87898:
+SKCaterkillerJr_RepeatedSegmentRecord:
                 dc.w    6-1
-                dc.l    loc_8778C
+                dc.l    SKCaterkillerJr_UpdateSegment
                 dc.b    0,   0
-ChildObjDat_878A0:
+SKCaterkillerJr_AttachedEffectRecord:
                 dc.w    1-1
-                dc.l    loc_8780A
+                dc.l    SKCaterkillerJr_InitAttachedEffect
                 dc.b    0,   0
-byte_878A8:
+SKCaterkillerJr_AttachedEffectAnim:
                 dc.b    3,   2
                 dc.b    3,   2
                 dc.b    4,   3

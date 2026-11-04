@@ -2,7 +2,7 @@
 ; Responsibility: Hydrocity conveyor belt player transport and coordinated conveyor spike motion
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-word_31124:
+SKConveyorBelt_ExtentsBySubtype:
                 dc.w    $B28,  $CD8
                 dc.w    $BA8,  $CD8
                 dc.w    $BA8,  $CD8
@@ -26,40 +26,40 @@ Obj_HCZConveyorBelt:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 tst.b   (a1,d0.w)
-                beq.s   loc_31186
+                beq.s   SKConveyorBelt_ClaimLoadSlotAndSetLeft
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_31180
+                beq.s   SKConveyorBelt_DeleteDuplicateController
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_31180:
+SKConveyorBelt_DeleteDuplicateController:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_31186:
+SKConveyorBelt_ClaimLoadSlotAndSetLeft:
                 move.b  #1,(a1,d0.w)
                 andi.w  #$F,d0
                 lsl.w   #2,d0
-                lea     word_31124(pc,d0.w),a1
+                lea     SKConveyorBelt_ExtentsBySubtype(pc,d0.w),a1
                 move.w  (a1)+,d0
                 move.w  d0,$3C(a0)
                 btst    #0,status(a0)
-                bne.s   loc_311A6
+                bne.s   SKConveyorBelt_SetCaptureLeftAndRight
                 subq.w  #8,d0
 
-loc_311A6:
+SKConveyorBelt_SetCaptureLeftAndRight:
                 move.w  d0,$40(a0)
                 move.w  (a1)+,d0
                 move.w  d0,$3E(a0)
                 btst    #0,status(a0)
-                beq.s   loc_311BA
+                beq.s   SKConveyorBelt_StartInvisibleController
                 addq.w  #8,d0
 
-loc_311BA:
+SKConveyorBelt_StartInvisibleController:
                 move.w  d0,$42(a0)
-                move.l  #loc_311C4,(a0)
+                move.l  #SKConveyorBelt_UpdateRidersAndCull,(a0)
 
-loc_311C4:
+SKConveyorBelt_UpdateRidersAndCull:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
@@ -75,70 +75,70 @@ loc_311C4:
                 andi.w  #$FF80,d0
                 subi.w  #$280,d0
                 cmp.w   d0,d1
-                blo.s   loc_31204
+                blo.s   SKConveyorBelt_ClearLoadSlotAndRespawn
                 move.w  $3E(a0),d0
                 andi.w  #$FF80,d0
                 cmp.w   d0,d1
-                bhi.s   loc_31204
+                bhi.s   SKConveyorBelt_ClearLoadSlotAndRespawn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31204:
+SKConveyorBelt_ClearLoadSlotAndRespawn:
                 lea     (Conveyor_belt_load_array).w,a1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  #0,(a1,d0.w)
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_31220
+                beq.s   SKConveyorBelt_DeleteController
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_31220:
+SKConveyorBelt_DeleteController:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnHczConveyorBelt:
                 tst.b   (a2)
-                beq.w   loc_31322
+                beq.w   SKConveyorBelt_TickRegrabDelay
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_312D4
+                bne.w   SKConveyorBelt_DetachAndSetRegrabDelay
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_312D4
+                bhs.w   SKConveyorBelt_DetachAndSetRegrabDelay
                 btst    #button_left+8,d1
-                beq.s   loc_31260
+                beq.s   SKConveyorBelt_TryWalkRight
                 subq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_31260
+                bpl.s   SKConveyorBelt_TryWalkRight
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_31260:
+SKConveyorBelt_TryWalkRight:
                 btst    #button_right+8,d1
-                beq.s   loc_31282
+                beq.s   SKConveyorBelt_PickJumpOrBeltDrift
                 addq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_31282
+                bpl.s   SKConveyorBelt_PickJumpOrBeltDrift
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_31282:
+SKConveyorBelt_PickJumpOrBeltDrift:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
-                bne.w   loc_312C0
+                bne.w   SKConveyorBelt_PickReleaseJumpSpeed
                 moveq   #2,d0
                 btst    #0,status(a0)
-                beq.s   loc_31296
+                beq.s   SKConveyorBelt_MoveAndPoseRider
                 neg.w   d0
 
-loc_31296:
+SKConveyorBelt_MoveAndPoseRider:
                 add.w   d0,x_pos(a1)
                 move.w  x_pos(a1),d0
                 cmp.w   $40(a0),d0
-                blo.s   loc_312D4
+                blo.s   SKConveyorBelt_DetachAndSetRegrabDelay
                 cmp.w   $42(a0),d0
-                bhs.s   loc_312D4
+                bhs.s   SKConveyorBelt_DetachAndSetRegrabDelay
                 bsr.w   PositionPlayerAroundHczConveyor
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -148,20 +148,21 @@ loc_31296:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_312C0:
+SKConveyorBelt_PickReleaseJumpSpeed:
                 move.w  #-$500,y_vel(a1)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_312D4
+                beq.s   SKConveyorBelt_DetachAndSetRegrabDelay
                 move.w  #-$200,y_vel(a1)
 
-loc_312D4:
+; Use 90 updates underwater and 60 otherwise
+SKConveyorBelt_DetachAndSetRegrabDelay:
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_312EA
+                beq.s   SKConveyorBelt_SetDetachedJumpState
                 move.b  #90,2(a2)
 
-loc_312EA:
+SKConveyorBelt_SetDetachedJumpState:
                 andi.b  #$FC,object_control(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -174,36 +175,36 @@ loc_312EA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_31322:
+SKConveyorBelt_TickRegrabDelay:
                 tst.b   2(a2)
-                beq.s   loc_3132E
+                beq.s   SKConveyorBelt_CheckXAndPickEntry
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3132E:
+SKConveyorBelt_CheckXAndPickEntry:
                 move.w  x_pos(a1),d0
                 cmp.w   $40(a0),d0
-                blo.w   locret_313D4
+                blo.w   SKConveyorBelt_CaptureReturn
                 cmp.w   $42(a0),d0
-                bhs.w   locret_313D4
+                bhs.w   SKConveyorBelt_CaptureReturn
                 cmpi.w  #1,ground_vel(a1)
-                beq.w   loc_313D6
+                beq.w   SKConveyorBelt_TryCaptureFromAbove
                 move.w  y_pos(a0),d0
                 addi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   locret_313D4
+                bhs.s   SKConveyorBelt_CaptureReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                blo.s   locret_313D4
+                blo.s   SKConveyorBelt_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_313D4
+                bne.s   SKConveyorBelt_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_313D4
+                bhs.s   SKConveyorBelt_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_313D4
+                bne.s   SKConveyorBelt_CaptureReturn
                 tst.w   y_vel(a1)
-                bmi.s   locret_313D4
+                bmi.s   SKConveyorBelt_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -224,24 +225,25 @@ loc_3132E:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
 
-locret_313D4:
+SKConveyorBelt_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_313D6:
+; The caller selects this path for a ground velocity word of exactly 1
+SKConveyorBelt_TryCaptureFromAbove:
                 move.w  y_pos(a0),d0
                 subi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   locret_313D4
+                bhs.s   SKConveyorBelt_CaptureReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                blo.s   locret_313D4
+                blo.s   SKConveyorBelt_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_313D4
+                bne.s   SKConveyorBelt_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_313D4
+                bhs.s   SKConveyorBelt_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_313D4
+                bne.s   SKConveyorBelt_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -268,62 +270,62 @@ loc_313D6:
 
 PositionPlayerAroundHczConveyor:
                 tst.w   ground_vel(a1)
-                bne.s   loc_31480
+                bne.s   SKConveyorBelt_StepTowardHalfTurn
                 move.b  4(a2),d0
-                beq.s   loc_3147E
-                bpl.s   loc_31472
+                beq.s   SKConveyorBelt_JoinPoseAtZeroTarget
+                bpl.s   SKConveyorBelt_StepPhaseDownToZero
                 addi.b  #6,d0
-                bcc.s   loc_31470
+                bcc.s   SKConveyorBelt_JoinZeroPhaseStore
                 moveq   #0,d0
 
-loc_31470:
-                bra.s   loc_3147A
+SKConveyorBelt_JoinZeroPhaseStore:
+                bra.s   SKConveyorBelt_StorePhaseTowardZero
 ; ---------------------------------------------------------------------------
 
-loc_31472:
+SKConveyorBelt_StepPhaseDownToZero:
                 subi.b  #6,d0
-                bcc.s   loc_3147A
+                bcc.s   SKConveyorBelt_StorePhaseTowardZero
                 moveq   #0,d0
 
-loc_3147A:
+SKConveyorBelt_StorePhaseTowardZero:
                 move.b  d0,4(a2)
 
-loc_3147E:
-                bra.s   loc_314AA
+SKConveyorBelt_JoinPoseAtZeroTarget:
+                bra.s   SKConveyorBelt_PickRiderFrameAndY
 ; ---------------------------------------------------------------------------
 
-loc_31480:
+SKConveyorBelt_StepTowardHalfTurn:
                 clr.w   ground_vel(a1)
                 move.b  4(a2),d0
                 subi.b  #$80,d0
-                beq.s   loc_314AA
-                bpl.s   loc_3149A
+                beq.s   SKConveyorBelt_PickRiderFrameAndY
+                bpl.s   SKConveyorBelt_StepHalfTurnResidualDown
                 addi.b  #6,d0
-                bcc.s   loc_31498
+                bcc.s   SKConveyorBelt_JoinHalfTurnStore
                 moveq   #0,d0
 
-loc_31498:
-                bra.s   loc_314A2
+SKConveyorBelt_JoinHalfTurnStore:
+                bra.s   SKConveyorBelt_StorePhaseTowardHalfTurn
 ; ---------------------------------------------------------------------------
 
-loc_3149A:
+SKConveyorBelt_StepHalfTurnResidualDown:
                 subi.b  #6,d0
-                bcc.s   loc_314A2
+                bcc.s   SKConveyorBelt_StorePhaseTowardHalfTurn
                 moveq   #0,d0
 
-loc_314A2:
+SKConveyorBelt_StorePhaseTowardHalfTurn:
                 addi.b  #$80,d0
                 move.b  d0,4(a2)
 
-loc_314AA:
+SKConveyorBelt_PickRiderFrameAndY:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 lsr.b   #4,d0
                 add.b   8(a2),d0
-                move.b  byte_314D2(pc,d0.w),d1
+                move.b  SKConveyorBelt_RiderFrameBanks(pc,d0.w),d1
                 move.b  d1,mapping_frame(a1)
                 andi.w  #$F,d0
-                move.b  byte_314F2(pc,d0.w),d1
+                move.b  SKConveyorBelt_RiderOffsetsByPhase(pc,d0.w),d1
                 ext.w   d1
                 add.w   y_pos(a0),d1
                 move.w  d1,y_pos(a1)
@@ -331,10 +333,10 @@ loc_314AA:
 ; End of function PositionPlayerAroundHczConveyor
 
 ; ---------------------------------------------------------------------------
-byte_314D2:
+SKConveyorBelt_RiderFrameBanks:
                 dc.b    $94, $63, $64, $64, $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68, $95, $63, $64, $64
                 dc.b    $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68
-byte_314F2:
+SKConveyorBelt_RiderOffsetsByPhase:
                 dc.b    $14, $14,  $B,  $B, -$F, -$F, -$F,-$14,-$14,-$14,-$14, -$C, -$C, -$C,  -2,  -2
 ; ---------------------------------------------------------------------------
 
@@ -343,7 +345,7 @@ Obj_HCZConveryorSpike:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lsl.w   #2,d0
-                lea     word_31124(pc),a1
+                lea     SKConveyorBelt_ExtentsBySubtype(pc),a1
                 lea     (a1,d0.w),a1
                 move.w  (a1)+,$3C(a0)
                 move.w  (a1)+,$3E(a0)
@@ -357,69 +359,69 @@ Obj_HCZConveryorSpike:
                 move.w  x_pos(a0),$30(a0)
                 move.w  y_pos(a0),$32(a0)
                 btst    #0,status(a0)
-                beq.s   loc_3156E
+                beq.s   SKConveyorBelt_StartSpikeUpperRun
                 addi.w  #$18,y_pos(a0)
-                move.l  #loc_315D2,(a0)
-                bra.w   loc_315D2
+                move.l  #SKConveyorBelt_StepSpikeLeft,(a0)
+                bra.w   SKConveyorBelt_StepSpikeLeft
 ; ---------------------------------------------------------------------------
 
-loc_3156E:
+SKConveyorBelt_StartSpikeUpperRun:
                 subi.w  #$18,y_pos(a0)
                 move.w  #$40,angle(a0)
-                move.l  #loc_31580,(a0)
+                move.l  #SKConveyorBelt_StepSpikeRight,(a0)
 
-loc_31580:
+SKConveyorBelt_StepSpikeRight:
                 addq.w  #2,x_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $3E(a0),d0
-                bne.s   loc_3159A
-                move.l  #loc_3159E,(a0)
+                bne.s   SKConveyorBelt_JoinSpikeDrawFromRight
+                move.l  #SKConveyorBelt_StepSpikeRightTurn,(a0)
                 move.w  x_pos(a0),$30(a0)
 
-loc_3159A:
-                bra.w   loc_31626
+SKConveyorBelt_JoinSpikeDrawFromRight:
+                bra.w   SKConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_3159E:
+SKConveyorBelt_StepSpikeRightTurn:
                 subq.w  #2,angle(a0)
                 andi.w  #$7E,angle(a0)
                 move.w  angle(a0),d0
-                bne.s   loc_315B4
-                move.l  #loc_315D2,(a0)
+                bne.s   SKConveyorBelt_PlaceSpikeOnRightArc
+                move.l  #SKConveyorBelt_StepSpikeLeft,(a0)
 
-loc_315B4:
-                lea     word_31664(pc),a1
+SKConveyorBelt_PlaceSpikeOnRightArc:
+                lea     SKConveyorBelt_SpikeArcCoordinates(pc),a1
                 move.w  (a1,d0.w),d1
                 move.w  $20(a1,d0.w),d2
                 add.w   $30(a0),d1
                 add.w   $32(a0),d2
                 move.w  d1,x_pos(a0)
                 move.w  d2,y_pos(a0)
-                bra.s   loc_31626
+                bra.s   SKConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_315D2:
+SKConveyorBelt_StepSpikeLeft:
                 subq.w  #2,x_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $3C(a0),d0
-                bne.s   loc_315EC
-                move.l  #loc_315EE,(a0)
+                bne.s   SKConveyorBelt_JoinSpikeDrawFromLeft
+                move.l  #SKConveyorBelt_StepSpikeLeftTurn,(a0)
                 move.w  x_pos(a0),$30(a0)
 
-loc_315EC:
-                bra.s   loc_31626
+SKConveyorBelt_JoinSpikeDrawFromLeft:
+                bra.s   SKConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_315EE:
+SKConveyorBelt_StepSpikeLeftTurn:
                 subq.w  #2,angle(a0)
                 andi.w  #$7E,angle(a0)
                 move.w  angle(a0),d0
                 cmpi.w  #$40,angle(a0)
-                bne.s   loc_3160A
-                move.l  #loc_31580,(a0)
+                bne.s   SKConveyorBelt_PlaceSpikeOnLeftArc
+                move.l  #SKConveyorBelt_StepSpikeRight,(a0)
 
-loc_3160A:
-                lea     word_31664(pc),a1
+SKConveyorBelt_PlaceSpikeOnLeftArc:
+                lea     SKConveyorBelt_SpikeArcCoordinates(pc),a1
                 move.w  (a1,d0.w),d1
                 move.w  2*$10(a1,d0.w),d2
                 add.w   $30(a0),d1
@@ -427,31 +429,32 @@ loc_3160A:
                 move.w  d1,x_pos(a0)
                 move.w  d2,y_pos(a0)
 
-loc_31626:
+SKConveyorBelt_CullOrDrawSpike:
                 move.w  (Camera_X_pos_coarse_back).w,d1
                 move.w  $3C(a0),d0
                 andi.w  #$FF80,d0
                 subi.w  #$280,d0
                 cmp.w   d0,d1
-                blo.s   loc_31652
+                blo.s   SKConveyorBelt_ClearSpikeRespawn
                 move.w  $3E(a0),d0
                 andi.w  #$FF80,d0
                 cmp.w   d0,d1
-                bhi.s   loc_31652
+                bhi.s   SKConveyorBelt_ClearSpikeRespawn
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_31652:
+SKConveyorBelt_ClearSpikeRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_3165E
+                beq.s   SKConveyorBelt_DeleteSpike
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_3165E:
+SKConveyorBelt_DeleteSpike:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_31664:
+; The X and Y lookups share this table with a $20-byte displacement
+SKConveyorBelt_SpikeArcCoordinates:
                 dc.w    0,     2,     4,     6,     9,    $B,    $D,    $F,   $10,   $12,   $13,   $15,   $16,   $16,   $17,   $17
                 dc.w    $18,   $17,   $17,   $16,   $16,   $15,   $13,   $12,   $10,    $F,    $D,    $B,     9,     6,     4,     2
                 dc.w    0,    -3,    -5,    -7,   -$A,   -$C,   -$E,  -$10,  -$11,  -$13,  -$14,  -$16,  -$17,  -$17,  -$18,  -$18

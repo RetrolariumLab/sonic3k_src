@@ -2,57 +2,57 @@
 ; Responsibility: Hydrocity twisting-loop geometry, player capture, scripted movement and release
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_39006:
+SKTwistingLoop_ShortRouteStates:
                 dc.b    2,   4,   4,   4,   4,   4,  $C,   0
                 even
-byte_3900E:
+SKTwistingLoop_LongRouteStates:
                 dc.b    2,   4,   6,   6,   6,   6,   8,   8,   8,   8,  $A,  $A,   0
                 even
-byte_3901C:
+SKTwistingLoop_SingleExitRouteStates:
                 dc.b    2,   4,   6,   6,   6,   6,   8,   8,   8,   8,  $A,   0
                 even
-byte_39028:
+SKTwistingLoop_ExtendedRouteStates:
                 dc.b    2,   4,   6,   6,   6,   6,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,   8,  $E,   0
                 even
 ; ---------------------------------------------------------------------------
-word_3903C:
+SKTwistingLoop_RouteOriginRecords:
                 dc.w    $840
                 dc.w    $120
-                dc.l    byte_39006
+                dc.l    SKTwistingLoop_ShortRouteStates
                 dc.w    $1540
                 dc.w    $620
-                dc.l    byte_3900E
+                dc.l    SKTwistingLoop_LongRouteStates
                 dc.w    $1740
                 dc.w    $3A0
-                dc.l    byte_3900E
+                dc.l    SKTwistingLoop_LongRouteStates
                 dc.w    $1CC0
                 dc.w    $620
-                dc.l    byte_39006
+                dc.l    SKTwistingLoop_ShortRouteStates
                 dc.w    $1FC0
                 dc.w    $2A0
-                dc.l    byte_3901C
+                dc.l    SKTwistingLoop_SingleExitRouteStates
                 dc.w    $24C0
                 dc.w    $220
-                dc.l    byte_39028
+                dc.l    SKTwistingLoop_ExtendedRouteStates
                 dc.w    $26C0
                 dc.w    $120
-                dc.l    byte_39006
+                dc.l    SKTwistingLoop_ShortRouteStates
                 dc.w    $3040
                 dc.w    $620
-                dc.l    byte_3900E
+                dc.l    SKTwistingLoop_LongRouteStates
 ; ---------------------------------------------------------------------------
 
 Obj_HCZTwistingLoop:
                 move.b  subtype(a0),d0
                 andi.w  #$7F,d0
                 lsl.w   #3,d0
-                lea     word_3903C(pc,d0.w),a1
+                lea     SKTwistingLoop_RouteOriginRecords(pc,d0.w),a1
                 move.w  (a1)+,$30(a0)
                 move.w  (a1)+,$32(a0)
                 move.l  (a1)+,$40(a0)
-                move.l  #loc_3909C,(a0)
+                move.l  #SKTwistingLoop_UpdateRidersAndTryCull,(a0)
 
-loc_3909C:
+SKTwistingLoop_UpdateRidersAndTryCull:
                 lea     (Player_1).w,a1
                 lea     $34(a0),a4
                 bsr.s   UpdatePlayerOnHczTwistingLoop
@@ -61,11 +61,11 @@ loc_3909C:
                 bsr.s   UpdatePlayerOnHczTwistingLoop
                 move.b  $34(a0),d0
                 add.b   $3A(a0),d0
-                beq.s   loc_390BC
+                beq.s   SKTwistingLoop_CullInactiveLoop
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_390BC:
+SKTwistingLoop_CullInactiveLoop:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -73,66 +73,66 @@ loc_390BC:
 UpdatePlayerOnHczTwistingLoop:
                 moveq   #0,d0
                 move.b  (a4),d0
-                move.w  off_390F2(pc,d0.w),d0
-                jsr     off_390F2(pc,d0.w)
+                move.w  SKTwistingLoop_RiderStateOffsets(pc,d0.w),d0
+                jsr     SKTwistingLoop_RiderStateOffsets(pc,d0.w)
                 tst.b   (a4)
-                beq.s   locret_390F0
+                beq.s   SKTwistingLoop_LoopUpdateReturn
                 bsr.w   UpdateHczTwistingLoopPlayerVelocity
                 moveq   #0,d0
                 move.w  2(a4),d0
                 divu.w  #$60,d0
                 movea.l $40(a0),a2
                 move.b  (a2,d0.w),(a4)
-                bne.s   locret_390F0
+                bne.s   SKTwistingLoop_LoopUpdateReturn
                 move.b  #0,object_control(a1)
 
-locret_390F0:
+SKTwistingLoop_LoopUpdateReturn:
                 rts
 ; End of function UpdatePlayerOnHczTwistingLoop
 
 ; ---------------------------------------------------------------------------
-off_390F2:
-                dc.w    loc_39102-off_390F2
-                dc.w    loc_3925C-off_390F2
-                dc.w    loc_392B6-off_390F2
-                dc.w    loc_392EE-off_390F2
-                dc.w    loc_3931E-off_390F2
-                dc.w    loc_3935E-off_390F2
-                dc.w    loc_3938E-off_390F2
-                dc.w    loc_393BE-off_390F2
+SKTwistingLoop_RiderStateOffsets:
+                dc.w    SKTwistingLoop_CheckCaptureDirection-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_CheckReverseEntryEscape-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnSecondCurve-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnMiddleRamp-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnShiftedCurve-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnLongExitRamp-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnShortExitRamp-SKTwistingLoop_RiderStateOffsets
+                dc.w    SKTwistingLoop_PlaceOnExtendedExitRamp-SKTwistingLoop_RiderStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_39102:
+SKTwistingLoop_CheckCaptureDirection:
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_39196
+                bne.w   SKTwistingLoop_CaptureReturn
                 tst.b   subtype(a0)
-                bmi.w   loc_39198
+                bmi.w   SKTwistingLoop_TryReverseEntry
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #8,d0
                 cmpi.w  #$10,d0
-                bhs.s   locret_39196
+                bhs.s   SKTwistingLoop_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$30,d1
-                bhs.s   locret_39196
+                bhs.s   SKTwistingLoop_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_39196
+                bne.s   SKTwistingLoop_CaptureReturn
                 btst    #0,status(a0)
-                beq.s   loc_39152
+                beq.s   SKTwistingLoop_CheckForwardEntrySpeed
                 tst.w   ground_vel(a1)
-                bpl.s   locret_39196
+                bpl.s   SKTwistingLoop_CaptureReturn
                 tst.w   x_vel(a1)
-                bpl.s   locret_39196
+                bpl.s   SKTwistingLoop_CaptureReturn
                 neg.w   ground_vel(a1)
-                bra.s   loc_39158
+                bra.s   SKTwistingLoop_CaptureLoopRider
 ; ---------------------------------------------------------------------------
 
-loc_39152:
+SKTwistingLoop_CheckForwardEntrySpeed:
                 tst.w   ground_vel(a1)
-                bmi.s   locret_39196
+                bmi.s   SKTwistingLoop_CaptureReturn
 
-loc_39158:
+SKTwistingLoop_CaptureLoopRider:
                 addq.b  #2,(a4)
                 move.b  #1,object_control(a1)
                 move.b  #2,anim(a1)
@@ -146,25 +146,25 @@ loc_39158:
                 sub.w   $32(a0),d1
                 move.w  d1,2(a4)
 
-locret_39196:
+SKTwistingLoop_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_39198:
+SKTwistingLoop_TryReverseEntry:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_39196
+                bhs.s   SKTwistingLoop_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$10,d1
                 cmpi.w  #$10,d1
-                bhs.s   locret_39196
+                bhs.s   SKTwistingLoop_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_39196
+                bne.s   SKTwistingLoop_CaptureReturn
                 tst.w   ground_vel(a1)
-                bpl.s   locret_39196
+                bpl.s   SKTwistingLoop_CaptureReturn
                 addq.b  #2,(a4)
                 move.b  #1,object_control(a1)
                 move.b  #2,anim(a1)
@@ -195,48 +195,49 @@ UpdateHczTwistingLoopPlayerVelocity:
                 muls.w  #$50,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a1)
-                bmi.s   loc_39250
+                bmi.s   SKTwistingLoop_ScaleReverseGravity
                 tst.w   d0
-                bpl.s   loc_39242
+                bpl.s   SKTwistingLoop_TryAddForwardGravity
                 asr.l   #2,d0
 
-loc_39242:
+SKTwistingLoop_TryAddForwardGravity:
                 cmpi.w  #$1800,ground_vel(a1)
-                bge.s   locret_3925A
+                bge.s   SKTwistingLoop_VelocityUpdateReturn
                 add.w   d0,ground_vel(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_39250:
+SKTwistingLoop_ScaleReverseGravity:
                 tst.w   d0
-                bmi.s   loc_39256
+                bmi.s   SKTwistingLoop_AddSignedGravity
                 asr.l   #2,d0
 
-loc_39256:
+SKTwistingLoop_AddSignedGravity:
                 add.w   d0,ground_vel(a1)
 
-locret_3925A:
+SKTwistingLoop_VelocityUpdateReturn:
                 rts
 ; End of function UpdateHczTwistingLoopPlayerVelocity
 
 ; ---------------------------------------------------------------------------
 
-loc_3925C:
+SKTwistingLoop_CheckReverseEntryEscape:
                 move.w  2(a4),d0
                 subi.w  #$16,d0
-                bcc.s   loc_39282
+                bcc.s   SKTwistingLoop_PlaceOnEntryCurve
                 tst.w   ground_vel(a1)
-                bpl.s   loc_39280
+                bpl.s   SKTwistingLoop_ClampEntryCurveParam
                 move.b  #0,(a4)
                 move.b  #0,object_control(a1)
                 move.b  #$70,angle(a1)
                 bra.w   UpdateHczTwistingLoopPlayerVelocity
 ; ---------------------------------------------------------------------------
 
-loc_39280:
+; Clamp the local parameter in d0 while leaving stored progress intact
+SKTwistingLoop_ClampEntryCurveParam:
                 moveq   #0,d0
 
-loc_39282:
+SKTwistingLoop_PlaceOnEntryCurve:
                 mulu.w  #$DD,d0
                 lsr.w   #8,d0
                 jsr     (GetSineCosine).l
@@ -254,7 +255,7 @@ loc_39282:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_392B6:
+SKTwistingLoop_PlaceOnSecondCurve:
                 move.w  2(a4),d0
                 mulu.w  #$AA,d0
                 asr.w   #8,d0
@@ -273,7 +274,7 @@ loc_392B6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_392EE:
+SKTwistingLoop_PlaceOnMiddleRamp:
                 move.w  2(a4),d0
                 subi.w  #$C0,d0
                 muls.w  #$AA,d0
@@ -290,7 +291,7 @@ loc_392EE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3931E:
+SKTwistingLoop_PlaceOnShiftedCurve:
                 move.w  2(a4),d0
                 subi.w  #$180,d0
                 mulu.w  #$AA,d0
@@ -311,7 +312,7 @@ loc_3931E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3935E:
+SKTwistingLoop_PlaceOnLongExitRamp:
                 move.w  2(a4),d0
                 subi.w  #$240,d0
                 muls.w  #$AA,d0
@@ -328,7 +329,7 @@ loc_3935E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3938E:
+SKTwistingLoop_PlaceOnShortExitRamp:
                 move.w  2(a4),d0
                 subi.w  #$240,d0
                 muls.w  #$AA,d0
@@ -345,7 +346,7 @@ loc_3938E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_393BE:
+SKTwistingLoop_PlaceOnExtendedExitRamp:
                 move.w  2(a4),d0
                 subi.w  #$540,d0
                 muls.w  #$AA,d0
@@ -362,7 +363,7 @@ loc_393BE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_393EE:
+SKSnowboard_InitSonicAndTrySnow:
                 move.w  #make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
                 move.l  #Map_SonicSnowboard,mappings(a0)
                 move.w  #$100,priority(a0)
@@ -372,23 +373,23 @@ loc_393EE:
                 move.b  #6,mapping_frame(a0)
                 move.w  #1,anim(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_39434
+                bne.w   SKSnowboard_StartFollowUntilGrounded
                 move.l  #loc_398E0,(a1)
                 move.w  a0,$30(a1)
 
-loc_39434:
-                move.l  #loc_3943A,(a0)
+SKSnowboard_StartFollowUntilGrounded:
+                move.l  #SKSnowboard_FollowUntilLanding,(a0)
 
-loc_3943A:
+SKSnowboard_FollowUntilLanding:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_3945E
+                bne.s   SKSnowboard_AnimateAndDrawInitialFollow
                 move.b  #1,anim(a0)
-                move.l  #loc_394A0,(a0)
+                move.l  #SKSnowboard_FollowAndPickSlopeAnim,(a0)
 
-loc_3945E:
+SKSnowboard_AnimateAndDrawInitialFollow:
                 lea     (Ani_SonicSnowboard).l,a1
                 jsr     (Animate_Sprite).l
                 jsr     (QueueIczSnowboardingSonicFrameArt).l
@@ -398,7 +399,7 @@ Ani_SonicSnowboard:
                 include "src/objects/shared/sonic/animations/snowboard.s"
 ; ---------------------------------------------------------------------------
 
-loc_394A0:
+SKSnowboard_FollowAndPickSlopeAnim:
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
@@ -406,75 +407,75 @@ loc_394A0:
                 move.b  angle(a2),d0
                 addq.b  #5,d0
                 lsr.w   #4,d0
-                move.b  byte_394F2(pc,d0.w),anim(a0)
+                move.b  SKSnowboard_GroundAnimByAngle(pc,d0.w),anim(a0)
                 btst    #Status_InAir,status(a2)
-                beq.s   loc_39502
+                beq.s   SKSnowboard_TryQuietSkidSound
                 move.b  #0,anim(a0)
                 tst.w   x_vel(a2)
-                beq.s   loc_394E2
+                beq.s   SKSnowboard_ClampUpwardSpeed
                 cmpi.w  #$1000,x_vel(a2)
-                blt.s   loc_394E2
+                blt.s   SKSnowboard_ClampUpwardSpeed
                 move.w  #$1000,x_vel(a2)
 
-loc_394E2:
+SKSnowboard_ClampUpwardSpeed:
                 cmpi.w  #-$200,y_vel(a2)
-                bge.s   loc_39554
+                bge.s   SKSnowboard_AnimateAndCheckSpeed
                 move.w  #-$200,y_vel(a2)
-                bra.s   loc_39554
+                bra.s   SKSnowboard_AnimateAndCheckSpeed
 ; ---------------------------------------------------------------------------
-byte_394F2:
+SKSnowboard_GroundAnimByAngle:
                 dc.b    4,   5,   2,   1,   1,   1,   1,   1,   0,   1,   2,   0,   1,   2,   0,   4
 ; ---------------------------------------------------------------------------
 
-loc_39502:
+SKSnowboard_TryQuietSkidSound:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_39514
+                bne.s   SKSnowboard_TryPickSlopeScript
                 moveq   #signextendB(sfx_SlideSkidQuiet),d0
                 jsr     (Play_SFX).l
 
-loc_39514:
+SKSnowboard_TryPickSlopeScript:
                 cmpi.w  #$1310,x_pos(a2)
-                blo.s   loc_39554
+                blo.s   SKSnowboard_AnimateAndCheckSpeed
                 moveq   #1,d0
                 cmpi.w  #$1330,x_pos(a2)
-                blo.s   loc_39538
+                blo.s   SKSnowboard_StartNewSlopeScript
                 cmpi.w  #$2210,x_pos(a2)
-                blo.s   loc_39554
+                blo.s   SKSnowboard_AnimateAndCheckSpeed
                 cmpi.w  #$2230,x_pos(a2)
-                bhs.s   loc_39554
+                bhs.s   SKSnowboard_AnimateAndCheckSpeed
                 moveq   #2,d0
 
-loc_39538:
+SKSnowboard_StartNewSlopeScript:
                 cmp.b   $36(a0),d0
-                beq.s   loc_39554
+                beq.s   SKSnowboard_AnimateAndCheckSpeed
                 move.b  d0,$36(a0)
                 move.b  #3,object_control(a2)
-                move.l  #loc_395FE,(a0)
+                move.l  #SKSnowboard_ReadNextSlopeRecord,(a0)
                 move.w  #0,$34(a0)
 
-loc_39554:
+SKSnowboard_AnimateAndCheckSpeed:
                 lea     (Ani_SonicSnowboard).l,a1
                 jsr     (Animate_Sprite).l
                 cmpi.b  #8,mapping_frame(a0)
-                bne.s   loc_39578
+                bne.s   SKSnowboard_EnforceMinGroundSpeed
                 cmpi.w  #$1000,ground_vel(a2)
-                blt.s   loc_39578
+                blt.s   SKSnowboard_EnforceMinGroundSpeed
                 subi.w  #8,ground_vel(a2)
-                bra.s   loc_39586
+                bra.s   SKSnowboard_TryTriggerCrash
 ; ---------------------------------------------------------------------------
 
-loc_39578:
+SKSnowboard_EnforceMinGroundSpeed:
                 cmpi.w  #$1000,ground_vel(a2)
-                bge.s   loc_39586
+                bge.s   SKSnowboard_TryTriggerCrash
                 move.w  #$1000,ground_vel(a2)
 
-loc_39586:
+SKSnowboard_TryTriggerCrash:
                 cmpi.w  #$3880,x_pos(a2)
-                blo.s   loc_395CC
+                blo.s   SKSnowboard_CheckGroundedSlideFrame
                 tst.w   x_vel(a2)
-                bne.s   loc_395CC
-                move.l  #loc_39676,(a0)
+                bne.s   SKSnowboard_CheckGroundedSlideFrame
+                move.l  #SKSnowboard_DeleteCrashedVisual,(a0)
                 bset    #Status_InAir,status(a2)
                 move.w  #-$200,x_vel(a2)
                 move.w  #-$400,y_vel(a2)
@@ -485,36 +486,36 @@ loc_39586:
                 jsr     (Play_SFX).l
                 move.w  #2,(Tails_CPU_routine).w
 
-loc_395CC:
+SKSnowboard_CheckGroundedSlideFrame:
                 btst    #Status_InAir,status(a2)
-                bne.s   loc_395F2
+                bne.s   SKSnowboard_QueueArtAndDraw
                 move.b  mapping_frame(a0),d0
                 cmp.b   $32(a0),d0
-                beq.s   loc_395F2
+                beq.s   SKSnowboard_QueueArtAndDraw
                 cmpi.b  #7,d0
-                beq.s   loc_395EA
+                beq.s   SKSnowboard_PlayGroundSlideSound
                 cmpi.b  #8,d0
-                bne.s   loc_395F2
+                bne.s   SKSnowboard_QueueArtAndDraw
 
-loc_395EA:
+SKSnowboard_PlayGroundSlideSound:
                 moveq   #signextendB(sfx_GroundSlide),d0
                 jsr     (Play_SFX).l
 
-loc_395F2:
+SKSnowboard_QueueArtAndDraw:
                 jsr     (QueueIczSnowboardingSonicFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_395FE:
+SKSnowboard_ReadNextSlopeRecord:
                 lea     (Player_1).w,a2
                 move.w  $34(a0),d0
                 addq.w  #6,$34(a0)
                 lea     (ICZSnowboard_Slope1).l,a1
                 cmpi.b  #1,$36(a0)
-                beq.s   loc_3961E
+                beq.s   SKSnowboard_ApplySlopeRecord
                 lea     (ICZSnowboard_Slope2).l,a1
 
-loc_3961E:
+SKSnowboard_ApplySlopeRecord:
                 lea     (a1,d0.w),a1
                 move.w  (a1)+,d0
                 move.w  d0,x_pos(a0)
@@ -525,25 +526,25 @@ loc_3961E:
                 move.w  (a1)+,d0
                 move.b  d0,mapping_frame(a0)
                 tst.w   (a1)
-                bpl.s   loc_39658
+                bpl.s   SKSnowboard_TryScriptedSlideSound
                 move.b  #$E,top_solid_bit(a2)
                 move.b  #$F,lrb_solid_bit(a2)
                 move.b  #2,object_control(a2)
-                move.l  #loc_394A0,(a0)
+                move.l  #SKSnowboard_FollowAndPickSlopeAnim,(a0)
 
-loc_39658:
+SKSnowboard_TryScriptedSlideSound:
                 move.b  mapping_frame(a0),d0
                 cmp.b   $32(a0),d0
-                beq.s   loc_3966A
+                beq.s   SKSnowboard_QueueScriptedArtAndDraw
                 moveq   #signextendB(sfx_GroundSlide),d0
                 jsr     (Play_SFX).l
 
-loc_3966A:
+SKSnowboard_QueueScriptedArtAndDraw:
                 jsr     (QueueIczSnowboardingSonicFrameArt).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_39676:
+SKSnowboard_DeleteCrashedVisual:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -552,7 +553,7 @@ QueueIczSnowboardFrameArt:
                 move.w  #tiles_to_bytes(ArtTile_Snowboard),d4
                 move.l  #ArtUnc_Snowboard,d6
                 lea     (DPLC_Snowboard).l,a2
-                bra.s   loc_3969E
+                bra.s   SKSnowboard_CheckFrameAndReadDplc
 ; End of function QueueIczSnowboardFrameArt
 
 ; =============== S U B R O U T I N E =======================================
@@ -562,19 +563,19 @@ QueueIczSnowboardingSonicFrameArt:
                 move.l  #ArtUnc_SonicSnowboard,d6
                 lea     (DPLC_SonicSnowboard).l,a2
 
-loc_3969E:
+SKSnowboard_CheckFrameAndReadDplc:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $32(a0),d0
-                beq.s   locret_396E2
+                beq.s   SKSnowboard_DplcReturn
                 move.b  d0,$32(a0)
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_396E2
+                bmi.s   SKSnowboard_DplcReturn
 
-loc_396BA:
+SKSnowboard_DecodeAndQueueDplc:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -588,8 +589,8 @@ loc_396BA:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_396BA
+                dbf     d5,SKSnowboard_DecodeAndQueueDplc
 
-locret_396E2:
+SKSnowboard_DplcReturn:
                 rts
 ; End of function QueueIczSnowboardingSonicFrameArt

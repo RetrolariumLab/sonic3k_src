@@ -2,7 +2,7 @@
 ; Responsibility: Hydrocity conveyor belt player transport and coordinated conveyor spike motion
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-word_2FD7E:
+S3ConveyorBelt_ExtentsBySubtype:
                 dc.w    $B28,  $CD8
                 dc.w    $BA8,  $CD8
                 dc.w    $BA8,  $CD8
@@ -26,40 +26,40 @@ Obj_HCZConveyorBelt:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 tst.b   (a1,d0.w)
-                beq.s   loc_2FDE0
+                beq.s   S3ConveyorBelt_ClaimLoadSlotAndSetLeft
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2FDDA
+                beq.s   S3ConveyorBelt_DeleteDuplicateController
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2FDDA:
+S3ConveyorBelt_DeleteDuplicateController:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FDE0:
+S3ConveyorBelt_ClaimLoadSlotAndSetLeft:
                 move.b  #1,(a1,d0.w)
                 andi.w  #$F,d0
                 lsl.w   #2,d0
-                lea     word_2FD7E(pc,d0.w),a1
+                lea     S3ConveyorBelt_ExtentsBySubtype(pc,d0.w),a1
                 move.w  (a1)+,d0
                 move.w  d0,$3C(a0)
                 btst    #0,status(a0)
-                bne.s   loc_2FE00
+                bne.s   S3ConveyorBelt_SetCaptureLeftAndRight
                 subq.w  #8,d0
 
-loc_2FE00:
+S3ConveyorBelt_SetCaptureLeftAndRight:
                 move.w  d0,$40(a0)
                 move.w  (a1)+,d0
                 move.w  d0,$3E(a0)
                 btst    #0,status(a0)
-                beq.s   loc_2FE14
+                beq.s   S3ConveyorBelt_StartInvisibleController
                 addq.w  #8,d0
 
-loc_2FE14:
+S3ConveyorBelt_StartInvisibleController:
                 move.w  d0,$42(a0)
-                move.l  #loc_2FE1E,(a0)
+                move.l  #S3ConveyorBelt_UpdateRidersAndCull,(a0)
 
-loc_2FE1E:
+S3ConveyorBelt_UpdateRidersAndCull:
                 lea     $32(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d1
@@ -75,70 +75,70 @@ loc_2FE1E:
                 andi.w  #$FF80,d0
                 subi.w  #$280,d0
                 cmp.w   d0,d1
-                blo.s   loc_2FE5E
+                blo.s   S3ConveyorBelt_ClearLoadSlotAndRespawn
                 move.w  $3E(a0),d0
                 andi.w  #$FF80,d0
                 cmp.w   d0,d1
-                bhi.s   loc_2FE5E
+                bhi.s   S3ConveyorBelt_ClearLoadSlotAndRespawn
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FE5E:
+S3ConveyorBelt_ClearLoadSlotAndRespawn:
                 lea     (Conveyor_belt_load_array).w,a1
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  #0,(a1,d0.w)
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2FE7A
+                beq.s   S3ConveyorBelt_DeleteController
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2FE7A:
+S3ConveyorBelt_DeleteController:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdatePlayerOnHczConveyorBelt:
                 tst.b   (a2)
-                beq.w   loc_2FF7C
+                beq.w   S3ConveyorBelt_TickRegrabDelay
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_2FF2E
+                bne.w   S3ConveyorBelt_DetachAndSetRegrabDelay
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_2FF2E
+                bhs.w   S3ConveyorBelt_DetachAndSetRegrabDelay
                 btst    #button_left+8,d1
-                beq.s   loc_2FEBA
+                beq.s   S3ConveyorBelt_TryWalkRight
                 subq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_2FEBA
+                bpl.s   S3ConveyorBelt_TryWalkRight
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_2FEBA:
+S3ConveyorBelt_TryWalkRight:
                 btst    #button_right+8,d1
-                beq.s   loc_2FEDC
+                beq.s   S3ConveyorBelt_PickJumpOrBeltDrift
                 addq.w  #1,x_pos(a1)
                 subq.b  #1,6(a2)
-                bpl.s   loc_2FEDC
+                bpl.s   S3ConveyorBelt_PickJumpOrBeltDrift
                 move.b  #7,6(a2)
                 addi.b  #$10,8(a2)
                 andi.b  #$10,8(a2)
 
-loc_2FEDC:
+S3ConveyorBelt_PickJumpOrBeltDrift:
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d1
-                bne.w   loc_2FF1A
+                bne.w   S3ConveyorBelt_PickReleaseJumpSpeed
                 moveq   #2,d0
                 btst    #0,status(a0)
-                beq.s   loc_2FEF0
+                beq.s   S3ConveyorBelt_MoveAndPoseRider
                 neg.w   d0
 
-loc_2FEF0:
+S3ConveyorBelt_MoveAndPoseRider:
                 add.w   d0,x_pos(a1)
                 move.w  x_pos(a1),d0
                 cmp.w   $40(a0),d0
-                blo.s   loc_2FF2E
+                blo.s   S3ConveyorBelt_DetachAndSetRegrabDelay
                 cmp.w   $42(a0),d0
-                bhs.s   loc_2FF2E
+                bhs.s   S3ConveyorBelt_DetachAndSetRegrabDelay
                 bsr.w   PositionPlayerAroundHczConveyor
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -148,20 +148,21 @@ loc_2FEF0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FF1A:
+S3ConveyorBelt_PickReleaseJumpSpeed:
                 move.w  #-$500,y_vel(a1)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_2FF2E
+                beq.s   S3ConveyorBelt_DetachAndSetRegrabDelay
                 move.w  #-$200,y_vel(a1)
 
-loc_2FF2E:
+; Use 90 updates underwater and 60 otherwise
+S3ConveyorBelt_DetachAndSetRegrabDelay:
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_2FF44
+                beq.s   S3ConveyorBelt_SetDetachedJumpState
                 move.b  #90,2(a2)
 
-loc_2FF44:
+S3ConveyorBelt_SetDetachedJumpState:
                 andi.b  #$FC,object_control(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -174,36 +175,36 @@ loc_2FF44:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FF7C:
+S3ConveyorBelt_TickRegrabDelay:
                 tst.b   2(a2)
-                beq.s   loc_2FF88
+                beq.s   S3ConveyorBelt_CheckXAndPickEntry
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FF88:
+S3ConveyorBelt_CheckXAndPickEntry:
                 move.w  x_pos(a1),d0
                 cmp.w   $40(a0),d0
-                blo.w   locret_3002E
+                blo.w   S3ConveyorBelt_CaptureReturn
                 cmp.w   $42(a0),d0
-                bhs.w   locret_3002E
+                bhs.w   S3ConveyorBelt_CaptureReturn
                 cmpi.w  #1,ground_vel(a1)
-                beq.w   loc_30030
+                beq.w   S3ConveyorBelt_TryCaptureFromAbove
                 move.w  y_pos(a0),d0
                 addi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   locret_3002E
+                bhs.s   S3ConveyorBelt_CaptureReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                blo.s   locret_3002E
+                blo.s   S3ConveyorBelt_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3002E
+                bne.s   S3ConveyorBelt_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_3002E
+                bhs.s   S3ConveyorBelt_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3002E
+                bne.s   S3ConveyorBelt_CaptureReturn
                 tst.w   y_vel(a1)
-                bmi.s   locret_3002E
+                bmi.s   S3ConveyorBelt_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -224,24 +225,25 @@ loc_2FF88:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
 
-locret_3002E:
+S3ConveyorBelt_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_30030:
+; The caller selects this path for a ground velocity word of exactly 1
+S3ConveyorBelt_TryCaptureFromAbove:
                 move.w  y_pos(a0),d0
                 subi.w  #$14,d0
                 cmp.w   y_pos(a1),d0
-                bhs.s   locret_3002E
+                bhs.s   S3ConveyorBelt_CaptureReturn
                 addi.w  #$10,d0
                 cmp.w   y_pos(a1),d0
-                blo.s   locret_3002E
+                blo.s   S3ConveyorBelt_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_3002E
+                bne.s   S3ConveyorBelt_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_3002E
+                bhs.s   S3ConveyorBelt_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_3002E
+                bne.s   S3ConveyorBelt_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -268,62 +270,62 @@ loc_30030:
 
 PositionPlayerAroundHczConveyor:
                 tst.w   ground_vel(a1)
-                bne.s   loc_300DA
+                bne.s   S3ConveyorBelt_StepTowardHalfTurn
                 move.b  4(a2),d0
-                beq.s   loc_300D8
-                bpl.s   loc_300CC
+                beq.s   S3ConveyorBelt_JoinPoseAtZeroTarget
+                bpl.s   S3ConveyorBelt_StepPhaseDownToZero
                 addi.b  #6,d0
-                bcc.s   loc_300CA
+                bcc.s   S3ConveyorBelt_JoinZeroPhaseStore
                 moveq   #0,d0
 
-loc_300CA:
-                bra.s   loc_300D4
+S3ConveyorBelt_JoinZeroPhaseStore:
+                bra.s   S3ConveyorBelt_StorePhaseTowardZero
 ; ---------------------------------------------------------------------------
 
-loc_300CC:
+S3ConveyorBelt_StepPhaseDownToZero:
                 subi.b  #6,d0
-                bcc.s   loc_300D4
+                bcc.s   S3ConveyorBelt_StorePhaseTowardZero
                 moveq   #0,d0
 
-loc_300D4:
+S3ConveyorBelt_StorePhaseTowardZero:
                 move.b  d0,4(a2)
 
-loc_300D8:
-                bra.s   loc_30104
+S3ConveyorBelt_JoinPoseAtZeroTarget:
+                bra.s   S3ConveyorBelt_PickRiderFrameAndY
 ; ---------------------------------------------------------------------------
 
-loc_300DA:
+S3ConveyorBelt_StepTowardHalfTurn:
                 clr.w   ground_vel(a1)
                 move.b  4(a2),d0
                 subi.b  #$80,d0
-                beq.s   loc_30104
-                bpl.s   loc_300F4
+                beq.s   S3ConveyorBelt_PickRiderFrameAndY
+                bpl.s   S3ConveyorBelt_StepHalfTurnResidualDown
                 addi.b  #6,d0
-                bcc.s   loc_300F2
+                bcc.s   S3ConveyorBelt_JoinHalfTurnStore
                 moveq   #0,d0
 
-loc_300F2:
-                bra.s   loc_300FC
+S3ConveyorBelt_JoinHalfTurnStore:
+                bra.s   S3ConveyorBelt_StorePhaseTowardHalfTurn
 ; ---------------------------------------------------------------------------
 
-loc_300F4:
+S3ConveyorBelt_StepHalfTurnResidualDown:
                 subi.b  #6,d0
-                bcc.s   loc_300FC
+                bcc.s   S3ConveyorBelt_StorePhaseTowardHalfTurn
                 moveq   #0,d0
 
-loc_300FC:
+S3ConveyorBelt_StorePhaseTowardHalfTurn:
                 addi.b  #$80,d0
                 move.b  d0,4(a2)
 
-loc_30104:
+S3ConveyorBelt_PickRiderFrameAndY:
                 moveq   #0,d0
                 move.b  4(a2),d0
                 lsr.b   #4,d0
                 add.b   8(a2),d0
-                move.b  byte_3012C(pc,d0.w),d1
+                move.b  S3ConveyorBelt_RiderFrameBanks(pc,d0.w),d1
                 move.b  d1,mapping_frame(a1)
                 andi.w  #$F,d0
-                move.b  byte_3014C(pc,d0.w),d1
+                move.b  S3ConveyorBelt_RiderOffsetsByPhase(pc,d0.w),d1
                 ext.w   d1
                 add.w   y_pos(a0),d1
                 move.w  d1,y_pos(a1)
@@ -331,10 +333,10 @@ loc_30104:
 ; End of function PositionPlayerAroundHczConveyor
 
 ; ---------------------------------------------------------------------------
-byte_3012C:
+S3ConveyorBelt_RiderFrameBanks:
                 dc.b    $94, $63, $64, $64, $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68, $95, $63, $64, $64
                 dc.b    $65, $65, $65, $66, $66, $66, $66, $67, $67, $67, $68, $68
-byte_3014C:
+S3ConveyorBelt_RiderOffsetsByPhase:
                 dc.b    $14, $14,  $B,  $B, -$F, -$F, -$F,-$14,-$14,-$14,-$14, -$C, -$C, -$C,  -2,  -2
 ; ---------------------------------------------------------------------------
 
@@ -343,7 +345,7 @@ Obj_HCZConveryorSpike:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lsl.w   #2,d0
-                lea     word_2FD7E(pc),a1
+                lea     S3ConveyorBelt_ExtentsBySubtype(pc),a1
                 lea     (a1,d0.w),a1
                 move.w  (a1)+,$3C(a0)
                 move.w  (a1)+,$3E(a0)
@@ -357,69 +359,69 @@ Obj_HCZConveryorSpike:
                 move.w  x_pos(a0),$30(a0)
                 move.w  y_pos(a0),$32(a0)
                 btst    #0,status(a0)
-                beq.s   loc_301C8
+                beq.s   S3ConveyorBelt_StartSpikeUpperRun
                 addi.w  #$18,y_pos(a0)
-                move.l  #loc_3022C,(a0)
-                bra.w   loc_3022C
+                move.l  #S3ConveyorBelt_StepSpikeLeft,(a0)
+                bra.w   S3ConveyorBelt_StepSpikeLeft
 ; ---------------------------------------------------------------------------
 
-loc_301C8:
+S3ConveyorBelt_StartSpikeUpperRun:
                 subi.w  #$18,y_pos(a0)
                 move.w  #$40,angle(a0)
-                move.l  #loc_301DA,(a0)
+                move.l  #S3ConveyorBelt_StepSpikeRight,(a0)
 
-loc_301DA:
+S3ConveyorBelt_StepSpikeRight:
                 addq.w  #2,x_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $3E(a0),d0
-                bne.s   loc_301F4
-                move.l  #loc_301F8,(a0)
+                bne.s   S3ConveyorBelt_JoinSpikeDrawFromRight
+                move.l  #S3ConveyorBelt_StepSpikeRightTurn,(a0)
                 move.w  x_pos(a0),$30(a0)
 
-loc_301F4:
-                bra.w   loc_30280
+S3ConveyorBelt_JoinSpikeDrawFromRight:
+                bra.w   S3ConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_301F8:
+S3ConveyorBelt_StepSpikeRightTurn:
                 subq.w  #2,angle(a0)
                 andi.w  #$7E,angle(a0)
                 move.w  angle(a0),d0
-                bne.s   loc_3020E
-                move.l  #loc_3022C,(a0)
+                bne.s   S3ConveyorBelt_PlaceSpikeOnRightArc
+                move.l  #S3ConveyorBelt_StepSpikeLeft,(a0)
 
-loc_3020E:
-                lea     word_302BE(pc),a1
+S3ConveyorBelt_PlaceSpikeOnRightArc:
+                lea     S3ConveyorBelt_SpikeArcCoordinates(pc),a1
                 move.w  (a1,d0.w),d1
                 move.w  $20(a1,d0.w),d2
                 add.w   $30(a0),d1
                 add.w   $32(a0),d2
                 move.w  d1,x_pos(a0)
                 move.w  d2,y_pos(a0)
-                bra.s   loc_30280
+                bra.s   S3ConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_3022C:
+S3ConveyorBelt_StepSpikeLeft:
                 subq.w  #2,x_pos(a0)
                 move.w  x_pos(a0),d0
                 cmp.w   $3C(a0),d0
-                bne.s   loc_30246
-                move.l  #loc_30248,(a0)
+                bne.s   S3ConveyorBelt_JoinSpikeDrawFromLeft
+                move.l  #S3ConveyorBelt_StepSpikeLeftTurn,(a0)
                 move.w  x_pos(a0),$30(a0)
 
-loc_30246:
-                bra.s   loc_30280
+S3ConveyorBelt_JoinSpikeDrawFromLeft:
+                bra.s   S3ConveyorBelt_CullOrDrawSpike
 ; ---------------------------------------------------------------------------
 
-loc_30248:
+S3ConveyorBelt_StepSpikeLeftTurn:
                 subq.w  #2,angle(a0)
                 andi.w  #$7E,angle(a0)
                 move.w  angle(a0),d0
                 cmpi.w  #$40,angle(a0)
-                bne.s   loc_30264
-                move.l  #loc_301DA,(a0)
+                bne.s   S3ConveyorBelt_PlaceSpikeOnLeftArc
+                move.l  #S3ConveyorBelt_StepSpikeRight,(a0)
 
-loc_30264:
-                lea     word_302BE(pc),a1
+S3ConveyorBelt_PlaceSpikeOnLeftArc:
+                lea     S3ConveyorBelt_SpikeArcCoordinates(pc),a1
                 move.w  (a1,d0.w),d1
                 move.w  2*$10(a1,d0.w),d2
                 add.w   $30(a0),d1
@@ -427,31 +429,32 @@ loc_30264:
                 move.w  d1,x_pos(a0)
                 move.w  d2,y_pos(a0)
 
-loc_30280:
+S3ConveyorBelt_CullOrDrawSpike:
                 move.w  (Camera_X_pos_coarse_back).w,d1
                 move.w  $3C(a0),d0
                 andi.w  #$FF80,d0
                 subi.w  #$280,d0
                 cmp.w   d0,d1
-                blo.s   loc_302AC
+                blo.s   S3ConveyorBelt_ClearSpikeRespawn
                 move.w  $3E(a0),d0
                 andi.w  #$FF80,d0
                 cmp.w   d0,d1
-                bhi.s   loc_302AC
+                bhi.s   S3ConveyorBelt_ClearSpikeRespawn
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_302AC:
+S3ConveyorBelt_ClearSpikeRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_302B8
+                beq.s   S3ConveyorBelt_DeleteSpike
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_302B8:
+S3ConveyorBelt_DeleteSpike:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-word_302BE:
+; The X and Y lookups share this table with a $20-byte displacement
+S3ConveyorBelt_SpikeArcCoordinates:
                 dc.w    0,     2,     4,     6,     9,    $B,    $D,    $F,   $10,   $12,   $13,   $15,   $16,   $16,   $17,   $17
                 dc.w    $18,   $17,   $17,   $16,   $16,   $15,   $13,   $12,   $10,    $F,    $D,    $B,     9,     6,     4,     2
                 dc.w    0,    -3,    -5,    -7,   -$A,   -$C,   -$E,  -$10,  -$11,  -$13,  -$14,  -$16,  -$17,  -$17,  -$18,  -$18

@@ -13,48 +13,48 @@ Obj_Blastoid:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Blastoid_Index:
-                dc.w    loc_55748-Blastoid_Index
-                dc.w    loc_55750-Blastoid_Index
-                dc.w    loc_55774-Blastoid_Index
+                dc.w    S3Blastoid_InitLauncher-Blastoid_Index
+                dc.w    S3Blastoid_WaitForNearbyTarget-Blastoid_Index
+                dc.w    S3Blastoid_AnimateAndTryFire-Blastoid_Index
 ; ---------------------------------------------------------------------------
 
-loc_55748:
+S3Blastoid_InitLauncher:
                 lea     ObjDat_Blastoid(pc),a1
                 jmp     SetUp_ObjAttributes(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55750:
+S3Blastoid_WaitForNearbyTarget:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$80,d2
-                blo.s   loc_5575C
+                blo.s   HCZBlastoidS3_StartPairedFiringSequence
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5575C:
+HCZBlastoidS3_StartPairedFiringSequence:
                 move.b  #4,routine(a0)
-                move.l  #byte_557F6,$30(a0)
-                move.l  #loc_5579E,$34(a0)
+                move.l  #HCZBlastoidS3_PairedLauncherFiringStream,$30(a0)
+                move.l  #S3Blastoid_RestartProximityWait,$34(a0)
 
-locret_55772:
+S3Blastoid_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55774:
+S3Blastoid_AnimateAndTryFire:
                 jsr     Animate_RawMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_55772
-                bmi.s   locret_55772
+                beq.s   S3Blastoid_UpdateReturn
+                bmi.s   S3Blastoid_UpdateReturn
                 cmpi.b  #1,mapping_frame(a0)
-                bne.s   locret_55772
+                bne.s   S3Blastoid_UpdateReturn
                 tst.b   render_flags(a0)
-                bpl.w   locret_55772
+                bpl.w   S3Blastoid_UpdateReturn
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_557DE(pc),a2
+                lea     S3Blastoid_ShotChildRecord(pc),a2
                 jmp     CreateChild5_ComplexAdjusted(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5579E:
+S3Blastoid_RestartProximityWait:
                 move.b  #2,routine(a0)
                 rts
 
@@ -62,7 +62,7 @@ loc_5579E:
 
 ResolveBlastoidContactAndLevelTrigger:
                 jsr     Check_PlayerCollision(pc)
-                beq.w   locret_55772
+                beq.w   S3Blastoid_UpdateReturn
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
@@ -79,20 +79,20 @@ ObjDat_Blastoid:
                 dc.w    make_art_tile(ArtTile_Blastoid,1,1)
                 dc.w    $280
                 dc.b    $14,  $C,   0, $D7
-ObjDat3_557D2:
+HCZBlastoidS3_ProjectileFullAttributes:
                 dc.l    Map_Blastoid
                 dc.w    make_art_tile(ArtTile_Blastoid,1,1)
                 dc.w    $280
                 dc.b    4,   4,   2, $98
-ChildObjDat_557DE:
+S3Blastoid_ShotChildRecord:
                 dc.w    1-1
                 dc.l    S3CallbackShot_InitDeflectable
-                dc.l    ObjDat3_557D2
-                dc.l    byte_55805
+                dc.l    HCZBlastoidS3_ProjectileFullAttributes
+                dc.l    S3Blastoid_ShotAnim
                 dc.l    Move_AnimateRaw
                 dc.b    -$14,  -7
                 dc.w    -$200, -$100
-byte_557F6:
+HCZBlastoidS3_PairedLauncherFiringStream:
                 dc.b    0, $7F
                 dc.b    1,   4
                 dc.b    0,   9
@@ -101,6 +101,6 @@ byte_557F6:
                 dc.b    1,   4
                 dc.b    0, $3F
                 dc.b    $F4
-byte_55805:
+S3Blastoid_ShotAnim:
                 dc.b    0,   2,   3, $FC
                 even

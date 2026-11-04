@@ -14,50 +14,51 @@ Obj_MegaChopper:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 MegaChopper_Index:
-                dc.w    loc_55D66-MegaChopper_Index
-                dc.w    loc_55D8A-MegaChopper_Index
-                dc.w    loc_55E02-MegaChopper_Index
-                dc.w    loc_55E40-MegaChopper_Index
+                dc.w    S3MegaChopper_InitSwimmer-MegaChopper_Index
+                dc.w    S3MegaChopper_AnimateAndPickSwimMotion-MegaChopper_Index
+                dc.w    S3MegaChopper_UpdateLeap-MegaChopper_Index
+                dc.w    S3MegaChopper_PickAttachedFrame-MegaChopper_Index
 ; ---------------------------------------------------------------------------
 
-loc_55D66:
+; Consume the initial vertical flip and use it to select art priority
+S3MegaChopper_InitSwimmer:
                 lea     ObjDat_MegaChopper(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AniRaw_MegaChopper,$30(a0)
                 clr.w   child_dx(a0)                    ; and child_dy
                 bclr    #1,render_flags(a0)
-                beq.s   locret_55D88
+                beq.s   S3MegaChopper_UpdateReturn
                 bset    #7,art_tile(a0)
 
-locret_55D88:
+S3MegaChopper_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55D8A:
+S3MegaChopper_AnimateAndPickSwimMotion:
                 bsr.w   MegaChopper_ResolveLatchedContact
                 jsr     Animate_Raw(pc)
                 jsr     Find_SonicTails(pc)
                 move.b  (V_int_run_count+3).w,d4
                 andi.b  #7,d4
-                bne.s   loc_55DAC
+                bne.s   S3MegaChopper_PickSwimOrLeap
                 moveq   #1,d4
                 tst.w   d1
-                bne.s   loc_55DA8
+                bne.s   S3MegaChopper_StepYTowardTarget
                 neg.w   d4
 
-loc_55DA8:
+S3MegaChopper_StepYTowardTarget:
                 add.w   d4,y_pos(a0)
 
-loc_55DAC:
+S3MegaChopper_PickSwimOrLeap:
                 move.w  y_pos(a0),d4
                 move.w  (Water_level).w,d5
                 addq.w  #8,d5
                 cmp.w   d5,d4
-                bhi.s   loc_55DC2
+                bhi.s   S3MegaChopper_SwimTowardTargetX
                 btst    #Status_Underwater,status(a1)
-                beq.s   loc_55DDA
+                beq.s   S3MegaChopper_PickLeapDirection
 
-loc_55DC2:
+S3MegaChopper_SwimTowardTargetX:
                 move.w  #$200,d0
                 move.w  #8,d1
                 jsr     (Chase_ObjectXOnly).l
@@ -65,70 +66,70 @@ loc_55DC2:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_55DDA:
+S3MegaChopper_PickLeapDirection:
                 move.b  #4,routine(a0)
                 move.w  #$200,d4
                 bset    #0,render_flags(a0)
                 tst.w   d0
-                bne.s   loc_55DF6
+                bne.s   S3MegaChopper_StoreLeapVelocity
                 neg.w   d4
                 bclr    #0,render_flags(a0)
 
-loc_55DF6:
+S3MegaChopper_StoreLeapVelocity:
                 move.w  d4,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55E02:
+S3MegaChopper_UpdateLeap:
                 bsr.w   MegaChopper_ResolveLatchedContact
                 jsr     Animate_Raw(pc)
                 tst.w   y_vel(a0)
-                bmi.s   loc_55E30
+                bmi.s   S3MegaChopper_ApplyLeapGravity
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                blo.s   loc_55E30
+                blo.s   S3MegaChopper_ApplyLeapGravity
                 move.w  y_vel(a0),d0
                 addi.w  #-$20,d0
                 move.w  d0,y_vel(a0)
-                beq.s   loc_55E34
-                bmi.s   loc_55E34
+                beq.s   S3MegaChopper_ResumeSwimming
+                bmi.s   S3MegaChopper_ResumeSwimming
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_55E30:
+S3MegaChopper_ApplyLeapGravity:
                 jmp     MoveSprite_LightGravity(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55E34:
+S3MegaChopper_ResumeSwimming:
                 move.b  #2,routine(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55E40:
+S3MegaChopper_PickAttachedFrame:
                 move.b  #0,mapping_frame(a0)
                 btst    #2,(V_int_run_count+3).w
-                beq.s   loc_55E54
+                beq.s   S3MegaChopper_CheckEscapeAndFilterInput
                 move.b  #2,mapping_frame(a0)
 
-loc_55E54:
+S3MegaChopper_CheckEscapeAndFilterInput:
                 movea.w $44(a0),a1
                 cmpi.b  #4,routine(a1)
-                beq.w   loc_55EE6
+                beq.w   S3MegaChopper_ReleaseInputAndDetach
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_55EE6
+                beq.s   S3MegaChopper_ReleaseInputAndDetach
                 cmpi.b  #9,anim(a1)
-                beq.s   loc_55EE6
+                beq.s   S3MegaChopper_ReleaseInputAndDetach
                 jsr     Check_LRControllerShake(pc)
-                bne.s   loc_55EE6
+                bne.s   S3MegaChopper_ReleaseInputAndDetach
                 btst    #2,$38(a0)
-                beq.s   loc_55E8C
+                beq.s   S3MegaChopper_FollowXAndCheckFacing
                 move.w  (Ctrl_1).w,d0
                 andi.w  #($8C<<8)|$8C,d0
                 move.w  d0,(Ctrl_1_logical).w
 
-loc_55E8C:
+S3MegaChopper_FollowXAndCheckFacing:
                 move.w  x_pos(a1),d0
                 move.b  child_dx(a0),d1
                 ext.w   d1
@@ -137,42 +138,43 @@ loc_55E8C:
                 move.b  render_flags(a1),d3
                 andi.b  #1,d3
                 eor.b   d2,d3
-                beq.s   loc_55EBA
+                beq.s   S3MegaChopper_StoreXAndReadYOffset
                 bchg    #0,render_flags(a0)
                 bchg    #0,$38(a0)
                 neg.b   child_dx(a0)
 
-loc_55EBA:
+S3MegaChopper_StoreXAndReadYOffset:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0
                 move.b  child_dy(a0),d1
                 ext.w   d1
-                bpl.s   loc_55ED8
+                bpl.s   S3MegaChopper_StoreYAndDrainRings
                 cmpi.b  #8,anim(a1)
-                bne.s   loc_55ED8
+                bne.s   S3MegaChopper_StoreYAndDrainRings
                 addi.w  #$10,d1
 
-loc_55ED8:
+S3MegaChopper_StoreYAndDrainRings:
                 add.w   d1,d0
                 move.w  d0,y_pos(a0)
                 bsr.w   DrainGlobalRingFromAttachedMegaChopper
-                beq.w   locret_55D88
+                beq.w   S3MegaChopper_UpdateReturn
 
-loc_55EE6:
+; Clear the primary input lock only when this object owns it
+S3MegaChopper_ReleaseInputAndDetach:
                 bclr    #2,$38(a0)
-                beq.s   loc_55EF2
+                beq.s   S3MegaChopper_BeginDetachedFall
                 clr.b   (Ctrl_1_locked).w
 
-loc_55EF2:
+S3MegaChopper_BeginDetachedFall:
                 move.l  #MoveChkDel,(a0)
                 move.b  #2,mapping_frame(a0)
                 move.w  #$200,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_55F0C
+                beq.s   S3MegaChopper_StoreDetachVelocity
                 neg.w   d0
 
-loc_55F0C:
+S3MegaChopper_StoreDetachVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  #-$200,y_vel(a0)
                 rts
@@ -181,33 +183,33 @@ loc_55F0C:
 ; Consume the latch, then check whether to mark defeat or initialize attachment offsets and controller state
 MegaChopper_ResolveLatchedContact:
                 move.b  collision_property(a0),d0
-                beq.w   locret_55D88
+                beq.w   S3MegaChopper_UpdateReturn
                 clr.b   collision_property(a0)
                 andi.w  #3,d0
                 move.w  d0,d2
                 lsl.w   #2,d0
-                lea     word_55FD6-4(pc),a2
+                lea     S3MegaChopper_PlayerControlPairs-4(pc),a2
                 lea     (a2,d0.w),a2
                 movea.w (a2)+,a1
                 move.w  a1,$44(a0)
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.w   loc_55FE2
+                bne.w   S3MegaChopper_MarkDefeated
                 move.w  y_pos(a0),d1
                 sub.w   y_pos(a1),d1
                 cmpi.w  #-$10,d1
-                blt.w   locret_55D88
+                blt.w   S3MegaChopper_UpdateReturn
                 cmpi.w  #$10,d1
-                bge.w   locret_55D88
+                bge.w   S3MegaChopper_UpdateReturn
                 move.w  a1,$44(a0)
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_55FE2
+                beq.s   S3MegaChopper_MarkDefeated
                 cmpi.w  #1,d2
-                bne.s   loc_55F7C
+                bne.s   S3MegaChopper_AttachAndStartRingTimer
                 clr.w   (Ctrl_1_logical).w
                 st      (Ctrl_1_locked).w
                 bset    #2,$38(a0)
 
-loc_55F7C:
+S3MegaChopper_AttachAndStartRingTimer:
                 movea.w (a2)+,a3
                 move.w  a3,$3E(a0)
                 move.w  (a3),parent3(a0)
@@ -219,28 +221,28 @@ loc_55F7C:
                 move.b  d0,child_dx(a0)
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                bpl.s   loc_55FB4
+                bpl.s   S3MegaChopper_SaveYOffsetAndFacing
                 bset    #0,render_flags(a0)
 
-loc_55FB4:
+S3MegaChopper_SaveYOffsetAndFacing:
                 move.w  y_pos(a0),d0
                 sub.w   y_pos(a1),d0
                 move.b  d0,child_dy(a0)
                 bclr    #0,$38(a0)
                 btst    #0,render_flags(a1)
-                beq.s   locret_55FD4
+                beq.s   S3MegaChopper_AttachmentReturn
                 bset    #0,$38(a0)
 
-locret_55FD4:
+S3MegaChopper_AttachmentReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_55FD6:
+S3MegaChopper_PlayerControlPairs:
                 dc.w    Player_1, Ctrl_1
                 dc.w    Player_2, Ctrl_2
                 dc.w    Player_1, Ctrl_1
 ; ---------------------------------------------------------------------------
 
-loc_55FE2:
+S3MegaChopper_MarkDefeated:
                 bset    #7,status(a0)
                 rts
 
@@ -248,41 +250,41 @@ loc_55FE2:
 
 DrainGlobalRingFromAttachedMegaChopper:
                 subq.w  #1,$2E(a0)
-                bpl.s   loc_56032
+                bpl.s   S3MegaChopper_TryClearRingHudPulse
                 move.w  #60-1,$2E(a0)
                 ori.b   #1,(Update_HUD_ring_count).w
                 bset    #7,$38(a0)
                 move.w  (Ring_count).w,d0
                 subq.w  #1,d0
-                bmi.s   loc_56044
-                beq.s   loc_5601C
+                bmi.s   S3MegaChopper_KillPlayerAtRingUnderflow
+                beq.s   S3MegaChopper_RequestFullRingHudUpdate
                 cmpi.w  #10,(Ring_count).w
-                beq.s   loc_5601C
+                beq.s   S3MegaChopper_RequestFullRingHudUpdate
                 cmpi.w  #100,(Ring_count).w
-                bne.s   loc_56022
+                bne.s   S3MegaChopper_StoreRingsAndPlaySound
 
-loc_5601C:
+S3MegaChopper_RequestFullRingHudUpdate:
                 ori.b   #$80,(Update_HUD_ring_count).w
 
-loc_56022:
+S3MegaChopper_StoreRingsAndPlaySound:
                 move.w  d0,(Ring_count).w
                 moveq   #signextendB(sfx_RingRight),d0
                 jsr     (Play_SFX).l
 
-loc_5602E:
+S3MegaChopper_RingDrainReturnZero:
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56032:
+S3MegaChopper_TryClearRingHudPulse:
                 bclr    #7,$38(a0)
-                beq.s   loc_5602E
+                beq.s   S3MegaChopper_RingDrainReturnZero
                 andi.b  #$FE,(Update_HUD_ring_count).w
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56044:
+S3MegaChopper_KillPlayerAtRingUnderflow:
                 movea.l a0,a2
                 movea.w $44(a0),a1
                 movea.l a1,a0

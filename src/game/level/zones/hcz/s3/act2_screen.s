@@ -16,9 +16,9 @@ HCZ2_ScreenEvent:
 
 HCZ2_BackgroundInit:
                 cmpi.w  #$C00,(Camera_X_pos_copy).w
-                bhs.s   loc_3C5E8
+                bhs.s   S3HCZ2Screen_InitNormalBg
                 cmpi.w  #$500,(Camera_Y_pos_copy).w
-                blo.s   loc_3C5E8
+                blo.s   S3HCZ2Screen_InitNormalBg
                 move.w  #4,(Events_routine_bg).w        ; Special deformation occurs when camera X is less than $C00 and camera Y is greater than $500
                 jsr     HCZ2_WallMove(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -26,7 +26,7 @@ HCZ2_BackgroundInit:
                 jmp     PlainDeformation(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3C5E8:
+S3HCZ2Screen_InitNormalBg:
                 move.w  #$10,(Events_routine_bg).w      ; Normal deformation
                 jsr     HCZ2_Deform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
@@ -59,7 +59,7 @@ HCZ2BGE_WallMoveInit:
 
 HCZ2BGE_WallMove:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_3C66C
+                bne.s   S3HCZ2Screen_ConsumeWallEndSignal
                 jsr     HCZ2_WallMove(pc)
                 jsr     DrawBGAsYouMove(pc)
                 jsr     PlainDeformation(pc)
@@ -68,27 +68,27 @@ HCZ2BGE_WallMove:
                 clr.b   (Background_collision_flag).w
                 move.w  (Player_1+x_pos).w,d0
                 cmpi.w  #$3F0,d0
-                blo.s   locret_3C66A
+                blo.s   S3HCZ2Screen_WallBgReturn
                 cmpi.w  #$C10,d0
-                bhs.s   locret_3C66A
+                bhs.s   S3HCZ2Screen_WallBgReturn
                 move.w  (Player_1+y_pos).w,d0
                 cmpi.w  #$600,d0
-                blo.s   locret_3C66A
+                blo.s   S3HCZ2Screen_WallBgReturn
                 cmpi.w  #$840,d0
-                bhs.s   locret_3C66A
+                bhs.s   S3HCZ2Screen_WallBgReturn
                 st      (Background_collision_flag).w   ; Only enable BG tile collision if player is within above parameters
 
-locret_3C66A:
+S3HCZ2Screen_WallBgReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3C66C:
+S3HCZ2Screen_ConsumeWallEndSignal:
                 clr.w   (Events_fg_5).w
                 tst.w   (Screen_shake_flag).w
-                bpl.s   loc_3C67A
+                bpl.s   S3HCZ2Screen_BeginWallExitRedraw
                 clr.w   (Screen_shake_flag).w           ; Disable screen shaking if still constant
 
-loc_3C67A:
+S3HCZ2Screen_BeginWallExitRedraw:
                 clr.b   (Background_collision_flag).w
                 move.w  #$F0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
@@ -106,25 +106,25 @@ HCZ2BGE_NormalTransition:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3C6C0
+                bra.s   S3HCZ2Screen_RefreshNormalBgAndDraw
 ; ---------------------------------------------------------------------------
 
 HCZ2BGE_NormalRefresh:
                 jsr     HCZ2_Deform(pc)
 
-loc_3C6C0:
+S3HCZ2Screen_RefreshNormalBgAndDraw:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_3C6D6
+                bpl.s   S3HCZ2Screen_DrawNormalBg
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3C6D6
+                bra.s   S3HCZ2Screen_DrawNormalBg
 ; ---------------------------------------------------------------------------
 
 HCZ2BGE_Normal:
                 jsr     HCZ2_Deform(pc)
 
-loc_3C6D6:
+S3HCZ2Screen_DrawNormalBg:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -138,40 +138,40 @@ loc_3C6D6:
 
 HCZ2_WallMove:
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_3C754                       ; If player is dead, don't bother
+                bhs.s   S3HCZ2Screen_SetWallBgPosition  ; If player is dead, don't bother
                 move.l  #$E000,d0
                 cmpi.w  #$A88,(Player_1+x_pos).w
-                blo.s   loc_3C70E
+                blo.s   S3HCZ2Screen_CheckWallTravel
                 move.l  #$14000,d0                      ; Speed up if player has passed the end already
 
-loc_3C70E:
+S3HCZ2Screen_CheckWallTravel:
                 move.w  (Events_bg+$00).w,d1
-                beq.s   loc_3C730
+                beq.s   S3HCZ2Screen_TryStartWallMotion
                 cmpi.w  #-$600,d1
-                bgt.s   loc_3C73C
+                bgt.s   S3HCZ2Screen_StepWallAndTryRumble
                 tst.w   (Screen_shake_flag).w           ; When wall has travelled $600 pixels
-                bpl.s   loc_3C754
+                bpl.s   S3HCZ2Screen_SetWallBgPosition
                 move.w  #$E,(Screen_shake_flag).w       ; Set screen shake to timed
                 moveq   #signextendB(sfx_Crash),d0
                 jsr     (Play_SFX).l                    ; Play final crashing sound
-                bra.s   loc_3C754
+                bra.s   S3HCZ2Screen_SetWallBgPosition
 ; ---------------------------------------------------------------------------
 
-loc_3C730:
+S3HCZ2Screen_TryStartWallMotion:
                 cmpi.w  #$680,(Player_1+x_pos).w
-                blo.s   loc_3C754                       ; If wall hasn't started moving and player hasn't moved far enough, end
+                blo.s   S3HCZ2Screen_SetWallBgPosition  ; If wall hasn't started moving and player hasn't moved far enough, end
                 st      (Screen_shake_flag).w           ; Begin constant screen shake movement
 
-loc_3C73C:
+S3HCZ2Screen_StepWallAndTryRumble:
                 sub.l   d0,(Events_bg+$00).w            ; Subtract speed from BG X offset
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_3C754
+                bne.s   S3HCZ2Screen_SetWallBgPosition
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l                    ; Play the screen shake sound every 16th frame
 
-loc_3C754:
+S3HCZ2Screen_SetWallBgPosition:
                 move.w  (Camera_Y_pos_copy).w,d0        ; Get BG camera Y
                 subi.w  #$500,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w     ; Offset it by $500 and put it in effective BG Y
@@ -198,22 +198,22 @@ HCZ2_Deform:
                 lea     HCZ2_BGDeformIndex(pc),a5
                 moveq   #0,d2
 
-loc_3C794:
+S3HCZ2Screen_ReadBgScatterCount:
                 move.b  (a5)+,d3
-                bmi.s   loc_3C7AC
+                bmi.s   S3HCZ2Screen_StoreBgScrollDeltas
                 ext.w   d3
                 swap    d0
 
-loc_3C79C:
+S3HCZ2Screen_ScatterBgOffset:
                 move.b  (a5)+,d2
                 move.w  d0,(a1,d2.w)
-                dbf     d3,loc_3C79C
+                dbf     d3,S3HCZ2Screen_ScatterBgOffset
                 swap    d0
                 sub.l   d1,d0
-                bra.s   loc_3C794
+                bra.s   S3HCZ2Screen_ReadBgScatterCount
 ; ---------------------------------------------------------------------------
 
-loc_3C7AC:
+S3HCZ2Screen_StoreBgScrollDeltas:
                 move.w  $12(a1),d0
                 sub.w   $A(a1),d0
                 move.w  d0,(Events_bg+$10).w

@@ -11,15 +11,15 @@ Obj_Bubbler:
                 jmp     Bubbler_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 Bubbler_Index:
-                dc.w    loc_2F952-Bubbler_Index
-                dc.w    loc_2F9B0-Bubbler_Index
-                dc.w    loc_2F9CA-Bubbler_Index
-                dc.w    loc_2FA2C-Bubbler_Index
-                dc.w    loc_2FA4A-Bubbler_Index
-                dc.w    loc_2FA50-Bubbler_Index
+                dc.w    SKHCZWater_InitBubbleOrEmitter-Bubbler_Index
+                dc.w    SKHCZWater_AnimateAndCheckBreathFrame-Bubbler_Index
+                dc.w    SKHCZWater_TryPopAtSurface-Bubbler_Index
+                dc.w    SKHCZWater_AnimateBubblePop-Bubbler_Index
+                dc.w    SKHCZWater_DeleteFinishedBubble-Bubbler_Index
+                dc.w    SKHCZWater_TryStartBurst-Bubbler_Index
 ; ---------------------------------------------------------------------------
 
-loc_2F952:
+SKHCZWater_InitBubbleOrEmitter:
                 addq.b  #2,routine(a0)
                 move.l  #Map_Bubbler,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Bubbles,0,0),art_tile(a0)
@@ -27,39 +27,39 @@ loc_2F952:
                 move.b  #$10,width_pixels(a0)
                 move.w  #$80,priority(a0)
                 move.b  subtype(a0),d0
-                bpl.s   loc_2F996
+                bpl.s   SKHCZWater_InitRisingBubble
                 addq.b  #8,routine(a0)
                 andi.w  #$7F,d0
                 move.b  d0,$32(a0)
                 move.b  d0,$33(a0)
                 move.b  #8,anim(a0)
-                bra.w   loc_2FA50
+                bra.w   SKHCZWater_TryStartBurst
 ; ---------------------------------------------------------------------------
 
-loc_2F996:
+SKHCZWater_InitRisingBubble:
                 move.b  d0,anim(a0)
                 move.w  x_pos(a0),$30(a0)
                 move.w  #-$88,y_vel(a0)
                 jsr     (Random_Number).l
                 move.b  d0,angle(a0)
 
-loc_2F9B0:
+SKHCZWater_AnimateAndCheckBreathFrame:
                 lea     (Ani_Bubbler).l,a1
                 jsr     (Animate_Sprite).l
                 cmpi.b  #6,mapping_frame(a0)
-                bne.s   loc_2F9CA
+                bne.s   SKHCZWater_TryPopAtSurface
                 move.b  #1,$2E(a0)
 
-loc_2F9CA:
+SKHCZWater_TryPopAtSurface:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_2F9E2
+                blo.s   SKHCZWater_WobbleAndCheckBreathing
                 move.b  #6,routine(a0)
                 addq.b  #4,anim(a0)
-                bra.w   loc_2FA2C
+                bra.w   SKHCZWater_AnimateBubblePop
 ; ---------------------------------------------------------------------------
 
-loc_2F9E2:
+SKHCZWater_WobbleAndCheckBreathing:
                 move.b  angle(a0),d0
                 addq.b  #1,angle(a0)
                 andi.w  #$7F,d0
@@ -69,80 +69,80 @@ loc_2F9E2:
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
                 tst.b   $2E(a0)
-                beq.s   loc_2FA14
+                beq.s   SKHCZWater_MoveAndDrawRisingBubble
                 bsr.w   CheckPlayersForHczAirBubble
                 cmpi.b  #6,routine(a0)
-                beq.s   loc_2FA2C
+                beq.s   SKHCZWater_AnimateBubblePop
 
-loc_2FA14:
+SKHCZWater_MoveAndDrawRisingBubble:
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2FA26
+                bpl.s   SKHCZWater_DeleteHiddenRisingBubble
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FA26:
+SKHCZWater_DeleteHiddenRisingBubble:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FA2C:
+SKHCZWater_AnimateBubblePop:
                 lea     (Ani_Bubbler).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_2FA44
+                bpl.s   SKHCZWater_DeleteHiddenPoppingBubble
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FA44:
+SKHCZWater_DeleteHiddenPoppingBubble:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FA4A:
+SKHCZWater_DeleteFinishedBubble:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FA50:
+SKHCZWater_TryStartBurst:
                 tst.w   $36(a0)
-                bne.s   loc_2FAB2
+                bne.s   SKHCZWater_TickBurstGap
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bhs.w   loc_2FB5C
+                bhs.w   SKHCZWater_CullOrDrawEmitter
                 tst.b   render_flags(a0)
-                bpl.w   loc_2FB5C
+                bpl.w   SKHCZWater_CullOrDrawEmitter
                 subq.w  #1,$38(a0)
-                bpl.w   loc_2FB50
+                bpl.w   SKHCZWater_AnimateEmitter
                 move.w  #1,$36(a0)
 
-loc_2FA78:
+SKHCZWater_PickBurstPattern:
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 andi.w  #7,d0
                 cmpi.w  #6,d0
-                bhs.s   loc_2FA78
+                bhs.s   SKHCZWater_PickBurstPattern
                 move.b  d0,$34(a0)
                 andi.w  #$C,d1
-                lea     (byte_2FB96).l,a1
+                lea     (SKHCZWater_BurstPatternWindows).l,a1
                 adda.w  d1,a1
                 move.l  a1,$3C(a0)
                 subq.b  #1,$32(a0)
-                bpl.s   loc_2FAB0
+                bpl.s   SKHCZWater_JoinFirstBurstAttempt
                 move.b  $33(a0),$32(a0)
                 bset    #7,$36(a0)
 
-loc_2FAB0:
-                bra.s   loc_2FABA
+SKHCZWater_JoinFirstBurstAttempt:
+                bra.s   SKHCZWater_TrySpawnPatternBubble
 ; ---------------------------------------------------------------------------
 
-loc_2FAB2:
+SKHCZWater_TickBurstGap:
                 subq.w  #1,$38(a0)
-                bpl.w   loc_2FB50
+                bpl.w   SKHCZWater_AnimateEmitter
 
-loc_2FABA:
+SKHCZWater_TrySpawnPatternBubble:
                 jsr     (Random_Number).l
                 andi.w  #$1F,d0
                 move.w  d0,$38(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_2FB34
+                bne.s   SKHCZWater_ConsumeBurstAttempt
                 move.l  (a0),(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 jsr     (Random_Number).l
@@ -155,60 +155,61 @@ loc_2FABA:
                 movea.l $3C(a0),a2
                 move.b  (a2,d0.w),subtype(a1)
                 btst    #7,$36(a0)
-                beq.s   loc_2FB34
+                beq.s   SKHCZWater_ConsumeBurstAttempt
                 jsr     (Random_Number).l
                 andi.w  #3,d0
-                bne.s   loc_2FB20
+                bne.s   SKHCZWater_TryForceLastBubbleLarge
                 bset    #6,$36(a0)
-                bne.s   loc_2FB34
+                bne.s   SKHCZWater_ConsumeBurstAttempt
                 move.b  #2,subtype(a1)
 
-loc_2FB20:
+SKHCZWater_TryForceLastBubbleLarge:
                 tst.b   $34(a0)
-                bne.s   loc_2FB34
+                bne.s   SKHCZWater_ConsumeBurstAttempt
                 bset    #6,$36(a0)
-                bne.s   loc_2FB34
+                bne.s   SKHCZWater_ConsumeBurstAttempt
                 move.b  #2,subtype(a1)
 
-loc_2FB34:
+; Count the attempt even when no object slot was allocated
+SKHCZWater_ConsumeBurstAttempt:
                 subq.b  #1,$34(a0)
-                bpl.s   loc_2FB50
+                bpl.s   SKHCZWater_AnimateEmitter
                 jsr     (Random_Number).l
                 andi.w  #$7F,d0
                 addi.w  #$80,d0
                 add.w   d0,$38(a0)
                 clr.w   $36(a0)
 
-loc_2FB50:
+SKHCZWater_AnimateEmitter:
                 lea     (Ani_Bubbler).l,a1
                 jsr     (Animate_Sprite).l
 
-loc_2FB5C:
+SKHCZWater_CullOrDrawEmitter:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_2FB7E
+                bhi.w   SKHCZWater_ClearEmitterRespawn
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                blo.w   loc_2FB90
+                blo.w   SKHCZWater_DrawSubmergedEmitter
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FB7E:
+SKHCZWater_ClearEmitterRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2FB8A
+                beq.s   SKHCZWater_DeleteEmitter
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2FB8A:
+SKHCZWater_DeleteEmitter:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FB90:
+SKHCZWater_DrawSubmergedEmitter:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-byte_2FB96:
+SKHCZWater_BurstPatternWindows:
                 dc.b    0
                 dc.b    1
                 dc.b    0
@@ -233,30 +234,30 @@ byte_2FB96:
 
 CheckPlayersForHczAirBubble:
                 lea     (Player_1).w,a1
-                bsr.s   loc_2FBB2
+                bsr.s   SKBubbler_TryPlayerBreath
                 lea     (Player_2).w,a1
 ; End of function CheckPlayersForHczAirBubble
 
-loc_2FBB2:
+SKBubbler_TryPlayerBreath:
                 tst.b   object_control(a1)
-                bmi.w   locret_2FC7C
+                bmi.w   SKHCZWater_BreathContactReturn
                 move.w  x_pos(a1),d0
                 move.w  x_pos(a0),d1
                 subi.w  #$10,d1
                 cmp.w   d0,d1
-                bhs.w   locret_2FC7C
+                bhs.w   SKHCZWater_BreathContactReturn
                 addi.w  #2*$10,d1
                 cmp.w   d0,d1
-                blo.w   locret_2FC7C
+                blo.w   SKHCZWater_BreathContactReturn
                 move.w  y_pos(a1),d0
                 move.w  y_pos(a0),d1
                 cmp.w   d0,d1
-                bhs.w   locret_2FC7C
+                bhs.w   SKHCZWater_BreathContactReturn
                 addi.w  #$10,d1
                 cmp.w   d0,d1
-                blo.w   locret_2FC7C
+                blo.w   SKHCZWater_BreathContactReturn
                 btst    #Status_BublShield,status_secondary(a1)
-                bne.w   locret_2FC7C
+                bne.w   SKHCZWater_BreathContactReturn
                 jsr     (Player_ResetAirTimer).l
                 moveq   #signextendB(sfx_Bubble),d0
                 jsr     (Play_SFX).l
@@ -269,28 +270,28 @@ loc_2FBB2:
                 bclr    #Status_Push,status(a1)
                 bclr    #Status_RollJump,status(a1)
                 btst    #Status_Roll,status(a1)
-                beq.w   loc_2FC6A
+                beq.w   SKHCZWater_TryStartBreathingPop
                 cmpi.l  #Obj_Sonic,(a1)
-                bne.s   loc_2FC5A
+                bne.s   SKHCZWater_AdjustRolledRadii
                 bclr    #Status_Roll,status(a1)
                 move.b  #$13,y_radius(a1)
                 move.b  #9,x_radius(a1)
                 subq.w  #5,y_pos(a1)
-                bra.s   loc_2FC6A
+                bra.s   SKHCZWater_TryStartBreathingPop
 ; ---------------------------------------------------------------------------
 
-loc_2FC5A:
+SKHCZWater_AdjustRolledRadii:
                 move.b  #$F,y_radius(a1)
                 move.b  #9,x_radius(a1)
                 subq.w  #1,y_pos(a1)
 
-loc_2FC6A:
+SKHCZWater_TryStartBreathingPop:
                 cmpi.b  #6,routine(a0)
-                beq.s   locret_2FC7C
+                beq.s   SKHCZWater_BreathContactReturn
                 move.b  #6,routine(a0)
                 addq.b  #4,anim(a0)
 
-locret_2FC7C:
+SKHCZWater_BreathContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Ani_Bubbler:
@@ -309,8 +310,8 @@ Obj_HCZWaterRush:
                 move.b  #$20,height_pixels(a0)
                 move.b  #2,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2FE28
-                move.l  #loc_2FEB2,(a1)
+                bne.w   SKHCZWater_InitRushTriggerWait
+                move.l  #SKHCZWater_TryStartRisingBlock,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 subi.w  #$30,x_pos(a1)
@@ -323,62 +324,62 @@ Obj_HCZWaterRush:
                 move.b  #1,mapping_frame(a1)
                 move.w  a1,$3C(a0)
 
-loc_2FE28:
+SKHCZWater_InitRushTriggerWait:
                 move.b  #3,(_unkF7C7).w
-                move.l  #loc_2FE34,(a0)
+                move.l  #SKHCZWater_TryActivateRush,(a0)
 
-loc_2FE34:
+SKHCZWater_TryActivateRush:
                 tst.b   (Level_trigger_array).w
-                beq.s   loc_2FE58
+                beq.s   SKHCZWater_DrawWaitingRush
                 move.b  #3,mapping_frame(a0)
                 move.b  #1,anim_frame_timer(a0)
-                move.l  #loc_2FE5E,(a0)
+                move.l  #SKHCZWater_StepRushAnimAndMotion,(a0)
                 move.b  #0,(_unkF7C7).w
                 move.b  #1,(Palette_cycle_counters+$00).w
 
-loc_2FE58:
+SKHCZWater_DrawWaitingRush:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2FE5E:
+SKHCZWater_StepRushAnimAndMotion:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_2FE9E
+                bpl.s   SKHCZWater_TryHideFinishedRush
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   loc_2FE98
+                bne.s   SKHCZWater_WrapRushFrame
                 addi.w  #$20,x_pos(a0)
                 cmpi.w  #$580,x_pos(a0)
-                bne.s   loc_2FE98
+                bne.s   SKHCZWater_WrapRushFrame
                 cmpi.w  #$5A0,y_pos(a0)
-                bne.s   loc_2FE98
+                bne.s   SKHCZWater_WrapRushFrame
                 subi.w  #$20,x_pos(a0)
                 subi.w  #$20,y_pos(a0)
 
-loc_2FE98:
+SKHCZWater_WrapRushFrame:
                 andi.b  #1,mapping_frame(a0)
 
-loc_2FE9E:
+SKHCZWater_TryHideFinishedRush:
                 cmpi.w  #$980,x_pos(a0)
-                blo.s   loc_2FEAC
+                blo.s   SKHCZWater_DrawActiveRush
                 move.w  #$7F00,x_pos(a0)
 
-loc_2FEAC:
+SKHCZWater_DrawActiveRush:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_2FEB2:
+SKHCZWater_TryStartRisingBlock:
                 tst.b   (Level_trigger_array).w
-                beq.s   loc_2FED2
-                move.l  #loc_2FEBE,(a0)
+                beq.s   SKHCZWater_CheckBlockSolidAndDraw
+                move.l  #SKHCZWater_MoveAndTryHideBlock,(a0)
 
-loc_2FEBE:
+SKHCZWater_MoveAndTryHideBlock:
                 subi.w  #$10,y_pos(a0)
                 cmpi.w  #$560,y_pos(a0)
-                bne.s   loc_2FED2
+                bne.s   SKHCZWater_CheckBlockSolidAndDraw
                 move.w  #$7F00,x_pos(a0)
 
-loc_2FED2:
+SKHCZWater_CheckBlockSolidAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -393,31 +394,31 @@ loc_2FED2:
 
 Obj_HCZWaterWall:
                 tst.b   subtype(a0)
-                beq.s   loc_2FF04
-                move.l  #loc_30294,(a0)
+                beq.s   SKHCZWater_CheckHorizontalWallY
+                move.l  #SKHCZWater_CheckVerticalLiftWindow,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FF04:
+SKHCZWater_CheckHorizontalWallY:
                 move.w  (Player_1+y_pos).w,d0
                 cmpi.w  #$500,d0
-                bhs.s   loc_2FF14
+                bhs.s   SKHCZWater_QueueHorizontalWallArt
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_2FF14:
+SKHCZWater_QueueHorizontalWallArt:
                 lea     (ArtKosM_HCZGeyserHorz).l,a1
                 move.w  #tiles_to_bytes(ArtTile_HCZGeyser),d2
                 jsr     (Queue_Kos_Module).l
-                move.l  #loc_2FF2A,(a0)
+                move.l  #SKHCZWater_WaitForHorizontalWallArt,(a0)
 
-loc_2FF2A:
+SKHCZWater_WaitForHorizontalWallArt:
                 tst.b   (Kos_modules_left).w
-                beq.s   loc_2FF32
+                beq.s   SKHCZWater_InitHorizontalWall
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2FF32:
+SKHCZWater_InitHorizontalWall:
                 ori.b   #4,render_flags(a0)
                 move.w  #$300,priority(a0)
                 move.l  #Map_HCZWaterWall,mappings(a0)
@@ -430,26 +431,26 @@ loc_2FF32:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #$20,$30(a0)
-                move.l  #loc_2FF7C,(a0)
+                move.l  #SKHCZWater_TryStartHorizontalBurst,(a0)
 
-loc_2FF7C:
+SKHCZWater_TryStartHorizontalBurst:
                 move.w  (Player_1+x_pos).w,d0
                 subi.w  #$60,d0
                 cmp.w   x_pos(a0),d0
-                blo.w   loc_30006
-                move.l  #loc_3003C,(a0)
+                blo.w   SKHCZWater_DrawWaitingHorizontalWall
+                move.l  #SKHCZWater_StepHorizontalWall,(a0)
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l
-                lea     (byte_3000C).l,a3
+                lea     (SKHCZWater_HorizontalDebrisRecords).l,a3
                 move.w  x_pos(a0),d2
                 addi.w  #$60,d2
                 move.w  y_pos(a0),d3
                 moveq   #8-1,d1
 
-loc_2FFAE:
+SKHCZWater_TrySpawnHorizontalDebris:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_30006
-                move.l  #loc_3011A,(a1)
+                bne.s   SKHCZWater_DrawWaitingHorizontalWall
+                move.l  #SKHCZWater_AnimateAirborneDebris,(a1)
                 move.l  #Map_HCZWaterWallDebris,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZGeyser+$58,2,0),art_tile(a1)
                 move.b  #$84,render_flags(a1)
@@ -467,12 +468,12 @@ loc_2FFAE:
                 move.w  (a3)+,x_vel(a1)
                 move.w  (a3)+,y_vel(a1)
                 move.b  d1,mapping_frame(a1)
-                dbf     d1,loc_2FFAE
+                dbf     d1,SKHCZWater_TrySpawnHorizontalDebris
 
-loc_30006:
+SKHCZWater_DrawWaitingHorizontalWall:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-byte_3000C:
+SKHCZWater_HorizontalDebrisRecords:
                 dc.b    0,-$18
                 dc.w    $400,  -$80
                 dc.b    0,  -8
@@ -491,16 +492,16 @@ byte_3000C:
                 dc.w    $500, -$100
 ; ---------------------------------------------------------------------------
 
-loc_3003C:
+SKHCZWater_StepHorizontalWall:
                 tst.w   $30(a0)
-                beq.s   loc_3004A
+                beq.s   SKHCZWater_TrySpawnHorizontalDroplet
                 subq.w  #1,$30(a0)
                 addq.w  #8,x_pos(a0)
 
-loc_3004A:
+SKHCZWater_TrySpawnHorizontalDroplet:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_300C8
-                move.l  #loc_301DE,(a1)
+                bne.w   SKHCZWater_SyncHorizontalWallAndCull
+                move.l  #SKHCZWater_MoveDropletToSurface,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.b  #$84,render_flags(a1)
                 move.w  x_pos(a0),x_pos(a1)
@@ -516,10 +517,10 @@ loc_3004A:
                 move.w  #make_art_tile(ArtTile_HCZGeyser+$30,2,0),art_tile(a1)
                 lsr.w   #4,d1
                 andi.w  #3,d1
-                bne.s   loc_300A6
+                bne.s   SKHCZWater_LaunchHorizontalDroplet
                 move.w  #make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 
-loc_300A6:
+SKHCZWater_LaunchHorizontalDroplet:
                 move.b  d1,anim(a1)
                 move.w  #$380,priority(a1)
                 move.b  #$18,width_pixels(a1)
@@ -527,57 +528,57 @@ loc_300A6:
                 move.w  #$400,x_vel(a1)
                 move.w  #0,y_vel(a1)
 
-loc_300C8:
+SKHCZWater_SyncHorizontalWallAndCull:
                 lea     sub2_x_pos(a0),a2
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 tst.b   render_flags(a0)
-                bmi.s   loc_30100
+                bmi.s   SKHCZWater_DrawActiveHorizontalWall
                 clr.b   (Palette_cycle_counters+$00).w
                 move.w  #signextendB(cmd_MutePSG),d0
                 jsr     (Play_SFX).l
                 move.w  #signextendB(cmd_StopSFX),d0
                 jsr     (Play_SFX).l
                 move.w  #150,$30(a0)
-                move.l  #loc_30106,(a0)
+                move.l  #SKHCZWater_TickEnemyArtReloadDelay,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_30100:
+SKHCZWater_DrawActiveHorizontalWall:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_30106:
+SKHCZWater_TickEnemyArtReloadDelay:
                 subq.w  #1,$30(a0)
-                bmi.s   loc_3010E
+                bmi.s   SKHCZWater_ReloadEnemyArtAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3010E:
+SKHCZWater_ReloadEnemyArtAndDelete:
                 jsr     (LoadEnemyArt).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3011A:
+SKHCZWater_AnimateAirborneDebris:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_30130
+                bpl.s   SKHCZWater_MoveDebrisToWater
                 move.b  #2,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #7,mapping_frame(a0)
 
-loc_30130:
+SKHCZWater_MoveDebrisToWater:
                 jsr     (MoveSprite2).l
                 addi.w  #$38,y_vel(a0)
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_301A2
+                bhs.s   SKHCZWater_DrawAirborneDebris
                 move.w  #0,y_vel(a0)
                 asr     x_vel(a0)
                 asr     x_vel(a0)
-                move.l  #loc_301A8,(a0)
+                move.l  #SKHCZWater_AnimateSubmergedDebris,(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_301A2
-                move.l  #loc_3023E,(a1)
+                bne.w   SKHCZWater_DrawAirborneDebris
+                move.l  #SKHCZWater_AnimateWallSplash,(a1)
                 move.l  #Map_HCZWaterWall,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZGeyser+$30,1,0),art_tile(a1)
                 move.b  #$84,render_flags(a1)
@@ -588,104 +589,104 @@ loc_30130:
                 move.b  #$18,height_pixels(a1)
                 move.b  #8,anim(a1)
 
-loc_301A2:
+SKHCZWater_DrawAirborneDebris:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_301A8:
+SKHCZWater_AnimateSubmergedDebris:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_301BE
+                bpl.s   SKHCZWater_MoveSubmergedDebris
                 move.b  #9,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #7,mapping_frame(a0)
 
-loc_301BE:
+SKHCZWater_MoveSubmergedDebris:
                 jsr     (MoveSprite2).l
                 addi.w  #8,y_vel(a0)
                 tst.b   render_flags(a0)
-                bpl.w   loc_301D8
+                bpl.w   SKHCZWater_DeleteHiddenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_301D8:
+SKHCZWater_DeleteHiddenDebris:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_301DE:
+SKHCZWater_MoveDropletToSurface:
                 jsr     (MoveSprite2).l
                 addi.w  #$28,y_vel(a0)
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_30202
+                bhs.s   SKHCZWater_AnimateMovingDroplet
                 move.w  d0,y_pos(a0)
-                move.l  #loc_3021C,(a0)
+                move.l  #SKHCZWater_AnimateDropletPop,(a0)
                 addq.b  #4,anim(a0)
 
-loc_30202:
+SKHCZWater_AnimateMovingDroplet:
                 tst.b   render_flags(a0)
-                bpl.w   loc_301D8
+                bpl.w   SKHCZWater_DeleteHiddenDebris
                 lea     (Ani_HCZWaterWall).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3021C:
+SKHCZWater_AnimateDropletPop:
                 tst.b   render_flags(a0)
-                bpl.w   loc_301D8
+                bpl.w   SKHCZWater_DeleteHiddenDebris
                 lea     (Ani_HCZWaterWall).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   routine(a0)
-                bne.w   loc_301D8
+                bne.w   SKHCZWater_DeleteHiddenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3023E:
+SKHCZWater_AnimateWallSplash:
                 tst.b   render_flags(a0)
-                bpl.w   loc_301D8
+                bpl.w   SKHCZWater_DeleteHiddenDebris
                 lea     (Ani_HCZWaterWall).l,a1
                 jsr     (Animate_SpriteIrregularDelay).l
                 tst.b   routine(a0)
-                bne.w   loc_301D8
+                bne.w   SKHCZWater_DeleteHiddenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_HCZWaterWall:
                 include "src/objects/shared/zones/hcz/animations/water_wall.s"
 ; ---------------------------------------------------------------------------
 
-loc_30294:
+SKHCZWater_CheckVerticalLiftWindow:
                 move.w  (Player_1+x_pos).w,d0
                 addi.w  #$30,d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$60,d0
-                bhs.s   loc_302B8
+                bhs.s   SKHCZWater_CullDormantVerticalWall
                 move.w  (Player_1+y_pos).w,d0
                 addi.w  #$40,d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #$10,d0
-                blo.s   loc_302BE
+                blo.s   SKHCZWater_QueueVerticalArtAndLockP1P2
 
-loc_302B8:
+SKHCZWater_CullDormantVerticalWall:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_302BE:
+SKHCZWater_QueueVerticalArtAndLockP1P2:
                 lea     (ArtKosM_HCZGeyserVert).l,a1
                 move.w  #tiles_to_bytes(ArtTile_HCZGeyser),d2
                 jsr     (Queue_Kos_Module).l
                 move.b  #1,mapping_frame(a0)
                 move.b  #$81,(Player_1+object_control).w
                 move.b  #$81,(Player_2+object_control).w
-                move.l  #loc_302E6,(a0)
+                move.l  #SKHCZWater_LiftWhileArtLoads,(a0)
 
-loc_302E6:
+SKHCZWater_LiftWhileArtLoads:
                 tst.b   (Kos_modules_left).w
-                beq.s   loc_302FA
+                beq.s   SKHCZWater_InitVerticalLift
                 subi.w  #8,(Player_1+y_pos).w
                 subi.w  #8,(Player_2+y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_302FA:
+SKHCZWater_InitVerticalLift:
                 ori.b   #4,render_flags(a0)
                 move.w  #$300,priority(a0)
                 move.l  #Map_HCZWaterWall,mappings(a0)
@@ -695,35 +696,35 @@ loc_302FA:
                 move.w  #$60,$30(a0)
                 move.b  #$1C,(Player_1+anim).w
                 move.b  #$1C,(Player_2+anim).w
-                move.l  #loc_30338,(a0)
+                move.l  #SKHCZWater_StepVerticalLift,(a0)
 
-loc_30338:
+SKHCZWater_StepVerticalLift:
                 tst.w   $30(a0)
-                beq.s   loc_30346
+                beq.s   SKHCZWater_LiftRidersAndTryBurst
                 subq.w  #1,$30(a0)
                 subq.w  #8,y_pos(a0)
 
-loc_30346:
+SKHCZWater_LiftRidersAndTryBurst:
                 subi.w  #8,(Player_1+y_pos).w
                 subi.w  #8,(Player_2+y_pos).w
                 cmpi.w  #$28,$30(a0)
-                bhi.w   locret_303E8
+                bhi.w   SKHCZWater_LiftOrBurstReturn
                 move.b  #$1A,(Player_1+anim).w
                 move.b  #$1A,(Player_2+anim).w
-                move.l  #loc_3041A,(a0)
+                move.l  #SKHCZWater_TickBurstAndReleaseRiders,(a0)
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(Palette_cycle_counters+$00).w
-                lea     (byte_303EA).l,a3
+                lea     (SKHCZWater_VerticalDebrisRecords).l,a3
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #$80,d3
                 moveq   #8-1,d1
 
-loc_30390:
+SKHCZWater_TrySpawnVerticalDebris:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_303E8
-                move.l  #loc_3011A,(a1)
+                bne.s   SKHCZWater_LiftOrBurstReturn
+                move.l  #SKHCZWater_AnimateAirborneDebris,(a1)
                 move.l  #Map_HCZWaterWallDebris,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZGeyser+$58,2,0),art_tile(a1)
                 move.b  #$84,render_flags(a1)
@@ -741,12 +742,12 @@ loc_30390:
                 move.w  (a3)+,x_vel(a1)
                 move.w  (a3)+,y_vel(a1)
                 move.b  d1,mapping_frame(a1)
-                dbf     d1,loc_30390
+                dbf     d1,SKHCZWater_TrySpawnVerticalDebris
 
-locret_303E8:
+SKHCZWater_LiftOrBurstReturn:
                 rts
 ; ---------------------------------------------------------------------------
-byte_303EA:
+SKHCZWater_VerticalDebrisRecords:
                 dc.b    -$18,   0
                 dc.w    -$200, -$B00
                 dc.b    -8,   0
@@ -765,13 +766,13 @@ byte_303EA:
                 dc.w    $200, -$800
 ; ---------------------------------------------------------------------------
 
-loc_3041A:
+SKHCZWater_TickBurstAndReleaseRiders:
                 tst.w   $30(a0)
-                beq.s   loc_30470
+                beq.s   SKHCZWater_MoveAndTryVerticalDroplets
                 move.w  #-$A00,y_vel(a0)
                 subq.w  #1,$30(a0)
-                bne.s   loc_30470
-                move.l  #loc_3052A,(a0)
+                bne.s   SKHCZWater_MoveAndTryVerticalDroplets
+                move.l  #SKHCZWater_TryMoveFreeVerticalWall,(a0)
                 lea     (Player_1).w,a1
                 move.b  #0,object_control(a1)
                 move.w  #0,x_vel(a1)
@@ -784,13 +785,13 @@ loc_3041A:
                 move.b  #0,jumping(a1)
                 move.w  #-$800,y_vel(a0)
 
-loc_30470:
+SKHCZWater_MoveAndTryVerticalDroplets:
                 subi.w  #$A,(Player_1+y_pos).w
                 subi.w  #$A,(Player_2+y_pos).w
                 jsr     (MoveSprite2).l
                 addi.w  #$48,y_vel(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_304D4
+                bne.w   SKHCZWater_DrawVerticalBurst
                 jsr     (Random_Number).l
                 move.w  d0,d1
                 move.w  d0,d2
@@ -802,20 +803,20 @@ loc_30470:
                 move.w  #-$700,y_vel(a1)
                 move.w  d0,d2
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_304D4
+                bne.w   SKHCZWater_DrawVerticalBurst
                 bsr.s   InitializeHczGeyserDroplet
                 subi.w  #$10,x_pos(a1)
                 neg.w   d1
                 move.w  d1,x_vel(a1)
                 move.w  #-$700,y_vel(a1)
 
-loc_304D4:
+SKHCZWater_DrawVerticalBurst:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 InitializeHczGeyserDroplet:
-                move.l  #loc_301DE,(a1)
+                move.l  #SKHCZWater_MoveDropletToSurface,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.b  #$84,render_flags(a1)
                 move.w  x_pos(a0),x_pos(a1)
@@ -827,19 +828,19 @@ InitializeHczGeyserDroplet:
                 move.w  #make_art_tile(ArtTile_HCZGeyser+$30,2,0),art_tile(a1)
                 lsr.w   #4,d2
                 andi.w  #3,d2
-                bne.s   loc_30524
+                bne.s   SKHCZWater_SetVerticalDropletAnim
                 move.w  #make_art_tile(ArtTile_Bubbles,0,0),art_tile(a1)
 
-loc_30524:
+SKHCZWater_SetVerticalDropletAnim:
                 move.b  d2,anim(a1)
                 rts
 ; End of function InitializeHczGeyserDroplet
 
 ; ---------------------------------------------------------------------------
 
-loc_3052A:
+SKHCZWater_TryMoveFreeVerticalWall:
                 tst.b   render_flags(a0)
-                bmi.s   loc_3056E
+                bmi.s   SKHCZWater_MoveFreeVerticalWall
                 move.w  #signextendB(cmd_StopSFX),d0
                 jsr     (Play_SFX).l
                 move.w  #signextendB(cmd_MutePSG),d0
@@ -848,18 +849,18 @@ loc_3052A:
                 jsr     (Play_SFX).l
                 move.b  #0,(Palette_cycle_counters+$00).w
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_30560
+                beq.s   SKHCZWater_StartEnemyArtReloadWait
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_30560:
+SKHCZWater_StartEnemyArtReloadWait:
                 move.w  #$1E,$30(a0)
-                move.l  #loc_30106,(a0)
+                move.l  #SKHCZWater_TickEnemyArtReloadDelay,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3056E:
+SKHCZWater_MoveFreeVerticalWall:
                 jsr     (MoveSprite2).l
                 addi.w  #$48,y_vel(a0)
                 jmp     (Sprite_OnScreen_Test).l
-; End of function loc_3052A
+; End of function SKHCZWater_TryMoveFreeVerticalWall

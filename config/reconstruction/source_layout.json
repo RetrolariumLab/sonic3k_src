@@ -8568,7 +8568,7 @@
       "responsibility": "Hydrocity act-two screen and background initialization, events, deformation and wall actor.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 263,
+      "physical_lines": 264,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -24194,7 +24194,7 @@
       "responsibility": "Buggernaut parent and baby flight states with private movement, animation and child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 184,
+      "physical_lines": 185,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24339,7 +24339,7 @@
       "responsibility": "Mega Chopper swimming, player attachment, damage and private animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 303,
+      "physical_lines": 305,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24424,7 +24424,7 @@
       "responsibility": "Turbo Spiker attack states, detached spikes, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 368,
+      "physical_lines": 370,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -24464,7 +24464,7 @@
       "responsibility": "Blastoid launcher, projectiles, helper callback and private construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 113,
+      "physical_lines": 114,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24499,7 +24499,7 @@
       "responsibility": "Buggernaut parent and baby flight states with private movement, animation and child records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 184,
+      "physical_lines": 185,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24614,7 +24614,7 @@
       "responsibility": "Mega Chopper swimming, player attachment, damage and private animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 304,
+      "physical_lines": 306,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -24679,7 +24679,7 @@
       "responsibility": "Turbo Spiker attack states, detached spikes, motion helpers and private resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 368,
+      "physical_lines": 370,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -48867,7 +48867,7 @@
       "responsibility": "Assembler data for Levels/HCZ/Misc Object Data/Map - Water Splash 2",
       "role": "data",
       "status": "owned",
-      "physical_lines": 12,
+      "physical_lines": 13,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "Levels/HCZ/Misc Object Data/Map - Water Splash 2.s",
@@ -60161,7 +60161,7 @@
       "responsibility": "Hydrocity breakable bar attachment, movement, breakage and shared player geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 444,
+      "physical_lines": 446,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "s3.s",
@@ -60201,7 +60201,7 @@
       "responsibility": "Hydrocity conveyor belt player transport and coordinated conveyor spike motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 459,
+      "physical_lines": 462,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -60333,7 +60333,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_2F96C",
+          "name": "S3HandLauncher_PlaceAndCheckVisualChild",
           "kind": "terminal-tail",
           "reason": "The complete hand-launcher follower state keeps its conditional early return and final on-screen tail call together, followed only by checked mapping resources.",
           "origin_first_line": 4793,
@@ -60521,7 +60521,7 @@
       "responsibility": "Hydrocity twisting-loop geometry, player capture, scripted movement and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 595,
+      "physical_lines": 596,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -60561,7 +60561,7 @@
       "responsibility": "Hydrocity air-bubble, water-rush and water-wall object families with player contact, debris and shared sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 875,
+      "physical_lines": 876,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -60573,7 +60573,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_2EDBA",
+          "name": "S3HCZWater_TryMoveFreeVerticalWall",
           "kind": "terminal-tail",
           "reason": "The complete water-wall reset and falling-debris state keeps its conditional early return with its final sprite-service tail call; only checked mapping resources follow.",
           "origin_first_line": 4070,
@@ -60616,7 +60616,7 @@
       "responsibility": "Hydrocity splash emission, particle motion, player contact and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 254,
+      "physical_lines": 255,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -60716,7 +60716,7 @@
       "responsibility": "Hydrocity breakable bar attachment, movement, breakage and shared player geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 440,
+      "physical_lines": 442,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "sonic3k.s",
@@ -60746,7 +60746,7 @@
       "responsibility": "Hydrocity conveyor belt player transport and coordinated conveyor spike motion.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 459,
+      "physical_lines": 462,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -60818,7 +60818,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_30DEC",
+          "name": "SKHandLauncher_PlaceAndCheckVisualChild",
           "kind": "terminal-tail",
           "reason": "The complete hand-launcher follower state keeps its conditional early return and final on-screen tail call together.",
           "origin_first_line": 5958,
@@ -60966,7 +60966,7 @@
       "responsibility": "Hydrocity twisting-loop geometry, player capture, scripted movement and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 595,
+      "physical_lines": 596,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -60996,7 +60996,7 @@
       "responsibility": "Hydrocity air-bubble, water-rush and water-wall object families with player contact, debris and shared sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 865,
+      "physical_lines": 866,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -61008,7 +61008,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_3052A",
+          "name": "SKHCZWater_TryMoveFreeVerticalWall",
           "kind": "terminal-tail",
           "reason": "The complete water-wall reset and falling-debris state keeps its conditional early return with its final sprite-service tail call; only checked mapping resources follow.",
           "origin_first_line": 5248,
@@ -61041,7 +61041,7 @@
       "responsibility": "Hydrocity splash emission, particle motion, player contact and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 248,
+      "physical_lines": 249,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",

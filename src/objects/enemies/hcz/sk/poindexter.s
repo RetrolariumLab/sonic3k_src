@@ -12,11 +12,11 @@ Obj_Poindexter:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Poindexter_Index:
-                dc.w    loc_88298-Poindexter_Index
-                dc.w    loc_882E6-Poindexter_Index
+                dc.w    SKPoindexter_InitTimersAndSwing-Poindexter_Index
+                dc.w    SKPoindexter_SwimAndSetHitbox-Poindexter_Index
 ; ---------------------------------------------------------------------------
 
-loc_88298:
+SKPoindexter_InitTimersAndSwing:
                 lea     ObjDat_Poindexter(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #AniRaw_Poindexter,$30(a0)
@@ -27,7 +27,7 @@ loc_88298:
                 move.w  d0,$2E(a0)
                 add.w   d0,d0
                 move.w  d0,$3A(a0)
-                move.l  #loc_8830E,$34(a0)
+                move.l  #SKPoindexter_ReverseAndReloadWait,$34(a0)
                 move.w  #-$40,d4
                 jsr     Set_VelocityXTrackSonic(pc)
                 move.w  #$20,d0
@@ -38,21 +38,21 @@ loc_88298:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_882E6:
+SKPoindexter_SwimAndSetHitbox:
                 jsr     Swing_UpAndDown(pc)
                 jsr     (MoveSprite2).l
                 jsr     Animate_RawMultiDelay(pc)
                 jsr     Obj_Wait(pc)
                 move.b  #$A,collision_flags(a0)
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   locret_8830C
+                bne.s   SKPoindexter_HitboxReturn
                 move.b  #$86,collision_flags(a0)
 
-locret_8830C:
+SKPoindexter_HitboxReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8830E:
+SKPoindexter_ReverseAndReloadWait:
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  $3A(a0),$2E(a0)

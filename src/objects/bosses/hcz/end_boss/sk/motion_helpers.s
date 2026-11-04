@@ -442,7 +442,7 @@ loc_6BCAC:
 ; ---------------------------------------------------------------------------
 
 loc_6BCB2:
-                lea     (byte_303EA).l,a3
+                lea     (SKHCZWater_VerticalDebrisRecords).l,a3
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #$80,d3
@@ -451,7 +451,7 @@ loc_6BCB2:
 loc_6BCC6:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   locret_6BD1E
-                move.l  #loc_3011A,(a1)
+                move.l  #SKHCZWater_AnimateAirborneDebris,(a1)
                 move.l  #Map_HCZWaterWallDebris,mappings(a1)
                 move.w  #make_art_tile(ArtTile_HCZCutsceneGeyser+$58,2,0),art_tile(a1)
                 move.b  #$84,render_flags(a1)

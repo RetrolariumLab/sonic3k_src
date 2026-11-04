@@ -4593,13 +4593,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "dff0b669694caedfc3fed365bf915ad3a8998e80595e0db8323f47dd74cc95f0",
+      "declarations_sha256": "35a9cad406d81722b1f28b029b86dc755f42d1f89dcb9dcb7b2cd7652c903b55",
       "labels": {
         "Map_Blastoid_": 0,
-        "Frame_360DD8": 8,
-        "Frame_360DEC": 28,
-        "Frame_360E00": 48,
-        "Frame_360E08": 56
+        "BlastoidS3_MapFrame00": 8,
+        "BlastoidS3_MapFrame01": 28,
+        "BlastoidS3_MapFrame02": 48,
+        "BlastoidS3_MapFrame03": 56
       },
       "external_symbols": [],
       "blocks": [
@@ -4607,28 +4607,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360DD8",
+          "target": "BlastoidS3_MapFrame00",
           "base": "Map_Blastoid_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360DEC",
+          "target": "BlastoidS3_MapFrame01",
           "base": "Map_Blastoid_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360E00",
+          "target": "BlastoidS3_MapFrame02",
           "base": "Map_Blastoid_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360E08",
+          "target": "BlastoidS3_MapFrame03",
           "base": "Map_Blastoid_"
         },
         {
@@ -5795,15 +5795,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 114
       },
-      "declarations_sha256": "825751cad63393e8e4e4a49eec5e35a9a2eac5e278bba7319d9fa832eec93396",
+      "declarations_sha256": "5db75c32aecb2e4ec9410c952ad52cdeca04f09e9497a257b4d0aa1cfb9f7913",
       "labels": {
         "Map_Buggernaut_": 0,
-        "Frame_360EC0": 12,
-        "Frame_360EC8": 20,
-        "Frame_360EDC": 40,
-        "Frame_360EF6": 66,
-        "Frame_360EFE": 74,
-        "Frame_360F12": 94
+        "BuggernautS3_MapFrame00": 12,
+        "BuggernautS3_MapFrame01": 20,
+        "BuggernautS3_MapFrame02": 40,
+        "BuggernautS3_MapFrame03": 66,
+        "BuggernautS3_MapFrame04": 74,
+        "BuggernautS3_MapFrame05": 94
       },
       "external_symbols": [],
       "blocks": [
@@ -5811,42 +5811,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EC0",
+          "target": "BuggernautS3_MapFrame00",
           "base": "Map_Buggernaut_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EC8",
+          "target": "BuggernautS3_MapFrame01",
           "base": "Map_Buggernaut_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EDC",
+          "target": "BuggernautS3_MapFrame02",
           "base": "Map_Buggernaut_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EF6",
+          "target": "BuggernautS3_MapFrame03",
           "base": "Map_Buggernaut_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EFE",
+          "target": "BuggernautS3_MapFrame04",
           "base": "Map_Buggernaut_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360F12",
+          "target": "BuggernautS3_MapFrame05",
           "base": "Map_Buggernaut_"
         },
         {
@@ -6110,15 +6110,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 96
       },
-      "declarations_sha256": "5709c3da343e29baf6396105038becf0b655b213e30df25dacd7905fcd3b2178",
+      "declarations_sha256": "7d2dee7d69281376ceeafff7941c4f6faaec438e39ec953d80eadbd6daae5ed6",
       "labels": {
         "Map_CaterKillerJr_": 0,
-        "Frame_361A24": 12,
-        "Frame_361A2C": 20,
-        "Frame_361A34": 28,
-        "Frame_361A3C": 36,
-        "Frame_361A50": 56,
-        "Frame_361A64": 76
+        "CaterkillerJrS3_MapFrame00": 12,
+        "CaterkillerJrS3_MapFrame01": 20,
+        "CaterkillerJrS3_MapFrame02": 28,
+        "CaterkillerJrS3_MapFrame03": 36,
+        "CaterkillerJrS3_MapFrame04": 56,
+        "CaterkillerJrS3_MapFrame05": 76
       },
       "external_symbols": [],
       "blocks": [
@@ -6126,42 +6126,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A24",
+          "target": "CaterkillerJrS3_MapFrame00",
           "base": "Map_CaterKillerJr_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A2C",
+          "target": "CaterkillerJrS3_MapFrame01",
           "base": "Map_CaterKillerJr_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A34",
+          "target": "CaterkillerJrS3_MapFrame02",
           "base": "Map_CaterKillerJr_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A3C",
+          "target": "CaterkillerJrS3_MapFrame03",
           "base": "Map_CaterKillerJr_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A50",
+          "target": "CaterkillerJrS3_MapFrame04",
           "base": "Map_CaterKillerJr_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361A64",
+          "target": "CaterkillerJrS3_MapFrame05",
           "base": "Map_CaterKillerJr_"
         },
         {
@@ -10651,11 +10651,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "db13faf60c119164c8ef41495454ef4be6773fca1bdaee780f71612907a5c12f",
+      "declarations_sha256": "2ad38aeb953d5036ab272291bd06f48502cc8325576898fccd32222ca6136f6a",
       "labels": {
         "Map_Jawz_": 0,
-        "Frame_361368": 4,
-        "Frame_36137C": 24
+        "JawzS3_MapFrame00": 4,
+        "JawzS3_MapFrame01": 24
       },
       "external_symbols": [],
       "blocks": [
@@ -10663,14 +10663,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361368",
+          "target": "JawzS3_MapFrame00",
           "base": "Map_Jawz_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36137C",
+          "target": "JawzS3_MapFrame01",
           "base": "Map_Jawz_"
         },
         {
@@ -25232,13 +25232,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "1074552cede985c51693cb3ba4cf434c2dcf334f9692ba9226d5042664e896f8",
+      "declarations_sha256": "1962e595d3b5a71f3eae073d6f597556a30d234c876f2423aa00fbfb666afba6",
       "labels": {
         "Map_MegaChopper_": 0,
-        "Frame_360F2E": 8,
-        "Frame_360F3C": 22,
-        "Frame_360F4A": 36,
-        "Frame_360F58": 50
+        "MegaChopperS3_MapFrame00": 8,
+        "MegaChopperS3_MapFrame01": 22,
+        "MegaChopperS3_MapFrame02": 36,
+        "MegaChopperS3_MapFrame03": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -25246,28 +25246,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360F2E",
+          "target": "MegaChopperS3_MapFrame00",
           "base": "Map_MegaChopper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360F3C",
+          "target": "MegaChopperS3_MapFrame01",
           "base": "Map_MegaChopper_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360F4A",
+          "target": "MegaChopperS3_MapFrame02",
           "base": "Map_MegaChopper_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360F58",
+          "target": "MegaChopperS3_MapFrame03",
           "base": "Map_MegaChopper_"
         },
         {
@@ -26306,12 +26306,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 66
       },
-      "declarations_sha256": "621aa6a44cfb1f7cbe28b40a9e02a66a077d6ff192c3dda4fe3090cbbed9f991",
+      "declarations_sha256": "670310d1ceb47d1527640edd0627708b55243820d899d739cc0ab5141bf3a51d",
       "labels": {
         "Map_Poindexter_": 0,
-        "Frame_360E78": 6,
-        "Frame_360E8C": 26,
-        "Frame_360EA0": 46
+        "PoindexterS3_MapFrame00": 6,
+        "PoindexterS3_MapFrame01": 26,
+        "PoindexterS3_MapFrame02": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -26319,21 +26319,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360E78",
+          "target": "PoindexterS3_MapFrame00",
           "base": "Map_Poindexter_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360E8C",
+          "target": "PoindexterS3_MapFrame01",
           "base": "Map_Poindexter_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360EA0",
+          "target": "PoindexterS3_MapFrame02",
           "base": "Map_Poindexter_"
         },
         {
@@ -77835,23 +77835,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 200
       },
-      "declarations_sha256": "605383f1463e2b7f83df08166f71c902e48ee815f01f62bd26a83f2bf1d1533d",
+      "declarations_sha256": "589d636f0cacb2b930f0b3d6ab8c19efa9b9e2c7f753089d03c06dcb0141c226",
       "labels": {
         "Map_TurboSpiker_": 0,
-        "Frame_36122E": 28,
-        "Frame_361248": 54,
-        "Frame_361262": 80,
-        "Frame_36127C": 106,
-        "Frame_36128A": 120,
-        "Frame_361292": 128,
-        "Frame_36129A": 136,
-        "Frame_3612A2": 144,
-        "Frame_3612AA": 152,
-        "Frame_3612B2": 160,
-        "Frame_3612BA": 168,
-        "Frame_3612C2": 176,
-        "Frame_3612CA": 184,
-        "Frame_3612D2": 192
+        "TurboSpikerS3_MapFrame00": 28,
+        "TurboSpikerS3_MapFrame01": 54,
+        "TurboSpikerS3_MapFrame02": 80,
+        "TurboSpikerS3_MapFrame03": 106,
+        "TurboSpikerS3_MapFrame04": 120,
+        "TurboSpikerS3_MapFrame05": 128,
+        "TurboSpikerS3_MapFrame06": 136,
+        "TurboSpikerS3_MapFrame07": 144,
+        "TurboSpikerS3_MapFrame08": 152,
+        "TurboSpikerS3_MapFrame09": 160,
+        "TurboSpikerS3_MapFrame0A": 168,
+        "TurboSpikerS3_MapFrame0B": 176,
+        "TurboSpikerS3_MapFrame0C": 184,
+        "TurboSpikerS3_MapFrame0D": 192
       },
       "external_symbols": [],
       "blocks": [
@@ -77859,98 +77859,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36122E",
+          "target": "TurboSpikerS3_MapFrame00",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361248",
+          "target": "TurboSpikerS3_MapFrame01",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361262",
+          "target": "TurboSpikerS3_MapFrame02",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36127C",
+          "target": "TurboSpikerS3_MapFrame03",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36128A",
+          "target": "TurboSpikerS3_MapFrame04",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361292",
+          "target": "TurboSpikerS3_MapFrame05",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36129A",
+          "target": "TurboSpikerS3_MapFrame06",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612A2",
+          "target": "TurboSpikerS3_MapFrame07",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612AA",
+          "target": "TurboSpikerS3_MapFrame08",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612B2",
+          "target": "TurboSpikerS3_MapFrame09",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612BA",
+          "target": "TurboSpikerS3_MapFrame0A",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612C2",
+          "target": "TurboSpikerS3_MapFrame0B",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612CA",
+          "target": "TurboSpikerS3_MapFrame0C",
           "base": "Map_TurboSpiker_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3612D2",
+          "target": "TurboSpikerS3_MapFrame0D",
           "base": "Map_TurboSpiker_"
         },
         {
@@ -78034,10 +78034,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "6732d8d4a6a15aef4afd70970af879eab7f188f538861b1e4ef8fb82d6bfec55",
+      "declarations_sha256": "00caa2238ceee3ea7568596aa80917d2852745d610035dd6e07bcbf0850063a7",
       "labels": {
         "Map_TurboSpikerHidden_": 0,
-        "word_87F42": 2
+        "TurboSpikerHiddenShared_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -78045,7 +78045,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_87F42",
+          "target": "TurboSpikerHiddenShared_MapFrame00",
           "base": "Map_TurboSpikerHidden_"
         },
         {
@@ -95543,11 +95543,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 18
       },
-      "declarations_sha256": "6bf160011be22d8d4a08262b93cbf980246968aacb6c7019d254475899d8e26d",
+      "declarations_sha256": "95937e2ba9b66daeda4831406cc2cce435aa6a3788a3490da4e83518f0579852",
       "labels": {
         "Ani_HCZWaterDrop_": 0,
-        "byte_383AE": 4,
-        "byte_383B7": 13
+        "HCZWaterDropShared_StandardAnim00": 4,
+        "HCZWaterDropShared_StandardAnim01": 13
       },
       "external_symbols": [],
       "blocks": [
@@ -95555,14 +95555,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_383AE",
+          "target": "HCZWaterDropShared_StandardAnim00",
           "base": "Ani_HCZWaterDrop_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_383B7",
+          "target": "HCZWaterDropShared_StandardAnim01",
           "base": "Ani_HCZWaterDrop_"
         },
         {
@@ -95593,15 +95593,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 52
       },
-      "declarations_sha256": "c1066a5a13cd25d5223f1baa2dbb1eeb3db2d1a5b99b6336e1424d450592f408",
+      "declarations_sha256": "d4b7624f17fd3b2ad8afae9d74aaa85541775c7aeda92d0303824778120e6aec",
       "labels": {
         "Ani_HCZWaterWall_": 0,
-        "byte_30272": 18,
-        "byte_30275": 21,
-        "byte_3027A": 26,
-        "byte_3027E": 30,
-        "byte_30280": 32,
-        "byte_30283": 35
+        "HCZWaterWallShared_StandardAnim00": 18,
+        "HCZWaterWallShared_StandardAnim01": 21,
+        "HCZWaterWall_AnimSlots02_03": 26,
+        "HCZWaterWallShared_StandardAnim04": 30,
+        "HCZWaterWall_AnimSlots05To07": 32,
+        "HCZWaterWallShared_IrregularAnim08": 35
       },
       "external_symbols": [],
       "blocks": [
@@ -95609,63 +95609,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30272",
+          "target": "HCZWaterWallShared_StandardAnim00",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30275",
+          "target": "HCZWaterWallShared_StandardAnim01",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3027A",
+          "target": "HCZWaterWall_AnimSlots02_03",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3027A",
+          "target": "HCZWaterWall_AnimSlots02_03",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3027E",
+          "target": "HCZWaterWallShared_StandardAnim04",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30280",
+          "target": "HCZWaterWall_AnimSlots05To07",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30280",
+          "target": "HCZWaterWall_AnimSlots05To07",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30280",
+          "target": "HCZWaterWall_AnimSlots05To07",
           "base": "Ani_HCZWaterWall_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_30283",
+          "target": "HCZWaterWallShared_IrregularAnim08",
           "base": "Ani_HCZWaterWall_"
         },
         {
@@ -95849,13 +95849,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "6ca1a95bdeb605e8f1d861f62aa9013187ff75ccc0e55225263b75462750b49e",
+      "declarations_sha256": "276ff16fab01167b7d9af916c8e0e62486331a2bd8381d59c0f63602ae192be7",
       "labels": {
         "Map_HCZBlock_": 0,
-        "Frame_21D052": 8,
-        "Frame_21D05A": 16,
-        "Frame_21D068": 30,
-        "Frame_21D07C": 50
+        "HCZBlockS3_MapSlot00": 8,
+        "HCZBlockS3_MapSlot01": 16,
+        "HCZBlockS3_MapSlot02": 30,
+        "HCZBlockS3_MapSlot03": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -95863,28 +95863,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21D052",
+          "target": "HCZBlockS3_MapSlot00",
           "base": "Map_HCZBlock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21D05A",
+          "target": "HCZBlockS3_MapSlot01",
           "base": "Map_HCZBlock_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21D068",
+          "target": "HCZBlockS3_MapSlot02",
           "base": "Map_HCZBlock_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21D07C",
+          "target": "HCZBlockS3_MapSlot03",
           "base": "Map_HCZBlock_"
         },
         {
@@ -95918,17 +95918,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "5d7dcf2e44a3a2527c08f19992826f9764484aa7adc5fd619ca1c680ec22778e",
+      "declarations_sha256": "ddcd47d6efc4ca33eda5af387fd012966be9bc6a10ae640851503a97baac06fe",
       "labels": {
         "Map_HCZBreakableBar_": 0,
-        "Frame_21CDDA": 16,
-        "Frame_21CDE8": 30,
-        "Frame_21CDFC": 50,
-        "Frame_21CE16": 76,
-        "Frame_21CE1E": 84,
-        "Frame_21CE2C": 98,
-        "Frame_21CE40": 118,
-        "Frame_21CE5A": 144
+        "HCZBreakableBarS3_MapFrame00": 16,
+        "HCZBreakableBarS3_MapFrame01": 30,
+        "HCZBreakableBarS3_MapFrame02": 50,
+        "HCZBreakableBarS3_MapFrame03": 76,
+        "HCZBreakableBarS3_MapFrame04": 84,
+        "HCZBreakableBarS3_MapFrame05": 98,
+        "HCZBreakableBarS3_MapFrame06": 118,
+        "HCZBreakableBarS3_MapFrame07": 144
       },
       "external_symbols": [],
       "blocks": [
@@ -95936,56 +95936,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CDDA",
+          "target": "HCZBreakableBarS3_MapFrame00",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CDE8",
+          "target": "HCZBreakableBarS3_MapFrame01",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CDFC",
+          "target": "HCZBreakableBarS3_MapFrame02",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CE16",
+          "target": "HCZBreakableBarS3_MapFrame03",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CE1E",
+          "target": "HCZBreakableBarS3_MapFrame04",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CE2C",
+          "target": "HCZBreakableBarS3_MapFrame05",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CE40",
+          "target": "HCZBreakableBarS3_MapFrame06",
           "base": "Map_HCZBreakableBar_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21CE5A",
+          "target": "HCZBreakableBarS3_MapFrame07",
           "base": "Map_HCZBreakableBar_"
         },
         {
@@ -96039,12 +96039,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 134
       },
-      "declarations_sha256": "bcee95ca5cc5850da91333fa9581851cf21dcb02beeb247710950fa03da76783",
+      "declarations_sha256": "d38acaa92c1024747007d2703b1661c96d9b73a47dca5db24ba3cc872d721ce0",
       "labels": {
         "Map_HCZBreakableWall_": 0,
-        "Frame_21FFE0": 8,
-        "Frame_21FFFA": 34,
-        "Frame_22002C": 84
+        "HCZBreakableWallS3_MapSlot00": 8,
+        "HCZBreakableWallS3_MapSlot01": 34,
+        "HCZBreakableWallS3_MapSlots02_03": 84
       },
       "external_symbols": [],
       "blocks": [
@@ -96052,28 +96052,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21FFE0",
+          "target": "HCZBreakableWallS3_MapSlot00",
           "base": "Map_HCZBreakableWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21FFFA",
+          "target": "HCZBreakableWallS3_MapSlot01",
           "base": "Map_HCZBreakableWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22002C",
+          "target": "HCZBreakableWallS3_MapSlots02_03",
           "base": "Map_HCZBreakableWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22002C",
+          "target": "HCZBreakableWallS3_MapSlots02_03",
           "base": "Map_HCZBreakableWall_"
         },
         {
@@ -96102,12 +96102,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "1cca2d41a0b37c267e07886f24448c249f85af78a4961d5d94029b5edb8956ae",
+      "declarations_sha256": "f433102cac96e1e273850e51ab79783337be6fe7457ea532152e75c69c5e799f",
       "labels": {
         "Map_HCZButton_": 0,
-        "Frame_22BD20": 6,
-        "Frame_22BD2E": 20,
-        "Frame_22BD3C": 34
+        "HCZButtonS3_MapSlot00": 6,
+        "HCZButtonS3_MapSlot01": 20,
+        "HCZButtonS3_MapSlot02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -96115,21 +96115,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD20",
+          "target": "HCZButtonS3_MapSlot00",
           "base": "Map_HCZButton_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD2E",
+          "target": "HCZButtonS3_MapSlot01",
           "base": "Map_HCZButton_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22BD3C",
+          "target": "HCZButtonS3_MapSlot02",
           "base": "Map_HCZButton_"
         },
         {
@@ -96158,12 +96158,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 72
       },
-      "declarations_sha256": "da5d8eec6dc425c8c2bd1707bbb9e88a3eaafaa60e1cad57019c9916ab4cd2a1",
+      "declarations_sha256": "888829574fe390601cfdb4b1dc78bcbba495577b3228bf3e25f3d57743d9f6a1",
       "labels": {
         "Map_HCZCNZDEZDoor_": 0,
-        "word_30F8C": 6,
-        "word_30F9A": 20,
-        "word_30FB4": 46
+        "HCZCNZDEZVerticalDoorSK_MapSlot00": 6,
+        "HCZCNZDEZVerticalDoorSK_MapSlot01": 20,
+        "HCZCNZDEZVerticalDoorSK_MapSlot02": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -96171,21 +96171,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_30F8C",
+          "target": "HCZCNZDEZVerticalDoorSK_MapSlot00",
           "base": "Map_HCZCNZDEZDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_30F9A",
+          "target": "HCZCNZDEZVerticalDoorSK_MapSlot01",
           "base": "Map_HCZCNZDEZDoor_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_30FB4",
+          "target": "HCZCNZDEZVerticalDoorSK_MapSlot02",
           "base": "Map_HCZCNZDEZDoor_"
         },
         {
@@ -96214,11 +96214,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 44
       },
-      "declarations_sha256": "41a291e23d670c26e685619102e447ddd90d215ef7a93558c4fe58071e2e2160",
+      "declarations_sha256": "14dbc48a3db37668ec81d08498bdf6a37f563ca34ad2f0ef822e28d31f3b106c",
       "labels": {
         "Map_HCZCNZDoor_": 0,
-        "word_2FC00": 4,
-        "word_2FC0E": 18
+        "HCZCNZVerticalDoorS3_MapSlot00": 4,
+        "HCZCNZVerticalDoorS3_MapSlot01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -96226,14 +96226,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FC00",
+          "target": "HCZCNZVerticalDoorS3_MapSlot00",
           "base": "Map_HCZCNZDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FC0E",
+          "target": "HCZCNZVerticalDoorS3_MapSlot01",
           "base": "Map_HCZCNZDoor_"
         },
         {
@@ -96257,20 +96257,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 1102
       },
-      "declarations_sha256": "f0e09341095d2ff10ff6e9bd5f0c0ee86eb344b228bf7bdbef115acc18c01f21",
+      "declarations_sha256": "f2bb215e6c6bd377e8d094a39a3795f7ea7aa6d4fe1b6000cfca9e9bc3bc8eeb",
       "labels": {
         "Map_HCZCollapsingBridge_": 0,
-        "Frame_21EA32": 24,
-        "Frame_21EA6A": 80,
-        "Frame_21EACC": 178,
-        "Frame_21EB2E": 276,
-        "Frame_21EB72": 344,
-        "Frame_21EBEC": 466,
-        "Frame_21EC66": 588,
-        "Frame_21EC9E": 644,
-        "Frame_21ECFA": 736,
-        "Frame_21ED44": 810,
-        "Frame_21EDD6": 956
+        "HCZCollapsingBridgeS3_MapSlot00": 24,
+        "HCZCollapsingBridgeS3_MapSlot01": 80,
+        "HCZCollapsingBridgeS3_MapSlot02": 178,
+        "HCZCollapsingBridgeS3_MapSlot03": 276,
+        "HCZCollapsingBridgeS3_MapSlot04": 344,
+        "HCZCollapsingBridgeS3_MapSlot05": 466,
+        "HCZCollapsingBridgeS3_MapSlot06": 588,
+        "HCZCollapsingBridgeS3_MapSlots07_08": 644,
+        "HCZCollapsingBridgeS3_MapSlot09": 736,
+        "HCZCollapsingBridgeS3_MapSlot0A": 810,
+        "HCZCollapsingBridgeS3_MapSlot0B": 956
       },
       "external_symbols": [],
       "blocks": [
@@ -96278,84 +96278,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EA32",
+          "target": "HCZCollapsingBridgeS3_MapSlot00",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EA6A",
+          "target": "HCZCollapsingBridgeS3_MapSlot01",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EACC",
+          "target": "HCZCollapsingBridgeS3_MapSlot02",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EB2E",
+          "target": "HCZCollapsingBridgeS3_MapSlot03",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EB72",
+          "target": "HCZCollapsingBridgeS3_MapSlot04",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EBEC",
+          "target": "HCZCollapsingBridgeS3_MapSlot05",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EC66",
+          "target": "HCZCollapsingBridgeS3_MapSlot06",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EC9E",
+          "target": "HCZCollapsingBridgeS3_MapSlots07_08",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EC9E",
+          "target": "HCZCollapsingBridgeS3_MapSlots07_08",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21ECFA",
+          "target": "HCZCollapsingBridgeS3_MapSlot09",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21ED44",
+          "target": "HCZCollapsingBridgeS3_MapSlot0A",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21EDD6",
+          "target": "HCZCollapsingBridgeS3_MapSlot0B",
           "base": "Map_HCZCollapsingBridge_"
         },
         {
@@ -96424,10 +96424,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "2266ab9cb7da32ffb2a4b6c9055e5f9567a0fa851cf8a3e77bf86de6ba012ae0",
+      "declarations_sha256": "3a2b4bf71e7887cda9bd31bfdcdd6f3914e933647e9f31e71ed0a63d45e00944",
       "labels": {
         "Map_HCZConveyorSpike_": 0,
-        "Frame_230360": 2
+        "HCZConveyorSpikeS3_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -96435,7 +96435,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_230360",
+          "target": "HCZConveyorSpikeS3_MapFrame00",
           "base": "Map_HCZConveyorSpike_"
         },
         {
@@ -97121,14 +97121,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 110
       },
-      "declarations_sha256": "f72103f6053d183c3496043b706d95b0c7ac9e75afd846163c5863dc5a4b8dfa",
+      "declarations_sha256": "83da9b29940eb0b1150a44b3f4e9b1d04cadbc9f2cfa7851474fb9a71fa148f9",
       "labels": {
         "Map_HCZFan_": 0,
-        "Frame_22F3B4": 10,
-        "Frame_22F3C8": 30,
-        "Frame_22F3DC": 50,
-        "Frame_22F3F0": 70,
-        "Frame_22F404": 90
+        "HCZFanS3_MapFrame00": 10,
+        "HCZFanS3_MapFrame01": 30,
+        "HCZFanS3_MapFrame02": 50,
+        "HCZFanS3_MapFrame03": 70,
+        "HCZFanS3_MapFrame04": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -97136,35 +97136,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F3B4",
+          "target": "HCZFanS3_MapFrame00",
           "base": "Map_HCZFan_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F3C8",
+          "target": "HCZFanS3_MapFrame01",
           "base": "Map_HCZFan_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F3DC",
+          "target": "HCZFanS3_MapFrame02",
           "base": "Map_HCZFan_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F3F0",
+          "target": "HCZFanS3_MapFrame03",
           "base": "Map_HCZFan_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F404",
+          "target": "HCZFanS3_MapFrame04",
           "base": "Map_HCZFan_"
         },
         {
@@ -97203,11 +97203,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "fd642b3f1ea061366b96c296316ed5c0110fc9159e0402f11d6b9f1b4d50466f",
+      "declarations_sha256": "b2ddb3ab1bf3d5806db706544681a1c6d79498a5f8a7191f9ce266094567d5d8",
       "labels": {
         "Map_HCZFloatingPlatform_": 0,
-        "word_2568C": 4,
-        "word_2569A": 18
+        "HCZFloatingPlatformShared_MapSlot00": 4,
+        "HCZFloatingPlatformShared_MapSlot01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -97215,14 +97215,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2568C",
+          "target": "HCZFloatingPlatformShared_MapSlot00",
           "base": "Map_HCZFloatingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2569A",
+          "target": "HCZFloatingPlatformShared_MapSlot01",
           "base": "Map_HCZFloatingPlatform_"
         },
         {
@@ -97246,17 +97246,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 272
       },
-      "declarations_sha256": "d606885e3f22101a0e1d6a022d8410acc7a5a94abb94dc634e4fae667a4a99d1",
+      "declarations_sha256": "1e07a00f237d05ea15ce6c40f97458d51a1d10a430b34e25ffc314395b4b6799",
       "labels": {
         "Map_HCZHandLauncher_": 0,
-        "Frame_22F9A8": 16,
-        "Frame_22F9CE": 54,
-        "Frame_22F9F4": 92,
-        "Frame_22FA1A": 130,
-        "Frame_22FA40": 168,
-        "Frame_22FA66": 206,
-        "Frame_22FA8C": 244,
-        "Frame_22FAA0": 264
+        "HCZHandLauncherS3_MapFrame00": 16,
+        "HCZHandLauncherS3_MapFrame01": 54,
+        "HCZHandLauncherS3_MapFrame02": 92,
+        "HCZHandLauncherS3_MapFrame03": 130,
+        "HCZHandLauncherS3_MapFrame04": 168,
+        "HCZHandLauncherS3_MapFrame05": 206,
+        "HCZHandLauncherS3_MapFrame06": 244,
+        "HCZHandLauncherS3_MapFrame07": 264
       },
       "external_symbols": [],
       "blocks": [
@@ -97264,56 +97264,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F9A8",
+          "target": "HCZHandLauncherS3_MapFrame00",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F9CE",
+          "target": "HCZHandLauncherS3_MapFrame01",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F9F4",
+          "target": "HCZHandLauncherS3_MapFrame02",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22FA1A",
+          "target": "HCZHandLauncherS3_MapFrame03",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22FA40",
+          "target": "HCZHandLauncherS3_MapFrame04",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22FA66",
+          "target": "HCZHandLauncherS3_MapFrame05",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22FA8C",
+          "target": "HCZHandLauncherS3_MapFrame06",
           "base": "Map_HCZHandLauncher_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22FAA0",
+          "target": "HCZHandLauncherS3_MapFrame07",
           "base": "Map_HCZHandLauncher_"
         },
         {
@@ -97367,14 +97367,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 260
       },
-      "declarations_sha256": "d2ec104ac9d88c0707be636c86bd5519e7891913eb1a291642e3922a68e599b8",
+      "declarations_sha256": "833d0b62df0ac3ed3759ebe20dfd4b0d20b3e28c3cbd4555a2646fb926770c50",
       "labels": {
         "Map_HCZLargeFan_": 0,
-        "Frame_22F422": 10,
-        "Frame_22F454": 60,
-        "Frame_22F486": 110,
-        "Frame_22F4B8": 160,
-        "Frame_22F4EA": 210
+        "HCZLargeFanS3_MapFrame00": 10,
+        "HCZLargeFanS3_MapFrame01": 60,
+        "HCZLargeFanS3_MapFrame02": 110,
+        "HCZLargeFanS3_MapFrame03": 160,
+        "HCZLargeFanS3_MapFrame04": 210
       },
       "external_symbols": [],
       "blocks": [
@@ -97382,35 +97382,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F422",
+          "target": "HCZLargeFanS3_MapFrame00",
           "base": "Map_HCZLargeFan_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F454",
+          "target": "HCZLargeFanS3_MapFrame01",
           "base": "Map_HCZLargeFan_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F486",
+          "target": "HCZLargeFanS3_MapFrame02",
           "base": "Map_HCZLargeFan_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F4B8",
+          "target": "HCZLargeFanS3_MapFrame03",
           "base": "Map_HCZLargeFan_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22F4EA",
+          "target": "HCZLargeFanS3_MapFrame04",
           "base": "Map_HCZLargeFan_"
         },
         {
@@ -98062,12 +98062,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 102
       },
-      "declarations_sha256": "7249480f033a62d507b24caeeb319c6531f4ebcd203cf4a9294353ced472f68f",
+      "declarations_sha256": "e12e65db41ba43837df68b0cd99028c7565a40adbb2865bfc4d550fb187fd0d8",
       "labels": {
         "Map_HCZSpinningColumn_": 0,
-        "Frame_231AF4": 6,
-        "Frame_231B14": 38,
-        "Frame_231B34": 70
+        "HCZSpinningColumnS3_MapFrame00": 6,
+        "HCZSpinningColumnS3_MapFrame01": 38,
+        "HCZSpinningColumnS3_MapFrame02": 70
       },
       "external_symbols": [],
       "blocks": [
@@ -98075,21 +98075,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_231AF4",
+          "target": "HCZSpinningColumnS3_MapFrame00",
           "base": "Map_HCZSpinningColumn_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_231B14",
+          "target": "HCZSpinningColumnS3_MapFrame01",
           "base": "Map_HCZSpinningColumn_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_231B34",
+          "target": "HCZSpinningColumnS3_MapFrame02",
           "base": "Map_HCZSpinningColumn_"
         },
         {
@@ -98118,16 +98118,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 70
       },
-      "declarations_sha256": "0eb3f851759af7141dddf5fed98f5526a0f7ab0244c60bbf0694adc7d3ddbd0a",
+      "declarations_sha256": "923ec659c84850053a6868cbe2109e5a52bfacc34a4b2f65c2b77cb971637645",
       "labels": {
         "Map_HCZWaterDrop_": 0,
-        "Frame_23795C": 14,
-        "Frame_237964": 22,
-        "Frame_23796C": 30,
-        "Frame_237974": 38,
-        "Frame_23797C": 46,
-        "Frame_237984": 54,
-        "Frame_23798C": 62
+        "HCZWaterDropS3_MapFrame00": 14,
+        "HCZWaterDropS3_MapFrame01": 22,
+        "HCZWaterDropS3_MapFrame02": 30,
+        "HCZWaterDropS3_MapFrame03": 38,
+        "HCZWaterDropS3_MapFrame04": 46,
+        "HCZWaterDropS3_MapFrame05": 54,
+        "HCZWaterDropS3_MapFrame06": 62
       },
       "external_symbols": [],
       "blocks": [
@@ -98135,49 +98135,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23795C",
+          "target": "HCZWaterDropS3_MapFrame00",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237964",
+          "target": "HCZWaterDropS3_MapFrame01",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23796C",
+          "target": "HCZWaterDropS3_MapFrame02",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237974",
+          "target": "HCZWaterDropS3_MapFrame03",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23797C",
+          "target": "HCZWaterDropS3_MapFrame04",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237984",
+          "target": "HCZWaterDropS3_MapFrame05",
           "base": "Map_HCZWaterDrop_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_23798C",
+          "target": "HCZWaterDropS3_MapFrame06",
           "base": "Map_HCZWaterDrop_"
         },
         {
@@ -98226,13 +98226,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 352
       },
-      "declarations_sha256": "bbb7ed27602282cc22bcbda2c2e03d867d565196208c88ec3bdd9f2398e63c90",
+      "declarations_sha256": "1c89c01d852f729f669425c95dcefcd0fc05f247860b67c16f36e79e73414fc2",
       "labels": {
         "Map_HCZWaterRush_": 0,
-        "Frame_22E614": 8,
-        "Frame_22E646": 58,
-        "Frame_22E684": 120,
-        "Frame_22E6F8": 236
+        "HCZWaterRushS3_MapFrame02": 8,
+        "HCZWaterRushS3_MapFrame03": 58,
+        "HCZWaterRushS3_MapFrame00": 120,
+        "HCZWaterRushS3_MapFrame01": 236
       },
       "external_symbols": [],
       "blocks": [
@@ -98240,28 +98240,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E684",
+          "target": "HCZWaterRushS3_MapFrame00",
           "base": "Map_HCZWaterRush_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E6F8",
+          "target": "HCZWaterRushS3_MapFrame01",
           "base": "Map_HCZWaterRush_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E614",
+          "target": "HCZWaterRushS3_MapFrame02",
           "base": "Map_HCZWaterRush_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E646",
+          "target": "HCZWaterRushS3_MapFrame03",
           "base": "Map_HCZWaterRush_"
         },
         {
@@ -98295,11 +98295,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "bbe754599175ed78dc7e143edd1dbda8df03e0426e2956da0c13fdbe1bc98ee8",
+      "declarations_sha256": "1daf53efb08ee6f726c8828b8b87ddf50c20d48535ed0d6b6c017543f71fced1",
       "labels": {
         "Map_HCZWaterRushBlock_": 0,
-        "Frame_22E770": 4,
-        "Frame_22E778": 12
+        "HCZWaterRushBlockS3_MapFrame00": 4,
+        "HCZWaterRushBlockS3_MapFrame01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -98307,14 +98307,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E770",
+          "target": "HCZWaterRushBlockS3_MapFrame00",
           "base": "Map_HCZWaterRushBlock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22E778",
+          "target": "HCZWaterRushBlockS3_MapFrame01",
           "base": "Map_HCZWaterRushBlock_"
         },
         {
@@ -98338,47 +98338,47 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "36e672f087853f16fcb371efa8b13282cbd1fd29313431b04795b425c1fcdd5c",
+      "declarations_sha256": "e434c2825bbd883a53cfb4cf1e218d4175ddb6c0ed891c268d3645c6f288fed6",
       "labels": {
         "Map_HCZWaterSplash_": 0,
-        "Frame_237C6A": 10,
-        "Frame_247C78": 24
+        "HCZWaterSplashSmallS3_MapSlots00To03": 10,
+        "HCZWaterSplashLargeS3_BlankMapSlot05": 24
       },
-      "external_symbols": ["Frame_237C86"],
+      "external_symbols": ["HCZWaterSplash_SharedMapFrame"],
       "blocks": [
         {
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C6A",
+          "target": "HCZWaterSplashSmallS3_MapSlots00To03",
           "base": "Map_HCZWaterSplash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C6A",
+          "target": "HCZWaterSplashSmallS3_MapSlots00To03",
           "base": "Map_HCZWaterSplash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C6A",
+          "target": "HCZWaterSplashSmallS3_MapSlots00To03",
           "base": "Map_HCZWaterSplash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C6A",
+          "target": "HCZWaterSplashSmallS3_MapSlots00To03",
           "base": "Map_HCZWaterSplash_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash_"
         },
         {
@@ -98402,53 +98402,53 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "62d9012c76af109fbb0504a5adde1606e515881bcbfa75e9fd295879069a8417",
+      "declarations_sha256": "7a6662c29eda1b64a08e1340422a6020e4215e24dd85128f28e59faad44d261c",
       "labels": {
         "Map_HCZWaterSplash2_": 0,
-        "Frame_237C86": 12
+        "HCZWaterSplash_SharedMapFrame": 12
       },
-      "external_symbols": ["Frame_247C78"],
+      "external_symbols": ["HCZWaterSplashLargeS3_BlankMapSlot05"],
       "blocks": [
         {
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash2_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash2_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash2_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash2_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_237C86",
+          "target": "HCZWaterSplash_SharedMapFrame",
           "base": "Map_HCZWaterSplash2_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_247C78",
+          "target": "HCZWaterSplashLargeS3_BlankMapSlot05",
           "base": "Map_HCZWaterSplash2_"
         },
         {
@@ -98467,17 +98467,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "433a8cef04cc5735fe9a8b19b149ba630487dd2d479efedf44364010bda4801c",
+      "declarations_sha256": "fdfc86df159a6106ccfe3313faf8025491c32e9523bcffa7e05ae856b200c477",
       "labels": {
         "Map_HCZWaterWallDebris_": 0,
-        "Frame_22EF1E": 16,
-        "Frame_22EF26": 24,
-        "Frame_22EF2E": 32,
-        "Frame_22EF36": 40,
-        "Frame_22EF3E": 48,
-        "Frame_22EF46": 56,
-        "Frame_22EF4E": 64,
-        "Frame_22EF56": 72
+        "HCZWaterWallDebrisS3_MapFrame00": 16,
+        "HCZWaterWallDebrisS3_MapFrame01": 24,
+        "HCZWaterWallDebrisS3_MapFrame02": 32,
+        "HCZWaterWallDebrisS3_MapFrame03": 40,
+        "HCZWaterWallDebrisS3_MapFrame04": 48,
+        "HCZWaterWallDebrisS3_MapFrame05": 56,
+        "HCZWaterWallDebrisS3_MapFrame06": 64,
+        "HCZWaterWallDebrisS3_MapFrame07": 72
       },
       "external_symbols": [],
       "blocks": [
@@ -98485,56 +98485,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF1E",
+          "target": "HCZWaterWallDebrisS3_MapFrame00",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF26",
+          "target": "HCZWaterWallDebrisS3_MapFrame01",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF2E",
+          "target": "HCZWaterWallDebrisS3_MapFrame02",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF36",
+          "target": "HCZWaterWallDebrisS3_MapFrame03",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF3E",
+          "target": "HCZWaterWallDebrisS3_MapFrame04",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF46",
+          "target": "HCZWaterWallDebrisS3_MapFrame05",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF4E",
+          "target": "HCZWaterWallDebrisS3_MapFrame06",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF56",
+          "target": "HCZWaterWallDebrisS3_MapFrame07",
           "base": "Map_HCZWaterWallDebris_"
         },
         {
@@ -98588,20 +98588,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 254
       },
-      "declarations_sha256": "28089ac20c723605c51f55d5a104c8b6ec60019a6ae54b11c9321f6f4cf70339",
+      "declarations_sha256": "429a5d00fd2a1f1d9713a6120c7dc82968319279eb5df686a6a3f056a06d658c",
       "labels": {
         "Map_HCZWaterWall_": 0,
-        "Frame_22EE26": 22,
-        "Frame_22EE7C": 108,
-        "Frame_22EEC6": 182,
-        "Frame_22EECE": 190,
-        "Frame_22EED6": 198,
-        "Frame_22EEDE": 206,
-        "Frame_22EEE6": 214,
-        "Frame_22EEEE": 222,
-        "Frame_22EEF6": 230,
-        "Frame_22EEFE": 238,
-        "Frame_22EF06": 246
+        "HCZWaterWallS3_MapFrame00": 22,
+        "HCZWaterWallS3_MapFrame01": 108,
+        "HCZWaterWallS3_MapFrame02": 182,
+        "HCZWaterWallS3_MapFrame03": 190,
+        "HCZWaterWallS3_MapFrame04": 198,
+        "HCZWaterWallS3_MapFrame05": 206,
+        "HCZWaterWallS3_MapFrame06": 214,
+        "HCZWaterWallS3_MapFrame07": 222,
+        "HCZWaterWallS3_MapFrame08": 230,
+        "HCZWaterWallS3_MapFrame09": 238,
+        "HCZWaterWallS3_MapFrame0A": 246
       },
       "external_symbols": [],
       "blocks": [
@@ -98609,77 +98609,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EE26",
+          "target": "HCZWaterWallS3_MapFrame00",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EE7C",
+          "target": "HCZWaterWallS3_MapFrame01",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEC6",
+          "target": "HCZWaterWallS3_MapFrame02",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EECE",
+          "target": "HCZWaterWallS3_MapFrame03",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EED6",
+          "target": "HCZWaterWallS3_MapFrame04",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEDE",
+          "target": "HCZWaterWallS3_MapFrame05",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEE6",
+          "target": "HCZWaterWallS3_MapFrame06",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEEE",
+          "target": "HCZWaterWallS3_MapFrame07",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEF6",
+          "target": "HCZWaterWallS3_MapFrame08",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EEFE",
+          "target": "HCZWaterWallS3_MapFrame09",
           "base": "Map_HCZWaterWall_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22EF06",
+          "target": "HCZWaterWallS3_MapFrame0A",
           "base": "Map_HCZWaterWall_"
         },
         {
@@ -98748,15 +98748,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 188
       },
-      "declarations_sha256": "35b994c2fd96be3cd745aea56046f8fa717941c9e4ed3b5f615f0b75e03ddb5e",
+      "declarations_sha256": "6b7a7ded26d11a0a8fffb5281319be0274e7c9e5e218e376c93d50a815b13fea",
       "labels": {
         "Map_HCZWaveSplash_": 0,
-        "word_1F2DC": 14,
-        "word_1F2F0": 34,
-        "word_1F304": 54,
-        "word_1F318": 74,
-        "word_1F33E": 112,
-        "word_1F364": 150
+        "HCZWaveSplashShared_MapSlots00_01": 14,
+        "HCZWaveSplashShared_MapFrame02": 34,
+        "HCZWaveSplashShared_MapFrame03": 54,
+        "HCZWaveSplashShared_MapFrame04": 74,
+        "HCZWaveSplashShared_MapFrame05": 112,
+        "HCZWaveSplashShared_MapFrame06": 150
       },
       "external_symbols": [],
       "blocks": [
@@ -98764,49 +98764,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F2DC",
+          "target": "HCZWaveSplashShared_MapSlots00_01",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F2DC",
+          "target": "HCZWaveSplashShared_MapSlots00_01",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F2F0",
+          "target": "HCZWaveSplashShared_MapFrame02",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F304",
+          "target": "HCZWaveSplashShared_MapFrame03",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F318",
+          "target": "HCZWaveSplashShared_MapFrame04",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F33E",
+          "target": "HCZWaveSplashShared_MapFrame05",
           "base": "Map_HCZWaveSplash_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1F364",
+          "target": "HCZWaveSplashShared_MapFrame06",
           "base": "Map_HCZWaveSplash_"
         },
         {

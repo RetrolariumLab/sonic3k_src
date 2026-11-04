@@ -721,59 +721,59 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
-      "sha256": "3a5e5a7e1d0a86b7e22d3b10125b3c852ab570fe8bc38deb2d44b716c3fcd1bb"
+      "sha256": "5f323c8b7dacc968f6026a3e249faeece6d0b017f947fdd7411a33ce68895129"
     },
     {
       "path": "src/objects/enemies/hcz/s3/buggernaut.s",
-      "sha256": "8b4740a1f679fe644709c0e4b6a89d60ae991241840cadb834da9e2b3166e1c7"
+      "sha256": "89c567d5358e0e0b6fa24a52b3cf7792ff188b6533bc7e8d5b98644f163f3ef1"
     },
     {
       "path": "src/objects/enemies/hcz/s3/caterkiller_jr.s",
-      "sha256": "5abe1d4413538d2715b7dd1994c758e149277b7c9ddcd18fa1fec5368e26e610"
+      "sha256": "16fbb0cf9e9805c39740d42f2416aaad35f0479445810233baa5ac365f814c78"
     },
     {
       "path": "src/objects/enemies/hcz/s3/jawz.s",
-      "sha256": "627e31b6cab0f7d45f272d932d2b11c9ec911c6642bc84598e27881a4d98116c"
+      "sha256": "6a256fa40c6fa261d3d6bb4da9260884ac880d0969581427ab578f64321136e8"
     },
     {
       "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
-      "sha256": "a2c49bbd4649f2264790eebadd416cddbdddec06e3d1f777814976cde0357f42"
+      "sha256": "ebfe4b262281e6a86d4bf27d48f575d1d4b5881cdf316cfee1cdbe9a9a5ad021"
     },
     {
       "path": "src/objects/enemies/hcz/s3/poindexter.s",
-      "sha256": "16c438a628a38d05ec54c1c1e741540129c491ad3baa08a4ab12650f1f8eb3fc"
+      "sha256": "456f64c464bc5622620814667c0697c24fa564044da8ace58777fb10618f02c0"
     },
     {
       "path": "src/objects/enemies/hcz/s3/turbo_spiker.s",
-      "sha256": "d83dd3bd4abb61778260a5384e9abac84ab6545423fabb327a10f824dc6f80e0"
+      "sha256": "f9f779cce23dd908f36a598b512dfce219711b709fe561a0760b94579363c69d"
     },
     {
       "path": "src/objects/enemies/hcz/sk/blastoid.s",
-      "sha256": "7bbdfab6d99bc71b9dba4b8c107ca3adbf3a421b31f4034f9d78423aa51ef51a"
+      "sha256": "06947ea0e13a09891dd6982cd635c24941f33fa5180040a229d811410cca258c"
     },
     {
       "path": "src/objects/enemies/hcz/sk/buggernaut.s",
-      "sha256": "54fd7006ef045392e696ed5c7a66b63b25f1a3732ecde7422b89524fee24d979"
+      "sha256": "2a1f325ff49b0ba8b296a196aed5090a3494a40bc2965911262c9afffca499d2"
     },
     {
       "path": "src/objects/enemies/hcz/sk/caterkiller_jr.s",
-      "sha256": "caea8e64a97567978997dbfeaaa2680d2f0eee7036da4d2f5a0b067f5460363c"
+      "sha256": "aae661612e20391d222863931c54b001ce5b21bc101e3f98096d5867af0e33b5"
     },
     {
       "path": "src/objects/enemies/hcz/sk/jawz.s",
-      "sha256": "0027b59688bede8cc2ed74733a01ed48cc130b7421d9a2110dbb8a74f9d55d53"
+      "sha256": "370ac8c36291ee41073adaa74adf794690a99f31e1a2d5d4def8e95184bf7181"
     },
     {
       "path": "src/objects/enemies/hcz/sk/mega_chopper.s",
-      "sha256": "ff74f86ec421b11bfd3bdc8755883effb5e8d0892b3ddf86cd77efc2662cab33"
+      "sha256": "fccf331c27ce262003537613a4be5c32f6dcdfa24c8b0da271bb4b84c6e4a1e3"
     },
     {
       "path": "src/objects/enemies/hcz/sk/poindexter.s",
-      "sha256": "dd05271e2b2cc50bb7da81f3d1da8efaa19100c4816c1842e0cf043bad18f317"
+      "sha256": "e8ec6ea90294dc65901a7a619c4e0e3a24285999a0b3501745ff87f4e83f9d53"
     },
     {
       "path": "src/objects/enemies/hcz/sk/turbo_spiker.s",
-      "sha256": "03cb4a8ae61c90381f7533776896c4a7f89b239f3f8e33a534f9bc962fa1878b"
+      "sha256": "ad01f3cb00830cdb2d03932fc87c4fb1e022525616b112e77b6c5d9af71bbce0"
     },
     {
       "path": "src/objects/enemies/icz/s3/penguinator.s",
@@ -3867,27 +3867,27 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
-      "symbol": "byte_557F6",
-      "scope": "byte_557F6",
+      "symbol": "HCZBlastoidS3_PairedLauncherFiringStream",
+      "scope": "HCZBlastoidS3_PairedLauncherFiringStream",
       "first_line": 95,
       "last_line": 106,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 20,
-      "declarations_sha256": "30aac79b7040121d74b294a811cfa2463507b64dcc67e6e3ba6bcd828035d7ad",
+      "declarations_sha256": "5c447e62175f2befd29b1b9c538540ef1d8d1ccfc9daedbc29d6fdf2abc3b2fd",
       "entries": [
         [0, "pairs"],
         [15, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_557F6", "byte_55805"],
+      "members": ["HCZBlastoidS3_PairedLauncherFiringStream", "S3Blastoid_ShotAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/s3/buggernaut.s",
       "symbol": "AniRaw_Buggernaut",
       "scope": "AniRaw_Buggernaut",
-      "first_line": 180,
-      "last_line": 184,
+      "first_line": 181,
+      "last_line": 185,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 10,
       "declarations_sha256": "b325c42a1faac5a1904e57f4d737fb9e779fe84886ca684be21a5f7cdde94711",
@@ -3901,38 +3901,38 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/caterkiller_jr.s",
-      "symbol": "byte_556A4",
-      "scope": "byte_556A4",
+      "symbol": "S3CaterkillerJr_AttachedEffectAnim",
+      "scope": "S3CaterkillerJr_AttachedEffectAnim",
       "first_line": 198,
       "last_line": 204,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 10,
-      "declarations_sha256": "83252aed3d53146d324ef9bc90bdc58242460a13260ae426fe31e3f5b178c566",
+      "declarations_sha256": "2ff6300da2eff23e2156fa4b0a638c6d72478fc999c43afd31526a9f5856586f",
       "entries": [[0, "pairs"]],
       "external_symbols": [],
-      "members": ["byte_556A4"],
+      "members": ["S3CaterkillerJr_AttachedEffectAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/s3/jawz.s",
-      "symbol": "byte_55722",
-      "scope": "byte_55722",
+      "symbol": "HCZJawzS3_UniformSwimTwoFrameLoop",
+      "scope": "HCZJawzS3_UniformSwimTwoFrameLoop",
       "first_line": 50,
       "last_line": 52,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
-      "declarations_sha256": "d4848275a06d9e2aee42573c6d09eedfd1b75e429bc635343f6b698317312169",
+      "declarations_sha256": "13f9d27194fe1d56c679f181659a36a93ff7710a94b16fe2a203ab3064177f04",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_55722"],
+      "members": ["HCZJawzS3_UniformSwimTwoFrameLoop"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/s3/mega_chopper.s",
       "symbol": "AniRaw_MegaChopper",
       "scope": "AniRaw_MegaChopper",
-      "first_line": 301,
-      "last_line": 303,
+      "first_line": 303,
+      "last_line": 305,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 4,
       "declarations_sha256": "64381e9107e0cc8014bed328e48218fa646e8ae09a32d9692ea93df57c3c05b6",
@@ -3957,13 +3957,13 @@
     },
     {
       "path": "src/objects/enemies/hcz/s3/turbo_spiker.s",
-      "symbol": "byte_55D0C",
-      "scope": "byte_55D0C",
-      "first_line": 358,
-      "last_line": 366,
+      "symbol": "S3TurboSpiker_SlowBodyAnim",
+      "scope": "S3TurboSpiker_SlowBodyAnim",
+      "first_line": 360,
+      "last_line": 368,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 26,
-      "declarations_sha256": "4b4cb591333f7964db808194eb7fa27351ee78aa54cb30850db518080b7ada0a",
+      "declarations_sha256": "6a1174741ad2d9a5e25179352f1fc3aeb36c57a2f85ecd5c3125b6aedb163f57",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -3971,32 +3971,37 @@
         [17, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_55D0C", "byte_55D11", "byte_55D16", "byte_55D1D"],
+      "members": [
+        "S3TurboSpiker_SlowBodyAnim",
+        "S3TurboSpiker_FastBodyAnim",
+        "S3TurboSpiker_PuffAnim",
+        "S3TurboSpiker_SplashAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/sk/blastoid.s",
-      "symbol": "byte_87A10",
-      "scope": "byte_87A10",
-      "first_line": 102,
-      "last_line": 113,
+      "symbol": "HCZBlastoidSK_PairedLauncherFiringStream",
+      "scope": "HCZBlastoidSK_PairedLauncherFiringStream",
+      "first_line": 103,
+      "last_line": 114,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 20,
-      "declarations_sha256": "c603c45486a30d97a684914fbc2714b0722f86ac07e4b1362e96d9bf58dabe0d",
+      "declarations_sha256": "f88f74a1c8523c4dca579a07319ca8eb1fd5f023c43ac50731d7d83a0f7ad66a",
       "entries": [
         [0, "pairs"],
         [15, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_87A10", "byte_87A1F"],
+      "members": ["HCZBlastoidSK_PairedLauncherFiringStream", "SKBlastoid_ShotAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/sk/buggernaut.s",
       "symbol": "AniRaw_Buggernaut",
       "scope": "AniRaw_Buggernaut",
-      "first_line": 180,
-      "last_line": 184,
+      "first_line": 181,
+      "last_line": 185,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
       "declarations_sha256": "b325c42a1faac5a1904e57f4d737fb9e779fe84886ca684be21a5f7cdde94711",
@@ -4010,38 +4015,38 @@
     },
     {
       "path": "src/objects/enemies/hcz/sk/caterkiller_jr.s",
-      "symbol": "byte_878A8",
-      "scope": "byte_878A8",
+      "symbol": "SKCaterkillerJr_AttachedEffectAnim",
+      "scope": "SKCaterkillerJr_AttachedEffectAnim",
       "first_line": 198,
       "last_line": 204,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 10,
-      "declarations_sha256": "dc8357246c6061dc70c2b7cf08c7f099f5dd6763b33a4d4c4f9c10f5a21f3647",
+      "declarations_sha256": "d908fa5631c34adf64916c0ad9973c9040a0b3fc18c009b82b26ed5092eccf8e",
       "entries": [[0, "pairs"]],
       "external_symbols": [],
-      "members": ["byte_878A8"],
+      "members": ["SKCaterkillerJr_AttachedEffectAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/sk/jawz.s",
-      "symbol": "byte_87924",
-      "scope": "byte_87924",
+      "symbol": "HCZJawzSK_UniformSwimTwoFrameLoop",
+      "scope": "HCZJawzSK_UniformSwimTwoFrameLoop",
       "first_line": 49,
       "last_line": 51,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "edb9d131e1a6efc24bfe710c06e5c2530174bb6e695c99965382b945891dc7b7",
+      "declarations_sha256": "d80c30d4c6930609992b4e05ba1f598339b2fa85357ec734a975ff7da7eb067b",
       "entries": [[0, "fixed"]],
       "external_symbols": [],
-      "members": ["byte_87924"],
+      "members": ["HCZJawzSK_UniformSwimTwoFrameLoop"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/hcz/sk/mega_chopper.s",
       "symbol": "AniRaw_MegaChopper",
       "scope": "AniRaw_MegaChopper",
-      "first_line": 302,
-      "last_line": 304,
+      "first_line": 304,
+      "last_line": 306,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
       "declarations_sha256": "64381e9107e0cc8014bed328e48218fa646e8ae09a32d9692ea93df57c3c05b6",
@@ -4066,13 +4071,13 @@
     },
     {
       "path": "src/objects/enemies/hcz/sk/turbo_spiker.s",
-      "symbol": "byte_87F26",
-      "scope": "byte_87F26",
-      "first_line": 358,
-      "last_line": 366,
+      "symbol": "SKTurboSpiker_SlowBodyAnim",
+      "scope": "SKTurboSpiker_SlowBodyAnim",
+      "first_line": 360,
+      "last_line": 368,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 26,
-      "declarations_sha256": "93b13f6e2015b0eaf7b24a86427e8ddbceb1c2e3dcae3cc3208062211ef3a3b4",
+      "declarations_sha256": "c83a6697bb85a6c4eef31855ef1b64388779ff29ad78048cc15a713ffb1eb2d2",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -4080,7 +4085,12 @@
         [17, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_87F26", "byte_87F2B", "byte_87F30", "byte_87F37"],
+      "members": [
+        "SKTurboSpiker_SlowBodyAnim",
+        "SKTurboSpiker_FastBodyAnim",
+        "SKTurboSpiker_PuffAnim",
+        "SKTurboSpiker_SplashAnim"
+      ],
       "stored_markers": []
     },
     {
