@@ -3,46 +3,46 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Obj_Tails2P:
                 cmpa.w  #Player_1,a0
-                bne.s   loc_13130
+                bne.s   SKTailsCompetition_SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask
                 lea     (Max_speed).w,a4
                 lea     (Distance_from_top).w,a5
                 lea     (Dust).w,a6
                 move.b  (Player_2+character_id).w,d0
                 cmp.b   character_id(a0),d0
-                bne.s   loc_13124
+                bne.s   SKTailsCompetition_GatePrimaryCompetitionDebugPlacement
                 bchg    #3,render_flags(a0)
 
-loc_13124:
+SKTailsCompetition_GatePrimaryCompetitionDebugPlacement:
                 tst.w   (Debug_placement_mode).w
-                beq.s   loc_1314C
+                beq.s   SKTailsCompetition_DispatchSixCompetitionTailsRoutineEntries
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
-loc_13130:
+SKTailsCompetition_SelectSecondaryCompetitionBasesAndMatchingCharacterViewportMask:
                 lea     (Max_speed_P2).w,a4
                 lea     (Distance_from_top_P2).w,a5
                 lea     (Dust_P2).w,a6
                 move.b  (Player_1+character_id).w,d0
                 cmp.b   character_id(a0),d0
-                bne.s   loc_1314C
+                bne.s   SKTailsCompetition_DispatchSixCompetitionTailsRoutineEntries
                 bchg    #4,render_flags(a0)
 
-loc_1314C:
+SKTailsCompetition_DispatchSixCompetitionTailsRoutineEntries:
                 moveq   #0,d0
                 move.b  routine(a0),d0
                 move.w  Tails2P_Index(pc,d0.w),d1
                 jmp     Tails2P_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 Tails2P_Index:
-                dc.w    loc_13166-Tails2P_Index
-                dc.w    loc_13274-Tails2P_Index
-                dc.w    loc_1569C-Tails2P_Index
-                dc.w    loc_1578E-Tails2P_Index
-                dc.w    loc_157E0-Tails2P_Index
-                dc.w    loc_157F4-Tails2P_Index
+                dc.w    SKTailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds-Tails2P_Index
+                dc.w    SKTailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB-Tails2P_Index
+                dc.w    SKTailsRecovery_EnterSoloDebugFromHurtWithPhysicalBPress-Tails2P_Index
+                dc.w    SKTailsRecovery_EnterSoloDebugFromDeathWithPhysicalBPress-Tails2P_Index
+                dc.w    SKTailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails2P_Index
+                dc.w    SKTailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails2P_Index
 ; ---------------------------------------------------------------------------
 
-loc_13166:
+SKTailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds:
                 addq.b  #2,routine(a0)
                 move.b  #$B,y_radius(a0)
                 move.b  #5,x_radius(a0)
@@ -63,33 +63,33 @@ loc_13166:
                 move.w  (a1)+,Acceleration_P2-Max_speed_P2(a4)
                 move.w  (a1)+,Deceleration_P2-Max_speed_P2(a4)
                 tst.b   (Last_star_post_hit).w
-                bne.w   loc_13250
+                bne.w   SKTailsCompetition_ResetCompetitionCpuTimersAndFallThroughControl
                 move.b  #$C,top_solid_bit(a0)
                 move.b  #$D,lrb_solid_bit(a0)
                 cmpa.w  #Player_1,a0
-                bne.s   loc_13218
+                bne.s   SKTailsCompetition_SelectSecondaryArtAndZoneHighPriority
                 move.w  #make_art_tile(ArtTile_Player_1,0,0),art_tile(a0)
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   loc_131F2
+                bne.s   SKTailsCompetition_SavePrimaryRespawnAndCreatePrimaryCompactTail
                 ori.w   #high_priority,art_tile(a0)
 
-loc_131F2:
+SKTailsCompetition_SavePrimaryRespawnAndCreatePrimaryCompactTail:
                 move.w  x_pos(a0),(Saved_X_pos).w
                 move.w  y_pos(a0),(Saved_Y_pos).w
                 move.w  art_tile(a0),(Saved_art_tile).w
                 move.w  top_solid_bit(a0),(Saved_solid_bits).w
                 move.l  #Obj_Tails2P_Tail,(Tails_tails_2P).w
                 move.w  a0,(Tails_tails_2P+$30).w
-                bra.s   loc_13250
+                bra.s   SKTailsCompetition_ResetCompetitionCpuTimersAndFallThroughControl
 ; ---------------------------------------------------------------------------
 
-loc_13218:
+SKTailsCompetition_SelectSecondaryArtAndZoneHighPriority:
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   loc_1322C
+                bne.s   SKTailsCompetition_SaveSecondaryRespawnAndCreateSecondaryCompactTail
                 ori.w   #high_priority,art_tile(a0)
 
-loc_1322C:
+SKTailsCompetition_SaveSecondaryRespawnAndCreateSecondaryCompactTail:
                 move.w  x_pos(a0),(Saved2_X_pos).w
                 move.w  y_pos(a0),(Saved2_Y_pos).w
                 move.w  art_tile(a0),(Saved2_art_tile).w
@@ -97,7 +97,7 @@ loc_1322C:
                 move.l  #Obj_Tails2P_Tail,(Tails_tails).w
                 move.w  a0,(Tails_tails+$30).w
 
-loc_13250:
+SKTailsCompetition_ResetCompetitionCpuTimersAndFallThroughControl:
                 move.b  #0,flips_remaining(a0)
                 move.b  #4,flip_speed(a0)
                 move.b  #30,air_left(a0)
@@ -105,51 +105,51 @@ loc_13250:
                 move.w  #10*60,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
 
-loc_13274:
+SKTailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_13294
+                beq.s   SKTailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback
                 cmpa.w  #Player_1,a0
-                bne.s   loc_13294
+                bne.s   SKTailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_13294
+                beq.s   SKTailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13294:
+SKTailsCompetition_CopyPrimaryInputIntoBothLogicalWordsWithLockedFallback:
                 cmpa.w  #Player_1,a0
-                bne.s   loc_132B4
+                bne.s   SKTailsCompetition_CopySecondaryCompetitionInputUnlessLocked
                 move.w  (Ctrl_1_logical).w,(Ctrl_2_logical).w
                 tst.b   (Ctrl_1_locked).w
-                bne.s   loc_132C0
+                bne.s   SKTailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes
                 move.w  (Ctrl_1).w,(Ctrl_2_logical).w
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
-                bra.s   loc_132C0
+                bra.s   SKTailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes
 ; ---------------------------------------------------------------------------
 
-loc_132B4:
+SKTailsCompetition_CopySecondaryCompetitionInputUnlessLocked:
                 tst.b   (Ctrl_2_locked).w
-                bne.s   loc_132C0
+                bne.s   SKTailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes
                 move.w  (Ctrl_2).w,(Ctrl_2_logical).w
 
-loc_132C0:
+SKTailsCompetition_QueueCompetitionDisplayAndGateFourMovementModes:
                 bsr.w   Tails_Display
                 btst    #0,object_control(a0)
-                bne.s   loc_132DE
+                bne.s   SKTailsCompetition_WrapCompetitionIntegerYAtSharedCameraMinimum
                 moveq   #0,d0
                 move.b  status(a0),d0
                 andi.w  #6,d0
-                move.w  off_1332E(pc,d0.w),d1
-                jsr     off_1332E(pc,d1.w)
+                move.w  SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets(pc,d0.w),d1
+                jsr     SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets(pc,d1.w)
 
-loc_132DE:
+SKTailsCompetition_WrapCompetitionIntegerYAtSharedCameraMinimum:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_132EE
+                bne.s   SKTailsCompetition_WrapXRecordHistoryAndGateCompactTailsAnimation
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_132EE:
+SKTailsCompetition_WrapXRecordHistoryAndGateCompactTailsAnimation:
                 move.w  (Screen_X_wrap_value).w,d0
                 and.w   d0,x_pos(a0)
                 addi.w  #$400,x_pos(a0)
@@ -157,27 +157,27 @@ loc_132EE:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 btst    #1,object_control(a0)
-                bne.s   loc_1331C
+                bne.s   SKTailsCompetition_RunCompactCompetitionTouchUnlessControlMaskA0Set
                 bsr.w   Animate_Tails2P
                 bsr.w   Tails2P_Load_PLC
 
-loc_1331C:
+SKTailsCompetition_RunCompactCompetitionTouchUnlessControlMaskA0Set:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   locret_1332C
+                bne.s   SKTailsCompetition_ReturnAfterCompactCompetitionServices
                 jsr     (TouchResponse_CompetitionMode).l
 
-locret_1332C:
+SKTailsCompetition_ReturnAfterCompactCompetitionServices:
                 rts
 ; ---------------------------------------------------------------------------
-off_1332E:
-                dc.w    loc_13336-off_1332E
-                dc.w    loc_1335A-off_1332E
-                dc.w    loc_1346A-off_1332E
-                dc.w    loc_1348C-off_1332E
+SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets:
+                dc.w    SKTailsCompetition_RunCompactGroundTailsUnlessJumpOrSpindashAborts-SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets
+                dc.w    SKTailsCompetition_ChooseCompetitionFlightOrOrdinaryNonrollingAir-SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets
+                dc.w    SKTailsCompetition_GateCompactRollingJumpByAnySpindashFlag-SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets
+                dc.w    SKTailsCompetition_RunCompactRollingAirWithoutInitialFlightDispatch-SKTailsCompetition_CompetitionTailsGroundAirRollJumpModeOffsets
 ; ---------------------------------------------------------------------------
 
-loc_13336:
+SKTailsCompetition_RunCompactGroundTailsUnlessJumpOrSpindashAborts:
                 bsr.w   TailsSKHandleCompetitionSpindashAndAbortGroundStep
                 bsr.w   Tails_Jump
                 bsr.w   Player_SlopeResist
@@ -189,17 +189,17 @@ loc_13336:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1335A:
+SKTailsCompetition_ChooseCompetitionFlightOrOrdinaryNonrollingAir:
                 tst.b   double_jump_flag(a0)
-                bne.s   loc_1338E
+                bne.s   SKTailsCompetition_UpdateCompactFlightWithoutNormalAnimationOrCarryService
                 bsr.w   Tails_JumpHeight
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_1337C
+                beq.s   SKTailsCompetition_ResolveCompactAirAngleAndPreserveBasesAcrossTerrain
                 subi.w  #$28,y_vel(a0)
 
-loc_1337C:
+SKTailsCompetition_ResolveCompactAirAngleAndPreserveBasesAcrossTerrain:
                 bsr.w   Player_JumpAngle
                 movem.l a4-a6,-(sp)
                 bsr.w   Tails_DoLevelCollision
@@ -207,7 +207,7 @@ loc_1337C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1338E:
+SKTailsCompetition_UpdateCompactFlightWithoutNormalAnimationOrCarryService:
                 bsr.w   TailsSKUpdateCompetitionFlightFlapAndFatigue
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite2).l
@@ -222,90 +222,90 @@ loc_1338E:
 TailsSKUpdateCompetitionFlightFlapAndFatigue:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                beq.s   loc_133C2
+                beq.s   SKTailsCompetition_AdvanceActiveFlapOrCheckNewFlapRequest
                 tst.b   double_jump_property(a0)
-                beq.s   loc_133C2
+                beq.s   SKTailsCompetition_AdvanceActiveFlapOrCheckNewFlapRequest
                 subq.b  #1,double_jump_property(a0)
 
-loc_133C2:
+SKTailsCompetition_AdvanceActiveFlapOrCheckNewFlapRequest:
                 cmpi.b  #1,double_jump_flag(a0)
-                beq.s   loc_133EC
+                beq.s   SKTailsCompetition_GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry
                 cmpi.w  #-$100,y_vel(a0)
-                blt.s   loc_133E4
+                blt.s   SKTailsCompetition_ResetCompetitionFlapStateToOne
                 subi.w  #$20,y_vel(a0)
                 addq.b  #1,double_jump_flag(a0)
                 cmpi.b  #$20,double_jump_flag(a0)
-                bne.s   loc_133EA
+                bne.s   SKTailsCompetition_JoinFlapBurstAtCeilingAndSoundChecks
 
-loc_133E4:
+SKTailsCompetition_ResetCompetitionFlapStateToOne:
                 move.b  #1,double_jump_flag(a0)
 
-loc_133EA:
-                bra.s   loc_1341E
+SKTailsCompetition_JoinFlapBurstAtCeilingAndSoundChecks:
+                bra.s   SKTailsCompetition_StopUpwardCompetitionFlightAtSharedCameraTopMargin
 ; ---------------------------------------------------------------------------
 
-loc_133EC:
+SKTailsCompetition_GateNewCompetitionFlapByPressSpeedFatigueAndUnderwaterCarry:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   loc_13418
+                beq.s   SKTailsCompetition_AddCompetitionFlightIdleGravity
                 cmpi.w  #-$100,y_vel(a0)
-                blt.s   loc_13418
+                blt.s   SKTailsCompetition_AddCompetitionFlightIdleGravity
                 tst.b   double_jump_property(a0)
-                beq.s   loc_13418
+                beq.s   SKTailsCompetition_AddCompetitionFlightIdleGravity
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_13412
+                beq.s   SKTailsCompetition_BeginNewFlapBurstBeforeIdleGravityStep
                 tst.b   (Flying_carrying_Sonic_flag).w
-                bne.s   loc_13418
+                bne.s   SKTailsCompetition_AddCompetitionFlightIdleGravity
 
-loc_13412:
+SKTailsCompetition_BeginNewFlapBurstBeforeIdleGravityStep:
                 move.b  #2,double_jump_flag(a0)
 
-loc_13418:
+SKTailsCompetition_AddCompetitionFlightIdleGravity:
                 addi.w  #8,y_vel(a0)
 
-loc_1341E:
+SKTailsCompetition_StopUpwardCompetitionFlightAtSharedCameraTopMargin:
                 move.w  (Camera_min_Y_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   loc_13438
+                blt.s   SKTailsCompetition_ChooseFatiguedOrNormalFlightSoundCadence
                 tst.w   y_vel(a0)
-                bpl.s   loc_13438
+                bpl.s   SKTailsCompetition_ChooseFatiguedOrNormalFlightSoundCadence
                 move.w  #0,y_vel(a0)
 
-loc_13438:
+SKTailsCompetition_ChooseFatiguedOrNormalFlightSoundCadence:
                 tst.b   double_jump_property(a0)
-                bne.s   loc_13454
+                bne.s   SKTailsCompetition_PlayNormalCompetitionFlightSoundOnSixteenFramePhase
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #8,d0
                 andi.b  #$F,d0
-                bne.s   locret_13452
+                bne.s   SKTailsCompetition_ReturnAfterFatiguedCompetitionFlightSoundGate
                 moveq   #signextendB(sfx_FlyTired),d0
                 jsr     (Play_SFX).l
 
-locret_13452:
+SKTailsCompetition_ReturnAfterFatiguedCompetitionFlightSoundGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13454:
+SKTailsCompetition_PlayNormalCompetitionFlightSoundOnSixteenFramePhase:
                 move.b  (Level_frame_counter+1).w,d0
                 addq.b  #8,d0
                 andi.b  #$F,d0
-                bne.s   locret_13468
+                bne.s   SKTailsCompetition_ReturnAfterNormalCompetitionFlightSoundGate
                 moveq   #signextendB(sfx_Flying),d0
                 jsr     (Play_SFX).l
 
-locret_13468:
+SKTailsCompetition_ReturnAfterNormalCompetitionFlightSoundGate:
                 rts
 ; End of function TailsSKUpdateCompetitionFlightFlapAndFatigue
 
 ; ---------------------------------------------------------------------------
 
-loc_1346A:
+SKTailsCompetition_GateCompactRollingJumpByAnySpindashFlag:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_13474
+                bne.s   SKTailsCompetition_AdvanceCompactGroundRollAndAttach
                 bsr.w   Tails_Jump
 
-loc_13474:
+SKTailsCompetition_AdvanceCompactGroundRollAndAttach:
                 bsr.w   Player_RollRepel
                 bsr.w   Tails_RollSpeed
                 jsr     (MoveSprite2).l
@@ -314,15 +314,15 @@ loc_13474:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1348C:
+SKTailsCompetition_RunCompactRollingAirWithoutInitialFlightDispatch:
                 bsr.w   Tails_JumpHeight
                 bsr.w   Tails_InputAcceleration_Freespace
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_134A8
+                beq.s   SKTailsCompetition_ResolveCompactRollingAirTerrainWhileSavingBases
                 subi.w  #$28,y_vel(a0)
 
-loc_134A8:
+SKTailsCompetition_ResolveCompactRollingAirTerrainWhileSavingBases:
                 bsr.w   Player_JumpAngle
                 movem.l a4-a6,-(sp)
                 bsr.w   Tails_DoLevelCollision
@@ -333,31 +333,31 @@ loc_134A8:
 
 TailsSKTryCompetitionRollFromDown:
                 tst.b   status_secondary(a0)
-                bmi.s   locret_134E0
+                bmi.s   SKTailsCompetition_ReturnAfterRejectedCompactRollEligibility
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_134C8
+                bpl.s   SKTailsCompetition_RequireCompactRollMagnitudeAndDownWithoutHorizontalInput
                 neg.w   d0
 
-loc_134C8:
+SKTailsCompetition_RequireCompactRollMagnitudeAndDownWithoutHorizontalInput:
                 cmpi.w  #$80,d0
-                blo.s   locret_134E0
+                blo.s   SKTailsCompetition_ReturnAfterRejectedCompactRollEligibility
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   locret_134E0
+                bne.s   SKTailsCompetition_ReturnAfterRejectedCompactRollEligibility
                 btst    #button_down,(Ctrl_2_held_logical).w
-                bne.s   loc_134E2
+                bne.s   SKTailsCompetition_AvoidReapplyingCompactRollIfAlreadyRolling
 
-locret_134E0:
+SKTailsCompetition_ReturnAfterRejectedCompactRollEligibility:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_134E2:
+SKTailsCompetition_AvoidReapplyingCompactRollIfAlreadyRolling:
                 btst    #Status_Roll,status(a0)
-                beq.s   loc_134EC
+                beq.s   SKTailsCompetition_EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_134EC:
+SKTailsCompetition_EnterCompactRollWithFourPixelYOffsetAndOptionalZeroSpeedFallback:
                 bset    #Status_Roll,status(a0)
                 move.b  #7,y_radius(a0)
                 move.b  #3,x_radius(a0)
@@ -366,10 +366,10 @@ loc_134EC:
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
                 tst.w   ground_vel(a0)
-                bne.s   locret_1351E
+                bne.s   SKTailsCompetition_ReturnAfterCompactRollGeometryAndSound
                 move.w  #$200,ground_vel(a0)
 
-locret_1351E:
+SKTailsCompetition_ReturnAfterCompactRollGeometryAndSound:
                 rts
 ; End of function TailsSKTryCompetitionRollFromDown
 
@@ -377,12 +377,12 @@ locret_1351E:
 
 TailsSKHandleCompetitionSpindashAndAbortGroundStep:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_13570
+                bne.s   SKTailsCompetition_MaintainOrReleaseCompactSpindashFromChargeIntegerByte
                 cmpi.b  #8,anim(a0)
-                bne.s   locret_1356E
+                bne.s   SKTailsCompetition_ReturnFromRejectedOrStackAbortedSpindashStart
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   locret_1356E
+                beq.w   SKTailsCompetition_ReturnFromRejectedOrStackAbortedSpindashStart
                 move.b  #9,anim(a0)
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
@@ -390,21 +390,21 @@ TailsSKHandleCompetitionSpindashAndAbortGroundStep:
                 move.b  #1,spin_dash_flag(a0)
                 move.w  #0,spin_dash_counter(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   loc_13566
+                blo.s   SKTailsCompetition_ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash
                 move.b  #2,anim(a6)
 
-loc_13566:
+SKTailsCompetition_ApplyBoundsAndAttachmentAfterStartingCompetitionSpindash:
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Player_AnglePos
 
-locret_1356E:
+SKTailsCompetition_ReturnFromRejectedOrStackAbortedSpindashStart:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_13570:
+SKTailsCompetition_MaintainOrReleaseCompactSpindashFromChargeIntegerByte:
                 move.b  (Ctrl_2_held_logical).w,d0
                 btst    #button_down,d0
-                bne.w   loc_13600
+                bne.w   SKTailsCompetition_DecayHeldCompactSpindashChargeWord
                 move.b  #7,y_radius(a0)
                 move.b  #3,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -413,7 +413,7 @@ loc_13570:
                 moveq   #0,d0
                 move.b  spin_dash_counter(a0),d0
                 add.w   d0,d0
-                move.w  word_135EE(pc,d0.w),ground_vel(a0)
+                move.w  SKTailsCompetition_CompactTailsSpindashLaunchSpeedWords(pc,d0.w),ground_vel(a0)
                 move.w  ground_vel(a0),d0
                 subi.w  #$800,d0
                 add.w   d0,d0
@@ -422,23 +422,23 @@ loc_13570:
                 addi.w  #$2000,d0
                 lea     (H_scroll_frame_offset).w,a1
                 cmpa.w  #Player_1,a0
-                beq.s   loc_135C8
+                beq.s   SKTailsCompetition_StoreCompactDashHistoryLagAndSignSpeedByFacing
                 lea     (H_scroll_frame_offset_P2).w,a1
 
-loc_135C8:
+SKTailsCompetition_StoreCompactDashHistoryLagAndSignSpeedByFacing:
                 move.w  d0,(a1)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_135D6
+                beq.s   SKTailsCompetition_CommitCompactDashRollStopDustAndPlayReleaseSound
                 neg.w   ground_vel(a0)
 
-loc_135D6:
+SKTailsCompetition_CommitCompactDashRollStopDustAndPlayReleaseSound:
                 bset    #Status_Roll,status(a0)
                 move.b  #0,anim(a6)
                 move.w  #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_13648
+                bra.s   SKTailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease
 ; ---------------------------------------------------------------------------
-word_135EE:
+SKTailsCompetition_CompactTailsSpindashLaunchSpeedWords:
                 dc.w    $800
                 dc.w    $880
                 dc.w    $900
@@ -450,38 +450,38 @@ word_135EE:
                 dc.w    $C00
 ; ---------------------------------------------------------------------------
 
-loc_13600:
+SKTailsCompetition_DecayHeldCompactSpindashChargeWord:
                 tst.w   spin_dash_counter(a0)
-                beq.s   loc_13618
+                beq.s   SKTailsCompetition_BoostCompactChargeOnNewAbcAndRestartChargeAnimation
                 move.w  spin_dash_counter(a0),d0
                 lsr.w   #5,d0
                 sub.w   d0,spin_dash_counter(a0)
-                bcc.s   loc_13618
+                bcc.s   SKTailsCompetition_BoostCompactChargeOnNewAbcAndRestartChargeAnimation
                 move.w  #0,spin_dash_counter(a0)
 
-loc_13618:
+SKTailsCompetition_BoostCompactChargeOnNewAbcAndRestartChargeAnimation:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_13648
+                beq.w   SKTailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease
                 move.w  #9<<8,anim(a0)                  ; and prev_anim
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
                 addi.w  #$200,spin_dash_counter(a0)
                 cmpi.w  #$800,spin_dash_counter(a0)
-                blo.s   loc_13648
+                blo.s   SKTailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease
                 move.w  #$800,spin_dash_counter(a0)
 
-loc_13648:
+SKTailsCompetition_DiscardGroundReturnAndRecoverCameraTargetDuringChargeOrRelease:
                 addq.l  #4,sp
                 cmpi.w  #$60,(a5)
-                beq.s   loc_13656
-                bcc.s   loc_13654
+                beq.s   SKTailsCompetition_AttachChargedOrReleasedCompactDashAndExitGroundMode
+                bcc.s   SKTailsCompetition_SubtractCompactSpindashCameraRecoveryStep
                 addq.w  #4,(a5)
 
-loc_13654:
+SKTailsCompetition_SubtractCompactSpindashCameraRecoveryStep:
                 subq.w  #2,(a5)
 
-loc_13656:
+SKTailsCompetition_AttachChargedOrReleasedCompactDashAndExitGroundMode:
                 bsr.w   Player_AnglePos
                 rts
 ; End of function TailsSKHandleCompetitionSpindashAndAbortGroundStep

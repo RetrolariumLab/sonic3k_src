@@ -1,50 +1,50 @@
 ; Data owner: objects/shared/tails
 ; Provenance and source range: config/reconstruction/source_layout.json
 DPLC_Tails2P_Tail_:
-                dc.w    Frame_2A026C-DPLC_Tails2P_Tail_  ;
-                dc.w    Frame_2A026E-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0272-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0276-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A027A-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A027E-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0282-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0286-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A028A-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A028E-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0292-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A0296-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A029A-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A029E-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A02A2-DPLC_Tails2P_Tail_
-                dc.w    Frame_2A02A6-DPLC_Tails2P_Tail_
-Frame_2A026C:   dc.w    0
-Frame_2A026E:   dc.w    1
+                dc.w    S3Tails2PTail_DplcFrame00-DPLC_Tails2P_Tail_  ;
+                dc.w    S3Tails2PTail_DplcFrame01-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame02-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame03-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame04-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame05-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame06-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame07-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame08-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame09-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0A-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0B-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0C-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0D-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0E-DPLC_Tails2P_Tail_
+                dc.w    S3Tails2PTail_DplcFrame0F-DPLC_Tails2P_Tail_
+S3Tails2PTail_DplcFrame00:  dc.w    0
+S3Tails2PTail_DplcFrame01:  dc.w    1
                 dc.w    $3000
-Frame_2A0272:   dc.w    1
+S3Tails2PTail_DplcFrame02:  dc.w    1
                 dc.w    $3004
-Frame_2A0276:   dc.w    1
+S3Tails2PTail_DplcFrame03:  dc.w    1
                 dc.w    $3008
-Frame_2A027A:   dc.w    1
+S3Tails2PTail_DplcFrame04:  dc.w    1
                 dc.w    $100C
-Frame_2A027E:   dc.w    1
+S3Tails2PTail_DplcFrame05:  dc.w    1
                 dc.w    $100E
-Frame_2A0282:   dc.w    1
+S3Tails2PTail_DplcFrame06:  dc.w    1
                 dc.w    $1010
-Frame_2A0286:   dc.w    1
+S3Tails2PTail_DplcFrame07:  dc.w    1
                 dc.w    $3012
-Frame_2A028A:   dc.w    1
+S3Tails2PTail_DplcFrame08:  dc.w    1
                 dc.w    $3016
-Frame_2A028E:   dc.w    1
+S3Tails2PTail_DplcFrame09:  dc.w    1
                 dc.w    $101A
-Frame_2A0292:   dc.w    1
+S3Tails2PTail_DplcFrame0A:  dc.w    1
                 dc.w    $101C
-Frame_2A0296:   dc.w    1
+S3Tails2PTail_DplcFrame0B:  dc.w    1
                 dc.w    $101E
-Frame_2A029A:   dc.w    1
+S3Tails2PTail_DplcFrame0C:  dc.w    1
                 dc.w    $1020
-Frame_2A029E:   dc.w    1
+S3Tails2PTail_DplcFrame0D:  dc.w    1
                 dc.w    $3022
-Frame_2A02A2:   dc.w    1
+S3Tails2PTail_DplcFrame0E:  dc.w    1
                 dc.w    $3026
-Frame_2A02A6:   dc.w    1
+S3Tails2PTail_DplcFrame0F:  dc.w    1
                 dc.w    $102A

@@ -3,18 +3,18 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Tails_Water:
                 tst.b   (Water_flag).w
-                bne.s   loc_1463A
+                bne.s   SKTailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds
 
-locret_14638:
+SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1463A:
+SKTailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   loc_146BA
+                bge.s   SKTailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost
                 bset    #Status_Underwater,status(a0)
-                bne.s   locret_14638
+                bne.s   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -25,30 +25,30 @@ loc_1463A:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 tst.b   (Super_Tails_flag).w
-                beq.s   loc_1468E
+                beq.s   SKTailsEnvironment_GateWaterEntryVelocityReductionAfterSuperSpeedChoice
                 move.w  #$400,Max_speed-Max_speed(a4)
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$60,Deceleration-Max_speed(a4)
 
-loc_1468E:
+SKTailsEnvironment_GateWaterEntryVelocityReductionAfterSuperSpeedChoice:
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.s   loc_1469C
+                beq.s   SKTailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY
                 tst.b   object_control(a0)
-                bne.s   locret_14638
+                bne.s   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
 
-loc_1469C:
+SKTailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY:
                 asr     x_vel(a0)
                 asr     y_vel(a0)
                 asr     y_vel(a0)
-                beq.s   locret_14638
+                beq.s   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-loc_146BA:
+SKTailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost:
                 bclr    #Status_Underwater,status(a0)
-                beq.w   locret_14638
+                beq.w   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -56,36 +56,36 @@ loc_146BA:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 tst.b   (Super_Tails_flag).w
-                beq.s   loc_146F4
+                beq.s   SKTailsEnvironment_GateWaterExitBoostAfterSuperSpeedRestoration
                 move.w  #$800,Max_speed-Max_speed(a4)
                 move.w  #$18,Acceleration-Max_speed(a4)
                 move.w  #$C0,Deceleration-Max_speed(a4)
 
-loc_146F4:
+SKTailsEnvironment_GateWaterExitBoostAfterSuperSpeedRestoration:
                 cmpi.b  #4,routine(a0)
-                beq.s   loc_14718
+                beq.s   SKTailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.s   loc_1470A
+                beq.s   SKTailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred
                 tst.b   object_control(a0)
-                bne.s   loc_14718
+                bne.s   SKTailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
 
-loc_1470A:
+SKTailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred:
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   loc_14718
+                blt.s   SKTailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
                 asl     y_vel(a0)
 
-loc_14718:
+SKTailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity:
                 cmpi.b  #$1C,anim(a0)
-                beq.w   locret_14638
+                beq.w   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
                 tst.w   y_vel(a0)
-                beq.w   locret_14638
+                beq.w   SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   loc_1473E
+                bgt.s   SKTailsEnvironment_TailPlayWaterExitSplashSound
                 move.w  #-$1000,y_vel(a0)
 
-loc_1473E:
+SKTailsEnvironment_TailPlayWaterExitSplashSound:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Tails_Water
@@ -94,13 +94,13 @@ loc_1473E:
 
 Tails_Stand_Path:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_14760
+                beq.s   SKTailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_14760:
+SKTailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic:
                 bsr.w   Tails_Spindash
                 bsr.w   Tails_Jump
                 bsr.w   Player_SlopeResist
@@ -111,26 +111,26 @@ loc_14760:
                 bsr.w   Call_Player_AnglePos
                 bsr.w   Player_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_147B6
+                beq.s   SKTailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_147A6
+                bpl.s   SKTailsEnvironment_CheckRightBackgroundWallAfterOptionalLeftCorrection
                 sub.w   d1,x_pos(a0)
 
-loc_147A6:
+SKTailsEnvironment_CheckRightBackgroundWallAfterOptionalLeftCorrection:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_147B2
+                bpl.s   SKTailsEnvironment_RestoreGroundBackgroundProbeBasesAndReturn
                 add.w   d1,x_pos(a0)
 
-loc_147B2:
+SKTailsEnvironment_RestoreGroundBackgroundProbeBasesAndReturn:
                 movem.l (sp)+,a4-a6
 
-locret_147B6:
+SKTailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -142,10 +142,10 @@ Tails_Stand_Freespace:
                 bsr.w   Tails_Check_Screen_Boundaries
                 jsr     (MoveSprite_TestGravity).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_147DE
+                beq.s   SKTailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep
                 subi.w  #$28,y_vel(a0)
 
-loc_147DE:
+SKTailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep:
                 bsr.w   Player_JumpAngle
                 bsr.w   Tails_DoLevelCollision
                 rts
@@ -161,11 +161,11 @@ Tails_FlyingSwimming:
                 bsr.w   Tails_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 tst.w   (Player_mode).w
-                bne.s   locret_14820
+                bne.s   SKTailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
                 bsr.w   Tails_Carry_Sonic
 
-locret_14820:
+SKTailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry:
                 rts

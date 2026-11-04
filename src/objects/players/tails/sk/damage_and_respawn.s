@@ -4,40 +4,40 @@
 
 ; ---------------------------------------------------------------------------
 
-loc_1569C:
+SKTailsRecovery_EnterSoloDebugFromHurtWithPhysicalBPress:
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_156BE
+                bne.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_156BE
+                beq.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_156BE
+                beq.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_156BE:
+SKTailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_156D6
+                beq.s   SKTailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_156D6:
+SKTailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_156F0
+                beq.s   SKTailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode
                 subi.w  #$20,y_vel(a0)
 
-loc_156F0:
+SKTailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_15700
+                bne.s   SKTailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_15700:
+SKTailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw:
                 bsr.w   TailsSKResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
@@ -48,29 +48,29 @@ loc_15700:
 
 TailsSKResolveHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   loc_15742
+                bne.s   SKTailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_15734
+                bne.s   SKTailsRecovery_CheckReverseGravityHurtDeathPlaneAtCameraMinimum
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   loc_15788
-                bra.s   loc_15742
+                blt.w   SKTailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing
+                bra.s   SKTailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding
 ; ---------------------------------------------------------------------------
 
-loc_15734:
+SKTailsRecovery_CheckReverseGravityHurtDeathPlaneAtCameraMinimum:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   loc_15742
-                bra.w   loc_15788
+                blt.s   SKTailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding
+                bra.w   SKTailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing
 ; ---------------------------------------------------------------------------
 
-loc_15742:
+SKTailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding:
                 movem.l a4-a6,-(sp)
                 bsr.w   Tails_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   locret_15786
+                bne.s   SKTailsRecovery_ReturnAfterHurtAirOrLandingDecision
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -82,37 +82,37 @@ loc_15742:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-locret_15786:
+SKTailsRecovery_ReturnAfterHurtAirOrLandingDecision:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_15788:
+SKTailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing:
                 jmp     (Kill_Character).l
 ; End of function TailsSKResolveHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-loc_1578E:
+SKTailsRecovery_EnterSoloDebugFromDeathWithPhysicalBPress:
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_157B0
+                bne.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_157B0
+                beq.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_157B0
+                beq.s   SKTailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_157B0:
+SKTailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_157C8
+                beq.s   SKTailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_157C8:
+SKTailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw:
                 bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
@@ -120,38 +120,38 @@ loc_157C8:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_157E0:
+SKTailsRecovery_CountNonzeroRestartWordDownToRestartRequest:
                 tst.w   $3E(a0)
-                beq.s   locret_157F2
+                beq.s   SKTailsRecovery_ReturnAfterRestartCountdownWithoutDrawing
                 subq.w  #1,$3E(a0)
-                bne.s   locret_157F2
+                bne.s   SKTailsRecovery_ReturnAfterRestartCountdownWithoutDrawing
                 move.w  #1,(Restart_level_flag).w
 
-locret_157F2:
+SKTailsRecovery_ReturnAfterRestartCountdownWithoutDrawing:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_157F4:
+SKTailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine:
                 tst.w   (H_scroll_amount_P2).w
-                bne.s   loc_15806
+                bne.s   SKTailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll
                 tst.w   (V_scroll_amount_P2).w
-                bne.s   loc_15806
+                bne.s   SKTailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll
                 move.b  #2,routine(a0)
 
-loc_15806:
+SKTailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll:
                 bsr.w   TailsSKAnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_15810:
+SKTailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_15828
+                beq.s   SKTailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_15828:
+SKTailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -162,17 +162,17 @@ loc_15828:
 
 TailsSKAnimateRecoveryStateAndDispatchPatternLoader:
                 tst.w   (Competition_mode).w
-                bne.s   loc_1585A
+                bne.s   SKTailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader
                 bsr.s   Animate_Tails
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_15856
+                beq.s   SKTailsRecovery_TailNormalRecoveryPatternLoaderAfterGravityRenderFlip
                 eori.b  #2,render_flags(a0)
 
-loc_15856:
+SKTailsRecovery_TailNormalRecoveryPatternLoaderAfterGravityRenderFlip:
                 bra.w   Tails_Load_PLC
 ; ---------------------------------------------------------------------------
 
-loc_1585A:
+SKTailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
 ; End of function TailsSKAnimateRecoveryStateAndDispatchPatternLoader

@@ -1,50 +1,50 @@
 ; Data owner: objects/shared/tails
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Tails2P_Tail_:
-                dc.w    Frame_2A00C4-Map_Tails2P_Tail_
-                dc.w    Frame_2A00C6-Map_Tails2P_Tail_
-                dc.w    Frame_2A00CE-Map_Tails2P_Tail_
-                dc.w    Frame_2A00D6-Map_Tails2P_Tail_
-                dc.w    Frame_2A00DE-Map_Tails2P_Tail_
-                dc.w    Frame_2A00E6-Map_Tails2P_Tail_
-                dc.w    Frame_2A00EE-Map_Tails2P_Tail_
-                dc.w    Frame_2A00F6-Map_Tails2P_Tail_
-                dc.w    Frame_2A00FE-Map_Tails2P_Tail_
-                dc.w    Frame_2A0106-Map_Tails2P_Tail_
-                dc.w    Frame_2A010E-Map_Tails2P_Tail_
-                dc.w    Frame_2A0116-Map_Tails2P_Tail_
-                dc.w    Frame_2A011E-Map_Tails2P_Tail_
-                dc.w    Frame_2A0126-Map_Tails2P_Tail_
-                dc.w    Frame_2A012E-Map_Tails2P_Tail_
-                dc.w    Frame_2A0136-Map_Tails2P_Tail_
-Frame_2A00C4:   dc.w    0
-Frame_2A00C6:   dc.w    1
+                dc.w    S3Tails2PTail_MappingFrame00-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame01-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame02-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame03-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame04-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame05-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame06-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame07-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame08-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame09-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0A-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0B-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0C-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0D-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0E-Map_Tails2P_Tail_
+                dc.w    S3Tails2PTail_MappingFrame0F-Map_Tails2P_Tail_
+S3Tails2PTail_MappingFrame00:   dc.w    0
+S3Tails2PTail_MappingFrame01:   dc.w    1
                 dc.b    $FC,   5,   0,   0, $FF, $F0
-Frame_2A00CE:   dc.w    1
+S3Tails2PTail_MappingFrame02:   dc.w    1
                 dc.b    $FC,   5,   0,   0, $FF, $F0
-Frame_2A00D6:   dc.w    1
+S3Tails2PTail_MappingFrame03:   dc.w    1
                 dc.b    $FC,   5,   0,   0, $FF, $F0
-Frame_2A00DE:   dc.w    1
+S3Tails2PTail_MappingFrame04:   dc.w    1
                 dc.b    $FC,   4,   0,   0, $FF, $EC
-Frame_2A00E6:   dc.w    1
+S3Tails2PTail_MappingFrame05:   dc.w    1
                 dc.b    $FC,   4,   0,   0, $FF, $EC
-Frame_2A00EE:   dc.w    1
+S3Tails2PTail_MappingFrame06:   dc.w    1
                 dc.b    $FC,   4,   0,   0, $FF, $EC
-Frame_2A00F6:   dc.w    1
+S3Tails2PTail_MappingFrame07:   dc.w    1
                 dc.b    3,   5,   0,   0, $FF, $ED
-Frame_2A00FE:   dc.w    1
+S3Tails2PTail_MappingFrame08:   dc.w    1
                 dc.b    3,   5,   0,   0, $FF, $ED
-Frame_2A0106:   dc.w    1
+S3Tails2PTail_MappingFrame09:   dc.w    1
                 dc.b    7,   4,   0,   0, $FF, $ED
-Frame_2A010E:   dc.w    1
+S3Tails2PTail_MappingFrame0A:   dc.w    1
                 dc.b    2,   1,   0,   0, $FF, $FC
-Frame_2A0116:   dc.w    1
+S3Tails2PTail_MappingFrame0B:   dc.w    1
                 dc.b    2,   1,   0,   0, $FF, $FC
-Frame_2A011E:   dc.w    1
+S3Tails2PTail_MappingFrame0C:   dc.w    1
                 dc.b    2,   1,   0,   0, $FF, $FC
-Frame_2A0126:   dc.w    1
+S3Tails2PTail_MappingFrame0D:   dc.w    1
                 dc.b    3,   5,   0,   0,   0,   5
-Frame_2A012E:   dc.w    1
+S3Tails2PTail_MappingFrame0E:   dc.w    1
                 dc.b    3,   5,   0,   0,   0,   3
-Frame_2A0136:   dc.w    1
+S3Tails2PTail_MappingFrame0F:   dc.w    1
                 dc.b    3,   1,   0,   0,   0,   7

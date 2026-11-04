@@ -9,32 +9,32 @@ Tails_InputAcceleration_Path:
                 move.w  Acceleration_P2-Max_speed_P2(a4),d5
                 move.w  Deceleration_P2-Max_speed_P2(a4),d4
                 tst.b   status_secondary(a0)
-                bmi.w   loc_14B5C
+                bmi.w   SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine
                 tst.w   move_lock(a0)
-                bne.w   loc_14B14
+                bne.w   SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery
                 btst    #button_left,(Ctrl_2_held_logical).w
-                beq.s   loc_14A0A
+                beq.s   SKTailsGround_ApplyRightHeldInputAfterLeftInput
                 bsr.w   TailsSKApplyGroundLeftInput
 
-loc_14A0A:
+SKTailsGround_ApplyRightHeldInputAfterLeftInput:
                 btst    #button_right,(Ctrl_2_logical).w
-                beq.s   loc_14A16
+                beq.s   SKTailsGround_GateStationaryFlatSectorBalanceAndIdleLook
                 bsr.w   TailsSKApplyGroundRightInput
 
-loc_14A16:
+SKTailsGround_GateStationaryFlatSectorBalanceAndIdleLook:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.w   loc_14B14
+                bne.w   SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery
                 tst.w   ground_vel(a0)
-                bne.w   loc_14B14
+                bne.w   SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery
                 bclr    #Status_Push,status(a0)
                 move.b  #5,anim(a0)
                 btst    #Status_OnObj,status(a0)
-                beq.s   loc_14A6C
+                beq.s   SKTailsGround_ProbeTerrainBalanceAndPreferForwardTiltThree
                 movea.w interact(a0),a1
                 tst.b   status(a1)
-                bmi.s   loc_14AA0
+                bmi.s   SKTailsGround_SelectIdleVerticalLookWithProfilePriority
                 moveq   #0,d1
                 move.b  width_pixels(a1),d1
                 move.w  d1,d2
@@ -43,125 +43,125 @@ loc_14A16:
                 add.w   x_pos(a0),d1
                 sub.w   x_pos(a1),d1
                 cmpi.w  #4,d1
-                blt.s   loc_14A92
+                blt.s   SKTailsGround_FaceLeftForStationaryBalance
                 cmp.w   d2,d1
-                bge.s   loc_14A82
-                bra.s   loc_14AA0
+                bge.s   SKTailsGround_FaceRightForStationaryBalance
+                bra.s   SKTailsGround_SelectIdleVerticalLookWithProfilePriority
 ; ---------------------------------------------------------------------------
 
-loc_14A6C:
+SKTailsGround_ProbeTerrainBalanceAndPreferForwardTiltThree:
                 move.w  x_pos(a0),d3
                 bsr.w   ChooseChkFloorEdge
                 cmpi.w  #$C,d1
-                blt.s   loc_14AA0
+                blt.s   SKTailsGround_SelectIdleVerticalLookWithProfilePriority
                 cmpi.b  #3,next_tilt(a0)
-                bne.s   loc_14A8A
+                bne.s   SKTailsGround_RequireRearTiltThreeForLeftBalance
 
-loc_14A82:
+SKTailsGround_FaceRightForStationaryBalance:
                 bclr    #Status_Facing,status(a0)
-                bra.s   loc_14A98
+                bra.s   SKTailsGround_SelectBalanceAnimationAndResetLookDelay
 ; ---------------------------------------------------------------------------
 
-loc_14A8A:
+SKTailsGround_RequireRearTiltThreeForLeftBalance:
                 cmpi.b  #3,tilt(a0)
-                bne.s   loc_14AA0
+                bne.s   SKTailsGround_SelectIdleVerticalLookWithProfilePriority
 
-loc_14A92:
+SKTailsGround_FaceLeftForStationaryBalance:
                 bset    #Status_Facing,status(a0)
 
-loc_14A98:
+SKTailsGround_SelectBalanceAnimationAndResetLookDelay:
                 move.b  #6,anim(a0)
-                bra.s   loc_14B14
+                bra.s   SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery
 ; ---------------------------------------------------------------------------
 
-loc_14AA0:
+SKTailsGround_SelectIdleVerticalLookWithProfilePriority:
                 btst    #button_down,(Ctrl_2_held_logical).w
-                beq.s   loc_14ADA
+                beq.s   SKTailsGround_CheckOtherIdleLookDirectionAndDelayedCameraTarget
                 move.b  #8,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #2*60,scroll_delay_counter(a0)
-                blo.s   loc_14B1A
+                blo.s   SKTailsGround_RecoverVerticalCameraTargetTowardSixty
                 move.b  #2*60,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_14AD0
+                bne.s   SKTailsGround_MoveReverseGravityDuckCameraTowardD8
                 cmpi.w  #8,(a5)
-                beq.s   loc_14B26
+                beq.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
                 subq.w  #2,(a5)
-                bra.s   loc_14B26
+                bra.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
 ; ---------------------------------------------------------------------------
 
-loc_14AD0:
+SKTailsGround_MoveReverseGravityDuckCameraTowardD8:
                 cmpi.w  #$D8,(a5)
-                beq.s   loc_14B26
+                beq.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
                 addq.w  #2,(a5)
-                bra.s   loc_14B26
+                bra.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
 ; ---------------------------------------------------------------------------
 
-loc_14ADA:
+SKTailsGround_CheckOtherIdleLookDirectionAndDelayedCameraTarget:
                 btst    #button_up,(Ctrl_2_logical).w
-                beq.s   loc_14B14
+                beq.s   SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery
                 move.b  #7,anim(a0)
                 addq.b  #1,scroll_delay_counter(a0)
                 cmpi.b  #2*60,scroll_delay_counter(a0)
-                blo.s   loc_14B1A
+                blo.s   SKTailsGround_RecoverVerticalCameraTargetTowardSixty
                 move.b  #2*60,scroll_delay_counter(a0)
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_14B0A
+                bne.s   SKTailsGround_MoveReverseGravityLookUpCameraToward18
                 cmpi.w  #$C8,(a5)
-                beq.s   loc_14B26
+                beq.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
                 addq.w  #2,(a5)
-                bra.s   loc_14B26
+                bra.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
 ; ---------------------------------------------------------------------------
 
-loc_14B0A:
+SKTailsGround_MoveReverseGravityLookUpCameraToward18:
                 cmpi.w  #$18,(a5)
-                beq.s   loc_14B26
+                beq.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
                 subq.w  #2,(a5)
-                bra.s   loc_14B26
+                bra.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
 ; ---------------------------------------------------------------------------
 
-loc_14B14:
+SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery:
                 move.b  #0,scroll_delay_counter(a0)
 
-loc_14B1A:
+SKTailsGround_RecoverVerticalCameraTargetTowardSixty:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_14B26
-                bcc.s   loc_14B24
+                beq.s   SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag
+                bcc.s   SKTailsGround_SubtractTwoFromCameraRecoveryTarget
                 addq.w  #4,(a5)
 
-loc_14B24:
+SKTailsGround_SubtractTwoFromCameraRecoveryTarget:
                 subq.w  #2,(a5)
 
-loc_14B26:
+SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag:
                 tst.b   (Super_Tails_flag).w
-                beq.s   loc_14B30
+                beq.s   SKTailsGround_ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput
                 move.w  #$C,d5
 
-loc_14B30:
+SKTailsGround_ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput:
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   loc_14B5C
+                bne.s   SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine
                 move.w  ground_vel(a0),d0
-                beq.s   loc_14B5C
-                bmi.s   loc_14B50
+                beq.s   SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine
+                bmi.s   SKTailsGround_ReduceNegativeNeutralGroundSpeedByAcceleration
                 sub.w   d5,d0
-                bcc.s   loc_14B4A
+                bcc.s   SKTailsGround_CommitPositiveNeutralGroundFriction
                 move.w  #0,d0
 
-loc_14B4A:
+SKTailsGround_CommitPositiveNeutralGroundFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_14B5C
+                bra.s   SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine
 ; ---------------------------------------------------------------------------
 
-loc_14B50:
+SKTailsGround_ReduceNegativeNeutralGroundSpeedByAcceleration:
                 add.w   d5,d0
-                bcc.s   loc_14B58
+                bcc.s   SKTailsGround_CommitNegativeNeutralGroundFriction
                 move.w  #0,d0
 
-loc_14B58:
+SKTailsGround_CommitNegativeNeutralGroundFriction:
                 move.w  d0,ground_vel(a0)
 
-loc_14B5C:
+SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -171,74 +171,74 @@ loc_14B5C:
                 asr.l   #8,d0
                 move.w  d0,y_vel(a0)
 
-loc_14B7A:
+SKTailsGround_GateProjectedGroundObstructionForWalkingAndRolling:
                 btst    #6,object_control(a0)
-                bne.w   locret_14C1E
+                bne.w   SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse
                 move.b  angle(a0),d0
                 andi.b  #$3F,d0
-                beq.s   loc_14B9A
+                beq.s   SKTailsGround_ChooseObstructionOffsetForSignedGroundDirection
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bmi.w   locret_14C1E
+                bmi.w   SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse
 
-loc_14B9A:
+SKTailsGround_ChooseObstructionOffsetForSignedGroundDirection:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
-                beq.s   locret_14C1E
-                bmi.s   loc_14BA8
+                beq.s   SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse
+                bmi.s   SKTailsGround_ProbeAheadUsingSavedRequestedSurfaceDirection
                 neg.w   d1
 
-loc_14BA8:
+SKTailsGround_ProbeAheadUsingSavedRequestedSurfaceDirection:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
                 bsr.w   ProbeNextSurfaceWithFixedLookahead
                 move.w  (sp)+,d0
                 tst.w   d1
-                bpl.s   locret_14C1E
+                bpl.s   SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse
                 asl.w   #8,d1
                 cmpi.b  #8,(Current_zone).w
-                bne.s   loc_14BCA
+                bne.s   SKTailsGround_ClassifySavedObstructionDirectionAfterZoneEightTweak
                 tst.b   d0
-                bpl.s   loc_14BCA
+                bpl.s   SKTailsGround_ClassifySavedObstructionDirectionAfterZoneEightTweak
                 subq.b  #1,d0
 
-loc_14BCA:
+SKTailsGround_ClassifySavedObstructionDirectionAfterZoneEightTweak:
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   loc_14C1A
+                beq.s   SKTailsGround_AddScaledFloorObstructionToYVelocity
                 cmpi.b  #$40,d0
-                beq.s   loc_14C00
+                beq.s   SKTailsGround_ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft
                 cmpi.b  #$80,d0
-                beq.s   loc_14BFA
+                beq.s   SKTailsGround_SubtractScaledCeilingObstructionFromYVelocity
                 add.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                bne.s   locret_14BF8
+                bne.s   SKTailsGround_ReturnAfterHorizontalObstructionAndOptionalPush
                 bset    #Status_Push,status(a0)
 
-locret_14BF8:
+SKTailsGround_ReturnAfterHorizontalObstructionAndOptionalPush:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14BFA:
+SKTailsGround_SubtractScaledCeilingObstructionFromYVelocity:
                 sub.w   d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C00:
+SKTailsGround_ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft:
                 sub.w   d1,x_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   locret_14BF8
+                beq.s   SKTailsGround_ReturnAfterHorizontalObstructionAndOptionalPush
                 bset    #Status_Push,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C1A:
+SKTailsGround_AddScaledFloorObstructionToYVelocity:
                 add.w   d1,y_vel(a0)
 
-locret_14C1E:
+SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse:
                 rts
 ; End of function Tails_InputAcceleration_Path
 
@@ -246,38 +246,38 @@ locret_14C1E:
 
 TailsSKApplyGroundLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_14C28
-                bpl.s   loc_14C5A
+                beq.s   SKTailsGround_FaceLeftForNonpositiveGroundAcceleration
+                bpl.s   SKTailsGround_BrakePositiveGroundSpeedForLeftInput
 
-loc_14C28:
+SKTailsGround_FaceLeftForNonpositiveGroundAcceleration:
                 bset    #Status_Facing,status(a0)
-                bne.s   loc_14C3C
+                bne.s   SKTailsGround_AccelerateLeftWithoutClampingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_14C3C:
+SKTailsGround_AccelerateLeftWithoutClampingExistingOverspeed:
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_14C4E
+                bgt.s   SKTailsGround_StoreLeftAccelerationAndSelectMovementAnimation
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_14C4E
+                ble.s   SKTailsGround_StoreLeftAccelerationAndSelectMovementAnimation
                 move.w  d1,d0
 
-loc_14C4E:
+SKTailsGround_StoreLeftAccelerationAndSelectMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C5A:
+SKTailsGround_BrakePositiveGroundSpeedForLeftInput:
                 sub.w   d4,d0
-                bcc.s   loc_14C62
+                bcc.s   SKTailsGround_StoreLeftBrakeAndTestSkidWithOverwrittenLowByte
                 move.w  #-$80,d0
 
-loc_14C62:
+SKTailsGround_StoreLeftBrakeAndTestSkidWithOverwrittenLowByte:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -287,21 +287,21 @@ loc_14C62:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_14CAA
+                bne.s   SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest
                 cmpi.w  #$400,d0
-                blt.s   locret_14CAA
+                blt.s   SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_14CAA
+                bmi.s   SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bclr    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_14CAA
+                blo.s   SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_14CAA:
+SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest:
                 rts
 ; End of function TailsSKApplyGroundLeftInput
 
@@ -309,33 +309,33 @@ locret_14CAA:
 
 TailsSKApplyGroundRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_14CE0
+                bmi.s   SKTailsGround_BrakeNegativeGroundSpeedForRightInput
                 bclr    #Status_Facing,status(a0)
-                beq.s   loc_14CC6
+                beq.s   SKTailsGround_AccelerateRightWithoutClampingExistingOverspeed
                 bclr    #Status_Push,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_14CC6:
+SKTailsGround_AccelerateRightWithoutClampingExistingOverspeed:
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_14CD4
+                blt.s   SKTailsGround_StoreRightAccelerationAndSelectMovementAnimation
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_14CD4
+                bge.s   SKTailsGround_StoreRightAccelerationAndSelectMovementAnimation
                 move.w  d6,d0
 
-loc_14CD4:
+SKTailsGround_StoreRightAccelerationAndSelectMovementAnimation:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14CE0:
+SKTailsGround_BrakeNegativeGroundSpeedForRightInput:
                 add.w   d4,d0
-                bcc.s   loc_14CE8
+                bcc.s   SKTailsGround_StoreRightBrakeAndTestSkidWithOverwrittenLowByte
                 move.w  #$80,d0
 
-loc_14CE8:
+SKTailsGround_StoreRightBrakeAndTestSkidWithOverwrittenLowByte:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -345,20 +345,20 @@ loc_14CE8:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_14D30
+                bne.s   SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest
                 cmpi.w  #-$400,d0
-                bgt.s   locret_14D30
+                bgt.s   SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest
                 tst.b   flip_type(a0)
-                bmi.s   locret_14D30
+                bmi.s   SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest
                 move.w  #sfx_Skid,d0
                 jsr     (Play_SFX).l
                 move.b  #$D,anim(a0)
                 bset    #Status_Facing,status(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   locret_14D30
+                blo.s   SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest
                 move.b  #6,routine(a6)
                 move.b  #$15,mapping_frame(a6)
 
-locret_14D30:
+SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest:
                 rts
 ; End of function TailsSKApplyGroundRightInput

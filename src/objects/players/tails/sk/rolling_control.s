@@ -10,57 +10,57 @@ Tails_RollSpeed:
                 move.w  Acceleration_P2-Max_speed_P2(a4),d5
                 asr.w   #1,d5
                 tst.b   (Super_Tails_flag).w
-                beq.s   loc_14D46
+                beq.s   SKTailsRolling_SetFixedRollingBrakeAndGateForcedOrLockedInput
                 move.w  #6,d5
 
-loc_14D46:
+SKTailsRolling_SetFixedRollingBrakeAndGateForcedOrLockedInput:
                 move.w  #$20,d4
                 tst.b   spin_dash_flag(a0)
-                bmi.w   loc_14DF0
+                bmi.w   SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
                 tst.b   status_secondary(a0)
-                bmi.w   loc_14DF0
+                bmi.w   SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
                 tst.w   move_lock(a0)
-                bne.s   loc_14D78
+                bne.s   SKTailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput
                 btst    #button_left,(Ctrl_2_held_logical).w
-                beq.s   loc_14D6C
+                beq.s   SKTailsRolling_ApplyRightRollingInputAfterLeftInput
                 bsr.w   TailsSKApplyRollingLeftInput
 
-loc_14D6C:
+SKTailsRolling_ApplyRightRollingInputAfterLeftInput:
                 btst    #button_right,(Ctrl_2_held_logical).w
-                beq.s   loc_14D78
+                beq.s   SKTailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput
                 bsr.w   TailsSKApplyRollingRightInput
 
-loc_14D78:
+SKTailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_14D9A
-                bmi.s   loc_14D8E
+                beq.s   SKTailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy
+                bmi.s   SKTailsRolling_ApplyNegativeRollingFrictionWithCarryClamp
                 sub.w   d5,d0
-                bcc.s   loc_14D88
+                bcc.s   SKTailsRolling_StorePositiveRollingFrictionBeforeUnrollTest
                 move.w  #0,d0
 
-loc_14D88:
+SKTailsRolling_StorePositiveRollingFrictionBeforeUnrollTest:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_14D9A
+                bra.s   SKTailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy
 ; ---------------------------------------------------------------------------
 
-loc_14D8E:
+SKTailsRolling_ApplyNegativeRollingFrictionWithCarryClamp:
                 add.w   d5,d0
-                bcc.s   loc_14D96
+                bcc.s   SKTailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest
                 move.w  #0,d0
 
-loc_14D96:
+SKTailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest:
                 move.w  d0,ground_vel(a0)
 
-loc_14D9A:
+SKTailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy:
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_14DA2
+                bpl.s   SKTailsRolling_UnrollBelowUnsignedEightyOrRestoreForcedRollSpeed
                 neg.w   d0
 
-loc_14DA2:
+SKTailsRolling_UnrollBelowUnsignedEightyOrRestoreForcedRollSpeed:
                 cmpi.w  #$80,d0
-                bhs.s   loc_14DF0
+                bhs.s   SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_14DDE
+                bne.s   SKTailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d0
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -69,30 +69,30 @@ loc_14DA2:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_14DD8
+                beq.s   SKTailsRolling_ApplyGravityAdjustedUnrollOffsetToIntegerY
                 neg.w   d0
 
-loc_14DD8:
+SKTailsRolling_ApplyGravityAdjustedUnrollOffsetToIntegerY:
                 add.w   d0,y_pos(a0)
-                bra.s   loc_14DF0
+                bra.s   SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
 ; ---------------------------------------------------------------------------
 
-loc_14DDE:
+SKTailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold:
                 move.w  #$400,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_14DF0
+                beq.s   SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
                 neg.w   ground_vel(a0)
 
-loc_14DF0:
+SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_14DFC
-                bcc.s   loc_14DFA
+                beq.s   SKTailsRolling_ProjectRollingVelocityAndClampPositiveXWord
+                bcc.s   SKTailsRolling_SubtractRollingCameraRecoveryStep
                 addq.w  #4,(a5)
 
-loc_14DFA:
+SKTailsRolling_SubtractRollingCameraRecoveryStep:
                 subq.w  #2,(a5)
 
-loc_14DFC:
+SKTailsRolling_ProjectRollingVelocityAndClampPositiveXWord:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -101,38 +101,38 @@ loc_14DFC:
                 muls.w  ground_vel(a0),d1
                 asr.l   #8,d1
                 cmpi.w  #$1000,d1
-                ble.s   loc_14E20
+                ble.s   SKTailsRolling_ClampNegativeRollingXProjectionWord
                 move.w  #$1000,d1
 
-loc_14E20:
+SKTailsRolling_ClampNegativeRollingXProjectionWord:
                 cmpi.w  #-$1000,d1
-                bge.s   loc_14E2A
+                bge.s   SKTailsRolling_StoreRollingXAndTailBranchSharedObstruction
                 move.w  #-$1000,d1
 
-loc_14E2A:
+SKTailsRolling_StoreRollingXAndTailBranchSharedObstruction:
                 move.w  d1,x_vel(a0)
-                bra.w   loc_14B7A
+                bra.w   SKTailsGround_GateProjectedGroundObstructionForWalkingAndRolling
 ; End of function Tails_RollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
 TailsSKApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_14E3A
-                bpl.s   loc_14E48
+                beq.s   SKTailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration
+                bpl.s   SKTailsRolling_BrakePositiveRollForLeftHeldInput
 
-loc_14E3A:
+SKTailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration:
                 bset    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14E48:
+SKTailsRolling_BrakePositiveRollForLeftHeldInput:
                 sub.w   d4,d0
-                bcc.s   loc_14E50
+                bcc.s   SKTailsRolling_StoreLeftRollingBrakeAndReturn
                 move.w  #-$80,d0
 
-loc_14E50:
+SKTailsRolling_StoreLeftRollingBrakeAndReturn:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function TailsSKApplyRollingLeftInput
@@ -141,18 +141,18 @@ loc_14E50:
 
 TailsSKApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_14E6A
+                bmi.s   SKTailsRolling_BrakeNegativeRollForRightHeldInput
                 bclr    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14E6A:
+SKTailsRolling_BrakeNegativeRollForRightHeldInput:
                 add.w   d4,d0
-                bcc.s   loc_14E72
+                bcc.s   SKTailsRolling_StoreRightRollingBrakeAndReturn
                 move.w  #$80,d0
 
-loc_14E72:
+SKTailsRolling_StoreRightRollingBrakeAndReturn:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function TailsSKApplyRollingRightInput
@@ -164,70 +164,70 @@ Tails_InputAcceleration_Freespace:
                 move.w  Acceleration_P2-Max_speed_P2(a4),d5
                 asl.w   #1,d5
                 btst    #Status_RollJump,status(a0)
-                bne.s   loc_14ECC
+                bne.s   SKTailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput
                 move.w  x_vel(a0),d0
                 btst    #button_left,(Ctrl_2_held_logical).w
-                beq.s   loc_14EAC
+                beq.s   SKTailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
                 bset    #Status_Facing,status(a0)
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_14EAC
+                bgt.s   SKTailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_14EAC
+                ble.s   SKTailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
                 move.w  d1,d0
 
-loc_14EAC:
+SKTailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep:
                 btst    #button_right,(Ctrl_2_held_logical).w
-                beq.s   loc_14EC8
+                beq.s   SKTailsRolling_CommitAirHorizontalInputVelocity
                 bclr    #Status_Facing,status(a0)
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_14EC8
+                blt.s   SKTailsRolling_CommitAirHorizontalInputVelocity
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_14EC8
+                bge.s   SKTailsRolling_CommitAirHorizontalInputVelocity
                 move.w  d6,d0
 
-loc_14EC8:
+SKTailsRolling_CommitAirHorizontalInputVelocity:
                 move.w  d0,x_vel(a0)
 
-loc_14ECC:
+SKTailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput:
                 cmpi.w  #$60,(a5)
-                beq.s   loc_14ED8
-                bcc.s   loc_14ED6
+                beq.s   SKTailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow
+                bcc.s   SKTailsRolling_SubtractAirCameraRecoveryStep
                 addq.w  #4,(a5)
 
-loc_14ED6:
+SKTailsRolling_SubtractAirCameraRecoveryStep:
                 subq.w  #2,(a5)
 
-loc_14ED8:
+SKTailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow:
                 cmpi.w  #-$400,y_vel(a0)
-                blo.s   locret_14F06
+                blo.s   SKTailsRolling_ReturnAfterAirDragOrIneligibleVelocity
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 asr.w   #5,d1
-                beq.s   locret_14F06
-                bmi.s   loc_14EFA
+                beq.s   SKTailsRolling_ReturnAfterAirDragOrIneligibleVelocity
+                bmi.s   SKTailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity
                 sub.w   d1,d0
-                bcc.s   loc_14EF4
+                bcc.s   SKTailsRolling_CommitNonnegativeQuotientAirDrag
                 move.w  #0,d0
 
-loc_14EF4:
+SKTailsRolling_CommitNonnegativeQuotientAirDrag:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14EFA:
+SKTailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity:
                 sub.w   d1,d0
-                bcs.s   loc_14F02
+                bcs.s   SKTailsRolling_CommitNegativeQuotientAirDrag
                 move.w  #0,d0
 
-loc_14F02:
+SKTailsRolling_CommitNegativeQuotientAirDrag:
                 move.w  d0,x_vel(a0)
 
-locret_14F06:
+SKTailsRolling_ReturnAfterAirDragOrIneligibleVelocity:
                 rts
 ; End of function Tails_InputAcceleration_Freespace

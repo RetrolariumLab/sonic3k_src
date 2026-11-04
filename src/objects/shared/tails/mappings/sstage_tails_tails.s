@@ -1,92 +1,92 @@
 ; Data owner: objects/shared/tails
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SStageTailstails_:
-                dc.w    word_91124-Map_SStageTailstails_
-                dc.w    word_91126-Map_SStageTailstails_
-                dc.w    word_9112E-Map_SStageTailstails_
-                dc.w    word_91136-Map_SStageTailstails_
-                dc.w    word_9113E-Map_SStageTailstails_
-                dc.w    word_91146-Map_SStageTailstails_
-                dc.w    word_9114E-Map_SStageTailstails_
-                dc.w    word_91156-Map_SStageTailstails_
-                dc.w    word_9115E-Map_SStageTailstails_
-                dc.w    word_91166-Map_SStageTailstails_
-                dc.w    word_9116E-Map_SStageTailstails_
-                dc.w    word_91176-Map_SStageTailstails_
-                dc.w    word_9117E-Map_SStageTailstails_
-                dc.w    word_91186-Map_SStageTailstails_
-                dc.w    word_9118E-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame01-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame02-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame03-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame04-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame05-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame06-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame07-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame08-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame09-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame0A-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame0B-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame0C-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame0D-Map_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_MappingFrame0E-Map_SStageTailstails_
 PLC_SStageTailstails:
 PLC_SStageTailstails_:
-                dc.w    word_91124-PLC_SStageTailstails_
-                dc.w    word_91196-PLC_SStageTailstails_
-                dc.w    word_9119A-PLC_SStageTailstails_
-                dc.w    word_9119E-PLC_SStageTailstails_
-                dc.w    word_911A2-PLC_SStageTailstails_
-                dc.w    word_911A6-PLC_SStageTailstails_
-                dc.w    word_911AA-PLC_SStageTailstails_
-                dc.w    word_911AE-PLC_SStageTailstails_
-                dc.w    word_911B2-PLC_SStageTailstails_
-                dc.w    word_911B6-PLC_SStageTailstails_
-                dc.w    word_911BA-PLC_SStageTailstails_
-                dc.w    word_911BE-PLC_SStageTailstails_
-                dc.w    word_911C2-PLC_SStageTailstails_
-                dc.w    word_911C6-PLC_SStageTailstails_
-                dc.w    word_911CA-PLC_SStageTailstails_
-word_91124:     dc.w    0
-word_91126:     dc.w    1
+                dc.w    S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame01-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame02-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame03-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame04-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame05-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame06-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame07-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame08-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame09-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame0A-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame0B-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame0C-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame0D-PLC_SStageTailstails_
+                dc.w    S3SpecialStageTailsTail_DplcFrame0E-PLC_SStageTailstails_
+S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00: dc.w    0
+S3SpecialStageTailsTail_MappingFrame01:             dc.w    1
                 dc.b    $EA,   6,   0,   0, $FF, $F8
-word_9112E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame02: dc.w    1
                 dc.b    $F2,  $A,   0,   0, $FF, $F8
-word_91136:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame03: dc.w    1
                 dc.b    $FA,   9,   0,   0, $FF, $F8
-word_9113E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame04: dc.w    1
                 dc.b    $F2,   6,   0,   0, $FF, $F8
-word_91146:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame05: dc.w    1
                 dc.b    $EA,   7,   0,   0, $FF, $F8
-word_9114E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame06: dc.w    1
                 dc.b    $EA,  $A,   0,   0, $FF, $F0
-word_91156:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame07: dc.w    1
                 dc.b    $EA,   6,   0,   0, $FF, $F8
-word_9115E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame08: dc.w    1
                 dc.b    $EA,   6,   8,   0, $FF, $F8
-word_91166:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame09: dc.w    1
                 dc.b    $F2,  $A,   8,   0, $FF, $F0
-word_9116E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame0A: dc.w    1
                 dc.b    $FA,   9,   0,   0, $FF, $F0
-word_91176:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame0B: dc.w    1
                 dc.b    $F2,   6,   8,   0, $FF, $F8
-word_9117E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame0C: dc.w    1
                 dc.b    $EA,   7,   8,   0, $FF, $F8
-word_91186:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame0D: dc.w    1
                 dc.b    $EA,  $A,   8,   0, $FF, $F8
-word_9118E:     dc.w    1
+S3SpecialStageTailsTail_MappingFrame0E: dc.w    1
                 dc.b    $EA,   6,   8,   0, $FF, $F8
-word_91196:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame01:    dc.w    1
                 dc.w    $5000
-word_9119A:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame02:    dc.w    1
                 dc.w    $8006
-word_9119E:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame03:    dc.w    1
                 dc.w    $500F
-word_911A2:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame04:    dc.w    1
                 dc.w    $5015
-word_911A6:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame05:    dc.w    1
                 dc.w    $701B
-word_911AA:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame06:    dc.w    1
                 dc.w    $8023
-word_911AE:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame07:    dc.w    1
                 dc.w    $502C
-word_911B2:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame08:    dc.w    1
                 dc.w    $5000
-word_911B6:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame09:    dc.w    1
                 dc.w    $8006
-word_911BA:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame0A:    dc.w    1
                 dc.w    $5032
-word_911BE:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame0B:    dc.w    1
                 dc.w    $5015
-word_911C2:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame0C:    dc.w    1
                 dc.w    $701B
-word_911C6:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame0D:    dc.w    1
                 dc.w    $8023
-word_911CA:     dc.w    1
+S3SpecialStageTailsTail_DplcFrame0E:    dc.w    1
                 dc.w    $502C

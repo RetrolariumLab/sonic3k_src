@@ -4,28 +4,28 @@
 
 ; ---------------------------------------------------------------------------
 
-loc_1620A:
+S3TailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_16222
+                beq.s   S3TailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_16222:
+S3TailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_1623C
+                beq.s   S3TailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode
                 subi.w  #$20,y_vel(a0)
 
-loc_1623C:
+S3TailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_1624C
+                bne.s   S3TailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_1624C:
+S3TailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw:
                 bsr.w   TailsS3ResolveHurtLandingOrDeathPlane
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Sonic_RecordPos
@@ -36,18 +36,18 @@ loc_1624C:
 
 TailsS3ResolveHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   loc_16278
+                bne.s   S3TailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   loc_162BE
+                blt.w   S3TailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing
 
-loc_16278:
+S3TailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding:
                 movem.l a4-a6,-(sp)
                 bsr.w   Tails_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   locret_162BC
+                bne.s   S3TailsRecovery_ReturnAfterHurtAirOrLandingDecision
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -59,25 +59,25 @@ loc_16278:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-locret_162BC:
+S3TailsRecovery_ReturnAfterHurtAirOrLandingDecision:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_162BE:
+S3TailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing:
                 jmp     (Kill_Character).l
 ; End of function TailsS3ResolveHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-loc_162C4:
+S3TailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_162DC
+                beq.s   S3TailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_162DC:
+S3TailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw:
                 bsr.w   PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite).l
                 bsr.w   Sonic_RecordPos
@@ -85,38 +85,38 @@ loc_162DC:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_162F4:
+S3TailsRecovery_CountNonzeroRestartWordDownToRestartRequest:
                 tst.w   $3E(a0)
-                beq.s   locret_16306
+                beq.s   S3TailsRecovery_ReturnAfterRestartCountdownWithoutDrawing
                 subq.w  #1,$3E(a0)
-                bne.s   locret_16306
+                bne.s   S3TailsRecovery_ReturnAfterRestartCountdownWithoutDrawing
                 move.w  #1,(Restart_level_flag).w
 
-locret_16306:
+S3TailsRecovery_ReturnAfterRestartCountdownWithoutDrawing:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_16308:
+S3TailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine:
                 tst.w   (H_scroll_amount_P2).w
-                bne.s   loc_1631A
+                bne.s   S3TailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll
                 tst.w   (V_scroll_amount_P2).w
-                bne.s   loc_1631A
+                bne.s   S3TailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll
                 move.b  #2,routine(a0)
 
-loc_1631A:
+S3TailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll:
                 bsr.w   TailsS3AnimateRecoveryStateAndDispatchPatternLoader
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_16324:
+S3TailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_1633C
+                beq.s   S3TailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-loc_1633C:
+S3TailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -127,12 +127,12 @@ loc_1633C:
 
 TailsS3AnimateRecoveryStateAndDispatchPatternLoader:
                 tst.w   (Competition_mode).w
-                bne.s   loc_16362
+                bne.s   S3TailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader
                 bsr.s   Animate_Tails
                 bra.w   Tails_Load_PLC
 ; ---------------------------------------------------------------------------
 
-loc_16362:
+S3TailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader:
                 bsr.w   Animate_Tails2P
                 bra.w   Tails2P_Load_PLC
 ; End of function TailsS3AnimateRecoveryStateAndDispatchPatternLoader

@@ -7,10 +7,10 @@
 Tails_DoLevelCollision:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_153D6
+                beq.s   SKTailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_153D6:
+SKTailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -18,237 +18,237 @@ loc_153D6:
                 subi.b  #$20,d0
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
-                beq.w   loc_154AC
+                beq.w   SKTailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant
                 cmpi.b  #$80,d0
-                beq.w   loc_15538
+                beq.w   SKTailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant
                 cmpi.b  #$C0,d0
-                beq.w   loc_1559C
+                beq.w   SKTailsTerrain_ResolveRightWallInRightwardVelocityQuadrant
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_1541A
+                bpl.s   SKTailsTerrain_ResolveRightWallBeforeDefaultFloorProbe
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_1541A:
+SKTailsTerrain_ResolveRightWallBeforeDefaultFloorProbe:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_1542C
+                bpl.s   SKTailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_1542C:
+SKTailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_154AA
+                bpl.s   SKTailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
                 move.b  y_vel(a0),d2
                 addq.b  #8,d2
                 neg.b   d2
                 cmp.b   d2,d1
-                bge.s   loc_15444
+                bge.s   SKTailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion
                 cmp.b   d2,d0
-                blt.s   locret_154AA
+                blt.s   SKTailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
 
-loc_15444:
+SKTailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion:
                 move.b  d3,angle(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_15450
+                beq.s   SKTailsTerrain_ApplyGravityOrientedDefaultFloorOffsetAndClassifySlope
                 neg.w   d1
 
-loc_15450:
+SKTailsTerrain_ApplyGravityOrientedDefaultFloorOffsetAndClassifySlope:
                 add.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   loc_15484
+                bne.s   SKTailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity
                 move.b  d3,d0
                 addi.b  #$10,d0
                 andi.b  #$20,d0
-                beq.s   loc_15472
+                beq.s   SKTailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset
                 asr     y_vel(a0)
-                bra.s   loc_15498
+                bra.s   SKTailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical
 ; ---------------------------------------------------------------------------
 
-loc_15472:
+SKTailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_15484:
+SKTailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity:
                 move.w  #0,x_vel(a0)
                 cmpi.w  #$FC0,y_vel(a0)
-                ble.s   loc_15498
+                ble.s   SKTailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical
                 move.w  #$FC0,y_vel(a0)
 
-loc_15498:
+SKTailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical:
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   locret_154AA
+                bpl.s   SKTailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
                 neg.w   ground_vel(a0)
 
-locret_154AA:
+SKTailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_154AC:
+SKTailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_154C4
+                bpl.s   SKTailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-loc_154C4:
+SKTailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   loc_15502
+                bpl.s   SKTailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed
                 neg.w   d1
                 cmpi.w  #$14,d1
-                bhs.s   loc_154EE
+                bhs.s   SKTailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_154DC
+                beq.s   SKTailsTerrain_ApplyGravityOrientedShallowLeftwardCeilingOffset
                 neg.w   d1
 
-loc_154DC:
+SKTailsTerrain_ApplyGravityOrientedShallowLeftwardCeilingOffset:
                 add.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_154EC
+                bpl.s   SKTailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection
                 move.w  #0,y_vel(a0)
 
-locret_154EC:
+SKTailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_154EE:
+SKTailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   locret_15500
+                bpl.s   SKTailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-locret_15500:
+SKTailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_15502:
+SKTailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed:
                 tst.b   (WindTunnel_flag_P2).w
-                bne.s   loc_1550E
+                bne.s   SKTailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant
                 tst.w   y_vel(a0)
-                bmi.s   locret_15536
+                bmi.s   SKTailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment
 
-loc_1550E:
+SKTailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_15536
+                bpl.s   SKTailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_1551E
+                beq.s   SKTailsTerrain_ApplyGravityOrientedLeftwardFloorLandingOffset
                 neg.w   d1
 
-loc_1551E:
+SKTailsTerrain_ApplyGravityOrientedLeftwardFloorLandingOffset:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
 
-locret_15536:
+SKTailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_15538:
+SKTailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_1554A
+                bpl.s   SKTailsTerrain_ResolveRightWallInUpwardVelocityQuadrant
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_1554A:
+SKTailsTerrain_ResolveRightWallInUpwardVelocityQuadrant:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_1555C
+                bpl.s   SKTailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_1555C:
+SKTailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_1559A
+                bpl.s   SKTailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_1556C
+                beq.s   SKTailsTerrain_ApplyGravityOrientedUpwardCeilingOffsetAndSlopeGate
                 neg.w   d1
 
-loc_1556C:
+SKTailsTerrain_ApplyGravityOrientedUpwardCeilingOffsetAndSlopeGate:
                 sub.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   loc_15584
+                bne.s   SKTailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset
                 move.w  #0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_15584:
+SKTailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset:
                 move.b  d3,angle(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   locret_1559A
+                bpl.s   SKTailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment
                 neg.w   ground_vel(a0)
 
-locret_1559A:
+SKTailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1559C:
+SKTailsTerrain_ResolveRightWallInRightwardVelocityQuadrant:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_155B4
+                bpl.s   SKTailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-loc_155B4:
+SKTailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold:
                 bsr.w   CheckSKPlayerGravityRelativeCeilingAndNormalizeAngle
                 tst.w   d1
-                bpl.s   loc_155D6
+                bpl.s   SKTailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_155C4
+                beq.s   SKTailsTerrain_ApplyGravityOrientedRightwardCeilingOffset
                 neg.w   d1
 
-loc_155C4:
+SKTailsTerrain_ApplyGravityOrientedRightwardCeilingOffset:
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_155D4
+                bpl.s   SKTailsTerrain_ReturnAfterRightwardCeilingCorrection
                 move.w  #0,y_vel(a0)
 
-locret_155D4:
+SKTailsTerrain_ReturnAfterRightwardCeilingCorrection:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_155D6:
+SKTailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed:
                 tst.b   (WindTunnel_flag_P2).w
-                bne.s   loc_155E2
+                bne.s   SKTailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant
                 tst.w   y_vel(a0)
-                bmi.s   locret_1560A
+                bmi.s   SKTailsTerrain_ReturnAfterRightwardFloorGateOrAttachment
 
-loc_155E2:
+SKTailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant:
                 bsr.w   CheckSKPlayerGravityRelativeFloorAndNormalizeAngle
                 tst.w   d1
-                bpl.s   locret_1560A
+                bpl.s   SKTailsTerrain_ReturnAfterRightwardFloorGateOrAttachment
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_155F2
+                beq.s   SKTailsTerrain_ApplyGravityOrientedRightwardFloorLandingOffset
                 neg.w   d1
 
-loc_155F2:
+SKTailsTerrain_ApplyGravityOrientedRightwardFloorLandingOffset:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
 
-locret_1560A:
+SKTailsTerrain_ReturnAfterRightwardFloorGateOrAttachment:
                 rts
 ; End of function Tails_DoLevelCollision
 
@@ -256,7 +256,7 @@ locret_1560A:
 
 Tails_TouchFloor_Check_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_1565E
+                bne.s   SKTailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin
                 move.b  #0,anim(a0)
 ; End of function Tails_TouchFloor_Check_Spindash
 
@@ -267,27 +267,27 @@ Tails_TouchFloor:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                beq.s   loc_1565E
+                beq.s   SKTailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin
                 bclr    #Status_Roll,status(a0)
                 move.b  #0,anim(a0)
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_1564A
+                beq.s   SKTailsTerrain_StackUnrollRadiusDeltaAndOrientByAngleHalfRange
                 neg.w   d0
 
-loc_1564A:
+SKTailsTerrain_StackUnrollRadiusDeltaAndOrientByAngleHalfRange:
                 move.w  d0,-(sp)
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
-                bpl.s   loc_15658
+                bpl.s   SKTailsTerrain_PopOrientedUnrollDeltaAndAddToIntegerY
                 neg.w   (sp)
 
-loc_15658:
+SKTailsTerrain_PopOrientedUnrollDeltaAndAddToIntegerY:
                 move.w  (sp)+,d0
                 add.w   d0,y_pos(a0)
 
-loc_1565E:
+SKTailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin:
                 bclr    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 bclr    #Status_RollJump,status(a0)

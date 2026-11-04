@@ -3,39 +3,39 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Tails_Carry_Sonic:
                 tst.b   (a2)
-                beq.w   loc_14534
+                beq.w   SKTailsCarry_CountDownPickupInhibitBeforeAcquisition
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_14466
+                bhs.w   SKTailsCarry_ClearCarriedControlBeforeForcedDetach
                 btst    #Status_InAir,status(a1)
-                beq.w   loc_1445A
+                beq.w   SKTailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
                 move.w  (_unkF744).w,d1
                 cmp.w   x_vel(a1),d1
-                bne.s   loc_1445A
+                bne.s   SKTailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
                 move.w  (_unkF74C).w,d1
                 cmp.w   y_vel(a1),d1
-                bne.s   loc_14460
+                bne.s   SKTailsCarry_ClearJumpingOnCarryMotionRelease
                 tst.b   object_control(a1)
-                bmi.s   loc_1446A
+                bmi.s   SKTailsCarry_DetachAndArmSixtyCallPickupCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_14474
+                beq.w   SKTailsCarry_SynchronizeCarriedPlayerPositionForAttachment
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,1(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_14410
+                beq.w   SKTailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease
                 move.b  #$3C,1(a2)
 
-loc_14410:
+SKTailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease:
                 btst    #button_left+8,d0
-                beq.s   loc_1441C
+                beq.s   SKTailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease
                 move.w  #-$200,x_vel(a1)
 
-loc_1441C:
+SKTailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease:
                 btst    #button_right+8,d0
-                beq.s   loc_14428
+                beq.s   SKTailsCarry_LaunchReleasedPlayerIntoRollingJump
                 move.w  #$200,x_vel(a1)
 
-loc_14428:
+SKTailsCarry_LaunchReleasedPlayerIntoRollingJump:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -47,30 +47,30 @@ loc_14428:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1445A:
+SKTailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch:
                 move.w  #-$100,y_vel(a1)
 
-loc_14460:
+SKTailsCarry_ClearJumpingOnCarryMotionRelease:
                 move.b  #0,jumping(a1)
 
-loc_14466:
+SKTailsCarry_ClearCarriedControlBeforeForcedDetach:
                 clr.b   object_control(a1)
 
-loc_1446A:
+SKTailsCarry_DetachAndArmSixtyCallPickupCooldown:
                 clr.b   (a2)
                 move.b  #$3C,1(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14474:
+SKTailsCarry_SynchronizeCarriedPlayerPositionForAttachment:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$1C,y_pos(a1)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_14492
+                beq.s   SKTailsCarry_MirrorCarriedFacingAndApplyReverseGravityFlip
                 subi.w  #2*$1C,y_pos(a1)
 
-loc_14492:
+SKTailsCarry_MirrorCarriedFacingAndApplyReverseGravityFlip:
                 andi.b  #$FC,render_flags(a1)
                 andi.b  #$FE,status(a1)
                 move.b  status(a0),d0
@@ -78,23 +78,23 @@ loc_14492:
                 or.b    d0,render_flags(a1)
                 or.b    d0,status(a1)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_144BA
+                beq.s   SKTailsCarry_GateCarryFrameStepBySignedByteTimer
                 eori.b  #2,render_flags(a1)
 
-loc_144BA:
+SKTailsCarry_GateCarryFrameStepBySignedByteTimer:
                 subq.b  #1,anim_frame_timer(a1)
-                bpl.s   loc_144F8
+                bpl.s   SKTailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain
                 move.b  #$B,anim_frame_timer(a1)
                 moveq   #0,d1
                 move.b  anim_frame(a1),d1
                 addq.b  #1,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_144E4
+                bne.s   SKTailsCarry_StoreCarryFrameAndLoadCharacterPatterns
                 move.b  #0,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc),d0
 
-loc_144E4:
+SKTailsCarry_StoreCarryFrameAndLoadCharacterPatterns:
                 move.b  d0,mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -102,7 +102,7 @@ loc_144E4:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
 
-loc_144F8:
+SKTailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain:
                 move.w  x_vel(a0),(Player_1+x_vel).w
                 move.w  x_vel(a0),(_unkF744).w
                 move.w  y_vel(a0),(Player_1+y_vel).w
@@ -118,42 +118,42 @@ AniRaw_Tails_Carry:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_14534:
+SKTailsCarry_CountDownPickupInhibitBeforeAcquisition:
                 tst.b   1(a2)
-                beq.s   loc_14542
+                beq.s   SKTailsCarry_TestPickupRelativePositionAndEligibility
                 subq.b  #1,1(a2)
-                bne.w   locret_1459C
+                bne.w   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
 
-loc_14542:
+SKTailsCarry_TestPickupRelativePositionAndEligibility:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_1459C
+                bhs.w   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$20,d1
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_1456C
+                beq.s   SKTailsCarry_TestGravityAdjustedPickupHeightAndEligibility
                 addi.w  #$50,d1
 
-loc_1456C:
+SKTailsCarry_TestGravityAdjustedPickupHeightAndEligibility:
                 cmpi.w  #$10,d1
-                bhs.w   locret_1459C
+                bhs.w   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.b   object_control(a1)
-                bne.s   locret_1459C
+                bne.s   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_1459C
+                bhs.s   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_1459C
+                bne.s   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.b   spin_dash_flag(a1)
-                bne.s   locret_1459C
+                bne.s   SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 bsr.s   TailsSKInitializeCarriedPlayerAttachment
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(a2)
 
-locret_1459C:
+SKTailsCarry_ReturnAfterPickupGateOrAttachmentCommit:
                 rts
 ; End of function Tails_Carry_Sonic
 
@@ -185,11 +185,11 @@ TailsSKInitializeCarriedPlayerAttachment:
                 move.w  y_vel(a0),(_unkF74C).w
                 move.w  y_vel(a0),y_vel(a1)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   locret_14630
+                beq.s   SKTailsCarry_ReturnFromGravityAdjustedAttachmentInitialization
                 subi.w  #$38,y_pos(a1)
                 eori.b  #2,render_flags(a1)
 
-locret_14630:
+SKTailsCarry_ReturnFromGravityAdjustedAttachmentInitialization:
                 rts
 ; End of function TailsSKInitializeCarriedPlayerAttachment
 

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 90
+    "commit_count": 91
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -587,9 +587,15 @@
       "commits": ["f63b63cd43d7eb0cc357ca0f4d32ee148447c1cd"]
     },
     {
-      "id": "current-semantic-06-player-sonic",
+      "id": "change-fc2b2d76e925",
       "kind": "source_or_tooling",
       "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 06-player-sonic; retain exact reversible source proof and original ROM bytes.",
+      "commits": ["fc2b2d76e9250e22363b8feda6580a15994b2416"]
+    },
+    {
+      "id": "current-semantic-07-player-tails",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 07-player-tails; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],

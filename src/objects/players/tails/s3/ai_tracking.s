@@ -7,10 +7,10 @@
 Tails_CPU_Control:
                 move.b  (Ctrl_2_held).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_B_mask|button_C_mask|button_A_mask,d0
-                beq.s   loc_146EE
+                beq.s   S3TailsAI_DispatchFollowerStateAfterManualInputRefresh
                 move.w  #10*60,(Tails_CPU_idle_timer).w
 
-loc_146EE:
+S3TailsAI_DispatchFollowerStateAfterManualInputRefresh:
                 lea     (Player_1).w,a1
                 move.w  (Tails_CPU_routine).w,d0
                 move.w  Tails_CPU_Control_Index(pc,d0.w),d0
@@ -19,44 +19,44 @@ loc_146EE:
 
 ; ---------------------------------------------------------------------------
 Tails_CPU_Control_Index:
-                dc.w    loc_14722-Tails_CPU_Control_Index
+                dc.w    S3TailsAI_InitializeFollowerByCheckpointAndStage-Tails_CPU_Control_Index
                 dc.w    Tails_Catch_Up_Flying-Tails_CPU_Control_Index
                 dc.w    Tails_FlySwim_Unknown-Tails_CPU_Control_Index
-                dc.w    loc_149E8-Tails_CPU_Control_Index
-                dc.w    loc_14BC6-Tails_CPU_Control_Index
-                dc.w    locret_14C46-Tails_CPU_Control_Index
-                dc.w    loc_14C48-Tails_CPU_Control_Index
-                dc.w    loc_14C80-Tails_CPU_Control_Index
-                dc.w    loc_14D10-Tails_CPU_Control_Index
-                dc.w    loc_14D4C-Tails_CPU_Control_Index
-                dc.w    loc_14D54-Tails_CPU_Control_Index
-                dc.w    loc_14D8C-Tails_CPU_Control_Index
-                dc.w    loc_14DD2-Tails_CPU_Control_Index
-                dc.w    loc_14E78-Tails_CPU_Control_Index
-                dc.w    loc_14EA2-Tails_CPU_Control_Index
-                dc.w    loc_14EDA-Tails_CPU_Control_Index
-                dc.w    loc_14EE2-Tails_CPU_Control_Index
-                dc.w    loc_14F0C-Tails_CPU_Control_Index
+                dc.w    S3TailsAI_SwitchNormalFollowToFlightWhenLeaderRoutineRequires-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_GateIdleCpuSpindashAfterOffscreenWatch-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_ReturnWithoutInputChangesInInactiveCpuState-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_InitializeIntroCarryFlightWithRightwardVelocity-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_ClearIdleAndPulseRightDuringIntroCarry-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_PulseRightAndFlapWhilePartnerLeavesIntro-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_ClearCpuInputWhileWaitingForBossCarrySetup-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_InitializeBossCarryFlightAndAttachPrimary-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_PulseFlapDuringBossCarryClimb-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_InitializeSoloBossFlightWithoutPrimaryAttachment-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_PulseSoloBossClimbAndRefreshFlightBudget-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_RefreshSoloFlightBudgetWithoutChangingInput-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_InitializeScriptedPrimaryFlyInWithRightwardVelocity-Tails_CPU_Control_Index
+                dc.w    S3TailsCpuScript_PulseRightDuringScriptedPrimaryFlyIn-Tails_CPU_Control_Index
 ; ---------------------------------------------------------------------------
 
-loc_14722:
+S3TailsAI_InitializeFollowerByCheckpointAndStage:
                 tst.b   (Tails_CPU_star_post_flag).w
-                bne.w   loc_147A8
+                bne.w   S3TailsAI_ClearFollowerMotionBeforeStartingFollow
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_14744
+                bne.s   S3TailsAI_SelectEarlyStagePlacementOrDirectFollow
                 bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14744:
+S3TailsAI_SelectEarlyStagePlacementOrDirectFollow:
                 cmpi.w  #$100,(Current_zone_and_act).w
-                beq.w   loc_147C6
+                beq.w   S3TailsAI_StartNormalFollowWithOwnControlEnabled
                 cmpi.w  #$200,(Current_zone_and_act).w
-                beq.w   loc_147C6
+                beq.w   S3TailsAI_StartNormalFollowWithOwnControlEnabled
                 cmpi.w  #$300,(Current_zone_and_act).w
-                bne.s   loc_14786
+                bne.s   S3TailsAI_HoldFollowerOffscreenForSelectedStageStart
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.b  #2,status(a0)
@@ -66,27 +66,27 @@ loc_14744:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14786:
+S3TailsAI_HoldFollowerOffscreenForSelectedStageStart:
                 cmpi.w  #$500,(Current_zone_and_act).w
-                bne.s   loc_147A0
+                bne.s   S3TailsAI_SelectDirectFollowOrExtendedStageStart
                 bsr.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
                 move.w  #$A,(Tails_CPU_routine).w
                 move.b  #$83,object_control(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_147A0:
+S3TailsAI_SelectDirectFollowOrExtendedStageStart:
                 cmpi.w  #$600,(Current_zone_and_act).w
-                beq.s   loc_147C6
+                beq.s   S3TailsAI_StartNormalFollowWithOwnControlEnabled
 
-loc_147A8:
+S3TailsAI_ClearFollowerMotionBeforeStartingFollow:
                 move.b  #0,anim(a0)
                 move.w  #0,x_vel(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 move.b  #0,status(a0)
 
-loc_147C6:
+S3TailsAI_StartNormalFollowWithOwnControlEnabled:
                 move.w  #6,(Tails_CPU_routine).w
                 move.b  #0,object_control(a0)
                 move.w  #0,(Tails_CPU_flight_timer).w
@@ -96,17 +96,17 @@ loc_147C6:
 Tails_Catch_Up_Flying:
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask|button_start_mask,d0
-                bne.s   loc_14804
+                bne.s   S3TailsAI_BeginFlightCatchUpAtLeaderPosition
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #$3F,d0
-                bne.w   locret_148A0
+                bne.w   S3TailsAI_ReturnFromCatchUpSpawnGateOrSetup
                 tst.b   object_control(a1)
-                bne.w   locret_148A0
+                bne.w   S3TailsAI_ReturnFromCatchUpSpawnGateOrSetup
                 move.b  status(a1),d0
                 andi.b  #$92,d0
-                bne.w   locret_148A0
+                bne.w   S3TailsAI_ReturnFromCatchUpSpawnGateOrSetup
 
-loc_14804:
+S3TailsAI_BeginFlightCatchUpAtLeaderPosition:
                 move.w  #4,(Tails_CPU_routine).w
                 move.w  x_pos(a1),d0
                 move.w  d0,x_pos(a0)
@@ -144,16 +144,16 @@ loc_14804:
                 move.b  #(8*60)/2,double_jump_property(a0)
                 bsr.w   Tails_Set_Flying_Animation
 
-locret_148A0:
+S3TailsAI_ReturnFromCatchUpSpawnGateOrSetup:
                 rts
 ; ---------------------------------------------------------------------------
 
 Tails_FlySwim_Unknown:
                 tst.b   render_flags(a0)
-                bmi.s   loc_148E4
+                bmi.s   S3TailsAI_RefreshVisibleFlightAnimationAndClearTimeout
                 addq.w  #1,(Tails_CPU_flight_timer).w
                 cmpi.w  #5*60,(Tails_CPU_flight_timer).w
-                blo.s   loc_148FA
+                blo.s   S3TailsAI_ReadDelayedLeaderPositionAndApproachInFlight
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.w  #2,(Tails_CPU_routine).w
                 move.b  #$81,object_control(a0)
@@ -165,13 +165,13 @@ Tails_FlySwim_Unknown:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_148E4:
+S3TailsAI_RefreshVisibleFlightAnimationAndClearTimeout:
                 move.b  #(8*60)/2,double_jump_property(a0)
                 ori.b   #1<<Status_InAir,status(a0)
                 bsr.w   Tails_Set_Flying_Animation
                 move.w  #0,(Tails_CPU_flight_timer).w
 
-loc_148FA:
+S3TailsAI_ReadDelayedLeaderPositionAndApproachInFlight:
                 lea     (Pos_table).w,a2
                 move.w  #$10,d2
                 lsl.b   #2,d2
@@ -183,67 +183,67 @@ loc_148FA:
                 bsr.w   Tails_Set_Flying_Animation
                 move.w  x_pos(a0),d0
                 sub.w   (Tails_CPU_target_X).w,d0
-                beq.s   loc_1496C
+                beq.s   S3TailsAI_ChooseSinglePixelFlightVerticalStep
                 move.w  d0,d2
-                bpl.s   loc_1492C
+                bpl.s   S3TailsAI_ScaleAndCapFlightHorizontalDistanceStep
                 neg.w   d2
 
-loc_1492C:
+S3TailsAI_ScaleAndCapFlightHorizontalDistanceStep:
                 lsr.w   #4,d2
                 cmpi.w  #$C,d2
-                blo.s   loc_14936
+                blo.s   S3TailsAI_ReadLeaderHorizontalVelocityHighByte
                 moveq   #$C,d2
 
-loc_14936:
+S3TailsAI_ReadLeaderHorizontalVelocityHighByte:
                 move.b  x_vel(a1),d1
-                bpl.s   loc_1493E
+                bpl.s   S3TailsAI_AddLeaderVelocityByteAndChooseFlightDirection
                 neg.b   d1
 
-loc_1493E:
+S3TailsAI_AddLeaderVelocityByteAndChooseFlightDirection:
                 add.b   d1,d2
                 addq.w  #1,d2
                 tst.w   d0
-                bmi.s   loc_14958
+                bmi.s   S3TailsAI_ApproachFlightTargetToTheRight
                 bset    #Status_Facing,status(a0)
                 cmp.w   d0,d2
-                blo.s   loc_14954
+                blo.s   S3TailsAI_NegateFlightStepWhenFollowerIsRightOfTarget
                 move.w  d0,d2
                 moveq   #0,d0
 
-loc_14954:
+S3TailsAI_NegateFlightStepWhenFollowerIsRightOfTarget:
                 neg.w   d2
-                bra.s   loc_14968
+                bra.s   S3TailsAI_AddFlightHorizontalStepToIntegerPosition
 ; ---------------------------------------------------------------------------
 
-loc_14958:
+S3TailsAI_ApproachFlightTargetToTheRight:
                 bclr    #Status_Facing,status(a0)
                 neg.w   d0
                 cmp.w   d0,d2
-                blo.s   loc_14968
+                blo.s   S3TailsAI_AddFlightHorizontalStepToIntegerPosition
                 move.b  d0,d2
                 moveq   #0,d0
 
-loc_14968:
+S3TailsAI_AddFlightHorizontalStepToIntegerPosition:
                 add.w   d2,x_pos(a0)
 
-loc_1496C:
+S3TailsAI_ChooseSinglePixelFlightVerticalStep:
                 moveq   #1,d2
                 move.w  y_pos(a0),d1
                 sub.w   (Tails_CPU_target_Y).w,d1
-                beq.s   loc_14980
-                bmi.s   loc_1497C
+                beq.s   S3TailsAI_GateFlightHandoffFromDelayedLeaderState
+                bmi.s   S3TailsAI_ApplyFlightVerticalStep
                 neg.w   d2
 
-loc_1497C:
+S3TailsAI_ApplyFlightVerticalStep:
                 add.w   d2,y_pos(a0)
 
-loc_14980:
+S3TailsAI_GateFlightHandoffFromDelayedLeaderState:
                 lea     (Stat_table).w,a2
                 move.b  2(a2,d3.w),d2
                 andi.b  #$92,d2
-                bne.s   locret_149E6
+                bne.s   S3TailsAI_ReturnAfterFlightHandoffOrUnreadyFlightChecks
                 or.w    d0,d1
-                bne.s   locret_149E6
+                bne.s   S3TailsAI_ReturnAfterFlightHandoffOrUnreadyFlightChecks
                 move.w  #6,(Tails_CPU_routine).w
                 move.b  #0,object_control(a0)
                 move.b  #0,anim(a0)
@@ -255,20 +255,20 @@ loc_14980:
                 move.w  #0,move_lock(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.b   art_tile(a1)
-                bpl.s   loc_149DA
+                bpl.s   S3TailsAI_CopyLeaderCollisionPlanesOnFlightHandoff
                 ori.w   #high_priority,art_tile(a0)
 
-loc_149DA:
+S3TailsAI_CopyLeaderCollisionPlanesOnFlightHandoff:
                 move.b  top_solid_bit(a1),top_solid_bit(a0)
                 move.b  lrb_solid_bit(a1),lrb_solid_bit(a0)
 
-locret_149E6:
+S3TailsAI_ReturnAfterFlightHandoffOrUnreadyFlightChecks:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_149E8:
+S3TailsAI_SwitchNormalFollowToFlightWhenLeaderRoutineRequires:
                 cmpi.b  #6,(Player_1+routine).w
-                blo.s   loc_14A16
+                blo.s   S3TailsAI_GateNormalAIByTimeoutManualControlAndPlayerState
                 move.w  #4,(Tails_CPU_routine).w
                 move.b  #0,spin_dash_flag(a0)
                 move.w  #0,spin_dash_counter(a0)
@@ -278,21 +278,21 @@ loc_149E8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14A16:
+S3TailsAI_GateNormalAIByTimeoutManualControlAndPlayerState:
                 bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
-                bne.w   loc_14B4C
+                bne.w   S3TailsAI_DecrementManualOverrideTimerWithoutReplacingInput
                 tst.b   object_control(a0)
-                bmi.w   loc_14B4C
+                bmi.w   S3TailsAI_DecrementManualOverrideTimerWithoutReplacingInput
                 tst.b   status_tertiary(a1)
-                bmi.w   loc_14B4C
+                bmi.w   S3TailsAI_DecrementManualOverrideTimerWithoutReplacingInput
                 tst.w   move_lock(a0)
-                beq.s   loc_14A44
+                beq.s   S3TailsAI_ReadDelayedLeaderXAndApplyTrailingOffset
                 tst.w   ground_vel(a0)
-                bne.s   loc_14A44
+                bne.s   S3TailsAI_ReadDelayedLeaderXAndApplyTrailingOffset
                 move.w  #8,(Tails_CPU_routine).w
 
-loc_14A44:
+S3TailsAI_ReadDelayedLeaderXAndApplyTrailingOffset:
                 lea     (Pos_table).w,a2
                 move.w  #$10,d1
                 lsl.b   #2,d1
@@ -301,104 +301,104 @@ loc_14A44:
                 sub.b   d1,d0
                 move.w  (a2,d0.w),d2
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_14A6E
+                bne.s   S3TailsAI_ReadDelayedInputStatusAndCheckPushMismatch
                 cmpi.w  #$400,ground_vel(a1)
-                bge.s   loc_14A6E
+                bge.s   S3TailsAI_ReadDelayedInputStatusAndCheckPushMismatch
                 subi.w  #$20,d2
 
-loc_14A6E:
+S3TailsAI_ReadDelayedInputStatusAndCheckPushMismatch:
                 move.w  2(a2,d0.w),d3
                 lea     (Stat_table).w,a2
                 move.w  (a2,d0.w),d1
                 move.b  2(a2,d0.w),d4
                 move.w  d1,d0
                 btst    #Status_Push,status(a0)
-                beq.s   loc_14A90
+                beq.s   S3TailsAI_ChooseFollowerHorizontalInputFromTargetError
                 btst    #5,d4
-                beq.w   loc_14B2A
+                beq.w   S3TailsAI_IssueAutomaticJumpOnSixtyFourFramePhase
 
-loc_14A90:
+S3TailsAI_ChooseFollowerHorizontalInputFromTargetError:
                 sub.w   x_pos(a0),d2
-                beq.s   loc_14ADE
-                bpl.s   loc_14ABC
+                beq.s   S3TailsAI_MatchDelayedLeaderFacingAtEqualX
+                bpl.s   S3TailsAI_OverrideInputRightWhenTargetFarEnough
                 neg.w   d2
                 cmpi.w  #$30,d2
-                bcs.s   loc_14AA8
+                bcs.s   S3TailsAI_NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft
                 andi.w  #$F3F3,d1
                 ori.w   #$404,d1
 
-loc_14AA8:
+S3TailsAI_NudgeFollowerLeftWhenAlreadyMovingAndFacingLeft:
                 tst.w   ground_vel(a0)
-                beq.s   loc_14AF2
+                beq.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_14AF2
+                beq.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
                 subq.w  #1,x_pos(a0)
-                bra.s   loc_14AF2
+                bra.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
 ; ---------------------------------------------------------------------------
 
-loc_14ABC:
+S3TailsAI_OverrideInputRightWhenTargetFarEnough:
                 cmpi.w  #$30,d2
-                blo.s   loc_14ACA
+                blo.s   S3TailsAI_NudgeFollowerRightWhenAlreadyMovingAndFacingRight
                 andi.w  #$F3F3,d1
                 ori.w   #$808,d1
 
-loc_14ACA:
+S3TailsAI_NudgeFollowerRightWhenAlreadyMovingAndFacingRight:
                 tst.w   ground_vel(a0)
-                beq.s   loc_14AF2
+                beq.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
                 btst    #Status_Facing,status(a0)
-                bne.s   loc_14AF2
+                bne.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
                 addq.w  #1,x_pos(a0)
-                bra.s   loc_14AF2
+                bra.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
 ; ---------------------------------------------------------------------------
 
-loc_14ADE:
+S3TailsAI_MatchDelayedLeaderFacingAtEqualX:
                 bclr    #Status_Facing,status(a0)
                 move.b  d4,d0
                 andi.b  #1,d0
-                beq.s   loc_14AF2
+                beq.s   S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears
                 bset    #Status_Facing,status(a0)
 
-loc_14AF2:
+S3TailsAI_ContinueAutomaticJumpHoldUntilAirborneClears:
                 tst.b   (Tails_CPU_auto_jump_flag).w
-                beq.s   loc_14B0A
+                beq.s   S3TailsAI_GateVerticalJumpCheckByHorizontalDistanceAndFramePhase
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|0,d1
                 btst    #Status_InAir,status(a0)
-                bne.s   loc_14B46
+                bne.s   S3TailsAI_WriteFollowerLogicalControllerWord
                 move.b  #0,(Tails_CPU_auto_jump_flag).w
 
-loc_14B0A:
+S3TailsAI_GateVerticalJumpCheckByHorizontalDistanceAndFramePhase:
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #$FF,d0
-                beq.s   loc_14B1A
+                beq.s   S3TailsAI_RequireTargetAboveByAtLeastThirtyTwoPixels
                 cmpi.w  #$40,d2
-                bhs.s   loc_14B46
+                bhs.s   S3TailsAI_WriteFollowerLogicalControllerWord
 
-loc_14B1A:
+S3TailsAI_RequireTargetAboveByAtLeastThirtyTwoPixels:
                 sub.w   y_pos(a0),d3
-                beq.s   loc_14B46
-                bpl.s   loc_14B46
+                beq.s   S3TailsAI_WriteFollowerLogicalControllerWord
+                bpl.s   S3TailsAI_WriteFollowerLogicalControllerWord
                 neg.w   d3
                 cmpi.w  #$20,d3
-                blo.s   loc_14B46
+                blo.s   S3TailsAI_WriteFollowerLogicalControllerWord
 
-loc_14B2A:
+S3TailsAI_IssueAutomaticJumpOnSixtyFourFramePhase:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$3F,d0
-                bne.s   loc_14B46
+                bne.s   S3TailsAI_WriteFollowerLogicalControllerWord
                 cmpi.b  #8,anim(a0)
-                beq.s   loc_14B46
+                beq.s   S3TailsAI_WriteFollowerLogicalControllerWord
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),d1
                 move.b  #1,(Tails_CPU_auto_jump_flag).w
 
-loc_14B46:
+S3TailsAI_WriteFollowerLogicalControllerWord:
                 move.w  d1,(Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14B4C:
+S3TailsAI_DecrementManualOverrideTimerWithoutReplacingInput:
                 tst.w   (Tails_CPU_idle_timer).w
-                beq.s   locret_14B56
+                beq.s   S3TailsAI_ReturnWithExistingFollowerInput
                 subq.w  #1,(Tails_CPU_idle_timer).w
 
-locret_14B56:
+S3TailsAI_ReturnWithExistingFollowerInput:
                 rts

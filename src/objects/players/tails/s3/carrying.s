@@ -3,39 +3,39 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Tails_Carry_Sonic:
                 tst.b   (a2)
-                beq.w   loc_151A2
+                beq.w   S3TailsCarry_CountDownPickupInhibitBeforeAcquisition
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_150EC
+                bhs.w   S3TailsCarry_ClearCarriedControlBeforeForcedDetach
                 btst    #Status_InAir,status(a1)
-                beq.w   loc_150E0
+                beq.w   S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
                 move.w  (_unkF744).w,d1
                 cmp.w   x_vel(a1),d1
-                bne.s   loc_150E0
+                bne.s   S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch
                 move.w  (_unkF74C).w,d1
                 cmp.w   y_vel(a1),d1
-                bne.s   loc_150E6
+                bne.s   S3TailsCarry_ClearJumpingOnCarryMotionRelease
                 tst.b   object_control(a1)
-                bmi.s   loc_150F0
+                bmi.s   S3TailsCarry_DetachAndArmSixtyCallPickupCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_150FA
+                beq.w   S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,1(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_15096
+                beq.w   S3TailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease
                 move.b  #$3C,1(a2)
 
-loc_15096:
+S3TailsCarry_ApplyHeldLeftVelocityOnCarryJumpRelease:
                 btst    #button_left+8,d0
-                beq.s   loc_150A2
+                beq.s   S3TailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease
                 move.w  #-$200,x_vel(a1)
 
-loc_150A2:
+S3TailsCarry_ApplyHeldRightVelocityOnCarryJumpRelease:
                 btst    #button_right+8,d0
-                beq.s   loc_150AE
+                beq.s   S3TailsCarry_LaunchReleasedPlayerIntoRollingJump
                 move.w  #$200,x_vel(a1)
 
-loc_150AE:
+S3TailsCarry_LaunchReleasedPlayerIntoRollingJump:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -47,22 +47,22 @@ loc_150AE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_150E0:
+S3TailsCarry_SetDropVelocityAfterGroundOrHorizontalMismatch:
                 move.w  #-$100,y_vel(a1)
 
-loc_150E6:
+S3TailsCarry_ClearJumpingOnCarryMotionRelease:
                 move.b  #0,jumping(a1)
 
-loc_150EC:
+S3TailsCarry_ClearCarriedControlBeforeForcedDetach:
                 clr.b   object_control(a1)
 
-loc_150F0:
+S3TailsCarry_DetachAndArmSixtyCallPickupCooldown:
                 clr.b   (a2)
                 move.b  #$3C,1(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_150FA:
+S3TailsCarry_SynchronizeCarriedPlayerPositionForAttachment:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$1C,y_pos(a1)
@@ -73,18 +73,18 @@ loc_150FA:
                 or.b    d0,render_flags(a1)
                 or.b    d0,status(a1)
                 subq.b  #1,anim_frame_timer(a1)
-                bpl.s   loc_15166
+                bpl.s   S3TailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain
                 move.b  #$B,anim_frame_timer(a1)
                 moveq   #0,d1
                 move.b  anim_frame(a1),d1
                 addq.b  #1,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_15152
+                bne.s   S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns
                 move.b  #0,anim_frame(a1)
                 move.b  AniRaw_Tails_Carry(pc),d0
 
-loc_15152:
+S3TailsCarry_StoreCarryFrameAndLoadCharacterPatterns:
                 move.b  d0,mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
@@ -92,7 +92,7 @@ loc_15152:
                 jsr     (Perform_Player_DPLC).l
                 movea.l (sp)+,a2
 
-loc_15166:
+S3TailsCarry_CopyCarrierVelocitiesAndProbePrimaryPlayerTerrain:
                 move.w  x_vel(a0),(Player_1+x_vel).w
                 move.w  x_vel(a0),(_unkF744).w
                 move.w  y_vel(a0),(Player_1+y_vel).w
@@ -108,37 +108,37 @@ AniRaw_Tails_Carry:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_151A2:
+S3TailsCarry_CountDownPickupInhibitBeforeAcquisition:
                 tst.b   1(a2)
-                beq.s   loc_151B0
+                beq.s   S3TailsCarry_TestPickupRelativePositionAndEligibility
                 subq.b  #1,1(a2)
-                bne.w   locret_15200
+                bne.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
 
-loc_151B0:
+S3TailsCarry_TestPickupRelativePositionAndEligibility:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_15200
+                bhs.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$20,d1
                 cmpi.w  #$10,d1
-                bhs.w   locret_15200
+                bhs.w   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.b   object_control(a1)
-                bne.s   locret_15200
+                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_15200
+                bhs.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_15200
+                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 tst.b   spin_dash_flag(a1)
-                bne.s   locret_15200
+                bne.s   S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit
                 bsr.s   TailsS3InitializeCarriedPlayerAttachment
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
                 move.b  #1,(a2)
 
-locret_15200:
+S3TailsCarry_ReturnAfterPickupGateOrAttachmentCommit:
                 rts
 ; End of function Tails_Carry_Sonic
 

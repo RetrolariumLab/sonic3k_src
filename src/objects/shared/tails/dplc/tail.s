@@ -1,137 +1,137 @@
 ; Data owner: objects/shared/tails
 ; Provenance and source range: config/reconstruction/source_layout.json
 PLC_Tails_Tail_:
-                dc.w    Frame_344DCE-PLC_Tails_Tail_
-                dc.w    Frame_344DD0-PLC_Tails_Tail_
-                dc.w    Frame_344DD4-PLC_Tails_Tail_
-                dc.w    Frame_344DD8-PLC_Tails_Tail_
-                dc.w    Frame_344DDC-PLC_Tails_Tail_
-                dc.w    Frame_344DE0-PLC_Tails_Tail_
-                dc.w    Frame_344DE4-PLC_Tails_Tail_
-                dc.w    Frame_344DE8-PLC_Tails_Tail_
-                dc.w    Frame_344DEC-PLC_Tails_Tail_
-                dc.w    Frame_344DF0-PLC_Tails_Tail_
-                dc.w    Frame_344DF4-PLC_Tails_Tail_
-                dc.w    Frame_344DF8-PLC_Tails_Tail_
-                dc.w    Frame_344DFC-PLC_Tails_Tail_
-                dc.w    Frame_344E00-PLC_Tails_Tail_
-                dc.w    Frame_344E04-PLC_Tails_Tail_
-                dc.w    Frame_344E08-PLC_Tails_Tail_
-                dc.w    Frame_344E0C-PLC_Tails_Tail_
-                dc.w    Frame_344E10-PLC_Tails_Tail_
-                dc.w    Frame_344E14-PLC_Tails_Tail_
-                dc.w    Frame_344E18-PLC_Tails_Tail_
-                dc.w    Frame_344E1C-PLC_Tails_Tail_
-                dc.w    Frame_344E20-PLC_Tails_Tail_
-                dc.w    Frame_344E24-PLC_Tails_Tail_
-                dc.w    Frame_344E28-PLC_Tails_Tail_
-                dc.w    Frame_344E2C-PLC_Tails_Tail_
-                dc.w    Frame_344E30-PLC_Tails_Tail_
-                dc.w    Frame_344E34-PLC_Tails_Tail_
-                dc.w    Frame_344E38-PLC_Tails_Tail_
-                dc.w    Frame_344E3C-PLC_Tails_Tail_
-                dc.w    Frame_344E40-PLC_Tails_Tail_
-                dc.w    Frame_344E44-PLC_Tails_Tail_
-                dc.w    Frame_344E48-PLC_Tails_Tail_
-                dc.w    Frame_344E4C-PLC_Tails_Tail_
-                dc.w    Frame_344E50-PLC_Tails_Tail_
-                dc.w    Frame_344E54-PLC_Tails_Tail_
-                dc.w    Frame_344E58-PLC_Tails_Tail_
-                dc.w    Frame_344E5C-PLC_Tails_Tail_
-                dc.w    Frame_344E60-PLC_Tails_Tail_
-                dc.w    Frame_344E64-PLC_Tails_Tail_
-                dc.w    Frame_344E68-PLC_Tails_Tail_
-                dc.w    Frame_344E6C-PLC_Tails_Tail_
-                dc.w    Frame_344E70-PLC_Tails_Tail_
-                dc.w    Frame_344E74-PLC_Tails_Tail_
-                dc.w    Frame_344E78-PLC_Tails_Tail_
-                dc.w    Frame_344E7C-PLC_Tails_Tail_
-Frame_344DCE:   dc.w    0
-Frame_344DD0:   dc.w    1
+                dc.w    S3TailsNormalTail_DplcFrame00-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame01-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame02-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame03-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame04-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame05-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame06-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame07-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame08-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame09-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0A-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0B-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0C-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0D-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0E-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame0F-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame10-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame11-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame12-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame13-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame14-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame15-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame16-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame17-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame18-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame19-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1A-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1B-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1C-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1D-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1E-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame1F-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame20-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame21-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame22-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame23-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame24-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame25-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame26-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame27-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame28-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame29-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame2A-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame2B-PLC_Tails_Tail_
+                dc.w    S3TailsNormalTail_DplcFrame2C-PLC_Tails_Tail_
+S3TailsNormalTail_DplcFrame00:  dc.w    0
+S3TailsNormalTail_DplcFrame01:  dc.w    1
                 dc.w    $5000
-Frame_344DD4:   dc.w    1
+S3TailsNormalTail_DplcFrame02:  dc.w    1
                 dc.w    $5006
-Frame_344DD8:   dc.w    1
+S3TailsNormalTail_DplcFrame03:  dc.w    1
                 dc.w    $500C
-Frame_344DDC:   dc.w    1
+S3TailsNormalTail_DplcFrame04:  dc.w    1
                 dc.w    $5012
-Frame_344DE0:   dc.w    1
+S3TailsNormalTail_DplcFrame05:  dc.w    1
                 dc.w    $5000
-Frame_344DE4:   dc.w    1
+S3TailsNormalTail_DplcFrame06:  dc.w    1
                 dc.w    $5006
-Frame_344DE8:   dc.w    1
+S3TailsNormalTail_DplcFrame07:  dc.w    1
                 dc.w    $500C
-Frame_344DEC:   dc.w    1
+S3TailsNormalTail_DplcFrame08:  dc.w    1
                 dc.w    $5012
-Frame_344DF0:   dc.w    1
+S3TailsNormalTail_DplcFrame09:  dc.w    1
                 dc.w    $5030
-Frame_344DF4:   dc.w    1
+S3TailsNormalTail_DplcFrame0A:  dc.w    1
                 dc.w    $5036
-Frame_344DF8:   dc.w    1
+S3TailsNormalTail_DplcFrame0B:  dc.w    1
                 dc.w    $503C
-Frame_344DFC:   dc.w    1
+S3TailsNormalTail_DplcFrame0C:  dc.w    1
                 dc.w    $5042
-Frame_344E00:   dc.w    1
+S3TailsNormalTail_DplcFrame0D:  dc.w    1
                 dc.w    $5018
-Frame_344E04:   dc.w    1
+S3TailsNormalTail_DplcFrame0E:  dc.w    1
                 dc.w    $501E
-Frame_344E08:   dc.w    1
+S3TailsNormalTail_DplcFrame0F:  dc.w    1
                 dc.w    $5024
-Frame_344E0C:   dc.w    1
+S3TailsNormalTail_DplcFrame10:  dc.w    1
                 dc.w    $502A
-Frame_344E10:   dc.w    1
+S3TailsNormalTail_DplcFrame11:  dc.w    1
                 dc.w    $5048
-Frame_344E14:   dc.w    1
+S3TailsNormalTail_DplcFrame12:  dc.w    1
                 dc.w    $504E
-Frame_344E18:   dc.w    1
+S3TailsNormalTail_DplcFrame13:  dc.w    1
                 dc.w    $5054
-Frame_344E1C:   dc.w    1
+S3TailsNormalTail_DplcFrame14:  dc.w    1
                 dc.w    $505A
-Frame_344E20:   dc.w    1
+S3TailsNormalTail_DplcFrame15:  dc.w    1
                 dc.w    $5060
-Frame_344E24:   dc.w    1
+S3TailsNormalTail_DplcFrame16:  dc.w    1
                 dc.w    $8066
-Frame_344E28:   dc.w    1
+S3TailsNormalTail_DplcFrame17:  dc.w    1
                 dc.w    $806F
-Frame_344E2C:   dc.w    1
+S3TailsNormalTail_DplcFrame18:  dc.w    1
                 dc.w    $5078
-Frame_344E30:   dc.w    1
+S3TailsNormalTail_DplcFrame19:  dc.w    1
                 dc.w    $807E
-Frame_344E34:   dc.w    1
+S3TailsNormalTail_DplcFrame1A:  dc.w    1
                 dc.w    $5000
-Frame_344E38:   dc.w    1
+S3TailsNormalTail_DplcFrame1B:  dc.w    1
                 dc.w    $5006
-Frame_344E3C:   dc.w    1
+S3TailsNormalTail_DplcFrame1C:  dc.w    1
                 dc.w    $500C
-Frame_344E40:   dc.w    1
+S3TailsNormalTail_DplcFrame1D:  dc.w    1
                 dc.w    $5012
-Frame_344E44:   dc.w    1
+S3TailsNormalTail_DplcFrame1E:  dc.w    1
                 dc.w    $5000
-Frame_344E48:   dc.w    1
+S3TailsNormalTail_DplcFrame1F:  dc.w    1
                 dc.w    $5006
-Frame_344E4C:   dc.w    1
+S3TailsNormalTail_DplcFrame20:  dc.w    1
                 dc.w    $500C
-Frame_344E50:   dc.w    1
+S3TailsNormalTail_DplcFrame21:  dc.w    1
                 dc.w    $5012
-Frame_344E54:   dc.w    1
+S3TailsNormalTail_DplcFrame22:  dc.w    1
                 dc.w    $5060
-Frame_344E58:   dc.w    1
+S3TailsNormalTail_DplcFrame23:  dc.w    1
                 dc.w    $8066
-Frame_344E5C:   dc.w    1
+S3TailsNormalTail_DplcFrame24:  dc.w    1
                 dc.w    $806F
-Frame_344E60:   dc.w    1
+S3TailsNormalTail_DplcFrame25:  dc.w    1
                 dc.w    $5078
-Frame_344E64:   dc.w    1
+S3TailsNormalTail_DplcFrame26:  dc.w    1
                 dc.w    $807E
-Frame_344E68:   dc.w    1
+S3TailsNormalTail_DplcFrame27:  dc.w    1
                 dc.w    $3087
-Frame_344E6C:   dc.w    1
+S3TailsNormalTail_DplcFrame28:  dc.w    1
                 dc.w    $3087
-Frame_344E70:   dc.w    1
+S3TailsNormalTail_DplcFrame29:  dc.w    1
                 dc.w    $5000
-Frame_344E74:   dc.w    1
+S3TailsNormalTail_DplcFrame2A:  dc.w    1
                 dc.w    $5006
-Frame_344E78:   dc.w    1
+S3TailsNormalTail_DplcFrame2B:  dc.w    1
                 dc.w    $500C
-Frame_344E7C:   dc.w    1
+S3TailsNormalTail_DplcFrame2C:  dc.w    1
                 dc.w    $5012

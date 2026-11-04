@@ -10,23 +10,23 @@ Obj_Tails:
                 tst.w   (Debug_placement_mode).w
                 beq.s   Tails_Normal
                 cmpi.b  #1,(Debug_placement_type).w
-                beq.s   loc_143FE
+                beq.s   S3TailsLifecycle_TailEnterDebugPlacementForSoloTails
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_143E2
+                beq.s   S3TailsLifecycle_AdvanceDebugFrameAfterOptionalBExit
                 move.w  #0,(Debug_placement_mode).w
 
-loc_143E2:
+S3TailsLifecycle_AdvanceDebugFrameAfterOptionalBExit:
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #$D1,mapping_frame(a0)
-                blo.s   loc_143F4
+                blo.s   S3TailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay
                 move.b  #0,mapping_frame(a0)
 
-loc_143F4:
+S3TailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay:
                 bsr.w   Tails_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_143FE:
+S3TailsLifecycle_TailEnterDebugPlacementForSoloTails:
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
@@ -39,11 +39,11 @@ Tails_Normal:
 Tails_Index:
                 dc.w    Tails_Init-Tails_Index
                 dc.w    Tails_Control-Tails_Index
-                dc.w    loc_1620A-Tails_Index
-                dc.w    loc_162C4-Tails_Index
-                dc.w    loc_162F4-Tails_Index
-                dc.w    loc_16308-Tails_Index
-                dc.w    loc_16324-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement-Tails_Index
+                dc.w    S3TailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails_Index
+                dc.w    S3TailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement-Tails_Index
 ; ---------------------------------------------------------------------------
 
 Tails_Init:
@@ -62,7 +62,7 @@ Tails_Init:
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_144B4
+                bne.s   S3TailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority
                 tst.b   (Last_star_post_hit).w
                 bne.s   Tails_Init_Continued
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
@@ -77,7 +77,7 @@ Tails_Init:
                 bra.s   Tails_Init_Continued
 ; ---------------------------------------------------------------------------
 
-loc_144B4:
+S3TailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority:
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 move.w  (Player_1+top_solid_bit).w,top_solid_bit(a0)
                 tst.w   (Player_1+art_tile).w
@@ -89,12 +89,12 @@ Tails_Init_Continued:
                 move.b  #4,flip_speed(a0)
                 move.b  #30,air_left(a0)
                 cmpi.w  #$20,(Tails_CPU_routine).w
-                beq.s   loc_144F4
+                beq.s   S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
                 cmpi.w  #$12,(Tails_CPU_routine).w
-                beq.s   loc_144F4
+                beq.s   S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
                 move.w  #0,(Tails_CPU_routine).w
 
-loc_144F4:
+S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.l  #Obj_Tails_Tail,(Tails_tails).w
@@ -105,58 +105,58 @@ loc_144F4:
 
 Tails_Control:
                 cmpi.w  #2,(Player_mode).w
-                bne.s   loc_14544
+                bne.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_14544
+                beq.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_14544
+                beq.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 btst    #button_C,(Ctrl_1_held).w
-                beq.s   locret_14542
+                beq.s   S3TailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode
                 move.w  #2,(Debug_placement_mode).w
 
-locret_14542:
+S3TailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14544:
+S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility:
                 cmpa.w  #Player_1,a0
-                bne.s   loc_1456C
+                bne.s   S3TailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy
                 move.w  (Ctrl_1_logical).w,(Ctrl_2_logical).w
                 tst.b   (Ctrl_1_locked).w
-                bne.s   loc_14582
+                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
                 move.w  (Ctrl_1).w,(Ctrl_2_logical).w
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
                 cmpi.w  #$1A,(Tails_CPU_routine).w
-                bhs.s   loc_14578
-                bra.s   loc_14582
+                bhs.s   S3TailsLifecycle_RunFollowerCpuOnlyOutsideCompetition
+                bra.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
 ; ---------------------------------------------------------------------------
 
-loc_1456C:
+S3TailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy:
                 tst.b   (Ctrl_2_locked).w
-                bne.s   loc_14582
+                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
                 move.w  (Ctrl_2).w,(Ctrl_2_logical).w
 
-loc_14578:
+S3TailsLifecycle_RunFollowerCpuOnlyOutsideCompetition:
                 tst.w   (Competition_mode).w
-                bne.s   loc_14582
+                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
                 bsr.w   Tails_CPU_Control
 
-loc_14582:
+S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl:
                 btst    #0,object_control(a0)
-                beq.s   loc_145AA
+                beq.s   S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases
                 move.b  #0,double_jump_flag(a0)
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   loc_145C4
+                beq.s   S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
-                bra.s   loc_145C4
+                bra.s   S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
 ; ---------------------------------------------------------------------------
 
-loc_145AA:
+S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -165,37 +165,37 @@ loc_145AA:
                 jsr     Tails_Modes(pc,d1.w)
                 movem.l (sp)+,a4-a6
 
-loc_145C4:
+S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_145D4
+                bne.s   S3TailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_145D4:
+S3TailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices:
                 bsr.s   Tails_Display
                 bsr.w   Sonic_RecordPos
                 bsr.w   Tails_Water
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag_P2).w
-                beq.s   loc_145FC
+                beq.s   S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
                 tst.b   anim(a0)
-                bne.s   loc_145FC
+                bne.s   S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
                 move.b  prev_anim(a0),anim(a0)
 
-loc_145FC:
+S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne:
                 btst    #1,object_control(a0)
-                bne.s   loc_1460C
+                bne.s   S3TailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet
                 bsr.w   Animate_Tails
                 bsr.w   Tails_Load_PLC
 
-loc_1460C:
+S3TailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   locret_1461C
+                bne.s   S3TailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch
                 jsr     (TouchResponse).l
 
-locret_1461C:
+S3TailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch:
                 rts
 ; ---------------------------------------------------------------------------
 Tails_Modes:
@@ -207,46 +207,46 @@ Tails_Modes:
 
 Tails_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   loc_14634
+                beq.s   S3TailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
-                bcc.s   loc_1463A
+                bcc.s   S3TailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase
 
-loc_14634:
+S3TailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks:
                 jsr     (Draw_Sprite).l
 
-loc_1463A:
+S3TailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase:
                 btst    #Status_Invincible,status_secondary(a0)
-                beq.s   loc_14676
+                beq.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
                 tst.b   invincibility_timer(a0)
-                beq.s   loc_14676
+                beq.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   loc_14676
+                bne.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
                 subq.b  #1,invincibility_timer(a0)
-                bne.s   loc_14676
+                bne.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
                 tst.b   (Boss_flag).w
-                bne.s   loc_14670
+                bne.s   S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
                 cmpi.b  #12,air_left(a0)
-                blo.s   loc_14670
+                blo.s   S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
                 move.w  (Current_music).w,d0
                 jsr     (Play_Music).l
 
-loc_14670:
+S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck:
                 bclr    #Status_Invincible,status_secondary(a0)
 
-loc_14676:
+S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds:
                 btst    #Status_SpeedShoes,status_secondary(a0)
-                beq.s   locret_146B8
+                beq.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
                 tst.b   speed_shoes_timer(a0)
-                beq.s   locret_146B8
+                beq.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   locret_146B8
+                bne.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
                 subq.b  #1,speed_shoes_timer(a0)
-                bne.s   locret_146B8
+                bne.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
                 tst.w   (Competition_mode).w
-                bne.s   loc_146BA
+                bne.s   S3TailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry
                 move.w  #$600,Max_speed_P2-Max_speed_P2(a4)
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
@@ -255,11 +255,11 @@ loc_14676:
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
 
-locret_146B8:
+S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_146BA:
+S3TailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry:
                 lea     (Character_Speeds).l,a1
                 moveq   #0,d0
                 move.b  character_id(a0),d0

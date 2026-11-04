@@ -937,11 +937,11 @@
     },
     {
       "path": "src/objects/players/tails/s3/carrying.s",
-      "sha256": "4324e072f9077e25daacf2a96e1c5f6486cc56b5d78b3b4a823793064500439d"
+      "sha256": "c2350507dbf161ea376b56e60e6ec0d76d6eef10ec6075415cd21366284c5ef6"
     },
     {
       "path": "src/objects/players/tails/sk/carrying.s",
-      "sha256": "b5ef44a944094092a9daaadc926fe51391fd5daf77247b3550fe70852947f121"
+      "sha256": "59610061b86610c1836ca9b0368df9c30cae2e163a3bf80c0d3becc71e986bb2"
     },
     {
       "path": "src/objects/runtime/s3/attributes_and_children.s",

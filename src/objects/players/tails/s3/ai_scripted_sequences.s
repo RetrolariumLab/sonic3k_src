@@ -20,28 +20,28 @@ TailsS3ResetCPUFollowerToOffscreenCatchUp:
 
 TailsS3WatchCPUOffscreenTimeoutAndInteractionCode:
                 tst.b   render_flags(a0)
-                bmi.s   loc_14BB6
+                bmi.s   S3TailsCpuScript_ClearOffscreenTimerWhenRenderSignMarksVisible
                 btst    #Status_OnObj,status(a0)
-                beq.s   loc_14BA6
+                beq.s   S3TailsCpuScript_AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged
                 moveq   #0,d0
                 movea.w interact(a0),a3
                 move.w  (Tails_CPU_interact).w,d0
                 cmp.w   (a3),d0
-                bne.s   loc_14BB2
+                bne.s   S3TailsCpuScript_ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord
 
-loc_14BA6:
+S3TailsCpuScript_AdvanceOffscreenFollowerTimeoutUnlessInteractionChanged:
                 addq.w  #1,(Tails_CPU_flight_timer).w
                 cmpi.w  #5*60,(Tails_CPU_flight_timer).w
-                blo.s   loc_14BBC
+                blo.s   S3TailsCpuScript_SampleInteractingObjectCodeWordForProfile
 
-loc_14BB2:
+S3TailsCpuScript_ResetFollowerAfterOffscreenTimeoutOrChangedCodeWord:
                 bra.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
-loc_14BB6:
+S3TailsCpuScript_ClearOffscreenTimerWhenRenderSignMarksVisible:
                 move.w  #0,(Tails_CPU_flight_timer).w
 
-loc_14BBC:
+S3TailsCpuScript_SampleInteractingObjectCodeWordForProfile:
                 movea.w interact(a0),a3
                 move.w  (a3),(Tails_CPU_interact).w
                 rts
@@ -49,59 +49,59 @@ loc_14BBC:
 
 ; ---------------------------------------------------------------------------
 
-loc_14BC6:
+S3TailsCpuScript_GateIdleCpuSpindashAfterOffscreenWatch:
                 bsr.w   TailsS3WatchCPUOffscreenTimeoutAndInteractionCode
                 tst.w   (Tails_CPU_idle_timer).w
-                bne.w   locret_14C44
+                bne.w   S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis
                 tst.w   move_lock(a0)
-                bne.s   locret_14C44
+                bne.s   S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_14C1A
+                bne.s   S3TailsCpuScript_MaintainCpuSpindashDownUntilGlobalReleasePhase
                 tst.w   ground_vel(a0)
-                bne.s   locret_14C44
+                bne.s   S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis
                 bclr    #Status_Facing,status(a0)
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_14BFA
+                bcs.s   S3TailsCpuScript_SynthesizeDownAndInitialSpindashButtonsByGlobalPhase
                 bset    #Status_Facing,status(a0)
 
-loc_14BFA:
+S3TailsCpuScript_SynthesizeDownAndInitialSpindashButtonsByGlobalPhase:
                 move.w  #(button_down_mask<<8)|button_down_mask,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$7F,d0
-                beq.s   loc_14C2A
+                beq.s   S3TailsCpuScript_ReleaseCpuSpindashInputAndResumeTracking
                 cmpi.b  #8,anim(a0)
-                bne.s   locret_14C44
+                bne.s   S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis
                 move.w  #((button_A_mask|button_B_mask|button_C_mask|button_down_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask|button_down_mask),(Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C1A:
+S3TailsCpuScript_MaintainCpuSpindashDownUntilGlobalReleasePhase:
                 move.w  #(button_down_mask<<8)|button_down_mask,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$7F,d0
-                bne.s   loc_14C38
+                bne.s   S3TailsCpuScript_PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames
 
-loc_14C2A:
+S3TailsCpuScript_ReleaseCpuSpindashInputAndResumeTracking:
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 move.w  #6,(Tails_CPU_routine).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C38:
+S3TailsCpuScript_PulseCpuSpindashChargeEveryThirtyTwoGlobalFrames:
                 andi.b  #$1F,d0
-                bne.s   locret_14C44
+                bne.s   S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
 
-locret_14C44:
+S3TailsCpuScript_ReturnAfterIdleSpindashGateOrButtonSynthesis:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_14C46:
+S3TailsCpuScript_ReturnWithoutInputChangesInInactiveCpuState:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14C48:
+S3TailsCpuScript_InitializeIntroCarryFlightWithRightwardVelocity:
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.b  #1<<Status_InAir,status(a0)
@@ -113,19 +113,19 @@ loc_14C48:
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$E,(Tails_CPU_routine).w
 
-loc_14C80:
+S3TailsCpuScript_ClearIdleAndPulseRightDuringIntroCarry:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_14C9C
+                bne.s   S3TailsCpuScript_FinishIntroCarryWhenPrimaryPlayerGrounded
                 ori.w   #(button_right_mask<<8)|button_right_mask,(Ctrl_2_logical).w
 
-loc_14C9C:
+S3TailsCpuScript_FinishIntroCarryWhenPrimaryPlayerGrounded:
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_14D08
+                bne.s   S3TailsCpuScript_RunPrimaryCarryLogicAfterIntroPhase
                 move.w  #6,(Tails_CPU_routine).w
                 move.b  #0,object_control(a0)
                 move.b  #0,anim(a0)
@@ -136,47 +136,47 @@ loc_14C9C:
                 move.w  #0,move_lock(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.b   art_tile(a1)
-                bpl.s   loc_14CEE
+                bpl.s   S3TailsCpuScript_CopyPrimarySolidityAndSelectPartnerExitFlight
                 ori.w   #high_priority,art_tile(a0)
 
-loc_14CEE:
+S3TailsCpuScript_CopyPrimarySolidityAndSelectPartnerExitFlight:
                 move.b  top_solid_bit(a1),top_solid_bit(a0)
                 move.b  lrb_solid_bit(a1),lrb_solid_bit(a0)
                 cmpi.w  #1,(Player_mode).w
-                bne.s   loc_14D08
+                bne.s   S3TailsCpuScript_RunPrimaryCarryLogicAfterIntroPhase
                 move.w  #$10,(Tails_CPU_routine).w
 
-loc_14D08:
+S3TailsCpuScript_RunPrimaryCarryLogicAfterIntroPhase:
                 move.w  (Ctrl_1).w,d0
                 bra.w   Tails_Carry_Sonic
 ; ---------------------------------------------------------------------------
 
-loc_14D10:
+S3TailsCpuScript_PulseRightAndFlapWhilePartnerLeavesIntro:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_14D32
+                bne.s   S3TailsCpuScript_HandleOffscreenPartnerExitByProfile
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask|button_right_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask|button_right_mask),(Ctrl_2_logical).w
 
-loc_14D32:
+S3TailsCpuScript_HandleOffscreenPartnerExitByProfile:
                 tst.b   render_flags(a0)
-                bmi.s   locret_14D4A
+                bmi.s   S3TailsCpuScript_ReturnAfterPartnerExitVisibilityDecision
                 move.w  #$7F00,x_pos(a0)
                 move.w  #0,y_pos(a0)
                 move.w  #$A,(Tails_CPU_routine).w
 
-locret_14D4A:
+S3TailsCpuScript_ReturnAfterPartnerExitVisibilityDecision:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14D4C:
+S3TailsCpuScript_ClearCpuInputWhileWaitingForBossCarrySetup:
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14D54:
+S3TailsCpuScript_InitializeBossCarryFlightAndAttachPrimary:
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.b  #1<<Status_InAir,status(a0)
@@ -188,85 +188,85 @@ loc_14D54:
                 move.b  #1,(Flying_carrying_Sonic_flag).w
                 move.w  #$16,(Tails_CPU_routine).w
 
-loc_14D8C:
+S3TailsCpuScript_PulseFlapDuringBossCarryClimb:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.w  #0,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   loc_14DAE
+                bne.s   S3TailsCpuScript_SwitchBossCarryToAltitudeControlAtCameraThreshold
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
 
-loc_14DAE:
+S3TailsCpuScript_SwitchBossCarryToAltitudeControlAtCameraThreshold:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$90,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_14DC2
+                blo.s   S3TailsCpuScript_InvokeCarryAfterBossClimbThreshold
                 move.w  #$18,(Tails_CPU_routine).w
 
-loc_14DC2:
+S3TailsCpuScript_InvokeCarryAfterBossClimbThreshold:
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
                 bra.w   Tails_Carry_Sonic
 ; ---------------------------------------------------------------------------
 
-loc_14DD2:
+S3TailsCpuScript_ChooseAutomaticAltitudeOrReacquisitionByIdleAndCarry:
                 move.b  #(8*60)/2,double_jump_property(a0)
                 tst.w   (Tails_CPU_idle_timer).w
-                beq.s   loc_14DEA
+                beq.s   S3TailsCpuScript_SynthesizeAutomaticCarryFlapsWithDownPriority
                 tst.b   (Flying_carrying_Sonic_flag).w
-                bne.w   loc_14E68
-                bra.w   loc_14F68
+                bne.w   S3TailsCpuScript_TailCarryWithPhysicalPrimaryControllerWord
+                bra.w   S3TailsCpuScript_ChooseHoverOrLatchedPrimaryReacquisition
 ; ---------------------------------------------------------------------------
 
-loc_14DEA:
+S3TailsCpuScript_SynthesizeAutomaticCarryFlapsWithDownPriority:
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.w   loc_14F68
+                beq.w   S3TailsCpuScript_ChooseHoverOrLatchedPrimaryReacquisition
                 clr.b   (_unkFAAC).w
                 btst    #button_down,(Ctrl_1_held).w
-                beq.s   loc_14E1E
+                beq.s   S3TailsCpuScript_UseFasterFlapCadenceWhenPhysicalUpHeld
                 addq.b  #1,(Tails_CPU_auto_fly_timer).w
                 cmpi.b  #$C0,(Tails_CPU_auto_fly_timer).w
-                blo.s   loc_14E58
+                blo.s   S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte
                 move.b  #0,(Tails_CPU_auto_fly_timer).w
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
-                bra.s   loc_14E58
+                bra.s   S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte
 ; ---------------------------------------------------------------------------
 
-loc_14E1E:
+S3TailsCpuScript_UseFasterFlapCadenceWhenPhysicalUpHeld:
                 btst    #button_up,(Ctrl_1_held).w
-                beq.s   loc_14E40
+                beq.s   S3TailsCpuScript_PulseNeutralAltitudeFlapAtTimerEightyEight
                 addq.b  #1,(Tails_CPU_auto_fly_timer).w
                 cmpi.b  #$20,(Tails_CPU_auto_fly_timer).w
-                blo.s   loc_14E58
+                blo.s   S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte
                 move.b  #0,(Tails_CPU_auto_fly_timer).w
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
-                bra.s   loc_14E58
+                bra.s   S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte
 ; ---------------------------------------------------------------------------
 
-loc_14E40:
+S3TailsCpuScript_PulseNeutralAltitudeFlapAtTimerEightyEight:
                 addq.b  #1,(Tails_CPU_auto_fly_timer).w
                 cmpi.b  #$58,(Tails_CPU_auto_fly_timer).w
-                bcs.s   loc_14E58
+                bcs.s   S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte
                 move.b  #0,(Tails_CPU_auto_fly_timer).w
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
 
-loc_14E58:
+S3TailsCpuScript_MergePrimaryHorizontalHeldInputIntoFollowerHeldByte:
                 move.b  (Ctrl_1_held).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
                 or.b    (Ctrl_2_held_logical).w,d0
                 move.b  d0,(Ctrl_2_logical).w
 
-loc_14E68:
+S3TailsCpuScript_TailCarryWithPhysicalPrimaryControllerWord:
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
                 bra.w   Tails_Carry_Sonic
 ; ---------------------------------------------------------------------------
 
-loc_14E78:
+S3TailsCpuScript_InitializeSoloBossFlightWithoutPrimaryAttachment:
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.b  #1<<Status_InAir,status(a0)
@@ -275,32 +275,32 @@ loc_14E78:
                 move.w  #0,ground_vel(a0)
                 move.w  #$1C,(Tails_CPU_routine).w
 
-loc_14EA2:
+S3TailsCpuScript_PulseSoloBossClimbAndRefreshFlightBudget:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.w  #0,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   loc_14EC4
+                bne.s   S3TailsCpuScript_ReleaseSoloScriptClimbAtCameraAltitude
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
 
-loc_14EC4:
+S3TailsCpuScript_ReleaseSoloScriptClimbAtCameraAltitude:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$90,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   locret_14ED8
+                blo.s   S3TailsCpuScript_ReturnAfterSoloClimbAltitudeDecision
                 move.w  #$1E,(Tails_CPU_routine).w
 
-locret_14ED8:
+S3TailsCpuScript_ReturnAfterSoloClimbAltitudeDecision:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14EDA:
+S3TailsCpuScript_RefreshSoloFlightBudgetWithoutChangingInput:
                 move.b  #(8*60)/2,double_jump_property(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14EE2:
+S3TailsCpuScript_InitializeScriptedPrimaryFlyInWithRightwardVelocity:
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 move.b  #2,status(a0)
@@ -309,17 +309,17 @@ loc_14EE2:
                 move.w  #0,ground_vel(a0)
                 move.w  #$22,(Tails_CPU_routine).w
 
-loc_14F0C:
+S3TailsCpuScript_PulseRightDuringScriptedPrimaryFlyIn:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_14F28
+                bne.s   S3TailsCpuScript_FinishPrimaryFlyInOnGroundContact
                 ori.w   #(button_right_mask<<8)|button_right_mask,(Ctrl_2_logical).w
 
-loc_14F28:
+S3TailsCpuScript_FinishPrimaryFlyInOnGroundContact:
                 btst    #Status_InAir,status(a0)
-                bne.s   locret_14F66
+                bne.s   S3TailsCpuScript_ReturnAfterPrimaryFlyInAirOrCompletionGate
                 move.w  #6,(Tails_CPU_routine).w
                 move.b  #0,object_control(a0)
                 move.b  #0,anim(a0)
@@ -330,44 +330,44 @@ loc_14F28:
                 move.w  #0,move_lock(a0)
                 andi.w  #drawing_mask,art_tile(a0)
 
-locret_14F66:
+S3TailsCpuScript_ReturnAfterPrimaryFlyInAirOrCompletionGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_14F68:
+S3TailsCpuScript_ChooseHoverOrLatchedPrimaryReacquisition:
                 tst.b   (_unkFAAC).w
-                bne.s   loc_14FE8
+                bne.s   S3TailsCpuScript_ChasePrimaryUsingLatchedAccelerationAndFacing
                 lea     (Player_1).w,a1
                 tst.b   render_flags(a1)
-                bpl.s   loc_14FB6
+                bpl.s   S3TailsCpuScript_LatchReacquisitionAndTakePrimaryVerticalDistance
                 tst.w   (Tails_CPU_idle_timer).w
-                bne.w   loc_15030
+                bne.w   S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition
                 cmpi.w  #$300,y_vel(a1)
-                bge.s   loc_14FB6
+                bge.s   S3TailsCpuScript_LatchReacquisitionAndTakePrimaryVerticalDistance
                 move.w  #0,x_vel(a0)
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 cmpi.w  #$200,y_vel(a0)
-                bge.s   loc_14FAE
+                bge.s   S3TailsCpuScript_EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate
                 addq.b  #1,(Tails_CPU_auto_fly_timer).w
                 cmpi.b  #$58,(Tails_CPU_auto_fly_timer).w
-                blo.s   loc_14FB4
+                blo.s   S3TailsCpuScript_JoinCarryAfterHoverPulseOrTimerHold
                 move.b  #0,(Tails_CPU_auto_fly_timer).w
 
-loc_14FAE:
+S3TailsCpuScript_EmitFallbackHoverFlapWithoutResettingTimerOnSpeedGate:
                 ori.w   #((button_A_mask|button_B_mask|button_C_mask)<<8)|(button_A_mask|button_B_mask|button_C_mask),(Ctrl_2_logical).w
 
-loc_14FB4:
-                bra.s   loc_15030
+S3TailsCpuScript_JoinCarryAfterHoverPulseOrTimerHold:
+                bra.s   S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition
 ; ---------------------------------------------------------------------------
 
-loc_14FB6:
+S3TailsCpuScript_LatchReacquisitionAndTakePrimaryVerticalDistance:
                 st      (_unkFAAC).w
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
-                bpl.s   loc_14FC6
+                bpl.s   S3TailsCpuScript_StoreVerticalCatchUpAccelerationInSharedCameraWord
                 neg.w   d1
 
-loc_14FC6:
+S3TailsCpuScript_StoreVerticalCatchUpAccelerationInSharedCameraWord:
                 lsr.w   #2,d1
                 move.w  d1,d2
                 lsr.w   #1,d2
@@ -375,16 +375,16 @@ loc_14FC6:
                 move.w  d1,(Camera_stored_min_X_pos).w
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
-                bpl.s   loc_14FDE
+                bpl.s   S3TailsCpuScript_StoreHorizontalCatchUpAccelerationAndDeferChase
                 neg.w   d1
 
-loc_14FDE:
+S3TailsCpuScript_StoreHorizontalCatchUpAccelerationAndDeferChase:
                 lsr.w   #2,d1
                 move.w  d1,(Camera_stored_max_X_pos).w
-                bra.w   loc_15030
+                bra.w   S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition
 ; ---------------------------------------------------------------------------
 
-loc_14FE8:
+S3TailsCpuScript_ChasePrimaryUsingLatchedAccelerationAndFacing:
                 move.w  #(0<<8)|0,(Ctrl_2_logical).w
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
@@ -393,23 +393,23 @@ loc_14FE8:
                 move.w  (Camera_stored_max_X_pos).w,d2
                 bclr    #Status_Facing,status(a0)
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_15016
+                blo.s   S3TailsCpuScript_ApplyHorizontalCatchUpAndGateVerticalAddition
                 bset    #Status_Facing,status(a0)
                 neg.w   d2
 
-loc_15016:
+S3TailsCpuScript_ApplyHorizontalCatchUpAndGateVerticalAddition:
                 add.w   d2,x_vel(a0)
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_15030
+                bhs.s   S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition
                 move.w  (Camera_stored_min_X_pos).w,d2
                 cmp.w   y_pos(a1),d1
-                blo.s   loc_1502C
+                blo.s   S3TailsCpuScript_AddGuardedVerticalCatchUpAcceleration
                 neg.w   d2
 
-loc_1502C:
+S3TailsCpuScript_AddGuardedVerticalCatchUpAcceleration:
                 add.w   d2,y_vel(a0)
 
-loc_15030:
+S3TailsCpuScript_TailPrimaryCarryAfterHoverOrReacquisition:
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
