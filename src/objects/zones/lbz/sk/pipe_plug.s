@@ -9,13 +9,13 @@ Obj_LBZPipePlug:
                 move.w  #make_art_tile(ArtTile_LBZ2Misc-$4,2,0),art_tile(a0)
                 move.b  #$10,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
-                move.l  #word_276D8,$3C(a0)
+                move.l  #SKLBZPipePlug_LeftDebrisSpeeds,$3C(a0)
                 move.b  #4,render_flags(a0)
                 move.w  #$200,priority(a0)              ; priority is used as a word at first but copied as a byte later which is a bug
                 move.b  #7,mapping_frame(a0)
-                move.l  #loc_27424,(a0)
+                move.l  #SKLBZPipePlug_SaveSpeedsAndResolveSolid,(a0)
 
-loc_27424:
+SKLBZPipePlug_SaveSpeedsAndResolveSolid:
                 move.w  (Player_1+x_vel).w,$30(a0)
                 move.w  (Player_2+x_vel).w,$32(a0)
                 move.w  #$1B,d1
@@ -25,87 +25,88 @@ loc_27424:
                 jsr     (SolidObjectFull).l
                 move.b  status(a0),d0
                 andi.b  #$60,d0
-                bne.s   loc_27456
+                bne.s   SKLBZPipePlug_TryRollingP1Smash
 
-loc_27450:
+SKLBZPipePlug_DrawIntactPlug:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_27456:
+SKLBZPipePlug_TryRollingP1Smash:
                 lea     (Player_1).w,a1
                 move.w  $30(a0),d1
                 btst    #p1_pushing_bit,status(a0)
-                beq.s   loc_274A2
+                beq.s   SKLBZPipePlug_TryRollingP2Smash
                 cmpi.b  #2,anim(a1)                     ; check animation 2
-                bne.s   loc_274A2                       ; if not go to loc_274A2
+                bne.s   SKLBZPipePlug_TryRollingP2Smash  ; if not go to loc_274A2
                 move.w  d1,d0
-                bpl.s   loc_27474
+                bpl.s   SKLBZPipePlug_CheckP1SmashSpeed
                 neg.w   d0
 
-loc_27474:
+SKLBZPipePlug_CheckP1SmashSpeed:
                 cmpi.w  #$480,d0
-                blo.s   loc_274A2
+                blo.s   SKLBZPipePlug_TryRollingP2Smash
                 bclr    #p2_pushing_bit,status(a0)
-                beq.s   loc_274D6
+                beq.s   SKLBZPipePlug_ClearP1Push
                 lea     (Player_2).w,a2
                 bclr    #Status_Push,status(a2)
                 cmpi.b  #2,anim(a2)
-                bne.s   loc_274D6
+                bne.s   SKLBZPipePlug_ClearP1Push
                 move.w  $32(a0),x_vel(a2)
                 move.w  x_vel(a2),ground_vel(a2)
-                bra.s   loc_274D6
+                bra.s   SKLBZPipePlug_ClearP1Push
 ; ---------------------------------------------------------------------------
 
-loc_274A2:
+SKLBZPipePlug_TryRollingP2Smash:
                 lea     (Player_2).w,a1
                 move.w  $32(a0),d1
                 btst    #p2_pushing_bit,status(a0)
-                beq.s   loc_27450
+                beq.s   SKLBZPipePlug_DrawIntactPlug
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_27450
+                bne.s   SKLBZPipePlug_DrawIntactPlug
                 move.w  d1,d0
-                bpl.s   loc_274C0
+                bpl.s   SKLBZPipePlug_CheckP2SmashSpeed
                 neg.w   d0
 
-loc_274C0:
+SKLBZPipePlug_CheckP2SmashSpeed:
                 cmpi.w  #$480,d0
-                blo.w   loc_27450
+                blo.w   SKLBZPipePlug_DrawIntactPlug
                 bclr    #p2_pushing_bit,status(a0)
-                beq.s   loc_274D6
+                beq.s   SKLBZPipePlug_ClearP1Push
                 bclr    #Status_Push,(Player_2+status).w  ; set Tails as not pushing against an object
 
-loc_274D6:
+SKLBZPipePlug_ClearP1Push:
                 bclr    #p1_pushing_bit,status(a0)
-                beq.s   loc_274E4
+                beq.s   SKLBZPipePlug_RestoreSpeedAndPickDebris
                 bclr    #Status_Push,(Player_1+status).w
 
-loc_274E4:
+SKLBZPipePlug_RestoreSpeedAndPickDebris:
                 move.w  d1,x_vel(a1)
                 addq.w  #4,x_pos(a1)
-                lea     (word_276D8).l,a4
+                lea     (SKLBZPipePlug_LeftDebrisSpeeds).l,a4
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_27508
+                blo.s   SKLBZPipePlug_SelectSmashEffect
                 subi.w  #2*4,x_pos(a1)
-                lea     (word_27718).l,a4
+                lea     (SKLBZPipePlug_RightDebrisSpeeds).l,a4
 
-loc_27508:
+; Subtype $1F raises the water and skips the tunnel and exhaust actors
+SKLBZPipePlug_SelectSmashEffect:
                 move.w  x_vel(a1),ground_vel(a1)
                 move.b  subtype(a0),d1
-                beq.s   loc_2758A
+                beq.s   SKLBZPipePlug_BeginPlugFracture
                 cmpi.b  #$1F,d1
-                bne.s   loc_27534
+                bne.s   SKLBZPipePlug_TrySpawnTunnel
                 move.b  #1,(_unkF7C2).w
                 move.w  #$660,(Target_water_level).w
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_2755E
+                beq.s   SKLBZPipePlug_TrySpawnExhaust
                 move.b  #2,(Water_speed).w
-                bra.s   loc_2755E
+                bra.s   SKLBZPipePlug_TrySpawnExhaust
 ; ---------------------------------------------------------------------------
 
-loc_27534:
+SKLBZPipePlug_TrySpawnTunnel:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2758A
+                bne.w   SKLBZPipePlug_BeginPlugFracture
                 move.l  #Obj_AutomaticTunnelDelayed,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -113,9 +114,9 @@ loc_27534:
                 move.b  #7,anim_frame_timer(a1)         ; set delay timer
                 move.b  d1,subtype(a1)
 
-loc_2755E:
+SKLBZPipePlug_TrySpawnExhaust:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2758A
+                bne.w   SKLBZPipePlug_BeginPlugFracture
                 move.l  #Obj_TunnelExhaustControl,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
@@ -123,38 +124,38 @@ loc_2755E:
                 move.w  #1,y_vel(a1)                    ; set vertical speed to 1
                 move.b  d1,subtype(a1)                  ; copy subtype from d1
 
-loc_2758A:
-                move.l  #loc_27592,(a0)
+SKLBZPipePlug_BeginPlugFracture:
+                move.l  #SKLBZPipePlug_MoveCornerDebris,(a0)
                 bsr.s   PipePlugSmashObject
 
-loc_27592:
+SKLBZPipePlug_MoveCornerDebris:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)                  ; make object fall
                 tst.b   render_flags(a0)
-                bpl.w   loc_275AC
+                bpl.w   SKLBZPipePlug_DeleteHiddenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_275AC:
+SKLBZPipePlug_DeleteHiddenDebris:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_275B2:
+SKLBZPipePlug_AnimatePlugChip:
                 moveq   #0,d0                           ; pretty useless in here
                 move.b  anim_frame(a0),mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
                 cmpi.b  #6,anim_frame(a0)
-                blo.s   loc_275CC
+                blo.s   SKLBZPipePlug_MovePlugChip
                 move.b  #0,anim_frame(a0)
 
-loc_275CC:
+SKLBZPipePlug_MovePlugChip:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)                  ; make object fall
                 tst.b   render_flags(a0)
-                bpl.w   loc_275AC
+                bpl.w   SKLBZPipePlug_DeleteHiddenDebris
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-byte_275E6:
+SKLBZPipePlug_ChipStartFrames:
                 dc.b    0
                 dc.b    1
                 dc.b    2
@@ -172,20 +173,20 @@ byte_275E6:
 ; =============== S U B R O U T I N E =======================================
 
 PipePlugSmashObject:
-                lea     (byte_275E6).l,a5
+                lea     (SKLBZPipePlug_ChipStartFrames).l,a5
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 add.w   d0,d0
                 movea.l mappings(a0),a3
                 lea     2*$D(a3),a2                     ; mappings +$1A bytes
                 adda.w  (a3,d0.w),a2
-                move.l  #loc_275B2,d4
+                move.l  #SKLBZPipePlug_AnimatePlugChip,d4
                 move.b  render_flags(a0),d5
                 moveq   #$C-1,d1                        ; set times to loop
 
-loc_27618:
+SKLBZPipePlug_TrySpawnAnimatedChips:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_276D0
+                bne.w   SKLBZPipePlug_PlayCollapseSound
                 move.l  d4,(a1)
                 move.l  a3,mappings(a1)
                 move.b  d5,render_flags(a1)
@@ -207,7 +208,7 @@ loc_27618:
                 move.w  (a2)+,d0                        ; get pixels dy
                 add.w   x_pos(a0),d0
                 move.w  d0,x_pos(a1)
-                dbf     d1,loc_27618
+                dbf     d1,SKLBZPipePlug_TrySpawnAnimatedChips
 ; don't know why they didn't use the subroutine instead of making a copy
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
@@ -221,15 +222,15 @@ loc_27618:
                 move.l  (a0),d4
                 move.b  render_flags(a0),d5
                 movea.l a0,a1
-                bra.s   loc_2769C
+                bra.s   SKLBZPipePlug_InitCornerDebris
 ; ---------------------------------------------------------------------------
 
-loc_27692:
+SKLBZPipePlug_TrySpawnNextCorner:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_276D0
+                bne.s   SKLBZPipePlug_PlayCollapseSound
                 addq.w  #6,a3
 
-loc_2769C:
+SKLBZPipePlug_InitCornerDebris:
                 move.l  d4,(a1)
                 move.l  a3,mappings(a1)
                 move.b  d5,render_flags(a1)
@@ -243,15 +244,15 @@ loc_2769C:
                 move.b  width_pixels(a0),width_pixels(a1)
                 move.w  (a4)+,x_vel(a1)
                 move.w  (a4)+,y_vel(a1)
-                dbf     d1,loc_27692
+                dbf     d1,SKLBZPipePlug_TrySpawnNextCorner
 
-loc_276D0:
+SKLBZPipePlug_PlayCollapseSound:
                 moveq   #signextendB(sfx_Collapse),d0
                 jmp     (Play_SFX).l
 ; End of function PipePlugSmashObject
 
 ; ---------------------------------------------------------------------------
-word_276D8:
+SKLBZPipePlug_LeftDebrisSpeeds:
                 dc.w    -$380, -$240
                 dc.w    -$300, -$250
                 dc.w    -$280, -$260
@@ -268,7 +269,7 @@ word_276D8:
                 dc.w    -$100, -$2C0
                 dc.w    -$400,  -$80
                 dc.w    -$100,  -$80
-word_27718:
+SKLBZPipePlug_RightDebrisSpeeds:
                 dc.w    $100, -$240
                 dc.w    $180, -$250
                 dc.w    $200, -$260

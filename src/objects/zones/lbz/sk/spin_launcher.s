@@ -11,81 +11,82 @@ Obj_LBZSpinLauncher:
                 move.b  #$20,height_pixels(a0)
                 ori.b   #4,render_flags(a0)
                 move.w  #$80,priority(a0)
-                move.l  #loc_28DE4,(a0)
+                move.l  #SKLBZSpinLaunch_InitSolidAndTickP1,(a0)
 
-loc_28DE4:
+SKLBZSpinLaunch_InitSolidAndTickP1:
                 move.w  #$2B,d1
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
-                lea     (byte_28FF4).l,a2
+                lea     (SKLBZSpinLaunch_SolidHeights).l,a2
                 lea     $2E(a0),a4
                 tst.b   (a4)
-                beq.s   loc_28E02
+                beq.s   SKLBZSpinLaunch_TryBounceUnderP1
                 subq.b  #1,(a4)
-                bra.s   loc_28E1E
+                bra.s   SKLBZSpinLaunch_TickP2Cooldown
 ; ---------------------------------------------------------------------------
 
-loc_28E02:
+SKLBZSpinLaunch_TryBounceUnderP1:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
                 jsr     (CollidePlayerWithHeightProfileSolid).l
                 cmpi.w  #-2,d4
-                bne.s   loc_28E1A
+                bne.s   SKLBZSpinLaunch_RestoreSolidBounds
                 bsr.s   BouncePlayerFromLbzSpinLauncherUnderside
 
-loc_28E1A:
+SKLBZSpinLaunch_RestoreSolidBounds:
                 movem.l (sp)+,d1-d4
 
-loc_28E1E:
+SKLBZSpinLaunch_TickP2Cooldown:
                 addq.w  #1,a4
                 tst.b   (a4)
-                beq.s   loc_28E28
+                beq.s   SKLBZSpinLaunch_TryBounceUnderP2
                 subq.b  #1,(a4)
-                bra.s   loc_28E3C
+                bra.s   SKLBZSpinLaunch_TryEjectStandingP1
 ; ---------------------------------------------------------------------------
 
-loc_28E28:
+SKLBZSpinLaunch_TryBounceUnderP2:
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 jsr     (CollidePlayerWithHeightProfileSolid).l
                 cmpi.w  #-2,d4
-                bne.s   loc_28E3C
+                bne.s   SKLBZSpinLaunch_TryEjectStandingP1
                 bsr.s   BouncePlayerFromLbzSpinLauncherUnderside
 
-loc_28E3C:
+SKLBZSpinLaunch_TryEjectStandingP1:
                 move.b  status(a0),d6
                 andi.b  #standing_mask,d6
-                beq.s   loc_28E70
+                beq.s   SKLBZSpinLaunch_DrawSpinLauncher
                 move.b  d6,d0
                 andi.b  #p1_standing,d0
-                beq.s   loc_28E5C
+                beq.s   SKLBZSpinLaunch_TryEjectStandingP2
                 lea     $2E(a0),a4
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.w   EjectStandingPlayerFromLbzSpinLauncher
 
-loc_28E5C:
+; The P2 standing test uses d6 after any P1 ejection call
+SKLBZSpinLaunch_TryEjectStandingP2:
                 andi.b  #p2_standing,d6
-                beq.s   loc_28E70
+                beq.s   SKLBZSpinLaunch_DrawSpinLauncher
                 lea     $2F(a0),a4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   EjectStandingPlayerFromLbzSpinLauncher
 
-loc_28E70:
+SKLBZSpinLaunch_DrawSpinLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 BouncePlayerFromLbzSpinLauncherUnderside:
                 btst    #0,status(a0)
-                bne.s   loc_28EDE
+                bne.s   SKLBZSpinLaunch_TryMirroredUnderBounce
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$18,d0
                 cmpi.w  #$30,d0
-                bhs.s   locret_28EDC
+                bhs.s   SKLBZSpinLaunch_BounceReturn
                 move.w  x_pos(a0),d0
                 addi.w  #$10,d0
                 move.w  d0,x_pos(a1)
@@ -101,17 +102,17 @@ BouncePlayerFromLbzSpinLauncherUnderside:
                 move.b  #2,anim(a1)
                 move.b  #$10,(a4)
 
-locret_28EDC:
+SKLBZSpinLaunch_BounceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_28EDE:
+SKLBZSpinLaunch_TryMirroredUnderBounce:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 neg.w   d0
                 addi.w  #$18,d0
                 cmpi.w  #$30,d0
-                bhs.s   locret_28EDC
+                bhs.s   SKLBZSpinLaunch_BounceReturn
                 move.w  x_pos(a0),d0
                 subi.w  #$10,d0
                 move.w  d0,x_pos(a1)
@@ -133,11 +134,11 @@ loc_28EDE:
 
 EjectStandingPlayerFromLbzSpinLauncher:
                 btst    #0,status(a0)
-                bne.s   loc_28F9C
+                bne.s   SKLBZSpinLaunch_TryMirroredTopEjection
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_28EDC
+                bhs.s   SKLBZSpinLaunch_BounceReturn
                 move.w  x_pos(a0),d0
                 addi.w  #$10,d0
                 move.w  d0,x_pos(a1)
@@ -154,12 +155,12 @@ EjectStandingPlayerFromLbzSpinLauncher:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_28F9C:
+SKLBZSpinLaunch_TryMirroredTopEjection:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 neg.w   d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_28EDC
+                bhs.w   SKLBZSpinLaunch_BounceReturn
                 move.w  x_pos(a0),d0
                 subi.w  #$10,d0
                 move.w  d0,x_pos(a1)
@@ -177,7 +178,7 @@ loc_28F9C:
 ; End of function EjectStandingPlayerFromLbzSpinLauncher
 
 ; ---------------------------------------------------------------------------
-byte_28FF4:
+SKLBZSpinLaunch_SolidHeights:
                 dc.b    $11
                 dc.b    $11
                 dc.b    $11

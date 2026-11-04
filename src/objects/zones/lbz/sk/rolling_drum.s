@@ -10,9 +10,9 @@ Obj_LBZRollingDrum:
                 neg.w   d0
                 move.w  d0,$30(a0)
                 move.b  #$80,width_pixels(a0)
-                move.l  #loc_2C3CA,(a0)
+                move.l  #SKLBZDrum_UpdateDrumRiders,(a0)
 
-loc_2C3CA:
+SKLBZDrum_UpdateDrumRiders:
                 lea     (Player_1).w,a1
                 lea     (_unkF7B0+0).w,a2
                 moveq   #p1_standing_bit,d6
@@ -27,66 +27,66 @@ loc_2C3CA:
 
 UpdatePlayerOnLbzRollingDrum:
                 btst    d6,status(a0)
-                bne.w   loc_2C46E
+                bne.w   SKLBZDrum_CheckRiderBounds
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmp.w   $30(a0),d0
-                blt.s   locret_2C46C
+                blt.s   SKLBZDrum_EntryReturn
                 cmp.w   $32(a0),d0
-                bge.s   locret_2C46C
+                bge.s   SKLBZDrum_EntryReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$53,d0
                 cmpi.w  #$A6,d0
-                bhs.s   locret_2C46C
+                bhs.s   SKLBZDrum_EntryReturn
                 cmpi.w  #$53,d0
-                bhs.s   loc_2C424
+                bhs.s   SKLBZDrum_CheckLowerEntrySpeed
                 tst.w   y_vel(a1)
-                bmi.s   locret_2C46C
-                bra.s   loc_2C42C
+                bmi.s   SKLBZDrum_EntryReturn
+                bra.s   SKLBZDrum_TrySeedTopEntryPhase
 ; ---------------------------------------------------------------------------
 
-loc_2C424:
+SKLBZDrum_CheckLowerEntrySpeed:
                 cmpi.w  #$38,y_vel(a1)
-                bgt.s   locret_2C46C
+                bgt.s   SKLBZDrum_EntryReturn
 
-loc_2C42C:
+SKLBZDrum_TrySeedTopEntryPhase:
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_2C46C
+                bhs.s   SKLBZDrum_EntryReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_2C46C
+                bne.s   SKLBZDrum_EntryReturn
                 cmpi.w  #8,d0
-                bhs.s   loc_2C444
+                bhs.s   SKLBZDrum_TrySeedBottomEntryPhase
                 move.b  #$81,(a2)
 
-loc_2C444:
+SKLBZDrum_TrySeedBottomEntryPhase:
                 cmpi.w  #$9E,d0
-                blo.s   loc_2C44E
+                blo.s   SKLBZDrum_AttachRiderAndSetPose
                 move.b  #1,(a2)
 
-loc_2C44E:
+SKLBZDrum_AttachRiderAndSetPose:
                 jsr     (RideObject_SetRide).l
                 move.b  #$80,flip_type(a1)
                 move.w  #1,anim(a1)                     ; and prev_anim
                 tst.w   ground_vel(a1)
-                bne.s   locret_2C46C
+                bne.s   SKLBZDrum_EntryReturn
                 move.w  #1,ground_vel(a1)
 
-locret_2C46C:
+SKLBZDrum_EntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2C46E:
+SKLBZDrum_CheckRiderBounds:
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_2C4A8
+                bne.s   SKLBZDrum_TryPushDownAirborneRider
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmp.w   $30(a0),d0
-                blt.s   loc_2C48A
+                blt.s   SKLBZDrum_ReleaseRider
                 cmp.w   $32(a0),d0
-                blt.s   loc_2C4BA
+                blt.s   SKLBZDrum_ProjectAndAdvanceRider
 
-loc_2C48A:
+SKLBZDrum_ReleaseRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,flips_remaining(a1)
@@ -95,17 +95,17 @@ loc_2C48A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2C4A8:
+SKLBZDrum_TryPushDownAirborneRider:
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
-                bmi.s   loc_2C48A
+                bmi.s   SKLBZDrum_ReleaseRider
                 move.w  #$400,y_vel(a1)
-                bra.s   loc_2C48A
+                bra.s   SKLBZDrum_ReleaseRider
 ; ---------------------------------------------------------------------------
 
-loc_2C4BA:
+SKLBZDrum_ProjectAndAdvanceRider:
                 btst    #Status_OnObj,status(a1)
-                beq.s   locret_2C46C
+                beq.s   SKLBZDrum_EntryReturn
                 move.b  (a2),d0
                 jsr     (GetSineCosine).l
                 moveq   #0,d2
@@ -122,16 +122,16 @@ loc_2C4BA:
                 addq.b  #2,(a2)
                 move.b  #$80,flip_type(a1)
                 tst.w   ground_vel(a1)
-                bne.s   loc_2C506
+                bne.s   SKLBZDrum_SetRiderDrawPriority
                 move.w  #1,ground_vel(a1)
                 move.b  #$81,flip_type(a1)
 
-loc_2C506:
+SKLBZDrum_SetRiderDrawPriority:
                 bset    #7,art_tile(a1)
                 tst.b   d0
-                bpl.s   locret_2C516
+                bpl.s   SKLBZDrum_RiderPoseReturn
                 bclr    #7,art_tile(a1)
 
-locret_2C516:
+SKLBZDrum_RiderPoseReturn:
                 rts
 ; End of function UpdatePlayerOnLbzRollingDrum

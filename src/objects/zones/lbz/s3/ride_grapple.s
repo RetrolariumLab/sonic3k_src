@@ -30,8 +30,8 @@ Obj_LBZRideGrapple:
                 move.l  #Map_LBZRideGrapple,mappings(a0)
                 move.w  #make_art_tile(ArtTile_LBZMisc+$70,1,0),art_tile(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_2562A
-                move.l  #loc_25752,(a1)
+                bne.s   S3LBZRideGrip_StartIdleGrapple
+                move.l  #S3LBZRideGrip_DrawChainVisual,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  mappings(a0),mappings(a1)
@@ -46,108 +46,109 @@ Obj_LBZRideGrapple:
                 subq.b  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_25610:
+S3LBZRideGrip_InitChainSprites:
                 move.w  x_pos(a1),(a2)+
                 move.w  y_pos(a1),(a2)+
                 move.w  #1,(a2)+
-                dbf     d1,loc_25610
+                dbf     d1,S3LBZRideGrip_InitChainSprites
                 move.b  #2,mapping_frame(a1)
                 move.w  a1,$3C(a0)
 
-loc_2562A:
-                move.l  #loc_25630,(a0)
+; Start the grapple even if the chain visual fails to allocate
+S3LBZRideGrip_StartIdleGrapple:
+                move.l  #S3LBZRideGrip_UpdateIdleAndTryTravel,(a0)
 
-loc_25630:
+S3LBZRideGrip_UpdateIdleAndTryTravel:
                 bsr.w   UpdateLbzRideGrappleSwingAndChain
                 bsr.w   UpdatePlayersOnLbzRideGrapple
                 tst.w   $30(a0)
-                beq.s   loc_2564C
+                beq.s   S3LBZRideGrip_TryDrawFromCurrentX
                 cmpi.w  #$28,$3A(a0)
-                bne.s   loc_2564C
-                move.l  #loc_256A0,(a0)
+                bne.s   S3LBZRideGrip_TryDrawFromCurrentX
+                move.l  #S3LBZRideGrip_MoveAndAccelerate,(a0)
 
-loc_2564C:
+S3LBZRideGrip_TryDrawFromCurrentX:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_25666
+                bhi.w   S3LBZRideGrip_TryDrawFromOriginalX
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_25666:
+S3LBZRideGrip_TryDrawFromOriginalX:
                 move.w  $38(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_25680
+                bhi.w   S3LBZRideGrip_TryClearRespawnBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_25680:
+S3LBZRideGrip_TryClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2568C
+                beq.s   S3LBZRideGrip_TryDeleteChainVisual
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_2568C:
+S3LBZRideGrip_TryDeleteChainVisual:
                 move.w  $3C(a0),d0
-                beq.s   loc_2569A
+                beq.s   S3LBZRideGrip_DeleteGrapple
                 movea.w d0,a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_2569A:
+S3LBZRideGrip_DeleteGrapple:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_256A0:
+S3LBZRideGrip_MoveAndAccelerate:
                 jsr     (MoveSprite2).l
                 btst    #0,status(a0)
-                beq.s   loc_256C2
+                beq.s   S3LBZRideGrip_AccelerateRight
                 subi.w  #$20,x_vel(a0)
                 tst.w   x_vel(a0)
-                bmi.s   loc_256D4
+                bmi.s   S3LBZRideGrip_CheckLeftEndpoint
                 subi.w  #$60,x_vel(a0)
-                bra.s   loc_256D4
+                bra.s   S3LBZRideGrip_CheckLeftEndpoint
 ; ---------------------------------------------------------------------------
 
-loc_256C2:
+S3LBZRideGrip_AccelerateRight:
                 addi.w  #$20,x_vel(a0)
                 tst.w   x_vel(a0)
-                bpl.s   loc_256D4
+                bpl.s   S3LBZRideGrip_CheckLeftEndpoint
                 addi.w  #$60,x_vel(a0)
 
-loc_256D4:
+S3LBZRideGrip_CheckLeftEndpoint:
                 move.w  x_pos(a0),d0
                 move.w  $34(a0),d1
                 cmp.w   d1,d0
-                bhi.s   loc_256F2
+                bhi.s   S3LBZRideGrip_CheckRightEndpoint
                 move.w  d1,x_pos(a0)
                 bsr.s   ReleaseLbzRideGrapplePlayersAtEndpoint
                 tst.w   x_vel(a0)
-                bpl.s   loc_256F2
+                bpl.s   S3LBZRideGrip_CheckRightEndpoint
                 move.w  #0,x_vel(a0)
 
-loc_256F2:
+S3LBZRideGrip_CheckRightEndpoint:
                 move.w  $36(a0),d1
                 cmp.w   d1,d0
-                blo.s   loc_2570C
+                blo.s   S3LBZRideGrip_UpdateChainRidersAndCull
                 move.w  d1,x_pos(a0)
                 bsr.s   ReleaseLbzRideGrapplePlayersAtEndpoint
                 tst.w   x_vel(a0)
-                bmi.s   loc_2570C
+                bmi.s   S3LBZRideGrip_UpdateChainRidersAndCull
                 move.w  #0,x_vel(a0)
 
-loc_2570C:
+S3LBZRideGrip_UpdateChainRidersAndCull:
                 bsr.w   UpdateLbzRideGrappleSwingAndChain
                 bsr.w   UpdatePlayersOnLbzRideGrapple
-                bra.w   loc_2564C
+                bra.w   S3LBZRideGrip_TryDrawFromCurrentX
 
 ; =============== S U B R O U T I N E =======================================
 
 ReleaseLbzRideGrapplePlayersAtEndpoint:
                 tst.b   subtype(a0)
-                bmi.s   locret_25750
+                bmi.s   S3LBZRideGrip_EndpointReleaseReturn
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   ReleasePlayerFromLbzRideGrappleEndpoint
@@ -159,7 +160,7 @@ ReleaseLbzRideGrapplePlayersAtEndpoint:
 
 ReleasePlayerFromLbzRideGrappleEndpoint:
                 tst.b   (a2)
-                beq.s   locret_25750
+                beq.s   S3LBZRideGrip_EndpointReleaseReturn
                 move.w  x_vel(a0),x_vel(a1)
                 move.w  #0,y_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -167,13 +168,13 @@ ReleasePlayerFromLbzRideGrappleEndpoint:
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
 
-locret_25750:
+S3LBZRideGrip_EndpointReleaseReturn:
                 rts
 ; End of function ReleasePlayerFromLbzRideGrappleEndpoint
 
 ; ---------------------------------------------------------------------------
 
-loc_25752:
+S3LBZRideGrip_DrawChainVisual:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -193,21 +194,21 @@ UpdatePlayersOnLbzRideGrapple:
 
 UpdatePlayerOnLbzRideGrapple:
                 tst.b   (a2)
-                beq.w   loc_25868
+                beq.w   S3LBZRideGrip_TickCaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_257DC
+                bpl.s   S3LBZRideGrip_DetachWithoutJump
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_257DC
+                bhs.s   S3LBZRideGrip_DetachWithoutJump
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_257EA
+                beq.w   S3LBZRideGrip_TryFaceRiderLeft
                 clr.b   $2E(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_257AA
+                beq.w   S3LBZRideGrip_JumpWithGrappleSpeed
                 move.b  #$3C,2(a2)
 
-loc_257AA:
+S3LBZRideGrip_JumpWithGrappleSpeed:
                 move.w  x_vel(a0),x_vel(a1)
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -219,24 +220,24 @@ loc_257AA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_257DC:
+S3LBZRideGrip_DetachWithoutJump:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_257EA:
+S3LBZRideGrip_TryFaceRiderLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_257F6
+                beq.s   S3LBZRideGrip_TryFaceRiderRight
                 bset    #Status_Facing,status(a1)
 
-loc_257F6:
+S3LBZRideGrip_TryFaceRiderRight:
                 btst    #button_right+8,d0
-                beq.s   loc_25802
+                beq.s   S3LBZRideGrip_SyncFacingAndPlaceRider
                 bclr    #Status_Facing,status(a1)
 
-loc_25802:
+S3LBZRideGrip_SyncFacingAndPlaceRider:
                 move.b  status(a1),status(a0)
                 move.b  status(a1),d0
                 andi.b  #1<<Status_Facing,d0
@@ -246,17 +247,17 @@ loc_25802:
                 move.w  y_pos(a3),y_pos(a1)
                 addi.w  #$24,y_pos(a1)
 
-loc_2582C:
+S3LBZRideGrip_ChooseMirroredPoseAngle:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_2583C
+                beq.s   S3LBZRideGrip_ApplyPoseAndLoadTiles
                 neg.b   d0
 
-loc_2583C:
+S3LBZRideGrip_ApplyPoseAndLoadTiles:
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  byte_25858(pc,d0.w),mapping_frame(a1)
+                move.b  S3LBZRideGrip_RiderPoseFrames(pc,d0.w),mapping_frame(a1)
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -264,34 +265,34 @@ loc_2583C:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-byte_25858:
+S3LBZRideGrip_RiderPoseFrames:
                 dc.b    $91, $91, $90, $90, $90, $90, $90, $90, $92, $92, $92, $92, $92, $92, $91, $91
                 even
 ; ---------------------------------------------------------------------------
 
-loc_25868:
+S3LBZRideGrip_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_25876
+                beq.s   S3LBZRideGrip_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_258F0
+                bne.w   S3LBZRideGrip_CaptureReturn
 
-loc_25876:
+S3LBZRideGrip_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_258F0
+                bhs.w   S3LBZRideGrip_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$18,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_258F0
+                bhs.w   S3LBZRideGrip_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_258F0
+                bne.s   S3LBZRideGrip_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_258F0
+                bhs.s   S3LBZRideGrip_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_258F0
+                bne.s   S3LBZRideGrip_CaptureReturn
                 move.b  status(a1),status(a0)
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
@@ -303,10 +304,10 @@ loc_25876:
                 move.b  #0,spin_dash_flag(a1)
                 move.b  #3,object_control(a1)
                 move.b  #1,(a2)
-                bra.w   loc_2582C
+                bra.w   S3LBZRideGrip_ChooseMirroredPoseAngle
 ; ---------------------------------------------------------------------------
 
-locret_258F0:
+S3LBZRideGrip_CaptureReturn:
                 rts
 ; End of function UpdatePlayerOnLbzRideGrapple
 
@@ -314,83 +315,84 @@ locret_258F0:
 
 UpdateLbzRideGrappleSwingAndChain:
                 tst.w   $30(a0)
-                beq.s   loc_25906
+                beq.s   S3LBZRideGrip_RetractUnoccupiedChain
                 move.w  $3A(a0),d2
                 cmpi.w  #$28,d2
-                beq.s   loc_2592C
+                beq.s   S3LBZRideGrip_SelectSwingOrTravelLean
                 addq.w  #1,d2
-                bra.s   loc_25928
+                bra.s   S3LBZRideGrip_SetChainLength
 ; ---------------------------------------------------------------------------
 
-loc_25906:
+S3LBZRideGrip_RetractUnoccupiedChain:
                 move.w  $3A(a0),d2
-                beq.s   loc_25910
+                beq.s   S3LBZRideGrip_ResetIdleSwing
                 subq.w  #1,d2
-                bne.s   loc_25928
+                bne.s   S3LBZRideGrip_SetChainLength
 
-loc_25910:
+S3LBZRideGrip_ResetIdleSwing:
                 clr.w   angle(a0)
                 clr.b   $40(a0)
                 clr.w   $3E(a0)
                 move.w  #0,x_vel(a0)
-                move.l  #loc_25630,(a0)
+                move.l  #S3LBZRideGrip_UpdateIdleAndTryTravel,(a0)
 
-loc_25928:
+S3LBZRideGrip_SetChainLength:
                 move.w  d2,$3A(a0)
 
-loc_2592C:
+S3LBZRideGrip_SelectSwingOrTravelLean:
                 mulu.w  #$33,d2
                 move.w  x_vel(a0),d0
-                bne.s   loc_25970
+                bne.s   S3LBZRideGrip_TrackTravelLean
                 tst.b   $40(a0)
-                bne.s   loc_25956
+                bne.s   S3LBZRideGrip_StepReverseFreeSwing
                 move.w  $3E(a0),d1
                 addi.w  #$40,d1
                 move.w  d1,$3E(a0)
                 add.w   d1,angle(a0)
-                bmi.s   loc_2596E
+                bmi.s   S3LBZRideGrip_JoinChainProjection
                 move.b  #1,$40(a0)
-                bra.s   loc_2596E
+                bra.s   S3LBZRideGrip_JoinChainProjection
 ; ---------------------------------------------------------------------------
 
-loc_25956:
+S3LBZRideGrip_StepReverseFreeSwing:
                 move.w  $3E(a0),d1
                 subi.w  #$40,d1
                 move.w  d1,$3E(a0)
                 add.w   d1,angle(a0)
-                bpl.s   loc_2596E
+                bpl.s   S3LBZRideGrip_JoinChainProjection
                 move.b  #0,$40(a0)
 
-loc_2596E:
-                bra.s   loc_259B0
+S3LBZRideGrip_JoinChainProjection:
+                bra.s   S3LBZRideGrip_CalcChainLinkSteps
 ; ---------------------------------------------------------------------------
 
-loc_25970:
+S3LBZRideGrip_TrackTravelLean:
                 neg.w   d0
                 asl.w   #2,d0
                 sub.w   angle(a0),d0
-                bge.s   loc_2598A
+                bge.s   S3LBZRideGrip_TryIncreaseTravelLean
                 cmpi.w  #-$3000,angle(a0)
-                ble.s   loc_2598A
+                ble.s   S3LBZRideGrip_TryIncreaseTravelLean
                 subi.w  #$180,angle(a0)
-                bra.s   loc_25998
+                bra.s   S3LBZRideGrip_SetSwingPhaseFromTravel
 ; ---------------------------------------------------------------------------
 
-loc_2598A:
+S3LBZRideGrip_TryIncreaseTravelLean:
                 cmpi.w  #$3000,angle(a0)
-                bge.s   loc_25998
+                bge.s   S3LBZRideGrip_SetSwingPhaseFromTravel
                 addi.w  #$180,angle(a0)
 
-loc_25998:
+S3LBZRideGrip_SetSwingPhaseFromTravel:
                 move.b  #0,$40(a0)
                 tst.w   x_vel(a0)
-                bpl.s   loc_259AA
+                bpl.s   S3LBZRideGrip_ClearAngularSpeed
                 move.b  #1,$40(a0)
 
-loc_259AA:
+S3LBZRideGrip_ClearAngularSpeed:
                 move.w  #0,$3E(a0)
 
-loc_259B0:
+; Use the stored chain actor pointer directly to place the links
+S3LBZRideGrip_CalcChainLinkSteps:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  d2,d0
@@ -401,7 +403,7 @@ loc_259B0:
                 moveq   #6-1,d4
                 lea     sub2_x_pos(a1),a2
 
-loc_259D0:
+S3LBZRideGrip_PlaceLinksAndGrip:
                 swap    d2
                 swap    d3
                 move.w  d2,(a2)+
@@ -411,7 +413,7 @@ loc_259D0:
                 swap    d3
                 add.l   d0,d2
                 add.l   d1,d3
-                dbf     d4,loc_259D0
+                dbf     d4,S3LBZRideGrip_PlaceLinksAndGrip
                 move.w  $36(a1),x_pos(a1)
                 move.w  $38(a1),y_pos(a1)
                 rts

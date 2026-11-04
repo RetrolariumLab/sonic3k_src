@@ -29,7 +29,7 @@ LBZ2_Deform:
                 swap    d0
                 clr.w   d0
                 tst.w   d2
-                beq.w   loc_3EB36                       ; Equilibrium skips ahead
+                beq.w   S3LBZ_NormalPrepareLowerAreaScrollBands  ; Equilibrium skips ahead
                 move.l  d0,d1
                 move.l  d0,d3
                 asr.l   #6,d3
@@ -38,10 +38,10 @@ LBZ2_Deform:
                 sub.l   d4,d3
                 moveq   #$20-1,d4
                 cmpi.w  #-$40,d2
-                bgt.s   loc_3EAB6
+                bgt.s   S3LBZ_NormalWaterBandPrepareBackwardFill
                 lea     (HScroll_table+$01E).w,a1       ; Above water, no art reloading needed
 
-loc_3EA9E:
+S3LBZ_NormalWaterBandFillForwardPairs:
                 swap    d1
                 move.w  d1,(a1)+
                 swap    d1
@@ -50,14 +50,14 @@ loc_3EA9E:
                 move.w  d1,(a1)+
                 swap    d1
                 sub.l   d3,d1
-                dbf     d4,loc_3EA9E
-                bra.w   loc_3EB36
+                dbf     d4,S3LBZ_NormalWaterBandFillForwardPairs
+                bra.w   S3LBZ_NormalPrepareLowerAreaScrollBands
 ; ---------------------------------------------------------------------------
 
-loc_3EAB6:
+S3LBZ_NormalWaterBandPrepareBackwardFill:
                 lea     (HScroll_table+$11E).w,a1       ; Below water
 
-loc_3EABA:
+S3LBZ_NormalWaterBandFillBackwardPairs:
                 swap    d1
                 move.w  d1,-(a1)
                 swap    d1
@@ -66,14 +66,14 @@ loc_3EABA:
                 move.w  d1,-(a1)
                 swap    d1
                 sub.l   d3,d1
-                dbf     d4,loc_3EABA
+                dbf     d4,S3LBZ_NormalWaterBandFillBackwardPairs
                 cmpi.w  #$40,d2
-                bge.s   loc_3EB36                       ; No art reloading needed if out of range
+                bge.s   S3LBZ_NormalPrepareLowerAreaScrollBands  ; No art reloading needed if out of range
                 lea     (HScroll_table+$09E).w,a1
                 lea     (a1),a5
                 lea     (LBZ_WaterlineScroll_Data).l,a6
                 move.w  d2,d1
-                bmi.s   loc_3EB0E
+                bmi.s   S3LBZ2Water_PrepareUpperRemap
                 move.w  d1,d3                           ; Below water
                 neg.w   d3
                 addi.w  #$40,d3
@@ -82,22 +82,22 @@ loc_3EABA:
                 subq.w  #1,d1
                 moveq   #0,d3
                 lsr.w   #1,d1
-                bcc.s   loc_3EB00
+                bcc.s   S3LBZ2Water_RemapLowerSecondWord
 
-loc_3EAF8:
+S3LBZ2Water_RemapLowerFirstWord:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+
 
-loc_3EB00:
+S3LBZ2Water_RemapLowerSecondWord:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+
-                dbf     d1,loc_3EAF8
-                bra.s   loc_3EB36
+                dbf     d1,S3LBZ2Water_RemapLowerFirstWord
+                bra.s   S3LBZ_NormalPrepareLowerAreaScrollBands
 ; ---------------------------------------------------------------------------
 
-loc_3EB0E:
+S3LBZ2Water_PrepareUpperRemap:
                 move.w  d1,d3                           ; Above water
                 addi.w  #$40,d3
                 lsl.w   #6,d3
@@ -106,20 +106,20 @@ loc_3EB0E:
                 subq.w  #1,d1
                 moveq   #0,d3
                 lsr.w   #1,d1
-                bcc.s   loc_3EB2A
+                bcc.s   S3LBZ2Water_RemapUpperSecondWord
 
-loc_3EB22:
+S3LBZ2Water_RemapUpperFirstWord:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),-(a1)
 
-loc_3EB2A:
+S3LBZ2Water_RemapUpperSecondWord:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),-(a1)
-                dbf     d1,loc_3EB22
+                dbf     d1,S3LBZ2Water_RemapUpperFirstWord
 
-loc_3EB36:
+S3LBZ_NormalPrepareLowerAreaScrollBands:
                 lea     (HScroll_table+$1E2).w,a1       ; Below the water area moving up (from Knuckles area of course)
                 move.l  d0,d1
                 asr.l   #1,d1
@@ -138,38 +138,38 @@ loc_3EB36:
                 sub.l   d3,d1                           ; Likely because the underwater wavy effect necessitates specifying deformation line-by-line
                 moveq   #4,d4
 
-loc_3EB60:
+S3LBZ2Water_StepUnderwaterSlope:
                 sub.l   d3,d1
                 swap    d1
                 move.w  (a5)+,d5
 
-loc_3EB66:
+S3LBZ2Water_FillUnderwaterBand:
                 move.w  d1,-(a1)
                 move.w  d1,-(a1)
                 move.w  d1,-(a1)
                 move.w  d1,-(a1)
-                dbf     d5,loc_3EB66
+                dbf     d5,S3LBZ2Water_FillUnderwaterBand
                 swap    d1
-                dbf     d4,loc_3EB60
+                dbf     d4,S3LBZ2Water_StepUnderwaterSlope
                 moveq   #$40-1,d3
                 tst.w   d2
-                bmi.s   loc_3EB82
+                bmi.s   S3LBZ2Water_PrepareLowerBandTail
                 sub.w   d2,d3                           ; Only perform as much addition line-by-line deformation as needed
-                bcs.s   loc_3EB90
+                bcs.s   S3LBZ_NormalPrepareCloudScrollOffsets
 
-loc_3EB82:
+S3LBZ2Water_PrepareLowerBandTail:
                 swap    d1
                 lsr.w   #1,d3
-                bcc.s   loc_3EB8A
+                bcc.s   S3LBZ2Water_FillLowerTailSecondWord
 
-loc_3EB88:
+S3LBZ_NormalFillLowerBandFirstWordOfPair:
                 move.w  d1,-(a1)
 
-loc_3EB8A:
+S3LBZ2Water_FillLowerTailSecondWord:
                 move.w  d1,-(a1)
-                dbf     d3,loc_3EB88
+                dbf     d3,S3LBZ_NormalFillLowerBandFirstWordOfPair
 
-loc_3EB90:
+S3LBZ_NormalPrepareCloudScrollOffsets:
                 lea     (HScroll_table).w,a1            ; With that over with, we can actually do some normal stuff
                 lea     LBZ2_CloudDeformArray(pc),a5
                 move.l  d0,d1
@@ -179,14 +179,14 @@ loc_3EB90:
                 addi.l  #$E00,(HScroll_table+$1E2).w    ; Move clouds
                 moveq   #$D-1,d5
 
-loc_3EBAC:
+S3LBZ_NormalWriteIndexedCloudScrollBand:
                 move.w  (a5)+,d6
                 add.l   d4,d1
                 swap    d1
                 move.w  d1,(a1,d6.w)
                 swap    d1
                 add.l   d3,d1
-                dbf     d5,loc_3EBAC
+                dbf     d5,S3LBZ_NormalWriteIndexedCloudScrollBand
                 move.l  d0,d1                           ; And now just do the rest of the deformation
                 asr.l   #4,d1
                 move.l  d1,d3
@@ -199,51 +199,51 @@ loc_3EBAC:
                 swap    d1
                 move.w  d1,(a1)+
                 tst.w   d2
-                bpl.s   loc_3EBEC                       ; If below water, just do the full deformation
+                bpl.s   S3LBZ2Water_SetFullUpperTailCount  ; If below water, just do the full deformation
                 moveq   #$40-1,d4
                 add.w   d2,d4
-                bmi.s   loc_3EC0A                       ; If above water far enough that entire waterline shows, skip ahead
+                bmi.s   S3LBZ2Water_CalcVisibleWaveExtent  ; If above water far enough that entire waterline shows, skip ahead
                 cmpi.w  #$30,d4
-                blo.s   loc_3EBFE
+                blo.s   S3LBZ2Water_SplitUpperTailByParity
                 subi.w  #$30,d4
-                bra.s   loc_3EBEE
+                bra.s   S3LBZ2Water_PrepareUpperPlateau
 ; ---------------------------------------------------------------------------
 
-loc_3EBEC:
+S3LBZ2Water_SetFullUpperTailCount:
                 moveq   #$10-1,d4
 
-loc_3EBEE:
+S3LBZ2Water_PrepareUpperPlateau:
                 moveq   #$18-1,d5
 
-loc_3EBF0:
+S3LBZ_NormalFillUpperPlateauWordPairs:
                 move.w  d1,(a1)+                        ; First $30 pixels have their own deformation
                 move.w  d1,(a1)+
-                dbf     d5,loc_3EBF0
+                dbf     d5,S3LBZ_NormalFillUpperPlateauWordPairs
                 swap    d1
                 add.l   d3,d1
                 swap    d1
 
-loc_3EBFE:
+S3LBZ2Water_SplitUpperTailByParity:
                 lsr.w   #1,d4                           ; As do the last $10 pixels
-                bcc.s   loc_3EC04
+                bcc.s   S3LBZ2Water_FillUpperTailSecondWord
 
-loc_3EC02:
+S3LBZ_NormalFillUpperBandTailFirstWord:
                 move.w  d1,(a1)+
 
-loc_3EC04:
+S3LBZ2Water_FillUpperTailSecondWord:
                 move.w  d1,(a1)+
-                dbf     d4,loc_3EC02
+                dbf     d4,S3LBZ_NormalFillUpperBandTailFirstWord
 
-loc_3EC0A:
+S3LBZ2Water_CalcVisibleWaveExtent:
                 moveq   #$3F,d0                         ; And yet, there's more, cause we now have the wavy effects to go!
                 sub.w   d2,d0
-                bmi.s   locret_3EC42                    ; If high enough, no waviness needed
+                bmi.s   S3LBZ_ReturnFromNormalActTwoDeformation  ; If high enough, no waviness needed
                 addi.w  #$60,d0                         ; Otherwise, keep it up
                 cmpi.w  #$E0,d0
-                blo.s   loc_3EC1E
+                blo.s   S3LBZ2Water_PrepareReverseWave
                 move.w  #$E0-1,d0
 
-loc_3EC1E:
+S3LBZ2Water_PrepareReverseWave:
                 lea     (HScroll_table+$1DE).w,a1
                 lea     LBZ_WaterWaveArray(pc),a5       ; Water wave array
                 move.w  (Level_frame_counter).w,d1
@@ -251,18 +251,18 @@ loc_3EC1E:
                 andi.w  #$7E,d1
                 adda.w  d1,a5
                 lsr.w   #1,d0
-                bcc.s   loc_3EC3A
+                bcc.s   S3LBZ2Water_AddWaveSecondWord
 
-loc_3EC36:
+S3LBZ_NormalAddWaterWaveFirstWordOfPair:
                 move.w  -(a5),d3
                 add.w   d3,-(a1)
 
-loc_3EC3A:
+S3LBZ2Water_AddWaveSecondWord:
                 move.w  -(a5),d3
                 add.w   d3,-(a1)
-                dbf     d0,loc_3EC36
+                dbf     d0,S3LBZ_NormalAddWaterWaveFirstWordOfPair
 
-locret_3EC42:
+S3LBZ_ReturnFromNormalActTwoDeformation:
                 rts
 ; End of function LBZ2_Deform
 
@@ -288,44 +288,44 @@ LBZ2_DeathEggDeform:
                 move.w  d0,d2
                 addi.w  #$2C0,d0
                 add.w   d3,d0
-                bpl.s   loc_3EC90
+                bpl.s   S3LBZ2Egg_ApplyBackgroundWrapBias
                 moveq   #0,d3
                 move.w  d0,d4
 
-loc_3EC7C:
+S3LBZ2Egg_GrowBackgroundWrapBias:
                 addi.w  #$100,d3
                 addi.w  #$100,d4
-                bmi.s   loc_3EC7C
+                bmi.s   S3LBZ2Egg_GrowBackgroundWrapBias
                 cmp.w   (_unkEEA0).w,d3
-                blo.s   loc_3EC90
+                blo.s   S3LBZ2Egg_ApplyBackgroundWrapBias
                 move.w  d3,(_unkEEA0).w
 
-loc_3EC90:
+S3LBZ2Egg_ApplyBackgroundWrapBias:
                 add.w   (_unkEEA0).w,d0
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 tst.w   (_unkEEA0).w
-                beq.s   loc_3ECAE
+                beq.s   S3LBZ2Egg_CheckWaterBandLevel
 
-loc_3EC9E:
+S3LBZ_DeathEggReduceEffectiveYModuloPage:
                 cmpi.w  #$100,d0
-                blo.s   loc_3ECAA
+                blo.s   S3LBZ_DeathEggPublishReducedBackgroundY
                 subi.w  #$100,d0
-                bra.s   loc_3EC9E
+                bra.s   S3LBZ_DeathEggReduceEffectiveYModuloPage
 ; ---------------------------------------------------------------------------
 
-loc_3ECAA:
+S3LBZ_DeathEggPublishReducedBackgroundY:
                 move.w  d0,(Camera_Y_pos_BG_copy).w
 
-loc_3ECAE:
+S3LBZ2Egg_CheckWaterBandLevel:
                 tst.w   (_unkEE9C).w
-                bmi.s   loc_3ECB8
+                bmi.s   S3LBZ2Egg_DisableWaterBand
                 sub.w   d1,d2
-                bpl.s   loc_3ECBC
+                bpl.s   S3LBZ2Egg_PrepareReverseUpperBand
 
-loc_3ECB8:
+S3LBZ2Egg_DisableWaterBand:
                 move.w  #$7FFF,d2
 
-loc_3ECBC:
+S3LBZ2Egg_PrepareReverseUpperBand:
                 move.w  d2,(Events_bg+$10).w
                 move.w  (Camera_X_pos_copy).w,d0
                 swap    d0
@@ -339,7 +339,7 @@ loc_3ECBC:
                 moveq   #$20-1,d4
                 lea     (HScroll_table+$0AC).w,a1
 
-loc_3ECDA:
+S3LBZ2Egg_FillUpperBandPairs:
                 swap    d1
                 move.w  d1,-(a1)
                 swap    d1
@@ -348,9 +348,9 @@ loc_3ECDA:
                 move.w  d1,-(a1)
                 swap    d1
                 sub.l   d3,d1
-                dbf     d4,loc_3ECDA
+                dbf     d4,S3LBZ2Egg_FillUpperBandPairs
                 cmpi.w  #$40,d2
-                bge.s   loc_3ED2A
+                bge.s   S3LBZ_DeathEggPrepareLowerFlatBand
                 lea     (HScroll_table+$02C).w,a1
                 lea     (a1),a5
                 lea     (LBZ_WaterlineScroll_Data).l,a6
@@ -363,20 +363,20 @@ loc_3ECDA:
                 subq.w  #1,d1
                 moveq   #0,d3
                 lsr.w   #1,d1
-                bcc.s   loc_3ED1E
+                bcc.s   S3LBZ2Egg_RemapWaterSecondWord
 
-loc_3ED16:
+S3LBZ_DeathEggWaterRemapFirstWordOfPair:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+
 
-loc_3ED1E:
+S3LBZ2Egg_RemapWaterSecondWord:
                 move.b  (a6)+,d3
                 add.w   d3,d3
                 move.w  (a5,d3.w),(a1)+
-                dbf     d1,loc_3ED16
+                dbf     d1,S3LBZ_DeathEggWaterRemapFirstWordOfPair
 
-loc_3ED2A:
+S3LBZ_DeathEggPrepareLowerFlatBand:
                 lea     (HScroll_table+$0EC).w,a1
                 move.l  d0,d1
                 asr.l   #1,d1
@@ -384,24 +384,24 @@ loc_3ED2A:
                 asr.l   #3,d3
                 moveq   #7-1,d4
 
-loc_3ED38:
+S3LBZ2Egg_StepLowerBandSlope:
                 sub.l   d3,d1
-                dbf     d4,loc_3ED38
+                dbf     d4,S3LBZ2Egg_StepLowerBandSlope
                 moveq   #$60-1,d3
                 sub.w   d2,d3
-                bcs.s   loc_3ED52
+                bcs.s   S3LBZ_DeathEggPrepareCloudScrollOffsets
                 swap    d1
                 lsr.w   #1,d3
-                bcc.s   loc_3ED4C
+                bcc.s   S3LBZ2Egg_FillLowerFlatSecondWord
 
-loc_3ED4A:
+S3LBZ_DeathEggFillLowerFlatBandFirstWord:
                 move.w  d1,-(a1)
 
-loc_3ED4C:
+S3LBZ2Egg_FillLowerFlatSecondWord:
                 move.w  d1,-(a1)
-                dbf     d3,loc_3ED4A
+                dbf     d3,S3LBZ_DeathEggFillLowerFlatBandFirstWord
 
-loc_3ED52:
+S3LBZ_DeathEggPrepareCloudScrollOffsets:
                 lea     (HScroll_table+$00C).w,a1
                 lea     LBZ2_CloudDeformArray(pc),a5
                 move.l  d0,d1
@@ -411,21 +411,21 @@ loc_3ED52:
                 addi.l  #$E00,(HScroll_table+$1E2).w
                 moveq   #$D-1,d5
 
-loc_3ED6E:
+S3LBZ2Egg_WriteCloudScrollBand:
                 move.w  (a5)+,d6
                 add.l   d4,d1
                 swap    d1
                 move.w  d1,(a1,d6.w)
                 swap    d1
                 add.l   d3,d1
-                dbf     d5,loc_3ED6E
+                dbf     d5,S3LBZ2Egg_WriteCloudScrollBand
                 lea     (HScroll_table+$010).w,a1
                 lea     (HScroll_table).w,a5
                 moveq   #4-1,d1
 
-loc_3ED8A:
+S3LBZ2Egg_CopyLeadingCloudScroll:
                 move.l  (a1)+,(a5)+
-                dbf     d1,loc_3ED8A
+                dbf     d1,S3LBZ2Egg_CopyLeadingCloudScroll
                 move.l  d0,d1
                 asr.l   #4,d1
                 move.l  d1,d3
@@ -445,10 +445,10 @@ loc_3ED8A:
                 sub.w   d2,d0
                 addi.w  #$20,d0
                 cmpi.w  #$60,d0
-                blo.s   loc_3EDC2
+                blo.s   S3LBZ2Egg_PrepareReverseWave
                 move.w  #$60-1,d0
 
-loc_3EDC2:
+S3LBZ2Egg_PrepareReverseWave:
                 lea     (HScroll_table+$0EC).w,a1
                 lea     LBZ_WaterWaveArray2(pc),a5
                 move.w  (Level_frame_counter).w,d1
@@ -456,16 +456,16 @@ loc_3EDC2:
                 andi.w  #$7E,d1
                 adda.w  d1,a5
                 lsr.w   #1,d0
-                bcc.s   loc_3EDDE
+                bcc.s   S3LBZ2Egg_AddWaveSecondWord
 
-loc_3EDDA:
+S3LBZ2Egg_AddWaveFirstWord:
                 move.w  -(a5),d3
                 add.w   d3,-(a1)
 
-loc_3EDDE:
+S3LBZ2Egg_AddWaveSecondWord:
                 move.w  -(a5),d3
                 add.w   d3,-(a1)
-                dbf     d0,loc_3EDDA
+                dbf     d0,S3LBZ2Egg_AddWaveFirstWord
                 rts
 ; End of function LBZ2_DeathEggDeform
 
@@ -473,46 +473,46 @@ loc_3EDDE:
 
 LBZ2_DeathEggMoveScreen:
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.w   locret_3EEBC                    ; If dying, don't bother
+                bhs.w   S3LBZ_ReturnFromDeathEggScreenMotion  ; If dying, don't bother
                 tst.b   (Scroll_lock).w
-                beq.s   loc_3EE1E                       ; Skip if flag turned off
+                beq.s   S3LBZ2Egg_TickMotionDelay       ; Skip if flag turned off
                 move.w  (Player_1+x_pos).w,d0
                 sub.w   (Camera_X_pos).w,d0
                 subi.w  #$A0,d0
-                bcs.s   loc_3EE0A
+                bcs.s   S3LBZ_DeathEggUnlockScrollAtCameraLimit
                 add.w   d0,(Camera_X_pos).w             ; Move screen along with player in Robotnik ship
 
-loc_3EE0A:
+S3LBZ_DeathEggUnlockScrollAtCameraLimit:
                 cmpi.w  #$4390,(Camera_X_pos).w
-                bhs.s   loc_3EE1A
+                bhs.s   S3LBZ_DeathEggClearScrollLockByte
                 cmpi.w  #$668,(Camera_Y_pos).w
-                blo.s   loc_3EE1E
+                blo.s   S3LBZ2Egg_TickMotionDelay
 
-loc_3EE1A:
+S3LBZ_DeathEggClearScrollLockByte:
                 clr.b   (Scroll_lock).w                 ; Stop movement when screen edge is reached
 
-loc_3EE1E:
+S3LBZ2Egg_TickMotionDelay:
                 tst.w   (Events_bg+$0E).w
-                beq.s   loc_3EE2C
+                beq.s   S3LBZ2Egg_TryLockCameraMinX
                 subq.w  #1,(Events_bg+$0E).w
-                bra.w   locret_3EEBC
+                bra.w   S3LBZ_ReturnFromDeathEggScreenMotion
 ; ---------------------------------------------------------------------------
 
-loc_3EE2C:
+S3LBZ2Egg_TryLockCameraMinX:
                 cmpi.w  #$4390,(Camera_X_pos).w
-                blo.s   loc_3EE40
+                blo.s   S3LBZ_DeathEggLockVerticalMinimumAtLimit
                 move.w  (Camera_max_X_pos).w,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_target_min_X_pos).w
 
-loc_3EE40:
+S3LBZ_DeathEggLockVerticalMinimumAtLimit:
                 cmpi.w  #$668,(Camera_Y_pos).w
-                blo.s   loc_3EE54
+                blo.s   S3LBZ2Egg_IntegratePrimaryMotion
                 move.w  (Camera_max_Y_pos).w,d0
                 move.w  d0,(Camera_min_Y_pos).w         ; Lock screen when edges are reached
                 move.w  d0,(Camera_target_min_Y_pos).w
 
-loc_3EE54:
+S3LBZ2Egg_IntegratePrimaryMotion:
                 lea     (Events_bg+$02).w,a1
                 moveq   #0,d1
                 move.w  (_unkEEA2).w,d1                 ; Speed of Death Egg movement
@@ -523,35 +523,35 @@ loc_3EE54:
                 move.w  d1,8(a1)
                 move.w  #$2200,d1
                 tst.b   (Scroll_lock).w
-                bne.s   loc_3EE7A
+                bne.s   S3LBZ2Egg_IntegrateSecondaryMotion
                 move.l  (_unkEE9C).w,d1                 ; Get BG movement speed if edge of screen is reached
 
-loc_3EE7A:
+S3LBZ2Egg_IntegrateSecondaryMotion:
                 add.l   d1,4(a1)
                 move.w  4(a1),d1
                 move.w  d1,d2
                 sub.w   $A(a1),d1
                 move.w  d2,$A(a1)
                 tst.b   (Scroll_lock).w
-                beq.s   loc_3EE9E
+                beq.s   S3LBZ2Egg_AdvanceWaterTarget
                 movea.w (Events_bg+$00).w,a5            ; If movement is still going
                 add.w   d0,$14(a5)                      ; Add Y movement to screen and Robotnik ship
                 add.w   d0,(Camera_Y_pos).w
 
-loc_3EE9E:
+S3LBZ2Egg_AdvanceWaterTarget:
                 move.w  (Target_water_level).w,d2
                 add.w   d0,d2
                 add.w   d1,d2
                 cmpi.w  #$F00,d2
-                blo.s   loc_3EEB0
+                blo.s   S3LBZ2Egg_SetWaterTargetAndDelta
                 move.w  #$F80,d2
 
-loc_3EEB0:
+S3LBZ2Egg_SetWaterTargetAndDelta:
                 move.w  d2,(Target_water_level).w
                 move.w  d0,(Events_bg+$14).w
                 add.w   d1,(Events_bg+$14).w
 
-locret_3EEBC:
+S3LBZ_ReturnFromDeathEggScreenMotion:
                 rts
 ; End of function LBZ2_DeathEggMoveScreen
 
@@ -559,17 +559,17 @@ locret_3EEBC:
 
 LBZ2_EndFallingAccel:
                 tst.w   (_unkEEA2).w
-                beq.s   loc_3EECC
+                beq.s   S3LBZ2Egg_AccelerateSecondaryFall
                 subi.w  #$100,(_unkEEA2).w
-                bra.s   locret_3EEDE
+                bra.s   S3LBZ_ReturnFromDeathEggFallAcceleration
 ; ---------------------------------------------------------------------------
 
-loc_3EECC:
+S3LBZ2Egg_AccelerateSecondaryFall:
                 cmpi.l  #$FFFE8000,(_unkEE9C).w
-                ble.s   locret_3EEDE
+                ble.s   S3LBZ_ReturnFromDeathEggFallAcceleration
                 subi.l  #$100,(_unkEE9C).w
 
-locret_3EEDE:
+S3LBZ_ReturnFromDeathEggFallAcceleration:
                 rts
 ; End of function LBZ2_EndFallingAccel
 

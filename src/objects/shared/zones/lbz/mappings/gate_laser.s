@@ -1,13 +1,13 @@
 ; Data owner: objects/shared/zones/lbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LBZGateLaser_:
-                dc.w    Frame_22839A-Map_LBZGateLaser_
-                dc.w    Frame_2283A8-Map_LBZGateLaser_
-                dc.w    Frame_2283B0-Map_LBZGateLaser_
-Frame_22839A:   dc.w    2
+                dc.w    LBZGateLaserS3Data_MapSlot00-Map_LBZGateLaser_
+                dc.w    LBZGateLaserS3Data_MapSlot01-Map_LBZGateLaser_
+                dc.w    LBZGateLaserS3Data_MapSlot02-Map_LBZGateLaser_
+LBZGateLaserS3Data_MapSlot00:   dc.w    2
                 dc.b    $FC,  $C,   0, $36, $FF, $E4
                 dc.b    $FC,   8,   0, $36,   0,   4
-Frame_2283A8:   dc.w    1
+LBZGateLaserS3Data_MapSlot01:   dc.w    1
                 dc.b    $FC,  $C,   0, $36, $FF, $E4
-Frame_2283B0:   dc.w    1
+LBZGateLaserS3Data_MapSlot02:   dc.w    1
                 dc.b    $FC,   8,   0, $36,   0,   4

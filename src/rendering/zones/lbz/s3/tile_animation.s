@@ -6,7 +6,7 @@
 AnimateTiles_LBZ1:
                 lea     (Anim_Counters).w,a3
                 subq.b  #1,(a3)
-                bcc.s   loc_2716E
+                bcc.s   S3LBZTiles_UpdateAct1CyclicRow
                 move.b  #3,(a3)
                 moveq   #0,d0
                 move.b  1(a3),d0
@@ -19,14 +19,14 @@ AnimateTiles_LBZ1:
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_2716E:
+S3LBZTiles_UpdateAct1CyclicRow:
                 addq.w  #2,a3
                 moveq   #0,d0
                 move.w  (Events_bg+$10).w,d0
                 sub.w   (Camera_X_pos_BG_copy).w,d0
                 andi.w  #$1F,d0
                 cmp.b   1(a3),d0
-                beq.s   loc_271F6
+                beq.s   S3LBZTiles_CheckAct1ScriptGate
                 move.b  d0,1(a3)
                 moveq   #0,d1
                 move.w  d0,d2
@@ -44,7 +44,7 @@ loc_2716E:
                 lsl.w   #2,d2
                 add.w   d2,d1
                 lsr.w   #1,d0
-                lea     word_2721A(pc,d0.w),a4
+                lea     S3LBZTiles_Act1CyclicDmaWordCounts(pc,d0.w),a4
                 lea     (ArtUnc_AniLBZ1_1).l,a0
                 move.w  #tiles_to_bytes($350),d4
                 add.l   a0,d1
@@ -57,12 +57,12 @@ loc_2716E:
                 add.l   a0,d1
                 move.w  d4,d2
                 move.w  (a4)+,d3
-                beq.s   loc_271DE
+                beq.s   S3LBZTiles_QueueAct1ExtraTile
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
 
-loc_271DE:
+S3LBZTiles_QueueAct1ExtraTile:
                 move.l  d6,d1
                 lsl.w   #5,d1
                 lea     (ArtUnc_AniLBZ1_2).l,a0
@@ -71,23 +71,23 @@ loc_271DE:
                 move.w  #$10,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_271F6:
+S3LBZTiles_CheckAct1ScriptGate:
                 addq.w  #2,a3
                 tst.w   (a3)+
-                bne.s   loc_27208
+                bne.s   S3LBZTiles_RunAct1NormalScript
                 cmpi.b  #1,1(a3)
-                beq.s   loc_2720C
+                beq.s   S3LBZTiles_RunAct1SpecialScript
                 move.w  #0,(a3)
 
-loc_27208:
+S3LBZTiles_RunAct1NormalScript:
                 bsr.w   S3TileScripts_RunAtCounter
 
-loc_2720C:
+S3LBZTiles_RunAct1SpecialScript:
                 lea     (Anim_Counters+$C).w,a3
                 lea     (AniPLC_LBZSpec).l,a2
                 bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
-word_2721A:
+S3LBZTiles_Act1CyclicDmaWordCounts:
                 dc.w    $140
                 dc.w    0
                 dc.w    $F0
@@ -101,9 +101,9 @@ word_2721A:
 AnimateTiles_LBZ2:
                 lea     (Anim_Counters).w,a3
                 tst.b   $F(a3)
-                bne.s   loc_2729E
+                bne.s   S3LBZTiles_RunAct2WaterOnly
                 subq.b  #1,(a3)
-                bcc.s   loc_27264
+                bcc.s   S3LBZTiles_UpdateAct2CyclicStrip
                 move.b  #3,(a3)
                 moveq   #0,d0
                 move.b  1(a3),d0
@@ -116,14 +116,14 @@ AnimateTiles_LBZ2:
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_27264:
+S3LBZTiles_UpdateAct2CyclicStrip:
                 addq.w  #2,a3
                 moveq   #0,d1
                 move.w  (Events_bg+$12).w,d1
                 sub.w   (Camera_X_pos_BG_copy).w,d1
                 andi.w  #$F,d1
                 cmp.b   1(a3),d1
-                beq.s   loc_27294
+                beq.s   S3LBZTiles_RunAct2WaterAndScripts
                 move.b  d1,1(a3)
                 lsl.w   #6,d1
                 addi.l  #ArtUnc_AniLBZ2_2,d1
@@ -131,14 +131,14 @@ loc_27264:
                 move.w  #$20,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_27294:
+S3LBZTiles_RunAct2WaterAndScripts:
                 addq.w  #2,a3
                 bsr.s   AniLBZ2_UpdateWaterlineTiles
                 addq.w  #4,a3
                 bra.w   S3TileScripts_RunAtCounter
 ; ---------------------------------------------------------------------------
 
-loc_2729E:
+S3LBZTiles_RunAct2WaterOnly:
                 addq.w  #4,a3
 
 ; =============== S U B R O U T I N E =======================================
@@ -147,20 +147,20 @@ AniLBZ2_UpdateWaterlineTiles:
                 moveq   #0,d1
                 move.w  (Events_bg+$10).w,d1
                 cmp.w   (a3),d1
-                beq.w   locret_27382
+                beq.w   S3LBZTiles_WaterlineUnchangedReturn
                 move.w  d1,(a3)
                 tst.w   d1
-                beq.w   loc_27384
-                bpl.w   loc_2731E
+                beq.w   S3LBZTiles_RestoreBothWaterlineSides
+                bpl.w   S3LBZTiles_TryPrepareAboveWaterline
                 addi.w  #$40,d1
-                bcc.w   locret_27382
+                bcc.w   S3LBZTiles_WaterlineUnchangedReturn
                 lsl.w   #6,d1
                 lea     (Chunk_table+$7E00).l,a4
                 lea     (LBZ_WaterlineScroll_Data).l,a5
                 adda.w  d1,a5
                 move.w  #$40-1,d1
 
-loc_272D4:
+S3LBZTiles_BuildBelowWaterline:
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 add.w   d0,d0
@@ -172,31 +172,31 @@ loc_272D4:
                 lea     $100(a4),a4
                 move.l  (a0),(a4)
                 lea     -$FC(a4),a4
-                dbf     d1,loc_272D4
+                dbf     d1,S3LBZTiles_BuildBelowWaterline
                 move.l  #Chunk_table+$7E00,d1
                 move.w  #tiles_to_bytes($2C3),d2
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
                 tst.w   2(a3)
-                beq.s   locret_2731C
+                beq.s   S3LBZTiles_BelowWaterlineReturn
                 move.w  #0,2(a3)
                 bsr.w   AniLBZ2_RestoreUpperBackground
 
-locret_2731C:
+S3LBZTiles_BelowWaterlineReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2731E:
+S3LBZTiles_TryPrepareAboveWaterline:
                 neg.w   d1
                 addi.w  #$40,d1
-                bcc.s   locret_27382
+                bcc.s   S3LBZTiles_WaterlineUnchangedReturn
                 lsl.w   #6,d1
                 lea     (Chunk_table+$7E00).l,a4
                 lea     (LBZ_WaterlineScroll_Data).l,a5
                 adda.w  d1,a5
                 move.w  #$40-1,d1
 
-loc_2733A:
+S3LBZTiles_BuildAboveWaterline:
                 moveq   #0,d0
                 move.b  (a5)+,d0
                 add.w   d0,d0
@@ -208,25 +208,25 @@ loc_2733A:
                 lea     $100(a4),a4
                 move.l  (a0),(a4)
                 lea     -$FC(a4),a4
-                dbf     d1,loc_2733A
+                dbf     d1,S3LBZTiles_BuildAboveWaterline
                 move.l  #Chunk_table+$7E00,d1
                 move.w  #tiles_to_bytes($2D3),d2
                 move.w  #$100,d3
                 jsr     (Add_To_DMA_Queue).l
                 tst.w   2(a3)
-                bmi.s   locret_27380
+                bmi.s   S3LBZTiles_AboveWaterlineReturn
                 move.w  #-1,2(a3)
                 bsr.s   AniLBZ2_RestoreLowerBackground
 
-locret_27380:
+S3LBZTiles_AboveWaterlineReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_27382:
+S3LBZTiles_WaterlineUnchangedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_27384:
+S3LBZTiles_RestoreBothWaterlineSides:
                 move.w  #1,2(a3)
                 bsr.s   AniLBZ2_RestoreUpperBackground
 ; End of function AniLBZ2_UpdateWaterlineTiles
@@ -255,13 +255,13 @@ AniLBZ2_InitWaterlineTiles:
                 lea     (Anim_Counters+4).w,a3
                 move.w  #1,2(a3)
                 move.w  (Events_bg+$10).w,d1
-                beq.s   loc_27384
-                bpl.s   loc_273CC
+                beq.s   S3LBZTiles_RestoreBothWaterlineSides
+                bpl.s   S3LBZTiles_InitAboveWaterline
                 bsr.s   AniLBZ2_RestoreUpperBackground
                 bra.w   AniLBZ2_UpdateWaterlineTiles
 ; ---------------------------------------------------------------------------
 
-loc_273CC:
+S3LBZTiles_InitAboveWaterline:
                 bsr.s   AniLBZ2_RestoreLowerBackground
                 bra.w   AniLBZ2_UpdateWaterlineTiles
 ; End of function AniLBZ2_InitWaterlineTiles

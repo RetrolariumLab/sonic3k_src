@@ -18,30 +18,30 @@ LBZ1_ScreenInit:
                 lea     (HScroll_table+$148).w,a1
                 moveq   #$E-1,d0
 
-loc_53ECC:
+SKLBZ_ActOneClearInitialVerticalOffsets:
                 clr.l   (a1)+                           ; Clear VScroll
-                dbf     d0,loc_53ECC
+                dbf     d0,SKLBZ_ActOneClearInitialVerticalOffsets
                 jsr     LBZ1_EventVScroll(pc)
                 lea     (HScroll_table+$100).w,a1
                 moveq   #$C-1,d0
 
-loc_53EDC:
+SKLBZ1Screen_InitMaskedVScroll:
                 move.w  (a1)+,d1
                 and.w   (Camera_Y_pos_mask).w,d1
                 move.w  d1,(a1)+                        ; Set up tile offsets for VScroll array
-                dbf     d0,loc_53EDC
+                dbf     d0,SKLBZ1Screen_InitMaskedVScroll
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_53F06
+                beq.s   SKLBZ1Screen_ApplyInitialEndingLayout
                 cmpi.w  #$3B60,(Camera_X_pos).w         ; Skip this if Knuckles
-                blo.s   loc_53F0A
+                blo.s   SKLBZ1Screen_InitForeground
                 jsr     (AllocateObject).l
-                bne.s   loc_53F06
+                bne.s   SKLBZ1Screen_ApplyInitialEndingLayout
                 move.l  #Obj_LBZ1InvisibleBarrier,(a1)
 
-loc_53F06:
+SKLBZ1Screen_ApplyInitialEndingLayout:
                 jsr     LBZ1_ModEndingLayout(pc)
 
-loc_53F0A:
+SKLBZ1Screen_InitForeground:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 moveq   #0,d2
@@ -55,16 +55,16 @@ LBZ1_ScreenEvent:
                 add.w   d0,(Camera_Y_pos_copy).w
                 jsr     LBZ1_KnuxLevelSizeAdjust(pc)
                 cmpi.w  #$55,(Events_fg_4).w
-                bne.s   loc_53F6A
+                bne.s   SKLBZ_ActOneUpdateLayoutFromPlayerRegion
                 clr.w   (Events_fg_4).w
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_53F50
+                beq.s   SKLBZ1Screen_PatchKnucklesBossChunks
                 movea.w 8(a3),a1
                 move.b  #$DA,$7D(a1)                    ; Changes the chunk where the boss appears
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53F50:
+SKLBZ1Screen_PatchKnucklesBossChunks:
                 movea.w $4C(a3),a1
                 move.b  $78(a1),d0
                 movea.w $50(a3),a1
@@ -75,35 +75,35 @@ loc_53F50:
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53F6A:
+SKLBZ_ActOneUpdateLayoutFromPlayerRegion:
                 move.w  (Player_1+x_pos).w,d0           ; Normal level operation
                 move.w  (Player_1+y_pos).w,d1
                 move.w  (Events_bg+$00).w,d2
-                bne.s   loc_53F86
+                bne.s   SKLBZ_ActOneTestActiveLayoutExitInterval
                 jsr     (LBZ1_CheckLayoutMod).l
                 tst.w   d3
-                bmi.s   loc_53FE2
+                bmi.s   SKLBZ1Screen_DrawVertDeformedFg
                 jmp     Refresh_PlaneScreenDirect(pc)   ; Refresh screen when a layout mod is made
 ; ---------------------------------------------------------------------------
 
-loc_53F86:
+SKLBZ_ActOneTestActiveLayoutExitInterval:
                 lea     (LBZ1_LayoutModExitRange-4).l,a1  ; If already in a layout
                 adda.w  d2,a1
                 cmp.w   (a1)+,d0
-                blo.s   loc_53F98
+                blo.s   SKLBZ1Screen_RestoreLayoutAndRefresh
                 cmp.w   (a1)+,d0
-                bhi.s   loc_53F98
-                bra.s   loc_53FE2
+                bhi.s   SKLBZ1Screen_RestoreLayoutAndRefresh
+                bra.s   SKLBZ1Screen_DrawVertDeformedFg
 ; ---------------------------------------------------------------------------
 
-loc_53F98:
+SKLBZ1Screen_RestoreLayoutAndRefresh:
                 clr.w   (Events_bg+$00).w
                 lsr.w   #1,d2
-                jsr     loc_53FA6-2(pc,d2.w)
+                jsr     SKLBZ1Screen_LayoutExitBranches-2(pc,d2.w)
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_53FA6:
+SKLBZ1Screen_LayoutExitBranches:
                 bra.s   LBZ1_LayoutExitMod1
 ; ---------------------------------------------------------------------------
                 bra.s   LBZ1_LayoutExitMod2
@@ -137,7 +137,7 @@ LBZ1_LayoutExitMod4:
                 jmp     (LBZ1_DoMod4).l
 ; ---------------------------------------------------------------------------
 
-loc_53FE2:
+SKLBZ1Screen_DrawVertDeformedFg:
                 jsr     LBZ1_EventVScroll(pc)           ; Do the vscroll deformation, if necessary
                 lea     (LBZ1_FGVScrollArray).l,a4
                 lea     (HScroll_table+$100).w,a5
@@ -149,15 +149,15 @@ loc_53FE2:
 
 LBZ1_EventVScroll:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_540AC
-                bpl.s   loc_5401C
+                beq.w   SKLBZ_ActOnePrepareVerticalOffsetExport
+                bpl.s   SKLBZ_ActOnePrepareCollapseIntegration
                 move.w  #1,(Events_fg_4).w
                 move.w  #4,(Special_V_int_routine).w
                 jsr     (AllocateObject).l
-                bne.s   loc_5401C
+                bne.s   SKLBZ_ActOnePrepareCollapseIntegration
                 move.l  #Obj_LBZ1InvisibleBarrier,(a1)
 
-loc_5401C:
+SKLBZ_ActOnePrepareCollapseIntegration:
                 lea     (HScroll_table+$14C).w,a1
                 lea     (LBZ1_CollapseScrollSpeed).l,a5
                 move.l  $2C(a1),d0
@@ -168,7 +168,7 @@ loc_5401C:
                 moveq   #$A,d2
                 moveq   #$A-1,d3
 
-loc_54040:
+SKLBZ_ActOneIntegrateOneCollapseStrip:
                 addq.w  #2,d1
                 andi.w  #$E,d1
                 move.w  (a5,d1.w),d4
@@ -179,26 +179,26 @@ loc_54040:
                 sub.l   d0,d5
                 swap    d5
                 cmpi.w  #-$300,d5
-                bgt.s   loc_54062
+                bgt.s   SKLBZ1Screen_StoreCollapseStrip
                 move.w  #-$300,d5
                 subq.w  #1,d2
 
-loc_54062:
+SKLBZ1Screen_StoreCollapseStrip:
                 swap    d5
                 move.l  d5,(a1)+
-                dbf     d3,loc_54040
+                dbf     d3,SKLBZ_ActOneIntegrateOneCollapseStrip
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_54082
+                bne.s   SKLBZ1Screen_TryFinishCollapse
                 tst.w   d2
-                beq.s   loc_54082
+                beq.s   SKLBZ1Screen_TryFinishCollapse
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
 
-loc_54082:
+SKLBZ1Screen_TryFinishCollapse:
                 tst.w   d2
-                bne.s   loc_540AC
+                bne.s   SKLBZ_ActOnePrepareVerticalOffsetExport
                 clr.w   (Screen_shake_flag).w
                 clr.w   (Events_fg_4).w
                 move.w  #$C,(Special_V_int_routine).w
@@ -206,27 +206,27 @@ loc_54082:
                 lea     (HScroll_table+$148).w,a1
                 moveq   #$E-1,d0
 
-loc_5409E:
+SKLBZ_ActOneClearFinishedCollapseOffsets:
                 clr.l   (a1)+
-                dbf     d0,loc_5409E
+                dbf     d0,SKLBZ_ActOneClearFinishedCollapseOffsets
                 moveq   #signextendB(sfx_Crash),d0
                 jsr     (Play_SFX).l
 
-loc_540AC:
+SKLBZ_ActOnePrepareVerticalOffsetExport:
                 lea     (HScroll_table+$100).w,a1
                 lea     (HScroll_table+$130).w,a4
                 lea     (HScroll_table+$148).w,a5
                 move.w  (Camera_Y_pos_copy).w,d0
                 moveq   #$C-1,d1
 
-loc_540BE:
+SKLBZ_ActOnePublishVerticalScrollColumns:
                 move.w  (a5),d2
                 add.w   d0,d2
                 move.w  d2,(a1)
                 move.w  d2,(a4)+
                 addq.w  #4,a1
                 addq.w  #4,a5
-                dbf     d1,loc_540BE
+                dbf     d1,SKLBZ_ActOnePublishVerticalScrollColumns
                 rts
 ; End of function LBZ1_EventVScroll
 
@@ -239,10 +239,10 @@ LBZ1_ModEndingLayout:
                 subq.w  #4,d0
                 moveq   #$C-1,d1
 
-loc_540DE:
+SKLBZ_ActOneClearEndingLayoutTwelveRows:
                 clr.l   (a1)+
                 adda.w  d0,a1
-                dbf     d1,loc_540DE
+                dbf     d1,SKLBZ_ActOneClearEndingLayoutTwelveRows
                 movea.w (a3),a5
                 lea     $98(a5),a5
                 movea.w $24(a3),a1
@@ -251,11 +251,11 @@ loc_540DE:
                 subq.w  #4,d0
                 moveq   #3-1,d1
 
-loc_540FC:
+SKLBZ_ActOneCopyThreeEndingLayoutRows:
                 move.l  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_540FC
+                dbf     d1,SKLBZ_ActOneCopyThreeEndingLayoutRows
                 st      (Events_bg+$02).w               ; Disable the layout modding for this area (layoutmod3)
                 rts
 ; End of function LBZ1_ModEndingLayout
@@ -264,26 +264,26 @@ loc_540FC:
 
 LBZ1_KnuxLevelSizeAdjust:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   locret_54144                    ; Only do this if playing as Knuckles
+                bne.s   SKLBZ1Screen_KnucklesBoundsReturn  ; Only do this if playing as Knuckles
                 move.w  (Player_1+x_pos).w,d0
                 cmpi.w  #$37C0,d0                       ; Basically this adjusts the top of the screen for Knuckles when he approaches the end of the level
-                blo.s   locret_54144
+                blo.s   SKLBZ1Screen_KnucklesBoundsReturn
                 cmpi.w  #$3800,d0
-                bhi.s   locret_54144
+                bhi.s   SKLBZ1Screen_KnucklesBoundsReturn
                 move.w  (Player_1+y_pos).w,d0
                 cmpi.w  #$600,d0
-                blo.s   locret_54144
+                blo.s   SKLBZ1Screen_KnucklesBoundsReturn
                 cmpi.w  #$680,d0
-                bhi.s   locret_54144
+                bhi.s   SKLBZ1Screen_KnucklesBoundsReturn
                 moveq   #0,d1
                 cmpi.w  #$640,d0
-                bhs.s   loc_54140
+                bhs.s   SKLBZ1Screen_SetKnucklesPassageMinY
                 move.w  #$40C,d1
 
-loc_54140:
+SKLBZ1Screen_SetKnucklesPassageMinY:
                 move.w  d1,(Camera_min_Y_pos).w
 
-locret_54144:
+SKLBZ1Screen_KnucklesBoundsReturn:
                 rts
 ; End of function LBZ1_KnuxLevelSizeAdjust
 
@@ -292,17 +292,17 @@ locret_54144:
 LBZ1_RotateChunks:
                 moveq   #$18-1,d2
 
-loc_54148:
+SKLBZ_ActOnePrepareChunkWordRotationPass:
                 lea     ((RAM_start+$6E00)&$FFFFFF).l,a1
                 lea     -2(a1),a5
                 move.w  (a5),d0
                 moveq   #$3F-1,d1
 
-loc_54156:
+SKLBZ_ActOneRotateChunkWordsBackward:
                 move.w  -(a5),-(a1)
-                dbf     d1,loc_54156
+                dbf     d1,SKLBZ_ActOneRotateChunkWordsBackward
                 move.w  d0,(a5)
-                dbf     d2,loc_54148
+                dbf     d2,SKLBZ_ActOnePrepareChunkWordRotationPass
                 rts
 ; End of function LBZ1_RotateChunks
 
@@ -310,11 +310,11 @@ loc_54156:
 
 Obj_LBZ1InvisibleBarrier:
                 cmpi.w  #$3D80,(Camera_X_pos).w
-                blo.s   loc_54172
+                blo.s   SKLBZ1Screen_ApplyEndingBarrier
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_54172:
+SKLBZ1Screen_ApplyEndingBarrier:
                 move.w  #$3BC0,d4
                 move.w  d4,x_pos(a0)
                 move.w  #$100,y_pos(a0)
@@ -328,7 +328,7 @@ loc_54172:
 
 LBZ1_BackgroundInit:
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_541C6
+                bne.s   SKLBZ1Screen_InitBgDeformation
                 movea.w (a3),a1                         ; Get rid of the Death Egg portion of the BG while playing as Knuckles. For obvious reasons
                 addq.w  #2,a1
                 move.b  #$E4,(a1)+
@@ -340,7 +340,7 @@ LBZ1_BackgroundInit:
                 move.b  #$EE,(a1)+
                 move.b  #$E8,(a1)+
 
-loc_541C6:
+SKLBZ1Screen_InitBgDeformation:
                 jsr     (LBZ1_Deform).l
                 jsr     Reset_TileOffsetPositionEff(pc)
                 move.w  d2,(HScroll_table+$002).w
@@ -366,7 +366,7 @@ LBZ1_BackgroundEvent_Index:
 
 LBZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_54248
+                beq.s   SKLBZ1Screen_DrawBgAndApplyVScroll
                 clr.w   (Events_fg_5).w                 ; Yeah, normal transition nonsense for the level change
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (LBZ2_128x128_Kos).l,a1
@@ -381,7 +381,7 @@ LBZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_54248:
+SKLBZ1Screen_DrawBgAndApplyVScroll:
                 jsr     (LBZ1_Deform).l
                 lea     LBZ1_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
@@ -399,7 +399,7 @@ loc_54248:
 
 LBZ1BGE_DoTransition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_5432E
+                bne.w   SKLBZ1Screen_ApplyTransitionDeform
                 move.w  #$601,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -433,16 +433,16 @@ LBZ1BGE_DoTransition:
                 clr.w   (Events_fg_3).w
                 move.w  #$40,(Events_bg+$10).w
                 cmpi.w  #$540,(Camera_Y_pos).w
-                blo.s   loc_5431C
+                blo.s   SKLBZ1Screen_InitAct2Waterline
                 neg.w   (Events_bg+$10).w
 
-loc_5431C:
+SKLBZ1Screen_InitAct2Waterline:
                 movem.l d7-a0/a2-a3,-(sp)
                 jsr     (AniLBZ2_InitWaterlineTiles).l  ; Start LBZ2 tile animation
                 movem.l (sp)+,d7-a0/a2-a3
                 clr.w   (Events_routine_bg).w
 
-loc_5432E:
+SKLBZ1Screen_ApplyTransitionDeform:
                 lea     LBZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table+$008).w,a5
                 jmp     ApplyDeformation(pc)

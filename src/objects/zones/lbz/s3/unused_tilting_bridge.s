@@ -13,8 +13,8 @@ Obj_LBZUnusedTiltingBridge:
                 move.b  #$80,$42(a0)
                 move.b  #1,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2628C
-                move.l  #loc_262DC,(a1)
+                bne.w   S3LBZUnusedTilt_InitDebugTilt
+                move.l  #S3LBZUnusedTilt_CopyTiltAndPlacePieces,(a1)
                 move.l  #Map_LBZUnusedTiltingBridge,mappings(a1)
                 move.w  #make_art_tile(ArtTile_LBZMisc,2,0),art_tile(a1)
                 ori.b   #4,render_flags(a1)
@@ -28,26 +28,26 @@ Obj_LBZUnusedTiltingBridge:
                 move.w  #6,mainspr_childsprites(a1)
                 move.w  a0,$3C(a1)
 
-loc_2628C:
+S3LBZUnusedTilt_InitDebugTilt:
                 move.b  #$10,$42(a0)
-                move.l  #loc_26298,(a0)
+                move.l  #S3LBZUnusedTilt_TryResetTilt,(a0)
 
-loc_26298:
+S3LBZUnusedTilt_TryResetTilt:
                 btst    #button_B,(Ctrl_2_held).w
-                beq.s   loc_262A6
+                beq.s   S3LBZUnusedTilt_TryIncreaseTilt
                 move.b  #0,$42(a0)
 
-loc_262A6:
+S3LBZUnusedTilt_TryIncreaseTilt:
                 btst    #button_C,(Ctrl_2_held).w
-                beq.s   loc_262B4
+                beq.s   S3LBZUnusedTilt_TryDecreaseTilt
                 addi.b  #1,$42(a0)
 
-loc_262B4:
+S3LBZUnusedTilt_TryDecreaseTilt:
                 btst    #button_A,(Ctrl_2_held).w
-                beq.s   loc_262C2
+                beq.s   S3LBZUnusedTilt_UpdateRidersAndDraw
                 subi.b  #1,$42(a0)
 
-loc_262C2:
+S3LBZUnusedTilt_UpdateRidersAndDraw:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 moveq   #8,d2
@@ -58,7 +58,7 @@ loc_262C2:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_262DC:
+S3LBZUnusedTilt_CopyTiltAndPlacePieces:
                 movea.w $3C(a0),a1
                 move.b  $42(a1),$42(a0)
                 bsr.w   PositionLbzUnusedTiltingBridgePieces
@@ -85,7 +85,7 @@ PositionLbzUnusedTiltingBridgePieces:
                 lea     sub2_x_pos(a0),a2
                 moveq   #3-1,d6
 
-loc_26320:
+S3LBZUnusedTilt_PlacePositivePieces:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -97,7 +97,7 @@ loc_26320:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_26320
+                dbf     d6,S3LBZUnusedTilt_PlacePositivePieces
                 movem.l (sp)+,d0-d5
                 neg.l   d4
                 neg.l   d5
@@ -105,7 +105,7 @@ loc_26320:
                 sub.l   d1,d5
                 moveq   #3-1,d6
 
-loc_2634C:
+S3LBZUnusedTilt_PlaceNegativePieces:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -117,7 +117,7 @@ loc_2634C:
                 sub.l   d0,d4
                 sub.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_2634C
+                dbf     d6,S3LBZUnusedTilt_PlaceNegativePieces
                 rts
 ; End of function PositionLbzUnusedTiltingBridgePieces
 
@@ -141,34 +141,34 @@ CollidePlayersWithLbzUnusedTiltingBridge:
 
 CollidePlayerWithLbzUnusedTiltingBridge:
                 btst    d6,status(a0)
-                beq.w   loc_26448
+                beq.w   S3LBZUnusedTilt_TryCaptureDescending
                 move.w  ground_vel(a1),d0
                 move.b  $42(a0),d4
                 addi.b  #$40,d4
-                bpl.s   loc_263A2
+                bpl.s   S3LBZUnusedTilt_UpdateAndCheckRider
                 neg.w   d0
 
-loc_263A2:
+S3LBZUnusedTilt_UpdateAndCheckRider:
                 add.w   d0,(a2)
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_263D0
+                bne.s   S3LBZUnusedTilt_DetachRider
                 move.b  $42(a0),d0
                 jsr     (GetSineCosine).l
                 tst.w   d1
-                bmi.s   loc_263BC
+                bmi.s   S3LBZUnusedTilt_CheckProjectedWidth
                 neg.w   d1
 
-loc_263BC:
+S3LBZUnusedTilt_CheckProjectedWidth:
                 asr.w   #2,d1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmp.w   d1,d0
-                blt.s   loc_263D0
+                blt.s   S3LBZUnusedTilt_DetachRider
                 neg.w   d1
                 cmp.w   d1,d0
-                blt.s   loc_263E4
+                blt.s   S3LBZUnusedTilt_PlaceAttachedRider
 
-loc_263D0:
+S3LBZUnusedTilt_DetachRider:
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
                 bclr    d6,status(a0)
@@ -176,7 +176,7 @@ loc_263D0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_263E4:
+S3LBZUnusedTilt_PlaceAttachedRider:
                 bsr.w   ProjectPlayerOnLbzUnusedTiltingBridge
                 moveq   #0,d4
                 rts
@@ -200,10 +200,10 @@ ProjectPlayerOnLbzUnusedTiltingBridge:
                 move.b  $42(a0),d0
                 move.b  d0,d1
                 addi.b  #$40,d1
-                bpl.s   loc_2641E
+                bpl.s   S3LBZUnusedTilt_SetAngleAndRadiusOffset
                 addi.b  #$80,d0
 
-loc_2641E:
+S3LBZUnusedTilt_SetAngleAndRadiusOffset:
                 move.b  d0,angle(a1)
                 moveq   #0,d1
                 move.b  y_radius(a1),d1
@@ -223,26 +223,26 @@ loc_2641E:
 
 ; ---------------------------------------------------------------------------
 
-loc_26448:
+S3LBZUnusedTilt_TryCaptureDescending:
                 tst.w   y_vel(a1)
-                bmi.w   locret_264DE
+                bmi.w   S3LBZUnusedTilt_LandingReturn
                 move.b  $42(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d0,d4
                 move.w  d1,d2
                 tst.w   d1
-                bmi.s   loc_26464
+                bmi.s   S3LBZUnusedTilt_CalcTravelAndTestLand
                 neg.w   d1
 
-loc_26464:
+S3LBZUnusedTilt_CalcTravelAndTestLand:
                 asr.w   #2,d1
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 cmp.w   d1,d0
-                blt.s   locret_264DE
+                blt.s   S3LBZUnusedTilt_LandingReturn
                 neg.w   d1
                 cmp.w   d1,d0
-                bge.s   locret_264DE
+                bge.s   S3LBZUnusedTilt_LandingReturn
                 swap    d0
                 divs.w  d2,d0
                 move.w  d0,(a2)
@@ -259,20 +259,20 @@ loc_26464:
                 add.w   d2,d1
                 addq.w  #4,d1
                 sub.w   d1,d0
-                bhi.s   locret_264DE
+                bhi.s   S3LBZUnusedTilt_LandingReturn
                 cmpi.w  #-$10,d0
-                blo.s   locret_264DE
+                blo.s   S3LBZUnusedTilt_LandingReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_264DE
+                bmi.s   S3LBZUnusedTilt_LandingReturn
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_264DE
+                bhs.s   S3LBZUnusedTilt_LandingReturn
                 move.b  $42(a0),d0
                 move.b  d0,d1
                 addi.b  #$40,d1
-                bpl.s   loc_264C4
+                bpl.s   S3LBZUnusedTilt_CorrectTravelAndAttach
                 addi.b  #$80,d0
 
-loc_264C4:
+S3LBZUnusedTilt_CorrectTravelAndAttach:
                 jsr     (GetSineCosine).l
                 muls.w  #$1B00,d0
                 swap    d0
@@ -282,7 +282,7 @@ loc_264C4:
                 jmp     (RideObject_SetRide).l
 ; ---------------------------------------------------------------------------
 
-locret_264DE:
+S3LBZUnusedTilt_LandingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_LBZUnusedTiltingBridge:

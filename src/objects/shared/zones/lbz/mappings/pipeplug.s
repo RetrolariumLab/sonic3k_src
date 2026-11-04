@@ -1,15 +1,15 @@
 ; Data owner: objects/shared/zones/lbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LBZPipePlug_:
-                dc.w    Frame_2268C6-Map_LBZPipePlug_
-                dc.w    Frame_2268CE-Map_LBZPipePlug_
-                dc.w    Frame_2268D6-Map_LBZPipePlug_
-                dc.w    Frame_2268DE-Map_LBZPipePlug_
-                dc.w    Frame_2268E6-Map_LBZPipePlug_
-                dc.w    Frame_2268EE-Map_LBZPipePlug_
-                dc.w    Frame_2268F6-Map_LBZPipePlug_
-                dc.w    Frame_226864-Map_LBZPipePlug_
-Frame_226864:   dc.w    $10
+                dc.w    LBZPipeplugS3Data_MapSlot00-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot01-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot02-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot03-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot04-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot05-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot06-Map_LBZPipePlug_
+                dc.w    LBZPipeplugS3Data_MapSlot07-Map_LBZPipePlug_
+LBZPipeplugS3Data_MapSlot07:    dc.w    $10
                 dc.b    $E0,   5,   0,   4, $FF, $F0
                 dc.b    $E0,   5,   8,   4,   0,   0
                 dc.b    $10,   5, $10,   4, $FF, $F0
@@ -26,17 +26,17 @@ Frame_226864:   dc.w    $10
                 dc.b    0,   1,   0,  $E, $FF, $FF
                 dc.b    0,   1,   8,  $A,   0,   4
                 dc.b    0,   1,   8,   8,   0,   7
-Frame_2268C6:   dc.w    1
+LBZPipeplugS3Data_MapSlot00:    dc.w    1
                 dc.b    0,   1,   0,   8,   0,   0
-Frame_2268CE:   dc.w    1
+LBZPipeplugS3Data_MapSlot01:    dc.w    1
                 dc.b    0,   1,   0,  $A,   0,   0
-Frame_2268D6:   dc.w    1
+LBZPipeplugS3Data_MapSlot02:    dc.w    1
                 dc.b    0,   1,   0,  $C,   0,   0
-Frame_2268DE:   dc.w    1
+LBZPipeplugS3Data_MapSlot03:    dc.w    1
                 dc.b    0,   1,   0,  $E,   0,   0
-Frame_2268E6:   dc.w    1
+LBZPipeplugS3Data_MapSlot04:    dc.w    1
                 dc.b    0,   1,   8,  $C,   0,   0
-Frame_2268EE:   dc.w    1
+LBZPipeplugS3Data_MapSlot05:    dc.w    1
                 dc.b    0,   1,   8,  $A,   0,   0
-Frame_2268F6:   dc.w    1
+LBZPipeplugS3Data_MapSlot06:    dc.w    1
                 dc.b    0,   1,   8,   8,   0,   0

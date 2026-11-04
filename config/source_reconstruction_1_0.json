@@ -1107,9 +1107,15 @@
       "commits": ["cb8d092905bf149c218fb83969cc5f1b8ca0fc78"]
     },
     {
-      "id": "current-shorten-28-zone-icz",
+      "id": "change-a3b7efecefff",
       "kind": "source_or_tooling",
       "summary": "Apply 1017 reviewed short labels for icz.",
+      "commits": ["a3b7efeceffff617e386ba3b8d16b7d95bd69c00"]
+    },
+    {
+      "id": "current-shorten-29-zone-lbz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 1047 reviewed short labels for lbz.",
       "commits": ["release-commit"]
     }
   ],

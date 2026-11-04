@@ -12,57 +12,57 @@ Obj_Orbinaut:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Orbinaut_Index:
-                dc.w    loc_59DCE-Orbinaut_Index
-                dc.w    loc_59DE0-Orbinaut_Index
+                dc.w    S3Orbinaut_InitAndSpawnOrbs-Orbinaut_Index
+                dc.w    S3Orbinaut_FaceP1AndPickSpeed-Orbinaut_Index
 ; ---------------------------------------------------------------------------
 
-loc_59DCE:
+S3Orbinaut_InitAndSpawnOrbs:
                 lea     ObjDat_Orbinaut(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     ChildObjDat_59E80(pc),a2
+                lea     S3Orbinaut_OrbChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_59DE0:
+S3Orbinaut_FaceP1AndPickSpeed:
                 lea     (Player_1).w,a1
                 jsr     Find_OtherObject(pc)
                 bclr    #0,render_flags(a0)
                 move.w  #-$80,d1
                 tst.w   d0
-                beq.s   loc_59DFE
+                beq.s   S3Orbinaut_MoveWithGroundedP1
                 bset    #0,render_flags(a0)
                 neg.w   d1
 
-loc_59DFE:
+S3Orbinaut_MoveWithGroundedP1:
                 move.w  d1,x_vel(a0)
                 bsr.w   TestPrimaryPlayerGroundMotionForOrbinaut
-                beq.w   locret_59E6C
+                beq.w   S3Orbinaut_GroundMotionReturn
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_59E10:
-                lea     word_59E7A(pc),a1
+S3Orbinaut_InitOrbAndPhase:
+                lea     OrbinautS3_Orb_PartialAttributePrefix(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_59E2C,(a0)
+                move.l  #S3Orbinaut_TryAdvanceOrbPhase,(a0)
                 move.b  subtype(a0),d0
                 lsl.b   #5,d0
                 move.b  d0,$3C(a0)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_59E2C:
+S3Orbinaut_TryAdvanceOrbPhase:
                 movea.w parent3(a0),a1
                 bsr.w   TestPrimaryPlayerGroundMotionForOrbinaut
-                beq.s   loc_59E46
+                beq.s   S3Orbinaut_PlaceAndDrawOrb
                 moveq   #8,d0
                 btst    #0,render_flags(a1)
-                beq.s   loc_59E42
+                beq.s   OrbinautS3_Orb_AddSignedEightPhaseStep
                 moveq   #-8,d0
 
-loc_59E42:
+OrbinautS3_Orb_AddSignedEightPhaseStep:
                 add.b   d0,$3C(a0)
 
-loc_59E46:
+S3Orbinaut_PlaceAndDrawOrb:
                 moveq   #4,d2
                 jsr     MoveSprite_CircularSimple(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
@@ -72,18 +72,18 @@ loc_59E46:
 TestPrimaryPlayerGroundMotionForOrbinaut:
                 lea     (Player_1).w,a2
                 btst    #Status_InAir,status(a2)
-                bne.s   loc_59E68
+                bne.s   S3Orbinaut_NoGroundMotion
                 tst.w   x_vel(a2)
-                bne.s   locret_59E6C
+                bne.s   S3Orbinaut_GroundMotionReturn
                 tst.w   y_vel(a2)
-                bne.s   locret_59E6C
+                bne.s   S3Orbinaut_GroundMotionReturn
 
-loc_59E68:
+S3Orbinaut_NoGroundMotion:
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_59E6C:
+S3Orbinaut_GroundMotionReturn:
                 rts
 ; End of function TestPrimaryPlayerGroundMotionForOrbinaut
 
@@ -93,18 +93,18 @@ ObjDat_Orbinaut:
                 dc.w    make_art_tile(ArtTile_Orbinaut,1,0)
                 dc.w    $280
                 dc.b    8,   8,   0,  $B
-word_59E7A:
+OrbinautS3_Orb_PartialAttributePrefix:
                 dc.w    $280
                 dc.b    8,   8,   1, $8B
-ChildObjDat_59E80:
+S3Orbinaut_OrbChildren:
                 dc.w    4-1
-                dc.l    loc_59E10
+                dc.l    S3Orbinaut_InitOrbAndPhase
                 dc.b    0, $10
-                dc.l    loc_59E10
+                dc.l    S3Orbinaut_InitOrbAndPhase
                 dc.b    $10,   0
-                dc.l    loc_59E10
+                dc.l    S3Orbinaut_InitOrbAndPhase
                 dc.b    0,-$10
-                dc.l    loc_59E10
+                dc.l    S3Orbinaut_InitOrbAndPhase
                 dc.b    -$10,   0
 
 ; unused

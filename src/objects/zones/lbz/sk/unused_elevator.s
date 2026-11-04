@@ -2,7 +2,7 @@
 ; Responsibility: Unused Launch Base elevator initialization, movement and player riding
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_25AF0:
+SKLBZUnusedLift_SubtypeHalfTravel:
                 dc.b    $10, $18, $20, $38, $40, $68
                 even
 ; ---------------------------------------------------------------------------
@@ -20,25 +20,25 @@ Obj_LBZUnusedElevator:
                 move.b  subtype(a0),d0
                 lsr.w   #4,d0
                 andi.w  #$F,d0
-                move.b  byte_25AF0(pc,d0.w),d0
+                move.b  SKLBZUnusedLift_SubtypeHalfTravel(pc,d0.w),d0
                 lsl.w   #3,d0
                 move.w  d0,$38(a0)
                 sub.w   d0,y_pos(a0)
                 btst    #0,status(a0)
-                beq.s   loc_25B56
+                beq.s   SKLBZUnusedLift_StartElevatorStates
                 add.w   d0,d0
                 add.w   d0,y_pos(a0)
                 move.b  #1,$34(a0)
 
-loc_25B56:
-                move.l  #loc_25B5C,(a0)
+SKLBZUnusedLift_StartElevatorStates:
+                move.l  #SKLBZUnusedLift_UpdateElevatorAndSolid,(a0)
 
-loc_25B5C:
+SKLBZUnusedLift_UpdateElevatorAndSolid:
                 move.w  $36(a0),d0
-                move.w  off_25B92(pc,d0.w),d1
-                jsr     off_25B92(pc,d1.w)
+                move.w  SKLBZUnusedLift_ElevatorStateTable(pc,d0.w),d1
+                jsr     SKLBZUnusedLift_ElevatorStateTable(pc,d1.w)
                 tst.b   render_flags(a0)
-                bpl.s   loc_25B8C
+                bpl.s   SKLBZUnusedLift_DrawElevator
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -49,77 +49,77 @@ loc_25B5C:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
 
-loc_25B8C:
+SKLBZUnusedLift_DrawElevator:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-off_25B92:
-                dc.w    loc_25B9A-off_25B92
-                dc.w    loc_25BB8-off_25B92
-                dc.w    loc_25BE4-off_25B92
-                dc.w    loc_25C02-off_25B92
+SKLBZUnusedLift_ElevatorStateTable:
+                dc.w    SKLBZUnusedLift_TryBeginOutboundTravel-SKLBZUnusedLift_ElevatorStateTable
+                dc.w    SKLBZUnusedLift_StepOutboundTravel-SKLBZUnusedLift_ElevatorStateTable
+                dc.w    SKLBZUnusedLift_TryBeginReturnTravel-SKLBZUnusedLift_ElevatorStateTable
+                dc.w    SKLBZUnusedLift_StepReturnTravel-SKLBZUnusedLift_ElevatorStateTable
 ; ---------------------------------------------------------------------------
 
-loc_25B9A:
+SKLBZUnusedLift_TryBeginOutboundTravel:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d0.w)
-                beq.s   locret_25BB6
+                beq.s   SKLBZUnusedLift_OutboundGateReturn
                 move.w  #$8000,objoff_16(a0)
                 addq.w  #2,$36(a0)
 
-locret_25BB6:
+SKLBZUnusedLift_OutboundGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25BB8:
+SKLBZUnusedLift_StepOutboundTravel:
                 bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
-                bne.s   locret_25BE2
+                bne.s   SKLBZUnusedLift_OutboundStepReturn
                 addq.w  #2,$36(a0)
                 move.w  d0,y_pos(a0)
                 move.w  $38(a0),d0
                 sub.w   d0,y_pos(a0)
                 btst    #0,status(a0)
-                bne.s   locret_25BE2
+                bne.s   SKLBZUnusedLift_OutboundStepReturn
                 add.w   d0,d0
                 add.w   d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_25BE2:
+SKLBZUnusedLift_OutboundStepReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25BE4:
+SKLBZUnusedLift_TryBeginReturnTravel:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d0.w)
-                bne.s   locret_25C00
+                bne.s   SKLBZUnusedLift_ReturnGateReturn
                 move.w  #$8000,objoff_16(a0)
                 addq.w  #2,$36(a0)
 
-locret_25C00:
+SKLBZUnusedLift_ReturnGateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25C02:
+SKLBZUnusedLift_StepReturnTravel:
                 bsr.w   StepLbzUnusedElevatorMidpointMotion
                 tst.w   y_vel(a0)
-                bne.s   locret_25C2C
+                bne.s   SKLBZUnusedLift_ReturnStepDone
                 clr.w   $36(a0)
                 move.w  d0,y_pos(a0)
                 move.w  $38(a0),d0
                 sub.w   d0,y_pos(a0)
                 btst    #0,status(a0)
-                beq.s   locret_25C2C
+                beq.s   SKLBZUnusedLift_ReturnStepDone
                 add.w   d0,d0
                 add.w   d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-locret_25C2C:
+SKLBZUnusedLift_ReturnStepDone:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -128,7 +128,7 @@ StepLbzUnusedElevatorMidpointMotion:
                 move.w  y_pos(a0),d2
                 moveq   #8,d1
                 tst.b   $34(a0)
-                bne.s   loc_25C7C
+                bne.s   SKLBZUnusedLift_StepNegativeTravel
                 add.w   d1,y_vel(a0)
                 move.w  y_vel(a0),d0
                 ext.l   d0
@@ -136,25 +136,26 @@ StepLbzUnusedElevatorMidpointMotion:
                 add.l   d0,y_pos(a0)
                 move.w  $32(a0),d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   locret_25CBC
-                beq.s   loc_25C6C
+                bhi.s   SKLBZUnusedLift_MidpointStepReturn
+                beq.s   SKLBZUnusedLift_CrossPositiveMidpoint
                 sub.w   d0,d2
                 neg.w   d2
                 add.w   d0,d2
                 move.w  d2,y_pos(a0)
                 neg.w   $16(a0)
                 move.b  #1,$34(a0)
-                bra.s   locret_25CBC
+                bra.s   SKLBZUnusedLift_MidpointStepReturn
 ; ---------------------------------------------------------------------------
 
-loc_25C6C:
+; At the exact midpoint, negate the fractional Y word and apply an extra acceleration step
+SKLBZUnusedLift_CrossPositiveMidpoint:
                 neg.w   $16(a0)
                 add.w   d1,y_vel(a0)
                 move.b  #1,$34(a0)
-                bra.s   locret_25CBC
+                bra.s   SKLBZUnusedLift_MidpointStepReturn
 ; ---------------------------------------------------------------------------
 
-loc_25C7C:
+SKLBZUnusedLift_StepNegativeTravel:
                 sub.w   d1,y_vel(a0)
                 move.w  y_vel(a0),d0
                 ext.l   d0
@@ -162,22 +163,23 @@ loc_25C7C:
                 add.l   d0,y_pos(a0)
                 move.w  $32(a0),d0
                 cmp.w   y_pos(a0),d0
-                blo.s   locret_25CBC
-                beq.s   loc_25CAE
+                blo.s   SKLBZUnusedLift_MidpointStepReturn
+                beq.s   SKLBZUnusedLift_CrossNegativeMidpoint
                 sub.w   d0,d2
                 neg.w   d2
                 add.w   d0,d2
                 move.w  d2,y_pos(a0)
                 neg.w   $16(a0)
                 move.b  #0,$34(a0)
-                bra.s   locret_25CBC
+                bra.s   SKLBZUnusedLift_MidpointStepReturn
 ; ---------------------------------------------------------------------------
 
-loc_25CAE:
+; At the exact midpoint, negate the fractional Y word and subtract another acceleration step
+SKLBZUnusedLift_CrossNegativeMidpoint:
                 neg.w   $16(a0)
                 sub.w   d1,y_vel(a0)
                 move.b  #0,$34(a0)
 
-locret_25CBC:
+SKLBZUnusedLift_MidpointStepReturn:
                 rts
 ; End of function StepLbzUnusedElevatorMidpointMotion

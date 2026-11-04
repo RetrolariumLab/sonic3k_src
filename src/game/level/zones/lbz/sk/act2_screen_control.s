@@ -30,15 +30,15 @@ LBZ2_ScreenEvent_Index:
 
 LBZ2SE_FromTransition:
                 cmpi.w  #3,(Player_mode).w              ; Only run when going from transition, of course
-                beq.s   loc_543C2                       ; Knuckles adjusts the layout immediately
+                beq.s   SKLBZ2Screen_ApplyKnucklesLayout  ; Knuckles adjusts the layout immediately
                 cmpi.w  #$60A,(Player_1+x_pos).w
-                blo.s   loc_5439E
+                blo.s   SKLBZ2Screen_DrawBeforeTransition
                 bsr.s   LBZ2_LayoutMod
                 addq.w  #4,(Events_routine_fg).w
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5439E:
+SKLBZ2Screen_DrawBeforeTransition:
                 jmp     DrawTilesAsYouMove(pc)
 
 ; =============== S U B R O U T I N E =======================================
@@ -52,18 +52,18 @@ LBZ2_LayoutMod:
                 subq.w  #6,d0
                 moveq   #6-1,d1
 
-loc_543B4:
+SKLBZ2Screen_CopyTransitionLayoutRow:
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_543B4
+                dbf     d1,SKLBZ2Screen_CopyTransitionLayoutRow
                 rts
 ; End of function LBZ2_LayoutMod
 
 ; ---------------------------------------------------------------------------
 
-loc_543C2:
+SKLBZ2Screen_ApplyKnucklesLayout:
                 bsr.s   LBZ2_LayoutMod
                 addq.w  #4,(Events_routine_fg).w
 
@@ -102,15 +102,15 @@ LBZ2_BackgroundInit:
                 jsr     Refresh_PlaneFull(pc)
                 moveq   #$40,d0
                 cmp.w   (Events_bg+$10).w,d0
-                blt.s   loc_54432
+                blt.s   SKLBZ2Screen_SetWaterRestLevel
                 neg.w   d0
                 cmp.w   (Events_bg+$10).w,d0
-                bgt.s   loc_54436
+                bgt.s   SKLBZ2Screen_ApplyInitialBgDeform
 
-loc_54432:
+SKLBZ2Screen_SetWaterRestLevel:
                 move.w  d0,(Events_bg+$10).w            ; Keep art reloading in range
 
-loc_54436:
+SKLBZ2Screen_ApplyInitialBgDeform:
                 lea     (LBZ2_BGDeformArray).l,a4
                 lea     (HScroll_table).w,a5
                 jmp     ApplyDeformation(pc)
@@ -143,27 +143,27 @@ LBZ2BGE_FromTransition:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_54488
+                bra.s   SKLBZ_ActTwoRefreshDelayedBackgroundRows
 ; ---------------------------------------------------------------------------
 
 LBZ2BGE_Refresh:
                 jsr     LBZ2_Deform(pc)
 
-loc_54488:
+SKLBZ_ActTwoRefreshDelayedBackgroundRows:
                 moveq   #0,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.s   loc_544A4
+                bpl.s   SKLBZ2Screen_DrawBgAndShake
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_544A4
+                bra.s   SKLBZ2Screen_DrawBgAndShake
 ; ---------------------------------------------------------------------------
 
 LBZ2BGE_Normal:
                 tst.w   (Events_fg_5).w
-                bne.s   loc_544C6                       ; Wait for flag
+                bne.s   SKLBZ_ActTwoBeginDeathEggBackgroundPhase  ; Wait for flag
                 jsr     LBZ2_Deform(pc)
 
-loc_544A4:
+SKLBZ2Screen_DrawBgAndShake:
                 lea     (Camera_Y_pos_BG_copy).w,a6
                 lea     (Camera_Y_pos_BG_rounded).w,a5
                 moveq   #0,d1
@@ -175,7 +175,7 @@ loc_544A4:
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
-loc_544C6:
+SKLBZ_ActTwoBeginDeathEggBackgroundPhase:
                 clr.w   (Events_fg_5).w                 ; Oh boy, NOW the fun begins
                 move.w  8(a3),(a3)
                 move.w  $C(a3),4(a3)                    ; Modify the background slightly
@@ -193,33 +193,33 @@ loc_544C6:
 
 LBZ2BGE_DeathEgg:
                 tst.w   (Event_LBZ2_DeathEgg).w
-                beq.s   loc_5452E
+                beq.s   SKLBZ2Screen_WaitForPlatformDescent
                 tst.w   (Screen_shake_flag).w
-                bne.s   loc_5451A                       ; Branch if shaking
+                bne.s   SKLBZ2Screen_TryPlayDeathEggRumble  ; Branch if shaking
                 clr.w   (Event_LBZ2_DeathEgg).w
-                bra.s   loc_5452E
+                bra.s   SKLBZ2Screen_WaitForPlatformDescent
 ; ---------------------------------------------------------------------------
 
-loc_5451A:
+SKLBZ2Screen_TryPlayDeathEggRumble:
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_5452E
+                bne.s   SKLBZ2Screen_WaitForPlatformDescent
                 moveq   #signextendB(sfx_DeathEggRiseLoud),d0  ; Play Death Egg rumbling sound
                 jsr     (Play_SFX).l
 
-loc_5452E:
+SKLBZ2Screen_WaitForPlatformDescent:
                 tst.w   (Events_fg_5).w
-                beq.w   loc_545DE
+                beq.w   SKLBZ2Screen_DrawDeathEggBgAndShake
                 jsr     LBZ2_EndFallingAccel(pc)        ; When signaled, start the falling of the death egg platform
                 tst.w   (_unkEE9C).w
-                bpl.w   loc_545DE
+                bpl.w   SKLBZ2Screen_DrawDeathEggBgAndShake
                 clr.w   (Events_fg_5).w                 ; When movement starts going negative
                 move.w  #$1B,(Draw_delayed_rowcount).w
                 move.w  #$10,(Special_V_int_routine).w  ; Do the first window copy
                 clr.b   (Water_flag).w                  ; No more water evidently
                 addq.w  #4,(Events_routine_bg).w
-                bra.w   loc_545DE
+                bra.w   SKLBZ2Screen_DrawDeathEggBgAndShake
 ; ---------------------------------------------------------------------------
 
 LBZ2BGE_PlatformDetach:
@@ -227,10 +227,10 @@ LBZ2BGE_PlatformDetach:
                 bne.s   AdvanceLbz2DeathEggFallingBackground  ; Wait for window copy to finish
                 move.w  (Level_frame_counter).w,d0
                 andi.w  #3,d0
-                bne.s   loc_545AA
+                bne.s   SKLBZ2Screen_PublishDetachScroll
                 move.w  (Events_bg+$16).w,d0            ; Only ever four frames
                 cmpi.w  #$28,d0
-                blo.s   loc_545A4
+                blo.s   SKLBZ2Screen_StepPlatformDetachScroll
                 clr.w   (Events_bg+$16).w               ; When scroll A has scrolled off screen
                 move.w  #$18,(Special_V_int_routine).w  ; Use the next Special VInt function to restore the entire platform
                 movea.w $2A(a3),a1
@@ -246,11 +246,12 @@ LBZ2BGE_PlatformDetach:
                 bra.s   LBZ2BGE_Falling
 ; ---------------------------------------------------------------------------
 
-loc_545A4:
+SKLBZ2Screen_StepPlatformDetachScroll:
                 addq.w  #1,d0
                 move.w  d0,(Events_bg+$16).w            ; Increment value
 
-loc_545AA:
+; Discard the event dispatcher's return address after writing the detached platform scroll
+SKLBZ2Screen_PublishDetachScroll:
                 bsr.s   AdvanceLbz2DeathEggFallingBackground
                 move.w  (Camera_Y_pos_copy).w,(V_scroll_value).w
                 move.w  (Camera_Y_pos_BG_copy).w,(V_scroll_value_BG).w
@@ -273,7 +274,7 @@ LBZ2BGE_Falling:
 AdvanceLbz2DeathEggFallingBackground:
                 jsr     LBZ2_EndFallingAccel(pc)
 
-loc_545DE:
+SKLBZ2Screen_DrawDeathEggBgAndShake:
                 jsr     LBZ2_DeathEggMoveScreen(pc)
                 jsr     LBZ2_DeathEggDeform(pc)
                 lea     (Camera_Y_pos_BG_copy).w,a6

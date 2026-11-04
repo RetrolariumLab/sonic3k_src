@@ -12,223 +12,223 @@ Obj_Ribot:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Ribot_Index:
-                dc.w    loc_8C2FE-Ribot_Index
-                dc.w    loc_8C34E-Ribot_Index
+                dc.w    SKRibot_InitAndSelectLimbs-Ribot_Index
+                dc.w    SKRibot_AlternateActiveLimb-Ribot_Index
 ; ---------------------------------------------------------------------------
 
-loc_8C2FE:
+SKRibot_InitAndSelectLimbs:
                 lea     ObjDat_Ribot(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #2,$38(a0)
                 move.b  subtype(a0),d0
                 subq.b  #2,d0
-                beq.s   loc_8C32A
-                bpl.s   loc_8C33C
-                move.l  #byte_8C626,$30(a0)
-                lea     ChildObjDat_8C5E2(pc),a2
+                beq.s   SKRibot_SpawnHorizontalLimbs
+                bpl.s   SKRibot_SpawnUpperLimb
+                move.l  #RibotSK_Root_UniformFrameZeroOneTwoLoop,$30(a0)
+                lea     SKRibot_DownwardLimbChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8C32A:
-                move.l  #byte_8C626,$30(a0)
-                lea     ChildObjDat_8C5F0(pc),a2
+SKRibot_SpawnHorizontalLimbs:
+                move.l  #RibotSK_Root_UniformFrameZeroOneTwoLoop,$30(a0)
+                lea     RibotSK_Root_TwoLateralNormalLimbRecords(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8C33C:
-                move.l  #byte_8C62C,$30(a0)
-                lea     ChildObjDat_8C5FE(pc),a2
+SKRibot_SpawnUpperLimb:
+                move.l  #SKRibot_UpperLimbBodyAnim,$30(a0)
+                lea     RibotSK_Root_OneUpperNormalLimbRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_8C34E:
+SKRibot_AlternateActiveLimb:
                 bclr    #2,$38(a0)
-                beq.s   loc_8C36C
+                beq.s   RibotSK_Root_DecodeBodyUniformLoop
                 andi.b  #$FC,$38(a0)
                 moveq   #0,d0
                 bchg    #3,$38(a0)
-                beq.s   loc_8C368
+                beq.s   SKRibot_ActivateSelectedLimb
                 moveq   #1,d0
 
-loc_8C368:
+SKRibot_ActivateSelectedLimb:
                 bset    d0,$38(a0)
 
-loc_8C36C:
+RibotSK_Root_DecodeBodyUniformLoop:
                 jmp     Animate_Raw(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C370:
+SKRibot_UpdateLimbAndDraw:
                 moveq   #0,d2
                 movea.w parent3(a0),a1
                 move.b  subtype(a1),d2
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_8C38C(pc,d0.w),d1
-                jsr     off_8C38C(pc,d1.w)
+                move.w  RibotSK_Limb_FiveRelativeStateOffsets(pc,d0.w),d1
+                jsr     RibotSK_Limb_FiveRelativeStateOffsets(pc,d1.w)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_8C38C:
-                dc.w    loc_8C396-off_8C38C
-                dc.w    loc_8C3BC-off_8C38C
-                dc.w    loc_8C428-off_8C38C
-                dc.w    loc_8C48E-off_8C38C
-                dc.w    loc_8C4BA-off_8C38C
+RibotSK_Limb_FiveRelativeStateOffsets:
+                dc.w    SKRibot_InitLimbAndSpawnLinks-RibotSK_Limb_FiveRelativeStateOffsets
+                dc.w    SKRibot_DispatchIdleLimb-RibotSK_Limb_FiveRelativeStateOffsets
+                dc.w    SKRibot_DispatchActiveLimb-RibotSK_Limb_FiveRelativeStateOffsets
+                dc.w    SKRibot_DispatchPausedLimb-RibotSK_Limb_FiveRelativeStateOffsets
+                dc.w    SKRibot_DispatchReturningLimb-RibotSK_Limb_FiveRelativeStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8C396:
-                lea     word_8C5D6(pc),a1
+SKRibot_InitLimbAndSpawnLinks:
+                lea     SKRibot_LimbAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.b  #8,y_radius(a0)
                 move.b  #-$10,child_dy(a0)
                 move.w  x_pos(a0),$3E(a0)
                 move.w  y_pos(a0),$40(a0)
-                bra.w   loc_8C594
+                bra.w   SKRibot_SelectLimbLinkRecord
 ; ---------------------------------------------------------------------------
 
-loc_8C3BC:
-                move.w  off_8C3C4(pc,d2.w),d3
-                jmp     off_8C3C4(pc,d3.w)
+SKRibot_DispatchIdleLimb:
+                move.w  SKRibot_IdleLimbTable(pc,d2.w),d3
+                jmp     SKRibot_IdleLimbTable(pc,d3.w)
 ; ---------------------------------------------------------------------------
-off_8C3C4:
-                dc.w    loc_8C3CA-off_8C3C4
-                dc.w    loc_8C3EC-off_8C3C4
-                dc.w    loc_8C41E-off_8C3C4
+SKRibot_IdleLimbTable:
+                dc.w    SKRibot_SelectVerticalLimbBit-SKRibot_IdleLimbTable
+                dc.w    SKRibot_SelectHorizontalLimbSpeed-SKRibot_IdleLimbTable
+                dc.w    SKRibot_StepLimbOrbit-SKRibot_IdleLimbTable
 ; ---------------------------------------------------------------------------
 
-loc_8C3CA:
+SKRibot_SelectVerticalLimbBit:
                 moveq   #0,d0
                 tst.b   subtype(a0)
-                bne.s   loc_8C3D4
+                bne.s   SKRibot_TryActivateVerticalLimb
                 moveq   #1,d0
 
-loc_8C3D4:
+SKRibot_TryActivateVerticalLimb:
                 btst    d0,$38(a1)
-                bne.s   loc_8C3DC
+                bne.s   SKRibot_BeginVerticalMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C3DC:
+SKRibot_BeginVerticalMotion:
                 move.b  #4,routine(a0)
-                move.l  #loc_8C456,$34(a0)
+                move.l  #SKRibot_TryBounceVerticalLimb,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C3EC:
+SKRibot_SelectHorizontalLimbSpeed:
                 moveq   #0,d0
                 move.w  #$400,d1
                 tst.b   subtype(a0)
-                bne.s   loc_8C3FC
+                bne.s   SKRibot_TryActivateHorizontalLimb
                 moveq   #1,d0
                 neg.w   d1
 
-loc_8C3FC:
+SKRibot_TryActivateHorizontalLimb:
                 btst    d0,$38(a1)
-                bne.s   loc_8C404
+                bne.s   SKRibot_BeginOutwardMotion
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C404:
+SKRibot_BeginOutwardMotion:
                 move.b  #4,routine(a0)
                 move.w  d1,x_vel(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_8C46A,$34(a0)
+                move.l  #SKRibot_BeginLimbPause,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C41E:
+SKRibot_StepLimbOrbit:
                 addq.b  #2,$3C(a0)
                 moveq   #2,d2
                 jmp     MoveSprite_CircularSimpleOffset(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C428:
-                move.w  off_8C430(pc,d2.w),d3
-                jmp     off_8C430(pc,d3.w)
+SKRibot_DispatchActiveLimb:
+                move.w  SKRibot_ActiveLimbTable(pc,d2.w),d3
+                jmp     SKRibot_ActiveLimbTable(pc,d3.w)
 ; ---------------------------------------------------------------------------
-off_8C430:
-                dc.w    loc_8C436-off_8C430
-                dc.w    loc_8C484-off_8C430
-                dc.w    loc_8C436-off_8C430
+SKRibot_ActiveLimbTable:
+                dc.w    SKRibot_TryFallAndCheckFloor-SKRibot_ActiveLimbTable
+                dc.w    SKRibot_MoveLimbOutward-SKRibot_ActiveLimbTable
+                dc.w    SKRibot_TryFallAndCheckFloor-SKRibot_ActiveLimbTable
 ; ---------------------------------------------------------------------------
 
-loc_8C436:
+SKRibot_TryFallAndCheckFloor:
                 move.w  y_pos(a0),d0
                 sub.w   $40(a0),d0
                 cmpi.w  #$80,d0
-                bhs.s   loc_8C46A
+                bhs.s   SKRibot_BeginLimbPause
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_8C482
+                bmi.w   SKRibot_LimbMotionReturn
                 jmp     ObjHitFloor_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C456:
+SKRibot_TryBounceVerticalLimb:
                 move.w  y_vel(a0),d0
                 cmpi.w  #$100,d0
-                blo.s   loc_8C46A
+                blo.s   SKRibot_BeginLimbPause
                 asr.w   #2,d0
                 neg.w   d0
                 move.w  d0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C46A:
+SKRibot_BeginLimbPause:
                 move.b  #6,routine(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_8C4A0,$34(a0)
+                move.l  #SKRibot_BeginLimbReturn,$34(a0)
                 clr.w   y_vel(a0)
 
-locret_8C482:
+SKRibot_LimbMotionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C484:
+SKRibot_MoveLimbOutward:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C48E:
-                move.w  off_8C496(pc,d2.w),d3
-                jmp     off_8C496(pc,d3.w)
+SKRibot_DispatchPausedLimb:
+                move.w  RibotSK_Limb_ThreeAliasedPauseOffsets(pc,d2.w),d3
+                jmp     RibotSK_Limb_ThreeAliasedPauseOffsets(pc,d3.w)
 ; ---------------------------------------------------------------------------
-off_8C496:
-                dc.w    loc_8C49C-off_8C496
-                dc.w    loc_8C49C-off_8C496
-                dc.w    loc_8C49C-off_8C496
+RibotSK_Limb_ThreeAliasedPauseOffsets:
+                dc.w    RibotSK_Limb_CountSeventeenCallPause-RibotSK_Limb_ThreeAliasedPauseOffsets
+                dc.w    RibotSK_Limb_CountSeventeenCallPause-RibotSK_Limb_ThreeAliasedPauseOffsets
+                dc.w    RibotSK_Limb_CountSeventeenCallPause-RibotSK_Limb_ThreeAliasedPauseOffsets
 ; ---------------------------------------------------------------------------
 
-loc_8C49C:
+RibotSK_Limb_CountSeventeenCallPause:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C4A0:
+SKRibot_BeginLimbReturn:
                 move.b  #8,routine(a0)
                 neg.w   x_vel(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_8C4DA,$34(a0)
+                move.l  #SKRibot_ResetLimbAndSignalRoot,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C4BA:
-                move.w  off_8C4C2(pc,d2.w),d3
-                jmp     off_8C4C2(pc,d3.w)
+SKRibot_DispatchReturningLimb:
+                move.w  SKRibot_ReturningLimbTable(pc,d2.w),d3
+                jmp     SKRibot_ReturningLimbTable(pc,d3.w)
 ; ---------------------------------------------------------------------------
-off_8C4C2:
-                dc.w    loc_8C4C8-off_8C4C2
-                dc.w    loc_8C4F8-off_8C4C2
-                dc.w    loc_8C4C8-off_8C4C2
+SKRibot_ReturningLimbTable:
+                dc.w    SKRibot_RaiseLimbTowardAnchor-SKRibot_ReturningLimbTable
+                dc.w    SKRibot_MoveLimbBack-SKRibot_ReturningLimbTable
+                dc.w    SKRibot_RaiseLimbTowardAnchor-SKRibot_ReturningLimbTable
 ; ---------------------------------------------------------------------------
 
-loc_8C4C8:
+SKRibot_RaiseLimbTowardAnchor:
                 move.w  y_pos(a0),d0
                 subq.w  #2,d0
                 cmp.w   $40(a0),d0
-                bls.s   loc_8C4DA
+                bls.s   SKRibot_ResetLimbAndSignalRoot
                 move.w  d0,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C4DA:
+SKRibot_ResetLimbAndSignalRoot:
                 move.b  #2,routine(a0)
                 move.w  $3E(a0),x_pos(a0)
                 move.w  $40(a0),y_pos(a0)
@@ -237,21 +237,21 @@ loc_8C4DA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C4F8:
+SKRibot_MoveLimbBack:
                 jsr     (MoveSprite2).l
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C502:
-                lea     word_8C5DC(pc),a1
+SKRibot_InitLinkAndSaveAnchor:
+                lea     SKRibot_LinkAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_8C522,(a0)
+                move.l  #SKRibot_UpdateLinkPosition,(a0)
                 move.w  x_pos(a0),$3E(a0)
                 move.w  y_pos(a0),$40(a0)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_8C522:
+SKRibot_UpdateLinkPosition:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),d2
                 move.w  y_pos(a1),d3
@@ -259,17 +259,18 @@ loc_8C522:
                 sub.w   $40(a0),d3
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  off_8C548(pc,d0.w),d1
-                jsr     off_8C548(pc,d1.w)
+                move.w  SKRibot_LinkPositionTable(pc,d0.w),d1
+                jsr     SKRibot_LinkPositionTable(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_8C548:
-                dc.w    loc_8C54E-off_8C548
-                dc.w    loc_8C568-off_8C548
-                dc.w    loc_8C57E-off_8C548
+SKRibot_LinkPositionTable:
+                dc.w    SKRibot_PlaceLinkNearLimb-SKRibot_LinkPositionTable
+                dc.w    SKRibot_PlaceLinkAtHalf-SKRibot_LinkPositionTable
+                dc.w    SKRibot_PlaceLinkAtQuarter-SKRibot_LinkPositionTable
 ; ---------------------------------------------------------------------------
 
-loc_8C54E:
+; Subtract an arithmetic quarter of the displacement from the parent position
+SKRibot_PlaceLinkNearLimb:
                 asr.w   #2,d2
                 neg.w   d2
                 add.w   x_pos(a1),d2
@@ -281,7 +282,7 @@ loc_8C54E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C568:
+SKRibot_PlaceLinkAtHalf:
                 asr.w   #1,d2
                 add.w   $3E(a0),d2
                 move.w  d2,x_pos(a0)
@@ -291,7 +292,7 @@ loc_8C568:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C57E:
+SKRibot_PlaceLinkAtQuarter:
                 asr.w   #2,d2
                 add.w   $3E(a0),d2
                 move.w  d2,x_pos(a0)
@@ -301,28 +302,28 @@ loc_8C57E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_8C594:
+SKRibot_SelectLimbLinkRecord:
                 movea.w parent3(a0),a1
                 move.b  subtype(a1),d0
                 subq.b  #2,d0
-                beq.s   loc_8C5AC
-                bpl.s   loc_8C5C0
-                lea     ChildObjDat_8C606(pc),a2
+                beq.s   SKRibot_SelectHorizontalLinkSide
+                bpl.s   SKRibot_SpawnOrbitLinks
+                lea     SKRibot_VerticalLinkChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_8C5AC:
-                lea     ChildObjDat_8C60E(pc),a2
+SKRibot_SelectHorizontalLinkSide:
+                lea     SKRibot_RightOffsetLinkChildren(pc),a2
                 tst.b   subtype(a0)
-                beq.s   loc_8C5BA
-                lea     ChildObjDat_8C616(pc),a2
+                beq.s   SKRibot_SpawnLimbLinks
+                lea     SKRibot_LeftOffsetLinkChildren(pc),a2
 
-loc_8C5BA:
+SKRibot_SpawnLimbLinks:
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_8C5C0:
-                lea     ChildObjDat_8C61E(pc),a2
+SKRibot_SpawnOrbitLinks:
+                lea     SKRibot_OrbitLinkChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 ObjDat_Ribot:
@@ -330,46 +331,46 @@ ObjDat_Ribot:
                 dc.w    make_art_tile(ArtTile_Ribot,1,0)
                 dc.w    $280
                 dc.b    $10,  $C,   0,  $B
-word_8C5D6:
+SKRibot_LimbAttrs:
                 dc.w    $200
                 dc.b    8,   8,   7, $97
-word_8C5DC:
+SKRibot_LinkAttrs:
                 dc.w    $200
                 dc.b    4,   4,   6,   0
-ChildObjDat_8C5E2:
+SKRibot_DownwardLimbChildren:
                 dc.w    2-1
-                dc.l    loc_8C370
+                dc.l    SKRibot_UpdateLimbAndDraw
                 dc.b    -$C,  $C
-                dc.l    loc_8C370
+                dc.l    SKRibot_UpdateLimbAndDraw
                 dc.b    $C,  $C
-ChildObjDat_8C5F0:
+RibotSK_Root_TwoLateralNormalLimbRecords:
                 dc.w    2-1
-                dc.l    loc_8C370
+                dc.l    SKRibot_UpdateLimbAndDraw
                 dc.b    -$18,   0
-                dc.l    loc_8C370
+                dc.l    SKRibot_UpdateLimbAndDraw
                 dc.b    $18,   0
-ChildObjDat_8C5FE:
+RibotSK_Root_OneUpperNormalLimbRecord:
                 dc.w    1-1
-                dc.l    loc_8C370
+                dc.l    SKRibot_UpdateLimbAndDraw
                 dc.b    0,-$10
-ChildObjDat_8C606:
+SKRibot_VerticalLinkChildren:
                 dc.w    3-1
-                dc.l    loc_8C502
+                dc.l    SKRibot_InitLinkAndSaveAnchor
                 dc.b    0, -$C
-ChildObjDat_8C60E:
+SKRibot_RightOffsetLinkChildren:
                 dc.w    3-1
-                dc.l    loc_8C502
+                dc.l    SKRibot_InitLinkAndSaveAnchor
                 dc.b    $C,   0
-ChildObjDat_8C616:
+SKRibot_LeftOffsetLinkChildren:
                 dc.w    3-1
-                dc.l    loc_8C502
+                dc.l    SKRibot_InitLinkAndSaveAnchor
                 dc.b    -$C,   0
-ChildObjDat_8C61E:
+SKRibot_OrbitLinkChildren:
                 dc.w    3-1
-                dc.l    loc_8C502
+                dc.l    SKRibot_InitLinkAndSaveAnchor
                 dc.b    0,   0
-byte_8C626:
+RibotSK_Root_UniformFrameZeroOneTwoLoop:
                 dc.b    7,   0,   1,   2,   1, $FC
-byte_8C62C:
+SKRibot_UpperLimbBodyAnim:
                 dc.b    7,   3,   4,   5,   4, $FC
                 even

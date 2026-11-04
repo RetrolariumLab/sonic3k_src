@@ -9,31 +9,31 @@ Obj_LBZAlarm:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$280,priority(a0)
                 move.b  #$D7,collision_flags(a0)
-                move.l  #loc_283DC,(a0)
+                move.l  #S3LBZAlarm_TickAlarmOrCheckContact,(a0)
 
-loc_283DC:
+S3LBZAlarm_TickAlarmOrCheckContact:
                 tst.w   $30(a0)
-                beq.s   loc_283F0
+                beq.s   S3LBZAlarm_TryStartAlarm
                 subq.w  #1,$30(a0)
-                bne.s   loc_28448
+                bne.s   S3LBZAlarm_TrySpawnDelayedFlybot
                 move.w  #0,(Anim_Counters+4).w
-                bra.s   loc_2846E
+                bra.s   S3LBZAlarm_AddContactAndCull
 ; ---------------------------------------------------------------------------
 
-loc_283F0:
+S3LBZAlarm_TryStartAlarm:
                 tst.b   collision_property(a0)
-                beq.s   loc_2846E
+                beq.s   S3LBZAlarm_AddContactAndCull
                 clr.b   collision_property(a0)
                 move.w  #$81,$30(a0)
                 move.w  #1,(Anim_Counters+4).w
                 btst    #0,subtype(a0)
-                bne.s   locret_28446
+                bne.s   S3LBZAlarm_ActivationReturn
 
 ; =============== S U B R O U T I N E =======================================
 
 SpawnLbzAlarmFlybot:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_28446
+                bne.s   S3LBZAlarm_ActivationReturn
                 move.l  #Obj_Flybot767,(a1)
                 lea     (Player_1).w,a2
                 move.w  x_pos(a2),x_pos(a1)
@@ -42,40 +42,40 @@ SpawnLbzAlarmFlybot:
                 add.w   d0,d0
                 add.w   d0,d0
                 andi.w  #$C,d0
-                move.l  word_2847A(pc,d0.w),d0
+                move.l  S3LBZAlarm_FlybotSpawnOffsets(pc,d0.w),d0
                 add.w   d0,y_pos(a1)
                 swap    d0
                 add.w   d0,x_pos(a1)
 
-locret_28446:
+S3LBZAlarm_ActivationReturn:
                 rts
 ; End of function SpawnLbzAlarmFlybot
 
 ; ---------------------------------------------------------------------------
 
-loc_28448:
+S3LBZAlarm_TrySpawnDelayedFlybot:
                 btst    #0,subtype(a0)
-                beq.s   loc_2845A
+                beq.s   S3LBZAlarm_TryPlayAlarmSound
                 cmpi.w  #$41,$30(a0)
-                bne.s   loc_2845A
+                bne.s   S3LBZAlarm_TryPlayAlarmSound
                 bsr.s   SpawnLbzAlarmFlybot
 
-loc_2845A:
+S3LBZAlarm_TryPlayAlarmSound:
                 move.w  $30(a0),d0
                 andi.b  #$1F,d0
-                bne.s   locret_2846C
+                bne.s   S3LBZAlarm_AlarmSoundReturn
                 moveq   #signextendB(sfx_Alarm),d0
                 jsr     (Play_SFX).l
 
-locret_2846C:
+S3LBZAlarm_AlarmSoundReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2846E:
+S3LBZAlarm_AddContactAndCull:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
-word_2847A:
+S3LBZAlarm_FlybotSpawnOffsets:
                 dc.w    $C0,  -$60
                 dc.w    $C0,  -$60
                 dc.w    -$C0,  -$60

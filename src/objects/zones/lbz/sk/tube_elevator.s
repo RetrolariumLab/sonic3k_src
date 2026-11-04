@@ -13,17 +13,17 @@ Obj_LBZTubeElevator:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 btst    #6,subtype(a0)
-                beq.s   loc_29CEC
+                beq.s   SKLBZTubeLift_TrySpawnFrontOverlay
                 move.b  #0,mapping_frame(a0)            ; If BIT 6 of subtype set, the elevator remains closed
                 move.b  #0,angle(a0)
                 move.l  #Obj_LBZTubeElevatorClosed,(a0)
                 bra.s   Obj_LBZTubeElevatorClosed
 ; ---------------------------------------------------------------------------
 
-loc_29CEC:
+SKLBZTubeLift_TrySpawnFrontOverlay:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_29D38
-                move.l  #loc_29DEC,(a1)
+                bne.w   SKLBZTubeLift_BeginActiveTube
+                move.l  #SKLBZTubeLift_FollowTubeOverlay,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  #Map_LBZTubeElevator,mappings(a1)
@@ -35,7 +35,7 @@ loc_29CEC:
                 move.b  #6,mapping_frame(a1)
                 move.w  a0,parent(a1)
 
-loc_29D38:
+SKLBZTubeLift_BeginActiveTube:
                 move.b  #2,mapping_frame(a0)
                 move.b  #2,angle(a0)
                 move.l  #Obj_LBZTubeElevatorActive,(a0)
@@ -54,32 +54,33 @@ Obj_LBZTubeElevatorActive:
 Obj_LBZTubeElevatorClosed:
                 lea     (Player_1).w,a1
                 btst    #Status_OnObj,status(a1)
-                beq.s   loc_29D8E
+                beq.s   SKLBZTubeLift_StepClosedIdleBob
                 tst.b   object_control(a1)
-                beq.s   loc_29D8E
+                beq.s   SKLBZTubeLift_StepClosedIdleBob
                 movea.w interact(a1),a2
                 cmpi.l  #Obj_LBZTubeElevatorActive,(a2)
-                bne.s   loc_29D8E
+                bne.s   SKLBZTubeLift_StepClosedIdleBob
                 move.w  #$7FF0,x_pos(a0)
 
-loc_29D8E:
+SKLBZTubeLift_StepClosedIdleBob:
                 lea     $2E(a0),a4
                 addq.b  #2,1(a4)
                 move.b  1(a4),d0
                 cmpi.b  #$B0,d0
-                blo.s   loc_29DAA
+                blo.s   SKLBZTubeLift_SampleClosedIdleBob
                 cmpi.b  #$D0,d0
-                bhs.s   loc_29DAA
+                bhs.s   SKLBZTubeLift_SampleClosedIdleBob
                 addi.b  #$20,d0
 
-loc_29DAA:
+; The idle, entrance and exit bob paths reduce a sine result of $100 to $FF before scaling
+SKLBZTubeLift_SampleClosedIdleBob:
                 move.b  d0,1(a4)
                 jsr     (GetSineCosine).l
                 cmpi.w  #$100,d0
-                bne.s   loc_29DBC
+                bne.s   SKLBZTubeLift_PlaceAndDrawClosedIdle
                 subq.w  #1,d0
 
-loc_29DBC:
+SKLBZTubeLift_PlaceAndDrawClosedIdle:
                 asr.w   #6,d0
                 move.w  $46(a0),d2
                 sub.w   d0,d2
@@ -96,23 +97,23 @@ loc_29DBC:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_29DEC:
+SKLBZTubeLift_FollowTubeOverlay:
                 movea.w parent(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 tst.b   render_flags(a1)
-                bpl.s   loc_29E16
+                bpl.s   SKLBZTubeLift_DrawFrontOverlay
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
-                move.b  byte_29E1C(pc,d0.w),d0
+                move.b  SKLBZTubeLift_OverlayXOffsets(pc,d0.w),d0
                 ext.w   d0
                 add.w   x_pos(a1),d0
                 move.w  d0,x_pos(a0)
 
-loc_29E16:
+SKLBZTubeLift_DrawFrontOverlay:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-byte_29E1C:
+SKLBZTubeLift_OverlayXOffsets:
                 dc.b    0,  -8,  -8,   0,   8,   8
                 even
 
@@ -140,34 +141,34 @@ LBZTubeElevator_Index:
 
 LBZTubeElevator_WaitPlayer:
                 cmpi.w  #$200,$38(a0)
-                beq.s   loc_29E52
+                beq.s   SKLBZTubeLift_BeginSpinWithP1
                 cmpi.w  #$202,$38(a0)
-                bne.s   loc_29E5E
+                bne.s   SKLBZTubeLift_StepEntranceBob
 
-loc_29E52:
+SKLBZTubeLift_BeginSpinWithP1:
                 addq.b  #2,(a4)
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
                 bra.s   LBZTubeElevator_StartSpin
 ; ---------------------------------------------------------------------------
 
-loc_29E5E:
+SKLBZTubeLift_StepEntranceBob:
                 addq.b  #2,1(a4)
                 move.b  1(a4),d0
                 cmpi.b  #$B0,d0
-                blo.s   loc_29E76
+                blo.s   SKLBZTubeLift_SampleEntranceBob
                 cmpi.b  #$D0,d0
-                bhs.s   loc_29E76
+                bhs.s   SKLBZTubeLift_SampleEntranceBob
                 addi.b  #$20,d0
 
-loc_29E76:
+SKLBZTubeLift_SampleEntranceBob:
                 move.b  d0,1(a4)
                 jsr     (GetSineCosine).l
                 cmpi.w  #$100,d0
-                bne.s   loc_29E88
+                bne.s   SKLBZTubeLift_ResolveEntranceSolid
                 subq.w  #1,d0
 
-loc_29E88:
+SKLBZTubeLift_ResolveEntranceSolid:
                 asr.w   #6,d0
                 move.w  $46(a0),d2
                 sub.w   d0,d2
@@ -185,23 +186,23 @@ loc_29E88:
 LBZTubeElevator_StartSpin:
                 move.w  mapping_frame(a0),d0            ; Get current mapping frame +
                 sub.w   $3C(a0),d0
-                bcc.s   loc_29EC0
+                bcc.s   SKLBZTubeLift_UpdateAcceleratingPose
                 addi.w  #$600,d0
 
-loc_29EC0:
+SKLBZTubeLift_UpdateAcceleratingPose:
                 move.w  d0,mapping_frame(a0)
                 move.w  angle(a0),d0
                 sub.w   $3C(a0),d0
-                bcc.s   loc_29ED2
+                bcc.s   SKLBZTubeLift_StepSpinAcceleration
                 addi.w  #$C00,d0
 
-loc_29ED2:
+SKLBZTubeLift_StepSpinAcceleration:
                 move.w  d0,angle(a0)
                 cmpi.w  #$180,$3C(a0)                   ; Accelerate speed of spinning
-                bhs.s   loc_29F1C                       ; When maxed out, branch
+                bhs.s   SKLBZTubeLift_BeginTubeTravel   ; When maxed out, branch
                 addq.w  #2,$3C(a0)
 
-loc_29EE2:
+SKLBZTubeLift_BobAndResolveSpinSolid:
                 move.b  1(a4),d0                        ; Increment bobbing angle
                 addq.b  #2,1(a4)
                 jsr     (GetSineCosine).l
@@ -221,32 +222,32 @@ loc_29EE2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_29F1C:
+SKLBZTubeLift_BeginTubeTravel:
                 addq.b  #2,(a4)                         ; Next routine
                 move.w  #$180,$3C(a0)
                 clr.b   1(a4)
                 bsr.w   AutoTunnel_GetPath              ; Get auto tunnel path
                 move.b  #1,(Fast_V_scroll_flag).w       ; Y camera follows Sonic differently
-                bra.s   loc_29EE2
+                bra.s   SKLBZTubeLift_BobAndResolveSpinSolid
 ; ---------------------------------------------------------------------------
 
 LBZTubeElevator_MovePath:
                 move.w  mapping_frame(a0),d0            ; Continuing spinning mapping frame
                 sub.w   $3C(a0),d0
-                bcc.s   loc_29F42
+                bcc.s   SKLBZTubeLift_UpdateTravelPose
                 addi.w  #$600,d0
 
-loc_29F42:
+SKLBZTubeLift_UpdateTravelPose:
                 move.w  d0,mapping_frame(a0)
                 move.w  angle(a0),d0
                 sub.w   $3C(a0),d0
-                bcc.s   loc_29F54
+                bcc.s   SKLBZTubeLift_StepTravelWaypoint
                 addi.w  #$C00,d0
 
-loc_29F54:
+SKLBZTubeLift_StepTravelWaypoint:
                 move.w  d0,angle(a0)
                 subq.b  #1,2(a4)
-                bhi.w   loc_29FA6
+                bhi.w   SKLBZTubeLift_IntegrateTravelMotion
                 movea.l 6(a4),a2                        ; Check for new path
                 move.w  (a2)+,d4
                 move.w  d4,x_pos(a1)
@@ -254,14 +255,14 @@ loc_29F54:
                 move.w  d5,y_pos(a1)
                 move.l  a2,6(a4)
                 subq.w  #4,4(a4)
-                beq.s   loc_29F86
+                beq.s   SKLBZTubeLift_FinishTubeTravel
                 move.w  (a2)+,d4
                 move.w  (a2)+,d5
                 move.w  #$1000,d2
                 bra.w   AutoTunnel_CalcSpeed            ; Recalc speed
 ; ---------------------------------------------------------------------------
 
-loc_29F86:
+SKLBZTubeLift_FinishTubeTravel:
                 addq.b  #2,(a4)                         ; If end of path reached, next routine
                 move.w  #0,x_vel(a1)
                 move.w  #0,y_vel(a1)                    ; Null momentum of player
@@ -271,7 +272,7 @@ loc_29F86:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_29FA6:
+SKLBZTubeLift_IntegrateTravelMotion:
                 move.l  x_pos(a1),d2                    ; Move tube elevator based on autotunnel speed
                 move.l  y_pos(a1),d3
                 move.w  x_vel(a1),d0
@@ -290,53 +291,53 @@ loc_29FA6:
 LBZTubeElevator_SlowSpin:
                 move.w  mapping_frame(a0),d0
                 sub.w   $3C(a0),d0
-                bcc.s   loc_29FDA
+                bcc.s   SKLBZTubeLift_UpdateDeceleratingPose
                 addi.w  #$600,d0
 
-loc_29FDA:
+SKLBZTubeLift_UpdateDeceleratingPose:
                 move.w  d0,mapping_frame(a0)
                 move.w  angle(a0),d0
                 sub.w   $3C(a0),d0                      ; Spin spin spinning
-                bcc.s   loc_29FEC
+                bcc.s   SKLBZTubeLift_TryFinishDeceleration
                 addi.w  #$C00,d0
 
-loc_29FEC:
+SKLBZTubeLift_TryFinishDeceleration:
                 move.w  d0,angle(a0)
                 cmpi.w  #8,$3C(a0)
-                bne.s   loc_2A014
+                bne.s   SKLBZTubeLift_DecelerateSpin
                 cmpi.b  #2,mapping_frame(a0)            ; When minimum speed reached and correct rotation on tube
                 bne.s   LBZTubeElevator_WaitExit
                 addq.b  #2,(a4)                         ; Next routine
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_2A012
+                beq.s   SKLBZTubeLift_EnterExitWait
                 movea.w d0,a2
                 bclr    #7,(a2)                         ; Restore jump control on player
                 clr.w   respawn_addr(a0)
 
-loc_2A012:
+SKLBZTubeLift_EnterExitWait:
                 bra.s   LBZTubeElevator_WaitExit
 ; ---------------------------------------------------------------------------
 
-loc_2A014:
+SKLBZTubeLift_DecelerateSpin:
                 subq.w  #4,$3C(a0)                      ; Subtract spin speed
 
 LBZTubeElevator_WaitExit:
                 addq.b  #2,1(a4)                        ; Change bobbing angle
                 move.b  1(a4),d0
                 cmpi.b  #$B0,d0
-                blo.s   loc_2A030
+                blo.s   SKLBZTubeLift_SampleExitBob
                 cmpi.b  #$D0,d0
-                bhs.s   loc_2A030
+                bhs.s   SKLBZTubeLift_SampleExitBob
                 addi.b  #$20,d0
 
-loc_2A030:
+SKLBZTubeLift_SampleExitBob:
                 move.b  d0,1(a4)
                 jsr     (GetSineCosine).l
                 cmpi.w  #$100,d0
-                bne.s   loc_2A042
+                bne.s   SKLBZTubeLift_ResolveExitAndTryClose
                 subq.w  #1,d0
 
-loc_2A042:
+SKLBZTubeLift_ResolveExitAndTryClose:
                 asr.w   #6,d0
                 move.w  $46(a0),d2
                 sub.w   d0,d2
@@ -350,11 +351,11 @@ loc_2A042:
                 jsr     (SolidObjectFull_Offset).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   locret_2A07C
+                bne.s   SKLBZTubeLift_ExitSolidReturn
                 addq.b  #2,(a4)                         ; When player is no longer standing on object, next routine
                 move.b  #0,anim_frame_timer(a0)
 
-locret_2A07C:
+SKLBZTubeLift_ExitSolidReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -364,11 +365,11 @@ LBZTubeElevator_EndSpin:
                 move.b  #$F,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)            ; Spin object until closed frame is on
                 cmpi.b  #6,mapping_frame(a0)
-                blo.s   loc_2A09E
+                blo.s   SKLBZTubeLift_StepClosingPose
                 move.b  #0,mapping_frame(a0)
                 addq.b  #2,(a4)
 
-loc_2A09E:
+SKLBZTubeLift_StepClosingPose:
                 addq.b  #1,angle(a0)
                 cmpi.b  #6,angle(a0)
                 blo.s   LBZTubeElevator_Closed
@@ -378,19 +379,19 @@ LBZTubeElevator_Closed:
                 addq.b  #2,1(a4)                        ; Add to bobbing angle
                 move.b  1(a4),d0
                 cmpi.b  #$B0,d0
-                blo.s   loc_2A0C8
+                blo.s   SKLBZTubeLift_SampleClosedBob
                 cmpi.b  #$D0,d0
-                bhs.s   loc_2A0C8
+                bhs.s   SKLBZTubeLift_SampleClosedBob
                 addi.b  #$20,d0
 
-loc_2A0C8:
+SKLBZTubeLift_SampleClosedBob:
                 move.b  d0,1(a4)
                 jsr     (GetSineCosine).l
                 cmpi.w  #$100,d0
-                bne.s   loc_2A0DA
+                bne.s   SKLBZTubeLift_ResolveClosedSolid
                 subq.w  #1,d0
 
-loc_2A0DA:
+SKLBZTubeLift_ResolveClosedSolid:
                 asr.w   #6,d0
                 move.w  $46(a0),d2
                 sub.w   d0,d2
@@ -410,38 +411,38 @@ loc_2A0DA:
 
 LBZTubeElevator_CheckPlayer:
                 move.b  (a2),d0
-                bne.w   loc_2A1B6
+                bne.w   SKLBZTubeLift_CarryOrReleasePassenger
                 tst.w   (Debug_placement_mode).w
-                bne.w   locret_2A1B4                    ; Do nothing if currently in debug state
+                bne.w   SKLBZTubeLift_EntryReturn       ; Do nothing if currently in debug state
                 cmpa.w  #Player_2,a1
-                bne.s   loc_2A128
+                bne.s   SKLBZTubeLift_CalcEntranceOffset
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_2A128
+                beq.s   SKLBZTubeLift_CalcEntranceOffset
                 tst.b   -1(a2)
-                bne.s   loc_2A164
+                bne.s   SKLBZTubeLift_CapturePassenger
 
-loc_2A128:
+SKLBZTubeLift_CalcEntranceOffset:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addq.w  #3,d0
                 btst    #0,status(a0)
-                beq.s   loc_2A13E
+                beq.s   SKLBZTubeLift_CheckPassengerEntry
                 addi.w  #$A,d0
 
-loc_2A13E:
+SKLBZTubeLift_CheckPassengerEntry:
                 cmpi.w  #$10,d0
-                bhs.s   locret_2A1B4
+                bhs.s   SKLBZTubeLift_EntryReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 addi.w  #$20,d1
                 cmpi.w  #$40,d1                         ; Check if in range
-                bhs.s   locret_2A1B4
+                bhs.s   SKLBZTubeLift_EntryReturn
                 tst.b   object_control(a1)
-                bne.s   locret_2A1B4                    ; If player is already under control, skip all this
+                bne.s   SKLBZTubeLift_EntryReturn       ; If player is already under control, skip all this
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_2A1B4                    ; If player is in the air, skip all this
+                bne.s   SKLBZTubeLift_EntryReturn       ; If player is in the air, skip all this
 
-loc_2A164:
+SKLBZTubeLift_CapturePassenger:
                 addq.b  #2,(a2)
                 move.b  #$83,object_control(a1)         ; Object control of player, control of animation too
                 move.b  #0,anim(a1)                     ; Clear player animation
@@ -460,13 +461,13 @@ loc_2A164:
                 sub.w   d1,d0
                 move.w  d0,y_pos(a1)
 
-locret_2A1B4:
+SKLBZTubeLift_EntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2A1B6:
+SKLBZTubeLift_CarryOrReleasePassenger:
                 subq.b  #2,d0                           ; If player already inside
-                bne.w   locret_2A230
+                bne.w   SKLBZTubeLift_PassengerStateReturn
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),d0
                 addi.w  #$18,d0
@@ -475,12 +476,12 @@ loc_2A1B6:
                 sub.w   d1,d0
                 move.w  d0,y_pos(a1)                    ; Match player position
                 cmpi.b  #8,$2E(a0)
-                bne.s   loc_2A1EC
+                bne.s   SKLBZTubeLift_ApplyPassengerPose
                 bset    #Status_Facing,status(a1)
                 move.b  #0,object_control(a1)
                 addq.b  #2,(a2)
 
-loc_2A1EC:
+SKLBZTubeLift_ApplyPassengerPose:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 move.b  LBZTubeElevator_PlayerFrame(pc,d0.w),mapping_frame(a1)
@@ -501,6 +502,6 @@ LBZTubeElevator_PlayerFlip:
                 even
 ; ---------------------------------------------------------------------------
 
-locret_2A230:
+SKLBZTubeLift_PassengerStateReturn:
                 rts
 ; End of function LBZTubeElevator_CheckPlayer

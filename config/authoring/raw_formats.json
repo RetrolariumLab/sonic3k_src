@@ -801,27 +801,27 @@
     },
     {
       "path": "src/objects/enemies/lbz/s3/corkey.s",
-      "sha256": "94ee6d34497c15308e2c86b7320e7aaf33596c0cf8d7b13a098c9ba71d14a051"
+      "sha256": "a2209b84e0f0b39a42972b79997fe0e2439d49fade2a625c359d92a4720c2cfe"
     },
     {
       "path": "src/objects/enemies/lbz/s3/flybot_767.s",
-      "sha256": "3434c82819c14d0a4c87cddc29fa24bf1b830d9fbf6e4fccd8c8131b0d2f01af"
+      "sha256": "182aa031fdb3ff82ed6eefd72cc099e2505846c0fb70125fa498a1c243002bfa"
     },
     {
       "path": "src/objects/enemies/lbz/s3/ribot.s",
-      "sha256": "8be0f59264cd9a19cfd5812a19fe161b603a46b012c84c8d260fa3670c8df191"
+      "sha256": "8aaad975352a893a4b70b99041c2489807305227ee44cad2118520dfe32992f6"
     },
     {
       "path": "src/objects/enemies/lbz/sk/corkey.s",
-      "sha256": "662da133aef325261e8b6ee4475206cfcd4e219529c2fa4cccdac2f6d5ec9820"
+      "sha256": "80d4b0c9041390c8fe4d392ae4d06d75fabb1095d85cd2fb0aaf03bfa2ad06cd"
     },
     {
       "path": "src/objects/enemies/lbz/sk/flybot_767.s",
-      "sha256": "4f85029fd7187365257a1c8b44547e17f597b7d8258f0b120974f7beca8d16b5"
+      "sha256": "acf31ff54eb262e3dfefd7927b06b6faff35b2b7774c8489d2d64b88cae298f6"
     },
     {
       "path": "src/objects/enemies/lbz/sk/ribot.s",
-      "sha256": "01445b13d65262e0504c3fa04dea92152091dce51c72a98f3792e5e957b01448"
+      "sha256": "f1ff1ad3bb0294b7e3cffd5c603fd69b20e62428c2f88e43a5e6f63061cb8cc1"
     },
     {
       "path": "src/objects/enemies/mgz/s3/bubbles.s",
@@ -1241,19 +1241,19 @@
     },
     {
       "path": "src/objects/zones/lbz/s3/ride_grapple.s",
-      "sha256": "ea435a55bf7cd2cdfe390e030e123762797805c3e5f6208eb7063a2dca9e569f"
+      "sha256": "4cef7937a0304ca448436c97464111592f3e8bfbfe5200d960afb53faa5c2844"
     },
     {
       "path": "src/objects/zones/lbz/s3/tube_elevator.s",
-      "sha256": "f81b68362554616dcd31f448e5713d2b3062e3b419572425a4a45c0bb6f5b0ec"
+      "sha256": "b43eee9c7930c0f2a8ed48b4facbeeab3599cbe374d1f59dff4bda408852b945"
     },
     {
       "path": "src/objects/zones/lbz/sk/ride_grapple.s",
-      "sha256": "72e1273386b95eafa155be073a7993cc0cd4044a7c94d09d4f54e34293a8f3d8"
+      "sha256": "9d4076f3fcd10138b496ec24fbcddd86251e9e8b987f911e49abed6ed35e3d91"
     },
     {
       "path": "src/objects/zones/lbz/sk/tube_elevator.s",
-      "sha256": "f0ce0e67e5a7ade4055864c2075e9b4557957374027336550ea2a824d55c90a6"
+      "sha256": "3e0d73dbedc53f225443e4b6fc969926436113e96d6a61076f3f1298154f26af"
     },
     {
       "path": "src/objects/zones/lrz/sk/corkscrew.s",
@@ -4263,13 +4263,13 @@
     },
     {
       "path": "src/objects/enemies/lbz/s3/corkey.s",
-      "symbol": "byte_5A0A2",
-      "scope": "byte_5A0A2",
-      "first_line": 212,
-      "last_line": 246,
+      "symbol": "S3Corkey_GunSpinAnim",
+      "scope": "S3Corkey_GunSpinAnim",
+      "first_line": 213,
+      "last_line": 247,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 56,
-      "declarations_sha256": "75bd95fd00da267112967ba7c007d1650b215c4a8d6e2e1cfb74c8d1c3a911cf",
+      "declarations_sha256": "514a3dd04af0ec75a7cf072f3041e8042bb690ff91e5475f543a53eaad6461d8",
       "entries": [
         [0, "accelerating"],
         [5, "pairs"],
@@ -4277,18 +4277,23 @@
         [23, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_5A0A2", "byte_5A0A7", "byte_5A0B0", "byte_5A0B9"],
+      "members": [
+        "S3Corkey_GunSpinAnim",
+        "S3Corkey_LeftLaserAnim",
+        "S3Corkey_RightLaserAnim",
+        "S3Corkey_CenterLaserAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/lbz/s3/flybot_767.s",
-      "symbol": "byte_5A294",
-      "scope": "byte_5A294",
+      "symbol": "S3Flybot767_ChaseAnim",
+      "scope": "S3Flybot767_ChaseAnim",
       "first_line": 159,
       "last_line": 175,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 44,
-      "declarations_sha256": "01bcd44c0bb762d1b33059ec03b5d5429d1469f2bcc10699c5570fc4fafff303",
+      "declarations_sha256": "83ee2cdcb7f6962832a696945f818d951323663e234efe2a8377ff5c6051503c",
       "entries": [
         [0, "fixed"],
         [12, "fixed"],
@@ -4296,35 +4301,40 @@
         [33, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_5A294", "byte_5A2A0", "byte_5A2A9", "byte_5A2B5"],
+      "members": [
+        "S3Flybot767_ChaseAnim",
+        "S3Flybot767_DiveWindupAnim",
+        "S3Flybot767_DescentAnim",
+        "S3Flybot767_AscentAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/lbz/s3/ribot.s",
-      "symbol": "byte_59DA6",
-      "scope": "byte_59DA6",
-      "first_line": 371,
-      "last_line": 375,
+      "symbol": "RibotS3_Root_UniformFrameZeroOneTwoLoop",
+      "scope": "RibotS3_Root_UniformFrameZeroOneTwoLoop",
+      "first_line": 372,
+      "last_line": 376,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
-      "declarations_sha256": "ba82c6120f4dbc53bf11371385b7570a3729d864bcd8fb21cf57440254e759e5",
+      "declarations_sha256": "6822c5af4a4933b69cb4f86e88d49a178390e04368f505331277a842c1abdcf5",
       "entries": [
         [0, "fixed"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_59DA6", "byte_59DAC"],
+      "members": ["RibotS3_Root_UniformFrameZeroOneTwoLoop", "S3Ribot_UpperLimbBodyAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/lbz/sk/corkey.s",
-      "symbol": "byte_8C92E",
-      "scope": "byte_8C92E",
-      "first_line": 212,
-      "last_line": 246,
+      "symbol": "SKCorkey_GunSpinAnim",
+      "scope": "SKCorkey_GunSpinAnim",
+      "first_line": 213,
+      "last_line": 247,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 56,
-      "declarations_sha256": "716ac8b166e9dc6e6b3380731d2d67f729cbe18bcd78b3d0a575147e5d0e4481",
+      "declarations_sha256": "e96c02b28d282e2175242c73d54a9d01253ef96c31222b17a29f3effde205d87",
       "entries": [
         [0, "accelerating"],
         [5, "pairs"],
@@ -4332,18 +4342,23 @@
         [23, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8C92E", "byte_8C933", "byte_8C93C", "byte_8C945"],
+      "members": [
+        "SKCorkey_GunSpinAnim",
+        "SKCorkey_LeftLaserAnim",
+        "SKCorkey_RightLaserAnim",
+        "SKCorkey_CenterLaserAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/lbz/sk/flybot_767.s",
-      "symbol": "byte_8CB2A",
-      "scope": "byte_8CB2A",
+      "symbol": "SKFlybot767_ChaseAnim",
+      "scope": "SKFlybot767_ChaseAnim",
       "first_line": 159,
       "last_line": 175,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 44,
-      "declarations_sha256": "c6bb7671de107c0d54a9b09fa34939554f77b4d72d9b60a24135d541889a6f51",
+      "declarations_sha256": "6158b98273e25599a752698ac3e4f797a0c0cee2837f90b3aeacc3ccb370ac1e",
       "entries": [
         [0, "fixed"],
         [12, "fixed"],
@@ -4351,24 +4366,29 @@
         [33, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8CB2A", "byte_8CB36", "byte_8CB3F", "byte_8CB4B"],
+      "members": [
+        "SKFlybot767_ChaseAnim",
+        "SKFlybot767_DiveWindupAnim",
+        "SKFlybot767_DescentAnim",
+        "SKFlybot767_AscentAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/lbz/sk/ribot.s",
-      "symbol": "byte_8C626",
-      "scope": "byte_8C626",
-      "first_line": 371,
-      "last_line": 375,
+      "symbol": "RibotSK_Root_UniformFrameZeroOneTwoLoop",
+      "scope": "RibotSK_Root_UniformFrameZeroOneTwoLoop",
+      "first_line": 372,
+      "last_line": 376,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
-      "declarations_sha256": "88f87a2f8d86f2e350116c9cdfc5417d7a1244dcc86518c448a8b43aa4abfb48",
+      "declarations_sha256": "4c207e56148a1e5ef1524940b0a4631f93266d5b88c8fc4c49a3e73eac22e7f6",
       "entries": [
         [0, "fixed"],
         [6, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_8C626", "byte_8C62C"],
+      "members": ["RibotSK_Root_UniformFrameZeroOneTwoLoop", "SKRibot_UpperLimbBodyAnim"],
       "stored_markers": []
     },
     {
@@ -5470,24 +5490,24 @@
     },
     {
       "path": "src/objects/zones/lbz/s3/ride_grapple.s",
-      "symbol": "byte_25858",
-      "scope": "byte_25858",
-      "first_line": 267,
-      "last_line": 269,
+      "symbol": "S3LBZRideGrip_RiderPoseFrames",
+      "scope": "S3LBZRideGrip_RiderPoseFrames",
+      "first_line": 268,
+      "last_line": 270,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "1454a974781fdc1b4c81c8e912314dc4343f23d4901c3ad36a10a0a6fe54f66c",
+      "declarations_sha256": "c9195820259c5e7eece1a966e33e3b5fedf9e46a03206eef6bcc25ef25612cdd",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_25858"],
+      "members": ["S3LBZRideGrip_RiderPoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/lbz/s3/tube_elevator.s",
       "symbol": "LBZTubeElevator_PlayerFrame",
       "scope": "LBZTubeElevator_PlayerFrame",
-      "first_line": 497,
-      "last_line": 498,
+      "first_line": 498,
+      "last_line": 499,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 12,
       "declarations_sha256": "6a6e9695e16eaec2d168a1db0686d2d9cade9a922ad7f9bcdf0bbaa4be88db01",
@@ -5498,24 +5518,24 @@
     },
     {
       "path": "src/objects/zones/lbz/sk/ride_grapple.s",
-      "symbol": "byte_26794",
-      "scope": "byte_26794",
-      "first_line": 267,
-      "last_line": 269,
+      "symbol": "SKLBZRideGrip_RiderPoseFrames",
+      "scope": "SKLBZRideGrip_RiderPoseFrames",
+      "first_line": 268,
+      "last_line": 270,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "a3ec9ee1817fcf3acd0f2f23ab37ee2b39147bcb0de5be5f823b831354bc288c",
+      "declarations_sha256": "1f98bfca01590d51d236c9e6508e281b092203fd070b77e426c0ce1778b495e5",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_26794"],
+      "members": ["SKLBZRideGrip_RiderPoseFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/lbz/sk/tube_elevator.s",
       "symbol": "LBZTubeElevator_PlayerFrame",
       "scope": "LBZTubeElevator_PlayerFrame",
-      "first_line": 497,
-      "last_line": 498,
+      "first_line": 498,
+      "last_line": 499,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 12,
       "declarations_sha256": "6a6e9695e16eaec2d168a1db0686d2d9cade9a922ad7f9bcdf0bbaa4be88db01",

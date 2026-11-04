@@ -7087,17 +7087,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "e5fb632de0e406855c3bf29ddffcda666863fe40bac819721ed905df43ced279",
+      "declarations_sha256": "b86169272c1f57d2743b8b29fe2c937600a829442a6d27726a09a2d54c522b2f",
       "labels": {
         "Map_Corkey_": 0,
-        "Frame_3605D2": 16,
-        "Frame_3605E0": 30,
-        "Frame_3605E8": 38,
-        "Frame_3605F0": 46,
-        "Frame_3605F8": 54,
-        "Frame_360618": 86,
-        "Frame_360638": 118,
-        "Frame_360658": 150
+        "CorkeyS3_MapFrame00": 16,
+        "CorkeyS3_MapFrame01": 30,
+        "CorkeyS3_MapFrame02": 38,
+        "CorkeyS3_MapFrame03": 46,
+        "CorkeyS3_MapFrame04": 54,
+        "CorkeyS3_MapFrame05": 86,
+        "CorkeyS3_MapFrame06": 118,
+        "CorkeyS3_MapFrame07": 150
       },
       "external_symbols": [],
       "blocks": [
@@ -7105,56 +7105,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605D2",
+          "target": "CorkeyS3_MapFrame00",
           "base": "Map_Corkey_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605E0",
+          "target": "CorkeyS3_MapFrame01",
           "base": "Map_Corkey_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605E8",
+          "target": "CorkeyS3_MapFrame02",
           "base": "Map_Corkey_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605F0",
+          "target": "CorkeyS3_MapFrame03",
           "base": "Map_Corkey_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605F8",
+          "target": "CorkeyS3_MapFrame04",
           "base": "Map_Corkey_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360618",
+          "target": "CorkeyS3_MapFrame05",
           "base": "Map_Corkey_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360638",
+          "target": "CorkeyS3_MapFrame06",
           "base": "Map_Corkey_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360658",
+          "target": "CorkeyS3_MapFrame07",
           "base": "Map_Corkey_"
         },
         {
@@ -9613,30 +9613,30 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 170
       },
-      "declarations_sha256": "d3873075d4ac5312fef39a577d1367c9e837b2a2d9600b9a7b1fa63fdb53524a",
+      "declarations_sha256": "1d2490143ab814f4d9ade520a148f7f9cf9073c16c65586276f67067afd2d468",
       "labels": {
         "DPLC_Flybot767_": 0,
-        "Frame_360816": 42,
-        "Frame_36081C": 48,
-        "Frame_360822": 54,
-        "Frame_360828": 60,
-        "Frame_36082E": 66,
-        "Frame_360834": 72,
-        "Frame_36083A": 78,
-        "Frame_360840": 84,
-        "Frame_360846": 90,
-        "Frame_36084C": 96,
-        "Frame_360852": 102,
-        "Frame_360858": 108,
-        "Frame_36085E": 114,
-        "Frame_360866": 122,
-        "Frame_36086C": 128,
-        "Frame_360870": 132,
-        "Frame_360876": 138,
-        "Frame_36087C": 144,
-        "Frame_360882": 150,
-        "Frame_360888": 156,
-        "Frame_36088E": 162
+        "Flybot767S3_DPLCFrame00": 42,
+        "Flybot767S3_DPLCFrame01": 48,
+        "Flybot767S3_DPLCFrame02": 54,
+        "Flybot767S3_DPLCFrame03": 60,
+        "Flybot767S3_DPLCFrame04": 66,
+        "Flybot767S3_DPLCFrame05": 72,
+        "Flybot767S3_DPLCFrame06": 78,
+        "Flybot767S3_DPLCFrame07": 84,
+        "Flybot767S3_DPLCFrame08": 90,
+        "Flybot767S3_DPLCFrame09": 96,
+        "Flybot767S3_DPLCFrame0A": 102,
+        "Flybot767S3_DPLCFrame0B": 108,
+        "Flybot767S3_DPLCFrame0C": 114,
+        "Flybot767S3_DPLCFrame0D": 122,
+        "Flybot767S3_DPLCFrame0E": 128,
+        "Flybot767S3_DPLCFrame0F": 132,
+        "Flybot767S3_DPLCFrame10": 138,
+        "Flybot767S3_DPLCFrame11": 144,
+        "Flybot767S3_DPLCFrame12": 150,
+        "Flybot767S3_DPLCFrame13": 156,
+        "Flybot767S3_DPLCFrame14": 162
       },
       "external_symbols": [],
       "blocks": [
@@ -9644,147 +9644,147 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360816",
+          "target": "Flybot767S3_DPLCFrame00",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36081C",
+          "target": "Flybot767S3_DPLCFrame01",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360822",
+          "target": "Flybot767S3_DPLCFrame02",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360828",
+          "target": "Flybot767S3_DPLCFrame03",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36082E",
+          "target": "Flybot767S3_DPLCFrame04",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360834",
+          "target": "Flybot767S3_DPLCFrame05",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36083A",
+          "target": "Flybot767S3_DPLCFrame06",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360840",
+          "target": "Flybot767S3_DPLCFrame07",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360846",
+          "target": "Flybot767S3_DPLCFrame08",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36084C",
+          "target": "Flybot767S3_DPLCFrame09",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360852",
+          "target": "Flybot767S3_DPLCFrame0A",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360858",
+          "target": "Flybot767S3_DPLCFrame0B",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36085E",
+          "target": "Flybot767S3_DPLCFrame0C",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360866",
+          "target": "Flybot767S3_DPLCFrame0D",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36086C",
+          "target": "Flybot767S3_DPLCFrame0E",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360870",
+          "target": "Flybot767S3_DPLCFrame0F",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360876",
+          "target": "Flybot767S3_DPLCFrame10",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36087C",
+          "target": "Flybot767S3_DPLCFrame11",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360882",
+          "target": "Flybot767S3_DPLCFrame12",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360888",
+          "target": "Flybot767S3_DPLCFrame13",
           "base": "DPLC_Flybot767_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36088E",
+          "target": "Flybot767S3_DPLCFrame14",
           "base": "DPLC_Flybot767_"
         },
         {
@@ -9903,30 +9903,30 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 402
       },
-      "declarations_sha256": "62223c859e424cdd6ccbf8e02cc9ca51c3becfaeec98f0076a6d4bf3838ec76b",
+      "declarations_sha256": "0f94e6332b63aeda3bf5455181ea34d124b834c5c23447507f76ad942de7ac2a",
       "labels": {
         "Map_Flybot767_": 0,
-        "Frame_360684": 42,
-        "Frame_360698": 62,
-        "Frame_3606AC": 82,
-        "Frame_3606C0": 102,
-        "Frame_3606D4": 122,
-        "Frame_3606E8": 142,
-        "Frame_3606FC": 162,
-        "Frame_360710": 182,
-        "Frame_360724": 202,
-        "Frame_360738": 222,
-        "Frame_36074C": 242,
-        "Frame_36075A": 256,
-        "Frame_360768": 270,
-        "Frame_36077C": 290,
-        "Frame_36078A": 304,
-        "Frame_360792": 312,
-        "Frame_3607A0": 326,
-        "Frame_3607AE": 340,
-        "Frame_3607BC": 354,
-        "Frame_3607CA": 368,
-        "Frame_3607D8": 382
+        "Flybot767S3_MapFrame00": 42,
+        "Flybot767S3_MapFrame01": 62,
+        "Flybot767S3_MapFrame02": 82,
+        "Flybot767S3_MapFrame03": 102,
+        "Flybot767S3_MapFrame04": 122,
+        "Flybot767S3_MapFrame05": 142,
+        "Flybot767S3_MapFrame06": 162,
+        "Flybot767S3_MapFrame07": 182,
+        "Flybot767S3_MapFrame08": 202,
+        "Flybot767S3_MapFrame09": 222,
+        "Flybot767S3_MapFrame0A": 242,
+        "Flybot767S3_MapFrame0B": 256,
+        "Flybot767S3_MapFrame0C": 270,
+        "Flybot767S3_MapFrame0D": 290,
+        "Flybot767S3_MapFrame0E": 304,
+        "Flybot767S3_MapFrame0F": 312,
+        "Flybot767S3_MapFrame10": 326,
+        "Flybot767S3_MapFrame11": 340,
+        "Flybot767S3_MapFrame12": 354,
+        "Flybot767S3_MapFrame13": 368,
+        "Flybot767S3_MapFrame14": 382
       },
       "external_symbols": [],
       "blocks": [
@@ -9934,147 +9934,147 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360684",
+          "target": "Flybot767S3_MapFrame00",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360698",
+          "target": "Flybot767S3_MapFrame01",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3606AC",
+          "target": "Flybot767S3_MapFrame02",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3606C0",
+          "target": "Flybot767S3_MapFrame03",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3606D4",
+          "target": "Flybot767S3_MapFrame04",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3606E8",
+          "target": "Flybot767S3_MapFrame05",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3606FC",
+          "target": "Flybot767S3_MapFrame06",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360710",
+          "target": "Flybot767S3_MapFrame07",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360724",
+          "target": "Flybot767S3_MapFrame08",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360738",
+          "target": "Flybot767S3_MapFrame09",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36074C",
+          "target": "Flybot767S3_MapFrame0A",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36075A",
+          "target": "Flybot767S3_MapFrame0B",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360768",
+          "target": "Flybot767S3_MapFrame0C",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36077C",
+          "target": "Flybot767S3_MapFrame0D",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36078A",
+          "target": "Flybot767S3_MapFrame0E",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360792",
+          "target": "Flybot767S3_MapFrame0F",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3607A0",
+          "target": "Flybot767S3_MapFrame10",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3607AE",
+          "target": "Flybot767S3_MapFrame11",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3607BC",
+          "target": "Flybot767S3_MapFrame12",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3607CA",
+          "target": "Flybot767S3_MapFrame13",
           "base": "Map_Flybot767_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3607D8",
+          "target": "Flybot767S3_MapFrame14",
           "base": "Map_Flybot767_"
         },
         {
@@ -25995,11 +25995,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "8b5e450413390140a9bf800161ea15d29e2956ea8825796ca80948309f215163",
+      "declarations_sha256": "ffb80f55cb138d868243a8ac5365e83f38c9adc4aec951460381ea6d14d0bb06",
       "labels": {
         "Map_Orbinaut_": 0,
-        "Frame_3604A8": 4,
-        "Frame_3604B0": 12
+        "OrbinautS3_MapFrame00": 4,
+        "OrbinautS3_MapFrame01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -26007,14 +26007,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3604A8",
+          "target": "OrbinautS3_MapFrame00",
           "base": "Map_Orbinaut_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3604B0",
+          "target": "OrbinautS3_MapFrame01",
           "base": "Map_Orbinaut_"
         },
         {
@@ -27977,17 +27977,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 266
       },
-      "declarations_sha256": "ca92142d8cc45b04e62f45784211d17d72744cc0d427799c1520e8f68bc5a67a",
+      "declarations_sha256": "31dad1532003e6137aed306c1f9f50cb7752523aa380893db44f1bec77361a1d",
       "labels": {
         "Map_Ribot_": 0,
-        "Frame_3604C8": 16,
-        "Frame_3604EE": 54,
-        "Frame_360514": 92,
-        "Frame_36053A": 130,
-        "Frame_360560": 168,
-        "Frame_360586": 206,
-        "Frame_3605AC": 244,
-        "Frame_3605B4": 252
+        "RibotS3_MapFrame00": 16,
+        "RibotS3_MapFrame01": 54,
+        "RibotS3_MapFrame02": 92,
+        "RibotS3_MapFrame03": 130,
+        "RibotS3_MapFrame04": 168,
+        "RibotS3_MapFrame05": 206,
+        "RibotS3_MapFrame06": 244,
+        "RibotS3_MapFrame07": 252
       },
       "external_symbols": [],
       "blocks": [
@@ -27995,56 +27995,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3604C8",
+          "target": "RibotS3_MapFrame00",
           "base": "Map_Ribot_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3604EE",
+          "target": "RibotS3_MapFrame01",
           "base": "Map_Ribot_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360514",
+          "target": "RibotS3_MapFrame02",
           "base": "Map_Ribot_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36053A",
+          "target": "RibotS3_MapFrame03",
           "base": "Map_Ribot_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360560",
+          "target": "RibotS3_MapFrame04",
           "base": "Map_Ribot_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_360586",
+          "target": "RibotS3_MapFrame05",
           "base": "Map_Ribot_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605AC",
+          "target": "RibotS3_MapFrame06",
           "base": "Map_Ribot_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3605B4",
+          "target": "RibotS3_MapFrame07",
           "base": "Map_Ribot_"
         },
         {
@@ -101386,10 +101386,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 14
       },
-      "declarations_sha256": "f7682d47b3b9f988dda561f048eab6d6471252dea05c3d62eb149a0f76743297",
+      "declarations_sha256": "dbc9d9a87c58b26eac71e6587e28adc2fbbdd4aa8917af8b356963beafb7c4fb",
       "labels": {
         "Ani_LBZFlameThrower_": 0,
-        "byte_26480": 2
+        "LBZFlameThrowerSharedData_StandardAnim00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -101397,7 +101397,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_26480",
+          "target": "LBZFlameThrowerSharedData_StandardAnim00",
           "base": "Ani_LBZFlameThrower_"
         },
         {
@@ -101417,10 +101417,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 12
       },
-      "declarations_sha256": "d79d1607d5533ebcda680b62eac504421063ad98de1b6bd5abc810b96252881d",
+      "declarations_sha256": "7a82055f8462f972ba521f112ac33647fd3bebeba1df255f5ce6c4557d2589de",
       "labels": {
         "Ani_LBZUnusedSolidHurt_": 0,
-        "byte_269F0": 2
+        "LBZUnusedSolidHurtS3Data_StandardAnim00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -101428,7 +101428,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_269F0",
+          "target": "LBZUnusedSolidHurtS3Data_StandardAnim00",
           "base": "Ani_LBZUnusedSolidHurt_"
         },
         {
@@ -101448,11 +101448,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "8c6375317220d85f55acd3eecd5a2ce70aa0b89aab60ba991c5541a32d27310c",
+      "declarations_sha256": "30cd74b5291bd7e73c4bdc6abc24cd9213d37695f8ca7dee1afdf3f5f8d0444e",
       "labels": {
         "Map_LBZBreakableWall_": 0,
-        "Frame_220062": 4,
-        "Frame_22007C": 30
+        "LBZBreakableWallS3Data_MapSlot00": 4,
+        "LBZBreakableWallS3Data_MapSlot01": 30
       },
       "external_symbols": [],
       "blocks": [
@@ -101460,14 +101460,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_220062",
+          "target": "LBZBreakableWallS3Data_MapSlot00",
           "base": "Map_LBZBreakableWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22007C",
+          "target": "LBZBreakableWallS3Data_MapSlot01",
           "base": "Map_LBZBreakableWall_"
         },
         {
@@ -101491,12 +101491,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 252
       },
-      "declarations_sha256": "c8d7e013a97df413a7246e1e6e82b4c259cd0683c0062c0636d44935541c06ad",
+      "declarations_sha256": "b81a835f3ba25b89990ea3533f793efbb43bf3c02a0b5b6ee69a7e198f92adc1",
       "labels": {
         "Map_LBZCollapsingBridge_": 0,
-        "Frame_21E89C": 6,
-        "Frame_21E8CE": 56,
-        "Frame_21E930": 154
+        "LBZCollapsingBridgeS3Data_MapSlot00": 6,
+        "LBZCollapsingBridgeS3Data_MapSlot01": 56,
+        "LBZCollapsingBridgeS3Data_MapSlot02": 154
       },
       "external_symbols": [],
       "blocks": [
@@ -101504,21 +101504,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E89C",
+          "target": "LBZCollapsingBridgeS3Data_MapSlot00",
           "base": "Map_LBZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E8CE",
+          "target": "LBZCollapsingBridgeS3Data_MapSlot01",
           "base": "Map_LBZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E930",
+          "target": "LBZCollapsingBridgeS3Data_MapSlot02",
           "base": "Map_LBZCollapsingBridge_"
         },
         {
@@ -101547,11 +101547,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 136
       },
-      "declarations_sha256": "50b3e2671eb2d5223c321fa5f34e5a54be6309c0a87754a61955c8caa1884412",
+      "declarations_sha256": "14d44fc1ebf5f8e8c13f88b79e63322f4f67e44a08c9e66e53b4a0c676bff35f",
       "labels": {
         "Map_LBZCollapsingLedge_": 0,
-        "Frame_21E998": 6,
-        "Frame_21E9C4": 50
+        "LBZCollapsingLedgeS3Data_MapSlot00": 6,
+        "LBZCollapsingLedgeS3Data_MapSlots01_02": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -101559,21 +101559,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E998",
+          "target": "LBZCollapsingLedgeS3Data_MapSlot00",
           "base": "Map_LBZCollapsingLedge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E9C4",
+          "target": "LBZCollapsingLedgeS3Data_MapSlots01_02",
           "base": "Map_LBZCollapsingLedge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_21E9C4",
+          "target": "LBZCollapsingLedgeS3Data_MapSlots01_02",
           "base": "Map_LBZCollapsingLedge_"
         },
         {
@@ -101597,11 +101597,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "59246a78eb583ebd62e243ad83244be4d50fd4bb1557df5d515dfb7f80664600",
+      "declarations_sha256": "cbff14903bf4eacb4adaed453a1883a19346dd6a0f726a0f44857f53362c84f7",
       "labels": {
         "Map_LBZCorkFloor_": 0,
-        "Frame_229EEC": 4,
-        "Frame_229F1E": 54
+        "LBZCorkFloorS3Data_MapSlot00": 4,
+        "LBZCorkFloorS3Data_MapSlot01": 54
       },
       "external_symbols": [],
       "blocks": [
@@ -101609,14 +101609,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229EEC",
+          "target": "LBZCorkFloorS3Data_MapSlot00",
           "base": "Map_LBZCorkFloor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229F1E",
+          "target": "LBZCorkFloorS3Data_MapSlot01",
           "base": "Map_LBZCorkFloor_"
         },
         {
@@ -101640,14 +101640,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 104
       },
-      "declarations_sha256": "f0ff0c3f5bf5218981e6580bea3ee2996e600c740d8b7371c07639e62f4cd574",
+      "declarations_sha256": "842c05f3988218624f3b81da48d659dd413e94b69bb42fa2855a9abb383eec7c",
       "labels": {
         "Map_LBZCupElevator_": 0,
-        "Frame_2261A4": 10,
-        "Frame_2261B2": 24,
-        "Frame_2261BA": 32,
-        "Frame_2261C8": 46,
-        "Frame_2261DC": 66
+        "LBZCupElevatorS3Data_MapSlot00": 10,
+        "LBZCupElevatorS3Data_MapSlot01": 24,
+        "LBZCupElevatorS3Data_MapSlot02": 32,
+        "LBZCupElevatorS3Data_MapSlot03": 46,
+        "LBZCupElevatorS3Data_MapSlot04": 66
       },
       "external_symbols": [],
       "blocks": [
@@ -101655,35 +101655,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2261A4",
+          "target": "LBZCupElevatorS3Data_MapSlot00",
           "base": "Map_LBZCupElevator_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2261B2",
+          "target": "LBZCupElevatorS3Data_MapSlot01",
           "base": "Map_LBZCupElevator_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2261BA",
+          "target": "LBZCupElevatorS3Data_MapSlot02",
           "base": "Map_LBZCupElevator_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2261C8",
+          "target": "LBZCupElevatorS3Data_MapSlot03",
           "base": "Map_LBZCupElevator_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2261DC",
+          "target": "LBZCupElevatorS3Data_MapSlot04",
           "base": "Map_LBZCupElevator_"
         },
         {
@@ -101722,21 +101722,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 138
       },
-      "declarations_sha256": "6193d57d25e2d2937e26264b2f3ae2fe3721210fc6da365521b6a7a15e0a7d92",
+      "declarations_sha256": "103829a4d54dc6add99d1a90b2c10a4fb2560cc466e687470a81f36224990124",
       "labels": {
         "Map_LBZDeathEggSmall_": 0,
-        "Frame_364824": 24,
-        "Frame_36483E": 50,
-        "Frame_364846": 58,
-        "Frame_36484E": 66,
-        "Frame_364856": 74,
-        "Frame_36485E": 82,
-        "Frame_364866": 90,
-        "Frame_36486E": 98,
-        "Frame_364876": 106,
-        "Frame_36487E": 114,
-        "Frame_364886": 122,
-        "Frame_36488E": 130
+        "LBZEndingDeathEggS3_MapFrame00": 24,
+        "LBZEndingDeathEggS3_MapFrame01": 50,
+        "LBZEndingDeathEggS3_MapFrame02": 58,
+        "LBZEndingDeathEggS3_MapFrame03": 66,
+        "LBZEndingDeathEggS3_MapFrame04": 74,
+        "LBZEndingDeathEggS3_MapFrame05": 82,
+        "LBZEndingDeathEggS3_MapFrame06": 90,
+        "LBZEndingDeathEggS3_MapFrame07": 98,
+        "LBZEndingDeathEggS3_MapFrame08": 106,
+        "LBZEndingDeathEggS3_MapFrame09": 114,
+        "LBZEndingDeathEggS3_MapFrame0A": 122,
+        "LBZEndingDeathEggS3_MapFrame0B": 130
       },
       "external_symbols": [],
       "blocks": [
@@ -101744,84 +101744,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364824",
+          "target": "LBZEndingDeathEggS3_MapFrame00",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36483E",
+          "target": "LBZEndingDeathEggS3_MapFrame01",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364846",
+          "target": "LBZEndingDeathEggS3_MapFrame02",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36484E",
+          "target": "LBZEndingDeathEggS3_MapFrame03",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364856",
+          "target": "LBZEndingDeathEggS3_MapFrame04",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36485E",
+          "target": "LBZEndingDeathEggS3_MapFrame05",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364866",
+          "target": "LBZEndingDeathEggS3_MapFrame06",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36486E",
+          "target": "LBZEndingDeathEggS3_MapFrame07",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364876",
+          "target": "LBZEndingDeathEggS3_MapFrame08",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36487E",
+          "target": "LBZEndingDeathEggS3_MapFrame09",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364886",
+          "target": "LBZEndingDeathEggS3_MapFrame0A",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36488E",
+          "target": "LBZEndingDeathEggS3_MapFrame0B",
           "base": "Map_LBZDeathEggSmall_"
         },
         {
@@ -102107,10 +102107,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "afe8273bc28bd3e920a0e3fd7e7501ca2d135009dd3dff04b937f6fb7bf56488",
+      "declarations_sha256": "dc82f2e5538d485d60af5b12fffee7b633df0be062dc342b4dd3093a4b1689fc",
       "labels": {
         "Map_LBZExplodingTrigger_": 0,
-        "Frame_2249AA": 2
+        "LBZExplodingTriggerS3Data_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -102118,7 +102118,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2249AA",
+          "target": "LBZExplodingTriggerS3Data_MapSlot00",
           "base": "Map_LBZExplodingTrigger_"
         },
         {
@@ -103009,18 +103009,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 258
       },
-      "declarations_sha256": "9aaa243f02f6f9fda90182f2f7c4b1f0722fab64430565fa9def6f5742c7a704",
+      "declarations_sha256": "afdc3988ffc070300d6b350474a1cd26a2296b8e8e52f49f107a302b43c381ee",
       "labels": {
         "Map_LBZFlameThrower_": 0,
-        "Frame_225460": 18,
-        "Frame_225468": 26,
-        "Frame_225476": 40,
-        "Frame_225490": 66,
-        "Frame_2254B6": 104,
-        "Frame_2254DC": 142,
-        "Frame_225502": 180,
-        "Frame_225528": 218,
-        "Frame_225542": 244
+        "LBZFlameThrowerS3Data_MapSlot00": 18,
+        "LBZFlameThrowerS3Data_MapSlot01": 26,
+        "LBZFlameThrowerS3Data_MapSlot02": 40,
+        "LBZFlameThrowerS3Data_MapSlot03": 66,
+        "LBZFlameThrowerS3Data_MapSlot04": 104,
+        "LBZFlameThrowerS3Data_MapSlot05": 142,
+        "LBZFlameThrowerS3Data_MapSlot06": 180,
+        "LBZFlameThrowerS3Data_MapSlot07": 218,
+        "LBZFlameThrowerS3Data_MapSlot08": 244
       },
       "external_symbols": [],
       "blocks": [
@@ -103028,63 +103028,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225460",
+          "target": "LBZFlameThrowerS3Data_MapSlot00",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225468",
+          "target": "LBZFlameThrowerS3Data_MapSlot01",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225476",
+          "target": "LBZFlameThrowerS3Data_MapSlot02",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225490",
+          "target": "LBZFlameThrowerS3Data_MapSlot03",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2254B6",
+          "target": "LBZFlameThrowerS3Data_MapSlot04",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2254DC",
+          "target": "LBZFlameThrowerS3Data_MapSlot05",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225502",
+          "target": "LBZFlameThrowerS3Data_MapSlot06",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225528",
+          "target": "LBZFlameThrowerS3Data_MapSlot07",
           "base": "Map_LBZFlameThrower_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225542",
+          "target": "LBZFlameThrowerS3Data_MapSlot08",
           "base": "Map_LBZFlameThrower_"
         },
         {
@@ -103143,12 +103143,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 36
       },
-      "declarations_sha256": "8a593fee157883ab8af60c8f3a693bc453f8a908e30b3aaf9b00a84227946103",
+      "declarations_sha256": "4d686a2139b8b8fb30605e6e9ac295aeb709fe218d905027595fb3a3be2104dd",
       "labels": {
         "Map_LBZGateLaser_": 0,
-        "Frame_22839A": 6,
-        "Frame_2283A8": 20,
-        "Frame_2283B0": 28
+        "LBZGateLaserS3Data_MapSlot00": 6,
+        "LBZGateLaserS3Data_MapSlot01": 20,
+        "LBZGateLaserS3Data_MapSlot02": 28
       },
       "external_symbols": [],
       "blocks": [
@@ -103156,21 +103156,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22839A",
+          "target": "LBZGateLaserS3Data_MapSlot00",
           "base": "Map_LBZGateLaser_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2283A8",
+          "target": "LBZGateLaserS3Data_MapSlot01",
           "base": "Map_LBZGateLaser_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2283B0",
+          "target": "LBZGateLaserS3Data_MapSlot02",
           "base": "Map_LBZGateLaser_"
         },
         {
@@ -103242,23 +103242,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 856
       },
-      "declarations_sha256": "2ea507a7614a23b38f11be1889b1399a80760a471fdedcdfbf572368cb9c0f6c",
+      "declarations_sha256": "cc0990d042b7be47cdd240b84015abaded54ccbf92fa65b6e73ad5af81ac1f6e",
       "labels": {
         "Map_LBZLoweringGrapple_": 0,
-        "Frame_227DDA": 30,
-        "Frame_227DEE": 50,
-        "Frame_227E08": 76,
-        "Frame_227E28": 108,
-        "Frame_227E4E": 146,
-        "Frame_227E7A": 190,
-        "Frame_227EAC": 240,
-        "Frame_227EE4": 296,
-        "Frame_227F22": 358,
-        "Frame_227F66": 426,
-        "Frame_227FB0": 500,
-        "Frame_228000": 580,
-        "Frame_228056": 666,
-        "Frame_2280B2": 758
+        "LBZLoweringGrappleS3Data_MapSlot00": 30,
+        "LBZLoweringGrappleS3Data_MapSlot01": 50,
+        "LBZLoweringGrappleS3Data_MapSlot02": 76,
+        "LBZLoweringGrappleS3Data_MapSlot03": 108,
+        "LBZLoweringGrappleS3Data_MapSlot04": 146,
+        "LBZLoweringGrappleS3Data_MapSlot05": 190,
+        "LBZLoweringGrappleS3Data_MapSlot06": 240,
+        "LBZLoweringGrappleS3Data_MapSlot07": 296,
+        "LBZLoweringGrappleS3Data_MapSlot08": 358,
+        "LBZLoweringGrappleS3Data_MapSlot09": 426,
+        "LBZLoweringGrappleS3Data_MapSlot0A": 500,
+        "LBZLoweringGrappleS3Data_MapSlot0B": 580,
+        "LBZLoweringGrappleS3Data_MapSlot0C": 666,
+        "LBZLoweringGrappleS3Data_MapSlots0D_0E": 758
       },
       "external_symbols": [],
       "blocks": [
@@ -103266,105 +103266,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227DDA",
+          "target": "LBZLoweringGrappleS3Data_MapSlot00",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227DEE",
+          "target": "LBZLoweringGrappleS3Data_MapSlot01",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227E08",
+          "target": "LBZLoweringGrappleS3Data_MapSlot02",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227E28",
+          "target": "LBZLoweringGrappleS3Data_MapSlot03",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227E4E",
+          "target": "LBZLoweringGrappleS3Data_MapSlot04",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227E7A",
+          "target": "LBZLoweringGrappleS3Data_MapSlot05",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227EAC",
+          "target": "LBZLoweringGrappleS3Data_MapSlot06",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227EE4",
+          "target": "LBZLoweringGrappleS3Data_MapSlot07",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227F22",
+          "target": "LBZLoweringGrappleS3Data_MapSlot08",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227F66",
+          "target": "LBZLoweringGrappleS3Data_MapSlot09",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227FB0",
+          "target": "LBZLoweringGrappleS3Data_MapSlot0A",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_228000",
+          "target": "LBZLoweringGrappleS3Data_MapSlot0B",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_228056",
+          "target": "LBZLoweringGrappleS3Data_MapSlot0C",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2280B2",
+          "target": "LBZLoweringGrappleS3Data_MapSlots0D_0E",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2280B2",
+          "target": "LBZLoweringGrappleS3Data_MapSlots0D_0E",
           "base": "Map_LBZLoweringGrapple_"
         },
         {
@@ -103798,12 +103798,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 48
       },
-      "declarations_sha256": "052aa6b62accc489197c1f4dd1d723ad08eb8cc140d05e72d3a26b199ffa2809",
+      "declarations_sha256": "19b0566a7fc91bc05eadc61684ab3111b80054a673598a715b2b9fad3bb6c58d",
       "labels": {
         "Map_LBZMovingPlatform_": 0,
-        "word_2533E": 6,
-        "word_2534C": 20,
-        "word_2535A": 34
+        "LBZMovingPlatformSharedData_MapSlot00": 6,
+        "LBZMovingPlatformSharedData_MapSlot01": 20,
+        "LBZMovingPlatformSharedData_MapSlot02": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -103811,21 +103811,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2533E",
+          "target": "LBZMovingPlatformSharedData_MapSlot00",
           "base": "Map_LBZMovingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2534C",
+          "target": "LBZMovingPlatformSharedData_MapSlot01",
           "base": "Map_LBZMovingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2535A",
+          "target": "LBZMovingPlatformSharedData_MapSlot02",
           "base": "Map_LBZMovingPlatform_"
         },
         {
@@ -103854,17 +103854,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 170
       },
-      "declarations_sha256": "a60849c1673c58826fba96db971f4f2ce48d1102ba04aca73aee12e4f6d43279",
+      "declarations_sha256": "beba857d9148c6db9f2cc5cbae185071c74c4f1f06554c3e27d42f7ec2af003e",
       "labels": {
         "Map_LBZPipePlug_": 0,
-        "Frame_226864": 16,
-        "Frame_2268C6": 114,
-        "Frame_2268CE": 122,
-        "Frame_2268D6": 130,
-        "Frame_2268DE": 138,
-        "Frame_2268E6": 146,
-        "Frame_2268EE": 154,
-        "Frame_2268F6": 162
+        "LBZPipeplugS3Data_MapSlot07": 16,
+        "LBZPipeplugS3Data_MapSlot00": 114,
+        "LBZPipeplugS3Data_MapSlot01": 122,
+        "LBZPipeplugS3Data_MapSlot02": 130,
+        "LBZPipeplugS3Data_MapSlot03": 138,
+        "LBZPipeplugS3Data_MapSlot04": 146,
+        "LBZPipeplugS3Data_MapSlot05": 154,
+        "LBZPipeplugS3Data_MapSlot06": 162
       },
       "external_symbols": [],
       "blocks": [
@@ -103872,56 +103872,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268C6",
+          "target": "LBZPipeplugS3Data_MapSlot00",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268CE",
+          "target": "LBZPipeplugS3Data_MapSlot01",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268D6",
+          "target": "LBZPipeplugS3Data_MapSlot02",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268DE",
+          "target": "LBZPipeplugS3Data_MapSlot03",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268E6",
+          "target": "LBZPipeplugS3Data_MapSlot04",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268EE",
+          "target": "LBZPipeplugS3Data_MapSlot05",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2268F6",
+          "target": "LBZPipeplugS3Data_MapSlot06",
           "base": "Map_LBZPipePlug_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_226864",
+          "target": "LBZPipeplugS3Data_MapSlot07",
           "base": "Map_LBZPipePlug_"
         },
         {
@@ -103975,11 +103975,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "0d15a9c3cd6af1bec51f3dd39f9de604c791ce1a97f18b03b1dcbf4f5e5fa30f",
+      "declarations_sha256": "5b889795b2290598f222998b29dd76db4d8cfe0a25ad9eb65b1c2b908fefec16",
       "labels": {
         "Map_LBZPlayerLauncher_": 0,
-        "Frame_225350": 4,
-        "Frame_225364": 24
+        "LBZPlayerLauncherS3Data_MapSlot00": 4,
+        "LBZPlayerLauncherS3Data_MapSlot01": 24
       },
       "external_symbols": [],
       "blocks": [
@@ -103987,14 +103987,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225350",
+          "target": "LBZPlayerLauncherS3Data_MapSlot00",
           "base": "Map_LBZPlayerLauncher_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225364",
+          "target": "LBZPlayerLauncherS3Data_MapSlot01",
           "base": "Map_LBZPlayerLauncher_"
         },
         {
@@ -104018,12 +104018,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "23183c33cf64f538df3c9d5fdde3ce4051ea42b1a42726358c9a7dcf0a5add60",
+      "declarations_sha256": "9e8a25be044e9a55bc91b4804ad6d76c4204ddf8093c028f024d6e637aa548fe",
       "labels": {
         "Map_LBZRideGrapple_": 0,
-        "word_26936": 6,
-        "word_2693E": 14,
-        "word_26946": 22
+        "LBZRideGrappleSharedData_MapSlot00": 6,
+        "LBZRideGrappleSharedData_MapSlot01": 14,
+        "LBZRideGrappleSharedData_MapSlot02": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -104031,21 +104031,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26936",
+          "target": "LBZRideGrappleSharedData_MapSlot00",
           "base": "Map_LBZRideGrapple_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2693E",
+          "target": "LBZRideGrappleSharedData_MapSlot01",
           "base": "Map_LBZRideGrapple_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26946",
+          "target": "LBZRideGrappleSharedData_MapSlot02",
           "base": "Map_LBZRideGrapple_"
         },
         {
@@ -104074,10 +104074,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "e395a99185dff0a56ee5b372295d4176c61d1ef7eacf11ed068a2116cdf5d2ca",
+      "declarations_sha256": "11c6a93ac9b836779c3961ab157d3d21a7376697ff24bbb8f43252718ed4a71c",
       "labels": {
         "Map_LBZSmashingSpikes_": 0,
-        "Frame_228238": 2
+        "LBZSmashingSpikesS3Data_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -104085,7 +104085,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_228238",
+          "target": "LBZSmashingSpikesS3Data_MapSlot00",
           "base": "Map_LBZSmashingSpikes_"
         },
         {
@@ -104104,10 +104104,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 46
       },
-      "declarations_sha256": "989a9296161d942bec754794843b1df5fd3a3412356fba0b619668779b69d764",
+      "declarations_sha256": "325a3636c9a765dcde6c508a77442d088bdc43b3d749edfd7796a30ec51be667",
       "labels": {
         "Map_LBZSpinLauncher_": 0,
-        "Frame_227BC4": 2
+        "LBZSpinLauncherS3Data_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -104115,7 +104115,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_227BC4",
+          "target": "LBZSpinLauncherS3Data_MapSlot00",
           "base": "Map_LBZSpinLauncher_"
         },
         {
@@ -104134,33 +104134,33 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 744
       },
-      "declarations_sha256": "e5606222dbe16c47fffa914c0eaf59b07fb85e071161ff1b7492635b7fb71292",
+      "declarations_sha256": "5cab0fb139909c2fea2bf7e75ded6c221da2f0a363e367c9f9224feb749b4da9",
       "labels": {
         "Map_LBZTriggerBridge_": 0,
-        "Frame_224E16": 48,
-        "Frame_224E48": 98,
-        "Frame_224E74": 142,
-        "Frame_224E9A": 180,
-        "Frame_224EBA": 212,
-        "Frame_224ED4": 238,
-        "Frame_224EE8": 258,
-        "Frame_224EF6": 272,
-        "Frame_224EFE": 280,
-        "Frame_224F30": 330,
-        "Frame_224F5C": 374,
-        "Frame_224F82": 412,
-        "Frame_224FA2": 444,
-        "Frame_224FBC": 470,
-        "Frame_224FD0": 490,
-        "Frame_224FDE": 504,
-        "Frame_224FE6": 512,
-        "Frame_225018": 562,
-        "Frame_225044": 606,
-        "Frame_22506A": 644,
-        "Frame_22508A": 676,
-        "Frame_2250A4": 702,
-        "Frame_2250B8": 722,
-        "Frame_2250C6": 736
+        "LBZTriggerBridgeS3Data_MapSlot00": 48,
+        "LBZTriggerBridgeS3Data_MapSlot01": 98,
+        "LBZTriggerBridgeS3Data_MapSlot02": 142,
+        "LBZTriggerBridgeS3Data_MapSlot03": 180,
+        "LBZTriggerBridgeS3Data_MapSlot04": 212,
+        "LBZTriggerBridgeS3Data_MapSlot05": 238,
+        "LBZTriggerBridgeS3Data_MapSlot06": 258,
+        "LBZTriggerBridgeS3Data_MapSlot07": 272,
+        "LBZTriggerBridgeS3Data_MapSlot08": 280,
+        "LBZTriggerBridgeS3Data_MapSlot09": 330,
+        "LBZTriggerBridgeS3Data_MapSlot0A": 374,
+        "LBZTriggerBridgeS3Data_MapSlot0B": 412,
+        "LBZTriggerBridgeS3Data_MapSlot0C": 444,
+        "LBZTriggerBridgeS3Data_MapSlot0D": 470,
+        "LBZTriggerBridgeS3Data_MapSlot0E": 490,
+        "LBZTriggerBridgeS3Data_MapSlot0F": 504,
+        "LBZTriggerBridgeS3Data_MapSlot10": 512,
+        "LBZTriggerBridgeS3Data_MapSlot11": 562,
+        "LBZTriggerBridgeS3Data_MapSlot12": 606,
+        "LBZTriggerBridgeS3Data_MapSlot13": 644,
+        "LBZTriggerBridgeS3Data_MapSlot14": 676,
+        "LBZTriggerBridgeS3Data_MapSlot15": 702,
+        "LBZTriggerBridgeS3Data_MapSlot16": 722,
+        "LBZTriggerBridgeS3Data_MapSlot17": 736
       },
       "external_symbols": [],
       "blocks": [
@@ -104168,168 +104168,168 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224E16",
+          "target": "LBZTriggerBridgeS3Data_MapSlot00",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224E48",
+          "target": "LBZTriggerBridgeS3Data_MapSlot01",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224E74",
+          "target": "LBZTriggerBridgeS3Data_MapSlot02",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224E9A",
+          "target": "LBZTriggerBridgeS3Data_MapSlot03",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224EBA",
+          "target": "LBZTriggerBridgeS3Data_MapSlot04",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224ED4",
+          "target": "LBZTriggerBridgeS3Data_MapSlot05",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224EE8",
+          "target": "LBZTriggerBridgeS3Data_MapSlot06",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224EF6",
+          "target": "LBZTriggerBridgeS3Data_MapSlot07",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224EFE",
+          "target": "LBZTriggerBridgeS3Data_MapSlot08",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224F30",
+          "target": "LBZTriggerBridgeS3Data_MapSlot09",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224F5C",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0A",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224F82",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0B",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224FA2",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0C",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224FBC",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0D",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224FD0",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0E",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224FDE",
+          "target": "LBZTriggerBridgeS3Data_MapSlot0F",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_224FE6",
+          "target": "LBZTriggerBridgeS3Data_MapSlot10",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225018",
+          "target": "LBZTriggerBridgeS3Data_MapSlot11",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_225044",
+          "target": "LBZTriggerBridgeS3Data_MapSlot12",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22506A",
+          "target": "LBZTriggerBridgeS3Data_MapSlot13",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22508A",
+          "target": "LBZTriggerBridgeS3Data_MapSlot14",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2250A4",
+          "target": "LBZTriggerBridgeS3Data_MapSlot15",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2250B8",
+          "target": "LBZTriggerBridgeS3Data_MapSlot16",
           "base": "Map_LBZTriggerBridge_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2250C6",
+          "target": "LBZTriggerBridgeS3Data_MapSlot17",
           "base": "Map_LBZTriggerBridge_"
         },
         {
@@ -104463,16 +104463,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 370
       },
-      "declarations_sha256": "5807c05518b89d2fd3ce48c547deb265cc47b9f71457ca7917601d087c009c9e",
+      "declarations_sha256": "bdf664ec22957af029c16014eab8a51a9abcfc0483b489864e0346c13b2a8de6",
       "labels": {
         "Map_LBZTubeElevator_": 0,
-        "Frame_2291B2": 14,
-        "Frame_2291F0": 76,
-        "Frame_22922E": 138,
-        "Frame_22925A": 182,
-        "Frame_229298": 244,
-        "Frame_2292C4": 288,
-        "Frame_229302": 350
+        "LBZTubeElevatorS3Data_MapSlot00": 14,
+        "LBZTubeElevatorS3Data_MapSlot01": 76,
+        "LBZTubeElevatorS3Data_MapSlot02": 138,
+        "LBZTubeElevatorS3Data_MapSlot03": 182,
+        "LBZTubeElevatorS3Data_MapSlot04": 244,
+        "LBZTubeElevatorS3Data_MapSlot05": 288,
+        "LBZTubeElevatorS3Data_MapSlot06": 350
       },
       "external_symbols": [],
       "blocks": [
@@ -104480,49 +104480,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2291B2",
+          "target": "LBZTubeElevatorS3Data_MapSlot00",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2291F0",
+          "target": "LBZTubeElevatorS3Data_MapSlot01",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22922E",
+          "target": "LBZTubeElevatorS3Data_MapSlot02",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22925A",
+          "target": "LBZTubeElevatorS3Data_MapSlot03",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229298",
+          "target": "LBZTubeElevatorS3Data_MapSlot04",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2292C4",
+          "target": "LBZTubeElevatorS3Data_MapSlot05",
           "base": "Map_LBZTubeElevator_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_229302",
+          "target": "LBZTubeElevatorS3Data_MapSlot06",
           "base": "Map_LBZTubeElevator_"
         },
         {
@@ -104571,10 +104571,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "d6892d3a70af3d266b3a610c5f35bbe9d4b5f2b0119da326ffd60fa425a1adba",
+      "declarations_sha256": "b5bd2e7fdaf580c0140e25c3183be697d8754d620efee21ffe70ce6a2bfd4515",
       "labels": {
         "Map_LBZUnusedBarPlatform_": 0,
-        "word_254EC": 2
+        "LBZUnusedBarPlatformSharedData_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -104582,7 +104582,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_254EC",
+          "target": "LBZUnusedBarPlatformSharedData_MapSlot00",
           "base": "Map_LBZUnusedBarPlatform_"
         },
         {
@@ -104601,10 +104601,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "b8f2cbfb3e4f2b1ebfadc68f0ab87a323753683cdf8bc728ac727deb6dbd926f",
+      "declarations_sha256": "d7c6f2912ceb89005cebdb7c59d358b21163be471534056bfcc299f6bb87b3a6",
       "labels": {
         "Map_LBZUnusedElevator_": 0,
-        "Frame_2248EC": 2
+        "LBZUnusedElevatorS3Data_MapSlot00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -104612,7 +104612,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2248EC",
+          "target": "LBZUnusedElevatorS3Data_MapSlot00",
           "base": "Map_LBZUnusedElevator_"
         },
         {
@@ -104631,14 +104631,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "9be5cdf9f260b6a7f809f8142c55b0212b0f655600f47b76603cda04ead3a5bc",
+      "declarations_sha256": "c0fb002b43f43b2402d6cd2ce514e7101737637277b53f74bc9d41909f9e06a8",
       "labels": {
         "Map_LBZUnusedSolidHurt_": 0,
-        "word_26A04": 10,
-        "word_26A1E": 36,
-        "word_26A38": 62,
-        "word_26A58": 94,
-        "word_26A72": 120
+        "LBZUnusedSolidHurtS3Data_MapSlot00": 10,
+        "LBZUnusedSolidHurtS3Data_MapSlot01": 36,
+        "LBZUnusedSolidHurtS3Data_MapSlot02": 62,
+        "LBZUnusedSolidHurtS3Data_MapSlot03": 94,
+        "LBZUnusedSolidHurtS3Data_MapSlot04": 120
       },
       "external_symbols": [],
       "blocks": [
@@ -104646,35 +104646,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26A04",
+          "target": "LBZUnusedSolidHurtS3Data_MapSlot00",
           "base": "Map_LBZUnusedSolidHurt_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26A1E",
+          "target": "LBZUnusedSolidHurtS3Data_MapSlot01",
           "base": "Map_LBZUnusedSolidHurt_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26A38",
+          "target": "LBZUnusedSolidHurtS3Data_MapSlot02",
           "base": "Map_LBZUnusedSolidHurt_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26A58",
+          "target": "LBZUnusedSolidHurtS3Data_MapSlot03",
           "base": "Map_LBZUnusedSolidHurt_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_26A72",
+          "target": "LBZUnusedSolidHurtS3Data_MapSlot04",
           "base": "Map_LBZUnusedSolidHurt_"
         },
         {
@@ -104713,11 +104713,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "d67bda2a92f1f6a467936de21e9368ad8f43bcabfb1a99a4aba35fb37aacde45",
+      "declarations_sha256": "72360c1ceea24dd7aa8fd6341ffcc0045f3f1c84c4c4dd16c1256717c4d20e32",
       "labels": {
         "Map_LBZUnusedTiltingBridge_": 0,
-        "Frame_2264E4": 4,
-        "Frame_2264EC": 12
+        "LBZUnusedTiltingBridgeS3Data_MapSlot00": 4,
+        "LBZUnusedTiltingBridgeS3Data_MapSlot01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -104725,14 +104725,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2264E4",
+          "target": "LBZUnusedTiltingBridgeS3Data_MapSlot00",
           "base": "Map_LBZUnusedTiltingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2264EC",
+          "target": "LBZUnusedTiltingBridgeS3Data_MapSlot01",
           "base": "Map_LBZUnusedTiltingBridge_"
         },
         {

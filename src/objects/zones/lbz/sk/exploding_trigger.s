@@ -12,11 +12,11 @@ Obj_LBZExplodingTrigger:
                 move.b  #$10,height_pixels(a0)
                 move.w  #$280,priority(a0)
                 move.b  #$C6,collision_flags(a0)
-                move.l  #loc_25CF0,(a0)
+                move.l  #SKLBZBlastTrig_CheckContactsAndSwitch,(a0)
 
-loc_25CF0:
+SKLBZBlastTrig_CheckContactsAndSwitch:
                 move.b  collision_property(a0),d0
-                beq.w   loc_25D26
+                beq.w   SKLBZBlastTrig_DrawAndCheckTouch
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
@@ -24,23 +24,23 @@ loc_25CF0:
                 moveq   #0,d3
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_25D18
+                beq.s   SKLBZBlastTrig_TryP2Contact
                 bsr.s   ActivateLbzExplodingTrigger
 
-loc_25D18:
+SKLBZBlastTrig_TryP2Contact:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_25D26
+                beq.s   SKLBZBlastTrig_DrawAndCheckTouch
                 bsr.s   ActivateLbzExplodingTrigger
 
-loc_25D26:
+SKLBZBlastTrig_DrawAndCheckTouch:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ActivateLbzExplodingTrigger:
                 cmpi.b  #2,anim(a1)
-                bne.s   locret_25D52
+                bne.s   SKLBZBlastTrig_ActivationReturn
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 bchg    d3,(a3)
@@ -49,6 +49,6 @@ ActivateLbzExplodingTrigger:
                 clr.b   collision_flags(a0)
                 clr.b   collision_property(a0)
 
-locret_25D52:
+SKLBZBlastTrig_ActivationReturn:
                 rts
 ; End of function ActivateLbzExplodingTrigger

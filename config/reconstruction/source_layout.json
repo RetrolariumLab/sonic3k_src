@@ -8918,7 +8918,7 @@
       "responsibility": "Launch Base act-two screen initialization, background setup and event control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 263,
+      "physical_lines": 264,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -9023,7 +9023,7 @@
       "responsibility": "Launch Base act-two screen and background initialization and event control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 288,
+      "physical_lines": 289,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -24929,7 +24929,7 @@
       "responsibility": "Corkey flying enemy, spawned projectiles and private construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 246,
+      "physical_lines": 247,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -25064,7 +25064,7 @@
       "responsibility": "Ribot enemy and spawned actors with private movement and construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 375,
+      "physical_lines": 376,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -25104,7 +25104,7 @@
       "responsibility": "Corkey flying enemy, spawned projectiles and private construction records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 246,
+      "physical_lines": 247,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -25209,7 +25209,7 @@
       "responsibility": "Ribot enemy and spawned actors with private movement and construction data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 375,
+      "physical_lines": 376,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -61476,7 +61476,7 @@
       "responsibility": "Launch Base cup elevator coordinated movement, flicker, base, attachment and pole objects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 666,
+      "physical_lines": 669,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -61616,7 +61616,7 @@
       "responsibility": "Launch Base gate laser activation, collision and sprite state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 85,
+      "physical_lines": 87,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -61716,7 +61716,7 @@
       "responsibility": "Launch Base lowering grapple movement and player attachment or release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 169,
+      "physical_lines": 170,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -61801,7 +61801,7 @@
       "responsibility": "Launch Base pipe-plug collision, player response, object smash helpers and fragment geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 280,
+      "physical_lines": 281,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -61846,7 +61846,7 @@
       "responsibility": "Launch Base player launcher initialization, launch control, player release and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 248,
+      "physical_lines": 250,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -61891,7 +61891,7 @@
       "responsibility": "Launch Base riding grapple initialization, constrained travel, player attachment and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 422,
+      "physical_lines": 424,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -61976,7 +61976,7 @@
       "responsibility": "Launch Base spin launcher motion, player capture, launch and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 227,
+      "physical_lines": 228,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -62021,7 +62021,7 @@
       "responsibility": "Launch Base triggered bridge activation, movement and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 171,
+      "physical_lines": 172,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -62066,7 +62066,7 @@
       "responsibility": "Launch Base tube elevator initialization, movement dispatch, player transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 510,
+      "physical_lines": 511,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -62106,7 +62106,7 @@
       "responsibility": "Unused Launch Base bar platform movement, player riding and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 134,
+      "physical_lines": 135,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -62151,7 +62151,7 @@
       "responsibility": "Unused Launch Base elevator initialization, movement and player riding.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 188,
+      "physical_lines": 190,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -62241,7 +62241,7 @@
       "responsibility": "Unused Launch Base moving solid hazard collision, damage, animation and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 88,
+      "physical_lines": 89,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -62366,7 +62366,7 @@
       "responsibility": "Launch Base cup elevator coordinated movement, flicker, base, attachment and pole objects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 678,
+      "physical_lines": 681,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -62476,7 +62476,7 @@
       "responsibility": "Launch Base gate laser activation, collision and sprite state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 82,
+      "physical_lines": 84,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -62511,7 +62511,7 @@
       "responsibility": "Launch Base lowering grapple movement and player attachment or release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 172,
+      "physical_lines": 174,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -62576,7 +62576,7 @@
       "responsibility": "Launch Base pipe-plug collision, player response, object smash helpers and fragment geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 287,
+      "physical_lines": 288,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -62611,7 +62611,7 @@
       "responsibility": "Launch Base player launcher initialization, launch control, player release and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 244,
+      "physical_lines": 246,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -62646,7 +62646,7 @@
       "responsibility": "Launch Base riding grapple initialization, constrained travel, player attachment and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 422,
+      "physical_lines": 424,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -62711,7 +62711,7 @@
       "responsibility": "Launch Base spin launcher motion, player capture, launch and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 225,
+      "physical_lines": 226,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -62746,7 +62746,7 @@
       "responsibility": "Launch Base triggered bridge activation, movement and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 167,
+      "physical_lines": 168,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -62781,7 +62781,7 @@
       "responsibility": "Launch Base tube elevator initialization, movement dispatch, player transport and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 506,
+      "physical_lines": 507,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -62811,7 +62811,7 @@
       "responsibility": "Unused Launch Base bar platform movement, player riding and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 134,
+      "physical_lines": 135,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -62846,7 +62846,7 @@
       "responsibility": "Unused Launch Base elevator initialization, movement and player riding.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 183,
+      "physical_lines": 185,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",

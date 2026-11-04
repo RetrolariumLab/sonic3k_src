@@ -13,30 +13,30 @@ LBZ1_ScreenInit:
                 lea     (HScroll_table+$148).w,a1
                 moveq   #$E-1,d0
 
-loc_3E276:
+S3LBZ_ActOneClearInitialVerticalOffsets:
                 clr.l   (a1)+                           ; Clear VScroll
-                dbf     d0,loc_3E276
+                dbf     d0,S3LBZ_ActOneClearInitialVerticalOffsets
                 jsr     LBZ1_EventVScroll(pc)
                 lea     (HScroll_table+$100).w,a1
                 moveq   #$C-1,d0
 
-loc_3E286:
+S3LBZ1Screen_InitMaskedVScroll:
                 move.w  (a1)+,d1
                 and.w   (Camera_Y_pos_mask).w,d1
                 move.w  d1,(a1)+                        ; Set up tile offsets for VScroll array
-                dbf     d0,loc_3E286
+                dbf     d0,S3LBZ1Screen_InitMaskedVScroll
                 cmpi.w  #3,(Player_mode).w
-                beq.s   loc_3E2B0
+                beq.s   S3LBZ1Screen_ApplyInitialEndingLayout
                 cmpi.w  #$3B60,(Camera_X_pos_copy).w    ; Skip this if Knuckles
-                blo.s   loc_3E2B4
+                blo.s   S3LBZ1Screen_InitForeground
                 jsr     (AllocateObject).l
-                bne.s   loc_3E2B0
+                bne.s   S3LBZ1Screen_ApplyInitialEndingLayout
                 move.l  #Obj_LBZ1InvisibleBarrier,(a1)
 
-loc_3E2B0:
+S3LBZ1Screen_ApplyInitialEndingLayout:
                 jsr     LBZ1_ModEndingLayout(pc)
 
-loc_3E2B4:
+S3LBZ1Screen_InitForeground:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 moveq   #0,d2
@@ -49,50 +49,50 @@ LBZ1_ScreenEvent:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_Y_pos_copy).w
                 cmpi.w  #$55,(Events_fg_4).w
-                bne.s   loc_3E302
+                bne.s   S3LBZ_ActOneUpdateLayoutFromPlayerRegion
                 clr.w   (Events_fg_4).w
                 cmpi.w  #$540,(Camera_Y_pos_copy).w
-                bcc.s   loc_3E2F4
+                bcc.s   S3LBZ1Screen_PatchLowerBossChunk
                 movea.w 8(a3),a1
                 move.b  #$DA,$7D(a1)                    ; Changes the chunk where the boss appears
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3E2F4:
+S3LBZ1Screen_PatchLowerBossChunk:
                 movea.w $4C(a3),a1
                 move.b  #$DB,$79(a1)
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3E302:
+S3LBZ_ActOneUpdateLayoutFromPlayerRegion:
                 move.w  (Player_1+x_pos).w,d0           ; Normal level operation
                 move.w  (Player_1+y_pos).w,d1
                 move.w  (Events_bg+$00).w,d2
-                bne.s   loc_3E31C
+                bne.s   S3LBZ_ActOneTestActiveLayoutExitInterval
                 jsr     LBZ1_CheckLayoutMod(pc)
                 tst.w   d3
-                bmi.s   loc_3E36E
+                bmi.s   S3LBZ1Screen_DrawVertDeformedFg
                 jmp     Refresh_PlaneScreenDirect(pc)   ; Refresh screen when a layout mod is made
 ; ---------------------------------------------------------------------------
 
-loc_3E31C:
+S3LBZ_ActOneTestActiveLayoutExitInterval:
                 lea     LBZ1_LayoutModExitRange-4(pc),a1  ; If already in a layout
                 adda.w  d2,a1
                 cmp.w   (a1)+,d0
-                blo.s   loc_3E32C
+                blo.s   S3LBZ1Screen_RestoreLayoutAndRefresh
                 cmp.w   (a1)+,d0
-                bhi.s   loc_3E32C
-                bra.s   loc_3E36E
+                bhi.s   S3LBZ1Screen_RestoreLayoutAndRefresh
+                bra.s   S3LBZ1Screen_DrawVertDeformedFg
 ; ---------------------------------------------------------------------------
 
-loc_3E32C:
+S3LBZ1Screen_RestoreLayoutAndRefresh:
                 clr.w   (Events_bg+$00).w
                 lsr.w   #1,d2
-                jsr     loc_3E33A-2(pc,d2.w)
+                jsr     S3LBZ1Screen_LayoutExitBranches-2(pc,d2.w)
                 jmp     Refresh_PlaneScreenDirect(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3E33A:
+S3LBZ1Screen_LayoutExitBranches:
                 bra.s   LBZ1_LayoutExitMod1
 ; ---------------------------------------------------------------------------
                 bra.s   LBZ1_LayoutExitMod2
@@ -126,7 +126,7 @@ LBZ1_LayoutExitMod4:
                 bra.w   LBZ1_DoMod4
 ; ---------------------------------------------------------------------------
 
-loc_3E36E:
+S3LBZ1Screen_DrawVertDeformedFg:
                 jsr     LBZ1_EventVScroll(pc)           ; Do the vscroll deformation, if necessary
                 lea     LBZ1_FGVScrollArray(pc),a4
                 lea     (HScroll_table+$100).w,a5
@@ -138,15 +138,15 @@ loc_3E36E:
 
 LBZ1_EventVScroll:
                 tst.w   (Events_fg_4).w
-                beq.w   loc_3E434
-                bpl.s   loc_3E3A6
+                beq.w   S3LBZ_ActOnePrepareVerticalOffsetExport
+                bpl.s   S3LBZ_ActOnePrepareCollapseIntegration
                 move.w  #1,(Events_fg_4).w
                 move.w  #4,(Special_V_int_routine).w
                 jsr     (AllocateObject).l
-                bne.s   loc_3E3A6
+                bne.s   S3LBZ_ActOnePrepareCollapseIntegration
                 move.l  #Obj_LBZ1InvisibleBarrier,(a1)
 
-loc_3E3A6:
+S3LBZ_ActOnePrepareCollapseIntegration:
                 lea     (HScroll_table+$14C).w,a1
                 lea     LBZ1_CollapseScrollSpeed(pc),a5
                 move.l  $2C(a1),d0
@@ -157,7 +157,7 @@ loc_3E3A6:
                 moveq   #$A,d2
                 moveq   #$A-1,d3
 
-loc_3E3C8:
+S3LBZ_ActOneIntegrateOneCollapseStrip:
                 addq.w  #2,d1
                 andi.w  #$E,d1
                 move.w  (a5,d1.w),d4
@@ -168,26 +168,26 @@ loc_3E3C8:
                 sub.l   d0,d5
                 swap    d5
                 cmpi.w  #-$300,d5
-                bgt.s   loc_3E3EA
+                bgt.s   S3LBZ1Screen_StoreCollapseStrip
                 move.w  #-$300,d5
                 subq.w  #1,d2
 
-loc_3E3EA:
+S3LBZ1Screen_StoreCollapseStrip:
                 swap    d5
                 move.l  d5,(a1)+
-                dbf     d3,loc_3E3C8
+                dbf     d3,S3LBZ_ActOneIntegrateOneCollapseStrip
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_3E40A
+                bne.s   S3LBZ1Screen_TryFinishCollapse
                 tst.w   d2
-                beq.s   loc_3E40A
+                beq.s   S3LBZ1Screen_TryFinishCollapse
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
 
-loc_3E40A:
+S3LBZ1Screen_TryFinishCollapse:
                 tst.w   d2
-                bne.s   loc_3E434
+                bne.s   S3LBZ_ActOnePrepareVerticalOffsetExport
                 clr.w   (Screen_shake_flag).w
                 clr.w   (Events_fg_4).w
                 move.w  #$C,(Special_V_int_routine).w
@@ -195,27 +195,27 @@ loc_3E40A:
                 lea     (HScroll_table+$148).w,a1
                 moveq   #$E-1,d0
 
-loc_3E426:
+S3LBZ_ActOneClearFinishedCollapseOffsets:
                 clr.l   (a1)+
-                dbf     d0,loc_3E426
+                dbf     d0,S3LBZ_ActOneClearFinishedCollapseOffsets
                 moveq   #signextendB(sfx_Crash),d0
                 jsr     (Play_SFX).l
 
-loc_3E434:
+S3LBZ_ActOnePrepareVerticalOffsetExport:
                 lea     (HScroll_table+$100).w,a1
                 lea     (HScroll_table+$130).w,a4
                 lea     (HScroll_table+$148).w,a5
                 move.w  (Camera_Y_pos_copy).w,d0
                 moveq   #$C-1,d1
 
-loc_3E446:
+S3LBZ_ActOnePublishVerticalScrollColumns:
                 move.w  (a5),d2
                 add.w   d0,d2
                 move.w  d2,(a1)
                 move.w  d2,(a4)+
                 addq.w  #4,a1
                 addq.w  #4,a5
-                dbf     d1,loc_3E446
+                dbf     d1,S3LBZ_ActOnePublishVerticalScrollColumns
                 rts
 ; End of function LBZ1_EventVScroll
 
@@ -225,31 +225,31 @@ LBZ1_CheckLayoutMod:
                 lea     LBZ1_LayoutModRange(pc),a1
                 moveq   #4-1,d3
 
-loc_3E45E:
+S3LBZ_ActOneScanInclusiveLayoutRectangle:
                 lea     (a1),a5
                 cmp.w   (a5)+,d0
-                bcs.s   loc_3E480
+                bcs.s   S3LBZ1Screen_NextLayoutRegion
                 cmp.w   (a5)+,d0
-                bhi.s   loc_3E480
+                bhi.s   S3LBZ1Screen_NextLayoutRegion
                 cmp.w   (a5)+,d1
-                bcs.s   loc_3E480
+                bcs.s   S3LBZ1Screen_NextLayoutRegion
                 cmp.w   (a5)+,d1
-                bhi.s   loc_3E480
+                bhi.s   S3LBZ1Screen_NextLayoutRegion
                 tst.w   d2
-                bne.s   loc_3E48A
+                bne.s   S3LBZ1Screen_DispatchLayoutCopy
                 cmpi.w  #$1580,d0                       ; The first layout mod range ignores a small corner on the lower right
-                bcs.s   loc_3E48A
+                bcs.s   S3LBZ1Screen_DispatchLayoutCopy
                 cmpi.w  #$400,d1
-                bcs.s   loc_3E48A
+                bcs.s   S3LBZ1Screen_DispatchLayoutCopy
 
-loc_3E480:
+S3LBZ1Screen_NextLayoutRegion:
                 addq.w  #8,a1
                 addq.w  #4,d2
-                dbf     d3,loc_3E45E
+                dbf     d3,S3LBZ_ActOneScanInclusiveLayoutRectangle
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E48A:
+S3LBZ1Screen_DispatchLayoutCopy:
                 addq.w  #4,d2
                 move.w  d2,(Events_bg+$00).w
                 lsr.w   #1,d2
@@ -280,13 +280,13 @@ LBZ1_LayoutMod2:
 
 LBZ1_LayoutMod3:
                 tst.w   (Events_bg+$02).w
-                beq.s   loc_3E4C0
+                beq.s   S3LBZ1Screen_SelectThirdLayoutSource
                 clr.w   (Events_bg+$00).w
                 moveq   #-1,d3
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3E4C0:
+S3LBZ1Screen_SelectThirdLayoutSource:
                 movea.w (a3),a5
                 lea     $94(a5),a5
                 bra.s   LBZ1_DoMod3
@@ -303,12 +303,12 @@ LBZ1_DoMod4:
                 subq.w  #6,d0
                 moveq   #6-1,d1
 
-loc_3E4DE:
+S3LBZ_ActOneCopyFourthLayoutSixByteRows:
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_3E4DE
+                dbf     d1,S3LBZ_ActOneCopyFourthLayoutSixByteRows
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -319,11 +319,11 @@ LBZ1_DoMod3:
                 subq.w  #4,d0
                 moveq   #$C-1,d1
 
-loc_3E4FA:
+S3LBZ_ActOneCopyThirdLayoutFourByteRows:
                 move.l  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_3E4FA
+                dbf     d1,S3LBZ_ActOneCopyThirdLayoutFourByteRows
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -334,13 +334,13 @@ LBZ1_DoMod2:
                 subi.w  #$A,d0
                 moveq   #$E-1,d1
 
-loc_3E516:
+S3LBZ_ActOneCopySecondLayoutTenByteRows:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 move.w  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_3E516
+                dbf     d1,S3LBZ_ActOneCopySecondLayoutTenByteRows
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -351,12 +351,12 @@ LBZ1_DoMod1:
                 subq.w  #8,d0
                 moveq   #9-1,d1
 
-loc_3E536:
+S3LBZ_ActOneCopyFirstLayoutEightByteRows:
                 move.l  (a5)+,(a1)+
                 move.l  (a5)+,(a1)+
                 adda.w  d0,a5
                 adda.w  d0,a1
-                dbf     d1,loc_3E536
+                dbf     d1,S3LBZ_ActOneCopyFirstLayoutEightByteRows
                 rts
 
 ; End of function LBZ1_CheckLayoutMod
@@ -370,10 +370,10 @@ LBZ1_ModEndingLayout:
                 subq.w  #4,d0
                 moveq   #$C-1,d1
 
-loc_3E552:
+S3LBZ_ActOneClearEndingLayoutTwelveRows:
                 clr.l   (a1)+
                 adda.w  d0,a1
-                dbf     d1,loc_3E552
+                dbf     d1,S3LBZ_ActOneClearEndingLayoutTwelveRows
                 st      (Events_bg+$02).w               ; Disable the layout modding for this area (layoutmod3)
                 rts
 ; End of function LBZ1_ModEndingLayout
@@ -382,11 +382,11 @@ loc_3E552:
 
 Obj_LBZ1InvisibleBarrier:
                 cmpi.w  #$3D80,(Camera_X_pos_copy).w
-                blo.s   loc_3E56E
+                blo.s   S3LBZ1Screen_ApplyEndingBarrier
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3E56E:
+S3LBZ1Screen_ApplyEndingBarrier:
                 move.w  #$3BC0,d4
                 move.w  d4,x_pos(a0)
                 move.w  #$100,y_pos(a0)
@@ -439,7 +439,7 @@ LBZ1_BackgroundEvent_Index:
 
 LBZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3E670
+                beq.s   S3LBZ1Screen_DrawBgAndApplyVScroll
                 clr.w   (Events_fg_5).w                 ; Yeah, normal transition nonsense for the level change
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (LBZ2_128x128_Kos).l,a1
@@ -454,7 +454,7 @@ LBZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_3E670:
+S3LBZ1Screen_DrawBgAndApplyVScroll:
                 jsr     LBZ1_Deform(pc)
                 lea     LBZ1_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
@@ -472,7 +472,7 @@ loc_3E670:
 
 LBZ1BGE_DoTransition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_3E74A
+                bne.w   S3LBZ1Screen_ApplyTransitionDeform
                 move.w  #$601,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -504,16 +504,16 @@ LBZ1BGE_DoTransition:
                 clr.w   (Event_LBZ2_DeathEgg).w
                 move.w  #$40,(Events_bg+$10).w
                 cmpi.w  #$540,(Camera_Y_pos_copy).w
-                blo.s   loc_3E738
+                blo.s   S3LBZ1Screen_InitAct2Waterline
                 neg.w   (Events_bg+$10).w
 
-loc_3E738:
+S3LBZ1Screen_InitAct2Waterline:
                 movem.l d7-a0/a2-a3,-(sp)
                 jsr     (AniLBZ2_InitWaterlineTiles).l  ; Start LBZ2 tile animation
                 movem.l (sp)+,d7-a0/a2-a3
                 clr.w   (Events_routine_bg).w
 
-loc_3E74A:
+S3LBZ1Screen_ApplyTransitionDeform:
                 lea     LBZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table+$008).w,a5
                 jmp     ApplyDeformation(pc)
@@ -547,12 +547,12 @@ LBZ1_Deform:
                 asr.l   #2,d0
                 moveq   #4-1,d2
 
-loc_3E79A:
+S3LBZ1Screen_WriteBgSlopeSamples:
                 swap    d1
                 move.w  d1,(a1)+
                 swap    d1
                 add.l   d0,d1
-                dbf     d2,loc_3E79A
+                dbf     d2,S3LBZ1Screen_WriteBgSlopeSamples
                 moveq   #$A,d0
                 add.w   d0,(Events_bg+$10).w
                 add.w   d0,(Camera_X_pos_BG_copy).w

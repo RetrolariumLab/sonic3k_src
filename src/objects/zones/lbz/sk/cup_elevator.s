@@ -11,16 +11,16 @@ Obj_LBZCupElevator:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 btst    #6,subtype(a0)                  ; BIT 6
-                beq.s   loc_2698A
+                beq.s   SKLBZCupLift_SaveOriginAndTryAttach
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_2698A
+                bne.s   SKLBZCupLift_SaveOriginAndTryAttach
                 move.w  #$7F00,x_pos(a0)                ; Set this object to be deleted if bit 6 is set and Knuckles is playing
 
-loc_2698A:
+SKLBZCupLift_SaveOriginAndTryAttach:
                 move.w  x_pos(a0),$30(a0)
                 move.w  y_pos(a0),$32(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_26A50
+                bne.w   SKLBZCupLift_InitTravelAndOrbit
                 move.l  #Obj_LBZCupElevatorAttach,(a1)
                 move.l  #Map_LBZCupElevator,mappings(a1)
                 move.w  #make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a1)
@@ -34,14 +34,14 @@ loc_2698A:
                 move.b  #1,mapping_frame(a1)
                 addi.w  #$18,x_pos(a1)
                 btst    #0,status(a0)
-                bne.s   loc_269F8
+                bne.s   SKLBZCupLift_LinkAttachmentAndTryBase
                 subi.w  #2*$18,x_pos(a1)                ; Set position based on orientation of original object
 
-loc_269F8:
+SKLBZCupLift_LinkAttachmentAndTryBase:
                 move.w  a0,$40(a1)
                 move.w  a1,$42(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_26A50
+                bne.w   SKLBZCupLift_InitTravelAndOrbit
                 move.l  #Obj_LBZCupElevatorBase,(a1)
                 move.l  #Map_LBZCupElevator,mappings(a1)
                 move.w  #make_art_tile(ArtTile_LBZMisc+$4A,2,0),art_tile(a1)
@@ -55,7 +55,7 @@ loc_269F8:
                 move.w  a0,$40(a1)
                 move.w  a1,$40(a0)
 
-loc_26A50:
+SKLBZCupLift_InitTravelAndOrbit:
                 moveq   #0,d0
                 move.b  subtype(a0),d0                  ; BITS 3-0
                 andi.w  #$F,d0
@@ -67,22 +67,23 @@ loc_26A50:
                 move.w  #0,angle(a0)
                 addi.w  #$40,x_pos(a0)
                 btst    #0,status(a0)
-                bne.s   loc_26A86
+                bne.s   SKLBZCupLift_PickInitialEndpoint
                 subi.w  #$80,x_pos(a0)
                 move.w  #$8080,angle(a0)
 
-loc_26A86:
+; Only subtype bits 4 and 5 select the upper starting endpoint
+SKLBZCupLift_PickInitialEndpoint:
                 move.b  subtype(a0),d1                  ; BITS 5-4
                 andi.w  #$30,d1
-                beq.s   loc_26AAC
+                beq.s   SKLBZCupLift_BeginCupControl
                 move.w  d0,$3A(a0)                      ; If any bit set, elevator is moving downward
                 add.w   d0,$32(a0)
                 move.w  #6,$36(a0)
                 btst    #0,subtype(a0)
-                beq.s   loc_26AAC
+                beq.s   SKLBZCupLift_BeginCupControl
                 addi.b  #$80,angle+1(a0)
 
-loc_26AAC:
+SKLBZCupLift_BeginCupControl:
                 move.l  #Obj_LBZCupElevatorMain,(a0)
 
 Obj_LBZCupElevatorMain:
@@ -112,7 +113,7 @@ Obj_LBZCupElevatorMain:
                 moveq   #p2_standing_bit,d6
                 move.w  (Ctrl_2_logical).w,d0
                 bsr.w   LBZCupElevator_PlayerControl
-                bra.w   loc_26E78
+                bra.w   SKLBZCupLift_DrawFromCenterX
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -139,33 +140,33 @@ LBZCupElevator_Action_Index:
 
 LBZCupElev_WaitEnter:
                 tst.w   $3C(a0)
-                beq.s   locret_26B44
+                beq.s   SKLBZCupLift_EntryWaitReturn
                 move.w  #1,$34(a0)
                 addq.w  #2,$36(a0)
 
-locret_26B44:
+SKLBZCupLift_EntryWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_MoveUp:
                 move.w  $3A(a0),d0
                 cmp.w   $38(a0),d0
-                bne.s   loc_26B78
+                bne.s   SKLBZCupLift_StepUpwardHelix
                 tst.b   subtype(a0)
-                bpl.s   loc_26B66
+                bpl.s   SKLBZCupLift_BeginUpperExitWait
                 move.w  #$C,$36(a0)
                 move.w  #$600,$2E(a0)
                 bra.w   LBZCupElev_Spin1
 ; ---------------------------------------------------------------------------
 
-loc_26B66:
+SKLBZCupLift_BeginUpperExitWait:
                 move.w  #$80,priority(a0)
                 move.w  #0,$34(a0)
                 addq.w  #2,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26B78:
+SKLBZCupLift_StepUpwardHelix:
                 addq.w  #4,$3A(a0)
                 move.w  $3A(a0),d0
                 move.w  d0,d1
@@ -177,55 +178,55 @@ loc_26B78:
                 sub.w   d1,d0
                 move.w  d0,y_pos(a0)
                 cmpi.w  #$200,priority(a0)
-                bne.s   loc_26BB8
+                bne.s   SKLBZCupLift_TryMoveUpwardToBack
                 tst.b   angle(a0)
-                bpl.s   locret_26BB6
+                bpl.s   SKLBZCupLift_UpwardFrontReturn
                 move.w  #$80,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26BB6:
+SKLBZCupLift_UpwardFrontReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26BB8:
+SKLBZCupLift_TryMoveUpwardToBack:
                 tst.b   angle(a0)
-                bmi.s   locret_26BCC
+                bmi.s   SKLBZCupLift_UpwardBackReturn
                 move.w  #$200,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26BCC:
+SKLBZCupLift_UpwardBackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_WaitExit1:
                 tst.w   $3C(a0)
-                bne.s   locret_26BD8
+                bne.s   SKLBZCupLift_UpperExitReturn
                 addq.w  #2,$36(a0)
 
-locret_26BD8:
+SKLBZCupLift_UpperExitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_MoveDown:
                 tst.w   $3A(a0)
-                bne.s   loc_26C08
+                bne.s   SKLBZCupLift_StepDownwardHelix
                 tst.b   subtype(a0)
-                bpl.s   loc_26BF6
+                bpl.s   SKLBZCupLift_BeginLowerExitWait
                 move.w  #$12,$36(a0)
                 move.w  #$600,$2E(a0)
                 bra.w   LBZCupElev_Spin1
 ; ---------------------------------------------------------------------------
 
-loc_26BF6:
+SKLBZCupLift_BeginLowerExitWait:
                 move.w  #$80,priority(a0)
                 move.w  #0,$34(a0)
                 addq.w  #2,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26C08:
+SKLBZCupLift_StepDownwardHelix:
                 subq.w  #4,$3A(a0)
                 move.w  $3A(a0),d0
                 move.w  d0,d1
@@ -237,46 +238,46 @@ loc_26C08:
                 sub.w   d1,d0
                 move.w  d0,y_pos(a0)
                 cmpi.w  #$200,priority(a0)
-                bne.s   loc_26C48
+                bne.s   SKLBZCupLift_TryMoveDownwardToBack
                 tst.b   angle(a0)
-                bpl.s   locret_26C46
+                bpl.s   SKLBZCupLift_DownwardFrontReturn
                 move.w  #$80,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26C46:
+SKLBZCupLift_DownwardFrontReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26C48:
+SKLBZCupLift_TryMoveDownwardToBack:
                 tst.b   angle(a0)
-                bmi.s   locret_26C5C
+                bmi.s   SKLBZCupLift_DownwardBackReturn
                 move.w  #$200,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26C5C:
+SKLBZCupLift_DownwardBackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_WaitExit2:
                 tst.w   $3C(a0)
-                bne.s   locret_26C6A
+                bne.s   SKLBZCupLift_LowerExitReturn
                 move.w  #0,$36(a0)
 
-locret_26C6A:
+SKLBZCupLift_LowerExitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_Spin1:
                 cmpi.w  #$1000,$2E(a0)
-                bne.s   loc_26CC4
+                bne.s   SKLBZCupLift_AccelerateForwardSpin
                 btst    #0,status(a0)
-                bne.s   loc_26CA0
+                bne.s   SKLBZCupLift_TryFinishForwardSpin
                 move.b  angle(a0),d0
                 addi.b  #$40,d0
                 cmpi.b  #$F0,d0
-                blo.s   loc_26CCA
+                blo.s   SKLBZCupLift_StepForwardSpin
                 move.b  #$C0,angle(a0)
                 movea.w $42(a0),a1
                 move.w  #$7FFF,$30(a1)
@@ -284,11 +285,11 @@ LBZCupElev_Spin1:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26CA0:
+SKLBZCupLift_TryFinishForwardSpin:
                 move.b  angle(a0),d0
                 addi.b  #$C0,d0
                 cmpi.b  #$F0,d0
-                blo.s   loc_26CCA
+                blo.s   SKLBZCupLift_StepForwardSpin
                 move.b  #$40,angle(a0)
                 movea.w $42(a0),a1
                 move.w  #$7FFF,$30(a1)
@@ -296,42 +297,42 @@ loc_26CA0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26CC4:
+SKLBZCupLift_AccelerateForwardSpin:
                 addi.w  #$10,$2E(a0)
 
-loc_26CCA:
+SKLBZCupLift_StepForwardSpin:
                 move.b  $2E(a0),d0
                 add.b   d0,angle(a0)
                 cmpi.w  #$200,priority(a0)
-                bne.s   loc_26CF0
+                bne.s   SKLBZCupLift_TryMoveForwardSpinToBack
                 tst.b   angle(a0)
-                bpl.s   locret_26CEE
+                bpl.s   SKLBZCupLift_ForwardSpinFrontReturn
                 move.w  #$80,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26CEE:
+SKLBZCupLift_ForwardSpinFrontReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26CF0:
+SKLBZCupLift_TryMoveForwardSpinToBack:
                 tst.b   angle(a0)
-                bmi.s   locret_26D04
+                bmi.s   SKLBZCupLift_ForwardSpinBackReturn
                 move.w  #$200,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26D04:
+SKLBZCupLift_ForwardSpinBackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_Spin2:
                 cmpi.w  #$1000,$2E(a0)
-                bne.s   loc_26D32
+                bne.s   SKLBZCupLift_AccelerateReverseSpin
                 move.b  angle(a0),d0
                 addi.b  #$B0,d0
                 cmpi.b  #$F0,d0
-                blo.s   loc_26D38
+                blo.s   SKLBZCupLift_StepReverseSpin
                 move.b  #$40,angle(a0)
                 movea.w $42(a0),a1
                 move.w  #$7FFF,$30(a1)
@@ -339,78 +340,79 @@ LBZCupElev_Spin2:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26D32:
+SKLBZCupLift_AccelerateReverseSpin:
                 addi.w  #$10,$2E(a0)
 
-loc_26D38:
+SKLBZCupLift_StepReverseSpin:
                 move.b  $2E(a0),d0
                 sub.b   d0,angle(a0)
                 cmpi.w  #$200,priority(a0)
-                bne.s   loc_26D5E
+                bne.s   SKLBZCupLift_TryMoveReverseSpinToBack
                 tst.b   angle(a0)
-                bpl.s   locret_26D5C
+                bpl.s   SKLBZCupLift_ReverseSpinFrontReturn
                 move.w  #$80,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26D5C:
+SKLBZCupLift_ReverseSpinFrontReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26D5E:
+SKLBZCupLift_TryMoveReverseSpinToBack:
                 tst.b   angle(a0)
-                bmi.s   locret_26D72
+                bmi.s   SKLBZCupLift_ReverseSpinBackReturn
                 move.w  #$200,priority(a0)
                 moveq   #signextendB(sfx_Hoverpad),d0
                 jsr     (Play_SFX).l
 
-locret_26D72:
+SKLBZCupLift_ReverseSpinBackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_Fling1:
                 cmpi.w  #$16C0,$30(a0)
-                blo.s   loc_26D90
+                blo.s   SKLBZCupLift_StepFirstFlingCenter
                 move.w  #$16C0,$30(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #0,y_vel(a0)
-                bra.s   loc_26DE0
+                bra.s   SKLBZCupLift_FlingRidersAndRetireCup
 ; ---------------------------------------------------------------------------
 
-loc_26D90:
+SKLBZCupLift_StepFirstFlingCenter:
                 addi.w  #$10,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_Fling2:
                 cmpi.w  #$2AE0,$30(a0)
-                bhi.s   loc_26DB4
+                bhi.s   SKLBZCupLift_StepSecondFlingCenter
                 move.w  #$2AE0,$30(a0)
                 move.w  #$200,x_vel(a0)
                 move.w  #0,y_vel(a0)
-                bra.s   loc_26DE0
+                bra.s   SKLBZCupLift_FlingRidersAndRetireCup
 ; ---------------------------------------------------------------------------
 
-loc_26DB4:
+SKLBZCupLift_StepSecondFlingCenter:
                 subi.w  #$10,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
 LBZCupElev_Fling3:
                 cmpi.w  #$2B20,$30(a0)
-                blo.s   loc_26DD8
+                blo.s   SKLBZCupLift_StepThirdFlingCenter
                 move.w  #$2B20,$30(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #0,y_vel(a0)
-                bra.s   loc_26DE0
+                bra.s   SKLBZCupLift_FlingRidersAndRetireCup
 ; ---------------------------------------------------------------------------
 
-loc_26DD8:
+SKLBZCupLift_StepThirdFlingCenter:
                 addi.w  #$10,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26DE0:
+; Fling P1 at -$300 Y speed and P2 at -$400 before the cup flickers away
+SKLBZCupLift_FlingRidersAndRetireCup:
                 move.l  #Obj_LBZElevatorCupFlicker,(a0)
                 moveq   #signextendB(sfx_Death),d0
                 jsr     (Play_SFX).l
@@ -427,7 +429,7 @@ loc_26DE0:
 FlingPlayerFromLbzCupElevator:
                 move.b  #$12,2(a2)
                 tst.b   (a2)
-                beq.s   locret_26E52
+                beq.s   SKLBZCupLift_FlingReturn
                 move.b  #4,routine(a1)                  ; Hit animation
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)         ; Player is not standing on/pushing an object
@@ -435,15 +437,15 @@ FlingPlayerFromLbzCupElevator:
                 move.w  d0,y_vel(a1)
                 move.w  #-$200,x_vel(a1)                ; Set speed of player
                 btst    #0,status(a0)
-                beq.s   loc_26E46
+                beq.s   SKLBZCupLift_SetFlungRiderPose
                 neg.w   x_vel(a1)                       ; Reverse direction depending on flip
                 bset    #Status_Facing,status(a1)
 
-loc_26E46:
+SKLBZCupLift_SetFlungRiderPose:
                 move.w  #0,ground_vel(a1)               ; Zero out inertia
                 move.b  #$1A,anim(a1)                   ; Set falling animation
 
-locret_26E52:
+SKLBZCupLift_FlingReturn:
                 rts
 ; End of function FlingPlayerFromLbzCupElevator
 
@@ -452,36 +454,37 @@ locret_26E52:
 Obj_LBZElevatorCupFlicker:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bmi.s   loc_26E66
+                bmi.s   SKLBZCupLift_DrawFlickeringCup
                 move.w  #$7FFF,x_pos(a0)
 
-loc_26E66:
+SKLBZCupLift_DrawFlickeringCup:
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #1,d0
-                beq.s   locret_26E76
+                beq.s   SKLBZCupLift_SkipFlickerFrame
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-locret_26E76:
+; The even-frame path skips the cull along with drawing
+SKLBZCupLift_SkipFlickerFrame:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26E78:
+SKLBZCupLift_DrawFromCenterX:
                 move.w  $30(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_26E92
+                bhi.w   SKLBZCupLift_ClearCupRespawnBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_26E92:
+SKLBZCupLift_ClearCupRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_26E9E
+                beq.s   SKLBZCupLift_ReleaseRidersAndDelete
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_26E9E:
+SKLBZCupLift_ReleaseRidersAndDelete:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   LBZCupElevator_ReleasePlayer
@@ -494,14 +497,14 @@ loc_26E9E:
 
 LBZCupElevator_ReleasePlayer:
                 bclr    d6,status(a0)
-                beq.w   locret_26ED8
+                beq.w   SKLBZCupLift_CullReleaseReturn
                 move.w  #$100,priority(a1)
                 clr.b   object_control(a1)
                 bclr    #Status_OnObj,status(a1)
                 bclr    #Status_Push,status(a1)
                 bset    #Status_InAir,status(a1)
 
-locret_26ED8:
+SKLBZCupLift_CullReleaseReturn:
                 rts
 ; End of function LBZCupElevator_ReleasePlayer
 
@@ -509,49 +512,49 @@ locret_26ED8:
 
 LBZCupElevator_PlayerControl:
                 tst.b   (a2)
-                bne.s   loc_26F46                       ; If player is inside cup, branch
+                bne.s   SKLBZCupLift_CarryOrReleaseRider  ; If player is inside cup, branch
                 tst.b   2(a2)
-                beq.s   loc_26EEA                       ; If timer has run out, branch
+                beq.s   SKLBZCupLift_TryResolveCupSolid  ; If timer has run out, branch
                 subq.b  #1,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26EEA:
+SKLBZCupLift_TryResolveCupSolid:
                 move.b  angle(a0),d0
                 subi.b  #$20,d0
                 cmpi.b  #$40,d0
-                blo.w   locret_2702C                    ; Only be solid when in proper angle position
+                blo.w   SKLBZCupLift_CaptureReturn      ; Only be solid when in proper angle position
                 jsr     (SolidObjectFull2_1P).l
                 btst    d6,status(a0)
-                beq.w   locret_2702C                    ; If player is not standing on elevator, don't bother
+                beq.w   SKLBZCupLift_CaptureReturn      ; If player is not standing on elevator, don't bother
                 tst.w   $34(a0)
-                bne.s   loc_26F26                       ; If $34 is set, then initiate elevator regardless of proximity to center
+                bne.s   SKLBZCupLift_CaptureCupRider    ; If $34 is set, then initiate elevator regardless of proximity to center
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #8,d0
-                bmi.w   locret_2702C
+                bmi.w   SKLBZCupLift_CaptureReturn
                 cmpi.w  #$10,d0
-                bhs.w   locret_2702C                    ; Otherwise only initiate elevator when close to center
+                bhs.w   SKLBZCupLift_CaptureReturn      ; Otherwise only initiate elevator when close to center
 
-loc_26F26:
+SKLBZCupLift_CaptureCupRider:
                 move.b  #1,(a2)                         ; Elevator on
                 move.b  #3,object_control(a1)           ; Sonic is under control of object and is not animated by normal function
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)                  ; Clear momentum of character
                 move.b  #0,anim(a1)                     ; Null animation number
-                bra.w   loc_26FF4
+                bra.w   SKLBZCupLift_PlaceRiderAndSetPriority
 ; ---------------------------------------------------------------------------
 
-loc_26F46:
+SKLBZCupLift_CarryOrReleaseRider:
                 tst.b   render_flags(a1)
-                bpl.w   loc_26FD4                       ; If player is offscreen somehow, branch
+                bpl.w   SKLBZCupLift_DetachAndStartCooldown  ; If player is offscreen somehow, branch
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_26FD4                       ; If player is in hit routine, branch
+                bhs.s   SKLBZCupLift_DetachAndStartCooldown  ; If player is in hit routine, branch
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_26FF4                       ; If jump hasn't been pressed, branch
+                beq.w   SKLBZCupLift_PlaceRiderAndSetPriority  ; If jump hasn't been pressed, branch
                 tst.b   (_unkFAA9).w
-                bne.w   loc_26FF4                       ; If controller is disabled, branch
+                bne.w   SKLBZCupLift_PlaceRiderAndSetPriority  ; If controller is disabled, branch
                 move.w  #$100,priority(a1)              ; Reset character priority
                 clr.b   object_control(a1)              ; Sonic is under player control once more
                 bclr    d6,status(a0)                   ; Release Solid object
@@ -567,20 +570,20 @@ loc_26F46:
                 move.b  #0,(a2)                         ; Turn off elevator
                 move.b  #$12,2(a2)                      ; Set cooldown timer so that elevator won't restart instantly
                 btst    #button_left+8,d0
-                beq.s   loc_26FC0
+                beq.s   SKLBZCupLift_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)                ; Set left speed if holding left on controller
 
-loc_26FC0:
+SKLBZCupLift_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_26FCC
+                beq.s   SKLBZCupLift_SetJumpYSpeed
                 move.w  #$200,x_vel(a1)                 ; Set right speed if holding right on controller
 
-loc_26FCC:
+SKLBZCupLift_SetJumpYSpeed:
                 move.w  #-$480,y_vel(a1)                ; Set jump speed regardless
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26FD4:
+SKLBZCupLift_DetachAndStartCooldown:
                 bclr    d6,status(a0)                   ; Release player if offscreen somehow
                 bclr    #Status_OnObj,status(a1)
                 move.w  #$100,priority(a1)
@@ -590,7 +593,7 @@ loc_26FD4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_26FF4:
+SKLBZCupLift_PlaceRiderAndSetPriority:
                 move.w  x_pos(a0),x_pos(a1)             ; Match character position to cup position
                 move.w  y_pos(a0),d0
                 subi.w  #$10,d0
@@ -599,16 +602,16 @@ loc_26FF4:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 cmpi.b  #$C0,d0
-                blo.s   loc_27020
+                blo.s   SKLBZCupLift_ApplyCylinderPose
                 move.w  #$100,priority(a1)              ; If correct angle range, set priority higher
 
-loc_27020:
+SKLBZCupLift_ApplyCylinderPose:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 jmp     (SKCNZCylinder_ApplyTwistFrameAndTiles).l
 ; ---------------------------------------------------------------------------
 
-locret_2702C:
+SKLBZCupLift_CaptureReturn:
                 rts
 ; End of function LBZCupElevator_PlayerControl
 
@@ -626,16 +629,16 @@ Obj_LBZCupElevatorAttach:
                 move.b  angle(a1),angle(a0)             ; Match angle and Y position to parent object
                 move.w  #$180,priority(a0)
                 move.b  angle(a0),d0                    ; If angle is positive object has lower priority
-                bpl.s   loc_27060
+                bpl.s   SKLBZCupLift_SetAttachmentFlip
                 move.w  #$100,priority(a0)
 
-loc_27060:
+SKLBZCupLift_SetAttachmentFlip:
                 andi.b  #$FE,render_flags(a0)
                 subi.b  #$40,d0
-                bpl.s   loc_27072
+                bpl.s   SKLBZCupLift_PlaceAttachment
                 ori.b   #1,render_flags(a0)             ; Flip object if angle-$40 is negative
 
-loc_27072:
+SKLBZCupLift_PlaceAttachment:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 move.w  d1,d2
@@ -659,20 +662,20 @@ Obj_LBZCupElevatorPole:
                 move.w  y_pos(a0),$32(a0)
                 move.b  #3,mapping_frame(a0)
                 btst    #6,subtype(a0)
-                beq.s   loc_270E4
+                beq.s   SKLBZCupLift_SelectPoleLength
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_270E4
+                bne.s   SKLBZCupLift_SelectPoleLength
                 move.w  #$7F00,x_pos(a0)
 
-loc_270E4:
+SKLBZCupLift_SelectPoleLength:
                 move.b  subtype(a0),d0
                 andi.b  #$3F,d0
-                beq.s   loc_270FA
+                beq.s   SKLBZCupLift_StartStaticPole
                 move.b  #$60,height_pixels(a0)
                 move.b  #4,mapping_frame(a0)
 
-loc_270FA:
-                move.l  #loc_27100,(a0)
+SKLBZCupLift_StartStaticPole:
+                move.l  #SKLBZCupLift_DrawStaticPole,(a0)
 
-loc_27100:
+SKLBZCupLift_DrawStaticPole:
                 jmp     (Sprite_OnScreen_Test).l

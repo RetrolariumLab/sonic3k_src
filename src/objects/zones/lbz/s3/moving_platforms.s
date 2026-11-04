@@ -3,7 +3,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 
 ; ---------------------------------------------------------------------------
-byte_23D2A:
+S3LBZMovePlat_GeometryTable:
                 dc.b    $20,   8,   0
                 even
                 dc.b    $20,   8,   1
@@ -17,17 +17,17 @@ Obj_LBZMovingPlatform:
                 move.w  #$180,priority(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                bpl.s   loc_23D64
+                bpl.s   S3LBZMovePlat_InitGeometryAndMotion
                 andi.w  #$7F,d0
                 lsl.w   #4,d0
                 move.w  d0,$38(a0)
                 moveq   #$17,d0
                 move.b  d0,subtype(a0)
 
-loc_23D64:
+S3LBZMovePlat_InitGeometryAndMotion:
                 lsr.w   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_23D2A(pc,d0.w),a2
+                lea     S3LBZMovePlat_GeometryTable(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a0)
                 move.b  (a2)+,height_pixels(a0)
                 move.b  (a2)+,mapping_frame(a0)
@@ -41,30 +41,30 @@ loc_23D64:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 subq.w  #8,d0
-                bcs.s   loc_23DD4
+                bcs.s   S3LBZMovePlat_StartSubtypeMotion
                 cmpi.w  #4,d0
-                bhs.s   loc_23DC8
+                bhs.s   S3LBZMovePlat_WidenCullWindow
                 lsl.w   #2,d0
                 lea     (Oscillating_table+$2C).w,a2
                 lea     (a2,d0.w),a2
                 tst.w   (a2)
-                bpl.s   loc_23DD4
+                bpl.s   S3LBZMovePlat_StartSubtypeMotion
                 bchg    #0,$2E(a0)
-                bra.s   loc_23DD4
+                bra.s   S3LBZMovePlat_StartSubtypeMotion
 ; ---------------------------------------------------------------------------
 
-loc_23DC8:
+S3LBZMovePlat_WidenCullWindow:
                 move.w  #$380,$42(a0)
                 addi.w  #$100,$44(a0)
 
-loc_23DD4:
+S3LBZMovePlat_StartSubtypeMotion:
                 move.b  subtype(a0),d0
                 andi.b  #$F,d0
                 add.b   d0,d0
                 move.b  d0,subtype(a0)
-                move.l  #loc_23DE8,(a0)
+                move.l  #S3LBZMovePlat_UpdateMotionAndSolid,(a0)
 
-loc_23DE8:
+S3LBZMovePlat_UpdateMotionAndSolid:
                 move.w  x_pos(a0),-(sp)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
@@ -72,34 +72,34 @@ loc_23DE8:
                 jsr     LBZMovingPlatformIndex(pc,d1.w)
                 move.w  (sp)+,d4
                 tst.b   render_flags(a0)
-                bpl.s   loc_23E12
+                bpl.s   S3LBZMovePlat_DrawFromCullAnchor
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 move.w  #9,d3
                 jsr     (SolidObjectTop).l
 
-loc_23E12:
+S3LBZMovePlat_DrawFromCullAnchor:
                 move.w  $44(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmp.w   $42(a0),d0
-                bhi.w   loc_23E2C
+                bhi.w   S3LBZMovePlat_TryDeleteLinkedBar
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_23E2C:
+S3LBZMovePlat_TryDeleteLinkedBar:
                 tst.b   $3D(a0)
-                beq.s   loc_23E3C
+                beq.s   S3LBZMovePlat_TryClearRespawnBit
                 movea.w $3E(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_23E3C:
+S3LBZMovePlat_TryClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_23E48
+                beq.s   S3LBZMovePlat_DeletePlatform
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_23E48:
+S3LBZMovePlat_DeletePlatform:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 LBZMovingPlatformIndex:
@@ -137,19 +137,19 @@ FloatingPlatformIndex:
 Platform_Stationary:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_23E9C
+                bne.s   S3LBZMovePlat_IncreaseSagAngle
                 tst.b   $3A(a0)
-                beq.s   loc_23EA8
+                beq.s   S3LBZMovePlat_ApplySineSag
                 subq.b  #4,$3A(a0)
-                bra.s   loc_23EA8
+                bra.s   S3LBZMovePlat_ApplySineSag
 ; ---------------------------------------------------------------------------
 
-loc_23E9C:
+S3LBZMovePlat_IncreaseSagAngle:
                 cmpi.b  #$40,$3A(a0)
-                beq.s   loc_23EA8
+                beq.s   S3LBZMovePlat_ApplySineSag
                 addq.b  #4,$3A(a0)
 
-loc_23EA8:
+S3LBZMovePlat_ApplySineSag:
                 move.b  $3A(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #6,d0
@@ -174,11 +174,11 @@ Platform_Horizontal128:
 
 PositionLbzPlatformHorizontalOscillation:
                 btst    #0,status(a0)
-                beq.s   loc_23EE0
+                beq.s   S3LBZMovePlat_ApplyOscillationX
                 neg.w   d0
                 add.w   d1,d0
 
-loc_23EE0:
+S3LBZMovePlat_ApplyOscillationX:
                 move.w  $30(a0),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
@@ -191,7 +191,7 @@ Platform_Vertical64:
                 move.w  #64,d1
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
-                bra.s   loc_23F02
+                bra.s   S3LBZMovePlat_TryMirrorOscillationY
 ; ---------------------------------------------------------------------------
 
 Platform_Vertical128:
@@ -199,13 +199,13 @@ Platform_Vertical128:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
 
-loc_23F02:
+S3LBZMovePlat_TryMirrorOscillationY:
                 btst    #0,status(a0)
-                beq.s   loc_23F0E
+                beq.s   S3LBZMovePlat_ApplyOscillationY
                 neg.w   d0
                 add.w   d1,d0
 
-loc_23F0E:
+S3LBZMovePlat_ApplyOscillationY:
                 move.w  $34(a0),d1
                 sub.w   d0,d1
                 move.w  d1,y_pos(a0)
@@ -221,7 +221,7 @@ Platform_DiagonalUp:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 lsr.b   #1,d0
-                bra.s   loc_23F02
+                bra.s   S3LBZMovePlat_TryMirrorOscillationY
 ; ---------------------------------------------------------------------------
 
 Platform_DiagonalDown:
@@ -235,37 +235,37 @@ Platform_DiagonalDown:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 lsr.b   #1,d0
-                bra.s   loc_23F02
+                bra.s   S3LBZMovePlat_TryMirrorOscillationY
 ; ---------------------------------------------------------------------------
 
 Platform_DiagonalLift:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_23F72
+                bne.s   S3LBZMovePlat_AdvanceOccupiedLift
                 move.w  $38(a0),d2
                 move.w  $36(a0),d1
-                beq.s   locret_23FA0
+                beq.s   S3LBZMovePlat_DiagonalLiftReturn
                 subq.w  #4,d1
-                bcc.s   loc_23F6C
+                bcc.s   S3LBZMovePlat_SetLiftReturnDistance
                 moveq   #0,d1
 
-loc_23F6C:
+S3LBZMovePlat_SetLiftReturnDistance:
                 move.w  d1,$36(a0)
-                bra.s   loc_23F86
+                bra.s   S3LBZMovePlat_PlaceDiagonalLift
 ; ---------------------------------------------------------------------------
 
-loc_23F72:
+S3LBZMovePlat_AdvanceOccupiedLift:
                 move.w  $38(a0),d2
                 move.w  $36(a0),d1
                 addq.w  #2,d1
                 cmp.w   d2,d1
-                blo.s   loc_23F82
+                blo.s   S3LBZMovePlat_SetOccupiedLiftDistance
                 move.w  d2,d1
 
-loc_23F82:
+S3LBZMovePlat_SetOccupiedLiftDistance:
                 move.w  d1,$36(a0)
 
-loc_23F86:
+S3LBZMovePlat_PlaceDiagonalLift:
                 move.w  $32(a0),d0
                 sub.w   d1,d0
                 move.w  d0,x_pos(a0)
@@ -275,42 +275,42 @@ loc_23F86:
                 sub.w   d1,d0
                 move.w  d0,y_pos(a0)
 
-locret_23FA0:
+S3LBZMovePlat_DiagonalLiftReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Platform_Horizontal256:
                 move.w  #$7F,d2
                 tst.b   $3C(a0)
-                bne.s   loc_23FC8
+                bne.s   S3LBZMovePlat_DecelerateWideTravel
                 move.w  $40(a0),d1
                 addq.w  #4,d1
                 move.w  d1,$40(a0)
                 add.w   d1,$36(a0)
                 cmp.b   $36(a0),d2
-                bhi.s   loc_23FE2
+                bhi.s   S3LBZMovePlat_GetWideTravelOffset
                 move.b  #1,$3C(a0)
-                bra.s   loc_23FE2
+                bra.s   S3LBZMovePlat_GetWideTravelOffset
 ; ---------------------------------------------------------------------------
 
-loc_23FC8:
+S3LBZMovePlat_DecelerateWideTravel:
                 move.w  $40(a0),d1
                 subq.w  #4,d1
                 move.w  d1,$40(a0)
                 add.w   d1,$36(a0)
                 cmp.b   $36(a0),d2
-                bls.s   loc_23FE2
+                bls.s   S3LBZMovePlat_GetWideTravelOffset
                 move.b  #0,$3C(a0)
 
-loc_23FE2:
+S3LBZMovePlat_GetWideTravelOffset:
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 btst    #0,status(a0)
-                beq.s   loc_23FF4
+                beq.s   S3LBZMovePlat_PlaceWidePlatformX
                 neg.w   d0
                 add.w   d2,d0
 
-loc_23FF4:
+S3LBZMovePlat_PlaceWidePlatformX:
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
@@ -318,19 +318,19 @@ loc_23FF4:
 
 Platform_FallingDelayed:
                 tst.w   $3A(a0)
-                bne.s   loc_24016
+                bne.s   S3LBZMovePlat_TickDelayAndBeginFall
                 move.b  status(a0),d0
                 andi.b  #$18,d0
-                beq.s   locret_24014
+                beq.s   S3LBZMovePlat_FallDelayReturn
                 move.w  #30,$3A(a0)
 
-locret_24014:
+S3LBZMovePlat_FallDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24016:
+S3LBZMovePlat_TickDelayAndBeginFall:
                 subq.w  #1,$3A(a0)
-                bne.s   locret_24014
+                bne.s   S3LBZMovePlat_FallDelayReturn
                 move.w  #32,$3A(a0)
                 addq.b  #2,subtype(a0)
                 rts
@@ -338,24 +338,24 @@ loc_24016:
 
 Platform_Falling:
                 tst.w   $3A(a0)
-                beq.s   loc_24056
+                beq.s   S3LBZMovePlat_MoveAndCheckFallDepth
                 subq.w  #1,$3A(a0)
-                bne.s   loc_24056
+                bne.s   S3LBZMovePlat_MoveAndCheckFallDepth
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_24042
+                beq.s   S3LBZMovePlat_TryReleaseFallingP2
                 lea     (Player_1).w,a1
                 bsr.s   ReleasePlayerFromLbzFallingPlatform
 
-loc_24042:
+S3LBZMovePlat_TryReleaseFallingP2:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_24050
+                beq.s   S3LBZMovePlat_BeginIntangibleFall
                 lea     (Player_2).w,a1
                 bsr.s   ReleasePlayerFromLbzFallingPlatform
 
-loc_24050:
+S3LBZMovePlat_BeginIntangibleFall:
                 move.l  #Obj_FallingPlatformIntangible,(a0)
 
-loc_24056:
+S3LBZMovePlat_MoveAndCheckFallDepth:
                 move.l  y_pos(a0),d3
                 move.w  y_vel(a0),d0
                 ext.l   d0
@@ -366,11 +366,11 @@ loc_24056:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$120,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   locret_24088
+                bhs.s   S3LBZMovePlat_FallMotionReturn
                 move.w  #$7F00,x_pos(a0)
                 move.w  #$7F00,$44(a0)
 
-locret_24088:
+S3LBZMovePlat_FallMotionReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -396,74 +396,74 @@ Obj_FallingPlatformIntangible:
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$120,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_240D6
+                bhs.s   S3LBZMovePlat_DrawIntangiblePlatform
                 move.w  #$7F00,x_pos(a0)
                 move.w  #$7F00,$44(a0)
 
-loc_240D6:
-                bra.w   loc_23E12
+S3LBZMovePlat_DrawIntangiblePlatform:
+                bra.w   S3LBZMovePlat_DrawFromCullAnchor
 ; ---------------------------------------------------------------------------
 
 Platform_Rising:
                 tst.b   $3C(a0)
-                bne.s   loc_240F8
+                bne.s   S3LBZMovePlat_MoveAndAccelerateRise
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                beq.s   locret_240F6
+                beq.s   S3LBZMovePlat_RiseWaitReturn
                 move.b  #1,$3C(a0)
                 move.b  #$C,y_radius(a0)
 
-locret_240F6:
+S3LBZMovePlat_RiseWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_240F8:
+S3LBZMovePlat_MoveAndAccelerateRise:
                 jsr     (MoveSprite2).l
                 moveq   #8,d1
                 move.w  $34(a0),d0
                 subi.w  #$80,d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_24114
+                bhs.s   S3LBZMovePlat_TryStopAtCeiling
                 neg.w   d1
                 add.w   d1,y_vel(a0)
 
-loc_24114:
+S3LBZMovePlat_TryStopAtCeiling:
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   loc_2412C
+                bpl.s   S3LBZMovePlat_CheckP1Clearance
                 sub.w   d1,y_pos(a0)
                 clr.b   $3C(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2412C:
+S3LBZMovePlat_CheckP1Clearance:
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_2414C
+                beq.s   S3LBZMovePlat_CheckP2Clearance
                 move.l  a0,-(sp)
                 lea     (Player_1).w,a0
                 jsr     (CheckPlayerBodyFloorClearance).l
                 tst.w   d1
-                bpl.s   loc_2414A
+                bpl.s   S3LBZMovePlat_RestorePlatformAfterP1
                 jsr     (Kill_Character).l
 
-loc_2414A:
+S3LBZMovePlat_RestorePlatformAfterP1:
                 movea.l (sp)+,a0
 
-loc_2414C:
+S3LBZMovePlat_CheckP2Clearance:
                 btst    #p2_standing_bit,status(a0)
-                beq.s   locret_2416C
+                beq.s   S3LBZMovePlat_ClearanceReturn
                 move.l  a0,-(sp)
                 lea     (Player_2).w,a0
                 jsr     (CheckPlayerBodyFloorClearance).l
                 tst.w   d1
-                bpl.s   loc_2416A
+                bpl.s   S3LBZMovePlat_RestorePlatformAfterP2
                 jsr     (Kill_Character).l
 
-loc_2416A:
+S3LBZMovePlat_RestorePlatformAfterP2:
                 movea.l (sp)+,a0
 
-locret_2416C:
+S3LBZMovePlat_ClearanceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -473,7 +473,7 @@ Platform_Square32:
                 move.b  (Oscillating_table+$2A).w,d0
                 lsr.w   #1,d0
                 move.w  (Oscillating_table+$2C).w,d3
-                bra.s   loc_241AE
+                bra.s   S3LBZMovePlat_TryAdvanceSquareSide
 ; ---------------------------------------------------------------------------
 
 Platform_Square96:
@@ -481,7 +481,7 @@ Platform_Square96:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$2E).w,d0
                 move.w  (Oscillating_table+$30).w,d3
-                bra.s   loc_241AE
+                bra.s   S3LBZMovePlat_TryAdvanceSquareSide
 ; ---------------------------------------------------------------------------
 
 Platform_Square160:
@@ -489,7 +489,7 @@ Platform_Square160:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$32).w,d0
                 move.w  (Oscillating_table+$34).w,d3
-                bra.s   loc_241AE
+                bra.s   S3LBZMovePlat_TryAdvanceSquareSide
 ; ---------------------------------------------------------------------------
 
 Platform_Square224:
@@ -498,16 +498,16 @@ Platform_Square224:
                 move.b  (Oscillating_table+$36).w,d0
                 move.w  (Oscillating_table+$38).w,d3
 
-loc_241AE:
+S3LBZMovePlat_TryAdvanceSquareSide:
                 tst.w   d3
-                bne.s   loc_241BC
+                bne.s   S3LBZMovePlat_TryPlaceSquareTop
                 addq.b  #1,$2E(a0)
                 andi.b  #3,$2E(a0)
 
-loc_241BC:
+S3LBZMovePlat_TryPlaceSquareTop:
                 move.b  $2E(a0),d2
                 andi.b  #3,d2
-                bne.s   loc_241DC
+                bne.s   S3LBZMovePlat_TryPlaceSquareRight
                 sub.w   d1,d0
                 add.w   $30(a0),d0
                 move.w  d0,x_pos(a0)
@@ -517,9 +517,9 @@ loc_241BC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_241DC:
+S3LBZMovePlat_TryPlaceSquareRight:
                 subq.b  #1,d2
-                bne.s   loc_241FA
+                bne.s   S3LBZMovePlat_TryPlaceSquareBottom
                 subq.w  #1,d1
                 sub.w   d1,d0
                 neg.w   d0
@@ -531,9 +531,9 @@ loc_241DC:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_241FA:
+S3LBZMovePlat_TryPlaceSquareBottom:
                 subq.b  #1,d2
-                bne.s   loc_24218
+                bne.s   S3LBZMovePlat_PlaceSquareLeft
                 subq.w  #1,d1
                 sub.w   d1,d0
                 neg.w   d0
@@ -545,7 +545,7 @@ loc_241FA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24218:
+S3LBZMovePlat_PlaceSquareLeft:
                 sub.w   d1,d0
                 add.w   $34(a0),d0
                 move.w  d0,y_pos(a0)

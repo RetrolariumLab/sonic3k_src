@@ -12,9 +12,9 @@ Obj_LBZUnusedForceFall:
                 move.b  subtype(a0),d0
                 lsl.w   #3,d0
                 move.w  d0,$2E(a0)
-                move.l  #loc_29542,(a0)
+                move.l  #SKLBZUnusedFall_ForceFallInBounds,(a0)
 
-loc_29542:
+SKLBZUnusedFall_ForceFallInBounds:
                 move.w  x_pos(a0),d1
                 move.w  d1,d2
                 subi.w  #$10,d1
@@ -34,16 +34,16 @@ loc_29542:
 ForcePlayerFallInLbzUnusedRegion:
                 move.w  x_pos(a1),d0
                 cmp.w   d1,d0
-                blo.s   locret_295C0
+                blo.s   SKLBZUnusedFall_ForceFallReturn
                 cmp.w   d2,d0
-                bhs.s   locret_295C0
+                bhs.s   SKLBZUnusedFall_ForceFallReturn
                 move.w  y_pos(a1),d0
                 cmp.w   d3,d0
-                blo.s   locret_295C0
+                blo.s   SKLBZUnusedFall_ForceFallReturn
                 cmp.w   d4,d0
-                bhs.s   locret_295C0
+                bhs.s   SKLBZUnusedFall_ForceFallReturn
                 cmpi.b  #$1A,anim(a1)
-                beq.s   locret_295C0
+                beq.s   SKLBZUnusedFall_ForceFallReturn
                 move.w  #0,x_vel(a1)
                 move.w  #$400,y_vel(a1)
                 move.w  #0,ground_vel(a1)
@@ -53,6 +53,6 @@ ForcePlayerFallInLbzUnusedRegion:
                 bclr    #Status_Roll,status(a1)
                 move.b  #$1A,anim(a1)
 
-locret_295C0:
+SKLBZUnusedFall_ForceFallReturn:
                 rts
 ; End of function ForcePlayerFallInLbzUnusedRegion

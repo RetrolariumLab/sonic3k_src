@@ -5,7 +5,7 @@
 
 Obj_LBZUnusedBarPlatform:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_253BE
+                bne.w   SKLBZUnusedBar_StartMovingPlatform
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  status(a0),status(a1)
@@ -16,15 +16,16 @@ Obj_LBZUnusedBarPlatform:
                 move.b  #$20,width_pixels(a1)
                 move.b  #$10,height_pixels(a1)
                 move.w  a0,$3E(a1)
-                move.l  #loc_253C2,(a1)
+                move.l  #SKLBZUnusedBar_FollowAndUpdateRiders,(a1)
                 move.w  a1,$3E(a0)
                 move.b  #1,$3D(a0)
 
-loc_253BE:
+SKLBZUnusedBar_StartMovingPlatform:
                 bra.w   Obj_LBZMovingPlatform
 ; ---------------------------------------------------------------------------
 
-loc_253C2:
+; Update P2 before P1 using the same platform displacement
+SKLBZUnusedBar_FollowAndUpdateRiders:
                 move.w  x_pos(a0),d4
                 movea.w $3E(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -49,73 +50,73 @@ UpdatePlayersHangingFromLbzUnusedBar:
 
 UpdatePlayerHangingFromLbzUnusedBar:
                 tst.b   (a2)
-                beq.w   loc_25476
+                beq.w   SKLBZUnusedBar_TickCaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_25456
+                bpl.s   SKLBZUnusedBar_DetachAndStartCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_25456
+                bhs.s   SKLBZUnusedBar_DetachAndStartCooldown
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_25464
+                beq.w   SKLBZUnusedBar_CarryHangingRider
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$12,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_25430
+                beq.w   SKLBZUnusedBar_TrySetJumpLeft
                 move.b  #$3C,2(a2)
 
-loc_25430:
+SKLBZUnusedBar_TrySetJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_2543C
+                beq.s   SKLBZUnusedBar_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_2543C:
+SKLBZUnusedBar_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_25448
+                beq.s   SKLBZUnusedBar_JumpFromBar
                 move.w  #$200,x_vel(a1)
 
-loc_25448:
+SKLBZUnusedBar_JumpFromBar:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25456:
+SKLBZUnusedBar_DetachAndStartCooldown:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25464:
+SKLBZUnusedBar_CarryHangingRider:
                 sub.w   d4,x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$24,y_pos(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_25476:
+SKLBZUnusedBar_TickCaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_25484
+                beq.s   SKLBZUnusedBar_TryCaptureAtBar
                 subq.b  #1,2(a2)
-                bne.w   locret_254E8
+                bne.w   SKLBZUnusedBar_CaptureReturn
 
-loc_25484:
+SKLBZUnusedBar_TryCaptureAtBar:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$1C,d0
                 cmpi.w  #$38,d0
-                bhs.w   locret_254E8
+                bhs.w   SKLBZUnusedBar_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 subi.w  #$18,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_254E8
+                bhs.w   SKLBZUnusedBar_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_254E8
+                bne.s   SKLBZUnusedBar_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_254E8
+                bhs.s   SKLBZUnusedBar_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_254E8
+                bne.s   SKLBZUnusedBar_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -125,7 +126,7 @@ loc_25484:
                 move.b  #1,object_control(a1)
                 move.b  #1,(a2)
 
-locret_254E8:
+SKLBZUnusedBar_CaptureReturn:
                 rts
 ; End of function UpdatePlayerHangingFromLbzUnusedBar
 
