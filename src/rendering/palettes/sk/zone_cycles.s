@@ -70,9 +70,9 @@ AnPal_None:
 
 AnPal_AIZ1:
                 move.b  (AIZ1_palette_cycle_flag).w,d0
-                bne.s   loc_221E
+                bne.s   SKPalAIZ1_TickAltCycle
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_221C
+                bpl.s   SKPalAIZ1_Return
                 move.w  #7,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
@@ -81,54 +81,54 @@ AnPal_AIZ1:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$16).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$1A).w
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.s   locret_221C
+                bne.s   SKPalAIZ1_Return
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #6,(Palette_cycle_counters+$02).w
                 cmpi.w  #$30,(Palette_cycle_counters+$02).w
-                blo.s   loc_220A
+                blo.s   SKPalAIZ1_WriteSecondaryTriplet
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_220A:
+SKPalAIZ1_WriteSecondaryTriplet:
                 lea     (AnPal_PalAIZ1_2).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$18).w
                 move.w  4(a0,d0.w),(Normal_palette_line_4+$1C).w
 
-locret_221C:
+SKPalAIZ1_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_221E:
+SKPalAIZ1_TickAltCycle:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_227A
+                bpl.s   SKPalAIZ1_AltReturn
                 move.w  #9,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$50,(Palette_cycle_counter0).w
-                blo.s   loc_2240
+                blo.s   SKPalAIZ1_WriteAltMainColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2240:
+SKPalAIZ1_WriteAltMainColors:
                 lea     (AnPal_PalAIZ1_3).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$04).w
                 move.l  4(a0,d0.w),(Normal_palette_line_4+$08).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #6,(Palette_cycle_counters+$02).w
                 cmpi.w  #$3C,(Palette_cycle_counters+$02).w
-                blo.s   loc_2268
+                blo.s   SKPalAIZ1_WriteAltTriplet
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2268:
+SKPalAIZ1_WriteAltTriplet:
                 lea     (AnPal_PalAIZ1_4).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$1A).w
                 move.w  4(a0,d0.w),(Normal_palette_line_4+$1E).w
 
-locret_227A:
+SKPalAIZ1_AltReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_AIZ2:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_22F6
+                bpl.s   SKPalAIZ2_TickSingleColor
                 move.w  #5,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
@@ -139,71 +139,71 @@ AnPal_AIZ2:
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #6,(Palette_cycle_counters+$02).w
                 cmpi.w  #$30,(Palette_cycle_counters+$02).w
-                blo.s   loc_22BC
+                blo.s   SKPalAIZ2_PickTripletSource
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_22BC:
+SKPalAIZ2_PickTripletSource:
                 lea     (AnPal_PalAIZ2_2).l,a0
                 cmpi.w  #$3800,(Camera_X_pos).w
-                blo.s   loc_22D0
+                blo.s   SKPalAIZ2_WriteScatteredTriplet
                 lea     (AnPal_PalAIZ2_3).l,a0
 
-loc_22D0:
+SKPalAIZ2_WriteScatteredTriplet:
                 move.w  (a0,d0.w),(Normal_palette_line_3+$08).w
                 move.w  2(a0,d0.w),(Normal_palette_line_3+$10).w
                 move.w  4(a0,d0.w),(Normal_palette_line_4+$16).w
                 move.w  #$A0E,(Normal_palette_line_3+$1C).w
                 cmpi.w  #$1C0,(Camera_X_pos).w
-                bhs.s   loc_22F6
+                bhs.s   SKPalAIZ2_TickSingleColor
                 move.w  4(a0,d0.w),(Normal_palette_line_3+$1C).w
 
-loc_22F6:
+SKPalAIZ2_TickSingleColor:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2332
+                bpl.s   SKPalAIZ2_Return
                 move.w  #1,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #2,(Palette_cycle_counters+$04).w
                 cmpi.w  #$34,(Palette_cycle_counters+$04).w
-                blo.s   loc_2318
+                blo.s   SKPalAIZ2_PickSingleColorSource
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_2318:
+SKPalAIZ2_PickSingleColorSource:
                 lea     (AnPal_PalAIZ2_4).l,a0
                 cmpi.w  #$3800,(Camera_X_pos).w
-                blo.s   loc_232C
+                blo.s   SKPalAIZ2_WriteSingleColor
                 lea     (AnPal_PalAIZ2_5).l,a0
 
-loc_232C:
+SKPalAIZ2_WriteSingleColor:
                 move.w  (a0,d0.w),(Normal_palette_line_4+$02).w
 
-locret_2332:
+SKPalAIZ2_Return:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 AnPal_HCZ1:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_2380
+                bpl.s   SKPalHCZ1_Return
                 move.w  #7,(Palette_cycle_counter1).w
                 tst.b   (Palette_cycle_counters+$00).w
-                beq.s   loc_234C
+                beq.s   SKPalHCZ1_StepCycleOffset
                 move.w  #0,(Palette_cycle_counter1).w
 
-loc_234C:
+SKPalHCZ1_StepCycleOffset:
                 lea     (AnPal_PalHCZ1).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$20,(Palette_cycle_counter0).w
-                blo.s   loc_2368
+                blo.s   SKPalHCZ1_MirrorColorsToWater
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2368:
+SKPalHCZ1_MirrorColorsToWater:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$06).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$0A).w
                 move.l  (a0,d0.w),(Water_palette_line_3+$06).w
                 move.l  4(a0,d0.w),(Water_palette_line_3+$0A).w
 
-locret_2380:
+SKPalHCZ1_Return:
                 rts
 ; End of function AnPal_HCZ1
 
@@ -215,167 +215,169 @@ AnPal_HCZ2:
 
 AnPal_CNZ:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_23CA
+                bpl.s   SKPalCNZ_StepSecondTriplet
                 move.w  #3,(Palette_cycle_counter1).w
                 lea     (AnPal_PalCNZ_1).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #6,(Palette_cycle_counter0).w
                 cmpi.w  #$60,(Palette_cycle_counter0).w
-                blo.s   loc_23AC
+                blo.s   SKPalCNZ_WriteFirstTriplets
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_23AC:
+SKPalCNZ_WriteFirstTriplets:
                 move.l  (a0,d0.w),(Normal_palette_line_4+$12).w
                 move.w  4(a0,d0.w),(Normal_palette_line_4+$16).w
                 lea     (AnPal_PalCNZ_2).l,a0
                 move.l  (a0,d0.w),(Water_palette_line_4+$12).w
                 move.w  4(a0,d0.w),(Water_palette_line_4+$16).w
 
-loc_23CA:
+; Advance this group on every call, independently of the first group's timer
+SKPalCNZ_StepSecondTriplet:
                 lea     (AnPal_PalCNZ_3).l,a0
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #6,(Palette_cycle_counters+$02).w
                 cmpi.w  #$B4,(Palette_cycle_counters+$02).w
-                blo.s   loc_23E6
+                blo.s   SKPalCNZ_WriteSecondTriplets
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_23E6:
+SKPalCNZ_WriteSecondTriplets:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$12).w
                 move.w  4(a0,d0.w),(Normal_palette_line_3+$16).w
                 lea     (AnPal_PalCNZ_4).l,a0
                 move.l  (a0,d0.w),(Water_palette_line_3+$12).w
                 move.w  4(a0,d0.w),(Water_palette_line_3+$16).w
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_243E
+                bpl.s   SKPalCNZ_Return
                 move.w  #2,(Palette_cycle_counters+$08).w
                 lea     (AnPal_PalCNZ_5).l,a0
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #4,(Palette_cycle_counters+$04).w
                 cmpi.w  #$40,(Palette_cycle_counters+$04).w
-                blo.s   loc_242C
+                blo.s   SKPalCNZ_WriteThirdPairs
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_242C:
+SKPalCNZ_WriteThirdPairs:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$E).w
                 lea     (AnPal_PalCNZ_5).l,a0
                 move.l  (a0,d0.w),(Water_palette_line_3+$E).w
 
-locret_243E:
+SKPalCNZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_FBZ:
                 tst.b   (Level_frame_counter+1).w
-                bne.s   locret_244C
+                bne.s   SKPalFBZ_Return
                 bchg    #0,(_unkF7C1).w
 
-locret_244C:
+SKPalFBZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_ICZ:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_247C
+                bpl.s   SKPalICZ_TickSecondPair
                 move.w  #5,(Palette_cycle_counter1).w
                 lea     (AnPal_PalICZ_1).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #4,(Palette_cycle_counter0).w
                 cmpi.w  #$40,(Palette_cycle_counter0).w
-                blo.s   loc_2476
+                blo.s   SKPalette_IczWriteFirstTwoColorPair
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2476:
+SKPalette_IczWriteFirstTwoColorPair:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$1C).w
 
-loc_247C:
+SKPalICZ_TickSecondPair:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   loc_24B0
+                bpl.s   SKPalICZ_TickLastPairs
                 move.w  #9,(Palette_cycle_counters+$08).w
                 lea     (AnPal_PalICZ_2).l,a0
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #4,(Palette_cycle_counters+$02).w
                 cmpi.w  #$48,(Palette_cycle_counters+$02).w
-                blo.s   loc_24A4
+                blo.s   SKPalICZ_TryWriteSecondPair
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_24A4:
+SKPalICZ_TryWriteSecondPair:
                 tst.w   (Events_bg+$16).w
-                beq.s   loc_24B0
+                beq.s   SKPalICZ_TickLastPairs
                 move.l  (a0,d0.w),(Normal_palette_line_4+$1C).w
 
-loc_24B0:
+SKPalICZ_TickLastPairs:
                 subq.w  #1,(Palette_cycle_counters+$0A).w
-                bpl.s   locret_2506
+                bpl.s   SKPalICZ_Return
                 move.w  #7,(Palette_cycle_counters+$0A).w
                 lea     (AnPal_PalICZ_3).l,a0
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #4,(Palette_cycle_counters+$04).w
                 cmpi.w  #$18,(Palette_cycle_counters+$04).w
-                blo.s   loc_24D8
+                blo.s   SKPalICZ_TryWriteThirdPair
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_24D8:
+; The background event flag gates the third pair. Continue to the fourth pair either way
+SKPalICZ_TryWriteThirdPair:
                 tst.w   (Events_bg+$16).w
-                beq.s   loc_24E4
+                beq.s   SKPalICZ_StepFourthPair
                 move.l  (a0,d0.w),(Normal_palette_line_4+$18).w
 
-loc_24E4:
+SKPalICZ_StepFourthPair:
                 lea     (AnPal_PalICZ_4).l,a0
                 move.w  (Palette_cycle_counters+$06).w,d0
                 addq.w  #4,(Palette_cycle_counters+$06).w
                 cmpi.w  #$40,(Palette_cycle_counters+$06).w
-                blo.s   loc_2500
+                blo.s   SKPalette_IczWriteFourthTwoColorPair
                 move.w  #0,(Palette_cycle_counters+$06).w
 
-loc_2500:
+SKPalette_IczWriteFourthTwoColorPair:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$18).w
 
-locret_2506:
+SKPalICZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_LBZ1:
                 lea     (AnPal_PalLBZ1).l,a0
-                bra.s   loc_2516
+                bra.s   SKPalLBZ_TickTriplet
 ; ---------------------------------------------------------------------------
 
 AnPal_LBZ2:
                 lea     (AnPal_PalLBZ2).l,a0
 
-loc_2516:
+SKPalLBZ_TickTriplet:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_2544
+                bpl.s   SKPalLBZ_Return
                 move.w  #3,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #6,(Palette_cycle_counter0).w
                 cmpi.w  #$12,(Palette_cycle_counter0).w
-                blo.s   loc_2538
+                blo.s   SKPalLBZ_WriteTriplet
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2538:
+SKPalLBZ_WriteTriplet:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$10).w
                 move.w  4(a0,d0.w),(Normal_palette_line_3+$14).w
 
-locret_2544:
+SKPalLBZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_SOZ1:
                 subq.w  #1,(Palette_cycle_counters+$0A).w
-                bpl.s   locret_257A
+                bpl.s   SKPalSOZ1_Return
                 move.w  #5,(Palette_cycle_counters+$0A).w
                 lea     (AnPal_PalSOZ1).l,a0
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #8,(Palette_cycle_counters+$04).w
                 cmpi.w  #$20,(Palette_cycle_counters+$04).w
-                blo.s   loc_256E
+                blo.s   SKPalSOZ1_WriteCycleColors
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_256E:
+SKPalSOZ1_WriteCycleColors:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$18).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$1C).w
 
-locret_257A:
+SKPalSOZ1_Return:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
@@ -388,70 +390,70 @@ locret_257A:
 
 AnPal_SOZ2:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_25C4
+                bpl.s   SKPalSOZ2_TickLightTransition
                 move.w  #900-1,(Palette_cycle_counter1).w
                 cmpi.b  #5,(SOZ_darkness_level).w
-                bhs.s   loc_25C4
+                bhs.s   SKPalSOZ2_TickLightTransition
                 addq.b  #1,(SOZ_darkness_level).w
                 btst    #0,(SOZ_darkness_level).w
-                bne.s   loc_25C4
+                bne.s   SKPalSOZ2_TickLightTransition
                 move.b  #2,(Palette_cycle_counters+$00).w
                 move.w  #0,(Palette_cycle_counters+$08).w
 
-loc_25C4:
+SKPalSOZ2_TickLightTransition:
                 tst.b   (Palette_cycle_counters+$00).w
-                beq.s   loc_262C
+                beq.s   SKPalSOZ2_TickColorCycle
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   loc_262C
+                bpl.s   SKPalSOZ2_TickColorCycle
                 move.w  #3,(Palette_cycle_counters+$08).w
                 tst.b   (Palette_cycle_counters+$00).w
-                bmi.s   loc_25EC
+                bmi.s   SKPalSOZ2_StepNegativeRequest
                 subq.b  #1,(Palette_cycle_counters+$00).w
                 addi.w  #$34,(Palette_cycle_counters+$02).w
                 addq.w  #1,(Palette_cycle_counters+$06).w
-                bra.s   loc_25FA
+                bra.s   SKPalSOZ2_SelectLightPalette
 ; ---------------------------------------------------------------------------
 
-loc_25EC:
+SKPalSOZ2_StepNegativeRequest:
                 addq.b  #1,(Palette_cycle_counters+$00).w
                 subi.w  #$34,(Palette_cycle_counters+$02).w
                 subq.w  #1,(Palette_cycle_counters+$06).w
 
-loc_25FA:
+SKPalSOZ2_SelectLightPalette:
                 move.w  (Palette_cycle_counters+$02).w,d0
                 lea     (AnPal_PalSOZ2_Light).l,a0
                 lea     (a0,d0.w),a0
                 lea     (Normal_palette_line_3+$2).w,a1
                 moveq   #$B-1,d0
 
-loc_260E:
+SKPalSOZ2_CopyLightLine3:
                 move.w  (a0)+,(a1)+
-                dbf     d0,loc_260E
+                dbf     d0,SKPalSOZ2_CopyLightLine3
                 lea     (Normal_palette_line_4+$2).w,a1
                 moveq   #$F-1,d0
 
-loc_261A:
+SKPalSOZ2_CopyLightLine4:
                 move.w  (a0)+,(a1)+
-                dbf     d0,loc_261A
+                dbf     d0,SKPalSOZ2_CopyLightLine4
                 move.w  (Palette_cycle_counters+$04).w,d0
                 subq.w  #1,(Palette_cycle_counters+$0A).w
-                bpl.s   loc_264E
-                bra.s   loc_2632
+                bpl.s   SKPalSOZ2_WriteCycleAtLightLevel
+                bra.s   SKPalSOZ2_StepCycleOffset
 ; ---------------------------------------------------------------------------
 
-loc_262C:
+SKPalSOZ2_TickColorCycle:
                 subq.w  #1,(Palette_cycle_counters+$0A).w
-                bpl.s   locret_266A
+                bpl.s   SKPalSOZ2_Return
 
-loc_2632:
+SKPalSOZ2_StepCycleOffset:
                 move.w  #5,(Palette_cycle_counters+$0A).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #8,(Palette_cycle_counters+$04).w
                 cmpi.w  #$20,(Palette_cycle_counters+$04).w
-                blo.s   loc_264E
+                blo.s   SKPalSOZ2_WriteCycleAtLightLevel
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_264E:
+SKPalSOZ2_WriteCycleAtLightLevel:
                 lea     (AnPal_PalSOZ1).l,a0
                 move.w  (Palette_cycle_counters+$06).w,d1
                 lsl.w   #5,d1
@@ -459,94 +461,94 @@ loc_264E:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$18).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$1C).w
 
-locret_266A:
+SKPalSOZ2_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_LRZ1:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_26C2
+                bpl.s   SKPalLRZ1_TickSingleColor
                 move.w  #$F,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$80,(Palette_cycle_counter0).w
-                blo.s   loc_268E
+                blo.s   SKPalLRZ1_WriteMainColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_268E:
+SKPalLRZ1_WriteMainColors:
                 lea     (AnPal_PalLRZ12_1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$02).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$06).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #4,(Palette_cycle_counters+$02).w
                 cmpi.w  #$1C,(Palette_cycle_counters+$02).w
-                blo.s   loc_26B6
+                blo.s   SKPalLRZ1_WriteSecondPair
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_26B6:
+SKPalLRZ1_WriteSecondPair:
                 lea     (AnPal_PalLRZ12_2).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$02).w
 
-loc_26C2:
+SKPalLRZ1_TickSingleColor:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_26F0
+                bpl.s   SKPalLRZ1_Return
                 move.w  #7,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #2,(Palette_cycle_counters+$04).w
                 cmpi.w  #$22,(Palette_cycle_counters+$04).w
-                blo.s   loc_26E4
+                blo.s   SKPalLRZ1_WriteSingleColor
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_26E4:
+SKPalLRZ1_WriteSingleColor:
                 lea     (AnPal_PalLRZ1_3).l,a0
                 move.w  (a0,d0.w),(Normal_palette_line_3+$16).w
 
-locret_26F0:
+SKPalLRZ1_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_LRZ2:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_2748
+                bpl.s   SKPalLRZ2_TickThirdGroup
                 move.w  #$F,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$80,(Palette_cycle_counter0).w
-                blo.s   loc_2714
+                blo.s   SKPalLRZ2_WriteMainColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2714:
+SKPalLRZ2_WriteMainColors:
                 lea     (AnPal_PalLRZ12_1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$2).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$6).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #4,(Palette_cycle_counters+$02).w
                 cmpi.w  #$1C,(Palette_cycle_counters+$02).w
-                blo.s   loc_273C
+                blo.s   SKPalLRZ2_WriteSecondPair
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_273C:
+SKPalLRZ2_WriteSecondPair:
                 lea     (AnPal_PalLRZ12_2).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$2).w
 
-loc_2748:
+SKPalLRZ2_TickThirdGroup:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_277C
+                bpl.s   SKPalLRZ2_Return
                 move.w  #$F,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #8,(Palette_cycle_counters+$04).w
                 cmpi.w  #$100,(Palette_cycle_counters+$04).w
-                blo.s   loc_276A
+                blo.s   SKPalLRZ2_MirrorThirdPair
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_276A:
+SKPalLRZ2_MirrorThirdPair:
                 lea     (AnPal_PalLRZ2_3).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$16).w
 ; Bug: This mistakenly use the same colors as the first and second indices, rather than the third and fourth
 ; This was fixed in Sonic Origins
                 move.l  (a0,d0.w),(Normal_palette_line_4+$1A).w
 
-locret_277C:
+SKPalLRZ2_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -557,39 +559,39 @@ AnPal_DEZ1:
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #8,(Palette_cycle_counters+$04).w
                 cmpi.w  #$30,(Palette_cycle_counters+$04).w
-                blo.s   loc_27A0
+                blo.s   SKPalDEZ1_WriteActColors
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_27A0:
+SKPalDEZ1_WriteActColors:
                 lea     (AnPal_PalDEZ1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$18).w
                 move.l  4(a0,d0.w),(Normal_palette_line_4+$1C).w
 
 AnPal_DEZ2:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_27E0
+                bpl.s   SKPalette_DezTickSharedFiveColorGroup
                 move.w  #4,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #4,(Palette_cycle_counter0).w
                 cmpi.w  #$30,(Palette_cycle_counter0).w
-                blo.s   loc_27D4
+                blo.s   SKPalDEZ_WriteSharedPair
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_27D4:
+SKPalDEZ_WriteSharedPair:
                 lea     (AnPal_PalDEZ12_1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$1A).w
 
-loc_27E0:
+SKPalette_DezTickSharedFiveColorGroup:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2818
+                bpl.s   SKPalDEZ_Return
                 move.w  #$13,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addi.w  #$A,(Palette_cycle_counters+$02).w
                 cmpi.w  #$28,(Palette_cycle_counters+$02).w
-                blo.s   loc_2804
+                blo.s   SKPalDEZ_WriteSharedFiveColors
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2804:
+SKPalDEZ_WriteSharedFiveColors:
                 lea     (AnPal_PalDEZ12_2).l,a0
                 lea     (a0,d0.w),a0
                 lea     (Normal_palette_line_3+$10).w,a1
@@ -597,106 +599,106 @@ loc_2804:
                 move.l  (a0)+,(a1)+
                 move.w  (a0)+,(a1)+
 
-locret_2818:
+SKPalDEZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_BPZ:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_284E
+                bpl.s   SKPalBPZ_TickSecondTriplet
                 move.w  #7,(Palette_cycle_counter1).w
                 lea     (AnPal_PalBPZ_1).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #6,(Palette_cycle_counter0).w
                 cmpi.w  #$12,(Palette_cycle_counter0).w
-                blo.s   loc_2842
+                blo.s   SKPalBPZ_WriteFirstTriplet
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2842:
+SKPalBPZ_WriteFirstTriplet:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$1A).w
                 move.w  4(a0,d0.w),(Normal_palette_line_3+$1E).w
 
-loc_284E:
+SKPalBPZ_TickSecondTriplet:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2882
+                bpl.s   SKPalBPZ_Return
                 move.w  #$11,(Palette_cycle_counters+$08).w
                 lea     (AnPal_PalBPZ_2).l,a0
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #6,(Palette_cycle_counters+$02).w
                 cmpi.w  #$7E,(Palette_cycle_counters+$02).w
-                blo.s   loc_2876
+                blo.s   SKPalette_BpzWriteSecondTriplet
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2876:
+SKPalette_BpzWriteSecondTriplet:
                 move.l  (a0,d0.w),(Normal_palette_line_4+$04).w
                 move.w  4(a0,d0.w),(Normal_palette_line_4+$08).w
 
-locret_2882:
+SKPalBPZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_CGZ:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_28B8
+                bpl.s   SKPalCGZ_Return
                 move.w  #9,(Palette_cycle_counter1).w
                 lea     (AnPal_PalCGZ).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$50,(Palette_cycle_counter0).w
-                blo.s   loc_28AC
+                blo.s   SKPalCGZ_WriteCycleColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_28AC:
+SKPalCGZ_WriteCycleColors:
                 move.l  (a0,d0.w),(Normal_palette_line_3+$04).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$08).w
 
-locret_28B8:
+SKPalCGZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_EMZ:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_28E8
+                bpl.s   SKPalEMZ_TickSecondPair
                 move.w  #7,(Palette_cycle_counter1).w
                 lea     (AnPal_PalEMZ_1).l,a0
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #2,(Palette_cycle_counter0).w
                 cmpi.w  #$3C,(Palette_cycle_counter0).w
-                blo.s   loc_28E2
+                blo.s   SKPalEMZ_WriteFirstColor
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_28E2:
+SKPalEMZ_WriteFirstColor:
                 move.w  4(a0,d0.w),(Normal_palette_line_3+$1C).w
 
-loc_28E8:
+SKPalEMZ_TickSecondPair:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2916
+                bpl.s   SKPalEMZ_Return
                 move.w  #$1F,(Palette_cycle_counters+$08).w
                 lea     (AnPal_PalEMZ_2).l,a0
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #4,(Palette_cycle_counters+$02).w
                 cmpi.w  #$34,(Palette_cycle_counters+$02).w
-                blo.s   loc_2910
+                blo.s   SKPalette_EmzWriteSecondTwoColorPair
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2910:
+SKPalette_EmzWriteSecondTwoColorPair:
                 move.l  (a0,d0.w),(Normal_palette_line_4+$12).w
 
-locret_2916:
+SKPalEMZ_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_Pachinko:
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_2952
+                bpl.s   SKPalPachinko_TickSecondGroup
                 move.w  #0,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addi.w  #$E,(Palette_cycle_counter0).w
                 cmpi.w  #$FC,(Palette_cycle_counter0).w
-                blo.s   loc_293C
+                blo.s   SKPalPachinko_CopyRamColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_293C:
+SKPalPachinko_CopyRamColors:
                 lea     (Chunk_table+$7800).l,a0
                 lea     (Normal_palette_line_4+$10).w,a1
                 lea     (a0,d0.w),a0
@@ -705,17 +707,18 @@ loc_293C:
                 move.l  (a0)+,(a1)+
                 move.w  (a0)+,(a1)+
 
-loc_2952:
+SKPalPachinko_TickSecondGroup:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_29A6
+                bpl.s   SKPalPachinko_Return
                 move.w  #3,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addi.w  #$A,(Palette_cycle_counters+$02).w
                 cmpi.w  #$3E8,(Palette_cycle_counters+$02).w
-                blo.s   loc_2976
+                blo.s   SKPalPachinko_WriteReversedSlices
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2976:
+; Copy the three five-color source groups in reverse group order
+SKPalPachinko_WriteReversedSlices:
                 lea     (Chunk_table+$78FC).l,a0
                 lea     (Normal_palette_line_3+$2).w,a1
                 lea     (a0,d0.w),a0
@@ -729,116 +732,116 @@ loc_2976:
                 move.l  4(a0),(a1)+
                 move.w  8(a0),(a1)+
 
-locret_29A6:
+SKPalPachinko_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_Slots:
                 tst.b   (Palette_cycle_counters+$00).w
-                bmi.s   locret_29F0
-                bne.s   loc_29F2
+                bmi.s   SKPalSlots_IdleReturn
+                bne.s   SKPalSlots_TickActiveCycle
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_29F0
+                bpl.s   SKPalSlots_IdleReturn
                 move.w  #3,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$40,(Palette_cycle_counter0).w
-                blo.s   loc_29D2
+                blo.s   SKPalSlots_WriteIdleColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_29D2:
+SKPalSlots_WriteIdleColors:
                 lea     (AnPal_PalSlots_1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$14).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$18).w
                 move.w  #$E02,(Normal_palette_line_3+$1C).w
                 move.w  #$E02,(Normal_palette_line_4+$1C).w
 
-locret_29F0:
+SKPalSlots_IdleReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_29F2:
+SKPalSlots_TickActiveCycle:
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2A4E
+                bpl.s   SKPalSlots_ActiveReturn
                 move.w  #0,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$02).w,d0
                 addq.w  #8,(Palette_cycle_counters+$02).w
                 cmpi.w  #$78,(Palette_cycle_counters+$02).w
-                blo.s   loc_2A14
+                blo.s   SKPalSlots_WriteActiveColors
                 move.w  #0,(Palette_cycle_counters+$02).w
 
-loc_2A14:
+SKPalSlots_WriteActiveColors:
                 lea     (AnPal_PalSlots_2).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$14).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$18).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #2,(Palette_cycle_counters+$04).w
                 cmpi.w  #$C,(Palette_cycle_counters+$04).w
-                blo.s   loc_2A3C
+                blo.s   SKPalSlots_MirrorActiveColor
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_2A3C:
+SKPalSlots_MirrorActiveColor:
                 lea     (AnPal_PalSlots_3).l,a0
                 move.w  (a0,d0.w),(Normal_palette_line_3+$1C).w
                 move.w  (a0,d0.w),(Normal_palette_line_4+$1C).w
 
-locret_2A4E:
+SKPalSlots_ActiveReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_LRZ3:
                 tst.b   (Palette_cycle_counters+$00).w
-                bmi.s   locret_2ABE
+                bmi.s   SKPalLRZ3_Return
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   loc_2A8A
+                bpl.s   SKPalLRZ3_TrySecondPair
                 move.w  #$F,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #8,(Palette_cycle_counter0).w
                 cmpi.w  #$80,(Palette_cycle_counter0).w
-                blo.s   loc_2A78
+                blo.s   SKPalette_LrzThreeWriteMainFourColors
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2A78:
+SKPalette_LrzThreeWriteMainFourColors:
                 lea     (AnPal_PalLRZ12_1).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_3+$2).w
                 move.l  4(a0,d0.w),(Normal_palette_line_3+$6).w
 
-loc_2A8A:
+SKPalLRZ3_TrySecondPair:
                 tst.b   (Palette_cycle_counters+$00).w
-                beq.s   locret_2ABE
+                beq.s   SKPalLRZ3_Return
                 subq.w  #1,(Palette_cycle_counters+$08).w
-                bpl.s   locret_2ABE
+                bpl.s   SKPalLRZ3_Return
                 move.w  #7,(Palette_cycle_counters+$08).w
                 move.w  (Palette_cycle_counters+$04).w,d0
                 addq.w  #4,(Palette_cycle_counters+$04).w
                 cmpi.w  #$3C,(Palette_cycle_counters+$04).w
-                blo.s   loc_2AB2
+                blo.s   SKPalLRZ3_WriteSecondPair
                 move.w  #0,(Palette_cycle_counters+$04).w
 
-loc_2AB2:
+SKPalLRZ3_WriteSecondPair:
                 lea     (AnPal_PalLRZ3).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$18).w
 
-locret_2ABE:
+SKPalLRZ3_Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 AnPal_HPZ:
                 tst.b   (Palette_cycle_counters+$00).w
-                bne.s   locret_2AF4
+                bne.s   SKPalHPZ_Return
                 subq.w  #1,(Palette_cycle_counter1).w
-                bpl.s   locret_2AF4
+                bpl.s   SKPalHPZ_Return
                 move.w  #7,(Palette_cycle_counter1).w
                 move.w  (Palette_cycle_counter0).w,d0
                 addq.w  #4,(Palette_cycle_counter0).w
                 cmpi.w  #$28,(Palette_cycle_counter0).w
-                blo.s   loc_2AE8
+                blo.s   SKPalHPZ_WriteCyclePair
                 move.w  #0,(Palette_cycle_counter0).w
 
-loc_2AE8:
+SKPalHPZ_WriteCyclePair:
                 lea     (AnPal_PalHPZ).l,a0
                 move.l  (a0,d0.w),(Normal_palette_line_4+$2).w
 
-locret_2AF4:
+SKPalHPZ_Return:
                 rts
 ; ---------------------------------------------------------------------------

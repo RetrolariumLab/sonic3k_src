@@ -394,7 +394,7 @@ loc_5DD34:
                 bmi.s   locret_5DD68
                 jsr     (AllocateObject).l
                 bne.s   locret_5DD68
-                move.l  #loc_5FC1E,(a1)
+                move.l  #EndLine3Flash_InitRaise,(a1)
 
 locret_5DD68:
                 rts

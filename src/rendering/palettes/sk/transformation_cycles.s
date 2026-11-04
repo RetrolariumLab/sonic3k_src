@@ -2,7 +2,7 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 SuperHyper_PalCycle:
                 move.b  (Super_palette_status).w,d0     ; 0 = off | 1 = fading | -1 = fading done
-                beq.w   locret_37EC                     ; return, if player isn't super
+                beq.w   SKPal_TransformCycleReturn      ; return, if player isn't super
                 bmi.w   SuperHyper_PalCycle_Normal      ; branch, if fade-in is done
                 subq.b  #1,d0
                 bne.w   SuperHyper_PalCycle_Revert      ; branch for values greater than 1
@@ -10,7 +10,7 @@ SuperHyper_PalCycle:
 ; fade from Sonic's to Super Sonic's palette
 ; run frame timer
                 subq.b  #1,(Palette_timer).w
-                bpl.w   locret_37EC
+                bpl.w   SKPal_TransformCycleReturn
                 move.b  #1,(Palette_timer).w
 
 ; Tails and Knuckles only
@@ -40,7 +40,7 @@ SuperHyper_PalCycle_SonicApply:
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry
 
                 tst.b   (Water_flag).w
-                beq.s   locret_37EC
+                beq.s   SKPal_TransformCycleReturn
                 lea     (PalCycle_SuperSonicUnderwaterAIZICZ).l,a0  ; Load underwater fade-in palette
                 tst.b   (Current_zone).w                ; Is Sonic in Angel Island Zone?
                 beq.s   SuperHyper_PalCycle_ApplyUnderwater  ; If so, branch
@@ -53,7 +53,7 @@ SuperHyper_PalCycle_ApplyUnderwater:
                 move.l  (a0,d0.w),(a1)+                 ; Write first two palette entries
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry
 
-locret_37EC:
+SKPal_TransformCycleReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -63,20 +63,20 @@ SuperHyper_PalCycle_Revert:                             ; runs the fade in trans
 
 ; run frame timer
                 subq.b  #1,(Palette_timer).w
-                bpl.s   locret_37EC
+                bpl.s   SKPal_TransformCycleReturn
                 move.b  #3,(Palette_timer).w
 
 ; decrement palette frame and update Sonic's palette
                 lea     (PalCycle_SuperSonic).l,a0
                 move.w  (Palette_frame).w,d0
                 subq.w  #6,(Palette_frame).w            ; previous frame
-                bhs.s   loc_381E                        ; branch, if it isn't the first frame
+                bhs.s   SKPal_ApplySonicRevertFrame     ; branch, if it isn't the first frame
 ; Bug: this only clears the high byte of Palette_frame, causing subsequent
 ; fade-ins to pull color values from PalCycle_SuperTails
                 move.b  #0,(Palette_frame).w
                 move.b  #0,(Super_palette_status).w     ; 0 = off
 
-loc_381E:
+SKPal_ApplySonicRevertFrame:
                 bra.s   SuperHyper_PalCycle_SonicApply
 ; ---------------------------------------------------------------------------
 
@@ -110,7 +110,7 @@ SuperHyper_PalCycle_Normal:
 SuperHyper_PalCycle_SuperSonic:                         ; Tails' code falls back here so the Super Flickies' palette can update
 ; run frame timer
                 subq.b  #1,(Palette_timer).w
-                bpl.w   locret_37EC
+                bpl.w   SKPal_TransformCycleReturn
                 move.b  #6,(Palette_timer).w
 
 ; increment palette frame and update Sonic's palette
@@ -119,17 +119,17 @@ SuperHyper_PalCycle_SuperSonic:                         ; Tails' code falls back
                 addq.w  #6,(Palette_frame).w            ; next frame
                 cmpi.w  #$36,(Palette_frame).w          ; is it the last frame?
 ; This condition causes the last frame to be skipped
-                blo.s   loc_3898                        ; if not, branch
+                blo.s   SKPal_ApplySuperSonicCycleFrame  ; if not, branch
                 move.w  #$24,(Palette_frame).w          ; reset frame counter (Super Sonic's normal palette cycle starts at $24. Everything before that is for the palette fade)
 
-loc_3898:
+SKPal_ApplySuperSonicCycleFrame:
                 bra.w   SuperHyper_PalCycle_SonicApply
 ; ---------------------------------------------------------------------------
 
 SuperHyper_PalCycle_HyperSonic:
 ; run frame timer
                 subq.b  #1,(Palette_timer).w
-                bpl.w   locret_37EC
+                bpl.w   SKPal_TransformCycleReturn
                 move.b  #4,(Palette_timer).w
 
 ; increment palette frame and update Sonic's palette
@@ -147,7 +147,7 @@ SuperHyper_PalCycle_HyperSonicApply:
                 move.l  (a0,d0.w),(a1)+                 ; Write first two palette entries
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry
                 tst.b   (Water_flag).w
-                beq.w   locret_37EC
+                beq.w   SKPal_TransformCycleReturn
                 lea     (Water_palette+$4).w,a1
                 move.l  (a0,d0.w),(a1)+                 ; Write first two palette entries
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry
@@ -191,7 +191,7 @@ SuperHyper_PalCycle_ApplyTails:
 SuperHyper_PalCycle_NormalKnuckles:
 ; run frame timer
                 subq.b  #1,(Palette_timer).w
-                bpl.w   locret_37EC
+                bpl.w   SKPal_TransformCycleReturn
                 move.b  #2,(Palette_timer).w
 
 ; increment palette frame and update Knuckles' palette
@@ -208,7 +208,7 @@ SuperHyper_PalCycle_Apply:
                 move.l  (a0,d0.w),(a1)+                 ; Write first two palette entries
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry
                 tst.b   (Water_flag).w
-                beq.w   locret_37EC
+                beq.w   SKPal_TransformCycleReturn
                 lea     (Water_palette+$4).w,a1
                 move.l  (a0,d0.w),(a1)+                 ; Write first two palette entries
                 move.w  4(a0,d0.w),(a1)                 ; Write last palette entry

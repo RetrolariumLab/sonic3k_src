@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 122
+    "commit_count": 123
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -779,9 +779,15 @@
       "commits": ["8ebcef8471196bd28a327a64455ea3df9752fa87"]
     },
     {
-      "id": "current-shorten-17-tile-rendering",
+      "id": "change-52b06392d1c7",
       "kind": "source_or_tooling",
       "summary": "Apply 239 reviewed short labels for tile rendering.",
+      "commits": ["52b06392d1c7341d1e1699b1f369bc3805cef3d8"]
+    },
+    {
+      "id": "current-shorten-18-palettes",
+      "kind": "source_or_tooling",
+      "summary": "Apply 216 reviewed short labels for palettes.",
       "commits": ["release-commit"]
     }
   ],

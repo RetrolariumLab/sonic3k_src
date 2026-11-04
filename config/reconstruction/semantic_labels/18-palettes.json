@@ -1,0 +1,2596 @@
+{
+  "schema_version": 1,
+  "packet": "18-palettes",
+  "mappings": [
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 8,
+      "old": "loc_3284",
+      "new": "S3Palette_RunBlackToTargetVblankStepLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_RunBlackToTargetVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 28,
+      "old": "loc_32B0",
+      "new": "S3Pal_FromBlackStepNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_StepNormalColorsUpTowardTargetWords"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 41,
+      "old": "loc_32D2",
+      "new": "S3Pal_FromBlackStepWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_StepEnabledWaterColorsUpTowardTargetWords"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 45,
+      "old": "locret_32D8",
+      "new": "S3Pal_FromBlackReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_ReturnAfterBlackFadeStepOrWaterGate"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 64,
+      "old": "loc_32F0",
+      "new": "S3Pal_FromBlackTryMid",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_TryMiddleNibbleIncrementAfterHighCandidateOvershoot"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 73,
+      "old": "loc_32FE",
+      "new": "S3Pal_FromBlackStepLow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncrementLowColorBitsAsFinalUpwardFallback"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 78,
+      "old": "loc_3302",
+      "new": "S3Pal_FromBlackSkipColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AdvanceCurrentColorPointerWhenTargetAlreadyEqual"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 93,
+      "old": "loc_3318",
+      "new": "S3Pal_FillBlackColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_FillOneNormalColorAndConditionallyMatchingWaterColor"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 99,
+      "old": "loc_3324",
+      "new": "S3Palette_AdvanceBlackFillEntryCounter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AdvanceBlackFillEntryCounter"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 113,
+      "old": "loc_3338",
+      "new": "S3Pal_RunPaletteCycles",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_DelegateZeroFadeTimerToTransformationAndZoneCycles"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 123,
+      "old": "loc_3348",
+      "new": "S3Pal_ToBlackVBlankLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_RunPaletteToBlackVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 141,
+      "old": "loc_336E",
+      "new": "S3Pal_ToBlackStepNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_DecreaseNormalColorsTowardZeroInChannelOrder"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 150,
+      "old": "loc_3384",
+      "new": "S3Pal_ToBlackStepWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_DecreaseWaterColorsRegardlessOfWaterFlag"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 168,
+      "old": "loc_339C",
+      "new": "S3Pal_ToBlackTryMid",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_DecreaseMiddleColorNibbleWhenLowChannelZero"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 176,
+      "old": "loc_33AA",
+      "new": "S3Pal_ToBlackTryHigh",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_DecreaseHighColorNibbleWhenLowerChannelsZero"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 184,
+      "old": "loc_33B8",
+      "new": "S3Pal_ToBlackSkipColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AdvancePastZeroOrUnselectedDecrementColor"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 200,
+      "old": "loc_33D6",
+      "new": "S3Pal_FillNormalWhite",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_FillNormalWhiteRangeBeforeTargetFade"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 205,
+      "old": "loc_33E0",
+      "new": "S3Palette_RunWhiteToTargetVblankStepLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_RunWhiteToTargetVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 225,
+      "old": "loc_340C",
+      "new": "S3Pal_FromWhiteStepNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_StepNormalColorsDownTowardTargetUsingNativeProfileHelper"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 238,
+      "old": "loc_342E",
+      "new": "S3Pal_FromWhiteStepWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_StepEnabledWaterColorsDownTowardTarget"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 242,
+      "old": "locret_3434",
+      "new": "S3Pal_FromWhiteReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_ReturnFromWhiteStepGateOrCompletedRange"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 262,
+      "old": "loc_344E",
+      "new": "S3Pal_FromWhiteTryMid",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_TryMiddleWordDecrementTowardTargetAfterHighBorrowOrUndershoot"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 272,
+      "old": "loc_345E",
+      "new": "S3Pal_FromWhiteStepLow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_SubtractLowWordStepAsFinalWhiteFadeFallback"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 277,
+      "old": "loc_3462",
+      "new": "S3Pal_FromWhiteSkipColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AdvanceUnchangedWhiteFadeColorPointer"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 288,
+      "old": "loc_3470",
+      "new": "S3Pal_ToWhiteVBlankLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_RunPaletteToWhiteVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 306,
+      "old": "loc_3496",
+      "new": "S3Pal_ToWhiteStepNormal",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncreaseNormalColorsTowardLiteralEee"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 315,
+      "old": "loc_34AC",
+      "new": "S3Pal_ToWhiteStepWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncreaseWaterColorsTowardLiteralEeeUnconditionally"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 335,
+      "old": "loc_34CC",
+      "new": "S3Pal_ToWhiteTryMid",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncreaseMiddleColorNibbleAfterLowMaskReachesE"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 344,
+      "old": "loc_34DE",
+      "new": "S3Pal_ToWhiteTryHigh",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncreaseHighColorNibbleAfterLowerMasksComplete"
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "original_line": 353,
+      "old": "loc_34F0",
+      "new": "S3Pal_ToWhiteSkipColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AdvancePastEeeOrCompleteChannelMasks"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 11,
+      "old": "loc_53C4E",
+      "new": "S3PalObj_TickFadeInDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_TickSelectedObjectFadeByteDelay"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 17,
+      "old": "loc_53C56",
+      "new": "S3PalObj_TryNextFadeInPass",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_GateSevenSelectedObjectColorPassesBeforeDeletion"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 27,
+      "old": "loc_53C72",
+      "new": "S3PalObj_FadeInLines2And3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IncrementThirtyTwoSelectedNormalColorsTowardTargets"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 43,
+      "old": "loc_53C8A",
+      "new": "S3PalObj_FadeInStoreHigh",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CommitHighByteIncrementThenPrepareMiddleByteComponent"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 55,
+      "old": "loc_53CA0",
+      "new": "S3PalObj_FadeInTryLow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CompareLowColorComponentAfterMiddleIncrement"
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "original_line": 62,
+      "old": "loc_53CAA",
+      "new": "S3PalObj_FadeInStoreLowByte",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CombineIncrementedLowByteAndAdvanceColorPointers"
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 10,
+      "old": "loc_53EEE",
+      "new": "PaletteRotationS3_VisitSlot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Visit one eight-byte global palette rotation slot."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 22,
+      "old": "loc_53F0A",
+      "new": "PaletteRotationS3_BeginColorCopy",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Load color-count-minus-one after selecting current palette entry."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 26,
+      "old": "loc_53F10",
+      "new": "S3PalRotation_CopyStepColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Copy palette entry colors and store its next delay/displacement."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 35,
+      "old": "loc_53F22",
+      "new": "PaletteRotationS3_AdvanceToNextSlot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance global rotation scan to the next eight-byte slot."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 48,
+      "old": "locret_53F32",
+      "new": "S3PalRotation_ScriptReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Shared return for end of slot scan and palette control-command paths."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 52,
+      "old": "loc_53F34",
+      "new": "PaletteRotationS3_DispatchCountedCommand",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Dispatch nonzero-parameter negative palette command in S3."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 64,
+      "old": "loc_53F42",
+      "new": "S3PalRotation_TrySwitchScriptAtLimit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count a palette cycle and switch header when unsigned BYTE limit is reached."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 74,
+      "old": "loc_53F5C",
+      "new": "PaletteRotationS3_RestartHeaderData",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Restart palette data at current header plus four bytes."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 80,
+      "old": "loc_53F64",
+      "new": "S3PalRotation_TickCustomCount",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count S3 palette cycles before custom callback or restart."
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "original_line": 89,
+      "old": "loc_53F76",
+      "new": "S3PalRotation_CallCustomAndStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Invoke S3 global palette callback and skip current entry copying."
+    },
+    {
+      "source": "src/rendering/palettes/s3/transformation_cycles.s",
+      "original_line": 44,
+      "old": "locret_316A",
+      "new": "S3Pal_TransformCycleReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_ReturnFromTransformationPaletteStatusTimerOrWaterGate"
+    },
+    {
+      "source": "src/rendering/palettes/s3/transformation_cycles.s",
+      "original_line": 64,
+      "old": "loc_3194",
+      "new": "S3Pal_ApplySonicRevertFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_ApplyOldOffsetAfterSonicRevertCounterUnderflowTest"
+    },
+    {
+      "source": "src/rendering/palettes/s3/transformation_cycles.s",
+      "original_line": 83,
+      "old": "loc_31BE",
+      "new": "S3Pal_ApplySuperSonicCycleFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_ApplyOldSuperSonicOffsetAfterFutureCounterWrap"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 91,
+      "old": "loc_2492",
+      "new": "S3PalAIZ1_WriteSecondaryTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneWriteSecondaryTripletFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 96,
+      "old": "locret_24A4",
+      "new": "S3PalAIZ1_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneReturnAfterTimerOrSecondaryGate"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 100,
+      "old": "loc_24A6",
+      "new": "S3PalAIZ1_TickAltCycle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneRunAlternatePaletteCounters"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 110,
+      "old": "loc_24C8",
+      "new": "S3PalAIZ1_WriteAltMainColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneWriteAlternateFourColorsAndAdvanceSecondOffset"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 120,
+      "old": "loc_24F0",
+      "new": "S3PalAIZ1_WriteAltTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneWriteAlternateTrailingTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 125,
+      "old": "locret_2502",
+      "new": "S3PalAIZ1_AltReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizOneReturnFromAlternateTimerGateOrWrites"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 145,
+      "old": "loc_2544",
+      "new": "S3PalAIZ2_PickTripletSource",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoChooseTripletSourceAtUnsignedCameraThreshold"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 151,
+      "old": "loc_2558",
+      "new": "S3PalAIZ2_WriteScatteredTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoScatterThreeSourceWordsAndGateEarlyCameraCopy"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 160,
+      "old": "loc_257E",
+      "new": "S3PalAIZ2_TickSingleColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoTickIndependentSingleColorCycle"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 170,
+      "old": "loc_25A0",
+      "new": "S3PalAIZ2_PickSingleColorSource",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoChooseSingleColorSourceAtCameraBoundary"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 176,
+      "old": "loc_25B4",
+      "new": "S3PalAIZ2_WriteSingleColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoWriteSelectedSinglePaletteWord"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 179,
+      "old": "locret_25BA",
+      "new": "S3PalAIZ2_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_AizTwoReturnAfterIndependentTimerOrSingleWord"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 192,
+      "old": "loc_25D4",
+      "new": "S3PalHCZ1_StepCycleOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_HczOneAdvanceFourColorOffsetWithFlagSelectedRate"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 200,
+      "old": "loc_25F0",
+      "new": "S3PalHCZ1_MirrorColorsToWater",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_HczOneMirrorFourColorsIntoNormalAndWaterBanks"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 206,
+      "old": "locret_2608",
+      "new": "S3PalHCZ1_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_HczOneReturnFromTimerGateOrMirroredWrites"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 227,
+      "old": "loc_2634",
+      "new": "S3PalCNZ_WriteFirstTriplets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CnzWriteFirstNormalAndWaterTriplets"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 234,
+      "old": "loc_2652",
+      "new": "S3PalCNZ_StepSecondTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CnzAdvanceSecondTripletOnEveryDispatch"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 242,
+      "old": "loc_266E",
+      "new": "S3PalCNZ_WriteSecondTriplets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CnzWriteSecondTripletsAndTickThirdGroup"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 258,
+      "old": "loc_26B4",
+      "new": "S3PalCNZ_WriteThirdPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CnzMirrorThirdTwoColorPairToBothBanks"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 263,
+      "old": "locret_26C6",
+      "new": "S3PalCNZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CnzReturnAfterThirdTimerGateOrPairWrite"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 282,
+      "old": "loc_26F2",
+      "new": "S3Palette_IczWriteFirstTwoColorPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczWriteFirstTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 285,
+      "old": "loc_26F8",
+      "new": "S3PalICZ_TickSecondPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczTickSecondPairCounterIndependently"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 296,
+      "old": "loc_2720",
+      "new": "S3PalICZ_TryWriteSecondPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczGateSecondPairWriteByBackgroundEventWord"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 301,
+      "old": "loc_272C",
+      "new": "S3PalICZ_TickLastPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczTickThirdAndFourthPairsOnSharedTimer"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 312,
+      "old": "loc_2754",
+      "new": "S3PalICZ_TryWriteThirdPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczGateThirdPairWriteWithoutSkippingFourthUpdate"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 317,
+      "old": "loc_2760",
+      "new": "S3PalICZ_StepFourthPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczAdvanceFourthPairOffsetOnThirdTimerExpiry"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 325,
+      "old": "loc_277C",
+      "new": "S3Palette_IczWriteFourthTwoColorPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczWriteFourthTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 328,
+      "old": "locret_2782",
+      "new": "S3PalICZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_IczReturnAfterThirdTimerWaitOrAllDuePairs"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 340,
+      "old": "loc_2792",
+      "new": "S3PalLBZ_TickTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LbzTickSelectedActTripletSource"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 350,
+      "old": "loc_27B4",
+      "new": "S3PalLBZ_WriteTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LbzWriteSelectedActThreeColorTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 354,
+      "old": "locret_27C0",
+      "new": "S3PalLBZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LbzReturnForTimerWaitOrTripletComplete"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 368,
+      "old": "loc_27E4",
+      "new": "S3PalLRZ1_WriteMainColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LrzOneWriteFourColorsThenAdvanceSecondPairOffset"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 378,
+      "old": "loc_280C",
+      "new": "S3PalLRZ1_WriteSecondPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LrzOneWriteSecondPairFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 382,
+      "old": "locret_2818",
+      "new": "S3PalLRZ1_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_LrzOneReturnFromMainTimerOrCompletedTwoGroups"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 401,
+      "old": "loc_2844",
+      "new": "S3PalBPZ_WriteFirstTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_BpzWriteFirstTripletFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 405,
+      "old": "loc_2850",
+      "new": "S3PalBPZ_TickSecondTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_BpzTickIndependentSecondTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 416,
+      "old": "loc_2878",
+      "new": "S3Palette_BpzWriteSecondTriplet",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_BpzWriteSecondTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 420,
+      "old": "locret_2884",
+      "new": "S3PalBPZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_BpzReturnAfterSecondTimerGateOrTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 435,
+      "old": "loc_28AE",
+      "new": "S3PalCGZ_WriteCycleColors",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CgzWriteFourColorsFromOldEightByteStride"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 439,
+      "old": "locret_28BA",
+      "new": "S3PalCGZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_CgzReturnForTimerWaitOrFourColorCopy"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 454,
+      "old": "loc_28E4",
+      "new": "S3PalEMZ_WriteFirstColor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_EmzWriteOffsetFourWordOfFirstCycleSource"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 457,
+      "old": "loc_28EA",
+      "new": "S3PalEMZ_TickSecondPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_EmzTickIndependentSecondPairCycle"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 468,
+      "old": "loc_2912",
+      "new": "S3Palette_EmzWriteSecondTwoColorPair",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_EmzWriteSecondTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "original_line": 471,
+      "old": "locret_2918",
+      "new": "S3PalEMZ_Return",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Actual CODE: S3Palette_EmzReturnFromSecondTimerGateOrPairCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 6,
+      "old": "loc_5FBA0",
+      "new": "EndSuperKnuxPal_AdvanceCycle",
+      "profiles": ["sk"],
+      "meaning": "Advance the standalone Super Knuckles pose color cycle."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 20,
+      "old": "loc_5FBCE",
+      "new": "EndSuperKnuxPal_CopyColors",
+      "profiles": ["sk"],
+      "meaning": "Copy selected solo Knuckles super colors with original gap."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 26,
+      "old": "locret_5FBE0",
+      "new": "EndSuperKnuxPal_CycleReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during solo Knuckles super cycle wait or after copy."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 34,
+      "old": "loc_5FC1E",
+      "new": "EndLine3Flash_InitRaise",
+      "profiles": ["sk"],
+      "meaning": "Initialize three whitening passes for ending palette line3."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 38,
+      "old": "loc_5FC2A",
+      "new": "EndLine3Flash_TryRaisePass",
+      "profiles": ["sk"],
+      "meaning": "Wait between line3 whitening passes and select15colors."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 45,
+      "old": "loc_5FC3C",
+      "new": "EndingLineThreeFlash_RaiseColorLoop",
+      "profiles": ["sk"],
+      "meaning": "Raise each of15selected line3 colors toward white."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 51,
+      "old": "locret_5FC4C",
+      "new": "EndingLineThreeFlash_ReturnBetweenPasses",
+      "profiles": ["sk"],
+      "meaning": "Shared return during whitening and restoring delays."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 55,
+      "old": "loc_5FC4E",
+      "new": "EndingLineThreeFlash_BeginRestoreDelay",
+      "profiles": ["sk"],
+      "meaning": "Install delayed three-pass restore phase after whitening."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 62,
+      "old": "loc_5FC62",
+      "new": "EndLine3Flash_TryRestorePass",
+      "profiles": ["sk"],
+      "meaning": "Wait then select15normal and target line3 colors."
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "original_line": 70,
+      "old": "loc_5FC78",
+      "new": "EndLine3Flash_RestoreColors",
+      "profiles": ["sk"],
+      "meaning": "Lower15colors toward target and delete after three passes."
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 8,
+      "old": "loc_3AFE",
+      "new": "SKPalette_RunBlackToTargetVblankStepLoop",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_RunBlackToTargetVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 28,
+      "old": "loc_3B2A",
+      "new": "SKPal_FromBlackStepNormal",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_StepNormalColorsUpTowardTargetWords"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 41,
+      "old": "loc_3B4C",
+      "new": "SKPal_FromBlackStepWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_StepEnabledWaterColorsUpTowardTargetWords"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 45,
+      "old": "locret_3B52",
+      "new": "SKPal_FromBlackReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnAfterBlackFadeStepOrWaterGate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 64,
+      "old": "loc_3B6A",
+      "new": "SKPal_FromBlackTryMid",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_TryMiddleNibbleIncrementAfterHighCandidateOvershoot"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 73,
+      "old": "loc_3B78",
+      "new": "SKPal_FromBlackStepLow",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncrementLowColorBitsAsFinalUpwardFallback"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 78,
+      "old": "loc_3B7C",
+      "new": "SKPal_FromBlackSkipColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AdvanceCurrentColorPointerWhenTargetAlreadyEqual"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 97,
+      "old": "loc_3BA6",
+      "new": "SKPal_FillBlackColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_FillOneNormalColorAndConditionallyMatchingWaterColor"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 103,
+      "old": "loc_3BB2",
+      "new": "SKPalette_AdvanceBlackFillEntryCounter",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AdvanceBlackFillEntryCounter"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 122,
+      "old": "loc_3BDC",
+      "new": "SKPal_RunPaletteCycles",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DelegateZeroFadeTimerToTransformationAndZoneCycles"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 126,
+      "old": "locret_3BE2",
+      "new": "SKPal_NegativeTimerReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnWhilePaletteAnimationTimerIsNegative"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 136,
+      "old": "loc_3BEE",
+      "new": "SKPal_ToBlackVBlankLoop",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_RunPaletteToBlackVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 154,
+      "old": "loc_3C14",
+      "new": "SKPal_ToBlackStepNormal",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseNormalColorsTowardZeroInChannelOrder"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 163,
+      "old": "loc_3C2A",
+      "new": "SKPal_ToBlackStepWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseWaterColorsRegardlessOfWaterFlag"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 181,
+      "old": "loc_3C42",
+      "new": "SKPal_ToBlackTryMid",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseMiddleColorNibbleWhenLowChannelZero"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 189,
+      "old": "loc_3C50",
+      "new": "SKPal_ToBlackTryHigh",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseHighColorNibbleWhenLowerChannelsZero"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 197,
+      "old": "loc_3C5E",
+      "new": "SKPal_ToBlackSkipColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AdvancePastZeroOrUnselectedDecrementColor"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 212,
+      "old": "loc_3C76",
+      "new": "SKPal_FillNormalWhite",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_FillNormalWhiteRangeBeforeTargetFade"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 226,
+      "old": "loc_3C8E",
+      "new": "SKPalette_RunWhiteToTargetVblankStepLoop",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_RunWhiteToTargetVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 249,
+      "old": "loc_3CC6",
+      "new": "SKPal_FromWhiteStepNormal",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_StepNormalColorsDownTowardTargetUsingNativeProfileHelper"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 262,
+      "old": "loc_3CE8",
+      "new": "SKPal_FromWhiteStepWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_StepEnabledWaterColorsDownTowardTarget"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 266,
+      "old": "locret_3CEE",
+      "new": "SKPal_FromWhiteReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnFromWhiteStepGateOrCompletedRange"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 281,
+      "old": "loc_3D02",
+      "new": "SKPal_FromWhiteStoreHigh",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CommitMaskedHighByteThenCompareMiddleColorBits"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 293,
+      "old": "loc_3D1C",
+      "new": "SKPal_FromWhiteTryLow",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CompareLowChannelAfterMiddleByteStep"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 300,
+      "old": "loc_3D2A",
+      "new": "SKPal_FromWhiteStoreLowByte",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CombineMaskedLowByteChannelsAndAdvanceColorPointer"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 312,
+      "old": "loc_3D3A",
+      "new": "SKPal_ToWhiteVBlankLoop",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_RunPaletteToWhiteVblankStepLoop"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 330,
+      "old": "loc_3D60",
+      "new": "SKPal_ToWhiteStepNormal",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncreaseNormalColorsTowardLiteralEee"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 339,
+      "old": "loc_3D76",
+      "new": "SKPal_ToWhiteStepWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncreaseWaterColorsTowardLiteralEeeUnconditionally"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 359,
+      "old": "loc_3D96",
+      "new": "SKPal_ToWhiteTryMid",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncreaseMiddleColorNibbleAfterLowMaskReachesE"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 368,
+      "old": "loc_3DA8",
+      "new": "SKPal_ToWhiteTryHigh",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncreaseHighColorNibbleAfterLowerMasksComplete"
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "original_line": 377,
+      "old": "loc_3DBA",
+      "new": "SKPal_ToWhiteSkipColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AdvancePastEeeOrCompleteChannelMasks"
+    },
+    {
+      "source": "src/rendering/palettes/sk/hidden_palace_control.s",
+      "original_line": 13,
+      "old": "loc_656B8",
+      "new": "SKHPZPal_SaveAndCompareOffset",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CacheCameraSelectedHpzPaletteOffsetBeforeEqualityGate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/hidden_palace_control.s",
+      "original_line": 21,
+      "old": "loc_656CA",
+      "new": "SKHPZPal_CopyLines2Through4",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CopyChangedHpzScenePaletteLinesTwoThroughFour"
+    },
+    {
+      "source": "src/rendering/palettes/sk/hidden_palace_control.s",
+      "original_line": 25,
+      "old": "locret_656D0",
+      "new": "SKHPZPal_UpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnFromUnchangedHpzCameraPaletteOrFinishedCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 12,
+      "old": "loc_855C2",
+      "new": "SKPalObj_TickFadeInDelay",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_TickSelectedObjectFadeInWordDelayAndBindCallerRange"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 22,
+      "old": "loc_855DE",
+      "new": "SKPalObj_RunFadeInPass",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IncrementSelectedColorsThenRetireEightPassFadeIn"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 30,
+      "old": "locret_855F6",
+      "new": "SKPalObj_FadeInReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnFromFadeInDelayOrCompletedPass"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 44,
+      "old": "loc_85606",
+      "new": "SKPalObj_FadeInStoreHigh",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CommitHighByteIncrementThenPrepareMiddleByteComponent"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 56,
+      "old": "loc_8561C",
+      "new": "SKPalObj_FadeInTryLow",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CompareLowColorComponentAfterMiddleIncrement"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "original_line": 63,
+      "old": "loc_85626",
+      "new": "SKPalObj_FadeInStoreLowByte",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CombineIncrementedLowByteAndAdvanceColorPointers"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 11,
+      "old": "loc_8555E",
+      "new": "SKPalObj_TickFadeOutDelay",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_TickSelectedObjectFadeOutWordDelayAndBindCallerRange"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 20,
+      "old": "loc_85576",
+      "new": "SKPalObj_RunFadeOutPass",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseSelectedColorsThenRetireEightPassFadeOut"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 28,
+      "old": "locret_8558E",
+      "new": "SKPalObj_FadeOutReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnFromFadeOutDelayOrCompletedPass"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 39,
+      "old": "loc_85598",
+      "new": "SKPalObj_FadeOutStoreHigh",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CommitDecreasedHighByteAndPrepareMiddleChannel"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 47,
+      "old": "loc_855A6",
+      "new": "SKPalObj_FadeOutTryLow",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DecreaseLowChannelIndependentlyOfMiddleChannel"
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "original_line": 52,
+      "old": "loc_855AC",
+      "new": "SKPalObj_FadeOutStoreLowByte",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CombineDecreasedLowByteAndAdvanceCurrentPointer"
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 12,
+      "old": "loc_85994",
+      "new": "PaletteRotationSK_VisitSlot",
+      "profiles": ["sk"],
+      "meaning": "Visit one eight-byte global palette rotation slot."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 25,
+      "old": "loc_859B0",
+      "new": "PaletteRotationSK_BeginColorCopy",
+      "profiles": ["sk"],
+      "meaning": "Load color-count-minus-one after selecting current palette entry."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 29,
+      "old": "loc_859B6",
+      "new": "SKPalRotation_CopyStepColors",
+      "profiles": ["sk"],
+      "meaning": "Copy palette entry colors and store its next delay/displacement."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 39,
+      "old": "loc_859CA",
+      "new": "PaletteRotationSK_AdvanceToNextSlot",
+      "profiles": ["sk"],
+      "meaning": "Advance global rotation scan to the next eight-byte slot."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 58,
+      "old": "loc_859E2",
+      "new": "SKPalRotation_TrySwitchScriptAtLimit",
+      "profiles": ["sk"],
+      "meaning": "Count a palette cycle and switch header when unsigned BYTE limit is reached."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 68,
+      "old": "loc_859FC",
+      "new": "PaletteRotationSK_RestartHeaderData",
+      "profiles": ["sk"],
+      "meaning": "Restart palette data at current header plus four bytes."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 72,
+      "old": "locret_85A00",
+      "new": "SKPalRotation_ScriptReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared return for end of slot scan and palette control-command paths."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 78,
+      "old": "loc_85A02",
+      "new": "PaletteRotationSK_RunCustomAtLoopLimit",
+      "profiles": ["sk"],
+      "meaning": "Invoke global palette custom routine when counted cycles reach limit."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 107,
+      "old": "loc_85A3E",
+      "new": "SKPalRotation_SelectIndexedStep",
+      "profiles": ["sk"],
+      "meaning": "Select indexed palette row and delay after cursor advance or negative-index restart."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 114,
+      "old": "loc_85A52",
+      "new": "PaletteRotationSK_IndexedCopyColorLoop",
+      "profiles": ["sk"],
+      "meaning": "Copy selected indexed palette row into caller destination."
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "original_line": 118,
+      "old": "locret_85A58",
+      "new": "PaletteRotationSK_IndexedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from indexed palette reader after disable,delay wait or color copy."
+    },
+    {
+      "source": "src/rendering/palettes/sk/transformation_cycles.s",
+      "original_line": 56,
+      "old": "locret_37EC",
+      "new": "SKPal_TransformCycleReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ReturnFromTransformationPaletteStatusTimerOrWaterGate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/transformation_cycles.s",
+      "original_line": 79,
+      "old": "loc_381E",
+      "new": "SKPal_ApplySonicRevertFrame",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ApplyOldOffsetAfterSonicRevertCounterUnderflowTest"
+    },
+    {
+      "source": "src/rendering/palettes/sk/transformation_cycles.s",
+      "original_line": 125,
+      "old": "loc_3898",
+      "new": "SKPal_ApplySuperSonicCycleFrame",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_ApplyOldSuperSonicOffsetAfterFutureCounterWrap"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 91,
+      "old": "loc_220A",
+      "new": "SKPalAIZ1_WriteSecondaryTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneWriteSecondaryTripletFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 96,
+      "old": "locret_221C",
+      "new": "SKPalAIZ1_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneReturnAfterTimerOrSecondaryGate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 100,
+      "old": "loc_221E",
+      "new": "SKPalAIZ1_TickAltCycle",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneRunAlternatePaletteCounters"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 110,
+      "old": "loc_2240",
+      "new": "SKPalAIZ1_WriteAltMainColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneWriteAlternateFourColorsAndAdvanceSecondOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 120,
+      "old": "loc_2268",
+      "new": "SKPalAIZ1_WriteAltTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneWriteAlternateTrailingTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 125,
+      "old": "locret_227A",
+      "new": "SKPalAIZ1_AltReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizOneReturnFromAlternateTimerGateOrWrites"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 145,
+      "old": "loc_22BC",
+      "new": "SKPalAIZ2_PickTripletSource",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoChooseTripletSourceAtUnsignedCameraThreshold"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 151,
+      "old": "loc_22D0",
+      "new": "SKPalAIZ2_WriteScatteredTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoScatterThreeSourceWordsAndGateEarlyCameraCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 160,
+      "old": "loc_22F6",
+      "new": "SKPalAIZ2_TickSingleColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoTickIndependentSingleColorCycle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 170,
+      "old": "loc_2318",
+      "new": "SKPalAIZ2_PickSingleColorSource",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoChooseSingleColorSourceAtCameraBoundary"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 176,
+      "old": "loc_232C",
+      "new": "SKPalAIZ2_WriteSingleColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoWriteSelectedSinglePaletteWord"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 179,
+      "old": "locret_2332",
+      "new": "SKPalAIZ2_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_AizTwoReturnAfterIndependentTimerOrSingleWord"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 192,
+      "old": "loc_234C",
+      "new": "SKPalHCZ1_StepCycleOffset",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_HczOneAdvanceFourColorOffsetWithFlagSelectedRate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 200,
+      "old": "loc_2368",
+      "new": "SKPalHCZ1_MirrorColorsToWater",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_HczOneMirrorFourColorsIntoNormalAndWaterBanks"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 206,
+      "old": "locret_2380",
+      "new": "SKPalHCZ1_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_HczOneReturnFromTimerGateOrMirroredWrites"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 227,
+      "old": "loc_23AC",
+      "new": "SKPalCNZ_WriteFirstTriplets",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CnzWriteFirstNormalAndWaterTriplets"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 234,
+      "old": "loc_23CA",
+      "new": "SKPalCNZ_StepSecondTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CnzAdvanceSecondTripletOnEveryDispatch"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 242,
+      "old": "loc_23E6",
+      "new": "SKPalCNZ_WriteSecondTriplets",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CnzWriteSecondTripletsAndTickThirdGroup"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 258,
+      "old": "loc_242C",
+      "new": "SKPalCNZ_WriteThirdPairs",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CnzMirrorThirdTwoColorPairToBothBanks"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 263,
+      "old": "locret_243E",
+      "new": "SKPalCNZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CnzReturnAfterThirdTimerGateOrPairWrite"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 272,
+      "old": "locret_244C",
+      "new": "SKPalFBZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_FbzReturnAfterOptionalLowFrameByteToggle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 287,
+      "old": "loc_2476",
+      "new": "SKPalette_IczWriteFirstTwoColorPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczWriteFirstTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 290,
+      "old": "loc_247C",
+      "new": "SKPalICZ_TickSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczTickSecondPairCounterIndependently"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 301,
+      "old": "loc_24A4",
+      "new": "SKPalICZ_TryWriteSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczGateSecondPairWriteByBackgroundEventWord"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 306,
+      "old": "loc_24B0",
+      "new": "SKPalICZ_TickLastPairs",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczTickThirdAndFourthPairsOnSharedTimer"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 317,
+      "old": "loc_24D8",
+      "new": "SKPalICZ_TryWriteThirdPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczGateThirdPairWriteWithoutSkippingFourthUpdate"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 322,
+      "old": "loc_24E4",
+      "new": "SKPalICZ_StepFourthPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczAdvanceFourthPairOffsetOnThirdTimerExpiry"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 330,
+      "old": "loc_2500",
+      "new": "SKPalette_IczWriteFourthTwoColorPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczWriteFourthTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 333,
+      "old": "locret_2506",
+      "new": "SKPalICZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_IczReturnAfterThirdTimerWaitOrAllDuePairs"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 345,
+      "old": "loc_2516",
+      "new": "SKPalLBZ_TickTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LbzTickSelectedActTripletSource"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 355,
+      "old": "loc_2538",
+      "new": "SKPalLBZ_WriteTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LbzWriteSelectedActThreeColorTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 359,
+      "old": "locret_2544",
+      "new": "SKPalLBZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LbzReturnForTimerWaitOrTripletComplete"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 374,
+      "old": "loc_256E",
+      "new": "SKPalSOZ1_WriteCycleColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozOneWriteFourColorsFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 378,
+      "old": "locret_257A",
+      "new": "SKPalSOZ1_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozOneReturnFromTimerOrFourColorCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 401,
+      "old": "loc_25C4",
+      "new": "SKPalSOZ2_TickLightTransition",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoTickSignedPaletteTransitionRequest"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 415,
+      "old": "loc_25EC",
+      "new": "SKPalSOZ2_StepNegativeRequest",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoAdvanceNegativeTransitionRequestTowardZero"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 420,
+      "old": "loc_25FA",
+      "new": "SKPalSOZ2_SelectLightPalette",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoBindUpdatedLightPaletteBlockAndFirstCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 427,
+      "old": "loc_260E",
+      "new": "SKPalSOZ2_CopyLightLine3",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoCopyElevenWordsIntoLineThree"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 433,
+      "old": "loc_261A",
+      "new": "SKPalSOZ2_CopyLightLine4",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoCopyFifteenWordsThenPreserveAnimationOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 442,
+      "old": "loc_262C",
+      "new": "SKPalSOZ2_TickColorCycle",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoTickAnimatedColorsWhenNoTransitionStepDue"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 446,
+      "old": "loc_2632",
+      "new": "SKPalSOZ2_StepCycleOffset",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoAdvanceAnimatedOffsetOnItsTimerExpiry"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 454,
+      "old": "loc_264E",
+      "new": "SKPalSOZ2_WriteCycleAtLightLevel",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoSelectAnimationPaletteByWordLevelIndex"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 462,
+      "old": "locret_266A",
+      "new": "SKPalSOZ2_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SozTwoReturnAfterTransitionAndAnimationGates"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 476,
+      "old": "loc_268E",
+      "new": "SKPalLRZ1_WriteMainColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzOneWriteMainFourColorsAndAdvanceSecondPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 486,
+      "old": "loc_26B6",
+      "new": "SKPalLRZ1_WriteSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzOneWriteSecondPairBeforeIndependentThirdTimer"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 490,
+      "old": "loc_26C2",
+      "new": "SKPalLRZ1_TickSingleColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzOneTickIndependentSingleColorGroup"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 500,
+      "old": "loc_26E4",
+      "new": "SKPalLRZ1_WriteSingleColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzOneWriteIndependentSingleColor"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 504,
+      "old": "locret_26F0",
+      "new": "SKPalLRZ1_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzOneReturnAfterThirdTimerOrSingleWord"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 518,
+      "old": "loc_2714",
+      "new": "SKPalLRZ2_WriteMainColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzTwoWriteMainFourColorsAndAdvanceSecondPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 528,
+      "old": "loc_273C",
+      "new": "SKPalLRZ2_WriteSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzTwoWriteSecondPairBeforeIndependentThirdTimer"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 532,
+      "old": "loc_2748",
+      "new": "SKPalLRZ2_TickThirdGroup",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzTwoTickIndependentEightByteCycle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 542,
+      "old": "loc_276A",
+      "new": "SKPalLRZ2_MirrorThirdPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzTwoDuplicateSameSourceLongIntoTwoPalettePairs"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 549,
+      "old": "locret_277C",
+      "new": "SKPalLRZ2_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzTwoReturnAfterThirdGroupTimerOrDuplicateWrite"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 563,
+      "old": "loc_27A0",
+      "new": "SKPalDEZ1_WriteActColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DezOneWriteActSpecificFourColorsThenRunSharedGroups"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 578,
+      "old": "loc_27D4",
+      "new": "SKPalDEZ_WriteSharedPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DezWriteSharedFirstPairFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 582,
+      "old": "loc_27E0",
+      "new": "SKPalette_DezTickSharedFiveColorGroup",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DezTickSharedFiveColorGroup"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 592,
+      "old": "loc_2804",
+      "new": "SKPalDEZ_WriteSharedFiveColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DezCopyFiveColorsAsTwoLongsAndWord"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 600,
+      "old": "locret_2818",
+      "new": "SKPalDEZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_DezReturnAfterSharedSecondTimerOrFiveColorCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 615,
+      "old": "loc_2842",
+      "new": "SKPalBPZ_WriteFirstTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_BpzWriteFirstTripletFromOldOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 619,
+      "old": "loc_284E",
+      "new": "SKPalBPZ_TickSecondTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_BpzTickIndependentSecondTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 630,
+      "old": "loc_2876",
+      "new": "SKPalette_BpzWriteSecondTriplet",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_BpzWriteSecondTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 634,
+      "old": "locret_2882",
+      "new": "SKPalBPZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_BpzReturnAfterSecondTimerGateOrTriplet"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 649,
+      "old": "loc_28AC",
+      "new": "SKPalCGZ_WriteCycleColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CgzWriteFourColorsFromOldEightByteStride"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 653,
+      "old": "locret_28B8",
+      "new": "SKPalCGZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_CgzReturnForTimerWaitOrFourColorCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 668,
+      "old": "loc_28E2",
+      "new": "SKPalEMZ_WriteFirstColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_EmzWriteOffsetFourWordOfFirstCycleSource"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 671,
+      "old": "loc_28E8",
+      "new": "SKPalEMZ_TickSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_EmzTickIndependentSecondPairCycle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 682,
+      "old": "loc_2910",
+      "new": "SKPalette_EmzWriteSecondTwoColorPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_EmzWriteSecondTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 685,
+      "old": "locret_2916",
+      "new": "SKPalEMZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_EmzReturnFromSecondTimerGateOrPairCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 699,
+      "old": "loc_293C",
+      "new": "SKPalPachinko_CopyRamColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_PachinkoCopySevenColorsFromChunkRamFirstCycle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 708,
+      "old": "loc_2952",
+      "new": "SKPalPachinko_TickSecondGroup",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_PachinkoTickSecondPaletteGroupIndependently"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 718,
+      "old": "loc_2976",
+      "new": "SKPalPachinko_WriteReversedSlices",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_PachinkoScatterThreeFiveColorSlicesInReverseSourceOrder"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 732,
+      "old": "locret_29A6",
+      "new": "SKPalPachinko_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_PachinkoReturnAfterSecondTimerOrScatteredCopy"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 749,
+      "old": "loc_29D2",
+      "new": "SKPalSlots_WriteIdleColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsWriteIdleFourColorCycleAndTwoLiteralWords"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 756,
+      "old": "locret_29F0",
+      "new": "SKPalSlots_IdleReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsReturnForNegativeRequestIdleTimerOrIdleWrite"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 760,
+      "old": "loc_29F2",
+      "new": "SKPalSlots_TickActiveCycle",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsTickPositiveRequestFourColorCycle"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 770,
+      "old": "loc_2A14",
+      "new": "SKPalSlots_WriteActiveColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsWriteActiveFourColorsThenAdvanceSingleColorOffset"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 780,
+      "old": "loc_2A3C",
+      "new": "SKPalSlots_MirrorActiveColor",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsMirrorSelectedSingleColorIntoTwoLines"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 785,
+      "old": "locret_2A4E",
+      "new": "SKPalSlots_ActiveReturn",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_SlotsReturnFromActiveTimerOrSelectedWordWrites"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 801,
+      "old": "loc_2A78",
+      "new": "SKPalette_LrzThreeWriteMainFourColors",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzThreeWriteMainFourColors"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 806,
+      "old": "loc_2A8A",
+      "new": "SKPalLRZ3_TrySecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzThreeGateOptionalSecondPairByNonzeroRequest"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 818,
+      "old": "loc_2AB2",
+      "new": "SKPalLRZ3_WriteSecondPair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzThreeWriteOptionalTwoColorPair"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 822,
+      "old": "locret_2ABE",
+      "new": "SKPalLRZ3_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_LrzThreeReturnForRequestOrTimerGatesOrWrites"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 838,
+      "old": "loc_2AE8",
+      "new": "SKPalHPZ_WriteCyclePair",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_HpzWriteTwoColorCycleWhenRequestByteZero"
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "original_line": 842,
+      "old": "locret_2AF4",
+      "new": "SKPalHPZ_Return",
+      "profiles": ["sk"],
+      "meaning": "Actual CODE: SKPalette_HpzReturnForNonzeroRequestTimerWaitOrPairWrite"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/ending/sk/character_poses.s",
+      "tokens": [[122, 2, 93, ""]]
+    },
+    {
+      "source": "src/objects/ending/sk/plane_scene.s",
+      "tokens": [[519, 2, 96, ""]]
+    },
+    {
+      "source": "src/objects/ending/sk/scene_controller.s",
+      "tokens": [[333, 2, 96, ""]]
+    },
+    {
+      "source": "src/rendering/palettes/s3/fades_and_loading.s",
+      "tokens": [
+        [5, 0, 0, ""],
+        [10, 3, 0, ""],
+        [20, 0, 1, ""],
+        [22, 3, 1, ""],
+        [24, 1, 3, ""],
+        [32, 0, 2, ""],
+        [34, 3, 2, ""],
+        [35, 0, 3, ""],
+        [41, 1, 6, ""],
+        [45, 1, 4, ""],
+        [48, 0, 4, ""],
+        [52, 1, 5, ""],
+        [55, 0, 5, ""],
+        [58, 0, 6, ""],
+        [68, 0, 7, ""],
+        [71, 1, 8, ""],
+        [73, 0, 8, ""],
+        [74, 3, 7, ""],
+        [78, 1, 9, ""],
+        [81, 0, 9, ""],
+        [86, 0, 10, ""],
+        [91, 3, 10, ""],
+        [99, 0, 11, ""],
+        [101, 3, 11, ""],
+        [107, 0, 12, ""],
+        [109, 3, 12, ""],
+        [113, 1, 15, ""],
+        [116, 1, 13, ""],
+        [119, 0, 13, ""],
+        [122, 1, 14, ""],
+        [125, 0, 14, ""],
+        [128, 1, 15, ""],
+        [131, 0, 15, ""],
+        [142, 0, 16, ""],
+        [144, 3, 16, ""],
+        [146, 0, 17, ""],
+        [151, 3, 17, ""],
+        [161, 0, 18, ""],
+        [163, 3, 18, ""],
+        [165, 1, 20, ""],
+        [173, 0, 19, ""],
+        [175, 3, 19, ""],
+        [176, 0, 20, ""],
+        [182, 1, 23, ""],
+        [185, 1, 21, ""],
+        [187, 1, 21, ""],
+        [190, 0, 21, ""],
+        [193, 1, 22, ""],
+        [195, 1, 22, ""],
+        [198, 0, 22, ""],
+        [201, 0, 23, ""],
+        [207, 0, 24, ""],
+        [212, 3, 24, ""],
+        [220, 0, 25, ""],
+        [222, 3, 25, ""],
+        [228, 0, 26, ""],
+        [230, 3, 26, ""],
+        [235, 1, 29, ""],
+        [239, 1, 27, ""],
+        [242, 0, 27, ""],
+        [246, 1, 28, ""],
+        [249, 0, 28, ""],
+        [253, 1, 29, ""],
+        [256, 0, 29, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/s3/object_fade.s",
+      "tokens": [
+        [2, 2, 30, ""],
+        [5, 0, 30, ""],
+        [7, 1, 31, ""],
+        [9, 0, 31, ""],
+        [18, 0, 32, ""],
+        [20, 3, 32, ""],
+        [28, 1, 33, ""],
+        [30, 0, 33, ""],
+        [39, 1, 34, ""],
+        [41, 0, 34, ""],
+        [45, 1, 35, ""],
+        [47, 0, 35, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/s3/rotation_script.s",
+      "tokens": [
+        [3, 0, 36, ""],
+        [5, 1, 40, ""],
+        [7, 1, 39, ""],
+        [12, 1, 37, ""],
+        [14, 0, 37, ""],
+        [17, 0, 38, ""],
+        [19, 3, 38, ""],
+        [25, 0, 39, ""],
+        [27, 1, 36, ""],
+        [30, 1, 41, ""],
+        [33, 0, 40, ""],
+        [35, 0, 41, ""],
+        [39, 1, 42, ""],
+        [40, 1, 44, ""],
+        [41, 0, 42, ""],
+        [44, 1, 43, ""],
+        [50, 0, 43, ""],
+        [54, 0, 44, ""],
+        [57, 1, 45, ""],
+        [61, 0, 45, ""],
+        [67, 1, 39, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/s3/transformation_cycles.s",
+      "tokens": [
+        [3, 1, 46, ""],
+        [8, 1, 46, ""],
+        [22, 1, 46, ""],
+        [33, 0, 46, ""],
+        [37, 1, 46, ""],
+        [42, 1, 47, ""],
+        [45, 0, 47, ""],
+        [49, 1, 46, ""],
+        [55, 1, 48, ""],
+        [57, 0, 48, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/s3/zone_cycles.s",
+      "tokens": [
+        [64, 1, 51, ""],
+        [66, 1, 50, ""],
+        [75, 1, 50, ""],
+        [79, 1, 49, ""],
+        [81, 0, 49, ""],
+        [85, 0, 50, ""],
+        [87, 0, 51, ""],
+        [89, 1, 54, ""],
+        [94, 1, 52, ""],
+        [96, 0, 52, ""],
+        [103, 1, 53, ""],
+        [105, 0, 53, ""],
+        [109, 0, 54, ""],
+        [113, 1, 57, ""],
+        [124, 1, 55, ""],
+        [126, 0, 55, ""],
+        [129, 1, 56, ""],
+        [131, 0, 56, ""],
+        [137, 1, 57, ""],
+        [139, 0, 57, ""],
+        [141, 1, 60, ""],
+        [146, 1, 58, ""],
+        [148, 0, 58, ""],
+        [151, 1, 59, ""],
+        [153, 0, 59, ""],
+        [155, 0, 60, ""],
+        [159, 1, 63, ""],
+        [162, 1, 61, ""],
+        [164, 0, 61, ""],
+        [169, 1, 62, ""],
+        [171, 0, 62, ""],
+        [176, 0, 63, ""],
+        [182, 1, 65, ""],
+        [188, 1, 64, ""],
+        [190, 0, 64, ""],
+        [196, 0, 65, ""],
+        [201, 1, 66, ""],
+        [203, 0, 66, ""],
+        [210, 1, 68, ""],
+        [216, 1, 67, ""],
+        [218, 0, 67, ""],
+        [222, 0, 68, ""],
+        [228, 1, 70, ""],
+        [234, 1, 69, ""],
+        [236, 0, 69, ""],
+        [238, 0, 70, ""],
+        [240, 1, 72, ""],
+        [246, 1, 71, ""],
+        [248, 0, 71, ""],
+        [250, 1, 72, ""],
+        [252, 0, 72, ""],
+        [254, 1, 76, ""],
+        [260, 1, 73, ""],
+        [262, 0, 73, ""],
+        [264, 1, 74, ""],
+        [266, 0, 74, ""],
+        [271, 1, 75, ""],
+        [273, 0, 75, ""],
+        [275, 0, 76, ""],
+        [279, 1, 77, ""],
+        [282, 0, 77, ""],
+        [284, 1, 79, ""],
+        [289, 1, 78, ""],
+        [291, 0, 78, ""],
+        [294, 0, 79, ""],
+        [298, 1, 82, ""],
+        [303, 1, 80, ""],
+        [305, 0, 80, ""],
+        [312, 1, 81, ""],
+        [314, 0, 81, ""],
+        [317, 0, 82, ""],
+        [323, 1, 84, ""],
+        [329, 1, 83, ""],
+        [331, 0, 83, ""],
+        [334, 0, 84, ""],
+        [336, 1, 86, ""],
+        [342, 1, 85, ""],
+        [344, 0, 85, ""],
+        [347, 0, 86, ""],
+        [351, 1, 88, ""],
+        [357, 1, 87, ""],
+        [359, 0, 87, ""],
+        [362, 0, 88, ""],
+        [366, 1, 90, ""],
+        [372, 1, 89, ""],
+        [374, 0, 89, ""],
+        [376, 0, 90, ""],
+        [378, 1, 92, ""],
+        [384, 1, 91, ""],
+        [386, 0, 91, ""],
+        [388, 0, 92, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/ending_pose_effects.s",
+      "tokens": [
+        [1, 0, 93, ""],
+        [5, 1, 95, ""],
+        [11, 1, 94, ""],
+        [14, 0, 94, ""],
+        [19, 0, 95, ""],
+        [24, 0, 96, ""],
+        [26, 2, 97, ""],
+        [27, 0, 97, ""],
+        [29, 1, 99, ""],
+        [33, 0, 98, ""],
+        [35, 3, 98, ""],
+        [37, 1, 100, ""],
+        [38, 0, 99, ""],
+        [40, 0, 100, ""],
+        [41, 2, 101, ""],
+        [45, 0, 101, ""],
+        [47, 1, 99, ""],
+        [52, 0, 102, ""],
+        [54, 3, 102, ""],
+        [56, 1, 99, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/fades_and_loading.s",
+      "tokens": [
+        [5, 0, 103, ""],
+        [10, 3, 103, ""],
+        [20, 0, 104, ""],
+        [22, 3, 104, ""],
+        [24, 1, 106, ""],
+        [32, 0, 105, ""],
+        [34, 3, 105, ""],
+        [35, 0, 106, ""],
+        [41, 1, 109, ""],
+        [45, 1, 107, ""],
+        [48, 0, 107, ""],
+        [52, 1, 108, ""],
+        [55, 0, 108, ""],
+        [58, 0, 109, ""],
+        [72, 0, 110, ""],
+        [75, 1, 111, ""],
+        [77, 0, 111, ""],
+        [78, 3, 110, ""],
+        [82, 1, 113, ""],
+        [83, 1, 112, ""],
+        [90, 0, 112, ""],
+        [92, 0, 113, ""],
+        [97, 0, 114, ""],
+        [102, 3, 114, ""],
+        [110, 0, 115, ""],
+        [112, 3, 115, ""],
+        [118, 0, 116, ""],
+        [120, 3, 116, ""],
+        [124, 1, 119, ""],
+        [127, 1, 117, ""],
+        [130, 0, 117, ""],
+        [133, 1, 118, ""],
+        [136, 0, 118, ""],
+        [139, 1, 119, ""],
+        [142, 0, 119, ""],
+        [152, 0, 120, ""],
+        [154, 3, 120, ""],
+        [161, 0, 121, ""],
+        [166, 3, 121, ""],
+        [170, 1, 124, ""],
+        [179, 0, 122, ""],
+        [181, 3, 122, ""],
+        [183, 1, 124, ""],
+        [191, 0, 123, ""],
+        [193, 3, 123, ""],
+        [194, 0, 124, ""],
+        [202, 1, 125, ""],
+        [204, 0, 125, ""],
+        [213, 1, 126, ""],
+        [215, 0, 126, ""],
+        [219, 1, 127, ""],
+        [221, 0, 127, ""],
+        [228, 0, 128, ""],
+        [233, 3, 128, ""],
+        [241, 0, 129, ""],
+        [243, 3, 129, ""],
+        [249, 0, 130, ""],
+        [251, 3, 130, ""],
+        [256, 1, 133, ""],
+        [260, 1, 131, ""],
+        [263, 0, 131, ""],
+        [267, 1, 132, ""],
+        [270, 0, 132, ""],
+        [274, 1, 133, ""],
+        [277, 0, 133, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/hidden_palace_control.s",
+      "tokens": [
+        [5, 1, 134, ""],
+        [7, 0, 134, ""],
+        [10, 1, 136, ""],
+        [14, 0, 135, ""],
+        [16, 3, 135, ""],
+        [17, 0, 136, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_in.s",
+      "tokens": [
+        [2, 2, 137, ""],
+        [5, 0, 137, ""],
+        [7, 1, 139, ""],
+        [14, 0, 138, ""],
+        [16, 3, 138, ""],
+        [18, 1, 139, ""],
+        [21, 0, 139, ""],
+        [29, 1, 140, ""],
+        [31, 0, 140, ""],
+        [40, 1, 141, ""],
+        [42, 0, 141, ""],
+        [46, 1, 142, ""],
+        [48, 0, 142, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/object_fade_out.s",
+      "tokens": [
+        [2, 2, 143, ""],
+        [5, 0, 143, ""],
+        [7, 1, 145, ""],
+        [13, 0, 144, ""],
+        [15, 3, 144, ""],
+        [17, 1, 145, ""],
+        [20, 0, 145, ""],
+        [25, 1, 146, ""],
+        [27, 0, 146, ""],
+        [32, 1, 147, ""],
+        [34, 0, 147, ""],
+        [36, 1, 148, ""],
+        [38, 0, 148, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/rotation_script.s",
+      "tokens": [
+        [3, 1, 155, ""],
+        [5, 0, 149, ""],
+        [7, 1, 155, ""],
+        [9, 1, 152, ""],
+        [15, 1, 150, ""],
+        [17, 0, 150, ""],
+        [20, 0, 151, ""],
+        [22, 3, 151, ""],
+        [29, 0, 152, ""],
+        [31, 1, 149, ""],
+        [34, 1, 154, ""],
+        [38, 1, 153, ""],
+        [39, 1, 156, ""],
+        [40, 0, 153, ""],
+        [43, 1, 154, ""],
+        [49, 0, 154, ""],
+        [52, 0, 155, ""],
+        [54, 0, 156, ""],
+        [57, 1, 154, ""],
+        [63, 1, 152, ""],
+        [66, 1, 159, ""],
+        [68, 1, 159, ""],
+        [76, 1, 157, ""],
+        [79, 0, 157, ""],
+        [85, 0, 158, ""],
+        [87, 3, 158, ""],
+        [88, 0, 159, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/transformation_cycles.s",
+      "tokens": [
+        [3, 1, 160, ""],
+        [8, 1, 160, ""],
+        [30, 1, 160, ""],
+        [41, 0, 160, ""],
+        [47, 1, 160, ""],
+        [52, 1, 161, ""],
+        [55, 0, 161, ""],
+        [80, 1, 160, ""],
+        [86, 1, 162, ""],
+        [88, 0, 162, ""],
+        [92, 1, 160, ""],
+        [105, 1, 160, ""],
+        [133, 1, 160, ""],
+        [147, 1, 160, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/palettes/sk/zone_cycles.s",
+      "tokens": [
+        [64, 1, 165, ""],
+        [66, 1, 164, ""],
+        [75, 1, 164, ""],
+        [79, 1, 163, ""],
+        [81, 0, 163, ""],
+        [85, 0, 164, ""],
+        [87, 0, 165, ""],
+        [89, 1, 168, ""],
+        [94, 1, 166, ""],
+        [96, 0, 166, ""],
+        [103, 1, 167, ""],
+        [105, 0, 167, ""],
+        [109, 0, 168, ""],
+        [113, 1, 171, ""],
+        [124, 1, 169, ""],
+        [126, 0, 169, ""],
+        [129, 1, 170, ""],
+        [131, 0, 170, ""],
+        [137, 1, 171, ""],
+        [139, 0, 171, ""],
+        [141, 1, 174, ""],
+        [146, 1, 172, ""],
+        [148, 0, 172, ""],
+        [151, 1, 173, ""],
+        [153, 0, 173, ""],
+        [155, 0, 174, ""],
+        [159, 1, 177, ""],
+        [162, 1, 175, ""],
+        [164, 0, 175, ""],
+        [169, 1, 176, ""],
+        [171, 0, 176, ""],
+        [176, 0, 177, ""],
+        [182, 1, 179, ""],
+        [188, 1, 178, ""],
+        [190, 0, 178, ""],
+        [196, 0, 179, ""],
+        [201, 1, 180, ""],
+        [203, 0, 180, ""],
+        [210, 1, 182, ""],
+        [216, 1, 181, ""],
+        [218, 0, 181, ""],
+        [222, 0, 182, ""],
+        [226, 1, 183, ""],
+        [228, 0, 183, ""],
+        [232, 1, 185, ""],
+        [238, 1, 184, ""],
+        [240, 0, 184, ""],
+        [242, 0, 185, ""],
+        [244, 1, 187, ""],
+        [250, 1, 186, ""],
+        [252, 0, 186, ""],
+        [254, 1, 187, ""],
+        [256, 0, 187, ""],
+        [258, 1, 191, ""],
+        [264, 1, 188, ""],
+        [266, 0, 188, ""],
+        [268, 1, 189, ""],
+        [270, 0, 189, ""],
+        [275, 1, 190, ""],
+        [277, 0, 190, ""],
+        [279, 0, 191, ""],
+        [283, 1, 192, ""],
+        [286, 0, 192, ""],
+        [288, 1, 194, ""],
+        [293, 1, 193, ""],
+        [295, 0, 193, ""],
+        [298, 0, 194, ""],
+        [302, 1, 196, ""],
+        [308, 1, 195, ""],
+        [310, 0, 195, ""],
+        [313, 0, 196, ""],
+        [323, 1, 197, ""],
+        [326, 1, 197, ""],
+        [329, 1, 197, ""],
+        [332, 0, 197, ""],
+        [334, 1, 202, ""],
+        [336, 1, 202, ""],
+        [339, 1, 198, ""],
+        [343, 1, 199, ""],
+        [344, 0, 198, ""],
+        [348, 0, 199, ""],
+        [354, 0, 200, ""],
+        [356, 3, 200, ""],
+        [359, 0, 201, ""],
+        [361, 3, 201, ""],
+        [364, 1, 204, ""],
+        [365, 1, 203, ""],
+        [366, 0, 202, ""],
+        [368, 1, 205, ""],
+        [369, 0, 203, ""],
+        [374, 1, 204, ""],
+        [376, 0, 204, ""],
+        [383, 0, 205, ""],
+        [387, 1, 208, ""],
+        [392, 1, 206, ""],
+        [394, 0, 206, ""],
+        [401, 1, 207, ""],
+        [403, 0, 207, ""],
+        [406, 0, 208, ""],
+        [408, 1, 210, ""],
+        [413, 1, 209, ""],
+        [415, 0, 209, ""],
+        [418, 0, 210, ""],
+        [422, 1, 213, ""],
+        [427, 1, 211, ""],
+        [429, 0, 211, ""],
+        [436, 1, 212, ""],
+        [438, 0, 212, ""],
+        [441, 0, 213, ""],
+        [443, 1, 215, ""],
+        [448, 1, 214, ""],
+        [450, 0, 214, ""],
+        [454, 0, 215, ""],
+        [463, 1, 216, ""],
+        [465, 0, 216, ""],
+        [471, 1, 218, ""],
+        [476, 1, 217, ""],
+        [478, 0, 217, ""],
+        [481, 0, 218, ""],
+        [483, 1, 220, ""],
+        [488, 1, 219, ""],
+        [490, 0, 219, ""],
+        [497, 0, 220, ""],
+        [501, 1, 222, ""],
+        [507, 1, 221, ""],
+        [509, 0, 221, ""],
+        [512, 0, 222, ""],
+        [514, 1, 224, ""],
+        [520, 1, 223, ""],
+        [522, 0, 223, ""],
+        [525, 0, 224, ""],
+        [529, 1, 226, ""],
+        [535, 1, 225, ""],
+        [537, 0, 225, ""],
+        [540, 0, 226, ""],
+        [544, 1, 228, ""],
+        [550, 1, 227, ""],
+        [552, 0, 227, ""],
+        [554, 0, 228, ""],
+        [556, 1, 230, ""],
+        [562, 1, 229, ""],
+        [564, 0, 229, ""],
+        [566, 0, 230, ""],
+        [570, 1, 232, ""],
+        [575, 1, 231, ""],
+        [577, 0, 231, ""],
+        [585, 0, 232, ""],
+        [587, 1, 234, ""],
+        [592, 1, 233, ""],
+        [594, 0, 233, ""],
+        [607, 0, 234, ""],
+        [611, 1, 236, ""],
+        [612, 1, 237, ""],
+        [614, 1, 236, ""],
+        [619, 1, 235, ""],
+        [621, 0, 235, ""],
+        [627, 0, 236, ""],
+        [629, 0, 237, ""],
+        [631, 1, 240, ""],
+        [636, 1, 238, ""],
+        [638, 0, 238, ""],
+        [645, 1, 239, ""],
+        [647, 0, 239, ""],
+        [651, 0, 240, ""],
+        [655, 1, 244, ""],
+        [657, 1, 242, ""],
+        [662, 1, 241, ""],
+        [664, 0, 241, ""],
+        [668, 0, 242, ""],
+        [670, 1, 244, ""],
+        [672, 1, 244, ""],
+        [677, 1, 243, ""],
+        [679, 0, 243, ""],
+        [682, 0, 244, ""],
+        [686, 1, 246, ""],
+        [688, 1, 246, ""],
+        [693, 1, 245, ""],
+        [695, 0, 245, ""],
+        [698, 0, 246, ""]
+      ]
+    }
+  ]
+}

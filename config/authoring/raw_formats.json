@@ -621,7 +621,7 @@
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
-      "sha256": "31a875d558d3e9c47290ae3a50441b266b4f935631c0459ddacc066e52bebeb9"
+      "sha256": "6d37fea7b3e428246046e2fddcb76559f78d3502d092eefc991cde21d4e3b223"
     },
     {
       "path": "src/objects/ending/sk/villain_eyecatch.s",
@@ -641,11 +641,11 @@
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "381ebddc6eb198f28ae8891387ee84bfbd8c09844298f835305372991b9657bc"
+      "sha256": "c93e2703f0acf693f685fdcd46160302e25158089a4c00e8f2267a81c0e0fb63"
     },
     {
       "path": "src/objects/ending/sk/scene_controller.s",
-      "sha256": "23e4fa9a9f38e3e1f441bf557872ebdcbe75deb92be5b7615ec434d78d8833d3"
+      "sha256": "2e198cbf2760b2e56889923918ea239003c6ff9db3da68cdd5358c9649fa0917"
     },
     {
       "path": "src/objects/ending/sk/scenery_and_creatures.s",

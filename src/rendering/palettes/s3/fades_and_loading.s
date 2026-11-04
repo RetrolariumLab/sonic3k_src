@@ -5,12 +5,12 @@ Pal_FadeFromBlack:
                 jsr     Pal_FillBlack(pc)
                 move.w  #$15,d4
 
-loc_3284:
+S3Palette_RunBlackToTargetVblankStepLoop:
                 move.b  #VInt_ID_12,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.s   Pal_FromBlack
                 bsr.w   Process_Nem_Queue_Init
-                dbf     d4,loc_3284
+                dbf     d4,S3Palette_RunBlackToTargetVblankStepLoop
                 rts
 ; End of function Pal_FadeFromBlack
 
@@ -25,11 +25,11 @@ Pal_FromBlack:
                 adda.w  d0,a1
                 move.b  (Palette_fade_count).w,d0
 
-loc_32B0:
+S3Pal_FromBlackStepNormal:
                 bsr.s   Pal_AddColor
-                dbf     d0,loc_32B0
+                dbf     d0,S3Pal_FromBlackStepNormal
                 tst.b   (Water_flag).w
-                beq.s   locret_32D8
+                beq.s   S3Pal_FromBlackReturn
                 moveq   #0,d0
                 lea     (Water_palette).w,a0
                 lea     (Target_water_palette).w,a1
@@ -38,11 +38,11 @@ loc_32B0:
                 adda.w  d0,a1
                 move.b  (Palette_fade_count).w,d0
 
-loc_32D2:
+S3Pal_FromBlackStepWater:
                 bsr.s   Pal_AddColor
-                dbf     d0,loc_32D2
+                dbf     d0,S3Pal_FromBlackStepWater
 
-locret_32D8:
+S3Pal_FromBlackReturn:
                 rts
 ; End of function Pal_FromBlack
 
@@ -52,30 +52,30 @@ Pal_AddColor:
                 move.w  (a1)+,d2
                 move.w  (a0),d3
                 cmp.w   d2,d3
-                beq.s   loc_3302
+                beq.s   S3Pal_FromBlackSkipColor
                 move.w  d3,d1
                 addi.w  #$200,d1
                 cmp.w   d2,d1
-                bhi.s   loc_32F0
+                bhi.s   S3Pal_FromBlackTryMid
                 move.w  d1,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32F0:
+S3Pal_FromBlackTryMid:
                 move.w  d3,d1
                 addi.w  #$20,d1
                 cmp.w   d2,d1
-                bhi.s   loc_32FE
+                bhi.s   S3Pal_FromBlackStepLow
                 move.w  d1,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_32FE:
+S3Pal_FromBlackStepLow:
                 addq.w  #2,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3302:
+S3Pal_FromBlackSkipColor:
                 addq.w  #2,a0
                 rts
 ; End of function Pal_AddColor
@@ -90,14 +90,14 @@ Pal_FillBlack:
                 moveq   #0,d1
                 move.b  (Palette_fade_count).w,d0
 
-loc_3318:
+S3Pal_FillBlackColor:
                 move.w  d1,(a0)+
                 tst.b   (Water_flag).w
-                beq.s   loc_3324
+                beq.s   S3Palette_AdvanceBlackFillEntryCounter
                 move.w  d1,(Water_palette-Normal_palette)-2(a0)
 
-loc_3324:
-                dbf     d0,loc_3318
+S3Palette_AdvanceBlackFillEntryCounter:
+                dbf     d0,S3Pal_FillBlackColor
                 rts
 ; End of function Pal_FillBlack
 
@@ -105,12 +105,12 @@ loc_3324:
 
 Animate_Palette:
                 tst.w   (Palette_fade_timer).w
-                beq.s   loc_3338
+                beq.s   S3Pal_RunPaletteCycles
                 subq.w  #1,(Palette_fade_timer).w
                 bra.w   Pal_FromBlack
 ; ---------------------------------------------------------------------------
 
-loc_3338:
+S3Pal_RunPaletteCycles:
                 jmp     (AnPal_Load).l
 ; End of function Animate_Palette
 
@@ -120,12 +120,12 @@ Pal_FadeToBlack:
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,d4
 
-loc_3348:
+S3Pal_ToBlackVBlankLoop:
                 move.b  #VInt_ID_12,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.s   Pal_ToBlack
                 bsr.w   Process_Nem_Queue_Init
-                dbf     d4,loc_3348
+                dbf     d4,S3Pal_ToBlackVBlankLoop
                 rts
 ; End of function Pal_FadeToBlack
 
@@ -138,18 +138,19 @@ Pal_ToBlack:
                 adda.w  d0,a0
                 move.b  (Palette_fade_count).w,d0
 
-loc_336E:
+S3Pal_ToBlackStepNormal:
                 bsr.s   Pal_DecColor
-                dbf     d0,loc_336E
+                dbf     d0,S3Pal_ToBlackStepNormal
                 moveq   #0,d0
                 lea     (Water_palette).w,a0
                 move.b  (Palette_fade_info).w,d0
                 adda.w  d0,a0
                 move.b  (Palette_fade_count).w,d0
 
-loc_3384:
+; Step the water palette even when the water flag is clear
+S3Pal_ToBlackStepWater:
                 bsr.s   Pal_DecColor
-                dbf     d0,loc_3384
+                dbf     d0,S3Pal_ToBlackStepWater
                 rts
 ; End of function Pal_ToBlack
 
@@ -157,31 +158,31 @@ loc_3384:
 
 Pal_DecColor:
                 move.w  (a0),d2
-                beq.s   loc_33B8
+                beq.s   S3Pal_ToBlackSkipColor
                 move.w  d2,d1
                 andi.w  #$E,d1
-                beq.s   loc_339C
+                beq.s   S3Pal_ToBlackTryMid
                 subq.w  #2,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_339C:
+S3Pal_ToBlackTryMid:
                 move.w  d2,d1
                 andi.w  #$E0,d1
-                beq.s   loc_33AA
+                beq.s   S3Pal_ToBlackTryHigh
                 subi.w  #$20,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_33AA:
+S3Pal_ToBlackTryHigh:
                 move.w  d2,d1
                 andi.w  #$E00,d1
-                beq.s   loc_33B8
+                beq.s   S3Pal_ToBlackSkipColor
                 subi.w  #$200,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_33B8:
+S3Pal_ToBlackSkipColor:
                 addq.w  #2,a0
                 rts
 ; End of function Pal_DecColor
@@ -197,17 +198,17 @@ Pal_FadeFromWhite:
                 move.w  #$EEE,d1
                 move.b  (Palette_fade_count).w,d0
 
-loc_33D6:
+S3Pal_FillNormalWhite:
                 move.w  d1,(a0)+
-                dbf     d0,loc_33D6
+                dbf     d0,S3Pal_FillNormalWhite
                 move.w  #$15,d4
 
-loc_33E0:
+S3Palette_RunWhiteToTargetVblankStepLoop:
                 move.b  #VInt_ID_12,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.s   Pal_FromWhite
                 bsr.w   Process_Nem_Queue_Init
-                dbf     d4,loc_33E0
+                dbf     d4,S3Palette_RunWhiteToTargetVblankStepLoop
                 rts
 ; End of function Pal_FadeFromWhite
 
@@ -222,11 +223,11 @@ Pal_FromWhite:
                 adda.w  d0,a1
                 move.b  (Palette_fade_count).w,d0
 
-loc_340C:
+S3Pal_FromWhiteStepNormal:
                 bsr.s   Pal_DecColor2
-                dbf     d0,loc_340C
+                dbf     d0,S3Pal_FromWhiteStepNormal
                 tst.b   (Water_flag).w
-                beq.s   locret_3434
+                beq.s   S3Pal_FromWhiteReturn
                 moveq   #0,d0
                 lea     (Water_palette).w,a0
                 lea     (Target_water_palette).w,a1
@@ -235,11 +236,11 @@ loc_340C:
                 adda.w  d0,a1
                 move.b  (Palette_fade_count).w,d0
 
-loc_342E:
+S3Pal_FromWhiteStepWater:
                 bsr.s   Pal_DecColor2
-                dbf     d0,loc_342E
+                dbf     d0,S3Pal_FromWhiteStepWater
 
-locret_3434:
+S3Pal_FromWhiteReturn:
                 rts
 ; End of function Pal_FromWhite
 
@@ -249,32 +250,32 @@ Pal_DecColor2:
                 move.w  (a1)+,d2
                 move.w  (a0),d3
                 cmp.w   d2,d3
-                beq.s   loc_3462
+                beq.s   S3Pal_FromWhiteSkipColor
                 move.w  d3,d1
                 subi.w  #$200,d1
-                bcs.s   loc_344E
+                bcs.s   S3Pal_FromWhiteTryMid
                 cmp.w   d2,d1
-                bcs.s   loc_344E
+                bcs.s   S3Pal_FromWhiteTryMid
                 move.w  d1,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_344E:
+S3Pal_FromWhiteTryMid:
                 move.w  d3,d1
                 subi.w  #$20,d1
-                bcs.s   loc_345E
+                bcs.s   S3Pal_FromWhiteStepLow
                 cmp.w   d2,d1
-                bcs.s   loc_345E
+                bcs.s   S3Pal_FromWhiteStepLow
                 move.w  d1,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_345E:
+S3Pal_FromWhiteStepLow:
                 subq.w  #2,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3462:
+S3Pal_FromWhiteSkipColor:
                 addq.w  #2,a0
                 rts
 ; End of function Pal_DecColor2
@@ -285,12 +286,12 @@ Pal_FadeToWhite:
                 move.w  #$40-1,(Palette_fade_info).w
                 move.w  #$15,d4
 
-loc_3470:
+S3Pal_ToWhiteVBlankLoop:
                 move.b  #VInt_ID_12,(V_int_routine).w
                 bsr.w   Wait_VSync
                 bsr.s   Pal_ToWhite
                 bsr.w   Process_Nem_Queue_Init
-                dbf     d4,loc_3470
+                dbf     d4,S3Pal_ToWhiteVBlankLoop
                 rts
 ; End of function Pal_FadeToWhite
 
@@ -303,18 +304,19 @@ Pal_ToWhite:
                 adda.w  d0,a0
                 move.b  (Palette_fade_count).w,d0
 
-loc_3496:
+S3Pal_ToWhiteStepNormal:
                 bsr.s   Pal_AddColor2
-                dbf     d0,loc_3496
+                dbf     d0,S3Pal_ToWhiteStepNormal
                 moveq   #0,d0
                 lea     (Water_palette).w,a0
                 move.b  (Palette_fade_info).w,d0
                 adda.w  d0,a0
                 move.b  (Palette_fade_count).w,d0
 
-loc_34AC:
+; Step the water palette even when the water flag is clear
+S3Pal_ToWhiteStepWater:
                 bsr.s   Pal_AddColor2
-                dbf     d0,loc_34AC
+                dbf     d0,S3Pal_ToWhiteStepWater
                 rts
 ; End of function Pal_ToWhite
 
@@ -323,34 +325,34 @@ loc_34AC:
 Pal_AddColor2:
                 move.w  (a0),d2
                 cmpi.w  #$EEE,d2
-                beq.s   loc_34F0
+                beq.s   S3Pal_ToWhiteSkipColor
                 move.w  d2,d1
                 andi.w  #$E,d1
                 cmpi.w  #$E,d1
-                beq.s   loc_34CC
+                beq.s   S3Pal_ToWhiteTryMid
                 addq.w  #2,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34CC:
+S3Pal_ToWhiteTryMid:
                 move.w  d2,d1
                 andi.w  #$E0,d1
                 cmpi.w  #$E0,d1
-                beq.s   loc_34DE
+                beq.s   S3Pal_ToWhiteTryHigh
                 addi.w  #$20,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34DE:
+S3Pal_ToWhiteTryHigh:
                 move.w  d2,d1
                 andi.w  #$E00,d1
                 cmpi.w  #$E00,d1
-                beq.s   loc_34F0
+                beq.s   S3Pal_ToWhiteSkipColor
                 addi.w  #$200,(a0)+
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34F0:
+S3Pal_ToWhiteSkipColor:
                 addq.w  #2,a0
                 rts
 ; End of function Pal_AddColor2

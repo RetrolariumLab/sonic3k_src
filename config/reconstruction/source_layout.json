@@ -66841,7 +66841,7 @@
       "responsibility": "Normal and underwater palette fades, individual colour steps and palette loading interfaces.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 423,
+      "physical_lines": 425,
       "origin": {
         "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
         "path": "s3.s",
@@ -66938,7 +66938,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_53F76",
+          "name": "S3PalRotation_CallCustomAndStep",
           "kind": "terminal-tail",
           "reason": "The final custom palette callback restores the interpreter continuation through an unconditional tail branch; preceding interpreter returns keep their independent boundaries.",
           "origin_first_line": 3633,
@@ -67066,7 +67066,7 @@
       "responsibility": "Zone and competition palette cycle dispatch, counters and complete per-zone update handlers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 473,
+      "physical_lines": 475,
       "origin": {
         "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
         "path": "s3.s",
@@ -67118,7 +67118,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_5FC62",
+          "name": "EndLine3Flash_TryRestorePass",
           "kind": "terminal-tail",
           "reason": "Keep the final conditional palette-fade loop and deletion tail together without absorbing earlier palette callbacks.",
           "origin_first_line": 2729,
@@ -67151,7 +67151,7 @@
       "responsibility": "Normal and underwater palette fades, individual colour steps and palette loading interfaces.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 447,
+      "physical_lines": 449,
       "origin": {
         "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
         "path": "sonic3k.s",
@@ -67386,7 +67386,7 @@
       "responsibility": "Zone and competition palette cycle dispatch, counters and complete per-zone update handlers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 844,
+      "physical_lines": 847,
       "origin": {
         "commit": "42e24a80354489c020e7a95fbec9fa4a42d7a296",
         "path": "sonic3k.s",

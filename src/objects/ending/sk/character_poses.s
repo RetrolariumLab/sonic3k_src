@@ -150,7 +150,7 @@ loc_5F4C6:
                 bmi.s   locret_5F4E2
                 jsr     (AllocateObject).l
                 bne.s   locret_5F4E2
-                move.l  #loc_5FBA0,(a1)
+                move.l  #EndSuperKnuxPal_AdvanceCycle,(a1)
 
 locret_5F4E2:
                 rts

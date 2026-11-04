@@ -7,22 +7,22 @@ Obj_HPZPaletteControl:
                 move.w  $3A(a0),d0
                 moveq   #0,d1
                 cmpi.w  #$460,(Camera_X_pos).w
-                blo.s   loc_656B8
+                blo.s   SKHPZPal_SaveAndCompareOffset
                 moveq   #4,d1
 
-loc_656B8:
+SKHPZPal_SaveAndCompareOffset:
                 move.w  d1,$3A(a0)
                 cmp.w   d0,d1
-                beq.s   locret_656D0
+                beq.s   SKHPZPal_UpdateReturn
                 movea.l HPZPaletteControl_PalIndex(pc,d1.w),a1
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($60),d0
 
-loc_656CA:
+SKHPZPal_CopyLines2Through4:
                 move.l  (a1)+,(a2)+
-                dbf     d0,loc_656CA
+                dbf     d0,SKHPZPal_CopyLines2Through4
 
-locret_656D0:
+SKHPZPal_UpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 HPZPaletteControl_PalIndex:

@@ -46,7 +46,7 @@
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
-      "sha256": "381ebddc6eb198f28ae8891387ee84bfbd8c09844298f835305372991b9657bc"
+      "sha256": "c93e2703f0acf693f685fdcd46160302e25158089a4c00e8f2267a81c0e0fb63"
     },
     {
       "path": "src/objects/interface/blue_sphere/sk/difficulty_widgets.s",
@@ -62,7 +62,7 @@
     },
     {
       "path": "src/rendering/palettes/sk/rotation_script.s",
-      "sha256": "3f455a079dd4c00291e55ea059b4e7fb7931bfbe17a524cc217cd9c9d64ffb29"
+      "sha256": "c5df2b8e2a656516ffeea8c2973d8b85650c5010e1ed84dfe56ef63079f195b7"
     }
   ],
   "consumer_bindings": [

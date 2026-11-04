@@ -3,27 +3,27 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_5FBA0:
+EndSuperKnuxPal_AdvanceCycle:
                 tst.b   (Palette_cycle_counters+$00).w
                 bne.w   loc_5EC36
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_5FBE0
+                bpl.w   EndSuperKnuxPal_CycleReturn
                 move.b  #2,anim_frame_timer(a0)
                 lea     Pal_KnuxEndPoseSuper(pc),a1
                 move.w  $3A(a0),d0
                 addq.w  #6,d0
                 cmpi.w  #$3C,d0
-                blo.s   loc_5FBCE
+                blo.s   EndSuperKnuxPal_CopyColors
                 moveq   #0,d0
                 move.b  #$E,anim_frame_timer(a0)
 
-loc_5FBCE:
+EndSuperKnuxPal_CopyColors:
                 move.w  d0,$3A(a0)
                 lea     (Normal_palette+$4).w,a2
                 move.l  (a1,d0.w),(a2)+
                 move.w  4(a1,d0.w),2(a2)
 
-locret_5FBE0:
+EndSuperKnuxPal_CycleReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Pal_KnuxEndPoseSuper:
@@ -31,46 +31,46 @@ Pal_KnuxEndPoseSuper:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_5FC1E:
+EndLine3Flash_InitRaise:
                 move.b  #2,$39(a0)
-                move.l  #loc_5FC2A,(a0)
+                move.l  #EndLine3Flash_TryRaisePass,(a0)
 
-loc_5FC2A:
+EndLine3Flash_TryRaisePass:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5FC4C
+                bpl.s   EndingLineThreeFlash_ReturnBetweenPasses
                 move.w  #5,$2E(a0)
                 lea     (Normal_palette_line_3+$2).w,a1
                 moveq   #$F-1,d0
 
-loc_5FC3C:
+EndingLineThreeFlash_RaiseColorLoop:
                 jsr     (EffectColorSKRaiseOneColorTowardWhite).l
-                dbf     d0,loc_5FC3C
+                dbf     d0,EndingLineThreeFlash_RaiseColorLoop
                 subq.b  #1,$39(a0)
-                bmi.s   loc_5FC4E
+                bmi.s   EndingLineThreeFlash_BeginRestoreDelay
 
-locret_5FC4C:
+EndingLineThreeFlash_ReturnBetweenPasses:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FC4E:
-                move.l  #loc_5FC62,(a0)
+EndingLineThreeFlash_BeginRestoreDelay:
+                move.l  #EndLine3Flash_TryRestorePass,(a0)
                 move.b  #2,$39(a0)
                 move.w  #$13,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5FC62:
+EndLine3Flash_TryRestorePass:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_5FC4C
+                bpl.s   EndingLineThreeFlash_ReturnBetweenPasses
                 move.w  #3,$2E(a0)
                 lea     (Normal_palette_line_3+$2).w,a1
                 lea     (Target_palette_line_3+$2).w,a2
                 moveq   #$F-1,d0
 
-loc_5FC78:
+EndLine3Flash_RestoreColors:
                 jsr     (EffectColorSKLowerOneColorTowardTarget).l
-                dbf     d0,loc_5FC78
+                dbf     d0,EndLine3Flash_RestoreColors
                 subq.b  #1,$39(a0)
-                bpl.s   locret_5FC4C
+                bpl.s   EndingLineThreeFlash_ReturnBetweenPasses
                 jmp     (Go_Delete_Sprite).l
-; End of function loc_5FC62
+; End of function EndLine3Flash_TryRestorePass
