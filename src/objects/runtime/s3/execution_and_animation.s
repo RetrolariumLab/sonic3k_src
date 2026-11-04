@@ -13,7 +13,7 @@ Init_SpriteTable:
                 clr.l   (Current_sprite_table_page).w   ; Clears both Current_sprite_table_page and Sprite_table_page_flip_pending!
                 endif
                 tst.w   (Competition_mode).w
-                beq.s   S3Runtime_SelectSinglePlayerHardwareSpriteTable
+                beq.s   S3Draw_SelectSinglePlayerTable
                 lea     (Sprite_table).w,a0
                 bsr.s   Init_SpriteTable2
                 bsr.s   Init_SpriteTable_2Player
@@ -26,7 +26,7 @@ Init_SpriteTable:
                 bra.s   Init_SpriteTable2
 ; ---------------------------------------------------------------------------
 
-S3Runtime_SelectSinglePlayerHardwareSpriteTable:
+S3Draw_SelectSinglePlayerTable:
                 lea     (Sprite_table).w,a0
 ; End of function Init_SpriteTable
 
@@ -62,16 +62,16 @@ Init_SpriteTable_2Player:
 
 Process_Sprites:
                 tst.b   (Teleport_active_flag).w
-                bne.s   S3Runtime_ReturnAfterObjectRangeOrTeleportGate
+                bne.s   S3ObjExec_Return
                 lea     (Object_RAM).w,a0
                 tst.w   (Competition_mode).w
-                bne.s   S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
+                bne.s   S3ObjExec_RunAllSlots
                 cmpi.b  #$C,(Player_1+routine).w
-                beq.s   S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
+                beq.s   S3ObjExec_RunAllSlots
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries
+                bhs.s   S3ObjExec_RunRestrictedSlots
 
-S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState:
+S3ObjExec_RunAllSlots:
                 moveq   #bytesToXcnt(Object_RAM_end-Object_RAM,object_size),d7
 ; End of function Process_Sprites
 
@@ -79,21 +79,22 @@ S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState:
 
 ExecuteObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode
+                beq.s   S3ObjExec_AdvanceSlot
                 movea.l d0,a1
                 jsr     (a1)
 
-S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode:
+S3ObjExec_AdvanceSlot:
                 lea     next_object(a0),a0
                 dbf     d7,ExecuteObjectSlotRange
 
-S3Runtime_ReturnAfterObjectRangeOrTeleportGate:
+S3ObjExec_Return:
                 rts
 ; End of function ExecuteObjectSlotRange
 
 ; ---------------------------------------------------------------------------
 
-S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries:  ; this is broken?
+; Queue the middle slot range for drawing without executing its callbacks
+S3ObjExec_RunRestrictedSlots:                           ; this is broken?
                 moveq   #((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
                 bsr.s   ExecuteObjectSlotRange
                 moveq   #((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
@@ -105,12 +106,12 @@ S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries:  ; this is
 
 QueueVisibleObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
+                beq.s   S3ObjExec_AdvanceDrawOnlySlot
                 tst.b   render_flags(a0)
-                bpl.s   S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
+                bpl.s   S3ObjExec_AdvanceDrawOnlySlot
                 jsr     Draw_Sprite(pc)
 
-S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode:
+S3ObjExec_AdvanceDrawOnlySlot:
                 lea     next_object(a0),a0
                 dbf     d7,QueueVisibleObjectSlotRange
                 rts
@@ -182,12 +183,12 @@ Draw_Sprite:
                 lea     (Sprite_table_input).w,a1
                 adda.w  priority(a0),a1
                 cmpi.w  #$7E,(a1)
-                bcc.s   S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection
+                bcc.s   S3Draw_QueueReturn
                 addq.w  #2,(a1)
                 adda.w  (a1),a1
                 move.w  a0,(a1)
 
-S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection:
+S3Draw_QueueReturn:
                 rts
 ; End of function Draw_Sprite
 
@@ -197,23 +198,24 @@ Animate_Sprite:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript
+                beq.s   S3AnimSTD_TickAndReadScript
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript:
+; Advance on byte underflow. The animation table stores relative word offsets
+S3AnimSTD_TickAndReadScript:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame
+                bcc.s   S3AnimSTD_FrameReturn
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),anim_frame_timer(a0)
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
-                bmi.s   S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands
+                bmi.s   S3AnimSTD_TestRestartFF
 
-S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor:
+S3AnimSTD_StoreFrameAndAdvance:
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
                 andi.b  #3,d1
@@ -221,52 +223,53 @@ S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame:
+S3AnimSTD_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands:
+S3AnimSTD_TestRestartFF:
                 addq.b  #1,d0                           ; Code FF - Repeat animation from beginning
-                bne.s   S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand
+                bne.s   S3AnimSTD_TestRepeatFE
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
+                bra.s   S3AnimSTD_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand:
+S3AnimSTD_TestRepeatFE:
                 addq.b  #1,d0                           ; Code FE - Repeat animation from earlier point
-                bne.s   S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand
+                bne.s   S3AnimSTD_TestChangeFD
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
+                bra.s   S3AnimSTD_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand:
+S3AnimSTD_TestChangeFD:
                 addq.b  #1,d0                           ; Code FD - Start new animation
-                bne.s   S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand
+                bne.s   S3AnimSTD_TestRoutineFC
                 move.b  2(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand:
+S3AnimSTD_TestRoutineFC:
                 addq.b  #1,d0                           ; Code FC - Increment routine counter
-                bne.s   S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand
+                bne.s   S3AnimSTD_TestOffscreenFB
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand:
+; Write $7F00 to integer X and leave the fractional word intact
+S3AnimSTD_TestOffscreenFB:
                 addq.b  #1,d0                           ; Code FB - Move offscreen
-                bne.s   S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand
+                bne.s   S3AnimSTD_UnknownCommandReturn
                 move.w  #$7F00,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand:
+S3AnimSTD_UnknownCommandReturn:
                 rts
 ; End of function Animate_Sprite
 
@@ -276,23 +279,23 @@ Animate_SpriteIrregularDelay:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair
+                beq.s   S3AnimPair_TickAndReadPair
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair:
+S3AnimPair_TickAndReadPair:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit
+                bcc.s   S3AnimPair_FrameReturn
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 add.w   d1,d1
                 move.b  (a1,d1.w),d0
-                bmi.s   S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference
+                bmi.s   S3AnimPair_TestRestartFF
 
-S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor:
+S3AnimPair_StoreFrameAndDelay:
                 move.b  1(a1,d1.w),anim_frame_timer(a0)
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
@@ -301,45 +304,47 @@ S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit:
+S3AnimPair_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference:
+; Read frame zero but keep the old pair offset when fetching its delay
+S3AnimPair_TestRestartFF:
                 addq.b  #1,d0
-                bne.s   S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap
+                bne.s   S3AnimPair_TestRepeatFE
                 move.b  #0,anim_frame(a0)
                 move.b  (a1),d0
-                bra.s   S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
+                bra.s   S3AnimPair_StoreFrameAndDelay
 ; ---------------------------------------------------------------------------
 
-S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap:
+; Subtract twice the repeat count from the low byte of the pair offset
+S3AnimPair_TestRepeatFE:
                 addq.b  #1,d0
-                bne.s   S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand
+                bne.s   S3AnimPair_TestChangeFD
                 move.b  1(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 add.w   d0,d0
                 sub.b   d0,d1
                 move.b  (a1,d1.w),d0
-                bra.s   S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
+                bra.s   S3AnimPair_StoreFrameAndDelay
 ; ---------------------------------------------------------------------------
 
-S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand:
+S3AnimPair_TestChangeFD:
                 addq.b  #1,d0
-                bne.s   S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand
+                bne.s   S3AnimPair_TestRoutineFC
                 move.b  1(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand:
+S3AnimPair_TestRoutineFC:
                 addq.b  #1,d0
-                bne.s   S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand
+                bne.s   S3AnimPair_UnknownCommandReturn
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand:
+S3AnimPair_UnknownCommandReturn:
                 rts
 ; End of function Animate_SpriteIrregularDelay

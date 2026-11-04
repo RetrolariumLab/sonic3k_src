@@ -13,7 +13,7 @@ Init_SpriteTable:
                 clr.l   (Current_sprite_table_page).w   ; Clears both Current_sprite_table_page and Sprite_table_page_flip_pending!
                 endif
                 tst.w   (Competition_mode).w
-                beq.s   SKRuntime_SelectSinglePlayerHardwareSpriteTable
+                beq.s   SKDraw_SelectSinglePlayerTable
                 lea     (Sprite_table).w,a0
                 bsr.s   Init_SpriteTable2
                 bsr.s   Init_SpriteTable_2Player
@@ -26,7 +26,7 @@ Init_SpriteTable:
                 bra.s   Init_SpriteTable2
 ; ---------------------------------------------------------------------------
 
-SKRuntime_SelectSinglePlayerHardwareSpriteTable:
+SKDraw_SelectSinglePlayerTable:
                 lea     (Sprite_table).w,a0
 ; End of function Init_SpriteTable
 
@@ -62,16 +62,16 @@ Init_SpriteTable_2Player:
 
 Process_Sprites:
                 tst.b   (Teleport_active_flag).w
-                bne.s   SKRuntime_ReturnAfterObjectRangeOrTeleportGate
+                bne.s   SKObjExec_Return
                 lea     (Object_RAM).w,a0
                 tst.w   (Competition_mode).w
-                bne.s   SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
+                bne.s   SKObjExec_RunAllSlots
                 cmpi.b  #$C,(Player_1+routine).w
-                beq.s   SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState
+                beq.s   SKObjExec_RunAllSlots
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   SKRuntime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries
+                bhs.s   SKObjExec_RunRestrictedSlots
 
-SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState:
+SKObjExec_RunAllSlots:
                 moveq   #(Object_RAM_end-Object_RAM)/object_size-1,d7
 ; End of function Process_Sprites
 
@@ -79,21 +79,22 @@ SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState:
 
 ExecuteObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   SKRuntime_AdvanceObjectSlotAfterCallbackOrEmptyCode
+                beq.s   SKObjExec_AdvanceSlot
                 movea.l d0,a1
                 jsr     (a1)
 
-SKRuntime_AdvanceObjectSlotAfterCallbackOrEmptyCode:
+SKObjExec_AdvanceSlot:
                 lea     next_object(a0),a0
                 dbf     d7,ExecuteObjectSlotRange
 
-SKRuntime_ReturnAfterObjectRangeOrTeleportGate:
+SKObjExec_Return:
                 rts
 ; End of function ExecuteObjectSlotRange
 
 ; ---------------------------------------------------------------------------
 
-SKRuntime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries:  ; this is broken?
+; Queue the middle slot range for drawing without executing its callbacks
+SKObjExec_RunRestrictedSlots:                           ; this is broken?
                 moveq   #((Dynamic_object_RAM+object_size)-Object_RAM)/object_size-1,d7
                 bsr.s   ExecuteObjectSlotRange
                 moveq   #((Level_object_RAM+object_size)-(Dynamic_object_RAM+object_size))/object_size-1,d7
@@ -105,12 +106,12 @@ SKRuntime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries:  ; this is
 
 QueueVisibleObjectSlotRange:
                 move.l  (a0),d0
-                beq.s   SKRuntime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
+                beq.s   SKObjExec_AdvanceDrawOnlySlot
                 tst.b   render_flags(a0)
-                bpl.s   SKRuntime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode
+                bpl.s   SKObjExec_AdvanceDrawOnlySlot
                 jsr     Draw_Sprite(pc)
 
-SKRuntime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode:
+SKObjExec_AdvanceDrawOnlySlot:
                 lea     next_object(a0),a0
                 dbf     d7,QueueVisibleObjectSlotRange
                 rts
@@ -219,22 +220,23 @@ Draw_Sprite:
                 lea     (Sprite_table_input).w,a1
                 adda.w  priority(a0),a1
 
-SKRuntime_TryAppendHandleToCurrentDrawPriorityBand:
+SKDraw_TryQueueBand:
                 cmpi.w  #$7E,(a1)
-                bhs.s   SKRuntime_SearchNextDrawPriorityBandUntilFinalBandEquality
+                bhs.s   SKDraw_TryNextQueueBand
                 addq.w  #2,(a1)
                 adda.w  (a1),a1
                 move.w  a0,(a1)
 
-SKRuntime_ReturnAfterDrawQueueAppendOrCapacityRejection:
+SKDraw_QueueReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_SearchNextDrawPriorityBandUntilFinalBandEquality:
+; Try higher bands in $80-byte steps until the final band is full
+SKDraw_TryNextQueueBand:
                 cmpa.w  #Sprite_table_input+($80*7),a1
-                beq.s   SKRuntime_ReturnAfterDrawQueueAppendOrCapacityRejection
+                beq.s   SKDraw_QueueReturn
                 adda.w  #$80,a1
-                bra.s   SKRuntime_TryAppendHandleToCurrentDrawPriorityBand
+                bra.s   SKDraw_TryQueueBand
 ; End of function Draw_Sprite
 
 ; =============== S U B R O U T I N E =======================================
@@ -243,23 +245,24 @@ Animate_Sprite:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   SKRuntime_STDAnimation_TickBorrowTimerAndSelectRelativeScript
+                beq.s   SKAnimSTD_TickAndReadScript
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-SKRuntime_STDAnimation_TickBorrowTimerAndSelectRelativeScript:
+; Advance on byte underflow. The animation table stores relative word offsets
+SKAnimSTD_TickAndReadScript:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   SKRuntime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame
+                bcc.s   SKAnimSTD_FrameReturn
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),anim_frame_timer(a0)
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
-                bmi.s   SKRuntime_STDAnimation_TestRestartThenOtherNegativeCommands
+                bmi.s   SKAnimSTD_TestRestartFF
 
-SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor:
+SKAnimSTD_StoreFrameAndAdvance:
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
                 andi.b  #3,d1
@@ -267,52 +270,53 @@ SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKRuntime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame:
+SKAnimSTD_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_TestRestartThenOtherNegativeCommands:
+SKAnimSTD_TestRestartFF:
                 addq.b  #1,d0                           ; Code FF - Repeat animation from beginning
-                bne.s   SKRuntime_STDAnimation_BacktrackCursorForRelativeRepeatCommand
+                bne.s   SKAnimSTD_TestRepeatFE
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
+                bra.s   SKAnimSTD_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_BacktrackCursorForRelativeRepeatCommand:
+SKAnimSTD_TestRepeatFE:
                 addq.b  #1,d0                           ; Code FE - Repeat animation from earlier point
-                bne.s   SKRuntime_STDAnimation_ChangeAnimationForStartAnimationCommand
+                bne.s   SKAnimSTD_TestChangeFD
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor
+                bra.s   SKAnimSTD_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_ChangeAnimationForStartAnimationCommand:
+SKAnimSTD_TestChangeFD:
                 addq.b  #1,d0                           ; Code FD - Start new animation
-                bne.s   SKRuntime_STDAnimation_AdvanceRoutineForRoutineCommand
+                bne.s   SKAnimSTD_TestRoutineFC
                 move.b  2(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_AdvanceRoutineForRoutineCommand:
+SKAnimSTD_TestRoutineFC:
                 addq.b  #1,d0                           ; Code FC - Increment routine counter
-                bne.s   SKRuntime_STDAnimation_MoveIntegerXForOffscreenCommand
+                bne.s   SKAnimSTD_TestOffscreenFB
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_MoveIntegerXForOffscreenCommand:
+; Write $7F00 to integer X and leave the fractional word intact
+SKAnimSTD_TestOffscreenFB:
                 addq.b  #1,d0                           ; Code FB - Move offscreen
-                bne.s   SKRuntime_STDAnimation_ReturnForUnrecognizedNegativeCommand
+                bne.s   SKAnimSTD_UnknownCommandReturn
                 move.w  #$7F00,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_STDAnimation_ReturnForUnrecognizedNegativeCommand:
+SKAnimSTD_UnknownCommandReturn:
                 rts
 ; End of function Animate_Sprite
 
@@ -322,23 +326,23 @@ Animate_SpriteIrregularDelay:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   SKRuntime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair
+                beq.s   SKAnimPair_TickAndReadPair
                 move.b  d0,prev_anim(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-SKRuntime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair:
+SKAnimPair_TickAndReadPair:
                 subq.b  #1,anim_frame_timer(a0)
-                bcc.s   SKRuntime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit
+                bcc.s   SKAnimPair_FrameReturn
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 add.w   d1,d1
                 move.b  (a1,d1.w),d0
-                bmi.s   SKRuntime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference
+                bmi.s   SKAnimPair_TestRestartFF
 
-SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor:
+SKAnimPair_StoreFrameAndDelay:
                 move.b  1(a1,d1.w),anim_frame_timer(a0)
                 move.b  d0,mapping_frame(a0)
                 move.b  status(a0),d1
@@ -347,49 +351,50 @@ SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor:
                 or.b    d1,render_flags(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKRuntime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit:
+SKAnimPair_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference:
+SKAnimPair_TestRestartFF:
                 addq.b  #1,d0
-                bne.s   SKRuntime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap
+                bne.s   SKAnimPair_TestRepeatFE
 ; Bug: S3 did not clear d1, making loc_1ACBA run a frame short with each loop
 ; This was fixed, but apart from the Blue Spheres title, the only other effect
 ; is that the wink animation on the S3 title now runs a frame too long
                 moveq   #0,d1
                 move.b  d1,anim_frame(a0)
                 move.b  (a1),d0
-                bra.s   SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
+                bra.s   SKAnimPair_StoreFrameAndDelay
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap:
+; Subtract twice the repeat count from the low byte of the pair offset
+SKAnimPair_TestRepeatFE:
                 addq.b  #1,d0
-                bne.s   SKRuntime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand
+                bne.s   SKAnimPair_TestChangeFD
                 move.b  1(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 add.w   d0,d0
                 sub.b   d0,d1
                 move.b  (a1,d1.w),d0
-                bra.s   SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor
+                bra.s   SKAnimPair_StoreFrameAndDelay
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand:
+SKAnimPair_TestChangeFD:
                 addq.b  #1,d0
-                bne.s   SKRuntime_PairDelayAnimation_AdvanceRoutineForRoutineCommand
+                bne.s   SKAnimPair_TestRoutineFC
                 move.b  1(a1,d1.w),anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PairDelayAnimation_AdvanceRoutineForRoutineCommand:
+SKAnimPair_TestRoutineFC:
                 addq.b  #1,d0
-                bne.s   SKRuntime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand
+                bne.s   SKAnimPair_UnknownCommandReturn
                 addq.b  #2,routine(a0)
                 clr.b   anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand:
+SKAnimPair_UnknownCommandReturn:
                 rts
 ; End of function Animate_SpriteIrregularDelay

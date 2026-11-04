@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 96
+    "commit_count": 97
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -623,9 +623,15 @@
       "commits": ["2d2ce733403f85008520a56b5a1a7962e042eea2"]
     },
     {
-      "id": "current-shorten-03a-runtime-lifecycle",
+      "id": "change-be07a676b27f",
       "kind": "source_or_tooling",
       "summary": "Shorten 220 streaming, child, visibility and object lifecycle labels and preserve the source and content bindings.",
+      "commits": ["be07a676b27f7537d292165aaff0d4cca9fa0c1e"]
+    },
+    {
+      "id": "current-shorten-03b-runtime-animation",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 127 object dispatch, sprite queue and animation labels while documenting format-specific command and return details.",
       "commits": ["release-commit"]
     }
   ],

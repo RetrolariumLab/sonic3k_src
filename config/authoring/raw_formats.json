@@ -965,7 +965,7 @@
     },
     {
       "path": "src/objects/runtime/s3/execution_and_animation.s",
-      "sha256": "d1bd1abbb304a4dc1d3cec2ffbb1b3eacd1cc00679cdb81609df6c1f71e71307"
+      "sha256": "4684665696fffa422049f1a97ae654193dff293c720dd7c861fe773efd8af438"
     },
     {
       "path": "src/objects/runtime/s3/movement_and_drawing.s",
@@ -981,7 +981,7 @@
     },
     {
       "path": "src/objects/runtime/s3/raw_animation.s",
-      "sha256": "7b9d7e9aa7ba77c35b9ba156f384e74ea52532a579186a0d66c12a5ef7d77b03"
+      "sha256": "6bab97040e748cbc8061e46c400df5e1cd8bd941ab14bb6007f07a1536641ca2"
     },
     {
       "path": "src/objects/runtime/s3/sprite_spawning.s",
@@ -1009,7 +1009,7 @@
     },
     {
       "path": "src/objects/runtime/s3/state_transitions.s",
-      "sha256": "b0cbe7b1bc15a398a2c198acbc92191dc680a277be87eec3135addbebb9ff3bc"
+      "sha256": "c5df73a41c6697a5bbdfe5186fa86bc309bd348d1732c5620f95fc2b788c83da"
     },
     {
       "path": "src/objects/runtime/sk/angle_targeting.s",
@@ -1037,7 +1037,7 @@
     },
     {
       "path": "src/objects/runtime/sk/execution_and_animation.s",
-      "sha256": "19b44b7afaed374677b7707dc063b7a705bda1864d2d9428e67b65c2928f186b"
+      "sha256": "a9ce29c6b26ea3fafbf57ce63974c76739f639b7317a675f6fcac39e8dfeddda"
     },
     {
       "path": "src/objects/runtime/sk/mask_callbacks.s",
@@ -1061,7 +1061,7 @@
     },
     {
       "path": "src/objects/runtime/sk/raw_animation.s",
-      "sha256": "588addad08e2583fcf272e12fa9757ebc62a9bfe65a6ecd68a243ad7ed8cf5a7"
+      "sha256": "8576ba2d77d07d652cf2955d2eee930c9dee0f2b41b4d513e43cdc5fd2982236"
     },
     {
       "path": "src/objects/runtime/sk/sprite_spawning.s",
@@ -1089,7 +1089,7 @@
     },
     {
       "path": "src/objects/runtime/sk/state_transitions.s",
-      "sha256": "fcb78a589360e5adc4cf3e00b55132ff559920d9f64b8c87c66ffda14521db63"
+      "sha256": "b5b70952e3d9806fe2548adef5a6e16327375f4d14395fd115674901c10bd009"
     },
     {
       "path": "src/objects/shared/s3/collapsing_platforms.s",

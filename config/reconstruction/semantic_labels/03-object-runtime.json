@@ -310,7 +310,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 29,
       "old": "loc_19162",
-      "new": "S3Runtime_SelectSinglePlayerHardwareSpriteTable",
+      "new": "S3Draw_SelectSinglePlayerTable",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_SelectSinglePlayerHardwareSpriteTable"
     },
@@ -318,7 +318,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 74,
       "old": "loc_191BE",
-      "new": "S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState",
+      "new": "S3ObjExec_RunAllSlots",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState"
     },
@@ -326,7 +326,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 86,
       "old": "loc_191C8",
-      "new": "S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode",
+      "new": "S3ObjExec_AdvanceSlot",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_AdvanceObjectSlotAfterCallbackOrEmptyCode"
     },
@@ -334,7 +334,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 90,
       "old": "locret_191D0",
-      "new": "S3Runtime_ReturnAfterObjectRangeOrTeleportGate",
+      "new": "S3ObjExec_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_ReturnAfterObjectRangeOrTeleportGate"
     },
@@ -342,7 +342,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 96,
       "old": "loc_191D2",
-      "new": "S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries",
+      "new": "S3ObjExec_RunRestrictedSlots",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries"
     },
@@ -350,7 +350,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 113,
       "old": "loc_191EC",
-      "new": "S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode",
+      "new": "S3ObjExec_AdvanceDrawOnlySlot",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode"
     },
@@ -358,7 +358,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 190,
       "old": "locret_19254",
-      "new": "S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection",
+      "new": "S3Draw_QueueReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_ReturnAfterDrawQueueAppendOrCapacityRejection"
     },
@@ -366,7 +366,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 205,
       "old": "loc_1926E",
-      "new": "S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript",
+      "new": "S3AnimSTD_TickAndReadScript",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_TickBorrowTimerAndSelectRelativeScript"
     },
@@ -374,7 +374,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 216,
       "old": "loc_1928A",
-      "new": "S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor",
+      "new": "S3AnimSTD_StoreFrameAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor"
     },
@@ -382,7 +382,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 224,
       "old": "locret_192A4",
-      "new": "S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame",
+      "new": "S3AnimSTD_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame"
     },
@@ -390,7 +390,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 228,
       "old": "loc_192A6",
-      "new": "S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands",
+      "new": "S3AnimSTD_TestRestartFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_TestRestartThenOtherNegativeCommands"
     },
@@ -398,7 +398,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 236,
       "old": "loc_192B6",
-      "new": "S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand",
+      "new": "S3AnimSTD_TestRepeatFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_BacktrackCursorForRelativeRepeatCommand"
     },
@@ -406,7 +406,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 246,
       "old": "loc_192CA",
-      "new": "S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand",
+      "new": "S3AnimSTD_TestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_ChangeAnimationForStartAnimationCommand"
     },
@@ -414,7 +414,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 253,
       "old": "loc_192D6",
-      "new": "S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand",
+      "new": "S3AnimSTD_TestRoutineFC",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_AdvanceRoutineForRoutineCommand"
     },
@@ -422,7 +422,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 262,
       "old": "loc_192E8",
-      "new": "S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand",
+      "new": "S3AnimSTD_TestOffscreenFB",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_MoveIntegerXForOffscreenCommand"
     },
@@ -430,7 +430,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 269,
       "old": "locret_192F4",
-      "new": "S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand",
+      "new": "S3AnimSTD_UnknownCommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_STDAnimation_ReturnForUnrecognizedNegativeCommand"
     },
@@ -438,7 +438,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 284,
       "old": "loc_1930E",
-      "new": "S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair",
+      "new": "S3AnimPair_TickAndReadPair",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair"
     },
@@ -446,7 +446,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 295,
       "old": "loc_19328",
-      "new": "S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor",
+      "new": "S3AnimPair_StoreFrameAndDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor"
     },
@@ -454,7 +454,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 304,
       "old": "locret_19348",
-      "new": "S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit",
+      "new": "S3AnimPair_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit"
     },
@@ -462,7 +462,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 308,
       "old": "loc_1934A",
-      "new": "S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference",
+      "new": "S3AnimPair_TestRestartFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference"
     },
@@ -470,7 +470,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 316,
       "old": "loc_19358",
-      "new": "S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap",
+      "new": "S3AnimPair_TestRepeatFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap"
     },
@@ -478,7 +478,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 327,
       "old": "loc_1936E",
-      "new": "S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand",
+      "new": "S3AnimPair_TestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand"
     },
@@ -486,7 +486,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 334,
       "old": "loc_1937A",
-      "new": "S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand",
+      "new": "S3AnimPair_TestRoutineFC",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_AdvanceRoutineForRoutineCommand"
     },
@@ -494,7 +494,7 @@
       "source": "src/objects/runtime/s3/execution_and_animation.s",
       "original_line": 343,
       "old": "locret_1938C",
-      "new": "S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand",
+      "new": "S3AnimPair_UnknownCommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Actual runtime control-flow join: S3Runtime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand"
     },
@@ -654,7 +654,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 26,
       "old": "locret_52CEA",
-      "new": "S3RawAnimation_ReturnFromSingleDelayHoldOrFrameWrite",
+      "new": "S3RawSingle_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnFromSingleDelayHoldOrFrameWrite."
     },
@@ -662,7 +662,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 30,
       "old": "loc_52CEC",
-      "new": "S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn",
+      "new": "S3RawSingle_DispatchCommand",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn."
     },
@@ -670,7 +670,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 37,
       "old": "off_52CF8",
-      "new": "S3RawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback",
+      "new": "S3RawSingle_CommandTable",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback."
     },
@@ -678,7 +678,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 79,
       "old": "loc_52D52",
-      "new": "S3RawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame",
+      "new": "S3RawSingle_StoreHFlipFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame."
     },
@@ -686,7 +686,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 83,
       "old": "locret_52D5A",
-      "new": "S3RawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission",
+      "new": "S3RawSingle_HFlipReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission."
     },
@@ -694,7 +694,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 104,
       "old": "loc_52D88",
-      "new": "S3RawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame",
+      "new": "S3RawSingle_StoreVFlipFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame."
     },
@@ -702,7 +702,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 108,
       "old": "locret_52D90",
-      "new": "S3RawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission",
+      "new": "S3RawSingle_VFlipReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission."
     },
@@ -710,7 +710,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 132,
       "old": "loc_52DBE",
-      "new": "S3RawAnimation_ReturnMultiDelayTimerHoldWithZeroResult",
+      "new": "S3RawMulti_HoldReturnZero",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnMultiDelayTimerHoldWithZeroResult."
     },
@@ -718,7 +718,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 137,
       "old": "loc_52DC2",
-      "new": "S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler",
+      "new": "S3RawMulti_DispatchCommand",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler."
     },
@@ -726,7 +726,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 144,
       "old": "off_52DCE",
-      "new": "S3RawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback",
+      "new": "S3RawMulti_CommandTable",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback."
     },
@@ -734,7 +734,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 152,
       "old": "loc_52DDA",
-      "new": "S3RawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer",
+      "new": "S3RawMulti_JumpSignedByte",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer."
     },
@@ -742,7 +742,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 158,
       "old": "loc_52DE8",
-      "new": "S3RawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear",
+      "new": "S3RawMulti_FirstPairReturnOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear."
     },
@@ -750,7 +750,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 165,
       "old": "loc_52DF6",
-      "new": "S3RawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear",
+      "new": "S3RawMulti_CallbackReturnMinusOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear."
     },
@@ -758,7 +758,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 191,
       "old": "loc_52E2E",
-      "new": "S3RawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult",
+      "new": "S3RawMulti_HFlipFrameReturnOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult."
     },
@@ -766,7 +766,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 198,
       "old": "loc_52E3C",
-      "new": "S3RawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult",
+      "new": "S3RawMulti_HFlipHoldReturnZero",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult."
     },
@@ -774,7 +774,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 220,
       "old": "loc_52E6C",
-      "new": "S3RawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult",
+      "new": "S3RawMulti_VFlipFrameReturnOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult."
     },
@@ -782,7 +782,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 227,
       "old": "loc_52E7A",
-      "new": "S3RawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult",
+      "new": "S3RawMulti_VFlipHoldReturnZero",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult."
     },
@@ -790,7 +790,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 241,
       "old": "loc_52E92",
-      "new": "S3RawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker",
+      "new": "S3RawAccel_Tick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker."
     },
@@ -798,7 +798,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 257,
       "old": "loc_52EBA",
-      "new": "S3RawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult",
+      "new": "S3RawAccel_StoreFrameReturnOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult."
     },
@@ -806,7 +806,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 265,
       "old": "loc_52ECA",
-      "new": "S3RawAnimation_ReturnAcceleratingTimerHoldWithZeroResult",
+      "new": "S3RawAccel_HoldReturnZero",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnAcceleratingTimerHoldWithZeroResult."
     },
@@ -814,7 +814,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 270,
       "old": "loc_52ECE",
-      "new": "S3RawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold",
+      "new": "S3RawAccel_CountZeroDelayLoop",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold."
     },
@@ -822,7 +822,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 284,
       "old": "loc_52EFA",
-      "new": "S3RawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback",
+      "new": "S3RawAccel_ZeroLoopReturnMinusOne",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback."
     },
@@ -830,7 +830,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 297,
       "old": "loc_52F0E",
-      "new": "S3RawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker",
+      "new": "S3RawDecel_Tick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker."
     },
@@ -838,7 +838,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 310,
       "old": "loc_52F2E",
-      "new": "S3RawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold",
+      "new": "S3RawDecel_StoreFrameAndTestDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold."
     },
@@ -846,7 +846,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 318,
       "old": "locret_52F42",
-      "new": "S3RawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter",
+      "new": "S3RawDecel_Return",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter."
     },
@@ -854,7 +854,7 @@
       "source": "src/objects/runtime/s3/raw_animation.s",
       "original_line": 322,
       "old": "loc_52F44",
-      "new": "S3RawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback",
+      "new": "S3RawDecel_CountAndContinue",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback."
     },
@@ -1278,7 +1278,7 @@
       "source": "src/objects/runtime/s3/state_transitions.s",
       "original_line": 13,
       "old": "loc_53010",
-      "new": "ObjectTransitionS3_Wait_InvokeExpiredTimerCallback",
+      "new": "S3ObjWait_RunCallback",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Invoke actor callback after signed WORD wait timer underflows."
     },
@@ -1286,7 +1286,7 @@
       "source": "src/objects/runtime/s3/state_transitions.s",
       "original_line": 28,
       "old": "loc_53024",
-      "new": "ObjectTransitionS3_Floor_AdjustYAndTailInvokeCallback",
+      "new": "S3Floor_AdjustYAndContinue",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Apply nonpositive floor distance and tail-invoke actor callback."
     },
@@ -1294,7 +1294,7 @@
       "source": "src/objects/runtime/s3/state_transitions.s",
       "original_line": 51,
       "old": "loc_53054",
-      "new": "ObjectTransitionS3_PredictedFloor_TailInvokeCallback",
+      "new": "S3PredFloor_TailCall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Tail-invoke transition callback outside predicted floor support band."
     },
@@ -1302,7 +1302,7 @@
       "source": "src/objects/runtime/s3/state_transitions.s",
       "original_line": 65,
       "old": "loc_53066",
-      "new": "ObjectTransitionS3_RightWall_AdjustXAndTailInvokeCallback",
+      "new": "S3RightWall_AdjustXAndContinue",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Correct negative right-wall penetration then invoke actor callback."
     },
@@ -1310,7 +1310,7 @@
       "source": "src/objects/runtime/s3/state_transitions.s",
       "original_line": 80,
       "old": "loc_5307C",
-      "new": "ObjectTransitionS3_LeftWall_AdjustXAndTailInvokeCallback",
+      "new": "S3LeftWall_AdjustXAndContinue",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Correct negative left-wall distance then invoke actor callback."
     },
@@ -2150,7 +2150,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 29,
       "old": "loc_1AA9E",
-      "new": "SKRuntime_SelectSinglePlayerHardwareSpriteTable",
+      "new": "SKDraw_SelectSinglePlayerTable",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_SelectSinglePlayerHardwareSpriteTable"
     },
@@ -2158,7 +2158,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 74,
       "old": "loc_1AAFA",
-      "new": "SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState",
+      "new": "SKObjExec_RunAllSlots",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_ExecuteAllObjectSlotsForOrdinaryOrCompetitionState"
     },
@@ -2166,7 +2166,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 86,
       "old": "loc_1AB04",
-      "new": "SKRuntime_AdvanceObjectSlotAfterCallbackOrEmptyCode",
+      "new": "SKObjExec_AdvanceSlot",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_AdvanceObjectSlotAfterCallbackOrEmptyCode"
     },
@@ -2174,7 +2174,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 90,
       "old": "locret_1AB0C",
-      "new": "SKRuntime_ReturnAfterObjectRangeOrTeleportGate",
+      "new": "SKObjExec_Return",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_ReturnAfterObjectRangeOrTeleportGate"
     },
@@ -2182,7 +2182,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 96,
       "old": "loc_1AB0E",
-      "new": "SKRuntime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries",
+      "new": "SKObjExec_RunRestrictedSlots",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_RunRestrictedPlayerStateSlotPartitionsAcrossBankBoundaries"
     },
@@ -2190,7 +2190,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 113,
       "old": "loc_1AB28",
-      "new": "SKRuntime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode",
+      "new": "SKObjExec_AdvanceDrawOnlySlot",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_AdvanceVisibleQueueRangeWithoutExecutingObjectCode"
     },
@@ -2198,7 +2198,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 222,
       "old": "loc_1ABCE",
-      "new": "SKRuntime_TryAppendHandleToCurrentDrawPriorityBand",
+      "new": "SKDraw_TryQueueBand",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_TryAppendHandleToCurrentDrawPriorityBand"
     },
@@ -2206,7 +2206,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 229,
       "old": "locret_1ABDA",
-      "new": "SKRuntime_ReturnAfterDrawQueueAppendOrCapacityRejection",
+      "new": "SKDraw_QueueReturn",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_ReturnAfterDrawQueueAppendOrCapacityRejection"
     },
@@ -2214,7 +2214,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 233,
       "old": "loc_1ABDC",
-      "new": "SKRuntime_SearchNextDrawPriorityBandUntilFinalBandEquality",
+      "new": "SKDraw_TryNextQueueBand",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_SearchNextDrawPriorityBandUntilFinalBandEquality"
     },
@@ -2222,7 +2222,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 251,
       "old": "loc_1AC00",
-      "new": "SKRuntime_STDAnimation_TickBorrowTimerAndSelectRelativeScript",
+      "new": "SKAnimSTD_TickAndReadScript",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_TickBorrowTimerAndSelectRelativeScript"
     },
@@ -2230,7 +2230,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 262,
       "old": "loc_1AC1C",
-      "new": "SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor",
+      "new": "SKAnimSTD_StoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_CommitFrameMergeFacingAndAdvanceCursor"
     },
@@ -2238,7 +2238,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 270,
       "old": "locret_1AC36",
-      "new": "SKRuntime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame",
+      "new": "SKAnimSTD_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_ReturnAfterTimerHoldOrCommittedFrame"
     },
@@ -2246,7 +2246,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 274,
       "old": "loc_1AC38",
-      "new": "SKRuntime_STDAnimation_TestRestartThenOtherNegativeCommands",
+      "new": "SKAnimSTD_TestRestartFF",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_TestRestartThenOtherNegativeCommands"
     },
@@ -2254,7 +2254,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 282,
       "old": "loc_1AC48",
-      "new": "SKRuntime_STDAnimation_BacktrackCursorForRelativeRepeatCommand",
+      "new": "SKAnimSTD_TestRepeatFE",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_BacktrackCursorForRelativeRepeatCommand"
     },
@@ -2262,7 +2262,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 292,
       "old": "loc_1AC5C",
-      "new": "SKRuntime_STDAnimation_ChangeAnimationForStartAnimationCommand",
+      "new": "SKAnimSTD_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_ChangeAnimationForStartAnimationCommand"
     },
@@ -2270,7 +2270,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 299,
       "old": "loc_1AC68",
-      "new": "SKRuntime_STDAnimation_AdvanceRoutineForRoutineCommand",
+      "new": "SKAnimSTD_TestRoutineFC",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_AdvanceRoutineForRoutineCommand"
     },
@@ -2278,7 +2278,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 308,
       "old": "loc_1AC7A",
-      "new": "SKRuntime_STDAnimation_MoveIntegerXForOffscreenCommand",
+      "new": "SKAnimSTD_TestOffscreenFB",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_MoveIntegerXForOffscreenCommand"
     },
@@ -2286,7 +2286,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 315,
       "old": "locret_1AC86",
-      "new": "SKRuntime_STDAnimation_ReturnForUnrecognizedNegativeCommand",
+      "new": "SKAnimSTD_UnknownCommandReturn",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_STDAnimation_ReturnForUnrecognizedNegativeCommand"
     },
@@ -2294,7 +2294,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 330,
       "old": "loc_1ACA0",
-      "new": "SKRuntime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair",
+      "new": "SKAnimPair_TickAndReadPair",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_TickBorrowTimerAndSelectFrameDelayPair"
     },
@@ -2302,7 +2302,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 341,
       "old": "loc_1ACBA",
-      "new": "SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor",
+      "new": "SKAnimPair_StoreFrameAndDelay",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_CommitAdjacentDelayFrameFacingAndCursor"
     },
@@ -2310,7 +2310,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 350,
       "old": "locret_1ACDA",
-      "new": "SKRuntime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit",
+      "new": "SKAnimPair_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_ReturnAfterTimerHoldOrPairCommit"
     },
@@ -2318,7 +2318,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 354,
       "old": "loc_1ACDC",
-      "new": "SKRuntime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference",
+      "new": "SKAnimPair_TestRestartFF",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_TestRestartAndPreserveNativeCursorDifference"
     },
@@ -2326,7 +2326,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 366,
       "old": "loc_1ACEA",
-      "new": "SKRuntime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap",
+      "new": "SKAnimPair_TestRepeatFE",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_BacktrackCursorWithLowByteOffsetWrap"
     },
@@ -2334,7 +2334,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 377,
       "old": "loc_1AD00",
-      "new": "SKRuntime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand",
+      "new": "SKAnimPair_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_ChangeAnimationForStartAnimationCommand"
     },
@@ -2342,7 +2342,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 384,
       "old": "loc_1AD0C",
-      "new": "SKRuntime_PairDelayAnimation_AdvanceRoutineForRoutineCommand",
+      "new": "SKAnimPair_TestRoutineFC",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_AdvanceRoutineForRoutineCommand"
     },
@@ -2350,7 +2350,7 @@
       "source": "src/objects/runtime/sk/execution_and_animation.s",
       "original_line": 393,
       "old": "locret_1AD1E",
-      "new": "SKRuntime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand",
+      "new": "SKAnimPair_UnknownCommandReturn",
       "profiles": ["sk"],
       "meaning": "Actual runtime control-flow join: SKRuntime_PairDelayAnimation_ReturnForUnrecognizedNegativeCommand"
     },
@@ -2742,7 +2742,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 26,
       "old": "locret_84426",
-      "new": "SKRawAnimation_ReturnFromSingleDelayHoldOrFrameWrite",
+      "new": "SKRawSingle_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnFromSingleDelayHoldOrFrameWrite."
     },
@@ -2750,7 +2750,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 30,
       "old": "loc_84428",
-      "new": "SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn",
+      "new": "SKRawSingle_DispatchCommand",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_DispatchSignedSingleDelayCommandThenClearCursorAfterReturn."
     },
@@ -2758,7 +2758,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 37,
       "old": "off_84434",
-      "new": "SKRawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback",
+      "new": "SKRawSingle_CommandTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_SingleDelayCommandBranchSlotsRestartJumpCallback."
     },
@@ -2766,7 +2766,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 79,
       "old": "loc_8448E",
-      "new": "SKRawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame",
+      "new": "SKRawSingle_StoreHFlipFrame",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReloadSingleDelayAndStoreHorizontalFlipStrippedFrame."
     },
@@ -2774,7 +2774,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 83,
       "old": "locret_84496",
-      "new": "SKRawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission",
+      "new": "SKRawSingle_HFlipReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnFromHorizontalSingleFlipHoldOrEmission."
     },
@@ -2782,7 +2782,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 104,
       "old": "loc_844C4",
-      "new": "SKRawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame",
+      "new": "SKRawSingle_StoreVFlipFrame",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReloadSingleDelayAndStoreVerticalFlipStrippedFrame."
     },
@@ -2790,7 +2790,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 108,
       "old": "locret_844CC",
-      "new": "SKRawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission",
+      "new": "SKRawSingle_VFlipReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnFromVerticalSingleFlipHoldOrEmission."
     },
@@ -2798,7 +2798,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 129,
       "old": "loc_84500",
-      "new": "SKRawAnimation_TailLoadExternalPlayerPatternsAfterTimerHoldOrFramePair",
+      "new": "SKExtPlayer_LoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_TailLoadExternalPlayerPatternsAfterTimerHoldOrFramePair."
     },
@@ -2806,7 +2806,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 133,
       "old": "loc_84504",
-      "new": "SKRawAnimation_LoadExternalPlayerPatternsThenTailInvokeControllerCallback",
+      "new": "SKExtPlayer_LoadPatternsAndContinue",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_LoadExternalPlayerPatternsThenTailInvokeControllerCallback."
     },
@@ -2814,7 +2814,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 165,
       "old": "loc_8453E",
-      "new": "SKRawAnimation_ReturnEscapedSingleDelayTimerHoldWithZeroResult",
+      "new": "SKRawEscSingle_HoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnEscapedSingleDelayTimerHoldWithZeroResult."
     },
@@ -2822,7 +2822,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 170,
       "old": "loc_84542",
-      "new": "SKRawAnimation_DecodeFfEscapedSingleCommandAndReturnMinusOneAfterCursorClear",
+      "new": "SKRawEscSingle_DispatchFF",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_DecodeFfEscapedSingleCommandAndReturnMinusOneAfterCursorClear."
     },
@@ -2830,7 +2830,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 179,
       "old": "off_84552",
-      "new": "SKRawAnimation_EscapedSingleCommandBranchSlotsRestartJumpCallback",
+      "new": "SKRawEscSingle_CommandTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EscapedSingleCommandBranchSlotsRestartJumpCallback."
     },
@@ -2838,7 +2838,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 187,
       "old": "loc_8455E",
-      "new": "SKRawAnimation_JumpEscapedSingleBySignedByteAndPublishPointer",
+      "new": "SKRawEscSingle_JumpSignedByte",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_JumpEscapedSingleBySignedByteAndPublishPointer."
     },
@@ -2846,7 +2846,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 193,
       "old": "loc_8456A",
-      "new": "SKRawAnimation_ReloadEscapedSingleFirstFrameAndDelayBeforeMinusOneReturn",
+      "new": "SKRawEscSingle_ReloadFirstFrame",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReloadEscapedSingleFirstFrameAndDelayBeforeMinusOneReturn."
     },
@@ -2854,7 +2854,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 199,
       "old": "loc_84576",
-      "new": "SKRawAnimation_TailInvokeEscapedSingleCallbackBeforeOuterResultEpilogue",
+      "new": "SKRawEscSingle_TailCall",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_TailInvokeEscapedSingleCallbackBeforeOuterResultEpilogue."
     },
@@ -2862,7 +2862,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 243,
       "old": "loc_845C8",
-      "new": "SKRawAnimation_ReturnMultiDelayTimerHoldWithZeroResult",
+      "new": "SKRawMulti_HoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnMultiDelayTimerHoldWithZeroResult."
     },
@@ -2870,7 +2870,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 248,
       "old": "loc_845CC",
-      "new": "SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler",
+      "new": "SKRawMulti_DispatchCommand",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_DispatchSignedMultiDelayCommandAndClearCursorAfterHandler."
     },
@@ -2878,7 +2878,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 255,
       "old": "off_845D8",
-      "new": "SKRawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback",
+      "new": "SKRawMulti_CommandTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_MultiDelayCommandBranchSlotsRestartJumpCallback."
     },
@@ -2886,7 +2886,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 263,
       "old": "loc_845E4",
-      "new": "SKRawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer",
+      "new": "SKRawMulti_JumpSignedByte",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_JumpMultiDelayBySignedByteAndPublishScriptPointer."
     },
@@ -2894,7 +2894,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 269,
       "old": "loc_845F2",
-      "new": "SKRawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear",
+      "new": "SKRawMulti_FirstPairReturnOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EmitFirstMultiDelayPairWithOneResultBeforeOuterClear."
     },
@@ -2902,7 +2902,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 276,
       "old": "loc_84600",
-      "new": "SKRawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear",
+      "new": "SKRawMulti_CallbackReturnMinusOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_InvokeMultiDelayCallbackThenReturnMinusOneBeforeOuterClear."
     },
@@ -2910,7 +2910,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 302,
       "old": "loc_84638",
-      "new": "SKRawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult",
+      "new": "SKRawMulti_HFlipFrameReturnOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EmitHorizontalMultiDelayFrameAndDelayWithOneResult."
     },
@@ -2918,7 +2918,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 309,
       "old": "loc_84646",
-      "new": "SKRawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult",
+      "new": "SKRawMulti_HFlipHoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnHorizontalMultiDelayTimerHoldWithZeroResult."
     },
@@ -2926,7 +2926,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 331,
       "old": "loc_84676",
-      "new": "SKRawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult",
+      "new": "SKRawMulti_VFlipFrameReturnOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EmitVerticalMultiDelayFrameAndDelayWithOneResult."
     },
@@ -2934,7 +2934,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 338,
       "old": "loc_84684",
-      "new": "SKRawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult",
+      "new": "SKRawMulti_VFlipHoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnVerticalMultiDelayTimerHoldWithZeroResult."
     },
@@ -2942,7 +2942,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 366,
       "old": "loc_846BA",
-      "new": "SKRawAnimation_ReturnEscapedMultiDelayTimerHoldWithZeroResult",
+      "new": "SKRawEscMulti_HoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnEscapedMultiDelayTimerHoldWithZeroResult."
     },
@@ -2950,7 +2950,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 371,
       "old": "loc_846BE",
-      "new": "SKRawAnimation_DecodeFfEscapedMultiCommandAndClearCursorAfterHandler",
+      "new": "SKRawEscMulti_DispatchFF",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_DecodeFfEscapedMultiCommandAndClearCursorAfterHandler."
     },
@@ -2958,7 +2958,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 379,
       "old": "off_846CC",
-      "new": "SKRawAnimation_EscapedMultiDelayCommandBranchSlotsRestartJumpCallback",
+      "new": "SKRawEscMulti_CommandTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EscapedMultiDelayCommandBranchSlotsRestartJumpCallback."
     },
@@ -2966,7 +2966,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 387,
       "old": "loc_846D8",
-      "new": "SKRawAnimation_JumpEscapedMultiBySignedByteAndPublishPointer",
+      "new": "SKRawEscMulti_JumpSignedByte",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_JumpEscapedMultiBySignedByteAndPublishPointer."
     },
@@ -2974,7 +2974,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 393,
       "old": "loc_846E4",
-      "new": "SKRawAnimation_EmitEscapedMultiFirstPairWithMinusOneBeforeOuterClear",
+      "new": "SKRawEscMulti_FirstPairReturnMinusOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_EmitEscapedMultiFirstPairWithMinusOneBeforeOuterClear."
     },
@@ -2982,7 +2982,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 400,
       "old": "loc_846F2",
-      "new": "SKRawAnimation_InvokeEscapedMultiCallbackThenMinusOneBeforeCursorClear",
+      "new": "SKRawEscMulti_CallbackReturnMinusOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_InvokeEscapedMultiCallbackThenMinusOneBeforeCursorClear."
     },
@@ -2990,7 +2990,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 416,
       "old": "loc_84714",
-      "new": "SKRawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker",
+      "new": "SKRawAccel_Tick",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_TickAcceleratingRawAnimationAndReduceDelayOnlyAtNegativeMarker."
     },
@@ -2998,7 +2998,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 432,
       "old": "loc_8473C",
-      "new": "SKRawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult",
+      "new": "SKRawAccel_StoreFrameReturnOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_CommitAcceleratingCursorFrameDelayAndOneResult."
     },
@@ -3006,7 +3006,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 440,
       "old": "loc_8474C",
-      "new": "SKRawAnimation_ReturnAcceleratingTimerHoldWithZeroResult",
+      "new": "SKRawAccel_HoldReturnZero",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnAcceleratingTimerHoldWithZeroResult."
     },
@@ -3014,7 +3014,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 445,
       "old": "loc_84750",
-      "new": "SKRawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold",
+      "new": "SKRawAccel_CountZeroDelayLoop",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_CountZeroDelayLoopAndInvokeCallbackAtUnsignedThreshold."
     },
@@ -3022,7 +3022,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 459,
       "old": "loc_8477C",
-      "new": "SKRawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback",
+      "new": "SKRawAccel_ZeroLoopReturnMinusOne",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnMinusOneForZeroDelayLoopEvenWithoutCallback."
     },
@@ -3030,7 +3030,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 472,
       "old": "loc_84790",
-      "new": "SKRawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker",
+      "new": "SKRawDecel_Tick",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_TickDeceleratingRawAndIncrementDelayOnlyAtNegativeMarker."
     },
@@ -3038,7 +3038,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 485,
       "old": "loc_847B0",
-      "new": "SKRawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold",
+      "new": "SKRawDecel_StoreFrameAndTestDelay",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_CommitDeceleratingFrameAndCompareDelayToHeaderThreshold."
     },
@@ -3046,7 +3046,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 493,
       "old": "locret_847C4",
-      "new": "SKRawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter",
+      "new": "SKRawDecel_Return",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_ReturnFromDeceleratingHoldBelowThresholdOrIncompleteCounter."
     },
@@ -3054,7 +3054,7 @@
       "source": "src/objects/runtime/sk/raw_animation.s",
       "original_line": 497,
       "old": "loc_847C6",
-      "new": "SKRawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback",
+      "new": "SKRawDecel_CountAndContinue",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRawAnimation_CountDeceleratingThresholdVisitsAndTailInvokeCallback."
     },
@@ -3606,7 +3606,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 13,
       "old": "loc_84892",
-      "new": "ObjectTransitionSK_Wait_InvokeExpiredTimerCallback",
+      "new": "SKObjWait_RunCallback",
       "profiles": ["sk"],
       "meaning": "Invoke actor callback after signed WORD wait timer underflows."
     },
@@ -3614,7 +3614,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 28,
       "old": "locret_848AA",
-      "new": "ObjectTransitionSK_Floor_ReturnWithoutContact",
+      "new": "SKFloor_NoContactReturn",
       "profiles": ["sk"],
       "meaning": "Return without floor callback while ascending or above floor."
     },
@@ -3622,7 +3622,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 32,
       "old": "loc_848AC",
-      "new": "ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback",
+      "new": "SKFloor_AdjustYAndContinue",
       "profiles": ["sk"],
       "meaning": "Apply nonpositive floor distance and tail-invoke actor callback."
     },
@@ -3630,7 +3630,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 56,
       "old": "loc_848DE",
-      "new": "ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne",
+      "new": "SKPredFloor_CallAndReturnOne",
       "profiles": ["sk"],
       "meaning": "Call transition callback when predicted floor support lies outside accepted distance band."
     },
@@ -3638,7 +3638,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 72,
       "old": "loc_848F4",
-      "new": "ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback",
+      "new": "SKRightWall_AdjustXAndContinue",
       "profiles": ["sk"],
       "meaning": "Correct negative right-wall penetration then invoke actor callback."
     },
@@ -3646,7 +3646,7 @@
       "source": "src/objects/runtime/sk/state_transitions.s",
       "original_line": 87,
       "old": "loc_8490A",
-      "new": "ObjectTransitionSK_LeftWall_AdjustXAndTailInvokeCallback",
+      "new": "SKLeftWall_AdjustXAndContinue",
       "profiles": ["sk"],
       "meaning": "Correct negative left-wall distance then invoke actor callback."
     },

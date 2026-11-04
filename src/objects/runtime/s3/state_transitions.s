@@ -6,11 +6,11 @@
 
 Obj_Wait:
                 subq.w  #1,$2E(a0)
-                bmi.s   ObjectTransitionS3_Wait_InvokeExpiredTimerCallback
+                bmi.s   S3ObjWait_RunCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionS3_Wait_InvokeExpiredTimerCallback:
+S3ObjWait_RunCallback:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function Obj_Wait
@@ -20,12 +20,12 @@ ObjectTransitionS3_Wait_InvokeExpiredTimerCallback:
 ObjHitFloor_DoRoutine:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionS3_Floor_AdjustYAndTailInvokeCallback
-                beq.s   ObjectTransitionS3_Floor_AdjustYAndTailInvokeCallback
+                bmi.s   S3Floor_AdjustYAndContinue
+                beq.s   S3Floor_AdjustYAndContinue
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionS3_Floor_AdjustYAndTailInvokeCallback:
+S3Floor_AdjustYAndContinue:
                 add.w   d1,y_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -41,14 +41,14 @@ ObjHitFloor2_DoRoutine:
                 swap    d3
                 jsr     (ObjCheckFloorDist2).l
                 cmpi.w  #-1,d1
-                blt.s   ObjectTransitionS3_PredictedFloor_TailInvokeCallback
+                blt.s   S3PredFloor_TailCall
                 cmpi.w  #$C,d1
-                bge.s   ObjectTransitionS3_PredictedFloor_TailInvokeCallback
+                bge.s   S3PredFloor_TailCall
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionS3_PredictedFloor_TailInvokeCallback:
+S3PredFloor_TailCall:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function ObjHitFloor2_DoRoutine
@@ -58,11 +58,11 @@ ObjectTransitionS3_PredictedFloor_TailInvokeCallback:
 ObjHitWall_DoRoutine:
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionS3_RightWall_AdjustXAndTailInvokeCallback
+                bmi.s   S3RightWall_AdjustXAndContinue
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionS3_RightWall_AdjustXAndTailInvokeCallback:
+S3RightWall_AdjustXAndContinue:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -73,11 +73,11 @@ ObjectTransitionS3_RightWall_AdjustXAndTailInvokeCallback:
 ObjHitWall2_DoRoutine:
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionS3_LeftWall_AdjustXAndTailInvokeCallback
+                bmi.s   S3LeftWall_AdjustXAndContinue
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionS3_LeftWall_AdjustXAndTailInvokeCallback:
+S3LeftWall_AdjustXAndContinue:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)

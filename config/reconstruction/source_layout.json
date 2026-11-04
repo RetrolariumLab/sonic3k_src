@@ -30049,7 +30049,7 @@
       "responsibility": "Sprite table initialization, object execution, movement, deletion, draw queuing and animation interfaces.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 345,
+      "physical_lines": 350,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -30234,7 +30234,7 @@
       "responsibility": "Raw animation interpreters, flip variants, multi-delay streams and accelerating or decelerating animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 332,
+      "physical_lines": 340,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30799,7 +30799,7 @@
       "responsibility": "Sprite table initialization, object execution, movement, deletion, draw queuing and animation interfaces.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 395,
+      "physical_lines": 400,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -31019,7 +31019,7 @@
       "responsibility": "Raw animation interpreters, external-player frames, result checks, flip or delay variants and animation state setup.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 507,
+      "physical_lines": 517,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",

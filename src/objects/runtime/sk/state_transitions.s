@@ -6,11 +6,11 @@
 
 Obj_Wait:
                 subq.w  #1,$2E(a0)
-                bmi.s   ObjectTransitionSK_Wait_InvokeExpiredTimerCallback
+                bmi.s   SKObjWait_RunCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionSK_Wait_InvokeExpiredTimerCallback:
+SKObjWait_RunCallback:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; End of function Obj_Wait
@@ -19,17 +19,17 @@ ObjectTransitionSK_Wait_InvokeExpiredTimerCallback:
 
 ObjHitFloor_DoRoutine:
                 tst.w   y_vel(a0)
-                bmi.s   ObjectTransitionSK_Floor_ReturnWithoutContact
+                bmi.s   SKFloor_NoContactReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback
-                beq.s   ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback
+                bmi.s   SKFloor_AdjustYAndContinue
+                beq.s   SKFloor_AdjustYAndContinue
 
-ObjectTransitionSK_Floor_ReturnWithoutContact:
+SKFloor_NoContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionSK_Floor_AdjustYAndTailInvokeCallback:
+SKFloor_AdjustYAndContinue:
                 add.w   d1,y_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -45,15 +45,15 @@ ObjHitFloor2_DoRoutine:
                 swap    d3
                 jsr     (ObjCheckFloorDist2).l
                 cmpi.w  #-1,d1
-                blt.s   ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne
+                blt.s   SKPredFloor_CallAndReturnOne
                 cmpi.w  #$C,d1
-                bge.s   ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne
+                bge.s   SKPredFloor_CallAndReturnOne
                 add.w   d1,y_pos(a0)
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne:
+SKPredFloor_CallAndReturnOne:
                 movea.l $34(a0),a1
                 jsr     (a1)
                 moveq   #1,d0
@@ -65,11 +65,11 @@ ObjectTransitionSK_PredictedFloor_InvokeCallbackAndReturnOne:
 ObjHitWall_DoRoutine:
                 jsr     (ObjCheckRightWallDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback
+                bmi.s   SKRightWall_AdjustXAndContinue
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback:
+SKRightWall_AdjustXAndContinue:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
@@ -80,11 +80,11 @@ ObjectTransitionSK_RightWall_AdjustXAndTailInvokeCallback:
 ObjHitWall2_DoRoutine:
                 jsr     (ObjCheckLeftWallDist).l
                 tst.w   d1
-                bmi.s   ObjectTransitionSK_LeftWall_AdjustXAndTailInvokeCallback
+                bmi.s   SKLeftWall_AdjustXAndContinue
                 rts
 ; ---------------------------------------------------------------------------
 
-ObjectTransitionSK_LeftWall_AdjustXAndTailInvokeCallback:
+SKLeftWall_AdjustXAndContinue:
                 add.w   d1,x_pos(a0)
                 movea.l $34(a0),a1
                 jmp     (a1)
