@@ -23,55 +23,56 @@ Obj_SOZLightSwitch:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #0,(a2)+
-                move.l  #loc_40EC4,(a0)
+                move.l  #SKSOZLightSwitch_ChooseGripDirection,(a0)
 
-loc_40EC4:
+SKSOZLightSwitch_ChooseGripDirection:
                 tst.b   $34(a0)
-                beq.s   loc_40ED2
+                beq.s   SKSOZLightSwitch_CheckNormalGripRiders
                 tst.w   $30(a0)
-                bne.s   loc_40F0A
-                bra.s   loc_40ED8
+                bne.s   SKSOZLightSwitch_RetractGrip
+                bra.s   SKSOZLightSwitch_ExtendGrip
 ; ---------------------------------------------------------------------------
 
-loc_40ED2:
+SKSOZLightSwitch_CheckNormalGripRiders:
                 tst.w   $30(a0)
-                beq.s   loc_40F0A
+                beq.s   SKSOZLightSwitch_RetractGrip
 
-loc_40ED8:
+; Restore the light when the new extension reaches the stop exactly
+SKSOZLightSwitch_ExtendGrip:
                 move.w  $36(a0),d2
                 cmp.w   $2E(a0),d2
-                beq.s   loc_40F2E
+                beq.s   SKSOZLightSwitch_UpdateRidersAndDraw
                 add.w   $38(a0),d2
                 cmp.w   $2E(a0),d2
-                bne.s   loc_40F14
+                bne.s   SKSOZLightSwitch_PlaceGrip
                 move.w  #(15*60)-1,(Palette_cycle_counter1).w
                 move.b  #0,(SOZ_darkness_level).w
                 move.w  (Palette_cycle_counters+$06).w,d0
                 neg.b   d0
                 move.b  d0,(Palette_cycle_counters+$00).w
                 move.w  #0,(Palette_cycle_counters+$08).w
-                bra.s   loc_40F14
+                bra.s   SKSOZLightSwitch_PlaceGrip
 ; ---------------------------------------------------------------------------
 
-loc_40F0A:
+SKSOZLightSwitch_RetractGrip:
                 move.w  $36(a0),d2
-                beq.s   loc_40F2E
+                beq.s   SKSOZLightSwitch_UpdateRidersAndDraw
                 sub.w   $38(a0),d2
 
-loc_40F14:
+SKSOZLightSwitch_PlaceGrip:
                 move.w  d2,$36(a0)
                 move.w  $46(a0),d0
                 add.w   d2,d0
                 move.w  d0,sub2_y_pos(a0)
                 move.w  d2,d0
-                beq.s   loc_40F2A
+                beq.s   SKSOZLightSwitch_SetGripFrame
                 lsr.w   #3,d0
                 addq.w  #1,d0
 
-loc_40F2A:
+SKSOZLightSwitch_SetGripFrame:
                 move.b  d0,sub2_mapframe(a0)
 
-loc_40F2E:
+SKSOZLightSwitch_UpdateRidersAndDraw:
                 lea     $30(a0),a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1_logical).w,d0
@@ -86,31 +87,31 @@ loc_40F2E:
 
 UpdatePlayerHangingFromSozLightSwitch:
                 tst.b   (a2)
-                beq.w   loc_4100E
+                beq.w   SKSOZLightSwitch_TickRecaptureCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_40FD8
+                bpl.s   SKSOZLightSwitch_DetachRider
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_40FD8
+                bhs.s   SKSOZLightSwitch_DetachRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_40FE6
+                beq.w   SKSOZLightSwitch_TryCheckRiderFloor
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #18,2(a2)
                 andi.w  #(button_up_mask|button_down_mask|button_left_mask|button_right_mask)<<8,d0
-                beq.w   loc_40F88
+                beq.w   SKSOZLightSwitch_TrySetJumpLeft
                 move.b  #60,2(a2)
 
-loc_40F88:
+SKSOZLightSwitch_TrySetJumpLeft:
                 btst    #button_left+8,d0
-                beq.s   loc_40F94
+                beq.s   SKSOZLightSwitch_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_40F94:
+SKSOZLightSwitch_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_40FA0
+                beq.s   SKSOZLightSwitch_ReleaseWithRollingJump
                 move.w  #$200,x_vel(a1)
 
-loc_40FA0:
+SKSOZLightSwitch_ReleaseWithRollingJump:
                 move.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -123,52 +124,53 @@ loc_40FA0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40FD8:
+SKSOZLightSwitch_DetachRider:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #$3C,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40FE6:
+; Probe the floor before keeping the rider attached only for negative subtypes
+SKSOZLightSwitch_TryCheckRiderFloor:
                 tst.b   subtype(a0)
-                bpl.s   loc_41000
+                bpl.s   SKSOZLightSwitch_PlaceRiderBelowGrip
                 movem.l a1-a2,-(sp)
                 jsr     (SonicOnObjHitFloor).l
                 movem.l (sp)+,a1-a2
                 tst.w   d1
-                beq.s   loc_40FD8
-                bmi.s   loc_40FD8
+                beq.s   SKSOZLightSwitch_DetachRider
+                bmi.s   SKSOZLightSwitch_DetachRider
 
-loc_41000:
+SKSOZLightSwitch_PlaceRiderBelowGrip:
                 move.w  sub2_y_pos(a0),y_pos(a1)
                 addi.w  #$30,y_pos(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4100E:
+SKSOZLightSwitch_TickRecaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_4101C
+                beq.s   SKSOZLightSwitch_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_4108E
+                bne.w   SKSOZLightSwitch_CaptureReturn
 
-loc_4101C:
+SKSOZLightSwitch_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_4108E
+                bhs.w   SKSOZLightSwitch_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   sub2_y_pos(a0),d1
                 subi.w  #$30,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_4108E
+                bhs.w   SKSOZLightSwitch_CaptureReturn
                 tst.b   object_control(a1)
-                bmi.s   locret_4108E
+                bmi.s   SKSOZLightSwitch_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_4108E
+                bhs.s   SKSOZLightSwitch_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4108E
+                bne.s   SKSOZLightSwitch_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -181,7 +183,7 @@ loc_4101C:
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-locret_4108E:
+SKSOZLightSwitch_CaptureReturn:
                 rts
 ; End of function UpdatePlayerHangingFromSozLightSwitch
 

@@ -67,12 +67,12 @@ SOZ_capsule:
                 lea     SOZ_capsule_switch_set_tbl(pc),a2
                 jsr     (CreateChild1_Normal).l
                 tst.b   (Last_star_post_hit).w
-                bne.s   ._100
+                bne.s   .UseOpenedCapsule
                 cmpi.b  #2,(Player_1+character_id).w    ; Is the player character Knuckles?
                 bne.s   return
 
 ; loc_8F424:
-                ._100:
+                .UseOpenedCapsule:
                 move.l  #FBZEggPrisonSK_ResolveSolidThenTouchCull,(a0)
                 move.b  #1,mapping_frame(a0)
                 bset    #5,$38(a0)
@@ -104,14 +104,14 @@ SOZ_capsule_Hyudoro:
                 move.w  .act_tbl(pc,d0.w),d1
                 jsr     .act_tbl(pc,d1.w)
                 tst.b   subtype(a0)
-                bne.s   ._100
+                bne.s   .CullReleasedGhost
                 lea     Hyudoro_DPLC_tbl(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Sprite_CheckDeleteSlotted).l
 ; ---------------------------------------------------------------------------
 
 ; loc_8F482:
-                ._100:
+                .CullReleasedGhost:
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 
@@ -132,13 +132,13 @@ SOZ_capsule_Hyudoro_init:
                 move.w  (a1)+,$40(a0)
                 jsr     (Change_FlipXWithVelocity).l
                 tst.w   d0
-                bne.s   ._100
+                bne.s   .InitOtherGhostChild
                 lea     Hyudoro_init_tbl(pc),a1
                 jmp     (SetUp_ObjAttributesSlotted).l
 ; ---------------------------------------------------------------------------
 
 ; loc_8F4B6:
-                ._100:
+                .InitOtherGhostChild:
                 lea     SOZ_capsule_Hyudoro_init_tbl(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------

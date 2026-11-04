@@ -5,7 +5,7 @@
 
 Obj_SOZRapelWire:
                 movea.l a0,a1
-                move.l  #loc_4AA80,(a1)
+                move.l  #SKSOZWire_WaitForP1Grab,(a1)
                 bsr.w   InitializeSozRappelWirePieceDisplay
                 move.b  #$20,mapping_frame(a1)
                 move.w  x_pos(a0),d2
@@ -19,22 +19,22 @@ Obj_SOZRapelWire:
                 moveq   #$F,d1
                 addq.w  #1,d1
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_4AA44
+                bne.w   SKSOZWire_EnterIdle
                 move.w  a1,$44(a0)
-                move.l  #loc_4AD7A,(a1)
+                move.l  #SKSOZWire_LoadFirstLinkGeometry,(a1)
                 move.w  a0,parent(a1)
-                bra.s   loc_4AA16
+                bra.s   SKSOZWire_InitAndCountLink
 ; ---------------------------------------------------------------------------
 
-loc_4A9FA:
+SKSOZWire_TryAllocNextLink:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_4AA44
-                move.l  #loc_4AE50,(a1)
+                bne.w   SKSOZWire_EnterIdle
+                move.l  #SKSOZWire_FollowPreviousLink,(a1)
                 move.w  a2,parent(a1)
                 move.w  a1,$44(a2)
                 move.w  a0,parent3(a1)
 
-loc_4AA16:
+SKSOZWire_InitAndCountLink:
                 movea.l a1,a2
                 bsr.s   InitializeSozRappelWirePieceDisplay
                 move.w  d2,x_pos(a1)
@@ -42,13 +42,14 @@ loc_4AA16:
                 addi.w  #$10,d3
                 addq.w  #1,$34(a0)
                 move.w  $34(a0),$34(a1)
-                dbf     d1,loc_4A9FA
-                move.l  #loc_4AF0A,(a1)
+                dbf     d1,SKSOZWire_TryAllocNextLink
+                move.l  #SKSOZWire_MoveEndAndSaveOldX,(a1)
                 move.b  #$21,mapping_frame(a1)
                 move.w  a1,parent3(a0)
 
-loc_4AA44:
-                bra.s   loc_4AA80
+; Start the root even if only part of the chain could be allocated
+SKSOZWire_EnterIdle:
+                bra.s   SKSOZWire_WaitForP1Grab
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -67,295 +68,298 @@ InitializeSozRappelWirePieceDisplay:
 
 ; ---------------------------------------------------------------------------
 
-loc_4AA80:
+SKSOZWire_WaitForP1Grab:
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                beq.s   loc_4AA90
-                move.l  #loc_4AA94,(a0)
+                beq.s   SKSOZWire_DrawIdle
+                move.l  #SKSOZWire_CheckP1BeforeExtension,(a0)
 
-loc_4AA90:
-                bra.w   loc_4AD32
+SKSOZWire_DrawIdle:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AA94:
+SKSOZWire_CheckP1BeforeExtension:
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4AAA4
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_StepInitialExtension
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4AAA4:
+SKSOZWire_StepInitialExtension:
                 addq.w  #2,$32(a0)
                 cmpi.w  #$C0,$32(a0)
-                bne.s   loc_4AAC4
+                bne.s   SKSOZWire_DrawAfterExtension
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_4AAC8,(a0)
+                move.l  #SKSOZWire_WaitForP1Action,(a0)
                 move.w  #1,$2E(a0)
 
-loc_4AAC4:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterExtension:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AAC8:
+SKSOZWire_WaitForP1Action:
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4AAD8
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_ChooseActionMotion
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4AAD8:
+SKSOZWire_ChooseActionMotion:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_4AB6A
+                beq.w   SKSOZWire_DrawAfterAction
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l
                 move.b  subtype(a0),d1
                 andi.w  #$F0,d1
-                bne.s   loc_4AB16
-                move.l  #loc_4AB6E,(a0)
+                bne.s   SKSOZWire_InitTravelSweep
+                move.l  #SKSOZWire_CheckP1BeforeRepeatTurn,(a0)
                 move.w  #$3F,$30(a0)
                 move.b  #0,angle(a0)
                 subq.b  #1,$36(a0)
-                bne.s   loc_4AB6A
-                move.l  #loc_4AB9E,(a0)
-                bra.s   loc_4AB6A
+                bne.s   SKSOZWire_DrawAfterAction
+                move.l  #SKSOZWire_InitFinalTurn,(a0)
+                bra.s   SKSOZWire_DrawAfterAction
 ; ---------------------------------------------------------------------------
 
-loc_4AB16:
+SKSOZWire_InitTravelSweep:
                 lsl.w   #1,d1
                 subi.w  #6,d1
                 subq.w  #1,d1
                 move.w  d1,$30(a0)
-                move.l  #loc_4ABD8,(a0)
+                move.l  #SKSOZWire_MoveRepeatSweep,(a0)
                 move.b  #$80,angle(a0)
                 move.b  #$80,$37(a0)
                 move.w  #$400,x_vel(a0)
                 btst    #0,status(a0)
-                bne.s   loc_4AB4C
+                bne.s   SKSOZWire_ReverseNextSweepAndCount
                 neg.w   x_vel(a0)
                 move.b  #0,$37(a0)
 
-loc_4AB4C:
+SKSOZWire_ReverseNextSweepAndCount:
                 bchg    #0,status(a0)
                 move.w  #3,$2E(a0)
                 move.w  #6,$3C(a0)
                 subq.b  #1,$36(a0)
-                bne.s   loc_4AB6A
-                move.l  #loc_4AC3A,(a0)
+                bne.s   SKSOZWire_DrawAfterAction
+                move.l  #SKSOZWire_MoveFinalSweep,(a0)
 
-loc_4AB6A:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterAction:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AB6E:
+SKSOZWire_CheckP1BeforeRepeatTurn:
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4AB7E
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_StepRepeatTurn
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4AB7E:
+SKSOZWire_StepRepeatTurn:
                 addq.b  #2,angle(a0)
                 addq.w  #2,$32(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_4AB9A
+                bpl.s   SKSOZWire_DrawAfterRepeatTurn
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_4AAC8,(a0)
+                move.l  #SKSOZWire_WaitForP1Action,(a0)
 
-loc_4AB9A:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterRepeatTurn:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AB9E:
+SKSOZWire_InitFinalTurn:
                 move.w  #2,$2E(a0)
-                move.l  #loc_4ABAA,(a0)
+                move.l  #SKSOZWire_CheckP1BeforeFinalTurn,(a0)
 
-loc_4ABAA:
+SKSOZWire_CheckP1BeforeFinalTurn:
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4ABBA
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_StepFinalTurnAndSavePhase
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4ABBA:
+SKSOZWire_StepFinalTurnAndSavePhase:
                 addq.b  #2,angle(a0)
                 addq.w  #2,$32(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_4ABD4
+                bpl.s   SKSOZWire_DrawAfterFinalTurn
                 move.b  angle(a0),$27(a0)
-                move.l  #loc_4AC98,(a0)
+                move.l  #SKSOZWire_CheckP1BeforeLimitedTurn,(a0)
 
-loc_4ABD4:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterFinalTurn:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4ABD8:
+SKSOZWire_MoveRepeatSweep:
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4ABEE
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_CheckRepeatSweepPose
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4ABEE:
+; Select pose mode 1 when the remaining countdown reaches $1A exactly
+SKSOZWire_CheckRepeatSweepPose:
                 cmpi.w  #$1A,$30(a0)
-                blo.s   loc_4AC02
-                bne.s   loc_4ABFE
+                blo.s   SKSOZWire_StepRepeatTravel
+                bne.s   SKSOZWire_StepTravelPose
                 move.w  #1,$2E(a0)
 
-loc_4ABFE:
+SKSOZWire_StepTravelPose:
                 addq.b  #4,$37(a0)
 
-loc_4AC02:
+SKSOZWire_StepRepeatTravel:
                 addq.b  #2,angle(a0)
                 addq.w  #1,$32(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_4AC24
+                bpl.s   SKSOZWire_TryExtraRepeatStep
                 move.w  #0,x_vel(a0)
                 moveq   #signextendB(sfx_GlideLand),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_4AAC8,(a0)
+                move.l  #SKSOZWire_WaitForP1Action,(a0)
 
-loc_4AC24:
+SKSOZWire_TryExtraRepeatStep:
                 tst.w   $3C(a0)
-                beq.s   loc_4AC36
+                beq.s   SKSOZWire_DrawAfterRepeatTravel
                 subq.w  #1,$3C(a0)
                 addq.w  #1,$32(a0)
                 addq.b  #2,angle(a0)
 
-loc_4AC36:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterRepeatTravel:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AC3A:
+SKSOZWire_MoveFinalSweep:
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4AC50
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_TryStepFinalTravelPose
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4AC50:
+SKSOZWire_TryStepFinalTravelPose:
                 cmpi.w  #$1A,$30(a0)
-                blo.s   loc_4AC5C
+                blo.s   SKSOZWire_StepFinalTravel
                 addq.b  #4,$37(a0)
 
-loc_4AC5C:
+SKSOZWire_StepFinalTravel:
                 addq.b  #2,angle(a0)
                 addq.w  #1,$32(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_4AC82
+                bpl.s   SKSOZWire_TryExtraFinalStep
                 move.w  #0,x_vel(a0)
                 move.w  #2,$2E(a0)
                 move.b  angle(a0),$27(a0)
-                move.l  #loc_4AC98,(a0)
+                move.l  #SKSOZWire_CheckP1BeforeLimitedTurn,(a0)
 
-loc_4AC82:
+SKSOZWire_TryExtraFinalStep:
                 tst.w   $3C(a0)
-                beq.s   loc_4AC94
+                beq.s   SKSOZWire_DrawAfterFinalTravel
                 subq.w  #1,$3C(a0)
                 addq.w  #1,$32(a0)
                 addq.b  #2,angle(a0)
 
-loc_4AC94:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterFinalTravel:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4AC98:
+SKSOZWire_CheckP1BeforeLimitedTurn:
                 movea.w $46(a0),a1
                 tst.b   $38(a1)
-                bne.s   loc_4ACA8
-                move.l  #loc_4ACC6,(a0)
+                bne.s   SKSOZWire_StepLimitedTurn
+                move.l  #SKSOZWire_AlignBeforeRetraction,(a0)
 
-loc_4ACA8:
+; Advance the phase each frame. The angle holds while phase is in $86 through $FB
+SKSOZWire_StepLimitedTurn:
                 addq.b  #2,$27(a0)
                 cmpi.b  #-4,$27(a0)
-                bhs.s   loc_4ACBC
+                bhs.s   SKSOZWire_ApplyFinalPhase
                 cmpi.b  #-$7A,$27(a0)
-                bhs.s   loc_4ACC2
+                bhs.s   SKSOZWire_DrawAfterLimitedTurn
 
-loc_4ACBC:
+SKSOZWire_ApplyFinalPhase:
                 move.b  $27(a0),angle(a0)
 
-loc_4ACC2:
-                bra.w   loc_4AD32
+SKSOZWire_DrawAfterLimitedTurn:
+                bra.w   SKSOZWire_SetCullXFromRoot
 ; ---------------------------------------------------------------------------
 
-loc_4ACC6:
+SKSOZWire_AlignBeforeRetraction:
                 tst.b   angle(a0)
-                beq.s   loc_4AD02
+                beq.s   SKSOZWire_RetractAndResetAtMinimum
                 cmpi.b  #-$7A,$27(a0)
-                bhs.s   loc_4ACF6
+                bhs.s   SKSOZWire_WaitAtNearUprightAngle
                 addq.b  #2,angle(a0)
                 cmpi.b  #$80,angle(a0)
-                blo.s   loc_4ACEE
+                blo.s   SKSOZWire_ClearRetractionPhase
                 cmpi.b  #-4,angle(a0)
-                bhs.s   loc_4ACEE
+                bhs.s   SKSOZWire_ClearRetractionPhase
                 move.b  #0,angle(a0)
 
-loc_4ACEE:
+SKSOZWire_ClearRetractionPhase:
                 move.b  #0,$27(a0)
-                bra.s   loc_4AD02
+                bra.s   SKSOZWire_RetractAndResetAtMinimum
 ; ---------------------------------------------------------------------------
 
-loc_4ACF6:
+SKSOZWire_WaitAtNearUprightAngle:
                 move.b  #-4,angle(a0)
                 addq.b  #2,$27(a0)
-                bmi.s   loc_4AD32
+                bmi.s   SKSOZWire_SetCullXFromRoot
 
-loc_4AD02:
+SKSOZWire_RetractAndResetAtMinimum:
                 subq.w  #4,$32(a0)
                 cmpi.w  #$30,$32(a0)
-                bhi.s   loc_4AD32
+                bhi.s   SKSOZWire_SetCullXFromRoot
                 move.w  #$30,$32(a0)
                 move.w  #0,$2E(a0)
                 move.b  subtype(a0),d1
                 andi.b  #$F,d1
                 move.b  d1,$36(a0)
-                move.l  #loc_4AA80,(a0)
+                move.l  #SKSOZWire_WaitForP1Grab,(a0)
                 move.w  $3E(a0),d0
-                bra.s   loc_4AD36
+                bra.s   SKSOZWire_DrawOrCullWire
 ; ---------------------------------------------------------------------------
 
-loc_4AD32:
+SKSOZWire_SetCullXFromRoot:
                 move.w  x_pos(a0),d0
 
-loc_4AD36:
+SKSOZWire_DrawOrCullWire:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_4AD4C
+                bhi.w   SKSOZWire_BeginLinkCleanup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4AD4C:
+SKSOZWire_BeginLinkCleanup:
                 move.w  $34(a0),d2
                 subq.w  #1,d2
-                bcs.s   loc_4AD68
+                bcs.s   SKSOZWire_ClearPlacementRespawn
                 movea.w $44(a0),a2
 
-loc_4AD58:
+SKSOZWire_DeleteAndAdvanceLink:
                 movea.l a2,a1
                 movea.w $44(a1),a2
                 jsr     (Delete_Referenced_Sprite).l
-                dbf     d2,loc_4AD58
+                dbf     d2,SKSOZWire_DeleteAndAdvanceLink
 
-loc_4AD68:
+SKSOZWire_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_4AD74
+                beq.s   SKSOZWire_DeleteRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_4AD74:
+SKSOZWire_DeleteRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4AD7A:
+SKSOZWire_LoadFirstLinkGeometry:
                 movea.w parent(a0),a1
                 move.w  angle(a1),angle(a0)
                 move.w  $32(a1),$32(a0)
                 move.b  angle(a0),d0
                 btst    #0,status(a1)
-                bne.s   loc_4AD9A
+                bne.s   SKSOZWire_CalcWireStepVector
                 addi.b  #$80,d0
 
-loc_4AD9A:
+; Scale the Q14 sine and cosine by $20 divided by the current wire length
+SKSOZWire_CalcWireStepVector:
                 jsr     (GetSineCosineQ14).l
                 muls.w  #$20,d0
                 move.w  $32(a0),d2
@@ -380,34 +384,34 @@ loc_4AD9A:
                 ext.l   d3
                 lsl.l   #4,d3
                 subq.w  #1,d5
-                bcs.s   loc_4ADF2
+                bcs.s   SKSOZWire_CalcWholeLinkStep
                 addi.w  #$10,d4
 
-loc_4ADEA:
+SKSOZWire_SubtractFractionalSteps:
                 sub.l   d2,d0
                 sub.l   d3,d1
-                dbf     d5,loc_4ADEA
+                dbf     d5,SKSOZWire_SubtractFractionalSteps
 
-loc_4ADF2:
+SKSOZWire_CalcWholeLinkStep:
                 lsl.l   #4,d2
                 lsl.l   #4,d3
                 lsr.w   #4,d4
                 subi.w  #$10,d4
-                bcc.s   loc_4AE04
+                bcc.s   SKSOZWire_PrepareWholeStepCount
                 neg.w   d4
                 neg.l   d2
                 neg.l   d3
 
-loc_4AE04:
+SKSOZWire_PrepareWholeStepCount:
                 subq.w  #1,d4
-                bcs.s   loc_4AE10
+                bcs.s   SKSOZWire_PlaceFirstLinkAndSetFrame
 
-loc_4AE08:
+SKSOZWire_AccumulateWholeSteps:
                 add.l   d2,d0
                 add.l   d3,d1
-                dbf     d4,loc_4AE08
+                dbf     d4,SKSOZWire_AccumulateWholeSteps
 
-loc_4AE10:
+SKSOZWire_PlaceFirstLinkAndSetFrame:
                 add.l   x_pos(a1),d0
                 move.l  d0,x_pos(a0)
                 add.l   y_pos(a1),d1
@@ -422,36 +426,37 @@ loc_4AE10:
                 move.w  y_pos(a0),d0
                 addi.w  #$10,d0
                 cmp.w   $40(a0),d0
-                ble.s   locret_4AE4E
+                ble.s   SKSOZWire_FirstLinkDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_4AE4E:
+SKSOZWire_FirstLinkDrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4AE50:
+; Link ordinal $D can change direction for the remaining links
+SKSOZWire_FollowPreviousLink:
                 movea.w parent(a0),a1
                 move.b  mapping_frame(a1),mapping_frame(a0)
                 bsr.w   PositionSozRappelPieceFromPreviousLink
                 cmpi.w  #$D,$34(a0)
-                bne.s   loc_4AE7C
+                bne.s   SKSOZWire_TryDrawIntermediateLink
                 movea.w parent3(a0),a2
                 cmpi.w  #2,$2E(a2)
-                bne.s   loc_4AE7C
+                bne.s   SKSOZWire_TryDrawIntermediateLink
                 cmpi.b  #-$7A,$27(a2)
-                blo.s   loc_4AE7C
+                blo.s   SKSOZWire_TryDrawIntermediateLink
                 bsr.s   BendSozRappelWireSegmentDirection
 
-loc_4AE7C:
+SKSOZWire_TryDrawIntermediateLink:
                 move.w  y_pos(a0),d0
                 addi.w  #$10,d0
                 cmp.w   $40(a0),d0
-                ble.s   locret_4AE90
+                ble.s   SKSOZWire_IntermediateDrawReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_4AE90:
+SKSOZWire_IntermediateDrawReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -459,10 +464,10 @@ locret_4AE90:
 BendSozRappelWireSegmentDirection:
                 move.b  $27(a2),d0
                 btst    #0,status(a2)
-                beq.s   loc_4AEA2
+                beq.s   SKSOZWire_CalcBendVectorAndFrame
                 addi.b  #$80,d0
 
-loc_4AEA2:
+SKSOZWire_CalcBendVectorAndFrame:
                 jsr     (GetSineCosine).l
                 muls.w  #$3C,d0
                 asr.w   #8,d0
@@ -502,21 +507,21 @@ PositionSozRappelPieceFromPreviousLink:
 
 ; ---------------------------------------------------------------------------
 
-loc_4AF0A:
+SKSOZWire_MoveEndAndSaveOldX:
                 move.w  x_pos(a0),d4
                 move.w  y_pos(a0),d5
                 movea.w parent(a0),a1
                 bsr.w   PositionSozRappelPieceFromPreviousLink
                 cmp.w   x_pos(a0),d4
-                beq.s   loc_4AF24
+                beq.s   SKSOZWire_TrySaveOldEndY
                 move.w  d4,$3E(a0)
 
-loc_4AF24:
+SKSOZWire_TrySaveOldEndY:
                 cmp.w   y_pos(a0),d5
-                beq.s   loc_4AF2E
+                beq.s   SKSOZWire_UpdateRidersAndEndPose
                 move.w  d5,$40(a0)
 
-loc_4AF2E:
+SKSOZWire_UpdateRidersAndEndPose:
                 movea.w parent3(a0),a3
                 lea     $38(a0),a2
                 lea     (Player_1).w,a1
@@ -528,17 +533,17 @@ loc_4AF2E:
                 bsr.s   UpdateSozRappelEndpointPlayerAttachment
                 move.b  #$21,mapping_frame(a0)
                 cmpi.w  #3,$2E(a3)
-                bne.s   loc_4AF6A
+                bne.s   SKSOZWire_DrawEndpoint
                 moveq   #0,d0
                 move.b  $37(a3),d0
                 addq.b  #4,d0
                 lsr.w   #4,d0
-                move.b  RawAni_4AF70(pc,d0.w),mapping_frame(a0)
+                move.b  SKSOZWire_TravelEndFrames(pc,d0.w),mapping_frame(a0)
 
-loc_4AF6A:
+SKSOZWire_DrawEndpoint:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-RawAni_4AF70:
+SKSOZWire_TravelEndFrames:
                 dc.b    $24, $25, $26, $26, $21, $22, $22, $23, $24, $25, $26, $26, $21, $22, $22, $23
                 even
 
@@ -546,18 +551,18 @@ RawAni_4AF70:
 
 UpdateSozRappelEndpointPlayerAttachment:
                 tst.b   (a2)
-                beq.w   loc_4B130
-                bmi.w   loc_4B02A
+                beq.w   SKSOZWire_TickRecaptureCooldown
+                bmi.w   SKSOZWire_EjectMarkedRider
                 tst.b   render_flags(a1)
-                bpl.w   loc_4B03C
+                bpl.w   SKSOZWire_ReleaseRiderWithCooldown
                 cmpi.b  #4,routine(a1)
-                bhs.w   loc_4B03C
+                bhs.w   SKSOZWire_ReleaseRiderWithCooldown
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_4B03C
+                bne.w   SKSOZWire_ReleaseRiderWithCooldown
                 cmpi.w  #2,$2E(a3)
-                bne.w   loc_4B04A
+                bne.w   SKSOZWire_PlaceRiderAndSelectPose
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_4B04A
+                beq.w   SKSOZWire_PlaceRiderAndSelectPose
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.w  x_pos(a0),d1
@@ -570,15 +575,15 @@ UpdateSozRappelEndpointPlayerAttachment:
                 move.w  d1,y_vel(a1)
                 move.b  #60,2(a2)
                 btst    #button_left+8,d0
-                beq.s   loc_4AFEA
+                beq.s   SKSOZWire_TrySetJumpRight
                 move.w  #-$200,x_vel(a1)
 
-loc_4AFEA:
+SKSOZWire_TrySetJumpRight:
                 btst    #button_right+8,d0
-                beq.s   loc_4AFF6
+                beq.s   SKSOZWire_ApplyJumpImpulseAndRoll
                 move.w  #$200,x_vel(a1)
 
-loc_4AFF6:
+SKSOZWire_ApplyJumpImpulseAndRoll:
                 addi.w  #-$380,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #1,jumping(a1)
@@ -591,41 +596,41 @@ loc_4AFF6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4B02A:
+SKSOZWire_EjectMarkedRider:
                 move.w  #$300,x_vel(a1)
                 move.w  #$200,y_vel(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_4B03C:
+SKSOZWire_ReleaseRiderWithCooldown:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4B04A:
+SKSOZWire_PlaceRiderAndSelectPose:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addi.w  #$14,y_pos(a1)
                 move.w  $2E(a3),d0
-                bne.s   loc_4B070
+                bne.s   SKSOZWire_TryMode1RiderPose
                 move.b  #$14,anim(a1)
                 move.b  #$92,mapping_frame(a1)
-                bra.s   loc_4B08E
+                bra.s   SKSOZWire_UploadRiderPatterns
 ; ---------------------------------------------------------------------------
 
-loc_4B070:
+SKSOZWire_TryMode1RiderPose:
                 cmpi.w  #1,d0
-                bne.s   loc_4B0B0
+                bne.s   SKSOZWire_TryMode2RiderPose
                 move.b  #$14,anim(a1)
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 add.b   d0,d0
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  RawAni_4B0A0(pc,d0.w),mapping_frame(a1)
+                move.b  SKSOZWire_Mode1RiderFrames(pc,d0.w),mapping_frame(a1)
 
-loc_4B08E:
+SKSOZWire_UploadRiderPatterns:
                 moveq   #0,d0
                 move.b  mapping_frame(a1),d0
                 move.l  a2,-(sp)
@@ -633,70 +638,70 @@ loc_4B08E:
                 movea.l (sp)+,a2
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_4B0A0:
+SKSOZWire_Mode1RiderFrames:
                 dc.b    $93, $92, $92, $92, $91, $91, $90, $90, $90, $90, $90, $91, $91, $92, $92, $92
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4B0B0:
+SKSOZWire_TryMode2RiderPose:
                 cmpi.w  #2,d0
-                bne.s   loc_4B0DE
+                bne.s   SKSOZWire_SetTravelRiderPose
                 move.b  #$14,anim(a1)
                 moveq   #0,d0
                 move.b  angle(a3),d0
                 addq.b  #8,d0
                 lsr.w   #4,d0
-                move.b  RawAni_4B0CE(pc,d0.w),mapping_frame(a1)
-                bra.s   loc_4B08E
+                move.b  SKSOZWire_Mode2RiderFrames(pc,d0.w),mapping_frame(a1)
+                bra.s   SKSOZWire_UploadRiderPatterns
 ; ---------------------------------------------------------------------------
-RawAni_4B0CE:
+SKSOZWire_Mode2RiderFrames:
                 dc.b    $90, $90, $90, $90, $90, $90, $90, $90, $91, $92, $92, $92, $92, $92, $92, $91
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4B0DE:
+SKSOZWire_SetTravelRiderPose:
                 move.b  #0,anim(a1)
                 moveq   #0,d0
                 move.b  $37(a3),d0
                 addq.b  #4,d0
                 lsr.w   #4,d0
-                move.b  RawAni_4B110(pc,d0.w),mapping_frame(a1)
-                move.b  byte_4B120(pc,d0.w),d0
+                move.b  SKSOZWire_TravelRiderFrames(pc,d0.w),mapping_frame(a1)
+                move.b  SKSOZWire_TravelRiderFlipBits(pc,d0.w),d0
                 andi.b  #$FC,render_flags(a1)
                 or.b    d0,render_flags(a1)
                 andi.b  #$FC,status(a1)
                 or.b    d0,status(a1)
-                bra.w   loc_4B08E
+                bra.w   SKSOZWire_UploadRiderPatterns
 ; ---------------------------------------------------------------------------
-RawAni_4B110:
+SKSOZWire_TravelRiderFrames:
                 dc.b    $E4, $E5, $E6, $E6, $E7, $E6, $E6, $E5, $E4, $E8, $E9, $E9, $EA, $E9, $E9, $E8
-byte_4B120:
+SKSOZWire_TravelRiderFlipBits:
                 dc.b    0,   0,   0,   0,   0,   1,   1,   1,   1,   0,   0,   0,   0,   1,   1,   1
                 even
 ; ---------------------------------------------------------------------------
 
-loc_4B130:
+SKSOZWire_TickRecaptureCooldown:
                 tst.b   2(a2)
-                beq.s   loc_4B13E
+                beq.s   SKSOZWire_TryCaptureRider
                 subq.b  #1,2(a2)
-                bne.w   locret_4B1CE
+                bne.w   SKSOZWire_CaptureReturn
 
-loc_4B13E:
+SKSOZWire_TryCaptureRider:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_4B1CE
+                bhs.w   SKSOZWire_CaptureReturn
                 move.w  y_pos(a1),d1
                 sub.w   y_pos(a0),d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_4B1CE
+                bhs.w   SKSOZWire_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_4B1CE
+                bne.s   SKSOZWire_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_4B1CE
+                bhs.s   SKSOZWire_CaptureReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_4B1CE
+                bne.s   SKSOZWire_CaptureReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -716,7 +721,7 @@ loc_4B13E:
                 moveq   #signextendB(sfx_Grab),d0
                 jsr     (Play_SFX).l
 
-locret_4B1CE:
+SKSOZWire_CaptureReturn:
                 rts
 ; End of function UpdateSozRappelEndpointPlayerAttachment
 

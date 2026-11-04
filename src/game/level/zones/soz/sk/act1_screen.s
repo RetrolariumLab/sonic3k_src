@@ -22,7 +22,7 @@ SOZ1_BackgroundInit:
                 jsr     Reset_TileOffsetPositionEff(pc)
                 moveq   #0,d1
                 jsr     (Refresh_PlaneFull).l
-                jmp     loc_55DF2(pc)
+                jmp     SKSOZ1Events_ComposeDistantHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
 SOZ1_BackgroundEvent:
@@ -31,22 +31,22 @@ SOZ1_BackgroundEvent:
 ; ---------------------------------------------------------------------------
 
 SOZ1_BackgroundEvent_Index:
-                bra.w   loc_55A9A
+                bra.w   SKSOZ1Events_TryBeginPyramidRise
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55B04
+                bra.w   SKSOZ1Events_PositionPyramidForRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55B70
+                bra.w   SKSOZ1Events_CheckBossFadeTrigger
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55BCE
+                bra.w   SKSOZ1Events_TickFirstFadeDoorDelay
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55C26
+                bra.w   SKSOZ1Events_TickSecondFadeDelay
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55C84
+                bra.w   SKSOZ1Events_WaitForArtAndEnterAct2
 ; ---------------------------------------------------------------------------
 
-loc_55A9A:
+SKSOZ1Events_TryBeginPyramidRise:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_55ACE
+                beq.s   SKSOZ1Events_SelectCameraMaxY
                 clr.w   (Events_fg_5).w
                 move.w  #-8,(_unkEE9C).w
                 st      (Screen_shake_flag).w
@@ -57,16 +57,16 @@ loc_55A9A:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_55B08
+                bra.s   SKSOZ1Events_RedrawAndLoadPyramid
 ; ---------------------------------------------------------------------------
 
-loc_55ACE:
+SKSOZ1Events_SelectCameraMaxY:
                 move.w  #$B20,d0
                 cmpi.w  #$4000,(Player_1+x_pos).w
-                blo.s   loc_55ADE
+                blo.s   SKSOZ1Events_SetCameraLimitsAndDrawHeat
                 move.w  #$960,d0
 
-loc_55ADE:
+SKSOZ1Events_SetCameraLimitsAndDrawHeat:
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 jsr     TriggerSoz1PyramidCameraLock(pc)
@@ -76,17 +76,17 @@ loc_55ADE:
                 moveq   #0,d1
                 moveq   #$20,d6
                 jsr     (Draw_TileRow).l
-                jmp     loc_55DF2(pc)
+                jmp     SKSOZ1Events_ComposeDistantHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55B04:
+SKSOZ1Events_PositionPyramidForRedraw:
                 jsr     PositionSoz1PyramidBackgroundAndRumble(pc)
 
-loc_55B08:
+SKSOZ1Events_RedrawAndLoadPyramid:
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 move.w  (Camera_Y_pos_BG_copy).w,d2
                 jsr     Draw_PlaneVertBottomUp(pc)
-                bpl.w   loc_55BA2
+                bpl.w   SKSOZ1Events_DrawPyramidDoorAndHeat
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (SOZ1_16x16_Custom_Kos).l,a1
                 lea     (Block_table+$EA0).w,a2
@@ -96,106 +96,108 @@ loc_55B08:
                 jsr     (Queue_Kos_Module).l
                 movem.l (sp)+,d7-a0/a2-a3
                 jsr     (AllocateObject).l
-                bne.s   loc_55B6A
-                move.l  #loc_55F48,(a1)
+                bne.s   SKSOZ1Events_AdvancePyramidState
+                move.l  #SKSOZ1Events_DispatchDoorTimer,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_55B6A
-                move.l  #loc_55F98,(a1)
+                bne.s   SKSOZ1Events_AdvancePyramidState
+                move.l  #SKSOZ1Events_InitPyramidMask,(a1)
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_55B6A
-                move.l  #loc_55FDA,(a1)
+                bne.s   SKSOZ1Events_AdvancePyramidState
+                move.l  #SKSOZ1Events_InitPyramidDoor,(a1)
 
-loc_55B6A:
+; Advance even if only a prefix of the pyramid actors could be allocated
+SKSOZ1Events_AdvancePyramidState:
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_55BA2
+                bra.s   SKSOZ1Events_DrawPyramidDoorAndHeat
 ; ---------------------------------------------------------------------------
 
-loc_55B70:
+; P1 must be at or left of $4378 and at or below $9A8. In Sonic-and-Tails mode, P2 passes if right of $4378 or at or below $9A8
+SKSOZ1Events_CheckBossFadeTrigger:
                 cmpi.w  #$55,(Events_fg_5).w
-                bne.s   loc_55B9E
+                bne.s   SKSOZ1Events_UpdatePyramidRise
                 move.w  #$4378,d0
                 cmp.w   (Player_1+x_pos).w,d0
-                bhi.s   loc_55B9E
+                bhi.s   SKSOZ1Events_UpdatePyramidRise
                 cmpi.w  #$9A8,(Player_1+y_pos).w
-                blo.s   loc_55B9E
+                blo.s   SKSOZ1Events_UpdatePyramidRise
                 tst.w   (Player_mode).w
-                bne.s   loc_55BB4
+                bne.s   SKSOZ1Events_InitFirstFadeAndDoorDelay
                 cmp.w   (Player_2+x_pos).w,d0
-                blo.s   loc_55BB4
+                blo.s   SKSOZ1Events_InitFirstFadeAndDoorDelay
                 cmpi.w  #$9A8,(Player_2+y_pos).w
-                bhs.s   loc_55BB4
+                bhs.s   SKSOZ1Events_InitFirstFadeAndDoorDelay
 
-loc_55B9E:
+SKSOZ1Events_UpdatePyramidRise:
                 jsr     SOZ1_UpdatePyramidRise(pc)
 
-loc_55BA2:
+SKSOZ1Events_DrawPyramidDoorAndHeat:
                 jsr     (DrawBGAsYouMove).l
                 jsr     ApplySoz1PyramidDoorChunkRequest(pc)
                 jsr     ComposeSoz1PyramidPairedHeatScroll(pc)
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55BB4:
+SKSOZ1Events_InitFirstFadeAndDoorDelay:
                 move.w  #$10-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$04).w
                 move.w  #$10,(Events_bg+$06).w
                 st      (Palette_fade_timer).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_55BCE:
+SKSOZ1Events_TickFirstFadeDoorDelay:
                 tst.w   (Events_bg+$06).w
-                beq.s   loc_55BE0
+                beq.s   SKSOZ1Events_TryFadeFirstRange
                 subq.w  #1,(Events_bg+$06).w
-                bne.s   loc_55BFE
+                bne.s   SKSOZ1Events_DrawPyramidDuringFade
                 st      (Events_bg+$02).w
-                bra.s   loc_55BFE
+                bra.s   SKSOZ1Events_DrawPyramidDuringFade
 ; ---------------------------------------------------------------------------
 
-loc_55BE0:
+SKSOZ1Events_TryFadeFirstRange:
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_55BFE
+                bne.s   SKSOZ1Events_DrawPyramidDuringFade
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_55BFE
+                beq.s   SKSOZ1Events_DrawPyramidDuringFade
                 move.l  a0,-(sp)
                 jsr     (Pal_ToBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$04).w
-                bmi.s   loc_55C10
+                bmi.s   SKSOZ1Events_InitSecondFadeDelay
 
-loc_55BFE:
+SKSOZ1Events_DrawPyramidDuringFade:
                 jsr     SOZ1_UpdatePyramidRise(pc)
                 jsr     (DrawBGAsYouMove).l
                 jsr     ApplySoz1PyramidDoorChunkRequest(pc)
                 jmp     ComposeSoz1PyramidPairedHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55C10:
+SKSOZ1Events_InitSecondFadeDelay:
                 move.w  #$4020-1,(Palette_fade_info).w
                 move.w  #$15,(Events_bg+$04).w
                 move.w  #8,(Events_bg+$06).w
                 addq.w  #4,(Events_routine_bg).w
 
-loc_55C26:
+SKSOZ1Events_TickSecondFadeDelay:
                 tst.w   (Events_bg+$06).w
-                beq.s   loc_55C32
+                beq.s   SKSOZ1Events_TryFadeSecondRange
                 subq.w  #1,(Events_bg+$06).w
-                bra.s   loc_55C4A
+                bra.s   SKSOZ1Events_DrawHeatDuringSecondFade
 ; ---------------------------------------------------------------------------
 
-loc_55C32:
+SKSOZ1Events_TryFadeSecondRange:
                 btst    #0,(Level_frame_counter+1).w
-                beq.s   loc_55C4A
+                beq.s   SKSOZ1Events_DrawHeatDuringSecondFade
                 move.l  a0,-(sp)
                 jsr     (Pal_ToBlack).l
                 movea.l (sp)+,a0
                 subq.w  #1,(Events_bg+$04).w
-                bmi.s   loc_55C4E
+                bmi.s   SKSOZ1Events_QueueAct2Resources
 
-loc_55C4A:
+SKSOZ1Events_DrawHeatDuringSecondFade:
                 jmp     ComposeSoz1PyramidPairedHeatScroll(pc)
 ; ---------------------------------------------------------------------------
 
-loc_55C4E:
+SKSOZ1Events_QueueAct2Resources:
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (SOZ2_16x16_Secondary_Kos).l,a1
                 lea     (Block_table+$EA0).w,a2
@@ -210,9 +212,9 @@ loc_55C4E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55C84:
+SKSOZ1Events_WaitForArtAndEnterAct2:
                 tst.b   (Kos_modules_left).w
-                bne.w   locret_55D54
+                bne.w   SKSOZ1Events_Act2TransitionReturn
                 move.w  #$801,(Current_zone_and_act).w
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -225,10 +227,10 @@ loc_55C84:
                 jsr     (LoadSolids).l
                 moveq   #PalID_SonicTails,d0
                 cmpi.w  #3,(Player_mode).w
-                bne.s   loc_55CC6
+                bne.s   SKSOZ1Events_LoadAct2TransitionPalettes
                 moveq   #PalID_Knuckles,d0
 
-loc_55CC6:
+SKSOZ1Events_LoadAct2TransitionPalettes:
                 jsr     (LoadPalette).l
                 moveq   #PalID_SOZ2,d0
                 jsr     (LoadPalette).l
@@ -239,9 +241,9 @@ loc_55CC6:
                 lea     (Normal_palette_line_3).w,a1
                 moveq   #bytesToLcnt($40),d0
 
-loc_55CEA:
+SKSOZ1Events_ClearPaletteAndRebaseAct2:
                 clr.l   (a1)+
-                dbf     d0,loc_55CEA
+                dbf     d0,SKSOZ1Events_ClearPaletteAndRebaseAct2
                 move.w  (Player_1+x_pos).w,d2
                 sub.w   (Player_2+x_pos).w,d2
                 move.w  (Player_1+y_pos).w,d3
@@ -269,7 +271,7 @@ loc_55CEA:
                 clr.w   (Events_fg_5).w
                 clr.w   (Events_routine_bg).w
 
-locret_55D54:
+SKSOZ1Events_Act2TransitionReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -294,12 +296,12 @@ BuildSoz1DistantBackgroundBands:
                 lea     (HScroll_table).w,a1
                 moveq   #7-1,d2
 
-loc_55D86:
+SKSOZ1Events_WriteDistantScrollBands:
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
-                dbf     d2,loc_55D86
+                dbf     d2,SKSOZ1Events_WriteDistantScrollBands
                 rts
 ; End of function BuildSoz1DistantBackgroundBands
 
@@ -322,15 +324,15 @@ SOZ1_UpdatePyramidRise:
 
 PositionSoz1PyramidBackgroundAndRumble:
                 tst.w   (Screen_shake_flag).w
-                bpl.s   loc_55DD0
+                bpl.s   SKSOZ1Events_SetPyramidBackgroundPos
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_55DD0
+                bne.s   SKSOZ1Events_SetPyramidBackgroundPos
                 moveq   #signextendB(sfx_Rumble2),d0
                 jsr     (Play_SFX).l
 
-loc_55DD0:
+SKSOZ1Events_SetPyramidBackgroundPos:
                 move.w  (Camera_Y_pos_copy).w,d0
                 subi.w  #$900,d0
                 add.w   (_unkEE9C).w,d0
@@ -344,7 +346,7 @@ loc_55DD0:
 
 ; ---------------------------------------------------------------------------
 
-loc_55DF2:
+SKSOZ1Events_ComposeDistantHeatScroll:
                 lea     (HScroll_table+$010).w,a1
                 lea     AIZ2_SOZ1_LRZ3_FGDeformDelta(pc),a6
                 move.w  (Camera_Y_pos_copy).w,d0
@@ -360,7 +362,7 @@ loc_55DF2:
                 jsr     MakeFGDeformArray(pc)
                 lea     (H_scroll_buffer).w,a1
                 lea     (HScroll_table+$010).w,a2
-                lea     word_560DC(pc),a4
+                lea     SKSOZ1Events_DistantHeatBandSpans(pc),a4
                 lea     (HScroll_table).w,a5
                 lea     AIZ2_SOZ1_LRZ3_FGDeformDelta(pc),a6
                 move.w  (Camera_Y_pos_BG_copy).w,d0
@@ -391,7 +393,7 @@ ComposeSoz1PyramidPairedHeatScroll:
                 neg.w   d1
                 move.w  #$70-1,d2
 
-loc_55E78:
+SKSOZ1Events_WritePyramidHeatPairs:
                 move.w  (a6)+,d3
                 move.w  d3,d4
                 add.w   d0,d3
@@ -404,7 +406,7 @@ loc_55E78:
                 add.w   d1,d4
                 move.w  d3,(a1)+
                 move.w  d4,(a1)+
-                dbf     d2,loc_55E78
+                dbf     d2,SKSOZ1Events_WritePyramidHeatPairs
                 rts
 ; End of function ComposeSoz1PyramidPairedHeatScroll
 
@@ -413,16 +415,16 @@ loc_55E78:
 TriggerSoz1PyramidCameraLock:
                 move.w  (Camera_max_Y_pos).w,d0
                 cmpi.w  #$960,d0
-                bne.s   locret_55EBC
+                bne.s   SKSOZ1Events_CameraLockReturn
                 cmp.w   (Camera_Y_pos).w,d0
-                bhi.s   locret_55EBC
+                bhi.s   SKSOZ1Events_CameraLockReturn
                 move.w  d0,(Camera_min_Y_pos).w
                 cmpi.w  #$4310,(Camera_X_pos).w
-                blo.s   locret_55EBC
+                blo.s   SKSOZ1Events_CameraLockReturn
                 move.w  #$4180,(Camera_min_X_pos).w
                 st      (Events_fg_5).w
 
-locret_55EBC:
+SKSOZ1Events_CameraLockReturn:
                 rts
 ; End of function TriggerSoz1PyramidCameraLock
 
@@ -430,25 +432,25 @@ locret_55EBC:
 
 ApplySoz1PyramidDoorChunkRequest:
                 move.w  (Events_bg+$00).w,d0
-                beq.s   locret_55EFA
+                beq.s   SKSOZ1Events_DoorPatchReturn
                 clr.w   (Events_bg+$00).w
                 movea.w $18(a3),a1
                 move.b  d0,$D(a1)
                 cmpi.w  #$540,(Camera_X_pos_BG_copy).w
-                blo.s   locret_55EFA
+                blo.s   SKSOZ1Events_DoorPatchReturn
                 move.w  #$6A0,d1
                 move.w  #$320,d0
                 moveq   #5,d6
                 moveq   #6-1,d2
 
-loc_55EE4:
+SKSOZ1Events_RedrawDoorTileRows:
                 movem.w d0-d2/d6,-(sp)
                 jsr     (Setup_TileRowDraw).l
                 movem.w (sp)+,d0-d2/d6
                 addi.w  #$10,d0
-                dbf     d2,loc_55EE4
+                dbf     d2,SKSOZ1Events_RedrawDoorTileRows
 
-locret_55EFA:
+SKSOZ1Events_DoorPatchReturn:
                 rts
 ; End of function ApplySoz1PyramidDoorChunkRequest
 
@@ -457,22 +459,22 @@ locret_55EFA:
 InitializeSoz2DarkTransitionPalettes:
                 lea     (Normal_palette_line_3+$2).w,a1
                 lea     (Target_palette_line_3+$2).w,a5
-                lea     word_560EA(pc),a6
+                lea     SKSOZ1Events_DarkPaletteLine3(pc),a6
                 moveq   #$B-1,d0
 
-loc_55F0A:
+SKSOZ1Events_CopyDarkPaletteLine3:
                 move.w  (a6),(a1)+
                 move.w  (a6)+,(a5)+
-                dbf     d0,loc_55F0A
+                dbf     d0,SKSOZ1Events_CopyDarkPaletteLine3
                 lea     (Normal_palette_line_4+$2).w,a1
                 lea     (Target_palette_line_4+$2).w,a5
-                lea     word_56100(pc),a6
+                lea     SKSOZ1Events_DarkPaletteLine4(pc),a6
                 moveq   #$F-1,d0
 
-loc_55F20:
+SKSOZ1Events_CopyDarkLine4AndInitTimers:
                 move.w  (a6),(a1)+
                 move.w  (a6)+,(a5)+
-                dbf     d0,loc_55F20
+                dbf     d0,SKSOZ1Events_CopyDarkLine4AndInitTimers
                 move.b  #5,(SOZ_darkness_level).w
                 move.w  #(30*60)-1,(Palette_cycle_counter1).w
                 move.b  #0,(Palette_cycle_counters+$00).w
@@ -483,69 +485,70 @@ loc_55F20:
 
 ; ---------------------------------------------------------------------------
 
-loc_55F48:
+SKSOZ1Events_DispatchDoorTimer:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                jmp     loc_55F52(pc,d0.w)
+                jmp     SKSOZ1Events_DoorTimerBranches(pc,d0.w)
 ; ---------------------------------------------------------------------------
 
-loc_55F52:
-                bra.w   loc_55F5E
+SKSOZ1Events_DoorTimerBranches:
+                bra.w   SKSOZ1Events_WaitForShakeToEnd
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55F6E
+                bra.w   SKSOZ1Events_TickDoorOpenDelay
 ; ---------------------------------------------------------------------------
-                bra.w   loc_55F7C
+                bra.w   SKSOZ1Events_WaitForDoorAndTryMiniboss
 ; ---------------------------------------------------------------------------
 
-loc_55F5E:
+SKSOZ1Events_WaitForShakeToEnd:
                 tst.w   (Screen_shake_flag).w
-                bne.s   locret_55F96
+                bne.s   SKSOZ1Events_DoorTimerReturn
                 move.w  #60,$2E(a0)
                 addq.b  #4,routine(a0)
 
-loc_55F6E:
+SKSOZ1Events_TickDoorOpenDelay:
                 subq.w  #1,$2E(a0)
-                bne.s   locret_55F96
+                bne.s   SKSOZ1Events_DoorTimerReturn
                 st      (Events_bg+$02).w
                 addq.b  #4,routine(a0)
 
-loc_55F7C:
+SKSOZ1Events_WaitForDoorAndTryMiniboss:
                 tst.w   (Events_bg+$02).w
-                bne.s   locret_55F96
+                bne.s   SKSOZ1Events_DoorTimerReturn
                 jsr     (AllocateObject).l
-                bne.s   loc_55F90
+                bne.s   SKSOZ1Events_DeleteDoorTimer
                 move.l  #Obj_SOZMiniboss,(a1)
 
-loc_55F90:
+SKSOZ1Events_DeleteDoorTimer:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_55F96:
+SKSOZ1Events_DoorTimerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_55F98:
-                move.l  #loc_55FBE,(a0)
+SKSOZ1Events_InitPyramidMask:
+                move.l  #SKSOZ1Events_CheckMaskAct,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$24,width_pixels(a0)
                 move.w  #$200,priority(a0)
                 move.l  #Map_SOZ1EndDoor,mappings(a0)
                 move.w  #$A00,y_pos(a0)
 
-loc_55FBE:
+SKSOZ1Events_CheckMaskAct:
                 tst.b   (Current_act).w
-                beq.s   loc_55FCA
+                beq.s   SKSOZ1Events_FollowCameraAndDrawMask
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55FCA:
+SKSOZ1Events_FollowCameraAndDrawMask:
                 move.w  (Camera_X_pos).w,x_pos(a0)
                 st      (Spritemask_flag).w
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_55FDA:
-                move.l  #loc_56012,(a0)
+; This actor uses the X and Y velocity words for its base coordinates
+SKSOZ1Events_InitPyramidDoor:
+                move.l  #SKSOZ1Events_WaitForDoorOpenSignal,(a0)
                 move.b  #4,render_flags(a0)
                 move.b  #$24,width_pixels(a0)
                 move.w  #$380,priority(a0)
@@ -555,61 +558,62 @@ loc_55FDA:
                 move.w  #$9D4,y_vel(a0)
                 move.b  #1,mapping_frame(a0)
 
-loc_56012:
+SKSOZ1Events_WaitForDoorOpenSignal:
                 bclr    #7,render_flags(a0)
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_56020
+                bne.s   SKSOZ1Events_BeginDoorOpening
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56020:
+SKSOZ1Events_BeginDoorOpening:
                 moveq   #signextendB(sfx_DoorOpen),d0
                 jsr     (Play_SFX).l
                 move.w  #$F6,(Events_bg+$00).w
-                move.l  #loc_56034,(a0)
+                move.l  #SKSOZ1Events_StepDoorOpening,(a0)
 
-loc_56034:
+; Compute position first, then clamp the stored offset and acknowledge the opening
+SKSOZ1Events_StepDoorOpening:
                 moveq   #1,d0
                 bsr.s   StepSoz1PyramidDoorWithJitter
                 cmpi.w  #$58,$2E(a0)
-                blo.s   loc_56050
+                blo.s   SKSOZ1Events_DrawOpeningDoor
                 move.w  #$58,$2E(a0)
                 clr.w   (Events_bg+$02).w
-                move.l  #loc_56056,(a0)
+                move.l  #SKSOZ1Events_CheckOpenDoorAct,(a0)
 
-loc_56050:
+SKSOZ1Events_DrawOpeningDoor:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_56056:
+SKSOZ1Events_CheckOpenDoorAct:
                 tst.b   (Current_act).w
-                beq.s   loc_56062
+                beq.s   SKSOZ1Events_WaitForDoorCloseSignal
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_56062:
+SKSOZ1Events_WaitForDoorCloseSignal:
                 bclr    #7,render_flags(a0)
                 tst.w   (Events_bg+$02).w
-                bne.s   loc_56070
+                bne.s   SKSOZ1Events_BeginDoorClosing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56070:
+SKSOZ1Events_BeginDoorClosing:
                 moveq   #signextendB(sfx_DoorOpen),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_5607E,(a0)
+                move.l  #SKSOZ1Events_StepDoorClosing,(a0)
 
-loc_5607E:
+SKSOZ1Events_StepDoorClosing:
                 moveq   #-1,d0
                 bsr.s   StepSoz1PyramidDoorWithJitter
                 tst.w   $2E(a0)
-                bpl.s   loc_5609C
+                bpl.s   SKSOZ1Events_DrawClosingDoor
                 clr.w   $2E(a0)
                 move.w  #$FD,(Events_bg+$00).w
                 clr.w   (Events_bg+$02).w
-                move.l  #loc_56012,(a0)
+                move.l  #SKSOZ1Events_WaitForDoorOpenSignal,(a0)
 
-loc_5609C:
+SKSOZ1Events_DrawClosingDoor:
                 jmp     (Draw_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -617,10 +621,10 @@ loc_5609C:
 StepSoz1PyramidDoorWithJitter:
                 move.w  (Level_frame_counter).w,d1
                 andi.w  #3,d1
-                bne.s   loc_560AE
+                bne.s   SKSOZ1Events_ApplyDoorOffsetAndJitter
                 add.w   d0,d0
 
-loc_560AE:
+SKSOZ1Events_ApplyDoorOffsetAndJitter:
                 add.w   d0,$2E(a0)
                 move.w  $1A(a0),d0
                 add.w   $2E(a0),d0
@@ -636,11 +640,11 @@ loc_560AE:
 ; End of function StepSoz1PyramidDoorWithJitter
 
 ; ---------------------------------------------------------------------------
-word_560DC:
+SKSOZ1Events_DistantHeatBandSpans:
                 dc.w    $110,     8,     8,     8,     8,     8, $7FFF
-word_560EA:
+SKSOZ1Events_DarkPaletteLine3:
                 dc.w    $C46,  $824,  $804,  $402,  $202,  $200,     0,  $422,  $402,  $200,   $40
-word_56100:
+SKSOZ1Events_DarkPaletteLine4:
                 dc.w    $6AE,  $664,  $422,  $402,  $200,     0,     0,  $EEE,  $466,  $224,     0,   $46,  $6EE,  $48C,  $26A
 Map_SOZ1EndDoor:
                 include "src/objects/shared/zones/soz/act1/mappings/end_door.s"

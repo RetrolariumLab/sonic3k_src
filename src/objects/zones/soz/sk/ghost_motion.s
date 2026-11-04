@@ -15,12 +15,12 @@ set_Hyudoro_body_init:
                 add.w   d1,d1
                 move.w  Hyudoro_init_spd_tbl(pc,d1.w),d2
                 cmpi.w  #$120,d0
-                bhs.s   ._100
+                bhs.s   .SetSpeedAndAppearance
                 bset    #0,render_flags(a0)
                 neg.w   d2
 
 ; loc_8F564:
-                ._100:
+                .SetSpeedAndAppearance:
                 move.w  d2,x_vel(a0)
                 andi.w  #$C,d1
                 move.l  .pg_tbl(pc,d1.w),$30(a0)
@@ -51,23 +51,23 @@ set_puka_init:
                 add.w   d0,d0
                 move.w  Hyudoro_init_spd_tbl(pc,d0.w),d1
                 tst.w   x_vel(a0)
-                bmi.s   ._100
+                bmi.s   .SetSpeedAndInitBob
                 neg.w   d1
 
 ; loc_8F5A2:
-                ._100:
+                .SetSpeedAndInitBob:
                 move.w  d1,x_vel(a0)
                 add.w   d0,d0
                 movea.l .puka_tbl(pc,d0.w),a1
                 bclr    #0,$38(a0)
                 jsr     (a1)
                 tst.w   y_vel(a0)
-                bpl.s   ._200
+                bpl.s   .StoreSignedBobSpeed
                 bset    #0,$38(a0)
                 neg.w   d0
 
 ; loc_8F5C2:
-                ._200:
+                .StoreSignedBobSpeed:
                 move.w  d0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------

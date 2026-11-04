@@ -11,9 +11,9 @@ Obj_SOZRisingSandWall:
                 move.b  #$34,height_pixels(a0)
                 move.w  #$280,priority(a0)
                 move.w  #$19,$30(a0)
-                move.l  #loc_40B48,(a0)
+                move.l  #SKSOZSandWall_CheckBothForActivation,(a0)
 
-loc_40B48:
+SKSOZSandWall_CheckBothForActivation:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 move.w  d1,d2
@@ -22,7 +22,7 @@ loc_40B48:
                 bsr.s   ActivateSozRisingSandWallNearPlayer
                 lea     (Player_2).w,a1
                 bsr.s   ActivateSozRisingSandWallNearPlayer
-                bra.w   loc_40C0E
+                bra.w   SKSOZSandWall_CheckSolidAndDraw
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -31,14 +31,14 @@ ActivateSozRisingSandWallNearPlayer:
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
                 cmp.w   d2,d0
-                bhs.w   locret_40BC8
+                bhs.w   SKSOZSandWall_ActivationReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$A4,d0
                 cmpi.w  #$C0,d0
-                bhs.s   locret_40BC8
+                bhs.s   SKSOZSandWall_ActivationReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_40BC8
+                bne.s   SKSOZSandWall_ActivationReturn
                 bset    #6,render_flags(a0)
                 move.w  #2,mainspr_childsprites(a0)
                 lea     sub2_x_pos(a0),a2
@@ -52,34 +52,34 @@ ActivateSozRisingSandWallNearPlayer:
                 move.b  #3,anim_frame_timer(a0)
                 moveq   #signextendB(sfx_SandwallRise),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_40BCA,(a0)
+                move.l  #SKSOZSandWall_AnimateAnchoredRiseDust,(a0)
 
-locret_40BC8:
+SKSOZSandWall_ActivationReturn:
                 rts
 ; End of function ActivateSozRisingSandWallNearPlayer
 
 ; ---------------------------------------------------------------------------
 
-loc_40BCA:
+SKSOZSandWall_AnimateAnchoredRiseDust:
                 lea     sub2_x_pos(a0),a2
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_40BEC
+                bpl.s   SKSOZSandWall_StepRiseAndCheckEnd
                 move.b  #3,anim_frame_timer(a0)
                 addq.b  #1,sub2_mapframe(a0)
                 cmpi.b  #$D,sub2_mapframe(a0)
-                blo.s   loc_40BEC
+                blo.s   SKSOZSandWall_StepRiseAndCheckEnd
                 move.b  #9,sub2_mapframe(a0)
 
-loc_40BEC:
+SKSOZSandWall_StepRiseAndCheckEnd:
                 subq.w  #4,y_pos(a0)
                 move.w  y_pos(a0),$20(a0)
                 subq.w  #1,$30(a0)
-                bpl.s   loc_40C0E
+                bpl.s   SKSOZSandWall_CheckSolidAndDraw
                 bclr    #6,render_flags(a0)
                 move.w  #0,mainspr_childsprites(a0)
-                move.l  #loc_40C2A,(a0)
+                move.l  #SKSOZSandWall_CheckSolidAndP1Roll,(a0)
 
-loc_40C0E:
+SKSOZSandWall_CheckSolidAndDraw:
                 move.w  #$17,d1
                 move.w  #$34,d2
                 move.w  #$35,d3
@@ -88,7 +88,7 @@ loc_40C0E:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_40C2A:
+SKSOZSandWall_CheckSolidAndP1Roll:
                 move.w  #$17,d1
                 move.w  #$34,d2
                 move.w  #$35,d3
@@ -96,69 +96,69 @@ loc_40C2A:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 andi.w  #3,d6
-                beq.w   loc_40CE6
+                beq.w   SKSOZSandWall_DrawWall
                 btst    #0,d6
-                beq.s   loc_40C66
+                beq.s   SKSOZSandWall_TryBreakWithP2Roll
                 lea     (Player_1).w,a1
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_40C66
+                bne.s   SKSOZSandWall_TryBreakWithP2Roll
                 asr     x_vel(a1)
                 asr     ground_vel(a1)
-                bra.s   loc_40C80
+                bra.s   SKSOZSandWall_BeginDissolveAndRelease
 ; ---------------------------------------------------------------------------
 
-loc_40C66:
+SKSOZSandWall_TryBreakWithP2Roll:
                 btst    #1,d6
-                beq.s   loc_40CE6
+                beq.s   SKSOZSandWall_DrawWall
                 lea     (Player_2).w,a1
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_40CE6
+                bne.s   SKSOZSandWall_DrawWall
                 asr     x_vel(a1)
                 asr     ground_vel(a1)
 
-loc_40C80:
+SKSOZSandWall_BeginDissolveAndRelease:
                 moveq   #signextendB(sfx_SandSplash),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_40CEC,(a0)
+                move.l  #SKSOZSandWall_TickDissolve,(a0)
                 move.b  #5,anim_frame_timer(a0)
                 move.b  #1,mapping_frame(a0)
                 lea     (Player_1).w,a1
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_40CB2
+                beq.s   SKSOZSandWall_ClearP1Push
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_40CB2:
+SKSOZSandWall_ClearP1Push:
                 bclr    #p1_pushing_bit,status(a0)
-                beq.s   loc_40CC0
+                beq.s   SKSOZSandWall_ReleaseP2Standing
                 bclr    #Status_Push,status(a1)
 
-loc_40CC0:
+SKSOZSandWall_ReleaseP2Standing:
                 lea     (Player_2).w,a1
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_40CD8
+                beq.s   SKSOZSandWall_ClearP2Push
                 bclr    #Status_OnObj,status(a1)
                 bset    #Status_InAir,status(a1)
 
-loc_40CD8:
+SKSOZSandWall_ClearP2Push:
                 bclr    #p2_pushing_bit,status(a0)
-                beq.s   loc_40CE6
+                beq.s   SKSOZSandWall_DrawWall
                 bclr    #Status_Push,status(a1)
 
-loc_40CE6:
+SKSOZSandWall_DrawWall:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_40CEC:
+SKSOZSandWall_TickDissolve:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_40D0A
+                bpl.s   SKSOZSandWall_DrawDissolve
                 move.b  #5,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #9,mapping_frame(a0)
-                blo.s   loc_40D0A
+                blo.s   SKSOZSandWall_DrawDissolve
                 move.w  #$7F00,x_pos(a0)
 
-loc_40D0A:
+SKSOZSandWall_DrawDissolve:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_SOZRisingSandWall:

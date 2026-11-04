@@ -2,7 +2,7 @@
 ; Responsibility: Floating pillar motion, player riding and mapping resources
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
-byte_4116A:
+SKSOZFloatPillar_ShapeAttributes:
                 dc.b    $20, $40,   0,   0
                 dc.b    $20, $50,   1, $30
                 dc.b    $20, $50,   2,  $C
@@ -20,7 +20,7 @@ Obj_SOZFloatingPillar:
                 move.b  subtype(a0),d0
                 lsr.w   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_4116A(pc,d0.w),a2
+                lea     SKSOZFloatPillar_ShapeAttributes(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a0)
                 move.b  (a2)+,height_pixels(a0)
                 move.b  (a2)+,mapping_frame(a0)
@@ -28,12 +28,12 @@ Obj_SOZFloatingPillar:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 add.w   d0,d0
-                move.w  off_41210(pc,d0.w),d0
-                lea     off_41210(pc,d0.w),a1
+                move.w  SKSOZFloatPillar_MotionOffsets(pc,d0.w),d0
+                lea     SKSOZFloatPillar_MotionOffsets(pc,d0.w),a1
                 move.l  a1,$30(a0)
-                move.l  #loc_411D8,(a0)
+                move.l  #SKSOZFloatPillar_MoveAndCheckSolid,(a0)
 
-loc_411D8:
+SKSOZFloatPillar_MoveAndCheckSolid:
                 move.w  x_pos(a0),-(sp)
                 movea.l $30(a0),a1
                 jsr     (a1)
@@ -48,119 +48,119 @@ loc_411D8:
                 jsr     (SolidObjectFull).l
                 swap    d6
                 and.b   $34(a0),d6
-                bne.s   loc_4121E
+                bne.s   SKSOZFloatPillar_CheckTopSpikes
 
-loc_41206:
+SKSOZFloatPillar_CullAtOriginAndDraw:
                 move.w  $44(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
-off_41210:
-                dc.w    locret_4126E-off_41210
-                dc.w    loc_41270-off_41210
-                dc.w    loc_4127C-off_41210
-                dc.w    loc_41288-off_41210
-                dc.w    loc_412A8-off_41210
-                dc.w    loc_412B4-off_41210
-                dc.w    loc_412C0-off_41210
+SKSOZFloatPillar_MotionOffsets:
+                dc.w    SKSOZFloatPillar_Stationary-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateX32-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateX64-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateX128-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateY32-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateY64-SKSOZFloatPillar_MotionOffsets
+                dc.w    SKSOZFloatPillar_OscillateY128-SKSOZFloatPillar_MotionOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4121E:
+SKSOZFloatPillar_CheckTopSpikes:
                 cmpi.b  #1,mapping_frame(a0)
-                bne.s   loc_4124A
+                bne.s   SKSOZFloatPillar_CheckP1UnderContact
                 move.b  d6,d0
                 andi.b  #$10,d0
-                beq.s   loc_41238
+                beq.s   SKSOZFloatPillar_CheckP2TopContact
                 lea     (Player_1).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_41238:
+SKSOZFloatPillar_CheckP2TopContact:
                 andi.b  #$20,d6
-                beq.s   loc_41248
+                beq.s   SKSOZFloatPillar_DrawAfterTopContact
                 lea     (Player_2).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_41248:
-                bra.s   loc_41206
+SKSOZFloatPillar_DrawAfterTopContact:
+                bra.s   SKSOZFloatPillar_CullAtOriginAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_4124A:
+SKSOZFloatPillar_CheckP1UnderContact:
                 move.b  d6,d0
                 andi.b  #4,d0
-                beq.s   loc_4125C
+                beq.s   SKSOZFloatPillar_CheckP2UnderContact
                 lea     (Player_1).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_4125C:
+SKSOZFloatPillar_CheckP2UnderContact:
                 andi.b  #8,d6
-                beq.s   loc_4126C
+                beq.s   SKSOZFloatPillar_DrawAfterUnderContact
                 lea     (Player_2).w,a1
                 jsr     (HurtPlayerFromSolidHazard).l
 
-loc_4126C:
-                bra.s   loc_41206
+SKSOZFloatPillar_DrawAfterUnderContact:
+                bra.s   SKSOZFloatPillar_CullAtOriginAndDraw
 ; ---------------------------------------------------------------------------
 
-locret_4126E:
+SKSOZFloatPillar_Stationary:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_41270:
+SKSOZFloatPillar_OscillateX32:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
                 subi.w  #$20,d0
-                bra.s   loc_41294
+                bra.s   SKSOZFloatPillar_MirrorOffsetX
 ; ---------------------------------------------------------------------------
 
-loc_4127C:
+SKSOZFloatPillar_OscillateX64:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 subi.w  #$40,d0
-                bra.s   loc_41294
+                bra.s   SKSOZFloatPillar_MirrorOffsetX
 ; ---------------------------------------------------------------------------
 
-loc_41288:
+SKSOZFloatPillar_OscillateX128:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$3A).w,d0
                 add.w   d0,d0
                 subi.w  #$80,d0
 
-loc_41294:
+SKSOZFloatPillar_MirrorOffsetX:
                 btst    #0,status(a0)
-                beq.s   loc_4129E
+                beq.s   SKSOZFloatPillar_ApplyOffsetX
                 neg.w   d0
 
-loc_4129E:
+SKSOZFloatPillar_ApplyOffsetX:
                 add.w   $44(a0),d0
                 move.w  d0,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_412A8:
+SKSOZFloatPillar_OscillateY32:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$0A).w,d0
                 subi.w  #$20,d0
-                bra.s   loc_412CC
+                bra.s   SKSOZFloatPillar_MirrorOffsetY
 ; ---------------------------------------------------------------------------
 
-loc_412B4:
+SKSOZFloatPillar_OscillateY64:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$1E).w,d0
                 subi.w  #$40,d0
-                bra.s   loc_412CC
+                bra.s   SKSOZFloatPillar_MirrorOffsetY
 ; ---------------------------------------------------------------------------
 
-loc_412C0:
+SKSOZFloatPillar_OscillateY128:
                 moveq   #0,d0
                 move.b  (Oscillating_table+$3A).w,d0
                 add.w   d0,d0
                 subi.w  #$80,d0
 
-loc_412CC:
+SKSOZFloatPillar_MirrorOffsetY:
                 btst    #0,status(a0)
-                beq.s   loc_412D6
+                beq.s   SKSOZFloatPillar_ApplyOffsetY
                 neg.w   d0
 
-loc_412D6:
+SKSOZFloatPillar_ApplyOffsetY:
                 add.w   $46(a0),d0
                 move.w  d0,y_pos(a0)
                 rts

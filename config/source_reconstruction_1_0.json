@@ -1119,9 +1119,15 @@
       "commits": ["478182c6b3f2a0547c3c72008a953976d7c29045"]
     },
     {
-      "id": "current-shorten-30-zone-mhz",
+      "id": "change-145517068793",
       "kind": "source_or_tooling",
       "summary": "Apply 386 reviewed short labels for mhz.",
+      "commits": ["145517068793ee633f25ac780fd20c60426723c4"]
+    },
+    {
+      "id": "current-shorten-31-zone-soz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 548 reviewed short labels for soz.",
       "commits": ["release-commit"]
     }
   ],

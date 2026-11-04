@@ -62,7 +62,7 @@ SpecialEvents_Index:
                 dc.l    AIZ2_DoShipLoop
                 dc.l    SKMHZ1Events_WrapChaseCameraAndPlayers
                 dc.l    SKMHZ2BG_StepChaseCamera
-                dc.l    loc_569BA
+                dc.l    SKSOZ2BG_StepSandCollisionOffset
                 dc.l    loc_59E46
 ; ---------------------------------------------------------------------------
 

@@ -1,21 +1,21 @@
 ; Data owner: objects/shared/zones/soz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SOZRisingSandWall_:
-                dc.w    word_40D2C-Map_SOZRisingSandWall_
-                dc.w    word_40D58-Map_SOZRisingSandWall_
-                dc.w    word_40D84-Map_SOZRisingSandWall_
-                dc.w    word_40DB0-Map_SOZRisingSandWall_
-                dc.w    word_40DD6-Map_SOZRisingSandWall_
-                dc.w    word_40DF6-Map_SOZRisingSandWall_
-                dc.w    word_40E10-Map_SOZRisingSandWall_
-                dc.w    word_40E24-Map_SOZRisingSandWall_
-                dc.w    word_40E32-Map_SOZRisingSandWall_
-                dc.w    word_40E3A-Map_SOZRisingSandWall_
-                dc.w    word_40E42-Map_SOZRisingSandWall_
-                dc.w    word_40E4A-Map_SOZRisingSandWall_
-                dc.w    word_40E52-Map_SOZRisingSandWall_
-                dc.w    word_40E5A-Map_SOZRisingSandWall_
-word_40D2C:     dc.w    7
+                dc.w    SOZMap_RisingSandWall_IntactSevenPieces-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_FractureCap1-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_FractureCap2-Map_SOZRisingSandWall_
+                dc.w    SOZMap_RisingSandWall_FractureSixPieces-Map_SOZRisingSandWall_
+                dc.w    SOZMap_RisingSandWall_FractureFivePieces-Map_SOZRisingSandWall_
+                dc.w    SOZMap_RisingSandWall_FractureFourPieces-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_Fracture3Pieces-Map_SOZRisingSandWall_
+                dc.w    SOZMap_RisingSandWall_FractureTwoPieces-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_FractureLastPiece-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_RiseDust1-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_RiseDust2-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_RiseDust3-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_RiseDust4-Map_SOZRisingSandWall_
+                dc.w    SOZSandWallMap_HiddenMain-Map_SOZRisingSandWall_
+SOZMap_RisingSandWall_IntactSevenPieces:    dc.w    7
                 dc.b    $CC,   8,   0,   0, $FF, $F4
                 dc.b    $D4,   9,   0,   3, $FF, $F4
                 dc.b    $E4,   9,   0,   3, $FF, $F4
@@ -23,7 +23,7 @@ word_40D2C:     dc.w    7
                 dc.b    4,   9,   0,   3, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40D58:     dc.w    7
+SOZSandWallMap_FractureCap1:    dc.w    7
                 dc.b    $CC,   8,   0,   9, $FF, $F4
                 dc.b    $D4,   9,   0,   3, $FF, $F4
                 dc.b    $E4,   9,   0,   3, $FF, $F4
@@ -31,7 +31,7 @@ word_40D58:     dc.w    7
                 dc.b    4,   9,   0,   3, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40D84:     dc.w    7
+SOZSandWallMap_FractureCap2:    dc.w    7
                 dc.b    $CC,   8,   0,  $C, $FF, $F4
                 dc.b    $D4,   9,   0,  $F, $FF, $F4
                 dc.b    $E4,   9,   0,   3, $FF, $F4
@@ -39,39 +39,39 @@ word_40D84:     dc.w    7
                 dc.b    4,   9,   0,   3, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40DB0:     dc.w    6
+SOZMap_RisingSandWall_FractureSixPieces:    dc.w    6
                 dc.b    $D4,   9,   0, $15, $FF, $F4
                 dc.b    $E4,   9,   8,  $F, $FF, $F4
                 dc.b    $F4,   9,   0,   3, $FF, $F4
                 dc.b    4,   9,   0,   3, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40DD6:     dc.w    5
+SOZMap_RisingSandWall_FractureFivePieces:   dc.w    5
                 dc.b    $E4,   9,   8, $15, $FF, $F4
                 dc.b    $F4,   9,   0,  $F, $FF, $F4
                 dc.b    4,   9,   0,   3, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40DF6:     dc.w    4
+SOZMap_RisingSandWall_FractureFourPieces:   dc.w    4
                 dc.b    $F4,   9,   0, $15, $FF, $F4
                 dc.b    4,   9,   8,  $F, $FF, $F4
                 dc.b    $14,   9,   0,   3, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40E10:     dc.w    3
+SOZSandWallMap_Fracture3Pieces: dc.w    3
                 dc.b    4,   9,   8, $15, $FF, $F4
                 dc.b    $14,   9,   0,  $F, $FF, $F4
                 dc.b    $24,   9,   0,   3, $FF, $F4
-word_40E24:     dc.w    2
+SOZMap_RisingSandWall_FractureTwoPieces:    dc.w    2
                 dc.b    $14,   9,   0, $15, $FF, $F4
                 dc.b    $24,   9,   8,  $F, $FF, $F4
-word_40E32:     dc.w    1
+SOZSandWallMap_FractureLastPiece:   dc.w    1
                 dc.b    $24,   9,   8, $15, $FF, $F4
-word_40E3A:     dc.w    1
+SOZSandWallMap_RiseDust1:   dc.w    1
                 dc.b    $C4,  $C,   0, $1B, $FF, $F0
-word_40E42:     dc.w    1
+SOZSandWallMap_RiseDust2:   dc.w    1
                 dc.b    $C4,  $C,   0, $1F, $FF, $F0
-word_40E4A:     dc.w    1
+SOZSandWallMap_RiseDust3:   dc.w    1
                 dc.b    $C4,  $C,   8, $1B, $FF, $F0
-word_40E52:     dc.w    1
+SOZSandWallMap_RiseDust4:   dc.w    1
                 dc.b    $C4,  $C,   8, $1F, $FF, $F0
-word_40E5A:     dc.w    0
+SOZSandWallMap_HiddenMain:  dc.w    0

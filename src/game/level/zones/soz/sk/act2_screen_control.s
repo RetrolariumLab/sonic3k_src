@@ -9,10 +9,10 @@ SOZ2_ScreenInit:
                 move.w  #$3C,(Layout_row_index_mask).w
                 move.w  #8,(Events_routine_fg).w
                 cmpi.w  #$4E80,(Player_1+x_pos).w
-                blo.s   loc_561B0
+                blo.s   SKSOZ2FG_RefreshInitialForeground
                 jsr     SOZ2_RestoreForegroundFromTemplate(pc)
 
-loc_561B0:
+SKSOZ2FG_RefreshInitialForeground:
                 jsr     (Reset_TileOffsetPositionActual).l
                 jmp     (Refresh_PlaneFull).l
 ; ---------------------------------------------------------------------------
@@ -25,14 +25,14 @@ SOZ2_ScreenEvent:
 ; ---------------------------------------------------------------------------
 
 SOZ2_ScreenEvent_Index:
-                bra.w   loc_561D8
+                bra.w   SKSOZ2FG_RestoreWrapAndBeginRedraw
 ; ---------------------------------------------------------------------------
-                bra.w   loc_56206
+                bra.w   SKSOZ2FG_RedrawForegroundBottomUp
 ; ---------------------------------------------------------------------------
-                bra.w   loc_5621A
+                bra.w   SKSOZ2FG_TryRestoreTemplate
 ; ---------------------------------------------------------------------------
 
-loc_561D8:
+SKSOZ2FG_RestoreWrapAndBeginRedraw:
                 move.w  #$7FF,(Screen_Y_wrap_value).w
                 move.w  #$7F0,(Camera_Y_pos_mask).w
                 move.w  #$3C,(Layout_row_index_mask).w
@@ -43,20 +43,20 @@ loc_561D8:
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_fg).w
 
-loc_56206:
+SKSOZ2FG_RedrawForegroundBottomUp:
                 move.w  (Camera_X_pos_copy).w,d1
                 move.w  (Camera_Y_pos_copy).w,d2
                 jsr     (Draw_PlaneVertBottomUp).l
-                bpl.s   loc_5621A
+                bpl.s   SKSOZ2FG_TryRestoreTemplate
                 addq.w  #4,(Events_routine_fg).w
 
-loc_5621A:
+SKSOZ2FG_TryRestoreTemplate:
                 tst.w   (Events_fg_4).w
-                beq.s   loc_56226
+                beq.s   SKSOZ2FG_DrawForeground
                 clr.w   (Events_fg_4).w
                 bsr.s   SOZ2_RestoreForegroundFromTemplate
 
-loc_56226:
+SKSOZ2FG_DrawForeground:
                 jmp     (DrawTilesAsYouMove).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -77,14 +77,14 @@ SOZ2_RestoreForegroundFromTemplate:
                 subi.w  #9,d0
                 moveq   #4-1,d1
 
-loc_56256:
+SKSOZ2FG_BeginTemplateRow:
                 moveq   #8,d2
 
-loc_56258:
+SKSOZ2FG_CopyTemplateRowBytes:
                 move.b  (a5)+,(a1)+
-                dbf     d2,loc_56258
+                dbf     d2,SKSOZ2FG_CopyTemplateRowBytes
                 adda.w  d0,a1
                 adda.w  d0,a5
-                dbf     d1,loc_56256
+                dbf     d1,SKSOZ2FG_BeginTemplateRow
                 rts
 ; End of function SOZ2_RestoreForegroundFromTemplate

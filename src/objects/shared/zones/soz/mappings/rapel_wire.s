@@ -1,120 +1,120 @@
 ; Data owner: objects/shared/zones/soz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SOZRapelWire_:
-                dc.w    word_4B21E-Map_SOZRapelWire_
-                dc.w    word_4B226-Map_SOZRapelWire_
-                dc.w    word_4B22E-Map_SOZRapelWire_
-                dc.w    word_4B236-Map_SOZRapelWire_
-                dc.w    word_4B23E-Map_SOZRapelWire_
-                dc.w    word_4B246-Map_SOZRapelWire_
-                dc.w    word_4B24E-Map_SOZRapelWire_
-                dc.w    word_4B256-Map_SOZRapelWire_
-                dc.w    word_4B25E-Map_SOZRapelWire_
-                dc.w    word_4B266-Map_SOZRapelWire_
-                dc.w    word_4B26E-Map_SOZRapelWire_
-                dc.w    word_4B276-Map_SOZRapelWire_
-                dc.w    word_4B27E-Map_SOZRapelWire_
-                dc.w    word_4B286-Map_SOZRapelWire_
-                dc.w    word_4B28E-Map_SOZRapelWire_
-                dc.w    word_4B296-Map_SOZRapelWire_
-                dc.w    word_4B29E-Map_SOZRapelWire_
-                dc.w    word_4B2A6-Map_SOZRapelWire_
-                dc.w    word_4B2AE-Map_SOZRapelWire_
-                dc.w    word_4B2B6-Map_SOZRapelWire_
-                dc.w    word_4B2BE-Map_SOZRapelWire_
-                dc.w    word_4B2C6-Map_SOZRapelWire_
-                dc.w    word_4B2CE-Map_SOZRapelWire_
-                dc.w    word_4B2D6-Map_SOZRapelWire_
-                dc.w    word_4B2DE-Map_SOZRapelWire_
-                dc.w    word_4B2E6-Map_SOZRapelWire_
-                dc.w    word_4B2EE-Map_SOZRapelWire_
-                dc.w    word_4B2F6-Map_SOZRapelWire_
-                dc.w    word_4B2FE-Map_SOZRapelWire_
-                dc.w    word_4B306-Map_SOZRapelWire_
-                dc.w    word_4B30E-Map_SOZRapelWire_
-                dc.w    word_4B316-Map_SOZRapelWire_
-                dc.w    word_4B31E-Map_SOZRapelWire_
-                dc.w    word_4B326-Map_SOZRapelWire_
-                dc.w    word_4B32E-Map_SOZRapelWire_
-                dc.w    word_4B336-Map_SOZRapelWire_
-                dc.w    word_4B33E-Map_SOZRapelWire_
-                dc.w    word_4B346-Map_SOZRapelWire_
-                dc.w    word_4B34E-Map_SOZRapelWire_
-word_4B21E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+                dc.w    SOZMap_RappelWire_QuantizedDirection00-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection01-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection02-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection03-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection04-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection05-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection06-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection07-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection08-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection09-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0A-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0B-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0C-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0D-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0E-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection0F-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection10-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection11-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection12-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection13-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection14-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection15-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection16-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection17-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection18-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection19-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1A-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1B-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1C-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1D-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1E-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_QuantizedDirection1F-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_RootAnchor-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointDefaultPhase-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointPhaseTile001B-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointPhaseTile001E-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointPhaseTile0020-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointPhaseTile081E-Map_SOZRapelWire_
+                dc.w    SOZMap_RappelWire_EndpointPhaseTile081B-Map_SOZRapelWire_
+SOZMap_RappelWire_QuantizedDirection00: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   1,   0, $16, $FF, $F8
-word_4B226:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection01: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   1,   0, $14, $FF, $F8
-word_4B22E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection02: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   1,   0, $12, $FF, $F8
-word_4B236:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection03: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   0,  $E, $FF, $F0
-word_4B23E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection04: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   0,  $A, $FF, $F0
-word_4B246:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection05: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   0,   6, $FF, $F0
-word_4B24E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection06: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   0,   4, $FF, $F0
-word_4B256:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection07: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   0,   2, $FF, $F0
-word_4B25E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection08: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   0,   0, $FF, $F0
-word_4B266:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection09: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F9,   4, $10,   2, $FF, $F0
-word_4B26E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0A: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F9,   4, $10,   4, $FF, $F0
-word_4B276:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0B: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $10,   6, $FF, $F0
-word_4B27E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0C: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $10,  $A, $FF, $F0
-word_4B286:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0D: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $10,  $E, $FF, $F0
-word_4B28E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0E: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   1, $10, $12, $FF, $F8
-word_4B296:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection0F: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   1, $10, $14, $FF, $F8
-word_4B29E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection10: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   1, $10, $16, $FF, $F8
-word_4B2A6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection11: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   1, $18, $14, $FF, $FF
-word_4B2AE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection12: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   1, $18, $12, $FF, $FF
-word_4B2B6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection13: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $18,  $E, $FF, $FF
-word_4B2BE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection14: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $18,  $A, $FF, $FF
-word_4B2C6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection15: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F1,   5, $18,   6, $FF, $FF
-word_4B2CE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection16: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F9,   4, $18,   4, $FF, $FF
-word_4B2D6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection17: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F9,   4, $18,   2, $FF, $FF
-word_4B2DE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection18: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   8,   0, $FF, $FF
-word_4B2E6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection19: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   8,   2, $FF, $FF
-word_4B2EE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1A: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   4,   8,   4, $FF, $FF
-word_4B2F6:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1B: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   8,   6, $FF, $FF
-word_4B2FE:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1C: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   8,  $A, $FF, $FF
-word_4B306:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1D: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   5,   8,  $E, $FF, $FF
-word_4B30E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1E: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   1,   8, $12, $FF, $FF
-word_4B316:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_QuantizedDirection1F: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    0,   1,   8, $14, $FF, $FF
-word_4B31E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_RootAnchor:   dc.w    1               ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $F0,   5, $FF, $C4, $FF, $FD
-word_4B326:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointDefaultPhase: dc.w    1       ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   8,   0, $18, $FF, $F4
-word_4B32E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointPhaseTile001B:    dc.w    1   ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   8,   0, $1B, $FF, $F4
-word_4B336:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointPhaseTile001E:    dc.w    1   ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   4,   0, $1E, $FF, $F8
-word_4B33E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointPhaseTile0020:    dc.w    1   ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   0,   0, $20, $FF, $FC
-word_4B346:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointPhaseTile081E:    dc.w    1   ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   4,   8, $1E, $FF, $F8
-word_4B34E:     dc.w    1                               ; DATA XREF: ROM:0004B1D0 o
+SOZMap_RappelWire_EndpointPhaseTile081B:    dc.w    1   ; DATA XREF: ROM:0004B1D0 o
                 dc.b    $FC,   8,   8, $1B, $FF, $F4

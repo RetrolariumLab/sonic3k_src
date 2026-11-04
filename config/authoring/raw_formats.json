@@ -1297,11 +1297,11 @@
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_capsule.s",
-      "sha256": "368a5fc100423eb04077329d71eb49bbce0ee1a461dfc052babb6a2c63d17b43"
+      "sha256": "679ac3b6993bddd60e3731ce93973aa59d48773f33e04f7a1b749c6ead86c4ce"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_controller.s",
-      "sha256": "e6aaa3cc4eb9899e8b64b5e81b9af6915ee32f6a5e45c0c618179feb795e688b"
+      "sha256": "8f276241c31b1c1278feb657b298741783647829641c2b9a184e73294c3b6136"
     },
     {
       "path": "src/objects/zones/soz/sk/ghost_resources.s",
@@ -1309,7 +1309,7 @@
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "sha256": "2fa0f582336ad628c78765beb188fdcd53d5ee4d3996553ccfa6fd1761134a83"
+      "sha256": "e172f8f455b77dcf3863dafe783921190e2417b520f5c96b1046f8900ec0aa4d"
     }
   ],
   "groups": [
@@ -5734,58 +5734,58 @@
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "symbol": "RawAni_4AF70",
-      "scope": "RawAni_4AF70",
-      "first_line": 541,
-      "last_line": 543,
+      "symbol": "SKSOZWire_TravelEndFrames",
+      "scope": "SKSOZWire_TravelEndFrames",
+      "first_line": 546,
+      "last_line": 548,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "6c3601569a41ab5132ea7ad8684f793fdcc57140209cf2d668c8c109e2d1519e",
+      "declarations_sha256": "5c577c5b2b993aab6ccae37480278fd54b15cead82287b2b39a90d95de942d6e",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4AF70"],
+      "members": ["SKSOZWire_TravelEndFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "symbol": "RawAni_4B0A0",
-      "scope": "RawAni_4B0A0",
-      "first_line": 636,
-      "last_line": 638,
+      "symbol": "SKSOZWire_Mode1RiderFrames",
+      "scope": "SKSOZWire_Mode1RiderFrames",
+      "first_line": 641,
+      "last_line": 643,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "c8a4639c17fb9207b31d8d00e6adcf0aa681e6447e56e46e1d0a426a31627209",
+      "declarations_sha256": "35920c6f49e5b5c3734ad00420e7ec3d4d95ceb876cada0447df5ceb8e31a6d8",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4B0A0"],
+      "members": ["SKSOZWire_Mode1RiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "symbol": "RawAni_4B0CE",
-      "scope": "RawAni_4B0CE",
-      "first_line": 652,
-      "last_line": 654,
+      "symbol": "SKSOZWire_Mode2RiderFrames",
+      "scope": "SKSOZWire_Mode2RiderFrames",
+      "first_line": 657,
+      "last_line": 659,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "01e49de7019de31937a17aa56dce1b01bc34b1a1a68d4aafbf3d49281d634b23",
+      "declarations_sha256": "7357aba6b8d158a5bb7d84ff671f28ed9bed5940d722ecdd180e9c48be69e6c6",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4B0CE"],
+      "members": ["SKSOZWire_Mode2RiderFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/soz/sk/rappel_wire.s",
-      "symbol": "RawAni_4B110",
-      "scope": "RawAni_4B110",
-      "first_line": 671,
-      "last_line": 672,
+      "symbol": "SKSOZWire_TravelRiderFrames",
+      "scope": "SKSOZWire_TravelRiderFrames",
+      "first_line": 676,
+      "last_line": 677,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "9959d539b2539288cd4404a1bf88d1fa20658fd26183883a14bcc2a32165ebad",
+      "declarations_sha256": "aebb639614a3db91d912033a8b5bf5765656d3f1193a9711a4159698f53a8fdd",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_4B110"],
+      "members": ["SKSOZWire_TravelRiderFrames"],
       "stored_markers": []
     }
   ]

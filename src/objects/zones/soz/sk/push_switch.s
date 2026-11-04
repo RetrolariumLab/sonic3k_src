@@ -18,16 +18,16 @@ Obj_SOZPushSwitch:
                 move.w  x_pos(a0),d0
                 addi.w  #$10,d0
                 btst    #0,status(a0)
-                beq.s   loc_418D4
+                beq.s   SKSOZPushSwitch_InitFaceAndUpdate
                 subi.w  #2*$10,d0
 
-loc_418D4:
+SKSOZPushSwitch_InitFaceAndUpdate:
                 move.w  d0,(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #0,(a2)+
-                move.l  #loc_418E4,(a0)
+                move.l  #SKSOZPushSwitch_LoadTravelAndCheckSolid,(a0)
 
-loc_418E4:
+SKSOZPushSwitch_LoadTravelAndCheckSolid:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
@@ -47,52 +47,52 @@ loc_418E4:
                 move.w  $36(a0),d0
                 lsr.w   #2,d0
                 btst    #0,status(a0)
-                beq.s   loc_41934
+                beq.s   SKSOZPushSwitch_PlaceSwitchAndTryRock
                 neg.w   d0
 
-loc_41934:
+SKSOZPushSwitch_PlaceSwitchAndTryRock:
                 add.w   $44(a0),d0
                 move.w  d0,x_pos(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_41946
+                bpl.s   SKSOZPushSwitch_PublishTravelAndDraw
                 bsr.w   PressSozSwitchWithRegisteredRock
 
-loc_41946:
+SKSOZPushSwitch_PublishTravelAndDraw:
                 move.w  $36(a0),d1
                 move.b  d1,(a3)
                 move.w  $44(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_41966
+                bhi.w   SKSOZPushSwitch_ClearRespawnBit
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_41966:
+SKSOZPushSwitch_ClearRespawnBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_41972
+                beq.s   SKSOZPushSwitch_DeleteOrRetractOffscreen
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_41972:
+SKSOZPushSwitch_DeleteOrRetractOffscreen:
                 tst.w   $36(a0)
-                bne.s   loc_4197E
+                bne.s   SKSOZPushSwitch_BeginOffscreenRetraction
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4197E:
-                move.l  #loc_41984,(a0)
+SKSOZPushSwitch_BeginOffscreenRetraction:
+                move.l  #SKSOZPushSwitch_CheckPlacementReload,(a0)
 
-loc_41984:
+SKSOZPushSwitch_CheckPlacementReload:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_41996
+                beq.s   SKSOZPushSwitch_RetractOffscreen
                 movea.w d0,a2
                 tst.b   (a2)
-                bpl.s   loc_41996
+                bpl.s   SKSOZPushSwitch_RetractOffscreen
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_41996:
+SKSOZPushSwitch_RetractOffscreen:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
@@ -104,11 +104,11 @@ loc_41996:
                 move.w  $36(a0),d1
                 move.b  d1,(a3)
                 tst.w   $36(a0)
-                bne.s   locret_419C4
+                bne.s   SKSOZPushSwitch_OffscreenReturn
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_419C4:
+SKSOZPushSwitch_OffscreenReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -124,7 +124,7 @@ UpdatePlayerPushOrReturnForSozSwitch:
                 moveq   #p1_pushing_bit,d6
                 bsr.s   ApplyPlayerPushToSozSwitch
                 tst.w   d5
-                bne.s   locret_419F8
+                bne.s   SKSOZPushSwitch_PlayerPushReturn
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
                 moveq   #p2_pushing_bit,d6
@@ -132,7 +132,7 @@ UpdatePlayerPushOrReturnForSozSwitch:
                 tst.w   d5
                 beq.s   ReturnSozPushSwitchProgress
 
-locret_419F8:
+SKSOZPushSwitch_PlayerPushReturn:
                 rts
 ; End of function UpdatePlayerPushOrReturnForSozSwitch
 
@@ -140,45 +140,46 @@ locret_419F8:
 
 ApplyPlayerPushToSozSwitch:
                 btst    d6,d3
-                beq.s   locret_41A6A
+                beq.s   SKSOZPushSwitch_ApplyPushReturn
                 cmp.w   x_pos(a1),d2
-                bcc.s   loc_41A38
+                bcc.s   SKSOZPushSwitch_TryPushFromLeft
                 btst    #5,d0
-                beq.s   locret_41A6A
+                beq.s   SKSOZPushSwitch_ApplyPushReturn
                 btst    #0,status(a0)
-                beq.s   locret_41A6A
+                beq.s   SKSOZPushSwitch_ApplyPushReturn
                 cmpi.w  #$80,$36(a0)
-                beq.s   loc_41A34
+                beq.s   SKSOZPushSwitch_ClaimPlayerPush
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),d0
                 andi.w  #3,d0
-                bne.s   loc_41A34
+                bne.s   SKSOZPushSwitch_ClaimPlayerPush
                 subq.w  #1,x_pos(a1)
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX).l
 
-loc_41A34:
+; Return D5 = 1 even at full travel or when the push does not move the switch this frame
+SKSOZPushSwitch_ClaimPlayerPush:
                 moveq   #1,d5
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_41A38:
+SKSOZPushSwitch_TryPushFromLeft:
                 btst    #5,d0
-                beq.s   locret_41A6A
+                beq.s   SKSOZPushSwitch_ApplyPushReturn
                 btst    #0,status(a0)
-                bne.s   locret_41A6A
+                bne.s   SKSOZPushSwitch_ApplyPushReturn
                 cmpi.w  #$80,$36(a0)
-                beq.s   loc_41A34
+                beq.s   SKSOZPushSwitch_ClaimPlayerPush
                 addq.w  #1,$36(a0)
                 move.w  $36(a0),d0
                 andi.w  #3,d0
-                bne.s   loc_41A34
+                bne.s   SKSOZPushSwitch_ClaimPlayerPush
                 addq.w  #1,x_pos(a1)
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX).l
                 moveq   #1,d5
 
-locret_41A6A:
+SKSOZPushSwitch_ApplyPushReturn:
                 rts
 ; End of function ApplyPlayerPushToSozSwitch
 
@@ -187,29 +188,29 @@ locret_41A6A:
 ReturnSozPushSwitchProgress:
                 move.b  subtype(a0),d0
                 andi.w  #$70,d0
-                bne.s   loc_41A82
+                bne.s   SKSOZPushSwitch_StepRetraction
                 subq.w  #1,$34(a0)
-                bpl.s   locret_41AA6
+                bpl.s   SKSOZPushSwitch_RetractionReturn
                 move.w  #9,$34(a0)
 
-loc_41A82:
+SKSOZPushSwitch_StepRetraction:
                 tst.w   $36(a0)
-                beq.s   locret_41AA6
+                beq.s   SKSOZPushSwitch_RetractionReturn
                 moveq   #signextendB(sfx_DoorClose),d0
                 subq.w  #1,$36(a0)
-                beq.s   loc_41A9E
+                beq.s   SKSOZPushSwitch_PlayRetractionSound
                 subq.b  #1,$3A(a0)
-                bpl.s   loc_41AA4
+                bpl.s   SKSOZPushSwitch_SetD4RetractionMoved
                 move.b  #3,$3A(a0)
                 moveq   #signextendB(sfx_DoorMove),d0
 
-loc_41A9E:
+SKSOZPushSwitch_PlayRetractionSound:
                 jsr     (Play_SFX).l
 
-loc_41AA4:
+SKSOZPushSwitch_SetD4RetractionMoved:
                 moveq   #1,d4
 
-locret_41AA6:
+SKSOZPushSwitch_RetractionReturn:
                 rts
 ; End of function ReturnSozPushSwitchProgress
 
@@ -217,70 +218,70 @@ locret_41AA6:
 
 PressSozSwitchWithRegisteredRock:
                 move.w  (_unkF7C4).w,d0
-                beq.w   locret_41B54
+                beq.w   SKSOZPushSwitch_RockPressureReturn
                 movea.w d0,a2
-                cmpi.l  #loc_405D6,(a2)
-                beq.s   loc_41AC2
+                cmpi.l  #SKSOZPushRock_UpdateRegisteredRock,(a2)
+                beq.s   SKSOZPushSwitch_CheckRockContact
                 move.w  #0,(_unkF7C4).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_41AC2:
+SKSOZPushSwitch_CheckRockContact:
                 move.w  x_pos(a2),d2
                 sub.w   x_pos(a0),d2
                 addi.w  #$1B,d2
                 cmpi.w  #$37,d2
-                bhs.s   loc_41B4E
+                bhs.s   SKSOZPushSwitch_SaveRockX
                 move.w  y_pos(a2),d3
                 sub.w   y_pos(a0),d3
                 addi.w  #$C,d3
                 cmpi.w  #$18,d3
-                bhs.s   loc_41B4E
+                bhs.s   SKSOZPushSwitch_SaveRockX
                 move.b  status(a0),d0
                 cmpi.w  #$1C,d2
-                blo.s   loc_41AF4
+                blo.s   SKSOZPushSwitch_TryPressFromRockSide
                 eori.b  #1,d0
 
-loc_41AF4:
+SKSOZPushSwitch_TryPressFromRockSide:
                 andi.b  #1,d0
-                bne.s   loc_41B24
+                bne.s   SKSOZPushSwitch_CalcRockPressedOffset
                 cmpi.w  #$80,$36(a0)
-                beq.s   loc_41B24
+                beq.s   SKSOZPushSwitch_CalcRockPressedOffset
                 moveq   #4,d1
                 add.w   d4,d1
                 move.w  $38(a0),d0
                 cmp.w   x_pos(a2),d0
-                bne.s   loc_41B12
+                bne.s   SKSOZPushSwitch_ApplyClampedRockTravel
                 moveq   #1,d1
 
-loc_41B12:
+SKSOZPushSwitch_ApplyClampedRockTravel:
                 add.w   d1,$36(a0)
                 cmpi.w  #$80,$36(a0)
-                blo.s   loc_41B24
+                blo.s   SKSOZPushSwitch_CalcRockPressedOffset
                 move.w  #$80,$36(a0)
 
-loc_41B24:
+SKSOZPushSwitch_CalcRockPressedOffset:
                 move.w  $36(a0),d0
                 lsr.w   #2,d0
                 btst    #0,status(a0)
-                beq.s   loc_41B34
+                beq.s   SKSOZPushSwitch_PlaceSwitchAndCalcRockX
                 neg.w   d0
 
-loc_41B34:
+SKSOZPushSwitch_PlaceSwitchAndCalcRockX:
                 add.w   $44(a0),d0
                 move.w  d0,x_pos(a0)
                 subi.w  #$1C,d0
                 cmpi.w  #$1C,d2
-                blo.s   loc_41B4A
+                blo.s   SKSOZPushSwitch_SnapRockToSwitch
                 addi.w  #$38,d0
 
-loc_41B4A:
+SKSOZPushSwitch_SnapRockToSwitch:
                 move.w  d0,x_pos(a2)
 
-loc_41B4E:
+SKSOZPushSwitch_SaveRockX:
                 move.w  x_pos(a2),$38(a0)
 
-locret_41B54:
+SKSOZPushSwitch_RockPressureReturn:
                 rts
 ; End of function PressSozSwitchWithRegisteredRock
 

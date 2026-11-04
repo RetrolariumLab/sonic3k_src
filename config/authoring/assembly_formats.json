@@ -57465,27 +57465,27 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 116
       },
-      "declarations_sha256": "2b9f44325eda541c4a0c12c14a972ac68715469ded596528b3edd112ffba12b9",
+      "declarations_sha256": "e244a8a6c8c1c80fcb9700bc9abf39dedc84ecbf0b4e3b648d75872eb878d745",
       "labels": {
         "DPLC_SOZGhosts_": 0,
-        "word_8F700": 36,
-        "word_8F704": 40,
-        "word_8F708": 44,
-        "word_8F70C": 48,
-        "word_8F710": 52,
-        "word_8F714": 56,
-        "word_8F718": 60,
-        "word_8F71C": 64,
-        "word_8F720": 68,
-        "word_8F724": 72,
-        "word_8F72A": 78,
-        "word_8F730": 84,
-        "word_8F736": 90,
-        "word_8F73C": 96,
-        "word_8F740": 100,
-        "word_8F744": 104,
-        "word_8F748": 108,
-        "word_8F74C": 112
+        "SKSOZGhostsDPLC_Frame00": 36,
+        "SKSOZGhostsDPLC_Frame01": 40,
+        "SKSOZGhostsDPLC_Frame02": 44,
+        "SKSOZGhostsDPLC_Frame03": 48,
+        "SKSOZGhostsDPLC_Frame04": 52,
+        "SKSOZGhostsDPLC_Frame05": 56,
+        "SKSOZGhostsDPLC_Frame06": 60,
+        "SKSOZGhostsDPLC_Frame07": 64,
+        "SKSOZGhostsDPLC_Frame08": 68,
+        "SKSOZGhostsDPLC_Frame09": 72,
+        "SKSOZGhostsDPLC_Frame0A": 78,
+        "SKSOZGhostsDPLC_Frame0B": 84,
+        "SKSOZGhostsDPLC_Frame0C": 90,
+        "SKSOZGhostsDPLC_Frame0D": 96,
+        "SKSOZGhostsDPLC_Frame0E": 100,
+        "SKSOZGhostsDPLC_Frame0F": 104,
+        "SKSOZGhostsDPLC_Frame10": 108,
+        "SKSOZGhostsDPLC_Frame11": 112
       },
       "external_symbols": [],
       "blocks": [
@@ -57493,126 +57493,126 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F700",
+          "target": "SKSOZGhostsDPLC_Frame00",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F704",
+          "target": "SKSOZGhostsDPLC_Frame01",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F708",
+          "target": "SKSOZGhostsDPLC_Frame02",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F70C",
+          "target": "SKSOZGhostsDPLC_Frame03",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F710",
+          "target": "SKSOZGhostsDPLC_Frame04",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F714",
+          "target": "SKSOZGhostsDPLC_Frame05",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F718",
+          "target": "SKSOZGhostsDPLC_Frame06",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F71C",
+          "target": "SKSOZGhostsDPLC_Frame07",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F720",
+          "target": "SKSOZGhostsDPLC_Frame08",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F724",
+          "target": "SKSOZGhostsDPLC_Frame09",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F72A",
+          "target": "SKSOZGhostsDPLC_Frame0A",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F730",
+          "target": "SKSOZGhostsDPLC_Frame0B",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F736",
+          "target": "SKSOZGhostsDPLC_Frame0C",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F73C",
+          "target": "SKSOZGhostsDPLC_Frame0D",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F740",
+          "target": "SKSOZGhostsDPLC_Frame0E",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F744",
+          "target": "SKSOZGhostsDPLC_Frame0F",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F748",
+          "target": "SKSOZGhostsDPLC_Frame10",
           "base": "DPLC_SOZGhosts_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_8F74C",
+          "target": "SKSOZGhostsDPLC_Frame11",
           "base": "DPLC_SOZGhosts_"
         },
         {
@@ -57716,27 +57716,27 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 204
       },
-      "declarations_sha256": "642c04894c033ab2f0011b1f62c5fb551e06b6f0682aab011c7684e67fa62455",
+      "declarations_sha256": "ff53989581a6e57b4c98e3381f2411cc4242bfd41205d153e766b91f9cae73cb",
       "labels": {
         "Map_SOZGhosts_": 0,
-        "word_1872DA": 36,
-        "word_1872E2": 44,
-        "word_1872EA": 52,
-        "word_1872F2": 60,
-        "word_1872FA": 68,
-        "word_187302": 76,
-        "word_18730A": 84,
-        "word_187312": 92,
-        "word_18731A": 100,
-        "word_187322": 108,
-        "word_187330": 122,
-        "word_18733E": 136,
-        "word_18734C": 150,
-        "word_18735A": 164,
-        "word_187362": 172,
-        "word_18736A": 180,
-        "word_187372": 188,
-        "word_18737A": 196
+        "SKSOZGhostsMap_Frame00": 36,
+        "SKSOZGhostsMap_Frame01": 44,
+        "SKSOZGhostsMap_Frame02": 52,
+        "SKSOZGhostsMap_Frame03": 60,
+        "SKSOZGhostsMap_Frame04": 68,
+        "SKSOZGhostsMap_Frame05": 76,
+        "SKSOZGhostsMap_Frame06": 84,
+        "SKSOZGhostsMap_Frame07": 92,
+        "SKSOZGhostsMap_Frame08": 100,
+        "SKSOZGhostsMap_Frame09": 108,
+        "SKSOZGhostsMap_Frame0A": 122,
+        "SKSOZGhostsMap_Frame0B": 136,
+        "SKSOZGhostsMap_Frame0C": 150,
+        "SKSOZGhostsMap_Frame0D": 164,
+        "SKSOZGhostsMap_Frame0E": 172,
+        "SKSOZGhostsMap_Frame0F": 180,
+        "SKSOZGhostsMap_Frame10": 188,
+        "SKSOZGhostsMap_Frame11": 196
       },
       "external_symbols": [],
       "blocks": [
@@ -57744,126 +57744,126 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872DA",
+          "target": "SKSOZGhostsMap_Frame00",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872E2",
+          "target": "SKSOZGhostsMap_Frame01",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872EA",
+          "target": "SKSOZGhostsMap_Frame02",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872F2",
+          "target": "SKSOZGhostsMap_Frame03",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1872FA",
+          "target": "SKSOZGhostsMap_Frame04",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187302",
+          "target": "SKSOZGhostsMap_Frame05",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18730A",
+          "target": "SKSOZGhostsMap_Frame06",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187312",
+          "target": "SKSOZGhostsMap_Frame07",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18731A",
+          "target": "SKSOZGhostsMap_Frame08",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187322",
+          "target": "SKSOZGhostsMap_Frame09",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187330",
+          "target": "SKSOZGhostsMap_Frame0A",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18733E",
+          "target": "SKSOZGhostsMap_Frame0B",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18734C",
+          "target": "SKSOZGhostsMap_Frame0C",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18735A",
+          "target": "SKSOZGhostsMap_Frame0D",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187362",
+          "target": "SKSOZGhostsMap_Frame0E",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18736A",
+          "target": "SKSOZGhostsMap_Frame0F",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_187372",
+          "target": "SKSOZGhostsMap_Frame10",
           "base": "Map_SOZGhosts_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18737A",
+          "target": "SKSOZGhostsMap_Frame11",
           "base": "Map_SOZGhosts_"
         },
         {
@@ -113226,11 +113226,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 110
       },
-      "declarations_sha256": "c1257affba6b0ac98643c24125c92faab29b400ee102a4cd53c8a55f17757814",
+      "declarations_sha256": "1c6ba11aae660697eb6f86155320b442bff767ecadc22b51fd49d3b03d4b9f1d",
       "labels": {
         "Map_SOZ1EndDoor_": 0,
-        "word_56122": 4,
-        "word_56154": 54
+        "SOZMap_EndDoor_CameraMaskStrips": 4,
+        "SOZMap_EndDoor_MovingPyramidDoor": 54
       },
       "external_symbols": [],
       "blocks": [
@@ -113238,14 +113238,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_56122",
+          "target": "SOZMap_EndDoor_CameraMaskStrips",
           "base": "Map_SOZ1EndDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_56154",
+          "target": "SOZMap_EndDoor_MovingPyramidDoor",
           "base": "Map_SOZ1EndDoor_"
         },
         {
@@ -113269,14 +113269,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "92dd441405f152832fec8a833593448df0b5a6aabea750013944c08066f9b02c",
+      "declarations_sha256": "64b2db4fe26c2cac9133cac8cb6b5c3bc2d04c7da5c10e56cfefbe6419d032da",
       "labels": {
         "Map_SOZBreakableSandRock_": 0,
-        "word_41838": 10,
-        "word_41846": 24,
-        "word_41854": 38,
-        "word_41862": 52,
-        "word_41870": 66
+        "SOZBreakableSandRockSK_MapFrame00": 10,
+        "SOZBreakableSandRockSK_MapFrame01": 24,
+        "SOZBreakableSandRockSK_MapFrame02": 38,
+        "SOZBreakableSandRockSK_MapFrame03": 52,
+        "SOZBreakableSandRockSK_MapFrame04": 66
       },
       "external_symbols": [],
       "blocks": [
@@ -113284,35 +113284,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41838",
+          "target": "SOZBreakableSandRockSK_MapFrame00",
           "base": "Map_SOZBreakableSandRock_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41846",
+          "target": "SOZBreakableSandRockSK_MapFrame01",
           "base": "Map_SOZBreakableSandRock_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41854",
+          "target": "SOZBreakableSandRockSK_MapFrame02",
           "base": "Map_SOZBreakableSandRock_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41862",
+          "target": "SOZBreakableSandRockSK_MapFrame03",
           "base": "Map_SOZBreakableSandRock_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41870",
+          "target": "SOZBreakableSandRockSK_MapFrame04",
           "base": "Map_SOZBreakableSandRock_"
         },
         {
@@ -113351,12 +113351,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 162
       },
-      "declarations_sha256": "e93c94a0e77d3fa6f1b106ff48f996b4951cc7708adc269a792de969658db02f",
+      "declarations_sha256": "aec92b9d7345925544f2534c1eb2996171523f0442cf4a1606a5114adaed292d",
       "labels": {
         "Map_SOZCollapsingBridge_": 0,
-        "word_21280": 6,
-        "word_212A0": 38,
-        "word_212DE": 100
+        "SOZMap_CollapsingBridge_IntactFivePieces": 6,
+        "SOZBridgeMap_DefaultBreakOrder": 38,
+        "SOZBridgeMap_AlternateBreakOrder": 100
       },
       "external_symbols": [],
       "blocks": [
@@ -113364,21 +113364,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21280",
+          "target": "SOZMap_CollapsingBridge_IntactFivePieces",
           "base": "Map_SOZCollapsingBridge_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_212A0",
+          "target": "SOZBridgeMap_DefaultBreakOrder",
           "base": "Map_SOZCollapsingBridge_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_212DE",
+          "target": "SOZBridgeMap_AlternateBreakOrder",
           "base": "Map_SOZCollapsingBridge_"
         },
         {
@@ -113407,11 +113407,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "a0f5a0494f6382c8e8cb0ec4f5c41a1e18a0f3712bb64656da938b59f23880ce",
+      "declarations_sha256": "ac2a4be9fa049dad4719387e52c5cf877f99ede801aa4e2550b2ed4afd1dd1a6",
       "labels": {
         "Map_SOZDoor_": 0,
-        "word_41C76": 4,
-        "word_41CA2": 48
+        "SOZMap_Door_VerticalSevenPieces": 4,
+        "SOZMap_Door_HorizontalFivePieces": 48
       },
       "external_symbols": [],
       "blocks": [
@@ -113419,14 +113419,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41C76",
+          "target": "SOZMap_Door_VerticalSevenPieces",
           "base": "Map_SOZDoor_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41CA2",
+          "target": "SOZMap_Door_HorizontalFivePieces",
           "base": "Map_SOZDoor_"
         },
         {
@@ -113705,12 +113705,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 348
       },
-      "declarations_sha256": "d5f7d1f6d2b6aac6077aa31a20f8b2be64bb3d8cc89498e609066ab2c2446944",
+      "declarations_sha256": "c9f55042e8ed762b0935a4baecb9f8082bad3282dfc8c11111df715894e19350",
       "labels": {
         "Map_SOZFloatingPillar_": 0,
-        "word_412E6": 6,
-        "word_41348": 104,
-        "word_413C2": 226
+        "SOZMap_FloatingPillar_PlainSixteenPieces": 6,
+        "SOZFloatPillarMap_UpperSpikes": 104,
+        "SOZFloatPillarMap_LowerSpikes": 226
       },
       "external_symbols": [],
       "blocks": [
@@ -113718,21 +113718,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_412E6",
+          "target": "SOZMap_FloatingPillar_PlainSixteenPieces",
           "base": "Map_SOZFloatingPillar_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41348",
+          "target": "SOZFloatPillarMap_UpperSpikes",
           "base": "Map_SOZFloatingPillar_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_413C2",
+          "target": "SOZFloatPillarMap_LowerSpikes",
           "base": "Map_SOZFloatingPillar_"
         },
         {
@@ -113761,17 +113761,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 218
       },
-      "declarations_sha256": "ee5a06387b5aff986b42b80841f4b9fb23c0d1cf5c17ff341ac237091dbdc585",
+      "declarations_sha256": "fa577b2564f675d5985a7be2095f052529b64ae4b51878dc41676604403c04ff",
       "labels": {
         "Map_SOZLightSwitch_": 0,
-        "word_410A0": 16,
-        "word_410AE": 30,
-        "word_410C2": 50,
-        "word_410DC": 76,
-        "word_410FC": 108,
-        "word_41122": 146,
-        "word_4114E": 190,
-        "word_41156": 198
+        "SOZLightSwitchMap_Retracted": 16,
+        "SOZLightSwitchMap_Extension1": 30,
+        "SOZLightSwitchMap_Extension2": 50,
+        "SOZLightSwitchMap_Extension3": 76,
+        "SOZLightSwitchMap_Extension4": 108,
+        "SOZLightSwitchMap_Extension5": 146,
+        "SOZMap_LightSwitch_MainHandleSinglePiece": 190,
+        "SOZMap_LightSwitch_CombinedHandleAndBase": 198
       },
       "external_symbols": [],
       "blocks": [
@@ -113779,56 +113779,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_410A0",
+          "target": "SOZLightSwitchMap_Retracted",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_410AE",
+          "target": "SOZLightSwitchMap_Extension1",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_410C2",
+          "target": "SOZLightSwitchMap_Extension2",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_410DC",
+          "target": "SOZLightSwitchMap_Extension3",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_410FC",
+          "target": "SOZLightSwitchMap_Extension4",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41122",
+          "target": "SOZLightSwitchMap_Extension5",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4114E",
+          "target": "SOZMap_LightSwitch_MainHandleSinglePiece",
           "base": "Map_SOZLightSwitch_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41156",
+          "target": "SOZMap_LightSwitch_CombinedHandleAndBase",
           "base": "Map_SOZLightSwitch_"
         },
         {
@@ -114319,11 +114319,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "13f6fbaa0a13ef5de1888feb49adf9c7b4ad7a74a02c407317dba6493aa813d7",
+      "declarations_sha256": "7a626c8fce2ed8e50ce0f22acf1272666e006af2961ced9ff1f292dee11125eb",
       "labels": {
         "Map_SOZPushSwitch_": 0,
-        "word_41B5A": 4,
-        "word_41B68": 18
+        "SOZMap_PushSwitch_EmbeddedFixedBase": 4,
+        "SOZMap_PushSwitch_MainMovingSinglePiece": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -114331,14 +114331,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41B5A",
+          "target": "SOZMap_PushSwitch_EmbeddedFixedBase",
           "base": "Map_SOZPushSwitch_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41B68",
+          "target": "SOZMap_PushSwitch_MainMovingSinglePiece",
           "base": "Map_SOZPushSwitch_"
         },
         {
@@ -114362,10 +114362,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "50634bcc44c9a77806eda20f3c5c330fe7e513a099842001a6a9ae984b8c1ff8",
+      "declarations_sha256": "5d52e33f6ae928bcd1d91e86cca5044fdb2fcf20fb5724f07ec682a46dd9cb9c",
       "labels": {
         "Map_SOZPushableRock_": 0,
-        "word_40778": 2
+        "SOZMap_PushableRock_SingleTwoPieceShape": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -114373,7 +114373,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40778",
+          "target": "SOZMap_PushableRock_SingleTwoPieceShape",
           "base": "Map_SOZPushableRock_"
         },
         {
@@ -114392,48 +114392,48 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 390
       },
-      "declarations_sha256": "aaf8ee63f8f9aaf3712f769d6508b140bcbeff370fde696a437b664ee2cbbab6",
+      "declarations_sha256": "8a491b82d922f2c2fc236364bbfdc57fe665fdbc4a524294eacc64ccbd4643e2",
       "labels": {
         "Map_SOZRapelWire_": 0,
-        "word_4B21E": 78,
-        "word_4B226": 86,
-        "word_4B22E": 94,
-        "word_4B236": 102,
-        "word_4B23E": 110,
-        "word_4B246": 118,
-        "word_4B24E": 126,
-        "word_4B256": 134,
-        "word_4B25E": 142,
-        "word_4B266": 150,
-        "word_4B26E": 158,
-        "word_4B276": 166,
-        "word_4B27E": 174,
-        "word_4B286": 182,
-        "word_4B28E": 190,
-        "word_4B296": 198,
-        "word_4B29E": 206,
-        "word_4B2A6": 214,
-        "word_4B2AE": 222,
-        "word_4B2B6": 230,
-        "word_4B2BE": 238,
-        "word_4B2C6": 246,
-        "word_4B2CE": 254,
-        "word_4B2D6": 262,
-        "word_4B2DE": 270,
-        "word_4B2E6": 278,
-        "word_4B2EE": 286,
-        "word_4B2F6": 294,
-        "word_4B2FE": 302,
-        "word_4B306": 310,
-        "word_4B30E": 318,
-        "word_4B316": 326,
-        "word_4B31E": 334,
-        "word_4B326": 342,
-        "word_4B32E": 350,
-        "word_4B336": 358,
-        "word_4B33E": 366,
-        "word_4B346": 374,
-        "word_4B34E": 382
+        "SOZMap_RappelWire_QuantizedDirection00": 78,
+        "SOZMap_RappelWire_QuantizedDirection01": 86,
+        "SOZMap_RappelWire_QuantizedDirection02": 94,
+        "SOZMap_RappelWire_QuantizedDirection03": 102,
+        "SOZMap_RappelWire_QuantizedDirection04": 110,
+        "SOZMap_RappelWire_QuantizedDirection05": 118,
+        "SOZMap_RappelWire_QuantizedDirection06": 126,
+        "SOZMap_RappelWire_QuantizedDirection07": 134,
+        "SOZMap_RappelWire_QuantizedDirection08": 142,
+        "SOZMap_RappelWire_QuantizedDirection09": 150,
+        "SOZMap_RappelWire_QuantizedDirection0A": 158,
+        "SOZMap_RappelWire_QuantizedDirection0B": 166,
+        "SOZMap_RappelWire_QuantizedDirection0C": 174,
+        "SOZMap_RappelWire_QuantizedDirection0D": 182,
+        "SOZMap_RappelWire_QuantizedDirection0E": 190,
+        "SOZMap_RappelWire_QuantizedDirection0F": 198,
+        "SOZMap_RappelWire_QuantizedDirection10": 206,
+        "SOZMap_RappelWire_QuantizedDirection11": 214,
+        "SOZMap_RappelWire_QuantizedDirection12": 222,
+        "SOZMap_RappelWire_QuantizedDirection13": 230,
+        "SOZMap_RappelWire_QuantizedDirection14": 238,
+        "SOZMap_RappelWire_QuantizedDirection15": 246,
+        "SOZMap_RappelWire_QuantizedDirection16": 254,
+        "SOZMap_RappelWire_QuantizedDirection17": 262,
+        "SOZMap_RappelWire_QuantizedDirection18": 270,
+        "SOZMap_RappelWire_QuantizedDirection19": 278,
+        "SOZMap_RappelWire_QuantizedDirection1A": 286,
+        "SOZMap_RappelWire_QuantizedDirection1B": 294,
+        "SOZMap_RappelWire_QuantizedDirection1C": 302,
+        "SOZMap_RappelWire_QuantizedDirection1D": 310,
+        "SOZMap_RappelWire_QuantizedDirection1E": 318,
+        "SOZMap_RappelWire_QuantizedDirection1F": 326,
+        "SOZMap_RappelWire_RootAnchor": 334,
+        "SOZMap_RappelWire_EndpointDefaultPhase": 342,
+        "SOZMap_RappelWire_EndpointPhaseTile001B": 350,
+        "SOZMap_RappelWire_EndpointPhaseTile001E": 358,
+        "SOZMap_RappelWire_EndpointPhaseTile0020": 366,
+        "SOZMap_RappelWire_EndpointPhaseTile081E": 374,
+        "SOZMap_RappelWire_EndpointPhaseTile081B": 382
       },
       "external_symbols": [],
       "blocks": [
@@ -114441,273 +114441,273 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B21E",
+          "target": "SOZMap_RappelWire_QuantizedDirection00",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B226",
+          "target": "SOZMap_RappelWire_QuantizedDirection01",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B22E",
+          "target": "SOZMap_RappelWire_QuantizedDirection02",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B236",
+          "target": "SOZMap_RappelWire_QuantizedDirection03",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B23E",
+          "target": "SOZMap_RappelWire_QuantizedDirection04",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B246",
+          "target": "SOZMap_RappelWire_QuantizedDirection05",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B24E",
+          "target": "SOZMap_RappelWire_QuantizedDirection06",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B256",
+          "target": "SOZMap_RappelWire_QuantizedDirection07",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B25E",
+          "target": "SOZMap_RappelWire_QuantizedDirection08",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B266",
+          "target": "SOZMap_RappelWire_QuantizedDirection09",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B26E",
+          "target": "SOZMap_RappelWire_QuantizedDirection0A",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B276",
+          "target": "SOZMap_RappelWire_QuantizedDirection0B",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B27E",
+          "target": "SOZMap_RappelWire_QuantizedDirection0C",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B286",
+          "target": "SOZMap_RappelWire_QuantizedDirection0D",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B28E",
+          "target": "SOZMap_RappelWire_QuantizedDirection0E",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B296",
+          "target": "SOZMap_RappelWire_QuantizedDirection0F",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B29E",
+          "target": "SOZMap_RappelWire_QuantizedDirection10",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2A6",
+          "target": "SOZMap_RappelWire_QuantizedDirection11",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2AE",
+          "target": "SOZMap_RappelWire_QuantizedDirection12",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2B6",
+          "target": "SOZMap_RappelWire_QuantizedDirection13",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2BE",
+          "target": "SOZMap_RappelWire_QuantizedDirection14",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2C6",
+          "target": "SOZMap_RappelWire_QuantizedDirection15",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2CE",
+          "target": "SOZMap_RappelWire_QuantizedDirection16",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2D6",
+          "target": "SOZMap_RappelWire_QuantizedDirection17",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2DE",
+          "target": "SOZMap_RappelWire_QuantizedDirection18",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2E6",
+          "target": "SOZMap_RappelWire_QuantizedDirection19",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2EE",
+          "target": "SOZMap_RappelWire_QuantizedDirection1A",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2F6",
+          "target": "SOZMap_RappelWire_QuantizedDirection1B",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B2FE",
+          "target": "SOZMap_RappelWire_QuantizedDirection1C",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B306",
+          "target": "SOZMap_RappelWire_QuantizedDirection1D",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B30E",
+          "target": "SOZMap_RappelWire_QuantizedDirection1E",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B316",
+          "target": "SOZMap_RappelWire_QuantizedDirection1F",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B31E",
+          "target": "SOZMap_RappelWire_RootAnchor",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B326",
+          "target": "SOZMap_RappelWire_EndpointDefaultPhase",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B32E",
+          "target": "SOZMap_RappelWire_EndpointPhaseTile001B",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B336",
+          "target": "SOZMap_RappelWire_EndpointPhaseTile001E",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B33E",
+          "target": "SOZMap_RappelWire_EndpointPhaseTile0020",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B346",
+          "target": "SOZMap_RappelWire_EndpointPhaseTile081E",
           "base": "Map_SOZRapelWire_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4B34E",
+          "target": "SOZMap_RappelWire_EndpointPhaseTile081B",
           "base": "Map_SOZRapelWire_"
         },
         {
@@ -114916,23 +114916,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 332
       },
-      "declarations_sha256": "5201b4cd63c86cec50dcb9b8394ab1e1dd18844874513bcf1370c2446531142a",
+      "declarations_sha256": "adbee40826d4ffadc6d248b0f1c0fc145cd7cca81666a53ba8438e180bfdf5fc",
       "labels": {
         "Map_SOZRisingSandWall_": 0,
-        "word_40D2C": 28,
-        "word_40D58": 72,
-        "word_40D84": 116,
-        "word_40DB0": 160,
-        "word_40DD6": 198,
-        "word_40DF6": 230,
-        "word_40E10": 256,
-        "word_40E24": 276,
-        "word_40E32": 290,
-        "word_40E3A": 298,
-        "word_40E42": 306,
-        "word_40E4A": 314,
-        "word_40E52": 322,
-        "word_40E5A": 330
+        "SOZMap_RisingSandWall_IntactSevenPieces": 28,
+        "SOZSandWallMap_FractureCap1": 72,
+        "SOZSandWallMap_FractureCap2": 116,
+        "SOZMap_RisingSandWall_FractureSixPieces": 160,
+        "SOZMap_RisingSandWall_FractureFivePieces": 198,
+        "SOZMap_RisingSandWall_FractureFourPieces": 230,
+        "SOZSandWallMap_Fracture3Pieces": 256,
+        "SOZMap_RisingSandWall_FractureTwoPieces": 276,
+        "SOZSandWallMap_FractureLastPiece": 290,
+        "SOZSandWallMap_RiseDust1": 298,
+        "SOZSandWallMap_RiseDust2": 306,
+        "SOZSandWallMap_RiseDust3": 314,
+        "SOZSandWallMap_RiseDust4": 322,
+        "SOZSandWallMap_HiddenMain": 330
       },
       "external_symbols": [],
       "blocks": [
@@ -114940,98 +114940,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40D2C",
+          "target": "SOZMap_RisingSandWall_IntactSevenPieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40D58",
+          "target": "SOZSandWallMap_FractureCap1",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40D84",
+          "target": "SOZSandWallMap_FractureCap2",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40DB0",
+          "target": "SOZMap_RisingSandWall_FractureSixPieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40DD6",
+          "target": "SOZMap_RisingSandWall_FractureFivePieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40DF6",
+          "target": "SOZMap_RisingSandWall_FractureFourPieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E10",
+          "target": "SOZSandWallMap_Fracture3Pieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E24",
+          "target": "SOZMap_RisingSandWall_FractureTwoPieces",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E32",
+          "target": "SOZSandWallMap_FractureLastPiece",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E3A",
+          "target": "SOZSandWallMap_RiseDust1",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E42",
+          "target": "SOZSandWallMap_RiseDust2",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E4A",
+          "target": "SOZSandWallMap_RiseDust3",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E52",
+          "target": "SOZSandWallMap_RiseDust4",
           "base": "Map_SOZRisingSandWall_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40E5A",
+          "target": "SOZSandWallMap_HiddenMain",
           "base": "Map_SOZRisingSandWall_"
         },
         {
@@ -115115,12 +115115,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 150
       },
-      "declarations_sha256": "d30404f1890905dc0eb51a30935d83d4f43e091b07b8d7bda714ad5212331cb8",
+      "declarations_sha256": "d89053ad71dd55378b5935ec17a627e8b3a57a7786df92033a44c283bf57584c",
       "labels": {
         "Map_SOZSandCork_": 0,
-        "word_41EB4": 6,
-        "word_41EBC": 14,
-        "word_41EE2": 52
+        "SOZMap_SandCork_IntactSinglePiece": 6,
+        "SOZMap_SandCork_SixPieceFractureGrid": 14,
+        "SOZSandCorkMap_ColumnSection": 52
       },
       "external_symbols": [],
       "blocks": [
@@ -115128,21 +115128,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41EB4",
+          "target": "SOZMap_SandCork_IntactSinglePiece",
           "base": "Map_SOZSandCork_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41EBC",
+          "target": "SOZMap_SandCork_SixPieceFractureGrid",
           "base": "Map_SOZSandCork_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41EE2",
+          "target": "SOZSandCorkMap_ColumnSection",
           "base": "Map_SOZSandCork_"
         },
         {
@@ -115171,11 +115171,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 38
       },
-      "declarations_sha256": "a30387e094b8f17206739ae2c4d3a81864ee4ca4e0bb582388bcc9de03807529",
+      "declarations_sha256": "790943d8d7102c7dbb51aa75ba64855d4c27958976b3184559335d122f9db62e",
       "labels": {
         "Map_SOZSolidSprites_": 0,
-        "word_41FCC": 4,
-        "word_41FE0": 24
+        "SOZMap_SolidSprites_TallThreePieceShape": 4,
+        "SOZMap_SolidSprites_WideTwoPieceShape": 24
       },
       "external_symbols": [],
       "blocks": [
@@ -115183,14 +115183,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41FCC",
+          "target": "SOZMap_SolidSprites_TallThreePieceShape",
           "base": "Map_SOZSolidSprites_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_41FE0",
+          "target": "SOZMap_SolidSprites_WideTwoPieceShape",
           "base": "Map_SOZSolidSprites_"
         },
         {
@@ -115214,10 +115214,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "feeb92b7202f24567198bf9ff813e6add543381fbb288f4a36304d8634af2b61",
+      "declarations_sha256": "b87c8a5b66c5840a60ad542488175a640b6eb331fc528862b7292a88876e3586",
       "labels": {
         "Map_SOZSpawningSandBlocks_": 0,
-        "word_4043C": 2
+        "SOZSandBlockMap_Block": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -115225,7 +115225,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4043C",
+          "target": "SOZSandBlockMap_Block",
           "base": "Map_SOZSpawningSandBlocks_"
         },
         {
@@ -115244,10 +115244,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "449cf9f964a2bb7b91ee477289a727ff100ec75a48e189a374b0788312138779",
+      "declarations_sha256": "740c89bd7e1176b40afb5175e07fd93fcc0edaf1fe3250d1e5a47ef4fe23fd88",
       "labels": {
         "Map_SOZSpringVine_": 0,
-        "word_40B0E": 2
+        "SOZSpringVineMap_Link": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -115255,7 +115255,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_40B0E",
+          "target": "SOZSpringVineMap_Link",
           "base": "Map_SOZSpringVine_"
         },
         {
@@ -115274,12 +115274,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 60
       },
-      "declarations_sha256": "5119f04708b10fc25077375078dc305b5f64cd141c6b39293f732388aa2c963c",
+      "declarations_sha256": "3d4363c6ad951d2b37c6f323b94d4b2d8c27df5d3fce39bc01611d263eb2ff2e",
       "labels": {
         "Map_SOZSwingingPlatform_": 0,
-        "word_416CC": 6,
-        "word_416EC": 38,
-        "word_416F4": 46
+        "SOZSwingPlatformMap_PlatformBody": 6,
+        "SOZSwingPlatformMap_ChainLink": 38,
+        "SOZSwingPlatformMap_FirstLinkAndPreview": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -115287,21 +115287,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_416CC",
+          "target": "SOZSwingPlatformMap_PlatformBody",
           "base": "Map_SOZSwingingPlatform_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_416EC",
+          "target": "SOZSwingPlatformMap_ChainLink",
           "base": "Map_SOZSwingingPlatform_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_416F4",
+          "target": "SOZSwingPlatformMap_FirstLinkAndPreview",
           "base": "Map_SOZSwingingPlatform_"
         },
         {

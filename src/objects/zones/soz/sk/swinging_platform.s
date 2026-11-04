@@ -13,7 +13,7 @@ Obj_SOZSwingingPlatform:
                 move.w  x_pos(a0),$44(a0)
                 move.w  y_pos(a0),$46(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_414E6
+                bne.w   SKSOZSwingPlatform_InitSwingMotion
                 move.l  #Draw_Sprite,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
@@ -32,22 +32,23 @@ Obj_SOZSwingingPlatform:
                 move.w  d1,mainspr_childsprites(a1)
                 subq.w  #1,d1
 
-loc_414CA:
+; The loop assumes the subtype's link count is nonzero
+SKSOZSwingPlatform_InitChainLinks:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #1,(a2)+
-                dbf     d1,loc_414CA
+                dbf     d1,SKSOZSwingPlatform_InitChainLinks
                 move.b  #2,sub2_mapframe(a1)
                 move.b  #1,mapping_frame(a1)
                 move.w  a1,$3C(a0)
 
-loc_414E6:
+SKSOZSwingPlatform_InitSwingMotion:
                 move.w  #$4000,angle(a0)
                 move.w  #0,$32(a0)
                 andi.b  #$F0,subtype(a0)
-                move.l  #loc_414FE,(a0)
+                move.l  #SKSOZSwingPlatform_MoveAndCheckTopSolid,(a0)
 
-loc_414FE:
+SKSOZSwingPlatform_MoveAndCheckTopSolid:
                 move.w  x_pos(a0),-(sp)
                 bsr.w   PositionSozSwingPlatformAndChain
                 move.w  #$20,d1
@@ -58,17 +59,17 @@ loc_414FE:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   loc_41530
+                bhi.w   SKSOZSwingPlatform_ClearPlacementRespawn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_41530:
+SKSOZSwingPlatform_ClearPlacementRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_4153C
+                beq.s   SKSOZSwingPlatform_DeleteChainAndRoot
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_4153C:
+SKSOZSwingPlatform_DeleteChainAndRoot:
                 movea.w $3C(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 jmp     (Delete_Current_Sprite).l
@@ -81,24 +82,25 @@ PositionSozSwingPlatformAndChain:
                 move.b  (Oscillating_table+$1A).w,d0
                 addi.b  #$80,d0
                 tst.b   subtype(a0)
-                beq.s   loc_41562
+                beq.s   SKSOZSwingPlatform_CheckPhaseChange
                 bsr.w   AdvanceRiderDrivenSozSwingAngle
 
-loc_41562:
+SKSOZSwingPlatform_CheckPhaseChange:
                 cmp.b   $36(a0),d0
-                beq.w   locret_41634
+                beq.w   SKSOZSwingPlatform_GeometryReturn
                 move.b  d0,$36(a0)
                 btst    #0,status(a0)
-                beq.s   loc_4157C
+                beq.s   SKSOZSwingPlatform_TryMirrorAngleAgain
                 neg.w   d0
                 addi.w  #$80,d0
 
-loc_4157C:
+SKSOZSwingPlatform_TryMirrorAngleAgain:
                 btst    #1,status(a0)
-                beq.s   loc_41586
+                beq.s   SKSOZSwingPlatform_BuildChainGeometry
                 neg.w   d0
 
-loc_41586:
+; After the first record, place the next link one and a half steps from the origin
+SKSOZSwingPlatform_BuildChainGeometry:
                 jsr     (GetSineCosine).l
                 move.w  $46(a0),d2
                 move.w  $44(a0),d3
@@ -106,7 +108,7 @@ loc_41586:
                 movea.w $3C(a0),a1
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #2,d6
-                bcs.w   locret_41634
+                bcs.w   SKSOZSwingPlatform_GeometryReturn
                 swap    d0
                 swap    d1
                 asr.l   #4,d0
@@ -119,7 +121,8 @@ loc_41586:
                 add.l   d1,d5
                 lea     sub3_x_pos(a1),a2
 
-loc_415BC:
+; The chain actor reuses its animation timer and angle words to cache the endpoint
+SKSOZSwingPlatform_PlaceRemainingLinks:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -131,7 +134,7 @@ loc_415BC:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_415BC
+                dbf     d6,SKSOZSwingPlatform_PlaceRemainingLinks
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -154,16 +157,16 @@ loc_415BC:
                 add.w   $44(a0),d5
                 move.w  d4,y_pos(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_41630
+                beq.s   SKSOZSwingPlatform_StorePlatformX
                 subi.w  #$18,d5
                 btst    #0,status(a0)
-                beq.s   loc_41630
+                beq.s   SKSOZSwingPlatform_StorePlatformX
                 addi.w  #$30,d5
 
-loc_41630:
+SKSOZSwingPlatform_StorePlatformX:
                 move.w  d5,x_pos(a0)
 
-locret_41634:
+SKSOZSwingPlatform_GeometryReturn:
                 rts
 ; End of function PositionSozSwingPlatformAndChain
 
@@ -171,55 +174,55 @@ locret_41634:
 
 AdvanceRiderDrivenSozSwingAngle:
                 tst.w   $34(a0)
-                beq.s   loc_4164C
+                beq.s   SKSOZSwingPlatform_TryStartFromP1
                 btst    #3,status(a0)
-                bne.s   loc_416C0
+                bne.s   SKSOZSwingPlatform_ReturnAngleHighByte
                 subq.w  #1,$34(a0)
-                bra.w   loc_416C0
+                bra.w   SKSOZSwingPlatform_ReturnAngleHighByte
 ; ---------------------------------------------------------------------------
 
-loc_4164C:
+SKSOZSwingPlatform_TryStartFromP1:
                 tst.b   $31(a0)
-                bne.s   loc_41668
+                bne.s   SKSOZSwingPlatform_StepPositiveSwing
                 btst    #3,status(a0)
-                beq.s   loc_416C0
+                beq.s   SKSOZSwingPlatform_ReturnAngleHighByte
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_416C0
+                bne.w   SKSOZSwingPlatform_ReturnAngleHighByte
                 move.b  #1,$31(a0)
 
-loc_41668:
+SKSOZSwingPlatform_StepPositiveSwing:
                 tst.b   $30(a0)
-                bne.s   loc_41698
+                bne.s   SKSOZSwingPlatform_StepNegativeSwing
                 move.w  $32(a0),d0
                 addi.w  #8,d0
                 move.w  d0,$32(a0)
                 add.w   d0,angle(a0)
                 tst.w   d0
-                bne.s   loc_41688
+                bne.s   SKSOZSwingPlatform_TrySwitchToDecel
                 move.b  #0,$31(a0)
 
-loc_41688:
+SKSOZSwingPlatform_TrySwitchToDecel:
                 cmpi.b  #$80,angle(a0)
-                blo.s   loc_416C0
+                blo.s   SKSOZSwingPlatform_ReturnAngleHighByte
                 move.b  #1,$30(a0)
-                bra.s   loc_416C0
+                bra.s   SKSOZSwingPlatform_ReturnAngleHighByte
 ; ---------------------------------------------------------------------------
 
-loc_41698:
+SKSOZSwingPlatform_StepNegativeSwing:
                 move.w  $32(a0),d0
                 subi.w  #8,d0
                 move.w  d0,$32(a0)
                 add.w   d0,angle(a0)
                 tst.w   d0
-                bne.s   loc_416B2
+                bne.s   SKSOZSwingPlatform_TrySwitchToAccel
                 move.w  #$1E,$34(a0)
 
-loc_416B2:
+SKSOZSwingPlatform_TrySwitchToAccel:
                 cmpi.b  #$80,angle(a0)
-                bhs.s   loc_416C0
+                bhs.s   SKSOZSwingPlatform_ReturnAngleHighByte
                 move.b  #0,$30(a0)
 
-loc_416C0:
+SKSOZSwingPlatform_ReturnAngleHighByte:
                 move.b  angle(a0),d0
                 rts
 ; End of function AdvanceRiderDrivenSozSwingAngle

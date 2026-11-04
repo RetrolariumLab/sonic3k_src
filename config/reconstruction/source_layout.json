@@ -9603,7 +9603,7 @@
       "responsibility": "Sandopolis act-one screen and background initialization, event control, deformation and private sequence data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 646,
+      "physical_lines": 650,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9633,7 +9633,7 @@
       "responsibility": "Sandopolis act-two background initialization, event control, deformation and private sequence data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 877,
+      "physical_lines": 880,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -54420,7 +54420,7 @@
       "responsibility": "Assembler data for Levels/SOZ/Misc Object Data/Map - Swinging Platform",
       "role": "data",
       "status": "owned",
-      "physical_lines": 17,
+      "physical_lines": 18,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "Levels/SOZ/Misc Object Data/Map - Swinging Platform.s",
@@ -65406,7 +65406,7 @@
       "responsibility": "Breakable sand rock collision, fracture response and fragments.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 112,
+      "physical_lines": 113,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65418,7 +65418,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_417DE",
+          "name": "SKSOZSandRock_TryBreakWithP2",
           "kind": "terminal-tail",
           "reason": "The final complete object state terminates in an unconditional sprite-service tail call followed only by checked mapping data; it preserves the preceding indexed lookup cohort.",
           "origin_first_line": 9428,
@@ -65566,7 +65566,7 @@
       "responsibility": "Sandopolis darkness-dependent ghost controller, ghost body attack states and disappearance animation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 312,
+      "physical_lines": 313,
       "origin": {
         "commit": "1616b6c2e29f266ddceab52d6b96b3b07759daab",
         "path": "sonic3k.s",
@@ -65661,7 +65661,7 @@
       "responsibility": "Light-switch activation, player contact, timer state and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 190,
+      "physical_lines": 192,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65731,7 +65731,7 @@
       "responsibility": "Sandopolis-specific collision-path switcher and its player contact geometry.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 419,
+      "physical_lines": 422,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -65761,7 +65761,7 @@
       "responsibility": "Push-switch contact, player pushing, trigger state and sprite resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 289,
+      "physical_lines": 290,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65796,7 +65796,7 @@
       "responsibility": "Pushable rock collision, player pushing, movement and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 225,
+      "physical_lines": 226,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65831,7 +65831,7 @@
       "responsibility": "Quicksand player detection, sinking, movement control and related sand states.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 492,
+      "physical_lines": 494,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -65861,7 +65861,7 @@
       "responsibility": "Sandopolis rappel wire geometry, player attachment, constrained travel, character motion and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 725,
+      "physical_lines": 730,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "sonic3k.s",
@@ -65931,7 +65931,7 @@
       "responsibility": "Sand cork player contact, fracture, movement and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 176,
+      "physical_lines": 178,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -66011,7 +66011,7 @@
       "responsibility": "Sand-block spawning, block motion, collision and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 150,
+      "physical_lines": 151,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -66046,7 +66046,7 @@
       "responsibility": "Spring vine player contact, deformation, launch response and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 331,
+      "physical_lines": 332,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -66076,7 +66076,7 @@
       "responsibility": "Swinging platform coordinated motion, player riding and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 229,
+      "physical_lines": 232,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",

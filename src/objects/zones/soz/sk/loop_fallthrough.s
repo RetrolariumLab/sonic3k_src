@@ -8,9 +8,9 @@ Obj_SOZLoopFallthrough:
                 andi.w  #$7F,d0
                 lsl.w   #4,d0
                 move.w  d0,$30(a0)
-                move.l  #loc_4045E,(a0)
+                move.l  #SKSOZLoopFall_UpdateBothPassengers,(a0)
 
-loc_4045E:
+SKSOZLoopFall_UpdateBothPassengers:
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 bsr.s   CarryPlayerThroughSozLoopFallthrough
@@ -23,25 +23,25 @@ loc_4045E:
 
 CarryPlayerThroughSozLoopFallthrough:
                 btst    d6,status(a0)
-                bne.w   loc_40508
+                bne.w   SKSOZLoopFall_MoveAndTryReleasePassenger
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.w   locret_40506
+                bhs.w   SKSOZLoopFall_CaptureReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   locret_40506
+                bhs.s   SKSOZLoopFall_CaptureReturn
                 btst    #Status_OnObj,status(a1)
-                bne.s   locret_40506
+                bne.s   SKSOZLoopFall_CaptureReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_40506
+                bhs.s   SKSOZLoopFall_CaptureReturn
                 tst.b   object_control(a1)
-                bne.s   locret_40506
+                bne.s   SKSOZLoopFall_CaptureReturn
                 cmpi.w  #$800,y_vel(a1)
-                blt.s   locret_40506
+                blt.s   SKSOZLoopFall_CaptureReturn
                 bset    #Status_OnObj,status(a1)
                 bset    d6,status(a0)
                 move.b  #$E,y_radius(a1)
@@ -55,11 +55,11 @@ CarryPlayerThroughSozLoopFallthrough:
                 move.b  #$81,object_control(a1)
                 move.w  #0,x_vel(a1)
 
-locret_40506:
+SKSOZLoopFall_CaptureReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40508:
+SKSOZLoopFall_MoveAndTryReleasePassenger:
                 move.w  x_vel(a1),d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -72,7 +72,7 @@ loc_40508:
                 move.w  y_pos(a1),d0
                 sub.w   $30(a0),d0
                 cmp.w   y_pos(a0),d0
-                blt.s   locret_40506
+                blt.s   SKSOZLoopFall_CaptureReturn
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 move.b  #0,object_control(a1)

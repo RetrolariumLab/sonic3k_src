@@ -24,16 +24,16 @@ Load_SOZ_Pushable_Rock_Track_Ride_Info:
                 move.w  (a1)+,$3A(a0)
                 move.l  a1,$36(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_405A4
+                bpl.s   SKSOZPushRock_InitOrdinaryPush
                 move.w  a0,(_unkF7C4).w
-                move.l  #loc_405D6,(a0)
-                bra.s   loc_405D6
+                move.l  #SKSOZPushRock_UpdateRegisteredRock,(a0)
+                bra.s   SKSOZPushRock_UpdateRegisteredRock
 ; ---------------------------------------------------------------------------
 
-loc_405A4:
-                move.l  #loc_405AA,(a0)
+SKSOZPushRock_InitOrdinaryPush:
+                move.l  #SKSOZPushRock_CheckSolidAndPush,(a0)
 
-loc_405AA:
+SKSOZPushRock_CheckSolidAndPush:
                 move.b  (Player_1+status).w,$30(a0)
                 move.b  (Player_2+status).w,$31(a0)
                 move.w  #$1B,d1
@@ -45,44 +45,44 @@ loc_405AA:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_405D6:
-                bra.s   loc_405AA
+SKSOZPushRock_UpdateRegisteredRock:
+                bra.s   SKSOZPushRock_CheckSolidAndPush
 ; ---------------------------------------------------------------------------
 
-loc_405D8:
+SKSOZPushRock_FallAndCheckCameraDepth:
                 move.w  x_pos(a0),-(sp)
                 jsr     (MoveSprite).l
                 move.w  (sp)+,d4
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$120,d0
                 cmp.w   y_pos(a0),d0
-                bgt.s   loc_405FA
+                bgt.s   SKSOZPushRock_SnapYAndReadNextX
                 move.w  #$7F00,d4
                 move.w  d4,x_pos(a0)
 
-loc_405FA:
+SKSOZPushRock_SnapYAndReadNextX:
                 move.w  $3A(a0),d0
                 cmp.w   y_pos(a0),d0
-                bhs.s   loc_4063C
+                bhs.s   SKSOZPushRock_CheckTrackSolidAndDraw
                 move.w  d0,y_pos(a0)
                 move.w  #0,y_vel(a0)
                 movea.l $36(a0),a1
                 move.w  (a1)+,d0
-                bpl.s   loc_4061E
-                move.l  #loc_406AE,(a0)
-                bra.s   loc_4063C
+                bpl.s   SKSOZPushRock_BeginHorizontalLeg
+                move.l  #SKSOZPushRock_UpdateStoppedTrackRock,(a0)
+                bra.s   SKSOZPushRock_CheckTrackSolidAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_4061E:
+SKSOZPushRock_BeginHorizontalLeg:
                 move.w  d0,$3A(a0)
                 move.l  a1,$36(a0)
-                move.l  #loc_40654,(a0)
+                move.l  #SKSOZPushRock_MoveHorizontalLeg,(a0)
                 move.w  #$100,x_vel(a0)
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_4063C
+                bhs.s   SKSOZPushRock_CheckTrackSolidAndDraw
                 neg.w   x_vel(a0)
 
-loc_4063C:
+SKSOZPushRock_CheckTrackSolidAndDraw:
                 move.w  #$1B,d1
                 move.w  #$C,d2
                 move.w  #$D,d3
@@ -90,50 +90,51 @@ loc_4063C:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_40654:
+SKSOZPushRock_MoveHorizontalLeg:
                 move.w  x_pos(a0),-(sp)
                 jsr     (MoveSprite2).l
                 move.w  (sp)+,d4
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #$1F,d0
-                bne.s   loc_40672
+                bne.s   SKSOZPushRock_CheckRightwardTarget
                 moveq   #signextendB(sfx_BlockConveyor),d0
                 jsr     (Play_SFX).l
 
-loc_40672:
+SKSOZPushRock_CheckRightwardTarget:
                 tst.w   x_vel(a0)
-                bmi.s   loc_40684
+                bmi.s   SKSOZPushRock_CheckLeftwardTarget
                 move.w  $3A(a0),d0
                 cmp.w   x_pos(a0),d0
-                bhi.s   loc_406AC
-                bra.s   loc_4068E
+                bhi.s   SKSOZPushRock_DrawMovingTrackRock
+                bra.s   SKSOZPushRock_ReadNextYOrStop
 ; ---------------------------------------------------------------------------
 
-loc_40684:
+SKSOZPushRock_CheckLeftwardTarget:
                 move.w  $3A(a0),d0
                 cmp.w   x_pos(a0),d0
-                blo.s   loc_406AC
+                blo.s   SKSOZPushRock_DrawMovingTrackRock
 
-loc_4068E:
+SKSOZPushRock_ReadNextYOrStop:
                 movea.l $36(a0),a1
                 move.w  (a1)+,d0
-                bpl.s   loc_4069E
-                move.l  #loc_406AE,(a0)
-                bra.s   loc_4063C
+                bpl.s   SKSOZPushRock_BeginNextVerticalLeg
+                move.l  #SKSOZPushRock_UpdateStoppedTrackRock,(a0)
+                bra.s   SKSOZPushRock_CheckTrackSolidAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_4069E:
+; Preserve horizontal velocity as the rock starts falling again
+SKSOZPushRock_BeginNextVerticalLeg:
                 move.w  d0,$3A(a0)
                 move.l  a1,$36(a0)
-                move.l  #loc_405D8,(a0)
+                move.l  #SKSOZPushRock_FallAndCheckCameraDepth,(a0)
 
-loc_406AC:
-                bra.s   loc_4063C
+SKSOZPushRock_DrawMovingTrackRock:
+                bra.s   SKSOZPushRock_CheckTrackSolidAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_406AE:
+SKSOZPushRock_UpdateStoppedTrackRock:
                 move.w  x_pos(a0),d4
-                bra.s   loc_4063C
+                bra.s   SKSOZPushRock_CheckTrackSolidAndDraw
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -141,20 +142,20 @@ UpdatePlayerPushingSozRock:
                 moveq   #0,d5
                 move.b  status(a0),d3
                 andi.b  #pushing_mask,d3
-                beq.w   locret_406E2
+                beq.w   SKSOZPushRock_PushSelectionReturn
                 move.w  x_pos(a0),d2
                 lea     (Player_1).w,a1
                 move.b  $30(a0),d0
                 moveq   #p1_pushing_bit,d6
                 bsr.s   ApplyDelayedPlayerPushToSozRock
                 tst.w   d5
-                bne.s   locret_406E2
+                bne.s   SKSOZPushRock_PushSelectionReturn
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
                 moveq   #p2_pushing_bit,d6
                 bsr.s   ApplyDelayedPlayerPushToSozRock
 
-locret_406E2:
+SKSOZPushRock_PushSelectionReturn:
                 rts
 ; End of function UpdatePlayerPushingSozRock
 
@@ -162,13 +163,13 @@ locret_406E2:
 
 ApplyDelayedPlayerPushToSozRock:
                 btst    d6,d3
-                beq.s   locret_4075C
+                beq.s   SKSOZPushRock_ApplyPushReturn
                 cmp.w   x_pos(a1),d2
-                bhs.s   loc_40726
+                bhs.s   SKSOZPushRock_TryDelayedPushRight
                 btst    #5,d0
-                beq.s   locret_4075C
+                beq.s   SKSOZPushRock_ApplyPushReturn
                 subq.w  #1,$32(a0)
-                bpl.s   loc_40722
+                bpl.s   SKSOZPushRock_ClaimPushForOnePlayer
                 move.w  #4,$32(a0)
                 subq.w  #1,x_pos(a0)
                 subq.w  #1,x_pos(a1)
@@ -177,19 +178,19 @@ ApplyDelayedPlayerPushToSozRock:
                 addi.w  #$10,d3
                 jsr     (ObjCheckFloorDist2).l
                 cmpi.w  #$E,d1
-                bgt.s   loc_4075E
+                bgt.s   SKSOZPushRock_BeginFallAtEdge
                 add.w   d1,y_pos(a0)
 
-loc_40722:
+SKSOZPushRock_ClaimPushForOnePlayer:
                 moveq   #1,d5
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_40726:
+SKSOZPushRock_TryDelayedPushRight:
                 btst    #5,d0
-                beq.s   locret_4075C
+                beq.s   SKSOZPushRock_ApplyPushReturn
                 subq.w  #1,$32(a0)
-                bpl.s   loc_40722
+                bpl.s   SKSOZPushRock_ClaimPushForOnePlayer
                 move.w  #4,$32(a0)
                 addq.w  #1,x_pos(a0)
                 addq.w  #1,x_pos(a1)
@@ -198,17 +199,17 @@ loc_40726:
                 subi.w  #$10,d3
                 jsr     (ObjCheckFloorDist2).l
                 cmpi.w  #$E,d1
-                bgt.s   loc_4075E
+                bgt.s   SKSOZPushRock_BeginFallAtEdge
                 add.w   d1,y_pos(a0)
                 moveq   #1,d5
 
-locret_4075C:
+SKSOZPushRock_ApplyPushReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4075E:
+SKSOZPushRock_BeginFallAtEdge:
                 bset    #1,status(a0)
-                move.l  #loc_405D8,(a0)
+                move.l  #SKSOZPushRock_FallAndCheckCameraDepth,(a0)
                 moveq   #1,d5
                 rts
 ; End of function ApplyDelayedPlayerPushToSozRock

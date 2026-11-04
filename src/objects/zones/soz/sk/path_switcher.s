@@ -12,55 +12,55 @@ Obj_SOZPathSwap:
                 move.w  #$280,priority(a0)
                 move.b  subtype(a0),d0
                 btst    #2,d0
-                beq.s   loc_1D180
+                beq.s   SKSOZPath_InitXSpanAndP1Side
                 andi.w  #7,d0
                 move.b  d0,mapping_frame(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  word_1D178(pc,d0.w),$32(a0)
+                move.w  SKSOZPath_CrossingHalfSpans(pc,d0.w),$32(a0)
                 move.w  y_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1D15E
+                bhs.s   SKSOZPath_InitP2SideY
                 move.b  #1,$34(a0)
 
-loc_1D15E:
+SKSOZPath_InitP2SideY:
                 lea     (Player_2).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1D16E
+                bhs.s   SKSOZPath_InitYCrossing
                 move.b  #1,$35(a0)
 
-loc_1D16E:
-                move.l  #loc_1D390,(a0)
-                bra.w   loc_1D390
+SKSOZPath_InitYCrossing:
+                move.l  #SKSOZPath_UpdateBothYCrossings,(a0)
+                bra.w   SKSOZPath_UpdateBothYCrossings
 ; ---------------------------------------------------------------------------
-word_1D178:
+SKSOZPath_CrossingHalfSpans:
                 dc.w    $20,   $40,   $80,  $100
 ; ---------------------------------------------------------------------------
 
-loc_1D180:
+SKSOZPath_InitXSpanAndP1Side:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_1D178(pc,d0.w),$32(a0)
+                move.w  SKSOZPath_CrossingHalfSpans(pc,d0.w),$32(a0)
                 move.w  x_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1D1A4
+                bhs.s   SKSOZPath_InitP2SideX
                 move.b  #1,$34(a0)
 
-loc_1D1A4:
+SKSOZPath_InitP2SideX:
                 lea     (Player_2).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1D1B4
+                bhs.s   SKSOZPath_InitXCrossing
                 move.b  #1,$35(a0)
 
-loc_1D1B4:
-                move.l  #loc_1D1BA,(a0)
+SKSOZPath_InitXCrossing:
+                move.l  #SKSOZPath_UpdateBothXCrossings,(a0)
 
-loc_1D1BA:
+SKSOZPath_UpdateBothXCrossings:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1D1DC
+                bne.w   SKSOZPath_DrawDebugXMarker
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -70,16 +70,16 @@ loc_1D1BA:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_1D1DC:
+SKSOZPath_DrawDebugXMarker:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ApplySozPathChangeOnXCrossing:
                 tst.b   (a2)+
-                bne.w   loc_1D2BE
+                bne.w   SKSOZPath_LatchLeftCrossing
                 cmp.w   x_pos(a1),d1
-                bhi.w   locret_1D38E
+                bhi.w   SKSOZPath_XCrossingReturn
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -88,77 +88,80 @@ ApplySozPathChangeOnXCrossing:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1D38E
+                blt.w   SKSOZPath_XCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_1D38E
+                bge.w   SKSOZPath_XCrossingReturn
                 move.b  subtype(a0),d0
-                bpl.s   loc_1D224
+                bpl.s   SKSOZPath_CalcRightDistance
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1D38E
+                bne.w   SKSOZPath_XCrossingReturn
 
-loc_1D224:
+SKSOZPath_CalcRightDistance:
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1D22E
+                bcc.s   SKSOZPath_CheckRightLayerAndPriority
                 neg.w   d2
 
-loc_1D22E:
+; All four crossing directions require distance below $40. The render flag can limit a crossing to priority changes
+SKSOZPath_CheckRightLayerAndPriority:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1D38E
+                bhs.w   SKSOZPath_XCrossingReturn
                 btst    #0,render_flags(a0)
-                bne.s   loc_1D2A6
+                bne.s   SKSOZPath_SetRightPriority
                 btst    #3,d0
-                bne.s   loc_1D276
+                bne.s   SKSOZPath_CheckRightAltLayer
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D254
+                bne.s   SKSOZPath_CountRightDefaultCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D268
+                bra.s   SKSOZPath_SetRightDefaultLayer
 ; ---------------------------------------------------------------------------
 
-loc_1D254:
+; The second mismatched crossing clears the count and skips the layer change. Priority still updates
+SKSOZPath_CountRightDefaultCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D268
+                bne.s   SKSOZPath_SetRightDefaultLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D2A6
+                bra.s   SKSOZPath_SetRightPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D268:
+SKSOZPath_SetRightDefaultLayer:
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
-                bra.s   loc_1D2A6
+                bra.s   SKSOZPath_SetRightPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D276:
+SKSOZPath_CheckRightAltLayer:
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D286
+                bne.s   SKSOZPath_CountRightAltCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D2A6
+                bra.s   SKSOZPath_SetRightPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D286:
+SKSOZPath_CountRightAltCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D29A
+                bne.s   SKSOZPath_SetRightAltLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D2A6
+                bra.s   SKSOZPath_SetRightPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D29A:
+SKSOZPath_SetRightAltLayer:
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1D2A6:
+SKSOZPath_SetRightPriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #5,d0
-                beq.w   locret_1D38E
+                beq.w   SKSOZPath_XCrossingReturn
                 ori.w   #high_priority,art_tile(a1)
-                bra.w   locret_1D38E
+                bra.w   SKSOZPath_XCrossingReturn
 ; ---------------------------------------------------------------------------
 
-loc_1D2BE:
+; Record the new side before testing the perpendicular span, airborne state and distance
+SKSOZPath_LatchLeftCrossing:
                 cmp.w   x_pos(a1),d1
-                bls.w   locret_1D38E
+                bls.w   SKSOZPath_XCrossingReturn
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -167,81 +170,81 @@ loc_1D2BE:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1D38E
+                blt.w   SKSOZPath_XCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_1D38E
+                bge.w   SKSOZPath_XCrossingReturn
                 move.b  subtype(a0),d0
-                bpl.s   loc_1D2FA
+                bpl.s   SKSOZPath_CalcLeftDistance
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1D38E
+                bne.w   SKSOZPath_XCrossingReturn
 
-loc_1D2FA:
+SKSOZPath_CalcLeftDistance:
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1D304
+                bcc.s   SKSOZPath_CheckLeftLayerAndPriority
                 neg.w   d2
 
-loc_1D304:
+SKSOZPath_CheckLeftLayerAndPriority:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1D38E
+                bhs.w   SKSOZPath_XCrossingReturn
                 btst    #0,render_flags(a0)
-                bne.s   loc_1D37C
+                bne.s   SKSOZPath_SetLeftPriority
                 btst    #4,d0
-                bne.s   loc_1D34C
+                bne.s   SKSOZPath_CheckLeftAltLayer
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D32A
+                bne.s   SKSOZPath_CountLeftDefaultCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D33E
+                bra.s   SKSOZPath_SetLeftDefaultLayer
 ; ---------------------------------------------------------------------------
 
-loc_1D32A:
+SKSOZPath_CountLeftDefaultCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D33E
+                bne.s   SKSOZPath_SetLeftDefaultLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D37C
+                bra.s   SKSOZPath_SetLeftPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D33E:
+SKSOZPath_SetLeftDefaultLayer:
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
-                bra.s   loc_1D37C
+                bra.s   SKSOZPath_SetLeftPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D34C:
+SKSOZPath_CheckLeftAltLayer:
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D35C
+                bne.s   SKSOZPath_CountLeftAltCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D37C
+                bra.s   SKSOZPath_SetLeftPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D35C:
+SKSOZPath_CountLeftAltCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D370
+                bne.s   SKSOZPath_SetLeftAltLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D37C
+                bra.s   SKSOZPath_SetLeftPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D370:
+SKSOZPath_SetLeftAltLayer:
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1D37C:
+SKSOZPath_SetLeftPriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #6,d0
-                beq.s   locret_1D38E
+                beq.s   SKSOZPath_XCrossingReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_1D38E:
+SKSOZPath_XCrossingReturn:
                 rts
 ; End of function ApplySozPathChangeOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
-loc_1D390:
+SKSOZPath_UpdateBothYCrossings:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1D3B2
+                bne.w   SKSOZPath_DrawDebugYMarker
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -251,16 +254,16 @@ loc_1D390:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_1D3B2:
+SKSOZPath_DrawDebugYMarker:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 ApplySozPathChangeOnYCrossing:
                 tst.b   (a2)+
-                bne.w   loc_1D494
+                bne.w   SKSOZPath_LatchUpCrossing
                 cmp.w   y_pos(a1),d1
-                bhi.w   locret_1D564
+                bhi.w   SKSOZPath_YCrossingReturn
                 move.b  #1,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -269,77 +272,77 @@ ApplySozPathChangeOnYCrossing:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1D564
+                blt.w   SKSOZPath_YCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_1D564
+                bge.w   SKSOZPath_YCrossingReturn
                 move.b  subtype(a0),d0
-                bpl.s   loc_1D3FA
+                bpl.s   SKSOZPath_CalcDownDistance
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1D564
+                bne.w   SKSOZPath_YCrossingReturn
 
-loc_1D3FA:
+SKSOZPath_CalcDownDistance:
                 move.w  y_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1D404
+                bcc.s   SKSOZPath_CheckDownLayerAndPriority
                 neg.w   d2
 
-loc_1D404:
+SKSOZPath_CheckDownLayerAndPriority:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1D564
+                bhs.w   SKSOZPath_YCrossingReturn
                 btst    #0,render_flags(a0)
-                bne.s   loc_1D47C
+                bne.s   SKSOZPath_SetDownPriority
                 btst    #3,d0
-                bne.s   loc_1D44C
+                bne.s   SKSOZPath_CheckDownAltLayer
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D42A
+                bne.s   SKSOZPath_CountDownDefaultCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D43E
+                bra.s   SKSOZPath_SetDownDefaultLayer
 ; ---------------------------------------------------------------------------
 
-loc_1D42A:
+SKSOZPath_CountDownDefaultCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D43E
+                bne.s   SKSOZPath_SetDownDefaultLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D47C
+                bra.s   SKSOZPath_SetDownPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D43E:
+SKSOZPath_SetDownDefaultLayer:
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
-                bra.s   loc_1D47C
+                bra.s   SKSOZPath_SetDownPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D44C:
+SKSOZPath_CheckDownAltLayer:
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D45C
+                bne.s   SKSOZPath_CountDownAltCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D47C
+                bra.s   SKSOZPath_SetDownPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D45C:
+SKSOZPath_CountDownAltCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D470
+                bne.s   SKSOZPath_SetDownAltLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D47C
+                bra.s   SKSOZPath_SetDownPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D470:
+SKSOZPath_SetDownAltLayer:
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1D47C:
+SKSOZPath_SetDownPriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #5,d0
-                beq.w   locret_1D564
+                beq.w   SKSOZPath_YCrossingReturn
                 ori.w   #high_priority,art_tile(a1)
-                bra.w   locret_1D564
+                bra.w   SKSOZPath_YCrossingReturn
 ; ---------------------------------------------------------------------------
 
-loc_1D494:
+SKSOZPath_LatchUpCrossing:
                 cmp.w   y_pos(a1),d1
-                bls.w   locret_1D564
+                bls.w   SKSOZPath_YCrossingReturn
                 move.b  #0,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -348,72 +351,72 @@ loc_1D494:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1D564
+                blt.w   SKSOZPath_YCrossingReturn
                 cmp.w   d3,d4
-                bge.w   locret_1D564
+                bge.w   SKSOZPath_YCrossingReturn
                 move.b  subtype(a0),d0
-                bpl.s   loc_1D4D0
+                bpl.s   SKSOZPath_CalcUpDistance
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1D564
+                bne.w   SKSOZPath_YCrossingReturn
 
-loc_1D4D0:
+SKSOZPath_CalcUpDistance:
                 move.w  y_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1D4DA
+                bcc.s   SKSOZPath_CheckUpLayerAndPriority
                 neg.w   d2
 
-loc_1D4DA:
+SKSOZPath_CheckUpLayerAndPriority:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1D564
+                bhs.w   SKSOZPath_YCrossingReturn
                 btst    #0,render_flags(a0)
-                bne.s   loc_1D552
+                bne.s   SKSOZPath_SetUpPriority
                 btst    #4,d0
-                bne.s   loc_1D522
+                bne.s   SKSOZPath_CheckUpAltLayer
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D500
+                bne.s   SKSOZPath_CountUpDefaultCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D514
+                bra.s   SKSOZPath_SetUpDefaultLayer
 ; ---------------------------------------------------------------------------
 
-loc_1D500:
+SKSOZPath_CountUpDefaultCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D514
+                bne.s   SKSOZPath_SetUpDefaultLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D552
+                bra.s   SKSOZPath_SetUpPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D514:
+SKSOZPath_SetUpDefaultLayer:
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
-                bra.s   loc_1D552
+                bra.s   SKSOZPath_SetUpPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D522:
+SKSOZPath_CheckUpAltLayer:
                 cmpi.b  #$C,top_solid_bit(a1)
-                bne.s   loc_1D532
+                bne.s   SKSOZPath_CountUpAltCrossing
                 move.b  #0,1(a2)
-                bra.s   loc_1D552
+                bra.s   SKSOZPath_SetUpPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D532:
+SKSOZPath_CountUpAltCrossing:
                 addq.b  #1,1(a2)
                 cmpi.b  #2,1(a2)
-                bne.s   loc_1D546
+                bne.s   SKSOZPath_SetUpAltLayer
                 move.b  #0,1(a2)
-                bra.s   loc_1D552
+                bra.s   SKSOZPath_SetUpPriority
 ; ---------------------------------------------------------------------------
 
-loc_1D546:
+SKSOZPath_SetUpAltLayer:
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1D552:
+SKSOZPath_SetUpPriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #6,d0
-                beq.s   locret_1D564
+                beq.s   SKSOZPath_YCrossingReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_1D564:
+SKSOZPath_YCrossingReturn:
                 rts
 ; End of function ApplySozPathChangeOnYCrossing

@@ -12,10 +12,10 @@ Obj_SOZSandCork:
                 move.w  #$280,priority(a0)
                 move.b  #$C6,collision_flags(a0)
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_41D2C
+                beq.s   SKSOZSandCork_InitIntactContact
                 movea.w d0,a2
                 btst    #0,(a2)
-                beq.s   loc_41D2C
+                beq.s   SKSOZSandCork_InitIntactContact
                 move.b  subtype(a0),d5
                 andi.w  #$7F,d5
                 lsl.w   #4,d5
@@ -24,40 +24,41 @@ Obj_SOZSandCork:
                 add.w   d5,d3
                 subi.w  #$90,d3
 
-loc_41D12:
+; The reload loop stops at zero remaining height. The live break loop includes that section
+SKSOZSandCork_RestoreColumnSections:
                 bsr.w   CreateSozSandColumnSection
                 subi.w  #$100,d3
                 subi.w  #$100,d5
-                bhi.s   loc_41D12
+                bhi.s   SKSOZSandCork_RestoreColumnSections
                 move.w  respawn_addr(a0),respawn_addr(a1)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_41D2C:
-                move.l  #loc_41D32,(a0)
+SKSOZSandCork_InitIntactContact:
+                move.l  #SKSOZSandCork_ConsumeP1Contact,(a0)
 
-loc_41D32:
+SKSOZSandCork_ConsumeP1Contact:
                 move.b  collision_property(a0),d0
-                beq.w   loc_41D56
+                beq.w   SKSOZSandCork_TouchCullAndDraw
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_41D48
+                beq.s   SKSOZSandCork_ConsumeP2Contact
                 bsr.s   BreakSozSandCorkFromRollingContact
 
-loc_41D48:
+SKSOZSandCork_ConsumeP2Contact:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_41D56
+                beq.s   SKSOZSandCork_TouchCullAndDraw
                 bsr.s   BreakSozSandCorkFromRollingContact
 
-loc_41D56:
+SKSOZSandCork_TouchCullAndDraw:
                 jmp     (Sprite_CheckDeleteTouch3).l
 
 ; =============== S U B R O U T I N E =======================================
 
 BreakSozSandCorkFromRollingContact:
                 cmpi.b  #2,anim(a1)
-                bne.w   locret_41DF2
+                bne.w   SKSOZSandCork_BreakReturn
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 move.b  subtype(a0),d4
@@ -67,14 +68,14 @@ BreakSozSandCorkFromRollingContact:
                 move.w  y_pos(a0),d3
                 subi.w  #$90,d3
 
-loc_41D82:
+SKSOZSandCork_SpawnFallingColumnSections:
                 bsr.w   CreateSozSandColumnSection
                 subi.w  #$100,d3
                 subi.w  #$100,d5
-                bcc.s   loc_41D82
+                bcc.s   SKSOZSandCork_SpawnFallingColumnSections
                 move.w  respawn_addr(a0),respawn_addr(a1)
-                lea     (word_41E96).l,a4
-                move.l  #loc_41DF4,(a0)
+                lea     (SKSOZSandCork_FragmentVelocities).l,a4
+                move.l  #SKSOZSandCork_MoveAndCullFragment,(a0)
                 addq.b  #1,mapping_frame(a0)
                 move.w  #0,priority(a0)
                 moveq   #signextendB(sfx_Collapse),d0
@@ -83,51 +84,51 @@ loc_41D82:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_41DD2
+                beq.s   SKSOZSandCork_SignalForegroundBySubtype
                 movea.w d0,a2
                 bset    #0,(a2)
 
-loc_41DD2:
+SKSOZSandCork_SignalForegroundBySubtype:
                 tst.b   subtype(a0)
-                bpl.s   loc_41DE0
+                bpl.s   SKSOZSandCork_SignalForegroundEvent5
                 move.w  #-1,(Events_fg_4).w
-                bra.s   loc_41DE6
+                bra.s   SKSOZSandCork_ClearCollisionAndContacts
 ; ---------------------------------------------------------------------------
 
-loc_41DE0:
+SKSOZSandCork_SignalForegroundEvent5:
                 move.w  #-1,(Events_fg_5).w
 
-loc_41DE6:
+SKSOZSandCork_ClearCollisionAndContacts:
                 move.b  #0,collision_flags(a0)
                 move.b  #0,collision_property(a0)
 
-locret_41DF2:
+SKSOZSandCork_BreakReturn:
                 rts
 ; End of function BreakSozSandCorkFromRollingContact
 
 ; ---------------------------------------------------------------------------
 
-loc_41DF4:
+SKSOZSandCork_MoveAndCullFragment:
                 jsr     (MoveSprite2).l
                 addi.w  #$18,y_vel(a0)
                 cmpi.w  #$400,y_vel(a0)
-                blt.s   loc_41E0E
+                blt.s   SKSOZSandCork_DrawFragment
                 tst.b   render_flags(a0)
-                bpl.s   loc_41E14
+                bpl.s   SKSOZSandCork_DeleteFragment
 
-loc_41E0E:
+SKSOZSandCork_DrawFragment:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_41E14:
+SKSOZSandCork_DeleteFragment:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 CreateSozSandColumnSection:
                 jsr     (AllocateObject).l
-                bne.w   locret_41E68
-                move.l  #loc_41E6A,(a1)
+                bne.w   SKSOZSandCork_ColumnAllocReturn
+                move.l  #SKSOZSandCork_LowerColumn,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  d3,y_pos(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -140,32 +141,33 @@ CreateSozSandColumnSection:
                 move.b  #2,mapping_frame(a1)
                 move.b  subtype(a0),subtype(a1)
 
-locret_41E68:
+SKSOZSandCork_ColumnAllocReturn:
                 rts
 ; End of function CreateSozSandColumnSection
 
 ; ---------------------------------------------------------------------------
 
-loc_41E6A:
+SKSOZSandCork_LowerColumn:
                 tst.w   $30(a0)
-                beq.s   loc_41E78
+                beq.s   SKSOZSandCork_TryPlayColumnSlideSound
                 addq.w  #4,y_pos(a0)
                 subq.w  #4,$30(a0)
 
-loc_41E78:
+; The sound timer reads the frame-counter address indexed by A0
+SKSOZSandCork_TryPlayColumnSlideSound:
 ; Bug: Level_frame_counter should not be using a0, as a0 is the object's RAM!
                 move.b  Level_frame_counter+1(a0),d0
                 andi.b  #$F,d0
-                bne.s   loc_41E90
+                bne.s   SKSOZSandCork_DrawColumnSection
                 tst.b   render_flags(a0)
-                bpl.s   loc_41E90
+                bpl.s   SKSOZSandCork_DrawColumnSection
                 moveq   #signextendB(sfx_SlideSkidQuiet),d0
                 jsr     (Play_SFX).l
 
-loc_41E90:
+SKSOZSandCork_DrawColumnSection:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-word_41E96:
+SKSOZSandCork_FragmentVelocities:
                 dc.w    -$200, -$200
                 dc.w    $80, -$200
                 dc.w    $200, -$200

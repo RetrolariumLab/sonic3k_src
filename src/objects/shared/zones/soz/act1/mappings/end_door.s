@@ -1,9 +1,9 @@
 ; Data owner: objects/shared/zones/soz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SOZ1EndDoor_:
-                dc.w    word_56122-Map_SOZ1EndDoor_
-                dc.w    word_56154-Map_SOZ1EndDoor_
-word_56122:     dc.w    8
+                dc.w    SOZMap_EndDoor_CameraMaskStrips-Map_SOZ1EndDoor_
+                dc.w    SOZMap_EndDoor_MovingPyramidDoor-Map_SOZ1EndDoor_
+SOZMap_EndDoor_CameraMaskStrips:    dc.w    8
                 dc.b    0,   3,   7, $C0, $FF, $FC
                 dc.b    0,   3,   0,   0, $FF, $FC
                 dc.b    $20,   3,   7, $C0, $FF, $FC
@@ -12,7 +12,7 @@ word_56122:     dc.w    8
                 dc.b    $40,   3,   0,   0, $FF, $FC
                 dc.b    $60,   3,   7, $C0, $FF, $FC
                 dc.b    $60,   3,   0,   0, $FF, $FC
-word_56154:     dc.w    9
+SOZMap_EndDoor_MovingPyramidDoor:   dc.w    9
                 dc.b    $D4,  $F,   0,   0, $FF, $DC
                 dc.b    $D4,   3,   0, $10, $FF, $FC
                 dc.b    $D4,  $F,   0, $14,   0,   4

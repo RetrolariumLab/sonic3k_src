@@ -10,9 +10,9 @@ Obj_SOZBreakableSandRock:
                 move.b  #$18,width_pixels(a0)
                 move.b  #$10,height_pixels(a0)
                 move.w  #$280,priority(a0)
-                move.l  #loc_4172E,(a0)
+                move.l  #SKSOZSandRock_SaveAnimsAndCheckSolid,(a0)
 
-loc_4172E:
+SKSOZSandRock_SaveAnimsAndCheckSolid:
                 move.b  (Player_1+anim).w,$30(a0)
                 move.b  (Player_2+anim).w,$31(a0)
                 move.w  #$23,d1
@@ -22,45 +22,46 @@ loc_4172E:
                 jsr     (SolidObjectFull).l
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_41760
+                bne.s   SKSOZSandRock_CheckBreakWithBothRiders
 
-loc_4175A:
+SKSOZSandRock_DrawIntactRock:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_41760:
+; With both players standing, either rider's roll can break the rock
+SKSOZSandRock_CheckBreakWithBothRiders:
                 cmpi.b  #$18,d0
-                bne.s   loc_4178E
+                bne.s   SKSOZSandRock_TryBreakWithP1
                 cmpi.b  #2,$30(a0)
-                beq.s   loc_41776
+                beq.s   SKSOZSandRock_ReleaseBothRiders
                 cmpi.b  #2,$31(a0)
-                bne.s   loc_4175A
+                bne.s   SKSOZSandRock_DrawIntactRock
 
-loc_41776:
+SKSOZSandRock_ReleaseBothRiders:
                 lea     (Player_1).w,a1
                 move.b  $30(a0),d0
                 bsr.s   ReleasePlayerFromBreakingSozSandRock
                 lea     (Player_2).w,a1
                 move.b  $31(a0),d0
                 bsr.s   ReleasePlayerFromBreakingSozSandRock
-                bra.w   loc_417F6
+                bra.w   SKSOZSandRock_ClearRidersAndDissolve
 ; ---------------------------------------------------------------------------
 
-loc_4178E:
+SKSOZSandRock_TryBreakWithP1:
                 move.b  d0,d1
                 andi.b  #8,d1
-                beq.s   loc_417DE
+                beq.s   SKSOZSandRock_TryBreakWithP2
                 cmpi.b  #2,$30(a0)
-                bne.s   loc_4175A
+                bne.s   SKSOZSandRock_DrawIntactRock
                 lea     (Player_1).w,a1
                 bsr.s   ReboundRollingPlayerFromSozSandRock
-                bra.s   loc_417F6
+                bra.s   SKSOZSandRock_ClearRidersAndDissolve
 
 ; =============== S U B R O U T I N E =======================================
 
 ReleasePlayerFromBreakingSozSandRock:
                 cmpi.b  #2,d0
-                bne.s   loc_417CA
+                bne.s   SKSOZSandRock_SetRiderAirborne
 ; End of function ReleasePlayerFromBreakingSozSandRock
 
 ; =============== S U B R O U T I N E =======================================
@@ -72,7 +73,7 @@ ReboundRollingPlayerFromSozSandRock:
                 move.b  #2,anim(a1)
                 move.w  #-$300,y_vel(a1)
 
-loc_417CA:
+SKSOZSandRock_SetRiderAirborne:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 move.b  #2,routine(a1)
@@ -81,32 +82,32 @@ loc_417CA:
 
 ; ---------------------------------------------------------------------------
 
-loc_417DE:
+SKSOZSandRock_TryBreakWithP2:
                 andi.b  #$10,d0
-                beq.w   loc_4175A
+                beq.w   SKSOZSandRock_DrawIntactRock
                 cmpi.b  #2,$31(a0)
-                bne.w   loc_4175A
+                bne.w   SKSOZSandRock_DrawIntactRock
                 lea     (Player_2).w,a1
                 bsr.s   ReboundRollingPlayerFromSozSandRock
 
-loc_417F6:
+SKSOZSandRock_ClearRidersAndDissolve:
                 andi.b  #$E7,status(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_4180A,(a0)
+                move.l  #SKSOZSandRock_TickDissolve,(a0)
 
-loc_4180A:
+SKSOZSandRock_TickDissolve:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_41828
+                bpl.s   SKSOZSandRock_DrawDissolvingRock
                 move.b  #5,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #5,mapping_frame(a0)
-                blo.s   loc_41828
+                blo.s   SKSOZSandRock_DrawDissolvingRock
                 move.w  #$7F00,x_pos(a0)
 
-loc_41828:
+SKSOZSandRock_DrawDissolvingRock:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 Map_SOZBreakableSandRock:
                 include "src/objects/shared/zones/soz/mappings/breakable_sand_rock.s"
-; End of function loc_417DE
+; End of function SKSOZSandRock_TryBreakWithP2

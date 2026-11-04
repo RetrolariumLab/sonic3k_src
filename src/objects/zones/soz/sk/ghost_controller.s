@@ -16,12 +16,12 @@ Hyudoro:
 ; loc_8F0CA:
 Hyudoro_ctr:
                 cmpi.b  #2,(Player_1+character_id).w    ; Is the player character Knuckles?
-                beq.s   ._100
+                beq.s   .CheckDarknessQuota
                 tst.b   (Last_star_post_hit).w
                 beq.w   return
 
 ; loc_8F0DA:
-                ._100:
+                .CheckDarknessQuota:
                 moveq   #0,d0
                 move.b  (SOZ_darkness_level).w,d0
                 beq.s   .clr_ret
@@ -34,11 +34,12 @@ Hyudoro_ctr:
                 addq.b  #1,d1
                 move.b  d1,(Hyudoro_count).w
                 cmp.b   d0,d1
-                bhs.s   ._200
+                bhs.s   .SpawnGhostBody
                 move.w  #$3F,$3A(a0)
 
 ; loc_8F108:
-                ._200:
+; The global ghost count is incremented before attempting allocation
+                .SpawnGhostBody:
                 lea     Hyudoro_body_set_tbl(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
@@ -68,15 +69,15 @@ Hyudoro_body:
                 tst.b   (SOZ_darkness_level).w
                 beq.s   .fout1
                 jsr     (Check_PlayerCollision).l
-                beq.s   ._100
+                beq.s   .QueueTouchAndDraw
                 jsr     (Check_PlayerAttack).l
                 bne.s   .fout1
                 tst.b   invulnerability_timer(a1)
-                bne.s   ._100
+                bne.s   .QueueTouchAndDraw
                 jsr     (HurtCharacter_Directly).l
 
 ; loc_8F15E:
-                ._100:
+                .QueueTouchAndDraw:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
