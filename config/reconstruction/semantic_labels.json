@@ -679,7 +679,7 @@
           "profiles": ["sk"]
         }
       ],
-      "destination_sha256": "e3620cde0b45b2483bc6cc11c780077ed869aaa8f762b434a86e5233759e16d1"
+      "destination_sha256": "36dabb34795e75206c03af7b3d63f4e20f95e40d757098be8c358ca344f98fd2"
     },
     {
       "id": "08-player-knuckles",

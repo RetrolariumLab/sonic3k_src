@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 103
+    "commit_count": 104
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -665,9 +665,15 @@
       "commits": ["639fe97806bee2e32df035822714e4b086ba6932"]
     },
     {
-      "id": "current-shorten-07a-tails-ai",
+      "id": "change-75e937676777",
       "kind": "source_or_tooling",
       "summary": "Shorten 250 Tails AI, flight, and carry labels and retain both registered carry blocks.",
+      "commits": ["75e9376767777bd0ea3ec49171684d280ea61eb5"]
+    },
+    {
+      "id": "current-shorten-07b-tails-motion",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 399 Tails terrain and movement states while retaining the recovery and respawn contracts.",
       "commits": ["release-commit"]
     }
   ],

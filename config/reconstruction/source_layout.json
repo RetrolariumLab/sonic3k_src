@@ -28709,7 +28709,7 @@
       "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 138,
+      "physical_lines": 139,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28754,7 +28754,7 @@
       "responsibility": "Tails water transitions and ground, air, rolling, jumping, flying and swimming mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 149,
+      "physical_lines": 151,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28844,7 +28844,7 @@
       "responsibility": "Tails ground input acceleration, balance, braking and horizontal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 328,
+      "physical_lines": 333,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28884,7 +28884,7 @@
       "responsibility": "Tails screen bounds, rolling initiation, jump launch and jump height control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 213,
+      "physical_lines": 214,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28929,7 +28929,7 @@
       "responsibility": "Tails object dispatch, initialization, active player control, timed powers and normal display state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 272,
+      "physical_lines": 276,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28974,7 +28974,7 @@
       "responsibility": "Tails rolling speed control and airborne input acceleration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 219,
+      "physical_lines": 221,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29019,7 +29019,7 @@
       "responsibility": "Tails spindash charge, slope resistance, rolling repulsion, slope detachment and airborne angle control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 295,
+      "physical_lines": 297,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29064,7 +29064,7 @@
       "responsibility": "Tails terrain collision, floor attachment and landing state restoration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 259,
+      "physical_lines": 261,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29294,7 +29294,7 @@
       "responsibility": "Tails hurt, death, restart and recovery animation dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 178,
+      "physical_lines": 179,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29329,7 +29329,7 @@
       "responsibility": "Tails water transitions and ground, air, rolling, jumping, flying and swimming mode dispatch.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 171,
+      "physical_lines": 173,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29399,7 +29399,7 @@
       "responsibility": "Tails ground input acceleration, balance, braking and horizontal movement helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 364,
+      "physical_lines": 369,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29429,7 +29429,7 @@
       "responsibility": "Tails screen bounds, rolling initiation, jump launch and jump height control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 283,
+      "physical_lines": 286,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29464,7 +29464,7 @@
       "responsibility": "Tails object dispatch, initialization, active player control, timed powers and normal display state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 297,
+      "physical_lines": 302,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29499,7 +29499,7 @@
       "responsibility": "Tails rolling speed control and airborne input acceleration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 233,
+      "physical_lines": 235,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29534,7 +29534,7 @@
       "responsibility": "Tails spindash charging, release and sound command sequencing.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 177,
+      "physical_lines": 179,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29569,7 +29569,7 @@
       "responsibility": "Tails terrain collision, floor attachment and landing state restoration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 302,
+      "physical_lines": 304,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",

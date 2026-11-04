@@ -10,23 +10,23 @@ Obj_Tails:
                 tst.w   (Debug_placement_mode).w
                 beq.s   Tails_Normal
                 cmpi.b  #1,(Debug_placement_type).w
-                beq.s   S3TailsLifecycle_TailEnterDebugPlacementForSoloTails
+                beq.s   S3TailsMain_EnterSoloDebugPlacement
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3TailsLifecycle_AdvanceDebugFrameAfterOptionalBExit
+                beq.s   S3TailsMain_AdvanceDebugFrame
                 move.w  #0,(Debug_placement_mode).w
 
-S3TailsLifecycle_AdvanceDebugFrameAfterOptionalBExit:
+S3TailsMain_AdvanceDebugFrame:
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #$D1,mapping_frame(a0)
-                blo.s   S3TailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay
+                blo.s   S3TailsMain_LoadAndDrawDebugFrame
                 move.b  #0,mapping_frame(a0)
 
-S3TailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay:
+S3TailsMain_LoadAndDrawDebugFrame:
                 bsr.w   Tails_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_TailEnterDebugPlacementForSoloTails:
+S3TailsMain_EnterSoloDebugPlacement:
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
@@ -39,11 +39,11 @@ Tails_Normal:
 Tails_Index:
                 dc.w    Tails_Init-Tails_Index
                 dc.w    Tails_Control-Tails_Index
-                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement-Tails_Index
-                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement-Tails_Index
-                dc.w    S3TailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails_Index
-                dc.w    S3TailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails_Index
-                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseRiderOnHurt-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseRiderOnDeath-Tails_Index
+                dc.w    S3TailsRecovery_TickRestartTimer-Tails_Index
+                dc.w    S3TailsRecovery_CheckP2ScrollSettled-Tails_Index
+                dc.w    S3TailsRecovery_ReleaseRiderOnDrown-Tails_Index
 ; ---------------------------------------------------------------------------
 
 Tails_Init:
@@ -62,7 +62,7 @@ Tails_Init:
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   S3TailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority
+                bne.s   S3TailsMain_InitFollowerArtAndSolidity
                 tst.b   (Last_star_post_hit).w
                 bne.s   Tails_Init_Continued
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
@@ -77,7 +77,7 @@ Tails_Init:
                 bra.s   Tails_Init_Continued
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority:
+S3TailsMain_InitFollowerArtAndSolidity:
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 move.w  (Player_1+top_solid_bit).w,top_solid_bit(a0)
                 tst.w   (Player_1+art_tile).w
@@ -89,12 +89,12 @@ Tails_Init_Continued:
                 move.b  #4,flip_speed(a0)
                 move.b  #30,air_left(a0)
                 cmpi.w  #$20,(Tails_CPU_routine).w
-                beq.s   S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
+                beq.s   S3TailsMain_ResetTimersAndBindTail
                 cmpi.w  #$12,(Tails_CPU_routine).w
-                beq.s   S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
+                beq.s   S3TailsMain_ResetTimersAndBindTail
                 move.w  #0,(Tails_CPU_routine).w
 
-S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor:
+S3TailsMain_ResetTimersAndBindTail:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.l  #Obj_Tails_Tail,(Tails_tails).w
@@ -105,58 +105,59 @@ S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor:
 
 Tails_Control:
                 cmpi.w  #2,(Player_mode).w
-                bne.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                bne.s   S3TailsMain_SelectControllerAndAI
                 tst.w   (Debug_mode_flag).w
-                beq.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                beq.s   S3TailsMain_SelectControllerAndAI
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                beq.s   S3TailsMain_SelectControllerAndAI
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 btst    #button_C,(Ctrl_1_held).w
-                beq.s   S3TailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode
+                beq.s   S3TailsMain_DebugReturn
                 move.w  #2,(Debug_placement_mode).w
 
-S3TailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode:
+S3TailsMain_DebugReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility:
+S3TailsMain_SelectControllerAndAI:
                 cmpa.w  #Player_1,a0
-                bne.s   S3TailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy
+                bne.s   S3TailsMain_CheckSecondaryInputLock
                 move.w  (Ctrl_1_logical).w,(Ctrl_2_logical).w
                 tst.b   (Ctrl_1_locked).w
-                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bne.s   S3TailsMain_CheckExternalMovement
                 move.w  (Ctrl_1).w,(Ctrl_2_logical).w
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
                 cmpi.w  #$1A,(Tails_CPU_routine).w
-                bhs.s   S3TailsLifecycle_RunFollowerCpuOnlyOutsideCompetition
-                bra.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bhs.s   S3TailsMain_CheckAndRunFollowerAI
+                bra.s   S3TailsMain_CheckExternalMovement
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy:
+S3TailsMain_CheckSecondaryInputLock:
                 tst.b   (Ctrl_2_locked).w
-                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bne.s   S3TailsMain_CheckExternalMovement
                 move.w  (Ctrl_2).w,(Ctrl_2_logical).w
 
-S3TailsLifecycle_RunFollowerCpuOnlyOutsideCompetition:
+S3TailsMain_CheckAndRunFollowerAI:
                 tst.w   (Competition_mode).w
-                bne.s   S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bne.s   S3TailsMain_CheckExternalMovement
                 bsr.w   Tails_CPU_Control
 
-S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl:
+; External movement clears the flap state and releases a carried player
+S3TailsMain_CheckExternalMovement:
                 btst    #0,object_control(a0)
-                beq.s   S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases
+                beq.s   S3TailsMain_DispatchMovementMode
                 move.b  #0,double_jump_flag(a0)
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
+                beq.s   S3TailsMain_WrapPlayerYIfEnabled
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
-                bra.s   S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
+                bra.s   S3TailsMain_WrapPlayerYIfEnabled
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases:
+S3TailsMain_DispatchMovementMode:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -165,37 +166,40 @@ S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases:
                 jsr     Tails_Modes(pc,d1.w)
                 movem.l (sp)+,a4-a6
 
-S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel:
+; Mask integer Y only when the camera minimum equals -$100
+S3TailsMain_WrapPlayerYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   S3TailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices
+                bne.s   S3TailsMain_UpdateFrameServices
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-S3TailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices:
+S3TailsMain_UpdateFrameServices:
                 bsr.s   Tails_Display
                 bsr.w   Sonic_RecordPos
                 bsr.w   Tails_Water
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag_P2).w
-                beq.s   S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
+                beq.s   S3TailsMain_CheckAnimateAndLoadPatterns
                 tst.b   anim(a0)
-                bne.s   S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
+                bne.s   S3TailsMain_CheckAnimateAndLoadPatterns
                 move.b  prev_anim(a0),anim(a0)
 
-S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne:
+; Object control bit 1 suppresses animation and the pattern update
+S3TailsMain_CheckAnimateAndLoadPatterns:
                 btst    #1,object_control(a0)
-                bne.s   S3TailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet
+                bne.s   S3TailsMain_CheckTouchResponse
                 bsr.w   Animate_Tails
                 bsr.w   Tails_Load_PLC
 
-S3TailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet:
+; Suppress touch processing when either object control bit 5 or 7 is set
+S3TailsMain_CheckTouchResponse:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   S3TailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch
+                bne.s   S3TailsMain_FrameReturn
                 jsr     (TouchResponse).l
 
-S3TailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch:
+S3TailsMain_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Tails_Modes:
@@ -207,46 +211,46 @@ Tails_Modes:
 
 Tails_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   S3TailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks
+                beq.s   S3TailsMain_DrawVisibleBlinkPhase
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
-                bcc.s   S3TailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase
+                bcc.s   S3TailsMain_TickInvincibilityEvery8
 
-S3TailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks:
+S3TailsMain_DrawVisibleBlinkPhase:
                 jsr     (Draw_Sprite).l
 
-S3TailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase:
+S3TailsMain_TickInvincibilityEvery8:
                 btst    #Status_Invincible,status_secondary(a0)
-                beq.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                beq.s   S3TailsMain_TickShoesAndRestoreSpeed
                 tst.b   invincibility_timer(a0)
-                beq.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                beq.s   S3TailsMain_TickShoesAndRestoreSpeed
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                bne.s   S3TailsMain_TickShoesAndRestoreSpeed
                 subq.b  #1,invincibility_timer(a0)
-                bne.s   S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                bne.s   S3TailsMain_TickShoesAndRestoreSpeed
                 tst.b   (Boss_flag).w
-                bne.s   S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
+                bne.s   S3TailsMain_ExpireInvincibility
                 cmpi.b  #12,air_left(a0)
-                blo.s   S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
+                blo.s   S3TailsMain_ExpireInvincibility
                 move.w  (Current_music).w,d0
                 jsr     (Play_Music).l
 
-S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck:
+S3TailsMain_ExpireInvincibility:
                 bclr    #Status_Invincible,status_secondary(a0)
 
-S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds:
+S3TailsMain_TickShoesAndRestoreSpeed:
                 btst    #Status_SpeedShoes,status_secondary(a0)
-                beq.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                beq.s   S3TailsMain_PowerUpdateReturn
                 tst.b   speed_shoes_timer(a0)
-                beq.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                beq.s   S3TailsMain_PowerUpdateReturn
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                bne.s   S3TailsMain_PowerUpdateReturn
                 subq.b  #1,speed_shoes_timer(a0)
-                bne.s   S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                bne.s   S3TailsMain_PowerUpdateReturn
                 tst.w   (Competition_mode).w
-                bne.s   S3TailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry
+                bne.s   S3TailsMain_RestoreCompSpeedRecord
                 move.w  #$600,Max_speed_P2-Max_speed_P2(a4)
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
@@ -255,11 +259,11 @@ S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds:
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes:
+S3TailsMain_PowerUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry:
+S3TailsMain_RestoreCompSpeedRecord:
                 lea     (Character_Speeds).l,a1
                 moveq   #0,d0
                 move.b  character_id(a0),d0

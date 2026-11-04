@@ -3,18 +3,18 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 Tails_Water:
                 tst.b   (Water_flag).w
-                bne.s   S3TailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds
+                bne.s   S3TailsEnv_CheckWaterAndInitEntry
 
-S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition:
+S3TailsEnv_WaterTransitionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds:
+S3TailsEnv_CheckWaterAndInitEntry:
                 move.w  (Water_level).w,d0
                 cmp.w   y_pos(a0),d0
-                bge.s   S3TailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost
+                bge.s   S3TailsEnv_RestoreAirAndSpeedsOnExit
                 bset    #Status_Underwater,status(a0)
-                bne.s   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                bne.s   S3TailsEnv_WaterTransitionReturn
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -25,23 +25,24 @@ S3TailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds:
                 move.w  #6,Acceleration-Max_speed(a4)
                 move.w  #$40,Deceleration-Max_speed(a4)
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.s   S3TailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY
+                beq.s   S3TailsEnv_DampenEntryAndCheckSplash
                 tst.b   object_control(a0)
-                bne.s   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                bne.s   S3TailsEnv_WaterTransitionReturn
 
-S3TailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY:
+; Halve X speed and quarter Y speed. The splash requires a nonzero reduced Y speed
+S3TailsEnv_DampenEntryAndCheckSplash:
                 asr     x_vel(a0)
                 asr     y_vel(a0)
                 asr     y_vel(a0)
-                beq.s   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                beq.s   S3TailsEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; ---------------------------------------------------------------------------
 
-S3TailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost:
+S3TailsEnv_RestoreAirAndSpeedsOnExit:
                 bclr    #Status_Underwater,status(a0)
-                beq.s   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                beq.s   S3TailsEnv_WaterTransitionReturn
                 addq.b  #1,(Water_entered_counter).w
                 movea.l a0,a1
                 bsr.w   Player_ResetAirTimer
@@ -49,29 +50,30 @@ S3TailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost:
                 move.w  #$C,Acceleration-Max_speed(a4)
                 move.w  #$80,Deceleration-Max_speed(a4)
                 cmpi.b  #4,routine(a0)
-                beq.s   S3TailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
+                beq.s   S3TailsEnv_CheckExitSplashAndClampY
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.s   S3TailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred
+                beq.s   S3TailsEnv_TryDoubleExitYSpeed
                 tst.b   object_control(a0)
-                bne.s   S3TailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
+                bne.s   S3TailsEnv_CheckExitSplashAndClampY
 
-S3TailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred:
+; Double Y speed only when it is at least -$400
+S3TailsEnv_TryDoubleExitYSpeed:
                 move.w  y_vel(a0),d0
                 cmpi.w  #-$400,d0
-                blt.s   S3TailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity
+                blt.s   S3TailsEnv_CheckExitSplashAndClampY
                 asl     y_vel(a0)
 
-S3TailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity:
+S3TailsEnv_CheckExitSplashAndClampY:
                 cmpi.b  #$1C,anim(a0)
-                beq.w   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                beq.w   S3TailsEnv_WaterTransitionReturn
                 tst.w   y_vel(a0)
-                beq.w   S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition
+                beq.w   S3TailsEnv_WaterTransitionReturn
                 move.w  #1<<8,anim(a6)                  ; and prev_anim
                 cmpi.w  #-$1000,y_vel(a0)
-                bgt.s   S3TailsEnvironment_TailPlayWaterExitSplashSound
+                bgt.s   S3TailsEnv_PlayExitSplash
                 move.w  #-$1000,y_vel(a0)
 
-S3TailsEnvironment_TailPlayWaterExitSplashSound:
+S3TailsEnv_PlayExitSplash:
                 move.w  #sfx_Splash,d0
                 jmp     (Play_SFX).l
 ; End of function Tails_Water
@@ -80,13 +82,13 @@ S3TailsEnvironment_TailPlayWaterExitSplashSound:
 
 Tails_Stand_Path:
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   S3TailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic
+                beq.s   S3TailsEnv_RunGroundMovement
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
 
-S3TailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic:
+S3TailsEnv_RunGroundMovement:
                 bsr.w   Tails_Spindash
                 bsr.w   Tails_Jump
                 bsr.w   Tails_SlopeResist
@@ -97,7 +99,7 @@ S3TailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic:
                 bsr.w   Player_AnglePos
                 bsr.w   Tails_SlopeRepel
                 tst.b   (Background_collision_flag).w
-                beq.s   S3TailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate
+                beq.s   S3TailsEnv_GroundModeReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
@@ -105,10 +107,10 @@ S3TailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic:
                 bsr.w   CheckLeftWallDist
                 movem.l (sp)+,a4-a6
                 tst.w   d1
-                bpl.s   S3TailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate
+                bpl.s   S3TailsEnv_GroundModeReturn
                 sub.w   d1,x_pos(a0)
 
-S3TailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate:
+S3TailsEnv_GroundModeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -120,10 +122,10 @@ Tails_Stand_Freespace:
                 bsr.w   Tails_Check_Screen_Boundaries
                 jsr     (MoveSprite).l
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3TailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep
+                beq.s   S3TailsEnv_AirAngleAndCollision
                 subi.w  #$28,y_vel(a0)
 
-S3TailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep:
+S3TailsEnv_AirAngleAndCollision:
                 bsr.w   Tails_JumpAngle
                 bsr.w   Tails_DoLevelCollision
                 rts
@@ -139,11 +141,11 @@ Tails_FlyingSwimming:
                 bsr.w   Tails_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 tst.w   (Player_mode).w
-                bne.s   S3TailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry
+                bne.s   S3TailsEnv_FlightModeReturn
                 lea     (Flying_carrying_Sonic_flag).w,a2
                 lea     (Player_1).w,a1
                 move.w  (Ctrl_1).w,d0
                 bsr.w   Tails_Carry_Sonic
 
-S3TailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry:
+S3TailsEnv_FlightModeReturn:
                 rts

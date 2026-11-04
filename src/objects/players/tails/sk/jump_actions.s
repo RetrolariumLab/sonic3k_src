@@ -14,99 +14,100 @@ Tails_Check_Screen_Boundaries:
                 move.w  (Camera_min_X_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   d1,d0
-                bhi.s   SKTailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion
+                bhi.s   SKTailsJump_ClampXAndStopMotion
                 move.w  (Camera_max_X_pos).w,d0
                 addi.w  #$128,d0
                 cmp.w   d1,d0
-                blo.s   SKTailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion
+                blo.s   SKTailsJump_ClampXAndStopMotion
 
-SKTailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds:
+SKTailsJump_CheckVerticalDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   SKTailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled
+                bne.s   SKTailsJump_LevelBoundsReturn
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   SKTailsJump_CheckReverseScreenDeathPlaneIncludingMinimumEquality
+                bne.s   SKTailsJump_CheckReverseDeathPlane
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   SKTailsJump_TailKillCharacterFromScreenDeathPlane
+                blt.s   SKTailsJump_KillAtScreenDeathPlane
 
-SKTailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled:
+SKTailsJump_LevelBoundsReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_CheckReverseScreenDeathPlaneIncludingMinimumEquality:
+; The reverse death plane includes equality at the camera minimum
+SKTailsJump_CheckReverseDeathPlane:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   SKTailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled
+                blt.s   SKTailsJump_LevelBoundsReturn
 
-SKTailsJump_TailKillCharacterFromScreenDeathPlane:
+SKTailsJump_KillAtScreenDeathPlane:
                 jmp     (Kill_Character).l
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion:
+SKTailsJump_ClampXAndStopMotion:
                 move.w  d0,x_pos(a0)
                 move.w  #0,2+x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  #0,ground_vel(a0)
-                bra.s   SKTailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds
+                bra.s   SKTailsJump_CheckVerticalDeathPlane
 ; End of function Tails_Check_Screen_Boundaries
 
 ; =============== S U B R O U T I N E =======================================
 
 Tails_Roll:
                 tst.b   status_secondary(a0)
-                bmi.s   SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bmi.s   SKTailsJump_RollInputReturn
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bne.s   SKTailsJump_RollInputReturn
                 btst    #button_down,(Ctrl_2_held_logical).w
-                beq.s   SKTailsJump_ClearDuckAnimationWhenDownReleased
+                beq.s   SKTailsJump_ClearDuckOnRelease
                 move.w  ground_vel(a0),d0
-                bpl.s   SKTailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy
+                bpl.s   SKTailsJump_CheckRollStartSpeed
                 neg.w   d0
 
-SKTailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy:
+SKTailsJump_CheckRollStartSpeed:
                 cmpi.w  #$100,d0
-                bhs.s   SKTailsJump_SkipRollInitializationIfAlreadyRolling
+                bhs.s   SKTailsJump_CheckAlreadyRolling
                 btst    #Status_OnObj,status(a0)
-                bne.s   SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bne.s   SKTailsJump_RollInputReturn
                 move.b  #8,anim(a0)
 
-SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice:
+SKTailsJump_RollInputReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_ClearDuckAnimationWhenDownReleased:
+SKTailsJump_ClearDuckOnRelease:
                 cmpi.b  #8,anim(a0)
-                bne.s   SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bne.s   SKTailsJump_RollInputReturn
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_SkipRollInitializationIfAlreadyRolling:
+SKTailsJump_CheckAlreadyRolling:
                 btst    #Status_Roll,status(a0)
-                beq.s   SKTailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed
+                beq.s   SKTailsJump_InitRollGeometry
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed:
+SKTailsJump_InitRollGeometry:
                 bset    #Status_Roll,status(a0)
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
                 addq.w  #1,y_pos(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsJump_PlayRollSoundAndSupplyPositiveSpeedOnlyAtZero
+                beq.s   SKTailsJump_PlayRollSFXAndSeedSpeed
                 subq.w  #2,y_pos(a0)
 
-SKTailsJump_PlayRollSoundAndSupplyPositiveSpeedOnlyAtZero:
+SKTailsJump_PlayRollSFXAndSeedSpeed:
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
                 tst.w   ground_vel(a0)
-                bne.s   SKTailsJump_ReturnAfterRollSoundAndGroundSpeedFallback
+                bne.s   SKTailsJump_StartRollReturn
                 move.w  #$200,ground_vel(a0)
 
-SKTailsJump_ReturnAfterRollSoundAndGroundSpeedFallback:
+SKTailsJump_StartRollReturn:
                 rts
 ; End of function Tails_Roll
 
@@ -115,28 +116,29 @@ SKTailsJump_ReturnAfterRollSoundAndGroundSpeedFallback:
 Tails_Jump:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKTailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved
+                beq.w   SKTailsJump_LaunchReturn
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsJump_ProbeOverheadAfterGravityAngleNormalization
+                beq.s   SKTailsJump_ProbeLaunchClearance
                 addi.b  #$40,d0
                 neg.b   d0
                 subi.b  #$40,d0
 
-SKTailsJump_ProbeOverheadAfterGravityAngleNormalization:
+SKTailsJump_ProbeLaunchClearance:
                 addi.b  #$80,d0
                 movem.l a4-a6,-(sp)
                 bsr.w   CalcRoomOverHead
                 movem.l (sp)+,a4-a6
                 cmpi.w  #6,d1
-                blt.w   SKTailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved
+                blt.w   SKTailsJump_LaunchReturn
                 move.w  #$680,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKTailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn
+                beq.s   SKTailsJump_ApplyImpulseAndSkipGround
                 move.w  #$380,d2
 
-SKTailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
+; Launch along the surface normal and discard the ground movement return address
+SKTailsJump_ApplyImpulseAndSkipGround:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -157,7 +159,7 @@ SKTailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                bne.s   SKTailsJump_MarkJumpStartedWhileAlreadyRolling
+                bne.s   SKTailsJump_MarkRollJump
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -166,17 +168,17 @@ SKTailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsJump_ApplySignedNewJumpRadiusDisplacement
+                beq.s   SKTailsJump_ApplyJumpRadiusOffset
                 neg.w   d0
 
-SKTailsJump_ApplySignedNewJumpRadiusDisplacement:
+SKTailsJump_ApplyJumpRadiusOffset:
                 sub.w   d0,y_pos(a0)
 
-SKTailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved:
+SKTailsJump_LaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_MarkJumpStartedWhileAlreadyRolling:
+SKTailsJump_MarkRollJump:
                 bset    #Status_RollJump,status(a0)
                 rts
 ; End of function Tails_Jump
@@ -185,61 +187,61 @@ SKTailsJump_MarkJumpStartedWhileAlreadyRolling:
 
 Tails_JumpHeight:
                 tst.b   jumping(a0)
-                beq.s   SKTailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet
+                beq.s   SKTailsJump_CapNonJumpAscent
                 move.w  #-$400,d1
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKTailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold
+                beq.s   SKTailsJump_CheckReleaseOrFlight
                 move.w  #-$200,d1
 
-SKTailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold:
+SKTailsJump_CheckReleaseOrFlight:
                 cmp.w   y_vel(a0),d1
                 ble.s   Tails_Test_For_Flight
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   SKTailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision
+                bne.s   SKTailsJump_ReleaseCapReturn
                 move.w  d1,y_vel(a0)
 
-SKTailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision:
+SKTailsJump_ReleaseCapReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet:
+SKTailsJump_CapNonJumpAscent:
                 tst.b   spin_dash_flag(a0)
-                bne.s   SKTailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption
+                bne.s   SKTailsJump_UpwardSpeedLimitReturn
                 cmpi.w  #-$FC0,y_vel(a0)
-                bge.s   SKTailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption
+                bge.s   SKTailsJump_UpwardSpeedLimitReturn
                 move.w  #-$FC0,y_vel(a0)
 
-SKTailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption:
+SKTailsJump_UpwardSpeedLimitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Tails_Test_For_Flight:
                 tst.b   double_jump_flag(a0)
-                bne.w   SKTailsJump_ReturnAfterFlightGateOrActivation
+                bne.w   SKTailsJump_FlightStartReturn
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   SKTailsJump_ReturnAfterFlightGateOrActivation
+                beq.w   SKTailsJump_FlightStartReturn
                 cmpi.w  #2,(Player_mode).w
-                bne.s   SKTailsJump_RequireCpuIdleTimerForNonSoloFlightStart
+                bne.s   SKTailsJump_CheckManualFlightOverride
                 tst.b   (Super_Tails_flag).w
-                bne.s   SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight
+                bne.s   SKTailsJump_UnrollForFlight
                 cmpi.b  #7,(Super_emerald_count).w
-                blo.s   SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight
+                blo.s   SKTailsJump_UnrollForFlight
                 cmpi.w  #50,(Ring_count).w
-                blo.s   SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight
+                blo.s   SKTailsJump_UnrollForFlight
                 tst.b   (Update_HUD_timer).w
                 bne.s   Tails_Transform
-                bra.s   SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight
+                bra.s   SKTailsJump_UnrollForFlight
 ; ---------------------------------------------------------------------------
 
-SKTailsJump_RequireCpuIdleTimerForNonSoloFlightStart:
+SKTailsJump_CheckManualFlightOverride:
                 tst.w   (Tails_CPU_idle_timer).w
-                beq.s   SKTailsJump_ReturnAfterFlightGateOrActivation
+                beq.s   SKTailsJump_FlightStartReturn
 
-SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight:
+SKTailsJump_UnrollForFlight:
                 btst    #Status_Roll,status(a0)
-                beq.s   SKTailsJump_ActivateFlightBudgetAndSelectFlyingAnimation
+                beq.s   SKTailsJump_StartFlightAndAnimate
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d1
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -247,19 +249,20 @@ SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight:
                 sub.b   default_y_radius(a0),d1
                 ext.w   d1
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsJump_AddFlightUnrollDeltaDespiteWrongRegisterGravityNegate
+                beq.s   SKTailsJump_ApplyFlightUnrollYOffset
                 neg.w   d0
 
-SKTailsJump_AddFlightUnrollDeltaDespiteWrongRegisterGravityNegate:
+; Reverse gravity negates D0 on this path. The Y adjustment uses D1
+SKTailsJump_ApplyFlightUnrollYOffset:
                 add.w   d1,y_pos(a0)
 
-SKTailsJump_ActivateFlightBudgetAndSelectFlyingAnimation:
+SKTailsJump_StartFlightAndAnimate:
                 bclr    #Status_RollJump,status(a0)
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 bsr.w   Tails_Set_Flying_Animation
 
-SKTailsJump_ReturnAfterFlightGateOrActivation:
+SKTailsJump_FlightStartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 

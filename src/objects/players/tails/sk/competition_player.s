@@ -36,10 +36,10 @@ SKTailsCompetition_DispatchSixCompetitionTailsRoutineEntries:
 Tails2P_Index:
                 dc.w    SKTailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds-Tails2P_Index
                 dc.w    SKTailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB-Tails2P_Index
-                dc.w    SKTailsRecovery_EnterSoloDebugFromHurtWithPhysicalBPress-Tails2P_Index
-                dc.w    SKTailsRecovery_EnterSoloDebugFromDeathWithPhysicalBPress-Tails2P_Index
-                dc.w    SKTailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails2P_Index
-                dc.w    SKTailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails2P_Index
+                dc.w    SKTailsRecovery_CheckHurtDebugEntry-Tails2P_Index
+                dc.w    SKTailsRecovery_CheckDeathDebugEntry-Tails2P_Index
+                dc.w    SKTailsRecovery_TickRestartTimer-Tails2P_Index
+                dc.w    SKTailsRecovery_CheckP2ScrollSettled-Tails2P_Index
 ; ---------------------------------------------------------------------------
 
 SKTailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds:

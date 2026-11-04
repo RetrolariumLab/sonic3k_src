@@ -7,10 +7,10 @@
 Tails_DoLevelCollision:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   S3TailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant
+                beq.s   S3TailsLand_DispatchVelocitySector
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-S3TailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
+S3TailsLand_DispatchVelocitySector:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -18,207 +18,209 @@ S3TailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant:
                 subi.b  #$20,d0
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
-                beq.w   S3TailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant
+                beq.w   S3TailsLand_CheckLeftSectorWall
                 cmpi.b  #$80,d0
-                beq.w   S3TailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant
+                beq.w   S3TailsLand_CheckCeilingSectorLeftWall
                 cmpi.b  #$C0,d0
-                beq.w   S3TailsTerrain_ResolveRightWallInRightwardVelocityQuadrant
+                beq.w   S3TailsLand_CheckRightSectorWall
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ResolveRightWallBeforeDefaultFloorProbe
+                bpl.s   S3TailsLand_CheckDefaultRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3TailsTerrain_ResolveRightWallBeforeDefaultFloorProbe:
+S3TailsLand_CheckDefaultRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons
+                bpl.s   S3TailsLand_TestDefaultFloorDepth
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3TailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons:
+; Add eight to the high Y speed byte and negate it before the signed penetration and sensor comparisons
+S3TailsLand_TestDefaultFloorDepth:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
+                bpl.s   S3TailsLand_DefaultFloorReturn
                 move.b  y_vel(a0),d2
                 addq.b  #8,d2
                 neg.b   d2
                 cmp.b   d2,d1
-                bge.s   S3TailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion
+                bge.s   S3TailsLand_StoreDefaultFloorAngle
                 cmp.b   d2,d0
-                blt.s   S3TailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
+                blt.s   S3TailsLand_DefaultFloorReturn
 
-S3TailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion:
+S3TailsLand_StoreDefaultFloorAngle:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   S3TailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity
+                bne.s   S3TailsLand_ClampSteepLandingSpeed
                 move.b  d3,d0
                 addi.b  #$10,d0
                 andi.b  #$20,d0
-                beq.s   S3TailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset
+                beq.s   S3TailsLand_LandOnFlatFloor
                 asr     y_vel(a0)
-                bra.s   S3TailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical
+                bra.s   S3TailsLand_FinishSlopeLanding
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset:
+S3TailsLand_LandOnFlatFloor:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity:
+S3TailsLand_ClampSteepLandingSpeed:
                 move.w  #0,x_vel(a0)
                 cmpi.w  #$FC0,y_vel(a0)
-                ble.s   S3TailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical
+                ble.s   S3TailsLand_FinishSlopeLanding
                 move.w  #$FC0,y_vel(a0)
 
-S3TailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical:
+S3TailsLand_FinishSlopeLanding:
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   S3TailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding
+                bpl.s   S3TailsLand_DefaultFloorReturn
                 neg.w   ground_vel(a0)
 
-S3TailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding:
+S3TailsLand_DefaultFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant:
+S3TailsLand_CheckLeftSectorWall:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath
+                bpl.s   S3TailsLand_CheckLeftSectorCeiling
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-S3TailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath:
+S3TailsLand_CheckLeftSectorCeiling:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3TailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed
+                bpl.s   S3TailsLand_CheckLeftFloorEligibility
                 neg.w   d1
                 cmpi.w  #$14,d1
-                bhs.s   S3TailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration
+                bhs.s   S3TailsLand_CheckRightWallAtDeepCeiling
                 add.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   S3TailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection
+                bpl.s   S3TailsLand_LeftCeilingReturn
                 move.w  #0,y_vel(a0)
 
-S3TailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection:
+S3TailsLand_LeftCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration:
+; Ceiling penetration of at least $14 pixels routes the left sector to the opposite wall probe
+S3TailsLand_CheckRightWallAtDeepCeiling:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe
+                bpl.s   S3TailsLand_DeepCeilingWallReturn
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3TailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe:
+S3TailsLand_DeepCeilingWallReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed:
+S3TailsLand_CheckLeftFloorEligibility:
                 tst.b   (WindTunnel_flag_P2).w
-                bne.s   S3TailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant
+                bne.s   S3TailsLand_ProbeLeftFloor
                 tst.w   y_vel(a0)
-                bmi.s   S3TailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment
+                bmi.s   S3TailsLand_LeftFloorReturn
 
-S3TailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant:
+S3TailsLand_ProbeLeftFloor:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment
+                bpl.s   S3TailsLand_LeftFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
 
-S3TailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment:
+S3TailsLand_LeftFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant:
+S3TailsLand_CheckCeilingSectorLeftWall:
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ResolveRightWallInUpwardVelocityQuadrant
+                bpl.s   S3TailsLand_CheckCeilingSectorRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3TailsTerrain_ResolveRightWallInUpwardVelocityQuadrant:
+S3TailsLand_CheckCeilingSectorRightWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment
+                bpl.s   S3TailsLand_ProbeCeilingAndResolve
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-S3TailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment:
+S3TailsLand_ProbeCeilingAndResolve:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment
+                bpl.s   S3TailsLand_CeilingSectorReturn
                 sub.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   S3TailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset
+                bne.s   S3TailsLand_AttachToSteepCeiling
                 move.w  #0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset:
+S3TailsLand_AttachToSteepCeiling:
                 move.b  d3,angle(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   S3TailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment
+                bpl.s   S3TailsLand_CeilingSectorReturn
                 neg.w   ground_vel(a0)
 
-S3TailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment:
+S3TailsLand_CeilingSectorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_ResolveRightWallInRightwardVelocityQuadrant:
+S3TailsLand_CheckRightSectorWall:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   S3TailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold
+                bpl.s   S3TailsLand_ResolveRightSectorCeiling
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-S3TailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold:
+S3TailsLand_ResolveRightSectorCeiling:
                 bsr.w   Sonic_CheckCeiling
                 tst.w   d1
-                bpl.s   S3TailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed
+                bpl.s   S3TailsLand_CheckRightFloorEligibility
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   S3TailsTerrain_ReturnAfterRightwardCeilingCorrection
+                bpl.s   S3TailsLand_RightCeilingReturn
                 move.w  #0,y_vel(a0)
 
-S3TailsTerrain_ReturnAfterRightwardCeilingCorrection:
+S3TailsLand_RightCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed:
+S3TailsLand_CheckRightFloorEligibility:
                 tst.b   (WindTunnel_flag_P2).w
-                bne.s   S3TailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant
+                bne.s   S3TailsLand_ProbeRightFloor
                 tst.w   y_vel(a0)
-                bmi.s   S3TailsTerrain_ReturnAfterRightwardFloorGateOrAttachment
+                bmi.s   S3TailsLand_RightFloorReturn
 
-S3TailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant:
+S3TailsLand_ProbeRightFloor:
                 bsr.w   Sonic_CheckFloor
                 tst.w   d1
-                bpl.s   S3TailsTerrain_ReturnAfterRightwardFloorGateOrAttachment
+                bpl.s   S3TailsLand_RightFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 bsr.w   Tails_TouchFloor_Check_Spindash
 
-S3TailsTerrain_ReturnAfterRightwardFloorGateOrAttachment:
+S3TailsLand_RightFloorReturn:
                 rts
 ; End of function Tails_DoLevelCollision
 
@@ -226,7 +228,7 @@ S3TailsTerrain_ReturnAfterRightwardFloorGateOrAttachment:
 
 Tails_TouchFloor_Check_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   S3TailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin
+                bne.s   S3TailsLand_ResetLandingAndFlight
                 move.b  #0,anim(a0)
 ; End of function Tails_TouchFloor_Check_Spindash
 
@@ -237,14 +239,14 @@ Tails_TouchFloor:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                beq.s   S3TailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin
+                beq.s   S3TailsLand_ResetLandingAndFlight
                 bclr    #Status_Roll,status(a0)
                 move.b  #0,anim(a0)
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 add.w   d0,y_pos(a0)
 
-S3TailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin:
+S3TailsLand_ResetLandingAndFlight:
                 bclr    #Status_InAir,status(a0)
                 bclr    #Status_Push,status(a0)
                 bclr    #Status_RollJump,status(a0)

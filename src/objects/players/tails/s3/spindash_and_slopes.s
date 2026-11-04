@@ -6,12 +6,12 @@
 
 Tails_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   S3TailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry
+                bne.s   S3TailsSpin_ReleaseOrKeepCharging
                 cmpi.b  #8,anim(a0)
-                bne.s   S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext
+                bne.s   S3TailsSpin_EntryReturn
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext
+                beq.w   S3TailsSpin_EntryReturn
                 move.b  #9,anim(a0)
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
@@ -19,14 +19,14 @@ Tails_Spindash:
                 move.b  #1,spin_dash_flag(a0)
                 move.w  #0,spin_dash_counter(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   S3TailsSpindash_ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart
+                blo.s   S3TailsSpin_CheckEntryBoundsAndTerrain
                 move.b  #2,anim(a6)
 
-S3TailsSpindash_ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart:
+S3TailsSpin_CheckEntryBoundsAndTerrain:
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
-                beq.s   S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext
+                beq.s   S3TailsSpin_EntryReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
@@ -34,17 +34,17 @@ S3TailsSpindash_ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart:
                 bsr.w   CheckLeftWallDist
                 movem.l (sp)+,a4-a6
                 tst.w   d1
-                bpl.s   S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext
+                bpl.s   S3TailsSpin_EntryReturn
                 sub.w   d1,x_pos(a0)
 
-S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext:
+S3TailsSpin_EntryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry:
+S3TailsSpin_ReleaseOrKeepCharging:
                 move.b  (Ctrl_2_held_logical).w,d0
                 btst    #button_down,d0
-                bne.w   S3TailsSpindash_DecayHeldSpindashChargeUsingLogicalWordShift
+                bne.w   S3TailsSpin_DecayHeldCharge
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -53,7 +53,7 @@ S3TailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry:
                 moveq   #0,d0
                 move.b  spin_dash_counter(a0),d0
                 add.w   d0,d0
-                move.w  S3TailsSpindash_NormalTailsSpindashLaunchSpeedWords(pc,d0.w),ground_vel(a0)
+                move.w  S3TailsSpin_NormalSpeedByChargeHi(pc,d0.w),ground_vel(a0)
                 move.w  ground_vel(a0),d0
                 subi.w  #$800,d0
                 add.w   d0,d0
@@ -62,23 +62,23 @@ S3TailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry:
                 addi.w  #$2000,d0
                 lea     (H_scroll_frame_offset).w,a1
                 cmpa.w  #Player_1,a0
-                beq.s   S3TailsSpindash_StorePreFacingDashHistoryLagThenSignLaunchSpeed
+                beq.s   S3TailsSpin_StoreLagAndApplyFacing
                 lea     (H_scroll_frame_offset_P2).w,a1
 
-S3TailsSpindash_StorePreFacingDashHistoryLagThenSignLaunchSpeed:
+S3TailsSpin_StoreLagAndApplyFacing:
                 move.w  d0,(a1)
                 btst    #Status_Facing,status(a0)
-                beq.s   S3TailsSpindash_CommitReleasedRollStopDustAndPlayDashSound
+                beq.s   S3TailsSpin_BeginRollAndStopDust
                 neg.w   ground_vel(a0)
 
-S3TailsSpindash_CommitReleasedRollStopDustAndPlayDashSound:
+S3TailsSpin_BeginRollAndStopDust:
                 bset    #Status_Roll,status(a0)
                 move.b  #0,anim(a6)
                 move.w  #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
-                bra.s   S3TailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease
+                bra.s   S3TailsSpin_SkipGroundAndEaseCamera
 ; ---------------------------------------------------------------------------
-S3TailsSpindash_NormalTailsSpindashLaunchSpeedWords:
+S3TailsSpin_NormalSpeedByChargeHi:
                 dc.w    $800
                 dc.w    $880
                 dc.w    $900
@@ -90,42 +90,43 @@ S3TailsSpindash_NormalTailsSpindashLaunchSpeedWords:
                 dc.w    $C00
 ; ---------------------------------------------------------------------------
 
-S3TailsSpindash_DecayHeldSpindashChargeUsingLogicalWordShift:
+S3TailsSpin_DecayHeldCharge:
                 tst.w   spin_dash_counter(a0)
-                beq.s   S3TailsSpindash_BoostChargeOnNewAbcAndRestartChargeAnimation
+                beq.s   S3TailsSpin_ChargeOnNewPress
                 move.w  spin_dash_counter(a0),d0
                 lsr.w   #5,d0
                 sub.w   d0,spin_dash_counter(a0)
-                bcc.s   S3TailsSpindash_BoostChargeOnNewAbcAndRestartChargeAnimation
+                bcc.s   S3TailsSpin_ChargeOnNewPress
                 move.w  #0,spin_dash_counter(a0)
 
-S3TailsSpindash_BoostChargeOnNewAbcAndRestartChargeAnimation:
+S3TailsSpin_ChargeOnNewPress:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   S3TailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease
+                beq.w   S3TailsSpin_SkipGroundAndEaseCamera
                 move.w  #9<<8,anim(a0)                  ; and prev_anim
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
                 addi.w  #$200,spin_dash_counter(a0)
                 cmpi.w  #$800,spin_dash_counter(a0)
-                blo.s   S3TailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease
+                blo.s   S3TailsSpin_SkipGroundAndEaseCamera
                 move.w  #$800,spin_dash_counter(a0)
 
-S3TailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease:
+; Discard the ground movement return address and ease the camera distance toward $60
+S3TailsSpin_SkipGroundAndEaseCamera:
                 addq.l  #4,sp
                 cmpi.w  #$60,(a5)
-                beq.s   S3TailsSpindash_AttachAndCheckBackgroundAfterActiveChargeOrRelease
-                bcc.s   S3TailsSpindash_SubtractSpindashCameraRecoveryStep
+                beq.s   S3TailsSpin_CheckActiveBoundsAndTerrain
+                bcc.s   S3TailsSpin_ReduceCameraDistanceBy2
                 addq.w  #4,(a5)
 
-S3TailsSpindash_SubtractSpindashCameraRecoveryStep:
+S3TailsSpin_ReduceCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-S3TailsSpindash_AttachAndCheckBackgroundAfterActiveChargeOrRelease:
+S3TailsSpin_CheckActiveBoundsAndTerrain:
                 bsr.w   Tails_Check_Screen_Boundaries
                 bsr.w   Player_AnglePos
                 tst.b   (Background_collision_flag).w
-                beq.s   S3TailsSpindash_ReturnToOuterModeAfterChargeReleaseTail
+                beq.s   S3TailsSpin_ActiveReturn
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
@@ -133,10 +134,10 @@ S3TailsSpindash_AttachAndCheckBackgroundAfterActiveChargeOrRelease:
                 bsr.w   CheckLeftWallDist
                 movem.l (sp)+,a4-a6
                 tst.w   d1
-                bpl.s   S3TailsSpindash_ReturnToOuterModeAfterChargeReleaseTail
+                bpl.s   S3TailsSpin_ActiveReturn
                 sub.w   d1,x_pos(a0)
 
-S3TailsSpindash_ReturnToOuterModeAfterChargeReleaseTail:
+S3TailsSpin_ActiveReturn:
                 rts
 ; End of function Tails_Spindash
 
@@ -146,26 +147,26 @@ Tails_SlopeResist:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bcc.s   S3TailsSlope_ReturnAfterPrivateSlopeResistanceGateOrNegativeAddition
+                bcc.s   S3TailsSlope_ResistReturn
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$20,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                beq.s   S3TailsSlope_ReturnAfterPrivateSlopeResistanceGateOrNegativeAddition
-                bmi.s   S3TailsSlope_AddSlopeResistanceToNegativeGroundSpeed
+                beq.s   S3TailsSlope_ResistReturn
+                bmi.s   S3TailsSlope_ResistNegativeSpeed
                 tst.w   d0
-                beq.s   S3TailsSlope_ReturnAfterPositiveSlopeResistanceOrZeroForce
+                beq.s   S3TailsSlope_ResistPositiveReturn
                 add.w   d0,ground_vel(a0)
 
-S3TailsSlope_ReturnAfterPositiveSlopeResistanceOrZeroForce:
+S3TailsSlope_ResistPositiveReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsSlope_AddSlopeResistanceToNegativeGroundSpeed:
+S3TailsSlope_ResistNegativeSpeed:
                 add.w   d0,ground_vel(a0)
 
-S3TailsSlope_ReturnAfterPrivateSlopeResistanceGateOrNegativeAddition:
+S3TailsSlope_ResistReturn:
                 rts
 ; End of function Tails_SlopeResist
 
@@ -175,31 +176,31 @@ Tails_RollRepel:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bcc.s   S3TailsSlope_ReturnAfterRollingSlopeGateOrNegativeForce
+                bcc.s   S3TailsSlope_RollRepelReturn
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$50,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                bmi.s   S3TailsSlope_ChooseRollingSlopeForceScaleForNegativeGroundSpeed
+                bmi.s   S3TailsSlope_ScaleRollForceAgainstNeg
                 tst.w   d0
-                bpl.s   S3TailsSlope_AddRollingSlopeForceForNonnegativeGroundSpeed
+                bpl.s   S3TailsSlope_ApplyRollForceToPosSpeed
                 asr.l   #2,d0
 
-S3TailsSlope_AddRollingSlopeForceForNonnegativeGroundSpeed:
+S3TailsSlope_ApplyRollForceToPosSpeed:
                 add.w   d0,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsSlope_ChooseRollingSlopeForceScaleForNegativeGroundSpeed:
+S3TailsSlope_ScaleRollForceAgainstNeg:
                 tst.w   d0
-                bmi.s   S3TailsSlope_AddRollingSlopeForceForNegativeGroundSpeed
+                bmi.s   S3TailsSlope_ApplyRollForceToNegSpeed
                 asr.l   #2,d0
 
-S3TailsSlope_AddRollingSlopeForceForNegativeGroundSpeed:
+S3TailsSlope_ApplyRollForceToNegSpeed:
                 add.w   d0,ground_vel(a0)
 
-S3TailsSlope_ReturnAfterRollingSlopeGateOrNegativeForce:
+S3TailsSlope_RollRepelReturn:
                 rts
 ; End of function Tails_RollRepel
 
@@ -208,29 +209,30 @@ S3TailsSlope_ReturnAfterRollingSlopeGateOrNegativeForce:
 Tails_SlopeRepel:
                 nop
                 tst.b   stick_to_convex(a0)
-                bne.s   S3TailsSlope_ReturnAfterPrivateSlopeRepelGateOrDetachment
+                bne.s   S3TailsSlope_RepelReturn
                 tst.w   move_lock(a0)
-                bne.s   S3TailsSlope_DecrementPrivateSlopeMoveLockOnlyWhenNotSticky
+                bne.s   S3TailsSlope_TickMoveLock
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   S3TailsSlope_ReturnAfterPrivateSlopeRepelGateOrDetachment
+                beq.s   S3TailsSlope_RepelReturn
                 move.w  ground_vel(a0),d0
-                bpl.s   S3TailsSlope_DetachSlowTailsFromNonflatSlopeAndLockControls
+                bpl.s   S3TailsSlope_DetachSlowPlayer
                 neg.w   d0
 
-S3TailsSlope_DetachSlowTailsFromNonflatSlopeAndLockControls:
+; Below $280 on a steep slope, clear ground speed and lock movement for 30 frames
+S3TailsSlope_DetachSlowPlayer:
                 cmpi.w  #$280,d0
-                bcc.s   S3TailsSlope_ReturnAfterPrivateSlopeRepelGateOrDetachment
+                bcc.s   S3TailsSlope_RepelReturn
                 clr.w   ground_vel(a0)
                 bset    #Status_InAir,status(a0)
                 move.w  #30,move_lock(a0)
 
-S3TailsSlope_ReturnAfterPrivateSlopeRepelGateOrDetachment:
+S3TailsSlope_RepelReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsSlope_DecrementPrivateSlopeMoveLockOnlyWhenNotSticky:
+S3TailsSlope_TickMoveLock:
                 subq.w  #1,move_lock(a0)
                 rts
 ; End of function Tails_SlopeRepel
@@ -239,57 +241,57 @@ S3TailsSlope_DecrementPrivateSlopeMoveLockOnlyWhenNotSticky:
 
 Tails_JumpAngle:
                 move.b  angle(a0),d0
-                beq.s   S3TailsSlope_GateSecondaryFlipAndChooseGroundSpeedDirection
-                bpl.s   S3TailsSlope_RecoverPositivePrimaryAngleTowardZero
+                beq.s   S3TailsSlope_CheckFlipAndDirection
+                bpl.s   S3TailsSlope_ReducePositiveAirAngle
                 addq.b  #2,d0
-                bcc.s   S3TailsSlope_JoinNegativePrimaryAngleRecoveryAtStore
+                bcc.s   S3TailsSlope_JoinNegativeAngleRecovery
                 moveq   #0,d0
 
-S3TailsSlope_JoinNegativePrimaryAngleRecoveryAtStore:
-                bra.s   S3TailsSlope_StoreRecoveredPrimaryAngleBeforeFlipUpdate
+S3TailsSlope_JoinNegativeAngleRecovery:
+                bra.s   S3TailsSlope_StoreAirAngle
 ; ---------------------------------------------------------------------------
 
-S3TailsSlope_RecoverPositivePrimaryAngleTowardZero:
+S3TailsSlope_ReducePositiveAirAngle:
                 subq.b  #2,d0
-                bcc.s   S3TailsSlope_StoreRecoveredPrimaryAngleBeforeFlipUpdate
+                bcc.s   S3TailsSlope_StoreAirAngle
                 moveq   #0,d0
 
-S3TailsSlope_StoreRecoveredPrimaryAngleBeforeFlipUpdate:
+S3TailsSlope_StoreAirAngle:
                 move.b  d0,angle(a0)
 
-S3TailsSlope_GateSecondaryFlipAndChooseGroundSpeedDirection:
+S3TailsSlope_CheckFlipAndDirection:
                 move.b  flip_angle(a0),d0
-                beq.s   S3TailsSlope_ReturnAfterPrimaryAngleAndOptionalSecondaryFlip
+                beq.s   S3TailsSlope_JumpFlipReturn
                 tst.w   ground_vel(a0)
-                bmi.s   S3TailsSlope_AdvanceLeftFlipUnlessFlipTypeSignReversesIt
+                bmi.s   S3TailsSlope_CheckAndAdvanceLeftFlip
 
-S3TailsSlope_AdvanceRightFlipAndConsumeCountOnlyOnByteWrap:
+S3TailsSlope_AdvanceRightFlip:
                 move.b  flip_speed(a0),d1
                 add.b   d1,d0
-                bcc.s   S3TailsSlope_JoinRightFlipAtSecondaryAngleStore
+                bcc.s   S3TailsSlope_JoinRightFlipStore
                 subq.b  #1,flips_remaining(a0)
-                bcc.s   S3TailsSlope_JoinRightFlipAtSecondaryAngleStore
+                bcc.s   S3TailsSlope_JoinRightFlipStore
                 move.b  #0,flips_remaining(a0)
                 moveq   #0,d0
 
-S3TailsSlope_JoinRightFlipAtSecondaryAngleStore:
-                bra.s   S3TailsSlope_StoreSecondaryFlipAngleAfterDirectionAndWrapHandling
+S3TailsSlope_JoinRightFlipStore:
+                bra.s   S3TailsSlope_StoreFlipAngle
 ; ---------------------------------------------------------------------------
 
-S3TailsSlope_AdvanceLeftFlipUnlessFlipTypeSignReversesIt:
+S3TailsSlope_CheckAndAdvanceLeftFlip:
                 tst.b   flip_type(a0)
-                bmi.s   S3TailsSlope_AdvanceRightFlipAndConsumeCountOnlyOnByteWrap
+                bmi.s   S3TailsSlope_AdvanceRightFlip
                 move.b  flip_speed(a0),d1
                 sub.b   d1,d0
-                bcc.s   S3TailsSlope_StoreSecondaryFlipAngleAfterDirectionAndWrapHandling
+                bcc.s   S3TailsSlope_StoreFlipAngle
                 subq.b  #1,flips_remaining(a0)
-                bcc.s   S3TailsSlope_StoreSecondaryFlipAngleAfterDirectionAndWrapHandling
+                bcc.s   S3TailsSlope_StoreFlipAngle
                 move.b  #0,flips_remaining(a0)
                 moveq   #0,d0
 
-S3TailsSlope_StoreSecondaryFlipAngleAfterDirectionAndWrapHandling:
+S3TailsSlope_StoreFlipAngle:
                 move.b  d0,flip_angle(a0)
 
-S3TailsSlope_ReturnAfterPrimaryAngleAndOptionalSecondaryFlip:
+S3TailsSlope_JumpFlipReturn:
                 rts
 ; End of function Tails_JumpAngle

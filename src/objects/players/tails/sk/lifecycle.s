@@ -10,23 +10,23 @@ Obj_Tails:
                 tst.w   (Debug_placement_mode).w
                 beq.s   Tails_Normal
                 cmpi.b  #1,(Debug_placement_type).w
-                beq.s   SKTailsLifecycle_TailEnterDebugPlacementForSoloTails
+                beq.s   SKTailsMain_EnterSoloDebugPlacement
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKTailsLifecycle_AdvanceDebugFrameAfterOptionalBExit
+                beq.s   SKTailsMain_AdvanceDebugFrame
                 move.w  #0,(Debug_placement_mode).w
 
-SKTailsLifecycle_AdvanceDebugFrameAfterOptionalBExit:
+SKTailsMain_AdvanceDebugFrame:
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #$FB,mapping_frame(a0)
-                blo.s   SKTailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay
+                blo.s   SKTailsMain_LoadAndDrawDebugFrame
                 move.b  #0,mapping_frame(a0)
 
-SKTailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay:
+SKTailsMain_LoadAndDrawDebugFrame:
                 bsr.w   Tails_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_TailEnterDebugPlacementForSoloTails:
+SKTailsMain_EnterSoloDebugPlacement:
                 jmp     (DebugMode).l
 ; ---------------------------------------------------------------------------
 
@@ -39,11 +39,11 @@ Tails_Normal:
 Tails_Index:
                 dc.w    Tails_Init-Tails_Index
                 dc.w    Tails_Control-Tails_Index
-                dc.w    SKTailsRecovery_EnterSoloDebugFromHurtWithPhysicalBPress-Tails_Index
-                dc.w    SKTailsRecovery_EnterSoloDebugFromDeathWithPhysicalBPress-Tails_Index
-                dc.w    SKTailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails_Index
-                dc.w    SKTailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails_Index
-                dc.w    SKTailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement-Tails_Index
+                dc.w    SKTailsRecovery_CheckHurtDebugEntry-Tails_Index
+                dc.w    SKTailsRecovery_CheckDeathDebugEntry-Tails_Index
+                dc.w    SKTailsRecovery_TickRestartTimer-Tails_Index
+                dc.w    SKTailsRecovery_CheckP2ScrollSettled-Tails_Index
+                dc.w    SKTailsRecovery_ReleaseRiderOnDrown-Tails_Index
 ; ---------------------------------------------------------------------------
 
 Tails_Init:
@@ -62,7 +62,7 @@ Tails_Init:
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
                 cmpi.w  #2,(Player_mode).w
-                bne.s   SKTailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority
+                bne.s   SKTailsMain_InitFollowerArtAndSolidity
                 tst.b   (Last_star_post_hit).w
                 bne.s   Tails_Init_Continued
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
@@ -77,7 +77,7 @@ Tails_Init:
                 bra.s   Tails_Init_Continued
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority:
+SKTailsMain_InitFollowerArtAndSolidity:
                 move.w  #make_art_tile(ArtTile_Player_2,0,0),art_tile(a0)
                 move.w  (Player_1+top_solid_bit).w,top_solid_bit(a0)
                 tst.w   (Player_1+art_tile).w
@@ -90,12 +90,12 @@ Tails_Init_Continued:
                 move.b  #0,(Super_Tails_flag).w
                 move.b  #30,air_left(a0)
                 cmpi.w  #$20,(Tails_CPU_routine).w
-                beq.s   SKTailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
+                beq.s   SKTailsMain_ResetTimersAndBindTail
                 cmpi.w  #$12,(Tails_CPU_routine).w
-                beq.s   SKTailsLifecycle_ResetFollowerTimersAndBindNormalTailActor
+                beq.s   SKTailsMain_ResetTimersAndBindTail
                 move.w  #0,(Tails_CPU_routine).w
 
-SKTailsLifecycle_ResetFollowerTimersAndBindNormalTailActor:
+SKTailsMain_ResetTimersAndBindTail:
                 move.w  #0,(Tails_CPU_idle_timer).w
                 move.w  #0,(Tails_CPU_flight_timer).w
                 move.l  #Obj_Tails_Tail,(Tails_tails).w
@@ -106,69 +106,71 @@ SKTailsLifecycle_ResetFollowerTimersAndBindNormalTailActor:
 
 Tails_Control:
                 cmpi.w  #2,(Player_mode).w
-                bne.s   SKTailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                bne.s   SKTailsMain_SelectControllerAndAI
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKTailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                beq.s   SKTailsMain_SelectControllerAndAI
                 bclr    #button_A,(Ctrl_1_pressed).w
-                beq.s   SKTailsLifecycle_CheckDebugBAfterConsumingNewAForGravityToggle
+                beq.s   SKTailsMain_CheckDebugBEntry
                 eori.b  #1,(Reverse_gravity_flag).w
 
-SKTailsLifecycle_CheckDebugBAfterConsumingNewAForGravityToggle:
+SKTailsMain_CheckDebugBEntry:
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKTailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility
+                beq.s   SKTailsMain_SelectControllerAndAI
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 btst    #button_C,(Ctrl_1_held).w
-                beq.s   SKTailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode
+                beq.s   SKTailsMain_DebugReturn
                 move.w  #2,(Debug_placement_mode).w
                 move.b  #0,anim(a0)
 
-SKTailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode:
+SKTailsMain_DebugReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility:
+SKTailsMain_SelectControllerAndAI:
                 cmpa.w  #Player_1,a0
-                bne.s   SKTailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy
+                bne.s   SKTailsMain_CheckSecondaryInputLock
                 move.w  (Ctrl_1_logical).w,(Ctrl_2_logical).w
                 tst.b   (Ctrl_1_locked).w
-                bne.s   SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bne.s   SKTailsMain_CheckExternalMovement
                 move.w  (Ctrl_1).w,(Ctrl_2_logical).w
                 move.w  (Ctrl_1).w,(Ctrl_1_logical).w
                 cmpi.w  #$1A,(Tails_CPU_routine).w
-                bhs.s   SKTailsLifecycle_RunFollowerCpuOnlyOutsideCompetition
-                bra.s   SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bhs.s   SKTailsMain_CheckAndRunFollowerAI
+                bra.s   SKTailsMain_CheckExternalMovement
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy:
+; A positive lock keeps logical input and still allows AI. A negative lock skips the AI call
+SKTailsMain_CheckSecondaryInputLock:
                 tst.b   (Ctrl_2_locked).w
-                beq.s   SKTailsLifecycle_CopyPhysicalSecondaryInputBeforeOptionalFollowerAi
-                bpl.s   SKTailsLifecycle_RunFollowerCpuOnlyOutsideCompetition
-                bra.s   SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                beq.s   SKTailsMain_CopySecondaryInput
+                bpl.s   SKTailsMain_CheckAndRunFollowerAI
+                bra.s   SKTailsMain_CheckExternalMovement
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_CopyPhysicalSecondaryInputBeforeOptionalFollowerAi:
+SKTailsMain_CopySecondaryInput:
                 move.w  (Ctrl_2).w,(Ctrl_2_logical).w
 
-SKTailsLifecycle_RunFollowerCpuOnlyOutsideCompetition:
+SKTailsMain_CheckAndRunFollowerAI:
                 tst.w   (Competition_mode).w
-                bne.s   SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl
+                bne.s   SKTailsMain_CheckExternalMovement
                 bsr.w   Tails_CPU_Control
 
-SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl:
+; External movement clears the flap state and releases a carried player
+SKTailsMain_CheckExternalMovement:
                 btst    #0,object_control(a0)
-                beq.s   SKTailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases
+                beq.s   SKTailsMain_DispatchMovementMode
                 move.b  #0,double_jump_flag(a0)
                 tst.b   (Flying_carrying_Sonic_flag).w
-                beq.s   SKTailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
+                beq.s   SKTailsMain_WrapPlayerYIfEnabled
                 lea     (Player_1).w,a1
                 clr.b   object_control(a1)
                 bset    #Status_InAir,status(a1)
                 clr.w   (Flying_carrying_Sonic_flag).w
-                bra.s   SKTailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel
+                bra.s   SKTailsMain_WrapPlayerYIfEnabled
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases:
+SKTailsMain_DispatchMovementMode:
                 movem.l a4-a6,-(sp)
                 moveq   #0,d0
                 move.b  status(a0),d0
@@ -177,13 +179,14 @@ SKTailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases:
                 jsr     Tails_Modes(pc,d1.w)
                 movem.l (sp)+,a4-a6
 
-SKTailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel:
+; Mask integer Y only when the camera minimum equals -$100
+SKTailsMain_WrapPlayerYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   SKTailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices
+                bne.s   SKTailsMain_UpdateFrameServices
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-SKTailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices:
+SKTailsMain_UpdateFrameServices:
                 bsr.s   Tails_Display
                 bsr.w   Tails_Super
                 bsr.w   Sonic_RecordPos
@@ -191,29 +194,31 @@ SKTailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices:
                 move.b  (Primary_Angle).w,next_tilt(a0)
                 move.b  (Secondary_Angle).w,tilt(a0)
                 tst.b   (WindTunnel_flag_P2).w
-                beq.s   SKTailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
+                beq.s   SKTailsMain_CheckAnimateAndLoadPatterns
                 tst.b   anim(a0)
-                bne.s   SKTailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne
+                bne.s   SKTailsMain_CheckAnimateAndLoadPatterns
                 move.b  prev_anim(a0),anim(a0)
 
-SKTailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne:
+; Object control bit 1 suppresses animation and the pattern update
+SKTailsMain_CheckAnimateAndLoadPatterns:
                 btst    #1,object_control(a0)
-                bne.s   SKTailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet
+                bne.s   SKTailsMain_CheckTouchResponse
                 bsr.w   Animate_Tails
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsLifecycle_LoadNormalTailsPatternsAfterOptionalReverseRenderFlip
+                beq.s   SKTailsMain_LoadPatterns
                 eori.b  #2,render_flags(a0)
 
-SKTailsLifecycle_LoadNormalTailsPatternsAfterOptionalReverseRenderFlip:
+SKTailsMain_LoadPatterns:
                 bsr.w   Tails_Load_PLC
 
-SKTailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet:
+; Suppress touch processing when either object control bit 5 or 7 is set
+SKTailsMain_CheckTouchResponse:
                 move.b  object_control(a0),d0
                 andi.b  #$A0,d0
-                bne.s   SKTailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch
+                bne.s   SKTailsMain_FrameReturn
                 jsr     (TouchResponse).l
 
-SKTailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch:
+SKTailsMain_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Tails_Modes:
@@ -225,66 +230,66 @@ Tails_Modes:
 
 Tails_Display:
                 move.b  invulnerability_timer(a0),d0
-                beq.s   SKTailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks
+                beq.s   SKTailsMain_DrawVisibleBlinkPhase
                 subq.b  #1,invulnerability_timer(a0)
                 lsr.b   #3,d0
-                bcc.s   SKTailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase
+                bcc.s   SKTailsMain_TickInvincibilityEvery8
 
-SKTailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks:
+SKTailsMain_DrawVisibleBlinkPhase:
                 jsr     (Draw_Sprite).l
 
-SKTailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase:
+SKTailsMain_TickInvincibilityEvery8:
                 btst    #Status_Invincible,status_secondary(a0)
-                beq.s   SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                beq.s   SKTailsMain_TickShoesAndRestoreSpeed
                 tst.b   invincibility_timer(a0)
-                beq.s   SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                beq.s   SKTailsMain_TickShoesAndRestoreSpeed
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                bne.s   SKTailsMain_TickShoesAndRestoreSpeed
                 subq.b  #1,invincibility_timer(a0)
-                bne.s   SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds
+                bne.s   SKTailsMain_TickShoesAndRestoreSpeed
                 tst.b   (Boss_flag).w
-                bne.s   SKTailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
+                bne.s   SKTailsMain_ExpireInvincibility
                 cmpi.b  #12,air_left(a0)
-                blo.s   SKTailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck
+                blo.s   SKTailsMain_ExpireInvincibility
                 move.w  (Current_music).w,d0
                 jsr     (Play_Music).l
 
-SKTailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck:
+SKTailsMain_ExpireInvincibility:
                 bclr    #Status_Invincible,status_secondary(a0)
 
-SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds:
+SKTailsMain_TickShoesAndRestoreSpeed:
                 btst    #Status_SpeedShoes,status_secondary(a0)
-                beq.s   SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                beq.s   SKTailsMain_PowerUpdateReturn
                 tst.b   speed_shoes_timer(a0)
-                beq.s   SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                beq.s   SKTailsMain_PowerUpdateReturn
                 move.b  (Level_frame_counter+1).w,d0
                 andi.b  #7,d0
-                bne.s   SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                bne.s   SKTailsMain_PowerUpdateReturn
                 subq.b  #1,speed_shoes_timer(a0)
-                bne.s   SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes
+                bne.s   SKTailsMain_PowerUpdateReturn
                 tst.w   (Competition_mode).w
-                bne.s   SKTailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry
+                bne.s   SKTailsMain_RestoreCompSpeedRecord
                 move.w  #$600,Max_speed_P2-Max_speed_P2(a4)
                 move.w  #$C,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$80,Deceleration_P2-Max_speed_P2(a4)
                 tst.b   (Super_Tails_flag).w
-                beq.s   SKTailsLifecycle_ClearExpiredShoesAndRestoreTempoAfterOptionalSuperSpeeds
+                beq.s   SKTailsMain_ClearShoesAndRestoreTempo
                 move.w  #$800,Max_speed_P2-Max_speed_P2(a4)
                 move.w  #$18,Acceleration_P2-Max_speed_P2(a4)
                 move.w  #$C0,Deceleration_P2-Max_speed_P2(a4)
 
-SKTailsLifecycle_ClearExpiredShoesAndRestoreTempoAfterOptionalSuperSpeeds:
+SKTailsMain_ClearShoesAndRestoreTempo:
                 bclr    #Status_SpeedShoes,status_secondary(a0)
                 moveq   #0,d0
                 jmp     (Change_Music_Tempo).l
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes:
+SKTailsMain_PowerUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry:
+SKTailsMain_RestoreCompSpeedRecord:
                 lea     (Character_Speeds).l,a1
                 moveq   #0,d0
                 move.b  character_id(a0),d0

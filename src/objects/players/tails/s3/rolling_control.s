@@ -12,46 +12,46 @@ Tails_RollSpeed:
                 move.w  Deceleration_P2-Max_speed_P2(a4),d4
                 asr.w   #2,d4
                 tst.b   spin_dash_flag(a0)
-                bmi.w   S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
+                bmi.w   S3TailsRoll_EaseRollCamera
                 tst.b   status_secondary(a0)
-                bmi.w   S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
+                bmi.w   S3TailsRoll_EaseRollCamera
                 tst.w   move_lock(a0)
-                bne.s   S3TailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput
+                bne.s   S3TailsRoll_ApplySignedFriction
                 btst    #button_left,(Ctrl_2_held_logical).w
-                beq.s   S3TailsRolling_ApplyRightRollingInputAfterLeftInput
+                beq.s   S3TailsRoll_CheckRightInput
                 bsr.w   TailsS3ApplyRollingLeftInput
 
-S3TailsRolling_ApplyRightRollingInputAfterLeftInput:
+S3TailsRoll_CheckRightInput:
                 btst    #button_right,(Ctrl_2_held_logical).w
-                beq.s   S3TailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput
+                beq.s   S3TailsRoll_ApplySignedFriction
                 bsr.w   TailsS3ApplyRollingRightInput
 
-S3TailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput:
+S3TailsRoll_ApplySignedFriction:
                 move.w  ground_vel(a0),d0
-                beq.s   S3TailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy
-                bmi.s   S3TailsRolling_ApplyNegativeRollingFrictionWithCarryClamp
+                beq.s   S3TailsRoll_CheckUnrollAtZeroSpeed
+                bmi.s   S3TailsRoll_ApplyNegativeFriction
                 sub.w   d5,d0
-                bcc.s   S3TailsRolling_StorePositiveRollingFrictionBeforeUnrollTest
+                bcc.s   S3TailsRoll_StorePositiveFriction
                 move.w  #0,d0
 
-S3TailsRolling_StorePositiveRollingFrictionBeforeUnrollTest:
+S3TailsRoll_StorePositiveFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   S3TailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy
+                bra.s   S3TailsRoll_CheckUnrollAtZeroSpeed
 ; ---------------------------------------------------------------------------
 
-S3TailsRolling_ApplyNegativeRollingFrictionWithCarryClamp:
+S3TailsRoll_ApplyNegativeFriction:
                 add.w   d5,d0
-                bcc.s   S3TailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest
+                bcc.s   S3TailsRoll_StoreNegativeFriction
                 move.w  #0,d0
 
-S3TailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest:
+S3TailsRoll_StoreNegativeFriction:
                 move.w  d0,ground_vel(a0)
 
-S3TailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy:
+S3TailsRoll_CheckUnrollAtZeroSpeed:
                 tst.w   ground_vel(a0)
-                bne.s   S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
+                bne.s   S3TailsRoll_EaseRollCamera
                 tst.b   spin_dash_flag(a0)
-                bne.s   S3TailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold
+                bne.s   S3TailsRoll_ResumeForcedRoll
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d0
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -60,25 +60,25 @@ S3TailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy:
                 sub.b   default_y_radius(a0),d0
                 ext.w   d0
                 add.w   d0,y_pos(a0)
-                bra.s   S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
+                bra.s   S3TailsRoll_EaseRollCamera
 ; ---------------------------------------------------------------------------
 
-S3TailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold:
+S3TailsRoll_ResumeForcedRoll:
                 move.w  #$400,ground_vel(a0)
                 btst    #Status_Facing,status(a0)
-                beq.s   S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection
+                beq.s   S3TailsRoll_EaseRollCamera
                 neg.w   ground_vel(a0)
 
-S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection:
+S3TailsRoll_EaseRollCamera:
                 cmpi.w  #$60,(a5)
-                beq.s   S3TailsRolling_ProjectRollingVelocityAndClampPositiveXWord
-                bcc.s   S3TailsRolling_SubtractRollingCameraRecoveryStep
+                beq.s   S3TailsRoll_ProjectGroundSpeed
+                bcc.s   S3TailsRoll_ReduceRollCameraDistanceBy2
                 addq.w  #4,(a5)
 
-S3TailsRolling_SubtractRollingCameraRecoveryStep:
+S3TailsRoll_ReduceRollCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-S3TailsRolling_ProjectRollingVelocityAndClampPositiveXWord:
+S3TailsRoll_ProjectGroundSpeed:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d0
@@ -87,38 +87,38 @@ S3TailsRolling_ProjectRollingVelocityAndClampPositiveXWord:
                 muls.w  ground_vel(a0),d1
                 asr.l   #8,d1
                 cmpi.w  #$1000,d1
-                ble.s   S3TailsRolling_ClampNegativeRollingXProjectionWord
+                ble.s   S3TailsRoll_ClampProjectedMinXSpeed
                 move.w  #$1000,d1
 
-S3TailsRolling_ClampNegativeRollingXProjectionWord:
+S3TailsRoll_ClampProjectedMinXSpeed:
                 cmpi.w  #-$1000,d1
-                bge.s   S3TailsRolling_StoreRollingXAndTailBranchSharedObstruction
+                bge.s   S3TailsRoll_StoreXSpeedAndProbe
                 move.w  #-$1000,d1
 
-S3TailsRolling_StoreRollingXAndTailBranchSharedObstruction:
+S3TailsRoll_StoreXSpeedAndProbe:
                 move.w  d1,x_vel(a0)
-                bra.w   S3TailsGround_GateProjectedGroundObstructionForWalkingAndRolling
+                bra.w   S3TailsGround_CheckTravelProbe
 ; End of function Tails_RollSpeed
 
 ; =============== S U B R O U T I N E =======================================
 
 TailsS3ApplyRollingLeftInput:
                 move.w  ground_vel(a0),d0
-                beq.s   S3TailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration
-                bpl.s   S3TailsRolling_BrakePositiveRollForLeftHeldInput
+                beq.s   S3TailsRoll_FaceLeftAndKeepRolling
+                bpl.s   S3TailsRoll_BrakeRightwardRoll
 
-S3TailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration:
+S3TailsRoll_FaceLeftAndKeepRolling:
                 bset    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsRolling_BrakePositiveRollForLeftHeldInput:
+S3TailsRoll_BrakeRightwardRoll:
                 sub.w   d4,d0
-                bcc.s   S3TailsRolling_StoreLeftRollingBrakeAndReturn
+                bcc.s   S3TailsRoll_StoreLeftBrakeResult
                 move.w  #-$80,d0
 
-S3TailsRolling_StoreLeftRollingBrakeAndReturn:
+S3TailsRoll_StoreLeftBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function TailsS3ApplyRollingLeftInput
@@ -127,18 +127,18 @@ S3TailsRolling_StoreLeftRollingBrakeAndReturn:
 
 TailsS3ApplyRollingRightInput:
                 move.w  ground_vel(a0),d0
-                bmi.s   S3TailsRolling_BrakeNegativeRollForRightHeldInput
+                bmi.s   S3TailsRoll_BrakeLeftwardRoll
                 bclr    #Status_Facing,status(a0)
                 move.b  #2,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsRolling_BrakeNegativeRollForRightHeldInput:
+S3TailsRoll_BrakeLeftwardRoll:
                 add.w   d4,d0
-                bcc.s   S3TailsRolling_StoreRightRollingBrakeAndReturn
+                bcc.s   S3TailsRoll_StoreRightBrakeResult
                 move.w  #$80,d0
 
-S3TailsRolling_StoreRightRollingBrakeAndReturn:
+S3TailsRoll_StoreRightBrakeResult:
                 move.w  d0,ground_vel(a0)
                 rts
 ; End of function TailsS3ApplyRollingRightInput
@@ -150,70 +150,72 @@ Tails_InputAcceleration_Freespace:
                 move.w  Acceleration_P2-Max_speed_P2(a4),d5
                 asl.w   #1,d5
                 btst    #Status_RollJump,status(a0)
-                bne.s   S3TailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput
+                bne.s   S3TailsRoll_EaseAirCamera
                 move.w  x_vel(a0),d0
                 btst    #button_left,(Ctrl_2_held_logical).w
-                beq.s   S3TailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                beq.s   S3TailsRoll_CheckAirRightInput
                 bset    #Status_Facing,status(a0)
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   S3TailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                bgt.s   S3TailsRoll_CheckAirRightInput
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   S3TailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep
+                ble.s   S3TailsRoll_CheckAirRightInput
                 move.w  d1,d0
 
-S3TailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep:
+; Keep the previous speed when right input would increase existing overspeed
+S3TailsRoll_CheckAirRightInput:
                 btst    #button_right,(Ctrl_2_held_logical).w
-                beq.s   S3TailsRolling_CommitAirHorizontalInputVelocity
+                beq.s   S3TailsRoll_StoreAirXSpeed
                 bclr    #Status_Facing,status(a0)
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   S3TailsRolling_CommitAirHorizontalInputVelocity
+                blt.s   S3TailsRoll_StoreAirXSpeed
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   S3TailsRolling_CommitAirHorizontalInputVelocity
+                bge.s   S3TailsRoll_StoreAirXSpeed
                 move.w  d6,d0
 
-S3TailsRolling_CommitAirHorizontalInputVelocity:
+S3TailsRoll_StoreAirXSpeed:
                 move.w  d0,x_vel(a0)
 
-S3TailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput:
+S3TailsRoll_EaseAirCamera:
                 cmpi.w  #$60,(a5)
-                beq.s   S3TailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow
-                bcc.s   S3TailsRolling_SubtractAirCameraRecoveryStep
+                beq.s   S3TailsRoll_CheckAirDragWindow
+                bcc.s   S3TailsRoll_ReduceAirCameraDistanceBy2
                 addq.w  #4,(a5)
 
-S3TailsRolling_SubtractAirCameraRecoveryStep:
+S3TailsRoll_ReduceAirCameraDistanceBy2:
                 subq.w  #2,(a5)
 
-S3TailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow:
+; Use an unsigned word comparison against -$400 before applying horizontal drag
+S3TailsRoll_CheckAirDragWindow:
                 cmpi.w  #-$400,y_vel(a0)
-                blo.s   S3TailsRolling_ReturnAfterAirDragOrIneligibleVelocity
+                blo.s   S3TailsRoll_AirDragReturn
                 move.w  x_vel(a0),d0
                 move.w  d0,d1
                 asr.w   #5,d1
-                beq.s   S3TailsRolling_ReturnAfterAirDragOrIneligibleVelocity
-                bmi.s   S3TailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity
+                beq.s   S3TailsRoll_AirDragReturn
+                bmi.s   S3TailsRoll_ApplyLeftAirDrag
                 sub.w   d1,d0
-                bcc.s   S3TailsRolling_CommitNonnegativeQuotientAirDrag
+                bcc.s   S3TailsRoll_StoreRightAirDrag
                 move.w  #0,d0
 
-S3TailsRolling_CommitNonnegativeQuotientAirDrag:
+S3TailsRoll_StoreRightAirDrag:
                 move.w  d0,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity:
+S3TailsRoll_ApplyLeftAirDrag:
                 sub.w   d1,d0
-                bcs.s   S3TailsRolling_CommitNegativeQuotientAirDrag
+                bcs.s   S3TailsRoll_StoreLeftAirDrag
                 move.w  #0,d0
 
-S3TailsRolling_CommitNegativeQuotientAirDrag:
+S3TailsRoll_StoreLeftAirDrag:
                 move.w  d0,x_vel(a0)
 
-S3TailsRolling_ReturnAfterAirDragOrIneligibleVelocity:
+S3TailsRoll_AirDragReturn:
                 rts
 ; End of function Tails_InputAcceleration_Freespace

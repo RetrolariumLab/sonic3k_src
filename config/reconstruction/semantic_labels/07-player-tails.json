@@ -1462,7 +1462,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 7,
       "old": "loc_1620A",
-      "new": "S3TailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement",
+      "new": "S3TailsRecovery_ReleaseRiderOnHurt",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeHurtMovement."
     },
@@ -1470,7 +1470,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 15,
       "old": "loc_16222",
-      "new": "S3TailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity",
+      "new": "S3TailsRecovery_MoveHurtAndApplyGravity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe IntegrateOldHurtVelocityThenAddStoredGravity."
     },
@@ -1478,7 +1478,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 22,
       "old": "loc_1623C",
-      "new": "S3TailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode",
+      "new": "S3TailsRecovery_WrapHurtYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MaskHurtIntegerYOnlyInWrappingCameraMode."
     },
@@ -1486,7 +1486,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 28,
       "old": "loc_1624C",
-      "new": "S3TailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw",
+      "new": "S3TailsRecovery_ResolveHurtAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveHurtThenBoundsRecordAnimateAndDraw."
     },
@@ -1494,7 +1494,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 45,
       "old": "loc_16278",
-      "new": "S3TailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding",
+      "new": "S3TailsRecovery_CheckHurtLandingAndReset",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding."
     },
@@ -1502,7 +1502,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 62,
       "old": "locret_162BC",
-      "new": "S3TailsRecovery_ReturnAfterHurtAirOrLandingDecision",
+      "new": "S3TailsRecovery_HurtLandingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterHurtAirOrLandingDecision."
     },
@@ -1510,7 +1510,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 66,
       "old": "loc_162BE",
-      "new": "S3TailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing",
+      "new": "S3TailsRecovery_KillAtHurtDeathPlane",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailKillCharacterAfterHurtDeathPlaneCrossing."
     },
@@ -1518,7 +1518,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 72,
       "old": "loc_162C4",
-      "new": "S3TailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement",
+      "new": "S3TailsRecovery_ReleaseRiderOnDeath",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeDeathMovement."
     },
@@ -1526,7 +1526,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 80,
       "old": "loc_162DC",
-      "new": "S3TailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw",
+      "new": "S3TailsRecovery_ResolveDeathAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FinishDeathBeforeGravityMovementAndRecoveryDraw."
     },
@@ -1534,7 +1534,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 88,
       "old": "loc_162F4",
-      "new": "S3TailsRecovery_CountNonzeroRestartWordDownToRestartRequest",
+      "new": "S3TailsRecovery_TickRestartTimer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CountNonzeroRestartWordDownToRestartRequest."
     },
@@ -1542,7 +1542,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 95,
       "old": "locret_16306",
-      "new": "S3TailsRecovery_ReturnAfterRestartCountdownWithoutDrawing",
+      "new": "S3TailsRecovery_RestartReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRestartCountdownWithoutDrawing."
     },
@@ -1550,7 +1550,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 99,
       "old": "loc_16308",
-      "new": "S3TailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine",
+      "new": "S3TailsRecovery_CheckP2ScrollSettled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WaitForBothSecondaryScrollAmountsBeforeNormalRoutine."
     },
@@ -1558,7 +1558,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 106,
       "old": "loc_1631A",
-      "new": "S3TailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll",
+      "new": "S3TailsRecovery_DrawScrollWaitFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AnimateAndDrawWhileWaitingForSecondaryScroll."
     },
@@ -1566,7 +1566,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 111,
       "old": "loc_16324",
-      "new": "S3TailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement",
+      "new": "S3TailsRecovery_ReleaseRiderOnDrown",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeDrowningMovement."
     },
@@ -1574,7 +1574,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 119,
       "old": "loc_1633C",
-      "new": "S3TailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity",
+      "new": "S3TailsRecovery_MoveDrowningAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe IntegrateOldDrowningVelocityThenAddSmallGravity."
     },
@@ -1582,7 +1582,7 @@
       "source": "src/objects/players/tails/s3/damage_and_respawn.s",
       "original_line": 135,
       "old": "loc_16362",
-      "new": "S3TailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader",
+      "new": "S3TailsRecovery_AnimateCompAndLoadArt",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader."
     },
@@ -1590,7 +1590,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 8,
       "old": "locret_1528A",
-      "new": "S3TailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition",
+      "new": "S3TailsEnv_WaterTransitionReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterDisabledWaterOrHandledTransition."
     },
@@ -1598,7 +1598,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 12,
       "old": "loc_1528C",
-      "new": "S3TailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds",
+      "new": "S3TailsEnv_CheckWaterAndInitEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds."
     },
@@ -1606,7 +1606,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 32,
       "old": "loc_152D8",
-      "new": "S3TailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY",
+      "new": "S3TailsEnv_DampenEntryAndCheckSplash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY."
     },
@@ -1614,7 +1614,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 42,
       "old": "loc_152F6",
-      "new": "S3TailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost",
+      "new": "S3TailsEnv_RestoreAirAndSpeedsOnExit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe LeaveWaterRestoreAirSpeedsAndGateExitBoost."
     },
@@ -1622,7 +1622,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 58,
       "old": "loc_1532E",
-      "new": "S3TailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred",
+      "new": "S3TailsEnv_TryDoubleExitYSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred."
     },
@@ -1630,7 +1630,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 64,
       "old": "loc_1533C",
-      "new": "S3TailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity",
+      "new": "S3TailsEnv_CheckExitSplashAndClampY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateWaterExitSplashAndLimitFastUpwardVelocity."
     },
@@ -1638,7 +1638,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 74,
       "old": "loc_15362",
-      "new": "S3TailsEnvironment_TailPlayWaterExitSplashSound",
+      "new": "S3TailsEnv_PlayExitSplash",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailPlayWaterExitSplashSound."
     },
@@ -1646,7 +1646,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 89,
       "old": "loc_15384",
-      "new": "S3TailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic",
+      "new": "S3TailsEnv_RunGroundMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceGroundTailsAfterReleasingCarriedSonic."
     },
@@ -1654,7 +1654,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 111,
       "old": "locret_153CE",
-      "new": "S3TailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate",
+      "new": "S3TailsEnv_GroundModeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterGroundBackgroundChecksOrDisabledGate."
     },
@@ -1662,7 +1662,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 126,
       "old": "loc_153F6",
-      "new": "S3TailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep",
+      "new": "S3TailsEnv_AirAngleAndCollision",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveOrdinaryAirAngleAndTerrainAfterGravityStep."
     },
@@ -1670,7 +1670,7 @@
       "source": "src/objects/players/tails/s3/environment_and_modes.s",
       "original_line": 148,
       "old": "locret_15438",
-      "new": "S3TailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry",
+      "new": "S3TailsEnv_FlightModeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterNormalFlightTerrainAndOptionalCarry."
     },
@@ -1846,7 +1846,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 19,
       "old": "loc_15616",
-      "new": "S3TailsGround_ApplyRightHeldInputAfterLeftInput",
+      "new": "S3TailsGround_CheckRightInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRightHeldInputAfterLeftInput."
     },
@@ -1854,7 +1854,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 24,
       "old": "loc_15622",
-      "new": "S3TailsGround_GateStationaryFlatSectorBalanceAndIdleLook",
+      "new": "S3TailsGround_CheckStationaryBalance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateStationaryFlatSectorBalanceAndIdleLook."
     },
@@ -1862,7 +1862,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 52,
       "old": "loc_15678",
-      "new": "S3TailsGround_ProbeTerrainBalanceAndPreferForwardTiltThree",
+      "new": "S3TailsGround_ProbeBalanceAndCheckTilt3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProbeTerrainBalanceAndPreferForwardTiltThree."
     },
@@ -1870,7 +1870,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 59,
       "old": "loc_1568C",
-      "new": "S3TailsGround_FaceRightForStationaryBalance",
+      "new": "S3TailsGround_FaceRightForBalance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FaceRightForStationaryBalance."
     },
@@ -1878,7 +1878,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 64,
       "old": "loc_15694",
-      "new": "S3TailsGround_RequireRearTiltThreeForLeftBalance",
+      "new": "S3TailsGround_CheckRearTilt3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RequireRearTiltThreeForLeftBalance."
     },
@@ -1886,7 +1886,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 68,
       "old": "loc_1569C",
-      "new": "S3TailsGround_FaceLeftForStationaryBalance",
+      "new": "S3TailsGround_FaceLeftForBalance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FaceLeftForStationaryBalance."
     },
@@ -1894,7 +1894,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 71,
       "old": "loc_156A2",
-      "new": "S3TailsGround_SelectBalanceAnimationAndResetLookDelay",
+      "new": "S3TailsGround_SetBalanceAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectBalanceAnimationAndResetLookDelay."
     },
@@ -1902,7 +1902,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 76,
       "old": "loc_156AA",
-      "new": "S3TailsGround_SelectIdleVerticalLookWithProfilePriority",
+      "new": "S3TailsGround_CheckFirstLookInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectIdleVerticalLookWithProfilePriority."
     },
@@ -1910,7 +1910,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 90,
       "old": "loc_156D4",
-      "new": "S3TailsGround_CheckOtherIdleLookDirectionAndDelayedCameraTarget",
+      "new": "S3TailsGround_CheckSecondLookInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CheckOtherIdleLookDirectionAndDelayedCameraTarget."
     },
@@ -1918,7 +1918,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 104,
       "old": "loc_156FE",
-      "new": "S3TailsGround_ResetVerticalLookDelayBeforeCameraRecovery",
+      "new": "S3TailsGround_ResetLookDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetVerticalLookDelayBeforeCameraRecovery."
     },
@@ -1926,7 +1926,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 107,
       "old": "loc_15704",
-      "new": "S3TailsGround_RecoverVerticalCameraTargetTowardSixty",
+      "new": "S3TailsGround_EaseLookCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RecoverVerticalCameraTargetTowardSixty."
     },
@@ -1934,7 +1934,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 113,
       "old": "loc_1570E",
-      "new": "S3TailsGround_SubtractTwoFromCameraRecoveryTarget",
+      "new": "S3TailsGround_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractTwoFromCameraRecoveryTarget."
     },
@@ -1942,7 +1942,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 116,
       "old": "loc_15710",
-      "new": "S3TailsGround_ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput",
+      "new": "S3TailsGround_ApplyNeutralFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput."
     },
@@ -1950,7 +1950,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 127,
       "old": "loc_1572A",
-      "new": "S3TailsGround_CommitPositiveNeutralGroundFriction",
+      "new": "S3TailsGround_StorePositiveFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitPositiveNeutralGroundFriction."
     },
@@ -1958,7 +1958,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 132,
       "old": "loc_15730",
-      "new": "S3TailsGround_ReduceNegativeNeutralGroundSpeedByAcceleration",
+      "new": "S3TailsGround_ApplyNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReduceNegativeNeutralGroundSpeedByAcceleration."
     },
@@ -1966,7 +1966,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 137,
       "old": "loc_15738",
-      "new": "S3TailsGround_CommitNegativeNeutralGroundFriction",
+      "new": "S3TailsGround_StoreNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitNegativeNeutralGroundFriction."
     },
@@ -1974,7 +1974,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 140,
       "old": "loc_1573C",
-      "new": "S3TailsGround_ProjectGroundSpeedThroughSignedSineCosine",
+      "new": "S3TailsGround_ProjectGroundSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProjectGroundSpeedThroughSignedSineCosine."
     },
@@ -1982,7 +1982,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 150,
       "old": "loc_1575A",
-      "new": "S3TailsGround_GateProjectedGroundObstructionForWalkingAndRolling",
+      "new": "S3TailsGround_CheckTravelProbe",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateProjectedGroundObstructionForWalkingAndRolling."
     },
@@ -1990,7 +1990,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 162,
       "old": "loc_1577C",
-      "new": "S3TailsGround_ProbeAheadUsingSavedRequestedSurfaceDirection",
+      "new": "S3TailsGround_ProbeTravelSide",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProbeAheadUsingSavedRequestedSurfaceDirection."
     },
@@ -1998,7 +1998,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 184,
       "old": "locret_157BE",
-      "new": "S3TailsGround_ReturnAfterHorizontalObstructionAndOptionalPush",
+      "new": "S3TailsGround_HorizontalProbeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterHorizontalObstructionAndOptionalPush."
     },
@@ -2006,7 +2006,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 188,
       "old": "loc_157C0",
-      "new": "S3TailsGround_SubtractScaledCeilingObstructionFromYVelocity",
+      "new": "S3TailsGround_ApplyCeilingCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractScaledCeilingObstructionFromYVelocity."
     },
@@ -2014,7 +2014,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 193,
       "old": "loc_157C6",
-      "new": "S3TailsGround_ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft",
+      "new": "S3TailsGround_ApplyLeftWallCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft."
     },
@@ -2022,7 +2022,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 202,
       "old": "loc_157E0",
-      "new": "S3TailsGround_AddScaledFloorObstructionToYVelocity",
+      "new": "S3TailsGround_ApplyFloorCorrection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddScaledFloorObstructionToYVelocity."
     },
@@ -2030,7 +2030,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 205,
       "old": "locret_157E4",
-      "new": "S3TailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse",
+      "new": "S3TailsGround_TravelProbeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterProjectionObstructionGateOrVerticalResponse."
     },
@@ -2038,7 +2038,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 216,
       "old": "loc_157EE",
-      "new": "S3TailsGround_FaceLeftForNonpositiveGroundAcceleration",
+      "new": "S3TailsGround_FaceLeftAndResetTurnState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FaceLeftForNonpositiveGroundAcceleration."
     },
@@ -2046,7 +2046,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 222,
       "old": "loc_15802",
-      "new": "S3TailsGround_AccelerateLeftWithoutClampingExistingOverspeed",
+      "new": "S3TailsGround_AccelerateLeft",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AccelerateLeftWithoutClampingExistingOverspeed."
     },
@@ -2054,7 +2054,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 233,
       "old": "loc_15814",
-      "new": "S3TailsGround_StoreLeftAccelerationAndSelectMovementAnimation",
+      "new": "S3TailsGround_StoreLeftSpeedAndAnimate",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreLeftAccelerationAndSelectMovementAnimation."
     },
@@ -2062,7 +2062,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 239,
       "old": "loc_15820",
-      "new": "S3TailsGround_BrakePositiveGroundSpeedForLeftInput",
+      "new": "S3TailsGround_BrakeRightwardSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakePositiveGroundSpeedForLeftInput."
     },
@@ -2070,7 +2070,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 244,
       "old": "loc_15828",
-      "new": "S3TailsGround_StoreLeftBrakeAndTestSkidWithOverwrittenLowByte",
+      "new": "S3TailsGround_StoreLeftBrakeAndTestSkid",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreLeftBrakeAndTestSkidWithOverwrittenLowByte."
     },
@@ -2078,7 +2078,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 268,
       "old": "locret_15870",
-      "new": "S3TailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest",
+      "new": "S3TailsGround_LeftBrakeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterLeftBrakeSkidAndOptionalDustRequest."
     },
@@ -2086,7 +2086,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 282,
       "old": "loc_1588C",
-      "new": "S3TailsGround_AccelerateRightWithoutClampingExistingOverspeed",
+      "new": "S3TailsGround_AccelerateRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AccelerateRightWithoutClampingExistingOverspeed."
     },
@@ -2094,7 +2094,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 291,
       "old": "loc_1589A",
-      "new": "S3TailsGround_StoreRightAccelerationAndSelectMovementAnimation",
+      "new": "S3TailsGround_StoreRightSpeedAndAnimate",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRightAccelerationAndSelectMovementAnimation."
     },
@@ -2102,7 +2102,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 297,
       "old": "loc_158A6",
-      "new": "S3TailsGround_BrakeNegativeGroundSpeedForRightInput",
+      "new": "S3TailsGround_BrakeLeftwardSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakeNegativeGroundSpeedForRightInput."
     },
@@ -2110,7 +2110,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 302,
       "old": "loc_158AE",
-      "new": "S3TailsGround_StoreRightBrakeAndTestSkidWithOverwrittenLowByte",
+      "new": "S3TailsGround_StoreRightBrakeAndTestSkid",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRightBrakeAndTestSkidWithOverwrittenLowByte."
     },
@@ -2118,7 +2118,7 @@
       "source": "src/objects/players/tails/s3/ground_movement.s",
       "original_line": 326,
       "old": "locret_158F6",
-      "new": "S3TailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest",
+      "new": "S3TailsGround_RightBrakeReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRightBrakeSkidAndOptionalDustRequest."
     },
@@ -2126,7 +2126,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 23,
       "old": "loc_15ADE",
-      "new": "S3TailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds",
+      "new": "S3TailsJump_CheckVerticalDeathPlane",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CheckEnabledVerticalDeathPlaneAfterHorizontalBounds."
     },
@@ -2134,7 +2134,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 31,
       "old": "locret_15AF2",
-      "new": "S3TailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled",
+      "new": "S3TailsJump_LevelBoundsReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled."
     },
@@ -2142,7 +2142,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 35,
       "old": "loc_15AF4",
-      "new": "S3TailsJump_TailKillCharacterFromScreenDeathPlane",
+      "new": "S3TailsJump_KillAtScreenDeathPlane",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailKillCharacterFromScreenDeathPlane."
     },
@@ -2150,7 +2150,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 39,
       "old": "loc_15AFA",
-      "new": "S3TailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion",
+      "new": "S3TailsJump_ClampXAndStopMotion",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClampPredictedHorizontalPositionAndStopHorizontalMotion."
     },
@@ -2158,7 +2158,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 56,
       "old": "loc_15B20",
-      "new": "S3TailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy",
+      "new": "S3TailsJump_CheckRollStartSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyProfileRollSpeedThresholdAndInputPolicy."
     },
@@ -2166,7 +2166,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 65,
       "old": "locret_15B38",
-      "new": "S3TailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice",
+      "new": "S3TailsJump_RollInputReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollEntryGateOrSlowDuckChoice."
     },
@@ -2174,7 +2174,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 69,
       "old": "loc_15B3A",
-      "new": "S3TailsJump_SkipRollInitializationIfAlreadyRolling",
+      "new": "S3TailsJump_CheckAlreadyRolling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SkipRollInitializationIfAlreadyRolling."
     },
@@ -2182,7 +2182,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 75,
       "old": "loc_15B44",
-      "new": "S3TailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed",
+      "new": "S3TailsJump_InitRollGeometry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeRollGeometryAndDefaultPositiveGroundSpeed."
     },
@@ -2190,7 +2190,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 87,
       "old": "locret_15B76",
-      "new": "S3TailsJump_ReturnAfterRollSoundAndGroundSpeedFallback",
+      "new": "S3TailsJump_StartRollReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollSoundAndGroundSpeedFallback."
     },
@@ -2198,7 +2198,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 110,
       "old": "loc_15BB2",
-      "new": "S3TailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn",
+      "new": "S3TailsJump_ApplyImpulseAndSkipGround",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn."
     },
@@ -2206,7 +2206,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 141,
       "old": "locret_15C2E",
-      "new": "S3TailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved",
+      "new": "S3TailsJump_LaunchReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved."
     },
@@ -2214,7 +2214,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 145,
       "old": "loc_15C30",
-      "new": "S3TailsJump_MarkJumpStartedWhileAlreadyRolling",
+      "new": "S3TailsJump_MarkRollJump",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MarkJumpStartedWhileAlreadyRolling."
     },
@@ -2222,7 +2222,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 160,
       "old": "loc_15C4E",
-      "new": "S3TailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold",
+      "new": "S3TailsJump_CheckReleaseOrFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold."
     },
@@ -2230,7 +2230,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 168,
       "old": "locret_15C62",
-      "new": "S3TailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision",
+      "new": "S3TailsJump_ReleaseCapReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterHeldOrReleasedJumpHeightDecision."
     },
@@ -2238,7 +2238,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 172,
       "old": "loc_15C64",
-      "new": "S3TailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet",
+      "new": "S3TailsJump_CapNonJumpAscent",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CapNonJumpUpwardVelocityUnlessSpindashFlagSet."
     },
@@ -2246,7 +2246,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 179,
       "old": "locret_15C78",
-      "new": "S3TailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption",
+      "new": "S3TailsJump_UpwardSpeedLimitReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterNonJumpVelocityCapOrSpindashExemption."
     },
@@ -2254,7 +2254,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 194,
       "old": "loc_15C9C",
-      "new": "S3TailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight",
+      "new": "S3TailsJump_UnrollForFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe UnrollAndRestoreDefaultsBeforeStartingFlight."
     },
@@ -2262,7 +2262,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 205,
       "old": "loc_15CC4",
-      "new": "S3TailsJump_ActivateFlightBudgetAndSelectFlyingAnimation",
+      "new": "S3TailsJump_StartFlightAndAnimate",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ActivateFlightBudgetAndSelectFlyingAnimation."
     },
@@ -2270,7 +2270,7 @@
       "source": "src/objects/players/tails/s3/jump_actions.s",
       "original_line": 211,
       "old": "locret_15CDA",
-      "new": "S3TailsJump_ReturnAfterFlightGateOrActivation",
+      "new": "S3TailsJump_FlightStartReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterFlightGateOrActivation."
     },
@@ -2278,7 +2278,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 18,
       "old": "loc_143E2",
-      "new": "S3TailsLifecycle_AdvanceDebugFrameAfterOptionalBExit",
+      "new": "S3TailsMain_AdvanceDebugFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceDebugFrameAfterOptionalBExit."
     },
@@ -2286,7 +2286,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 24,
       "old": "loc_143F4",
-      "new": "S3TailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay",
+      "new": "S3TailsMain_LoadAndDrawDebugFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe LoadCurrentDebugFrameAndQueueDisplay."
     },
@@ -2294,7 +2294,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 29,
       "old": "loc_143FE",
-      "new": "S3TailsLifecycle_TailEnterDebugPlacementForSoloTails",
+      "new": "S3TailsMain_EnterSoloDebugPlacement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TailEnterDebugPlacementForSoloTails."
     },
@@ -2302,7 +2302,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 80,
       "old": "loc_144B4",
-      "new": "S3TailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority",
+      "new": "S3TailsMain_InitFollowerArtAndSolidity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe InitializeFollowerArtFromPrimarySolidityAndPriority."
     },
@@ -2310,7 +2310,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 97,
       "old": "loc_144F4",
-      "new": "S3TailsLifecycle_ResetFollowerTimersAndBindNormalTailActor",
+      "new": "S3TailsMain_ResetTimersAndBindTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetFollowerTimersAndBindNormalTailActor."
     },
@@ -2318,7 +2318,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 119,
       "old": "locret_14542",
-      "new": "S3TailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode",
+      "new": "S3TailsMain_DebugReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterEnteringSoloTailsDebugMode."
     },
@@ -2326,7 +2326,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 123,
       "old": "loc_14544",
-      "new": "S3TailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility",
+      "new": "S3TailsMain_SelectControllerAndAI",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectPrimaryControllerAndFollowerCpuEligibility."
     },
@@ -2334,7 +2334,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 136,
       "old": "loc_1456C",
-      "new": "S3TailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy",
+      "new": "S3TailsMain_CheckSecondaryInputLock",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateSecondaryControllerCopyAndCpuByProfileLockPolicy."
     },
@@ -2342,7 +2342,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 141,
       "old": "loc_14578",
-      "new": "S3TailsLifecycle_RunFollowerCpuOnlyOutsideCompetition",
+      "new": "S3TailsMain_CheckAndRunFollowerAI",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunFollowerCpuOnlyOutsideCompetition."
     },
@@ -2350,7 +2350,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 146,
       "old": "loc_14582",
-      "new": "S3TailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl",
+      "new": "S3TailsMain_CheckExternalMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SkipOwnMovementAndReleaseCarryForExternalControl."
     },
@@ -2358,7 +2358,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 159,
       "old": "loc_145AA",
-      "new": "S3TailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases",
+      "new": "S3TailsMain_DispatchMovementMode",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchNormalTailsModeWhileSavingSharedBases."
     },
@@ -2366,7 +2366,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 168,
       "old": "loc_145C4",
-      "new": "S3TailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel",
+      "new": "S3TailsMain_WrapPlayerYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel."
     },
@@ -2374,7 +2374,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 174,
       "old": "loc_145D4",
-      "new": "S3TailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices",
+      "new": "S3TailsMain_UpdateFrameServices",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunNormalDisplayHistoryWaterAndWindAnimationServices."
     },
@@ -2382,7 +2382,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 186,
       "old": "loc_145FC",
-      "new": "S3TailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne",
+      "new": "S3TailsMain_CheckAnimateAndLoadPatterns",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateNormalTailsAnimationAndPatternsByControlBitOne."
     },
@@ -2390,7 +2390,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 192,
       "old": "loc_1460C",
-      "new": "S3TailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet",
+      "new": "S3TailsMain_CheckTouchResponse",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunNormalTouchUnlessControlBitsFiveOrSevenSet."
     },
@@ -2398,7 +2398,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 198,
       "old": "locret_1461C",
-      "new": "S3TailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch",
+      "new": "S3TailsMain_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterNormalTailsServicesAndOptionalTouch."
     },
@@ -2406,7 +2406,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 215,
       "old": "loc_14634",
-      "new": "S3TailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks",
+      "new": "S3TailsMain_DrawVisibleBlinkPhase",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe QueueVisibleOldBlinkPhaseBeforePowerChecks."
     },
@@ -2414,7 +2414,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 218,
       "old": "loc_1463A",
-      "new": "S3TailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase",
+      "new": "S3TailsMain_TickInvincibilityEvery8",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CheckTimedInvincibilityExpiryOnGlobalEightFramePhase."
     },
@@ -2422,7 +2422,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 235,
       "old": "loc_14670",
-      "new": "S3TailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck",
+      "new": "S3TailsMain_ExpireInvincibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearExpiredInvincibilityBeforeSpeedShoesCheck."
     },
@@ -2430,7 +2430,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 238,
       "old": "loc_14676",
-      "new": "S3TailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds",
+      "new": "S3TailsMain_TickShoesAndRestoreSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds."
     },
@@ -2438,7 +2438,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 258,
       "old": "locret_146B8",
-      "new": "S3TailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes",
+      "new": "S3TailsMain_PowerUpdateReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPowerChecksOrUnexpiredSpeedShoes."
     },
@@ -2446,7 +2446,7 @@
       "source": "src/objects/players/tails/s3/lifecycle.s",
       "original_line": 262,
       "old": "loc_146BA",
-      "new": "S3TailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry",
+      "new": "S3TailsMain_RestoreCompSpeedRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RestoreCompetitionSpeedRecordOnShoesExpiry."
     },
@@ -2454,7 +2454,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 24,
       "old": "loc_1592A",
-      "new": "S3TailsRolling_ApplyRightRollingInputAfterLeftInput",
+      "new": "S3TailsRoll_CheckRightInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRightRollingInputAfterLeftInput."
     },
@@ -2462,7 +2462,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 29,
       "old": "loc_15936",
-      "new": "S3TailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput",
+      "new": "S3TailsRoll_ApplySignedFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRollingFrictionRegardlessHeldHorizontalInput."
     },
@@ -2470,7 +2470,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 37,
       "old": "loc_15946",
-      "new": "S3TailsRolling_StorePositiveRollingFrictionBeforeUnrollTest",
+      "new": "S3TailsRoll_StorePositiveFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StorePositiveRollingFrictionBeforeUnrollTest."
     },
@@ -2478,7 +2478,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 42,
       "old": "loc_1594C",
-      "new": "S3TailsRolling_ApplyNegativeRollingFrictionWithCarryClamp",
+      "new": "S3TailsRoll_ApplyNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyNegativeRollingFrictionWithCarryClamp."
     },
@@ -2486,7 +2486,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 47,
       "old": "loc_15954",
-      "new": "S3TailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest",
+      "new": "S3TailsRoll_StoreNegativeFriction",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreNegativeRollingFrictionBeforeUnrollTest."
     },
@@ -2494,7 +2494,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 50,
       "old": "loc_15958",
-      "new": "S3TailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy",
+      "new": "S3TailsRoll_CheckUnrollAtZeroSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClassifyPostFrictionSpeedForProfileUnrollPolicy."
     },
@@ -2502,7 +2502,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 66,
       "old": "loc_1598C",
-      "new": "S3TailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold",
+      "new": "S3TailsRoll_ResumeForcedRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RestoreForcedRollSpeedByFacingAtUnrollThreshold."
     },
@@ -2510,7 +2510,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 72,
       "old": "loc_1599E",
-      "new": "S3TailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection",
+      "new": "S3TailsRoll_EaseRollCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RecoverRollingCameraTargetBeforeVelocityProjection."
     },
@@ -2518,7 +2518,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 78,
       "old": "loc_159A8",
-      "new": "S3TailsRolling_SubtractRollingCameraRecoveryStep",
+      "new": "S3TailsRoll_ReduceRollCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractRollingCameraRecoveryStep."
     },
@@ -2526,7 +2526,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 81,
       "old": "loc_159AA",
-      "new": "S3TailsRolling_ProjectRollingVelocityAndClampPositiveXWord",
+      "new": "S3TailsRoll_ProjectGroundSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProjectRollingVelocityAndClampPositiveXWord."
     },
@@ -2534,7 +2534,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 93,
       "old": "loc_159CE",
-      "new": "S3TailsRolling_ClampNegativeRollingXProjectionWord",
+      "new": "S3TailsRoll_ClampProjectedMinXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClampNegativeRollingXProjectionWord."
     },
@@ -2542,7 +2542,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 98,
       "old": "loc_159D8",
-      "new": "S3TailsRolling_StoreRollingXAndTailBranchSharedObstruction",
+      "new": "S3TailsRoll_StoreXSpeedAndProbe",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRollingXAndTailBranchSharedObstruction."
     },
@@ -2550,7 +2550,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 110,
       "old": "loc_159E8",
-      "new": "S3TailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration",
+      "new": "S3TailsRoll_FaceLeftAndKeepRolling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe FaceLeftAndKeepRollAnimationWithoutAcceleration."
     },
@@ -2558,7 +2558,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 116,
       "old": "loc_159F6",
-      "new": "S3TailsRolling_BrakePositiveRollForLeftHeldInput",
+      "new": "S3TailsRoll_BrakeRightwardRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakePositiveRollForLeftHeldInput."
     },
@@ -2566,7 +2566,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 121,
       "old": "loc_159FE",
-      "new": "S3TailsRolling_StoreLeftRollingBrakeAndReturn",
+      "new": "S3TailsRoll_StoreLeftBrakeResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreLeftRollingBrakeAndReturn."
     },
@@ -2574,7 +2574,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 136,
       "old": "loc_15A18",
-      "new": "S3TailsRolling_BrakeNegativeRollForRightHeldInput",
+      "new": "S3TailsRoll_BrakeLeftwardRoll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BrakeNegativeRollForRightHeldInput."
     },
@@ -2582,7 +2582,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 141,
       "old": "loc_15A20",
-      "new": "S3TailsRolling_StoreRightRollingBrakeAndReturn",
+      "new": "S3TailsRoll_StoreRightBrakeResult",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRightRollingBrakeAndReturn."
     },
@@ -2590,7 +2590,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 168,
       "old": "loc_15A5A",
-      "new": "S3TailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep",
+      "new": "S3TailsRoll_CheckAirRightInput",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRightAirInputAfterOverspeedPreservingLeftStep."
     },
@@ -2598,7 +2598,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 180,
       "old": "loc_15A76",
-      "new": "S3TailsRolling_CommitAirHorizontalInputVelocity",
+      "new": "S3TailsRoll_StoreAirXSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitAirHorizontalInputVelocity."
     },
@@ -2606,7 +2606,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 183,
       "old": "loc_15A7A",
-      "new": "S3TailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput",
+      "new": "S3TailsRoll_EaseAirCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RecoverAirCameraEvenWhenRollJumpBlocksInput."
     },
@@ -2614,7 +2614,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 189,
       "old": "loc_15A84",
-      "new": "S3TailsRolling_SubtractAirCameraRecoveryStep",
+      "new": "S3TailsRoll_ReduceAirCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractAirCameraRecoveryStep."
     },
@@ -2622,7 +2622,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 192,
       "old": "loc_15A86",
-      "new": "S3TailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow",
+      "new": "S3TailsRoll_CheckAirDragWindow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateAirHorizontalDragByUnsignedUpwardVelocityWindow."
     },
@@ -2630,7 +2630,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 204,
       "old": "loc_15AA2",
-      "new": "S3TailsRolling_CommitNonnegativeQuotientAirDrag",
+      "new": "S3TailsRoll_StoreRightAirDrag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitNonnegativeQuotientAirDrag."
     },
@@ -2638,7 +2638,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 209,
       "old": "loc_15AA8",
-      "new": "S3TailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity",
+      "new": "S3TailsRoll_ApplyLeftAirDrag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyNegativeQuotientAirDragUsingBorrowPolarity."
     },
@@ -2646,7 +2646,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 214,
       "old": "loc_15AB0",
-      "new": "S3TailsRolling_CommitNegativeQuotientAirDrag",
+      "new": "S3TailsRoll_StoreLeftAirDrag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitNegativeQuotientAirDrag."
     },
@@ -2654,7 +2654,7 @@
       "source": "src/objects/players/tails/s3/rolling_control.s",
       "original_line": 217,
       "old": "locret_15AB4",
-      "new": "S3TailsRolling_ReturnAfterAirDragOrIneligibleVelocity",
+      "new": "S3TailsRoll_AirDragReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterAirDragOrIneligibleVelocity."
     },
@@ -2662,7 +2662,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 25,
       "old": "loc_15D22",
-      "new": "S3TailsSpindash_ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart",
+      "new": "S3TailsSpin_CheckEntryBoundsAndTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart."
     },
@@ -2670,7 +2670,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 40,
       "old": "locret_15D4E",
-      "new": "S3TailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext",
+      "new": "S3TailsSpin_EntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnWithRejectedStartOrAbortedGroundStackContext."
     },
@@ -2678,7 +2678,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 44,
       "old": "loc_15D50",
-      "new": "S3TailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry",
+      "new": "S3TailsSpin_ReleaseOrKeepCharging",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe MaintainHeldChargeOrReleaseNormalTailsGeometry."
     },
@@ -2686,7 +2686,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 68,
       "old": "loc_15DA8",
-      "new": "S3TailsSpindash_StorePreFacingDashHistoryLagThenSignLaunchSpeed",
+      "new": "S3TailsSpin_StoreLagAndApplyFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StorePreFacingDashHistoryLagThenSignLaunchSpeed."
     },
@@ -2694,7 +2694,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 74,
       "old": "loc_15DB6",
-      "new": "S3TailsSpindash_CommitReleasedRollStopDustAndPlayDashSound",
+      "new": "S3TailsSpin_BeginRollAndStopDust",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CommitReleasedRollStopDustAndPlayDashSound."
     },
@@ -2702,7 +2702,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 81,
       "old": "word_15DCE",
-      "new": "S3TailsSpindash_NormalTailsSpindashLaunchSpeedWords",
+      "new": "S3TailsSpin_NormalSpeedByChargeHi",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NormalTailsSpindashLaunchSpeedWords."
     },
@@ -2710,7 +2710,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 93,
       "old": "loc_15DE0",
-      "new": "S3TailsSpindash_DecayHeldSpindashChargeUsingLogicalWordShift",
+      "new": "S3TailsSpin_DecayHeldCharge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DecayHeldSpindashChargeUsingLogicalWordShift."
     },
@@ -2718,7 +2718,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 102,
       "old": "loc_15DF8",
-      "new": "S3TailsSpindash_BoostChargeOnNewAbcAndRestartChargeAnimation",
+      "new": "S3TailsSpin_ChargeOnNewPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe BoostChargeOnNewAbcAndRestartChargeAnimation."
     },
@@ -2726,7 +2726,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 114,
       "old": "loc_15E28",
-      "new": "S3TailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease",
+      "new": "S3TailsSpin_SkipGroundAndEaseCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease."
     },
@@ -2734,7 +2734,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 121,
       "old": "loc_15E34",
-      "new": "S3TailsSpindash_SubtractSpindashCameraRecoveryStep",
+      "new": "S3TailsSpin_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractSpindashCameraRecoveryStep."
     },
@@ -2742,7 +2742,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 124,
       "old": "loc_15E36",
-      "new": "S3TailsSpindash_AttachAndCheckBackgroundAfterActiveChargeOrRelease",
+      "new": "S3TailsSpin_CheckActiveBoundsAndTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AttachAndCheckBackgroundAfterActiveChargeOrRelease."
     },
@@ -2750,7 +2750,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 139,
       "old": "locret_15E62",
-      "new": "S3TailsSpindash_ReturnToOuterModeAfterChargeReleaseTail",
+      "new": "S3TailsSpin_ActiveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnToOuterModeAfterChargeReleaseTail."
     },
@@ -2758,7 +2758,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 161,
       "old": "locret_15E92",
-      "new": "S3TailsSlope_ReturnAfterPositiveSlopeResistanceOrZeroForce",
+      "new": "S3TailsSlope_ResistPositiveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPositiveSlopeResistanceOrZeroForce."
     },
@@ -2766,7 +2766,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 165,
       "old": "loc_15E94",
-      "new": "S3TailsSlope_AddSlopeResistanceToNegativeGroundSpeed",
+      "new": "S3TailsSlope_ResistNegativeSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddSlopeResistanceToNegativeGroundSpeed."
     },
@@ -2774,7 +2774,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 168,
       "old": "locret_15E98",
-      "new": "S3TailsSlope_ReturnAfterPrivateSlopeResistanceGateOrNegativeAddition",
+      "new": "S3TailsSlope_ResistReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPrivateSlopeResistanceGateOrNegativeAddition."
     },
@@ -2782,7 +2782,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 189,
       "old": "loc_15EC4",
-      "new": "S3TailsSlope_AddRollingSlopeForceForNonnegativeGroundSpeed",
+      "new": "S3TailsSlope_ApplyRollForceToPosSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddRollingSlopeForceForNonnegativeGroundSpeed."
     },
@@ -2790,7 +2790,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 194,
       "old": "loc_15ECA",
-      "new": "S3TailsSlope_ChooseRollingSlopeForceScaleForNegativeGroundSpeed",
+      "new": "S3TailsSlope_ScaleRollForceAgainstNeg",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseRollingSlopeForceScaleForNegativeGroundSpeed."
     },
@@ -2798,7 +2798,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 199,
       "old": "loc_15ED0",
-      "new": "S3TailsSlope_AddRollingSlopeForceForNegativeGroundSpeed",
+      "new": "S3TailsSlope_ApplyRollForceToNegSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddRollingSlopeForceForNegativeGroundSpeed."
     },
@@ -2806,7 +2806,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 202,
       "old": "locret_15ED4",
-      "new": "S3TailsSlope_ReturnAfterRollingSlopeGateOrNegativeForce",
+      "new": "S3TailsSlope_RollRepelReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollingSlopeGateOrNegativeForce."
     },
@@ -2814,7 +2814,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 222,
       "old": "loc_15EFA",
-      "new": "S3TailsSlope_DetachSlowTailsFromNonflatSlopeAndLockControls",
+      "new": "S3TailsSlope_DetachSlowPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DetachSlowTailsFromNonflatSlopeAndLockControls."
     },
@@ -2822,7 +2822,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 229,
       "old": "locret_15F10",
-      "new": "S3TailsSlope_ReturnAfterPrivateSlopeRepelGateOrDetachment",
+      "new": "S3TailsSlope_RepelReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPrivateSlopeRepelGateOrDetachment."
     },
@@ -2830,7 +2830,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 233,
       "old": "loc_15F12",
-      "new": "S3TailsSlope_DecrementPrivateSlopeMoveLockOnlyWhenNotSticky",
+      "new": "S3TailsSlope_TickMoveLock",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DecrementPrivateSlopeMoveLockOnlyWhenNotSticky."
     },
@@ -2838,7 +2838,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 248,
       "old": "loc_15F26",
-      "new": "S3TailsSlope_JoinNegativePrimaryAngleRecoveryAtStore",
+      "new": "S3TailsSlope_JoinNegativeAngleRecovery",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe JoinNegativePrimaryAngleRecoveryAtStore."
     },
@@ -2846,7 +2846,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 252,
       "old": "loc_15F28",
-      "new": "S3TailsSlope_RecoverPositivePrimaryAngleTowardZero",
+      "new": "S3TailsSlope_ReducePositiveAirAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RecoverPositivePrimaryAngleTowardZero."
     },
@@ -2854,7 +2854,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 257,
       "old": "loc_15F2E",
-      "new": "S3TailsSlope_StoreRecoveredPrimaryAngleBeforeFlipUpdate",
+      "new": "S3TailsSlope_StoreAirAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreRecoveredPrimaryAngleBeforeFlipUpdate."
     },
@@ -2862,7 +2862,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 260,
       "old": "loc_15F32",
-      "new": "S3TailsSlope_GateSecondaryFlipAndChooseGroundSpeedDirection",
+      "new": "S3TailsSlope_CheckFlipAndDirection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateSecondaryFlipAndChooseGroundSpeedDirection."
     },
@@ -2870,7 +2870,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 266,
       "old": "loc_15F3E",
-      "new": "S3TailsSlope_AdvanceRightFlipAndConsumeCountOnlyOnByteWrap",
+      "new": "S3TailsSlope_AdvanceRightFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceRightFlipAndConsumeCountOnlyOnByteWrap."
     },
@@ -2878,7 +2878,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 275,
       "old": "loc_15F54",
-      "new": "S3TailsSlope_JoinRightFlipAtSecondaryAngleStore",
+      "new": "S3TailsSlope_JoinRightFlipStore",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe JoinRightFlipAtSecondaryAngleStore."
     },
@@ -2886,7 +2886,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 279,
       "old": "loc_15F56",
-      "new": "S3TailsSlope_AdvanceLeftFlipUnlessFlipTypeSignReversesIt",
+      "new": "S3TailsSlope_CheckAndAdvanceLeftFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvanceLeftFlipUnlessFlipTypeSignReversesIt."
     },
@@ -2894,7 +2894,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 290,
       "old": "loc_15F72",
-      "new": "S3TailsSlope_StoreSecondaryFlipAngleAfterDirectionAndWrapHandling",
+      "new": "S3TailsSlope_StoreFlipAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreSecondaryFlipAngleAfterDirectionAndWrapHandling."
     },
@@ -2902,7 +2902,7 @@
       "source": "src/objects/players/tails/s3/spindash_and_slopes.s",
       "original_line": 293,
       "old": "locret_15F76",
-      "new": "S3TailsSlope_ReturnAfterPrimaryAngleAndOptionalSecondaryFlip",
+      "new": "S3TailsSlope_JumpFlipReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPrimaryAngleAndOptionalSecondaryFlip."
     },
@@ -3254,7 +3254,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 13,
       "old": "loc_15F8C",
-      "new": "S3TailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant",
+      "new": "S3TailsLand_DispatchVelocitySector",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchTerrainResponseByVelocityAngleQuadrant."
     },
@@ -3262,7 +3262,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 32,
       "old": "loc_15FD0",
-      "new": "S3TailsTerrain_ResolveRightWallBeforeDefaultFloorProbe",
+      "new": "S3TailsLand_CheckDefaultRightWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveRightWallBeforeDefaultFloorProbe."
     },
@@ -3270,7 +3270,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 39,
       "old": "loc_15FE2",
-      "new": "S3TailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons",
+      "new": "S3TailsLand_TestDefaultFloorDepth",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe GateFloorPenetrationByTwoSignedByteDepthComparisons."
     },
@@ -3278,7 +3278,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 51,
       "old": "loc_15FFA",
-      "new": "S3TailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion",
+      "new": "S3TailsLand_StoreDefaultFloorAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AttachFloorAndSelectFlatModerateOrSteepVelocityConversion."
     },
@@ -3286,7 +3286,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 66,
       "old": "loc_16020",
-      "new": "S3TailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset",
+      "new": "S3TailsLand_LandOnFlatFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset."
     },
@@ -3294,7 +3294,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 73,
       "old": "loc_16032",
-      "new": "S3TailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity",
+      "new": "S3TailsLand_ClampSteepLandingSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity."
     },
@@ -3302,7 +3302,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 79,
       "old": "loc_16046",
-      "new": "S3TailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical",
+      "new": "S3TailsLand_FinishSlopeLanding",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical."
     },
@@ -3310,7 +3310,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 86,
       "old": "locret_16058",
-      "new": "S3TailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding",
+      "new": "S3TailsLand_DefaultFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterDefaultFloorGateOrSlopeLanding."
     },
@@ -3318,7 +3318,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 90,
       "old": "loc_1605A",
-      "new": "S3TailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant",
+      "new": "S3TailsLand_CheckLeftSectorWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveLeftWallInLeftwardVelocityQuadrant."
     },
@@ -3326,7 +3326,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 98,
       "old": "loc_16072",
-      "new": "S3TailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath",
+      "new": "S3TailsLand_CheckLeftSectorCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath."
     },
@@ -3334,7 +3334,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 110,
       "old": "locret_16092",
-      "new": "S3TailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection",
+      "new": "S3TailsLand_LeftCeilingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterLeftwardShallowCeilingCorrection."
     },
@@ -3342,7 +3342,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 114,
       "old": "loc_16094",
-      "new": "S3TailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration",
+      "new": "S3TailsLand_CheckRightWallAtDeepCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProbeRightWallAfterDeepLeftwardCeilingPenetration."
     },
@@ -3350,7 +3350,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 121,
       "old": "locret_160A6",
-      "new": "S3TailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe",
+      "new": "S3TailsLand_DeepCeilingWallReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterLeftwardDeepCeilingOppositeWallProbe."
     },
@@ -3358,7 +3358,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 125,
       "old": "loc_160A8",
-      "new": "S3TailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed",
+      "new": "S3TailsLand_CheckLeftFloorEligibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed."
     },
@@ -3366,7 +3366,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 131,
       "old": "loc_160B4",
-      "new": "S3TailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant",
+      "new": "S3TailsLand_ProbeLeftFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProbeAndAttachFloorFromLeftwardQuadrant."
     },
@@ -3374,7 +3374,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 141,
       "old": "locret_160D4",
-      "new": "S3TailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment",
+      "new": "S3TailsLand_LeftFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterLeftwardFloorGateOrAttachment."
     },
@@ -3382,7 +3382,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 145,
       "old": "loc_160D6",
-      "new": "S3TailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant",
+      "new": "S3TailsLand_CheckCeilingSectorLeftWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveLeftWallInUpwardVelocityQuadrant."
     },
@@ -3390,7 +3390,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 152,
       "old": "loc_160E8",
-      "new": "S3TailsTerrain_ResolveRightWallInUpwardVelocityQuadrant",
+      "new": "S3TailsLand_CheckCeilingSectorRightWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveRightWallInUpwardVelocityQuadrant."
     },
@@ -3398,7 +3398,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 159,
       "old": "loc_160FA",
-      "new": "S3TailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment",
+      "new": "S3TailsLand_ProbeCeilingAndResolve",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CorrectUpwardCeilingAndGateCeilingSlopeAttachment."
     },
@@ -3406,7 +3406,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 172,
       "old": "loc_1611A",
-      "new": "S3TailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset",
+      "new": "S3TailsLand_AttachToSteepCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset."
     },
@@ -3414,7 +3414,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 180,
       "old": "locret_16130",
-      "new": "S3TailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment",
+      "new": "S3TailsLand_CeilingSectorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterUpwardCeilingProbeOrSlopeAttachment."
     },
@@ -3422,7 +3422,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 184,
       "old": "loc_16132",
-      "new": "S3TailsTerrain_ResolveRightWallInRightwardVelocityQuadrant",
+      "new": "S3TailsLand_CheckRightSectorWall",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveRightWallInRightwardVelocityQuadrant."
     },
@@ -3430,7 +3430,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 192,
       "old": "loc_1614A",
-      "new": "S3TailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold",
+      "new": "S3TailsLand_ResolveRightSectorCeiling",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CorrectRightwardCeilingWithoutLeftwardDepthThreshold."
     },
@@ -3438,7 +3438,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 201,
       "old": "locret_16162",
-      "new": "S3TailsTerrain_ReturnAfterRightwardCeilingCorrection",
+      "new": "S3TailsLand_RightCeilingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRightwardCeilingCorrection."
     },
@@ -3446,7 +3446,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 205,
       "old": "loc_16164",
-      "new": "S3TailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed",
+      "new": "S3TailsLand_CheckRightFloorEligibility",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed."
     },
@@ -3454,7 +3454,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 211,
       "old": "loc_16170",
-      "new": "S3TailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant",
+      "new": "S3TailsLand_ProbeRightFloor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ProbeAndAttachFloorFromRightwardQuadrant."
     },
@@ -3462,7 +3462,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 221,
       "old": "locret_16190",
-      "new": "S3TailsTerrain_ReturnAfterRightwardFloorGateOrAttachment",
+      "new": "S3TailsLand_RightFloorReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRightwardFloorGateOrAttachment."
     },
@@ -3470,7 +3470,7 @@
       "source": "src/objects/players/tails/s3/terrain_landing.s",
       "original_line": 247,
       "old": "loc_161CC",
-      "new": "S3TailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin",
+      "new": "S3TailsLand_ResetLandingAndFlight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ClearAirJumpFlipAndFlightStateAtLandingJoin."
     },
@@ -5030,7 +5030,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 7,
       "old": "loc_1569C",
-      "new": "SKTailsRecovery_EnterSoloDebugFromHurtWithPhysicalBPress",
+      "new": "SKTailsRecovery_CheckHurtDebugEntry",
       "profiles": ["sk"],
       "meaning": "Describe EnterSoloDebugFromHurtWithPhysicalBPress."
     },
@@ -5038,7 +5038,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 19,
       "old": "loc_156BE",
-      "new": "SKTailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement",
+      "new": "SKTailsRecovery_ReleaseRiderOnHurt",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeHurtMovement."
     },
@@ -5046,7 +5046,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 27,
       "old": "loc_156D6",
-      "new": "SKTailsRecovery_IntegrateOldHurtVelocityThenAddStoredGravity",
+      "new": "SKTailsRecovery_MoveHurtAndApplyGravity",
       "profiles": ["sk"],
       "meaning": "Describe IntegrateOldHurtVelocityThenAddStoredGravity."
     },
@@ -5054,7 +5054,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 34,
       "old": "loc_156F0",
-      "new": "SKTailsRecovery_MaskHurtIntegerYOnlyInWrappingCameraMode",
+      "new": "SKTailsRecovery_WrapHurtYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe MaskHurtIntegerYOnlyInWrappingCameraMode."
     },
@@ -5062,7 +5062,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 40,
       "old": "loc_15700",
-      "new": "SKTailsRecovery_ResolveHurtThenBoundsRecordAnimateAndDraw",
+      "new": "SKTailsRecovery_ResolveHurtAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe ResolveHurtThenBoundsRecordAnimateAndDraw."
     },
@@ -5070,7 +5070,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 61,
       "old": "loc_15734",
-      "new": "SKTailsRecovery_CheckReverseGravityHurtDeathPlaneAtCameraMinimum",
+      "new": "SKTailsRecovery_CheckReverseDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe CheckReverseGravityHurtDeathPlaneAtCameraMinimum."
     },
@@ -5078,7 +5078,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 68,
       "old": "loc_15742",
-      "new": "SKTailsRecovery_ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding",
+      "new": "SKTailsRecovery_CheckHurtLandingAndReset",
       "profiles": ["sk"],
       "meaning": "Describe ResolveTerrainAndRestoreNormalRoutineAfterHurtLanding."
     },
@@ -5086,7 +5086,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 85,
       "old": "locret_15786",
-      "new": "SKTailsRecovery_ReturnAfterHurtAirOrLandingDecision",
+      "new": "SKTailsRecovery_HurtLandingReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterHurtAirOrLandingDecision."
     },
@@ -5094,7 +5094,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 89,
       "old": "loc_15788",
-      "new": "SKTailsRecovery_TailKillCharacterAfterHurtDeathPlaneCrossing",
+      "new": "SKTailsRecovery_KillAtHurtDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe TailKillCharacterAfterHurtDeathPlaneCrossing."
     },
@@ -5102,7 +5102,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 95,
       "old": "loc_1578E",
-      "new": "SKTailsRecovery_EnterSoloDebugFromDeathWithPhysicalBPress",
+      "new": "SKTailsRecovery_CheckDeathDebugEntry",
       "profiles": ["sk"],
       "meaning": "Describe EnterSoloDebugFromDeathWithPhysicalBPress."
     },
@@ -5110,7 +5110,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 107,
       "old": "loc_157B0",
-      "new": "SKTailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement",
+      "new": "SKTailsRecovery_ReleaseRiderOnDeath",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeDeathMovement."
     },
@@ -5118,7 +5118,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 115,
       "old": "loc_157C8",
-      "new": "SKTailsRecovery_FinishDeathBeforeGravityMovementAndRecoveryDraw",
+      "new": "SKTailsRecovery_ResolveDeathAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe FinishDeathBeforeGravityMovementAndRecoveryDraw."
     },
@@ -5126,7 +5126,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 123,
       "old": "loc_157E0",
-      "new": "SKTailsRecovery_CountNonzeroRestartWordDownToRestartRequest",
+      "new": "SKTailsRecovery_TickRestartTimer",
       "profiles": ["sk"],
       "meaning": "Describe CountNonzeroRestartWordDownToRestartRequest."
     },
@@ -5134,7 +5134,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 130,
       "old": "locret_157F2",
-      "new": "SKTailsRecovery_ReturnAfterRestartCountdownWithoutDrawing",
+      "new": "SKTailsRecovery_RestartReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRestartCountdownWithoutDrawing."
     },
@@ -5142,7 +5142,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 134,
       "old": "loc_157F4",
-      "new": "SKTailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine",
+      "new": "SKTailsRecovery_CheckP2ScrollSettled",
       "profiles": ["sk"],
       "meaning": "Describe WaitForBothSecondaryScrollAmountsBeforeNormalRoutine."
     },
@@ -5150,7 +5150,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 141,
       "old": "loc_15806",
-      "new": "SKTailsRecovery_AnimateAndDrawWhileWaitingForSecondaryScroll",
+      "new": "SKTailsRecovery_DrawScrollWaitFrame",
       "profiles": ["sk"],
       "meaning": "Describe AnimateAndDrawWhileWaitingForSecondaryScroll."
     },
@@ -5158,7 +5158,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 146,
       "old": "loc_15810",
-      "new": "SKTailsRecovery_ReleaseCarriedPrimaryBeforeDrowningMovement",
+      "new": "SKTailsRecovery_ReleaseRiderOnDrown",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseCarriedPrimaryBeforeDrowningMovement."
     },
@@ -5166,7 +5166,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 154,
       "old": "loc_15828",
-      "new": "SKTailsRecovery_IntegrateOldDrowningVelocityThenAddSmallGravity",
+      "new": "SKTailsRecovery_MoveDrowningAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe IntegrateOldDrowningVelocityThenAddSmallGravity."
     },
@@ -5174,7 +5174,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 171,
       "old": "loc_15856",
-      "new": "SKTailsRecovery_TailNormalRecoveryPatternLoaderAfterGravityRenderFlip",
+      "new": "SKTailsRecovery_LoadRecoveryPatterns",
       "profiles": ["sk"],
       "meaning": "Describe TailNormalRecoveryPatternLoaderAfterGravityRenderFlip."
     },
@@ -5182,7 +5182,7 @@
       "source": "src/objects/players/tails/sk/damage_and_respawn.s",
       "original_line": 175,
       "old": "loc_1585A",
-      "new": "SKTailsRecovery_AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader",
+      "new": "SKTailsRecovery_AnimateCompAndLoadArt",
       "profiles": ["sk"],
       "meaning": "Describe AnimateCompetitionRecoveryAndTailTwoPlayerPatternLoader."
     },
@@ -5190,7 +5190,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 8,
       "old": "locret_14638",
-      "new": "SKTailsEnvironment_ReturnAfterDisabledWaterOrHandledTransition",
+      "new": "SKTailsEnv_WaterTransitionReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterDisabledWaterOrHandledTransition."
     },
@@ -5198,7 +5198,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 12,
       "old": "loc_1463A",
-      "new": "SKTailsEnvironment_ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds",
+      "new": "SKTailsEnv_CheckWaterAndInitEntry",
       "profiles": ["sk"],
       "meaning": "Describe ClassifyWaterCrossingAndInitializeUnderwaterAirAndSpeeds."
     },
@@ -5206,7 +5206,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 33,
       "old": "loc_1468E",
-      "new": "SKTailsEnvironment_GateWaterEntryVelocityReductionAfterSuperSpeedChoice",
+      "new": "SKTailsEnv_CheckEntryDamping",
       "profiles": ["sk"],
       "meaning": "Describe GateWaterEntryVelocityReductionAfterSuperSpeedChoice."
     },
@@ -5214,7 +5214,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 39,
       "old": "loc_1469C",
-      "new": "SKTailsEnvironment_ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY",
+      "new": "SKTailsEnv_DampenEntryAndCheckSplash",
       "profiles": ["sk"],
       "meaning": "Describe ReduceEntryVelocityAndRequestSplashOnlyForNonzeroQuarterY."
     },
@@ -5222,7 +5222,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 49,
       "old": "loc_146BA",
-      "new": "SKTailsEnvironment_LeaveWaterRestoreAirSpeedsAndGateExitBoost",
+      "new": "SKTailsEnv_RestoreAirAndSpeedsOnExit",
       "profiles": ["sk"],
       "meaning": "Describe LeaveWaterRestoreAirSpeedsAndGateExitBoost."
     },
@@ -5230,7 +5230,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 64,
       "old": "loc_146F4",
-      "new": "SKTailsEnvironment_GateWaterExitBoostAfterSuperSpeedRestoration",
+      "new": "SKTailsEnv_CheckExitBoost",
       "profiles": ["sk"],
       "meaning": "Describe GateWaterExitBoostAfterSuperSpeedRestoration."
     },
@@ -5238,7 +5238,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 72,
       "old": "loc_1470A",
-      "new": "SKTailsEnvironment_DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred",
+      "new": "SKTailsEnv_TryDoubleExitYSpeed",
       "profiles": ["sk"],
       "meaning": "Describe DoubleExitYVelocityUnlessAlreadyFasterThanMinusFourHundred."
     },
@@ -5246,7 +5246,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 78,
       "old": "loc_14718",
-      "new": "SKTailsEnvironment_GateWaterExitSplashAndLimitFastUpwardVelocity",
+      "new": "SKTailsEnv_CheckExitSplashAndClampY",
       "profiles": ["sk"],
       "meaning": "Describe GateWaterExitSplashAndLimitFastUpwardVelocity."
     },
@@ -5254,7 +5254,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 88,
       "old": "loc_1473E",
-      "new": "SKTailsEnvironment_TailPlayWaterExitSplashSound",
+      "new": "SKTailsEnv_PlayExitSplash",
       "profiles": ["sk"],
       "meaning": "Describe TailPlayWaterExitSplashSound."
     },
@@ -5262,7 +5262,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 103,
       "old": "loc_14760",
-      "new": "SKTailsEnvironment_AdvanceGroundTailsAfterReleasingCarriedSonic",
+      "new": "SKTailsEnv_RunGroundMovement",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceGroundTailsAfterReleasingCarriedSonic."
     },
@@ -5270,7 +5270,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 124,
       "old": "loc_147A6",
-      "new": "SKTailsEnvironment_CheckRightBackgroundWallAfterOptionalLeftCorrection",
+      "new": "SKTailsEnv_CheckGroundRightWall",
       "profiles": ["sk"],
       "meaning": "Describe CheckRightBackgroundWallAfterOptionalLeftCorrection."
     },
@@ -5278,7 +5278,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 130,
       "old": "loc_147B2",
-      "new": "SKTailsEnvironment_RestoreGroundBackgroundProbeBasesAndReturn",
+      "new": "SKTailsEnv_RestoreGroundWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreGroundBackgroundProbeBasesAndReturn."
     },
@@ -5286,7 +5286,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 133,
       "old": "locret_147B6",
-      "new": "SKTailsEnvironment_ReturnAfterGroundBackgroundChecksOrDisabledGate",
+      "new": "SKTailsEnv_GroundModeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterGroundBackgroundChecksOrDisabledGate."
     },
@@ -5294,7 +5294,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 148,
       "old": "loc_147DE",
-      "new": "SKTailsEnvironment_ResolveOrdinaryAirAngleAndTerrainAfterGravityStep",
+      "new": "SKTailsEnv_AirAngleAndCollision",
       "profiles": ["sk"],
       "meaning": "Describe ResolveOrdinaryAirAngleAndTerrainAfterGravityStep."
     },
@@ -5302,7 +5302,7 @@
       "source": "src/objects/players/tails/sk/environment_and_modes.s",
       "original_line": 170,
       "old": "locret_14820",
-      "new": "SKTailsEnvironment_ReturnAfterNormalFlightTerrainAndOptionalCarry",
+      "new": "SKTailsEnv_FlightModeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterNormalFlightTerrainAndOptionalCarry."
     },
@@ -5494,7 +5494,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 19,
       "old": "loc_14A0A",
-      "new": "SKTailsGround_ApplyRightHeldInputAfterLeftInput",
+      "new": "SKTailsGround_CheckRightInput",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRightHeldInputAfterLeftInput."
     },
@@ -5502,7 +5502,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 24,
       "old": "loc_14A16",
-      "new": "SKTailsGround_GateStationaryFlatSectorBalanceAndIdleLook",
+      "new": "SKTailsGround_CheckStationaryBalance",
       "profiles": ["sk"],
       "meaning": "Describe GateStationaryFlatSectorBalanceAndIdleLook."
     },
@@ -5510,7 +5510,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 52,
       "old": "loc_14A6C",
-      "new": "SKTailsGround_ProbeTerrainBalanceAndPreferForwardTiltThree",
+      "new": "SKTailsGround_ProbeBalanceAndCheckTilt3",
       "profiles": ["sk"],
       "meaning": "Describe ProbeTerrainBalanceAndPreferForwardTiltThree."
     },
@@ -5518,7 +5518,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 60,
       "old": "loc_14A82",
-      "new": "SKTailsGround_FaceRightForStationaryBalance",
+      "new": "SKTailsGround_FaceRightForBalance",
       "profiles": ["sk"],
       "meaning": "Describe FaceRightForStationaryBalance."
     },
@@ -5526,7 +5526,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 65,
       "old": "loc_14A8A",
-      "new": "SKTailsGround_RequireRearTiltThreeForLeftBalance",
+      "new": "SKTailsGround_CheckRearTilt3",
       "profiles": ["sk"],
       "meaning": "Describe RequireRearTiltThreeForLeftBalance."
     },
@@ -5534,7 +5534,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 69,
       "old": "loc_14A92",
-      "new": "SKTailsGround_FaceLeftForStationaryBalance",
+      "new": "SKTailsGround_FaceLeftForBalance",
       "profiles": ["sk"],
       "meaning": "Describe FaceLeftForStationaryBalance."
     },
@@ -5542,7 +5542,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 72,
       "old": "loc_14A98",
-      "new": "SKTailsGround_SelectBalanceAnimationAndResetLookDelay",
+      "new": "SKTailsGround_SetBalanceAnim",
       "profiles": ["sk"],
       "meaning": "Describe SelectBalanceAnimationAndResetLookDelay."
     },
@@ -5550,7 +5550,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 77,
       "old": "loc_14AA0",
-      "new": "SKTailsGround_SelectIdleVerticalLookWithProfilePriority",
+      "new": "SKTailsGround_CheckFirstLookInput",
       "profiles": ["sk"],
       "meaning": "Describe SelectIdleVerticalLookWithProfilePriority."
     },
@@ -5558,7 +5558,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 93,
       "old": "loc_14AD0",
-      "new": "SKTailsGround_MoveReverseGravityDuckCameraTowardD8",
+      "new": "SKTailsGround_RaiseCameraForReverseDuck",
       "profiles": ["sk"],
       "meaning": "Describe MoveReverseGravityDuckCameraTowardD8."
     },
@@ -5566,7 +5566,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 100,
       "old": "loc_14ADA",
-      "new": "SKTailsGround_CheckOtherIdleLookDirectionAndDelayedCameraTarget",
+      "new": "SKTailsGround_CheckSecondLookInput",
       "profiles": ["sk"],
       "meaning": "Describe CheckOtherIdleLookDirectionAndDelayedCameraTarget."
     },
@@ -5574,7 +5574,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 116,
       "old": "loc_14B0A",
-      "new": "SKTailsGround_MoveReverseGravityLookUpCameraToward18",
+      "new": "SKTailsGround_LowerCameraForReverseLook",
       "profiles": ["sk"],
       "meaning": "Describe MoveReverseGravityLookUpCameraToward18."
     },
@@ -5582,7 +5582,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 123,
       "old": "loc_14B14",
-      "new": "SKTailsGround_ResetVerticalLookDelayBeforeCameraRecovery",
+      "new": "SKTailsGround_ResetLookDelay",
       "profiles": ["sk"],
       "meaning": "Describe ResetVerticalLookDelayBeforeCameraRecovery."
     },
@@ -5590,7 +5590,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 126,
       "old": "loc_14B1A",
-      "new": "SKTailsGround_RecoverVerticalCameraTargetTowardSixty",
+      "new": "SKTailsGround_EaseLookCamera",
       "profiles": ["sk"],
       "meaning": "Describe RecoverVerticalCameraTargetTowardSixty."
     },
@@ -5598,7 +5598,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 132,
       "old": "loc_14B24",
-      "new": "SKTailsGround_SubtractTwoFromCameraRecoveryTarget",
+      "new": "SKTailsGround_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractTwoFromCameraRecoveryTarget."
     },
@@ -5606,7 +5606,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 135,
       "old": "loc_14B26",
-      "new": "SKTailsGround_OverrideNeutralGroundFrictionForAnySuperTailsFlag",
+      "new": "SKTailsGround_SelectPoweredFriction",
       "profiles": ["sk"],
       "meaning": "Describe OverrideNeutralGroundFrictionForAnySuperTailsFlag."
     },
@@ -5614,7 +5614,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 140,
       "old": "loc_14B30",
-      "new": "SKTailsGround_ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput",
+      "new": "SKTailsGround_ApplyNeutralFriction",
       "profiles": ["sk"],
       "meaning": "Describe ApplyNeutralGroundFrictionOnlyWithoutHeldHorizontalInput."
     },
@@ -5622,7 +5622,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 151,
       "old": "loc_14B4A",
-      "new": "SKTailsGround_CommitPositiveNeutralGroundFriction",
+      "new": "SKTailsGround_StorePositiveFriction",
       "profiles": ["sk"],
       "meaning": "Describe CommitPositiveNeutralGroundFriction."
     },
@@ -5630,7 +5630,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 156,
       "old": "loc_14B50",
-      "new": "SKTailsGround_ReduceNegativeNeutralGroundSpeedByAcceleration",
+      "new": "SKTailsGround_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe ReduceNegativeNeutralGroundSpeedByAcceleration."
     },
@@ -5638,7 +5638,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 161,
       "old": "loc_14B58",
-      "new": "SKTailsGround_CommitNegativeNeutralGroundFriction",
+      "new": "SKTailsGround_StoreNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe CommitNegativeNeutralGroundFriction."
     },
@@ -5646,7 +5646,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 164,
       "old": "loc_14B5C",
-      "new": "SKTailsGround_ProjectGroundSpeedThroughSignedSineCosine",
+      "new": "SKTailsGround_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ProjectGroundSpeedThroughSignedSineCosine."
     },
@@ -5654,7 +5654,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 174,
       "old": "loc_14B7A",
-      "new": "SKTailsGround_GateProjectedGroundObstructionForWalkingAndRolling",
+      "new": "SKTailsGround_CheckTravelProbe",
       "profiles": ["sk"],
       "meaning": "Describe GateProjectedGroundObstructionForWalkingAndRolling."
     },
@@ -5662,7 +5662,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 184,
       "old": "loc_14B9A",
-      "new": "SKTailsGround_ChooseObstructionOffsetForSignedGroundDirection",
+      "new": "SKTailsGround_PickTravelProbeOffset",
       "profiles": ["sk"],
       "meaning": "Describe ChooseObstructionOffsetForSignedGroundDirection."
     },
@@ -5670,7 +5670,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 191,
       "old": "loc_14BA8",
-      "new": "SKTailsGround_ProbeAheadUsingSavedRequestedSurfaceDirection",
+      "new": "SKTailsGround_ProbeTravelSide",
       "profiles": ["sk"],
       "meaning": "Describe ProbeAheadUsingSavedRequestedSurfaceDirection."
     },
@@ -5678,7 +5678,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 206,
       "old": "loc_14BCA",
-      "new": "SKTailsGround_ClassifySavedObstructionDirectionAfterZoneEightTweak",
+      "new": "SKTailsGround_RoundProbeAndResolve",
       "profiles": ["sk"],
       "meaning": "Describe ClassifySavedObstructionDirectionAfterZoneEightTweak."
     },
@@ -5686,7 +5686,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 220,
       "old": "locret_14BF8",
-      "new": "SKTailsGround_ReturnAfterHorizontalObstructionAndOptionalPush",
+      "new": "SKTailsGround_HorizontalProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterHorizontalObstructionAndOptionalPush."
     },
@@ -5694,7 +5694,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 224,
       "old": "loc_14BFA",
-      "new": "SKTailsGround_SubtractScaledCeilingObstructionFromYVelocity",
+      "new": "SKTailsGround_ApplyCeilingCorrection",
       "profiles": ["sk"],
       "meaning": "Describe SubtractScaledCeilingObstructionFromYVelocity."
     },
@@ -5702,7 +5702,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 229,
       "old": "loc_14C00",
-      "new": "SKTailsGround_ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft",
+      "new": "SKTailsGround_ApplyLeftWallCorrection",
       "profiles": ["sk"],
       "meaning": "Describe ResolveLeftWallVelocityAndPushOnlyWhenFacingLeft."
     },
@@ -5710,7 +5710,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 238,
       "old": "loc_14C1A",
-      "new": "SKTailsGround_AddScaledFloorObstructionToYVelocity",
+      "new": "SKTailsGround_ApplyFloorCorrection",
       "profiles": ["sk"],
       "meaning": "Describe AddScaledFloorObstructionToYVelocity."
     },
@@ -5718,7 +5718,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 241,
       "old": "locret_14C1E",
-      "new": "SKTailsGround_ReturnAfterProjectionObstructionGateOrVerticalResponse",
+      "new": "SKTailsGround_TravelProbeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterProjectionObstructionGateOrVerticalResponse."
     },
@@ -5726,7 +5726,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 252,
       "old": "loc_14C28",
-      "new": "SKTailsGround_FaceLeftForNonpositiveGroundAcceleration",
+      "new": "SKTailsGround_FaceLeftAndResetTurnState",
       "profiles": ["sk"],
       "meaning": "Describe FaceLeftForNonpositiveGroundAcceleration."
     },
@@ -5734,7 +5734,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 258,
       "old": "loc_14C3C",
-      "new": "SKTailsGround_AccelerateLeftWithoutClampingExistingOverspeed",
+      "new": "SKTailsGround_AccelerateLeft",
       "profiles": ["sk"],
       "meaning": "Describe AccelerateLeftWithoutClampingExistingOverspeed."
     },
@@ -5742,7 +5742,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 269,
       "old": "loc_14C4E",
-      "new": "SKTailsGround_StoreLeftAccelerationAndSelectMovementAnimation",
+      "new": "SKTailsGround_StoreLeftSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe StoreLeftAccelerationAndSelectMovementAnimation."
     },
@@ -5750,7 +5750,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 275,
       "old": "loc_14C5A",
-      "new": "SKTailsGround_BrakePositiveGroundSpeedForLeftInput",
+      "new": "SKTailsGround_BrakeRightwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe BrakePositiveGroundSpeedForLeftInput."
     },
@@ -5758,7 +5758,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 280,
       "old": "loc_14C62",
-      "new": "SKTailsGround_StoreLeftBrakeAndTestSkidWithOverwrittenLowByte",
+      "new": "SKTailsGround_StoreLeftBrakeAndTestSkid",
       "profiles": ["sk"],
       "meaning": "Describe StoreLeftBrakeAndTestSkidWithOverwrittenLowByte."
     },
@@ -5766,7 +5766,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 304,
       "old": "locret_14CAA",
-      "new": "SKTailsGround_ReturnAfterLeftBrakeSkidAndOptionalDustRequest",
+      "new": "SKTailsGround_LeftBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterLeftBrakeSkidAndOptionalDustRequest."
     },
@@ -5774,7 +5774,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 318,
       "old": "loc_14CC6",
-      "new": "SKTailsGround_AccelerateRightWithoutClampingExistingOverspeed",
+      "new": "SKTailsGround_AccelerateRight",
       "profiles": ["sk"],
       "meaning": "Describe AccelerateRightWithoutClampingExistingOverspeed."
     },
@@ -5782,7 +5782,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 327,
       "old": "loc_14CD4",
-      "new": "SKTailsGround_StoreRightAccelerationAndSelectMovementAnimation",
+      "new": "SKTailsGround_StoreRightSpeedAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe StoreRightAccelerationAndSelectMovementAnimation."
     },
@@ -5790,7 +5790,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 333,
       "old": "loc_14CE0",
-      "new": "SKTailsGround_BrakeNegativeGroundSpeedForRightInput",
+      "new": "SKTailsGround_BrakeLeftwardSpeed",
       "profiles": ["sk"],
       "meaning": "Describe BrakeNegativeGroundSpeedForRightInput."
     },
@@ -5798,7 +5798,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 338,
       "old": "loc_14CE8",
-      "new": "SKTailsGround_StoreRightBrakeAndTestSkidWithOverwrittenLowByte",
+      "new": "SKTailsGround_StoreRightBrakeAndTestSkid",
       "profiles": ["sk"],
       "meaning": "Describe StoreRightBrakeAndTestSkidWithOverwrittenLowByte."
     },
@@ -5806,7 +5806,7 @@
       "source": "src/objects/players/tails/sk/ground_movement.s",
       "original_line": 362,
       "old": "locret_14D30",
-      "new": "SKTailsGround_ReturnAfterRightBrakeSkidAndOptionalDustRequest",
+      "new": "SKTailsGround_RightBrakeReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRightBrakeSkidAndOptionalDustRequest."
     },
@@ -5814,7 +5814,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 23,
       "old": "loc_14F30",
-      "new": "SKTailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds",
+      "new": "SKTailsJump_CheckVerticalDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe CheckEnabledVerticalDeathPlaneAfterHorizontalBounds."
     },
@@ -5822,7 +5822,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 33,
       "old": "locret_14F4A",
-      "new": "SKTailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled",
+      "new": "SKTailsJump_LevelBoundsReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled."
     },
@@ -5830,7 +5830,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 37,
       "old": "loc_14F4C",
-      "new": "SKTailsJump_CheckReverseScreenDeathPlaneIncludingMinimumEquality",
+      "new": "SKTailsJump_CheckReverseDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe CheckReverseScreenDeathPlaneIncludingMinimumEquality."
     },
@@ -5838,7 +5838,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 42,
       "old": "loc_14F56",
-      "new": "SKTailsJump_TailKillCharacterFromScreenDeathPlane",
+      "new": "SKTailsJump_KillAtScreenDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe TailKillCharacterFromScreenDeathPlane."
     },
@@ -5846,7 +5846,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 46,
       "old": "loc_14F5C",
-      "new": "SKTailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion",
+      "new": "SKTailsJump_ClampXAndStopMotion",
       "profiles": ["sk"],
       "meaning": "Describe ClampPredictedHorizontalPositionAndStopHorizontalMotion."
     },
@@ -5854,7 +5854,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 68,
       "old": "loc_14F94",
-      "new": "SKTailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy",
+      "new": "SKTailsJump_CheckRollStartSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ApplyProfileRollSpeedThresholdAndInputPolicy."
     },
@@ -5862,7 +5862,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 75,
       "old": "locret_14FA8",
-      "new": "SKTailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice",
+      "new": "SKTailsJump_RollInputReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollEntryGateOrSlowDuckChoice."
     },
@@ -5870,7 +5870,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 79,
       "old": "loc_14FAA",
-      "new": "SKTailsJump_ClearDuckAnimationWhenDownReleased",
+      "new": "SKTailsJump_ClearDuckOnRelease",
       "profiles": ["sk"],
       "meaning": "Describe ClearDuckAnimationWhenDownReleased."
     },
@@ -5878,7 +5878,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 86,
       "old": "loc_14FBA",
-      "new": "SKTailsJump_SkipRollInitializationIfAlreadyRolling",
+      "new": "SKTailsJump_CheckAlreadyRolling",
       "profiles": ["sk"],
       "meaning": "Describe SkipRollInitializationIfAlreadyRolling."
     },
@@ -5886,7 +5886,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 92,
       "old": "loc_14FC4",
-      "new": "SKTailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed",
+      "new": "SKTailsJump_InitRollGeometry",
       "profiles": ["sk"],
       "meaning": "Describe InitializeRollGeometryAndDefaultPositiveGroundSpeed."
     },
@@ -5894,7 +5894,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 102,
       "old": "loc_14FEA",
-      "new": "SKTailsJump_PlayRollSoundAndSupplyPositiveSpeedOnlyAtZero",
+      "new": "SKTailsJump_PlayRollSFXAndSeedSpeed",
       "profiles": ["sk"],
       "meaning": "Describe PlayRollSoundAndSupplyPositiveSpeedOnlyAtZero."
     },
@@ -5902,7 +5902,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 109,
       "old": "locret_15000",
-      "new": "SKTailsJump_ReturnAfterRollSoundAndGroundSpeedFallback",
+      "new": "SKTailsJump_StartRollReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollSoundAndGroundSpeedFallback."
     },
@@ -5910,7 +5910,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 127,
       "old": "loc_15024",
-      "new": "SKTailsJump_ProbeOverheadAfterGravityAngleNormalization",
+      "new": "SKTailsJump_ProbeLaunchClearance",
       "profiles": ["sk"],
       "meaning": "Describe ProbeOverheadAfterGravityAngleNormalization."
     },
@@ -5918,7 +5918,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 139,
       "old": "loc_1504C",
-      "new": "SKTailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn",
+      "new": "SKTailsJump_ApplyImpulseAndSkipGround",
       "profiles": ["sk"],
       "meaning": "Describe AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn."
     },
@@ -5926,7 +5926,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 172,
       "old": "loc_150CC",
-      "new": "SKTailsJump_ApplySignedNewJumpRadiusDisplacement",
+      "new": "SKTailsJump_ApplyJumpRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe ApplySignedNewJumpRadiusDisplacement."
     },
@@ -5934,7 +5934,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 175,
       "old": "locret_150D0",
-      "new": "SKTailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved",
+      "new": "SKTailsJump_LaunchReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved."
     },
@@ -5942,7 +5942,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 179,
       "old": "loc_150D2",
-      "new": "SKTailsJump_MarkJumpStartedWhileAlreadyRolling",
+      "new": "SKTailsJump_MarkRollJump",
       "profiles": ["sk"],
       "meaning": "Describe MarkJumpStartedWhileAlreadyRolling."
     },
@@ -5950,7 +5950,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 194,
       "old": "loc_150F0",
-      "new": "SKTailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold",
+      "new": "SKTailsJump_CheckReleaseOrFlight",
       "profiles": ["sk"],
       "meaning": "Describe GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold."
     },
@@ -5958,7 +5958,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 202,
       "old": "locret_15104",
-      "new": "SKTailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision",
+      "new": "SKTailsJump_ReleaseCapReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterHeldOrReleasedJumpHeightDecision."
     },
@@ -5966,7 +5966,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 206,
       "old": "loc_15106",
-      "new": "SKTailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet",
+      "new": "SKTailsJump_CapNonJumpAscent",
       "profiles": ["sk"],
       "meaning": "Describe CapNonJumpUpwardVelocityUnlessSpindashFlagSet."
     },
@@ -5974,7 +5974,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 213,
       "old": "locret_1511A",
-      "new": "SKTailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption",
+      "new": "SKTailsJump_UpwardSpeedLimitReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterNonJumpVelocityCapOrSpindashExemption."
     },
@@ -5982,7 +5982,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 236,
       "old": "loc_15156",
-      "new": "SKTailsJump_RequireCpuIdleTimerForNonSoloFlightStart",
+      "new": "SKTailsJump_CheckManualFlightOverride",
       "profiles": ["sk"],
       "meaning": "Describe RequireCpuIdleTimerForNonSoloFlightStart."
     },
@@ -5990,7 +5990,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 240,
       "old": "loc_1515C",
-      "new": "SKTailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight",
+      "new": "SKTailsJump_UnrollForFlight",
       "profiles": ["sk"],
       "meaning": "Describe UnrollAndRestoreDefaultsBeforeStartingFlight."
     },
@@ -5998,7 +5998,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 253,
       "old": "loc_15188",
-      "new": "SKTailsJump_AddFlightUnrollDeltaDespiteWrongRegisterGravityNegate",
+      "new": "SKTailsJump_ApplyFlightUnrollYOffset",
       "profiles": ["sk"],
       "meaning": "Describe AddFlightUnrollDeltaDespiteWrongRegisterGravityNegate."
     },
@@ -6006,7 +6006,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 256,
       "old": "loc_1518C",
-      "new": "SKTailsJump_ActivateFlightBudgetAndSelectFlyingAnimation",
+      "new": "SKTailsJump_StartFlightAndAnimate",
       "profiles": ["sk"],
       "meaning": "Describe ActivateFlightBudgetAndSelectFlyingAnimation."
     },
@@ -6014,7 +6014,7 @@
       "source": "src/objects/players/tails/sk/jump_actions.s",
       "original_line": 262,
       "old": "locret_151A2",
-      "new": "SKTailsJump_ReturnAfterFlightGateOrActivation",
+      "new": "SKTailsJump_FlightStartReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterFlightGateOrActivation."
     },
@@ -6022,7 +6022,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 18,
       "old": "loc_1368C",
-      "new": "SKTailsLifecycle_AdvanceDebugFrameAfterOptionalBExit",
+      "new": "SKTailsMain_AdvanceDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe AdvanceDebugFrameAfterOptionalBExit."
     },
@@ -6030,7 +6030,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 24,
       "old": "loc_1369E",
-      "new": "SKTailsLifecycle_LoadCurrentDebugFrameAndQueueDisplay",
+      "new": "SKTailsMain_LoadAndDrawDebugFrame",
       "profiles": ["sk"],
       "meaning": "Describe LoadCurrentDebugFrameAndQueueDisplay."
     },
@@ -6038,7 +6038,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 29,
       "old": "loc_136A8",
-      "new": "SKTailsLifecycle_TailEnterDebugPlacementForSoloTails",
+      "new": "SKTailsMain_EnterSoloDebugPlacement",
       "profiles": ["sk"],
       "meaning": "Describe TailEnterDebugPlacementForSoloTails."
     },
@@ -6046,7 +6046,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 80,
       "old": "loc_1375E",
-      "new": "SKTailsLifecycle_InitializeFollowerArtFromPrimarySolidityAndPriority",
+      "new": "SKTailsMain_InitFollowerArtAndSolidity",
       "profiles": ["sk"],
       "meaning": "Describe InitializeFollowerArtFromPrimarySolidityAndPriority."
     },
@@ -6054,7 +6054,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 98,
       "old": "loc_137A4",
-      "new": "SKTailsLifecycle_ResetFollowerTimersAndBindNormalTailActor",
+      "new": "SKTailsMain_ResetTimersAndBindTail",
       "profiles": ["sk"],
       "meaning": "Describe ResetFollowerTimersAndBindNormalTailActor."
     },
@@ -6062,7 +6062,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 116,
       "old": "loc_137E0",
-      "new": "SKTailsLifecycle_CheckDebugBAfterConsumingNewAForGravityToggle",
+      "new": "SKTailsMain_CheckDebugBEntry",
       "profiles": ["sk"],
       "meaning": "Describe CheckDebugBAfterConsumingNewAForGravityToggle."
     },
@@ -6070,7 +6070,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 126,
       "old": "locret_13806",
-      "new": "SKTailsLifecycle_ReturnAfterEnteringSoloTailsDebugMode",
+      "new": "SKTailsMain_DebugReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterEnteringSoloTailsDebugMode."
     },
@@ -6078,7 +6078,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 130,
       "old": "loc_13808",
-      "new": "SKTailsLifecycle_SelectPrimaryControllerAndFollowerCpuEligibility",
+      "new": "SKTailsMain_SelectControllerAndAI",
       "profiles": ["sk"],
       "meaning": "Describe SelectPrimaryControllerAndFollowerCpuEligibility."
     },
@@ -6086,7 +6086,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 143,
       "old": "loc_13830",
-      "new": "SKTailsLifecycle_GateSecondaryControllerCopyAndCpuByProfileLockPolicy",
+      "new": "SKTailsMain_CheckSecondaryInputLock",
       "profiles": ["sk"],
       "meaning": "Describe GateSecondaryControllerCopyAndCpuByProfileLockPolicy."
     },
@@ -6094,7 +6094,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 150,
       "old": "loc_1383A",
-      "new": "SKTailsLifecycle_CopyPhysicalSecondaryInputBeforeOptionalFollowerAi",
+      "new": "SKTailsMain_CopySecondaryInput",
       "profiles": ["sk"],
       "meaning": "Describe CopyPhysicalSecondaryInputBeforeOptionalFollowerAi."
     },
@@ -6102,7 +6102,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 153,
       "old": "loc_13840",
-      "new": "SKTailsLifecycle_RunFollowerCpuOnlyOutsideCompetition",
+      "new": "SKTailsMain_CheckAndRunFollowerAI",
       "profiles": ["sk"],
       "meaning": "Describe RunFollowerCpuOnlyOutsideCompetition."
     },
@@ -6110,7 +6110,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 158,
       "old": "loc_1384A",
-      "new": "SKTailsLifecycle_SkipOwnMovementAndReleaseCarryForExternalControl",
+      "new": "SKTailsMain_CheckExternalMovement",
       "profiles": ["sk"],
       "meaning": "Describe SkipOwnMovementAndReleaseCarryForExternalControl."
     },
@@ -6118,7 +6118,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 171,
       "old": "loc_13872",
-      "new": "SKTailsLifecycle_DispatchNormalTailsModeWhileSavingSharedBases",
+      "new": "SKTailsMain_DispatchMovementMode",
       "profiles": ["sk"],
       "meaning": "Describe DispatchNormalTailsModeWhileSavingSharedBases."
     },
@@ -6126,7 +6126,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 180,
       "old": "loc_1388C",
-      "new": "SKTailsLifecycle_WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel",
+      "new": "SKTailsMain_WrapPlayerYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe WrapNormalTailsIntegerYAtSharedCameraMinimumSentinel."
     },
@@ -6134,7 +6134,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 186,
       "old": "loc_1389C",
-      "new": "SKTailsLifecycle_RunNormalDisplayHistoryWaterAndWindAnimationServices",
+      "new": "SKTailsMain_UpdateFrameServices",
       "profiles": ["sk"],
       "meaning": "Describe RunNormalDisplayHistoryWaterAndWindAnimationServices."
     },
@@ -6142,7 +6142,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 199,
       "old": "loc_138C8",
-      "new": "SKTailsLifecycle_GateNormalTailsAnimationAndPatternsByControlBitOne",
+      "new": "SKTailsMain_CheckAnimateAndLoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe GateNormalTailsAnimationAndPatternsByControlBitOne."
     },
@@ -6150,7 +6150,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 207,
       "old": "loc_138E0",
-      "new": "SKTailsLifecycle_LoadNormalTailsPatternsAfterOptionalReverseRenderFlip",
+      "new": "SKTailsMain_LoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe LoadNormalTailsPatternsAfterOptionalReverseRenderFlip."
     },
@@ -6158,7 +6158,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 210,
       "old": "loc_138E4",
-      "new": "SKTailsLifecycle_RunNormalTouchUnlessControlBitsFiveOrSevenSet",
+      "new": "SKTailsMain_CheckTouchResponse",
       "profiles": ["sk"],
       "meaning": "Describe RunNormalTouchUnlessControlBitsFiveOrSevenSet."
     },
@@ -6166,7 +6166,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 216,
       "old": "locret_138F4",
-      "new": "SKTailsLifecycle_ReturnAfterNormalTailsServicesAndOptionalTouch",
+      "new": "SKTailsMain_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterNormalTailsServicesAndOptionalTouch."
     },
@@ -6174,7 +6174,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 233,
       "old": "loc_1390C",
-      "new": "SKTailsLifecycle_QueueVisibleOldBlinkPhaseBeforePowerChecks",
+      "new": "SKTailsMain_DrawVisibleBlinkPhase",
       "profiles": ["sk"],
       "meaning": "Describe QueueVisibleOldBlinkPhaseBeforePowerChecks."
     },
@@ -6182,7 +6182,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 236,
       "old": "loc_13912",
-      "new": "SKTailsLifecycle_CheckTimedInvincibilityExpiryOnGlobalEightFramePhase",
+      "new": "SKTailsMain_TickInvincibilityEvery8",
       "profiles": ["sk"],
       "meaning": "Describe CheckTimedInvincibilityExpiryOnGlobalEightFramePhase."
     },
@@ -6190,7 +6190,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 253,
       "old": "loc_13948",
-      "new": "SKTailsLifecycle_ClearExpiredInvincibilityBeforeSpeedShoesCheck",
+      "new": "SKTailsMain_ExpireInvincibility",
       "profiles": ["sk"],
       "meaning": "Describe ClearExpiredInvincibilityBeforeSpeedShoesCheck."
     },
@@ -6198,7 +6198,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 256,
       "old": "loc_1394E",
-      "new": "SKTailsLifecycle_ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds",
+      "new": "SKTailsMain_TickShoesAndRestoreSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ExpireSpeedShoesAndRestoreProfileAppropriateSpeeds."
     },
@@ -6206,7 +6206,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 277,
       "old": "loc_13998",
-      "new": "SKTailsLifecycle_ClearExpiredShoesAndRestoreTempoAfterOptionalSuperSpeeds",
+      "new": "SKTailsMain_ClearShoesAndRestoreTempo",
       "profiles": ["sk"],
       "meaning": "Describe ClearExpiredShoesAndRestoreTempoAfterOptionalSuperSpeeds."
     },
@@ -6214,7 +6214,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 283,
       "old": "locret_139A6",
-      "new": "SKTailsLifecycle_ReturnAfterPowerChecksOrUnexpiredSpeedShoes",
+      "new": "SKTailsMain_PowerUpdateReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterPowerChecksOrUnexpiredSpeedShoes."
     },
@@ -6222,7 +6222,7 @@
       "source": "src/objects/players/tails/sk/lifecycle.s",
       "original_line": 287,
       "old": "loc_139A8",
-      "new": "SKTailsLifecycle_RestoreCompetitionSpeedRecordOnShoesExpiry",
+      "new": "SKTailsMain_RestoreCompSpeedRecord",
       "profiles": ["sk"],
       "meaning": "Describe RestoreCompetitionSpeedRecordOnShoesExpiry."
     },
@@ -6230,7 +6230,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 16,
       "old": "loc_14D46",
-      "new": "SKTailsRolling_SetFixedRollingBrakeAndGateForcedOrLockedInput",
+      "new": "SKTailsRoll_CheckRollInput",
       "profiles": ["sk"],
       "meaning": "Describe SetFixedRollingBrakeAndGateForcedOrLockedInput."
     },
@@ -6238,7 +6238,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 28,
       "old": "loc_14D6C",
-      "new": "SKTailsRolling_ApplyRightRollingInputAfterLeftInput",
+      "new": "SKTailsRoll_CheckRightInput",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRightRollingInputAfterLeftInput."
     },
@@ -6246,7 +6246,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 33,
       "old": "loc_14D78",
-      "new": "SKTailsRolling_ApplyRollingFrictionRegardlessHeldHorizontalInput",
+      "new": "SKTailsRoll_ApplySignedFriction",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRollingFrictionRegardlessHeldHorizontalInput."
     },
@@ -6254,7 +6254,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 41,
       "old": "loc_14D88",
-      "new": "SKTailsRolling_StorePositiveRollingFrictionBeforeUnrollTest",
+      "new": "SKTailsRoll_StorePositiveFriction",
       "profiles": ["sk"],
       "meaning": "Describe StorePositiveRollingFrictionBeforeUnrollTest."
     },
@@ -6262,7 +6262,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 46,
       "old": "loc_14D8E",
-      "new": "SKTailsRolling_ApplyNegativeRollingFrictionWithCarryClamp",
+      "new": "SKTailsRoll_ApplyNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe ApplyNegativeRollingFrictionWithCarryClamp."
     },
@@ -6270,7 +6270,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 51,
       "old": "loc_14D96",
-      "new": "SKTailsRolling_StoreNegativeRollingFrictionBeforeUnrollTest",
+      "new": "SKTailsRoll_StoreNegativeFriction",
       "profiles": ["sk"],
       "meaning": "Describe StoreNegativeRollingFrictionBeforeUnrollTest."
     },
@@ -6278,7 +6278,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 54,
       "old": "loc_14D9A",
-      "new": "SKTailsRolling_ClassifyPostFrictionSpeedForProfileUnrollPolicy",
+      "new": "SKTailsRoll_GetRollSpeedMagnitude",
       "profiles": ["sk"],
       "meaning": "Describe ClassifyPostFrictionSpeedForProfileUnrollPolicy."
     },
@@ -6286,7 +6286,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 59,
       "old": "loc_14DA2",
-      "new": "SKTailsRolling_UnrollBelowUnsignedEightyOrRestoreForcedRollSpeed",
+      "new": "SKTailsRoll_CheckUnrollBelow80",
       "profiles": ["sk"],
       "meaning": "Describe UnrollBelowUnsignedEightyOrRestoreForcedRollSpeed."
     },
@@ -6294,7 +6294,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 75,
       "old": "loc_14DD8",
-      "new": "SKTailsRolling_ApplyGravityAdjustedUnrollOffsetToIntegerY",
+      "new": "SKTailsRoll_ApplyUnrollRadiusOffset",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityAdjustedUnrollOffsetToIntegerY."
     },
@@ -6302,7 +6302,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 80,
       "old": "loc_14DDE",
-      "new": "SKTailsRolling_RestoreForcedRollSpeedByFacingAtUnrollThreshold",
+      "new": "SKTailsRoll_ResumeForcedRoll",
       "profiles": ["sk"],
       "meaning": "Describe RestoreForcedRollSpeedByFacingAtUnrollThreshold."
     },
@@ -6310,7 +6310,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 86,
       "old": "loc_14DF0",
-      "new": "SKTailsRolling_RecoverRollingCameraTargetBeforeVelocityProjection",
+      "new": "SKTailsRoll_EaseRollCamera",
       "profiles": ["sk"],
       "meaning": "Describe RecoverRollingCameraTargetBeforeVelocityProjection."
     },
@@ -6318,7 +6318,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 92,
       "old": "loc_14DFA",
-      "new": "SKTailsRolling_SubtractRollingCameraRecoveryStep",
+      "new": "SKTailsRoll_ReduceRollCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractRollingCameraRecoveryStep."
     },
@@ -6326,7 +6326,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 95,
       "old": "loc_14DFC",
-      "new": "SKTailsRolling_ProjectRollingVelocityAndClampPositiveXWord",
+      "new": "SKTailsRoll_ProjectGroundSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ProjectRollingVelocityAndClampPositiveXWord."
     },
@@ -6334,7 +6334,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 107,
       "old": "loc_14E20",
-      "new": "SKTailsRolling_ClampNegativeRollingXProjectionWord",
+      "new": "SKTailsRoll_ClampProjectedMinXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ClampNegativeRollingXProjectionWord."
     },
@@ -6342,7 +6342,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 112,
       "old": "loc_14E2A",
-      "new": "SKTailsRolling_StoreRollingXAndTailBranchSharedObstruction",
+      "new": "SKTailsRoll_StoreXSpeedAndProbe",
       "profiles": ["sk"],
       "meaning": "Describe StoreRollingXAndTailBranchSharedObstruction."
     },
@@ -6350,7 +6350,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 124,
       "old": "loc_14E3A",
-      "new": "SKTailsRolling_FaceLeftAndKeepRollAnimationWithoutAcceleration",
+      "new": "SKTailsRoll_FaceLeftAndKeepRolling",
       "profiles": ["sk"],
       "meaning": "Describe FaceLeftAndKeepRollAnimationWithoutAcceleration."
     },
@@ -6358,7 +6358,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 130,
       "old": "loc_14E48",
-      "new": "SKTailsRolling_BrakePositiveRollForLeftHeldInput",
+      "new": "SKTailsRoll_BrakeRightwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe BrakePositiveRollForLeftHeldInput."
     },
@@ -6366,7 +6366,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 135,
       "old": "loc_14E50",
-      "new": "SKTailsRolling_StoreLeftRollingBrakeAndReturn",
+      "new": "SKTailsRoll_StoreLeftBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreLeftRollingBrakeAndReturn."
     },
@@ -6374,7 +6374,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 150,
       "old": "loc_14E6A",
-      "new": "SKTailsRolling_BrakeNegativeRollForRightHeldInput",
+      "new": "SKTailsRoll_BrakeLeftwardRoll",
       "profiles": ["sk"],
       "meaning": "Describe BrakeNegativeRollForRightHeldInput."
     },
@@ -6382,7 +6382,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 155,
       "old": "loc_14E72",
-      "new": "SKTailsRolling_StoreRightRollingBrakeAndReturn",
+      "new": "SKTailsRoll_StoreRightBrakeResult",
       "profiles": ["sk"],
       "meaning": "Describe StoreRightRollingBrakeAndReturn."
     },
@@ -6390,7 +6390,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 182,
       "old": "loc_14EAC",
-      "new": "SKTailsRolling_ApplyRightAirInputAfterOverspeedPreservingLeftStep",
+      "new": "SKTailsRoll_CheckAirRightInput",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRightAirInputAfterOverspeedPreservingLeftStep."
     },
@@ -6398,7 +6398,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 194,
       "old": "loc_14EC8",
-      "new": "SKTailsRolling_CommitAirHorizontalInputVelocity",
+      "new": "SKTailsRoll_StoreAirXSpeed",
       "profiles": ["sk"],
       "meaning": "Describe CommitAirHorizontalInputVelocity."
     },
@@ -6406,7 +6406,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 197,
       "old": "loc_14ECC",
-      "new": "SKTailsRolling_RecoverAirCameraEvenWhenRollJumpBlocksInput",
+      "new": "SKTailsRoll_EaseAirCamera",
       "profiles": ["sk"],
       "meaning": "Describe RecoverAirCameraEvenWhenRollJumpBlocksInput."
     },
@@ -6414,7 +6414,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 203,
       "old": "loc_14ED6",
-      "new": "SKTailsRolling_SubtractAirCameraRecoveryStep",
+      "new": "SKTailsRoll_ReduceAirCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractAirCameraRecoveryStep."
     },
@@ -6422,7 +6422,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 206,
       "old": "loc_14ED8",
-      "new": "SKTailsRolling_GateAirHorizontalDragByUnsignedUpwardVelocityWindow",
+      "new": "SKTailsRoll_CheckAirDragWindow",
       "profiles": ["sk"],
       "meaning": "Describe GateAirHorizontalDragByUnsignedUpwardVelocityWindow."
     },
@@ -6430,7 +6430,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 218,
       "old": "loc_14EF4",
-      "new": "SKTailsRolling_CommitNonnegativeQuotientAirDrag",
+      "new": "SKTailsRoll_StoreRightAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe CommitNonnegativeQuotientAirDrag."
     },
@@ -6438,7 +6438,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 223,
       "old": "loc_14EFA",
-      "new": "SKTailsRolling_ApplyNegativeQuotientAirDragUsingBorrowPolarity",
+      "new": "SKTailsRoll_ApplyLeftAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe ApplyNegativeQuotientAirDragUsingBorrowPolarity."
     },
@@ -6446,7 +6446,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 228,
       "old": "loc_14F02",
-      "new": "SKTailsRolling_CommitNegativeQuotientAirDrag",
+      "new": "SKTailsRoll_StoreLeftAirDrag",
       "profiles": ["sk"],
       "meaning": "Describe CommitNegativeQuotientAirDrag."
     },
@@ -6454,7 +6454,7 @@
       "source": "src/objects/players/tails/sk/rolling_control.s",
       "original_line": 231,
       "old": "locret_14F06",
-      "new": "SKTailsRolling_ReturnAfterAirDragOrIneligibleVelocity",
+      "new": "SKTailsRoll_AirDragReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterAirDragOrIneligibleVelocity."
     },
@@ -6462,7 +6462,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 25,
       "old": "loc_15242",
-      "new": "SKTailsSpindash_ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart",
+      "new": "SKTailsSpin_CheckEntryBoundsAndTerrain",
       "profiles": ["sk"],
       "meaning": "Describe ApplyBoundsAttachmentAndBackgroundChecksAfterChargeStart."
     },
@@ -6470,7 +6470,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 39,
       "old": "loc_1526A",
-      "new": "SKTailsSpindash_ProbeRightBackgroundWallAfterChargeStartLeftCorrection",
+      "new": "SKTailsSpin_CheckEntryRightWall",
       "profiles": ["sk"],
       "meaning": "Describe ProbeRightBackgroundWallAfterChargeStartLeftCorrection."
     },
@@ -6478,7 +6478,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 45,
       "old": "loc_15276",
-      "new": "SKTailsSpindash_RestoreChargeStartWallProbeBases",
+      "new": "SKTailsSpin_RestoreEntryWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreChargeStartWallProbeBases."
     },
@@ -6486,7 +6486,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 48,
       "old": "locret_1527A",
-      "new": "SKTailsSpindash_ReturnWithRejectedStartOrAbortedGroundStackContext",
+      "new": "SKTailsSpin_EntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnWithRejectedStartOrAbortedGroundStackContext."
     },
@@ -6494,7 +6494,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 52,
       "old": "loc_1527C",
-      "new": "SKTailsSpindash_MaintainHeldChargeOrReleaseNormalTailsGeometry",
+      "new": "SKTailsSpin_ReleaseOrKeepCharging",
       "profiles": ["sk"],
       "meaning": "Describe MaintainHeldChargeOrReleaseNormalTailsGeometry."
     },
@@ -6502,7 +6502,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 64,
       "old": "loc_152A8",
-      "new": "SKTailsSpindash_ClearReleasedChargeAndChooseNormalOrSuperTailsSpeed",
+      "new": "SKTailsSpin_SelectReleaseSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ClearReleasedChargeAndChooseNormalOrSuperTailsSpeed."
     },
@@ -6510,7 +6510,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 74,
       "old": "loc_152C8",
-      "new": "SKTailsSpindash_EncodeDashHistoryLagFromPositiveSelectedLaunchSpeed",
+      "new": "SKTailsSpin_CalcReleaseCameraLag",
       "profiles": ["sk"],
       "meaning": "Describe EncodeDashHistoryLagFromPositiveSelectedLaunchSpeed."
     },
@@ -6518,7 +6518,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 86,
       "old": "loc_152EA",
-      "new": "SKTailsSpindash_StorePreFacingDashHistoryLagThenSignLaunchSpeed",
+      "new": "SKTailsSpin_StoreLagAndApplyFacing",
       "profiles": ["sk"],
       "meaning": "Describe StorePreFacingDashHistoryLagThenSignLaunchSpeed."
     },
@@ -6526,7 +6526,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 92,
       "old": "loc_152F8",
-      "new": "SKTailsSpindash_CommitReleasedRollStopDustAndPlayDashSound",
+      "new": "SKTailsSpin_BeginRollAndStopDust",
       "profiles": ["sk"],
       "meaning": "Describe CommitReleasedRollStopDustAndPlayDashSound."
     },
@@ -6534,7 +6534,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 99,
       "old": "word_1530E",
-      "new": "SKTailsSpindash_NormalTailsSpindashLaunchSpeedWords",
+      "new": "SKTailsSpin_NormalSpeedByChargeHi",
       "profiles": ["sk"],
       "meaning": "Describe NormalTailsSpindashLaunchSpeedWords."
     },
@@ -6542,7 +6542,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 109,
       "old": "word_15320",
-      "new": "SKTailsSpindash_SuperTailsSpindashLaunchSpeedWords",
+      "new": "SKTailsSpin_SuperSpeedByChargeHi",
       "profiles": ["sk"],
       "meaning": "Describe SuperTailsSpindashLaunchSpeedWords."
     },
@@ -6550,7 +6550,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 121,
       "old": "loc_15332",
-      "new": "SKTailsSpindash_DecayHeldSpindashChargeUsingLogicalWordShift",
+      "new": "SKTailsSpin_DecayHeldCharge",
       "profiles": ["sk"],
       "meaning": "Describe DecayHeldSpindashChargeUsingLogicalWordShift."
     },
@@ -6558,7 +6558,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 130,
       "old": "loc_1534A",
-      "new": "SKTailsSpindash_BoostChargeOnNewAbcAndRestartChargeAnimation",
+      "new": "SKTailsSpin_ChargeOnNewPress",
       "profiles": ["sk"],
       "meaning": "Describe BoostChargeOnNewAbcAndRestartChargeAnimation."
     },
@@ -6566,7 +6566,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 142,
       "old": "loc_1537A",
-      "new": "SKTailsSpindash_DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease",
+      "new": "SKTailsSpin_SkipGroundAndEaseCamera",
       "profiles": ["sk"],
       "meaning": "Describe DiscardGroundReturnAndRecoverCameraDuringChargeOrRelease."
     },
@@ -6574,7 +6574,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 149,
       "old": "loc_15386",
-      "new": "SKTailsSpindash_SubtractSpindashCameraRecoveryStep",
+      "new": "SKTailsSpin_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractSpindashCameraRecoveryStep."
     },
@@ -6582,7 +6582,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 152,
       "old": "loc_15388",
-      "new": "SKTailsSpindash_AttachAndCheckBackgroundAfterActiveChargeOrRelease",
+      "new": "SKTailsSpin_CheckActiveBoundsAndTerrain",
       "profiles": ["sk"],
       "meaning": "Describe AttachAndCheckBackgroundAfterActiveChargeOrRelease."
     },
@@ -6590,7 +6590,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 166,
       "old": "loc_153B0",
-      "new": "SKTailsSpindash_ProbeRightBackgroundWallAfterActiveDashLeftCorrection",
+      "new": "SKTailsSpin_CheckActiveRightWall",
       "profiles": ["sk"],
       "meaning": "Describe ProbeRightBackgroundWallAfterActiveDashLeftCorrection."
     },
@@ -6598,7 +6598,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 172,
       "old": "loc_153BC",
-      "new": "SKTailsSpindash_RestoreActiveDashWallProbeBasesBeforeOuterReturn",
+      "new": "SKTailsSpin_RestoreActiveWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreActiveDashWallProbeBasesBeforeOuterReturn."
     },
@@ -6606,7 +6606,7 @@
       "source": "src/objects/players/tails/sk/spindash.s",
       "original_line": 175,
       "old": "locret_153C0",
-      "new": "SKTailsSpindash_ReturnToOuterModeAfterChargeReleaseTail",
+      "new": "SKTailsSpin_ActiveReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnToOuterModeAfterChargeReleaseTail."
     },
@@ -6966,7 +6966,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 13,
       "old": "loc_153D6",
-      "new": "SKTailsTerrain_DispatchTerrainResponseByVelocityAngleQuadrant",
+      "new": "SKTailsLand_DispatchVelocitySector",
       "profiles": ["sk"],
       "meaning": "Describe DispatchTerrainResponseByVelocityAngleQuadrant."
     },
@@ -6974,7 +6974,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 32,
       "old": "loc_1541A",
-      "new": "SKTailsTerrain_ResolveRightWallBeforeDefaultFloorProbe",
+      "new": "SKTailsLand_CheckDefaultRightWall",
       "profiles": ["sk"],
       "meaning": "Describe ResolveRightWallBeforeDefaultFloorProbe."
     },
@@ -6982,7 +6982,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 39,
       "old": "loc_1542C",
-      "new": "SKTailsTerrain_GateFloorPenetrationByTwoSignedByteDepthComparisons",
+      "new": "SKTailsLand_TestDefaultFloorDepth",
       "profiles": ["sk"],
       "meaning": "Describe GateFloorPenetrationByTwoSignedByteDepthComparisons."
     },
@@ -6990,7 +6990,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 51,
       "old": "loc_15444",
-      "new": "SKTailsTerrain_AttachFloorAndSelectFlatModerateOrSteepVelocityConversion",
+      "new": "SKTailsLand_StoreDefaultFloorAngle",
       "profiles": ["sk"],
       "meaning": "Describe AttachFloorAndSelectFlatModerateOrSteepVelocityConversion."
     },
@@ -6998,7 +6998,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 57,
       "old": "loc_15450",
-      "new": "SKTailsTerrain_ApplyGravityOrientedDefaultFloorOffsetAndClassifySlope",
+      "new": "SKTailsLand_CorrectDefaultFloorAndSlope",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedDefaultFloorOffsetAndClassifySlope."
     },
@@ -7006,7 +7006,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 71,
       "old": "loc_15472",
-      "new": "SKTailsTerrain_ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset",
+      "new": "SKTailsLand_LandOnFlatFloor",
       "profiles": ["sk"],
       "meaning": "Describe ZeroVerticalSpeedAndSetFlatGroundSpeedBeforeLandingReset."
     },
@@ -7014,7 +7014,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 78,
       "old": "loc_15484",
-      "new": "SKTailsTerrain_ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity",
+      "new": "SKTailsLand_ClampSteepLandingSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ClearHorizontalSpeedAndCapPositiveSteepLandingVelocity."
     },
@@ -7022,7 +7022,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 84,
       "old": "loc_15498",
-      "new": "SKTailsTerrain_ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical",
+      "new": "SKTailsLand_FinishSlopeLanding",
       "profiles": ["sk"],
       "meaning": "Describe ResetLandingThenDeriveSignedSlopeGroundSpeedFromVertical."
     },
@@ -7030,7 +7030,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 91,
       "old": "locret_154AA",
-      "new": "SKTailsTerrain_ReturnAfterDefaultFloorGateOrSlopeLanding",
+      "new": "SKTailsLand_DefaultFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterDefaultFloorGateOrSlopeLanding."
     },
@@ -7038,7 +7038,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 95,
       "old": "loc_154AC",
-      "new": "SKTailsTerrain_ResolveLeftWallInLeftwardVelocityQuadrant",
+      "new": "SKTailsLand_CheckLeftSectorWall",
       "profiles": ["sk"],
       "meaning": "Describe ResolveLeftWallInLeftwardVelocityQuadrant."
     },
@@ -7046,7 +7046,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 103,
       "old": "loc_154C4",
-      "new": "SKTailsTerrain_ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath",
+      "new": "SKTailsLand_CheckLeftSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe ChooseShallowCeilingCorrectionOrOppositeWallFallbackOnLeftwardPath."
     },
@@ -7054,7 +7054,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 114,
       "old": "loc_154DC",
-      "new": "SKTailsTerrain_ApplyGravityOrientedShallowLeftwardCeilingOffset",
+      "new": "SKTailsLand_CorrectLeftCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedShallowLeftwardCeilingOffset."
     },
@@ -7062,7 +7062,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 120,
       "old": "locret_154EC",
-      "new": "SKTailsTerrain_ReturnAfterLeftwardShallowCeilingCorrection",
+      "new": "SKTailsLand_LeftCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterLeftwardShallowCeilingCorrection."
     },
@@ -7070,7 +7070,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 124,
       "old": "loc_154EE",
-      "new": "SKTailsTerrain_ProbeRightWallAfterDeepLeftwardCeilingPenetration",
+      "new": "SKTailsLand_CheckRightWallAtDeepCeiling",
       "profiles": ["sk"],
       "meaning": "Describe ProbeRightWallAfterDeepLeftwardCeilingPenetration."
     },
@@ -7078,7 +7078,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 131,
       "old": "locret_15500",
-      "new": "SKTailsTerrain_ReturnAfterLeftwardDeepCeilingOppositeWallProbe",
+      "new": "SKTailsLand_DeepCeilingWallReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterLeftwardDeepCeilingOppositeWallProbe."
     },
@@ -7086,7 +7086,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 135,
       "old": "loc_15502",
-      "new": "SKTailsTerrain_PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed",
+      "new": "SKTailsLand_CheckLeftFloorEligibility",
       "profiles": ["sk"],
       "meaning": "Describe PermitLeftwardFloorProbeInWindOrWithNonnegativeVerticalSpeed."
     },
@@ -7094,7 +7094,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 141,
       "old": "loc_1550E",
-      "new": "SKTailsTerrain_ProbeAndAttachFloorFromLeftwardQuadrant",
+      "new": "SKTailsLand_ProbeLeftFloor",
       "profiles": ["sk"],
       "meaning": "Describe ProbeAndAttachFloorFromLeftwardQuadrant."
     },
@@ -7102,7 +7102,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 149,
       "old": "loc_1551E",
-      "new": "SKTailsTerrain_ApplyGravityOrientedLeftwardFloorLandingOffset",
+      "new": "SKTailsLand_LandOnLeftSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedLeftwardFloorLandingOffset."
     },
@@ -7110,7 +7110,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 156,
       "old": "locret_15536",
-      "new": "SKTailsTerrain_ReturnAfterLeftwardFloorGateOrAttachment",
+      "new": "SKTailsLand_LeftFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterLeftwardFloorGateOrAttachment."
     },
@@ -7118,7 +7118,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 160,
       "old": "loc_15538",
-      "new": "SKTailsTerrain_ResolveLeftWallInUpwardVelocityQuadrant",
+      "new": "SKTailsLand_CheckCeilingSectorLeftWall",
       "profiles": ["sk"],
       "meaning": "Describe ResolveLeftWallInUpwardVelocityQuadrant."
     },
@@ -7126,7 +7126,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 167,
       "old": "loc_1554A",
-      "new": "SKTailsTerrain_ResolveRightWallInUpwardVelocityQuadrant",
+      "new": "SKTailsLand_CheckCeilingSectorRightWall",
       "profiles": ["sk"],
       "meaning": "Describe ResolveRightWallInUpwardVelocityQuadrant."
     },
@@ -7134,7 +7134,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 174,
       "old": "loc_1555C",
-      "new": "SKTailsTerrain_CorrectUpwardCeilingAndGateCeilingSlopeAttachment",
+      "new": "SKTailsLand_ProbeCeilingAndResolve",
       "profiles": ["sk"],
       "meaning": "Describe CorrectUpwardCeilingAndGateCeilingSlopeAttachment."
     },
@@ -7142,7 +7142,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 182,
       "old": "loc_1556C",
-      "new": "SKTailsTerrain_ApplyGravityOrientedUpwardCeilingOffsetAndSlopeGate",
+      "new": "SKTailsLand_CorrectCeilingAndCheckSlope",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedUpwardCeilingOffsetAndSlopeGate."
     },
@@ -7150,7 +7150,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 192,
       "old": "loc_15584",
-      "new": "SKTailsTerrain_AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset",
+      "new": "SKTailsLand_AttachToSteepCeiling",
       "profiles": ["sk"],
       "meaning": "Describe AttachCeilingSlopeAndDeriveGroundSpeedAfterLandingReset."
     },
@@ -7158,7 +7158,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 200,
       "old": "locret_1559A",
-      "new": "SKTailsTerrain_ReturnAfterUpwardCeilingProbeOrSlopeAttachment",
+      "new": "SKTailsLand_CeilingSectorReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterUpwardCeilingProbeOrSlopeAttachment."
     },
@@ -7166,7 +7166,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 204,
       "old": "loc_1559C",
-      "new": "SKTailsTerrain_ResolveRightWallInRightwardVelocityQuadrant",
+      "new": "SKTailsLand_CheckRightSectorWall",
       "profiles": ["sk"],
       "meaning": "Describe ResolveRightWallInRightwardVelocityQuadrant."
     },
@@ -7174,7 +7174,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 212,
       "old": "loc_155B4",
-      "new": "SKTailsTerrain_CorrectRightwardCeilingWithoutLeftwardDepthThreshold",
+      "new": "SKTailsLand_ResolveRightSectorCeiling",
       "profiles": ["sk"],
       "meaning": "Describe CorrectRightwardCeilingWithoutLeftwardDepthThreshold."
     },
@@ -7182,7 +7182,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 220,
       "old": "loc_155C4",
-      "new": "SKTailsTerrain_ApplyGravityOrientedRightwardCeilingOffset",
+      "new": "SKTailsLand_CorrectRightCeilingY",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedRightwardCeilingOffset."
     },
@@ -7190,7 +7190,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 226,
       "old": "locret_155D4",
-      "new": "SKTailsTerrain_ReturnAfterRightwardCeilingCorrection",
+      "new": "SKTailsLand_RightCeilingReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRightwardCeilingCorrection."
     },
@@ -7198,7 +7198,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 230,
       "old": "loc_155D6",
-      "new": "SKTailsTerrain_PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed",
+      "new": "SKTailsLand_CheckRightFloorEligibility",
       "profiles": ["sk"],
       "meaning": "Describe PermitRightwardFloorProbeInWindOrWithNonnegativeVerticalSpeed."
     },
@@ -7206,7 +7206,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 236,
       "old": "loc_155E2",
-      "new": "SKTailsTerrain_ProbeAndAttachFloorFromRightwardQuadrant",
+      "new": "SKTailsLand_ProbeRightFloor",
       "profiles": ["sk"],
       "meaning": "Describe ProbeAndAttachFloorFromRightwardQuadrant."
     },
@@ -7214,7 +7214,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 244,
       "old": "loc_155F2",
-      "new": "SKTailsTerrain_ApplyGravityOrientedRightwardFloorLandingOffset",
+      "new": "SKTailsLand_LandOnRightSectorFloor",
       "profiles": ["sk"],
       "meaning": "Describe ApplyGravityOrientedRightwardFloorLandingOffset."
     },
@@ -7222,7 +7222,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 251,
       "old": "locret_1560A",
-      "new": "SKTailsTerrain_ReturnAfterRightwardFloorGateOrAttachment",
+      "new": "SKTailsLand_RightFloorReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRightwardFloorGateOrAttachment."
     },
@@ -7230,7 +7230,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 279,
       "old": "loc_1564A",
-      "new": "SKTailsTerrain_StackUnrollRadiusDeltaAndOrientByAngleHalfRange",
+      "new": "SKTailsLand_AdjustUnrollOffsetForSurface",
       "profiles": ["sk"],
       "meaning": "Describe StackUnrollRadiusDeltaAndOrientByAngleHalfRange."
     },
@@ -7238,7 +7238,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 286,
       "old": "loc_15658",
-      "new": "SKTailsTerrain_PopOrientedUnrollDeltaAndAddToIntegerY",
+      "new": "SKTailsLand_ApplyUnrollYOffset",
       "profiles": ["sk"],
       "meaning": "Describe PopOrientedUnrollDeltaAndAddToIntegerY."
     },
@@ -7246,7 +7246,7 @@
       "source": "src/objects/players/tails/sk/terrain_landing.s",
       "original_line": 290,
       "old": "loc_1565E",
-      "new": "SKTailsTerrain_ClearAirJumpFlipAndFlightStateAtLandingJoin",
+      "new": "SKTailsLand_ResetLandingAndFlight",
       "profiles": ["sk"],
       "meaning": "Describe ClearAirJumpFlipAndFlightStateAtLandingJoin."
     },

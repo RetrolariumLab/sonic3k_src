@@ -14,65 +14,65 @@ Tails_Check_Screen_Boundaries:
                 move.w  (Camera_min_X_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   d1,d0
-                bhi.s   S3TailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion
+                bhi.s   S3TailsJump_ClampXAndStopMotion
                 move.w  (Camera_max_X_pos).w,d0
                 addi.w  #$128,d0
                 cmp.w   d1,d0
-                bls.s   S3TailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion
+                bls.s   S3TailsJump_ClampXAndStopMotion
 
-S3TailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds:
+S3TailsJump_CheckVerticalDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   S3TailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled
+                bne.s   S3TailsJump_LevelBoundsReturn
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   S3TailsJump_TailKillCharacterFromScreenDeathPlane
+                blt.s   S3TailsJump_KillAtScreenDeathPlane
 
-S3TailsJump_ReturnInsideVerticalBoundsOrWithDeathPlaneDisabled:
+S3TailsJump_LevelBoundsReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_TailKillCharacterFromScreenDeathPlane:
+S3TailsJump_KillAtScreenDeathPlane:
                 jmp     (Kill_Character).l
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_ClampPredictedHorizontalPositionAndStopHorizontalMotion:
+S3TailsJump_ClampXAndStopMotion:
                 move.w  d0,x_pos(a0)
                 move.w  #0,2+x_pos(a0)
                 move.w  #0,x_vel(a0)
                 move.w  #0,ground_vel(a0)
-                bra.s   S3TailsJump_CheckEnabledVerticalDeathPlaneAfterHorizontalBounds
+                bra.s   S3TailsJump_CheckVerticalDeathPlane
 ; End of function Tails_Check_Screen_Boundaries
 
 ; =============== S U B R O U T I N E =======================================
 
 Tails_Roll:
                 tst.b   status_secondary(a0)
-                bmi.s   S3TailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bmi.s   S3TailsJump_RollInputReturn
                 move.w  ground_vel(a0),d0
-                bpl.s   S3TailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy
+                bpl.s   S3TailsJump_CheckRollStartSpeed
                 neg.w   d0
 
-S3TailsJump_ApplyProfileRollSpeedThresholdAndInputPolicy:
+S3TailsJump_CheckRollStartSpeed:
                 cmpi.w  #$80,d0
-                bcs.s   S3TailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bcs.s   S3TailsJump_RollInputReturn
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_left_mask|button_right_mask,d0
-                bne.s   S3TailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice
+                bne.s   S3TailsJump_RollInputReturn
                 btst    #button_down,(Ctrl_2_held_logical).w
-                bne.s   S3TailsJump_SkipRollInitializationIfAlreadyRolling
+                bne.s   S3TailsJump_CheckAlreadyRolling
 
-S3TailsJump_ReturnAfterRollEntryGateOrSlowDuckChoice:
+S3TailsJump_RollInputReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_SkipRollInitializationIfAlreadyRolling:
+S3TailsJump_CheckAlreadyRolling:
                 btst    #Status_Roll,status(a0)
-                beq.s   S3TailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed
+                beq.s   S3TailsJump_InitRollGeometry
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed:
+S3TailsJump_InitRollGeometry:
                 bset    #Status_Roll,status(a0)
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
@@ -81,10 +81,10 @@ S3TailsJump_InitializeRollGeometryAndDefaultPositiveGroundSpeed:
                 move.w  #sfx_Roll,d0
                 jsr     (Play_SFX).l
                 tst.w   ground_vel(a0)
-                bne.s   S3TailsJump_ReturnAfterRollSoundAndGroundSpeedFallback
+                bne.s   S3TailsJump_StartRollReturn
                 move.w  #$200,ground_vel(a0)
 
-S3TailsJump_ReturnAfterRollSoundAndGroundSpeedFallback:
+S3TailsJump_StartRollReturn:
                 rts
 ; End of function Tails_Roll
 
@@ -93,7 +93,7 @@ S3TailsJump_ReturnAfterRollSoundAndGroundSpeedFallback:
 Tails_Jump:
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   S3TailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved
+                beq.w   S3TailsJump_LaunchReturn
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 addi.b  #$80,d0
@@ -101,13 +101,14 @@ Tails_Jump:
                 bsr.w   CalcRoomOverHead
                 movem.l (sp)+,a4-a6
                 cmpi.w  #6,d1
-                blt.w   S3TailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved
+                blt.w   S3TailsJump_LaunchReturn
                 move.w  #$680,d2
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3TailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn
+                beq.s   S3TailsJump_ApplyImpulseAndSkipGround
                 move.w  #$380,d2
 
-S3TailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
+; Launch along the surface normal and discard the ground movement return address
+S3TailsJump_ApplyImpulseAndSkipGround:
                 moveq   #0,d0
                 move.b  angle(a0),d0
                 subi.b  #$40,d0
@@ -128,7 +129,7 @@ S3TailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
                 move.b  default_y_radius(a0),y_radius(a0)
                 move.b  default_x_radius(a0),x_radius(a0)
                 btst    #Status_Roll,status(a0)
-                bne.s   S3TailsJump_MarkJumpStartedWhileAlreadyRolling
+                bne.s   S3TailsJump_MarkRollJump
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
@@ -138,11 +139,11 @@ S3TailsJump_AddAngleDirectedJumpImpulseAndDiscardGroundCallerReturn:
                 ext.w   d0
                 sub.w   d0,y_pos(a0)
 
-S3TailsJump_ReturnFromRejectedOrCompletedJumpWithStackSemanticsPreserved:
+S3TailsJump_LaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_MarkJumpStartedWhileAlreadyRolling:
+S3TailsJump_MarkRollJump:
                 bset    #Status_RollJump,status(a0)
                 rts
 ; End of function Tails_Jump
@@ -151,49 +152,49 @@ S3TailsJump_MarkJumpStartedWhileAlreadyRolling:
 
 Tails_JumpHeight:
                 tst.b   jumping(a0)
-                beq.s   S3TailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet
+                beq.s   S3TailsJump_CapNonJumpAscent
                 move.w  #-$400,d1
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3TailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold
+                beq.s   S3TailsJump_CheckReleaseOrFlight
                 move.w  #-$200,d1
 
-S3TailsJump_GateFlightOrShortenReleasedJumpAtSignedVerticalThreshold:
+S3TailsJump_CheckReleaseOrFlight:
                 cmp.w   y_vel(a0),d1
                 ble.s   Tails_Test_For_Flight
                 move.b  (Ctrl_2_held_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                bne.s   S3TailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision
+                bne.s   S3TailsJump_ReleaseCapReturn
                 move.w  d1,y_vel(a0)
 
-S3TailsJump_ReturnAfterHeldOrReleasedJumpHeightDecision:
+S3TailsJump_ReleaseCapReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3TailsJump_CapNonJumpUpwardVelocityUnlessSpindashFlagSet:
+S3TailsJump_CapNonJumpAscent:
                 tst.b   spin_dash_flag(a0)
-                bne.s   S3TailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption
+                bne.s   S3TailsJump_UpwardSpeedLimitReturn
                 cmpi.w  #-$FC0,y_vel(a0)
-                bge.s   S3TailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption
+                bge.s   S3TailsJump_UpwardSpeedLimitReturn
                 move.w  #-$FC0,y_vel(a0)
 
-S3TailsJump_ReturnAfterNonJumpVelocityCapOrSpindashExemption:
+S3TailsJump_UpwardSpeedLimitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Tails_Test_For_Flight:
                 tst.b   double_jump_flag(a0)
-                bne.w   S3TailsJump_ReturnAfterFlightGateOrActivation
+                bne.w   S3TailsJump_FlightStartReturn
                 move.b  (Ctrl_2_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   S3TailsJump_ReturnAfterFlightGateOrActivation
+                beq.w   S3TailsJump_FlightStartReturn
                 cmpi.w  #2,(Player_mode).w
-                beq.s   S3TailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight
+                beq.s   S3TailsJump_UnrollForFlight
                 tst.w   (Tails_CPU_idle_timer).w
-                beq.s   S3TailsJump_ReturnAfterFlightGateOrActivation
+                beq.s   S3TailsJump_FlightStartReturn
 
-S3TailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight:
+S3TailsJump_UnrollForFlight:
                 btst    #Status_Roll,status(a0)
-                beq.s   S3TailsJump_ActivateFlightBudgetAndSelectFlyingAnimation
+                beq.s   S3TailsJump_StartFlightAndAnimate
                 bclr    #Status_Roll,status(a0)
                 move.b  y_radius(a0),d1
                 move.b  default_y_radius(a0),y_radius(a0)
@@ -202,12 +203,12 @@ S3TailsJump_UnrollAndRestoreDefaultsBeforeStartingFlight:
                 ext.w   d1
                 add.w   d1,y_pos(a0)
 
-S3TailsJump_ActivateFlightBudgetAndSelectFlyingAnimation:
+S3TailsJump_StartFlightAndAnimate:
                 bclr    #Status_RollJump,status(a0)
                 move.b  #1,double_jump_flag(a0)
                 move.b  #(8*60)/2,double_jump_property(a0)
                 bsr.w   Tails_Set_Flying_Animation
 
-S3TailsJump_ReturnAfterFlightGateOrActivation:
+S3TailsJump_FlightStartReturn:
                 rts
 ; End of function Tails_JumpHeight

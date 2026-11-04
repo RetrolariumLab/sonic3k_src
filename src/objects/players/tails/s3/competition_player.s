@@ -36,10 +36,10 @@ S3TailsCompetition_DispatchSixCompetitionTailsRoutineEntries:
 Tails2P_Index:
                 dc.w    S3TailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds-Tails2P_Index
                 dc.w    S3TailsCompetition_EnterPrimaryCompetitionDebugOnPhysicalB-Tails2P_Index
-                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeHurtMovement-Tails2P_Index
-                dc.w    S3TailsRecovery_ReleaseCarriedPrimaryBeforeDeathMovement-Tails2P_Index
-                dc.w    S3TailsRecovery_CountNonzeroRestartWordDownToRestartRequest-Tails2P_Index
-                dc.w    S3TailsRecovery_WaitForBothSecondaryScrollAmountsBeforeNormalRoutine-Tails2P_Index
+                dc.w    S3TailsRecovery_ReleaseRiderOnHurt-Tails2P_Index
+                dc.w    S3TailsRecovery_ReleaseRiderOnDeath-Tails2P_Index
+                dc.w    S3TailsRecovery_TickRestartTimer-Tails2P_Index
+                dc.w    S3TailsRecovery_CheckP2ScrollSettled-Tails2P_Index
 ; ---------------------------------------------------------------------------
 
 S3TailsCompetition_InitializeCompactTailsAndLoadCharacterOneSpeeds:
