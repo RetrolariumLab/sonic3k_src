@@ -933,9 +933,15 @@
       "commits": ["75e9376767777bd0ea3ec49171684d280ea61eb5"]
     },
     {
-      "id": "current-shorten-07b-tails-motion",
+      "id": "change-3e765e529708",
       "kind": "source_or_tooling",
       "summary": "Shorten 399 Tails terrain and movement states while retaining the recovery and respawn contracts.",
+      "commits": ["3e765e529708778f09ba26efb67af3f9e0229a00"]
+    },
+    {
+      "id": "current-shorten-07c-tails-animation",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 153 Tails and tail animation labels and preserve their resource bindings.",
       "commits": ["release-commit"]
     }
   ],

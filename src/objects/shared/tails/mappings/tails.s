@@ -211,21 +211,21 @@ Map_Tails_:
                 dc.w    SKTailsMapping_FrameCE-Map_Tails_  ; 206
                 dc.w    SKTailsMapping_FrameCF-Map_Tails_  ; 207
                 dc.w    SKTailsMapping_FrameD0-Map_Tails_  ; 208
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 209
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 210
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 211
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 212
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 213
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 214
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 215
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 216
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 217
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 218
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 219
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 220
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 221
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 222
-                dc.w    SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-Map_Tails_  ; 223
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 209
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 210
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 211
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 212
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 213
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 214
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 215
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 216
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 217
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 218
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 219
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 220
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 221
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 222
+                dc.w    SKTailsMap_FramesD1toDF-Map_Tails_  ; 223
                 dc.w    SKTailsMapping_FrameE0-Map_Tails_  ; 224
                 dc.w    SKTailsMapping_FrameE1-Map_Tails_  ; 225
                 dc.w    SKTailsMapping_FrameE2-Map_Tails_  ; 226
@@ -997,7 +997,7 @@ SKTailsMapping_FrameCF: dc.w    2
 SKTailsMapping_FrameD0: dc.w    2
                 dc.b    $E6,   4,   0,   0, $FF, $F4
                 dc.b    $EE,  $B,   0,   2, $FF, $F4
-SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF:   dc.w    3
+SKTailsMap_FramesD1toDF:    dc.w    3
                 dc.b    $EC,   9,   0,   0, $FF, $F0
                 dc.b    $FC,  $C,   0,   6, $FF, $F0
                 dc.b    4,   1,   0,  $A,   0,   0

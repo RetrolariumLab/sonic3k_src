@@ -8,23 +8,23 @@ Animate_Tails_Tail2P:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   SKTailsTailDriver_ResolveCompactRelativeHeaderAndOrdinaryTimer
+                beq.s   SKTailsTail_CompDispatchHeader
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-SKTailsTailDriver_ResolveCompactRelativeHeaderAndOrdinaryTimer:
+SKTailsTail_CompDispatchHeader:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   SKTailsTailDriver_SelectCompactMovementTumbleOrOtherNegativeDriver
+                bmi.s   SKTailsTail_CompDispatchMovementFF
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   SKTailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite
+                bpl.s   SKTailsTail_CompFrameReturn
                 move.b  d0,anim_frame_timer(a0)
 ; End of function Animate_Tails2P
 
@@ -35,128 +35,129 @@ TailsSKStepCompetitionAnimationFrameBytecode:
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$F0,d0
-                bhs.s   SKTailsTailDriver_ResolveCompactFfFullStreamRestart
+                bhs.s   SKTailsTail_CompTestRestartFF
 
-SKTailsTailDriver_StoreCompactMappingFrameAndAdvanceByteCursor:
+SKTailsTail_CompStoreFrameAndAdvance:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKTailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite:
+SKTailsTail_CompFrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_ResolveCompactFfFullStreamRestart:
+SKTailsTail_CompTestRestartFF:
                 addq.b  #1,d0
-                bne.s   SKTailsTailDriver_ResolveCompactFeByteBacktrack
+                bne.s   SKTailsTail_CompTestBacktrackFE
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   SKTailsTailDriver_StoreCompactMappingFrameAndAdvanceByteCursor
+                bra.s   SKTailsTail_CompStoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_ResolveCompactFeByteBacktrack:
+SKTailsTail_CompTestBacktrackFE:
                 addq.b  #1,d0
-                bne.s   SKTailsTailDriver_DeferCompactAnimationChangeOrIgnoreOtherCommand
+                bne.s   SKTailsTail_CompTestChangeFD
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   SKTailsTailDriver_StoreCompactMappingFrameAndAdvanceByteCursor
+                bra.s   SKTailsTail_CompStoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_DeferCompactAnimationChangeOrIgnoreOtherCommand:
+SKTailsTail_CompTestChangeFD:
                 addq.b  #1,d0
-                bne.s   SKTailsTailDriver_ReturnAfterCompactDeferredOrIgnoredCommand
+                bne.s   SKTailsTail_CompCommandReturn
                 move.b  2(a1,d1.w),anim(a0)
 
-SKTailsTailDriver_ReturnAfterCompactDeferredOrIgnoredCommand:
+SKTailsTail_CompCommandReturn:
                 rts
 ; End of function TailsSKStepCompetitionAnimationFrameBytecode
 
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_SelectCompactMovementTumbleOrOtherNegativeDriver:
+SKTailsTail_CompDispatchMovementFF:
                 addq.b  #1,d0
-                bne.w   SKTailsTailDriver_GateCompactRollOrDirectionalTailByTimer
+                bne.w   SKTailsTail_CompTickRollOrTail
                 moveq   #0,d0
                 move.b  flip_angle(a0),d0
-                bne.w   SKTailsTailDriver_QuantizeCompactTumbleForFacingClear
+                bne.w   SKTailsTail_CompSelectTumbleFrame
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   SKTailsTailDriver_OrientCompactMovementAngleByFacing
-                beq.s   SKTailsTailDriver_OrientCompactMovementAngleByFacing
+                bmi.s   SKTailsTail_CompOrientWalkAngle
+                beq.s   SKTailsTail_CompOrientWalkAngle
                 subq.b  #1,d0
 
-SKTailsTailDriver_OrientCompactMovementAngleByFacing:
+SKTailsTail_CompOrientWalkAngle:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   SKTailsTailDriver_ChooseCompactMovementFlipPairFromAngleSign
+                bne.s   SKTailsTail_CompChooseWalkFlip
                 not.b   d0
 
-SKTailsTailDriver_ChooseCompactMovementFlipPairFromAngleSign:
+SKTailsTail_CompChooseWalkFlip:
                 addi.b  #$10,d0
-                bpl.s   SKTailsTailDriver_ApplyCompactMovementFlipsAndSelectPushOrSpeed
+                bpl.s   SKTailsTail_CompApplyFlipAndCheckPush
                 moveq   #3,d1
 
-SKTailsTailDriver_ApplyCompactMovementFlipsAndSelectPushOrSpeed:
+SKTailsTail_CompApplyFlipAndCheckPush:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   SKTailsTailDriver_GateCompactPushStepAndTakeNegativeSpeedMagnitude
+                bne.w   SKTailsTail_CompTickPushFrames
                 lsr.b   #5,d0
                 andi.b  #3,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   SKTailsTailDriver_DoubleCompactAnimationSpeedForSecondarySignBit
+                bpl.s   SKTailsTail_CompAdjustWalkSpeed
                 neg.w   d2
 
-SKTailsTailDriver_DoubleCompactAnimationSpeedForSecondarySignBit:
+; Double the animation speed magnitude when secondary status is negative
+SKTailsTail_CompAdjustWalkSpeed:
                 tst.b   status_secondary(a0)
-                bpl.w   SKTailsTailDriver_ChooseCompactWalkOrRunStreamAtSixHundred
+                bpl.w   SKTailsTail_CompSelectWalkOrRunAt600
                 add.w   d2,d2
 
-SKTailsTailDriver_ChooseCompactWalkOrRunStreamAtSixHundred:
+SKTailsTail_CompSelectWalkOrRunAt600:
                 move.b  d0,d3
                 lea     (AniTails2P01).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   SKTailsTailDriver_ComputeCompactAngularStrideAndReadCurrentFrame
+                bhs.s   SKTailsTail_CompReadAngularMoveFrame
                 lea     (AniTails2P00).l,a1
                 add.b   d0,d0
 
-SKTailsTailDriver_ComputeCompactAngularStrideAndReadCurrentFrame:
+SKTailsTail_CompReadAngularMoveFrame:
                 add.b   d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   SKTailsTailDriver_RefreshCompactAngularFrameBeforeTimerAdvance
+                bne.s   SKTailsTail_CompStoreMoveFrameAndTick
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-SKTailsTailDriver_RefreshCompactAngularFrameBeforeTimerAdvance:
+SKTailsTail_CompStoreMoveFrameAndTick:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   SKTailsTailDriver_ReturnAfterCompactMovementFrameRefresh
+                bpl.s   SKTailsTail_CompMovementReturn
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   SKTailsTailDriver_ReloadCompactMovementDelayAndAdvanceCursor
+                bpl.s   SKTailsTail_CompReloadMoveDelay
                 moveq   #0,d2
 
-SKTailsTailDriver_ReloadCompactMovementDelayAndAdvanceCursor:
+SKTailsTail_CompReloadMoveDelay:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKTailsTailDriver_ReturnAfterCompactMovementFrameRefresh:
+SKTailsTail_CompMovementReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_QuantizeCompactTumbleForFacingClear:
+SKTailsTail_CompSelectTumbleFrame:
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   SKTailsTailDriver_ChooseCompactFacingSetTumbleReflectionByFlipTypeSign
+                bne.s   SKTailsTail_CompChooseLeftTumbleFlip
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #$16,d0
                 divu.w  #$2C,d0
@@ -166,21 +167,21 @@ SKTailsTailDriver_QuantizeCompactTumbleForFacingClear:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_ChooseCompactFacingSetTumbleReflectionByFlipTypeSign:
+SKTailsTail_CompChooseLeftTumbleFlip:
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   SKTailsTailDriver_MirrorCompactFacingSetTumbleWithByteNegation
+                bpl.s   SKTailsTail_CompMirrorLeftTumble
                 ori.b   #1,render_flags(a0)
                 addi.b  #$16,d0
-                bra.s   SKTailsTailDriver_StoreCompactFacingSetTumbleFrameAndZeroTimer
+                bra.s   SKTailsTail_CompStoreLeftTumbleFrame
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_MirrorCompactFacingSetTumbleWithByteNegation:
+SKTailsTail_CompMirrorLeftTumble:
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$9A,d0
 
-SKTailsTailDriver_StoreCompactFacingSetTumbleFrameAndZeroTimer:
+SKTailsTail_CompStoreLeftTumbleFrame:
                 divu.w  #$2C,d0
                 addi.b  #$15,d0
                 move.b  d0,mapping_frame(a0)
@@ -188,28 +189,28 @@ SKTailsTailDriver_StoreCompactFacingSetTumbleFrameAndZeroTimer:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_GateCompactRollOrDirectionalTailByTimer:
+SKTailsTail_CompTickRollOrTail:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   SKTailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite
+                bpl.w   SKTailsTail_CompFrameReturn
                 addq.b  #1,d0
-                bne.s   SKTailsTailDriver_DeriveCompactDirectionalTailAngleFromParentVelocity
+                bne.s   SKTailsTail_CompGetTailAngleFromSpeed
                 move.w  ground_vel(a0),d2
-                bpl.s   SKTailsTailDriver_ChooseCompactRollStreamAtUnsignedSixHundred
+                bpl.s   SKTailsTail_CompSelectRollStreamAt600
                 neg.w   d2
 
-SKTailsTailDriver_ChooseCompactRollStreamAtUnsignedSixHundred:
+SKTailsTail_CompSelectRollStreamAt600:
                 lea     (AniTails2P03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   SKTailsTailDriver_ComputeCompactRollDurationFromWrappedSpeed
+                bhs.s   SKTailsTail_CompCalcRollDelay
                 lea     (AniTails2P02).l,a1
 
-SKTailsTailDriver_ComputeCompactRollDurationFromWrappedSpeed:
+SKTailsTail_CompCalcRollDelay:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   SKTailsTailDriver_ReloadCompactRollDelayAndApplyFacingBeforeFrameStep
+                bpl.s   SKTailsTail_CompReloadRollAndRead
                 moveq   #0,d2
 
-SKTailsTailDriver_ReloadCompactRollDelayAndApplyFacingBeforeFrameStep:
+SKTailsTail_CompReloadRollAndRead:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
@@ -219,19 +220,19 @@ SKTailsTailDriver_ReloadCompactRollDelayAndApplyFacingBeforeFrameStep:
                 bra.w   TailsSKStepCompetitionAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_GateCompactPushStepAndTakeNegativeSpeedMagnitude:
+SKTailsTail_CompTickPushFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   SKTailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite
+                bpl.w   SKTailsTail_CompFrameReturn
                 move.w  ground_vel(a0),d2
-                bmi.s   SKTailsTailDriver_ClampCompactPushDurationAfterEightHundredAddition
+                bmi.s   SKTailsTail_CompClampPushDelay
                 neg.w   d2
 
-SKTailsTailDriver_ClampCompactPushDurationAfterEightHundredAddition:
+SKTailsTail_CompClampPushDelay:
                 addi.w  #$800,d2
-                bpl.s   SKTailsTailDriver_ReloadCompactPushDelayAndStepItsPayloadDirectly
+                bpl.s   SKTailsTail_CompReloadPushAndRead
                 moveq   #0,d2
 
-SKTailsTailDriver_ReloadCompactPushDelayAndStepItsPayloadDirectly:
+SKTailsTail_CompReloadPushAndRead:
                 lsr.w   #6,d2
                 move.b  d2,anim_frame_timer(a0)
                 lea     (AniTails2P04).l,a1
@@ -242,27 +243,28 @@ SKTailsTailDriver_ReloadCompactPushDelayAndStepItsPayloadDirectly:
                 bra.w   TailsSKStepCompetitionAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_DeriveCompactDirectionalTailAngleFromParentVelocity:
+SKTailsTail_CompGetTailAngleFromSpeed:
                 move.w  x_vel(a2),d1
                 move.w  y_vel(a2),d2
                 jsr     (GetArcTan).l
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   SKTailsTailDriver_RotateCompactDirectionalTailAngleForFacingSet
+                bne.s   SKTailsTail_CompRotateTailForFacing
                 not.b   d0
-                bra.s   SKTailsTailDriver_ChooseCompactDirectionalTailQuadrantFlipPair
+                bra.s   SKTailsTail_CompChooseTailFlip
 ; ---------------------------------------------------------------------------
 
-SKTailsTailDriver_RotateCompactDirectionalTailAngleForFacingSet:
+SKTailsTail_CompRotateTailForFacing:
                 addi.b  #$80,d0
 
-SKTailsTailDriver_ChooseCompactDirectionalTailQuadrantFlipPair:
+SKTailsTail_CompChooseTailFlip:
                 addi.b  #$10,d0
-                bpl.s   SKTailsTailDriver_StepCompactDirectionalTailAndAddThreeFrameAngularStride
+                bpl.s   SKTailsTail_CompStepDirectionalTail
                 moveq   #3,d1
 
-SKTailsTailDriver_StepCompactDirectionalTailAndAddThreeFrameAngularStride:
+; Advance the mapping by three frames per angle sector
+SKTailsTail_CompStepDirectionalTail:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
@@ -290,13 +292,13 @@ Tails2P_Tail_Load_PLC:
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   SKTailsTailDriver_ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers
+                bmi.s   SKTailsTail_CompDPLCLoadReturn
                 move.l  #ArtUnc_Tails2P_Tail,d6
                 move.w  #tiles_to_bytes(ArtTile_Player_2_Tail),d4
                 cmpa.w  #Tails_tails,a0
-                beq.s   SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers
+                beq.s   SKTailsTail_CompQueueUncachedDPLC
                 move.w  #tiles_to_bytes(ArtTile_Player_1+$10),d4
-                bra.s   SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers
+                bra.s   SKTailsTail_CompQueueUncachedDPLC
 ; End of function Tails2P_Tail_Load_PLC
 
 ; =============== S U B R O U T I N E =======================================
@@ -309,14 +311,14 @@ Tails2P_Load_PLC:
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   SKTailsTailDriver_ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers
+                bmi.s   SKTailsTail_CompDPLCLoadReturn
                 move.l  #ArtUnc_Tails2P,d6
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
                 cmpa.w  #Player_1,a0
-                beq.s   SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers
+                beq.s   SKTailsTail_CompQueueUncachedDPLC
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
 
-SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers:
+SKTailsTail_CompQueueUncachedDPLC:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -330,9 +332,9 @@ SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers
+                dbf     d5,SKTailsTail_CompQueueUncachedDPLC
 
-SKTailsTailDriver_ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers:
+SKTailsTail_CompDPLCLoadReturn:
                 rts
 ; End of function Tails2P_Load_PLC
 
@@ -358,39 +360,40 @@ Obj_Tails_Tail_Main:
                 move.w  priority(a2),priority(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   SKTailsTailDriver_ChooseNormalTailParentAnimationWithProfilePushOverride
+                bpl.s   SKTailsTail_ChooseNormalParentAnim
                 ori.w   #high_priority,art_tile(a0)
 
-SKTailsTailDriver_ChooseNormalTailParentAnimationWithProfilePushOverride:
+; The push override also requires the parent mapping frame to be in $A9 through $AC
+SKTailsTail_ChooseNormalParentAnim:
                 moveq   #0,d0
                 move.b  anim(a2),d0
                 btst    #Status_Push,status(a2)
-                beq.s   SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank
+                beq.s   SKTailsTail_RemapChangedNormalAnim
                 tst.b   (WindTunnel_flag_P2).w
-                bne.s   SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank
+                bne.s   SKTailsTail_RemapChangedNormalAnim
 ; This is checking if parent (Tails) is in its pushing animation
                 cmpi.b  #$A9,mapping_frame(a2)
-                blo.s   SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank
+                blo.s   SKTailsTail_RemapChangedNormalAnim
                 cmpi.b  #$AC,mapping_frame(a2)
-                bhi.s   SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank
+                bhi.s   SKTailsTail_RemapChangedNormalAnim
                 moveq   #4,d0
 
-SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank:
+SKTailsTail_RemapChangedNormalAnim:
                 cmp.b   objoff_34(a0),d0                ; Has the input parent anim changed since last check?
-                beq.s   SKTailsTailDriver_AnimateNormalTailThenLoadPatternsAndQueueSprite  ; If not, branch and skip setting a matching Tails' Tails anim
+                beq.s   SKTailsTail_AnimateAndDrawNormalTail  ; If not, branch and skip setting a matching Tails' Tails anim
                 move.b  d0,objoff_34(a0)                ; Store d0 for the above comparison
                 move.b  Obj_Tails_Tail_AniSelection(pc,d0.w),anim(a0)  ; Load anim relative to parent's
 
-SKTailsTailDriver_AnimateNormalTailThenLoadPatternsAndQueueSprite:
+SKTailsTail_AnimateAndDrawNormalTail:
                 lea     (AniTails_Tail).l,a1
                 bsr.w   Animate_Tails_Part2
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsTailDriver_LoadNormalTailPatternsAfterOptionalGravityMirror
+                beq.s   SKTailsTail_LoadAndDrawNormalTail
                 cmpi.b  #3,anim(a0)                     ; Is this the Directional animation?
-                beq.s   SKTailsTailDriver_LoadNormalTailPatternsAfterOptionalGravityMirror  ; If so, skip the mirroring
+                beq.s   SKTailsTail_LoadAndDrawNormalTail  ; If so, skip the mirroring
                 eori.b  #2,render_flags(a0)             ; Reverse the vertical mirror render flag bit (on if off beforehand and vice versa)
 
-SKTailsTailDriver_LoadNormalTailPatternsAfterOptionalGravityMirror:
+SKTailsTail_LoadAndDrawNormalTail:
                 bsr.w   Tails_Tail_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -447,17 +450,17 @@ Obj_Tails2P_Tail:
                 move.l  #Map_Tails2P_Tail,mappings(a0)
                 move.w  #make_art_tile(ArtTile_Player_2_Tail,0,0),art_tile(a0)
                 cmpa.w  #Tails_tails,a0
-                beq.s   SKTailsTailDriver_InitializeCompactTailGeometryAndInstallFollowCallback
+                beq.s   SKTailsTail_InitCompTail
                 move.w  #make_art_tile(ArtTile_Player_1+$10,0,0),art_tile(a0)
 
-SKTailsTailDriver_InitializeCompactTailGeometryAndInstallFollowCallback:
+SKTailsTail_InitCompTail:
                 move.w  #$100,priority(a0)
                 move.b  #$18,width_pixels(a0)
                 move.b  #$18,height_pixels(a0)
                 move.b  #4,render_flags(a0)
-                move.l  #SKTailsTailDriver_FollowCompactTailParentCoordinatesStatusAndArtPriority,(a0)
+                move.l  #SKTailsTail_FollowCompParent,(a0)
 
-SKTailsTailDriver_FollowCompactTailParentCoordinatesStatusAndArtPriority:
+SKTailsTail_FollowCompParent:
                 movea.w $30(a0),a2
                 move.b  angle(a2),angle(a0)
                 move.b  status(a2),status(a0)
@@ -466,31 +469,31 @@ SKTailsTailDriver_FollowCompactTailParentCoordinatesStatusAndArtPriority:
                 move.w  priority(a2),priority(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   SKTailsTailDriver_OverrideCompactTailSelectorForPushExceptIdleBankFive
+                bpl.s   SKTailsTail_CheckCompPushOverride
                 ori.w   #high_priority,art_tile(a0)
 
-SKTailsTailDriver_OverrideCompactTailSelectorForPushExceptIdleBankFive:
+SKTailsTail_CheckCompPushOverride:
                 moveq   #0,d0
                 move.b  anim(a2),d0
                 btst    #Status_Push,status(a2)
-                beq.s   SKTailsTailDriver_RemapChangedCompactParentSelectorThroughByteTable
+                beq.s   SKTailsTail_RemapChangedCompAnim
                 cmpi.b  #5,d0
-                beq.s   SKTailsTailDriver_RemapChangedCompactParentSelectorThroughByteTable
+                beq.s   SKTailsTail_RemapChangedCompAnim
                 moveq   #4,d0
 
-SKTailsTailDriver_RemapChangedCompactParentSelectorThroughByteTable:
+SKTailsTail_RemapChangedCompAnim:
                 cmp.b   $34(a0),d0
-                beq.s   SKTailsTailDriver_AnimateCompactTailQueueUncachedPatternsAndDraw
+                beq.s   SKTailsTail_AnimateAndDrawCompTail
                 move.b  d0,$34(a0)
-                move.b  SKTailsTailDriver_CompetitionParentAnimationToTailBankBytes(pc,d0.w),anim(a0)
+                move.b  SKTailsTail_CompParentToTailAnim(pc,d0.w),anim(a0)
 
-SKTailsTailDriver_AnimateCompactTailQueueUncachedPatternsAndDraw:
+SKTailsTail_AnimateAndDrawCompTail:
                 lea     (AniTails2P_Tail).l,a1
                 bsr.w   Animate_Tails_Tail2P
                 bsr.w   Tails2P_Tail_Load_PLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-SKTailsTailDriver_CompetitionParentAnimationToTailBankBytes:
+SKTailsTail_CompParentToTailAnim:
                 dc.b    0,0
                 dc.b    3
                 dc.b    3

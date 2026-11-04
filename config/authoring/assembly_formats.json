@@ -61303,7 +61303,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 2124
       },
-      "declarations_sha256": "449062ee69b2b9b02b3e76a9103314105dc3ab0c633912acd65a753ab50502b4",
+      "declarations_sha256": "4e79f3e8d73b23d8c3196e6dd7094524117425ca53c18bb61b8f5dca04879f77",
       "labels": {
         "PLC_Tails_": 0,
         "SKTailsDplc_Frame00_Empty": 502,
@@ -61513,7 +61513,7 @@
         "SKTailsDplc_FrameCE": 1954,
         "SKTailsDplc_FrameCF": 1962,
         "SKTailsDplc_FrameD0": 1968,
-        "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF": 1974,
+        "SKTailsDplc_FramesD1toDF": 1974,
         "SKTailsDplc_FrameE0": 1982,
         "SKTailsDplc_FrameE1": 1988,
         "SKTailsDplc_FrameE2": 1996,
@@ -63005,105 +63005,105 @@
           "offset": 418,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 420,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 422,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 424,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 426,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 428,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 430,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 432,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 434,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsDplc_FramesD1toDF",
           "base": "PLC_Tails_"
         },
         {
@@ -68609,12 +68609,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 302
       },
-      "declarations_sha256": "a6c41300b65b80ce28095a8b2ea21fdf0e69683e2712961446a902561aeafcf1",
+      "declarations_sha256": "b94aa77e3d5efcaffa3c454311f7306faa84ca83c86132498d7561fda2b57868",
       "labels": {
         "Map_SStageTails_": 0,
         "PLC_SStageTails": 24,
         "PLC_SStageTails_": 24,
-        "S3SpecialStageTails_EmptyMappingAndDplcFrame00": 48,
+        "S3SStageTails_EmptyMapDPLC00": 48,
         "S3SpecialStageTails_MappingFrame09": 50,
         "S3SpecialStageTails_MappingFrame0A": 58,
         "S3SpecialStageTails_MappingFrame0B": 66,
@@ -68644,7 +68644,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "S3SpecialStageTails_EmptyMappingAndDplcFrame00",
+          "target": "S3SStageTails_EmptyMapDPLC00",
           "base": "Map_SStageTails_"
         },
         {
@@ -68728,7 +68728,7 @@
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "S3SpecialStageTails_EmptyMappingAndDplcFrame00",
+          "target": "S3SStageTails_EmptyMapDPLC00",
           "base": "PLC_SStageTails_"
         },
         {
@@ -68934,12 +68934,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 230
       },
-      "declarations_sha256": "9d1d226a5df319f75a8ec06b22e6fe24e42b9c32bcd079a1e5e80b24cc68f356",
+      "declarations_sha256": "3d0f84e37f16ef1af5d2a4d38aeca8ddabc3f7cbf812d875e3f9279da38efa73",
       "labels": {
         "Map_SStageTailstails_": 0,
         "PLC_SStageTailstails": 30,
         "PLC_SStageTailstails_": 30,
-        "S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00": 60,
+        "S3SStageTail_EmptyMapDPLC00": 60,
         "S3SpecialStageTailsTail_MappingFrame01": 62,
         "S3SpecialStageTailsTail_MappingFrame02": 70,
         "S3SpecialStageTailsTail_MappingFrame03": 78,
@@ -68975,7 +68975,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00",
+          "target": "S3SStageTail_EmptyMapDPLC00",
           "base": "Map_SStageTailstails_"
         },
         {
@@ -69080,7 +69080,7 @@
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00",
+          "target": "S3SStageTail_EmptyMapDPLC00",
           "base": "PLC_SStageTailstails_"
         },
         {
@@ -69393,7 +69393,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 4562
       },
-      "declarations_sha256": "e1eb232dc54da67693829dfcf1925c1236e3a2712fe035d4917a710d2008541a",
+      "declarations_sha256": "0b64c8b0a436ecce1e163ff5fd7f75cf23d3d11d4af49707f763ce748dd41fc6",
       "labels": {
         "Map_Tails_": 0,
         "SKTailsMapping_Frame00_Empty": 502,
@@ -69605,7 +69605,7 @@
         "SKTailsMapping_FrameCE": 4082,
         "SKTailsMapping_FrameCF": 4102,
         "SKTailsMapping_FrameD0": 4116,
-        "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF": 4130,
+        "SKTailsMap_FramesD1toDF": 4130,
         "SKTailsMapping_FrameE0": 4150,
         "SKTailsMapping_FrameE1": 4164,
         "SKTailsMapping_FrameE2": 4184,
@@ -71102,105 +71102,105 @@
           "offset": 418,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 420,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 422,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 424,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 426,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 428,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 430,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 432,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 434,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 436,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 438,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 440,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 442,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 444,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {
           "offset": 446,
           "size": 2,
           "kind": "relative-word",
-          "target": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+          "target": "SKTailsMap_FramesD1toDF",
           "base": "Map_Tails_"
         },
         {

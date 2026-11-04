@@ -1,7 +1,7 @@
 ; Data owner: objects/shared/tails
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SStageTails_:
-                dc.w    S3SpecialStageTails_EmptyMappingAndDplcFrame00-Map_SStageTails_
+                dc.w    S3SStageTails_EmptyMapDPLC00-Map_SStageTails_
                 dc.w    S3SpecialStageTails_MappingFrame01-Map_SStageTails_
                 dc.w    S3SpecialStageTails_MappingFrame02-Map_SStageTails_
                 dc.w    S3SpecialStageTails_MappingFrame03-Map_SStageTails_
@@ -15,7 +15,7 @@ Map_SStageTails_:
                 dc.w    S3SpecialStageTails_MappingFrame0B-Map_SStageTails_
 PLC_SStageTails:
 PLC_SStageTails_:
-                dc.w    S3SpecialStageTails_EmptyMappingAndDplcFrame00-PLC_SStageTails_
+                dc.w    S3SStageTails_EmptyMapDPLC00-PLC_SStageTails_
                 dc.w    S3SpecialStageTails_DplcFrame01-PLC_SStageTails_
                 dc.w    S3SpecialStageTails_DplcFrame02-PLC_SStageTails_
                 dc.w    S3SpecialStageTails_DplcFrame03-PLC_SStageTails_
@@ -27,8 +27,8 @@ PLC_SStageTails_:
                 dc.w    S3SpecialStageTails_DplcFrame09-PLC_SStageTails_
                 dc.w    S3SpecialStageTails_DplcFrame0A-PLC_SStageTails_
                 dc.w    S3SpecialStageTails_DplcFrame0B-PLC_SStageTails_
-S3SpecialStageTails_EmptyMappingAndDplcFrame00: dc.w    0
-S3SpecialStageTails_MappingFrame09:             dc.w    1
+S3SStageTails_EmptyMapDPLC00:       dc.w    0
+S3SpecialStageTails_MappingFrame09: dc.w    1
                 dc.b    $DD,  $B,   0,   0, $FF, $F4
 S3SpecialStageTails_MappingFrame0A: dc.w    1
                 dc.b    $DD,  $B,   0,   0, $FF, $F4

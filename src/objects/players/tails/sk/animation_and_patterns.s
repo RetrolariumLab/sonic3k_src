@@ -11,23 +11,23 @@ Animate_Tails_Part2:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   SKTailsAnimation_ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames
+                beq.s   SKTailsAnim_DispatchHeader
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-SKTailsAnimation_ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames:
+SKTailsAnim_DispatchHeader:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   SKTailsAnimation_SelectWalkTumbleOrOtherNegativeHeaderDriver
+                bmi.s   SKTailsAnim_DispatchMovementHeaderFF
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame
+                bpl.s   SKTailsAnim_FrameReturn
                 move.b  d0,anim_frame_timer(a0)
 ; End of function Animate_Tails
 
@@ -38,48 +38,48 @@ TailsSKStepNormalAnimationFrameBytecode:
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$FC,d0
-                bhs.s   SKTailsAnimation_ResolveFullStreamLoopCommandOrTryBacktrack
+                bhs.s   SKTailsAnim_TestRestartFF
 
-SKTailsAnimation_StoreInterpretedMappingFrameAndAdvanceByteCursor:
+SKTailsAnim_StoreFrameAndAdvance:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame:
+SKTailsAnim_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_ResolveFullStreamLoopCommandOrTryBacktrack:
+SKTailsAnim_TestRestartFF:
                 addq.b  #1,d0
-                bne.s   SKTailsAnimation_ResolveByteBacktrackCommandOrTryAnimationChange
+                bne.s   SKTailsAnim_TestBacktrackFE
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   SKTailsAnimation_StoreInterpretedMappingFrameAndAdvanceByteCursor
+                bra.s   SKTailsAnim_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_ResolveByteBacktrackCommandOrTryAnimationChange:
+SKTailsAnim_TestBacktrackFE:
                 addq.b  #1,d0
-                bne.s   SKTailsAnimation_DeferRequestedAnimationChangeForFdCommand
+                bne.s   SKTailsAnim_TestChangeFD
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   SKTailsAnimation_StoreInterpretedMappingFrameAndAdvanceByteCursor
+                bra.s   SKTailsAnim_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_DeferRequestedAnimationChangeForFdCommand:
+SKTailsAnim_TestChangeFD:
                 addq.b  #1,d0
-                bne.s   SKTailsAnimation_ReturnAfterAnimationCommandChangeOrIgnoredOpcode
+                bne.s   SKTailsAnim_CommandReturn
                 move.b  2(a1,d1.w),anim(a0)
 
-SKTailsAnimation_ReturnAfterAnimationCommandChangeOrIgnoredOpcode:
+SKTailsAnim_CommandReturn:
                 rts
 ; End of function TailsSKStepNormalAnimationFrameBytecode
 
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_SelectWalkTumbleOrOtherNegativeHeaderDriver:
+SKTailsAnim_DispatchMovementHeaderFF:
                 addq.b  #1,d0
-                bne.w   SKTailsAnimation_SelectRollHeaderOrDirectionalTailFallback
+                bne.w   SKTailsAnim_CheckRollHeaderFE
                 moveq   #0,d0
                 tst.b   flip_type(a0)
                 bmi.w   Anim_Tumble
@@ -87,167 +87,170 @@ SKTailsAnimation_SelectWalkTumbleOrOtherNegativeHeaderDriver:
                 bne.w   Anim_Tumble
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   SKTailsAnimation_ReflectMovementAngleForCurrentFacing
-                beq.s   SKTailsAnimation_ReflectMovementAngleForCurrentFacing
+                bmi.s   SKTailsAnim_OrientWalkAngle
+                beq.s   SKTailsAnim_OrientWalkAngle
                 subq.b  #1,d0
 
-SKTailsAnimation_ReflectMovementAngleForCurrentFacing:
+SKTailsAnim_OrientWalkAngle:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   SKTailsAnimation_ChooseMovementRenderFlipPairFromWrappedAngle
+                bne.s   SKTailsAnim_ChooseWalkFlip
                 not.b   d0
 
-SKTailsAnimation_ChooseMovementRenderFlipPairFromWrappedAngle:
+SKTailsAnim_ChooseWalkFlip:
                 addi.b  #$10,d0
-                bpl.s   SKTailsAnimation_ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup
+                bpl.s   SKTailsAnim_ApplyWalkFlipAndCheckPush
                 moveq   #3,d1
 
-SKTailsAnimation_ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup:
+SKTailsAnim_ApplyWalkFlipAndCheckPush:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   SKTailsAnimation_GatePushAnimationStepBySignedByteTimer
+                bne.w   SKTailsAnim_TickPushFrames
                 lsr.b   #4,d0
                 andi.b  #6,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   SKTailsAnimation_DoubleAnimationSpeedForSecondaryStatusSignBit
+                bpl.s   SKTailsAnim_AdjustWalkSpeed
                 neg.w   d2
 
-SKTailsAnimation_DoubleAnimationSpeedForSecondaryStatusSignBit:
+; Double the animation speed magnitude when secondary status is negative
+SKTailsAnim_AdjustWalkSpeed:
                 tst.b   status_secondary(a0)
-                bpl.w   SKTailsAnimation_ChooseWalkRunOrFastRunStreamAndAngularFrameStride
+                bpl.w   SKTailsAnim_SelectWalkRunOrFastRun
                 add.w   d2,d2
 
-SKTailsAnimation_ChooseWalkRunOrFastRunStreamAndAngularFrameStride:
+; Switch at $600 and $700. Each faster stream reduces the angular frame stride
+SKTailsAnim_SelectWalkRunOrFastRun:
                 move.b  d0,d3
                 add.b   d3,d3
                 add.b   d3,d3
                 lea     (AniTails00).l,a1
                 cmpi.w  #$600,d2
-                blo.s   SKTailsAnimation_ReadMovementFrameAndRestartOnFfTerminator
+                blo.s   SKTailsAnim_ReadOrLoopMovementFrame
                 lea     (AniTails01).l,a1
                 move.b  d0,d3
                 add.b   d3,d3
                 cmpi.w  #$700,d2
-                blo.s   SKTailsAnimation_ReadMovementFrameAndRestartOnFfTerminator
+                blo.s   SKTailsAnim_ReadOrLoopMovementFrame
                 lea     (AniTails1F).l,a1
                 move.b  d0,d3
 
-SKTailsAnimation_ReadMovementFrameAndRestartOnFfTerminator:
+SKTailsAnim_ReadOrLoopMovementFrame:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   SKTailsAnimation_WriteAngularMovementFrameBeforeTimerGate
+                bne.s   SKTailsAnim_StoreMovementFrameAndTick
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-SKTailsAnimation_WriteAngularMovementFrameBeforeTimerGate:
+SKTailsAnim_StoreMovementFrameAndTick:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   SKTailsAnimation_ReturnAfterMovementFrameRefreshOrCursorStep
+                bpl.s   SKTailsAnim_MovementReturn
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   SKTailsAnimation_ReloadMovementDelayAndAdvanceFrameCursor
+                bpl.s   SKTailsAnim_ReloadMoveDelayAndAdvance
                 moveq   #0,d2
 
-SKTailsAnimation_ReloadMovementDelayAndAdvanceFrameCursor:
+SKTailsAnim_ReloadMoveDelayAndAdvance:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-SKTailsAnimation_ReturnAfterMovementFrameRefreshOrCursorStep:
+SKTailsAnim_MovementReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_SelectRollHeaderOrDirectionalTailFallback:
+SKTailsAnim_CheckRollHeaderFE:
                 addq.b  #1,d0
-                bne.s   SKTailsAnimation_DeriveDirectionalTailFrameAngleFromParentVelocity
+                bne.s   SKTailsAnim_GetTailAngleFromParentSpeed
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame
+                bpl.w   SKTailsAnim_FrameReturn
                 move.w  ground_vel(a0),d2
-                bpl.s   SKTailsAnimation_ChooseRollSpeedStreamAtSixHundred
+                bpl.s   SKTailsAnim_SelectRollSequenceAt600
                 neg.w   d2
 
-SKTailsAnimation_ChooseRollSpeedStreamAtSixHundred:
+SKTailsAnim_SelectRollSequenceAt600:
                 lea     (AniTails03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   SKTailsAnimation_ComputeWrappedRollFrameDuration
+                bhs.s   SKTailsAnim_CalcRollDelay
                 lea     (AniTails02).l,a1
 
-SKTailsAnimation_ComputeWrappedRollFrameDuration:
+SKTailsAnim_CalcRollDelay:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   SKTailsAnimation_ReloadRollTimerAndStepNormalBytecode
+                bpl.s   SKTailsAnim_ReloadRollDelayAndReadFrame
                 moveq   #0,d2
 
-SKTailsAnimation_ReloadRollTimerAndStepNormalBytecode:
+SKTailsAnim_ReloadRollDelayAndReadFrame:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 bra.w   TailsSKStepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_GatePushAnimationStepBySignedByteTimer:
+SKTailsAnim_TickPushFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame
+                bpl.w   SKTailsAnim_FrameReturn
                 move.w  ground_vel(a0),d2
-                bmi.s   SKTailsAnimation_ClampWrappedPushDelayAfterAddingEightHundred
+                bmi.s   SKTailsAnim_ClampPushDelay
                 neg.w   d2
 
-SKTailsAnimation_ClampWrappedPushDelayAfterAddingEightHundred:
+SKTailsAnim_ClampPushDelay:
                 addi.w  #$800,d2
-                bpl.s   SKTailsAnimation_ReloadPushDelayAndInterpretPushSequence
+                bpl.s   SKTailsAnim_ReloadPushDelayAndReadFrame
                 moveq   #0,d2
 
-SKTailsAnimation_ReloadPushDelayAndInterpretPushSequence:
+SKTailsAnim_ReloadPushDelayAndReadFrame:
                 lsr.w   #6,d2
                 move.b  d2,anim_frame_timer(a0)
                 lea     (AniTails04).l,a1
                 bra.w   TailsSKStepNormalAnimationFrameBytecode
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_DeriveDirectionalTailFrameAngleFromParentVelocity:
+SKTailsAnim_GetTailAngleFromParentSpeed:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame
+                bpl.w   SKTailsAnim_FrameReturn
                 move.w  x_vel(a2),d1
                 move.w  y_vel(a2),d2
                 jsr     (GetArcTan).l
                 cmpi.b  #$15,(Current_zone).w
-                bne.s   SKTailsAnimation_OrientDirectionalTailAfterOptionalSlotsRotation
+                bne.s   SKTailsAnim_OrientDirectionalTail
                 add.b   (Stat_table).w,d0
 
-SKTailsAnimation_OrientDirectionalTailAfterOptionalSlotsRotation:
+; In the slots stage, the angle already includes the rotation byte from Stat_table
+SKTailsAnim_OrientDirectionalTail:
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   SKTailsAnimation_RotateDirectionalTailAngleForFacingSet
+                bne.s   SKTailsAnim_RotateTailAngleForFacing
                 not.b   d0
-                bra.s   SKTailsAnimation_ChooseDirectionalTailRenderFlipQuadrant
+                bra.s   SKTailsAnim_ChooseTailFlip
 ; ---------------------------------------------------------------------------
 
-SKTailsAnimation_RotateDirectionalTailAngleForFacingSet:
+SKTailsAnim_RotateTailAngleForFacing:
                 addi.b  #$80,d0
 
-SKTailsAnimation_ChooseDirectionalTailRenderFlipQuadrant:
+SKTailsAnim_ChooseTailFlip:
                 addi.b  #$10,d0
-                bpl.s   SKTailsAnimation_CommitDirectionalTailFlipsAndPrepareAngularFrameGroup
+                bpl.s   SKTailsAnim_ApplyDirectionalTailFlips
                 moveq   #3,d1
 
-SKTailsAnimation_CommitDirectionalTailFlipsAndPrepareAngularFrameGroup:
+SKTailsAnim_ApplyDirectionalTailFlips:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKTailsAnimation_StepDirectionalTailFrameAfterGravityFlip
+                beq.s   SKTailsAnim_ReadDirectionalTailFrame
                 eori.b  #2,render_flags(a0)
 
-SKTailsAnimation_StepDirectionalTailFrameAfterGravityFlip:
+SKTailsAnim_ReadDirectionalTailFrame:
                 lsr.b   #3,d0
                 andi.b  #$C,d0
                 move.b  d0,d3
@@ -265,17 +268,17 @@ Tails_Tail_Load_PLC:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   (Player_prev_frame_P2_tail).w,d0
-                beq.w   SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList
+                beq.w   SKTailsAnim_DPLCLoadReturn
                 move.b  d0,(Player_prev_frame_P2_tail).w
                 lea     (PLC_Tails_Tail).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList
+                bmi.s   SKTailsAnim_DPLCLoadReturn
                 move.w  #tiles_to_bytes(ArtTile_Player_2_Tail),d4
                 move.l  #ArtUnc_Tails_Tail,d6
-                bra.s   SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram
+                bra.s   SKTailsAnim_QueueDPLCEntry
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -285,21 +288,21 @@ Tails_Load_PLC:
 
 Tails_Load_PLC2:
                 cmp.b   (Player_prev_frame_P2).w,d0
-                beq.s   SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList
+                beq.s   SKTailsAnim_DPLCLoadReturn
                 move.b  d0,(Player_prev_frame_P2).w
                 lea     (PLC_Tails).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList
+                bmi.s   SKTailsAnim_DPLCLoadReturn
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
                 move.l  #ArtUnc_Tails,d6
                 cmpi.w  #2*$D1,d0
-                blo.s   SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram
+                blo.s   SKTailsAnim_QueueDPLCEntry
                 move.l  #ArtUnc_Tails_Extra,d6
 
-SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram:
+SKTailsAnim_QueueDPLCEntry:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -313,9 +316,9 @@ SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram
+                dbf     d5,SKTailsAnim_QueueDPLCEntry
 
-SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList:
+SKTailsAnim_DPLCLoadReturn:
                 rts
 ; End of function Tails_Load_PLC
 

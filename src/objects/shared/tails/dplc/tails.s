@@ -211,21 +211,21 @@ PLC_Tails_:
                 dc.w    SKTailsDplc_FrameCE-PLC_Tails_  ; 206
                 dc.w    SKTailsDplc_FrameCF-PLC_Tails_  ; 207
                 dc.w    SKTailsDplc_FrameD0-PLC_Tails_  ; 208
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 209
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 210
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 211
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 212
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 213
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 214
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 215
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 216
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 217
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 218
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 219
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 220
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 221
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 222
-                dc.w    SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF-PLC_Tails_  ; 223
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 209
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 210
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 211
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 212
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 213
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 214
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 215
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 216
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 217
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 218
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 219
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 220
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 221
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 222
+                dc.w    SKTailsDplc_FramesD1toDF-PLC_Tails_  ; 223
                 dc.w    SKTailsDplc_FrameE0-PLC_Tails_  ; 224
                 dc.w    SKTailsDplc_FrameE1-PLC_Tails_  ; 225
                 dc.w    SKTailsDplc_FrameE2-PLC_Tails_  ; 226
@@ -989,7 +989,7 @@ SKTailsDplc_FrameCF:    dc.w    2
 SKTailsDplc_FrameD0:    dc.w    2
                 dc.w    $1B1C
                 dc.w    $BB1E
-SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF:  dc.w    3
+SKTailsDplc_FramesD1toDF:   dc.w    3
                 dc.w    $5000
                 dc.w    $3006
                 dc.w    $100A

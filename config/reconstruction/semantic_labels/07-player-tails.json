@@ -702,7 +702,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 20,
       "old": "loc_16392",
-      "new": "S3TailsAnimation_ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames",
+      "new": "S3TailsAnim_DispatchHeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames"
     },
@@ -710,7 +710,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 43,
       "old": "loc_163C8",
-      "new": "S3TailsAnimation_StoreInterpretedMappingFrameAndAdvanceByteCursor",
+      "new": "S3TailsAnim_StoreFrameAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: StoreInterpretedMappingFrameAndAdvanceByteCursor"
     },
@@ -718,7 +718,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 47,
       "old": "locret_163D0",
-      "new": "S3TailsAnimation_ReturnAfterAnimationHoldOrStoredFrame",
+      "new": "S3TailsAnim_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterAnimationHoldOrStoredFrame"
     },
@@ -726,7 +726,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 51,
       "old": "loc_163D2",
-      "new": "S3TailsAnimation_ResolveFullStreamLoopCommandOrTryBacktrack",
+      "new": "S3TailsAnim_TestRestartFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveFullStreamLoopCommandOrTryBacktrack"
     },
@@ -734,7 +734,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 59,
       "old": "loc_163E2",
-      "new": "S3TailsAnimation_ResolveByteBacktrackCommandOrTryAnimationChange",
+      "new": "S3TailsAnim_TestBacktrackFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveByteBacktrackCommandOrTryAnimationChange"
     },
@@ -742,7 +742,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 69,
       "old": "loc_163F6",
-      "new": "S3TailsAnimation_DeferRequestedAnimationChangeForFdCommand",
+      "new": "S3TailsAnim_TestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DeferRequestedAnimationChangeForFdCommand"
     },
@@ -750,7 +750,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 74,
       "old": "locret_16400",
-      "new": "S3TailsAnimation_ReturnAfterAnimationCommandChangeOrIgnoredOpcode",
+      "new": "S3TailsAnim_CommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterAnimationCommandChangeOrIgnoredOpcode"
     },
@@ -758,7 +758,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 80,
       "old": "loc_16402",
-      "new": "S3TailsAnimation_SelectWalkTumbleOrOtherNegativeHeaderDriver",
+      "new": "S3TailsAnim_DispatchMovementHeaderFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: SelectWalkTumbleOrOtherNegativeHeaderDriver"
     },
@@ -766,7 +766,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 94,
       "old": "loc_16426",
-      "new": "S3TailsAnimation_ReflectMovementAngleForCurrentFacing",
+      "new": "S3TailsAnim_OrientWalkAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReflectMovementAngleForCurrentFacing"
     },
@@ -774,7 +774,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 100,
       "old": "loc_16432",
-      "new": "S3TailsAnimation_ChooseMovementRenderFlipPairFromWrappedAngle",
+      "new": "S3TailsAnim_ChooseWalkFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseMovementRenderFlipPairFromWrappedAngle"
     },
@@ -782,7 +782,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 105,
       "old": "loc_1643A",
-      "new": "S3TailsAnimation_ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup",
+      "new": "S3TailsAnim_ApplyWalkFlipAndCheckPush",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup"
     },
@@ -790,7 +790,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 117,
       "old": "loc_1645E",
-      "new": "S3TailsAnimation_DoubleAnimationSpeedForSecondaryStatusSignBit",
+      "new": "S3TailsAnim_AdjustWalkSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DoubleAnimationSpeedForSecondaryStatusSignBit"
     },
@@ -798,7 +798,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 122,
       "old": "loc_16468",
-      "new": "S3TailsAnimation_ChooseWalkRunOrFastRunStreamAndAngularFrameStride",
+      "new": "S3TailsAnim_SelectWalkRunOrFastRun",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseWalkRunOrFastRunStreamAndAngularFrameStride"
     },
@@ -806,7 +806,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 137,
       "old": "loc_16492",
-      "new": "S3TailsAnimation_ReadMovementFrameAndRestartOnFfTerminator",
+      "new": "S3TailsAnim_ReadOrLoopMovementFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReadMovementFrameAndRestartOnFfTerminator"
     },
@@ -814,7 +814,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 146,
       "old": "loc_164AC",
-      "new": "S3TailsAnimation_WriteAngularMovementFrameBeforeTimerGate",
+      "new": "S3TailsAnim_StoreMovementFrameAndTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: WriteAngularMovementFrameBeforeTimerGate"
     },
@@ -822,7 +822,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 156,
       "old": "loc_164C4",
-      "new": "S3TailsAnimation_ReloadMovementDelayAndAdvanceFrameCursor",
+      "new": "S3TailsAnim_ReloadMoveDelayAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadMovementDelayAndAdvanceFrameCursor"
     },
@@ -830,7 +830,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 161,
       "old": "locret_164CE",
-      "new": "S3TailsAnimation_ReturnAfterMovementFrameRefreshOrCursorStep",
+      "new": "S3TailsAnim_MovementReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterMovementFrameRefreshOrCursorStep"
     },
@@ -838,7 +838,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 165,
       "old": "loc_164D0",
-      "new": "S3TailsAnimation_SelectRollHeaderOrDirectionalTailFallback",
+      "new": "S3TailsAnim_CheckRollHeaderFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: SelectRollHeaderOrDirectionalTailFallback"
     },
@@ -846,7 +846,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 174,
       "old": "loc_164E4",
-      "new": "S3TailsAnimation_ChooseRollSpeedStreamAtSixHundred",
+      "new": "S3TailsAnim_SelectRollSequenceAt600",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseRollSpeedStreamAtSixHundred"
     },
@@ -854,7 +854,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 180,
       "old": "loc_164F6",
-      "new": "S3TailsAnimation_ComputeWrappedRollFrameDuration",
+      "new": "S3TailsAnim_CalcRollDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ComputeWrappedRollFrameDuration"
     },
@@ -862,7 +862,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 186,
       "old": "loc_16500",
-      "new": "S3TailsAnimation_ReloadRollTimerAndStepNormalBytecode",
+      "new": "S3TailsAnim_ReloadRollDelayAndReadFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadRollTimerAndStepNormalBytecode"
     },
@@ -870,7 +870,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 196,
       "old": "loc_1651C",
-      "new": "S3TailsAnimation_GatePushAnimationStepBySignedByteTimer",
+      "new": "S3TailsAnim_TickPushFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: GatePushAnimationStepBySignedByteTimer"
     },
@@ -878,7 +878,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 203,
       "old": "loc_1652C",
-      "new": "S3TailsAnimation_ClampWrappedPushDelayAfterAddingEightHundred",
+      "new": "S3TailsAnim_ClampPushDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ClampWrappedPushDelayAfterAddingEightHundred"
     },
@@ -886,7 +886,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 208,
       "old": "loc_16534",
-      "new": "S3TailsAnimation_ReloadPushDelayAndInterpretPushSequence",
+      "new": "S3TailsAnim_ReloadPushDelayAndReadFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadPushDelayAndInterpretPushSequence"
     },
@@ -894,7 +894,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 219,
       "old": "loc_16556",
-      "new": "S3TailsAnimation_DeriveDirectionalTailFrameAngleFromParentVelocity",
+      "new": "S3TailsAnim_GetTailAngleFromParentSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DeriveDirectionalTailFrameAngleFromParentVelocity"
     },
@@ -902,7 +902,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 231,
       "old": "loc_16574",
-      "new": "S3TailsAnimation_RotateDirectionalTailAngleForFacingSet",
+      "new": "S3TailsAnim_RotateTailAngleForFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: RotateDirectionalTailAngleForFacingSet"
     },
@@ -910,7 +910,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 234,
       "old": "loc_16578",
-      "new": "S3TailsAnimation_ChooseDirectionalTailRenderFlipQuadrant",
+      "new": "S3TailsAnim_ChooseTailFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseDirectionalTailRenderFlipQuadrant"
     },
@@ -918,7 +918,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 239,
       "old": "loc_16580",
-      "new": "S3TailsAnimation_CommitDirectionalTailFlipsAndPrepareAngularFrameGroup",
+      "new": "S3TailsAnim_ApplyDirectionalTailFlips",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: CommitDirectionalTailFlipsAndPrepareAngularFrameGroup"
     },
@@ -926,7 +926,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 291,
       "old": "loc_16782",
-      "new": "S3TailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram",
+      "new": "S3TailsAnim_QueueDPLCEntry",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: QueuePackedBodyOrTailPatternTransfersAndAdvanceVram"
     },
@@ -934,7 +934,7 @@
       "source": "src/objects/players/tails/s3/animation_and_patterns.s",
       "original_line": 307,
       "old": "locret_167AA",
-      "new": "S3TailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList",
+      "new": "S3TailsAnim_DPLCLoadReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList"
     },
@@ -2910,7 +2910,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 17,
       "old": "loc_167D4",
-      "new": "S3TailsTailDriver_ResolveCompactRelativeHeaderAndOrdinaryTimer",
+      "new": "S3TailsTail_CompDispatchHeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactRelativeHeaderAndOrdinaryTimer"
     },
@@ -2918,7 +2918,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 40,
       "old": "loc_1680A",
-      "new": "S3TailsTailDriver_StoreCompactMappingFrameAndAdvanceByteCursor",
+      "new": "S3TailsTail_CompStoreFrameAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StoreCompactMappingFrameAndAdvanceByteCursor"
     },
@@ -2926,7 +2926,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 44,
       "old": "locret_16812",
-      "new": "S3TailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite",
+      "new": "S3TailsTail_CompFrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactAnimationHoldOrFrameWrite"
     },
@@ -2934,7 +2934,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 48,
       "old": "loc_16814",
-      "new": "S3TailsTailDriver_ResolveCompactFfFullStreamRestart",
+      "new": "S3TailsTail_CompTestRestartFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactFfFullStreamRestart"
     },
@@ -2942,7 +2942,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 56,
       "old": "loc_16824",
-      "new": "S3TailsTailDriver_ResolveCompactFeByteBacktrack",
+      "new": "S3TailsTail_CompTestBacktrackFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactFeByteBacktrack"
     },
@@ -2950,7 +2950,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 66,
       "old": "loc_16838",
-      "new": "S3TailsTailDriver_DeferCompactAnimationChangeOrIgnoreOtherCommand",
+      "new": "S3TailsTail_CompTestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DeferCompactAnimationChangeOrIgnoreOtherCommand"
     },
@@ -2958,7 +2958,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 71,
       "old": "locret_16842",
-      "new": "S3TailsTailDriver_ReturnAfterCompactDeferredOrIgnoredCommand",
+      "new": "S3TailsTail_CompCommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactDeferredOrIgnoredCommand"
     },
@@ -2966,7 +2966,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 77,
       "old": "loc_16844",
-      "new": "S3TailsTailDriver_SelectCompactMovementTumbleOrOtherNegativeDriver",
+      "new": "S3TailsTail_CompDispatchMovementFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: SelectCompactMovementTumbleOrOtherNegativeDriver"
     },
@@ -2974,7 +2974,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 89,
       "old": "loc_16860",
-      "new": "S3TailsTailDriver_OrientCompactMovementAngleByFacing",
+      "new": "S3TailsTail_CompOrientWalkAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: OrientCompactMovementAngleByFacing"
     },
@@ -2982,7 +2982,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 95,
       "old": "loc_1686C",
-      "new": "S3TailsTailDriver_ChooseCompactMovementFlipPairFromAngleSign",
+      "new": "S3TailsTail_CompChooseWalkFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactMovementFlipPairFromAngleSign"
     },
@@ -2990,7 +2990,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 100,
       "old": "loc_16874",
-      "new": "S3TailsTailDriver_ApplyCompactMovementFlipsAndSelectPushOrSpeed",
+      "new": "S3TailsTail_CompApplyFlipAndCheckPush",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ApplyCompactMovementFlipsAndSelectPushOrSpeed"
     },
@@ -2998,7 +2998,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 112,
       "old": "loc_16898",
-      "new": "S3TailsTailDriver_DoubleCompactAnimationSpeedForSecondarySignBit",
+      "new": "S3TailsTail_CompAdjustWalkSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DoubleCompactAnimationSpeedForSecondarySignBit"
     },
@@ -3006,7 +3006,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 117,
       "old": "loc_168A2",
-      "new": "S3TailsTailDriver_ChooseCompactWalkOrRunStreamAtSixHundred",
+      "new": "S3TailsTail_CompSelectWalkOrRunAt600",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactWalkOrRunStreamAtSixHundred"
     },
@@ -3014,7 +3014,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 125,
       "old": "loc_168B8",
-      "new": "S3TailsTailDriver_ComputeCompactAngularStrideAndReadCurrentFrame",
+      "new": "S3TailsTail_CompReadAngularMoveFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ComputeCompactAngularStrideAndReadCurrentFrame"
     },
@@ -3022,7 +3022,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 135,
       "old": "loc_168D4",
-      "new": "S3TailsTailDriver_RefreshCompactAngularFrameBeforeTimerAdvance",
+      "new": "S3TailsTail_CompStoreMoveFrameAndTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RefreshCompactAngularFrameBeforeTimerAdvance"
     },
@@ -3030,7 +3030,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 145,
       "old": "loc_168EC",
-      "new": "S3TailsTailDriver_ReloadCompactMovementDelayAndAdvanceCursor",
+      "new": "S3TailsTail_CompReloadMoveDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactMovementDelayAndAdvanceCursor"
     },
@@ -3038,7 +3038,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 150,
       "old": "locret_168F6",
-      "new": "S3TailsTailDriver_ReturnAfterCompactMovementFrameRefresh",
+      "new": "S3TailsTail_CompMovementReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactMovementFrameRefresh"
     },
@@ -3046,7 +3046,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 154,
       "old": "loc_168F8",
-      "new": "S3TailsTailDriver_QuantizeCompactTumbleForFacingClear",
+      "new": "S3TailsTail_CompSelectTumbleFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: QuantizeCompactTumbleForFacingClear"
     },
@@ -3054,7 +3054,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 169,
       "old": "loc_16926",
-      "new": "S3TailsTailDriver_ChooseCompactFacingSetTumbleReflectionByFlipTypeSign",
+      "new": "S3TailsTail_CompChooseLeftTumbleFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactFacingSetTumbleReflectionByFlipTypeSign"
     },
@@ -3062,7 +3062,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 178,
       "old": "loc_1693E",
-      "new": "S3TailsTailDriver_MirrorCompactFacingSetTumbleWithByteNegation",
+      "new": "S3TailsTail_CompMirrorLeftTumble",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: MirrorCompactFacingSetTumbleWithByteNegation"
     },
@@ -3070,7 +3070,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 183,
       "old": "loc_1694A",
-      "new": "S3TailsTailDriver_StoreCompactFacingSetTumbleFrameAndZeroTimer",
+      "new": "S3TailsTail_CompStoreLeftTumbleFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StoreCompactFacingSetTumbleFrameAndZeroTimer"
     },
@@ -3078,7 +3078,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 191,
       "old": "loc_1695E",
-      "new": "S3TailsTailDriver_GateCompactRollOrDirectionalTailByTimer",
+      "new": "S3TailsTail_CompTickRollOrTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: GateCompactRollOrDirectionalTailByTimer"
     },
@@ -3086,7 +3086,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 200,
       "old": "loc_16972",
-      "new": "S3TailsTailDriver_ChooseCompactRollStreamAtUnsignedSixHundred",
+      "new": "S3TailsTail_CompSelectRollStreamAt600",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactRollStreamAtUnsignedSixHundred"
     },
@@ -3094,7 +3094,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 206,
       "old": "loc_16984",
-      "new": "S3TailsTailDriver_ComputeCompactRollDurationFromWrappedSpeed",
+      "new": "S3TailsTail_CompCalcRollDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ComputeCompactRollDurationFromWrappedSpeed"
     },
@@ -3102,7 +3102,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 212,
       "old": "loc_1698E",
-      "new": "S3TailsTailDriver_ReloadCompactRollDelayAndApplyFacingBeforeFrameStep",
+      "new": "S3TailsTail_CompReloadRollAndRead",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactRollDelayAndApplyFacingBeforeFrameStep"
     },
@@ -3110,7 +3110,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 222,
       "old": "loc_169AA",
-      "new": "S3TailsTailDriver_GateCompactPushStepAndTakeNegativeSpeedMagnitude",
+      "new": "S3TailsTail_CompTickPushFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: GateCompactPushStepAndTakeNegativeSpeedMagnitude"
     },
@@ -3118,7 +3118,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 229,
       "old": "loc_169BA",
-      "new": "S3TailsTailDriver_ClampCompactPushDurationAfterEightHundredAddition",
+      "new": "S3TailsTail_CompClampPushDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ClampCompactPushDurationAfterEightHundredAddition"
     },
@@ -3126,7 +3126,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 234,
       "old": "loc_169C2",
-      "new": "S3TailsTailDriver_ReloadCompactPushDelayAndStepItsPayloadDirectly",
+      "new": "S3TailsTail_CompReloadPushAndRead",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactPushDelayAndStepItsPayloadDirectly"
     },
@@ -3134,7 +3134,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 245,
       "old": "loc_169E4",
-      "new": "S3TailsTailDriver_DeriveCompactDirectionalTailAngleFromParentVelocity",
+      "new": "S3TailsTail_CompGetTailAngleFromSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DeriveCompactDirectionalTailAngleFromParentVelocity"
     },
@@ -3142,7 +3142,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 257,
       "old": "loc_16A02",
-      "new": "S3TailsTailDriver_RotateCompactDirectionalTailAngleForFacingSet",
+      "new": "S3TailsTail_CompRotateTailForFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RotateCompactDirectionalTailAngleForFacingSet"
     },
@@ -3150,7 +3150,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 260,
       "old": "loc_16A06",
-      "new": "S3TailsTailDriver_ChooseCompactDirectionalTailQuadrantFlipPair",
+      "new": "S3TailsTail_CompChooseTailFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactDirectionalTailQuadrantFlipPair"
     },
@@ -3158,7 +3158,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 265,
       "old": "loc_16A0E",
-      "new": "S3TailsTailDriver_StepCompactDirectionalTailAndAddThreeFrameAngularStride",
+      "new": "S3TailsTail_CompStepDirectionalTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StepCompactDirectionalTailAndAddThreeFrameAngularStride"
     },
@@ -3166,7 +3166,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 319,
       "old": "loc_16B58",
-      "new": "S3TailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers",
+      "new": "S3TailsTail_CompQueueUncachedDPLC",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: QueueUncachedCompactBodyOrTailPackedTransfers"
     },
@@ -3174,7 +3174,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 335,
       "old": "locret_16B80",
-      "new": "S3TailsTailDriver_ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers",
+      "new": "S3TailsTail_CompDPLCLoadReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers"
     },
@@ -3182,7 +3182,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 364,
       "old": "loc_16BE2",
-      "new": "S3TailsTailDriver_ChooseNormalTailParentAnimationWithProfilePushOverride",
+      "new": "S3TailsTail_ChooseNormalParentAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseNormalTailParentAnimationWithProfilePushOverride"
     },
@@ -3190,7 +3190,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 373,
       "old": "loc_16BF8",
-      "new": "S3TailsTailDriver_RemapChangedNormalParentAnimationToTailBank",
+      "new": "S3TailsTail_RemapChangedNormalAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RemapChangedNormalParentAnimationToTailBank"
     },
@@ -3198,7 +3198,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 379,
       "old": "loc_16C08",
-      "new": "S3TailsTailDriver_AnimateNormalTailThenLoadPatternsAndQueueSprite",
+      "new": "S3TailsTail_AnimateAndDrawNormalTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: AnimateNormalTailThenLoadPatternsAndQueueSprite"
     },
@@ -3206,7 +3206,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 441,
       "old": "loc_16CCC",
-      "new": "S3TailsTailDriver_InitializeCompactTailGeometryAndInstallFollowCallback",
+      "new": "S3TailsTail_InitCompTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: InitializeCompactTailGeometryAndInstallFollowCallback"
     },
@@ -3214,7 +3214,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 448,
       "old": "loc_16CEA",
-      "new": "S3TailsTailDriver_FollowCompactTailParentCoordinatesStatusAndArtPriority",
+      "new": "S3TailsTail_FollowCompParent",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: FollowCompactTailParentCoordinatesStatusAndArtPriority"
     },
@@ -3222,7 +3222,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 460,
       "old": "loc_16D1E",
-      "new": "S3TailsTailDriver_OverrideCompactTailSelectorForPushExceptIdleBankFive",
+      "new": "S3TailsTail_CheckCompPushOverride",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: OverrideCompactTailSelectorForPushExceptIdleBankFive"
     },
@@ -3230,7 +3230,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 469,
       "old": "loc_16D34",
-      "new": "S3TailsTailDriver_RemapChangedCompactParentSelectorThroughByteTable",
+      "new": "S3TailsTail_RemapChangedCompAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RemapChangedCompactParentSelectorThroughByteTable"
     },
@@ -3238,7 +3238,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 475,
       "old": "loc_16D44",
-      "new": "S3TailsTailDriver_AnimateCompactTailQueueUncachedPatternsAndDraw",
+      "new": "S3TailsTail_AnimateAndDrawCompTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: AnimateCompactTailQueueUncachedPatternsAndDraw"
     },
@@ -3246,7 +3246,7 @@
       "source": "src/objects/players/tails/s3/tail_display.s",
       "original_line": 481,
       "old": "byte_16D58",
-      "new": "S3TailsTailDriver_CompetitionParentAnimationToTailBankBytes",
+      "new": "S3TailsTail_CompParentToTailAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: CompetitionParentAnimationToTailBankBytes"
     },
@@ -4222,7 +4222,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 20,
       "old": "loc_1588A",
-      "new": "SKTailsAnimation_ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames",
+      "new": "SKTailsAnim_DispatchHeader",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveRelativeAnimationHeaderAndTimedOrdinaryFrames"
     },
@@ -4230,7 +4230,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 43,
       "old": "loc_158C0",
-      "new": "SKTailsAnimation_StoreInterpretedMappingFrameAndAdvanceByteCursor",
+      "new": "SKTailsAnim_StoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: StoreInterpretedMappingFrameAndAdvanceByteCursor"
     },
@@ -4238,7 +4238,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 47,
       "old": "locret_158C8",
-      "new": "SKTailsAnimation_ReturnAfterAnimationHoldOrStoredFrame",
+      "new": "SKTailsAnim_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterAnimationHoldOrStoredFrame"
     },
@@ -4246,7 +4246,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 51,
       "old": "loc_158CA",
-      "new": "SKTailsAnimation_ResolveFullStreamLoopCommandOrTryBacktrack",
+      "new": "SKTailsAnim_TestRestartFF",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveFullStreamLoopCommandOrTryBacktrack"
     },
@@ -4254,7 +4254,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 59,
       "old": "loc_158DA",
-      "new": "SKTailsAnimation_ResolveByteBacktrackCommandOrTryAnimationChange",
+      "new": "SKTailsAnim_TestBacktrackFE",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ResolveByteBacktrackCommandOrTryAnimationChange"
     },
@@ -4262,7 +4262,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 69,
       "old": "loc_158EE",
-      "new": "SKTailsAnimation_DeferRequestedAnimationChangeForFdCommand",
+      "new": "SKTailsAnim_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DeferRequestedAnimationChangeForFdCommand"
     },
@@ -4270,7 +4270,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 74,
       "old": "locret_158F8",
-      "new": "SKTailsAnimation_ReturnAfterAnimationCommandChangeOrIgnoredOpcode",
+      "new": "SKTailsAnim_CommandReturn",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterAnimationCommandChangeOrIgnoredOpcode"
     },
@@ -4278,7 +4278,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 80,
       "old": "loc_158FA",
-      "new": "SKTailsAnimation_SelectWalkTumbleOrOtherNegativeHeaderDriver",
+      "new": "SKTailsAnim_DispatchMovementHeaderFF",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: SelectWalkTumbleOrOtherNegativeHeaderDriver"
     },
@@ -4286,7 +4286,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 94,
       "old": "loc_1591E",
-      "new": "SKTailsAnimation_ReflectMovementAngleForCurrentFacing",
+      "new": "SKTailsAnim_OrientWalkAngle",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReflectMovementAngleForCurrentFacing"
     },
@@ -4294,7 +4294,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 100,
       "old": "loc_1592A",
-      "new": "SKTailsAnimation_ChooseMovementRenderFlipPairFromWrappedAngle",
+      "new": "SKTailsAnim_ChooseWalkFlip",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseMovementRenderFlipPairFromWrappedAngle"
     },
@@ -4302,7 +4302,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 105,
       "old": "loc_15932",
-      "new": "SKTailsAnimation_ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup",
+      "new": "SKTailsAnim_ApplyWalkFlipAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ApplyMovementFlipsAndChoosePushOrAngularSpeedGroup"
     },
@@ -4310,7 +4310,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 117,
       "old": "loc_15956",
-      "new": "SKTailsAnimation_DoubleAnimationSpeedForSecondaryStatusSignBit",
+      "new": "SKTailsAnim_AdjustWalkSpeed",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DoubleAnimationSpeedForSecondaryStatusSignBit"
     },
@@ -4318,7 +4318,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 122,
       "old": "loc_15960",
-      "new": "SKTailsAnimation_ChooseWalkRunOrFastRunStreamAndAngularFrameStride",
+      "new": "SKTailsAnim_SelectWalkRunOrFastRun",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseWalkRunOrFastRunStreamAndAngularFrameStride"
     },
@@ -4326,7 +4326,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 137,
       "old": "loc_1598A",
-      "new": "SKTailsAnimation_ReadMovementFrameAndRestartOnFfTerminator",
+      "new": "SKTailsAnim_ReadOrLoopMovementFrame",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReadMovementFrameAndRestartOnFfTerminator"
     },
@@ -4334,7 +4334,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 146,
       "old": "loc_159A4",
-      "new": "SKTailsAnimation_WriteAngularMovementFrameBeforeTimerGate",
+      "new": "SKTailsAnim_StoreMovementFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: WriteAngularMovementFrameBeforeTimerGate"
     },
@@ -4342,7 +4342,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 156,
       "old": "loc_159BC",
-      "new": "SKTailsAnimation_ReloadMovementDelayAndAdvanceFrameCursor",
+      "new": "SKTailsAnim_ReloadMoveDelayAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadMovementDelayAndAdvanceFrameCursor"
     },
@@ -4350,7 +4350,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 161,
       "old": "locret_159C6",
-      "new": "SKTailsAnimation_ReturnAfterMovementFrameRefreshOrCursorStep",
+      "new": "SKTailsAnim_MovementReturn",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterMovementFrameRefreshOrCursorStep"
     },
@@ -4358,7 +4358,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 165,
       "old": "loc_159C8",
-      "new": "SKTailsAnimation_SelectRollHeaderOrDirectionalTailFallback",
+      "new": "SKTailsAnim_CheckRollHeaderFE",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: SelectRollHeaderOrDirectionalTailFallback"
     },
@@ -4366,7 +4366,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 178,
       "old": "loc_159EE",
-      "new": "SKTailsAnimation_ChooseRollSpeedStreamAtSixHundred",
+      "new": "SKTailsAnim_SelectRollSequenceAt600",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseRollSpeedStreamAtSixHundred"
     },
@@ -4374,7 +4374,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 184,
       "old": "loc_15A00",
-      "new": "SKTailsAnimation_ComputeWrappedRollFrameDuration",
+      "new": "SKTailsAnim_CalcRollDelay",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ComputeWrappedRollFrameDuration"
     },
@@ -4382,7 +4382,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 190,
       "old": "loc_15A0A",
-      "new": "SKTailsAnimation_ReloadRollTimerAndStepNormalBytecode",
+      "new": "SKTailsAnim_ReloadRollDelayAndReadFrame",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadRollTimerAndStepNormalBytecode"
     },
@@ -4390,7 +4390,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 196,
       "old": "loc_15A14",
-      "new": "SKTailsAnimation_GatePushAnimationStepBySignedByteTimer",
+      "new": "SKTailsAnim_TickPushFrames",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: GatePushAnimationStepBySignedByteTimer"
     },
@@ -4398,7 +4398,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 203,
       "old": "loc_15A24",
-      "new": "SKTailsAnimation_ClampWrappedPushDelayAfterAddingEightHundred",
+      "new": "SKTailsAnim_ClampPushDelay",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ClampWrappedPushDelayAfterAddingEightHundred"
     },
@@ -4406,7 +4406,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 208,
       "old": "loc_15A2C",
-      "new": "SKTailsAnimation_ReloadPushDelayAndInterpretPushSequence",
+      "new": "SKTailsAnim_ReloadPushDelayAndReadFrame",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReloadPushDelayAndInterpretPushSequence"
     },
@@ -4414,7 +4414,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 215,
       "old": "loc_15A3C",
-      "new": "SKTailsAnimation_DeriveDirectionalTailFrameAngleFromParentVelocity",
+      "new": "SKTailsAnim_GetTailAngleFromParentSpeed",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: DeriveDirectionalTailFrameAngleFromParentVelocity"
     },
@@ -4422,7 +4422,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 225,
       "old": "loc_15A5E",
-      "new": "SKTailsAnimation_OrientDirectionalTailAfterOptionalSlotsRotation",
+      "new": "SKTailsAnim_OrientDirectionalTail",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: OrientDirectionalTailAfterOptionalSlotsRotation"
     },
@@ -4430,7 +4430,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 234,
       "old": "loc_15A6E",
-      "new": "SKTailsAnimation_RotateDirectionalTailAngleForFacingSet",
+      "new": "SKTailsAnim_RotateTailAngleForFacing",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: RotateDirectionalTailAngleForFacingSet"
     },
@@ -4438,7 +4438,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 237,
       "old": "loc_15A72",
-      "new": "SKTailsAnimation_ChooseDirectionalTailRenderFlipQuadrant",
+      "new": "SKTailsAnim_ChooseTailFlip",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ChooseDirectionalTailRenderFlipQuadrant"
     },
@@ -4446,7 +4446,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 242,
       "old": "loc_15A7A",
-      "new": "SKTailsAnimation_CommitDirectionalTailFlipsAndPrepareAngularFrameGroup",
+      "new": "SKTailsAnim_ApplyDirectionalTailFlips",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: CommitDirectionalTailFlipsAndPrepareAngularFrameGroup"
     },
@@ -4454,7 +4454,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 250,
       "old": "loc_15A92",
-      "new": "SKTailsAnimation_StepDirectionalTailFrameAfterGravityFlip",
+      "new": "SKTailsAnim_ReadDirectionalTailFrame",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: StepDirectionalTailFrameAfterGravityFlip"
     },
@@ -4462,7 +4462,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 302,
       "old": "loc_15CA6",
-      "new": "SKTailsAnimation_QueuePackedBodyOrTailPatternTransfersAndAdvanceVram",
+      "new": "SKTailsAnim_QueueDPLCEntry",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: QueuePackedBodyOrTailPatternTransfersAndAdvanceVram"
     },
@@ -4470,7 +4470,7 @@
       "source": "src/objects/players/tails/sk/animation_and_patterns.s",
       "original_line": 318,
       "old": "locret_15CCE",
-      "new": "SKTailsAnimation_ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList",
+      "new": "SKTailsAnim_DPLCLoadReturn",
       "profiles": ["sk"],
       "meaning": "Describe the actual Tails normal/body-tail animation or packed-pattern entry: ReturnAfterUnchangedFrameEmptyCueOrQueuedPatternList"
     },
@@ -6614,7 +6614,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 17,
       "old": "loc_15CF8",
-      "new": "SKTailsTailDriver_ResolveCompactRelativeHeaderAndOrdinaryTimer",
+      "new": "SKTailsTail_CompDispatchHeader",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactRelativeHeaderAndOrdinaryTimer"
     },
@@ -6622,7 +6622,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 40,
       "old": "loc_15D2E",
-      "new": "SKTailsTailDriver_StoreCompactMappingFrameAndAdvanceByteCursor",
+      "new": "SKTailsTail_CompStoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StoreCompactMappingFrameAndAdvanceByteCursor"
     },
@@ -6630,7 +6630,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 44,
       "old": "locret_15D36",
-      "new": "SKTailsTailDriver_ReturnAfterCompactAnimationHoldOrFrameWrite",
+      "new": "SKTailsTail_CompFrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactAnimationHoldOrFrameWrite"
     },
@@ -6638,7 +6638,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 48,
       "old": "loc_15D38",
-      "new": "SKTailsTailDriver_ResolveCompactFfFullStreamRestart",
+      "new": "SKTailsTail_CompTestRestartFF",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactFfFullStreamRestart"
     },
@@ -6646,7 +6646,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 56,
       "old": "loc_15D48",
-      "new": "SKTailsTailDriver_ResolveCompactFeByteBacktrack",
+      "new": "SKTailsTail_CompTestBacktrackFE",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ResolveCompactFeByteBacktrack"
     },
@@ -6654,7 +6654,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 66,
       "old": "loc_15D5C",
-      "new": "SKTailsTailDriver_DeferCompactAnimationChangeOrIgnoreOtherCommand",
+      "new": "SKTailsTail_CompTestChangeFD",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DeferCompactAnimationChangeOrIgnoreOtherCommand"
     },
@@ -6662,7 +6662,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 71,
       "old": "locret_15D66",
-      "new": "SKTailsTailDriver_ReturnAfterCompactDeferredOrIgnoredCommand",
+      "new": "SKTailsTail_CompCommandReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactDeferredOrIgnoredCommand"
     },
@@ -6670,7 +6670,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 77,
       "old": "loc_15D68",
-      "new": "SKTailsTailDriver_SelectCompactMovementTumbleOrOtherNegativeDriver",
+      "new": "SKTailsTail_CompDispatchMovementFF",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: SelectCompactMovementTumbleOrOtherNegativeDriver"
     },
@@ -6678,7 +6678,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 89,
       "old": "loc_15D84",
-      "new": "SKTailsTailDriver_OrientCompactMovementAngleByFacing",
+      "new": "SKTailsTail_CompOrientWalkAngle",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: OrientCompactMovementAngleByFacing"
     },
@@ -6686,7 +6686,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 95,
       "old": "loc_15D90",
-      "new": "SKTailsTailDriver_ChooseCompactMovementFlipPairFromAngleSign",
+      "new": "SKTailsTail_CompChooseWalkFlip",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactMovementFlipPairFromAngleSign"
     },
@@ -6694,7 +6694,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 100,
       "old": "loc_15D98",
-      "new": "SKTailsTailDriver_ApplyCompactMovementFlipsAndSelectPushOrSpeed",
+      "new": "SKTailsTail_CompApplyFlipAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ApplyCompactMovementFlipsAndSelectPushOrSpeed"
     },
@@ -6702,7 +6702,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 112,
       "old": "loc_15DBC",
-      "new": "SKTailsTailDriver_DoubleCompactAnimationSpeedForSecondarySignBit",
+      "new": "SKTailsTail_CompAdjustWalkSpeed",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DoubleCompactAnimationSpeedForSecondarySignBit"
     },
@@ -6710,7 +6710,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 117,
       "old": "loc_15DC6",
-      "new": "SKTailsTailDriver_ChooseCompactWalkOrRunStreamAtSixHundred",
+      "new": "SKTailsTail_CompSelectWalkOrRunAt600",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactWalkOrRunStreamAtSixHundred"
     },
@@ -6718,7 +6718,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 125,
       "old": "loc_15DDC",
-      "new": "SKTailsTailDriver_ComputeCompactAngularStrideAndReadCurrentFrame",
+      "new": "SKTailsTail_CompReadAngularMoveFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ComputeCompactAngularStrideAndReadCurrentFrame"
     },
@@ -6726,7 +6726,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 135,
       "old": "loc_15DF8",
-      "new": "SKTailsTailDriver_RefreshCompactAngularFrameBeforeTimerAdvance",
+      "new": "SKTailsTail_CompStoreMoveFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RefreshCompactAngularFrameBeforeTimerAdvance"
     },
@@ -6734,7 +6734,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 145,
       "old": "loc_15E10",
-      "new": "SKTailsTailDriver_ReloadCompactMovementDelayAndAdvanceCursor",
+      "new": "SKTailsTail_CompReloadMoveDelay",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactMovementDelayAndAdvanceCursor"
     },
@@ -6742,7 +6742,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 150,
       "old": "locret_15E1A",
-      "new": "SKTailsTailDriver_ReturnAfterCompactMovementFrameRefresh",
+      "new": "SKTailsTail_CompMovementReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactMovementFrameRefresh"
     },
@@ -6750,7 +6750,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 154,
       "old": "loc_15E1C",
-      "new": "SKTailsTailDriver_QuantizeCompactTumbleForFacingClear",
+      "new": "SKTailsTail_CompSelectTumbleFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: QuantizeCompactTumbleForFacingClear"
     },
@@ -6758,7 +6758,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 169,
       "old": "loc_15E4A",
-      "new": "SKTailsTailDriver_ChooseCompactFacingSetTumbleReflectionByFlipTypeSign",
+      "new": "SKTailsTail_CompChooseLeftTumbleFlip",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactFacingSetTumbleReflectionByFlipTypeSign"
     },
@@ -6766,7 +6766,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 178,
       "old": "loc_15E62",
-      "new": "SKTailsTailDriver_MirrorCompactFacingSetTumbleWithByteNegation",
+      "new": "SKTailsTail_CompMirrorLeftTumble",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: MirrorCompactFacingSetTumbleWithByteNegation"
     },
@@ -6774,7 +6774,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 183,
       "old": "loc_15E6E",
-      "new": "SKTailsTailDriver_StoreCompactFacingSetTumbleFrameAndZeroTimer",
+      "new": "SKTailsTail_CompStoreLeftTumbleFrame",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StoreCompactFacingSetTumbleFrameAndZeroTimer"
     },
@@ -6782,7 +6782,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 191,
       "old": "loc_15E82",
-      "new": "SKTailsTailDriver_GateCompactRollOrDirectionalTailByTimer",
+      "new": "SKTailsTail_CompTickRollOrTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: GateCompactRollOrDirectionalTailByTimer"
     },
@@ -6790,7 +6790,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 200,
       "old": "loc_15E96",
-      "new": "SKTailsTailDriver_ChooseCompactRollStreamAtUnsignedSixHundred",
+      "new": "SKTailsTail_CompSelectRollStreamAt600",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactRollStreamAtUnsignedSixHundred"
     },
@@ -6798,7 +6798,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 206,
       "old": "loc_15EA8",
-      "new": "SKTailsTailDriver_ComputeCompactRollDurationFromWrappedSpeed",
+      "new": "SKTailsTail_CompCalcRollDelay",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ComputeCompactRollDurationFromWrappedSpeed"
     },
@@ -6806,7 +6806,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 212,
       "old": "loc_15EB2",
-      "new": "SKTailsTailDriver_ReloadCompactRollDelayAndApplyFacingBeforeFrameStep",
+      "new": "SKTailsTail_CompReloadRollAndRead",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactRollDelayAndApplyFacingBeforeFrameStep"
     },
@@ -6814,7 +6814,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 222,
       "old": "loc_15ECE",
-      "new": "SKTailsTailDriver_GateCompactPushStepAndTakeNegativeSpeedMagnitude",
+      "new": "SKTailsTail_CompTickPushFrames",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: GateCompactPushStepAndTakeNegativeSpeedMagnitude"
     },
@@ -6822,7 +6822,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 229,
       "old": "loc_15EDE",
-      "new": "SKTailsTailDriver_ClampCompactPushDurationAfterEightHundredAddition",
+      "new": "SKTailsTail_CompClampPushDelay",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ClampCompactPushDurationAfterEightHundredAddition"
     },
@@ -6830,7 +6830,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 234,
       "old": "loc_15EE6",
-      "new": "SKTailsTailDriver_ReloadCompactPushDelayAndStepItsPayloadDirectly",
+      "new": "SKTailsTail_CompReloadPushAndRead",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReloadCompactPushDelayAndStepItsPayloadDirectly"
     },
@@ -6838,7 +6838,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 245,
       "old": "loc_15F08",
-      "new": "SKTailsTailDriver_DeriveCompactDirectionalTailAngleFromParentVelocity",
+      "new": "SKTailsTail_CompGetTailAngleFromSpeed",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: DeriveCompactDirectionalTailAngleFromParentVelocity"
     },
@@ -6846,7 +6846,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 257,
       "old": "loc_15F26",
-      "new": "SKTailsTailDriver_RotateCompactDirectionalTailAngleForFacingSet",
+      "new": "SKTailsTail_CompRotateTailForFacing",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RotateCompactDirectionalTailAngleForFacingSet"
     },
@@ -6854,7 +6854,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 260,
       "old": "loc_15F2A",
-      "new": "SKTailsTailDriver_ChooseCompactDirectionalTailQuadrantFlipPair",
+      "new": "SKTailsTail_CompChooseTailFlip",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseCompactDirectionalTailQuadrantFlipPair"
     },
@@ -6862,7 +6862,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 265,
       "old": "loc_15F32",
-      "new": "SKTailsTailDriver_StepCompactDirectionalTailAndAddThreeFrameAngularStride",
+      "new": "SKTailsTail_CompStepDirectionalTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: StepCompactDirectionalTailAndAddThreeFrameAngularStride"
     },
@@ -6870,7 +6870,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 319,
       "old": "loc_1607C",
-      "new": "SKTailsTailDriver_QueueUncachedCompactBodyOrTailPackedTransfers",
+      "new": "SKTailsTail_CompQueueUncachedDPLC",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: QueueUncachedCompactBodyOrTailPackedTransfers"
     },
@@ -6878,7 +6878,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 335,
       "old": "locret_160A4",
-      "new": "SKTailsTailDriver_ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers",
+      "new": "SKTailsTail_CompDPLCLoadReturn",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ReturnAfterCompactEmptyCueOrFinishedUncachedTransfers"
     },
@@ -6886,7 +6886,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 364,
       "old": "loc_16106",
-      "new": "SKTailsTailDriver_ChooseNormalTailParentAnimationWithProfilePushOverride",
+      "new": "SKTailsTail_ChooseNormalParentAnim",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: ChooseNormalTailParentAnimationWithProfilePushOverride"
     },
@@ -6894,7 +6894,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 378,
       "old": "loc_1612C",
-      "new": "SKTailsTailDriver_RemapChangedNormalParentAnimationToTailBank",
+      "new": "SKTailsTail_RemapChangedNormalAnim",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RemapChangedNormalParentAnimationToTailBank"
     },
@@ -6902,7 +6902,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 384,
       "old": "loc_1613C",
-      "new": "SKTailsTailDriver_AnimateNormalTailThenLoadPatternsAndQueueSprite",
+      "new": "SKTailsTail_AnimateAndDrawNormalTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: AnimateNormalTailThenLoadPatternsAndQueueSprite"
     },
@@ -6910,7 +6910,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 393,
       "old": "loc_1615A",
-      "new": "SKTailsTailDriver_LoadNormalTailPatternsAfterOptionalGravityMirror",
+      "new": "SKTailsTail_LoadAndDrawNormalTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: LoadNormalTailPatternsAfterOptionalGravityMirror"
     },
@@ -6918,7 +6918,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 453,
       "old": "loc_16214",
-      "new": "SKTailsTailDriver_InitializeCompactTailGeometryAndInstallFollowCallback",
+      "new": "SKTailsTail_InitCompTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: InitializeCompactTailGeometryAndInstallFollowCallback"
     },
@@ -6926,7 +6926,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 460,
       "old": "loc_16232",
-      "new": "SKTailsTailDriver_FollowCompactTailParentCoordinatesStatusAndArtPriority",
+      "new": "SKTailsTail_FollowCompParent",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: FollowCompactTailParentCoordinatesStatusAndArtPriority"
     },
@@ -6934,7 +6934,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 472,
       "old": "loc_16266",
-      "new": "SKTailsTailDriver_OverrideCompactTailSelectorForPushExceptIdleBankFive",
+      "new": "SKTailsTail_CheckCompPushOverride",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: OverrideCompactTailSelectorForPushExceptIdleBankFive"
     },
@@ -6942,7 +6942,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 481,
       "old": "loc_1627C",
-      "new": "SKTailsTailDriver_RemapChangedCompactParentSelectorThroughByteTable",
+      "new": "SKTailsTail_RemapChangedCompAnim",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: RemapChangedCompactParentSelectorThroughByteTable"
     },
@@ -6950,7 +6950,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 487,
       "old": "loc_1628C",
-      "new": "SKTailsTailDriver_AnimateCompactTailQueueUncachedPatternsAndDraw",
+      "new": "SKTailsTail_AnimateAndDrawCompTail",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: AnimateCompactTailQueueUncachedPatternsAndDraw"
     },
@@ -6958,7 +6958,7 @@
       "source": "src/objects/players/tails/sk/tail_display.s",
       "original_line": 493,
       "old": "byte_162A0",
-      "new": "SKTailsTailDriver_CompetitionParentAnimationToTailBankBytes",
+      "new": "SKTailsTail_CompParentToTailAnim",
       "profiles": ["sk"],
       "meaning": "Describe actual compact animation/packed-DMA or tail-follow/remap definition: CompetitionParentAnimationToTailBankBytes"
     },
@@ -11286,7 +11286,7 @@
       "source": "src/objects/shared/tails/dplc/tails.s",
       "original_line": 992,
       "old": "word_14A840",
-      "new": "SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+      "new": "SKTailsDplc_FramesD1toDF",
       "profiles": ["sk"],
       "meaning": "Describe SKTailsDplc_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF using actual indexed resource readers."
     },
@@ -13622,7 +13622,7 @@
       "source": "src/objects/shared/tails/mappings/sstage_tails.s",
       "original_line": 30,
       "old": "word_908EA",
-      "new": "S3SpecialStageTails_EmptyMappingAndDplcFrame00",
+      "new": "S3SStageTails_EmptyMapDPLC00",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual structural graphics record S3SpecialStageTails_EmptyMappingAndDplcFrame00."
     },
@@ -13806,7 +13806,7 @@
       "source": "src/objects/shared/tails/mappings/sstage_tails_tails.s",
       "original_line": 36,
       "old": "word_91124",
-      "new": "S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00",
+      "new": "S3SStageTail_EmptyMapDPLC00",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe actual structural graphics record S3SpecialStageTailsTail_EmptyMappingAndDplcFrame00."
     },
@@ -16222,7 +16222,7 @@
       "source": "src/objects/shared/tails/mappings/tails.s",
       "original_line": 1000,
       "old": "word_149EDA",
-      "new": "SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF",
+      "new": "SKTailsMap_FramesD1toDF",
       "profiles": ["sk"],
       "meaning": "Describe SKTailsMapping_FrameD1_D2_D3_D4_D5_D6_D7_D8_D9_DA_DB_DC_DD_DE_DF using actual indexed resource readers."
     },

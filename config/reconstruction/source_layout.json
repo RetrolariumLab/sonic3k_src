@@ -28544,7 +28544,7 @@
       "responsibility": "Normal Tails and tail animation sequences with dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 311,
+      "physical_lines": 313,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -28629,7 +28629,7 @@
       "responsibility": "Competition Tails animation and pattern loading plus normal and competition tail object rendering.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 510,
+      "physical_lines": 512,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "s3.s",
@@ -29169,7 +29169,7 @@
       "responsibility": "Normal Tails and tail animation sequences with dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 322,
+      "physical_lines": 325,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
@@ -29234,7 +29234,7 @@
       "responsibility": "Competition Tails animation and pattern loading plus normal and competition tail object rendering.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 522,
+      "physical_lines": 525,
       "origin": {
         "commit": "becb5f8b9c06c511c8ba1e49cc3cf340d5ff2866",
         "path": "sonic3k.s",
