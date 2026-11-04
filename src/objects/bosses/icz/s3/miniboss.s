@@ -101,7 +101,7 @@ loc_4E490:
                 move.b  #6,routine(a0)
                 move.w  #$3F,$2E(a0)
                 move.l  #loc_4E4BE,$34(a0)
-                lea     (word_16322C).l,a1
+                lea     (S3ICZMinibossPal_PulseAccel).l,a1
 
 loc_4E4AA:
                 lea     (Palette_rotation_data).w,a2
@@ -192,7 +192,7 @@ loc_4E58E:
                 move.b  #$10,routine(a0)
                 bclr    #2,$38(a0)
                 move.l  #loc_4E5B0,(Palette_rotation_custom).w
-                lea     (word_163298).l,a1
+                lea     (S3ICZMinibossPal_PulseDecel).l,a1
                 bra.w   loc_4E4AA
 ; ---------------------------------------------------------------------------
 

@@ -67461,7 +67461,7 @@
       "responsibility": "Actor mappings and DPLC bindings, boss motion lookup data and complete boss palette scripts.",
       "role": "data",
       "status": "owned",
-      "physical_lines": 345,
+      "physical_lines": 346,
       "origin": {
         "commit": "6d0135ff3ff1256ef1e5372e29e252ca7f027dfc",
         "path": "s3.s",
@@ -67541,7 +67541,7 @@
       "responsibility": "Art-scaling buffer initialization, scale selection, packed pixel sampling and scaled sprite mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 562,
+      "physical_lines": 564,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -67661,7 +67661,7 @@
       "responsibility": "Competition sprite display and its private piece-coordinate lookup tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 372,
+      "physical_lines": 374,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -68001,7 +68001,7 @@
       "responsibility": "Prioritized normal sprite display, mapping-piece expansion and orientation-specific rendering helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 569,
+      "physical_lines": 573,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -68656,7 +68656,7 @@
       "responsibility": "Art-scaling buffer initialization, scale selection, packed pixel sampling and scaled sprite mappings.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 562,
+      "physical_lines": 564,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -68746,7 +68746,7 @@
       "responsibility": "Competition sprite display and its private piece-coordinate lookup tables.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 372,
+      "physical_lines": 374,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -68841,7 +68841,7 @@
       "responsibility": "Zone enemy-art selection, decompression queue dispatch and product-specific pattern-load catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 173,
+      "physical_lines": 174,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -69006,7 +69006,7 @@
       "responsibility": "Prioritized normal sprite display, mapping-piece expansion and orientation-specific rendering helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 575,
+      "physical_lines": 579,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",

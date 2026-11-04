@@ -13,25 +13,25 @@ Render_Sprites:
                 lea     (Camera_X_pos_copy).w,a3
                 lea     (Sprite_table).w,a6
                 tst.b   (Level_started_flag).w
-                beq.s   loc_1AD4A
+                beq.s   SKSpriteRender_BeginPriorityBucket
                 jsr     (Render_HUD).l
                 jsr     (Render_Rings).l
 
-loc_1AD4A:
+SKSpriteRender_BeginPriorityBucket:
                 tst.w   (a5)
                 beq.w   Render_Sprites_NextLevel
                 lea     2(a5),a4
 
-loc_1AD54:
+SKSpriteRender_ReadActorAndPickDrawMode:
                 movea.w (a4)+,a0                        ; a0=object
                 andi.b  #$7F,render_flags(a0)           ; clear on-screen flag
                 move.b  render_flags(a0),d6
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6                           ; is the multi-draw flag set?
-                bne.w   loc_1AE58                       ; if it is, branch
+                bne.w   SKSpriteRender_CullScreenParent  ; if it is, branch
                 btst    #2,d6                           ; is this to be positioned by screen coordinates?
-                beq.s   loc_1ADB2                       ; if it is, branch
+                beq.s   SKSpriteRender_MarkSingleVisible  ; if it is, branch
                 moveq   #0,d2
                 move.b  width_pixels(a0),d2
                 sub.w   (a3),d0
@@ -55,14 +55,15 @@ loc_1AD54:
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_1ADB2:
+; Set visibility before checking the sprite budget or the mapping frame
+SKSpriteRender_MarkSingleVisible:
                 ori.b   #$80,render_flags(a0)           ; set on-screen flag
                 tst.w   d7
                 bmi.s   Render_Sprites_NextObj
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6                           ; is the static mappings flag set?
-                bne.s   loc_1ADD8                       ; if it is, branch
+                bne.s   SKSpriteRender_DrawSingleMapping  ; if it is, branch
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
@@ -70,66 +71,67 @@ loc_1ADB2:
                 subq.w  #1,d4                           ; get number of pieces
                 bmi.s   Render_Sprites_NextObj          ; if there are 0 pieces, branch
 
-loc_1ADD8:
+SKSpriteRender_DrawSingleMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
 Render_Sprites_NextObj:
                 subq.w  #2,(a5)                         ; decrement object count
-                bne.w   loc_1AD54                       ; if there are objects left, repeat
+                bne.w   SKSpriteRender_ReadActorAndPickDrawMode  ; if there are objects left, repeat
 
 Render_Sprites_NextLevel:
                 cmpa.l  #Sprite_table_input,a5
-                bne.s   loc_1ADFC
+                bne.s   SKSpriteRender_NextPriorityBucket
                 cmpi.b  #9,(Current_zone).w             ; LRZ?
-                bne.s   loc_1ADFC
+                bne.s   SKSpriteRender_NextPriorityBucket
                 jsr     (RenderLRZForegroundRockPieces).l
 
-loc_1ADFC:
+SKSpriteRender_NextPriorityBucket:
                 lea     $80(a5),a5                      ; load next priority level
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_1AD4A
+                blo.w   SKSpriteRender_BeginPriorityBucket
                 move.w  d7,d6
-                bmi.s   loc_1AE18
+                bmi.s   SKSpriteRender_SaveCountAndCheckMask
                 moveq   #0,d0
 
-loc_1AE10:
+SKSpriteRender_HideUnusedHardwareSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_1AE10
+                dbf     d7,SKSpriteRender_HideUnusedHardwareSprites
 
-loc_1AE18:
+SKSpriteRender_SaveCountAndCheckMask:
                 subi.w  #$4F,d6
                 neg.w   d6
                 move.b  d6,(Sprites_drawn).w
                 tst.w   (Spritemask_flag).w
-                beq.s   locret_1AE56
+                beq.s   SKSpriteRender_RenderReturn
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.s   loc_1AE34
+                bhs.s   SKSpriteRender_BeginMaskScan
                 clr.w   (Spritemask_flag).w
 
-loc_1AE34:
+; Scan 79 slots. Earlier code leaves the mask flag set when P1's routine is 6 or higher
+SKSpriteRender_BeginMaskScan:
                 lea     (Sprite_table-4).w,a0
                 move.w  #$7C0,d0
                 moveq   #$4F-1,d1
 
-loc_1AE3E:
+SKSpriteRender_ApplyAllMasks:
                 addq.w  #8,a0
                 cmp.w   (a0),d0
-                dbeq    d1,loc_1AE3E
-                bne.s   locret_1AE56
+                dbeq    d1,SKSpriteRender_ApplyAllMasks
+                bne.s   SKSpriteRender_RenderReturn
                 move.w  #1,2(a0)
                 clr.w   $A(a0)
                 subq.w  #1,d1
-                bpl.s   loc_1AE3E
+                bpl.s   SKSpriteRender_ApplyAllMasks
 
-locret_1AE56:
+SKSpriteRender_RenderReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1AE58:
+SKSpriteRender_CullScreenParent:
                 btst    #2,d6                           ; is this to be positioned by screen coordinates?
-                bne.s   loc_1AEA2                       ; if it is, branch
+                bne.s   SKSpriteRender_ProjectAndCullWorldParent  ; if it is, branch
                 moveq   #0,d2
 
 ; check if object is within X bounds
@@ -155,10 +157,10 @@ loc_1AE58:
                 cmpi.w  #224,d3
                 bge.w   Render_Sprites_NextObj
                 addi.w  #128,d1
-                bra.s   loc_1AEE4
+                bra.s   SKSpriteRender_TryDrawParentFrame
 ; ---------------------------------------------------------------------------
 
-loc_1AEA2:
+SKSpriteRender_ProjectAndCullWorldParent:
                 moveq   #0,d2
                 move.b  width_pixels(a0),d2
                 sub.w   (a3),d0
@@ -182,7 +184,7 @@ loc_1AEA2:
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_1AEE4:
+SKSpriteRender_TryDrawParentFrame:
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
                 bmi.w   Render_Sprites_NextObj
@@ -190,37 +192,38 @@ loc_1AEE4:
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_1AF1C
+                beq.s   SKSpriteRender_BeginEmbeddedChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1AF1C
+                bmi.s   SKSpriteRender_BeginEmbeddedChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
                 bmi.w   Render_Sprites_NextObj
 
-loc_1AF1C:
+SKSpriteRender_BeginEmbeddedChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
                 bcs.w   Render_Sprites_NextObj
                 lea     sub2_x_pos(a0),a0
 
-loc_1AF2A:
+; World children add the hardware Y bias before wrapping Y
+SKSpriteRender_ReadAndProjectChild:
                 move.w  (a0)+,d0
                 move.w  (a0)+,d1
                 btst    #2,d6
-                beq.s   loc_1AF46
+                beq.s   SKSpriteRender_DrawChildFrameClipped
                 sub.w   (a3),d0
                 addi.w  #128,d0
                 sub.w   4(a3),d1
                 addi.w  #128,d1
                 and.w   (Screen_Y_wrap_value).w,d1
 
-loc_1AF46:
+SKSpriteRender_DrawChildFrameClipped:
                 addq.w  #1,a0
                 moveq   #0,d4
                 move.b  (a0)+,d4
@@ -229,14 +232,14 @@ loc_1AF46:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1AF62
+                bmi.s   SKSpriteRender_TryNextEmbeddedChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_1AF62:
+SKSpriteRender_TryNextEmbeddedChild:
                 tst.w   d7
-                dbmi    d3,loc_1AF2A
+                dbmi    d3,SKSpriteRender_ReadAndProjectChild
                 bra.w   Render_Sprites_NextObj
 ; End of function Render_Sprites
 
@@ -244,11 +247,11 @@ loc_1AF62:
 
 RenderMappingPieces:
                 lsr.b   #1,d6
-                bcs.s   loc_1AF9E
+                bcs.s   SKSpriteRender_PickUnclippedHOrHV
                 lsr.b   #1,d6
-                bcs.w   loc_1B038
+                bcs.w   SKSpriteRender_DrawUnclippedPieceV
 
-loc_1AF76:
+SKSpriteRender_DrawUnclippedPiece:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
@@ -261,21 +264,21 @@ loc_1AF76:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_1AF94
+                bne.s   SKSpriteRender_FinishUnclippedPiece
                 addq.w  #1,d2
 
-loc_1AF94:
+SKSpriteRender_FinishUnclippedPiece:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1AF76
+                dbmi    d4,SKSpriteRender_DrawUnclippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1AF9E:
+SKSpriteRender_PickUnclippedHOrHV:
                 lsr.b   #1,d6
-                bcs.s   loc_1AFE8
+                bcs.s   SKSpriteRender_DrawUnclippedPieceHV
 
-loc_1AFA2:
+SKSpriteRender_DrawUnclippedPieceH:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
@@ -289,20 +292,20 @@ loc_1AFA2:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1AFD8(pc,d6.w),d6
+                move.b  SKSpriteRender_UnclippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_1AFCE
+                bne.s   SKSpriteRender_FinishUnclippedPieceH
                 addq.w  #1,d2
 
-loc_1AFCE:
+SKSpriteRender_FinishUnclippedPieceH:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1AFA2
+                dbmi    d4,SKSpriteRender_DrawUnclippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
-byte_1AFD8:
+SKSpriteRender_UnclippedWidthByVdpSize:
                 dc.b    8,   8,   8,   8
                 dc.b    $10, $10, $10, $10
                 dc.b    $18, $18, $18, $18
@@ -310,12 +313,12 @@ byte_1AFD8:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1AFE8:
+SKSpriteRender_DrawUnclippedPieceHV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1),d6
-                move.b  byte_1B028(pc,d6.w),d6
+                move.b  SKSpriteRender_UnclippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 move.w  d2,(a6)+
@@ -328,20 +331,20 @@ loc_1AFE8:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1AFD8(pc,d6.w),d6
+                move.b  SKSpriteRender_UnclippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_1B01E
+                bne.s   SKSpriteRender_FinishUnclippedPieceHV
                 addq.w  #1,d2
 
-loc_1B01E:
+SKSpriteRender_FinishUnclippedPieceHV:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1AFE8
+                dbmi    d4,SKSpriteRender_DrawUnclippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
-byte_1B028:
+SKSpriteRender_UnclippedHeightByVdpSize:
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
@@ -349,13 +352,13 @@ byte_1B028:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1B038:
+SKSpriteRender_DrawUnclippedPieceV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1)+,d6
                 move.b  d6,2(a6)
-                move.b  byte_1B028(pc,d6.w),d6
+                move.b  SKSpriteRender_UnclippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 move.w  d2,(a6)+
@@ -367,13 +370,13 @@ loc_1B038:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_1B066
+                bne.s   SKSpriteRender_FinishUnclippedPieceV
                 addq.w  #1,d2
 
-loc_1B066:
+SKSpriteRender_FinishUnclippedPieceV:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1B038
+                dbmi    d4,SKSpriteRender_DrawUnclippedPieceV
                 rts
 ; End of function RenderMappingPieces
 
@@ -381,18 +384,18 @@ loc_1B066:
 
 RenderMappingPiecesClipped:
                 lsr.b   #1,d6
-                bcs.s   loc_1B0C2
+                bcs.s   SKSpriteRender_PickClippedHOrHV
                 lsr.b   #1,d6
-                bcs.w   loc_1B19C
+                bcs.w   SKSpriteRender_DrawClippedPieceV
 
-loc_1B07A:
+SKSpriteRender_DrawClippedPiece:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B0BA
+                bls.s   SKSpriteRender_RejectClippedY
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1B0BA
+                bhs.s   SKSpriteRender_RejectClippedY
                 move.w  d2,(a6)+
                 move.b  (a1)+,(a6)+
                 addq.w  #1,a6
@@ -402,39 +405,39 @@ loc_1B07A:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B0B2
+                bls.s   SKSpriteRender_RejectClippedX
                 cmpi.w  #320+128,d2
-                bhs.s   loc_1B0B2
+                bhs.s   SKSpriteRender_RejectClippedX
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1B07A
+                dbmi    d4,SKSpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B0B2:
+SKSpriteRender_RejectClippedX:
                 subq.w  #6,a6
-                dbf     d4,loc_1B07A
+                dbf     d4,SKSpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B0BA:
+SKSpriteRender_RejectClippedY:
                 addq.w  #5,a1
-                dbf     d4,loc_1B07A
+                dbf     d4,SKSpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B0C2:
+SKSpriteRender_PickClippedHOrHV:
                 lsr.b   #1,d6
-                bcs.s   loc_1B12C
+                bcs.s   SKSpriteRender_DrawClippedPieceHV
 
-loc_1B0C6:
+SKSpriteRender_DrawClippedPieceH:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B114
+                bls.s   SKSpriteRender_RejectClippedYH
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1B114
+                bhs.s   SKSpriteRender_RejectClippedYH
                 move.w  d2,(a6)+
                 move.b  (a1)+,d6
                 move.b  d6,(a6)+
@@ -445,31 +448,31 @@ loc_1B0C6:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1B11C(pc,d6.w),d6
+                move.b  SKSpriteRender_ClippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B10C
+                bls.s   SKSpriteRender_RejectClippedXH
                 cmpi.w  #320+128,d2
-                bhs.s   loc_1B10C
+                bhs.s   SKSpriteRender_RejectClippedXH
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1B0C6
+                dbmi    d4,SKSpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B10C:
+SKSpriteRender_RejectClippedXH:
                 subq.w  #6,a6
-                dbf     d4,loc_1B0C6
+                dbf     d4,SKSpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B114:
+SKSpriteRender_RejectClippedYH:
                 addq.w  #5,a1
-                dbf     d4,loc_1B0C6
+                dbf     d4,SKSpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
-byte_1B11C:
+SKSpriteRender_ClippedWidthByVdpSize:
                 dc.b    8,   8,   8,   8
                 dc.b    $10, $10, $10, $10
                 dc.b    $18, $18, $18, $18
@@ -477,18 +480,18 @@ byte_1B11C:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1B12C:
+SKSpriteRender_DrawClippedPieceHV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1),d6
-                move.b  byte_1B18C(pc,d6.w),d6
+                move.b  SKSpriteRender_ClippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B184
+                bls.s   SKSpriteRender_RejectClippedYHV
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1B184
+                bhs.s   SKSpriteRender_RejectClippedYHV
                 move.w  d2,(a6)+
                 move.b  (a1)+,d6
                 move.b  d6,(a6)+
@@ -499,31 +502,31 @@ loc_1B12C:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1B11C(pc,d6.w),d6
+                move.b  SKSpriteRender_ClippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B17C
+                bls.s   SKSpriteRender_RejectClippedXHV
                 cmpi.w  #320+128,d2
-                bhs.s   loc_1B17C
+                bhs.s   SKSpriteRender_RejectClippedXHV
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1B12C
+                dbmi    d4,SKSpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B17C:
+SKSpriteRender_RejectClippedXHV:
                 subq.w  #6,a6
-                dbf     d4,loc_1B12C
+                dbf     d4,SKSpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B184:
+SKSpriteRender_RejectClippedYHV:
                 addq.w  #5,a1
-                dbf     d4,loc_1B12C
+                dbf     d4,SKSpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
-byte_1B18C:
+SKSpriteRender_ClippedHeightByVdpSize:
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
@@ -531,19 +534,19 @@ byte_1B18C:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1B19C:
+SKSpriteRender_DrawClippedPieceV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1)+,d6
                 move.b  d6,2(a6)
-                move.b  byte_1B18C(pc,d6.w),d6
+                move.b  SKSpriteRender_ClippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B1EC
+                bls.s   SKSpriteRender_RejectClippedYV
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1B1EC
+                bhs.s   SKSpriteRender_RejectClippedYV
                 move.w  d2,(a6)+
                 addq.w  #2,a6
                 move.w  (a1)+,d2
@@ -553,23 +556,24 @@ loc_1B19C:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1B1E4
+                bls.s   SKSpriteRender_RejectClippedXV
                 cmpi.w  #320+128,d2
-                bhs.s   loc_1B1E4
+                bhs.s   SKSpriteRender_RejectClippedXV
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1B19C
+                dbmi    d4,SKSpriteRender_DrawClippedPieceV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B1E4:
+SKSpriteRender_RejectClippedXV:
                 subq.w  #6,a6
-                dbf     d4,loc_1B19C
+                dbf     d4,SKSpriteRender_DrawClippedPieceV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B1EC:
+; Skip four source bytes. The size byte has already been written to the output slot
+SKSpriteRender_RejectClippedYV:
                 addq.w  #4,a1
-                dbf     d4,loc_1B19C
+                dbf     d4,SKSpriteRender_DrawClippedPieceV
                 rts
 ; End of function RenderMappingPiecesClipped

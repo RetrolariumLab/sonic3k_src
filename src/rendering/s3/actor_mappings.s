@@ -238,7 +238,7 @@ PalSPtr_CNZMinibossOpen:
 Map_CNZMiniboss:
                 include "src/objects/shared/zones/cnz/mappings/miniboss.s"
 
-word_16322C:    palscriptptr .header, .data
+S3ICZMinibossPal_PulseAccel:    palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$14, 1, 3-1
                 .data:  palscriptdata 8, $222
@@ -266,7 +266,8 @@ word_16322C:    palscriptptr .header, .data
                 palscriptdata 1, $EE0
                 palscriptrept
 
-word_163298:    palscriptptr .header, .data
+; The last palette step invokes the completion callback
+S3ICZMinibossPal_PulseDecel:    palscriptptr .header, .data
                 dc.w    0
                 .header: palscripthdr Normal_palette_line_2+$14, 1, 3-1
                 .data:  palscriptdata 2, $222

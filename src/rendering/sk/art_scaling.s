@@ -26,7 +26,7 @@ Init_ArtScaling:
 ; End of function Init_ArtScaling
 
 ; ---------------------------------------------------------------------------
-word_2464A:
+SKScale_TileCountsByScale:
                 dc.w    $100
                 dc.w    $FC
                 dc.w    $90
@@ -66,17 +66,17 @@ TryBuildObjectScaledArt:
                 moveq   #0,d1
                 move.b  $40(a0),d1
                 cmpi.b  #$1C,d1
-                blo.s   loc_2469A
+                blo.s   SKScale_SetFrameAndTryReserveTiles
                 move.b  #$1C,d1                         ; Maximum 28 different "scales"
 
-loc_2469A:
+SKScale_SetFrameAndTryReserveTiles:
                 move.b  d1,mapping_frame(a0)            ; Scale level correlates with mapping frame
                 add.w   d1,d1
-                move.w  word_2464A(pc,d1.w),d1
+                move.w  SKScale_TileCountsByScale(pc,d1.w),d1
                 move.w  (_unkF740).w,d2
                 add.w   d1,d2
                 cmpi.w  #$80,d2
-                bhi.s   loc_246D2
+                bhi.s   SKScale_HideOnReservationFailure
                 sub.w   d1,d2
                 movem.l d1/d5-a0/a2/a4,-(sp)
                 lea     (Kos_decomp_buffer).w,a2
@@ -93,7 +93,7 @@ loc_2469A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_246D2:
+SKScale_HideOnReservationFailure:
                 bclr    #7,render_flags(a0)
                 rts
 ; End of function TryBuildObjectScaledArt
@@ -121,15 +121,15 @@ ScaleArt_ResampleObjectFrame:
                 move.w  #$F,d7
                 swap    d7
                 tst.w   d4
-                beq.w   loc_249BA                       ; If modified scale factor smaller than 8, branch
+                beq.w   SKScale_TryFactor7Sampler       ; If modified scale factor smaller than 8, branch
                 cmpi.w  #1,d4
-                bne.s   loc_2472A                       ; If modified scale factor is not between 8-$10, branch
+                bne.s   SKScale_InitGenericSampler      ; If modified scale factor is not between 8-$10, branch
                 tst.w   d5
-                beq.w   loc_2493E                       ; If modified scale factor is 8, branch
+                beq.w   SKScale_InitFactor8Sampler      ; If modified scale factor is 8, branch
                 cmpi.w  #$2000,d5
-                beq.w   loc_248B8                       ; If modified scale factor is 9, branch
+                beq.w   SKScale_InitFactor9Sampler      ; If modified scale factor is 9, branch
 
-loc_2472A:
+SKScale_InitGenericSampler:
                 move.w  d4,d2                           ; All other instances. Scale factor/8 to d2
                 swap    d2
                 move.w  d5,d2
@@ -142,57 +142,58 @@ loc_2472A:
                 movea.w d0,a5                           ; Note the result in a5
                 moveq   #0,d2
                 moveq   #0,d3
-                lea     loc_2479C(pc),a6
+                lea     SKScale_PackGenericSamples(pc),a6
 
-loc_2474A:
+SKScale_BeginGenericGroup:
                 move.w  #$20-1,d7
 
-loc_2474E:
+SKScale_InitGenericRow:
                 swap    d7
                 swap    d3
                 move.w  #0,d2
                 move.w  #0,d3
                 movea.l a2,a4
                 move.w  a5,d6
-                bmi.s   loc_24770
+                bmi.s   SKScale_WriteMaskedGenericTail
 
-loc_24760:
+SKScale_WriteGenericRowGroups:
                 swap    d6
                 jsr     (a6)
                 swap    d6
-                dbf     d6,loc_24760
+                dbf     d6,SKScale_WriteGenericRowGroups
                 cmpi.w  #$40,d2
-                bhs.s   loc_24778
+                bhs.s   SKScale_AdvanceGenericYPhase
 
-loc_24770:
+SKScale_WriteMaskedGenericTail:
                 swap    d6
                 jsr     ScaleArt_WriteMaskedTailPixels(pc)
                 swap    d6
 
-loc_24778:
+; Carry from the vertical fraction adds one source row before the whole-row step
+SKScale_AdvanceGenericYPhase:
                 swap    d3
                 add.w   d5,d3
-                bcc.s   loc_24782
+                bcc.s   SKScale_AdvanceGenericRows
                 adda.w  #$40,a1
 
-loc_24782:
+SKScale_AdvanceGenericRows:
                 move.w  d4,d0
                 lsl.w   #6,d0
                 adda.w  d0,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_2479A
+                bhs.s   SKScale_GenericSamplerReturn
                 addq.w  #4,a2
                 swap    d7
-                dbf     d7,loc_2474E
+                dbf     d7,SKScale_InitGenericRow
                 lea     $380(a2),a2
-                bra.s   loc_2474A
+                bra.s   SKScale_BeginGenericGroup
 ; ---------------------------------------------------------------------------
 
-locret_2479A:
+SKScale_GenericSamplerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2479C:
+SKScale_PackGenericSamples:
                 rept    4
                 move.b  (a1,d2.w),d0
                 add.w   d5,d3
@@ -216,18 +217,18 @@ ScaleArt_WriteMaskedTailPixels:
                 add.w   d5,d3
                 addx.w  d4,d2
                 cmpi.w  #$40,d2
-                blo.s   loc_24814
+                blo.s   ScaleArtTail_ReadSecondSourceByte
                 move.b  #0,d0
 
-loc_24814:
+ScaleArtTail_ReadSecondSourceByte:
                 move.b  (a1,d2.w),d1
                 add.w   d5,d3
                 addx.w  d4,d2
                 cmpi.w  #$40,d2
-                blo.s   loc_24826
+                blo.s   SKScale_StoreTailPackedByte
                 move.b  #0,d1
 
-loc_24826:
+SKScale_StoreTailPackedByte:
                 and.b   d6,d0
                 and.b   d7,d1
                 or.b    d1,d0
@@ -239,17 +240,17 @@ loc_24826:
 
 ; ---------------------------------------------------------------------------
 
-loc_248B8:
+SKScale_InitFactor9Sampler:
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_24906(pc),a6
+                lea     SKScale_PackFactor9Samples(pc),a6
                 move.w  #2-1,d7
 
-loc_248C4:
+SKScale_BeginFactor9Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_248CA:
+SKScale_WriteFactor9Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -260,25 +261,26 @@ loc_248CA:
                 and.b   d6,d0
                 move.b  d0,(a4)+
                 add.w   d5,d3
-                bcc.s   loc_248EC
+                bcc.s   SKScale_AdvanceFactor9Rows
                 lea     $40(a1),a1
 
-loc_248EC:
+SKScale_AdvanceFactor9Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_24904
+                bhs.s   SKArtScaling_ReturnFromFactorNineSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_248CA
+                dbf     d6,SKScale_WriteFactor9Row
                 lea     $380(a2),a2
                 swap    d7
-                dbf     d7,loc_248C4
+                dbf     d7,SKScale_BeginFactor9Group
 
-locret_24904:
+SKArtScaling_ReturnFromFactorNineSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24906:
+; Read eight source bytes into four output bytes, then skip the ninth source byte
+SKScale_PackFactor9Samples:
                 rept    3
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -298,17 +300,17 @@ loc_24906:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2493E:
+SKScale_InitFactor8Sampler:
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_24984(pc),a6
+                lea     SKScale_PackFactor8Samples(pc),a6
                 move.w  #2-1,d7
 
-loc_2494A:
+SKScale_BeginFactor8Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_24950:
+SKScale_WriteFactor8Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -316,21 +318,21 @@ loc_24950:
                 jsr     (a6)
                 endm
                 add.w   d5,d3
-                bcc.s   loc_2496E
+                bcc.s   SKScale_AdvanceFactor8Rows
                 lea     $40(a1),a1
 
-loc_2496E:
+SKScale_AdvanceFactor8Rows:
                 adda.w  d4,a1
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_24950
+                dbf     d6,SKScale_WriteFactor8Row
                 lea     $380(a2),a2
                 swap    d7
-                dbf     d7,loc_2494A
+                dbf     d7,SKScale_BeginFactor8Group
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24984:
+SKScale_PackFactor8Samples:
                 rept    4
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -343,19 +345,19 @@ loc_24984:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_249BA:
+SKScale_TryFactor7Sampler:
                 cmpi.w  #$E000,d5
-                bne.w   loc_24A3C
-                lea     loc_24A10(pc),a6
+                bne.w   SKScale_TryFactor6Sampler
+                lea     SKScale_PackFactor7Samples(pc),a6
                 moveq   #0,d3
                 lsl.w   #6,d4
                 move.w  #3-1,d7
 
-loc_249CE:
+SKScale_BeginFactor7Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_249D4:
+SKScale_WriteFactor7Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -364,25 +366,25 @@ loc_249D4:
                 endm
                 move.b  (a3),(a4)
                 add.w   d5,d3
-                bcc.s   loc_249F6
+                bcc.s   SKScale_AdvanceFactor7Rows
                 lea     $40(a1),a1
 
-loc_249F6:
+SKScale_AdvanceFactor7Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_24A0E
+                bhs.s   SKScale_Factor7Return
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_249D4
+                dbf     d6,SKScale_WriteFactor7Row
                 lea     $580(a2),a2
                 swap    d7
-                dbf     d7,loc_249CE
+                dbf     d7,SKScale_BeginFactor7Group
 
-locret_24A0E:
+SKScale_Factor7Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24A10:
+SKScale_PackFactor7Samples:
                 move.b  (a3)+,(a4)+
                 rept    3
                 move.b  (a3)+,d0
@@ -396,19 +398,19 @@ loc_24A10:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24A3C:
+SKScale_TryFactor6Sampler:
                 cmpi.w  #$C000,d5
-                bne.w   loc_24AC6
+                bne.w   SKScale_TryFactor5Sampler
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_24AA4(pc),a6
+                lea     SKScale_PackFactor6Samples(pc),a6
                 move.w  #4-1,d7
 
-loc_24A50:
+SKScale_BeginFactor6Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_24A56:
+SKScale_WriteFactor6Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -425,25 +427,25 @@ loc_24A56:
                 move.b  (a3),d0
                 move.b  d0,(a4)
                 add.w   d5,d3
-                bcc.s   loc_24A8A
+                bcc.s   SKScale_AdvanceFactor6Rows
                 lea     $40(a1),a1
 
-loc_24A8A:
+SKScale_AdvanceFactor6Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_24AA2
+                bhs.s   SKArtScaling_ReturnFromFactorSixSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_24A56
+                dbf     d6,SKScale_WriteFactor6Row
                 lea     $580(a2),a2
                 swap    d7
-                dbf     d7,loc_24A50
+                dbf     d7,SKScale_BeginFactor6Group
 
-locret_24AA2:
+SKArtScaling_ReturnFromFactorSixSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24AA4:
+SKScale_PackFactor6Samples:
                 rept    2
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,d0
@@ -457,20 +459,20 @@ loc_24AA4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24AC6:
+SKScale_TryFactor5Sampler:
                 cmpi.w  #$A000,d5
-                bne.w   loc_24B60
+                bne.w   SKScale_InitFactor4Copy
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_24B4A(pc),a5
-                lea     loc_24B32(pc),a6
+                lea     SKScale_PackFactor5FromWord(pc),a5
+                lea     SKScale_PackFactor5FromBytes(pc),a6
                 move.w  #4-1,d7
 
-loc_24ADE:
+SKScale_BeginFactor5Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_24AE4:
+SKScale_WriteFactor5Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -486,25 +488,25 @@ loc_24AE4:
                 or.b    d1,d0
                 move.b  d0,(a4)+
                 add.w   d5,d3
-                bcc.s   loc_24B18
+                bcc.s   SKScale_AdvanceFactor5Rows
                 lea     $40(a1),a1
 
-loc_24B18:
+SKScale_AdvanceFactor5Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_24B30
+                bhs.s   SKArtScaling_ReturnFromFactorFiveSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_24AE4
+                dbf     d6,SKScale_WriteFactor5Row
                 lea     $780(a2),a2
                 swap    d7
-                dbf     d7,loc_24ADE
+                dbf     d7,SKScale_BeginFactor5Group
 
-locret_24B30:
+SKArtScaling_ReturnFromFactorFiveSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24B32:
+SKScale_PackFactor5FromBytes:
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,d0
@@ -518,7 +520,7 @@ loc_24B32:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24B4A:
+SKScale_PackFactor5FromWord:
                 move.w  (a3)+,(a4)+
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -531,15 +533,15 @@ loc_24B4A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_24B60:
+SKScale_InitFactor4Copy:
                 moveq   #0,d3
                 lsl.w   #6,d4
                 moveq   #4-1,d7
 
-loc_24B66:
+SKScale_BeginFactor4Group:
                 move.w  #$20-1,d6
 
-loc_24B6A:
+SKScale_CopyFactor4Row:
                 movea.l a1,a3
                 movea.l a2,a4
                 rept    16
@@ -547,15 +549,15 @@ loc_24B6A:
                 lea     $80(a4),a4
                 endm
                 add.w   d5,d3
-                bcc.s   loc_24BD6
+                bcc.s   SKScale_AdvanceFactor4Rows
                 lea     $40(a1),a1
 
-loc_24BD6:
+SKScale_AdvanceFactor4Rows:
                 adda.w  d4,a1
                 addq.w  #4,a2
-                dbf     d6,loc_24B6A
+                dbf     d6,SKScale_CopyFactor4Row
                 lea     $780(a2),a2
-                dbf     d7,loc_24B66
+                dbf     d7,SKScale_BeginFactor4Group
                 rts
 ; ---------------------------------------------------------------------------
 Map_ScaledArt:

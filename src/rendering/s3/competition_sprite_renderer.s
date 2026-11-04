@@ -16,31 +16,32 @@ Render_Sprites_CompetitionMode:
 ; Modify the back buffer
                 lea     (Sprite_table+$10).w,a6
                 tst.w   (Current_sprite_table_page).w
-                beq.s   loc_19872
+                beq.s   S3CompRender_TryDrawP1Hud
                 lea     (Sprite_table_alternate+$10).l,a6
 
-loc_19872:
+S3CompRender_TryDrawP1Hud:
                 tst.b   (Level_started_flag).w
-                beq.s   loc_1987E
+                beq.s   S3CompRender_BeginTopBucket
                 jsr     (Render_HUD_P1).l
 
-loc_1987E:
+S3CompRender_BeginTopBucket:
                 move.b  1(a5),(a5)
-                beq.w   loc_1992A
+                beq.w   S3CompRender_NextTopPriority
                 lea     2(a5),a4
 
-loc_1988A:
+; Clear the actor's visible bit at the start of the first viewport pass
+S3CompRender_ReadAndCullTopActor:
                 movea.w (a4)+,a0
                 andi.b  #$7F,render_flags(a0)
                 move.b  render_flags(a0),d6
                 btst    #4,d6
-                bne.w   loc_19924
+                bne.w   S3CompRender_TickTopBucket
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6
-                bne.w   loc_19A4E
+                bne.w   S3CompRender_TryDrawTopParent
                 btst    #2,d6
-                beq.s   loc_198F6
+                beq.s   S3CompRender_ResolveTopMapping
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -50,7 +51,7 @@ loc_1988A:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.s   loc_19924
+                bhs.s   S3CompRender_TickTopBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -62,54 +63,55 @@ loc_1988A:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.s   loc_19924
+                bhs.s   S3CompRender_TickTopBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_198F6:
+S3CompRender_ResolveTopMapping:
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.s   loc_19924
+                bmi.s   S3CompRender_TickTopBucket
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6
-                bne.s   loc_1991C
+                bne.s   S3CompRender_DrawTopMapping
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19924
+                bmi.s   S3CompRender_TickTopBucket
 
-loc_1991C:
+S3CompRender_DrawTopMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
-loc_19924:
+S3CompRender_TickTopBucket:
                 subq.b  #2,(a5)
-                bne.w   loc_1988A
+                bne.w   S3CompRender_ReadAndCullTopActor
 
-loc_1992A:
+S3CompRender_NextTopPriority:
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_1987E
+                blo.w   S3CompRender_BeginTopBucket
                 tst.w   d7
-                bmi.s   loc_19946
+                bmi.s   S3CompRender_TrySwapPlayersInBucket2
                 moveq   #0,d0
 
-loc_1993E:
+S3CompRender_HideUnusedTopSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_1993E
+                dbf     d7,S3CompRender_HideUnusedTopSprites
 
-loc_19946:
+; Swap only when the first two handles in priority 2 are P1 followed by P2
+S3CompRender_TrySwapPlayersInBucket2:
                 move.l  (Sprite_table_input+2+($80*2)).w,d0
                 cmpi.l  #((Player_1&$FFFF)<<16)|(Player_2&$FFFF),d0
-                bne.s   loc_19958
+                bne.s   S3CompRender_InitBottomViewport
                 swap    d0
                 move.l  d0,(Sprite_table_input+2+($80*2)).w
 
-loc_19958:
+S3CompRender_InitBottomViewport:
                 moveq   #80-1,d7                        ; Number of sprites to render
                 lea     (Sprite_table_input).w,a5
                 lea     (Camera_X_pos_P2_copy).w,a3
@@ -120,30 +122,30 @@ loc_19958:
 ; Modify the back buffer
                 lea     (Sprite_table_P2).l,a6
                 tst.w   (Current_sprite_table_page).w
-                beq.s   loc_19974
+                beq.s   S3CompRender_TryCallP2HudStub
                 lea     (Sprite_table_P2_alternate).l,a6
 
-loc_19974:
+S3CompRender_TryCallP2HudStub:
                 tst.b   (Level_started_flag).w
-                beq.s   loc_19980
+                beq.s   S3CompRender_BeginBottomBucket
                 jsr     (Render_HUD_P2).l
 
-loc_19980:
+S3CompRender_BeginBottomBucket:
                 tst.b   1(a5)
-                beq.w   loc_19A2C
+                beq.w   S3CompRender_NextBottomPriority
                 lea     2(a5),a4
 
-loc_1998C:
+S3CompRender_ReadAndCullBottomActor:
                 movea.w (a4)+,a0
                 move.b  render_flags(a0),d6
                 btst    #3,d6
-                bne.w   loc_19A24
+                bne.w   S3CompRender_TickBottomBucket
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6
-                bne.w   loc_19B1A
+                bne.w   S3CompRender_TryDrawBottomParent
                 btst    #2,d6
-                beq.s   loc_199F2
+                beq.s   S3CompRender_ResolveBottomMapping
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -153,7 +155,7 @@ loc_1998C:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.s   loc_19A24
+                bhs.s   S3CompRender_TickBottomBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -165,55 +167,55 @@ loc_1998C:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.s   loc_19A24
+                bhs.s   S3CompRender_TickBottomBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_199F2:
+S3CompRender_ResolveBottomMapping:
                 addi.w  #224/2,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.s   loc_19A24
+                bmi.s   S3CompRender_TickBottomBucket
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6
-                bne.s   loc_19A1C
+                bne.s   S3CompRender_DrawBottomMapping
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19A24
+                bmi.s   S3CompRender_TickBottomBucket
 
-loc_19A1C:
+S3CompRender_DrawBottomMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
-loc_19A24:
+S3CompRender_TickBottomBucket:
                 subq.b  #2,1(a5)
-                bne.w   loc_1998C
+                bne.w   S3CompRender_ReadAndCullBottomActor
 
-loc_19A2C:
+S3CompRender_NextBottomPriority:
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_19980
+                blo.w   S3CompRender_BeginBottomBucket
                 tst.w   d7
-                bmi.s   loc_19A48
+                bmi.s   S3CompRender_RequestPageFlip
                 moveq   #0,d0
 
-loc_19A40:
+S3CompRender_HideUnusedBottomSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_19A40
+                dbf     d7,S3CompRender_HideUnusedBottomSprites
 
-loc_19A48:
+S3CompRender_RequestPageFlip:
 ; The new sprite tables are complete: signal a page flip to
 ; allow them to be uploaded to the VDP!
                 st.b    (Sprite_table_page_flip_pending).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19A4E:
+S3CompRender_TryDrawTopParent:
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -223,7 +225,7 @@ loc_19A4E:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.w   loc_19924
+                bhs.w   S3CompRender_TickTopBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -235,36 +237,36 @@ loc_19A4E:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.w   loc_19924
+                bhs.w   S3CompRender_TickTopBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.w   loc_19924
+                bmi.w   S3CompRender_TickTopBucket
                 move.w  art_tile(a0),d5
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_19ACC
+                beq.s   S3CompRender_BeginTopChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19ACC
+                bmi.s   S3CompRender_BeginTopChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
-                bmi.w   loc_19924
+                bmi.w   S3CompRender_TickTopBucket
 
-loc_19ACC:
+S3CompRender_BeginTopChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
-                bcs.w   loc_19924
+                bcs.w   S3CompRender_TickTopBucket
                 lea     sub2_x_pos(a0),a0
 
-loc_19ADA:
+S3CompRender_DrawTopChild:
                 move.w  (a0)+,d0
                 sub.w   (a3),d0
                 addi.w  #128,d0
@@ -281,18 +283,18 @@ loc_19ADA:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19B10
+                bmi.s   S3CompRender_TryNextTopChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_19B10:
+S3CompRender_TryNextTopChild:
                 tst.w   d7
-                dbmi    d3,loc_19ADA
-                bra.w   loc_19924
+                dbmi    d3,S3CompRender_DrawTopChild
+                bra.w   S3CompRender_TickTopBucket
 ; ---------------------------------------------------------------------------
 
-loc_19B1A:
+S3CompRender_TryDrawBottomParent:
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -302,7 +304,7 @@ loc_19B1A:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.w   loc_19A24
+                bhs.w   S3CompRender_TickBottomBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -314,36 +316,36 @@ loc_19B1A:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.w   loc_19A24
+                bhs.w   S3CompRender_TickBottomBucket
                 addi.w  #240,d1
                 sub.w   d3,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.w   loc_19A24
+                bmi.w   S3CompRender_TickBottomBucket
                 move.w  art_tile(a0),d5
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_19B98
+                beq.s   S3CompRender_BeginBottomChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19B98
+                bmi.s   S3CompRender_BeginBottomChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
-                bmi.w   loc_19A24
+                bmi.w   S3CompRender_TickBottomBucket
 
-loc_19B98:
+S3CompRender_BeginBottomChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
-                bcs.w   loc_19A24
+                bcs.w   S3CompRender_TickBottomBucket
                 lea     sub2_x_pos(a0),a0
 
-loc_19BA6:
+S3CompRender_DrawBottomChild:
                 move.w  (a0)+,d0
                 sub.w   (a3),d0
                 addi.w  #128,d0
@@ -361,12 +363,12 @@ loc_19BA6:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_19BE0
+                bmi.s   S3CompRender_TryNextBottomChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_19BE0:
+S3CompRender_TryNextBottomChild:
                 tst.w   d7
-                dbmi    d3,loc_19BA6
-                bra.w   loc_19A24
+                dbmi    d3,S3CompRender_DrawBottomChild
+                bra.w   S3CompRender_TickBottomBucket

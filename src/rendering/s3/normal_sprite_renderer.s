@@ -13,25 +13,25 @@ Render_Sprites:
                 lea     (Camera_X_pos_copy).w,a3
                 lea     (Sprite_table).w,a6
                 tst.b   (Level_started_flag).w
-                beq.s   loc_193B8
+                beq.s   S3SpriteRender_BeginPriorityBucket
                 jsr     (Render_HUD).l
                 jsr     (Render_Rings).l
 
-loc_193B8:
+S3SpriteRender_BeginPriorityBucket:
                 tst.w   (a5)
                 beq.w   Render_Sprites_NextLevel
                 lea     2(a5),a4
 
-loc_193C2:
+S3SpriteRender_ReadActorAndPickDrawMode:
                 movea.w (a4)+,a0                        ; a0=object
                 andi.b  #$7F,render_flags(a0)           ; clear on-screen flag
                 move.b  render_flags(a0),d6
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6                           ; is the multi-draw flag set?
-                bne.w   loc_194BA                       ; if it is, branch
+                bne.w   S3SpriteRender_CullScreenParent  ; if it is, branch
                 btst    #2,d6                           ; is this to be positioned by screen coordinates?
-                beq.s   loc_19420                       ; if it is, branch
+                beq.s   S3SpriteRender_MarkSingleVisible  ; if it is, branch
                 moveq   #0,d2
                 move.b  width_pixels(a0),d2
                 sub.w   (a3),d0
@@ -55,14 +55,15 @@ loc_193C2:
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_19420:
+; Set visibility before checking the sprite budget or the mapping frame
+S3SpriteRender_MarkSingleVisible:
                 ori.b   #$80,render_flags(a0)           ; set on-screen flag
                 tst.w   d7
                 bmi.s   Render_Sprites_NextObj
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6                           ; is the static mappings flag set?
-                bne.s   loc_19446                       ; if it is, branch
+                bne.s   S3SpriteRender_DrawSingleMapping  ; if it is, branch
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
@@ -70,60 +71,61 @@ loc_19420:
                 subq.w  #1,d4                           ; get number of pieces
                 bmi.s   Render_Sprites_NextObj          ; if there are 0 pieces, branch
 
-loc_19446:
+S3SpriteRender_DrawSingleMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
 Render_Sprites_NextObj:
                 subq.w  #2,(a5)                         ; decrement object count
-                bne.w   loc_193C2                       ; if there are objects left, repeat
+                bne.w   S3SpriteRender_ReadActorAndPickDrawMode  ; if there are objects left, repeat
 
 Render_Sprites_NextLevel:
                 cmpa.l  #Sprite_table_input,a5
-                bne.s   loc_1946A
+                bne.s   S3SpriteRender_NextPriorityBucket
                 cmpi.w  #$900,(Current_zone_and_act).w  ; LRZ Act 1?
-                bne.s   loc_1946A
+                bne.s   S3SpriteRender_NextPriorityBucket
                 jsr     (RenderLRZForegroundRockPieces).l
 
-loc_1946A:
+S3SpriteRender_NextPriorityBucket:
                 lea     $80(a5),a5                      ; load next priority level
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_193B8
+                blo.w   S3SpriteRender_BeginPriorityBucket
                 move.w  d7,d6
-                bmi.s   loc_19486
+                bmi.s   S3SpriteRender_SaveCountAndCheckMask
                 moveq   #0,d0
 
-loc_1947E:
+S3SpriteRender_HideUnusedHardwareSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_1947E
+                dbf     d7,S3SpriteRender_HideUnusedHardwareSprites
 
-loc_19486:
+S3SpriteRender_SaveCountAndCheckMask:
                 subi.w  #$4F,d6
                 neg.w   d6
                 move.b  d6,(Sprites_drawn).w
                 tst.w   (Spritemask_flag).w
-                beq.s   locret_194B8
+                beq.s   S3SpriteRender_RenderReturn
                 clr.w   (Spritemask_flag).w
                 lea     (Sprite_table-4).w,a0
                 move.w  #$7C0,d0
                 moveq   #80-1,d1
 
-loc_194A4:
+; Scan at most 80 slots and stop after the first mask tile
+S3SpriteRender_ApplyFirstMask:
                 addq.w  #8,a0
                 cmp.w   (a0),d0
-                dbeq    d1,loc_194A4
-                bne.s   locret_194B8
+                dbeq    d1,S3SpriteRender_ApplyFirstMask
+                bne.s   S3SpriteRender_RenderReturn
                 move.w  #1,2(a0)
                 clr.w   $A(a0)
 
-locret_194B8:
+S3SpriteRender_RenderReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_194BA:
+S3SpriteRender_CullScreenParent:
                 btst    #2,d6                           ; is this to be positioned by screen coordinates?
-                bne.s   loc_19504                       ; if it is, branch
+                bne.s   S3SpriteRender_ProjectAndCullWorldParent  ; if it is, branch
                 moveq   #0,d2
 
 ; check if object is within X bounds
@@ -149,10 +151,10 @@ loc_194BA:
                 cmpi.w  #224,d3
                 bge.w   Render_Sprites_NextObj
                 addi.w  #128,d1
-                bra.s   loc_19546
+                bra.s   S3SpriteRender_TryDrawParentFrame
 ; ---------------------------------------------------------------------------
 
-loc_19504:
+S3SpriteRender_ProjectAndCullWorldParent:
                 moveq   #0,d2
                 move.b  width_pixels(a0),d2
                 sub.w   (a3),d0
@@ -176,7 +178,7 @@ loc_19504:
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_19546:
+S3SpriteRender_TryDrawParentFrame:
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
                 bmi.w   Render_Sprites_NextObj
@@ -184,37 +186,38 @@ loc_19546:
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_1957E
+                beq.s   S3SpriteRender_BeginEmbeddedChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1957E
+                bmi.s   S3SpriteRender_BeginEmbeddedChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
                 bmi.w   Render_Sprites_NextObj
 
-loc_1957E:
+S3SpriteRender_BeginEmbeddedChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
                 bcs.w   Render_Sprites_NextObj
                 lea     sub2_x_pos(a0),a0
 
-loc_1958C:
+; World children add the hardware Y bias before wrapping Y
+S3SpriteRender_ReadAndProjectChild:
                 move.w  (a0)+,d0
                 move.w  (a0)+,d1
                 btst    #2,d6
-                beq.s   loc_195A8
+                beq.s   S3SpriteRender_DrawChildFrameClipped
                 sub.w   (a3),d0
                 addi.w  #128,d0
                 sub.w   4(a3),d1
                 addi.w  #128,d1
                 and.w   (Screen_Y_wrap_value).w,d1
 
-loc_195A8:
+S3SpriteRender_DrawChildFrameClipped:
                 addq.w  #1,a0
                 moveq   #0,d4
                 move.b  (a0)+,d4
@@ -223,14 +226,14 @@ loc_195A8:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_195C4
+                bmi.s   S3SpriteRender_TryNextEmbeddedChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_195C4:
+S3SpriteRender_TryNextEmbeddedChild:
                 tst.w   d7
-                dbmi    d3,loc_1958C
+                dbmi    d3,S3SpriteRender_ReadAndProjectChild
                 bra.w   Render_Sprites_NextObj
 ; End of function Render_Sprites
 
@@ -238,11 +241,11 @@ loc_195C4:
 
 RenderMappingPieces:
                 lsr.b   #1,d6
-                bcs.s   loc_19600
+                bcs.s   S3SpriteRender_PickUnclippedHOrHV
                 lsr.b   #1,d6
-                bcs.w   loc_1969A
+                bcs.w   S3SpriteRender_DrawUnclippedPieceV
 
-loc_195D8:
+S3SpriteRender_DrawUnclippedPiece:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
@@ -255,21 +258,21 @@ loc_195D8:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_195F6
+                bne.s   S3SpriteRender_FinishUnclippedPiece
                 addq.w  #1,d2
 
-loc_195F6:
+S3SpriteRender_FinishUnclippedPiece:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_195D8
+                dbmi    d4,S3SpriteRender_DrawUnclippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19600:
+S3SpriteRender_PickUnclippedHOrHV:
                 lsr.b   #1,d6
-                bcs.s   loc_1964A
+                bcs.s   S3SpriteRender_DrawUnclippedPieceHV
 
-loc_19604:
+S3SpriteRender_DrawUnclippedPieceH:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
@@ -283,20 +286,20 @@ loc_19604:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1963A(pc,d6.w),d6
+                move.b  S3SpriteRender_UnclippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_19630
+                bne.s   S3SpriteRender_FinishUnclippedPieceH
                 addq.w  #1,d2
 
-loc_19630:
+S3SpriteRender_FinishUnclippedPieceH:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_19604
+                dbmi    d4,S3SpriteRender_DrawUnclippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
-byte_1963A:
+S3SpriteRender_UnclippedWidthByVdpSize:
                 dc.b    8,   8,   8,   8
                 dc.b    $10, $10, $10, $10
                 dc.b    $18, $18, $18, $18
@@ -304,12 +307,12 @@ byte_1963A:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1964A:
+S3SpriteRender_DrawUnclippedPieceHV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1),d6
-                move.b  byte_1968A(pc,d6.w),d6
+                move.b  S3SpriteRender_UnclippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 move.w  d2,(a6)+
@@ -322,20 +325,20 @@ loc_1964A:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1963A(pc,d6.w),d6
+                move.b  S3SpriteRender_UnclippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_19680
+                bne.s   S3SpriteRender_FinishUnclippedPieceHV
                 addq.w  #1,d2
 
-loc_19680:
+S3SpriteRender_FinishUnclippedPieceHV:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1964A
+                dbmi    d4,S3SpriteRender_DrawUnclippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
-byte_1968A:
+S3SpriteRender_UnclippedHeightByVdpSize:
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
@@ -343,13 +346,13 @@ byte_1968A:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1969A:
+S3SpriteRender_DrawUnclippedPieceV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1)+,d6
                 move.b  d6,2(a6)
-                move.b  byte_1968A(pc,d6.w),d6
+                move.b  S3SpriteRender_UnclippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 move.w  d2,(a6)+
@@ -361,13 +364,13 @@ loc_1969A:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 andi.w  #$1FF,d2
-                bne.s   loc_196C8
+                bne.s   S3SpriteRender_FinishUnclippedPieceV
                 addq.w  #1,d2
 
-loc_196C8:
+S3SpriteRender_FinishUnclippedPieceV:
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1969A
+                dbmi    d4,S3SpriteRender_DrawUnclippedPieceV
                 rts
 ; End of function RenderMappingPieces
 
@@ -375,18 +378,18 @@ loc_196C8:
 
 RenderMappingPiecesClipped:
                 lsr.b   #1,d6
-                bcs.s   loc_19724
+                bcs.s   S3SpriteRender_PickClippedHOrHV
                 lsr.b   #1,d6
-                bcs.w   loc_197FE
+                bcs.w   S3SpriteRender_DrawClippedPieceV
 
-loc_196DC:
+S3SpriteRender_DrawClippedPiece:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1971C
+                bls.s   S3SpriteRender_RejectClippedY
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1971C
+                bhs.s   S3SpriteRender_RejectClippedY
                 move.w  d2,(a6)+
                 move.b  (a1)+,(a6)+
                 addq.w  #1,a6
@@ -396,39 +399,39 @@ loc_196DC:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_19714
+                bls.s   S3SpriteRender_RejectClippedX
                 cmpi.w  #320+128,d2
-                bhs.s   loc_19714
+                bhs.s   S3SpriteRender_RejectClippedX
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_196DC
+                dbmi    d4,S3SpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19714:
+S3SpriteRender_RejectClippedX:
                 subq.w  #6,a6
-                dbf     d4,loc_196DC
+                dbf     d4,S3SpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1971C:
+S3SpriteRender_RejectClippedY:
                 addq.w  #5,a1
-                dbf     d4,loc_196DC
+                dbf     d4,S3SpriteRender_DrawClippedPiece
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19724:
+S3SpriteRender_PickClippedHOrHV:
                 lsr.b   #1,d6
-                bcs.s   loc_1978E
+                bcs.s   S3SpriteRender_DrawClippedPieceHV
 
-loc_19728:
+S3SpriteRender_DrawClippedPieceH:
                 move.b  (a1)+,d2
                 ext.w   d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_19776
+                bls.s   S3SpriteRender_RejectClippedYH
                 cmpi.w  #224+128,d2
-                bhs.s   loc_19776
+                bhs.s   S3SpriteRender_RejectClippedYH
                 move.w  d2,(a6)+
                 move.b  (a1)+,d6
                 move.b  d6,(a6)+
@@ -439,31 +442,31 @@ loc_19728:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1977E(pc,d6.w),d6
+                move.b  S3SpriteRender_ClippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1976E
+                bls.s   S3SpriteRender_RejectClippedXH
                 cmpi.w  #320+128,d2
-                bhs.s   loc_1976E
+                bhs.s   S3SpriteRender_RejectClippedXH
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_19728
+                dbmi    d4,S3SpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1976E:
+S3SpriteRender_RejectClippedXH:
                 subq.w  #6,a6
-                dbf     d4,loc_19728
+                dbf     d4,S3SpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19776:
+S3SpriteRender_RejectClippedYH:
                 addq.w  #5,a1
-                dbf     d4,loc_19728
+                dbf     d4,S3SpriteRender_DrawClippedPieceH
                 rts
 ; ---------------------------------------------------------------------------
-byte_1977E:
+S3SpriteRender_ClippedWidthByVdpSize:
                 dc.b    8,   8,   8,   8
                 dc.b    $10, $10, $10, $10
                 dc.b    $18, $18, $18, $18
@@ -471,18 +474,18 @@ byte_1977E:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_1978E:
+S3SpriteRender_DrawClippedPieceHV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1),d6
-                move.b  byte_197EE(pc,d6.w),d6
+                move.b  S3SpriteRender_ClippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_197E6
+                bls.s   S3SpriteRender_RejectClippedYHV
                 cmpi.w  #224+128,d2
-                bhs.s   loc_197E6
+                bhs.s   S3SpriteRender_RejectClippedYHV
                 move.w  d2,(a6)+
                 move.b  (a1)+,d6
                 move.b  d6,(a6)+
@@ -493,31 +496,31 @@ loc_1978E:
                 move.w  d2,(a6)+
                 move.w  (a1)+,d2
                 neg.w   d2
-                move.b  byte_1977E(pc,d6.w),d6
+                move.b  S3SpriteRender_ClippedWidthByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_197DE
+                bls.s   S3SpriteRender_RejectClippedXHV
                 cmpi.w  #320+128,d2
-                bhs.s   loc_197DE
+                bhs.s   S3SpriteRender_RejectClippedXHV
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_1978E
+                dbmi    d4,S3SpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_197DE:
+S3SpriteRender_RejectClippedXHV:
                 subq.w  #6,a6
-                dbf     d4,loc_1978E
+                dbf     d4,S3SpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_197E6:
+S3SpriteRender_RejectClippedYHV:
                 addq.w  #5,a1
-                dbf     d4,loc_1978E
+                dbf     d4,S3SpriteRender_DrawClippedPieceHV
                 rts
 ; ---------------------------------------------------------------------------
-byte_197EE:
+S3SpriteRender_ClippedHeightByVdpSize:
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
                 dc.b    8, $10, $18, $20
@@ -525,19 +528,19 @@ byte_197EE:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_197FE:
+S3SpriteRender_DrawClippedPieceV:
                 move.b  (a1)+,d2
                 ext.w   d2
                 neg.w   d2
                 move.b  (a1)+,d6
                 move.b  d6,2(a6)
-                move.b  byte_197EE(pc,d6.w),d6
+                move.b  S3SpriteRender_ClippedHeightByVdpSize(pc,d6.w),d6
                 sub.w   d6,d2
                 add.w   d1,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_1984E
+                bls.s   S3SpriteRender_RejectClippedYV
                 cmpi.w  #224+128,d2
-                bhs.s   loc_1984E
+                bhs.s   S3SpriteRender_RejectClippedYV
                 move.w  d2,(a6)+
                 addq.w  #2,a6
                 move.w  (a1)+,d2
@@ -547,23 +550,24 @@ loc_197FE:
                 move.w  (a1)+,d2
                 add.w   d0,d2
                 cmpi.w  #-32+128,d2
-                bls.s   loc_19846
+                bls.s   S3SpriteRender_RejectClippedXV
                 cmpi.w  #320+128,d2
-                bhs.s   loc_19846
+                bhs.s   S3SpriteRender_RejectClippedXV
                 move.w  d2,(a6)+
                 subq.w  #1,d7
-                dbmi    d4,loc_197FE
+                dbmi    d4,S3SpriteRender_DrawClippedPieceV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19846:
+S3SpriteRender_RejectClippedXV:
                 subq.w  #6,a6
-                dbf     d4,loc_197FE
+                dbf     d4,S3SpriteRender_DrawClippedPieceV
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1984E:
+; Skip four source bytes. The size byte has already been written to the output slot
+S3SpriteRender_RejectClippedYV:
                 addq.w  #4,a1
-                dbf     d4,loc_197FE
+                dbf     d4,S3SpriteRender_DrawClippedPieceV
                 rts
 ; End of function RenderMappingPiecesClipped

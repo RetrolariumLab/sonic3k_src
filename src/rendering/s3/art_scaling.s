@@ -26,7 +26,7 @@ Init_ArtScaling:
 ; End of function Init_ArtScaling
 
 ; ---------------------------------------------------------------------------
-word_22C50:
+S3Scale_TileCountsByScale:
                 dc.w    $100
                 dc.w    $FC
                 dc.w    $90
@@ -66,17 +66,17 @@ TryBuildObjectScaledArt:
                 moveq   #0,d1
                 move.b  $40(a0),d1
                 cmpi.b  #$1C,d1
-                blo.s   loc_22CA0
+                blo.s   S3Scale_SetFrameAndTryReserveTiles
                 move.b  #$1C,d1                         ; Maximum 28 different "scales"
 
-loc_22CA0:
+S3Scale_SetFrameAndTryReserveTiles:
                 move.b  d1,mapping_frame(a0)            ; Scale level correlates with mapping frame
                 add.w   d1,d1
-                move.w  word_22C50(pc,d1.w),d1
+                move.w  S3Scale_TileCountsByScale(pc,d1.w),d1
                 move.w  (_unkF740).w,d2
                 add.w   d1,d2
                 cmpi.w  #$80,d2
-                bhi.s   loc_22CD8
+                bhi.s   S3Scale_HideOnReservationFailure
                 sub.w   d1,d2
                 movem.l d1/d5-a0/a2/a4,-(sp)
                 lea     (Kos_decomp_buffer).w,a2
@@ -93,7 +93,7 @@ loc_22CA0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22CD8:
+S3Scale_HideOnReservationFailure:
                 bclr    #7,render_flags(a0)
                 rts
 ; End of function TryBuildObjectScaledArt
@@ -121,15 +121,15 @@ ScaleArt_ResampleObjectFrame:
                 move.w  #$F,d7
                 swap    d7
                 tst.w   d4
-                beq.w   loc_22FC0                       ; If modified scale factor smaller than 8, branch
+                beq.w   S3Scale_TryFactor7Sampler       ; If modified scale factor smaller than 8, branch
                 cmpi.w  #1,d4
-                bne.s   loc_22D30                       ; If modified scale factor is not between 8-$10, branch
+                bne.s   S3Scale_InitGenericSampler      ; If modified scale factor is not between 8-$10, branch
                 tst.w   d5
-                beq.w   loc_22F44                       ; If modified scale factor is 8, branch
+                beq.w   S3Scale_InitFactor8Sampler      ; If modified scale factor is 8, branch
                 cmpi.w  #$2000,d5
-                beq.w   loc_22EBE                       ; If modified scale factor is 9, branch
+                beq.w   S3Scale_InitFactor9Sampler      ; If modified scale factor is 9, branch
 
-loc_22D30:
+S3Scale_InitGenericSampler:
                 move.w  d4,d2                           ; All other instances. Scale factor/8 to d2
                 swap    d2
                 move.w  d5,d2
@@ -142,57 +142,58 @@ loc_22D30:
                 movea.w d0,a5                           ; Note the result in a5
                 moveq   #0,d2
                 moveq   #0,d3
-                lea     loc_22DA2(pc),a6
+                lea     S3Scale_PackGenericSamples(pc),a6
 
-loc_22D50:
+S3Scale_BeginGenericGroup:
                 move.w  #$20-1,d7
 
-loc_22D54:
+S3Scale_InitGenericRow:
                 swap    d7
                 swap    d3
                 move.w  #0,d2
                 move.w  #0,d3
                 movea.l a2,a4
                 move.w  a5,d6
-                bmi.s   loc_22D76
+                bmi.s   S3Scale_WriteMaskedGenericTail
 
-loc_22D66:
+S3Scale_WriteGenericRowGroups:
                 swap    d6
                 jsr     (a6)
                 swap    d6
-                dbf     d6,loc_22D66
+                dbf     d6,S3Scale_WriteGenericRowGroups
                 cmpi.w  #$40,d2
-                bhs.s   loc_22D7E
+                bhs.s   S3Scale_AdvanceGenericYPhase
 
-loc_22D76:
+S3Scale_WriteMaskedGenericTail:
                 swap    d6
                 jsr     ScaleArt_WriteMaskedTailPixels(pc)
                 swap    d6
 
-loc_22D7E:
+; Carry from the vertical fraction adds one source row before the whole-row step
+S3Scale_AdvanceGenericYPhase:
                 swap    d3
                 add.w   d5,d3
-                bcc.s   loc_22D88
+                bcc.s   S3Scale_AdvanceGenericRows
                 adda.w  #$40,a1
 
-loc_22D88:
+S3Scale_AdvanceGenericRows:
                 move.w  d4,d0
                 lsl.w   #6,d0
                 adda.w  d0,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_22DA0
+                bhs.s   S3Scale_GenericSamplerReturn
                 addq.w  #4,a2
                 swap    d7
-                dbf     d7,loc_22D54
+                dbf     d7,S3Scale_InitGenericRow
                 lea     $380(a2),a2
-                bra.s   loc_22D50
+                bra.s   S3Scale_BeginGenericGroup
 ; ---------------------------------------------------------------------------
 
-locret_22DA0:
+S3Scale_GenericSamplerReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22DA2:
+S3Scale_PackGenericSamples:
                 rept    4
                 move.b  (a1,d2.w),d0
                 add.w   d5,d3
@@ -216,18 +217,18 @@ ScaleArt_WriteMaskedTailPixels:
                 add.w   d5,d3
                 addx.w  d4,d2
                 cmpi.w  #$40,d2
-                blo.s   loc_22E1A
+                blo.s   ScaleArtTail_ReadSecondSourceByte
                 move.b  #0,d0
 
-loc_22E1A:
+ScaleArtTail_ReadSecondSourceByte:
                 move.b  (a1,d2.w),d1
                 add.w   d5,d3
                 addx.w  d4,d2
                 cmpi.w  #$40,d2
-                blo.s   loc_22E2C
+                blo.s   S3Scale_StoreTailPackedByte
                 move.b  #0,d1
 
-loc_22E2C:
+S3Scale_StoreTailPackedByte:
                 and.b   d6,d0
                 and.b   d7,d1
                 or.b    d1,d0
@@ -239,17 +240,17 @@ loc_22E2C:
 
 ; ---------------------------------------------------------------------------
 
-loc_22EBE:
+S3Scale_InitFactor9Sampler:
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_22F0C(pc),a6
+                lea     S3Scale_PackFactor9Samples(pc),a6
                 move.w  #2-1,d7
 
-loc_22ECA:
+S3Scale_BeginFactor9Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_22ED0:
+S3Scale_WriteFactor9Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -260,25 +261,26 @@ loc_22ED0:
                 and.b   d6,d0
                 move.b  d0,(a4)+
                 add.w   d5,d3
-                bcc.s   loc_22EF2
+                bcc.s   S3Scale_AdvanceFactor9Rows
                 lea     $40(a1),a1
 
-loc_22EF2:
+S3Scale_AdvanceFactor9Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_22F0A
+                bhs.s   S3ArtScaling_ReturnFromFactorNineSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_22ED0
+                dbf     d6,S3Scale_WriteFactor9Row
                 lea     $380(a2),a2
                 swap    d7
-                dbf     d7,loc_22ECA
+                dbf     d7,S3Scale_BeginFactor9Group
 
-locret_22F0A:
+S3ArtScaling_ReturnFromFactorNineSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22F0C:
+; Read eight source bytes into four output bytes, then skip the ninth source byte
+S3Scale_PackFactor9Samples:
                 rept    3
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -298,17 +300,17 @@ loc_22F0C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22F44:
+S3Scale_InitFactor8Sampler:
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_22F8A(pc),a6
+                lea     S3Scale_PackFactor8Samples(pc),a6
                 move.w  #2-1,d7
 
-loc_22F50:
+S3Scale_BeginFactor8Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_22F56:
+S3Scale_WriteFactor8Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -316,21 +318,21 @@ loc_22F56:
                 jsr     (a6)
                 endm
                 add.w   d5,d3
-                bcc.s   loc_22F74
+                bcc.s   S3Scale_AdvanceFactor8Rows
                 lea     $40(a1),a1
 
-loc_22F74:
+S3Scale_AdvanceFactor8Rows:
                 adda.w  d4,a1
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_22F56
+                dbf     d6,S3Scale_WriteFactor8Row
                 lea     $380(a2),a2
                 swap    d7
-                dbf     d7,loc_22F50
+                dbf     d7,S3Scale_BeginFactor8Group
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22F8A:
+S3Scale_PackFactor8Samples:
                 rept    4
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -343,19 +345,19 @@ loc_22F8A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_22FC0:
+S3Scale_TryFactor7Sampler:
                 cmpi.w  #$E000,d5
-                bne.w   loc_23042
-                lea     loc_23016(pc),a6
+                bne.w   S3Scale_TryFactor6Sampler
+                lea     S3Scale_PackFactor7Samples(pc),a6
                 moveq   #0,d3
                 lsl.w   #6,d4
                 move.w  #3-1,d7
 
-loc_22FD4:
+S3Scale_BeginFactor7Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_22FDA:
+S3Scale_WriteFactor7Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -364,25 +366,25 @@ loc_22FDA:
                 endm
                 move.b  (a3),(a4)
                 add.w   d5,d3
-                bcc.s   loc_22FFC
+                bcc.s   S3Scale_AdvanceFactor7Rows
                 lea     $40(a1),a1
 
-loc_22FFC:
+S3Scale_AdvanceFactor7Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_23014
+                bhs.s   S3Scale_Factor7Return
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_22FDA
+                dbf     d6,S3Scale_WriteFactor7Row
                 lea     $580(a2),a2
                 swap    d7
-                dbf     d7,loc_22FD4
+                dbf     d7,S3Scale_BeginFactor7Group
 
-locret_23014:
+S3Scale_Factor7Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23016:
+S3Scale_PackFactor7Samples:
                 move.b  (a3)+,(a4)+
                 rept    3
                 move.b  (a3)+,d0
@@ -396,19 +398,19 @@ loc_23016:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23042:
+S3Scale_TryFactor6Sampler:
                 cmpi.w  #$C000,d5
-                bne.w   loc_230CC
+                bne.w   S3Scale_TryFactor5Sampler
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_230AA(pc),a6
+                lea     S3Scale_PackFactor6Samples(pc),a6
                 move.w  #4-1,d7
 
-loc_23056:
+S3Scale_BeginFactor6Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_2305C:
+S3Scale_WriteFactor6Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -425,25 +427,25 @@ loc_2305C:
                 move.b  (a3),d0
                 move.b  d0,(a4)
                 add.w   d5,d3
-                bcc.s   loc_23090
+                bcc.s   S3Scale_AdvanceFactor6Rows
                 lea     $40(a1),a1
 
-loc_23090:
+S3Scale_AdvanceFactor6Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_230A8
+                bhs.s   S3ArtScaling_ReturnFromFactorSixSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_2305C
+                dbf     d6,S3Scale_WriteFactor6Row
                 lea     $580(a2),a2
                 swap    d7
-                dbf     d7,loc_23056
+                dbf     d7,S3Scale_BeginFactor6Group
 
-locret_230A8:
+S3ArtScaling_ReturnFromFactorSixSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_230AA:
+S3Scale_PackFactor6Samples:
                 rept    2
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,d0
@@ -457,20 +459,20 @@ loc_230AA:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_230CC:
+S3Scale_TryFactor5Sampler:
                 cmpi.w  #$A000,d5
-                bne.w   loc_23166
+                bne.w   S3Scale_InitFactor4Copy
                 moveq   #0,d3
                 lsl.w   #6,d4
-                lea     loc_23150(pc),a5
-                lea     loc_23138(pc),a6
+                lea     S3Scale_PackFactor5FromWord(pc),a5
+                lea     S3Scale_PackFactor5FromBytes(pc),a6
                 move.w  #4-1,d7
 
-loc_230E4:
+S3Scale_BeginFactor5Group:
                 swap    d7
                 move.w  #$20-1,d6
 
-loc_230EA:
+S3Scale_WriteFactor5Row:
                 swap    d6
                 movea.l a1,a3
                 movea.l a2,a4
@@ -486,25 +488,25 @@ loc_230EA:
                 or.b    d1,d0
                 move.b  d0,(a4)+
                 add.w   d5,d3
-                bcc.s   loc_2311E
+                bcc.s   S3Scale_AdvanceFactor5Rows
                 lea     $40(a1),a1
 
-loc_2311E:
+S3Scale_AdvanceFactor5Rows:
                 adda.w  d4,a1
                 cmpa.l  a0,a1
-                bhs.s   locret_23136
+                bhs.s   S3ArtScaling_ReturnFromFactorFiveSampler
                 addq.w  #4,a2
                 swap    d6
-                dbf     d6,loc_230EA
+                dbf     d6,S3Scale_WriteFactor5Row
                 lea     $780(a2),a2
                 swap    d7
-                dbf     d7,loc_230E4
+                dbf     d7,S3Scale_BeginFactor5Group
 
-locret_23136:
+S3ArtScaling_ReturnFromFactorFiveSampler:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23138:
+S3Scale_PackFactor5FromBytes:
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,(a4)+
                 move.b  (a3)+,d0
@@ -518,7 +520,7 @@ loc_23138:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23150:
+S3Scale_PackFactor5FromWord:
                 move.w  (a3)+,(a4)+
                 move.b  (a3)+,d0
                 move.b  (a3)+,d1
@@ -531,15 +533,15 @@ loc_23150:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23166:
+S3Scale_InitFactor4Copy:
                 moveq   #0,d3
                 lsl.w   #6,d4
                 moveq   #4-1,d7
 
-loc_2316C:
+S3Scale_BeginFactor4Group:
                 move.w  #$20-1,d6
 
-loc_23170:
+S3Scale_CopyFactor4Row:
                 movea.l a1,a3
                 movea.l a2,a4
                 rept    16
@@ -547,15 +549,15 @@ loc_23170:
                 lea     $80(a4),a4
                 endm
                 add.w   d5,d3
-                bcc.s   loc_231DC
+                bcc.s   S3Scale_AdvanceFactor4Rows
                 lea     $40(a1),a1
 
-loc_231DC:
+S3Scale_AdvanceFactor4Rows:
                 adda.w  d4,a1
                 addq.w  #4,a2
-                dbf     d6,loc_23170
+                dbf     d6,S3Scale_CopyFactor4Row
                 lea     $780(a2),a2
-                dbf     d7,loc_2316C
+                dbf     d7,S3Scale_BeginFactor4Group
                 rts
 ; ---------------------------------------------------------------------------
 Map_ScaledArt:

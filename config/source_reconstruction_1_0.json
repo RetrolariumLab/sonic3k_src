@@ -1029,9 +1029,15 @@
       "commits": ["a62ba22a7f5047e6e4f3c20a3e58f62401297c8f"]
     },
     {
-      "id": "current-shorten-15-world-sprites",
+      "id": "change-62d6304dcca8",
       "kind": "source_or_tooling",
       "summary": "Apply 12 reviewed short labels for world sprites.",
+      "commits": ["62d6304dcca85601e6acf6f27a857086cacb6b76"]
+    },
+    {
+      "id": "current-shorten-16-sprite-rendering",
+      "kind": "source_or_tooling",
+      "summary": "Apply 238 reviewed short labels for sprite rendering.",
       "commits": ["release-commit"]
     }
   ],

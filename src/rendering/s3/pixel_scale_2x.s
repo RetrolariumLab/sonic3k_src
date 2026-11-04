@@ -19,10 +19,10 @@ Scale_2x:
                 btst    #1,d0
                 beq.w   locret_432D8
                 btst    #1,d1
-                bne.s   loc_436DC
+                bne.s   S3Scale2x_ExpandSecondGroup
                 movea.l a3,a5
 
-loc_436DC:
+S3Scale2x_ExpandSecondGroup:
                 movea.l a5,a2
 ; End of function Scale_2x
 
@@ -37,7 +37,7 @@ Scale2x_ExpandSpriteTileGroup:
                 andi.w  #1,d5
                 bsr.w   Scale2x_SingleTile
                 btst    #1,d1
-                beq.s   loc_4371A
+                beq.s   S3Scale2x_CheckAdjacentColumn
                 swap    d2
                 move.w  d2,d4
                 swap    d2
@@ -53,13 +53,13 @@ Scale2x_ExpandSpriteTileGroup:
                 swap    d3
                 bsr.w   Scale2x_SingleTile2
 
-loc_4371A:
+S3Scale2x_CheckAdjacentColumn:
                 btst    #0,d0
-                bne.s   loc_43726
+                bne.s   S3Scale2x_ExpandAdjacentColumn
                 btst    #1,d0
-                beq.s   locret_43756
+                beq.s   S3Scale2x_ReturnAfterSelectedTileGroups
 
-loc_43726:
+S3Scale2x_ExpandAdjacentColumn:
                 swap    d2
                 lea     (a2,d2.w),a2
                 lea     (a2,d2.w),a3
@@ -68,7 +68,7 @@ loc_43726:
                 andi.w  #1,d5
                 bsr.w   Scale2x_SingleTile
                 btst    #1,d1
-                beq.s   locret_43756
+                beq.s   S3Scale2x_ReturnAfterSelectedTileGroups
                 move.w  d1,d5
                 lsr.w   #1,d5
                 swap    d3
@@ -77,7 +77,7 @@ loc_43726:
                 swap    d3
                 bsr.w   Scale2x_SingleTile2
 
-locret_43756:
+S3Scale2x_ReturnAfterSelectedTileGroups:
                 rts
 ; End of function Scale2x_ExpandSpriteTileGroup
 
@@ -114,9 +114,9 @@ Scale2x_SingleTile2:
 ; =============== S U B R O U T I N E =======================================
 
 Scale_2x_LeftPixels:
-                bsr.w   loc_4378C
+                bsr.w   S3Scale2x_ExpandByteLeft
 
-loc_4378C:
+S3Scale2x_ExpandByteLeft:
                 move.b  (a1)+,d2
                 move.b  d2,d3
                 andi.b  #$F0,d2
@@ -137,9 +137,9 @@ loc_4378C:
 ; =============== S U B R O U T I N E =======================================
 
 Scale_2x_RightPixels:
-                bsr.w   loc_437B6
+                bsr.w   S3Scale2x_ExpandByteRight
 
-loc_437B6:
+S3Scale2x_ExpandByteRight:
                 move.b  (a1)+,d2
                 move.b  d2,d3
                 andi.b  #$F0,d2
@@ -160,9 +160,9 @@ loc_437B6:
 ; =============== S U B R O U T I N E =======================================
 
 Scale_2x_LeftPixels2:
-                bsr.w   loc_437E0
+                bsr.w   S3Scale2x_ExpandByteLeftGroup2
 
-loc_437E0:
+S3Scale2x_ExpandByteLeftGroup2:
                 move.b  (a1)+,d2
                 move.b  d2,d3
                 andi.b  #$F0,d2
@@ -183,9 +183,9 @@ loc_437E0:
 ; =============== S U B R O U T I N E =======================================
 
 Scale_2x_RightPixels2:
-                bsr.w   loc_4380A
+                bsr.w   S3Scale2x_ExpandByteRightGroup2
 
-loc_4380A:
+S3Scale2x_ExpandByteRightGroup2:
                 move.b  (a1)+,d2
                 move.b  d2,d3
                 andi.b  #$F0,d2

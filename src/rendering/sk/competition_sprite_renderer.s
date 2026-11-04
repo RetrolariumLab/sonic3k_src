@@ -16,31 +16,32 @@ Render_Sprites_CompetitionMode:
 ; Modify the back buffer
                 lea     (Sprite_table+$10).w,a6
                 tst.w   (Current_sprite_table_page).w
-                beq.s   loc_1B210
+                beq.s   SKCompRender_TryDrawP1Hud
                 lea     (Sprite_table_alternate+$10).l,a6
 
-loc_1B210:
+SKCompRender_TryDrawP1Hud:
                 tst.b   (Level_started_flag).w
-                beq.s   loc_1B21C
+                beq.s   SKCompRender_BeginTopBucket
                 jsr     (Render_HUD_P1).l
 
-loc_1B21C:
+SKCompRender_BeginTopBucket:
                 move.b  1(a5),(a5)
-                beq.w   loc_1B2C8
+                beq.w   SKCompRender_NextTopPriority
                 lea     2(a5),a4
 
-loc_1B228:
+; Clear the actor's visible bit at the start of the first viewport pass
+SKCompRender_ReadAndCullTopActor:
                 movea.w (a4)+,a0
                 andi.b  #$7F,render_flags(a0)
                 move.b  render_flags(a0),d6
                 btst    #4,d6
-                bne.w   loc_1B2C2
+                bne.w   SKCompRender_TickTopBucket
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6
-                bne.w   loc_1B3EC
+                bne.w   SKCompRender_TryDrawTopParent
                 btst    #2,d6
-                beq.s   loc_1B294
+                beq.s   SKCompRender_ResolveTopMapping
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -50,7 +51,7 @@ loc_1B228:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.s   loc_1B2C2
+                bhs.s   SKCompRender_TickTopBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -62,54 +63,55 @@ loc_1B228:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.s   loc_1B2C2
+                bhs.s   SKCompRender_TickTopBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_1B294:
+SKCompRender_ResolveTopMapping:
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.s   loc_1B2C2
+                bmi.s   SKCompRender_TickTopBucket
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6
-                bne.s   loc_1B2BA
+                bne.s   SKCompRender_DrawTopMapping
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B2C2
+                bmi.s   SKCompRender_TickTopBucket
 
-loc_1B2BA:
+SKCompRender_DrawTopMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
-loc_1B2C2:
+SKCompRender_TickTopBucket:
                 subq.b  #2,(a5)
-                bne.w   loc_1B228
+                bne.w   SKCompRender_ReadAndCullTopActor
 
-loc_1B2C8:
+SKCompRender_NextTopPriority:
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_1B21C
+                blo.w   SKCompRender_BeginTopBucket
                 tst.w   d7
-                bmi.s   loc_1B2E4
+                bmi.s   SKCompRender_TrySwapPlayersInBucket2
                 moveq   #0,d0
 
-loc_1B2DC:
+SKCompRender_HideUnusedTopSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_1B2DC
+                dbf     d7,SKCompRender_HideUnusedTopSprites
 
-loc_1B2E4:
+; Swap only when the first two handles in priority 2 are P1 followed by P2
+SKCompRender_TrySwapPlayersInBucket2:
                 move.l  (Sprite_table_input+2+($80*2)).w,d0
                 cmpi.l  #((Player_1&$FFFF)<<16)|(Player_2&$FFFF),d0
-                bne.s   loc_1B2F6
+                bne.s   SKCompRender_InitBottomViewport
                 swap    d0
                 move.l  d0,(Sprite_table_input+2+($80*2)).w
 
-loc_1B2F6:
+SKCompRender_InitBottomViewport:
                 moveq   #$50-1,d7
                 lea     (Sprite_table_input).w,a5
                 lea     (Camera_X_pos_P2_copy).w,a3
@@ -120,30 +122,30 @@ loc_1B2F6:
 ; Modify the back buffer
                 lea     (Sprite_table_P2).l,a6
                 tst.w   (Current_sprite_table_page).w
-                beq.s   loc_1B312
+                beq.s   SKCompRender_TryCallP2HudStub
                 lea     (Sprite_table_P2_alternate).l,a6
 
-loc_1B312:
+SKCompRender_TryCallP2HudStub:
                 tst.b   (Level_started_flag).w
-                beq.s   loc_1B31E
+                beq.s   SKCompRender_BeginBottomBucket
                 jsr     (Render_HUD_P2).l
 
-loc_1B31E:
+SKCompRender_BeginBottomBucket:
                 tst.b   1(a5)
-                beq.w   loc_1B3CA
+                beq.w   SKCompRender_NextBottomPriority
                 lea     2(a5),a4
 
-loc_1B32A:
+SKCompRender_ReadAndCullBottomActor:
                 movea.w (a4)+,a0
                 move.b  render_flags(a0),d6
                 btst    #3,d6
-                bne.w   loc_1B3C2
+                bne.w   SKCompRender_TickBottomBucket
                 move.w  x_pos(a0),d0
                 move.w  y_pos(a0),d1
                 btst    #6,d6
-                bne.w   loc_1B4B8
+                bne.w   SKCompRender_TryDrawBottomParent
                 btst    #2,d6
-                beq.s   loc_1B390
+                beq.s   SKCompRender_ResolveBottomMapping
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -153,7 +155,7 @@ loc_1B32A:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.s   loc_1B3C2
+                bhs.s   SKCompRender_TickBottomBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -165,55 +167,55 @@ loc_1B32A:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.s   loc_1B3C2
+                bhs.s   SKCompRender_TickBottomBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
 
-loc_1B390:
+SKCompRender_ResolveBottomMapping:
                 addi.w  #224/2,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.s   loc_1B3C2
+                bmi.s   SKCompRender_TickBottomBucket
                 movea.l mappings(a0),a1
                 moveq   #0,d4
                 btst    #5,d6
-                bne.s   loc_1B3BA
+                bne.s   SKCompRender_DrawBottomMapping
                 move.b  mapping_frame(a0),d4
                 add.w   d4,d4
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B3C2
+                bmi.s   SKCompRender_TickBottomBucket
 
-loc_1B3BA:
+SKCompRender_DrawBottomMapping:
                 move.w  art_tile(a0),d5
                 jsr     RenderMappingPieces(pc)
 
-loc_1B3C2:
+SKCompRender_TickBottomBucket:
                 subq.b  #2,1(a5)
-                bne.w   loc_1B32A
+                bne.w   SKCompRender_ReadAndCullBottomActor
 
-loc_1B3CA:
+SKCompRender_NextBottomPriority:
                 lea     $80(a5),a5
                 cmpa.l  #Sprite_table_input_end,a5
-                blo.w   loc_1B31E
+                blo.w   SKCompRender_BeginBottomBucket
                 tst.w   d7
-                bmi.s   loc_1B3E6
+                bmi.s   SKCompRender_RequestPageFlip
                 moveq   #0,d0
 
-loc_1B3DE:
+SKCompRender_HideUnusedBottomSprites:
                 move.w  d0,(a6)
                 addq.w  #8,a6
-                dbf     d7,loc_1B3DE
+                dbf     d7,SKCompRender_HideUnusedBottomSprites
 
-loc_1B3E6:
+SKCompRender_RequestPageFlip:
 ; The new sprite tables are complete: signal a page flip to
 ; allow them to be uploaded to the VDP!
                 st.b    (Sprite_table_page_flip_pending).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1B3EC:
+SKCompRender_TryDrawTopParent:
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -223,7 +225,7 @@ loc_1B3EC:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.w   loc_1B2C2
+                bhs.w   SKCompRender_TickTopBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -235,36 +237,36 @@ loc_1B3EC:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.w   loc_1B2C2
+                bhs.w   SKCompRender_TickTopBucket
                 addi.w  #128,d1
                 sub.w   d3,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.w   loc_1B2C2
+                bmi.w   SKCompRender_TickTopBucket
                 move.w  art_tile(a0),d5
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_1B46A
+                beq.s   SKCompRender_BeginTopChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B46A
+                bmi.s   SKCompRender_BeginTopChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
-                bmi.w   loc_1B2C2
+                bmi.w   SKCompRender_TickTopBucket
 
-loc_1B46A:
+SKCompRender_BeginTopChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
-                bcs.w   loc_1B2C2
+                bcs.w   SKCompRender_TickTopBucket
                 lea     sub2_x_pos(a0),a0
 
-loc_1B478:
+SKCompRender_DrawTopChild:
                 move.w  (a0)+,d0
                 sub.w   (a3),d0
                 addi.w  #128,d0
@@ -281,18 +283,18 @@ loc_1B478:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B4AE
+                bmi.s   SKCompRender_TryNextTopChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_1B4AE:
+SKCompRender_TryNextTopChild:
                 tst.w   d7
-                dbmi    d3,loc_1B478
-                bra.w   loc_1B2C2
+                dbmi    d3,SKCompRender_DrawTopChild
+                bra.w   SKCompRender_TickTopBucket
 ; ---------------------------------------------------------------------------
 
-loc_1B4B8:
+SKCompRender_TryDrawBottomParent:
                 moveq   #0,d2
                 sub.w   (a3),d0
                 move.b  width_pixels(a0),d2
@@ -302,7 +304,7 @@ loc_1B4B8:
                 add.w   d2,d2
                 addi.w  #320,d2
                 cmp.w   d2,d0
-                bhs.w   loc_1B3C2
+                bhs.w   SKCompRender_TickBottomBucket
                 addi.w  #128,d0
                 sub.w   d3,d0
                 moveq   #0,d2
@@ -314,36 +316,36 @@ loc_1B4B8:
                 add.w   d2,d2
                 addi.w  #224/2,d2
                 cmp.w   d2,d1
-                bhs.w   loc_1B3C2
+                bhs.w   SKCompRender_TickBottomBucket
                 addi.w  #240,d1
                 sub.w   d3,d1
                 ori.b   #$80,render_flags(a0)
                 tst.w   d7
-                bmi.w   loc_1B3C2
+                bmi.w   SKCompRender_TickBottomBucket
                 move.w  art_tile(a0),d5
                 movea.l mappings(a0),a2
                 moveq   #0,d4
                 move.b  mapping_frame(a0),d4
-                beq.s   loc_1B536
+                beq.s   SKCompRender_BeginBottomChildren
                 add.w   d4,d4
                 lea     (a2),a1
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B536
+                bmi.s   SKCompRender_BeginBottomChildren
                 move.w  d6,d3
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  d3,d6
                 tst.w   d7
-                bmi.w   loc_1B3C2
+                bmi.w   SKCompRender_TickBottomBucket
 
-loc_1B536:
+SKCompRender_BeginBottomChildren:
                 move.w  mainspr_childsprites(a0),d3
                 subq.w  #1,d3
-                bcs.w   loc_1B3C2
+                bcs.w   SKCompRender_TickBottomBucket
                 lea     sub2_x_pos(a0),a0
 
-loc_1B544:
+SKCompRender_DrawBottomChild:
                 move.w  (a0)+,d0
                 sub.w   (a3),d0
                 addi.w  #128,d0
@@ -361,12 +363,12 @@ loc_1B544:
                 adda.w  (a1,d4.w),a1
                 move.w  (a1)+,d4
                 subq.w  #1,d4
-                bmi.s   loc_1B57E
+                bmi.s   SKCompRender_TryNextBottomChild
                 move.w  d6,-(sp)
                 jsr     RenderMappingPiecesClipped(pc)
                 move.w  (sp)+,d6
 
-loc_1B57E:
+SKCompRender_TryNextBottomChild:
                 tst.w   d7
-                dbmi    d3,loc_1B544
-                bra.w   loc_1B3C2
+                dbmi    d3,SKCompRender_DrawBottomChild
+                bra.w   SKCompRender_TickBottomBucket

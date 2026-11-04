@@ -8,20 +8,21 @@ LoadEnemyArt:
                 lea     Offs_LoadEnemyArt(pc),a6
                 move.w  #$D00,d0
                 cmpi.b  #$16,(Current_zone).w
-                beq.s   loc_2F798
+                beq.s   SKEnemyArt_SelectBonusAct
                 move.w  #$E00,d0
                 cmpi.w  #$1700,(Current_zone_and_act).w
-                bne.s   loc_2F79E
+                bne.s   SKEnemyArt_LoadOrdinaryZoneActCatalogKey
 
-loc_2F798:
+; Keep the act byte while retaining the selected Pachinko or Slots catalog bank
+SKEnemyArt_SelectBonusAct:
                 move.b  (Current_act).w,d0
-                bra.s   loc_2F7A2
+                bra.s   SKEnemyArt_QueueRelativeList
 ; ---------------------------------------------------------------------------
 
-loc_2F79E:
+SKEnemyArt_LoadOrdinaryZoneActCatalogKey:
                 move.w  (Current_zone_and_act).w,d0
 
-loc_2F7A2:
+SKEnemyArt_QueueRelativeList:
                 ror.b   #1,d0
                 lsr.w   #6,d0
                 adda.w  (a6,d0.w),a6
