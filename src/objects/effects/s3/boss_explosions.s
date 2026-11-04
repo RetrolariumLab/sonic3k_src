@@ -11,7 +11,7 @@ Obj_CreateBossExplosion:
 ; ---------------------------------------------------------------------------
 CreateBossExplosion_Index:
                 dc.w    Obj_BossExpControl-CreateBossExplosion_Index
-                dc.w    loc_5281C-CreateBossExplosion_Index
+                dc.w    S3BossExpl_RunWaitCallback-CreateBossExplosion_Index
                 dc.w    Obj_WaitForParent-CreateBossExplosion_Index
 
 ; =============== S U B R O U T I N E =======================================
@@ -21,24 +21,24 @@ Obj_BossExpControl:
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #Obj_NormalExpControl,$34(a0)
                 cmpi.b  #8,subtype(a0)
-                bne.s   loc_52812
-                move.l  #loc_5289A,$34(a0)
+                bne.s   S3BossExpl_InitWaitAndParams
+                move.l  #S3BossExpl_TickAndTryPlainExplosion,$34(a0)
 
-loc_52812:
+S3BossExpl_InitWaitAndParams:
                 move.w  #3-1,$2E(a0)
-                bra.w   loc_528BA
+                bra.w   S3BossExpl_LoadSubtypeParams
 ; ---------------------------------------------------------------------------
 
-loc_5281C:
+S3BossExpl_RunWaitCallback:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
 Obj_WaitForParent:
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.w   loc_52896
+                bne.w   S3BossExpl_DeleteController
                 tst.l   (a1)
-                beq.w   loc_52896
+                beq.w   S3BossExpl_DeleteController
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 jmp     Obj_Wait(pc)
@@ -46,7 +46,7 @@ Obj_WaitForParent:
 
 Obj_NormalExpControl:
                 subq.b  #1,$39(a0)
-                bmi.s   loc_52896
+                bmi.s   S3BossExpl_DeleteController
                 move.w  #3-1,$2E(a0)
 ; End of function Obj_BossExpControl
 
@@ -57,9 +57,9 @@ BossExplosionS3SpawnAtMaskedRandomOffset:
                 jsr     (Play_SFX).l
                 lea     Child1_MakeBossExplosion(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                bne.w   locret_5293E
+                bne.w   S3BossExpl_SpecialSetupReturn
 
-loc_52864:
+S3BossExpl_ApplyRandomOffset:
                 jsr     (Random_Number).l               ; Offset the explosion by a random amount capped by an effective range
                 moveq   #0,d1
                 move.b  $3A(a0),d1
@@ -81,22 +81,22 @@ loc_52864:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_52896:
+S3BossExpl_DeleteController:
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5289A:
+S3BossExpl_TickAndTryPlainExplosion:
                 subq.b  #1,$39(a0)                      ; Same as above, but uses regular explosions (no animals of course)
-                bmi.s   loc_52896
+                bmi.s   S3BossExpl_DeleteController
                 move.w  #2,$2E(a0)
                 lea     Child1_MakeNormalExplosion(pc),a2
                 jsr     CreateChild1_Normal(pc)
-                bne.w   locret_5293E
+                bne.w   S3BossExpl_SpecialSetupReturn
                 move.b  #2,routine(a1)
-                bra.s   loc_52864
+                bra.s   S3BossExpl_ApplyRandomOffset
 ; ---------------------------------------------------------------------------
 
-loc_528BA:
+S3BossExpl_LoadSubtypeParams:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 lea     CreateBossExpParameterIndex(pc),a1
@@ -131,11 +131,11 @@ Obj_BossExplosionSpecial:
                 jmp     BossExplosionSpecial_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 BossExplosionSpecial_Index:
-                dc.w    loc_52916-BossExplosionSpecial_Index
-                dc.w    loc_5281C-BossExplosionSpecial_Index
+                dc.w    S3BossExpl_InitCameraCentered-BossExplosionSpecial_Index
+                dc.w    S3BossExpl_RunWaitCallback-BossExplosionSpecial_Index
 ; ---------------------------------------------------------------------------
 
-loc_52916:
+S3BossExpl_InitCameraCentered:
                 move.b  #2,subtype(a0)
                 bsr.w   Obj_BossExpControl
                 move.w  #2,$2E(a0)
@@ -146,7 +146,7 @@ loc_52916:
                 addi.w  #224/2,d0
                 move.w  d0,y_pos(a0)
 
-locret_5293E:
+S3BossExpl_SpecialSetupReturn:
                 rts
 ; End of function BossExplosionS3SpawnAtMaskedRandomOffset
 
@@ -156,10 +156,10 @@ Obj_BossExplosion:
                 lea     ObjDat_BossExplosion(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 tst.b   (Current_zone).w
-                bne.s   loc_52954
+                bne.s   S3BossExpl_InitRawAnimAndDelete
                 move.w  #make_art_tile(ArtTile_BossExplosion2,0,1),art_tile(a0)
 
-loc_52954:
+S3BossExpl_InitRawAnimAndDelete:
                 move.l  #Obj_BossExplosionAnim,(a0)
                 move.l  #AniRaw_BossExplosion,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)

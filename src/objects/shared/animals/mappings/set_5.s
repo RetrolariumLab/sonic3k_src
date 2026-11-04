@@ -1,12 +1,12 @@
 ; Data owner: objects/shared/animals
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Animals5_:
-                dc.w    word_2CF40-Map_Animals5_
-                dc.w    word_2CF48-Map_Animals5_
-                dc.w    word_2CF38-Map_Animals5_
-word_2CF38:     dc.w    1
+                dc.w    AnimalsSet5_Frame0_Mapping-Map_Animals5_
+                dc.w    AnimalsSet5_Frame1_Mapping-Map_Animals5_
+                dc.w    AnimalsSet5_Frame2_Mapping-Map_Animals5_
+AnimalsSet5_Frame2_Mapping: dc.w    1
                 dc.b    $F4,   6,   0,   0, $FF, $F8
-word_2CF40:     dc.w    1
+AnimalsSet5_Frame0_Mapping: dc.w    1
                 dc.b    $F4,   6,   0,   6, $FF, $F8
-word_2CF48:     dc.w    1
+AnimalsSet5_Frame1_Mapping: dc.w    1
                 dc.b    $F4,   6,   0,  $C, $FF, $F8

@@ -374,7 +374,7 @@ loc_81C3E:
                 move.b  #4,routine(a0)
                 jsr     (AllocateObject).l
                 bne.s   locret_81C6E
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  a1,$44(a0)
                 move.w  #7,$3A(a1)
 

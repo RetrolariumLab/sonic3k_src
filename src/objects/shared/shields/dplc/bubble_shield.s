@@ -1,48 +1,48 @@
 ; Data owner: objects/shared/shields
 ; Provenance and source range: config/reconstruction/source_layout.json
 DPLC_BubbleShield_:
-                dc.w    word_1A090-DPLC_BubbleShield_
-                dc.w    word_1A094-DPLC_BubbleShield_
-                dc.w    word_1A098-DPLC_BubbleShield_
-                dc.w    word_1A09C-DPLC_BubbleShield_
-                dc.w    word_1A0A0-DPLC_BubbleShield_
-                dc.w    word_1A0A4-DPLC_BubbleShield_
-                dc.w    word_1A0A8-DPLC_BubbleShield_
-                dc.w    word_1A0AC-DPLC_BubbleShield_
-                dc.w    word_1A0B0-DPLC_BubbleShield_
-                dc.w    word_1A0B4-DPLC_BubbleShield_
-                dc.w    word_1A0BA-DPLC_BubbleShield_
-                dc.w    word_1A0C0-DPLC_BubbleShield_
-                dc.w    word_1A0C8-DPLC_BubbleShield_
-word_1A090:     dc.w    1
+                dc.w    BubbleShield_Frame0_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame1_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame2_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame3_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame4_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame5_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame6_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame7_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame8_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame9_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame10_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame11_Dplc-DPLC_BubbleShield_
+                dc.w    BubbleShield_Frame12_Dplc-DPLC_BubbleShield_
+BubbleShield_Frame0_Dplc:   dc.w    1
                 dc.w    $3000
-word_1A094:     dc.w    1
+BubbleShield_Frame1_Dplc:   dc.w    1
                 dc.w    $5004
-word_1A098:     dc.w    1
+BubbleShield_Frame2_Dplc:   dc.w    1
                 dc.w    $800A
-word_1A09C:     dc.w    1
+BubbleShield_Frame3_Dplc:   dc.w    1
                 dc.w    $8013
-word_1A0A0:     dc.w    1
+BubbleShield_Frame4_Dplc:   dc.w    1
                 dc.w    $B01C
-word_1A0A4:     dc.w    1
+BubbleShield_Frame5_Dplc:   dc.w    1
                 dc.w    $8013
-word_1A0A8:     dc.w    1
+BubbleShield_Frame6_Dplc:   dc.w    1
                 dc.w    $800A
-word_1A0AC:     dc.w    1
+BubbleShield_Frame7_Dplc:   dc.w    1
                 dc.w    $5004
-word_1A0B0:     dc.w    1
+BubbleShield_Frame8_Dplc:   dc.w    1
                 dc.w    $1000
-word_1A0B4:     dc.w    2
+BubbleShield_Frame9_Dplc:   dc.w    2
                 dc.w    $8028
                 dc.w    $8031
-word_1A0BA:     dc.w    2
+BubbleShield_Frame10_Dplc:  dc.w    2
                 dc.w    $803A
                 dc.w    $8043
-word_1A0C0:     dc.w    3
+BubbleShield_Frame11_Dplc:  dc.w    3
                 dc.w    $704C
                 dc.w    $5054
                 dc.w    $B05A
-word_1A0C8:     dc.w    3
+BubbleShield_Frame12_Dplc:  dc.w    3
                 dc.w    $F066
                 dc.w    $3076
                 dc.w    $F07A

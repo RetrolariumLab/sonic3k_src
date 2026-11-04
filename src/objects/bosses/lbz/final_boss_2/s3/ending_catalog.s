@@ -132,10 +132,10 @@ ChildObjDat_52048:
                 dc.l    loc_51B18
 ChildObjDat_5204E:
                 dc.w    1-1
-                dc.l    loc_542B8
+                dc.l    S3PalEffect_InitWhitePasses
 ChildObjDat_52054:
                 dc.w    1-1
-                dc.l    loc_54322
+                dc.l    S3PalEffect_InitTargetPasses
 byte_5205A:
                 dc.b    9,   7,   4,   5,   6,   5,   4, $FC
 byte_52062:

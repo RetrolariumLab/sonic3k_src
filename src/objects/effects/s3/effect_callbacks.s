@@ -13,21 +13,22 @@ Play_SFX_Continuous:
 
 ; ---------------------------------------------------------------------------
 
-loc_542B8:
+; Schedule eight passes at four-update intervals
+S3PalEffect_InitWhitePasses:
                 move.b  #7,$39(a0)
                 move.w  #3,$2E(a0)
-                move.l  #loc_542CA,(a0)
+                move.l  #S3PalEffect_WaitForWhitePass,(a0)
 
-loc_542CA:
+S3PalEffect_WaitForWhitePass:
                 subq.w  #1,$2E(a0)
                 bpl.w   S3Return_AttrSetup
                 move.w  #3,$2E(a0)
                 lea     (Normal_palette).w,a1
                 moveq   #$40-1,d0
 
-loc_542DE:
+S3PalEffect_Raise64Colors:
                 bsr.w   EffectColorS3RaiseOneColorTowardWhite
-                dbf     d0,loc_542DE
+                dbf     d0,S3PalEffect_Raise64Colors
                 subq.b  #1,$39(a0)
                 bmi.w   Go_Delete_Sprite
                 rts
@@ -39,26 +40,26 @@ EffectColorS3RaiseOneColorTowardWhite:
                 move.b  (a1),d3
                 and.b   d2,d3
                 cmp.b   d2,d3
-                bhs.s   loc_542FE
+                bhs.s   S3PalEffect_ReadGreenAndRed
                 addq.b  #2,d3
                 move.b  d3,(a1)
 
-loc_542FE:
+S3PalEffect_ReadGreenAndRed:
                 addq.w  #1,a1
                 move.b  (a1),d3
                 move.b  d3,d4
                 andi.b  #$E0,d3
                 andi.b  #$E,d4
                 cmpi.b  #$E0,d3
-                bhs.s   loc_54316
+                bhs.s   S3PalEffect_TryRaiseRed
                 addi.b  #$20,d3
 
-loc_54316:
+S3PalEffect_TryRaiseRed:
                 cmp.b   d2,d4
-                bhs.s   loc_5431C
+                bhs.s   S3PalEffect_StoreRaisedGreenRed
                 addq.b  #2,d4
 
-loc_5431C:
+S3PalEffect_StoreRaisedGreenRed:
                 or.b    d3,d4
                 move.b  d4,(a1)+
                 rts
@@ -66,12 +67,12 @@ loc_5431C:
 
 ; ---------------------------------------------------------------------------
 
-loc_54322:
+S3PalEffect_InitTargetPasses:
                 move.b  #7,$39(a0)
                 move.w  #3,$2E(a0)
-                move.l  #loc_54334,(a0)
+                move.l  #S3PalEffect_WaitForTargetPass,(a0)
 
-loc_54334:
+S3PalEffect_WaitForTargetPass:
                 subq.w  #1,$2E(a0)
                 bpl.w   S3Return_AttrSetup
                 move.w  #3,$2E(a0)
@@ -79,9 +80,9 @@ loc_54334:
                 lea     (Target_palette).w,a2
                 moveq   #$40-1,d0
 
-loc_5434C:
+S3PalEffect_Lower64Colors:
                 bsr.w   EffectColorS3LowerOneColorTowardTarget
-                dbf     d0,loc_5434C
+                dbf     d0,S3PalEffect_Lower64Colors
                 subq.b  #1,$39(a0)
                 bmi.w   Go_Delete_Sprite
                 rts
@@ -93,11 +94,11 @@ EffectColorS3LowerOneColorTowardTarget:
                 andi.b  #$E,d2
                 move.b  (a1),d3
                 cmp.b   d2,d3
-                bls.s   loc_5436E
+                bls.s   S3PalEffect_ReadTargetGreenRed
                 subq.b  #2,d3
                 move.b  d3,(a1)
 
-loc_5436E:
+S3PalEffect_ReadTargetGreenRed:
                 addq.w  #1,a1
                 move.b  (a2)+,d2
                 move.b  d2,d3
@@ -108,15 +109,15 @@ loc_5436E:
                 andi.b  #$E0,d4
                 andi.b  #$E,d5
                 cmp.b   d2,d4
-                bls.s   loc_54390
+                bls.s   S3PalEffect_TryLowerRed
                 subi.b  #$20,d4
 
-loc_54390:
+S3PalEffect_TryLowerRed:
                 cmp.b   d3,d5
-                bls.s   loc_54396
+                bls.s   S3PalEffect_StoreLoweredGreenRed
                 subq.b  #2,d5
 
-loc_54396:
+S3PalEffect_StoreLoweredGreenRed:
                 or.b    d4,d5
                 move.b  d5,(a1)+
                 rts

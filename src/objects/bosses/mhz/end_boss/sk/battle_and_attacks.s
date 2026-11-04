@@ -494,7 +494,7 @@ loc_765C0:
                 dbf     d6,loc_765C0
                 jsr     (AllocateObject).l
                 bne.s   loc_765DE
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 st      subtype(a1)
                 move.w  #3,$3A(a1)
 

@@ -35,7 +35,7 @@ S3TensionBridge_InitPieceAndTryExplosion:
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   S3TensionBridge_FinishPartialCollapse
-                move.l  #loc_1C31E,(a1)
+                move.l  #S3Explosion_InitHighPriorityDelayed,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),$24(a1)

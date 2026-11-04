@@ -15,10 +15,10 @@ Obj_FireShield:
                 move.w  #make_art_tile(ArtTile_Shield,0,0),art_tile(a0)
                 move.w  #tiles_to_bytes(ArtTile_Shield),vram_art(a0)  ; Used by PLCLoad_Shields
                 btst    #7,(Player_1+art_tile).w
-                beq.s   loc_181A4
+                beq.s   S3Shield_InitFireIdleAndReload
                 bset    #7,art_tile(a0)
 
-loc_181A4:
+S3Shield_InitFireIdleAndReload:
                 move.w  #1,anim(a0)                     ; Clear anim and set prev_anim to 1
                 move.b  #-1,shield_prev_frame(a0)       ; Reset shield_prev_frame (used by PLCLoad_Shields)
                 move.l  #Obj_FireShield_Main,(a0)
@@ -26,9 +26,9 @@ loc_181A4:
 Obj_FireShield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)  ; Is player invincible?
-                bne.s   locret_18236                    ; If so, do not display and do not update variables
+                bne.s   S3Shield_FireHiddenReturn       ; If so, do not display and do not update variables
                 cmpi.b  #$1C,anim(a2)                   ; Is player in their 'blank' animation?
-                beq.s   locret_18236                    ; If so, do not display and do not update variables
+                beq.s   S3Shield_FireHiddenReturn       ; If so, do not display and do not update variables
                 btst    #Status_Shield,status_secondary(a2)  ; Should the player still have a shield?
                 beq.w   Obj_FireShield_Destroy          ; If not, change to Insta-Shield
                 btst    #Status_Underwater,status(a2)   ; Is player underwater?
@@ -57,7 +57,7 @@ Obj_FireShield_Main:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_18236:
+S3Shield_FireHiddenReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -104,9 +104,9 @@ Obj_LightningShield:
 Obj_LightningShield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)  ; Is player invincible?
-                bne.s   locret_1835E                    ; If so, do not display and do not update variables
+                bne.s   S3Shield_LightningHiddenReturn  ; If so, do not display and do not update variables
                 cmpi.b  #$1C,anim(a2)                   ; Is player in their 'blank' animation?
-                beq.s   locret_1835E                    ; If so, do not display and do not update variables
+                beq.s   S3Shield_LightningHiddenReturn  ; If so, do not display and do not update variables
                 btst    #Status_Shield,status_secondary(a2)  ; Should the player still have a shield?
                 beq.w   Obj_LightningShield_Destroy     ; If not, change to Insta-Shield
                 btst    #Status_Underwater,status(a2)   ; Is player underwater?
@@ -139,7 +139,7 @@ Obj_LightningShield_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_1835E:
+S3Shield_LightningHiddenReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -153,10 +153,11 @@ Obj_LightningShield_DestroyUnderwater:
                 lea     (Target_water_palette).w,a2
                 move.w  #bytesToLcnt($80),d0            ; Size of Water_palette/4-1
 
-loc_18378:
+; Copy the original palette while replacing each longword with $0EEE0EEE
+S3Shield_BackupAndFlashWaterPalette:
                 move.l  (a1),(a2)+                      ; Backup palette entries
                 move.l  #$0EEE0EEE,(a1)+                ; Overwrite palette entries with white
-                dbf     d0,loc_18378                    ; Loop until entire thing is overwritten
+                dbf     d0,S3Shield_BackupAndFlashWaterPalette  ; Loop until entire thing is overwritten
 
                 move.w  #0,(Water_palette_line_3).w     ; Set the first color in the third palette line to black
                 move.b  #3,anim_frame_timer(a0)
@@ -259,9 +260,9 @@ Obj_BubbleShield:
 Obj_BubbleShield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)  ; Is player invincible?
-                bne.s   locret_18518                    ; If so, do not display and do not update variables
+                bne.s   S3Shield_BubbleHiddenReturn     ; If so, do not display and do not update variables
                 cmpi.b  #$1C,anim(a2)                   ; Is player in their 'blank' animation?
-                beq.s   locret_18518                    ; If so, do not display and do not update variables
+                beq.s   S3Shield_BubbleHiddenReturn     ; If so, do not display and do not update variables
                 btst    #Status_Shield,status_secondary(a2)  ; Should the player still have a shield?
                 beq.s   Obj_BubbleShield_Destroy        ; If not, change to Insta-Shield
                 move.w  x_pos(a2),x_pos(a0)
@@ -280,7 +281,7 @@ Obj_BubbleShield_Main:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_18518:
+S3Shield_BubbleHiddenReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -295,14 +296,14 @@ PLCLoad_Shields:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   shield_prev_frame(a0),d0
-                beq.s   locret_18576
+                beq.s   S3Shield_ShieldPatternsReturn
                 move.b  d0,shield_prev_frame(a0)
                 movea.l shield_plc(a0),a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_18576
+                bmi.s   S3Shield_ShieldPatternsReturn
                 move.w  vram_art(a0),d4
 
 PLCLoad_Shields_ReadEntry:
@@ -321,7 +322,7 @@ PLCLoad_Shields_ReadEntry:
                 jsr     (Add_To_DMA_Queue).l
                 dbf     d5,PLCLoad_Shields_ReadEntry
 
-locret_18576:
+S3Shield_ShieldPatternsReturn:
                 rts
 ; End of function PLCLoad_Shields
 

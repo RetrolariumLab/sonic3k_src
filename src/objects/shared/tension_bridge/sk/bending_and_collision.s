@@ -35,7 +35,7 @@ SKTensionBridge_InitPieceAndTryExplosion:
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   SKTensionBridge_FinishPartialCollapse
-                move.l  #loc_1E6EC,(a1)
+                move.l  #SKExplosion_InitHighPriorityDelayed,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),$24(a1)

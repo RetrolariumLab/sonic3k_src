@@ -25,7 +25,7 @@ Obj_S2Shield_Init:
 Obj_S2Shield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)
-                bne.s   locret_17566
+                bne.s   LegacyShield_ReturnWhileParentInvincible
                 btst    #Status_Shield,status_secondary(a2)
                 beq.s   Obj_S2Shield_Destroy
                 move.w  x_pos(a2),x_pos(a0)
@@ -42,19 +42,19 @@ Obj_S2Shield_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_17566:
+LegacyShield_ReturnWhileParentInvincible:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield_Destroy:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-off_1756E:
-                dc.l    byte_1776D
+LegacyInvincibility_TrailingGroupRecords:
+                dc.l    S3InvincibilityTrail_NearFrames
                 dc.b    0,  $B
-                dc.l    byte_17782
+                dc.l    S3InvincibilityTrail_MiddleFrames
                 dc.b    $16,  $D
-                dc.l    byte_1779B
+                dc.l    S3InvincibilityTrail_FarFrames
                 dc.b    $2C,  $D
 ; ---------------------------------------------------------------------------
 
@@ -64,12 +64,12 @@ Obj_Invincibility:
                 move.w  #(ArtUnc_Invincibility_end-ArtUnc_Invincibility)/2,d3
                 jsr     (Add_To_DMA_Queue).l
                 moveq   #0,d2
-                lea     off_1756E-6(pc),a2
+                lea     LegacyInvincibility_TrailingGroupRecords-6(pc),a2
                 lea     (a0),a1
                 moveq   #4-1,d1
 
-loc_1759E:
-                move.l  #Obj_17670,(a1)
+S3Invincibility_InitParticleSlot:
+                move.l  #S3InvincibilityTrail_UpdateFromHistory,(a1)
                 move.l  #Map_Invincibility,mappings(a1)
                 move.w  #make_art_tile(ArtTile_Shield,0,0),art_tile(a1)
                 move.w  #$80,priority(a1)
@@ -83,11 +83,11 @@ loc_1759E:
                 move.l  (a2)+,$30(a1)
                 move.w  (a2)+,$34(a1)
                 lea     next_object(a1),a1
-                dbf     d1,loc_1759E
-                move.l  #loc_175F8,(a0)
+                dbf     d1,S3Invincibility_InitParticleSlot
+                move.l  #S3InvincibilityRoot_UpdateAtParent,(a0)
                 move.b  #4,$34(a0)
 
-loc_175F8:
+S3InvincibilityRoot_UpdateAtParent:
                 tst.b   (Super_Sonic_Knux_flag).w
                 bne.w   Delete_Current_Sprite
                 movea.w parent(a0),a1
@@ -98,20 +98,20 @@ loc_175F8:
                 move.w  y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 lea     sub2_x_pos(a0),a2
-                lea     byte_17760(pc),a3
+                lea     LegacyInvincibilityRoot_FrameStream(pc),a3
                 moveq   #0,d5
 
-loc_17628:
+S3InvincibilityRoot_ReadFrameOrLoop:
                 move.w  $38(a0),d2
                 move.b  (a3,d2.w),d5
-                bpl.s   loc_17638
+                bpl.s   S3InvincibilityRoot_BuildOppositePair
                 clr.w   $38(a0)
-                bra.s   loc_17628
+                bra.s   S3InvincibilityRoot_ReadFrameOrLoop
 ; ---------------------------------------------------------------------------
 
-loc_17638:
+S3InvincibilityRoot_BuildOppositePair:
                 addq.w  #1,$38(a0)
-                lea     byte_17720(pc),a6
+                lea     S3Invincibility_OrbitOffsetPairs(pc),a6
                 move.b  $34(a0),d6
                 jsr     S3InvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
@@ -124,15 +124,15 @@ loc_17638:
                 move.w  d5,(a2)+
                 moveq   #$12,d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_17668
+                beq.s   S3InvincibilityRoot_StepPhaseAndDraw
                 neg.w   d0
 
-loc_17668:
+S3InvincibilityRoot_StepPhaseAndDraw:
                 add.b   d0,$34(a0)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-Obj_17670:
+S3InvincibilityTrail_UpdateFromHistory:
                 tst.b   (Super_Sonic_Knux_flag).w
                 bne.w   Delete_Current_Sprite
                 movea.w parent(a0),a1
@@ -155,20 +155,20 @@ Obj_17670:
                 lea     sub2_x_pos(a0),a2
                 movea.l $30(a0),a3
 
-loc_176B6:
+S3InvincibilityTrail_ReadFrameOrLoop:
                 move.w  $38(a0),d2
                 move.b  (a3,d2.w),d5
-                bpl.s   loc_176C6
+                bpl.s   S3InvincibilityTrail_BuildSpritePair
                 clr.w   $38(a0)
-                bra.s   loc_176B6
+                bra.s   S3InvincibilityTrail_ReadFrameOrLoop
 ; ---------------------------------------------------------------------------
 
-loc_176C6:
+S3InvincibilityTrail_BuildSpritePair:
                 swap    d5
                 add.b   $35(a0),d2
                 move.b  (a3,d2.w),d5
                 addq.w  #1,$38(a0)
-                lea     byte_17720(pc),a6
+                lea     S3Invincibility_OrbitOffsetPairs(pc),a6
                 move.b  $34(a0),d6
                 jsr     S3InvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
@@ -182,10 +182,10 @@ loc_176C6:
                 move.w  d5,(a2)+
                 moveq   #2,d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_17702
+                beq.s   S3InvincibilityTrail_StepPhaseAndDraw
                 neg.w   d0
 
-loc_17702:
+S3InvincibilityTrail_StepPhaseAndDraw:
                 add.b   d0,$34(a0)
                 bra.w   Draw_Sprite
 
@@ -204,7 +204,7 @@ S3InvincibilityOrbit_AddOffset:
 ; End of function S3InvincibilityOrbit_AddOffset
 
 ; ---------------------------------------------------------------------------
-byte_17720:
+S3Invincibility_OrbitOffsetPairs:
                 dc.b    $F,   0
                 dc.b    $F,   3
                 dc.b    $E,   6
@@ -237,15 +237,15 @@ byte_17720:
                 dc.b    $D,  -9
                 dc.b    $E,  -7
                 dc.b    $F,  -4
-byte_17760:
+LegacyInvincibilityRoot_FrameStream:
                 dc.b    8,   5,   7,   6,   6,   7,   5,   8,   6,   7,   7,   6, $FF
-byte_1776D:
+S3InvincibilityTrail_NearFrames:
                 dc.b    8,   7,   6,   5,   4,   3,   4,   5,   6,   7, $FF,   3,   4,   5,   6,   7,   8,   7,   6,   5
                 dc.b    4
-byte_17782:
+S3InvincibilityTrail_MiddleFrames:
                 dc.b    8,   7,   6,   5,   4,   3,   2,   3,   4,   5,   6,   7, $FF,   2,   3,   4,   5,   6,   7,   8
                 dc.b    7,   6,   5,   4,   3
-byte_1779B:
+S3InvincibilityTrail_FarFrames:
                 dc.b    7,   6,   5,   4,   3,   2,   1,   2,   3,   4,   5,   6, $FF,   1,   2,   3,   4,   5,   6,   7
                 dc.b    6,   5,   4,   3,   2
                 even

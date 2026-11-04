@@ -249,7 +249,7 @@ loc_917C0:
 loc_917E2:
                 move.b  d0,$30(a0)
                 lsl.w   #3,d0
-                lea     (word_2C7EA).l,a1
+                lea     (SKAnimal_DefaultSpeciesRecords).l,a1
                 adda.w  d0,a1
                 move.w  (a1)+,d1
                 movea.w parent3(a0),a2

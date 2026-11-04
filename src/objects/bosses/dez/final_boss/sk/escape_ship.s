@@ -190,7 +190,7 @@ loc_80382:
                 move.l  #loc_803D6,(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_803B4
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  a1,$44(a0)
                 move.w  #3,$3A(a1)
                 rts
@@ -205,7 +205,7 @@ loc_803B4:
 loc_803BE:
                 move.w  d0,(a1)+
                 dbf     d1,loc_803BE
-                move.l  #loc_85E64,(a2)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a2)
                 move.w  a2,$44(a0)
                 move.w  #3,$3A(a2)
 

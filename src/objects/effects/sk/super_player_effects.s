@@ -238,40 +238,41 @@ Obj_SuperTailsBirds_Move:
                 and.w   (Screen_Y_wrap_value).w,d3
                 move.w  #$20,d1
                 sub.w   y_pos(a0),d3
-                bcc.s   loc_1A3CA
+                bcc.s   SKSuperBird_CheckDownGap
                 cmpi.w  #-$500,d3
-                ble.s   loc_1A3D0
+                ble.s   SKSuperBird_CheckDownVelLimit
 
-loc_1A3B4:
+SKSuperBird_CheckUpVelLimit:
                 cmpi.w  #-$1000,y_vel(a0)
-                ble.s   loc_1A3D8
+                ble.s   SKSuperBird_AccelDownAndCheckReversal
 
-loc_1A3BC:
+SKSuperBird_AccelUpAndCheckReversal:
                 neg.w   d1
                 tst.w   y_vel(a0)
-                bmi.s   loc_1A3E2
+                bmi.s   SKSuperBird_MoveAndWrap
 ; Going the wrong way - make it turn around faster
                 add.w   d1,d1
                 add.w   d1,d1
-                bra.s   loc_1A3E2
+                bra.s   SKSuperBird_MoveAndWrap
 ; ---------------------------------------------------------------------------
 
-loc_1A3CA:
+; The nonborrow path uses a signed word gap threshold of $500
+SKSuperBird_CheckDownGap:
                 cmpi.w  #$500,d3
-                bge.s   loc_1A3B4
+                bge.s   SKSuperBird_CheckUpVelLimit
 
-loc_1A3D0:
+SKSuperBird_CheckDownVelLimit:
                 cmpi.w  #$1000,y_vel(a0)
-                bge.s   loc_1A3BC
+                bge.s   SKSuperBird_AccelUpAndCheckReversal
 
-loc_1A3D8:
+SKSuperBird_AccelDownAndCheckReversal:
                 tst.w   y_vel(a0)
-                bpl.s   loc_1A3E2
+                bpl.s   SKSuperBird_MoveAndWrap
 ; Going the wrong way - make it turn around faster
                 add.w   d1,d1
                 add.w   d1,d1
 
-loc_1A3E2:
+SKSuperBird_MoveAndWrap:
                 add.w   d1,y_vel(a0)
                 jsr     (MoveSprite2).l
                 move.w  (Level_repeat_offset).w,d0
@@ -343,11 +344,11 @@ Map_SuperTails_Birds:
                 include "src/objects/shared/tails/mappings/super_tails_birds.s"
 ; ---------------------------------------------------------------------------
 ; unused
-                dc.l    byte_189ED
+                dc.l    SKInvincibilityTrail_NearFrames
                 dc.b    0,  $B
-                dc.l    byte_18A02
+                dc.l    SKInvincibilityTrail_MiddleFrames
                 dc.b    $16,  $D
-                dc.l    byte_18A1B
+                dc.l    SKInvincibilityTrail_FarFrames
                 dc.b    $2C,  $D
 ; ---------------------------------------------------------------------------
 

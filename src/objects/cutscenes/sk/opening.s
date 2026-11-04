@@ -350,7 +350,7 @@ loc_63870:
                 jsr     (AllocateObject).l
                 bne.s   loc_6389C
                 move.w  a1,$44(a0)
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  #7,$3A(a1)
                 st      subtype(a1)
                 lea     ChildObjDat_66650(pc),a2

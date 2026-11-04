@@ -1,26 +1,26 @@
 ; Data owner: objects/shared/dash_dust
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_DashDust2P_:
-                dc.w    word_1911C-Map_DashDust2P_
-                dc.w    word_1911E-Map_DashDust2P_
-                dc.w    word_19126-Map_DashDust2P_
-                dc.w    word_1912E-Map_DashDust2P_
-                dc.w    word_19136-Map_DashDust2P_
-                dc.w    word_1913E-Map_DashDust2P_
-                dc.w    word_19146-Map_DashDust2P_
-                dc.w    word_1914E-Map_DashDust2P_
-word_1911C:     dc.w    0
-word_1911E:     dc.w    1
+                dc.w    CompetitionDust_Frame0_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame1_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame2_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame3_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame4_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame5_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame6_Mapping-Map_DashDust2P_
+                dc.w    CompetitionDust_Frame7_Mapping-Map_DashDust2P_
+CompetitionDust_Frame0_Mapping: dc.w    0
+CompetitionDust_Frame1_Mapping: dc.w    1
                 dc.b    4,   8,   0,   0, $FF, $EC
-word_19126:     dc.w    1
+CompetitionDust_Frame2_Mapping: dc.w    1
                 dc.b    4,   8,   0,   3, $FF, $EC
-word_1912E:     dc.w    1
+CompetitionDust_Frame3_Mapping: dc.w    1
                 dc.b    $FC,   9,   0,   6, $FF, $EC
-word_19136:     dc.w    1
+CompetitionDust_Frame4_Mapping: dc.w    1
                 dc.b    $FC,   9,   0,  $C, $FF, $EC
-word_1913E:     dc.w    1
+CompetitionDust_Frame5_Mapping: dc.w    1
                 dc.b    $FC,   0,   0, $12, $FF, $FC
-word_19146:     dc.w    1
+CompetitionDust_Frame6_Mapping: dc.w    1
                 dc.b    $FC,   0,   0, $13, $FF, $FC
-word_1914E:     dc.w    1
+CompetitionDust_Frame7_Mapping: dc.w    1
                 dc.b    $FC,   0,   0, $14, $FF, $FC

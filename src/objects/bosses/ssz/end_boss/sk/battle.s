@@ -832,7 +832,7 @@ loc_7BC90:
                 jsr     (AllocateObject).l
                 bne.s   locret_7BCAE
                 move.w  a1,$44(a0)
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  #7,$3A(a1)
 
 locret_7BCAE:
@@ -870,7 +870,7 @@ loc_7BCFC:
 loc_7BD1C:
                 jsr     (AllocateObject).l
                 bne.s   loc_7BD2A
-                move.l  #loc_85EE6,(a1)
+                move.l  #SKPalEffect_InitTargetPasses,(a1)
 
 loc_7BD2A:
                 jmp     (Delete_Current_Sprite).l

@@ -17,7 +17,7 @@
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "sha256": "db1699cea221af7fc80aa1416c13bae544f857e163463defbefbfb0151f5ff6b"
+      "sha256": "72026fe06940c756876adb9d4e2db07076d30f8eb9c1681b0c80b7d4da9ad54c"
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
@@ -161,7 +161,7 @@
     },
     {
       "path": "src/objects/bosses/ddz/sk/battle_control.s",
-      "sha256": "1c30c8d5b92c9f0d0d1b6c59f98893d6b762a19cb7a999ae7e15317b8a1443a5"
+      "sha256": "f3495fc28a12f9b28dfa50a5413820c319f98a205094a3f94e274f464103e66f"
     },
     {
       "path": "src/objects/bosses/ddz/sk/missile.s",
@@ -193,7 +193,7 @@
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/escape_ship.s",
-      "sha256": "619f1fb95fa423f81b359cda38551096374281c809b47158ef089f8c32ac3d38"
+      "sha256": "0afa23c5e644e6be7affa725d22db0a126c548e8ae71b7d8e9f9bb92f73b66d1"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/object_catalog.s",
@@ -337,7 +337,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/ending_catalog.s",
-      "sha256": "720a671a0b00d26719d05f9c23ed27f7ccb374f5afb8399052cf06e4234fc6ba"
+      "sha256": "6592d7e1b831d19afcfdde5299d723a241c76cc4f3a7afcb07976a2027aa8a87"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
@@ -449,7 +449,7 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "eb6f4823501eda0b989b5f2817970e5cdfcee81e2d4be516828769f10a2483e0"
+      "sha256": "bee5cfdcc79e10856e28c8436263ef4aa08b2f8aba9e9e5a20cca5bc577bb9f9"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
@@ -501,7 +501,7 @@
     },
     {
       "path": "src/objects/bosses/ssz/end_boss/sk/battle.s",
-      "sha256": "1a4903cfa997d9c3fbf2ae713e0c2d2c1da4871d4c17f9f965527cf483ae22e9"
+      "sha256": "b3bf99cea6af73d7799ad1a5ac3de0dc83844a494b10d214fca757c4498f8ea4"
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/battle.s",
@@ -553,7 +553,7 @@
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/launch_base.s",
-      "sha256": "696c32de872c91e5360331a2648ef9098f0754381f88efadebfcf5f8d3a7d7dd"
+      "sha256": "722989b4a718d36213bffa4501ec0e3608a471a53c691ed433e0f60dc9a3b714"
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island.s",
@@ -597,7 +597,7 @@
     },
     {
       "path": "src/objects/cutscenes/sk/opening.s",
-      "sha256": "9d03da7bd0f728c705b402e94edbf1750a50a0154d6f76102bb08c4d04f9b3fc"
+      "sha256": "3bf6d4390bcf3149237d38b7ad931db3f339784aa685ad96729114664e54ba31"
     },
     {
       "path": "src/objects/cutscenes/sk/sky_sanctuary.s",
@@ -605,19 +605,19 @@
     },
     {
       "path": "src/objects/effects/s3/boss_explosions.s",
-      "sha256": "efd4c5812757500a86215b71af600414002881dc28249564d536d9c51481bb11"
+      "sha256": "bf71ce30ed00e937d5cae3621e81fe92427e95bb9a1d5ccec828fd0c8387e24f"
     },
     {
       "path": "src/objects/effects/s3/legacy_defense.s",
-      "sha256": "1ea1ea7167fdb7b2e788db2044a758321a0b88b48e704e9f9830a74f9de940e1"
+      "sha256": "e98aa817a4ae7cd11c212c7d2eb9e63ad463e82eb14497855337f408ca62a79c"
     },
     {
       "path": "src/objects/effects/sk/boss_explosions.s",
-      "sha256": "cea0ebd9c5840a24d53f2a705e044ecb72b4d4df4fd9c5d631616e11197c0823"
+      "sha256": "7db3558b0acb1df3645da95df6c21ab9f2c793a817d09aabee14b947a0db0b95"
     },
     {
       "path": "src/objects/effects/sk/legacy_defense.s",
-      "sha256": "e3825720ee39144fedae923ed897565d15fde45b82b3550e17445c963efd5431"
+      "sha256": "b9a058bccc4a64c8f3b487db9fcb5146e99f688752c30aa9c697a5f0f7d549f2"
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
@@ -717,7 +717,7 @@
     },
     {
       "path": "src/objects/enemies/fbz/sk/techno_squeek.s",
-      "sha256": "97f378ba97c6c28aa05badb756b60ad79a75fc803c1f609ad2e3343e6a7aa1a5"
+      "sha256": "2de2b2ded0224bada837f22643e5220a8fa4cd3b2797d9b9f023bc33e787f9bc"
     },
     {
       "path": "src/objects/enemies/hcz/s3/blastoid.s",
@@ -913,7 +913,7 @@
     },
     {
       "path": "src/objects/level_end/s3/egg_capsule.s",
-      "sha256": "3f8f7d2f3af513e12283722a90057a1b2b2f1b61af3a68a1999c2048ae8f1725"
+      "sha256": "51e2ba650b4316fca0d1532951dea35b303d10b64df80d0ae39b2126292023ee"
     },
     {
       "path": "src/objects/level_end/s3/signpost.s",
@@ -925,7 +925,7 @@
     },
     {
       "path": "src/objects/level_end/sk/egg_capsule.s",
-      "sha256": "df3714b5005d02fcc20ce3185eb496ed83f7983befb1c0126cfba347cabd2af7"
+      "sha256": "dc57ce178dc0021baddef35bacd7c7ffa0b16b17458d4b18493e0adca394450d"
     },
     {
       "path": "src/objects/level_end/sk/signpost.s",
@@ -3405,13 +3405,13 @@
     },
     {
       "path": "src/objects/effects/s3/legacy_defense.s",
-      "symbol": "byte_17760",
-      "scope": "byte_17760",
+      "symbol": "LegacyInvincibilityRoot_FrameStream",
+      "scope": "LegacyInvincibilityRoot_FrameStream",
       "first_line": 240,
       "last_line": 251,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 84,
-      "declarations_sha256": "6cbfba97a27fe14dee1e9e77d8047aeec4fbfcbe88fd51a0620a9d3dbacb035e",
+      "declarations_sha256": "61b2f2325b575bf5c152ee716aa86b0b8edcebe3d1f170652cc7e45224e62d4e",
       "entries": [
         [0, "negative-sentinel"],
         [13, "paired-lanes"],
@@ -3419,7 +3419,12 @@
         [59, "paired-lanes"]
       ],
       "external_symbols": [],
-      "members": ["byte_17760", "byte_1776D", "byte_17782", "byte_1779B"],
+      "members": [
+        "LegacyInvincibilityRoot_FrameStream",
+        "S3InvincibilityTrail_NearFrames",
+        "S3InvincibilityTrail_MiddleFrames",
+        "S3InvincibilityTrail_FarFrames"
+      ],
       "stored_markers": []
     },
     {
@@ -3438,13 +3443,13 @@
     },
     {
       "path": "src/objects/effects/sk/legacy_defense.s",
-      "symbol": "byte_189E0",
-      "scope": "byte_189E0",
+      "symbol": "LegacyInvincibilityRoot_FrameStream",
+      "scope": "LegacyInvincibilityRoot_FrameStream",
       "first_line": 244,
       "last_line": 255,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 84,
-      "declarations_sha256": "c3917ca86ad0bf0f8592100565369999e2803ca6da2bc66259c2266824354be1",
+      "declarations_sha256": "bc50d35ec32a2b247e3fcc946e7b3bdd6482e9ecc7c5b3de634a0e5ad1345848",
       "entries": [
         [0, "negative-sentinel"],
         [13, "paired-lanes"],
@@ -3452,7 +3457,12 @@
         [59, "paired-lanes"]
       ],
       "external_symbols": [],
-      "members": ["byte_189E0", "byte_189ED", "byte_18A02", "byte_18A1B"],
+      "members": [
+        "LegacyInvincibilityRoot_FrameStream",
+        "SKInvincibilityTrail_NearFrames",
+        "SKInvincibilityTrail_MiddleFrames",
+        "SKInvincibilityTrail_FarFrames"
+      ],
       "stored_markers": []
     },
     {

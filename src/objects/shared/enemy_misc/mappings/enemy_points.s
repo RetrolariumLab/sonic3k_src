@@ -1,27 +1,27 @@
 ; Data owner: objects/shared/enemy_misc
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_EnemyScore_:
-                dc.w    word_2CF5E-Map_EnemyScore_
-                dc.w    word_2CF66-Map_EnemyScore_
-                dc.w    word_2CF6E-Map_EnemyScore_
-                dc.w    word_2CF76-Map_EnemyScore_
-                dc.w    word_2CF84-Map_EnemyScore_
-                dc.w    word_2CF8C-Map_EnemyScore_
-                dc.w    word_2CF9A-Map_EnemyScore_
-word_2CF5E:     dc.w    1
+                dc.w    EnemyScore_Frame0_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame1_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame2_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame3_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame4_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame5_Mapping-Map_EnemyScore_
+                dc.w    EnemyScore_Frame6_Mapping-Map_EnemyScore_
+EnemyScore_Frame0_Mapping:  dc.w    1
                 dc.b    $FC,   4,   0,   0, $FF, $FA
-word_2CF66:     dc.w    1
+EnemyScore_Frame1_Mapping:  dc.w    1
                 dc.b    $FC,   4,   0,   2, $FF, $F8
-word_2CF6E:     dc.w    1
+EnemyScore_Frame2_Mapping:  dc.w    1
                 dc.b    $FC,   4,   0,   4, $FF, $F8
-word_2CF76:     dc.w    2
+EnemyScore_Frame3_Mapping:  dc.w    2
                 dc.b    $FC,   0,   0,   0, $FF, $F8
                 dc.b    $FC,   4,   0,   6,   0,   0
-word_2CF84:     dc.w    1
+EnemyScore_Frame4_Mapping:  dc.w    1
                 dc.b    $FC,   0,   0,   0, $FF, $FC
-word_2CF8C:     dc.w    2
+EnemyScore_Frame5_Mapping:  dc.w    2
                 dc.b    $FC,   4,   0,   0, $FF, $F8
                 dc.b    $FC,   4,   0,   6,   0,   5
-word_2CF9A:     dc.w    2
+EnemyScore_Frame6_Mapping:  dc.w    2
                 dc.b    $FC,   4,   0,   4, $FF, $F8
                 dc.b    $FC,   4,   0,   6,   0,   7

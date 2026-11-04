@@ -193,7 +193,7 @@ loc_451CE:
                 move.w  (a1)+,x_pos(a0)
                 move.w  (a1)+,y_pos(a0)
                 move.b  #$A,subtype(a0)
-                jmp     (loc_528BA).l
+                jmp     (S3BossExpl_LoadSubtypeParams).l
 ; ---------------------------------------------------------------------------
 word_451FC:
                 dc.w    $3BC0,  $1A0

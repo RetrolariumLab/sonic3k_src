@@ -25,7 +25,7 @@ Obj_S2Shield_Init:
 Obj_S2Shield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)
-                bne.s   locret_187D6
+                bne.s   LegacyShield_ReturnWhileParentInvincible
                 btst    #Status_Shield,status_secondary(a2)
                 beq.s   Obj_S2Shield_Destroy
                 move.w  x_pos(a2),x_pos(a0)
@@ -42,19 +42,19 @@ Obj_S2Shield_Display:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_187D6:
+LegacyShield_ReturnWhileParentInvincible:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_S2Shield_Destroy:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
-off_187DE:
-                dc.l    byte_189ED
+LegacyInvincibility_TrailingGroupRecords:
+                dc.l    SKInvincibilityTrail_NearFrames
                 dc.b    0,  $B
-                dc.l    byte_18A02
+                dc.l    SKInvincibilityTrail_MiddleFrames
                 dc.b    $16,  $D
-                dc.l    byte_18A1B
+                dc.l    SKInvincibilityTrail_FarFrames
                 dc.b    $2C,  $D
 ; ---------------------------------------------------------------------------
 
@@ -64,12 +64,12 @@ Obj_Invincibility:
                 move.w  #(ArtUnc_Invincibility_end-ArtUnc_Invincibility)/2,d3
                 jsr     (Add_To_DMA_Queue).l
                 moveq   #0,d2
-                lea     off_187DE-6(pc),a2
+                lea     LegacyInvincibility_TrailingGroupRecords-6(pc),a2
                 lea     (a0),a1
                 moveq   #4-1,d1
 
-loc_1880E:
-                move.l  #Obj_188E8,(a1)
+SKInvincibility_InitParticleSlot:
+                move.l  #SKInvincibilityTrail_UpdateFromHistory,(a1)
                 move.l  #Map_Invincibility,mappings(a1)
                 move.w  #make_art_tile(ArtTile_Shield,0,0),art_tile(a1)
                 move.w  #$80,priority(a1)
@@ -83,11 +83,11 @@ loc_1880E:
                 move.l  (a2)+,$30(a1)
                 move.w  (a2)+,$34(a1)
                 lea     next_object(a1),a1
-                dbf     d1,loc_1880E
-                move.l  #loc_18868,(a0)
+                dbf     d1,SKInvincibility_InitParticleSlot
+                move.l  #SKInvincibilityRoot_UpdateAtParent,(a0)
                 move.b  #4,$34(a0)
 
-loc_18868:
+SKInvincibilityRoot_UpdateAtParent:
                 tst.b   (Super_Sonic_Knux_flag).w
                 bne.w   Delete_Current_Sprite
                 tst.b   (Super_Tails_flag).w
@@ -100,20 +100,20 @@ loc_18868:
                 move.w  y_pos(a1),d1
                 move.w  d1,y_pos(a0)
                 lea     sub2_x_pos(a0),a2
-                lea     byte_189E0(pc),a3
+                lea     LegacyInvincibilityRoot_FrameStream(pc),a3
                 moveq   #0,d5
 
-loc_188A0:
+SKInvincibilityRoot_ReadFrameOrLoop:
                 move.w  $38(a0),d2
                 move.b  (a3,d2.w),d5
-                bpl.s   loc_188B0
+                bpl.s   SKInvincibilityRoot_BuildOppositePair
                 clr.w   $38(a0)
-                bra.s   loc_188A0
+                bra.s   SKInvincibilityRoot_ReadFrameOrLoop
 ; ---------------------------------------------------------------------------
 
-loc_188B0:
+SKInvincibilityRoot_BuildOppositePair:
                 addq.w  #1,$38(a0)
-                lea     byte_189A0(pc),a6
+                lea     SKInvincibility_OrbitOffsetPairs(pc),a6
                 move.b  $34(a0),d6
                 jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
@@ -126,15 +126,15 @@ loc_188B0:
                 move.w  d5,(a2)+
                 moveq   #$12,d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_188E0
+                beq.s   SKInvincibilityRoot_StepPhaseAndDraw
                 neg.w   d0
 
-loc_188E0:
+SKInvincibilityRoot_StepPhaseAndDraw:
                 add.b   d0,$34(a0)
                 bra.w   Draw_Sprite
 ; ---------------------------------------------------------------------------
 
-Obj_188E8:
+SKInvincibilityTrail_UpdateFromHistory:
                 tst.b   (Super_Sonic_Knux_flag).w
                 bne.w   Delete_Current_Sprite
                 tst.b   (Super_Tails_flag).w
@@ -159,20 +159,20 @@ Obj_188E8:
                 lea     sub2_x_pos(a0),a2
                 movea.l $30(a0),a3
 
-loc_18936:
+SKInvincibilityTrail_ReadFrameOrLoop:
                 move.w  $38(a0),d2
                 move.b  (a3,d2.w),d5
-                bpl.s   loc_18946
+                bpl.s   SKInvincibilityTrail_BuildSpritePair
                 clr.w   $38(a0)
-                bra.s   loc_18936
+                bra.s   SKInvincibilityTrail_ReadFrameOrLoop
 ; ---------------------------------------------------------------------------
 
-loc_18946:
+SKInvincibilityTrail_BuildSpritePair:
                 swap    d5
                 add.b   $35(a0),d2
                 move.b  (a3,d2.w),d5
                 addq.w  #1,$38(a0)
-                lea     byte_189A0(pc),a6
+                lea     SKInvincibility_OrbitOffsetPairs(pc),a6
                 move.b  $34(a0),d6
                 jsr     SKInvincibilityOrbit_AddOffset(pc)
                 move.w  d2,(a2)+
@@ -186,10 +186,10 @@ loc_18946:
                 move.w  d5,(a2)+
                 moveq   #2,d0
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_18982
+                beq.s   SKInvincibilityTrail_StepPhaseAndDraw
                 neg.w   d0
 
-loc_18982:
+SKInvincibilityTrail_StepPhaseAndDraw:
                 add.b   d0,$34(a0)
                 bra.w   Draw_Sprite
 
@@ -208,7 +208,7 @@ SKInvincibilityOrbit_AddOffset:
 ; End of function SKInvincibilityOrbit_AddOffset
 
 ; ---------------------------------------------------------------------------
-byte_189A0:
+SKInvincibility_OrbitOffsetPairs:
                 dc.b    $F,   0
                 dc.b    $F,   3
                 dc.b    $E,   6
@@ -241,15 +241,15 @@ byte_189A0:
                 dc.b    $D,  -9
                 dc.b    $E,  -7
                 dc.b    $F,  -4
-byte_189E0:
+LegacyInvincibilityRoot_FrameStream:
                 dc.b    8,   5,   7,   6,   6,   7,   5,   8,   6,   7,   7,   6, $FF
-byte_189ED:
+SKInvincibilityTrail_NearFrames:
                 dc.b    8,   7,   6,   5,   4,   3,   4,   5,   6,   7, $FF,   3,   4,   5,   6,   7,   8,   7,   6,   5
                 dc.b    4
-byte_18A02:
+SKInvincibilityTrail_MiddleFrames:
                 dc.b    8,   7,   6,   5,   4,   3,   2,   3,   4,   5,   6,   7, $FF,   2,   3,   4,   5,   6,   7,   8
                 dc.b    7,   6,   5,   4,   3
-byte_18A1B:
+SKInvincibilityTrail_FarFrames:
                 dc.b    7,   6,   5,   4,   3,   2,   1,   2,   3,   4,   5,   6, $FF,   1,   2,   3,   4,   5,   6,   7
                 dc.b    6,   5,   4,   3,   2
                 even

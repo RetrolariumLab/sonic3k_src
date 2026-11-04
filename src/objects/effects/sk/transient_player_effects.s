@@ -10,13 +10,13 @@ Obj_DashDust:
                 jmp     DashDust_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 DashDust_Index:
-                dc.w    loc_18B54-DashDust_Index
-                dc.w    loc_18BAA-DashDust_Index
-                dc.w    loc_18CB2-DashDust_Index
-                dc.w    loc_18CB6-DashDust_Index
+                dc.w    SKDust_InitParentArtAndDma-DashDust_Index
+                dc.w    SKDust_DispatchNormalAnim-DashDust_Index
+                dc.w    SKDust_DeleteNormal-DashDust_Index
+                dc.w    SKDust_CheckNormalSmokeEmitter-DashDust_Index
 ; ---------------------------------------------------------------------------
 
-loc_18B54:
+SKDust_InitParentArtAndDma:
                 addq.b  #2,routine(a0)
                 move.l  #Map_DashDust,mappings(a0)
                 ori.b   #4,render_flags(a0)
@@ -26,48 +26,48 @@ loc_18B54:
                 move.w  #Player_1,parent(a0)
                 move.w  #tiles_to_bytes(ArtTile_DashDust),vram_art(a0)
                 cmpa.w  #Dust,a0
-                beq.s   loc_18BAA
+                beq.s   SKDust_DispatchNormalAnim
                 move.b  #1,$38(a0)
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_18BAA
+                beq.s   SKDust_DispatchNormalAnim
                 move.w  #make_art_tile(ArtTile_DashDust_P2,0,0),art_tile(a0)
                 move.w  #Player_2,parent(a0)
                 move.w  #tiles_to_bytes(ArtTile_DashDust_P2),vram_art(a0)
 
-loc_18BAA:
+SKDust_DispatchNormalAnim:
                 movea.w parent(a0),a2
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_18BBE(pc,d0.w),d1
-                jmp     off_18BBE(pc,d1.w)
+                move.w  SKDust_NormalHandlerOffsets(pc,d0.w),d1
+                jmp     SKDust_NormalHandlerOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_18BBE:
-                dc.w    loc_18C94-off_18BBE
-                dc.w    loc_18BC8-off_18BBE
-                dc.w    loc_18C20-off_18BBE
-                dc.w    loc_18C84-off_18BBE
-                dc.w    loc_18BEC-off_18BBE
+SKDust_NormalHandlerOffsets:
+                dc.w    SKDust_AnimateLoadAndDrawNormal-SKDust_NormalHandlerOffsets
+                dc.w    SKDust_AlignWaterSplash-SKDust_NormalHandlerOffsets
+                dc.w    SKDust_CheckChargingPlayer-SKDust_NormalHandlerOffsets
+                dc.w    SKDust_CheckDetachedSmoke-SKDust_NormalHandlerOffsets
+                dc.w    SKDust_InitGroundSplashX-SKDust_NormalHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_18BC8:
+SKDust_AlignWaterSplash:
                 move.w  (Water_level).w,y_pos(a0)
                 tst.b   prev_anim(a0)
-                bne.w   loc_18C94
+                bne.w   SKDust_AnimateLoadAndDrawNormal
                 move.w  x_pos(a2),x_pos(a0)
                 move.b  #0,status(a0)
                 andi.w  #drawing_mask,art_tile(a0)
-                bra.w   loc_18C94
+                bra.w   SKDust_AnimateLoadAndDrawNormal
 ; ---------------------------------------------------------------------------
 
-loc_18BEC:
+SKDust_InitGroundSplashX:
                 tst.b   prev_anim(a0)
-                bne.s   loc_18C04
+                bne.s   SKDust_AnimateGroundSplash
                 move.w  x_pos(a2),x_pos(a0)
                 move.b  #0,status(a0)
                 andi.w  #drawing_mask,art_tile(a0)
 
-loc_18C04:
+SKDust_AnimateGroundSplash:
                 lea     (Ani_DashSplashDrown).l,a1
                 jsr     (Animate_Sprite).l
                 move.l  #ArtUnc_SplashDrown,d6
@@ -75,98 +75,99 @@ loc_18C04:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_18C20:
+SKDust_CheckChargingPlayer:
                 cmpi.b  #12,air_left(a2)
-                blo.w   loc_18CAA
+                blo.w   SKDust_SetIdleAndReturn
                 cmpi.b  #4,routine(a2)
-                bhs.s   loc_18CAA
+                bhs.s   SKDust_SetIdleAndReturn
                 tst.b   spin_dash_flag(a2)
-                beq.s   loc_18CAA
+                beq.s   SKDust_SetIdleAndReturn
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
                 move.b  status(a2),status(a0)
                 andi.b  #1,status(a0)
                 moveq   #4,d1
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_18C60
+                beq.s   SKDust_OffsetP2ChargeForGravity
                 ori.b   #2,status(a0)
                 neg.w   d1
 
-loc_18C60:
+SKDust_OffsetP2ChargeForGravity:
                 tst.b   $38(a0)
-                beq.s   loc_18C6A
+                beq.s   SKDust_InitChargeArtPriority
                 sub.w   d1,y_pos(a0)
 
-loc_18C6A:
+; Copy the parent's priority only on entry from animation bank zero
+SKDust_InitChargeArtPriority:
                 tst.b   prev_anim(a0)
-                bne.s   loc_18C94
+                bne.s   SKDust_AnimateLoadAndDrawNormal
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   loc_18C94
+                bpl.s   SKDust_AnimateLoadAndDrawNormal
                 ori.w   #high_priority,art_tile(a0)
-                bra.s   loc_18C94
+                bra.s   SKDust_AnimateLoadAndDrawNormal
 ; ---------------------------------------------------------------------------
 
-loc_18C84:
+SKDust_CheckDetachedSmoke:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_18CAA
+                blo.s   SKDust_SetIdleAndReturn
                 btst    #6,status(a0)
-                bne.s   loc_18CAA
+                bne.s   SKDust_SetIdleAndReturn
 
-loc_18C94:
+SKDust_AnimateLoadAndDrawNormal:
                 lea     (Ani_DashSplashDrown).l,a1
                 jsr     (Animate_Sprite).l
                 bsr.w   DashDust_Load_DPLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_18CAA:
+SKDust_SetIdleAndReturn:
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_18CB2:
+SKDust_DeleteNormal:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_18CB6:
+SKDust_CheckNormalSmokeEmitter:
                 movea.w parent(a0),a2
                 moveq   #$10,d1
                 cmpi.b  #$D,anim(a2)
-                beq.s   loc_18CE4
+                beq.s   SKDust_WaitForNormalSmoke
                 cmpi.b  #2,character_id(a2)
-                bne.s   loc_18CD6
+                bne.s   SKDust_RestoreNormalDispatcher
                 moveq   #6,d1
                 cmpi.b  #3,double_jump_flag(a2)
-                beq.s   loc_18CE4
+                beq.s   SKDust_WaitForNormalSmoke
 
-loc_18CD6:
+SKDust_RestoreNormalDispatcher:
                 move.b  #2,routine(a0)
                 move.b  #0,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_18CE4:
+SKDust_WaitForNormalSmoke:
                 subq.b  #1,$36(a0)
-                bpl.s   loc_18D66
+                bpl.s   SKDust_RefreshEmitterPatterns
                 move.b  #3,$36(a0)
                 btst    #Status_Underwater,status(a2)
-                bne.s   loc_18D66
+                bne.s   SKDust_RefreshEmitterPatterns
                 bsr.w   AllocateObject
-                bne.s   loc_18D66
+                bne.s   SKDust_RefreshEmitterPatterns
                 move.l  (a0),(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
                 tst.b   $38(a0)
-                beq.s   loc_18D14
+                beq.s   SKDust_MirrorSmokeYOffset
                 subq.w  #4,d1
 
-loc_18D14:
+SKDust_MirrorSmokeYOffset:
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_18D1C
+                beq.s   SKDust_InitStationarySmoke
                 neg.w   d1
 
-loc_18D1C:
+SKDust_InitStationarySmoke:
                 add.w   d1,y_pos(a1)
                 move.b  #0,status(a1)
                 move.b  #3,anim(a1)
@@ -179,10 +180,10 @@ loc_18D1C:
                 move.w  parent(a0),parent(a1)
                 andi.w  #drawing_mask,art_tile(a1)
                 tst.w   art_tile(a2)
-                bpl.s   loc_18D66
+                bpl.s   SKDust_RefreshEmitterPatterns
                 ori.w   #high_priority,art_tile(a1)
 
-loc_18D66:
+SKDust_RefreshEmitterPatterns:
                 bsr.s   DashDust_Load_DPLC
                 rts
 
@@ -195,17 +196,17 @@ SplashDrown_Load_DPLC:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $34(a0),d0
-                beq.s   locret_18DBE
+                beq.s   SKDust_PatternLoadReturn
                 move.b  d0,$34(a0)
                 lea     (DPLC_DashSplashDrown).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_18DBE
+                bmi.s   SKDust_PatternLoadReturn
                 move.w  vram_art(a0),d4
 
-loc_18D96:
+SKDust_QueueDplcAndAdvanceVram:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -219,9 +220,9 @@ loc_18D96:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_18D96
+                dbf     d5,SKDust_QueueDplcAndAdvanceVram
 
-locret_18DBE:
+SKDust_PatternLoadReturn:
                 rts
 ; End of function DashDust_Load_DPLC
 
@@ -241,13 +242,13 @@ Obj_DashDust2P:
                 jmp     DashDust2P_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 DashDust2P_Index:
-                dc.w    loc_18F9C-DashDust2P_Index
-                dc.w    loc_18FD2-DashDust2P_Index
-                dc.w    loc_19060-DashDust2P_Index
-                dc.w    loc_19064-DashDust2P_Index
+                dc.w    SKDust_InitCompAndSelectParent-DashDust2P_Index
+                dc.w    SKDust_DispatchCompAnim-DashDust2P_Index
+                dc.w    SKDust_DeleteComp-DashDust2P_Index
+                dc.w    SKDust_CheckCompSmokeEmitter-DashDust2P_Index
 ; ---------------------------------------------------------------------------
 
-loc_18F9C:
+SKDust_InitCompAndSelectParent:
                 addq.b  #2,routine(a0)
                 move.l  #Map_DashDust2P,mappings(a0)
                 ori.b   #4,render_flags(a0)
@@ -256,84 +257,85 @@ loc_18F9C:
                 move.w  #make_art_tile(ArtTile_DashDust,0,0),art_tile(a0)
                 move.w  #Player_1,parent(a0)
                 cmpa.w  #Dust,a0
-                beq.s   loc_18FD2
+                beq.s   SKDust_DispatchCompAnim
                 move.w  #Player_2,parent(a0)
 
-loc_18FD2:
+SKDust_DispatchCompAnim:
                 movea.w parent(a0),a2
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_18FE6(pc,d0.w),d1
-                jmp     off_18FE6(pc,d1.w)
+                move.w  SKDust_CompHandlerOffsets(pc,d0.w),d1
+                jmp     SKDust_CompHandlerOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_18FE6:
-                dc.w    loc_18FEE-off_18FE6
-                dc.w    loc_18FEE-off_18FE6
-                dc.w    loc_18FF6-off_18FE6
-                dc.w    loc_1903E-off_18FE6
+SKDust_CompHandlerOffsets:
+                dc.w    SKDust_BlankCompIdleOrSplash-SKDust_CompHandlerOffsets
+                dc.w    SKDust_BlankCompIdleOrSplash-SKDust_CompHandlerOffsets
+                dc.w    SKDust_CheckCompCharge-SKDust_CompHandlerOffsets
+                dc.w    SKDust_CheckCompSmokeAir-SKDust_CompHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_18FEE:
+SKDust_BlankCompIdleOrSplash:
                 move.b  #0,mapping_frame(a0)
-                bra.s   loc_19046
+                bra.s   SKDust_AnimateAndDrawComp
 ; ---------------------------------------------------------------------------
 
-loc_18FF6:
+SKDust_CheckCompCharge:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_19058
+                blo.s   SKDust_SetCompIdleAndReturn
                 cmpi.b  #4,routine(a2)
-                bhs.s   loc_19058
+                bhs.s   SKDust_SetCompIdleAndReturn
                 tst.b   spin_dash_flag(a2)
-                beq.s   loc_19058
+                beq.s   SKDust_SetCompIdleAndReturn
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
                 move.b  status(a2),status(a0)
                 andi.b  #1,status(a0)
                 tst.b   prev_anim(a0)
-                bne.s   loc_19046
+                bne.s   SKDust_AnimateAndDrawComp
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   loc_19046
+                bpl.s   SKDust_AnimateAndDrawComp
                 ori.w   #high_priority,art_tile(a0)
-                bra.s   loc_19046
+                bra.s   SKDust_AnimateAndDrawComp
 ; ---------------------------------------------------------------------------
 
-loc_1903E:
+SKDust_CheckCompSmokeAir:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_19058
+                blo.s   SKDust_SetCompIdleAndReturn
 
-loc_19046:
+SKDust_AnimateAndDrawComp:
                 lea     (Ani_DashDust2P).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_19058:
+SKDust_SetCompIdleAndReturn:
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19060:
+SKDust_DeleteComp:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_19064:
+SKDust_CheckCompSmokeEmitter:
                 movea.w parent(a0),a2
                 cmpi.b  #$D,anim(a2)
-                beq.s   loc_1907E
+                beq.s   SKDust_TickCompSmokeEmitter
                 move.b  #2,routine(a0)
                 move.b  #0,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1907E:
+; Emit every four updates with a fixed vertical offset
+SKDust_TickCompSmokeEmitter:
                 move.b  #0,mapping_frame(a0)
                 subq.b  #1,$36(a0)
-                bpl.s   locret_190F0
+                bpl.s   SKDust_CompSmokeReturn
                 move.b  #3,$36(a0)
                 bsr.w   AllocateObject
-                bne.s   locret_190F0
+                bne.s   SKDust_CompSmokeReturn
                 move.l  (a0),(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
@@ -349,10 +351,10 @@ loc_1907E:
                 move.w  parent(a0),parent(a1)
                 andi.w  #drawing_mask,art_tile(a1)
                 tst.w   art_tile(a2)
-                bpl.s   locret_190F0
+                bpl.s   SKDust_CompSmokeReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_190F0:
+SKDust_CompSmokeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Ani_DashDust2P:
@@ -373,68 +375,69 @@ Obj_SuperSonicKnux_Stars:
                 move.b  #$18,height_pixels(a0)
                 move.w  #make_art_tile(ArtTile_Shield,0,0),art_tile(a0)
                 btst    #7,(Player_1+art_tile).w
-                beq.s   loc_1919E
+                beq.s   SKSuperTrail_InstallHandler
                 bset    #7,art_tile(a0)
 
-loc_1919E:
-                move.l  #loc_191A4,(a0)
+SKSuperTrail_InstallHandler:
+                move.l  #SKSuperTrail_UpdateOrBurst,(a0)
 
-loc_191A4:
+SKSuperTrail_UpdateOrBurst:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   loc_19230
+                beq.w   SKSuperTrail_DeleteWhenNormal
                 tst.b   anim(a0)
-                beq.s   loc_191B6
+                beq.s   SKSuperTrail_TickAndLatchPosition
                 bsr.w   SKSuperStarBurst_SpawnParticles
 
-loc_191B6:
+; Run the six-frame cycle and latch the frozen position at the transition
+SKSuperTrail_TickAndLatchPosition:
                 tst.b   $34(a0)
-                beq.s   loc_19200
+                beq.s   SKSuperTrail_CheckP1Control
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_191E8
+                bpl.s   SKSuperTrail_CheckFrozenPosition
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #6,mapping_frame(a0)
-                blo.s   loc_191E8
+                blo.s   SKSuperTrail_CheckFrozenPosition
                 move.b  #0,mapping_frame(a0)
                 move.b  #0,$34(a0)
                 move.b  #1,$35(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_191E8:
+SKSuperTrail_CheckFrozenPosition:
                 tst.b   $35(a0)
-                bne.s   loc_191FA
+                bne.s   SKSuperTrail_Draw
 
-loc_191EE:
+SKSuperTrail_CopyP1Position:
                 move.w  (Player_1+x_pos).w,x_pos(a0)
                 move.w  (Player_1+y_pos).w,y_pos(a0)
 
-loc_191FA:
+SKSuperTrail_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_19200:
+SKSuperTrail_CheckP1Control:
                 tst.b   (Player_1+object_control).w
-                bne.s   loc_19222
+                bne.s   SKSuperTrail_ClearAndReturn
                 move.w  (Player_1+ground_vel).w,d0
-                bpl.s   loc_1920E
+                bpl.s   SKSuperTrail_TryArmAtSpeed8
                 neg.w   d0
 
-loc_1920E:
+SKSuperTrail_TryArmAtSpeed8:
                 cmpi.w  #$800,d0
-                blo.s   loc_19222
+                blo.s   SKSuperTrail_ClearAndReturn
                 move.b  #0,mapping_frame(a0)
                 move.b  #1,$34(a0)
-                bra.s   loc_191EE
+                bra.s   SKSuperTrail_CopyP1Position
 ; ---------------------------------------------------------------------------
 
-loc_19222:
+SKSuperTrail_ClearAndReturn:
                 move.b  #0,$34(a0)
                 move.b  #0,$35(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_19230:
+SKSuperTrail_DeleteWhenNormal:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -446,9 +449,9 @@ SKSuperStarBurst_SpawnParticles:
                 moveq   #$10-1,d5
                 move.w  #$488,d4
 
-loc_19246:
+SKSuperBurst_TryParticleAndStep:
                 bsr.w   AllocateObject
-                bne.w   locret_192BE
+                bne.w   SKSuperBurst_SpawnReturn
                 move.l  #Obj_SuperSonicKnux_Stars_Timer,(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
@@ -459,7 +462,7 @@ loc_19246:
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
                 tst.w   d4
-                bmi.s   loc_192AE
+                bmi.s   SKSuperBurst_StoreVelAndMirrorX
                 move.w  d4,d0
                 jsr     (GetSineCosine).l
                 move.w  d4,d2
@@ -469,19 +472,19 @@ loc_19246:
                 move.w  d0,d2
                 move.w  d1,d3
                 addi.b  #$10,d4
-                bcc.s   loc_192AE
+                bcc.s   SKSuperBurst_StoreVelAndMirrorX
                 subi.w  #$80,d4
-                bcc.s   loc_192AE
+                bcc.s   SKSuperBurst_StoreVelAndMirrorX
                 move.w  #$488,d4
 
-loc_192AE:
+SKSuperBurst_StoreVelAndMirrorX:
                 move.w  d2,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 neg.w   d2
                 neg.w   d4
-                dbf     d5,loc_19246
+                dbf     d5,SKSuperBurst_TryParticleAndStep
 
-locret_192BE:
+SKSuperBurst_SpawnReturn:
                 rts
 ; End of function SKSuperStarBurst_SpawnParticles
 
@@ -489,11 +492,11 @@ locret_192BE:
 
 Obj_SuperSonicKnux_Stars_Timer:
                 tst.b   render_flags(a0)
-                bmi.s   loc_192CC
+                bmi.s   SKSuperBurst_MoveAndCycleParticle
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_192CC:
+SKSuperBurst_MoveAndCycleParticle:
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
                 bsr.w   MoveSprite2
@@ -561,19 +564,19 @@ Obj_HyperSonic_Stars_Main:
 
                 .child:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   loc_19486
+                beq.w   SKHyperStar_DeleteWhenNormal
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_1941C
+                bpl.s   SKHyperStar_AccumulateOrbit
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #3,mapping_frame(a0)
-                blo.s   loc_1941C
+                blo.s   SKHyperStar_AccumulateOrbit
                 move.b  #0,mapping_frame(a0)
                 moveq   #0,d0
                 move.w  d0,$30(a0)
                 move.w  d0,$34(a0)
 
-loc_1941C:
+SKHyperStar_AccumulateOrbit:
                 move.b  angle(a0),d0
                 addi.b  #-$10,angle(a0)
                 jsr     (GetSineCosine).l
@@ -588,10 +591,11 @@ loc_1941C:
                 move.b  $30(a0),d2
                 ext.w   d2
                 btst    #Status_Facing,(Player_1+status).w
-                beq.s   loc_19458
+                beq.s   SKHyperStar_SetOrbitPosition
                 neg.w   d2
 
-loc_19458:
+; Add the signed high bytes of the orbit accumulators to Player 1's coordinates
+SKHyperStar_SetOrbitPosition:
                 move.b  $34(a0),d3
                 ext.w   d3
                 add.w   (Player_1+x_pos).w,d2
@@ -600,14 +604,14 @@ loc_19458:
                 move.w  d3,y_pos(a0)
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.b   (Player_1+art_tile).w
-                bpl.s   loc_19480
+                bpl.s   SKHyperStar_Draw
                 ori.w   #high_priority,art_tile(a0)
 
-loc_19480:
+SKHyperStar_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_19486:
+SKHyperStar_DeleteWhenNormal:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 Map_HyperSonicStars:
@@ -637,7 +641,7 @@ Obj_InstaShield:
 Obj_InstaShield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)  ; Is the player invincible?
-                bne.s   locret_195A4                    ; If so, return
+                bne.s   SKInstaShield_ParentInvincibleReturn  ; If so, return
                 move.w  x_pos(a2),x_pos(a0)             ; Inherit player's x_pos
                 move.w  y_pos(a2),y_pos(a0)             ; Inherit player's y_pos
                 move.b  status(a2),status(a0)           ; Inherit status
@@ -674,5 +678,5 @@ Obj_InstaShield_Main:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_195A4:
+SKInstaShield_ParentInvincibleReturn:
                 rts

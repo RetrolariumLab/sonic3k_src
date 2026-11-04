@@ -22367,7 +22367,7 @@
       "responsibility": "Elemental shield states, sparks and shared shield animation and dynamic pattern-load catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 352,
+      "physical_lines": 353,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -22435,7 +22435,7 @@
           "origin_end_line": 188
         },
         {
-          "name": "loc_1C31E",
+          "name": "S3Explosion_InitHighPriorityDelayed",
           "kind": "terminal-tail",
           "reason": "The delayed explosion variant ends in its existing draw tail call and owns the mapping tail.",
           "origin_first_line": 191,
@@ -22523,7 +22523,7 @@
       "responsibility": "Continuous sound playback and callback-driven object palette fade effects with their color-channel helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 123,
+      "physical_lines": 124,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -22568,7 +22568,7 @@
       "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 536,
+      "physical_lines": 539,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -22620,7 +22620,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_83EC2",
+          "name": "SKBossExpl_DeleteController",
           "kind": "terminal-tail",
           "reason": "Close the explosion controller tails and private object, animation or mapping records after the existing spawning helper annotation; original independent points remain untouched.",
           "origin_first_line": 1355,
@@ -22653,7 +22653,7 @@
       "responsibility": "Elemental shield states, sparks and shared shield animation and dynamic pattern-load catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 377,
+      "physical_lines": 378,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -22711,7 +22711,7 @@
           "origin_end_line": 203
         },
         {
-          "name": "loc_1E6EC",
+          "name": "SKExplosion_InitHighPriorityDelayed",
           "kind": "terminal-tail",
           "reason": "The delayed explosion variant ends in its existing draw tail call and owns the mapping tail.",
           "origin_first_line": 206,
@@ -22779,7 +22779,7 @@
       "responsibility": "Continuous sound playback and callback-driven palette fade effects with color-channel helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 159,
+      "physical_lines": 162,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -22814,7 +22814,7 @@
       "responsibility": "Super Tails bird companions and hyper Sonic or Knuckles after-image trail objects.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 389,
+      "physical_lines": 390,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -22844,7 +22844,7 @@
       "responsibility": "Short-lived dash, splash and drowning particles, transformation stars and instant-shield attack display.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 678,
+      "physical_lines": 682,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -36431,7 +36431,7 @@
       "responsibility": "Freed animal state, species movement, enemy score display and product-specific animal spawn helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 494,
+      "physical_lines": 497,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -37578,7 +37578,7 @@
       "responsibility": "Assembler data for General/Sprites/Shields/Anim - Insta-Shield",
       "role": "data",
       "status": "owned",
-      "physical_lines": 8,
+      "physical_lines": 9,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "General/Sprites/Shields/Anim - Insta-Shield.s",
@@ -38464,7 +38464,7 @@
       "responsibility": "Freed animal state, species movement, enemy score display and product-specific animal spawn helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 651,
+      "physical_lines": 654,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",

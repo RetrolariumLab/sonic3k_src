@@ -10,13 +10,13 @@ Obj_DashDust:
                 jmp     DashDust_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 DashDust_Index:
-                dc.w    loc_178D4-DashDust_Index
-                dc.w    loc_1792A-DashDust_Index
-                dc.w    loc_17A1C-DashDust_Index
-                dc.w    loc_17A20-DashDust_Index
+                dc.w    S3Dust_InitParentArtAndDma-DashDust_Index
+                dc.w    S3Dust_DispatchNormalAnim-DashDust_Index
+                dc.w    S3Dust_DeleteNormal-DashDust_Index
+                dc.w    S3Dust_CheckNormalSmokeEmitter-DashDust_Index
 ; ---------------------------------------------------------------------------
 
-loc_178D4:
+S3Dust_InitParentArtAndDma:
                 addq.b  #2,routine(a0)
                 move.l  #Map_DashDust,mappings(a0)
                 ori.b   #4,render_flags(a0)
@@ -26,48 +26,48 @@ loc_178D4:
                 move.w  #Player_1,parent(a0)
                 move.w  #tiles_to_bytes(ArtTile_DashDust),vram_art(a0)
                 cmpa.w  #Dust,a0
-                beq.s   loc_1792A
+                beq.s   S3Dust_DispatchNormalAnim
                 move.b  #1,$38(a0)
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_1792A
+                beq.s   S3Dust_DispatchNormalAnim
                 move.w  #make_art_tile(ArtTile_DashDust_P2,0,0),art_tile(a0)
                 move.w  #Player_2,parent(a0)
                 move.w  #tiles_to_bytes(ArtTile_DashDust_P2),vram_art(a0)
 
-loc_1792A:
+S3Dust_DispatchNormalAnim:
                 movea.w parent(a0),a2
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_1793E(pc,d0.w),d1
-                jmp     off_1793E(pc,d1.w)
+                move.w  S3Dust_NormalHandlerOffsets(pc,d0.w),d1
+                jmp     S3Dust_NormalHandlerOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_1793E:
-                dc.w    loc_179FE-off_1793E
-                dc.w    loc_17948-off_1793E
-                dc.w    loc_179A0-off_1793E
-                dc.w    loc_179F6-off_1793E
-                dc.w    loc_1796C-off_1793E
+S3Dust_NormalHandlerOffsets:
+                dc.w    S3Dust_AnimateLoadAndDrawNormal-S3Dust_NormalHandlerOffsets
+                dc.w    S3Dust_AlignWaterSplash-S3Dust_NormalHandlerOffsets
+                dc.w    S3Dust_CheckChargingPlayer-S3Dust_NormalHandlerOffsets
+                dc.w    S3Dust_CheckDetachedSmoke-S3Dust_NormalHandlerOffsets
+                dc.w    S3Dust_InitGroundSplashX-S3Dust_NormalHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_17948:
+S3Dust_AlignWaterSplash:
                 move.w  (Water_level).w,y_pos(a0)
                 tst.b   prev_anim(a0)
-                bne.w   loc_179FE
+                bne.w   S3Dust_AnimateLoadAndDrawNormal
                 move.w  x_pos(a2),x_pos(a0)
                 move.b  #0,status(a0)
                 andi.w  #drawing_mask,art_tile(a0)
-                bra.w   loc_179FE
+                bra.w   S3Dust_AnimateLoadAndDrawNormal
 ; ---------------------------------------------------------------------------
 
-loc_1796C:
+S3Dust_InitGroundSplashX:
                 tst.b   prev_anim(a0)
-                bne.s   loc_17984
+                bne.s   S3Dust_AnimateGroundSplash
                 move.w  x_pos(a2),x_pos(a0)
                 move.b  #0,status(a0)
                 andi.w  #drawing_mask,art_tile(a0)
 
-loc_17984:
+S3Dust_AnimateGroundSplash:
                 lea     (Ani_DashSplashDrown).l,a1
                 jsr     (Animate_Sprite).l
                 move.l  #ArtUnc_SplashDrown,d6
@@ -75,75 +75,76 @@ loc_17984:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_179A0:
+S3Dust_CheckChargingPlayer:
                 cmpi.b  #12,air_left(a2)
-                blo.w   loc_17A14
+                blo.w   S3Dust_SetIdleAndReturn
                 cmpi.b  #4,routine(a2)
-                bhs.s   loc_17A14
+                bhs.s   S3Dust_SetIdleAndReturn
                 tst.b   spin_dash_flag(a2)
-                beq.s   loc_17A14
+                beq.s   S3Dust_SetIdleAndReturn
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
                 move.b  status(a2),status(a0)
                 andi.b  #1,status(a0)
                 tst.b   $38(a0)
-                beq.s   loc_179DC
+                beq.s   S3Dust_InitChargeArtPriority
                 subi.w  #4,y_pos(a0)
 
-loc_179DC:
+; Copy the parent's priority only on entry from animation bank zero
+S3Dust_InitChargeArtPriority:
                 tst.b   prev_anim(a0)
-                bne.s   loc_179FE
+                bne.s   S3Dust_AnimateLoadAndDrawNormal
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   loc_179FE
+                bpl.s   S3Dust_AnimateLoadAndDrawNormal
                 ori.w   #high_priority,art_tile(a0)
-                bra.s   loc_179FE
+                bra.s   S3Dust_AnimateLoadAndDrawNormal
 ; ---------------------------------------------------------------------------
 
-loc_179F6:
+S3Dust_CheckDetachedSmoke:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_17A14
+                blo.s   S3Dust_SetIdleAndReturn
 
-loc_179FE:
+S3Dust_AnimateLoadAndDrawNormal:
                 lea     (Ani_DashSplashDrown).l,a1
                 jsr     (Animate_Sprite).l
                 bsr.w   DashDust_Load_DPLC
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_17A14:
+S3Dust_SetIdleAndReturn:
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17A1C:
+S3Dust_DeleteNormal:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_17A20:
+S3Dust_CheckNormalSmokeEmitter:
                 movea.w parent(a0),a2
                 cmpi.b  #$D,anim(a2)
-                beq.s   loc_17A3A
+                beq.s   S3Dust_WaitForNormalSmoke
                 move.b  #2,routine(a0)
                 move.b  #0,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17A3A:
+S3Dust_WaitForNormalSmoke:
                 subq.b  #1,$36(a0)
-                bpl.s   loc_17AB2
+                bpl.s   S3Dust_RefreshEmitterPatterns
                 move.b  #3,$36(a0)
                 bsr.w   AllocateObject
-                bne.s   loc_17AB2
+                bne.s   S3Dust_RefreshEmitterPatterns
                 move.l  (a0),(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
                 addi.w  #$10,y_pos(a1)
                 tst.b   $38(a0)
-                beq.s   loc_17A6C
+                beq.s   S3Dust_InitStationarySmoke
                 subi.w  #4,y_pos(a1)
 
-loc_17A6C:
+S3Dust_InitStationarySmoke:
                 move.b  #0,status(a1)
                 move.b  #3,anim(a1)
                 addq.b  #2,routine(a1)
@@ -155,10 +156,10 @@ loc_17A6C:
                 move.w  parent(a0),parent(a1)
                 andi.w  #drawing_mask,art_tile(a1)
                 tst.w   art_tile(a2)
-                bpl.s   loc_17AB2
+                bpl.s   S3Dust_RefreshEmitterPatterns
                 ori.w   #high_priority,art_tile(a1)
 
-loc_17AB2:
+S3Dust_RefreshEmitterPatterns:
                 bsr.s   DashDust_Load_DPLC
                 rts
 
@@ -171,17 +172,17 @@ SplashDrown_Load_DPLC:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $34(a0),d0
-                beq.s   locret_17B0A
+                beq.s   S3Dust_PatternLoadReturn
                 move.b  d0,$34(a0)
                 lea     (DPLC_DashSplashDrown).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_17B0A
+                bmi.s   S3Dust_PatternLoadReturn
                 move.w  vram_art(a0),d4
 
-loc_17AE2:
+S3Dust_QueueDplcAndAdvanceVram:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -195,9 +196,9 @@ loc_17AE2:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_17AE2
+                dbf     d5,S3Dust_QueueDplcAndAdvanceVram
 
-locret_17B0A:
+S3Dust_PatternLoadReturn:
                 rts
 ; End of function DashDust_Load_DPLC
 
@@ -217,13 +218,13 @@ Obj_DashDust2P:
                 jmp     DashDust2P_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 DashDust2P_Index:
-                dc.w    loc_17CE8-DashDust2P_Index
-                dc.w    loc_17D1E-DashDust2P_Index
-                dc.w    loc_17DAC-DashDust2P_Index
-                dc.w    loc_17DB0-DashDust2P_Index
+                dc.w    S3Dust_InitCompAndSelectParent-DashDust2P_Index
+                dc.w    S3Dust_DispatchCompAnim-DashDust2P_Index
+                dc.w    S3Dust_DeleteComp-DashDust2P_Index
+                dc.w    S3Dust_CheckCompSmokeEmitter-DashDust2P_Index
 ; ---------------------------------------------------------------------------
 
-loc_17CE8:
+S3Dust_InitCompAndSelectParent:
                 addq.b  #2,routine(a0)
                 move.l  #Map_DashDust2P,mappings(a0)
                 ori.b   #4,render_flags(a0)
@@ -232,84 +233,85 @@ loc_17CE8:
                 move.w  #make_art_tile(ArtTile_DashDust,0,0),art_tile(a0)
                 move.w  #Player_1,parent(a0)
                 cmpa.w  #Dust,a0
-                beq.s   loc_17D1E
+                beq.s   S3Dust_DispatchCompAnim
                 move.w  #Player_2,parent(a0)
 
-loc_17D1E:
+S3Dust_DispatchCompAnim:
                 movea.w parent(a0),a2
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
-                move.w  off_17D32(pc,d0.w),d1
-                jmp     off_17D32(pc,d1.w)
+                move.w  S3Dust_CompHandlerOffsets(pc,d0.w),d1
+                jmp     S3Dust_CompHandlerOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_17D32:
-                dc.w    loc_17D3A-off_17D32
-                dc.w    loc_17D3A-off_17D32
-                dc.w    loc_17D42-off_17D32
-                dc.w    loc_17D8A-off_17D32
+S3Dust_CompHandlerOffsets:
+                dc.w    S3Dust_BlankCompIdleOrSplash-S3Dust_CompHandlerOffsets
+                dc.w    S3Dust_BlankCompIdleOrSplash-S3Dust_CompHandlerOffsets
+                dc.w    S3Dust_CheckCompCharge-S3Dust_CompHandlerOffsets
+                dc.w    S3Dust_CheckCompSmokeAir-S3Dust_CompHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_17D3A:
+S3Dust_BlankCompIdleOrSplash:
                 move.b  #0,mapping_frame(a0)
-                bra.s   loc_17D92
+                bra.s   S3Dust_AnimateAndDrawComp
 ; ---------------------------------------------------------------------------
 
-loc_17D42:
+S3Dust_CheckCompCharge:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_17DA4
+                blo.s   S3Dust_SetCompIdleAndReturn
                 cmpi.b  #4,routine(a2)
-                bhs.s   loc_17DA4
+                bhs.s   S3Dust_SetCompIdleAndReturn
                 tst.b   spin_dash_flag(a2)
-                beq.s   loc_17DA4
+                beq.s   S3Dust_SetCompIdleAndReturn
                 move.w  x_pos(a2),x_pos(a0)
                 move.w  y_pos(a2),y_pos(a0)
                 move.b  status(a2),status(a0)
                 andi.b  #1,status(a0)
                 tst.b   prev_anim(a0)
-                bne.s   loc_17D92
+                bne.s   S3Dust_AnimateAndDrawComp
                 andi.w  #drawing_mask,art_tile(a0)
                 tst.w   art_tile(a2)
-                bpl.s   loc_17D92
+                bpl.s   S3Dust_AnimateAndDrawComp
                 ori.w   #high_priority,art_tile(a0)
-                bra.s   loc_17D92
+                bra.s   S3Dust_AnimateAndDrawComp
 ; ---------------------------------------------------------------------------
 
-loc_17D8A:
+S3Dust_CheckCompSmokeAir:
                 cmpi.b  #12,air_left(a2)
-                blo.s   loc_17DA4
+                blo.s   S3Dust_SetCompIdleAndReturn
 
-loc_17D92:
+S3Dust_AnimateAndDrawComp:
                 lea     (Ani_DashDust2P).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_17DA4:
+S3Dust_SetCompIdleAndReturn:
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17DAC:
+S3Dust_DeleteComp:
                 bra.w   Delete_Current_Sprite
 ; ---------------------------------------------------------------------------
 
-loc_17DB0:
+S3Dust_CheckCompSmokeEmitter:
                 movea.w parent(a0),a2
                 cmpi.b  #$D,anim(a2)
-                beq.s   loc_17DCA
+                beq.s   S3Dust_TickCompSmokeEmitter
                 move.b  #2,routine(a0)
                 move.b  #0,$36(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17DCA:
+; Emit every four updates with a fixed vertical offset
+S3Dust_TickCompSmokeEmitter:
                 move.b  #0,mapping_frame(a0)
                 subq.b  #1,$36(a0)
-                bpl.s   locret_17E3C
+                bpl.s   S3Dust_CompSmokeReturn
                 move.b  #3,$36(a0)
                 bsr.w   AllocateObject
-                bne.s   locret_17E3C
+                bne.s   S3Dust_CompSmokeReturn
                 move.l  (a0),(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
@@ -325,10 +327,10 @@ loc_17DCA:
                 move.w  parent(a0),parent(a1)
                 andi.w  #drawing_mask,art_tile(a1)
                 tst.w   art_tile(a2)
-                bpl.s   locret_17E3C
+                bpl.s   S3Dust_CompSmokeReturn
                 ori.w   #high_priority,art_tile(a1)
 
-locret_17E3C:
+S3Dust_CompSmokeReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Ani_DashDust2P:
@@ -349,68 +351,69 @@ Obj_SuperSonic_Stars:
                 move.b  #$18,height_pixels(a0)
                 move.w  #make_art_tile(ArtTile_Shield,0,0),art_tile(a0)
                 btst    #7,(Player_1+art_tile).w
-                beq.s   loc_17EEA
+                beq.s   S3SuperTrail_InstallHandler
                 bset    #7,art_tile(a0)
 
-loc_17EEA:
-                move.l  #loc_17EF0,(a0)
+S3SuperTrail_InstallHandler:
+                move.l  #S3SuperTrail_UpdateOrBurst,(a0)
 
-loc_17EF0:
+S3SuperTrail_UpdateOrBurst:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   loc_17F7C
+                beq.w   S3SuperTrail_DeleteWhenNormal
                 tst.b   anim(a0)
-                beq.s   loc_17F02
+                beq.s   S3SuperTrail_TickAndLatchPosition
                 bsr.w   S3SuperStarBurst_SpawnParticles
 
-loc_17F02:
+; Run the six-frame cycle and latch the frozen position at the transition
+S3SuperTrail_TickAndLatchPosition:
                 tst.b   $34(a0)
-                beq.s   loc_17F4C
+                beq.s   S3SuperTrail_CheckP1Control
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_17F34
+                bpl.s   S3SuperTrail_CheckFrozenPosition
                 move.b  #1,anim_frame_timer(a0)
                 addq.b  #1,mapping_frame(a0)
                 cmpi.b  #6,mapping_frame(a0)
-                blo.s   loc_17F34
+                blo.s   S3SuperTrail_CheckFrozenPosition
                 move.b  #0,mapping_frame(a0)
                 move.b  #0,$34(a0)
                 move.b  #1,$35(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17F34:
+S3SuperTrail_CheckFrozenPosition:
                 tst.b   $35(a0)
-                bne.s   loc_17F46
+                bne.s   S3SuperTrail_Draw
 
-loc_17F3A:
+S3SuperTrail_CopyP1Position:
                 move.w  (Player_1+x_pos).w,x_pos(a0)
                 move.w  (Player_1+y_pos).w,y_pos(a0)
 
-loc_17F46:
+S3SuperTrail_Draw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_17F4C:
+S3SuperTrail_CheckP1Control:
                 tst.b   (Player_1+object_control).w
-                bne.s   loc_17F6E
+                bne.s   S3SuperTrail_ClearAndReturn
                 move.w  (Player_1+ground_vel).w,d0
-                bpl.s   loc_17F5A
+                bpl.s   S3SuperTrail_TryArmAtSpeed8
                 neg.w   d0
 
-loc_17F5A:
+S3SuperTrail_TryArmAtSpeed8:
                 cmpi.w  #$800,d0
-                blo.s   loc_17F6E
+                blo.s   S3SuperTrail_ClearAndReturn
                 move.b  #0,mapping_frame(a0)
                 move.b  #1,$34(a0)
-                bra.s   loc_17F3A
+                bra.s   S3SuperTrail_CopyP1Position
 ; ---------------------------------------------------------------------------
 
-loc_17F6E:
+S3SuperTrail_ClearAndReturn:
                 move.b  #0,$34(a0)
                 move.b  #0,$35(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_17F7C:
+S3SuperTrail_DeleteWhenNormal:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -422,9 +425,9 @@ S3SuperStarBurst_SpawnParticles:
                 moveq   #$10-1,d5
                 move.w  #$488,d4
 
-loc_17F92:
+S3SuperBurst_TryParticleAndStep:
                 bsr.w   AllocateObject
-                bne.w   locret_1800A
+                bne.w   S3SuperBurst_SpawnReturn
                 move.l  #Obj_SuperSonic_Stars_Timer,(a1)
                 move.w  x_pos(a2),x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
@@ -435,7 +438,7 @@ loc_17F92:
                 move.b  #8,width_pixels(a1)
                 move.b  #8,height_pixels(a1)
                 tst.w   d4
-                bmi.s   loc_17FFA
+                bmi.s   S3SuperBurst_StoreVelAndMirrorX
                 move.w  d4,d0
                 jsr     (GetSineCosine).l
                 move.w  d4,d2
@@ -445,19 +448,19 @@ loc_17F92:
                 move.w  d0,d2
                 move.w  d1,d3
                 addi.b  #$10,d4
-                bcc.s   loc_17FFA
+                bcc.s   S3SuperBurst_StoreVelAndMirrorX
                 subi.w  #$80,d4
-                bcc.s   loc_17FFA
+                bcc.s   S3SuperBurst_StoreVelAndMirrorX
                 move.w  #$488,d4
 
-loc_17FFA:
+S3SuperBurst_StoreVelAndMirrorX:
                 move.w  d2,x_vel(a1)
                 move.w  d3,y_vel(a1)
                 neg.w   d2
                 neg.w   d4
-                dbf     d5,loc_17F92
+                dbf     d5,S3SuperBurst_TryParticleAndStep
 
-locret_1800A:
+S3SuperBurst_SpawnReturn:
                 rts
 ; End of function S3SuperStarBurst_SpawnParticles
 
@@ -465,11 +468,11 @@ locret_1800A:
 
 Obj_SuperSonic_Stars_Timer:
                 tst.b   render_flags(a0)
-                bmi.s   loc_18018
+                bmi.s   S3SuperBurst_MoveAndCycleParticle
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_18018:
+S3SuperBurst_MoveAndCycleParticle:
                 addq.b  #1,mapping_frame(a0)
                 andi.b  #3,mapping_frame(a0)
                 bsr.w   MoveSprite2
@@ -502,7 +505,7 @@ Obj_InstaShield:
 Obj_InstaShield_Main:
                 movea.w parent(a0),a2
                 btst    #Status_Invincible,status_secondary(a2)  ; Is the player invincible?
-                bne.s   locret_18158                    ; If so, return
+                bne.s   S3InstaShield_ParentInvincibleReturn  ; If so, return
                 move.w  x_pos(a2),x_pos(a0)             ; Inherit player's x_pos
                 move.w  y_pos(a2),y_pos(a0)             ; Inherit player's y_pos
                 move.b  status(a2),status(a0)           ; Inherit status
@@ -532,5 +535,5 @@ Obj_InstaShield_Main:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_18158:
+S3InstaShield_ParentInvincibleReturn:
                 rts

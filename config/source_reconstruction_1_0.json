@@ -1011,9 +1011,15 @@
       "commits": ["06ef2ae49ef12ada0c62191a549a6b85c6695917"]
     },
     {
-      "id": "current-shorten-12-collectibles",
+      "id": "change-c0e89d6627a2",
       "kind": "source_or_tooling",
       "summary": "Apply 241 reviewed short labels for collectibles.",
+      "commits": ["c0e89d6627a2f5ef828419eb47ef3a6af15e5d02"]
+    },
+    {
+      "id": "current-shorten-13-effects",
+      "kind": "source_or_tooling",
+      "summary": "Apply 325 reviewed short labels for effects.",
       "commits": ["release-commit"]
     }
   ],

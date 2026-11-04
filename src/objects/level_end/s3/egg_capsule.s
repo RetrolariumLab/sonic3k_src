@@ -550,12 +550,12 @@ loc_54A0A:
                 moveq   #0,d2
                 move.b  (Current_zone).w,d2
                 add.w   d2,d2
-                lea     (byte_2BDDA).l,a1
+                lea     (S3Animal_ZoneSpeciesPairs).l,a1
                 adda.w  d2,a1
                 lsr.w   #1,d0
                 move.b  (a1,d0.w),d0
                 lsl.w   #3,d0
-                lea     (word_2BDF4).l,a2
+                lea     (S3Animal_DefaultSpeciesRecords).l,a2
                 move.l  4(a2,d0.w),mappings(a0)
                 lsl.w   #2,d1
                 move.w  d1,$2E(a0)

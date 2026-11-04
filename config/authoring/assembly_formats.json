@@ -4045,12 +4045,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "5b5e79a87616e8881df8ceb8129b6dbd1bb3b578ad9e977b9409a0a5028c8991",
+      "declarations_sha256": "e47138bb4e081c041855a847162d91c827a0811d4e57b26e6c8bacc9231608f6",
       "labels": {
         "Map_Animals1_": 0,
-        "word_2CEC0": 6,
-        "word_2CEC8": 14,
-        "word_2CED0": 22
+        "AnimalsSet1_Frame2_Mapping": 6,
+        "AnimalsSet1_Frame0_Mapping": 14,
+        "AnimalsSet1_Frame1_Mapping": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -4058,21 +4058,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEC8",
+          "target": "AnimalsSet1_Frame0_Mapping",
           "base": "Map_Animals1_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CED0",
+          "target": "AnimalsSet1_Frame1_Mapping",
           "base": "Map_Animals1_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEC0",
+          "target": "AnimalsSet1_Frame2_Mapping",
           "base": "Map_Animals1_"
         },
         {
@@ -4101,12 +4101,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "09973cc34a556ab70b6a3df7941d532a829e8482785617ff9605d381e635689e",
+      "declarations_sha256": "928f10069cde139e183abfcb50fedd6210b54876d1b6cc86f4c0484bda9113c3",
       "labels": {
         "Map_Animals2_": 0,
-        "word_2CEDE": 6,
-        "word_2CEE6": 14,
-        "word_2CEEE": 22
+        "AnimalsSet2_Frame2_Mapping": 6,
+        "AnimalsSet2_Frame0_Mapping": 14,
+        "AnimalsSet2_Frame1_Mapping": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -4114,21 +4114,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEE6",
+          "target": "AnimalsSet2_Frame0_Mapping",
           "base": "Map_Animals2_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEEE",
+          "target": "AnimalsSet2_Frame1_Mapping",
           "base": "Map_Animals2_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEDE",
+          "target": "AnimalsSet2_Frame2_Mapping",
           "base": "Map_Animals2_"
         },
         {
@@ -4157,12 +4157,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "58f81880b4a97f3366a30ca4e1d328aa4f68d17debb93086e1eae106e8223054",
+      "declarations_sha256": "d3f88b5a7443e67c7f8d0b2ad9d13bdc3fc4daf1c1d217498ab62cb825c57f3f",
       "labels": {
         "Map_Animals3_": 0,
-        "word_2CEFC": 6,
-        "word_2CF04": 14,
-        "word_2CF0C": 22
+        "AnimalsSet3_Frame2_Mapping": 6,
+        "AnimalsSet3_Frame0_Mapping": 14,
+        "AnimalsSet3_Frame1_Mapping": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -4170,21 +4170,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF04",
+          "target": "AnimalsSet3_Frame0_Mapping",
           "base": "Map_Animals3_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF0C",
+          "target": "AnimalsSet3_Frame1_Mapping",
           "base": "Map_Animals3_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CEFC",
+          "target": "AnimalsSet3_Frame2_Mapping",
           "base": "Map_Animals3_"
         },
         {
@@ -4213,12 +4213,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "ab241a0ca1bcde8e61942bac5b5d930eb9634bc85064d5a4b9ea8770b997ef55",
+      "declarations_sha256": "4a5cfa7aa23873761bf640641487adb032f00dc728aacc8eb413380ad92cd94f",
       "labels": {
         "Map_Animals4_": 0,
-        "word_2CF1A": 6,
-        "word_2CF22": 14,
-        "word_2CF2A": 22
+        "AnimalsSet4_Frame2_Mapping": 6,
+        "AnimalsSet4_Frame0_Mapping": 14,
+        "AnimalsSet4_Frame1_Mapping": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -4226,21 +4226,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF22",
+          "target": "AnimalsSet4_Frame0_Mapping",
           "base": "Map_Animals4_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF2A",
+          "target": "AnimalsSet4_Frame1_Mapping",
           "base": "Map_Animals4_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF1A",
+          "target": "AnimalsSet4_Frame2_Mapping",
           "base": "Map_Animals4_"
         },
         {
@@ -4269,12 +4269,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "cef4b5c8f48c451ad642bf0f5eb0f22cef182f041828fa806a50df8b54c045be",
+      "declarations_sha256": "593d752f996227c7f7f79a5a3ed28ef863ba6b01e02d30f3956cd599904cf29f",
       "labels": {
         "Map_Animals5_": 0,
-        "word_2CF38": 6,
-        "word_2CF40": 14,
-        "word_2CF48": 22
+        "AnimalsSet5_Frame2_Mapping": 6,
+        "AnimalsSet5_Frame0_Mapping": 14,
+        "AnimalsSet5_Frame1_Mapping": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -4282,21 +4282,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF40",
+          "target": "AnimalsSet5_Frame0_Mapping",
           "base": "Map_Animals5_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF48",
+          "target": "AnimalsSet5_Frame1_Mapping",
           "base": "Map_Animals5_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF38",
+          "target": "AnimalsSet5_Frame2_Mapping",
           "base": "Map_Animals5_"
         },
         {
@@ -7208,14 +7208,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 52
       },
-      "declarations_sha256": "5152d283492ca57023cfdcc41777ef50c6aeb188c2bd6595b8653f63fd9c0a42",
+      "declarations_sha256": "8b983ef5b36ffa376541af0f39de805ca0b52da25a15026cbfc4bc74533c7499",
       "labels": {
         "Ani_DashSplashDrown_": 0,
-        "byte_18DCA": 10,
-        "byte_18DCD": 13,
-        "byte_18DD9": 25,
-        "byte_18DE2": 34,
-        "byte_18DE8": 40
+        "DashDust_Animation0_IdleBlankLoop": 10,
+        "DashDust_Animation1_WaterSplashThenIdle": 13,
+        "DashDust_Animation2_ChargeDustLoop": 25,
+        "DashDustAnim_SmokeThenAdvance": 34,
+        "DashDust_Animation4_GroundSplashThenIdle": 40
       },
       "external_symbols": [],
       "blocks": [
@@ -7223,35 +7223,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18DCA",
+          "target": "DashDust_Animation0_IdleBlankLoop",
           "base": "Ani_DashSplashDrown_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18DCD",
+          "target": "DashDust_Animation1_WaterSplashThenIdle",
           "base": "Ani_DashSplashDrown_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18DD9",
+          "target": "DashDust_Animation2_ChargeDustLoop",
           "base": "Ani_DashSplashDrown_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18DE2",
+          "target": "DashDustAnim_SmokeThenAdvance",
           "base": "Ani_DashSplashDrown_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18DE8",
+          "target": "DashDust_Animation4_GroundSplashThenIdle",
           "base": "Ani_DashSplashDrown_"
         },
         {
@@ -7300,13 +7300,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 26
       },
-      "declarations_sha256": "6f48ef2bdc2cf628e4ad9b39bcd4e12d3f6fcee370e1fa0a260406026623bf03",
+      "declarations_sha256": "21017d11f614dbdb35223ae8d8b9b645f6812fce6dc71c283aa030021ff67566",
       "labels": {
         "Ani_DashDust2P_": 0,
-        "byte_190FA": 8,
-        "byte_190FD": 11,
-        "byte_19101": 15,
-        "byte_19107": 21
+        "CompetitionDust_Animation0_IdleBlankLoop": 8,
+        "CompDustAnim_BlankSplashToIdle": 11,
+        "CompDustAnim_ChargeLoop": 15,
+        "CompDustAnim_SmokeThenAdvance": 21
       },
       "external_symbols": [],
       "blocks": [
@@ -7314,28 +7314,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_190FA",
+          "target": "CompetitionDust_Animation0_IdleBlankLoop",
           "base": "Ani_DashDust2P_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_190FD",
+          "target": "CompDustAnim_BlankSplashToIdle",
           "base": "Ani_DashDust2P_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19101",
+          "target": "CompDustAnim_ChargeLoop",
           "base": "Ani_DashDust2P_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19107",
+          "target": "CompDustAnim_SmokeThenAdvance",
           "base": "Ani_DashDust2P_"
         },
         {
@@ -7373,36 +7373,36 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 164
       },
-      "declarations_sha256": "7e50660c8296a441de4a5e977ccd97435962774e48145de0fe3e11ce808d5e49",
+      "declarations_sha256": "305be8b0e4380ecf24a0cc37c18e3bac8b8fc8bda1d5619d7b7fb5d12df84b7d",
       "labels": {
         "DPLC_DashSplashDrown_": 0,
-        "word_18F1E": 60,
-        "word_18F20": 62,
-        "word_18F24": 66,
-        "word_18F28": 70,
-        "word_18F2C": 74,
-        "word_18F30": 78,
-        "word_18F34": 82,
-        "word_18F38": 86,
-        "word_18F3C": 90,
-        "word_18F40": 94,
-        "word_18F44": 98,
-        "word_18F48": 102,
-        "word_18F4C": 106,
-        "word_18F50": 110,
-        "word_18F54": 114,
-        "word_18F58": 118,
-        "word_18F5C": 122,
-        "word_18F60": 126,
-        "word_18F62": 128,
-        "word_18F66": 132,
-        "word_18F6A": 136,
-        "word_18F6E": 140,
-        "word_18F72": 144,
-        "word_18F76": 148,
-        "word_18F7A": 152,
-        "word_18F7E": 156,
-        "word_18F82": 160
+        "DashDust_Frame0_Dplc": 60,
+        "DashDust_Frame1_Dplc": 62,
+        "DashDust_Frame2_Dplc": 66,
+        "DashDust_Frame3_Dplc": 70,
+        "DashDust_Frame4_Dplc": 74,
+        "DashDust_Frame5_Dplc": 78,
+        "DashDust_Frame6_Dplc": 82,
+        "DashDust_Frame7_Dplc": 86,
+        "DashDust_Frame8_Dplc": 90,
+        "DashDust_Frame9_Dplc": 94,
+        "DashDust_Frame10_Dplc": 98,
+        "DashDust_Frame11_Dplc": 102,
+        "DashDust_Frame12_Dplc": 106,
+        "DashDust_Frame13_Dplc": 110,
+        "DashDust_Frame14_Dplc": 114,
+        "DashDust_Frame15_Dplc": 118,
+        "DashDust_Frame16_Dplc": 122,
+        "DashDust_Frames17_18_19_20_Dplc": 126,
+        "DashDust_Frame21_Dplc": 128,
+        "DashDust_Frame22_Dplc": 132,
+        "DashDust_Frame23_Dplc": 136,
+        "DashDust_Frame24_Dplc": 140,
+        "DashDust_Frame25_Dplc": 144,
+        "DashDust_Frame26_Dplc": 148,
+        "DashDust_Frame27_Dplc": 152,
+        "DashDust_Frame28_Dplc": 156,
+        "DashDust_Frame29_Dplc": 160
       },
       "external_symbols": [],
       "blocks": [
@@ -7410,210 +7410,210 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F1E",
+          "target": "DashDust_Frame0_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F20",
+          "target": "DashDust_Frame1_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F24",
+          "target": "DashDust_Frame2_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F28",
+          "target": "DashDust_Frame3_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F2C",
+          "target": "DashDust_Frame4_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F30",
+          "target": "DashDust_Frame5_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F34",
+          "target": "DashDust_Frame6_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F38",
+          "target": "DashDust_Frame7_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F3C",
+          "target": "DashDust_Frame8_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F40",
+          "target": "DashDust_Frame9_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F44",
+          "target": "DashDust_Frame10_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F48",
+          "target": "DashDust_Frame11_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F4C",
+          "target": "DashDust_Frame12_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F50",
+          "target": "DashDust_Frame13_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F54",
+          "target": "DashDust_Frame14_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F58",
+          "target": "DashDust_Frame15_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F5C",
+          "target": "DashDust_Frame16_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F60",
+          "target": "DashDust_Frames17_18_19_20_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F60",
+          "target": "DashDust_Frames17_18_19_20_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F60",
+          "target": "DashDust_Frames17_18_19_20_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F60",
+          "target": "DashDust_Frames17_18_19_20_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F62",
+          "target": "DashDust_Frame21_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F66",
+          "target": "DashDust_Frame22_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F6A",
+          "target": "DashDust_Frame23_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F6E",
+          "target": "DashDust_Frame24_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F72",
+          "target": "DashDust_Frame25_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F76",
+          "target": "DashDust_Frame26_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F7A",
+          "target": "DashDust_Frame27_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F7E",
+          "target": "DashDust_Frame28_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18F82",
+          "target": "DashDust_Frame29_Dplc",
           "base": "DPLC_DashSplashDrown_"
         },
         {
@@ -7762,32 +7762,32 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 238
       },
-      "declarations_sha256": "81252b92d229d0c0435fc2003b504aa43d5da0eabb1a89dbe75275ad3b4db55a",
+      "declarations_sha256": "93ec379fcd84dd368747697d0e04921af1f696da31b5c5a655f15bf0826881f8",
       "labels": {
         "Map_DashDust_": 0,
-        "word_18E30": 60,
-        "word_18E32": 62,
-        "word_18E3A": 70,
-        "word_18E42": 78,
-        "word_18E4A": 86,
-        "word_18E52": 94,
-        "word_18E5A": 102,
-        "word_18E62": 110,
-        "word_18E6A": 118,
-        "word_18E72": 126,
-        "word_18E7A": 134,
-        "word_18E82": 142,
-        "word_18E8A": 150,
-        "word_18E92": 158,
-        "word_18E9A": 166,
-        "word_18EA2": 174,
-        "word_18EAA": 182,
-        "word_18EB2": 190,
-        "word_18EBA": 198,
-        "word_18EC2": 206,
-        "word_18ECA": 214,
-        "word_18ED2": 222,
-        "word_18EDA": 230
+        "DashDust_Frames0_21_Mapping": 60,
+        "DashDust_Frame1_Mapping": 62,
+        "DashDust_Frame2_Mapping": 70,
+        "DashDust_Frame3_Mapping": 78,
+        "DashDust_Frame4_Mapping": 86,
+        "DashDust_Frame5_Mapping": 94,
+        "DashDust_Frame6_Mapping": 102,
+        "DashDust_Frame7_Mapping": 110,
+        "DashDust_Frame8_Mapping": 118,
+        "DashDust_Frame9_Mapping": 126,
+        "DashDust_Frame10_Mapping": 134,
+        "DashDust_Frame11_Mapping": 142,
+        "DashDust_Frame12_Mapping": 150,
+        "DashDust_Frame13_Mapping": 158,
+        "DashDust_Frame14_Mapping": 166,
+        "DashDust_Frame15_Mapping": 174,
+        "DashDust_Frame16_Mapping": 182,
+        "DashDust_Frame17_Mapping": 190,
+        "DashDust_Frame18_Mapping": 198,
+        "DashDust_Frame19_Mapping": 206,
+        "DashDust_Frame20_Mapping": 214,
+        "DashDust_Frame22_Mapping": 222,
+        "DashDustMap_SharedFrames23To29": 230
       },
       "external_symbols": [],
       "blocks": [
@@ -7795,210 +7795,210 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E30",
+          "target": "DashDust_Frames0_21_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E32",
+          "target": "DashDust_Frame1_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E3A",
+          "target": "DashDust_Frame2_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E42",
+          "target": "DashDust_Frame3_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E4A",
+          "target": "DashDust_Frame4_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E52",
+          "target": "DashDust_Frame5_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E5A",
+          "target": "DashDust_Frame6_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E62",
+          "target": "DashDust_Frame7_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E6A",
+          "target": "DashDust_Frame8_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E72",
+          "target": "DashDust_Frame9_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E7A",
+          "target": "DashDust_Frame10_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E82",
+          "target": "DashDust_Frame11_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E8A",
+          "target": "DashDust_Frame12_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E92",
+          "target": "DashDust_Frame13_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E9A",
+          "target": "DashDust_Frame14_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EA2",
+          "target": "DashDust_Frame15_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EAA",
+          "target": "DashDust_Frame16_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EB2",
+          "target": "DashDust_Frame17_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EBA",
+          "target": "DashDust_Frame18_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EC2",
+          "target": "DashDust_Frame19_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18ECA",
+          "target": "DashDust_Frame20_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18E30",
+          "target": "DashDust_Frames0_21_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18ED2",
+          "target": "DashDust_Frame22_Mapping",
           "base": "Map_DashDust_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_18EDA",
+          "target": "DashDustMap_SharedFrames23To29",
           "base": "Map_DashDust_"
         },
         {
@@ -8127,17 +8127,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 74
       },
-      "declarations_sha256": "b20e3280b5746d67bbb943e1239722687222f0b62843f59be4019f531a4980fa",
+      "declarations_sha256": "0b13cff70fab11378bcd655614951f8dbb00eb28513b8f6bf3ae78dafaa0422b",
       "labels": {
         "Map_DashDust2P_": 0,
-        "word_1911C": 16,
-        "word_1911E": 18,
-        "word_19126": 26,
-        "word_1912E": 34,
-        "word_19136": 42,
-        "word_1913E": 50,
-        "word_19146": 58,
-        "word_1914E": 66
+        "CompetitionDust_Frame0_Mapping": 16,
+        "CompetitionDust_Frame1_Mapping": 18,
+        "CompetitionDust_Frame2_Mapping": 26,
+        "CompetitionDust_Frame3_Mapping": 34,
+        "CompetitionDust_Frame4_Mapping": 42,
+        "CompetitionDust_Frame5_Mapping": 50,
+        "CompetitionDust_Frame6_Mapping": 58,
+        "CompetitionDust_Frame7_Mapping": 66
       },
       "external_symbols": [],
       "blocks": [
@@ -8145,56 +8145,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1911C",
+          "target": "CompetitionDust_Frame0_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1911E",
+          "target": "CompetitionDust_Frame1_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19126",
+          "target": "CompetitionDust_Frame2_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1912E",
+          "target": "CompetitionDust_Frame3_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19136",
+          "target": "CompetitionDust_Frame4_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1913E",
+          "target": "CompetitionDust_Frame5_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19146",
+          "target": "CompetitionDust_Frame6_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1914E",
+          "target": "CompetitionDust_Frame7_Mapping",
           "base": "Map_DashDust2P_"
         },
         {
@@ -9082,16 +9082,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 88
       },
-      "declarations_sha256": "3abc06c52e43deb7ce4ff5f41e7064c8b60d37a5785144ba0e363285a3616273",
+      "declarations_sha256": "c6f0fa33114a22a2b1216fc73428ec26b194a580c2f7f4afb2cf4ab768bef740",
       "labels": {
         "Map_EnemyScore_": 0,
-        "word_2CF5E": 14,
-        "word_2CF66": 22,
-        "word_2CF6E": 30,
-        "word_2CF76": 38,
-        "word_2CF84": 52,
-        "word_2CF8C": 60,
-        "word_2CF9A": 74
+        "EnemyScore_Frame0_Mapping": 14,
+        "EnemyScore_Frame1_Mapping": 22,
+        "EnemyScore_Frame2_Mapping": 30,
+        "EnemyScore_Frame3_Mapping": 38,
+        "EnemyScore_Frame4_Mapping": 52,
+        "EnemyScore_Frame5_Mapping": 60,
+        "EnemyScore_Frame6_Mapping": 74
       },
       "external_symbols": [],
       "blocks": [
@@ -9099,49 +9099,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF5E",
+          "target": "EnemyScore_Frame0_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF66",
+          "target": "EnemyScore_Frame1_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF6E",
+          "target": "EnemyScore_Frame2_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF76",
+          "target": "EnemyScore_Frame3_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF84",
+          "target": "EnemyScore_Frame4_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF8C",
+          "target": "EnemyScore_Frame5_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2CF9A",
+          "target": "EnemyScore_Frame6_Mapping",
           "base": "Map_EnemyScore_"
         },
         {
@@ -9190,14 +9190,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "531de2e15749fe08b602324503c706166295754f244d593b4d13728551b6b743",
+      "declarations_sha256": "ae37ec04279fcedda09e1e1cb27d8ec9782bc493752bf6599ac4a64bcece6733",
       "labels": {
         "Map_Explosion_": 0,
-        "word_1E762": 10,
-        "word_1E76A": 18,
-        "word_1E772": 26,
-        "word_1E77A": 34,
-        "word_1E782": 42
+        "EffectResource_SKExplosionMap_Frame00": 10,
+        "EffectResource_SKExplosionMap_Frame01": 18,
+        "EffectResource_SKExplosionMap_Frame02": 26,
+        "EffectResource_SKExplosionMap_Frame03": 34,
+        "EffectResource_SKExplosionMap_Frame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -9205,35 +9205,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1E762",
+          "target": "EffectResource_SKExplosionMap_Frame00",
           "base": "Map_Explosion_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1E76A",
+          "target": "EffectResource_SKExplosionMap_Frame01",
           "base": "Map_Explosion_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1E772",
+          "target": "EffectResource_SKExplosionMap_Frame02",
           "base": "Map_Explosion_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1E77A",
+          "target": "EffectResource_SKExplosionMap_Frame03",
           "base": "Map_Explosion_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1E782",
+          "target": "EffectResource_SKExplosionMap_Frame04",
           "base": "Map_Explosion_"
         },
         {
@@ -9272,14 +9272,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "179ddd1bbb98a264435eb1348366c0d49599881516d0048adc72c86a411fd82f",
+      "declarations_sha256": "a5cdf868902621f409ff492685174b3dd7bd026b9311dd9b74e42c6d963758c9",
       "labels": {
         "Map_Explosion_": 0,
-        "word_1C394": 10,
-        "word_1C39C": 18,
-        "word_1C3A4": 26,
-        "word_1C3AC": 34,
-        "word_1C3B4": 42
+        "EffectResource_S3ExplosionMap_Frame00": 10,
+        "EffectResource_S3ExplosionMap_Frame01": 18,
+        "EffectResource_S3ExplosionMap_Frame02": 26,
+        "EffectResource_S3ExplosionMap_Frame03": 34,
+        "EffectResource_S3ExplosionMap_Frame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -9287,35 +9287,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1C394",
+          "target": "EffectResource_S3ExplosionMap_Frame00",
           "base": "Map_Explosion_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1C39C",
+          "target": "EffectResource_S3ExplosionMap_Frame01",
           "base": "Map_Explosion_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1C3A4",
+          "target": "EffectResource_S3ExplosionMap_Frame02",
           "base": "Map_Explosion_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1C3AC",
+          "target": "EffectResource_S3ExplosionMap_Frame03",
           "base": "Map_Explosion_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1C3B4",
+          "target": "EffectResource_S3ExplosionMap_Frame04",
           "base": "Map_Explosion_"
         },
         {
@@ -29405,12 +29405,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 76
       },
-      "declarations_sha256": "6974d95e616e492c524544ff276514eec9cd6c01ed21e6daf326eab6638d76a6",
+      "declarations_sha256": "3854f150dc4847242f6736e358a99cf628bac784e7debce76bac25c93f2b49a4",
       "labels": {
         "Ani_BubbleShield_": 0,
-        "byte_19A80": 6,
-        "byte_19AB8": 62,
-        "byte_19ABF": 69
+        "BubbleShieldAnim_IdleLoop": 6,
+        "BubbleShieldAnim_AttackToIdle": 62,
+        "BubbleShieldAnim_BounceToIdle": 69
       },
       "external_symbols": [],
       "blocks": [
@@ -29418,21 +29418,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A80",
+          "target": "BubbleShieldAnim_IdleLoop",
           "base": "Ani_BubbleShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19AB8",
+          "target": "BubbleShieldAnim_AttackToIdle",
           "base": "Ani_BubbleShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19ABF",
+          "target": "BubbleShieldAnim_BounceToIdle",
           "base": "Ani_BubbleShield_"
         },
         {
@@ -29469,11 +29469,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "ee18da78bec731071ee9a45661a357159f4af82a131e2e1ba9b7902b0c0d5ecd",
+      "declarations_sha256": "90c32bb8401b61dbece874e7b498f26fcf47d748d8bae43a3a67aa7b3be1947f",
       "labels": {
         "Ani_FireShield_": 0,
-        "byte_19A06": 4,
-        "byte_19A1A": 24
+        "FireShieldAnim_IdleOrbitLoop": 4,
+        "FireShield_Animation1_AirDashThenIdle": 24
       },
       "external_symbols": [],
       "blocks": [
@@ -29481,14 +29481,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A06",
+          "target": "FireShieldAnim_IdleOrbitLoop",
           "base": "Ani_FireShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A1A",
+          "target": "FireShield_Animation1_AirDashThenIdle",
           "base": "Ani_FireShield_"
         },
         {
@@ -29519,11 +29519,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 24
       },
-      "declarations_sha256": "5931b46ec0950611494b7982a22fcf956dc804bd249699beac286628a665fe69",
+      "declarations_sha256": "960fc58b347f26f041c2067997cfb3b2f9299265bbebb24b095fe4b00218c801",
       "labels": {
         "Ani_InstaShield_": 0,
-        "byte_199EE": 4,
-        "byte_199F1": 7
+        "InstaShield_Animation0_IdleBlankLoop": 4,
+        "InstaShieldAnim_AttackToIdle": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -29531,14 +29531,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_199EE",
+          "target": "InstaShield_Animation0_IdleBlankLoop",
           "base": "Ani_InstaShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_199F1",
+          "target": "InstaShieldAnim_AttackToIdle",
           "base": "Ani_InstaShield_"
         },
         {
@@ -29564,12 +29564,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 80
       },
-      "declarations_sha256": "0919138551c4b30fc669a1333b1badcca94077d8343af93542eb50c019acdf08",
+      "declarations_sha256": "bca4d90e2ac9871f65f4aeee24e3a62550b9e0c08f8e6bd1760cbf4281291852",
       "labels": {
         "Ani_LightningShield_": 0,
-        "byte_19A30": 6,
-        "byte_19A5C": 50,
-        "byte_19A73": 73
+        "SKLightningAnim_IdleOrbitLoop": 6,
+        "SKLightningAnim_SparkThenDelete": 50,
+        "SKLightningAnim_HyperSparkThenDelete": 73
       },
       "external_symbols": [],
       "blocks": [
@@ -29577,21 +29577,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A30",
+          "target": "SKLightningAnim_IdleOrbitLoop",
           "base": "Ani_LightningShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A5C",
+          "target": "SKLightningAnim_SparkThenDelete",
           "base": "Ani_LightningShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_19A73",
+          "target": "SKLightningAnim_HyperSparkThenDelete",
           "base": "Ani_LightningShield_"
         },
         {
@@ -29628,11 +29628,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 72
       },
-      "declarations_sha256": "92caf8a753f82776410952eff9460ea236b1afafb8861c2be8012c2133e86e81",
+      "declarations_sha256": "54eeb260042a9dac342cbabce943c9ff369846635c66fd190bcb53ddd5a477c2",
       "labels": {
         "Ani_LightningShield_": 0,
-        "byte_185BC": 4,
-        "byte_185E8": 48
+        "S3LightningAnim_IdleOrbitLoop": 4,
+        "S3LightningAnim_SparkThenDelete": 48
       },
       "external_symbols": [],
       "blocks": [
@@ -29640,14 +29640,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_185BC",
+          "target": "S3LightningAnim_IdleOrbitLoop",
           "base": "Ani_LightningShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_185E8",
+          "target": "S3LightningAnim_SparkThenDelete",
           "base": "Ani_LightningShield_"
         },
         {
@@ -29678,10 +29678,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 14
       },
-      "declarations_sha256": "fdbce7778dc2f2b1d9ef14929c0ce3eddba4b691a3f4b4e0cb5c3db4f332e5c2",
+      "declarations_sha256": "2f99654558052f315a422090d5c2158de83ce00f8401cf6e6a09aa08e4f91386",
       "labels": {
         "Ani_S2Shield_": 0,
-        "byte_177B6": 2
+        "LegacyShieldAnim_Standard00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -29689,7 +29689,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_177B6",
+          "target": "LegacyShieldAnim_Standard00",
           "base": "Ani_S2Shield_"
         },
         {
@@ -29709,22 +29709,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 90
       },
-      "declarations_sha256": "70e4a6c16a16b92c0133c6a31f8fbb0875c391b21e5df4a7dba9cb8106b83b5f",
+      "declarations_sha256": "63cff8252738346fd6427f0b495983deddf0e1dee8543cf6f547291a387d6ddf",
       "labels": {
         "DPLC_BubbleShield_": 0,
-        "word_1A090": 26,
-        "word_1A094": 30,
-        "word_1A098": 34,
-        "word_1A09C": 38,
-        "word_1A0A0": 42,
-        "word_1A0A4": 46,
-        "word_1A0A8": 50,
-        "word_1A0AC": 54,
-        "word_1A0B0": 58,
-        "word_1A0B4": 62,
-        "word_1A0BA": 68,
-        "word_1A0C0": 74,
-        "word_1A0C8": 82
+        "BubbleShield_Frame0_Dplc": 26,
+        "BubbleShield_Frame1_Dplc": 30,
+        "BubbleShield_Frame2_Dplc": 34,
+        "BubbleShield_Frame3_Dplc": 38,
+        "BubbleShield_Frame4_Dplc": 42,
+        "BubbleShield_Frame5_Dplc": 46,
+        "BubbleShield_Frame6_Dplc": 50,
+        "BubbleShield_Frame7_Dplc": 54,
+        "BubbleShield_Frame8_Dplc": 58,
+        "BubbleShield_Frame9_Dplc": 62,
+        "BubbleShield_Frame10_Dplc": 68,
+        "BubbleShield_Frame11_Dplc": 74,
+        "BubbleShield_Frame12_Dplc": 82
       },
       "external_symbols": [],
       "blocks": [
@@ -29732,91 +29732,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A090",
+          "target": "BubbleShield_Frame0_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A094",
+          "target": "BubbleShield_Frame1_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A098",
+          "target": "BubbleShield_Frame2_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A09C",
+          "target": "BubbleShield_Frame3_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0A0",
+          "target": "BubbleShield_Frame4_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0A4",
+          "target": "BubbleShield_Frame5_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0A8",
+          "target": "BubbleShield_Frame6_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0AC",
+          "target": "BubbleShield_Frame7_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0B0",
+          "target": "BubbleShield_Frame8_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0B4",
+          "target": "BubbleShield_Frame9_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0BA",
+          "target": "BubbleShield_Frame10_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0C0",
+          "target": "BubbleShield_Frame11_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0C8",
+          "target": "BubbleShield_Frame12_Dplc",
           "base": "DPLC_BubbleShield_"
         },
         {
@@ -29895,34 +29895,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 226
       },
-      "declarations_sha256": "c9350b0e4874114d0ea0908928f558b6584b36a51b7ea8cd58ca5dfbd5b95f98",
+      "declarations_sha256": "77144555c8f7e55d1c6d90567ed485648386f6736fbf14b6a82263b310454891",
       "labels": {
         "DPLC_FireShield_": 0,
-        "word_19D18": 50,
-        "word_19D20": 58,
-        "word_19D28": 66,
-        "word_19D30": 74,
-        "word_19D38": 82,
-        "word_19D3E": 88,
-        "word_19D46": 96,
-        "word_19D4E": 104,
-        "word_19D56": 112,
-        "word_19D5E": 120,
-        "word_19D66": 128,
-        "word_19D6C": 134,
-        "word_19D74": 142,
-        "word_19D7C": 150,
-        "word_19D82": 156,
-        "word_19D88": 162,
-        "word_19D8E": 168,
-        "word_19D94": 174,
-        "word_19D9C": 182,
-        "word_19DA4": 190,
-        "word_19DAA": 196,
-        "word_19DB2": 204,
-        "word_19DBA": 212,
-        "word_19DC0": 218,
-        "word_19DC6": 224
+        "FireShield_Frame0_Dplc": 50,
+        "FireShield_Frame1_Dplc": 58,
+        "FireShield_Frame2_Dplc": 66,
+        "FireShield_Frame3_Dplc": 74,
+        "FireShield_Frame4_Dplc": 82,
+        "FireShield_Frame5_Dplc": 88,
+        "FireShield_Frame6_Dplc": 96,
+        "FireShield_Frame7_Dplc": 104,
+        "FireShield_Frame8_Dplc": 112,
+        "FireShield_Frame9_Dplc": 120,
+        "FireShield_Frame10_Dplc": 128,
+        "FireShield_Frame11_Dplc": 134,
+        "FireShield_Frame12_Dplc": 142,
+        "FireShield_Frame13_Dplc": 150,
+        "FireShield_Frame14_Dplc": 156,
+        "FireShield_Frame15_Dplc": 162,
+        "FireShield_Frame16_Dplc": 168,
+        "FireShield_Frame17_Dplc": 174,
+        "FireShield_Frame18_Dplc": 182,
+        "FireShield_Frame19_Dplc": 190,
+        "FireShield_Frame20_Dplc": 196,
+        "FireShield_Frame21_Dplc": 204,
+        "FireShield_Frame22_Dplc": 212,
+        "FireShield_Frame23_Dplc": 218,
+        "FireShield_Frame24_Dplc": 224
       },
       "external_symbols": [],
       "blocks": [
@@ -29930,175 +29930,175 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D18",
+          "target": "FireShield_Frame0_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D20",
+          "target": "FireShield_Frame1_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D28",
+          "target": "FireShield_Frame2_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D30",
+          "target": "FireShield_Frame3_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D38",
+          "target": "FireShield_Frame4_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D3E",
+          "target": "FireShield_Frame5_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D46",
+          "target": "FireShield_Frame6_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D4E",
+          "target": "FireShield_Frame7_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D56",
+          "target": "FireShield_Frame8_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D5E",
+          "target": "FireShield_Frame9_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D66",
+          "target": "FireShield_Frame10_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D6C",
+          "target": "FireShield_Frame11_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D74",
+          "target": "FireShield_Frame12_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D7C",
+          "target": "FireShield_Frame13_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D82",
+          "target": "FireShield_Frame14_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D88",
+          "target": "FireShield_Frame15_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D8E",
+          "target": "FireShield_Frame16_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D94",
+          "target": "FireShield_Frame17_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19D9C",
+          "target": "FireShield_Frame18_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DA4",
+          "target": "FireShield_Frame19_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DAA",
+          "target": "FireShield_Frame20_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DB2",
+          "target": "FireShield_Frame21_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DBA",
+          "target": "FireShield_Frame22_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DC0",
+          "target": "FireShield_Frame23_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DC6",
+          "target": "FireShield_Frame24_Dplc",
           "base": "DPLC_FireShield_"
         },
         {
@@ -30237,11 +30237,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "6c8e873971df4f9ab129ae58c68835448c4992af41f3808a74ab84d97a4dec0d",
+      "declarations_sha256": "12e14a56836a5dee6f881b6f622a3a57316e5a3178018feadbe6d0b7be44e94b",
       "labels": {
         "DPLC_InstaShield_": 0,
-        "word_1A164": 16,
-        "word_1A16A": 22
+        "InstaShield_Frames0_1_2_Dplc": 16,
+        "InstaShield_Frames3_4_5_6_7_Dplc": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -30249,56 +30249,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A164",
+          "target": "InstaShield_Frames0_1_2_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A164",
+          "target": "InstaShield_Frames0_1_2_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A164",
+          "target": "InstaShield_Frames0_1_2_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A16A",
+          "target": "InstaShield_Frames3_4_5_6_7_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A16A",
+          "target": "InstaShield_Frames3_4_5_6_7_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A16A",
+          "target": "InstaShield_Frames3_4_5_6_7_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A16A",
+          "target": "InstaShield_Frames3_4_5_6_7_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A16A",
+          "target": "InstaShield_Frames3_4_5_6_7_Dplc",
           "base": "DPLC_InstaShield_"
         },
         {
@@ -30322,23 +30322,23 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 136
       },
-      "declarations_sha256": "5abebaef3434b4e2e104e92ec107f567ca6f650300d9715c6638b043b6ad04d9",
+      "declarations_sha256": "77c0fe76911415805fef8881672c127a0fa5814f06869868e804f66c2fd17e37",
       "labels": {
         "DPLC_LightningShield_": 0,
-        "word_19F28": 46,
-        "word_19F30": 54,
-        "word_19F36": 60,
-        "word_19F3E": 68,
-        "word_19F46": 76,
-        "word_19F4C": 82,
-        "word_19F54": 90,
-        "word_19F5C": 98,
-        "word_19F62": 104,
-        "word_19F6A": 112,
-        "word_19F70": 118,
-        "word_19F76": 124,
-        "word_19F7A": 128,
-        "word_19F7E": 132
+        "LightningShield_Frames0_14_Dplc": 46,
+        "LightningShield_Frames1_15_Dplc": 54,
+        "LightningShield_Frames2_16_Dplc": 60,
+        "LightningShield_Frames3_17_Dplc": 68,
+        "LightningShield_Frames4_18_Dplc": 76,
+        "LightningShield_Frames5_19_Dplc": 82,
+        "LightningShield_Frames6_20_Dplc": 90,
+        "LightningShield_Frames7_21_Dplc": 98,
+        "LightningShield_Frames8_22_Dplc": 104,
+        "LightningShield_Frame9_Dplc": 112,
+        "LightningShield_Frame10_Dplc": 118,
+        "LightningShield_Frame11_Dplc": 124,
+        "LightningShield_Frame12_Dplc": 128,
+        "LightningShield_Frame13_Dplc": 132
       },
       "external_symbols": [],
       "blocks": [
@@ -30346,161 +30346,161 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F28",
+          "target": "LightningShield_Frames0_14_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F30",
+          "target": "LightningShield_Frames1_15_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F36",
+          "target": "LightningShield_Frames2_16_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F3E",
+          "target": "LightningShield_Frames3_17_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F46",
+          "target": "LightningShield_Frames4_18_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F4C",
+          "target": "LightningShield_Frames5_19_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F54",
+          "target": "LightningShield_Frames6_20_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F5C",
+          "target": "LightningShield_Frames7_21_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F62",
+          "target": "LightningShield_Frames8_22_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F6A",
+          "target": "LightningShield_Frame9_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F70",
+          "target": "LightningShield_Frame10_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F76",
+          "target": "LightningShield_Frame11_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F7A",
+          "target": "LightningShield_Frame12_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F7E",
+          "target": "LightningShield_Frame13_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F28",
+          "target": "LightningShield_Frames0_14_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F30",
+          "target": "LightningShield_Frames1_15_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F36",
+          "target": "LightningShield_Frames2_16_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F3E",
+          "target": "LightningShield_Frames3_17_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F46",
+          "target": "LightningShield_Frames4_18_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F4C",
+          "target": "LightningShield_Frames5_19_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F54",
+          "target": "LightningShield_Frames6_20_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F5C",
+          "target": "LightningShield_Frames7_21_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F62",
+          "target": "LightningShield_Frames8_22_Dplc",
           "base": "DPLC_LightningShield_"
         },
         {
@@ -30584,22 +30584,22 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 244
       },
-      "declarations_sha256": "29ffd9e7052549b86a7c86888b5c70417ec2b4bb9165988310a63650fe447627",
+      "declarations_sha256": "35b41eb83b77befd0cb64ea5d15b4dcb51af97a464ad410e266a844b44a5f664",
       "labels": {
         "Map_BubbleShield_": 0,
-        "word_19F9C": 26,
-        "word_19FA4": 34,
-        "word_19FB2": 48,
-        "word_19FC0": 62,
-        "word_19FCE": 76,
-        "word_19FDC": 90,
-        "word_19FEA": 104,
-        "word_19FF8": 118,
-        "word_1A006": 132,
-        "word_1A014": 146,
-        "word_1A02E": 172,
-        "word_1A048": 198,
-        "word_1A062": 224
+        "BubbleShield_Frame0_Mapping": 26,
+        "BubbleShield_Frame1_Mapping": 34,
+        "BubbleShield_Frame2_Mapping": 48,
+        "BubbleShield_Frame3_Mapping": 62,
+        "BubbleShield_Frame4_Mapping": 76,
+        "BubbleShield_Frame5_Mapping": 90,
+        "BubbleShield_Frame6_Mapping": 104,
+        "BubbleShield_Frame7_Mapping": 118,
+        "BubbleShield_Frame8_Mapping": 132,
+        "BubbleShield_Frame9_Mapping": 146,
+        "BubbleShield_Frame10_Mapping": 172,
+        "BubbleShield_Frame11_Mapping": 198,
+        "BubbleShield_Frame12_Mapping": 224
       },
       "external_symbols": [],
       "blocks": [
@@ -30607,91 +30607,91 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19F9C",
+          "target": "BubbleShield_Frame0_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FA4",
+          "target": "BubbleShield_Frame1_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FB2",
+          "target": "BubbleShield_Frame2_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FC0",
+          "target": "BubbleShield_Frame3_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FCE",
+          "target": "BubbleShield_Frame4_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FDC",
+          "target": "BubbleShield_Frame5_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FEA",
+          "target": "BubbleShield_Frame6_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19FF8",
+          "target": "BubbleShield_Frame7_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A006",
+          "target": "BubbleShield_Frame8_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A014",
+          "target": "BubbleShield_Frame9_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A02E",
+          "target": "BubbleShield_Frame10_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A048",
+          "target": "BubbleShield_Frame11_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A062",
+          "target": "BubbleShield_Frame12_Mapping",
           "base": "Map_BubbleShield_"
         },
         {
@@ -30770,34 +30770,34 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 544
       },
-      "declarations_sha256": "f4137d36699b9540913c343052f0eac7188c98e146ceb26ce417d2edc6824c59",
+      "declarations_sha256": "d76a77f5fbcd87f52c0f91c19c6eca6f1bad2e4cf65e405d2a39c038b18add5f",
       "labels": {
         "Map_FireShield_": 0,
-        "word_19AF8": 50,
-        "word_19B0C": 70,
-        "word_19B20": 90,
-        "word_19B34": 110,
-        "word_19B48": 130,
-        "word_19B62": 156,
-        "word_19B76": 176,
-        "word_19B8A": 196,
-        "word_19B9E": 216,
-        "word_19BB2": 236,
-        "word_19BC6": 256,
-        "word_19BE0": 282,
-        "word_19BFA": 308,
-        "word_19C0E": 328,
-        "word_19C28": 354,
-        "word_19C42": 380,
-        "word_19C50": 394,
-        "word_19C5E": 408,
-        "word_19C72": 428,
-        "word_19C86": 448,
-        "word_19CA0": 474,
-        "word_19CB4": 494,
-        "word_19CC8": 514,
-        "word_19CD6": 528,
-        "word_19CE4": 542
+        "FireShield_Frame0_Mapping": 50,
+        "FireShield_Frame1_Mapping": 70,
+        "FireShield_Frame2_Mapping": 90,
+        "FireShield_Frame3_Mapping": 110,
+        "FireShield_Frame4_Mapping": 130,
+        "FireShield_Frame5_Mapping": 156,
+        "FireShield_Frame6_Mapping": 176,
+        "FireShield_Frame7_Mapping": 196,
+        "FireShield_Frame8_Mapping": 216,
+        "FireShield_Frame9_Mapping": 236,
+        "FireShield_Frame10_Mapping": 256,
+        "FireShield_Frame11_Mapping": 282,
+        "FireShield_Frame12_Mapping": 308,
+        "FireShield_Frame13_Mapping": 328,
+        "FireShield_Frame14_Mapping": 354,
+        "FireShield_Frame15_Mapping": 380,
+        "FireShield_Frame16_Mapping": 394,
+        "FireShield_Frame17_Mapping": 408,
+        "FireShield_Frame18_Mapping": 428,
+        "FireShield_Frame19_Mapping": 448,
+        "FireShield_Frame20_Mapping": 474,
+        "FireShield_Frame21_Mapping": 494,
+        "FireShield_Frame22_Mapping": 514,
+        "FireShield_Frame23_Mapping": 528,
+        "FireShield_Frame24_Mapping": 542
       },
       "external_symbols": [],
       "blocks": [
@@ -30805,175 +30805,175 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19AF8",
+          "target": "FireShield_Frame0_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B0C",
+          "target": "FireShield_Frame1_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B20",
+          "target": "FireShield_Frame2_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B34",
+          "target": "FireShield_Frame3_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B48",
+          "target": "FireShield_Frame4_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B62",
+          "target": "FireShield_Frame5_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B76",
+          "target": "FireShield_Frame6_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B8A",
+          "target": "FireShield_Frame7_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19B9E",
+          "target": "FireShield_Frame8_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19BB2",
+          "target": "FireShield_Frame9_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19BC6",
+          "target": "FireShield_Frame10_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19BE0",
+          "target": "FireShield_Frame11_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19BFA",
+          "target": "FireShield_Frame12_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C0E",
+          "target": "FireShield_Frame13_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C28",
+          "target": "FireShield_Frame14_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C42",
+          "target": "FireShield_Frame15_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C50",
+          "target": "FireShield_Frame16_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C5E",
+          "target": "FireShield_Frame17_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C72",
+          "target": "FireShield_Frame18_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19C86",
+          "target": "FireShield_Frame19_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19CA0",
+          "target": "FireShield_Frame20_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19CB4",
+          "target": "FireShield_Frame21_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19CC8",
+          "target": "FireShield_Frame22_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19CD6",
+          "target": "FireShield_Frame23_Mapping",
           "base": "Map_FireShield_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19CE4",
+          "target": "FireShield_Frame24_Mapping",
           "base": "Map_FireShield_"
         },
         {
@@ -31112,16 +31112,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 132
       },
-      "declarations_sha256": "9b28620e08285840f40793efa770d22e043b4ae820a523a3f912d7a941ad604e",
+      "declarations_sha256": "a02b8263994214ccb58c273a0c389a1e48a4085458f2f84e6078d2e6d44179c5",
       "labels": {
         "Map_InstaShield_": 0,
-        "word_1A0E0": 16,
-        "word_1A0F4": 36,
-        "word_1A108": 56,
-        "word_1A116": 70,
-        "word_1A12A": 90,
-        "word_1A13E": 110,
-        "word_1A152": 130
+        "InstaShield_Frame0_Mapping": 16,
+        "InstaShield_Frame1_Mapping": 36,
+        "InstaShield_Frame2_Mapping": 56,
+        "InstaShield_Frame3_Mapping": 70,
+        "InstaShield_Frame4_Mapping": 90,
+        "InstaShield_Frame5_Mapping": 110,
+        "InstaShield_Frames6_7_Mapping": 130
       },
       "external_symbols": [],
       "blocks": [
@@ -31129,56 +31129,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0E0",
+          "target": "InstaShield_Frame0_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A0F4",
+          "target": "InstaShield_Frame1_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A108",
+          "target": "InstaShield_Frame2_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A116",
+          "target": "InstaShield_Frame3_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A12A",
+          "target": "InstaShield_Frame4_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A13E",
+          "target": "InstaShield_Frame5_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A152",
+          "target": "InstaShield_Frames6_7_Mapping",
           "base": "Map_InstaShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1A152",
+          "target": "InstaShield_Frames6_7_Mapping",
           "base": "Map_InstaShield_"
         },
         {
@@ -31227,18 +31227,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 84
       },
-      "declarations_sha256": "40e16bcb2cd51cde2251f6afaf2c6e03af2c6e6f30143ed8b694ab681709f4e6",
+      "declarations_sha256": "2afc8eb571bf95ebe03914ca267d308ccf14e789677fc89b0dcb0f76875f1cc3",
       "labels": {
         "Map_Invincibility_": 0,
-        "word_1787C": 18,
-        "word_1787E": 20,
-        "word_17886": 28,
-        "word_1788E": 36,
-        "word_17896": 44,
-        "word_1789E": 52,
-        "word_178A6": 60,
-        "word_178AE": 68,
-        "word_178B6": 76
+        "InvincibilityMap_EmptyFrame00": 18,
+        "InvincibilityMap_Frame01": 20,
+        "InvincibilityMap_Frame02": 28,
+        "InvincibilityMap_Frame03": 36,
+        "InvincibilityMap_Frame04": 44,
+        "InvincibilityMap_Frame05": 52,
+        "InvincibilityMap_Frame06": 60,
+        "InvincibilityMap_Frame07": 68,
+        "InvincibilityMap_Frame08": 76
       },
       "external_symbols": [],
       "blocks": [
@@ -31246,63 +31246,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1787C",
+          "target": "InvincibilityMap_EmptyFrame00",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1787E",
+          "target": "InvincibilityMap_Frame01",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_17886",
+          "target": "InvincibilityMap_Frame02",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1788E",
+          "target": "InvincibilityMap_Frame03",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_17896",
+          "target": "InvincibilityMap_Frame04",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1789E",
+          "target": "InvincibilityMap_Frame05",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_178A6",
+          "target": "InvincibilityMap_Frame06",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_178AE",
+          "target": "InvincibilityMap_Frame07",
           "base": "Map_Invincibility_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_178B6",
+          "target": "InvincibilityMap_Frame08",
           "base": "Map_Invincibility_"
         },
         {
@@ -31361,24 +31361,24 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 306
       },
-      "declarations_sha256": "008c4383fd290e08f325e176f7e8d0fae34afab18ed059f220980cc59aa0a7b4",
+      "declarations_sha256": "e1ba0a5777ddc6c15643915a12d32c1e42f519ecb97a599d19d0474c2432be40",
       "labels": {
         "Map_LightningShield_": 0,
-        "word_19DF8": 48,
-        "word_19E0C": 68,
-        "word_19E1A": 82,
-        "word_19E2E": 102,
-        "word_19E42": 122,
-        "word_19E50": 136,
-        "word_19E64": 156,
-        "word_19E78": 176,
-        "word_19E86": 190,
-        "word_19E9A": 210,
-        "word_19EB4": 236,
-        "word_19ECE": 262,
-        "word_19EE8": 288,
-        "word_19EF0": 296,
-        "word_19EF8": 304
+        "LightningShield_Frames0_14_Mapping": 48,
+        "LightningShield_Frames1_15_Mapping": 68,
+        "LightningShield_Frames2_16_Mapping": 82,
+        "LightningShield_Frames3_17_Mapping": 102,
+        "LightningShield_Frames4_18_Mapping": 122,
+        "LightningShield_Frames5_19_Mapping": 136,
+        "LightningShield_Frames6_20_Mapping": 156,
+        "LightningShield_Frames7_21_Mapping": 176,
+        "LightningShield_Frames8_22_Mapping": 190,
+        "LightningShield_Frame9_Mapping": 210,
+        "LightningShield_Frame10_Mapping": 236,
+        "LightningShield_Frame11_Mapping": 262,
+        "LightningShield_Frame12_Mapping": 288,
+        "LightningShield_Frame13_Mapping": 296,
+        "LightningShield_Frame23_Mapping": 304
       },
       "external_symbols": [],
       "blocks": [
@@ -31386,168 +31386,168 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DF8",
+          "target": "LightningShield_Frames0_14_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E0C",
+          "target": "LightningShield_Frames1_15_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E1A",
+          "target": "LightningShield_Frames2_16_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E2E",
+          "target": "LightningShield_Frames3_17_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E42",
+          "target": "LightningShield_Frames4_18_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E50",
+          "target": "LightningShield_Frames5_19_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E64",
+          "target": "LightningShield_Frames6_20_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E78",
+          "target": "LightningShield_Frames7_21_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E86",
+          "target": "LightningShield_Frames8_22_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E9A",
+          "target": "LightningShield_Frame9_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19EB4",
+          "target": "LightningShield_Frame10_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19ECE",
+          "target": "LightningShield_Frame11_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19EE8",
+          "target": "LightningShield_Frame12_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19EF0",
+          "target": "LightningShield_Frame13_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19DF8",
+          "target": "LightningShield_Frames0_14_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E0C",
+          "target": "LightningShield_Frames1_15_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E1A",
+          "target": "LightningShield_Frames2_16_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E2E",
+          "target": "LightningShield_Frames3_17_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E42",
+          "target": "LightningShield_Frames4_18_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E50",
+          "target": "LightningShield_Frames5_19_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E64",
+          "target": "LightningShield_Frames6_20_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E78",
+          "target": "LightningShield_Frames7_21_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19E86",
+          "target": "LightningShield_Frames8_22_Mapping",
           "base": "Map_LightningShield_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19EF8",
+          "target": "LightningShield_Frame23_Mapping",
           "base": "Map_LightningShield_"
         },
         {
@@ -31636,15 +31636,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 168
       },
-      "declarations_sha256": "84b955e85ebb2b1d127bb5d128f11c0d1fe5735f3712d81e18406f1084ecd2c3",
+      "declarations_sha256": "bc8a3c4cdf3322ba69f939872b64247b90c54ccc8cf9a7fc50803ca7bc65a86e",
       "labels": {
         "Map_S2Shield_": 0,
-        "word_177CE": 12,
-        "word_177E8": 38,
-        "word_17802": 64,
-        "word_1781C": 90,
-        "word_17836": 116,
-        "word_17850": 142
+        "LegacyShieldMap_Frame00": 12,
+        "LegacyShieldMap_Frame01": 38,
+        "LegacyShieldMap_Frame02": 64,
+        "LegacyShieldMap_Frame03": 90,
+        "LegacyShieldMap_Frame04": 116,
+        "LegacyShieldMap_Frame05": 142
       },
       "external_symbols": [],
       "blocks": [
@@ -31652,42 +31652,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_177CE",
+          "target": "LegacyShieldMap_Frame00",
           "base": "Map_S2Shield_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_177E8",
+          "target": "LegacyShieldMap_Frame01",
           "base": "Map_S2Shield_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_17802",
+          "target": "LegacyShieldMap_Frame02",
           "base": "Map_S2Shield_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1781C",
+          "target": "LegacyShieldMap_Frame03",
           "base": "Map_S2Shield_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_17836",
+          "target": "LegacyShieldMap_Frame04",
           "base": "Map_S2Shield_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_17850",
+          "target": "LegacyShieldMap_Frame05",
           "base": "Map_S2Shield_"
         },
         {
@@ -31731,18 +31731,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 106
       },
-      "declarations_sha256": "1720a4094cd1272752ef3db52b3e97a977f009a3fbef872c7965781f7470209b",
+      "declarations_sha256": "cfeabcf58c6a15d99d501ccecc8303b1e2e62d888047d86171699178bf7d3d6f",
       "labels": {
         "Map_SuperSonic_Stars_": 0,
         "Map_SuperSonic_Stars2": 12,
         "Map_SuperSonic_Stars2_": 12,
-        "word_192F2": 20,
-        "word_192F4": 22,
-        "word_192FC": 30,
-        "word_19316": 56,
-        "word_19330": 82,
-        "word_19338": 90,
-        "word_19340": 98
+        "SuperStarTrail_Frame0_Mapping": 20,
+        "SuperStarTrail_Frames1_5_Mapping": 22,
+        "SuperStarTrail_Frames2_4_Mapping": 30,
+        "SuperStarTrail_Frame3_Mapping": 56,
+        "SuperStarBurst_Frames0_2_Mapping": 82,
+        "SuperStarBurst_Frame1_Mapping": 90,
+        "SuperStarBurst_Frame3_Mapping": 98
       },
       "external_symbols": [],
       "blocks": [
@@ -31750,70 +31750,70 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_192F2",
+          "target": "SuperStarTrail_Frame0_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_192F4",
+          "target": "SuperStarTrail_Frames1_5_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_192FC",
+          "target": "SuperStarTrail_Frames2_4_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19316",
+          "target": "SuperStarTrail_Frame3_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_192FC",
+          "target": "SuperStarTrail_Frames2_4_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_192F4",
+          "target": "SuperStarTrail_Frames1_5_Mapping",
           "base": "Map_SuperSonic_Stars_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19330",
+          "target": "SuperStarBurst_Frames0_2_Mapping",
           "base": "Map_SuperSonic_Stars2_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19338",
+          "target": "SuperStarBurst_Frame1_Mapping",
           "base": "Map_SuperSonic_Stars2_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19330",
+          "target": "SuperStarBurst_Frames0_2_Mapping",
           "base": "Map_SuperSonic_Stars2_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_19340",
+          "target": "SuperStarBurst_Frame3_Mapping",
           "base": "Map_SuperSonic_Stars2_"
         },
         {

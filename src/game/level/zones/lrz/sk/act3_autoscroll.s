@@ -404,7 +404,7 @@ loc_7944C:
                 dbf     d6,loc_7944C
                 jsr     (AllocateObject).l
                 bne.s   loc_7946A
-                move.l  #loc_85E64,(a1)
+                move.l  #SKPalEffect_InitWhiteAndLockRotation,(a1)
                 move.w  a1,$44(a0)
                 move.w  #3,$3A(a1)
 
@@ -427,7 +427,7 @@ loc_79486:
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
                 bne.s   loc_794BE
-                move.l  #loc_85EE6,(a1)
+                move.l  #SKPalEffect_InitTargetPasses,(a1)
                 move.w  a1,$44(a0)
 
 loc_794BE:

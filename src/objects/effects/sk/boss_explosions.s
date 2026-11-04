@@ -73,9 +73,9 @@ CreateBossExp20:    dc.b    $80, $20, $20, $30
 Obj_WaitForParent:
                 movea.w parent3(a0),a1
                 btst    #5,$38(a1)
-                bne.w   loc_83EC2
+                bne.w   SKBossExpl_DeleteController
                 tst.l   (a1)
-                beq.w   loc_83EC2
+                beq.w   SKBossExpl_DeleteController
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 jmp     Obj_Wait(pc)
@@ -83,12 +83,12 @@ Obj_WaitForParent:
 
 Obj_BossExpControl1:
                 move.b  $39(a0),d0
-                bmi.s   loc_83E7E                       ; If negative, explosions are constantly created every three frames
+                bmi.s   SKBossExpl_ResetSpawnWait       ; If negative, explosions are constantly created every three frames
                 subq.b  #1,d0
                 move.b  d0,$39(a0)                      ; Otherwise, continue making explosions until timer runs out
-                beq.s   loc_83EC2
+                beq.s   SKBossExpl_DeleteController
 
-loc_83E7E:
+SKBossExpl_ResetSpawnWait:
                 move.w  #2,$2E(a0)
 
 ; =============== S U B R O U T I N E =======================================
@@ -96,9 +96,9 @@ loc_83E7E:
 BossExplosionSKSpawnAtMaskedRandomOffset:
                 lea     Child6_MakeBossExplosion1(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.w   locret_83EC0
+                bne.w   SKBossExpl_SpawnReturn
 
-loc_83E90:
+SKBossExpl_ApplyRandomOffset:
                 jsr     (Random_Number).l               ; Offset the explosion by a random amount capped by an effective range
                 moveq   #0,d1
                 move.b  $3A(a0),d1
@@ -118,46 +118,46 @@ loc_83E90:
                 sub.w   d1,d0
                 add.w   d0,y_pos(a1)
 
-locret_83EC0:
+SKBossExpl_SpawnReturn:
                 rts
 ; End of function BossExplosionSKSpawnAtMaskedRandomOffset
 
 ; ---------------------------------------------------------------------------
 
-loc_83EC2:
+SKBossExpl_DeleteController:
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
 Obj_NormalExpControl:
                 subq.b  #1,$39(a0)                      ; Same as above, but uses regular explosions (no animals of course)
-                beq.s   loc_83EC2
+                beq.s   SKBossExpl_DeleteController
                 move.w  #2,$2E(a0)
                 lea     Child6_MakeNormalExplosion(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.w   locret_83EC0
+                bne.w   SKBossExpl_SpawnReturn
                 move.b  #2,routine(a1)
                 bset    #7,art_tile(a1)
-                bra.s   loc_83E90
+                bra.s   SKBossExpl_ApplyRandomOffset
 ; ---------------------------------------------------------------------------
 
 Obj_BossExpControl2:
                 subq.b  #1,$39(a0)
-                beq.s   loc_83EC2
+                beq.s   SKBossExpl_DeleteController
                 move.w  #2,$2E(a0)
                 lea     Child6_MakeBossExplosion2(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.w   locret_83EC0
-                bra.s   loc_83E90
+                bne.w   SKBossExpl_SpawnReturn
+                bra.s   SKBossExpl_ApplyRandomOffset
 ; ---------------------------------------------------------------------------
 
 Obj_BossExpControlOff:
                 subq.b  #1,$39(a0)
-                beq.s   loc_83EC2
+                beq.s   SKBossExpl_DeleteController
                 move.w  #2,$2E(a0)
                 lea     Child6_MakeBossExplosionOff(pc),a2
                 jsr     CreateChild6_Simple(pc)
-                bne.w   locret_83EC0
-                bra.w   loc_83E90
+                bne.w   SKBossExpl_SpawnReturn
+                bra.w   SKBossExpl_ApplyRandomOffset
 ; ---------------------------------------------------------------------------
 
 Obj_BossExplosionSpecial:
@@ -176,7 +176,7 @@ Obj_BossExplosion1:
                 lea     ObjDat_BossExplosion1(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
 
-loc_83F52:
+SKBossExpl_InitRawAnimAndSound:
                 move.l  #Obj_BossExplosionAnim,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 moveq   #signextendB(sfx_Explode),d0
@@ -191,7 +191,7 @@ Obj_BossExplosionAnim:
 Obj_BossExplosion2:
                 lea     ObjDat_BossExplosion2(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                bra.s   loc_83F52
+                bra.s   SKBossExpl_InitRawAnimAndSound
 ; ---------------------------------------------------------------------------
 
 Obj_BossExplosionOffset:
@@ -240,4 +240,4 @@ Child6_MakeNormalExplosion:
                 dc.l    Obj_Explosion
 Map_BossExplosion:
                 include "src/objects/shared/boss_explosion/mappings/boss_explosion.s"
-; End of function loc_83EC2
+; End of function SKBossExpl_DeleteController

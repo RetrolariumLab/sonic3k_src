@@ -348,7 +348,7 @@ loc_2AB98:
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.s   loc_2ABFC
-                move.l  #loc_1C31E,(a1)
+                move.l  #S3Explosion_InitHighPriorityDelayed,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),anim_frame_timer(a1)
