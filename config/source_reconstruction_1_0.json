@@ -807,9 +807,15 @@
       "commits": ["6f4587ab040e4cae0eca368849b76184deebcac5"]
     },
     {
-      "id": "current-reversible-semantic-tokens",
+      "id": "change-15afb64f15d7",
       "kind": "tooling",
       "summary": "Bind reviewed destination names and exact symbol-token edits; restore historical source views without admitting instruction, literal or context changes.",
+      "commits": ["15afb64f15d7cfe86424217518474ea3dc437d16"]
+    },
+    {
+      "id": "current-semantic-01-audio",
+      "kind": "source_or_tooling",
+      "summary": "Apply reviewed physical labels and all frozen source-token references for subsystem 01-audio; retain exact reversible source proof and original ROM bytes.",
       "commits": ["release-commit"]
     }
   ],

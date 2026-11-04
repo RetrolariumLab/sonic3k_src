@@ -7,9 +7,9 @@ Obj_Song_Fade_ToLevelMusic:
                 move.w  #2*60,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                move.l  #loc_85B1E,(a0)
+                move.l  #SKLevelMusic_WaitForFadeThenRestoreLevelAndDelete,(a0)
 
-loc_85B1E:
+SKLevelMusic_WaitForFadeThenRestoreLevelAndDelete:
                 subq.w  #1,$2E(a0)
                 bpl.w   locret_8405E
                 bsr.w   Restore_LevelMusic
@@ -20,9 +20,9 @@ Obj_Song_Fade_Transition:
                 move.w  #90,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                move.l  #loc_85B44,(a0)
+                move.l  #SKLevelMusic_WaitNinetyTimerThenLatchSubtypeMusicAndDelete,(a0)
 
-loc_85B44:
+SKLevelMusic_WaitNinetyTimerThenLatchSubtypeMusicAndDelete:
                 subq.w  #1,$2E(a0)
                 bpl.w   locret_8405E
                 move.b  subtype(a0),d0
@@ -42,9 +42,9 @@ Restore_LevelMusic:
                 move.b  (a2,d0.w),d0
                 move.w  d0,(Current_music).w
                 btst    #Status_Invincible,(Player_1+status_secondary).w
-                beq.s   loc_85B84
+                beq.s   SKLevelMusic_TailPlayLevelOrInvincibilityOverride
                 moveq   #signextendB(mus_Invincibility),d0  ; If invincible, play invincibility
 
-loc_85B84:
+SKLevelMusic_TailPlayLevelOrInvincibilityOverride:
                 jmp     (Play_Music).l
 ; End of function Restore_LevelMusic

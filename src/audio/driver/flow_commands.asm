@@ -44,7 +44,7 @@ cfSetModulation:
 cfStopTrack:
                 res     7, (ix+zTrack.PlaybackControl)  ; Clear 'track playing' flag
                 ld      a, 1Fh                          ; a = 1Fh
-                ld      (unk_1C15), a                   ; Set otherwise unused location to 1Fh
+                ld      (zDriverRetained_StopTrackWriteOnlyLatch), a  ; Set otherwise unused location to 1Fh
                 call    zKeyOffIfActive                 ; Send key off for track channel
                 ld      c, (ix+zTrack.VoiceControl)     ; c = voice control bits
                 push    ix                              ; Save track pointer
@@ -57,7 +57,7 @@ cfStopTrack:
                 jp      z, zStopCleanExit               ; Exit if not
                 endif
                 xor     a                               ; a = 0
-                ld      (unk_1C18), a                   ; Set otherwise unused value to zero
+                ld      (zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch), a  ; Set otherwise unused value to zero
                 push    hl                              ; Save hl
                 ld      hl, (zVoiceTblPtr)              ; hl = pointer to voice table
                 pop     ix                              ; ix = overridden track's pointer

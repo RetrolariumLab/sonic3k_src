@@ -44,7 +44,7 @@ zPlaySoundByIndex:
                 ld      hl, zFadeEffects                ; hl = switch table pointer
                 rst     PointerTableOffset              ; Get address of function that handles the fade effect
                 xor     a                               ; Set a = 0
-                ld      (unk_1C18), a                   ; Set otherwise unused value to zero
+                ld      (zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch), a  ; Set otherwise unused value to zero
                 jp      (hl)                            ; Handle fade effect
 ; End of function zPlaySoundByIndex
 ; ---------------------------------------------------------------------------
@@ -171,8 +171,9 @@ zBGMLoad:
                 adc     a, h                            ; a += h, plus 1 if a + l overflowed the 8-bit register
                 sub     l                               ; Now, a = high byte of offset into music entry
                 ld      h, a                            ; hl is the offset to the music bank
-                ld      (loc_5EB+1), hl                 ; Store into next instruction (self-modifying code)
-loc_5EB:
+                ld      (zMusicLoad_ReadBankThroughPatchedAbsoluteOperand+1), hl  ; Store into next instruction (self-modifying code)
+; The preceding write patches this instruction's 16-bit bank-table operand
+zMusicLoad_ReadBankThroughPatchedAbsoluteOperand:
                 ld      a, (z80_MusicBanks)             ; self-modified code; a is set to correct bank for the song to play
                 ld      (zSongBank), a                  ; Save the song's bank
                 if      SonicDriverVer==3
@@ -345,7 +346,7 @@ zPlaySound:
                 rst     ReadPointer                     ; hl = voice table pointer
                 ld      (zSFXVoiceTblPtr), hl           ; Save to RAM
                 xor     a                               ; a = 0
-                ld      (unk_1C15), a                   ; Set otherwise unused location to zero
+                ld      (zDriverRetained_StopTrackWriteOnlyLatch), a  ; Set otherwise unused location to zero
                 pop     hl                              ; hl = pointer to SFX data
                 push    hl                              ; Save it again
                 pop     iy                              ; iy = pointer to SFX data

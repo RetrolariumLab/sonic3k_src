@@ -117,13 +117,14 @@ zHaltFlag:          ds.b    1
 zFM3Settings:       ds.b    1                           ; Set twice, never read (is read in Z80 Type 1 for YM timer-related purposes)
 zTempoAccumulator:  ds.b    1
                 ds.b    1                               ; unused
-unk_1C15:           ds.b    1                           ; Set twice, never read
-zFadeToPrevFlag:    ds.b    1
-unk_1C17:           ds.b    1                           ; Set once, never read
-unk_1C18:           ds.b    1                           ; Set twice, never read
-zUpdatingSFX:       ds.b    1
+; Retained write-only stop-track latch; preserve its byte and cleanup writes
+zDriverRetained_StopTrackWriteOnlyLatch:            ds.b    1  ; Set twice, never read
+zFadeToPrevFlag:                                    ds.b    1
+zDriverRetained_RefreshRegisterWriteOnlySnapshot:   ds.b    1  ; Set once, never read
+zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch:    ds.b    1  ; Set twice, never read
+zUpdatingSFX:                                       ds.b    1
                 ds.b    7                               ; unused
-unk_1C21:       ds.b    1                               ; Set once, never read
+zDriverRetained_S3UpdateWriteOnlyClearByte: ds.b    1   ; Set once, never read
                 ds.b    2                               ; unused
 zCurrentTempo:      ds.b    1
 zContinuousSFX:     ds.b    1

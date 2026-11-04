@@ -50,16 +50,17 @@ zUpdateDACTrack_GetDuration:
 ; ---------------------------------------------------------------------------
 ; loc_BE3
 zHandleDACCoordFlag:
-                ld      hl, loc_BE9                     ; hl = desired return address
+                ld      hl, zCoordination_ResumeDacStreamAfterCommand  ; hl = desired return address
                 jp      zHandleCoordFlag
 ; ---------------------------------------------------------------------------
-loc_BE9:
+; Synthetic RET target for resuming the DAC stream after a coordination command
+zCoordination_ResumeDacStreamAfterCommand:
                 inc     de                              ; Advance to next byte in track
                 jp      zUpdateDACTrack_cont            ; Continue processing DAC track
 ; ---------------------------------------------------------------------------
 ; loc_BED
 zHandleFMorPSGCoordFlag:
-                ld      hl, loc_BF9                     ; hl = desired return address
+                ld      hl, zCoordination_ResumeFmPsgStreamAfterCommand  ; hl = desired return address
 
 ; loc_BF0
 zHandleCoordFlag:
@@ -71,7 +72,7 @@ zHandleCoordFlag:
                 jp      (hl)                            ; Indirect jump to coordination flag handler
 ; End of function zUpdateDACTrack
 ; ---------------------------------------------------------------------------
-loc_BF9:
+zCoordination_ResumeFmPsgStreamAfterCommand:
                 inc     de                              ; Advance to next byte in track
                 jp      zGetNextNote_cont               ; Continue processing FM/PSG track
 ; ---------------------------------------------------------------------------

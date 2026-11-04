@@ -2766,7 +2766,7 @@
       "role": "z80-driver",
       "status": "owned",
       "address_space": "z80-driver-code",
-      "physical_lines": 168,
+      "physical_lines": 169,
       "origin": {
         "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
         "path": "Sound/Z80 Sound Driver.s",
@@ -2946,7 +2946,7 @@
       "role": "z80-driver",
       "status": "owned",
       "address_space": "declarations",
-      "physical_lines": 194,
+      "physical_lines": 195,
       "origin": {
         "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
         "path": "Sound/Z80 Sound Driver.s",
@@ -2966,7 +2966,7 @@
       "role": "z80-driver",
       "status": "owned",
       "address_space": "z80-driver-code",
-      "physical_lines": 560,
+      "physical_lines": 561,
       "origin": {
         "commit": "62002dc1e0ed0c8d77b3482bfe0ab2255827e6b7",
         "path": "Sound/Z80 Sound Driver.s",
