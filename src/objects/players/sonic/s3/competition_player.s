@@ -36,10 +36,10 @@ S3SonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries:
 Sonic2P_Index:
                 dc.w    S3SonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot-Sonic2P_Index
                 dc.w    S3SonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB-Sonic2P_Index
-                dc.w    S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic2P_Index
-                dc.w    S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic2P_Index
-                dc.w    S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic2P_Index
-                dc.w    S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic2P_Index
+                dc.w    S3Recovery_HurtState4-Sonic2P_Index
+                dc.w    S3Recovery_DeathState6-Sonic2P_Index
+                dc.w    S3Recovery_RestartState8-Sonic2P_Index
+                dc.w    S3Recovery_ScrollWaitStateA-Sonic2P_Index
 ; ---------------------------------------------------------------------------
 
 S3SonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot:

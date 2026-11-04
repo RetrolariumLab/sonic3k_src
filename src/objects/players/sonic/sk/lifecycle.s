@@ -44,11 +44,11 @@ Sonic_Normal:
 Sonic_Index:
                 dc.w    Sonic_Init-Sonic_Index          ; 0
                 dc.w    Sonic_Control-Sonic_Index       ; 2
-                dc.w    SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic_Index  ; 4
-                dc.w    SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic_Index  ; 6
-                dc.w    SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic_Index  ; 8
-                dc.w    SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic_Index  ; $A
-                dc.w    SKPlayerRecovery_DrowningStateCWithDebugPlacementEscape-Sonic_Index  ; $C
+                dc.w    SKRecovery_HurtState4-Sonic_Index  ; 4
+                dc.w    SKRecovery_DeathState6-Sonic_Index  ; 6
+                dc.w    SKRecovery_RestartState8-Sonic_Index  ; 8
+                dc.w    SKRecovery_ScrollWaitStateA-Sonic_Index  ; $A
+                dc.w    SKRecovery_DrowningStateC-Sonic_Index  ; $C
 ; ---------------------------------------------------------------------------
 
 Sonic_Init:                                             ; Routine 0

@@ -367,7 +367,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
       ],
-      "destination_sha256": "03d8a48a2d6b10a66efb0222445dc6ba8a1ed7785eee86077a7fae37677f5df4"
+      "destination_sha256": "c2e4b8854155d3cffefa5c51dde1f55040702867cc43806d197c75c478151512"
     },
     {
       "id": "06-player-sonic",

@@ -27,23 +27,24 @@ AirCountdown_Init:
                 addq.b  #2,routine(a0)
                 move.l  #Map_Bubbler,mappings(a0)
                 tst.b   parent+1(a0)
-                beq.s   SKAirSupply_InitializeAirActorRenderAndDecodeControllerSubtype
+                beq.s   SKAirSupply_InitActorBySubtype
                 move.l  #Map_Bubbler2,mappings(a0)
 
-SKAirSupply_InitializeAirActorRenderAndDecodeControllerSubtype:
+; A negative subtype selects the countdown controller. The lower seven bits set its repeat budget
+SKAirSupply_InitActorBySubtype:
                 move.w  #make_art_tile(ArtTile_Bubbles,0,0),art_tile(a0)
                 move.b  #$84,render_flags(a0)
                 move.b  #$10,width_pixels(a0)
                 move.w  #$80,priority(a0)
                 move.b  subtype(a0),d0
-                bpl.s   SKAirSupply_InitializeRisingChildAnimationCenterAndVelocity
+                bpl.s   SKAirSupply_InitRisingBubble
                 addq.b  #8,routine(a0)
                 andi.w  #$7F,d0
                 move.b  d0,$37(a0)
                 bra.w   AirCountdown_Countdown
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_InitializeRisingChildAnimationCenterAndVelocity:
+SKAirSupply_InitRisingBubble:
                 move.b  d0,anim(a0)
                 move.w  x_pos(a0),$34(a0)
                 move.w  #-$100,y_vel(a0)
@@ -68,10 +69,10 @@ AirCountdown_ChkWater:
 
 AirCountdown_Wobble:
                 tst.w   (WindTunnel_flag).w
-                beq.s   SKAirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace
+                beq.s   SKAirSupply_WobbleBubbleAndShowNumber
                 addq.w  #4,$34(a0)
 
-SKAirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace:
+SKAirSupply_WobbleBubbleAndShowNumber:
                 move.b  angle(a0),d0
                 addq.b  #1,angle(a0)
                 andi.w  #$7F,d0
@@ -83,11 +84,11 @@ SKAirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace:
                 bsr.w   AirCountdown_ShowNumber
                 jsr     (MoveSprite2).l
                 tst.b   render_flags(a0)
-                bpl.s   SKAirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss
+                bpl.s   SKAirSupply_DeleteOffscreenBubble
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss:
+SKAirSupply_DeleteOffscreenBubble:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 ; AirCountdown_Display and AirCountdown_DisplayNumber were split in this
@@ -110,7 +111,7 @@ AirCountdown_Delete:
 AirCountdown_AirLeft:
                 movea.l $40(a0),a2                      ; a2=character
                 cmpi.b  #12,air_left(a2)                ; check air remaining
-                bhi.s   SKAirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible  ; if higher than 12, branch
+                bhi.s   SKAirSupply_DeleteExpiredWarning  ; if higher than 12, branch
                 subq.w  #1,$3C(a0)
                 bne.s   AirCountdown_Display2
                 move.b  #$E,routine(a0)
@@ -123,11 +124,11 @@ AirCountdown_Display2:
                 jsr     (Animate_Sprite).l
                 bsr.w   AirCountdown_Load_Art
                 tst.b   render_flags(a0)
-                bpl.s   SKAirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible
+                bpl.s   SKAirSupply_DeleteExpiredWarning
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible:
+SKAirSupply_DeleteExpiredWarning:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -144,11 +145,11 @@ AirCountdown_DisplayNumber:
 
 AirCountdown_ShowNumber:
                 tst.w   $3C(a0)
-                beq.s   SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion
+                beq.s   SKAirSupply_ShowNumberReturn
                 subq.w  #1,$3C(a0)
-                bne.s   SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion
+                bne.s   SKAirSupply_ShowNumberReturn
                 cmpi.b  #7,anim(a0)
-                bhs.s   SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion
+                bhs.s   SKAirSupply_ShowNumberReturn
                 move.w  #$F,$3C(a0)
                 clr.w   y_vel(a0)
                 move.b  #$80,render_flags(a0)
@@ -162,7 +163,7 @@ AirCountdown_ShowNumber:
                 move.w  d0,y_pos(a0)
                 move.b  #$C,routine(a0)
 
-SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion:
+SKAirSupply_ShowNumberReturn:
                 rts
 ; End of function AirCountdown_ShowNumber
 
@@ -194,11 +195,11 @@ AirCountdown_Load_Art:
                 moveq   #0,d1
                 move.b  mapping_frame(a0),d1
                 cmpi.b  #9,d1
-                blo.s   SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad
+                blo.s   SKAirSupply_LoadWarningArtReturn
                 cmpi.b  #$13,d1
-                bhs.s   SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad
+                bhs.s   SKAirSupply_LoadWarningArtReturn
                 cmp.b   $32(a0),d1
-                beq.s   SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad
+                beq.s   SKAirSupply_LoadWarningArtReturn
                 move.b  d1,$32(a0)
                 subi.w  #9,d1
                 move.w  d1,d0
@@ -208,14 +209,14 @@ AirCountdown_Load_Art:
                 addi.l  #ArtUnc_AirCountdown,d1
                 move.w  #tiles_to_bytes(ArtTile_DashDust),d2
                 tst.b   parent+1(a0)
-                beq.s   SKAirSupply_QueueSixTileWarningArtIntoSelectedDustVram
+                beq.s   SKAirSupply_QueueWarningArt6Tiles
                 move.w  #tiles_to_bytes(ArtTile_DashDust_P2),d2
 
-SKAirSupply_QueueSixTileWarningArtIntoSelectedDustVram:
+SKAirSupply_QueueWarningArt6Tiles:
                 move.w  #$60,d3
                 jsr     (Add_To_DMA_Queue).l
 
-SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad:
+SKAirSupply_LoadWarningArtReturn:
                 rts
 ; End of function AirCountdown_Load_Art
 
@@ -224,17 +225,17 @@ SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad:
 AirCountdown_Countdown:
                 movea.l $40(a0),a2                      ; a2=character
                 tst.w   $30(a0)
-                bne.w   SKAirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero
+                bne.w   SKAirSupply_TickDrowningUntilDeath
                 cmpi.b  #6,routine(a2)
-                bhs.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bhs.w   SKAirSupply_BubbleBatchReturn
                 btst    #Status_BublShield,status_secondary(a2)
-                bne.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bne.w   SKAirSupply_BubbleBatchReturn
                 tst.b   (Super_Sonic_Knux_flag).w
-                bmi.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bmi.w   SKAirSupply_BubbleBatchReturn
                 btst    #Status_Underwater,status(a2)
-                beq.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                beq.w   SKAirSupply_BubbleBatchReturn
                 subq.w  #1,$3C(a0)
-                bpl.w   SKAirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive
+                bpl.w   SKAirSupply_TickActiveBatchSpacing
                 move.w  #60-1,$3C(a0)
                 move.w  #1,$3A(a0)
                 jsr     (Random_Number).l
@@ -250,13 +251,13 @@ AirCountdown_Countdown:
                 beq.s   AirCountdown_WarnSound          ; play ding sound if air is 15
                 cmpi.w  #12,d0
                 bhi.s   AirCountdown_ReduceAir
-                bne.s   SKAirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks
+                bne.s   SKAirSupply_TickWarningNumberBudget
                 tst.b   parent+1(a0)
-                bne.s   SKAirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks
+                bne.s   SKAirSupply_TickWarningNumberBudget
                 moveq   #signextendB(mus_Drowning),d0
                 jsr     (Play_Music).l
 
-SKAirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks:
+SKAirSupply_TickWarningNumberBudget:
                 subq.b  #1,$36(a0)
                 bpl.s   AirCountdown_ReduceAir
                 move.b  $37(a0),$36(a0)
@@ -272,7 +273,7 @@ AirCountdown_WarnSound:
 
 AirCountdown_ReduceAir:
                 subq.b  #1,air_left(a2)
-                bcc.w   SKAirSupply_EmitImmediatelyAfterNonUnderflowingAirTick
+                bcc.w   SKAirSupply_EmitAfterAirTick
                 move.b  #$81,object_control(a2)
                 move.w  #sfx_Drown,d0
                 jsr     (Play_SFX).l
@@ -293,34 +294,34 @@ AirCountdown_ReduceAir:
                 move.b  #$C,routine(a0)
                 movea.l (sp)+,a0
                 cmpa.w  #Player_1,a2
-                bne.s   SKAirSupply_ReturnAfterStartingDrowningPlayerState
+                bne.s   SKAirSupply_StartDrowningReturn
                 move.b  #1,(Deform_lock).w
 
-SKAirSupply_ReturnAfterStartingDrowningPlayerState:
+SKAirSupply_StartDrowningReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero:
+SKAirSupply_TickDrowningUntilDeath:
                 move.b  #$17,anim(a2)
                 subq.w  #1,$30(a0)
-                bne.s   SKAirSupply_ContinueDrowningEmissionGateBeforeDelayEnds
+                bne.s   SKAirSupply_ContinueDrowningBubbles
                 move.b  #6,routine(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_ContinueDrowningEmissionGateBeforeDelayEnds:
-                bra.s   SKAirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive
+SKAirSupply_ContinueDrowningBubbles:
+                bra.s   SKAirSupply_TickActiveBatchSpacing
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_EmitImmediatelyAfterNonUnderflowingAirTick:
+SKAirSupply_EmitAfterAirTick:
                 bra.s   AirCountdown_MakeItem
 ; ---------------------------------------------------------------------------
 
-SKAirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive:
+SKAirSupply_TickActiveBatchSpacing:
                 tst.w   $3A(a0)
-                beq.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                beq.w   SKAirSupply_BubbleBatchReturn
                 subq.w  #1,$3E(a0)
-                bpl.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bpl.w   SKAirSupply_BubbleBatchReturn
 
 AirCountdown_MakeItem:
                 jsr     (Random_Number).l
@@ -328,22 +329,22 @@ AirCountdown_MakeItem:
                 addq.w  #8,d0
                 move.w  d0,$3E(a0)
                 jsr     (AllocateObject).l
-                bne.w   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bne.w   SKAirSupply_BubbleBatchReturn
                 move.l  (a0),(a1)                       ; load Obj_Air_Countdown
                 move.w  x_pos(a2),x_pos(a1)             ; match its X position to Sonic
                 moveq   #6,d0
                 btst    #Status_Facing,status(a2)
-                beq.s   SKAirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant
+                beq.s   SKAirSupply_PlaceChildAndChooseVariant
                 neg.w   d0
                 move.b  #$40,angle(a1)
 
-SKAirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant:
+SKAirSupply_PlaceChildAndChooseVariant:
                 add.w   d0,x_pos(a1)
                 move.w  y_pos(a2),y_pos(a1)
                 move.l  $40(a0),$40(a1)
                 move.b  #6,subtype(a1)
                 tst.w   $30(a0)
-                beq.w   SKAirSupply_TryOneLowAirNumberChildPerMarkedBatch
+                beq.w   SKAirSupply_TryNumberOncePerBatch
                 andi.w  #7,$3E(a0)
                 addi.w  #0,$3E(a0)
                 move.w  y_pos(a2),d0
@@ -353,70 +354,71 @@ SKAirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant:
                 move.b  d0,angle(a1)
                 move.w  (Level_frame_counter).w,d0
                 andi.b  #3,d0
-                bne.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bne.s   SKAirSupply_ConsumeChildBudget
                 move.b  #$E,subtype(a1)
-                bra.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bra.s   SKAirSupply_ConsumeChildBudget
 ; ---------------------------------------------------------------------------
 ; has something to do with making bubbles come out less regularly
 ; when Sonic is almost drowning
-SKAirSupply_TryOneLowAirNumberChildPerMarkedBatch:
+SKAirSupply_TryNumberOncePerBatch:
                 btst    #7,$3A(a0)
-                beq.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                beq.s   SKAirSupply_ConsumeChildBudget
                 moveq   #0,d2
                 move.b  air_left(a2),d2
                 cmpi.b  #12,d2
-                bhs.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bhs.s   SKAirSupply_ConsumeChildBudget
                 lsr.w   #1,d2
                 jsr     (Random_Number).l
                 andi.w  #3,d0
-                bne.s   SKAirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild
+                bne.s   SKAirSupply_PutMissingNumberOnLastChild
                 bset    #6,$3A(a0)
-                bne.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bne.s   SKAirSupply_ConsumeChildBudget
                 move.b  d2,subtype(a1)
                 move.w  #$1C,$3C(a1)
 
-SKAirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild:
+SKAirSupply_PutMissingNumberOnLastChild:
                 tst.b   $38(a0)
-                bne.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bne.s   SKAirSupply_ConsumeChildBudget
                 bset    #6,$3A(a0)
-                bne.s   SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow
+                bne.s   SKAirSupply_ConsumeChildBudget
                 move.b  d2,subtype(a1)
                 move.w  #$1C,$3C(a1)
 
-SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow:
+SKAirSupply_ConsumeChildBudget:
                 subq.b  #1,$38(a0)
-                bpl.s   SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt
+                bpl.s   SKAirSupply_BubbleBatchReturn
                 clr.w   $3A(a0)
 
-SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt:
+SKAirSupply_BubbleBatchReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
 Player_ResetAirTimer:
                 cmpi.b  #12,air_left(a1)
-                bhi.s   SKAirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage  ; branch if countdown hasn't started yet
+                bhi.s   SKAirSupply_RefillAir30         ; branch if countdown hasn't started yet
                 cmpa.w  #Player_1,a1
-                bne.s   SKAirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage  ; branch if it isn't player 1
+                bne.s   SKAirSupply_RefillAir30         ; branch if it isn't player 1
                 move.w  (Current_music).w,d0            ; prepare to play current level's music
                 btst    #Status_Invincible,status_secondary(a1)
-                beq.s   SKAirSupply_OverrideRestoredAirMusicForAnyTransformationFlag  ; branch if Sonic is not invincible
+                beq.s   SKAirSupply_SelectTransformMusic  ; branch if Sonic is not invincible
                 move.w  #mus_Invincibility,d0           ; prepare to play invincibility music
 
-SKAirSupply_OverrideRestoredAirMusicForAnyTransformationFlag:
+SKAirSupply_SelectTransformMusic:
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.w   SKAirSupply_OverrideRestoredAirMusicForActiveBossFlag  ; branch if it isn't Super/Hyper
+                beq.w   SKAirSupply_SelectBossMusic     ; branch if it isn't Super/Hyper
                 move.w  #mus_Invincibility,d0           ; prepare to play Super Sonic music (same as invincibility in this game)
 
-SKAirSupply_OverrideRestoredAirMusicForActiveBossFlag:
+SKAirSupply_SelectBossMusic:
                 tst.b   (Boss_flag).w
-                beq.s   SKAirSupply_PlaySelectedRestoredMusicBeforeResettingAir  ; branch if not in a boss fight
+                beq.s   SKAirSupply_PlayRestoredMusic   ; branch if not in a boss fight
                 move.w  #mus_MinibossK,d0               ; prepare to play boss music
 
-SKAirSupply_PlaySelectedRestoredMusicBeforeResettingAir:
+SKAirSupply_PlayRestoredMusic:
                 jsr     (Play_Music).l
 
-SKAirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage:
+; Refilling the air byte preserves the countdown controller's current stage
+SKAirSupply_RefillAir30:
                 move.b  #30,air_left(a1)                ; reset air to full
                 rts
 ; End of function Player_ResetAirTimer

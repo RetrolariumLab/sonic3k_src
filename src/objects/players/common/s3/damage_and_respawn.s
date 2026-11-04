@@ -4,30 +4,31 @@
 
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape:
+S3Recovery_HurtState4:
                 tst.w   (Debug_mode_flag).w
-                beq.s   S3PlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
+                beq.s   S3Recovery_MoveHurtAndApplyGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3PlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
+                beq.s   S3Recovery_MoveHurtAndApplyGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity:
+S3Recovery_MoveHurtAndApplyGravity:
                 jsr     (MoveSprite2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   S3PlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum
+                beq.s   S3Recovery_WrapHurtYIfEnabled
                 subi.w  #$20,y_vel(a0)
 
-S3PlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum:
+; Mask integer Y only when the camera minimum equals -$100
+S3Recovery_WrapHurtYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   S3PlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw
+                bne.s   S3Recovery_ResolveHurtAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-S3PlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw:
+S3Recovery_ResolveHurtAndDraw:
                 bsr.w   PlayerS3ResolveCommonHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
@@ -38,18 +39,18 @@ S3PlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw:
 
 PlayerS3ResolveCommonHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   S3PlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
+                bne.s   S3Recovery_CheckHurtLandingAndReset
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   S3PlayerRecovery_TailCallCharacterKillFromHurtDeathPlane
+                blt.w   S3Recovery_KillAtHurtDeathPlane
 
-S3PlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded:
+S3Recovery_CheckHurtLandingAndReset:
                 movem.l a4-a6,-(sp)
                 bsr.w   Sonic_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   S3PlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset
+                bne.s   S3Recovery_HurtLandingReturn
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -61,27 +62,27 @@ S3PlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-S3PlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset:
+S3Recovery_HurtLandingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_TailCallCharacterKillFromHurtDeathPlane:
+S3Recovery_KillAtHurtDeathPlane:
                 jmp     (Kill_Character).l
 ; End of function PlayerS3ResolveCommonHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape:
+S3Recovery_DeathState6:
                 tst.w   (Debug_mode_flag).w
-                beq.s   S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
+                beq.s   S3Recovery_ResolveDeathAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
+                beq.s   S3Recovery_ResolveDeathAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw:
+S3Recovery_ResolveDeathAndDraw:
                 bsr.w   PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite).l
                 bsr.w   Sonic_RecordPos
@@ -92,43 +93,44 @@ S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw:
 
 PlayerS3FinishDeathWithFollowerResetRestartOrCompetitionRespawn:
                 cmpa.w  #Player_1,a0
-                bne.s   S3PlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold
+                bne.s   S3Recovery_LockP2ScrollAndReadCameraY
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock).w
-                bra.s   S3PlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy
+                bra.s   S3Recovery_PrepareDeathExitDepth
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold:
+; The secondary player uses the primary camera Y for this death threshold
+S3Recovery_LockP2ScrollAndReadCameraY:
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock_P2).w
 
-S3PlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy:
+S3Recovery_PrepareDeathExitDepth:
                 move.b  #0,spin_dash_flag(a0)
                 addi.w  #$100,d0
                 tst.w   (Competition_mode).w
-                beq.s   S3PlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution
+                beq.s   S3Recovery_TestNormalDeathDepth
                 subi.w  #$70,d0
 
-S3PlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution:
+S3Recovery_TestNormalDeathDepth:
                 cmp.w   y_pos(a0),d0
-                bge.w   S3PlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
+                bge.w   S3Recovery_DeathFinishReturn
                 tst.w   (Competition_mode).w
-                bne.w   S3PlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot
+                bne.w   S3Recovery_RestoreCompP1OrP2
                 cmpi.b  #1,character_id(a0)
-                bne.s   S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
+                bne.s   S3Recovery_ChargeLifeAndPrepRestart
                 cmpi.w  #2,(Player_mode).w
-                beq.s   S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
+                beq.s   S3Recovery_ChargeLifeAndPrepRestart
                 move.b  #2,routine(a0)
                 bra.w   TailsS3ResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver:
+S3Recovery_ChargeLifeAndPrepRestart:
                 move.b  #8,routine(a0)
                 move.w  #60,$3E(a0)
                 move.b  #0,(Respawn_table_keep).w
                 addq.b  #1,(Update_HUD_life_count).w
                 subq.b  #1,(Life_count).w
-                bne.s   S3PlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge
+                bne.s   S3Recovery_TryTimeOverWithLivesLeft
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
@@ -137,7 +139,7 @@ S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver:
                 move.w  a0,(Reserved_object_3+objoff_3E).w
                 clr.b   (Time_over_flag).w
 
-S3PlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt:
+S3Recovery_StopTimersAndCueGameOver:
                 clr.b   (Update_HUD_timer).w
                 clr.b   (Update_HUD_timer_P2).w
                 move.b  #8,routine(a0)
@@ -147,26 +149,26 @@ S3PlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt:
                 jmp     (Load_PLC_2).l
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge:
+S3Recovery_TryTimeOverWithLivesLeft:
                 tst.b   (Time_over_flag).w
-                beq.s   S3PlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
+                beq.s   S3Recovery_DeathFinishReturn
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
                 move.b  #2,(Reserved_object_3+mapping_frame).w
                 move.b  #3,(Dynamic_object_RAM+mapping_frame).w
                 move.w  a0,(Reserved_object_3+objoff_3E).w
-                bra.s   S3PlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt
+                bra.s   S3Recovery_StopTimersAndCueGameOver
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation:
+S3Recovery_DeathFinishReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot:
+S3Recovery_RestoreCompP1OrP2:
                 move.b  #2,routine(a0)
                 cmpa.w  #Player_1,a0
-                bne.s   S3PlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState
+                bne.s   S3Recovery_RestoreCompP2Spawn
                 move.b  #0,(Scroll_lock).w
                 move.w  (Saved_X_pos).w,x_pos(a0)
                 move.w  (Saved_Y_pos).w,y_pos(a0)
@@ -175,10 +177,10 @@ S3PlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot:
                 clr.w   (Ring_count).w
                 clr.b   (Extra_life_flags).w
                 move.b  #1,(Competition_lap_count_flag).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
-                bra.s   S3PlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet
+                bra.s   S3Recovery_ResetCompMotionAndSpeeds
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState:
+S3Recovery_RestoreCompP2Spawn:
                 move.b  #0,(Scroll_lock_P2).w
                 move.w  (Saved2_X_pos).w,x_pos(a0)
                 move.w  (Saved2_Y_pos).w,y_pos(a0)
@@ -187,7 +189,7 @@ S3PlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState:
                 clr.w   (Ring_count_P2).w
                 move.b  #1,(Competition_lap_count_flag_P2).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
 
-S3PlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet:
+S3Recovery_ResetCompMotionAndSpeeds:
                 move.b  #0,object_control(a0)
                 move.b  #5,anim(a0)
                 move.w  #0,x_vel(a0)
@@ -210,40 +212,42 @@ S3PlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet:
 
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero:
+; Request a restart on the decrement to zero. An already-zero timer holds this state
+S3Recovery_RestartState8:
                 tst.w   $3E(a0)
-                beq.s   S3PlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
+                beq.s   S3Recovery_RestartReturn
                 subq.w  #1,$3E(a0)
-                bne.s   S3PlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
+                bne.s   S3Recovery_RestartReturn
                 move.w  #1,(Restart_level_flag).w
 
-S3PlayerRecovery_ReturnFromRestartTimerHoldOrCompletion:
+S3Recovery_RestartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero:
+; Restore control once both global scroll deltas are zero
+S3Recovery_ScrollWaitStateA:
                 tst.w   (H_scroll_amount).w
-                bne.s   S3PlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
+                bne.s   S3Recovery_DrawScrollWaitFrame
                 tst.w   (V_scroll_amount).w
-                bne.s   S3PlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
+                bne.s   S3Recovery_DrawScrollWaitFrame
                 move.b  #2,routine(a0)
 
-S3PlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume:
+S3Recovery_DrawScrollWaitFrame:
                 bsr.w   PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_DrowningStateCWithDebugPlacementEscape:
+S3Recovery_DrowningStateC:
                 tst.w   (Debug_mode_flag).w
-                beq.s   S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
+                beq.s   S3Recovery_MoveDrowningAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
+                beq.s   S3Recovery_MoveDrowningAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity:
+S3Recovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -254,12 +258,12 @@ S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity:
 
 PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
                 tst.w   (Competition_mode).w
-                bne.s   S3PlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns
+                bne.s   S3Recovery_AnimateCompAndLoadPatterns
                 bsr.s   Animate_Sonic
                 bra.w   Sonic_Load_PLC
 ; ---------------------------------------------------------------------------
 
-S3PlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns:
+S3Recovery_AnimateCompAndLoadPatterns:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
 ; End of function PlayerS3AnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns

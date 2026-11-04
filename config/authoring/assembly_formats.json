@@ -4839,24 +4839,24 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 146
       },
-      "declarations_sha256": "3d5e1ee5c6069c0abd37632fa8efc83d4817d0df664737af1b9df9ab8716dd06",
+      "declarations_sha256": "17b8e720cd014bd8c1b78f90024285367c0e1345e88d78261a2a0394f4a87476",
       "labels": {
         "Ani_AirCountdown_": 0,
-        "AirCountdown_Animation0_WarningValue0Formation": 30,
-        "AirCountdown_Animation1_WarningValue1Formation": 39,
-        "AirCountdown_Animation2_WarningValue2Formation": 48,
-        "AirCountdown_Animation3_WarningValue3Formation": 57,
-        "AirCountdown_Animation4_WarningValue4Formation": 66,
-        "AirCountdown_Animation5_WarningValue5Formation": 75,
-        "AirCountdown_Animation6_SmallBreathingBubbleFormation": 84,
-        "AirCountdown_Animation7_WarningValue0Blink": 89,
-        "AirCountdown_Animation8_WarningValue1Blink": 97,
-        "AirCountdown_Animation9_WarningValue2Blink": 105,
-        "AirCountdown_Animation10_WarningValue3Blink": 113,
-        "AirCountdown_Animation11_WarningValue4Blink": 121,
-        "AirCountdown_Animation12_WarningValue5Blink": 129,
-        "AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame": 137,
-        "AirCountdown_Animation14_DrowningBubbleFormation": 139
+        "AirCountdown_FormNumber0": 30,
+        "AirCountdown_FormNumber1": 39,
+        "AirCountdown_FormNumber2": 48,
+        "AirCountdown_FormNumber3": 57,
+        "AirCountdown_FormNumber4": 66,
+        "AirCountdown_FormNumber5": 75,
+        "AirCountdown_FormSmallBubble": 84,
+        "AirCountdown_BlinkNumber0": 89,
+        "AirCountdown_BlinkNumber1": 97,
+        "AirCountdown_BlinkNumber2": 105,
+        "AirCountdown_BlinkNumber3": 113,
+        "AirCountdown_BlinkNumber4": 121,
+        "AirCountdown_BlinkNumber5": 129,
+        "AirCountdown_SurfaceAdvance": 137,
+        "AirCountdown_FormDrowningBubble": 139
       },
       "external_symbols": [],
       "blocks": [
@@ -4864,105 +4864,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation0_WarningValue0Formation",
+          "target": "AirCountdown_FormNumber0",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation1_WarningValue1Formation",
+          "target": "AirCountdown_FormNumber1",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation2_WarningValue2Formation",
+          "target": "AirCountdown_FormNumber2",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation3_WarningValue3Formation",
+          "target": "AirCountdown_FormNumber3",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation4_WarningValue4Formation",
+          "target": "AirCountdown_FormNumber4",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation5_WarningValue5Formation",
+          "target": "AirCountdown_FormNumber5",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation6_SmallBreathingBubbleFormation",
+          "target": "AirCountdown_FormSmallBubble",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation7_WarningValue0Blink",
+          "target": "AirCountdown_BlinkNumber0",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation8_WarningValue1Blink",
+          "target": "AirCountdown_BlinkNumber1",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation9_WarningValue2Blink",
+          "target": "AirCountdown_BlinkNumber2",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation10_WarningValue3Blink",
+          "target": "AirCountdown_BlinkNumber3",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation11_WarningValue4Blink",
+          "target": "AirCountdown_BlinkNumber4",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation12_WarningValue5Blink",
+          "target": "AirCountdown_BlinkNumber5",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame",
+          "target": "AirCountdown_SurfaceAdvance",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "AirCountdown_Animation14_DrowningBubbleFormation",
+          "target": "AirCountdown_FormDrowningBubble",
           "base": "Ani_AirCountdown_"
         },
         {
@@ -5066,16 +5066,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 52
       },
-      "declarations_sha256": "b5932082b0030bd128366fbe4cfc8b11430b7edcad9b18e6343a273fbd646ac0",
+      "declarations_sha256": "f8a66b306718f56305c09330144a428b2c1c2b19897ada3fd64248f0e566985b",
       "labels": {
         "Ani_Bubbler_": 0,
         "Bubbler_Animation0_SmallBubbleFormation": 18,
         "Bubbler_Animation1_MediumBubbleFormation": 23,
-        "Bubbler_Animation2_LargeCollectableAirBubbleFormation": 29,
-        "Bubbler_Animation3_FastLargeBubbleFormation": 36,
-        "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance": 40,
-        "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop": 42,
-        "Bubbler_Animation8_StationaryGeneratorLoop": 46
+        "Bubbler_FormLargeAirBubble": 29,
+        "Bubbler_FormFastLargeBubble": 36,
+        "Bubbler_Anim45_SurfaceAdvance": 40,
+        "Bubbler_Anim67_LargePop": 42,
+        "Bubbler_GeneratorLoop": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -5097,49 +5097,49 @@
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation2_LargeCollectableAirBubbleFormation",
+          "target": "Bubbler_FormLargeAirBubble",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation3_FastLargeBubbleFormation",
+          "target": "Bubbler_FormFastLargeBubble",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance",
+          "target": "Bubbler_Anim45_SurfaceAdvance",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance",
+          "target": "Bubbler_Anim45_SurfaceAdvance",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop",
+          "target": "Bubbler_Anim67_LargePop",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop",
+          "target": "Bubbler_Anim67_LargePop",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_Animation8_StationaryGeneratorLoop",
+          "target": "Bubbler_GeneratorLoop",
           "base": "Ani_Bubbler_"
         },
         {
@@ -5200,7 +5200,7 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 242
       },
-      "declarations_sha256": "efd257b0c4708250ae6f0e03639aca4ba5963ffdff73b309b64b7feff98e862c",
+      "declarations_sha256": "d2abfab9526bb7221dab81c1d0d6432b294c72d9487171a724b103193ba921fd",
       "labels": {
         "Map_Bubbler_": 0,
         "Map_Bubbler2": 46,
@@ -5214,12 +5214,12 @@
         "Bubbler_Frame6_Mapping": 140,
         "Bubbler_Frame7_Mapping": 148,
         "Bubbler_Frame8_Mapping": 174,
-        "Bubbler_PrimaryWarningFrames9To18_Mapping": 200,
+        "Bubbler_MapP1WarningFrames9To18": 200,
         "Bubbler_Frame19_Mapping": 208,
         "Bubbler_Frame20_Mapping": 216,
         "Bubbler_Frame21_Mapping": 224,
         "Bubbler_Frame22_Mapping": 232,
-        "Bubbler_SecondaryWarningFrames9To18_Mapping": 234
+        "Bubbler_MapP2WarningFrames9To18": 234
       },
       "external_symbols": [],
       "blocks": [
@@ -5290,70 +5290,70 @@
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP1WarningFrames9To18",
           "base": "Map_Bubbler_"
         },
         {
@@ -5451,70 +5451,70 @@
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+          "target": "Bubbler_MapP2WarningFrames9To18",
           "base": "Map_Bubbler2_"
         },
         {

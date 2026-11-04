@@ -6,7 +6,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 32,
       "old": "loc_16F36",
-      "new": "S3AirSupply_InitializeAirActorRenderAndDecodeControllerSubtype",
+      "new": "S3AirSupply_InitActorBySubtype",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_InitializeAirActorRenderAndDecodeControllerSubtype."
     },
@@ -14,7 +14,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 45,
       "old": "loc_16F64",
-      "new": "S3AirSupply_InitializeRisingChildAnimationCenterAndVelocity",
+      "new": "S3AirSupply_InitRisingBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_InitializeRisingChildAnimationCenterAndVelocity."
     },
@@ -22,7 +22,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 73,
       "old": "loc_16FB0",
-      "new": "S3AirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace",
+      "new": "S3AirSupply_WobbleBubbleAndShowNumber",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace."
     },
@@ -30,7 +30,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 89,
       "old": "loc_16FE6",
-      "new": "S3AirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss",
+      "new": "S3AirSupply_DeleteOffscreenBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss."
     },
@@ -38,7 +38,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 129,
       "old": "loc_17044",
-      "new": "S3AirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible",
+      "new": "S3AirSupply_DeleteExpiredWarning",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible."
     },
@@ -46,7 +46,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 164,
       "old": "locret_170B4",
-      "new": "S3AirSupply_ReturnFromNumberPromotionTimerOrScreenConversion",
+      "new": "S3AirSupply_ShowNumberReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ReturnFromNumberPromotionTimerOrScreenConversion."
     },
@@ -54,7 +54,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 213,
       "old": "loc_171F2",
-      "new": "S3AirSupply_QueueSixTileWarningArtIntoSelectedDustVram",
+      "new": "S3AirSupply_QueueWarningArt6Tiles",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_QueueSixTileWarningArtIntoSelectedDustVram."
     },
@@ -62,7 +62,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 217,
       "old": "locret_171FC",
-      "new": "S3AirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad",
+      "new": "S3AirSupply_LoadWarningArtReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad."
     },
@@ -70,7 +70,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 256,
       "old": "loc_17278",
-      "new": "S3AirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks",
+      "new": "S3AirSupply_TickWarningNumberBudget",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks."
     },
@@ -78,7 +78,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 296,
       "old": "locret_1730A",
-      "new": "S3AirSupply_ReturnAfterStartingDrowningPlayerState",
+      "new": "S3AirSupply_StartDrowningReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ReturnAfterStartingDrowningPlayerState."
     },
@@ -86,7 +86,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 300,
       "old": "loc_1730C",
-      "new": "S3AirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero",
+      "new": "S3AirSupply_TickDrowningUntilDeath",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero."
     },
@@ -94,7 +94,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 308,
       "old": "loc_17320",
-      "new": "S3AirSupply_ContinueDrowningEmissionGateBeforeDelayEnds",
+      "new": "S3AirSupply_ContinueDrowningBubbles",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ContinueDrowningEmissionGateBeforeDelayEnds."
     },
@@ -102,7 +102,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 312,
       "old": "loc_17322",
-      "new": "S3AirSupply_EmitImmediatelyAfterNonUnderflowingAirTick",
+      "new": "S3AirSupply_EmitAfterAirTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_EmitImmediatelyAfterNonUnderflowingAirTick."
     },
@@ -110,7 +110,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 316,
       "old": "loc_17324",
-      "new": "S3AirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive",
+      "new": "S3AirSupply_TickActiveBatchSpacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive."
     },
@@ -118,7 +118,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 337,
       "old": "loc_17368",
-      "new": "S3AirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant",
+      "new": "S3AirSupply_PlaceChildAndChooseVariant",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant."
     },
@@ -126,7 +126,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 359,
       "old": "loc_173BA",
-      "new": "S3AirSupply_TryOneLowAirNumberChildPerMarkedBatch",
+      "new": "S3AirSupply_TryNumberOncePerBatch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_TryOneLowAirNumberChildPerMarkedBatch."
     },
@@ -134,7 +134,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 375,
       "old": "loc_173EE",
-      "new": "S3AirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild",
+      "new": "S3AirSupply_PutMissingNumberOnLastChild",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild."
     },
@@ -142,7 +142,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 383,
       "old": "loc_17406",
-      "new": "S3AirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow",
+      "new": "S3AirSupply_ConsumeChildBudget",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow."
     },
@@ -150,7 +150,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 388,
       "old": "locret_17410",
-      "new": "S3AirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt",
+      "new": "S3AirSupply_BubbleBatchReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt."
     },
@@ -158,7 +158,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 403,
       "old": "loc_17430",
-      "new": "S3AirSupply_OverrideRestoredAirMusicForAnyTransformationFlag",
+      "new": "S3AirSupply_SelectTransformMusic",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_OverrideRestoredAirMusicForAnyTransformationFlag."
     },
@@ -166,7 +166,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 408,
       "old": "loc_1743C",
-      "new": "S3AirSupply_OverrideRestoredAirMusicForActiveBossFlag",
+      "new": "S3AirSupply_SelectBossMusic",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_OverrideRestoredAirMusicForActiveBossFlag."
     },
@@ -174,7 +174,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 413,
       "old": "loc_17446",
-      "new": "S3AirSupply_PlaySelectedRestoredMusicBeforeResettingAir",
+      "new": "S3AirSupply_PlayRestoredMusic",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_PlaySelectedRestoredMusicBeforeResettingAir."
     },
@@ -182,7 +182,7 @@
       "source": "src/objects/players/common/s3/air_supply.s",
       "original_line": 416,
       "old": "loc_1744C",
-      "new": "S3AirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage",
+      "new": "S3AirSupply_RefillAir30",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3AirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage."
     },
@@ -190,7 +190,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 10,
       "old": "loc_13A9E",
-      "new": "S3PlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush",
+      "new": "S3CompAnim_ResetOnAnimChange",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RestartChangedCompetitionAnimationAndClearPush."
     },
@@ -198,7 +198,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 20,
       "old": "loc_13AC0",
-      "new": "S3PlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames",
+      "new": "S3CompAnim_DispatchHeader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchCompetitionSequenceHeaderAndTimedFrames."
     },
@@ -206,7 +206,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 33,
       "old": "loc_13AE6",
-      "new": "S3PlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand",
+      "new": "S3CompAnim_ReadFrameOrCommand",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadCompetitionFrameOrGenericSequenceCommand."
     },
@@ -214,7 +214,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 40,
       "old": "loc_13AF6",
-      "new": "S3PlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence",
+      "new": "S3CompAnim_StoreFrameAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreCompetitionMappingFrameAndAdvanceSequence."
     },
@@ -222,7 +222,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 44,
       "old": "locret_13AFE",
-      "new": "S3PlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore",
+      "new": "S3CompAnim_FrameReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterTimedFrameHoldOrGenericFrameStore."
     },
@@ -230,7 +230,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 48,
       "old": "loc_13B00",
-      "new": "S3PlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand",
+      "new": "S3CompAnim_TestLoopFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe LoopCompetitionSequenceOnFFCommand."
     },
@@ -238,7 +238,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 56,
       "old": "loc_13B10",
-      "new": "S3PlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand",
+      "new": "S3CompAnim_TestRewindFE",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RewindCompetitionSequenceOnFECommand."
     },
@@ -246,7 +246,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 66,
       "old": "loc_13B24",
-      "new": "S3PlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand",
+      "new": "S3CompAnim_TestChangeFD",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChangeCompetitionAnimationOnFDCommand."
     },
@@ -254,7 +254,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 71,
       "old": "locret_13B2E",
-      "new": "S3PlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand",
+      "new": "S3CompAnim_CommandReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterAnimationChangeOrUnhandledFCCommand."
     },
@@ -262,7 +262,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 75,
       "old": "loc_13B30",
-      "new": "S3PlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble",
+      "new": "S3CompAnim_DispatchMovementHeaderFF",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DispatchFFHeaderToMovementOrTumble."
     },
@@ -270,7 +270,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 87,
       "old": "loc_13B4C",
-      "new": "S3PlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight",
+      "new": "S3CompAnim_ReflectAngleIfFacingRight",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReflectMovementAngleWhenFacingRight."
     },
@@ -278,7 +278,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 93,
       "old": "loc_13B58",
-      "new": "S3PlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle",
+      "new": "S3CompAnim_PickMovementFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectMovementRenderInversionFromWrappedAngle."
     },
@@ -286,7 +286,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 98,
       "old": "loc_13B60",
-      "new": "S3PlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames",
+      "new": "S3CompAnim_ApplyFlipAndCheckPush",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyMovementFlipAndGatePushingBeforeSpeedFrames."
     },
@@ -294,7 +294,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 110,
       "old": "loc_13B84",
-      "new": "S3PlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit",
+      "new": "S3CompAnim_AdjustMovementSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DoubleMovementAnimationSpeedForSecondarySignBit."
     },
@@ -302,7 +302,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 115,
       "old": "loc_13B8E",
-      "new": "S3PlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride",
+      "new": "S3CompAnim_SelectWalkOrRunSequence",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseCompactWalkOrRunSequenceAndOrientationStride."
     },
@@ -310,7 +310,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 123,
       "old": "loc_13BA4",
-      "new": "S3PlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset",
+      "new": "S3CompAnim_ReadOrLoopMovementFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReadMovementFrameWithCompactOrientationOffset."
     },
@@ -318,7 +318,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 133,
       "old": "loc_13BC0",
-      "new": "S3PlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer",
+      "new": "S3CompAnim_StoreMovementFrameAndTick",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe WriteMovementFrameBeforeCheckingAdvanceTimer."
     },
@@ -326,7 +326,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 143,
       "old": "loc_13BD8",
-      "new": "S3PlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex",
+      "new": "S3CompAnim_ReloadMoveDelayAndAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReloadMovementDurationAndAdvanceFrameIndex."
     },
@@ -334,7 +334,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 148,
       "old": "locret_13BE2",
-      "new": "S3PlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance",
+      "new": "S3CompAnim_MovementReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterMovementFrameWriteAndOptionalAdvance."
     },
@@ -342,7 +342,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 152,
       "old": "loc_13BE4",
-      "new": "S3PlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing",
+      "new": "S3CompAnim_SelectTumbleOrientation",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseCompactTumbleOrientationByFacing."
     },
@@ -350,7 +350,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 167,
       "old": "loc_13C12",
-      "new": "S3PlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType",
+      "new": "S3CompAnim_SelectLeftTumbleFlip",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseLeftFacingTumbleFlipType."
     },
@@ -358,7 +358,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 176,
       "old": "loc_13C2A",
-      "new": "S3PlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes",
+      "new": "S3CompAnim_ReverseTumbleAndFlipXY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReverseLeftFacingTumbleAngleAndFlipBothAxes."
     },
@@ -366,7 +366,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 181,
       "old": "loc_13C36",
-      "new": "S3PlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame",
+      "new": "S3CompAnim_StoreLeftTumbleFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe QuantizeLeftTumbleAngleIntoCompactFrame."
     },
@@ -374,7 +374,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 189,
       "old": "loc_13C4A",
-      "new": "S3PlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames",
+      "new": "S3CompAnim_TickRollingFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe HandleOtherNegativeHeadersAsTimedRollingFrames."
     },
@@ -382,7 +382,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 196,
       "old": "loc_13C5A",
-      "new": "S3PlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude",
+      "new": "S3CompAnim_SelectRollSequence",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectRollingSequenceFromUnsignedSpeedMagnitude."
     },
@@ -390,7 +390,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 202,
       "old": "loc_13C6C",
-      "new": "S3PlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration",
+      "new": "S3CompAnim_CalcRollDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ComputeWrappedRollingFrameDuration."
     },
@@ -398,7 +398,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 208,
       "old": "loc_13C76",
-      "new": "S3PlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead",
+      "new": "S3CompAnim_ReloadRollDelayAndFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReloadRollingTimerAndFacingBeforeGenericFrameRead."
     },
@@ -406,7 +406,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 218,
       "old": "loc_13C92",
-      "new": "S3PlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires",
+      "new": "S3CompAnim_TickPushingFrames",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AdvancePushingOnlyWhenAnimationTimerExpires."
     },
@@ -414,7 +414,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 225,
       "old": "loc_13CA2",
-      "new": "S3PlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator",
+      "new": "S3CompAnim_CalcPushDelay",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ComputeWrappedPushingDurationNumerator."
     },
@@ -422,7 +422,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 230,
       "old": "loc_13CAA",
-      "new": "S3PlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale",
+      "new": "S3CompAnim_SelectPushSequence",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SelectCharacterPushingSequenceAndTimerScale."
     },
@@ -430,7 +430,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 238,
       "old": "loc_13CC0",
-      "new": "S3PlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead",
+      "new": "S3CompAnim_StorePushDelayAndFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StorePushingTimerAndFacingBeforeGenericFrameRead."
     },
@@ -438,7 +438,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 263,
       "old": "loc_13E14",
-      "new": "S3PlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination",
+      "new": "S3CompAnim_SelectPatternsAndPlayerVRAM",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ResolveCompetitionFramePatternListAndPlayerDestination."
     },
@@ -446,7 +446,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 274,
       "old": "loc_13E2E",
-      "new": "S3PlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination",
+      "new": "S3CompAnim_QueuePatternRun",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe QueueCompactPatternRunAndAdvanceVramDestination."
     },
@@ -454,7 +454,7 @@
       "source": "src/objects/players/common/s3/competition_animation.s",
       "original_line": 290,
       "old": "locret_13E56",
-      "new": "S3PlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList",
+      "new": "S3CompAnim_PatternQueueReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterEmptyOrQueuedCompetitionPatternList."
     },
@@ -462,7 +462,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 7,
       "old": "loc_13142",
-      "new": "S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape",
+      "new": "S3Recovery_HurtState4",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape."
     },
@@ -470,7 +470,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 17,
       "old": "loc_1315C",
-      "new": "S3PlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity",
+      "new": "S3Recovery_MoveHurtAndApplyGravity",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity."
     },
@@ -478,7 +478,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 24,
       "old": "loc_13176",
-      "new": "S3PlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum",
+      "new": "S3Recovery_WrapHurtYIfEnabled",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum."
     },
@@ -486,7 +486,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 30,
       "old": "loc_13186",
-      "new": "S3PlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw",
+      "new": "S3Recovery_ResolveHurtAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw."
     },
@@ -494,7 +494,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 47,
       "old": "loc_131B2",
-      "new": "S3PlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded",
+      "new": "S3Recovery_CheckHurtLandingAndReset",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded."
     },
@@ -502,7 +502,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 64,
       "old": "locret_131F6",
-      "new": "S3PlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset",
+      "new": "S3Recovery_HurtLandingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset."
     },
@@ -510,7 +510,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 68,
       "old": "loc_131F8",
-      "new": "S3PlayerRecovery_TailCallCharacterKillFromHurtDeathPlane",
+      "new": "S3Recovery_KillAtHurtDeathPlane",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_TailCallCharacterKillFromHurtDeathPlane."
     },
@@ -518,7 +518,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 74,
       "old": "loc_131FE",
-      "new": "S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape",
+      "new": "S3Recovery_DeathState6",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape."
     },
@@ -526,7 +526,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 84,
       "old": "loc_13218",
-      "new": "S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw",
+      "new": "S3Recovery_ResolveDeathAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw."
     },
@@ -534,7 +534,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 101,
       "old": "loc_13242",
-      "new": "S3PlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold",
+      "new": "S3Recovery_LockP2ScrollAndReadCameraY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold."
     },
@@ -542,7 +542,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 105,
       "old": "loc_1324C",
-      "new": "S3PlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy",
+      "new": "S3Recovery_PrepareDeathExitDepth",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy."
     },
@@ -550,7 +550,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 112,
       "old": "loc_13260",
-      "new": "S3PlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution",
+      "new": "S3Recovery_TestNormalDeathDepth",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution."
     },
@@ -558,7 +558,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 125,
       "old": "loc_1328A",
-      "new": "S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver",
+      "new": "S3Recovery_ChargeLifeAndPrepRestart",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver."
     },
@@ -566,7 +566,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 140,
       "old": "loc_132D0",
-      "new": "S3PlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt",
+      "new": "S3Recovery_StopTimersAndCueGameOver",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt."
     },
@@ -574,7 +574,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 150,
       "old": "loc_132F0",
-      "new": "S3PlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge",
+      "new": "S3Recovery_TryTimeOverWithLivesLeft",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge."
     },
@@ -582,7 +582,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 162,
       "old": "locret_1331E",
-      "new": "S3PlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation",
+      "new": "S3Recovery_DeathFinishReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation."
     },
@@ -590,7 +590,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 166,
       "old": "loc_13320",
-      "new": "S3PlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot",
+      "new": "S3Recovery_RestoreCompP1OrP2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot."
     },
@@ -598,7 +598,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 181,
       "old": "loc_1335A",
-      "new": "S3PlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState",
+      "new": "S3Recovery_RestoreCompP2Spawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState."
     },
@@ -606,7 +606,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 190,
       "old": "loc_13382",
-      "new": "S3PlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet",
+      "new": "S3Recovery_ResetCompMotionAndSpeeds",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet."
     },
@@ -614,7 +614,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 213,
       "old": "loc_133D4",
-      "new": "S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero",
+      "new": "S3Recovery_RestartState8",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero."
     },
@@ -622,7 +622,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 220,
       "old": "locret_133E6",
-      "new": "S3PlayerRecovery_ReturnFromRestartTimerHoldOrCompletion",
+      "new": "S3Recovery_RestartReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ReturnFromRestartTimerHoldOrCompletion."
     },
@@ -630,7 +630,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 224,
       "old": "loc_133E8",
-      "new": "S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero",
+      "new": "S3Recovery_ScrollWaitStateA",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero."
     },
@@ -638,7 +638,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 231,
       "old": "loc_133FA",
-      "new": "S3PlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume",
+      "new": "S3Recovery_DrawScrollWaitFrame",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume."
     },
@@ -646,7 +646,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 236,
       "old": "loc_13404",
-      "new": "S3PlayerRecovery_DrowningStateCWithDebugPlacementEscape",
+      "new": "S3Recovery_DrowningStateC",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_DrowningStateCWithDebugPlacementEscape."
     },
@@ -654,7 +654,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 246,
       "old": "loc_1341E",
-      "new": "S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity",
+      "new": "S3Recovery_MoveDrowningAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity."
     },
@@ -662,7 +662,7 @@
       "source": "src/objects/players/common/s3/damage_and_respawn.s",
       "original_line": 262,
       "old": "loc_13444",
-      "new": "S3PlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns",
+      "new": "S3Recovery_AnimateCompAndLoadPatterns",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe S3PlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns."
     },
@@ -670,7 +670,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 27,
       "old": "locret_12CFA",
-      "new": "S3PlayerSlope_ReturnAfterPositiveSpeedSlopeResistance",
+      "new": "S3PlayerSlope_ResistPositiveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterPositiveSpeedSlopeResistance."
     },
@@ -678,7 +678,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 31,
       "old": "loc_12CFC",
-      "new": "S3PlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity",
+      "new": "S3PlayerSlope_ResistNegativeSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplySlopeResistanceToNegativeGroundVelocity."
     },
@@ -686,7 +686,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 34,
       "old": "locret_12D00",
-      "new": "S3PlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate",
+      "new": "S3PlayerSlope_ResistReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterSlopeAngleOrRestingForceGate."
     },
@@ -694,7 +694,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 38,
       "old": "loc_12D02",
-      "new": "S3PlayerSlope_TakeSlopeForceMagnitudeForRestingActor",
+      "new": "S3PlayerSlope_AbsRestingForce",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe TakeSlopeForceMagnitudeForRestingActor."
     },
@@ -702,7 +702,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 43,
       "old": "loc_12D08",
-      "new": "S3PlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen",
+      "new": "S3PlayerSlope_ApplyRestingForceAt13",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StartRestingSlopeMotionAtForceMagnitudeThirteen."
     },
@@ -710,7 +710,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 71,
       "old": "loc_12D3E",
-      "new": "S3PlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed",
+      "new": "S3PlayerSlope_ApplyRollForceToPosSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ApplyRollingSlopeForceForNonnegativeGroundSpeed."
     },
@@ -718,7 +718,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 76,
       "old": "loc_12D44",
-      "new": "S3PlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed",
+      "new": "S3PlayerSlope_ScaleRollForceAgainstNeg",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ScaleOpposingRollingSlopeForceForNegativeGroundSpeed."
     },
@@ -726,7 +726,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 81,
       "old": "loc_12D4A",
-      "new": "S3PlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity",
+      "new": "S3PlayerSlope_ApplyRollForceToNegSpeed",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddSelectedRollingSlopeForceToGroundVelocity."
     },
@@ -734,7 +734,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 84,
       "old": "locret_12D4E",
-      "new": "S3PlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition",
+      "new": "S3PlayerSlope_RollRepelReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterRollingSlopeGateOrForceAddition."
     },
@@ -742,7 +742,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 108,
       "old": "loc_12D74",
-      "new": "S3PlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope",
+      "new": "S3PlayerSlope_RepelSlowPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DetachOrNudgeSlowActorOnNonflatSlope."
     },
@@ -750,7 +750,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 118,
       "old": "locret_12D94",
-      "new": "S3PlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach",
+      "new": "S3PlayerSlope_RepelReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterSlopeRepulsionGateOrAirDetach."
     },
@@ -758,7 +758,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 122,
       "old": "loc_12D96",
-      "new": "S3PlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector",
+      "new": "S3PlayerSlope_ChooseNudgeDirection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ChooseSlowSlopeNudgeByWrappedAngleSector."
     },
@@ -766,7 +766,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 129,
       "old": "loc_12DA4",
-      "new": "S3PlayerSlope_NudgeSlowSlopeGroundVelocityNegative",
+      "new": "S3PlayerSlope_NudgeGroundSpeedNegative",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NudgeSlowSlopeGroundVelocityNegative."
     },
@@ -774,7 +774,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 134,
       "old": "loc_12DAC",
-      "new": "S3PlayerSlope_CountDownExistingSlopeMovementLock",
+      "new": "S3PlayerSlope_TickMoveLock",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe CountDownExistingSlopeMovementLock."
     },
@@ -782,7 +782,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 154,
       "old": "loc_12DC0",
-      "new": "S3PlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp",
+      "new": "S3PlayerSlope_StoreRecoveredNegAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreNegativeAngleRecoveryAfterByteCarryClamp."
     },
@@ -790,7 +790,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 158,
       "old": "loc_12DC2",
-      "new": "S3PlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp",
+      "new": "S3PlayerSlope_ReducePositiveAirAngleBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReducePositiveAirAngleByTwoWithBorrowClamp."
     },
@@ -798,7 +798,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 189,
       "old": "loc_12DEE",
-      "new": "S3PlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling",
+      "new": "S3PlayerSlope_StoreRightFlipAngle",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreAddedFlipAngleAfterWrapBudgetHandling."
     },
@@ -806,7 +806,7 @@
       "source": "src/objects/players/common/s3/slope_physics.s",
       "original_line": 207,
       "old": "locret_12E10",
-      "new": "S3PlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate",
+      "new": "S3PlayerSlope_JumpFlipReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterFlipAngleZeroOrStoredUpdate."
     },
@@ -814,7 +814,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 75,
       "old": "loc_12B6E",
-      "new": "S3PlayerSpindash_RunEntrySpindashBoundsAndBackgroundChecks",
+      "new": "S3Spin_CheckEntryBoundsAndTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunEntrySpindashBoundsAndBackgroundChecks."
     },
@@ -822,7 +822,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 90,
       "old": "locret_12B9A",
-      "new": "S3PlayerSpindash_ReturnFromSpindashEntryOrRejectedStart",
+      "new": "S3Spin_EntryReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnFromSpindashEntryOrRejectedStart."
     },
@@ -830,7 +830,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 94,
       "old": "loc_12B9C",
-      "new": "S3PlayerSpindash_ReleaseOrContinueActiveSpindash",
+      "new": "S3Spin_ReleaseOrKeepCharging",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReleaseOrContinueActiveSpindash."
     },
@@ -838,7 +838,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 111,
       "old": "loc_12BDE",
-      "new": "S3PlayerSpindash_ComputeReleaseCameraLagFromUnsignedSpeed",
+      "new": "S3Spin_CalcReleaseCameraLag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ComputeReleaseCameraLagFromUnsignedSpeed."
     },
@@ -846,7 +846,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 123,
       "old": "loc_12C00",
-      "new": "S3PlayerSpindash_StoreReleaseCameraLagAndApplyFacing",
+      "new": "S3Spin_StoreLagAndApplyFacing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe StoreReleaseCameraLagAndApplyFacing."
     },
@@ -854,7 +854,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 129,
       "old": "loc_12C0E",
-      "new": "S3PlayerSpindash_SetReleasedRollAndStopDust",
+      "new": "S3Spin_BeginRollAndStopDust",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SetReleasedRollAndStopDust."
     },
@@ -862,7 +862,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 136,
       "old": "word_12C24",
-      "new": "S3PlayerSpindash_NormalReleaseSpeedsByChargeHighByte",
+      "new": "S3Spin_NormalSpeedByChargeHi",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe NormalReleaseSpeedsByChargeHighByte."
     },
@@ -870,7 +870,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 146,
       "old": "word_12C36",
-      "new": "S3PlayerSpindash_SuperReleaseSpeedsByChargeHighByte",
+      "new": "S3Spin_SuperSpeedByChargeHi",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SuperReleaseSpeedsByChargeHighByte."
     },
@@ -878,7 +878,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 158,
       "old": "loc_12C48",
-      "new": "S3PlayerSpindash_DecayHeldSpindashChargeWord",
+      "new": "S3Spin_DecayHeldCharge",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe DecayHeldSpindashChargeWord."
     },
@@ -886,7 +886,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 167,
       "old": "loc_12C60",
-      "new": "S3PlayerSpindash_AddNewButtonChargeAndRestartSpindashAnimation",
+      "new": "S3Spin_ChargeOnNewPress",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AddNewButtonChargeAndRestartSpindashAnimation."
     },
@@ -894,7 +894,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 179,
       "old": "loc_12C90",
-      "new": "S3PlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash",
+      "new": "S3Spin_SkipGroundCallerAndEaseCamera",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe AbortGroundCallerAndRelaxCameraAfterActiveSpindash."
     },
@@ -902,7 +902,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 186,
       "old": "loc_12C9C",
-      "new": "S3PlayerSpindash_SubtractTwoFromSpindashCameraDistance",
+      "new": "S3Spin_ReduceCameraDistanceBy2",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe SubtractTwoFromSpindashCameraDistance."
     },
@@ -910,7 +910,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 189,
       "old": "loc_12C9E",
-      "new": "S3PlayerSpindash_RunActiveSpindashBoundsAndBackgroundChecks",
+      "new": "S3Spin_CheckActiveBoundsAndTerrain",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe RunActiveSpindashBoundsAndBackgroundChecks."
     },
@@ -918,7 +918,7 @@
       "source": "src/objects/players/common/s3/transformation_and_spindash.s",
       "original_line": 204,
       "old": "locret_12CCA",
-      "new": "S3PlayerSpindash_ReturnAfterActiveSpindashBackgroundChecks",
+      "new": "S3Spin_ActiveReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe ReturnAfterActiveSpindashBackgroundChecks."
     },
@@ -926,7 +926,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 33,
       "old": "loc_1819E",
-      "new": "SKAirSupply_InitializeAirActorRenderAndDecodeControllerSubtype",
+      "new": "SKAirSupply_InitActorBySubtype",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_InitializeAirActorRenderAndDecodeControllerSubtype."
     },
@@ -934,7 +934,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 46,
       "old": "loc_181CC",
-      "new": "SKAirSupply_InitializeRisingChildAnimationCenterAndVelocity",
+      "new": "SKAirSupply_InitRisingBubble",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_InitializeRisingChildAnimationCenterAndVelocity."
     },
@@ -942,7 +942,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 74,
       "old": "loc_18218",
-      "new": "SKAirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace",
+      "new": "SKAirSupply_WobbleBubbleAndShowNumber",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_WobbleRisingChildAndMaybePromoteWarningToScreenSpace."
     },
@@ -950,7 +950,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 90,
       "old": "loc_1824E",
-      "new": "SKAirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss",
+      "new": "SKAirSupply_DeleteOffscreenBubble",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_DeleteRisingAirChildAfterPreviousVisibilityLoss."
     },
@@ -958,7 +958,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 130,
       "old": "loc_182AC",
-      "new": "SKAirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible",
+      "new": "SKAirSupply_DeleteExpiredWarning",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_DeleteWarningWhenAirRestoredOrNotPreviouslyVisible."
     },
@@ -966,7 +966,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 165,
       "old": "locret_1831C",
-      "new": "SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion",
+      "new": "SKAirSupply_ShowNumberReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ReturnFromNumberPromotionTimerOrScreenConversion."
     },
@@ -974,7 +974,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 214,
       "old": "loc_1845A",
-      "new": "SKAirSupply_QueueSixTileWarningArtIntoSelectedDustVram",
+      "new": "SKAirSupply_QueueWarningArt6Tiles",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_QueueSixTileWarningArtIntoSelectedDustVram."
     },
@@ -982,7 +982,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 218,
       "old": "locret_18464",
-      "new": "SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad",
+      "new": "SKAirSupply_LoadWarningArtReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ReturnForNonNumericCachedOrCompletedWarningArtLoad."
     },
@@ -990,7 +990,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 259,
       "old": "loc_184E8",
-      "new": "SKAirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks",
+      "new": "SKAirSupply_TickWarningNumberBudget",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ScheduleLowAirNumberFlagOnAlternatingBudgetTicks."
     },
@@ -998,7 +998,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 299,
       "old": "locret_1857A",
-      "new": "SKAirSupply_ReturnAfterStartingDrowningPlayerState",
+      "new": "SKAirSupply_StartDrowningReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ReturnAfterStartingDrowningPlayerState."
     },
@@ -1006,7 +1006,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 303,
       "old": "loc_1857C",
-      "new": "SKAirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero",
+      "new": "SKAirSupply_TickDrowningUntilDeath",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_CountDrowningDelayAndSwitchActorToDeathRoutineAtZero."
     },
@@ -1014,7 +1014,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 311,
       "old": "loc_18590",
-      "new": "SKAirSupply_ContinueDrowningEmissionGateBeforeDelayEnds",
+      "new": "SKAirSupply_ContinueDrowningBubbles",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ContinueDrowningEmissionGateBeforeDelayEnds."
     },
@@ -1022,7 +1022,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 315,
       "old": "loc_18592",
-      "new": "SKAirSupply_EmitImmediatelyAfterNonUnderflowingAirTick",
+      "new": "SKAirSupply_EmitAfterAirTick",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_EmitImmediatelyAfterNonUnderflowingAirTick."
     },
@@ -1030,7 +1030,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 319,
       "old": "loc_18594",
-      "new": "SKAirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive",
+      "new": "SKAirSupply_TickActiveBatchSpacing",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_CountSpawnSpacingOnlyWhileBubbleBatchActive."
     },
@@ -1038,7 +1038,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 340,
       "old": "loc_185D8",
-      "new": "SKAirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant",
+      "new": "SKAirSupply_PlaceChildAndChooseVariant",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_PositionChildCopyActorPointerAndChooseDrowningVariant."
     },
@@ -1046,7 +1046,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 362,
       "old": "loc_1862A",
-      "new": "SKAirSupply_TryOneLowAirNumberChildPerMarkedBatch",
+      "new": "SKAirSupply_TryNumberOncePerBatch",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_TryOneLowAirNumberChildPerMarkedBatch."
     },
@@ -1054,7 +1054,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 378,
       "old": "loc_1865E",
-      "new": "SKAirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild",
+      "new": "SKAirSupply_PutMissingNumberOnLastChild",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ForceUnmadeWarningNumberOntoFinalBatchChild."
     },
@@ -1062,7 +1062,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 386,
       "old": "loc_18676",
-      "new": "SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow",
+      "new": "SKAirSupply_ConsumeChildBudget",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ConsumeSuccessfulChildBudgetAndEndBatchOnUnderflow."
     },
@@ -1070,7 +1070,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 391,
       "old": "locret_18680",
-      "new": "SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt",
+      "new": "SKAirSupply_BubbleBatchReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_ReturnFromInactiveAirControllerOrCompletedChildAttempt."
     },
@@ -1078,7 +1078,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 406,
       "old": "loc_186A0",
-      "new": "SKAirSupply_OverrideRestoredAirMusicForAnyTransformationFlag",
+      "new": "SKAirSupply_SelectTransformMusic",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_OverrideRestoredAirMusicForAnyTransformationFlag."
     },
@@ -1086,7 +1086,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 411,
       "old": "loc_186AC",
-      "new": "SKAirSupply_OverrideRestoredAirMusicForActiveBossFlag",
+      "new": "SKAirSupply_SelectBossMusic",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_OverrideRestoredAirMusicForActiveBossFlag."
     },
@@ -1094,7 +1094,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 416,
       "old": "loc_186B6",
-      "new": "SKAirSupply_PlaySelectedRestoredMusicBeforeResettingAir",
+      "new": "SKAirSupply_PlayRestoredMusic",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_PlaySelectedRestoredMusicBeforeResettingAir."
     },
@@ -1102,7 +1102,7 @@
       "source": "src/objects/players/common/sk/air_supply.s",
       "original_line": 419,
       "old": "loc_186BC",
-      "new": "SKAirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage",
+      "new": "SKAirSupply_RefillAir30",
       "profiles": ["sk"],
       "meaning": "Describe SKAirSupply_RestoreThirtyAirUnitsWithoutClearingControllerStage."
     },
@@ -1110,7 +1110,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 10,
       "old": "loc_12D48",
-      "new": "SKPlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush",
+      "new": "SKCompAnim_ResetOnAnimChange",
       "profiles": ["sk"],
       "meaning": "Describe RestartChangedCompetitionAnimationAndClearPush."
     },
@@ -1118,7 +1118,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 20,
       "old": "loc_12D6A",
-      "new": "SKPlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames",
+      "new": "SKCompAnim_DispatchHeader",
       "profiles": ["sk"],
       "meaning": "Describe DispatchCompetitionSequenceHeaderAndTimedFrames."
     },
@@ -1126,7 +1126,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 33,
       "old": "loc_12D90",
-      "new": "SKPlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand",
+      "new": "SKCompAnim_ReadFrameOrCommand",
       "profiles": ["sk"],
       "meaning": "Describe ReadCompetitionFrameOrGenericSequenceCommand."
     },
@@ -1134,7 +1134,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 40,
       "old": "loc_12DA0",
-      "new": "SKPlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence",
+      "new": "SKCompAnim_StoreFrameAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe StoreCompetitionMappingFrameAndAdvanceSequence."
     },
@@ -1142,7 +1142,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 44,
       "old": "locret_12DA8",
-      "new": "SKPlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore",
+      "new": "SKCompAnim_FrameReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterTimedFrameHoldOrGenericFrameStore."
     },
@@ -1150,7 +1150,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 48,
       "old": "loc_12DAA",
-      "new": "SKPlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand",
+      "new": "SKCompAnim_TestLoopFF",
       "profiles": ["sk"],
       "meaning": "Describe LoopCompetitionSequenceOnFFCommand."
     },
@@ -1158,7 +1158,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 56,
       "old": "loc_12DBA",
-      "new": "SKPlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand",
+      "new": "SKCompAnim_TestRewindFE",
       "profiles": ["sk"],
       "meaning": "Describe RewindCompetitionSequenceOnFECommand."
     },
@@ -1166,7 +1166,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 66,
       "old": "loc_12DCE",
-      "new": "SKPlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand",
+      "new": "SKCompAnim_TestChangeFD",
       "profiles": ["sk"],
       "meaning": "Describe ChangeCompetitionAnimationOnFDCommand."
     },
@@ -1174,7 +1174,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 71,
       "old": "locret_12DD8",
-      "new": "SKPlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand",
+      "new": "SKCompAnim_CommandReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterAnimationChangeOrUnhandledFCCommand."
     },
@@ -1182,7 +1182,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 75,
       "old": "loc_12DDA",
-      "new": "SKPlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble",
+      "new": "SKCompAnim_DispatchMovementHeaderFF",
       "profiles": ["sk"],
       "meaning": "Describe DispatchFFHeaderToMovementOrTumble."
     },
@@ -1190,7 +1190,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 87,
       "old": "loc_12DF6",
-      "new": "SKPlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight",
+      "new": "SKCompAnim_ReflectAngleIfFacingRight",
       "profiles": ["sk"],
       "meaning": "Describe ReflectMovementAngleWhenFacingRight."
     },
@@ -1198,7 +1198,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 93,
       "old": "loc_12E02",
-      "new": "SKPlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle",
+      "new": "SKCompAnim_PickMovementFlip",
       "profiles": ["sk"],
       "meaning": "Describe SelectMovementRenderInversionFromWrappedAngle."
     },
@@ -1206,7 +1206,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 98,
       "old": "loc_12E0A",
-      "new": "SKPlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames",
+      "new": "SKCompAnim_ApplyFlipAndCheckPush",
       "profiles": ["sk"],
       "meaning": "Describe ApplyMovementFlipAndGatePushingBeforeSpeedFrames."
     },
@@ -1214,7 +1214,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 110,
       "old": "loc_12E2E",
-      "new": "SKPlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit",
+      "new": "SKCompAnim_AdjustMovementSpeed",
       "profiles": ["sk"],
       "meaning": "Describe DoubleMovementAnimationSpeedForSecondarySignBit."
     },
@@ -1222,7 +1222,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 115,
       "old": "loc_12E38",
-      "new": "SKPlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride",
+      "new": "SKCompAnim_SelectWalkOrRunSequence",
       "profiles": ["sk"],
       "meaning": "Describe ChooseCompactWalkOrRunSequenceAndOrientationStride."
     },
@@ -1230,7 +1230,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 123,
       "old": "loc_12E4E",
-      "new": "SKPlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset",
+      "new": "SKCompAnim_ReadOrLoopMovementFrame",
       "profiles": ["sk"],
       "meaning": "Describe ReadMovementFrameWithCompactOrientationOffset."
     },
@@ -1238,7 +1238,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 133,
       "old": "loc_12E6A",
-      "new": "SKPlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer",
+      "new": "SKCompAnim_StoreMovementFrameAndTick",
       "profiles": ["sk"],
       "meaning": "Describe WriteMovementFrameBeforeCheckingAdvanceTimer."
     },
@@ -1246,7 +1246,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 143,
       "old": "loc_12E82",
-      "new": "SKPlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex",
+      "new": "SKCompAnim_ReloadMoveDelayAndAdvance",
       "profiles": ["sk"],
       "meaning": "Describe ReloadMovementDurationAndAdvanceFrameIndex."
     },
@@ -1254,7 +1254,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 148,
       "old": "locret_12E8C",
-      "new": "SKPlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance",
+      "new": "SKCompAnim_MovementReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterMovementFrameWriteAndOptionalAdvance."
     },
@@ -1262,7 +1262,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 152,
       "old": "loc_12E8E",
-      "new": "SKPlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing",
+      "new": "SKCompAnim_SelectTumbleOrientation",
       "profiles": ["sk"],
       "meaning": "Describe ChooseCompactTumbleOrientationByFacing."
     },
@@ -1270,7 +1270,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 167,
       "old": "loc_12EBC",
-      "new": "SKPlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType",
+      "new": "SKCompAnim_SelectLeftTumbleFlip",
       "profiles": ["sk"],
       "meaning": "Describe ChooseLeftFacingTumbleFlipType."
     },
@@ -1278,7 +1278,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 176,
       "old": "loc_12ED4",
-      "new": "SKPlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes",
+      "new": "SKCompAnim_ReverseTumbleAndFlipXY",
       "profiles": ["sk"],
       "meaning": "Describe ReverseLeftFacingTumbleAngleAndFlipBothAxes."
     },
@@ -1286,7 +1286,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 181,
       "old": "loc_12EE0",
-      "new": "SKPlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame",
+      "new": "SKCompAnim_StoreLeftTumbleFrame",
       "profiles": ["sk"],
       "meaning": "Describe QuantizeLeftTumbleAngleIntoCompactFrame."
     },
@@ -1294,7 +1294,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 189,
       "old": "loc_12EF4",
-      "new": "SKPlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames",
+      "new": "SKCompAnim_TickRollingFrames",
       "profiles": ["sk"],
       "meaning": "Describe HandleOtherNegativeHeadersAsTimedRollingFrames."
     },
@@ -1302,7 +1302,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 196,
       "old": "loc_12F04",
-      "new": "SKPlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude",
+      "new": "SKCompAnim_SelectRollSequence",
       "profiles": ["sk"],
       "meaning": "Describe SelectRollingSequenceFromUnsignedSpeedMagnitude."
     },
@@ -1310,7 +1310,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 202,
       "old": "loc_12F16",
-      "new": "SKPlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration",
+      "new": "SKCompAnim_CalcRollDelay",
       "profiles": ["sk"],
       "meaning": "Describe ComputeWrappedRollingFrameDuration."
     },
@@ -1318,7 +1318,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 208,
       "old": "loc_12F20",
-      "new": "SKPlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead",
+      "new": "SKCompAnim_ReloadRollDelayAndFacing",
       "profiles": ["sk"],
       "meaning": "Describe ReloadRollingTimerAndFacingBeforeGenericFrameRead."
     },
@@ -1326,7 +1326,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 218,
       "old": "loc_12F3C",
-      "new": "SKPlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires",
+      "new": "SKCompAnim_TickPushingFrames",
       "profiles": ["sk"],
       "meaning": "Describe AdvancePushingOnlyWhenAnimationTimerExpires."
     },
@@ -1334,7 +1334,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 225,
       "old": "loc_12F4C",
-      "new": "SKPlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator",
+      "new": "SKCompAnim_CalcPushDelay",
       "profiles": ["sk"],
       "meaning": "Describe ComputeWrappedPushingDurationNumerator."
     },
@@ -1342,7 +1342,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 230,
       "old": "loc_12F54",
-      "new": "SKPlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale",
+      "new": "SKCompAnim_SelectPushSequence",
       "profiles": ["sk"],
       "meaning": "Describe SelectCharacterPushingSequenceAndTimerScale."
     },
@@ -1350,7 +1350,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 238,
       "old": "loc_12F6A",
-      "new": "SKPlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead",
+      "new": "SKCompAnim_StorePushDelayAndFacing",
       "profiles": ["sk"],
       "meaning": "Describe StorePushingTimerAndFacingBeforeGenericFrameRead."
     },
@@ -1358,7 +1358,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 263,
       "old": "loc_130BE",
-      "new": "SKPlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination",
+      "new": "SKCompAnim_SelectPatternsAndPlayerVRAM",
       "profiles": ["sk"],
       "meaning": "Describe ResolveCompetitionFramePatternListAndPlayerDestination."
     },
@@ -1366,7 +1366,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 274,
       "old": "loc_130D8",
-      "new": "SKPlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination",
+      "new": "SKCompAnim_QueuePatternRun",
       "profiles": ["sk"],
       "meaning": "Describe QueueCompactPatternRunAndAdvanceVramDestination."
     },
@@ -1374,7 +1374,7 @@
       "source": "src/objects/players/common/sk/competition_animation.s",
       "original_line": 290,
       "old": "locret_13100",
-      "new": "SKPlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList",
+      "new": "SKCompAnim_PatternQueueReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterEmptyOrQueuedCompetitionPatternList."
     },
@@ -1382,7 +1382,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 7,
       "old": "loc_122BE",
-      "new": "SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape",
+      "new": "SKRecovery_HurtState4",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape."
     },
@@ -1390,7 +1390,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 17,
       "old": "loc_122D8",
-      "new": "SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity",
+      "new": "SKRecovery_MoveHurtAndApplyGravity",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity."
     },
@@ -1398,7 +1398,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 24,
       "old": "loc_122F2",
-      "new": "SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum",
+      "new": "SKRecovery_WrapHurtYIfEnabled",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum."
     },
@@ -1406,7 +1406,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 30,
       "old": "loc_12302",
-      "new": "SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw",
+      "new": "SKRecovery_ResolveHurtAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw."
     },
@@ -1414,7 +1414,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 51,
       "old": "loc_12336",
-      "new": "SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary",
+      "new": "SKRecovery_TestReverseHurtDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary."
     },
@@ -1422,7 +1422,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 58,
       "old": "loc_12344",
-      "new": "SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded",
+      "new": "SKRecovery_CheckHurtLandingAndReset",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded."
     },
@@ -1430,7 +1430,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 75,
       "old": "locret_12388",
-      "new": "SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset",
+      "new": "SKRecovery_HurtLandingReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset."
     },
@@ -1438,7 +1438,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 79,
       "old": "loc_1238A",
-      "new": "SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane",
+      "new": "SKRecovery_KillAtHurtDeathPlane",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane."
     },
@@ -1446,7 +1446,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 85,
       "old": "loc_12390",
-      "new": "SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape",
+      "new": "SKRecovery_DeathState6",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape."
     },
@@ -1454,7 +1454,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 95,
       "old": "loc_123AA",
-      "new": "SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw",
+      "new": "SKRecovery_ResolveDeathAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw."
     },
@@ -1462,7 +1462,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 112,
       "old": "loc_123D4",
-      "new": "SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold",
+      "new": "SKRecovery_LockP2ScrollAndReadCameraY",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold."
     },
@@ -1470,7 +1470,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 116,
       "old": "loc_123DE",
-      "new": "SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy",
+      "new": "SKRecovery_PrepareDeathExitDepth",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy."
     },
@@ -1478,7 +1478,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 126,
       "old": "loc_123FA",
-      "new": "SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold",
+      "new": "SKRecovery_SetNormalDeathThreshold",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold."
     },
@@ -1486,7 +1486,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 132,
       "old": "loc_12408",
-      "new": "SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution",
+      "new": "SKRecovery_TestNormalDeathDepth",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution."
     },
@@ -1494,7 +1494,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 136,
       "old": "loc_12410",
-      "new": "SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge",
+      "new": "SKRecovery_DispatchDeathOutcome",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge."
     },
@@ -1502,7 +1502,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 147,
       "old": "loc_12432",
-      "new": "SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver",
+      "new": "SKRecovery_ChargeLifeAndPrepRestart",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver."
     },
@@ -1510,7 +1510,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 162,
       "old": "loc_12478",
-      "new": "SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt",
+      "new": "SKRecovery_StopTimersAndCueGameOver",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt."
     },
@@ -1518,7 +1518,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 172,
       "old": "loc_12498",
-      "new": "SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge",
+      "new": "SKRecovery_TryTimeOverWithLivesLeft",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge."
     },
@@ -1526,7 +1526,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 184,
       "old": "locret_124C6",
-      "new": "SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation",
+      "new": "SKRecovery_DeathFinishReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation."
     },
@@ -1534,7 +1534,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 188,
       "old": "loc_124C8",
-      "new": "SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot",
+      "new": "SKRecovery_RestoreCompP1OrP2",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot."
     },
@@ -1542,7 +1542,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 203,
       "old": "loc_12502",
-      "new": "SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState",
+      "new": "SKRecovery_RestoreCompP2Spawn",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState."
     },
@@ -1550,7 +1550,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 212,
       "old": "loc_1252A",
-      "new": "SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet",
+      "new": "SKRecovery_ResetCompMotionAndSpeeds",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet."
     },
@@ -1558,7 +1558,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 235,
       "old": "loc_1257C",
-      "new": "SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero",
+      "new": "SKRecovery_RestartState8",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero."
     },
@@ -1566,7 +1566,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 242,
       "old": "locret_1258E",
-      "new": "SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion",
+      "new": "SKRecovery_RestartReturn",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion."
     },
@@ -1574,7 +1574,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 246,
       "old": "loc_12590",
-      "new": "SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero",
+      "new": "SKRecovery_ScrollWaitStateA",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero."
     },
@@ -1582,7 +1582,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 253,
       "old": "loc_125A2",
-      "new": "SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume",
+      "new": "SKRecovery_DrawScrollWaitFrame",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume."
     },
@@ -1590,7 +1590,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 258,
       "old": "loc_125AC",
-      "new": "SKPlayerRecovery_DrowningStateCWithDebugPlacementEscape",
+      "new": "SKRecovery_DrowningStateC",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_DrowningStateCWithDebugPlacementEscape."
     },
@@ -1598,7 +1598,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 268,
       "old": "loc_125C6",
-      "new": "SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity",
+      "new": "SKRecovery_MoveDrowningAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity."
     },
@@ -1606,7 +1606,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 285,
       "old": "loc_125F4",
-      "new": "SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip",
+      "new": "SKRecovery_LoadRecoverySonicPatterns",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip."
     },
@@ -1614,7 +1614,7 @@
       "source": "src/objects/players/common/sk/damage_and_respawn.s",
       "original_line": 289,
       "old": "loc_125F8",
-      "new": "SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns",
+      "new": "SKRecovery_AnimateCompAndLoadPatterns",
       "profiles": ["sk"],
       "meaning": "Describe SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns."
     },
@@ -1622,7 +1622,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 27,
       "old": "locret_11DD4",
-      "new": "SKPlayerSlope_ReturnAfterPositiveSpeedSlopeResistance",
+      "new": "SKPlayerSlope_ResistPositiveReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterPositiveSpeedSlopeResistance."
     },
@@ -1630,7 +1630,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 31,
       "old": "loc_11DD6",
-      "new": "SKPlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity",
+      "new": "SKPlayerSlope_ResistNegativeSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ApplySlopeResistanceToNegativeGroundVelocity."
     },
@@ -1638,7 +1638,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 34,
       "old": "locret_11DDA",
-      "new": "SKPlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate",
+      "new": "SKPlayerSlope_ResistReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterSlopeAngleOrRestingForceGate."
     },
@@ -1646,7 +1646,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 38,
       "old": "loc_11DDC",
-      "new": "SKPlayerSlope_TakeSlopeForceMagnitudeForRestingActor",
+      "new": "SKPlayerSlope_AbsRestingForce",
       "profiles": ["sk"],
       "meaning": "Describe TakeSlopeForceMagnitudeForRestingActor."
     },
@@ -1654,7 +1654,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 43,
       "old": "loc_11DE2",
-      "new": "SKPlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen",
+      "new": "SKPlayerSlope_ApplyRestingForceAt13",
       "profiles": ["sk"],
       "meaning": "Describe StartRestingSlopeMotionAtForceMagnitudeThirteen."
     },
@@ -1662,7 +1662,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 71,
       "old": "loc_11E18",
-      "new": "SKPlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed",
+      "new": "SKPlayerSlope_ApplyRollForceToPosSpeed",
       "profiles": ["sk"],
       "meaning": "Describe ApplyRollingSlopeForceForNonnegativeGroundSpeed."
     },
@@ -1670,7 +1670,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 76,
       "old": "loc_11E1E",
-      "new": "SKPlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed",
+      "new": "SKPlayerSlope_ScaleRollForceAgainstNeg",
       "profiles": ["sk"],
       "meaning": "Describe ScaleOpposingRollingSlopeForceForNegativeGroundSpeed."
     },
@@ -1678,7 +1678,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 81,
       "old": "loc_11E24",
-      "new": "SKPlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity",
+      "new": "SKPlayerSlope_ApplyRollForceToNegSpeed",
       "profiles": ["sk"],
       "meaning": "Describe AddSelectedRollingSlopeForceToGroundVelocity."
     },
@@ -1686,7 +1686,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 84,
       "old": "locret_11E28",
-      "new": "SKPlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition",
+      "new": "SKPlayerSlope_RollRepelReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterRollingSlopeGateOrForceAddition."
     },
@@ -1694,7 +1694,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 108,
       "old": "loc_11E4E",
-      "new": "SKPlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope",
+      "new": "SKPlayerSlope_RepelSlowPlayer",
       "profiles": ["sk"],
       "meaning": "Describe DetachOrNudgeSlowActorOnNonflatSlope."
     },
@@ -1702,7 +1702,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 118,
       "old": "locret_11E6E",
-      "new": "SKPlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach",
+      "new": "SKPlayerSlope_RepelReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterSlopeRepulsionGateOrAirDetach."
     },
@@ -1710,7 +1710,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 122,
       "old": "loc_11E70",
-      "new": "SKPlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector",
+      "new": "SKPlayerSlope_ChooseNudgeDirection",
       "profiles": ["sk"],
       "meaning": "Describe ChooseSlowSlopeNudgeByWrappedAngleSector."
     },
@@ -1718,7 +1718,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 129,
       "old": "loc_11E7E",
-      "new": "SKPlayerSlope_NudgeSlowSlopeGroundVelocityNegative",
+      "new": "SKPlayerSlope_NudgeGroundSpeedNegative",
       "profiles": ["sk"],
       "meaning": "Describe NudgeSlowSlopeGroundVelocityNegative."
     },
@@ -1726,7 +1726,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 134,
       "old": "loc_11E86",
-      "new": "SKPlayerSlope_CountDownExistingSlopeMovementLock",
+      "new": "SKPlayerSlope_TickMoveLock",
       "profiles": ["sk"],
       "meaning": "Describe CountDownExistingSlopeMovementLock."
     },
@@ -1734,7 +1734,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 154,
       "old": "loc_11E9A",
-      "new": "SKPlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp",
+      "new": "SKPlayerSlope_StoreRecoveredNegAngle",
       "profiles": ["sk"],
       "meaning": "Describe StoreNegativeAngleRecoveryAfterByteCarryClamp."
     },
@@ -1742,7 +1742,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 158,
       "old": "loc_11E9C",
-      "new": "SKPlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp",
+      "new": "SKPlayerSlope_ReducePositiveAirAngleBy2",
       "profiles": ["sk"],
       "meaning": "Describe ReducePositiveAirAngleByTwoWithBorrowClamp."
     },
@@ -1750,7 +1750,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 189,
       "old": "loc_11EC8",
-      "new": "SKPlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling",
+      "new": "SKPlayerSlope_StoreRightFlipAngle",
       "profiles": ["sk"],
       "meaning": "Describe StoreAddedFlipAngleAfterWrapBudgetHandling."
     },
@@ -1758,7 +1758,7 @@
       "source": "src/objects/players/common/sk/slope_physics.s",
       "original_line": 207,
       "old": "locret_11EEA",
-      "new": "SKPlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate",
+      "new": "SKPlayerSlope_JumpFlipReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterFlipAngleZeroOrStoredUpdate."
     },
@@ -1766,7 +1766,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 89,
       "old": "loc_11C24",
-      "new": "SKPlayerSpindash_RunEntrySpindashBoundsAndBackgroundChecks",
+      "new": "SKSpin_CheckEntryBoundsAndTerrain",
       "profiles": ["sk"],
       "meaning": "Describe RunEntrySpindashBoundsAndBackgroundChecks."
     },
@@ -1774,7 +1774,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 103,
       "old": "loc_11C4C",
-      "new": "SKPlayerSpindash_CheckEntrySpindashRightWallAfterLeftCorrection",
+      "new": "SKSpin_CheckEntryRightWall",
       "profiles": ["sk"],
       "meaning": "Describe CheckEntrySpindashRightWallAfterLeftCorrection."
     },
@@ -1782,7 +1782,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 109,
       "old": "loc_11C58",
-      "new": "SKPlayerSpindash_RestoreEntrySpindashRegistersAfterBothWallChecks",
+      "new": "SKSpin_RestoreEntryWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreEntrySpindashRegistersAfterBothWallChecks."
     },
@@ -1790,7 +1790,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 112,
       "old": "locret_11C5C",
-      "new": "SKPlayerSpindash_ReturnFromSpindashEntryOrRejectedStart",
+      "new": "SKSpin_EntryReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnFromSpindashEntryOrRejectedStart."
     },
@@ -1798,7 +1798,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 116,
       "old": "loc_11C5E",
-      "new": "SKPlayerSpindash_ReleaseOrContinueActiveSpindash",
+      "new": "SKSpin_ReleaseOrKeepCharging",
       "profiles": ["sk"],
       "meaning": "Describe ReleaseOrContinueActiveSpindash."
     },
@@ -1806,7 +1806,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 128,
       "old": "loc_11C8C",
-      "new": "SKPlayerSpindash_SelectReleaseSpeedAfterGravityAdjustedShapeShift",
+      "new": "SKSpin_SelectReleaseSpeed",
       "profiles": ["sk"],
       "meaning": "Describe SelectReleaseSpeedAfterGravityAdjustedShapeShift."
     },
@@ -1814,7 +1814,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 138,
       "old": "loc_11CAC",
-      "new": "SKPlayerSpindash_ComputeReleaseCameraLagFromUnsignedSpeed",
+      "new": "SKSpin_CalcReleaseCameraLag",
       "profiles": ["sk"],
       "meaning": "Describe ComputeReleaseCameraLagFromUnsignedSpeed."
     },
@@ -1822,7 +1822,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 150,
       "old": "loc_11CCE",
-      "new": "SKPlayerSpindash_StoreReleaseCameraLagAndApplyFacing",
+      "new": "SKSpin_StoreLagAndApplyFacing",
       "profiles": ["sk"],
       "meaning": "Describe StoreReleaseCameraLagAndApplyFacing."
     },
@@ -1830,7 +1830,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 156,
       "old": "loc_11CDC",
-      "new": "SKPlayerSpindash_SetReleasedRollAndStopDust",
+      "new": "SKSpin_BeginRollAndStopDust",
       "profiles": ["sk"],
       "meaning": "Describe SetReleasedRollAndStopDust."
     },
@@ -1838,7 +1838,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 163,
       "old": "word_11CF2",
-      "new": "SKPlayerSpindash_NormalReleaseSpeedsByChargeHighByte",
+      "new": "SKSpin_NormalSpeedByChargeHi",
       "profiles": ["sk"],
       "meaning": "Describe NormalReleaseSpeedsByChargeHighByte."
     },
@@ -1846,7 +1846,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 173,
       "old": "word_11D04",
-      "new": "SKPlayerSpindash_SuperReleaseSpeedsByChargeHighByte",
+      "new": "SKSpin_SuperSpeedByChargeHi",
       "profiles": ["sk"],
       "meaning": "Describe SuperReleaseSpeedsByChargeHighByte."
     },
@@ -1854,7 +1854,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 185,
       "old": "loc_11D16",
-      "new": "SKPlayerSpindash_DecayHeldSpindashChargeWord",
+      "new": "SKSpin_DecayHeldCharge",
       "profiles": ["sk"],
       "meaning": "Describe DecayHeldSpindashChargeWord."
     },
@@ -1862,7 +1862,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 194,
       "old": "loc_11D2E",
-      "new": "SKPlayerSpindash_AddNewButtonChargeAndRestartSpindashAnimation",
+      "new": "SKSpin_ChargeOnNewPress",
       "profiles": ["sk"],
       "meaning": "Describe AddNewButtonChargeAndRestartSpindashAnimation."
     },
@@ -1870,7 +1870,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 206,
       "old": "loc_11D5E",
-      "new": "SKPlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash",
+      "new": "SKSpin_SkipGroundCallerAndEaseCamera",
       "profiles": ["sk"],
       "meaning": "Describe AbortGroundCallerAndRelaxCameraAfterActiveSpindash."
     },
@@ -1878,7 +1878,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 213,
       "old": "loc_11D6A",
-      "new": "SKPlayerSpindash_SubtractTwoFromSpindashCameraDistance",
+      "new": "SKSpin_ReduceCameraDistanceBy2",
       "profiles": ["sk"],
       "meaning": "Describe SubtractTwoFromSpindashCameraDistance."
     },
@@ -1886,7 +1886,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 216,
       "old": "loc_11D6C",
-      "new": "SKPlayerSpindash_RunActiveSpindashBoundsAndBackgroundChecks",
+      "new": "SKSpin_CheckActiveBoundsAndTerrain",
       "profiles": ["sk"],
       "meaning": "Describe RunActiveSpindashBoundsAndBackgroundChecks."
     },
@@ -1894,7 +1894,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 230,
       "old": "loc_11D94",
-      "new": "SKPlayerSpindash_CheckActiveSpindashRightWallAfterLeftCorrection",
+      "new": "SKSpin_CheckActiveRightWall",
       "profiles": ["sk"],
       "meaning": "Describe CheckActiveSpindashRightWallAfterLeftCorrection."
     },
@@ -1902,7 +1902,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 236,
       "old": "loc_11DA0",
-      "new": "SKPlayerSpindash_RestoreActiveSpindashRegistersAfterBothWallChecks",
+      "new": "SKSpin_RestoreActiveWallRegisters",
       "profiles": ["sk"],
       "meaning": "Describe RestoreActiveSpindashRegistersAfterBothWallChecks."
     },
@@ -1910,7 +1910,7 @@
       "source": "src/objects/players/common/sk/transformation_and_spindash.s",
       "original_line": 239,
       "old": "locret_11DA4",
-      "new": "SKPlayerSpindash_ReturnAfterActiveSpindashBackgroundChecks",
+      "new": "SKSpin_ActiveReturn",
       "profiles": ["sk"],
       "meaning": "Describe ReturnAfterActiveSpindashBackgroundChecks."
     },
@@ -1918,7 +1918,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 19,
       "old": "byte_186E2",
-      "new": "AirCountdown_Animation0_WarningValue0Formation",
+      "new": "AirCountdown_FormNumber0",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation0_WarningValue0Formation."
     },
@@ -1926,7 +1926,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 20,
       "old": "byte_186EB",
-      "new": "AirCountdown_Animation1_WarningValue1Formation",
+      "new": "AirCountdown_FormNumber1",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation1_WarningValue1Formation."
     },
@@ -1934,7 +1934,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 21,
       "old": "byte_186F4",
-      "new": "AirCountdown_Animation2_WarningValue2Formation",
+      "new": "AirCountdown_FormNumber2",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation2_WarningValue2Formation."
     },
@@ -1942,7 +1942,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 22,
       "old": "byte_186FD",
-      "new": "AirCountdown_Animation3_WarningValue3Formation",
+      "new": "AirCountdown_FormNumber3",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation3_WarningValue3Formation."
     },
@@ -1950,7 +1950,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 23,
       "old": "byte_18706",
-      "new": "AirCountdown_Animation4_WarningValue4Formation",
+      "new": "AirCountdown_FormNumber4",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation4_WarningValue4Formation."
     },
@@ -1958,7 +1958,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 24,
       "old": "byte_1870F",
-      "new": "AirCountdown_Animation5_WarningValue5Formation",
+      "new": "AirCountdown_FormNumber5",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation5_WarningValue5Formation."
     },
@@ -1966,7 +1966,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 25,
       "old": "byte_18718",
-      "new": "AirCountdown_Animation6_SmallBreathingBubbleFormation",
+      "new": "AirCountdown_FormSmallBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation6_SmallBreathingBubbleFormation."
     },
@@ -1974,7 +1974,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 26,
       "old": "byte_1871D",
-      "new": "AirCountdown_Animation7_WarningValue0Blink",
+      "new": "AirCountdown_BlinkNumber0",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation7_WarningValue0Blink."
     },
@@ -1982,7 +1982,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 27,
       "old": "byte_18725",
-      "new": "AirCountdown_Animation8_WarningValue1Blink",
+      "new": "AirCountdown_BlinkNumber1",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation8_WarningValue1Blink."
     },
@@ -1990,7 +1990,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 28,
       "old": "byte_1872D",
-      "new": "AirCountdown_Animation9_WarningValue2Blink",
+      "new": "AirCountdown_BlinkNumber2",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation9_WarningValue2Blink."
     },
@@ -1998,7 +1998,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 29,
       "old": "byte_18735",
-      "new": "AirCountdown_Animation10_WarningValue3Blink",
+      "new": "AirCountdown_BlinkNumber3",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation10_WarningValue3Blink."
     },
@@ -2006,7 +2006,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 30,
       "old": "byte_1873D",
-      "new": "AirCountdown_Animation11_WarningValue4Blink",
+      "new": "AirCountdown_BlinkNumber4",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation11_WarningValue4Blink."
     },
@@ -2014,7 +2014,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 31,
       "old": "byte_18745",
-      "new": "AirCountdown_Animation12_WarningValue5Blink",
+      "new": "AirCountdown_BlinkNumber5",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation12_WarningValue5Blink."
     },
@@ -2022,7 +2022,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 32,
       "old": "byte_1874D",
-      "new": "AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame",
+      "new": "AirCountdown_SurfaceAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame."
     },
@@ -2030,7 +2030,7 @@
       "source": "src/objects/shared/bubbles/animations/air_countdown.s",
       "original_line": 33,
       "old": "byte_1874F",
-      "new": "AirCountdown_Animation14_DrowningBubbleFormation",
+      "new": "AirCountdown_FormDrowningBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe AirCountdown_Animation14_DrowningBubbleFormation."
     },
@@ -2054,7 +2054,7 @@
       "source": "src/objects/shared/bubbles/animations/bubbler.s",
       "original_line": 15,
       "old": "byte_2FC9B",
-      "new": "Bubbler_Animation2_LargeCollectableAirBubbleFormation",
+      "new": "Bubbler_FormLargeAirBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_Animation2_LargeCollectableAirBubbleFormation."
     },
@@ -2062,7 +2062,7 @@
       "source": "src/objects/shared/bubbles/animations/bubbler.s",
       "original_line": 16,
       "old": "byte_2FCA2",
-      "new": "Bubbler_Animation3_FastLargeBubbleFormation",
+      "new": "Bubbler_FormFastLargeBubble",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_Animation3_FastLargeBubbleFormation."
     },
@@ -2070,7 +2070,7 @@
       "source": "src/objects/shared/bubbles/animations/bubbler.s",
       "original_line": 17,
       "old": "byte_2FCA6",
-      "new": "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance",
+      "new": "Bubbler_Anim45_SurfaceAdvance",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance."
     },
@@ -2078,7 +2078,7 @@
       "source": "src/objects/shared/bubbles/animations/bubbler.s",
       "original_line": 18,
       "old": "byte_2FCA8",
-      "new": "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop",
+      "new": "Bubbler_Anim67_LargePop",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop."
     },
@@ -2086,7 +2086,7 @@
       "source": "src/objects/shared/bubbles/animations/bubbler.s",
       "original_line": 19,
       "old": "byte_2FCAC",
-      "new": "Bubbler_Animation8_StationaryGeneratorLoop",
+      "new": "Bubbler_GeneratorLoop",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_Animation8_StationaryGeneratorLoop."
     },
@@ -2166,7 +2166,7 @@
       "source": "src/objects/shared/bubbles/mappings/bubbler.s",
       "original_line": 76,
       "old": "word_2FD7A",
-      "new": "Bubbler_PrimaryWarningFrames9To18_Mapping",
+      "new": "Bubbler_MapP1WarningFrames9To18",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_PrimaryWarningFrames9To18_Mapping."
     },
@@ -2206,7 +2206,7 @@
       "source": "src/objects/shared/bubbles/mappings/bubbler.s",
       "original_line": 85,
       "old": "word_2FD9C",
-      "new": "Bubbler_SecondaryWarningFrames9To18_Mapping",
+      "new": "Bubbler_MapP2WarningFrames9To18",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Describe Bubbler_SecondaryWarningFrames9To18_Mapping."
     }

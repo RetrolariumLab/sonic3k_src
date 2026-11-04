@@ -903,9 +903,15 @@
       "commits": ["e29aa0440dda60da3c5057c4635a7997ef3c0037"]
     },
     {
-      "id": "current-shorten-04-collision",
+      "id": "change-919681cc6390",
       "kind": "source_or_tooling",
       "summary": "Shorten 347 terrain probe and contact labels and preserve the original source bindings.",
+      "commits": ["919681cc63905c8241d9163a94268e1f899cb4cd"]
+    },
+    {
+      "id": "current-shorten-05-player-common",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 261 shared player state labels and keep their animation, resource, and motion contracts.",
       "commits": ["release-commit"]
     }
   ],

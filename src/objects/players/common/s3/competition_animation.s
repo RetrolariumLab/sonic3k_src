@@ -4,157 +4,161 @@
 Animate_SonicKnuckles_2P:
                 lea     (AniSonic2P).l,a1
                 tst.b   character_id(a0)
-                beq.s   S3PlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush
+                beq.s   S3CompAnim_ResetOnAnimChange
                 lea     (AniKnuckles2P).l,a1
 
-S3PlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush:
+S3CompAnim_ResetOnAnimChange:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   S3PlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames
+                beq.s   S3CompAnim_DispatchHeader
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-S3PlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames:
+S3CompAnim_DispatchHeader:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   S3PlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble
+                bmi.s   S3CompAnim_DispatchMovementHeaderFF
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   S3PlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
+                bpl.s   S3CompAnim_FrameReturn
                 move.b  d0,anim_frame_timer(a0)
 
-S3PlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand:
+; Bytes $FC through $FF enter the command decoder
+S3CompAnim_ReadFrameOrCommand:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$FC,d0
-                bhs.s   S3PlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand
+                bhs.s   S3CompAnim_TestLoopFF
 
-S3PlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence:
+S3CompAnim_StoreFrameAndAdvance:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-S3PlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore:
+S3CompAnim_FrameReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand:
+S3CompAnim_TestLoopFF:
                 addq.b  #1,d0
-                bne.s   S3PlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand
+                bne.s   S3CompAnim_TestRewindFE
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   S3PlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence
+                bra.s   S3CompAnim_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand:
+S3CompAnim_TestRewindFE:
                 addq.b  #1,d0
-                bne.s   S3PlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand
+                bne.s   S3CompAnim_TestChangeFD
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   S3PlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence
+                bra.s   S3CompAnim_StoreFrameAndAdvance
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand:
+S3CompAnim_TestChangeFD:
                 addq.b  #1,d0
-                bne.s   S3PlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand
+                bne.s   S3CompAnim_CommandReturn
                 move.b  2(a1,d1.w),anim(a0)
 
-S3PlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand:
+S3CompAnim_CommandReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble:
+; Header $FF selects movement or tumble. Other negative headers use rolling frames
+S3CompAnim_DispatchMovementHeaderFF:
                 addq.b  #1,d0
-                bne.w   S3PlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames
+                bne.w   S3CompAnim_TickRollingFrames
                 moveq   #0,d0
                 move.b  flip_angle(a0),d0
-                bne.w   S3PlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing
+                bne.w   S3CompAnim_SelectTumbleOrientation
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   S3PlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight
-                beq.s   S3PlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight
+                bmi.s   S3CompAnim_ReflectAngleIfFacingRight
+                beq.s   S3CompAnim_ReflectAngleIfFacingRight
                 subq.b  #1,d0
 
-S3PlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight:
+S3CompAnim_ReflectAngleIfFacingRight:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   S3PlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle
+                bne.s   S3CompAnim_PickMovementFlip
                 not.b   d0
 
-S3PlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle:
+S3CompAnim_PickMovementFlip:
                 addi.b  #$10,d0
-                bpl.s   S3PlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames
+                bpl.s   S3CompAnim_ApplyFlipAndCheckPush
                 moveq   #3,d1
 
-S3PlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames:
+S3CompAnim_ApplyFlipAndCheckPush:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   S3PlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires
+                bne.w   S3CompAnim_TickPushingFrames
                 lsr.b   #5,d0
                 andi.b  #3,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   S3PlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit
+                bpl.s   S3CompAnim_AdjustMovementSpeed
                 neg.w   d2
 
-S3PlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit:
+; Double the speed used for frame selection when secondary status is negative
+S3CompAnim_AdjustMovementSpeed:
                 tst.b   status_secondary(a0)
-                bpl.w   S3PlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride
+                bpl.w   S3CompAnim_SelectWalkOrRunSequence
                 add.w   d2,d2
 
-S3PlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride:
+S3CompAnim_SelectWalkOrRunSequence:
                 move.b  d0,d3
                 lea     (AniSonic2P01).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   S3PlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset
+                bhs.s   S3CompAnim_ReadOrLoopMovementFrame
                 lea     (AniSonic2P00).l,a1
                 add.b   d0,d0
 
-S3PlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset:
+S3CompAnim_ReadOrLoopMovementFrame:
                 add.b   d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   S3PlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer
+                bne.s   S3CompAnim_StoreMovementFrameAndTick
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-S3PlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer:
+; Write the oriented frame every call. Advance the cursor on timer underflow
+S3CompAnim_StoreMovementFrameAndTick:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   S3PlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance
+                bpl.s   S3CompAnim_MovementReturn
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   S3PlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex
+                bpl.s   S3CompAnim_ReloadMoveDelayAndAdvance
                 moveq   #0,d2
 
-S3PlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex:
+S3CompAnim_ReloadMoveDelayAndAdvance:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-S3PlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance:
+S3CompAnim_MovementReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing:
+S3CompAnim_SelectTumbleOrientation:
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   S3PlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType
+                bne.s   S3CompAnim_SelectLeftTumbleFlip
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #$16,d0
                 divu.w  #$2C,d0
@@ -164,21 +168,21 @@ S3PlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType:
+S3CompAnim_SelectLeftTumbleFlip:
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   S3PlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes
+                bpl.s   S3CompAnim_ReverseTumbleAndFlipXY
                 ori.b   #1,render_flags(a0)
                 addi.b  #$16,d0
-                bra.s   S3PlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame
+                bra.s   S3CompAnim_StoreLeftTumbleFrame
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes:
+S3CompAnim_ReverseTumbleAndFlipXY:
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$9A,d0
 
-S3PlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame:
+S3CompAnim_StoreLeftTumbleFrame:
                 divu.w  #$2C,d0
                 addi.b  #$15,d0
                 move.b  d0,mapping_frame(a0)
@@ -186,62 +190,63 @@ S3PlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame:
                 rts
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames:
+S3CompAnim_TickRollingFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   S3PlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
+                bpl.w   S3CompAnim_FrameReturn
                 move.w  ground_vel(a0),d2
-                bpl.s   S3PlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude
+                bpl.s   S3CompAnim_SelectRollSequence
                 neg.w   d2
 
-S3PlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude:
+S3CompAnim_SelectRollSequence:
                 lea     (AniSonic2P03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   S3PlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration
+                bhs.s   S3CompAnim_CalcRollDelay
                 lea     (AniSonic2P02).l,a1
 
-S3PlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration:
+S3CompAnim_CalcRollDelay:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   S3PlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead
+                bpl.s   S3CompAnim_ReloadRollDelayAndFacing
                 moveq   #0,d2
 
-S3PlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead:
+S3CompAnim_ReloadRollDelayAndFacing:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   S3PlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand
+                bra.w   S3CompAnim_ReadFrameOrCommand
 ; ---------------------------------------------------------------------------
 
-S3PlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires:
+S3CompAnim_TickPushingFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   S3PlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
+                bpl.w   S3CompAnim_FrameReturn
                 move.w  ground_vel(a0),d2
-                bmi.s   S3PlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator
+                bmi.s   S3CompAnim_CalcPushDelay
                 neg.w   d2
 
-S3PlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator:
+S3CompAnim_CalcPushDelay:
                 addi.w  #$800,d2
-                bpl.s   S3PlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale
+                bpl.s   S3CompAnim_SelectPushSequence
                 moveq   #0,d2
 
-S3PlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale:
+; Knuckles uses a separate sequence and an additional divide by four for the delay
+S3CompAnim_SelectPushSequence:
                 lsr.w   #6,d2
                 lea     (AniSonic2P04).l,a1
                 tst.b   character_id(a0)
-                beq.s   S3PlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead
+                beq.s   S3CompAnim_StorePushDelayAndFacing
                 lea     (AniKnuckles2P04).l,a1
                 lsr.w   #2,d2
 
-S3PlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead:
+S3CompAnim_StorePushDelayAndFacing:
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   S3PlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand
+                bra.w   S3CompAnim_ReadFrameOrCommand
 ; End of function Animate_SonicKnuckles_2P
 
 ; ---------------------------------------------------------------------------
@@ -256,22 +261,22 @@ SonicKnuckles2P_Load_PLC:
                 lea     (PLC_Sonic2P).l,a2
                 move.l  #ArtUnc_Sonic2P,d6
                 tst.b   character_id(a0)
-                beq.s   S3PlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination
+                beq.s   S3CompAnim_SelectPatternsAndPlayerVRAM
                 lea     (PLC_Knuckles2P).l,a2
                 move.l  #ArtUnc_Knuckles2P,d6
 
-S3PlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination:
+S3CompAnim_SelectPatternsAndPlayerVRAM:
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   S3PlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList
+                bmi.s   S3CompAnim_PatternQueueReturn
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
                 cmpa.w  #Player_1,a0
-                beq.s   S3PlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination
+                beq.s   S3CompAnim_QueuePatternRun
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
 
-S3PlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination:
+S3CompAnim_QueuePatternRun:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -285,9 +290,9 @@ S3PlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,S3PlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination
+                dbf     d5,S3CompAnim_QueuePatternRun
 
-S3PlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList:
+S3CompAnim_PatternQueueReturn:
                 rts
 ; End of function SonicKnuckles2P_Load_PLC
 

@@ -27124,7 +27124,7 @@
       "responsibility": "Player underwater air countdown, warning numbers, small bubbles and air timer restoration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 423,
+      "physical_lines": 425,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -27164,7 +27164,7 @@
       "responsibility": "Shared Sonic and Knuckles competition animation and compact dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 294,
+      "physical_lines": 299,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -27209,7 +27209,7 @@
       "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 265,
+      "physical_lines": 269,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -27254,7 +27254,7 @@
       "responsibility": "Shared slope resistance, rolling repulsion, slope detachment and airborne angle normalization.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 209,
+      "physical_lines": 212,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -27299,7 +27299,7 @@
       "responsibility": "Existing shared transformation state and Sonic or Knuckles spindash logic, including product-specific Tails super handling.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 206,
+      "physical_lines": 208,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "s3.s",
@@ -27344,7 +27344,7 @@
       "responsibility": "Player underwater air countdown, warning numbers, small bubbles and air timer restoration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 426,
+      "physical_lines": 428,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -27374,7 +27374,7 @@
       "responsibility": "Shared Sonic and Knuckles competition animation and compact dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 294,
+      "physical_lines": 299,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -27409,7 +27409,7 @@
       "responsibility": "Existing shared player hurt, death, speed restoration, restart and animation dispatch state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 292,
+      "physical_lines": 297,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -27444,7 +27444,7 @@
       "responsibility": "Shared slope resistance, rolling repulsion, slope detachment and airborne angle normalization.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 209,
+      "physical_lines": 212,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -27479,7 +27479,7 @@
       "responsibility": "Existing shared transformation state and Sonic or Knuckles spindash logic, including product-specific Tails super handling.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 241,
+      "physical_lines": 243,
       "origin": {
         "commit": "936341bdc39cf12eefb781658c9e2fd6a1b73b4d",
         "path": "sonic3k.s",
@@ -32021,7 +32021,7 @@
       "responsibility": "Assembler data for General/Sprites/Bubbles/Anim - Air Countdown",
       "role": "data",
       "status": "owned",
-      "physical_lines": 33,
+      "physical_lines": 34,
       "origin": {
         "commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
         "path": "General/Sprites/Bubbles/Anim - Air Countdown.s",

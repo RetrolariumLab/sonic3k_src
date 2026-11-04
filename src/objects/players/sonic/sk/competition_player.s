@@ -36,10 +36,10 @@ SKSonicCompetition_DispatchCompetitionRoutineByteThroughSixRelativeEntries:
 Sonic2P_Index:
                 dc.w    SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot-Sonic2P_Index
                 dc.w    SKSonicCompetition_EnterPrimaryCompetitionDebugPlacementOnNewPhysicalB-Sonic2P_Index
-                dc.w    SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic2P_Index
-                dc.w    SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic2P_Index
-                dc.w    SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic2P_Index
-                dc.w    SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic2P_Index
+                dc.w    SKRecovery_HurtState4-Sonic2P_Index
+                dc.w    SKRecovery_DeathState6-Sonic2P_Index
+                dc.w    SKRecovery_RestartState8-Sonic2P_Index
+                dc.w    SKRecovery_ScrollWaitStateA-Sonic2P_Index
 ; ---------------------------------------------------------------------------
 
 SKSonicCompetition_InitializeCompactCompetitionGeometrySpeedsAndOptionalRespawnSnapshot:

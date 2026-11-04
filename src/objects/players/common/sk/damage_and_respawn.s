@@ -4,30 +4,31 @@
 
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape:
+SKRecovery_HurtState4:
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
+                beq.s   SKRecovery_MoveHurtAndApplyGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
+                beq.s   SKRecovery_MoveHurtAndApplyGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity:
+SKRecovery_MoveHurtAndApplyGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum
+                beq.s   SKRecovery_WrapHurtYIfEnabled
                 subi.w  #$20,y_vel(a0)
 
-SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum:
+; Mask integer Y only when the camera minimum equals -$100
+SKRecovery_WrapHurtYIfEnabled:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw
+                bne.s   SKRecovery_ResolveHurtAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw:
+SKRecovery_ResolveHurtAndDraw:
                 bsr.w   PlayerSKResolveCommonHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
@@ -38,29 +39,30 @@ SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw:
 
 PlayerSKResolveCommonHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
+                bne.s   SKRecovery_CheckHurtLandingAndReset
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary
+                bne.s   SKRecovery_TestReverseHurtDeathPlane
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane
-                bra.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
+                blt.w   SKRecovery_KillAtHurtDeathPlane
+                bra.s   SKRecovery_CheckHurtLandingAndReset
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary:
+; Under reverse gravity, reaching the camera minimum or going above it kills the hurt player
+SKRecovery_TestReverseHurtDeathPlane:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
-                bra.w   SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane
+                blt.s   SKRecovery_CheckHurtLandingAndReset
+                bra.w   SKRecovery_KillAtHurtDeathPlane
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded:
+SKRecovery_CheckHurtLandingAndReset:
                 movem.l a4-a6,-(sp)
                 bsr.w   SonicKnux_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset
+                bne.s   SKRecovery_HurtLandingReturn
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -72,27 +74,27 @@ SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset:
+SKRecovery_HurtLandingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane:
+SKRecovery_KillAtHurtDeathPlane:
                 jmp     (Kill_Character).l
 ; End of function PlayerSKResolveCommonHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape:
+SKRecovery_DeathState6:
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
+                beq.s   SKRecovery_ResolveDeathAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
+                beq.s   SKRecovery_ResolveDeathAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw:
+SKRecovery_ResolveDeathAndDraw:
                 bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
@@ -103,54 +105,55 @@ SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw:
 
 PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn:
                 cmpa.w  #Player_1,a0
-                bne.s   SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold
+                bne.s   SKRecovery_LockP2ScrollAndReadCameraY
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock).w
-                bra.s   SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy
+                bra.s   SKRecovery_PrepareDeathExitDepth
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold:
+; The secondary player uses the primary camera Y for this death threshold
+SKRecovery_LockP2ScrollAndReadCameraY:
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock_P2).w
 
-SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy:
+SKRecovery_PrepareDeathExitDepth:
                 move.b  #0,spin_dash_flag(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold
+                beq.s   SKRecovery_SetNormalDeathThreshold
                 subi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bge.w   SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge
-                bra.w   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
+                bge.w   SKRecovery_DispatchDeathOutcome
+                bra.w   SKRecovery_DeathFinishReturn
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold:
+SKRecovery_SetNormalDeathThreshold:
                 addi.w  #$100,d0
                 tst.w   (Competition_mode).w
-                beq.s   SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution
+                beq.s   SKRecovery_TestNormalDeathDepth
                 subi.w  #$70,d0
 
-SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution:
+SKRecovery_TestNormalDeathDepth:
                 cmp.w   y_pos(a0),d0
-                bge.w   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
+                bge.w   SKRecovery_DeathFinishReturn
 
-SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge:
+SKRecovery_DispatchDeathOutcome:
                 tst.w   (Competition_mode).w
-                bne.w   SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot
+                bne.w   SKRecovery_RestoreCompP1OrP2
                 cmpi.b  #1,character_id(a0)
-                bne.s   SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
+                bne.s   SKRecovery_ChargeLifeAndPrepRestart
                 cmpi.w  #2,(Player_mode).w
-                beq.s   SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
+                beq.s   SKRecovery_ChargeLifeAndPrepRestart
                 move.b  #2,routine(a0)
                 bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver:
+SKRecovery_ChargeLifeAndPrepRestart:
                 move.b  #8,routine(a0)
                 move.w  #60,$3E(a0)
                 move.b  #0,(Respawn_table_keep).w
                 addq.b  #1,(Update_HUD_life_count).w
                 subq.b  #1,(Life_count).w
-                bne.s   SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge
+                bne.s   SKRecovery_TryTimeOverWithLivesLeft
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
@@ -159,7 +162,7 @@ SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver:
                 move.w  a0,(Reserved_object_3+objoff_3E).w
                 clr.b   (Time_over_flag).w
 
-SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt:
+SKRecovery_StopTimersAndCueGameOver:
                 clr.b   (Update_HUD_timer).w
                 clr.b   (Update_HUD_timer_P2).w
                 move.b  #8,routine(a0)
@@ -169,26 +172,26 @@ SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt:
                 jmp     (Load_PLC_2).l
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge:
+SKRecovery_TryTimeOverWithLivesLeft:
                 tst.b   (Time_over_flag).w
-                beq.s   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
+                beq.s   SKRecovery_DeathFinishReturn
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
                 move.b  #2,(Reserved_object_3+mapping_frame).w
                 move.b  #3,(Dynamic_object_RAM+mapping_frame).w
                 move.w  a0,(Reserved_object_3+objoff_3E).w
-                bra.s   SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt
+                bra.s   SKRecovery_StopTimersAndCueGameOver
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation:
+SKRecovery_DeathFinishReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot:
+SKRecovery_RestoreCompP1OrP2:
                 move.b  #2,routine(a0)
                 cmpa.w  #Player_1,a0
-                bne.s   SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState
+                bne.s   SKRecovery_RestoreCompP2Spawn
                 move.b  #0,(Scroll_lock).w
                 move.w  (Saved_X_pos).w,x_pos(a0)
                 move.w  (Saved_Y_pos).w,y_pos(a0)
@@ -197,10 +200,10 @@ SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot:
                 clr.w   (Ring_count).w
                 clr.b   (Extra_life_flags).w
                 move.b  #1,(Competition_lap_count_flag).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
-                bra.s   SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet
+                bra.s   SKRecovery_ResetCompMotionAndSpeeds
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState:
+SKRecovery_RestoreCompP2Spawn:
                 move.b  #0,(Scroll_lock_P2).w
                 move.w  (Saved2_X_pos).w,x_pos(a0)
                 move.w  (Saved2_Y_pos).w,y_pos(a0)
@@ -209,7 +212,7 @@ SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState:
                 clr.w   (Ring_count_P2).w
                 move.b  #1,(Competition_lap_count_flag_P2).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
 
-SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet:
+SKRecovery_ResetCompMotionAndSpeeds:
                 move.b  #0,object_control(a0)
                 move.b  #5,anim(a0)
                 move.w  #0,x_vel(a0)
@@ -232,40 +235,42 @@ SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet:
 
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero:
+; Request a restart on the decrement to zero. An already-zero timer holds this state
+SKRecovery_RestartState8:
                 tst.w   $3E(a0)
-                beq.s   SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
+                beq.s   SKRecovery_RestartReturn
                 subq.w  #1,$3E(a0)
-                bne.s   SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
+                bne.s   SKRecovery_RestartReturn
                 move.w  #1,(Restart_level_flag).w
 
-SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion:
+SKRecovery_RestartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero:
+; Restore control once both global scroll deltas are zero
+SKRecovery_ScrollWaitStateA:
                 tst.w   (H_scroll_amount).w
-                bne.s   SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
+                bne.s   SKRecovery_DrawScrollWaitFrame
                 tst.w   (V_scroll_amount).w
-                bne.s   SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
+                bne.s   SKRecovery_DrawScrollWaitFrame
                 move.b  #2,routine(a0)
 
-SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume:
+SKRecovery_DrawScrollWaitFrame:
                 bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_DrowningStateCWithDebugPlacementEscape:
+SKRecovery_DrowningStateC:
                 tst.w   (Debug_mode_flag).w
-                beq.s   SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
+                beq.s   SKRecovery_MoveDrowningAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
+                beq.s   SKRecovery_MoveDrowningAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity:
+SKRecovery_MoveDrowningAndDraw:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -276,17 +281,17 @@ SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity:
 
 PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
                 tst.w   (Competition_mode).w
-                bne.s   SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns
+                bne.s   SKRecovery_AnimateCompAndLoadPatterns
                 bsr.s   Animate_Sonic
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip
+                beq.s   SKRecovery_LoadRecoverySonicPatterns
                 eori.b  #2,render_flags(a0)
 
-SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip:
+SKRecovery_LoadRecoverySonicPatterns:
                 bra.w   Sonic_Load_PLC
 ; ---------------------------------------------------------------------------
 
-SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns:
+SKRecovery_AnimateCompAndLoadPatterns:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
 ; End of function PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns

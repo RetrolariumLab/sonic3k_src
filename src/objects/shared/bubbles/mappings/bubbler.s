@@ -10,16 +10,16 @@ Map_Bubbler_:
                 dc.w    Bubbler_Frame6_Mapping-Map_Bubbler_
                 dc.w    Bubbler_Frame7_Mapping-Map_Bubbler_
                 dc.w    Bubbler_Frame8_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
-                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
+                dc.w    Bubbler_MapP1WarningFrames9To18-Map_Bubbler_
                 dc.w    Bubbler_Frame19_Mapping-Map_Bubbler_
                 dc.w    Bubbler_Frame20_Mapping-Map_Bubbler_
                 dc.w    Bubbler_Frame21_Mapping-Map_Bubbler_
@@ -35,16 +35,16 @@ Map_Bubbler2_:
                 dc.w    Bubbler_Frame6_Mapping-Map_Bubbler2_
                 dc.w    Bubbler_Frame7_Mapping-Map_Bubbler2_
                 dc.w    Bubbler_Frame8_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
-                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
+                dc.w    Bubbler_MapP2WarningFrames9To18-Map_Bubbler2_
                 dc.w    Bubbler_Frame19_Mapping-Map_Bubbler2_
                 dc.w    Bubbler_Frame20_Mapping-Map_Bubbler2_
                 dc.w    Bubbler_Frame21_Mapping-Map_Bubbler2_
@@ -73,7 +73,7 @@ Bubbler_Frame8_Mapping: dc.w    4
                 dc.b    $F0,   5,   8, $28,   0,   0
                 dc.b    0,   5, $10, $28, $FF, $F0
                 dc.b    0,   5, $18, $28,   0,   0
-Bubbler_PrimaryWarningFrames9To18_Mapping:  dc.w    1
+Bubbler_MapP1WarningFrames9To18:    dc.w    1
                 dc.b    $F4,   6,   3, $84, $FF, $F8
 Bubbler_Frame19_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $2C, $FF, $F8
@@ -81,6 +81,6 @@ Bubbler_Frame20_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $30, $FF, $F8
 Bubbler_Frame21_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $34, $FF, $F8
-Bubbler_Frame22_Mapping:                        dc.w    0
-Bubbler_SecondaryWarningFrames9To18_Mapping:    dc.w    1
+Bubbler_Frame22_Mapping:            dc.w    0
+Bubbler_MapP2WarningFrames9To18:    dc.w    1
                 dc.b    $F4,   6,   3, $94, $FF, $F8
