@@ -11,30 +11,30 @@ Obj_BubblesBadnik:
                 jsr     BubblesBadnik_Index(pc,d1.w)
                 move.b  #$12,collision_flags(a0)
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   loc_8835E
+                bne.s   SKBubblesBadnik_LoadFrameAndDraw
                 move.b  #$86,collision_flags(a0)
 
-loc_8835E:
+SKBubblesBadnik_LoadFrameAndDraw:
                 lea     PLCPtr_BubblesBadnik(pc),a2
                 jsr     Perform_DPLC(pc)
                 jmp     Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
 BubblesBadnik_Index:
-                dc.w    loc_88370-BubblesBadnik_Index
-                dc.w    loc_883AC-BubblesBadnik_Index
-                dc.w    loc_883E6-BubblesBadnik_Index
+                dc.w    SKBubblesBadnik_InitSlotAndVelocity-BubblesBadnik_Index
+                dc.w    SKBubblesBadnik_BobAndCheckTurn-BubblesBadnik_Index
+                dc.w    SKBubblesBadnik_AnimateAndTryTurnSound-BubblesBadnik_Index
 ; ---------------------------------------------------------------------------
 
-loc_88370:
+SKBubblesBadnik_InitSlotAndVelocity:
                 lea     ObjSlot_BubblesBadnik(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 move.w  #-$80,x_vel(a0)
                 btst    #0,render_flags(a0)
-                beq.s   loc_8838A
+                beq.s   SKBubblesBadnik_InitIdleAnimAndSwing
                 neg.w   x_vel(a0)
 
-loc_8838A:
-                move.l  #byte_8844D,$30(a0)
+SKBubblesBadnik_InitIdleAnimAndSwing:
+                move.l  #SKBubblesBadnik_IdleAnim,$30(a0)
                 move.w  #$100,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
@@ -43,46 +43,47 @@ loc_8838A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_883AC:
+SKBubblesBadnik_BobAndCheckTurn:
                 jsr     Animate_RawMultiDelay(pc)
                 move.w  y_vel(a0),d4
                 jsr     Swing_UpAndDown(pc)
                 tst.w   y_vel(a0)
-                bne.s   loc_883E0
+                bne.s   SKBubblesBadnik_MoveAfterIdleSwing
                 tst.w   d4
-                bmi.s   loc_883E0
+                bmi.s   SKBubblesBadnik_MoveAfterIdleSwing
                 move.b  #4,routine(a0)
-                move.l  #byte_8843E,$30(a0)
-                move.l  #loc_88414,$34(a0)
+                move.l  #SKBubblesBadnik_TurnAnim,$30(a0)
+                move.l  #SKBubblesBadnik_RestartIdleAnim,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-loc_883E0:
+SKBubblesBadnik_MoveAfterIdleSwing:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_883E6:
+; Play the tick when the animation cursor reaches 4 on a fresh pair
+SKBubblesBadnik_AnimateAndTryTurnSound:
                 jsr     Animate_RawMultiDelay(pc)
-                beq.s   loc_883FC
+                beq.s   SKBubblesBadnik_TryReverseAtSwingTurn
                 cmpi.b  #4,anim_frame(a0)
-                bne.s   loc_883FC
+                bne.s   SKBubblesBadnik_TryReverseAtSwingTurn
                 moveq   #signextendB(sfx_ChainTick),d0
                 jsr     (Play_SFX).l
 
-loc_883FC:
+SKBubblesBadnik_TryReverseAtSwingTurn:
                 jsr     Swing_UpAndDown(pc)
                 tst.w   d3
-                beq.s   loc_8840E
+                beq.s   SKBubblesBadnik_MoveAfterTurn
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
 
-loc_8840E:
+SKBubblesBadnik_MoveAfterTurn:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_88414:
+SKBubblesBadnik_RestartIdleAnim:
                 move.b  #2,routine(a0)
-                move.l  #byte_8844D,$30(a0)
+                move.l  #SKBubblesBadnik_IdleAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 ObjSlot_BubblesBadnik:
@@ -95,7 +96,7 @@ ObjSlot_BubblesBadnik:
 PLCPtr_BubblesBadnik:
                 dc.l    ArtUnc_BubblesBadnik
                 dc.l    DPLC_BubblesBadnik
-byte_8843E:
+SKBubblesBadnik_TurnAnim:
                 dc.b    0,  $F
                 dc.b    0, $77
                 dc.b    1,   3
@@ -104,7 +105,7 @@ byte_8843E:
                 dc.b    1,   3
                 dc.b    0, $77
                 dc.b    $F4
-byte_8844D:
+SKBubblesBadnik_IdleAnim:
                 dc.b    0, $7F
                 dc.b    3,   3
                 dc.b    4, $6B

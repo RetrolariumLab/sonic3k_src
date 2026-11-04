@@ -17,10 +17,10 @@ MGZ2_ScreenEvent:
                 move.w  (Screen_shake_offset).w,d0
                 add.w   d0,(Camera_Y_pos_copy).w
                 tst.w   (Events_fg_0).w
-                beq.s   loc_512D0
+                beq.s   SKMGZ2Screen_DispatchFgAndShakeSound
                 st      (Screen_shake_flag).w           ; Turn continuous shaking on
 
-loc_512D0:
+SKMGZ2Screen_DispatchFgAndShakeSound:
                 jsr     Do_ShakeSound(pc)
                 move.w  (Events_routine_fg).w,d0
                 jmp     MGZ2_ScreenEvent_Index(pc,d0.w)
@@ -36,13 +36,13 @@ MGZ2_ScreenEvent_Index:
 
 MGZ2SE_Normal:
                 tst.w   (Events_fg_4).w
-                bne.s   loc_512FA
+                bne.s   SKMGZ2Screen_BeginFinalCollapse
                 jsr     MGZ2_QuakeEvent(pc)
                 jsr     MGZ2_ChunkEvent(pc)
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
-loc_512FA:
+SKMGZ2Screen_BeginFinalCollapse:
                 clr.w   (Events_fg_4).w                 ; Clear background event
                 st      (Events_bg+$16).w
                 move.w  #$14,(Screen_shake_flag).w
@@ -51,11 +51,11 @@ loc_512FA:
 MGZ2SE_Collapse:
                 jsr     MGZ2_LevelCollapse(pc)
                 tst.w   (Screen_shake_flag).w
-                bmi.s   loc_5131A
+                bmi.s   SKMGZ2Screen_DrawDeformedCollapseFg
                 jmp     DrawTilesAsYouMove(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5131A:
+SKMGZ2Screen_DrawDeformedCollapseFg:
                 lea     (MGZ2_FGVScrollArray).l,a4
                 lea     (HScroll_table+$100).w,a5
                 moveq   #$F,d6
@@ -66,11 +66,11 @@ loc_5131A:
 MGZ2SE_MoveBG:
                 move.l  (Events_bg+$08).w,d0
                 cmpi.l  #$50000,d0
-                bhs.s   loc_51342
+                bhs.s   SKMGZ2Screen_StepBossBgOffset
                 addi.l  #$800,d0
                 move.l  d0,(Events_bg+$08).w
 
-loc_51342:
+SKMGZ2Screen_StepBossBgOffset:
                 swap    d0
                 add.w   d0,(Events_bg+$0C).w            ; Apply a movement offset for the BG scrolling during the boss
                 jmp     DrawTilesAsYouMove(pc)
@@ -79,22 +79,22 @@ loc_51342:
 
 MGZ2_LevelCollapse:
                 cmpi.b  #6,(Player_1+routine).w
-                bhs.w   locret_514A8                    ; If dying, don't do anything else
+                bhs.w   SKMGZ2Screen_CollapseReturn     ; If dying, don't do anything else
                 tst.w   (Screen_shake_flag).w
-                bmi.w   loc_5140C                       ; If shaking continuously, branch
-                bne.w   locret_514A8
+                bmi.w   SKMGZ2Screen_BeginCollapseColumnUpdate  ; If shaking continuously, branch
+                bne.w   SKMGZ2Screen_CollapseReturn
                 movea.w $38(a3),a1                      ; Get chunk line at $700 Y
                 lea     $79(a1),a1                      ; Get chunk at $3C80
                 move.w  -8(a3),d0                       ; Get FG level X chunksize
                 subq.w  #3,d0
                 moveq   #3-1,d1
 
-loc_51372:
+SKMGZ2Screen_ClearInitialCollapseChunks:
                 clr.b   (a1)+
                 clr.b   (a1)+
                 clr.b   (a1)+                           ; Clear the three main chunks on three lines that comprise the boss battle
                 adda.w  d0,a1
-                dbf     d1,loc_51372
+                dbf     d1,SKMGZ2Screen_ClearInitialCollapseChunks
                 lea     (HScroll_table+$102).w,a1
                 lea     (HScroll_table+$13C).w,a5
                 lea     $28(a5),a6
@@ -102,27 +102,27 @@ loc_51372:
                 and.w   (Camera_Y_pos_mask).w,d0        ; AND it to get tile position
                 moveq   #$A-1,d1
 
-loc_51394:
+SKMGZ2Screen_InitCollapseColumns:
                 move.w  d0,(a1)
                 addq.w  #4,a1
                 clr.l   (a5)+
                 clr.l   (a6)+                           ; Clear scroll values, etc
-                dbf     d1,loc_51394
+                dbf     d1,SKMGZ2Screen_InitCollapseColumns
                 jsr     (AllocateObject).l
-                bne.s   loc_513FA
+                bne.s   SKMGZ2Screen_EnableCollapseVScroll
                 move.w  #$3C90,d1
                 move.l  #$5C00790,d2
                 move.l  #HScroll_table+$13C,d3
                 moveq   #$A-1,d4
 
-loc_513BA:
+SKMGZ2Screen_TryCreateCollapseSolids:
                 move.l  #Obj_MGZ2LevelCollapseSolid,(a1)  ; Create solid objects that Sonic can stand on as the level collapses
                 move.w  d1,x_pos(a1)
                 move.w  d2,$2E(a1)
                 move.l  d3,$30(a1)
                 swap    d2
                 jsr     (CreateNewSprite4).l
-                bne.s   loc_513FA
+                bne.s   SKMGZ2Screen_EnableCollapseVScroll
                 move.l  #Obj_MGZ2LevelCollapseSolid,(a1)
                 move.w  d1,x_pos(a1)
                 move.w  d2,$2E(a1)
@@ -131,15 +131,16 @@ loc_513BA:
                 swap    d2
                 addq.l  #4,d3
                 jsr     (CreateNewSprite4).l
-                dbne    d4,loc_513BA
+                dbne    d4,SKMGZ2Screen_TryCreateCollapseSolids
 
-loc_513FA:
+; Enable the special scroll even if either collapse solid failed to spawn
+SKMGZ2Screen_EnableCollapseVScroll:
                 st      (Screen_shake_flag).w           ; Turn quake on
                 clr.w   (Events_bg+$06).w
                 st      (_unkEEA2).w                    ; Turn on special VScroll VInt function
                 move.w  #4,(Special_V_int_routine).w
 
-loc_5140C:
+SKMGZ2Screen_BeginCollapseColumnUpdate:
                 lea     (HScroll_table+$100).w,a1
                 lea     $28(a1),a4
                 lea     $14(a4),a5
@@ -149,56 +150,57 @@ loc_5140C:
                 moveq   #$A,d1
                 moveq   #$A-1,d2
 
-loc_5142A:
+SKMGZ2Screen_TryAccelerateColumn:
                 cmp.w   (a6)+,d0                        ; Get scroll delay for each block
-                blo.s   loc_51436
+                blo.s   SKMGZ2Screen_StepCollapseColumn
                 addi.l  #$500,$64(a1)                   ; Add $500 to Vscroll velocity for this block when not delayed
 
-loc_51436:
+; Clamp the displayed displacement while keeping the full accumulator for collision
+SKMGZ2Screen_StepCollapseColumn:
                 move.l  $64(a1),d3
                 add.l   d3,(a5)+                        ; Add velocity to actual VScroll
                 move.w  -4(a5),d3
                 cmpi.w  #$2E0,d3
-                blo.s   loc_5144C
+                blo.s   SKMGZ2Screen_StoreColumnScroll
                 move.w  #$2E0,d3                        ; $2E0 is the maximum scroll
                 subq.w  #1,d1                           ; When maximum scroll is reached, lower amount of "active" scrolling lines
 
-loc_5144C:
+SKMGZ2Screen_StoreColumnScroll:
                 move.w  (Camera_Y_pos_copy).w,d4        ; Get BG Y
                 sub.w   d3,d4
                 move.w  d4,(a4)+
                 move.w  d4,(a1)                         ; Subtract from scroll to get... something
                 addq.w  #4,a1
-                dbf     d2,loc_5142A                    ; Repeat until all scrolling parts are off-screen
+                dbf     d2,SKMGZ2Screen_TryAccelerateColumn  ; Repeat until all scrolling parts are off-screen
                 move.w  (Level_frame_counter).w,d0
                 subq.w  #1,d0
                 andi.w  #$F,d0
-                bne.s   loc_51470
+                bne.s   SKMGZ2Screen_TryFinishCollapse
                 moveq   #signextendB(sfx_BigRumble),d0  ; Play collapsing sound every 16 frames
                 jsr     (Play_SFX).l
 
-loc_51470:
+SKMGZ2Screen_TryFinishCollapse:
                 tst.w   d1
-                bne.s   locret_514A8                    ; If scrolling chunks still remain, do nothing
+                bne.s   SKMGZ2Screen_CollapseReturn     ; If scrolling chunks still remain, do nothing
                 movea.w $2C(a3),a1                      ; Get chunk line at $580 Y
                 lea     $79(a1),a1                      ; Get chunk at $3C80 X
                 move.w  -8(a3),d0
                 subq.w  #3,d0
                 moveq   #2,d1
 
-loc_51484:
+SKMGZ2Screen_ClearFinalCollapseChunks:
                 clr.b   (a1)+
                 clr.b   (a1)+
                 clr.b   (a1)+
                 adda.w  d0,a1
-                dbf     d1,loc_51484
+                dbf     d1,SKMGZ2Screen_ClearFinalCollapseChunks
                 clr.w   (Screen_shake_flag).w           ; Stop quaking
                 clr.l   (Events_bg+$08).w               ; Stop special tile drawing
                 move.w  (Camera_X_pos_copy).w,(Events_bg+$0C).w
                 move.w  #$C,(Special_V_int_routine).w   ; Set VScroll VInt routine
                 addq.w  #4,(Events_routine_fg).w        ; Next screen routine
 
-locret_514A8:
+SKMGZ2Screen_CollapseReturn:
                 rts
 ; End of function MGZ2_LevelCollapse
 
@@ -206,26 +208,26 @@ locret_514A8:
 
 MGZ2_QuakeEvent:
                 tst.w   (Events_fg_2).w
-                beq.s   loc_514D8
-                bpl.s   loc_514BE
+                beq.s   SKMGZ2Screen_DispatchQuakeAtP1
+                bpl.s   SKMGZ2Screen_TryReduceQuakeMinY
                 tst.l   (Nem_decomp_queue).w
-                bne.s   loc_514D8
+                bne.s   SKMGZ2Screen_DispatchQuakeAtP1
                 move.w  #$FF,(Events_fg_2).w
 
-loc_514BE:
+SKMGZ2Screen_TryReduceQuakeMinY:
                 move.w  (Camera_min_Y_pos).w,d0
-                beq.s   loc_514D8
+                beq.s   SKMGZ2Screen_DispatchQuakeAtP1
                 cmpi.w  #$1E0,d0
-                beq.s   loc_514D8
+                beq.s   SKMGZ2Screen_DispatchQuakeAtP1
                 subq.w  #2,d0
-                bcc.s   loc_514D4
+                bcc.s   SKMGZ2Screen_StoreQuakeMinY
                 moveq   #0,d0
                 move.w  d0,(Events_fg_2).w
 
-loc_514D4:
+SKMGZ2Screen_StoreQuakeMinY:
                 move.w  d0,(Camera_min_Y_pos).w
 
-loc_514D8:
+SKMGZ2Screen_DispatchQuakeAtP1:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 move.w  (Events_bg+$10).w,d2
@@ -256,87 +258,87 @@ MGZ2_QuakeEventCheck:
                 moveq   #4,d2
                 moveq   #2,d3
 
-loc_51512:
+SKMGZ2Screen_FindUnusedQuakeTrigger:
                 tst.b   (a5)
-                bne.s   loc_51552
+                bne.s   SKMGZ2Screen_NextQuakeTrigger
                 cmp.w   (a1),d0
-                blo.s   loc_51552
+                blo.s   SKMGZ2Screen_NextQuakeTrigger
                 cmp.w   2(a1),d0
-                bhs.s   loc_51552
+                bhs.s   SKMGZ2Screen_NextQuakeTrigger
                 cmp.w   4(a1),d1
-                blo.s   loc_51552
+                blo.s   SKMGZ2Screen_NextQuakeTrigger
                 cmp.w   6(a1),d1
-                bhs.s   loc_51552
+                bhs.s   SKMGZ2Screen_NextQuakeTrigger
                 move.w  d2,(Events_bg+$10).w
                 move.w  8(a1),d0
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
                 move.w  $A(a1),d0
                 cmpi.w  #4,d2
-                bne.s   loc_5154C
+                bne.s   SKMGZ2Screen_SetLaterQuakeMinX
                 move.w  d0,(Camera_max_X_pos).w         ; First earthquake event near start of level makes you go right
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5154C:
+SKMGZ2Screen_SetLaterQuakeMinX:
                 move.w  d0,(Camera_min_X_pos).w         ; The other two make you go left
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51552:
+SKMGZ2Screen_NextQuakeTrigger:
                 lea     $C(a1),a1
                 addq.w  #1,a5
                 addq.w  #4,d2
-                dbf     d3,loc_51512
+                dbf     d3,SKMGZ2Screen_FindUnusedQuakeTrigger
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_QuakeEvent1:
                 cmpi.w  #$780,d0
-                blo.w   loc_51656                       ; If player retreats, revert to normal camera movement
+                blo.w   SKMGZ2Screen_ResetQuakeBounds   ; If player retreats, revert to normal camera movement
                 move.w  (Camera_max_X_pos).w,d0
                 cmp.w   (Camera_X_pos).w,d0
-                bhi.s   locret_515A2                    ; If camera X hasn't reached level X end, branch
+                bhi.s   SKMGZ2Screen_Quake1Return       ; If camera X hasn't reached level X end, branch
                 move.w  d0,(Camera_min_X_pos).w         ; Lock the screen
                 st      (Events_bg+$12).w               ; Set the earthquake flag for this first one
                 addi.w  #$C,(Events_bg+$10).w           ; Set next quake event routine
                 jsr     (AllocateObject).l
-                bne.s   locret_515A2
+                bne.s   SKMGZ2Screen_Quake1Return
                 move.l  #Obj_MGZ2DrillingRobotnik,(a1)
                 move.w  #$8E0,x_pos(a1)
                 move.w  #$690,y_pos(a1)                 ; Create drilling Eggman boss sprite
                 st      (Screen_shake_flag).w
                 st      (Events_fg_0).w                 ; Start shaking the screen
 
-locret_515A2:
+SKMGZ2Screen_Quake1Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_QuakeEvent2:
                 cmpi.w  #$3200,d0
-                blo.s   loc_515B4
+                blo.s   SKMGZ2Screen_TryRaiseQuake2MinY
                 move.w  #$1DF,(Camera_min_Y_pos).w      ; If player retreats, reset level height
-                bra.w   loc_51656
+                bra.w   SKMGZ2Screen_ResetQuakeBounds
 ; ---------------------------------------------------------------------------
 
-loc_515B4:
+SKMGZ2Screen_TryRaiseQuake2MinY:
                 move.w  (Camera_max_Y_pos).w,d1
                 cmp.w   (Camera_Y_pos).w,d1
-                bne.s   loc_515CC
+                bne.s   SKMGZ2Screen_TryLockQuake2XAndShake
                 cmp.w   (Camera_min_Y_pos).w,d1
-                beq.s   loc_515CC
+                beq.s   SKMGZ2Screen_TryLockQuake2XAndShake
                 move.w  d1,(Camera_min_Y_pos).w         ; Adjust level height during this event
                 st      (Events_fg_2+1).w
 
-loc_515CC:
+SKMGZ2Screen_TryLockQuake2XAndShake:
                 move.w  (Camera_min_X_pos).w,d0         ; If camera X hasn't reached level X start, branch
                 cmp.w   (Camera_X_pos).w,d0
-                blo.s   locret_5160C
+                blo.s   SKMGZ2Screen_Quake2Return
                 move.w  d0,(Camera_max_X_pos).w         ; Lock the screen
                 st      (Events_bg+$13).w               ; Set this earthquake flag
                 addi.w  #$C,(Events_bg+$10).w           ; Set next quake event routine
                 jsr     (AllocateObject).l
-                bne.s   locret_5160C
+                bne.s   SKMGZ2Screen_Quake2Return
                 move.l  #Obj_MGZ2DrillingRobotnik,(a1)
                 bset    #0,render_flags(a1)
                 move.w  #$2FA0,x_pos(a1)
@@ -344,21 +346,21 @@ loc_515CC:
                 st      (Screen_shake_flag).w
                 st      (Events_fg_0).w                 ; Start quaking
 
-locret_5160C:
+SKMGZ2Screen_Quake2Return:
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_QuakeEvent3:
                 cmpi.w  #$3480,d0                       ; Same as above, you know the drill (haha, drill...)
-                bhs.s   loc_51656
+                bhs.s   SKMGZ2Screen_ResetQuakeBounds
                 move.w  (Camera_min_X_pos).w,d0
                 cmp.w   (Camera_X_pos).w,d0
-                blo.s   locret_51654
+                blo.s   SKMGZ2Screen_Quake3Return
                 move.w  d0,(Camera_max_X_pos).w
                 st      (Events_bg+$14).w
                 addi.w  #$C,(Events_bg+$10).w
                 jsr     (AllocateObject).l
-                bne.s   locret_51654
+                bne.s   SKMGZ2Screen_Quake3Return
                 move.l  #Obj_MGZ2DrillingRobotnik,(a1)
                 bset    #0,render_flags(a1)
                 move.w  #$3300,x_pos(a1)
@@ -366,11 +368,11 @@ MGZ2_QuakeEvent3:
                 st      (Screen_shake_flag).w
                 st      (Events_fg_0).w
 
-locret_51654:
+SKMGZ2Screen_Quake3Return:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51656:
+SKMGZ2Screen_ResetQuakeBounds:
                 move.w  #$1000,d0
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
@@ -382,31 +384,31 @@ loc_51656:
 
 MGZ2_QuakeEvent1Cont:
                 cmpi.w  #$980,(Player_1+x_pos).w
-                bhs.s   loc_516A2                       ; Reset level Y end when Sonic has travelled past $980 X
+                bhs.s   SKMGZ2Screen_RestoreQuakeIdleBounds  ; Reset level Y end when Sonic has travelled past $980 X
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_QuakeEvent2Cont:
                 cmpi.w  #$100,(Player_1+y_pos).w
-                bhs.s   locret_51696
+                bhs.s   SKMGZ2Screen_Quake2ExitReturn
                 cmpi.w  #$2F80,(Player_1+x_pos).w
-                blo.s   locret_51696
+                blo.s   SKMGZ2Screen_Quake2ExitReturn
                 move.w  #$6000,d0
                 move.w  d0,(Camera_max_X_pos).w
-                bra.s   loc_516A2
+                bra.s   SKMGZ2Screen_RestoreQuakeIdleBounds
 ; ---------------------------------------------------------------------------
 
-locret_51696:
+SKMGZ2Screen_Quake2ExitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_QuakeEvent3Cont:
                 cmpi.w  #$3200,(Player_1+x_pos).w
-                blo.s   loc_516A2
+                blo.s   SKMGZ2Screen_RestoreQuakeIdleBounds
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_516A2:
+SKMGZ2Screen_RestoreQuakeIdleBounds:
                 move.w  #$1000,d0
                 move.w  d0,(Camera_max_Y_pos).w
                 move.w  d0,(Camera_target_max_Y_pos).w
@@ -443,28 +445,28 @@ MGZ2_ChunkEventCheck:
                 moveq   #4,d2
                 moveq   #3-1,d3
 
-loc_516E4:
+SKMGZ2Screen_FindChunkShiftTrigger:
                 cmp.w   (a1),d0
-                blo.s   loc_51706
+                blo.s   SKMGZ2Screen_NextChunkShiftTrigger
                 cmp.w   2(a1),d0
-                bhs.s   loc_51706
+                bhs.s   SKMGZ2Screen_NextChunkShiftTrigger
                 cmp.w   4(a1),d1
-                blo.s   loc_51706
+                blo.s   SKMGZ2Screen_NextChunkShiftTrigger
                 cmp.w   6(a1),d1
-                bhs.s   loc_51706
+                bhs.s   SKMGZ2Screen_NextChunkShiftTrigger
                 cmpi.w  #4,d2
-                bne.s   loc_51712
+                bne.s   SKMGZ2Screen_StartChunkShift
                 tst.w   (Screen_shake_flag).w
-                bmi.s   loc_51712                       ; Only perform the first layout shift event if screen is continually shaking
+                bmi.s   SKMGZ2Screen_StartChunkShift    ; Only perform the first layout shift event if screen is continually shaking
 
-loc_51706:
+SKMGZ2Screen_NextChunkShiftTrigger:
                 lea     $C(a1),a1
                 addq.w  #4,d2
-                dbf     d3,loc_516E4
+                dbf     d3,SKMGZ2Screen_FindChunkShiftTrigger
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51712:
+SKMGZ2Screen_StartChunkShift:
                 move.w  d2,(Events_bg+$04).w
                 clr.w   (Events_bg+$06).w
                 clr.w   (Events_bg+$08).w
@@ -474,7 +476,7 @@ loc_51712:
 MGZ2_ChunkEvent1:
                 move.w  (Events_bg+$06).w,d0
                 cmpi.w  #$5C,d0
-                blo.s   loc_51762
+                blo.s   SKMGZ2Screen_StepChunkShiftFrame
                 clr.w   (Screen_shake_flag).w           ; Stop shaking when first chunk event is finished
                 clr.w   (Events_fg_0).w                 ; Reset quake event
                 clr.w   (Camera_min_X_pos).w            ; Reset level height
@@ -485,61 +487,61 @@ MGZ2_ChunkEvent1:
 MGZ2_ChunkEvent2_3:
                 move.w  (Events_bg+$06).w,d0
                 cmpi.w  #$5C,d0
-                blo.s   loc_51762
+                blo.s   SKMGZ2Screen_StepChunkShiftFrame
                 move.w  #$6000,d0
                 move.w  d0,(Camera_max_X_pos).w         ; Reset level end X
                 move.w  #$14,(Events_bg+$04).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_51762:
+SKMGZ2Screen_StepChunkShiftFrame:
                 subq.w  #1,(Events_bg+$08).w
-                bpl.s   locret_517C2
+                bpl.s   SKMGZ2Screen_ChunkRedrawReturn
                 move.w  #7-1,(Events_bg+$08).w          ; Perform the layout change once every seven frames
                 move.w  d0,d2
                 bsr.s   MGZ2_ModifyChunk
                 move.w  (Events_bg+$0A).w,d0
                 addi.w  #$80,d0
                 sub.w   (Camera_X_pos_copy).w,d0
-                bcs.s   locret_517C2
+                bcs.s   SKMGZ2Screen_ChunkRedrawReturn
                 cmpi.w  #$1C0,d0                        ; Calculate the X position of the screen redraw
-                bhs.s   locret_517C2
+                bhs.s   SKMGZ2Screen_ChunkRedrawReturn
                 move.w  (Events_bg+$0C).w,d0
                 lea     (MGZ2_ScreenRedrawArray).l,a1
                 add.w   (a1,d2.w),d0                    ; Calculate the Y position
                 move.w  2(a1,d2.w),d2                   ; And the number of lines to write
 
-loc_51798:
+SKMGZ2Screen_DrawVisibleChunkRow:
                 move.w  (Camera_Y_pos_copy).w,d3
                 and.w   (Camera_Y_pos_mask).w,d3
                 cmp.w   d3,d0
-                blo.s   loc_517BA
+                blo.s   SKMGZ2Screen_NextChunkRedrawRow
                 addi.w  #$F0,d3
                 cmp.w   d3,d0
-                bhs.s   loc_517BA
+                bhs.s   SKMGZ2Screen_NextChunkRedrawRow
                 move.w  (Events_bg+$0A).w,d1
                 moveq   #8,d6                           ; Always draw 8 tiles
                 swap    d2
                 jsr     Setup_TileRowDraw(pc)
                 swap    d2
 
-loc_517BA:
+SKMGZ2Screen_NextChunkRedrawRow:
                 addi.w  #$10,d0
-                dbf     d2,loc_51798
+                dbf     d2,SKMGZ2Screen_DrawVisibleChunkRow
 
-locret_517C2:
+SKMGZ2Screen_ChunkRedrawReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 MGZ2_ChunkEventReset:
                 cmpi.w  #$2A00,(Player_1+x_pos).w       ; When Player has travelled far enough, reset the chunk to its original form
-                blo.s   locret_517D4
+                blo.s   SKMGZ2Screen_ChunkResetReturn
                 clr.w   (Events_bg+$04).w
                 moveq   #$5C,d0
                 bra.s   MGZ2_ModifyChunk
 ; ---------------------------------------------------------------------------
 
-locret_517D4:
+SKMGZ2Screen_ChunkResetReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -558,12 +560,12 @@ WriteNextMgz2QuakeChunkFrame:
                 adda.w  (a1,d0.w),a4
                 moveq   #8-1,d1
 
-loc_517F6:
+SKMGZ2Screen_CopyReplacementChunkRow:
                 move.l  (a4)+,(a5)+
                 move.l  (a4)+,(a5)+
                 move.l  (a4)+,(a5)+
                 move.l  (a4)+,(a5)+
-                dbf     d1,loc_517F6
+                dbf     d1,SKMGZ2Screen_CopyReplacementChunkRow
                 addq.w  #2,d0
                 move.w  d0,(Events_bg+$06).w
                 rts

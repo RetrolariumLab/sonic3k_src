@@ -14,80 +14,80 @@ Obj_Spiker:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Spiker_Index:
-                dc.w    loc_88BC0-Spiker_Index
-                dc.w    loc_88BD0-Spiker_Index
-                dc.w    loc_88BEA-Spiker_Index
-                dc.w    loc_88C04-Spiker_Index
-                dc.w    loc_88C24-Spiker_Index
-                dc.w    loc_88C38-Spiker_Index
+                dc.w    SKSpiker_InitRootAndChildren-Spiker_Index
+                dc.w    SKSpiker_CheckPlayerToRise-Spiker_Index
+                dc.w    SKSpiker_StepRise-Spiker_Index
+                dc.w    SKSpiker_WaitRaised-Spiker_Index
+                dc.w    SKSpiker_StepDescent-Spiker_Index
+                dc.w    SKSpiker_AnimateAndTryLaunch-Spiker_Index
 ; ---------------------------------------------------------------------------
 
-loc_88BC0:
+SKSpiker_InitRootAndChildren:
                 lea     ObjDat_Spiker(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     ChildObjDat_88E1E(pc),a2
+                lea     SKSpiker_RootChildRecords(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88BD0:
+SKSpiker_CheckPlayerToRise:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                blo.s   loc_88BDC
+                blo.s   SpikerSK_Root_StartEightCallIntegerRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88BDC:
+SpikerSK_Root_StartEightCallIntegerRise:
                 move.b  #4,routine(a0)
                 move.w  #7,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88BEA:
+SKSpiker_StepRise:
                 subq.w  #1,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_88BF6
+                bmi.s   SpikerSK_Root_EnableSideUnitsAfterRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88BF6:
+SpikerSK_Root_EnableSideUnitsAfterRise:
                 move.b  #6,routine(a0)
                 bset    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C04:
+SKSpiker_WaitRaised:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_88C10
+                bhs.s   SKSpiker_BeginDescent
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C10:
+SKSpiker_BeginDescent:
                 move.b  #8,routine(a0)
                 bclr    #2,$38(a0)
                 move.w  #7,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C24:
+SKSpiker_StepDescent:
                 addq.w  #1,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_88C30
+                bmi.s   SpikerSK_Root_RearmIdleProximityPoll
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C30:
+SpikerSK_Root_RearmIdleProximityPoll:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C38:
-                lea     byte_88E4A(pc),a1
+SKSpiker_AnimateAndTryLaunch:
+                lea     SKSpiker_SpringAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_88C6C
+                beq.s   SKSpiker_LaunchReturn
                 cmpi.b  #4,anim_frame(a0)
-                bne.s   locret_88C6C
+                bne.s   SKSpiker_LaunchReturn
                 movea.w $44(a0),a1
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -95,135 +95,135 @@ loc_88C38:
                 clr.b   jumping(a1)
                 move.b  #2,routine(a1)
 
-locret_88C6C:
+SKSpiker_LaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C6E:
+SKSpiker_RestoreAfterSpring:
                 move.b  $3A(a0),routine(a0)
                 move.b  #$A,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88C7C:
+SKSpiker_UpdateSideUnit:
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_88C92(pc,d0.w),d1
-                jsr     off_88C92(pc,d1.w)
+                move.w  SKSpiker_SideStateOffsets(pc,d0.w),d1
+                jsr     SKSpiker_SideStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_88C92:
-                dc.w    loc_88C9A-off_88C92
-                dc.w    loc_88CB0-off_88C92
-                dc.w    loc_88CC6-off_88C92
-                dc.w    loc_88D02-off_88C92
+SKSpiker_SideStateOffsets:
+                dc.w    SKSpiker_InitSideAndFacing-SKSpiker_SideStateOffsets
+                dc.w    SKSpiker_WaitForFireEnable-SKSpiker_SideStateOffsets
+                dc.w    SKSpiker_TryFindSideTarget-SKSpiker_SideStateOffsets
+                dc.w    SKSpiker_AnimateAndTryFire-SKSpiker_SideStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_88C9A:
-                lea     word_88E06(pc),a1
+SKSpiker_InitSideAndFacing:
+                lea     SpikerSK_SideUnit_PartialAttributePrefix(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 tst.b   subtype(a0)
-                bne.s   locret_88CAE
+                bne.s   SKSpiker_SideInitReturn
                 bset    #0,render_flags(a0)
 
-locret_88CAE:
+SKSpiker_SideInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88CB0:
+SKSpiker_WaitForFireEnable:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_88CBE
+                bne.s   SKSpiker_StartSideTargetPoll
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88CBE:
+SKSpiker_StartSideTargetPoll:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88CC6:
+SKSpiker_TryFindSideTarget:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_88CFA
+                beq.s   SpikerSK_SideUnit_ReturnToRootEnableWait
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   locret_88CE8
+                bhs.s   SKSpiker_SideTargetReturn
                 tst.b   subtype(a0)
-                beq.s   loc_88CE4
+                beq.s   SKSpiker_CheckSideTargetDirection
                 subq.w  #2,d0
 
-loc_88CE4:
+SKSpiker_CheckSideTargetDirection:
                 tst.w   d0
-                beq.s   loc_88CEA
+                beq.s   SKSpiker_BeginFiring
 
-locret_88CE8:
+SKSpiker_SideTargetReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88CEA:
+SKSpiker_BeginFiring:
                 move.b  #6,routine(a0)
-                move.l  #loc_88D28,$34(a0)
+                move.l  #SKSpiker_ResumeSideTargetPoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88CFA:
+SpikerSK_SideUnit_ReturnToRootEnableWait:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88D02:
-                lea     byte_88E53(pc),a1
+SKSpiker_AnimateAndTryFire:
+                lea     SKSpiker_FiringAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_88D26
+                beq.s   SKSpiker_FireReturn
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   locret_88D26
+                bne.s   SKSpiker_FireReturn
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_88E32(pc),a2
+                lea     SKSpiker_ShotChildRecord(pc),a2
                 jsr     CreateChild5_ComplexAdjusted(pc)
 
-locret_88D26:
+SKSpiker_FireReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88D28:
+SKSpiker_ResumeSideTargetPoll:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88D30:
+SKSpiker_UpdateSpringContact:
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_88D46(pc,d0.w),d1
-                jsr     off_88D46(pc,d1.w)
+                move.w  SKSpiker_SpringStateOffsets(pc,d0.w),d1
+                jsr     SKSpiker_SpringStateOffsets(pc,d1.w)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_88D46:
-                dc.w    loc_88D4C-off_88D46
-                dc.w    loc_88D54-off_88D46
-                dc.w    loc_88D94-off_88D46
+SKSpiker_SpringStateOffsets:
+                dc.w    SKSpiker_InitSpringAndProbe-SKSpiker_SpringStateOffsets
+                dc.w    SKSpiker_ReadSpringContact-SKSpiker_SpringStateOffsets
+                dc.w    SKSpiker_WaitToRearmSpring-SKSpiker_SpringStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_88D4C:
-                lea     word_88E0C(pc),a1
+SKSpiker_InitSpringAndProbe:
+                lea     SKSpiker_SpringContactAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
 
-loc_88D54:
+SKSpiker_ReadSpringContact:
                 jsr     Check_PlayerCollision(pc)
-                bne.s   loc_88D5C
+                bne.s   SKSpiker_PrimeSpringAndStartWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88D5C:
+SKSpiker_PrimeSpringAndStartWait:
                 bsr.w   PrimeSpikerSpringContactPlayer
                 move.b  #4,routine(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_88D98,$34(a0)
+                move.l  #SKSpiker_RearmSpring,$34(a0)
                 movea.w parent3(a0),a1
                 bset    #3,$38(a1)
                 move.b  #1,mapping_frame(a1)
@@ -232,11 +232,11 @@ loc_88D5C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88D94:
+SKSpiker_WaitToRearmSpring:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88D98:
+SKSpiker_RearmSpring:
                 move.b  #2,routine(a0)
                 move.b  #$CA,collision_flags(a0)
                 rts
@@ -259,17 +259,17 @@ PrimeSpikerSpringContactPlayer:
 
 ConsumeSpikerSpringRequestAndSaveRoutine:
                 btst    #3,$38(a0)
-                bne.s   loc_88DD8
+                bne.s   SKSpiker_ConsumeSpringRequest
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88DD8:
+SKSpiker_ConsumeSpringRequest:
                 bclr    #3,$38(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 move.b  routine(a0),$3A(a0)
                 move.b  d0,routine(a0)
-                move.l  #loc_88C6E,$34(a0)
+                move.l  #SKSpiker_RestoreAfterSpring,$34(a0)
                 rts
 ; End of function ConsumeSpikerSpringRequestAndSaveRoutine
 
@@ -279,45 +279,45 @@ ObjDat_Spiker:
                 dc.w    make_art_tile(ArtTile_Spiker,1,0)
                 dc.w    $280
                 dc.b    $20, $10,   0,  $A
-word_88E06:
+SpikerSK_SideUnit_PartialAttributePrefix:
                 dc.w    $280
                 dc.b    $20,   4,   3,   0
-word_88E0C:
+SKSpiker_SpringContactAttrs:
                 dc.w    $200
                 dc.b    $20,   4,   7, $CA
-ObjDat3_88E12:
+SKSpiker_ShotAttrs:
                 dc.l    Map_Spiker
                 dc.w    make_art_tile(ArtTile_Spiker,0,0)
                 dc.w    $280
                 dc.b    4,   4,   5, $98
-ChildObjDat_88E1E:
+SKSpiker_RootChildRecords:
                 dc.w    3-1
-                dc.l    loc_88C7C
+                dc.l    SKSpiker_UpdateSideUnit
                 dc.b    -$10,  $C
-                dc.l    loc_88C7C
+                dc.l    SKSpiker_UpdateSideUnit
                 dc.b    $10,  $C
-                dc.l    loc_88D30
+                dc.l    SKSpiker_UpdateSpringContact
                 dc.b    0, -$C
-ChildObjDat_88E32:
+SKSpiker_ShotChildRecord:
                 dc.w    1-1
                 dc.l    SKCallbackShot_InitDeflectable
-                dc.l    ObjDat3_88E12
-                dc.l    byte_88E5C
+                dc.l    SKSpiker_ShotAttrs
+                dc.l    SKSpiker_ShotAnim
                 dc.l    MoveSlowFall_AnimateRaw
                 dc.b    4,   0
                 dc.w    $200, -$200
-byte_88E4A:
+SKSpiker_SpringAnim:
                 dc.b    1,   0
                 dc.b    2,   1
                 dc.b    1,   0
                 dc.b    0,   5
                 dc.b    $F4
-byte_88E53:
+SKSpiker_FiringAnim:
                 dc.b    3,   1
                 dc.b    3,  $F
                 dc.b    4,   7
                 dc.b    3, $3F
                 dc.b    $F4
-byte_88E5C:
+SKSpiker_ShotAnim:
                 dc.b    1,   5,   6, $FC
                 even

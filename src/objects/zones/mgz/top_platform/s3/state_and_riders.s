@@ -18,9 +18,9 @@ Obj_MGZTopPlatform:
                 move.w  y_pos(a0),$32(a0)
                 move.b  #$C,top_solid_bit(a0)
                 move.b  #$D,lrb_solid_bit(a0)
-                move.l  #loc_341EC,(a0)
+                move.l  #S3MGZTopRoot_UpdateRidersAndMotion,(a0)
 
-loc_341EC:
+S3MGZTopRoot_UpdateRidersAndMotion:
                 lea     (Player_1).w,a1
                 lea     $40(a0),a4
                 move.w  (Ctrl_1_logical).w,d5
@@ -32,14 +32,14 @@ loc_341EC:
                 moveq   #p2_standing_bit,d6
                 bsr.w   UpdateTopPlatformRiderState
                 tst.b   subtype(a0)
-                bne.w   loc_342FA
+                bne.w   S3MGZTopRoot_AlignRidersAndDraw
                 btst    #1,status(a0)
-                beq.w   loc_342A6
+                beq.w   S3MGZTopRoot_StepScriptedPath
                 cmpi.w  #$200,y_vel(a0)
-                bge.s   loc_34230
+                bge.s   S3MGZTopRoot_MoveAndProbeAirborne
                 addi.w  #8,y_vel(a0)
 
-loc_34230:
+S3MGZTopRoot_MoveAndProbeAirborne:
                 jsr     (MoveSprite2).l
                 subi.w  #$13,y_pos(a0)
                 move.l  a1,-(sp)
@@ -47,49 +47,49 @@ loc_34230:
                 movea.l (sp)+,a1
                 addi.w  #$13,y_pos(a0)
                 tst.b   $2D(a0)
-                beq.s   loc_34268
+                beq.s   S3MGZTopRoot_TryBoostOnLanding
                 move.w  #0,y_vel(a0)
                 move.w  #0,x_vel(a0)
                 bclr    #1,status(a0)
-                bra.w   loc_342FA
+                bra.w   S3MGZTopRoot_AlignRidersAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_34268:
+S3MGZTopRoot_TryBoostOnLanding:
                 btst    #1,status(a0)
-                bne.w   loc_342FA
+                bne.w   S3MGZTopRoot_AlignRidersAndDraw
                 move.w  x_vel(a0),d0
-                bpl.s   loc_3427A
+                bpl.s   S3MGZTopRoot_SelectLandingBoost
                 neg.w   d0
 
-loc_3427A:
+S3MGZTopRoot_SelectLandingBoost:
                 cmpi.w  #$40,d0
-                blo.s   loc_342FA
+                blo.s   S3MGZTopRoot_AlignRidersAndDraw
                 move.w  #$800,d1
                 cmpi.w  #$100,d0
-                blo.s   loc_3428E
+                blo.s   S3MGZTopRoot_SignLandingBoost
                 move.w  #$C00,d1
 
-loc_3428E:
+S3MGZTopRoot_SignLandingBoost:
                 tst.w   x_vel(a0)
-                bpl.s   loc_34296
+                bpl.s   S3MGZTopRoot_SetLaunchSpeed
                 neg.w   d1
 
-loc_34296:
+S3MGZTopRoot_SetLaunchSpeed:
                 move.w  d1,x_vel(a0)
                 move.w  d1,ground_vel(a0)
                 move.b  #1,$34(a0)
-                bra.s   loc_342FA
+                bra.s   S3MGZTopRoot_AlignRidersAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_342A6:
+S3MGZTopRoot_StepScriptedPath:
                 tst.b   $35(a0)
-                beq.s   loc_342B6
+                beq.s   S3MGZTopRoot_StepGroundMotion
                 bsr.w   UpdateTopPlatformScriptedSinePath
                 addq.w  #4,$24(a0)
-                bra.s   loc_342FA
+                bra.s   S3MGZTopRoot_AlignRidersAndDraw
 ; ---------------------------------------------------------------------------
 
-loc_342B6:
+S3MGZTopRoot_StepGroundMotion:
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  ground_vel(a0),d1
@@ -101,19 +101,19 @@ loc_342B6:
                 bsr.s   MGZTopPlatform_LimitVelByTerrain
                 jsr     (MoveSprite2).l
                 tst.b   $2D(a0)
-                bne.s   loc_342E6
+                bne.s   S3MGZTopRoot_SpinAndCheckStopped
                 bsr.w   FollowFloorUnderTopPlatform
 
-loc_342E6:
+S3MGZTopRoot_SpinAndCheckStopped:
                 addq.w  #4,$24(a0)
                 tst.w   ground_vel(a0)
-                bne.s   loc_342F6
+                bne.s   S3MGZTopRoot_TryEnterScriptedPath
                 move.b  #0,$34(a0)
 
-loc_342F6:
+S3MGZTopRoot_TryEnterScriptedPath:
                 bsr.w   TryEnterTopPlatformScriptedSinePath
 
-loc_342FA:
+S3MGZTopRoot_AlignRidersAndDraw:
                 lea     (Player_1).w,a1
                 lea     $40(a0),a4
                 moveq   #p1_standing_bit,d6
@@ -129,7 +129,7 @@ loc_342FA:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_3432A:
+S3MGZTopRoot_StepAbandonedTop:
                 jsr     (MoveSprite).l
                 addq.w  #4,$24(a0)
                 move.w  $24(a0),d0
@@ -137,10 +137,10 @@ loc_3432A:
                 andi.w  #1,d0
                 move.b  d0,mapping_frame(a0)
                 tst.b   render_flags(a0)
-                bmi.s   loc_3434E
+                bmi.s   S3MGZTopRoot_DrawAbandonedTop
                 move.w  #$7F00,x_pos(a0)
 
-loc_3434E:
+S3MGZTopRoot_DrawAbandonedTop:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -148,11 +148,11 @@ loc_3434E:
 MGZTopPlatform_LimitVelByTerrain:
                 move.b  #$40,d1
                 tst.w   ground_vel(a0)
-                beq.s   locret_343CE
-                bmi.s   loc_34362
+                beq.s   S3MGZTopTerrain_PredictionReturn
+                bmi.s   S3MGZTopTerrain_ProbePredictedSurface
                 neg.w   d1
 
-loc_34362:
+S3MGZTopTerrain_ProbePredictedSurface:
                 move.b  angle(a0),d0
                 add.b   d1,d0
                 move.w  d0,-(sp)
@@ -163,48 +163,48 @@ loc_34362:
                 addi.w  #$C,y_pos(a0)
                 move.w  (sp)+,d0
                 tst.w   d1
-                bpl.s   locret_343CE
+                bpl.s   S3MGZTopTerrain_PredictionReturn
                 asl.w   #8,d1
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                beq.s   loc_34400
+                beq.s   S3MGZTopTerrain_IncreasePredictedYSpeed
                 cmpi.b  #$40,d0
-                beq.s   loc_343D6
+                beq.s   S3MGZTopTerrain_StopAtPredictedWall
                 cmpi.b  #$80,d0
-                beq.s   loc_343D0
+                beq.s   S3MGZTopTerrain_ReducePredictedYSpeed
                 addi.b  #$30,d3
                 cmpi.b  #$60,d3
-                blo.s   locret_343CE
+                blo.s   S3MGZTopTerrain_PredictionReturn
                 add.w   d1,x_vel(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #0,status(a0)
-                bne.s   locret_343CE
+                bne.s   S3MGZTopTerrain_PredictionReturn
                 bset    #5,status(a0)
 
-locret_343CE:
+S3MGZTopTerrain_PredictionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_343D0:
+S3MGZTopTerrain_ReducePredictedYSpeed:
                 sub.w   d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_343D6:
+S3MGZTopTerrain_StopAtPredictedWall:
                 addi.b  #$30,d3
                 cmpi.b  #$60,d3
-                blo.s   locret_343CE
+                blo.s   S3MGZTopTerrain_PredictionReturn
                 sub.w   d1,x_vel(a0)
                 move.w  #0,y_vel(a0)
                 move.w  #0,ground_vel(a0)
                 btst    #0,status(a0)
-                beq.s   locret_343CE
+                beq.s   S3MGZTopTerrain_PredictionReturn
                 bset    #5,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34400:
+S3MGZTopTerrain_IncreasePredictedYSpeed:
                 add.w   d1,y_vel(a0)
                 rts
 ; End of function MGZTopPlatform_LimitVelByTerrain
@@ -219,50 +219,50 @@ FollowFloorUnderTopPlatform:
                 move.b  d0,(Secondary_Angle).w
                 jsr     (Sonic_CheckFloor).l
                 tst.b   d3
-                bpl.s   loc_34432
+                bpl.s   S3MGZTopTerrain_ClampPositiveFloorAngle
                 cmpi.b  #-$1E,d3
-                bhs.s   loc_3443C
+                bhs.s   S3MGZTopTerrain_StoreAngleAndTestGap
                 move.b  #-$1E,d3
-                bra.s   loc_3443C
+                bra.s   S3MGZTopTerrain_StoreAngleAndTestGap
 ; ---------------------------------------------------------------------------
 
-loc_34432:
+S3MGZTopTerrain_ClampPositiveFloorAngle:
                 cmpi.b  #$1E,d3
-                bls.s   loc_3443C
+                bls.s   S3MGZTopTerrain_StoreAngleAndTestGap
                 move.b  #$1E,d3
 
-loc_3443C:
+S3MGZTopTerrain_StoreAngleAndTestGap:
                 move.b  d3,angle(a0)
                 tst.w   d1
-                beq.s   locret_34450
-                bpl.s   loc_34452
+                beq.s   S3MGZTopTerrain_FloorGapReturn
+                bpl.s   S3MGZTopTerrain_CalcFloorReach
                 cmpi.w  #-$E,d1
-                blt.s   locret_34450
+                blt.s   S3MGZTopTerrain_FloorGapReturn
                 add.w   d1,y_pos(a0)
 
-locret_34450:
+S3MGZTopTerrain_FloorGapReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34452:
+S3MGZTopTerrain_CalcFloorReach:
                 move.b  x_vel(a0),d0
-                bpl.s   loc_3445A
+                bpl.s   S3MGZTopTerrain_ClampFloorReach
                 neg.b   d0
 
-loc_3445A:
+S3MGZTopTerrain_ClampFloorReach:
                 addq.b  #4,d0
                 cmpi.b  #$E,d0
-                blo.s   loc_34466
+                blo.s   S3MGZTopTerrain_FollowFloorOrLeave
                 move.b  #$E,d0
 
-loc_34466:
+S3MGZTopTerrain_FollowFloorOrLeave:
                 cmp.b   d0,d1
-                bgt.s   loc_34470
+                bgt.s   S3MGZTopTerrain_LeaveFloor
                 add.w   d1,y_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34470:
+S3MGZTopTerrain_LeaveFloor:
                 bset    #1,status(a0)
                 bclr    #5,status(a0)
                 move.b  #0,$34(a0)
@@ -274,24 +274,24 @@ loc_34470:
 UpdateTopPlatformRiderState:
                 moveq   #0,d0
                 move.b  (a4),d0
-                move.w  off_34490(pc,d0.w),d0
-                jmp     off_34490(pc,d0.w)
+                move.w  S3MGZTopRider_StateTable(pc,d0.w),d0
+                jmp     S3MGZTopRider_StateTable(pc,d0.w)
 ; End of function UpdateTopPlatformRiderState
 
 ; ---------------------------------------------------------------------------
-off_34490:
-                dc.w    loc_3449C-off_34490
-                dc.w    loc_344E4-off_34490
-                dc.w    loc_34554-off_34490
-                dc.w    loc_34498-off_34490
+S3MGZTopRider_StateTable:
+                dc.w    S3MGZTopRider_CheckBoardingContact-S3MGZTopRider_StateTable
+                dc.w    S3MGZTopRider_UpdateBoardingContact-S3MGZTopRider_StateTable
+                dc.w    S3MGZTopRider_UpdateCaptured-S3MGZTopRider_StateTable
+                dc.w    S3MGZTopRider_ResetStateAndSide-S3MGZTopRider_StateTable
 ; ---------------------------------------------------------------------------
 
-loc_34498:
+S3MGZTopRider_ResetStateAndSide:
                 clr.w   (a4)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3449C:
+S3MGZTopRider_CheckBoardingContact:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -302,29 +302,29 @@ loc_3449C:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull_1P).l
                 btst    d6,status(a0)
-                bne.s   loc_344C2
+                bne.s   S3MGZTopRider_TryRecordBoardingSide
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_344C2:
+S3MGZTopRider_TryRecordBoardingSide:
                 tst.b   status_tertiary(a1)
-                bmi.s   locret_344E2
+                bmi.s   S3MGZTopRider_BoardingReturn
                 addq.b  #2,(a4)
                 move.b  #0,1(a4)
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcc.s   loc_344E0
+                bcc.s   S3MGZTopRider_TryCenterAfterBoarding
                 move.b  #1,1(a4)
 
-loc_344E0:
-                bra.s   loc_34502
+S3MGZTopRider_TryCenterAfterBoarding:
+                bra.s   S3MGZTopRider_CheckStandingBeforeCenter
 ; ---------------------------------------------------------------------------
 
-locret_344E2:
+S3MGZTopRider_BoardingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_344E4:
+S3MGZTopRider_UpdateBoardingContact:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #$B,d1
@@ -335,21 +335,22 @@ loc_344E4:
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull_1P).l
 
-loc_34502:
+; Losing contact clears the rider state but still falls through to the center test
+S3MGZTopRider_CheckStandingBeforeCenter:
                 btst    d6,status(a0)
-                bne.s   loc_3450A
+                bne.s   S3MGZTopRider_OffsetCenterByBoardingSide
                 clr.b   (a4)
 
-loc_3450A:
+S3MGZTopRider_OffsetCenterByBoardingSide:
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 tst.b   1(a4)
-                beq.s   loc_3451C
+                beq.s   S3MGZTopRider_TryCaptureAtCenter
                 addi.w  #$F,d0
 
-loc_3451C:
+S3MGZTopRider_TryCaptureAtCenter:
                 cmpi.w  #$10,d0
-                bhs.s   locret_34552
+                bhs.s   S3MGZTopRider_CenterTestReturn
                 move.w  x_pos(a0),x_pos(a1)
                 move.b  default_y_radius(a1),d0
                 addi.b  #$18,d0
@@ -361,18 +362,19 @@ loc_3451C:
                 bset    #Status_InAir,status(a1)
                 addq.b  #2,(a4)
 
-locret_34552:
+S3MGZTopRider_CenterTestReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34554:
+; Death or a later player routine abandons the top for both riders before checking jump input
+S3MGZTopRider_UpdateCaptured:
                 cmpi.b  #4,routine(a1)
                 bhs.w   AbandonTopPlatformAndReleaseRiders
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_3459C
+                bne.s   S3MGZTopRider_DetachAndCheckP1
                 move.w  d5,d0
                 andi.w  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_345BA
+                beq.w   S3MGZTopRider_AutoFaceWithTopMotion
                 move.w  #-$680,y_vel(a1)
                 move.b  #1,jumping(a1)
                 move.b  #$E,y_radius(a1)
@@ -382,7 +384,7 @@ loc_34554:
                 move.w  #sfx_Jump,d0
                 jsr     (Play_SFX).l
 
-loc_3459C:
+S3MGZTopRider_DetachAndCheckP1:
                 bclr    #0,object_control(a1)
                 move.b  #0,status_tertiary(a1)
                 bset    #Status_InAir,status(a1)
@@ -390,44 +392,45 @@ loc_3459C:
                 cmpa.w  #Player_1,a1
                 beq.w   AbandonTopPlatformAndReleaseRiders
 
-locret_345B8:
+S3MGZTopRider_ActiveReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_345BA:
+S3MGZTopRider_AutoFaceWithTopMotion:
                 move.w  d5,d0
                 andi.w  #$C00,d0
-                bne.s   loc_345DA
+                bne.s   S3MGZTopRider_SetRadiusAndCheckDriver
                 tst.w   x_vel(a0)
-                beq.s   loc_345DA
+                beq.s   S3MGZTopRider_SetRadiusAndCheckDriver
                 bclr    #Status_Facing,status(a1)
                 tst.w   x_vel(a0)
-                bpl.s   loc_345DA
+                bpl.s   S3MGZTopRider_SetRadiusAndCheckDriver
                 bset    #Status_Facing,status(a1)
 
-loc_345DA:
+S3MGZTopRider_SetRadiusAndCheckDriver:
                 move.b  default_y_radius(a1),d0
                 addi.b  #$18,d0
                 move.b  d0,y_radius(a1)
                 cmpa.w  #Player_2,a1
-                bne.s   loc_345EE
+                bne.s   S3MGZTopRider_TryApplyP1GroundInput
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_345EE:
+S3MGZTopRider_TryApplyP1GroundInput:
                 move.l  a0,-(sp)
                 movea.l a1,a0
                 move.w  d5,d3
                 cmpi.b  #$10,anim(a0)
-                beq.s   loc_34602
+                beq.s   S3MGZTopRider_MoveP1AndCheckAnimSpeed
                 jsr     (ControlTopRiderGroundSpeed).l
 
-loc_34602:
+; Animation $10 supplies the top's velocity from P1 and advances P1's vertical speed
+S3MGZTopRider_MoveP1AndCheckAnimSpeed:
                 jsr     (Player_LevelBound).l
                 jsr     (MoveSprite2).l
                 movea.l (sp)+,a0
                 cmpi.b  #$10,anim(a1)
-                bne.s   loc_34638
+                bne.s   S3MGZTopRider_ApplyHorizontalStop
                 move.w  x_vel(a1),x_vel(a0)
                 move.w  y_vel(a1),y_vel(a0)
                 addi.w  #$38,y_vel(a1)
@@ -436,90 +439,90 @@ loc_34602:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34638:
+S3MGZTopRider_ApplyHorizontalStop:
                 bclr    #6,status_tertiary(a1)
-                beq.s   loc_3464C
+                beq.s   S3MGZTopRider_ApplyVerticalStop
                 move.w  #0,ground_vel(a0)
                 move.w  #0,x_vel(a0)
 
-loc_3464C:
+S3MGZTopRider_ApplyVerticalStop:
                 bclr    #5,status_tertiary(a1)
-                beq.s   loc_3465A
+                beq.s   S3MGZTopRider_SyncSpeedAndSteerByOffset
                 move.w  #0,y_vel(a0)
 
-loc_3465A:
+S3MGZTopRider_SyncSpeedAndSteerByOffset:
                 move.w  x_vel(a0),x_vel(a1)
                 move.w  y_vel(a0),y_vel(a1)
                 move.w  top_solid_bit(a1),top_solid_bit(a0)
                 tst.b   $34(a0)
-                bne.w   locret_345B8
+                bne.w   S3MGZTopRider_ActiveReturn
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
-                beq.w   loc_34702
-                bcc.w   loc_346C2
+                beq.w   S3MGZTopRider_ApplyCenteredFriction
+                bcc.w   S3MGZTopRider_TryDriveRight
                 cmpi.w  #-$200,x_vel(a0)
-                ble.s   loc_3469C
+                ble.s   S3MGZTopRider_SpinAndLiftFromLeft
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
 
-loc_3469C:
+S3MGZTopRider_SpinAndLiftFromLeft:
                 add.w   d0,$24(a0)
                 move.w  x_vel(a0),d0
-                bpl.s   loc_346BA
+                bpl.s   S3MGZTopRider_LeaveFloorFromLeft
                 asr.w   #4,d0
                 subi.w  #8,y_vel(a0)
                 cmpi.w  #-$100,y_vel(a0)
-                ble.s   loc_346BA
+                ble.s   S3MGZTopRider_LeaveFloorFromLeft
                 add.w   d0,y_vel(a0)
 
-loc_346BA:
+S3MGZTopRider_LeaveFloorFromLeft:
                 bset    #1,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_346C2:
+S3MGZTopRider_TryDriveRight:
                 cmpi.w  #$200,x_vel(a0)
-                bge.s   loc_346DA
+                bge.s   S3MGZTopRider_SpinAndLiftFromRight
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
                 add.w   d0,x_vel(a0)
 
-loc_346DA:
+S3MGZTopRider_SpinAndLiftFromRight:
                 add.w   d0,$24(a0)
                 move.w  x_vel(a0),d0
-                bmi.s   loc_346FA
+                bmi.s   S3MGZTopRider_LeaveFloorFromRight
                 neg.w   d0
                 asr.w   #4,d0
                 subi.w  #8,y_vel(a0)
                 cmpi.w  #-$100,y_vel(a0)
-                ble.s   loc_346FA
+                ble.s   S3MGZTopRider_LeaveFloorFromRight
                 add.w   d0,y_vel(a0)
 
-loc_346FA:
+S3MGZTopRider_LeaveFloorFromRight:
                 bset    #1,status(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34702:
+S3MGZTopRider_ApplyCenteredFriction:
                 moveq   #1,d0
                 tst.w   x_vel(a0)
-                beq.s   loc_34712
-                bmi.s   loc_3470E
+                beq.s   S3MGZTopRider_SpinAndStopCenteredRise
+                bmi.s   S3MGZTopRider_StepCenteredXSpeed
                 neg.w   d0
 
-loc_3470E:
+S3MGZTopRider_StepCenteredXSpeed:
                 add.w   d0,x_vel(a0)
 
-loc_34712:
+S3MGZTopRider_SpinAndStopCenteredRise:
                 add.w   d0,$24(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_34720
+                bpl.s   S3MGZTopRider_CenteredDriveReturn
                 clr.w   y_vel(a0)
 
-locret_34720:
+S3MGZTopRider_CenteredDriveReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
@@ -530,33 +533,33 @@ locret_34720:
 ; =============== S U B R O U T I N E =======================================
 
 AbandonTopPlatformAndReleaseRiders:
-                move.l  #loc_3432A,(a0)
+                move.l  #S3MGZTopRoot_StepAbandonedTop,(a0)
                 lea     (Player_1).w,a2
                 cmpi.b  #4,$40(a0)
-                bne.s   loc_34750
+                bne.s   S3MGZTopRider_ClearP1Standing
                 bclr    #0,object_control(a2)
                 move.b  #0,status_tertiary(a2)
                 bset    #Status_InAir,status(a2)
 
-loc_34750:
+S3MGZTopRider_ClearP1Standing:
                 tst.b   $40(a0)
-                beq.s   loc_3475C
+                beq.s   S3MGZTopRider_ReleaseP2IfCaptured
                 bclr    #Status_OnObj,status(a2)
 
-loc_3475C:
+S3MGZTopRider_ReleaseP2IfCaptured:
                 lea     (Player_2).w,a2
                 cmpi.b  #4,$42(a0)
-                bne.s   loc_3477A
+                bne.s   S3MGZTopRider_ClearP2Standing
                 bclr    #0,object_control(a2)
                 move.b  #0,status_tertiary(a2)
                 bset    #Status_InAir,status(a2)
 
-loc_3477A:
+S3MGZTopRider_ClearP2Standing:
                 tst.b   $42(a0)
-                beq.s   loc_34786
+                beq.s   S3MGZTopRider_DeferBothRiderResets
                 bclr    #Status_OnObj,status(a2)
 
-loc_34786:
+S3MGZTopRider_DeferBothRiderResets:
                 move.b  #6,$40(a0)
                 move.b  #6,$42(a0)
                 rts
@@ -566,9 +569,9 @@ loc_34786:
 
 AlignTopPlatformAndRiderAfterMovement:
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_347C4
+                bne.s   S3MGZTopRider_CheckSupportForSinkingMud
                 cmpi.b  #4,(a4)
-                blo.s   locret_347C2
+                blo.s   S3MGZTopRider_FollowTopReturn
                 move.w  y_pos(a0),d0
                 subi.w  #$C,d0
                 moveq   #0,d1
@@ -578,19 +581,19 @@ AlignTopPlatformAndRiderAfterMovement:
                 move.w  x_pos(a0),x_pos(a1)
                 move.b  #0,$2D(a0)
 
-locret_347C2:
+S3MGZTopRider_FollowTopReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_347C4:
+S3MGZTopRider_CheckSupportForSinkingMud:
                 cmpi.b  #4,(a4)
-                blo.s   locret_347FA
+                blo.s   S3MGZTopRider_OtherSupportReturn
                 movea.w interact(a1),a2
                 cmpi.l  #S3SinkingMud_UpdateNormalP1Depth,(a2)
-                bne.s   loc_347DA
+                bne.s   S3MGZTopRider_AlignTopUnderRider
                 bsr.w   AbandonTopPlatformAndReleaseRiders
 
-loc_347DA:
+S3MGZTopRider_AlignTopUnderRider:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a1),d0
                 moveq   #0,d1
@@ -600,6 +603,6 @@ loc_347DA:
                 move.w  d0,y_pos(a0)
                 move.b  #1,$2D(a0)
 
-locret_347FA:
+S3MGZTopRider_OtherSupportReturn:
                 rts
 ; End of function AlignTopPlatformAndRiderAfterMovement

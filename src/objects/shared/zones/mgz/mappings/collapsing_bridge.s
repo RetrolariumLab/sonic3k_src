@@ -1,16 +1,16 @@
 ; Data owner: objects/shared/zones/mgz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_MGZCollapsingBridge_:
-                dc.w    Frame_21EE7A-Map_MGZCollapsingBridge_
-                dc.w    Frame_21EEDC-Map_MGZCollapsingBridge_
-                dc.w    Frame_21EF9E-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F060-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F0AA-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F13C-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F1CE-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F230-Map_MGZCollapsingBridge_
-                dc.w    Frame_21F230-Map_MGZCollapsingBridge_
-Frame_21EE7A:   dc.w    $10
+                dc.w    MGZCollapsingBridgeS3_MapSlot00-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot01-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot02-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot03-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot04-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot05-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlot06-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlots07_08-Map_MGZCollapsingBridge_
+                dc.w    MGZCollapsingBridgeS3_MapSlots07_08-Map_MGZCollapsingBridge_
+MGZCollapsingBridgeS3_MapSlot00:    dc.w    $10
                 dc.b    $EC,  $D,   0, $18, $FF, $C0
                 dc.b    $EC,  $D,   0, $18, $FF, $E0
                 dc.b    $EC,  $D,   0, $18,   0,   0
@@ -27,7 +27,7 @@ Frame_21EE7A:   dc.w    $10
                 dc.b    $1C,  $D,   0, $28, $FF, $E0
                 dc.b    $1C,  $D,   0, $28,   0,   0
                 dc.b    $1C,  $D,   8, $10,   0, $20
-Frame_21EEDC:   dc.w    $20
+MGZCollapsingBridgeS3_MapSlot01:    dc.w    $20
                 dc.b    $EC,   5,   0, $18, $FF, $C0
                 dc.b    $EC,   5,   0, $1C, $FF, $D0
                 dc.b    $EC,   5,   0, $18, $FF, $E0
@@ -60,7 +60,7 @@ Frame_21EEDC:   dc.w    $20
                 dc.b    $1C,   5,   8,  $C,   0, $10
                 dc.b    $1C,   5,   8, $14,   0, $20
                 dc.b    $1C,   5,   0, $10,   0, $30
-Frame_21EF9E:   dc.w    $20
+MGZCollapsingBridgeS3_MapSlot02:    dc.w    $20
                 dc.b    $EC,   5,   0, $1C,   0, $30
                 dc.b    $EC,   5,   0, $18, $FF, $C0
                 dc.b    $EC,   5,   0, $1C, $FF, $D0
@@ -93,7 +93,7 @@ Frame_21EF9E:   dc.w    $20
                 dc.b    $1C,   5,   8,  $C,   0, $10
                 dc.b    $1C,   5,   8, $14,   0, $20
                 dc.b    $1C,   5,   0, $10,   0, $30
-Frame_21F060:   dc.w    $C
+MGZCollapsingBridgeS3_MapSlot03:    dc.w    $C
                 dc.b    $EC,  $D,   0, $18, $FF, $D0
                 dc.b    $EC,  $D,   0, $18, $FF, $F0
                 dc.b    $EC,  $D,   0, $18,   0, $10
@@ -106,7 +106,7 @@ Frame_21F060:   dc.w    $C
                 dc.b    $1C,  $D,   0, $10, $FF, $D0
                 dc.b    $1C,  $D,   0, $28, $FF, $F0
                 dc.b    $1C,  $D,   8, $10,   0, $10
-Frame_21F0AA:   dc.w    $18
+MGZCollapsingBridgeS3_MapSlot04:    dc.w    $18
                 dc.b    $EC,   5,   0, $18, $FF, $D0
                 dc.b    $EC,   5,   0, $1C, $FF, $E0
                 dc.b    $EC,   5,   0, $18, $FF, $F0
@@ -131,7 +131,7 @@ Frame_21F0AA:   dc.w    $18
                 dc.b    $1C,   5,   8,  $C,   0,   0
                 dc.b    $1C,   5,   8, $14,   0, $10
                 dc.b    $1C,   5,   0, $10,   0, $20
-Frame_21F13C:   dc.w    $18
+MGZCollapsingBridgeS3_MapSlot05:    dc.w    $18
                 dc.b    $EC,   5,   0, $1C,   0, $20
                 dc.b    $EC,   5,   0, $18, $FF, $D0
                 dc.b    $EC,   5,   0, $1C, $FF, $E0
@@ -156,7 +156,7 @@ Frame_21F13C:   dc.w    $18
                 dc.b    $1C,   5,   8,  $C,   0,   0
                 dc.b    $1C,   5,   8, $14,   0, $10
                 dc.b    $1C,   5,   0, $10,   0, $20
-Frame_21F1CE:   dc.w    $10
+MGZCollapsingBridgeS3_MapSlot06:    dc.w    $10
                 dc.b    $EC,  $D,   0, $18, $FF, $C0
                 dc.b    $EC,  $D,   0, $18, $FF, $E0
                 dc.b    $EC,  $D,   0, $18,   0,   0
@@ -173,7 +173,7 @@ Frame_21F1CE:   dc.w    $10
                 dc.b    $1C,  $D,   0, $5E, $FF, $E0
                 dc.b    $1C,  $D,   0, $5E,   0,   0
                 dc.b    $1C,  $D,   0, $5E,   0, $20
-Frame_21F230:   dc.w    $20
+MGZCollapsingBridgeS3_MapSlots07_08:    dc.w    $20
                 dc.b    $EC,   5,   0, $18, $FF, $C0
                 dc.b    $EC,   5,   0, $1C, $FF, $D0
                 dc.b    $EC,   5,   0, $18, $FF, $E0

@@ -1,8 +1,8 @@
 ; Data owner: objects/shared/zones/mgz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_MGZSmashingPillar_:
-                dc.w    Frame_228248-Map_MGZSmashingPillar_
-Frame_228248:   dc.w    $A
+                dc.w    MGZSmashingPillarS3_MapSlot00-Map_MGZSmashingPillar_
+MGZSmashingPillarS3_MapSlot00:  dc.w    $A
                 dc.b    $D8,  $E, $20, $38, $FF, $E0
                 dc.b    $D8,  $E, $28, $38,   0,   0
                 dc.b    $F0,  $C,   0, $44, $FF, $E0

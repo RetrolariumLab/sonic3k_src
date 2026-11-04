@@ -7,10 +7,10 @@
 ResolveAirborneTopPlatformTerrain:
                 move.l  (Primary_collision_addr).w,(Collision_addr).w
                 cmpi.b  #$C,top_solid_bit(a0)
-                beq.s   loc_3527E
+                beq.s   SKMGZTopTerrain_DispatchByVelocitySector
                 move.l  (Secondary_collision_addr).w,(Collision_addr).w
 
-loc_3527E:
+SKMGZTopTerrain_DispatchByVelocitySector:
                 move.b  lrb_solid_bit(a0),d5
                 move.w  x_vel(a0),d1
                 move.w  y_vel(a0),d2
@@ -18,41 +18,41 @@ loc_3527E:
                 subi.b  #$20,d0
                 andi.b  #$C0,d0
                 cmpi.b  #$40,d0
-                beq.w   loc_3536E
+                beq.w   SKMGZTopTerrain_ProbeLeftWall
                 cmpi.b  #$80,d0
-                beq.w   loc_353F8
+                beq.w   SKMGZTopTerrain_ProbeUpSectorLeftWall
                 cmpi.b  #-$40,d0
-                beq.w   loc_3547A
+                beq.w   SKMGZTopTerrain_ProbeRightWall
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
                 jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_352D0
+                bpl.s   SKMGZTopTerrain_ProbeDefaultRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_352D0:
+SKMGZTopTerrain_ProbeDefaultRightWall:
                 jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_352E4
+                bpl.s   SKMGZTopTerrain_ProbeDefaultFloor
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_352E4:
+SKMGZTopTerrain_ProbeDefaultFloor:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 jsr     (Sonic_CheckFloor).l
                 tst.w   d1
-                bpl.s   locret_3536C
+                bpl.s   SKMGZTopTerrain_DefaultContactReturn
                 move.b  y_vel(a0),d2
                 addq.b  #8,d2
                 neg.b   d2
                 cmp.b   d2,d1
-                bge.s   loc_3530A
+                bge.s   SKMGZTopTerrain_LandAndClassifySlope
                 cmp.b   d2,d0
-                blt.s   locret_3536C
+                blt.s   SKMGZTopTerrain_DefaultContactReturn
 
-loc_3530A:
+SKMGZTopTerrain_LandAndClassifySlope:
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 bclr    #1,status(a0)
@@ -60,71 +60,71 @@ loc_3530A:
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   loc_3534A
+                bne.s   SKMGZTopTerrain_LandOnSteepSlope
                 move.b  d3,d0
                 addi.b  #$10,d0
                 andi.b  #$20,d0
-                beq.s   loc_3533C
+                beq.s   SKMGZTopTerrain_LandOnFlat
                 asr     y_vel(a0)
-                bra.s   loc_3535E
+                bra.s   SKMGZTopTerrain_ProjectLandingSpeed
 ; ---------------------------------------------------------------------------
 
-loc_3533C:
+SKMGZTopTerrain_LandOnFlat:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3534A:
+SKMGZTopTerrain_LandOnSteepSlope:
                 move.w  #0,x_vel(a0)
                 cmpi.w  #$FC0,y_vel(a0)
-                ble.s   loc_3535E
+                ble.s   SKMGZTopTerrain_ProjectLandingSpeed
                 move.w  #$FC0,y_vel(a0)
 
-loc_3535E:
+SKMGZTopTerrain_ProjectLandingSpeed:
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   locret_3536C
+                bpl.s   SKMGZTopTerrain_DefaultContactReturn
                 neg.w   ground_vel(a0)
 
-locret_3536C:
+SKMGZTopTerrain_DefaultContactReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3536E:
+SKMGZTopTerrain_ProbeLeftWall:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
                 jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_3539E
+                bpl.s   SKMGZTopTerrain_ProbeLeftSectorCeiling
                 sub.w   d1,x_pos(a0)
                 addi.b  #$30,d3
                 cmpi.b  #$60,d3
-                blo.s   loc_3539E
+                blo.s   SKMGZTopTerrain_ProbeLeftSectorCeiling
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-loc_3539E:
+SKMGZTopTerrain_ProbeLeftSectorCeiling:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
-                bpl.s   loc_353C6
+                bpl.s   SKMGZTopTerrain_TryLandInLeftSector
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_353C4
+                bpl.s   SKMGZTopTerrain_LeftCeilingReturn
                 move.w  #0,y_vel(a0)
 
-locret_353C4:
+SKMGZTopTerrain_LeftCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_353C6:
+SKMGZTopTerrain_TryLandInLeftSector:
                 tst.w   y_vel(a0)
-                bmi.s   locret_353F6
+                bmi.s   SKMGZTopTerrain_LeftFloorReturn
                 jsr     (Sonic_CheckFloor).l
                 tst.w   d1
-                bpl.s   locret_353F6
+                bpl.s   SKMGZTopTerrain_LeftFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 bclr    #1,status(a0)
@@ -132,88 +132,88 @@ loc_353C6:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
 
-locret_353F6:
+SKMGZTopTerrain_LeftFloorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_353F8:
+SKMGZTopTerrain_ProbeUpSectorLeftWall:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
                 jsr     (ProbeLeftWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_35418
+                bpl.s   SKMGZTopTerrain_ProbeUpSectorRightWall
                 sub.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_35418:
+SKMGZTopTerrain_ProbeUpSectorRightWall:
                 jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_3542C
+                bpl.s   SKMGZTopTerrain_CheckCeilingSlope
                 add.w   d1,x_pos(a0)
                 move.w  #0,x_vel(a0)
 
-loc_3542C:
+SKMGZTopTerrain_CheckCeilingSlope:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
-                bpl.s   locret_35478
+                bpl.s   SKMGZTopTerrain_UpSectorReturn
                 sub.w   d1,y_pos(a0)
                 move.b  d3,d0
                 addi.b  #$20,d0
                 andi.b  #$40,d0
-                bne.s   loc_3545A
+                bne.s   SKMGZTopTerrain_AttachToCeilingSlope
                 move.w  #0,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3545A:
+SKMGZTopTerrain_AttachToCeilingSlope:
                 move.b  d3,angle(a0)
                 bclr    #1,status(a0)
                 move.b  #0,$2D(a0)
                 move.w  y_vel(a0),ground_vel(a0)
                 tst.b   d3
-                bpl.s   locret_35478
+                bpl.s   SKMGZTopTerrain_UpSectorReturn
                 neg.w   ground_vel(a0)
 
-locret_35478:
+SKMGZTopTerrain_UpSectorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3547A:
+SKMGZTopTerrain_ProbeRightWall:
                 move.b  #$C,y_radius(a0)
                 move.b  #$18,x_radius(a0)
                 jsr     (ProbeRightWallAtBodyExtents).l
                 tst.w   d1
-                bpl.s   loc_354AA
+                bpl.s   SKMGZTopTerrain_ProbeRightSectorCeiling
                 add.w   d1,x_pos(a0)
                 addi.b  #$30,d3
                 cmpi.b  #$60,d3
-                blo.s   loc_354AA
+                blo.s   SKMGZTopTerrain_ProbeRightSectorCeiling
                 move.w  #0,x_vel(a0)
                 move.w  y_vel(a0),ground_vel(a0)
 
-loc_354AA:
+SKMGZTopTerrain_ProbeRightSectorCeiling:
                 move.b  #$1F,y_radius(a0)
                 move.b  #$A,x_radius(a0)
                 jsr     (ProbeCeilingWithInsetHorizontalRadius).l
                 tst.w   d1
-                bpl.s   loc_354D2
+                bpl.s   SKMGZTopTerrain_TryLandInRightSector
                 sub.w   d1,y_pos(a0)
                 tst.w   y_vel(a0)
-                bpl.s   locret_354D0
+                bpl.s   SKMGZTopTerrain_RightCeilingReturn
                 move.w  #0,y_vel(a0)
 
-locret_354D0:
+SKMGZTopTerrain_RightCeilingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_354D2:
+SKMGZTopTerrain_TryLandInRightSector:
                 tst.w   y_vel(a0)
-                bmi.s   locret_35502
+                bmi.s   SKMGZTopTerrain_RightFloorReturn
                 jsr     (Sonic_CheckFloor).l
                 tst.w   d1
-                bpl.s   locret_35502
+                bpl.s   SKMGZTopTerrain_RightFloorReturn
                 add.w   d1,y_pos(a0)
                 move.b  d3,angle(a0)
                 bclr    #1,status(a0)
@@ -221,7 +221,7 @@ loc_354D2:
                 move.w  #0,y_vel(a0)
                 move.w  x_vel(a0),ground_vel(a0)
 
-locret_35502:
+SKMGZTopTerrain_RightFloorReturn:
                 rts
 ; End of function ResolveAirborneTopPlatformTerrain
 
@@ -232,39 +232,39 @@ ControlTopRiderGroundSpeed:
                 move.w  #$C,d5
                 move.w  #$80,d4
                 btst    #$A,d3
-                beq.s   loc_3551A
+                beq.s   SKMGZTopRider_TryAccelerateRight
                 bsr.w   AccelerateTopRiderLeft
 
-loc_3551A:
+SKMGZTopRider_TryAccelerateRight:
                 btst    #$B,d3
-                beq.s   loc_35524
+                beq.s   SKMGZTopRider_TryApplyNoInputFriction
                 bsr.w   AccelerateTopRiderRight
 
-loc_35524:
+SKMGZTopRider_TryApplyNoInputFriction:
                 move.w  d3,d0
                 andi.w  #$C00,d0
-                bne.s   loc_3554E
+                bne.s   SKMGZTopRider_SetMotionFromGroundSpeed
                 move.w  ground_vel(a0),d0
-                beq.s   loc_3554E
-                bmi.s   loc_35542
+                beq.s   SKMGZTopRider_SetMotionFromGroundSpeed
+                bmi.s   SKMGZTopRider_ApplyNegativeFriction
                 sub.w   d5,d0
-                bcc.s   loc_3553C
+                bcc.s   SKMGZTopRider_StorePositiveFriction
                 move.w  #0,d0
 
-loc_3553C:
+SKMGZTopRider_StorePositiveFriction:
                 move.w  d0,ground_vel(a0)
-                bra.s   loc_3554E
+                bra.s   SKMGZTopRider_SetMotionFromGroundSpeed
 ; ---------------------------------------------------------------------------
 
-loc_35542:
+SKMGZTopRider_ApplyNegativeFriction:
                 add.w   d5,d0
-                bcc.s   loc_3554A
+                bcc.s   SKMGZTopRider_StoreNegativeFriction
                 move.w  #0,d0
 
-loc_3554A:
+SKMGZTopRider_StoreNegativeFriction:
                 move.w  d0,ground_vel(a0)
 
-loc_3554E:
+SKMGZTopRider_SetMotionFromGroundSpeed:
                 move.w  ground_vel(a0),x_vel(a0)
                 move.w  #0,y_vel(a0)
                 rts
@@ -274,38 +274,38 @@ loc_3554E:
 
 AccelerateTopRiderLeft:
                 move.w  ground_vel(a0),d0
-                beq.s   loc_35564
-                bpl.s   loc_35596
+                beq.s   SKMGZTopRider_FaceLeftForMotion
+                bpl.s   SKMGZTopRider_BrakeMovingRight
 
-loc_35564:
+SKMGZTopRider_FaceLeftForMotion:
                 bset    #0,status(a0)
-                bne.s   loc_35578
+                bne.s   SKMGZTopRider_StepLeftAcceleration
                 bclr    #5,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_35578:
+SKMGZTopRider_StepLeftAcceleration:
                 sub.w   d5,d0
                 move.w  d6,d1
                 neg.w   d1
                 cmp.w   d1,d0
-                bgt.s   loc_3558A
+                bgt.s   SKMGZTopRider_StoreLeftSpeedAndPose
                 add.w   d5,d0
                 cmp.w   d1,d0
-                ble.s   loc_3558A
+                ble.s   SKMGZTopRider_StoreLeftSpeedAndPose
                 move.w  d1,d0
 
-loc_3558A:
+SKMGZTopRider_StoreLeftSpeedAndPose:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35596:
+SKMGZTopRider_BrakeMovingRight:
                 sub.w   d4,d0
-                bcc.s   loc_3559E
+                bcc.s   SKMGZTopRider_StoreBrakeLeftAndTestSkid
                 move.w  #-$80,d0
 
-loc_3559E:
+SKMGZTopRider_StoreBrakeLeftAndTestSkid:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -315,9 +315,9 @@ loc_3559E:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_355E2
+                bne.s   SKMGZTopRider_BrakeLeftReturn
                 cmpi.w  #$400,d0
-                blt.s   locret_355E2
+                blt.s   SKMGZTopRider_BrakeLeftReturn
                 move.b  #$D,anim(a0)
                 bclr    #0,status(a0)
                 move.w  #sfx_Skid,d0
@@ -328,7 +328,7 @@ loc_3559E:
                 move.b  #6,routine(a2)
                 move.b  #$15,mapping_frame(a2)
 
-locret_355E2:
+SKMGZTopRider_BrakeLeftReturn:
                 rts
 ; End of function AccelerateTopRiderLeft
 
@@ -336,33 +336,33 @@ locret_355E2:
 
 AccelerateTopRiderRight:
                 move.w  ground_vel(a0),d0
-                bmi.s   loc_35618
+                bmi.s   SKMGZTopRider_BrakeMovingLeft
                 bclr    #0,status(a0)
-                beq.s   loc_355FE
+                beq.s   SKMGZTopRider_StepRightAcceleration
                 bclr    #5,status(a0)
                 move.b  #1,prev_anim(a0)
 
-loc_355FE:
+SKMGZTopRider_StepRightAcceleration:
                 add.w   d5,d0
                 cmp.w   d6,d0
-                blt.s   loc_3560C
+                blt.s   SKMGZTopRider_StoreRightSpeedAndPose
                 sub.w   d5,d0
                 cmp.w   d6,d0
-                bge.s   loc_3560C
+                bge.s   SKMGZTopRider_StoreRightSpeedAndPose
                 move.w  d6,d0
 
-loc_3560C:
+SKMGZTopRider_StoreRightSpeedAndPose:
                 move.w  d0,ground_vel(a0)
                 move.b  #0,anim(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35618:
+SKMGZTopRider_BrakeMovingLeft:
                 add.w   d4,d0
-                bcc.s   loc_35620
+                bcc.s   SKMGZTopRider_StoreBrakeRightAndTestSkid
                 move.w  #$80,d0
 
-loc_35620:
+SKMGZTopRider_StoreBrakeRightAndTestSkid:
                 move.w  d0,ground_vel(a0)
 ; These three instructions partially overwrite the inertia value in
 ; 'd0'! This causes the character to trigger their skidding
@@ -372,9 +372,9 @@ loc_35620:
                 move.b  angle(a0),d0
                 addi.b  #$20,d0
                 andi.b  #$C0,d0
-                bne.s   locret_35664
+                bne.s   SKMGZTopRider_BrakeRightReturn
                 cmpi.w  #-$400,d0
-                bgt.s   locret_35664
+                bgt.s   SKMGZTopRider_BrakeRightReturn
                 move.b  #$D,anim(a0)
                 bset    #0,status(a0)
                 move.w  #sfx_Skid,d0
@@ -385,6 +385,6 @@ loc_35620:
                 move.b  #6,routine(a2)
                 move.b  #$15,mapping_frame(a2)
 
-locret_35664:
+SKMGZTopRider_BrakeRightReturn:
                 rts
 ; End of function AccelerateTopRiderRight

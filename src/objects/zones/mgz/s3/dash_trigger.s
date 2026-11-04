@@ -16,95 +16,95 @@ Obj_MGZDashTrigger:
                 move.w  x_pos(a0),(a2)+
                 move.w  y_pos(a0),(a2)+
                 move.w  #0,(a2)+
-                move.l  #loc_249FA,(a0)
+                move.l  #S3MGZDashTrig_CheckSolidAndDashContacts,(a0)
 
-loc_249FA:
+S3MGZDashTrig_CheckSolidAndDashContacts:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
-                lea     (byte_24B6C).l,a2
+                lea     (S3MGZDashTrig_SolidHeightProfile).l,a2
                 jsr     (CollidePlayersWithHeightProfileSolid).l
                 swap    d6
                 andi.w  #$33,d6
-                beq.s   loc_24A80
+                beq.s   S3MGZDashTrig_TickActivation
                 move.b  d6,d0
                 andi.b  #$11,d0
-                beq.s   loc_24A4E
+                beq.s   S3MGZDashTrig_TryP2DashContact
                 lea     (Player_1).w,a1
                 cmpi.b  #9,anim(a1)
-                bne.s   loc_24A4E
+                bne.s   S3MGZDashTrig_TryP2DashContact
                 move.w  #$3C,$30(a0)
                 move.b  #1,$32(a0)
                 move.b  status(a1),d0
                 add.b   status(a0),d0
                 andi.b  #1,d0
-                bne.s   loc_24A4E
+                bne.s   S3MGZDashTrig_TryP2DashContact
                 move.b  #-1,$32(a0)
 
-loc_24A4E:
+S3MGZDashTrig_TryP2DashContact:
                 andi.b  #$22,d6
-                beq.s   loc_24A80
+                beq.s   S3MGZDashTrig_TickActivation
                 lea     (Player_2).w,a1
                 cmpi.b  #9,anim(a1)
-                bne.s   loc_24A80
+                bne.s   S3MGZDashTrig_TickActivation
                 move.w  #$3C,$30(a0)
                 move.b  #1,$32(a0)
                 move.b  status(a1),d0
                 add.b   status(a0),d0
                 andi.b  #1,d0
-                bne.s   loc_24A80
+                bne.s   S3MGZDashTrig_TickActivation
                 move.b  #-1,$32(a0)
 
-loc_24A80:
+S3MGZDashTrig_TickActivation:
                 tst.w   $30(a0)
-                beq.s   loc_24AFE
+                beq.s   S3MGZDashTrig_CullOrDrawTrigger
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 lea     (a3,d0.w),a3
                 subq.w  #1,$30(a0)
-                bne.s   loc_24AA8
+                bne.s   S3MGZDashTrig_SetTriggerAndTryReboundP1
                 move.b  #0,(a3)
                 move.b  #0,mapping_frame(a0)
-                bra.s   loc_24AFE
+                bra.s   S3MGZDashTrig_CullOrDrawTrigger
 ; ---------------------------------------------------------------------------
 
-loc_24AA8:
+S3MGZDashTrig_SetTriggerAndTryReboundP1:
                 move.b  #1,(a3)
                 move.b  status(a0),d6
                 andi.w  #standing_mask,d6
-                beq.s   loc_24AD0
+                beq.s   S3MGZDashTrig_StepEmbeddedFrame
                 move.w  d6,d0
                 andi.w  #p1_standing,d0
-                beq.s   loc_24AC4
+                beq.s   S3MGZDashTrig_TryReboundP2
                 lea     (Player_1).w,a1
                 bsr.s   ReboundPlayerFromActiveMgzDashTrigger
 
-loc_24AC4:
+S3MGZDashTrig_TryReboundP2:
                 andi.w  #p2_standing,d6
-                beq.s   loc_24AD0
+                beq.s   S3MGZDashTrig_StepEmbeddedFrame
                 lea     (Player_2).w,a1
                 bsr.s   ReboundPlayerFromActiveMgzDashTrigger
 
-loc_24AD0:
+S3MGZDashTrig_StepEmbeddedFrame:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_24AEA
+                bpl.s   S3MGZDashTrig_ToggleMainFrame
                 move.b  #1,anim_frame_timer(a0)
                 move.b  $32(a0),d0
                 add.b   d0,$1D(a0)
                 andi.b  #3,$1D(a0)
 
-loc_24AEA:
+S3MGZDashTrig_ToggleMainFrame:
                 tst.b   mapping_frame(a0)
-                beq.s   loc_24AF8
+                beq.s   S3MGZDashTrig_ShowActiveFrameFour
                 move.b  #0,mapping_frame(a0)
-                bra.s   loc_24AFE
+                bra.s   S3MGZDashTrig_CullOrDrawTrigger
 ; ---------------------------------------------------------------------------
 
-loc_24AF8:
+S3MGZDashTrig_ShowActiveFrameFour:
                 move.b  #4,mapping_frame(a0)
 
-loc_24AFE:
+S3MGZDashTrig_CullOrDrawTrigger:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -113,10 +113,10 @@ ReboundPlayerFromActiveMgzDashTrigger:
                 move.w  x_pos(a0),d1
                 subi.w  #$10,d1
                 btst    #0,status(a0)
-                beq.s   loc_24B18
+                beq.s   S3MGZDashTrig_ApplyOutwardRebound
                 addi.w  #2*$10,d1
 
-loc_24B18:
+S3MGZDashTrig_ApplyOutwardRebound:
                 move.w  y_pos(a0),d2
                 addi.w  #$10,d2
                 sub.w   x_pos(a1),d1
@@ -140,7 +140,7 @@ loc_24B18:
 ; End of function ReboundPlayerFromActiveMgzDashTrigger
 
 ; ---------------------------------------------------------------------------
-byte_24B6C:
+S3MGZDashTrig_SolidHeightProfile:
                 dc.b    $10
                 dc.b    $10
                 dc.b    $10

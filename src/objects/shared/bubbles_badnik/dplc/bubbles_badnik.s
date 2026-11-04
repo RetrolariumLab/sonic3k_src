@@ -1,22 +1,22 @@
 ; Data owner: objects/shared/bubbles_badnik
 ; Provenance and source range: config/reconstruction/source_layout.json
 DPLC_BubblesBadnik_:
-                dc.w    Frame_361C4A-DPLC_BubblesBadnik_
-                dc.w    Frame_361C50-DPLC_BubblesBadnik_
-                dc.w    Frame_361C54-DPLC_BubblesBadnik_
-                dc.w    Frame_361C58-DPLC_BubblesBadnik_
-                dc.w    Frame_361C5E-DPLC_BubblesBadnik_
-Frame_361C4A:   dc.w    1
+                dc.w    BubblesBadnikS3_DPLCFrame00-DPLC_BubblesBadnik_
+                dc.w    BubblesBadnikS3_DPLCFrame01-DPLC_BubblesBadnik_
+                dc.w    BubblesBadnikS3_DPLCFrame02-DPLC_BubblesBadnik_
+                dc.w    BubblesBadnikS3_DPLCFrame03-DPLC_BubblesBadnik_
+                dc.w    BubblesBadnikS3_DPLCFrame04-DPLC_BubblesBadnik_
+BubblesBadnikS3_DPLCFrame00:    dc.w    1
                 dc.w    $000B
                 dc.w    $00C2
-Frame_361C50:   dc.w    0
+BubblesBadnikS3_DPLCFrame01:    dc.w    0
                 dc.w    $00FB
-Frame_361C54:   dc.w    0
+BubblesBadnikS3_DPLCFrame02:    dc.w    0
                 dc.w    $01BB
-Frame_361C58:   dc.w    1
+BubblesBadnikS3_DPLCFrame03:    dc.w    1
                 dc.w    $027F
                 dc.w    $0371
-Frame_361C5E:   dc.w    3
+BubblesBadnikS3_DPLCFrame04:    dc.w    3
                 dc.w    $0391
                 dc.w    $03BF
                 dc.w    $04B3

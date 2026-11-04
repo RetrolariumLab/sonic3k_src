@@ -39,7 +39,7 @@ MGZ1_BackgroundEvent_Index:
 
 MGZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_3C8B4
+                beq.s   S3MGZ1Screen_ApplyBgDeformAndShake
                 clr.w   (Events_fg_5).w                 ; Transition time
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (MGZ2_128x128_Secondary_Kos).l,a1
@@ -56,7 +56,7 @@ MGZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_3C8B4:
+S3MGZ1Screen_ApplyBgDeformAndShake:
                 jsr     MGZ1_Deform(pc)                 ; Pretty self-explanatory to be honest
                 lea     MGZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table).w,a5
@@ -66,7 +66,7 @@ loc_3C8B4:
 
 MGZ1BGE_Transition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_3C960                       ; Wait for Kos queue to finish
+                bne.w   S3MGZ1Screen_DrawBgDuringActChange  ; Wait for Kos queue to finish
                 move.w  #$201,(Current_zone_and_act).w  ; Change act
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -102,7 +102,7 @@ MGZ1BGE_Transition:
                 clr.w   (_unkEEA2).w
                 clr.w   (Events_routine_bg).w           ; Clear flags/values used for BG stuff in act 2
 
-loc_3C960:
+S3MGZ1Screen_DrawBgDuringActChange:
                 jsr     MGZ1_Deform(pc)
                 lea     MGZ1_BGDeformArray(pc),a4
                 lea     (HScroll_table).w,a5
@@ -121,26 +121,26 @@ MGZ1_Deform:
                 lea     (HScroll_table+$01C).w,a1
                 moveq   #9-1,d2
 
-loc_3C98A:
+S3MGZ1Screen_WriteParallaxWords:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d2,loc_3C98A
+                dbf     d2,S3MGZ1Screen_WriteParallaxWords
                 lea     (HScroll_table).w,a1
                 move.l  (HScroll_table+$01C).w,d2
                 addi.l  #$500,(HScroll_table+$01C).w
                 asr.l   #1,d0
                 moveq   #5-1,d3
 
-loc_3C9AA:
+S3MGZ1Screen_WriteFgScrollPairs:
                 add.l   d2,d0
                 addi.l  #$500,d2
                 swap    d0
                 move.w  d0,(a1)+
                 swap    d0
                 add.l   d1,d0
-                dbf     d3,loc_3C9AA
+                dbf     d3,S3MGZ1Screen_WriteFgScrollPairs
                 move.w  -2(a1),d0
                 move.w  -4(a1),-2(a1)
                 move.w  d0,-4(a1)

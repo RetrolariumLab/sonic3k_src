@@ -9258,7 +9258,7 @@
       "responsibility": "Marble Garden act-two collapse solids, background deformation and coordinated character-dependent background movement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 557,
+      "physical_lines": 558,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -9298,7 +9298,7 @@
       "responsibility": "Marble Garden act-two screen initialization, event control and level-collapse triggering.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 532,
+      "physical_lines": 534,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -9373,7 +9373,7 @@
       "responsibility": "Marble Garden act-two collapse solids, background events and coordinated character-dependent movement.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 377,
+      "physical_lines": 379,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -9403,7 +9403,7 @@
       "responsibility": "Marble Garden act-two screen initialization, event control and collapse triggering.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 570,
+      "physical_lines": 572,
       "origin": {
         "commit": "047f240d907eaaabf0e5f1c7bbf51710b84d21df",
         "path": "sonic3k.s",
@@ -25239,7 +25239,7 @@
       "responsibility": "Bubbles enemy states, tracking-slot resources and graphics loading descriptors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 115,
+      "physical_lines": 116,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -25369,7 +25369,7 @@
       "responsibility": "Bubbles enemy states, tracking-slot resources and graphics loading descriptors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 115,
+      "physical_lines": 116,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -63961,7 +63961,7 @@
       "responsibility": "Marble Garden head trigger activation, coordinated motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 158,
+      "physical_lines": 159,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64071,7 +64071,7 @@
       "responsibility": "Marble Garden pulley travel, player attachment, coordinated sprites and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 359,
+      "physical_lines": 360,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64156,7 +64156,7 @@
       "responsibility": "Marble Garden swinging spike-ball motion, chain sprites and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 192,
+      "physical_lines": 193,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64311,7 +64311,7 @@
       "responsibility": "Marble Garden twisting loop player capture, scripted rotation and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 270,
+      "physical_lines": 271,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64426,7 +64426,7 @@
       "responsibility": "Marble Garden head trigger activation, coordinated motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 157,
+      "physical_lines": 158,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -64516,7 +64516,7 @@
       "responsibility": "Marble Garden pulley travel, player attachment, coordinated sprites and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 356,
+      "physical_lines": 357,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -64581,7 +64581,7 @@
       "responsibility": "Marble Garden swinging spike-ball motion, chain sprites and player collision.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 189,
+      "physical_lines": 190,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -64706,7 +64706,7 @@
       "responsibility": "Marble Garden twisting loop player capture, scripted rotation and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 270,
+      "physical_lines": 271,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -64741,7 +64741,7 @@
       "responsibility": "Marble Garden spinning top scripted loop entry, constrained path traversal and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 278,
+      "physical_lines": 279,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64786,7 +64786,7 @@
       "responsibility": "Marble Garden spinning top initialization, active state, rider attachment and input handling.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 605,
+      "physical_lines": 608,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -64866,7 +64866,7 @@
       "responsibility": "Marble Garden spinning top scripted loop entry, constrained path traversal and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 278,
+      "physical_lines": 279,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -64901,7 +64901,7 @@
       "responsibility": "Marble Garden spinning top initialization, active state, rider attachment and input handling.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 607,
+      "physical_lines": 610,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",

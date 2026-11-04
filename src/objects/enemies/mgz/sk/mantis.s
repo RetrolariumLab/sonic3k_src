@@ -12,130 +12,130 @@ Obj_Mantis:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Mantis_Index:
-                dc.w    loc_88E82-Mantis_Index
-                dc.w    loc_88E98-Mantis_Index
-                dc.w    loc_88EC4-Mantis_Index
-                dc.w    loc_88EFE-Mantis_Index
-                dc.w    loc_88F22-Mantis_Index
+                dc.w    SKMantis_InitRootAndFollower-Mantis_Index
+                dc.w    SKMantis_FaceNearestPlayer-Mantis_Index
+                dc.w    SKMantis_AnimateJumpPrep-Mantis_Index
+                dc.w    SKMantis_MoveAndTryLand-Mantis_Index
+                dc.w    SKMantis_AnimateRecovery-Mantis_Index
 ; ---------------------------------------------------------------------------
 
-loc_88E82:
+SKMantis_InitRootAndFollower:
                 lea     ObjDat_Mantis(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.b  #$29,y_radius(a0)
-                lea     ChildObjDat_88F9C(pc),a2
+                lea     MantisSK_Root_OneNormalFollowerRecord(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88E98:
+SKMantis_FaceNearestPlayer:
                 jsr     Find_SonicTails(pc)
                 bclr    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   loc_88EAC
+                beq.s   SKMantis_CheckHorizontalJumpRange
                 bset    #0,render_flags(a0)
 
-loc_88EAC:
+SKMantis_CheckHorizontalJumpRange:
                 cmpi.w  #$40,d2
-                blo.s   loc_88EB4
+                blo.s   SKMantis_BeginJumpPrep
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88EB4:
+SKMantis_BeginJumpPrep:
                 move.b  #4,routine(a0)
-                move.l  #loc_88EE8,$34(a0)
+                move.l  #MantisSK_Root_StartSixPixelUpwardJump,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88EC4:
-                lea     byte_88FA4(pc),a1
+SKMantis_AnimateJumpPrep:
+                lea     SKMantis_JumpPrepAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_88EE0
-                bmi.s   locret_88EE0
+                beq.s   SKMantis_JumpPrepReturn
+                bmi.s   SKMantis_JumpPrepReturn
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
-                move.w  word_88EE2(pc,d0.w),d0
+                move.w  SKMantis_PrepYStepsByFrame(pc,d0.w),d0
                 add.w   d0,y_pos(a0)
 
-locret_88EE0:
+SKMantis_JumpPrepReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_88EE2:
+SKMantis_PrepYStepsByFrame:
                 dc.w    0,    -5,  -$13
 ; ---------------------------------------------------------------------------
 
-loc_88EE8:
+MantisSK_Root_StartSixPixelUpwardJump:
                 move.b  #6,routine(a0)
                 move.w  #-$600,y_vel(a0)
-                move.l  #loc_88F0E,$34(a0)
+                move.l  #SKMantis_BeginLandingRecovery,$34(a0)
 
-locret_88EFC:
+SKMantis_JumpReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88EFE:
+SKMantis_MoveAndTryLand:
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_88EFC
+                bmi.s   SKMantis_JumpReturn
                 jmp     ObjHitFloor_DoRoutine(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88F0E:
+SKMantis_BeginLandingRecovery:
                 move.b  #8,routine(a0)
                 clr.w   y_vel(a0)
-                move.l  #loc_88F48,$34(a0)
+                move.l  #MantisSK_Root_ReturnToNearestPlayerPoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88F22:
-                lea     byte_88FAB(pc),a1
+SKMantis_AnimateRecovery:
+                lea     SKMantis_LandingRecoveryAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_88F3E
-                bmi.s   locret_88F3E
+                beq.s   SKMantis_RecoveryReturn
+                bmi.s   SKMantis_RecoveryReturn
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
-                move.w  word_88F40(pc,d0.w),d0
+                move.w  SKMantis_RecoveryYStepsByFrame(pc,d0.w),d0
                 add.w   d0,y_pos(a0)
 
-locret_88F3E:
+SKMantis_RecoveryReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_88F40:
+SKMantis_RecoveryYStepsByFrame:
                 dc.w    0,   $12,     6,    -1
 ; ---------------------------------------------------------------------------
 
-loc_88F48:
+MantisSK_Root_ReturnToNearestPlayerPoll:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_88F50:
+SKMantis_UpdateFollower:
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_88F66(pc,d0.w),d1
-                jsr     off_88F66(pc,d1.w)
+                move.w  SKMantis_FollowerStateOffsets(pc,d0.w),d1
+                jsr     SKMantis_FollowerStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_88F66:
-                dc.w    loc_88F6A-off_88F66
-                dc.w    loc_88F72-off_88F66
+SKMantis_FollowerStateOffsets:
+                dc.w    SKMantis_InitFollower-SKMantis_FollowerStateOffsets
+                dc.w    SKMantis_PickFollowerPose-SKMantis_FollowerStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_88F6A:
-                lea     word_88F96(pc),a1
+SKMantis_InitFollower:
+                lea     MantisSK_Follower_PartialAttributePrefix(pc),a1
                 jmp     SetUp_ObjAttributes3(pc)
 ; ---------------------------------------------------------------------------
 
-loc_88F72:
+SKMantis_PickFollowerPose:
                 movea.w parent3(a0),a1
                 move.b  #5,mapping_frame(a0)
                 tst.w   y_vel(a1)
-                bmi.s   locret_88F88
+                bmi.s   SKMantis_FollowerPoseReturn
                 move.b  #4,mapping_frame(a0)
 
-locret_88F88:
+SKMantis_FollowerPoseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ObjDat_Mantis:
@@ -143,19 +143,19 @@ ObjDat_Mantis:
                 dc.w    make_art_tile(ArtTile_Mantis,1,0)
                 dc.w    $280
                 dc.b    $14, $1C,   0, $1A
-word_88F96:
+MantisSK_Follower_PartialAttributePrefix:
                 dc.w    $200
                 dc.b    4,   4,   5,   0
-ChildObjDat_88F9C:
+MantisSK_Root_OneNormalFollowerRecord:
                 dc.w    1-1
-                dc.l    loc_88F50
+                dc.l    SKMantis_UpdateFollower
                 dc.b    -9, -$B
-byte_88FA4:
+SKMantis_JumpPrepAnim:
                 dc.b    0,   0
                 dc.b    1,   2
                 dc.b    2,   0
                 dc.b    $F4
-byte_88FAB:
+SKMantis_LandingRecoveryAnim:
                 dc.b    2,   0
                 dc.b    1,   2
                 dc.b    3,   2

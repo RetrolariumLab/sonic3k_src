@@ -825,27 +825,27 @@
     },
     {
       "path": "src/objects/enemies/mgz/s3/bubbles.s",
-      "sha256": "cfc39baf51de4536eec35afcbd9438557e680d4232f85594308ad5137f0b99f2"
+      "sha256": "cb89380a28cfc92bf659db1bc53b7dda7fe31636a99dfccd0db8f9a93f59eaa7"
     },
     {
       "path": "src/objects/enemies/mgz/s3/mantis.s",
-      "sha256": "3a0d50091aaba9acbba8b30fd531b578f528cab13acb3839b63a542403f6ebab"
+      "sha256": "d178d73a5e9b0ea3a20f028364348692ff36677cf713092b02b47909a75723c0"
     },
     {
       "path": "src/objects/enemies/mgz/s3/spiker.s",
-      "sha256": "b22b0705dc851d8ce8c6b2d20c141c555628dbeca588eecc9a92607c5a4338ee"
+      "sha256": "dd94966615bd23913ae4dffb2fde043a32831947f16108ffe86b59223cd3532e"
     },
     {
       "path": "src/objects/enemies/mgz/sk/bubbles.s",
-      "sha256": "ba8629dabe23da1b4013fb0090aa038b20cec9a4811333877d16ee573e5e7271"
+      "sha256": "47269697f7ef9c5b9b29c14c2f8239e6eba102faab530bbb8dddf7845e9bb9f6"
     },
     {
       "path": "src/objects/enemies/mgz/sk/mantis.s",
-      "sha256": "b36e3b17673e843a4051e0101a60fdcd1660d77d7520a5bfe21f302a1ba564f5"
+      "sha256": "a75152a3d213cfffa249814a0c7b88423f82dd90eabb008befe57e67a2a2cb59"
     },
     {
       "path": "src/objects/enemies/mgz/sk/spiker.s",
-      "sha256": "1ed87b2694fbe48a252e944851d7daa057fe583751c81a75ca27e23a8fb9e027"
+      "sha256": "f33f2ebff4d5e3bb762a4c940eb9879ad2f773713efeaa036c35de5b8a0e5576"
     },
     {
       "path": "src/objects/enemies/sk/butterdroid.s",
@@ -1273,11 +1273,11 @@
     },
     {
       "path": "src/objects/zones/mgz/s3/twisting_loop.s",
-      "sha256": "bb0756002b67404c0b7d14ca35164702b5617c6c421c233cd809f86e5a5e4de4"
+      "sha256": "ed6ec14517bc2dc091000cbac4ca721a06acba57f7c572679ac06d6461b20983"
     },
     {
       "path": "src/objects/zones/mgz/sk/twisting_loop.s",
-      "sha256": "ffdf27ee9a0995ab1edc00456bedf41551bc58078cbcfaca01461fc2c9e757a4"
+      "sha256": "6bcb20691e30d579cf55fb3b0f346fe8b5781e1e80de7c9a6e797dee72f12c4a"
     },
     {
       "path": "src/objects/zones/mhz/sk/horizontal_swing_bar.s",
@@ -4339,106 +4339,106 @@
     },
     {
       "path": "src/objects/enemies/mgz/s3/bubbles.s",
-      "symbol": "byte_5622A",
-      "scope": "byte_5622A",
-      "first_line": 98,
-      "last_line": 115,
+      "symbol": "S3BubblesBadnik_TurnAnim",
+      "scope": "S3BubblesBadnik_TurnAnim",
+      "first_line": 99,
+      "last_line": 116,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 28,
-      "declarations_sha256": "71c89a95ce9bd3d96ec4d255605d0fc95e85f0a6dc6a1a4282418c47859794fd",
+      "declarations_sha256": "47c6ba2f98827af10e3d2695903b37ef70ea76ec18bf3f4a0943a76a605c4c29",
       "entries": [
         [0, "pairs"],
         [15, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_5622A", "byte_56239"],
+      "members": ["S3BubblesBadnik_TurnAnim", "S3BubblesBadnik_IdleAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/mgz/s3/mantis.s",
-      "symbol": "byte_56D62",
-      "scope": "byte_56D62",
+      "symbol": "S3Mantis_JumpPrepAnim",
+      "scope": "S3Mantis_JumpPrepAnim",
       "first_line": 153,
       "last_line": 164,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 16,
-      "declarations_sha256": "60b9fc54118648796ac1fe420950c0e87d5f684262c5ff5cc2f82a2b88481363",
+      "declarations_sha256": "98e2ff420478df155ffd2e05d17904a91d8de30ea8863b30d01ec4f428e61870",
       "entries": [
         [0, "pairs"],
         [7, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_56D62", "byte_56D69"],
+      "members": ["S3Mantis_JumpPrepAnim", "S3Mantis_LandingRecoveryAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/mgz/s3/spiker.s",
-      "symbol": "byte_56C08",
-      "scope": "byte_56C08",
+      "symbol": "S3Spiker_SpringAnim",
+      "scope": "S3Spiker_SpringAnim",
       "first_line": 309,
       "last_line": 323,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 22,
-      "declarations_sha256": "c0c6d8bbd9191023e45fc358da36e33b756d6427114090136e0a7607e4673059",
+      "declarations_sha256": "4c7d4e07df39194219fa9b7bc89194364bcf82e20d4d77e767f4e120e16e56b1",
       "entries": [
         [0, "pairs"],
         [9, "pairs"],
         [18, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_56C08", "byte_56C11", "byte_56C1A"],
+      "members": ["S3Spiker_SpringAnim", "S3Spiker_FiringAnim", "S3Spiker_ShotAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/mgz/sk/bubbles.s",
-      "symbol": "byte_8843E",
-      "scope": "byte_8843E",
-      "first_line": 98,
-      "last_line": 115,
+      "symbol": "SKBubblesBadnik_TurnAnim",
+      "scope": "SKBubblesBadnik_TurnAnim",
+      "first_line": 99,
+      "last_line": 116,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 28,
-      "declarations_sha256": "73ee0f6a7fb6c0650e38d3d8bcc3c6bec6b41b7ef88f27d9d2c5f8d2bdd6040a",
+      "declarations_sha256": "05d85bc6346e24d4924ece58605bcf61b75df25862361ad56586f1aeb1cfed69",
       "entries": [
         [0, "pairs"],
         [15, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_8843E", "byte_8844D"],
+      "members": ["SKBubblesBadnik_TurnAnim", "SKBubblesBadnik_IdleAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/mgz/sk/mantis.s",
-      "symbol": "byte_88FA4",
-      "scope": "byte_88FA4",
+      "symbol": "SKMantis_JumpPrepAnim",
+      "scope": "SKMantis_JumpPrepAnim",
       "first_line": 153,
       "last_line": 164,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 16,
-      "declarations_sha256": "c4949e9e7700e5e4f0a34c8b8fa42ce844520786602f5b5511ef78c8df14e4da",
+      "declarations_sha256": "806dcf836eb0ac78a1a320bd6fc50d4abda875405a6795dae6dfc913166befcf",
       "entries": [
         [0, "pairs"],
         [7, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_88FA4", "byte_88FAB"],
+      "members": ["SKMantis_JumpPrepAnim", "SKMantis_LandingRecoveryAnim"],
       "stored_markers": []
     },
     {
       "path": "src/objects/enemies/mgz/sk/spiker.s",
-      "symbol": "byte_88E4A",
-      "scope": "byte_88E4A",
+      "symbol": "SKSpiker_SpringAnim",
+      "scope": "SKSpiker_SpringAnim",
       "first_line": 309,
       "last_line": 323,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 22,
-      "declarations_sha256": "6f67d6982f9dbe0e6aa9a8d258f3f865a2d73b3045da48ae89e05a8a75f86562",
+      "declarations_sha256": "819a92763b99d3a4a8cf6396fdb03c335e292906fca168459095bcb2b2081a12",
       "entries": [
         [0, "pairs"],
         [9, "pairs"],
         [18, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_88E4A", "byte_88E53", "byte_88E5C"],
+      "members": ["SKSpiker_SpringAnim", "SKSpiker_FiringAnim", "SKSpiker_ShotAnim"],
       "stored_markers": []
     },
     {
@@ -5540,30 +5540,30 @@
     },
     {
       "path": "src/objects/zones/mgz/s3/twisting_loop.s",
-      "symbol": "byte_331B8",
-      "scope": "byte_331B8",
-      "first_line": 267,
-      "last_line": 270,
+      "symbol": "S3MGZLoop_OrbitFramesByPhase",
+      "scope": "S3MGZLoop_OrbitFramesByPhase",
+      "first_line": 268,
+      "last_line": 271,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 24,
-      "declarations_sha256": "c43e069c271f0b7d1e69a405e1370e267375aeae4efea37f20c34d6dc29740b8",
+      "declarations_sha256": "6d1bbfda758090411992df6932d3b267e5cf86a8c191ef70018f322c0dd92f1b",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_331B8"],
+      "members": ["S3MGZLoop_OrbitFramesByPhase"],
       "stored_markers": []
     },
     {
       "path": "src/objects/zones/mgz/sk/twisting_loop.s",
-      "symbol": "byte_33F6C",
-      "scope": "byte_33F6C",
-      "first_line": 267,
-      "last_line": 270,
+      "symbol": "SKMGZLoop_OrbitFramesByPhase",
+      "scope": "SKMGZLoop_OrbitFramesByPhase",
+      "first_line": 268,
+      "last_line": 271,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 24,
-      "declarations_sha256": "f9ae8520e8478722d179e05e5a67af355103eb7be3b709ec7ab6e3c5bb1d00cb",
+      "declarations_sha256": "88ddfcb23d0da0ee5edf51ca72ad80de637be80301b52f011ce1f5c81455076c",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_33F6C"],
+      "members": ["SKMGZLoop_OrbitFramesByPhase"],
       "stored_markers": []
     },
     {

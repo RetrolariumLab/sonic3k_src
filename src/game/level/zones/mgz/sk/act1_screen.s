@@ -39,7 +39,7 @@ MGZ1_BackgroundEvent_Index:
 
 MGZ1BGE_Normal:
                 tst.w   (Events_fg_5).w
-                beq.s   loc_511B0
+                beq.s   SKMGZ1Screen_ApplyBgDeformAndShake
                 clr.w   (Events_fg_5).w                 ; Transition time
                 movem.l d7-a0/a2-a3,-(sp)
                 lea     (MGZ2_128x128_Secondary_Kos).l,a1
@@ -56,7 +56,7 @@ MGZ1BGE_Normal:
                 movem.l (sp)+,d7-a0/a2-a3
                 addq.w  #4,(Events_routine_bg).w
 
-loc_511B0:
+SKMGZ1Screen_ApplyBgDeformAndShake:
                 jsr     (MGZ1_Deform).l                 ; Pretty self-explanatory to be honest
                 lea     (MGZ1_BGDeformArray).l,a4
                 lea     (HScroll_table).w,a5
@@ -66,7 +66,7 @@ loc_511B0:
 
 MGZ1BGE_Transition:
                 tst.b   (Kos_modules_left).w
-                bne.w   loc_51268                       ; Wait for Kos queue to finish
+                bne.w   SKMGZ1Screen_DrawBgDuringActChange  ; Wait for Kos queue to finish
                 move.w  #$201,(Current_zone_and_act).w  ; Change act
                 clr.b   (Dynamic_resize_routine).w
                 clr.b   (Object_load_routine).w
@@ -104,7 +104,7 @@ MGZ1BGE_Transition:
                 clr.w   (Events_fg_2).w
                 clr.w   (Events_routine_bg).w           ; Clear flags/values used for BG stuff in act 2
 
-loc_51268:
+SKMGZ1Screen_DrawBgDuringActChange:
                 jsr     (MGZ1_Deform).l
                 lea     (MGZ1_BGDeformArray).l,a4
                 lea     (HScroll_table).w,a5

@@ -11,30 +11,30 @@ Obj_BubblesBadnik:
                 jsr     BubblesBadnik_Index(pc,d1.w)
                 move.b  #$12,collision_flags(a0)
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   loc_5614A
+                bne.s   S3BubblesBadnik_LoadFrameAndDraw
                 move.b  #$86,collision_flags(a0)
 
-loc_5614A:
+S3BubblesBadnik_LoadFrameAndDraw:
                 lea     PLCPtr_BubblesBadnik(pc),a2
                 jsr     Perform_DPLC(pc)
                 jmp     Sprite_CheckDeleteTouchSlotted(pc)
 ; ---------------------------------------------------------------------------
 BubblesBadnik_Index:
-                dc.w    loc_5615C-BubblesBadnik_Index
-                dc.w    loc_56198-BubblesBadnik_Index
-                dc.w    loc_561D2-BubblesBadnik_Index
+                dc.w    S3BubblesBadnik_InitSlotAndVelocity-BubblesBadnik_Index
+                dc.w    S3BubblesBadnik_BobAndCheckTurn-BubblesBadnik_Index
+                dc.w    S3BubblesBadnik_AnimateAndTryTurnSound-BubblesBadnik_Index
 ; ---------------------------------------------------------------------------
 
-loc_5615C:
+S3BubblesBadnik_InitSlotAndVelocity:
                 lea     ObjSlot_BubblesBadnik(pc),a1
                 jsr     SetUp_ObjAttributesSlotted(pc)
                 move.w  #-$80,x_vel(a0)
                 btst    #0,render_flags(a0)
-                beq.s   loc_56176
+                beq.s   S3BubblesBadnik_InitIdleAnimAndSwing
                 neg.w   x_vel(a0)
 
-loc_56176:
-                move.l  #byte_56239,$30(a0)
+S3BubblesBadnik_InitIdleAnimAndSwing:
+                move.l  #S3BubblesBadnik_IdleAnim,$30(a0)
                 move.w  #$100,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
@@ -43,46 +43,47 @@ loc_56176:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56198:
+S3BubblesBadnik_BobAndCheckTurn:
                 jsr     Animate_RawMultiDelay(pc)
                 move.w  y_vel(a0),d4
                 jsr     Swing_UpAndDown(pc)
                 tst.w   y_vel(a0)
-                bne.s   loc_561CC
+                bne.s   S3BubblesBadnik_MoveAfterIdleSwing
                 tst.w   d4
-                bmi.s   loc_561CC
+                bmi.s   S3BubblesBadnik_MoveAfterIdleSwing
                 move.b  #4,routine(a0)
-                move.l  #byte_5622A,$30(a0)
-                move.l  #loc_56200,$34(a0)
+                move.l  #S3BubblesBadnik_TurnAnim,$30(a0)
+                move.l  #S3BubblesBadnik_RestartIdleAnim,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
 
-loc_561CC:
+S3BubblesBadnik_MoveAfterIdleSwing:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_561D2:
+; Play the tick when the animation cursor reaches 4 on a fresh pair
+S3BubblesBadnik_AnimateAndTryTurnSound:
                 jsr     Animate_RawMultiDelay(pc)
-                beq.s   loc_561E8
+                beq.s   S3BubblesBadnik_TryReverseAtSwingTurn
                 cmpi.b  #4,anim_frame(a0)
-                bne.s   loc_561E8
+                bne.s   S3BubblesBadnik_TryReverseAtSwingTurn
                 moveq   #signextendB(sfx_ChainTick),d0
                 jsr     (Play_SFX).l
 
-loc_561E8:
+S3BubblesBadnik_TryReverseAtSwingTurn:
                 jsr     Swing_UpAndDown(pc)
                 tst.w   d3
-                beq.s   loc_561FA
+                beq.s   S3BubblesBadnik_MoveAfterTurn
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
 
-loc_561FA:
+S3BubblesBadnik_MoveAfterTurn:
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_56200:
+S3BubblesBadnik_RestartIdleAnim:
                 move.b  #2,routine(a0)
-                move.l  #byte_56239,$30(a0)
+                move.l  #S3BubblesBadnik_IdleAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 ObjSlot_BubblesBadnik:
@@ -95,7 +96,7 @@ ObjSlot_BubblesBadnik:
 PLCPtr_BubblesBadnik:
                 dc.l    ArtUnc_BubblesBadnik
                 dc.l    DPLC_BubblesBadnik
-byte_5622A:
+S3BubblesBadnik_TurnAnim:
                 dc.b    0,  $F
                 dc.b    0, $77
                 dc.b    1,   3
@@ -104,7 +105,7 @@ byte_5622A:
                 dc.b    1,   3
                 dc.b    0, $77
                 dc.b    $F4
-byte_56239:
+S3BubblesBadnik_IdleAnim:
                 dc.b    0, $7F
                 dc.b    3,   3
                 dc.b    4, $6B

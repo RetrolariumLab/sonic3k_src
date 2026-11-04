@@ -1,8 +1,8 @@
 ; Data owner: objects/shared/zones/mgz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_MGZFloatingPlatform_:
-                dc.w    word_25656-Map_MGZFloatingPlatform_
-word_25656:     dc.w    8
+                dc.w    MGZFloatingPlatformShared_MapSlot00-Map_MGZFloatingPlatform_
+MGZFloatingPlatformShared_MapSlot00:    dc.w    8
                 dc.b    $DC,  $D,   0,   0, $FF, $E0
                 dc.b    $DC,  $D,   0,   0,   0,   0
                 dc.b    $EC,  $D,   0,   8, $FF, $E0

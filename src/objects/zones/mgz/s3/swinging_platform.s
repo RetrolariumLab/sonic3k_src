@@ -14,8 +14,8 @@ Obj_MGZSwingingPlatform:
                 move.w  y_pos(a0),$32(a0)
                 move.b  #2,mapping_frame(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_33268
-                move.l  #loc_332BA,(a1)
+                bne.w   S3MGZSwingPlat_PickSignedPhaseStep
+                move.l  #S3MGZSwingPlat_CullOrDrawChain,(a1)
                 move.l  #Map_MGZSwingingPlatform,mappings(a1)
                 move.w  #make_art_tile(ArtTile_MGZMisc1,2,0),art_tile(a1)
                 move.b  #4,render_flags(a1)
@@ -25,27 +25,27 @@ Obj_MGZSwingingPlatform:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 btst    #1,status(a0)
-                bne.s   loc_33258
+                bne.s   S3MGZSwingPlat_InitChainComposite
                 move.b  #1,mapping_frame(a1)
 
-loc_33258:
+S3MGZSwingPlat_InitChainComposite:
                 bset    #6,render_flags(a1)
                 move.w  #4,mainspr_childsprites(a1)
                 move.w  a1,$3C(a0)
 
-loc_33268:
+S3MGZSwingPlat_PickSignedPhaseStep:
                 moveq   #1,d0
                 btst    #0,status(a0)
-                beq.s   loc_33274
+                beq.s   S3MGZSwingPlat_StartActiveSwing
                 neg.w   d0
 
-loc_33274:
+S3MGZSwingPlat_StartActiveSwing:
                 move.b  d0,$36(a0)
                 move.b  subtype(a0),d0
                 move.b  d0,$34(a0)
-                move.l  #loc_33286,(a0)
+                move.l  #S3MGZSwingPlat_UpdateSwingAndSolid,(a0)
 
-loc_33286:
+S3MGZSwingPlat_UpdateSwingAndSolid:
                 move.w  x_pos(a0),-(sp)
                 movea.w $3C(a0),a1
                 bsr.w   PositionMgzSwingingPlatformAndChain
@@ -62,7 +62,7 @@ loc_33286:
                 jmp     (Sprite_OnScreen_Test2).l
 ; ---------------------------------------------------------------------------
 
-loc_332BA:
+S3MGZSwingPlat_CullOrDrawChain:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -82,7 +82,7 @@ PositionMgzSwingingPlatformAndChain:
                 move.w  mainspr_childsprites(a1),d6
                 subq.w  #1,d6
 
-loc_332E8:
+S3MGZSwingPlat_PlaceNextChainLink:
                 movem.l d4-d5,-(sp)
                 swap    d4
                 swap    d5
@@ -94,7 +94,7 @@ loc_332E8:
                 add.l   d0,d4
                 add.l   d1,d5
                 addq.w  #2,a2
-                dbf     d6,loc_332E8
+                dbf     d6,S3MGZSwingPlat_PlaceNextChainLink
                 swap    d4
                 swap    d5
                 add.w   d2,d4

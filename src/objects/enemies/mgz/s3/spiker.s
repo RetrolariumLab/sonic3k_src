@@ -14,80 +14,80 @@ Obj_Spiker:
                 jmp     Sprite_CheckDeleteTouch(pc)
 ; ---------------------------------------------------------------------------
 Spiker_Index:
-                dc.w    loc_5697E-Spiker_Index
-                dc.w    loc_5698E-Spiker_Index
-                dc.w    loc_569A8-Spiker_Index
-                dc.w    loc_569C2-Spiker_Index
-                dc.w    loc_569E2-Spiker_Index
-                dc.w    loc_569F6-Spiker_Index
+                dc.w    S3Spiker_InitRootAndChildren-Spiker_Index
+                dc.w    S3Spiker_CheckPlayerToRise-Spiker_Index
+                dc.w    S3Spiker_StepRise-Spiker_Index
+                dc.w    S3Spiker_WaitRaised-Spiker_Index
+                dc.w    S3Spiker_StepDescent-Spiker_Index
+                dc.w    S3Spiker_AnimateAndTryLaunch-Spiker_Index
 ; ---------------------------------------------------------------------------
 
-loc_5697E:
+S3Spiker_InitRootAndChildren:
                 lea     ObjDat_Spiker(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                lea     ChildObjDat_56BDC(pc),a2
+                lea     S3Spiker_RootChildRecords(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5698E:
+S3Spiker_CheckPlayerToRise:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                blo.s   loc_5699A
+                blo.s   SpikerS3_Root_StartEightCallIntegerRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5699A:
+SpikerS3_Root_StartEightCallIntegerRise:
                 move.b  #4,routine(a0)
                 move.w  #7,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569A8:
+S3Spiker_StepRise:
                 subq.w  #1,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_569B4
+                bmi.s   SpikerS3_Root_EnableSideUnitsAfterRise
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569B4:
+SpikerS3_Root_EnableSideUnitsAfterRise:
                 move.b  #6,routine(a0)
                 bset    #2,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569C2:
+S3Spiker_WaitRaised:
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   loc_569CE
+                bhs.s   S3Spiker_BeginDescent
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569CE:
+S3Spiker_BeginDescent:
                 move.b  #8,routine(a0)
                 bclr    #2,$38(a0)
                 move.w  #7,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569E2:
+S3Spiker_StepDescent:
                 addq.w  #1,y_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_569EE
+                bmi.s   SpikerS3_Root_RearmIdleProximityPoll
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569EE:
+SpikerS3_Root_RearmIdleProximityPoll:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_569F6:
-                lea     byte_56C08(pc),a1
+S3Spiker_AnimateAndTryLaunch:
+                lea     S3Spiker_SpringAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_56A2A
+                beq.s   S3Spiker_LaunchReturn
                 cmpi.b  #4,anim_frame(a0)
-                bne.s   locret_56A2A
+                bne.s   S3Spiker_LaunchReturn
                 movea.w $44(a0),a1
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -95,135 +95,135 @@ loc_569F6:
                 clr.b   jumping(a1)
                 move.b  #2,routine(a1)
 
-locret_56A2A:
+S3Spiker_LaunchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56A2C:
+S3Spiker_RestoreAfterSpring:
                 move.b  $3A(a0),routine(a0)
                 move.b  #$A,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56A3A:
+S3Spiker_UpdateSideUnit:
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_56A50(pc,d0.w),d1
-                jsr     off_56A50(pc,d1.w)
+                move.w  S3Spiker_SideStateOffsets(pc,d0.w),d1
+                jsr     S3Spiker_SideStateOffsets(pc,d1.w)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_56A50:
-                dc.w    loc_56A58-off_56A50
-                dc.w    loc_56A6E-off_56A50
-                dc.w    loc_56A84-off_56A50
-                dc.w    loc_56AC0-off_56A50
+S3Spiker_SideStateOffsets:
+                dc.w    S3Spiker_InitSideAndFacing-S3Spiker_SideStateOffsets
+                dc.w    S3Spiker_WaitForFireEnable-S3Spiker_SideStateOffsets
+                dc.w    S3Spiker_TryFindSideTarget-S3Spiker_SideStateOffsets
+                dc.w    S3Spiker_AnimateAndTryFire-S3Spiker_SideStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_56A58:
-                lea     word_56BC4(pc),a1
+S3Spiker_InitSideAndFacing:
+                lea     SpikerS3_SideUnit_PartialAttributePrefix(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 tst.b   subtype(a0)
-                bne.s   locret_56A6C
+                bne.s   S3Spiker_SideInitReturn
                 bset    #0,render_flags(a0)
 
-locret_56A6C:
+S3Spiker_SideInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56A6E:
+S3Spiker_WaitForFireEnable:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_56A7C
+                bne.s   S3Spiker_StartSideTargetPoll
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56A7C:
+S3Spiker_StartSideTargetPoll:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56A84:
+S3Spiker_TryFindSideTarget:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                beq.s   loc_56AB8
+                beq.s   SpikerS3_SideUnit_ReturnToRootEnableWait
                 jsr     Find_SonicTails(pc)
                 cmpi.w  #$40,d2
-                bhs.s   locret_56AA6
+                bhs.s   S3Spiker_SideTargetReturn
                 tst.b   subtype(a0)
-                beq.s   loc_56AA2
+                beq.s   S3Spiker_CheckSideTargetDirection
                 subq.w  #2,d0
 
-loc_56AA2:
+S3Spiker_CheckSideTargetDirection:
                 tst.w   d0
-                beq.s   loc_56AA8
+                beq.s   S3Spiker_BeginFiring
 
-locret_56AA6:
+S3Spiker_SideTargetReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56AA8:
+S3Spiker_BeginFiring:
                 move.b  #6,routine(a0)
-                move.l  #loc_56AE6,$34(a0)
+                move.l  #S3Spiker_ResumeSideTargetPoll,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56AB8:
+SpikerS3_SideUnit_ReturnToRootEnableWait:
                 move.b  #2,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56AC0:
-                lea     byte_56C11(pc),a1
+S3Spiker_AnimateAndTryFire:
+                lea     S3Spiker_FiringAnim(pc),a1
                 jsr     Animate_RawNoSSTMultiDelay(pc)
                 tst.w   d2
-                beq.s   locret_56AE4
+                beq.s   S3Spiker_FireReturn
                 cmpi.b  #4,mapping_frame(a0)
-                bne.s   locret_56AE4
+                bne.s   S3Spiker_FireReturn
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_56BF0(pc),a2
+                lea     S3Spiker_ShotChildRecord(pc),a2
                 jsr     CreateChild5_ComplexAdjusted(pc)
 
-locret_56AE4:
+S3Spiker_FireReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56AE6:
+S3Spiker_ResumeSideTargetPoll:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56AEE:
+S3Spiker_UpdateSpringContact:
                 jsr     Refresh_ChildPosition(pc)
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_56B04(pc,d0.w),d1
-                jsr     off_56B04(pc,d1.w)
+                move.w  S3Spiker_SpringStateOffsets(pc,d0.w),d1
+                jsr     S3Spiker_SpringStateOffsets(pc,d1.w)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_56B04:
-                dc.w    loc_56B0A-off_56B04
-                dc.w    loc_56B12-off_56B04
-                dc.w    loc_56B52-off_56B04
+S3Spiker_SpringStateOffsets:
+                dc.w    S3Spiker_InitSpringAndProbe-S3Spiker_SpringStateOffsets
+                dc.w    S3Spiker_ReadSpringContact-S3Spiker_SpringStateOffsets
+                dc.w    S3Spiker_WaitToRearmSpring-S3Spiker_SpringStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_56B0A:
-                lea     word_56BCA(pc),a1
+S3Spiker_InitSpringAndProbe:
+                lea     S3Spiker_SpringContactAttrs(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
 
-loc_56B12:
+S3Spiker_ReadSpringContact:
                 jsr     Check_PlayerCollision(pc)
-                bne.s   loc_56B1A
+                bne.s   S3Spiker_PrimeSpringAndStartWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56B1A:
+S3Spiker_PrimeSpringAndStartWait:
                 bsr.w   PrimeSpikerSpringContactPlayer
                 move.b  #4,routine(a0)
                 clr.b   collision_flags(a0)
                 move.w  #$10,$2E(a0)
-                move.l  #loc_56B56,$34(a0)
+                move.l  #S3Spiker_RearmSpring,$34(a0)
                 movea.w parent3(a0),a1
                 bset    #3,$38(a1)
                 move.b  #1,mapping_frame(a1)
@@ -232,11 +232,11 @@ loc_56B1A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56B52:
+S3Spiker_WaitToRearmSpring:
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
 
-loc_56B56:
+S3Spiker_RearmSpring:
                 move.b  #2,routine(a0)
                 move.b  #$CA,collision_flags(a0)
                 rts
@@ -259,17 +259,17 @@ PrimeSpikerSpringContactPlayer:
 
 ConsumeSpikerSpringRequestAndSaveRoutine:
                 btst    #3,$38(a0)
-                bne.s   loc_56B96
+                bne.s   S3Spiker_ConsumeSpringRequest
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56B96:
+S3Spiker_ConsumeSpringRequest:
                 bclr    #3,$38(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 move.b  routine(a0),$3A(a0)
                 move.b  d0,routine(a0)
-                move.l  #loc_56A2C,$34(a0)
+                move.l  #S3Spiker_RestoreAfterSpring,$34(a0)
                 rts
 ; End of function ConsumeSpikerSpringRequestAndSaveRoutine
 
@@ -279,45 +279,45 @@ ObjDat_Spiker:
                 dc.w    make_art_tile(ArtTile_Spiker,1,0)
                 dc.w    $280
                 dc.b    $20, $10,   0,  $A
-word_56BC4:
+SpikerS3_SideUnit_PartialAttributePrefix:
                 dc.w    $280
                 dc.b    $20,   4,   3,   0
-word_56BCA:
+S3Spiker_SpringContactAttrs:
                 dc.w    $200
                 dc.b    $20,   4,   7, $CA
-ObjDat3_56BD0:
+S3Spiker_ShotAttrs:
                 dc.l    Map_Spiker
                 dc.w    make_art_tile(ArtTile_Spiker,0,0)
                 dc.w    $280
                 dc.b    4,   4,   5, $98
-ChildObjDat_56BDC:
+S3Spiker_RootChildRecords:
                 dc.w    3-1
-                dc.l    loc_56A3A
+                dc.l    S3Spiker_UpdateSideUnit
                 dc.b    -$10,  $C
-                dc.l    loc_56A3A
+                dc.l    S3Spiker_UpdateSideUnit
                 dc.b    $10,  $C
-                dc.l    loc_56AEE
+                dc.l    S3Spiker_UpdateSpringContact
                 dc.b    0, -$C
-ChildObjDat_56BF0:
+S3Spiker_ShotChildRecord:
                 dc.w    1-1
                 dc.l    S3CallbackShot_InitDeflectable
-                dc.l    ObjDat3_56BD0
-                dc.l    byte_56C1A
+                dc.l    S3Spiker_ShotAttrs
+                dc.l    S3Spiker_ShotAnim
                 dc.l    MoveSlowFall_AnimateRaw
                 dc.b    4,   0
                 dc.w    $200, -$200
-byte_56C08:
+S3Spiker_SpringAnim:
                 dc.b    1,   0
                 dc.b    2,   1
                 dc.b    1,   0
                 dc.b    0,   5
                 dc.b    $F4
-byte_56C11:
+S3Spiker_FiringAnim:
                 dc.b    3,   1
                 dc.b    3,  $F
                 dc.b    4,   7
                 dc.b    3, $3F
                 dc.b    $F4
-byte_56C1A:
+S3Spiker_ShotAnim:
                 dc.b    1,   5,   6, $FC
                 even

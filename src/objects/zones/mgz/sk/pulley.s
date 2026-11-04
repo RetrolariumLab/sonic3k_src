@@ -22,8 +22,8 @@ Obj_MGZPulley:
                 move.w  d0,$40(a0)
                 move.w  d0,$3C(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_348FA
-                move.l  #loc_34BEE,(a1)
+                bne.w   SKMGZPulley_StartActivePulley
+                move.l  #SKMGZPulley_CullOrDrawRope,(a1)
                 move.l  mappings(a0),mappings(a1)
                 move.w  art_tile(a0),art_tile(a1)
                 move.b  render_flags(a0),render_flags(a1)
@@ -35,10 +35,10 @@ Obj_MGZPulley:
                 move.w  y_pos(a0),y_pos(a1)
                 subi.w  #$78,x_pos(a1)
                 btst    #0,status(a0)
-                beq.s   loc_348AC
+                beq.s   SKMGZPulley_InitRopeDisplay
                 addi.w  #2*$78,x_pos(a1)
 
-loc_348AC:
+SKMGZPulley_InitRopeDisplay:
                 addi.w  #$D0,y_pos(a1)
                 bset    #6,render_flags(a1)
                 move.w  #8,mainspr_childsprites(a1)
@@ -51,81 +51,81 @@ loc_348AC:
                 subi.w  #$18,d2
                 addi.w  #$30,d3
 
-loc_348DC:
+SKMGZPulley_WriteInitialRopeSection:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #5,(a2)+
                 subi.w  #$18,d2
                 addi.w  #$30,d3
-                dbf     d0,loc_348DC
+                dbf     d0,SKMGZPulley_WriteInitialRopeSection
                 move.w  #6,-2(a2)
                 move.w  a1,$3E(a0)
 
-loc_348FA:
-                move.l  #loc_34900,(a0)
+SKMGZPulley_StartActivePulley:
+                move.l  #SKMGZPulley_PickOccupiedMotion,(a0)
 
-loc_34900:
+SKMGZPulley_PickOccupiedMotion:
                 moveq   #0,d4
                 tst.b   $38(a0)
-                bne.s   loc_34928
+                bne.s   SKMGZPulley_LiftOrWaitForPrepull
                 move.w  $3C(a0),d0
                 cmp.w   $40(a0),d0
-                beq.s   loc_3498E
-                bcc.s   loc_3491E
+                beq.s   SKMGZPulley_ClearMainFrame
+                bcc.s   SKMGZPulley_ShortenEmptyRope
                 addq.w  #2,$3C(a0)
                 move.b  #-1,d4
-                bra.s   loc_34966
+                bra.s   SKMGZPulley_StepRotorAnim
 ; ---------------------------------------------------------------------------
 
-loc_3491E:
+SKMGZPulley_ShortenEmptyRope:
                 move.b  #1,d4
                 subq.w  #2,$3C(a0)
-                bra.s   loc_34966
+                bra.s   SKMGZPulley_StepRotorAnim
 ; ---------------------------------------------------------------------------
 
-loc_34928:
+SKMGZPulley_LiftOrWaitForPrepull:
                 tst.w   $34(a0)
-                bne.s   loc_34946
+                bne.s   SKMGZPulley_TickPrepullAndTryExtend
                 tst.w   $3C(a0)
-                beq.s   loc_3498E
+                beq.s   SKMGZPulley_ClearMainFrame
                 move.b  #1,d4
                 subq.w  #4,$3C(a0)
-                bcc.s   loc_34966
+                bcc.s   SKMGZPulley_StepRotorAnim
                 move.w  #0,$3C(a0)
-                bra.s   loc_34966
+                bra.s   SKMGZPulley_StepRotorAnim
 ; ---------------------------------------------------------------------------
 
-loc_34946:
+SKMGZPulley_TickPrepullAndTryExtend:
                 subq.w  #1,$34(a0)
                 cmpi.w  #$C,$34(a0)
-                blo.s   loc_3498E
+                blo.s   SKMGZPulley_ClearMainFrame
                 move.w  $40(a0),d0
                 addq.w  #8,d0
                 cmp.w   $3C(a0),d0
-                beq.s   loc_3498E
+                beq.s   SKMGZPulley_ClearMainFrame
                 addq.w  #2,$3C(a0)
                 move.b  #-1,d4
 
-loc_34966:
+SKMGZPulley_StepRotorAnim:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_3497C
+                bpl.s   SKMGZPulley_UpdateMainGraphic
                 move.b  #1,anim_frame_timer(a0)
                 add.b   d4,$1D(a0)
                 andi.b  #3,$1D(a0)
 
-loc_3497C:
+SKMGZPulley_UpdateMainGraphic:
                 tst.b   mapping_frame(a0)
-                bne.s   loc_3498E
+                bne.s   SKMGZPulley_ClearMainFrame
                 tst.w   d4
-                beq.s   loc_34994
+                beq.s   SKMGZPulley_UpdateRopeAndRiders
                 move.b  #4,mapping_frame(a0)
-                bra.s   loc_34994
+                bra.s   SKMGZPulley_UpdateRopeAndRiders
 ; ---------------------------------------------------------------------------
 
-loc_3498E:
+SKMGZPulley_ClearMainFrame:
                 move.b  #0,mapping_frame(a0)
 
-loc_34994:
+SKMGZPulley_UpdateRopeAndRiders:
                 bsr.w   BuildMgzPulleyRopeSegments
                 bsr.w   UpdatePlayersOnMgzPulley
                 jmp     (Sprite_OnScreen_Test).l
@@ -146,22 +146,22 @@ UpdatePlayersOnMgzPulley:
 
 UpdatePlayerOnMgzPulley:
                 tst.b   (a2)
-                beq.w   loc_34A5A
+                beq.w   SKMGZPulley_TickRegrabCooldown
                 tst.b   render_flags(a1)
-                bpl.s   loc_34A1A
+                bpl.s   SKMGZPulley_DetachRider
                 cmpi.b  #4,routine(a1)
-                bhs.s   loc_34A1A
+                bhs.s   SKMGZPulley_DetachRider
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_34A28
+                beq.w   SKMGZPulley_CalcHeldRiderPosition
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 move.w  #-$400,x_vel(a1)
                 btst    #0,status(a0)
-                beq.s   loc_349F4
+                beq.s   SKMGZPulley_JumpReleaseRider
                 neg.w   x_vel(a1)
 
-loc_349F4:
+SKMGZPulley_JumpReleaseRider:
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_InAir,status(a1)
                 move.b  #$E,y_radius(a1)
@@ -171,14 +171,14 @@ loc_349F4:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34A1A:
+SKMGZPulley_DetachRider:
                 clr.b   object_control(a1)
                 clr.b   (a2)
                 move.b  #60,2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34A28:
+SKMGZPulley_CalcHeldRiderPosition:
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #$26,d2
@@ -187,24 +187,24 @@ loc_34A28:
                 add.w   d0,d3
                 lsr.w   #1,d0
                 btst    #0,status(a0)
-                beq.s   loc_34A4E
+                beq.s   SKMGZPulley_StoreRiderPosition
                 addi.w  #2*$26,d2
                 neg.w   d0
 
-loc_34A4E:
+SKMGZPulley_StoreRiderPosition:
                 sub.w   d0,d2
                 move.w  d2,x_pos(a1)
                 move.w  d3,y_pos(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34A5A:
+SKMGZPulley_TickRegrabCooldown:
                 tst.b   2(a2)
-                beq.s   loc_34A68
+                beq.s   SKMGZPulley_CalcGrabPoint
                 subq.b  #1,2(a2)
-                bne.w   locret_34B20
+                bne.w   SKMGZPulley_GrabReturn
 
-loc_34A68:
+SKMGZPulley_CalcGrabPoint:
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
                 subi.w  #$26,d2
@@ -213,36 +213,36 @@ loc_34A68:
                 add.w   d0,d3
                 lsr.w   #1,d0
                 btst    #0,status(a0)
-                beq.s   loc_34A8E
+                beq.s   SKMGZPulley_CheckGrabWindow
                 addi.w  #2*$26,d2
                 neg.w   d0
 
-loc_34A8E:
+SKMGZPulley_CheckGrabWindow:
                 sub.w   d0,d2
                 move.w  x_pos(a1),d0
                 sub.w   d2,d0
                 addi.w  #$C,d0
                 cmpi.w  #$18,d0
-                bhs.w   locret_34B20
+                bhs.w   SKMGZPulley_GrabReturn
                 move.w  y_pos(a1),d1
                 sub.w   d3,d1
                 addi.w  #$C,d1
                 cmpi.w  #$18,d1
-                bhs.w   locret_34B20
+                bhs.w   SKMGZPulley_GrabReturn
                 tst.b   object_control(a1)
-                bne.s   locret_34B20
+                bne.s   SKMGZPulley_GrabReturn
                 cmpi.b  #4,routine(a1)
-                bhs.s   locret_34B20
+                bhs.s   SKMGZPulley_GrabReturn
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_34B20
+                bne.s   SKMGZPulley_GrabReturn
                 move.w  x_vel(a1),d0
                 btst    #0,status(a0)
-                beq.s   loc_34AD6
+                beq.s   SKMGZPulley_TryGrabWithApproachSpeed
                 neg.w   d0
 
-loc_34AD6:
+SKMGZPulley_TryGrabWithApproachSpeed:
                 tst.w   d0
-                bpl.s   locret_34B20
+                bpl.s   SKMGZPulley_GrabReturn
                 clr.w   x_vel(a1)
                 clr.w   y_vel(a1)
                 clr.w   ground_vel(a1)
@@ -252,16 +252,16 @@ loc_34AD6:
                 move.b  #1,object_control(a1)
                 bclr    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                beq.s   loc_34B0E
+                beq.s   SKMGZPulley_CommitGrabAndPrepull
                 bset    #Status_Facing,status(a1)
 
-loc_34B0E:
+SKMGZPulley_CommitGrabAndPrepull:
                 move.w  #$10,$34(a0)
                 move.b  #1,(a2)
                 moveq   #signextendB(sfx_PulleyGrab),d0
                 jsr     (Play_SFX).l
 
-locret_34B20:
+SKMGZPulley_GrabReturn:
                 rts
 ; End of function UpdatePlayerOnMgzPulley
 
@@ -269,7 +269,7 @@ locret_34B20:
 
 BuildMgzPulleyRopeSegments:
                 btst    #0,status(a0)
-                bne.s   loc_34B8C
+                bne.s   SKMGZPulley_SetUpFlippedRope
                 movea.w $3E(a0),a1
                 moveq   #0,d0
                 move.w  $3C(a0),d0
@@ -284,32 +284,32 @@ BuildMgzPulleyRopeSegments:
                 subi.w  #8,d3
                 swap    d0
                 cmpi.w  #8,d1
-                bne.s   loc_34B66
+                bne.s   SKMGZPulley_AddNormalRopeSection
                 move.w  #$30,d0
                 moveq   #8-1,d1
-                bra.s   loc_34B6A
+                bra.s   SKMGZPulley_OffsetNormalRopeStart
 ; ---------------------------------------------------------------------------
 
-loc_34B66:
+SKMGZPulley_AddNormalRopeSection:
                 addq.w  #1,mainspr_childsprites(a1)
 
-loc_34B6A:
+SKMGZPulley_OffsetNormalRopeStart:
                 add.w   d0,d3
                 lsr.w   #1,d0
                 sub.w   d0,d2
 
-loc_34B70:
+SKMGZPulley_WriteNormalRopeSection:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #5,(a2)+
                 subi.w  #$18,d2
                 addi.w  #$30,d3
-                dbf     d1,loc_34B70
+                dbf     d1,SKMGZPulley_WriteNormalRopeSection
                 move.w  #6,-2(a2)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_34B8C:
+SKMGZPulley_SetUpFlippedRope:
                 movea.w $3E(a0),a1
                 moveq   #0,d0
                 move.w  $3C(a0),d0
@@ -324,33 +324,34 @@ loc_34B8C:
                 subi.w  #8,d3
                 swap    d0
                 cmpi.w  #8,d1
-                bne.s   loc_34BC8
+                bne.s   SKMGZPulley_AddFlippedRopeSection
                 move.w  #$30,d0
                 moveq   #8-1,d1
-                bra.s   loc_34BCC
+                bra.s   SKMGZPulley_OffsetFlippedRopeStart
 ; ---------------------------------------------------------------------------
 
-loc_34BC8:
+SKMGZPulley_AddFlippedRopeSection:
                 addq.w  #1,mainspr_childsprites(a1)
 
-loc_34BCC:
+SKMGZPulley_OffsetFlippedRopeStart:
                 add.w   d0,d3
                 lsr.w   #1,d0
                 add.w   d0,d2
 
-loc_34BD2:
+SKMGZPulley_WriteFlippedRopeSection:
                 move.w  d2,(a2)+
                 move.w  d3,(a2)+
                 move.w  #5,(a2)+
                 addi.w  #$18,d2
                 addi.w  #$30,d3
-                dbf     d1,loc_34BD2
+                dbf     d1,SKMGZPulley_WriteFlippedRopeSection
                 move.w  #6,-2(a2)
                 rts
 ; End of function BuildMgzPulleyRopeSegments
 
 ; ---------------------------------------------------------------------------
 
-loc_34BEE:
+; Read the original X from the position fraction word for culling
+SKMGZPulley_CullOrDrawRope:
                 move.w  $12(a0),d0
                 jmp     (Sprite_OnScreen_Test2).l

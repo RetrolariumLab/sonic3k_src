@@ -6,49 +6,49 @@
 
 TryEnterTopPlatformScriptedSinePath:
                 tst.w   (Debug_placement_mode).w
-                bne.s   locret_356C8
+                bne.s   SKMGZTopPath_EntryScanReturn
                 tst.b   $34(a0)
-                beq.s   locret_356C8
-                lea     (word_35784).l,a1
+                beq.s   SKMGZTopPath_EntryScanReturn
+                lea     (SKMGZTopPath_Act1EntryRecords).l,a1
                 tst.b   (Current_act).w
-                beq.s   loc_35684
-                lea     (word_357F6).l,a1
+                beq.s   SKMGZTopPath_BeginActEntryScan
+                lea     (SKMGZTopPath_Act2EntryRecords).l,a1
 
-loc_35684:
+SKMGZTopPath_BeginActEntryScan:
                 move.w  (a1)+,d6
                 move.w  x_pos(a0),d2
                 move.w  y_pos(a0),d3
 
-loc_3568E:
+SKMGZTopPath_CheckEntryWindowAndSpeed:
                 move.w  (a1),d0
                 sub.w   d2,d0
                 addi.w  #$10,d0
                 cmpi.w  #$20,d0
-                bhs.s   loc_356C0
+                bhs.s   SKMGZTopPath_NextEntryRecord
                 move.w  2(a1),d1
                 sub.w   d3,d1
                 addi.w  #$10,d1
                 cmpi.w  #$20,d1
-                bhs.s   loc_356C0
+                bhs.s   SKMGZTopPath_NextEntryRecord
                 move.w  ground_vel(a0),d0
                 move.b  4(a1),d2
                 andi.b  #$7F,d2
-                beq.s   loc_356BC
+                beq.s   SKMGZTopPath_TryAcceptEntryDirection
                 neg.w   d0
 
-loc_356BC:
+SKMGZTopPath_TryAcceptEntryDirection:
                 tst.w   d0
-                bpl.s   loc_356CA
+                bpl.s   SKMGZTopPath_BeginEntryApproach
 
-loc_356C0:
+SKMGZTopPath_NextEntryRecord:
                 adda.w  #$10,a1
-                dbf     d6,loc_3568E
+                dbf     d6,SKMGZTopPath_CheckEntryWindowAndSpeed
 
-locret_356C8:
+SKMGZTopPath_EntryScanReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_356CA:
+SKMGZTopPath_BeginEntryApproach:
                 move.b  #1,$35(a0)
                 move.w  4(a1),$3E(a0)
                 addq.w  #6,a1
@@ -58,41 +58,41 @@ loc_356CA:
                 move.w  d5,d0
                 move.b  $3F(a0),d1
                 andi.b  #$7F,d1
-                beq.s   loc_356EE
+                beq.s   SKMGZTopPath_SaveBaselineAndExitCursor
                 sub.w   (a1),d0
 
-loc_356EE:
+SKMGZTopPath_SaveBaselineAndExitCursor:
                 move.w  d0,$32(a0)
                 move.l  a1,$36(a0)
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_356FE
+                bpl.s   SKMGZTopPath_UseDefaultEntrySpeed
                 neg.w   d2
 
-loc_356FE:
+SKMGZTopPath_UseDefaultEntrySpeed:
                 tst.w   d2
-                bne.s   loc_35706
+                bne.s   SKMGZTopPath_CalcApproachDeltaX
                 move.w  #$800,d2
 
-loc_35706:
+SKMGZTopPath_CalcApproachDeltaX:
                 moveq   #0,d0
                 move.w  d2,d3
                 move.w  d4,d0
                 sub.w   x_pos(a0),d0
-                bge.s   loc_35716
+                bge.s   SKMGZTopPath_CalcApproachDeltaY
                 neg.w   d0
                 neg.w   d2
 
-loc_35716:
+SKMGZTopPath_CalcApproachDeltaY:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a0),d1
-                bge.s   loc_35724
+                bge.s   SKMGZTopPath_SolveYDominantApproach
                 neg.w   d1
                 neg.w   d3
 
-loc_35724:
+SKMGZTopPath_SolveYDominantApproach:
                 cmp.w   d0,d1
-                blo.s   loc_35756
+                blo.s   SKMGZTopPath_SolveXDominantApproach
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a0),d1
@@ -101,23 +101,23 @@ loc_35724:
                 moveq   #0,d0
                 move.w  d4,d0
                 sub.w   x_pos(a0),d0
-                beq.s   loc_35742
+                beq.s   SKMGZTopPath_StoreYDominantVelocity
                 swap    d0
                 divs.w  d1,d0
 
-loc_35742:
+SKMGZTopPath_StoreYDominantVelocity:
                 move.w  d0,x_vel(a0)
                 move.w  d3,y_vel(a0)
                 tst.w   d1
-                bpl.s   loc_35750
+                bpl.s   SKMGZTopPath_StoreYDominantDuration
                 neg.w   d1
 
-loc_35750:
+SKMGZTopPath_StoreYDominantDuration:
                 move.w  d1,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_35756:
+SKMGZTopPath_SolveXDominantApproach:
                 moveq   #0,d0
                 move.w  d4,d0
                 sub.w   x_pos(a0),d0
@@ -126,24 +126,24 @@ loc_35756:
                 moveq   #0,d1
                 move.w  d5,d1
                 sub.w   y_pos(a0),d1
-                beq.s   loc_35770
+                beq.s   SKMGZTopPath_StoreXDominantVelocity
                 swap    d1
                 divs.w  d0,d1
 
-loc_35770:
+SKMGZTopPath_StoreXDominantVelocity:
                 move.w  d1,y_vel(a0)
                 move.w  d2,x_vel(a0)
                 tst.w   d0
-                bpl.s   loc_3577E
+                bpl.s   SKMGZTopPath_StoreXDominantDuration
                 neg.w   d0
 
-loc_3577E:
+SKMGZTopPath_StoreXDominantDuration:
                 move.w  d0,$3A(a0)
                 rts
 ; End of function TryEnterTopPlatformScriptedSinePath
 
 ; ---------------------------------------------------------------------------
-word_35784:     dc.w    7-1
+SKMGZTopPath_Act1EntryRecords:  dc.w    7-1
                 dc.w    $1BA0,   $C6,     0, $1C40,   $E6,  $280, $1CE0,  $385
                 dc.w    $1BA0,  $3C4, $8001, $1C40,  $3A6,  $2C0, $1BA0,   $C6
                 dc.w    $1CE0,  $385,  $101, $1C40,  $366,  $280, $1BA0,   $C6
@@ -151,7 +151,7 @@ word_35784:     dc.w    7-1
                 dc.w    $2860,  $846,  $180, $27C0,  $866,  $200, $2720,  $A86
                 dc.w    $2720,  $A86,   $81, $27C0,  $A66,  $200, $2860,  $846
                 dc.w    $2860,  $A86,  $101, $27C0,  $A66,  $200, $2720,  $846
-word_357F6:     dc.w    7-1
+SKMGZTopPath_Act2EntryRecords:  dc.w    7-1
                 dc.w    $1760,  $546, $8180, $16C0,  $566,  $140, $1760,  $6C5
                 dc.w    $1760,  $6C5, $8181, $16C0,  $6A6,  $140, $1760,  $546
                 dc.w    $1620,  $6C4,   $81, $16C0,  $6C6,  $180, $1760,  $546
@@ -164,11 +164,11 @@ word_357F6:     dc.w    7-1
 
 UpdateTopPlatformScriptedSinePath:
                 cmpi.b  #2,$35(a0)
-                beq.s   loc_358E0
+                beq.s   SKMGZTopPath_CalcAngleFromProgress
                 subq.b  #1,$3A(a0)
-                bpl.s   loc_358A8
+                bpl.s   SKMGZTopPath_StepLinearApproach
                 cmpi.b  #3,$35(a0)
-                beq.s   loc_358CE
+                beq.s   SKMGZTopPath_TryReverseExitSpeed
                 move.w  #0,$3C(a0)
                 move.b  #2,$35(a0)
                 movea.l $36(a0),a1
@@ -176,15 +176,15 @@ UpdateTopPlatformScriptedSinePath:
                 move.w  d0,$2E(a0)
                 move.b  $3F(a0),d1
                 andi.b  #$7F,d1
-                beq.s   loc_358A2
+                beq.s   SKMGZTopPath_BeginSineTraversal
                 move.w  d0,$3C(a0)
 
-loc_358A2:
+SKMGZTopPath_BeginSineTraversal:
                 move.l  a1,$36(a0)
-                bra.s   loc_358E0
+                bra.s   SKMGZTopPath_CalcAngleFromProgress
 ; ---------------------------------------------------------------------------
 
-loc_358A8:
+SKMGZTopPath_StepLinearApproach:
                 move.l  x_pos(a0),d2
                 move.l  y_pos(a0),d3
                 move.w  x_vel(a0),d0
@@ -200,24 +200,24 @@ loc_358A8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_358CE:
+SKMGZTopPath_TryReverseExitSpeed:
                 tst.b   $3E(a0)
-                bpl.s   loc_358D8
+                bpl.s   SKMGZTopPath_ClearScriptedPhase
                 neg.w   ground_vel(a0)
 
-loc_358D8:
+SKMGZTopPath_ClearScriptedPhase:
                 move.b  #0,$35(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_358E0:
+SKMGZTopPath_CalcAngleFromProgress:
                 move.w  $3C(a0),d0
                 add.w   d0,d0
                 tst.b   $3F(a0)
-                bpl.s   loc_358EE
+                bpl.s   SKMGZTopPath_PlaceOnSinePath
                 neg.w   d0
 
-loc_358EE:
+SKMGZTopPath_PlaceOnSinePath:
                 jsr     (GetSineCosine).l
                 muls.w  #$5800,d0
                 swap    d0
@@ -228,48 +228,49 @@ loc_358EE:
                 move.w  d0,y_pos(a0)
                 moveq   #2,d1
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_35918
+                bpl.s   SKMGZTopPath_TryFastTraversalStep
                 neg.w   d0
 
-loc_35918:
+; Use step 3 only when absolute ground speed is exactly $C00
+SKMGZTopPath_TryFastTraversalStep:
                 cmpi.w  #$C00,d0
-                bne.s   loc_35920
+                bne.s   SKMGZTopPath_StepReverseProgress
                 moveq   #3,d1
 
-loc_35920:
+SKMGZTopPath_StepReverseProgress:
                 move.b  $3F(a0),d0
                 andi.b  #$7F,d0
-                beq.s   loc_35932
+                beq.s   SKMGZTopPath_StepForwardProgress
                 sub.w   d1,$3C(a0)
-                bgt.s   locret_35962
-                bra.s   loc_35940
+                bgt.s   SKMGZTopPath_TraversalReturn
+                bra.s   SKMGZTopPath_BeginLinearExit
 ; ---------------------------------------------------------------------------
 
-loc_35932:
+SKMGZTopPath_StepForwardProgress:
                 add.w   d1,$3C(a0)
                 move.w  $2E(a0),d0
                 cmp.w   $3C(a0),d0
-                bhi.s   locret_35962
+                bhi.s   SKMGZTopPath_TraversalReturn
 
-loc_35940:
+SKMGZTopPath_BeginLinearExit:
                 move.b  #3,$35(a0)
                 movea.l $36(a0),a2
                 move.w  (a2)+,d4
                 move.w  (a2)+,d5
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_35956
+                bpl.s   SKMGZTopPath_UseDefaultExitSpeed
                 neg.w   d2
 
-loc_35956:
+SKMGZTopPath_UseDefaultExitSpeed:
                 tst.w   d2
-                bne.s   loc_3595E
+                bne.s   SKMGZTopPath_CalcExitVector
                 move.w  #$800,d2
 
-loc_3595E:
-                bra.w   loc_35706
+SKMGZTopPath_CalcExitVector:
+                bra.w   SKMGZTopPath_CalcApproachDeltaX
 ; ---------------------------------------------------------------------------
 
-locret_35962:
+SKMGZTopPath_TraversalReturn:
                 rts
 ; End of function UpdateTopPlatformScriptedSinePath
 

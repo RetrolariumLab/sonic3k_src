@@ -6,11 +6,11 @@
 
 Obj_MGZ2LevelCollapseSolid:
                 cmpi.w  #8,(Events_routine_fg).w
-                bne.s   loc_3CF2E
+                bne.s   S3MGZ2Bg_PlaceCollapseSolid
                 jmp     (Delete_Current_Sprite).l       ; Delete control object when next screen event is in effect
 ; ---------------------------------------------------------------------------
 
-loc_3CF2E:
+S3MGZ2Bg_PlaceCollapseSolid:
                 movea.l $30(a0),a1                      ; Get vertical scroll position for this block
                 move.w  $2E(a0),d0                      ; Get vertical position
                 add.w   (a1),d0                         ; Add it to scroll value to get final Y position
@@ -93,46 +93,46 @@ MGZ2_BackgroundInit:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 cmpi.w  #$500,d1
-                bhs.s   loc_3D0C0
+                bhs.s   S3MGZ2Bg_PickInitialMovementBand
                 cmpi.w  #$3800,d0
-                blo.s   loc_3D10C
+                blo.s   S3MGZ2Bg_InitBgRefreshAndDeform
                 move.w  #4,(Events_bg+$00).w            ; If player is <$500 Y and >$3800 X (Knuckles area presumably)
                 move.l  #Obj_MGZ2BGMoveKnux,d1
                 cmpi.w  #$3A80,d0
-                blo.s   loc_3D102
+                blo.s   S3MGZ2Bg_TrySpawnMovementActor
                 move.w  #$220,(Events_bg+$02).w
-                bra.s   loc_3D10C
+                bra.s   S3MGZ2Bg_InitBgRefreshAndDeform
 ; ---------------------------------------------------------------------------
 
-loc_3D0C0:
+S3MGZ2Bg_PickInitialMovementBand:
                 cmpi.w  #$800,d1
-                blo.s   loc_3D0E6
+                blo.s   S3MGZ2Bg_PickInitialPostMoveBand
                 cmpi.w  #$34C0,d0
-                blo.s   loc_3D10C
+                blo.s   S3MGZ2Bg_InitBgRefreshAndDeform
                 move.w  #8,(Events_bg+$00).w            ; If player is >$800 Y and >$34C0 X
                 move.l  #Obj_MGZ2BGMoveSonic,d1
                 cmpi.w  #$3800,d0
-                blo.s   loc_3D102
+                blo.s   S3MGZ2Bg_TrySpawnMovementActor
                 move.w  #$1D0,(Events_bg+$02).w
-                bra.s   loc_3D10C
+                bra.s   S3MGZ2Bg_InitBgRefreshAndDeform
 ; ---------------------------------------------------------------------------
 
-loc_3D0E6:
+S3MGZ2Bg_PickInitialPostMoveBand:
                 cmpi.w  #$3900,d0
-                blo.s   loc_3D10C
+                blo.s   S3MGZ2Bg_InitBgRefreshAndDeform
                 move.w  #$C,(Events_bg+$00).w           ; If player is >$3900X and inbetween $500 and $800 Y
                 move.w  #$1D0,(Events_bg+$02).w
                 st      (Events_bg+$0E).w               ; Turn off cloud movement
                 clr.l   (HScroll_table+$038).w
-                bra.s   loc_3D10C
+                bra.s   S3MGZ2Bg_InitBgRefreshAndDeform
 ; ---------------------------------------------------------------------------
 
-loc_3D102:
+S3MGZ2Bg_TrySpawnMovementActor:
                 jsr     (AllocateObject).l
-                bne.s   loc_3D10C
+                bne.s   S3MGZ2Bg_InitBgRefreshAndDeform
                 move.l  d1,(a1)
 
-loc_3D10C:
+S3MGZ2Bg_InitBgRefreshAndDeform:
                 jsr     MGZ2_BGDeform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 clr.l   (HScroll_table).w
@@ -162,15 +162,15 @@ MGZ2BGE_GoRefresh:
                 jsr     MGZ2_ClearBottomBG(pc)
                 clr.l   (HScroll_table).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3D190
+                bra.s   S3MGZ2Bg_BeginDelayedBgRefresh
 ; ---------------------------------------------------------------------------
 
 MGZ2BGE_Normal:
                 jsr     MGZ2_BGEventTrigger(pc)
-                bne.s   loc_3D190                       ; If BG event has triggered, go refresh the BG
+                bne.s   S3MGZ2Bg_BeginDelayedBgRefresh  ; If BG event has triggered, go refresh the BG
                 jsr     MGZ2_BGDeform(pc)
 
-loc_3D160:
+S3MGZ2Bg_DrawBgAndStoreCollapseScroll:
                 lea     MGZ2_BGDrawArray(pc),a4
                 lea     (HScroll_table).w,a5
                 moveq   #$20,d6
@@ -186,7 +186,7 @@ loc_3D160:
                 jmp     ShakeScreen_Setup(pc)
 ; ---------------------------------------------------------------------------
 
-loc_3D190:
+S3MGZ2Bg_BeginDelayedBgRefresh:
                 jsr     MGZ2_BGDeform(pc)
                 jsr     Reset_TileOffsetPositionEff(pc)
                 move.w  d2,(HScroll_table+$006).w
@@ -195,20 +195,20 @@ loc_3D190:
                 move.w  d0,(Draw_delayed_position).w
                 move.w  #$F,(Draw_delayed_rowcount).w
                 addq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3D1B8
+                bra.s   S3MGZ2Bg_RefreshColumnAndCheckEnd
 ; ---------------------------------------------------------------------------
 
 MGZ2BGE_Refresh:
                 jsr     MGZ2_BGDeform(pc)
 
-loc_3D1B8:
+S3MGZ2Bg_RefreshColumnAndCheckEnd:
                 lea     MGZ2_BGDrawArray(pc),a4
                 lea     (HScroll_table-$04).w,a5
                 move.w  (Camera_Y_pos_BG_copy).w,d1
                 jsr     Draw_PlaneVertBottomUpComplex(pc)
-                bpl.s   loc_3D160
+                bpl.s   S3MGZ2Bg_DrawBgAndStoreCollapseScroll
                 subq.w  #4,(Events_routine_bg).w
-                bra.s   loc_3D160
+                bra.s   S3MGZ2Bg_DrawBgAndStoreCollapseScroll
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -220,27 +220,27 @@ MGZ2_BGDeform:
 ; ---------------------------------------------------------------------------
 
 MGZ2_BGDeform_Index:
-                bra.w   loc_3D21E                       ; 0 - Normal
+                bra.w   S3MGZ2Bg_UseUnshiftedYParallax  ; 0 - Normal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3D1F4                       ; 4 - Knuckles BG move event
+                bra.w   S3MGZ2Bg_SetUpperBandOrigin     ; 4 - Knuckles BG move event
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3D1EA                       ; 8 - Sonic BG move event
+                bra.w   S3MGZ2Bg_SetLowerBandOrigin     ; 8 - Sonic BG move event
 ; ---------------------------------------------------------------------------
                 move.w  #$500,d1                        ; C - After BG move event
-                bra.s   loc_3D220
+                bra.s   S3MGZ2Bg_ApplyNormalYParallax
 ; ---------------------------------------------------------------------------
 
-loc_3D1EA:
+S3MGZ2Bg_SetLowerBandOrigin:
                 move.w  #$8F0,d1
                 move.w  #$3200,d2
-                bra.s   loc_3D1FC
+                bra.s   S3MGZ2Bg_ApplyMovementBandScroll
 ; ---------------------------------------------------------------------------
 
-loc_3D1F4:
+S3MGZ2Bg_SetUpperBandOrigin:
                 move.w  #$1E0,d1
                 move.w  #$3580,d2
 
-loc_3D1FC:
+S3MGZ2Bg_ApplyMovementBandScroll:
                 move.w  (Camera_Y_pos_copy).w,d0
                 sub.w   d1,d0
                 add.w   (Events_bg+$02).w,d0
@@ -250,13 +250,13 @@ loc_3D1FC:
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  d0,(HScroll_table+$004).w
                 move.w  d0,(HScroll_table+$036).w
-                bra.s   loc_3D24C
+                bra.s   S3MGZ2Bg_PickXParallaxSource
 ; ---------------------------------------------------------------------------
 
-loc_3D21E:
+S3MGZ2Bg_UseUnshiftedYParallax:
                 moveq   #0,d1
 
-loc_3D220:
+S3MGZ2Bg_ApplyNormalYParallax:
                 move.w  (Camera_Y_pos_copy).w,d0
                 move.w  (Screen_shake_offset).w,d2
                 sub.w   d2,d0
@@ -274,13 +274,13 @@ loc_3D220:
                 clr.w   (HScroll_table+$004).w
                 clr.w   (HScroll_table+$036).w
 
-loc_3D24C:
+S3MGZ2Bg_PickXParallaxSource:
                 move.w  (Camera_X_pos_copy).w,d0
                 cmpi.w  #8,(Events_routine_fg).w
-                bne.s   loc_3D25C
+                bne.s   S3MGZ2Bg_BuildXParallaxSteps
                 move.w  (Events_bg+$0C).w,d0            ; If playing on the boss, use the special camera scrolling set by MGZ2's screen event
 
-loc_3D25C:
+S3MGZ2Bg_BuildXParallaxSteps:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -291,17 +291,17 @@ loc_3D25C:
                 lea     (HScroll_table+$036).w,a1
                 moveq   #8-1,d3
 
-loc_3D270:
+S3MGZ2Bg_WriteReverseXParallax:
                 swap    d0
                 move.w  d0,-(a1)
                 swap    d0
                 sub.l   d1,d0
-                dbf     d3,loc_3D270
+                dbf     d3,S3MGZ2Bg_WriteReverseXParallax
                 tst.w   (Events_bg+$0E).w               ; If EEE0 is set, don't bother moving the clouds automatically
-                bne.s   loc_3D28A
+                bne.s   S3MGZ2Bg_SetUpCloudParallax
                 addi.l  #$800,(HScroll_table+$038).w
 
-loc_3D28A:
+S3MGZ2Bg_SetUpCloudParallax:
                 move.l  (HScroll_table+$038).w,d1
                 lea     (HScroll_table+$008).w,a1
                 lea     MGZ2_BGDeformIndex(pc),a5
@@ -309,21 +309,21 @@ loc_3D28A:
                 asr.l   #1,d2
                 moveq   #$F-1,d3
 
-loc_3D29C:
+S3MGZ2Bg_WriteCloudParallax:
                 move.w  (a5)+,d4
                 add.l   d1,d0
                 swap    d0
                 move.w  d0,(a1,d4.w)
                 swap    d0
                 add.l   d2,d0
-                dbf     d3,loc_3D29C
+                dbf     d3,S3MGZ2Bg_WriteCloudParallax
                 lea     MGZ2_BGDeformOffset(pc),a5
                 moveq   #$17-1,d0
 
-loc_3D2B4:
+S3MGZ2Bg_AddBgScrollOffsets:
                 move.w  (a5)+,d1
                 add.w   d1,(a1)+
-                dbf     d0,loc_3D2B4
+                dbf     d0,S3MGZ2Bg_AddBgScrollOffsets
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -341,11 +341,11 @@ MGZ2_ClearBottomBG:
 
 MGZ2_BGEventTrigger:
                 tst.w   (_unkEEA2).w
-                beq.s   loc_3D2D8
+                beq.s   S3MGZ2Bg_DispatchP1Region
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D2D8:
+S3MGZ2Bg_DispatchP1Region:
                 move.w  (Player_1+x_pos).w,d0
                 move.w  (Player_1+y_pos).w,d1
                 move.w  (Events_bg+$00).w,d2
@@ -355,101 +355,102 @@ loc_3D2D8:
 ; ---------------------------------------------------------------------------
 
 MGZ2_BGEventTrigger_Index:
-                bra.w   loc_3D376                       ; 0 - Normal
+                bra.w   S3MGZ2Bg_CheckFirstMovementBand  ; 0 - Normal
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3D348                       ; 4 - Knuckles BG Move Event
+                bra.w   S3MGZ2Bg_UpdateUpperRegion      ; 4 - Knuckles BG Move Event
 ; ---------------------------------------------------------------------------
-                bra.w   loc_3D310                       ; 8 - Sonic BG Move Event
+                bra.w   S3MGZ2Bg_UpdateLowerRegion      ; 8 - Sonic BG Move Event
 ; ---------------------------------------------------------------------------
                 clr.b   (Background_collision_flag).w   ; C - After BG Move
                 cmpi.w  #$800,d1                        ; Turn off BG collision
-                blo.w   loc_3D3C4
+                blo.w   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$3A40,d0
-                blo.w   loc_3D3C4                       ; If Player (Sonic/Tails) is > $800 Y and > $3A40 X, go back to BG event
+                blo.w   S3MGZ2Bg_NoRegionChange         ; If Player (Sonic/Tails) is > $800 Y and > $3A40 X, go back to BG event
                 move.w  #8,(Events_bg+$00).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D310:
+S3MGZ2Bg_UpdateLowerRegion:
                 st      (Background_collision_flag).w   ; Set BG collision on
                 cmpi.w  #$800,d1
-                bhs.s   loc_3D32E
+                bhs.s   S3MGZ2Bg_TryExitLowerRegion
                 cmpi.w  #$3900,d0
-                blo.w   loc_3D3C4
+                blo.w   S3MGZ2Bg_NoRegionChange
                 st      (Events_bg+$0E).w               ; If Player < $800 Y and > $3900 X, turn off cloud movement
                 clr.l   (HScroll_table+$038).w
                 moveq   #$C,d0                          ; Go to after BG Event trigger
-                bra.s   loc_3D340
+                bra.s   S3MGZ2Bg_SetRegionAndSignalChange
 ; ---------------------------------------------------------------------------
 
-loc_3D32E:
+S3MGZ2Bg_TryExitLowerRegion:
                 cmpi.w  #$900,d1
-                bhs.w   loc_3D3C4
+                bhs.w   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$34C0,d0
-                bhs.w   loc_3D3C4                       ; If player is > $900 Y or > $34C0 X, continue normal deformation
+                bhs.w   S3MGZ2Bg_NoRegionChange         ; If player is > $900 Y or > $34C0 X, continue normal deformation
                 moveq   #0,d0
 
-loc_3D340:
+S3MGZ2Bg_SetRegionAndSignalChange:
                 move.w  d0,(Events_bg+$00).w            ; Otherwise, return to normal BG collision trigger
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D348:
+S3MGZ2Bg_UpdateUpperRegion:
                 st      (Background_collision_flag).w   ; Set BG collision on
                 cmpi.w  #$100,d1
-                bhs.s   loc_3D35C
+                bhs.s   S3MGZ2Bg_TryExitUpperRegion
                 cmpi.w  #$3C00,d0
-                blo.s   loc_3D35C
+                blo.s   S3MGZ2Bg_TryExitUpperRegion
                 clr.b   (Background_collision_flag).w   ; If Player < $100 Y and > $3C00 X, turn off BG collision
 
-loc_3D35C:
+S3MGZ2Bg_TryExitUpperRegion:
                 cmpi.w  #$80,d1
-                blo.s   loc_3D3C4
+                blo.s   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$180,d1
-                bhs.s   loc_3D3C4
+                bhs.s   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$3800,d0
-                bhs.s   loc_3D3C4                       ; If player is < $80 Y and > $180 Y and  > $3800 X, continue deformation
+                bhs.s   S3MGZ2Bg_NoRegionChange         ; If player is < $80 Y and > $180 Y and  > $3800 X, continue deformation
                 clr.w   (Events_bg+$00).w               ; Otherwise
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D376:
+S3MGZ2Bg_CheckFirstMovementBand:
                 clr.b   (Background_collision_flag).w
                 cmpi.w  #$80,d1
-                blo.s   loc_3D3C4
+                blo.s   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$180,d1
-                bhs.s   loc_3D396
+                bhs.s   S3MGZ2Bg_CheckSecondMovementBand
                 cmpi.w  #$3800,d0
-                blo.s   loc_3D3C4
+                blo.s   S3MGZ2Bg_NoRegionChange
                 moveq   #4,d0                           ; If between $80 and $180 Y and > $3800 X, use first BG move
                 move.l  #Obj_MGZ2BGMoveKnux,d1
-                bra.s   loc_3D3B0
+                bra.s   S3MGZ2Bg_SetStateAndTrySpawnMover
 ; ---------------------------------------------------------------------------
 
-loc_3D396:
+S3MGZ2Bg_CheckSecondMovementBand:
                 cmpi.w  #$800,d1
-                blo.s   loc_3D3C4
+                blo.s   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$900,d1
-                bhs.s   loc_3D3C4
+                bhs.s   S3MGZ2Bg_NoRegionChange
                 cmpi.w  #$34C0,d0
-                blo.s   loc_3D3C4
+                blo.s   S3MGZ2Bg_NoRegionChange
                 moveq   #8,d0                           ; If between $800 and $900 Y and > $34C0 X, use second BG move
                 move.l  #Obj_MGZ2BGMoveSonic,d1
 
-loc_3D3B0:
+S3MGZ2Bg_SetStateAndTrySpawnMover:
                 move.w  d0,(Events_bg+$00).w
                 clr.w   (Events_bg+$02).w
                 jsr     (AllocateObject).l
-                bne.s   locret_3D3C2
+                bne.s   S3MGZ2Bg_ReturnMoverAllocResult
                 move.l  d1,(a1)
 
-locret_3D3C2:
+; Preserve the allocation call's condition codes for the caller
+S3MGZ2Bg_ReturnMoverAllocResult:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D3C4:
+S3MGZ2Bg_NoRegionChange:
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
@@ -460,7 +461,7 @@ Obj_MGZ2BGMoveKnux:
                 move.w  #$38A0,d2
                 move.w  #$220,d3
                 move.w  #$6000,d4
-                bra.s   loc_3D3F2
+                bra.s   S3MGZ2Bg_DeleteMoverOnRegionExit
 ; ---------------------------------------------------------------------------
 
 Obj_MGZ2BGMoveSonic:
@@ -471,74 +472,74 @@ Obj_MGZ2BGMoveSonic:
                 move.w  #$6000,d4
                 st      $38(a0)
 
-loc_3D3F2:
+S3MGZ2Bg_DeleteMoverOnRegionExit:
                 cmp.w   (Events_bg+$00).w,d0
-                beq.s   loc_3D3FE
+                beq.s   S3MGZ2Bg_CheckMoverStartWindow
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3D3FE:
+S3MGZ2Bg_CheckMoverStartWindow:
                 cmp.w   (Player_1+y_pos).w,d1
-                bhs.s   locret_3D40A
+                bhs.s   S3MGZ2Bg_MoverStartReturn
                 cmp.w   (Player_1+x_pos).w,d2
-                blo.s   loc_3D40C
+                blo.s   S3MGZ2Bg_SetMoverTargetAndLockX
 
-locret_3D40A:
+S3MGZ2Bg_MoverStartReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3D40C:
+S3MGZ2Bg_SetMoverTargetAndLockX:
                 move.w  d3,$2E(a0)
                 move.w  d4,$32(a0)
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_target_min_X_pos).w
-                move.l  #loc_3D426,(a0)
+                move.l  #S3MGZ2Bg_CheckMoverTargetReached,(a0)
 
-loc_3D426:
+S3MGZ2Bg_CheckMoverTargetReached:
                 move.w  (Events_bg+$02).w,d0
                 cmp.w   $2E(a0),d0                      ; Wait for BG offset to match given value
-                blo.s   loc_3D444
+                blo.s   S3MGZ2Bg_PickMoverStep
                 moveq   #signextendB(sfx_Crash),d0      ; Play final crashing sound
                 jsr     (Play_SFX).l
                 move.w  #$E,(Screen_shake_flag).w       ; Do final screen shake
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3D444:
+S3MGZ2Bg_PickMoverStep:
                 move.w  (Player_1+x_pos).w,d2
                 move.w  (Player_1+y_pos).w,d3
                 tst.b   $39(a0)
-                beq.s   loc_3D458
+                beq.s   S3MGZ2Bg_TryLatchFirstMoverStep
                 move.w  d0,d1
                 addq.w  #1,d1
-                bra.s   loc_3D484
+                bra.s   S3MGZ2Bg_ApplyBgOffsetAndMovePlayers
 ; ---------------------------------------------------------------------------
 
-loc_3D458:
+S3MGZ2Bg_TryLatchFirstMoverStep:
                 tst.b   $38(a0)
-                bne.s   loc_3D46C
+                bne.s   S3MGZ2Bg_TryLatchSecondMoverStep
                 cmpi.w  #$200,d3
-                bhs.s   loc_3D476
+                bhs.s   S3MGZ2Bg_IntegrateMoverOffset
                 cmpi.w  #$3CB0,d2
-                blo.s   loc_3D472
-                bra.s   loc_3D476
+                blo.s   S3MGZ2Bg_LatchOnePixelStep
+                bra.s   S3MGZ2Bg_IntegrateMoverOffset
 ; ---------------------------------------------------------------------------
 
-loc_3D46C:
+S3MGZ2Bg_TryLatchSecondMoverStep:
                 cmpi.w  #$3D50,d2                       ; Second background object check
-                blo.s   loc_3D476
+                blo.s   S3MGZ2Bg_IntegrateMoverOffset
 
-loc_3D472:
+S3MGZ2Bg_LatchOnePixelStep:
                 st      $39(a0)
 
-loc_3D476:
+S3MGZ2Bg_IntegrateMoverOffset:
                 move.l  $34(a0),d1
                 add.l   $30(a0),d1
                 move.l  d1,$34(a0)
                 swap    d1
 
-loc_3D484:
+S3MGZ2Bg_ApplyBgOffsetAndMovePlayers:
                 move.w  d1,(Events_bg+$02).w            ; Move background offset
                 sub.w   d0,d1
                 sub.w   d1,(Player_1+y_pos).w

@@ -1,9 +1,9 @@
 ; Data owner: objects/shared/zones/mgz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_MGZTriggerPlatform_:
-                dc.w    Frame_2339B6-Map_MGZTriggerPlatform_
-                dc.w    Frame_233A18-Map_MGZTriggerPlatform_
-Frame_2339B6:   dc.w    $10
+                dc.w    MGZTriggerPlatformS3_MapSlot00-Map_MGZTriggerPlatform_
+                dc.w    MGZTriggerPlatformS3_MapSlot01-Map_MGZTriggerPlatform_
+MGZTriggerPlatformS3_MapSlot00: dc.w    $10
                 dc.b    $DC,  $D,   0, $18, $FF, $C0
                 dc.b    $DC,  $D,   0, $18, $FF, $E0
                 dc.b    $DC,  $D,   0, $18,   0,   0
@@ -20,7 +20,7 @@ Frame_2339B6:   dc.w    $10
                 dc.b    $C,  $D,   0, $28, $FF, $E0
                 dc.b    $C,  $D,   0, $28,   0,   0
                 dc.b    $C,  $D,   8, $10,   0, $20
-Frame_233A18:   dc.w    $10
+MGZTriggerPlatformS3_MapSlot01: dc.w    $10
                 dc.b    $BC,  $D,   0, $18, $FF, $E0
                 dc.b    $BC,  $D,   0, $18,   0,   0
                 dc.b    $CC,  $D,   0, $20, $FF, $E0

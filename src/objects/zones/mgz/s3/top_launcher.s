@@ -14,56 +14,56 @@ Obj_MGZTopLauncher:
                 move.w  #$10,$30(a0)
                 move.w  #$C00,d0
                 btst    #0,status(a0)
-                beq.s   loc_34F60
+                beq.s   S3MGZTopLauncher_SetSpeedAndTryCreateTop
                 neg.w   d0
 
-loc_34F60:
+S3MGZTopLauncher_SetSpeedAndTryCreateTop:
                 move.w  d0,x_vel(a0)
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_34F7C
+                bne.s   S3MGZTopLauncher_StartHoldingTop
                 move.l  #Obj_MGZTopPlatform,(a1)
                 move.b  #1,subtype(a1)
                 move.w  a1,$3E(a0)
 
-loc_34F7C:
-                move.l  #loc_34F82,(a0)
+S3MGZTopLauncher_StartHoldingTop:
+                move.l  #S3MGZTopLauncher_HoldTopAndCheckRiders,(a0)
 
-loc_34F82:
+S3MGZTopLauncher_HoldTopAndCheckRiders:
                 movea.w $3E(a0),a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addq.w  #4,$24(a1)
                 cmpi.b  #4,$40(a1)
-                beq.s   loc_34FA6
+                beq.s   S3MGZTopLauncher_BeginSink
                 cmpi.b  #4,$42(a1)
-                bne.s   loc_34FAC
+                bne.s   S3MGZTopLauncher_DrawHoldingLauncher
 
-loc_34FA6:
-                move.l  #loc_34FB2,(a0)
+S3MGZTopLauncher_BeginSink:
+                move.l  #S3MGZTopLauncher_StepSink,(a0)
 
-loc_34FAC:
+S3MGZTopLauncher_DrawHoldingLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_34FB2:
+S3MGZTopLauncher_StepSink:
                 movea.w $3E(a0),a1
                 addq.w  #1,y_pos(a0)
                 subq.w  #1,$30(a0)
-                bne.s   loc_34FCC
-                move.l  #loc_35006,(a0)
+                bne.s   S3MGZTopLauncher_HoldOrReleaseTop
+                move.l  #S3MGZTopLauncher_DrawSinkingLauncher,(a0)
                 move.w  #$7F00,x_pos(a0)
 
-loc_34FCC:
+S3MGZTopLauncher_HoldOrReleaseTop:
                 cmpi.w  #4,$30(a0)
-                beq.s   loc_34FE8
-                bcs.s   loc_35006
+                beq.s   S3MGZTopLauncher_ReleaseTopWithSpeed
+                bcs.s   S3MGZTopLauncher_DrawSinkingLauncher
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 addq.w  #4,$24(a1)
-                bra.s   loc_35006
+                bra.s   S3MGZTopLauncher_DrawSinkingLauncher
 ; ---------------------------------------------------------------------------
 
-loc_34FE8:
+S3MGZTopLauncher_ReleaseTopWithSpeed:
                 move.w  x_vel(a0),d1
                 move.w  d1,x_vel(a1)
                 move.w  d1,ground_vel(a1)
@@ -71,6 +71,6 @@ loc_34FE8:
                 bclr    #1,status(a1)
                 move.b  #0,subtype(a1)
 
-loc_35006:
+S3MGZTopLauncher_DrawSinkingLauncher:
                 jmp     (Sprite_OnScreen_Test).l
 ; End of function Obj_MGZTopLauncher
