@@ -326,7 +326,7 @@ ContinueKnuckles_DispatchAndQueueArt:
                 move.b  routine(a0),d0
                 move.w  ContinueKnuckles_StateOffsets(pc,d0.w),d1
                 jsr     ContinueKnuckles_StateOffsets(pc,d1.w)
-                jsr     (Knuckles_Load_PLC_661E0).l
+                jsr     (SKScene_LoadKnuxArtToSceneTiles).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 ContinueKnuckles_StateOffsets:

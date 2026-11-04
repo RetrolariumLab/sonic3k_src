@@ -37,16 +37,16 @@ CutsceneKnux_AIZ1:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_AIZ1_Index:
-                dc.w    loc_61DBE-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61DF4-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61E24-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61E64-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61E96-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61EE0-CutsceneKnux_AIZ1_Index
-                dc.w    loc_61F10-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_InitKnucklesAndCork-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_WaitForParentDeleteFlag-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_JumpAndProbeFloor-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_TickFirstPause-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_MoveAndTickDash-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_AnimateIdleAndTickExit-CutsceneKnux_AIZ1_Index
+                dc.w    SKAIZScene_MoveWhilePreviouslyVisible-CutsceneKnux_AIZ1_Index
 ; ---------------------------------------------------------------------------
 
-loc_61DBE:
+SKAIZScene_InitKnucklesAndCork:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 bclr    #7,art_tile(a0)
@@ -55,18 +55,18 @@ loc_61DBE:
                 move.w  #$1400,x_pos(a0)
                 move.w  #$440,y_pos(a0)
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
-                lea     ChildObjDat_6659A(pc),a2
+                lea     SKSceneData_AIZ1CorkFloorChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_61DF4:
+SKAIZScene_WaitForParentDeleteFlag:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_61E02
+                bne.s   SKAIZScene_LaunchAndLoadPalette
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_61E02:
+SKAIZScene_LaunchAndLoadPalette:
                 move.b  #4,routine(a0)
                 bset    #7,status(a0)
                 move.w  #-$600,y_vel(a0)
@@ -75,98 +75,99 @@ loc_61E02:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_61E24:
-                lea     byte_666AF(pc),a1
+; Probe the floor only when MoveSprite reports a nonnegative previous vertical velocity
+SKAIZScene_JumpAndProbeFloor:
+                lea     SKKnucklesCutscene_LeapPhaseBodyLoop(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jsr     (MoveSprite).l
                 tst.l   d0
-                bmi.s   locret_61E42
+                bmi.s   SKAIZScene_IntroJumpReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_61E44
+                bmi.s   SKAIZScene_LandAndStartFirstPause
 
-locret_61E42:
+SKAIZScene_IntroJumpReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_61E44:
+SKAIZScene_LandAndStartFirstPause:
                 move.b  #6,routine(a0)
                 add.w   d1,y_pos(a0)
                 move.b  #$16,mapping_frame(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_61E6A,$34(a0)
+                move.l  #SKAIZScene_BeginLeftDashAndMove,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_61E64:
+SKAIZScene_TickFirstPause:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_61E6A:
+SKAIZScene_BeginLeftDashAndMove:
                 move.b  #8,routine(a0)
                 bchg    #0,render_flags(a0)
-                move.l  #byte_666A9,$30(a0)
+                move.l  #SKSceneAnim_KnuxFastTravelLoop,$30(a0)
                 move.w  #-$600,x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #$29,$2E(a0)
-                move.l  #loc_61EA8,$34(a0)
+                move.l  #SKAIZScene_ReverseDashAndPause,$34(a0)
 
-loc_61E96:
+SKAIZScene_MoveAndTickDash:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_61EA8:
+SKAIZScene_ReverseDashAndPause:
                 neg.w   x_vel(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$29,$2E(a0)
-                move.l  #loc_61EC2,$34(a0)
+                move.l  #SKAIZScene_EnterIdlePause,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_61EC2:
+SKAIZScene_EnterIdlePause:
                 move.b  #$A,routine(a0)
                 move.b  #$16,mapping_frame(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_61EEC,$34(a0)
-                bra.w   loc_62056
+                move.l  #SKAIZScene_BeginRightExitAndTryFade,$34(a0)
+                bra.w   SKAIZScene_ResetSharedIdleAnim
 ; ---------------------------------------------------------------------------
 
-loc_61EE0:
+SKAIZScene_AnimateIdleAndTickExit:
                 jsr     (Animate_Raw).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_61EEC:
+SKAIZScene_BeginRightExitAndTryFade:
                 move.b  #$C,routine(a0)
-                move.l  #byte_666A9,$30(a0)
+                move.l  #SKSceneAnim_KnuxFastTravelLoop,$30(a0)
                 move.w  #$600,x_vel(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_61F0E
+                bne.s   SKAIZScene_ExitMusicSpawnReturn
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-locret_61F0E:
+SKAIZScene_ExitMusicSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_61F10:
+SKAIZScene_MoveWhilePreviouslyVisible:
                 tst.b   render_flags(a0)
-                bpl.s   loc_61F22
+                bpl.s   SKAIZScene_RestoreLevelAndTryTitleCard
                 jsr     (Animate_Raw).l
                 jmp     (MoveSprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_61F22:
+SKAIZScene_RestoreLevelAndTryTitleCard:
                 clr.b   (Palette_cycle_counters+$00).w
                 clr.b   (Ctrl_1_locked).w
                 jsr     (AfterBoss_Cleanup).l
                 jsr     (Remove_From_TrackingSlot).l
                 jsr     (AllocateObject).l
-                bne.s   loc_61F44
+                bne.s   SKAIZScene_CommitLevelStartAndDelete
                 move.l  #Obj_TitleCard,(a1)
 
-loc_61F44:
+SKAIZScene_CommitLevelStartAndDelete:
                 move.b  #$91,(Level_started_flag).w
                 move.b  #$80,(Update_HUD_timer).w
                 clr.l   (Timer).w
@@ -174,19 +175,19 @@ loc_61F44:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_61F60:
-                lea     ObjDat3_66432(pc),a1
+SKAIZScene_InitCorkAndCheckParent:
+                lea     SKAizCutscene_CorkFloorAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_61F70,(a0)
+                move.l  #SKAIZScene_DrawCorkUntilBreakSignal,(a0)
 
-loc_61F70:
+SKAIZScene_DrawCorkUntilBreakSignal:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_61F82
+                bne.s   SKAIZScene_BreakCorkIntoPieces
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_61F82:
+SKAIZScene_BreakCorkIntoPieces:
                 lea     (SKCork_AIZCorkVelocityPairs).l,a4
                 addq.b  #1,mapping_frame(a0)
                 move.l  #SKCork_MoveFragmentAndApplyGravity,(a0)
@@ -203,15 +204,15 @@ CutsceneKnux_AIZ2:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_AIZ2_Index:
-                dc.w    loc_61FC2-CutsceneKnux_AIZ2_Index
-                dc.w    loc_62014-CutsceneKnux_AIZ2_Index
-                dc.w    loc_62022-CutsceneKnux_AIZ2_Index
-                dc.w    loc_6206E-CutsceneKnux_AIZ2_Index
-                dc.w    loc_620AA-CutsceneKnux_AIZ2_Index
-                dc.w    loc_620E4-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_InitAct2AndSolidChild-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_TickSharedWordWait-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_WalkLeftToAct2Threshold-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_AnimateIdleAndTickJumpPause-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_UpdateJumpAndBounceOnce-CutsceneKnux_AIZ2_Index
+                dc.w    SKAIZScene_AnimateAct2FinalIdle-CutsceneKnux_AIZ2_Index
 ; ---------------------------------------------------------------------------
 
-loc_61FC2:
+SKAIZScene_InitAct2AndSolidChild:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.w  #$4B8E,x_pos(a0)
@@ -219,68 +220,68 @@ loc_61FC2:
                 bset    #0,render_flags(a0)
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 move.w  #(2*60)-1,$2E(a0)
-                move.l  #loc_6201A,$34(a0)
+                move.l  #SKAIZScene_EndAct2PauseAndWalk,$34(a0)
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_6655A(pc),a2
+                lea     SKSceneData_AIZ2SolidChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   locret_62012
+                bne.s   SKAIZScene_Act2InitReturn
                 move.w  #$4B08,x_pos(a1)
                 move.w  #$178,y_pos(a1)
 
-locret_62012:
+SKAIZScene_Act2InitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_62014:
+SKAIZScene_TickSharedWordWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6201A:
+SKAIZScene_EndAct2PauseAndWalk:
                 move.b  #4,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_62022:
+SKAIZScene_WalkLeftToAct2Threshold:
                 move.w  x_pos(a0),d0
                 subq.w  #2,d0
                 cmpi.w  #$4B3C,d0
-                blo.s   loc_6203C
+                blo.s   SKAIZScene_FaceRightAndStartJumpPause
                 move.w  d0,x_pos(a0)
-                lea     byte_6669F(pc),a1
+                lea     SKSceneAnim_KnuxTravelLoop(pc),a1
                 jmp     (Animate_RawNoSST).l
 ; ---------------------------------------------------------------------------
 
-loc_6203C:
+SKAIZScene_FaceRightAndStartJumpPause:
                 move.b  #6,routine(a0)
                 bclr    #0,render_flags(a0)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_6207A,$34(a0)
+                move.l  #SKAIZScene_SelectAct2Jump,$34(a0)
 
-loc_62056:
-                move.l  #byte_666B9,$30(a0)
+SKAIZScene_ResetSharedIdleAnim:
+                move.l  #SKSceneAnim_KnuxWaitWithTailLoop,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 move.b  #$1C,mapping_frame(a0)
 
-locret_6206C:
+SKAIZScene_SharedSceneReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6206E:
+SKAIZScene_AnimateIdleAndTickJumpPause:
                 jsr     (Animate_Raw).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6207A:
+SKAIZScene_SelectAct2Jump:
                 move.b  #8,routine(a0)
 
-loc_62080:
+SKAIZScene_SetSharedLeftJumpSpeed:
                 move.w  #-$100,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
 
-loc_6208C:
-                move.l  #byte_666AF,$30(a0)
+SKAIZScene_ResetSharedJumpAnim:
+                move.l  #SKKnucklesCutscene_LeapPhaseBodyLoop,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
                 move.b  #8,mapping_frame(a0)
@@ -288,34 +289,34 @@ loc_6208C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_620AA:
+SKAIZScene_UpdateJumpAndBounceOnce:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.s   locret_620D6
+                bmi.s   SKAIZScene_SharedJumpUpdateReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_620D6
+                bpl.s   SKAIZScene_SharedJumpUpdateReturn
                 bset    #2,$38(a0)
-                bne.s   loc_620D8
+                bne.s   SKAIZScene_LandSecondContactAndIdle
                 neg.w   x_vel(a0)
                 neg.w   y_vel(a0)
 
-locret_620D6:
+SKAIZScene_SharedJumpUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_620D8:
+SKAIZScene_LandSecondContactAndIdle:
                 addq.b  #2,routine(a0)
                 add.w   d1,y_pos(a0)
-                bra.w   loc_62056
+                bra.w   SKAIZScene_ResetSharedIdleAnim
 ; ---------------------------------------------------------------------------
 
-loc_620E4:
+SKAIZScene_AnimateAct2FinalIdle:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_620EA:
+SKAIZScene_ResolveAct2SolidChild:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.w   CutsceneKnux_Delete
@@ -325,4 +326,4 @@ loc_620EA:
                 move.w  #$40,d3
                 move.w  x_pos(a0),d4
                 jmp     (SolidObjectFull2).l
-; End of function loc_620AA
+; End of function SKAIZScene_UpdateJumpAndBounceOnce

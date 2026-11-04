@@ -7,20 +7,20 @@
 SSZSmallDeathEgg_TryParticleEvery32:
                 move.b  (V_int_run_count+3).w,d0
                 andi.w  #$1F,d0
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
                 moveq   #signextendB(sfx_MissileShoot),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_665F0(pc),a2
+                lea     SKSceneData_SSZDeathEggParticleChildren(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; End of function SSZSmallDeathEgg_TryParticleEvery32
 
 ; ---------------------------------------------------------------------------
 
-loc_66072:
+SKScene_SSZStartHalfCameraTracker:
                 move.w  (Camera_X_pos).w,$3A(a0)
-                move.l  #loc_6607E,(a0)
+                move.l  #SKSszCutscene_StoreHalfSignedCameraDelta,(a0)
 
-loc_6607E:
+SKSszCutscene_StoreHalfSignedCameraDelta:
                 move.w  (Camera_X_pos).w,d0
                 move.w  $3A(a0),d1
                 move.w  d0,$3A(a0)
@@ -34,72 +34,72 @@ loc_6607E:
 HPZKnucklesFaceTargetFromSideWord:
                 bset    #0,render_flags(a0)
                 tst.w   d0
-                beq.s   locret_660A4
+                beq.s   SKScene_HPZFacingSideReturn
                 bclr    #0,render_flags(a0)
 
-locret_660A4:
+SKScene_HPZFacingSideReturn:
                 rts
 ; End of function HPZKnucklesFaceTargetFromSideWord
 
 ; ---------------------------------------------------------------------------
 
-loc_660A6:
+SKScene_HPZCheckHurtInvulnTimer:
                 tst.b   $34(a1)
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
 
-loc_660AE:
+SKScene_HPZHurtUnlessInvincible:
                 btst    #Status_InAir,status_secondary(a1)
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
                 jmp     (HurtCharacter_Directly).l
 ; ---------------------------------------------------------------------------
 
-loc_660BE:
-                lea     word_66152(pc),a1
+SKScene_HPZCheckPackedPlayerContacts:
+                lea     SKHpzContact_PlayerQueryRectangle(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 tst.w   d0
-                beq.s   loc_660DA
+                beq.s   SKScene_HPZDispatchHighWordContact
                 move.l  d0,-(sp)
                 bsr.w   HPZKnux_DispatchPlayerContact
                 move.l  (sp)+,d0
 
-loc_660DA:
+SKScene_HPZDispatchHighWordContact:
                 swap    d0
                 tst.w   d0
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
 
 ; =============== S U B R O U T I N E =======================================
 
 ; Select the callback by facing side and vertical alignment. Nonrolling invincible contact goes directly to the hit response
 HPZKnux_DispatchPlayerContact:
                 btst    #4,$38(a0)
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
                 movea.w d0,a1
                 btst    #0,render_flags(a0)
                 sne     d4
                 move.w  x_pos(a1),d1
                 cmp.w   x_pos(a0),d1
-                bhs.s   loc_66102
+                bhs.s   SKScene_HPZCheckFrontFacingAndGap
                 not.b   d4
 
-loc_66102:
+SKScene_HPZCheckFrontFacingAndGap:
                 tst.b   d4
-                bne.s   loc_66134
+                bne.s   SKScene_HPZSelectRearOrInvincible
                 move.w  y_pos(a1),d2
                 sub.w   y_pos(a0),d2
-                bpl.s   loc_66112
+                bpl.s   SKScene_HPZSelectFrontOrInvincible
                 neg.w   d2
 
-loc_66112:
+SKScene_HPZSelectFrontOrInvincible:
                 cmpi.w  #$10,d2
-                bhs.s   loc_66134
+                bhs.s   SKScene_HPZSelectRearOrInvincible
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_6612A
+                beq.s   SKScene_HPZDispatchFirstContact
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.w   loc_6429E
+                bne.w   HPZKnux_TakeHitAndSelectRecoil
 
-loc_6612A:
+SKScene_HPZDispatchFirstContact:
                 movea.l (a3),a4
                 jmp     (a4)
 ; ---------------------------------------------------------------------------
@@ -108,13 +108,13 @@ loc_6612A:
                 jmp     (a4)
 ; ---------------------------------------------------------------------------
 
-loc_66134:
+SKScene_HPZSelectRearOrInvincible:
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_66146
+                beq.s   SKScene_HPZDispatchThirdContact
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.w   loc_6429E
+                bne.w   HPZKnux_TakeHitAndSelectRecoil
 
-loc_66146:
+SKScene_HPZDispatchThirdContact:
                 movea.l 8(a3),a4
                 jmp     (a4)
 ; ---------------------------------------------------------------------------
@@ -124,52 +124,52 @@ loc_66146:
 ; End of function HPZKnux_DispatchPlayerContact
 
 ; ---------------------------------------------------------------------------
-word_66152:
+SKHpzContact_PlayerQueryRectangle:
                 dc.w    -$18,   $30,  -$18,   $30
 
 ; =============== S U B R O U T I N E =======================================
 
 HPZKnux_StopAtCameraXMargins:
                 tst.w   x_vel(a0)
-                beq.s   locret_66188
-                bmi.s   loc_66176
+                beq.s   SKScene_HPZCameraMarginReturn
+                bmi.s   SKScene_HPZClampLeftwardSpeed
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$130,d0
                 cmp.w   x_pos(a0),d0
-                bhi.s   locret_66188
+                bhi.s   SKScene_HPZCameraMarginReturn
                 clr.w   x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_66176:
+SKScene_HPZClampLeftwardSpeed:
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   x_pos(a0),d0
-                blo.s   locret_66188
+                blo.s   SKScene_HPZCameraMarginReturn
                 clr.w   x_vel(a0)
 
-locret_66188:
+SKScene_HPZCameraMarginReturn:
                 rts
 ; End of function HPZKnux_StopAtCameraXMargins
 
 ; ---------------------------------------------------------------------------
 
-Knuckles_Load_PLC_6618A:
+SKScene_LoadKnuxArtToP2Tiles:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $3A(a0),d0
-                beq.s   locret_661DE
+                beq.s   SKScene_KnuxP2ArtReturn
                 move.b  d0,$3A(a0)
                 lea     (PLC_Knuckles).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_661DE
+                bmi.s   SKScene_KnuxP2ArtReturn
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
                 move.l  #ArtUnc_Knux,d6
 
-loc_661B6:
+SKScene_QueueKnuxP2ArtEntry:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -183,29 +183,29 @@ loc_661B6:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_661B6
+                dbf     d5,SKScene_QueueKnuxP2ArtEntry
 
-locret_661DE:
+SKScene_KnuxP2ArtReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-Knuckles_Load_PLC_661E0:
+SKScene_LoadKnuxArtToSceneTiles:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $3A(a0),d0
-                beq.s   locret_66234
+                beq.s   SKScene_KnuxSceneArtReturn
                 move.b  d0,$3A(a0)
                 lea     (PLC_Knuckles).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_66234
+                bmi.s   SKScene_KnuxSceneArtReturn
                 move.w  #tiles_to_bytes(ArtTile_CutsceneKnux),d4
                 move.l  #ArtUnc_Knux,d6
 
-loc_6620C:
+SKScene_QueueKnuxSceneArtEntry:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -219,11 +219,11 @@ loc_6620C:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_6620C
+                dbf     d5,SKScene_QueueKnuxSceneArtEntry
 
-locret_66234:
+SKScene_KnuxSceneArtReturn:
                 rts
-; End of function Knuckles_Load_PLC_661E0
+; End of function SKScene_LoadKnuxArtToSceneTiles
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -232,17 +232,17 @@ HPZKnucklesDustQueueDPLCWhenFrameChanges:
                 moveq   #0,d0
                 move.b  mapping_frame(a0),d0
                 cmp.b   $3A(a0),d0
-                beq.s   locret_6628A
+                beq.s   SKScene_HPZDashDustArtReturn
                 move.b  d0,$3A(a0)
                 lea     (DPLC_DashSplashDrown).l,a2
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_6628A
+                bmi.s   SKScene_HPZDashDustArtReturn
                 move.w  #tiles_to_bytes(ArtTile_HPZKnuxBossDust),d4
 
-loc_66262:
+SKScene_QueueHPZDashDustArtEntry:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -256,9 +256,9 @@ loc_66262:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_66262
+                dbf     d5,SKScene_QueueHPZDashDustArtEntry
 
-locret_6628A:
+SKScene_HPZDashDustArtReturn:
                 rts
 ; End of function HPZKnucklesDustQueueDPLCWhenFrameChanges
 
@@ -269,11 +269,11 @@ HPZCrane_TickOscillation:
                 move.b  $40(a0),d0
                 add.b   d0,$3C(a0)
                 subq.b  #1,$39(a0)
-                bpl.s   locret_662A4
+                bpl.s   SKScene_HPZCraneAngleUpdateReturn
                 move.b  $30(a0),$39(a0)
                 neg.b   $40(a0)
 
-locret_662A4:
+SKScene_HPZCraneAngleUpdateReturn:
                 rts
 ; End of function HPZCrane_TickOscillation
 
@@ -293,11 +293,11 @@ HPZCrane_SelectEightWayFrame:
 
 ; ---------------------------------------------------------------------------
 
-loc_662C0:
+SKScene_HPZSeedPlatformFragment:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d3
-                lea     byte_66308(pc,d0.w),a1
+                lea     SKHpzPlatformFragment_LaunchOffsets(pc,d0.w),a1
                 move.b  (a1)+,d1
                 ext.w   d1
                 add.w   d1,x_pos(a0)
@@ -316,14 +316,14 @@ loc_662C0:
                 andi.w  #$180,d3
                 addi.w  #$80,d3
                 tst.w   d2
-                bpl.s   loc_66302
+                bpl.s   SKScene_HPZStoreFragmentYVelocity
                 neg.w   d3
 
-loc_66302:
+SKScene_HPZStoreFragmentYVelocity:
                 move.w  d3,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_66308:
+SKHpzPlatformFragment_LaunchOffsets:
                 dc.b    8,   -8
                 dc.b    8,    0
                 dc.b    8, -$10
@@ -362,19 +362,19 @@ byte_66308:
 ; Count 48 updates while hit status bit 6 is set, then clear the bit
 HPZShip_TickMovingHitPause:
                 btst    #6,status(a0)
-                beq.s   locret_66370
+                beq.s   SKHpzShip_ReturnAfterMovingHitPauseGate
                 tst.b   $20(a0)
-                bne.s   loc_66364
+                bne.s   SKScene_HPZTickShipHitPause
                 move.b  #$30,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_66364:
+SKScene_HPZTickShipHitPause:
                 subq.b  #1,$20(a0)
-                bne.s   locret_66370
+                bne.s   SKHpzShip_ReturnAfterMovingHitPauseGate
                 bclr    #6,status(a0)
 
-locret_66370:
+SKHpzShip_ReturnAfterMovingHitPauseGate:
                 rts
 ; End of function HPZShip_TickMovingHitPause
 
@@ -383,28 +383,28 @@ locret_66370:
 ; Flash three palette slots for 32 updates before restoring the saved collision type
 HPZShip_TickHitFlashAndRestoreColl:
                 tst.b   collision_flags(a0)
-                bne.s   locret_663B8
+                bne.s   SKScene_HPZShipFlashUpdateReturn
                 tst.b   $20(a0)
-                bne.s   loc_66392
+                bne.s   SKScene_HPZSelectShipHitFlashPhase
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
                 bset    #6,status(a0)
 
-loc_66392:
+SKScene_HPZSelectShipHitFlashPhase:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_663A0
+                bne.s   SKScene_HPZCopyShipFlashAndRestoreTouch
 ; Bug: should be 2*3
                 addi.w  #2*2,d0
 
-loc_663A0:
+SKScene_HPZCopyShipFlashAndRestoreTouch:
                 jsr     (CopySSZGHZThreeColorPaletteAtByteOffset).l
                 subq.b  #1,$20(a0)
-                bne.s   locret_663B8
+                bne.s   SKScene_HPZShipFlashUpdateReturn
                 bclr    #6,status(a0)
                 move.b  $25(a0),collision_flags(a0)
 
-locret_663B8:
+SKScene_HPZShipFlashUpdateReturn:
                 rts
 ; End of function HPZShip_TickHitFlashAndRestoreColl

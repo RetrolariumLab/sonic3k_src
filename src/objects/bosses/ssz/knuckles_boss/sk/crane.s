@@ -19,7 +19,7 @@ SSZCrane_WaitForPlayerAirborne:
                 btst    #Status_InAir,status(a1)
                 beq.w   SSZMechaBattleAndChildren_SharedReturn
                 move.l  #SSZCrane_MoveLeftToDeployClaw,(a0)
-                lea     (ObjDat3_664EE).l,a1
+                lea     (SKHpzSszSceneShip_CoreAttributes).l,a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.w  #-$80,x_vel(a0)
                 jsr     (Swing_Setup1).l
@@ -214,11 +214,11 @@ SSZCrane_TransferFallAndRelease:
 ; ---------------------------------------------------------------------------
 
 SSZCrane_InitClawAndDetails:
-                lea     (ObjDat3_664FA).l,a1
+                lea     (SKHpzSszCrane_LiftingHeadAttributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #0,priority(a0)
                 move.l  #SSZCrane_ClawFollowUntilDeploy,(a0)
-                lea     (ChildObjDat_66610).l,a2
+                lea     (SKSceneData_CraneFollowerChildren).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 

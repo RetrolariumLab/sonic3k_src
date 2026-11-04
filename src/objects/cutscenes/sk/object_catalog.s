@@ -36,12 +36,12 @@ ObjDat_CutsceneButton:
                 dc.w    make_art_tile(ArtTile_GrayButton,0,1)
                 dc.w    $100
                 dc.b    $10,   8,   0,   0
-ObjDat3_6640E:
+SKLbzCutscene_BombAttributes:
                 dc.l    Map_LBZKnuxBomb
                 dc.w    make_art_tile(ArtTile_LBZKnuxBomb,1,1)
                 dc.w    $80
                 dc.b    8,   8,   0,   0
-ObjDat3_6641A:
+SKSceneData_LBZ2PillarAttrs:
                 dc.l    Map_LBZKnuxPillar
                 dc.w    make_art_tile(ArtTile_Explosion,2,0)
                 dc.w    $280
@@ -51,12 +51,12 @@ ObjDat_LBZKnuxPillar:
                 dc.w    make_art_tile(ArtTile_Explosion,2,0)
                 dc.w    $280
                 dc.b    $10, $80,   1,   0
-ObjDat3_66432:
+SKAizCutscene_CorkFloorAttributes:
                 dc.l    Map_AIZCorkFloor
                 dc.w    make_art_tile($001,2,0)
                 dc.w    $180
                 dc.b    $10, $18,   0,   0
-ObjDat3_6643E:
+SKSceneData_MHZ1PeeringAttrs:
                 dc.l    Map_MHZKnuxPeer
                 dc.w    make_art_tile(ArtTile_MHZKnuxPeer,1,0)
                 dc.w    $180
@@ -66,35 +66,35 @@ ObjDat_MHZ1CutsceneButton:
                 dc.w    make_art_tile(ArtTile_MHZ1CutsceneButton,0,0)
                 dc.w    $100
                 dc.b    $80, $80,   0,   0
-ObjDat3_66456:
+SKMhzActTwoCutscene_SwitchAttributes:
                 dc.l    Map_MHZKnuxSwitch
                 dc.w    make_art_tile(ArtTile_MHZKnuxSwitch,1,1)
                 dc.w    $300
                 dc.b    $10, $10,   0,   0
-ObjDat3_66462:
+SKMhzActOneCutscene_DoorAttributes:
                 dc.l    Map_MHZKnuxDoor
                 dc.w    make_art_tile(ArtTile_MHZMisc+$82,3,0)
                 dc.w    $80
                 dc.b    $10, $20,   0,   0
-ObjDat3_6646E:
+SKMhzSceneBossLeaf_Attributes:
                 dc.l    Map_MHZKnuxLeaves
                 dc.w    make_art_tile(ArtTile_MHZMisc+$21,3,1)
                 dc.w    0
                 dc.b    4,   4,   0,   0
-ObjDat3_6647A:
+SKLrzCutscene_BoulderAttributes:
                 dc.l    Map_LRZKnuxBoulder
                 dc.w    make_art_tile(ArtTile_LRZKnuxBoulder,2,0)
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-ObjDat3_66486:
+SKOpeningCutscene_BombAttributes:
                 dc.l    Map_KnuxIntroBomb
                 dc.w    make_art_tile(ArtTile_KnuxIntroBomb,1,0)
                 dc.w    $180
                 dc.b    $C, $10,   0,   0
-word_66492:
+SKOpeningBomb_FlamePartialAttributes:
                 dc.w    $100
                 dc.b    8,   8,   1,   0
-word_66498:
+SKOpeningBomb_SmokePartialAttributes:
                 dc.w    $100
                 dc.b    8,   8,   5,   0
 ObjDat_SSZCutsceneButton:
@@ -102,90 +102,90 @@ ObjDat_SSZCutsceneButton:
                 dc.w    make_art_tile(ArtTile_SSZCutsceneButton,0,0)
                 dc.w    $180
                 dc.b    $10,   8,   1,   0
-ObjDat3_664AA:
+SKSszCutscene_SmallDeathEggAttributes:
                 dc.l    Map_SSZDeathEggSmall
                 dc.w    make_art_tile(ArtTile_SSZDeathEggSmall,3,0)
                 dc.w    $380
                 dc.b    $3C, $30,   0,   0
-ObjSlot_664B6:
+SKSceneData_SSZDeathEggCloudSlotAttrs:
                 dc.w    1-1
                 dc.w    make_art_tile(ArtTile_SSZDeathEggCloud,3,0)
                 dc.w    $10,     2
                 dc.l    Map_SSZDeathEggCloud
                 dc.w    $280
                 dc.b    $40, $10,   0,   0
-ObjDat3_664C8:
+SKSszSmallDeathEgg_SpriteMaskAttributes:
                 dc.l    Map_SpriteMask
                 dc.w    make_art_tile($000,0,0)
                 dc.w    $200
                 dc.b    $40, $30,  $C,   0
-word_664D4:
+SKSceneData_SSZDeathEggPiecePartialAttrs:
                 dc.w    $300
                 dc.b    4, $1C,   1,   0
-word_664DA:
+SKSceneData_SSZDeathEggParticlePartAttrs:
                 dc.w    make_art_tile(ArtTile_SSZDeathEggSmall,0,0)
                 dc.w    $280
                 dc.b    8,   8,   4,   0
-ObjDat3_664E2:
+SKHpzKnuckles_FollowingDustAttributes:
                 dc.l    Map_DashDust
                 dc.w    make_art_tile(ArtTile_HPZKnuxBossDust,0,0)
                 dc.w    $80
                 dc.b    $10, $10,  $A,   0
-ObjDat3_664EE:
+SKHpzSszSceneShip_CoreAttributes:
                 dc.l    Map_RobotnikShip
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,1)
                 dc.w    0
                 dc.b    $1C, $20,  $A,   0
-ObjDat3_664FA:
+SKHpzSszCrane_LiftingHeadAttributes:
                 dc.l    Map_KnuxFinalBossCrane
                 dc.w    make_art_tile(ArtTile_HPZSSZBossCrane,0,1)
                 dc.w    $180
                 dc.b    $14, $14,   0,   0
-word_66506:
+SKSceneData_CraneFrameFollowerPartAttrs:
                 dc.w    $280
                 dc.b    $10,  $C,   1,   0
-word_6650C:
+SKSceneData_CraneOffsetFollowerPartAttrs:
                 dc.w    $180
                 dc.b    4, $80,   4,   0
-ObjDat3_66512:
+SKHpzEmeraldLift_InitialSparkAttributes:
                 dc.l    Map_HPZEmeraldMisc
                 dc.w    make_art_tile(ArtTile_HPZEmeraldMisc,0,1)
                 dc.w    0
                 dc.b    $C,  $C, $12,   0
-ObjDat3_6651E:
+SKSceneData_HPZEmeraldFragmentAttrs:
                 dc.l    Map_HPZEmeraldMisc
                 dc.w    make_art_tile(ArtTile_HPZEmeraldMisc,2,0)
                 dc.w    $180
                 dc.b    4,   8, $18,   0
-ObjDat3_6652A:
+SKHpzCrane_ChainBranchRootAttributes:
                 dc.l    Map_KnuxFinalBossCrane
                 dc.w    make_art_tile(ArtTile_HPZSSZBossCrane,0,0)
                 dc.w    0
                 dc.b    8,   8, $12,   0
-word_66536:
+SKHpzCrane_ChainSegmentPartialAttributes:
                 dc.w    0
                 dc.b    8,   8, $12,   0
-ObjDat3_6653C:
+SKHpzEscape_PlatformAttributes:
                 dc.l    Map_LRZ3Platform
                 dc.w    make_art_tile($001,2,1)
                 dc.w    0
                 dc.b    $10, $20,   6,   0
-word_66548:
+SKSceneData_HPZPlatformFragmentPartAttrs:
                 dc.w    0
                 dc.b    4,   4,   7,   0
-ObjDat3_6654E:
+SKHpzKnuckles_DizzyStarsAttributes:
                 dc.l    Map_HPZKnuxDizzyStars
                 dc.w    make_art_tile(ArtTile_HPZKnuxDizzy,1,0)
                 dc.w    $180
                 dc.b    $C,   4,   1,   0
-ChildObjDat_6655A:
+SKSceneData_AIZ2SolidChildren:
                 dc.w    1-1
-                dc.l    loc_620EA
-ChildObjDat_66560:
+                dc.l    SKAIZScene_ResolveAct2SolidChild
+SKSceneData_CNZ2TallSolidChildren:
                 dc.w    1-1
-                dc.l    loc_62458
+                dc.l    SKCNZScene_ResolveInvisibleSolidChild
                 dc.b    -$20,-$6C
-ChildObjDat_66568:
+SKSceneData_CNZ2CameraRestoreChildren:
                 dc.w    3-1
                 dc.l    Obj_DecLevStartYGradual
                 dc.b    0,   0
@@ -193,115 +193,115 @@ ChildObjDat_66568:
                 dc.b    0,   0
                 dc.l    Obj_IncLevEndXGradual
                 dc.b    0,   0
-ChildObjDat_6657C:
+SKSceneData_LBZ1RangeLockChildren:
                 dc.w    1-1
-                dc.l    loc_627C6
+                dc.l    SKLBZScene_CheckPlayersAndSignalP1
                 dc.b    -$40,   0
-ChildObjDat_66584:
+SKLbzActOneCutscene_BombSpawnList:
                 dc.w    1-1
-                dc.l    loc_6282A
+                dc.l    SKLBZScene_InitBombAndPlaySound
                 dc.b    -8,-$10
-ChildObjDat_6658C:
+SKSceneData_LBZ1RisingExplosionChildren:
                 dc.w    4-1
-                dc.l    loc_6285A
-ChildObjDat_66592:
+                dc.l    SKLBZScene_InitExplosionColumn
+SKSceneData_LBZ2PillarChildren:
                 dc.w    4-1
-                dc.l    loc_629CE
+                dc.l    SKLBZScene_InitPillarMotionAndRestX
                 dc.b    2, $24
-ChildObjDat_6659A:
+SKSceneData_AIZ1CorkFloorChildren:
                 dc.w    1-1
-                dc.l    loc_61F60
+                dc.l    SKAIZScene_InitCorkAndCheckParent
                 dc.b    0, $18
-ChildObjDat_665A2:
+SKHczActTwoCutscene_ButtonChildSpawnList:
                 dc.w    1-1
                 dc.l    Obj_CutsceneButton
                 dc.b    0,  $C
-ChildObjDat_665AA:
+SKSceneData_MHZ1KnuxDispatcherChildren:
                 dc.w    1-1
                 dc.l    Obj_CutsceneKnuckles
-ChildObjDat_665B0:
+SKSceneData_MHZ1PeeringChildren:
                 dc.w    1-1
-                dc.l    loc_62F72
-ChildObjDat_665B6:
+                dc.l    MHZ1Scene_InitPeerAndStartEightStepRun
+SKMhzActOneCutscene_DoorSpawnList:
                 dc.w    1-1
-                dc.l    loc_6300C
-ChildObjDat_665BC:
+                dc.l    MHZ1Scene_InitDoorAndLinkButton
+SKMhzActTwoCutscene_SwitchChildSpawnList:
                 dc.w    1-1
-                dc.l    loc_632CA
+                dc.l    MHZ2Scene_InitLinkedOrStandaloneSwitch
                 dc.b    -8,   0
-ChildObjDat_665C4:
+SKSceneData_SSZDeathEggCompositeChildren:
                 dc.w    7-1
-                dc.l    loc_65B0E
+                dc.l    SSZScene_InitBackgroundSpriteMask
                 dc.b    0,   0
-                dc.l    loc_65A8C
+                dc.l    SSZScene_DispatchMoveAndDrawCloud
                 dc.b    0,-$33
-                dc.l    loc_65B42
+                dc.l    SSZScene_InitTimedChildEffect
                 dc.b    -$20, $1D
-                dc.l    loc_65B42
+                dc.l    SSZScene_InitTimedChildEffect
                 dc.b    -$10, $1D
-                dc.l    loc_65B42
+                dc.l    SSZScene_InitTimedChildEffect
                 dc.b    8, $1D
-                dc.l    loc_65B42
+                dc.l    SSZScene_InitTimedChildEffect
                 dc.b    $10, $1D
-                dc.l    loc_65B42
+                dc.l    SSZScene_InitTimedChildEffect
                 dc.b    $28, $1D
-ChildObjDat_665F0:
+SKSceneData_SSZDeathEggParticleChildren:
                 dc.w    1-1
-                dc.l    loc_65B70
-ChildObjDat_665F6:
+                dc.l    SSZScene_InitSmallEggParticle
+SKSszCutscene_SmallDeathEggRootSpawnList:
                 dc.w    1-1
-                dc.l    loc_659CC
-ChildObjDat_665FC:
+                dc.l    SSZScene_InitSmallDeathEggAndPalette
+SKHpzEncounter_SpinPhaseDustSpawnList:
                 dc.w    1-1
-                dc.l    loc_64C24
-ChildObjDat_66602:
+                dc.l    HPZKnux_InitDustAndCheckDashGate
+SKSceneData_HPZCameraExplosionChildren:
                 dc.w    $10-1
-                dc.l    loc_652A2
-ChildObjDat_66608:
+                dc.l    HPZEffect_InitDelayedExplosion
+SKHpzShip_LiftingCraneHeadSpawnList:
                 dc.w    1-1
-                dc.l    loc_6502E
+                dc.l    HPZShipCrane_InitOverlayAndBeam
                 dc.b    0, $23
-ChildObjDat_66610:
+SKSceneData_CraneFollowerChildren:
                 dc.w    2-1
-                dc.l    loc_65138
+                dc.l    HPZShipCrane_InitCraneOverlay
                 dc.b    0,   0
-                dc.l    loc_6515E
+                dc.l    HPZShipCrane_InitCraneBeam
                 dc.b    0,-$30
-ChildObjDat_6661E:
+SKSceneData_HPZEmeraldSparkChildren:
                 dc.w    $F-1
-                dc.l    loc_6518A
-ChildSpriteDat_66624:
+                dc.l    HPZEffect_InitSparkAndTickDelay
+SKHpzShip_TwoCraneBranchRootsSpawnList:
                 dc.w    2-1
-                dc.l    loc_6531E
+                dc.l    HPZEffect_InitCraneRootAndSelectGroup
                 dc.b    8,  -4
-ChildObjDat3_6662C:
+SKHpzCrane_NegativePhaseChainSpawnList:
                 dc.w    $A-1
-                dc.l    loc_65376
-ChildObjDat3_66632:
+                dc.l    HPZCrane_InitNegativePhase
+SKHpzCrane_PositivePhaseChainSpawnList:
                 dc.w    $A-1
-                dc.l    loc_65360
-ChildObjDat_66638:
+                dc.l    HPZCrane_InitSecondTargetBank
+SKSceneData_HPZEmeraldFragmentChildren:
                 dc.w    5-1
-                dc.l    loc_65226
-ChildObjDat_6663E:
+                dc.l    HPZEffect_InitEmeraldPiece
+SKHpzEscape_PlatformSpawnList:
                 dc.w    1-1
-                dc.l    loc_655B2
-ChildObjDat_66644:
+                dc.l    HPZScenePlatform_InitFixedPosition
+SKHpzKnuckles_DizzyStarsSpawnList:
                 dc.w    1-1
-                dc.l    loc_6563A
-ChildObjDat_6664A:
+                dc.l    HPZScenePlatform_InitDizzyStarsLifetime
+SKSceneData_HPZPlatformFragmentChildren:
                 dc.w    $20-1
-                dc.l    loc_65602
-ChildObjDat_66650:
+                dc.l    HPZScenePlatform_InitFragmentAndScatter
+SKSceneData_OpeningBombExplosionChildren:
                 dc.w    $A-1
-                dc.l    loc_6395C
-ChildObjDat_66656:
+                dc.l    KnuxOpening_InitDelayedExplosion
+SKOpeningCutscene_EightAnimalSpawnList:
                 dc.w    8-1
-                dc.l    loc_63694
-ChildObjDat_6665C:
+                dc.l    KnuxOpening_SelectAnimalPosAndBounds
+SKOpeningBomb_FlameChildSpawnList:
                 dc.w    1-1
-                dc.l    loc_638DC
+                dc.l    KnuxOpening_InitAttachedBombFlame
                 dc.b    0,-$14
-ChildObjDat_66664:
+SKOpeningBomb_EmittedSmokeSpawnList:
                 dc.w    1-1
-                dc.l    loc_63916
+                dc.l    KnuxOpening_InitSmokeDrift

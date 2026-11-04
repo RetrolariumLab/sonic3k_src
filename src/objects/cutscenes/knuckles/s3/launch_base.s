@@ -13,20 +13,20 @@ CutsceneKnux_LBZ1:
                 jmp     (Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_LBZ1_Index:
-                dc.w    loc_44FE8-CutsceneKnux_LBZ1_Index
-                dc.w    loc_45022-CutsceneKnux_LBZ1_Index
-                dc.w    loc_449A2-CutsceneKnux_LBZ1_Index
-                dc.w    loc_4505E-CutsceneKnux_LBZ1_Index
-                dc.w    loc_449A2-CutsceneKnux_LBZ1_Index
-                dc.w    loc_44CC4-CutsceneKnux_LBZ1_Index
-                dc.w    loc_44CC4-CutsceneKnux_LBZ1_Index
-                dc.w    loc_450E8-CutsceneKnux_LBZ1_Index
+                dc.w    S3LBZScene_InitAct1IfP1IsLeft-CutsceneKnux_LBZ1_Index
+                dc.w    S3LBZScene_WaitForPrimaryRangeSignal-CutsceneKnux_LBZ1_Index
+                dc.w    S3AIZScene_TickSharedWordWait-CutsceneKnux_LBZ1_Index
+                dc.w    S3LBZScene_AnimateThrow-CutsceneKnux_LBZ1_Index
+                dc.w    S3AIZScene_TickSharedWordWait-CutsceneKnux_LBZ1_Index
+                dc.w    S3CNZScene_AnimateAndTickSharedWait-CutsceneKnux_LBZ1_Index
+                dc.w    S3CNZScene_AnimateAndTickSharedWait-CutsceneKnux_LBZ1_Index
+                dc.w    S3LBZScene_WalkWhilePreviouslyVisible-CutsceneKnux_LBZ1_Index
 ; ---------------------------------------------------------------------------
 
-loc_44FE8:
+S3LBZScene_InitAct1IfP1IsLeft:
                 move.w  (Player_1+x_pos).w,d0
                 cmp.w   x_pos(a0),d0
-                bhs.s   loc_4501C
+                bhs.s   S3LBZScene_DeleteIfP1PassedTrigger
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.b  #$16,mapping_frame(a0)
@@ -37,39 +37,39 @@ loc_44FE8:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_4501C:
+S3LBZScene_DeleteIfP1PassedTrigger:
                 jmp     (Go_Delete_SpriteSlotted2).l
 ; ---------------------------------------------------------------------------
 
-loc_45022:
+S3LBZScene_WaitForPrimaryRangeSignal:
                 btst    #3,$38(a0)
-                bne.s   loc_4502C
+                bne.s   S3LBZScene_PlayMusicAndWait60
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4502C:
+S3LBZScene_PlayMusicAndWait60:
                 move.b  #4,routine(a0)
                 bsr.w   SpawnKnucklesCutsceneMusicTransition
                 move.w  #60-1,$2E(a0)
-                move.l  #loc_45046,$34(a0)
+                move.l  #S3LBZScene_SetThrowAnimAndCallback,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_45046:
+S3LBZScene_SetThrowAnimAndCallback:
                 move.b  #6,routine(a0)
                 move.l  #S3KnuxScene_LBZBombThrowAnim,$30(a0)
-                move.l  #loc_45064,$34(a0)
+                move.l  #S3LBZScene_ThrowBombAndQueueArt,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4505E:
+S3LBZScene_AnimateThrow:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_45064:
+S3LBZScene_ThrowBombAndQueueArt:
                 move.b  #8,routine(a0)
                 move.w  #$F,$2E(a0)
-                move.l  #loc_45096,$34(a0)
+                move.l  #S3LBZScene_BeginIdleBeforeShake,$34(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
                 lea     S3KnuxScene_LBZBombChild(pc),a2
@@ -78,23 +78,23 @@ loc_45064:
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_45096:
+S3LBZScene_BeginIdleBeforeShake:
                 move.b  #$A,routine(a0)
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_450AE,$34(a0)
-                bra.w   loc_449E4
+                move.l  #S3LBZScene_StartShakeAndTryExplosions,$34(a0)
+                bra.w   S3AIZScene_ResetSharedIdleAnim
 ; ---------------------------------------------------------------------------
 
-loc_450AE:
+S3LBZScene_StartShakeAndTryExplosions:
                 move.b  #$C,routine(a0)
                 st      (Screen_shake_flag).w
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_450D0,$34(a0)
+                move.l  #S3LBZScene_BeginEscapeWalk,$34(a0)
                 lea     S3KnuxScene_LBZRisingExplosions(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_450D0:
+S3LBZScene_BeginEscapeWalk:
                 move.b  #$E,routine(a0)
                 move.l  #S3KnuxScene_RunAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
@@ -102,14 +102,14 @@ loc_450D0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_450E8:
+S3LBZScene_WalkWhilePreviouslyVisible:
                 tst.b   render_flags(a0)
-                bpl.w   loc_450FA
+                bpl.w   S3LBZScene_ReleasePlayersAndCamera
                 addq.w  #2,x_pos(a0)
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_450FA:
+S3LBZScene_ReleasePlayersAndCamera:
                 clr.b   (_unkFAA9).w
                 clr.b   (Player_1+object_control).w
                 clr.b   (Player_2+object_control).w
@@ -123,31 +123,31 @@ loc_450FA:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_45136:
+S3LBZScene_CheckPlayersAndSignalP1:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4516E
-                lea     word_45196(pc),a1
+                bne.s   S3LBZScene_DeleteRangeChild
+                lea     S3LBZScene_PlayerTriggerBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
-                beq.s   locret_4516C
+                beq.s   S3LBZScene_RangeChildReturn
                 tst.w   d0
-                beq.s   loc_45162
+                beq.s   S3LBZScene_CheckSecondaryRange
                 movea.w parent3(a0),a2
                 bset    #3,$38(a2)
                 bsr.w   S3LBZScene_LockPlayerFacingRight
 
-loc_45162:
+S3LBZScene_CheckSecondaryRange:
                 swap    d0
                 tst.w   d0
-                beq.s   locret_4516C
+                beq.s   S3LBZScene_RangeChildReturn
                 bsr.w   S3LBZScene_LockPlayerFacingRight
 
-locret_4516C:
+S3LBZScene_RangeChildReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4516E:
+S3LBZScene_DeleteRangeChild:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -157,7 +157,7 @@ S3LBZScene_LockPlayerFacingRight:
                 st      (_unkFAA9).w
                 movea.w d0,a1
                 cmpi.b  #6,routine(a1)
-                bhs.s   locret_4516C
+                bhs.s   S3LBZScene_RangeChildReturn
                 move.b  #$81,object_control(a1)
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
@@ -165,44 +165,44 @@ S3LBZScene_LockPlayerFacingRight:
 ; End of function S3LBZScene_LockPlayerFacingRight
 
 ; ---------------------------------------------------------------------------
-word_45196:
+S3LBZScene_PlayerTriggerBounds:
                 dc.w    -$40,   $80,  -$30,   $60
 ; ---------------------------------------------------------------------------
 
-loc_4519E:
+S3LBZScene_InitBombAndPlaySound:
                 lea     S3KnuxScene_LBZBombAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_451C2,(a0)
+                move.l  #S3LBZScene_MoveBombAndCull,(a0)
                 move.w  #-$200,x_vel(a0)
                 move.w  #-$400,y_vel(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
 
-loc_451C2:
+S3LBZScene_MoveBombAndCull:
                 jsr     (MoveSprite_LightGravity).l
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_451CE:
-                move.l  #loc_4520C,(a0)
+S3LBZScene_InitExplosionColumn:
+                move.l  #S3LBZScene_RaiseExplosionAndTickTimer,(a0)
                 move.l  #Obj_NormalExpControl,$34(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                lea     word_451FC(pc,d0.w),a1
+                lea     S3LBZScene_ExplosionPositionsBySubtype(pc,d0.w),a1
                 move.w  (a1)+,x_pos(a0)
                 move.w  (a1)+,y_pos(a0)
                 move.b  #$A,subtype(a0)
                 jmp     (S3BossExpl_LoadSubtypeParams).l
 ; ---------------------------------------------------------------------------
-word_451FC:
+S3LBZScene_ExplosionPositionsBySubtype:
                 dc.w    $3BC0,  $1A0
                 dc.w    $3B80,  $1A0
                 dc.w    $3B40,  $1A0
                 dc.w    $3B00,  $1A0
 ; ---------------------------------------------------------------------------
 
-loc_4520C:
+S3LBZScene_RaiseExplosionAndTickTimer:
                 subq.w  #4,y_pos(a0)
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
@@ -217,16 +217,16 @@ CutsceneKnux_LBZ2:
                 jmp     (Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_LBZ2_Index:
-                dc.w    loc_45242-CutsceneKnux_LBZ2_Index
-                dc.w    loc_45270-CutsceneKnux_LBZ2_Index
-                dc.w    loc_4528A-CutsceneKnux_LBZ2_Index
-                dc.w    loc_452A4-CutsceneKnux_LBZ2_Index
-                dc.w    loc_452C6-CutsceneKnux_LBZ2_Index
-                dc.w    loc_4530A-CutsceneKnux_LBZ2_Index
-                dc.w    loc_45322-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_InitAct2AndFourPillars-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_WaitForAct2Signal-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_AnimateReaction-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_SelectShakeAnim-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_FollowBGUntilPillarRelease-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_SplashAtWaterlineOnce-CutsceneKnux_LBZ2_Index
+                dc.w    S3LBZScene_ApplyBGDeltaAndGravity-CutsceneKnux_LBZ2_Index
 ; ---------------------------------------------------------------------------
 
-loc_45242:
+S3LBZScene_InitAct2AndFourPillars:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 bset    #0,render_flags(a0)
@@ -238,158 +238,158 @@ loc_45242:
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_45270:
+S3LBZScene_WaitForAct2Signal:
                 btst    #1,$38(a0)
-                bne.s   loc_4527A
+                bne.s   S3LBZScene_SelectReactionAndCallback
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4527A:
+S3LBZScene_SelectReactionAndCallback:
                 move.b  #4,routine(a0)
-                move.l  #loc_45294,$34(a0)
+                move.l  #S3LBZScene_FaceRightAndResetIdle,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4528A:
+S3LBZScene_AnimateReaction:
                 lea     S3KnuxScene_LBZSecondSceneAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_45294:
+S3LBZScene_FaceRightAndResetIdle:
                 move.b  #6,routine(a0)
                 bclr    #0,render_flags(a0)
-                bra.w   loc_449E4
+                bra.w   S3AIZScene_ResetSharedIdleAnim
 ; ---------------------------------------------------------------------------
 
-loc_452A4:
+S3LBZScene_SelectShakeAnim:
                 tst.b   (Screen_shake_flag).w
-                beq.s   loc_452C0
+                beq.s   S3LBZScene_AnimateAfterShakeCheck
                 move.b  #8,routine(a0)
                 move.l  #S3KnuxScene_LBZIdleAnim,$30(a0)
                 clr.b   anim_frame_timer(a0)
                 clr.b   anim_frame(a0)
 
-loc_452C0:
+S3LBZScene_AnimateAfterShakeCheck:
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_452C6:
+S3LBZScene_FollowBGUntilPillarRelease:
                 btst    #3,$38(a0)
-                bne.s   loc_452DC
+                bne.s   S3LBZScene_BeginFallAndTryMusicFade
                 move.w  (Events_bg+$14).w,d0
                 add.w   d0,y_pos(a0)
                 jmp     (Animate_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_452DC:
+S3LBZScene_BeginFallAndTryMusicFade:
                 move.b  #$A,routine(a0)
                 bset    #0,render_flags(a0)
                 move.b  #9,mapping_frame(a0)
                 move.w  #$200,x_vel(a0)
                 move.w  #-$100,y_vel(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_45308
+                bne.s   S3LBZScene_ReleaseMusicReturn
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-locret_45308:
+S3LBZScene_ReleaseMusicReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4530A:
+S3LBZScene_SplashAtWaterlineOnce:
                 move.w  y_pos(a0),d0
                 cmp.w   (Water_level).w,d0
-                blo.s   loc_45322
+                blo.s   S3LBZScene_ApplyBGDeltaAndGravity
                 moveq   #signextendB(sfx_Splash),d0
                 jsr     (Play_SFX).l
                 move.b  #$C,routine(a0)
 
-loc_45322:
+S3LBZScene_ApplyBGDeltaAndGravity:
                 move.w  (Events_bg+$14).w,d0
                 add.w   d0,y_pos(a0)
                 jmp     (MoveSprite_LightGravity).l
 ; ---------------------------------------------------------------------------
 
-loc_45330:
+S3LBZScene_InitPillarMotionAndRestX:
                 lea     S3KnuxScene_LBZPillarAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_4536C,(a0)
+                move.l  #S3LBZScene_WaitForShakeToMovePillar,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                move.l  word_4535C(pc,d0.w),$3E(a0)
+                move.l  S3LBZScene_PillarMotionPairs(pc,d0.w),$3E(a0)
                 lsl.w   #3,d0
                 add.w   d0,y_pos(a0)
                 move.w  x_pos(a0),$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
-word_4535C:
+S3LBZScene_PillarMotionPairs:
                 dc.w    $100,   $10
                 dc.w    $C0,    $C
                 dc.w    $80,     8
                 dc.w    $40,     4
 ; ---------------------------------------------------------------------------
 
-loc_4536C:
+S3LBZScene_WaitForShakeToMovePillar:
                 tst.b   (Screen_shake_flag).w
-                beq.s   loc_45384
-                move.l  #loc_4538A,(a0)
+                beq.s   S3LBZScene_DrawWaitingPillar
+                move.l  #S3LBZScene_ApplyBGDeltaAndCheckRestSide,(a0)
                 move.w  $3E(a0),x_vel(a0)
                 move.b  #6,$39(a0)
 
-loc_45384:
+S3LBZScene_DrawWaitingPillar:
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_4538A:
+S3LBZScene_ApplyBGDeltaAndCheckRestSide:
                 move.w  (Events_bg+$14).w,d0
                 add.w   d0,y_pos(a0)
                 move.w  x_pos(a0),d0
                 move.w  $40(a0),d1
                 cmp.w   $3A(a0),d0
                 scs     d2
-                bcs.s   loc_453A4
+                bcs.s   S3LBZScene_AccelerateAndCheckSide
                 neg.w   d1
 
-loc_453A4:
+S3LBZScene_AccelerateAndCheckSide:
                 add.w   d1,x_vel(a0)
                 cmp.b   $3C(a0),d2
-                beq.s   loc_453E4
+                beq.s   S3LBZScene_MovePillarAndMaybeCarryX
                 move.b  d2,$3C(a0)
                 cmpi.b  #3,$39(a0)
-                bne.s   loc_453CE
+                bne.s   S3LBZScene_TickCrossingsAndSignalParent
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
-                move.l  word_45400(pc,d0.w),$3E(a0)
+                move.l  S3LBZScene_FastPillarMotionPairs(pc,d0.w),$3E(a0)
                 move.w  $3E(a0),x_vel(a0)
 
-loc_453CE:
+S3LBZScene_TickCrossingsAndSignalParent:
                 subq.b  #1,$39(a0)
-                bne.s   loc_453E4
-                move.l  #loc_45410,(a0)
+                bne.s   S3LBZScene_MovePillarAndMaybeCarryX
+                move.l  #S3LBZScene_FallPillarWithBGAndCull,(a0)
                 movea.w parent3(a0),a1
                 bset    #3,$38(a1)
 
-loc_453E4:
+S3LBZScene_MovePillarAndMaybeCarryX:
                 jsr     (MoveSprite2).l
                 tst.b   subtype(a0)
-                bne.s   loc_453FA
+                bne.s   S3LBZScene_CullOrDrawPillar
                 movea.w parent3(a0),a1
                 move.w  x_pos(a0),x_pos(a1)
 
-loc_453FA:
+S3LBZScene_CullOrDrawPillar:
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
-word_45400:
+S3LBZScene_FastPillarMotionPairs:
                 dc.w    $200,   $20
                 dc.w    $180,   $18
                 dc.w    $100,   $10
                 dc.w    $80,     8
 ; ---------------------------------------------------------------------------
 
-loc_45410:
+S3LBZScene_FallPillarWithBGAndCull:
                 move.w  (Events_bg+$14).w,d0
                 add.w   d0,y_pos(a0)
                 jsr     (MoveSprite_LightGravity).l
                 jmp     (Sprite_CheckDeleteXY).l
-; End of function loc_45410
+; End of function S3LBZScene_FallPillarWithBGAndCull

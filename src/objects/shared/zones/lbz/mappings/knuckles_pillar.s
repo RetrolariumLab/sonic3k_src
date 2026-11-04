@@ -1,11 +1,11 @@
 ; Data owner: objects/shared/zones/lbz
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_LBZKnuxPillar_:
-                dc.w    word_62B00-Map_LBZKnuxPillar_
-                dc.w    word_62B08-Map_LBZKnuxPillar_
-word_62B00:     dc.w    1
+                dc.w    LBZKnucklesPillarSharedData_MapSlot00-Map_LBZKnuxPillar_
+                dc.w    LBZKnucklesPillarSharedData_MapSlot01-Map_LBZKnuxPillar_
+LBZKnucklesPillarSharedData_MapSlot00:  dc.w    1
                 dc.b    $F0,  $F,   0,   0, $FF, $F0
-word_62B08:     dc.w    8
+LBZKnucklesPillarSharedData_MapSlot01:  dc.w    8
                 dc.b    $80,  $F,   0,   0, $FF, $F0
                 dc.b    $A0,  $F,   0,   0, $FF, $F0
                 dc.b    $C0,  $F,   0,   0, $FF, $F0

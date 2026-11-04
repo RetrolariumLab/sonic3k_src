@@ -11234,46 +11234,46 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 354
       },
-      "declarations_sha256": "2192f9fb244a1e4ba16d9946fcb04440feee115a12daa5cef6d6ad06232afc29",
+      "declarations_sha256": "6584ad08b33c40a0fd0814ff9e5243aaa842d0050d124e8c8465c7aeb9ff5f48",
       "labels": {
         "DPLC_CutsceneKnux_": 0,
-        "Frame_364358": 74,
-        "Frame_36435C": 78,
-        "Frame_364366": 88,
-        "Frame_364370": 98,
-        "Frame_36437A": 108,
-        "Frame_36437E": 112,
-        "Frame_364382": 116,
-        "Frame_364386": 120,
-        "Frame_36438A": 124,
-        "Frame_36438E": 128,
-        "Frame_364398": 138,
-        "Frame_3643A2": 148,
-        "Frame_3643AA": 156,
-        "Frame_3643B2": 164,
-        "Frame_3643B8": 170,
-        "Frame_3643C2": 180,
-        "Frame_3643CC": 190,
-        "Frame_3643D4": 198,
-        "Frame_3643DE": 208,
-        "Frame_3643E4": 214,
-        "Frame_3643EA": 220,
-        "Frame_3643F0": 226,
-        "Frame_3643F6": 232,
-        "Frame_3643FC": 238,
-        "Frame_364406": 248,
-        "Frame_36440E": 256,
-        "Frame_364418": 266,
-        "Frame_364422": 276,
-        "Frame_364428": 282,
-        "Frame_364430": 290,
-        "Frame_364438": 298,
-        "Frame_364440": 306,
-        "Frame_364448": 314,
-        "Frame_36444E": 320,
-        "Frame_364454": 326,
-        "Frame_36445E": 336,
-        "Frame_364466": 344
+        "S3CutsceneKnucklesDplc_Frame00": 74,
+        "S3CutsceneKnucklesDplc_Frame01": 78,
+        "S3CutsceneKnucklesDplc_Frame02": 88,
+        "S3CutsceneKnucklesDplc_Frame03": 98,
+        "S3CutsceneKnucklesDplc_Frame04": 108,
+        "S3CutsceneKnucklesDplc_Frame05": 112,
+        "S3CutsceneKnucklesDplc_Frame06": 116,
+        "S3CutsceneKnucklesDplc_Frame07": 120,
+        "S3CutsceneKnucklesDplc_Frame08": 124,
+        "S3CutsceneKnucklesDplc_Frame09": 128,
+        "S3CutsceneKnucklesDplc_Frame0A": 138,
+        "S3CutsceneKnucklesDplc_Frame0B": 148,
+        "S3CutsceneKnucklesDplc_Frame0C": 156,
+        "S3CutsceneKnucklesDplc_Frame0D": 164,
+        "S3CutsceneKnucklesDplc_Frame0E": 170,
+        "S3CutsceneKnucklesDplc_Frame0F": 180,
+        "S3CutsceneKnucklesDplc_Frame10": 190,
+        "S3CutsceneKnucklesDplc_Frame11": 198,
+        "S3CutsceneKnucklesDplc_Frame12": 208,
+        "S3CutsceneKnucklesDplc_Frame13": 214,
+        "S3CutsceneKnucklesDplc_Frame14": 220,
+        "S3CutsceneKnucklesDplc_Frame15": 226,
+        "S3CutsceneKnucklesDplc_Frame16": 232,
+        "S3CutsceneKnucklesDplc_Frame17": 238,
+        "S3CutsceneKnucklesDplc_Frame18": 248,
+        "S3CutsceneKnucklesDplc_Frame19": 256,
+        "S3CutsceneKnucklesDplc_Frame1A": 266,
+        "S3CutsceneKnucklesDplc_Frame1B": 276,
+        "S3CutsceneKnucklesDplc_Frame1C": 282,
+        "S3CutsceneKnucklesDplc_Frame1D": 290,
+        "S3CutsceneKnucklesDplc_Frame1E": 298,
+        "S3CutsceneKnucklesDplc_Frame1F": 306,
+        "S3CutsceneKnucklesDplc_Frame20": 314,
+        "S3CutsceneKnucklesDplc_Frame21": 320,
+        "S3CutsceneKnucklesDplc_Frame22": 326,
+        "S3CutsceneKnucklesDplc_Frame23": 336,
+        "S3CutsceneKnucklesDplc_Frame24": 344
       },
       "external_symbols": [],
       "blocks": [
@@ -11281,259 +11281,259 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364358",
+          "target": "S3CutsceneKnucklesDplc_Frame00",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36435C",
+          "target": "S3CutsceneKnucklesDplc_Frame01",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364366",
+          "target": "S3CutsceneKnucklesDplc_Frame02",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364370",
+          "target": "S3CutsceneKnucklesDplc_Frame03",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36437A",
+          "target": "S3CutsceneKnucklesDplc_Frame04",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36437E",
+          "target": "S3CutsceneKnucklesDplc_Frame05",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364382",
+          "target": "S3CutsceneKnucklesDplc_Frame06",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364386",
+          "target": "S3CutsceneKnucklesDplc_Frame07",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36438A",
+          "target": "S3CutsceneKnucklesDplc_Frame08",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36438E",
+          "target": "S3CutsceneKnucklesDplc_Frame09",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364398",
+          "target": "S3CutsceneKnucklesDplc_Frame0A",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643A2",
+          "target": "S3CutsceneKnucklesDplc_Frame0B",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643AA",
+          "target": "S3CutsceneKnucklesDplc_Frame0C",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643B2",
+          "target": "S3CutsceneKnucklesDplc_Frame0D",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643B8",
+          "target": "S3CutsceneKnucklesDplc_Frame0E",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643C2",
+          "target": "S3CutsceneKnucklesDplc_Frame0F",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643CC",
+          "target": "S3CutsceneKnucklesDplc_Frame10",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643D4",
+          "target": "S3CutsceneKnucklesDplc_Frame11",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643DE",
+          "target": "S3CutsceneKnucklesDplc_Frame12",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643E4",
+          "target": "S3CutsceneKnucklesDplc_Frame13",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643EA",
+          "target": "S3CutsceneKnucklesDplc_Frame14",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643F0",
+          "target": "S3CutsceneKnucklesDplc_Frame15",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643F6",
+          "target": "S3CutsceneKnucklesDplc_Frame16",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3643FC",
+          "target": "S3CutsceneKnucklesDplc_Frame17",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364406",
+          "target": "S3CutsceneKnucklesDplc_Frame18",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36440E",
+          "target": "S3CutsceneKnucklesDplc_Frame19",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364418",
+          "target": "S3CutsceneKnucklesDplc_Frame1A",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364422",
+          "target": "S3CutsceneKnucklesDplc_Frame1B",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364428",
+          "target": "S3CutsceneKnucklesDplc_Frame1C",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364430",
+          "target": "S3CutsceneKnucklesDplc_Frame1D",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364438",
+          "target": "S3CutsceneKnucklesDplc_Frame1E",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364440",
+          "target": "S3CutsceneKnucklesDplc_Frame1F",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364448",
+          "target": "S3CutsceneKnucklesDplc_Frame20",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36444E",
+          "target": "S3CutsceneKnucklesDplc_Frame21",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364454",
+          "target": "S3CutsceneKnucklesDplc_Frame22",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36445E",
+          "target": "S3CutsceneKnucklesDplc_Frame23",
           "base": "DPLC_CutsceneKnux_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364466",
+          "target": "S3CutsceneKnucklesDplc_Frame24",
           "base": "DPLC_CutsceneKnux_"
         },
         {
@@ -11732,28 +11732,28 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 158
       },
-      "declarations_sha256": "5947ffe5f38a88da5a9962bf0fe28ada19de59d7565307d4b7be06f0b924c53f",
+      "declarations_sha256": "c39c9436b70be0657f78ab7c4cfb33583b341329897036e375440b967e98e491",
       "labels": {
         "DPLC_HPZKnucklesGrab_": 0,
-        "word_6709E": 38,
-        "word_670A4": 44,
-        "word_670AA": 50,
-        "word_670B0": 56,
-        "word_670B6": 62,
-        "word_670BC": 68,
-        "word_670C2": 74,
-        "word_670C8": 80,
-        "word_670CE": 86,
-        "word_670D4": 92,
-        "word_670DA": 98,
-        "word_670E0": 104,
-        "word_670E8": 112,
-        "word_670F0": 120,
-        "word_670F6": 126,
-        "word_670FC": 132,
-        "word_67102": 138,
-        "word_6710A": 146,
-        "word_67110": 152
+        "SKKnucklesHPZGrabDplc_Frame00": 38,
+        "SKKnucklesHPZGrabDplc_Frame01": 44,
+        "SKKnucklesHPZGrabDplc_Frame02": 50,
+        "SKKnucklesHPZGrabDplc_Frame03": 56,
+        "SKKnucklesHPZGrabDplc_Frame04": 62,
+        "SKKnucklesHPZGrabDplc_Frame05": 68,
+        "SKKnucklesHPZGrabDplc_Frame06": 74,
+        "SKKnucklesHPZGrabDplc_Frame07": 80,
+        "SKKnucklesHPZGrabDplc_Frame08": 86,
+        "SKKnucklesHPZGrabDplc_Frame09": 92,
+        "SKKnucklesHPZGrabDplc_Frame0A": 98,
+        "SKKnucklesHPZGrabDplc_Frame0B": 104,
+        "SKKnucklesHPZGrabDplc_Frame0C": 112,
+        "SKKnucklesHPZGrabDplc_Frame0D": 120,
+        "SKKnucklesHPZGrabDplc_Frame0E": 126,
+        "SKKnucklesHPZGrabDplc_Frame0F": 132,
+        "SKKnucklesHPZGrabDplc_Frame10": 138,
+        "SKKnucklesHPZGrabDplc_Frame11": 146,
+        "SKKnucklesHPZGrabDplc_Frame12": 152
       },
       "external_symbols": [],
       "blocks": [
@@ -11761,133 +11761,133 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6709E",
+          "target": "SKKnucklesHPZGrabDplc_Frame00",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670A4",
+          "target": "SKKnucklesHPZGrabDplc_Frame01",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670AA",
+          "target": "SKKnucklesHPZGrabDplc_Frame02",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670B0",
+          "target": "SKKnucklesHPZGrabDplc_Frame03",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670B6",
+          "target": "SKKnucklesHPZGrabDplc_Frame04",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670BC",
+          "target": "SKKnucklesHPZGrabDplc_Frame05",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670C2",
+          "target": "SKKnucklesHPZGrabDplc_Frame06",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670C8",
+          "target": "SKKnucklesHPZGrabDplc_Frame07",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670CE",
+          "target": "SKKnucklesHPZGrabDplc_Frame08",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670D4",
+          "target": "SKKnucklesHPZGrabDplc_Frame09",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670DA",
+          "target": "SKKnucklesHPZGrabDplc_Frame0A",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670E0",
+          "target": "SKKnucklesHPZGrabDplc_Frame0B",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670E8",
+          "target": "SKKnucklesHPZGrabDplc_Frame0C",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670F0",
+          "target": "SKKnucklesHPZGrabDplc_Frame0D",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670F6",
+          "target": "SKKnucklesHPZGrabDplc_Frame0E",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_670FC",
+          "target": "SKKnucklesHPZGrabDplc_Frame0F",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67102",
+          "target": "SKKnucklesHPZGrabDplc_Frame10",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6710A",
+          "target": "SKKnucklesHPZGrabDplc_Frame11",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67110",
+          "target": "SKKnucklesHPZGrabDplc_Frame12",
           "base": "DPLC_HPZKnucklesGrab_"
         },
         {
@@ -11996,14 +11996,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 58
       },
-      "declarations_sha256": "dabb19bdb29e717029a5f98e2f62e4ebba102f91fc8499e44a5661d09a119265",
+      "declarations_sha256": "ad59a19db565e218844322288e0cc889ba33ea3db199528fe33d8230bcb5017c",
       "labels": {
         "DPLC_KnuxIntroLay_": 0,
-        "word_673E2": 10,
-        "word_673EC": 20,
-        "word_673F6": 30,
-        "word_67402": 42,
-        "word_67408": 48
+        "SKKnucklesIntroLayingDplc_Frame00": 10,
+        "SKKnucklesIntroLayingDplc_Frame01": 20,
+        "SKKnucklesIntroLayingDplc_Frame02": 30,
+        "SKKnucklesIntroLayingDplc_Frame03": 42,
+        "SKKnucklesIntroLayingDplc_Frame04": 48
       },
       "external_symbols": [],
       "blocks": [
@@ -12011,35 +12011,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_673E2",
+          "target": "SKKnucklesIntroLayingDplc_Frame00",
           "base": "DPLC_KnuxIntroLay_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_673EC",
+          "target": "SKKnucklesIntroLayingDplc_Frame01",
           "base": "DPLC_KnuxIntroLay_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_673F6",
+          "target": "SKKnucklesIntroLayingDplc_Frame02",
           "base": "DPLC_KnuxIntroLay_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67402",
+          "target": "SKKnucklesIntroLayingDplc_Frame03",
           "base": "DPLC_KnuxIntroLay_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67408",
+          "target": "SKKnucklesIntroLayingDplc_Frame04",
           "base": "DPLC_KnuxIntroLay_"
         },
         {
@@ -12078,13 +12078,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "166ba0e5a8bd9aad68be26d9b5d8a23683253a9123e3f284b09f3f0d5fdac570",
+      "declarations_sha256": "37ae1b864b14b4eb1f5c9ab6c13cd552c948a4ef72bede517e6eedb49a81efed",
       "labels": {
         "DPLC_MHZKnuxPress_": 0,
-        "word_66B18": 8,
-        "word_66B1E": 14,
-        "word_66B24": 20,
-        "word_66B2A": 26
+        "SKKnucklesMHZ2PressDplc_Frame00": 8,
+        "SKKnucklesMHZ2PressDplc_Frame01": 14,
+        "SKKnucklesMHZ2PressDplc_Frame02": 20,
+        "SKKnucklesMHZ2PressDplc_Frame03": 26
       },
       "external_symbols": [],
       "blocks": [
@@ -12092,28 +12092,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B18",
+          "target": "SKKnucklesMHZ2PressDplc_Frame00",
           "base": "DPLC_MHZKnuxPress_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B1E",
+          "target": "SKKnucklesMHZ2PressDplc_Frame01",
           "base": "DPLC_MHZKnuxPress_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B24",
+          "target": "SKKnucklesMHZ2PressDplc_Frame02",
           "base": "DPLC_MHZKnuxPress_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B2A",
+          "target": "SKKnucklesMHZ2PressDplc_Frame03",
           "base": "DPLC_MHZKnuxPress_"
         },
         {
@@ -12147,16 +12147,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 56
       },
-      "declarations_sha256": "27d45e728abbc9ca88cb877c69863da4c1e1d449ddd031b24cff4d4c09a54697",
+      "declarations_sha256": "574c0a0a29ad81f9f062cebdc786510b8a2fd568eb3ece7893319fabc3c3de7f",
       "labels": {
         "DPLC_SSZKnucklesTired_": 0,
-        "word_66BE8": 14,
-        "word_66BF0": 22,
-        "word_66BF6": 28,
-        "word_66BFC": 34,
-        "word_66C02": 40,
-        "word_66C08": 46,
-        "word_66C0C": 50
+        "SKKnucklesSSZTiredDplc_Frame00": 14,
+        "SKKnucklesSSZTiredDplc_Frame01": 22,
+        "SKKnucklesSSZTiredDplc_Frame02": 28,
+        "SKKnucklesSSZTiredDplc_Frame03": 34,
+        "SKKnucklesSSZTiredDplc_Frame04": 40,
+        "SKKnucklesSSZTiredDplc_Frame05": 46,
+        "SKKnucklesSSZTiredDplc_Frame06": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -12164,49 +12164,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BE8",
+          "target": "SKKnucklesSSZTiredDplc_Frame00",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BF0",
+          "target": "SKKnucklesSSZTiredDplc_Frame01",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BF6",
+          "target": "SKKnucklesSSZTiredDplc_Frame02",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BFC",
+          "target": "SKKnucklesSSZTiredDplc_Frame03",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66C02",
+          "target": "SKKnucklesSSZTiredDplc_Frame04",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66C08",
+          "target": "SKKnucklesSSZTiredDplc_Frame05",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66C0C",
+          "target": "SKKnucklesSSZTiredDplc_Frame06",
           "base": "DPLC_SSZKnucklesTired_"
         },
         {
@@ -12255,11 +12255,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 20
       },
-      "declarations_sha256": "172faa03815b225895567939547cf5fdaa78506ef1876d0be3509c5a63da8c23",
+      "declarations_sha256": "f2535d9c8ea1779cf2a7e2eec4f3948bcf23f066233d30470cc9eecd3e09eb7e",
       "labels": {
         "Map_MHZKnuxSwitch_": 0,
-        "word_66B34": 4,
-        "word_66B3C": 12
+        "SKKnucklesMHZSwitchMapping_Frame00": 4,
+        "SKKnucklesMHZSwitchMapping_Frame01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -12267,14 +12267,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B34",
+          "target": "SKKnucklesMHZSwitchMapping_Frame00",
           "base": "Map_MHZKnuxSwitch_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B3C",
+          "target": "SKKnucklesMHZSwitchMapping_Frame01",
           "base": "Map_MHZKnuxSwitch_"
         },
         {
@@ -12298,46 +12298,46 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 760
       },
-      "declarations_sha256": "ca3f648d4f7b2d094388412200ed754282cd603ef1b9162b95452847ac3ea249",
+      "declarations_sha256": "5eb3c918f86e4001bca2dd138993c4e85384904d831d61c3c4ce13e456104d9a",
       "labels": {
         "Map_CutsceneKnux_": 0,
-        "Frame_364060": 74,
-        "Frame_364062": 76,
-        "Frame_36407C": 102,
-        "Frame_364096": 128,
-        "Frame_3640B0": 154,
-        "Frame_3640B8": 162,
-        "Frame_3640C0": 170,
-        "Frame_3640C8": 178,
-        "Frame_3640D0": 186,
-        "Frame_3640D8": 194,
-        "Frame_3640F2": 220,
-        "Frame_36410C": 246,
-        "Frame_364120": 266,
-        "Frame_364134": 286,
-        "Frame_364142": 300,
-        "Frame_36415C": 326,
-        "Frame_364176": 352,
-        "Frame_36418A": 372,
-        "Frame_3641A4": 398,
-        "Frame_3641B2": 412,
-        "Frame_3641C0": 426,
-        "Frame_3641CE": 440,
-        "Frame_3641DC": 454,
-        "Frame_3641EA": 468,
-        "Frame_364204": 494,
-        "Frame_364218": 514,
-        "Frame_364232": 540,
-        "Frame_36424C": 566,
-        "Frame_36425A": 580,
-        "Frame_36426E": 600,
-        "Frame_364282": 620,
-        "Frame_364296": 640,
-        "Frame_3642AA": 660,
-        "Frame_3642B8": 674,
-        "Frame_3642C6": 688,
-        "Frame_3642E0": 714,
-        "Frame_3642F4": 734
+        "S3CutsceneKnucklesMapping_Frame00_Empty": 74,
+        "S3CutsceneKnucklesMapping_Frame01": 76,
+        "S3CutsceneKnucklesMapping_Frame02": 102,
+        "S3CutsceneKnucklesMapping_Frame03": 128,
+        "S3CutsceneKnucklesMapping_Frame04": 154,
+        "S3CutsceneKnucklesMapping_Frame05": 162,
+        "S3CutsceneKnucklesMapping_Frame06": 170,
+        "S3CutsceneKnucklesMapping_Frame07": 178,
+        "S3CutsceneKnucklesMapping_Frame08": 186,
+        "S3CutsceneKnucklesMapping_Frame09": 194,
+        "S3CutsceneKnucklesMapping_Frame0A": 220,
+        "S3CutsceneKnucklesMapping_Frame0B": 246,
+        "S3CutsceneKnucklesMapping_Frame0C": 266,
+        "S3CutsceneKnucklesMapping_Frame0D": 286,
+        "S3CutsceneKnucklesMapping_Frame0E": 300,
+        "S3CutsceneKnucklesMapping_Frame0F": 326,
+        "S3CutsceneKnucklesMapping_Frame10": 352,
+        "S3CutsceneKnucklesMapping_Frame11": 372,
+        "S3CutsceneKnucklesMapping_Frame12": 398,
+        "S3CutsceneKnucklesMapping_Frame13": 412,
+        "S3CutsceneKnucklesMapping_Frame14": 426,
+        "S3CutsceneKnucklesMapping_Frame15": 440,
+        "S3CutsceneKnucklesMapping_Frame16": 454,
+        "S3CutsceneKnucklesMapping_Frame17": 468,
+        "S3CutsceneKnucklesMapping_Frame18": 494,
+        "S3CutsceneKnucklesMapping_Frame19": 514,
+        "S3CutsceneKnucklesMapping_Frame1A": 540,
+        "S3CutsceneKnucklesMapping_Frame1B": 566,
+        "S3CutsceneKnucklesMapping_Frame1C": 580,
+        "S3CutsceneKnucklesMapping_Frame1D": 600,
+        "S3CutsceneKnucklesMapping_Frame1E": 620,
+        "S3CutsceneKnucklesMapping_Frame1F": 640,
+        "S3CutsceneKnucklesMapping_Frame20": 660,
+        "S3CutsceneKnucklesMapping_Frame21": 674,
+        "S3CutsceneKnucklesMapping_Frame22": 688,
+        "S3CutsceneKnucklesMapping_Frame23": 714,
+        "S3CutsceneKnucklesMapping_Frame24": 734
       },
       "external_symbols": [],
       "blocks": [
@@ -12345,259 +12345,259 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364060",
+          "target": "S3CutsceneKnucklesMapping_Frame00_Empty",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364062",
+          "target": "S3CutsceneKnucklesMapping_Frame01",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36407C",
+          "target": "S3CutsceneKnucklesMapping_Frame02",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364096",
+          "target": "S3CutsceneKnucklesMapping_Frame03",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640B0",
+          "target": "S3CutsceneKnucklesMapping_Frame04",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640B8",
+          "target": "S3CutsceneKnucklesMapping_Frame05",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640C0",
+          "target": "S3CutsceneKnucklesMapping_Frame06",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640C8",
+          "target": "S3CutsceneKnucklesMapping_Frame07",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640D0",
+          "target": "S3CutsceneKnucklesMapping_Frame08",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640D8",
+          "target": "S3CutsceneKnucklesMapping_Frame09",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3640F2",
+          "target": "S3CutsceneKnucklesMapping_Frame0A",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36410C",
+          "target": "S3CutsceneKnucklesMapping_Frame0B",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364120",
+          "target": "S3CutsceneKnucklesMapping_Frame0C",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364134",
+          "target": "S3CutsceneKnucklesMapping_Frame0D",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364142",
+          "target": "S3CutsceneKnucklesMapping_Frame0E",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36415C",
+          "target": "S3CutsceneKnucklesMapping_Frame0F",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364176",
+          "target": "S3CutsceneKnucklesMapping_Frame10",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36418A",
+          "target": "S3CutsceneKnucklesMapping_Frame11",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641A4",
+          "target": "S3CutsceneKnucklesMapping_Frame12",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641B2",
+          "target": "S3CutsceneKnucklesMapping_Frame13",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641C0",
+          "target": "S3CutsceneKnucklesMapping_Frame14",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641CE",
+          "target": "S3CutsceneKnucklesMapping_Frame15",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641DC",
+          "target": "S3CutsceneKnucklesMapping_Frame16",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3641EA",
+          "target": "S3CutsceneKnucklesMapping_Frame17",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364204",
+          "target": "S3CutsceneKnucklesMapping_Frame18",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364218",
+          "target": "S3CutsceneKnucklesMapping_Frame19",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364232",
+          "target": "S3CutsceneKnucklesMapping_Frame1A",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36424C",
+          "target": "S3CutsceneKnucklesMapping_Frame1B",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36425A",
+          "target": "S3CutsceneKnucklesMapping_Frame1C",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36426E",
+          "target": "S3CutsceneKnucklesMapping_Frame1D",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364282",
+          "target": "S3CutsceneKnucklesMapping_Frame1E",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364296",
+          "target": "S3CutsceneKnucklesMapping_Frame1F",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3642AA",
+          "target": "S3CutsceneKnucklesMapping_Frame20",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3642B8",
+          "target": "S3CutsceneKnucklesMapping_Frame21",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3642C6",
+          "target": "S3CutsceneKnucklesMapping_Frame22",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3642E0",
+          "target": "S3CutsceneKnucklesMapping_Frame23",
           "base": "Map_CutsceneKnux_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3642F4",
+          "target": "S3CutsceneKnucklesMapping_Frame24",
           "base": "Map_CutsceneKnux_"
         },
         {
@@ -12796,17 +12796,17 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 152
       },
-      "declarations_sha256": "88128e9a24b8e0fd508f96475b1211dcebcc1854058e7501a7677e40c876714d",
+      "declarations_sha256": "5b180f071cb3a04afdfed420190eecf09741f1b111b77f0e919bedf15dfc8bc0",
       "labels": {
         "Map_KnuxEnding_": 0,
-        "word_602E6": 16,
-        "word_602E8": 18,
-        "word_602FC": 38,
-        "word_60316": 64,
-        "word_60330": 90,
-        "word_60344": 110,
-        "word_60352": 124,
-        "word_60360": 138
+        "SKKnucklesScene_EmptyEndingMapFrame0": 16,
+        "SKKnucklesEndingCutsceneMapping_Frame01": 18,
+        "SKKnucklesEndingCutsceneMapping_Frame02": 38,
+        "SKKnucklesEndingCutsceneMapping_Frame03": 64,
+        "SKKnucklesEndingCutsceneMapping_Frame04": 90,
+        "SKKnucklesEndingCutsceneMapping_Frame05": 110,
+        "SKKnucklesEndingCutsceneMapping_Frame06": 124,
+        "SKKnucklesEndingCutsceneMapping_Frame07": 138
       },
       "external_symbols": [],
       "blocks": [
@@ -12814,56 +12814,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_602E6",
+          "target": "SKKnucklesScene_EmptyEndingMapFrame0",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_602E8",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame01",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_602FC",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame02",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60316",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame03",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60330",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame04",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60344",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame05",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60352",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame06",
           "base": "Map_KnuxEnding_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_60360",
+          "target": "SKKnucklesEndingCutsceneMapping_Frame07",
           "base": "Map_KnuxEnding_"
         },
         {
@@ -12917,28 +12917,28 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 322
       },
-      "declarations_sha256": "d8dfd1db09209e6fb51aebbeabe39d0ef4349279fbd9b1a47983a783d28d9871",
+      "declarations_sha256": "2b461c3ba451e899e6cdeacd92d4e1078197434b32a717e47dc2e9ff58af8b58",
       "labels": {
         "Map_HPZKnucklesGrab_": 0,
-        "word_66F5C": 38,
-        "word_66F6A": 52,
-        "word_66F78": 66,
-        "word_66F86": 80,
-        "word_66F94": 94,
-        "word_66FA2": 108,
-        "word_66FB0": 122,
-        "word_66FBE": 136,
-        "word_66FCC": 150,
-        "word_66FDA": 164,
-        "word_66FE8": 178,
-        "word_66FF6": 192,
-        "word_6700A": 212,
-        "word_6701E": 232,
-        "word_6702C": 246,
-        "word_6703A": 260,
-        "word_67048": 274,
-        "word_6705C": 294,
-        "word_6706A": 308
+        "SKKnucklesHPZGrabMapping_Frame00": 38,
+        "SKKnucklesHPZGrabMapping_Frame01": 52,
+        "SKKnucklesHPZGrabMapping_Frame02": 66,
+        "SKKnucklesHPZGrabMapping_Frame03": 80,
+        "SKKnucklesHPZGrabMapping_Frame04": 94,
+        "SKKnucklesHPZGrabMapping_Frame05": 108,
+        "SKKnucklesHPZGrabMapping_Frame06": 122,
+        "SKKnucklesHPZGrabMapping_Frame07": 136,
+        "SKKnucklesHPZGrabMapping_Frame08": 150,
+        "SKKnucklesHPZGrabMapping_Frame09": 164,
+        "SKKnucklesHPZGrabMapping_Frame0A": 178,
+        "SKKnucklesHPZGrabMapping_Frame0B": 192,
+        "SKKnucklesHPZGrabMapping_Frame0C": 212,
+        "SKKnucklesHPZGrabMapping_Frame0D": 232,
+        "SKKnucklesHPZGrabMapping_Frame0E": 246,
+        "SKKnucklesHPZGrabMapping_Frame0F": 260,
+        "SKKnucklesHPZGrabMapping_Frame10": 274,
+        "SKKnucklesHPZGrabMapping_Frame11": 294,
+        "SKKnucklesHPZGrabMapping_Frame12": 308
       },
       "external_symbols": [],
       "blocks": [
@@ -12946,133 +12946,133 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66F5C",
+          "target": "SKKnucklesHPZGrabMapping_Frame00",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66F6A",
+          "target": "SKKnucklesHPZGrabMapping_Frame01",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66F78",
+          "target": "SKKnucklesHPZGrabMapping_Frame02",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66F86",
+          "target": "SKKnucklesHPZGrabMapping_Frame03",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66F94",
+          "target": "SKKnucklesHPZGrabMapping_Frame04",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FA2",
+          "target": "SKKnucklesHPZGrabMapping_Frame05",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FB0",
+          "target": "SKKnucklesHPZGrabMapping_Frame06",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FBE",
+          "target": "SKKnucklesHPZGrabMapping_Frame07",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FCC",
+          "target": "SKKnucklesHPZGrabMapping_Frame08",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FDA",
+          "target": "SKKnucklesHPZGrabMapping_Frame09",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FE8",
+          "target": "SKKnucklesHPZGrabMapping_Frame0A",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66FF6",
+          "target": "SKKnucklesHPZGrabMapping_Frame0B",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6700A",
+          "target": "SKKnucklesHPZGrabMapping_Frame0C",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6701E",
+          "target": "SKKnucklesHPZGrabMapping_Frame0D",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6702C",
+          "target": "SKKnucklesHPZGrabMapping_Frame0E",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6703A",
+          "target": "SKKnucklesHPZGrabMapping_Frame0F",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67048",
+          "target": "SKKnucklesHPZGrabMapping_Frame10",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6705C",
+          "target": "SKKnucklesHPZGrabMapping_Frame11",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6706A",
+          "target": "SKKnucklesHPZGrabMapping_Frame12",
           "base": "Map_HPZKnucklesGrab_"
         },
         {
@@ -13181,18 +13181,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 96
       },
-      "declarations_sha256": "da5dfe093735fa1531c2dfa7f029e26a9efdfd9fc08902334a0440f1b1a13deb",
+      "declarations_sha256": "6b7ae6125f2b098036380fb135d08d1984206ce550601a7a2f1eb0d8f9fc0c1c",
       "labels": {
         "Map_KnuxIntroBomb_": 0,
-        "word_67424": 18,
-        "word_67432": 32,
-        "word_6743A": 40,
-        "word_67442": 48,
-        "word_6744A": 56,
-        "word_67452": 64,
-        "word_6745A": 72,
-        "word_67462": 80,
-        "word_6746A": 88
+        "SKKnucklesIntroBombMapping_Frame00": 18,
+        "SKKnucklesIntroBombMapping_Frame01": 32,
+        "SKKnucklesIntroBombMapping_Frame02": 40,
+        "SKKnucklesIntroBombMapping_Frame03": 48,
+        "SKKnucklesIntroBombMapping_Frame04": 56,
+        "SKKnucklesIntroBombMapping_Frame05": 64,
+        "SKKnucklesIntroBombMapping_Frame06": 72,
+        "SKKnucklesIntroBombMapping_Frame07": 80,
+        "SKKnucklesIntroBombMapping_Frame08": 88
       },
       "external_symbols": [],
       "blocks": [
@@ -13200,63 +13200,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67424",
+          "target": "SKKnucklesIntroBombMapping_Frame00",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67432",
+          "target": "SKKnucklesIntroBombMapping_Frame01",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6743A",
+          "target": "SKKnucklesIntroBombMapping_Frame02",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67442",
+          "target": "SKKnucklesIntroBombMapping_Frame03",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6744A",
+          "target": "SKKnucklesIntroBombMapping_Frame04",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67452",
+          "target": "SKKnucklesIntroBombMapping_Frame05",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6745A",
+          "target": "SKKnucklesIntroBombMapping_Frame06",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67462",
+          "target": "SKKnucklesIntroBombMapping_Frame07",
           "base": "Map_KnuxIntroBomb_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6746A",
+          "target": "SKKnucklesIntroBombMapping_Frame08",
           "base": "Map_KnuxIntroBomb_"
         },
         {
@@ -13315,14 +13315,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 134
       },
-      "declarations_sha256": "9988cba6f6ea849773c445db34f0a62aed577494da203632549363fdd51864e4",
+      "declarations_sha256": "ce79a381bfc8c159f72168660b7309219bec943291492c1664305b9fddb0dd87",
       "labels": {
         "Map_KnuxIntroLay_": 0,
-        "word_6735C": 10,
-        "word_67376": 36,
-        "word_67390": 62,
-        "word_673B0": 94,
-        "word_673BE": 108
+        "SKKnucklesIntroLayingMapping_Frame00": 10,
+        "SKKnucklesIntroLayingMapping_Frame01": 36,
+        "SKKnucklesIntroLayingMapping_Frame02": 62,
+        "SKKnucklesIntroLayingMapping_Frame03": 94,
+        "SKKnucklesIntroLayingMapping_Frame04": 108
       },
       "external_symbols": [],
       "blocks": [
@@ -13330,35 +13330,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6735C",
+          "target": "SKKnucklesIntroLayingMapping_Frame00",
           "base": "Map_KnuxIntroLay_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67376",
+          "target": "SKKnucklesIntroLayingMapping_Frame01",
           "base": "Map_KnuxIntroLay_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_67390",
+          "target": "SKKnucklesIntroLayingMapping_Frame02",
           "base": "Map_KnuxIntroLay_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_673B0",
+          "target": "SKKnucklesIntroLayingMapping_Frame03",
           "base": "Map_KnuxIntroLay_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_673BE",
+          "target": "SKKnucklesIntroLayingMapping_Frame04",
           "base": "Map_KnuxIntroLay_"
         },
         {
@@ -13397,10 +13397,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "a025714086ab83f53b0838d673c97d5819286ff2bc3c9d244b7269699de5a371",
+      "declarations_sha256": "d09d3766db932173ac3849d6f2378797a449a76b26a6ab6275d4b5cfe7096513",
       "labels": {
         "Map_LBZKnuxBomb_": 0,
-        "Frame_36400E": 2
+        "S3LBZKnucklesBombMapping_Frame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -13408,7 +13408,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36400E",
+          "target": "S3LBZKnucklesBombMapping_Frame00",
           "base": "Map_LBZKnuxBomb_"
         },
         {
@@ -13427,13 +13427,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 64
       },
-      "declarations_sha256": "56e6fcd1a74c017bf71c0b3c7b4e87a6c23373b204fe88efdd10799644703cf1",
+      "declarations_sha256": "5ce419aa2d272aff0a76f52b949933202a2d6a695968a66bbf524b41fc655e8c",
       "labels": {
         "Map_MHZKnuxPullSwitch_": 0,
-        "word_66AD8": 8,
-        "word_66AE6": 22,
-        "word_66AF4": 36,
-        "word_66B02": 50
+        "SKKnucklesMHZ2PressMapping_Frame00": 8,
+        "SKKnucklesMHZ2PressMapping_Frame01": 22,
+        "SKKnucklesMHZ2PressMapping_Frame02": 36,
+        "SKKnucklesMHZ2PressMapping_Frame03": 50
       },
       "external_symbols": [],
       "blocks": [
@@ -13441,28 +13441,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66AD8",
+          "target": "SKKnucklesMHZ2PressMapping_Frame00",
           "base": "Map_MHZKnuxPullSwitch_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66AE6",
+          "target": "SKKnucklesMHZ2PressMapping_Frame01",
           "base": "Map_MHZKnuxPullSwitch_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66AF4",
+          "target": "SKKnucklesMHZ2PressMapping_Frame02",
           "base": "Map_MHZKnuxPullSwitch_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B02",
+          "target": "SKKnucklesMHZ2PressMapping_Frame03",
           "base": "Map_MHZKnuxPullSwitch_"
         },
         {
@@ -13496,16 +13496,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "f33305de0a97656ee67bb618642811bee860eb05a3b3a7f76c608f1fade450a9",
+      "declarations_sha256": "f313a6bd0b2554e3aa6579f8e075d1a062a0674e8607c1480a923f1238f73a3f",
       "labels": {
         "Map_SSZKnucklesTired_": 0,
-        "word_66B78": 14,
-        "word_66B8C": 34,
-        "word_66B9A": 48,
-        "word_66BA8": 62,
-        "word_66BB6": 76,
-        "word_66BC4": 90,
-        "word_66BCC": 98
+        "SKKnucklesSSZTiredMapping_Frame00": 14,
+        "SKKnucklesSSZTiredMapping_Frame01": 34,
+        "SKKnucklesSSZTiredMapping_Frame02": 48,
+        "SKKnucklesSSZTiredMapping_Frame03": 62,
+        "SKKnucklesSSZTiredMapping_Frame04": 76,
+        "SKKnucklesSSZTiredMapping_Frame05": 90,
+        "SKKnucklesSSZTiredMapping_Frame06": 98
       },
       "external_symbols": [],
       "blocks": [
@@ -13513,49 +13513,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B78",
+          "target": "SKKnucklesSSZTiredMapping_Frame00",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B8C",
+          "target": "SKKnucklesSSZTiredMapping_Frame01",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66B9A",
+          "target": "SKKnucklesSSZTiredMapping_Frame02",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BA8",
+          "target": "SKKnucklesSSZTiredMapping_Frame03",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BB6",
+          "target": "SKKnucklesSSZTiredMapping_Frame04",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BC4",
+          "target": "SKKnucklesSSZTiredMapping_Frame05",
           "base": "Map_SSZKnucklesTired_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_66BCC",
+          "target": "SKKnucklesSSZTiredMapping_Frame06",
           "base": "Map_SSZKnucklesTired_"
         },
         {
@@ -82277,16 +82277,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 70
       },
-      "declarations_sha256": "0175c4c39a03d529402e2fcbab2b0a35e4644b1d8bbe61b83f40b696c8a48f6f",
+      "declarations_sha256": "50416966a2ebbd5eb3679735b81934cf6d59f3d96841db230cdd8b47a68d60b1",
       "labels": {
         "Map_AIZIntroEmeralds_": 0,
-        "Frame_364570": 14,
-        "Frame_364578": 22,
-        "Frame_364580": 30,
-        "Frame_364588": 38,
-        "Frame_364590": 46,
-        "Frame_364598": 54,
-        "Frame_3645A0": 62
+        "AIZIntroEmeraldsS3_MapFrame00": 14,
+        "AIZIntroEmeraldsS3_MapFrame01": 22,
+        "AIZIntroEmeraldsS3_MapFrame02": 30,
+        "AIZIntroEmeraldsS3_MapFrame03": 38,
+        "AIZIntroEmeraldsS3_MapFrame04": 46,
+        "AIZIntroEmeraldsS3_MapFrame05": 54,
+        "AIZIntroEmeraldsS3_MapFrame06": 62
       },
       "external_symbols": [],
       "blocks": [
@@ -82294,49 +82294,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364570",
+          "target": "AIZIntroEmeraldsS3_MapFrame00",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364578",
+          "target": "AIZIntroEmeraldsS3_MapFrame01",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364580",
+          "target": "AIZIntroEmeraldsS3_MapFrame02",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364588",
+          "target": "AIZIntroEmeraldsS3_MapFrame03",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364590",
+          "target": "AIZIntroEmeraldsS3_MapFrame04",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364598",
+          "target": "AIZIntroEmeraldsS3_MapFrame05",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3645A0",
+          "target": "AIZIntroEmeraldsS3_MapFrame06",
           "base": "Map_AIZIntroEmeralds_"
         },
         {
@@ -82385,20 +82385,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 242
       },
-      "declarations_sha256": "4da146b29f7b3984f46d3b65a270ae322b7013bbdff3a294b5104622cd9e95bd",
+      "declarations_sha256": "6af87d73a73ba4b6f6816de31398ff53daa36efb98b0af66cffdc5563d34330d",
       "labels": {
         "Map_AIZIntroPlane_": 0,
-        "Frame_364486": 22,
-        "Frame_3644BE": 78,
-        "Frame_3644C6": 86,
-        "Frame_3644CE": 94,
-        "Frame_3644D6": 102,
-        "Frame_3644DE": 110,
-        "Frame_3644F2": 130,
-        "Frame_364506": 150,
-        "Frame_364526": 182,
-        "Frame_364540": 208,
-        "Frame_364554": 228
+        "AIZIntroPlaneS3_MapFrame00": 22,
+        "AIZIntroPlaneS3_MapFrame01": 78,
+        "AIZIntroPlaneS3_MapFrame02": 86,
+        "AIZIntroPlaneS3_MapFrame03": 94,
+        "AIZIntroPlaneS3_MapFrame04": 102,
+        "AIZIntroPlaneS3_MapFrame05": 110,
+        "AIZIntroPlaneS3_MapFrame06": 130,
+        "AIZIntroPlaneS3_MapFrame07": 150,
+        "AIZIntroPlaneS3_MapFrame08": 182,
+        "AIZIntroPlaneS3_MapFrame09": 208,
+        "AIZIntroPlaneS3_MapFrame0A": 228
       },
       "external_symbols": [],
       "blocks": [
@@ -82406,77 +82406,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364486",
+          "target": "AIZIntroPlaneS3_MapFrame00",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644BE",
+          "target": "AIZIntroPlaneS3_MapFrame01",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644C6",
+          "target": "AIZIntroPlaneS3_MapFrame02",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644CE",
+          "target": "AIZIntroPlaneS3_MapFrame03",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644D6",
+          "target": "AIZIntroPlaneS3_MapFrame04",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644DE",
+          "target": "AIZIntroPlaneS3_MapFrame05",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3644F2",
+          "target": "AIZIntroPlaneS3_MapFrame06",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364506",
+          "target": "AIZIntroPlaneS3_MapFrame07",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364526",
+          "target": "AIZIntroPlaneS3_MapFrame08",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364540",
+          "target": "AIZIntroPlaneS3_MapFrame09",
           "base": "Map_AIZIntroPlane_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364554",
+          "target": "AIZIntroPlaneS3_MapFrame0A",
           "base": "Map_AIZIntroPlane_"
         },
         {
@@ -82545,15 +82545,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 168
       },
-      "declarations_sha256": "21ed7519be571b058c975605f94d5d831fabdea0208e7e7ae50dc9414b7de046",
+      "declarations_sha256": "2127647116a4fcec23ef0919163fa00ca6b803cd24cecea92e59672a8becfe43",
       "labels": {
         "Map_AIZIntroWaves_": 0,
-        "Frame_2211A6": 12,
-        "Frame_2211B4": 26,
-        "Frame_2211D4": 58,
-        "Frame_2211F4": 90,
-        "Frame_221214": 122,
-        "Frame_22122E": 148
+        "AIZIntroWavesS3_MapFrame00": 12,
+        "AIZIntroWavesS3_MapFrame01": 26,
+        "AIZIntroWavesS3_MapFrame02": 58,
+        "AIZIntroWavesS3_MapFrame03": 90,
+        "AIZIntroWavesS3_MapFrame04": 122,
+        "AIZIntroWavesS3_MapFrame05": 148
       },
       "external_symbols": [],
       "blocks": [
@@ -82561,42 +82561,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2211A6",
+          "target": "AIZIntroWavesS3_MapFrame00",
           "base": "Map_AIZIntroWaves_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2211B4",
+          "target": "AIZIntroWavesS3_MapFrame01",
           "base": "Map_AIZIntroWaves_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2211D4",
+          "target": "AIZIntroWavesS3_MapFrame02",
           "base": "Map_AIZIntroWaves_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2211F4",
+          "target": "AIZIntroWavesS3_MapFrame03",
           "base": "Map_AIZIntroWaves_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_221214",
+          "target": "AIZIntroWavesS3_MapFrame04",
           "base": "Map_AIZIntroWaves_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_22122E",
+          "target": "AIZIntroWavesS3_MapFrame05",
           "base": "Map_AIZIntroWaves_"
         },
         {
@@ -103199,11 +103199,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 62
       },
-      "declarations_sha256": "3cb27d94091c833557a518090bf8921082d620b6886de3b0003d82be8615a781",
+      "declarations_sha256": "a7bb47a8d618cd44b5dd87e34fa434699514e3fad78fb7f1e36815d8bccfb3e0",
       "labels": {
         "Map_LBZKnuxPillar_": 0,
-        "word_62B00": 4,
-        "word_62B08": 12
+        "LBZKnucklesPillarSharedData_MapSlot00": 4,
+        "LBZKnucklesPillarSharedData_MapSlot01": 12
       },
       "external_symbols": [],
       "blocks": [
@@ -103211,14 +103211,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_62B00",
+          "target": "LBZKnucklesPillarSharedData_MapSlot00",
           "base": "Map_LBZKnuxPillar_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_62B08",
+          "target": "LBZKnucklesPillarSharedData_MapSlot01",
           "base": "Map_LBZKnuxPillar_"
         },
         {

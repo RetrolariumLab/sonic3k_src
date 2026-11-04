@@ -6,7 +6,7 @@
 Obj_CutsceneButton:
                 lea     ObjDat_CutsceneButton(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_454C2,(a0)
+                move.l  #S3SceneButton_CheckActorAndDispatchPress,(a0)
                 addq.w  #4,y_pos(a0)
                 lea     PLC_CutsceneButton(pc),a1
                 jmp     (Load_PLC_Raw).l
@@ -16,53 +16,53 @@ PLC_CutsceneButton: plrlistheader
 PLC_CutsceneButton_End:
 ; ---------------------------------------------------------------------------
 
-loc_454C2:
+S3SceneButton_CheckActorAndDispatchPress:
                 move.w  (_unkFAA4).w,d0
-                beq.s   loc_45518
+                beq.s   S3SceneButton_CheckVisibilityAfterPress
                 movea.w d0,a1
-                lea     word_4551E(pc),a2
+                lea     S3SceneButton_ActorContactBounds(pc),a2
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bcs.s   loc_45518
+                bcs.s   S3SceneButton_CheckVisibilityAfterPress
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bcc.s   loc_45518
+                bcc.s   S3SceneButton_CheckVisibilityAfterPress
                 move.w  y_pos(a0),d0
                 move.w  y_pos(a1),d1
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bcs.s   loc_45518
+                bcs.s   S3SceneButton_CheckVisibilityAfterPress
                 add.w   (a2)+,d0
                 cmp.w   d0,d1
-                bcc.s   loc_45518
-                move.l  #loc_4552E,(a0)
+                bcc.s   S3SceneButton_CheckVisibilityAfterPress
+                move.l  #S3SceneButton_DrawPressedOrCull,(a0)
                 move.b  #1,mapping_frame(a0)
                 st      (_unkFAA9).w
                 clr.w   respawn_addr(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                move.w  off_45526(pc,d0.w),d0
-                jsr     off_45526(pc,d0.w)
+                move.w  S3SceneButton_PressActionOffsets(pc,d0.w),d0
+                jsr     S3SceneButton_PressActionOffsets(pc,d0.w)
 
-loc_45518:
+S3SceneButton_CheckVisibilityAfterPress:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-word_4551E:
+S3SceneButton_ActorContactBounds:
                 dc.w    -$18,   $30,  -$18,   $30
-off_45526:
-                dc.w    loc_45534-off_45526
-                dc.w    loc_45550-off_45526
-                dc.w    loc_45556-off_45526
-                dc.w    loc_4558A-off_45526
+S3SceneButton_PressActionOffsets:
+                dc.w    S3SceneButton_UnlockInputAndExpandCamera-S3SceneButton_PressActionOffsets
+                dc.w    S3SceneButton_SetLevelTrigger8-S3SceneButton_PressActionOffsets
+                dc.w    S3SceneButton_StartWaterShiftAndTryFlash-S3SceneButton_PressActionOffsets
+                dc.w    S3SceneButton_PatchWaterAndTryTubes-S3SceneButton_PressActionOffsets
 ; ---------------------------------------------------------------------------
 
-loc_4552E:
+S3SceneButton_DrawPressedOrCull:
                 jmp     (Sprite_CheckDelete).l
 ; ---------------------------------------------------------------------------
 
-loc_45534:
+S3SceneButton_UnlockInputAndExpandCamera:
                 clr.b   (Ctrl_1_locked).w
                 move.w  #$1000,d0
                 move.w  d0,(Camera_stored_max_Y_pos).w
@@ -71,12 +71,12 @@ loc_45534:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_45550:
+S3SceneButton_SetLevelTrigger8:
                 st      (Level_trigger_array+8).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_45556:
+S3SceneButton_StartWaterShiftAndTryFlash:
                 move.w  #$14,(Screen_shake_flag).w
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$100,d0
@@ -86,14 +86,14 @@ loc_45556:
                 moveq   #signextendB(sfx_Geyser),d0
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
-                bne.s   locret_45588
-                move.l  #loc_44E04,(a1)
+                bne.s   S3SceneButton_WaterEffectSpawnReturn
+                move.l  #S3CNZScene_TickFlashAndSelectBank,(a1)
 
-locret_45588:
+S3SceneButton_WaterEffectSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4558A:
+S3SceneButton_PatchWaterAndTryTubes:
                 move.w  #$14,(Screen_shake_flag).w
                 movea.w (Level_layout_main+$40).w,a1
                 lea     $8E(a1),a1
@@ -106,19 +106,19 @@ loc_4558A:
                 adda.w  d0,a1
                 move.b  #$88,(a1)
                 jsr     (AllocateObject).l
-                bne.s   loc_455D2
+                bne.s   S3SceneButton_TrySecondVacuumTube
                 move.l  #Obj_CNZVacuumTube,(a1)
                 move.w  #$4740,x_pos(a1)
                 move.w  #$828,y_pos(a1)
                 move.b  #$4C,subtype(a1)
 
-loc_455D2:
+S3SceneButton_TrySecondVacuumTube:
                 jsr     (AllocateObject).l
-                bne.s   locret_455F2
+                bne.s   S3SceneButton_VacuumTubeSpawnReturn
                 move.l  #Obj_CNZVacuumTube,(a1)
                 move.w  #$4740,x_pos(a1)
                 move.w  #$A28,y_pos(a1)
                 move.b  #$20,subtype(a1)
 
-locret_455F2:
+S3SceneButton_VacuumTubeSpawnReturn:
                 rts

@@ -461,7 +461,7 @@
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/battle_helpers.s",
-      "sha256": "b5c1408f7d083143ada73aa4c340d17fdf7d9e3d4252942fb0eaaf4eaf080f6b"
+      "sha256": "6f98728dcc06578f22614020a3f1e4d1f0be9488b7c469828b21b20564da173b"
     },
     {
       "path": "src/objects/bosses/mhz/miniboss/sk/motion_helpers.s",
@@ -517,91 +517,91 @@
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/aftermath.s",
-      "sha256": "21720ff683fcddd24177110080c7f6d4c358b58e48508a504f4fc0a9a6316342"
+      "sha256": "6a2a2d4f0b16c971685ef33718611de583fa2bb3ef52d96d6e39414a4a34da3d"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/crane.s",
-      "sha256": "4c288eda3478c4668704ab0dc664a6419c7408fe2e878775788bc7a71b54b6e3"
+      "sha256": "804c550daf8707ad091fec7e19eb8ac607b58d24c84b2dc560d4c262aff4c12c"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/effects.s",
-      "sha256": "66a84e7de340fca5574484c4419f4ec1ae4bf20a5fb1b35bad225ed943908df6"
+      "sha256": "76471e7f25aa0ba57724ca62e6979d6cac6e49a21173ea7634b5dd2165aa9f04"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/encounter.s",
-      "sha256": "ccdb1579de64a1d1776fbf74273c153120552ecd9e20e89911799f40bb12daca"
+      "sha256": "a3bde65703e2003171ce603c81e5455abfc8d0137dd433d0c813e028742cc199"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/platforms.s",
-      "sha256": "8affd4a3ca81f3ad537fc1d2ae64f113069777646c2d0055c3b4d30f386b0ceb"
+      "sha256": "d1e0008d567328c3c202a4b3d555f7ca13d1e2915cc943e5114c93a9b03fe42d"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/recovery.s",
-      "sha256": "de666b99e90ab435765e9f2e2e281d31f3d65c3ac2c5250e72aede6c34b07d49"
+      "sha256": "5316ea45032847570d9ee4738c3d7fe6c6dc8ab592fef2d84a096639678420ac"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/angel_island.s",
-      "sha256": "5a85730f3dd6f35f2a8c9980f1c5e05d7e6ce361966bf4ae3e0e50996378c052"
+      "sha256": "cf5aefc28e39a57612c5e0fd88b1fb1774632bce51469085bc6b5ce3a3757870"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/carnival_night.s",
-      "sha256": "c7e2b03e31fb7c69585b1c41fc72c00c26ac97a0e97dbbb0fa77ab36eee7b3b4"
+      "sha256": "dd0f69b7e3b9371220dd596a57e6b9737bbdf7d2a97c6ca2e1f549eef2e9319f"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/hydrocity.s",
-      "sha256": "08088bc6a801ca92cf1b11844ff5a56a60918283d829bb5a11929d9ae3a14d08"
+      "sha256": "c95ffe98e5c49c8a15a9641498e956eacd9e23d9a93cb805ee61b9baae30376a"
     },
     {
       "path": "src/objects/cutscenes/knuckles/s3/launch_base.s",
-      "sha256": "b53ae8139a77f786ac8145a0e4ec881f54e35bf2ac16aaf7a34532992b0dc43d"
+      "sha256": "ac15f1c6de497900d68a07f312f7b6c8528b7d244000521de202fd054577f0e2"
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island.s",
-      "sha256": "c955602fae41ec0308f17fb9699c69099c11d73200f624356221cc947b302fdd"
+      "sha256": "ff16130d5a60c8aba09263c85042e5bd390f2e18bd914c75453682c188edec34"
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island_plane.s",
-      "sha256": "51cd6fe2ed9798c4d8371208012fa4538b5cdca22cda0a7ede6a6b66b644205a"
+      "sha256": "be92b7b451c76f78b376f03b958191bd185700d5a62c83af458373160af8994a"
     },
     {
       "path": "src/objects/cutscenes/sk/animation_and_patterns.s",
-      "sha256": "09e4bd389f12896dbe93752ff0d8e6147a482555c6b640521a97909ff97038ea"
+      "sha256": "e77876a07a974c0a15d4cc86ce8c896b7404aa7c23f15264f411995ca32f1218"
     },
     {
       "path": "src/objects/cutscenes/sk/carnival_encounters.s",
-      "sha256": "e256bc1813b26ff2065350b385d91e87515006a1b79666c8012ca9c1ed2e66a8"
+      "sha256": "c2c49e7835571dd702f633e4fe8c856aa7be37997c0aabe2f1c0a954262e8452"
     },
     {
       "path": "src/objects/cutscenes/sk/hydrocity.s",
-      "sha256": "07ca2e056a87fa85324a2c12968182a0fb6898a49b91e6a875a7497dcbb988c1"
+      "sha256": "15e16468436111226fb5b6c1e24902ff452e144d91bc6af38da5a48db21e26b9"
     },
     {
       "path": "src/objects/cutscenes/sk/launch_base.s",
-      "sha256": "2a8d88eff701e4ad33a846ff9d534512ced8a696cf02cd611543eb9e70fb9194"
+      "sha256": "b2f42c0c7876a0b332d6628289e1f553154697349b89504e96cdca2073cff504"
     },
     {
       "path": "src/objects/cutscenes/sk/lava_reef.s",
-      "sha256": "b4efa45e8cef5fb2ea33e3c69d67e49f03aeabda73fc03789ea61d88a6649c61"
+      "sha256": "878d948cf3e9aea8f33526eec4183302cb98fd4e6c212f8e7bc93fa5e00885d8"
     },
     {
       "path": "src/objects/cutscenes/sk/movement_and_collision.s",
-      "sha256": "265776d5cb44d7dd5ec22a4f358337261ee0bb8774ac0a7805ec548e7e2382fe"
+      "sha256": "076495ebdd6588dc6853a2cb95cf9022a003c014f1ff5c8b9fbc2002a5ed3571"
     },
     {
       "path": "src/objects/cutscenes/sk/mushroom_hill_act1.s",
-      "sha256": "b481bc17d880a61ddaec4232285417c18971e0cd187025e9b2eab991502d0131"
+      "sha256": "a0a816261d660de38db28c19ea6f99eda869c8e3aa7b0d473050ccdbe8cc7c80"
     },
     {
       "path": "src/objects/cutscenes/sk/mushroom_hill_act2.s",
-      "sha256": "f4febabfc40a430dffb60af2b9f6870447c61d0fcb82eb8ab064839240f79d1e"
+      "sha256": "07a87326b6816db057363fdccad756021476dcccc634ca3501a32dbe638ad736"
     },
     {
       "path": "src/objects/cutscenes/sk/opening.s",
-      "sha256": "82da7752582138216b7591d7f13b7837bad8f5a814a4c6f84f53ca35d6900658"
+      "sha256": "9524a6adfb001a97b5bb70b2576d447bdbea539309fad2fae1b2cc825ff9ae86"
     },
     {
       "path": "src/objects/cutscenes/sk/sky_sanctuary.s",
-      "sha256": "23f3caa9f5445a8355434f3c16384a04f633b12d42cdc5979e98361f93e930aa"
+      "sha256": "1b490df003550d83e7d91a78767b513eed5453a618ca89a29f101b9df847020d"
     },
     {
       "path": "src/objects/effects/s3/boss_explosions.s",
@@ -621,7 +621,7 @@
     },
     {
       "path": "src/objects/ending/sk/character_poses.s",
-      "sha256": "6d37fea7b3e428246046e2fddcb76559f78d3502d092eefc991cde21d4e3b223"
+      "sha256": "19a11794973a61b8b4974ca50eeacf378b384cd2f7ce4e55ee8c822d44c05614"
     },
     {
       "path": "src/objects/ending/sk/villain_eyecatch.s",
@@ -637,7 +637,7 @@
     },
     {
       "path": "src/objects/ending/sk/plane_and_knuckles.s",
-      "sha256": "b5d352f0069de1bf3500e08b7e9e7219bed419203b1f1db5c4e900a5162098a3"
+      "sha256": "28b3b4d267ccc58808c9004f2dca1f3acac8fc802463d294dbfba8a0fcaba7d9"
     },
     {
       "path": "src/objects/ending/sk/plane_scene.s",
@@ -901,7 +901,7 @@
     },
     {
       "path": "src/objects/interface/continue/sk/characters.s",
-      "sha256": "382a83d6e8c2aa8169b1e3ebe405a16319ef8502f1283974ff1c2a4129d393d7"
+      "sha256": "146ff1be6c01faf2040a5604a62414879653d4c722f4f849a114bd2425ba46d3"
     },
     {
       "path": "src/objects/interface/continue/sk/countdown_and_patterns.s",
@@ -1189,7 +1189,7 @@
     },
     {
       "path": "src/objects/zones/cnz/s3/water_level_controls.s",
-      "sha256": "4f08a37195b9d83f436a807f0dd3e43f9f7403b80e917c5906587c53bca71ca0"
+      "sha256": "588ec849311e276067cf4f716b07695040d2438d5e72e34edd4430e56af6b084"
     },
     {
       "path": "src/objects/zones/cnz/s3/wire_cage.s",
@@ -3324,41 +3324,41 @@
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/crane.s",
-      "symbol": "RawAni_65550",
-      "scope": "RawAni_65550",
+      "symbol": "HPZCrane_TerminalParityFrameTable",
+      "scope": "HPZCrane_TerminalParityFrameTable",
       "first_line": 216,
       "last_line": 218,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "f33ac0a4d38917073beb7c3669903b203e1792f173301a34d0ff11cda7b97bab",
+      "declarations_sha256": "3d3e4f5175f21b059fbbef55d6404f5f694881cdac0fa54a5c86134b4392fee1",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_65550"],
+      "members": ["HPZCrane_TerminalParityFrameTable"],
       "stored_markers": []
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/effects.s",
-      "symbol": "RawAni_6525C",
-      "scope": "RawAni_6525C",
+      "symbol": "SKHPZAux_EmeraldPieceFiveSubtypeFrames",
+      "scope": "SKHPZAux_EmeraldPieceFiveSubtypeFrames",
       "first_line": 70,
       "last_line": 72,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "97f0cd4367c67a191dd2db2f149558b12834b0215b9fda3371e777414e34c6c8",
+      "declarations_sha256": "bed8c2f89015d1818e474d5dd3b44fc7ec11bd4bd18ee73249c2ee8866a9cb82",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_6525C"],
+      "members": ["SKHPZAux_EmeraldPieceFiveSubtypeFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/cutscenes/sk/angel_island_plane.s",
-      "symbol": "byte_67A84",
-      "scope": "byte_67A84",
-      "first_line": 522,
-      "last_line": 542,
+      "symbol": "AIZPlaneIntro_EightFrameCountedAnim",
+      "scope": "AIZPlaneIntro_EightFrameCountedAnim",
+      "first_line": 524,
+      "last_line": 544,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 38,
-      "declarations_sha256": "7554b0c5e864f897052a18553cc371da314262ca2f2b5f81849f9de3c222a664",
+      "declarations_sha256": "d66995eb94a1edd63c31a28228f747d7fa1ccec8845178ba15e9f1a075d724f2",
       "entries": [
         [0, "counted"],
         [11, "fixed"],
@@ -3366,7 +3366,12 @@
         [23, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_67A84", "byte_67A8F", "byte_67A97", "byte_67A9B"],
+      "members": [
+        "AIZPlaneIntro_EightFrameCountedAnim",
+        "AIZPlaneIntro_PlaneDetail1Anim",
+        "AIZPlaneIntro_PlaneDetail2Anim",
+        "AIZPlaneIntro_WaveAnimAndDelete"
+      ],
       "stored_markers": [
         {
           "offset": 10,
@@ -3377,13 +3382,13 @@
     },
     {
       "path": "src/objects/cutscenes/sk/animation_and_patterns.s",
-      "symbol": "byte_6669A",
-      "scope": "byte_6669A",
+      "symbol": "SKSceneAnim_LBZ2ShakeLoop",
+      "scope": "SKSceneAnim_LBZ2ShakeLoop",
       "first_line": 22,
       "last_line": 328,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 632,
-      "declarations_sha256": "915a2db89416c881f1c23841b3b198814aeca7256460178f3759e413c501ef0f",
+      "declarations_sha256": "9b6aa634601454381d9f43fe926699a856637e26d1a3f5866daa3685669e6eb1",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -3433,65 +3438,65 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_6669A",
-        "byte_6669F",
-        "byte_666A9",
-        "byte_666AF",
-        "byte_666B9",
-        "byte_666BF",
-        "byte_666C3",
-        "byte_666D2",
-        "byte_666E1",
-        "byte_666F6",
-        "byte_66719",
-        "byte_6671F",
-        "byte_6672A",
-        "byte_66739",
-        "byte_66760",
-        "byte_66771",
-        "byte_667AD",
-        "byte_667B4",
-        "byte_667BC",
-        "byte_667C1",
-        "byte_667CC",
-        "byte_667D4",
-        "byte_667E0",
-        "byte_667E7",
-        "byte_667F5",
-        "byte_6680A",
-        "byte_66824",
-        "byte_6682F",
-        "byte_6683A",
-        "byte_66843",
-        "byte_6684A",
-        "byte_6684F",
-        "byte_66875",
-        "byte_6687B",
-        "byte_66880",
-        "byte_66885",
-        "byte_66891",
-        "byte_668A7",
-        "byte_668AF",
-        "byte_668C3",
-        "byte_668C7",
-        "byte_668D0",
-        "byte_66905",
-        "byte_6690B"
+        "SKSceneAnim_LBZ2ShakeLoop",
+        "SKSceneAnim_KnuxTravelLoop",
+        "SKSceneAnim_KnuxFastTravelLoop",
+        "SKKnucklesCutscene_LeapPhaseBodyLoop",
+        "SKSceneAnim_KnuxWaitWithTailLoop",
+        "SKSceneAnim_KnuxWaitTailFrames1E1F",
+        "SKSceneAnim_LBZ1PreBombSequence",
+        "SKSceneAnim_LBZ2PreTurnSequence",
+        "SKSceneAnim_MHZ1PeeringSequence",
+        "SKSceneAnim_MHZ2BlowerSequence",
+        "SKSceneAnim_SSZTiredLeadIn",
+        "SKSszHpzKnuckles_TiredBodyTimedLoop",
+        "SKSceneAnim_SSZCrouchingPlayerReaction",
+        "SKSceneAnim_SSZDeathEggCloud",
+        "SKSceneAnim_SSZDeathEggBackgroundPiece",
+        "SKSceneAnim_HPZEncounterOpening",
+        "SKHpzKnuckles_FrontContactBodyFrameLoop",
+        "SKSceneAnim_HPZFrontCounterRecoil",
+        "SKHpzKnuckles_NonfinalHitBodyFrameLoop",
+        "SKSceneAnim_KnuxJumpAndFastTravel",
+        "SKHpzKnuckles_PreJumpBodyFrameSequence",
+        "SKHpzKnuckles_DescendingBodyTimedLoop",
+        "SKHpzKnuckles_LandingBodyFrameSequence",
+        "SKSceneAnim_HPZShipDepartureLanding",
+        "SKSceneAnim_HPZTravelWindupWithTailLoop",
+        "SKSceneAnim_HPZGrabFloorRecovery",
+        "SKSceneAnim_KnuxTravelLoopDelay4",
+        "SKKnucklesCutscene_SharedTravelBodyLoop",
+        "SKHpzKnuckles_FollowingDustFrameLoop",
+        "SKSceneAnim_HPZEmeraldSparkInitial",
+        "SKSceneAnim_HPZEmeraldSparkRising",
+        "SKSceneAnim_HPZSecondRecoveryGrab",
+        "SKHpzKnuckles_DizzyStarsFrameLoop",
+        "SKSceneAnim_HPZLowerGrabFrames9And10",
+        "SKSceneAnim_HPZUpperGrabFrames11And12",
+        "SKSceneAnim_HPZPostGrabCollapse",
+        "SKSceneAnim_LRZSignalReaction",
+        "SKSceneAnim_LRZPostSignalReaction",
+        "SKSceneAnim_HPZGrabFrames14To18",
+        "SKSceneAnim_OpeningLyingFrames0And1",
+        "SKSceneAnim_OpeningLyingFrames423",
+        "SKSceneAnim_OpeningGrabFrames3To10",
+        "SKOpeningBomb_FlameFrameLoop",
+        "SKOpeningBomb_EmittedSmokeFrameSequence"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/cutscenes/sk/movement_and_collision.s",
-      "symbol": "RawAni_65EB0",
-      "scope": "RawAni_65EB0",
+      "symbol": "SKMhzBlower_ForcedPlayerFramePairs",
+      "scope": "SKMhzBlower_ForcedPlayerFramePairs",
       "first_line": 103,
       "last_line": 105,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "d88107d69ec26cf19a98d03e393fdc812380fcc90c9b793447336dceed244820",
+      "declarations_sha256": "8a7254ebeb9f9de9163dd0209e979507d80ce3539b089d8daf674b7c94454091",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_65EB0"],
+      "members": ["SKMhzBlower_ForcedPlayerFramePairs"],
       "stored_markers": []
     },
     {

@@ -3,82 +3,82 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_6502E:
-                lea     ObjDat3_664FA(pc),a1
+HPZShipCrane_InitOverlayAndBeam:
+                lea     SKHpzSszCrane_LiftingHeadAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65048,(a0)
-                lea     ChildObjDat_66610(pc),a2
+                move.l  #HPZShipCrane_FollowShipUntilLowerSignal,(a0)
+                lea     SKSceneData_CraneFollowerChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_65048:
+HPZShipCrane_FollowShipUntilLowerSignal:
                 btst    #0,(_unkFAB8).w
-                bne.s   loc_6505C
+                bne.s   HPZShipCrane_SaveOffsetAndBeginLowering
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6505C:
-                move.l  #loc_65068,(a0)
+HPZShipCrane_SaveOffsetAndBeginLowering:
+                move.l  #HPZShipCrane_CheckEmeraldAndAdvancePhase,(a0)
                 move.b  child_dy(a0),$3A(a0)
 
-loc_65068:
+HPZShipCrane_CheckEmeraldAndAdvancePhase:
                 move.w  (_unkFABA).w,d0
-                beq.s   loc_6509A
+                beq.s   HPZShipCrane_FollowShipAndDraw
                 movea.w d0,a1
                 move.w  y_pos(a1),d0
                 subi.w  #$18,d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_650A6
+                bls.s   HPZShipCrane_AttachEmeraldAndRetract
                 move.w  y_vel(a0),d0
                 addi.w  #$80,d0
-                bmi.s   loc_6508C
+                bmi.s   HPZShipCrane_DeriveOffsetFromPhaseHigh
                 move.w  d0,y_vel(a0)
 
-loc_6508C:
+HPZShipCrane_DeriveOffsetFromPhaseHigh:
                 move.b  y_vel(a0),d2
                 move.b  $3A(a0),d3
                 add.b   d2,d3
                 move.b  d3,child_dy(a0)
 
-loc_6509A:
+HPZShipCrane_FollowShipAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_650A6:
-                move.l  #loc_650D4,(a0)
+HPZShipCrane_AttachEmeraldAndRetract:
+                move.l  #HPZShipCrane_RetractAndSignalOnUnderflow,(a0)
                 move.b  #2,mapping_frame(a0)
                 move.w  #$14,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_BigRumble),d0
                 jsr     (Play_SFX).l
-                lea     ChildObjDat_6661E(pc),a2
+                lea     SKSceneData_HPZEmeraldSparkChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
-                lea     ChildObjDat_66638(pc),a2
+                lea     SKSceneData_HPZEmeraldFragmentChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_650D4:
+HPZShipCrane_RetractAndSignalOnUnderflow:
                 move.w  y_vel(a0),d2
                 subi.w  #$80,d2
-                bpl.s   loc_650FA
-                move.l  #loc_6510C,(a0)
+                bpl.s   HPZShipCrane_StoreRetractPhaseAndOffset
+                move.l  #HPZShipCrane_FollowShipAndCarryEmerald,(a0)
                 moveq   #0,d2
                 movea.w parent3(a0),a1
                 bset    #2,$38(a1)
                 movea.w (_unkFABA).w,a2
                 bset    #7,art_tile(a2)
 
-loc_650FA:
+HPZShipCrane_StoreRetractPhaseAndOffset:
                 move.w  d2,y_vel(a0)
                 move.b  y_vel(a0),d2
                 move.b  $3A(a0),d3
                 add.b   d2,d3
                 move.b  d3,child_dy(a0)
 
-loc_6510C:
+HPZShipCrane_FollowShipAndCarryEmerald:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 move.w  (_unkFABA).w,d0
-                beq.s   loc_65132
+                beq.s   HPZShipCrane_DrawAfterCarry
                 movea.w d0,a1
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),d0
@@ -88,16 +88,16 @@ loc_6510C:
                 add.w   d1,d0
                 move.w  d0,y_pos(a1)
 
-loc_65132:
+HPZShipCrane_DrawAfterCarry:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65138:
-                lea     word_66506(pc),a1
+HPZShipCrane_InitCraneOverlay:
+                lea     SKSceneData_CraneFrameFollowerPartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_65148,(a0)
+                move.l  #HPZShipCrane_SetOverlayFramePlusOne,(a0)
 
-loc_65148:
+HPZShipCrane_SetOverlayFramePlusOne:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 move.b  mapping_frame(a1),d0
                 addq.b  #1,d0
@@ -105,12 +105,12 @@ loc_65148:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6515E:
-                lea     word_6650C(pc),a1
+HPZShipCrane_InitCraneBeam:
+                lea     SKSceneData_CraneOffsetFollowerPartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_6516E,(a0)
+                move.l  #HPZShipCrane_SelectBeamFrameByPhase,(a0)
 
-loc_6516E:
+HPZShipCrane_SelectBeamFrameByPhase:
                 movea.w parent3(a0),a1
                 move.b  y_vel(a1),d0
                 lsr.b   #4,d0
@@ -118,4 +118,4 @@ loc_6516E:
                 move.b  d0,mapping_frame(a0)
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Child_Draw_Sprite).l
-; End of function loc_6502E
+; End of function HPZShipCrane_InitOverlayAndBeam

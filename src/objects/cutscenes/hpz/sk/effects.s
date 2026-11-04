@@ -3,24 +3,24 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_6518A:
-                lea     ObjDat3_66512(pc),a1
+HPZEffect_InitSparkAndTickDelay:
+                lea     SKHpzEmeraldLift_InitialSparkAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_651AC,(a0)
+                move.l  #HPZEffect_SparkWaitHidden,(a0)
                 addi.w  #$30,y_pos(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 add.w   d0,d0
                 move.w  d0,$2E(a0)
 
-loc_651AC:
+HPZEffect_SparkWaitHidden:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_651B4
+                bmi.s   HPZEffect_RandomizeSparkAndStartAnim
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_651B4:
-                move.l  #loc_651E2,(a0)
+HPZEffect_RandomizeSparkAndStartAnim:
+                move.l  #HPZEffect_AnimateInitialSpark,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$3F,d0
                 subi.w  #$20,d0
@@ -29,54 +29,54 @@ loc_651B4:
                 andi.w  #$3F,d0
                 subi.w  #$20,d0
                 add.w   d0,y_pos(a0)
-                move.l  #loc_651F2,$34(a0)
+                move.l  #HPZEffect_StartRisingSpark,$34(a0)
 
-loc_651E2:
-                lea     byte_66843(pc),a1
+HPZEffect_AnimateInitialSpark:
+                lea     SKSceneAnim_HPZEmeraldSparkInitial(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_651F2:
-                move.l  #loc_6520A,(a0)
+HPZEffect_StartRisingSpark:
+                move.l  #HPZEffect_AnimateAndMoveRisingSpark,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 clr.b   anim_frame(a0)
                 clr.b   anim_frame_timer(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6520A:
-                lea     byte_6684A(pc),a1
+HPZEffect_AnimateAndMoveRisingSpark:
+                lea     SKSceneAnim_HPZEmeraldSparkRising(pc),a1
                 jsr     (Animate_RawNoSST).l
                 subi.w  #$80,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65226:
-                lea     ObjDat3_6651E(pc),a1
+HPZEffect_InitEmeraldPiece:
+                lea     SKSceneData_HPZEmeraldFragmentAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65276,(a0)
+                move.l  #HPZEffect_PieceFollowAndTickRelease,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.w  d0,d1
-                move.w  byte_65262(pc,d0.w),child_dx(a0)  ; and child_dy
-                move.w  word_6526C(pc,d0.w),$2E(a0)
+                move.w  HPZEffect_EmeraldPieceOffsets(pc,d0.w),child_dx(a0)  ; and child_dy
+                move.w  SKHPZAux_EmeraldPieceFiveReleaseDelays(pc,d0.w),$2E(a0)
                 lsr.w   #1,d1
-                move.b  RawAni_6525C(pc,d1.w),mapping_frame(a0)
-                move.l  #loc_65288,$34(a0)
+                move.b  SKHPZAux_EmeraldPieceFiveSubtypeFrames(pc,d1.w),mapping_frame(a0)
+                move.l  #HPZEffect_ReleasePieceWithPriority,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
-RawAni_6525C:
+SKHPZAux_EmeraldPieceFiveSubtypeFrames:
                 dc.b    $1C, $1B, $1A, $19, $18
                 even
-byte_65262:
+HPZEffect_EmeraldPieceOffsets:
                 dc.b    4, $2C
                 dc.b    -2, $2A
                 dc.b    6, $22
                 dc.b    -8, $24
                 dc.b    -2, $1C
-word_6526C:
+SKHPZAux_EmeraldPieceFiveReleaseDelays:
                 dc.w    $20
                 dc.w    $30
                 dc.w    $40
@@ -84,28 +84,28 @@ word_6526C:
                 dc.w    $60
 ; ---------------------------------------------------------------------------
 
-loc_65276:
+HPZEffect_PieceFollowAndTickRelease:
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Obj_Wait).l
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_65288:
-                move.l  #loc_65296,(a0)
+HPZEffect_ReleasePieceWithPriority:
+                move.l  #HPZEffect_MoveAndCullReleasedPiece,(a0)
                 bset    #7,art_tile(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65296:
+HPZEffect_MoveAndCullReleasedPiece:
                 jsr     (MoveSprite).l
                 jmp     (Sprite_CheckDeleteXY).l
 ; ---------------------------------------------------------------------------
 
-loc_652A2:
-                move.l  #loc_652FE,(a0)
+HPZEffect_InitDelayedExplosion:
+                move.l  #HPZEffect_TickDelayThenInitExplosion,(a0)
                 moveq   #0,d0
                 move.b  subtype(a0),d0
-                lea     byte_652DE(pc,d0.w),a1
+                lea     HPZEffect_DelayedExplosionOffsets(pc,d0.w),a1
                 move.w  (Camera_X_pos).w,d1
                 addi.w  #$140,d1
                 move.w  (Camera_Y_pos).w,d2
@@ -122,7 +122,7 @@ loc_652A2:
                 move.w  d0,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
-byte_652DE:
+HPZEffect_DelayedExplosionOffsets:
                 dc.b    -$10, -$58
                 dc.b    -$18, -$30
                 dc.b    -8, -$10
@@ -142,9 +142,9 @@ byte_652DE:
                 even
 ; ---------------------------------------------------------------------------
 
-loc_652FE:
+HPZEffect_TickDelayThenInitExplosion:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 lea     (Obj_Explosion).l,a1
                 move.l  a1,(a0)
                 move.b  #2,routine(a0)
@@ -153,25 +153,26 @@ loc_652FE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6531E:
-                lea     ObjDat3_6652A(pc),a1
+HPZEffect_InitCraneRootAndSelectGroup:
+                lea     SKHpzCrane_ChainBranchRootAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65348,(a0)
+                move.l  #HPZEffect_SignalCraneReleaseAtZero,(a0)
                 move.w  #4*60,$2E(a0)
-                lea     ChildObjDat3_6662C(pc),a2
+                lea     SKHpzCrane_NegativePhaseChainSpawnList(pc),a2
                 tst.b   subtype(a0)
-                beq.s   loc_65342
-                lea     ChildObjDat3_66632(pc),a2
+                beq.s   HPZEffect_BuildCraneSegmentChain
+                lea     SKHpzCrane_PositivePhaseChainSpawnList(pc),a2
 
-loc_65342:
+; Each segment links to the previous one and keeps a separate pointer to the root
+HPZEffect_BuildCraneSegmentChain:
                 jmp     (CreateChild8_TreeListRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_65348:
+HPZEffect_SignalCraneReleaseAtZero:
                 subq.w  #1,$2E(a0)
-                bne.s   loc_65354
+                bne.s   HPZEffect_FollowShipOrDeleteRoot
                 bset    #7,$38(a0)
 
-loc_65354:
+HPZEffect_FollowShipOrDeleteRoot:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite).l

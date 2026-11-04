@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 33199,
+  "applied_targets": 34381,
   "packets": [
     {
       "id": "01-audio",
@@ -7019,7 +7019,7 @@
     },
     {
       "id": "65-cutscenes",
-      "state": "pending",
+      "state": "applied",
       "target_count": 1182,
       "scope_sha256": "89d9f26820557824150ed36de3517d421772a381c3ac0d3b3c758fbd27829651",
       "registry": "config/reconstruction/semantic_labels/65-cutscenes.json",
@@ -7213,7 +7213,7 @@
           "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"]
         }
       ],
-      "destination_sha256": "6c111444056376854f1fdd0371d76ffc1dce7017eb0281b51ae63d15b7e8113f"
+      "destination_sha256": "ed0d5f31db2213ddcbc7f1c2fc9dac101312d2054d51bfdf92b7f1df5dfeab7f"
     },
     {
       "id": "66-ending",
@@ -7481,6 +7481,7 @@
     "61-blue-sphere",
     "62-bonus-gumball",
     "63-bonus-pachinko",
-    "64-bonus-slots"
+    "64-bonus-slots",
+    "65-cutscenes"
   ]
 }

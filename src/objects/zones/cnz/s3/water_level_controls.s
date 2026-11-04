@@ -59,7 +59,7 @@ S3CNZWater_UpdateWaterButton:
                 jsr     (Play_SFX).l
                 jsr     (AllocateObject).l
                 bne.s   S3CNZWater_DrawWaterButton
-                move.l  #loc_44E04,(a1)
+                move.l  #S3CNZScene_TickFlashAndSelectBank,(a1)
                 st      subtype(a1)
 
 S3CNZWater_DrawWaterButton:
@@ -112,29 +112,29 @@ S3KnuxScene_AIZCorkAttrs:
                 dc.b    $10, $18,   0,   0
 S3KnuxScene_AIZ2BarrierChild:
                 dc.w    1-1
-                dc.l    loc_44A78
+                dc.l    S3AIZScene_ResolveAct2SolidChild
 S3KnuxScene_CNZTallBarrierChild:
                 dc.w    1-1
-                dc.l    loc_44DD8
+                dc.l    S3CNZScene_ResolveInvisibleSolidChild
                 dc.b    -$20,-$6C
 S3KnuxScene_LBZCaptureChild:
                 dc.w    1-1
-                dc.l    loc_45136
+                dc.l    S3LBZScene_CheckPlayersAndSignalP1
                 dc.b    -$40,   0
 S3KnuxScene_LBZBombChild:
                 dc.w    1-1
-                dc.l    loc_4519E
+                dc.l    S3LBZScene_InitBombAndPlaySound
                 dc.b    -8,-$10
 S3KnuxScene_LBZRisingExplosions:
                 dc.w    4-1
-                dc.l    loc_451CE
+                dc.l    S3LBZScene_InitExplosionColumn
 S3KnuxScene_LBZWobblingPillars:
                 dc.w    4-1
-                dc.l    loc_45330
+                dc.l    S3LBZScene_InitPillarMotionAndRestX
                 dc.b    2, $24
 S3KnuxScene_AIZ1CorkChild:
                 dc.w    1-1
-                dc.l    loc_448EE
+                dc.l    S3AIZScene_InitCorkAndCheckParent
                 dc.b    0, $18
 DPLCPtr_CutsceneKnux:
                 dc.l    ArtUnc_CutsceneKnux

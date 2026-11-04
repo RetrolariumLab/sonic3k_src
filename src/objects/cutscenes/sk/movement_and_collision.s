@@ -6,11 +6,11 @@
 
 CutsceneSpawnKnucklesMusicFadeTransition:
                 jsr     (AllocateObject).l
-                bne.s   locret_65DEA
+                bne.s   SKScene_KnucklesMusicFadeReturn
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_Knuckles,subtype(a1)
 
-locret_65DEA:
+SKScene_KnucklesMusicFadeReturn:
                 rts
 ; End of function CutsceneSpawnKnucklesMusicFadeTransition
 
@@ -36,21 +36,21 @@ OpeningAnimal_ChooseBounceVel:
                 swap    d0
                 move.w  #$100,d1
                 btst    #2,(_unkFAB8).w
-                bne.s   loc_65E3E
+                bne.s   SKScene_AnimalBounceLeft
                 bclr    #0,render_flags(a0)
                 move.w  x_pos(a0),d2
                 cmp.w   $3A(a0),d2
-                blo.s   loc_65E46
+                blo.s   SKScene_StoreAnimalBounceVelocity
                 cmp.w   $3C(a0),d2
-                bhi.s   loc_65E3E
+                bhi.s   SKScene_AnimalBounceLeft
                 tst.w   d0
-                bpl.s   loc_65E46
+                bpl.s   SKScene_StoreAnimalBounceVelocity
 
-loc_65E3E:
+SKScene_AnimalBounceLeft:
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-loc_65E46:
+SKScene_StoreAnimalBounceVelocity:
                 move.w  d1,x_vel(a0)
                 rts
 ; End of function OpeningAnimal_ChooseBounceVel
@@ -72,7 +72,7 @@ MHZBlower_ApplyPoseToBothPlayers:
                 bsr.w   MHZBlower_SetPlayerFlipPose
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   locret_65EAE
+                beq.s   SKScene_BlowerPoseReturn
 ; End of function MHZBlower_ApplyPoseToBothPlayers
 
 ; =============== S U B R O U T I N E =======================================
@@ -81,26 +81,26 @@ MHZBlower_ApplyPoseToBothPlayers:
 MHZBlower_SetPlayerFlipPose:
                 move.b  #5,anim(a1)
                 cmpi.b  #$C,anim_frame(a0)
-                blo.s   locret_65EAE
+                blo.s   SKScene_BlowerPoseReturn
                 move.b  #$83,object_control(a1)
                 move.b  #0,anim(a1)
                 bset    #1,render_flags(a1)
                 moveq   #0,d0
                 btst    #1,(V_int_run_count+3).w
-                beq.s   loc_65E9E
+                beq.s   SKScene_BlowerSelectPlayerPose
                 moveq   #2,d0
 
-loc_65E9E:
+SKScene_BlowerSelectPlayerPose:
                 add.b   character_id(a1),d0
-                move.b  RawAni_65EB0(pc,d0.w),mapping_frame(a1)
+                move.b  SKMhzBlower_ForcedPlayerFramePairs(pc,d0.w),mapping_frame(a1)
                 jsr     (Player_Load_PLC2).l
 
-locret_65EAE:
+SKScene_BlowerPoseReturn:
                 rts
 ; End of function MHZBlower_SetPlayerFlipPose
 
 ; ---------------------------------------------------------------------------
-RawAni_65EB0:
+SKMhzBlower_ForcedPlayerFramePairs:
                 dc.b    $B4, $A7, $B5, $A8
                 even
 
@@ -108,14 +108,14 @@ RawAni_65EB0:
 
 MHZBlowerEmitLeafOnReloadedTimer:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_65ED2
+                bpl.s   SKScene_BlowerLeafSpawnReturn
                 move.w  $3E(a0),$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   locret_65ED2
-                move.l  #loc_63324,(a1)
+                bne.s   SKScene_BlowerLeafSpawnReturn
+                move.l  #MHZ2Scene_InitLeafWithBiasedX,(a1)
                 move.w  a0,parent3(a1)
 
-locret_65ED2:
+SKScene_BlowerLeafSpawnReturn:
                 rts
 ; End of function MHZBlowerEmitLeafOnReloadedTimer
 
@@ -123,7 +123,7 @@ locret_65ED2:
 
 LRZRollingSceneCycleOwnerRenderFlips:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_65EFC
+                bpl.s   SKScene_LRZFlipTimerReturn
                 move.b  #4,anim_frame_timer(a0)
                 move.b  anim_frame(a0),d0
                 addq.b  #1,d0
@@ -134,7 +134,7 @@ LRZRollingSceneCycleOwnerRenderFlips:
                 or.b    d0,d1
                 move.b  d1,render_flags(a0)
 
-locret_65EFC:
+SKScene_LRZFlipTimerReturn:
                 rts
 ; End of function LRZRollingSceneCycleOwnerRenderFlips
 
@@ -164,9 +164,9 @@ LRZRollingScene_OrbitBothPlayers:
 
 LRZRollingSceneOrbitOneCapturedPlayer:
                 btst    d2,$38(a0)
-                beq.w   locret_65FD4
+                beq.w   SKScene_LRZCaptureGateReturn
                 subq.b  #1,anim_frame_timer(a1)
-                bpl.s   loc_65F5C
+                bpl.s   SKScene_LRZOrbitCapturedPlayer
                 move.b  #8,anim_frame_timer(a1)
                 move.b  anim_frame(a1),d0
                 addq.b  #1,anim_frame(a1)
@@ -176,7 +176,7 @@ LRZRollingSceneOrbitOneCapturedPlayer:
                 or.b    d0,d1
                 move.b  d1,render_flags(a1)
 
-loc_65F5C:
+SKScene_LRZOrbitCapturedPlayer:
                 move.b  (a0,d3.w),d0
                 addq.b  #2,(a0,d3.w)
                 jsr     (GetSineCosine).l
@@ -196,10 +196,10 @@ loc_65F5C:
 ; Capture once within the signed 64-by-64 box, stop the timer and scroll lock, and seed the orbit angle
 LRZRollingScene_TryCapturePlayer:
                 btst    d2,$38(a0)
-                bne.s   locret_65FD4
-                lea     word_65FD6(pc),a2
+                bne.s   SKScene_LRZCaptureGateReturn
+                lea     SKLrzRollingScene_PlayerCaptureRectangle(pc),a2
                 jsr     (Check_InMyRange).l
-                beq.s   locret_65FD4
+                beq.s   SKScene_LRZCaptureGateReturn
                 bset    d2,$38(a0)
                 move.w  d3,-(sp)
                 clr.b   (Scroll_lock).w
@@ -218,33 +218,33 @@ LRZRollingScene_TryCapturePlayer:
                 move.w  (sp)+,d3
                 move.b  d0,(a0,d3.w)
 
-locret_65FD4:
+SKScene_LRZCaptureGateReturn:
                 rts
 ; End of function LRZRollingScene_TryCapturePlayer
 
 ; ---------------------------------------------------------------------------
-word_65FD6:
+SKLrzRollingScene_PlayerCaptureRectangle:
                 dc.w    -$20,   $40,  -$20,   $40
 
 ; =============== S U B R O U T I N E =======================================
 
 SSZKnucklesReactToCrouchingP1OnRight:
                 btst    #3,$38(a0)
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
                 lea     (Player_1).w,a1
                 jsr     (Find_OtherObject).l
                 cmpi.w  #$20,d3
-                bhs.w   locret_6206C
+                bhs.w   SKAIZScene_SharedSceneReturn
                 subi.w  #$30,d2
                 cmpi.w  #$20,d2
-                bhs.w   locret_6206C
+                bhs.w   SKAIZScene_SharedSceneReturn
                 tst.w   d0
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 btst    #0,render_flags(a1)
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 cmpi.b  #8,anim(a1)
-                bne.w   locret_6206C
-                lea     byte_6672A(pc),a1
+                bne.w   SKAIZScene_SharedSceneReturn
+                lea     SKSceneAnim_SSZCrouchingPlayerReaction(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; End of function SSZKnucklesReactToCrouchingP1OnRight
 

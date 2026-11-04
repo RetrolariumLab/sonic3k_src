@@ -125,7 +125,7 @@ MHZMini_DeleteFlickerFollower:
 ; ---------------------------------------------------------------------------
 
 MHZMini_InitCameraRelativeMotion:
-                lea     (ObjDat3_6646E).l,a1
+                lea     (SKMhzSceneBossLeaf_Attributes).l,a1
                 jsr     (SetUp_ObjAttributes).l
                 move.l  #MHZMini_CheckHorizontalDeceleration,(a0)
                 bsr.w   MHZMiniParticle_InitMotion

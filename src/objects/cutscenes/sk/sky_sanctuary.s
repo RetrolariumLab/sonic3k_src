@@ -9,33 +9,33 @@ CutsceneKnux_SSZ:
                 move.w  CutsceneKnux_SSZ_Index(pc,d0.w),d1
                 jsr     CutsceneKnux_SSZ_Index(pc,d1.w)
                 btst    #6,$38(a0)
-                bne.s   loc_65702
+                bne.s   SSZScene_SelectTiredGraphics
                 move.l  #Map_Knuckles,mappings(a0)
-                bsr.w   Knuckles_Load_PLC_661E0
+                bsr.w   SKScene_LoadKnuxArtToSceneTiles
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65702:
+SSZScene_SelectTiredGraphics:
                 move.l  #Map_SSZKnucklesTired,mappings(a0)
                 lea     DPLCPtr_SSZKnucklesTired(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_SSZ_Index:
-                dc.w    loc_65730-CutsceneKnux_SSZ_Index
-                dc.w    loc_6575E-CutsceneKnux_SSZ_Index
-                dc.w    loc_65794-CutsceneKnux_SSZ_Index
-                dc.w    loc_657CE-CutsceneKnux_SSZ_Index
-                dc.w    loc_657FE-CutsceneKnux_SSZ_Index
-                dc.w    loc_65826-CutsceneKnux_SSZ_Index
-                dc.w    loc_6584C-CutsceneKnux_SSZ_Index
-                dc.w    loc_65876-CutsceneKnux_SSZ_Index
-                dc.w    loc_658BA-CutsceneKnux_SSZ_Index
-                dc.w    loc_658F2-CutsceneKnux_SSZ_Index
-                dc.w    loc_6594A-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_InitSlottedKnuxAndFlags-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_AnimateUntilArrivalSignal-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_FallAndSeedGroundWait-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_TickDelayAndSetTiredLoop-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_AnimateTiredUntilEggDone-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_WaitThenRestoreNormalArt-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_WaitThenBeginFirstJump-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_AnimateAndLandFirstJump-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_RunRightToX2A8ThenJump-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_LandAndOpenBridgeEvent-CutsceneKnux_SSZ_Index
+                dc.w    SSZScene_AnimateAndCheckCameraExit-CutsceneKnux_SSZ_Index
 ; ---------------------------------------------------------------------------
 
-loc_65730:
+SSZScene_InitSlottedKnuxAndFlags:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 clr.b   (_unkFAB8).w
@@ -44,18 +44,18 @@ loc_65730:
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_6574E:
+SSZScene_SavePaletteAndLoadScene:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_6574E
+                dbf     d6,SSZScene_SavePaletteAndLoadScene
                 lea     Pal_CutsceneKnux(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_6575E:
-                lea     byte_667C1(pc),a1
+SSZScene_AnimateUntilArrivalSignal:
+                lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jsr     (Animate_RawNoSSTCheckResult).l
                 btst    #0,(_unkFAB8).w
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 move.b  #4,routine(a0)
                 move.b  #$56,mapping_frame(a0)
                 move.b  #$33,y_radius(a0)
@@ -64,113 +64,114 @@ loc_6575E:
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_65794:
+SSZScene_FallAndSeedGroundWait:
                 jsr     (MoveSprite_LightGravity).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 add.w   d1,y_pos(a0)
                 move.b  #6,routine(a0)
                 move.w  #5,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_657C4
-                move.l  #loc_66072,(a1)
+                bne.s   SSZScene_TrySmallEggAfterObserver
+                move.l  #SKScene_SSZStartHalfCameraTracker,(a1)
 
-loc_657C4:
-                lea     ChildObjDat_665F6(pc),a2
+SSZScene_TrySmallEggAfterObserver:
+                lea     SKSszCutscene_SmallDeathEggRootSpawnList(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_657CE:
+SSZScene_TickDelayAndSetTiredLoop:
                 moveq   #signextendB(sfx_DeathEggRiseQuiet),d0
                 jsr     (Play_SFX_Continuous).l
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 move.b  #8,routine(a0)
                 bset    #0,render_flags(a0)
                 bset    #6,$38(a0)
                 clr.b   mapping_frame(a0)
-                lea     byte_66719(pc),a1
+                lea     SKSceneAnim_SSZTiredLeadIn(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_657FE:
+SSZScene_AnimateTiredUntilEggDone:
                 moveq   #signextendB(sfx_DeathEggRiseQuiet),d0
                 jsr     (Play_SFX_Continuous).l
                 btst    #1,(_unkFAB8).w
-                bne.s   loc_65814
+                bne.s   SSZScene_BeginTiredPoseWait
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_65814:
+SSZScene_BeginTiredPoseWait:
                 move.b  #$A,routine(a0)
                 clr.b   mapping_frame(a0)
                 move.w  #5,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65826:
+SSZScene_WaitThenRestoreNormalArt:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_6584A
+                bpl.s   SSZScene_NormalArtWaitReturn
                 move.b  #$C,routine(a0)
                 bclr    #0,render_flags(a0)
                 bclr    #6,$38(a0)
                 move.b  #$56,mapping_frame(a0)
                 move.w  #5,$2E(a0)
 
-locret_6584A:
+SSZScene_NormalArtWaitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6584C:
+SSZScene_WaitThenBeginFirstJump:
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 move.b  #$E,routine(a0)
                 move.b  #$13,y_radius(a0)
                 move.w  #$200,x_vel(a0)
                 move.w  #-$300,y_vel(a0)
-                lea     byte_667C1(pc),a1
+                lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_65876:
+; Test the updated vertical velocity after MoveSprite before probing the floor
+SSZScene_AnimateAndLandFirstJump:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 add.w   d1,y_pos(a0)
                 move.b  #$10,routine(a0)
                 move.w  #$300,x_vel(a0)
                 clr.w   y_vel(a0)
                 bclr    #0,render_flags(a0)
-                lea     byte_66824(pc),a1
+                lea     SKSceneAnim_KnuxTravelLoopDelay4(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_658BA:
+SSZScene_RunRightToX2A8ThenJump:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite2).l
                 cmpi.w  #$2A8,x_pos(a0)
-                blo.w   locret_6206C
+                blo.w   SKAIZScene_SharedSceneReturn
                 move.b  #$12,routine(a0)
                 move.b  #$1B,y_radius(a0)
                 move.w  #$480,x_vel(a0)
                 move.w  #-$600,y_vel(a0)
-                lea     byte_667C1(pc),a1
+                lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_658F2:
+SSZScene_LandAndOpenBridgeEvent:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 add.w   d1,y_pos(a0)
                 move.b  #$14,routine(a0)
                 move.w  #$200,priority(a0)
@@ -180,24 +181,24 @@ loc_658F2:
                 st      (Events_bg+$08).w
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
-                lea     byte_6671F(pc),a1
+                lea     SKSszHpzKnuckles_TiredBodyTimedLoop(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_6594A:
+SSZScene_AnimateAndCheckCameraExit:
                 bsr.w   SSZKnucklesReactToCrouchingP1OnRight
                 jsr     (Animate_RawMultiDelay).l
                 move.w  (Camera_X_pos).w,d0
                 subi.w  #$80,d0
                 cmp.w   x_pos(a0),d0
-                bgt.s   loc_65976
+                bgt.s   SSZScene_SaveCheckpointAndPrepPalette
                 move.w  y_pos(a0),d0
                 sub.w   (Camera_Y_pos).w,d0
                 addi.w  #$80,d0
                 cmpi.w  #$200,d0
-                bls.w   locret_6206C
+                bls.w   SKAIZScene_SharedSceneReturn
 
-loc_65976:
+SSZScene_SaveCheckpointAndPrepPalette:
                 move.b  #1,(Last_star_post_hit).w
                 move.w  #$140,(Saved_X_pos).w
                 move.w  #$C6C,(Saved_Y_pos).w
@@ -206,9 +207,9 @@ loc_65976:
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_65998:
+SSZScene_RestorePaletteAndReleaseSlot:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_65998
+                dbf     d6,SSZScene_RestorePaletteAndReleaseSlot
                 lea     (PLC_Monitors).l,a1
                 jsr     (Load_PLC_Raw).l
                 jsr     (Remove_From_TrackingSlot).l
@@ -218,16 +219,16 @@ loc_65998:
 Obj_SSZCutsceneButton:
                 lea     ObjDat_SSZCutsceneButton(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_659C6,(a0)
+                move.l  #SSZScene_DrawOrCullSceneButton,(a0)
 
-loc_659C6:
+SSZScene_DrawOrCullSceneButton:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_659CC:
-                lea     ObjDat3_664AA(pc),a1
+SSZScene_InitSmallDeathEggAndPalette:
+                lea     SKSszCutscene_SmallDeathEggAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65A30,(a0)
+                move.l  #SSZScene_DrawSmallEggAndTickDelay,(a0)
                 move.w  #$200,x_pos(a0)
                 move.w  #$C68,d0
                 move.w  d0,y_pos(a0)
@@ -235,146 +236,147 @@ loc_659CC:
                 move.w  #-$40,$40(a0)
                 move.w  #$100,$2E(a0)
                 move.l  (V_int_run_count).w,(RNG_seed).w
-                lea     ChildObjDat_665C4(pc),a2
+                lea     SKSceneData_SSZDeathEggCompositeChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
                 lea     (Normal_palette_line_4).w,a1
                 lea     (Target_palette_line_4).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_65A14:
+SSZScene_SaveLine4AndPrepSparseCopy:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_65A14
+                dbf     d6,SSZScene_SaveLine4AndPrepSparseCopy
                 lea     Pal_KnuxSSZEnd(pc),a1
                 lea     (Normal_palette_line_4).w,a2
                 moveq   #bytesToWcnt($20),d0
 
-loc_65A24:
+SSZScene_CopyNonzeroEggColors:
                 move.w  (a1)+,d1
-                beq.s   loc_65A2A
+                beq.s   SSZScene_AdvanceSparsePaletteCopy
                 move.w  d1,(a2)
 
-loc_65A2A:
+SSZScene_AdvanceSparsePaletteCopy:
                 addq.w  #2,a2
-                dbf     d0,loc_65A24
+                dbf     d0,SSZScene_CopyNonzeroEggColors
 
-loc_65A30:
+SSZScene_DrawSmallEggAndTickDelay:
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jsr     (Draw_Sprite).l
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_65A48
-                move.l  #loc_65A4A,(a0)
+                bpl.s   SSZScene_SmallEggDelayReturn
+                move.l  #SSZScene_EmitAndMoveEggUntilSignal,(a0)
 
-locret_65A48:
+SSZScene_SmallEggDelayReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65A4A:
+SSZScene_EmitAndMoveEggUntilSignal:
                 bsr.w   SSZSmallDeathEgg_TryParticleEvery32
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jsr     (Draw_Sprite).l
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$38,d0
                 cmp.w   y_pos(a0),d0
-                bls.w   locret_6206C
+                bls.w   SKAIZScene_SharedSceneReturn
                 bset    #5,$38(a0)
                 bset    #1,(_unkFAB8).w
                 lea     (Target_palette_line_4).w,a1
                 lea     (Normal_palette_line_4).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_65A80:
+SSZScene_RestoreEggPaletteAndDelete:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_65A80
+                dbf     d6,SSZScene_RestoreEggPaletteAndDelete
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65A8C:
+SSZScene_DispatchMoveAndDrawCloud:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_65AB0(pc,d0.w),d1
-                jsr     off_65AB0(pc,d1.w)
+                move.w  SSZScene_CloudRoutineOffsets(pc,d0.w),d1
+                jsr     SSZScene_CloudRoutineOffsets(pc,d1.w)
                 jsr     (MoveSprite_SSZBGAdjust).l
                 lea     DPLCPtr_SSZDeathEggCloud(pc),a2
                 jsr     (Perform_DPLC).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_65AB0:
-                dc.w    loc_65AB6-off_65AB0
-                dc.w    loc_65AD4-off_65AB0
-                dc.w    loc_65AF6-off_65AB0
+SSZScene_CloudRoutineOffsets:
+                dc.w    SSZScene_InitSlottedCloudAndTick-SSZScene_CloudRoutineOffsets
+                dc.w    SSZScene_AnimateCloudUntilUnderflow-SSZScene_CloudRoutineOffsets
+                dc.w    SSZScene_TickFinalCloudDelay-SSZScene_CloudRoutineOffsets
 ; ---------------------------------------------------------------------------
 
-loc_65AB6:
-                lea     ObjSlot_664B6(pc),a1
+SSZScene_InitSlottedCloudAndTick:
+                lea     SKSceneData_SSZDeathEggCloudSlotAttrs(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
-                move.l  #byte_66739,$30(a0)
+                move.l  #SKSceneAnim_SSZDeathEggCloud,$30(a0)
                 move.w  y_pos(a0),y_vel(a0)
                 move.w  #$190,$2E(a0)
 
-loc_65AD4:
+SSZScene_AnimateCloudUntilUnderflow:
                 jsr     (Animate_RawMultiDelay).l
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 move.b  #4,routine(a0)
                 move.w  #$10,$40(a0)
                 move.w  #$180,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65AF6:
+SSZScene_TickFinalCloudDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_65B02
+                bmi.s   SSZScene_ReleaseCloudSlotAndDelete
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_65B02:
+SSZScene_ReleaseCloudSlotAndDelete:
                 jsr     (Remove_From_TrackingSlot).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65B0E:
-                lea     ObjDat3_664C8(pc),a1
+SSZScene_InitBackgroundSpriteMask:
+                lea     SKSszSmallDeathEgg_SpriteMaskAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65B24,(a0)
+                move.l  #SSZScene_ApplyMaskAndCheckRelease,(a0)
                 move.w  y_pos(a0),y_vel(a0)
 
-loc_65B24:
+SSZScene_ApplyMaskAndCheckRelease:
                 st      (Spritemask_flag).w
                 btst    #2,(_unkFAB8).w
-                bne.s   loc_65B3C
+                bne.s   SSZScene_DeleteReleasedMask
                 jsr     (MoveSprite_SSZBGAdjust).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65B3C:
+SSZScene_DeleteReleasedMask:
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65B42:
-                lea     word_664D4(pc),a1
+SSZScene_InitTimedChildEffect:
+                lea     SKSceneData_SSZDeathEggPiecePartialAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_65B5A,(a0)
+                move.l  #SSZScene_FollowParentAndAnimateEffect,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
 
-loc_65B5A:
+SSZScene_FollowParentAndAnimateEffect:
                 jsr     (Refresh_ChildPosition).l
-                lea     byte_66760(pc),a1
+                lea     SKSceneAnim_SSZDeathEggBackgroundPiece(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65B70:
-                lea     word_664DA(pc),a1
+SSZScene_InitSmallEggParticle:
+                lea     SKSceneData_SSZDeathEggParticlePartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_65BAE,(a0)
+                move.l  #SSZScene_SelectParticleParityFrame,(a0)
                 jsr     (Random_Number).l
                 move.w  #$100,d1
                 andi.w  #$3F,d0
                 subi.w  #$20,d0
-                bpl.s   loc_65B96
+                bpl.s   SSZScene_StoreParticleSpeedAndOffsets
                 neg.w   d1
 
-loc_65B96:
+; The particle's Y offset comes from the high word of the random value
+SSZScene_StoreParticleSpeedAndOffsets:
                 move.w  d1,x_vel(a0)
                 add.w   d0,x_pos(a0)
                 swap    d0
@@ -382,13 +384,13 @@ loc_65B96:
                 add.w   d0,y_pos(a0)
                 move.w  #$100,y_vel(a0)
 
-loc_65BAE:
+SSZScene_SelectParticleParityFrame:
                 move.b  #4,mapping_frame(a0)
                 btst    #0,(V_int_run_count+3).w
-                beq.s   loc_65BC2
+                beq.s   SSZScene_AccelerateMoveAndCullParticle
                 move.b  #5,mapping_frame(a0)
 
-loc_65BC2:
+SSZScene_AccelerateMoveAndCullParticle:
                 addi.w  #-$10,y_vel(a0)
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_CheckDeleteXY).l

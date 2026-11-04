@@ -10,18 +10,18 @@ CutsceneKnux_LRZ2:
                 move.b  routine(a0),d0
                 move.w  CutsceneKnux_LRZ2_Index(pc,d0.w),d1
                 jsr     CutsceneKnux_LRZ2_Index(pc,d1.w)
-                bsr.w   Knuckles_Load_PLC_661E0
+                bsr.w   SKScene_LoadKnuxArtToSceneTiles
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_LRZ2_Index:
-                dc.w    loc_63A96-CutsceneKnux_LRZ2_Index
-                dc.w    loc_63ACA-CutsceneKnux_LRZ2_Index
-                dc.w    loc_63AE8-CutsceneKnux_LRZ2_Index
-                dc.w    loc_63B10-CutsceneKnux_LRZ2_Index
-                dc.w    locret_63B20-CutsceneKnux_LRZ2_Index
+                dc.w    LRZ2Scene_InitKnucklesAtBoulder-CutsceneKnux_LRZ2_Index
+                dc.w    LRZ2Scene_StartReactionOnCameraCue-CutsceneKnux_LRZ2_Index
+                dc.w    LRZ2Scene_AnimateHighFrameReaction-CutsceneKnux_LRZ2_Index
+                dc.w    LRZ2Scene_AnimateFinalReaction-CutsceneKnux_LRZ2_Index
+                dc.w    LRZ2Scene_FinalActorReturn-CutsceneKnux_LRZ2_Index
 ; ---------------------------------------------------------------------------
 
-loc_63A96:
+LRZ2Scene_InitKnucklesAtBoulder:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 bset    #0,render_flags(a0)
@@ -33,91 +33,91 @@ loc_63A96:
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_63ACA:
+LRZ2Scene_StartReactionOnCameraCue:
                 btst    #1,(_unkFAB8).w
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 move.b  #4,routine(a0)
                 move.b  #$DE,mapping_frame(a0)
-                move.l  #loc_63AF2,$34(a0)
+                move.l  #LRZ2Scene_SignalBoulderAndSetFinalAnim,$34(a0)
 
-loc_63AE8:
-                lea     byte_66891(pc),a1
+LRZ2Scene_AnimateHighFrameReaction:
+                lea     SKSceneAnim_LRZSignalReaction(pc),a1
                 jmp     (Animate_Raw2NoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_63AF2:
+LRZ2Scene_SignalBoulderAndSetFinalAnim:
                 move.b  #6,routine(a0)
                 bset    #2,(_unkFAB8).w
-                move.l  #loc_63B1A,$34(a0)
-                lea     byte_668A7(pc),a1
+                move.l  #LRZ2Scene_SelectFinalIdle,$34(a0)
+                lea     SKSceneAnim_LRZPostSignalReaction(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_63B10:
-                lea     byte_668A7(pc),a1
+LRZ2Scene_AnimateFinalReaction:
+                lea     SKSceneAnim_LRZPostSignalReaction(pc),a1
                 jmp     (Animate_Raw2NoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_63B1A:
+LRZ2Scene_SelectFinalIdle:
                 move.b  #8,routine(a0)
 
-locret_63B20:
+LRZ2Scene_FinalActorReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 Obj_LRZ2CutsceneKnuckles:
                 cmpi.b  #2,(Player_1+character_id).w
                 beq.w   CutsceneKnux_Delete
-                move.l  #loc_63B40,(a0)
+                move.l  #LRZ2Scene_CheckPrimarySceneTrigger,(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_63B40
+                bne.s   LRZ2Scene_CheckPrimarySceneTrigger
                 move.l  #SKInput_LockP2IfActive,(a1)
 
-loc_63B40:
+LRZ2Scene_CheckPrimarySceneTrigger:
                 lea     (Player_1).w,a1
-                lea     word_63B94(pc),a2
+                lea     LRZ2Scene_PrimaryTriggerBounds(pc),a2
                 jsr     (Check_InMyRange).l
-                beq.w   locret_6206C
-                move.l  #loc_63B9C,(a0)
+                beq.w   SKAIZScene_SharedSceneReturn
+                move.l  #LRZ2Scene_LockP1AtX39B0,(a0)
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 jsr     (AllocateObject).l
-                bne.s   loc_63B72
+                bne.s   LRZ2Scene_TryMusicAndBoulderActors
                 move.l  #Obj_CutsceneKnuckles,(a1)
                 move.b  #$24,subtype(a1)
 
-loc_63B72:
+LRZ2Scene_TryMusicAndBoulderActors:
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 jsr     (AllocateObject).l
-                bne.s   loc_63B84
-                move.l  #loc_63C3E,(a1)
+                bne.s   LRZ2Scene_QueueBoulderArt
+                move.l  #LRZ2Scene_InitSelfParentedBoulder,(a1)
 
-loc_63B84:
+LRZ2Scene_QueueBoulderArt:
                 lea     (ArtKosM_LRZKnuxBoulder).l,a1
                 move.w  #tiles_to_bytes(ArtTile_LRZKnuxBoulder),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
-word_63B94:
+LRZ2Scene_PrimaryTriggerBounds:
                 dc.w    -$10,   $10, -$240,  $240
 ; ---------------------------------------------------------------------------
 
-loc_63B9C:
+LRZ2Scene_LockP1AtX39B0:
                 lea     (Player_1).w,a1
                 cmpi.w  #$39B0,x_pos(a1)
-                blo.s   locret_63BBC
-                move.l  #loc_63BBE,(a0)
+                blo.s   LRZ2Scene_PrimaryPositionReturn
+                move.l  #LRZ2Scene_WaitGroundedAndUnlockCamera,(a0)
                 st      (Ctrl_1_locked).w
                 jsr     (Stop_Object).l
                 clr.w   (Ctrl_1_logical).w
 
-locret_63BBC:
+LRZ2Scene_PrimaryPositionReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63BBE:
+LRZ2Scene_WaitGroundedAndUnlockCamera:
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_6206C
-                move.l  #loc_63BF4,(a0)
+                bne.w   SKAIZScene_SharedSceneReturn
+                move.l  #LRZ2Scene_PanUpToY90,(a0)
                 bset    #0,(_unkFAB8).w
                 move.w  #0,(Camera_min_X_pos).w
                 st      (Scroll_lock).w
@@ -127,20 +127,20 @@ loc_63BBE:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63BF4:
+LRZ2Scene_PanUpToY90:
                 move.w  (Camera_Y_pos).w,d0
                 subq.w  #2,d0
                 move.w  d0,(Camera_Y_pos).w
                 cmpi.w  #$90,d0
-                bhi.w   locret_6206C
-                move.l  #loc_63C14,(a0)
+                bhi.w   SKAIZScene_SharedSceneReturn
+                move.l  #LRZ2Scene_StartNextZoneAtY4C0,(a0)
                 bset    #1,(_unkFAB8).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63C14:
+LRZ2Scene_StartNextZoneAtY4C0:
                 cmpi.w  #$4C0,(Player_1+y_pos).w
-                blo.w   locret_6206C
+                blo.w   SKAIZScene_SharedSceneReturn
                 st      (Act3_flag).w
                 move.w  (Ring_count).w,(Act3_ring_count).w
                 move.l  (Timer).w,(Act3_timer).w
@@ -149,10 +149,10 @@ loc_63C14:
                 jmp     (StartNewLevel).l
 ; ---------------------------------------------------------------------------
 
-loc_63C3E:
-                lea     ObjDat3_6647A(pc),a1
+LRZ2Scene_InitSelfParentedBoulder:
+                lea     SKLrzCutscene_BoulderAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_63C66,(a0)
+                move.l  #LRZ2Scene_WaitForBoulderStartSignal,(a0)
                 move.w  #$3A08,x_pos(a0)
                 move.w  #$E2,y_pos(a0)
                 move.b  #$1F,y_radius(a0)
@@ -160,17 +160,17 @@ loc_63C3E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63C66:
+LRZ2Scene_WaitForBoulderStartSignal:
                 btst    #2,(_unkFAB8).w
-                beq.s   loc_63C7A
-                move.l  #loc_63C80,(a0)
+                beq.s   LRZ2Scene_DrawWaitingBoulder
+                move.l  #LRZ2Scene_RollAndCheckFloorGap,(a0)
                 move.w  #-$200,x_vel(a0)
 
-loc_63C7A:
+LRZ2Scene_DrawWaitingBoulder:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_63C80:
+LRZ2Scene_RollAndCheckFloorGap:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
                 bsr.w   LRZRollingSceneCycleOwnerRenderFlips
@@ -178,32 +178,32 @@ loc_63C80:
                 jsr     (MoveSprite2).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_63CA6
-                move.l  #loc_63CAC,(a0)
+                bmi.s   LRZ2Scene_DrawRollingBoulder
+                move.l  #LRZ2Scene_MoveAirBoulderAndCheckBounce,(a0)
 
-loc_63CA6:
+LRZ2Scene_DrawRollingBoulder:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_63CAC:
+LRZ2Scene_MoveAirBoulderAndCheckBounce:
                 moveq   #signextendB(sfx_PushBlock),d0
                 jsr     (Play_SFX_Continuous).l
                 bsr.w   LRZRollingSceneCycleOwnerRenderFlips
                 bsr.w   LRZRollingScene_OrbitBothPlayers
                 jsr     (MoveSprite_LightGravity).l
                 tst.w   y_vel(a0)
-                bmi.s   loc_63CE6
+                bmi.s   LRZ2Scene_DrawAirborneBoulder
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   loc_63CE6
+                bpl.s   LRZ2Scene_DrawAirborneBoulder
                 move.w  #-$100,y_vel(a0)
                 move.w  #$14,(Screen_shake_flag).w
                 moveq   #signextendB(sfx_Collapse),d0
                 jsr     (Play_SFX).l
 
-loc_63CE6:
+LRZ2Scene_DrawAirborneBoulder:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_63CEC:
+LRZ2Scene_HPZCameraBoundsAndSplit:
                 dc.w    $180,  $480,  $FE0, $11E0
                 dc.w    $380,  $380, $10E0, $10E0

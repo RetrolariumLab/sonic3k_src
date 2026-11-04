@@ -65,7 +65,7 @@ loc_5E0D6:
                 move.b  routine(a0),d0
                 move.w  off_5E0F0(pc,d0.w),d1
                 jsr     off_5E0F0(pc,d1.w)
-                jsr     (Knuckles_Load_PLC_661E0).l
+                jsr     (SKScene_LoadKnuxArtToSceneTiles).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 off_5E0F0:
@@ -96,7 +96,7 @@ loc_5E13A:
 ; ---------------------------------------------------------------------------
 
 loc_5E142:
-                lea     (byte_66824).l,a1
+                lea     (SKSceneAnim_KnuxTravelLoopDelay4).l,a1
                 jsr     (Animate_RawNoSSTCheckResult).l
                 jsr     (MoveSprite2).l
                 cmpi.w  #$120,x_pos(a0)

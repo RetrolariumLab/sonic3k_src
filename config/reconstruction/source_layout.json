@@ -21097,7 +21097,7 @@
       "responsibility": "Hidden Palace encounter aftermath, ship theft sequence and scripted player guidance through the scene.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 472,
+      "physical_lines": 473,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -21139,7 +21139,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_65360",
+          "name": "HPZCrane_InitSecondTargetBank",
           "kind": "terminal-tail",
           "reason": "Close the complete linked crane movement and animation program, including its indexed private geometry and terminal branch back to the shared motion state.",
           "origin_first_line": 5051,
@@ -21172,7 +21172,7 @@
       "responsibility": "Hidden Palace transient effects, fragments, timed motion and chain child construction.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 177,
+      "physical_lines": 178,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -21207,7 +21207,7 @@
       "responsibility": "Hidden Palace Knuckles encounter setup, combat movement, attack and defeat transition state program.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 568,
+      "physical_lines": 569,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -21219,7 +21219,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6429E",
+          "name": "HPZKnux_TakeHitAndSelectRecoil",
           "kind": "terminal-tail",
           "reason": "Keep the final encounter defeat and dizzy-pose transition tails together after the original independent fight returns.",
           "origin_first_line": 3654,
@@ -21282,7 +21282,7 @@
       "responsibility": "Hidden Palace post-encounter Knuckles movement, ship-scene setup and recovery progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 456,
+      "physical_lines": 457,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -21294,7 +21294,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6438A",
+          "name": "HPZKnux_PlayPeriodicCollapseSound",
           "kind": "terminal-tail",
           "reason": "Close the complete post-encounter recovery and ship-scene transition program; all its conditional returns remain one physically inseparable original cohort.",
           "origin_first_line": 3722,
@@ -21334,7 +21334,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_64E88",
+          "name": "HPZShip_InitReferenceAndAttachments",
           "kind": "terminal-tail",
           "reason": "Close the complete ship controller and scene synchronization callbacks, which have only unconditional terminal dispatch.",
           "origin_first_line": 4643,
@@ -21379,7 +21379,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6502E",
+          "name": "HPZShipCrane_InitOverlayAndBeam",
           "kind": "terminal-tail",
           "reason": "Close the complete family of ship attachments and adjusted child drawing callbacks with no original independent return boundaries.",
           "origin_first_line": 4760,
@@ -21412,7 +21412,7 @@
       "responsibility": "Knuckles cutscene dispatch and Angel Island act-one and act-two scene programs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 326,
+      "physical_lines": 327,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -21474,7 +21474,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_44F94",
+          "name": "S3CNZScene_ScriptLeftUntilKnuxExits",
           "kind": "terminal-tail",
           "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
           "origin_first_line": 4514,
@@ -21569,7 +21569,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_45410",
+          "name": "S3LBZScene_FallPillarWithBGAndCull",
           "kind": "terminal-tail",
           "reason": "The complete object state or helper keeps its conditional early return with its final unconditional sprite-service tail call; only checked private data resources follow.",
           "origin_first_line": 4912,
@@ -21652,7 +21652,7 @@
       "responsibility": "Knuckles cutscene dispatch and Angel Island act-one and act-two encounters.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 328,
+      "physical_lines": 329,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -21664,7 +21664,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_620AA",
+          "name": "SKAIZScene_UpdateJumpAndBounceOnce",
           "kind": "terminal-tail",
           "reason": "Keep the final conditional landing, motion and parent-attached solid callbacks together after all earlier independent encounter return points.",
           "origin_first_line": 771,
@@ -21692,7 +21692,7 @@
       "responsibility": "Angel Island plane opening actor, flight sequence, child construction and private palette resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 545,
+      "physical_lines": 547,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -21799,7 +21799,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_6261A",
+          "name": "SKCNZScene_ScriptLeftUntilKnuxExits",
           "kind": "terminal-tail",
           "reason": "Close the final input-controlled Carnival Night exit callback, including its conditional return and deletion tail.",
           "origin_first_line": 1252,
@@ -21904,7 +21904,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_629A8",
+          "name": "SKLBZScene_SplashAtWaterlineOnce",
           "kind": "terminal-tail",
           "reason": "Keep the final Launch Base water, moving scene children and private velocity data together after the last original independent return.",
           "origin_first_line": 1560,
@@ -22077,7 +22077,7 @@
       "responsibility": "Mushroom Hill second-act Knuckles encounter, motion and scene transition helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 284,
+      "physical_lines": 285,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -22142,7 +22142,7 @@
       "responsibility": "Standalone Knuckles opening sequence, skip input and startup scene actors.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 508,
+      "physical_lines": 509,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",
@@ -22154,7 +22154,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_63694",
+          "name": "KnuxOpening_SelectAnimalPosAndBounds",
           "kind": "terminal-tail",
           "reason": "Close the opening scene child actor programs, indexed private records and final swing or deletion callbacks after the last original independent return.",
           "origin_first_line": 2637,
@@ -22182,7 +22182,7 @@
       "responsibility": "Sky Sanctuary Knuckles encounter, tired actor and scene button program.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 394,
+      "physical_lines": 396,
       "origin": {
         "commit": "685ff61c714d63ac4759d95513e2a3c2d4726221",
         "path": "sonic3k.s",

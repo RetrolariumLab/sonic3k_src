@@ -5,33 +5,33 @@
 
 CutsceneKnux_HPZ:
                 movea.l a0,a1
-                move.l  #loc_63D1A,(a1)
+                move.l  #HPZKnux_CheckCameraAndBeginEncounter,(a1)
                 lea     (Dynamic_object_RAM+(object_size*45)).w,a2
                 move.w  a2,(_unkFAA4).w
                 moveq   #bytesToWcnt(object_size),d0
 
-loc_63D0E:
+HPZKnux_CopyRelocatedActorAndDelete:
                 move.w  (a1)+,(a2)+
-                dbf     d0,loc_63D0E
+                dbf     d0,HPZKnux_CopyRelocatedActorAndDelete
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_63D1A:
+HPZKnux_CheckCameraAndBeginEncounter:
                 cmpi.b  #2,(Player_1+character_id).w
                 beq.w   CutsceneKnux_Delete
-                lea     word_63CEC(pc),a1
+                lea     LRZ2Scene_HPZCameraBoundsAndSplit(pc),a1
                 jsr     (Check_CameraInRange).l
                 jsr     (Boss_BeginCameraTransition).l
                 jsr     (AllocateObject).l
-                bne.s   loc_63D5C
+                bne.s   HPZKnux_InitEncounterAndPalette
                 move.l  #SKEndCamera_TickAndSaveMusic,(a1)
-                move.l  #loc_63DD4,$34(a1)
+                move.l  #HPZKnux_SignalCameraReadyAndDelete,$34(a1)
                 move.b  #mus_Knuckles,boss_saved_mus(a1)
                 move.w  #2*60,$2E(a1)
                 move.b  $27(a0),$27(a1)
 
-loc_63D5C:
-                move.l  #loc_63DE0,(a0)
+HPZKnux_InitEncounterAndPalette:
+                move.l  #HPZKnux_DispatchLoadArtAndDraw,(a0)
                 move.l  #Map_Knuckles,mappings(a0)
                 move.w  #make_art_tile(ArtTile_CutsceneKnux,1,0),art_tile(a0)
                 move.w  #$100,priority(a0)
@@ -43,497 +43,498 @@ loc_63D5C:
                 bset    #0,render_flags(a0)
                 move.b  #$D8,mapping_frame(a0)
                 move.b  #8,collision_property(a0)
-                move.l  #byte_66771,$30(a0)
+                move.l  #SKSceneAnim_HPZEncounterOpening,$30(a0)
                 clr.w   $44(a0)
                 lea     (Normal_palette_line_2).w,a1
                 lea     (Target_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d6
 
-loc_63DBC:
+HPZKnux_CopyAndLoadScenePalette:
                 move.l  (a1)+,(a2)+
-                dbf     d6,loc_63DBC
+                dbf     d6,HPZKnux_CopyAndLoadScenePalette
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
                 move.w  #$88,(Normal_palette_line_2+$C).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63DD4:
+HPZKnux_SignalCameraReadyAndDelete:
                 bset    #0,(_unkFAB8).w
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_63DE0:
+HPZKnux_DispatchLoadArtAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_63E1E(pc,d0.w),d1
-                jsr     off_63E1E(pc,d1.w)
+                move.w  SKHPZKnuckles_StateRelativeWordTable(pc,d0.w),d1
+                jsr     SKHPZKnuckles_StateRelativeWordTable(pc,d1.w)
                 move.w  $44(a0),d0
-                move.w  off_63E00(pc,d0.w),d0
-                jsr     off_63E00(pc,d0.w)
+                move.w  HPZKnux_GraphicsLoaderOffsets(pc,d0.w),d0
+                jsr     HPZKnux_GraphicsLoaderOffsets(pc,d0.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_63E00:
-                dc.w    loc_63E06-off_63E00
-                dc.w    loc_63E0A-off_63E00
-                dc.w    loc_63E14-off_63E00
+HPZKnux_GraphicsLoaderOffsets:
+                dc.w    HPZKnux_LoadNormalCutsceneArt-HPZKnux_GraphicsLoaderOffsets
+                dc.w    SKHPZKnuckles_LoadHPZGrabCutsceneArt-HPZKnux_GraphicsLoaderOffsets
+                dc.w    SKHPZKnuckles_LoadSSZTiredCutsceneArt-HPZKnux_GraphicsLoaderOffsets
 ; ---------------------------------------------------------------------------
 
-loc_63E06:
-                bra.w   Knuckles_Load_PLC_661E0
+HPZKnux_LoadNormalCutsceneArt:
+                bra.w   SKScene_LoadKnuxArtToSceneTiles
 ; ---------------------------------------------------------------------------
 
-loc_63E0A:
+SKHPZKnuckles_LoadHPZGrabCutsceneArt:
                 lea     DPLCPtr_HPZKnucklesGrab(pc),a2
                 jmp     (Perform_DPLC).l
 ; ---------------------------------------------------------------------------
 
-loc_63E14:
+SKHPZKnuckles_LoadSSZTiredCutsceneArt:
                 lea     DPLCPtr_SSZKnucklesTired(pc),a2
                 jmp     (Perform_DPLC).l
 ; ---------------------------------------------------------------------------
-off_63E1E:
-                dc.w    loc_63E7C-off_63E1E
-                dc.w    loc_63EDA-off_63E1E
-                dc.w    loc_63F3C-off_63E1E
-                dc.w    loc_63FD8-off_63E1E
-                dc.w    loc_64016-off_63E1E
-                dc.w    loc_6403A-off_63E1E
-                dc.w    loc_64090-off_63E1E
-                dc.w    loc_64102-off_63E1E
-                dc.w    loc_6414C-off_63E1E
-                dc.w    loc_64184-off_63E1E
-                dc.w    loc_641EC-off_63E1E
-                dc.w    loc_64258-off_63E1E
-                dc.w    loc_642F0-off_63E1E
-                dc.w    loc_64350-off_63E1E
-                dc.w    loc_6438A-off_63E1E
-                dc.w    loc_643BE-off_63E1E
-                dc.w    loc_643EA-off_63E1E
-                dc.w    loc_64422-off_63E1E
-                dc.w    loc_64460-off_63E1E
-                dc.w    loc_6451E-off_63E1E
-                dc.w    loc_64574-off_63E1E
-                dc.w    loc_64594-off_63E1E
-                dc.w    loc_645D4-off_63E1E
-                dc.w    loc_64610-off_63E1E
-                dc.w    loc_64668-off_63E1E
-                dc.w    loc_64692-off_63E1E
-                dc.w    loc_646F6-off_63E1E
-                dc.w    loc_64758-off_63E1E
-                dc.w    loc_647C6-off_63E1E
-                dc.w    loc_6480A-off_63E1E
-                dc.w    loc_64846-off_63E1E
-                dc.w    loc_6487C-off_63E1E
-                dc.w    loc_648B2-off_63E1E
-                dc.w    loc_648E2-off_63E1E
-                dc.w    loc_648F2-off_63E1E
-                dc.w    loc_64952-off_63E1E
-                dc.w    loc_64984-off_63E1E
-                dc.w    loc_649AE-off_63E1E
-                dc.w    loc_649D6-off_63E1E
-                dc.w    loc_64A00-off_63E1E
-                dc.w    loc_64A36-off_63E1E
-                dc.w    loc_64A6E-off_63E1E
-                dc.w    loc_64AC0-off_63E1E
-                dc.w    loc_64B10-off_63E1E
-                dc.w    loc_64B6A-off_63E1E
-                dc.w    loc_64BB8-off_63E1E
-                dc.w    loc_64BFA-off_63E1E
+SKHPZKnuckles_StateRelativeWordTable:
+                dc.w    HPZKnux_AnimateIdleAndCountLoops-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateGuardAndCheckTarget-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_UpdateRecoilMotion-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickShortHoldAndCheckContact-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateJumpPreparation-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_JumpAndSwitchAtApex-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AirRushAndCheckPassedTarget-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TurnaroundFallAndCheckFloor-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateLandingAndCheckGuard-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_PlayPeriodicChargeSound-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_DashAndCheckCameraMargin-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_HitBounceAndCheckLanding-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_DefeatBounceAndCheckFloor-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateDefeatLanding-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_PlayPeriodicCollapseSound-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    SKHPZKnuckles_CountResetPoseDelay-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickPreRunAnimDelay-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateAndAccelerateRight-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateAndWaitForShipReady-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_JumpTowardShipAndCheckFloor-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    SKHPZKnuckles_CountShortLandedJumpPause-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_JumpLeftAndCheckHeight-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickGrabPauseBeforeRun-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateAndCapRightRun-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickGrabHoldBeforeJump-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_JumpAndCheckShipContact-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_ReboundAndCheckHeight-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AccelerateTowardEmerald-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_JumpAndCheckEmeraldContact-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_CheckShipReleaseSignal-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickHoldAndSelectParityFrame-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_SelectParityFrameBeforeFall-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimatePostReleaseLanding-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_WaitForGuideRumbleSignal-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickRumbleDelay-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_FallAndCheckRumbleFloor-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateRumbleLanding-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateExtendedPause-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_TickPoseResetDelay-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AccelerateLeftToWorldX-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateGrabUntilRetreat-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateRetreatAndSignalPlatform-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_RetreatRunToCameraLeft-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateTiredAndCheckDeparture-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_UpdateFinalJumpToWorldX-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateTiredAndWaitForBeam-SKHPZKnuckles_StateRelativeWordTable
+                dc.w    HPZKnux_AnimateTerminalWait-SKHPZKnuckles_StateRelativeWordTable
 ; ---------------------------------------------------------------------------
 
-loc_63E7C:
+HPZKnux_AnimateIdleAndCountLoops:
                 jsr     (Animate_Raw2MultiDelay).l
                 tst.w   d2
-                bpl.s   loc_63EA0
+                bpl.s   HPZKnux_FaceTargetAndCheckRange
                 btst    #0,(_unkFAB8).w
-                beq.s   loc_63EA0
+                beq.s   HPZKnux_FaceTargetAndCheckRange
                 move.b  $39(a0),d0
                 addq.b  #1,d0
                 cmpi.b  #2,d0
-                bhs.w   loc_641C4
+                bhs.w   HPZKnux_Begin59TickCharge
                 move.b  d0,$39(a0)
 
-loc_63EA0:
+HPZKnux_FaceTargetAndCheckRange:
                 jsr     (Find_SonicTails).l
                 bsr.w   HPZKnucklesFaceTargetFromSideWord
                 cmpi.w  #$40,d3
-                bhs.w   locret_6206C
+                bhs.w   SKAIZScene_SharedSceneReturn
                 cmpi.w  #$30,d2
-                bhs.w   locret_6206C
-                bra.w   loc_63F20
+                bhs.w   SKAIZScene_SharedSceneReturn
+                bra.w   HPZKnux_StartTwoSecondGuard
 ; ---------------------------------------------------------------------------
 
-loc_63EBE:
+HPZKnux_ResetIdleAndStop:
                 move.b  #0,routine(a0)
                 clr.b   $39(a0)
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                lea     byte_66771(pc),a1
+                lea     SKSceneAnim_HPZEncounterOpening(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_63EDA:
+HPZKnux_AnimateGuardAndCheckTarget:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (Find_SonicTails).l
                 bsr.w   HPZKnucklesFaceTargetFromSideWord
                 cmpi.w  #$10,d3
-                bhs.s   loc_63F00
+                bhs.s   HPZKnux_TickGuardOrDispatchContact
                 cmpi.w  #$20,d2
-                bhs.s   loc_63F00
+                bhs.s   HPZKnux_TickGuardOrDispatchContact
                 cmpi.b  #2,anim(a1)
-                bne.w   loc_63FF8
+                bne.w   HPZKnux_BeginAttackIfPlayerNotHurt
 
-loc_63F00:
+HPZKnux_TickGuardOrDispatchContact:
                 subq.w  #1,$2E(a0)
-                bmi.w   loc_64066
-                lea     off_63F10(pc),a3
-                bra.w   loc_660BE
+                bmi.w   HPZKnux_BeginJumpPreparation
+                lea     HPZKnux_GuardContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_63F10:
-                dc.l    loc_63F7A
-                dc.l    loc_63FF8
-                dc.l    loc_6429E
-                dc.l    loc_660A6
+HPZKnux_GuardContactHandlers:
+                dc.l    HPZKnux_BeginRecoilAndReversePlayer
+                dc.l    HPZKnux_BeginAttackIfPlayerNotHurt
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_63F20:
+HPZKnux_StartTwoSecondGuard:
                 move.b  #2,routine(a0)
                 move.b  #$DA,mapping_frame(a0)
                 move.w  #(2*60)-1,$2E(a0)
-                lea     byte_667AD(pc),a1
+                lea     SKHpzKnuckles_FrontContactBodyFrameLoop(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_63F3C:
+HPZKnux_UpdateRecoilMotion:
                 jsr     (HPZKnux_StopAtCameraXMargins).l
                 move.w  x_vel(a0),d0
-                beq.s   loc_63F58
+                beq.s   HPZKnux_AnimateRecoilAndCheckResult
                 move.w  $40(a0),d1
                 add.w   d1,d0
                 move.w  d0,x_vel(a0)
                 jsr     (MoveSprite2).l
 
-loc_63F58:
+HPZKnux_AnimateRecoilAndCheckResult:
                 jsr     (Animate_Raw2MultiDelay).l
-                bmi.w   locret_6206C
-                lea     off_63F6A(pc),a3
-                bra.w   loc_660BE
+                bmi.w   SKAIZScene_SharedSceneReturn
+                lea     HPZKnux_RecoilContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_63F6A:
-                dc.l    loc_63F7A
-                dc.l    loc_660A6
-                dc.l    loc_6429E
-                dc.l    loc_660A6
+HPZKnux_RecoilContactHandlers:
+                dc.l    HPZKnux_BeginRecoilAndReversePlayer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_63F7A:
+HPZKnux_BeginRecoilAndReversePlayer:
                 move.b  #4,routine(a0)
-                move.l  #loc_63EBE,$34(a0)
+                move.l  #HPZKnux_ResetIdleAndStop,$34(a0)
                 move.w  #$2C0,d3
                 move.w  #-$20,d4
                 btst    #0,render_flags(a0)
-                bne.s   loc_63F9C
+                bne.s   HPZKnux_StoreRecoilAndChooseMinSpeed
                 neg.w   d3
                 neg.w   d4
 
-loc_63F9C:
+HPZKnux_StoreRecoilAndChooseMinSpeed:
                 move.w  d3,x_vel(a0)
                 move.w  d4,$40(a0)
                 move.w  x_vel(a1),d0
                 move.w  #$100,d1
                 move.w  #-$100,d2
                 cmp.w   d2,d0
-                blt.s   loc_63FC0
+                blt.s   HPZKnux_ReversePlayerAndSetRecoilAnim
                 cmp.w   d1,d0
-                bge.s   loc_63FC0
+                bge.s   HPZKnux_ReversePlayerAndSetRecoilAnim
                 tst.w   d0
-                bpl.s   loc_63FBE
+                bpl.s   HPZKnux_ApplyMinimumPlayerXSpeed
                 move.w  d2,d1
 
-loc_63FBE:
+HPZKnux_ApplyMinimumPlayerXSpeed:
                 move.w  d1,d0
 
-loc_63FC0:
+HPZKnux_ReversePlayerAndSetRecoilAnim:
                 neg.w   d0
                 move.w  d0,x_vel(a1)
                 neg.w   y_vel(a1)
                 neg.w   ground_vel(a1)
-                lea     byte_667B4(pc),a1
+                lea     SKSceneAnim_HPZFrontCounterRecoil(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_63FD8:
+HPZKnux_TickShortHoldAndCheckContact:
                 subq.w  #1,$2E(a0)
-                bmi.w   loc_63EBE
-                lea     off_63FE8(pc),a3
-                bra.w   loc_660BE
+                bmi.w   HPZKnux_ResetIdleAndStop
+                lea     HPZKnux_ShortHoldContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_63FE8:
-                dc.l    loc_660A6
-                dc.l    loc_660A6
-                dc.l    loc_6429E
-                dc.l    loc_660A6
+HPZKnux_ShortHoldContactHandlers:
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_63FF8:
+HPZKnux_BeginAttackIfPlayerNotHurt:
                 tst.b   $34(a1)
-                bne.w   locret_6206C
+                bne.w   SKAIZScene_SharedSceneReturn
                 move.b  #6,routine(a0)
                 move.b  #$DE,mapping_frame(a0)
                 move.w  #7,$2E(a0)
-                bra.w   loc_660AE
+                bra.w   SKScene_HPZHurtUnlessInvincible
 ; ---------------------------------------------------------------------------
 
-loc_64016:
+HPZKnux_AnimateJumpPreparation:
                 jmp     (Animate_RawCheckResult).l
 ; ---------------------------------------------------------------------------
 
-loc_6401C:
+HPZKnux_LaunchVerticalJump:
                 move.b  #$A,routine(a0)
                 move.w  #-$600,y_vel(a0)
                 moveq   #signextendB(sfx_Jump),d0
                 jsr     (Play_SFX).l
-                lea     byte_667C1(pc),a1
+                lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_6403A:
+HPZKnux_JumpAndSwitchAtApex:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bpl.w   loc_640DC
-                lea     off_64056(pc),a3
-                bra.w   loc_660BE
+                bpl.w   HPZKnux_BeginAirRushAtApex
+                lea     HPZKnux_HurtContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_64056:
-                dc.l    loc_660A6
-                dc.l    loc_660A6
-                dc.l    loc_660A6
-                dc.l    loc_660A6
+HPZKnux_HurtContactHandlers:
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_64066:
+HPZKnux_BeginJumpPreparation:
                 move.b  #8,routine(a0)
                 jsr     (Find_SonicTails).l
                 bsr.w   HPZKnucklesFaceTargetFromSideWord
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                move.l  #loc_6401C,$34(a0)
-                lea     byte_667CC(pc),a1
+                move.l  #HPZKnux_LaunchVerticalJump,$34(a0)
+                lea     SKHpzKnuckles_PreJumpBodyFrameSequence(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_64090:
+HPZKnux_AirRushAndCheckPassedTarget:
                 jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite2).l
                 tst.w   x_vel(a0)
-                beq.w   loc_64132
+                beq.w   HPZKnux_BeginTurnaroundFall
                 jsr     (Find_SonicTails).l
                 cmpi.w  #$30,d2
-                blo.s   loc_640C4
+                blo.s   SKHPZKnuckles_DispatchAirRushContact
                 btst    #0,render_flags(a0)
                 sne     d4
                 tst.w   d0
-                beq.s   loc_640BE
+                beq.s   HPZKnux_CheckRushFacingAgainstTarget
                 not.b   d4
 
-loc_640BE:
+HPZKnux_CheckRushFacingAgainstTarget:
                 tst.b   d4
-                beq.w   loc_64132
+                beq.w   HPZKnux_BeginTurnaroundFall
 
-loc_640C4:
-                lea     off_640CC(pc),a3
-                bra.w   loc_660BE
+SKHPZKnuckles_DispatchAirRushContact:
+                lea     HPZKnux_AirRushContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_640CC:
-                dc.l    loc_660A6
-                dc.l    loc_660A6
-                dc.l    loc_6429E
-                dc.l    loc_660A6
+HPZKnux_AirRushContactHandlers:
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_640DC:
+HPZKnux_BeginAirRushAtApex:
                 move.b  #$C,routine(a0)
                 move.b  #$C0,mapping_frame(a0)
                 move.w  #$400,d0
                 btst    #0,render_flags(a0)
-                beq.s   loc_640F6
+                beq.s   SKHPZKnuckles_StoreAirRushSpeeds
                 neg.w   d0
 
-loc_640F6:
+SKHPZKnuckles_StoreAirRushSpeeds:
                 move.w  d0,x_vel(a0)
                 move.w  #$80,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_64102:
+HPZKnux_TurnaroundFallAndCheckFloor:
                 jsr     (Animate_Raw2MultiDelay).l
                 jsr     (MoveSprite).l
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.w   loc_64164
-                lea     off_64122(pc),a3
-                bra.w   loc_660BE
+                bmi.w   HPZKnux_LandTurnaroundAndSetIdle
+                lea     HPZKnux_TurnaroundContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
-off_64122:
-                dc.l    loc_6429E
-                dc.l    loc_660A6
-                dc.l    loc_6429E
-                dc.l    loc_660A6
+HPZKnux_TurnaroundContactHandlers:
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
+                dc.l    HPZKnux_TakeHitAndSelectRecoil
+                dc.l    SKScene_HPZCheckHurtInvulnTimer
 ; ---------------------------------------------------------------------------
 
-loc_64132:
+HPZKnux_BeginTurnaroundFall:
                 move.b  #$E,routine(a0)
                 bchg    #0,render_flags(a0)
                 clr.w   x_vel(a0)
-                lea     byte_667D4(pc),a1
+                lea     SKHpzKnuckles_DescendingBodyTimedLoop(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_6414C:
+HPZKnux_AnimateLandingAndCheckGuard:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (Find_SonicTails).l
                 bsr.w   HPZKnucklesFaceTargetFromSideWord
-                lea     off_63F10(pc),a3
-                bra.w   loc_660BE
+                lea     HPZKnux_GuardContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
 
-loc_64164:
+HPZKnux_LandTurnaroundAndSetIdle:
                 add.w   d1,y_pos(a0)
                 move.b  #$10,routine(a0)
                 clr.w   y_vel(a0)
-                move.l  #loc_63EBE,$34(a0)
-                lea     byte_667E0(pc),a1
+                move.l  #HPZKnux_ResetIdleAndStop,$34(a0)
+                lea     SKHpzKnuckles_LandingBodyFrameSequence(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_64184:
+HPZKnux_PlayPeriodicChargeSound:
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #$F,d0
-                bne.s   loc_64196
+                bne.s   HPZKnux_AnimateChargeAndSpawnDust
                 moveq   #signextendB(sfx_Roll),d0
                 jsr     (Play_SFX).l
 
-loc_64196:
+; Spawn dust only when the decremented charge timer equals 43
+HPZKnux_AnimateChargeAndSpawnDust:
                 jsr     (Animate_RawCheckResult).l
                 subq.w  #1,$2E(a0)
-                bmi.w   loc_64222
+                bmi.w   HPZKnux_BeginFastDashAndCloseDust
                 cmpi.w  #43,$2E(a0)
-                bne.s   loc_641BC
+                bne.s   SKHPZKnuckles_DispatchChargeHurtContact
                 bclr    #0,$38(a0)
-                lea     ChildObjDat_665FC(pc),a2
+                lea     SKHpzEncounter_SpinPhaseDustSpawnList(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_641BC:
-                lea     off_64056(pc),a3
-                bra.w   loc_660BE
+SKHPZKnuckles_DispatchChargeHurtContact:
+                lea     HPZKnux_HurtContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
 
-loc_641C4:
+HPZKnux_Begin59TickCharge:
                 move.b  #$12,routine(a0)
                 jsr     (Find_SonicTails).l
                 bsr.w   HPZKnucklesFaceTargetFromSideWord
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
                 move.w  #60-1,$2E(a0)
-                lea     byte_667F5(pc),a1
+                lea     SKSceneAnim_HPZTravelWindupWithTailLoop(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_641EC:
+HPZKnux_DashAndCheckCameraMargin:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (HPZKnux_StopAtCameraXMargins).l
                 tst.w   x_vel(a0)
-                bne.s   loc_6420C
+                bne.s   HPZKnux_AccelerateDashAndCheckHurt
                 bchg    #0,render_flags(a0)
                 subq.w  #4,y_pos(a0)
-                bra.w   loc_63EBE
+                bra.w   HPZKnux_ResetIdleAndStop
 ; ---------------------------------------------------------------------------
 
-loc_6420C:
+HPZKnux_AccelerateDashAndCheckHurt:
                 move.w  $40(a0),d0
                 add.w   d0,x_vel(a0)
                 jsr     (MoveSprite2).l
-                lea     off_64056(pc),a3
-                bra.w   loc_660BE
+                lea     HPZKnux_HurtContactHandlers(pc),a3
+                bra.w   SKScene_HPZCheckPackedPlayerContacts
 ; ---------------------------------------------------------------------------
 
-loc_64222:
+HPZKnux_BeginFastDashAndCloseDust:
                 move.b  #$14,routine(a0)
                 bset    #0,$38(a0)
                 move.w  #$800,d0
                 move.w  #-$10,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_64242
+                beq.s   HPZKnux_StoreDashSpeedAndAccel
                 neg.w   d0
                 neg.w   d1
 
-loc_64242:
+HPZKnux_StoreDashSpeedAndAccel:
                 move.w  d0,x_vel(a0)
                 move.w  d1,$40(a0)
                 addq.w  #4,y_pos(a0)
-                lea     byte_667C1(pc),a1
+                lea     SKSceneAnim_KnuxJumpAndFastTravel(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_64258:
+HPZKnux_HitBounceAndCheckLanding:
                 jsr     (Animate_RawCheckResult).l
                 jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.w   locret_6206C
+                bpl.w   SKAIZScene_SharedSceneReturn
                 add.w   d1,y_pos(a0)
                 move.w  (Camera_X_pos).w,d0
                 addi.w  #$A0,d0
                 sub.w   x_pos(a0),d0
-                bpl.s   loc_64292
+                bpl.s   HPZKnux_ChooseChargeOrJump
                 neg.w   d0
 
-loc_64292:
+HPZKnux_ChooseChargeOrJump:
                 cmpi.w  #$60,d0
-                blo.w   loc_641C4
-                bra.w   loc_64066
+                blo.w   HPZKnux_Begin59TickCharge
+                bra.w   HPZKnux_BeginJumpPreparation
 ; ---------------------------------------------------------------------------
 
-loc_6429E:
+HPZKnux_TakeHitAndSelectRecoil:
                 bset    #0,$38(a0)
                 moveq   #signextendB(sfx_FloorThump),d0
                 jsr     (Play_SFX).l
                 move.w  #$300,d3
                 move.w  x_pos(a1),d1
                 sub.w   x_pos(a0),d1
-                bcs.s   loc_642BC
+                bcs.s   HPZKnux_CountHitAndCheckDefeat
                 neg.w   d3
 
-loc_642BC:
+HPZKnux_CountHitAndCheckDefeat:
                 move.w  d3,x_vel(a0)
                 move.w  #-$300,y_vel(a0)
                 subq.b  #1,collision_property(a0)
-                beq.s   loc_64310
+                beq.s   HPZKnux_BeginDefeatArtAndMusic
                 move.b  #$16,routine(a0)
                 move.w  #0,$44(a0)
                 move.l  #Map_Knuckles,mappings(a0)
                 move.b  #$8D,mapping_frame(a0)
-                lea     byte_667BC(pc),a1
+                lea     SKHpzKnuckles_NonfinalHitBodyFrameLoop(pc),a1
                 jmp     (Set_Raw_Animation).l
 ; ---------------------------------------------------------------------------
 
-loc_642F0:
+HPZKnux_DefeatBounceAndCheckFloor:
                 jsr     (HPZKnux_StopAtCameraXMargins).l
                 jsr     (MoveSprite).l
                 tst.w   y_vel(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bmi.s   loc_64356
+                bmi.s   HPZKnux_LandDefeatedAndQueueDizzyArt
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_64310:
+HPZKnux_BeginDefeatArtAndMusic:
                 move.b  #$18,routine(a0)
                 clr.b   (Update_HUD_timer).w
                 move.w  #2,$44(a0)
@@ -542,27 +543,27 @@ loc_64310:
                 bset    #4,$38(a0)
                 move.b  #mus_LRZ2,(Current_music+1).w
                 jsr     (AllocateObject).l
-                bne.s   locret_6434E
+                bne.s   HPZKnux_DefeatMusicSpawnReturn
                 move.l  #Obj_Song_Fade_Transition,(a1)
                 move.b  #mus_LRZ2,subtype(a1)
 
-locret_6434E:
+HPZKnux_DefeatMusicSpawnReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_64350:
+HPZKnux_AnimateDefeatLanding:
                 jmp     (Animate_Raw2MultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_64356:
+HPZKnux_LandDefeatedAndQueueDizzyArt:
                 add.w   d1,y_pos(a0)
                 move.b  #$1A,routine(a0)
-                move.l  #loc_643A4,$34(a0)
+                move.l  #HPZKnux_StartShakeAndTryExplosions,$34(a0)
                 moveq   #signextendB(sfx_DoorMove),d0
                 jsr     (Play_SFX).l
-                lea     byte_6680A(pc),a1
+                lea     SKSceneAnim_HPZGrabFloorRecovery(pc),a1
                 jsr     (Set_Raw_Animation).l
                 lea     (ArtKosM_HPZKnuxDizzy).l,a1
                 move.w  #tiles_to_bytes(ArtTile_HPZKnuxDizzy),d2
                 jmp     (Queue_Kos_Module).l
-; End of function loc_6429E
+; End of function HPZKnux_TakeHitAndSelectRecoil

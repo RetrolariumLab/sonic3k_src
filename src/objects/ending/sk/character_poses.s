@@ -122,7 +122,7 @@ byte_5F462:
 ; ---------------------------------------------------------------------------
 
 loc_5F46A:
-                lea     (byte_66771).l,a1
+                lea     (SKSceneAnim_HPZEncounterOpening).l,a1
                 jsr     (Animate_Raw2NoSSTMultiDelay).l
                 bsr.w   KnucklesEnding_Load_PLC
                 jmp     (Draw_Sprite).l

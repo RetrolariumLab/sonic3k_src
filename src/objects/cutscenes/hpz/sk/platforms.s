@@ -3,80 +3,80 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_655B2:
-                lea     ObjDat3_6653C(pc),a1
+HPZScenePlatform_InitFixedPosition:
+                lea     SKHpzEscape_PlatformAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_655CE,(a0)
+                move.l  #HPZScenePlatform_ResolveSolidAndBreak,(a0)
                 move.w  #$17F0,x_pos(a0)
                 move.w  #$660,y_pos(a0)
 
-loc_655CE:
+HPZScenePlatform_ResolveSolidAndBreak:
                 moveq   #$1B,d1
                 moveq   #$20,d2
                 moveq   #$20,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 tst.b   (_unkFAA2).w
-                beq.s   loc_655F4
-                lea     ChildObjDat_6664A(pc),a2
+                beq.s   HPZScenePlatform_DrawAfterSolidCheck
+                lea     SKSceneData_HPZPlatformFragmentChildren(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jsr     (Go_Delete_Sprite).l
 
-loc_655F4:
+HPZScenePlatform_DrawAfterSolidCheck:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 ; unused
                 dc.w    -$18,   $30,  -$20,   $40
 ; ---------------------------------------------------------------------------
 
-loc_65602:
-                lea     word_66548(pc),a1
+HPZScenePlatform_InitFragmentAndScatter:
+                lea     SKSceneData_HPZPlatformFragmentPartAttrs(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_6561C,(a0)
+                move.l  #HPZScenePlatform_ApplyGravityIfVisible,(a0)
                 bset    #7,render_flags(a0)
-                bra.w   loc_662C0
+                bra.w   SKScene_HPZSeedPlatformFragment
 ; ---------------------------------------------------------------------------
 
-loc_6561C:
+HPZScenePlatform_ApplyGravityIfVisible:
                 tst.b   render_flags(a0)
-                bpl.s   loc_6562E
+                bpl.s   HPZScenePlatform_ReleaseRidersAndDelete
                 jsr     (MoveSprite_LightGravity).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6562E:
+HPZScenePlatform_ReleaseRidersAndDelete:
                 jsr     (Displace_PlayerOffObject).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6563A:
-                lea     ObjDat3_6654E(pc),a1
+HPZScenePlatform_InitDizzyStarsLifetime:
+                lea     SKHpzKnuckles_DizzyStarsAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_65662,(a0)
+                move.l  #HPZScenePlatform_TickDizzyStarsAnim,(a0)
                 move.w  #$63,$2E(a0)
                 tst.b   subtype(a0)
-                beq.w   locret_6206C
+                beq.w   SKAIZScene_SharedSceneReturn
                 move.l  #Wait_Draw,(a0)
-                bra.w   loc_65692
+                bra.w   HPZScenePlatform_ShowFinalStarsAndDelete
 ; ---------------------------------------------------------------------------
 
-loc_65662:
+HPZScenePlatform_TickDizzyStarsAnim:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_65678
-                lea     byte_66875(pc),a1
+                bmi.s   HPZScenePlatform_PauseDizzyStarsHidden
+                lea     SKHpzKnuckles_DizzyStarsFrameLoop(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_65678:
+HPZScenePlatform_PauseDizzyStarsHidden:
                 move.l  #Wait_Draw,(a0)
                 clr.b   mapping_frame(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_65692,$34(a0)
+                move.l  #HPZScenePlatform_ShowFinalStarsAndDelete,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_65692:
+HPZScenePlatform_ShowFinalStarsAndDelete:
                 move.b  #5,mapping_frame(a0)
                 move.w  #$B,$2E(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)

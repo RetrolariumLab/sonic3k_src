@@ -5,10 +5,10 @@
 
 CutsceneKnux_MHZ2:
                 cmpi.b  #2,(Player_1+character_id).w
-                beq.s   loc_6311A
+                beq.s   MHZ2Scene_SpawnKnucklesSwitchAndDelete
                 cmpi.b  #7,(Last_star_post_hit).w
                 bhs.w   CutsceneKnux_Delete
-                lea     word_630D0(pc),a1
+                lea     MHZ1Scene_Act2CameraBoundsAndSplitY(pc),a1
                 jsr     (Check_CameraInRange).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -19,43 +19,43 @@ CutsceneKnux_MHZ2:
                 jmp     (Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
 
-loc_6311A:
-                lea     ChildObjDat_665BC(pc),a2
+MHZ2Scene_SpawnKnucklesSwitchAndDelete:
+                lea     SKMhzActTwoCutscene_SwitchChildSpawnList(pc),a2
                 jsr     (CreateChild1_Normal).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_MHZ2_Index:
-                dc.w    loc_63134-CutsceneKnux_MHZ2_Index
-                dc.w    loc_63170-CutsceneKnux_MHZ2_Index
-                dc.w    loc_631A4-CutsceneKnux_MHZ2_Index
-                dc.w    loc_63220-CutsceneKnux_MHZ2_Index
-                dc.w    loc_632AE-CutsceneKnux_MHZ2_Index
+                dc.w    MHZ2Scene_InitBlowerAndCamera-CutsceneKnux_MHZ2_Index
+                dc.w    MHZ2Scene_TrackCameraMinimumToTarget-CutsceneKnux_MHZ2_Index
+                dc.w    MHZ2Scene_WaitForGroundedOrTimeout-CutsceneKnux_MHZ2_Index
+                dc.w    MHZ2Scene_ForcePoseAndCheckLeafCursor-CutsceneKnux_MHZ2_Index
+                dc.w    MHZ2Scene_EmitLeavesUntilOffscreen-CutsceneKnux_MHZ2_Index
 ; ---------------------------------------------------------------------------
 
-loc_63134:
+MHZ2Scene_InitBlowerAndCamera:
                 lea     ObjSlot_CutsceneKnux_MHZ2(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
-                move.l  #loc_63182,$34(a0)
+                move.l  #MHZ2Scene_SetTargetAndLockControllers,$34(a0)
                 move.w  (Camera_min_X_pos).w,(Camera_stored_min_X_pos).w
-                move.w  (word_630DC).l,(_unkFAB4).w
+                move.w  (MHZ1Scene_Act2SplitXAndCameraTarget).l,(_unkFAB4).w
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 st      (Events_bg+$16).w
                 lea     Pal_CutsceneKnux(pc),a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_665BC(pc),a2
+                lea     SKMhzActTwoCutscene_SwitchChildSpawnList(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_63170:
+MHZ2Scene_TrackCameraMinimumToTarget:
                 move.w  (Camera_X_pos).w,d0
                 move.w  (_unkFAB4).w,d1
                 cmp.w   d1,d0
-                bhs.s   loc_63182
+                bhs.s   MHZ2Scene_SetTargetAndLockControllers
                 move.w  d0,(Camera_min_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63182:
+MHZ2Scene_SetTargetAndLockControllers:
                 move.w  d1,(Camera_min_X_pos).w
                 move.b  #4,routine(a0)
                 move.w  #60-1,$2E(a0)
@@ -66,38 +66,38 @@ loc_63182:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_631A4:
+MHZ2Scene_WaitForGroundedOrTimeout:
                 subi.w  #1,$2E(a0)
-                bmi.s   loc_631E0
+                bmi.s   MHZ2Scene_StartBlowerAndLockActors
                 moveq   #0,d0
                 lea     (Player_1).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_631BE
+                bne.s   MHZ2Scene_CheckVisibleFollowerReady
                 bset    #0,d0
 
-loc_631BE:
+MHZ2Scene_CheckVisibleFollowerReady:
                 lea     (Player_2).w,a2
                 tst.l   (a2)
-                beq.s   loc_631D4
+                beq.s   MHZ2Scene_MarkFollowerReady
                 tst.b   render_flags(a2)
-                bpl.s   loc_631D4
+                bpl.s   MHZ2Scene_MarkFollowerReady
                 btst    #Status_InAir,status(a2)
-                bne.s   loc_631D8
+                bne.s   MHZ2Scene_StartWhenBothReady
 
-loc_631D4:
+MHZ2Scene_MarkFollowerReady:
                 bset    #1,d0
 
-loc_631D8:
+MHZ2Scene_StartWhenBothReady:
                 cmpi.b  #3,d0
-                beq.s   loc_631E0
+                beq.s   MHZ2Scene_StartBlowerAndLockActors
 
-locret_631DE:
+MHZ2Scene_BlowerReadinessReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_631E0:
+MHZ2Scene_StartBlowerAndLockActors:
                 move.b  #6,routine(a0)
-                move.l  #loc_63280,$34(a0)
+                move.l  #MHZ2Scene_FinishScriptAndTryP1Lift,$34(a0)
                 move.w  #$10,$3E(a0)
                 clr.w   $2E(a0)
                 move.b  #1,$39(a0)
@@ -105,7 +105,7 @@ loc_631E0:
                 bsr.w   MHZBlowerLockAndStopSelectedPlayer
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   locret_631DE
+                beq.s   MHZ2Scene_BlowerReadinessReturn
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -117,104 +117,105 @@ MHZBlowerLockAndStopSelectedPlayer:
 
 ; ---------------------------------------------------------------------------
 
-loc_63220:
+MHZ2Scene_ForcePoseAndCheckLeafCursor:
                 bsr.w   MHZBlower_ApplyPoseToBothPlayers
                 cmpi.b  #8,anim_frame(a0)
-                blo.s   loc_63238
+                blo.s   MHZ2Scene_AnimateBlowerAndTestZ
                 moveq   #signextendB(sfx_LeafBlower),d0
                 jsr     (Play_SFX_Continuous).l
                 bsr.w   MHZBlowerEmitLeafOnReloadedTimer
 
-loc_63238:
-                lea     byte_666F6(pc),a1
+; The follow-up work depends on the Z flag returned by the raw animation reader
+MHZ2Scene_AnimateBlowerAndTestZ:
+                lea     SKSceneAnim_MHZ2BlowerSequence(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
-                beq.s   locret_6327E
+                beq.s   MHZ2Scene_BlowerAnimReturn
                 cmpi.b  #$C,anim_frame(a0)
-                bne.s   loc_63266
+                bne.s   MHZ2Scene_IncreaseBlowerOnFrame2
                 lea     (Player_1).w,a1
                 move.b  #$14,anim(a1)
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
-                bpl.s   loc_63266
+                bpl.s   MHZ2Scene_IncreaseBlowerOnFrame2
                 move.b  #$14,anim(a1)
 
-loc_63266:
+MHZ2Scene_IncreaseBlowerOnFrame2:
                 cmpi.b  #2,mapping_frame(a0)
-                bne.s   locret_6327E
+                bne.s   MHZ2Scene_BlowerAnimReturn
                 addq.b  #1,$39(a0)
                 subq.w  #4,$3E(a0)
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l
 
-locret_6327E:
+MHZ2Scene_BlowerAnimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_63280:
+MHZ2Scene_FinishScriptAndTryP1Lift:
                 move.b  #8,routine(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_63294
-                move.l  #loc_6338E,(a1)
+                bne.s   MHZ2Scene_TryVisibleFollowerLift
+                move.l  #MHZ2Scene_SelectLiftTargetBySubtype,(a1)
 
-loc_63294:
+MHZ2Scene_TryVisibleFollowerLift:
                 tst.b   (Player_2+render_flags).w
-                bpl.s   loc_632AE
+                bpl.s   MHZ2Scene_EmitLeavesUntilOffscreen
                 jsr     (AllocateObject).l
-                bne.s   loc_632AE
-                move.l  #loc_6338E,(a1)
+                bne.s   MHZ2Scene_EmitLeavesUntilOffscreen
+                move.l  #MHZ2Scene_SelectLiftTargetBySubtype,(a1)
                 move.b  #2,subtype(a1)
 
-loc_632AE:
+MHZ2Scene_EmitLeavesUntilOffscreen:
                 tst.b   render_flags(a0)
-                bpl.w   loc_62422
+                bpl.w   SKCNZScene_RestorePaletteAndFadeMusic
                 bra.w   MHZBlowerEmitLeafOnReloadedTimer
 ; ---------------------------------------------------------------------------
 ; unused
                 lea     (Pal_MHZ2).l,a1
                 jsr     (PalLoad_Line1).l
-                bra.w   loc_62422
+                bra.w   SKCNZScene_RestorePaletteAndFadeMusic
 ; ---------------------------------------------------------------------------
 
-loc_632CA:
-                lea     ObjDat3_66456(pc),a1
+MHZ2Scene_InitLinkedOrStandaloneSwitch:
+                lea     SKMhzActTwoCutscene_SwitchAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_63308,(a0)
+                move.l  #MHZ2Scene_SetSwitchFrameFromParent,(a0)
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_632F8
+                bne.s   MHZ2Scene_QueueSwitchArt
                 move.l  #Sprite_OnScreen_Test,(a0)
                 move.w  #make_art_tile(ArtTile_MHZKnuxSwitch,0,1),art_tile(a0)
                 movea.w parent3(a0),a1
                 move.w  respawn_addr(a1),respawn_addr(a0)
 
-loc_632F8:
+MHZ2Scene_QueueSwitchArt:
                 lea     (ArtKosM_MHZKnuxSwitch).l,a1
                 move.w  #tiles_to_bytes(ArtTile_MHZKnuxSwitch),d2
                 jmp     (Queue_Kos_Module).l
 ; ---------------------------------------------------------------------------
 
-loc_63308:
+MHZ2Scene_SetSwitchFrameFromParent:
                 movea.w parent3(a0),a1
                 clr.b   mapping_frame(a0)
                 cmpi.b  #2,mapping_frame(a1)
-                bne.s   loc_6331E
+                bne.s   MHZ2Scene_DrawSwitchIfParentActive
                 move.b  #1,mapping_frame(a0)
 
-loc_6331E:
+MHZ2Scene_DrawSwitchIfParentActive:
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_63324:
-                lea     ObjDat3_6646E(pc),a1
+MHZ2Scene_InitLeafWithBiasedX:
+                lea     SKMhzSceneBossLeaf_Attributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_63372,(a0)
+                move.l  #MHZ2Scene_StepLeafAndCullAbove,(a0)
                 jsr     (Random_Number).l
                 andi.w  #$1FF,d0
                 cmpi.w  #$140,d0
-                blo.s   loc_6334A
+                blo.s   MHZ2Scene_PlaceLeafAndSetStep
                 andi.w  #$3F,d0
                 lsl.w   #2,d0
 
-loc_6334A:
+MHZ2Scene_PlaceLeafAndSetStep:
                 move.w  (Camera_X_pos_copy).w,d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
@@ -228,7 +229,7 @@ loc_6334A:
                 neg.w   d1
                 move.w  d1,y_vel(a0)
 
-loc_63372:
+MHZ2Scene_StepLeafAndCullAbove:
                 move.w  y_vel(a0),d0
                 add.w   d0,y_pos(a0)
                 move.w  (Camera_Y_pos).w,d0
@@ -238,14 +239,14 @@ loc_63372:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6338E:
+MHZ2Scene_SelectLiftTargetBySubtype:
                 lea     (Player_1).w,a1
                 tst.b   subtype(a0)
-                beq.s   loc_6339C
+                beq.s   MHZ2Scene_InitLiftAndLockTarget
                 lea     (Player_2).w,a1
 
-loc_6339C:
-                move.l  #loc_633D6,(a0)
+MHZ2Scene_InitLiftAndLockTarget:
+                move.l  #MHZ2Scene_LiftTargetUntilApex,(a0)
                 move.w  a1,$44(a0)
                 move.w  #-$1000,y_vel(a0)
                 move.w  x_pos(a1),x_pos(a0)
@@ -258,7 +259,7 @@ loc_6339C:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_633D6:
+MHZ2Scene_LiftTargetUntilApex:
                 moveq   #signextendB(sfx_LeafBlower),d0
                 jsr     (Play_SFX_Continuous).l
                 jsr     (MoveSprite_LightGravity).l
@@ -266,7 +267,7 @@ loc_633D6:
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 tst.w   y_vel(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
                 clr.w   (Ctrl_1_logical).w

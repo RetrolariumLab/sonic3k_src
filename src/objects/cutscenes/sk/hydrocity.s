@@ -6,7 +6,7 @@
 CutsceneKnux_HCZ2:
                 cmpi.b  #2,(Player_1+character_id).w
                 beq.s   CutsceneKnux_Delete
-                lea     word_62150(pc),a1
+                lea     SKHCZScene_CameraTriggerBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -17,14 +17,14 @@ CutsceneKnux_HCZ2:
                 jmp     (Sprite_CheckDeleteTouchSlotted).l
 ; ---------------------------------------------------------------------------
 CutsceneKnux_HCZ2_Index:
-                dc.w    loc_6215E-CutsceneKnux_HCZ2_Index
-                dc.w    loc_62194-CutsceneKnux_HCZ2_Index
-                dc.w    loc_62014-CutsceneKnux_HCZ2_Index
-                dc.w    loc_62200-CutsceneKnux_HCZ2_Index
-                dc.w    loc_62014-CutsceneKnux_HCZ2_Index
-                dc.w    loc_620AA-CutsceneKnux_HCZ2_Index
-                dc.w    loc_62242-CutsceneKnux_HCZ2_Index
-word_62150:
+                dc.w    SKHCZScene_InitActorAndCameraBounds-CutsceneKnux_HCZ2_Index
+                dc.w    SKHCZScene_WaitForStandingAtRight-CutsceneKnux_HCZ2_Index
+                dc.w    SKAIZScene_TickSharedWordWait-CutsceneKnux_HCZ2_Index
+                dc.w    SKHCZScene_WalkLeftAndTickPose-CutsceneKnux_HCZ2_Index
+                dc.w    SKAIZScene_TickSharedWordWait-CutsceneKnux_HCZ2_Index
+                dc.w    SKAIZScene_UpdateJumpAndBounceOnce-CutsceneKnux_HCZ2_Index
+                dc.w    SKHCZScene_AnimateUntilOffscreen-CutsceneKnux_HCZ2_Index
+SKHCZScene_CameraTriggerBounds:
                 dc.w    $540,  $600, $3900, $3940
 ; ---------------------------------------------------------------------------
 
@@ -32,99 +32,99 @@ CutsceneKnux_Delete:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6215E:
+SKHCZScene_InitActorAndCameraBounds:
                 lea     ObjSlot_CutsceneKnux(pc),a1
                 jsr     (SetUp_ObjAttributesSlotted).l
                 move.w  (Camera_min_Y_pos).w,(Camera_stored_min_Y_pos).w
                 move.w  (Camera_max_X_pos).w,(Camera_stored_max_X_pos).w
                 move.w  #$3940,(Camera_max_X_pos).w
-                lea     ChildObjDat_665A2(pc),a2
+                lea     SKHczActTwoCutscene_ButtonChildSpawnList(pc),a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_6218C
+                bne.s   SKHCZScene_OffsetAfterButtonAttempt
                 move.b  #2,subtype(a1)
 
-loc_6218C:
+SKHCZScene_OffsetAfterButtonAttempt:
                 addi.w  #$9E,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_62194:
+SKHCZScene_WaitForStandingAtRight:
                 lea     (Player_1).w,a1
                 cmpi.w  #$3990,x_pos(a1)
-                blo.s   loc_621AE
+                blo.s   SKHCZScene_FollowCameraMinima
                 tst.b   object_control(a1)
-                bne.s   loc_621AE
+                bne.s   SKHCZScene_FollowCameraMinima
                 btst    #Status_OnObj,status(a1)
-                bne.s   loc_621BC
+                bne.s   SKHCZScene_PlayMusicAndWait3Seconds
 
-loc_621AE:
+SKHCZScene_FollowCameraMinima:
                 move.w  (Camera_Y_pos).w,(Camera_min_Y_pos).w
                 move.w  (Camera_X_pos).w,(Camera_min_X_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_621BC:
+SKHCZScene_PlayMusicAndWait3Seconds:
                 move.b  #4,routine(a0)
                 bsr.w   CutsceneSpawnKnucklesMusicFadeTransition
                 move.w  #(3*60)-1,$2E(a0)
-                move.l  #loc_621D6,$34(a0)
+                move.l  #SKHCZScene_FaceLeftAndLowerCameraFloor,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_621D6:
+SKHCZScene_FaceLeftAndLowerCameraFloor:
                 move.b  #6,routine(a0)
                 bset    #0,render_flags(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_62216,$34(a0)
+                move.l  #SKHCZScene_WaitInPose20BeforeJump,$34(a0)
                 move.w  #$5C0,(Camera_min_Y_pos).w
                 lea     Pal_CutsceneKnux(pc),a1
                 jmp     (PalLoad_Line1).l
 ; ---------------------------------------------------------------------------
 
-loc_62200:
+SKHCZScene_WalkLeftAndTickPose:
                 subq.w  #4,x_pos(a0)
-                lea     (byte_6669F).l,a1
+                lea     (SKSceneAnim_KnuxTravelLoop).l,a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_62216:
+SKHCZScene_WaitInPose20BeforeJump:
                 move.b  #8,routine(a0)
                 move.b  #$20,mapping_frame(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_62232,$34(a0)
+                move.l  #SKHCZScene_TurnAndSelectJump,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_62232:
+SKHCZScene_TurnAndSelectJump:
                 move.b  #$A,routine(a0)
                 bchg    #0,render_flags(a0)
-                bra.w   loc_62080
+                bra.w   SKAIZScene_SetSharedLeftJumpSpeed
 ; ---------------------------------------------------------------------------
 
-loc_62242:
+SKHCZScene_AnimateUntilOffscreen:
                 jsr     (Animate_Raw).l
                 tst.b   render_flags(a0)
-                bmi.w   locret_6206C
+                bmi.w   SKAIZScene_SharedSceneReturn
                 lea     (Pal_HCZ2).l,a1
                 jsr     (PalLoad_Line1).l
-                lea     ChildObjDat_62280(pc),a2
+                lea     SKHCZScene_CameraRestoreChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
                 jsr     (AllocateObject).l
-                bne.s   loc_62274
+                bne.s   SKHCZScene_ReleaseTrackingAndDelete
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-loc_62274:
+SKHCZScene_ReleaseTrackingAndDelete:
                 jsr     (Remove_From_TrackingSlot).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
-ChildObjDat_62280:
+SKHCZScene_CameraRestoreChildren:
                 dc.w    2-1
                 dc.l    Obj_DecLevStartYGradual
                 dc.b    0,   0
                 dc.l    Obj_IncLevEndXGradual
                 dc.b    0,   0
-word_6228E:
+SKHCZScene_CNZ1CameraTriggerBounds:
                 dc.w    $176,  $300, $1C00, $1E00
-word_62296:
+SKHCZScene_CNZ1BossCameraBounds:
                 dc.w    $280,  $280, $1D00, $1D00
