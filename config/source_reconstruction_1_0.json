@@ -987,9 +987,15 @@
       "commits": ["7a68a974f888c861d7f88849b2deba7940298597"]
     },
     {
-      "id": "current-shorten-L06-scenes",
+      "id": "change-72c7fdf84204",
       "kind": "source_or_tooling",
       "summary": "Shorten 46 earlier cutscene, capsule, signpost and results procedure names.",
+      "commits": ["72c7fdf84204668dd31e7e9239de4194581facfa"]
+    },
+    {
+      "id": "current-shorten-09-object-motion",
+      "kind": "source_or_tooling",
+      "summary": "Apply 481 reviewed short labels for object motion.",
       "commits": ["release-commit"]
     }
   ],

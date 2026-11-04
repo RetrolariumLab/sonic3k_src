@@ -5,32 +5,32 @@
 ; ---------------------------------------------------------------------------
 
 Obj_TensionBridge:
-                move.l  #loc_387E0,(a0)
+                move.l  #SKTensionBridge_TickFlatBendFromRiders,(a0)
                 move.l  #Map_TensionBridge,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0),art_tile(a0)
                 move.w  #$200,priority(a0)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_386D0
-                move.l  #loc_38882,(a0)
+                bne.s   SKTensionBridge_SetLavaReefArt
+                move.l  #SKTensionBridge_TickAnimFlatFromRiders,(a0)
                 move.l  #Map_ICZTensionBridge,mappings(a0)
                 move.w  #make_art_tile(ArtTile_ICZMisc1,2,0),art_tile(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_386D0
-                move.l  #loc_38946,(a0)
+                bpl.s   SKTensionBridge_SetLavaReefArt
+                move.l  #SKTensionBridge_InitSlopedGeometry,(a0)
                 andi.b  #$7F,subtype(a0)
 
-loc_386D0:
+SKTensionBridge_SetLavaReefArt:
                 cmpi.b  #9,(Current_zone).w
-                bne.s   loc_386DE
+                bne.s   SKTensionBridge_CheckTriggerCollapse
                 move.w  #make_art_tile($113,3,1),art_tile(a0)
 
-loc_386DE:
+SKTensionBridge_CheckTriggerCollapse:
                 tst.b   subtype(a0)
-                bpl.s   loc_386F0
-                move.l  #loc_387B6,(a0)
+                bpl.s   SKTensionBridge_InitGeometryAndBanks
+                move.l  #SKTensionBridge_TryTriggeredCollapse,(a0)
                 andi.b  #$7F,subtype(a0)
 
-loc_386F0:
+SKTensionBridge_InitGeometryAndBanks:
                 move.b  #4,render_flags(a0)
                 move.b  #$80,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
@@ -53,7 +53,7 @@ loc_386F0:
                 move.l  a1,$30(a0)
                 swap    d1
                 subq.w  #8,d1
-                bls.s   loc_38752
+                bls.s   SKTensionBridge_EnterFlatUpdate
                 move.w  d1,d4
                 bsr.s   CreateTensionBridgeSpriteBank
                 move.l  a1,$34(a0)
@@ -64,15 +64,15 @@ loc_386F0:
                 subq.w  #8,d0
                 move.w  d0,x_pos(a1)
 
-loc_38752:
-                bra.w   loc_387E0
+SKTensionBridge_EnterFlatUpdate:
+                bra.w   SKTensionBridge_TickFlatBendFromRiders
 
 ; =============== S U B R O U T I N E =======================================
 
 CreateTensionBridgeSpriteBank:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_387B4
-                move.l  #loc_3887C,(a1)
+                bne.s   SKTensionBridge_CreateBankReturn
+                move.l  #SKTensionBridge_DrawEmbeddedSegmentBank,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  mappings(a0),mappings(a1)
@@ -86,65 +86,65 @@ CreateTensionBridgeSpriteBank:
                 subq.b  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_387A4:
+SKTensionBridge_WriteSegmentAndStepX:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 move.w  #0,(a2)+
                 addi.w  #$10,d3
-                dbf     d1,loc_387A4
+                dbf     d1,SKTensionBridge_WriteSegmentAndStepX
 
-locret_387B4:
+SKTensionBridge_CreateBankReturn:
                 rts
 ; End of function CreateTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
 
-loc_387B6:
+SKTensionBridge_TryTriggeredCollapse:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 lea     (a3,d0.w),a3
                 tst.b   (a3)
-                beq.s   loc_387E0
-                move.l  #loc_3890C,(a0)
+                beq.s   SKTensionBridge_TickFlatBendFromRiders
+                move.l  #SKTensionBridge_WaitCollapseRelease,(a0)
                 move.b  #$E,$34(a0)
-                move.l  #loc_388E4,d4
-                bra.w   loc_389C8
+                move.l  #SKTensionBridge_WaitAndDrawCollapsePiece,d4
+                bra.w   SKTensionBridge_CollapseSpriteBanks
 ; ---------------------------------------------------------------------------
 
-loc_387E0:
+SKTensionBridge_TickFlatBendFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_387F6
+                bne.s   SKTensionBridge_MoveFlatCursorTowardP2
                 tst.b   $3E(a0)
-                beq.s   loc_38822
+                beq.s   SKTensionBridge_CollideFlatBridge
                 subq.b  #4,$3E(a0)
-                bra.s   loc_3881E
+                bra.s   SKTensionBridge_BendFlatSegments
 ; ---------------------------------------------------------------------------
 
-loc_387F6:
+SKTensionBridge_MoveFlatCursorTowardP2:
                 andi.b  #$10,d0
-                beq.s   loc_38812
+                beq.s   SKTensionBridge_RaiseFlatPhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_38812
-                bcc.s   loc_3880E
+                beq.s   SKTensionBridge_RaiseFlatPhaseTo40
+                bcc.s   SKTensionBridge_DecrementFlatBendCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_38812
+                bra.s   SKTensionBridge_RaiseFlatPhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_3880E:
+SKTensionBridge_DecrementFlatBendCursor:
                 subq.b  #1,$3F(a0)
 
-loc_38812:
+SKTensionBridge_RaiseFlatPhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_3881E
+                beq.s   SKTensionBridge_BendFlatSegments
                 addq.b  #4,$3E(a0)
 
-loc_3881E:
+SKTensionBridge_BendFlatSegments:
                 bsr.w   BendTensionBridgeSegments
 
-loc_38822:
+SKTensionBridge_CollideFlatBridge:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -155,70 +155,70 @@ loc_38822:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
 
-loc_3883A:
+SKTensionBridge_CullRootByCoarseX:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_3884E
+                bhi.s   SKTensionBridge_DeleteBanksOutsideRange
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3884E:
+SKTensionBridge_DeleteBanksOutsideRange:
                 movea.l $30(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 cmpi.b  #8,subtype(a0)
-                bls.s   loc_3886A
+                bls.s   SKTensionBridge_ClearRootLoadedBit
                 movea.l $34(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_3886A:
+SKTensionBridge_ClearRootLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_38876
+                beq.s   SKTensionBridge_DeleteRootAfterBanks
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_38876:
+SKTensionBridge_DeleteRootAfterBanks:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3887C:
+SKTensionBridge_DrawEmbeddedSegmentBank:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_38882:
+SKTensionBridge_TickAnimFlatFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_38898
+                bne.s   SKTensionBridge_MoveAnimFlatCursorToP2
                 tst.b   $3E(a0)
-                beq.s   loc_388C4
+                beq.s   SKTensionBridge_CollideAndAnimateFlat
                 subq.b  #4,$3E(a0)
-                bra.s   loc_388C0
+                bra.s   SKTensionBridge_BendAnimFlatSegments
 ; ---------------------------------------------------------------------------
 
-loc_38898:
+SKTensionBridge_MoveAnimFlatCursorToP2:
                 andi.b  #p2_standing,d0
-                beq.s   loc_388B4
+                beq.s   SKTensionBridge_RaiseAnimFlatPhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_388B4
-                bcc.s   loc_388B0
+                beq.s   SKTensionBridge_RaiseAnimFlatPhaseTo40
+                bcc.s   SKTensionBridge_LowerAnimFlatCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_388B4
+                bra.s   SKTensionBridge_RaiseAnimFlatPhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_388B0:
+SKTensionBridge_LowerAnimFlatCursor:
                 subq.b  #1,$3F(a0)
 
-loc_388B4:
+SKTensionBridge_RaiseAnimFlatPhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_388C0
+                beq.s   SKTensionBridge_BendAnimFlatSegments
                 addq.b  #4,$3E(a0)
 
-loc_388C0:
+SKTensionBridge_BendAnimFlatSegments:
                 bsr.w   BendTensionBridgeSegments
 
-loc_388C4:
+SKTensionBridge_CollideAndAnimateFlat:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -229,65 +229,66 @@ loc_388C4:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
                 bsr.w   TensionBridge_AnimateRiddenBoards
-                bra.w   loc_3883A
+                bra.w   SKTensionBridge_CullRootByCoarseX
 ; ---------------------------------------------------------------------------
 
-loc_388E4:
+SKTensionBridge_WaitAndDrawCollapsePiece:
                 tst.b   $34(a0)
-                beq.s   loc_388F4
+                beq.s   SKTensionBridge_MoveCollapsePiece
                 subq.b  #1,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_388F4:
+; Use the saved render sign from the preceding frame to decide whether to draw or delete
+SKTensionBridge_MoveCollapsePiece:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_38906
+                bpl.s   SKTensionBridge_DeleteHiddenPiece
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_38906:
+SKTensionBridge_DeleteHiddenPiece:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3890C:
+SKTensionBridge_WaitCollapseRelease:
                 tst.b   $34(a0)
-                beq.s   loc_38918
+                beq.s   SKTensionBridge_ReleaseCollapseP1
                 subq.b  #1,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38918:
+SKTensionBridge_ReleaseCollapseP1:
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_3892C
+                beq.s   SKTensionBridge_ReleaseCollapseP2
                 bclr    #Status_OnObj,(Player_1+status).w
                 bset    #Status_InAir,(Player_1+status).w
 
-loc_3892C:
+SKTensionBridge_ReleaseCollapseP2:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_38940
+                beq.s   SKTensionBridge_DeleteCollapseRoot
                 bclr    #Status_OnObj,(Player_2+status).w
                 bset    #Status_InAir,(Player_2+status).w
 
-loc_38940:
+SKTensionBridge_DeleteCollapseRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_38946:
+SKTensionBridge_InitSlopedGeometry:
                 bsr.w   BendSlopedTensionBridgeSegments
-                move.l  #loc_38950,(a0)
+                move.l  #SKTensionBridge_TickSlopeBendFromRiders,(a0)
 
-loc_38950:
+SKTensionBridge_TickSlopeBendFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_38966
+                bne.s   SKTensionBridge_CacheSlopedRiderBins
                 tst.b   $3E(a0)
-                beq.s   loc_389A8
+                beq.s   SKTensionBridge_CollideAndAnimateSlope
                 subq.b  #4,$3E(a0)
-                bra.s   loc_389A4
+                bra.s   SKTensionBridge_BendSlopedSegments
 ; ---------------------------------------------------------------------------
 
-loc_38966:
+SKTensionBridge_CacheSlopedRiderBins:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -297,27 +298,27 @@ loc_38966:
                 bsr.w   CacheTensionBridgeRiderSegments
                 move.b  status(a0),d0
                 andi.b  #p2_standing,d0
-                beq.s   loc_38998
+                beq.s   SKTensionBridge_RaiseSlopePhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_38998
-                bcc.s   loc_38994
+                beq.s   SKTensionBridge_RaiseSlopePhaseTo40
+                bcc.s   SKTensionBridge_LowerSlopeCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_38998
+                bra.s   SKTensionBridge_RaiseSlopePhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_38994:
+SKTensionBridge_LowerSlopeCursor:
                 subq.b  #1,$3F(a0)
 
-loc_38998:
+SKTensionBridge_RaiseSlopePhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_389A4
+                beq.s   SKTensionBridge_BendSlopedSegments
                 addq.b  #4,$3E(a0)
 
-loc_389A4:
+SKTensionBridge_BendSlopedSegments:
                 bsr.w   BendSlopedTensionBridgeSegments
 
-loc_389A8:
+SKTensionBridge_CollideAndAnimateSlope:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -328,16 +329,17 @@ loc_389A8:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithSlopedTensionBridge
                 bsr.w   TensionBridge_AnimateRiddenBoards
-                bra.w   loc_3883A
+                bra.w   SKTensionBridge_CullRootByCoarseX
 ; ---------------------------------------------------------------------------
 
-loc_389C8:
+; Collapse a second bank when the bridge has more than eight segments
+SKTensionBridge_CollapseSpriteBanks:
                 movea.l $30(a0),a3
                 bsr.s   CollapseTensionBridgeSpriteBank
                 cmpi.b  #8,subtype(a0)
-                bls.s   locret_389DC
+                bls.s   SKTensionBridge_CollapseBanksReturn
                 movea.l $34(a0),a3
                 bsr.s   CollapseTensionBridgeSpriteBank
 
-locret_389DC:
+SKTensionBridge_CollapseBanksReturn:
                 rts

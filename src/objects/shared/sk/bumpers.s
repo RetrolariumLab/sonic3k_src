@@ -13,38 +13,38 @@ Obj_Bumper:
                 move.w  x_pos(a0),$30(a0)
                 move.w  y_pos(a0),$32(a0)
                 cmpi.b  #$14,(Current_zone).w
-                bne.s   loc_32E3C
+                bne.s   SKBumper_CheckCompetitionMode
                 move.l  #Map_PachinkoBumper,mappings(a0)
                 move.w  #make_art_tile(ArtTile_PachinkoMain,3,0),art_tile(a0)
-                move.l  #loc_32EF0,(a0)
-                bra.w   loc_32EF0
+                move.l  #SKBumper_HandlePachinkoContactProperties,(a0)
+                bra.w   SKBumper_HandlePachinkoContactProperties
 ; ---------------------------------------------------------------------------
 
-loc_32E3C:
+SKBumper_CheckCompetitionMode:
                 tst.w   (Competition_mode).w
-                beq.s   loc_32E5A
+                beq.s   SKBumper_SelectFixedOrOrbitHandler
                 move.l  #Map_2PBumper,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BPZMisc,1,0),art_tile(a0)
-                move.l  #loc_32FF0,(a0)
-                bra.w   loc_32FF0
+                move.l  #SKBumper_CheckCompetitionContacts,(a0)
+                bra.w   SKBumper_CheckCompetitionContacts
 ; ---------------------------------------------------------------------------
 
-loc_32E5A:
+SKBumper_SelectFixedOrOrbitHandler:
                 move.l  #Map_Bumper,mappings(a0)
                 move.w  #make_art_tile(ArtTile_CNZMisc+$13,2,0),art_tile(a0)
-                move.l  #loc_32EAA,(a0)
+                move.l  #SKBumper_HandleNormalContactProperties,(a0)
                 move.b  subtype(a0),d0
-                beq.s   loc_32EAA
+                beq.s   SKBumper_HandleNormalContactProperties
                 move.b  d0,angle(a0)
-                move.l  #loc_32E7E,(a0)
+                move.l  #SKBumper_SelectOrbitCounterDirection,(a0)
 
-loc_32E7E:
+SKBumper_SelectOrbitCounterDirection:
                 move.b  (Level_frame_counter+1).w,d0
                 btst    #0,status(a0)
-                beq.s   loc_32E8C
+                beq.s   SKBumper_ApplyOrbitAroundSavedCenter
                 neg.b   d0
 
-loc_32E8C:
+SKBumper_ApplyOrbitAroundSavedCenter:
                 add.b   angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
@@ -54,57 +54,57 @@ loc_32E8C:
                 move.w  d1,x_pos(a0)
                 move.w  d0,y_pos(a0)
 
-loc_32EAA:
+SKBumper_HandleNormalContactProperties:
                 tst.b   collision_property(a0)
-                beq.s   loc_32EB4
+                beq.s   SKBumper_TickNormalAndCullByAnchorX
                 bsr.w   ReboundPlayersTouchingBumper
 
-loc_32EB4:
+SKBumper_TickNormalAndCullByAnchorX:
                 lea     (Ani_Bumper).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $30(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_32EDE
+                bhi.s   SKBumper_ClearNormalLoadedBit
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_32EDE:
+SKBumper_ClearNormalLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_32EEA
+                beq.s   SKBumper_DeleteOutsideAnchorRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_32EEA:
+SKBumper_DeleteOutsideAnchorRange:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_32EF0:
+SKBumper_HandlePachinkoContactProperties:
                 tst.b   collision_property(a0)
-                beq.s   loc_32EF8
+                beq.s   SKBumper_TickPachinkoAndCullY
                 bsr.s   ReboundPlayersTouchingBumper
 
-loc_32EF8:
+SKBumper_TickPachinkoAndCullY:
                 lea     (Ani_Bumper).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  y_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_Y_pos_coarse_back).w,d0
                 cmpi.w  #$200,d0
-                bhi.s   loc_32F22
+                bhi.s   SKBumper_ClearPachinkoLoadedBit
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_32F22:
+SKBumper_ClearPachinkoLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_32F2E
+                beq.s   SKBumper_DeletePachinkoOffscreen
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_32F2E:
+SKBumper_DeletePachinkoOffscreen:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -112,16 +112,16 @@ loc_32F2E:
 ReboundPlayersTouchingBumper:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_32F42
+                beq.s   SKBumper_TryReboundP2
                 bsr.s   ReboundPlayerFromBumperAndAwardScore
 
-loc_32F42:
+SKBumper_TryReboundP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_32F50
+                beq.s   SKBumper_ClearNormalContacts
                 bsr.s   ReboundPlayerFromBumperAndAwardScore
 
-loc_32F50:
+SKBumper_ClearNormalContacts:
                 clr.b   collision_property(a0)
                 rts
 ; End of function ReboundPlayersTouchingBumper
@@ -152,46 +152,47 @@ ReboundPlayerFromBumperAndAwardScore:
                 moveq   #signextendB(sfx_Bumper),d0
                 jsr     (Play_SFX).l
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_32FC4
+                beq.s   SKBumper_AwardScoreAndTryPopup
                 movea.w d0,a2
                 cmpi.b  #$8A,(a2)
-                bhs.s   locret_32FEE
+                bhs.s   SKBumper_ReturnAfterScoringReboundOrCap
                 addq.b  #1,(a2)
 
-loc_32FC4:
+; One stored score unit displays as ten points
+SKBumper_AwardScoreAndTryPopup:
                 moveq   #1,d0
                 movea.w a1,a3
                 jsr     (HUD_AddToScore).l
                 jsr     (AllocateObject).l
-                bne.s   locret_32FEE
+                bne.s   SKBumper_ReturnAfterScoringReboundOrCap
                 move.l  #Obj_EnemyScore,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  #4,mapping_frame(a1)
 
-locret_32FEE:
+SKBumper_ReturnAfterScoringReboundOrCap:
                 rts
 ; End of function ReboundPlayerFromBumperAndAwardScore
 
 ; ---------------------------------------------------------------------------
 
-loc_32FF0:
+SKBumper_CheckCompetitionContacts:
                 tst.b   collision_property(a0)
-                beq.w   loc_3307C
+                beq.w   SKBumper_TickAndDrawCompetition
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_33006
+                beq.s   SKBumper_TryReboundCompetitionP2
                 bsr.s   ReboundPlayerFromCompetitionBumper
 
-loc_33006:
+SKBumper_TryReboundCompetitionP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_33014
+                beq.s   SKBumper_ClearCompetitionContacts
                 bsr.s   ReboundPlayerFromCompetitionBumper
 
-loc_33014:
+SKBumper_ClearCompetitionContacts:
                 clr.b   collision_property(a0)
-                bra.w   loc_3307C
+                bra.w   SKBumper_TickAndDrawCompetition
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -223,7 +224,7 @@ ReboundPlayerFromCompetitionBumper:
 
 ; ---------------------------------------------------------------------------
 
-loc_3307C:
+SKBumper_TickAndDrawCompetition:
                 lea     (Ani_Bumper).l,a1
                 jsr     (Animate_Sprite).l
                 jsr     (Add_SpriteToCollisionResponseList).l

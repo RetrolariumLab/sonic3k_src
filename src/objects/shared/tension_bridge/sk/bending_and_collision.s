@@ -5,20 +5,20 @@
 ; =============== S U B R O U T I N E =======================================
 
 CollapseTensionBridgeSpriteBank:
-                lea     (byte_38A78).l,a4
+                lea     (SKTensionBridge_CollapsePieceDelayBytes).l,a4
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6
                 subq.w  #1,d6
                 bclr    #6,render_flags(a3)
                 movea.l a3,a1
-                bra.s   loc_38A00
+                bra.s   SKTensionBridge_InitPieceAndTryExplosion
 ; ---------------------------------------------------------------------------
 
-loc_389F8:
+SKTensionBridge_TryNextCollapsePiece:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_38A64
+                bne.s   SKTensionBridge_FinishPartialCollapse
 
-loc_38A00:
+SKTensionBridge_InitPieceAndTryExplosion:
                 move.l  d4,(a1)
                 move.l  mappings(a3),mappings(a1)
                 move.b  render_flags(a3),render_flags(a1)
@@ -34,14 +34,15 @@ loc_38A00:
                 move.b  (a4)+,$34(a1)
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_38A64
+                bne.s   SKTensionBridge_FinishPartialCollapse
                 move.l  #loc_1E6EC,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),$24(a1)
-                dbf     d6,loc_389F8
+                dbf     d6,SKTensionBridge_TryNextCollapsePiece
 
-loc_38A64:
+; Clear the two reused sub-sprite coordinate words before requesting the collapse sound
+SKTensionBridge_FinishPartialCollapse:
                 move.w  #0,sub2_x_pos(a3)
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_BridgeCollapse),d0
@@ -49,7 +50,7 @@ loc_38A64:
 ; End of function CollapseTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
-byte_38A78:
+SKTensionBridge_CollapsePieceDelayBytes:
                 dc.b    8, $10,  $C,  $E,   6,  $A,   4,   2
                 dc.b    8, $10,  $C,  $E,   6,  $A,   4,   2
 
@@ -71,34 +72,35 @@ CollidePlayersWithTensionBridge:
 
 CollidePlayerWithTensionBridge:
                 btst    d6,status(a0)
-                beq.s   loc_38B06
+                beq.s   SKTensionBridge_TryFlatLandingAndCache
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_38AC2
+                bne.s   SKTensionBridge_ReleaseFlatRider
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_38AC2
+                bmi.s   SKTensionBridge_ReleaseFlatRider
                 cmp.w   d2,d0
-                blo.s   loc_38AD0
+                blo.s   SKTensionBridge_CacheFlatBinAndPickBank
 
-loc_38AC2:
+SKTensionBridge_ReleaseFlatRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38AD0:
+; Index 16-pixel segments. The second sprite bank starts at segment 8
+SKTensionBridge_CacheFlatBinAndPickBank:
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
                 movea.l $30(a0),a2
                 cmpi.w  #8,d0
-                blo.s   loc_38AE8
+                blo.s   SKTensionBridge_SnapFlatRiderToSegment
                 movea.l $34(a0),a2
                 subi.w  #8,d0
 
-loc_38AE8:
+SKTensionBridge_SnapFlatRiderToSegment:
                 add.w   d0,d0
                 move.w  d0,d1
                 add.w   d0,d0
@@ -113,12 +115,12 @@ loc_38AE8:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38B06:
+SKTensionBridge_TryFlatLandingAndCache:
                 move.w  d1,-(sp)
                 jsr     (TryLandPlayerOnPlatformSpan).l
                 move.w  (sp)+,d1
                 btst    d6,status(a0)
-                beq.s   locret_38B28
+                beq.s   SKTensionBridge_FlatLandingReturn
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
@@ -126,7 +128,7 @@ loc_38B06:
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
 
-locret_38B28:
+SKTensionBridge_FlatLandingReturn:
                 rts
 ; End of function CollidePlayerWithTensionBridge
 
@@ -148,33 +150,34 @@ CollidePlayersWithSlopedTensionBridge:
 
 CollidePlayerWithSlopedTensionBridge:
                 btst    d6,status(a0)
-                beq.s   loc_38BA4
+                beq.s   SKTensionBridge_TryNewSlopedLanding
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_38B64
+                bne.s   SKTensionBridge_ReleaseSlopedRider
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_38B64
+                bmi.s   SKTensionBridge_ReleaseSlopedRider
                 cmp.w   d2,d0
-                blo.s   loc_38B72
+                blo.s   SKTensionBridge_PickSlopedRiderBank
 
-loc_38B64:
+SKTensionBridge_ReleaseSlopedRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38B72:
+; Select the bank from the current rider bin and leave the cached bend index untouched
+SKTensionBridge_PickSlopedRiderBank:
                 lsr.w   #4,d0
                 movea.l $30(a0),a2
                 cmpi.w  #8,d0
-                blo.s   loc_38B86
+                blo.s   SKTensionBridge_SnapSlopedRiderToSegment
                 movea.l $34(a0),a2
                 subi.w  #8,d0
 
-loc_38B86:
+SKTensionBridge_SnapSlopedRiderToSegment:
                 add.w   d0,d0
                 move.w  d0,d1
                 add.w   d0,d0
@@ -189,7 +192,7 @@ loc_38B86:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38BA4:
+SKTensionBridge_TryNewSlopedLanding:
                 bsr.s   TryLandPlayerOnSlopedTensionBridge
                 rts
 ; End of function CollidePlayerWithSlopedTensionBridge
@@ -198,13 +201,13 @@ loc_38BA4:
 
 TryLandPlayerOnSlopedTensionBridge:
                 tst.w   y_vel(a1)
-                bmi.s   locret_38BD6
+                bmi.s   SKTensionBridge_RejectSlopedLanding
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_38BD6
+                bmi.s   SKTensionBridge_RejectSlopedLanding
                 cmp.w   d2,d0
-                bhs.s   locret_38BD6
+                bhs.s   SKTensionBridge_RejectSlopedLanding
                 lsr.w   #4,d0
                 move.w  d0,d3
                 add.w   d0,d0
@@ -216,7 +219,8 @@ TryLandPlayerOnSlopedTensionBridge:
                 jmp     (SKPlatform_CheckTopAndSnapRider).l
 ; ---------------------------------------------------------------------------
 
-locret_38BD6:
+; Return with the original predicate flags from the rejected landing test
+SKTensionBridge_RejectSlopedLanding:
                 rts
 ; End of function TryLandPlayerOnSlopedTensionBridge
 
@@ -236,20 +240,21 @@ CacheTensionBridgeRiderSegments:
 
 CacheTensionBridgeRiderSegment:
                 btst    d6,status(a0)
-                beq.s   locret_38C10
+                beq.s   SKTensionBridge_RiderCacheProbeReturn
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_38C10
+                bne.s   SKTensionBridge_RiderCacheProbeReturn
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_38C10
+                bmi.s   SKTensionBridge_RiderCacheProbeReturn
                 cmp.w   d2,d0
-                bhs.s   locret_38C10
+                bhs.s   SKTensionBridge_RiderCacheProbeReturn
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
 
-locret_38C10:
+; Leave the old cached index when the rider fails this probe
+SKTensionBridge_RiderCacheProbeReturn:
                 rts
 ; End of function CacheTensionBridgeRiderSegment
 
@@ -264,22 +269,22 @@ TensionBridge_AnimateRiddenBoards:
                 moveq   #-2,d4
                 move.b  status(a0),d0
                 andi.w  #p1_standing,d0
-                beq.s   loc_38C3E
+                beq.s   SKTensionBridge_TryAnimateP2Segment
                 tst.w   (Player_1+x_vel).w
-                beq.s   loc_38C3E
+                beq.s   SKTensionBridge_TryAnimateP2Segment
                 move.b  $3F(a0),d0
                 bsr.w   StartTensionBridgeSegmentAnimation
 
-loc_38C3E:
+SKTensionBridge_TryAnimateP2Segment:
                 move.b  status(a0),d0
                 andi.w  #p2_standing,d0
-                beq.s   loc_38C56
+                beq.s   SKTensionBridge_InitSegmentFrameLoop
                 tst.w   (Player_2+x_vel).w
-                beq.s   loc_38C56
+                beq.s   SKTensionBridge_InitSegmentFrameLoop
                 move.b  $3B(a0),d0
                 bsr.w   StartTensionBridgeSegmentAnimation
 
-loc_38C56:
+SKTensionBridge_InitSegmentFrameLoop:
                 movea.l $30(a0),a1
                 lea     $4D(a1),a2
                 lea     sub2_mapframe(a1),a1
@@ -287,23 +292,25 @@ loc_38C56:
                 move.b  subtype(a0),d1
                 subq.b  #1,d1
 
-loc_38C6A:
+SKTensionBridge_TickActiveFrameTo12:
                 tst.b   (a1)
-                beq.s   loc_38C7A
+                beq.s   SKTensionBridge_NextFrameSlotOrBank
                 addq.b  #1,(a1)
                 cmpi.b  #$C,(a1)
-                blo.s   loc_38C7A
+                blo.s   SKTensionBridge_NextFrameSlotOrBank
                 move.b  #0,(a1)
 
-loc_38C7A:
+; Switch to the second sprite bank after the eighth first-bank slot
+SKTensionBridge_NextFrameSlotOrBank:
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38C88
+                bne.s   SKTensionBridge_RepeatSegmentFrameTick
                 movea.l $34(a0),a1
                 lea     sub2_mapframe(a1),a1
 
-loc_38C88:
-                dbf     d1,loc_38C6A
+; The original loop count comes from the subtype byte
+SKTensionBridge_RepeatSegmentFrameTick:
+                dbf     d1,SKTensionBridge_TickActiveFrameTo12
                 rts
 ; End of function TensionBridge_AnimateRiddenBoards
 
@@ -311,30 +318,30 @@ loc_38C88:
 
 StartTensionBridgeSegmentAnimation:
                 cmpi.b  #8,d0
-                bhs.s   loc_38CAA
+                bhs.s   SKTensionBridge_TryStartSecondBankAnim
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0
                 tst.b   (a1,d0.w)
-                bne.s   locret_38CA8
+                bne.s   SKTensionBridge_FirstBankAnimReturn
                 move.b  #1,(a1,d0.w)
 
-locret_38CA8:
+SKTensionBridge_FirstBankAnimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38CAA:
+SKTensionBridge_TryStartSecondBankAnim:
                 subq.w  #8,d0
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0
                 tst.b   (a2,d0.w)
-                bne.s   locret_38CC0
+                bne.s   SKTensionBridge_SecondBankAnimReturn
                 move.b  #1,(a2,d0.w)
 
-locret_38CC0:
+SKTensionBridge_SecondBankAnimReturn:
                 rts
 ; End of function StartTensionBridgeSegmentAnimation
 
@@ -353,7 +360,7 @@ BendTensionBridgeSegments:
                 move.w  d3,d2
                 add.w   d0,d3
                 moveq   #0,d5
-                lea     (byte_38E2A-$80).l,a5
+                lea     (SKTensionBridge_BendAmplitudeRows-$80).l,a5
                 move.b  (a5,d3.w),d5
                 andi.w  #$F,d3
                 lsl.w   #4,d3
@@ -362,7 +369,7 @@ BendTensionBridgeSegments:
                 lea     next_object(a1),a2
                 lea     sub2_y_pos(a1),a1
 
-loc_38D08:
+SKTensionBridge_WriteFlatForwardSample:
                 moveq   #0,d0
                 move.b  (a3)+,d0
                 addq.w  #1,d0
@@ -373,12 +380,12 @@ loc_38D08:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38D28
+                bne.s   SKTensionBridge_FinishFlatForwardPass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38D28:
-                dbf     d2,loc_38D08
+SKTensionBridge_FinishFlatForwardPass:
+                dbf     d2,SKTensionBridge_WriteFlatForwardSample
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 moveq   #0,d3
@@ -386,15 +393,15 @@ loc_38D28:
                 addq.b  #1,d3
                 sub.b   d0,d3
                 neg.b   d3
-                bmi.s   locret_38D72
+                bmi.s   SKTensionBridge_FlatBendReturn
                 move.w  d3,d2
                 lsl.w   #4,d3
                 lea     (a4,d3.w),a3
                 adda.w  d2,a3
                 subq.w  #1,d2
-                bcs.s   locret_38D72
+                bcs.s   SKTensionBridge_FlatBendReturn
 
-loc_38D4E:
+SKTensionBridge_WriteFlatReverseSample:
                 moveq   #0,d0
                 move.b  -(a3),d0
                 addq.w  #1,d0
@@ -405,14 +412,15 @@ loc_38D4E:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38D6E
+                bne.s   SKTensionBridge_RepeatFlatReversePass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38D6E:
-                dbf     d2,loc_38D4E
+; Return with the loop's existing condition codes
+SKTensionBridge_RepeatFlatReversePass:
+                dbf     d2,SKTensionBridge_WriteFlatReverseSample
 
-locret_38D72:
+SKTensionBridge_FlatBendReturn:
                 rts
 ; End of function BendTensionBridgeSegments
 
@@ -431,7 +439,7 @@ BendSlopedTensionBridgeSegments:
                 move.w  d3,d2
                 add.w   d0,d3
                 moveq   #0,d5
-                lea     (byte_38E2A-$80).l,a5
+                lea     (SKTensionBridge_BendAmplitudeRows-$80).l,a5
                 move.b  (a5,d3.w),d5
                 andi.w  #$F,d3
                 lsl.w   #4,d3
@@ -441,7 +449,7 @@ BendSlopedTensionBridgeSegments:
                 lea     next_object(a1),a2
                 lea     sub2_y_pos(a1),a1
 
-loc_38DBE:
+SKTensionBridge_WriteSlopeForwardSample:
                 moveq   #0,d0
                 move.b  (a3)+,d0
                 addq.w  #1,d0
@@ -453,12 +461,12 @@ loc_38DBE:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38DDE
+                bne.s   SKTensionBridge_FinishSlopeForwardPass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38DDE:
-                dbf     d2,loc_38DBE
+SKTensionBridge_FinishSlopeForwardPass:
+                dbf     d2,SKTensionBridge_WriteSlopeForwardSample
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 moveq   #0,d3
@@ -466,15 +474,15 @@ loc_38DDE:
                 addq.b  #1,d3
                 sub.b   d0,d3
                 neg.b   d3
-                bmi.s   locret_38E28
+                bmi.s   SKTensionBridge_SlopeBendReturn
                 move.w  d3,d2
                 lsl.w   #4,d3
                 lea     (a4,d3.w),a3
                 adda.w  d2,a3
                 subq.w  #1,d2
-                bcs.s   locret_38E28
+                bcs.s   SKTensionBridge_SlopeBendReturn
 
-loc_38E04:
+SKTensionBridge_WriteSlopeReverseSample:
                 moveq   #0,d0
                 move.b  -(a3),d0
                 addq.w  #1,d0
@@ -486,19 +494,21 @@ loc_38E04:
                 move.w  d0,(a1)
                 addq.w  #6,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38E24
+                bne.s   SKTensionBridge_RepeatSlopeReversePass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38E24:
-                dbf     d2,loc_38E04
+; Carry the running word baseline from one segment to the next
+SKTensionBridge_RepeatSlopeReversePass:
+                dbf     d2,SKTensionBridge_WriteSlopeReverseSample
 
-locret_38E28:
+SKTensionBridge_SlopeBendReturn:
                 rts
 ; End of function BendSlopedTensionBridgeSegments
 
 ; ---------------------------------------------------------------------------
-byte_38E2A:
+; The rows cover bridge lengths from eight through sixteen segments
+SKTensionBridge_BendAmplitudeRows:
                 dc.b    2,   4,   6,   8,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0,   0,   0
                 dc.b    2,   4,   6,   8,  $A,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0,   0
                 dc.b    2,   4,   6,   8,  $A,  $A,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0

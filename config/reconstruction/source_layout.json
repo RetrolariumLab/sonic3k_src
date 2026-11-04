@@ -36471,7 +36471,7 @@
       "responsibility": "Automatic tunnel player capture, scripted movement, final movement and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 291,
+      "physical_lines": 292,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "s3.s",
@@ -36596,7 +36596,7 @@
       "responsibility": "Shared bumper response, competition and product-specific bonus variants and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 196,
+      "physical_lines": 197,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -36956,7 +36956,7 @@
       "responsibility": "Shared introductory player launch, ground motion and character control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 113,
+      "physical_lines": 114,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -37091,7 +37091,7 @@
       "responsibility": "Shared foreground priority and collision-path switcher state and geometric contact helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 327,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "s3.s",
@@ -37271,7 +37271,7 @@
       "responsibility": "Automatic player rolling triggers and their shared geometric contact helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 252,
+      "physical_lines": 254,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "s3.s",
@@ -38494,7 +38494,7 @@
       "responsibility": "Automatic tunnel player capture, scripted movement, final movement and release.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 291,
+      "physical_lines": 292,
       "origin": {
         "commit": "cb38b95cbe1cded4de16d140782f81ded9c90567",
         "path": "sonic3k.s",
@@ -38589,7 +38589,7 @@
       "responsibility": "Shared bumper response, competition and product-specific bonus variants and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 235,
+      "physical_lines": 236,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",
@@ -38874,7 +38874,7 @@
       "responsibility": "Introductory player fall, ground transition and character control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 224,
+      "physical_lines": 229,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "sonic3k.s",
@@ -38909,7 +38909,7 @@
       "responsibility": "Shared introductory player launch, ground motion and character control helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 113,
+      "physical_lines": 114,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -38944,7 +38944,7 @@
       "responsibility": "Introductory player running state and character control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 32,
+      "physical_lines": 33,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "sonic3k.s",
@@ -39059,7 +39059,7 @@
       "responsibility": "Shared foreground priority and collision-path switcher state and geometric contact helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 325,
+      "physical_lines": 327,
       "origin": {
         "commit": "332abac9176a546d9574ff1b49161b69b0af33e2",
         "path": "sonic3k.s",
@@ -39229,7 +39229,7 @@
       "responsibility": "Automatic player rolling triggers and their shared geometric contact helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 304,
+      "physical_lines": 310,
       "origin": {
         "commit": "112c6fc7e9ba620c0c05a2197fdcce4fb164e687",
         "path": "sonic3k.s",
@@ -39289,7 +39289,7 @@
       "responsibility": "Twisted ramp placement and player path control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 73,
+      "physical_lines": 74,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -40509,7 +40509,7 @@
       "responsibility": "Up, horizontal and down spring contact and launch responses for normal and competition players.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 479,
+      "physical_lines": 480,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -40549,7 +40549,7 @@
       "responsibility": "Diagonal spring collision, launch response, surface profiles and shared spring animation and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 262,
+      "physical_lines": 263,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -40639,7 +40639,7 @@
       "responsibility": "Retracting spring timing, extension states, competition variants and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 505,
+      "physical_lines": 512,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "s3.s",
@@ -40679,7 +40679,7 @@
       "responsibility": "Up, horizontal and down spring contact and launch responses for normal and competition players.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 489,
+      "physical_lines": 490,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -40709,7 +40709,7 @@
       "responsibility": "Diagonal spring collision, launch response, surface profiles and shared spring animation and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 262,
+      "physical_lines": 263,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -40779,7 +40779,7 @@
       "responsibility": "Retracting spring timing, extension states, competition variants and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 505,
+      "physical_lines": 512,
       "origin": {
         "commit": "bbbb7a46d3fb58038025ceb0f6303b48a2db1594",
         "path": "sonic3k.s",
@@ -42250,7 +42250,7 @@
       "responsibility": "Tension bridge segment bending, player collision, movement helpers and private bend data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 527,
+      "physical_lines": 537,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -42330,7 +42330,7 @@
       "responsibility": "Tension bridge initialization, coordinated segments, player state and active control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 337,
+      "physical_lines": 339,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -42370,7 +42370,7 @@
       "responsibility": "Tension bridge segment bending, player collision, movement helpers and private bend data.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 527,
+      "physical_lines": 537,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -42430,7 +42430,7 @@
       "responsibility": "Tension bridge initialization, coordinated segments, player state and active control.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 343,
+      "physical_lines": 345,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",

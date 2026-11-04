@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 113
+    "commit_count": 114
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -725,9 +725,15 @@
       "commits": ["7a68a974f888c861d7f88849b2deba7940298597"]
     },
     {
-      "id": "current-shorten-L06-scenes",
+      "id": "change-72c7fdf84204",
       "kind": "source_or_tooling",
       "summary": "Shorten 46 earlier cutscene, capsule, signpost and results procedure names.",
+      "commits": ["72c7fdf84204668dd31e7e9239de4194581facfa"]
+    },
+    {
+      "id": "current-shorten-09-object-motion",
+      "kind": "source_or_tooling",
+      "summary": "Apply 481 reviewed short labels for object motion.",
       "commits": ["release-commit"]
     }
   ],

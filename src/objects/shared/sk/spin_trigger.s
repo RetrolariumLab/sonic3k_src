@@ -12,78 +12,78 @@ Obj_AutoSpin:
                 move.w  #$280,priority(a0)
                 move.b  subtype(a0),d0
                 btst    #2,d0
-                beq.s   loc_1E85C
+                beq.s   SKAutoRoll_InitXFrameAndP1Side
                 andi.w  #7,d0
                 move.b  d0,mapping_frame(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  word_1E854(pc,d0.w),$32(a0)
+                move.w  SKAutoRoll_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  y_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1E83A
+                bhs.s   SKAutoRoll_InitializePlayerTwoYSideLatch
                 move.b  #1,$34(a0)
 
-loc_1E83A:
+SKAutoRoll_InitializePlayerTwoYSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1E84A
+                bhs.s   SKAutoRoll_InstallYHandler
                 move.b  #1,$35(a0)
 
-loc_1E84A:
-                move.l  #loc_1E9E6,(a0)
-                bra.w   loc_1E9E6
+SKAutoRoll_InstallYHandler:
+                move.l  #SKAutoRoll_CheckPlayersCrossingY,(a0)
+                bra.w   SKAutoRoll_CheckPlayersCrossingY
 ; ---------------------------------------------------------------------------
-word_1E854:
+SKAutoRoll_PerpendicularHalfSpanWords:
                 dc.w    $20,   $40,   $80,  $100
 ; ---------------------------------------------------------------------------
 
-loc_1E85C:
+SKAutoRoll_InitXFrameAndP1Side:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_1E854(pc,d0.w),$32(a0)
+                move.w  SKAutoRoll_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  x_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1E880
+                bhs.s   SKAutoRoll_InitializePlayerTwoXSideLatch
                 move.b  #1,$34(a0)
 
-loc_1E880:
+SKAutoRoll_InitializePlayerTwoXSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1E890
+                bhs.s   SKAutoRoll_InstallXHandler
                 move.b  #1,$35(a0)
 
-loc_1E890:
-                move.l  #loc_1E896,(a0)
+SKAutoRoll_InstallXHandler:
+                move.l  #SKAutoRoll_CheckPlayersCrossingX,(a0)
 
-loc_1E896:
+SKAutoRoll_CheckPlayersCrossingX:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_1E8C0
+                bne.s   SKAutoRoll_DrawXDebugMarker
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   UpdateAutoRollOnXCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.w   loc_1E8BA
+                beq.w   SKAutoRoll_FinishXVisibilityByProfile
                 bsr.s   UpdateAutoRollOnXCrossing
 
-loc_1E8BA:
+SKAutoRoll_FinishXVisibilityByProfile:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_1E8C0:
+SKAutoRoll_DrawXDebugMarker:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateAutoRollOnXCrossing:
                 tst.b   (a2)+
-                bne.s   loc_1E944
+                bne.s   SKAutoRoll_LatchNegativeXAndCheckSpan
                 cmp.w   x_pos(a1),d1
-                bhi.w   locret_1E9B4
+                bhi.w   SKAutoRoll_ReturnFromXAutoRollCheck
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -92,39 +92,40 @@ UpdateAutoRollOnXCrossing:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.w   locret_1E9B4
+                blo.w   SKAutoRoll_ReturnFromXAutoRollCheck
                 cmp.w   d3,d4
-                bhs.w   locret_1E9B4
+                bhs.w   SKAutoRoll_ReturnFromXAutoRollCheck
                 btst    #5,subtype(a0)
-                beq.s   loc_1E908
+                beq.s   SKAutoRoll_CheckPositiveXPolicy
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1E9B4
+                bne.w   SKAutoRoll_ReturnFromXAutoRollCheck
 
-loc_1E908:
+; X flip and subtype bit 4 control whether this crossing forces or releases roll
+SKAutoRoll_CheckPositiveXPolicy:
                 btst    #0,render_flags(a0)
-                bne.s   loc_1E934
+                bne.s   SKAutoRoll_ReleaseForcedRollPositiveX
                 btst    #4,subtype(a0)
-                bne.s   loc_1E930
+                bne.s   SKAutoRoll_JoinPositiveXRollConversion
                 move.w  #$580,ground_vel(a1)
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1E930
+                bpl.s   SKAutoRoll_JoinPositiveXRollConversion
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1E930:
-                bra.w   loc_1E9B6
+SKAutoRoll_JoinPositiveXRollConversion:
+                bra.w   SKAutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1E934:
+SKAutoRoll_ReleaseForcedRollPositiveX:
                 btst    #4,subtype(a0)
-                bne.s   locret_1E9B4
+                bne.s   SKAutoRoll_ReturnFromXAutoRollCheck
                 move.b  #0,spin_dash_flag(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E944:
+SKAutoRoll_LatchNegativeXAndCheckSpan:
                 cmp.w   x_pos(a1),d1
-                bls.s   locret_1E9B4
+                bls.s   SKAutoRoll_ReturnFromXAutoRollCheck
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -133,45 +134,46 @@ loc_1E944:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.s   locret_1E9B4
+                blo.s   SKAutoRoll_ReturnFromXAutoRollCheck
                 cmp.w   d3,d4
-                bhs.s   locret_1E9B4
+                bhs.s   SKAutoRoll_ReturnFromXAutoRollCheck
                 btst    #5,subtype(a0)
-                beq.s   loc_1E97C
+                beq.s   SKAutoRoll_CheckNegativeXPolicy
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1E9B4
+                bne.w   SKAutoRoll_ReturnFromXAutoRollCheck
 
-loc_1E97C:
+; X flip and subtype bit 4 control whether this crossing forces or releases roll
+SKAutoRoll_CheckNegativeXPolicy:
                 btst    #0,render_flags(a0)
-                beq.s   loc_1E9A6
+                beq.s   SKAutoRoll_ReleaseForcedRollNegativeX
                 btst    #4,subtype(a0)
-                bne.s   loc_1E9A4
+                bne.s   SKAutoRoll_JoinNegativeXRollConversion
                 move.w  #-$580,ground_vel(a1)
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1E9A4
+                bpl.s   SKAutoRoll_JoinNegativeXRollConversion
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1E9A4:
-                bra.s   loc_1E9B6
+SKAutoRoll_JoinNegativeXRollConversion:
+                bra.s   SKAutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1E9A6:
+SKAutoRoll_ReleaseForcedRollNegativeX:
                 btst    #4,subtype(a0)
-                bne.s   locret_1E9B4
+                bne.s   SKAutoRoll_ReturnFromXAutoRollCheck
                 move.b  #0,spin_dash_flag(a1)
 
-locret_1E9B4:
+SKAutoRoll_ReturnFromXAutoRollCheck:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E9B6:
+SKAutoRoll_CheckAlreadyRolling:
                 btst    #Status_Roll,status(a1)
-                beq.s   loc_1E9C0
+                beq.s   SKAutoRoll_SetRollGeometryAndSound
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1E9C0:
+SKAutoRoll_SetRollGeometryAndSound:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -184,32 +186,32 @@ loc_1E9C0:
 
 ; ---------------------------------------------------------------------------
 
-loc_1E9E6:
+SKAutoRoll_CheckPlayersCrossingY:
                 tst.w   (Debug_placement_mode).w
-                bne.s   loc_1EA0E
+                bne.s   SKAutoRoll_DrawYDebugMarker
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   UpdateAutoRollOnYCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.s   loc_1EA08
+                beq.s   SKAutoRoll_FinishYVisibilityByProfile
                 bsr.s   UpdateAutoRollOnYCrossing
 
-loc_1EA08:
+SKAutoRoll_FinishYVisibilityByProfile:
                 jmp     (Delete_Sprite_If_Not_In_Range).l
 ; ---------------------------------------------------------------------------
 
-loc_1EA0E:
+SKAutoRoll_DrawYDebugMarker:
                 jmp     (Sprite_OnScreen_Test).l
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateAutoRollOnYCrossing:
                 tst.b   (a2)+
-                bne.w   loc_1EAB0
+                bne.w   SKAutoRoll_LatchNegativeYAndCheckSpan
                 cmp.w   y_pos(a1),d1
-                bhi.w   locret_1EB30
+                bhi.w   SKAutoRoll_ReturnFromYAutoRollCheck
                 move.b  #1,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -218,46 +220,48 @@ UpdateAutoRollOnYCrossing:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blo.w   locret_1EB30
+                blo.w   SKAutoRoll_ReturnFromYAutoRollCheck
                 cmp.w   d3,d4
-                bhs.w   locret_1EB30
+                bhs.w   SKAutoRoll_ReturnFromYAutoRollCheck
                 btst    #5,subtype(a0)
-                beq.s   loc_1EA58
+                beq.s   SKAutoRoll_CheckPositiveYPolicy
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1EB30
+                bne.w   SKAutoRoll_ReturnFromYAutoRollCheck
 
-loc_1EA58:
+; X flip and subtype bit 4 control whether this crossing forces or releases roll
+SKAutoRoll_CheckPositiveYPolicy:
                 btst    #0,render_flags(a0)
-                bne.s   loc_1EA9E
+                bne.s   SKAutoRoll_ReleaseForcedRollPositiveY
                 btst    #4,subtype(a0)
-                bne.s   loc_1EA9A
+                bne.s   SKAutoRoll_JoinPositiveYRollConversion
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1EA7A
+                bpl.s   SKAutoRoll_AlignPositiveYRoll
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1EA7A:
+; Subtype bit 6 clears InAir and sets the vertical angle to $40
+SKAutoRoll_AlignPositiveYRoll:
                 btst    #6,subtype(a0)
-                beq.s   loc_1EA9A
+                beq.s   SKAutoRoll_JoinPositiveYRollConversion
                 bclr    #Status_InAir,status(a1)
                 move.b  #$40,angle(a1)
                 move.w  y_vel(a1),ground_vel(a1)
                 move.w  #0,x_vel(a1)
 
-loc_1EA9A:
-                bra.w   loc_1E9B6
+SKAutoRoll_JoinPositiveYRollConversion:
+                bra.w   SKAutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1EA9E:
+SKAutoRoll_ReleaseForcedRollPositiveY:
                 btst    #4,subtype(a0)
-                bne.w   locret_1EB30
+                bne.w   SKAutoRoll_ReturnFromYAutoRollCheck
                 move.b  #0,spin_dash_flag(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1EAB0:
+SKAutoRoll_LatchNegativeYAndCheckSpan:
                 cmp.w   y_pos(a1),d1
-                bls.s   locret_1EB30
+                bls.s   SKAutoRoll_ReturnFromYAutoRollCheck
                 move.b  #0,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -266,39 +270,41 @@ loc_1EAB0:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blo.s   locret_1EB30
+                blo.s   SKAutoRoll_ReturnFromYAutoRollCheck
                 cmp.w   d3,d4
-                bhs.s   locret_1EB30
+                bhs.s   SKAutoRoll_ReturnFromYAutoRollCheck
                 btst    #5,subtype(a0)
-                beq.s   loc_1EAE8
+                beq.s   SKAutoRoll_CheckNegativeYPolicy
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1EB30
+                bne.w   SKAutoRoll_ReturnFromYAutoRollCheck
 
-loc_1EAE8:
+; X flip and subtype bit 4 control whether this crossing forces or releases roll
+SKAutoRoll_CheckNegativeYPolicy:
                 btst    #0,render_flags(a0)
-                beq.s   loc_1EB22
+                beq.s   SKAutoRoll_ReleaseForcedRollNegativeY
                 btst    #4,subtype(a0)
-                bne.s   loc_1EB1E
+                bne.s   SKAutoRoll_JoinNegativeYRollConversion
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1EB0A
+                bpl.s   SKAutoRoll_AlignNegativeYRoll
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1EB0A:
+; Subtype bit 6 clears InAir and sets the vertical angle to $40
+SKAutoRoll_AlignNegativeYRoll:
                 btst    #6,subtype(a0)
-                beq.s   loc_1EB1E
+                beq.s   SKAutoRoll_JoinNegativeYRollConversion
                 bclr    #Status_InAir,status(a1)
                 move.b  #$40,angle(a1)
 
-loc_1EB1E:
-                bra.w   loc_1E9B6
+SKAutoRoll_JoinNegativeYRollConversion:
+                bra.w   SKAutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1EB22:
+SKAutoRoll_ReleaseForcedRollNegativeY:
                 btst    #4,subtype(a0)
-                bne.s   locret_1EB30
+                bne.s   SKAutoRoll_ReturnFromYAutoRollCheck
                 move.b  #0,spin_dash_flag(a1)
 
-locret_1EB30:
+SKAutoRoll_ReturnFromYAutoRollCheck:
                 rts
 ; End of function UpdateAutoRollOnYCrossing

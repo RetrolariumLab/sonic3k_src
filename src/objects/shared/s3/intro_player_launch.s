@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LevelIntro_PlayerLaunchFromGround:
-                move.l  #loc_3907E,(a0)
+                move.l  #S3LbzGroundIntro_TickLockedLaunchDelay,(a0)
                 move.b  #1,(Ctrl_1_locked).w
                 move.b  #1,(Ctrl_2_locked).w
                 moveq   #0,d0
@@ -17,36 +17,36 @@ Obj_LevelIntro_PlayerLaunchFromGround:
                 bsr.s   HoldPlayerForLbzGroundLaunchIntro
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   locret_3907C
+                beq.s   S3LbzGroundIntro_HoldReturn
 
 ; =============== S U B R O U T I N E =======================================
 
 HoldPlayerForLbzGroundLaunchIntro:
                 move.b  #3,object_control(a1)
 
-locret_3907C:
+S3LbzGroundIntro_HoldReturn:
                 rts
 ; End of function HoldPlayerForLbzGroundLaunchIntro
 
 ; ---------------------------------------------------------------------------
 
-loc_3907E:
+S3LbzGroundIntro_TickLockedLaunchDelay:
                 move.b  #1,(Ctrl_1_locked).w
                 move.b  #1,(Ctrl_2_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_3909E
+                beq.s   S3LbzGroundIntro_LaunchPresentPlayers
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3909E:
-                move.l  #loc_390D0,(a0)
+S3LbzGroundIntro_LaunchPresentPlayers:
+                move.l  #S3LbzGroundIntro_CheckP1ReleaseHeight,(a0)
                 lea     (Player_1).w,a1
                 bsr.s   LaunchLbzIntroPlayerUpward
                 lea     (Player_2).w,a1
                 tst.l   (a1)
-                beq.s   locret_390CE
+                beq.s   S3LbzGroundIntro_LaunchReturn
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -57,31 +57,32 @@ LaunchLbzIntroPlayerUpward:
                 move.b  #$10,anim(a1)
                 move.b  #1,object_control(a1)
 
-locret_390CE:
+S3LbzGroundIntro_LaunchReturn:
                 rts
 ; End of function LaunchLbzIntroPlayerUpward
 
 ; ---------------------------------------------------------------------------
 
-loc_390D0:
+; Release once Player 1 reaches an unsigned Y below $5C0
+S3LbzGroundIntro_CheckP1ReleaseHeight:
                 move.b  #1,(Ctrl_1_locked).w
                 move.b  #1,(Ctrl_2_locked).w
                 move.w  #0,(Ctrl_1_logical).w
                 move.w  #0,(Ctrl_2_logical).w
                 lea     (Player_1).w,a2
                 cmpi.w  #$5C0,y_pos(a2)
-                bhs.s   loc_3913A
+                bhs.s   S3LbzGroundIntro_MoveHeldPlayers
                 move.b  #0,object_control(a2)
                 move.w  #4<<8,(Dust+anim).w             ; and prev_anim
                 move.w  #$5C0,(Dust+y_pos).w
                 lea     (Player_2).w,a2
                 tst.l   (a2)
-                beq.s   loc_39120
+                beq.s   S3LbzGroundIntro_SplashUnlockAndDelete
                 move.b  #0,object_control(a2)
                 move.w  #4<<8,(Dust_P2+anim).w          ; and prev_anim
                 move.w  #$5C0,(Dust_P2+y_pos).w
 
-loc_39120:
+S3LbzGroundIntro_SplashUnlockAndDelete:
                 moveq   #signextendB(sfx_SandSplash),d0
                 jsr     (Play_SFX).l
                 move.b  #0,(Ctrl_1_locked).w
@@ -89,11 +90,11 @@ loc_39120:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3913A:
+S3LbzGroundIntro_MoveHeldPlayers:
                 bsr.s   MoveLbzIntroPlayerWithGravity
                 lea     (Player_2).w,a2
                 tst.l   (a2)
-                beq.s   locret_39162
+                beq.s   S3LbzGroundIntro_MoveReturn
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -108,6 +109,6 @@ MoveLbzIntroPlayerWithGravity:
                 lsl.l   #8,d0
                 add.l   d0,y_pos(a2)
 
-locret_39162:
+S3LbzGroundIntro_MoveReturn:
                 rts
 ; End of function MoveLbzIntroPlayerWithGravity

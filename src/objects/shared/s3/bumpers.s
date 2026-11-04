@@ -15,27 +15,27 @@ Obj_Bumper:
                 move.w  x_pos(a0),$30(a0)
                 move.w  y_pos(a0),$32(a0)
                 tst.w   (Competition_mode).w
-                beq.s   loc_320D8
+                beq.s   S3Bumper_SelectFixedOrOrbitHandler
                 move.l  #Map_2PBumper,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BPZMisc,1,0),art_tile(a0)
-                move.l  #loc_3221C,(a0)
-                bra.w   loc_3221C
+                move.l  #S3Bumper_CheckCompetitionContacts,(a0)
+                bra.w   S3Bumper_CheckCompetitionContacts
 ; ---------------------------------------------------------------------------
 
-loc_320D8:
-                move.l  #loc_3211A,(a0)
+S3Bumper_SelectFixedOrOrbitHandler:
+                move.l  #S3Bumper_HandleNormalContactProperties,(a0)
                 move.b  subtype(a0),d0
-                beq.s   loc_3211A
+                beq.s   S3Bumper_HandleNormalContactProperties
                 move.b  d0,angle(a0)
-                move.l  #loc_320EE,(a0)
+                move.l  #S3Bumper_SelectOrbitCounterDirection,(a0)
 
-loc_320EE:
+S3Bumper_SelectOrbitCounterDirection:
                 move.b  (Level_frame_counter+1).w,d0
                 btst    #0,status(a0)
-                beq.s   loc_320FC
+                beq.s   S3Bumper_ApplyOrbitAroundSavedCenter
                 neg.b   d0
 
-loc_320FC:
+S3Bumper_ApplyOrbitAroundSavedCenter:
                 add.b   angle(a0),d0
                 jsr     (GetSineCosine).l
                 asr.w   #2,d1
@@ -45,23 +45,23 @@ loc_320FC:
                 move.w  d1,x_pos(a0)
                 move.w  d0,y_pos(a0)
 
-loc_3211A:
+S3Bumper_HandleNormalContactProperties:
                 tst.b   collision_property(a0)
-                beq.w   loc_321E0
+                beq.w   S3Bumper_TickNormalAndCullByAnchorX
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_32130
+                beq.s   S3Bumper_TryReboundP2
                 bsr.s   ReboundPlayerFromBumperAndAwardScore
 
-loc_32130:
+S3Bumper_TryReboundP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_3213E
+                beq.s   S3Bumper_ClearNormalContacts
                 bsr.s   ReboundPlayerFromBumperAndAwardScore
 
-loc_3213E:
+S3Bumper_ClearNormalContacts:
                 clr.b   collision_property(a0)
-                bra.w   loc_321E0
+                bra.w   S3Bumper_TickNormalAndCullByAnchorX
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -89,68 +89,69 @@ ReboundPlayerFromBumperAndAwardScore:
                 moveq   #signextendB(sfx_Bumper),d0
                 jsr     (Play_SFX).l
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_321B4
+                beq.s   S3Bumper_AwardScoreAndTryPopup
                 movea.w d0,a2
                 cmpi.b  #$8A,(a2)
-                bhs.s   locret_321DE
+                bhs.s   S3Bumper_ReturnAfterScoringReboundOrCap
                 addq.b  #1,(a2)
 
-loc_321B4:
+; One stored score unit displays as ten points
+S3Bumper_AwardScoreAndTryPopup:
                 moveq   #1,d0
                 movea.w a1,a3
                 jsr     (HUD_AddToScore).l
                 jsr     (AllocateObject).l
-                bne.s   locret_321DE
+                bne.s   S3Bumper_ReturnAfterScoringReboundOrCap
                 move.l  #Obj_EnemyScore,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.b  #4,mapping_frame(a1)
 
-locret_321DE:
+S3Bumper_ReturnAfterScoringReboundOrCap:
                 rts
 ; End of function ReboundPlayerFromBumperAndAwardScore
 
 ; ---------------------------------------------------------------------------
 
-loc_321E0:
+S3Bumper_TickNormalAndCullByAnchorX:
                 lea     (Ani_Bumper).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $30(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_3220A
+                bhi.s   S3Bumper_ClearNormalLoadedBit
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3220A:
+S3Bumper_ClearNormalLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_32216
+                beq.s   S3Bumper_DeleteOutsideAnchorRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_32216:
+S3Bumper_DeleteOutsideAnchorRange:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_3221C:
+S3Bumper_CheckCompetitionContacts:
                 tst.b   collision_property(a0)
-                beq.w   loc_322A8
+                beq.w   S3Bumper_TickAndDrawCompetition
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
-                beq.s   loc_32232
+                beq.s   S3Bumper_TryReboundCompetitionP2
                 bsr.s   ReboundPlayerFromCompetitionBumper
 
-loc_32232:
+S3Bumper_TryReboundCompetitionP2:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
-                beq.s   loc_32240
+                beq.s   S3Bumper_ClearCompetitionContacts
                 bsr.s   ReboundPlayerFromCompetitionBumper
 
-loc_32240:
+S3Bumper_ClearCompetitionContacts:
                 clr.b   collision_property(a0)
-                bra.w   loc_322A8
+                bra.w   S3Bumper_TickAndDrawCompetition
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -182,7 +183,7 @@ ReboundPlayerFromCompetitionBumper:
 
 ; ---------------------------------------------------------------------------
 
-loc_322A8:
+S3Bumper_TickAndDrawCompetition:
                 lea     (Ani_Bumper).l,a1
                 jsr     (Animate_Sprite).l
                 jsr     (Add_SpriteToCollisionResponseList).l

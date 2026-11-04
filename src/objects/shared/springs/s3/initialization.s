@@ -42,22 +42,22 @@ InitCompetitionRetractingSpring:
                 move.b  subtype(a0),d0
                 lsr.w   #3,d0
                 andi.w  #$E,d0
-                move.w  off_21472(pc,d0.w),d0
-                jsr     off_21472(pc,d0.w)
+                move.w  S3Spring_RetractingOrientationOffsets(pc,d0.w),d0
+                jsr     S3Spring_RetractingOrientationOffsets(pc,d0.w)
                 move.w  #-$800,$30(a0)
                 rts
 ; End of function InitCompetitionRetractingSpring
 
 ; ---------------------------------------------------------------------------
-off_21472:
-                dc.w    Spring_Up-off_21472
-                dc.w    Spring_Horizontal-off_21472
-                dc.w    Spring_Down-off_21472
-                dc.w    Spring_Horizontal-off_21472
-                dc.w    Spring_Up-off_21472
-                dc.w    Spring_Down-off_21472
-                dc.w    Spring_Up-off_21472
-                dc.w    Spring_Down-off_21472
+S3Spring_RetractingOrientationOffsets:
+                dc.w    Spring_Up-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Horizontal-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Down-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Horizontal-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Up-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Down-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Up-S3Spring_RetractingOrientationOffsets
+                dc.w    Spring_Down-S3Spring_RetractingOrientationOffsets
 ; ---------------------------------------------------------------------------
 
 Spring_Horizontal:
@@ -91,10 +91,10 @@ Spring_UpDiag:
                 move.b  #7,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_21512
+                bne.s   S3Spring_InstallUpDiagonalHandler
                 move.w  #make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
-loc_21512:
+S3Spring_InstallUpDiagonalHandler:
                 move.l  #Obj_Spring_UpDiag,(a0)
                 bra.s   Spring_Common
 ; ---------------------------------------------------------------------------
@@ -104,10 +104,10 @@ Spring_DownDiag:
                 move.b  #$A,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
                 cmpi.b  #2,(Current_zone).w
-                bne.s   loc_2153A
+                bne.s   S3Spring_InstallDownDiagonalHandler
                 move.w  #make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
-loc_2153A:
+S3Spring_InstallDownDiagonalHandler:
                 bset    #1,status(a0)
                 move.l  #Obj_Spring_DownDiag,(a0)
                 bra.s   Spring_Common
@@ -127,17 +127,17 @@ Spring_Up:
 Spring_Common:
                 move.b  subtype(a0),d0
                 andi.w  #2,d0
-                move.w  word_215A2(pc,d0.w),$30(a0)
+                move.w  S3Spring_LaunchStrengthWords(pc,d0.w),$30(a0)
                 btst    #1,d0
-                beq.s   locret_215A0
+                beq.s   S3Spring_InitReturn
                 move.l  #Map_Spring2,mappings(a0)
                 tst.w   (Competition_mode).w
-                beq.s   locret_215A0
+                beq.s   S3Spring_InitReturn
                 move.l  #Map_Spring3,mappings(a0)
 
-locret_215A0:
+S3Spring_InitReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_215A2:
+S3Spring_LaunchStrengthWords:
                 dc.w    -$1000
                 dc.w    -$A00

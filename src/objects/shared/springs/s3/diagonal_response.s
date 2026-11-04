@@ -8,25 +8,25 @@ Obj_Spring_UpDiag:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
-                lea     byte_21D78(pc),a2
+                lea     S3Spring_UpDiagonalHeightSamples(pc),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
                 bsr.w   CollidePlayerWithHeightProfileSolid
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_21B46
+                beq.s   S3Spring_TestUpDiagonalPlayerTwo
                 bsr.s   LaunchPlayerFromUpDiagonalSpring
 
-loc_21B46:
+S3Spring_TestUpDiagonalPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   CollidePlayerWithHeightProfileSolid
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_21B5E
+                beq.s   S3Spring_AnimateAndCullUpDiagonal
                 bsr.s   LaunchPlayerFromUpDiagonalSpring
 
-loc_21B5E:
+S3Spring_AnimateAndCullUpDiagonal:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $32(a0),d0
@@ -36,23 +36,24 @@ loc_21B5E:
 
 LaunchPlayerFromUpDiagonalSpring:
                 btst    #0,status(a0)
-                bne.s   loc_21B8A
+                bne.s   S3Spring_TestFlippedUpDiagonalLaunchSide
                 move.w  x_pos(a0),d0
                 subq.w  #4,d0
                 cmp.w   x_pos(a1),d0
-                blo.s   loc_21B98
+                blo.s   S3Spring_SetUpDiagonalVelAndOffset
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_21B8A:
+S3Spring_TestFlippedUpDiagonalLaunchSide:
                 move.w  x_pos(a0),d0
                 addq.w  #4,d0
                 cmp.w   x_pos(a1),d0
-                bhs.s   loc_21B98
+                bhs.s   S3Spring_SetUpDiagonalVelAndOffset
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_21B98:
+; Use the configured speed for both axes and add six pixels to Y
+S3Spring_SetUpDiagonalVelAndOffset:
                 move.w  #5<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),y_vel(a1)
                 move.w  $30(a0),x_vel(a1)
@@ -60,12 +61,12 @@ loc_21B98:
                 addq.w  #6,x_pos(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                bne.s   loc_21BD0
+                bne.s   S3Spring_SetUpDiagonalAirStateAndFlip
                 bclr    #Status_Facing,status(a1)
                 subi.w  #2*6,x_pos(a1)
                 neg.w   x_vel(a1)
 
-loc_21BD0:
+S3Spring_SetUpDiagonalAirStateAndFlip:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 clr.b   jumping(a1)
@@ -73,36 +74,36 @@ loc_21BD0:
                 move.b  #2,routine(a1)
                 move.b  subtype(a0),d0
                 btst    #0,d0
-                beq.s   loc_21C30
+                beq.s   S3Spring_CheckUpDiagonalPrimaryLayer
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,flips_remaining(a1)
                 move.b  #8,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_21C20
+                bne.s   S3Spring_ApplyUpDiagonalFlipFacingSign
                 move.b  #3,flips_remaining(a1)
 
-loc_21C20:
+S3Spring_ApplyUpDiagonalFlipFacingSign:
                 btst    #0,status(a1)
-                beq.s   loc_21C30
+                beq.s   S3Spring_CheckUpDiagonalPrimaryLayer
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_21C30:
+S3Spring_CheckUpDiagonalPrimaryLayer:
                 andi.b  #$C,d0
                 cmpi.b  #4,d0
-                bne.s   loc_21C46
+                bne.s   S3Spring_CheckUpDiagonalSecondaryLayer
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-loc_21C46:
+S3Spring_CheckUpDiagonalSecondaryLayer:
                 cmpi.b  #8,d0
-                bne.s   loc_21C58
+                bne.s   S3Spring_PlayUpDiagonalLaunchSound
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_21C58:
+S3Spring_PlayUpDiagonalLaunchSound:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
 ; End of function LaunchPlayerFromUpDiagonalSpring
@@ -113,25 +114,25 @@ Obj_Spring_DownDiag:
                 move.w  #$1B,d1
                 move.w  #$10,d2
                 move.w  x_pos(a0),d4
-                lea     byte_21D94(pc),a2
+                lea     S3Spring_DownDiagonalHeightSamples(pc),a2
                 lea     (Player_1).w,a1
                 moveq   #p1_standing_bit,d6
                 movem.l d1-d4,-(sp)
                 bsr.w   CollidePlayerWithHeightProfileSolid
                 cmpi.w  #-2,d4
-                bne.s   loc_21C86
+                bne.s   S3Spring_TestDownDiagonalPlayerTwo
                 bsr.s   LaunchPlayerFromDownDiagonalSpring
 
-loc_21C86:
+S3Spring_TestDownDiagonalPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   CollidePlayerWithHeightProfileSolid
                 cmpi.w  #-2,d4
-                bne.s   loc_21C9C
+                bne.s   S3Spring_AnimateAndCullDownDiagonal
                 bsr.s   LaunchPlayerFromDownDiagonalSpring
 
-loc_21C9C:
+S3Spring_AnimateAndCullDownDiagonal:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $32(a0),d0
@@ -148,54 +149,54 @@ LaunchPlayerFromDownDiagonalSpring:
                 addq.w  #6,x_pos(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                bne.s   loc_21CEE
+                bne.s   S3Spring_SetDownDiagonalAirStateAndFlip
                 bclr    #Status_Facing,status(a1)
                 subi.w  #2*6,x_pos(a1)
                 neg.w   x_vel(a1)
 
-loc_21CEE:
+S3Spring_SetDownDiagonalAirStateAndFlip:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 clr.b   jumping(a1)
                 move.b  #2,routine(a1)
                 move.b  subtype(a0),d0
                 btst    #0,d0
-                beq.s   loc_21D48
+                beq.s   S3Spring_CheckDownDiagonalPrimaryLayer
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,flips_remaining(a1)
                 move.b  #8,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_21D38
+                bne.s   S3Spring_ApplyDownDiagonalFlipFacingSign
                 move.b  #3,flips_remaining(a1)
 
-loc_21D38:
+S3Spring_ApplyDownDiagonalFlipFacingSign:
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_21D48
+                beq.s   S3Spring_CheckDownDiagonalPrimaryLayer
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_21D48:
+S3Spring_CheckDownDiagonalPrimaryLayer:
                 andi.b  #$C,d0
                 cmpi.b  #4,d0
-                bne.s   loc_21D5E
+                bne.s   S3Spring_CheckDownDiagonalSecondaryLayer
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-loc_21D5E:
+S3Spring_CheckDownDiagonalSecondaryLayer:
                 cmpi.b  #8,d0
-                bne.s   loc_21D70
+                bne.s   S3Spring_PlayDownDiagonalLaunchSound
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_21D70:
+S3Spring_PlayDownDiagonalLaunchSound:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
 ; End of function LaunchPlayerFromDownDiagonalSpring
 
 ; ---------------------------------------------------------------------------
-byte_21D78:
+S3Spring_UpDiagonalHeightSamples:
                 dc.b    $10
                 dc.b    $10
                 dc.b    $10
@@ -224,7 +225,7 @@ byte_21D78:
                 dc.b    -4
                 dc.b    -4
                 dc.b    -4
-byte_21D94:
+S3Spring_DownDiagonalHeightSamples:
                 dc.b    -$C
                 dc.b    -$10
                 dc.b    -$10

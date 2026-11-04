@@ -12,40 +12,40 @@ Obj_TwistedRamp:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_23C90
+                bhi.s   S3TwistedRamp_ClearLoadedBit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23C90:
+S3TwistedRamp_ClearLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_23C9C
+                beq.s   S3TwistedRamp_DeleteOutsideXRange
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_23C9C:
+S3TwistedRamp_DeleteOutsideXRange:
                 jmp     (Delete_Current_Sprite).l
 
 ; =============== S U B R O U T I N E =======================================
 
 LaunchPlayerFromTwistedRamp:
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_23D28
+                bne.w   S3TwistedRamp_LaunchReturn
                 move.w  x_pos(a1),d0
                 addi.w  #$10,d0
                 sub.w   x_pos(a0),d0
-                bcs.s   locret_23D28
+                bcs.s   S3TwistedRamp_LaunchReturn
                 cmpi.w  #$20,d0
-                bge.s   locret_23D28
+                bge.s   S3TwistedRamp_LaunchReturn
                 move.w  y_pos(a1),d0
                 sub.w   y_pos(a0),d0
                 cmpi.w  #-$14,d0
-                blt.s   locret_23D28
+                blt.s   S3TwistedRamp_LaunchReturn
                 cmpi.w  #$20,d0
-                bgt.s   locret_23D28
+                bgt.s   S3TwistedRamp_LaunchReturn
                 cmpi.w  #$400,x_vel(a1)
-                blt.s   locret_23D28
+                blt.s   S3TwistedRamp_LaunchReturn
                 tst.b   object_control(a1)
-                bne.s   locret_23D28
+                bne.s   S3TwistedRamp_LaunchReturn
                 move.w  #-$700,y_vel(a1)
                 addi.w  #$400,x_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -56,10 +56,10 @@ LaunchPlayerFromTwistedRamp:
                 move.b  #0,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 btst    #Status_Facing,status(a1)
-                beq.s   locret_23D28
+                beq.s   S3TwistedRamp_LaunchReturn
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-locret_23D28:
+S3TwistedRamp_LaunchReturn:
                 rts
 ; End of function LaunchPlayerFromTwistedRamp

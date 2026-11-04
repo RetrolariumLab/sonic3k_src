@@ -4,27 +4,27 @@
 ; ---------------------------------------------------------------------------
 
 Obj_TensionBridge:
-                move.l  #loc_37DDE,(a0)
+                move.l  #S3TensionBridge_TickFlatBendFromRiders,(a0)
                 move.l  #Map_TensionBridge,mappings(a0)
                 move.w  #make_art_tile(ArtTile_HCZ2BlockPlat+$10,2,0),art_tile(a0)
                 move.w  #$200,priority(a0)
                 cmpi.b  #5,(Current_zone).w
-                bne.s   loc_37CDC
-                move.l  #loc_37E80,(a0)
+                bne.s   S3TensionBridge_CheckTriggerCollapse
+                move.l  #S3TensionBridge_TickAnimFlatFromRiders,(a0)
                 move.l  #Map_ICZTensionBridge,mappings(a0)
                 move.w  #make_art_tile(ArtTile_ICZMisc1,2,0),art_tile(a0)
                 tst.b   subtype(a0)
-                bpl.s   loc_37CDC
-                move.l  #loc_37F44,(a0)
+                bpl.s   S3TensionBridge_CheckTriggerCollapse
+                move.l  #S3TensionBridge_InitSlopedGeometry,(a0)
                 andi.b  #$7F,subtype(a0)
 
-loc_37CDC:
+S3TensionBridge_CheckTriggerCollapse:
                 tst.b   subtype(a0)
-                bpl.s   loc_37CEE
-                move.l  #loc_37DB4,(a0)
+                bpl.s   S3TensionBridge_InitGeometryAndBanks
+                move.l  #S3TensionBridge_TryTriggeredCollapse,(a0)
                 andi.b  #$7F,subtype(a0)
 
-loc_37CEE:
+S3TensionBridge_InitGeometryAndBanks:
                 move.b  #4,render_flags(a0)
                 move.b  #$80,width_pixels(a0)
                 move.b  #8,height_pixels(a0)
@@ -47,7 +47,7 @@ loc_37CEE:
                 move.l  a1,$30(a0)
                 swap    d1
                 subq.w  #8,d1
-                bls.s   loc_37D50
+                bls.s   S3TensionBridge_EnterFlatUpdate
                 move.w  d1,d4
                 bsr.s   CreateTensionBridgeSpriteBank
                 move.l  a1,$34(a0)
@@ -58,15 +58,15 @@ loc_37CEE:
                 subq.w  #8,d0
                 move.w  d0,x_pos(a1)
 
-loc_37D50:
-                bra.w   loc_37DDE
+S3TensionBridge_EnterFlatUpdate:
+                bra.w   S3TensionBridge_TickFlatBendFromRiders
 
 ; =============== S U B R O U T I N E =======================================
 
 CreateTensionBridgeSpriteBank:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_37DB2
-                move.l  #loc_37E7A,(a1)
+                bne.s   S3TensionBridge_CreateBankReturn
+                move.l  #S3TensionBridge_DrawEmbeddedSegmentBank,(a1)
                 move.w  x_pos(a0),x_pos(a1)
                 move.w  y_pos(a0),y_pos(a1)
                 move.l  mappings(a0),mappings(a1)
@@ -80,65 +80,65 @@ CreateTensionBridgeSpriteBank:
                 subq.b  #1,d1
                 lea     sub2_x_pos(a1),a2
 
-loc_37DA2:
+S3TensionBridge_WriteSegmentAndStepX:
                 move.w  d3,(a2)+
                 move.w  d2,(a2)+
                 move.w  #0,(a2)+
                 addi.w  #$10,d3
-                dbf     d1,loc_37DA2
+                dbf     d1,S3TensionBridge_WriteSegmentAndStepX
 
-locret_37DB2:
+S3TensionBridge_CreateBankReturn:
                 rts
 ; End of function CreateTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
 
-loc_37DB4:
+S3TensionBridge_TryTriggeredCollapse:
                 move.b  subtype(a0),d0
                 andi.w  #$F,d0
                 lea     (Level_trigger_array).w,a3
                 lea     (a3,d0.w),a3
                 tst.b   (a3)
-                beq.s   loc_37DDE
-                move.l  #loc_37F0A,(a0)
+                beq.s   S3TensionBridge_TickFlatBendFromRiders
+                move.l  #S3TensionBridge_WaitCollapseRelease,(a0)
                 move.b  #$E,$34(a0)
-                move.l  #loc_37EE2,d4
-                bra.w   loc_37FC6
+                move.l  #S3TensionBridge_WaitAndDrawCollapsePiece,d4
+                bra.w   S3TensionBridge_CollapseSpriteBanks
 ; ---------------------------------------------------------------------------
 
-loc_37DDE:
+S3TensionBridge_TickFlatBendFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_37DF4
+                bne.s   S3TensionBridge_MoveFlatCursorTowardP2
                 tst.b   $3E(a0)
-                beq.s   loc_37E20
+                beq.s   S3TensionBridge_CollideFlatBridge
                 subq.b  #4,$3E(a0)
-                bra.s   loc_37E1C
+                bra.s   S3TensionBridge_BendFlatSegments
 ; ---------------------------------------------------------------------------
 
-loc_37DF4:
+S3TensionBridge_MoveFlatCursorTowardP2:
                 andi.b  #$10,d0
-                beq.s   loc_37E10
+                beq.s   S3TensionBridge_RaiseFlatPhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_37E10
-                bcc.s   loc_37E0C
+                beq.s   S3TensionBridge_RaiseFlatPhaseTo40
+                bcc.s   S3TensionBridge_DecrementFlatBendCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_37E10
+                bra.s   S3TensionBridge_RaiseFlatPhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_37E0C:
+S3TensionBridge_DecrementFlatBendCursor:
                 subq.b  #1,$3F(a0)
 
-loc_37E10:
+S3TensionBridge_RaiseFlatPhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_37E1C
+                beq.s   S3TensionBridge_BendFlatSegments
                 addq.b  #4,$3E(a0)
 
-loc_37E1C:
+S3TensionBridge_BendFlatSegments:
                 bsr.w   BendTensionBridgeSegments
 
-loc_37E20:
+S3TensionBridge_CollideFlatBridge:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -149,70 +149,70 @@ loc_37E20:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
 
-loc_37E38:
+S3TensionBridge_CullRootByCoarseX:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   loc_37E4C
+                bhi.s   S3TensionBridge_DeleteBanksOutsideRange
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37E4C:
+S3TensionBridge_DeleteBanksOutsideRange:
                 movea.l $30(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
                 cmpi.b  #8,subtype(a0)
-                bls.s   loc_37E68
+                bls.s   S3TensionBridge_ClearRootLoadedBit
                 movea.l $34(a0),a1
                 jsr     (Delete_Referenced_Sprite).l
 
-loc_37E68:
+S3TensionBridge_ClearRootLoadedBit:
                 move.w  respawn_addr(a0),d0
-                beq.s   loc_37E74
+                beq.s   S3TensionBridge_DeleteRootAfterBanks
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-loc_37E74:
+S3TensionBridge_DeleteRootAfterBanks:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37E7A:
+S3TensionBridge_DrawEmbeddedSegmentBank:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37E80:
+S3TensionBridge_TickAnimFlatFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_37E96
+                bne.s   S3TensionBridge_MoveAnimFlatCursorToP2
                 tst.b   $3E(a0)
-                beq.s   loc_37EC2
+                beq.s   S3TensionBridge_CollideAndAnimateFlat
                 subq.b  #4,$3E(a0)
-                bra.s   loc_37EBE
+                bra.s   S3TensionBridge_BendAnimFlatSegments
 ; ---------------------------------------------------------------------------
 
-loc_37E96:
+S3TensionBridge_MoveAnimFlatCursorToP2:
                 andi.b  #p2_standing,d0
-                beq.s   loc_37EB2
+                beq.s   S3TensionBridge_RaiseAnimFlatPhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_37EB2
-                bcc.s   loc_37EAE
+                beq.s   S3TensionBridge_RaiseAnimFlatPhaseTo40
+                bcc.s   S3TensionBridge_LowerAnimFlatCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_37EB2
+                bra.s   S3TensionBridge_RaiseAnimFlatPhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_37EAE:
+S3TensionBridge_LowerAnimFlatCursor:
                 subq.b  #1,$3F(a0)
 
-loc_37EB2:
+S3TensionBridge_RaiseAnimFlatPhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_37EBE
+                beq.s   S3TensionBridge_BendAnimFlatSegments
                 addq.b  #4,$3E(a0)
 
-loc_37EBE:
+S3TensionBridge_BendAnimFlatSegments:
                 bsr.w   BendTensionBridgeSegments
 
-loc_37EC2:
+S3TensionBridge_CollideAndAnimateFlat:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -223,65 +223,66 @@ loc_37EC2:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithTensionBridge
                 bsr.w   TensionBridge_AnimateRiddenBoards
-                bra.w   loc_37E38
+                bra.w   S3TensionBridge_CullRootByCoarseX
 ; ---------------------------------------------------------------------------
 
-loc_37EE2:
+S3TensionBridge_WaitAndDrawCollapsePiece:
                 tst.b   $34(a0)
-                beq.s   loc_37EF2
+                beq.s   S3TensionBridge_MoveCollapsePiece
                 subq.b  #1,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37EF2:
+; Use the saved render sign from the preceding frame to decide whether to draw or delete
+S3TensionBridge_MoveCollapsePiece:
                 jsr     (MoveSprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_37F04
+                bpl.s   S3TensionBridge_DeleteHiddenPiece
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37F04:
+S3TensionBridge_DeleteHiddenPiece:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37F0A:
+S3TensionBridge_WaitCollapseRelease:
                 tst.b   $34(a0)
-                beq.s   loc_37F16
+                beq.s   S3TensionBridge_ReleaseCollapseP1
                 subq.b  #1,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_37F16:
+S3TensionBridge_ReleaseCollapseP1:
                 bclr    #p1_standing_bit,status(a0)
-                beq.s   loc_37F2A
+                beq.s   S3TensionBridge_ReleaseCollapseP2
                 bclr    #Status_OnObj,(Player_1+status).w
                 bset    #Status_InAir,(Player_1+status).w
 
-loc_37F2A:
+S3TensionBridge_ReleaseCollapseP2:
                 bclr    #p2_standing_bit,status(a0)
-                beq.s   loc_37F3E
+                beq.s   S3TensionBridge_DeleteCollapseRoot
                 bclr    #Status_OnObj,(Player_2+status).w
                 bset    #Status_InAir,(Player_2+status).w
 
-loc_37F3E:
+S3TensionBridge_DeleteCollapseRoot:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_37F44:
+S3TensionBridge_InitSlopedGeometry:
                 bsr.w   BendSlopedTensionBridgeSegments
-                move.l  #loc_37F4E,(a0)
+                move.l  #S3TensionBridge_TickSlopeBendFromRiders,(a0)
 
-loc_37F4E:
+S3TensionBridge_TickSlopeBendFromRiders:
                 move.b  status(a0),d0
                 andi.b  #standing_mask,d0
-                bne.s   loc_37F64
+                bne.s   S3TensionBridge_CacheSlopedRiderBins
                 tst.b   $3E(a0)
-                beq.s   loc_37FA6
+                beq.s   S3TensionBridge_CollideAndAnimateSlope
                 subq.b  #4,$3E(a0)
-                bra.s   loc_37FA2
+                bra.s   S3TensionBridge_BendSlopedSegments
 ; ---------------------------------------------------------------------------
 
-loc_37F64:
+S3TensionBridge_CacheSlopedRiderBins:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -291,27 +292,27 @@ loc_37F64:
                 bsr.w   CacheTensionBridgeRiderSegments
                 move.b  status(a0),d0
                 andi.b  #p2_standing,d0
-                beq.s   loc_37F96
+                beq.s   S3TensionBridge_RaiseSlopePhaseTo40
                 move.b  $3F(a0),d0
                 sub.b   $3B(a0),d0
-                beq.s   loc_37F96
-                bcc.s   loc_37F92
+                beq.s   S3TensionBridge_RaiseSlopePhaseTo40
+                bcc.s   S3TensionBridge_LowerSlopeCursor
                 addq.b  #1,$3F(a0)
-                bra.s   loc_37F96
+                bra.s   S3TensionBridge_RaiseSlopePhaseTo40
 ; ---------------------------------------------------------------------------
 
-loc_37F92:
+S3TensionBridge_LowerSlopeCursor:
                 subq.b  #1,$3F(a0)
 
-loc_37F96:
+S3TensionBridge_RaiseSlopePhaseTo40:
                 cmpi.b  #$40,$3E(a0)
-                beq.s   loc_37FA2
+                beq.s   S3TensionBridge_BendSlopedSegments
                 addq.b  #4,$3E(a0)
 
-loc_37FA2:
+S3TensionBridge_BendSlopedSegments:
                 bsr.w   BendSlopedTensionBridgeSegments
 
-loc_37FA6:
+S3TensionBridge_CollideAndAnimateSlope:
                 moveq   #0,d1
                 move.b  subtype(a0),d1
                 lsl.w   #3,d1
@@ -322,16 +323,17 @@ loc_37FA6:
                 move.w  x_pos(a0),d4
                 bsr.w   CollidePlayersWithSlopedTensionBridge
                 bsr.w   TensionBridge_AnimateRiddenBoards
-                bra.w   loc_37E38
+                bra.w   S3TensionBridge_CullRootByCoarseX
 ; ---------------------------------------------------------------------------
 
-loc_37FC6:
+; Collapse a second bank when the bridge has more than eight segments
+S3TensionBridge_CollapseSpriteBanks:
                 movea.l $30(a0),a3
                 bsr.s   CollapseTensionBridgeSpriteBank
                 cmpi.b  #8,subtype(a0)
-                bls.s   locret_37FDA
+                bls.s   S3TensionBridge_CollapseBanksReturn
                 movea.l $34(a0),a3
                 bsr.s   CollapseTensionBridgeSpriteBank
 
-locret_37FDA:
+S3TensionBridge_CollapseBanksReturn:
                 rts

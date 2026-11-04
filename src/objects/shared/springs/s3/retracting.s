@@ -12,17 +12,17 @@ Obj_RetractingSpring:
                 jmp     RetractingSpring_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 RetractingSpring_Index:
-                dc.w    loc_22092-RetractingSpring_Index
-                dc.w    loc_220AE-RetractingSpring_Index
-                dc.w    loc_220CA-RetractingSpring_Index
-                dc.w    loc_220E6-RetractingSpring_Index
-                dc.w    loc_22116-RetractingSpring_Index
+                dc.w    S3RetractSpring_InstallNormalUp-RetractingSpring_Index
+                dc.w    S3RetractSpring_InstallNormalHorizontal-RetractingSpring_Index
+                dc.w    S3RetractSpring_InstallNormalDown-RetractingSpring_Index
+                dc.w    S3RetractSpring_InstallNormalUpDiag-RetractingSpring_Index
+                dc.w    S3RetractSpring_InstallNormalDownDiag-RetractingSpring_Index
 ; ---------------------------------------------------------------------------
 
-loc_22092:
-                move.l  #loc_22098,(a0)
+S3RetractSpring_InstallNormalUp:
+                move.l  #S3RetractingSpring_MoveNormalUpAlongY,(a0)
 
-loc_22098:
+S3RetractingSpring_MoveNormalUpAlongY:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -31,10 +31,10 @@ loc_22098:
                 bra.w   Obj_Spring_Up
 ; ---------------------------------------------------------------------------
 
-loc_220AE:
-                move.l  #loc_220B4,(a0)
+S3RetractSpring_InstallNormalHorizontal:
+                move.l  #S3RetractSpring_MoveNormalHorizontal,(a0)
 
-loc_220B4:
+S3RetractSpring_MoveNormalHorizontal:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -43,10 +43,10 @@ loc_220B4:
                 bra.w   Obj_Spring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_220CA:
-                move.l  #loc_220D0,(a0)
+S3RetractSpring_InstallNormalDown:
+                move.l  #S3RetractingSpring_MoveNormalDownAlongY,(a0)
 
-loc_220D0:
+S3RetractingSpring_MoveNormalDownAlongY:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -55,19 +55,19 @@ loc_220D0:
                 bra.w   Obj_Spring_Down
 ; ---------------------------------------------------------------------------
 
-loc_220E6:
-                move.l  #loc_220EC,(a0)
+S3RetractSpring_InstallNormalUpDiag:
+                move.l  #S3RetractSpring_CalcNormalUpDiagDelta,(a0)
 
-loc_220EC:
+S3RetractSpring_CalcNormalUpDiagDelta:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
                 btst    #0,status(a0)
-                bne.s   loc_22102
+                bne.s   S3RetractSpring_MoveNormalUpDiagonal
                 neg.w   d0
 
-loc_22102:
+S3RetractSpring_MoveNormalUpDiagonal:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
                 add.w   $34(a0),d1
@@ -75,19 +75,19 @@ loc_22102:
                 bra.w   Obj_Spring_UpDiag
 ; ---------------------------------------------------------------------------
 
-loc_22116:
-                move.l  #loc_2211C,(a0)
+S3RetractSpring_InstallNormalDownDiag:
+                move.l  #S3RetractSpring_CalcNormalDownDiagDelta,(a0)
 
-loc_2211C:
+S3RetractSpring_CalcNormalDownDiagDelta:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
                 btst    #0,status(a0)
-                beq.s   loc_22132
+                beq.s   S3RetractSpring_MoveNormalDownDiagonal
                 neg.w   d0
 
-loc_22132:
+S3RetractSpring_MoveNormalDownDiagonal:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
                 add.w   $34(a0),d1
@@ -98,41 +98,42 @@ loc_22132:
 
 UpdateRetractingSpringTravel:
                 tst.w   $3A(a0)
-                beq.s   loc_22162
+                beq.s   S3RetractSpring_TickNormalTravel
                 subq.w  #1,$3A(a0)
-                bne.s   locret_221A4
+                bne.s   S3RetractSpring_NormalTravelReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_221A4
+                bpl.s   S3RetractSpring_NormalTravelReturn
                 moveq   #signextendB(sfx_SpikeMove),d0
                 jsr     (Play_SFX).l
-                bra.s   locret_221A4
+                bra.s   S3RetractSpring_NormalTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_22162:
+S3RetractSpring_TickNormalTravel:
                 tst.w   $38(a0)
-                beq.s   loc_22184
+                beq.s   S3RetractSpring_ExtendNormalAndPause
                 subi.w  #$800,$36(a0)
-                bcc.s   locret_221A4
+                bcc.s   S3RetractSpring_NormalTravelReturn
                 move.w  #0,$36(a0)
                 move.w  #0,$38(a0)
                 move.w  #60,$3A(a0)
-                bra.s   locret_221A4
+                bra.s   S3RetractSpring_NormalTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_22184:
+; Advance in eight-pixel steps and pause at 32 pixels of extension
+S3RetractSpring_ExtendNormalAndPause:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$2000,$36(a0)
-                blo.s   locret_221A4
+                blo.s   S3RetractSpring_NormalTravelReturn
                 move.w  #$2000,$36(a0)
                 move.w  #1,$38(a0)
                 move.w  #60,$3A(a0)
 
-locret_221A4:
+S3RetractSpring_NormalTravelReturn:
                 rts
 ; End of function UpdateRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
-byte_221A6:
+S3RetractSpring_CompanionAttrs:
                 dc.b    $C,   8,   0,   1
                 dc.b    $C,   8,   0,   0
                 dc.b    $C,   8,   0,   1
@@ -146,28 +147,28 @@ byte_221A6:
 
 Obj_2PRetractingSpring:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_2229C
-                move.l  #loc_2255E,(a1)
+                bne.w   S3RetractSpring_InitCompParent
+                move.l  #S3RetractSpring_FollowParentAndTrigger,(a1)
                 move.l  #Map_2PRetractingSpring,mappings(a1)
                 move.w  #make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a1)
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   loc_221F4
+                bne.s   S3RetractSpring_InitCompanionAttrs
                 move.l  #Map_2PRetractingSpring_2,mappings(a1)
 
-loc_221F4:
+S3RetractSpring_InitCompanionAttrs:
                 move.b  subtype(a0),d0
                 move.b  d0,subtype(a1)
                 lsr.b   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_221A6(pc,d0.w),a2
+                lea     S3RetractSpring_CompanionAttrs(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a1)
                 move.b  (a2)+,height_pixels(a1)
                 move.b  (a2)+,d0
                 move.b  d0,mapping_frame(a1)
-                bne.s   loc_2221C
-                move.l  #loc_225B8,(a1)
+                bne.s   S3RetractSpring_SetSubtypeAndChildPos
+                move.l  #S3RetractSpring_CheckTriggerOnlyChild,(a1)
 
-loc_2221C:
+S3RetractSpring_SetSubtypeAndChildPos:
                 andi.b  #$F0,subtype(a0)
                 move.b  (a2)+,d1
                 or.b    d1,subtype(a0)
@@ -176,35 +177,36 @@ loc_2221C:
                 moveq   #0,d2
                 moveq   #0,d3
                 cmpi.b  #1,d0
-                bne.s   loc_2224E
+                bne.s   S3RetractSpring_TryOffsetCompanionDown
                 moveq   #$C,d2
                 btst    #0,status(a0)
-                bne.s   loc_2224A
+                bne.s   S3RetractSpring_OffsetCompanionX
                 neg.w   d2
 
-loc_2224A:
+S3RetractSpring_OffsetCompanionX:
                 add.w   d2,x_pos(a1)
 
-loc_2224E:
+S3RetractSpring_TryOffsetCompanionDown:
                 cmpi.b  #2,d0
-                bne.s   loc_2225A
+                bne.s   S3RetractSpring_TryOffsetCompanionUp
                 moveq   #$B,d3
                 add.w   d3,y_pos(a1)
 
-loc_2225A:
+S3RetractSpring_TryOffsetCompanionUp:
                 cmpi.b  #3,d0
-                bne.s   loc_22266
+                bne.s   S3RetractSpring_SaveOffsetsAndYFlip
                 moveq   #-$B,d3
                 add.w   d3,y_pos(a1)
 
-loc_22266:
+; Save child XY offsets and latch the parent's initial Y flip before clearing its flag
+S3RetractSpring_SaveOffsetsAndYFlip:
                 move.w  d2,$30(a1)
                 move.w  d3,$32(a1)
                 bclr    #1,status(a0)
-                beq.s   loc_2227C
+                beq.s   S3RetractSpring_CopyFlagsAndLinkChild
                 move.b  #1,$3C(a0)
 
-loc_2227C:
+S3RetractSpring_CopyFlagsAndLinkChild:
                 move.b  status(a0),status(a1)
                 move.b  render_flags(a0),render_flags(a1)
                 ori.b   #4,render_flags(a1)
@@ -212,31 +214,31 @@ loc_2227C:
                 move.w  a0,$3E(a1)
                 move.w  a1,$3E(a0)
 
-loc_2229C:
+S3RetractSpring_InitCompParent:
                 bsr.w   InitCompetitionRetractingSpring
 
-loc_222A0:
+S3RetractSpring_DispatchCompOrientation:
                 move.b  subtype(a0),d0
                 lsr.w   #3,d0
                 andi.w  #$E,d0
-                move.w  off_222B2(pc,d0.w),d1
-                jmp     off_222B2(pc,d1.w)
+                move.w  S3RetractSpring_CompOrientationOffsets(pc,d0.w),d1
+                jmp     S3RetractSpring_CompOrientationOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_222B2:
-                dc.w    loc_222C2-off_222B2
-                dc.w    loc_222DE-off_222B2
-                dc.w    loc_222FA-off_222B2
-                dc.w    loc_22316-off_222B2
-                dc.w    loc_22332-off_222B2
-                dc.w    loc_2234E-off_222B2
-                dc.w    loc_22332-off_222B2
-                dc.w    loc_2234E-off_222B2
+S3RetractSpring_CompOrientationOffsets:
+                dc.w    S3RetractSpring_InstallCompUpY-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompHorizontalX-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompDownY-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompHorizontalY-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompUpX-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompDownX-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompUpX-S3RetractSpring_CompOrientationOffsets
+                dc.w    S3RetractSpring_InstallCompDownX-S3RetractSpring_CompOrientationOffsets
 ; ---------------------------------------------------------------------------
 
-loc_222C2:
-                move.l  #loc_222C8,(a0)
+S3RetractSpring_InstallCompUpY:
+                move.l  #S3RetractSpring_MoveCompUpY,(a0)
 
-loc_222C8:
+S3RetractSpring_MoveCompUpY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -245,10 +247,10 @@ loc_222C8:
                 bra.w   Obj_2PSpring_Up
 ; ---------------------------------------------------------------------------
 
-loc_222DE:
-                move.l  #loc_222E4,(a0)
+S3RetractSpring_InstallCompHorizontalX:
+                move.l  #S3RetractSpring_MoveCompHorizontalX,(a0)
 
-loc_222E4:
+S3RetractSpring_MoveCompHorizontalX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -257,10 +259,10 @@ loc_222E4:
                 bra.w   Obj_2PSpring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_222FA:
-                move.l  #loc_22300,(a0)
+S3RetractSpring_InstallCompDownY:
+                move.l  #S3RetractSpring_MoveCompDownY,(a0)
 
-loc_22300:
+S3RetractSpring_MoveCompDownY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -269,10 +271,10 @@ loc_22300:
                 bra.w   Obj_2PSpring_Down
 ; ---------------------------------------------------------------------------
 
-loc_22316:
-                move.l  #loc_2231C,(a0)
+S3RetractSpring_InstallCompHorizontalY:
+                move.l  #S3RetractSpring_MoveCompHorizontalY,(a0)
 
-loc_2231C:
+S3RetractSpring_MoveCompHorizontalY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -281,10 +283,10 @@ loc_2231C:
                 bra.w   Obj_2PSpring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_22332:
-                move.l  #loc_22338,(a0)
+S3RetractSpring_InstallCompUpX:
+                move.l  #S3RetractSpring_MoveCompUpX,(a0)
 
-loc_22338:
+S3RetractSpring_MoveCompUpX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -293,10 +295,10 @@ loc_22338:
                 bra.w   Obj_2PSpring_Up
 ; ---------------------------------------------------------------------------
 
-loc_2234E:
-                move.l  #loc_22354,(a0)
+S3RetractSpring_InstallCompDownX:
+                move.l  #S3RetractSpring_MoveCompDownX,(a0)
 
-loc_22354:
+S3RetractSpring_MoveCompDownX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -308,158 +310,163 @@ loc_22354:
 
 UpdateCompetitionRetractingSpringTravel:
                 tst.b   subtype(a0)
-                bmi.s   loc_223D0
+                bmi.s   S3RetractSpring_CheckRetractedRest
                 tst.w   $3A(a0)
-                beq.s   loc_2238C
+                beq.s   S3RetractSpring_TickAutoCompTravel
                 subq.w  #1,$3A(a0)
-                bne.s   locret_223CE
+                bne.s   S3RetractSpring_AutoCompTravelReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_223CE
+                bpl.s   S3RetractSpring_AutoCompTravelReturn
                 moveq   #signextendB(sfx_SpikeMove),d0
                 jsr     (Play_SFX).l
-                bra.s   locret_223CE
+                bra.s   S3RetractSpring_AutoCompTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_2238C:
+S3RetractSpring_TickAutoCompTravel:
                 tst.w   $38(a0)
-                beq.s   loc_223AE
+                beq.s   S3RetractSpring_ExtendAutoCompTo24
                 subi.w  #$800,$36(a0)
-                bcc.s   locret_223CE
+                bcc.s   S3RetractSpring_AutoCompTravelReturn
                 move.w  #0,$36(a0)
                 move.w  #0,$38(a0)
                 move.w  #60,$3A(a0)
-                bra.s   locret_223CE
+                bra.s   S3RetractSpring_AutoCompTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_223AE:
+; Use eight-pixel steps and stop at 24 pixels of extension
+S3RetractSpring_ExtendAutoCompTo24:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_223CE
+                blo.s   S3RetractSpring_AutoCompTravelReturn
                 move.w  #$1800,$36(a0)
                 move.w  #1,$38(a0)
                 move.w  #60,$3A(a0)
 
-locret_223CE:
+S3RetractSpring_AutoCompTravelReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_223D0:
+; Use the initial Y flip latch to select retracted rest. The other branch rests extended
+S3RetractSpring_CheckRetractedRest:
                 tst.b   $3C(a0)
-                beq.w   loc_2249A
+                beq.w   S3RetractSpring_TickExtendedRestHold
                 tst.w   $3A(a0)
-                beq.s   loc_223F0
+                beq.s   S3RetractSpring_TickTriggeredRetract
                 subq.w  #1,$3A(a0)
-                bne.w   locret_22498
+                bne.w   S3RetractSpring_RetractedRestReturn
                 move.w  #0,$38(a0)
-                bra.w   locret_22498
+                bra.w   S3RetractSpring_RetractedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_223F0:
+S3RetractSpring_TickTriggeredRetract:
                 tst.w   $38(a0)
-                bne.w   loc_2247E
+                bne.w   S3RetractSpring_ExtendTriggeredAndHold
                 tst.w   $36(a0)
-                beq.w   locret_22498
+                beq.w   S3RetractSpring_RetractedRestReturn
                 subi.w  #$800,$36(a0)
-                bhi.w   locret_22498
+                bhi.w   S3RetractSpring_RetractedRestReturn
                 move.w  #0,$36(a0)
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 cmpi.b  #$E0,d0
-                bne.s   loc_2244A
+                bne.s   S3RetractSpring_SwapRetractedF0ToE0
                 addi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$F0,subtype(a0)
-                move.l  #loc_222A0,(a0)
+                move.l  #S3RetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_2244A:
+; Shift Y by -$16, flip the parent and companion offset, and redispatch orientation
+S3RetractSpring_SwapRetractedF0ToE0:
                 cmpi.b  #$F0,d0
-                bne.s   loc_2247C
+                bne.s   S3RetractSpring_RetractedEndpointDone
                 subi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$E0,subtype(a0)
-                move.l  #loc_222A0,(a0)
+                move.l  #S3RetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_2247C:
-                bra.s   locret_22498
+S3RetractSpring_RetractedEndpointDone:
+                bra.s   S3RetractSpring_RetractedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_2247E:
+; At 24 pixels of extension, load the three-second hold
+S3RetractSpring_ExtendTriggeredAndHold:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_22498
+                blo.s   S3RetractSpring_RetractedRestReturn
                 move.w  #$1800,$36(a0)
                 move.w  #3*60,$3A(a0)
 
-locret_22498:
+S3RetractSpring_RetractedRestReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_2249A:
+S3RetractSpring_TickExtendedRestHold:
                 tst.w   $3A(a0)
-                beq.s   loc_224B2
+                beq.s   S3RetractSpring_RetractFromExtendedRest
                 subq.w  #1,$3A(a0)
-                bne.w   locret_2255C
+                bne.w   S3RetractSpring_ExtendedRestReturn
                 move.w  #0,$38(a0)
-                bra.w   locret_2255C
+                bra.w   S3RetractSpring_ExtendedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_224B2:
+S3RetractSpring_RetractFromExtendedRest:
                 tst.w   $38(a0)
-                beq.s   loc_224D2
+                beq.s   S3RetractSpring_RestoreExtendedRest
                 subi.w  #$800,$36(a0)
-                bcc.w   locret_2255C
+                bcc.w   S3RetractSpring_ExtendedRestReturn
                 move.w  #0,$36(a0)
                 move.w  #3*60,$3A(a0)
-                bra.w   locret_2255C
+                bra.w   S3RetractSpring_ExtendedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_224D2:
+S3RetractSpring_RestoreExtendedRest:
                 cmpi.w  #$1800,$36(a0)
-                beq.w   locret_2255C
+                beq.w   S3RetractSpring_ExtendedRestReturn
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_2255C
+                blo.s   S3RetractSpring_ExtendedRestReturn
                 move.w  #$1800,$36(a0)
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 cmpi.b  #$E0,d0
-                bne.s   loc_2252A
+                bne.s   S3RetractSpring_SwapExtendedF0ToE0
                 addi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$F0,subtype(a0)
-                move.l  #loc_222A0,(a0)
+                move.l  #S3RetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_2252A:
+; Shift Y by -$16, flip the parent and companion offset, and redispatch orientation
+S3RetractSpring_SwapExtendedF0ToE0:
                 cmpi.b  #$F0,d0
-                bne.s   locret_2255C
+                bne.s   S3RetractSpring_ExtendedRestReturn
                 subi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$E0,subtype(a0)
-                move.l  #loc_222A0,(a0)
+                move.l  #S3RetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-locret_2255C:
+S3RetractSpring_ExtendedRestReturn:
                 rts
 ; End of function UpdateCompetitionRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
 
-loc_2255E:
+S3RetractSpring_FollowParentAndTrigger:
                 movea.w $3E(a0),a1
                 move.w  x_pos(a1),d2
                 move.w  y_pos(a1),d3
@@ -468,14 +475,14 @@ loc_2255E:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 move.b  subtype(a0),d1
-                bpl.s   loc_22594
+                bpl.s   S3RetractSpring_CollideAndDrawCompanion
                 andi.w  #$F,d1
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d1.w)
-                beq.s   loc_22594
+                beq.s   S3RetractSpring_CollideAndDrawCompanion
                 move.w  #1,$38(a1)
 
-loc_22594:
+S3RetractSpring_CollideAndDrawCompanion:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -488,17 +495,17 @@ loc_22594:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_225B8:
+S3RetractSpring_CheckTriggerOnlyChild:
                 move.b  subtype(a0),d1
-                bpl.s   locret_225D6
+                bpl.s   S3RetractSpring_TriggerOnlyReturn
                 andi.w  #$F,d1
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d1.w)
-                beq.s   locret_225D6
+                beq.s   S3RetractSpring_TriggerOnlyReturn
                 movea.w $3E(a0),a1
                 move.w  #1,$38(a1)
 
-locret_225D6:
+S3RetractSpring_TriggerOnlyReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_2PRetractingSpring:

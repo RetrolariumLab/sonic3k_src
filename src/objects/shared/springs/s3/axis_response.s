@@ -13,19 +13,19 @@ Obj_Spring_Up:
                 movem.l d1-d4,-(sp)
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_215CE
+                beq.s   S3Spring_TestNormalUpPlayerTwo
                 bsr.s   LaunchPlayerFromUpSpring
 
-loc_215CE:
+S3Spring_TestNormalUpPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_215E6
+                beq.s   S3Spring_AnimateAndCullNormalUp
                 bsr.s   LaunchPlayerFromUpSpring
 
-loc_215E6:
+S3Spring_AnimateAndCullNormalUp:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
@@ -41,19 +41,19 @@ Obj_2PSpring_Up:
                 movem.l d1-d4,-(sp)
                 bsr.w   SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_21620
+                beq.s   S3Spring_TestCompetitionUpPlayerTwo
                 bsr.s   LaunchPlayerFromUpSpring
 
-loc_21620:
+S3Spring_TestCompetitionUpPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_21638
+                beq.s   S3Spring_AnimateAndDrawCompetitionUp
                 bsr.s   LaunchPlayerFromUpSpring
 
-loc_21638:
+S3Spring_AnimateAndDrawCompetitionUp:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
@@ -71,41 +71,41 @@ LaunchPlayerFromUpSpring:
                 move.b  #$10,anim(a1)
                 move.b  #2,routine(a1)
                 move.b  subtype(a0),d0
-                bpl.s   loc_21686
+                bpl.s   S3Spring_ConfigureUpLaunchFlip
                 move.w  #0,x_vel(a1)
 
-loc_21686:
+S3Spring_ConfigureUpLaunchFlip:
                 btst    #0,d0
-                beq.s   loc_216C6
+                beq.s   S3Spring_ApplyUpPrimaryLayerSelector
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #0,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_216B6
+                bne.s   S3Spring_ApplyUpFlipFacingSign
                 move.b  #1,flips_remaining(a1)
 
-loc_216B6:
+S3Spring_ApplyUpFlipFacingSign:
                 btst    #0,status(a1)
-                beq.s   loc_216C6
+                beq.s   S3Spring_ApplyUpPrimaryLayerSelector
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_216C6:
+S3Spring_ApplyUpPrimaryLayerSelector:
                 andi.b  #$C,d0
                 cmpi.b  #4,d0
-                bne.s   loc_216DC
+                bne.s   S3Spring_ApplyUpSecondaryLayerSelector
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-loc_216DC:
+S3Spring_ApplyUpSecondaryLayerSelector:
                 cmpi.b  #8,d0
-                bne.s   loc_216EE
+                bne.s   S3Spring_PlayUpLaunchSound
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_216EE:
+S3Spring_PlayUpLaunchSound:
                 moveq   #signextendB(sfx_Spring),d0
                 jmp     (Play_SFX).l
 ; End of function LaunchPlayerFromUpSpring
@@ -123,38 +123,38 @@ Obj_Spring_Horizontal:
                 bsr.w   SolidObjectFull2_1P
                 swap    d6
                 andi.w  #1,d6
-                beq.s   loc_21738
+                beq.s   S3Spring_TestNormalHorizontalPlayerTwo
                 move.b  status(a0),d1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_2172E
+                bcs.s   S3Spring_CheckHorizontalP1Side
                 eori.b  #1,d1
 
-loc_2172E:
+S3Spring_CheckHorizontalP1Side:
                 andi.b  #1,d1
-                bne.s   loc_21738
+                bne.s   S3Spring_TestNormalHorizontalPlayerTwo
                 bsr.w   LaunchPlayerFromHorizontalSpring
 
-loc_21738:
+S3Spring_TestNormalHorizontalPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 swap    d6
                 andi.w  #2,d6
-                beq.s   loc_2176A
+                beq.s   S3Spring_TickHorizontalBoostAndCull
                 move.b  status(a0),d1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_21760
+                bcs.s   S3Spring_CheckHorizontalP2Side
                 eori.b  #1,d1
 
-loc_21760:
+S3Spring_CheckHorizontalP2Side:
                 andi.b  #1,d1
-                bne.s   loc_2176A
+                bne.s   S3Spring_TickHorizontalBoostAndCull
                 bsr.w   LaunchPlayerFromHorizontalSpring
 
-loc_2176A:
+S3Spring_TickHorizontalBoostAndCull:
                 bsr.w   BoostGroundedPlayersNearHorizontalSpring
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
@@ -173,38 +173,38 @@ Obj_2PSpring_Horizontal:
                 bsr.w   SolidObjectFull2_1P
                 swap    d6
                 andi.w  #1,d6
-                beq.s   loc_217C4
+                beq.s   S3Spring_CheckCompHorizontalP2
                 move.b  status(a0),d1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_217BC
+                bcs.s   S3Spring_CheckCompHorizontalP1Side
                 eori.b  #1,d1
 
-loc_217BC:
+S3Spring_CheckCompHorizontalP1Side:
                 andi.b  #1,d1
-                bne.s   loc_217C4
+                bne.s   S3Spring_CheckCompHorizontalP2
                 bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
-loc_217C4:
+S3Spring_CheckCompHorizontalP2:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 swap    d6
                 andi.w  #2,d6
-                beq.s   loc_217F4
+                beq.s   S3Spring_AnimateAndDrawCompHorizontal
                 move.b  status(a0),d1
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
-                bcs.s   loc_217EC
+                bcs.s   S3Spring_CheckCompHorizontalP2Side
                 eori.b  #1,d1
 
-loc_217EC:
+S3Spring_CheckCompHorizontalP2Side:
                 andi.b  #1,d1
-                bne.s   loc_217F4
+                bne.s   S3Spring_AnimateAndDrawCompHorizontal
                 bsr.s   LaunchPlayerFromSmallHorizontalSpring
 
-loc_217F4:
+S3Spring_AnimateAndDrawCompHorizontal:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
@@ -217,13 +217,13 @@ LaunchPlayerFromSmallHorizontalSpring:
                 addq.w  #4,x_pos(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                bne.s   loc_21834
+                bne.s   S3Spring_JoinSmallHorizontalLaunchTail
                 bclr    #Status_Facing,status(a1)
                 subi.w  #2*4,x_pos(a1)
                 neg.w   x_vel(a1)
 
-loc_21834:
-                bra.s   loc_21864
+S3Spring_JoinSmallHorizontalLaunchTail:
+                bra.s   S3Spring_SetHorizontalLockAndGroundVel
 ; End of function LaunchPlayerFromSmallHorizontalSpring
 
 ; =============== S U B R O U T I N E =======================================
@@ -234,55 +234,56 @@ LaunchPlayerFromHorizontalSpring:
                 addq.w  #8,x_pos(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,status(a0)
-                bne.s   loc_21864
+                bne.s   S3Spring_SetHorizontalLockAndGroundVel
                 bclr    #Status_Facing,status(a1)
                 subi.w  #2*8,x_pos(a1)
                 neg.w   x_vel(a1)
 
-loc_21864:
+; Set a $F control lock and copy X velocity to ground velocity
+S3Spring_SetHorizontalLockAndGroundVel:
                 move.w  #$F,$32(a1)
                 move.w  x_vel(a1),ground_vel(a1)
                 btst    #Status_Roll,status(a1)
-                bne.s   loc_2187E
+                bne.s   S3Spring_ApplyHorizontalCrossAxisStop
                 move.b  #0,anim(a1)
 
-loc_2187E:
+S3Spring_ApplyHorizontalCrossAxisStop:
                 move.b  subtype(a0),d0
-                bpl.s   loc_2188A
+                bpl.s   S3Spring_ConfigureHorizontalFlip
                 move.w  #0,y_vel(a1)
 
-loc_2188A:
+S3Spring_ConfigureHorizontalFlip:
                 btst    #0,d0
-                beq.s   loc_218CA
+                beq.s   S3Spring_CheckHorizontalPrimaryLayer
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #1,flips_remaining(a1)
                 move.b  #8,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_218BA
+                bne.s   S3Spring_ApplyHorizontalFlipFacingSign
                 move.b  #3,flips_remaining(a1)
 
-loc_218BA:
+S3Spring_ApplyHorizontalFlipFacingSign:
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_218CA
+                beq.s   S3Spring_CheckHorizontalPrimaryLayer
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_218CA:
+S3Spring_CheckHorizontalPrimaryLayer:
                 andi.b  #$C,d0
                 cmpi.b  #4,d0
-                bne.s   loc_218E0
+                bne.s   S3Spring_CheckHorizontalSecondaryLayer
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-loc_218E0:
+S3Spring_CheckHorizontalSecondaryLayer:
                 cmpi.b  #8,d0
-                bne.s   loc_218F2
+                bne.s   S3Spring_ClearHorizontalPushAndPlaySound
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_218F2:
+S3Spring_ClearHorizontalPushAndPlaySound:
                 bclr    #p1_pushing_bit,status(a0)
                 bclr    #p2_pushing_bit,status(a0)
                 bclr    #Status_Push,status(a1)
@@ -294,70 +295,70 @@ loc_218F2:
 
 BoostGroundedPlayersNearHorizontalSpring:
                 cmpi.b  #3,anim(a0)
-                beq.w   locret_219C4
+                beq.w   S3Spring_GroundBoostReturn
                 move.w  x_pos(a0),d0
                 move.w  d0,d1
                 addi.w  #$28,d1
                 btst    #0,status(a0)
-                beq.s   loc_2192E
+                beq.s   S3Spring_SetBoostBoundsAndCheckP1
                 move.w  d0,d1
                 subi.w  #$28,d0
 
-loc_2192E:
+S3Spring_SetBoostBoundsAndCheckP1:
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
                 subi.w  #$18,d2
                 addi.w  #$18,d3
                 lea     (Player_1).w,a1
                 btst    #1,status(a1)
-                bne.s   loc_21982
+                bne.s   S3Spring_TestGroundBoostPlayerTwo
                 move.w  ground_vel(a1),d4
                 btst    #0,status(a0)
-                beq.s   loc_21956
+                beq.s   S3Spring_CheckGroundBoostP1
                 neg.w   d4
 
-loc_21956:
+S3Spring_CheckGroundBoostP1:
                 tst.w   d4
-                bmi.s   loc_21982
+                bmi.s   S3Spring_TestGroundBoostPlayerTwo
                 move.w  x_pos(a1),d4
                 cmp.w   d0,d4
-                blo.w   loc_21982
+                blo.w   S3Spring_TestGroundBoostPlayerTwo
                 cmp.w   d1,d4
-                bhs.w   loc_21982
+                bhs.w   S3Spring_TestGroundBoostPlayerTwo
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.w   loc_21982
+                blo.w   S3Spring_TestGroundBoostPlayerTwo
                 cmp.w   d3,d4
-                bhs.w   loc_21982
+                bhs.w   S3Spring_TestGroundBoostPlayerTwo
                 move.w  d0,-(sp)
                 bsr.w   LaunchPlayerFromHorizontalSpring
                 move.w  (sp)+,d0
 
-loc_21982:
+S3Spring_TestGroundBoostPlayerTwo:
                 lea     (Player_2).w,a1
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_219C4
+                bne.s   S3Spring_GroundBoostReturn
                 move.w  ground_vel(a1),d4
                 btst    #0,status(a0)
-                beq.s   loc_2199C
+                beq.s   S3Spring_CheckGroundBoostP2
                 neg.w   d4
 
-loc_2199C:
+S3Spring_CheckGroundBoostP2:
                 tst.w   d4
-                bmi.s   locret_219C4
+                bmi.s   S3Spring_GroundBoostReturn
                 move.w  x_pos(a1),d4
                 cmp.w   d0,d4
-                blo.w   locret_219C4
+                blo.w   S3Spring_GroundBoostReturn
                 cmp.w   d1,d4
-                bhs.w   locret_219C4
+                bhs.w   S3Spring_GroundBoostReturn
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.w   locret_219C4
+                blo.w   S3Spring_GroundBoostReturn
                 cmp.w   d3,d4
-                bhs.w   locret_219C4
+                bhs.w   S3Spring_GroundBoostReturn
                 bsr.w   LaunchPlayerFromHorizontalSpring
 
-locret_219C4:
+S3Spring_GroundBoostReturn:
                 rts
 ; End of function BoostGroundedPlayersNearHorizontalSpring
 
@@ -373,19 +374,19 @@ Obj_Spring_Down:
                 movem.l d1-d4,-(sp)
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
-                bne.s   loc_219EC
+                bne.s   S3Spring_TestNormalDownPlayerTwo
                 bsr.s   LaunchPlayerFromDownSpring
 
-loc_219EC:
+S3Spring_TestNormalDownPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
-                bne.s   loc_21A02
+                bne.s   S3Spring_AnimateAndCullNormalDown
                 bsr.s   LaunchPlayerFromDownSpring
 
-loc_21A02:
+S3Spring_AnimateAndCullNormalDown:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
@@ -401,21 +402,21 @@ Obj_2PSpring_Down:
                 movem.l d1-d4,-(sp)
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
-                bne.s   loc_21A3E
+                bne.s   S3Spring_TestCompetitionDownPlayerTwo
                 subq.w  #4,y_pos(a1)
-                bsr.s   loc_21A6E
+                bsr.s   S3Spring_SetDownLaunchVelocity
 
-loc_21A3E:
+S3Spring_TestCompetitionDownPlayerTwo:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 bsr.w   SolidObjectFull2_1P
                 cmpi.w  #-2,d4
-                bne.s   loc_21A58
+                bne.s   S3Spring_AnimateAndDrawCompetitionDown
                 subq.w  #4,y_pos(a1)
-                bsr.s   loc_21A6E
+                bsr.s   S3Spring_SetDownLaunchVelocity
 
-loc_21A58:
+S3Spring_AnimateAndDrawCompetitionDown:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
@@ -425,51 +426,51 @@ loc_21A58:
 LaunchPlayerFromDownSpring:
                 subq.w  #8,y_pos(a1)
 
-loc_21A6E:
+S3Spring_SetDownLaunchVelocity:
                 move.w  #1<<8,anim(a0)                  ; and prev_anim
                 move.w  $30(a0),y_vel(a1)
                 neg.w   y_vel(a1)
                 cmpi.w  #$1000,y_vel(a1)
-                bne.s   loc_21A8C
+                bne.s   S3Spring_ApplyDownCrossAxisStop
                 move.w  #$D00,y_vel(a1)
 
-loc_21A8C:
+S3Spring_ApplyDownCrossAxisStop:
                 move.b  subtype(a0),d0
-                bpl.s   loc_21A98
+                bpl.s   S3Spring_ConfigureDownFlip
                 move.w  #0,x_vel(a1)
 
-loc_21A98:
+S3Spring_ConfigureDownFlip:
                 btst    #0,d0
-                beq.s   loc_21AD8
+                beq.s   S3Spring_ApplyDownPrimaryLayerSelector
                 move.w  #1,ground_vel(a1)
                 move.b  #1,flip_angle(a1)
                 move.b  #0,anim(a1)
                 move.b  #0,flips_remaining(a1)
                 move.b  #4,flip_speed(a1)
                 btst    #1,d0
-                bne.s   loc_21AC8
+                bne.s   S3Spring_ApplyDownFlipFacingSign
                 move.b  #1,flips_remaining(a1)
 
-loc_21AC8:
+S3Spring_ApplyDownFlipFacingSign:
                 btst    #Status_Facing,status(a1)
-                beq.s   loc_21AD8
+                beq.s   S3Spring_ApplyDownPrimaryLayerSelector
                 neg.b   flip_angle(a1)
                 neg.w   ground_vel(a1)
 
-loc_21AD8:
+S3Spring_ApplyDownPrimaryLayerSelector:
                 andi.b  #$C,d0
                 cmpi.b  #4,d0
-                bne.s   loc_21AEE
+                bne.s   S3Spring_ApplyDownSecondaryLayerSelector
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
 
-loc_21AEE:
+S3Spring_ApplyDownSecondaryLayerSelector:
                 cmpi.b  #8,d0
-                bne.s   loc_21B00
+                bne.s   S3Spring_FinishDownAirStateAndSound
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_21B00:
+S3Spring_FinishDownAirStateAndSound:
                 bset    #Status_InAir,status(a1)
                 bclr    #Status_OnObj,status(a1)
                 clr.b   jumping(a1)

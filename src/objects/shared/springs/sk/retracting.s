@@ -12,17 +12,17 @@ Obj_RetractingSpring:
                 jmp     RetractingSpring_Index(pc,d1.w)
 ; ---------------------------------------------------------------------------
 RetractingSpring_Index:
-                dc.w    loc_23A04-RetractingSpring_Index
-                dc.w    loc_23A20-RetractingSpring_Index
-                dc.w    loc_23A3C-RetractingSpring_Index
-                dc.w    loc_23A58-RetractingSpring_Index
-                dc.w    loc_23A88-RetractingSpring_Index
+                dc.w    SKRetractSpring_InstallNormalUp-RetractingSpring_Index
+                dc.w    SKRetractSpring_InstallNormalHorizontal-RetractingSpring_Index
+                dc.w    SKRetractSpring_InstallNormalDown-RetractingSpring_Index
+                dc.w    SKRetractSpring_InstallNormalUpDiag-RetractingSpring_Index
+                dc.w    SKRetractSpring_InstallNormalDownDiag-RetractingSpring_Index
 ; ---------------------------------------------------------------------------
 
-loc_23A04:
-                move.l  #loc_23A0A,(a0)
+SKRetractSpring_InstallNormalUp:
+                move.l  #SKRetractingSpring_MoveNormalUpAlongY,(a0)
 
-loc_23A0A:
+SKRetractingSpring_MoveNormalUpAlongY:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -31,10 +31,10 @@ loc_23A0A:
                 bra.w   Obj_Spring_Up
 ; ---------------------------------------------------------------------------
 
-loc_23A20:
-                move.l  #loc_23A26,(a0)
+SKRetractSpring_InstallNormalHorizontal:
+                move.l  #SKRetractSpring_MoveNormalHorizontal,(a0)
 
-loc_23A26:
+SKRetractSpring_MoveNormalHorizontal:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -43,10 +43,10 @@ loc_23A26:
                 bra.w   Obj_Spring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_23A3C:
-                move.l  #loc_23A42,(a0)
+SKRetractSpring_InstallNormalDown:
+                move.l  #SKRetractingSpring_MoveNormalDownAlongY,(a0)
 
-loc_23A42:
+SKRetractingSpring_MoveNormalDownAlongY:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -55,19 +55,19 @@ loc_23A42:
                 bra.w   Obj_Spring_Down
 ; ---------------------------------------------------------------------------
 
-loc_23A58:
-                move.l  #loc_23A5E,(a0)
+SKRetractSpring_InstallNormalUpDiag:
+                move.l  #SKRetractSpring_CalcNormalUpDiagDelta,(a0)
 
-loc_23A5E:
+SKRetractSpring_CalcNormalUpDiagDelta:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
                 btst    #0,status(a0)
-                bne.s   loc_23A74
+                bne.s   SKRetractSpring_MoveNormalUpDiagonal
                 neg.w   d0
 
-loc_23A74:
+SKRetractSpring_MoveNormalUpDiagonal:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
                 add.w   $34(a0),d1
@@ -75,19 +75,19 @@ loc_23A74:
                 bra.w   Obj_Spring_UpDiag
 ; ---------------------------------------------------------------------------
 
-loc_23A88:
-                move.l  #loc_23A8E,(a0)
+SKRetractSpring_InstallNormalDownDiag:
+                move.l  #SKRetractSpring_CalcNormalDownDiagDelta,(a0)
 
-loc_23A8E:
+SKRetractSpring_CalcNormalDownDiagDelta:
                 bsr.w   UpdateRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
                 move.w  d0,d1
                 btst    #0,status(a0)
-                beq.s   loc_23AA4
+                beq.s   SKRetractSpring_MoveNormalDownDiagonal
                 neg.w   d0
 
-loc_23AA4:
+SKRetractSpring_MoveNormalDownDiagonal:
                 add.w   $32(a0),d0
                 move.w  d0,x_pos(a0)
                 add.w   $34(a0),d1
@@ -98,41 +98,42 @@ loc_23AA4:
 
 UpdateRetractingSpringTravel:
                 tst.w   $3A(a0)
-                beq.s   loc_23AD4
+                beq.s   SKRetractSpring_TickNormalTravel
                 subq.w  #1,$3A(a0)
-                bne.s   locret_23B16
+                bne.s   SKRetractSpring_NormalTravelReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_23B16
+                bpl.s   SKRetractSpring_NormalTravelReturn
                 moveq   #signextendB(sfx_SpikeMove),d0
                 jsr     (Play_SFX).l
-                bra.s   locret_23B16
+                bra.s   SKRetractSpring_NormalTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_23AD4:
+SKRetractSpring_TickNormalTravel:
                 tst.w   $38(a0)
-                beq.s   loc_23AF6
+                beq.s   SKRetractSpring_ExtendNormalAndPause
                 subi.w  #$800,$36(a0)
-                bcc.s   locret_23B16
+                bcc.s   SKRetractSpring_NormalTravelReturn
                 move.w  #0,$36(a0)
                 move.w  #0,$38(a0)
                 move.w  #60,$3A(a0)
-                bra.s   locret_23B16
+                bra.s   SKRetractSpring_NormalTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_23AF6:
+; Advance in eight-pixel steps and pause at 32 pixels of extension
+SKRetractSpring_ExtendNormalAndPause:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$2000,$36(a0)
-                blo.s   locret_23B16
+                blo.s   SKRetractSpring_NormalTravelReturn
                 move.w  #$2000,$36(a0)
                 move.w  #1,$38(a0)
                 move.w  #60,$3A(a0)
 
-locret_23B16:
+SKRetractSpring_NormalTravelReturn:
                 rts
 ; End of function UpdateRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
-byte_23B18:
+SKRetractSpring_CompanionAttrs:
                 dc.b    $C,   8,   0,   1
                 dc.b    $C,   8,   0,   0
                 dc.b    $C,   8,   0,   1
@@ -146,28 +147,28 @@ byte_23B18:
 
 Obj_2PRetractingSpring:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.w   loc_23C0E
-                move.l  #loc_23ED0,(a1)
+                bne.w   SKRetractSpring_InitCompParent
+                move.l  #SKRetractSpring_FollowParentAndTrigger,(a1)
                 move.l  #Map_2PRetractingSpring,mappings(a1)
                 move.w  #make_art_tile(ArtTile_2PArt_2,0,0),art_tile(a1)
                 cmpi.b  #$12,(Current_zone).w
-                bne.s   loc_23B66
+                bne.s   SKRetractSpring_InitCompanionAttrs
                 move.l  #Map_2PRetractingSpring_2,mappings(a1)
 
-loc_23B66:
+SKRetractSpring_InitCompanionAttrs:
                 move.b  subtype(a0),d0
                 move.b  d0,subtype(a1)
                 lsr.b   #2,d0
                 andi.w  #$1C,d0
-                lea     byte_23B18(pc,d0.w),a2
+                lea     SKRetractSpring_CompanionAttrs(pc,d0.w),a2
                 move.b  (a2)+,width_pixels(a1)
                 move.b  (a2)+,height_pixels(a1)
                 move.b  (a2)+,d0
                 move.b  d0,mapping_frame(a1)
-                bne.s   loc_23B8E
-                move.l  #loc_23F2A,(a1)
+                bne.s   SKRetractSpring_SetSubtypeAndChildPos
+                move.l  #SKRetractSpring_CheckTriggerOnlyChild,(a1)
 
-loc_23B8E:
+SKRetractSpring_SetSubtypeAndChildPos:
                 andi.b  #$F0,subtype(a0)
                 move.b  (a2)+,d1
                 or.b    d1,subtype(a0)
@@ -176,35 +177,36 @@ loc_23B8E:
                 moveq   #0,d2
                 moveq   #0,d3
                 cmpi.b  #1,d0
-                bne.s   loc_23BC0
+                bne.s   SKRetractSpring_TryOffsetCompanionDown
                 moveq   #$C,d2
                 btst    #0,status(a0)
-                bne.s   loc_23BBC
+                bne.s   SKRetractSpring_OffsetCompanionX
                 neg.w   d2
 
-loc_23BBC:
+SKRetractSpring_OffsetCompanionX:
                 add.w   d2,x_pos(a1)
 
-loc_23BC0:
+SKRetractSpring_TryOffsetCompanionDown:
                 cmpi.b  #2,d0
-                bne.s   loc_23BCC
+                bne.s   SKRetractSpring_TryOffsetCompanionUp
                 moveq   #$B,d3
                 add.w   d3,y_pos(a1)
 
-loc_23BCC:
+SKRetractSpring_TryOffsetCompanionUp:
                 cmpi.b  #3,d0
-                bne.s   loc_23BD8
+                bne.s   SKRetractSpring_SaveOffsetsAndYFlip
                 moveq   #-$B,d3
                 add.w   d3,y_pos(a1)
 
-loc_23BD8:
+; Save child XY offsets and latch the parent's initial Y flip before clearing its flag
+SKRetractSpring_SaveOffsetsAndYFlip:
                 move.w  d2,$30(a1)
                 move.w  d3,$32(a1)
                 bclr    #1,status(a0)
-                beq.s   loc_23BEE
+                beq.s   SKRetractSpring_CopyFlagsAndLinkChild
                 move.b  #1,$3C(a0)
 
-loc_23BEE:
+SKRetractSpring_CopyFlagsAndLinkChild:
                 move.b  status(a0),status(a1)
                 move.b  render_flags(a0),render_flags(a1)
                 ori.b   #4,render_flags(a1)
@@ -212,31 +214,31 @@ loc_23BEE:
                 move.w  a0,$3E(a1)
                 move.w  a1,$3E(a0)
 
-loc_23C0E:
+SKRetractSpring_InitCompParent:
                 bsr.w   InitCompetitionRetractingSpring
 
-loc_23C12:
+SKRetractSpring_DispatchCompOrientation:
                 move.b  subtype(a0),d0
                 lsr.w   #3,d0
                 andi.w  #$E,d0
-                move.w  off_23C24(pc,d0.w),d1
-                jmp     off_23C24(pc,d1.w)
+                move.w  SKRetractSpring_CompOrientationOffsets(pc,d0.w),d1
+                jmp     SKRetractSpring_CompOrientationOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_23C24:
-                dc.w    loc_23C34-off_23C24
-                dc.w    loc_23C50-off_23C24
-                dc.w    loc_23C6C-off_23C24
-                dc.w    loc_23C88-off_23C24
-                dc.w    loc_23CA4-off_23C24
-                dc.w    loc_23CC0-off_23C24
-                dc.w    loc_23CA4-off_23C24
-                dc.w    loc_23CC0-off_23C24
+SKRetractSpring_CompOrientationOffsets:
+                dc.w    SKRetractSpring_InstallCompUpY-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompHorizontalX-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompDownY-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompHorizontalY-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompUpX-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompDownX-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompUpX-SKRetractSpring_CompOrientationOffsets
+                dc.w    SKRetractSpring_InstallCompDownX-SKRetractSpring_CompOrientationOffsets
 ; ---------------------------------------------------------------------------
 
-loc_23C34:
-                move.l  #loc_23C3A,(a0)
+SKRetractSpring_InstallCompUpY:
+                move.l  #SKRetractSpring_MoveCompUpY,(a0)
 
-loc_23C3A:
+SKRetractSpring_MoveCompUpY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -245,10 +247,10 @@ loc_23C3A:
                 bra.w   Obj_2PSpring_Up
 ; ---------------------------------------------------------------------------
 
-loc_23C50:
-                move.l  #loc_23C56,(a0)
+SKRetractSpring_InstallCompHorizontalX:
+                move.l  #SKRetractSpring_MoveCompHorizontalX,(a0)
 
-loc_23C56:
+SKRetractSpring_MoveCompHorizontalX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -257,10 +259,10 @@ loc_23C56:
                 bra.w   Obj_2PSpring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_23C6C:
-                move.l  #loc_23C72,(a0)
+SKRetractSpring_InstallCompDownY:
+                move.l  #SKRetractSpring_MoveCompDownY,(a0)
 
-loc_23C72:
+SKRetractSpring_MoveCompDownY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -269,10 +271,10 @@ loc_23C72:
                 bra.w   Obj_2PSpring_Down
 ; ---------------------------------------------------------------------------
 
-loc_23C88:
-                move.l  #loc_23C8E,(a0)
+SKRetractSpring_InstallCompHorizontalY:
+                move.l  #SKRetractSpring_MoveCompHorizontalY,(a0)
 
-loc_23C8E:
+SKRetractSpring_MoveCompHorizontalY:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -281,10 +283,10 @@ loc_23C8E:
                 bra.w   Obj_2PSpring_Horizontal
 ; ---------------------------------------------------------------------------
 
-loc_23CA4:
-                move.l  #loc_23CAA,(a0)
+SKRetractSpring_InstallCompUpX:
+                move.l  #SKRetractSpring_MoveCompUpX,(a0)
 
-loc_23CAA:
+SKRetractSpring_MoveCompUpX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -293,10 +295,10 @@ loc_23CAA:
                 bra.w   Obj_2PSpring_Up
 ; ---------------------------------------------------------------------------
 
-loc_23CC0:
-                move.l  #loc_23CC6,(a0)
+SKRetractSpring_InstallCompDownX:
+                move.l  #SKRetractSpring_MoveCompDownX,(a0)
 
-loc_23CC6:
+SKRetractSpring_MoveCompDownX:
                 bsr.w   UpdateCompetitionRetractingSpringTravel
                 moveq   #0,d0
                 move.b  $36(a0),d0
@@ -308,158 +310,163 @@ loc_23CC6:
 
 UpdateCompetitionRetractingSpringTravel:
                 tst.b   subtype(a0)
-                bmi.s   loc_23D42
+                bmi.s   SKRetractSpring_CheckRetractedRest
                 tst.w   $3A(a0)
-                beq.s   loc_23CFE
+                beq.s   SKRetractSpring_TickAutoCompTravel
                 subq.w  #1,$3A(a0)
-                bne.s   locret_23D40
+                bne.s   SKRetractSpring_AutoCompTravelReturn
                 tst.b   render_flags(a0)
-                bpl.s   locret_23D40
+                bpl.s   SKRetractSpring_AutoCompTravelReturn
                 moveq   #signextendB(sfx_SpikeMove),d0
                 jsr     (Play_SFX).l
-                bra.s   locret_23D40
+                bra.s   SKRetractSpring_AutoCompTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_23CFE:
+SKRetractSpring_TickAutoCompTravel:
                 tst.w   $38(a0)
-                beq.s   loc_23D20
+                beq.s   SKRetractSpring_ExtendAutoCompTo24
                 subi.w  #$800,$36(a0)
-                bcc.s   locret_23D40
+                bcc.s   SKRetractSpring_AutoCompTravelReturn
                 move.w  #0,$36(a0)
                 move.w  #0,$38(a0)
                 move.w  #60,$3A(a0)
-                bra.s   locret_23D40
+                bra.s   SKRetractSpring_AutoCompTravelReturn
 ; ---------------------------------------------------------------------------
 
-loc_23D20:
+; Use eight-pixel steps and stop at 24 pixels of extension
+SKRetractSpring_ExtendAutoCompTo24:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_23D40
+                blo.s   SKRetractSpring_AutoCompTravelReturn
                 move.w  #$1800,$36(a0)
                 move.w  #1,$38(a0)
                 move.w  #60,$3A(a0)
 
-locret_23D40:
+SKRetractSpring_AutoCompTravelReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23D42:
+; Use the initial Y flip latch to select retracted rest. The other branch rests extended
+SKRetractSpring_CheckRetractedRest:
                 tst.b   $3C(a0)
-                beq.w   loc_23E0C
+                beq.w   SKRetractSpring_TickExtendedRestHold
                 tst.w   $3A(a0)
-                beq.s   loc_23D62
+                beq.s   SKRetractSpring_TickTriggeredRetract
                 subq.w  #1,$3A(a0)
-                bne.w   locret_23E0A
+                bne.w   SKRetractSpring_RetractedRestReturn
                 move.w  #0,$38(a0)
-                bra.w   locret_23E0A
+                bra.w   SKRetractSpring_RetractedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_23D62:
+SKRetractSpring_TickTriggeredRetract:
                 tst.w   $38(a0)
-                bne.w   loc_23DF0
+                bne.w   SKRetractSpring_ExtendTriggeredAndHold
                 tst.w   $36(a0)
-                beq.w   locret_23E0A
+                beq.w   SKRetractSpring_RetractedRestReturn
                 subi.w  #$800,$36(a0)
-                bhi.w   locret_23E0A
+                bhi.w   SKRetractSpring_RetractedRestReturn
                 move.w  #0,$36(a0)
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 cmpi.b  #$E0,d0
-                bne.s   loc_23DBC
+                bne.s   SKRetractSpring_SwapRetractedF0ToE0
                 addi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$F0,subtype(a0)
-                move.l  #loc_23C12,(a0)
+                move.l  #SKRetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_23DBC:
+; Shift Y by -$16, flip the parent and companion offset, and redispatch orientation
+SKRetractSpring_SwapRetractedF0ToE0:
                 cmpi.b  #$F0,d0
-                bne.s   loc_23DEE
+                bne.s   SKRetractSpring_RetractedEndpointDone
                 subi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$E0,subtype(a0)
-                move.l  #loc_23C12,(a0)
+                move.l  #SKRetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_23DEE:
-                bra.s   locret_23E0A
+SKRetractSpring_RetractedEndpointDone:
+                bra.s   SKRetractSpring_RetractedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_23DF0:
+; At 24 pixels of extension, load the three-second hold
+SKRetractSpring_ExtendTriggeredAndHold:
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_23E0A
+                blo.s   SKRetractSpring_RetractedRestReturn
                 move.w  #$1800,$36(a0)
                 move.w  #3*60,$3A(a0)
 
-locret_23E0A:
+SKRetractSpring_RetractedRestReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_23E0C:
+SKRetractSpring_TickExtendedRestHold:
                 tst.w   $3A(a0)
-                beq.s   loc_23E24
+                beq.s   SKRetractSpring_RetractFromExtendedRest
                 subq.w  #1,$3A(a0)
-                bne.w   locret_23ECE
+                bne.w   SKRetractSpring_ExtendedRestReturn
                 move.w  #0,$38(a0)
-                bra.w   locret_23ECE
+                bra.w   SKRetractSpring_ExtendedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_23E24:
+SKRetractSpring_RetractFromExtendedRest:
                 tst.w   $38(a0)
-                beq.s   loc_23E44
+                beq.s   SKRetractSpring_RestoreExtendedRest
                 subi.w  #$800,$36(a0)
-                bcc.w   locret_23ECE
+                bcc.w   SKRetractSpring_ExtendedRestReturn
                 move.w  #0,$36(a0)
                 move.w  #3*60,$3A(a0)
-                bra.w   locret_23ECE
+                bra.w   SKRetractSpring_ExtendedRestReturn
 ; ---------------------------------------------------------------------------
 
-loc_23E44:
+SKRetractSpring_RestoreExtendedRest:
                 cmpi.w  #$1800,$36(a0)
-                beq.w   locret_23ECE
+                beq.w   SKRetractSpring_ExtendedRestReturn
                 addi.w  #$800,$36(a0)
                 cmpi.w  #$1800,$36(a0)
-                blo.s   locret_23ECE
+                blo.s   SKRetractSpring_ExtendedRestReturn
                 move.w  #$1800,$36(a0)
                 move.b  subtype(a0),d0
                 andi.b  #$F0,d0
                 cmpi.b  #$E0,d0
-                bne.s   loc_23E9C
+                bne.s   SKRetractSpring_SwapExtendedF0ToE0
                 addi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$F0,subtype(a0)
-                move.l  #loc_23C12,(a0)
+                move.l  #SKRetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-loc_23E9C:
+; Shift Y by -$16, flip the parent and companion offset, and redispatch orientation
+SKRetractSpring_SwapExtendedF0ToE0:
                 cmpi.b  #$F0,d0
-                bne.s   locret_23ECE
+                bne.s   SKRetractSpring_ExtendedRestReturn
                 subi.w  #$16,y_pos(a0)
                 bchg    #1,status(a0)
                 bchg    #1,render_flags(a0)
                 andi.b  #$F,subtype(a0)
                 ori.b   #$E0,subtype(a0)
-                move.l  #loc_23C12,(a0)
+                move.l  #SKRetractSpring_DispatchCompOrientation,(a0)
                 movea.w $3E(a0),a1
                 neg.w   $32(a1)
 
-locret_23ECE:
+SKRetractSpring_ExtendedRestReturn:
                 rts
 ; End of function UpdateCompetitionRetractingSpringTravel
 
 ; ---------------------------------------------------------------------------
 
-loc_23ED0:
+SKRetractSpring_FollowParentAndTrigger:
                 movea.w $3E(a0),a1
                 move.w  x_pos(a1),d2
                 move.w  y_pos(a1),d3
@@ -468,14 +475,14 @@ loc_23ED0:
                 move.w  d2,x_pos(a0)
                 move.w  d3,y_pos(a0)
                 move.b  subtype(a0),d1
-                bpl.s   loc_23F06
+                bpl.s   SKRetractSpring_CollideAndDrawCompanion
                 andi.w  #$F,d1
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d1.w)
-                beq.s   loc_23F06
+                beq.s   SKRetractSpring_CollideAndDrawCompanion
                 move.w  #1,$38(a1)
 
-loc_23F06:
+SKRetractSpring_CollideAndDrawCompanion:
                 moveq   #0,d1
                 move.b  width_pixels(a0),d1
                 addi.w  #7,d1
@@ -488,17 +495,17 @@ loc_23F06:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_23F2A:
+SKRetractSpring_CheckTriggerOnlyChild:
                 move.b  subtype(a0),d1
-                bpl.s   locret_23F48
+                bpl.s   SKRetractSpring_TriggerOnlyReturn
                 andi.w  #$F,d1
                 lea     (Level_trigger_array).w,a3
                 tst.b   (a3,d1.w)
-                beq.s   locret_23F48
+                beq.s   SKRetractSpring_TriggerOnlyReturn
                 movea.w $3E(a0),a1
                 move.w  #1,$38(a1)
 
-locret_23F48:
+SKRetractSpring_TriggerOnlyReturn:
                 rts
 ; ---------------------------------------------------------------------------
 Map_2PRetractingSpring:

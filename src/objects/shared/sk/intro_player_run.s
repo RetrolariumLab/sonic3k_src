@@ -9,9 +9,10 @@ Obj_LevelIntro_PlayerRun:
                 move.w  d0,$30(a0)
                 move.w  (Player_1+y_pos).w,d0
                 move.w  d0,$32(a0)
-                move.l  #loc_44A26,(a0)
+                move.l  #SKLevelRunIntro_ForceRightToAnchor,(a0)
 
-loc_44A26:
+; Lock scrolling and hold Right for the lead player until the anchor is reached
+SKLevelRunIntro_ForceRightToAnchor:
                 move.b  #1,(Ctrl_1_locked).w
                 move.w  #button_right_mask<<8,d0
                 move.w  d0,(Ctrl_1_logical).w
@@ -21,11 +22,11 @@ loc_44A26:
                 move.w  (Player_1+x_pos).w,d0
                 addi.w  #$10,d0
                 cmp.w   $30(a0),d0
-                bhs.s   loc_44A56
+                bhs.s   SKLevelRunIntro_UnlockAndDelete
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_44A56:
+SKLevelRunIntro_UnlockAndDelete:
                 move.b  #0,(Ctrl_1_locked).w
                 move.b  #0,(Ctrl_2_locked).w
                 jmp     (Delete_Current_Sprite).l

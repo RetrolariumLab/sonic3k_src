@@ -5,20 +5,20 @@
 ; =============== S U B R O U T I N E =======================================
 
 CollapseTensionBridgeSpriteBank:
-                lea     (byte_38076).l,a4
+                lea     (S3TensionBridge_CollapsePieceDelayBytes).l,a4
                 lea     sub2_x_pos(a3),a2
                 move.w  mainspr_childsprites(a3),d6
                 subq.w  #1,d6
                 bclr    #6,render_flags(a3)
                 movea.l a3,a1
-                bra.s   loc_37FFE
+                bra.s   S3TensionBridge_InitPieceAndTryExplosion
 ; ---------------------------------------------------------------------------
 
-loc_37FF6:
+S3TensionBridge_TryNextCollapsePiece:
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_38062
+                bne.s   S3TensionBridge_FinishPartialCollapse
 
-loc_37FFE:
+S3TensionBridge_InitPieceAndTryExplosion:
                 move.l  d4,(a1)
                 move.l  mappings(a3),mappings(a1)
                 move.b  render_flags(a3),render_flags(a1)
@@ -34,14 +34,15 @@ loc_37FFE:
                 move.b  (a4)+,$34(a1)
                 movea.l a1,a5
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   loc_38062
+                bne.s   S3TensionBridge_FinishPartialCollapse
                 move.l  #loc_1C31E,(a1)
                 move.w  x_pos(a5),x_pos(a1)
                 move.w  y_pos(a5),y_pos(a1)
                 move.b  -1(a4),$24(a1)
-                dbf     d6,loc_37FF6
+                dbf     d6,S3TensionBridge_TryNextCollapsePiece
 
-loc_38062:
+; Clear the two reused sub-sprite coordinate words before requesting the collapse sound
+S3TensionBridge_FinishPartialCollapse:
                 move.w  #0,sub2_x_pos(a3)
                 move.w  #0,sub2_y_pos(a3)
                 moveq   #signextendB(sfx_BridgeCollapse),d0
@@ -49,7 +50,7 @@ loc_38062:
 ; End of function CollapseTensionBridgeSpriteBank
 
 ; ---------------------------------------------------------------------------
-byte_38076:
+S3TensionBridge_CollapsePieceDelayBytes:
                 dc.b    8, $10,  $C,  $E,   6,  $A,   4,   2
                 dc.b    8, $10,  $C,  $E,   6,  $A,   4,   2
 
@@ -71,34 +72,35 @@ CollidePlayersWithTensionBridge:
 
 CollidePlayerWithTensionBridge:
                 btst    d6,status(a0)
-                beq.s   loc_38104
+                beq.s   S3TensionBridge_TryFlatLandingAndCache
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_380C0
+                bne.s   S3TensionBridge_ReleaseFlatRider
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_380C0
+                bmi.s   S3TensionBridge_ReleaseFlatRider
                 cmp.w   d2,d0
-                blo.s   loc_380CE
+                blo.s   S3TensionBridge_CacheFlatBinAndPickBank
 
-loc_380C0:
+S3TensionBridge_ReleaseFlatRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_380CE:
+; Index 16-pixel segments. The second sprite bank starts at segment 8
+S3TensionBridge_CacheFlatBinAndPickBank:
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
                 movea.l $30(a0),a2
                 cmpi.w  #8,d0
-                blo.s   loc_380E6
+                blo.s   S3TensionBridge_SnapFlatRiderToSegment
                 movea.l $34(a0),a2
                 subi.w  #8,d0
 
-loc_380E6:
+S3TensionBridge_SnapFlatRiderToSegment:
                 add.w   d0,d0
                 move.w  d0,d1
                 add.w   d0,d0
@@ -113,12 +115,12 @@ loc_380E6:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38104:
+S3TensionBridge_TryFlatLandingAndCache:
                 move.w  d1,-(sp)
                 jsr     (TryLandPlayerOnPlatformSpan).l
                 move.w  (sp)+,d1
                 btst    d6,status(a0)
-                beq.s   locret_38126
+                beq.s   S3TensionBridge_FlatLandingReturn
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
@@ -126,7 +128,7 @@ loc_38104:
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
 
-locret_38126:
+S3TensionBridge_FlatLandingReturn:
                 rts
 ; End of function CollidePlayerWithTensionBridge
 
@@ -148,33 +150,34 @@ CollidePlayersWithSlopedTensionBridge:
 
 CollidePlayerWithSlopedTensionBridge:
                 btst    d6,status(a0)
-                beq.s   loc_381A2
+                beq.s   S3TensionBridge_TryNewSlopedLanding
                 btst    #Status_InAir,status(a1)
-                bne.s   loc_38162
+                bne.s   S3TensionBridge_ReleaseSlopedRider
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   loc_38162
+                bmi.s   S3TensionBridge_ReleaseSlopedRider
                 cmp.w   d2,d0
-                blo.s   loc_38170
+                blo.s   S3TensionBridge_PickSlopedRiderBank
 
-loc_38162:
+S3TensionBridge_ReleaseSlopedRider:
                 bclr    #Status_OnObj,status(a1)
                 bclr    d6,status(a0)
                 moveq   #0,d4
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_38170:
+; Select the bank from the current rider bin and leave the cached bend index untouched
+S3TensionBridge_PickSlopedRiderBank:
                 lsr.w   #4,d0
                 movea.l $30(a0),a2
                 cmpi.w  #8,d0
-                blo.s   loc_38184
+                blo.s   S3TensionBridge_SnapSlopedRiderToSegment
                 movea.l $34(a0),a2
                 subi.w  #8,d0
 
-loc_38184:
+S3TensionBridge_SnapSlopedRiderToSegment:
                 add.w   d0,d0
                 move.w  d0,d1
                 add.w   d0,d0
@@ -189,7 +192,7 @@ loc_38184:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_381A2:
+S3TensionBridge_TryNewSlopedLanding:
                 bsr.s   TryLandPlayerOnSlopedTensionBridge
                 rts
 ; End of function CollidePlayerWithSlopedTensionBridge
@@ -198,13 +201,13 @@ loc_381A2:
 
 TryLandPlayerOnSlopedTensionBridge:
                 tst.w   y_vel(a1)
-                bmi.s   locret_381D4
+                bmi.s   S3TensionBridge_RejectSlopedLanding
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_381D4
+                bmi.s   S3TensionBridge_RejectSlopedLanding
                 cmp.w   d2,d0
-                bhs.s   locret_381D4
+                bhs.s   S3TensionBridge_RejectSlopedLanding
                 lsr.w   #4,d0
                 move.w  d0,d3
                 add.w   d0,d0
@@ -216,7 +219,8 @@ TryLandPlayerOnSlopedTensionBridge:
                 jmp     (S3Platform_CheckTopAndSnapRider).l
 ; ---------------------------------------------------------------------------
 
-locret_381D4:
+; Return with the original predicate flags from the rejected landing test
+S3TensionBridge_RejectSlopedLanding:
                 rts
 ; End of function TryLandPlayerOnSlopedTensionBridge
 
@@ -236,20 +240,21 @@ CacheTensionBridgeRiderSegments:
 
 CacheTensionBridgeRiderSegment:
                 btst    d6,status(a0)
-                beq.s   locret_3820E
+                beq.s   S3TensionBridge_RiderCacheProbeReturn
                 btst    #Status_InAir,status(a1)
-                bne.s   locret_3820E
+                bne.s   S3TensionBridge_RiderCacheProbeReturn
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
                 sub.w   x_pos(a0),d0
                 add.w   d1,d0
-                bmi.s   locret_3820E
+                bmi.s   S3TensionBridge_RiderCacheProbeReturn
                 cmp.w   d2,d0
-                bhs.s   locret_3820E
+                bhs.s   S3TensionBridge_RiderCacheProbeReturn
                 lsr.w   #4,d0
                 move.b  d0,(a0,d5.w)
 
-locret_3820E:
+; Leave the old cached index when the rider fails this probe
+S3TensionBridge_RiderCacheProbeReturn:
                 rts
 ; End of function CacheTensionBridgeRiderSegment
 
@@ -264,22 +269,22 @@ TensionBridge_AnimateRiddenBoards:
                 moveq   #-2,d4
                 move.b  status(a0),d0
                 andi.w  #p1_standing,d0
-                beq.s   loc_3823C
+                beq.s   S3TensionBridge_TryAnimateP2Segment
                 tst.w   (Player_1+x_vel).w
-                beq.s   loc_3823C
+                beq.s   S3TensionBridge_TryAnimateP2Segment
                 move.b  $3F(a0),d0
                 bsr.w   StartTensionBridgeSegmentAnimation
 
-loc_3823C:
+S3TensionBridge_TryAnimateP2Segment:
                 move.b  status(a0),d0
                 andi.w  #p2_standing,d0
-                beq.s   loc_38254
+                beq.s   S3TensionBridge_InitSegmentFrameLoop
                 tst.w   (Player_2+x_vel).w
-                beq.s   loc_38254
+                beq.s   S3TensionBridge_InitSegmentFrameLoop
                 move.b  $3B(a0),d0
                 bsr.w   StartTensionBridgeSegmentAnimation
 
-loc_38254:
+S3TensionBridge_InitSegmentFrameLoop:
                 movea.l $30(a0),a1
                 lea     $4D(a1),a2
                 lea     sub2_mapframe(a1),a1
@@ -287,23 +292,25 @@ loc_38254:
                 move.b  subtype(a0),d1
                 subq.b  #1,d1
 
-loc_38268:
+S3TensionBridge_TickActiveFrameTo12:
                 tst.b   (a1)
-                beq.s   loc_38278
+                beq.s   S3TensionBridge_NextFrameSlotOrBank
                 addq.b  #1,(a1)
                 cmpi.b  #$C,(a1)
-                blo.s   loc_38278
+                blo.s   S3TensionBridge_NextFrameSlotOrBank
                 move.b  #0,(a1)
 
-loc_38278:
+; Switch to the second sprite bank after the eighth first-bank slot
+S3TensionBridge_NextFrameSlotOrBank:
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38286
+                bne.s   S3TensionBridge_RepeatSegmentFrameTick
                 movea.l $34(a0),a1
                 lea     sub2_mapframe(a1),a1
 
-loc_38286:
-                dbf     d1,loc_38268
+; The original loop count comes from the subtype byte
+S3TensionBridge_RepeatSegmentFrameTick:
+                dbf     d1,S3TensionBridge_TickActiveFrameTo12
                 rts
 ; End of function TensionBridge_AnimateRiddenBoards
 
@@ -311,30 +318,30 @@ loc_38286:
 
 StartTensionBridgeSegmentAnimation:
                 cmpi.b  #8,d0
-                bhs.s   loc_382A8
+                bhs.s   S3TensionBridge_TryStartSecondBankAnim
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0
                 tst.b   (a1,d0.w)
-                bne.s   locret_382A6
+                bne.s   S3TensionBridge_FirstBankAnimReturn
                 move.b  #1,(a1,d0.w)
 
-locret_382A6:
+S3TensionBridge_FirstBankAnimReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_382A8:
+S3TensionBridge_TryStartSecondBankAnim:
                 subq.w  #8,d0
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
                 add.w   d0,d0
                 tst.b   (a2,d0.w)
-                bne.s   locret_382BE
+                bne.s   S3TensionBridge_SecondBankAnimReturn
                 move.b  #1,(a2,d0.w)
 
-locret_382BE:
+S3TensionBridge_SecondBankAnimReturn:
                 rts
 ; End of function StartTensionBridgeSegmentAnimation
 
@@ -353,7 +360,7 @@ BendTensionBridgeSegments:
                 move.w  d3,d2
                 add.w   d0,d3
                 moveq   #0,d5
-                lea     (byte_38428-$80).l,a5
+                lea     (S3TensionBridge_BendAmplitudeRows-$80).l,a5
                 move.b  (a5,d3.w),d5
                 andi.w  #$F,d3
                 lsl.w   #4,d3
@@ -362,7 +369,7 @@ BendTensionBridgeSegments:
                 lea     next_object(a1),a2
                 lea     sub2_y_pos(a1),a1
 
-loc_38306:
+S3TensionBridge_WriteFlatForwardSample:
                 moveq   #0,d0
                 move.b  (a3)+,d0
                 addq.w  #1,d0
@@ -373,12 +380,12 @@ loc_38306:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38326
+                bne.s   S3TensionBridge_FinishFlatForwardPass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38326:
-                dbf     d2,loc_38306
+S3TensionBridge_FinishFlatForwardPass:
+                dbf     d2,S3TensionBridge_WriteFlatForwardSample
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 moveq   #0,d3
@@ -386,15 +393,15 @@ loc_38326:
                 addq.b  #1,d3
                 sub.b   d0,d3
                 neg.b   d3
-                bmi.s   locret_38370
+                bmi.s   S3TensionBridge_FlatBendReturn
                 move.w  d3,d2
                 lsl.w   #4,d3
                 lea     (a4,d3.w),a3
                 adda.w  d2,a3
                 subq.w  #1,d2
-                bcs.s   locret_38370
+                bcs.s   S3TensionBridge_FlatBendReturn
 
-loc_3834C:
+S3TensionBridge_WriteFlatReverseSample:
                 moveq   #0,d0
                 move.b  -(a3),d0
                 addq.w  #1,d0
@@ -405,14 +412,15 @@ loc_3834C:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_3836C
+                bne.s   S3TensionBridge_RepeatFlatReversePass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_3836C:
-                dbf     d2,loc_3834C
+; Return with the loop's existing condition codes
+S3TensionBridge_RepeatFlatReversePass:
+                dbf     d2,S3TensionBridge_WriteFlatReverseSample
 
-locret_38370:
+S3TensionBridge_FlatBendReturn:
                 rts
 ; End of function BendTensionBridgeSegments
 
@@ -431,7 +439,7 @@ BendSlopedTensionBridgeSegments:
                 move.w  d3,d2
                 add.w   d0,d3
                 moveq   #0,d5
-                lea     (byte_38428-$80).l,a5
+                lea     (S3TensionBridge_BendAmplitudeRows-$80).l,a5
                 move.b  (a5,d3.w),d5
                 andi.w  #$F,d3
                 lsl.w   #4,d3
@@ -441,7 +449,7 @@ BendSlopedTensionBridgeSegments:
                 lea     next_object(a1),a2
                 lea     sub2_y_pos(a1),a1
 
-loc_383BC:
+S3TensionBridge_WriteSlopeForwardSample:
                 moveq   #0,d0
                 move.b  (a3)+,d0
                 addq.w  #1,d0
@@ -453,12 +461,12 @@ loc_383BC:
                 move.w  d0,(a1)
                 addq.w  #next_subspr,a1
                 cmpa.w  a2,a1
-                bne.s   loc_383DC
+                bne.s   S3TensionBridge_FinishSlopeForwardPass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_383DC:
-                dbf     d2,loc_383BC
+S3TensionBridge_FinishSlopeForwardPass:
+                dbf     d2,S3TensionBridge_WriteSlopeForwardSample
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 moveq   #0,d3
@@ -466,15 +474,15 @@ loc_383DC:
                 addq.b  #1,d3
                 sub.b   d0,d3
                 neg.b   d3
-                bmi.s   locret_38426
+                bmi.s   S3TensionBridge_SlopeBendReturn
                 move.w  d3,d2
                 lsl.w   #4,d3
                 lea     (a4,d3.w),a3
                 adda.w  d2,a3
                 subq.w  #1,d2
-                bcs.s   locret_38426
+                bcs.s   S3TensionBridge_SlopeBendReturn
 
-loc_38402:
+S3TensionBridge_WriteSlopeReverseSample:
                 moveq   #0,d0
                 move.b  -(a3),d0
                 addq.w  #1,d0
@@ -486,19 +494,21 @@ loc_38402:
                 move.w  d0,(a1)
                 addq.w  #6,a1
                 cmpa.w  a2,a1
-                bne.s   loc_38422
+                bne.s   S3TensionBridge_RepeatSlopeReversePass
                 movea.l $34(a0),a1
                 lea     sub2_y_pos(a1),a1
 
-loc_38422:
-                dbf     d2,loc_38402
+; Carry the running word baseline from one segment to the next
+S3TensionBridge_RepeatSlopeReversePass:
+                dbf     d2,S3TensionBridge_WriteSlopeReverseSample
 
-locret_38426:
+S3TensionBridge_SlopeBendReturn:
                 rts
 ; End of function BendSlopedTensionBridgeSegments
 
 ; ---------------------------------------------------------------------------
-byte_38428:
+; The rows cover bridge lengths from eight through sixteen segments
+S3TensionBridge_BendAmplitudeRows:
                 dc.b    2,   4,   6,   8,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0,   0,   0
                 dc.b    2,   4,   6,   8,  $A,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0,   0
                 dc.b    2,   4,   6,   8,  $A,  $A,   8,   6,   4,   2,   0,   0,   0,   0,   0,   0

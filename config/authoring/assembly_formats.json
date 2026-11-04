@@ -21799,11 +21799,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 14
       },
-      "declarations_sha256": "6005e90e74abf58f2ce9c553591fd602a1f4b3179e66d14c7c9b44d659eb2543",
+      "declarations_sha256": "4f728555402352ae9c6b559f4db30a2a5b918c24eef86bf4951257b4c2668370",
       "labels": {
         "Ani_Bumper_": 0,
-        "byte_33098": 4,
-        "byte_3309B": 7
+        "BumperAnimation_Idle": 4,
+        "BumperAnimation_Contact": 7
       },
       "external_symbols": [],
       "blocks": [
@@ -21811,14 +21811,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_33098",
+          "target": "BumperAnimation_Idle",
           "base": "Ani_Bumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_3309B",
+          "target": "BumperAnimation_Contact",
           "base": "Ani_Bumper_"
         },
         {
@@ -21849,15 +21849,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 58
       },
-      "declarations_sha256": "bd021a201012b1b6c9daa898a58ec0d7f8ad5eca34d59709fd3d8b7db2a20e2e",
+      "declarations_sha256": "5bce0bc24bae7e95f78deefd01bf14dcea7e429c80f6e00720645719f83eeb19",
       "labels": {
         "Ani_Spring_": 0,
-        "byte_2372E": 12,
-        "byte_23731": 15,
-        "byte_2373D": 27,
-        "byte_23740": 30,
-        "byte_2374C": 42,
-        "byte_2374F": 45
+        "SpringAnimation_VerticalIdle": 12,
+        "SpringAnimation_VerticalLaunch": 15,
+        "SpringAnimation_HorizontalIdle": 27,
+        "SpringAnimation_HorizontalLaunch": 30,
+        "SpringAnimation_DiagonalIdle": 42,
+        "SpringAnimation_DiagonalLaunch": 45
       },
       "external_symbols": [],
       "blocks": [
@@ -21865,42 +21865,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2372E",
+          "target": "SpringAnimation_VerticalIdle",
           "base": "Ani_Spring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_23731",
+          "target": "SpringAnimation_VerticalLaunch",
           "base": "Ani_Spring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2373D",
+          "target": "SpringAnimation_HorizontalIdle",
           "base": "Ani_Spring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_23740",
+          "target": "SpringAnimation_HorizontalLaunch",
           "base": "Ani_Spring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2374C",
+          "target": "SpringAnimation_DiagonalIdle",
           "base": "Ani_Spring_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2374F",
+          "target": "SpringAnimation_DiagonalLaunch",
           "base": "Ani_Spring_"
         },
         {
@@ -21955,15 +21955,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 42
       },
-      "declarations_sha256": "97b255c5805709cd5e5475b5997e10e183fa9743379ae5ec46779747551f0f42",
+      "declarations_sha256": "6ff306ab286f397fe1b5be3eb98fd38c19ddec2fdf52e6f4bfabeab4a79bebee",
       "labels": {
         "Map_2PRetractingSpring_": 0,
         "Map_2PRetractingSpring_2": 8,
         "Map_2PRetractingSpring_2_": 8,
-        "word_23F5A": 16,
-        "word_23F5C": 18,
-        "word_23F64": 26,
-        "word_23F6C": 34
+        "CompRetractSpringMap_SharedBlank00": 16,
+        "CompRetractSpringMap_PrimaryFrame01": 18,
+        "CompRetractSpringMap_SharedFrame02And03": 26,
+        "CompRetractSpringMap_Zone12AltFrame01": 34
       },
       "external_symbols": [],
       "blocks": [
@@ -21971,56 +21971,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F5A",
+          "target": "CompRetractSpringMap_SharedBlank00",
           "base": "Map_2PRetractingSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F5C",
+          "target": "CompRetractSpringMap_PrimaryFrame01",
           "base": "Map_2PRetractingSpring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F64",
+          "target": "CompRetractSpringMap_SharedFrame02And03",
           "base": "Map_2PRetractingSpring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F64",
+          "target": "CompRetractSpringMap_SharedFrame02And03",
           "base": "Map_2PRetractingSpring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F5A",
+          "target": "CompRetractSpringMap_SharedBlank00",
           "base": "Map_2PRetractingSpring_2_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F6C",
+          "target": "CompRetractSpringMap_Zone12AltFrame01",
           "base": "Map_2PRetractingSpring_2_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F64",
+          "target": "CompRetractSpringMap_SharedFrame02And03",
           "base": "Map_2PRetractingSpring_2_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23F64",
+          "target": "CompRetractSpringMap_SharedFrame02And03",
           "base": "Map_2PRetractingSpring_2_"
         },
         {
@@ -22054,25 +22054,25 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 224
       },
-      "declarations_sha256": "fc7efb41ee28a32b11e9c26031c4f1ff4b3dd9b2e64e92f75daf98623cd1bfcc",
+      "declarations_sha256": "444c92abdc5b3875c55e3c3e3a4ad20541c0a9e7a962fd4523ec28d9a89b8927",
       "labels": {
         "Map_2PSpring_": 0,
         "Map_Spring3": 14,
         "Map_Spring3_": 14,
-        "word_23920": 28,
-        "word_2392E": 42,
-        "word_23936": 50,
-        "word_2394A": 70,
-        "word_23958": 84,
-        "word_23960": 92,
-        "word_23974": 112,
-        "word_23982": 126,
-        "word_23990": 140,
-        "word_23998": 148,
-        "word_239AC": 168,
-        "word_239BA": 182,
-        "word_239C2": 190,
-        "word_239D6": 210
+        "CompetitionSpringMapping_PrimaryFrame00": 28,
+        "CompetitionSpringMapping_PrimaryFrame01": 42,
+        "CompetitionSpringMapping_PrimaryFrame02": 50,
+        "CompetitionSpringMapping_PrimaryFrame03": 70,
+        "CompetitionSpringMapping_PrimaryFrame04": 84,
+        "CompetitionSpringMapping_PrimaryFrame05": 92,
+        "CompetitionSpringMapping_PrimaryFrame06": 112,
+        "CompSpringMap_AlternateFrame00": 126,
+        "CompSpringMap_AlternateFrame01": 140,
+        "CompSpringMap_AlternateFrame02": 148,
+        "CompSpringMap_AlternateFrame03": 168,
+        "CompSpringMap_AlternateFrame04": 182,
+        "CompSpringMap_AlternateFrame05": 190,
+        "CompSpringMap_AlternateFrame06": 210
       },
       "external_symbols": [],
       "blocks": [
@@ -22080,98 +22080,98 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23920",
+          "target": "CompetitionSpringMapping_PrimaryFrame00",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2392E",
+          "target": "CompetitionSpringMapping_PrimaryFrame01",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23936",
+          "target": "CompetitionSpringMapping_PrimaryFrame02",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2394A",
+          "target": "CompetitionSpringMapping_PrimaryFrame03",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23958",
+          "target": "CompetitionSpringMapping_PrimaryFrame04",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23960",
+          "target": "CompetitionSpringMapping_PrimaryFrame05",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23974",
+          "target": "CompetitionSpringMapping_PrimaryFrame06",
           "base": "Map_2PSpring_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23982",
+          "target": "CompSpringMap_AlternateFrame00",
           "base": "Map_Spring3_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23990",
+          "target": "CompSpringMap_AlternateFrame01",
           "base": "Map_Spring3_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23998",
+          "target": "CompSpringMap_AlternateFrame02",
           "base": "Map_Spring3_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_239AC",
+          "target": "CompSpringMap_AlternateFrame03",
           "base": "Map_Spring3_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_239BA",
+          "target": "CompSpringMap_AlternateFrame04",
           "base": "Map_Spring3_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_239C2",
+          "target": "CompSpringMap_AlternateFrame05",
           "base": "Map_Spring3_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_239D6",
+          "target": "CompSpringMap_AlternateFrame06",
           "base": "Map_Spring3_"
         },
         {
@@ -22255,11 +22255,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "48bfd1bd24e4e9e202edd780954d291a9676ca744c393860d804dcb3d7256932",
+      "declarations_sha256": "ab5ef85c2b66808d0b4dec117fe83ee1f4f26da1dde880acbd447bf6c56b18fb",
       "labels": {
         "Map_Bumper_": 0,
-        "Frame_2322D2": 4,
-        "Frame_2322E0": 18
+        "S3BumperMapping_Frame00": 4,
+        "S3BumperMapping_Frame01": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -22267,14 +22267,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2322D2",
+          "target": "S3BumperMapping_Frame00",
           "base": "Map_Bumper_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_2322E0",
+          "target": "S3BumperMapping_Frame01",
           "base": "Map_Bumper_"
         },
         {
@@ -22454,15 +22454,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 172
       },
-      "declarations_sha256": "f68102df136598fe4ea65fcb6a61e9c049488a3f1dde2a50f539f840ea2734de",
+      "declarations_sha256": "5752a3a1403cc3b38e64e35a50f4e841be2085339e87f3e98c1021e246f654c6",
       "labels": {
         "Map_PathSwap_": 0,
-        "word_1D06A": 16,
-        "word_1D084": 42,
-        "word_1D09E": 68,
-        "word_1D0B8": 94,
-        "word_1D0D2": 120,
-        "word_1D0EC": 146
+        "PathSwapMapping_XBoundaryFrame00": 16,
+        "PathSwapMapping_XBoundaryFrame01": 42,
+        "PathSwapMapping_XBoundaryFrames02And03": 68,
+        "PathSwapMapping_YBoundaryFrame04": 94,
+        "PathSwapMapping_YBoundaryFrame05": 120,
+        "PathSwapMapping_YBoundaryFrames06And07": 146
       },
       "external_symbols": [],
       "blocks": [
@@ -22470,56 +22470,56 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D06A",
+          "target": "PathSwapMapping_XBoundaryFrame00",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D084",
+          "target": "PathSwapMapping_XBoundaryFrame01",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D09E",
+          "target": "PathSwapMapping_XBoundaryFrames02And03",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D09E",
+          "target": "PathSwapMapping_XBoundaryFrames02And03",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D0B8",
+          "target": "PathSwapMapping_YBoundaryFrame04",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D0D2",
+          "target": "PathSwapMapping_YBoundaryFrame05",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D0EC",
+          "target": "PathSwapMapping_YBoundaryFrames06And07",
           "base": "Map_PathSwap_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_1D0EC",
+          "target": "PathSwapMapping_YBoundaryFrames06And07",
           "base": "Map_PathSwap_"
         },
         {
@@ -22967,33 +22967,33 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 424
       },
-      "declarations_sha256": "b0c0175d791ac9008668ad6b2c469933121323351d3c3bb38366b1c782a95dc1",
+      "declarations_sha256": "cfc34bebadf6f97e74faac4fda81c631a7237edcb2ad4b9b686177ade58916b5",
       "labels": {
         "Map_Spring_": 0,
         "Map_Spring2": 22,
         "Map_Spring2_": 22,
-        "word_23788": 44,
-        "word_23796": 58,
-        "word_2379E": 66,
-        "word_237AC": 80,
-        "word_237BA": 94,
-        "word_237C2": 102,
-        "word_237D0": 116,
-        "word_237DE": 130,
-        "word_237E6": 138,
-        "word_237F4": 152,
-        "word_23802": 166,
-        "word_2380A": 174,
-        "word_23818": 188,
-        "word_23826": 202,
-        "word_23834": 216,
-        "word_2384E": 242,
-        "word_23862": 262,
-        "word_23882": 294,
-        "word_2389C": 320,
-        "word_238B6": 346,
-        "word_238CA": 366,
-        "word_238EA": 398
+        "SpringMapping_PrimaryFrame00": 44,
+        "SpringMapping_PrimaryFrame01": 58,
+        "SpringMapping_PrimaryFrame02": 66,
+        "SpringMapping_AlternateFrame00": 80,
+        "SpringMapping_AlternateFrame01": 94,
+        "SpringMapping_AlternateFrame02": 102,
+        "SpringMapping_PrimaryFrame03": 116,
+        "SpringMapping_PrimaryFrame04": 130,
+        "SpringMapping_PrimaryFrame05": 138,
+        "SpringMapping_AlternateFrame03": 152,
+        "SpringMapping_AlternateFrame04": 166,
+        "SpringMapping_AlternateFrame05": 174,
+        "SpringMapping_PrimaryFrame06": 188,
+        "SpringMapping_AlternateFrame06": 202,
+        "SpringMapping_PrimaryFrame07": 216,
+        "SpringMapping_PrimaryFrame08": 242,
+        "SpringMapping_PrimaryFrame09": 262,
+        "SpringMapping_PrimaryFrame0A": 294,
+        "SpringMapping_AlternateFrame07": 320,
+        "SpringMapping_AlternateFrame08": 346,
+        "SpringMapping_AlternateFrame09": 366,
+        "SpringMapping_AlternateFrame0A": 398
       },
       "external_symbols": [],
       "blocks": [
@@ -23001,154 +23001,154 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23788",
+          "target": "SpringMapping_PrimaryFrame00",
           "base": "Map_Spring_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23796",
+          "target": "SpringMapping_PrimaryFrame01",
           "base": "Map_Spring_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2379E",
+          "target": "SpringMapping_PrimaryFrame02",
           "base": "Map_Spring_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237D0",
+          "target": "SpringMapping_PrimaryFrame03",
           "base": "Map_Spring_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237DE",
+          "target": "SpringMapping_PrimaryFrame04",
           "base": "Map_Spring_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237E6",
+          "target": "SpringMapping_PrimaryFrame05",
           "base": "Map_Spring_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23818",
+          "target": "SpringMapping_PrimaryFrame06",
           "base": "Map_Spring_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23834",
+          "target": "SpringMapping_PrimaryFrame07",
           "base": "Map_Spring_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2384E",
+          "target": "SpringMapping_PrimaryFrame08",
           "base": "Map_Spring_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23862",
+          "target": "SpringMapping_PrimaryFrame09",
           "base": "Map_Spring_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23882",
+          "target": "SpringMapping_PrimaryFrame0A",
           "base": "Map_Spring_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237AC",
+          "target": "SpringMapping_AlternateFrame00",
           "base": "Map_Spring2_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237BA",
+          "target": "SpringMapping_AlternateFrame01",
           "base": "Map_Spring2_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237C2",
+          "target": "SpringMapping_AlternateFrame02",
           "base": "Map_Spring2_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_237F4",
+          "target": "SpringMapping_AlternateFrame03",
           "base": "Map_Spring2_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23802",
+          "target": "SpringMapping_AlternateFrame04",
           "base": "Map_Spring2_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2380A",
+          "target": "SpringMapping_AlternateFrame05",
           "base": "Map_Spring2_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23826",
+          "target": "SpringMapping_AlternateFrame06",
           "base": "Map_Spring2_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2389C",
+          "target": "SpringMapping_AlternateFrame07",
           "base": "Map_Spring2_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_238B6",
+          "target": "SpringMapping_AlternateFrame08",
           "base": "Map_Spring2_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_238CA",
+          "target": "SpringMapping_AlternateFrame09",
           "base": "Map_Spring2_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_238EA",
+          "target": "SpringMapping_AlternateFrame0A",
           "base": "Map_Spring2_"
         },
         {
@@ -32350,10 +32350,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 8
       },
-      "declarations_sha256": "e0343b3f1ad5a8490a40689862c5f39e1dc77431f1dd34324b021bcb268c7798",
+      "declarations_sha256": "b1265e16050f0c6dc67d6018532f26b72596d72c314d08e440b03d0341a58d97",
       "labels": {
         "Ani_SnowboardDust_": 0,
-        "byte_399D2": 2
+        "SharedSnowboardDustSTD_AdvanceRoutine": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -32361,7 +32361,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_399D2",
+          "target": "SharedSnowboardDustSTD_AdvanceRoutine",
           "base": "Ani_SnowboardDust_"
         },
         {
@@ -32381,21 +32381,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 120
       },
-      "declarations_sha256": "76b8ef21d79e0786aa898360e8ea25ea763c2b85a46bb79ea4e37137bb2d9c0c",
+      "declarations_sha256": "e029cfb0d5dadc78048504cfc960dcad4298830f161e60d8204a0d76f4c7f629",
       "labels": {
         "DPLC_Snowboard_": 0,
-        "Frame_348140": 24,
-        "Frame_348142": 26,
-        "Frame_348148": 32,
-        "Frame_348152": 42,
-        "Frame_348158": 48,
-        "Frame_348164": 60,
-        "Frame_34816A": 66,
-        "Frame_348174": 76,
-        "Frame_34817A": 82,
-        "Frame_348186": 94,
-        "Frame_34818C": 100,
-        "Frame_348196": 110
+        "S3SnowboardDPLC_Frame00": 24,
+        "S3SnowboardDPLC_Frame01": 26,
+        "S3SnowboardDPLC_Frame02": 32,
+        "S3SnowboardDPLC_Frame03": 42,
+        "S3SnowboardDPLC_Frame04": 48,
+        "S3SnowboardDPLC_Frame05": 60,
+        "S3SnowboardDPLC_Frame06": 66,
+        "S3SnowboardDPLC_Frame07": 76,
+        "S3SnowboardDPLC_Frame08": 82,
+        "S3SnowboardDPLC_Frame09": 94,
+        "S3SnowboardDPLC_Frame0A": 100,
+        "S3SnowboardDPLC_Frame0B": 110
       },
       "external_symbols": [],
       "blocks": [
@@ -32403,84 +32403,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348140",
+          "target": "S3SnowboardDPLC_Frame00",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348142",
+          "target": "S3SnowboardDPLC_Frame01",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348148",
+          "target": "S3SnowboardDPLC_Frame02",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348152",
+          "target": "S3SnowboardDPLC_Frame03",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348158",
+          "target": "S3SnowboardDPLC_Frame04",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348164",
+          "target": "S3SnowboardDPLC_Frame05",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34816A",
+          "target": "S3SnowboardDPLC_Frame06",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348174",
+          "target": "S3SnowboardDPLC_Frame07",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34817A",
+          "target": "S3SnowboardDPLC_Frame08",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348186",
+          "target": "S3SnowboardDPLC_Frame09",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34818C",
+          "target": "S3SnowboardDPLC_Frame0A",
           "base": "DPLC_Snowboard_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348196",
+          "target": "S3SnowboardDPLC_Frame0B",
           "base": "DPLC_Snowboard_"
         },
         {
@@ -32554,21 +32554,21 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 264
       },
-      "declarations_sha256": "77e10614dc958d87b3fe77584ac4255ae9cae3c8662156323ca5ef5791d9a8e8",
+      "declarations_sha256": "6a7deca739f017aec640824d07ca61f2edc95e566da969517d2a00b8d3c32313",
       "labels": {
         "Map_Snowboard_": 0,
-        "Frame_348038": 24,
-        "Frame_34803A": 26,
-        "Frame_348048": 40,
-        "Frame_348062": 66,
-        "Frame_348070": 80,
-        "Frame_348090": 112,
-        "Frame_34809E": 126,
-        "Frame_3480B8": 152,
-        "Frame_3480C6": 166,
-        "Frame_3480E6": 198,
-        "Frame_3480F4": 212,
-        "Frame_34810E": 238
+        "S3SnowboardMap_Frame00": 24,
+        "S3SnowboardMap_Frame01": 26,
+        "S3SnowboardMap_Frame02": 40,
+        "S3SnowboardMap_Frame03": 66,
+        "S3SnowboardMap_Frame04": 80,
+        "S3SnowboardMap_Frame05": 112,
+        "S3SnowboardMap_Frame06": 126,
+        "S3SnowboardMap_Frame07": 152,
+        "S3SnowboardMap_Frame08": 166,
+        "S3SnowboardMap_Frame09": 198,
+        "S3SnowboardMap_Frame0A": 212,
+        "S3SnowboardMap_Frame0B": 238
       },
       "external_symbols": [],
       "blocks": [
@@ -32576,84 +32576,84 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348038",
+          "target": "S3SnowboardMap_Frame00",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34803A",
+          "target": "S3SnowboardMap_Frame01",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348048",
+          "target": "S3SnowboardMap_Frame02",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348062",
+          "target": "S3SnowboardMap_Frame03",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348070",
+          "target": "S3SnowboardMap_Frame04",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_348090",
+          "target": "S3SnowboardMap_Frame05",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34809E",
+          "target": "S3SnowboardMap_Frame06",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3480B8",
+          "target": "S3SnowboardMap_Frame07",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3480C6",
+          "target": "S3SnowboardMap_Frame08",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3480E6",
+          "target": "S3SnowboardMap_Frame09",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3480F4",
+          "target": "S3SnowboardMap_Frame0A",
           "base": "Map_Snowboard_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_34810E",
+          "target": "S3SnowboardMap_Frame0B",
           "base": "Map_Snowboard_"
         },
         {
@@ -32727,13 +32727,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "cfb5c1c0d459030046de2b05ddd40501c662d49de3eba91e1997947c4e263280",
+      "declarations_sha256": "2e61ed05e57465d8b5a8948738087bc33ec8bc223ddbb39c8509d7156040ae75",
       "labels": {
         "Map_SnowboardDust_": 0,
-        "word_399E0": 8,
-        "word_399E8": 16,
-        "word_399F0": 24,
-        "word_399F8": 32
+        "SharedSnowboardDustMap_Frame00": 8,
+        "SharedSnowboardDustMap_Frame01": 16,
+        "SharedSnowboardDustMap_Frame02": 24,
+        "SharedSnowboardDustMap_Frame03": 32
       },
       "external_symbols": [],
       "blocks": [
@@ -32741,28 +32741,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_399E0",
+          "target": "SharedSnowboardDustMap_Frame00",
           "base": "Map_SnowboardDust_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_399E8",
+          "target": "SharedSnowboardDustMap_Frame01",
           "base": "Map_SnowboardDust_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_399F0",
+          "target": "SharedSnowboardDustMap_Frame02",
           "base": "Map_SnowboardDust_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_399F8",
+          "target": "SharedSnowboardDustMap_Frame03",
           "base": "Map_SnowboardDust_"
         },
         {
@@ -59107,10 +59107,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "5a1048accbd8173330e9d93a9bf16058102e818e390ef2640514ceb76128ac81",
+      "declarations_sha256": "9a29fec5fbdf7ccef43a4de1b1497ef66f09ad310690925b8d2fdc249a81579a",
       "labels": {
         "Ani_Surfboard_": 0,
-        "byte_21344": 2
+        "S3SurfboardAnim_RepeatLastEightPairs": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -59118,7 +59118,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_21344",
+          "target": "S3SurfboardAnim_RepeatLastEightPairs",
           "base": "Ani_Surfboard_"
         },
         {
@@ -59138,10 +59138,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 18
       },
-      "declarations_sha256": "2f70fbc4ad429c7fc69052df100ec41e2aad61a5f91f7321f2c6134940c295a1",
+      "declarations_sha256": "fb765e9337e1981bea6dea3dbd05202b481bb28612dc92debfe54a8235390ba4",
       "labels": {
         "Ani_SurfboardSplash_": 0,
-        "byte_2118A": 2
+        "S3SurfboardSplashAnim_RepeatFromStart": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -59149,7 +59149,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2118A",
+          "target": "S3SurfboardSplashAnim_RepeatFromStart",
           "base": "Ani_SurfboardSplash_"
         },
         {
@@ -59174,10 +59174,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 16
       },
-      "declarations_sha256": "1dda87740c9f45d976f5b0a8b225d803d102ecfa1e238f76989245eb3a6997d0",
+      "declarations_sha256": "035d72073e5785917b8ed65699e91d04d672444d5ef82ce23f7ee08f525a206f",
       "labels": {
         "Ani_SurfboardWaves_": 0,
-        "byte_20FEE": 2
+        "S3SurfboardWavesIrregular_AdvanceRoutine": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -59185,7 +59185,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_20FEE",
+          "target": "S3SurfboardWavesIrregular_AdvanceRoutine",
           "base": "Ani_SurfboardWaves_"
         },
         {
@@ -59205,14 +59205,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 122
       },
-      "declarations_sha256": "4d2ef1529794ab843523ffa5786cd33084a056e4c029202368a559fa20b08593",
+      "declarations_sha256": "5696e6c0cbff51f4aeae5f7f08b3eb6145a228484d2314791ba7f89e42a412b4",
       "labels": {
         "Map_Surfboard_": 0,
-        "word_21368": 10,
-        "word_2136A": 12,
-        "word_2137E": 32,
-        "word_2139E": 64,
-        "word_213B8": 90
+        "S3SurfboardMap_Frame00": 10,
+        "S3SurfboardMap_Frame01": 12,
+        "S3SurfboardMap_Frame02": 32,
+        "S3SurfboardMap_Frame03": 64,
+        "S3SurfboardMap_Frame04": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -59220,35 +59220,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21368",
+          "target": "S3SurfboardMap_Frame00",
           "base": "Map_Surfboard_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2136A",
+          "target": "S3SurfboardMap_Frame01",
           "base": "Map_Surfboard_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2137E",
+          "target": "S3SurfboardMap_Frame02",
           "base": "Map_Surfboard_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2139E",
+          "target": "S3SurfboardMap_Frame03",
           "base": "Map_Surfboard_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_213B8",
+          "target": "S3SurfboardMap_Frame04",
           "base": "Map_Surfboard_"
         },
         {
@@ -59287,16 +59287,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "afd5848cfc9ee3d33a5196b304a194cec10ed891bccbcb2f1f83e13e86a37ed9",
+      "declarations_sha256": "7c1b8d8c980f32dee93213e5c780ba8fdebab66776380e73a1f4dd18a0d7808e",
       "labels": {
         "Map_SurfboardSplash_": 0,
-        "word_21250": 14,
-        "word_2125E": 28,
-        "word_2126C": 42,
-        "word_2127A": 56,
-        "word_21288": 70,
-        "word_21296": 84,
-        "word_212A4": 98
+        "S3SurfboardSplashMap_Frame00": 14,
+        "S3SurfboardSplashMap_Frame01": 28,
+        "S3SurfboardSplashMap_Frame02": 42,
+        "S3SurfboardSplashMap_Frame03": 56,
+        "S3SurfboardSplashMap_Frame04": 70,
+        "S3SurfboardSplashMap_Frame05": 84,
+        "S3SurfboardSplashMap_Frame06": 98
       },
       "external_symbols": [],
       "blocks": [
@@ -59304,49 +59304,49 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21250",
+          "target": "S3SurfboardSplashMap_Frame00",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2125E",
+          "target": "S3SurfboardSplashMap_Frame01",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2126C",
+          "target": "S3SurfboardSplashMap_Frame02",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2127A",
+          "target": "S3SurfboardSplashMap_Frame03",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21288",
+          "target": "S3SurfboardSplashMap_Frame04",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_21296",
+          "target": "S3SurfboardSplashMap_Frame05",
           "base": "Map_SurfboardSplash_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_212A4",
+          "target": "S3SurfboardSplashMap_Frame06",
           "base": "Map_SurfboardSplash_"
         },
         {
@@ -76900,20 +76900,20 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 428
       },
-      "declarations_sha256": "8fc7bddecf024e6ebb3e0a73ed5516dac71ceae898ae4e85846118b314647020",
+      "declarations_sha256": "bcdb657ab4fbb8c6f517bd8e1ab0c5c28179302a439be65a668c9ba5e8d37fbe",
       "labels": {
         "Map_SSZHPZTeleporter_": 0,
-        "word_46B52": 22,
-        "word_46B66": 42,
-        "word_46B6E": 50,
-        "word_46B76": 58,
-        "word_46BA8": 108,
-        "word_46BDA": 158,
-        "word_46C0C": 208,
-        "word_46C3E": 258,
-        "word_46C70": 308,
-        "word_46CA2": 358,
-        "word_46CD4": 408
+        "SKSSZHPZTeleporterMap_Frame00": 22,
+        "SKSSZHPZTeleporterMap_Frame01": 42,
+        "SKSSZHPZTeleporterMap_Frame02": 50,
+        "SKSSZHPZTeleporterMap_Frame03": 58,
+        "SKSSZHPZTeleporterMap_Frame04": 108,
+        "SKSSZHPZTeleporterMap_Frame05": 158,
+        "SKSSZHPZTeleporterMap_Frame06": 208,
+        "SKSSZHPZTeleporterMap_Frame07": 258,
+        "SKSSZHPZTeleporterMap_Frame08": 308,
+        "SKSSZHPZTeleporterMap_Frame09": 358,
+        "SKSSZHPZTeleporterMap_Frame0A": 408
       },
       "external_symbols": [],
       "blocks": [
@@ -76921,77 +76921,77 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46B52",
+          "target": "SKSSZHPZTeleporterMap_Frame00",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46B66",
+          "target": "SKSSZHPZTeleporterMap_Frame01",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46B6E",
+          "target": "SKSSZHPZTeleporterMap_Frame02",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46B76",
+          "target": "SKSSZHPZTeleporterMap_Frame03",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46BA8",
+          "target": "SKSSZHPZTeleporterMap_Frame04",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46BDA",
+          "target": "SKSSZHPZTeleporterMap_Frame05",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46C0C",
+          "target": "SKSSZHPZTeleporterMap_Frame06",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46C3E",
+          "target": "SKSSZHPZTeleporterMap_Frame07",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46C70",
+          "target": "SKSSZHPZTeleporterMap_Frame08",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46CA2",
+          "target": "SKSSZHPZTeleporterMap_Frame09",
           "base": "Map_SSZHPZTeleporter_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_46CD4",
+          "target": "SKSSZHPZTeleporterMap_Frame0A",
           "base": "Map_SSZHPZTeleporter_"
         },
         {

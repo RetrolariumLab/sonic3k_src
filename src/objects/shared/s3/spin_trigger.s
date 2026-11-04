@@ -12,70 +12,70 @@ Obj_AutoSpin:
                 move.w  #$280,priority(a0)
                 move.b  subtype(a0),d0
                 btst    #2,d0
-                beq.s   loc_1C4BA
+                beq.s   S3AutoRoll_InitXFrameAndP1Side
                 andi.w  #7,d0
                 move.b  d0,mapping_frame(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  word_1C4B2(pc,d0.w),$32(a0)
+                move.w  S3AutoRoll_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  y_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1C498
+                bhs.s   S3AutoRoll_InitializePlayerTwoYSideLatch
                 move.b  #1,$34(a0)
 
-loc_1C498:
+S3AutoRoll_InitializePlayerTwoYSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1C4A8
+                bhs.s   S3AutoRoll_InstallYHandler
                 move.b  #1,$35(a0)
 
-loc_1C4A8:
-                move.l  #loc_1C5FA,(a0)
-                bra.w   loc_1C5FA
+S3AutoRoll_InstallYHandler:
+                move.l  #S3AutoRoll_CheckPlayersCrossingY,(a0)
+                bra.w   S3AutoRoll_CheckPlayersCrossingY
 ; ---------------------------------------------------------------------------
-word_1C4B2:
+S3AutoRoll_PerpendicularHalfSpanWords:
                 dc.w    $20,   $40,   $80,  $100
 ; ---------------------------------------------------------------------------
 
-loc_1C4BA:
+S3AutoRoll_InitXFrameAndP1Side:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_1C4B2(pc,d0.w),$32(a0)
+                move.w  S3AutoRoll_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  x_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1C4DE
+                bhs.s   S3AutoRoll_InitializePlayerTwoXSideLatch
                 move.b  #1,$34(a0)
 
-loc_1C4DE:
+S3AutoRoll_InitializePlayerTwoXSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1C4EE
+                bhs.s   S3AutoRoll_InstallXHandler
                 move.b  #1,$35(a0)
 
-loc_1C4EE:
-                move.l  #loc_1C4F4,(a0)
+S3AutoRoll_InstallXHandler:
+                move.l  #S3AutoRoll_CheckPlayersCrossingX,(a0)
 
-loc_1C4F4:
+S3AutoRoll_CheckPlayersCrossingX:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1C5BC
+                bne.w   S3AutoRoll_FinishXVisibilityByProfile
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   UpdateAutoRollOnXCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.w   loc_1C5BC
+                beq.w   S3AutoRoll_FinishXVisibilityByProfile
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateAutoRollOnXCrossing:
                 tst.b   (a2)+
-                bne.s   loc_1C56E
+                bne.s   S3AutoRoll_LatchNegativeXAndCheckSpan
                 cmp.w   x_pos(a1),d1
-                bhi.w   loc_1C5BC
+                bhi.w   S3AutoRoll_FinishXVisibilityByProfile
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -84,29 +84,29 @@ UpdateAutoRollOnXCrossing:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.s   loc_1C5BC
+                blo.s   S3AutoRoll_FinishXVisibilityByProfile
                 cmp.w   d3,d4
-                bhs.s   loc_1C5BC
+                bhs.s   S3AutoRoll_FinishXVisibilityByProfile
                 btst    #0,render_flags(a0)
-                bne.s   loc_1C566
+                bne.s   S3AutoRoll_ReleaseForcedRollPositiveX
                 move.w  #$580,ground_vel(a1)
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1C564
+                bpl.s   S3AutoRoll_JoinPositiveXRollConversion
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1C564:
-                bra.s   loc_1C5CA
+S3AutoRoll_JoinPositiveXRollConversion:
+                bra.s   S3AutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1C566:
+S3AutoRoll_ReleaseForcedRollPositiveX:
                 move.b  #0,spin_dash_flag(a1)
-                bra.s   loc_1C5BC
+                bra.s   S3AutoRoll_FinishXVisibilityByProfile
 ; ---------------------------------------------------------------------------
 
-loc_1C56E:
+S3AutoRoll_LatchNegativeXAndCheckSpan:
                 cmp.w   x_pos(a1),d1
-                bls.s   loc_1C5BC
+                bls.s   S3AutoRoll_FinishXVisibilityByProfile
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -115,37 +115,37 @@ loc_1C56E:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blo.s   loc_1C5BC
+                blo.s   S3AutoRoll_FinishXVisibilityByProfile
                 cmp.w   d3,d4
-                bhs.s   loc_1C5BC
+                bhs.s   S3AutoRoll_FinishXVisibilityByProfile
                 btst    #0,render_flags(a0)
-                beq.s   loc_1C5B6
+                beq.s   S3AutoRoll_ReleaseForcedRollNegativeX
                 move.w  #-$580,ground_vel(a1)
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1C5B4
+                bpl.s   S3AutoRoll_JoinNegativeXRollConversion
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1C5B4:
-                bra.s   loc_1C5CA
+S3AutoRoll_JoinNegativeXRollConversion:
+                bra.s   S3AutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1C5B6:
+S3AutoRoll_ReleaseForcedRollNegativeX:
                 move.b  #0,spin_dash_flag(a1)
 
-loc_1C5BC:
+S3AutoRoll_FinishXVisibilityByProfile:
                 tst.w   (Debug_mode_flag).w
                 beq.w   Delete_Sprite_If_Not_In_Range
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_1C5CA:
+S3AutoRoll_CheckAlreadyRolling:
                 btst    #Status_Roll,status(a1)
-                beq.s   loc_1C5D4
+                beq.s   S3AutoRoll_SetRollGeometryAndSound
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1C5D4:
+S3AutoRoll_SetRollGeometryAndSound:
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -158,24 +158,24 @@ loc_1C5D4:
 
 ; ---------------------------------------------------------------------------
 
-loc_1C5FA:
+S3AutoRoll_CheckPlayersCrossingY:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1C6F2
+                bne.w   S3AutoRoll_FinishYVisibilityByProfile
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
                 bsr.s   UpdateAutoRollOnYCrossing
                 lea     (Player_2).w,a1
                 cmpi.w  #4,(Tails_CPU_routine).w
-                beq.w   loc_1C6F2
+                beq.w   S3AutoRoll_FinishYVisibilityByProfile
 
 ; =============== S U B R O U T I N E =======================================
 
 UpdateAutoRollOnYCrossing:
                 tst.b   (a2)+
-                bne.s   loc_1C694
+                bne.s   S3AutoRoll_LatchNegativeYAndCheckSpan
                 cmp.w   y_pos(a1),d1
-                bhi.w   loc_1C6F2
+                bhi.w   S3AutoRoll_FinishYVisibilityByProfile
                 move.b  #1,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -184,36 +184,37 @@ UpdateAutoRollOnYCrossing:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blo.w   loc_1C6F2
+                blo.w   S3AutoRoll_FinishYVisibilityByProfile
                 cmp.w   d3,d4
-                bhs.w   loc_1C6F2
+                bhs.w   S3AutoRoll_FinishYVisibilityByProfile
                 btst    #0,render_flags(a0)
-                bne.s   loc_1C68C
+                bne.s   S3AutoRoll_ReleaseForcedRollPositiveY
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1C668
+                bpl.s   S3AutoRoll_AlignPositiveYRoll
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1C668:
+; Subtype bit 6 clears InAir and sets the vertical angle to $40
+S3AutoRoll_AlignPositiveYRoll:
                 btst    #6,subtype(a0)
-                beq.s   loc_1C688
+                beq.s   S3AutoRoll_JoinPositiveYRollConversion
                 bclr    #Status_InAir,status(a1)
                 move.b  #$40,angle(a1)
                 move.w  y_vel(a1),ground_vel(a1)
                 move.w  #0,x_vel(a1)
 
-loc_1C688:
-                bra.w   loc_1C5CA
+S3AutoRoll_JoinPositiveYRollConversion:
+                bra.w   S3AutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1C68C:
+S3AutoRoll_ReleaseForcedRollPositiveY:
                 move.b  #0,spin_dash_flag(a1)
-                bra.s   loc_1C6F2
+                bra.s   S3AutoRoll_FinishYVisibilityByProfile
 ; ---------------------------------------------------------------------------
 
-loc_1C694:
+S3AutoRoll_LatchNegativeYAndCheckSpan:
                 cmp.w   y_pos(a1),d1
-                bls.s   loc_1C6F2
+                bls.s   S3AutoRoll_FinishYVisibilityByProfile
                 move.b  #0,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -222,30 +223,31 @@ loc_1C694:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blo.s   loc_1C6F2
+                blo.s   S3AutoRoll_FinishYVisibilityByProfile
                 cmp.w   d3,d4
-                bhs.s   loc_1C6F2
+                bhs.s   S3AutoRoll_FinishYVisibilityByProfile
                 btst    #0,render_flags(a0)
-                beq.s   loc_1C6EC
+                beq.s   S3AutoRoll_ReleaseForcedRollNegativeY
                 move.b  #1,spin_dash_flag(a1)
                 tst.b   subtype(a0)
-                bpl.s   loc_1C6D4
+                bpl.s   S3AutoRoll_AlignNegativeYRoll
                 move.b  #$81,spin_dash_flag(a1)
 
-loc_1C6D4:
+; Subtype bit 6 clears InAir and sets the vertical angle to $40
+S3AutoRoll_AlignNegativeYRoll:
                 btst    #6,subtype(a0)
-                beq.s   loc_1C6E8
+                beq.s   S3AutoRoll_JoinNegativeYRollConversion
                 bclr    #Status_InAir,status(a1)
                 move.b  #$40,angle(a1)
 
-loc_1C6E8:
-                bra.w   loc_1C5CA
+S3AutoRoll_JoinNegativeYRollConversion:
+                bra.w   S3AutoRoll_CheckAlreadyRolling
 ; ---------------------------------------------------------------------------
 
-loc_1C6EC:
+S3AutoRoll_ReleaseForcedRollNegativeY:
                 move.b  #0,spin_dash_flag(a1)
 
-loc_1C6F2:
+S3AutoRoll_FinishYVisibilityByProfile:
                 tst.w   (Debug_mode_flag).w
                 beq.w   Delete_Sprite_If_Not_In_Range
                 jmp     (Sprite_OnScreen_Test).l

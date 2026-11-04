@@ -42,22 +42,22 @@ InitCompetitionRetractingSpring:
                 move.b  subtype(a0),d0
                 lsr.w   #3,d0
                 andi.w  #$E,d0
-                move.w  off_22DA0(pc,d0.w),d0
-                jsr     off_22DA0(pc,d0.w)
+                move.w  SKSpring_RetractingOrientationOffsets(pc,d0.w),d0
+                jsr     SKSpring_RetractingOrientationOffsets(pc,d0.w)
                 move.w  #-$800,$30(a0)
                 rts
 ; End of function InitCompetitionRetractingSpring
 
 ; ---------------------------------------------------------------------------
-off_22DA0:
-                dc.w    Spring_Up-off_22DA0
-                dc.w    Spring_Horizontal-off_22DA0
-                dc.w    Spring_Down-off_22DA0
-                dc.w    Spring_Horizontal-off_22DA0
-                dc.w    Spring_Up-off_22DA0
-                dc.w    Spring_Down-off_22DA0
-                dc.w    Spring_Up-off_22DA0
-                dc.w    Spring_Down-off_22DA0
+SKSpring_RetractingOrientationOffsets:
+                dc.w    Spring_Up-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Horizontal-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Down-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Horizontal-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Up-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Down-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Up-SKSpring_RetractingOrientationOffsets
+                dc.w    Spring_Down-SKSpring_RetractingOrientationOffsets
 ; ---------------------------------------------------------------------------
 
 Spring_Horizontal:
@@ -76,10 +76,10 @@ Spring_Horizontal:
 
 Spring_Down:
                 tst.b   (Reverse_gravity_flag).w
-                bne.w   loc_22E96
+                bne.w   SKSpring_InstallGravitySelectedUpHandler
                 bset    #1,status(a0)
 
-loc_22DFC:
+SKSpring_InstallDownHandler:
                 move.b  #6,mapping_frame(a0)
                 move.l  #Obj_Spring_Down,(a0)
                 tst.w   (Competition_mode).w
@@ -95,14 +95,14 @@ Spring_UpDiag:
                 move.b  #7,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
                 cmpi.b  #2,(Current_zone).w
-                beq.s   loc_22E4A
+                beq.s   SKSpring_UseMGZMHZUpDiagonalArt
                 cmpi.b  #7,(Current_zone).w
-                bne.s   loc_22E50
+                bne.s   SKSpring_InstallUpDiagonalHandler
 
-loc_22E4A:
+SKSpring_UseMGZMHZUpDiagonalArt:
                 move.w  #make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
-loc_22E50:
+SKSpring_InstallUpDiagonalHandler:
                 move.l  #Obj_Spring_UpDiag,(a0)
                 bra.s   Spring_Common
 ; ---------------------------------------------------------------------------
@@ -112,14 +112,14 @@ Spring_DownDiag:
                 move.b  #$A,mapping_frame(a0)
                 move.w  #make_art_tile(ArtTile_DiagonalSpring,0,0),art_tile(a0)
                 cmpi.b  #2,(Current_zone).w
-                beq.s   loc_22E7A
+                beq.s   SKSpring_UseMGZMHZDownDiagonalArt
                 cmpi.b  #7,(Current_zone).w
-                bne.s   loc_22E80
+                bne.s   SKSpring_InstallDownDiagonalHandler
 
-loc_22E7A:
+SKSpring_UseMGZMHZDownDiagonalArt:
                 move.w  #make_art_tile(ArtTile_MGZMHZDiagonalSpring,0,0),art_tile(a0)
 
-loc_22E80:
+SKSpring_InstallDownDiagonalHandler:
                 bset    #1,status(a0)
                 move.l  #Obj_Spring_DownDiag,(a0)
                 bra.s   Spring_Common
@@ -127,9 +127,9 @@ loc_22E80:
 
 Spring_Up:
                 tst.b   (Reverse_gravity_flag).w
-                bne.w   loc_22DFC
+                bne.w   SKSpring_InstallDownHandler
 
-loc_22E96:
+SKSpring_InstallGravitySelectedUpHandler:
                 move.l  #Obj_Spring_Up,(a0)
                 tst.w   (Competition_mode).w
                 beq.s   Spring_Common
@@ -143,17 +143,17 @@ loc_22E96:
 Spring_Common:
                 move.b  subtype(a0),d0
                 andi.w  #2,d0
-                move.w  word_22EF0(pc,d0.w),$30(a0)
+                move.w  SKSpring_LaunchStrengthWords(pc,d0.w),$30(a0)
                 btst    #1,d0
-                beq.s   locret_22EEE
+                beq.s   SKSpring_InitReturn
                 move.l  #Map_Spring2,mappings(a0)
                 tst.w   (Competition_mode).w
-                beq.s   locret_22EEE
+                beq.s   SKSpring_InitReturn
                 move.l  #Map_Spring3,mappings(a0)
 
-locret_22EEE:
+SKSpring_InitReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_22EF0:
+SKSpring_LaunchStrengthWords:
                 dc.w    -$1000
                 dc.w    -$A00

@@ -12,65 +12,65 @@ Obj_PathSwap:
                 move.w  #$280,priority(a0)
                 move.b  subtype(a0),d0
                 btst    #2,d0
-                beq.s   loc_1B050
+                beq.s   S3PathSwap_InitXFrameAndP1Side
                 andi.w  #7,d0
                 move.b  d0,mapping_frame(a0)
                 andi.w  #3,d0
                 add.w   d0,d0
-                move.w  word_1B048(pc,d0.w),$32(a0)
+                move.w  S3PathSwap_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  y_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1B01A
+                bhs.s   S3PathSwap_InitializePlayerTwoYSideLatch
                 move.b  #1,$34(a0)
 
-loc_1B01A:
+S3PathSwap_InitializePlayerTwoYSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   y_pos(a1),d1
-                bhs.s   loc_1B02A
+                bhs.s   S3PathSwap_InstallYCrossingHandlerByMode
                 move.b  #1,$35(a0)
 
-loc_1B02A:
-                move.l  #loc_1B208,(a0)
+S3PathSwap_InstallYCrossingHandlerByMode:
+                move.l  #S3PathSwap_CheckNormalYCrossings,(a0)
                 tst.w   (Competition_mode).w
-                beq.w   loc_1B208
-                move.l  #loc_1B232,(a0)
+                beq.w   S3PathSwap_CheckNormalYCrossings
+                move.l  #S3PathSwap_CheckCompetitionYCrossings,(a0)
                 move.w  #make_art_tile(ArtTile_2PArt_3+$C,3,0),art_tile(a0)
-                bra.w   loc_1B232
+                bra.w   S3PathSwap_CheckCompetitionYCrossings
 ; ---------------------------------------------------------------------------
-word_1B048:
+S3PathSwap_PerpendicularHalfSpanWords:
                 dc.w    $20,   $40,   $80,  $100
 ; ---------------------------------------------------------------------------
 
-loc_1B050:
+S3PathSwap_InitXFrameAndP1Side:
                 andi.w  #3,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_1B048(pc,d0.w),$32(a0)
+                move.w  S3PathSwap_PerpendicularHalfSpanWords(pc,d0.w),$32(a0)
                 move.w  x_pos(a0),d1
                 lea     (Player_1).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1B074
+                bhs.s   S3PathSwap_InitializePlayerTwoXSideLatch
                 move.b  #1,$34(a0)
 
-loc_1B074:
+S3PathSwap_InitializePlayerTwoXSideLatch:
                 lea     (Player_2).w,a1
                 cmp.w   x_pos(a1),d1
-                bhs.s   loc_1B084
+                bhs.s   S3PathSwap_InstallXCrossingHandlerByMode
                 move.b  #1,$35(a0)
 
-loc_1B084:
-                move.l  #loc_1B09E,(a0)
+S3PathSwap_InstallXCrossingHandlerByMode:
+                move.l  #S3PathSwap_CheckNormalXCrossings,(a0)
                 tst.w   (Competition_mode).w
-                beq.s   loc_1B09E
-                move.l  #loc_1B0C8,(a0)
+                beq.s   S3PathSwap_CheckNormalXCrossings
+                move.l  #S3PathSwap_CheckCompetitionXCrossings,(a0)
                 move.w  #make_art_tile(ArtTile_2PArt_3+$C,3,0),art_tile(a0)
-                bra.s   loc_1B0C8
+                bra.s   S3PathSwap_CheckCompetitionXCrossings
 ; ---------------------------------------------------------------------------
 
-loc_1B09E:
+S3PathSwap_CheckNormalXCrossings:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1B0BA
+                bne.w   S3PathSwap_FinishNormalXVisibility
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -78,13 +78,14 @@ loc_1B09E:
                 lea     (Player_2).w,a1
                 bsr.s   SwitchPlayerPathOnXCrossing
 
-loc_1B0BA:
+S3PathSwap_FinishNormalXVisibility:
                 tst.w   (Debug_mode_flag).w
                 beq.w   Delete_Sprite_If_Not_In_Range
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_1B0C8:
+; Run the crossing worker for both players and the Breathing_bubbles slot
+S3PathSwap_CheckCompetitionXCrossings:
                 move.w  x_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -101,9 +102,9 @@ loc_1B0C8:
 
 SwitchPlayerPathOnXCrossing:
                 tst.b   (a2)+
-                bne.w   loc_1B182
+                bne.w   S3PathSwap_LatchNegativeXAndCheckSpan
                 cmp.w   x_pos(a1),d1
-                bhi.w   locret_1B206
+                bhi.w   S3PathSwap_ReturnFromXCrossingCheck
                 move.b  #1,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -112,43 +113,43 @@ SwitchPlayerPathOnXCrossing:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1B206
+                blt.w   S3PathSwap_ReturnFromXCrossingCheck
                 cmp.w   d3,d4
-                bge.w   locret_1B206
+                bge.w   S3PathSwap_ReturnFromXCrossingCheck
                 move.b  subtype(a0),d0
-                bpl.s   loc_1B132
+                bpl.s   S3PathSwap_MeasurePositiveXCrossing
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1B206
+                bne.w   S3PathSwap_ReturnFromXCrossingCheck
 
-loc_1B132:
+S3PathSwap_MeasurePositiveXCrossing:
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1B13C
+                bcc.s   S3PathSwap_ApplyPositiveXCollisionPath
                 neg.w   d2
 
-loc_1B13C:
+S3PathSwap_ApplyPositiveXCollisionPath:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1B206
+                bhs.w   S3PathSwap_ReturnFromXCrossingCheck
                 btst    #0,render_flags(a0)
-                bne.s   loc_1B16A
+                bne.s   S3PathSwap_ApplyPositiveXTilePriority
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
                 btst    #3,d0
-                beq.s   loc_1B16A
+                beq.s   S3PathSwap_ApplyPositiveXTilePriority
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1B16A:
+S3PathSwap_ApplyPositiveXTilePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #5,d0
-                beq.w   locret_1B206
+                beq.w   S3PathSwap_ReturnFromXCrossingCheck
                 ori.w   #high_priority,art_tile(a1)
-                bra.w   locret_1B206
+                bra.w   S3PathSwap_ReturnFromXCrossingCheck
 ; ---------------------------------------------------------------------------
 
-loc_1B182:
+S3PathSwap_LatchNegativeXAndCheckSpan:
                 cmp.w   x_pos(a1),d1
-                bls.w   locret_1B206
+                bls.w   S3PathSwap_ReturnFromXCrossingCheck
                 move.b  #0,-1(a2)
                 move.w  y_pos(a0),d2
                 move.w  d2,d3
@@ -157,47 +158,47 @@ loc_1B182:
                 add.w   d4,d3
                 move.w  y_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1B206
+                blt.w   S3PathSwap_ReturnFromXCrossingCheck
                 cmp.w   d3,d4
-                bge.w   locret_1B206
+                bge.w   S3PathSwap_ReturnFromXCrossingCheck
                 move.b  subtype(a0),d0
-                bpl.s   loc_1B1BE
+                bpl.s   S3PathSwap_MeasureNegativeXCrossing
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1B206
+                bne.w   S3PathSwap_ReturnFromXCrossingCheck
 
-loc_1B1BE:
+S3PathSwap_MeasureNegativeXCrossing:
                 move.w  x_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1B1C8
+                bcc.s   S3PathSwap_ApplyNegativeXCollisionPath
                 neg.w   d2
 
-loc_1B1C8:
+S3PathSwap_ApplyNegativeXCollisionPath:
                 cmpi.w  #$40,d2
-                bhs.s   locret_1B206
+                bhs.s   S3PathSwap_ReturnFromXCrossingCheck
                 btst    #0,render_flags(a0)
-                bne.s   loc_1B1F4
+                bne.s   S3PathSwap_ApplyNegativeXTilePriority
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
                 btst    #4,d0
-                beq.s   loc_1B1F4
+                beq.s   S3PathSwap_ApplyNegativeXTilePriority
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1B1F4:
+S3PathSwap_ApplyNegativeXTilePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #6,d0
-                beq.s   locret_1B206
+                beq.s   S3PathSwap_ReturnFromXCrossingCheck
                 ori.w   #high_priority,art_tile(a1)
 
-locret_1B206:
+S3PathSwap_ReturnFromXCrossingCheck:
                 rts
 ; End of function SwitchPlayerPathOnXCrossing
 
 ; ---------------------------------------------------------------------------
 
-loc_1B208:
+S3PathSwap_CheckNormalYCrossings:
                 tst.w   (Debug_placement_mode).w
-                bne.w   loc_1B224
+                bne.w   S3PathSwap_FinishNormalYVisibility
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -205,13 +206,14 @@ loc_1B208:
                 lea     (Player_2).w,a1
                 bsr.s   SwitchPlayerPathOnYCrossing
 
-loc_1B224:
+S3PathSwap_FinishNormalYVisibility:
                 tst.w   (Debug_mode_flag).w
                 beq.w   Delete_Sprite_If_Not_In_Range
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_1B232:
+; Run the crossing worker for both players and the Breathing_bubbles slot
+S3PathSwap_CheckCompetitionYCrossings:
                 move.w  y_pos(a0),d1
                 lea     $34(a0),a2
                 lea     (Player_1).w,a1
@@ -228,9 +230,9 @@ loc_1B232:
 
 SwitchPlayerPathOnYCrossing:
                 tst.b   (a2)+
-                bne.w   loc_1B2EC
+                bne.w   S3PathSwap_LatchNegativeYAndCheckSpan
                 cmp.w   y_pos(a1),d1
-                bhi.w   locret_1B370
+                bhi.w   S3PathSwap_ReturnFromYCrossingCheck
                 move.b  #1,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -239,43 +241,43 @@ SwitchPlayerPathOnYCrossing:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1B370
+                blt.w   S3PathSwap_ReturnFromYCrossingCheck
                 cmp.w   d3,d4
-                bge.w   locret_1B370
+                bge.w   S3PathSwap_ReturnFromYCrossingCheck
                 move.b  subtype(a0),d0
-                bpl.s   loc_1B29C
+                bpl.s   S3PathSwap_MeasurePositiveYCrossing
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1B370
+                bne.w   S3PathSwap_ReturnFromYCrossingCheck
 
-loc_1B29C:
+S3PathSwap_MeasurePositiveYCrossing:
                 move.w  y_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1B2A6
+                bcc.s   S3PathSwap_ApplyPositiveYCollisionPath
                 neg.w   d2
 
-loc_1B2A6:
+S3PathSwap_ApplyPositiveYCollisionPath:
                 cmpi.w  #$40,d2
-                bhs.w   locret_1B370
+                bhs.w   S3PathSwap_ReturnFromYCrossingCheck
                 btst    #0,render_flags(a0)
-                bne.s   loc_1B2D4
+                bne.s   S3PathSwap_ApplyPositiveYTilePriority
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
                 btst    #3,d0
-                beq.s   loc_1B2D4
+                beq.s   S3PathSwap_ApplyPositiveYTilePriority
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1B2D4:
+S3PathSwap_ApplyPositiveYTilePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #5,d0
-                beq.w   locret_1B370
+                beq.w   S3PathSwap_ReturnFromYCrossingCheck
                 ori.w   #high_priority,art_tile(a1)
-                bra.w   locret_1B370
+                bra.w   S3PathSwap_ReturnFromYCrossingCheck
 ; ---------------------------------------------------------------------------
 
-loc_1B2EC:
+S3PathSwap_LatchNegativeYAndCheckSpan:
                 cmp.w   y_pos(a1),d1
-                bls.w   locret_1B370
+                bls.w   S3PathSwap_ReturnFromYCrossingCheck
                 move.b  #0,-1(a2)
                 move.w  x_pos(a0),d2
                 move.w  d2,d3
@@ -284,39 +286,39 @@ loc_1B2EC:
                 add.w   d4,d3
                 move.w  x_pos(a1),d4
                 cmp.w   d2,d4
-                blt.w   locret_1B370
+                blt.w   S3PathSwap_ReturnFromYCrossingCheck
                 cmp.w   d3,d4
-                bge.w   locret_1B370
+                bge.w   S3PathSwap_ReturnFromYCrossingCheck
                 move.b  subtype(a0),d0
-                bpl.s   loc_1B328
+                bpl.s   S3PathSwap_MeasureNegativeYCrossing
                 btst    #Status_InAir,status(a1)
-                bne.w   locret_1B370
+                bne.w   S3PathSwap_ReturnFromYCrossingCheck
 
-loc_1B328:
+S3PathSwap_MeasureNegativeYCrossing:
                 move.w  y_pos(a1),d2
                 sub.w   d1,d2
-                bcc.s   loc_1B332
+                bcc.s   S3PathSwap_ApplyNegativeYCollisionPath
                 neg.w   d2
 
-loc_1B332:
+S3PathSwap_ApplyNegativeYCollisionPath:
                 cmpi.w  #$40,d2
-                bhs.s   locret_1B370
+                bhs.s   S3PathSwap_ReturnFromYCrossingCheck
                 btst    #0,render_flags(a0)
-                bne.s   loc_1B35E
+                bne.s   S3PathSwap_ApplyNegativeYTilePriority
                 move.b  #$C,top_solid_bit(a1)
                 move.b  #$D,lrb_solid_bit(a1)
                 btst    #4,d0
-                beq.s   loc_1B35E
+                beq.s   S3PathSwap_ApplyNegativeYTilePriority
                 move.b  #$E,top_solid_bit(a1)
                 move.b  #$F,lrb_solid_bit(a1)
 
-loc_1B35E:
+S3PathSwap_ApplyNegativeYTilePriority:
                 andi.w  #drawing_mask,art_tile(a1)
                 btst    #6,d0
-                beq.s   locret_1B370
+                beq.s   S3PathSwap_ReturnFromYCrossingCheck
                 ori.w   #high_priority,art_tile(a1)
 
-locret_1B370:
+S3PathSwap_ReturnFromYCrossingCheck:
                 rts
 ; End of function SwitchPlayerPathOnYCrossing
 
