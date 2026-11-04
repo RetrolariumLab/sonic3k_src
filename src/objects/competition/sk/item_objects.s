@@ -28,7 +28,7 @@ loc_363B4:
                 move.l  #loc_363D0,(a0)
 
 loc_363D0:
-                bsr.s   CompetitionItemSKConsumePickupPlayerContacts
+                bsr.s   SKCompItem_ConsumePickupContacts
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asl.w   #3,d1
@@ -65,37 +65,39 @@ loc_36418:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKConsumePickupPlayerContacts:
+; Dispatch queued contact for Player 1 before Player 2
+SKCompItem_ConsumePickupContacts:
                 tst.b   collision_property(a0)
                 beq.s   locret_36462
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_36450
-                bsr.s   CompetitionItemSKDispatchCollectedEffectByAnimation
+                bsr.s   SKCompItem_ApplyEffectFromAnim
 
 loc_36450:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_3645E
-                bsr.s   CompetitionItemSKDispatchCollectedEffectByAnimation
+                bsr.s   SKCompItem_ApplyEffectFromAnim
 
 loc_3645E:
                 clr.b   collision_property(a0)
 
 locret_36462:
                 rts
-; End of function CompetitionItemSKConsumePickupPlayerContacts
+; End of function SKCompItem_ConsumePickupContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKDispatchCollectedEffectByAnimation:
+; Animation selects one of seven effects. Index 7 is neutral
+SKCompItem_ApplyEffectFromAnim:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
                 move.w  off_36476(pc,d0.w),d0
                 jsr     off_36476(pc,d0.w)
                 rts
-; End of function CompetitionItemSKDispatchCollectedEffectByAnimation
+; End of function SKCompItem_ApplyEffectFromAnim
 
 ; ---------------------------------------------------------------------------
 off_36476:
@@ -130,7 +132,7 @@ loc_364BE:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -155,7 +157,7 @@ loc_36510:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -210,7 +212,7 @@ loc_365CE:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -219,7 +221,7 @@ loc_365E8:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_36A1A,d1
                 moveq   #8,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 cmpa.w  #Player_1,a2
                 bne.s   loc_3660C
                 jmp     (GiveRing).l
@@ -258,7 +260,7 @@ loc_36652:
                 clr.b   collision_property(a0)
                 move.l  #loc_366B6,d1
                 moveq   #5,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 bne.s   locret_36674
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -272,7 +274,7 @@ loc_36676:
                 clr.b   collision_property(a0)
                 move.l  #loc_366BE,d1
                 moveq   #6,d2
-                bsr.w   CompetitionItemSKClonePrefixWithHandlerAndAnimation
+                bsr.w   SKCompItem_TryCloneEffect
                 bne.s   locret_36698
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -335,13 +337,13 @@ loc_3670C:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_36720
-                bsr.s   CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
+                bsr.s   SKCompItem_TryUpwardFlipLaunch
 
 loc_36720:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_3672E
-                bsr.s   CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
+                bsr.s   SKCompItem_TryUpwardFlipLaunch
 
 loc_3672E:
                 clr.b   collision_property(a0)
@@ -364,7 +366,8 @@ loc_36758:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch:
+; Compare the collision-plane word and use the player's facing for the flip
+SKCompItem_TryUpwardFlipLaunch:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_3676A
@@ -391,7 +394,7 @@ loc_3676A:
 loc_367BA:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch
+; End of function SKCompItem_TryUpwardFlipLaunch
 
 ; ---------------------------------------------------------------------------
 
@@ -401,13 +404,13 @@ loc_367C2:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_367D6
-                bsr.s   CompetitionItemSKBeginGroundedMomentumTrap
+                bsr.s   SKCompItem_TryGroundMomentumTrap
 
 loc_367D6:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_367E4
-                bsr.s   CompetitionItemSKBeginGroundedMomentumTrap
+                bsr.s   SKCompItem_TryGroundMomentumTrap
 
 loc_367E4:
                 clr.b   collision_property(a0)
@@ -450,7 +453,8 @@ loc_36840:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKBeginGroundedMomentumTrap:
+; Double ground inertia and force the running pose. The trap owns the input lock until release
+SKCompItem_TryGroundMomentumTrap:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 bne.s   locret_368A8
@@ -482,7 +486,7 @@ loc_3688E:
 
 locret_368A8:
                 rts
-; End of function CompetitionItemSKBeginGroundedMomentumTrap
+; End of function SKCompItem_TryGroundMomentumTrap
 
 ; ---------------------------------------------------------------------------
 
@@ -492,19 +496,19 @@ loc_368AA:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_368BE
-                bsr.s   CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
+                bsr.s   SKCompRollingItem_ExplodeOnHit
 
 loc_368BE:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_368CC
-                bsr.s   CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
+                bsr.s   SKCompRollingItem_ExplodeOnHit
 
 loc_368CC:
                 clr.b   collision_property(a0)
 
 loc_368D0:
-                bsr.w   CompetitionItemSKMoveRollingHazardOnTerrainOrInAir
+                bsr.w   SKCompRollingItem_UpdateMovement
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
                 lsr.b   #5,d0
@@ -523,7 +527,8 @@ loc_368FA:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt:
+; Require matching collision planes, then enter the explosion animation and tail-call the standard hazard response
+SKCompRollingItem_ExplodeOnHit:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_36912
@@ -535,11 +540,12 @@ loc_36912:
                 move.b  #$B,anim(a0)
                 movea.l a2,a1
                 jmp     (HurtPlayerFromSolidHazard).l
-; End of function CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt
+; End of function SKCompRollingItem_ExplodeOnHit
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKMoveRollingHazardOnTerrainOrInAir:
+; Roll left on terrain or fall, wrap world coordinates and explode on left-wall penetration at a horizontal angle
+SKCompRollingItem_UpdateMovement:
                 btst    #1,status(a0)
                 bne.s   loc_36990
                 move.b  angle(a0),d0
@@ -636,11 +642,12 @@ loc_36A1A:
 
 loc_36A32:
                 jmp     (Draw_Sprite).l
-; End of function CompetitionItemSKMoveRollingHazardOnTerrainOrInAir
+; End of function SKCompRollingItem_UpdateMovement
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemSKClonePrefixWithHandlerAndAnimation:
+; Allocate after the current slot, copy the common object prefix and install the supplied handler and animation
+SKCompItem_TryCloneEffect:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_36A56
                 moveq   #subtype,d0
@@ -655,7 +662,7 @@ loc_36A44:
 
 locret_36A56:
                 rts
-; End of function CompetitionItemSKClonePrefixWithHandlerAndAnimation
+; End of function SKCompItem_TryCloneEffect
 
 ; ---------------------------------------------------------------------------
 Ani_2PItem:

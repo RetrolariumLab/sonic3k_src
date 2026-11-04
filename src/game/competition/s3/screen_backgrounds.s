@@ -154,16 +154,17 @@ DPZ_BackgroundEvent:
                 move.w  (Camera_X_pos_copy).w,d0
                 move.w  (Camera_X_pos_BG_copy).w,d1
                 moveq   #$1A,d2
-                bsr.s   S3CompFillUniformForegroundBackgroundScrollLines
+                bsr.s   S3Comp_FillUniformHScroll
                 move.w  (Camera_X_pos_P2_copy).w,d0
                 move.w  (Camera_X_pos_P2_BG_copy).w,d1
                 moveq   #$1C,d2
-                bsr.s   S3CompFillUniformForegroundBackgroundScrollLines
+                bsr.s   S3Comp_FillUniformHScroll
                 jmp     Update_VScrollValueP2(pc)
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CompFillUniformForegroundBackgroundScrollLines:
+; Pack negated foreground and background X into one long and repeat in groups of four lines
+S3Comp_FillUniformHScroll:
                 neg.w   d0
                 swap    d0
                 neg.w   d1
@@ -176,7 +177,7 @@ loc_3A7C2:
                 move.l  d0,(a1)+
                 dbf     d2,loc_3A7C2
                 rts
-; End of function S3CompFillUniformForegroundBackgroundScrollLines
+; End of function S3Comp_FillUniformHScroll
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -192,10 +193,10 @@ ALZ_Deformation:
                 lea     AIZ2_ALZ_BGDeformDelta(pc),a4
                 lea     (HScroll_table).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
+                bsr.s   S3ALZ_BuildBandsAndAnimatedScroll
                 lea     (HScroll_table+$100).w,a1
                 move.w  (_unkEEBA).w,d0
-                bra.s   S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
+                bra.s   S3ALZ_BuildBandsAndAnimatedScroll
 ; End of function ALZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
@@ -214,7 +215,8 @@ S3ALZMapCameraYToThreeQuarterBackground:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable:
+; Build nine fixed bands and 63 animated line offsets with a terminal half-camera fixed-point entry
+S3ALZ_BuildBandsAndAnimatedScroll:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -266,7 +268,7 @@ loc_3A882:
                 move.w  d2,(a5)+
                 dbf     d1,loc_3A882
                 rts
-; End of function S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable
+; End of function S3ALZ_BuildBandsAndAnimatedScroll
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -279,10 +281,10 @@ BPZ_Deformation:
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 lea     (HScroll_table+$00E).w,a1
                 move.w  (Events_fg_1).w,d0
-                bsr.s   S3BPZBuildSevenReverseWrittenParallaxBands
+                bsr.s   S3BPZ_BuildReverseParallaxBands
                 lea     (HScroll_table+$10E).w,a1
                 move.w  (_unkEEBA).w,d0
-                bsr.s   S3BPZBuildSevenReverseWrittenParallaxBands
+                bsr.s   S3BPZ_BuildReverseParallaxBands
 ; End of function BPZ_Deformation
 
 ; =============== S U B R O U T I N E =======================================
@@ -296,7 +298,8 @@ S3BPZMapCameraYToHalfSpeedBackground:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3BPZBuildSevenReverseWrittenParallaxBands:
+; Write seven offsets in reverse order, ranging from one-eighth to one-half foreground X displacement
+S3BPZ_BuildReverseParallaxBands:
                 swap    d0
                 clr.w   d0
                 asr.l   #1,d0
@@ -311,24 +314,24 @@ loc_3A8CE:
                 sub.l   d1,d0
                 dbf     d2,loc_3A8CE
                 rts
-; End of function S3BPZBuildSevenReverseWrittenParallaxBands
+; End of function S3BPZ_BuildReverseParallaxBands
 
 ; =============== S U B R O U T I N E =======================================
 
 DPZ_Deformation:
                 move.w  (Camera_Y_pos_copy).w,d0
-                bsr.s   S3DPZMapCameraYToSixteenthSpeedBackground
+                bsr.s   S3DPZ_ScaleCameraYToBg
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Camera_Y_pos_P2_copy).w,d0
-                bsr.s   S3DPZMapCameraYToSixteenthSpeedBackground
+                bsr.s   S3DPZ_ScaleCameraYToBg
                 addi.w  #$80,d0
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 move.w  (Events_fg_1).w,d0
-                bsr.s   S3DPZDeriveHalfAndEighthForegroundXOffsets
+                bsr.s   S3DPZ_ScaleForegroundXOffsets
                 move.w  d0,(Camera_X_pos_BG_copy).w
                 move.w  d1,(Events_bg+$10).w
                 move.w  (_unkEEBA).w,d0
-                bsr.s   S3DPZDeriveHalfAndEighthForegroundXOffsets
+                bsr.s   S3DPZ_ScaleForegroundXOffsets
                 move.w  d0,(Camera_X_pos_P2_BG_copy).w
                 move.w  d1,(Events_bg+$12).w
                 rts
@@ -336,30 +339,31 @@ DPZ_Deformation:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3DPZMapCameraYToSixteenthSpeedBackground:
+S3DPZ_ScaleCameraYToBg:
                 subi.w  #$148,d0
                 asr.w   #4,d0
                 addq.w  #8,d0
                 rts
-; End of function S3DPZMapCameraYToSixteenthSpeedBackground
+; End of function S3DPZ_ScaleCameraYToBg
 
 ; =============== S U B R O U T I N E =======================================
 
-S3DPZDeriveHalfAndEighthForegroundXOffsets:
+; Return half displacement in d0.w and one-eighth in d1.w
+S3DPZ_ScaleForegroundXOffsets:
                 asr.w   #1,d0
                 move.w  d0,d1
                 asr.w   #2,d1
                 rts
-; End of function S3DPZDeriveHalfAndEighthForegroundXOffsets
+; End of function S3DPZ_ScaleForegroundXOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
 CGZ_Deformation:
                 move.w  (Events_bg+$02).w,d0
-                bsr.s   S3CGZScaleNonnegativeLapHeightIntoBackgroundY
+                bsr.s   S3CGZ_ScaleLapHeightToBgY
                 move.w  d0,(Camera_Y_pos_BG_copy).w
                 move.w  (Events_bg+$06).w,d0
-                bsr.s   S3CGZScaleNonnegativeLapHeightIntoBackgroundY
+                bsr.s   S3CGZ_ScaleLapHeightToBgY
                 move.w  d0,(Camera_Y_pos_P2_BG_copy).w
                 lea     (HScroll_table+$00A).w,a1
                 move.w  (Events_fg_1).w,d0
@@ -371,7 +375,8 @@ CGZ_Deformation:
 
 ; =============== S U B R O U T I N E =======================================
 
-S3CGZScaleNonnegativeLapHeightIntoBackgroundY:
+; Clamp negative progress to zero and scale positive height by the unsigned lap-derived fraction
+S3CGZ_ScaleLapHeightToBgY:
                 bmi.s   loc_3A958
                 move.w  (Events_bg+$08).w,d1
                 mulu.w  d1,d0
@@ -382,7 +387,7 @@ S3CGZScaleNonnegativeLapHeightIntoBackgroundY:
 loc_3A958:
                 moveq   #0,d0
                 rts
-; End of function S3CGZScaleNonnegativeLapHeightIntoBackgroundY
+; End of function S3CGZ_ScaleLapHeightToBgY
 
 ; =============== S U B R O U T I N E =======================================
 

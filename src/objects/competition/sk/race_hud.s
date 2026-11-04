@@ -97,7 +97,7 @@ loc_37DB0:
                 lsl.w   #2,d1
                 move.l  d6,(a6,d1.w)
                 move.l  $14(a6),d5
-                jsr     CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes(pc)
+                jsr     SKCompGoal_AddPackedTimes(pc)
                 move.l  d6,(a5)
 
 loc_37DD0:

@@ -4673,7 +4673,7 @@
       "responsibility": "Competition zone screen setup, background events, per-zone deformation and callback catalogs.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 488,
+      "physical_lines": 493,
       "origin": {
         "commit": "09151d1cb7de39457227feda6bd7e68a88021a86",
         "path": "s3.s",
@@ -20225,7 +20225,7 @@
       "responsibility": "Balloon Park balloon motion, player bounce and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 87,
+      "physical_lines": 88,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20435,7 +20435,7 @@
       "responsibility": "Balloon Park elephant-block movement, player collision and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 122,
+      "physical_lines": 123,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20480,7 +20480,7 @@
       "responsibility": "Competition goal marker activation, race lap accounting and lap number sprites.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 395,
+      "physical_lines": 399,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20520,7 +20520,7 @@
       "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 664,
+      "physical_lines": 671,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20560,7 +20560,7 @@
       "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 360,
+      "physical_lines": 362,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "s3.s",
@@ -20666,7 +20666,7 @@
       "responsibility": "Competition triangle bumper variants, collision and bounce response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 135,
+      "physical_lines": 136,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "s3.s",
@@ -20711,7 +20711,7 @@
       "responsibility": "Balloon Park balloon motion, player bounce and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 87,
+      "physical_lines": 88,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20881,7 +20881,7 @@
       "responsibility": "Balloon Park elephant-block movement, player collision and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 122,
+      "physical_lines": 123,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20916,7 +20916,7 @@
       "responsibility": "Competition goal marker activation, race lap accounting and lap number sprites.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 395,
+      "physical_lines": 399,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20946,7 +20946,7 @@
       "responsibility": "Competition item selection, collection, effects, object motion and mapping resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 664,
+      "physical_lines": 671,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -20976,7 +20976,7 @@
       "responsibility": "Competition neon display animation, start countdown, race state and finish presentation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 360,
+      "physical_lines": 362,
       "origin": {
         "commit": "7cfdadcea16038302a35278b3ab4d04253f3169a",
         "path": "sonic3k.s",
@@ -21062,7 +21062,7 @@
       "responsibility": "Competition triangle bumper variants, collision and bounce response.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 135,
+      "physical_lines": 136,
       "origin": {
         "commit": "282c4cb1c6dbd31b8ff7357cf8bf7d8aba55377c",
         "path": "sonic3k.s",

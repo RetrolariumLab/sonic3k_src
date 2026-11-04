@@ -19,13 +19,13 @@ loc_35DB2:
                 lea     (Player_1).w,a1
                 bclr    #0,collision_property(a0)
                 beq.s   loc_35DC8
-                bsr.s   CompetitionSKBouncePlayerFromBalloonWithUpperConeBoost
+                bsr.s   SKCompBalloon_BouncePlayer
 
 loc_35DC8:
                 lea     (Player_2).w,a1
                 bclr    #1,collision_property(a0)
                 beq.s   loc_35DD6
-                bsr.s   CompetitionSKBouncePlayerFromBalloonWithUpperConeBoost
+                bsr.s   SKCompBalloon_BouncePlayer
 
 loc_35DD6:
                 clr.b   collision_property(a0)
@@ -33,7 +33,8 @@ loc_35DD6:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKBouncePlayerFromBalloonWithUpperConeBoost:
+; Upper-cone contact gives a stronger straight-up launch
+SKCompBalloon_BouncePlayer:
                 move.w  x_pos(a0),d1
                 move.w  y_pos(a0),d2
                 sub.w   x_pos(a1),d1
@@ -65,7 +66,7 @@ loc_35E2E:
                 clr.b   jumping(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function CompetitionSKBouncePlayerFromBalloonWithUpperConeBoost
+; End of function SKCompBalloon_BouncePlayer
 
 ; ---------------------------------------------------------------------------
 

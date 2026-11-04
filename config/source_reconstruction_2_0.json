@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 110
+    "commit_count": 111
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -707,9 +707,15 @@
       "commits": ["b40718f4aa26df2a4151aea0a78771bd2b5a4c56"]
     },
     {
-      "id": "current-shorten-L03-player",
+      "id": "change-58f70dc98809",
       "kind": "source_or_tooling",
       "summary": "Shorten 33 earlier player and collision entry points and document their recovery contracts.",
+      "commits": ["58f70dc9880933601187cf9bdbcb0d2b2596e91e"]
+    },
+    {
+      "id": "current-shorten-L04-competition",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 40 earlier Competition race, timing and item procedure names.",
       "commits": ["release-commit"]
     }
   ],

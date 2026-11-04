@@ -636,7 +636,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 166,
       "old": "sub_3A7BA",
-      "new": "S3CompFillUniformForegroundBackgroundScrollLines",
+      "new": "S3Comp_FillUniformHScroll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Pack negative foreground/background X offsets into one H-scroll LONG and repeat it in groups of four lines."
     },
@@ -652,7 +652,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 217,
       "old": "sub_3A81E",
-      "new": "S3ALZBuildBandParallaxAndAnimatedDeltaScrollTable",
+      "new": "S3ALZ_BuildBandsAndAnimatedScroll",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Build ALZ nine fixed-band scroll values,63 animated per-line offsets and terminal half-camera fixed-point entry for one player."
     },
@@ -668,7 +668,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 299,
       "old": "sub_3A8C2",
-      "new": "S3BPZBuildSevenReverseWrittenParallaxBands",
+      "new": "S3BPZ_BuildReverseParallaxBands",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Write seven BPZ horizontal parallax band offsets from one-eighth to one-half foreground displacement."
     },
@@ -676,7 +676,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 339,
       "old": "sub_3A912",
-      "new": "S3DPZMapCameraYToSixteenthSpeedBackground",
+      "new": "S3DPZ_ScaleCameraYToBg",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Map DPZ camera Y to a vertically anchored one-sixteenth background coordinate."
     },
@@ -684,7 +684,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 348,
       "old": "sub_3A91C",
-      "new": "S3DPZDeriveHalfAndEighthForegroundXOffsets",
+      "new": "S3DPZ_ScaleForegroundXOffsets",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Return DPZ half-speed background X and one-eighth auxiliary X from foreground displacement."
     },
@@ -692,7 +692,7 @@
       "source": "src/game/competition/s3/screen_backgrounds.s",
       "original_line": 374,
       "old": "sub_3A94C",
-      "new": "S3CGZScaleNonnegativeLapHeightIntoBackgroundY",
+      "new": "S3CGZ_ScaleLapHeightToBgY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Scale CGZ unwrapped vertical progress by lap-count-derived unsigned16-bit fraction, clamping negative progress to0."
     },
@@ -5460,7 +5460,7 @@
       "source": "src/objects/competition/s3/balloon.s",
       "original_line": 36,
       "old": "sub_35370",
-      "new": "CompetitionS3BouncePlayerFromBalloonWithUpperConeBoost",
+      "new": "S3CompBalloon_BouncePlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Bounce a touched player away from a Balloon Park balloon, using a stronger straight-up response in the upper contact cone."
     },
@@ -5468,7 +5468,7 @@
       "source": "src/objects/competition/s3/elephant_block.s",
       "original_line": 96,
       "old": "sub_352B4",
-      "new": "CompetitionS3OscillateElephantBlockExtensionFixedPoint",
+      "new": "S3CompElephant_TickExtension",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Advance the elephant block extension between zero and its subtype-scaled maximum in half-pixel fixed-point steps, changing direction at either endpoint."
     },
@@ -5476,7 +5476,7 @@
       "source": "src/objects/competition/s3/goal_and_laps.s",
       "original_line": 128,
       "old": "sub_3638E",
-      "new": "CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart",
+      "new": "S3CompGoal_TrackPlayerCrossing",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Process one player side transition across the goal line, maintain current/high-water laps and cumulative lap time, refresh items on new laps, and initiate the pre-start wrong-way reset."
     },
@@ -5484,7 +5484,7 @@
       "source": "src/objects/competition/s3/goal_and_laps.s",
       "original_line": 263,
       "old": "sub_364EC",
-      "new": "CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords",
+      "new": "S3CompGoal_ClearLapAndRunTimes",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Clear the two six-LONG lap timing work blocks and both displayed run totals, marking that no new top-three time-attack record has been assigned."
     },
@@ -5492,7 +5492,7 @@
       "source": "src/objects/competition/s3/goal_and_laps.s",
       "original_line": 278,
       "old": "sub_36508",
-      "new": "CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes",
+      "new": "S3CompGoal_AddPackedTimes",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Add two packed binary minute/second/centisecond LONGs with base100 fractional and base60 second carries, returning the normalized sum in d6."
     },
@@ -5500,7 +5500,7 @@
       "source": "src/objects/competition/s3/goal_and_laps.s",
       "original_line": 309,
       "old": "sub_3653C",
-      "new": "CompetitionGoalS3RearmOrbitingItemsFromLapSequence",
+      "new": "S3CompGoal_RearmOrbitingItems",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "When competition items are enabled, assign sequential effect indices and touch flags to orbiting item actors found by a literal after-increment object-slot scan."
     },
@@ -5508,7 +5508,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 68,
       "old": "sub_359CE",
-      "new": "CompetitionItemS3ConsumePickupPlayerContacts",
+      "new": "S3CompItem_ConsumePickupContacts",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Consume queued player-contact bits in P1-then-P2 order and dispatch the current competition item effect for each surviving bit."
     },
@@ -5516,7 +5516,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 91,
       "old": "sub_359F6",
-      "new": "CompetitionItemS3DispatchCollectedEffectByAnimation",
+      "new": "S3CompItem_ApplyEffectFromAnim",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Use the item animation index to apply one of seven competition pickup effects, with index7 as neutral/no-op."
     },
@@ -5524,7 +5524,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 367,
       "old": "sub_35CF0",
-      "new": "CompetitionItemS3ApplyPlaneMatchedUpwardFlipLaunch",
+      "new": "S3CompItem_TryUpwardFlipLaunch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Launch a touched player straight upward and start a facing-dependent visual flip when its collision-plane WORD matches the spawned item."
     },
@@ -5532,7 +5532,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 453,
       "old": "sub_35DDE",
-      "new": "CompetitionItemS3BeginGroundedMomentumTrap",
+      "new": "S3CompItem_TryGroundMomentumTrap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Double an eligible grounded player inertia, start the forced running pose and lock its input until the trap owner slows/releases it."
     },
@@ -5540,7 +5540,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 526,
       "old": "sub_35E98",
-      "new": "CompetitionItemS3ExplodeRollingHazardAndAttemptPlayerHurt",
+      "new": "S3CompRollingItem_ExplodeOnHit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Switch a plane-matched rolling item hazard into its explosion animation and tail-attempt ordinary spike-style player harm."
     },
@@ -5548,7 +5548,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 542,
       "old": "sub_35EB8",
-      "new": "CompetitionItemS3MoveRollingHazardOnTerrainOrInAir",
+      "new": "S3CompRollingItem_UpdateMovement",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Advance the left-moving rolling item on terrain or in falling motion, normalize world wrapping, and explode on a horizontal-angle left-wall penetration."
     },
@@ -5556,7 +5556,7 @@
       "source": "src/objects/competition/s3/item_objects.s",
       "original_line": 643,
       "old": "sub_35FCA",
-      "new": "CompetitionItemS3ClonePrefixWithHandlerAndAnimation",
+      "new": "S3CompItem_TryCloneEffect",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Attempt an object slot after the current item and clone its common prefix, replacing executable handler and animation for a transient item effect."
     },
@@ -5564,7 +5564,7 @@
       "source": "src/objects/competition/s3/neon_display.s",
       "original_line": 51,
       "old": "sub_36750",
-      "new": "CompetitionS3UpdateNeonRaceStartFinishAndProgression",
+      "new": "S3CompNeon_UpdateRaceState",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Drive the competition neon start/finish controller: begin timers at GO, mark finishers, wait or progress Grand Prix, and let a secondary display acknowledge late finishers."
     },
@@ -5572,7 +5572,7 @@
       "source": "src/objects/competition/s3/neon_display.s",
       "original_line": 271,
       "old": "sub_36998",
-      "new": "CompetitionS3SpawnNeonLateFinisherDisplay",
+      "new": "S3CompNeon_TrySpawnLateFinish",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Attempt a secondary neon actor in state3 so a race started by the first finisher can acknowledge a later finisher independently."
     },
@@ -5580,7 +5580,7 @@
       "source": "src/objects/competition/s3/neon_display.s",
       "original_line": 286,
       "old": "sub_369C2",
-      "new": "CompetitionS3InsertP1TimeAttackTopThreeAndSave",
+      "new": "S3CompTimeAttack_TrySaveP1Top3",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "For negative competition type, insert the current P1 run time and selected character into the per-zone top-three saved table and persist it."
     },
@@ -5588,7 +5588,7 @@
       "source": "src/objects/competition/s3/triangle_bumpers.s",
       "original_line": 70,
       "old": "sub_31FA6",
-      "new": "CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane",
+      "new": "S3CompTriangle_LaunchPlayer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Apply the active side of a competition triangle bumper: sideways/downward velocity, brief input lock, optional flips and optional collision-layer transfer."
     },
@@ -5596,7 +5596,7 @@
       "source": "src/objects/competition/sk/balloon.s",
       "original_line": 36,
       "old": "sub_35DDE",
-      "new": "CompetitionSKBouncePlayerFromBalloonWithUpperConeBoost",
+      "new": "SKCompBalloon_BouncePlayer",
       "profiles": ["sk"],
       "meaning": "Bounce a touched player away from a Balloon Park balloon, using a stronger straight-up response in the upper contact cone."
     },
@@ -5604,7 +5604,7 @@
       "source": "src/objects/competition/sk/elephant_block.s",
       "original_line": 96,
       "old": "sub_35D22",
-      "new": "CompetitionSKOscillateElephantBlockExtensionFixedPoint",
+      "new": "SKCompElephant_TickExtension",
       "profiles": ["sk"],
       "meaning": "Advance the elephant block extension between zero and its subtype-scaled maximum in half-pixel fixed-point steps, changing direction at either endpoint."
     },
@@ -5612,7 +5612,7 @@
       "source": "src/objects/competition/sk/goal_and_laps.s",
       "original_line": 128,
       "old": "sub_36DFC",
-      "new": "CompetitionGoalSKTrackPlayerCrossingLapAndWrongWayRestart",
+      "new": "SKCompGoal_TrackPlayerCrossing",
       "profiles": ["sk"],
       "meaning": "Process one player side transition across the goal line, maintain current/high-water laps and cumulative lap time, refresh items on new laps, and initiate the pre-start wrong-way reset."
     },
@@ -5620,7 +5620,7 @@
       "source": "src/objects/competition/sk/goal_and_laps.s",
       "original_line": 263,
       "old": "sub_36F5A",
-      "new": "CompetitionGoalSKClearBothLapTimeBlocksAndRunRecords",
+      "new": "SKCompGoal_ClearLapAndRunTimes",
       "profiles": ["sk"],
       "meaning": "Clear the two six-LONG lap timing work blocks and both displayed run totals, marking that no new top-three time-attack record has been assigned."
     },
@@ -5628,7 +5628,7 @@
       "source": "src/objects/competition/sk/goal_and_laps.s",
       "original_line": 278,
       "old": "sub_36F76",
-      "new": "CompetitionGoalSKAddPackedMinuteSecondCentisecondTimes",
+      "new": "SKCompGoal_AddPackedTimes",
       "profiles": ["sk"],
       "meaning": "Add two packed binary minute/second/centisecond LONGs with base100 fractional and base60 second carries, returning the normalized sum in d6."
     },
@@ -5636,7 +5636,7 @@
       "source": "src/objects/competition/sk/goal_and_laps.s",
       "original_line": 309,
       "old": "sub_36FAA",
-      "new": "CompetitionGoalSKRearmOrbitingItemsFromLapSequence",
+      "new": "SKCompGoal_RearmOrbitingItems",
       "profiles": ["sk"],
       "meaning": "When competition items are enabled, assign sequential effect indices and touch flags to orbiting item actors found by a literal after-increment object-slot scan."
     },
@@ -5644,7 +5644,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 68,
       "old": "sub_3643C",
-      "new": "CompetitionItemSKConsumePickupPlayerContacts",
+      "new": "SKCompItem_ConsumePickupContacts",
       "profiles": ["sk"],
       "meaning": "Consume queued player-contact bits in P1-then-P2 order and dispatch the current competition item effect for each surviving bit."
     },
@@ -5652,7 +5652,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 91,
       "old": "sub_36464",
-      "new": "CompetitionItemSKDispatchCollectedEffectByAnimation",
+      "new": "SKCompItem_ApplyEffectFromAnim",
       "profiles": ["sk"],
       "meaning": "Use the item animation index to apply one of seven competition pickup effects, with index7 as neutral/no-op."
     },
@@ -5660,7 +5660,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 367,
       "old": "sub_3675E",
-      "new": "CompetitionItemSKApplyPlaneMatchedUpwardFlipLaunch",
+      "new": "SKCompItem_TryUpwardFlipLaunch",
       "profiles": ["sk"],
       "meaning": "Launch a touched player straight upward and start a facing-dependent visual flip when its collision-plane WORD matches the spawned item."
     },
@@ -5668,7 +5668,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 453,
       "old": "sub_3684C",
-      "new": "CompetitionItemSKBeginGroundedMomentumTrap",
+      "new": "SKCompItem_TryGroundMomentumTrap",
       "profiles": ["sk"],
       "meaning": "Double an eligible grounded player inertia, start the forced running pose and lock its input until the trap owner slows/releases it."
     },
@@ -5676,7 +5676,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 526,
       "old": "sub_36906",
-      "new": "CompetitionItemSKExplodeRollingHazardAndAttemptPlayerHurt",
+      "new": "SKCompRollingItem_ExplodeOnHit",
       "profiles": ["sk"],
       "meaning": "Switch a plane-matched rolling item hazard into its explosion animation and tail-attempt ordinary spike-style player harm."
     },
@@ -5684,7 +5684,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 542,
       "old": "sub_36926",
-      "new": "CompetitionItemSKMoveRollingHazardOnTerrainOrInAir",
+      "new": "SKCompRollingItem_UpdateMovement",
       "profiles": ["sk"],
       "meaning": "Advance the left-moving rolling item on terrain or in falling motion, normalize world wrapping, and explode on a horizontal-angle left-wall penetration."
     },
@@ -5692,7 +5692,7 @@
       "source": "src/objects/competition/sk/item_objects.s",
       "original_line": 643,
       "old": "sub_36A38",
-      "new": "CompetitionItemSKClonePrefixWithHandlerAndAnimation",
+      "new": "SKCompItem_TryCloneEffect",
       "profiles": ["sk"],
       "meaning": "Attempt an object slot after the current item and clone its common prefix, replacing executable handler and animation for a transient item effect."
     },
@@ -5700,7 +5700,7 @@
       "source": "src/objects/competition/sk/neon_display.s",
       "original_line": 51,
       "old": "sub_371BE",
-      "new": "CompetitionSKUpdateNeonRaceStartFinishAndProgression",
+      "new": "SKCompNeon_UpdateRaceState",
       "profiles": ["sk"],
       "meaning": "Drive the competition neon start/finish controller: begin timers at GO, mark finishers, wait or progress Grand Prix, and let a secondary display acknowledge late finishers."
     },
@@ -5708,7 +5708,7 @@
       "source": "src/objects/competition/sk/neon_display.s",
       "original_line": 271,
       "old": "sub_37406",
-      "new": "CompetitionSKSpawnNeonLateFinisherDisplay",
+      "new": "SKCompNeon_TrySpawnLateFinish",
       "profiles": ["sk"],
       "meaning": "Attempt a secondary neon actor in state3 so a race started by the first finisher can acknowledge a later finisher independently."
     },
@@ -5716,7 +5716,7 @@
       "source": "src/objects/competition/sk/neon_display.s",
       "original_line": 286,
       "old": "sub_37430",
-      "new": "CompetitionSKInsertP1TimeAttackTopThreeAndSave",
+      "new": "SKCompTimeAttack_TrySaveP1Top3",
       "profiles": ["sk"],
       "meaning": "For negative competition type, insert the current P1 run time and selected character into the per-zone top-three saved table and persist it."
     },
@@ -5724,7 +5724,7 @@
       "source": "src/objects/competition/sk/triangle_bumpers.s",
       "original_line": 70,
       "old": "sub_32D16",
-      "new": "CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane",
+      "new": "SKCompTriangle_LaunchPlayer",
       "profiles": ["sk"],
       "meaning": "Apply the active side of a competition triangle bumper: sideways/downward velocity, brief input lock, optional flips and optional collision-layer transfer."
     },

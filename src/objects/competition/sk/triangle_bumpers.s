@@ -40,7 +40,7 @@ loc_32C92:
 loc_32CD4:
                 andi.b  #1,d1
                 bne.s   loc_32CDC
-                bsr.s   CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane
+                bsr.s   SKCompTriangle_LaunchPlayer
 
 loc_32CDC:
                 movem.l (sp)+,d1-d4
@@ -60,14 +60,15 @@ loc_32CDC:
 loc_32D0C:
                 andi.b  #1,d1
                 bne.s   locret_32D14
-                bsr.s   CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane
+                bsr.s   SKCompTriangle_LaunchPlayer
 
 locret_32D14:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane:
+; Apply a sideways and downward launch with brief input lock. Subtype controls the flips and collision-layer transfer
+SKCompTriangle_LaunchPlayer:
                 cmpi.b  #4,routine(a1)
                 blo.s   loc_32D20
                 rts
@@ -132,4 +133,4 @@ loc_32DD2:
                 bclr    #Status_RollJump,status(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function CompetitionSKLaunchFromTriangleWithSubtypeFlipAndPlane
+; End of function SKCompTriangle_LaunchPlayer

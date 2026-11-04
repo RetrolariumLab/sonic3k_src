@@ -33,7 +33,7 @@ loc_35C6C:
                 move.l  #loc_35C72,(a0)
 
 loc_35C72:
-                bsr.w   CompetitionSKOscillateElephantBlockExtensionFixedPoint
+                bsr.w   SKCompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
                 move.b  $34(a0),d1
@@ -63,7 +63,7 @@ loc_35CAC:
 ; ---------------------------------------------------------------------------
 
 loc_35CCA:
-                bsr.w   CompetitionSKOscillateElephantBlockExtensionFixedPoint
+                bsr.w   SKCompElephant_TickExtension
                 lea     sub2_x_pos(a0),a2
                 move.w  $30(a0),d0
                 move.b  $34(a0),d1
@@ -93,7 +93,8 @@ loc_35D04:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKOscillateElephantBlockExtensionFixedPoint:
+; Move by half a pixel per step and reverse at zero or the subtype-scaled maximum
+SKCompElephant_TickExtension:
                 tst.b   $3A(a0)
                 bne.s   loc_35D44
                 move.w  $38(a0),d0
@@ -115,7 +116,7 @@ loc_35D44:
 
 locret_35D58:
                 rts
-; End of function CompetitionSKOscillateElephantBlockExtensionFixedPoint
+; End of function SKCompElephant_TickExtension
 
 ; ---------------------------------------------------------------------------
 Map_BPZElephantBlock:

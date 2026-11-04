@@ -40,7 +40,7 @@ loc_31F22:
 loc_31F64:
                 andi.b  #1,d1
                 bne.s   loc_31F6C
-                bsr.s   CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane
+                bsr.s   S3CompTriangle_LaunchPlayer
 
 loc_31F6C:
                 movem.l (sp)+,d1-d4
@@ -60,14 +60,15 @@ loc_31F6C:
 loc_31F9C:
                 andi.b  #1,d1
                 bne.s   locret_31FA4
-                bsr.s   CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane
+                bsr.s   S3CompTriangle_LaunchPlayer
 
 locret_31FA4:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane:
+; Apply a sideways and downward launch with brief input lock. Subtype controls the flips and collision-layer transfer
+S3CompTriangle_LaunchPlayer:
                 cmpi.b  #4,routine(a1)
                 blo.s   loc_31FB0
                 rts
@@ -132,4 +133,4 @@ loc_32062:
                 bclr    #Status_RollJump,status(a1)
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function CompetitionS3LaunchFromTriangleWithSubtypeFlipAndPlane
+; End of function S3CompTriangle_LaunchPlayer

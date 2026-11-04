@@ -26,7 +26,7 @@ Obj_2PGoalMarker:
                 clr.l   (Timer_P2).w
                 clr.w   (Ring_count).w
                 clr.w   (Ring_count_P2).w
-                jsr     CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords(pc)
+                jsr     S3CompGoal_ClearLapAndRunTimes(pc)
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   loc_36276
                 move.l  #loc_37454,(a1)
@@ -67,13 +67,13 @@ loc_3627C:
                 lea     (Competition_lap_count_flag).w,a4
                 lea     (Timer).w,a5
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a6
-                bsr.w   CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
+                bsr.w   S3CompGoal_TrackPlayerCrossing
                 lea     (Player_2).w,a1
                 lea     (Competition_current_lap_2P).w,a3
                 lea     (Competition_lap_count_flag_P2).w,a4
                 lea     (Timer_P2).w,a5
                 lea     ((RAM_start+$7840)&$FFFFFF).l,a6
-                bsr.w   CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
+                bsr.w   S3CompGoal_TrackPlayerCrossing
                 lea     (Ani_2PGoalMarker).l,a1
                 jsr     (Animate_Sprite).l
                 move.w  $36(a0),(Competition_lap_count).w
@@ -114,7 +114,7 @@ loc_36352:
                 clr.l   (Timer_P2).w
                 clr.b   (Ctrl_1_locked).w
                 clr.b   (Ctrl_2_locked).w
-                jsr     CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords(pc)
+                jsr     S3CompGoal_ClearLapAndRunTimes(pc)
                 clr.w   (Events_bg+$14).w
                 move.l  #loc_3627C,(a0)
 
@@ -125,7 +125,8 @@ loc_3637C:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart:
+; Update lap high-water and cumulative time, rearm items on new laps and restart on a pre-start wrong-way crossing
+S3CompGoal_TrackPlayerCrossing:
                 tst.b   (a4)                            ; check the lap count flag
                 bne.w   loc_3648E                       ; if not equal to zero, branch
                 tst.b   (a2)+
@@ -165,7 +166,7 @@ loc_363D0:
                 lsl.w   #2,d0
                 move.l  (a6,d0.w),d5
                 move.l  $14(a6),d6
-                jsr     CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes(pc)
+                jsr     S3CompGoal_AddPackedTimes(pc)
                 move.l  d6,$14(a6)
                 clr.l   (a5)
 
@@ -176,7 +177,7 @@ loc_3640E:
                 bge.s   loc_3642A
                 move.w  $3A(a0),d0
                 andi.w  #$F,d0
-                bsr.w   CompetitionGoalS3RearmOrbitingItemsFromLapSequence
+                bsr.w   S3CompGoal_RearmOrbitingItems
                 addq.w  #2,$3A(a0)
 
 loc_3642A:
@@ -256,11 +257,12 @@ loc_364D4:
 
 locret_364EA:
                 rts
-; End of function CompetitionGoalS3TrackPlayerCrossingLapAndWrongWayRestart
+; End of function S3CompGoal_TrackPlayerCrossing
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords:
+; Clear both six-long timing blocks and displayed totals. Mark that no new top-three record was assigned
+S3CompGoal_ClearLapAndRunTimes:
                 lea     ((RAM_start+$7828)&$FFFFFF).l,a1
                 moveq   #bytesToLcnt($30),d0
 
@@ -271,11 +273,12 @@ CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords:
                 clr.l   (Competition_time_record_P2).w
                 st      (Competition_time_attack_new_top_record).w
                 rts
-; End of function CompetitionGoalS3ClearBothLapTimeBlocksAndRunRecords
+; End of function S3CompGoal_ClearLapAndRunTimes
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes:
+; Add the binary time fields with base-100 centisecond and base-60 second carries. Return the sum in d6
+S3CompGoal_AddPackedTimes:
                 add.b   d5,d6
                 moveq   #0,d3
                 cmpi.b  #100,d6
@@ -302,11 +305,12 @@ loc_3652E:
                 swap    d5
                 swap    d6
                 rts
-; End of function CompetitionGoalS3AddPackedMinuteSecondCentisecondTimes
+; End of function S3CompGoal_AddPackedTimes
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionGoalS3RearmOrbitingItemsFromLapSequence:
+; Use the lap sequence to assign effect indices and touch flags. The slot scan advances before each test
+S3CompGoal_RearmOrbitingItems:
                 tst.b   (Competition_items).w
                 bne.s   locret_3656A
                 lea     (byte_3656C).l,a4
@@ -326,7 +330,7 @@ loc_36566:
 
 locret_3656A:
                 rts
-; End of function CompetitionGoalS3RearmOrbitingItemsFromLapSequence
+; End of function S3CompGoal_RearmOrbitingItems
 
 ; ---------------------------------------------------------------------------
 byte_3656C:

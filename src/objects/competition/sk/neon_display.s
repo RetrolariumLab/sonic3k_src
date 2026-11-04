@@ -37,7 +37,7 @@ loc_371A8:
                 jsr     (Play_SFX).l
 
 loc_371AE:
-                bsr.s   CompetitionSKUpdateNeonRaceStartFinishAndProgression
+                bsr.s   SKCompNeon_UpdateRaceState
                 tst.w   (Events_bg+$14).w
                 bne.s   locret_371BC
                 jmp     (Draw_Sprite).l
@@ -48,7 +48,8 @@ locret_371BC:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKUpdateNeonRaceStartFinishAndProgression:
+; Start timing at GO and advance or wait on the Grand Prix results. A secondary display can acknowledge late finishers
+SKCompNeon_UpdateRaceState:
                 move.b  $3A(a0),d0
                 bne.s   loc_371F4
                 tst.b   (Ctrl_1_locked).w
@@ -103,7 +104,7 @@ loc_37232:
 
 loc_37256:
                 move.b  #$80,(Update_HUD_timer).w
-                jsr     CompetitionSKInsertP1TimeAttackTopThreeAndSave(pc)
+                jsr     SKCompTimeAttack_TrySaveP1Top3(pc)
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
                 move.b  (Competition_total_laps).w,d0
@@ -117,7 +118,7 @@ loc_37256:
 ; ---------------------------------------------------------------------------
 
 loc_3728C:
-                bsr.w   CompetitionSKSpawnNeonLateFinisherDisplay
+                bsr.w   SKCompNeon_TrySpawnLateFinish
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -134,7 +135,7 @@ loc_37292:
 
 loc_372BC:
                 move.b  #$80,(Update_HUD_timer_P2).w
-                bsr.w   CompetitionSKSpawnNeonLateFinisherDisplay
+                bsr.w   SKCompNeon_TrySpawnLateFinish
                 moveq   #signextendB(sfx_Goal),d0
                 jsr     (Play_SFX).l
 
@@ -264,11 +265,11 @@ loc_373D4:
 
 locret_37404:
                 rts
-; End of function CompetitionSKUpdateNeonRaceStartFinishAndProgression
+; End of function SKCompNeon_UpdateRaceState
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKSpawnNeonLateFinisherDisplay:
+SKCompNeon_TrySpawnLateFinish:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_3742E
                 move.l  #loc_3713A,(a1)
@@ -279,11 +280,12 @@ CompetitionSKSpawnNeonLateFinisherDisplay:
 
 locret_3742E:
                 rts
-; End of function CompetitionSKSpawnNeonLateFinisherDisplay
+; End of function SKCompNeon_TrySpawnLateFinish
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionSKInsertP1TimeAttackTopThreeAndSave:
+; Insert the time and selected character in the current zone's table when the competition type is negative
+SKCompTimeAttack_TrySaveP1Top3:
                 tst.b   (Competition_type).w
                 bpl.w   locret_374B6
                 moveq   #0,d0
@@ -328,7 +330,7 @@ loc_374B0:
 
 locret_374B6:
                 rts
-; End of function CompetitionSKInsertP1TimeAttackTopThreeAndSave
+; End of function SKCompTimeAttack_TrySaveP1Top3
 
 ; ---------------------------------------------------------------------------
 

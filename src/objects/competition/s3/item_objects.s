@@ -28,7 +28,7 @@ loc_35946:
                 move.l  #loc_35962,(a0)
 
 loc_35962:
-                bsr.s   CompetitionItemS3ConsumePickupPlayerContacts
+                bsr.s   S3CompItem_ConsumePickupContacts
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 asl.w   #3,d1
@@ -65,37 +65,39 @@ loc_359AA:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3ConsumePickupPlayerContacts:
+; Dispatch queued contact for Player 1 before Player 2
+S3CompItem_ConsumePickupContacts:
                 tst.b   collision_property(a0)
                 beq.s   locret_359F4
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_359E2
-                bsr.s   CompetitionItemS3DispatchCollectedEffectByAnimation
+                bsr.s   S3CompItem_ApplyEffectFromAnim
 
 loc_359E2:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_359F0
-                bsr.s   CompetitionItemS3DispatchCollectedEffectByAnimation
+                bsr.s   S3CompItem_ApplyEffectFromAnim
 
 loc_359F0:
                 clr.b   collision_property(a0)
 
 locret_359F4:
                 rts
-; End of function CompetitionItemS3ConsumePickupPlayerContacts
+; End of function S3CompItem_ConsumePickupContacts
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3DispatchCollectedEffectByAnimation:
+; Animation selects one of seven effects. Index 7 is neutral
+S3CompItem_ApplyEffectFromAnim:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 add.w   d0,d0
                 move.w  off_35A08(pc,d0.w),d0
                 jsr     off_35A08(pc,d0.w)
                 rts
-; End of function CompetitionItemS3DispatchCollectedEffectByAnimation
+; End of function S3CompItem_ApplyEffectFromAnim
 
 ; ---------------------------------------------------------------------------
 off_35A08:
@@ -130,7 +132,7 @@ loc_35A50:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_35FAC,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -155,7 +157,7 @@ loc_35AA2:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_35FAC,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -210,7 +212,7 @@ loc_35B60:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_35FAC,d1
                 moveq   #9,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -219,7 +221,7 @@ loc_35B7A:
                 move.b  #0,collision_flags(a0)
                 move.l  #loc_35FAC,d1
                 moveq   #8,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 cmpa.w  #Player_1,a2
                 bne.s   loc_35B9E
                 jmp     (GiveRing).l
@@ -258,7 +260,7 @@ loc_35BE4:
                 clr.b   collision_property(a0)
                 move.l  #loc_35C48,d1
                 moveq   #5,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 bne.s   locret_35C06
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -272,7 +274,7 @@ loc_35C08:
                 clr.b   collision_property(a0)
                 move.l  #loc_35C50,d1
                 moveq   #6,d2
-                bsr.w   CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+                bsr.w   S3CompItem_TryCloneEffect
                 bne.s   locret_35C2A
                 move.w  top_solid_bit(a2),top_solid_bit(a1)
 
@@ -335,13 +337,13 @@ loc_35C9E:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_35CB2
-                bsr.s   CompetitionItemS3ApplyPlaneMatchedUpwardFlipLaunch
+                bsr.s   S3CompItem_TryUpwardFlipLaunch
 
 loc_35CB2:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_35CC0
-                bsr.s   CompetitionItemS3ApplyPlaneMatchedUpwardFlipLaunch
+                bsr.s   S3CompItem_TryUpwardFlipLaunch
 
 loc_35CC0:
                 clr.b   collision_property(a0)
@@ -364,7 +366,8 @@ loc_35CEA:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3ApplyPlaneMatchedUpwardFlipLaunch:
+; Compare the collision-plane word and use the player's facing for the flip
+S3CompItem_TryUpwardFlipLaunch:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_35CFC
@@ -391,7 +394,7 @@ loc_35CFC:
 loc_35D4C:
                 moveq   #signextendB(sfx_SmallBumpers),d0
                 jmp     (Play_SFX).l
-; End of function CompetitionItemS3ApplyPlaneMatchedUpwardFlipLaunch
+; End of function S3CompItem_TryUpwardFlipLaunch
 
 ; ---------------------------------------------------------------------------
 
@@ -401,13 +404,13 @@ loc_35D54:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_35D68
-                bsr.s   CompetitionItemS3BeginGroundedMomentumTrap
+                bsr.s   S3CompItem_TryGroundMomentumTrap
 
 loc_35D68:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_35D76
-                bsr.s   CompetitionItemS3BeginGroundedMomentumTrap
+                bsr.s   S3CompItem_TryGroundMomentumTrap
 
 loc_35D76:
                 clr.b   collision_property(a0)
@@ -450,7 +453,8 @@ loc_35DD2:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3BeginGroundedMomentumTrap:
+; Double ground inertia and force the running pose. The trap owns the input lock until release
+S3CompItem_TryGroundMomentumTrap:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 bne.s   locret_35E3A
@@ -482,7 +486,7 @@ loc_35E20:
 
 locret_35E3A:
                 rts
-; End of function CompetitionItemS3BeginGroundedMomentumTrap
+; End of function S3CompItem_TryGroundMomentumTrap
 
 ; ---------------------------------------------------------------------------
 
@@ -492,19 +496,19 @@ loc_35E3C:
                 lea     (Player_1).w,a2
                 bclr    #0,collision_property(a0)
                 beq.s   loc_35E50
-                bsr.s   CompetitionItemS3ExplodeRollingHazardAndAttemptPlayerHurt
+                bsr.s   S3CompRollingItem_ExplodeOnHit
 
 loc_35E50:
                 lea     (Player_2).w,a2
                 bclr    #1,collision_property(a0)
                 beq.s   loc_35E5E
-                bsr.s   CompetitionItemS3ExplodeRollingHazardAndAttemptPlayerHurt
+                bsr.s   S3CompRollingItem_ExplodeOnHit
 
 loc_35E5E:
                 clr.b   collision_property(a0)
 
 loc_35E62:
-                bsr.w   CompetitionItemS3MoveRollingHazardOnTerrainOrInAir
+                bsr.w   S3CompRollingItem_UpdateMovement
                 move.b  angle(a0),d0
                 addi.b  #$10,d0
                 lsr.b   #5,d0
@@ -523,7 +527,8 @@ loc_35E8C:
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3ExplodeRollingHazardAndAttemptPlayerHurt:
+; Require matching collision planes, then enter the explosion animation and tail-call the standard hazard response
+S3CompRollingItem_ExplodeOnHit:
                 move.w  top_solid_bit(a2),d0
                 cmp.w   top_solid_bit(a0),d0
                 beq.s   loc_35EA4
@@ -535,11 +540,12 @@ loc_35EA4:
                 move.b  #$B,anim(a0)
                 movea.l a2,a1
                 jmp     (HurtPlayerFromSolidHazard).l
-; End of function CompetitionItemS3ExplodeRollingHazardAndAttemptPlayerHurt
+; End of function S3CompRollingItem_ExplodeOnHit
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3MoveRollingHazardOnTerrainOrInAir:
+; Roll left on terrain or fall, wrap world coordinates and explode on left-wall penetration at a horizontal angle
+S3CompRollingItem_UpdateMovement:
                 btst    #1,status(a0)
                 bne.s   loc_35F22
                 move.b  angle(a0),d0
@@ -636,11 +642,12 @@ loc_35FAC:
 
 loc_35FC4:
                 jmp     (Draw_Sprite).l
-; End of function CompetitionItemS3MoveRollingHazardOnTerrainOrInAir
+; End of function S3CompRollingItem_UpdateMovement
 
 ; =============== S U B R O U T I N E =======================================
 
-CompetitionItemS3ClonePrefixWithHandlerAndAnimation:
+; Allocate after the current slot, copy the common object prefix and install the supplied handler and animation
+S3CompItem_TryCloneEffect:
                 jsr     (AllocateObjectAfterCurrent).l
                 bne.w   locret_35FE8
                 moveq   #subtype,d0
@@ -655,7 +662,7 @@ loc_35FD6:
 
 locret_35FE8:
                 rts
-; End of function CompetitionItemS3ClonePrefixWithHandlerAndAnimation
+; End of function S3CompItem_TryCloneEffect
 
 ; ---------------------------------------------------------------------------
 Ani_2PItem:
