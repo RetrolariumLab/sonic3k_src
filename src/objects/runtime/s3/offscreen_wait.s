@@ -10,30 +10,31 @@ Obj_WaitOffscreen:
                 move.b  #$20,width_pixels(a0)
                 move.b  #$20,height_pixels(a0)
                 move.l  (sp)+,$34(a0)
-                move.l  #S3RuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull,(a0)
+                move.l  #S3OffscreenWait_CheckRenderOrCull,(a0)
 
-S3RuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull:
+; The previous draw's render flag takes precedence over the coarse X cull
+S3OffscreenWait_CheckRenderOrCull:
                 tst.b   render_flags(a0)
-                bmi.s   S3RuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation
+                bmi.s   S3OffscreenWait_RestoreInit
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   S3RuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear
+                bhi.s   S3OffscreenWait_ReleaseRespawn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear:
+S3OffscreenWait_ReleaseRespawn:
                 move.w  respawn_addr(a0),d0
-                beq.s   S3RuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately
+                beq.s   S3OffscreenWait_DeleteNow
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-S3RuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately:
+S3OffscreenWait_DeleteNow:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation:
+S3OffscreenWait_RestoreInit:
                 move.l  $34(a0),(a0)                    ; Restore normal object operation when onscreen
                 rts
 ; End of function Obj_WaitOffscreen

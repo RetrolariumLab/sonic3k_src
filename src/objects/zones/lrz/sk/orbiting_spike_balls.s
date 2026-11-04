@@ -45,7 +45,7 @@ loc_43BC4:
                 add.w   $44(a0),d1
                 move.w  d1,x_pos(a0)
                 move.w  $44(a0),d0
-                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_43BDE:
@@ -72,7 +72,7 @@ loc_43C0C:
                 add.w   $44(a0),d1
                 move.w  d1,x_pos(a0)
                 move.w  $44(a0),d0
-                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
 Obj_LRZOrbitingSpikeBallVertical:
@@ -120,7 +120,7 @@ loc_43CB6:
                 add.w   $46(a0),d1
                 move.w  d1,y_pos(a0)
                 move.w  $44(a0),d0
-                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_43CD6:
@@ -147,7 +147,7 @@ loc_43D04:
                 add.w   $46(a0),d1
                 move.w  d1,y_pos(a0)
                 move.w  $44(a0),d0
-                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 Map_LRZOrbitingSpikeBall:
                 include "src/objects/shared/zones/lrz/mappings/orbiting_spike_ball.s"

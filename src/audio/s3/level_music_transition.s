@@ -11,7 +11,7 @@ Obj_Song_Fade_ToLevelMusic:
 
 S3LevelMusic_WaitToRestore:
                 subq.w  #1,$2E(a0)
-                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   S3Return_AttrSetup
                 bsr.w   Restore_LevelMusic
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Obj_Song_Fade_Transition:
 
 S3LevelMusic_WaitToPlaySubtype:
                 subq.w  #1,$2E(a0)
-                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   S3Return_AttrSetup
                 move.b  subtype(a0),d0
 ; Play the subtype track without changing Current_music
                 jsr     (Play_Music).l

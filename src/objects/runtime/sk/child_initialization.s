@@ -8,10 +8,10 @@ Child_GetPriority:
                 movea.w parent3(a0),a1
                 bclr    #7,art_tile(a0)
                 btst    #7,art_tile(a1)
-                beq.s   SKRuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync
+                beq.s   SKChild_CopyParentDrawPriority
                 bset    #7,art_tile(a0)
 
-SKRuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync:
+SKChild_CopyParentDrawPriority:
                 move.w  priority(a1),priority(a0)
                 rts
 ; End of function Child_GetPriority
@@ -21,11 +21,11 @@ SKRuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync:
 Child_GetPriorityOnce:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   SKRuntimeChildren_ReturnFromConditionalParentArtPriorityLatch
+                beq.s   SKChild_GetPriorityOnceReturn
                 bset    #7,art_tile(a0)
                 move.l  (sp),(a0)
 
-SKRuntimeChildren_ReturnFromConditionalParentArtPriorityLatch:
+SKChild_GetPriorityOnceReturn:
                 rts
 ; End of function Child_GetPriorityOnce
 

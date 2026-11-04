@@ -24,7 +24,7 @@ MoveSlowFall_AnimateRaw:
 Move_AnimateRaw_Wait:
                 jsr     (MoveSprite2).l
 
-SKRuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback:
+SKRawWait_AnimateAndTickTimer:
                 jsr     Animate_Raw(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -39,29 +39,31 @@ Wait_Draw:
 
 Wait_FadeToLevelMusic:
                 subq.w  #1,$2E(a0)
-                bmi.s   SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController
+                bmi.s   SKMusicWait_TryCreateFade
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController:
+; Clear the prior render flag and reset the two-second counter before trying to allocate the fade object
+SKMusicWait_TryCreateFade:
                 bclr    #7,render_flags(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 jsr     (AllocateObject).l
-                bne.s   SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt
+                bne.s   SKMusicWait_RunContinuation
                 move.l  #Obj_Song_Fade_ToLevelMusic,(a1)
 
-SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt:
+; Jump to the stored continuation even if the fade object could not be allocated
+SKMusicWait_RunContinuation:
                 movea.l $34(a0),a1
                 jmp     (a1)
 ; ---------------------------------------------------------------------------
 
 Wait_NewDelay:
                 subq.w  #1,$2E(a0)
-                bmi.s   SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation
+                bmi.s   SKDelayWait_ResetAndContinue
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation:
+SKDelayWait_ResetAndContinue:
                 bclr    #7,render_flags(a0)
                 move.w  #(2*60)-1,$2E(a0)
                 movea.l $34(a0),a1
@@ -74,7 +76,7 @@ MoveWaitTouch:
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-SKRuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact:  ; used in S3, unused in S&K
+SKChildRaw_RefreshAnimateAndTouch:                      ; used in S3, unused in S&K
                 jsr     Refresh_ChildPosition(pc)
 
 AnimateRaw_DrawTouch:

@@ -11,7 +11,7 @@ Obj_Song_Fade_ToLevelMusic:
 
 SKLevelMusic_WaitToRestore:
                 subq.w  #1,$2E(a0)
-                bpl.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   SKReturn_AttrSetup
                 bsr.w   Restore_LevelMusic
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -24,7 +24,7 @@ Obj_Song_Fade_Transition:
 
 SKLevelMusic_WaitToPlaySubtype:
                 subq.w  #1,$2E(a0)
-                bpl.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   SKReturn_AttrSetup
                 move.b  subtype(a0),d0
 ; The subtype replaces only the low byte of Current_music
                 move.b  d0,(Current_music+1).w

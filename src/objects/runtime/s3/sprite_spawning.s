@@ -13,95 +13,98 @@ Load_Sprites:
 ; ---------------------------------------------------------------------------
 
 Load_Sprites_Index:
-                bra.w   S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear
+                bra.w   S3Spawn_InitLoader
 ; ---------------------------------------------------------------------------
-                bra.w   S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
+                bra.w   S3Spawn_UpdateCameraBackAndYWindow
 ; ---------------------------------------------------------------------------
-                bra.w   S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
+                bra.w   S3Spawn_UpdateCameraBackAndYWindow
 ; ---------------------------------------------------------------------------
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear:
+; Keep the existing respawn table when Respawn_table_keep is set
+S3Spawn_InitLoader:
                 addq.b  #4,(Object_load_routine).w
                 tst.b   (Respawn_table_keep).w
-                bne.s   S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming
+                bne.s   S3Spawn_SelectLayoutAndLoadMode
                 lea     (Object_respawn_table).w,a0
                 moveq   #0,d0
                 move.w  #bytesToLcnt($300),d1
 
-S3RuntimeSpawning_ClearMainRespawnTableByLongword:
+S3Spawn_ClearRespawnTable:
                 move.l  d0,(a0)+
-                dbf     d1,S3RuntimeSpawning_ClearMainRespawnTableByLongword
+                dbf     d1,S3Spawn_ClearRespawnTable
 
-S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming:
+S3Spawn_SelectLayoutAndLoadMode:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
                 lea     (SpriteLocPtrs).l,a0
                 movea.l (a0,d0.w),a0
                 cmpi.b  #$13,(Current_zone).w           ; Is this the Gumball Machine?
-                bcc.s   S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate  ; if so, branch
+                bcc.s   S3Spawn_BeginOnePassPreload     ; if so, branch
                 tst.w   (Competition_mode).w            ; Is Competition Mode active?
-                beq.s   S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase  ; if not, branch
+                beq.s   S3Spawn_InitLayoutCursors       ; if not, branch
 
-S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate:
+S3Spawn_BeginOnePassPreload:
                 addq.b  #8,(Object_load_routine).w
                 jsr     AllocateObject(pc)
-                bne.s   S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
+                bne.s   S3Spawn_FinishPreload
                 lea     (_unkF712).w,a3
                 lea     (Sprite_Listing).l,a4
                 move.w  #$800,d6
 
-S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure:
+; Stop when the record X reaches the unsigned limit or no slot is available
+S3Spawn_PreloadUntilXLimit:
                 cmp.w   (a0),d6
-                bls.s   S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
+                bls.s   S3Spawn_FinishPreload
                 jsr     CreateObjectFromLayoutRecord(pc)
-                beq.s   S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure
+                beq.s   S3Spawn_PreloadUntilXLimit
 
-S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization:
+S3Spawn_FinishPreload:
                 clr.w   (Camera_X_pos_coarse_back).w
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase:
+S3Spawn_InitLayoutCursors:
                 move.l  a0,(Object_load_addr_front).w
                 move.l  a0,(Object_load_addr_back).w
                 lea     (Object_respawn_table).w,a3
                 move.w  (Camera_X_pos).w,d6
                 subi.w  #$80,d6
-                bcc.s   S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels
+                bcc.s   S3Spawn_AlignFrontTo128px
                 moveq   #0,d6
 
-S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels:
+S3Spawn_AlignFrontTo128px:
                 andi.w  #$FF80,d6
                 movea.l (Object_load_addr_front).w,a0
 
-S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary:
+S3Spawn_SeekInitialFront:
                 cmp.w   (a0),d6
-                bls.s   S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek
+                bls.s   S3Spawn_StoreFrontAndBeginBackSeek
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary
+                bra.s   S3Spawn_SeekInitialFront
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek:
+S3Spawn_StoreFrontAndBeginBackSeek:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 lea     (Object_respawn_table).w,a3
                 movea.l (Object_load_addr_back).w,a0
                 subi.w  #$80,d6
-                bcs.s   S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
+                bcs.s   S3Spawn_StoreBackAndSeedCoarseXY
 
-S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary:
+S3Spawn_SeekInitialBack:
                 cmp.w   (a0),d6
-                bls.s   S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
+                bls.s   S3Spawn_StoreBackAndSeedCoarseXY
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary
+                bra.s   S3Spawn_SeekInitialBack
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY:
+; Set coarse X to -1 to force the first horizontal refresh
+S3Spawn_StoreBackAndSeedCoarseXY:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 move.w  #-1,(Camera_X_pos_coarse).w
@@ -109,183 +112,189 @@ S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY:
                 andi.w  #$FF80,d0
                 move.w  d0,(Camera_Y_pos_coarse).w
 
-S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder:
+S3Spawn_UpdateCameraBackAndYWindow:
                 move.w  (Camera_X_pos).w,d1
                 subi.w  #$80,d1
                 andi.w  #$FF80,d1
                 move.w  d1,(Camera_X_pos_coarse_back).w
                 lea     (Sprite_Listing).l,a4
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge
-                lea     S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter(pc),a6
+                bpl.s   S3Spawn_BuildLinearYWindow
+                lea     S3Spawn_DecodeWrappedRecord(pc),a6
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow
+                bpl.s   S3Spawn_CheckYWindowBottomWrap
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
+                bra.s   S3Spawn_SelectXStreamDirection
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow:
+S3Spawn_CheckYWindowBottomWrap:
                 move.w  (Screen_Y_wrap_value).w,d0
                 addq.w  #1,d0
                 cmp.w   d0,d4
-                bls.s   S3RuntimeSpawning_SelectLinearVerticalRecordDecoder
+                bls.s   S3Spawn_UseLinearYDecoder
                 and.w   (Screen_Y_wrap_value).w,d4
-                bra.s   S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
+                bra.s   S3Spawn_SelectXStreamDirection
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge:
+; Clamp the top edge to zero when it would be negative
+S3Spawn_BuildLinearYWindow:
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   S3RuntimeSpawning_SelectLinearVerticalRecordDecoder
+                bpl.s   S3Spawn_UseLinearYDecoder
                 moveq   #0,d3
 
-S3RuntimeSpawning_SelectLinearVerticalRecordDecoder:
-                lea     S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter(pc),a6
+S3Spawn_UseLinearYDecoder:
+                lea     S3Spawn_DecodeLinearRecord(pc),a6
 
-S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange:
+; Compare coarse X as signed. If X is unchanged, scan the entering Y row
+S3Spawn_SelectXStreamDirection:
                 move.w  #$FFF,d5
                 move.w  (Camera_X_pos).w,d6
                 andi.w  #$FF80,d6
                 cmp.w   (Camera_X_pos_coarse).w,d6
-                beq.w   S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
-                bge.s   S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate
+                beq.w   S3Spawn_SelectEnteringYRow
+                bge.s   S3Spawn_BeginRightStream
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$80,d6
-                bcs.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bcs.s   S3Spawn_StoreLeftBackCursor
                 jsr     AllocateObject(pc)
-                bne.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bne.s   S3Spawn_StoreLeftBackCursor
 
-S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion:
+S3Spawn_LoadLeftRecords:
                 cmp.w   -6(a0),d6
-                bge.s   S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bge.s   S3Spawn_StoreLeftBackCursor
                 subq.w  #6,a0
                 subq.w  #1,a3
                 jsr     (a6)
-                bne.s   S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord
+                bne.s   S3Spawn_AdvanceLeftOnFailure
                 subq.w  #6,a0
-                bra.s   S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion
+                bra.s   S3Spawn_LoadLeftRecords
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord:
+; The decoder already consumed the record before the next slot search failed
+S3Spawn_AdvanceLeftOnFailure:
                 addq.w  #6,a0
                 addq.w  #1,a3
 
-S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction:
+S3Spawn_StoreLeftBackCursor:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$300,d6
 
-S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary:
+S3Spawn_RetractFrontCursor:
                 cmp.w   -6(a0),d6
-                bgt.s   S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan
+                bgt.s   S3Spawn_StoreRetractedFrontCursor
                 subq.w  #6,a0
                 subq.w  #1,a3
-                bra.s   S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary
+                bra.s   S3Spawn_RetractFrontCursor
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan:
+S3Spawn_StoreRetractedFrontCursor:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
-                bra.s   S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
+                bra.s   S3Spawn_SelectEnteringYRow
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate:
+S3Spawn_BeginRightStream:
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$280,d6
                 jsr     AllocateObject(pc)
-                bne.s   S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
+                bne.s   S3Spawn_StoreRightFrontCursor
 
-S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary:
+; Stop at the exclusive right edge using an unsigned X comparison
+S3Spawn_LoadRightRecords:
                 cmp.w   (a0),d6
-                bls.s   S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
+                bls.s   S3Spawn_StoreRightFrontCursor
                 jsr     (a6)
                 addq.w  #1,a3
-                beq.s   S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary
+                beq.s   S3Spawn_LoadRightRecords
 
-S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance:
+S3Spawn_StoreRightFrontCursor:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$300,d6
-                bcs.s   S3RuntimeSpawning_CommitAdvancedBackCursor
+                bcs.s   S3Spawn_StoreAdvancedBackCursor
 
-S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary:
+S3Spawn_AdvanceBackCursor:
                 cmp.w   (a0),d6
-                bls.s   S3RuntimeSpawning_CommitAdvancedBackCursor
+                bls.s   S3Spawn_StoreAdvancedBackCursor
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary
+                bra.s   S3Spawn_AdvanceBackCursor
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_CommitAdvancedBackCursor:
+S3Spawn_StoreAdvancedBackCursor:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
 
-S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange:
+S3Spawn_SelectEnteringYRow:
                 move.w  (Camera_Y_pos).w,d6
                 andi.w  #$FF80,d6
                 move.w  d6,d3
                 cmp.w   (Camera_Y_pos_coarse).w,d6
-                beq.w   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
-                bge.s   S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow
+                beq.w   S3Spawn_StoreCoarseY
+                bge.s   S3Spawn_SelectDownstreamYRow
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled
+                bpl.s   S3Spawn_CheckLinearUpperRow
                 tst.w   d6
-                bne.s   S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
+                bne.s   S3Spawn_WrapUpperRow
                 cmpi.w  #$80,(Camera_Y_pos_coarse).w
-                bne.s   S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
+                bne.s   S3Spawn_WrapLowerRow
 
-S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask:
+S3Spawn_WrapUpperRow:
                 subi.w  #$80,d3
-                bpl.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bpl.s   S3Spawn_BeginYRowScan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bra.s   S3Spawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled:
+S3Spawn_CheckLinearUpperRow:
                 subi.w  #$80,d3
-                bmi.w   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
-                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bmi.w   S3Spawn_StoreCoarseY
+                bra.s   S3Spawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow:
+; When wrapping is enabled, a seam crossing can select the upper row even after a signed increase in coarse Y
+S3Spawn_SelectDownstreamYRow:
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit
+                bpl.s   S3Spawn_CheckLinearLowerRow
                 tst.w   (Camera_Y_pos_coarse).w
-                bne.s   S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
+                bne.s   S3Spawn_WrapLowerRow
                 cmpi.w  #$80,d6
-                bne.s   S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
+                bne.s   S3Spawn_WrapUpperRow
 
-S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit:
+S3Spawn_WrapLowerRow:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                blo.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                blo.s   S3Spawn_BeginYRowScan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bra.s   S3Spawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit:
+; Scan the row at the limit itself. Skip only when the row starts beyond the limit
+S3Spawn_CheckLinearLowerRow:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                bhi.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bhi.s   S3Spawn_StoreCoarseY
 
-S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan:
+S3Spawn_BeginYRowScan:
                 jsr     AllocateObject(pc)
-                bne.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bne.s   S3Spawn_StoreCoarseY
                 move.w  d3,d4
                 addi.w  #$80,d4
                 move.w  #$FFF,d5
@@ -293,18 +302,19 @@ S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan:
                 movea.w (Object_respawn_index_back).w,a3
                 move.l  (Object_load_addr_front).w,d7
                 sub.l   a0,d7
-                beq.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                beq.s   S3Spawn_StoreCoarseY
                 addq.w  #2,a0
 
-S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow:
+; Accept both edges of the Y row and skip records whose respawn bit is set
+S3Spawn_LoadUnspawnedYRowRecords:
                 tst.b   (a3)
-                bmi.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                bmi.s   S3Spawn_AdvanceYRowRecord
                 move.w  (a0),d1
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                blo.s   S3Spawn_AdvanceYRowRecord
                 cmp.w   d4,d1
-                bhi.s   S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                bhi.s   S3Spawn_AdvanceYRowRecord
                 bset    #7,(a3)
                 move.w  -2(a0),x_pos(a1)
                 move.w  (a0),d1
@@ -322,15 +332,16 @@ S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow:
                 move.b  3(a0),subtype(a1)
                 move.w  a3,respawn_addr(a1)
                 jsr     CreateNewSprite4(pc)
-                bne.s   S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bne.s   S3Spawn_StoreCoarseY
 
-S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount:
+S3Spawn_AdvanceYRowRecord:
                 addq.w  #6,a0
                 addq.w  #1,a3
                 subq.w  #6,d7
-                bne.s   S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow
+                bne.s   S3Spawn_LoadUnspawnedYRowRecords
 
-S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure:
+; Advance coarse Y even when the row is skipped or a slot cannot be allocated
+S3Spawn_StoreCoarseY:
                 move.w  d6,(Camera_Y_pos_coarse).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -362,33 +373,34 @@ CreateObjectFromLayoutRecord:
                 bra.w   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter:
+S3Spawn_DecodeWrappedRecord:
                 tst.b   (a3)
-                bpl.s   S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow
+                bpl.s   S3Spawn_FilterWrappedRecordY
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow:
+; The wrapped window accepts Y on either side of the seam. A negative packed Y bypasses the filter
+S3Spawn_FilterWrappedRecordY:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation
+                bmi.s   S3Spawn_MaskForcedWrappedY
                 and.w   d5,d1
                 cmp.w   d3,d1
-                bhs.s   S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
+                bhs.s   S3Spawn_CreateWrappedRecord
                 cmp.w   d4,d1
-                bls.s   S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
+                bls.s   S3Spawn_CreateWrappedRecord
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation:
+S3Spawn_MaskForcedWrappedY:
                 and.w   d5,d1
 
-S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate:
+S3Spawn_CreateWrappedRecord:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -405,35 +417,37 @@ S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate:
                 bra.s   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter:
+S3Spawn_DecodeLinearRecord:
                 tst.b   (a3)
-                bpl.s   S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow
+                bpl.s   S3Spawn_FilterLinearRecordY
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow:
+; The linear window includes both bounds. A negative packed Y bypasses the filter
+S3Spawn_FilterLinearRecordY:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation
+                bmi.s   S3Spawn_MaskForcedLinearY
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags
+                blo.s   S3Spawn_SkipRecordTail
                 cmp.w   d4,d1
-                bls.s   S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch
+                bls.s   S3Spawn_CreateLinearRecord
 
-S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags:
+; Skip ID and subtype, then set Z so the caller can continue scanning
+S3Spawn_SkipRecordTail:
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation:
+S3Spawn_MaskForcedLinearY:
                 and.w   d5,d1
 
-S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch:
+S3Spawn_CreateLinearRecord:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -450,14 +464,15 @@ S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch:
 
 CreateNewSprite4:
                 subq.w  #1,d0
-                bmi.s   S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr
+                bmi.s   S3Spawn_NextSlotReturn
 
-S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero:
+S3Spawn_FindNextFreeSlot:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                dbeq    d0,S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero
+                dbeq    d0,S3Spawn_FindNextFreeSlot
 
-S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr:
+; Return the remaining count in D0.w and keep the slot search flags for the caller
+S3Spawn_NextSlotReturn:
                 rts
 ; End of function CreateObjectFromLayoutRecord
 
@@ -505,30 +520,31 @@ Clear_SpriteRingMem:
                 lea     (Dynamic_object_RAM).w,a1
                 moveq   #((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d1
 
-S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer:
+S3Spawn_ClearActiveRespawnBit:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                beq.s   S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
+                beq.s   S3Spawn_NextActorOrReadRingCount
                 move.w  respawn_addr(a1),d0
-                beq.s   S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
+                beq.s   S3Spawn_NextActorOrReadRingCount
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount:
-                dbf     d1,S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer
+S3Spawn_NextActorOrReadRingCount:
+                dbf     d1,S3Spawn_ClearActiveRespawnBit
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
-                bcs.s   S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization
+                bcs.s   S3Spawn_ClearRespawnAndRingReturn
 
-S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries:
+; Ignore empty queue entries and mark each referenced ring status word as -1
+S3Spawn_FinalizeConsumedRings:
                 move.w  (a2)+,d0
-                beq.s   S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
+                beq.s   S3Spawn_FinalizeConsumedRings
                 movea.w d0,a1
                 move.w  #-1,(a1)
                 clr.w   -2(a2)
                 subq.w  #1,(Ring_consumption_table).w
-                dbf     d1,S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
+                dbf     d1,S3Spawn_FinalizeConsumedRings
 
-S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization:
+S3Spawn_ClearRespawnAndRingReturn:
                 rts

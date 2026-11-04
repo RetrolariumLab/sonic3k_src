@@ -8,7 +8,7 @@ Change_Act2Sizes:
                 moveq   #0,d0
                 move.b  (Current_zone).w,d0
                 cmpi.b  #8,d0
-                beq.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit  ; SOZ1 has a special event leading to SOZ2, so don't mess around there
+                beq.w   SKReturn_AttrSetup              ; SOZ1 has a special event leading to SOZ2, so don't mess around there
                 lsl.w   #4,d0
                 lea     (LevelSizes).l,a1
                 lea     8(a1,d0.w),a1                   ; Get level sizes for act 2
@@ -19,7 +19,7 @@ Change_Act2Sizes:
                 move.w  d1,(Camera_stored_max_Y_pos).w  ; Put level sizes into the target size memory
                 move.w  d1,(Camera_target_max_Y_pos).w
                 cmpi.b  #$10,d0
-                beq.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit  ; If we're in HCZ, don't immediately apply these changes. There's another event to do
+                beq.w   SKReturn_AttrSetup              ; If we're in HCZ, don't immediately apply these changes. There's another event to do
 ; End of function Change_Act2Sizes
 
 ; =============== S U B R O U T I N E =======================================

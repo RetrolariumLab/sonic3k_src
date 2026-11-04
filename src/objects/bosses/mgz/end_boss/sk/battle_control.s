@@ -490,4 +490,4 @@ loc_6C932:
                 addi.w  #$150,d0
                 cmp.w   (Player_1+x_pos).w,d0
                 bls.w   loc_6D13C
-                jmp     (SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord).l
+                jmp     (SKInput_BuildAutoRightAndJump).l

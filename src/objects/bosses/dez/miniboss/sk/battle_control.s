@@ -443,7 +443,7 @@ loc_7E26A:
                 st      (Ctrl_1_locked).w
                 jsr     (AllocateObject).l
                 bne.s   loc_7E28A
-                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
+                move.l  #SKInput_LockP2IfActive,(a1)
 
 loc_7E28A:
                 cmpi.w  #$140,(Player_1+x_pos).w

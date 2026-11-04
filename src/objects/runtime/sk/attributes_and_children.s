@@ -19,7 +19,8 @@ SetUp_ObjAttributes3:
                 bset    #2,render_flags(a0)             ; Object uses world coordinates
                 addq.b  #2,routine(a0)                  ; Increase routine counter
 
-SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit:
+; Also used as a shared RTS by the music, transition and object code
+SKReturn_AttrSetup:
                 rts
 ; End of function SetUp_ObjAttributes
 
@@ -386,11 +387,11 @@ Refresh_ChildPositionAdjusted:
                 ext.w   d1
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset
+                beq.s   SKChild_StoreXAndAdjustY
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset:
+SKChild_StoreXAndAdjustY:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0

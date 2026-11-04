@@ -50,20 +50,21 @@ SpriteMask_PriorityBySubtypeLowBits:
                 dc.w    0,   $80,  $100,  $180,  $200,  $280,  $300,  $380
 ; ---------------------------------------------------------------------------
 
-SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord:
+; Always set Right in both bytes. While the timer runs, keep A held without pressing it again
+SKInput_BuildAutoRightAndJump:
                 move.w  #(button_right_mask<<8)|button_right_mask,d0
                 tst.w   $2E(a0)
-                beq.s   SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing
+                beq.s   SKInput_PressJumpIfPushing
                 subq.w  #1,$2E(a0)
                 move.w  #((button_A_mask|button_right_mask)<<8)|button_right_mask,d0
 
-SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing:
+SKInput_PressJumpIfPushing:
                 btst    #5,(Player_1+status).w
-                beq.s   SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord
+                beq.s   SKInput_StoreAutoP1Input
                 move.w  #$1F,$2E(a0)
                 move.w  #((button_A_mask|button_right_mask)<<8)|(button_A_mask|button_right_mask),d0
 
-SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord:
+SKInput_StoreAutoP1Input:
                 move.w  d0,(Ctrl_1_logical).w
                 rts
 
@@ -88,7 +89,7 @@ FacePlayersTowardObject:
                 bsr.w   FacePlayerTowardObject
                 lea     (Player_2).w,a1
                 tst.b   render_flags(a1)
-                bpl.s   SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip
+                bpl.s   SKFacePlayers_Return
 ; End of function FacePlayersTowardObject
 
 ; =============== S U B R O U T I N E =======================================
@@ -98,33 +99,33 @@ FacePlayerTowardObject:
                 bclr    #0,render_flags(a1)
                 bclr    #Status_Facing,status(a1)
                 cmp.w   x_pos(a1),d0
-                bhs.s   SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip
+                bhs.s   SKFacePlayers_Return
                 bset    #0,render_flags(a1)
                 bset    #Status_Facing,status(a1)
 
-SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip:
+SKFacePlayers_Return:
                 rts
 ; End of function FacePlayerTowardObject
 
 ; ---------------------------------------------------------------------------
 
-SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists:
+SKInput_LockP2IfActive:
                 tst.l   (Player_2).w
-                beq.s   SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock
+                beq.s   SKInput_DeleteP2LockActor
                 move.b  #1,(Ctrl_2_locked).w
                 clr.w   (Tails_CPU_idle_timer).w
-                move.l  #SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock,(a0)
+                move.l  #SKInput_ClearP2WhileLocked,(a0)
 
-SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock:
+SKInput_ClearP2WhileLocked:
                 tst.b   (Ctrl_2_locked).w
-                beq.s   SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock
+                beq.s   SKInput_ClearP2OnUnlock
                 clr.w   (Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock:
+SKInput_ClearP2OnUnlock:
                 clr.w   (Ctrl_2).w
 
-SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock:
+SKInput_DeleteP2LockActor:
                 jmp     (Delete_Current_Sprite).l
-; End of function SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists
+; End of function SKInput_LockP2IfActive

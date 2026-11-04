@@ -53,7 +53,7 @@ SetScaledObjectOriginFromCenter:
 
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve:
+SKAimVelocity_LoadP1Position:
                 lea     (Player_1).w,a1
                 moveq   #0,d0
                 move.w  x_pos(a1),d0
@@ -65,60 +65,62 @@ SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve:
 SetVelocityTowardPointByDominantAxis:
                 sub.w   x_pos(a0),d0
                 smi     d2
-                bpl.s   SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude
+                bpl.s   SKAimVelocity_GetSignedDY
                 neg.w   d0
 
-SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude:
+SKAimVelocity_GetSignedDY:
                 sub.w   y_pos(a0),d1
                 smi     d3
-                bpl.s   SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath
+                bpl.s   SKAimVelocity_SelectMajorAxis
                 neg.w   d1
 
-SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath:
+SKAimVelocity_SelectMajorAxis:
                 cmp.w   d1,d0
                 scs     d4
-                beq.s   SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint
-                bcc.s   SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord
+                beq.s   SKAimVelocity_EqualMagnitudes
+                bcc.s   SKAimVelocity_DivideMinorByMajor
                 exg     d0,d1
 
-SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord:
+; Swap the minor magnitude into the high word to form a fixed-point dividend
+SKAimVelocity_DivideMinorByMajor:
                 swap    d1
                 divu.w  d0,d1
 
-SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient:
+SKAimVelocity_ScaleComponents:
                 move.w  #$100,d0
                 lsl.w   d5,d0
                 moveq   #8,d6
                 sub.w   d5,d6
                 lsr.w   d6,d1
 
-SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance:
+SKAimVelocity_RestoreAxisOrder:
                 tst.b   d4
-                beq.s   SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign
+                beq.s   SKAimVelocity_RestoreXSign
                 exg     d0,d1
 
-SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign:
+SKAimVelocity_RestoreXSign:
                 tst.b   d2
-                beq.s   SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign
+                beq.s   SKAimVelocity_RestoreYSign
                 neg.w   d0
 
-SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign:
+SKAimVelocity_RestoreYSign:
                 tst.b   d3
-                beq.s   SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn
+                beq.s   SKAimVelocity_StoreXY
                 neg.w   d1
 
-SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn:
+SKAimVelocity_StoreXY:
                 move.w  d0,x_vel(a0)
                 move.w  d1,y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint:
+; Use equal components on a diagonal. A coincident target enters the scaling path with a zero minor component
+SKAimVelocity_EqualMagnitudes:
                 tst.w   d0
-                beq.s   SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient
+                beq.s   SKAimVelocity_ScaleComponents
                 move.w  #$100,d0
                 lsl.w   d5,d0
                 move.w  #$100,d1
                 lsl.w   d5,d1
-                bra.s   SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance
+                bra.s   SKAimVelocity_RestoreAxisOrder
 ; End of function SetVelocityTowardPointByDominantAxis

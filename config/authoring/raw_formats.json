@@ -77,7 +77,7 @@
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/main_control.s",
-      "sha256": "0b69fca7ba9a0de3e2d6131e16832d9a160f2d5de0c80533a3b72ff3d8019128"
+      "sha256": "d99d890164717e7281c3b5c9263ad5a64e5a5c9a6db3978dad27aa0da8a6673d"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/object_catalog.s",
@@ -205,7 +205,7 @@
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/motion_helpers.s",
-      "sha256": "745827bb89a5a5c787bcf5c19cee60c141ea060aeea2bb95522f2012252f8fed"
+      "sha256": "9880f07efbddf3709f7a2ee5076ee8695b04d8f4f6ff53d6338829a8b575305a"
     },
     {
       "path": "src/objects/bosses/dez/miniboss/sk/object_catalog.s",
@@ -213,7 +213,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "4c823c46fa158c4cd1736ced1d2ae88dc47411c7d6c932e27906323ab652e93f"
+      "sha256": "1ad38cf870c034e8e01c92b8c5ecc68c9f54b5b48b50f5dfeaa025640d7ec611"
     },
     {
       "path": "src/objects/bosses/fbz/end_boss/sk/object_catalog.s",
@@ -225,7 +225,7 @@
     },
     {
       "path": "src/objects/bosses/fbz/s3/end_boss.s",
-      "sha256": "786738c2bbbe57e72ac2a99144e010b1524bf74f26b9757989a47f7ca143b2ca"
+      "sha256": "8c625a3d48d628df5bfb89f081a953e1ec964baf27a366ef505603e8bd0d4f58"
     },
     {
       "path": "src/objects/bosses/fbz/sk/act2_subboss.s",
@@ -285,7 +285,7 @@
     },
     {
       "path": "src/objects/bosses/icz/s3/end_boss.s",
-      "sha256": "a116a6554de391f8338b3a7613907a8df27c3a8ad81cb019e0757ef4d4fd79d2"
+      "sha256": "9901af987d3bf94ddcd06bb82174c2c896c42871cc68a0bcf24911280add6da0"
     },
     {
       "path": "src/objects/bosses/icz/s3/miniboss.s",
@@ -293,7 +293,7 @@
     },
     {
       "path": "src/objects/bosses/icz/sk/end_boss.s",
-      "sha256": "b7a8984bf582dc60c68f396c58f4b7a1460d9cc1942a5864e235aedbbe756088"
+      "sha256": "275de922ad7b5e45d892e9ee350fc6916a1aba70eb316e3663b2170856f7d48d"
     },
     {
       "path": "src/objects/bosses/icz/sk/miniboss.s",
@@ -325,7 +325,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "sha256": "fd84b77a5fbe0ae7f48a5ee8da6a0f8263f6197a21d6af424f398205dc1c29d3"
+      "sha256": "759c05872aab6734d6ffe4e05fbeb3ade4295a9c149c24d0861ab4d7bb9ef43a"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
@@ -349,7 +349,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/s3/act1_robotnik_scene.s",
-      "sha256": "a43e4b5a8f2be837496de864662ed9fbf94b4c06c4373e575465d3e0aefd817a"
+      "sha256": "e9fd434ed964aa98dee6a913e32a0b586d8351e1b9e8493c8c1515751dcb663d"
     },
     {
       "path": "src/objects/bosses/lbz/s3/act2_robotnik_ship.s",
@@ -365,7 +365,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/sk/act1_robotnik_scene.s",
-      "sha256": "f911ca066ff3d8ffd7e2ef23942f0aced1ced97f4e5dfb6609a15481a83a3ac2"
+      "sha256": "4e604d08d0fed8b7d24aaa9d76750d874164c86013a587553983cdbaff1bfcaa"
     },
     {
       "path": "src/objects/bosses/lbz/sk/act2_robotnik_ship.s",
@@ -405,7 +405,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/motion_helpers.s",
-      "sha256": "222620328d5ad40ba4867b80874e53a6b8389b8fe795727e15b2e21977722b64"
+      "sha256": "49ef0e47a6de7201408de457c5db3a135109a67a8f5bc04ed8f632cccc454d6d"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/s3/object_catalog.s",
@@ -421,7 +421,7 @@
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/motion_helpers.s",
-      "sha256": "0c6a9a4af71d97d35fdd6694f104a4e14fc6aaca1e4fc15efda4f32aa5a8131b"
+      "sha256": "83b7e6ff4332055ecbce142b988f7960189de59bed33a00a9717432e739688d7"
     },
     {
       "path": "src/objects/bosses/mgz/end_boss/sk/object_catalog.s",
@@ -449,7 +449,7 @@
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "c6ffa15988798c9966432835c6d53ab822245bb8427a2e05303d5fb4981ba50d"
+      "sha256": "f418c6d687beb7945d66217d44ed197a196b5280381eb68c0aaf50803cc5047f"
     },
     {
       "path": "src/objects/bosses/mhz/end_boss/sk/object_catalog.s",
@@ -485,7 +485,7 @@
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "d1dc6a6ebf098ea6d37177d896320b96127c7140ea48f88747fa1a41bff930ee"
+      "sha256": "03c40b0a62a1b8a9745ce07a374fe50b62483d56da425d213d713b321fc04d15"
     },
     {
       "path": "src/objects/bosses/soz/end_boss/sk/object_catalog.s",
@@ -493,7 +493,7 @@
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/battle_and_attacks.s",
-      "sha256": "ee75d3041283ec5da7535fd57828b3b6ba6668ddcdd3a0d78062bf8d542a3b32"
+      "sha256": "e8b615ed4d035235950dd956fde6850766cf25861a32075d8aafd01caa22f8f7"
     },
     {
       "path": "src/objects/bosses/soz/miniboss/sk/object_catalog.s",
@@ -509,7 +509,7 @@
     },
     {
       "path": "src/objects/bosses/ssz/knuckles_boss/sk/phase_helpers.s",
-      "sha256": "d0c972ebf6a3fb486dd102570a2f5978ced2cebdfc7667f9f922ab564160017b"
+      "sha256": "6e8f345c7a775cd9bd6330c156765ddfb9f865ef9c730b8cc3ebc945863025b7"
     },
     {
       "path": "src/objects/bosses/ssz/shared/sk/object_catalog.s",
@@ -517,7 +517,7 @@
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/aftermath.s",
-      "sha256": "38425656b7ab616e61191cff8f6f76b6454cb9fb255487fe4853d2829d826c2d"
+      "sha256": "21720ff683fcddd24177110080c7f6d4c358b58e48508a504f4fc0a9a6316342"
     },
     {
       "path": "src/objects/cutscenes/hpz/sk/crane.s",
@@ -581,7 +581,7 @@
     },
     {
       "path": "src/objects/cutscenes/sk/lava_reef.s",
-      "sha256": "4de59fa8b78d492e43aec7eabe78e193a799249c9c9b91ba826d6a788093e351"
+      "sha256": "7679582526ff3ab5cc99020951f714d4155ea53b5c71c22d56fffb9ae71aaf5f"
     },
     {
       "path": "src/objects/cutscenes/sk/movement_and_collision.s",
@@ -661,7 +661,7 @@
     },
     {
       "path": "src/objects/enemies/aiz/s3/monkey_dude.s",
-      "sha256": "667240014493cd587f9730ac5164a19c26056cca1ed03ebb243a367061cec705"
+      "sha256": "9b8e88554637d3a2b19af21443cdf6e6fed66d84f7a500c409659bfe1ed2890c"
     },
     {
       "path": "src/objects/enemies/aiz/s3/rhinobot.s",
@@ -673,7 +673,7 @@
     },
     {
       "path": "src/objects/enemies/aiz/sk/monkey_dude.s",
-      "sha256": "7517e8ce73712d73537fca6ae8409fb2ad56d064f26b0141cf0ae6fc73cedea8"
+      "sha256": "7fcdee14b881218c530b8dc1f59b8feed53b0b5e7cc0f8ed60d4656983d8034c"
     },
     {
       "path": "src/objects/enemies/aiz/sk/rhinobot.s",
@@ -869,7 +869,7 @@
     },
     {
       "path": "src/objects/enemies/sk/iwamodoki.s",
-      "sha256": "a738daa18fb5a2c7d04adb3f715da63156714fbb34e47c66db7722b7a1ec5034"
+      "sha256": "6af1f081d9ac22394dc6a0e42aaedc8e40aac9d9b59c5ca972d38bdb8573e79e"
     },
     {
       "path": "src/objects/enemies/sk/madmole.s",
@@ -913,7 +913,7 @@
     },
     {
       "path": "src/objects/level_end/s3/egg_capsule.s",
-      "sha256": "c81270a346ab802db8691a2c6bc8e84ed518732ded6d6e31b33a5f3c8cc81dd0"
+      "sha256": "64274ecf33819c3eeacf7b6d9693c04e5e22e319b188839db7f3baa784a40b1e"
     },
     {
       "path": "src/objects/level_end/s3/signpost.s",
@@ -945,15 +945,15 @@
     },
     {
       "path": "src/objects/runtime/s3/attributes_and_children.s",
-      "sha256": "f02e1f3c186403bd9e619933bcb631ce7d87c549a3a22dbc618bd6ee6eefbdb7"
+      "sha256": "beacbc728fa6bcda0503ae5379d69306e5002855e73d1aa17754da2bb1281d3e"
     },
     {
       "path": "src/objects/runtime/s3/child_drawing.s",
-      "sha256": "5f5eda5af9f8a1f58a60ebdd76546ba58d9d68f7bf5496118e620b5ebebde589"
+      "sha256": "75de3ee6b33c309e894ff1fb56e5cd0b0a4cec74e4c72e5d45ceb47edffa5cf1"
     },
     {
       "path": "src/objects/runtime/s3/child_initialization.s",
-      "sha256": "0c758849287ad13b90732a71d4793900615bb0021b7230cf43e6dabd1aed2c16"
+      "sha256": "bf742e98610b5cd507ef49c8436dbfae17ce0a002baf2c01aeceb2368b213e64"
     },
     {
       "path": "src/objects/runtime/s3/curved_motion.s",
@@ -961,7 +961,7 @@
     },
     {
       "path": "src/objects/runtime/s3/deletion_and_tracking.s",
-      "sha256": "0817f542e5fa140163111204e4c93c961bf8170fde580532fa0de9e13927b818"
+      "sha256": "ddf6f72621a5837e789eb582c7aa9e17a16fcbed42a87ce2f53ebc0f87fcaab7"
     },
     {
       "path": "src/objects/runtime/s3/execution_and_animation.s",
@@ -969,11 +969,11 @@
     },
     {
       "path": "src/objects/runtime/s3/movement_and_drawing.s",
-      "sha256": "8cb77fe0f50361141fbb1b05cd48dac318e4333f6d038c30db8b50f4405ea39d"
+      "sha256": "363cb11570384b57e94f4fc0ef68be55e863e572dbf5ab269135f67167913a15"
     },
     {
       "path": "src/objects/runtime/s3/offscreen_wait.s",
-      "sha256": "a00f51b17bf016d7443dd69fe737bfb0160bd6c7e695facf1aeb30c6787fdd28"
+      "sha256": "82d50d148a6621fb40f95b478852733856f7a1ffd7e4f6092ab1dc1e5c1d8867"
     },
     {
       "path": "src/objects/runtime/s3/player_interactions.s",
@@ -985,7 +985,7 @@
     },
     {
       "path": "src/objects/runtime/s3/sprite_spawning.s",
-      "sha256": "4b51169f20dcfda98d2b6a5445ca0386a598424849de46e6c50084b223687ef2"
+      "sha256": "42da8cc696d361d2e31bf6e4ab31cc11fd901a12dc88941c7a98b8fd61bfefc2"
     },
     {
       "path": "src/objects/runtime/s3/swing_motion.s",
@@ -997,7 +997,7 @@
     },
     {
       "path": "src/objects/runtime/s3/display_helpers.s",
-      "sha256": "d3ec4cd6b1179e057904f8a36e97737c75927ab873d1552fb5c34968ca925ac4"
+      "sha256": "66dafb90d924ae83ad532d1321050c7794815636da2d980da4dfa32c75ed755b"
     },
     {
       "path": "src/objects/runtime/s3/velocity_and_chasing.s",
@@ -1005,7 +1005,7 @@
     },
     {
       "path": "src/objects/runtime/s3/visibility_and_culling.s",
-      "sha256": "22ba574f2585ccc16c7393e76eb3053f41f36ac33730b80842c94c9b7b549f04"
+      "sha256": "8b55c71df4627f737f75b8bf4df8988ec9eac9ef5dfb32c0e5c70025dce306f5"
     },
     {
       "path": "src/objects/runtime/s3/state_transitions.s",
@@ -1017,15 +1017,15 @@
     },
     {
       "path": "src/objects/runtime/sk/attributes_and_children.s",
-      "sha256": "5fe83527441ef2a52e355c543a9549557d62078f4d61625ed6db23adb6ac3b13"
+      "sha256": "3c9d8f66b7b0528c0d61cb3be5a20f9b54e133e8d820239e7a959c88546b7be6"
     },
     {
       "path": "src/objects/runtime/sk/child_drawing.s",
-      "sha256": "646d519ac8ee2b4e6f877ed0e1e8160cb2a44f30e7f55d889d5c317f7c374dfa"
+      "sha256": "e45435acb1a57594592a972c822ab7c71296682070b10da095639aeefc339e61"
     },
     {
       "path": "src/objects/runtime/sk/child_initialization.s",
-      "sha256": "058a792bd4ecf450e7ddea8506bf370d083f58491d7828d73768f2e57671b064"
+      "sha256": "c91c1b1eb2ee0d12ff12a53668cc051c606e85b917afbe4aca63932f93b8048c"
     },
     {
       "path": "src/objects/runtime/sk/curved_motion.s",
@@ -1033,7 +1033,7 @@
     },
     {
       "path": "src/objects/runtime/sk/deletion_and_tracking.s",
-      "sha256": "849eb95504b33adc6698d411b2147dc6b734739caa8198c087f5c1d3cd3a492d"
+      "sha256": "1b5cf6c76c7ccec6c8752a5cb979d3b29858f654dff4a75d83345fb11de8e733"
     },
     {
       "path": "src/objects/runtime/sk/execution_and_animation.s",
@@ -1041,19 +1041,19 @@
     },
     {
       "path": "src/objects/runtime/sk/mask_callbacks.s",
-      "sha256": "9e2816cecf3d82327f5002f119ada973a164975b217e486c600e0d5d026f8b75"
+      "sha256": "2abc3481971f134470300c27e7f8c495e8e7076aaf9e80b4933475172fe2b792"
     },
     {
       "path": "src/objects/runtime/sk/movement_and_drawing.s",
-      "sha256": "94d3285bf3b945e81e20a33c7ae91050b98215fd3642ea5d84798055ab844060"
+      "sha256": "f07c07998f11d8f6393246427164ea31b0a19d8134b7c4919901983f22ce11eb"
     },
     {
       "path": "src/objects/runtime/sk/object_transformations.s",
-      "sha256": "59f0b639b0a2211174927ad7987696e4113b2e10797a01ecc3b25dce0f0c2f26"
+      "sha256": "8ac49523e0f6884eef6fd3be29f8a112cd32ff81b03fea7a890cd9f37e434232"
     },
     {
       "path": "src/objects/runtime/sk/offscreen_wait.s",
-      "sha256": "8cdadba3e909ab2492129d0b3542e7d15e3e112e0b71f4cfb88180c52b44e126"
+      "sha256": "baa6ae44f4ac30c09893b97461eb92614e450057e606a7941562cb0361c6ee33"
     },
     {
       "path": "src/objects/runtime/sk/player_interactions.s",
@@ -1065,7 +1065,7 @@
     },
     {
       "path": "src/objects/runtime/sk/sprite_spawning.s",
-      "sha256": "93c2786c53ab98f7e218efbf9a21bb07d1bd7f69cbea97c3d669b6e8e8535ba1"
+      "sha256": "64ce0281c1b2c3f2090b5f7126a4bc8d14ec77faba7cf8764bce26df60f0bfbe"
     },
     {
       "path": "src/objects/runtime/sk/swing_motion.s",
@@ -1077,7 +1077,7 @@
     },
     {
       "path": "src/objects/runtime/sk/display_helpers.s",
-      "sha256": "c41a811d5c4c62cbcecee35ec5c9b94824906bae3176821f78cbe5830d565935"
+      "sha256": "f1bf6b7ec2c10df5408a41b1d2580200927fdf40d2776abf0cbc2d7ff9d096ba"
     },
     {
       "path": "src/objects/runtime/sk/velocity_and_chasing.s",
@@ -1085,7 +1085,7 @@
     },
     {
       "path": "src/objects/runtime/sk/visibility_and_culling.s",
-      "sha256": "d2eaf37f4b842424b414776f5a6322ee8f3abc2125b07b534bf3d1d3a6df8a8e"
+      "sha256": "ddb9c73fc913b72b1aa38d77e0f918a50479f61071ca2772bf8daf9123d58c98"
     },
     {
       "path": "src/objects/runtime/sk/state_transitions.s",
@@ -1121,7 +1121,7 @@
     },
     {
       "path": "src/objects/terrain/icz/s3/path_platform.s",
-      "sha256": "ea5e39dd8cff22d9c6b27511f5d18eda604fcb172ffb9712a30add45530732d5"
+      "sha256": "f7daed0465de5652d722a9c2ee350cef3aa3731da5628bc00a1b6058362cb976"
     },
     {
       "path": "src/objects/terrain/icz/s3/snow_pile.s",
@@ -1145,7 +1145,7 @@
     },
     {
       "path": "src/objects/terrain/icz/sk/path_platform.s",
-      "sha256": "d997b5a62e0650a9a9f3efcbbc2e94c70528716b5656cae8a49548a73fad2772"
+      "sha256": "6abda9d49157624b5cc743f8af36d8b0595c0c58328f13dad5e2ecf92bdad5ab"
     },
     {
       "path": "src/objects/terrain/icz/sk/snow_pile.s",

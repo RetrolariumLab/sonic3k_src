@@ -276,7 +276,7 @@ loc_694D4:
                 clr.w   (Ctrl_1_logical).w
                 jsr     (AllocateObject).l
                 bne.s   loc_6950E
-                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
+                move.l  #SKInput_LockP2IfActive,(a1)
 
 loc_6950E:
                 move.w  (_unkFA84).w,d0

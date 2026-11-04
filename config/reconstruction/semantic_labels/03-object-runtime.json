@@ -6,7 +6,7 @@
       "source": "src/objects/runtime/s3/attributes_and_children.s",
       "original_line": 22,
       "old": "locret_529CE",
-      "new": "S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit",
+      "new": "S3Return_AttrSetup",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit."
     },
@@ -14,7 +14,7 @@
       "source": "src/objects/runtime/s3/attributes_and_children.s",
       "original_line": 324,
       "old": "loc_52C96",
-      "new": "S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset",
+      "new": "S3Child_StoreXAndAdjustY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset."
     },
@@ -30,7 +30,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 18,
       "old": "loc_530A4",
-      "new": "S3RuntimeChildren_ScheduleChildDeletionForParentStatus",
+      "new": "S3Child_DeleteOnParentStatus",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ScheduleChildDeletionForParentStatus."
     },
@@ -38,7 +38,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 30,
       "old": "loc_530C0",
-      "new": "S3RuntimeChildren_ScheduleTouchChildDeletionForParentStatus",
+      "new": "S3ChildTouch_DeleteOnParentStatus",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ScheduleTouchChildDeletionForParentStatus."
     },
@@ -46,7 +46,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 41,
       "old": "loc_530D6",
-      "new": "S3RuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion",
+      "new": "S3Child_UntrackAndDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion."
     },
@@ -54,7 +54,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 53,
       "old": "loc_530F0",
-      "new": "S3RuntimeChildren_ScheduleChildDeletionForParentPrivateFlag",
+      "new": "S3Child_DeleteOnParentPrivateFlag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ScheduleChildDeletionForParentPrivateFlag."
     },
@@ -62,7 +62,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 65,
       "old": "loc_5310E",
-      "new": "S3RuntimeChildren_DrawChildAfterParentStatusContactGate",
+      "new": "S3Child_DrawWithoutTouch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_DrawChildAfterParentStatusContactGate."
     },
@@ -70,7 +70,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 69,
       "old": "loc_53114",
-      "new": "S3RuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag",
+      "new": "S3ChildTouch_DeleteOnParentPrivateFlag",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag."
     },
@@ -78,7 +78,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 80,
       "old": "loc_5312A",
-      "new": "S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw",
+      "new": "S3Child_StartFlickerAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw."
     },
@@ -86,7 +86,7 @@
       "source": "src/objects/runtime/s3/child_drawing.s",
       "original_line": 113,
       "old": "loc_5318E",
-      "new": "S3RuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear",
+      "new": "S3ChildFlicker_DrawAndTouch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear."
     },
@@ -94,7 +94,7 @@
       "source": "src/objects/runtime/s3/child_initialization.s",
       "original_line": 14,
       "old": "loc_53F9C",
-      "new": "S3RuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync",
+      "new": "S3Child_CopyParentDrawPriority",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync."
     },
@@ -102,7 +102,7 @@
       "source": "src/objects/runtime/s3/child_initialization.s",
       "original_line": 28,
       "old": "locret_53FB8",
-      "new": "S3RuntimeChildren_ReturnFromConditionalParentArtPriorityLatch",
+      "new": "S3Child_GetPriorityOnceReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeChildren_ReturnFromConditionalParentArtPriorityLatch."
     },
@@ -246,7 +246,7 @@
       "source": "src/objects/runtime/s3/deletion_and_tracking.s",
       "original_line": 16,
       "old": "loc_5371C",
-      "new": "S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete",
+      "new": "S3Cull_ReleaseRespawnForStatusDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete from actualnativeowner/actualconsumer/caller."
     },
@@ -254,7 +254,7 @@
       "source": "src/objects/runtime/s3/deletion_and_tracking.s",
       "original_line": 22,
       "old": "loc_53728",
-      "new": "S3RuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler",
+      "new": "S3Cull_DeferStatusDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler from actualnativeowner/actualconsumer/caller."
     },
@@ -262,7 +262,7 @@
       "source": "src/objects/runtime/s3/deletion_and_tracking.s",
       "original_line": 37,
       "old": "loc_5374E",
-      "new": "S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete",
+      "new": "S3Cull_ReleaseRespawnForPrivateDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete from actualnativeowner/actualconsumer/caller."
     },
@@ -270,7 +270,7 @@
       "source": "src/objects/runtime/s3/deletion_and_tracking.s",
       "original_line": 43,
       "old": "loc_5375A",
-      "new": "S3RuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler",
+      "new": "S3Cull_DeferPrivateDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler from actualnativeowner/actualconsumer/caller."
     },
@@ -278,7 +278,7 @@
       "source": "src/objects/runtime/s3/deletion_and_tracking.s",
       "original_line": 240,
       "old": "loc_539C4",
-      "new": "S3RuntimeLifetime_CapsuleCoarseCull_DrawOrSchedulePrivateFlagDeletion",
+      "new": "S3Capsule_CoarseCullOrDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_CapsuleCoarseCull_DrawOrSchedulePrivateFlagDeletion from actualnativeowner/actualconsumer/caller."
     },
@@ -286,7 +286,7 @@
       "source": "src/objects/runtime/s3/display_helpers.s",
       "original_line": 36,
       "old": "loc_5361C",
-      "new": "S3RuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion",
+      "new": "S3ScreenLock_SetBossFlagAndDelete",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion from actualnativeowner/actualconsumer/caller."
     },
@@ -294,7 +294,7 @@
       "source": "src/objects/runtime/s3/display_helpers.s",
       "original_line": 70,
       "old": "loc_53650",
-      "new": "S3RuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels",
+      "new": "S3Slot_FindFreeBit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels from actualnativeowner/actualconsumer/caller."
     },
@@ -302,7 +302,7 @@
       "source": "src/objects/runtime/s3/display_helpers.s",
       "original_line": 87,
       "old": "loc_53678",
-      "new": "S3RuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail",
+      "new": "S3Slot_ReserveAndCopyAttributes",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail from actualnativeowner/actualconsumer/caller."
     },
@@ -502,7 +502,7 @@
       "source": "src/objects/runtime/s3/movement_and_drawing.s",
       "original_line": 27,
       "old": "loc_53CD6",
-      "new": "S3RuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback",
+      "new": "S3RawWait_AnimateAndTickTimer",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback from actualnativeowner/actualconsumer/caller."
     },
@@ -510,7 +510,7 @@
       "source": "src/objects/runtime/s3/movement_and_drawing.s",
       "original_line": 46,
       "old": "loc_53CFA",
-      "new": "S3RuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact",
+      "new": "S3ChildRaw_RefreshAnimateAndTouch",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact from actualnativeowner/actualconsumer/caller."
     },
@@ -518,7 +518,7 @@
       "source": "src/objects/runtime/s3/offscreen_wait.s",
       "original_line": 15,
       "old": "loc_53FFC",
-      "new": "S3RuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull",
+      "new": "S3OffscreenWait_CheckRenderOrCull",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull from actualnativeowner/actualconsumer/caller."
     },
@@ -526,7 +526,7 @@
       "source": "src/objects/runtime/s3/offscreen_wait.s",
       "original_line": 26,
       "old": "loc_5401A",
-      "new": "S3RuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear",
+      "new": "S3OffscreenWait_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear from actualnativeowner/actualconsumer/caller."
     },
@@ -534,7 +534,7 @@
       "source": "src/objects/runtime/s3/offscreen_wait.s",
       "original_line": 32,
       "old": "loc_54026",
-      "new": "S3RuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately",
+      "new": "S3OffscreenWait_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately from actualnativeowner/actualconsumer/caller."
     },
@@ -542,7 +542,7 @@
       "source": "src/objects/runtime/s3/offscreen_wait.s",
       "original_line": 36,
       "old": "loc_5402C",
-      "new": "S3RuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation",
+      "new": "S3OffscreenWait_RestoreInit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation from actualnativeowner/actualconsumer/caller."
     },
@@ -862,7 +862,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 25,
       "old": "loc_19D0A",
-      "new": "S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear",
+      "new": "S3Spawn_InitLoader",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear."
     },
@@ -870,7 +870,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 33,
       "old": "loc_19D1E",
-      "new": "S3RuntimeSpawning_ClearMainRespawnTableByLongword",
+      "new": "S3Spawn_ClearRespawnTable",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ClearMainRespawnTableByLongword."
     },
@@ -878,7 +878,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 37,
       "old": "loc_19D24",
-      "new": "S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming",
+      "new": "S3Spawn_SelectLayoutAndLoadMode",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming."
     },
@@ -886,7 +886,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 48,
       "old": "loc_19D44",
-      "new": "S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate",
+      "new": "S3Spawn_BeginOnePassPreload",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate."
     },
@@ -894,7 +894,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 56,
       "old": "loc_19D5C",
-      "new": "S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure",
+      "new": "S3Spawn_PreloadUntilXLimit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure."
     },
@@ -902,7 +902,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 62,
       "old": "loc_19D66",
-      "new": "S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization",
+      "new": "S3Spawn_FinishPreload",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization."
     },
@@ -910,7 +910,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 67,
       "old": "loc_19D6C",
-      "new": "S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase",
+      "new": "S3Spawn_InitLayoutCursors",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase."
     },
@@ -918,7 +918,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 76,
       "old": "loc_19D84",
-      "new": "S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels",
+      "new": "S3Spawn_AlignFrontTo128px",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels."
     },
@@ -926,7 +926,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 80,
       "old": "loc_19D8C",
-      "new": "S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary",
+      "new": "S3Spawn_SeekInitialFront",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary."
     },
@@ -934,7 +934,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 88,
       "old": "loc_19D96",
-      "new": "S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek",
+      "new": "S3Spawn_StoreFrontAndBeginBackSeek",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek."
     },
@@ -942,7 +942,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 96,
       "old": "loc_19DAC",
-      "new": "S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary",
+      "new": "S3Spawn_SeekInitialBack",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary."
     },
@@ -950,7 +950,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 104,
       "old": "loc_19DB6",
-      "new": "S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY",
+      "new": "S3Spawn_StoreBackAndSeedCoarseXY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY."
     },
@@ -958,7 +958,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 112,
       "old": "loc_19DD0",
-      "new": "S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder",
+      "new": "S3Spawn_UpdateCameraBackAndYWindow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder."
     },
@@ -966,7 +966,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 131,
       "old": "loc_19E0A",
-      "new": "S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow",
+      "new": "S3Spawn_CheckYWindowBottomWrap",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow."
     },
@@ -974,7 +974,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 140,
       "old": "loc_19E1A",
-      "new": "S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge",
+      "new": "S3Spawn_BuildLinearYWindow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge."
     },
@@ -982,7 +982,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 149,
       "old": "loc_19E30",
-      "new": "S3RuntimeSpawning_SelectLinearVerticalRecordDecoder",
+      "new": "S3Spawn_UseLinearYDecoder",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SelectLinearVerticalRecordDecoder."
     },
@@ -990,7 +990,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 152,
       "old": "loc_19E34",
-      "new": "S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange",
+      "new": "S3Spawn_SelectXStreamDirection",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange."
     },
@@ -998,7 +998,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 167,
       "old": "loc_19E62",
-      "new": "S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion",
+      "new": "S3Spawn_LoadLeftRecords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion."
     },
@@ -1006,7 +1006,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 178,
       "old": "loc_19E74",
-      "new": "S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord",
+      "new": "S3Spawn_AdvanceLeftOnFailure",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord."
     },
@@ -1014,7 +1014,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 182,
       "old": "loc_19E78",
-      "new": "S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction",
+      "new": "S3Spawn_StoreLeftBackCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction."
     },
@@ -1022,7 +1022,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 189,
       "old": "loc_19E8C",
-      "new": "S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary",
+      "new": "S3Spawn_RetractFrontCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary."
     },
@@ -1030,7 +1030,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 197,
       "old": "loc_19E98",
-      "new": "S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan",
+      "new": "S3Spawn_StoreRetractedFrontCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan."
     },
@@ -1038,7 +1038,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 203,
       "old": "loc_19EA2",
-      "new": "S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate",
+      "new": "S3Spawn_BeginRightStream",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate."
     },
@@ -1046,7 +1046,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 211,
       "old": "loc_19EB8",
-      "new": "S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary",
+      "new": "S3Spawn_LoadRightRecords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary."
     },
@@ -1054,7 +1054,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 218,
       "old": "loc_19EC2",
-      "new": "S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance",
+      "new": "S3Spawn_StoreRightFrontCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance."
     },
@@ -1062,7 +1062,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 226,
       "old": "loc_19ED8",
-      "new": "S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary",
+      "new": "S3Spawn_AdvanceBackCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary."
     },
@@ -1070,7 +1070,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 234,
       "old": "loc_19EE2",
-      "new": "S3RuntimeSpawning_CommitAdvancedBackCursor",
+      "new": "S3Spawn_StoreAdvancedBackCursor",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitAdvancedBackCursor."
     },
@@ -1078,7 +1078,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 238,
       "old": "loc_19EEA",
-      "new": "S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange",
+      "new": "S3Spawn_SelectEnteringYRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange."
     },
@@ -1086,7 +1086,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 252,
       "old": "loc_19F10",
-      "new": "S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask",
+      "new": "S3Spawn_WrapUpperRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask."
     },
@@ -1094,7 +1094,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 259,
       "old": "loc_19F1C",
-      "new": "S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled",
+      "new": "S3Spawn_CheckLinearUpperRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled."
     },
@@ -1102,7 +1102,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 265,
       "old": "loc_19F26",
-      "new": "S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow",
+      "new": "S3Spawn_SelectDownstreamYRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow."
     },
@@ -1110,7 +1110,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 273,
       "old": "loc_19F38",
-      "new": "S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit",
+      "new": "S3Spawn_WrapLowerRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit."
     },
@@ -1118,7 +1118,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 281,
       "old": "loc_19F48",
-      "new": "S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit",
+      "new": "S3Spawn_CheckLinearLowerRow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit."
     },
@@ -1126,7 +1126,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 286,
       "old": "loc_19F52",
-      "new": "S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan",
+      "new": "S3Spawn_BeginYRowScan",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan."
     },
@@ -1134,7 +1134,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 299,
       "old": "loc_19F74",
-      "new": "S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow",
+      "new": "S3Spawn_LoadUnspawnedYRowRecords",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow."
     },
@@ -1142,7 +1142,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 327,
       "old": "loc_19FC2",
-      "new": "S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount",
+      "new": "S3Spawn_AdvanceYRowRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount."
     },
@@ -1150,7 +1150,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 333,
       "old": "loc_19FCA",
-      "new": "S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure",
+      "new": "S3Spawn_StoreCoarseY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure."
     },
@@ -1158,7 +1158,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 365,
       "old": "loc_1A010",
-      "new": "S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter",
+      "new": "S3Spawn_DecodeWrappedRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter."
     },
@@ -1166,7 +1166,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 373,
       "old": "loc_1A01A",
-      "new": "S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow",
+      "new": "S3Spawn_FilterWrappedRecordY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow."
     },
@@ -1174,7 +1174,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 388,
       "old": "loc_1A032",
-      "new": "S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation",
+      "new": "S3Spawn_MaskForcedWrappedY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation."
     },
@@ -1182,7 +1182,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 391,
       "old": "loc_1A034",
-      "new": "S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate",
+      "new": "S3Spawn_CreateWrappedRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate."
     },
@@ -1190,7 +1190,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 408,
       "old": "loc_1A062",
-      "new": "S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter",
+      "new": "S3Spawn_DecodeLinearRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter."
     },
@@ -1198,7 +1198,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 416,
       "old": "loc_1A06C",
-      "new": "S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow",
+      "new": "S3Spawn_FilterLinearRecordY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow."
     },
@@ -1206,7 +1206,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 427,
       "old": "loc_1A07E",
-      "new": "S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags",
+      "new": "S3Spawn_SkipRecordTail",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags."
     },
@@ -1214,7 +1214,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 433,
       "old": "loc_1A084",
-      "new": "S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation",
+      "new": "S3Spawn_MaskForcedLinearY",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_MaskForcedLinearRecordYBeforeCreation."
     },
@@ -1222,7 +1222,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 436,
       "old": "loc_1A086",
-      "new": "S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch",
+      "new": "S3Spawn_CreateLinearRecord",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch."
     },
@@ -1230,7 +1230,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 455,
       "old": "loc_1A0B6",
-      "new": "S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero",
+      "new": "S3Spawn_FindNextFreeSlot",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero."
     },
@@ -1238,7 +1238,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 460,
       "old": "locret_1A0C0",
-      "new": "S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr",
+      "new": "S3Spawn_NextSlotReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr."
     },
@@ -1246,7 +1246,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 508,
       "old": "loc_1A154",
-      "new": "S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer",
+      "new": "S3Spawn_ClearActiveRespawnBit",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer."
     },
@@ -1254,7 +1254,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 517,
       "old": "loc_1A168",
-      "new": "S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount",
+      "new": "S3Spawn_NextActorOrReadRingCount",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount."
     },
@@ -1262,7 +1262,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 524,
       "old": "loc_1A176",
-      "new": "S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries",
+      "new": "S3Spawn_FinalizeConsumedRings",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries."
     },
@@ -1270,7 +1270,7 @@
       "source": "src/objects/runtime/s3/sprite_spawning.s",
       "original_line": 533,
       "old": "locret_1A18C",
-      "new": "S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization",
+      "new": "S3Spawn_ClearRespawnAndRingReturn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Describe manually reviewed S3RuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization."
     },
@@ -1638,7 +1638,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 15,
       "old": "loc_19C02",
-      "new": "S3RuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside",
+      "new": "S3DrawCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -1646,7 +1646,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 21,
       "old": "loc_19C0E",
-      "new": "S3RuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease",
+      "new": "S3DrawCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease from actualnativeowner/actualconsumer/caller."
     },
@@ -1654,7 +1654,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 33,
       "old": "loc_19C26",
-      "new": "S3RuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside",
+      "new": "S3AnchorDrawCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -1662,7 +1662,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 39,
       "old": "loc_19C32",
-      "new": "S3RuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot",
+      "new": "S3AnchorDrawCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -1670,7 +1670,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 53,
       "old": "loc_19C4C",
-      "new": "S3RuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside",
+      "new": "S3RangeCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -1678,7 +1678,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 59,
       "old": "loc_19C58",
-      "new": "S3RuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot",
+      "new": "S3RangeCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -1686,7 +1686,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 75,
       "old": "loc_19C7A",
-      "new": "S3RuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside",
+      "new": "S3LegacyDrawCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -1694,7 +1694,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 81,
       "old": "loc_19C86",
-      "new": "S3RuntimeLifetime_LegacyNormalDrawCull_ClearSlot",
+      "new": "S3LegacyDrawCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyNormalDrawCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -1702,7 +1702,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 85,
       "old": "loc_19C8A",
-      "new": "S3RuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow",
+      "new": "S3DualCull_CheckPrimaryWindow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow from actualnativeowner/actualconsumer/caller."
     },
@@ -1710,7 +1710,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 95,
       "old": "loc_19CA4",
-      "new": "S3RuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow",
+      "new": "S3DualCull_CheckSecondaryWindow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow from actualnativeowner/actualconsumer/caller."
     },
@@ -1718,7 +1718,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 102,
       "old": "loc_19CB4",
-      "new": "S3RuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows",
+      "new": "S3DualCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows from actualnativeowner/actualconsumer/caller."
     },
@@ -1726,7 +1726,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 108,
       "old": "loc_19CC0",
-      "new": "S3RuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows",
+      "new": "S3DualCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows from actualnativeowner/actualconsumer/caller."
     },
@@ -1734,7 +1734,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 115,
       "old": "loc_19CC8",
-      "new": "S3RuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact",
+      "new": "S3TouchCull_TestAnchorAndDraw",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact from actualnativeowner/actualconsumer/caller."
     },
@@ -1742,7 +1742,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 124,
       "old": "loc_19CE2",
-      "new": "S3RuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside",
+      "new": "S3TouchCull_ReleaseRespawn",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -1750,7 +1750,7 @@
       "source": "src/objects/runtime/s3/visibility_and_culling.s",
       "original_line": 130,
       "old": "loc_19CEE",
-      "new": "S3RuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull",
+      "new": "S3TouchCull_DeleteNow",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Establish S3RuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull from actualnativeowner/actualconsumer/caller."
     },
@@ -1854,7 +1854,7 @@
       "source": "src/objects/runtime/sk/attributes_and_children.s",
       "original_line": 22,
       "old": "locret_8405E",
-      "new": "SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit",
+      "new": "SKReturn_AttrSetup",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit."
     },
@@ -1862,7 +1862,7 @@
       "source": "src/objects/runtime/sk/attributes_and_children.s",
       "original_line": 393,
       "old": "loc_843D2",
-      "new": "SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset",
+      "new": "SKChild_StoreXAndAdjustY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_CommitAdjustedChildXAndMirrorYOffset."
     },
@@ -1878,7 +1878,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 47,
       "old": "loc_84984",
-      "new": "SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion",
+      "new": "SKChild_UntrackAndDelete",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion."
     },
@@ -1886,7 +1886,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 59,
       "old": "loc_8499E",
-      "new": "SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag",
+      "new": "SKChild_DeleteOnParentPrivateFlag",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag."
     },
@@ -1894,7 +1894,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 71,
       "old": "loc_849BC",
-      "new": "SKRuntimeChildren_DrawChildAfterParentStatusContactGate",
+      "new": "SKChild_DrawWithoutTouch",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_DrawChildAfterParentStatusContactGate."
     },
@@ -1902,7 +1902,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 75,
       "old": "loc_849C2",
-      "new": "SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag",
+      "new": "SKChildTouch_DeleteOnParentPrivateFlag",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag."
     },
@@ -1910,7 +1910,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 86,
       "old": "loc_849D8",
-      "new": "SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw",
+      "new": "SKChild_StartFlickerAndDraw",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw."
     },
@@ -1918,7 +1918,7 @@
       "source": "src/objects/runtime/sk/child_drawing.s",
       "original_line": 119,
       "old": "loc_84A3C",
-      "new": "SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear",
+      "new": "SKChildFlicker_DrawAndTouch",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear."
     },
@@ -1926,7 +1926,7 @@
       "source": "src/objects/runtime/sk/child_initialization.s",
       "original_line": 14,
       "old": "loc_85A72",
-      "new": "SKRuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync",
+      "new": "SKChild_CopyParentDrawPriority",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync."
     },
@@ -1934,7 +1934,7 @@
       "source": "src/objects/runtime/sk/child_initialization.s",
       "original_line": 28,
       "old": "locret_85A8E",
-      "new": "SKRuntimeChildren_ReturnFromConditionalParentArtPriorityLatch",
+      "new": "SKChild_GetPriorityOnceReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeChildren_ReturnFromConditionalParentArtPriorityLatch."
     },
@@ -2094,7 +2094,7 @@
       "source": "src/objects/runtime/sk/deletion_and_tracking.s",
       "original_line": 16,
       "old": "loc_85088",
-      "new": "SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete",
+      "new": "SKCull_ReleaseRespawnForStatusDelete",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete from actualnativeowner/actualconsumer/caller."
     },
@@ -2102,7 +2102,7 @@
       "source": "src/objects/runtime/sk/deletion_and_tracking.s",
       "original_line": 22,
       "old": "loc_85094",
-      "new": "SKRuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler",
+      "new": "SKCull_DeferStatusDelete",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler from actualnativeowner/actualconsumer/caller."
     },
@@ -2110,7 +2110,7 @@
       "source": "src/objects/runtime/sk/deletion_and_tracking.s",
       "original_line": 37,
       "old": "loc_850BA",
-      "new": "SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete",
+      "new": "SKCull_ReleaseRespawnForPrivateDelete",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete from actualnativeowner/actualconsumer/caller."
     },
@@ -2118,7 +2118,7 @@
       "source": "src/objects/runtime/sk/deletion_and_tracking.s",
       "original_line": 43,
       "old": "loc_850C6",
-      "new": "SKRuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler",
+      "new": "SKCull_DeferPrivateDelete",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler from actualnativeowner/actualconsumer/caller."
     },
@@ -2126,7 +2126,7 @@
       "source": "src/objects/runtime/sk/display_helpers.s",
       "original_line": 36,
       "old": "loc_84F88",
-      "new": "SKRuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion",
+      "new": "SKScreenLock_SetBossFlagAndDelete",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ScreenLockTimer_SetBossFlagAndSchedulePrivateFlagDeletion from actualnativeowner/actualconsumer/caller."
     },
@@ -2134,7 +2134,7 @@
       "source": "src/objects/runtime/sk/display_helpers.s",
       "original_line": 70,
       "old": "loc_84FBC",
-      "new": "SKRuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels",
+      "new": "SKSlot_FindFreeBit",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_SlottedAttributes_ShiftOccupiedBitsOrAbortTwoReturnLevels from actualnativeowner/actualconsumer/caller."
     },
@@ -2142,7 +2142,7 @@
       "source": "src/objects/runtime/sk/display_helpers.s",
       "original_line": 87,
       "old": "loc_84FE4",
-      "new": "SKRuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail",
+      "new": "SKSlot_ReserveAndCopyAttributes",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_SlottedAttributes_ReserveBitAndCopyFullSlottedDescriptorTail from actualnativeowner/actualconsumer/caller."
     },
@@ -2406,7 +2406,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 53,
       "old": "loc_86334",
-      "new": "SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord",
+      "new": "SKInput_BuildAutoRightAndJump",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord"
     },
@@ -2414,7 +2414,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 60,
       "old": "loc_86346",
-      "new": "SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing",
+      "new": "SKInput_PressJumpIfPushing",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_PrimaryInput_ReloadJumpPulseWhenPlayerIsPushing"
     },
@@ -2422,7 +2422,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 66,
       "old": "loc_86358",
-      "new": "SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord",
+      "new": "SKInput_StoreAutoP1Input",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_PrimaryInput_StoreSynthesizedLogicalHeldAndPressedWord"
     },
@@ -2430,7 +2430,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 105,
       "old": "locret_863BE",
-      "new": "SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip",
+      "new": "SKFacePlayers_Return",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Facing_ReturnAfterUnsignedTargetComparisonOrP2Skip"
     },
@@ -2438,7 +2438,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 111,
       "old": "loc_863C0",
-      "new": "SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists",
+      "new": "SKInput_LockP2IfActive",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists"
     },
@@ -2446,7 +2446,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 118,
       "old": "loc_863D6",
-      "new": "SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock",
+      "new": "SKInput_ClearP2WhileLocked",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_SecondaryInput_ClearLogicalWordUntilExternalUnlock"
     },
@@ -2454,7 +2454,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 125,
       "old": "loc_863E2",
-      "new": "SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock",
+      "new": "SKInput_ClearP2OnUnlock",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_SecondaryInput_ClearPhysicalControllerAfterUnlock"
     },
@@ -2462,7 +2462,7 @@
       "source": "src/objects/runtime/sk/mask_callbacks.s",
       "original_line": 128,
       "old": "loc_863E6",
-      "new": "SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock",
+      "new": "SKInput_DeleteP2LockActor",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_SecondaryInput_DeleteClearActorForAbsentPlayerOrUnlock"
     },
@@ -2470,7 +2470,7 @@
       "source": "src/objects/runtime/sk/movement_and_drawing.s",
       "original_line": 27,
       "old": "loc_85652",
-      "new": "SKRuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback",
+      "new": "SKRawWait_AnimateAndTickTimer",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback from actualnativeowner/actualconsumer/caller."
     },
@@ -2478,7 +2478,7 @@
       "source": "src/objects/runtime/sk/movement_and_drawing.s",
       "original_line": 46,
       "old": "loc_85674",
-      "new": "SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController",
+      "new": "SKMusicWait_TryCreateFade",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_MusicWait_ClearPriorVisibleFlagAndAttemptFadeController from actualnativeowner/actualconsumer/caller."
     },
@@ -2486,7 +2486,7 @@
       "source": "src/objects/runtime/sk/movement_and_drawing.s",
       "original_line": 53,
       "old": "loc_8568E",
-      "new": "SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt",
+      "new": "SKMusicWait_RunContinuation",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_MusicWait_TailCallStoredContinuationAfterAllocationAttempt from actualnativeowner/actualconsumer/caller."
     },
@@ -2494,7 +2494,7 @@
       "source": "src/objects/runtime/sk/movement_and_drawing.s",
       "original_line": 64,
       "old": "loc_856A0",
-      "new": "SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation",
+      "new": "SKDelayWait_ResetAndContinue",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_NewDelayWait_ResetCounterAndTailCallStoredContinuation from actualnativeowner/actualconsumer/caller."
     },
@@ -2502,7 +2502,7 @@
       "source": "src/objects/runtime/sk/movement_and_drawing.s",
       "original_line": 77,
       "old": "loc_856C0",
-      "new": "SKRuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact",
+      "new": "SKChildRaw_RefreshAnimateAndTouch",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact from actualnativeowner/actualconsumer/caller."
     },
@@ -2510,7 +2510,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 56,
       "old": "loc_861C0",
-      "new": "SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve",
+      "new": "SKAimVelocity_LoadP1Position",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_LoadPrimaryPlayerPointBeforeDominantAxisSolve"
     },
@@ -2518,7 +2518,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 71,
       "old": "loc_861DA",
-      "new": "SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude",
+      "new": "SKAimVelocity_GetSignedDY",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_ExtractVerticalDifferenceSignAndMagnitude"
     },
@@ -2526,7 +2526,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 77,
       "old": "loc_861E4",
-      "new": "SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath",
+      "new": "SKAimVelocity_SelectMajorAxis",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_SelectDominantAxisOrEqualMagnitudePath"
     },
@@ -2534,7 +2534,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 84,
       "old": "loc_861EE",
-      "new": "SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord",
+      "new": "SKAimVelocity_DivideMinorByMajor",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_DivideSwappedMinorDividendByMajorWord"
     },
@@ -2542,7 +2542,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 88,
       "old": "loc_861F2",
-      "new": "SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient",
+      "new": "SKAimVelocity_ScaleComponents",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_ScaleDominantComponentAndMinorQuotient"
     },
@@ -2550,7 +2550,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 95,
       "old": "loc_861FE",
-      "new": "SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance",
+      "new": "SKAimVelocity_RestoreAxisOrder",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_RestoreComponentsAfterVerticalDominance"
     },
@@ -2558,7 +2558,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 100,
       "old": "loc_86204",
-      "new": "SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign",
+      "new": "SKAimVelocity_RestoreXSign",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_ApplyOriginalHorizontalDifferenceSign"
     },
@@ -2566,7 +2566,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 105,
       "old": "loc_8620A",
-      "new": "SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign",
+      "new": "SKAimVelocity_RestoreYSign",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_ApplyOriginalVerticalDifferenceSign"
     },
@@ -2574,7 +2574,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 110,
       "old": "loc_86210",
-      "new": "SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn",
+      "new": "SKAimVelocity_StoreXY",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_StoreSolvedWordComponentsAndReturn"
     },
@@ -2582,7 +2582,7 @@
       "source": "src/objects/runtime/sk/object_transformations.s",
       "original_line": 116,
       "old": "loc_8621A",
-      "new": "SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint",
+      "new": "SKAimVelocity_EqualMagnitudes",
       "profiles": ["sk"],
       "meaning": "Actualruntimeflow: SKRuntime_Velocity_HandleEqualMagnitudesIncludingCoincidentPoint"
     },
@@ -2590,7 +2590,7 @@
       "source": "src/objects/runtime/sk/offscreen_wait.s",
       "original_line": 15,
       "old": "loc_85AD2",
-      "new": "SKRuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull",
+      "new": "SKOffscreenWait_CheckRenderOrCull",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_OffscreenWait_CheckPriorRenderBeforeCoarseCull from actualnativeowner/actualconsumer/caller."
     },
@@ -2598,7 +2598,7 @@
       "source": "src/objects/runtime/sk/offscreen_wait.s",
       "original_line": 26,
       "old": "loc_85AF0",
-      "new": "SKRuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear",
+      "new": "SKOffscreenWait_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_OffscreenWait_ReleaseRespawnBeforeImmediateClear from actualnativeowner/actualconsumer/caller."
     },
@@ -2606,7 +2606,7 @@
       "source": "src/objects/runtime/sk/offscreen_wait.s",
       "original_line": 32,
       "old": "loc_85AFC",
-      "new": "SKRuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately",
+      "new": "SKOffscreenWait_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_OffscreenWait_ClearCurrentSlotImmediately from actualnativeowner/actualconsumer/caller."
     },
@@ -2614,7 +2614,7 @@
       "source": "src/objects/runtime/sk/offscreen_wait.s",
       "original_line": 36,
       "old": "loc_85B02",
-      "new": "SKRuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation",
+      "new": "SKOffscreenWait_RestoreInit",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_OffscreenWait_InstallCapturedInitializationContinuation from actualnativeowner/actualconsumer/caller."
     },
@@ -3062,7 +3062,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 25,
       "old": "loc_1B6A8",
-      "new": "SKRuntimeSpawning_ChooseNativeObjectIndexByUnsignedZoneBands",
+      "new": "SKSpawn_SelectZoneObjectIndex",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ChooseNativeObjectIndexByUnsignedZoneBands."
     },
@@ -3070,7 +3070,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 35,
       "old": "loc_1B6C4",
-      "new": "SKRuntimeSpawning_SelectSonicThreeObjectIndexForEarlyOrCompetitionBonusBands",
+      "new": "SKSpawn_UseS3ObjectIndex",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SelectSonicThreeObjectIndexForEarlyOrCompetitionBonusBands."
     },
@@ -3078,7 +3078,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 38,
       "old": "loc_1B6CA",
-      "new": "SKRuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear",
+      "new": "SKSpawn_InitLoader",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear."
     },
@@ -3086,7 +3086,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 47,
       "old": "loc_1B6E2",
-      "new": "SKRuntimeSpawning_ClearMainRespawnTableByLongword",
+      "new": "SKSpawn_ClearRespawnTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ClearMainRespawnTableByLongword."
     },
@@ -3094,7 +3094,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 51,
       "old": "loc_1B6E8",
-      "new": "SKRuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming",
+      "new": "SKSpawn_SelectLayoutAndLoadMode",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming."
     },
@@ -3102,7 +3102,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 68,
       "old": "loc_1B720",
-      "new": "SKRuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate",
+      "new": "SKSpawn_BeginOnePassPreload",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate."
     },
@@ -3110,7 +3110,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 79,
       "old": "loc_1B742",
-      "new": "SKRuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure",
+      "new": "SKSpawn_PreloadUntilXLimit",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure."
     },
@@ -3118,7 +3118,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 85,
       "old": "loc_1B74C",
-      "new": "SKRuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization",
+      "new": "SKSpawn_FinishPreload",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization."
     },
@@ -3126,7 +3126,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 94,
       "old": "locret_1B768",
-      "new": "SKRuntimeSpawning_ReturnFromPreloadAfterOptionalHpzMiniCoarseBackFix",
+      "new": "SKSpawn_PreloadReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReturnFromPreloadAfterOptionalHpzMiniCoarseBackFix."
     },
@@ -3134,7 +3134,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 98,
       "old": "loc_1B76A",
-      "new": "SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase",
+      "new": "SKSpawn_InitLayoutCursors",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase."
     },
@@ -3142,7 +3142,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 107,
       "old": "loc_1B784",
-      "new": "SKRuntimeSpawning_ClearAlternatePachinkoRespawnTableByLongword",
+      "new": "SKSpawn_ClearPachinkoRespawnTable",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ClearAlternatePachinkoRespawnTableByLongword."
     },
@@ -3150,7 +3150,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 112,
       "old": "loc_1B78E",
-      "new": "SKRuntimeSpawning_ComputeInitialFrontBoundaryWithUnsignedBorrowClamp",
+      "new": "SKSpawn_CalcInitialFrontBoundary",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ComputeInitialFrontBoundaryWithUnsignedBorrowClamp."
     },
@@ -3158,7 +3158,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 118,
       "old": "loc_1B79A",
-      "new": "SKRuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels",
+      "new": "SKSpawn_AlignFrontTo128px",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels."
     },
@@ -3166,7 +3166,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 122,
       "old": "loc_1B7A2",
-      "new": "SKRuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary",
+      "new": "SKSpawn_SeekInitialFront",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary."
     },
@@ -3174,7 +3174,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 130,
       "old": "loc_1B7AC",
-      "new": "SKRuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek",
+      "new": "SKSpawn_StoreFrontAndBeginBackSeek",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek."
     },
@@ -3182,7 +3182,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 138,
       "old": "loc_1B7C4",
-      "new": "SKRuntimeSpawning_PrepareBackSeekFromSelectedRespawnBase",
+      "new": "SKSpawn_BeginBackSeek",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_PrepareBackSeekFromSelectedRespawnBase."
     },
@@ -3190,7 +3190,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 143,
       "old": "loc_1B7CE",
-      "new": "SKRuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary",
+      "new": "SKSpawn_SeekInitialBack",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary."
     },
@@ -3198,7 +3198,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 151,
       "old": "loc_1B7D8",
-      "new": "SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY",
+      "new": "SKSpawn_StoreBackAndSeedCoarseXY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY."
     },
@@ -3206,7 +3206,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 159,
       "old": "loc_1B7F2",
-      "new": "SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder",
+      "new": "SKSpawn_UpdateCameraBackAndYWindow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder."
     },
@@ -3214,7 +3214,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 182,
       "old": "loc_1B83A",
-      "new": "SKRuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow",
+      "new": "SKSpawn_CheckYWindowBottomWrap",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow."
     },
@@ -3222,7 +3222,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 191,
       "old": "loc_1B84A",
-      "new": "SKRuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge",
+      "new": "SKSpawn_BuildLinearYWindow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge."
     },
@@ -3230,7 +3230,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 200,
       "old": "loc_1B860",
-      "new": "SKRuntimeSpawning_SelectLinearVerticalRecordDecoder",
+      "new": "SKSpawn_UseLinearYDecoder",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SelectLinearVerticalRecordDecoder."
     },
@@ -3238,7 +3238,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 203,
       "old": "loc_1B864",
-      "new": "SKRuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange",
+      "new": "SKSpawn_SelectXStreamDirection",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange."
     },
@@ -3246,7 +3246,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 218,
       "old": "loc_1B892",
-      "new": "SKRuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion",
+      "new": "SKSpawn_LoadLeftRecords",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion."
     },
@@ -3254,7 +3254,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 229,
       "old": "loc_1B8A4",
-      "new": "SKRuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord",
+      "new": "SKSpawn_AdvanceLeftOnFailure",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord."
     },
@@ -3262,7 +3262,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 233,
       "old": "loc_1B8A8",
-      "new": "SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction",
+      "new": "SKSpawn_StoreLeftBackCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction."
     },
@@ -3270,7 +3270,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 240,
       "old": "loc_1B8BC",
-      "new": "SKRuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary",
+      "new": "SKSpawn_RetractFrontCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary."
     },
@@ -3278,7 +3278,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 248,
       "old": "loc_1B8C8",
-      "new": "SKRuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan",
+      "new": "SKSpawn_StoreRetractedFrontCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan."
     },
@@ -3286,7 +3286,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 254,
       "old": "loc_1B8D2",
-      "new": "SKRuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate",
+      "new": "SKSpawn_BeginRightStream",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate."
     },
@@ -3294,7 +3294,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 262,
       "old": "loc_1B8E8",
-      "new": "SKRuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary",
+      "new": "SKSpawn_LoadRightRecords",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary."
     },
@@ -3302,7 +3302,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 269,
       "old": "loc_1B8F2",
-      "new": "SKRuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance",
+      "new": "SKSpawn_StoreRightFrontCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance."
     },
@@ -3310,7 +3310,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 277,
       "old": "loc_1B908",
-      "new": "SKRuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary",
+      "new": "SKSpawn_AdvanceBackCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary."
     },
@@ -3318,7 +3318,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 285,
       "old": "loc_1B912",
-      "new": "SKRuntimeSpawning_CommitAdvancedBackCursor",
+      "new": "SKSpawn_StoreAdvancedBackCursor",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitAdvancedBackCursor."
     },
@@ -3326,7 +3326,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 289,
       "old": "loc_1B91A",
-      "new": "SKRuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange",
+      "new": "SKSpawn_SelectEnteringYRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange."
     },
@@ -3334,7 +3334,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 303,
       "old": "loc_1B940",
-      "new": "SKRuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask",
+      "new": "SKSpawn_WrapUpperRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask."
     },
@@ -3342,7 +3342,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 310,
       "old": "loc_1B94C",
-      "new": "SKRuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled",
+      "new": "SKSpawn_CheckLinearUpperRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled."
     },
@@ -3350,7 +3350,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 316,
       "old": "loc_1B956",
-      "new": "SKRuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow",
+      "new": "SKSpawn_SelectDownstreamYRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow."
     },
@@ -3358,7 +3358,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 324,
       "old": "loc_1B968",
-      "new": "SKRuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit",
+      "new": "SKSpawn_WrapLowerRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit."
     },
@@ -3366,7 +3366,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 332,
       "old": "loc_1B978",
-      "new": "SKRuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit",
+      "new": "SKSpawn_CheckLinearLowerRow",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit."
     },
@@ -3374,7 +3374,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 337,
       "old": "loc_1B982",
-      "new": "SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan",
+      "new": "SKSpawn_BeginYRowScan",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan."
     },
@@ -3382,7 +3382,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 350,
       "old": "loc_1B9A4",
-      "new": "SKRuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow",
+      "new": "SKSpawn_LoadUnspawnedYRowRecords",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow."
     },
@@ -3390,7 +3390,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 378,
       "old": "loc_1B9F2",
-      "new": "SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount",
+      "new": "SKSpawn_AdvanceYRowRecord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount."
     },
@@ -3398,7 +3398,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 384,
       "old": "loc_1B9FA",
-      "new": "SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure",
+      "new": "SKSpawn_StoreCoarseY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure."
     },
@@ -3406,7 +3406,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 416,
       "old": "loc_1BA40",
-      "new": "SKRuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter",
+      "new": "SKSpawn_DecodeWrappedRecord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter."
     },
@@ -3414,7 +3414,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 424,
       "old": "loc_1BA4A",
-      "new": "SKRuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow",
+      "new": "SKSpawn_FilterWrappedRecordY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow."
     },
@@ -3422,7 +3422,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 439,
       "old": "loc_1BA62",
-      "new": "SKRuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation",
+      "new": "SKSpawn_MaskForcedWrappedY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation."
     },
@@ -3430,7 +3430,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 442,
       "old": "loc_1BA64",
-      "new": "SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate",
+      "new": "SKSpawn_CreateWrappedRecord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate."
     },
@@ -3438,7 +3438,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 459,
       "old": "loc_1BA92",
-      "new": "SKRuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter",
+      "new": "SKSpawn_DecodeLinearRecord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter."
     },
@@ -3446,7 +3446,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 467,
       "old": "loc_1BA9C",
-      "new": "SKRuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow",
+      "new": "SKSpawn_FilterLinearRecordY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow."
     },
@@ -3454,7 +3454,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 478,
       "old": "loc_1BAAE",
-      "new": "SKRuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags",
+      "new": "SKSpawn_SkipRecordTail",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags."
     },
@@ -3462,7 +3462,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 484,
       "old": "loc_1BAB4",
-      "new": "SKRuntimeSpawning_MaskForcedLinearRecordYBeforeCreation",
+      "new": "SKSpawn_MaskForcedLinearY",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_MaskForcedLinearRecordYBeforeCreation."
     },
@@ -3470,7 +3470,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 487,
       "old": "loc_1BAB6",
-      "new": "SKRuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch",
+      "new": "SKSpawn_CreateLinearRecord",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch."
     },
@@ -3478,7 +3478,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 506,
       "old": "loc_1BAE6",
-      "new": "SKRuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero",
+      "new": "SKSpawn_FindNextFreeSlot",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero."
     },
@@ -3486,7 +3486,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 511,
       "old": "locret_1BAF0",
-      "new": "SKRuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr",
+      "new": "SKSpawn_NextSlotReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr."
     },
@@ -3494,7 +3494,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 559,
       "old": "loc_1BB84",
-      "new": "SKRuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer",
+      "new": "SKSpawn_ClearActiveRespawnBit",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer."
     },
@@ -3502,7 +3502,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 568,
       "old": "loc_1BB98",
-      "new": "SKRuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount",
+      "new": "SKSpawn_NextActorOrReadRingCount",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount."
     },
@@ -3510,7 +3510,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 575,
       "old": "loc_1BBA6",
-      "new": "SKRuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries",
+      "new": "SKSpawn_FinalizeConsumedRings",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries."
     },
@@ -3518,7 +3518,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 584,
       "old": "locret_1BBBC",
-      "new": "SKRuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization",
+      "new": "SKSpawn_ClearRespawnAndRingReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization."
     },
@@ -3526,7 +3526,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 606,
       "old": "loc_1BBE6",
-      "new": "SKRuntimeSpawning_SeekPreviousBackRecordsForRebasedCameraWithoutSpawning",
+      "new": "SKSpawn_RebaseSeekBackLeft",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_SeekPreviousBackRecordsForRebasedCameraWithoutSpawning."
     },
@@ -3534,7 +3534,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 614,
       "old": "loc_1BBF2",
-      "new": "SKRuntimeSpawning_CommitRebasedBackCursorAndPrepareFrontRetraction",
+      "new": "SKSpawn_RebaseStoreBackLeft",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRebasedBackCursorAndPrepareFrontRetraction."
     },
@@ -3542,7 +3542,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 621,
       "old": "loc_1BC06",
-      "new": "SKRuntimeSpawning_RetractRebasedFrontUntilPreviousXIsStrictlyBelowBoundary",
+      "new": "SKSpawn_RebaseRetractFront",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_RetractRebasedFrontUntilPreviousXIsStrictlyBelowBoundary."
     },
@@ -3550,7 +3550,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 629,
       "old": "loc_1BC12",
-      "new": "SKRuntimeSpawning_CommitRebasedFrontPairAndReturn",
+      "new": "SKSpawn_RebaseStoreFrontLeft",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRebasedFrontPairAndReturn."
     },
@@ -3558,7 +3558,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 635,
       "old": "loc_1BC1C",
-      "new": "SKRuntimeSpawning_CommitRightRebaseCoarseXAndPrepareFrontAdvance",
+      "new": "SKSpawn_BeginRightRebase",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRightRebaseCoarseXAndPrepareFrontAdvance."
     },
@@ -3566,7 +3566,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 641,
       "old": "loc_1BC2C",
-      "new": "SKRuntimeSpawning_AdvanceRebasedFrontWhileRecordXBelowUnsignedBoundary",
+      "new": "SKSpawn_RebaseAdvanceFront",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AdvanceRebasedFrontWhileRecordXBelowUnsignedBoundary."
     },
@@ -3574,7 +3574,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 649,
       "old": "loc_1BC36",
-      "new": "SKRuntimeSpawning_CommitRebasedFrontAndPrepareBackAdvance",
+      "new": "SKSpawn_RebaseStoreFrontRight",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRebasedFrontAndPrepareBackAdvance."
     },
@@ -3582,7 +3582,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 657,
       "old": "loc_1BC4C",
-      "new": "SKRuntimeSpawning_AdvanceRebasedBackWhileRecordXBelowUnsignedBoundary",
+      "new": "SKSpawn_RebaseAdvanceBack",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_AdvanceRebasedBackWhileRecordXBelowUnsignedBoundary."
     },
@@ -3590,7 +3590,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 665,
       "old": "loc_1BC56",
-      "new": "SKRuntimeSpawning_CommitRebasedBackLayoutAndRespawnPointers",
+      "new": "SKSpawn_RebaseStoreBackRight",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_CommitRebasedBackLayoutAndRespawnPointers."
     },
@@ -3598,7 +3598,7 @@
       "source": "src/objects/runtime/sk/sprite_spawning.s",
       "original_line": 669,
       "old": "locret_1BC5E",
-      "new": "SKRuntimeSpawning_ReturnFromUnchangedOrCompletedCursorOnlyRebase",
+      "new": "SKSpawn_RebaseReturn",
       "profiles": ["sk"],
       "meaning": "Describe manually reviewed SKRuntimeSpawning_ReturnFromUnchangedOrCompletedCursorOnlyRebase."
     },
@@ -3974,7 +3974,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 15,
       "old": "loc_1B5A0",
-      "new": "SKRuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside",
+      "new": "SKDrawCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateXDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -3982,7 +3982,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 21,
       "old": "loc_1B5AC",
-      "new": "SKRuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease",
+      "new": "SKDrawCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateXDrawCull_ClearSlotAfterOptionalRespawnRelease from actualnativeowner/actualconsumer/caller."
     },
@@ -3990,7 +3990,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 33,
       "old": "loc_1B5C4",
-      "new": "SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside",
+      "new": "SKAnchorDrawCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -3998,7 +3998,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 39,
       "old": "loc_1B5D0",
-      "new": "SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot",
+      "new": "SKAnchorDrawCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateSuppliedXDrawCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -4006,7 +4006,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 53,
       "old": "loc_1B5EA",
-      "new": "SKRuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside",
+      "new": "SKRangeCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateRangeOnlyCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -4014,7 +4014,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 59,
       "old": "loc_1B5F6",
-      "new": "SKRuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot",
+      "new": "SKRangeCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_ImmediateRangeOnlyCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -4022,7 +4022,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 75,
       "old": "loc_1B618",
-      "new": "SKRuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside",
+      "new": "SKLegacyDrawCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyNormalDrawCull_ReleaseRespawnWhenOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -4030,7 +4030,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 81,
       "old": "loc_1B624",
-      "new": "SKRuntimeLifetime_LegacyNormalDrawCull_ClearSlot",
+      "new": "SKLegacyDrawCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyNormalDrawCull_ClearSlot from actualnativeowner/actualconsumer/caller."
     },
@@ -4038,7 +4038,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 85,
       "old": "loc_1B628",
-      "new": "SKRuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow",
+      "new": "SKDualCull_CheckPrimaryWindow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyDualReferenceCull_TestPrimaryCoarseXWindow from actualnativeowner/actualconsumer/caller."
     },
@@ -4046,7 +4046,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 95,
       "old": "loc_1B642",
-      "new": "SKRuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow",
+      "new": "SKDualCull_CheckSecondaryWindow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyDualReferenceCull_TestSecondaryWordXWindow from actualnativeowner/actualconsumer/caller."
     },
@@ -4054,7 +4054,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 102,
       "old": "loc_1B652",
-      "new": "SKRuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows",
+      "new": "SKDualCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyDualReferenceCull_ReleaseRespawnOutsideBothWindows from actualnativeowner/actualconsumer/caller."
     },
@@ -4062,7 +4062,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 108,
       "old": "loc_1B65E",
-      "new": "SKRuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows",
+      "new": "SKDualCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_LegacyDualReferenceCull_ClearSlotOutsideBothWindows from actualnativeowner/actualconsumer/caller."
     },
@@ -4070,7 +4070,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 115,
       "old": "loc_1B666",
-      "new": "SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact",
+      "new": "SKTouchCull_TestAnchorAndDraw",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact from actualnativeowner/actualconsumer/caller."
     },
@@ -4078,7 +4078,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 124,
       "old": "loc_1B680",
-      "new": "SKRuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside",
+      "new": "SKTouchCull_ReleaseRespawn",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_TouchDrawCull_ReleaseRespawnWhenSuppliedAnchorOutside from actualnativeowner/actualconsumer/caller."
     },
@@ -4086,7 +4086,7 @@
       "source": "src/objects/runtime/sk/visibility_and_culling.s",
       "original_line": 130,
       "old": "loc_1B68C",
-      "new": "SKRuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull",
+      "new": "SKTouchCull_DeleteNow",
       "profiles": ["sk"],
       "meaning": "Establish SKRuntimeLifetime_TouchDrawCull_ClearSlotAfterAnchorCull from actualnativeowner/actualconsumer/caller."
     }

@@ -25,7 +25,7 @@ loc_8AB6A:
 ; ---------------------------------------------------------------------------
 
 loc_8AB82:
-                jmp     SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete(pc)
+                jmp     SKCull_ReleaseRespawnForPrivateDelete(pc)
 ; ---------------------------------------------------------------------------
 
 loc_8AB86:

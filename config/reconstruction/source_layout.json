@@ -29824,7 +29824,7 @@
       "responsibility": "Object attribute initialization, eight child construction layouts, tree lists and parent-relative position refresh.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 340,
+      "physical_lines": 341,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -29864,7 +29864,7 @@
       "responsibility": "Parent-aware child drawing, touch interaction, remembered placement and flicker-motion wrappers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 116,
+      "physical_lines": 117,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30004,7 +30004,7 @@
       "responsibility": "Bounds-based object deletion, touch variants, flicker motion and object tracking slot removal.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 262,
+      "physical_lines": 264,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30144,7 +30144,7 @@
       "responsibility": "Suspend offscreen objects with a private empty mapping before their normal activation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 43,
+      "physical_lines": 44,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30284,7 +30284,7 @@
       "responsibility": "Placed-object streaming, free-slot allocation and level object and ring memory reset.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 534,
+      "physical_lines": 550,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "s3.s",
@@ -30414,7 +30414,7 @@
       "responsibility": "Timed sprite drawing, screen lock, boss flashing, slotted attributes and dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 140,
+      "physical_lines": 141,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -30634,7 +30634,7 @@
       "responsibility": "Object attributes, ten child construction layouts, tree lists and parent-relative position refresh.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 409,
+      "physical_lines": 410,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30664,7 +30664,7 @@
       "responsibility": "Parent-aware child drawing, touch interaction, remembered placement and flicker-motion wrappers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 121,
+      "physical_lines": 122,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30764,7 +30764,7 @@
       "responsibility": "Bounds-based deletion, touch variants, flicker motion and tracking-slot removal.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 222,
+      "physical_lines": 224,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30829,7 +30829,7 @@
       "responsibility": "Sprite mask actors, facing or parent-state helpers and second-player input locking callbacks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 130,
+      "physical_lines": 131,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30841,7 +30841,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists",
+          "name": "SKInput_LockP2IfActive",
           "kind": "terminal-tail",
           "reason": "Close the final second-player input-lock callback, conditional return and deletion tail after all earlier annotated helpers.",
           "origin_first_line": 5748,
@@ -30874,7 +30874,7 @@
       "responsibility": "Combined motion, animation, waiting, music delay, collision and sprite drawing callbacks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 132,
+      "physical_lines": 134,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30919,7 +30919,7 @@
       "responsibility": "Object art scaling and DMA setup, fixed-point position integration, scaled-coordinate projection and target velocity calculation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 124,
+      "physical_lines": 126,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -30954,7 +30954,7 @@
       "responsibility": "Suspend offscreen objects with a private empty mapping until normal activation.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 43,
+      "physical_lines": 44,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",
@@ -31059,7 +31059,7 @@
       "responsibility": "Placed-object streaming, free-slot allocation and level object and ring memory reset.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 670,
+      "physical_lines": 689,
       "origin": {
         "commit": "0c0c07b5da0f5ea1903ea7b3bdb1f6f5d18761a9",
         "path": "sonic3k.s",
@@ -31159,7 +31159,7 @@
       "responsibility": "Timed drawing, screen lock, boss flashing, slotted attributes and dynamic pattern loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 140,
+      "physical_lines": 141,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",

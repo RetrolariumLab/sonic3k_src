@@ -19,7 +19,8 @@ SetUp_ObjAttributes3:
                 bset    #2,render_flags(a0)             ; Object uses world coordinates
                 addq.b  #2,routine(a0)                  ; Increase routine counter
 
-S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit:
+; Also used as a shared RTS by the music, transition and object code
+S3Return_AttrSetup:
                 rts
 ; End of function SetUp_ObjAttributes
 
@@ -317,11 +318,11 @@ Refresh_ChildPositionAdjusted:
                 ext.w   d1
                 bclr    #0,render_flags(a0)
                 btst    #0,render_flags(a1)
-                beq.s   S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset
+                beq.s   S3Child_StoreXAndAdjustY
                 neg.w   d1
                 bset    #0,render_flags(a0)
 
-S3RuntimeChildren_CommitAdjustedChildXAndMirrorYOffset:
+S3Child_StoreXAndAdjustY:
                 add.w   d1,d0
                 move.w  d0,x_pos(a0)
                 move.w  y_pos(a1),d0

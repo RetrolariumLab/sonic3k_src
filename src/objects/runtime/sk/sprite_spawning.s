@@ -13,142 +13,147 @@ Load_Sprites:
 ; ---------------------------------------------------------------------------
 
 Load_Sprites_Index:
-                bra.w   SKRuntimeSpawning_ChooseNativeObjectIndexByUnsignedZoneBands
+                bra.w   SKSpawn_SelectZoneObjectIndex
 ; ---------------------------------------------------------------------------
-                bra.w   SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
+                bra.w   SKSpawn_UpdateCameraBackAndYWindow
 ; ---------------------------------------------------------------------------
-                bra.w   SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder
+                bra.w   SKSpawn_UpdateCameraBackAndYWindow
 ; ---------------------------------------------------------------------------
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_ChooseNativeObjectIndexByUnsignedZoneBands:
+SKSpawn_SelectZoneObjectIndex:
                 move.l  #Sprite_ListingK,d0
                 move.b  (Current_zone).w,d1
                 cmpi.b  #$16,d1
-                bhs.s   SKRuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear
+                bhs.s   SKSpawn_InitLoader
                 cmpi.b  #$E,d1
-                bhs.s   SKRuntimeSpawning_SelectSonicThreeObjectIndexForEarlyOrCompetitionBonusBands
+                bhs.s   SKSpawn_UseS3ObjectIndex
                 cmpi.b  #7,d1
-                bhs.s   SKRuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear
+                bhs.s   SKSpawn_InitLoader
 
-SKRuntimeSpawning_SelectSonicThreeObjectIndexForEarlyOrCompetitionBonusBands:
+; Use the Sonic 3 index for zones below $07 and from $0E through $15
+SKSpawn_UseS3ObjectIndex:
                 move.l  #Sprite_Listing3,d0
 
-SKRuntimeSpawning_EnterStreamingInitializationAndGateRespawnClear:
+; Keep the existing respawn table when Respawn_table_keep is set
+SKSpawn_InitLoader:
                 move.l  d0,(Object_index_addr).w
                 addq.b  #4,(Object_load_routine).w
                 tst.b   (Respawn_table_keep).w
-                bne.s   SKRuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming
+                bne.s   SKSpawn_SelectLayoutAndLoadMode
                 lea     (Object_respawn_table).w,a0
                 moveq   #0,d0
                 move.w  #bytesToLcnt($300),d1
 
-SKRuntimeSpawning_ClearMainRespawnTableByLongword:
+SKSpawn_ClearRespawnTable:
                 move.l  d0,(a0)+
-                dbf     d1,SKRuntimeSpawning_ClearMainRespawnTableByLongword
+                dbf     d1,SKSpawn_ClearRespawnTable
 
-SKRuntimeSpawning_SelectZoneActLayoutAndChoosePreloadOrStreaming:
+SKSpawn_SelectLayoutAndLoadMode:
                 move.w  (Current_zone_and_act).w,d0
                 ror.b   #1,d0
                 lsr.w   #5,d0
                 lea     (SpriteLocPtrs).l,a0
                 movea.l (a0,d0.w),a0
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                beq.s   SKRuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate
+                beq.s   SKSpawn_BeginOnePassPreload
                 cmpi.b  #$16,(Current_zone).w
-                bhs.s   SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase
+                bhs.s   SKSpawn_InitLayoutCursors
                 cmpi.b  #$14,(Current_zone).w
-                beq.s   SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase
+                beq.s   SKSpawn_InitLayoutCursors
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   SKRuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate
+                bhs.s   SKSpawn_BeginOnePassPreload
                 tst.w   (Competition_mode).w
-                beq.s   SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase
+                beq.s   SKSpawn_InitLayoutCursors
 
-SKRuntimeSpawning_EnterOnePassPreloadAndAllocateInitialCandidate:
+SKSpawn_BeginOnePassPreload:
                 addq.b  #8,(Object_load_routine).w
                 jsr     AllocateObject(pc)
-                bne.s   SKRuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
+                bne.s   SKSpawn_FinishPreload
                 lea     (_unkF712).w,a3
                 movea.l (Object_index_addr).w,a4
                 move.w  #$800,d6
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                bne.s   SKRuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure
+                bne.s   SKSpawn_PreloadUntilXLimit
                 move.w  #$1780,d6
 
-SKRuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure:
+; Stop when the record X reaches the unsigned limit or no slot is available
+SKSpawn_PreloadUntilXLimit:
                 cmp.w   (a0),d6
-                bls.s   SKRuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization
+                bls.s   SKSpawn_FinishPreload
                 jsr     CreateObjectFromLayoutRecord(pc)
-                beq.s   SKRuntimeSpawning_PreloadSixByteRecordsUntilUnsignedXThresholdOrNextSlotFailure
+                beq.s   SKSpawn_PreloadUntilXLimit
 
-SKRuntimeSpawning_FinishOnePassPreloadWithCoarseBackInitialization:
+SKSpawn_FinishPreload:
                 clr.w   (Camera_X_pos_coarse_back).w
                 cmpi.w  #$1701,(Current_zone_and_act).w
-                bne.s   SKRuntimeSpawning_ReturnFromPreloadAfterOptionalHpzMiniCoarseBackFix
+                bne.s   SKSpawn_PreloadReturn
                 move.w  (Camera_X_pos).w,d1
                 subi.w  #$80,d1
                 andi.w  #$FF80,d1
                 move.w  d1,(Camera_X_pos_coarse_back).w
 
-SKRuntimeSpawning_ReturnFromPreloadAfterOptionalHpzMiniCoarseBackFix:
+SKSpawn_PreloadReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_InitializeLayoutCursorPairAndRespawnBase:
+SKSpawn_InitLayoutCursors:
                 move.l  a0,(Object_load_addr_front).w
                 move.l  a0,(Object_load_addr_back).w
                 lea     (Object_respawn_table).w,a3
                 cmpi.b  #$14,(Current_zone).w
-                bne.s   SKRuntimeSpawning_ComputeInitialFrontBoundaryWithUnsignedBorrowClamp
+                bne.s   SKSpawn_CalcInitialFrontBoundary
                 lea     (Object_respawn_table_2).w,a3
                 moveq   #bytesToLcnt($200),d6
 
-SKRuntimeSpawning_ClearAlternatePachinkoRespawnTableByLongword:
+SKSpawn_ClearPachinkoRespawnTable:
                 clr.l   (a3)+
-                dbf     d6,SKRuntimeSpawning_ClearAlternatePachinkoRespawnTableByLongword
+                dbf     d6,SKSpawn_ClearPachinkoRespawnTable
                 lea     (Object_respawn_table_2).w,a3
 
-SKRuntimeSpawning_ComputeInitialFrontBoundaryWithUnsignedBorrowClamp:
+; Clamp camera X minus $80 to zero on unsigned borrow
+SKSpawn_CalcInitialFrontBoundary:
                 move.w  (Camera_X_pos).w,d6
                 subi.w  #$80,d6
-                bcc.s   SKRuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels
+                bcc.s   SKSpawn_AlignFrontTo128px
                 moveq   #0,d6
 
-SKRuntimeSpawning_AlignFrontSeekBoundaryToOneHundredTwentyEightPixels:
+SKSpawn_AlignFrontTo128px:
                 andi.w  #$FF80,d6
                 movea.l (Object_load_addr_front).w,a0
 
-SKRuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary:
+SKSpawn_SeekInitialFront:
                 cmp.w   (a0),d6
-                bls.s   SKRuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek
+                bls.s   SKSpawn_StoreFrontAndBeginBackSeek
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   SKRuntimeSpawning_SeekInitialFrontCursorWhileRecordXBelowBoundary
+                bra.s   SKSpawn_SeekInitialFront
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitInitialFrontCursorAndPrepareBackSeek:
+SKSpawn_StoreFrontAndBeginBackSeek:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 lea     (Object_respawn_table).w,a3
                 cmpi.b  #$14,(Current_zone).w
-                bne.s   SKRuntimeSpawning_PrepareBackSeekFromSelectedRespawnBase
+                bne.s   SKSpawn_BeginBackSeek
                 lea     (Object_respawn_table_2).w,a3
 
-SKRuntimeSpawning_PrepareBackSeekFromSelectedRespawnBase:
+SKSpawn_BeginBackSeek:
                 movea.l (Object_load_addr_back).w,a0
                 subi.w  #$80,d6
-                bcs.s   SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
+                bcs.s   SKSpawn_StoreBackAndSeedCoarseXY
 
-SKRuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary:
+SKSpawn_SeekInitialBack:
                 cmp.w   (a0),d6
-                bls.s   SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY
+                bls.s   SKSpawn_StoreBackAndSeedCoarseXY
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   SKRuntimeSpawning_SeekInitialBackCursorWhileRecordXBelowBoundary
+                bra.s   SKSpawn_SeekInitialBack
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY:
+; Set coarse X to -1 to force the first horizontal refresh
+SKSpawn_StoreBackAndSeedCoarseXY:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 move.w  #-1,(Camera_X_pos_coarse).w
@@ -156,7 +161,7 @@ SKRuntimeSpawning_CommitInitialBackCursorForceFirstXRefreshAndSeedCoarseY:
                 andi.w  #$FF80,d0
                 move.w  d0,(Camera_Y_pos_coarse).w
 
-SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder:
+SKSpawn_UpdateCameraBackAndYWindow:
                 move.w  (Camera_Y_pos).w,d1
                 subi.w  #$80,d1
                 andi.w  #$FF80,d1
@@ -167,176 +172,182 @@ SKRuntimeSpawning_PublishCameraBackBoundaryAndSelectVerticalWindowDecoder:
                 move.w  d1,(Camera_X_pos_coarse_back).w
                 movea.l (Object_index_addr).w,a4
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   SKRuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge
-                lea     SKRuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter(pc),a6
+                bpl.s   SKSpawn_BuildLinearYWindow
+                lea     SKSpawn_DecodeWrappedRecord(pc),a6
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   SKRuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow
+                bpl.s   SKSpawn_CheckYWindowBottomWrap
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   SKRuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
+                bra.s   SKSpawn_SelectXStreamDirection
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_DetectBottomOverflowOfWrappedVerticalWindow:
+SKSpawn_CheckYWindowBottomWrap:
                 move.w  (Screen_Y_wrap_value).w,d0
                 addq.w  #1,d0
                 cmp.w   d0,d4
-                bls.s   SKRuntimeSpawning_SelectLinearVerticalRecordDecoder
+                bls.s   SKSpawn_UseLinearYDecoder
                 and.w   (Screen_Y_wrap_value).w,d4
-                bra.s   SKRuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange
+                bra.s   SKSpawn_SelectXStreamDirection
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_BuildNonwrappingVerticalWindowAndClampNegativeLowerEdge:
+; Clamp the top edge to zero when it would be negative
+SKSpawn_BuildLinearYWindow:
                 move.w  (Camera_Y_pos).w,d3
                 andi.w  #$FF80,d3
                 move.w  d3,d4
                 addi.w  #$200,d4
                 subi.w  #$80,d3
-                bpl.s   SKRuntimeSpawning_SelectLinearVerticalRecordDecoder
+                bpl.s   SKSpawn_UseLinearYDecoder
                 moveq   #0,d3
 
-SKRuntimeSpawning_SelectLinearVerticalRecordDecoder:
-                lea     SKRuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter(pc),a6
+SKSpawn_UseLinearYDecoder:
+                lea     SKSpawn_DecodeLinearRecord(pc),a6
 
-SKRuntimeSpawning_ChooseHorizontalStreamDirectionFromSignedCoarseXChange:
+; Compare coarse X as signed. If X is unchanged, scan the entering Y row
+SKSpawn_SelectXStreamDirection:
                 move.w  #$FFF,d5
                 move.w  (Camera_X_pos).w,d6
                 andi.w  #$FF80,d6
                 cmp.w   (Camera_X_pos_coarse).w,d6
-                beq.w   SKRuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
-                bge.s   SKRuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate
+                beq.w   SKSpawn_SelectEnteringYRow
+                bge.s   SKSpawn_BeginRightStream
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$80,d6
-                bcs.s   SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bcs.s   SKSpawn_StoreLeftBackCursor
                 jsr     AllocateObject(pc)
-                bne.s   SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bne.s   SKSpawn_StoreLeftBackCursor
 
-SKRuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion:
+SKSpawn_LoadLeftRecords:
                 cmp.w   -6(a0),d6
-                bge.s   SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction
+                bge.s   SKSpawn_StoreLeftBackCursor
                 subq.w  #6,a0
                 subq.w  #1,a3
                 jsr     (a6)
-                bne.s   SKRuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord
+                bne.s   SKSpawn_AdvanceLeftOnFailure
                 subq.w  #6,a0
-                bra.s   SKRuntimeSpawning_LoadPreviousRecordsForLeftwardWindowExpansion
+                bra.s   SKSpawn_LoadLeftRecords
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_AdvanceLeftFailureCursorBeyondAlreadyConsumedRecord:
+; The decoder already consumed the record before the next slot search failed
+SKSpawn_AdvanceLeftOnFailure:
                 addq.w  #6,a0
                 addq.w  #1,a3
 
-SKRuntimeSpawning_CommitLeftBackCursorAndPrepareFrontRetraction:
+SKSpawn_StoreLeftBackCursor:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$300,d6
 
-SKRuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary:
+SKSpawn_RetractFrontCursor:
                 cmp.w   -6(a0),d6
-                bgt.s   SKRuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan
+                bgt.s   SKSpawn_StoreRetractedFrontCursor
                 subq.w  #6,a0
                 subq.w  #1,a3
-                bra.s   SKRuntimeSpawning_RetractFrontCursorWhilePreviousXAtOrBeyondRightBoundary
+                bra.s   SKSpawn_RetractFrontCursor
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRetractedFrontCursorAndContinueVerticalScan:
+SKSpawn_StoreRetractedFrontCursor:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
-                bra.s   SKRuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange
+                bra.s   SKSpawn_SelectEnteringYRow
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRightCoarseXAndAllocateEnteringFrontCandidate:
+SKSpawn_BeginRightStream:
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_front).w,a0
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$280,d6
                 jsr     AllocateObject(pc)
-                bne.s   SKRuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
+                bne.s   SKSpawn_StoreRightFrontCursor
 
-SKRuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary:
+; Stop at the exclusive right edge using an unsigned X comparison
+SKSpawn_LoadRightRecords:
                 cmp.w   (a0),d6
-                bls.s   SKRuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance
+                bls.s   SKSpawn_StoreRightFrontCursor
                 jsr     (a6)
                 addq.w  #1,a3
-                beq.s   SKRuntimeSpawning_LoadForwardRecordsBelowExclusiveRightBoundary
+                beq.s   SKSpawn_LoadRightRecords
 
-SKRuntimeSpawning_CommitRightFrontCursorAndPrepareBackAdvance:
+SKSpawn_StoreRightFrontCursor:
                 move.l  a0,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 movea.l (Object_load_addr_back).w,a0
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$300,d6
-                bcs.s   SKRuntimeSpawning_CommitAdvancedBackCursor
+                bcs.s   SKSpawn_StoreAdvancedBackCursor
 
-SKRuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary:
+SKSpawn_AdvanceBackCursor:
                 cmp.w   (a0),d6
-                bls.s   SKRuntimeSpawning_CommitAdvancedBackCursor
+                bls.s   SKSpawn_StoreAdvancedBackCursor
                 addq.w  #6,a0
                 addq.w  #1,a3
-                bra.s   SKRuntimeSpawning_AdvanceBackCursorPastRecordsBelowUnsignedLeftBoundary
+                bra.s   SKSpawn_AdvanceBackCursor
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitAdvancedBackCursor:
+SKSpawn_StoreAdvancedBackCursor:
                 move.l  a0,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
 
-SKRuntimeSpawning_ChooseNewVerticalRowFromSignedCoarseYChange:
+SKSpawn_SelectEnteringYRow:
                 move.w  (Camera_Y_pos).w,d6
                 andi.w  #$FF80,d6
                 move.w  d6,d3
                 cmp.w   (Camera_Y_pos_coarse).w,d6
-                beq.w   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
-                bge.s   SKRuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow
+                beq.w   SKSpawn_StoreCoarseY
+                bge.s   SKSpawn_SelectDownstreamYRow
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   SKRuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled
+                bpl.s   SKSpawn_CheckLinearUpperRow
                 tst.w   d6
-                bne.s   SKRuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
+                bne.s   SKSpawn_WrapUpperRow
                 cmpi.w  #$80,(Camera_Y_pos_coarse).w
-                bne.s   SKRuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
+                bne.s   SKSpawn_WrapLowerRow
 
-SKRuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask:
+SKSpawn_WrapUpperRow:
                 subi.w  #$80,d3
-                bpl.s   SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bpl.s   SKSpawn_BeginYRowScan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bra.s   SKSpawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_RejectNegativeUpperRowWhenVerticalWrappingDisabled:
+SKSpawn_CheckLinearUpperRow:
                 subi.w  #$80,d3
-                bmi.w   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
-                bra.s   SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bmi.w   SKSpawn_StoreCoarseY
+                bra.s   SKSpawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_ChooseLowerEnteringRowOrWrapSeamUpperRow:
+; When wrapping is enabled, a seam crossing can select the upper row even after a signed increase in coarse Y
+SKSpawn_SelectDownstreamYRow:
                 tst.w   (Camera_min_Y_pos).w
-                bpl.s   SKRuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit
+                bpl.s   SKSpawn_CheckLinearLowerRow
                 tst.w   (Camera_Y_pos_coarse).w
-                bne.s   SKRuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit
+                bne.s   SKSpawn_WrapLowerRow
                 cmpi.w  #$80,d6
-                bne.s   SKRuntimeSpawning_SelectUpperEnteringRowWithConditionalWrapMask
+                bne.s   SKSpawn_WrapUpperRow
 
-SKRuntimeSpawning_SelectLowerEnteringRowAndMaskAtOrBeyondWrapLimit:
+SKSpawn_WrapLowerRow:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                blo.s   SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                blo.s   SKSpawn_BeginYRowScan
                 and.w   (Screen_Y_wrap_value).w,d3
-                bra.s   SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan
+                bra.s   SKSpawn_BeginYRowScan
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_SkipNonwrappingLowerRowOnlyWhenBeyondWrapLimit:
+; Scan the row at the limit itself. Skip only when the row starts beyond the limit
+SKSpawn_CheckLinearLowerRow:
                 addi.w  #$180,d3
                 cmp.w   (Screen_Y_wrap_value).w,d3
-                bhi.s   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bhi.s   SKSpawn_StoreCoarseY
 
-SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan:
+SKSpawn_BeginYRowScan:
                 jsr     AllocateObject(pc)
-                bne.s   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bne.s   SKSpawn_StoreCoarseY
                 move.w  d3,d4
                 addi.w  #$80,d4
                 move.w  #$FFF,d5
@@ -344,18 +355,19 @@ SKRuntimeSpawning_AllocateVerticalRowCandidateAndBoundCurrentLayoutSpan:
                 movea.w (Object_respawn_index_back).w,a3
                 move.l  (Object_load_addr_front).w,d7
                 sub.l   a0,d7
-                beq.s   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                beq.s   SKSpawn_StoreCoarseY
                 addq.w  #2,a0
 
-SKRuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow:
+; Accept both edges of the Y row and skip records whose respawn bit is set
+SKSpawn_LoadUnspawnedYRowRecords:
                 tst.b   (a3)
-                bmi.s   SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                bmi.s   SKSpawn_AdvanceYRowRecord
                 move.w  (a0),d1
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                blo.s   SKSpawn_AdvanceYRowRecord
                 cmp.w   d4,d1
-                bhi.s   SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount
+                bhi.s   SKSpawn_AdvanceYRowRecord
                 bset    #7,(a3)
                 move.w  -2(a0),x_pos(a1)
                 move.w  (a0),d1
@@ -373,15 +385,16 @@ SKRuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow:
                 move.b  3(a0),subtype(a1)
                 move.w  a3,respawn_addr(a1)
                 jsr     CreateNewSprite4(pc)
-                bne.s   SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure
+                bne.s   SKSpawn_StoreCoarseY
 
-SKRuntimeSpawning_AdvanceSixByteVerticalSpanAndWordRemainingCount:
+SKSpawn_AdvanceYRowRecord:
                 addq.w  #6,a0
                 addq.w  #1,a3
                 subq.w  #6,d7
-                bne.s   SKRuntimeSpawning_CreateUnloadedRecordsInsideInclusiveVerticalRow
+                bne.s   SKSpawn_LoadUnspawnedYRowRecords
 
-SKRuntimeSpawning_CommitCoarseYAfterScanSkipOrAllocationFailure:
+; Advance coarse Y even when the row is skipped or a slot cannot be allocated
+SKSpawn_StoreCoarseY:
                 move.w  d6,(Camera_Y_pos_coarse).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -413,33 +426,34 @@ CreateObjectFromLayoutRecord:
                 bra.w   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_SkipLoadedRecordOrEnterWrappedUnionYFilter:
+SKSpawn_DecodeWrappedRecord:
                 tst.b   (a3)
-                bpl.s   SKRuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow
+                bpl.s   SKSpawn_FilterWrappedRecordY
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_ReadRecordXYAndApplyWrappedUnionWindow:
+; The wrapped window accepts Y on either side of the seam. A negative packed Y bypasses the filter
+SKSpawn_FilterWrappedRecordY:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   SKRuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation
+                bmi.s   SKSpawn_MaskForcedWrappedY
                 and.w   d5,d1
                 cmp.w   d3,d1
-                bhs.s   SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
+                bhs.s   SKSpawn_CreateWrappedRecord
                 cmp.w   d4,d1
-                bls.s   SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate
+                bls.s   SKSpawn_CreateWrappedRecord
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_MaskForcedWrappedRecordYBeforeCreation:
+SKSpawn_MaskForcedWrappedY:
                 and.w   d5,d1
 
-SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate:
+SKSpawn_CreateWrappedRecord:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -456,35 +470,37 @@ SKRuntimeSpawning_CommitWrappedRecordAndSearchFollowingCandidate:
                 bra.s   CreateNewSprite4
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_SkipLoadedRecordOrEnterLinearYFilter:
+SKSpawn_DecodeLinearRecord:
                 tst.b   (a3)
-                bpl.s   SKRuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow
+                bpl.s   SKSpawn_FilterLinearRecordY
                 addq.w  #6,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_ReadRecordXYAndApplyInclusiveLinearWindow:
+; The linear window includes both bounds. A negative packed Y bypasses the filter
+SKSpawn_FilterLinearRecordY:
                 move.w  (a0)+,d7
                 move.w  (a0)+,d1
                 move.w  d1,d2
-                bmi.s   SKRuntimeSpawning_MaskForcedLinearRecordYBeforeCreation
+                bmi.s   SKSpawn_MaskForcedLinearY
                 and.w   d5,d1
                 cmp.w   d3,d1
-                blo.s   SKRuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags
+                blo.s   SKSpawn_SkipRecordTail
                 cmp.w   d4,d1
-                bls.s   SKRuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch
+                bls.s   SKSpawn_CreateLinearRecord
 
-SKRuntimeSpawning_SkipRemainingRecordIdAndSubtypeWithSuccessFlags:
+; Skip ID and subtype, then set Z so the caller can continue scanning
+SKSpawn_SkipRecordTail:
                 addq.w  #2,a0
                 moveq   #0,d1
                 rts
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_MaskForcedLinearRecordYBeforeCreation:
+SKSpawn_MaskForcedLinearY:
                 and.w   d5,d1
 
-SKRuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch:
+SKSpawn_CreateLinearRecord:
                 bset    #7,(a3)
                 move.w  d7,x_pos(a1)
                 move.w  d1,y_pos(a1)
@@ -501,14 +517,15 @@ SKRuntimeSpawning_CommitLinearRecordAndFallIntoNextCandidateSearch:
 
 CreateNewSprite4:
                 subq.w  #1,d0
-                bmi.s   SKRuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr
+                bmi.s   SKSpawn_NextSlotReturn
 
-SKRuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero:
+SKSpawn_FindNextFreeSlot:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                dbeq    d0,SKRuntimeSpawning_ScanFollowingObjectSlotsUsingRemainingCounterAndCodeZero
+                dbeq    d0,SKSpawn_FindNextFreeSlot
 
-SKRuntimeSpawning_ReturnFromNextCandidateSearchWithNativeCounterAndCcr:
+; Return the remaining count in D0.w and keep the slot search flags for the caller
+SKSpawn_NextSlotReturn:
                 rts
 ; End of function CreateObjectFromLayoutRecord
 
@@ -556,32 +573,33 @@ Clear_SpriteRingMem:
                 lea     (Dynamic_object_RAM).w,a1
                 moveq   #((Dynamic_object_RAM_end-Dynamic_object_RAM)/object_size)-1,d1
 
-SKRuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer:
+SKSpawn_ClearActiveRespawnBit:
                 lea     next_object(a1),a1
                 tst.l   (a1)
-                beq.s   SKRuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
+                beq.s   SKSpawn_NextActorOrReadRingCount
                 move.w  respawn_addr(a1),d0
-                beq.s   SKRuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount
+                beq.s   SKSpawn_NextActorOrReadRingCount
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-SKRuntimeSpawning_ContinueActorFlagResetThenReadActiveRingConsumptionCount:
-                dbf     d1,SKRuntimeSpawning_ClearRespawnBitForActiveActorWithNonzeroWordPointer
+SKSpawn_NextActorOrReadRingCount:
+                dbf     d1,SKSpawn_ClearActiveRespawnBit
                 lea     (Ring_consumption_table).w,a2
                 move.w  (a2)+,d1
                 subq.w  #1,d1
-                bcs.s   SKRuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization
+                bcs.s   SKSpawn_ClearRespawnAndRingReturn
 
-SKRuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries:
+; Ignore empty queue entries and mark each referenced ring status word as -1
+SKSpawn_FinalizeConsumedRings:
                 move.w  (a2)+,d0
-                beq.s   SKRuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
+                beq.s   SKSpawn_FinalizeConsumedRings
                 movea.w d0,a1
                 move.w  #-1,(a1)
                 clr.w   -2(a2)
                 subq.w  #1,(Ring_consumption_table).w
-                dbf     d1,SKRuntimeSpawning_FinalizeNonzeroRingStatusPointersAndClearTheirQueueEntries
+                dbf     d1,SKSpawn_FinalizeConsumedRings
 
-SKRuntimeSpawning_ReturnAfterRespawnFlagAndActiveRingFinalization:
+SKSpawn_ClearRespawnAndRingReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -595,76 +613,77 @@ Seek_Object_Manager:
                 addi.w  #$400,d6
                 andi.w  #$FF80,d6
                 cmp.w   (Camera_X_pos_coarse).w,d6
-                beq.w   SKRuntimeSpawning_ReturnFromUnchangedOrCompletedCursorOnlyRebase
-                bge.s   SKRuntimeSpawning_CommitRightRebaseCoarseXAndPrepareFrontAdvance
+                beq.w   SKSpawn_RebaseReturn
+                bge.s   SKSpawn_BeginRightRebase
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_back).w,a1
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$80,d6
-                bcs.s   SKRuntimeSpawning_CommitRebasedBackCursorAndPrepareFrontRetraction
+                bcs.s   SKSpawn_RebaseStoreBackLeft
 
-SKRuntimeSpawning_SeekPreviousBackRecordsForRebasedCameraWithoutSpawning:
+; Move the layout and respawn cursors without creating objects
+SKSpawn_RebaseSeekBackLeft:
                 cmp.w   -6(a1),d6
-                bge.s   SKRuntimeSpawning_CommitRebasedBackCursorAndPrepareFrontRetraction
+                bge.s   SKSpawn_RebaseStoreBackLeft
                 subq.w  #6,a1
                 subq.w  #1,a3
-                bra.s   SKRuntimeSpawning_SeekPreviousBackRecordsForRebasedCameraWithoutSpawning
+                bra.s   SKSpawn_RebaseSeekBackLeft
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRebasedBackCursorAndPrepareFrontRetraction:
+SKSpawn_RebaseStoreBackLeft:
                 move.l  a1,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
                 movea.l (Object_load_addr_front).w,a1
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$300,d6
 
-SKRuntimeSpawning_RetractRebasedFrontUntilPreviousXIsStrictlyBelowBoundary:
+SKSpawn_RebaseRetractFront:
                 cmp.w   -6(a1),d6
-                bgt.s   SKRuntimeSpawning_CommitRebasedFrontPairAndReturn
+                bgt.s   SKSpawn_RebaseStoreFrontLeft
                 subq.w  #6,a1
                 subq.w  #1,a3
-                bra.s   SKRuntimeSpawning_RetractRebasedFrontUntilPreviousXIsStrictlyBelowBoundary
+                bra.s   SKSpawn_RebaseRetractFront
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRebasedFrontPairAndReturn:
+SKSpawn_RebaseStoreFrontLeft:
                 move.l  a1,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
-                bra.s   SKRuntimeSpawning_ReturnFromUnchangedOrCompletedCursorOnlyRebase
+                bra.s   SKSpawn_RebaseReturn
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRightRebaseCoarseXAndPrepareFrontAdvance:
+SKSpawn_BeginRightRebase:
                 move.w  d6,(Camera_X_pos_coarse).w
                 movea.l (Object_load_addr_front).w,a1
                 movea.w (Object_respawn_index_front).w,a3
                 addi.w  #$280,d6
 
-SKRuntimeSpawning_AdvanceRebasedFrontWhileRecordXBelowUnsignedBoundary:
+SKSpawn_RebaseAdvanceFront:
                 cmp.w   (a1),d6
-                bls.s   SKRuntimeSpawning_CommitRebasedFrontAndPrepareBackAdvance
+                bls.s   SKSpawn_RebaseStoreFrontRight
                 addq.w  #6,a1
                 addq.w  #1,a3
-                bra.s   SKRuntimeSpawning_AdvanceRebasedFrontWhileRecordXBelowUnsignedBoundary
+                bra.s   SKSpawn_RebaseAdvanceFront
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRebasedFrontAndPrepareBackAdvance:
+SKSpawn_RebaseStoreFrontRight:
                 move.l  a1,(Object_load_addr_front).w
                 move.w  a3,(Object_respawn_index_front).w
                 movea.l (Object_load_addr_back).w,a1
                 movea.w (Object_respawn_index_back).w,a3
                 subi.w  #$300,d6
-                bcs.s   SKRuntimeSpawning_CommitRebasedBackLayoutAndRespawnPointers
+                bcs.s   SKSpawn_RebaseStoreBackRight
 
-SKRuntimeSpawning_AdvanceRebasedBackWhileRecordXBelowUnsignedBoundary:
+SKSpawn_RebaseAdvanceBack:
                 cmp.w   (a1),d6
-                bls.s   SKRuntimeSpawning_CommitRebasedBackLayoutAndRespawnPointers
+                bls.s   SKSpawn_RebaseStoreBackRight
                 addq.w  #6,a1
                 addq.w  #1,a3
-                bra.s   SKRuntimeSpawning_AdvanceRebasedBackWhileRecordXBelowUnsignedBoundary
+                bra.s   SKSpawn_RebaseAdvanceBack
 ; ---------------------------------------------------------------------------
 
-SKRuntimeSpawning_CommitRebasedBackLayoutAndRespawnPointers:
+SKSpawn_RebaseStoreBackRight:
                 move.l  a1,(Object_load_addr_back).w
                 move.w  a3,(Object_respawn_index_back).w
 
-SKRuntimeSpawning_ReturnFromUnchangedOrCompletedCursorOnlyRebase:
+SKSpawn_RebaseReturn:
                 rts

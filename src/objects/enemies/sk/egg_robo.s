@@ -360,7 +360,7 @@ RequireEggRoboAppearanceGroupBit:
                 btst    d0,d1
                 bne.w   locret_918C2
                 addq.w  #8,sp
-                jmp     (SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete).l
+                jmp     (SKCull_ReleaseRespawnForStatusDelete).l
 ; End of function RequireEggRoboAppearanceGroupBit
 
 ; =============== S U B R O U T I N E =======================================

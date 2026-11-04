@@ -173,7 +173,7 @@ loc_768B6:
                 move.l  #loc_768D2,(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_768D2
-                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
+                move.l  #SKInput_LockP2IfActive,(a1)
 
 loc_768D2:
                 moveq   #0,d0

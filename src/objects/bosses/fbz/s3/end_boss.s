@@ -423,7 +423,7 @@ loc_4E00E:
 ; ---------------------------------------------------------------------------
 
 loc_4E022:
-                move.l  #S3RuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact,(a0)
+                move.l  #S3ChildRaw_RefreshAnimateAndTouch,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------

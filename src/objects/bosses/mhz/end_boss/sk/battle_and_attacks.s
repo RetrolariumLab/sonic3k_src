@@ -316,7 +316,7 @@ loc_76376:
                 bset    #5,$38(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_763A4
-                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
+                move.l  #SKInput_LockP2IfActive,(a1)
 
 loc_763A4:
                 move.w  (Level_repeat_offset).w,d0
@@ -328,7 +328,7 @@ loc_763B2:
                 lea     (Player_1).w,a1
                 cmpi.w  #$4778,x_pos(a1)
                 bhs.s   loc_763C4
-                jmp     (SKRuntime_PrimaryInput_BuildRightAndConditionalHeldJumpWord).l
+                jmp     (SKInput_BuildAutoRightAndJump).l
 ; ---------------------------------------------------------------------------
 
 loc_763C4:

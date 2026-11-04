@@ -8,10 +8,10 @@ Child_GetPriority:
                 movea.w parent3(a0),a1
                 bclr    #7,art_tile(a0)
                 btst    #7,art_tile(a1)
-                beq.s   S3RuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync
+                beq.s   S3Child_CopyParentDrawPriority
                 bset    #7,art_tile(a0)
 
-S3RuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync:
+S3Child_CopyParentDrawPriority:
                 move.w  priority(a1),priority(a0)
                 rts
 ; End of function Child_GetPriority
@@ -21,11 +21,11 @@ S3RuntimeChildren_CopyParentQueuePriorityAfterArtPrioritySync:
 Child_GetPriorityOnce:
                 movea.w parent3(a0),a1
                 btst    #7,art_tile(a1)
-                beq.s   S3RuntimeChildren_ReturnFromConditionalParentArtPriorityLatch
+                beq.s   S3Child_GetPriorityOnceReturn
                 bset    #7,art_tile(a0)
                 move.l  (sp),(a0)
 
-S3RuntimeChildren_ReturnFromConditionalParentArtPriorityLatch:
+S3Child_GetPriorityOnceReturn:
                 rts
 ; End of function Child_GetPriorityOnce
 

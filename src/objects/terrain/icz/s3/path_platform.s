@@ -183,7 +183,7 @@ loc_578DC:
 
 loc_57912:
                 jsr     Displace_PlayerOffObject(pc)
-                jmp     S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete(pc)
+                jmp     S3Cull_ReleaseRespawnForStatusDelete(pc)
 ; ---------------------------------------------------------------------------
 
 loc_5791A:

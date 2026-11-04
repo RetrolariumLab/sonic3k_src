@@ -7,7 +7,7 @@
 Play_SFX_Continuous:
                 move.b  (V_int_run_count+3).w,d1
                 andi.b  #$F,d1
-                bne.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bne.w   S3Return_AttrSetup
                 jmp     (Play_SFX).l
 ; End of function Play_SFX_Continuous
 
@@ -20,7 +20,7 @@ loc_542B8:
 
 loc_542CA:
                 subq.w  #1,$2E(a0)
-                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   S3Return_AttrSetup
                 move.w  #3,$2E(a0)
                 lea     (Normal_palette).w,a1
                 moveq   #$40-1,d0
@@ -73,7 +73,7 @@ loc_54322:
 
 loc_54334:
                 subq.w  #1,$2E(a0)
-                bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   S3Return_AttrSetup
                 move.w  #3,$2E(a0)
                 lea     (Normal_palette).w,a1
                 lea     (Target_palette).w,a2

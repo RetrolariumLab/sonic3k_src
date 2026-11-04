@@ -71,7 +71,7 @@ Obj_LRZ2CutsceneKnuckles:
                 move.l  #loc_63B40,(a0)
                 jsr     (AllocateObject).l
                 bne.s   loc_63B40
-                move.l  #SKRuntime_SecondaryInput_BeginLogicalClearActorIfCodeExists,(a1)
+                move.l  #SKInput_LockP2IfActive,(a1)
 
 loc_63B40:
                 lea     (Player_1).w,a1

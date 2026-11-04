@@ -7,7 +7,7 @@
 Play_SFX_Continuous:
                 move.b  (V_int_run_count+3).w,d1
                 andi.b  #$F,d1
-                bne.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bne.w   SKReturn_AttrSetup
                 jmp     (Play_SFX).l
 ; End of function Play_SFX_Continuous
 
@@ -88,7 +88,7 @@ loc_85EE6:
 
 loc_85EF8:
                 subq.w  #1,$2E(a0)
-                bpl.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   SKReturn_AttrSetup
                 move.w  #3,$2E(a0)
                 lea     (Normal_palette).w,a1
                 lea     (Target_palette).w,a2
@@ -98,7 +98,7 @@ loc_85F10:
                 bsr.w   EffectColorSKLowerOneColorTowardTarget
                 dbf     d0,loc_85F10
                 subq.b  #1,$39(a0)
-                bpl.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bpl.w   SKReturn_AttrSetup
                 clr.b   (Palette_rotation_disable).w
                 jmp     (Go_Delete_Sprite).l
 

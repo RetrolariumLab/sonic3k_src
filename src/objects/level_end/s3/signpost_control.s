@@ -59,7 +59,7 @@ Child6_EndSign:
 
 Obj_EndSignControlAwaitStart:
                 tst.b   (_unkFAA8).w
-                bne.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bne.w   S3Return_AttrSetup
                 move.l  #Obj_EndSignControlDoStart,(a0)
                 jsr     Restore_PlayerControl(pc)
                 lea     (Player_2).w,a1
@@ -68,7 +68,7 @@ Obj_EndSignControlAwaitStart:
 
 Obj_EndSignControlDoStart:
                 tst.b   (End_of_level_flag).w           ; Wait for title card to finish
-                beq.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                beq.w   S3Return_AttrSetup
                 jsr     Change_Act2Sizes(pc)
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -148,7 +148,7 @@ loc_54220:
                 move.b  $38(a0),d0
                 andi.b  #7,d0
                 cmpi.b  #7,d0
-                bne.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                bne.w   S3Return_AttrSetup
                 clr.b   $38(a0)
                 clr.w   $1C(a0)
                 clr.b   $26(a0)

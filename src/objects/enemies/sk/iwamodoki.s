@@ -26,7 +26,7 @@ Obj_Iwamodoki:
 
 loc_8FB2A:
                 jsr     (Displace_PlayerOffObject).l
-                jmp     (SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete).l
+                jmp     (SKCull_ReleaseRespawnForStatusDelete).l
 ; ---------------------------------------------------------------------------
 
 loc_8FB36:

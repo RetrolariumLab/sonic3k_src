@@ -40,11 +40,11 @@ Child_AddToTouchList:
 Child_Remember_Draw_Sprite:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion
+                bne.s   SKChild_UntrackAndDelete
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion:
+SKChild_UntrackAndDelete:
                 bsr.w   Remove_From_TrackingSlot
                 bra.w   Go_Delete_Sprite
 ; ---------------------------------------------------------------------------
@@ -52,38 +52,39 @@ SKRuntimeChildren_ClearRememberedChildTrackingAndScheduleDeletion:
 Child_Draw_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag
+                bne.s   SKChild_DeleteOnParentPrivateFlag
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeChildren_ScheduleChildDeletionForParentPrivateFlag:
+SKChild_DeleteOnParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite2:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag
+                bne.s   SKChildTouch_DeleteOnParentPrivateFlag
                 btst    #7,status(a1)
-                bne.s   SKRuntimeChildren_DrawChildAfterParentStatusContactGate
+                bne.s   SKChild_DrawWithoutTouch
                 jsr     (Add_SpriteToCollisionResponseList).l
 
-SKRuntimeChildren_DrawChildAfterParentStatusContactGate:
+SKChild_DrawWithoutTouch:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeChildren_ScheduleTouchChildDeletionForParentPrivateFlag:
+SKChildTouch_DeleteOnParentPrivateFlag:
                 bra.w   Go_Delete_Sprite_2
 ; ---------------------------------------------------------------------------
 
 Child_Draw_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
+                bne.s   SKChild_StartFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw:
+; Clear collision flags and load the indexed velocity before drawing
+SKChild_StartFlickerAndDraw:
                 bset    #7,status(a0)
                 move.l  #Obj_FlickerMove,(a0)
                 clr.b   collision_flags(a0)
@@ -94,14 +95,14 @@ SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw:
 Child_Draw_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
+                bne.s   SKChild_StartFlickerAndDraw
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
 Child_DrawTouch_Sprite_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
+                bne.s   SKChild_StartFlickerAndDraw
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -109,13 +110,13 @@ Child_DrawTouch_Sprite_FlickerMove:
 Child_DrawTouch_Sprite2_FlickerMove:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                bne.s   SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw
+                bne.s   SKChild_StartFlickerAndDraw
                 btst    #7,status(a1)
-                beq.s   SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear
+                beq.s   SKChildFlicker_DrawAndTouch
                 bset    #7,status(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeChildren_EnqueueChildContactAndDrawWhileParentFlagsClear:
+SKChildFlicker_DrawAndTouch:
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l

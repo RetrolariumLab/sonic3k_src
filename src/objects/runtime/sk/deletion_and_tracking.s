@@ -9,17 +9,18 @@ Sprite_CheckDelete:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.s   SKCull_ReleaseRespawnForStatusDelete
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete:
+SKCull_ReleaseRespawnForStatusDelete:
                 move.w  respawn_addr(a0),d0
-                beq.s   SKRuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler
+                beq.s   SKCull_DeferStatusDelete
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-SKRuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler:
+; Set bit 7 of status for children that follow the parent's deletion
+SKCull_DeferStatusDelete:
                 bset    #7,status(a0)
                 move.l  #Delete_Current_Sprite,(a0)
                 rts
@@ -30,17 +31,18 @@ Sprite_CheckDelete2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete
+                bhi.s   SKCull_ReleaseRespawnForPrivateDelete
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete:
+SKCull_ReleaseRespawnForPrivateDelete:
                 move.w  respawn_addr(a0),d0
-                beq.s   SKRuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler
+                beq.s   SKCull_DeferPrivateDelete
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-SKRuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler:
+; Use bit 4 of object field $38 to signal this deletion to children
+SKCull_DeferPrivateDelete:
                 bset    #4,$38(a0)
                 move.l  #Delete_Current_Sprite,(a0)
                 rts
@@ -73,7 +75,7 @@ Obj_FlickerMove:
                 cmpi.w  #$200,d0
                 bhi.w   Go_Delete_Sprite_3
                 bchg    #6,$38(a0)
-                beq.w   SKRuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                beq.w   SKReturn_AttrSetup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -82,7 +84,7 @@ Sprite_CheckDeleteTouch:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   SKCull_ReleaseRespawnForStatusDelete
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -92,7 +94,7 @@ Sprite_CheckDeleteTouch2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete
+                bhi.w   SKCull_ReleaseRespawnForPrivateDelete
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -180,21 +182,21 @@ Go_Delete_SpriteSlotted3:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   SKCull_ReleaseRespawnForStatusDelete
                 rts
 ; ---------------------------------------------------------------------------
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   SKCull_ReleaseRespawnForStatusDelete
                 rts
 ; ---------------------------------------------------------------------------
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   SKRuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   SKCull_ReleaseRespawnForStatusDelete
                 jmp     (Add_SpriteToCollisionResponseList).l
 
 ; =============== S U B R O U T I N E =======================================

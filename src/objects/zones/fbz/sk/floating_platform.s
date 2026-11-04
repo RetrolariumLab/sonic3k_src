@@ -49,7 +49,7 @@ loc_3A5DA:
 
 loc_3A616:
                 move.w  $44(a0),d0
-                jmp     (SKRuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (SKTouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_3A620:

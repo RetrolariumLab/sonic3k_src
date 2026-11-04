@@ -9,17 +9,18 @@ Sprite_CheckDelete:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.s   S3Cull_ReleaseRespawnForStatusDelete
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete:
+S3Cull_ReleaseRespawnForStatusDelete:
                 move.w  respawn_addr(a0),d0
-                beq.s   S3RuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler
+                beq.s   S3Cull_DeferStatusDelete
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-S3RuntimeLifetime_DeferredCull_MarkStatusAndInstallDeleteHandler:
+; Set bit 7 of status for children that follow the parent's deletion
+S3Cull_DeferStatusDelete:
                 bset    #7,status(a0)
                 move.l  #Delete_Current_Sprite,(a0)
                 rts
@@ -30,17 +31,18 @@ Sprite_CheckDelete2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete
+                bhi.s   S3Cull_ReleaseRespawnForPrivateDelete
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete:
+S3Cull_ReleaseRespawnForPrivateDelete:
                 move.w  respawn_addr(a0),d0
-                beq.s   S3RuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler
+                beq.s   S3Cull_DeferPrivateDelete
                 movea.w d0,a2
                 bclr    #7,(a2)
 
-S3RuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler:
+; Use bit 4 of object field $38 to signal this deletion to children
+S3Cull_DeferPrivateDelete:
                 bset    #4,$38(a0)
                 move.l  #Delete_Current_Sprite,(a0)
                 rts
@@ -50,7 +52,7 @@ S3RuntimeLifetime_DeferredCull_MarkPrivateFlagAndInstallDeleteHandler:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.s   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.s   S3Cull_ReleaseRespawnForStatusDelete
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -81,7 +83,7 @@ Obj_FlickerMove:
                 cmpi.w  #$200,d0
                 bhi.w   Go_Delete_Sprite
                 btst    #0,(V_int_run_count+3).w
-                beq.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
+                beq.w   S3Return_AttrSetup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -90,7 +92,7 @@ Sprite_CheckDeleteTouch:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   S3Cull_ReleaseRespawnForStatusDelete
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -100,7 +102,7 @@ Sprite_CheckDeleteTouch2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforePrivateFlagDelete
+                bhi.w   S3Cull_ReleaseRespawnForPrivateDelete
                 jsr     (Add_SpriteToCollisionResponseList).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
@@ -109,7 +111,7 @@ Sprite_CheckDeleteTouch2:
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0
                 cmpi.w  #$280,d0
-                bhi.w   S3RuntimeLifetime_DeferredCull_ReleaseRespawnBeforeStatusDelete
+                bhi.w   S3Cull_ReleaseRespawnForStatusDelete
                 jmp     (Add_SpriteToCollisionResponseList).l
 ; ---------------------------------------------------------------------------
 
@@ -237,7 +239,7 @@ Go_Delete_SpriteSlotted3:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_CapsuleCoarseCull_DrawOrSchedulePrivateFlagDeletion:
+S3Capsule_CoarseCullOrDraw:
                 move.w  x_pos(a0),d0
                 andi.w  #$FF80,d0
                 sub.w   (Camera_X_pos_coarse_back).w,d0

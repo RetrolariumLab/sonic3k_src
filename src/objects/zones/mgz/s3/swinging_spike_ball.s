@@ -79,7 +79,7 @@ loc_3342C:
 
 loc_33460:
                 move.w  $30(a0),d0
-                jmp     (S3RuntimeLifetime_TouchDrawCull_TestSuppliedCoarseXAndRegisterContact).l
+                jmp     (S3TouchCull_TestAnchorAndDraw).l
 ; ---------------------------------------------------------------------------
 
 loc_3346A:

@@ -24,7 +24,7 @@ MoveSlowFall_AnimateRaw:
 Move_AnimateRaw_Wait:
                 jsr     (MoveSprite2).l
 
-S3RuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback:
+S3RawWait_AnimateAndTickTimer:
                 jsr     Animate_Raw(pc)
                 jmp     Obj_Wait(pc)
 ; ---------------------------------------------------------------------------
@@ -43,7 +43,7 @@ MoveWaitTouch:
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-S3RuntimeLifetime_ChildRawTouch_RefreshPositionThenAnimatePairDelayAndQueueContact:
+S3ChildRaw_RefreshAnimateAndTouch:
                 jsr     Refresh_ChildPosition(pc)
 
 AnimateRaw_DrawTouch:

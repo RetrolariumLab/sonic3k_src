@@ -41,7 +41,7 @@ loc_871B4:
 ; ---------------------------------------------------------------------------
 
 loc_871BC:
-                jmp     (SKRuntimeLifetime_RawWait_AnimateThenRunWordCountdownCallback).l
+                jmp     (SKRawWait_AnimateAndTickTimer).l
 ; ---------------------------------------------------------------------------
 
 loc_871C2:

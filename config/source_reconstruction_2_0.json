@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 95
+    "commit_count": 96
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -617,9 +617,15 @@
       "commits": ["bd1eb9fd98b223249a23153dc2eb4ce7421ba657"]
     },
     {
-      "id": "current-shorten-02-system",
+      "id": "change-2d2ce733403f",
       "kind": "source_or_tooling",
       "summary": "Shorten 97 reset, device, math, interrupt and debug labels while preserving hardware and controller details in source comments.",
+      "commits": ["2d2ce733403f85008520a56b5a1a7962e042eea2"]
+    },
+    {
+      "id": "current-shorten-03a-runtime-lifecycle",
+      "kind": "source_or_tooling",
+      "summary": "Shorten 220 streaming, child, visibility and object lifecycle labels and preserve the source and content bindings.",
       "commits": ["release-commit"]
     }
   ],

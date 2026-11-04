@@ -482,7 +482,7 @@ loc_6D6A6:
 loc_6D6BC:
                 jsr     (Random_Number).l
                 andi.w  #$3C,d0
-                jmp     (SKRuntimeChildren_ConvertChildToIndexedVelocityFlickerAndDraw).l
+                jmp     (SKChild_StartFlickerAndDraw).l
 
 ; =============== S U B R O U T I N E =======================================
 
