@@ -102137,56 +102137,56 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 612
       },
-      "declarations_sha256": "6ca20b97ce69099e064abbf822f91b4bd820b1d25f568cb46371ae34bcd5bebf",
+      "declarations_sha256": "6a5699538c147c5a7a15a370dfad0cdf72d99caa9e290e40a1895d927af5dd06",
       "labels": {
         "Map_LBZFinalBoss1_": 0,
-        "Frame_364604": 92,
-        "Frame_36461E": 118,
-        "Frame_364644": 156,
-        "Frame_36465E": 182,
-        "Frame_364666": 190,
-        "Frame_36466E": 198,
-        "Frame_364676": 206,
-        "Frame_36467E": 214,
-        "Frame_364686": 222,
-        "Frame_36468E": 230,
-        "Frame_36469C": 244,
-        "Frame_3646AA": 258,
-        "Frame_3646B8": 272,
-        "Frame_3646C0": 280,
-        "Frame_3646C8": 288,
-        "Frame_3646D0": 296,
-        "Frame_3646D8": 304,
-        "Frame_3646E6": 318,
-        "Frame_3646F4": 332,
-        "Frame_3646FC": 340,
-        "Frame_364704": 348,
-        "Frame_36470C": 356,
-        "Frame_36471A": 370,
-        "Frame_364722": 378,
-        "Frame_36472A": 386,
-        "Frame_364732": 394,
-        "Frame_36473A": 402,
-        "Frame_364748": 416,
-        "Frame_364756": 430,
-        "Frame_36475E": 438,
-        "Frame_364766": 446,
-        "Frame_36476E": 454,
-        "Frame_364776": 462,
-        "Frame_36477E": 470,
-        "Frame_364786": 478,
-        "Frame_364794": 492,
-        "Frame_3647AE": 518,
-        "Frame_3647B6": 526,
-        "Frame_3647BE": 534,
-        "Frame_3647C6": 542,
-        "Frame_3647CE": 550,
-        "Frame_3647D6": 558,
-        "Frame_3647DE": 566,
-        "Frame_3647E6": 574,
-        "Frame_3647EE": 582,
-        "Frame_3647FC": 596,
-        "Frame_36480A": 610
+        "LBZFinalBoss1S3_MapFrame00": 92,
+        "LBZFinalBoss1S3_MapFrame01": 118,
+        "LBZFinalBoss1S3_MapFrame02": 156,
+        "LBZFinalBoss1S3_MapFrame03": 182,
+        "LBZFinalBoss1S3_MapFrame04": 190,
+        "LBZFinalBoss1S3_MapFrame05": 198,
+        "LBZFinalBoss1S3_MapFrame06": 206,
+        "LBZFinalBoss1S3_MapFrame07": 214,
+        "LBZFinalBoss1S3_MapFrame08": 222,
+        "LBZFinalBoss1S3_MapFrame09": 230,
+        "LBZFinalBoss1S3_MapFrame0A": 244,
+        "LBZFinalBoss1S3_MapFrame0B": 258,
+        "LBZFinalBoss1S3_MapFrame0C": 272,
+        "LBZFinalBoss1S3_MapFrame0D": 280,
+        "LBZFinalBoss1S3_MapFrame0E": 288,
+        "LBZFinalBoss1S3_MapFrame0F": 296,
+        "LBZFinalBoss1S3_MapFrame10": 304,
+        "LBZFinalBoss1S3_MapFrame11": 318,
+        "LBZFinalBoss1S3_MapFrame12": 332,
+        "LBZFinalBoss1S3_MapFrame13": 340,
+        "LBZFinalBoss1S3_MapFrame14": 348,
+        "LBZFinalBoss1S3_MapFrame15": 356,
+        "LBZFinalBoss1S3_MapFrame16": 370,
+        "LBZFinalBoss1S3_MapFrame17": 378,
+        "LBZFinalBoss1S3_MapFrame18": 386,
+        "LBZFinalBoss1S3_MapFrame19": 394,
+        "LBZFinalBoss1S3_MapFrame1A": 402,
+        "LBZFinalBoss1S3_MapFrame1B": 416,
+        "LBZFinalBoss1S3_MapFrame1C": 430,
+        "LBZFinalBoss1S3_MapFrame1D": 438,
+        "LBZFinalBoss1S3_MapFrame1E": 446,
+        "LBZFinalBoss1S3_MapFrame1F": 454,
+        "LBZFinalBoss1S3_MapFrame20": 462,
+        "LBZFinalBoss1S3_MapFrame21": 470,
+        "LBZFinalBoss1S3_MapFrame22": 478,
+        "LBZFinalBoss1S3_UnindexedStoredMapBody": 492,
+        "LBZFinalBoss1S3_MapFrame23": 518,
+        "LBZFinalBoss1S3_MapFrame24": 526,
+        "LBZFinalBoss1S3_MapFrame25": 534,
+        "LBZFinalBoss1S3_MapFrame26": 542,
+        "LBZFinalBoss1S3_MapFrame27": 550,
+        "LBZFinalBoss1S3_MapFrame28": 558,
+        "LBZFinalBoss1S3_MapFrame29": 566,
+        "LBZFinalBoss1S3_MapFrame2A": 574,
+        "LBZFinalBoss1S3_MapFrame2B": 582,
+        "LBZFinalBoss1S3_MapFrame2C": 596,
+        "LBZFinalBoss1S3_MapFrame2D": 610
       },
       "external_symbols": [],
       "blocks": [
@@ -102194,322 +102194,322 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364604",
+          "target": "LBZFinalBoss1S3_MapFrame00",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36461E",
+          "target": "LBZFinalBoss1S3_MapFrame01",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364644",
+          "target": "LBZFinalBoss1S3_MapFrame02",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36465E",
+          "target": "LBZFinalBoss1S3_MapFrame03",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364666",
+          "target": "LBZFinalBoss1S3_MapFrame04",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36466E",
+          "target": "LBZFinalBoss1S3_MapFrame05",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364676",
+          "target": "LBZFinalBoss1S3_MapFrame06",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36467E",
+          "target": "LBZFinalBoss1S3_MapFrame07",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364686",
+          "target": "LBZFinalBoss1S3_MapFrame08",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36468E",
+          "target": "LBZFinalBoss1S3_MapFrame09",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36469C",
+          "target": "LBZFinalBoss1S3_MapFrame0A",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646AA",
+          "target": "LBZFinalBoss1S3_MapFrame0B",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646B8",
+          "target": "LBZFinalBoss1S3_MapFrame0C",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646C0",
+          "target": "LBZFinalBoss1S3_MapFrame0D",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646C8",
+          "target": "LBZFinalBoss1S3_MapFrame0E",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646D0",
+          "target": "LBZFinalBoss1S3_MapFrame0F",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646D8",
+          "target": "LBZFinalBoss1S3_MapFrame10",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646E6",
+          "target": "LBZFinalBoss1S3_MapFrame11",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646F4",
+          "target": "LBZFinalBoss1S3_MapFrame12",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3646FC",
+          "target": "LBZFinalBoss1S3_MapFrame13",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364704",
+          "target": "LBZFinalBoss1S3_MapFrame14",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36470C",
+          "target": "LBZFinalBoss1S3_MapFrame15",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36471A",
+          "target": "LBZFinalBoss1S3_MapFrame16",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364722",
+          "target": "LBZFinalBoss1S3_MapFrame17",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36472A",
+          "target": "LBZFinalBoss1S3_MapFrame18",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364732",
+          "target": "LBZFinalBoss1S3_MapFrame19",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36473A",
+          "target": "LBZFinalBoss1S3_MapFrame1A",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364748",
+          "target": "LBZFinalBoss1S3_MapFrame1B",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364756",
+          "target": "LBZFinalBoss1S3_MapFrame1C",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36475E",
+          "target": "LBZFinalBoss1S3_MapFrame1D",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364766",
+          "target": "LBZFinalBoss1S3_MapFrame1E",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36476E",
+          "target": "LBZFinalBoss1S3_MapFrame1F",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364776",
+          "target": "LBZFinalBoss1S3_MapFrame20",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36477E",
+          "target": "LBZFinalBoss1S3_MapFrame21",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_364786",
+          "target": "LBZFinalBoss1S3_MapFrame22",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647AE",
+          "target": "LBZFinalBoss1S3_MapFrame23",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647B6",
+          "target": "LBZFinalBoss1S3_MapFrame24",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647BE",
+          "target": "LBZFinalBoss1S3_MapFrame25",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647C6",
+          "target": "LBZFinalBoss1S3_MapFrame26",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647CE",
+          "target": "LBZFinalBoss1S3_MapFrame27",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647D6",
+          "target": "LBZFinalBoss1S3_MapFrame28",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647DE",
+          "target": "LBZFinalBoss1S3_MapFrame29",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647E6",
+          "target": "LBZFinalBoss1S3_MapFrame2A",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647EE",
+          "target": "LBZFinalBoss1S3_MapFrame2B",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3647FC",
+          "target": "LBZFinalBoss1S3_MapFrame2C",
           "base": "Map_LBZFinalBoss1_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36480A",
+          "target": "LBZFinalBoss1S3_MapFrame2D",
           "base": "Map_LBZFinalBoss1_"
         },
         {

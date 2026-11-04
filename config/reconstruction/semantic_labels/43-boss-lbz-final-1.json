@@ -1,0 +1,3706 @@
+{
+  "schema_version": 1,
+  "packet": "43-boss-lbz-final-1",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 23,
+      "old": "loc_4F9CE",
+      "new": "LBZBoss1S3_InitBossAndChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the shared nine-hit root and its child groups."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 37,
+      "old": "loc_4FA0C",
+      "new": "LBZBoss1S3_SpawnBossChildGroups",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Construct root attachments without rolling back earlier groups."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 48,
+      "old": "loc_4FA2E",
+      "new": "LBZFinalBoss1S3_Root_CountInitialWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count initial root wait without moving."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 52,
+      "old": "loc_4FA32",
+      "new": "LBZBoss1S3_BeginVerticalPass",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Begin upward vertical battle pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 59,
+      "old": "loc_4FA46",
+      "new": "LBZBoss1S3_CheckLowerPassBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose vertical pass limit from current velocity sign."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 70,
+      "old": "loc_4FA62",
+      "new": "LBZBoss1S3_CheckUpperPassBoundary",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move upward until old integerY reaches upper limit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 77,
+      "old": "loc_4FA70",
+      "new": "LBZBoss1S3_CheckTurnaroundWindow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Wait at vertical boundary until cannon/health permits turnaround."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 83,
+      "old": "loc_4FA80",
+      "new": "LBZBoss1S3_ChooseRandomPassSide",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose root side and flip from RNG highWORDbit0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 93,
+      "old": "loc_4FA9E",
+      "new": "LBZBoss1S3_ApplySideAndReverseY",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Reposition horizontally and choose opposite vertical velocity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 103,
+      "old": "loc_4FAB8",
+      "new": "LBZBoss1S3_StoreReversedYSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit the next vertical pass speed."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 106,
+      "old": "locret_4FABC",
+      "new": "LBZBoss1S3_TurnaroundReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from vertical boundary handling."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 109,
+      "old": "word_4FABE",
+      "new": "LBZBoss1S3_PassSideCameraXOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two WORD offsets select randomized root side."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 114,
+      "old": "locret_4FAC2",
+      "new": "LBZBoss1S3_HoldDuringHit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Hold root state6 while post-state hit processing continues."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 118,
+      "old": "loc_4FAC4",
+      "new": "LBZBoss1S3_TickSectionDropPause",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Count the first body-drop BYTEdelay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 124,
+      "old": "loc_4FACC",
+      "new": "LBZBoss1S3_BeginSectionDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select short downward root shift after drop pause."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 128,
+      "old": "locret_4FAD8",
+      "new": "LBZBoss1S3_SharedReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from root delay and assorted child/ending gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 132,
+      "old": "loc_4FADA",
+      "new": "LBZBoss1S3_StepSectionDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Apply each downward shift before checking BYTEtimeout."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 139,
+      "old": "loc_4FAE6",
+      "new": "LBZBoss1S3_ResumeHitHold",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Resume still root state while flash completes."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 144,
+      "old": "loc_4FAEE",
+      "new": "LBZBoss1S3_DescendToHandoffHeight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Lower defeatedroot toward camera+140hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 155,
+      "old": "loc_4FB0A",
+      "new": "LBZBoss1S3_TryFinalBossTwo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attempt secondfinalboss at clampedrootposition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 169,
+      "old": "loc_4FB46",
+      "new": "LBZBoss1S3_QueueDefeatDeletion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retireroot after final2allocationattempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 173,
+      "old": "loc_4FB4C",
+      "new": "LBZBoss1S3_AltExitRiseAboveCamera",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move alternative defeatedroot upward oneintegerpixel."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 184,
+      "old": "loc_4FB68",
+      "new": "LBZBoss1S3_AltExitRepositionAndFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Begin alternative return from above camera."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 195,
+      "old": "loc_4FB8C",
+      "new": "LBZBoss1S3_AltExitDescendToCamera",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Descend onepixel before flame/departure selection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 206,
+      "old": "loc_4FBA8",
+      "new": "LBZBoss1S3_AltExitSpawnFlameAndMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start horizontalexit and attemptnormalshipflame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 213,
+      "old": "loc_4FBBE",
+      "new": "LBZBoss1S3_AltExitApproachPayloadX",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move horizontally to camera+A0hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 224,
+      "old": "loc_4FBDA",
+      "new": "LBZBoss1S3_AltExitDropPayload",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attemptonebouncingpayload and continue departure."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 232,
+      "old": "loc_4FBF2",
+      "new": "LBZBoss1S3_AltExitApproachRightGate",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move horizontally until camera+1C0hexthreshold."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 243,
+      "old": "loc_4FC0E",
+      "new": "LBZBoss1S3_AltExitSignalChildRemoval",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Signalrootstatus6/flag4 at finalexitgate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 250,
+      "old": "loc_4FC26",
+      "new": "LBZBoss1S3_AltExitClearBossAndDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Finishalternativeexit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 255,
+      "old": "loc_4FC30",
+      "new": "LBZBoss1S3_InitPrimarySectionAndCannons",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize section0 or preselectedsection1 and its cannons."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 264,
+      "old": "loc_4FC4E",
+      "new": "LBZBoss1S3_SectionFollowAndCheckBreak",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow root before section damage/lifetime helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 270,
+      "old": "loc_4FC5A",
+      "new": "LBZBoss1S3_SectionWaitHitAndAdjust",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Hold section during root status6 and reposition surviving sections afterward."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 282,
+      "old": "loc_4FC86",
+      "new": "LBZBoss1S3_SectionDrawDuringHit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retain section collision/draw after hit-state processing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 286,
+      "old": "loc_4FC8A",
+      "new": "LBZBoss1S3_DeleteBrokenSection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Directly delete a broken bodysection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 290,
+      "old": "loc_4FC90",
+      "new": "LBZBoss1S3_InitMiddleSection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the middle bodysection using breakflagindex1."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 295,
+      "old": "loc_4FC98",
+      "new": "LBZBoss1S3_InitLowerSectionAndFlames",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize lower section with larger full resources and flames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 305,
+      "old": "loc_4FCBC",
+      "new": "LBZBoss1S3_LowerSectionCheckBreak",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow root and process index2 breakup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 311,
+      "old": "loc_4FCC8",
+      "new": "LBZBoss1S3_InitSectionDebris",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a normal-created section fragment and update immediately."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 318,
+      "old": "loc_4FCE0",
+      "new": "LBZBoss1S3_SectionDebrisFallAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move debris and keep current draw through timed deletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 324,
+      "old": "loc_4FCF0",
+      "new": "LBZBoss1S3_InitTopTrim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize the root's top trim actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 330,
+      "old": "loc_4FCFE",
+      "new": "LBZBoss1S3_TopTrimFollowOrDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Keep top trim attached until rootstatus7."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 338,
+      "old": "loc_4FD14",
+      "new": "LBZBoss1S3_DeleteTopTrim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Clear top trim on immediate root death."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 342,
+      "old": "loc_4FD1A",
+      "new": "LBZBoss1S3_InitHitOverlay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one of two root hit overlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 350,
+      "old": "locret_4FD34",
+      "new": "LBZBoss1S3_HitOverlayInitReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from overlay initialization."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 354,
+      "old": "loc_4FD36",
+      "new": "LBZBoss1S3_HitOverlayDrawDuringFlash",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw overlay only while root hitstatus6 remainsset."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 362,
+      "old": "loc_4FD4C",
+      "new": "LBZBoss1S3_DeleteHitOverlay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Delete the temporary overlay immediately."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 366,
+      "old": "loc_4FD52",
+      "new": "LBZBoss1S3_InitCannonAndCacheRoot",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a section-attached cannon with cached grandparentroot."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 376,
+      "old": "loc_4FD76",
+      "new": "LBZBoss1S3_CannonTurnAndCheckBreak",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Run private cannoncycle then immediate-section lifetime draw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 387,
+      "old": "loc_4FD92",
+      "new": "LBZBoss1S3_CannonHitHoldDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Retained alternate cannon tail performs section-aware flickerdraw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 392,
+      "old": "loc_4FD98",
+      "new": "LBZBoss1S3_InitLaserCharge",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize one attached charging laser."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 400,
+      "old": "loc_4FDAE",
+      "new": "LBZBoss1S3_LaserChargeAccelerateBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow cannon and shorten redraw intervals before blinking."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 413,
+      "old": "loc_4FDDE",
+      "new": "LBZBoss1S3_LaserChargeDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Draw charge only on interval reload/transition updates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 417,
+      "old": "loc_4FDE4",
+      "new": "LBZBoss1S3_DeleteChargeWithCannon",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Delete charging laser when immediate cannonstatus7."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 421,
+      "old": "loc_4FDEA",
+      "new": "LBZBoss1S3_LaserChargeTickFinalBlink",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Blink charge before selecting raw launch animation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 430,
+      "old": "loc_4FE04",
+      "new": "LBZBoss1S3_LaserChargeBeginLaunchAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Start charging laser raw launch sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 437,
+      "old": "loc_4FE20",
+      "new": "LBZBoss1S3_LaserChargeFollowAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow parent while decoding launch frames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 443,
+      "old": "loc_4FE2E",
+      "new": "LBZBoss1S3_LaserBeginFlight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Launch charged laser,playing sound only when previously onscreen."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 450,
+      "old": "loc_4FE42",
+      "new": "LBZBoss1S3_LaserChooseFacingLaunch",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Activate laser collision and choose horizontal launch side."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 460,
+      "old": "loc_4FE60",
+      "new": "LBZBoss1S3_LaserStoreOffsetAndSpeed",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Move laser to muzzle offset and store launch speed."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 466,
+      "old": "loc_4FE6A",
+      "new": "LBZBoss1S3_LaserSpawnTrailByParity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Create one trail with even-parity raw variant before laser motion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 476,
+      "old": "loc_4FE8A",
+      "new": "LBZBoss1S3_LaserSpawnOddTrail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Create odd-parity trail before laser motion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 482,
+      "old": "loc_4FE9E",
+      "new": "LBZBoss1S3_LaserMoveAndCull",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Integrate flying laser after optional unchecked trail processing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 487,
+      "old": "loc_4FEAA",
+      "new": "LBZBoss1S3_InitLaserTrail",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a trail using raw pointer written by its creator."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 494,
+      "old": "loc_4FEC4",
+      "new": "LBZBoss1S3_LaserTrailAnimateAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance trailraw and remain at initialized worldposition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 499,
+      "old": "loc_4FECE",
+      "new": "LBZBoss1S3_InitSectionFlame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize inherited-map section flame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 507,
+      "old": "loc_4FEE6",
+      "new": "LBZBoss1S3_SectionFlameFollowAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Follow section and animate its damaging flame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 513,
+      "old": "loc_4FEF2",
+      "new": "LBZBoss1S3_InitAlternateUnderside",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize alternativeexitunderside actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 520,
+      "old": "loc_4FF02",
+      "new": "LBZBoss1S3_AlternateUndersideDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Followalternativeexitrootuntilownflag4release."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 525,
+      "old": "loc_4FF0A",
+      "new": "LBZBoss1S3_PayloadDispatchAndDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Runbouncingpayloadthree-stategraph."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 532,
+      "old": "off_4FF1C",
+      "new": "LBZBoss1S3_PayloadStateOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Selectpayloadsetup,gravityfloor,anddeletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 538,
+      "old": "loc_4FF22",
+      "new": "LBZBoss1S3_InitBouncingPayload",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initializefallingpayloadwithoutinitialvelocityload."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 546,
+      "old": "loc_4FF3A",
+      "new": "LBZBoss1S3_PayloadFallAndProbe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Movebeforetestingupdatedverticalspeedandfloor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 553,
+      "old": "loc_4FF4C",
+      "new": "LBZBoss1S3_PayloadBounceOrSettle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Chooseweakerreboundorfinalpayloadsettling."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 563,
+      "old": "loc_4FF60",
+      "new": "LBZBoss1S3_PayloadBreakUpAndDelete",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Attemptsharedbreakupeffectsandexplosionthenretirenextupdate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 571,
+      "old": "loc_4FF7A",
+      "new": "LBZFinalBoss1S3_Payload_DeleteDirectly",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Clearpayloadinitsfinalroutine."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 575,
+      "old": "loc_4FF80",
+      "new": "LBZBoss1S3_InitOrbiter",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Initialize a raw-animated circular attack actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 586,
+      "old": "locret_4FFB0",
+      "new": "LBZBoss1S3_OrbiterPhaseInitReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after default/halfturn phase initialization."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 590,
+      "old": "loc_4FFB2",
+      "new": "LBZBoss1S3_OrbiterAnimateAndCircle",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Animate orbiter before incrementing circularphase and placing it."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "original_line": 598,
+      "old": "loc_4FFC4",
+      "new": "LBZBoss1S3_OrbiterCycleFlips",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Cycle renderflipbits when raw sequence ends."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 16,
+      "old": "loc_4FFF0",
+      "new": "LBZBoss1S3_CannonTurnFromRootFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance cannon turnphase when its WORDtimerunderflows."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 27,
+      "old": "loc_50008",
+      "new": "LBZBoss1S3_CannonStepAndWrapPhase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Advance forward cannonphase through12positions."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 33,
+      "old": "loc_50012",
+      "new": "LBZBoss1S3_CannonStorePhaseAndDecodeFlip",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Read packed cannonframe/flipflag and adjust firingdirectiontest."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 43,
+      "old": "loc_50032",
+      "new": "LBZBoss1S3_CannonCheckChargeWindow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Signal root turnaroundwindow and attempt charge at alignedframe4."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 55,
+      "old": "loc_50058",
+      "new": "LBZBoss1S3_CannonLoadFrameAndWait",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Commit cannonframe and reload its perphaseWORDtimer."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 60,
+      "old": "loc_50064",
+      "new": "LBZBoss1S3_CannonApplySectionOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Place cannon from phase-indexed signedBYTE offsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 77,
+      "old": "byte_5008A",
+      "new": "LBZBoss1S3_CannonFrameFlipBytes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Twelve packed bytes select turnframe and horizontalflip."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 91,
+      "old": "word_50096",
+      "new": "LBZBoss1S3_CannonPhaseWaits",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Twelve WORDdelays select cannonphase dwell."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 104,
+      "old": "byte_500AE",
+      "new": "LBZBoss1S3_CannonPositionOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Eleven signedBYTEpairs position cannonaroundsection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 151,
+      "old": "loc_50126",
+      "new": "LBZBoss1S3_HitCheckSectionThresholds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Trigger bodysection drop only at remainingHP5or1."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 158,
+      "old": "loc_5013C",
+      "new": "LBZBoss1S3_HitBeginNextSectionDrop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Request next bodysectionbreak and temporary dropmotion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 168,
+      "old": "loc_50162",
+      "new": "LBZBoss1S3_HitChooseFlashRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Choose two-color hitpalette by currentBYTEtimerparity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 174,
+      "old": "loc_50170",
+      "new": "LBZBoss1S3_HitCopyColorsAndTick",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Write hitcolors and restore savedstate/collision on timerzero."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 183,
+      "old": "locret_50192",
+      "new": "LBZBoss1S3_HitUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return from root hitprocessing guards/countdown."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 187,
+      "old": "loc_50194",
+      "new": "LBZBoss1S3_BeginScoredDefeatHandoff",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Mark rootdefeat and choose profile-specific continuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 204,
+      "old": "loc_501D4",
+      "new": "LBZBoss1S3_BeginAlternateExit",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Select alternate rootdefeatcontinuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 219,
+      "old": "word_501EE",
+      "new": "LBZBoss1S3_HitPaletteDestinations",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two WORDaddresses select hitpalette destinations."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 221,
+      "old": "word_501F2",
+      "new": "LBZBoss1S3_HitPaletteColorRows",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Two adjacent two-WORDcolorbanks alternatebytimerparity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 240,
+      "old": "loc_50230",
+      "new": "LBZBoss1S3_BreakSectionAndTryExplosion",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Breaksection with selectedframebank/childrecord."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 248,
+      "old": "loc_5024A",
+      "new": "LBZBoss1S3_SectionCheckHitSuspension",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Pause sectionrefresh while rootstatus6."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 253,
+      "old": "locret_50258",
+      "new": "LBZBoss1S3_SectionUnbrokenReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Return after optional hitsuspensionselection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 275,
+      "old": "word_50282",
+      "new": "LBZBoss1S3_SectionDebrisVelocities",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Six signedWORDXYpairslaunchbodydebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 282,
+      "old": "byte_5029A",
+      "new": "LBZBoss1S3_SectionDebrisFourFrames",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "FourBYTEframeslabelupper/middledebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "original_line": 287,
+      "old": "byte_5029E",
+      "new": "LBZBoss1S3_SectionDebrisSixFrames",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "SixBYTEframeslabellowersectiondebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 9,
+      "old": "word_502B0",
+      "new": "LBZBoss1S3_AlternateUndersideAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Art-firstdescriptorselectsalternativeundersideframe."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 13,
+      "old": "word_502B8",
+      "new": "LBZBoss1S3_PayloadAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Art-firstdescriptorselectsbouncingpayloadframe."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 17,
+      "old": "ObjDat3_502C0",
+      "new": "LBZBoss1S3_PrimarySectionAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full attributes describe upper/middlesection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 22,
+      "old": "ObjDat3_502CC",
+      "new": "LBZBoss1S3_LowerSectionAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full attributes describe lowersection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 27,
+      "old": "word_502D8",
+      "new": "LBZBoss1S3_SectionFlameAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Art-first attributes retaininheritedmapforflame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 31,
+      "old": "word_502E0",
+      "new": "LBZBoss1S3_SectionDebrisAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Partial3attributesconfiguresectiondebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 34,
+      "old": "word_502E6",
+      "new": "LBZFinalBoss1S3_Cannon_PartialAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Partial3attributesconfiguresectioncannon."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 37,
+      "old": "word_502EC",
+      "new": "LBZBoss1S3_LaserChargeAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Art-first attributesconfigurecharge."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 41,
+      "old": "word_502F4",
+      "new": "LBZBoss1S3_LaserTrailAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Partial3attributesconfigurelasertrail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 44,
+      "old": "ObjDat3_502FA",
+      "new": "LBZFinalBoss1S3_Orbiter_FullAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full attributesconfigurecircularattack."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 49,
+      "old": "ObjDat3_50306",
+      "new": "LBZFinalBoss1S3_TopTrim_FullAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full attributesconfiguretoptrim."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 54,
+      "old": "ObjDat3_50312",
+      "new": "LBZBoss1S3_HitOverlayAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Full attributesconfiguretwohitoverlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 59,
+      "old": "ChildObjDat_5031E",
+      "new": "LBZBoss1S3_AlternateUndersideChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normalonechildrecordrequestsunderside."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 63,
+      "old": "ChildObjDat_50326",
+      "new": "LBZBoss1S3_AlternatePayloadChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normalonechildrecordrequestsbouncingpayload."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 67,
+      "old": "ChildObjDat_5032E",
+      "new": "LBZBoss1S3_BodySectionChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normal3childrecordcreatesrootbodysections."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 75,
+      "old": "ChildObjDat_50342",
+      "new": "LBZBoss1S3_BreakupFourDebrisChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normal4childrecordcreatesupper/middledebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 85,
+      "old": "ChildObjDat_5035C",
+      "new": "LBZBoss1S3_BreakupSixDebrisChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normal6childrecordcreateslowerdebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 99,
+      "old": "ChildObjDat_50382",
+      "new": "LBZBoss1S3_SectionCannonChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Repeatednormalrecordcreates2cannons."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 103,
+      "old": "ChildObjDat_5038A",
+      "new": "LBZBoss1S3_CannonChargeChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Twostoredadjacentnormalrecordsdescribeoppositechargeoffsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 110,
+      "old": "ChildObjDat_5039A",
+      "new": "LBZBoss1S3_LaserTrailChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normalonechildrecordcreateslasertrail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 114,
+      "old": "ChildObjDat_503A2",
+      "new": "LBZBoss1S3_LowerSectionFlameChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normal2childrecordcreateslowerflames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 120,
+      "old": "ChildObjDat_503B0",
+      "new": "LBZBoss1S3_OrbiterChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Repeatednormalrecordrequestsonecircularactor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 124,
+      "old": "ChildObjDat_503B8",
+      "new": "LBZBoss1S3_TopTrimChild",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normalonechildrecordcreatesroottrim."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 128,
+      "old": "ChildObjDat_503C0",
+      "new": "LBZBoss1S3_HitOverlayChildren",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Normal2childrecordcreateshitleftrightoverlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 134,
+      "old": "byte_503CE",
+      "new": "LBZBoss1S3_SectionFlameAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniformrawloopanimatessectionflames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 136,
+      "old": "byte_503D3",
+      "new": "LBZBoss1S3_LaserChargeLaunchAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniformrawstreamfinisheschargewithlaunchcallback."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 138,
+      "old": "byte_503DB",
+      "new": "LBZBoss1S3_LaserTrailEvenAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniformrawfirsttrailvariant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 140,
+      "old": "byte_503E1",
+      "new": "LBZBoss1S3_LaserTrailOddAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniformrawsecondtrailvariant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "original_line": 142,
+      "old": "byte_503E7",
+      "new": "LBZBoss1S3_OrbiterFlipCycleAnim",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Uniformrawstreamcyclesorbiterflipcombination."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 32,
+      "old": "loc_73046",
+      "new": "LBZBoss1SK_KnucklesTickCameraTransition",
+      "profiles": ["sk"],
+      "meaning": "AdvanceKnucklescamera/musictransition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 36,
+      "old": "loc_7304C",
+      "new": "LBZBoss1SK_KnucklesInstallBossInit",
+      "profiles": ["sk"],
+      "meaning": "Selectordinarynine-hitrootaftercameratransition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 41,
+      "old": "loc_73054",
+      "new": "LBZBoss1SK_KnucklesRiseToHandoffHeight",
+      "profiles": ["sk"],
+      "meaning": "MoveKnucklesdefeatedrootupwardtowardfinal2handoff."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 52,
+      "old": "loc_73070",
+      "new": "LBZBoss1SK_KnucklesTryFinalBossTwo",
+      "profiles": ["sk"],
+      "meaning": "SpawnKnucklessecondbosswithoutpositionassignment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 59,
+      "old": "loc_73088",
+      "new": "LBZBoss1SK_KnucklesQueueDefeatDeletion",
+      "profiles": ["sk"],
+      "meaning": "RetireKnucklesrootregardlessfinal2allocationresult."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 63,
+      "old": "loc_7308E",
+      "new": "LBZBoss1SK_InitPrimarySectionAndCannons",
+      "profiles": ["sk"],
+      "meaning": "Initialize section0 or preselectedsection1 and its cannons."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 72,
+      "old": "loc_730B0",
+      "new": "LBZBoss1SK_SectionFollowAndCheckBreak",
+      "profiles": ["sk"],
+      "meaning": "Follow root before section damage/lifetime helper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 78,
+      "old": "loc_730C0",
+      "new": "LBZBoss1SK_SectionWaitHitAndAdjust",
+      "profiles": ["sk"],
+      "meaning": "Hold section during root status6 and reposition surviving sections afterward."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 90,
+      "old": "loc_730EC",
+      "new": "LBZBoss1SK_SectionDrawDuringHit",
+      "profiles": ["sk"],
+      "meaning": "Retain section collision/draw after hit-state processing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 94,
+      "old": "loc_730F2",
+      "new": "LBZBoss1SK_DeleteBrokenSection",
+      "profiles": ["sk"],
+      "meaning": "Directly delete a broken bodysection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 98,
+      "old": "loc_730F8",
+      "new": "LBZBoss1SK_InitMiddleSection",
+      "profiles": ["sk"],
+      "meaning": "Initialize the middle bodysection using breakflagindex1."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 103,
+      "old": "loc_73100",
+      "new": "LBZBoss1SK_InitLowerSectionAndFlames",
+      "profiles": ["sk"],
+      "meaning": "Initialize lower section with larger full resources and flames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 113,
+      "old": "loc_73128",
+      "new": "LBZBoss1SK_LowerSectionCheckBreak",
+      "profiles": ["sk"],
+      "meaning": "Follow root and process index2 breakup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 119,
+      "old": "loc_73138",
+      "new": "LBZBoss1SK_InitSectionDebris",
+      "profiles": ["sk"],
+      "meaning": "Initialize a normal-created section fragment and update immediately."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 126,
+      "old": "loc_73152",
+      "new": "LBZBoss1SK_SectionDebrisFallAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Move debris and keep current draw through timed deletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 132,
+      "old": "loc_73164",
+      "new": "LBZBoss1SK_InitTopTrim",
+      "profiles": ["sk"],
+      "meaning": "Initialize the root's top trim actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 138,
+      "old": "loc_73174",
+      "new": "LBZBoss1SK_TopTrimFollowOrDelete",
+      "profiles": ["sk"],
+      "meaning": "Keep top trim attached until rootstatus7."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 146,
+      "old": "loc_7318C",
+      "new": "LBZBoss1SK_DeleteTopTrim",
+      "profiles": ["sk"],
+      "meaning": "Clear top trim on immediate root death."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 150,
+      "old": "loc_73192",
+      "new": "LBZBoss1SK_InitHitOverlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two root hit overlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 158,
+      "old": "locret_731AE",
+      "new": "LBZBoss1SK_HitOverlayInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from overlay initialization."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 162,
+      "old": "loc_731B0",
+      "new": "LBZBoss1SK_HitOverlayDrawDuringFlash",
+      "profiles": ["sk"],
+      "meaning": "Draw overlay only while root hitstatus6 remainsset."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 170,
+      "old": "loc_731C8",
+      "new": "LBZBoss1SK_DeleteHitOverlay",
+      "profiles": ["sk"],
+      "meaning": "Delete the temporary overlay immediately."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 174,
+      "old": "loc_731CE",
+      "new": "LBZBoss1SK_InitCannonAndCacheRoot",
+      "profiles": ["sk"],
+      "meaning": "Initialize a section-attached cannon with cached grandparentroot."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 184,
+      "old": "loc_731F4",
+      "new": "LBZBoss1SK_CannonTurnAndCheckBreak",
+      "profiles": ["sk"],
+      "meaning": "Run private cannoncycle then immediate-section lifetime draw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 195,
+      "old": "loc_73212",
+      "new": "LBZBoss1SK_CannonHitHoldDraw",
+      "profiles": ["sk"],
+      "meaning": "Retained alternate cannon tail performs section-aware flickerdraw."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 200,
+      "old": "loc_7321A",
+      "new": "LBZBoss1SK_InitLaserCharge",
+      "profiles": ["sk"],
+      "meaning": "Initialize one attached charging laser."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 208,
+      "old": "loc_73232",
+      "new": "LBZBoss1SK_LaserChargeAccelerateBlink",
+      "profiles": ["sk"],
+      "meaning": "Follow cannon and shorten redraw intervals before blinking."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 221,
+      "old": "loc_73264",
+      "new": "LBZBoss1SK_LaserChargeDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw charge only on interval reload/transition updates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 225,
+      "old": "loc_7326A",
+      "new": "LBZBoss1SK_DeleteChargeWithCannon",
+      "profiles": ["sk"],
+      "meaning": "Delete charging laser when immediate cannonstatus7."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 229,
+      "old": "loc_73270",
+      "new": "LBZBoss1SK_LaserChargeTickFinalBlink",
+      "profiles": ["sk"],
+      "meaning": "Blink charge before selecting raw launch animation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 238,
+      "old": "loc_7328C",
+      "new": "LBZBoss1SK_LaserChargeBeginLaunchAnim",
+      "profiles": ["sk"],
+      "meaning": "Start charging laser raw launch sequence."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 245,
+      "old": "loc_732A8",
+      "new": "LBZBoss1SK_LaserChargeFollowAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow parent while decoding launch frames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 251,
+      "old": "loc_732BA",
+      "new": "LBZBoss1SK_LaserBeginFlight",
+      "profiles": ["sk"],
+      "meaning": "Launch charged laser,playing sound only when previously onscreen."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 258,
+      "old": "loc_732CE",
+      "new": "LBZBoss1SK_LaserChooseFacingLaunch",
+      "profiles": ["sk"],
+      "meaning": "Activate laser collision and choose horizontal launch side."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 268,
+      "old": "loc_732EC",
+      "new": "LBZBoss1SK_LaserStoreOffsetAndSpeed",
+      "profiles": ["sk"],
+      "meaning": "Move laser to muzzle offset and store launch speed."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 274,
+      "old": "loc_732F6",
+      "new": "LBZBoss1SK_LaserSpawnTrailByParity",
+      "profiles": ["sk"],
+      "meaning": "Create one trail with even-parity raw variant before laser motion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 284,
+      "old": "loc_73318",
+      "new": "LBZBoss1SK_LaserSpawnOddTrail",
+      "profiles": ["sk"],
+      "meaning": "Create odd-parity trail before laser motion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 290,
+      "old": "loc_7332E",
+      "new": "LBZBoss1SK_LaserMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Integrate flying laser after optional unchecked trail processing."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 295,
+      "old": "loc_7333A",
+      "new": "LBZBoss1SK_InitLaserTrail",
+      "profiles": ["sk"],
+      "meaning": "Initialize a trail using raw pointer written by its creator."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 302,
+      "old": "loc_73358",
+      "new": "LBZBoss1SK_LaserTrailAnimateAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Advance trailraw and remain at initialized worldposition."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 307,
+      "old": "loc_73364",
+      "new": "LBZBoss1SK_InitSectionFlame",
+      "profiles": ["sk"],
+      "meaning": "Initialize inherited-map section flame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 316,
+      "old": "loc_73384",
+      "new": "LBZBoss1SK_SectionFlameFollowAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Follow section and animate its damaging flame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 322,
+      "old": "loc_73396",
+      "new": "LBZBoss1SK_InitOrbiter",
+      "profiles": ["sk"],
+      "meaning": "Initialize a raw-animated circular attack actor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 333,
+      "old": "locret_733C8",
+      "new": "LBZBoss1SK_OrbiterPhaseInitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after default/halfturn phase initialization."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 337,
+      "old": "loc_733CA",
+      "new": "LBZBoss1SK_OrbiterAnimateAndCircle",
+      "profiles": ["sk"],
+      "meaning": "Animate orbiter before incrementing circularphase and placing it."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 345,
+      "old": "loc_733E2",
+      "new": "LBZBoss1SK_OrbiterCycleFlips",
+      "profiles": ["sk"],
+      "meaning": "Cycle renderflipbits when raw sequence ends."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 365,
+      "old": "loc_7340E",
+      "new": "LBZBoss1SK_CannonTurnFromRootFlip",
+      "profiles": ["sk"],
+      "meaning": "Advance cannon turnphase when its WORDtimerunderflows."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 376,
+      "old": "loc_73426",
+      "new": "LBZBoss1SK_CannonStepAndWrapPhase",
+      "profiles": ["sk"],
+      "meaning": "Advance forward cannonphase through12positions."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 382,
+      "old": "loc_73430",
+      "new": "LBZBoss1SK_CannonStorePhaseAndDecodeFlip",
+      "profiles": ["sk"],
+      "meaning": "Read packed cannonframe/flipflag and adjust firingdirectiontest."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 392,
+      "old": "loc_73450",
+      "new": "LBZBoss1SK_CannonCheckChargeWindow",
+      "profiles": ["sk"],
+      "meaning": "Signal root turnaroundwindow and attempt charge at alignedframe4."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 404,
+      "old": "loc_73478",
+      "new": "LBZBoss1SK_CannonLoadFrameAndWait",
+      "profiles": ["sk"],
+      "meaning": "Commit cannonframe and reload its perphaseWORDtimer."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 409,
+      "old": "loc_73484",
+      "new": "LBZBoss1SK_CannonApplySectionOffset",
+      "profiles": ["sk"],
+      "meaning": "Place cannon from phase-indexed signedBYTE offsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 426,
+      "old": "byte_734AA",
+      "new": "LBZBoss1SK_CannonFrameFlipBytes",
+      "profiles": ["sk"],
+      "meaning": "Twelve packed bytes select turnframe and horizontalflip."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 440,
+      "old": "word_734B6",
+      "new": "LBZBoss1SK_CannonPhaseWaits",
+      "profiles": ["sk"],
+      "meaning": "Twelve WORDdelays select cannonphase dwell."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 453,
+      "old": "byte_734CE",
+      "new": "LBZBoss1SK_CannonPositionOffsets",
+      "profiles": ["sk"],
+      "meaning": "Eleven signedBYTEpairs position cannonaroundsection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 500,
+      "old": "loc_73546",
+      "new": "LBZBoss1SK_HitCheckSectionThresholds",
+      "profiles": ["sk"],
+      "meaning": "Trigger bodysection drop only at remainingHP5or1."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 507,
+      "old": "loc_7355C",
+      "new": "LBZBoss1SK_HitBeginNextSectionDrop",
+      "profiles": ["sk"],
+      "meaning": "Request next bodysectionbreak and temporary dropmotion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 517,
+      "old": "loc_73584",
+      "new": "LBZBoss1SK_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Choose two-color hitpalette by currentBYTEtimerparity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 523,
+      "old": "loc_73592",
+      "new": "LBZBoss1SK_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Write hitcolors and restore savedstate/collision on timerzero."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 532,
+      "old": "locret_735B4",
+      "new": "LBZBoss1SK_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from root hitprocessing guards/countdown."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 536,
+      "old": "loc_735B6",
+      "new": "LBZBoss1SK_BeginScoredDefeatHandoff",
+      "profiles": ["sk"],
+      "meaning": "Mark rootdefeat and choose profile-specific continuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 553,
+      "old": "loc_735FC",
+      "new": "LBZBoss1SK_BeginAlternateExit",
+      "profiles": ["sk"],
+      "meaning": "Select alternate rootdefeatcontinuation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 567,
+      "old": "word_73612",
+      "new": "LBZBoss1SK_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Two WORDaddresses select hitpalette destinations."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 569,
+      "old": "word_73616",
+      "new": "LBZBoss1SK_HitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two adjacent two-WORDcolorbanks alternatebytimerparity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 588,
+      "old": "loc_73654",
+      "new": "LBZBoss1SK_BreakSectionAndTryExplosion",
+      "profiles": ["sk"],
+      "meaning": "Breaksection with selectedframebank/childrecord."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 596,
+      "old": "loc_73672",
+      "new": "LBZBoss1SK_SectionCheckHitSuspension",
+      "profiles": ["sk"],
+      "meaning": "Pause sectionrefresh while rootstatus6."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 601,
+      "old": "locret_73680",
+      "new": "LBZBoss1SK_SectionUnbrokenReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after optional hitsuspensionselection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 623,
+      "old": "word_736AA",
+      "new": "LBZBoss1SK_SectionDebrisVelocities",
+      "profiles": ["sk"],
+      "meaning": "Six signedWORDXYpairslaunchbodydebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 630,
+      "old": "byte_736C2",
+      "new": "LBZBoss1SK_SectionDebrisFourFrames",
+      "profiles": ["sk"],
+      "meaning": "FourBYTEframeslabelupper/middledebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "original_line": 635,
+      "old": "byte_736C6",
+      "new": "LBZBoss1SK_SectionDebrisSixFrames",
+      "profiles": ["sk"],
+      "meaning": "SixBYTEframeslabellowersectiondebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "ObjDat3_736D8",
+      "new": "LBZBoss1SK_PrimarySectionAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes describe upper/middlesection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "ObjDat3_736E4",
+      "new": "LBZBoss1SK_LowerSectionAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributes describe lowersection."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 19,
+      "old": "word_736F0",
+      "new": "LBZBoss1SK_SectionFlameAttributes",
+      "profiles": ["sk"],
+      "meaning": "Art-first attributes retaininheritedmapforflame."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 23,
+      "old": "word_736F8",
+      "new": "LBZBoss1SK_SectionDebrisAttributes",
+      "profiles": ["sk"],
+      "meaning": "Partial3attributesconfiguresectiondebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 26,
+      "old": "word_736FE",
+      "new": "LBZFinalBoss1SK_Cannon_PartialAttributes",
+      "profiles": ["sk"],
+      "meaning": "Partial3attributesconfiguresectioncannon."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 29,
+      "old": "word_73704",
+      "new": "LBZBoss1SK_LaserChargeAttributes",
+      "profiles": ["sk"],
+      "meaning": "Art-first attributesconfigurecharge."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 33,
+      "old": "word_7370C",
+      "new": "LBZBoss1SK_LaserTrailAttributes",
+      "profiles": ["sk"],
+      "meaning": "Partial3attributesconfigurelasertrail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 36,
+      "old": "ObjDat3_73712",
+      "new": "LBZFinalBoss1SK_Orbiter_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributesconfigurecircularattack."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 41,
+      "old": "ObjDat3_7371E",
+      "new": "LBZFinalBoss1SK_TopTrim_FullAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributesconfiguretoptrim."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 46,
+      "old": "ObjDat3_7372A",
+      "new": "LBZBoss1SK_HitOverlayAttributes",
+      "profiles": ["sk"],
+      "meaning": "Full attributesconfiguretwohitoverlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 51,
+      "old": "ObjDat3_73736",
+      "new": "LBZBoss1SK_FallingDebrisAttributes",
+      "profiles": ["sk"],
+      "meaning": "Fullresourcesforrandomfallingdebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 56,
+      "old": "ObjDat3_73742",
+      "new": "LBZBoss1SK_DeathEggPieceAttributes",
+      "profiles": ["sk"],
+      "meaning": "Fullresourcesformain/fallingpieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 61,
+      "old": "ObjDat3_7374E",
+      "new": "LBZBoss1SK_DeathEggParticleAttributes",
+      "profiles": ["sk"],
+      "meaning": "Fullresourcesforupwardparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 66,
+      "old": "ObjDat3_7375A",
+      "new": "LBZBoss1SK_DeathEggNestedFxAttributes",
+      "profiles": ["sk"],
+      "meaning": "Fullresourcesfornestedrawparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 71,
+      "old": "ChildObjDat_73766",
+      "new": "LBZBoss1SK_BodySectionChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal3childrecordcreatesrootbodysections."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 79,
+      "old": "ChildObjDat_7377A",
+      "new": "LBZBoss1SK_BreakupFourDebrisChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal4childrecordcreatesupper/middledebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 89,
+      "old": "ChildObjDat_73794",
+      "new": "LBZBoss1SK_BreakupSixDebrisChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal6childrecordcreateslowerdebris."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 103,
+      "old": "ChildObjDat_737BA",
+      "new": "LBZBoss1SK_SectionCannonChildren",
+      "profiles": ["sk"],
+      "meaning": "Repeatednormalrecordcreates2cannons."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 107,
+      "old": "ChildObjDat_737C2",
+      "new": "LBZBoss1SK_CannonChargeChildren",
+      "profiles": ["sk"],
+      "meaning": "Twostoredadjacentnormalrecordsdescribeoppositechargeoffsets."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 114,
+      "old": "ChildObjDat_737D2",
+      "new": "LBZBoss1SK_LaserTrailChild",
+      "profiles": ["sk"],
+      "meaning": "Normalonechildrecordcreateslasertrail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 118,
+      "old": "ChildObjDat_737DA",
+      "new": "LBZBoss1SK_LowerSectionFlameChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal2childrecordcreateslowerflames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 124,
+      "old": "ChildObjDat_737E8",
+      "new": "LBZBoss1SK_OrbiterChild",
+      "profiles": ["sk"],
+      "meaning": "Repeatednormalrecordrequestsonecircularactor."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 128,
+      "old": "ChildObjDat_737F0",
+      "new": "LBZBoss1SK_TopTrimChild",
+      "profiles": ["sk"],
+      "meaning": "Normalonechildrecordcreatesroottrim."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 132,
+      "old": "ChildObjDat_737F8",
+      "new": "LBZBoss1SK_HitOverlayChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal2childrecordcreateshitleftrightoverlays."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 138,
+      "old": "ChildObjDat_73806",
+      "new": "LBZBoss1SK_EndingBurstChildren",
+      "profiles": ["sk"],
+      "meaning": "Simplecount2recordrequestsoppositeburstcontrollers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 141,
+      "old": "ChildObjDat_7380C",
+      "new": "LBZBoss1SK_DeathEggPieceChildren",
+      "profiles": ["sk"],
+      "meaning": "Normal7childrecordcreatesfallingpiecegroup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 157,
+      "old": "ChildObjDat_73838",
+      "new": "LBZBoss1SK_DeathEggParticleChild",
+      "profiles": ["sk"],
+      "meaning": "Simpleonechildrecordcreatesmainpieceparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 160,
+      "old": "ChildObjDat_7383E",
+      "new": "LBZBoss1SK_DeathEggNestedParticleChild",
+      "profiles": ["sk"],
+      "meaning": "Simpleonechildrecordcreatesnestedrawparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 163,
+      "old": "byte_73844",
+      "new": "LBZBoss1SK_SectionFlameAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawloopanimatessectionflames."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 165,
+      "old": "byte_73849",
+      "new": "LBZBoss1SK_LaserChargeLaunchAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawstreamfinisheschargewithlaunchcallback."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 167,
+      "old": "byte_73851",
+      "new": "LBZBoss1SK_LaserTrailEvenAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawfirsttrailvariant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 169,
+      "old": "byte_73857",
+      "new": "LBZBoss1SK_LaserTrailOddAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawsecondtrailvariant."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 171,
+      "old": "byte_7385D",
+      "new": "LBZBoss1SK_OrbiterFlipCycleAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawstreamcyclesorbiterflipcombination."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 173,
+      "old": "byte_73864",
+      "new": "LBZBoss1SK_DeathEggNestedParticleAnim",
+      "profiles": ["sk"],
+      "meaning": "Uniformrawstreamfornestedparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 175,
+      "old": "byte_7386A",
+      "new": "LBZBoss1SK_EndingP1FrameFlipAnim",
+      "profiles": ["sk"],
+      "meaning": "ExternalplayerstreamdrivesPlayer1endinganimation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 181,
+      "old": "byte_73874",
+      "new": "LBZBoss1SK_EndingP2FrameFlipAnim",
+      "profiles": ["sk"],
+      "meaning": "LongerexternalplayerstreamforPlayer2."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 199,
+      "old": "word_738C6",
+      "new": "LBZBoss1SK_EarlierBossCameraTrigger",
+      "profiles": ["sk"],
+      "meaning": "FourWORDrangebelongsseparateLBZendbossroot."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "original_line": 201,
+      "old": "word_738CE",
+      "new": "LBZBoss1SK_EarlierBossCameraTarget",
+      "profiles": ["sk"],
+      "meaning": "FourtargetWORDsbelongseparateLBZendbosscamera."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 23,
+      "old": "loc_729DE",
+      "new": "LBZBoss1SK_InitBossAndChildren",
+      "profiles": ["sk"],
+      "meaning": "Initialize the shared nine-hit root and its child groups."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 40,
+      "old": "loc_72A2A",
+      "new": "LBZBoss1SK_SpawnBossChildGroups",
+      "profiles": ["sk"],
+      "meaning": "Construct root attachments without rolling back earlier groups."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 51,
+      "old": "loc_72A54",
+      "new": "LBZFinalBoss1SK_Root_CountInitialWait",
+      "profiles": ["sk"],
+      "meaning": "Count initial root wait without moving."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 55,
+      "old": "loc_72A5A",
+      "new": "LBZBoss1SK_BeginVerticalPass",
+      "profiles": ["sk"],
+      "meaning": "Begin upward vertical battle pass."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 62,
+      "old": "loc_72A70",
+      "new": "LBZBoss1SK_CheckLowerPassBoundary",
+      "profiles": ["sk"],
+      "meaning": "Choose vertical pass limit from current velocity sign."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 73,
+      "old": "loc_72A8C",
+      "new": "LBZBoss1SK_CheckUpperPassBoundary",
+      "profiles": ["sk"],
+      "meaning": "Move upward until old integerY reaches upper limit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 80,
+      "old": "loc_72A9A",
+      "new": "LBZBoss1SK_CheckTurnaroundWindow",
+      "profiles": ["sk"],
+      "meaning": "Wait at vertical boundary until cannon/health permits turnaround."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 86,
+      "old": "loc_72AAA",
+      "new": "LBZBoss1SK_ChooseRandomPassSide",
+      "profiles": ["sk"],
+      "meaning": "Choose root side and flip from RNG highWORDbit0."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 96,
+      "old": "loc_72AC8",
+      "new": "LBZBoss1SK_ApplySideAndReverseY",
+      "profiles": ["sk"],
+      "meaning": "Reposition horizontally and choose opposite vertical velocity."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 106,
+      "old": "loc_72AE2",
+      "new": "LBZBoss1SK_StoreReversedYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Commit the next vertical pass speed."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 109,
+      "old": "locret_72AE6",
+      "new": "LBZBoss1SK_TurnaroundReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from vertical boundary handling."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 112,
+      "old": "word_72AE8",
+      "new": "LBZBoss1SK_PassSideCameraXOffsets",
+      "profiles": ["sk"],
+      "meaning": "Two WORD offsets select randomized root side."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 117,
+      "old": "locret_72AEC",
+      "new": "LBZBoss1SK_HoldDuringHit",
+      "profiles": ["sk"],
+      "meaning": "Hold root state6 while post-state hit processing continues."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 121,
+      "old": "loc_72AEE",
+      "new": "LBZBoss1SK_TickSectionDropPause",
+      "profiles": ["sk"],
+      "meaning": "Count the first body-drop BYTEdelay."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 127,
+      "old": "loc_72AF6",
+      "new": "LBZBoss1SK_BeginSectionDrop",
+      "profiles": ["sk"],
+      "meaning": "Select short downward root shift after drop pause."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 131,
+      "old": "locret_72B02",
+      "new": "LBZBoss1SK_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from root delay and assorted child/ending gates."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 135,
+      "old": "loc_72B04",
+      "new": "LBZBoss1SK_StepSectionDrop",
+      "profiles": ["sk"],
+      "meaning": "Apply each downward shift before checking BYTEtimeout."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 142,
+      "old": "loc_72B10",
+      "new": "LBZBoss1SK_ResumeHitHold",
+      "profiles": ["sk"],
+      "meaning": "Resume still root state while flash completes."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 147,
+      "old": "loc_72B18",
+      "new": "LBZBoss1SK_EndingDescendToCameraY",
+      "profiles": ["sk"],
+      "meaning": "Moveordinarydefeatedrootdownoneintegerpixel."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 158,
+      "old": "loc_72B34",
+      "new": "LBZBoss1SK_EndingBeginPoseDelay",
+      "profiles": ["sk"],
+      "meaning": "Pause64updatesbeforePlayer1endingposegate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 165,
+      "old": "loc_72B46",
+      "new": "LBZBoss1SK_EndingWaitGroundedAndScore",
+      "profiles": ["sk"],
+      "meaning": "WaitforPlayer1poseeligibilityandattemptresultshelpers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 182,
+      "old": "loc_72B86",
+      "new": "LBZBoss1SK_EndingTryP2PoseHelper",
+      "profiles": ["sk"],
+      "meaning": "AttemptP2posemonitorafterresultsallocation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 187,
+      "old": "locret_72B94",
+      "new": "LBZBoss1SK_EndingPoseSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Returnfromblockedposeorfailure/successallocationtail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 191,
+      "old": "loc_72B96",
+      "new": "LBZBoss1SK_EndingWaitResultsAndMusic",
+      "profiles": ["sk"],
+      "meaning": "WaituntilEnd_of_level_flagthenpreparestageending."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 201,
+      "old": "loc_72BBC",
+      "new": "LBZBoss1SK_EndingRestoreAndLockInput",
+      "profiles": ["sk"],
+      "meaning": "Beginendingsequenceafter32callwait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 216,
+      "old": "loc_72BFA",
+      "new": "LBZBoss1SK_EndingQueueDeathEggArt",
+      "profiles": ["sk"],
+      "meaning": "QueueartafteroptionalP2inputmaskactorattempt."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 222,
+      "old": "loc_72C0A",
+      "new": "LBZBoss1SK_EndingCenterGroundedPlayer",
+      "profiles": ["sk"],
+      "meaning": "WalkPlayer1towardcamera+A0hexusinglogicalcontrols."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 233,
+      "old": "loc_72C28",
+      "new": "LBZBoss1SK_EndingChooseCenterDirection",
+      "profiles": ["sk"],
+      "meaning": "Testcenteringdeadbandandchooselogicaldirectionbit."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 241,
+      "old": "loc_72C36",
+      "new": "LBZBoss1SK_EndingSetHeldDirection",
+      "profiles": ["sk"],
+      "meaning": "Holdselectedcenteringdirectionwithoutclearingotherbits."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 244,
+      "old": "locret_72C3A",
+      "new": "LBZBoss1SK_EndingCenteringReturn",
+      "profiles": ["sk"],
+      "meaning": "Returnfromcenteringgate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 248,
+      "old": "loc_72C3C",
+      "new": "LBZBoss1SK_EndingStopPlayerAndSpawnBurst",
+      "profiles": ["sk"],
+      "meaning": "StartendingburstwhenPlayer1withincenteringdeadband."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 259,
+      "old": "loc_72C68",
+      "new": "LBZBoss1SK_EndingTakeAnimationControl",
+      "profiles": ["sk"],
+      "meaning": "StartbothexternalplayeranimationsonceFA88bit0set."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 277,
+      "old": "locret_72C9C",
+      "new": "LBZBoss1SK_EndingAnimSetupReturn",
+      "profiles": ["sk"],
+      "meaning": "Returnfromcontrolsetuporunsetburstflag."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 281,
+      "old": "loc_72C9E",
+      "new": "LBZBoss1SK_EndingAnimateBothPlayers",
+      "profiles": ["sk"],
+      "meaning": "DrivePlayer1thenPlayer2externalpresentation."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 291,
+      "old": "loc_72CBE",
+      "new": "LBZBoss1SK_EndingInstallFallFlagPoll",
+      "profiles": ["sk"],
+      "meaning": "Endexternalanimationrootloop."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 296,
+      "old": "loc_72CC6",
+      "new": "LBZBoss1SK_EndingWaitDeathEggFall",
+      "profiles": ["sk"],
+      "meaning": "Waituntilfallingmainpiecepassesheightgate."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 302,
+      "old": "locret_72CD8",
+      "new": "LBZBoss1SK_EndingFallPollReturn",
+      "profiles": ["sk"],
+      "meaning": "Returnfromwaitingorsettingstageevent."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 306,
+      "old": "loc_72CDA",
+      "new": "LBZBoss1SK_EndingStartNextLevel",
+      "profiles": ["sk"],
+      "meaning": "Transitiontozone700hexafterPlayer1fallsbelowcamera+120hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 316,
+      "old": "loc_72CFA",
+      "new": "LBZBoss1SK_EndingWaitForP2Grounded",
+      "profiles": ["sk"],
+      "meaning": "WaitforPlayer2endingposeconditions."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 325,
+      "old": "locret_72D16",
+      "new": "LBZBoss1SK_EndingP2PoseReturn",
+      "profiles": ["sk"],
+      "meaning": "RetainposehelperuntilPlayer2eligible."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 329,
+      "old": "loc_72D18",
+      "new": "LBZBoss1SK_EndingSetP2PoseAndDelete",
+      "profiles": ["sk"],
+      "meaning": "PutP2endingposeandretirehelper."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 334,
+      "old": "loc_72D24",
+      "new": "LBZBoss1SK_InitBurstController",
+      "profiles": ["sk"],
+      "meaning": "Initializeoneoftwooppositelymovingburstcontrollers."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 344,
+      "old": "loc_72D48",
+      "new": "LBZBoss1SK_BurstSetHorizontalLeg",
+      "profiles": ["sk"],
+      "meaning": "Start66movementcallhorizontalleg."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 349,
+      "old": "loc_72D5A",
+      "new": "LBZBoss1SK_BurstTryPeriodicExplosion",
+      "profiles": ["sk"],
+      "meaning": "EmitburstexplosiononBYTEcountdownunderflow."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 355,
+      "old": "loc_72D6C",
+      "new": "LBZBoss1SK_BurstMoveAndTickWait",
+      "profiles": ["sk"],
+      "meaning": "MoveburstcontrollerbeforeitsWORDwait."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 360,
+      "old": "loc_72D78",
+      "new": "LBZBoss1SK_BurstBeginUpwardLeg",
+      "profiles": ["sk"],
+      "meaning": "Start88callupwardburstleg."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 368,
+      "old": "loc_72D92",
+      "new": "LBZBoss1SK_BurstTryFinalExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attemptfixedboss-explosioncontrolleratlegcompletion."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 376,
+      "old": "loc_72DB2",
+      "new": "LBZBoss1SK_BurstTryEndingCoordinator",
+      "profiles": ["sk"],
+      "meaning": "Requestsingleendingcoordinatorfromfirstburstcontroller."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 390,
+      "old": "loc_72DE4",
+      "new": "LBZBoss1SK_BurstQueueDeletion",
+      "profiles": ["sk"],
+      "meaning": "Retireburstcontrolleraftercompletionattempts."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 394,
+      "old": "loc_72DEA",
+      "new": "LBZBoss1SK_EndingTickDebrisIntervals",
+      "profiles": ["sk"],
+      "meaning": "Countdebrisburstsandprogressstageflags."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 402,
+      "old": "loc_72E00",
+      "new": "LBZBoss1SK_EndingTryDebrisOrPause",
+      "profiles": ["sk"],
+      "meaning": "Attemptfallingdebrisduringfirst23countsteps."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 411,
+      "old": "locret_72E20",
+      "new": "LBZBoss1SK_EndingDebrisUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Returnfrompositiveintervalorfailure/successtail."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 415,
+      "old": "loc_72E22",
+      "new": "LBZBoss1SK_EndingBeginLongPause",
+      "profiles": ["sk"],
+      "meaning": "Begin384totaldecrementcallsbeforefallingpiecegroup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 419,
+      "old": "loc_72E2E",
+      "new": "LBZBoss1SK_EndingTickLongPause",
+      "profiles": ["sk"],
+      "meaning": "CountdownbeforeDeathEggpiecegroup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 425,
+      "old": "loc_72E36",
+      "new": "LBZBoss1SK_EndingSignalAnimAndSpawnEgg",
+      "profiles": ["sk"],
+      "meaning": "Startplayeranimationandattemptfallingpiecegroup."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 434,
+      "old": "loc_72E54",
+      "new": "LBZBoss1SK_InitFallingDebris",
+      "profiles": ["sk"],
+      "meaning": "InitializeoneunanimatedfallingDeathEggfragment."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 452,
+      "old": "RawAni_72E96",
+      "new": "LBZBoss1SK_FallingDebrisFrames",
+      "profiles": ["sk"],
+      "meaning": "Directrandom-indexbankselectsdebrisframe."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 457,
+      "old": "loc_72E9E",
+      "new": "LBZBoss1SK_InitDeathEggPiece",
+      "profiles": ["sk"],
+      "meaning": "Initializeoneof7normalfallingpieces."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 466,
+      "old": "loc_72EBC",
+      "new": "LBZBoss1SK_DeathEggPieceLoadSubtype",
+      "profiles": ["sk"],
+      "meaning": "Setfallingspeed/frame/renderbitsfromsubtype."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 475,
+      "old": "byte_72EDA",
+      "new": "LBZBoss1SK_DeathEggPieceFrameFlips",
+      "profiles": ["sk"],
+      "meaning": "SevenBYTEpairsselectpieceframeandORflipbits."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 483,
+      "old": "word_72EE8",
+      "new": "LBZBoss1SK_DeathEggPieceYSpeeds",
+      "profiles": ["sk"],
+      "meaning": "EightWORDsstorefallingspeedswithoneexcessentry."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 494,
+      "old": "loc_72EF8",
+      "new": "LBZBoss1SK_DeathEggEmitParticle",
+      "profiles": ["sk"],
+      "meaning": "Mainpieceattemptsoneparticleevery16VIntframes."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 509,
+      "old": "loc_72F2C",
+      "new": "LBZBoss1SK_DeathEggCheckFallThreshold",
+      "profiles": ["sk"],
+      "meaning": "SignalstagefallaftermainpieceoldYstrictlybelowcamera+80hex."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 516,
+      "old": "loc_72F40",
+      "new": "LBZBoss1SK_DeathEggPieceMoveAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Movefallingpieceanddrawunconditionally."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 521,
+      "old": "loc_72F4C",
+      "new": "LBZBoss1SK_InitDeathEggParticle",
+      "profiles": ["sk"],
+      "meaning": "Initializeoneperiodicmainpieceparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 531,
+      "old": "loc_72F7A",
+      "new": "LBZBoss1SK_DeathEggParticleTickFlip",
+      "profiles": ["sk"],
+      "meaning": "CycleparticleflipcombinationonVIntmultiples4."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 544,
+      "old": "loc_72FA0",
+      "new": "LBZBoss1SK_DeathEggParticleMoveAndWait",
+      "profiles": ["sk"],
+      "meaning": "Moveupwardparticlethencounttimedlife."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 550,
+      "old": "loc_72FB2",
+      "new": "LBZBoss1SK_InitDeathEggNestedParticle",
+      "profiles": ["sk"],
+      "meaning": "Initializeupwardparticle'snesteddownwardeffect."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 558,
+      "old": "loc_72FD8",
+      "new": "LBZBoss1SK_NestedParticleAnimateAndMove",
+      "profiles": ["sk"],
+      "meaning": "Animatebeforemovingnestedparticle."
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "original_line": 563,
+      "old": "word_72FEA",
+      "new": "LBZBoss1SK_KnucklesEntryCameraBounds",
+      "profiles": ["sk"],
+      "meaning": "EightWORDrecordactivatesKnucklesfinalboss."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 50,
+      "old": "Frame_364604",
+      "new": "LBZFinalBoss1S3_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 55,
+      "old": "Frame_36461E",
+      "new": "LBZFinalBoss1S3_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 62,
+      "old": "Frame_364644",
+      "new": "LBZFinalBoss1S3_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 67,
+      "old": "Frame_36465E",
+      "new": "LBZFinalBoss1S3_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 69,
+      "old": "Frame_364666",
+      "new": "LBZFinalBoss1S3_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 71,
+      "old": "Frame_36466E",
+      "new": "LBZFinalBoss1S3_MapFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 73,
+      "old": "Frame_364676",
+      "new": "LBZFinalBoss1S3_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 75,
+      "old": "Frame_36467E",
+      "new": "LBZFinalBoss1S3_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 77,
+      "old": "Frame_364686",
+      "new": "LBZFinalBoss1S3_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 79,
+      "old": "Frame_36468E",
+      "new": "LBZFinalBoss1S3_MapFrame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 82,
+      "old": "Frame_36469C",
+      "new": "LBZFinalBoss1S3_MapFrame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 85,
+      "old": "Frame_3646AA",
+      "new": "LBZFinalBoss1S3_MapFrame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 88,
+      "old": "Frame_3646B8",
+      "new": "LBZFinalBoss1S3_MapFrame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 90,
+      "old": "Frame_3646C0",
+      "new": "LBZFinalBoss1S3_MapFrame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 92,
+      "old": "Frame_3646C8",
+      "new": "LBZFinalBoss1S3_MapFrame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 94,
+      "old": "Frame_3646D0",
+      "new": "LBZFinalBoss1S3_MapFrame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 96,
+      "old": "Frame_3646D8",
+      "new": "LBZFinalBoss1S3_MapFrame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 99,
+      "old": "Frame_3646E6",
+      "new": "LBZFinalBoss1S3_MapFrame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 102,
+      "old": "Frame_3646F4",
+      "new": "LBZFinalBoss1S3_MapFrame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 104,
+      "old": "Frame_3646FC",
+      "new": "LBZFinalBoss1S3_MapFrame13",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 106,
+      "old": "Frame_364704",
+      "new": "LBZFinalBoss1S3_MapFrame14",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 108,
+      "old": "Frame_36470C",
+      "new": "LBZFinalBoss1S3_MapFrame15",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 111,
+      "old": "Frame_36471A",
+      "new": "LBZFinalBoss1S3_MapFrame16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 113,
+      "old": "Frame_364722",
+      "new": "LBZFinalBoss1S3_MapFrame17",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 115,
+      "old": "Frame_36472A",
+      "new": "LBZFinalBoss1S3_MapFrame18",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 117,
+      "old": "Frame_364732",
+      "new": "LBZFinalBoss1S3_MapFrame19",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot19 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 119,
+      "old": "Frame_36473A",
+      "new": "LBZFinalBoss1S3_MapFrame1A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 122,
+      "old": "Frame_364748",
+      "new": "LBZFinalBoss1S3_MapFrame1B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 125,
+      "old": "Frame_364756",
+      "new": "LBZFinalBoss1S3_MapFrame1C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 127,
+      "old": "Frame_36475E",
+      "new": "LBZFinalBoss1S3_MapFrame1D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 129,
+      "old": "Frame_364766",
+      "new": "LBZFinalBoss1S3_MapFrame1E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 131,
+      "old": "Frame_36476E",
+      "new": "LBZFinalBoss1S3_MapFrame1F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot1F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 133,
+      "old": "Frame_364776",
+      "new": "LBZFinalBoss1S3_MapFrame20",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot20 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 135,
+      "old": "Frame_36477E",
+      "new": "LBZFinalBoss1S3_MapFrame21",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot21 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 137,
+      "old": "Frame_364786",
+      "new": "LBZFinalBoss1S3_MapFrame22",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot22 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 140,
+      "old": "Frame_364794",
+      "new": "LBZFinalBoss1S3_UnindexedStoredMapBody",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body omitted from the exact offset table."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 145,
+      "old": "Frame_3647AE",
+      "new": "LBZFinalBoss1S3_MapFrame23",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot23 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 147,
+      "old": "Frame_3647B6",
+      "new": "LBZFinalBoss1S3_MapFrame24",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot24 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 149,
+      "old": "Frame_3647BE",
+      "new": "LBZFinalBoss1S3_MapFrame25",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot25 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 151,
+      "old": "Frame_3647C6",
+      "new": "LBZFinalBoss1S3_MapFrame26",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot26 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 153,
+      "old": "Frame_3647CE",
+      "new": "LBZFinalBoss1S3_MapFrame27",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot27 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 155,
+      "old": "Frame_3647D6",
+      "new": "LBZFinalBoss1S3_MapFrame28",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot28 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 157,
+      "old": "Frame_3647DE",
+      "new": "LBZFinalBoss1S3_MapFrame29",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot29 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 159,
+      "old": "Frame_3647E6",
+      "new": "LBZFinalBoss1S3_MapFrame2A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot2A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 161,
+      "old": "Frame_3647EE",
+      "new": "LBZFinalBoss1S3_MapFrame2B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot2B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 164,
+      "old": "Frame_3647FC",
+      "new": "LBZFinalBoss1S3_MapFrame2C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot2C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "original_line": 167,
+      "old": "Frame_36480A",
+      "new": "LBZFinalBoss1S3_MapFrame2D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "LBZFinalBoss1S3 physical mapping body at verified slot2D hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
+      "tokens": [
+        [2, 1, 239, ""],
+        [23, 1, 240, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
+      "tokens": [
+        [9, 1, 0, ""],
+        [10, 1, 2, ""],
+        [11, 1, 4, ""],
+        [12, 1, 12, ""],
+        [13, 1, 13, ""],
+        [14, 1, 16, ""],
+        [15, 0, 0, ""],
+        [21, 2, 3, ""],
+        [25, 1, 1, ""],
+        [28, 0, 1, ""],
+        [31, 1, 126, ""],
+        [33, 1, 118, ""],
+        [35, 1, 125, ""],
+        [37, 0, 2, ""],
+        [39, 0, 3, ""],
+        [44, 0, 4, ""],
+        [48, 1, 5, ""],
+        [51, 1, 6, ""],
+        [53, 0, 5, ""],
+        [56, 1, 6, ""],
+        [58, 0, 6, ""],
+        [60, 1, 7, ""],
+        [62, 1, 10, ""],
+        [63, 0, 7, ""],
+        [69, 1, 8, ""],
+        [72, 0, 8, ""],
+        [73, 1, 11, ""],
+        [79, 1, 9, ""],
+        [81, 0, 9, ""],
+        [83, 0, 10, ""],
+        [85, 0, 11, ""],
+        [88, 0, 12, ""],
+        [90, 0, 13, ""],
+        [92, 1, 14, ""],
+        [94, 0, 14, ""],
+        [97, 0, 15, ""],
+        [99, 0, 16, ""],
+        [102, 1, 17, ""],
+        [104, 0, 17, ""],
+        [107, 0, 18, ""],
+        [113, 1, 19, ""],
+        [116, 0, 19, ""],
+        [125, 1, 20, ""],
+        [129, 0, 20, ""],
+        [131, 0, 21, ""],
+        [137, 1, 22, ""],
+        [140, 0, 22, ""],
+        [141, 2, 23, ""],
+        [149, 0, 23, ""],
+        [155, 1, 24, ""],
+        [158, 0, 24, ""],
+        [159, 2, 25, ""],
+        [163, 0, 25, ""],
+        [169, 1, 26, ""],
+        [172, 0, 26, ""],
+        [174, 2, 27, ""],
+        [175, 1, 117, ""],
+        [178, 0, 27, ""],
+        [184, 1, 28, ""],
+        [187, 0, 28, ""],
+        [188, 2, 29, ""],
+        [192, 0, 29, ""],
+        [195, 0, 30, ""],
+        [196, 1, 106, ""],
+        [198, 2, 31, ""],
+        [199, 2, 31, ""],
+        [200, 1, 121, ""],
+        [202, 0, 31, ""],
+        [206, 0, 32, ""],
+        [209, 1, 33, ""],
+        [212, 1, 33, ""],
+        [215, 1, 33, ""],
+        [217, 0, 33, ""],
+        [219, 0, 34, ""],
+        [221, 0, 35, ""],
+        [223, 1, 30, ""],
+        [224, 0, 36, ""],
+        [225, 1, 107, ""],
+        [227, 2, 37, ""],
+        [228, 2, 37, ""],
+        [230, 1, 124, ""],
+        [232, 0, 37, ""],
+        [236, 0, 38, ""],
+        [237, 1, 109, ""],
+        [239, 2, 39, ""],
+        [242, 0, 39, ""],
+        [246, 0, 40, ""],
+        [247, 2, 41, ""],
+        [248, 1, 114, ""],
+        [250, 0, 41, ""],
+        [253, 1, 42, ""],
+        [256, 0, 42, ""],
+        [258, 0, 43, ""],
+        [259, 1, 115, ""],
+        [261, 2, 45, ""],
+        [263, 1, 44, ""],
+        [265, 0, 44, ""],
+        [267, 0, 45, ""],
+        [270, 1, 46, ""],
+        [273, 0, 46, ""],
+        [275, 0, 47, ""],
+        [276, 1, 110, ""],
+        [278, 2, 48, ""],
+        [282, 1, 48, ""],
+        [284, 0, 48, ""],
+        [290, 1, 49, ""],
+        [291, 2, 48, ""],
+        [292, 0, 49, ""],
+        [295, 0, 50, ""],
+        [296, 1, 111, ""],
+        [298, 2, 51, ""],
+        [301, 0, 51, ""],
+        [304, 1, 53, ""],
+        [307, 1, 15, ""],
+        [310, 1, 52, ""],
+        [311, 2, 54, ""],
+        [313, 0, 52, ""],
+        [315, 0, 53, ""],
+        [317, 0, 54, ""],
+        [320, 1, 55, ""],
+        [322, 1, 15, ""],
+        [324, 0, 55, ""],
+        [325, 2, 56, ""],
+        [326, 2, 129, ""],
+        [327, 2, 57, ""],
+        [329, 0, 56, ""],
+        [333, 0, 57, ""],
+        [334, 2, 60, ""],
+        [336, 1, 58, ""],
+        [339, 0, 58, ""],
+        [345, 1, 59, ""],
+        [348, 0, 59, ""],
+        [352, 0, 60, ""],
+        [354, 1, 61, ""],
+        [355, 1, 123, ""],
+        [357, 2, 130, ""],
+        [359, 1, 62, ""],
+        [360, 0, 61, ""],
+        [361, 1, 123, ""],
+        [363, 2, 131, ""],
+        [365, 0, 62, ""],
+        [368, 0, 63, ""],
+        [369, 1, 112, ""],
+        [371, 2, 64, ""],
+        [374, 0, 64, ""],
+        [377, 0, 65, ""],
+        [378, 1, 108, ""],
+        [380, 2, 66, ""],
+        [381, 2, 128, ""],
+        [383, 0, 66, ""],
+        [387, 0, 67, ""],
+        [388, 1, 104, ""],
+        [390, 2, 68, ""],
+        [392, 0, 68, ""],
+        [395, 0, 69, ""],
+        [398, 1, 70, ""],
+        [399, 1, 70, ""],
+        [401, 0, 70, ""],
+        [402, 1, 71, ""],
+        [402, 3, 70, ""],
+        [403, 1, 72, ""],
+        [403, 3, 70, ""],
+        [404, 1, 75, ""],
+        [404, 3, 70, ""],
+        [405, 0, 71, ""],
+        [406, 1, 105, ""],
+        [409, 2, 73, ""],
+        [411, 0, 72, ""],
+        [414, 1, 15, ""],
+        [416, 0, 73, ""],
+        [419, 1, 74, ""],
+        [424, 0, 74, ""],
+        [430, 0, 75, ""],
+        [432, 0, 76, ""],
+        [433, 1, 113, ""],
+        [435, 2, 78, ""],
+        [436, 2, 132, ""],
+        [437, 2, 79, ""],
+        [440, 1, 77, ""],
+        [442, 0, 77, ""],
+        [444, 0, 78, ""],
+        [450, 0, 79, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/motion_helpers.s",
+      "tokens": [
+        [5, 1, 80, ""],
+        [7, 1, 85, ""],
+        [8, 0, 80, ""],
+        [12, 1, 81, ""],
+        [14, 1, 82, ""],
+        [16, 1, 82, ""],
+        [17, 0, 81, ""],
+        [20, 1, 82, ""],
+        [22, 0, 82, ""],
+        [24, 1, 86, ""],
+        [28, 1, 83, ""],
+        [31, 0, 83, ""],
+        [34, 1, 84, ""],
+        [37, 1, 84, ""],
+        [39, 1, 122, ""],
+        [42, 0, 84, ""],
+        [45, 1, 87, ""],
+        [46, 0, 85, ""],
+        [47, 1, 88, ""],
+        [60, 0, 86, ""],
+        [74, 0, 87, ""],
+        [87, 0, 88, ""],
+        [108, 1, 93, ""],
+        [110, 1, 94, ""],
+        [112, 1, 91, ""],
+        [122, 1, 89, ""],
+        [124, 1, 89, ""],
+        [126, 0, 89, ""],
+        [128, 1, 90, ""],
+        [130, 1, 91, ""],
+        [132, 0, 90, ""],
+        [139, 1, 127, ""],
+        [141, 0, 91, ""],
+        [144, 1, 92, ""],
+        [146, 0, 92, ""],
+        [149, 1, 93, ""],
+        [154, 0, 93, ""],
+        [156, 0, 94, ""],
+        [168, 1, 95, ""],
+        [169, 2, 18, ""],
+        [171, 0, 95, ""],
+        [172, 2, 21, ""],
+        [173, 1, 116, ""],
+        [176, 1, 96, ""],
+        [177, 1, 97, ""],
+        [179, 0, 96, ""],
+        [181, 0, 97, ""],
+        [188, 1, 99, ""],
+        [189, 2, 102, ""],
+        [191, 2, 119, ""],
+        [193, 1, 98, ""],
+        [194, 2, 103, ""],
+        [195, 2, 120, ""],
+        [196, 0, 98, ""],
+        [198, 2, 34, ""],
+        [202, 0, 99, ""],
+        [204, 1, 100, ""],
+        [205, 2, 32, ""],
+        [206, 0, 100, ""],
+        [217, 1, 101, ""],
+        [221, 0, 101, ""],
+        [228, 0, 102, ""],
+        [233, 0, 103, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
+      "tokens": [
+        [6, 0, 104, ""],
+        [10, 0, 105, ""],
+        [14, 0, 106, ""],
+        [19, 0, 107, ""],
+        [24, 0, 108, ""],
+        [28, 0, 109, ""],
+        [31, 0, 110, ""],
+        [34, 0, 111, ""],
+        [38, 0, 112, ""],
+        [41, 0, 113, ""],
+        [46, 0, 114, ""],
+        [51, 0, 115, ""],
+        [56, 0, 116, ""],
+        [58, 1, 67, ""],
+        [60, 0, 117, ""],
+        [62, 1, 69, ""],
+        [64, 0, 118, ""],
+        [66, 1, 30, ""],
+        [68, 1, 35, ""],
+        [70, 1, 36, ""],
+        [72, 0, 119, ""],
+        [74, 1, 38, ""],
+        [76, 1, 38, ""],
+        [78, 1, 38, ""],
+        [80, 1, 38, ""],
+        [82, 0, 120, ""],
+        [84, 1, 38, ""],
+        [86, 1, 38, ""],
+        [88, 1, 38, ""],
+        [90, 1, 38, ""],
+        [92, 1, 38, ""],
+        [94, 1, 38, ""],
+        [96, 0, 121, ""],
+        [98, 1, 47, ""],
+        [100, 0, 122, ""],
+        [102, 1, 50, ""],
+        [105, 1, 50, ""],
+        [107, 0, 123, ""],
+        [109, 1, 63, ""],
+        [111, 0, 124, ""],
+        [113, 1, 65, ""],
+        [115, 1, 65, ""],
+        [117, 0, 125, ""],
+        [119, 1, 76, ""],
+        [121, 0, 126, ""],
+        [123, 1, 40, ""],
+        [125, 0, 127, ""],
+        [127, 1, 43, ""],
+        [129, 1, 43, ""],
+        [131, 0, 128, ""],
+        [133, 0, 129, ""],
+        [135, 0, 130, ""],
+        [137, 0, 131, ""],
+        [139, 0, 132, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
+      "tokens": [
+        [2, 1, 310, ""],
+        [6, 2, 133, ""],
+        [7, 2, 134, ""],
+        [19, 0, 133, ""],
+        [21, 0, 134, ""],
+        [24, 0, 135, ""],
+        [30, 1, 136, ""],
+        [33, 0, 136, ""],
+        [37, 1, 137, ""],
+        [39, 0, 137, ""],
+        [41, 0, 138, ""],
+        [42, 1, 203, ""],
+        [44, 2, 139, ""],
+        [45, 2, 139, ""],
+        [46, 1, 220, ""],
+        [48, 0, 139, ""],
+        [52, 0, 140, ""],
+        [55, 1, 141, ""],
+        [58, 1, 141, ""],
+        [61, 1, 141, ""],
+        [63, 0, 141, ""],
+        [65, 0, 142, ""],
+        [67, 0, 143, ""],
+        [69, 1, 138, ""],
+        [70, 0, 144, ""],
+        [71, 1, 204, ""],
+        [73, 2, 145, ""],
+        [74, 2, 145, ""],
+        [76, 1, 223, ""],
+        [78, 0, 145, ""],
+        [82, 0, 146, ""],
+        [83, 1, 206, ""],
+        [85, 2, 147, ""],
+        [88, 0, 147, ""],
+        [92, 0, 148, ""],
+        [93, 2, 149, ""],
+        [94, 1, 211, ""],
+        [96, 0, 149, ""],
+        [99, 1, 150, ""],
+        [102, 0, 150, ""],
+        [104, 0, 151, ""],
+        [105, 1, 212, ""],
+        [107, 2, 153, ""],
+        [109, 1, 152, ""],
+        [111, 0, 152, ""],
+        [113, 0, 153, ""],
+        [116, 1, 154, ""],
+        [119, 0, 154, ""],
+        [121, 0, 155, ""],
+        [122, 1, 207, ""],
+        [124, 2, 156, ""],
+        [128, 1, 156, ""],
+        [130, 0, 156, ""],
+        [136, 1, 157, ""],
+        [137, 2, 156, ""],
+        [138, 0, 157, ""],
+        [141, 0, 158, ""],
+        [142, 1, 208, ""],
+        [144, 2, 159, ""],
+        [147, 0, 159, ""],
+        [150, 1, 161, ""],
+        [153, 1, 256, ""],
+        [156, 1, 160, ""],
+        [157, 2, 162, ""],
+        [159, 0, 160, ""],
+        [161, 0, 161, ""],
+        [163, 0, 162, ""],
+        [166, 1, 163, ""],
+        [168, 1, 256, ""],
+        [170, 0, 163, ""],
+        [171, 2, 164, ""],
+        [172, 2, 232, ""],
+        [173, 2, 165, ""],
+        [175, 0, 164, ""],
+        [179, 0, 165, ""],
+        [180, 2, 168, ""],
+        [182, 1, 166, ""],
+        [185, 0, 166, ""],
+        [191, 1, 167, ""],
+        [194, 0, 167, ""],
+        [198, 0, 168, ""],
+        [200, 1, 169, ""],
+        [201, 1, 222, ""],
+        [203, 2, 233, ""],
+        [205, 1, 170, ""],
+        [206, 0, 169, ""],
+        [207, 1, 222, ""],
+        [209, 2, 234, ""],
+        [211, 0, 170, ""],
+        [214, 0, 171, ""],
+        [215, 1, 209, ""],
+        [217, 2, 172, ""],
+        [220, 0, 172, ""],
+        [223, 0, 173, ""],
+        [224, 1, 205, ""],
+        [227, 2, 174, ""],
+        [228, 2, 231, ""],
+        [230, 0, 174, ""],
+        [234, 0, 175, ""],
+        [235, 1, 210, ""],
+        [237, 2, 177, ""],
+        [238, 2, 235, ""],
+        [239, 2, 178, ""],
+        [242, 1, 176, ""],
+        [244, 0, 176, ""],
+        [246, 0, 177, ""],
+        [252, 0, 178, ""],
+        [264, 1, 179, ""],
+        [266, 1, 184, ""],
+        [267, 0, 179, ""],
+        [271, 1, 180, ""],
+        [273, 1, 181, ""],
+        [275, 1, 181, ""],
+        [276, 0, 180, ""],
+        [279, 1, 181, ""],
+        [281, 0, 181, ""],
+        [283, 1, 185, ""],
+        [287, 1, 182, ""],
+        [290, 0, 182, ""],
+        [293, 1, 183, ""],
+        [296, 1, 183, ""],
+        [298, 1, 221, ""],
+        [301, 0, 183, ""],
+        [304, 1, 186, ""],
+        [305, 0, 184, ""],
+        [306, 1, 187, ""],
+        [319, 0, 185, ""],
+        [333, 0, 186, ""],
+        [346, 0, 187, ""],
+        [367, 1, 192, ""],
+        [369, 1, 193, ""],
+        [371, 1, 190, ""],
+        [381, 1, 188, ""],
+        [383, 1, 188, ""],
+        [385, 0, 188, ""],
+        [387, 1, 189, ""],
+        [389, 1, 190, ""],
+        [391, 0, 189, ""],
+        [398, 1, 226, ""],
+        [400, 0, 190, ""],
+        [403, 1, 191, ""],
+        [405, 0, 191, ""],
+        [408, 1, 192, ""],
+        [413, 0, 192, ""],
+        [415, 0, 193, ""],
+        [427, 1, 194, ""],
+        [428, 2, 259, ""],
+        [430, 0, 194, ""],
+        [431, 2, 135, ""],
+        [434, 1, 195, ""],
+        [435, 1, 196, ""],
+        [437, 0, 195, ""],
+        [439, 0, 196, ""],
+        [446, 1, 198, ""],
+        [447, 2, 201, ""],
+        [449, 2, 218, ""],
+        [451, 1, 197, ""],
+        [452, 2, 202, ""],
+        [453, 2, 219, ""],
+        [454, 0, 197, ""],
+        [456, 2, 142, ""],
+        [460, 0, 198, ""],
+        [462, 1, 199, ""],
+        [463, 2, 140, ""],
+        [464, 0, 199, ""],
+        [475, 1, 200, ""],
+        [479, 0, 200, ""],
+        [486, 0, 201, ""],
+        [491, 0, 202, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 203, ""],
+        [11, 0, 204, ""],
+        [16, 0, 205, ""],
+        [20, 0, 206, ""],
+        [23, 0, 207, ""],
+        [26, 0, 208, ""],
+        [30, 0, 209, ""],
+        [33, 0, 210, ""],
+        [38, 0, 211, ""],
+        [43, 0, 212, ""],
+        [48, 0, 213, ""],
+        [53, 0, 214, ""],
+        [58, 0, 215, ""],
+        [63, 0, 216, ""],
+        [68, 0, 217, ""],
+        [70, 1, 138, ""],
+        [72, 1, 143, ""],
+        [74, 1, 144, ""],
+        [76, 0, 218, ""],
+        [78, 1, 146, ""],
+        [80, 1, 146, ""],
+        [82, 1, 146, ""],
+        [84, 1, 146, ""],
+        [86, 0, 219, ""],
+        [88, 1, 146, ""],
+        [90, 1, 146, ""],
+        [92, 1, 146, ""],
+        [94, 1, 146, ""],
+        [96, 1, 146, ""],
+        [98, 1, 146, ""],
+        [100, 0, 220, ""],
+        [102, 1, 155, ""],
+        [104, 0, 221, ""],
+        [106, 1, 158, ""],
+        [109, 1, 158, ""],
+        [111, 0, 222, ""],
+        [113, 1, 171, ""],
+        [115, 0, 223, ""],
+        [117, 1, 173, ""],
+        [119, 1, 173, ""],
+        [121, 0, 224, ""],
+        [123, 1, 175, ""],
+        [125, 0, 225, ""],
+        [127, 1, 148, ""],
+        [129, 0, 226, ""],
+        [131, 1, 151, ""],
+        [133, 1, 151, ""],
+        [135, 0, 227, ""],
+        [137, 1, 282, ""],
+        [138, 0, 228, ""],
+        [140, 1, 298, ""],
+        [142, 1, 298, ""],
+        [144, 1, 298, ""],
+        [146, 1, 298, ""],
+        [148, 1, 298, ""],
+        [150, 1, 298, ""],
+        [152, 1, 298, ""],
+        [154, 0, 229, ""],
+        [156, 1, 305, ""],
+        [157, 0, 230, ""],
+        [159, 1, 308, ""],
+        [160, 0, 231, ""],
+        [162, 0, 232, ""],
+        [164, 0, 233, ""],
+        [166, 0, 234, ""],
+        [168, 0, 235, ""],
+        [170, 0, 236, ""],
+        [172, 0, 237, ""],
+        [178, 0, 238, ""],
+        [195, 0, 239, ""],
+        [197, 0, 240, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
+      "tokens": [
+        [9, 1, 241, ""],
+        [10, 1, 243, ""],
+        [11, 1, 245, ""],
+        [12, 1, 253, ""],
+        [13, 1, 254, ""],
+        [14, 1, 257, ""],
+        [15, 0, 241, ""],
+        [20, 2, 244, ""],
+        [22, 1, 242, ""],
+        [28, 1, 242, ""],
+        [31, 0, 242, ""],
+        [34, 1, 225, ""],
+        [36, 1, 217, ""],
+        [38, 1, 224, ""],
+        [40, 0, 243, ""],
+        [42, 0, 244, ""],
+        [47, 0, 245, ""],
+        [51, 1, 246, ""],
+        [54, 1, 247, ""],
+        [56, 0, 246, ""],
+        [59, 1, 247, ""],
+        [61, 0, 247, ""],
+        [63, 1, 248, ""],
+        [65, 1, 251, ""],
+        [66, 0, 248, ""],
+        [72, 1, 249, ""],
+        [75, 0, 249, ""],
+        [76, 1, 252, ""],
+        [82, 1, 250, ""],
+        [84, 0, 250, ""],
+        [86, 0, 251, ""],
+        [88, 0, 252, ""],
+        [91, 0, 253, ""],
+        [93, 0, 254, ""],
+        [95, 1, 255, ""],
+        [97, 0, 255, ""],
+        [100, 0, 256, ""],
+        [102, 0, 257, ""],
+        [105, 1, 258, ""],
+        [107, 0, 258, ""],
+        [110, 0, 259, ""],
+        [116, 1, 260, ""],
+        [119, 0, 260, ""],
+        [120, 2, 261, ""],
+        [124, 0, 261, ""],
+        [126, 1, 263, ""],
+        [129, 1, 263, ""],
+        [131, 1, 263, ""],
+        [133, 1, 263, ""],
+        [134, 2, 264, ""],
+        [138, 1, 262, ""],
+        [140, 0, 262, ""],
+        [142, 1, 263, ""],
+        [143, 2, 279, ""],
+        [144, 0, 263, ""],
+        [146, 0, 264, ""],
+        [148, 1, 256, ""],
+        [149, 2, 265, ""],
+        [154, 0, 265, ""],
+        [156, 1, 256, ""],
+        [157, 2, 267, ""],
+        [166, 1, 266, ""],
+        [168, 0, 266, ""],
+        [172, 0, 267, ""],
+        [175, 1, 270, ""],
+        [180, 1, 268, ""],
+        [182, 0, 268, ""],
+        [184, 1, 271, ""],
+        [187, 1, 269, ""],
+        [189, 0, 269, ""],
+        [191, 0, 270, ""],
+        [193, 0, 271, ""],
+        [194, 2, 272, ""],
+        [200, 1, 227, ""],
+        [202, 0, 272, ""],
+        [204, 1, 273, ""],
+        [205, 2, 274, ""],
+        [206, 2, 275, ""],
+        [215, 0, 273, ""],
+        [217, 0, 274, ""],
+        [219, 1, 237, ""],
+        [223, 1, 238, ""],
+        [225, 0, 275, ""],
+        [226, 2, 276, ""],
+        [228, 0, 276, ""],
+        [230, 1, 277, ""],
+        [231, 2, 278, ""],
+        [233, 0, 277, ""],
+        [235, 0, 278, ""],
+        [239, 1, 256, ""],
+        [243, 0, 279, ""],
+        [246, 1, 280, ""],
+        [248, 1, 280, ""],
+        [250, 1, 281, ""],
+        [251, 0, 280, ""],
+        [253, 0, 281, ""],
+        [256, 0, 282, ""],
+        [257, 2, 284, ""],
+        [263, 1, 283, ""],
+        [265, 0, 283, ""],
+        [268, 2, 286, ""],
+        [269, 0, 284, ""],
+        [271, 1, 285, ""],
+        [274, 0, 285, ""],
+        [277, 0, 286, ""],
+        [281, 2, 287, ""],
+        [283, 0, 287, ""],
+        [286, 1, 288, ""],
+        [290, 0, 288, ""],
+        [292, 1, 289, ""],
+        [294, 1, 289, ""],
+        [295, 2, 290, ""],
+        [303, 0, 289, ""],
+        [305, 0, 290, ""],
+        [307, 1, 292, ""],
+        [310, 1, 291, ""],
+        [312, 0, 291, ""],
+        [314, 1, 293, ""],
+        [318, 1, 292, ""],
+        [319, 2, 296, ""],
+        [320, 0, 292, ""],
+        [322, 0, 293, ""],
+        [323, 2, 294, ""],
+        [325, 0, 294, ""],
+        [327, 1, 295, ""],
+        [329, 0, 295, ""],
+        [333, 1, 228, ""],
+        [336, 0, 296, ""],
+        [337, 1, 213, ""],
+        [342, 1, 297, ""],
+        [353, 0, 297, ""],
+        [356, 0, 298, ""],
+        [357, 1, 214, ""],
+        [359, 2, 302, ""],
+        [362, 1, 299, ""],
+        [363, 2, 304, ""],
+        [364, 0, 299, ""],
+        [365, 1, 301, ""],
+        [366, 1, 300, ""],
+        [372, 0, 300, ""],
+        [380, 0, 301, ""],
+        [389, 0, 302, ""],
+        [392, 1, 303, ""],
+        [393, 1, 229, ""],
+        [403, 0, 303, ""],
+        [407, 1, 304, ""],
+        [409, 0, 304, ""],
+        [412, 0, 305, ""],
+        [413, 1, 215, ""],
+        [415, 2, 306, ""],
+        [419, 1, 230, ""],
+        [421, 0, 306, ""],
+        [424, 1, 307, ""],
+        [433, 0, 307, ""],
+        [437, 0, 308, ""],
+        [438, 1, 216, ""],
+        [440, 2, 309, ""],
+        [441, 2, 236, ""],
+        [444, 0, 309, ""],
+        [448, 0, 310, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/lbz/final_boss/mappings/boss_1.s",
+      "tokens": [
+        [2, 1, 311, ""],
+        [3, 1, 312, ""],
+        [4, 1, 313, ""],
+        [5, 1, 314, ""],
+        [6, 1, 315, ""],
+        [7, 1, 316, ""],
+        [8, 1, 317, ""],
+        [9, 1, 318, ""],
+        [10, 1, 319, ""],
+        [11, 1, 320, ""],
+        [12, 1, 321, ""],
+        [13, 1, 322, ""],
+        [14, 1, 323, ""],
+        [15, 1, 324, ""],
+        [16, 1, 325, ""],
+        [17, 1, 326, ""],
+        [18, 1, 327, ""],
+        [19, 1, 328, ""],
+        [20, 1, 329, ""],
+        [21, 1, 330, ""],
+        [22, 1, 331, ""],
+        [23, 1, 332, ""],
+        [24, 1, 333, ""],
+        [25, 1, 334, ""],
+        [26, 1, 335, ""],
+        [27, 1, 336, ""],
+        [28, 1, 337, ""],
+        [29, 1, 338, ""],
+        [30, 1, 339, ""],
+        [31, 1, 340, ""],
+        [32, 1, 341, ""],
+        [33, 1, 342, ""],
+        [34, 1, 343, ""],
+        [35, 1, 344, ""],
+        [36, 1, 345, ""],
+        [37, 1, 347, ""],
+        [38, 1, 348, ""],
+        [39, 1, 349, ""],
+        [40, 1, 350, ""],
+        [41, 1, 351, ""],
+        [42, 1, 352, ""],
+        [43, 1, 353, ""],
+        [44, 1, 354, ""],
+        [45, 1, 355, ""],
+        [46, 1, 356, ""],
+        [47, 1, 357, ""],
+        [48, 0, 311, ""],
+        [53, 0, 312, ""],
+        [60, 0, 313, ""],
+        [65, 0, 314, ""],
+        [67, 0, 315, ""],
+        [69, 0, 316, ""],
+        [71, 0, 317, ""],
+        [73, 0, 318, ""],
+        [75, 0, 319, ""],
+        [77, 0, 320, ""],
+        [80, 0, 321, ""],
+        [83, 0, 322, ""],
+        [86, 0, 323, ""],
+        [88, 0, 324, ""],
+        [90, 0, 325, ""],
+        [92, 0, 326, ""],
+        [94, 0, 327, ""],
+        [97, 0, 328, ""],
+        [100, 0, 329, ""],
+        [102, 0, 330, ""],
+        [104, 0, 331, ""],
+        [106, 0, 332, ""],
+        [109, 0, 333, ""],
+        [111, 0, 334, ""],
+        [113, 0, 335, ""],
+        [115, 0, 336, ""],
+        [117, 0, 337, ""],
+        [120, 0, 338, ""],
+        [123, 0, 339, ""],
+        [125, 0, 340, ""],
+        [127, 0, 341, ""],
+        [129, 0, 342, ""],
+        [131, 0, 343, ""],
+        [133, 0, 344, ""],
+        [135, 0, 345, ""],
+        [138, 0, 346, ""],
+        [143, 0, 347, ""],
+        [145, 0, 348, ""],
+        [147, 0, 349, ""],
+        [149, 0, 350, ""],
+        [151, 0, 351, ""],
+        [153, 0, 352, ""],
+        [155, 0, 353, ""],
+        [157, 0, 354, ""],
+        [159, 0, 355, ""],
+        [162, 0, 356, ""],
+        [165, 0, 357, ""]
+      ]
+    }
+  ]
+}

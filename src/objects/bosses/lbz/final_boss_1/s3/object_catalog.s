@@ -6,140 +6,140 @@ ObjDat_LBZFinalBoss1:
                 dc.w    make_art_tile(ArtTile_RobotnikShip,0,1)
                 dc.w    $280
                 dc.b    $20, $20,  $C,  $F
-word_502B0:
+LBZBoss1S3_AlternateUndersideAttributes:
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $200
                 dc.b    $10,   4, $15,   0
-word_502B8:
+LBZBoss1S3_PayloadAttributes:
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $300
                 dc.b    $C, $10, $16,   0
-ObjDat3_502C0:
+LBZBoss1S3_PrimarySectionAttributes:
                 dc.l    Map_LBZFinalBoss1
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $200
                 dc.b    $20, $14,   0, $AD
-ObjDat3_502CC:
+LBZBoss1S3_LowerSectionAttributes:
                 dc.l    Map_LBZFinalBoss1
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $200
                 dc.b    $28, $18,   1, $AD
-word_502D8:
+LBZBoss1S3_SectionFlameAttributes:
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,0,1)
                 dc.w    $280
                 dc.b    $C, $18,   9, $89
-word_502E0:
+LBZBoss1S3_SectionDebrisAttributes:
                 dc.w    $200
                 dc.b    $10, $10, $2A,   0
-word_502E6:
+LBZFinalBoss1S3_Cannon_PartialAttributes:
                 dc.w    $180
                 dc.b    $C,  $C,   3,   0
-word_502EC:
+LBZBoss1S3_LaserChargeAttributes:
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,0,1)
                 dc.w    $100
                 dc.b    $18,   8,  $F,   0
-word_502F4:
+LBZBoss1S3_LaserTrailAttributes:
                 dc.w    $100
                 dc.b    8,   8, $1C,   0
-ObjDat3_502FA:
+LBZFinalBoss1S3_Orbiter_FullAttributes:
                 dc.l    Map_LBZFinalBoss1
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $300
                 dc.b    $C,  $C,  $C, $97
-ObjDat3_50306:
+LBZFinalBoss1S3_TopTrim_FullAttributes:
                 dc.l    Map_LBZFinalBoss1
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $200
                 dc.b    $28,   8,   2,   0
-ObjDat3_50312:
+LBZBoss1S3_HitOverlayAttributes:
                 dc.l    Map_LBZFinalBoss1
                 dc.w    make_art_tile(ArtTile_LBZFinalBoss1,1,1)
                 dc.w    $280
                 dc.b    $10,  $C, $10,   0
-ChildObjDat_5031E:
+LBZBoss1S3_AlternateUndersideChild:
                 dc.w    1-1
-                dc.l    loc_4FEF2
+                dc.l    LBZBoss1S3_InitAlternateUnderside
                 dc.b    0, $10
-ChildObjDat_50326:
+LBZBoss1S3_AlternatePayloadChild:
                 dc.w    1-1
-                dc.l    loc_4FF0A
+                dc.l    LBZBoss1S3_PayloadDispatchAndDraw
                 dc.b    0,   8
-ChildObjDat_5032E:
+LBZBoss1S3_BodySectionChildren:
                 dc.w    3-1
-                dc.l    loc_4FC30
+                dc.l    LBZBoss1S3_InitPrimarySectionAndCannons
                 dc.b    0,   8
-                dc.l    loc_4FC90
+                dc.l    LBZBoss1S3_InitMiddleSection
                 dc.b    0, $30
-                dc.l    loc_4FC98
+                dc.l    LBZBoss1S3_InitLowerSectionAndFlames
                 dc.b    0, $5C
-ChildObjDat_50342:
+LBZBoss1S3_BreakupFourDebrisChildren:
                 dc.w    4-1
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    -$10,  -4
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    $10,  -4
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    -$10, $10
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    $10, $10
-ChildObjDat_5035C:
+LBZBoss1S3_BreakupSixDebrisChildren:
                 dc.w    6-1
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    -$10,  -8
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    $10,  -8
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    -$10, $10
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    $10, $10
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    -$14,-$20
-                dc.l    loc_4FCC8
+                dc.l    LBZBoss1S3_InitSectionDebris
                 dc.b    $14,-$20
-ChildObjDat_50382:
+LBZBoss1S3_SectionCannonChildren:
                 dc.w    2-1
-                dc.l    loc_4FD52
+                dc.l    LBZBoss1S3_InitCannonAndCacheRoot
                 dc.b    0,   0
-ChildObjDat_5038A:
+LBZBoss1S3_CannonChargeChildren:
                 dc.w    1-1
-                dc.l    loc_4FD98
+                dc.l    LBZBoss1S3_InitLaserCharge
                 dc.b    -8,   0
                 dc.w    1-1
-                dc.l    loc_4FD98
+                dc.l    LBZBoss1S3_InitLaserCharge
                 dc.b    8,   0
-ChildObjDat_5039A:
+LBZBoss1S3_LaserTrailChild:
                 dc.w    1-1
-                dc.l    loc_4FEAA
+                dc.l    LBZBoss1S3_InitLaserTrail
                 dc.b    $20,   0
-ChildObjDat_503A2:
+LBZBoss1S3_LowerSectionFlameChildren:
                 dc.w    2-1
-                dc.l    loc_4FECE
+                dc.l    LBZBoss1S3_InitSectionFlame
                 dc.b    -$14, $30
-                dc.l    loc_4FECE
+                dc.l    LBZBoss1S3_InitSectionFlame
                 dc.b    $14, $30
-ChildObjDat_503B0:
+LBZBoss1S3_OrbiterChild:
                 dc.w    1-1
-                dc.l    loc_4FF80
+                dc.l    LBZBoss1S3_InitOrbiter
                 dc.b    0,   0
-ChildObjDat_503B8:
+LBZBoss1S3_TopTrimChild:
                 dc.w    1-1
-                dc.l    loc_4FCF0
+                dc.l    LBZBoss1S3_InitTopTrim
                 dc.b    0,-$14
-ChildObjDat_503C0:
+LBZBoss1S3_HitOverlayChildren:
                 dc.w    2-1
-                dc.l    loc_4FD1A
+                dc.l    LBZBoss1S3_InitHitOverlay
                 dc.b    -$10,   0
-                dc.l    loc_4FD1A
+                dc.l    LBZBoss1S3_InitHitOverlay
                 dc.b    $10,   0
-byte_503CE:
+LBZBoss1S3_SectionFlameAnim:
                 dc.b    2,   9,  $A,  $B, $FC
-byte_503D3:
+LBZBoss1S3_LaserChargeLaunchAnim:
                 dc.b    0, $17, $17, $18, $19, $1A, $1B, $F4
-byte_503DB:
+LBZBoss1S3_LaserTrailEvenAnim:
                 dc.b    0, $1C, $1C, $1D, $1E, $F4
-byte_503E1:
+LBZBoss1S3_LaserTrailOddAnim:
                 dc.b    0, $1F, $1F, $20, $21, $F4
-byte_503E7:
+LBZBoss1S3_OrbiterFlipCycleAnim:
                 dc.b    1,  $C,  $D,  $E,  $D,  $C, $F4
                 even
 Pal_LBZFinalBoss1:

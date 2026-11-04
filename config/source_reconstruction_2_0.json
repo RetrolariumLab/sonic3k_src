@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 148
+    "commit_count": 149
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -935,9 +935,15 @@
       "commits": ["9d9bb0993e558c6cfd52d75d5bf23fdc11a2e6c2"]
     },
     {
-      "id": "current-shorten-42-boss-lbz-main",
+      "id": "change-fb9c9e200fc8",
       "kind": "source_or_tooling",
       "summary": "Apply 544 reviewed short labels for boss lbz main.",
+      "commits": ["fb9c9e200fc884538c73c3e91e3342193c28ae0d"]
+    },
+    {
+      "id": "current-shorten-43-boss-lbz-final-1",
+      "kind": "source_or_tooling",
+      "summary": "Apply 302 reviewed short labels for boss lbz final 1.",
       "commits": ["release-commit"]
     }
   ],

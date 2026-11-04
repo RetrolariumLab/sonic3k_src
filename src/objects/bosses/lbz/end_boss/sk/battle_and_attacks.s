@@ -4,7 +4,7 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LBZEndBoss:
-                lea     word_738C6(pc),a1
+                lea     LBZBoss1SK_EarlierBossCameraTrigger(pc),a1
                 jsr     (Check_CameraInRange).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
@@ -28,7 +28,7 @@ LBZBossSK_InitBossAndArena:
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #8,collision_property(a0)
                 move.l  #LBZBossSK_SpawnPlatformsAndRunner,$34(a0)
-                lea     word_738CE(pc),a1
+                lea     LBZBoss1SK_EarlierBossCameraTarget(pc),a1
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
                 lea     LBZBossSK_OperatorAndCoverChildren(pc),a2

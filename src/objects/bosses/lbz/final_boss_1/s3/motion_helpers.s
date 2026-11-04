@@ -8,57 +8,58 @@ AdvanceLBZFinalBoss1CannonTurnCycle:
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_4FFF0
+                bmi.s   LBZBoss1S3_CannonTurnFromRootFlip
                 add.w   d0,d0
-                bra.w   loc_50064
+                bra.w   LBZBoss1S3_CannonApplySectionOffset
 ; ---------------------------------------------------------------------------
 
-loc_4FFF0:
+LBZBoss1S3_CannonTurnFromRootFlip:
                 movea.w $44(a0),a1
                 btst    #0,render_flags(a1)
                 sne     d2
-                beq.s   loc_50008
+                beq.s   LBZBoss1S3_CannonStepAndWrapPhase
                 subq.b  #1,d0
-                bpl.s   loc_50012
+                bpl.s   LBZBoss1S3_CannonStorePhaseAndDecodeFlip
                 moveq   #$B,d0
-                bra.w   loc_50012
+                bra.w   LBZBoss1S3_CannonStorePhaseAndDecodeFlip
 ; ---------------------------------------------------------------------------
 
-loc_50008:
+LBZBoss1S3_CannonStepAndWrapPhase:
                 addq.b  #1,d0
                 cmpi.b  #$C,d0
-                blo.s   loc_50012
+                blo.s   LBZBoss1S3_CannonStorePhaseAndDecodeFlip
                 moveq   #0,d0
 
-loc_50012:
+LBZBoss1S3_CannonStorePhaseAndDecodeFlip:
                 move.b  d0,$39(a0)
-                lea     byte_5008A(pc),a2
+                lea     LBZBoss1S3_CannonFrameFlipBytes(pc),a2
                 move.b  (a2,d0.w),d1
                 bset    #0,render_flags(a0)
                 bclr    #7,d1
-                bne.s   loc_50032
+                bne.s   LBZBoss1S3_CannonCheckChargeWindow
                 bclr    #0,render_flags(a0)
                 not.b   d2
 
-loc_50032:
+; Open the firing window for cannon frame 4. Spawn a charge only when the mode permits
+LBZBoss1S3_CannonCheckChargeWindow:
                 bclr    #3,$38(a1)
                 cmpi.b  #4,d1
-                bne.s   loc_50058
+                bne.s   LBZBoss1S3_CannonLoadFrameAndWait
                 bset    #3,$38(a1)
                 tst.b   d2
-                beq.s   loc_50058
+                beq.s   LBZBoss1S3_CannonLoadFrameAndWait
                 movem.l d0-d1,-(sp)
-                lea     ChildObjDat_5038A(pc),a2
+                lea     LBZBoss1S3_CannonChargeChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 movem.l (sp)+,d0-d1
 
-loc_50058:
+LBZBoss1S3_CannonLoadFrameAndWait:
                 move.b  d1,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_50096(pc,d0.w),$2E(a0)
+                move.w  LBZBoss1S3_CannonPhaseWaits(pc,d0.w),$2E(a0)
 
-loc_50064:
-                lea     byte_500AE(pc,d0.w),a1
+LBZBoss1S3_CannonApplySectionOffset:
+                lea     LBZBoss1S3_CannonPositionOffsets(pc,d0.w),a1
                 movea.w parent3(a0),a2
                 move.b  (a1)+,d1
                 ext.w   d1
@@ -74,7 +75,7 @@ loc_50064:
 ; End of function AdvanceLBZFinalBoss1CannonTurnCycle
 
 ; ---------------------------------------------------------------------------
-byte_5008A:
+LBZBoss1S3_CannonFrameFlipBytes:
                 dc.b    3|$80
                 dc.b    4|$80
                 dc.b    5|$80
@@ -88,7 +89,7 @@ byte_5008A:
                 dc.b    3
                 dc.b    $2D
                 even
-word_50096:
+LBZBoss1S3_CannonPhaseWaits:
                 dc.w    7
                 dc.w    $5F
                 dc.w    7
@@ -101,7 +102,7 @@ word_50096:
                 dc.w    $5F
                 dc.w    7
                 dc.w    $27
-byte_500AE:
+LBZBoss1S3_CannonPositionOffsets:
                 dc.b    $27,  -8
                 dc.b    $24,  -8
                 dc.b    $24,  -8
@@ -130,11 +131,11 @@ RandomizeLBZFinalBoss1LaserTrailOffset:
 ; A hit freezes and flashes the root and speeds its vertical movement. Request body-section loss at five and one HP
 LBZBoss1_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.w   locret_50192
+                bne.w   LBZBoss1S3_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.w   loc_50194
+                beq.w   LBZBoss1S3_BeginScoredDefeatHandoff
                 tst.b   $20(a0)
-                bne.s   loc_50162
+                bne.s   LBZBoss1S3_HitChooseFlashRow
                 move.b  routine(a0),$3A(a0)
                 move.b  #6,routine(a0)
                 move.b  #$20,$20(a0)
@@ -144,48 +145,49 @@ LBZBoss1_HandleHitOrDefeat:
                 move.w  y_vel(a0),d0
                 asl.w   #1,d0
                 cmpi.w  #-$800,d0
-                blt.s   loc_50126
+                blt.s   LBZBoss1S3_HitCheckSectionThresholds
                 cmpi.w  #$800,d0
-                bgt.s   loc_50126
+                bgt.s   LBZBoss1S3_HitCheckSectionThresholds
                 move.w  d0,y_vel(a0)
 
-loc_50126:
+; Drop a section at five and one remaining hit. One remaining hit also sets root bit 3
+LBZBoss1S3_HitCheckSectionThresholds:
                 cmpi.b  #5,collision_property(a0)
-                beq.s   loc_5013C
+                beq.s   LBZBoss1S3_HitBeginNextSectionDrop
                 cmpi.b  #1,collision_property(a0)
-                bne.s   loc_50162
+                bne.s   LBZBoss1S3_HitChooseFlashRow
                 bset    #3,$38(a0)
 
-loc_5013C:
+LBZBoss1S3_HitBeginNextSectionDrop:
                 move.w  $3C(a0),d0
                 bset    d0,$38(a0)
                 addq.w  #1,$3C(a0)
                 move.b  #8,routine(a0)
                 move.b  #$F,$40(a0)
                 bset    #5,status(a0)
-                lea     ChildObjDat_503C0(pc),a2
+                lea     LBZBoss1S3_HitOverlayChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
 
-loc_50162:
+LBZBoss1S3_HitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_50170
+                bne.s   LBZBoss1S3_HitCopyColorsAndTick
                 addi.w  #2*2,d0
 
-loc_50170:
+LBZBoss1S3_HitCopyColorsAndTick:
                 bsr.w   CopyLBZFinalBoss1TwoColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_50192
+                bne.s   LBZBoss1S3_HitUpdateReturn
                 move.b  $3A(a0),routine(a0)
                 move.w  #$EEE,(Normal_palette_line_2+2).w
                 move.b  $25(a0),collision_flags(a0)
                 bclr    #6,status(a0)
 
-locret_50192:
+LBZBoss1S3_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_50194:
+LBZBoss1S3_BeginScoredDefeatHandoff:
                 jsr     BossDefeated(pc)
                 move.b  #5,mapping_frame(a0)
                 bset    #6,status(a0)
@@ -197,29 +199,29 @@ loc_50194:
                 jsr     CreateChild1_Normal(pc)
                 move.b  #4,subtype(a1)
                 tst.b   (_unkFA80+1).w
-                bne.s   loc_501D4
-                move.l  #loc_4FAEE,(a0)
+                bne.s   LBZBoss1S3_BeginAlternateExit
+                move.l  #LBZBoss1S3_DescendToHandoffHeight,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_501D4:
-                move.l  #loc_4FB4C,(a0)
-                lea     ChildObjDat_5031E(pc),a2
+LBZBoss1S3_BeginAlternateExit:
+                move.l  #LBZBoss1S3_AltExitRiseAboveCamera,(a0)
+                lea     LBZBoss1S3_AlternateUndersideChild(pc),a2
                 jmp     CreateChild1_Normal(pc)
 ; End of function LBZBoss1_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyLBZFinalBoss1TwoColorPalette:
-                lea     word_501EE(pc),a1
-                lea     word_501F2(pc,d0.w),a2
+                lea     LBZBoss1S3_HitPaletteDestinations(pc),a1
+                lea     LBZBoss1S3_HitPaletteColorRows(pc,d0.w),a2
                 jmp     CopyWordData_2(pc)
 ; End of function CopyLBZFinalBoss1TwoColorPalette
 
 ; ---------------------------------------------------------------------------
-word_501EE:
+LBZBoss1S3_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$1C
-word_501F2:
+LBZBoss1S3_HitPaletteColorRows:
                 dc.w    $26,   $20
                 dc.w    $EEE,  $EEE
 
@@ -229,29 +231,29 @@ BreakOrSuspendLBZFinalBoss1BodySection:
                 movea.w parent3(a0),a1
                 move.w  $3C(a0),d0
                 btst    d0,$38(a1)
-                beq.s   loc_5024A
-                move.l  #byte_5029A,$3E(a0)
+                beq.s   LBZBoss1S3_SectionCheckHitSuspension
+                move.l  #LBZBoss1S3_SectionDebrisFourFrames,$3E(a0)
                 bset    #7,status(a0)
-                lea     (ChildObjDat_50342).l,a2
+                lea     (LBZBoss1S3_BreakupFourDebrisChildren).l,a2
                 cmpi.w  #2,d0
-                bne.s   loc_50230
-                move.l  #byte_5029E,$3E(a0)
-                lea     (ChildObjDat_5035C).l,a2
+                bne.s   LBZBoss1S3_BreakSectionAndTryExplosion
+                move.l  #LBZBoss1S3_SectionDebrisSixFrames,$3E(a0)
+                lea     (LBZBoss1S3_BreakupSixDebrisChildren).l,a2
 
-loc_50230:
+LBZBoss1S3_BreakSectionAndTryExplosion:
                 move.w  #$10,$2E(a0)
-                move.l  #loc_4FC8A,(a0)
+                move.l  #LBZBoss1S3_DeleteBrokenSection,(a0)
                 jsr     CreateChild1_Normal(pc)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jmp     CreateChild1_Normal(pc)
 ; ---------------------------------------------------------------------------
 
-loc_5024A:
+LBZBoss1S3_SectionCheckHitSuspension:
                 btst    #6,status(a1)
-                beq.s   locret_50258
-                move.l  #loc_4FC5A,(a0)
+                beq.s   LBZBoss1S3_SectionUnbrokenReturn
+                move.l  #LBZBoss1S3_SectionWaitHitAndAdjust,(a0)
 
-locret_50258:
+LBZBoss1S3_SectionUnbrokenReturn:
                 rts
 ; End of function BreakOrSuspendLBZFinalBoss1BodySection
 
@@ -267,26 +269,26 @@ LBZBoss1Debris_InitFrameAndVel:
                 movea.l $3E(a1),a1
                 move.b  (a1,d1.w),mapping_frame(a0)
                 add.w   d0,d0
-                lea     word_50282(pc,d0.w),a1
+                lea     LBZBoss1S3_SectionDebrisVelocities(pc,d0.w),a1
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
 ; End of function LBZBoss1Debris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
-word_50282:
+LBZBoss1S3_SectionDebrisVelocities:
                 dc.w    -$100, -$200
                 dc.w    $100, -$200
                 dc.w    -$200, -$100
                 dc.w    $200, -$100
                 dc.w    -$300, -$300
                 dc.w    $300, -$300
-byte_5029A:
+LBZBoss1S3_SectionDebrisFourFrames:
                 dc.b    $23
                 dc.b    $25
                 dc.b    $24
                 dc.b    $26
-byte_5029E:
+LBZBoss1S3_SectionDebrisSixFrames:
                 dc.b    $27
                 dc.b    $29
                 dc.b    $28

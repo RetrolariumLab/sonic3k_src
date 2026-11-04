@@ -4,12 +4,12 @@
 ; ---------------------------------------------------------------------------
 
 Obj_LBZFinalBossKnux:
-                lea     word_72FEA(pc),a1
+                lea     LBZBoss1SK_KnucklesEntryCameraBounds(pc),a1
                 jsr     (Check_CameraInRange).l
                 move.b  #mus_EndBoss,boss_saved_mus(a0)
                 jsr     (Boss_BeginCameraTransition).l
-                move.l  #loc_73046,(a0)
-                move.l  #loc_7304C,$34(a0)
+                move.l  #LBZBoss1SK_KnucklesTickCameraTransition,(a0)
+                move.l  #LBZBoss1SK_KnucklesInstallBossInit,$34(a0)
                 clr.b   (_unkFAA2).w
                 clr.b   (_unkFAA3).w
                 moveq   #PLCID_71,d0
@@ -29,159 +29,159 @@ PLC_LBZFinalBoss_Extra: plrlistheader
 PLC_LBZFinalBoss_Extra_End:
 ; ---------------------------------------------------------------------------
 
-loc_73046:
+LBZBoss1SK_KnucklesTickCameraTransition:
                 jmp     (SKEndCamera_TickAndSaveMusic).l
 ; ---------------------------------------------------------------------------
 
-loc_7304C:
+LBZBoss1SK_KnucklesInstallBossInit:
                 move.l  #Obj_LBZFinalBoss1,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_73054:
+LBZBoss1SK_KnucklesRiseToHandoffHeight:
                 move.w  y_pos(a0),d0
                 subq.w  #1,d0
                 move.w  (Camera_Y_pos).w,d1
                 subi.w  #$50,d1
                 cmp.w   d1,d0
-                blo.s   loc_73070
+                blo.s   LBZBoss1SK_KnucklesTryFinalBossTwo
                 move.w  d0,y_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73070:
+LBZBoss1SK_KnucklesTryFinalBossTwo:
                 move.w  d1,y_pos(a0)
                 bset    #5,$38(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_73088
+                bne.s   LBZBoss1SK_KnucklesQueueDefeatDeletion
                 move.l  #Obj_LBZFinalBoss2,(a1)
 
-loc_73088:
+LBZBoss1SK_KnucklesQueueDefeatDeletion:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_7308E:
-                lea     ObjDat3_736D8(pc),a1
+LBZBoss1SK_InitPrimarySectionAndCannons:
+                lea     LBZBoss1SK_PrimarySectionAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_730B0,(a0)
-                move.l  #loc_730B0,$34(a0)
-                lea     ChildObjDat_737BA(pc),a2
+                move.l  #LBZBoss1SK_SectionFollowAndCheckBreak,(a0)
+                move.l  #LBZBoss1SK_SectionFollowAndCheckBreak,$34(a0)
+                lea     LBZBoss1SK_SectionCannonChildren(pc),a2
                 jmp     (CreateChild3_NormalRepeated).l
 ; ---------------------------------------------------------------------------
 
-loc_730B0:
+LBZBoss1SK_SectionFollowAndCheckBreak:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_730C0:
+LBZBoss1SK_SectionWaitHitAndAdjust:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
-                bne.s   loc_730EC
+                bne.s   LBZBoss1SK_SectionDrawDuringHit
                 move.l  $34(a0),(a0)
                 btst    #5,status(a1)
-                beq.s   loc_730EC
+                beq.s   LBZBoss1SK_SectionDrawDuringHit
                 subi.b  #$28,child_dy(a0)
                 cmpi.b  #4,subtype(a0)
-                bne.s   loc_730EC
+                bne.s   LBZBoss1SK_SectionDrawDuringHit
                 bclr    #5,status(a1)
 
-loc_730EC:
+LBZBoss1SK_SectionDrawDuringHit:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_730F2:
+LBZBoss1SK_DeleteBrokenSection:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_730F8:
+LBZBoss1SK_InitMiddleSection:
                 move.w  #1,$3C(a0)
-                bra.s   loc_7308E
+                bra.s   LBZBoss1SK_InitPrimarySectionAndCannons
 ; ---------------------------------------------------------------------------
 
-loc_73100:
-                lea     ObjDat3_736E4(pc),a1
+LBZBoss1SK_InitLowerSectionAndFlames:
+                lea     LBZBoss1SK_LowerSectionAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_73128,(a0)
-                move.l  #loc_73128,$34(a0)
+                move.l  #LBZBoss1SK_LowerSectionCheckBreak,(a0)
+                move.l  #LBZBoss1SK_LowerSectionCheckBreak,$34(a0)
                 move.w  #2,$3C(a0)
-                lea     ChildObjDat_737DA(pc),a2
+                lea     LBZBoss1SK_LowerSectionFlameChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_73128:
+LBZBoss1SK_LowerSectionCheckBreak:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 bsr.w   BreakOrSuspendLBZFinalBoss1BodySection
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73138:
-                lea     word_736F8(pc),a1
+LBZBoss1SK_InitSectionDebris:
+                lea     LBZBoss1SK_SectionDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_73152,(a0)
+                move.l  #LBZBoss1SK_SectionDebrisFallAndDraw,(a0)
                 move.w  #$60,$2E(a0)
                 bsr.w   LBZBoss1Debris_InitFrameAndVel
 
-loc_73152:
+LBZBoss1SK_SectionDebrisFallAndDraw:
                 jsr     (MoveSprite).l
                 jsr     (TimedSprite_ScreenLock).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73164:
-                move.l  #loc_73174,(a0)
-                lea     ObjDat3_7371E(pc),a1
+LBZBoss1SK_InitTopTrim:
+                move.l  #LBZBoss1SK_TopTrimFollowOrDelete,(a0)
+                lea     LBZFinalBoss1SK_TopTrim_FullAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes).l
 ; ---------------------------------------------------------------------------
 
-loc_73174:
+LBZBoss1SK_TopTrimFollowOrDelete:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_7318C
+                bne.s   LBZBoss1SK_DeleteTopTrim
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7318C:
+LBZBoss1SK_DeleteTopTrim:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73192:
-                lea     ObjDat3_7372A(pc),a1
+LBZBoss1SK_InitHitOverlay:
+                lea     LBZBoss1SK_HitOverlayAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_731B0,(a0)
+                move.l  #LBZBoss1SK_HitOverlayDrawDuringFlash,(a0)
                 tst.b   subtype(a0)
-                beq.s   locret_731AE
+                beq.s   LBZBoss1SK_HitOverlayInitReturn
                 move.b  #$22,mapping_frame(a0)
 
-locret_731AE:
+LBZBoss1SK_HitOverlayInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_731B0:
+LBZBoss1SK_HitOverlayDrawDuringFlash:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
-                beq.s   loc_731C8
+                beq.s   LBZBoss1SK_DeleteHitOverlay
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_731C8:
+LBZBoss1SK_DeleteHitOverlay:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_731CE:
-                lea     word_736FE(pc),a1
+LBZBoss1SK_InitCannonAndCacheRoot:
+                lea     LBZFinalBoss1SK_Cannon_PartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_731F4,(a0)
+                move.l  #LBZBoss1SK_CannonTurnAndCheckBreak,(a0)
                 movea.w parent3(a0),a1
                 move.w  parent3(a1),$44(a0)
                 tst.b   subtype(a0)
-                beq.s   loc_731F4
+                beq.s   LBZBoss1SK_CannonTurnAndCheckBreak
                 move.b  #8,$39(a0)
 
-loc_731F4:
+LBZBoss1SK_CannonTurnAndCheckBreak:
                 bsr.w   AdvanceLBZFinalBoss1CannonTurnCycle
                 moveq   #4,d0
                 jmp     (Child_Draw_Sprite_FlickerMove).l
@@ -189,152 +189,153 @@ loc_731F4:
 ; unused
                 movea.w $44(a0),a1
                 btst    #6,status(a1)
-                bne.s   loc_73212
-                move.l  #loc_731F4,(a0)
+                bne.s   LBZBoss1SK_CannonHitHoldDraw
+                move.l  #LBZBoss1SK_CannonTurnAndCheckBreak,(a0)
 
-loc_73212:
+LBZBoss1SK_CannonHitHoldDraw:
                 moveq   #4,d0
                 jmp     (Child_Draw_Sprite_FlickerMove).l
 ; ---------------------------------------------------------------------------
 
-loc_7321A:
-                lea     word_73704(pc),a1
+LBZBoss1SK_InitLaserCharge:
+                lea     LBZBoss1SK_LaserChargeAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_73232,(a0)
+                move.l  #LBZBoss1SK_LaserChargeAccelerateBlink,(a0)
                 move.w  #8,$3A(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_73232:
+LBZBoss1SK_LaserChargeAccelerateBlink:
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_7326A
+                bne.s   LBZBoss1SK_DeleteChargeWithCannon
                 jsr     (Refresh_ChildPositionAdjusted).l
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_72B02
+                bpl.w   LBZBoss1SK_SharedReturn
                 move.w  $3A(a0),$2E(a0)
                 subq.w  #1,$3A(a0)
-                bpl.s   loc_73264
-                move.l  #loc_73270,(a0)
+                bpl.s   LBZBoss1SK_LaserChargeDraw
+                move.l  #LBZBoss1SK_LaserChargeTickFinalBlink,(a0)
                 move.w  #$18,$2E(a0)
 
-loc_73264:
+LBZBoss1SK_LaserChargeDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7326A:
+LBZBoss1SK_DeleteChargeWithCannon:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73270:
+LBZBoss1SK_LaserChargeTickFinalBlink:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7328C
+                bmi.s   LBZBoss1SK_LaserChargeBeginLaunchAnim
                 btst    #0,$2F(a0)
-                bne.w   locret_72B02
+                bne.w   LBZBoss1SK_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7328C:
-                move.l  #loc_732A8,(a0)
-                move.l  #byte_73849,$30(a0)
-                move.l  #loc_732BA,$34(a0)
+LBZBoss1SK_LaserChargeBeginLaunchAnim:
+                move.l  #LBZBoss1SK_LaserChargeFollowAndDraw,(a0)
+                move.l  #LBZBoss1SK_LaserChargeLaunchAnim,$30(a0)
+                move.l  #LBZBoss1SK_LaserBeginFlight,$34(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_732A8:
+LBZBoss1SK_LaserChargeFollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_732BA:
-                move.l  #loc_732F6,(a0)
+LBZBoss1SK_LaserBeginFlight:
+                move.l  #LBZBoss1SK_LaserSpawnTrailByParity,(a0)
                 tst.b   render_flags(a0)
-                bpl.s   loc_732CE
+                bpl.s   LBZBoss1SK_LaserChooseFacingLaunch
                 moveq   #signextendB(sfx_Laser),d0
                 jsr     (Play_SFX).l
 
-loc_732CE:
+LBZBoss1SK_LaserChooseFacingLaunch:
                 move.b  #$9C,collision_flags(a0)
                 move.b  #$11,mapping_frame(a0)
                 moveq   #-$2C,d0
                 move.w  #-$800,d1
                 btst    #0,render_flags(a0)
-                beq.s   loc_732EC
+                beq.s   LBZBoss1SK_LaserStoreOffsetAndSpeed
                 neg.w   d0
                 neg.w   d1
 
-loc_732EC:
+LBZBoss1SK_LaserStoreOffsetAndSpeed:
                 add.w   d0,x_pos(a0)
                 move.w  d1,x_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_732F6:
+; The parity paths write the trail animation pointer without a separate allocation check
+LBZBoss1SK_LaserSpawnTrailByParity:
                 btst    #0,(V_int_run_count+3).w
-                bne.s   loc_73318
-                lea     ChildObjDat_737D2(pc),a2
+                bne.s   LBZBoss1SK_LaserSpawnOddTrail
+                lea     LBZBoss1SK_LaserTrailChild(pc),a2
                 jsr     (CreateChild1_Normal).l
-                move.l  #byte_73851,$30(a1)
+                move.l  #LBZBoss1SK_LaserTrailEvenAnim,$30(a1)
                 bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
-                bra.w   loc_7332E
+                bra.w   LBZBoss1SK_LaserMoveAndCull
 ; ---------------------------------------------------------------------------
 
-loc_73318:
-                lea     ChildObjDat_737D2(pc),a2
+LBZBoss1SK_LaserSpawnOddTrail:
+                lea     LBZBoss1SK_LaserTrailChild(pc),a2
                 jsr     (CreateChild1_Normal).l
-                move.l  #byte_73857,$30(a1)
+                move.l  #LBZBoss1SK_LaserTrailOddAnim,$30(a1)
                 bsr.w   RandomizeLBZFinalBoss1LaserTrailOffset
 
-loc_7332E:
+LBZBoss1SK_LaserMoveAndCull:
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_CheckDeleteTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_7333A:
-                lea     word_7370C(pc),a1
+LBZBoss1SK_InitLaserTrail:
+                lea     LBZBoss1SK_LaserTrailAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_73358,(a0)
+                move.l  #LBZBoss1SK_LaserTrailAnimateAndDraw,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 jsr     (Refresh_ChildPositionAdjusted).l
 
-loc_73358:
+LBZBoss1SK_LaserTrailAnimateAndDraw:
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73364:
-                lea     word_736F0(pc),a1
+LBZBoss1SK_InitSectionFlame:
+                lea     LBZBoss1SK_SectionFlameAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 bset    #4,shield_reaction(a0)
-                move.l  #loc_73384,(a0)
-                move.l  #byte_73844,$30(a0)
+                move.l  #LBZBoss1SK_SectionFlameFollowAndDraw,(a0)
+                move.l  #LBZBoss1SK_SectionFlameAnim,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_73384:
+LBZBoss1SK_SectionFlameFollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Animate_Raw).l
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_73396:
-                lea     ObjDat3_73712(pc),a1
+LBZBoss1SK_InitOrbiter:
+                lea     LBZFinalBoss1SK_Orbiter_FullAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_733CA,(a0)
-                move.l  #byte_7385D,$30(a0)
-                move.l  #loc_733E2,$34(a0)
+                move.l  #LBZBoss1SK_OrbiterAnimateAndCircle,(a0)
+                move.l  #LBZBoss1SK_OrbiterFlipCycleAnim,$30(a0)
+                move.l  #LBZBoss1SK_OrbiterCycleFlips,$34(a0)
                 move.b  #-$14,child_dy(a0)
                 tst.b   subtype(a0)
-                beq.s   locret_733C8
+                beq.s   LBZBoss1SK_OrbiterPhaseInitReturn
                 move.b  #$80,$3C(a0)
 
-locret_733C8:
+LBZBoss1SK_OrbiterPhaseInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_733CA:
+LBZBoss1SK_OrbiterAnimateAndCircle:
                 jsr     (Animate_Raw).l
                 addq.b  #1,$3C(a0)
                 moveq   #3,d2
@@ -342,7 +343,7 @@ loc_733CA:
                 jmp     (Child_DrawTouch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_733E2:
+LBZBoss1SK_OrbiterCycleFlips:
                 move.b  $39(a0),d0
                 addq.b  #1,d0
                 move.b  d0,$39(a0)
@@ -357,57 +358,58 @@ AdvanceLBZFinalBoss1CannonTurnCycle:
                 moveq   #0,d0
                 move.b  $39(a0),d0
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7340E
+                bmi.s   LBZBoss1SK_CannonTurnFromRootFlip
                 add.w   d0,d0
-                bra.w   loc_73484
+                bra.w   LBZBoss1SK_CannonApplySectionOffset
 ; ---------------------------------------------------------------------------
 
-loc_7340E:
+LBZBoss1SK_CannonTurnFromRootFlip:
                 movea.w $44(a0),a1
                 btst    #0,render_flags(a1)
                 sne     d2
-                beq.s   loc_73426
+                beq.s   LBZBoss1SK_CannonStepAndWrapPhase
                 subq.b  #1,d0
-                bpl.s   loc_73430
+                bpl.s   LBZBoss1SK_CannonStorePhaseAndDecodeFlip
                 moveq   #$B,d0
-                bra.w   loc_73430
+                bra.w   LBZBoss1SK_CannonStorePhaseAndDecodeFlip
 ; ---------------------------------------------------------------------------
 
-loc_73426:
+LBZBoss1SK_CannonStepAndWrapPhase:
                 addq.b  #1,d0
                 cmpi.b  #$C,d0
-                blo.s   loc_73430
+                blo.s   LBZBoss1SK_CannonStorePhaseAndDecodeFlip
                 moveq   #0,d0
 
-loc_73430:
+LBZBoss1SK_CannonStorePhaseAndDecodeFlip:
                 move.b  d0,$39(a0)
-                lea     byte_734AA(pc),a2
+                lea     LBZBoss1SK_CannonFrameFlipBytes(pc),a2
                 move.b  (a2,d0.w),d1
                 bset    #0,render_flags(a0)
                 bclr    #7,d1
-                bne.s   loc_73450
+                bne.s   LBZBoss1SK_CannonCheckChargeWindow
                 bclr    #0,render_flags(a0)
                 not.b   d2
 
-loc_73450:
+; Open the firing window for cannon frame 4. Spawn a charge only when the mode permits
+LBZBoss1SK_CannonCheckChargeWindow:
                 bclr    #3,$38(a1)
                 cmpi.b  #4,d1
-                bne.s   loc_73478
+                bne.s   LBZBoss1SK_CannonLoadFrameAndWait
                 bset    #3,$38(a1)
                 tst.b   d2
-                beq.s   loc_73478
+                beq.s   LBZBoss1SK_CannonLoadFrameAndWait
                 movem.l d0-d1,-(sp)
-                lea     ChildObjDat_737C2(pc),a2
+                lea     LBZBoss1SK_CannonChargeChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
                 movem.l (sp)+,d0-d1
 
-loc_73478:
+LBZBoss1SK_CannonLoadFrameAndWait:
                 move.b  d1,mapping_frame(a0)
                 add.w   d0,d0
-                move.w  word_734B6(pc,d0.w),$2E(a0)
+                move.w  LBZBoss1SK_CannonPhaseWaits(pc,d0.w),$2E(a0)
 
-loc_73484:
-                lea     byte_734CE(pc,d0.w),a1
+LBZBoss1SK_CannonApplySectionOffset:
+                lea     LBZBoss1SK_CannonPositionOffsets(pc,d0.w),a1
                 movea.w parent3(a0),a2
                 move.b  (a1)+,d1
                 ext.w   d1
@@ -423,7 +425,7 @@ loc_73484:
 ; End of function AdvanceLBZFinalBoss1CannonTurnCycle
 
 ; ---------------------------------------------------------------------------
-byte_734AA:
+LBZBoss1SK_CannonFrameFlipBytes:
                 dc.b    3|$80
                 dc.b    4|$80
                 dc.b    5|$80
@@ -437,7 +439,7 @@ byte_734AA:
                 dc.b    3
                 dc.b    $2D
                 even
-word_734B6:
+LBZBoss1SK_CannonPhaseWaits:
                 dc.w    7
                 dc.w    $5F
                 dc.w    7
@@ -450,7 +452,7 @@ word_734B6:
                 dc.w    $5F
                 dc.w    7
                 dc.w    $27
-byte_734CE:
+LBZBoss1SK_CannonPositionOffsets:
                 dc.b    $27,  -8
                 dc.b    $24,  -8
                 dc.b    $24,  -8
@@ -479,11 +481,11 @@ RandomizeLBZFinalBoss1LaserTrailOffset:
 ; A hit freezes and flashes the root and speeds its vertical movement. Request body-section loss at five and one HP
 LBZBoss1_HandleHitOrDefeat:
                 tst.b   collision_flags(a0)
-                bne.w   locret_735B4
+                bne.w   LBZBoss1SK_HitUpdateReturn
                 tst.b   collision_property(a0)
-                beq.w   loc_735B6
+                beq.w   LBZBoss1SK_BeginScoredDefeatHandoff
                 tst.b   $20(a0)
-                bne.s   loc_73584
+                bne.s   LBZBoss1SK_HitChooseFlashRow
                 move.b  routine(a0),$3A(a0)
                 move.b  #6,routine(a0)
                 move.b  #$20,$20(a0)
@@ -493,48 +495,49 @@ LBZBoss1_HandleHitOrDefeat:
                 move.w  y_vel(a0),d0
                 asl.w   #1,d0
                 cmpi.w  #-$800,d0
-                blt.s   loc_73546
+                blt.s   LBZBoss1SK_HitCheckSectionThresholds
                 cmpi.w  #$800,d0
-                bgt.s   loc_73546
+                bgt.s   LBZBoss1SK_HitCheckSectionThresholds
                 move.w  d0,y_vel(a0)
 
-loc_73546:
+; Drop a section at five and one remaining hit. One remaining hit also sets root bit 3
+LBZBoss1SK_HitCheckSectionThresholds:
                 cmpi.b  #5,collision_property(a0)
-                beq.s   loc_7355C
+                beq.s   LBZBoss1SK_HitBeginNextSectionDrop
                 cmpi.b  #1,collision_property(a0)
-                bne.s   loc_73584
+                bne.s   LBZBoss1SK_HitChooseFlashRow
                 bset    #3,$38(a0)
 
-loc_7355C:
+LBZBoss1SK_HitBeginNextSectionDrop:
                 move.w  $3C(a0),d0
                 bset    d0,$38(a0)
                 addq.w  #1,$3C(a0)
                 move.b  #8,routine(a0)
                 move.b  #$F,$40(a0)
                 bset    #5,status(a0)
-                lea     ChildObjDat_737F8(pc),a2
+                lea     LBZBoss1SK_HitOverlayChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_73584:
+LBZBoss1SK_HitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_73592
+                bne.s   LBZBoss1SK_HitCopyColorsAndTick
                 addi.w  #2*2,d0
 
-loc_73592:
+LBZBoss1SK_HitCopyColorsAndTick:
                 bsr.w   CopyLBZFinalBoss1TwoColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_735B4
+                bne.s   LBZBoss1SK_HitUpdateReturn
                 move.b  $3A(a0),routine(a0)
                 move.w  #$EEE,(Normal_palette_line_2+$2).w
                 move.b  $25(a0),collision_flags(a0)
                 bclr    #6,status(a0)
 
-locret_735B4:
+LBZBoss1SK_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_735B6:
+LBZBoss1SK_BeginScoredDefeatHandoff:
                 jsr     (BossDefeated).l
                 move.b  #5,mapping_frame(a0)
                 bset    #6,status(a0)
@@ -546,28 +549,28 @@ loc_735B6:
                 jsr     (CreateChild1_Normal).l
                 move.b  #4,subtype(a1)
                 cmpi.b  #2,(Player_1+character_id).w
-                beq.s   loc_735FC
-                move.l  #loc_72B18,(a0)
+                beq.s   LBZBoss1SK_BeginAlternateExit
+                move.l  #LBZBoss1SK_EndingDescendToCameraY,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_735FC:
-                move.l  #loc_73054,(a0)
+LBZBoss1SK_BeginAlternateExit:
+                move.l  #LBZBoss1SK_KnucklesRiseToHandoffHeight,(a0)
                 rts
 ; End of function LBZBoss1_HandleHitOrDefeat
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyLBZFinalBoss1TwoColorPalette:
-                lea     word_73612(pc),a1
-                lea     word_73616(pc,d0.w),a2
+                lea     LBZBoss1SK_HitPaletteDestinations(pc),a1
+                lea     LBZBoss1SK_HitPaletteColorRows(pc,d0.w),a2
                 jmp     (CopyWordData_2).l
 ; End of function CopyLBZFinalBoss1TwoColorPalette
 
 ; ---------------------------------------------------------------------------
-word_73612:
+LBZBoss1SK_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$08, Normal_palette_line_2+$1C
-word_73616:
+LBZBoss1SK_HitPaletteColorRows:
                 dc.w    $26,   $20
                 dc.w    $EEE,  $EEE
 
@@ -577,29 +580,29 @@ BreakOrSuspendLBZFinalBoss1BodySection:
                 movea.w parent3(a0),a1
                 move.w  $3C(a0),d0
                 btst    d0,$38(a1)
-                beq.s   loc_73672
-                move.l  #byte_736C2,$3E(a0)
+                beq.s   LBZBoss1SK_SectionCheckHitSuspension
+                move.l  #LBZBoss1SK_SectionDebrisFourFrames,$3E(a0)
                 bset    #7,status(a0)
-                lea     (ChildObjDat_7377A).l,a2
+                lea     (LBZBoss1SK_BreakupFourDebrisChildren).l,a2
                 cmpi.w  #2,d0
-                bne.s   loc_73654
-                move.l  #byte_736C6,$3E(a0)
-                lea     (ChildObjDat_73794).l,a2
+                bne.s   LBZBoss1SK_BreakSectionAndTryExplosion
+                move.l  #LBZBoss1SK_SectionDebrisSixFrames,$3E(a0)
+                lea     (LBZBoss1SK_BreakupSixDebrisChildren).l,a2
 
-loc_73654:
+LBZBoss1SK_BreakSectionAndTryExplosion:
                 move.w  #$10,$2E(a0)
-                move.l  #loc_730F2,(a0)
+                move.l  #LBZBoss1SK_DeleteBrokenSection,(a0)
                 jsr     (CreateChild1_Normal).l
                 lea     (Child6_CreateBossExplosion).l,a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_73672:
+LBZBoss1SK_SectionCheckHitSuspension:
                 btst    #6,status(a1)
-                beq.s   locret_73680
-                move.l  #loc_730C0,(a0)
+                beq.s   LBZBoss1SK_SectionUnbrokenReturn
+                move.l  #LBZBoss1SK_SectionWaitHitAndAdjust,(a0)
 
-locret_73680:
+LBZBoss1SK_SectionUnbrokenReturn:
                 rts
 ; End of function BreakOrSuspendLBZFinalBoss1BodySection
 
@@ -615,26 +618,26 @@ LBZBoss1Debris_InitFrameAndVel:
                 movea.l $3E(a1),a1
                 move.b  (a1,d1.w),mapping_frame(a0)
                 add.w   d0,d0
-                lea     word_736AA(pc,d0.w),a1
+                lea     LBZBoss1SK_SectionDebrisVelocities(pc,d0.w),a1
                 move.w  (a1)+,x_vel(a0)
                 move.w  (a1)+,y_vel(a0)
                 rts
 ; End of function LBZBoss1Debris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
-word_736AA:
+LBZBoss1SK_SectionDebrisVelocities:
                 dc.w    -$100, -$200
                 dc.w    $100, -$200
                 dc.w    -$200, -$100
                 dc.w    $200, -$100
                 dc.w    -$300, -$300
                 dc.w    $300, -$300
-byte_736C2:
+LBZBoss1SK_SectionDebrisFourFrames:
                 dc.b    $23
                 dc.b    $25
                 dc.b    $24
                 dc.b    $26
-byte_736C6:
+LBZBoss1SK_SectionDebrisSixFrames:
                 dc.b    $27
                 dc.b    $29
                 dc.b    $28

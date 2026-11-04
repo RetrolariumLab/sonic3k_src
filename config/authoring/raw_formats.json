@@ -301,7 +301,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/battle_and_attacks.s",
-      "sha256": "ebd142a809c568e2099b9e86244fc0c7560f61958d7ad61da13a3da18f6b2a21"
+      "sha256": "d921d84e09a8113d9f5118dfadabf72bc2394b193bd46806b4a8b67ee772ac6b"
     },
     {
       "path": "src/objects/bosses/lbz/end_boss/sk/object_catalog.s",
@@ -309,23 +309,23 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
-      "sha256": "a931437b134cc089976455db966b6bf91ab84000063673db6273218e45340f2c"
+      "sha256": "99d7f9a87208d205fc33a6b997cfff3b5a6c99c783b90c24c7b2bea07a4dd276"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
-      "sha256": "0aabd39df0ded553c611b95a7772306d5d32ce3e723dfdac5e90ed3e0daba526"
+      "sha256": "340de9f11d875756b86db7e9070566509b3dace42d5ded4a63fc65214c7d1f55"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/knuckles_battle.s",
-      "sha256": "8652b5b33aa51c9ff6622c3dd8c2b698765a66f7109a87bea981666dd1bc6665"
+      "sha256": "d179886159c9d0a2b650512f2746fb8072fa340e08a00c2871bbc829183dfa9b"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
-      "sha256": "78b037daf1ff317e11ea927f7781b6581f1a20d4c19cbf20960916e6e1f4b5ab"
+      "sha256": "99b8e0e58a27d88ed8896930432732c5f22fe9a5bdfcf674bbfd7ec57954ca1c"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "sha256": "19a78869660bbe8799b73398098dbea8a0323a1c55a23c1833e4d4e5eb459703"
+      "sha256": "449815aa8a6d0b0dff3993fb3ba68d46ecadeed365118a161c4448e8419fe0eb"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/s3/attachments_and_effects.s",
@@ -2473,13 +2473,13 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
-      "symbol": "byte_503CE",
-      "scope": "byte_503CE",
+      "symbol": "LBZBoss1S3_SectionFlameAnim",
+      "scope": "LBZBoss1S3_SectionFlameAnim",
       "first_line": 134,
       "last_line": 144,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 32,
-      "declarations_sha256": "f984f3b92be5d39cf784d95afe0cad50f4b28b1dc6cacf8f5ed207ae8fc73e84",
+      "declarations_sha256": "fe8dff3b430a49a67509981f2e1c5eb27fc7a8bb73906f40f7924652b22a94b7",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -2488,18 +2488,24 @@
         [25, "fixed"]
       ],
       "external_symbols": [],
-      "members": ["byte_503CE", "byte_503D3", "byte_503DB", "byte_503E1", "byte_503E7"],
+      "members": [
+        "LBZBoss1S3_SectionFlameAnim",
+        "LBZBoss1S3_LaserChargeLaunchAnim",
+        "LBZBoss1S3_LaserTrailEvenAnim",
+        "LBZBoss1S3_LaserTrailOddAnim",
+        "LBZBoss1S3_OrbiterFlipCycleAnim"
+      ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/object_catalog.s",
-      "symbol": "byte_73844",
-      "scope": "byte_73844",
+      "symbol": "LBZBoss1SK_SectionFlameAnim",
+      "scope": "LBZBoss1SK_SectionFlameAnim",
       "first_line": 163,
       "last_line": 191,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 66,
-      "declarations_sha256": "2f8a297283c855584b1e27e5d9d5097dfd4f5053496adc144f6175f0c743d0ce",
+      "declarations_sha256": "3ef5623e668e2cb0eecdf8e7a01bc6fedea769206d7727df8e2bd67518f4c0fb",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -2512,29 +2518,29 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_73844",
-        "byte_73849",
-        "byte_73851",
-        "byte_73857",
-        "byte_7385D",
-        "byte_73864",
-        "byte_7386A",
-        "byte_73874"
+        "LBZBoss1SK_SectionFlameAnim",
+        "LBZBoss1SK_LaserChargeLaunchAnim",
+        "LBZBoss1SK_LaserTrailEvenAnim",
+        "LBZBoss1SK_LaserTrailOddAnim",
+        "LBZBoss1SK_OrbiterFlipCycleAnim",
+        "LBZBoss1SK_DeathEggNestedParticleAnim",
+        "LBZBoss1SK_EndingP1FrameFlipAnim",
+        "LBZBoss1SK_EndingP2FrameFlipAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/sk/sonic_tails_battle.s",
-      "symbol": "RawAni_72E96",
-      "scope": "RawAni_72E96",
-      "first_line": 452,
-      "last_line": 454,
+      "symbol": "LBZBoss1SK_FallingDebrisFrames",
+      "scope": "LBZBoss1SK_FallingDebrisFrames",
+      "first_line": 455,
+      "last_line": 457,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 8,
-      "declarations_sha256": "7f7dc99d3629c31af826c00350f750e40960e04d8840b920d03d464ae5002c74",
+      "declarations_sha256": "23a944692e06efb9e2f3df06ffa2a4dbb53dc14e1d8cf85a89ce670fbc522715",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_72E96"],
+      "members": ["LBZBoss1SK_FallingDebrisFrames"],
       "stored_markers": []
     },
     {
