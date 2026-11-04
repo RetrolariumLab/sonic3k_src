@@ -20,10 +20,10 @@ Obj_SKTitle_CopyrightDisplay:
 
 Copy_Map_Line_To_VRAM:
                 subi.w  #$10,d1
-                bcs.s   locret_5D22
+                bcs.s   SKSoloTitle_MapRowUploadReturn
                 move.w  d1,d3
                 andi.w  #7,d3
-                bne.s   locret_5D22
+                bne.s   SKSoloTitle_MapRowUploadReturn
                 andi.w  #$F8,d1
                 move.w  d1,d2
                 add.w   d1,d1
@@ -41,7 +41,7 @@ Copy_Map_Line_To_VRAM:
                 bsr.s   SKTitleWriteOneMapRowToVDPFromCommand
                 move    #$2300,sr
 
-locret_5D22:
+SKSoloTitle_MapRowUploadReturn:
                 rts
 ; End of function Copy_Map_Line_To_VRAM
 
@@ -90,12 +90,12 @@ ClearVRAMArea:
 
 SKTitle_ScreenShake:
                 tst.w   (Screen_shake_flag).w
-                beq.s   locret_5D92                     ; If timer has run out, don't do anything
+                beq.s   SKSoloTitle_ShakeReturnKeepOldOffsets  ; If timer has run out, don't do anything
                 subq.w  #1,(Screen_shake_flag).w
-                bne.s   loc_5D72
+                bne.s   SKSoloTitle_ReadFrameMaskedShakeOffsets
                 addq.w  #1,(Events_routine_fg).w        ; Increment title routine counter when this is done
 
-loc_5D72:
+SKSoloTitle_ReadFrameMaskedShakeOffsets:
                 move.w  (V_int_run_count+2).w,d0
                 andi.w  #$3F,d0                         ; Get frame counter then AND it for offset
                 lea     (SKTitle_ShakeOffsets).l,a1
@@ -106,7 +106,7 @@ loc_5D72:
                 move.b  (a1)+,d0
                 move.w  d0,(Camera_X_pos_P2_copy).w
 
-locret_5D92:
+SKSoloTitle_ShakeReturnKeepOldOffsets:
                 rts
 ; End of function SKTitle_ScreenShake
 
@@ -117,18 +117,18 @@ SKTitle_DeformBG:
                 move.w  (Camera_Y_pos_P2).w,(V_scroll_value_BG).w  ; Move BG position values to their proper spots
                 moveq   #0,d2
                 tst.w   (Screen_shake_flag).w
-                beq.s   loc_5DB8
+                beq.s   SKSoloTitle_DispatchHScrollByPhase
                 move.w  (Camera_Y_pos_P2_copy).w,d0
                 add.w   d0,(V_scroll_value).w
                 add.w   d0,(V_scroll_value_BG).w        ; Shake the screen by the proper offsets if screen shaking is on
                 move.w  (Camera_X_pos_P2_copy).w,d2     ; Move shake X amount to d2
 
-loc_5DB8:
+SKSoloTitle_DispatchHScrollByPhase:
                 lea     (H_scroll_buffer).w,a1
                 move.w  (Events_routine_fg).w,d0
-                bne.s   loc_5DE0
+                bne.s   SKSoloTitle_SelectPhase1StaticNoise
 
-loc_5DC2:
+SKSoloTitle_PackConstantHScrollPair:
                 move.w  #224-1,d1                       ; If routine counter is zero
                 move.w  (Camera_X_pos).w,d0
                 add.w   d2,d0
@@ -138,20 +138,20 @@ loc_5DC2:
                 add.w   d2,d0
                 neg.w   d0
 
-loc_5DD8:
+SKSoloTitle_Fill224HScrollPairs:
                 move.l  d0,(a1)+                        ; Do normal deformation, nothing special
-                dbf     d1,loc_5DD8
+                dbf     d1,SKSoloTitle_Fill224HScrollPairs
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5DE0:
+SKSoloTitle_SelectPhase1StaticNoise:
                 subq.w  #1,d0
-                bne.s   loc_5E0E
+                bne.s   SKSoloTitle_TickPhase2EraseTimer
                 add.w   (Camera_X_pos_P2).w,d2          ; If routine counter is 1
                 neg.w   d2
                 move.w  #112-1,d3
 
-loc_5DEE:
+SKSoloTitle_WriteTwoNoiseLines:
                 jsr     (Random_Number).l
                 andi.w  #7,d0
                 move.w  d0,(a1)+                        ; Shake the scanlines of the foreground (SEGA logo) by random amounts to simulate static
@@ -161,15 +161,15 @@ loc_5DEE:
                 neg.w   d0
                 move.w  d0,(a1)+
                 move.w  d2,(a1)+
-                dbf     d3,loc_5DEE
+                dbf     d3,SKSoloTitle_WriteTwoNoiseLines
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5E0E:
+SKSoloTitle_TickPhase2EraseTimer:
                 subq.w  #1,d0
-                bne.s   loc_5DC2
+                bne.s   SKSoloTitle_PackConstantHScrollPair
                 subq.w  #1,(Events_bg+$00).w            ; If routine counter is 2
-                bne.s   loc_5E52
+                bne.s   SKSoloTitle_PrepareLogoExitScroll
                 addq.w  #1,(Events_routine_fg).w        ; If above timer has expired
                 move    #$2700,sr
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table+$500,VRAM,WRITE),d0
@@ -180,29 +180,29 @@ loc_5E0E:
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #bytesToLcnt($20),d0
 
-loc_5E3E:
+SKSoloTitle_LoadKnucklesColorsAndHand:
                 move.l  (a0)+,(a2)+                     ; Load the knuckles palette into the final line
-                dbf     d0,loc_5E3E
+                dbf     d0,SKSoloTitle_LoadKnucklesColorsAndHand
                 move.l  #Obj_SKTitle_HandAnim,(Dynamic_object_RAM+object_size).w  ; Start hand animations
                 moveq   #0,d2
-                bra.w   loc_5DC2                        ; Then do normal deformation
+                bra.w   SKSoloTitle_PackConstantHScrollPair  ; Then do normal deformation
 ; ---------------------------------------------------------------------------
 
-loc_5E52:
+SKSoloTitle_PrepareLogoExitScroll:
                 move.w  (Camera_X_pos_P2).w,d2
                 neg.w   d2
                 move.w  #112-1,d3
 
-loc_5E5C:
+SKSoloTitle_MoveFirstLogoScanlineRight:
                 jsr     (Random_Number).l
                 addq.w  #8,(a1)                         ; On every other line, alternate between moving the line randomly to the left and randomly to the right
                 andi.w  #7,d0                           ; The result is a staticky phaseout effect of the SEGA logo
                 add.w   d0,(a1)
                 cmpi.w  #$FC,(a1)
-                blt.s   loc_5E74
+                blt.s   SKSoloTitle_MoveSecondLogoScanlineLeft
                 move.w  #$FC,(a1)
 
-loc_5E74:
+SKSoloTitle_MoveSecondLogoScanlineLeft:
                 addq.w  #2,a1
                 move.w  d2,(a1)+
                 subq.w  #8,(a1)
@@ -210,12 +210,12 @@ loc_5E74:
                 andi.w  #7,d0
                 sub.w   d0,(a1)
                 cmpi.w  #-$104,(a1)
-                bgt.s   loc_5E8C
+                bgt.s   SKSoloTitle_WriteSecondLineAndRepeat
                 move.w  #-$104,(a1)
 
-loc_5E8C:
+SKSoloTitle_WriteSecondLineAndRepeat:
                 addq.w  #2,a1
                 move.w  d2,(a1)+
-                dbf     d3,loc_5E5C
+                dbf     d3,SKSoloTitle_MoveFirstLogoScanlineRight
                 rts
 ; End of function SKTitle_DeformBG

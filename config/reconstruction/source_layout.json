@@ -11118,7 +11118,7 @@
       "responsibility": "SEGA transition, Sonic 3 title initialization, title loop and animated player-frame loading.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 485,
+      "physical_lines": 487,
       "origin": {
         "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
         "path": "s3.s",
@@ -11158,7 +11158,7 @@
       "responsibility": "Sonic 3 title frame declarations, banner, text and player widgets plus the preserved level-select input sequence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 376,
+      "physical_lines": 377,
       "origin": {
         "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
         "path": "s3.s",
@@ -11603,7 +11603,7 @@
       "responsibility": "Standalone title character landing, scenery, banner and hand animation state machines.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 372,
+      "physical_lines": 373,
       "origin": {
         "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
         "path": "sonic3k.s",
@@ -11823,7 +11823,7 @@
       "responsibility": "Sonic 3 title frame declarations, banner, text and player widgets plus the preserved level-select input sequence.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 419,
+      "physical_lines": 420,
       "origin": {
         "commit": "eb0ce00a4f241944bd05626f880d9028e1a4b1ad",
         "path": "sonic3k.s",

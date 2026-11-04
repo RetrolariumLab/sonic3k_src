@@ -109,26 +109,27 @@ Obj_TitleBanner_Main:
                 move.b  #0,$34(a0)
                 move.w  #$40,d1
                 cmpi.w  #0,d0
-                blt.s   loc_48B4
-                bne.s   loc_48AA
+                blt.s   SKTitleWidget_BannerUpdateBounce
+                bne.s   SKTitleWidget_BannerSelectNegativeAccel
                 cmpi.w  #-$5B,y_vel(a0)
-                bne.s   loc_48AA
+                bne.s   SKTitleWidget_BannerSelectNegativeAccel
                 move.l  #Obj_TitleBanner_Display,(a0)
                 move.l  #Obj_TitleTM,(Reserved_object_3).w
-                bra.s   loc_48C2
+                bra.s   SKTitleWidget_BannerProjectOffset
 ; ---------------------------------------------------------------------------
 
-loc_48AA:
+SKTitleWidget_BannerSelectNegativeAccel:
                 move.b  #-1,$34(a0)
                 move.w  #-$40,d1
 
-loc_48B4:
+; Halve the velocity when it changes direction
+SKTitleWidget_BannerUpdateBounce:
                 add.w   d1,y_vel(a0)
                 cmp.b   $34(a0),d2
-                beq.s   loc_48C2
+                beq.s   SKTitleWidget_BannerProjectOffset
                 asr     y_vel(a0)
 
-loc_48C2:
+SKTitleWidget_BannerProjectOffset:
                 move.w  $30(a0),d0
                 neg.w   d0
                 addi.w  #$D4,d0
@@ -139,12 +140,12 @@ loc_48C2:
 
 Obj_TitleBanner_Display:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_48F2
+                bpl.s   SKTitleWidget_BannerCycleWaterPalette
                 move.b  #9,anim_frame_timer(a0)
                 addq.b  #4,anim_frame(a0)
                 andi.b  #$1C,anim_frame(a0)
 
-loc_48F2:
+SKTitleWidget_BannerCycleWaterPalette:
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 move.l  Pal_TitleWaterRot(pc,d0.w),(Target_palette_line_3+$1A).w
@@ -168,11 +169,11 @@ Obj_TitleTM:
 
 Obj_TitleTM_Display:
                 tst.b   (Graphics_flags).w
-                bpl.s   locret_4968
+                bpl.s   SKTitleWidget_SkipJapaneseTrademark
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_4968:
+SKTitleWidget_SkipJapaneseTrademark:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -203,21 +204,21 @@ OldDebugCode:
                 adda.w  d0,a1
                 move.b  (Ctrl_1_pressed_title).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_4A10
+                beq.s   SKTitleWidget_UnusedDebugSequenceReturn
                 move.b  (Ctrl_1_held_title).w,d0
                 cmp.b   (a1),d0
-                bne.s   loc_4A0A
+                bne.s   SKTitleWidget_ResetUnusedDebugSequence
                 addq.w  #1,(Debug_mode_cheat_counter).w
                 tst.b   1(a1)
-                bne.s   locret_4A10
+                bne.s   SKTitleWidget_UnusedDebugSequenceReturn
                 move.w  #(1<<8)|1,(Debug_cheat_flag).w
                 moveq   #signextendB(sfx_RingLoss),d0
                 bsr.w   Play_SFX
 
-loc_4A0A:
+SKTitleWidget_ResetUnusedDebugSequence:
                 move.w  #0,(Debug_mode_cheat_counter).w
 
-locret_4A10:
+SKTitleWidget_UnusedDebugSequenceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 OldDebugCodeDat:
@@ -266,36 +267,36 @@ Obj_TitleSelection_Main:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 btst    #button_up,d0
-                beq.s   loc_4AAE
+                beq.s   SKTitleWidget_HandleMenuDown
                 subq.b  #1,d2
-                bcc.s   loc_4AAE
+                bcc.s   SKTitleWidget_HandleMenuDown
                 move.b  #2,d2
                 tst.b   (Level_select_flag).w           ; If level select is on, maximum choices are 3
-                bne.s   loc_4AAE
+                bne.s   SKTitleWidget_HandleMenuDown
                 move.b  #1,d2
 
-loc_4AAE:
+SKTitleWidget_HandleMenuDown:
                 btst    #button_down,d0
-                beq.s   loc_4AC8
+                beq.s   SKTitleWidget_StoreMenuFrameAndSound
                 addq.b  #1,d2
                 tst.b   (Level_select_flag).w           ; See above
-                bne.s   loc_4AC0
+                bne.s   SKTitleWidget_WrapTitleMenuOptionAtThree
                 andi.b  #1,d2
 
-loc_4AC0:
+SKTitleWidget_WrapTitleMenuOptionAtThree:
                 cmpi.b  #3,d2
-                blo.s   loc_4AC8
+                blo.s   SKTitleWidget_StoreMenuFrameAndSound
                 moveq   #0,d2
 
-loc_4AC8:
+SKTitleWidget_StoreMenuFrameAndSound:
                 move.b  d2,mapping_frame(a0)
                 move.b  d2,(Title_screen_option).w
                 andi.b  #3,d0
-                beq.s   loc_4ADE
+                beq.s   SKTitleWidget_QueueMenuTextSprite
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l                    ; Only play sound if selection was changed
 
-loc_4ADE:
+SKTitleWidget_QueueMenuTextSprite:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -355,34 +356,34 @@ Obj_TitleTailsPlane:
 
 Obj_TitleTailsPlane_Main:
                 tst.b   $30(a0)
-                bne.s   loc_4C0A
+                bne.s   SKTitleWidget_MovePlaneLeftAndTurn
                 addq.w  #1,x_pos(a0)
                 cmpi.w  #$240,x_pos(a0)
-                bne.s   loc_4C08
+                bne.s   SKTitleWidget_AnimatePlaneAfterRightMove
                 move.b  #1,$30(a0)
                 bset    #0,status(a0)
                 move.w  #$D0,y_pos(a0)
 
-loc_4C08:
-                bra.s   loc_4C28
+SKTitleWidget_AnimatePlaneAfterRightMove:
+                bra.s   SKTitleWidget_AnimatePlaneAndCheckCheat
 ; ---------------------------------------------------------------------------
 
-loc_4C0A:
+SKTitleWidget_MovePlaneLeftAndTurn:
                 subq.w  #1,x_pos(a0)
                 cmpi.w  #0,x_pos(a0)
-                bne.s   loc_4C28
+                bne.s   SKTitleWidget_AnimatePlaneAndCheckCheat
                 move.b  #0,$30(a0)
                 bclr    #0,status(a0)
                 move.w  #$C0,y_pos(a0)
 
-loc_4C28:
+SKTitleWidget_AnimatePlaneAndCheckCheat:
                 lea     (Ani_TitleTailsPlane).l,a1
                 jsr     (Animate_Sprite).l
                 tst.b   render_flags(a0)
-                bpl.s   loc_4C3E
+                bpl.s   SKTitleWidget_QueuePlaneSprite
                 bsr.w   S3_Level_Select_Code
 
-loc_4C3E:
+SKTitleWidget_QueuePlaneSprite:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 Ani_TitleTailsPlane:
@@ -399,21 +400,21 @@ S3_Level_Select_Code:
                 adda.w  d0,a1
                 move.b  (Ctrl_1_pressed_title).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_4C90
+                beq.s   SKTitleWidget_LevelSelectSequenceReturn
                 move.b  (Ctrl_1_held_title).w,d0
                 cmp.b   (a1),d0
-                bne.s   loc_4C8A
+                bne.s   SKTitleWidget_ResetLevelSelectSequence
                 addq.w  #1,(Level_select_cheat_counter).w
                 tst.b   1(a1)
-                bne.s   locret_4C90
+                bne.s   SKTitleWidget_LevelSelectSequenceReturn
                 move.w  #(1<<8)|1,(Level_select_flag).w
                 move.w  #(1<<8)|1,(Debug_cheat_flag).w
                 moveq   #signextendB(sfx_RingRight),d0
                 bsr.w   Play_SFX
 
-loc_4C8A:
+SKTitleWidget_ResetLevelSelectSequence:
                 move.w  #0,(Level_select_cheat_counter).w
 
-locret_4C90:
+SKTitleWidget_LevelSelectSequenceReturn:
                 rts
 ; End of function S3_Level_Select_Code

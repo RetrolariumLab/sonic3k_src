@@ -33,11 +33,11 @@ SonicOnSegaScr_Index:
                 dc.w    SonicOnSegaScr_MidWipe-SonicOnSegaScr_Index
                 dc.w    SonicOnSegaScr_RunRight-SonicOnSegaScr_Index
                 dc.w    SonicOnSegaScr_EndWipe-SonicOnSegaScr_Index
-                dc.w    locret_43340-SonicOnSegaScr_Index
+                dc.w    S3SegaActor_ReturnFromTerminalRoutine-SonicOnSegaScr_Index
 ; ---------------------------------------------------------------------------
 
 SonicOnSegaScr_Init:
-                lea     ObjDat3_434E0(pc),a1
+                lea     S3SegaActor_RunnerPartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #0,render_flags(a0)
                 move.w  #$1E8,x_pos(a0)
@@ -51,24 +51,24 @@ SonicOnSegaScr_Init:
                 moveq   #0,d0
                 moveq   #35-1,d6
 
-loc_431B8:
+S3SegaActor_AddLeftStreakOffsets:
                 move.b  (a2)+,d0
                 add.w   d0,(a1)
                 addq.w  #8,a1
-                dbf     d6,loc_431B8
+                dbf     d6,S3SegaActor_AddLeftStreakOffsets
                 move.w  d7,-(sp)
                 moveq   #0,d0
                 moveq   #0,d1
                 lea     SonicRunningSpriteScaleData(pc),a6
                 moveq   #8-1,d7
 
-loc_431CE:
+S3SegaActor_ExpandEightRunTileGroups:
                 movea.l (a6)+,a1
                 movea.l (a6)+,a2
                 move.b  (a6)+,d0
                 move.b  (a6)+,d1
                 bsr.w   Scale_2x
-                dbf     d7,loc_431CE
+                dbf     d7,S3SegaActor_ExpandEightRunTileGroups
                 move.w  (sp)+,d7
                 rts
 ; ---------------------------------------------------------------------------
@@ -110,14 +110,14 @@ SonicRunningSpriteScaleData:
 SonicOnSegaScr_RunLeft:
                 subi.w  #$20,x_pos(a0)
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_43254
+                bmi.s   S3SegaActor_EnterMiddleWipe
                 bsr.w   SonicOnSegaScr_Move_Streaks_Left
                 lea     (Ani_SonicOnSegaScr).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_43254:
+S3SegaActor_EnterMiddleWipe:
                 addq.b  #2,routine(a0)
                 move.w  #$C,$2E(a0)
                 move.b  #1,$30(a0)
@@ -127,18 +127,18 @@ loc_43254:
 
 SonicOnSegaScr_MidWipe:
                 tst.w   $2E(a0)
-                beq.s   loc_4327E
+                beq.s   S3SegaActor_StepMiddlePaletteWipe
                 subq.w  #1,$2E(a0)
                 bsr.w   SonicOnSegaScr_Move_Streaks_Left
 
-loc_4327E:
-                lea     byte_433F4(pc),a1
+S3SegaActor_StepMiddlePaletteWipe:
+                lea     S3SegaActor_MiddleWipePaletteSequence(pc),a1
                 bsr.w   SegaS3StepTimedPaletteFrameCopy
-                bne.s   loc_4328A
+                bne.s   S3SegaActor_TurnAndRequestRightWipe
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4328A:
+S3SegaActor_TurnAndRequestRightWipe:
                 addq.b  #2,routine(a0)
                 bchg    #0,render_flags(a0)
                 move.w  #$B,$2E(a0)
@@ -153,19 +153,19 @@ loc_4328A:
                 moveq   #0,d0
                 moveq   #35-1,d6
 
-loc_432CE:
+S3SegaActor_SubtractRightStreakOffsets:
                 move.b  (a2)+,d0
                 sub.w   d0,(a1)
                 addq.w  #8,a1
-                dbf     d6,loc_432CE
+                dbf     d6,S3SegaActor_SubtractRightStreakOffsets
 
-locret_432D8:
+S3SegaActor_WipeScaleTransferReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
 SonicOnSegaScr_RunRight:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_432FC
+                bmi.s   S3SegaActor_EnterEndWipe
                 addi.w  #$20,x_pos(a0)
                 bsr.w   SonicOnSegaScr_Move_Streaks_Right
                 lea     (Ani_SonicOnSegaScr).l,a1
@@ -173,7 +173,7 @@ SonicOnSegaScr_RunRight:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_432FC:
+S3SegaActor_EnterEndWipe:
                 addq.b  #2,routine(a0)
                 move.w  #$C,$2E(a0)
                 move.b  #1,$30(a0)
@@ -183,24 +183,24 @@ loc_432FC:
 
 SonicOnSegaScr_EndWipe:
                 tst.w   $2E(a0)
-                beq.s   loc_43322
+                beq.s   S3SegaActor_StepFinalPaletteWipe
                 subq.w  #1,$2E(a0)
                 bsr.w   SonicOnSegaScr_Move_Streaks_Right
 
-loc_43322:
-                lea     byte_4346A(pc),a1
+S3SegaActor_StepFinalPaletteWipe:
+                lea     S3SegaActor_FinalWipePaletteSequence(pc),a1
                 bsr.w   SegaS3StepTimedPaletteFrameCopy
-                bne.s   loc_4332E
+                bne.s   S3SegaActor_FinishWipeAndPlaySega
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4332E:
+S3SegaActor_FinishWipeAndPlaySega:
                 addq.b  #2,routine(a0)
                 st      (_unkF660).w
                 move.b  #cmd_S2SEGA,d0
                 jsr     (Play_SFX).l
 
-locret_43340:
+S3SegaActor_ReturnFromTerminalRoutine:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -216,7 +216,7 @@ ObjB1_Index:
 ; ---------------------------------------------------------------------------
 
 ObjB1_Init:
-                lea     ObjDat3_434EA(pc),a1
+                lea     S3SegaActor_AuxActorPartialAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #0,render_flags(a0)
                 move.b  #4,mapping_frame(a0)
@@ -234,10 +234,10 @@ SonicOnSegaScr_Move_Streaks_Left:
                 lea     (H_scroll_buffer+$138).w,a1
                 move.w  #35-1,d6
 
-loc_43386:
+S3SegaActor_Shift35LeftStreakWords:
                 subi.w  #$20,(a1)
                 addq.w  #8,a1
-                dbf     d6,loc_43386
+                dbf     d6,S3SegaActor_Shift35LeftStreakWords
                 rts
 ; End of function SonicOnSegaScr_Move_Streaks_Left
 
@@ -247,10 +247,10 @@ SonicOnSegaScr_Move_Streaks_Right:
                 lea     (H_scroll_buffer+$13C).w,a1
                 move.w  #35-1,d6
 
-loc_4339A:
+S3SegaActor_Shift35RightStreakWords:
                 addi.w  #$20,(a1)
                 addq.w  #8,a1
-                dbf     d6,loc_4339A
+                dbf     d6,S3SegaActor_Shift35RightStreakWords
                 rts
 ; End of function SonicOnSegaScr_Move_Streaks_Right
 
@@ -258,16 +258,16 @@ loc_4339A:
 
 SegaS3StepTimedPaletteFrameCopy:
                 subq.b  #1,$30(a0)
-                bne.s   loc_433EC
+                bne.s   S3SegaActor_PaletteStepReturnZero
                 moveq   #0,d0
                 move.b  $31(a0),d0
                 addq.b  #1,d0
                 cmp.b   1(a1),d0
-                bcs.s   loc_433C0
+                bcs.s   S3SegaActor_ReloadPaletteFrameDelay
                 tst.b   3(a1)
-                bne.s   loc_433F0
+                bne.s   S3SegaActor_PaletteSequenceReturnOne
 
-loc_433C0:
+S3SegaActor_ReloadPaletteFrameDelay:
                 move.b  d0,$31(a0)
                 move.b  (a1),$30(a0)
                 lea     6(a1),a2
@@ -275,58 +275,58 @@ loc_433C0:
                 move.b  2(a1),d1
                 move.w  d1,d2
                 tst.w   d0
-                beq.s   loc_433E2
+                beq.s   S3SegaActor_ReadPaletteDestWord
 
-loc_433D8:
+S3SegaActor_SumPaletteFrameOffset:
                 subq.b  #1,d0
-                beq.s   loc_433E0
+                beq.s   S3SegaActor_AdvanceToPaletteFrame
                 add.w   d2,d1
-                bra.s   loc_433D8
+                bra.s   S3SegaActor_SumPaletteFrameOffset
 ; ---------------------------------------------------------------------------
 
-loc_433E0:
+S3SegaActor_AdvanceToPaletteFrame:
                 adda.w  d1,a2
 
-loc_433E2:
+S3SegaActor_ReadPaletteDestWord:
                 movea.w 4(a1),a3
 
-loc_433E6:
+S3SegaActor_CopyPaletteFrameWords:
                 move.w  (a2)+,(a3)+
                 subq.w  #2,d2
-                bne.s   loc_433E6
+                bne.s   S3SegaActor_CopyPaletteFrameWords
 
-loc_433EC:
+S3SegaActor_PaletteStepReturnZero:
                 moveq   #0,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_433F0:
+S3SegaActor_PaletteSequenceReturnOne:
                 moveq   #1,d0
                 rts
 ; End of function SegaS3StepTimedPaletteFrameCopy
 
 ; ---------------------------------------------------------------------------
-byte_433F4:
+S3SegaActor_MiddleWipePaletteSequence:
                 dc.b    4
                 dc.b    7
                 dc.b    $10
                 dc.b    $FF
                 dc.w    Normal_palette+$10
                 binclude "data/General/S2Menu/Palettes/Sega Screen 2.bin"
-byte_4346A:
+S3SegaActor_FinalWipePaletteSequence:
                 dc.b    4
                 dc.b    7
                 dc.b    $10
                 dc.b    $FF
                 dc.w    Normal_palette
                 binclude "data/General/S2Menu/Palettes/Sega Screen 3.bin"
-ObjDat3_434E0:
+S3SegaActor_RunnerPartialAttributes:
                 dc.l    Map_SonicOnSegaScr
                 dc.w    make_art_tile(ArtTile_S2Sega+8,2,1)
                 dc.w    $80
                 dc.b    $10
                 dc.b    0
-ObjDat3_434EA:
+S3SegaActor_AuxActorPartialAttributes:
                 dc.l    Map_SonicOnSegaScr
                 dc.w    make_art_tile($003,0,0)
                 dc.w    $100

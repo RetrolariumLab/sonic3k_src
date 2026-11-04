@@ -120645,10 +120645,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 32
       },
-      "declarations_sha256": "7077176d8fc0268dd383c230563bdbbff60942656be220e5ca525e67d91a5afa",
+      "declarations_sha256": "e8dd4059c4e25f42815e0fe3f6528345571f9f98c5e883c3135ee3f906b29c54",
       "labels": {
         "Ani_TitleSonicFinger_": 0,
-        "byte_4B36": 2
+        "S3Title_FingerAnimWithHiddenHolds": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -120656,7 +120656,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4B36",
+          "target": "S3Title_FingerAnimWithHiddenHolds",
           "base": "Ani_TitleSonicFinger_"
         },
         {
@@ -120676,10 +120676,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 14
       },
-      "declarations_sha256": "08b61135e36c3835e87b9da60d46f9b955d84f397dfdaccc5740ae3c9437369a",
+      "declarations_sha256": "a5b21d67e0051ff0441848fb7a069e8dc8d82f834b3e934fd354196fc52a59a3",
       "labels": {
         "Ani_TitleSonicWink_": 0,
-        "byte_4BA6": 2
+        "SharedTitleAnimation_WinkFrameDelayPairs": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -120687,7 +120687,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4BA6",
+          "target": "SharedTitleAnimation_WinkFrameDelayPairs",
           "base": "Ani_TitleSonicWink_"
         },
         {
@@ -120712,10 +120712,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "4545402326da552c6290edda6728ff12a6b7903f11c0f8008a5c7968bd47ee03",
+      "declarations_sha256": "8df5b02e155cc31129c1988a05d494198a9414a03801dffcb495a0c49a988f6e",
       "labels": {
         "Ani_TitleTailsPlane_": 0,
-        "byte_4C46": 2
+        "SharedTitleAnimation_PlaneSixFrameLoop": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -120723,7 +120723,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_4C46",
+          "target": "SharedTitleAnimation_PlaneSixFrameLoop",
           "base": "Ani_TitleTailsPlane_"
         },
         {
@@ -120743,12 +120743,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "109d02fd88c854d82898edab5eec2ee8b36becd699da830e415190b7c5c46445",
+      "declarations_sha256": "cd7870d0aeb6a3af7ca2d3a1cfeede52b8a82e7e5ae3b0acb4dbe73aaaef8d59",
       "labels": {
         "Ani_SKTitle_Icon_": 0,
-        "byte_5C60": 6,
-        "byte_5C66": 12,
-        "byte_5C6C": 18
+        "SKTitleIcon_FirstChoiceAnim": 6,
+        "SKTitleIcon_SecondChoiceAnim": 12,
+        "SKTitleIcon_NeutralHoldAnim": 18
       },
       "external_symbols": [],
       "blocks": [
@@ -120756,21 +120756,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_5C60",
+          "target": "SKTitleIcon_FirstChoiceAnim",
           "base": "Ani_SKTitle_Icon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_5C66",
+          "target": "SKTitleIcon_SecondChoiceAnim",
           "base": "Ani_SKTitle_Icon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_5C6C",
+          "target": "SKTitleIcon_NeutralHoldAnim",
           "base": "Ani_SKTitle_Icon_"
         },
         {
@@ -120807,10 +120807,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "09e8966a011ffc0fdfaf59df0a26f4bca857b7c5a64f3eb3dc5d9f5838c0423c",
+      "declarations_sha256": "d3086c52e3d90b8d7b18609ba9083b591baded6146fd246e3bb539ca9fcd9d33",
       "labels": {
         "Map_TitleANDKnuckles_": 0,
-        "word_49B0": 2
+        "LockOnTitle_AndKnucklesSubtitlePieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -120818,7 +120818,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_49B0",
+          "target": "LockOnTitle_AndKnucklesSubtitlePieces",
           "base": "Map_TitleANDKnuckles_"
         },
         {
@@ -120837,11 +120837,11 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 140
       },
-      "declarations_sha256": "0ca0ecd6adec605cab864303a21aa3f310b85212540e05ea62f7745689ac3b8a",
+      "declarations_sha256": "0fd265920b16a42dfdeabf7e39f876cfceaa7c2747fa351acf473644f9246802",
       "labels": {
         "Map_S3TitleBanner_": 0,
-        "Frame_3501E4": 4,
-        "Frame_350264": 132
+        "S3Title_BannerMainPieces": 4,
+        "S3Title_BannerTrademarkPiece": 132
       },
       "external_symbols": [],
       "blocks": [
@@ -120849,14 +120849,14 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3501E4",
+          "target": "S3Title_BannerMainPieces",
           "base": "Map_S3TitleBanner_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_350264",
+          "target": "S3Title_BannerTrademarkPiece",
           "base": "Map_S3TitleBanner_"
         },
         {
@@ -120880,13 +120880,13 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 142
       },
-      "declarations_sha256": "a48214beea534dbc557f7f838c2f9001ffe7a6494ec2241be5dc44b506172bc6",
+      "declarations_sha256": "1514b94051cf8c6c20d90592483ea7882bd5c6a1a9bca36907d5eeabac75fbe7",
       "labels": {
         "Map_TitleScreenText_": 0,
-        "word_4CA4": 8,
-        "word_4CD0": 52,
-        "word_4CFC": 96,
-        "word_4D16": 122
+        "SharedTitleText_FirstMenuOptionPieces": 8,
+        "SharedTitleText_SecondMenuOptionPieces": 52,
+        "S3Title_LevelSelectionTextMap": 96,
+        "SharedTitleText_CopyrightPieces": 122
       },
       "external_symbols": [],
       "blocks": [
@@ -120894,28 +120894,28 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4CA4",
+          "target": "SharedTitleText_FirstMenuOptionPieces",
           "base": "Map_TitleScreenText_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4CD0",
+          "target": "SharedTitleText_SecondMenuOptionPieces",
           "base": "Map_TitleScreenText_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4CFC",
+          "target": "S3Title_LevelSelectionTextMap",
           "base": "Map_TitleScreenText_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4D16",
+          "target": "SharedTitleText_CopyrightPieces",
           "base": "Map_TitleScreenText_"
         },
         {
@@ -120949,14 +120949,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 92
       },
-      "declarations_sha256": "58c8ea6b6097e0173adf36c53759b17b667ddee38b1da334438ea96bfd00955b",
+      "declarations_sha256": "2948716de445ea2a10c3c82defacafed153f4518c9078945e3fb071f1478adf3",
       "labels": {
         "Map_TitleSonicAnim_": 0,
-        "word_4F96": 10,
-        "word_4FB0": 36,
-        "word_4FCA": 62,
-        "word_4FD8": 76,
-        "word_4FE6": 90
+        "SharedTitleSonic_FirstFingerStatePieces": 10,
+        "SharedTitleSonic_SecondFingerStatePieces": 36,
+        "SharedTitleSonic_FirstWinkStatePieces": 62,
+        "SharedTitleSonic_SecondWinkStatePieces": 76,
+        "S3Title_HiddenFingerAndWinkMap": 90
       },
       "external_symbols": [],
       "blocks": [
@@ -120964,35 +120964,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4F96",
+          "target": "SharedTitleSonic_FirstFingerStatePieces",
           "base": "Map_TitleSonicAnim_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4FB0",
+          "target": "SharedTitleSonic_SecondFingerStatePieces",
           "base": "Map_TitleSonicAnim_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4FCA",
+          "target": "SharedTitleSonic_FirstWinkStatePieces",
           "base": "Map_TitleSonicAnim_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4FD8",
+          "target": "SharedTitleSonic_SecondWinkStatePieces",
           "base": "Map_TitleSonicAnim_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4FE6",
+          "target": "S3Title_HiddenFingerAndWinkMap",
           "base": "Map_TitleSonicAnim_"
         },
         {
@@ -121031,15 +121031,15 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 96
       },
-      "declarations_sha256": "58971852f4d6e1fc13b6f9cc381e97f63f9f894d0e55fe84cceb68b514e95d2e",
+      "declarations_sha256": "35785cc7334a63d2564ce30f17470b4d49513c23fca6845bf00558a856a9078e",
       "labels": {
         "Map_TitleTailsPlane_": 0,
-        "word_4FF4": 12,
-        "word_5002": 26,
-        "word_5010": 40,
-        "word_501E": 54,
-        "word_502C": 68,
-        "word_503A": 82
+        "SharedTitlePlane_FirstCycleFramePieces": 12,
+        "SharedTitlePlane_SecondCycleFramePieces": 26,
+        "SharedTitlePlane_ThirdCycleFramePieces": 40,
+        "SharedTitlePlane_FourthCycleFramePieces": 54,
+        "SharedTitlePlane_FifthCycleFramePieces": 68,
+        "SharedTitlePlane_SixthCycleFramePieces": 82
       },
       "external_symbols": [],
       "blocks": [
@@ -121047,42 +121047,42 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_4FF4",
+          "target": "SharedTitlePlane_FirstCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5002",
+          "target": "SharedTitlePlane_SecondCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5010",
+          "target": "SharedTitlePlane_ThirdCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_501E",
+          "target": "SharedTitlePlane_FourthCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_502C",
+          "target": "SharedTitlePlane_FifthCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_503A",
+          "target": "SharedTitlePlane_SixthCycleFramePieces",
           "base": "Map_TitleTailsPlane_"
         },
         {
@@ -121126,10 +121126,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 184
       },
-      "declarations_sha256": "5ffe05276a6c2f54a65994f4385df5004339f145c18c5bdac31acbc696a21c31",
+      "declarations_sha256": "ee83d0cc660c70e6eabf4992839ee5451d8456eeab06e203b98fdd2fb5a444c2",
       "labels": {
         "Map_SKTitle_Banner_": 0,
-        "word_CB996": 2
+        "StandaloneTitle_BannerPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121137,7 +121137,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CB996",
+          "target": "StandaloneTitle_BannerPieces",
           "base": "Map_SKTitle_Banner_"
         },
         {
@@ -121156,10 +121156,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 22
       },
-      "declarations_sha256": "2e355ab39a8da767e6cc15bec886bc04c1ff84ba8891c2ebd7939a7290079434",
+      "declarations_sha256": "477c9465ff2bcd834cd4f3be4576ab9f4b9319980c75e87ebeba0c663dbd3faf",
       "labels": {
         "Map_SKTitle_Copyright_": 0,
-        "word_5F6E": 2
+        "StandaloneTitle_CopyrightPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121167,7 +121167,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F6E",
+          "target": "StandaloneTitle_CopyrightPieces",
           "base": "Map_SKTitle_Copyright_"
         },
         {
@@ -121186,10 +121186,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 112
       },
-      "declarations_sha256": "72deefea19a3089ed2d0473220ed9f972f9e86589fd8697823bb06bfbaba97ba",
+      "declarations_sha256": "82ccf6eae2b185217c2d110e4aa26887596c9d3c16be474643187c73f1b505eb",
       "labels": {
         "Map_SKTitle_DeathEgg_": 0,
-        "word_CB926": 2
+        "StandaloneTitle_DeathEggPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121197,7 +121197,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CB926",
+          "target": "StandaloneTitle_DeathEggPieces",
           "base": "Map_SKTitle_DeathEgg_"
         },
         {
@@ -121216,18 +121216,18 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 138
       },
-      "declarations_sha256": "66f490a3b2e175da38628a631b77144551fba2f19f8e4343c4f69d09ee9bad28",
+      "declarations_sha256": "980083ea8e9443b176317f5cd5245b3e1f5e1eaf203618f88df63f71053231f7",
       "labels": {
         "Map_SKTitle_Icon_": 0,
-        "word_5EEA": 18,
-        "word_5EF8": 32,
-        "word_5F06": 46,
-        "word_5F20": 72,
-        "word_5F3A": 98,
-        "word_5F42": 106,
-        "word_5F4A": 114,
-        "word_5F52": 122,
-        "word_5F5A": 130
+        "SKTitleIcon_FirstChoiceFrontNameMap": 18,
+        "SKTitleIcon_SecondChoiceFrontNameMap": 32,
+        "SKTitleIcon_FirstChoiceBackNameMap": 46,
+        "SKTitleIcon_SecondChoiceBackNameMap": 72,
+        "SKTitleIcon_NeutralPortraitMap": 98,
+        "SKTitleIcon_FirstChoiceLoopMap1": 106,
+        "SKTitleIcon_FirstChoiceLoopMap2": 114,
+        "SKTitleIcon_SecondChoiceLoopMap1": 122,
+        "SKTitleIcon_SecondChoiceLoopMap2": 130
       },
       "external_symbols": [],
       "blocks": [
@@ -121235,63 +121235,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5EEA",
+          "target": "SKTitleIcon_FirstChoiceFrontNameMap",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5EF8",
+          "target": "SKTitleIcon_SecondChoiceFrontNameMap",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F06",
+          "target": "SKTitleIcon_FirstChoiceBackNameMap",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F20",
+          "target": "SKTitleIcon_SecondChoiceBackNameMap",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F3A",
+          "target": "SKTitleIcon_NeutralPortraitMap",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F42",
+          "target": "SKTitleIcon_FirstChoiceLoopMap1",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F4A",
+          "target": "SKTitleIcon_FirstChoiceLoopMap2",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F52",
+          "target": "SKTitleIcon_SecondChoiceLoopMap1",
           "base": "Map_SKTitle_Icon_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F5A",
+          "target": "SKTitleIcon_SecondChoiceLoopMap2",
           "base": "Map_SKTitle_Icon_"
         },
         {
@@ -121350,10 +121350,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 28
       },
-      "declarations_sha256": "80b0192990f16939c4ab6eafbadcb7d72fabdd9e3b9a4e9705306b256642c0f4",
+      "declarations_sha256": "b1a8eee53dbf7b84351462178531e7d8368bd673abe9abe51c0641dc5b6f3f8d",
       "labels": {
         "Map_SKTitle_Mountain_": 0,
-        "word_CBA4E": 2
+        "StandaloneTitle_MountainOcclusionPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121361,7 +121361,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CBA4E",
+          "target": "StandaloneTitle_MountainOcclusionPieces",
           "base": "Map_SKTitle_Mountain_"
         },
         {
@@ -121380,10 +121380,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 196
       },
-      "declarations_sha256": "f18dc4bf3eaffa07d6354b95a8454bee4b02189617a8b88527919eb4d9362370",
+      "declarations_sha256": "cebbfd9f4f2df6322eeaddd1ae0f39f6b3f9e306ef43acb4ecab40419c32ffa7",
       "labels": {
         "Map_SKTitle_SonicFall_": 0,
-        "word_CB862": 2
+        "StandaloneTitle_FallingSonicPieces": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121391,7 +121391,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_CB862",
+          "target": "StandaloneTitle_FallingSonicPieces",
           "base": "Map_SKTitle_SonicFall_"
         },
         {
@@ -121410,10 +121410,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 10
       },
-      "declarations_sha256": "13363444e3098b6311d3a86e63827c1441aee49255964e408ae7580faf146e6d",
+      "declarations_sha256": "080df0f9fdd54bc91d78240f8d85ebeda827349839f1a8f6263493e0aa0aa331",
       "labels": {
         "Map_SKTitle_TM_": 0,
-        "word_5F64": 2
+        "StandaloneTitle_TrademarkPiece": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -121421,7 +121421,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_5F64",
+          "target": "StandaloneTitle_TrademarkPiece",
           "base": "Map_SKTitle_TM_"
         },
         {

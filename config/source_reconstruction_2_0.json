@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 160
+    "commit_count": 161
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1007,9 +1007,15 @@
       "commits": ["3bb3054949d7c427ceeed357c800815173b86d71"]
     },
     {
-      "id": "current-shorten-54-boss-common",
+      "id": "change-3bb07fcaf7f3",
       "kind": "source_or_tooling",
       "summary": "Apply 76 reviewed short labels for boss common.",
+      "commits": ["3bb07fcaf7f3f9889655ea9df2bf42e9a686d9df"]
+    },
+    {
+      "id": "current-shorten-55-title",
+      "kind": "source_or_tooling",
+      "summary": "Apply 230 reviewed short labels for title.",
       "commits": ["release-commit"]
     }
   ],

@@ -26,35 +26,35 @@ Obj_SKTitle_SonicFall:
 
 Obj_SKTitle_SonicFallMain:
                 cmpi.w  #$F0,y_pos(a0)
-                beq.s   loc_5666
+                beq.s   SKSoloTitle_GateSonicFallScrollByPhase
                 addq.w  #1,y_pos(a0)                    ; Slowly move Sonic downwards
 
-loc_5666:
+SKSoloTitle_GateSonicFallScrollByPhase:
                 cmpi.w  #3,(Events_routine_fg).w
-                bne.s   loc_56AA                        ; Wait until the proper phase of the title sequence
+                bne.s   SKSoloTitle_QueueFallingSonic   ; Wait until the proper phase of the title sequence
                 ori.w   #high_priority,art_tile(a0)     ; Modify the priority of the sprite
                 cmpi.w  #$E0,(Camera_Y_pos).w
-                bhs.s   loc_56B0                        ; If the foreground Y is past $E0, branch
+                bhs.s   SKSoloTitle_UploadLandingMapAtE0  ; If the foreground Y is past $E0, branch
                 addq.w  #8,(Camera_Y_pos).w             ; Otherwise scroll foreground by 8 pixels
                 cmpi.w  #$C8,(Camera_Y_pos).w
-                bne.s   loc_5698
+                bne.s   SKSoloTitle_StreamStandingFrameRow
                 lea     (ArtKosM_SonicLand).l,a1        ; Once foreground has hit C8 Y
                 move.w  #tiles_to_bytes(ArtTile_SKTitle_SonicKnuxStand+$380),d2
                 jsr     (Queue_Kos_Module).l            ; Queue the landing frames into VRAM
 
-loc_5698:
+SKSoloTitle_StreamStandingFrameRow:
                 lea     (RAM_start+$8580).w,a1          ; First frame data (Knuckles only)
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
                 move.w  (Camera_Y_pos).w,d1
                 bsr.w   Copy_Map_Line_To_VRAM           ; Since the nametable is only 32 tiles high, we can't copy the first foreground mapping frame for Sonic and Knuckles wholesale
         ; We set up each line of mappings data every time the screen scrolls down further
 
-loc_56AA:
+SKSoloTitle_QueueFallingSonic:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_56B0:
-                bne.s   loc_56D4
+SKSoloTitle_UploadLandingMapAtE0:
+                bne.s   SKSoloTitle_AdvanceLandingScrollTo100
                 move    #$2700,sr                       ; Only do this when screen scrolling has his E0 Y
                 lea     (RAM_start+$8E40).w,a1          ; Second frame data (Sonic lands)
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
@@ -64,19 +64,19 @@ loc_56B0:
                 move    #$2300,sr
                 move.b  #6,anim_frame_timer(a0)         ; Set up an internal timer
 
-loc_56D4:
+SKSoloTitle_AdvanceLandingScrollTo100:
                 cmpi.w  #$100,(Camera_Y_pos).w
-                beq.s   loc_56E2                        ; When screen has hit $100 Y, branch
+                beq.s   SKSoloTitle_InstallTimedLandingMapState  ; When screen has hit $100 Y, branch
                 addq.w  #8,(Camera_Y_pos).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_56E2:
+SKSoloTitle_InstallTimedLandingMapState:
                 move.l  #Obj_SKTitle_SonicFallLand,(a0)
 
 Obj_SKTitle_SonicFallLand:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_5716
+                bpl.s   SKSoloTitle_LandingMapUpdateReturn
                 move    #$2700,sr
                 lea     (Block_table+$700).w,a1         ; Get third mapping frame (Sonic starting to stand)
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
@@ -87,7 +87,7 @@ Obj_SKTitle_SonicFallLand:
                 move.b  #4,anim_frame_timer(a0)
                 move.l  #Obj_SKTitle_SonicFallLand_2,(a0)
 
-locret_5716:
+SKSoloTitle_LandingMapUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -133,21 +133,21 @@ Obj_SKTitle_DeathEgg:
 
 Obj_SKTitle_DeathEggMain:
                 cmpi.w  #$F0,y_pos(a0)
-                beq.s   loc_57D8                        ; If Death Egg has reached volcano, branch
+                beq.s   SKSoloTitle_SaveDeathEggBaseAndShake  ; If Death Egg has reached volcano, branch
                 addi.l  #$8000,y_pos(a0)                ; Move Death Egg sprite downward
                 cmpi.w  #$100,(Camera_Y_pos_P2).w
-                beq.s   loc_57D2
+                beq.s   SKSoloTitle_QueueDescendingDeathEgg
                 addq.w  #1,(Camera_Y_pos_P2).w          ; Scroll screen downwards
                 lea     (Chunk_table+$7CC0).l,a1
                 move.l  #vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0
                 move.w  (Camera_Y_pos_P2).w,d1
                 bsr.w   Copy_Map_Line_To_VRAM           ; Update second nametable with background mappings as the screen scrolls down
 
-loc_57D2:
+SKSoloTitle_QueueDescendingDeathEgg:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_57D8:
+SKSoloTitle_SaveDeathEggBaseAndShake:
                 move.l  x_pos(a0),$2E(a0)
                 move.l  y_pos(a0),$32(a0)               ; Backup position values
                 move.w  #$8000,(Camera_Y_pos_P2+2).w
@@ -159,7 +159,7 @@ loc_57D8:
 Obj_SKTitle_DeathEggShake:
                 bsr.w   SKTitle_ScreenShake
                 cmpi.w  #$100,(Camera_Y_pos_P2).w
-                beq.s   loc_5832
+                beq.s   SKSoloTitle_ProjectDeathEggWithShake
                 subi.l  #$8000,$32(a0)                  ; Move Death Egg backwards to keep up with scroll
                 addi.l  #$8000,(Camera_Y_pos_P2).w
                 lea     (Chunk_table+$7CC0).l,a1
@@ -167,15 +167,15 @@ Obj_SKTitle_DeathEggShake:
                 move.w  (Camera_Y_pos_P2).w,d1
                 bsr.w   Copy_Map_Line_To_VRAM           ; Continue drawing mapping lines
 
-loc_5832:
+SKSoloTitle_ProjectDeathEggWithShake:
                 move.w  $2E(a0),d0
                 move.w  $32(a0),d1
                 tst.w   (Screen_shake_flag).w
-                beq.s   loc_5848
+                beq.s   SKSoloTitle_StoreAndQueueDeathEgg
                 sub.w   (Camera_X_pos_P2_copy).w,d0
                 sub.w   (Camera_Y_pos_P2_copy).w,d1     ; Shake Death Egg along with screen
 
-loc_5848:
+SKSoloTitle_StoreAndQueueDeathEgg:
                 move.w  d0,x_pos(a0)
                 move.w  d1,y_pos(a0)
                 jmp     (Draw_Sprite).l
@@ -195,11 +195,11 @@ Obj_SKTitle_MountainMain:
                 sub.w   (Camera_X_pos_P2).w,d0
                 sub.w   (Camera_Y_pos_P2).w,d1
                 tst.w   (Screen_shake_flag).w
-                beq.s   loc_589A
+                beq.s   SKSoloTitle_StoreMountainWithShake
                 sub.w   (Camera_X_pos_P2_copy).w,d0
                 sub.w   (Camera_Y_pos_P2_copy).w,d1
 
-loc_589A:
+SKSoloTitle_StoreMountainWithShake:
                 move.w  d0,x_pos(a0)
                 move.w  d1,y_pos(a0)
                 jmp     (Draw_Sprite).l
@@ -207,11 +207,11 @@ loc_589A:
 
 Obj_SKTitle_Banner:
                 subq.b  #1,anim_frame_timer(a0)
-                beq.s   loc_58B0                        ; Wait for the timer to finish
+                beq.s   SKSoloTitle_InitBannerAfterDelay  ; Wait for the timer to finish
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_58B0:
+SKSoloTitle_InitBannerAfterDelay:
                 move.l  #Map_SKTitle_Banner,mappings(a0)
                 move.w  #make_art_tile(ArtTile_SKTitle_Banner,0,1),art_tile(a0)
                 move.w  #0,priority(a0)
@@ -233,29 +233,30 @@ Obj_SKTitle_BannerMain:
                 move.b  #0,$34(a0)                      ; Set direction toggle flag
                 move.w  #$40,d1
                 cmpi.w  #0,d0
-                blt.s   loc_5950                        ; If offset is negative, branch
-                bne.s   loc_5946                        ; If offset is positive and nonzero, branch
+                blt.s   SKSoloTitle_BannerUpdateBounce  ; If offset is negative, branch
+                bne.s   SKSoloTitle_BannerSelectNegativeAccel  ; If offset is positive and nonzero, branch
                 cmpi.w  #-$5B,y_vel(a0)
-                bne.s   loc_5946                        ; Branch if the velocity isn't small enough
+                bne.s   SKSoloTitle_BannerSelectNegativeAccel  ; Branch if the velocity isn't small enough
                 move.l  #Obj_SKTitle_BannerDisplay,(a0)
                 move.l  #Obj_SKTitle_Icon,(Dynamic_object_RAM+(object_size*2)).w
                 move.l  #Obj_SKTitle_Icon2,(Dynamic_object_RAM+(object_size*3)).w
                 move.l  #Obj_SKTitle_TM,(Dynamic_object_RAM+(object_size*4)).w
                 move.l  #Obj_SKTitle_Copyright,(Dynamic_object_RAM+(object_size*5)).w  ; Set up menu items and the like
-                bra.s   loc_595E
+                bra.s   SKSoloTitle_BannerProjectBounceOffset
 ; ---------------------------------------------------------------------------
 
-loc_5946:
+SKSoloTitle_BannerSelectNegativeAccel:
                 move.b  #-1,$34(a0)                     ; This is all to perform the bobbing motion into place
                 move.w  #-$40,d1
 
-loc_5950:
+; Halve the velocity when it changes direction
+SKSoloTitle_BannerUpdateBounce:
                 add.w   d1,y_vel(a0)
                 cmp.b   $34(a0),d2
-                beq.s   loc_595E
+                beq.s   SKSoloTitle_BannerProjectBounceOffset
                 asr     y_vel(a0)
 
-loc_595E:
+SKSoloTitle_BannerProjectBounceOffset:
                 move.w  $30(a0),d0
                 neg.w   d0
                 addi.w  #$118,d0
@@ -282,7 +283,7 @@ Obj_SKTitle_HandAnimMain:
                 lea     (SKTitle_AnimSmile).l,a1
                 lea     $30(a0),a2
                 bsr.w   SKTitle_AnimateHands
-                bmi.s   loc_59D0
+                bmi.s   SKSoloTitle_AdvanceSonicFingerArt
                 lea     (RAM_start+$4800).l,a1
                 lea     (a1,d0.w),a1
                 move.l  a1,d1
@@ -290,11 +291,11 @@ Obj_SKTitle_HandAnimMain:
                 move.w  #$30,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_59D0:
+SKSoloTitle_AdvanceSonicFingerArt:
                 lea     (SKTitle_AnimFinger).l,a1
                 lea     $32(a0),a2
                 bsr.w   SKTitle_AnimateHands
-                bmi.s   loc_59FA
+                bmi.s   SKSoloTitle_AdvanceKnucklesHandArt1
                 lea     (RAM_start+$4920).l,a1
                 lea     (a1,d0.w),a1
                 move.l  a1,d1
@@ -302,11 +303,11 @@ loc_59D0:
                 move.w  #$290,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_59FA:
+SKSoloTitle_AdvanceKnucklesHandArt1:
                 lea     (SKTitle_AnimKnuckle1).l,a1
                 lea     $34(a0),a2
                 bsr.w   SKTitle_AnimateHands
-                bmi.s   loc_5A24
+                bmi.s   SKSoloTitle_AdvanceKnucklesHandArt2
                 lea     (RAM_start+$5880).l,a1
                 lea     (a1,d0.w),a1
                 move.l  a1,d1
@@ -314,11 +315,11 @@ loc_59FA:
                 move.w  #$2F0,d3
                 jsr     (Add_To_DMA_Queue).l
 
-loc_5A24:
+SKSoloTitle_AdvanceKnucklesHandArt2:
                 lea     (SKTitle_AnimKnuckle2).l,a1
                 lea     $36(a0),a2
                 bsr.w   SKTitle_AnimateHands
-                bmi.s   locret_5A4E
+                bmi.s   SKSoloTitle_HandArtUpdateReturn
                 lea     (RAM_start+$6A20).l,a1
                 lea     (a1,d0.w),a1
                 move.l  a1,d1
@@ -326,7 +327,7 @@ loc_5A24:
                 move.w  #$140,d3
                 jsr     (Add_To_DMA_Queue).l
 
-locret_5A4E:
+SKSoloTitle_HandArtUpdateReturn:
                 rts
 ; End of function Obj_SKTitle_HandAnim
 
@@ -334,39 +335,39 @@ locret_5A4E:
 
 SKTitle_AnimateHands:
                 subq.b  #1,(a2)
-                bcc.s   loc_5A6C
+                bcc.s   SKSoloTitle_HandFrameNoUpdate
                 move.b  (a1),(a2)
                 moveq   #0,d1
                 move.b  1(a2),d1
                 move.b  1(a1,d1.w),d0
-                bmi.s   loc_5A70
+                bmi.s   SKSoloTitle_RestartHandSeqOnMinusOne
 
-loc_5A62:
+SKSoloTitle_AdvanceHandFrameAndGetOffset:
                 addq.b  #1,1(a2)
                 ext.w   d0
                 lsl.w   #5,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A6C:
+SKSoloTitle_HandFrameNoUpdate:
                 moveq   #-1,d0
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_5A70:
+SKSoloTitle_RestartHandSeqOnMinusOne:
                 addq.b  #1,d0
-                bne.s   loc_5A80
+                bne.s   SKSoloTitle_RewindHandSeqOnMinusTwo
                 move.b  #0,1(a2)
                 move.b  1(a1),d0
-                bra.s   loc_5A62
+                bra.s   SKSoloTitle_AdvanceHandFrameAndGetOffset
 ; ---------------------------------------------------------------------------
 
-loc_5A80:
+SKSoloTitle_RewindHandSeqOnMinusTwo:
                 addq.b  #1,d0
-                bne.s   loc_5A6C
+                bne.s   SKSoloTitle_HandFrameNoUpdate
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,1(a2)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   loc_5A62
+                bra.s   SKSoloTitle_AdvanceHandFrameAndGetOffset
 ; End of function sub_5A50

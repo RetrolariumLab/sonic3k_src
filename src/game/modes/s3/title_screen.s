@@ -68,9 +68,9 @@ Title_Screen:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_2-Target_palette),d0
 
-loc_36AE:
+S3Title_CopySegaPaletteAndEnableDisplay:
                 move.l  (a0)+,(a1)+                     ; Fill 2 palette lines with title screen data
-                dbf     d0,loc_36AE
+                dbf     d0,S3Title_CopySegaPaletteAndEnableDisplay
                 move.w  #4*60,(Demo_timer).w
                 move.w  (VDP_reg_1_command).w,d0
                 ori.b   #$40,d0
@@ -86,16 +86,16 @@ Wait_Sega:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_36F8                        ; If start was pressed, skip ahead
+                bne.w   S3Title_StopSegaAndStartPaletteFade  ; If start was pressed, skip ahead
                 tst.w   (Demo_timer).w
                 bne.s   Wait_Sega
 
-loc_36F8:
+S3Title_StopSegaAndStartPaletteFade:
                 moveq   #signextendB(cmd_StopSEGA),d0
                 bsr.w   Play_Music                      ; Stop SEGA sound
                 lea     (Pal_Title).l,a1
 
-loc_3704:
+S3Title_CopyNextFadePaletteStep:
                 move.b  #VInt_ID_2,(V_int_routine).w
                 bsr.w   Wait_VSync
                 lea     (Normal_palette).w,a2
@@ -104,7 +104,7 @@ loc_3704:
                 move.l  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+
                 tst.w   -$E(a1)                         ; Wait for BG color to turn to black
-                bne.s   loc_3704
+                bne.s   S3Title_CopyNextFadePaletteStep
                 clr.w   (_unkF660).w
                 clr.w   (_unkF662).w
                 move.b  #-1,(Title_anim_buffer).w
@@ -131,18 +131,18 @@ Wait_Title:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_379E                        ; If start was pressed, skip straight to title
+                bne.w   S3Title_FinishIntroAndBeginWhiteFlash  ; If start was pressed, skip straight to title
                 cmpi.w  #$C,(Title_anim_frame).w
                 blo.s   Wait_Title                      ; If last frame was reached, don't repeat
 
-loc_379E:
+S3Title_FinishIntroAndBeginWhiteFlash:
                 move.w  #$C,(Title_anim_frame).w
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToWcnt(Normal_palette_end-Normal_palette),d1
 
-loc_37AA:
+S3Title_FillPaletteWhite:
                 move.w  #$EEE,(a1)+
-                dbf     d1,loc_37AA                     ; Flash palette white
+                dbf     d1,S3Title_FillPaletteWhite     ; Flash palette white
                 move.b  #3,(Title_anim_delay).w
                 move.b  #VInt_ID_4,(V_int_routine).w
                 bsr.w   Wait_VSync
@@ -179,9 +179,9 @@ loc_37AA:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette),d0
 
-loc_384E:
+S3Title_LoadFinalPaletteAndWidgets:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_384E
+                dbf     d0,S3Title_LoadFinalPaletteAndWidgets
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Title_Banner),VRAM,WRITE),(VDP_control_port).l  ; to VRAM $A000
                 lea     (ArtNem_Title_S3Banner).l,a0
                 bsr.w   Nem_Decomp
@@ -214,19 +214,19 @@ loc_384E:
                 endif
                 move.b  #0,(Title_anim_delay).w
 
-loc_38D8:
+S3Title_RunMenuAndDispatchStart:
                 move.b  #VInt_ID_4,(V_int_routine).w
                 bsr.w   Wait_VSync
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 bsr.w   Process_Nem_Queue_Init
                 tst.l   (Reserved_object_3).w
-                beq.s   loc_38D8                        ; Don't do anything at all until banner has finished moving
+                beq.s   S3Title_RunMenuAndDispatchStart  ; Don't do anything at all until banner has finished moving
                 tst.w   (Demo_timer).w
-                beq.w   loc_3978                        ; If the timer has run out, go do the level demos
+                beq.w   S3Title_BeginAttractDemo        ; If the timer has run out, go do the level demos
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                beq.w   loc_38D8                        ; Repeat until start has been pressed
+                beq.w   S3Title_RunMenuAndDispatchStart  ; Repeat until start has been pressed
                 move.b  #GameMode_Level,(Game_mode).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -244,24 +244,24 @@ loc_38D8:
                 bsr.w   Play_SFX                        ; Fade out the title screen music
                 moveq   #0,d0
                 move.b  (Title_screen_option).w,d0      ; Selection is stored here
-                bne.w   loc_3964
+                bne.w   S3Title_SelectCompetition
                 move.b  #GameMode_SaveScreen,(Game_mode).w  ; Game Mode 4C is the save select
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3964:
+S3Title_SelectCompetition:
                 subq.b  #1,d0
-                bne.s   loc_3970
+                bne.s   S3Title_SelectLevelMenu
                 move.b  #GameMode_CompetitionMenu,(Game_mode).w  ; Game Mode 38 is Competition mode
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3970:
+S3Title_SelectLevelMenu:
                 move.b  #GameMode_LevelSelect,(Game_mode).w  ; Game Mode 28 is the level select
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3978:
+S3Title_BeginAttractDemo:
                 moveq   #signextendB(cmd_FadeOut),d0
                 bsr.w   Play_SFX                        ; Fade out music
                 move.w  (Next_demo_number).w,d0         ; Get index of current demo to run
@@ -273,10 +273,10 @@ loc_3978:
                 move.w  d0,(Saved_zone_and_act).w
                 addq.w  #1,(Next_demo_number).w
                 cmpi.w  #3,(Next_demo_number).w
-                bcs.s   loc_39AA
+                bcs.s   S3Title_InitAttractStats
                 move.w  #0,(Next_demo_number).w
 
-loc_39AA:
+S3Title_InitAttractStats:
                 move.w  #1,(Demo_mode_flag).w
                 move.b  #GameMode_Demo,(Game_mode).w    ; We're about to perform a level demo
                 move.b  #3,(Life_count).w
@@ -300,45 +300,45 @@ DemoLevels:
 
 TitleAnim_FlipBuffer:
                 tst.b   (Title_anim_delay).w
-                bne.s   loc_3A4E
+                bne.s   S3Title_TickIntroPageDelay
                 move.b  #4-1,(Title_anim_delay).w
                 cmpi.w  #$C,(Title_anim_frame).w
-                bhs.s   loc_3A54
+                bhs.s   S3Title_PrepareFinalPlanePalette
                 move.b  #4-1,(Title_anim_delay).w
                 lea     (Target_palette).w,a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_3-Target_palette),d0
 
-loc_3A18:
+S3Title_CopyPaletteAndSwapIntroPage:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_3A18
+                dbf     d0,S3Title_CopyPaletteAndSwapIntroPage
                 eori.b  #-1,(Title_anim_buffer).w
                 tst.b   (Title_anim_buffer).w
-                beq.s   loc_3A3C
+                beq.s   S3Title_PointBothPlanesAtE000
                 move.w  #$8406,(VDP_control_port).l     ; Nametable B Address $C000
                 move.w  #$8230,(VDP_control_port).l     ; Nametable A Address $C000
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A3C:
+S3Title_PointBothPlanesAtE000:
                 move.w  #$8407,(VDP_control_port).l     ; Nametable B Address $E000
                 move.w  #$8238,(VDP_control_port).l     ; Nametable A Address $E000
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A4E:
+S3Title_TickIntroPageDelay:
                 subq.b  #1,(Title_anim_delay).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A54:
+S3Title_PrepareFinalPlanePalette:
                 lea     (Target_palette).w,a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_end-Target_palette),d0
 
-loc_3A5E:
+S3Title_CopyFinalPaletteAndSetPlanes:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_3A5E
+                dbf     d0,S3Title_CopyFinalPaletteAndSetPlanes
                 move.w  #$8407,(VDP_control_port).l     ; Nametable B Address $E000
                 move.w  #$8230,(VDP_control_port).l     ; Nametable A Address $C000
                 rts
@@ -347,35 +347,36 @@ loc_3A5E:
 
 Iterate_TitleSonicFrame:
                 cmpi.b  #1,(Title_anim_delay).w
-                bne.s   locret_3A92
+                bne.s   S3Title_IntroFrameUpdateReturn
                 move.w  (Title_anim_frame).w,d0
                 move.b  SonicFrameIndex(pc,d0.w),d0
                 ext.w   d0
-                bmi.s   loc_3A94                        ; if negative, do not load anymore frames
+                bmi.s   S3Title_ClampIntroAtFrame12     ; if negative, do not load anymore frames
                 bsr.w   TitleSonic_LoadFrame
                 addq.w  #1,(Title_anim_frame).w
 
-locret_3A92:
+S3Title_IntroFrameUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3A94:
+S3Title_ClampIntroAtFrame12:
                 move.w  #$C,(Title_anim_frame).w
                 move.b  #3,(Title_anim_delay).w
-                bra.w   locret_3AB0
+                bra.w   S3Title_IntroSentinelReturn
 ; ---------------------------------------------------------------------------
 SonicFrameIndex:
                 dc.b    1,   2,   3,   4,   5,   6,   7,   8,   9,  $A,  $B, $FF
                 even
 ; ---------------------------------------------------------------------------
 
-locret_3AB0:
+; The unused title scroll bounce code begins immediately after this return
+S3Title_IntroSentinelReturn:
                 rts
 ; ---------------------------------------------------------------------------
 ; unused
                 move.b  (Title_anim_buffer).w,d2
                 cmpi.b  #1,d2
-                beq.s   locret_3B0A
+                beq.s   S3Title_UnusedBounceReturn
                 move.w  (V_scroll_amount).w,d0
                 ext.l   d0
                 lsl.l   #8,d0
@@ -385,25 +386,26 @@ locret_3AB0:
                 move.b  #0,(Title_anim_buffer).w
                 move.w  #$40,d1
                 cmpi.w  #0,d0
-                blt.s   loc_3AFC
-                bne.s   loc_3AF2
+                blt.s   S3Title_UnusedBounceUpdateVelocity
+                bne.s   S3Title_UnusedBounceSelectNegativeAccel
                 cmpi.w  #-$5B,(V_scroll_amount).w
-                bne.s   loc_3AF2
+                bne.s   S3Title_UnusedBounceSelectNegativeAccel
                 move.b  #1,(Title_anim_buffer).w
-                bra.s   locret_3B0A
+                bra.s   S3Title_UnusedBounceReturn
 ; ---------------------------------------------------------------------------
 
-loc_3AF2:
+S3Title_UnusedBounceSelectNegativeAccel:
                 move.b  #-1,(Title_anim_buffer).w
                 move.w  #-$40,d1
 
-loc_3AFC:
+; Halve the velocity when it changes direction
+S3Title_UnusedBounceUpdateVelocity:
                 add.w   d1,(V_scroll_amount).w
                 cmp.b   (Title_anim_buffer).w,d2
-                beq.s   locret_3B0A
+                beq.s   S3Title_UnusedBounceReturn
                 asr     (V_scroll_amount).w
 
-locret_3B0A:
+S3Title_UnusedBounceReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -420,8 +422,8 @@ TitleSonic_LoadFrame:
                 move.w  #$2C60,d3
                 move.l  (a2)+,d0                        ; Art data
                 cmpi.w  #7,d7
-                beq.s   loc_3B46
-                bcs.s   loc_3B66
+                beq.s   S3Title_SelectFrameArtVRAM
+                bcs.s   S3Title_ReadFramePaletteDescriptor
                 andi.l  #$FFFFFF,d0
                 movea.l d0,a0
                 lea     (RAM_start).l,a1
@@ -429,27 +431,27 @@ TitleSonic_LoadFrame:
                 move.w  a1,d3
                 lsr.w   #1,d3
 
-loc_3B46:
+S3Title_SelectFrameArtVRAM:
                 move.l  #RAM_start,d1
                 move.w  #0,d2
                 tst.b   (Title_anim_buffer).w           ; FFFFBC toggles on and off so that each animation frame could alternate locations for a sort of makeshift double-buffering
-                beq.s   loc_3B5A
+                beq.s   S3Title_QueueFrameArtDMA
                 move.w  #tiles_to_bytes(ArtTile_Title_Buffer),d2
 
-loc_3B5A:
+S3Title_QueueFrameArtDMA:
                 andi.l  #$FFFFFF,d1
                 jsr     (Add_To_DMA_Queue).l
 
-loc_3B66:
+S3Title_ReadFramePaletteDescriptor:
                 movea.l (a2)+,a0                        ; Palette data address
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt(Target_palette_line_3-Target_palette),d0
 
-loc_3B6E:
+S3Title_CopyFramePaletteAndCheckPage:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_3B6E
+                dbf     d0,S3Title_CopyFramePaletteAndCheckPage
                 tst.b   (Title_anim_buffer).w
-                bne.s   loc_3BA6
+                bne.s   S3Title_SelectAltPageArtBase
                 lea     (RAM_start+$8000).w,a1          ; Buffer 1
                 movea.l (a2)+,a0                        ; Enigma Mappings
                 move.w  #make_art_tile($000,0,0),d0
@@ -464,15 +466,15 @@ loc_3B6E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_3BA6:
+S3Title_SelectAltPageArtBase:
                 lea     (RAM_start+$8000).w,a1          ; Buffer 2
                 movea.l (a2)+,a0                        ; Enigma Mappings
                 move.w  #make_art_tile(ArtTile_Title_Buffer,0,0),d0
                 cmpi.w  #7,d7
-                bhs.s   loc_3BBA
+                bhs.s   S3Title_DecodeAndUploadAltPageMap
                 move.w  #make_art_tile($000,0,0),d0
 
-loc_3BBA:
+S3Title_DecodeAndUploadAltPageMap:
                 bsr.w   Eni_Decomp
                 move    #$2700,sr
                 lea     (RAM_start+$8000).w,a1

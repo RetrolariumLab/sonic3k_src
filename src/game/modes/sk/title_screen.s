@@ -80,11 +80,11 @@ Title_Screen:
                 move.w  #make_art_tile($000,0,0),d0
                 bsr.w   Eni_Decomp                      ; Decompress Enigma mappings
                 tst.b   (Graphics_flags).w
-                bmi.s   loc_3F7E
+                bmi.s   SKTitle_UploadInitialMapAfterRegionGate
                 moveq   #0,d0
                 move.l  d0,(RAM_start+$83AC).w          ; Hide trademark symbol if the console is Japanese
 
-loc_3F7E:
+SKTitle_UploadInitialMapAfterRegionGate:
                 lea     (RAM_start+$8000).w,a1
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
                 moveq   #40-1,d1
@@ -94,9 +94,9 @@ loc_3F7E:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_3F9E:
+SKTitle_CopySegaPaletteAndEnableDisplay:
                 move.l  (a0)+,(a1)+                     ; Fill 2 palette lines with title screen data
-                dbf     d0,loc_3F9E
+                dbf     d0,SKTitle_CopySegaPaletteAndEnableDisplay
                 move.w  #4*60,(Demo_timer).w
                 move.w  (VDP_reg_1_command).w,d0
                 ori.b   #$40,d0
@@ -111,16 +111,16 @@ Wait_SegaS3K:
                 bsr.w   Wait_VSync                      ; Wait for SEGA sound
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_3FE4                        ; If start was pressed, skip ahead
+                bne.w   SKTitle_StopSegaAndStartPaletteFade  ; If start was pressed, skip ahead
                 tst.w   (Demo_timer).w
                 bne.s   Wait_SegaS3K
 
-loc_3FE4:
+SKTitle_StopSegaAndStartPaletteFade:
                 moveq   #signextendB(cmd_StopSEGA),d0
                 bsr.w   Play_Music                      ; Stop SEGA sound
                 lea     (Pal_Title).l,a1
 
-loc_3FF0:
+SKTitle_CopyNextFadePaletteStep:
                 move.b  #VInt_ID_2,(V_int_routine).w
                 bsr.w   Wait_VSync
                 lea     (Normal_palette).w,a2
@@ -129,7 +129,7 @@ loc_3FF0:
                 move.l  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+
                 tst.w   -$E(a1)                         ; Wait for BG color to turn to black
-                bne.s   loc_3FF0
+                bne.s   SKTitle_CopyNextFadePaletteStep
                 clr.w   (_unkF660).w
                 clr.w   (_unkF662).w
                 move.b  #-1,(Title_anim_buffer).w
@@ -139,10 +139,10 @@ loc_3FF0:
                 bsr.w   TitleSonic_LoadFrame
                 move.w  #15*60,(Demo_timer).w           ; Set to wait 15 seconds (900 frames in NTSC)
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_4040
+                beq.s   SKTitle_QueueEighthArtAndStartMusic
                 move.w  #15*50,(Demo_timer).w           ; Set to wait 15 seconds (750 frames in PAL)
 
-loc_4040:
+SKTitle_QueueEighthArtAndStartMusic:
                 lea     (ArtKos_S3TitleSonic8).l,a1
                 lea     (RAM_start).l,a2
                 jsr     (Queue_Kos).l                   ; Queue frame 8 of data into a2 since frame 1 is already in VRAM
@@ -159,18 +159,18 @@ Wait_TitleS3K:
                 bsr.w   Process_Nem_Queue_Init
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_4090                        ; If start was pressed, skip straight to title
+                bne.w   SKTitle_FinishIntroAndBeginWhiteFlash  ; If start was pressed, skip straight to title
                 cmpi.w  #$C,(Title_anim_frame).w
                 blo.s   Wait_TitleS3K                   ; If last frame was reached, don't repeat
 
-loc_4090:
+SKTitle_FinishIntroAndBeginWhiteFlash:
                 move.w  #$C,(Title_anim_frame).w
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToWcnt($80),d1
 
-loc_409C:
+SKTitle_FillPaletteWhite:
                 move.w  #$EEE,(a1)+
-                dbf     d1,loc_409C                     ; Flash palette white
+                dbf     d1,SKTitle_FillPaletteWhite     ; Flash palette white
                 move.b  #3,(Title_anim_delay).w
                 move.b  #VInt_ID_4,(V_int_routine).w
                 bsr.w   Wait_VSync
@@ -207,9 +207,9 @@ loc_409C:
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($80),d0
 
-loc_4140:
+SKTitle_LoadFinalPaletteAndWidgets:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_4140
+                dbf     d0,SKTitle_LoadFinalPaletteAndWidgets
                 move.l  #vdpComm(tiles_to_bytes(ArtTile_Title_Banner),VRAM,WRITE),(VDP_control_port).l  ; to VRAM $A000
                 lea     (ArtNem_Title_S3Banner).l,a0
                 bsr.w   Nem_Decomp
@@ -231,20 +231,20 @@ loc_4140:
                 move.l  #Obj_TitleANDKnuckles,(Dynamic_object_RAM+(object_size*4)).w  ; Load all applicable title objects
                 move.b  #0,(Title_anim_delay).w
 
-loc_41D4:
+SKTitle_RunMenuAndDispatchStart:
                 move.b  #VInt_ID_4,(V_int_routine).w
                 bsr.w   Wait_VSync
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 bsr.w   Process_Nem_Queue_Init
                 tst.l   (Reserved_object_3).w
-                beq.s   loc_41D4                        ; Don't do anything at all until banner has finished moving
+                beq.s   SKTitle_RunMenuAndDispatchStart  ; Don't do anything at all until banner has finished moving
                 tst.w   (Demo_timer).w
-                beq.w   loc_4278                        ; If the timer has run out, go do the level demos
+                beq.w   SKTitle_BeginAttractDemo        ; If the timer has run out, go do the level demos
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                beq.w   loc_41D4                        ; Repeat until start has been pressed on either controller
+                beq.w   SKTitle_RunMenuAndDispatchStart  ; Repeat until start has been pressed on either controller
                 move.b  #GameMode_Level,(Game_mode).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -262,24 +262,24 @@ loc_41D4:
                 bsr.w   Play_SFX                        ; Fade out the title screen music
                 moveq   #0,d0
                 move.b  (Title_screen_option).w,d0      ; Selection is stored here
-                bne.w   loc_4264
+                bne.w   SKTitle_SelectCompetition
                 move.b  #GameMode_SaveScreen,(Game_mode).w  ; Game Mode 4C is the save select
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4264:
+SKTitle_SelectCompetition:
                 subq.b  #1,d0
-                bne.s   loc_4270
+                bne.s   SKTitle_SelectLevelMenu
                 move.b  #GameMode_CompetitionMenu,(Game_mode).w  ; Game Mode 38 is Competition mode
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4270:
+SKTitle_SelectLevelMenu:
                 move.b  #GameMode_LevelSelect,(Game_mode).w  ; Game Mode 28 is the level select
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4278:
+SKTitle_BeginAttractDemo:
                 moveq   #signextendB(cmd_FadeOut),d0
                 bsr.w   Play_SFX                        ; Fade out music
                 move.w  (Next_demo_number).w,d0         ; Get index of current demo to run
@@ -294,31 +294,31 @@ loc_4278:
                 move.w  (Next_demo_number).w,d1
                 addq.w  #1,d1
                 tst.w   (SK_alone_flag).w
-                bne.s   loc_42C0                        ; If playing only Sonic & Knuckles, branch
+                bne.s   SKTitle_WrapStandaloneDemoAtThree  ; If playing only Sonic & Knuckles, branch
                 cmpi.w  #3,d1
-                bne.s   loc_42B6
+                bne.s   SKTitle_WrapLockOnDemoAtSeven
                 moveq   #4,d1
-                bra.s   loc_42C8
+                bra.s   SKTitle_StoreDemoIndexAndCheckSpecial
 ; ---------------------------------------------------------------------------
 
-loc_42B6:
+SKTitle_WrapLockOnDemoAtSeven:
                 cmpi.w  #7,d1
-                blo.s   loc_42C8
+                blo.s   SKTitle_StoreDemoIndexAndCheckSpecial
                 moveq   #0,d1
-                bra.s   loc_42C8
+                bra.s   SKTitle_StoreDemoIndexAndCheckSpecial
 ; ---------------------------------------------------------------------------
 ; unused/dead code, since it's not possible to reach the S3K title screen in S&K mode
 ; Even if were, this sets the next demo to a S3 level, which would crash S&K when played
 
-loc_42C0:
+SKTitle_WrapStandaloneDemoAtThree:
                 cmpi.w  #3,d1
-                blo.s   loc_42C8
+                blo.s   SKTitle_StoreDemoIndexAndCheckSpecial
                 moveq   #0,d1
 
-loc_42C8:
+SKTitle_StoreDemoIndexAndCheckSpecial:
                 move.w  d1,(Next_demo_number).w
                 tst.w   d0
-                bpl.s   loc_4300                        ; Branch if we are indeed playing a level
+                bpl.s   SKTitle_SelectRegularDemoMode   ; Branch if we are indeed playing a level
                 move.b  #GameMode_SpecialStage,(Game_mode).w  ; Do the special stage demo
                 move.b  #1,(Current_special_stage).w
                 move.b  #1,(SK_special_stage_flag).w
@@ -328,13 +328,13 @@ loc_42C8:
                 clr.w   (Collected_emeralds_array+4).w
                 clr.b   (Collected_emeralds_array+6).w
                 move.b  #2,(Collected_emeralds_array+1).w
-                bra.s   loc_4306
+                bra.s   SKTitle_InitAttractStats
 ; ---------------------------------------------------------------------------
 
-loc_4300:
+SKTitle_SelectRegularDemoMode:
                 move.b  #GameMode_Demo,(Game_mode).w    ; We're about to perform a level demo
 
-loc_4306:
+SKTitle_InitAttractStats:
                 move.w  #1,(Demo_mode_flag).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -361,45 +361,45 @@ DemoLevels:
 
 TitleAnim_FlipBuffer:
                 tst.b   (Title_anim_delay).w
-                bne.s   loc_43AC
+                bne.s   SKTitle_TickIntroPageDelay
                 move.b  #4-1,(Title_anim_delay).w
                 cmpi.w  #$C,(Title_anim_frame).w
-                bhs.s   loc_43B2
+                bhs.s   SKTitle_PrepareFinalPlanePalette
                 move.b  #4-1,(Title_anim_delay).w
                 lea     (Target_palette).w,a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt($40),d0
 
-loc_4376:
+SKTitle_CopyPaletteAndSwapIntroPage:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_4376
+                dbf     d0,SKTitle_CopyPaletteAndSwapIntroPage
                 eori.b  #-1,(Title_anim_buffer).w
                 tst.b   (Title_anim_buffer).w
-                beq.s   loc_439A
+                beq.s   SKTitle_PointBothPlanesAtE000
                 move.w  #$8406,(VDP_control_port).l     ; Nametable B Address $C000
                 move.w  #$8230,(VDP_control_port).l     ; Nametable A Address $C000
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_439A:
+SKTitle_PointBothPlanesAtE000:
                 move.w  #$8407,(VDP_control_port).l     ; Nametable B Address $E000
                 move.w  #$8238,(VDP_control_port).l     ; Nametable A Address $E000
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_43AC:
+SKTitle_TickIntroPageDelay:
                 subq.b  #1,(Title_anim_delay).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_43B2:
+SKTitle_PrepareFinalPlanePalette:
                 lea     (Target_palette).w,a0
                 lea     (Normal_palette).w,a1
                 moveq   #bytesToLcnt($80),d0
 
-loc_43BC:
+SKTitle_CopyFinalPaletteAndSetPlanes:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_43BC
+                dbf     d0,SKTitle_CopyFinalPaletteAndSetPlanes
                 move.w  #$8407,(VDP_control_port).l     ; Nametable B Address $E000
                 move.w  #$8230,(VDP_control_port).l     ; Nametable A Address $C000
                 rts
@@ -408,19 +408,19 @@ loc_43BC:
 
 Iterate_TitleSonicFrame:
                 cmpi.b  #1,(Title_anim_delay).w
-                bne.s   locret_43F0
+                bne.s   SKTitle_IntroFrameUpdateReturn
                 move.w  (Title_anim_frame).w,d0
                 move.b  SonicFrameIndex(pc,d0.w),d0
                 ext.w   d0
-                bmi.s   loc_43F2                        ; if negative, do not load anymore frames
+                bmi.s   SKTitle_ClampIntroAtFrame12     ; if negative, do not load anymore frames
                 bsr.w   TitleSonic_LoadFrame
                 addq.w  #1,(Title_anim_frame).w
 
-locret_43F0:
+SKTitle_IntroFrameUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_43F2:
+SKTitle_ClampIntroAtFrame12:
                 move.w  #$C,(Title_anim_frame).w
                 move.b  #3,(Title_anim_delay).w
                 rts
@@ -443,8 +443,8 @@ TitleSonic_LoadFrame:
                 move.w  #$2C60,d3
                 move.l  (a2)+,d0                        ; Art data
                 cmpi.w  #7,d7
-                beq.s   loc_4446
-                bcs.s   loc_4466
+                beq.s   SKTitle_SelectFrameArtVRAM
+                bcs.s   SKTitle_ReadFramePaletteDescriptor
                 andi.l  #$FFFFFF,d0
                 movea.l d0,a0
                 lea     (RAM_start).l,a1
@@ -452,39 +452,39 @@ TitleSonic_LoadFrame:
                 move.w  a1,d3
                 lsr.w   #1,d3
 
-loc_4446:
+SKTitle_SelectFrameArtVRAM:
                 move.l  #RAM_start,d1
                 move.w  #0,d2
                 tst.b   (Title_anim_buffer).w           ; FFFFBC toggles on and off so that each animation frame could alternate locations for a sort of makeshift double-buffering
-                beq.s   loc_445A
+                beq.s   SKTitle_QueueFrameArtDMA
                 move.w  #tiles_to_bytes(ArtTile_Title_Buffer),d2
 
-loc_445A:
+SKTitle_QueueFrameArtDMA:
                 andi.l  #$FFFFFF,d1
                 jsr     (Add_To_DMA_Queue).l
 
-loc_4466:
+SKTitle_ReadFramePaletteDescriptor:
                 movea.l (a2)+,a0                        ; Palette data address
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($40),d0
 
-loc_446E:
+SKTitle_CopyFramePaletteAndCheckPage:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_446E
+                dbf     d0,SKTitle_CopyFramePaletteAndCheckPage
                 tst.b   (Title_anim_buffer).w
-                bne.s   loc_44B8
+                bne.s   SKTitle_SelectAltPageArtBase
                 lea     (RAM_start+$8000).w,a1          ; Buffer 1
                 movea.l (a2)+,a0                        ; Enigma Mappings
                 move.w  #make_art_tile($000,0,0),d0
                 bsr.w   Eni_Decomp
                 cmpi.w  #7,d7
-                bhs.s   loc_449A
+                bhs.s   SKTitle_UploadZeroPageMapAfterRegionGate
                 tst.b   (Graphics_flags).w
-                bmi.s   loc_449A
+                bmi.s   SKTitle_UploadZeroPageMapAfterRegionGate
                 moveq   #0,d0
                 move.l  d0,(RAM_start+$83AC).w
 
-loc_449A:
+SKTitle_UploadZeroPageMapAfterRegionGate:
                 move    #$2700,sr
                 lea     (RAM_start+$8000).w,a1
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0  ; to $C000 in VRAM, Nametable A
@@ -495,24 +495,24 @@ loc_449A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_44B8:
+SKTitle_SelectAltPageArtBase:
                 lea     (RAM_start+$8000).w,a1          ; Buffer 2
                 movea.l (a2)+,a0                        ; Enigma Mappings
                 move.w  #make_art_tile(ArtTile_Title_Buffer,0,0),d0
                 cmpi.w  #7,d7
-                bhs.s   loc_44CC
+                bhs.s   SKTitle_DecodeAndUploadAltPageMap
                 move.w  #make_art_tile($000,0,0),d0
 
-loc_44CC:
+SKTitle_DecodeAndUploadAltPageMap:
                 bsr.w   Eni_Decomp
                 cmpi.w  #7,d7
-                bhs.s   loc_44E2
+                bhs.s   SKTitle_UploadAltPageMapAfterRegionGate
                 tst.b   (Graphics_flags).w
-                bmi.s   loc_44E2
+                bmi.s   SKTitle_UploadAltPageMapAfterRegionGate
                 moveq   #0,d0
                 move.l  d0,(RAM_start+$83AC).w
 
-loc_44E2:
+SKTitle_UploadAltPageMapAfterRegionGate:
                 move    #$2700,sr
                 lea     (RAM_start+$8000).w,a1
                 move.l  #vdpComm(VRAM_Plane_B_Name_Table,VRAM,WRITE),d0  ; to $E000 in VRAM Nametable B

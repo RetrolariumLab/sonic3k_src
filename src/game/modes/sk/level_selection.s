@@ -137,10 +137,10 @@ LevelSelect_S2Options:
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d1
 
-loc_7BE4:
+SKLevelMenu_CopyAndClearPaletteLine3:
                 move.l  (a1),(a2)+
                 clr.l   (a1)+
-                dbf     d1,loc_7BE4
+                dbf     d1,SKLevelMenu_CopyAndClearPaletteLine3
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
                 move.w  #(30*60)-1,(Demo_timer).w
@@ -197,12 +197,12 @@ LevelSelect_Main:                                       ; routine running during
 
 LevelSelect_PressStart:
                 tst.w   (SK_alone_flag).w
-                beq.s   loc_7CA0
+                beq.s   SKLevelMenu_StoreModeAndDecodeLevel
                 cmpi.w  #3,(Player_option).w
-                bhs.s   loc_7CA0
+                bhs.s   SKLevelMenu_StoreModeAndDecodeLevel
                 move.w  #1,(Player_option).w
 
-loc_7CA0:
+SKLevelMenu_StoreModeAndDecodeLevel:
                 move.w  (Player_option).w,(Player_mode).w
                 lea     LS_Level_Order(pc),a1
                 move.w  (Level_select_option).w,d0
@@ -222,18 +222,18 @@ loc_7CA0:
 LevelSelect_SpecialStage:
                 move.b  #GameMode_SpecialStage,(Game_mode).w
                 tst.w   (SK_alone_flag).w
-                beq.s   locret_7D12
+                beq.s   SKLevelMenu_SpecialZoneCheckReturn
                 cmpi.w  #$400,(Current_zone_and_act).w
-                beq.s   locret_7D12
+                beq.s   SKLevelMenu_SpecialZoneCheckReturn
                 cmpi.w  #$700,(Current_zone_and_act).w
-                bhs.s   locret_7D12
+                bhs.s   SKLevelMenu_SpecialZoneCheckReturn
                 move.w  #$700,d0
                 move.w  d0,(Current_zone_and_act).w
                 move.w  d0,(Apparent_zone_and_act).w
                 move.w  d0,(Saved_zone_and_act).w
                 move.w  d0,(Saved_apparent_zone_and_act).w
 
-locret_7D12:
+SKLevelMenu_SpecialZoneCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
@@ -286,7 +286,7 @@ LevelSelect_Return:
 
 LevelSelect_CheckKnuckles:
                 tst.w   (Debug_cheat_flag).w
-                bne.s   loc_7DBA
+                bne.s   SKLevelMenu_RestrictToKnucklesZones
                 cmpi.w  #3,(Player_mode).w              ; Are we Knuckles?
                 bne.s   LevelSelect_CheckSonicTails     ; If not, branch
                 cmpi.w  #$A00,d0                        ; Is SSZ act 1 selected?
@@ -306,17 +306,17 @@ LevelSelect_DenySelection:
 
 LevelSelect_CheckSonicTails:
                 cmpi.w  #3,(Player_mode).w              ; Are we Knuckles (any character with an ID of 3+)?
-                bhs.s   loc_7DAC                        ; If so, branch
+                bhs.s   SKLevelMenu_DenyTailsDoomsday   ; If so, branch
                 cmpi.w  #$A01,d0                        ; Is SSZ act 2 selected?
                 beq.s   LevelSelect_DenySelection       ; If so, branch and deny entry
 
-loc_7DAC:
+SKLevelMenu_DenyTailsDoomsday:
                 cmpi.w  #2,(Player_mode).w              ; Are we Tails?
-                bne.s   loc_7DBA                        ; If not, branch
+                bne.s   SKLevelMenu_RestrictToKnucklesZones  ; If not, branch
                 cmpi.w  #$C00,d0                        ; Is DDZ act 1 selected?
                 beq.s   LevelSelect_DenySelection       ; If so, branch and deny entry
 
-loc_7DBA:
+SKLevelMenu_RestrictToKnucklesZones:
                 tst.w   (SK_alone_flag).w               ; Are we playing S3K and not S&K?
                 beq.s   LevelSelect_StartZone           ; If so, branch
 ; This here stops you from accessing S3 zones in S&K
@@ -357,12 +357,12 @@ LevelSelect_StartZone:
                 move.w  d0,(Competition_settings).w
                 move.w  d0,(Competition_mode).w
                 cmpi.b  #$E,(Current_zone).w
-                blo.s   locret_7E62
+                blo.s   SKLevelMenu_InitZoneReturn
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   locret_7E62
+                bhs.s   SKLevelMenu_InitZoneReturn
                 move.w  #1,(Competition_mode).w
 
-locret_7E62:
+SKLevelMenu_InitZoneReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -370,31 +370,31 @@ locret_7E62:
 LevSelControls:
                 move.b  (Ctrl_1_pressed).w,d1
                 andi.b  #button_up_mask|button_down_mask,d1
-                bne.s   loc_7E74                        ; up/down pressed
+                bne.s   SKLevelMenu_RepeatHeldVerticalInput  ; up/down pressed
                 subq.w  #1,(Level_select_repeat).w
                 bpl.s   LevSelControls_CheckLR
 
-loc_7E74:
+SKLevelMenu_RepeatHeldVerticalInput:
                 move.w  #$B,(Level_select_repeat).w
                 move.b  (Ctrl_1).w,d1
                 andi.b  #button_up_mask|button_down_mask,d1
                 beq.s   LevSelControls_CheckLR          ; up/down not pressed, check for left & right
                 move.w  (Level_select_option).w,d0
                 btst    #button_up,d1
-                beq.s   loc_7E94
+                beq.s   SKLevelMenu_MoveDownWrap33Entries
                 subq.w  #1,d0                           ; decrease by 1
-                bcc.s   loc_7E94                        ; >= 0?
+                bcc.s   SKLevelMenu_MoveDownWrap33Entries  ; >= 0?
                 moveq   #$20,d0                         ; set to $20
 
-loc_7E94:
+SKLevelMenu_MoveDownWrap33Entries:
                 btst    #button_down,d1
-                beq.s   loc_7EA4
+                beq.s   SKLevelMenu_StoreVerticalSelection
                 addq.w  #1,d0                           ; yes, add 1
                 cmpi.w  #$21,d0
-                blo.s   loc_7EA4                        ; smaller than $21?
+                blo.s   SKLevelMenu_StoreVerticalSelection  ; smaller than $21?
                 moveq   #0,d0                           ; if not, set to 0
 
-loc_7EA4:
+SKLevelMenu_StoreVerticalSelection:
                 move.w  d0,(Level_select_option).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -405,51 +405,51 @@ LevSelControls_CheckLR:
                 move.w  (Sound_test_sound).w,d0
                 move.b  (Ctrl_1_pressed).w,d1
                 btst    #button_left,d1
-                beq.s   loc_7EC6
+                beq.s   SKLevelMenu_IncrementSoundOnRight
                 subq.b  #1,d0
-                bcc.s   loc_7EC6
+                bcc.s   SKLevelMenu_IncrementSoundOnRight
                 moveq   #0,d0
 
-loc_7EC6:
+SKLevelMenu_IncrementSoundOnRight:
                 btst    #button_right,d1
-                beq.s   loc_7ED6
+                beq.s   SKLevelMenu_AddSixteenToSoundByteOnA
                 addq.b  #1,d0
                 cmpi.w  #$100,d0
-                blo.s   loc_7ED6
+                blo.s   SKLevelMenu_AddSixteenToSoundByteOnA
                 moveq   #0,d0
 
-loc_7ED6:
+SKLevelMenu_AddSixteenToSoundByteOnA:
                 btst    #button_A,d1
-                beq.s   loc_7EE4
+                beq.s   SKLevelMenu_StoreSoundAndPlayOnC
                 addi.b  #$10,d0
                 andi.b  #$FF,d0
 
-loc_7EE4:
+SKLevelMenu_StoreSoundAndPlayOnC:
                 move.w  d0,(Sound_test_sound).w
                 btst    #button_C,d1
-                beq.s   loc_7EF8
+                beq.s   SKLevelMenu_MutePsgOnBPress
                 move.w  (Sound_test_sound).w,d0
                 jsr     (Play_Music).l
 
-loc_7EF8:
+SKLevelMenu_MutePsgOnBPress:
                 btst    #button_B,d1
-                beq.s   locret_7F06
+                beq.s   SKLevelMenu_ReturnFromSoundTestControls
                 moveq   #signextendB(cmd_MutePSG),d0
                 jsr     (Play_Music).l
 
-locret_7F06:
+SKLevelMenu_ReturnFromSoundTestControls:
                 rts
 ; ---------------------------------------------------------------------------
 
 LevSelControls_SwitchSide:
                 move.b  (Ctrl_1_pressed).w,d1
                 andi.b  #button_left_mask|button_right_mask,d1
-                beq.s   loc_7F1E
+                beq.s   SKLevelMenu_CyclePlayerOptionAfterColumn
                 move.w  (Level_select_option).w,d0
                 move.b  LevelSelect_SwitchTable(pc,d0.w),d0
                 move.w  d0,(Level_select_option).w
 
-loc_7F1E:
+SKLevelMenu_CyclePlayerOptionAfterColumn:
                 bra.s   LevelSelect_PickCharacterNumber
 ; ---------------------------------------------------------------------------
 ; unused
@@ -496,13 +496,13 @@ LevelSelect_SwitchTable:
 
 LevelSelect_PickCharacterNumber:
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   locret_7F60
+                beq.s   SKLevelMenu_ReturnFromPlayerOptionCycle
                 addq.w  #1,(Player_option).w
                 cmpi.w  #4,(Player_option).w
-                blo.s   locret_7F60
+                blo.s   SKLevelMenu_ReturnFromPlayerOptionCycle
                 move.w  #0,(Player_option).w
 
-locret_7F60:
+SKLevelMenu_ReturnFromPlayerOptionCycle:
                 rts
 ; End of function LevSelControls
 
@@ -535,15 +535,15 @@ LevelSelect_MarkFields:
                 move.l  d1,VDP_control_port-VDP_data_port(a6)
                 moveq   #$F-1,d2
 
-loc_7FB2:
+SKLevelMenu_UploadHighlightAndExtraTile:
                 move.w  (a1)+,d0
                 add.w   d3,d0
                 move.w  d0,(a6)
-                dbf     d2,loc_7FB2
+                dbf     d2,SKLevelMenu_UploadHighlightAndExtraTile
                 addq.w  #2,a3
                 moveq   #0,d0
                 move.b  (a3),d0
-                beq.s   loc_7FF6
+                beq.s   SKLevelMenu_ChooseSoundOrPlayerDraw
                 mulu.w  #$50,d0
                 moveq   #0,d1
                 move.b  1(a3),d1
@@ -563,7 +563,7 @@ loc_7FB2:
                 add.w   d3,d0
                 move.w  d0,(a6)
 
-loc_7FF6:
+SKLevelMenu_ChooseSoundOrPlayerDraw:
                 cmpi.w  #$20,(Level_select_option).w
                 bne.s   LevelSelect_DrawCharacterNumber
                 bra.w   LevelSelect_DrawSoundNumber
@@ -590,10 +590,10 @@ LevelSelect_DrawContinued:
 LevelSelectSKWriteOneHexNibbleTile:
                 andi.w  #$F,d0
                 cmpi.b  #$A,d0
-                blo.s   loc_8036
+                blo.s   SKLevelMenu_WriteHexDigitWithPalette
                 addi.b  #4,d0
 
-loc_8036:
+SKLevelMenu_WriteHexDigitWithPalette:
                 addi.b  #$10,d0
                 add.w   d3,d0
                 move.w  d0,(a6)

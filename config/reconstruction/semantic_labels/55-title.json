@@ -1,0 +1,2902 @@
+{
+  "schema_version": 1,
+  "packet": "55-title",
+  "mappings": [
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 99,
+      "old": "loc_696C",
+      "new": "S3LevelMenu_CopyAndClearPaletteLine3",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_CopyAndClearThirdPaletteLineBeforeSceneStart"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 245,
+      "old": "locret_6B48",
+      "new": "S3LevelMenu_InitZoneReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ReturnAfterZoneSelectionInitialization"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 257,
+      "old": "loc_6B5A",
+      "new": "S3LevelMenu_RepeatHeldVerticalInput",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_RepeatHeldVerticalSelectionAfterElevenCountdownReset"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 269,
+      "old": "loc_6B7A",
+      "new": "S3LevelMenu_MoveDownWrap29Entries",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ApplyDownAndWrapTwentyNineMenuEntries"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 277,
+      "old": "loc_6B8A",
+      "new": "S3LevelMenu_StoreVerticalSelection",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_StoreVerticalSelectionAndReturn"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 293,
+      "old": "loc_6BAC",
+      "new": "S3LevelMenu_IncrementSoundOnRight",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_IncreaseSoundByteOnRightPress"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 301,
+      "old": "loc_6BBC",
+      "new": "S3LevelMenu_AddSixteenToSoundByteOnA",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_AddSixteenToSoundByteOnA"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 307,
+      "old": "loc_6BCA",
+      "new": "S3LevelMenu_PlaySoundAndCheckCheats",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_StoreSoundAndPlayThenCheckDebugEmeraldSequences"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 320,
+      "old": "loc_6BF4",
+      "new": "S3LevelMenu_MutePsgOnBPress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_MutePsgOnBPress"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 326,
+      "old": "locret_6C02",
+      "new": "S3LevelMenu_ReturnFromSoundTestControls",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ReturnFromSoundTestControls"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 338,
+      "old": "loc_6C1A",
+      "new": "S3LevelMenu_CycleCharacterAfterColumn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_JoinCharacterCyclingAfterOptionalColumnSwitch"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 385,
+      "old": "loc_6C56",
+      "new": "S3LevelMenu_CycleP2CharacterOnC",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_CycleSecondPlayerCharacterOnC"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 393,
+      "old": "locret_6C70",
+      "new": "S3LevelMenu_ReturnFromCharacterCycling",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ReturnFromCharacterCycling"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 426,
+      "old": "loc_6CC2",
+      "new": "S3LevelMenu_UploadHighlightAndActTile",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_UploadFifteenHighlightedPrimaryTilesAndOptionalActTile"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 454,
+      "old": "loc_6D06",
+      "new": "S3LevelMenu_ChooseSoundOrCharacterDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ChooseSoundOrCharacterNumberRedraw"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 487,
+      "old": "loc_6D56",
+      "new": "S3LevelMenu_WriteHexDigitWithPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_WriteAdjustedHexDigitTileWithPalette"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 520,
+      "old": "loc_6DAA",
+      "new": "S3LevelMenu_CopySelectedIconPaletteLine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_CopySelectedIconPaletteLine"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 608,
+      "old": "loc_6E88",
+      "new": "S3LevelMenu_ResetFirstCheatProgress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ResetFirstCheatProgressOnMismatchOrCompletion"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 611,
+      "old": "loc_6E8E",
+      "new": "S3LevelMenu_CheckSecondSoundSequence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_CheckSecondSoundSequenceAndDispatchReward"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 628,
+      "old": "loc_6EBA",
+      "new": "S3LevelMenu_AwardSevenEmeralds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_GrantSevenEmeraldsForSecondSoundSequence"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 633,
+      "old": "loc_6EC8",
+      "new": "S3LevelMenu_ResetSecondCheatProgress",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ResetSecondCheatSequenceProgress"
+    },
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "original_line": 636,
+      "old": "locret_6ECE",
+      "new": "S3LevelMenu_SoundSequenceCheckReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3LevelMenu_ReturnFromSoundSequenceChecks"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 71,
+      "old": "loc_36AE",
+      "new": "S3Title_CopySegaPaletteAndEnableDisplay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyInitialThirtyTwoByteTitlePaletteLineAndEnableSegaDisplay"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 93,
+      "old": "loc_36F8",
+      "new": "S3Title_StopSegaAndStartPaletteFade",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_StopSegaSampleAndBeginTitlePaletteTransitionStream"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 98,
+      "old": "loc_3704",
+      "new": "S3Title_CopyNextFadePaletteStep",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyNextFourteenByteTitlePaletteTransitionUntilBlack"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 138,
+      "old": "loc_379E",
+      "new": "S3Title_FinishIntroAndBeginWhiteFlash",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ForceFinalIntroFrameAndBeginWhiteFlashTransition"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 143,
+      "old": "loc_37AA",
+      "new": "S3Title_FillPaletteWhite",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_FlashAllSixtyFourPaletteWordsWhiteBeforeFinalTitleAssets"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 182,
+      "old": "loc_384E",
+      "new": "S3Title_LoadFinalPaletteAndWidgets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyFullFinalTitleTargetPaletteAndInstallFixedWidgets"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 217,
+      "old": "loc_38D8",
+      "new": "S3Title_RunMenuAndDispatchStart",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_RunFinalTitleMenuAfterBannerAndDispatchStartSelection"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 252,
+      "old": "loc_3964",
+      "new": "S3Title_SelectCompetition",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_SelectCompetitionMenuWhenTitleOptionEqualsOne"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 259,
+      "old": "loc_3970",
+      "new": "S3Title_SelectLevelMenu",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_SelectLevelSelectionForOtherNonzeroTitleOptions"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 264,
+      "old": "loc_3978",
+      "new": "S3Title_BeginAttractDemo",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_BeginAttractDemoFromMaskedNextDemoIndex"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 279,
+      "old": "loc_39AA",
+      "new": "S3Title_InitAttractStats",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_InitializeAttractDemoLivesScoresTimersAndThresholds"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 312,
+      "old": "loc_3A18",
+      "new": "S3Title_CopyPaletteAndSwapIntroPage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyTwoTargetPaletteLinesAndToggleIntroNameTablePage"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 323,
+      "old": "loc_3A3C",
+      "new": "S3Title_PointBothPlanesAtE000",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_PointBothTitlePlanesAtE000WhenIntroPageByteZero"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 329,
+      "old": "loc_3A4E",
+      "new": "S3Title_TickIntroPageDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_DecrementNonzeroIntroPageDelayAndReturn"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 334,
+      "old": "loc_3A54",
+      "new": "S3Title_PrepareFinalPlanePalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_PrepareFullPaletteRefreshForFinalTitlePlaneLayout"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 339,
+      "old": "loc_3A5E",
+      "new": "S3Title_CopyFinalPaletteAndSetPlanes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyAllTargetColorsAndFixFinalPlanesToC000AndE000"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 358,
+      "old": "locret_3A92",
+      "new": "S3Title_IntroFrameUpdateReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ReturnAfterIntroFrameIterationGateOrSuccessfulLoad"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 362,
+      "old": "loc_3A94",
+      "new": "S3Title_ClampIntroAtFrame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ClampIntroAtFrameTwelveAfterNegativeFrameSentinel"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 372,
+      "old": "locret_3AB0",
+      "new": "S3Title_IntroSentinelReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ReturnAfterIntroSentinelWithoutEnteringUnusedBounceCode"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 396,
+      "old": "loc_3AF2",
+      "new": "S3Title_UnusedBounceSelectNegativeAccel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_UnusedTitleBounceSelectNegativeScrollAcceleration"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 400,
+      "old": "loc_3AFC",
+      "new": "S3Title_UnusedBounceUpdateVelocity",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_UnusedTitleBounceAccelerateAndHalveVelocityOnDirectionChange"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 406,
+      "old": "locret_3B0A",
+      "new": "S3Title_UnusedBounceReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ReturnFromUnusedTitleScrollBounceBlock"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 432,
+      "old": "loc_3B46",
+      "new": "S3Title_SelectFrameArtVRAM",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ChooseVramArtDestinationForLoadedOrPrequeuedFrame"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 439,
+      "old": "loc_3B5A",
+      "new": "S3Title_QueueFrameArtDMA",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_QueueFrameArtDmaThenContinueWithPaletteDescriptor"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 443,
+      "old": "loc_3B66",
+      "new": "S3Title_ReadFramePaletteDescriptor",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ReadFramePaletteDescriptorAndPrepareTwoLineTargetCopy"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 448,
+      "old": "loc_3B6E",
+      "new": "S3Title_CopyFramePaletteAndCheckPage",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_CopyFramePaletteAndChooseZeroPageMappingUpload"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 467,
+      "old": "loc_3BA6",
+      "new": "S3Title_SelectAltPageArtBase",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_ChooseAlternatePageMappingArtBaseByDescriptorIndex"
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "original_line": 475,
+      "old": "loc_3BBA",
+      "new": "S3Title_DecodeAndUploadAltPageMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3Title_DecodeAlternatePageMapAndUploadFortyByTwentyEightTiles"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 121,
+      "old": "loc_3F86",
+      "new": "S3TitleWidget_BannerSelectNegativeAccel",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_SelectNegativeBannerBounceAcceleration"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 125,
+      "old": "loc_3F90",
+      "new": "S3TitleWidget_BannerUpdateBounce",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_AccelerateBannerAndHalveVelocityOnSideChange"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 131,
+      "old": "loc_3F9E",
+      "new": "S3TitleWidget_BannerProjectOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ProjectBannerOffsetToScreenAndContinuePaletteAnimation"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 144,
+      "old": "loc_3FC2",
+      "new": "S3TitleWidget_BannerCycleWaterPalette",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_SelectNextWaterPalettePairAndQueueBannerSprite"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 188,
+      "old": "loc_4066",
+      "new": "S3TitleWidget_ResetUnusedDebugSequence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ResetUnusedOldDebugInputSequenceCounter"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 191,
+      "old": "locret_406C",
+      "new": "S3TitleWidget_UnusedDebugSequenceReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ReturnFromUnusedOldDebugSequenceReader"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 248,
+      "old": "loc_410A",
+      "new": "S3TitleWidget_HandleMenuDown",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ProcessTitleMenuDownAfterOptionalUpSelection"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 256,
+      "old": "loc_411C",
+      "new": "S3TitleWidget_WrapTitleMenuOptionAtThree",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_WrapTitleMenuOptionAtThree"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 261,
+      "old": "loc_4124",
+      "new": "S3TitleWidget_StoreMenuFrameAndSound",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_StoreTitleMenuFrameAndPlaySwitchForDirectionalPress"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 269,
+      "old": "loc_413A",
+      "new": "S3TitleWidget_QueueMenuTextSprite",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_QueueTitleSelectionTextSprite"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 331,
+      "old": "loc_424C",
+      "new": "S3TitleWidget_AnimatePlaneAfterRightMove",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_JoinPlaneAnimationAfterRightwardMovement"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 335,
+      "old": "loc_424E",
+      "new": "S3TitleWidget_MovePlaneLeftAndTurn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_MoveTitlePlaneLeftAndTurnAtZero"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 343,
+      "old": "loc_426C",
+      "new": "S3TitleWidget_AnimatePlaneAndCheckCheat",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_AnimateTitlePlaneAndQueueSpriteWithProfileCheatGate"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 371,
+      "old": "loc_42C2",
+      "new": "S3TitleWidget_ResetLevelSelectSequence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ResetLevelSelectInputSequenceCounter"
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "original_line": 374,
+      "old": "locret_42C8",
+      "new": "S3TitleWidget_LevelSelectSequenceReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3TitleWidget_ReturnFromLevelSelectSequenceReaderOrPreservedUnusedBody"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 140,
+      "old": "loc_7BE4",
+      "new": "SKLevelMenu_CopyAndClearPaletteLine3",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_CopyAndClearThirdPaletteLineBeforeSceneStart"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 205,
+      "old": "loc_7CA0",
+      "new": "SKLevelMenu_StoreModeAndDecodeLevel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_LatchPermittedPlayerModeAndDecodeSelectedLevel"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 236,
+      "old": "locret_7D12",
+      "new": "SKLevelMenu_SpecialZoneCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ReturnAfterSpecialStageZoneRestriction"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 313,
+      "old": "loc_7DAC",
+      "new": "SKLevelMenu_DenyTailsDoomsday",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_RejectTailsDoomsdaySelectionUnlessDebugBypass"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 319,
+      "old": "loc_7DBA",
+      "new": "SKLevelMenu_RestrictToKnucklesZones",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_RestrictStandaloneSelectionToKnucklesZones"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 365,
+      "old": "locret_7E62",
+      "new": "SKLevelMenu_InitZoneReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ReturnAfterRegularZoneInitialization"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 377,
+      "old": "loc_7E74",
+      "new": "SKLevelMenu_RepeatHeldVerticalInput",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_RepeatHeldVerticalSelectionWithThirtyThreeEntries"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 389,
+      "old": "loc_7E94",
+      "new": "SKLevelMenu_MoveDownWrap33Entries",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ApplyDownAndWrapThirtyThreeEntries"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 397,
+      "old": "loc_7EA4",
+      "new": "SKLevelMenu_StoreVerticalSelection",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_StoreVerticalSelectionAndReturn"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 413,
+      "old": "loc_7EC6",
+      "new": "SKLevelMenu_IncrementSoundOnRight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_IncreaseSoundByteOnRightPress"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 421,
+      "old": "loc_7ED6",
+      "new": "SKLevelMenu_AddSixteenToSoundByteOnA",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_AddSixteenToSoundByteOnA"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 427,
+      "old": "loc_7EE4",
+      "new": "SKLevelMenu_StoreSoundAndPlayOnC",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_StoreSoundAndPlayOnC"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 434,
+      "old": "loc_7EF8",
+      "new": "SKLevelMenu_MutePsgOnBPress",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_MutePsgOnBPress"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 440,
+      "old": "locret_7F06",
+      "new": "SKLevelMenu_ReturnFromSoundTestControls",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ReturnFromSoundTestControls"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 452,
+      "old": "loc_7F1E",
+      "new": "SKLevelMenu_CyclePlayerOptionAfterColumn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_JoinPlayerOptionCyclingAfterColumnSwitch"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 505,
+      "old": "locret_7F60",
+      "new": "SKLevelMenu_ReturnFromPlayerOptionCycle",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ReturnFromPlayerOptionCycle"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 538,
+      "old": "loc_7FB2",
+      "new": "SKLevelMenu_UploadHighlightAndExtraTile",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_UploadFifteenHighlightedTilesAndOptionalSecondaryTile"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 566,
+      "old": "loc_7FF6",
+      "new": "SKLevelMenu_ChooseSoundOrPlayerDraw",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_ChooseSoundOrPlayerOptionHexRedraw"
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "original_line": 596,
+      "old": "loc_8036",
+      "new": "SKLevelMenu_WriteHexDigitWithPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKLevelMenu_WriteAdjustedHexNibbleTileWithPalette"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 54,
+      "old": "loc_5B6E",
+      "new": "SKTitleBadge_HandleDownRotation",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_ProcessStandaloneIconDownAfterOptionalUpRotation"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 65,
+      "old": "loc_5B8C",
+      "new": "SKTitleBadge_StoreChoiceAndPlaySwitch",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_StoreStandaloneCharacterChoiceAndPlayDirectionalSound"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 72,
+      "old": "loc_5B9E",
+      "new": "SKTitleBadge_RotateUntilHalfTurn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_AdvanceIconRotationBySignedStepUntilHalfTurnEndpoint"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 79,
+      "old": "loc_5BB0",
+      "new": "SKTitleBadge_ComputeOpposedIconsAndOrder",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_ComputeOppositeIconPositionsAndChooseFrontBackOrder"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 104,
+      "old": "loc_5BF6",
+      "new": "SKTitleBadge_StoreNamesAndQueueIcon",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_StoreRotatingCharacterNameChildrenAndQueueIcon"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "original_line": 153,
+      "old": "locret_5CAE",
+      "new": "SKTitleBadge_SkipJapaneseTrademark",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Badges_SuppressStandaloneTrademarkForJapaneseRegionPredicate"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 32,
+      "old": "loc_5666",
+      "new": "SKSoloTitle_GateSonicFallScrollByPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_GateFallingSonicForegroundScrollOnTitlePhaseThree"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 45,
+      "old": "loc_5698",
+      "new": "SKSoloTitle_StreamStandingFrameRow",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_StreamFirstStandingFrameRowAsForegroundScrolls"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 52,
+      "old": "loc_56AA",
+      "new": "SKSoloTitle_QueueFallingSonic",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_QueueFallingSonicSpriteDuringIntro"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 56,
+      "old": "loc_56B0",
+      "new": "SKSoloTitle_UploadLandingMapAtE0",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_UploadLandingMapAndSeedTimerOnlyAtExactE0Scroll"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 67,
+      "old": "loc_56D4",
+      "new": "SKSoloTitle_AdvanceLandingScrollTo100",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AdvanceFinalForegroundScrollToOneHundred"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 74,
+      "old": "loc_56E2",
+      "new": "SKSoloTitle_InstallTimedLandingMapState",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_InstallTimedSonicLandingMapState"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 90,
+      "old": "locret_5716",
+      "new": "SKSoloTitle_LandingMapUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_ReturnWhileLandingMapTimerRunsOrAfterThirdFrameUpload"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 146,
+      "old": "loc_57D2",
+      "new": "SKSoloTitle_QueueDescendingDeathEgg",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_QueueDescendingDeathEggAfterBackgroundRowUpdate"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 150,
+      "old": "loc_57D8",
+      "new": "SKSoloTitle_SaveDeathEggBaseAndShake",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_SaveDeathEggBasePositionAndStartShakePhase"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 170,
+      "old": "loc_5832",
+      "new": "SKSoloTitle_ProjectDeathEggWithShake",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_ProjectDeathEggBasePositionWithOptionalShakeOffsets"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 178,
+      "old": "loc_5848",
+      "new": "SKSoloTitle_StoreAndQueueDeathEgg",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_StoreProjectedDeathEggCoordinatesAndQueueSprite"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 202,
+      "old": "loc_589A",
+      "new": "SKSoloTitle_StoreMountainWithShake",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_StoreMountainPositionAfterCameraAndOptionalShake"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 214,
+      "old": "loc_58B0",
+      "new": "SKSoloTitle_InitBannerAfterDelay",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_InitializeStandaloneBannerAfterExactDelayExpiry"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 248,
+      "old": "loc_5946",
+      "new": "SKSoloTitle_BannerSelectNegativeAccel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_SelectNegativeStandaloneBannerBounceAcceleration"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 252,
+      "old": "loc_5950",
+      "new": "SKSoloTitle_BannerUpdateBounce",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AccelerateStandaloneBannerAndHalveOnSideChange"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 258,
+      "old": "loc_595E",
+      "new": "SKSoloTitle_BannerProjectBounceOffset",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_ProjectStandaloneBannerBounceOffsetAtBaselineOneEighteen"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 293,
+      "old": "loc_59D0",
+      "new": "SKSoloTitle_AdvanceSonicFingerArt",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AdvanceSonicFingerHandArtChannel"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 305,
+      "old": "loc_59FA",
+      "new": "SKSoloTitle_AdvanceKnucklesHandArt1",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AdvanceFirstKnucklesHandArtChannel"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 317,
+      "old": "loc_5A24",
+      "new": "SKSoloTitle_AdvanceKnucklesHandArt2",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AdvanceSecondKnucklesHandArtChannel"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 329,
+      "old": "locret_5A4E",
+      "new": "SKSoloTitle_HandArtUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_ReturnAfterFourHandArtAnimationChannels"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 344,
+      "old": "loc_5A62",
+      "new": "SKSoloTitle_AdvanceHandFrameAndGetOffset",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_AdvanceCustomHandFrameCursorAndReturnTileByteOffset"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 351,
+      "old": "loc_5A6C",
+      "new": "SKSoloTitle_HandFrameNoUpdate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_ReturnNegativeHandFrameWhenTimerOrCommandProducesNoUpdate"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 356,
+      "old": "loc_5A70",
+      "new": "SKSoloTitle_RestartHandSeqOnMinusOne",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_RestartCustomHandSequenceOnNegativeOneCommand"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "original_line": 364,
+      "old": "loc_5A80",
+      "new": "SKSoloTitle_RewindHandSeqOnMinusTwo",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Characters_FollowRelativeHandSequenceBacktrackOnNegativeTwo"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 44,
+      "old": "locret_5D22",
+      "new": "SKSoloTitle_MapRowUploadReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_ReturnAfterAlignedMapRowUploadOrRejectedRowRequest"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 98,
+      "old": "loc_5D72",
+      "new": "SKSoloTitle_ReadFrameMaskedShakeOffsets",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_ReadTwoUnsignedShakeBytesFromFrameMaskedWindow"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 109,
+      "old": "locret_5D92",
+      "new": "SKSoloTitle_ShakeReturnKeepOldOffsets",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_ReturnFromScreenShakeWithoutClearingOldOffsets"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 126,
+      "old": "loc_5DB8",
+      "new": "SKSoloTitle_DispatchHScrollByPhase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_DispatchHorizontalDeformationByStandaloneTitlePhase"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 131,
+      "old": "loc_5DC2",
+      "new": "SKSoloTitle_PackConstantHScrollPair",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_BuildPackedForegroundBackgroundConstantScrollPair"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 141,
+      "old": "loc_5DD8",
+      "new": "SKSoloTitle_Fill224HScrollPairs",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_FillAllTwoHundredTwentyFourHorizontalScrollPairs"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 147,
+      "old": "loc_5DE0",
+      "new": "SKSoloTitle_SelectPhase1StaticNoise",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_SelectPhaseOneStaticNoiseOrContinuePhaseDispatch"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 154,
+      "old": "loc_5DEE",
+      "new": "SKSoloTitle_WriteTwoNoiseLines",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_WriteTwoRandomForegroundNoiseLinesWithFixedBackground"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 168,
+      "old": "loc_5E0E",
+      "new": "SKSoloTitle_TickPhase2EraseTimer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_AdvancePhaseTwoEraseTimerOrRestoreNormalScroll"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 183,
+      "old": "loc_5E3E",
+      "new": "SKSoloTitle_LoadKnucklesColorsAndHand",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_CopyKnucklesPaletteAndInstallHandActorAfterLogoClear"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 191,
+      "old": "loc_5E52",
+      "new": "SKSoloTitle_PrepareLogoExitScroll",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_PrepareContinuingLogoPhaseoutBackgroundScroll"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 196,
+      "old": "loc_5E5C",
+      "new": "SKSoloTitle_MoveFirstLogoScanlineRight",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_MoveFirstPhaseoutScanlineRightWithSignedPositiveCap"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 205,
+      "old": "loc_5E74",
+      "new": "SKSoloTitle_MoveSecondLogoScanlineLeft",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_WriteFirstBackgroundAndMoveSecondPhaseoutLineLeft"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "original_line": 216,
+      "old": "loc_5E8C",
+      "new": "SKSoloTitle_WriteSecondLineAndRepeat",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Display_WriteSecondBackgroundAndRepeatPhaseoutLinePairs"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 50,
+      "old": "loc_5122",
+      "new": "SKSoloTitle_UploadSegaMapAndPrepFrames",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_UploadSegaMapAndPrepareBackgroundAndStandingFrames"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 85,
+      "old": "loc_51BC",
+      "new": "SKSoloTitle_StartWhiteLineWithColorZero",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_BeginNextWhitePaletteLineWithTransparentZero"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 89,
+      "old": "loc_51C2",
+      "new": "SKSoloTitle_FillWhiteAndLoadSegaPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_FillFifteenOpaqueColorsWhiteAndLoadSegaPalette"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 97,
+      "old": "loc_51DA",
+      "new": "SKSoloTitle_CopySegaPaletteAndSetTimer",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_CopySegaPaletteLineAndChooseRegionalIntroTimer"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 105,
+      "old": "loc_51F4",
+      "new": "SKSoloTitle_EnableDisplayAndPlaySega",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_EnableDisplayFadeInAndPlaySegaSample"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 113,
+      "old": "loc_520C",
+      "new": "SKSoloTitle_WaitSegaTimerOrStart",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_WaitForSegaTimerOrStartAfterModuleGate"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 126,
+      "old": "loc_523A",
+      "new": "SKSoloTitle_StopSegaAndPrepSonicPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_StopSegaAndPrepareFullSonicTargetPalette"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 133,
+      "old": "loc_524C",
+      "new": "SKSoloTitle_CopyPaletteAndStartSonicFall",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_CopyFullPaletteAndStartFallingSonicTitleActors"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 152,
+      "old": "loc_52A6",
+      "new": "SKSoloTitle_RunIntroAndWhiteFade",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_RunIntroFrameAndAdvanceWhiteFade"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 161,
+      "old": "loc_52C4",
+      "new": "SKSoloTitle_UpdateActorsAndCheckIntroEnd",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_ProcessIntroActorsAndChooseSkipOrCompletedBannerLoop"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 174,
+      "old": "loc_52F0",
+      "new": "SKSoloTitle_FastForwardAfterWhiteFade",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_FastForwardIntroOnlyAfterWhiteFadeHasFinished"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 194,
+      "old": "loc_5342",
+      "new": "SKSoloTitle_CopyKnucklesPaletteAndLand",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_CopyKnucklesPaletteIntoNormalAndTargetThenFinishFall"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 210,
+      "old": "loc_537C",
+      "new": "SKSoloTitle_RunMenuFrameWithFade",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_RunSettledStandaloneMenuFrameWithOptionalFade"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 219,
+      "old": "loc_539A",
+      "new": "SKSoloTitle_DispatchMenuOrAttract",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_DispatchStandaloneCharacterStartOrAttractAfterMenuExists"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 270,
+      "old": "loc_5464",
+      "new": "SKSoloTitle_SelectLevelMenu",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_SelectStandaloneLevelSelectionMode"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 273,
+      "old": "locret_546A",
+      "new": "SKSoloTitle_MenuDispatchReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_ReturnFromStandaloneMenuSelection"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 277,
+      "old": "loc_546C",
+      "new": "SKSoloTitle_BeginAttractAtIndex3",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_BeginStandaloneAttractAndRaiseInitialDemoIndexToThree"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 285,
+      "old": "loc_547E",
+      "new": "SKSoloTitle_LoadDemoAndAdvanceIndex3To6",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_LoadStandaloneAttractLevelAndAdvanceThreeThroughSixCycle"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 301,
+      "old": "loc_54AE",
+      "new": "SKSoloTitle_StoreIndexAndInitSpecialDemo",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_CommitAttractSuccessorAndInitializeEmptyEmeraldSpecialDemo"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 316,
+      "old": "loc_54E0",
+      "new": "SKSoloTitle_PrepMushroomHillCheckpoint",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_PrepareMushroomHillCheckpointForItsAttractLevel"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 321,
+      "old": "loc_54EA",
+      "new": "SKSoloTitle_SelectRegularDemoMode",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_SelectOrdinaryStandaloneLevelDemo"
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "original_line": 324,
+      "old": "loc_54F0",
+      "new": "SKSoloTitle_InitAttractStats",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKStandaloneTitle_Screen_InitializeStandaloneAttractStatistics"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 87,
+      "old": "loc_3F7E",
+      "new": "SKTitle_UploadInitialMapAfterRegionGate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_UploadInitialTitleMapAfterJapaneseTrademarkPatchGate"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 97,
+      "old": "loc_3F9E",
+      "new": "SKTitle_CopySegaPaletteAndEnableDisplay",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyInitialThirtyTwoByteTitlePaletteLineAndEnableSegaDisplay"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 118,
+      "old": "loc_3FE4",
+      "new": "SKTitle_StopSegaAndStartPaletteFade",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_StopSegaSampleAndBeginTitlePaletteTransitionStream"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 123,
+      "old": "loc_3FF0",
+      "new": "SKTitle_CopyNextFadePaletteStep",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyNextFourteenByteTitlePaletteTransitionUntilBlack"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 145,
+      "old": "loc_4040",
+      "new": "SKTitle_QueueEighthArtAndStartMusic",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_QueueEighthAssetArtAndStartLockOnTitleMusic"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 166,
+      "old": "loc_4090",
+      "new": "SKTitle_FinishIntroAndBeginWhiteFlash",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ForceFinalIntroFrameAndBeginWhiteFlashTransition"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 171,
+      "old": "loc_409C",
+      "new": "SKTitle_FillPaletteWhite",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_FlashAllSixtyFourPaletteWordsWhiteBeforeFinalTitleAssets"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 210,
+      "old": "loc_4140",
+      "new": "SKTitle_LoadFinalPaletteAndWidgets",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyFullFinalTitleTargetPaletteAndInstallFixedWidgets"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 234,
+      "old": "loc_41D4",
+      "new": "SKTitle_RunMenuAndDispatchStart",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_RunFinalTitleMenuAfterBannerAndDispatchStartSelection"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 270,
+      "old": "loc_4264",
+      "new": "SKTitle_SelectCompetition",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_SelectCompetitionMenuWhenTitleOptionEqualsOne"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 277,
+      "old": "loc_4270",
+      "new": "SKTitle_SelectLevelMenu",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_SelectLevelSelectionForOtherNonzeroTitleOptions"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 282,
+      "old": "loc_4278",
+      "new": "SKTitle_BeginAttractDemo",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_BeginAttractDemoFromMaskedNextDemoIndex"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 304,
+      "old": "loc_42B6",
+      "new": "SKTitle_WrapLockOnDemoAtSeven",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_WrapLockOnAttractDemoSuccessorAtSeven"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 313,
+      "old": "loc_42C0",
+      "new": "SKTitle_WrapStandaloneDemoAtThree",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ApplyPreservedStandaloneSuccessorWrapAtThree"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 318,
+      "old": "loc_42C8",
+      "new": "SKTitle_StoreDemoIndexAndCheckSpecial",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CommitAttractSuccessorAndInitializeSpecialDemoForNegativeLevel"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 334,
+      "old": "loc_4300",
+      "new": "SKTitle_SelectRegularDemoMode",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_SelectOrdinaryAttractLevelDemoMode"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 337,
+      "old": "loc_4306",
+      "new": "SKTitle_InitAttractStats",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_InitializeAttractDemoLivesScoresTimersAndThresholds"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 373,
+      "old": "loc_4376",
+      "new": "SKTitle_CopyPaletteAndSwapIntroPage",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyTwoTargetPaletteLinesAndToggleIntroNameTablePage"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 384,
+      "old": "loc_439A",
+      "new": "SKTitle_PointBothPlanesAtE000",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_PointBothTitlePlanesAtE000WhenIntroPageByteZero"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 390,
+      "old": "loc_43AC",
+      "new": "SKTitle_TickIntroPageDelay",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_DecrementNonzeroIntroPageDelayAndReturn"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 395,
+      "old": "loc_43B2",
+      "new": "SKTitle_PrepareFinalPlanePalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_PrepareFullPaletteRefreshForFinalTitlePlaneLayout"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 400,
+      "old": "loc_43BC",
+      "new": "SKTitle_CopyFinalPaletteAndSetPlanes",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyAllTargetColorsAndFixFinalPlanesToC000AndE000"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 419,
+      "old": "locret_43F0",
+      "new": "SKTitle_IntroFrameUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ReturnAfterIntroFrameIterationGateOrSuccessfulLoad"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 423,
+      "old": "loc_43F2",
+      "new": "SKTitle_ClampIntroAtFrame12",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ClampIntroAtFrameTwelveAfterNegativeFrameSentinel"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 455,
+      "old": "loc_4446",
+      "new": "SKTitle_SelectFrameArtVRAM",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ChooseVramArtDestinationForLoadedOrPrequeuedFrame"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 462,
+      "old": "loc_445A",
+      "new": "SKTitle_QueueFrameArtDMA",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_QueueFrameArtDmaThenContinueWithPaletteDescriptor"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 466,
+      "old": "loc_4466",
+      "new": "SKTitle_ReadFramePaletteDescriptor",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ReadFramePaletteDescriptorAndPrepareTwoLineTargetCopy"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 471,
+      "old": "loc_446E",
+      "new": "SKTitle_CopyFramePaletteAndCheckPage",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_CopyFramePaletteAndChooseZeroPageMappingUpload"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 487,
+      "old": "loc_449A",
+      "new": "SKTitle_UploadZeroPageMapAfterRegionGate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_UploadZeroPageTitleMapAfterConditionalTrademarkRemoval"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 498,
+      "old": "loc_44B8",
+      "new": "SKTitle_SelectAltPageArtBase",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_ChooseAlternatePageMappingArtBaseByDescriptorIndex"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 506,
+      "old": "loc_44CC",
+      "new": "SKTitle_DecodeAndUploadAltPageMap",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_DecodeAlternatePageMapAndUploadFortyByTwentyEightTiles"
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "original_line": 515,
+      "old": "loc_44E2",
+      "new": "SKTitle_UploadAltPageMapAfterRegionGate",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitle_UploadAlternatePageTitleMapAfterConditionalTrademarkRemoval"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 121,
+      "old": "loc_48AA",
+      "new": "SKTitleWidget_BannerSelectNegativeAccel",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_SelectNegativeBannerBounceAcceleration"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 125,
+      "old": "loc_48B4",
+      "new": "SKTitleWidget_BannerUpdateBounce",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_AccelerateBannerAndHalveVelocityOnSideChange"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 131,
+      "old": "loc_48C2",
+      "new": "SKTitleWidget_BannerProjectOffset",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ProjectBannerOffsetToScreenAndContinuePaletteAnimation"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 147,
+      "old": "loc_48F2",
+      "new": "SKTitleWidget_BannerCycleWaterPalette",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_SelectNextWaterPalettePairAndQueueBannerSprite"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 175,
+      "old": "locret_4968",
+      "new": "SKTitleWidget_SkipJapaneseTrademark",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_SuppressLockOnTitleTrademarkOnJapaneseRegionPredicate"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 217,
+      "old": "loc_4A0A",
+      "new": "SKTitleWidget_ResetUnusedDebugSequence",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ResetUnusedOldDebugInputSequenceCounter"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 220,
+      "old": "locret_4A10",
+      "new": "SKTitleWidget_UnusedDebugSequenceReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ReturnFromUnusedOldDebugSequenceReader"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 277,
+      "old": "loc_4AAE",
+      "new": "SKTitleWidget_HandleMenuDown",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ProcessTitleMenuDownAfterOptionalUpSelection"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 285,
+      "old": "loc_4AC0",
+      "new": "SKTitleWidget_WrapTitleMenuOptionAtThree",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_WrapTitleMenuOptionAtThree"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 290,
+      "old": "loc_4AC8",
+      "new": "SKTitleWidget_StoreMenuFrameAndSound",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_StoreTitleMenuFrameAndPlaySwitchForDirectionalPress"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 298,
+      "old": "loc_4ADE",
+      "new": "SKTitleWidget_QueueMenuTextSprite",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_QueueTitleSelectionTextSprite"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 366,
+      "old": "loc_4C08",
+      "new": "SKTitleWidget_AnimatePlaneAfterRightMove",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_JoinPlaneAnimationAfterRightwardMovement"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 370,
+      "old": "loc_4C0A",
+      "new": "SKTitleWidget_MovePlaneLeftAndTurn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_MoveTitlePlaneLeftAndTurnAtZero"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 378,
+      "old": "loc_4C28",
+      "new": "SKTitleWidget_AnimatePlaneAndCheckCheat",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_AnimateTitlePlaneAndQueueSpriteWithProfileCheatGate"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 385,
+      "old": "loc_4C3E",
+      "new": "SKTitleWidget_QueuePlaneSprite",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_QueueTitlePlaneAfterOptionalNoOpCheatCall"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 414,
+      "old": "loc_4C8A",
+      "new": "SKTitleWidget_ResetLevelSelectSequence",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ResetLevelSelectInputSequenceCounter"
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "original_line": 417,
+      "old": "locret_4C90",
+      "new": "SKTitleWidget_LevelSelectSequenceReturn",
+      "profiles": ["sk"],
+      "meaning": "Execution state: SKTitleWidget_ReturnFromLevelSelectSequenceReaderOrPreservedUnusedBody"
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 54,
+      "old": "loc_431B8",
+      "new": "S3SegaActor_AddLeftStreakOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_AddInitialOffsetsToLeftStreakWords from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 65,
+      "old": "loc_431CE",
+      "new": "S3SegaActor_ExpandEightRunTileGroups",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ExpandEightRunningSpriteTileGroups from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 120,
+      "old": "loc_43254",
+      "new": "S3SegaActor_EnterMiddleWipe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_EnterMiddleWipeAfterLeftwardTerminalStep from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 134,
+      "old": "loc_4327E",
+      "new": "S3SegaActor_StepMiddlePaletteWipe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_StepMiddlePaletteWipeAndTestCompletion from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 141,
+      "old": "loc_4328A",
+      "new": "S3SegaActor_TurnAndRequestRightWipe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ReverseFacingRequestRightWipeAndClearScrollSpan from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 156,
+      "old": "loc_432CE",
+      "new": "S3SegaActor_SubtractRightStreakOffsets",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_SubtractInitialOffsetsFromRightStreakWords from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 162,
+      "old": "locret_432D8",
+      "new": "S3SegaActor_WipeScaleTransferReturn",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_SharedReturnForWipeScaleAndTransferIdlePaths from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 176,
+      "old": "loc_432FC",
+      "new": "S3SegaActor_EnterEndWipe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_EnterEndWipeBeforeRightwardTerminalMotion from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 190,
+      "old": "loc_43322",
+      "new": "S3SegaActor_StepFinalPaletteWipe",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_StepFinalPaletteWipeAndTestCompletion from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 197,
+      "old": "loc_4332E",
+      "new": "S3SegaActor_FinishWipeAndPlaySega",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_LatchCompletionAndRequestSegaSound from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 203,
+      "old": "locret_43340",
+      "new": "S3SegaActor_ReturnFromTerminalRoutine",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ReturnFromTerminalRoutine from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 237,
+      "old": "loc_43386",
+      "new": "S3SegaActor_Shift35LeftStreakWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ShiftThirtyFiveLeftStreakWords from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 250,
+      "old": "loc_4339A",
+      "new": "S3SegaActor_Shift35RightStreakWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ShiftThirtyFiveRightStreakWords from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 270,
+      "old": "loc_433C0",
+      "new": "S3SegaActor_ReloadPaletteFrameDelay",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ReloadPaletteDelayAndPrepareSelectedFrame from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 280,
+      "old": "loc_433D8",
+      "new": "S3SegaActor_SumPaletteFrameOffset",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_AccumulatePaletteFrameByteOffset from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 287,
+      "old": "loc_433E0",
+      "new": "S3SegaActor_AdvanceToPaletteFrame",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_AdvancePaletteSourceToSelectedFrame from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 290,
+      "old": "loc_433E2",
+      "new": "S3SegaActor_ReadPaletteDestWord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_LoadPaletteDestinationWordHandle from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 293,
+      "old": "loc_433E6",
+      "new": "S3SegaActor_CopyPaletteFrameWords",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_CopyPaletteFrameWordsUntilSizeZero from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 298,
+      "old": "loc_433EC",
+      "new": "S3SegaActor_PaletteStepReturnZero",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ReturnPaletteStepIncompleteWithZero from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 303,
+      "old": "loc_433F0",
+      "new": "S3SegaActor_PaletteSequenceReturnOne",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_ReturnPaletteSequenceCompleteWithOne from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 309,
+      "old": "byte_433F4",
+      "new": "S3SegaActor_MiddleWipePaletteSequence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_MiddleWipePaletteSequence from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 316,
+      "old": "byte_4346A",
+      "new": "S3SegaActor_FinalWipePaletteSequence",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_FinalWipePaletteSequence from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 323,
+      "old": "ObjDat3_434E0",
+      "new": "S3SegaActor_RunnerPartialAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_PartialRunningActorAttributeRecord from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "original_line": 329,
+      "old": "ObjDat3_434EA",
+      "new": "S3SegaActor_AuxActorPartialAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Establish S3SegaActor_PartialAuxiliaryActorAttributeRecord from wholeactualowner/actualreaderandformat."
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 21,
+      "old": "loc_435C4",
+      "new": "S3SegaVInt_UploadArtAndPrepRightStreaks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_UploadScaledArtAndPrepareRightFadeStreaks"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 28,
+      "old": "loc_435F6",
+      "new": "S3SegaVInt_ClearPlaneAndPrepLeftStreaks",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_ClearPlaneAndPrepareLeftFadeStreaks"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 35,
+      "old": "loc_43632",
+      "new": "S3SegaVInt_InitStreakDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_InitializeEightEntryTenRowStreakDraw"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 41,
+      "old": "loc_43642",
+      "new": "S3SegaVInt_BeginStreakRow",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_BeginStreakRowAndResetPatternCursor"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 46,
+      "old": "loc_4364A",
+      "new": "S3SegaVInt_ReadAndExpandStreakMarker",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_ReadStreakWordAndExpandMarkerBit"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 52,
+      "old": "loc_43656",
+      "new": "S3SegaVInt_WriteStreakAndAdvance",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_WriteStreakWordAndAdvanceEntryOrRow"
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "original_line": 64,
+      "old": "loc_43666",
+      "new": "S3SegaVInt_RepeatMarkedStreakWord",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Execution state: S3SegaVInt_RepeatMarkedStreakWordFortyOneTimes"
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_sonic_finger.s",
+      "original_line": 5,
+      "old": "byte_4B36",
+      "new": "S3Title_FingerAnimWithHiddenHolds",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleAnimation_FingerLoopAndHiddenHolds"
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_sonic_wink.s",
+      "original_line": 5,
+      "old": "byte_4BA6",
+      "new": "SharedTitleAnimation_WinkFrameDelayPairs",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleAnimation_WinkFrameDelayPairs"
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_tails_plane.s",
+      "original_line": 5,
+      "old": "byte_4C46",
+      "new": "SharedTitleAnimation_PlaneSixFrameLoop",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleAnimation_PlaneSixFrameLoop"
+    },
+    {
+      "source": "src/ui/shared/title/animations/sk_icon.s",
+      "original_line": 7,
+      "old": "byte_5C60",
+      "new": "SKTitleIcon_FirstChoiceAnim",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleAnimation_FirstChoicePortraitLoop"
+    },
+    {
+      "source": "src/ui/shared/title/animations/sk_icon.s",
+      "original_line": 8,
+      "old": "byte_5C66",
+      "new": "SKTitleIcon_SecondChoiceAnim",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleAnimation_SecondChoicePortraitLoop"
+    },
+    {
+      "source": "src/ui/shared/title/animations/sk_icon.s",
+      "original_line": 9,
+      "old": "byte_5C6C",
+      "new": "SKTitleIcon_NeutralHoldAnim",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleAnimation_NeutralPortraitHold"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_andknuckles.s",
+      "original_line": 5,
+      "old": "word_49B0",
+      "new": "LockOnTitle_AndKnucklesSubtitlePieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: LockOnTitle_AndKnucklesSubtitlePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_banner.s",
+      "original_line": 6,
+      "old": "Frame_3501E4",
+      "new": "S3Title_BannerMainPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Title_BannerMainPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_banner.s",
+      "original_line": 28,
+      "old": "Frame_350264",
+      "new": "S3Title_BannerTrademarkPiece",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Data structure: S3Title_BannerTrademarkPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_screen_text.s",
+      "original_line": 8,
+      "old": "word_4CA4",
+      "new": "SharedTitleText_FirstMenuOptionPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleText_FirstMenuOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_screen_text.s",
+      "original_line": 16,
+      "old": "word_4CD0",
+      "new": "SharedTitleText_SecondMenuOptionPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleText_SecondMenuOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_screen_text.s",
+      "original_line": 24,
+      "old": "word_4CFC",
+      "new": "S3Title_LevelSelectionTextMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleText_LevelSelectionOptionPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_screen_text.s",
+      "original_line": 29,
+      "old": "word_4D16",
+      "new": "SharedTitleText_CopyrightPieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleText_CopyrightPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "original_line": 9,
+      "old": "word_4F96",
+      "new": "SharedTitleSonic_FirstFingerStatePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleSonic_FirstFingerStatePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "original_line": 14,
+      "old": "word_4FB0",
+      "new": "SharedTitleSonic_SecondFingerStatePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleSonic_SecondFingerStatePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "original_line": 19,
+      "old": "word_4FCA",
+      "new": "SharedTitleSonic_FirstWinkStatePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleSonic_FirstWinkStatePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "original_line": 22,
+      "old": "word_4FD8",
+      "new": "SharedTitleSonic_SecondWinkStatePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleSonic_SecondWinkStatePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "original_line": 25,
+      "old": "word_4FE6",
+      "new": "S3Title_HiddenFingerAndWinkMap",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitleSonic_HiddenFingerAndWinkFrame"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 10,
+      "old": "word_4FF4",
+      "new": "SharedTitlePlane_FirstCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_FirstCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 13,
+      "old": "word_5002",
+      "new": "SharedTitlePlane_SecondCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_SecondCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 16,
+      "old": "word_5010",
+      "new": "SharedTitlePlane_ThirdCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_ThirdCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 19,
+      "old": "word_501E",
+      "new": "SharedTitlePlane_FourthCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_FourthCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 22,
+      "old": "word_502C",
+      "new": "SharedTitlePlane_FifthCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_FifthCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "original_line": 25,
+      "old": "word_503A",
+      "new": "SharedTitlePlane_SixthCycleFramePieces",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Data structure: SharedTitlePlane_SixthCycleFramePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_banner.s",
+      "original_line": 5,
+      "old": "word_CB996",
+      "new": "StandaloneTitle_BannerPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_BannerPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_copyright.s",
+      "original_line": 5,
+      "old": "word_5F6E",
+      "new": "StandaloneTitle_CopyrightPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_CopyrightPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_death_egg.s",
+      "original_line": 5,
+      "old": "word_CB926",
+      "new": "StandaloneTitle_DeathEggPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_DeathEggPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 13,
+      "old": "word_5EEA",
+      "new": "SKTitleIcon_FirstChoiceFrontNameMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_FirstChoiceFrontNamePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 16,
+      "old": "word_5EF8",
+      "new": "SKTitleIcon_SecondChoiceFrontNameMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_SecondChoiceFrontNamePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 19,
+      "old": "word_5F06",
+      "new": "SKTitleIcon_FirstChoiceBackNameMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_FirstChoiceBackNamePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 24,
+      "old": "word_5F20",
+      "new": "SKTitleIcon_SecondChoiceBackNameMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_SecondChoiceBackNamePieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 29,
+      "old": "word_5F3A",
+      "new": "SKTitleIcon_NeutralPortraitMap",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_NeutralCharacterAnimationPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 31,
+      "old": "word_5F42",
+      "new": "SKTitleIcon_FirstChoiceLoopMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_FirstChoiceLoopFirstPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 33,
+      "old": "word_5F4A",
+      "new": "SKTitleIcon_FirstChoiceLoopMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_FirstChoiceLoopSecondPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 35,
+      "old": "word_5F52",
+      "new": "SKTitleIcon_SecondChoiceLoopMap1",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_SecondChoiceLoopFirstPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "original_line": 37,
+      "old": "word_5F5A",
+      "new": "SKTitleIcon_SecondChoiceLoopMap2",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitleIcon_SecondChoiceLoopSecondPiece"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_mountain.s",
+      "original_line": 5,
+      "old": "word_CBA4E",
+      "new": "StandaloneTitle_MountainOcclusionPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_MountainOcclusionPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_sonic_falling.s",
+      "original_line": 5,
+      "old": "word_CB862",
+      "new": "StandaloneTitle_FallingSonicPieces",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_FallingSonicPieces"
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_tm.s",
+      "original_line": 5,
+      "old": "word_5F64",
+      "new": "StandaloneTitle_TrademarkPiece",
+      "profiles": ["sk"],
+      "meaning": "Data structure: StandaloneTitle_TrademarkPiece"
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/modes/s3/level_selection.s",
+      "tokens": [
+        [71, 0, 0, ""],
+        [74, 3, 0, ""],
+        [200, 1, 1, ""],
+        [202, 1, 1, ""],
+        [204, 0, 1, ""],
+        [209, 1, 2, ""],
+        [212, 0, 2, ""],
+        [219, 1, 3, ""],
+        [221, 1, 3, ""],
+        [223, 0, 3, ""],
+        [225, 1, 4, ""],
+        [228, 1, 4, ""],
+        [230, 0, 4, ""],
+        [239, 1, 5, ""],
+        [241, 1, 5, ""],
+        [243, 0, 5, ""],
+        [245, 1, 6, ""],
+        [248, 1, 6, ""],
+        [250, 0, 6, ""],
+        [252, 1, 7, ""],
+        [255, 0, 7, ""],
+        [258, 1, 8, ""],
+        [266, 0, 8, ""],
+        [268, 1, 9, ""],
+        [271, 0, 9, ""],
+        [276, 1, 10, ""],
+        [280, 0, 10, ""],
+        [316, 1, 11, ""],
+        [319, 1, 11, ""],
+        [321, 0, 11, ""],
+        [323, 1, 12, ""],
+        [326, 1, 12, ""],
+        [328, 0, 12, ""],
+        [356, 0, 13, ""],
+        [360, 3, 13, ""],
+        [364, 1, 14, ""],
+        [383, 0, 14, ""],
+        [405, 1, 15, ""],
+        [407, 0, 15, ""],
+        [435, 0, 16, ""],
+        [437, 3, 16, ""],
+        [507, 1, 17, ""],
+        [510, 1, 18, ""],
+        [514, 0, 17, ""],
+        [516, 0, 18, ""],
+        [521, 1, 20, ""],
+        [524, 1, 21, ""],
+        [526, 1, 19, ""],
+        [530, 1, 20, ""],
+        [531, 0, 19, ""],
+        [535, 0, 20, ""],
+        [537, 0, 21, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/title_screen.s",
+      "tokens": [
+        [62, 0, 22, ""],
+        [64, 3, 22, ""],
+        [79, 1, 23, ""],
+        [82, 0, 23, ""],
+        [86, 0, 24, ""],
+        [95, 1, 24, ""],
+        [121, 1, 25, ""],
+        [124, 0, 25, ""],
+        [128, 0, 26, ""],
+        [130, 3, 26, ""],
+        [166, 0, 27, ""],
+        [168, 3, 27, ""],
+        [198, 0, 28, ""],
+        [205, 1, 28, ""],
+        [207, 1, 31, ""],
+        [210, 1, 28, ""],
+        [228, 1, 29, ""],
+        [231, 0, 29, ""],
+        [233, 1, 30, ""],
+        [236, 0, 30, ""],
+        [239, 0, 31, ""],
+        [251, 1, 32, ""],
+        [253, 0, 32, ""],
+        [274, 1, 35, ""],
+        [277, 1, 36, ""],
+        [282, 0, 33, ""],
+        [284, 3, 33, ""],
+        [287, 1, 34, ""],
+        [291, 0, 34, ""],
+        [295, 0, 35, ""],
+        [298, 0, 36, ""],
+        [302, 0, 37, ""],
+        [304, 3, 37, ""],
+        [310, 1, 38, ""],
+        [314, 1, 39, ""],
+        [317, 0, 38, ""],
+        [319, 0, 39, ""],
+        [322, 1, 40, ""],
+        [326, 0, 40, ""],
+        [330, 1, 43, ""],
+        [340, 1, 42, ""],
+        [341, 1, 41, ""],
+        [343, 1, 41, ""],
+        [345, 1, 43, ""],
+        [346, 0, 41, ""],
+        [349, 0, 42, ""],
+        [352, 1, 43, ""],
+        [354, 0, 43, ""],
+        [368, 1, 44, ""],
+        [369, 1, 46, ""],
+        [376, 0, 44, ""],
+        [380, 1, 45, ""],
+        [382, 0, 45, ""],
+        [385, 0, 46, ""],
+        [389, 0, 47, ""],
+        [391, 3, 47, ""],
+        [393, 1, 48, ""],
+        [406, 0, 48, ""],
+        [411, 1, 49, ""],
+        [413, 0, 49, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/s3/title_widgets.s",
+      "tokens": [
+        [104, 1, 51, ""],
+        [105, 1, 50, ""],
+        [107, 1, 50, ""],
+        [110, 1, 52, ""],
+        [111, 0, 50, ""],
+        [114, 0, 51, ""],
+        [117, 1, 52, ""],
+        [119, 0, 52, ""],
+        [126, 1, 53, ""],
+        [130, 0, 53, ""],
+        [156, 1, 55, ""],
+        [159, 1, 54, ""],
+        [162, 1, 55, ""],
+        [166, 0, 54, ""],
+        [168, 0, 55, ""],
+        [210, 1, 56, ""],
+        [212, 1, 56, ""],
+        [215, 1, 56, ""],
+        [217, 0, 56, ""],
+        [219, 1, 58, ""],
+        [222, 1, 57, ""],
+        [224, 0, 57, ""],
+        [226, 1, 58, ""],
+        [228, 0, 58, ""],
+        [232, 1, 59, ""],
+        [235, 0, 59, ""],
+        [278, 1, 61, ""],
+        [281, 1, 60, ""],
+        [285, 0, 60, ""],
+        [286, 1, 62, ""],
+        [287, 0, 61, ""],
+        [290, 1, 62, ""],
+        [294, 0, 62, ""],
+        [306, 1, 64, ""],
+        [309, 1, 63, ""],
+        [312, 1, 64, ""],
+        [317, 0, 63, ""],
+        [319, 0, 64, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/level_selection.s",
+      "tokens": [
+        [91, 0, 65, ""],
+        [94, 3, 65, ""],
+        [144, 1, 66, ""],
+        [146, 1, 66, ""],
+        [148, 0, 66, ""],
+        [167, 1, 67, ""],
+        [169, 1, 67, ""],
+        [171, 1, 67, ""],
+        [177, 0, 67, ""],
+        [223, 1, 69, ""],
+        [240, 1, 68, ""],
+        [243, 0, 68, ""],
+        [245, 1, 69, ""],
+        [248, 0, 69, ""],
+        [287, 1, 70, ""],
+        [289, 1, 70, ""],
+        [291, 0, 70, ""],
+        [296, 1, 71, ""],
+        [299, 0, 71, ""],
+        [306, 1, 72, ""],
+        [308, 1, 72, ""],
+        [310, 0, 72, ""],
+        [312, 1, 73, ""],
+        [315, 1, 73, ""],
+        [317, 0, 73, ""],
+        [326, 1, 74, ""],
+        [328, 1, 74, ""],
+        [330, 0, 74, ""],
+        [332, 1, 75, ""],
+        [335, 1, 75, ""],
+        [337, 0, 75, ""],
+        [339, 1, 76, ""],
+        [342, 0, 76, ""],
+        [345, 1, 77, ""],
+        [348, 0, 77, ""],
+        [350, 1, 78, ""],
+        [353, 0, 78, ""],
+        [358, 1, 79, ""],
+        [362, 0, 79, ""],
+        [404, 1, 80, ""],
+        [407, 1, 80, ""],
+        [409, 0, 80, ""],
+        [437, 0, 81, ""],
+        [441, 3, 81, ""],
+        [445, 1, 82, ""],
+        [464, 0, 82, ""],
+        [483, 1, 83, ""],
+        [485, 0, 83, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_badges.s",
+      "tokens": [
+        [36, 1, 86, ""],
+        [39, 1, 84, ""],
+        [43, 1, 84, ""],
+        [45, 0, 84, ""],
+        [47, 1, 85, ""],
+        [53, 1, 85, ""],
+        [55, 0, 85, ""],
+        [58, 1, 86, ""],
+        [61, 0, 86, ""],
+        [64, 1, 87, ""],
+        [67, 0, 87, ""],
+        [87, 1, 88, ""],
+        [91, 0, 88, ""],
+        [129, 1, 89, ""],
+        [131, 0, 89, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_characters.s",
+      "tokens": [
+        [21, 1, 90, ""],
+        [23, 0, 90, ""],
+        [25, 1, 92, ""],
+        [28, 1, 93, ""],
+        [31, 1, 91, ""],
+        [35, 0, 91, ""],
+        [40, 0, 92, ""],
+        [42, 0, 93, ""],
+        [43, 1, 94, ""],
+        [52, 0, 94, ""],
+        [54, 1, 95, ""],
+        [57, 0, 95, ""],
+        [61, 1, 96, ""],
+        [71, 0, 96, ""],
+        [106, 1, 98, ""],
+        [109, 1, 97, ""],
+        [115, 0, 97, ""],
+        [117, 0, 98, ""],
+        [128, 1, 99, ""],
+        [135, 0, 99, ""],
+        [139, 1, 100, ""],
+        [142, 0, 100, ""],
+        [159, 1, 101, ""],
+        [162, 0, 101, ""],
+        [168, 1, 102, ""],
+        [170, 0, 102, ""],
+        [191, 1, 104, ""],
+        [192, 1, 103, ""],
+        [194, 1, 103, ""],
+        [200, 1, 105, ""],
+        [201, 0, 103, ""],
+        [204, 0, 104, ""],
+        [207, 1, 105, ""],
+        [209, 0, 105, ""],
+        [231, 1, 106, ""],
+        [238, 0, 106, ""],
+        [242, 1, 107, ""],
+        [249, 0, 107, ""],
+        [253, 1, 108, ""],
+        [260, 0, 108, ""],
+        [264, 1, 109, ""],
+        [271, 0, 109, ""],
+        [275, 1, 111, ""],
+        [280, 1, 112, ""],
+        [281, 0, 110, ""],
+        [286, 0, 111, ""],
+        [289, 0, 112, ""],
+        [291, 1, 113, ""],
+        [294, 1, 110, ""],
+        [295, 0, 113, ""],
+        [297, 1, 111, ""],
+        [302, 1, 110, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_display.s",
+      "tokens": [
+        [14, 1, 114, ""],
+        [17, 1, 114, ""],
+        [34, 0, 114, ""],
+        [64, 1, 116, ""],
+        [66, 1, 115, ""],
+        [68, 0, 115, ""],
+        [78, 0, 116, ""],
+        [85, 1, 117, ""],
+        [90, 0, 117, ""],
+        [93, 1, 120, ""],
+        [94, 0, 118, ""],
+        [103, 0, 119, ""],
+        [105, 3, 119, ""],
+        [107, 0, 120, ""],
+        [109, 1, 122, ""],
+        [113, 0, 121, ""],
+        [123, 3, 121, ""],
+        [125, 0, 122, ""],
+        [127, 1, 118, ""],
+        [129, 1, 124, ""],
+        [139, 0, 123, ""],
+        [141, 3, 123, ""],
+        [144, 1, 118, ""],
+        [145, 0, 124, ""],
+        [149, 0, 125, ""],
+        [155, 1, 126, ""],
+        [157, 0, 126, ""],
+        [165, 1, 127, ""],
+        [167, 0, 127, ""],
+        [170, 3, 125, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/standalone_title_screen.s",
+      "tokens": [
+        [38, 1, 128, ""],
+        [46, 0, 128, ""],
+        [80, 0, 129, ""],
+        [83, 0, 130, ""],
+        [85, 3, 130, ""],
+        [86, 3, 129, ""],
+        [90, 0, 131, ""],
+        [92, 3, 131, ""],
+        [95, 1, 132, ""],
+        [97, 0, 132, ""],
+        [104, 0, 133, ""],
+        [110, 1, 133, ""],
+        [113, 1, 134, ""],
+        [115, 1, 133, ""],
+        [116, 0, 134, ""],
+        [122, 0, 135, ""],
+        [124, 3, 135, ""],
+        [138, 1, 136, ""],
+        [140, 0, 136, ""],
+        [145, 1, 137, ""],
+        [148, 0, 137, ""],
+        [155, 1, 138, ""],
+        [157, 1, 136, ""],
+        [158, 1, 140, ""],
+        [159, 0, 138, ""],
+        [161, 1, 136, ""],
+        [178, 0, 139, ""],
+        [181, 3, 139, ""],
+        [193, 0, 140, ""],
+        [198, 1, 141, ""],
+        [201, 0, 141, ""],
+        [208, 1, 140, ""],
+        [210, 1, 144, ""],
+        [213, 1, 140, ""],
+        [232, 1, 142, ""],
+        [248, 1, 143, ""],
+        [250, 1, 143, ""],
+        [251, 0, 142, ""],
+        [253, 0, 143, ""],
+        [255, 0, 144, ""],
+        [260, 1, 145, ""],
+        [262, 0, 145, ""],
+        [275, 1, 146, ""],
+        [277, 0, 146, ""],
+        [280, 1, 147, ""],
+        [289, 1, 149, ""],
+        [290, 0, 147, ""],
+        [292, 1, 148, ""],
+        [294, 0, 148, ""],
+        [296, 0, 149, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/title_screen.s",
+      "tokens": [
+        [73, 1, 150, ""],
+        [76, 0, 150, ""],
+        [85, 0, 151, ""],
+        [87, 3, 151, ""],
+        [101, 1, 152, ""],
+        [104, 0, 152, ""],
+        [108, 0, 153, ""],
+        [117, 1, 153, ""],
+        [127, 1, 154, ""],
+        [129, 0, 154, ""],
+        [145, 1, 155, ""],
+        [148, 0, 155, ""],
+        [152, 0, 156, ""],
+        [154, 3, 156, ""],
+        [190, 0, 157, ""],
+        [192, 3, 157, ""],
+        [213, 0, 158, ""],
+        [220, 1, 158, ""],
+        [222, 1, 161, ""],
+        [226, 1, 158, ""],
+        [244, 1, 159, ""],
+        [247, 0, 159, ""],
+        [249, 1, 160, ""],
+        [252, 0, 160, ""],
+        [255, 0, 161, ""],
+        [270, 1, 163, ""],
+        [272, 1, 162, ""],
+        [274, 1, 164, ""],
+        [275, 0, 162, ""],
+        [277, 1, 164, ""],
+        [279, 1, 164, ""],
+        [280, 0, 163, ""],
+        [282, 1, 164, ""],
+        [284, 0, 164, ""],
+        [287, 1, 165, ""],
+        [297, 1, 166, ""],
+        [298, 0, 165, ""],
+        [300, 0, 166, ""],
+        [324, 1, 169, ""],
+        [327, 1, 170, ""],
+        [332, 0, 167, ""],
+        [334, 3, 167, ""],
+        [337, 1, 168, ""],
+        [341, 0, 168, ""],
+        [345, 0, 169, ""],
+        [348, 0, 170, ""],
+        [352, 0, 171, ""],
+        [354, 3, 171, ""],
+        [360, 1, 172, ""],
+        [364, 1, 173, ""],
+        [367, 0, 172, ""],
+        [369, 0, 173, ""],
+        [388, 1, 174, ""],
+        [389, 1, 176, ""],
+        [396, 0, 174, ""],
+        [400, 1, 175, ""],
+        [402, 0, 175, ""],
+        [405, 0, 176, ""],
+        [409, 0, 177, ""],
+        [411, 3, 177, ""],
+        [413, 1, 179, ""],
+        [419, 1, 178, ""],
+        [421, 1, 178, ""],
+        [424, 0, 178, ""],
+        [433, 0, 179, ""],
+        [438, 1, 180, ""],
+        [440, 0, 180, ""],
+        [443, 1, 181, ""],
+        [445, 1, 181, ""],
+        [448, 0, 181, ""]
+      ]
+    },
+    {
+      "source": "src/game/modes/sk/title_widgets.s",
+      "tokens": [
+        [104, 1, 183, ""],
+        [105, 1, 182, ""],
+        [107, 1, 182, ""],
+        [110, 1, 184, ""],
+        [111, 0, 182, ""],
+        [114, 0, 183, ""],
+        [117, 1, 184, ""],
+        [119, 0, 184, ""],
+        [129, 1, 185, ""],
+        [133, 0, 185, ""],
+        [153, 1, 186, ""],
+        [155, 0, 186, ""],
+        [179, 1, 188, ""],
+        [182, 1, 187, ""],
+        [185, 1, 188, ""],
+        [189, 0, 187, ""],
+        [191, 0, 188, ""],
+        [233, 1, 189, ""],
+        [235, 1, 189, ""],
+        [238, 1, 189, ""],
+        [240, 0, 189, ""],
+        [242, 1, 191, ""],
+        [245, 1, 190, ""],
+        [247, 0, 190, ""],
+        [249, 1, 191, ""],
+        [251, 0, 191, ""],
+        [255, 1, 192, ""],
+        [258, 0, 192, ""],
+        [307, 1, 194, ""],
+        [310, 1, 193, ""],
+        [314, 0, 193, ""],
+        [315, 1, 195, ""],
+        [316, 0, 194, ""],
+        [319, 1, 195, ""],
+        [323, 0, 195, ""],
+        [327, 1, 196, ""],
+        [329, 0, 196, ""],
+        [340, 1, 198, ""],
+        [343, 1, 197, ""],
+        [346, 1, 198, ""],
+        [351, 0, 197, ""],
+        [353, 0, 198, ""]
+      ]
+    },
+    {
+      "source": "src/objects/interface/s3/sega_screen_actor.s",
+      "tokens": [
+        [27, 1, 209, ""],
+        [29, 1, 221, ""],
+        [42, 0, 199, ""],
+        [46, 3, 199, ""],
+        [52, 0, 200, ""],
+        [58, 3, 200, ""],
+        [97, 1, 201, ""],
+        [102, 0, 201, ""],
+        [110, 1, 202, ""],
+        [113, 0, 202, ""],
+        [114, 1, 219, ""],
+        [116, 1, 203, ""],
+        [118, 0, 203, ""],
+        [131, 0, 204, ""],
+        [135, 3, 204, ""],
+        [136, 0, 205, ""],
+        [140, 1, 206, ""],
+        [146, 0, 206, ""],
+        [154, 1, 207, ""],
+        [157, 0, 207, ""],
+        [158, 1, 220, ""],
+        [160, 1, 208, ""],
+        [162, 0, 208, ""],
+        [167, 0, 209, ""],
+        [178, 1, 222, ""],
+        [190, 0, 210, ""],
+        [193, 3, 210, ""],
+        [198, 0, 211, ""],
+        [201, 3, 211, ""],
+        [205, 1, 217, ""],
+        [210, 1, 212, ""],
+        [212, 1, 218, ""],
+        [213, 0, 212, ""],
+        [221, 1, 215, ""],
+        [222, 0, 213, ""],
+        [224, 1, 214, ""],
+        [226, 1, 213, ""],
+        [227, 0, 214, ""],
+        [229, 0, 215, ""],
+        [231, 0, 216, ""],
+        [234, 1, 216, ""],
+        [235, 0, 217, ""],
+        [238, 0, 218, ""],
+        [241, 0, 219, ""],
+        [248, 0, 220, ""],
+        [255, 0, 221, ""],
+        [261, 0, 222, ""]
+      ]
+    },
+    {
+      "source": "src/rendering/s3/pixel_scale_2x.s",
+      "tokens": [[14, 1, 205, ""]]
+    },
+    {
+      "source": "src/rendering/s3/sega_screen_transfers.s",
+      "tokens": [
+        [3, 1, 205, ""],
+        [8, 1, 223, ""],
+        [9, 1, 224, ""],
+        [10, 0, 223, ""],
+        [14, 1, 225, ""],
+        [15, 0, 224, ""],
+        [19, 1, 225, ""],
+        [20, 0, 225, ""],
+        [25, 0, 226, ""],
+        [29, 0, 227, ""],
+        [32, 1, 228, ""],
+        [34, 0, 228, ""],
+        [36, 3, 227, ""],
+        [38, 3, 226, ""],
+        [42, 0, 229, ""],
+        [44, 3, 229, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_sonic_finger.s",
+      "tokens": [
+        [2, 1, 230, ""],
+        [3, 0, 230, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_sonic_wink.s",
+      "tokens": [
+        [2, 1, 231, ""],
+        [3, 0, 231, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/animations/s3_tails_plane.s",
+      "tokens": [
+        [2, 1, 232, ""],
+        [3, 0, 232, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/animations/sk_icon.s",
+      "tokens": [
+        [2, 1, 233, ""],
+        [3, 1, 234, ""],
+        [4, 1, 235, ""],
+        [5, 0, 233, ""],
+        [6, 0, 234, ""],
+        [7, 0, 235, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_andknuckles.s",
+      "tokens": [
+        [2, 1, 236, ""],
+        [3, 0, 236, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_banner.s",
+      "tokens": [
+        [2, 1, 237, ""],
+        [3, 1, 238, ""],
+        [4, 0, 237, ""],
+        [26, 0, 238, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_screen_text.s",
+      "tokens": [
+        [2, 1, 239, ""],
+        [3, 1, 240, ""],
+        [4, 1, 241, ""],
+        [5, 1, 242, ""],
+        [6, 0, 239, ""],
+        [14, 0, 240, ""],
+        [22, 0, 241, ""],
+        [27, 0, 242, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_sonic_anim.s",
+      "tokens": [
+        [2, 1, 243, ""],
+        [3, 1, 244, ""],
+        [4, 1, 245, ""],
+        [5, 1, 246, ""],
+        [6, 1, 247, ""],
+        [7, 0, 243, ""],
+        [12, 0, 244, ""],
+        [17, 0, 245, ""],
+        [20, 0, 246, ""],
+        [23, 0, 247, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/s3_tails_plane.s",
+      "tokens": [
+        [2, 1, 248, ""],
+        [3, 1, 249, ""],
+        [4, 1, 250, ""],
+        [5, 1, 251, ""],
+        [6, 1, 252, ""],
+        [7, 1, 253, ""],
+        [8, 0, 248, ""],
+        [11, 0, 249, ""],
+        [14, 0, 250, ""],
+        [17, 0, 251, ""],
+        [20, 0, 252, ""],
+        [23, 0, 253, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_banner.s",
+      "tokens": [
+        [2, 1, 254, ""],
+        [3, 0, 254, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_copyright.s",
+      "tokens": [
+        [2, 1, 255, ""],
+        [3, 0, 255, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_death_egg.s",
+      "tokens": [
+        [2, 1, 256, ""],
+        [3, 0, 256, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_icon.s",
+      "tokens": [
+        [2, 1, 257, ""],
+        [3, 1, 258, ""],
+        [4, 1, 259, ""],
+        [5, 1, 260, ""],
+        [6, 1, 261, ""],
+        [7, 1, 262, ""],
+        [8, 1, 263, ""],
+        [9, 1, 264, ""],
+        [10, 1, 265, ""],
+        [11, 0, 257, ""],
+        [14, 0, 258, ""],
+        [17, 0, 259, ""],
+        [22, 0, 260, ""],
+        [27, 0, 261, ""],
+        [29, 0, 262, ""],
+        [31, 0, 263, ""],
+        [33, 0, 264, ""],
+        [35, 0, 265, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_mountain.s",
+      "tokens": [
+        [2, 1, 266, ""],
+        [3, 0, 266, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_sonic_falling.s",
+      "tokens": [
+        [2, 1, 267, ""],
+        [3, 0, 267, ""]
+      ]
+    },
+    {
+      "source": "src/ui/shared/title/mappings/sk_tm.s",
+      "tokens": [
+        [2, 1, 268, ""],
+        [3, 0, 268, ""]
+      ]
+    }
+  ]
+}

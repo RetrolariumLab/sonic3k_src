@@ -1,8 +1,8 @@
 ; Data owner: ui/shared/title
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_SKTitle_SonicFall_:
-                dc.w    word_CB862-Map_SKTitle_SonicFall_
-word_CB862:     dc.w    $20
+                dc.w    StandaloneTitle_FallingSonicPieces-Map_SKTitle_SonicFall_
+StandaloneTitle_FallingSonicPieces: dc.w    $20
                 dc.b    $90,  $F,   0,   0, $FF, $D0
                 dc.b    $90,  $F,   0, $10, $FF, $F0
                 dc.b    $90,  $F,   0, $20,   0, $10

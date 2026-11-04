@@ -1,8 +1,8 @@
 ; Data owner: ui/shared/title
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_TitleANDKnuckles_:
-                dc.w    word_49B0-Map_TitleANDKnuckles_
-word_49B0:      dc.w    6
+                dc.w    LockOnTitle_AndKnucklesSubtitlePieces-Map_TitleANDKnuckles_
+LockOnTitle_AndKnucklesSubtitlePieces:  dc.w    6
                 dc.b    $F4,  $E,   0,   0, $FF, $AC
                 dc.b    $F4,  $E,   0,  $C, $FF, $CC
                 dc.b    $F4,  $E,   0, $18, $FF, $EC

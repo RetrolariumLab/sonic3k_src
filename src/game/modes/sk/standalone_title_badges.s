@@ -41,42 +41,42 @@ Obj_SKTitle_IconDisplay:
                 move.b  (Title_screen_option).w,d2      ; Get current selection
                 move.b  angle(a0),d0
                 andi.b  #$7F,d0
-                bne.s   loc_5B9E                        ; If selection is currently, being rotated, branch
+                bne.s   SKTitleBadge_RotateUntilHalfTurn  ; If selection is currently, being rotated, branch
                 move.b  (Ctrl_1_pressed).w,d0
                 btst    #button_up,d0
-                beq.s   loc_5B6E
+                beq.s   SKTitleBadge_HandleDownRotation
                 subq.b  #8,angle(a0)                    ; if down was pressed, rotate backwards
                 move.b  #-8,$27(a0)
                 subq.b  #1,d2
-                bcc.s   loc_5B6E
+                bcc.s   SKTitleBadge_HandleDownRotation
                 move.b  #1,d2
 
-loc_5B6E:
+SKTitleBadge_HandleDownRotation:
                 btst    #button_down,d0
-                beq.s   loc_5B8C
+                beq.s   SKTitleBadge_StoreChoiceAndPlaySwitch
                 addq.b  #8,angle(a0)                    ; if up was pressed, rotate forward
                 move.b  #8,$27(a0)
                 addq.b  #1,d2
                 andi.b  #1,d2
                 cmpi.b  #3,d2
-                blo.s   loc_5B8C
+                blo.s   SKTitleBadge_StoreChoiceAndPlaySwitch
                 moveq   #0,d2
 
-loc_5B8C:
+SKTitleBadge_StoreChoiceAndPlaySwitch:
                 move.b  d2,(Title_screen_option).w      ; Move selection
                 andi.b  #3,d0
-                beq.s   loc_5B9E
+                beq.s   SKTitleBadge_RotateUntilHalfTurn
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l                    ; Only play sound if selection was made
 
-loc_5B9E:
+SKTitleBadge_RotateUntilHalfTurn:
                 move.b  angle(a0),d0
                 andi.b  #$7F,d0
-                beq.s   loc_5BB0
+                beq.s   SKTitleBadge_ComputeOpposedIconsAndOrder
                 move.b  $27(a0),d0                      ; Perform rotation if necessary
                 add.b   d0,angle(a0)
 
-loc_5BB0:
+SKTitleBadge_ComputeOpposedIconsAndOrder:
                 move.b  angle(a0),d0                    ; Get rotation angle
                 addi.b  #$98,d0
                 jsr     (GetSineCosine).l
@@ -96,12 +96,12 @@ loc_5BB0:
                 moveq   #2,d5
                 move.b  angle(a0),d6
                 subi.b  #$A0,d6
-                bpl.s   loc_5BF6
+                bpl.s   SKTitleBadge_StoreNamesAndQueueIcon
                 exg     d1,d3                           ; Exchange attributes of Sonic/Knuckles text sprites depending on the rotation angle
                 exg     d0,d2
                 exg     d4,d5
 
-loc_5BF6:
+SKTitleBadge_StoreNamesAndQueueIcon:
                 addq.b  #1,d5
                 lea     sub2_x_pos(a0),a2
                 move.w  d1,(a2)+                        ; sub2_x_pos
@@ -146,9 +146,9 @@ Obj_SKTitle_TM:
 
 Obj_SKTitle_TMDisplay:
                 tst.b   (Graphics_flags).w
-                bpl.s   locret_5CAE
+                bpl.s   SKTitleBadge_SkipJapaneseTrademark
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-locret_5CAE:
+SKTitleBadge_SkipJapaneseTrademark:
                 rts

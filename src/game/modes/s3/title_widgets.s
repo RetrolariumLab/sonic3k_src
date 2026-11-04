@@ -109,26 +109,27 @@ Obj_TitleBanner_Main:
                 move.b  #0,$34(a0)
                 move.w  #$40,d1
                 cmpi.w  #0,d0
-                blt.s   loc_3F90
-                bne.s   loc_3F86
+                blt.s   S3TitleWidget_BannerUpdateBounce
+                bne.s   S3TitleWidget_BannerSelectNegativeAccel
                 cmpi.w  #-$5B,y_vel(a0)
-                bne.s   loc_3F86
+                bne.s   S3TitleWidget_BannerSelectNegativeAccel
                 move.l  #Obj_TitleBanner_Display,(a0)
                 move.l  #Obj_TitleTM,(Reserved_object_3).w
-                bra.s   loc_3F9E
+                bra.s   S3TitleWidget_BannerProjectOffset
 ; ---------------------------------------------------------------------------
 
-loc_3F86:
+S3TitleWidget_BannerSelectNegativeAccel:
                 move.b  #-1,$34(a0)
                 move.w  #-$40,d1
 
-loc_3F90:
+; Halve the velocity when it changes direction
+S3TitleWidget_BannerUpdateBounce:
                 add.w   d1,y_vel(a0)
                 cmp.b   $34(a0),d2
-                beq.s   loc_3F9E
+                beq.s   S3TitleWidget_BannerProjectOffset
                 asr     y_vel(a0)
 
-loc_3F9E:
+S3TitleWidget_BannerProjectOffset:
                 move.w  $30(a0),d0
                 neg.w   d0
                 addi.w  #$F0,d0
@@ -136,12 +137,12 @@ loc_3F9E:
 
 Obj_TitleBanner_Display:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   loc_3FC2
+                bpl.s   S3TitleWidget_BannerCycleWaterPalette
                 move.b  #9,anim_frame_timer(a0)
                 addq.b  #4,anim_frame(a0)
                 andi.b  #$1C,anim_frame(a0)
 
-loc_3FC2:
+S3TitleWidget_BannerCycleWaterPalette:
                 moveq   #0,d0
                 move.b  anim_frame(a0),d0
                 move.l  Pal_TitleWaterRot(pc,d0.w),(Target_palette_line_3+$1A).w
@@ -174,21 +175,21 @@ OldDebugCode:
                 adda.w  d0,a1
                 move.b  (Ctrl_1_pressed_title).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_406C
+                beq.s   S3TitleWidget_UnusedDebugSequenceReturn
                 move.b  (Ctrl_1_held_title).w,d0
                 cmp.b   (a1),d0
-                bne.s   loc_4066
+                bne.s   S3TitleWidget_ResetUnusedDebugSequence
                 addq.w  #1,(Debug_mode_cheat_counter).w
                 tst.b   1(a1)
-                bne.s   locret_406C
+                bne.s   S3TitleWidget_UnusedDebugSequenceReturn
                 move.w  #(1<<8)|1,(Debug_cheat_flag).w
                 moveq   #signextendB(sfx_RingLoss),d0
                 bsr.w   Play_SFX
 
-loc_4066:
+S3TitleWidget_ResetUnusedDebugSequence:
                 move.w  #0,(Debug_mode_cheat_counter).w
 
-locret_406C:
+S3TitleWidget_UnusedDebugSequenceReturn:
                 rts
 ; ---------------------------------------------------------------------------
 OldDebugCodeDat:
@@ -237,36 +238,36 @@ Obj_TitleSelection_Main:
                 move.b  (Ctrl_1_pressed).w,d0
                 or.b    (Ctrl_2_pressed).w,d0
                 btst    #button_up,d0
-                beq.s   loc_410A
+                beq.s   S3TitleWidget_HandleMenuDown
                 subq.b  #1,d2
-                bcc.s   loc_410A
+                bcc.s   S3TitleWidget_HandleMenuDown
                 move.b  #2,d2
                 tst.b   (Level_select_flag).w           ; If level select is on, maximum choices are 3
-                bne.s   loc_410A
+                bne.s   S3TitleWidget_HandleMenuDown
                 move.b  #1,d2
 
-loc_410A:
+S3TitleWidget_HandleMenuDown:
                 btst    #button_down,d0
-                beq.s   loc_4124
+                beq.s   S3TitleWidget_StoreMenuFrameAndSound
                 addq.b  #1,d2
                 tst.b   (Level_select_flag).w           ; See above
-                bne.s   loc_411C
+                bne.s   S3TitleWidget_WrapTitleMenuOptionAtThree
                 andi.b  #1,d2
 
-loc_411C:
+S3TitleWidget_WrapTitleMenuOptionAtThree:
                 cmpi.b  #3,d2
-                blo.s   loc_4124
+                blo.s   S3TitleWidget_StoreMenuFrameAndSound
                 moveq   #0,d2
 
-loc_4124:
+S3TitleWidget_StoreMenuFrameAndSound:
                 move.b  d2,mapping_frame(a0)
                 move.b  d2,(Title_screen_option).w
                 andi.b  #3,d0
-                beq.s   loc_413A
+                beq.s   S3TitleWidget_QueueMenuTextSprite
                 moveq   #signextendB(sfx_Switch),d0
                 jsr     (Play_SFX).l                    ; Only play sound if selection was changed
 
-loc_413A:
+S3TitleWidget_QueueMenuTextSprite:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
@@ -320,27 +321,27 @@ Obj_TitleTailsPlane:
 
 Obj_TitleTailsPlane_Main:
                 tst.b   $30(a0)
-                bne.s   loc_424E
+                bne.s   S3TitleWidget_MovePlaneLeftAndTurn
                 addq.w  #1,x_pos(a0)
                 cmpi.w  #$240,x_pos(a0)
-                bne.s   loc_424C
+                bne.s   S3TitleWidget_AnimatePlaneAfterRightMove
                 move.b  #1,$30(a0)
                 bset    #0,status(a0)
                 move.w  #$D0,y_pos(a0)
 
-loc_424C:
-                bra.s   loc_426C
+S3TitleWidget_AnimatePlaneAfterRightMove:
+                bra.s   S3TitleWidget_AnimatePlaneAndCheckCheat
 ; ---------------------------------------------------------------------------
 
-loc_424E:
+S3TitleWidget_MovePlaneLeftAndTurn:
                 subq.w  #1,x_pos(a0)
                 cmpi.w  #0,x_pos(a0)
-                bne.s   loc_426C
+                bne.s   S3TitleWidget_AnimatePlaneAndCheckCheat
                 move.b  #0,$30(a0)
                 bclr    #0,status(a0)
                 move.w  #$C0,y_pos(a0)
 
-loc_426C:
+S3TitleWidget_AnimatePlaneAndCheckCheat:
                 lea     (Ani_TitleTailsPlane).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Draw_Sprite).l
@@ -356,21 +357,21 @@ S3_Level_Select_Code:
                 adda.w  d0,a1
                 move.b  (Ctrl_1_pressed_title).w,d0
                 andi.b  #button_up_mask|button_down_mask|button_left_mask|button_right_mask|button_A_mask|button_B_mask|button_C_mask,d0
-                beq.s   locret_42C8
+                beq.s   S3TitleWidget_LevelSelectSequenceReturn
                 move.b  (Ctrl_1_held_title).w,d0
                 cmp.b   (a1),d0
-                bne.s   loc_42C2
+                bne.s   S3TitleWidget_ResetLevelSelectSequence
                 addq.w  #1,(Level_select_cheat_counter).w
                 tst.b   1(a1)
-                bne.s   locret_42C8
+                bne.s   S3TitleWidget_LevelSelectSequenceReturn
                 move.w  #(1<<8)|1,(Level_select_flag).w
                 move.w  #(1<<8)|1,(Debug_cheat_flag).w
                 moveq   #signextendB(sfx_RingRight),d0
                 bsr.w   Play_SFX
 
-loc_42C2:
+S3TitleWidget_ResetLevelSelectSequence:
                 move.w  #0,(Level_select_cheat_counter).w
 
-locret_42C8:
+S3TitleWidget_LevelSelectSequenceReturn:
                 rts
 ; End of function S3_Level_Select_Code

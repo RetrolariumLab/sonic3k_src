@@ -17,7 +17,7 @@ Scale_2x:
                 swap    d3
                 bsr.w   Scale2x_ExpandSpriteTileGroup
                 btst    #1,d0
-                beq.w   locret_432D8
+                beq.w   S3SegaActor_WipeScaleTransferReturn
                 btst    #1,d1
                 bne.s   S3Scale2x_ExpandSecondGroup
                 movea.l a3,a5

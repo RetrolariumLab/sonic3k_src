@@ -96,10 +96,10 @@ MenuScreen_LevelSelect:
                 lea     (Target_palette_line_3).w,a2
                 moveq   #bytesToLcnt(Normal_palette_line_4-Normal_palette_line_3),d1
 
-loc_696C:
+S3LevelMenu_CopyAndClearPaletteLine3:
                 move.l  (a1),(a2)+
                 clr.l   (a1)+
-                dbf     d1,loc_696C
+                dbf     d1,S3LevelMenu_CopyAndClearPaletteLine3
                 moveq   #signextendB(mus_DataSelect),d0
                 jsr     (Play_Music).l
                 move.w  #(30*60)-1,(Demo_timer).w
@@ -237,12 +237,12 @@ LevelSelect_StartZone:
                 move.w  d0,(Competition_settings).w
                 move.w  d0,(Competition_mode).w
                 cmpi.b  #$E,(Current_zone).w
-                blo.s   locret_6B48
+                blo.s   S3LevelMenu_InitZoneReturn
                 cmpi.b  #$13,(Current_zone).w
-                bhs.s   locret_6B48
+                bhs.s   S3LevelMenu_InitZoneReturn
                 move.w  #1,(Competition_mode).w
 
-locret_6B48:
+S3LevelMenu_InitZoneReturn:
                 rts
 
 ; =============== S U B R O U T I N E =======================================
@@ -250,31 +250,31 @@ locret_6B48:
 LevSelControls:
                 move.b  (Ctrl_1_pressed).w,d1
                 andi.b  #button_up_mask|button_down_mask,d1
-                bne.s   loc_6B5A                        ; up/down pressed
+                bne.s   S3LevelMenu_RepeatHeldVerticalInput  ; up/down pressed
                 subq.w  #1,(Level_select_repeat).w
                 bpl.s   LevSelControls_CheckLR
 
-loc_6B5A:
+S3LevelMenu_RepeatHeldVerticalInput:
                 move.w  #$B,(Level_select_repeat).w
                 move.b  (Ctrl_1_held).w,d1
                 andi.b  #button_up_mask|button_down_mask,d1
                 beq.s   LevSelControls_CheckLR          ; up/down not pressed, check for left & right
                 move.w  (Level_select_option).w,d0
                 btst    #button_up,d1
-                beq.s   loc_6B7A
+                beq.s   S3LevelMenu_MoveDownWrap29Entries
                 subq.w  #1,d0                           ; decrease by 1
-                bcc.s   loc_6B7A                        ; >= 0?
+                bcc.s   S3LevelMenu_MoveDownWrap29Entries  ; >= 0?
                 moveq   #$1C,d0                         ; set to $1C
 
-loc_6B7A:
+S3LevelMenu_MoveDownWrap29Entries:
                 btst    #button_down,d1
-                beq.s   loc_6B8A
+                beq.s   S3LevelMenu_StoreVerticalSelection
                 addq.w  #1,d0                           ; yes, add 1
                 cmpi.w  #$1D,d0
-                blo.s   loc_6B8A                        ; smaller than $1D?
+                blo.s   S3LevelMenu_StoreVerticalSelection  ; smaller than $1D?
                 moveq   #0,d0                           ; if not, set to 0
 
-loc_6B8A:
+S3LevelMenu_StoreVerticalSelection:
                 move.w  d0,(Level_select_option).w
                 rts
 ; ---------------------------------------------------------------------------
@@ -285,29 +285,29 @@ LevSelControls_CheckLR:
                 move.w  (Sound_test_sound).w,d0
                 move.b  (Ctrl_1_pressed).w,d1
                 btst    #button_left,d1
-                beq.s   loc_6BAC
+                beq.s   S3LevelMenu_IncrementSoundOnRight
                 subq.b  #1,d0
-                bcc.s   loc_6BAC
+                bcc.s   S3LevelMenu_IncrementSoundOnRight
                 moveq   #0,d0
 
-loc_6BAC:
+S3LevelMenu_IncrementSoundOnRight:
                 btst    #button_right,d1
-                beq.s   loc_6BBC
+                beq.s   S3LevelMenu_AddSixteenToSoundByteOnA
                 addq.b  #1,d0
                 cmpi.w  #$100,d0
-                blo.s   loc_6BBC
+                blo.s   S3LevelMenu_AddSixteenToSoundByteOnA
                 moveq   #0,d0
 
-loc_6BBC:
+S3LevelMenu_AddSixteenToSoundByteOnA:
                 btst    #button_A,d1
-                beq.s   loc_6BCA
+                beq.s   S3LevelMenu_PlaySoundAndCheckCheats
                 addi.b  #$10,d0
                 andi.b  #$FF,d0
 
-loc_6BCA:
+S3LevelMenu_PlaySoundAndCheckCheats:
                 move.w  d0,(Sound_test_sound).w
                 btst    #button_C,d1
-                beq.s   loc_6BF4
+                beq.s   S3LevelMenu_MutePsgOnBPress
                 move.w  (Sound_test_sound).w,d0
                 jsr     (Play_Music).l
                 lea     (DebugCodeDat).l,a0
@@ -317,25 +317,25 @@ loc_6BCA:
                 bra.w   CheckCheats
 ; ---------------------------------------------------------------------------
 
-loc_6BF4:
+S3LevelMenu_MutePsgOnBPress:
                 btst    #button_B,d1
-                beq.s   locret_6C02
+                beq.s   S3LevelMenu_ReturnFromSoundTestControls
                 moveq   #signextendB(cmd_MutePSG),d0
                 jsr     (Play_Music).l
 
-locret_6C02:
+S3LevelMenu_ReturnFromSoundTestControls:
                 rts
 ; ---------------------------------------------------------------------------
 
 LevSelControls_SwitchSide:
                 move.b  (Ctrl_1_pressed).w,d1
                 andi.b  #button_left_mask|button_right_mask,d1
-                beq.s   loc_6C1A
+                beq.s   S3LevelMenu_CycleCharacterAfterColumn
                 move.w  (Level_select_option).w,d0
                 move.b  LevelSelect_SwitchTable(pc,d0.w),d0
                 move.w  d0,(Level_select_option).w
 
-loc_6C1A:
+S3LevelMenu_CycleCharacterAfterColumn:
                 bra.s   LevelSelect_PickCharacterNumber
 ; ---------------------------------------------------------------------------
 ; unused
@@ -376,21 +376,21 @@ LevelSelect_SwitchTable:
 
 LevelSelect_PickCharacterNumber:
                 btst    #button_C,(Ctrl_1_pressed).w
-                beq.s   loc_6C56
+                beq.s   S3LevelMenu_CycleP2CharacterOnC
                 addq.b  #1,(P1_character).w
                 cmpi.b  #3,(P1_character).w
-                blo.s   loc_6C56
+                blo.s   S3LevelMenu_CycleP2CharacterOnC
                 move.b  #0,(P1_character).w
 
-loc_6C56:
+S3LevelMenu_CycleP2CharacterOnC:
                 btst    #button_C,(Ctrl_2_pressed).w
-                beq.s   locret_6C70
+                beq.s   S3LevelMenu_ReturnFromCharacterCycling
                 addq.b  #1,(P2_character).w
                 cmpi.b  #3,(P2_character).w
-                blo.s   locret_6C70
+                blo.s   S3LevelMenu_ReturnFromCharacterCycling
                 move.b  #0,(P2_character).w
 
-locret_6C70:
+S3LevelMenu_ReturnFromCharacterCycling:
                 rts
 ; End of function LevSelControls
 
@@ -423,15 +423,15 @@ LevelSelect_MarkFields:
                 move.l  d1,VDP_control_port-VDP_data_port(a6)
                 moveq   #$F-1,d2
 
-loc_6CC2:
+S3LevelMenu_UploadHighlightAndActTile:
                 move.w  (a1)+,d0
                 add.w   d3,d0
                 move.w  d0,(a6)
-                dbf     d2,loc_6CC2
+                dbf     d2,S3LevelMenu_UploadHighlightAndActTile
                 addq.w  #2,a3
                 moveq   #0,d0
                 move.b  (a3),d0
-                beq.s   loc_6D06
+                beq.s   S3LevelMenu_ChooseSoundOrCharacterDraw
                 mulu.w  #$50,d0
                 moveq   #0,d1
                 move.b  1(a3),d1
@@ -451,7 +451,7 @@ loc_6CC2:
                 add.w   d3,d0
                 move.w  d0,(a6)
 
-loc_6D06:
+S3LevelMenu_ChooseSoundOrCharacterDraw:
                 cmpi.w  #$1C,(Level_select_option).w
                 bne.s   LevelSelect_DrawCharacterNumber
                 bra.w   LevelSelect_DrawSoundNumber
@@ -481,10 +481,10 @@ LevelSelect_DrawContinued:
 LevelSelectS3WriteOneHexNibbleTile:
                 andi.w  #$F,d0
                 cmpi.b  #$A,d0
-                blo.s   loc_6D56
+                blo.s   S3LevelMenu_WriteHexDigitWithPalette
                 addi.b  #4,d0
 
-loc_6D56:
+S3LevelMenu_WriteHexDigitWithPalette:
                 addi.b  #$10,d0
                 add.w   d3,d0
                 move.w  d0,(a6)
@@ -517,9 +517,9 @@ LevelSelect_DrawIcon:
                 lea     (Normal_palette_line_3).w,a2
                 moveq   #bytesToLcnt($20),d1
 
-loc_6DAA:
+S3LevelMenu_CopySelectedIconPaletteLine:
                 move.l  (a1)+,(a2)+
-                dbf     d1,loc_6DAA
+                dbf     d1,S3LevelMenu_CopySelectedIconPaletteLine
                 rts
 ; End of function LevelSelect_DrawIcon
 
@@ -597,42 +597,42 @@ CheckCheats:
                 adda.w  d0,a0
                 move.w  (Sound_test_sound).w,d0
                 cmp.b   (a0),d0
-                bne.s   loc_6E88
+                bne.s   S3LevelMenu_ResetFirstCheatProgress
                 addq.w  #1,(Level_select_cheat_counter).w
                 tst.b   1(a0)
-                bne.s   loc_6E8E
+                bne.s   S3LevelMenu_CheckSecondSoundSequence
                 move.w  #(1<<8)|1,(a1)
                 moveq   #signextendB(sfx_RingRight),d0
                 jsr     (Play_SFX).l
 
-loc_6E88:
+S3LevelMenu_ResetFirstCheatProgress:
                 move.w  #0,(Level_select_cheat_counter).w
 
-loc_6E8E:
+S3LevelMenu_CheckSecondSoundSequence:
                 move.w  (Debug_mode_cheat_counter).w,d0
                 adda.w  d0,a2
                 move.w  (Sound_test_sound).w,d0
                 cmp.b   (a2),d0
-                bne.s   loc_6EC8
+                bne.s   S3LevelMenu_ResetSecondCheatProgress
                 addq.w  #1,(Debug_mode_cheat_counter).w
                 tst.b   1(a2)
-                bne.s   locret_6ECE
+                bne.s   S3LevelMenu_SoundSequenceCheckReturn
                 tst.w   d2
-                bne.s   loc_6EBA
+                bne.s   S3LevelMenu_AwardSevenEmeralds
                 move.b  #$F,(Continue_count).w
                 moveq   #signextendB(mus_Continue),d0
                 jsr     (Play_Music).l
-                bra.s   loc_6EC8
+                bra.s   S3LevelMenu_ResetSecondCheatProgress
 ; ---------------------------------------------------------------------------
 
-loc_6EBA:
+S3LevelMenu_AwardSevenEmeralds:
                 move.w  #7,(Chaos_emerald_count).w
                 moveq   #signextendB(mus_Emerald),d0
                 jsr     (Play_Music).l
 
-loc_6EC8:
+S3LevelMenu_ResetSecondCheatProgress:
                 move.w  #0,(Debug_mode_cheat_counter).w
 
-locret_6ECE:
+S3LevelMenu_SoundSequenceCheckReturn:
                 rts
 ; End of function CheckCheats

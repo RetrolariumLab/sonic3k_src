@@ -38,7 +38,7 @@ SK_Alone_Title_Screen:
                 move.w  #make_art_tile(ArtTile_SKTitle_Sega,0,1),d0
                 bsr.w   Eni_Decomp
                 tst.b   (Graphics_flags).w
-                bmi.s   loc_5122
+                bmi.s   SKSoloTitle_UploadSegaMapAndPrepFrames
                 move.w  #make_art_tile(ArtTile_SKTitle_Sega,1,1),d0
                 move.w  d0,(RAM_start+$775C).l
                 move.w  d0,(RAM_start+$775E).l
@@ -47,7 +47,7 @@ SK_Alone_Title_Screen:
                 move.w  d0,(RAM_start+$77AE).l
                 move.w  d0,(RAM_start+$77B0).l          ; Remove the TM from the Sega logo if on a Japan console
 
-loc_5122:
+SKSoloTitle_UploadSegaMapAndPrepFrames:
                 lea     (RAM_start+$7400).l,a1
                 move.l  #vdpComm(VRAM_Plane_A_Name_Table,VRAM,WRITE),d0
                 moveq   #40-1,d1
@@ -82,27 +82,27 @@ loc_5122:
                 lea     (Target_palette).w,a1
                 moveq   #4-1,d1
 
-loc_51BC:
+SKSoloTitle_StartWhiteLineWithColorZero:
                 move.w  #0,(a1)+
                 moveq   #$F-1,d0
 
-loc_51C2:
+SKSoloTitle_FillWhiteAndLoadSegaPalette:
                 move.w  #$EEE,(a1)+                     ; Set up the palette to full white
-                dbf     d0,loc_51C2
-                dbf     d1,loc_51BC
+                dbf     d0,SKSoloTitle_FillWhiteAndLoadSegaPalette
+                dbf     d1,SKSoloTitle_StartWhiteLineWithColorZero
                 lea     (Pal_SKTitle_SegaBG).l,a0
                 lea     (Target_palette_line_2).w,a1
                 moveq   #bytesToLcnt($20),d0
 
-loc_51DA:
+SKSoloTitle_CopySegaPaletteAndSetTimer:
                 move.l  (a0)+,(a1)+                     ; Load Sega palette into the first F colors of pal line 1
-                dbf     d0,loc_51DA
+                dbf     d0,SKSoloTitle_CopySegaPaletteAndSetTimer
                 move.w  #3*60,(Demo_timer).w            ; Set vsync timer to 3 seconds (180 frames NTSC)
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_51F4
+                beq.s   SKSoloTitle_EnableDisplayAndPlaySega
                 move.w  #3*50,(Demo_timer).w            ; Set vsync timer to 3 seconds (150 frames PAL)
 
-loc_51F4:
+SKSoloTitle_EnableDisplayAndPlaySega:
                 move.w  (VDP_reg_1_command).w,d0
                 ori.b   #$40,d0
                 move.w  d0,(VDP_control_port).l         ; Turn the display on
@@ -110,29 +110,29 @@ loc_51F4:
                 moveq   #signextendB(cmd_SEGA),d0       ; SEGA sound
                 bsr.w   Play_Music
 
-loc_520C:
+SKSoloTitle_WaitSegaTimerOrStart:
                 move.b  #VInt_ID_14,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 jsr     (Process_Kos_Module_Queue).l
                 tst.b   (Kos_modules_left).w
-                bne.s   loc_520C                        ; Don't allow the game to continue until the Knuckles art has been decompressed
+                bne.s   SKSoloTitle_WaitSegaTimerOrStart  ; Don't allow the game to continue until the Knuckles art has been decompressed
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_523A                        ; If start is pressed afterwards, skip to next part of title
+                bne.w   SKSoloTitle_StopSegaAndPrepSonicPalette  ; If start is pressed afterwards, skip to next part of title
                 tst.w   (Demo_timer).w
-                bne.s   loc_520C                        ; Otherwise, wait for vsync timer to run out
+                bne.s   SKSoloTitle_WaitSegaTimerOrStart  ; Otherwise, wait for vsync timer to run out
 
-loc_523A:
+SKSoloTitle_StopSegaAndPrepSonicPalette:
                 moveq   #signextendB(cmd_StopSEGA),d0
                 bsr.w   Play_Music                      ; Stop the SEGA sound if necessary
                 lea     (Pal_SKTitle_Sonic).l,a0
                 lea     (Target_palette).w,a1
                 moveq   #bytesToLcnt($80),d0
 
-loc_524C:
+SKSoloTitle_CopyPaletteAndStartSonicFall:
                 move.l  (a0)+,(a1)+
-                dbf     d0,loc_524C                     ; Load the Sonic palette and Sega palette
+                dbf     d0,SKSoloTitle_CopyPaletteAndStartSonicFall  ; Load the Sonic palette and Sega palette
                 lea     (ArtKosM_SonicKnuxStand).l,a1
                 move.w  #tiles_to_bytes(ArtTile_SKTitle_SonicKnuxStand),d2
                 jsr     (Queue_Kos_Module).l            ; Cue the art Sonic and Knuckles standing
@@ -146,34 +146,34 @@ loc_524C:
                 move.b  #3,(Life_count).w
                 move.w  #18*60,(Demo_timer).w           ; 18 second delay (1080 frames NTSC)
                 btst    #6,(Graphics_flags).w
-                beq.s   loc_52A6
+                beq.s   SKSoloTitle_RunIntroAndWhiteFade
                 move.w  #18*50,(Demo_timer).w           ; 18 second delay (900 frames PAL)
 
-loc_52A6:
+SKSoloTitle_RunIntroAndWhiteFade:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 tst.w   (Palette_fade_timer).w
-                beq.s   loc_52C4
+                beq.s   SKSoloTitle_UpdateActorsAndCheckIntroEnd
                 subq.w  #1,(Palette_fade_timer).w
                 bsr.w   Pal_FromWhite                   ; Fade from white for set number of frames
 
-loc_52C4:
+SKSoloTitle_UpdateActorsAndCheckIntroEnd:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 bsr.w   SKTitle_DeformBG
                 jsr     (Process_Kos_Module_Queue).l
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                bne.w   loc_52F0                        ; If start is pressed, branch
+                bne.w   SKSoloTitle_FastForwardAfterWhiteFade  ; If start is pressed, branch
                 tst.l   (Dynamic_object_RAM).w          ; test if banner object has been created
-                beq.s   loc_52A6                        ; If not, continue with the above
-                bra.w   loc_537C
+                beq.s   SKSoloTitle_RunIntroAndWhiteFade  ; If not, continue with the above
+                bra.w   SKSoloTitle_RunMenuFrameWithFade
 ; ---------------------------------------------------------------------------
 
-loc_52F0:
+SKSoloTitle_FastForwardAfterWhiteFade:
                 tst.w   (Palette_fade_timer).w
-                bne.s   loc_52A6                        ; If palette fade hasn't completed, go back
+                bne.s   SKSoloTitle_RunIntroAndWhiteFade  ; If palette fade hasn't completed, go back
                 lea     (Dynamic_object_RAM+object_size).w,a0
                 bsr.w   Obj_SKTitle_HandAnim            ; Initialize Hand animation object
                 move.l  #Obj_SKTitle_DeathEggShake,(Player_2).w  ; Change Death Egg object to second phase
@@ -191,10 +191,10 @@ loc_52F0:
                 lea     (Normal_palette_line_2).w,a2
                 moveq   #8-1,d0
 
-loc_5342:
+SKSoloTitle_CopyKnucklesPaletteAndLand:
                 move.l  (a0),$80(a2)
                 move.l  (a0)+,(a2)+                     ; Change to Knuckles palette
-                dbf     d0,loc_5342
+                dbf     d0,SKSoloTitle_CopyKnucklesPaletteAndLand
                 bsr.w   SKTitle_DeformBG                ; Deform the BG to apply the changes
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 bsr.w   Wait_VSync                      ; Refresh the screen
@@ -207,28 +207,28 @@ loc_5342:
                 lea     (Player_1).w,a0
                 bsr.w   Obj_SKTitle_SonicFallFinish     ; Finish the sonic fall object
 
-loc_537C:
+SKSoloTitle_RunMenuFrameWithFade:
                 move.b  #VInt_ID_1A,(V_int_routine).w
                 jsr     (Process_Kos_Queue).l
                 bsr.w   Wait_VSync
                 tst.w   (Palette_fade_timer).w
-                beq.s   loc_539A
+                beq.s   SKSoloTitle_DispatchMenuOrAttract
                 subq.w  #1,(Palette_fade_timer).w
                 bsr.w   Pal_FromWhite
 
-loc_539A:
+SKSoloTitle_DispatchMenuOrAttract:
                 jsr     (Process_Sprites).l
                 jsr     (Render_Sprites).l
                 bsr.w   SKTitle_DeformBG
                 jsr     (Process_Kos_Module_Queue).l
                 bsr.w   S3_Level_Select_Code            ; This routine is dummied out
                 tst.l   (Dynamic_object_RAM+(object_size*2)).w
-                beq.s   loc_537C                        ; If menu object isn't loaded, branch
+                beq.s   SKSoloTitle_RunMenuFrameWithFade  ; If menu object isn't loaded, branch
                 tst.w   (Demo_timer).w
-                beq.w   loc_546C                        ; If timer has run out, branch forward
+                beq.w   SKSoloTitle_BeginAttractAtIndex3  ; If timer has run out, branch forward
                 move.b  (Ctrl_1_pressed).w,d0
                 andi.b  #button_start_mask,d0
-                beq.w   loc_537C                        ; If start is not pressed, branch back
+                beq.w   SKSoloTitle_RunMenuFrameWithFade  ; If start is not pressed, branch back
                 move.b  #GameMode_Level,(Game_mode).w   ; Play a level
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
@@ -247,7 +247,7 @@ loc_539A:
                 moveq   #0,d0
                 move.b  (Title_screen_option).w,d0
                 cmpi.b  #2,d0
-                bhs.w   loc_5464
+                bhs.w   SKSoloTitle_SelectLevelMenu
                 add.w   d0,d0
                 addq.w  #1,d0
                 move.w  d0,(Player_option).w
@@ -263,26 +263,26 @@ loc_539A:
                 clr.l   (Collected_special_ring_array).w
                 clr.l   (Save_pointer).w
                 tst.b   (Level_select_flag).w
-                beq.s   locret_546A
+                beq.s   SKSoloTitle_MenuDispatchReturn
                 btst    #button_A,(Ctrl_1).w
-                beq.s   locret_546A
+                beq.s   SKSoloTitle_MenuDispatchReturn
 
-loc_5464:
+SKSoloTitle_SelectLevelMenu:
                 move.b  #GameMode_LevelSelect,(Game_mode).w
 
-locret_546A:
+SKSoloTitle_MenuDispatchReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_546C:
+SKSoloTitle_BeginAttractAtIndex3:
                 moveq   #signextendB(cmd_FadeOut),d0    ; Start demo by fading out music
                 bsr.w   Play_SFX
                 move.w  (Next_demo_number).w,d0         ; Get demo number
                 cmpi.w  #3,d0
-                bhs.s   loc_547E
+                bhs.s   SKSoloTitle_LoadDemoAndAdvanceIndex3To6
                 moveq   #3,d0
 
-loc_547E:
+SKSoloTitle_LoadDemoAndAdvanceIndex3To6:
                 move.w  d0,(Next_demo_number).w
                 move.w  d0,(Demo_number).w
                 andi.w  #7,d0
@@ -295,13 +295,13 @@ loc_547E:
                 move.w  (Next_demo_number).w,d1
                 addq.w  #1,d1
                 cmpi.w  #7,d1
-                blo.s   loc_54AE
+                blo.s   SKSoloTitle_StoreIndexAndInitSpecialDemo
                 moveq   #3,d1
 
-loc_54AE:
+SKSoloTitle_StoreIndexAndInitSpecialDemo:
                 move.w  d1,(Next_demo_number).w
                 tst.w   d0
-                bpl.s   loc_54E0
+                bpl.s   SKSoloTitle_PrepMushroomHillCheckpoint
                 move.b  #GameMode_SpecialStage,(Game_mode).w  ; Special stage
                 move.b  #1,(Current_special_stage).w
                 move.b  #1,(SK_special_stage_flag).w
@@ -310,18 +310,18 @@ loc_54AE:
                 clr.l   (Collected_emeralds_array).w
                 clr.w   (Collected_emeralds_array+4).w
                 clr.b   (Collected_emeralds_array+6).w
-                bra.s   loc_54F0
+                bra.s   SKSoloTitle_InitAttractStats
 ; ---------------------------------------------------------------------------
 
-loc_54E0:
+SKSoloTitle_PrepMushroomHillCheckpoint:
                 cmpi.w  #$700,d0
-                bne.s   loc_54EA
+                bne.s   SKSoloTitle_SelectRegularDemoMode
                 jsr     Prep_MHZDemo(pc)                ; If doing Mushroom Hill demo, do this routine
 
-loc_54EA:
+SKSoloTitle_SelectRegularDemoMode:
                 move.b  #GameMode_Demo,(Game_mode).w
 
-loc_54F0:
+SKSoloTitle_InitAttractStats:
                 move.w  #1,(Demo_mode_flag).w
                 move.b  #3,(Life_count).w
                 move.b  #3,(Life_count_P2).w
