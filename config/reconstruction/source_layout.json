@@ -15450,7 +15450,7 @@
       "responsibility": "Death Egg end-boss controller, player interaction and coordinated attack state progression.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 395,
+      "physical_lines": 397,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15480,7 +15480,7 @@
       "responsibility": "Death Egg end-boss child attacks, destruction effects, attached actors and battle callbacks.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 377,
+      "physical_lines": 378,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",
@@ -15510,7 +15510,7 @@
       "responsibility": "Death Egg end-boss movement, collision, palette, angle and parent-state helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 418,
+      "physical_lines": 419,
       "origin": {
         "commit": "0bf63c6483ed4a12120f35cb9d44e58ff431865d",
         "path": "sonic3k.s",

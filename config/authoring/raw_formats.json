@@ -173,15 +173,15 @@
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
-      "sha256": "ec40b3662e523595b7c6caf077d01387bd9b36cef5a4286a7c9a809e5b751fee"
+      "sha256": "e392a6b85b697d98fc13a8076190e3c5e27d43d7c4bd89af36b6cb03103e8987"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
-      "sha256": "2b200b0ad523009f24294f6228763b5e158aff1865c203eff1bbbaae9c519790"
+      "sha256": "839790a8156380ec4f050cf7d13a3aa1f5d0e00b856a5d2aae256871bc674c3f"
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
-      "sha256": "13ed70140345ddb286bbe95ce82939a86d3d3df247f325f472936e33e6a1d38a"
+      "sha256": "9399858cdcaaf6feac6b757bb384139963104b68163599045a39dbaababc611e"
     },
     {
       "path": "src/objects/bosses/dez/final_boss/sk/attack_actors.s",
@@ -1932,13 +1932,13 @@
     },
     {
       "path": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
-      "symbol": "byte_7FCD4",
-      "scope": "byte_7FCD4",
+      "symbol": "DEZEndBossAttack_FixedDelayOpenSequence",
+      "scope": "DEZEndBossAttack_FixedDelayOpenSequence",
       "first_line": 70,
       "last_line": 98,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 52,
-      "declarations_sha256": "3a0177d3da9d93556e1e119ae23ef82a4addfd68e6748f6381532908ea901b4e",
+      "declarations_sha256": "e9e0cc673a59d8915cb5ced67d3df4c664308a65530987809405c0df2fd977a5",
       "entries": [
         [0, "fixed"],
         [5, "fixed"],
@@ -1947,7 +1947,13 @@
         [27, "pairs"]
       ],
       "external_symbols": [],
-      "members": ["byte_7FCD4", "byte_7FCD9", "byte_7FCDE", "byte_7FCE2", "byte_7FCEF"],
+      "members": [
+        "DEZEndBossAttack_FixedDelayOpenSequence",
+        "DEZEndBossAttack_FixedDelayCloseSequence",
+        "DEZRollingCapsule_FixedDelayTwoFrameLoop",
+        "DEZBossExitRobotnik_FrameDelayLoop",
+        "DEZBoss_SleeveLoopAnim"
+      ],
       "stored_markers": []
     },
     {

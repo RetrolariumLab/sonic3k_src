@@ -88152,49 +88152,49 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 922
       },
-      "declarations_sha256": "dfa1dbfde2087c131c7fd7b26d2914dedb9b3e288314fa6aee3e13afdc02c47f",
+      "declarations_sha256": "9253de61c4b8870f37dfa06c99ba4ce42933f36678a8f0def65acdff059c211e",
       "labels": {
         "Map_DEZEndBoss_": 0,
-        "word_185BD2": 80,
-        "word_185C1C": 154,
-        "word_185C66": 228,
-        "word_185CB0": 302,
-        "word_185CE8": 358,
-        "word_185CF6": 372,
-        "word_185D04": 386,
-        "word_185D18": 406,
-        "word_185D2C": 426,
-        "word_185D40": 446,
-        "word_185D4E": 460,
-        "word_185D5C": 474,
-        "word_185D6A": 488,
-        "word_185D7E": 508,
-        "word_185D92": 528,
-        "word_185DA6": 548,
-        "word_185DB4": 562,
-        "word_185DC2": 576,
-        "word_185DEE": 620,
-        "word_185E14": 658,
-        "word_185E22": 672,
-        "word_185E30": 686,
-        "word_185E3E": 700,
-        "word_185E4C": 714,
-        "word_185E5A": 728,
-        "word_185E68": 742,
-        "word_185E76": 756,
-        "word_185E84": 770,
-        "word_185E92": 784,
-        "word_185EA0": 798,
-        "word_185EAE": 812,
-        "word_185EB0": 814,
-        "word_185EB8": 822,
-        "word_185EC0": 830,
-        "word_185EC8": 838,
-        "word_185ED6": 852,
-        "word_185EE4": 866,
-        "word_185EF2": 880,
-        "word_185F00": 894,
-        "word_185F0E": 908
+        "DEZEndBoss_MapFrame00": 80,
+        "DEZEndBoss_MapFrame01": 154,
+        "DEZEndBoss_MapFrame02": 228,
+        "DEZEndBoss_MapFrame03": 302,
+        "DEZEndBoss_MapFrame04": 358,
+        "DEZEndBoss_MapFrame05": 372,
+        "DEZEndBoss_MapFrame06": 386,
+        "DEZEndBoss_MapFrame07": 406,
+        "DEZEndBoss_MapFrame08": 426,
+        "DEZEndBoss_MapFrame09": 446,
+        "DEZEndBoss_MapFrame0A": 460,
+        "DEZEndBoss_MapFrame0B": 474,
+        "DEZEndBoss_MapFrame0C": 488,
+        "DEZEndBoss_MapFrame0D": 508,
+        "DEZEndBoss_MapFrame0E": 528,
+        "DEZEndBoss_MapFrame0F": 548,
+        "DEZEndBoss_MapFrame10": 562,
+        "DEZEndBoss_MapFrame11": 576,
+        "DEZEndBoss_MapFrame12": 620,
+        "DEZEndBoss_MapFrame13": 658,
+        "DEZEndBoss_MapFrame14": 672,
+        "DEZEndBoss_MapFrame15": 686,
+        "DEZEndBoss_MapFrame16": 700,
+        "DEZEndBoss_MapFrame17": 714,
+        "DEZEndBoss_MapFrame18": 728,
+        "DEZEndBoss_MapFrame19": 742,
+        "DEZEndBoss_MapFrame1A": 756,
+        "DEZEndBoss_MapFrame1B": 770,
+        "DEZEndBoss_MapFrame1C": 784,
+        "DEZEndBoss_MapFrame1D": 798,
+        "DEZEndBoss_MapFrame1E": 812,
+        "DEZEndBoss_MapFrame1F": 814,
+        "DEZEndBoss_MapFrame20": 822,
+        "DEZEndBoss_MapFrame21": 830,
+        "DEZEndBoss_MapFrame22": 838,
+        "DEZEndBoss_MapFrame23": 852,
+        "DEZEndBoss_MapFrame24": 866,
+        "DEZEndBoss_MapFrame25": 880,
+        "DEZEndBoss_MapFrame26": 894,
+        "DEZEndBoss_MapFrame27": 908
       },
       "external_symbols": [],
       "blocks": [
@@ -88202,280 +88202,280 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185BD2",
+          "target": "DEZEndBoss_MapFrame00",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185C1C",
+          "target": "DEZEndBoss_MapFrame01",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185C66",
+          "target": "DEZEndBoss_MapFrame02",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185CB0",
+          "target": "DEZEndBoss_MapFrame03",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185CE8",
+          "target": "DEZEndBoss_MapFrame04",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185CF6",
+          "target": "DEZEndBoss_MapFrame05",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D04",
+          "target": "DEZEndBoss_MapFrame06",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D18",
+          "target": "DEZEndBoss_MapFrame07",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D2C",
+          "target": "DEZEndBoss_MapFrame08",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D40",
+          "target": "DEZEndBoss_MapFrame09",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D4E",
+          "target": "DEZEndBoss_MapFrame0A",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D5C",
+          "target": "DEZEndBoss_MapFrame0B",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D6A",
+          "target": "DEZEndBoss_MapFrame0C",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D7E",
+          "target": "DEZEndBoss_MapFrame0D",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185D92",
+          "target": "DEZEndBoss_MapFrame0E",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185DA6",
+          "target": "DEZEndBoss_MapFrame0F",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185DB4",
+          "target": "DEZEndBoss_MapFrame10",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185DC2",
+          "target": "DEZEndBoss_MapFrame11",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185DEE",
+          "target": "DEZEndBoss_MapFrame12",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E14",
+          "target": "DEZEndBoss_MapFrame13",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E22",
+          "target": "DEZEndBoss_MapFrame14",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E30",
+          "target": "DEZEndBoss_MapFrame15",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E3E",
+          "target": "DEZEndBoss_MapFrame16",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E4C",
+          "target": "DEZEndBoss_MapFrame17",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E5A",
+          "target": "DEZEndBoss_MapFrame18",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E68",
+          "target": "DEZEndBoss_MapFrame19",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E76",
+          "target": "DEZEndBoss_MapFrame1A",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E84",
+          "target": "DEZEndBoss_MapFrame1B",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185E92",
+          "target": "DEZEndBoss_MapFrame1C",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EA0",
+          "target": "DEZEndBoss_MapFrame1D",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EAE",
+          "target": "DEZEndBoss_MapFrame1E",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EB0",
+          "target": "DEZEndBoss_MapFrame1F",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EB8",
+          "target": "DEZEndBoss_MapFrame20",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EC0",
+          "target": "DEZEndBoss_MapFrame21",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EC8",
+          "target": "DEZEndBoss_MapFrame22",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185ED6",
+          "target": "DEZEndBoss_MapFrame23",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EE4",
+          "target": "DEZEndBoss_MapFrame24",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185EF2",
+          "target": "DEZEndBoss_MapFrame25",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F00",
+          "target": "DEZEndBoss_MapFrame26",
           "base": "Map_DEZEndBoss_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_185F0E",
+          "target": "DEZEndBoss_MapFrame27",
           "base": "Map_DEZEndBoss_"
         },
         {

@@ -1245,9 +1245,15 @@
       "commits": ["410765b500879e56ea07318cf38affc6c38c424a"]
     },
     {
-      "id": "current-shorten-50-boss-dez-mini",
+      "id": "change-a474b9b412cf",
       "kind": "source_or_tooling",
       "summary": "Apply 197 reviewed short labels for boss dez mini.",
+      "commits": ["a474b9b412cf61267a948e0e86623becbf01f87b"]
+    },
+    {
+      "id": "current-shorten-51-boss-dez-end",
+      "kind": "source_or_tooling",
+      "summary": "Apply 141 reviewed short labels for boss dez end.",
       "commits": ["release-commit"]
     }
   ],

@@ -13,10 +13,10 @@ DEZCapsule_MoveWithGravity:
                 move.w  y_vel(a0),d0
                 moveq   #$38,d1
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_7F8BA
+                beq.s   DEZBoss_ApplyCapsuleGravity
                 neg.w   d1
 
-loc_7F8BA:
+DEZBoss_ApplyCapsuleGravity:
                 add.w   d1,d0
                 move.w  d0,y_vel(a0)
                 ext.l   d0
@@ -31,24 +31,24 @@ DEZCapsule_DropIfGravityReversed:
                 tst.b   $3A(a0)
                 sne     d0
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_7F8D8
+                beq.s   DEZBoss_DropCapsuleOnGravityChange
                 not.b   d0
 
-loc_7F8D8:
+DEZBoss_DropCapsuleOnGravityChange:
                 tst.b   d0
-                beq.s   locret_7F8FE
+                beq.s   DEZBoss_RestingGravityReturn
                 move.b  #4,routine(a0)
                 move.b  #$C6,collision_flags(a0)
                 clr.b   $39(a0)
                 move.w  x_vel(a0),d0
-                beq.s   loc_7F8FA
+                beq.s   DEZBoss_ClearDropYSpeed
                 move.w  d0,$3C(a0)
                 clr.w   x_vel(a0)
 
-loc_7F8FA:
+DEZBoss_ClearDropYSpeed:
                 clr.w   y_vel(a0)
 
-locret_7F8FE:
+DEZBoss_RestingGravityReturn:
                 rts
 ; End of function DEZCapsule_DropIfGravityReversed
 
@@ -57,19 +57,19 @@ locret_7F8FE:
 ; A grounded rolling player launches the capsule. An airborne rolling player bounces and destroys it
 DEZCapsule_CheckRestingContact:
                 jsr     Check_PlayerCollision(pc)
-                beq.w   locret_7F9A6
+                beq.w   DEZBoss_RestContactReturn
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_7F926
+                beq.s   DEZBoss_RestContactBreakOrLaunch
                 tst.b   invulnerability_timer(a1)
-                bne.w   locret_7F9A6
+                bne.w   DEZBoss_RestContactReturn
                 btst    #Status_InAir,status_secondary(a1)
-                bne.w   locret_7F9A6
+                bne.w   DEZBoss_RestContactReturn
                 jmp     HurtCharacter_Directly(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F926:
+DEZBoss_RestContactBreakOrLaunch:
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_7F95C
+                beq.s   DEZBoss_InitPlayerLaunchedCapsule
                 bset    #Status_Roll,status(a1)
                 move.b  #$E,y_radius(a1)
                 move.b  #7,x_radius(a1)
@@ -81,37 +81,38 @@ loc_7F926:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F95C:
+DEZBoss_InitPlayerLaunchedCapsule:
                 move.b  #6,routine(a0)
                 move.b  #$C6,collision_flags(a0)
                 move.w  #7,child_dx(a0)
                 move.b  #8,$39(a0)
                 move.w  #$200,d4
                 tst.w   x_vel(a1)
-                bpl.s   loc_7F980
+                bpl.s   DEZBoss_StoreLaunchXAndGetMagnitude
                 neg.w   d4
 
-loc_7F980:
+DEZBoss_StoreLaunchXAndGetMagnitude:
                 move.w  d4,x_vel(a0)
                 move.w  ground_vel(a1),d4
-                bpl.s   loc_7F98C
+                bpl.s   DEZBoss_ClampLaunchYMagnitude
                 neg.w   d4
 
-loc_7F98C:
+; Use an unsigned minimum of $500 before applying the vertical flip
+DEZBoss_ClampLaunchYMagnitude:
                 cmpi.w  #$500,d4
-                bhs.s   loc_7F996
+                bhs.s   DEZBoss_ApplyLaunchYFlip
                 move.w  #$500,d4
 
-loc_7F996:
+DEZBoss_ApplyLaunchYFlip:
                 btst    #1,render_flags(a0)
-                beq.s   loc_7F9A0
+                beq.s   DEZBoss_StoreLaunchYAndAbortTail
                 neg.w   d4
 
-loc_7F9A0:
+DEZBoss_StoreLaunchYAndAbortTail:
                 move.w  d4,y_vel(a0)
                 addq.w  #4,sp
 
-locret_7F9A6:
+DEZBoss_RestContactReturn:
                 rts
 ; End of function DEZCapsule_CheckRestingContact
 
@@ -119,36 +120,36 @@ locret_7F9A6:
 
 HandleRollingDEZCapsulePlayerContact:
                 jsr     Check_PlayerCollision(pc)
-                beq.w   locret_7F9F6
+                beq.w   DEZBoss_RollContactReturn
                 cmpi.b  #2,anim(a1)
-                bne.s   loc_7F9C0
+                bne.s   DEZBoss_RollContactHurtIfVulnerable
                 btst    #Status_InAir,status(a1)
-                beq.s   loc_7F9D6
+                beq.s   DEZBoss_CheckApproachingGroundRoll
 
-loc_7F9C0:
+DEZBoss_RollContactHurtIfVulnerable:
                 tst.b   invulnerability_timer(a1)
-                bne.w   locret_7F9F6
+                bne.w   DEZBoss_RollContactReturn
                 btst    #Status_InAir,status_secondary(a1)
-                bne.w   locret_7F9F6
+                bne.w   DEZBoss_RollContactReturn
                 jmp     HurtCharacter_Directly(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F9D6:
+DEZBoss_CheckApproachingGroundRoll:
                 move.w  x_pos(a0),d0
                 sub.w   x_pos(a1),d0
                 smi     d1
                 move.w  x_vel(a1),d2
-                bmi.s   loc_7F9E8
+                bmi.s   DEZBoss_ReflectPlayerXAndGroundSpeed
                 not.b   d1
 
-loc_7F9E8:
+DEZBoss_ReflectPlayerXAndGroundSpeed:
                 tst.b   d1
-                beq.s   locret_7F9F6
+                beq.s   DEZBoss_RollContactReturn
                 neg.w   d2
                 move.w  d2,x_vel(a1)
                 neg.w   ground_vel(a1)
 
-locret_7F9F6:
+DEZBoss_RollContactReturn:
                 rts
 ; End of function HandleRollingDEZCapsulePlayerContact
 
@@ -157,47 +158,47 @@ locret_7F9F6:
 ; Consume the initial contact reports without resolving them. A later attack can destroy the capsule if orientation matches
 DEZCapsule_CheckFallingContact:
                 jsr     Check_PlayerCollision(pc)
-                beq.s   locret_7FA5E
+                beq.s   DEZBoss_FallContactReturn
                 tst.b   $39(a0)
-                beq.s   loc_7FA0A
+                beq.s   DEZBoss_FallContactCheckAttack
                 subq.b  #1,$39(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7FA0A:
+DEZBoss_FallContactCheckAttack:
                 cmpi.b  #2,anim(a1)
-                beq.s   loc_7FA2C
+                beq.s   DEZBoss_FallContactCheckAttackSide
                 cmpi.b  #9,anim(a1)
-                beq.s   loc_7FA2C
+                beq.s   DEZBoss_FallContactCheckAttackSide
 
-loc_7FA1A:
+DEZBoss_FallContactHurtIfVulnerable:
                 tst.b   $34(a1)
-                bne.s   locret_7FA5E
+                bne.s   DEZBoss_FallContactReturn
                 btst    #Status_Invincible,status_secondary(a1)
-                bne.s   locret_7FA5E
+                bne.s   DEZBoss_FallContactReturn
                 jmp     HurtCharacter_Directly(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7FA2C:
+DEZBoss_FallContactCheckAttackSide:
                 jsr     (Find_OtherObject).l
                 cmpi.w  #$10,d2
-                bhs.s   loc_7FA1A
+                bhs.s   DEZBoss_FallContactHurtIfVulnerable
                 btst    #1,render_flags(a0)
                 sne     d2
                 tst.w   d1
-                bne.s   loc_7FA46
+                bne.s   DEZBoss_FallContactReflectAndBreak
                 not.b   d2
 
-loc_7FA46:
+DEZBoss_FallContactReflectAndBreak:
                 tst.b   d2
-                bne.s   loc_7FA1A
+                bne.s   DEZBoss_FallContactHurtIfVulnerable
                 neg.w   x_vel(a1)
                 neg.w   y_vel(a1)
                 neg.w   ground_vel(a1)
                 bsr.w   DEZCapsule_ExplodeThenDelete
                 adda.w  #8,sp
 
-locret_7FA5E:
+DEZBoss_FallContactReturn:
                 rts
 ; End of function DEZCapsule_CheckFallingContact
 
@@ -206,20 +207,20 @@ locret_7FA5E:
 ReverseDEZEndBossAtInclusiveWorldXBounds:
                 move.w  x_pos(a0),d0
                 tst.w   x_vel(a0)
-                bmi.s   loc_7FA72
+                bmi.s   DEZBoss_CheckLeftArenaLimit
                 cmpi.w  #$3598,d0
-                bhs.s   loc_7FA78
+                bhs.s   DEZBoss_ReverseXAtArenaLimit
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7FA72:
+DEZBoss_CheckLeftArenaLimit:
                 cmpi.w  #$3488,d0
-                bhi.s   locret_7FA7C
+                bhi.s   DEZBoss_ArenaLimitReturn
 
-loc_7FA78:
+DEZBoss_ReverseXAtArenaLimit:
                 neg.w   x_vel(a0)
 
-locret_7FA7C:
+DEZBoss_ArenaLimitReturn:
                 rts
 ; End of function ReverseDEZEndBossAtInclusiveWorldXBounds
 
@@ -227,7 +228,7 @@ locret_7FA7C:
 
 LaunchPlayerFromDEZBossBumperContact:
                 jsr     Check_PlayerCollision(pc)
-                beq.s   locret_7FACA
+                beq.s   DEZBoss_BumperContactReturn
                 move.b  $3C(a0),d0
                 move.b  (V_int_run_count+3).w,d1
                 andi.b  #3,d1
@@ -246,7 +247,7 @@ LaunchPlayerFromDEZBossBumperContact:
                 moveq   #signextendB(sfx_Bumper),d0
                 jsr     (Play_SFX).l
 
-locret_7FACA:
+DEZBoss_BumperContactReturn:
                 rts
 ; End of function LaunchPlayerFromDEZBossBumperContact
 
@@ -258,34 +259,34 @@ SelectDEZBossBumperFrameAndFlipFromAngle:
                 bclr    #7,d0
                 sne     d2
                 moveq   #4,d3
-                lea     byte_7FB0A(pc),a1
+                lea     DEZBoss_BumperAngleThresholds(pc),a1
                 btst    #6,d0
-                beq.s   loc_7FAE8
+                beq.s   DEZBoss_FindBumperAngleFrame
                 moveq   #$A,d3
                 addq.w  #8,a1
 
-loc_7FAE8:
+DEZBoss_FindBumperAngleFrame:
                 cmp.b   (a1)+,d0
-                blo.s   loc_7FAF0
+                blo.s   DEZBoss_StoreBumperFrameAndGetFlips
                 addq.w  #1,d3
-                bra.s   loc_7FAE8
+                bra.s   DEZBoss_FindBumperAngleFrame
 ; ---------------------------------------------------------------------------
 
-loc_7FAF0:
+DEZBoss_StoreBumperFrameAndGetFlips:
                 move.b  d3,mapping_frame(a0)
                 move.b  render_flags(a0),d0
                 andi.b  #$FC,d0
                 tst.b   d2
-                beq.s   loc_7FB04
+                beq.s   DEZBoss_StoreBumperRenderFlags
                 ori.b   #3,d0
 
-loc_7FB04:
+DEZBoss_StoreBumperRenderFlags:
                 move.b  d0,render_flags(a0)
                 rts
 ; End of function SelectDEZBossBumperFrameAndFlipFromAngle
 
 ; ---------------------------------------------------------------------------
-byte_7FB0A:
+DEZBoss_BumperAngleThresholds:
                 dc.b    5, $10, $1B, $26, $31, $3C, $40
                 even
                 dc.b    $45, $50, $5B, $66, $71, $7C, $80
@@ -302,17 +303,17 @@ DEZCapsuleDebris_InitFrameAndVel:
                 addi.b  #$1F,d0
                 move.b  d0,mapping_frame(a0)
                 add.w   d1,d1
-                move.l  word_7FB42(pc,d1.w),x_vel(a0)   ; and y_vel
+                move.l  DEZBoss_FragmentVelocityPairs(pc,d1.w),x_vel(a0)  ; and y_vel
                 btst    #1,render_flags(a0)
-                beq.s   locret_7FB40
+                beq.s   DEZBoss_FragmentSeedReturn
                 neg.w   y_vel(a0)
 
-locret_7FB40:
+DEZBoss_FragmentSeedReturn:
                 rts
 ; End of function DEZCapsuleDebris_InitFrameAndVel
 
 ; ---------------------------------------------------------------------------
-word_7FB42:
+DEZBoss_FragmentVelocityPairs:
                 dc.w    -$16A, -$16A
                 dc.w    0, -$200
                 dc.w    $16A, -$16A
@@ -323,96 +324,96 @@ word_7FB42:
 DEZCapsule_CheckBossHitAndShatter:
                 movea.w parent3(a0),a1
                 btst    #6,status(a1)
-                bne.s   locret_7FB88
-                lea     word_7FB8A(pc),a2
+                bne.s   DEZBoss_ReturnedHitCheckReturn
+                lea     DEZBoss_ReturnedCapsuleHitBounds(pc),a2
                 jsr     Check_InMyRange(pc)
-                beq.s   locret_7FB88
+                beq.s   DEZBoss_ReturnedHitCheckReturn
                 btst    #1,render_flags(a0)
                 sne     d0
                 tst.w   y_vel(a0)
-                bpl.s   loc_7FB74
+                bpl.s   DEZBoss_CheckReturnHitDirection
                 not.b   d0
 
-loc_7FB74:
+DEZBoss_CheckReturnHitDirection:
                 tst.b   d0
-                beq.s   loc_7FB82
+                beq.s   DEZBoss_ShatterCapsuleAndAbortDraw
                 st      $42(a1)
                 bset    #6,status(a1)
 
-loc_7FB82:
+DEZBoss_ShatterCapsuleAndAbortDraw:
                 bsr.w   DEZCapsule_ExplodeThenSpawnDebris
                 addq.w  #4,sp
 
-locret_7FB88:
+DEZBoss_ReturnedHitCheckReturn:
                 rts
 ; End of function DEZCapsule_CheckBossHitAndShatter
 
 ; ---------------------------------------------------------------------------
-word_7FB8A:
+DEZBoss_ReturnedCapsuleHitBounds:
                 dc.w    -$28,   $50,  -$28,   $50
 
 ; =============== S U B R O U T I N E =======================================
 
 ConsumeDEZEndBossReturnedCapsuleHitLatch:
                 tst.b   $42(a0)
-                beq.s   locret_7FBD4
+                beq.s   DEZBoss_HitUpdateReturn
                 tst.b   $20(a0)
-                bne.s   loc_7FBB2
+                bne.s   DEZBoss_HitChooseFlashRow
                 subq.b  #1,collision_property(a0)
-                beq.s   loc_7FBD6
+                beq.s   DEZBoss_BeginDefeatAndResetGravity
                 move.b  #$20,$20(a0)
                 moveq   #signextendB(sfx_BossHit),d0
                 jsr     (Play_SFX).l
 
-loc_7FBB2:
+DEZBoss_HitChooseFlashRow:
                 moveq   #0,d0
                 btst    #0,$20(a0)
-                bne.s   loc_7FBC0
+                bne.s   DEZBoss_HitCopyColorsAndTick
                 addi.w  #2*6,d0
 
-loc_7FBC0:
+DEZBoss_HitCopyColorsAndTick:
                 bsr.w   CopyDEZEndBossSixColorPalette
                 subq.b  #1,$20(a0)
-                bne.s   locret_7FBD4
+                bne.s   DEZBoss_HitUpdateReturn
                 bclr    #6,status(a0)
                 clr.b   $42(a0)
 
-locret_7FBD4:
+DEZBoss_HitUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7FBD6:
+DEZBoss_BeginDefeatAndResetGravity:
                 move.l  #Wait_NewDelay,(a0)
                 bset    #7,status(a0)
                 bset    #0,(_unkFAB8).w
-                move.l  #loc_7F210,$34(a0)
+                move.l  #DEZBoss_BeginDefeatFall,$34(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
                 jsr     (AllocateObject).l
-                bne.s   loc_7FC0A
-                move.l  #loc_7FC3E,(a1)
+                bne.s   DEZBoss_StopTimerAndAwardScore
+                move.l  #DEZBoss_HoldNormalGravity,(a1)
 
-loc_7FC0A:
+DEZBoss_StopTimerAndAwardScore:
                 jmp     BossDefeated_StopTimer(pc)
 ; End of function ConsumeDEZEndBossReturnedCapsuleHitLatch
 
 ; =============== S U B R O U T I N E =======================================
 
 CopyDEZEndBossSixColorPalette:
-                lea     word_7FC1A(pc),a1
-                lea     word_7FC26(pc,d0.w),a2
+                lea     DEZBoss_HitPaletteDestinations(pc),a1
+                lea     DEZBoss_HitPaletteColorRows(pc,d0.w),a2
                 jmp     CopyWordData_6(pc)
 ; End of function CopyDEZEndBossSixColorPalette
 
 ; ---------------------------------------------------------------------------
-word_7FC1A:
+DEZBoss_HitPaletteDestinations:
                 dc.w    Normal_palette_line_2+$06, Normal_palette_line_2+$08, Normal_palette_line_2+$16
                 dc.w    Normal_palette_line_2+$18, Normal_palette_line_2+$1A, Normal_palette_line_2+$1C
-word_7FC26:
+DEZBoss_HitPaletteColorRows:
                 dc.w    $2A,     6,  $A48,  $644,  $422,     0
                 dc.w    $888,  $AAA,  $888,  $AAA,  $CCC,  $EEE
 ; ---------------------------------------------------------------------------
 
-loc_7FC3E:
+DEZBoss_HoldNormalGravity:
                 clr.b   (Reverse_gravity_flag).w
                 rts

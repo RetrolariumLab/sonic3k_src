@@ -1,0 +1,2095 @@
+{
+  "schema_version": 1,
+  "packet": "51-boss-dez-end",
+  "mappings": [
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 25,
+      "old": "word_7F0BE",
+      "new": "DEZEndBoss_ActivationCameraRectangle",
+      "profiles": ["sk"],
+      "meaning": "Camera activation bounds in the exact shared camera-check format."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 27,
+      "old": "word_7F0C6",
+      "new": "DEZEndBoss_TargetCameraBounds",
+      "profiles": ["sk"],
+      "meaning": "Final camera-bound WORDs for the shared boss transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 31,
+      "old": "loc_7F0CE",
+      "new": "DEZBoss_TickCameraMusicTransition",
+      "profiles": ["sk"],
+      "meaning": "Run the shared staged camera locking and delayed boss-music transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 35,
+      "old": "loc_7F0D2",
+      "new": "DEZBoss_InstallBattleDispatcher",
+      "profiles": ["sk"],
+      "meaning": "Install the active battle dispatcher after shared camera setup completes."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 38,
+      "old": "locret_7F0D8",
+      "new": "DEZBoss_SharedReturn",
+      "profiles": ["sk"],
+      "meaning": "Shared RTS used by battle setup and several cross-file child tails."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 42,
+      "old": "loc_7F0DA",
+      "new": "DEZBoss_BattleDispatchAndCheckHit",
+      "profiles": ["sk"],
+      "meaning": "Run battle state, consume a returned-capsule hit latch, periodically sound and collision-draw."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 54,
+      "old": "loc_7F0FE",
+      "new": "DEZBoss_BattleTouchDraw",
+      "profiles": ["sk"],
+      "meaning": "Shared draw/touch tail after active state and hit handling."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 57,
+      "old": "off_7F102",
+      "new": "DEZEndBoss_BattleStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Six relative WORD entries with shared movement states for release and closure phases."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 66,
+      "old": "loc_7F10E",
+      "new": "DEZBoss_InitBossAndPlayerBumpers",
+      "profiles": ["sk"],
+      "meaning": "Initialize the eight-hit boss and one or two independently allocated player-targeted bumpers."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 82,
+      "old": "locret_7F14E",
+      "new": "DEZBoss_BumperSpawnReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from initialized descent after optional bumper creation."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 86,
+      "old": "loc_7F150",
+      "new": "DEZEndBoss_DescendAndWaitForSwingSetup",
+      "profiles": ["sk"],
+      "meaning": "Integrate boss descent before the signed wait callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 91,
+      "old": "loc_7F15A",
+      "new": "DEZEndBoss_StartSwingAndHorizontalPatrol",
+      "profiles": ["sk"],
+      "meaning": "Set up vertical swing and one-pixel-per-update horizontal patrol velocity."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 95,
+      "old": "loc_7F166",
+      "new": "DEZEndBoss_BeginPreReleasePatrolWait",
+      "profiles": ["sk"],
+      "meaning": "Select patrol wait and clear the coordinated release/opening flags."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 103,
+      "old": "loc_7F182",
+      "new": "DEZEndBoss_SwingPatrolReverseAndWait",
+      "profiles": ["sk"],
+      "meaning": "Run patrol movement and wait for the next coordinated capsule callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 110,
+      "old": "loc_7F194",
+      "new": "DEZBoss_TryOpenCapsule",
+      "profiles": ["sk"],
+      "meaning": "Start another coordinated capsule opening only while the active-count BYTE is below three."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 123,
+      "old": "loc_7F1C4",
+      "new": "DEZBoss_RetryCapsuleAfterWait",
+      "profiles": ["sk"],
+      "meaning": "Reload a short wait when three capsules are already counted active."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 128,
+      "old": "loc_7F1CC",
+      "new": "DEZEndBoss_SwingPatrolReverseAndAnimate",
+      "profiles": ["sk"],
+      "meaning": "Patrol while the fixed-delay opening or closing raw script selects its callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 135,
+      "old": "loc_7F1DE",
+      "new": "DEZEndBoss_SetCapsuleReleaseFlagAndHold",
+      "profiles": ["sk"],
+      "meaning": "Set the parent release signal after the opening animation completes."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 143,
+      "old": "loc_7F1FA",
+      "new": "DEZBoss_CloseCapsuleAndResumePatrol",
+      "profiles": ["sk"],
+      "meaning": "Select closure raw animation and install the reusable patrol-wait callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 150,
+      "old": "loc_7F210",
+      "new": "DEZBoss_BeginDefeatFall",
+      "profiles": ["sk"],
+      "meaning": "Leave the scored defeat wait and prepare a gravity-driven fall."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 157,
+      "old": "loc_7F220",
+      "new": "DEZBoss_FallToAftermathHeight",
+      "profiles": ["sk"],
+      "meaning": "Apply light gravity until the defeated boss reaches the scene-effect threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 164,
+      "old": "loc_7F234",
+      "new": "DEZBoss_SpawnDefeatFxAndFadeMusic",
+      "profiles": ["sk"],
+      "meaning": "Install the scene handshake wait and attempt three independent effect groups."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 178,
+      "old": "loc_7F266",
+      "new": "DEZBoss_WaitRightEmitterAndRelease",
+      "profiles": ["sk"],
+      "meaning": "Wait for the right explosion emitter to reach its boundary before releasing scene actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 189,
+      "old": "locret_7F298",
+      "new": "DEZBoss_EmitterGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return during the emitter handshake or after scene-release setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 193,
+      "old": "loc_7F29A",
+      "new": "DEZBoss_TickAftermathReleaseWait",
+      "profiles": ["sk"],
+      "meaning": "Use exact countdown values to signal the foreground and unlock the route."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 204,
+      "old": "loc_7F2B4",
+      "new": "DEZBoss_RestoreMusicAndOpenCamera",
+      "profiles": ["sk"],
+      "meaning": "Clear boss mode, restore DEZ2 music and attempt gradual route expansion."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 214,
+      "old": "locret_7F2DA",
+      "new": "DEZBoss_AftermathCameraReturn",
+      "profiles": ["sk"],
+      "meaning": "Return between exact countdown events or after maximum-X actor allocation."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 218,
+      "old": "loc_7F2DC",
+      "new": "DEZBoss_AdvanceCameraAndLockExit",
+      "profiles": ["sk"],
+      "meaning": "Track the camera minimum until the exit threshold, then extend the maximum once."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 226,
+      "old": "locret_7F2FC",
+      "new": "DEZBoss_ExitCameraGateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return before or immediately after selecting the player-exit gate."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 230,
+      "old": "loc_7F2FE",
+      "new": "DEZBoss_WaitForPlayerAtExit",
+      "profiles": ["sk"],
+      "meaning": "Wait until Player1 reaches 0x160 pixels ahead of camera X."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 238,
+      "old": "loc_7F310",
+      "new": "DEZBoss_SaveActThreeStateAndStart",
+      "profiles": ["sk"],
+      "meaning": "Save act-three carryover fields and start encoded level 0x1700."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 248,
+      "old": "loc_7F336",
+      "new": "DEZBoss_InitBumperAndTarget",
+      "profiles": ["sk"],
+      "meaning": "Initialize a player-targeted bumper with inherited boss mappings and art."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 253,
+      "old": "loc_7F344",
+      "new": "DEZBossBumper_SelectPlayerBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Choose Player1 for subtype zero or Player2 for any nonzero subtype."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 259,
+      "old": "loc_7F352",
+      "new": "DEZBoss_BumperAimOutsideOpening",
+      "profiles": ["sk"],
+      "meaning": "Compute bumper bearing and move near-zero bearings to an opening-sector boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 275,
+      "old": "loc_7F37C",
+      "new": "DEZBoss_BumperPlaceLaunchAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Store the bearing, position from the parent lookup curve and apply bumper contact."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 285,
+      "old": "loc_7F398",
+      "new": "DEZBoss_InitAttachedCapsule",
+      "profiles": ["sk"],
+      "meaning": "Initialize the normal capsule child before parent release."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 293,
+      "old": "loc_7F3B0",
+      "new": "DEZBoss_CapsuleFollowUntilRelease",
+      "profiles": ["sk"],
+      "meaning": "Keep the capsule attached until parent +0x38 bit 2 requests release."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 301,
+      "old": "loc_7F3C4",
+      "new": "DEZBoss_CapsuleBeginExtension",
+      "profiles": ["sk"],
+      "meaning": "Install the capsule extension phase with a countdown consumed immediately."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 305,
+      "old": "loc_7F3D0",
+      "new": "DEZBoss_CapsuleTickExtension",
+      "profiles": ["sk"],
+      "meaning": "Advance capsule release extension until the signed timer underflows."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 312,
+      "old": "loc_7F3E2",
+      "new": "DEZBoss_CapsuleDrawDuringExtension",
+      "profiles": ["sk"],
+      "meaning": "Follow and draw the capsule after the alternating extension step."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 317,
+      "old": "loc_7F3EA",
+      "new": "DEZBoss_BeginTetheredGravity",
+      "profiles": ["sk"],
+      "meaning": "Start a short parent-X-following gravity interval after extension."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 321,
+      "old": "loc_7F3F6",
+      "new": "DEZBoss_TickTetheredGravity",
+      "profiles": ["sk"],
+      "meaning": "Keep parent X alignment during the short release interval and play bounce at its end."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 328,
+      "old": "loc_7F40A",
+      "new": "DEZBoss_CopyParentXBeforeRelease",
+      "profiles": ["sk"],
+      "meaning": "Align capsule integer X with the parent before the current gravity step."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 332,
+      "old": "loc_7F414",
+      "new": "DEZBoss_MoveWithGravityAndLand",
+      "profiles": ["sk"],
+      "meaning": "Move the newly released capsule and select ceiling or floor distance by current vertical speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 343,
+      "old": "loc_7F430",
+      "new": "DEZBoss_CapsuleCheckInitialLanding",
+      "profiles": ["sk"],
+      "meaning": "Correct a downward/nonnegative-velocity capsule only on negative floor penetration."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 349,
+      "old": "loc_7F43E",
+      "new": "DEZBoss_CapsuleCheckDeleteAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Check the initial-flight capsule own status and optionally flicker-draw it."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 375,
+      "old": "loc_7F486",
+      "new": "DEZBoss_InitRestingCapsule",
+      "profiles": ["sk"],
+      "meaning": "Install the landed capsule state dispatcher with a ten-second lifetime and random horizontal drift."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "original_line": 384,
+      "old": "loc_7F4A2",
+      "new": "DEZBoss_StoreLandingDriftAndStopY",
+      "profiles": ["sk"],
+      "meaning": "Store randomly selected initial capsule drift and end vertical landing motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 10,
+      "old": "loc_7F4C0",
+      "new": "DEZBoss_CapsuleTryBreakupExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt one explosion before installing a callback-selected capsule destruction wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 16,
+      "old": "loc_7F4D4",
+      "new": "DEZBoss_CapsuleDecCountAndWait",
+      "profiles": ["sk"],
+      "meaning": "Count this capsule as removed and wait eight updates before the chosen destruction callback."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 26,
+      "old": "loc_7F4EE",
+      "new": "DEZBoss_CapsuleSpawnDebrisAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Attempt three normal debris children after the explosion wait and schedule capsule deletion."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 32,
+      "old": "loc_7F4FA",
+      "new": "DEZBoss_CapsuleDispatchAndCheckHit",
+      "profiles": ["sk"],
+      "meaning": "Run the five-state capsule graph, then parent death, boss-range damage and collision drawing."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 43,
+      "old": "off_7F51E",
+      "new": "DEZBossCapsule_LandedStateOffsets",
+      "profiles": ["sk"],
+      "meaning": "Five relative WORD state offsets for resting, rolling, dropping, launched and expiry phases."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 51,
+      "old": "loc_7F528",
+      "new": "DEZBoss_CapsuleCheckRestAndGravity",
+      "profiles": ["sk"],
+      "meaning": "Process a resting capsule player contact, possible gravity-side drop and lifetime countdown."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 59,
+      "old": "loc_7F538",
+      "new": "DEZBoss_CapsuleRollAndCheckLifetime",
+      "profiles": ["sk"],
+      "meaning": "Move a rolling capsule and maintain its contact, bounds and lifetime behavior."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 69,
+      "old": "loc_7F55A",
+      "new": "DEZBoss_CapsuleBeginExpiryWait",
+      "profiles": ["sk"],
+      "meaning": "Start the capsule expiry wait after its shared lifetime underflows."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 75,
+      "old": "loc_7F568",
+      "new": "DEZBoss_CapsuleMoveDroppedState",
+      "profiles": ["sk"],
+      "meaning": "Integrate reversible-gravity motion for the dropped capsule state."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 78,
+      "old": "loc_7F56E",
+      "new": "DEZBoss_CapsuleCheckCeilingLanding",
+      "profiles": ["sk"],
+      "meaning": "Apply falling-contact suppression/attack handling and process upward ceiling penetration."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 90,
+      "old": "loc_7F592",
+      "new": "DEZBoss_CapsuleEnterRestingState",
+      "profiles": ["sk"],
+      "meaning": "Select the resting capsule state after a landing/orientation combination."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 96,
+      "old": "loc_7F5A0",
+      "new": "DEZBoss_CapsuleCheckFloorAndRoll",
+      "profiles": ["sk"],
+      "meaning": "Correct downward floor penetration and choose the orientation-dependent landed state."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 105,
+      "old": "loc_7F5BA",
+      "new": "DEZBoss_CapsuleRestoreRollSpeed",
+      "profiles": ["sk"],
+      "meaning": "Resume rolling after a landing aligned to the capsule orientation."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 111,
+      "old": "locret_7F5D0",
+      "new": "DEZBoss_CapsuleLandingCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after absent penetration or completed rolling landing."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 115,
+      "old": "loc_7F5D2",
+      "new": "DEZBoss_CapsuleTickLaunchFlip",
+      "profiles": ["sk"],
+      "meaning": "Advance the launched capsule WORD orientation countdown without reloading it."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 120,
+      "old": "loc_7F5DE",
+      "new": "DEZBoss_CapsuleMoveAndChooseDrift",
+      "profiles": ["sk"],
+      "meaning": "Integrate launched motion and prepare its eventual +/-0x80 rolling speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 128,
+      "old": "loc_7F5F4",
+      "new": "DEZBoss_CapsuleStoreLaunchDrift",
+      "profiles": ["sk"],
+      "meaning": "Save the launch-derived horizontal landing speed before contact/landing handling."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 133,
+      "old": "loc_7F5FC",
+      "new": "DEZBoss_CapsuleExpireAndAbortTail",
+      "profiles": ["sk"],
+      "meaning": "Destroy an expired capsule and skip the remaining landed dispatcher wrapper."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 139,
+      "old": "locret_7F608",
+      "new": "DEZBoss_CapsuleExpiryReturn",
+      "profiles": ["sk"],
+      "meaning": "Return with the original or deliberately shortened stack after the expiry gate."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 143,
+      "old": "loc_7F60A",
+      "new": "DEZBoss_InitFragmentAndReparent",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of three normal capsule fragments and replace its immediate capsule parent with the boss."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 155,
+      "old": "loc_7F62E",
+      "new": "DEZBoss_FragmentMoveAndCull",
+      "profiles": ["sk"],
+      "meaning": "Move a fragment and draw/register contact only while its reassigned boss parent survives."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 163,
+      "old": "loc_7F644",
+      "new": "DEZBoss_DeleteCapsuleFragment",
+      "profiles": ["sk"],
+      "meaning": "Immediately delete the fragment after its boss parent status bit7 is observed."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 167,
+      "old": "loc_7F64A",
+      "new": "DEZBoss_InitSleeveAndOverlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize the animated sleeve attachment and attempt its position-copying overlay."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 177,
+      "old": "loc_7F66C",
+      "new": "DEZBoss_SleeveFollowAndTouch",
+      "profiles": ["sk"],
+      "meaning": "Animate the sleeve at its attached offset until the root release signal."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 186,
+      "old": "loc_7F684",
+      "new": "DEZCapsuleSleeve_StartExtensionCountdown",
+      "profiles": ["sk"],
+      "meaning": "Select the sleeve extension phase and consume its first timer decrement immediately."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 190,
+      "old": "loc_7F690",
+      "new": "DEZBoss_SleeveTickExtension",
+      "profiles": ["sk"],
+      "meaning": "Extend the sleeve offset on every other nonnegative countdown update."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 197,
+      "old": "loc_7F6A2",
+      "new": "DEZBoss_SleeveDrawDuringExtension",
+      "profiles": ["sk"],
+      "meaning": "Update sleeve position and animation after the optional extension step."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 203,
+      "old": "loc_7F6AE",
+      "new": "DEZBoss_SleeveHoldBeforeRetract",
+      "profiles": ["sk"],
+      "meaning": "Install a short sleeve hold timer after extension."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 207,
+      "old": "loc_7F6BA",
+      "new": "DEZBoss_SleeveTickHold",
+      "profiles": ["sk"],
+      "meaning": "Hold the extended sleeve for the signed timer interval."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 215,
+      "old": "loc_7F6CC",
+      "new": "DEZBoss_SleeveBeginRetraction",
+      "profiles": ["sk"],
+      "meaning": "Install sleeve retraction and enter it on the same call."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 218,
+      "old": "loc_7F6D2",
+      "new": "DEZBoss_SleeveTickRetraction",
+      "profiles": ["sk"],
+      "meaning": "Reduce sleeve BYTE offset every other call while checking the opening-state handshake."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 223,
+      "old": "loc_7F6DE",
+      "new": "DEZBoss_SleeveAnimateAndCheckOpen",
+      "profiles": ["sk"],
+      "meaning": "Follow/animate the retracting sleeve, then touch-draw only while root opening flag remains set."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 232,
+      "old": "loc_7F6F6",
+      "new": "DEZBoss_DeleteSleeveAfterClose",
+      "profiles": ["sk"],
+      "meaning": "Schedule sleeve deletion when the root opening-state flag clears."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 236,
+      "old": "loc_7F6FA",
+      "new": "DEZBoss_InitSleeveOverlay",
+      "profiles": ["sk"],
+      "meaning": "Initialize the sleeve overlay while retaining inherited resources and parent."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 241,
+      "old": "loc_7F708",
+      "new": "DEZBoss_SleeveOverlayFollowDraw",
+      "profiles": ["sk"],
+      "meaning": "Copy the sleeve integer position exactly and honor its lifetime."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 248,
+      "old": "loc_7F71C",
+      "new": "DEZBoss_InitEscapingRobotnik",
+      "profiles": ["sk"],
+      "meaning": "Initialize the Robotnik scene actor using the shared FBZ reaction updater."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 259,
+      "old": "loc_7F74C",
+      "new": "DEZBoss_RobotnikKeepAheadOfPlayer",
+      "profiles": ["sk"],
+      "meaning": "Adjust the escaping Robotnik X only when Player1 is close behind."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 270,
+      "old": "loc_7F76A",
+      "new": "DEZBoss_RobotnikRunAndCull",
+      "profiles": ["sk"],
+      "meaning": "Run the shared Robotnik running animation and existing escape velocity."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 277,
+      "old": "loc_7F782",
+      "new": "DEZBoss_InitAftermathPiece",
+      "profiles": ["sk"],
+      "meaning": "Initialize the scene piece that changes when the defeated boss releases scene actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 284,
+      "old": "loc_7F79C",
+      "new": "DEZBoss_AftermathPieceReleaseFx",
+      "profiles": ["sk"],
+      "meaning": "Change the scene piece once parent aftermath bit4 is set."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 295,
+      "old": "loc_7F7C8",
+      "new": "DEZBoss_AftermathPieceDraw",
+      "profiles": ["sk"],
+      "meaning": "Draw the scene piece after waiting or changing its release frame."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 299,
+      "old": "loc_7F7CE",
+      "new": "DEZBoss_InitDefeatFragment",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of six subtype-indexed defeat debris pieces."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 312,
+      "old": "loc_7F7F6",
+      "new": "DEZBoss_InitExplosionSweep",
+      "profiles": ["sk"],
+      "meaning": "Initialize one of two independent defeat explosion emitters with integer-step motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 323,
+      "old": "loc_7F816",
+      "new": "DEZBoss_ExplosionSweepSetStep",
+      "profiles": ["sk"],
+      "meaning": "Store the prepared signed integer X step and staggered explosion interval."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 327,
+      "old": "loc_7F81E",
+      "new": "DEZBoss_TryHorizontalSweepExplosion",
+      "profiles": ["sk"],
+      "meaning": "Attempt periodic random-offset explosions before each horizontal integer step."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 333,
+      "old": "loc_7F830",
+      "new": "DEZBoss_SweepMoveAndCheckRight",
+      "profiles": ["sk"],
+      "meaning": "Advance integer X using the stored signed step and select the horizontal boundary."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 346,
+      "old": "loc_7F84C",
+      "new": "DEZBoss_SweepCheckLeft",
+      "profiles": ["sk"],
+      "meaning": "End the left-moving emitter horizontal sweep at or below X0x3450."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 351,
+      "old": "loc_7F854",
+      "new": "DEZBoss_SweepBeginRiseAndSignal",
+      "profiles": ["sk"],
+      "meaning": "Clamp horizontal endpoint, switch to upward motion and signal only the subtype-zero emitter."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 359,
+      "old": "locret_7F870",
+      "new": "DEZBoss_SweepBoundaryReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the left boundary test or completed upward-transition setup."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 363,
+      "old": "loc_7F872",
+      "new": "DEZBoss_TryVerticalSweepExplosion",
+      "profiles": ["sk"],
+      "meaning": "Continue periodic explosion attempts during upward integer-step motion."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "original_line": 369,
+      "old": "loc_7F884",
+      "new": "DEZBoss_SweepRiseAndDelete",
+      "profiles": ["sk"],
+      "meaning": "Move the emitter two integer Y pixels upward and delete below unsigned Y0x240."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 18,
+      "old": "loc_7F8BA",
+      "new": "DEZBoss_ApplyCapsuleGravity",
+      "profiles": ["sk"],
+      "meaning": "Integrate capsule Y using the velocity after reversible gravity acceleration."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 36,
+      "old": "loc_7F8D8",
+      "new": "DEZBoss_DropCapsuleOnGravityChange",
+      "profiles": ["sk"],
+      "meaning": "Enter falling routine when resting side mismatches active gravity."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 47,
+      "old": "loc_7F8FA",
+      "new": "DEZBoss_ClearDropYSpeed",
+      "profiles": ["sk"],
+      "meaning": "Clear capsule vertical speed when gravity starts a new fall."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 50,
+      "old": "locret_7F8FE",
+      "new": "DEZBoss_RestingGravityReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from capsule gravity/resting-side transition."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 68,
+      "old": "loc_7F926",
+      "new": "DEZBoss_RestContactBreakOrLaunch",
+      "profiles": ["sk"],
+      "meaning": "Handle consumed player contact while the player animation equals2."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 82,
+      "old": "loc_7F95C",
+      "new": "DEZBoss_InitPlayerLaunchedCapsule",
+      "profiles": ["sk"],
+      "meaning": "Launch a capsule after grounded rolling-animation player contact."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 92,
+      "old": "loc_7F980",
+      "new": "DEZBoss_StoreLaunchXAndGetMagnitude",
+      "profiles": ["sk"],
+      "meaning": "Store launch direction and derive vertical launch magnitude from player ground speed."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 98,
+      "old": "loc_7F98C",
+      "new": "DEZBoss_ClampLaunchYMagnitude",
+      "profiles": ["sk"],
+      "meaning": "Use at least500 hex of vertical launch magnitude."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 103,
+      "old": "loc_7F996",
+      "new": "DEZBoss_ApplyLaunchYFlip",
+      "profiles": ["sk"],
+      "meaning": "Choose vertical launch direction from the capsule render flip-Y bit."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 108,
+      "old": "loc_7F9A0",
+      "new": "DEZBoss_StoreLaunchYAndAbortTail",
+      "profiles": ["sk"],
+      "meaning": "Store vertical launch velocity and exit the current resting state early."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 112,
+      "old": "locret_7F9A6",
+      "new": "DEZBoss_RestContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after a resting capsule contact gate or launch-specific stack adjustment."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 126,
+      "old": "loc_7F9C0",
+      "new": "DEZBoss_RollContactHurtIfVulnerable",
+      "profiles": ["sk"],
+      "meaning": "Apply ordinary hurt policy to non-grounded-rolling player contact."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 134,
+      "old": "loc_7F9D6",
+      "new": "DEZBoss_CheckApproachingGroundRoll",
+      "profiles": ["sk"],
+      "meaning": "Determine whether grounded rolling player velocity points toward the capsule."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 142,
+      "old": "loc_7F9E8",
+      "new": "DEZBoss_ReflectPlayerXAndGroundSpeed",
+      "profiles": ["sk"],
+      "meaning": "Reverse selected player horizontal and ground speeds only for an approaching side."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 149,
+      "old": "locret_7F9F6",
+      "new": "DEZBoss_RollContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from rolling capsule player-contact policy."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 164,
+      "old": "loc_7FA0A",
+      "new": "DEZBoss_FallContactCheckAttack",
+      "profiles": ["sk"],
+      "meaning": "Select attack geometry only for player animation2 or9."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 170,
+      "old": "loc_7FA1A",
+      "new": "DEZBoss_FallContactHurtIfVulnerable",
+      "profiles": ["sk"],
+      "meaning": "Hurt a contacting player unless its original two protection fields are set."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 178,
+      "old": "loc_7FA2C",
+      "new": "DEZBoss_FallContactCheckAttackSide",
+      "profiles": ["sk"],
+      "meaning": "Check animation2/9 contact alignment against capsule orientation."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 188,
+      "old": "loc_7FA46",
+      "new": "DEZBoss_FallContactReflectAndBreak",
+      "profiles": ["sk"],
+      "meaning": "Reverse all selected player speeds and destroy the capsule on the accepted side."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 197,
+      "old": "locret_7FA5E",
+      "new": "DEZBoss_FallContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from falling-contact policy or its accepted-attack stack continuation."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 212,
+      "old": "loc_7FA72",
+      "new": "DEZBoss_CheckLeftArenaLimit",
+      "profiles": ["sk"],
+      "meaning": "Reverse a negative-X-moving actor at or left of3488 hex."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 216,
+      "old": "loc_7FA78",
+      "new": "DEZBoss_ReverseXAtArenaLimit",
+      "profiles": ["sk"],
+      "meaning": "Reverse horizontal velocity after the direction-specific inclusive bound test."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 219,
+      "old": "locret_7FA7C",
+      "new": "DEZBoss_ArenaLimitReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after horizontal boundary policy."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 246,
+      "old": "locret_7FACA",
+      "new": "DEZBoss_BumperContactReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from bumper launch policy after optional consumed-player response."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 264,
+      "old": "loc_7FAE8",
+      "new": "DEZBoss_FindBumperAngleFrame",
+      "profiles": ["sk"],
+      "meaning": "Advance bumper frame while the reduced angle reaches each threshold."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 271,
+      "old": "loc_7FAF0",
+      "new": "DEZBoss_StoreBumperFrameAndGetFlips",
+      "profiles": ["sk"],
+      "meaning": "Store the scanned bumper frame and choose render XY flip from original angle bit7."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 279,
+      "old": "loc_7FB04",
+      "new": "DEZBoss_StoreBumperRenderFlags",
+      "profiles": ["sk"],
+      "meaning": "Commit render flags after frame/flip selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 285,
+      "old": "byte_7FB0A",
+      "new": "DEZBoss_BumperAngleThresholds",
+      "profiles": ["sk"],
+      "meaning": "Two padded seven-threshold lists for heading-based bumper mapping frame selection."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 306,
+      "old": "locret_7FB40",
+      "new": "DEZBoss_FragmentSeedReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after selecting a capsule fragment frame and initial velocity."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 311,
+      "old": "word_7FB42",
+      "new": "DEZBoss_FragmentVelocityPairs",
+      "profiles": ["sk"],
+      "meaning": "Three WORD x/y velocity pairs for the capsule fragments."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 331,
+      "old": "loc_7FB74",
+      "new": "DEZBoss_CheckReturnHitDirection",
+      "profiles": ["sk"],
+      "meaning": "Set boss returned-capsule hit latch only when flip and velocity signs agree."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 337,
+      "old": "loc_7FB82",
+      "new": "DEZBoss_ShatterCapsuleAndAbortDraw",
+      "profiles": ["sk"],
+      "meaning": "Destroy every in-range capsule even if its vertical direction did not latch boss damage."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 341,
+      "old": "locret_7FB88",
+      "new": "DEZBoss_ReturnedHitCheckReturn",
+      "profiles": ["sk"],
+      "meaning": "Return from parent hit-range policy or the consumed wrapper return."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 346,
+      "old": "word_7FB8A",
+      "new": "DEZBoss_ReturnedCapsuleHitBounds",
+      "profiles": ["sk"],
+      "meaning": "Signed capsule-local square used to test the boss parent point."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 362,
+      "old": "loc_7FBB2",
+      "new": "DEZBoss_HitChooseFlashRow",
+      "profiles": ["sk"],
+      "meaning": "Choose normal or alternate six-color row during a latched hit."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 368,
+      "old": "loc_7FBC0",
+      "new": "DEZBoss_HitCopyColorsAndTick",
+      "profiles": ["sk"],
+      "meaning": "Advance latched flash and clear damage suppression at zero."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 375,
+      "old": "locret_7FBD4",
+      "new": "DEZBoss_HitUpdateReturn",
+      "profiles": ["sk"],
+      "meaning": "Return after the boss latch gate or flash update."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 379,
+      "old": "loc_7FBD6",
+      "new": "DEZBoss_BeginDefeatAndResetGravity",
+      "profiles": ["sk"],
+      "meaning": "Begin defeat on health reaching zero and independently attempt two effect actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 390,
+      "old": "loc_7FC0A",
+      "new": "DEZBoss_StopTimerAndAwardScore",
+      "profiles": ["sk"],
+      "meaning": "Apply common defeat timer/score after either gravity-reset allocation result."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 403,
+      "old": "word_7FC1A",
+      "new": "DEZBoss_HitPaletteDestinations",
+      "profiles": ["sk"],
+      "meaning": "Six scatter destination RAM addresses for returned-capsule hit flash."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 406,
+      "old": "word_7FC26",
+      "new": "DEZBoss_HitPaletteColorRows",
+      "profiles": ["sk"],
+      "meaning": "Two disjoint six-WORD boss hit-flash color rows."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "original_line": 411,
+      "old": "loc_7FC3E",
+      "new": "DEZBoss_HoldNormalGravity",
+      "profiles": ["sk"],
+      "meaning": "Persistent optional defeat effect that clears reverse gravity on every call."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 10,
+      "old": "word_7FC50",
+      "new": "DEZBossBumper_PartialAttributeRecord",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor for each player-targeting boss bumper."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 13,
+      "old": "word_7FC56",
+      "new": "DEZBoss_SleeveAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor for the animated parent-linked contact assembly."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 16,
+      "old": "word_7FC5C",
+      "new": "DEZBoss_SleeveOverlayAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor for the assembly origin-copy overlay."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 19,
+      "old": "word_7FC62",
+      "new": "DEZBossCapsule_PartialAttributeRecord",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor for the released/resting/rolling capsule."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 22,
+      "old": "word_7FC68",
+      "new": "DEZBoss_CapsuleFragmentAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor shared by the three moving capsule fragments."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 25,
+      "old": "word_7FC6E",
+      "new": "DEZBoss_DefeatFragmentAttributes",
+      "profiles": ["sk"],
+      "meaning": "Six-byte descriptor for six indexed defeat fragments."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 28,
+      "old": "ObjDat3_7FC74",
+      "new": "DEZBossExitRobotnik_FullAttributeRecord",
+      "profiles": ["sk"],
+      "meaning": "Twelve-byte mappings/art/priority/bounds descriptor for the exit Robotnik actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 33,
+      "old": "ObjDat3_7FC80",
+      "new": "DEZBossExitPanel_FullAttributeRecord",
+      "profiles": ["sk"],
+      "meaning": "Twelve-byte descriptor for the fixed exit panel actor."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 38,
+      "old": "ChildObjDat_7FC8C",
+      "new": "DEZBoss_ExitSceneChildren",
+      "profiles": ["sk"],
+      "meaning": "Two normal-child records for the fixed exit Robotnik and panel actors."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 44,
+      "old": "ChildObjDat_7FC9A",
+      "new": "DEZEndBoss_SingleTargetBumperSimpleChild",
+      "profiles": ["sk"],
+      "meaning": "Single repeated-entry child record for the player-targeting bumper."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 47,
+      "old": "ChildObjDat_7FCA0",
+      "new": "DEZBoss_SleeveAndCapsuleChildren",
+      "profiles": ["sk"],
+      "meaning": "Two distinct normal-child records emitted for a boss attack."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 53,
+      "old": "ChildObjDat_7FCAE",
+      "new": "DEZBoss_SleeveOverlayChild",
+      "profiles": ["sk"],
+      "meaning": "One simple child for the animated attack assembly overlay."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 56,
+      "old": "ChildObjDat_7FCB4",
+      "new": "DEZBoss_CapsuleFragmentChildren",
+      "profiles": ["sk"],
+      "meaning": "Three normal child fragment records created after capsule explosion wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 64,
+      "old": "ChildObjDat_7FCC8",
+      "new": "DEZBoss_DefeatFragmentChildren",
+      "profiles": ["sk"],
+      "meaning": "Six repeated defeat-fragment children with externally selected frames and velocities."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 67,
+      "old": "ChildObjDat_7FCCE",
+      "new": "DEZBoss_DefeatSweepChildren",
+      "profiles": ["sk"],
+      "meaning": "Two repeated explosion-sweep controllers for the defeat scene."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 70,
+      "old": "byte_7FCD4",
+      "new": "DEZEndBossAttack_FixedDelayOpenSequence",
+      "profiles": ["sk"],
+      "meaning": "Fixed-delay raw stream used before capsule release."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 72,
+      "old": "byte_7FCD9",
+      "new": "DEZEndBossAttack_FixedDelayCloseSequence",
+      "profiles": ["sk"],
+      "meaning": "Fixed-delay raw stream used after the capsule-release wait."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 74,
+      "old": "byte_7FCDE",
+      "new": "DEZRollingCapsule_FixedDelayTwoFrameLoop",
+      "profiles": ["sk"],
+      "meaning": "Fixed-delay rolling-capsule animation with FC restart."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 76,
+      "old": "byte_7FCE2",
+      "new": "DEZBossExitRobotnik_FrameDelayLoop",
+      "profiles": ["sk"],
+      "meaning": "Variable frame-delay stream for the fixed exit Robotnik before status-driven overrides."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_7FCEF",
+      "new": "DEZBoss_SleeveLoopAnim",
+      "profiles": ["sk"],
+      "meaning": "Variable-delay raw frame sequence for the parent-linked contact assembly."
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "original_line": 102,
+      "old": "byte_7FD28",
+      "new": "DEZBoss_BumperQuarterTurnLookup",
+      "profiles": ["sk"],
+      "meaning": "Sixty-four unsigned BYTE magnitudes used to position the bumper around its boss parent."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 44,
+      "old": "word_185BD2",
+      "new": "DEZEndBoss_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 00 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 57,
+      "old": "word_185C1C",
+      "new": "DEZEndBoss_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 01 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 70,
+      "old": "word_185C66",
+      "new": "DEZEndBoss_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 02 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 83,
+      "old": "word_185CB0",
+      "new": "DEZEndBoss_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 03 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 93,
+      "old": "word_185CE8",
+      "new": "DEZEndBoss_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 04 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 96,
+      "old": "word_185CF6",
+      "new": "DEZEndBoss_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 05 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 99,
+      "old": "word_185D04",
+      "new": "DEZEndBoss_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 06 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 103,
+      "old": "word_185D18",
+      "new": "DEZEndBoss_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 07 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 107,
+      "old": "word_185D2C",
+      "new": "DEZEndBoss_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 08 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 111,
+      "old": "word_185D40",
+      "new": "DEZEndBoss_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 09 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 114,
+      "old": "word_185D4E",
+      "new": "DEZEndBoss_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 117,
+      "old": "word_185D5C",
+      "new": "DEZEndBoss_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 120,
+      "old": "word_185D6A",
+      "new": "DEZEndBoss_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 124,
+      "old": "word_185D7E",
+      "new": "DEZEndBoss_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 128,
+      "old": "word_185D92",
+      "new": "DEZEndBoss_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 132,
+      "old": "word_185DA6",
+      "new": "DEZEndBoss_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 0F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 135,
+      "old": "word_185DB4",
+      "new": "DEZEndBoss_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 10 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 138,
+      "old": "word_185DC2",
+      "new": "DEZEndBoss_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 11 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 146,
+      "old": "word_185DEE",
+      "new": "DEZEndBoss_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 12 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 153,
+      "old": "word_185E14",
+      "new": "DEZEndBoss_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 13 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 156,
+      "old": "word_185E22",
+      "new": "DEZEndBoss_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 14 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 159,
+      "old": "word_185E30",
+      "new": "DEZEndBoss_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 15 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 162,
+      "old": "word_185E3E",
+      "new": "DEZEndBoss_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 16 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 165,
+      "old": "word_185E4C",
+      "new": "DEZEndBoss_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 17 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 168,
+      "old": "word_185E5A",
+      "new": "DEZEndBoss_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 18 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 171,
+      "old": "word_185E68",
+      "new": "DEZEndBoss_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 19 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 174,
+      "old": "word_185E76",
+      "new": "DEZEndBoss_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1A hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 177,
+      "old": "word_185E84",
+      "new": "DEZEndBoss_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1B hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 180,
+      "old": "word_185E92",
+      "new": "DEZEndBoss_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1C hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 183,
+      "old": "word_185EA0",
+      "new": "DEZEndBoss_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1D hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 186,
+      "old": "word_185EAE",
+      "new": "DEZEndBoss_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1E hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 187,
+      "old": "word_185EB0",
+      "new": "DEZEndBoss_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 1F hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 189,
+      "old": "word_185EB8",
+      "new": "DEZEndBoss_MapFrame20",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 20 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 191,
+      "old": "word_185EC0",
+      "new": "DEZEndBoss_MapFrame21",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 21 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 193,
+      "old": "word_185EC8",
+      "new": "DEZEndBoss_MapFrame22",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 22 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 196,
+      "old": "word_185ED6",
+      "new": "DEZEndBoss_MapFrame23",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 23 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 199,
+      "old": "word_185EE4",
+      "new": "DEZEndBoss_MapFrame24",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 24 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 202,
+      "old": "word_185EF2",
+      "new": "DEZEndBoss_MapFrame25",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 25 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 205,
+      "old": "word_185F00",
+      "new": "DEZEndBoss_MapFrame26",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 26 hex."
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "original_line": 208,
+      "old": "word_185F0E",
+      "new": "DEZEndBoss_MapFrame27",
+      "profiles": ["sk"],
+      "meaning": "DEZEndBoss sprite mapping frame at verified table index 27 hex."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/battle_control.s",
+      "tokens": [
+        [2, 1, 0, ""],
+        [4, 2, 2, ""],
+        [5, 2, 3, ""],
+        [6, 1, 1, ""],
+        [17, 1, 149, ""],
+        [19, 0, 0, ""],
+        [21, 0, 1, ""],
+        [23, 0, 2, ""],
+        [25, 0, 3, ""],
+        [26, 2, 5, ""],
+        [27, 0, 4, ""],
+        [29, 0, 5, ""],
+        [32, 1, 7, ""],
+        [33, 1, 7, ""],
+        [37, 1, 6, ""],
+        [40, 0, 6, ""],
+        [42, 0, 7, ""],
+        [43, 1, 8, ""],
+        [43, 3, 7, ""],
+        [44, 1, 10, ""],
+        [44, 3, 7, ""],
+        [45, 1, 13, ""],
+        [45, 3, 7, ""],
+        [46, 1, 16, ""],
+        [46, 3, 7, ""],
+        [47, 1, 13, ""],
+        [47, 3, 7, ""],
+        [48, 1, 16, ""],
+        [48, 3, 7, ""],
+        [49, 0, 8, ""],
+        [55, 2, 11, ""],
+        [56, 1, 150, ""],
+        [59, 1, 9, ""],
+        [60, 1, 150, ""],
+        [62, 1, 9, ""],
+        [64, 0, 9, ""],
+        [66, 0, 10, ""],
+        [69, 0, 11, ""],
+        [72, 0, 12, ""],
+        [76, 2, 14, ""],
+        [78, 0, 13, ""],
+        [83, 0, 14, ""],
+        [85, 1, 15, ""],
+        [89, 2, 17, ""],
+        [90, 1, 156, ""],
+        [92, 1, 151, ""],
+        [94, 0, 15, ""],
+        [97, 0, 16, ""],
+        [102, 0, 17, ""],
+        [106, 2, 18, ""],
+        [108, 0, 18, ""],
+        [110, 2, 12, ""],
+        [111, 1, 157, ""],
+        [113, 0, 19, ""],
+        [114, 2, 20, ""],
+        [118, 0, 20, ""],
+        [121, 1, 21, ""],
+        [123, 0, 21, ""],
+        [124, 2, 22, ""],
+        [126, 1, 155, ""],
+        [128, 1, 154, ""],
+        [135, 0, 22, ""],
+        [137, 1, 23, ""],
+        [138, 2, 24, ""],
+        [145, 0, 23, ""],
+        [147, 0, 24, ""],
+        [151, 1, 25, ""],
+        [153, 1, 26, ""],
+        [156, 0, 25, ""],
+        [157, 2, 27, ""],
+        [163, 1, 26, ""],
+        [165, 0, 26, ""],
+        [167, 0, 27, ""],
+        [170, 1, 28, ""],
+        [171, 2, 29, ""],
+        [174, 0, 28, ""],
+        [176, 0, 29, ""],
+        [180, 1, 30, ""],
+        [182, 0, 30, ""],
+        [190, 0, 31, ""],
+        [191, 1, 141, ""],
+        [193, 2, 32, ""],
+        [194, 0, 32, ""],
+        [197, 1, 33, ""],
+        [199, 0, 33, ""],
+        [204, 1, 34, ""],
+        [209, 1, 34, ""],
+        [212, 1, 34, ""],
+        [214, 0, 34, ""],
+        [216, 2, 161, ""],
+        [222, 0, 35, ""],
+        [223, 1, 144, ""],
+        [225, 2, 36, ""],
+        [228, 0, 36, ""],
+        [231, 1, 37, ""],
+        [234, 0, 37, ""],
+        [235, 2, 38, ""],
+        [237, 0, 38, ""],
+        [239, 1, 40, ""],
+        [241, 1, 39, ""],
+        [243, 0, 39, ""],
+        [246, 0, 40, ""],
+        [247, 2, 41, ""],
+        [249, 0, 41, ""],
+        [251, 1, 42, ""],
+        [252, 2, 43, ""],
+        [255, 0, 42, ""],
+        [258, 0, 43, ""],
+        [261, 1, 44, ""],
+        [264, 1, 45, ""],
+        [266, 1, 45, ""],
+        [267, 0, 44, ""],
+        [270, 1, 45, ""],
+        [272, 0, 45, ""],
+        [277, 1, 4, ""],
+        [284, 1, 46, ""],
+        [290, 0, 46, ""],
+        [291, 2, 51, ""],
+        [296, 1, 47, ""],
+        [298, 0, 47, ""],
+        [304, 1, 48, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/child_attack_states.s",
+      "tokens": [
+        [2, 2, 50, ""],
+        [3, 0, 48, ""],
+        [6, 1, 49, ""],
+        [8, 0, 49, ""],
+        [14, 0, 50, ""],
+        [15, 1, 153, ""],
+        [18, 0, 51, ""],
+        [21, 1, 52, ""],
+        [22, 1, 52, ""],
+        [28, 0, 52, ""],
+        [29, 1, 53, ""],
+        [29, 3, 52, ""],
+        [30, 1, 54, ""],
+        [30, 3, 52, ""],
+        [31, 1, 56, ""],
+        [31, 3, 52, ""],
+        [32, 1, 62, ""],
+        [32, 3, 52, ""],
+        [33, 1, 65, ""],
+        [33, 3, 52, ""],
+        [34, 0, 53, ""],
+        [38, 1, 55, ""],
+        [40, 0, 54, ""],
+        [44, 1, 158, ""],
+        [48, 1, 4, ""],
+        [49, 0, 55, ""],
+        [53, 0, 56, ""],
+        [55, 0, 57, ""],
+        [58, 1, 59, ""],
+        [61, 1, 61, ""],
+        [65, 1, 60, ""],
+        [66, 0, 58, ""],
+        [70, 0, 59, ""],
+        [73, 1, 61, ""],
+        [77, 1, 58, ""],
+        [78, 0, 60, ""],
+        [83, 0, 61, ""],
+        [85, 0, 62, ""],
+        [87, 1, 63, ""],
+        [89, 0, 63, ""],
+        [94, 1, 64, ""],
+        [96, 0, 64, ""],
+        [98, 1, 57, ""],
+        [99, 0, 65, ""],
+        [101, 1, 66, ""],
+        [104, 0, 66, ""],
+        [106, 0, 67, ""],
+        [107, 1, 145, ""],
+        [109, 2, 68, ""],
+        [116, 0, 68, ""],
+        [120, 1, 69, ""],
+        [122, 0, 69, ""],
+        [124, 0, 70, ""],
+        [125, 1, 142, ""],
+        [127, 2, 71, ""],
+        [128, 2, 160, ""],
+        [129, 1, 152, ""],
+        [132, 0, 71, ""],
+        [135, 1, 72, ""],
+        [139, 0, 72, ""],
+        [140, 2, 73, ""],
+        [142, 0, 73, ""],
+        [144, 1, 75, ""],
+        [146, 1, 74, ""],
+        [148, 0, 74, ""],
+        [152, 0, 75, ""],
+        [153, 2, 76, ""],
+        [155, 0, 76, ""],
+        [157, 1, 77, ""],
+        [161, 0, 77, ""],
+        [162, 2, 78, ""],
+        [163, 0, 78, ""],
+        [165, 1, 79, ""],
+        [167, 0, 79, ""],
+        [172, 1, 80, ""],
+        [174, 0, 80, ""],
+        [176, 0, 81, ""],
+        [177, 1, 143, ""],
+        [179, 2, 82, ""],
+        [180, 0, 82, ""],
+        [185, 0, 83, ""],
+        [186, 1, 147, ""],
+        [189, 2, 84, ""],
+        [190, 2, 159, ""],
+        [194, 0, 84, ""],
+        [199, 1, 85, ""],
+        [201, 1, 85, ""],
+        [204, 0, 85, ""],
+        [209, 0, 86, ""],
+        [210, 1, 148, ""],
+        [212, 2, 87, ""],
+        [215, 0, 87, ""],
+        [218, 1, 88, ""],
+        [223, 1, 88, ""],
+        [225, 0, 88, ""],
+        [227, 0, 89, ""],
+        [228, 1, 146, ""],
+        [238, 0, 90, ""],
+        [239, 2, 92, ""],
+        [245, 1, 91, ""],
+        [248, 0, 91, ""],
+        [251, 0, 92, ""],
+        [253, 1, 93, ""],
+        [256, 0, 93, ""],
+        [262, 1, 94, ""],
+        [265, 1, 95, ""],
+        [267, 0, 94, ""],
+        [270, 1, 96, ""],
+        [271, 0, 95, ""],
+        [273, 2, 97, ""],
+        [276, 1, 96, ""],
+        [278, 0, 96, ""],
+        [280, 0, 97, ""],
+        [282, 1, 98, ""],
+        [285, 0, 98, ""],
+        [291, 1, 4, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/motion_helpers.s",
+      "tokens": [
+        [9, 1, 99, ""],
+        [11, 0, 99, ""],
+        [22, 1, 100, ""],
+        [24, 0, 100, ""],
+        [26, 1, 102, ""],
+        [31, 1, 101, ""],
+        [34, 0, 101, ""],
+        [36, 0, 102, ""],
+        [40, 1, 109, ""],
+        [42, 1, 103, ""],
+        [44, 1, 109, ""],
+        [46, 1, 109, ""],
+        [48, 0, 103, ""],
+        [50, 1, 104, ""],
+        [60, 0, 104, ""],
+        [67, 1, 105, ""],
+        [69, 0, 105, ""],
+        [72, 1, 106, ""],
+        [74, 0, 106, ""],
+        [76, 1, 107, ""],
+        [78, 0, 107, ""],
+        [80, 1, 108, ""],
+        [82, 0, 108, ""],
+        [85, 0, 109, ""],
+        [89, 1, 113, ""],
+        [91, 1, 110, ""],
+        [93, 1, 111, ""],
+        [94, 0, 110, ""],
+        [96, 1, 113, ""],
+        [98, 1, 113, ""],
+        [100, 0, 111, ""],
+        [105, 1, 112, ""],
+        [107, 0, 112, ""],
+        [109, 1, 113, ""],
+        [113, 0, 113, ""],
+        [117, 1, 118, ""],
+        [119, 1, 114, ""],
+        [122, 0, 114, ""],
+        [124, 1, 116, ""],
+        [126, 1, 116, ""],
+        [127, 0, 115, ""],
+        [129, 1, 118, ""],
+        [131, 1, 118, ""],
+        [133, 0, 116, ""],
+        [136, 1, 115, ""],
+        [140, 1, 117, ""],
+        [142, 0, 117, ""],
+        [144, 1, 115, ""],
+        [150, 0, 118, ""],
+        [155, 1, 119, ""],
+        [157, 1, 120, ""],
+        [159, 0, 119, ""],
+        [161, 1, 121, ""],
+        [162, 0, 120, ""],
+        [164, 0, 121, ""],
+        [168, 1, 122, ""],
+        [186, 0, 122, ""],
+        [194, 1, 126, ""],
+        [196, 1, 123, ""],
+        [199, 0, 123, ""],
+        [201, 1, 124, ""],
+        [203, 1, 123, ""],
+        [204, 0, 124, ""],
+        [209, 1, 125, ""],
+        [211, 0, 125, ""],
+        [214, 0, 126, ""],
+        [227, 1, 128, ""],
+        [229, 1, 127, ""],
+        [231, 0, 127, ""],
+        [233, 0, 128, ""],
+        [240, 1, 131, ""],
+        [241, 1, 132, ""],
+        [243, 1, 131, ""],
+        [247, 1, 129, ""],
+        [249, 0, 129, ""],
+        [251, 1, 130, ""],
+        [254, 0, 130, ""],
+        [257, 0, 131, ""],
+        [259, 0, 132, ""],
+        [263, 1, 135, ""],
+        [265, 1, 133, ""],
+        [267, 1, 136, ""],
+        [271, 0, 133, ""],
+        [274, 1, 134, ""],
+        [276, 0, 134, ""],
+        [279, 1, 135, ""],
+        [282, 0, 135, ""],
+        [284, 0, 136, ""],
+        [288, 2, 19, ""],
+        [292, 1, 137, ""],
+        [293, 2, 140, ""],
+        [294, 0, 137, ""],
+        [297, 1, 138, ""],
+        [298, 1, 139, ""],
+        [300, 0, 138, ""],
+        [303, 0, 139, ""],
+        [306, 0, 140, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bosses/dez/end_boss/sk/object_catalog.s",
+      "tokens": [
+        [6, 0, 141, ""],
+        [9, 0, 142, ""],
+        [12, 0, 143, ""],
+        [15, 0, 144, ""],
+        [18, 0, 145, ""],
+        [21, 0, 146, ""],
+        [24, 0, 147, ""],
+        [29, 0, 148, ""],
+        [34, 0, 149, ""],
+        [36, 1, 83, ""],
+        [38, 1, 86, ""],
+        [40, 0, 150, ""],
+        [42, 1, 31, ""],
+        [43, 0, 151, ""],
+        [45, 1, 70, ""],
+        [47, 1, 35, ""],
+        [49, 0, 152, ""],
+        [51, 1, 81, ""],
+        [52, 0, 153, ""],
+        [54, 1, 67, ""],
+        [56, 1, 67, ""],
+        [58, 1, 67, ""],
+        [60, 0, 154, ""],
+        [62, 1, 89, ""],
+        [63, 0, 155, ""],
+        [65, 1, 90, ""],
+        [66, 0, 156, ""],
+        [68, 0, 157, ""],
+        [70, 0, 158, ""],
+        [72, 0, 159, ""],
+        [80, 0, 160, ""],
+        [98, 0, 161, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/zones/dez/mappings/end_boss.s",
+      "tokens": [
+        [2, 1, 162, ""],
+        [3, 1, 163, ""],
+        [4, 1, 164, ""],
+        [5, 1, 165, ""],
+        [6, 1, 166, ""],
+        [7, 1, 167, ""],
+        [8, 1, 168, ""],
+        [9, 1, 169, ""],
+        [10, 1, 170, ""],
+        [11, 1, 171, ""],
+        [12, 1, 172, ""],
+        [13, 1, 173, ""],
+        [14, 1, 174, ""],
+        [15, 1, 175, ""],
+        [16, 1, 176, ""],
+        [17, 1, 177, ""],
+        [18, 1, 178, ""],
+        [19, 1, 179, ""],
+        [20, 1, 180, ""],
+        [21, 1, 181, ""],
+        [22, 1, 182, ""],
+        [23, 1, 183, ""],
+        [24, 1, 184, ""],
+        [25, 1, 185, ""],
+        [26, 1, 186, ""],
+        [27, 1, 187, ""],
+        [28, 1, 188, ""],
+        [29, 1, 189, ""],
+        [30, 1, 190, ""],
+        [31, 1, 191, ""],
+        [32, 1, 192, ""],
+        [33, 1, 193, ""],
+        [34, 1, 194, ""],
+        [35, 1, 195, ""],
+        [36, 1, 196, ""],
+        [37, 1, 197, ""],
+        [38, 1, 198, ""],
+        [39, 1, 199, ""],
+        [40, 1, 200, ""],
+        [41, 1, 201, ""],
+        [42, 0, 162, ""],
+        [55, 0, 163, ""],
+        [68, 0, 164, ""],
+        [81, 0, 165, ""],
+        [91, 0, 166, ""],
+        [94, 0, 167, ""],
+        [97, 0, 168, ""],
+        [101, 0, 169, ""],
+        [105, 0, 170, ""],
+        [109, 0, 171, ""],
+        [112, 0, 172, ""],
+        [115, 0, 173, ""],
+        [118, 0, 174, ""],
+        [122, 0, 175, ""],
+        [126, 0, 176, ""],
+        [130, 0, 177, ""],
+        [133, 0, 178, ""],
+        [136, 0, 179, ""],
+        [144, 0, 180, ""],
+        [151, 0, 181, ""],
+        [154, 0, 182, ""],
+        [157, 0, 183, ""],
+        [160, 0, 184, ""],
+        [163, 0, 185, ""],
+        [166, 0, 186, ""],
+        [169, 0, 187, ""],
+        [172, 0, 188, ""],
+        [175, 0, 189, ""],
+        [178, 0, 190, ""],
+        [181, 0, 191, ""],
+        [184, 0, 192, ""],
+        [185, 0, 193, ""],
+        [187, 0, 194, ""],
+        [189, 0, 195, ""],
+        [191, 0, 196, ""],
+        [194, 0, 197, ""],
+        [197, 0, 198, ""],
+        [200, 0, 199, ""],
+        [203, 0, 200, ""],
+        [206, 0, 201, ""]
+      ]
+    }
+  ]
+}

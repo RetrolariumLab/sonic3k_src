@@ -6,15 +6,15 @@
 
 ; The delayed callback spawns three fragments before deleting the capsule
 DEZCapsule_ExplodeThenSpawnDebris:
-                move.l  #loc_7F4EE,$34(a0)
+                move.l  #DEZBoss_CapsuleSpawnDebrisAndDelete,$34(a0)
 
-loc_7F4C0:
+DEZBoss_CapsuleTryBreakupExplosion:
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_7F4D4
+                bne.s   DEZBoss_CapsuleDecCountAndWait
                 move.b  #6,subtype(a1)
 
-loc_7F4D4:
+DEZBoss_CapsuleDecCountAndWait:
                 move.l  #Wait_Draw,(a0)
                 movea.w parent3(a0),a1
                 subq.b  #1,$39(a1)
@@ -24,127 +24,128 @@ loc_7F4D4:
 
 ; ---------------------------------------------------------------------------
 
-loc_7F4EE:
-                lea     ChildObjDat_7FCB4(pc),a2
+DEZBoss_CapsuleSpawnDebrisAndDelete:
+                lea     DEZBoss_CapsuleFragmentChildren(pc),a2
                 jsr     CreateChild1_Normal(pc)
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F4FA:
+DEZBoss_CapsuleDispatchAndCheckHit:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_7F51E(pc,d0.w),d1
-                jsr     off_7F51E(pc,d1.w)
+                move.w  DEZBossCapsule_LandedStateOffsets(pc,d0.w),d1
+                jsr     DEZBossCapsule_LandedStateOffsets(pc,d1.w)
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
                 bne.w   DEZCapsule_ExplodeThenDelete
                 bsr.w   DEZCapsule_CheckBossHitAndShatter
                 jmp     Draw_And_Touch_Sprite(pc)
 ; ---------------------------------------------------------------------------
-off_7F51E:
-                dc.w    loc_7F528-off_7F51E
-                dc.w    loc_7F538-off_7F51E
-                dc.w    loc_7F568-off_7F51E
-                dc.w    loc_7F5D2-off_7F51E
-                dc.w    loc_7F5FC-off_7F51E
+DEZBossCapsule_LandedStateOffsets:
+                dc.w    DEZBoss_CapsuleCheckRestAndGravity-DEZBossCapsule_LandedStateOffsets
+                dc.w    DEZBoss_CapsuleRollAndCheckLifetime-DEZBossCapsule_LandedStateOffsets
+                dc.w    DEZBoss_CapsuleMoveDroppedState-DEZBossCapsule_LandedStateOffsets
+                dc.w    DEZBoss_CapsuleTickLaunchFlip-DEZBossCapsule_LandedStateOffsets
+                dc.w    DEZBoss_CapsuleExpireAndAbortTail-DEZBossCapsule_LandedStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_7F528:
+DEZBoss_CapsuleCheckRestAndGravity:
                 bsr.w   DEZCapsule_CheckRestingContact
                 bsr.w   DEZCapsule_DropIfGravityReversed
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7F55A
+                bmi.s   DEZBoss_CapsuleBeginExpiryWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F538:
+DEZBoss_CapsuleRollAndCheckLifetime:
                 jsr     (MoveSprite2).l
                 bsr.w   HandleRollingDEZCapsulePlayerContact
                 bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
-                lea     byte_7FCDE(pc),a1
+                lea     DEZRollingCapsule_FixedDelayTwoFrameLoop(pc),a1
                 jsr     Animate_RawNoSST(pc)
                 bsr.w   DEZCapsule_DropIfGravityReversed
                 subq.w  #1,$2E(a0)
-                bpl.w   locret_7F0D8
+                bpl.w   DEZBoss_SharedReturn
 
-loc_7F55A:
+DEZBoss_CapsuleBeginExpiryWait:
                 move.b  #8,routine(a0)
                 move.w  #$1F,$2E(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F568:
+DEZBoss_CapsuleMoveDroppedState:
                 jsr     (DEZCapsule_MoveWithGravity).l
 
-loc_7F56E:
+DEZBoss_CapsuleCheckCeilingLanding:
                 bsr.w   DEZCapsule_CheckFallingContact
                 tst.w   y_vel(a0)
-                bpl.s   loc_7F5A0
+                bpl.s   DEZBoss_CapsuleCheckFloorAndRoll
                 jsr     (ObjCheckCeilingDist).l
                 tst.w   d1
-                bpl.s   locret_7F5D0
+                bpl.s   DEZBoss_CapsuleLandingCheckReturn
                 sub.w   d1,y_pos(a0)
                 st      $3A(a0)
                 btst    #1,render_flags(a0)
-                bne.s   loc_7F5BA
+                bne.s   DEZBoss_CapsuleRestoreRollSpeed
 
-loc_7F592:
+DEZBoss_CapsuleEnterRestingState:
                 move.b  #0,routine(a0)
                 move.b  #$C6,collision_flags(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F5A0:
+DEZBoss_CapsuleCheckFloorAndRoll:
                 jsr     (ObjCheckFloorDist).l
                 tst.w   d1
-                bpl.s   locret_7F5D0
+                bpl.s   DEZBoss_CapsuleLandingCheckReturn
                 add.w   d1,y_pos(a0)
                 clr.b   $3A(a0)
                 btst    #1,render_flags(a0)
-                bne.s   loc_7F592
+                bne.s   DEZBoss_CapsuleEnterRestingState
 
-loc_7F5BA:
+DEZBoss_CapsuleRestoreRollSpeed:
                 move.b  #2,routine(a0)
                 move.b  #$C6,collision_flags(a0)
                 move.w  $3C(a0),x_vel(a0)
                 clr.w   y_vel(a0)
 
-locret_7F5D0:
+DEZBoss_CapsuleLandingCheckReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F5D2:
+DEZBoss_CapsuleTickLaunchFlip:
                 subq.w  #1,child_dx(a0)
-                bne.s   loc_7F5DE
+                bne.s   DEZBoss_CapsuleMoveAndChooseDrift
                 bchg    #1,render_flags(a0)
 
-loc_7F5DE:
+DEZBoss_CapsuleMoveAndChooseDrift:
                 jsr     (DEZCapsule_MoveWithGravity).l
                 bsr.w   ReverseDEZEndBossAtInclusiveWorldXBounds
                 move.w  #$80,d0
                 tst.w   x_vel(a0)
-                bpl.s   loc_7F5F4
+                bpl.s   DEZBoss_CapsuleStoreLaunchDrift
                 neg.w   d0
 
-loc_7F5F4:
+DEZBoss_CapsuleStoreLaunchDrift:
                 move.w  d0,$3C(a0)
-                bra.w   loc_7F56E
+                bra.w   DEZBoss_CapsuleCheckCeilingLanding
 ; ---------------------------------------------------------------------------
 
-loc_7F5FC:
+; After expiry, discard the dispatcher's return address to skip its draw and hit checks
+DEZBoss_CapsuleExpireAndAbortTail:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_7F608
+                bpl.s   DEZBoss_CapsuleExpiryReturn
                 bsr.w   DEZCapsule_ExplodeThenSpawnDebris
                 addq.w  #4,sp
 
-locret_7F608:
+DEZBoss_CapsuleExpiryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F60A:
-                lea     word_7FC68(pc),a1
+DEZBoss_InitFragmentAndReparent:
+                lea     DEZBoss_CapsuleFragmentAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_7F62E,(a0)
+                move.l  #DEZBoss_FragmentMoveAndCull,(a0)
                 jsr     Refresh_ChildPositionAdjusted(pc)
                 bsr.w   DEZCapsuleDebris_InitFrameAndVel
                 movea.w parent3(a0),a1
@@ -153,152 +154,152 @@ loc_7F60A:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F62E:
+DEZBoss_FragmentMoveAndCull:
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_7F644
+                bne.s   DEZBoss_DeleteCapsuleFragment
                 jmp     Sprite_CheckDeleteTouchXY(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F644:
+DEZBoss_DeleteCapsuleFragment:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7F64A:
-                lea     word_7FC56(pc),a1
+DEZBoss_InitSleeveAndOverlay:
+                lea     DEZBoss_SleeveAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_7F66C,(a0)
-                move.l  #byte_7FCEF,$30(a0)
-                lea     ChildObjDat_7FCAE(pc),a2
+                move.l  #DEZBoss_SleeveFollowAndTouch,(a0)
+                move.l  #DEZBoss_SleeveLoopAnim,$30(a0)
+                lea     DEZBoss_SleeveOverlayChild(pc),a2
                 jsr     CreateChild6_Simple(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F66C:
+DEZBoss_SleeveFollowAndTouch:
                 movea.w parent3(a0),a1
                 btst    #2,$38(a1)
-                bne.s   loc_7F684
+                bne.s   DEZCapsuleSleeve_StartExtensionCountdown
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F684:
-                move.l  #loc_7F690,(a0)
+DEZCapsuleSleeve_StartExtensionCountdown:
+                move.l  #DEZBoss_SleeveTickExtension,(a0)
                 move.w  #$10,$2E(a0)
 
-loc_7F690:
+DEZBoss_SleeveTickExtension:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7F6AE
+                bmi.s   DEZBoss_SleeveHoldBeforeRetract
                 bchg    #2,$38(a0)
-                bne.s   loc_7F6A2
+                bne.s   DEZBoss_SleeveDrawDuringExtension
                 addq.b  #1,child_dy(a0)
 
-loc_7F6A2:
+DEZBoss_SleeveDrawDuringExtension:
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F6AE:
-                move.l  #loc_7F6BA,(a0)
+DEZBoss_SleeveHoldBeforeRetract:
+                move.l  #DEZBoss_SleeveTickHold,(a0)
                 move.w  #7,$2E(a0)
 
-loc_7F6BA:
+DEZBoss_SleeveTickHold:
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_7F6CC
+                bmi.s   DEZBoss_SleeveBeginRetraction
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F6CC:
-                move.l  #loc_7F6D2,(a0)
+DEZBoss_SleeveBeginRetraction:
+                move.l  #DEZBoss_SleeveTickRetraction,(a0)
 
-loc_7F6D2:
+DEZBoss_SleeveTickRetraction:
                 bchg    #2,$38(a0)
-                bne.s   loc_7F6DE
+                bne.s   DEZBoss_SleeveAnimateAndCheckOpen
                 subq.b  #1,child_dy(a0)
 
-loc_7F6DE:
+DEZBoss_SleeveAnimateAndCheckOpen:
                 jsr     Refresh_ChildPosition(pc)
                 jsr     Animate_RawMultiDelay(pc)
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_7F6F6
+                beq.s   DEZBoss_DeleteSleeveAfterClose
                 jmp     Child_DrawTouch_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F6F6:
+DEZBoss_DeleteSleeveAfterClose:
                 jmp     Go_Delete_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F6FA:
-                lea     word_7FC5C(pc),a1
+DEZBoss_InitSleeveOverlay:
+                lea     DEZBoss_SleeveOverlayAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
-                move.l  #loc_7F708,(a0)
+                move.l  #DEZBoss_SleeveOverlayFollowDraw,(a0)
 
-loc_7F708:
+DEZBoss_SleeveOverlayFollowDraw:
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
                 move.w  y_pos(a1),y_pos(a0)
                 jmp     Child_Draw_Sprite(pc)
 ; ---------------------------------------------------------------------------
 
-loc_7F71C:
-                lea     ObjDat3_7FC74(pc),a1
+DEZBoss_InitEscapingRobotnik:
+                lea     DEZBossExitRobotnik_FullAttributeRecord(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
                 move.l  #FBZAct2SK_OperatorIdleAndCheckFeedback,(a0)
-                move.l  #loc_7F74C,$34(a0)
-                move.l  #byte_7FCE2,$30(a0)
+                move.l  #DEZBoss_RobotnikKeepAheadOfPlayer,$34(a0)
+                move.l  #DEZBossExitRobotnik_FrameDelayLoop,$30(a0)
                 move.w  #$3610,x_pos(a0)
                 move.w  #$324,y_pos(a0)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7F74C:
+DEZBoss_RobotnikKeepAheadOfPlayer:
                 lea     (Player_1).w,a1
                 move.w  x_pos(a0),d0
                 move.w  x_pos(a1),d1
                 sub.w   d1,d0
-                bmi.s   loc_7F76A
+                bmi.s   DEZBoss_RobotnikRunAndCull
                 cmpi.w  #$40,d0
-                bhs.s   loc_7F76A
+                bhs.s   DEZBoss_RobotnikRunAndCull
                 addi.w  #$40,d1
                 move.w  d1,x_pos(a0)
 
-loc_7F76A:
+DEZBoss_RobotnikRunAndCull:
                 lea     (FBZAct2SK_OperatorRunAnim).l,a1
                 jsr     (Animate_RawNoSST).l
                 jsr     (MoveSprite2).l
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
 
-loc_7F782:
-                lea     ObjDat3_7FC80(pc),a1
+DEZBoss_InitAftermathPiece:
+                lea     DEZBossExitPanel_FullAttributeRecord(pc),a1
                 jsr     SetUp_ObjAttributes(pc)
-                move.l  #loc_7F79C,(a0)
+                move.l  #DEZBoss_AftermathPieceReleaseFx,(a0)
                 move.w  #$3600,x_pos(a0)
                 move.w  #$32C,y_pos(a0)
 
-loc_7F79C:
+DEZBoss_AftermathPieceReleaseFx:
                 movea.w parent3(a0),a1
                 btst    #4,$38(a1)
-                beq.s   loc_7F7C8
+                beq.s   DEZBoss_AftermathPieceDraw
                 move.l  #Sprite_OnScreen_Test,(a0)
                 move.b  #$15,mapping_frame(a0)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jsr     (CreateChild6_Simple).l
-                bne.s   loc_7F7C8
+                bne.s   DEZBoss_AftermathPieceDraw
                 move.b  #6,subtype(a1)
 
-loc_7F7C8:
+DEZBoss_AftermathPieceDraw:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7F7CE:
-                lea     word_7FC6E(pc),a1
+DEZBoss_InitDefeatFragment:
+                lea     DEZBoss_DefeatFragmentAttributes(pc),a1
                 jsr     SetUp_ObjAttributes3(pc)
                 move.l  #Obj_FlickerMove,(a0)
                 move.b  subtype(a0),d0
@@ -310,68 +311,68 @@ loc_7F7CE:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_7F7F6:
-                move.l  #loc_7F81E,(a0)
+DEZBoss_InitExplosionSweep:
+                move.l  #DEZBoss_TryHorizontalSweepExplosion,(a0)
                 addi.w  #$38,y_pos(a0)
                 move.w  #$1010,$3A(a0)
                 moveq   #2,d0
                 moveq   #4,d1
                 tst.b   subtype(a0)
-                beq.s   loc_7F816
+                beq.s   DEZBoss_ExplosionSweepSetStep
                 neg.w   d0
                 moveq   #2,d1
 
-loc_7F816:
+DEZBoss_ExplosionSweepSetStep:
                 move.w  d0,x_vel(a0)
                 move.b  d1,$39(a0)
 
-loc_7F81E:
+DEZBoss_TryHorizontalSweepExplosion:
                 subq.b  #1,$39(a0)
-                bpl.s   loc_7F830
+                bpl.s   DEZBoss_SweepMoveAndCheckRight
                 move.b  #3,$39(a0)
                 jsr     (BossExplosionSKSpawnAtMaskedRandomOffset).l
 
-loc_7F830:
+DEZBoss_SweepMoveAndCheckRight:
                 move.w  x_vel(a0),d0
                 move.w  x_pos(a0),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 tst.w   d0
-                bmi.s   loc_7F84C
+                bmi.s   DEZBoss_SweepCheckLeft
                 move.w  #$35D0,d2
                 cmp.w   d2,d1
-                bhs.s   loc_7F854
+                bhs.s   DEZBoss_SweepBeginRiseAndSignal
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F84C:
+DEZBoss_SweepCheckLeft:
                 move.w  #$3450,d2
                 cmp.w   d2,d1
-                bhi.s   locret_7F870
+                bhi.s   DEZBoss_SweepBoundaryReturn
 
-loc_7F854:
+DEZBoss_SweepBeginRiseAndSignal:
                 move.w  d2,x_pos(a0)
-                move.l  #loc_7F872,(a0)
+                move.l  #DEZBoss_TryVerticalSweepExplosion,(a0)
                 move.w  #-2,y_vel(a0)
                 tst.b   subtype(a0)
-                bne.s   locret_7F870
+                bne.s   DEZBoss_SweepBoundaryReturn
                 bset    #1,(_unkFAB8).w
 
-locret_7F870:
+DEZBoss_SweepBoundaryReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_7F872:
+DEZBoss_TryVerticalSweepExplosion:
                 subq.b  #1,$39(a0)
-                bpl.s   loc_7F884
+                bpl.s   DEZBoss_SweepRiseAndDelete
                 move.b  #3,$39(a0)
                 jsr     (BossExplosionSKSpawnAtMaskedRandomOffset).l
 
-loc_7F884:
+DEZBoss_SweepRiseAndDelete:
                 move.w  y_vel(a0),d0
                 move.w  y_pos(a0),d1
                 add.w   d0,d1
                 move.w  d1,y_pos(a0)
                 cmpi.w  #$240,d1
-                bhs.w   locret_7F0D8
+                bhs.w   DEZBoss_SharedReturn
                 jmp     (Delete_Current_Sprite).l

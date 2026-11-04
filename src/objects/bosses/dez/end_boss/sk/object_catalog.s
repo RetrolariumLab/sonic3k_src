@@ -7,73 +7,73 @@ ObjDat_DEZEndBoss:
                 dc.w    make_art_tile(ArtTile_DEZEndBoss,1,1)
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-word_7FC50:
+DEZBossBumper_PartialAttributeRecord:
                 dc.w    $180
                 dc.b    $18, $18,   4, $D7
-word_7FC56:
+DEZBoss_SleeveAttributes:
                 dc.w    $200
                 dc.b    $18,   4, $16, $9C
-word_7FC5C:
+DEZBoss_SleeveOverlayAttributes:
                 dc.w    $200
                 dc.b    $18,  $C, $13, $9C
-word_7FC62:
+DEZBossCapsule_PartialAttributeRecord:
                 dc.w    $280
                 dc.b    $10, $18, $11,   0
-word_7FC68:
+DEZBoss_CapsuleFragmentAttributes:
                 dc.w    $280
                 dc.b    8,   8, $1F, $98
-word_7FC6E:
+DEZBoss_DefeatFragmentAttributes:
                 dc.w    0
                 dc.b    $28, $28, $22,   0
-ObjDat3_7FC74:
+DEZBossExitRobotnik_FullAttributeRecord:
                 dc.l    Map_FBZRobotnikStand
                 dc.w    make_art_tile(ArtTile_FBZRobotnikStand,0,1)
                 dc.w    $200
                 dc.b    $20, $20,   0,   0
-ObjDat3_7FC80:
+DEZBossExitPanel_FullAttributeRecord:
                 dc.l    Map_DEZEndBoss
                 dc.w    make_art_tile(ArtTile_DEZEndBoss,1,1)
                 dc.w    $180
                 dc.b    $C, $14, $14,   0
-ChildObjDat_7FC8C:
+DEZBoss_ExitSceneChildren:
                 dc.w    2-1
-                dc.l    loc_7F71C
+                dc.l    DEZBoss_InitEscapingRobotnik
                 dc.b    0,   0
-                dc.l    loc_7F782
+                dc.l    DEZBoss_InitAftermathPiece
                 dc.b    0,   0
-ChildObjDat_7FC9A:
+DEZEndBoss_SingleTargetBumperSimpleChild:
                 dc.w    1-1
-                dc.l    loc_7F336
-ChildObjDat_7FCA0:
+                dc.l    DEZBoss_InitBumperAndTarget
+DEZBoss_SleeveAndCapsuleChildren:
                 dc.w    2-1
-                dc.l    loc_7F64A
+                dc.l    DEZBoss_InitSleeveAndOverlay
                 dc.b    0, $14
-                dc.l    loc_7F398
+                dc.l    DEZBoss_InitAttachedCapsule
                 dc.b    0,  $C
-ChildObjDat_7FCAE:
+DEZBoss_SleeveOverlayChild:
                 dc.w    1-1
-                dc.l    loc_7F6FA
-ChildObjDat_7FCB4:
+                dc.l    DEZBoss_InitSleeveOverlay
+DEZBoss_CapsuleFragmentChildren:
                 dc.w    3-1
-                dc.l    loc_7F60A
+                dc.l    DEZBoss_InitFragmentAndReparent
                 dc.b    -$10,  -9
-                dc.l    loc_7F60A
+                dc.l    DEZBoss_InitFragmentAndReparent
                 dc.b    0, -$C
-                dc.l    loc_7F60A
+                dc.l    DEZBoss_InitFragmentAndReparent
                 dc.b    $10,  -9
-ChildObjDat_7FCC8:
+DEZBoss_DefeatFragmentChildren:
                 dc.w    6-1
-                dc.l    loc_7F7CE
-ChildObjDat_7FCCE:
+                dc.l    DEZBoss_InitDefeatFragment
+DEZBoss_DefeatSweepChildren:
                 dc.w    2-1
-                dc.l    loc_7F7F6
-byte_7FCD4:
+                dc.l    DEZBoss_InitExplosionSweep
+DEZEndBossAttack_FixedDelayOpenSequence:
                 dc.b    3,   0,   1,   2, $F4
-byte_7FCD9:
+DEZEndBossAttack_FixedDelayCloseSequence:
                 dc.b    3,   2,   1,   0, $F4
-byte_7FCDE:
+DEZRollingCapsule_FixedDelayTwoFrameLoop:
                 dc.b    3, $11, $12, $FC
-byte_7FCE2:
+DEZBossExitRobotnik_FrameDelayLoop:
                 dc.b    0,   7
                 dc.b    1, $17
                 dc.b    0,   7
@@ -81,7 +81,7 @@ byte_7FCE2:
                 dc.b    0, $3F
                 dc.b    1,   7
                 dc.b    $FC
-byte_7FCEF:
+DEZBoss_SleeveLoopAnim:
                 dc.b    $16,   0
                 dc.b    $17,   1
                 dc.b    $1E,   1
@@ -99,7 +99,7 @@ byte_7FCEF:
 Pal_DEZEndBoss:
                 binclude "data/Levels/DEZ/Palettes/End Boss.bin"
                 even
-byte_7FD28:
+DEZBoss_BumperQuarterTurnLookup:
                 dc.b    0
                 dc.b    1
                 dc.b    2
