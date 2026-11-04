@@ -10,11 +10,11 @@ SKGumballTriangle_LaunchAndClear:
                 move.w  #-$600,y_vel(a1)
                 bset    #Status_Facing,status(a1)
                 btst    #0,render_flags(a0)
-                bne.s   loc_60FB4
+                bne.s   SKGumball_LaunchAndConsumeTriangleCell
                 bclr    #Status_Facing,status(a1)
                 neg.w   d0
 
-loc_60FB4:
+SKGumball_LaunchAndConsumeTriangleCell:
                 move.w  d0,x_vel(a1)
                 move.w  d0,ground_vel(a1)
                 bset    #Status_InAir,status(a1)
@@ -35,50 +35,50 @@ loc_60FB4:
 
 ; ---------------------------------------------------------------------------
 
-loc_60FFE:
-                lea     ObjDat3_6138C(pc),a1
+SKGumball_InitAttachedDecoration:
+                lea     SKGumball_DecorationAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_61012,(a0)
+                move.l  #SKGumball_FollowDecorationParentAndDraw,(a0)
                 bsr.w   SKGumballDecor_SelectFrameAndMask
 
-loc_61012:
+SKGumball_FollowDecorationParentAndDraw:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6101E:
-                lea     ObjDat3_613D4(pc),a1
+SKGumball_InitDebrisAndSetDelay:
+                lea     SKGumball_PlatformDebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_61032,(a0)
+                move.l  #SKGumball_TickDelayAndStartDebrisFall,(a0)
                 bsr.w   GumballSKOffsetDebrisAndSeedSubtypeDelay
 
-loc_61032:
+SKGumball_TickDelayAndStartDebrisFall:
                 subq.b  #1,$2E(a0)
-                bpl.s   loc_6103E
+                bpl.s   SKGumball_DrawPlatformDebris
                 move.l  #MoveChkDel,(a0)
 
-loc_6103E:
+SKGumball_DrawPlatformDebris:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_61044:
+SKGumball_InitExitMonitor:
                 addi.w  #$2A0,y_pos(a0)
-                move.l  #loc_61050,(a0)
+                move.l  #SKGumball_TickCooldownAndCheckExit,(a0)
 
-loc_61050:
+SKGumball_TickCooldownAndCheckExit:
                 subq.w  #1,((RAM_start+$2020)&$FFFFFF).l
-                lea     word_610AE(pc),a1
+                lea     SKGumball_ExitMonitorRectangleWords(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_61076
+                bne.s   SKGumball_RestoreLevelAndSaveP1
                 swap    d0
                 tst.w   d0
-                beq.w   locret_60EB8
+                beq.w   SKGumball_BodyCallbackReturn
                 lea     (Player_2).w,a1
                 jmp     (Delete_Referenced_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_61076:
+SKGumball_RestoreLevelAndSaveP1:
                 move.w  (Saved_zone_and_act).w,(Current_zone_and_act).w
                 move.w  (Saved_apparent_zone_and_act).w,(Apparent_zone_and_act).w
                 move.b  (Saved_last_star_post_hit).w,(Last_star_post_hit).w
@@ -91,16 +91,16 @@ loc_61076:
                 move.b  d0,(Saved_status_secondary).w
                 rts
 ; ---------------------------------------------------------------------------
-word_610AE:
+SKGumball_ExitMonitorRectangleWords:
                 dc.w    -$100,  $200,  -$10,   $40
 ; ---------------------------------------------------------------------------
 
-loc_610B6:
-                lea     ObjDat3_613EC(pc),a1
+SKGumball_InitializeDecorationMaskActor:
+                lea     SKGumball_SpriteMaskAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_610C6,(a0)
+                move.l  #SKGumball_SetMaskFlagAndFollowParent,(a0)
 
-loc_610C6:
+SKGumball_SetMaskFlagAndFollowParent:
                 st      (Spritemask_flag).w
                 movea.w parent3(a0),a1
                 move.w  x_pos(a1),x_pos(a0)
@@ -111,83 +111,84 @@ loc_610C6:
 
 ; Check both players, dispatch one subtype effect and return Z when the item should remain
 SKGumball_TryRewardNearbyPlayer:
-                lea     word_610F0(pc),a1
+                lea     SKGumball_ItemCollectionRectangleWords(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.l   d0
-                bne.s   loc_610F8
+                bne.s   SKGumball_InitRewardDispatch
                 rts
 ; ---------------------------------------------------------------------------
-word_610F0:
+SKGumball_ItemCollectionRectangleWords:
                 dc.w    -$18,   $30,  -$18,   $30
 ; ---------------------------------------------------------------------------
 
-loc_610F8:
+SKGumball_InitRewardDispatch:
                 moveq   #0,d1
                 moveq   #1,d2
                 move.b  subtype(a0),d1
 
-loc_61100:
+SKGumball_DispatchRewardType:
                 add.w   d1,d1
-                move.w  off_6110E(pc,d1.w),d1
-                jsr     off_6110E(pc,d1.w)
+                move.w  SKGumball_RewardHandlerOffsets(pc,d1.w),d1
+                jsr     SKGumball_RewardHandlerOffsets(pc,d1.w)
                 tst.w   d2
 
-locret_6110C:
+SKGumball_RewardDispatchReturn:
                 rts
 ; End of function SKGumball_TryRewardNearbyPlayer
 
 ; ---------------------------------------------------------------------------
-off_6110E:
-                dc.w    loc_61120-off_6110E
-                dc.w    loc_61130-off_6110E
-                dc.w    loc_6114E-off_6110E
-                dc.w    locret_6114C-off_6110E
-                dc.w    loc_6115C-off_6110E
-                dc.w    loc_611D6-off_6110E
-                dc.w    loc_61200-off_6110E
-                dc.w    loc_6122A-off_6110E
-                dc.w    loc_61264-off_6110E
+SKGumball_RewardHandlerOffsets:
+                dc.w    SKGumball_AwardLifeAndPlayMusic-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_TryRefillIfPlatformMissing-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_AddSavedAndLiveRings-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_RefillOrNoopRewardReturn-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_RepelLowWordContact-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_GiveFireShieldToP1-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_GiveBubbleShieldToP1-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_GiveLightningShieldToP1-SKGumball_RewardHandlerOffsets
+                dc.w    SKGumball_SetSavedStatusBit7-SKGumball_RewardHandlerOffsets
 ; ---------------------------------------------------------------------------
 
-loc_61120:
+SKGumball_AwardLifeAndPlayMusic:
                 addq.b  #1,(Life_count).w
                 addq.b  #1,(Update_HUD_life_count).w
                 moveq   #signextendB(mus_ExtraLife),d0
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_61130:
+SKGumball_TryRefillIfPlatformMissing:
                 tst.b   ((RAM_start+$2022)&$FFFFFF).l
-                bne.s   locret_6110C
+                bne.s   SKGumball_RewardDispatchReturn
                 jsr     (AllocateObjectAfterCurrent).l
-                bne.s   locret_6110C
-                move.l  #loc_60D58,(a1)
+                bne.s   SKGumball_RewardDispatchReturn
+                move.l  #SKGumball_InitPlatformAndFourSprings,(a1)
                 st      ((RAM_start+$2022)&$FFFFFF).l
 
-locret_6114C:
+SKGumball_RefillOrNoopRewardReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6114E:
+; Add 20 to the saved ring count and 10 to the live count
+SKGumball_AddSavedAndLiveRings:
                 addi.w  #20,(Saved_ring_count).w
                 moveq   #10,d0
                 jmp     (AddRings).l
 ; ---------------------------------------------------------------------------
 
-loc_6115C:
+SKGumball_RepelLowWordContact:
                 move.l  d0,-(sp)
                 tst.w   d0
-                beq.s   loc_61164
+                beq.s   SKGumball_RepelHighWordContact
                 bsr.s   SKGumballRound_RepelPlayer
 
-loc_61164:
+SKGumball_RepelHighWordContact:
                 move.l  (sp)+,d0
                 swap    d0
                 tst.w   d0
-                beq.s   loc_6116E
+                beq.s   SKGumball_ClearRoundItemContacts
                 bsr.s   SKGumballRound_RepelPlayer
 
-loc_6116E:
+SKGumball_ClearRoundItemContacts:
                 clr.b   collision_property(a0)
                 moveq   #0,d2
                 rts
@@ -223,7 +224,7 @@ SKGumballRound_RepelPlayer:
 
 ; ---------------------------------------------------------------------------
 
-loc_611D6:
+SKGumball_GiveFireShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_FireShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -235,7 +236,7 @@ loc_611D6:
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_61200:
+SKGumball_GiveBubbleShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_BubbleShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -247,7 +248,7 @@ loc_61200:
                 jmp     (Play_Music).l
 ; ---------------------------------------------------------------------------
 
-loc_6122A:
+SKGumball_GiveLightningShieldToP1:
                 lea     (Player_1).w,a1
                 move.l  #Obj_LightningShield,(Shield).w
                 move.w  a1,(Shield+parent).w
@@ -271,7 +272,7 @@ SKGumball_SetLiveAndSavedShield:
 
 ; ---------------------------------------------------------------------------
 
-loc_61264:
+SKGumball_SetSavedStatusBit7:
                 bset    #7,(Saved_status_secondary).w
                 rts
 
@@ -280,31 +281,31 @@ loc_61264:
 ; When flagged, count leading empty occupancy words to choose the target. Move down four pixels per update
 SKGumballMachine_UpdateDescent:
                 bclr    #0,$38(a0)
-                beq.s   loc_61294
+                beq.s   SKGumball_DescendFourTowardTarget
                 lea     ((RAM_start+$2000)&$FFFFFF).l,a1
                 moveq   #0,d0
                 moveq   #$E-1,d1
 
-loc_6127E:
+SKGumball_ScanLeadingEmptyBumperPairs:
                 tst.w   (a1)+
-                bne.s   loc_6128A
+                bne.s   SKGumball_SetTargetYFromEmptyPairs
                 addi.w  #$20,d0
-                dbf     d1,loc_6127E
+                dbf     d1,SKGumball_ScanLeadingEmptyBumperPairs
 
-loc_6128A:
+SKGumball_SetTargetYFromEmptyPairs:
                 move.w  $3A(a0),d1
                 add.w   d0,d1
                 move.w  d1,$3C(a0)
 
-loc_61294:
+SKGumball_DescendFourTowardTarget:
                 move.w  $3C(a0),d1
                 move.w  y_pos(a0),d2
                 cmp.w   d1,d2
-                bhs.s   locret_612A6
+                bhs.s   SKGumball_MachineDescentReturn
                 addq.w  #4,d2
                 move.w  d2,y_pos(a0)
 
-locret_612A6:
+SKGumball_MachineDescentReturn:
                 rts
 ; End of function SKGumballMachine_UpdateDescent
 
@@ -314,27 +315,27 @@ locret_612A6:
 SKGumballMachine_ChooseDrop:
                 jsr     (Random_Number).l
                 andi.w  #$F,d0
-                bne.s   loc_612C2
+                bne.s   SKGumball_SetWeightedRewardAndCollision
                 movea.w parent3(a0),a1
                 bset    #7,$38(a1)
-                beq.s   loc_612C2
+                beq.s   SKGumball_SetWeightedRewardAndCollision
                 moveq   #3,d0
 
-loc_612C2:
-                move.b  byte_612E0(pc,d0.w),d0
+SKGumball_SetWeightedRewardAndCollision:
+                move.b  SKGumball_SixteenWeightedRewardTypeBytes(pc,d0.w),d0
                 move.b  d0,subtype(a0)
                 cmpi.b  #4,d0
-                bne.s   loc_612D6
+                bne.s   SKGumball_SelectRewardRawAnim
                 move.b  #$D7,collision_flags(a0)
 
-loc_612D6:
+SKGumball_SelectRewardRawAnim:
                 lsl.w   #2,d0
-                move.l  off_612F0(pc,d0.w),$30(a0)
+                move.l  SKGumball_RewardRawAnimPointers(pc,d0.w),$30(a0)
                 rts
 ; End of function SKGumballMachine_ChooseDrop
 
 ; ---------------------------------------------------------------------------
-byte_612E0:
+SKGumball_SixteenWeightedRewardTypeBytes:
                 dc.b    0
                 dc.b    3
                 dc.b    1
@@ -352,16 +353,16 @@ byte_612E0:
                 dc.b    7
                 dc.b    2
                 even
-off_612F0:
-                dc.l    byte_61466
-                dc.l    byte_6146A
-                dc.l    byte_6146E
-                dc.l    byte_61472
-                dc.l    byte_61476
-                dc.l    byte_6147A
-                dc.l    byte_6147E
-                dc.l    byte_61482
-                dc.l    byte_61486
+SKGumball_RewardRawAnimPointers:
+                dc.l    SKGumball_LifeRewardSingleDelayRawStream
+                dc.l    SKGumball_PlatformRefillAnim
+                dc.l    SKGumball_RingRewardSingleDelayRawStream
+                dc.l    SKGumball_NoopRewardSingleDelayRawStream
+                dc.l    SKGumball_PersistentRoundRewardAnim
+                dc.l    SKGumball_FireShieldRewardAnim
+                dc.l    SKGumball_BubbleShieldRewardAnim
+                dc.l    SKGumball_LightningShieldRewardAnim
+                dc.l    SKGumball_SavedStatusBit7RewardAnim
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -380,7 +381,7 @@ GumballSKOffsetDebrisAndSeedSubtypeDelay:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 move.b  d0,$2E(a0)
-                lea     byte_61342(pc,d0.w),a1
+                lea     SKGumball_DebrisOffsetPairs(pc,d0.w),a1
                 move.b  (a1)+,d0
                 ext.w   d0
                 add.w   d0,x_pos(a0)
@@ -392,7 +393,7 @@ GumballSKOffsetDebrisAndSeedSubtypeDelay:
 ; End of function GumballSKOffsetDebrisAndSeedSubtypeDelay
 
 ; ---------------------------------------------------------------------------
-byte_61342:
+SKGumball_DebrisOffsetPairs:
                 dc.b    -8,   8
                 dc.b    8,   8
                 dc.b    -8,  -8
@@ -419,14 +420,14 @@ SKGumballDecor_SelectFrameAndMask:
                 move.b  subtype(a0),d0
                 subi.w  #6,d0
                 lsr.w   #1,d0
-                move.b  RawAni_61388(pc,d0.w),d0
+                move.b  SKGumball_DecorationFramesBySubtype(pc,d0.w),d0
                 move.b  d0,mapping_frame(a0)
                 cmpi.b  #$16,d0
-                bne.w   locret_60EB8
-                lea     ChildObjDat_6144A(pc),a2
+                bne.w   SKGumball_BodyCallbackReturn
+                lea     SKGumball_SpriteMaskChildRecord(pc),a2
                 jmp     (CreateChild6_Simple).l
 ; End of function SKGumballDecor_SelectFrameAndMask
 
 ; ---------------------------------------------------------------------------
-RawAni_61388:
+SKGumball_DecorationFramesBySubtype:
                 dc.b    0,   1,   0, $16

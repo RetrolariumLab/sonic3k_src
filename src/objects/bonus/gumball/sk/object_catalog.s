@@ -1,17 +1,17 @@
 ; Owner: objects/bonus/gumball/sk
 ; Responsibility: Gumball object attributes, construction records, raw animations and mappings
 ; Source provenance and ranges: config/reconstruction/source_layout.json
-ObjDat3_6138C:
+SKGumball_DecorationAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,0,0)
                 dc.w    $200
                 dc.b    $10, $20,   0,   0
-ObjDat3_61398:
+SKGumball_PlatformAttributeDescriptor:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $40, $10, $13,   0
-ObjDat3_613A4:
+SKGumball_TriangleBumperAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
@@ -21,88 +21,88 @@ ObjDat_GumballMachine:
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $18, $18,   5,   0
-ObjDat3_613BC:
+SKGumball_MechanismBodyAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    $14, $14,   2,   0
-ObjDat3_613C8:
+SKGumball_PlatformSpringAttributes:
                 dc.l    Map_Spring
                 dc.w    make_art_tile(ArtTile_SpikesSprings+$10,0,0)
                 dc.w    $100
                 dc.b    $10, $10,   0,   0
-ObjDat3_613D4:
+SKGumball_PlatformDebrisAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,1,1)
                 dc.w    $100
                 dc.b    8,   8, $15,   0
-ObjDat3_613E0:
+SKGumball_RewardItemAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile(ArtTile_BonusStage,0,1)
                 dc.w    $100
                 dc.b    8,   8,   8,   0
-ObjDat3_613EC:
+SKGumball_SpriteMaskAttributes:
                 dc.l    Map_GumballBonus
                 dc.w    make_art_tile($000,0,0)
                 dc.w    $180
                 dc.b    4, $10, $17,   0
-ChildObjDat_613F8:
+SKGumball_MachineChildRecords:
                 dc.w    7-1
-                dc.l    loc_60D58
+                dc.l    SKGumball_InitPlatformAndFourSprings
                 dc.b    0,   0
-                dc.l    loc_60E4C
+                dc.l    SKGumball_InitMechanismBody
                 dc.b    0, $24
-                dc.l    loc_61044
+                dc.l    SKGumball_InitExitMonitor
                 dc.b    0,   0
-                dc.l    loc_60FFE
+                dc.l    SKGumball_InitAttachedDecoration
                 dc.b    -$38,-$2C
-                dc.l    loc_60FFE
+                dc.l    SKGumball_InitAttachedDecoration
                 dc.b    0,-$2C
-                dc.l    loc_60FFE
+                dc.l    SKGumball_InitAttachedDecoration
                 dc.b    $38,-$2C
-                dc.l    loc_60FFE
+                dc.l    SKGumball_InitAttachedDecoration
                 dc.b    0,-$28
-ChildObjDat_61424:
+SKGumball_PlatformSpringChildRecords:
                 dc.w    4-1
-                dc.l    loc_60DAC
+                dc.l    SKGumball_InitAndCheckSpringP1
                 dc.b    -$30,-$18
-                dc.l    loc_60DAC
+                dc.l    SKGumball_InitAndCheckSpringP1
                 dc.b    -$10,-$18
-                dc.l    loc_60DAC
+                dc.l    SKGumball_InitAndCheckSpringP1
                 dc.b    $10,-$18
-                dc.l    loc_60DAC
+                dc.l    SKGumball_InitAndCheckSpringP1
                 dc.b    $30,-$18
-ChildObjDat_6143E:
+SKGumball_PlatformDebrisChildRecord:
                 dc.w    $10-1
-                dc.l    loc_6101E
-ChildObjDat_61444:
+                dc.l    SKGumball_InitDebrisAndSetDelay
+SKGumball_BodyRewardChildRecord:
                 dc.w    1-1
-                dc.l    loc_60EBA
-ChildObjDat_6144A:
+                dc.l    SKGumball_InitWeightedRewardItem
+SKGumball_SpriteMaskChildRecord:
                 dc.w    1-1
-                dc.l    loc_610B6
-byte_61450:
+                dc.l    SKGumball_InitializeDecorationMaskActor
+SKGumball_MachineActivationAnim:
                 dc.b    3,   5,   6,   7, $14,   5, $F4
                 dc.b    $7F,   5,   5, $FC
-byte_6145B:
+SKGumball_BodyCycleCallbackAnim:
                 dc.b    2,   3,   3,   3,   4,  $F,   3,   3,   2,   3, $F4
-byte_61466:
+SKGumball_LifeRewardSingleDelayRawStream:
                 dc.b    $7F,   8,   8, $FC
-byte_6146A:
+SKGumball_PlatformRefillAnim:
                 dc.b    $7F,   9,   9, $FC
-byte_6146E:
+SKGumball_RingRewardSingleDelayRawStream:
                 dc.b    $7F,  $A,  $A, $FC
-byte_61472:
+SKGumball_NoopRewardSingleDelayRawStream:
                 dc.b    $7F,  $B,  $B, $FC
-byte_61476:
+SKGumball_PersistentRoundRewardAnim:
                 dc.b    $7F,  $C,  $C, $FC
-byte_6147A:
+SKGumball_FireShieldRewardAnim:
                 dc.b    $7F,  $D,  $D, $FC
-byte_6147E:
+SKGumball_BubbleShieldRewardAnim:
                 dc.b    $7F,  $E,  $E, $FC
-byte_61482:
+SKGumball_LightningShieldRewardAnim:
                 dc.b    $7F,  $F,  $F, $FC
-byte_61486:
+SKGumball_SavedStatusBit7RewardAnim:
                 dc.b    1, $10, $11, $FC
 Map_GumballBonus:
                 include "src/objects/shared/zones/gumball/mappings/bonus.s"

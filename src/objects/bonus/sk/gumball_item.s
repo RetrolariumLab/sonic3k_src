@@ -94,7 +94,7 @@ PachinkoGumball_DeleteAndApplyReward:
                 bcs.s   loc_4A3AC
                 moveq   #0,d0
                 move.w  a1,d0
-                jmp     (loc_61100).l
+                jmp     (SKGumball_DispatchRewardType).l
 ; ---------------------------------------------------------------------------
 
 loc_4A3AC:

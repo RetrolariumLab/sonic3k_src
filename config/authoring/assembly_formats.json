@@ -95214,33 +95214,33 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 480
       },
-      "declarations_sha256": "af6a2c5ac0d619553875e39cd2c10d9a7b810174d53ddce5a3e8e08e5b8b09fe",
+      "declarations_sha256": "6f01e26b5e358fc210dfc2656cdba7ee52ab2c770c3d84e0c828b9a15f6f85dc",
       "labels": {
         "Map_GumballBonus_": 0,
-        "word_614BA": 48,
-        "word_614CE": 68,
-        "word_614F4": 106,
-        "word_6151A": 144,
-        "word_6152E": 164,
-        "word_61542": 184,
-        "word_61556": 204,
-        "word_61570": 230,
-        "word_61584": 250,
-        "word_6158C": 258,
-        "word_61594": 266,
-        "word_6159C": 274,
-        "word_615A4": 282,
-        "word_615AC": 290,
-        "word_615B4": 298,
-        "word_615BC": 306,
-        "word_615C4": 314,
-        "word_615CC": 322,
-        "word_615D4": 330,
-        "word_615DC": 338,
-        "word_6160E": 388,
-        "word_61628": 414,
-        "word_61630": 422,
-        "word_6165C": 466
+        "GumballBonusMap_Frame00": 48,
+        "GumballBonusMap_Frame01": 68,
+        "GumballBonusMap_Frame02": 106,
+        "GumballBonusMap_Frame03": 144,
+        "GumballBonusMap_Frame04": 164,
+        "GumballBonusMap_Frame05": 184,
+        "GumballBonusMap_Frame06": 204,
+        "GumballBonusMap_Frame07": 230,
+        "GumballBonusMap_Frame08": 250,
+        "GumballBonusMap_Frame09": 258,
+        "GumballBonusMap_Frame0A": 266,
+        "GumballBonusMap_Frame0B": 274,
+        "GumballBonusMap_Frame0C": 282,
+        "GumballBonusMap_Frame0D": 290,
+        "GumballBonusMap_Frame0E": 298,
+        "GumballBonusMap_Frame0F": 306,
+        "GumballBonusMap_Frame10": 314,
+        "GumballBonusMap_Frame11": 322,
+        "GumballBonusMap_Frame12": 330,
+        "GumballBonusMap_Frame13": 338,
+        "GumballBonusMap_Frame14": 388,
+        "GumballBonusMap_Frame15": 414,
+        "GumballBonusMap_Frame16": 422,
+        "GumballBonusMap_Frame17": 466
       },
       "external_symbols": [],
       "blocks": [
@@ -95248,168 +95248,168 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_614BA",
+          "target": "GumballBonusMap_Frame00",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_614CE",
+          "target": "GumballBonusMap_Frame01",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_614F4",
+          "target": "GumballBonusMap_Frame02",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6151A",
+          "target": "GumballBonusMap_Frame03",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6152E",
+          "target": "GumballBonusMap_Frame04",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61542",
+          "target": "GumballBonusMap_Frame05",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61556",
+          "target": "GumballBonusMap_Frame06",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61570",
+          "target": "GumballBonusMap_Frame07",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61584",
+          "target": "GumballBonusMap_Frame08",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6158C",
+          "target": "GumballBonusMap_Frame09",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61594",
+          "target": "GumballBonusMap_Frame0A",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6159C",
+          "target": "GumballBonusMap_Frame0B",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615A4",
+          "target": "GumballBonusMap_Frame0C",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615AC",
+          "target": "GumballBonusMap_Frame0D",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615B4",
+          "target": "GumballBonusMap_Frame0E",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615BC",
+          "target": "GumballBonusMap_Frame0F",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615C4",
+          "target": "GumballBonusMap_Frame10",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615CC",
+          "target": "GumballBonusMap_Frame11",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615D4",
+          "target": "GumballBonusMap_Frame12",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_615DC",
+          "target": "GumballBonusMap_Frame13",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6160E",
+          "target": "GumballBonusMap_Frame14",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61628",
+          "target": "GumballBonusMap_Frame15",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_61630",
+          "target": "GumballBonusMap_Frame16",
           "base": "Map_GumballBonus_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_6165C",
+          "target": "GumballBonusMap_Frame17",
           "base": "Map_GumballBonus_"
         },
         {

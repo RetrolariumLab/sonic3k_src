@@ -1311,9 +1311,15 @@
       "commits": ["ef6aee24e7fe447044e576a37b7a160062e3e0d7"]
     },
     {
-      "id": "current-shorten-61-blue-sphere",
+      "id": "change-3e7829b31e7a",
       "kind": "source_or_tooling",
       "summary": "Apply 150 reviewed short labels for blue sphere.",
+      "commits": ["3e7829b31e7a1b3339bc8168405552f9d95776ce"]
+    },
+    {
+      "id": "current-shorten-62-bonus-gumball",
+      "kind": "source_or_tooling",
+      "summary": "Apply 89 reviewed short labels for bonus gumball.",
       "commits": ["release-commit"]
     }
   ],

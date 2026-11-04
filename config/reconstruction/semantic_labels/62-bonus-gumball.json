@@ -1,0 +1,1282 @@
+{
+  "schema_version": 1,
+  "packet": "62-bonus-gumball",
+  "mappings": [
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 24,
+      "old": "loc_60CA8",
+      "new": "SKGumball_InitBumpersAndMachineChildren",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FillBumperCellsCooldownAndPlatformLatchThenCreateMachineChildren."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 30,
+      "old": "loc_60CB8",
+      "new": "SKGumball_DescendAndCheckActivation",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DescendMachineAndPollPackedPlayerActivationRectangle."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 40,
+      "old": "loc_60CD0",
+      "new": "SKGumball_LatchActivationAndSelectFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_LatchActivationAndChooseMachineFlipFromSideAndVerticalSpeed."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 52,
+      "old": "loc_60CF8",
+      "new": "SKGumball_StoreMachineFlip",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_CommitMachineHorizontalRenderBitFromActivationPredicate."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 58,
+      "old": "loc_60D08",
+      "new": "SKGumball_PlayActivationSound",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RequestActivationTabSoundAndContinueDrawing."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 62,
+      "old": "loc_60D10",
+      "new": "SKGumball_DrawIdleMachine",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DrawMachineAfterIdleOrActivationWork."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 65,
+      "old": "word_60D16",
+      "new": "SKGumball_MachineActivationBounds",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_MachineActivationRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 69,
+      "old": "loc_60D1E",
+      "new": "SKGumball_AnimateActivationAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AdvanceActivationRawStreamAndDrawAfterCallbackReturn."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 76,
+      "old": "loc_60D32",
+      "new": "SKGumball_SetMechanismActive",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PublishActivatedMechanismFlagFromSingleRawCallback."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 82,
+      "old": "loc_60D40",
+      "new": "SKGumball_DescendUntilMechanismUnlocks",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DescendAndReturnToIdleWhenMechanismLockClears."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 88,
+      "old": "loc_60D52",
+      "new": "SKGumball_DrawActiveMachine",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DrawMachineAfterMechanismLockGate."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 92,
+      "old": "loc_60D58",
+      "new": "SKGumball_InitPlatformAndFourSprings",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeReplacementPlatformAndItsFourSpringChildren."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 101,
+      "old": "loc_60D7E",
+      "new": "SKGumball_CollideAndDrawLivePlatform",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_CollideAndDrawPlatformUntilItsRetirementFlag."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 109,
+      "old": "loc_60D96",
+      "new": "SKGumball_SpawnDebrisAndRetirePlatform",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ClearPlatformPresenceCreateDebrisAndSchedulePlatformDeletion."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 116,
+      "old": "loc_60DAC",
+      "new": "SKGumball_InitAndCheckSpringP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeAndProbePlatformSpringWithPrimaryLatchAsymmetry."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 136,
+      "old": "loc_60DFC",
+      "new": "SKGumball_CheckSpringP2",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RestoreSpringSolidRegistersAndProbeSecondaryPlayer."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 145,
+      "old": "loc_60E1A",
+      "new": "SKGumball_AnimateSpringAndCheckRetire",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AnimateSpringAndRetireOnlyWhenPrimaryLatchAndPreviousAnimationMatch."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 153,
+      "old": "loc_60E36",
+      "new": "SKGumball_StartFallingSpringAndFlagRoot",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ConvertSpringToFutureGravityMotionAndFlagItsPlatform."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 158,
+      "old": "loc_60E46",
+      "new": "SKGumball_DrawPlatformSpring",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DrawSpringAfterCollisionAnimationOrHandlerConversion."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 162,
+      "old": "loc_60E4C",
+      "new": "SKGumball_InitMechanismBody",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeFollowingMechanismBody."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 167,
+      "old": "loc_60E5C",
+      "new": "SKGumball_BeginBodyCycleAndTryItem",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_StartBodyCycleAndAttemptSingleItemWhenRootActivationFlagSet."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 176,
+      "old": "loc_60E80",
+      "new": "SKGumball_FollowRootAndDrawBody",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RefreshBodyFromSignedChildOffsetsAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 181,
+      "old": "loc_60E8C",
+      "new": "SKGumball_AnimateBodyCycleAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AdvanceBodyMultiDelayThenFollowAndDrawAfterCallbacks."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 188,
+      "old": "loc_60EA2",
+      "new": "SKGumball_ResetBodyAndUnlockRoot",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ResetBodyIdleAndClearRootLockAndActivationFlags."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 194,
+      "old": "locret_60EB8",
+      "new": "SKGumball_BodyCallbackReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ReturnFromBodyCallbackOrForeignLocalEarlyExit."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 198,
+      "old": "loc_60EBA",
+      "new": "SKGumball_InitWeightedRewardItem",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeItemSelectWeightedTypeAndEnterMotion."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 204,
+      "old": "loc_60ECE",
+      "new": "SKGumball_IncreaseItemYSpeedTo200",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AcceptUnsignedVerticalSpeedIncrementOnlyThroughTwoHundredHex."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 211,
+      "old": "loc_60EE0",
+      "new": "SKGumball_MoveItemAndClampToBodyFloor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_IntegrateItemThenClampIntegerYToBodyFloor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 221,
+      "old": "loc_60EFC",
+      "new": "SKGumball_CheckRewardBelowBody",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ProbeItemRewardOnlyAtLeastSixteenBelowBody."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 228,
+      "old": "loc_60F0E",
+      "new": "SKGumball_CullOrAnimateRewardItem",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_CullBelowCameraWordThresholdOtherwiseRawAnimateAndDrawItem."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "original_line": 237,
+      "old": "loc_60F28",
+      "new": "SKGumball_DeleteRewardItem",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ImmediatelyDeleteConsumedOrBelowThresholdItem."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 16,
+      "old": "loc_60FB4",
+      "new": "SKGumball_LaunchAndConsumeTriangleCell",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_CommitTriangleLaunchAndConsumeIndexedCell."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 37,
+      "old": "loc_60FFE",
+      "new": "SKGumball_InitAttachedDecoration",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeAttachedDecorationAndSelectSubtypeFrame."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 43,
+      "old": "loc_61012",
+      "new": "SKGumball_FollowDecorationParentAndDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FollowDecorationParentAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 48,
+      "old": "loc_6101E",
+      "new": "SKGumball_InitDebrisAndSetDelay",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeRepeatedPlatformDebrisAndSeedOffsetDelay."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 54,
+      "old": "loc_61032",
+      "new": "SKGumball_TickDelayAndStartDebrisFall",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_TickSignedDebrisDelayThenAssignFutureGravityMotion."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 59,
+      "old": "loc_6103E",
+      "new": "SKGumball_DrawPlatformDebris",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DrawDebrisAfterDelayTickOrCodeChange."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 63,
+      "old": "loc_61044",
+      "new": "SKGumball_InitExitMonitor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PositionExitMonitorBelowMachineAndEnterCountdownProbe."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 67,
+      "old": "loc_61050",
+      "new": "SKGumball_TickCooldownAndCheckExit",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DecrementSharedTriangleCooldownAndPrioritizePrimaryExit."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 80,
+      "old": "loc_61076",
+      "new": "SKGumball_RestoreLevelAndSaveP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RestoreSavedLevelAndSaveSkPrimaryStatusOnExit."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 93,
+      "old": "word_610AE",
+      "new": "SKGumball_ExitMonitorRectangleWords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ExitMonitorRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 97,
+      "old": "loc_610B6",
+      "new": "SKGumball_InitializeDecorationMaskActor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InitializeDecorationMaskActor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 102,
+      "old": "loc_610C6",
+      "new": "SKGumball_SetMaskFlagAndFollowParent",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SetMaskFlagHighByteFollowParentAndDraw."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 118,
+      "old": "word_610F0",
+      "new": "SKGumball_ItemCollectionRectangleWords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ItemCollectionRectangleWords."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 122,
+      "old": "loc_610F8",
+      "new": "SKGumball_InitRewardDispatch",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PrepareDefaultConsumeResultAndZeroExtendedRewardType."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 127,
+      "old": "loc_61100",
+      "new": "SKGumball_DispatchRewardType",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DispatchUncheckedRewardTypeThroughRelativeWordTable."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 133,
+      "old": "locret_6110C",
+      "new": "SKGumball_RewardDispatchReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ReturnRewardResultOrRefillEarlyExit."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 138,
+      "old": "off_6110E",
+      "new": "SKGumball_RewardHandlerOffsets",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RewardTypeRelativeWordDispatchOffsets."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 150,
+      "old": "loc_61120",
+      "new": "SKGumball_AwardLifeAndPlayMusic",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AwardOneGlobalLifeAndRequestMusic."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 157,
+      "old": "loc_61130",
+      "new": "SKGumball_TryRefillIfPlatformMissing",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AttemptPlatformRefillOnlyWhenPresenceByteClear."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 165,
+      "old": "locret_6114C",
+      "new": "SKGumball_RefillOrNoopRewardReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ReturnRefillSuccessOrNoopRewardThree."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 169,
+      "old": "loc_6114E",
+      "new": "SKGumball_AddSavedAndLiveRings",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AddTwentySavedRingsAndTenLiveRings."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 175,
+      "old": "loc_6115C",
+      "new": "SKGumball_RepelLowWordContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RepelLowWordContactWhileSavingPackedHandles."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 181,
+      "old": "loc_61164",
+      "new": "SKGumball_RepelHighWordContact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RestorePackedHandlesAndRepelHighWordContactIfPresent."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 188,
+      "old": "loc_6116E",
+      "new": "SKGumball_ClearRoundItemContacts",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ClearRoundItemContactPropertyAndReturnRetainResult."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 223,
+      "old": "loc_611D6",
+      "new": "SKGumball_GiveFireShieldToP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InstallFireShieldOnPrimaryRegardlessCollector."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 235,
+      "old": "loc_61200",
+      "new": "SKGumball_GiveBubbleShieldToP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InstallBubbleShieldOnPrimaryRegardlessCollector."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 247,
+      "old": "loc_6122A",
+      "new": "SKGumball_GiveLightningShieldToP1",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InstallLightningShieldOnPrimaryRegardlessCollector."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 270,
+      "old": "loc_61264",
+      "new": "SKGumball_SetSavedStatusBit7",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SetSavedSecondaryStatusBitSevenOnly."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 283,
+      "old": "loc_6127E",
+      "new": "SKGumball_ScanLeadingEmptyBumperPairs",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ScanLeadingZeroWordBumperPairsForDropDisplacement."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 289,
+      "old": "loc_6128A",
+      "new": "SKGumball_SetTargetYFromEmptyPairs",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PublishTargetYFromInitialBaseAndLeadingEmptyPairCount."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 294,
+      "old": "loc_61294",
+      "new": "SKGumball_DescendFourTowardTarget",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AdvanceMachineIntegerYByFourOnlyBelowUnsignedTarget."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 302,
+      "old": "locret_612A6",
+      "new": "SKGumball_MachineDescentReturn",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_ReturnMachineDescentWithNativeCompareOrStoreFlags."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 317,
+      "old": "loc_612C2",
+      "new": "SKGumball_SetWeightedRewardAndCollision",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_MapWeightedSlotToRewardByteAndMarkRoundCollisionClass."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 324,
+      "old": "loc_612D6",
+      "new": "SKGumball_SelectRewardRawAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_InstallSingleRawStreamPointerByRewardType."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 331,
+      "old": "byte_612E0",
+      "new": "SKGumball_SixteenWeightedRewardTypeBytes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SixteenWeightedRewardTypeBytes."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 349,
+      "old": "off_612F0",
+      "new": "SKGumball_RewardRawAnimPointers",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RewardTypeLongPointersToSingleDelayRawStreams."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 388,
+      "old": "byte_61342",
+      "new": "SKGumball_DebrisOffsetPairs",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SixteenSignedDebrisOffsetBytePairs."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "original_line": 423,
+      "old": "RawAni_61388",
+      "new": "SKGumball_DecorationFramesBySubtype",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AttachedDecorationSubtypeFrameBytes."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 4,
+      "old": "ObjDat3_6138C",
+      "new": "SKGumball_DecorationAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_AttachedDecorationAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 9,
+      "old": "ObjDat3_61398",
+      "new": "SKGumball_PlatformAttributeDescriptor",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PlatformAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 14,
+      "old": "ObjDat3_613A4",
+      "new": "SKGumball_TriangleBumperAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_TriangleBumperAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 24,
+      "old": "ObjDat3_613BC",
+      "new": "SKGumball_MechanismBodyAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FollowingMechanismBodyAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 29,
+      "old": "ObjDat3_613C8",
+      "new": "SKGumball_PlatformSpringAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PlatformSpringAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 34,
+      "old": "ObjDat3_613D4",
+      "new": "SKGumball_PlatformDebrisAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RetiringPlatformDebrisAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 39,
+      "old": "ObjDat3_613E0",
+      "new": "SKGumball_RewardItemAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FallingRewardItemAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 44,
+      "old": "ObjDat3_613EC",
+      "new": "SKGumball_SpriteMaskAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FollowingSpriteMaskAttributeDescriptor."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 49,
+      "old": "ChildObjDat_613F8",
+      "new": "SKGumball_MachineChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SevenSequentialMachineChildRecords."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 65,
+      "old": "ChildObjDat_61424",
+      "new": "SKGumball_PlatformSpringChildRecords",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FourSequentialPlatformSpringChildRecords."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 75,
+      "old": "ChildObjDat_6143E",
+      "new": "SKGumball_PlatformDebrisChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SixteenRepeatedPlatformDebrisChildRecord."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 78,
+      "old": "ChildObjDat_61444",
+      "new": "SKGumball_BodyRewardChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SingleRepeatedBodyRewardItemChildRecord."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 81,
+      "old": "ChildObjDat_6144A",
+      "new": "SKGumball_SpriteMaskChildRecord",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SingleRepeatedMaskChildOfFrameSixteenDecorationRecord."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 84,
+      "old": "byte_61450",
+      "new": "SKGumball_MachineActivationAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_MachineActivationSingleDelayRawAndTrailingFrameFiveLoopBytes."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 87,
+      "old": "byte_6145B",
+      "new": "SKGumball_BodyCycleCallbackAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_BodyCycleMultiDelayFrameDelayPairsAndCallback."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 89,
+      "old": "byte_61466",
+      "new": "SKGumball_LifeRewardSingleDelayRawStream",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_LifeRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 91,
+      "old": "byte_6146A",
+      "new": "SKGumball_PlatformRefillAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PlatformRefillRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 93,
+      "old": "byte_6146E",
+      "new": "SKGumball_RingRewardSingleDelayRawStream",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_RingRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 95,
+      "old": "byte_61472",
+      "new": "SKGumball_NoopRewardSingleDelayRawStream",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_NoopRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 97,
+      "old": "byte_61476",
+      "new": "SKGumball_PersistentRoundRewardAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_PersistentRoundRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 99,
+      "old": "byte_6147A",
+      "new": "SKGumball_FireShieldRewardAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_FireShieldRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 101,
+      "old": "byte_6147E",
+      "new": "SKGumball_BubbleShieldRewardAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_BubbleShieldRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 103,
+      "old": "byte_61482",
+      "new": "SKGumball_LightningShieldRewardAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_LightningShieldRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "original_line": 105,
+      "old": "byte_61486",
+      "new": "SKGumball_SavedStatusBit7RewardAnim",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_SavedStatusBitSevenRewardSingleDelayRawStream."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "original_line": 11,
+      "old": "loc_60F3E",
+      "new": "SKGumball_GateTriangleOnCooldown",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_GateTriangleCollisionOnNegativeSharedCooldownWord."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "original_line": 24,
+      "old": "loc_60F64",
+      "new": "SKGumball_LaunchP1AndDeleteTriangle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_LaunchPrimaryFromTriangleAndDeleteBumper."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "original_line": 30,
+      "old": "loc_60F72",
+      "new": "SKGumball_CheckTriangleP2Contact",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_TestSecondaryTriangleContactAfterPrimaryMiss."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "original_line": 36,
+      "old": "loc_60F80",
+      "new": "SKGumball_LaunchP2AndDeleteTriangle",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_LaunchSecondaryFromTriangleAndDeleteBumper."
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "original_line": 42,
+      "old": "loc_60F8E",
+      "new": "SKGumball_DrawTriangleBumper",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKGumball_DrawTriangleAfterCooldownGateOrNoContact."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 28,
+      "old": "word_614BA",
+      "new": "GumballBonusMap_Frame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame00 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 32,
+      "old": "word_614CE",
+      "new": "GumballBonusMap_Frame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame01 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 39,
+      "old": "word_614F4",
+      "new": "GumballBonusMap_Frame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame02 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 46,
+      "old": "word_6151A",
+      "new": "GumballBonusMap_Frame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame03 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 50,
+      "old": "word_6152E",
+      "new": "GumballBonusMap_Frame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame04 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 54,
+      "old": "word_61542",
+      "new": "GumballBonusMap_Frame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame05 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 58,
+      "old": "word_61556",
+      "new": "GumballBonusMap_Frame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame06 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 63,
+      "old": "word_61570",
+      "new": "GumballBonusMap_Frame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame07 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 67,
+      "old": "word_61584",
+      "new": "GumballBonusMap_Frame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame08 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 69,
+      "old": "word_6158C",
+      "new": "GumballBonusMap_Frame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame09 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 71,
+      "old": "word_61594",
+      "new": "GumballBonusMap_Frame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0A from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 73,
+      "old": "word_6159C",
+      "new": "GumballBonusMap_Frame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0B from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 75,
+      "old": "word_615A4",
+      "new": "GumballBonusMap_Frame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0C from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 77,
+      "old": "word_615AC",
+      "new": "GumballBonusMap_Frame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0D from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 79,
+      "old": "word_615B4",
+      "new": "GumballBonusMap_Frame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0E from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 81,
+      "old": "word_615BC",
+      "new": "GumballBonusMap_Frame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame0F from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 83,
+      "old": "word_615C4",
+      "new": "GumballBonusMap_Frame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame10 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 85,
+      "old": "word_615CC",
+      "new": "GumballBonusMap_Frame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame11 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 87,
+      "old": "word_615D4",
+      "new": "GumballBonusMap_Frame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame12 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 89,
+      "old": "word_615DC",
+      "new": "GumballBonusMap_Frame13",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame13 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 98,
+      "old": "word_6160E",
+      "new": "GumballBonusMap_Frame14",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame14 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 103,
+      "old": "word_61628",
+      "new": "GumballBonusMap_Frame15",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame15 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 105,
+      "old": "word_61630",
+      "new": "GumballBonusMap_Frame16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame16 from literal native mapping/script and actual readers."
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "original_line": 113,
+      "old": "word_6165C",
+      "new": "GumballBonusMap_Frame17",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish GumballBonusMap_Frame17 from literal native mapping/script and actual readers."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/objects/bonus/gumball/sk/machine.s",
+      "tokens": [
+        [4, 2, 1, ""],
+        [18, 0, 0, ""],
+        [20, 3, 0, ""],
+        [21, 1, 77, ""],
+        [23, 0, 1, ""],
+        [25, 1, 6, ""],
+        [28, 1, 2, ""],
+        [31, 1, 5, ""],
+        [32, 0, 2, ""],
+        [33, 2, 7, ""],
+        [34, 2, 8, ""],
+        [41, 1, 3, ""],
+        [43, 0, 3, ""],
+        [46, 1, 4, ""],
+        [48, 0, 4, ""],
+        [51, 0, 5, ""],
+        [53, 0, 6, ""],
+        [55, 0, 7, ""],
+        [57, 1, 82, ""],
+        [60, 0, 8, ""],
+        [61, 2, 9, ""],
+        [64, 0, 9, ""],
+        [67, 1, 10, ""],
+        [68, 2, 1, ""],
+        [69, 0, 10, ""],
+        [71, 0, 11, ""],
+        [72, 1, 70, ""],
+        [76, 1, 78, ""],
+        [78, 2, 12, ""],
+        [79, 0, 12, ""],
+        [81, 1, 13, ""],
+        [85, 0, 13, ""],
+        [87, 1, 79, ""],
+        [90, 0, 14, ""],
+        [91, 1, 73, ""],
+        [96, 1, 17, ""],
+        [106, 1, 15, ""],
+        [109, 0, 15, ""],
+        [115, 1, 16, ""],
+        [117, 0, 16, ""],
+        [121, 1, 18, ""],
+        [123, 1, 18, ""],
+        [124, 0, 17, ""],
+        [128, 0, 18, ""],
+        [130, 0, 19, ""],
+        [131, 1, 72, ""],
+        [133, 2, 20, ""],
+        [134, 0, 20, ""],
+        [137, 1, 21, ""],
+        [138, 2, 22, ""],
+        [139, 2, 23, ""],
+        [140, 1, 80, ""],
+        [142, 0, 21, ""],
+        [145, 0, 22, ""],
+        [146, 1, 83, ""],
+        [150, 0, 23, ""],
+        [151, 2, 20, ""],
+        [155, 0, 24, ""],
+        [157, 0, 25, ""],
+        [158, 1, 75, ""],
+        [160, 2, 26, ""],
+        [162, 0, 26, ""],
+        [166, 1, 27, ""],
+        [168, 0, 27, ""],
+        [173, 1, 28, ""],
+        [175, 1, 29, ""],
+        [176, 0, 28, ""],
+        [179, 1, 29, ""],
+        [181, 1, 30, ""],
+        [182, 0, 29, ""],
+        [186, 1, 30, ""],
+        [189, 0, 30, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
+      "tokens": [
+        [6, 1, 31, ""],
+        [9, 0, 31, ""],
+        [26, 0, 32, ""],
+        [27, 1, 69, ""],
+        [29, 2, 33, ""],
+        [31, 0, 33, ""],
+        [34, 0, 34, ""],
+        [35, 1, 74, ""],
+        [37, 2, 35, ""],
+        [39, 0, 35, ""],
+        [41, 1, 36, ""],
+        [43, 0, 36, ""],
+        [45, 0, 37, ""],
+        [47, 2, 38, ""],
+        [48, 0, 38, ""],
+        [50, 1, 40, ""],
+        [53, 1, 39, ""],
+        [56, 1, 24, ""],
+        [59, 0, 39, ""],
+        [71, 0, 40, ""],
+        [73, 0, 41, ""],
+        [74, 1, 76, ""],
+        [76, 2, 42, ""],
+        [77, 0, 42, ""],
+        [84, 1, 43, ""],
+        [87, 1, 44, ""],
+        [89, 0, 43, ""],
+        [91, 0, 44, ""],
+        [95, 0, 45, ""],
+        [97, 1, 47, ""],
+        [98, 1, 47, ""],
+        [100, 0, 46, ""],
+        [102, 0, 47, ""],
+        [103, 1, 48, ""],
+        [103, 3, 47, ""],
+        [104, 1, 49, ""],
+        [104, 3, 47, ""],
+        [105, 1, 51, ""],
+        [105, 3, 47, ""],
+        [106, 1, 50, ""],
+        [106, 3, 47, ""],
+        [107, 1, 52, ""],
+        [107, 3, 47, ""],
+        [108, 1, 55, ""],
+        [108, 3, 47, ""],
+        [109, 1, 56, ""],
+        [109, 3, 47, ""],
+        [110, 1, 57, ""],
+        [110, 3, 47, ""],
+        [111, 1, 58, ""],
+        [111, 3, 47, ""],
+        [112, 0, 48, ""],
+        [117, 0, 49, ""],
+        [119, 1, 46, ""],
+        [121, 1, 46, ""],
+        [122, 2, 11, ""],
+        [124, 0, 50, ""],
+        [126, 0, 51, ""],
+        [130, 0, 52, ""],
+        [133, 1, 53, ""],
+        [135, 0, 53, ""],
+        [139, 1, 54, ""],
+        [141, 0, 54, ""],
+        [169, 0, 55, ""],
+        [179, 0, 56, ""],
+        [189, 0, 57, ""],
+        [205, 0, 58, ""],
+        [210, 1, 61, ""],
+        [214, 0, 59, ""],
+        [216, 1, 60, ""],
+        [218, 3, 59, ""],
+        [219, 0, 60, ""],
+        [223, 0, 61, ""],
+        [227, 1, 62, ""],
+        [230, 0, 62, ""],
+        [235, 1, 63, ""],
+        [238, 1, 63, ""],
+        [240, 0, 63, ""],
+        [241, 1, 65, ""],
+        [244, 1, 64, ""],
+        [246, 0, 64, ""],
+        [248, 1, 66, ""],
+        [250, 0, 65, ""],
+        [268, 0, 66, ""],
+        [269, 1, 84, ""],
+        [270, 1, 85, ""],
+        [271, 1, 86, ""],
+        [272, 1, 87, ""],
+        [273, 1, 88, ""],
+        [274, 1, 89, ""],
+        [275, 1, 90, ""],
+        [276, 1, 91, ""],
+        [277, 1, 92, ""],
+        [288, 1, 67, ""],
+        [297, 0, 67, ""],
+        [320, 1, 68, ""],
+        [323, 1, 24, ""],
+        [324, 1, 81, ""],
+        [326, 0, 68, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/object_catalog.s",
+      "tokens": [
+        [1, 0, 69, ""],
+        [6, 0, 70, ""],
+        [11, 0, 71, ""],
+        [21, 0, 72, ""],
+        [26, 0, 73, ""],
+        [31, 0, 74, ""],
+        [36, 0, 75, ""],
+        [41, 0, 76, ""],
+        [46, 0, 77, ""],
+        [48, 1, 11, ""],
+        [50, 1, 19, ""],
+        [52, 1, 37, ""],
+        [54, 1, 32, ""],
+        [56, 1, 32, ""],
+        [58, 1, 32, ""],
+        [60, 1, 32, ""],
+        [62, 0, 78, ""],
+        [64, 1, 14, ""],
+        [66, 1, 14, ""],
+        [68, 1, 14, ""],
+        [70, 1, 14, ""],
+        [72, 0, 79, ""],
+        [74, 1, 34, ""],
+        [75, 0, 80, ""],
+        [77, 1, 25, ""],
+        [78, 0, 81, ""],
+        [80, 1, 41, ""],
+        [81, 0, 82, ""],
+        [84, 0, 83, ""],
+        [86, 0, 84, ""],
+        [88, 0, 85, ""],
+        [90, 0, 86, ""],
+        [92, 0, 87, ""],
+        [94, 0, 88, ""],
+        [96, 0, 89, ""],
+        [98, 0, 90, ""],
+        [100, 0, 91, ""],
+        [102, 0, 92, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/gumball/sk/triangle_bumper.s",
+      "tokens": [
+        [2, 1, 71, ""],
+        [4, 2, 93, ""],
+        [5, 0, 93, ""],
+        [7, 1, 97, ""],
+        [14, 1, 94, ""],
+        [16, 1, 95, ""],
+        [17, 0, 94, ""],
+        [21, 0, 95, ""],
+        [23, 1, 96, ""],
+        [25, 1, 97, ""],
+        [26, 0, 96, ""],
+        [30, 0, 97, ""]
+      ]
+    },
+    {
+      "source": "src/objects/bonus/sk/gumball_item.s",
+      "tokens": [[71, 2, 45, ""]]
+    },
+    {
+      "source": "src/objects/shared/zones/gumball/mappings/bonus.s",
+      "tokens": [
+        [2, 1, 98, ""],
+        [3, 1, 99, ""],
+        [4, 1, 100, ""],
+        [5, 1, 101, ""],
+        [6, 1, 102, ""],
+        [7, 1, 103, ""],
+        [8, 1, 104, ""],
+        [9, 1, 105, ""],
+        [10, 1, 106, ""],
+        [11, 1, 107, ""],
+        [12, 1, 108, ""],
+        [13, 1, 109, ""],
+        [14, 1, 110, ""],
+        [15, 1, 111, ""],
+        [16, 1, 112, ""],
+        [17, 1, 113, ""],
+        [18, 1, 114, ""],
+        [19, 1, 115, ""],
+        [20, 1, 116, ""],
+        [21, 1, 117, ""],
+        [22, 1, 118, ""],
+        [23, 1, 119, ""],
+        [24, 1, 120, ""],
+        [25, 1, 121, ""],
+        [26, 0, 98, ""],
+        [30, 0, 99, ""],
+        [37, 0, 100, ""],
+        [44, 0, 101, ""],
+        [48, 0, 102, ""],
+        [52, 0, 103, ""],
+        [56, 0, 104, ""],
+        [61, 0, 105, ""],
+        [65, 0, 106, ""],
+        [67, 0, 107, ""],
+        [69, 0, 108, ""],
+        [71, 0, 109, ""],
+        [73, 0, 110, ""],
+        [75, 0, 111, ""],
+        [77, 0, 112, ""],
+        [79, 0, 113, ""],
+        [81, 0, 114, ""],
+        [83, 0, 115, ""],
+        [85, 0, 116, ""],
+        [87, 0, 117, ""],
+        [96, 0, 118, ""],
+        [101, 0, 119, ""],
+        [103, 0, 120, ""],
+        [111, 0, 121, ""]
+      ]
+    }
+  ]
+}

@@ -4,41 +4,41 @@
 ; ---------------------------------------------------------------------------
 
 Obj_GumballTriangleBumper:
-                lea     ObjDat3_613A4(pc),a1
+                lea     SKGumball_TriangleBumperAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_60F3E,(a0)
+                move.l  #SKGumball_GateTriangleOnCooldown,(a0)
 
-loc_60F3E:
+SKGumball_GateTriangleOnCooldown:
                 tst.w   ((RAM_start+$2020)&$FFFFFF).l
-                bpl.s   loc_60F8E
+                bpl.s   SKGumball_DrawTriangleBumper
                 moveq   #$D,d1
                 moveq   #8,d2
                 moveq   #$11,d3
                 move.w  x_pos(a0),d4
                 jsr     (SolidObjectFull).l
                 btst    #$10,d6
-                bne.s   loc_60F64
+                bne.s   SKGumball_LaunchP1AndDeleteTriangle
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_60F72
+                beq.s   SKGumball_CheckTriangleP2Contact
 
-loc_60F64:
+SKGumball_LaunchP1AndDeleteTriangle:
                 lea     (Player_1).w,a1
                 bsr.w   SKGumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60F72:
+SKGumball_CheckTriangleP2Contact:
                 btst    #$11,d6
-                bne.s   loc_60F80
+                bne.s   SKGumball_LaunchP2AndDeleteTriangle
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_60F8E
+                beq.s   SKGumball_DrawTriangleBumper
 
-loc_60F80:
+SKGumball_LaunchP2AndDeleteTriangle:
                 lea     (Player_2).w,a1
                 bsr.w   SKGumballTriangle_LaunchAndClear
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60F8E:
+SKGumball_DrawTriangleBumper:
                 jmp     (Draw_Sprite).l
 ; End of function Obj_GumballTriangleBumper

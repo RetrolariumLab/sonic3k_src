@@ -13555,7 +13555,7 @@
       "responsibility": "Gumball machine controller, item mechanism and bonus-stage completion state.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 238,
+      "physical_lines": 240,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",
@@ -13590,7 +13590,7 @@
       "responsibility": "Gumball machine item motion, collision, spawning and state helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 432,
+      "physical_lines": 433,
       "origin": {
         "commit": "168ed4a9d5c671fee7aa6d0197cb1b081dc8e1dd",
         "path": "sonic3k.s",

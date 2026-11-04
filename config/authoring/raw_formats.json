@@ -37,15 +37,15 @@
     },
     {
       "path": "src/objects/bonus/gumball/sk/machine.s",
-      "sha256": "ecfb8a81ba03ac97791aca2aca659bfd660cfe5a0053fa10b9626217067b74ac"
+      "sha256": "a85fd044247a799873ba379470387009eefce9ccb25a587ef7c918e251e28994"
     },
     {
       "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
-      "sha256": "68af5194a641f13c881ab18018f1967e93fe2333e3f1e7c27c2b260c40087cb7"
+      "sha256": "dcdf3746c23628b14ea3ca148970eab82d054820c0a2314e3acca2a1451f380c"
     },
     {
       "path": "src/objects/bonus/gumball/sk/object_catalog.s",
-      "sha256": "9002085f2e6edfdecd81193e780fd3c73a83b816f06014a3a65757be94ee8360"
+      "sha256": "66b84cf35b36637959e294431fce8f93dd4ebc47da94b1654637c71a1003495a"
     },
     {
       "path": "src/objects/bonus/pachinko/sk/invisible_object.s",
@@ -1428,27 +1428,27 @@
     },
     {
       "path": "src/objects/bonus/gumball/sk/mechanism_helpers.s",
-      "symbol": "RawAni_61388",
-      "scope": "RawAni_61388",
-      "first_line": 431,
-      "last_line": 432,
+      "symbol": "SKGumball_DecorationFramesBySubtype",
+      "scope": "SKGumball_DecorationFramesBySubtype",
+      "first_line": 432,
+      "last_line": 433,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 4,
-      "declarations_sha256": "dde20e2cadcd986db78a73dcbf57c902bd15012dc8127cb1d1e3a36db1a4bfc9",
+      "declarations_sha256": "7bf655386b5b5a633f9f06da923fbd2daab24aab736baf1f0f253cda5d110e67",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["RawAni_61388"],
+      "members": ["SKGumball_DecorationFramesBySubtype"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bonus/gumball/sk/object_catalog.s",
-      "symbol": "byte_61450",
-      "scope": "byte_61450",
+      "symbol": "SKGumball_MachineActivationAnim",
+      "scope": "SKGumball_MachineActivationAnim",
       "first_line": 84,
       "last_line": 106,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 58,
-      "declarations_sha256": "56a1fc6ab68e2b71277c9a15df6707a49b92d05758d619f92d35db151276d26a",
+      "declarations_sha256": "094ea0ae1c7478dfac6bcb260e66e3e08daedaf262363d959997b91fac1708f4",
       "entries": [
         [0, "fixed"],
         [7, "fixed"],
@@ -1465,17 +1465,17 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_61450",
-        "byte_6145B",
-        "byte_61466",
-        "byte_6146A",
-        "byte_6146E",
-        "byte_61472",
-        "byte_61476",
-        "byte_6147A",
-        "byte_6147E",
-        "byte_61482",
-        "byte_61486"
+        "SKGumball_MachineActivationAnim",
+        "SKGumball_BodyCycleCallbackAnim",
+        "SKGumball_LifeRewardSingleDelayRawStream",
+        "SKGumball_PlatformRefillAnim",
+        "SKGumball_RingRewardSingleDelayRawStream",
+        "SKGumball_NoopRewardSingleDelayRawStream",
+        "SKGumball_PersistentRoundRewardAnim",
+        "SKGumball_FireShieldRewardAnim",
+        "SKGumball_BubbleShieldRewardAnim",
+        "SKGumball_LightningShieldRewardAnim",
+        "SKGumball_SavedStatusBit7RewardAnim"
       ],
       "stored_markers": []
     },

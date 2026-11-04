@@ -6,7 +6,7 @@
 Obj_GumballMachine:
                 lea     ObjDat_GumballMachine(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_60CB8,(a0)
+                move.l  #SKGumball_DescendAndCheckActivation,(a0)
                 move.w  a0,(_unkFAA4).w
                 subi.w  #$100,y_pos(a0)
                 move.w  y_pos(a0),$3A(a0)
@@ -21,105 +21,105 @@ Obj_GumballMachine:
                 moveq   #-1,d0
                 moveq   #bytesToLcnt($24),d1
 
-loc_60CA8:
+SKGumball_InitBumpersAndMachineChildren:
                 move.l  d0,(a1)+
-                dbf     d1,loc_60CA8
-                lea     ChildObjDat_613F8(pc),a2
+                dbf     d1,SKGumball_InitBumpersAndMachineChildren
+                lea     SKGumball_MachineChildRecords(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_60CB8:
+SKGumball_DescendAndCheckActivation:
                 bsr.w   SKGumballMachine_UpdateDescent
-                lea     word_60D16(pc),a1
+                lea     SKGumball_MachineActivationBounds(pc),a1
                 jsr     (Check_PlayerInRange).l
                 tst.w   d0
-                bne.s   loc_60CD0
+                bne.s   SKGumball_LatchActivationAndSelectFlip
                 swap    d0
                 tst.w   d0
-                beq.s   loc_60D10
+                beq.s   SKGumball_DrawIdleMachine
 
-loc_60CD0:
-                move.l  #loc_60D1E,(a0)
-                move.l  #loc_60D32,$34(a0)
+SKGumball_LatchActivationAndSelectFlip:
+                move.l  #SKGumball_AnimateActivationAndDraw,(a0)
+                move.l  #SKGumball_SetMechanismActive,$34(a0)
                 bset    #1,$38(a0)
                 movea.w d0,a1
                 move.w  x_pos(a0),d0
                 cmp.w   x_pos(a1),d0
                 scs     d1
                 tst.w   y_vel(a1)
-                bmi.s   loc_60CF8
+                bmi.s   SKGumball_StoreMachineFlip
                 not.b   d1
 
-loc_60CF8:
+SKGumball_StoreMachineFlip:
                 bclr    #0,render_flags(a0)
                 tst.b   d1
-                beq.s   loc_60D08
+                beq.s   SKGumball_PlayActivationSound
                 bset    #0,render_flags(a0)
 
-loc_60D08:
+SKGumball_PlayActivationSound:
                 moveq   #signextendB(sfx_GumballTab),d0
                 jsr     (Play_SFX).l
 
-loc_60D10:
+SKGumball_DrawIdleMachine:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-word_60D16:
+SKGumball_MachineActivationBounds:
                 dc.w    -$24,   $48,    -8,   $10
 ; ---------------------------------------------------------------------------
 
-loc_60D1E:
+SKGumball_AnimateActivationAndDraw:
                 bsr.w   SKGumballMachine_UpdateDescent
-                lea     byte_61450(pc),a1
+                lea     SKGumball_MachineActivationAnim(pc),a1
                 jsr     (Animate_RawNoSST).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60D32:
-                move.l  #loc_60D40,(a0)
+SKGumball_SetMechanismActive:
+                move.l  #SKGumball_DescendUntilMechanismUnlocks,(a0)
                 bset    #3,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_60D40:
+SKGumball_DescendUntilMechanismUnlocks:
                 bsr.w   SKGumballMachine_UpdateDescent
                 btst    #1,$38(a0)
-                bne.s   loc_60D52
-                move.l  #loc_60CB8,(a0)
+                bne.s   SKGumball_DrawActiveMachine
+                move.l  #SKGumball_DescendAndCheckActivation,(a0)
 
-loc_60D52:
+SKGumball_DrawActiveMachine:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60D58:
-                lea     ObjDat3_61398(pc),a1
+SKGumball_InitPlatformAndFourSprings:
+                lea     SKGumball_PlatformAttributeDescriptor(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #$100,x_pos(a0)
                 move.w  #$310,y_pos(a0)
-                lea     ChildObjDat_61424(pc),a2
+                lea     SKGumball_PlatformSpringChildRecords(pc),a2
                 jsr     (CreateChild1_Normal).l
-                move.l  #loc_60D7E,(a0)
+                move.l  #SKGumball_CollideAndDrawLivePlatform,(a0)
 
-loc_60D7E:
+SKGumball_CollideAndDrawLivePlatform:
                 btst    #1,$38(a0)
-                bne.s   loc_60D96
+                bne.s   SKGumball_SpawnDebrisAndRetirePlatform
                 lea     (SolidObjectFull).l,a1
                 bsr.w   SKGumballPlatform_CallSolidity
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60D96:
+SKGumball_SpawnDebrisAndRetirePlatform:
                 clr.b   ((RAM_start+$2022)&$FFFFFF).l
-                lea     ChildObjDat_6143E(pc),a2
+                lea     SKGumball_PlatformDebrisChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60DAC:
-                lea     ObjDat3_613C8(pc),a1
+SKGumball_InitAndCheckSpringP1:
+                lea     SKGumball_PlatformSpringAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.w  #-$1000,$30(a0)
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_60E36
+                bne.s   SKGumball_StartFallingSpringAndFlagRoot
                 move.w  #$1B,d1
                 move.w  #8,d2
                 move.w  #$10,d3
@@ -129,110 +129,112 @@ loc_60DAC:
                 movem.l d1-d4,-(sp)
                 jsr     SolidObjectFull2_1P
                 btst    #p1_standing_bit,status(a0)
-                beq.s   loc_60DFC
+                beq.s   SKGumball_CheckSpringP2
                 bset    #5,$38(a0)
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_60DFC:
+SKGumball_CheckSpringP2:
                 movem.l (sp)+,d1-d4
                 lea     (Player_2).w,a1
                 moveq   #p2_standing_bit,d6
                 jsr     SolidObjectFull2_1P
                 btst    #p2_standing_bit,status(a0)
-                beq.s   loc_60E1A
+                beq.s   SKGumball_AnimateSpringAndCheckRetire
                 jsr     (LaunchPlayerFromUpSpring).l
 
-loc_60E1A:
+; Only the P1 launch sets the latch that can retire the platform
+SKGumball_AnimateSpringAndCheckRetire:
                 lea     (Ani_Spring).l,a1
                 jsr     (Animate_Sprite).l
                 btst    #5,$38(a0)
-                beq.s   loc_60E46
+                beq.s   SKGumball_DrawPlatformSpring
                 cmpi.b  #1,prev_anim(a0)
-                bne.s   loc_60E46
+                bne.s   SKGumball_DrawPlatformSpring
 
-loc_60E36:
+SKGumball_StartFallingSpringAndFlagRoot:
                 move.l  #MoveChkDel,(a0)
                 movea.w parent3(a0),a1
                 bset    #1,$38(a1)
 
-loc_60E46:
+SKGumball_DrawPlatformSpring:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60E4C:
-                lea     ObjDat3_613BC(pc),a1
+SKGumball_InitMechanismBody:
+                lea     SKGumball_MechanismBodyAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_60E5C,(a0)
+                move.l  #SKGumball_BeginBodyCycleAndTryItem,(a0)
 
-loc_60E5C:
+SKGumball_BeginBodyCycleAndTryItem:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                beq.s   loc_60E80
-                move.l  #loc_60E8C,(a0)
-                move.l  #loc_60EA2,$34(a0)
-                lea     ChildObjDat_61444(pc),a2
+                beq.s   SKGumball_FollowRootAndDrawBody
+                move.l  #SKGumball_AnimateBodyCycleAndDraw,(a0)
+                move.l  #SKGumball_ResetBodyAndUnlockRoot,$34(a0)
+                lea     SKGumball_BodyRewardChildRecord(pc),a2
                 jsr     (CreateChild6_Simple).l
 
-loc_60E80:
+SKGumball_FollowRootAndDrawBody:
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60E8C:
-                lea     byte_6145B(pc),a1
+SKGumball_AnimateBodyCycleAndDraw:
+                lea     SKGumball_BodyCycleCallbackAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jsr     (Refresh_ChildPosition).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60EA2:
-                move.l  #loc_60E5C,(a0)
+SKGumball_ResetBodyAndUnlockRoot:
+                move.l  #SKGumball_BeginBodyCycleAndTryItem,(a0)
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 bclr    #3,$38(a1)
 
-locret_60EB8:
+SKGumball_BodyCallbackReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_60EBA:
-                lea     ObjDat3_613E0(pc),a1
+SKGumball_InitWeightedRewardItem:
+                lea     SKGumball_RewardItemAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_60ECE,(a0)
+                move.l  #SKGumball_IncreaseItemYSpeedTo200,(a0)
                 bsr.w   SKGumballMachine_ChooseDrop
 
-loc_60ECE:
+; Reject the candidate above $200 using an unsigned comparison
+SKGumball_IncreaseItemYSpeedTo200:
                 move.w  y_vel(a0),d0
                 addi.w  #$10,d0
                 cmpi.w  #$200,d0
-                bhi.s   loc_60EE0
+                bhi.s   SKGumball_MoveItemAndClampToBodyFloor
                 move.w  d0,y_vel(a0)
 
-loc_60EE0:
+SKGumball_MoveItemAndClampToBodyFloor:
                 jsr     (MoveSprite2).l
                 movea.w parent3(a0),a1
                 move.w  y_pos(a1),d0
                 cmp.w   y_pos(a0),d0
-                bls.s   loc_60EFC
+                bls.s   SKGumball_CheckRewardBelowBody
                 move.w  d0,y_pos(a0)
-                bra.w   loc_60F0E
+                bra.w   SKGumball_CullOrAnimateRewardItem
 ; ---------------------------------------------------------------------------
 
-loc_60EFC:
+SKGumball_CheckRewardBelowBody:
                 addi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bhi.s   loc_60F0E
+                bhi.s   SKGumball_CullOrAnimateRewardItem
                 jsr     (SKGumball_TryRewardNearbyPlayer).l
-                bne.s   loc_60F28
+                bne.s   SKGumball_DeleteRewardItem
 
-loc_60F0E:
+SKGumball_CullOrAnimateRewardItem:
                 move.w  (Camera_Y_pos).w,d0
                 addi.w  #$240,d0
                 cmp.w   y_pos(a0),d0
-                blo.s   loc_60F28
+                blo.s   SKGumball_DeleteRewardItem
                 jsr     (Animate_Raw).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_60F28:
+SKGumball_DeleteRewardItem:
                 jmp     (Delete_Current_Sprite).l
