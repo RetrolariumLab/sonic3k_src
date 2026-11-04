@@ -3076,7 +3076,7 @@
       "responsibility": "Fade transition actors, invincibility-aware level music restoration and zone playlist.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 58,
+      "physical_lines": 60,
       "origin": {
         "commit": "5cf1cd0686f103ae66a1861daa2799443f211942",
         "path": "s3.s",
@@ -3202,7 +3202,7 @@
       "responsibility": "Fade transition actors and invincibility-aware level music restoration.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 50,
+      "physical_lines": 52,
       "origin": {
         "commit": "caf88d995b77bacb0ff1c4b5c45ae8ea08a82ecf",
         "path": "sonic3k.s",

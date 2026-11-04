@@ -118,13 +118,13 @@ zFM3Settings:       ds.b    1                           ; Set twice, never read 
 zTempoAccumulator:  ds.b    1
                 ds.b    1                               ; unused
 ; Retained write-only stop-track latch; preserve its byte and cleanup writes
-zDriverRetained_StopTrackWriteOnlyLatch:            ds.b    1  ; Set twice, never read
-zFadeToPrevFlag:                                    ds.b    1
-zDriverRetained_RefreshRegisterWriteOnlySnapshot:   ds.b    1  ; Set once, never read
-zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch:    ds.b    1  ; Set twice, never read
-zUpdatingSFX:                                       ds.b    1
+zDriverRetained_StopTrackWriteOnlyLatch:    ds.b    1   ; Set twice, never read
+zFadeToPrevFlag:                            ds.b    1
+zRefreshRegSnapshot:                        ds.b    1   ; Set once, never read
+zFadeSFXCleanupByte:                        ds.b    1   ; Set twice, never read
+zUpdatingSFX:                               ds.b    1
                 ds.b    7                               ; unused
-zDriverRetained_S3UpdateWriteOnlyClearByte: ds.b    1   ; Set once, never read
+zV3UpdateClearByte: ds.b    1                           ; Set once, never read
                 ds.b    2                               ; unused
 zCurrentTempo:      ds.b    1
 zContinuousSFX:     ds.b    1

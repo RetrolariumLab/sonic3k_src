@@ -57,7 +57,7 @@ cfStopTrack:
                 jp      z, zStopCleanExit               ; Exit if not
                 endif
                 xor     a                               ; a = 0
-                ld      (zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch), a  ; Set otherwise unused value to zero
+                ld      (zFadeSFXCleanupByte), a        ; Set otherwise unused value to zero
                 push    hl                              ; Save hl
                 ld      hl, (zVoiceTblPtr)              ; hl = pointer to voice table
                 pop     ix                              ; ix = overridden track's pointer

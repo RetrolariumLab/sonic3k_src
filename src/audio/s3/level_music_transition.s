@@ -7,9 +7,9 @@ Obj_Song_Fade_ToLevelMusic:
                 move.w  #2*60,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                move.l  #S3LevelMusic_WaitForFadeThenRestoreLevelAndDelete,(a0)
+                move.l  #S3LevelMusic_WaitToRestore,(a0)
 
-S3LevelMusic_WaitForFadeThenRestoreLevelAndDelete:
+S3LevelMusic_WaitToRestore:
                 subq.w  #1,$2E(a0)
                 bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 bsr.w   Restore_LevelMusic
@@ -20,12 +20,13 @@ Obj_Song_Fade_Transition:
                 move.w  #2*60,$2E(a0)
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
-                move.l  #S3LevelMusic_WaitForFadeThenPlaySubtypeAndDelete,(a0)
+                move.l  #S3LevelMusic_WaitToPlaySubtype,(a0)
 
-S3LevelMusic_WaitForFadeThenPlaySubtypeAndDelete:
+S3LevelMusic_WaitToPlaySubtype:
                 subq.w  #1,$2E(a0)
                 bpl.w   S3RuntimeChildren_ReturnAfterAttributeSetupOrSharedEarlyExit
                 move.b  subtype(a0),d0
+; Play the subtype track without changing Current_music
                 jsr     (Play_Music).l
                 jmp     (Delete_Current_Sprite).l
 
@@ -38,12 +39,13 @@ Restore_LevelMusic:
                 add.b   d0,d0
                 add.b   (a1),d0
                 move.b  PlayLevelMusic_Playlist(pc,d0.w),d0
+; Keep the level track in Current_music even when invincibility music plays
                 move.w  d0,(Current_music).w
                 btst    #Status_Invincible,(Player_1+status_secondary).w
-                beq.s   S3LevelMusic_TailPlaySelectedLevelOrInvincibilityMusic
+                beq.s   S3LevelMusic_PlaySelected
                 moveq   #signextendB(mus_Invincibility),d0  ; If invincible, play invincibility
 
-S3LevelMusic_TailPlaySelectedLevelOrInvincibilityMusic:
+S3LevelMusic_PlaySelected:
                 jmp     (Play_Music).l
 ; End of function Restore_LevelMusic
 

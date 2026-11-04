@@ -105,7 +105,7 @@ zVInt:          rsttarget
 
                 .doupdate:
                 ld      a, r                            ; Get memory refresh register
-                ld      (zDriverRetained_RefreshRegisterWriteOnlySnapshot), a  ; Save it
+                ld      (zRefreshRegSnapshot), a        ; Save it
                 call    zUpdateEverything               ; Update all tracks
                 ld      a, (zPalFlag)                   ; Get PAL flag
                 or      a                               ; Is it set?
@@ -128,9 +128,9 @@ zVInt:          rsttarget
 
                 .not_pal:
                 if      SonicDriverVer==3
-; Unused variable
+; Clear this write-only byte after track updates in both PAL and NTSC
                 xor     a
-                ld      (zDriverRetained_S3UpdateWriteOnlyClearByte), a
+                ld      (zV3UpdateClearByte), a
                 endif
 
                 ld      a, (zDACIndex)                  ; Get index of playing DAC sample

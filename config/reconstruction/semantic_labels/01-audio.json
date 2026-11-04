@@ -6,7 +6,7 @@
       "source": "src/audio/driver/dac_dispatch.asm",
       "original_line": 56,
       "old": "loc_BE9",
-      "new": "zCoordination_ResumeDacStreamAfterCommand",
+      "new": "zResumeDACAfterCoordFlag",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Synthetic RET continuation: increment DE, then jump to zUpdateDACTrack_cont to resume DAC note decoding."
     },
@@ -14,7 +14,7 @@
       "source": "src/audio/driver/dac_dispatch.asm",
       "original_line": 74,
       "old": "loc_BF9",
-      "new": "zCoordination_ResumeFmPsgStreamAfterCommand",
+      "new": "zResumeFMPSGAfterCoordFlag",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Synthetic RET continuation: increment DE, then jump to zGetNextNote_cont to resume FM/PSG note decoding."
     },
@@ -30,7 +30,7 @@
       "source": "src/audio/driver/ram_layout.asm",
       "original_line": 122,
       "old": "unk_1C17",
-      "new": "zDriverRetained_RefreshRegisterWriteOnlySnapshot",
+      "new": "zRefreshRegSnapshot",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Write-only snapshot of Z80 refresh register R saved immediately before zUpdateEverything."
     },
@@ -38,7 +38,7 @@
       "source": "src/audio/driver/ram_layout.asm",
       "original_line": 123,
       "old": "unk_1C18",
-      "new": "zDriverRetained_FadeAndSfxCleanupWriteOnlyLatch",
+      "new": "zFadeSFXCleanupByte",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Write-only byte cleared by fade dispatch and cfStopTrack SFX cleanup."
     },
@@ -46,15 +46,15 @@
       "source": "src/audio/driver/ram_layout.asm",
       "original_line": 126,
       "old": "unk_1C21",
-      "new": "zDriverRetained_S3UpdateWriteOnlyClearByte",
+      "new": "zV3UpdateClearByte",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
-      "meaning": "Shared-layout byte cleared after PAL updates only when SonicDriverVer==3; retained without a source reader."
+      "meaning": "Shared-layout byte cleared by driver v3 after track updates in both PAL and NTSC, with no source reader."
     },
     {
       "source": "src/audio/driver/sound_loading.asm",
       "original_line": 175,
       "old": "loc_5EB",
-      "new": "zMusicLoad_ReadBankThroughPatchedAbsoluteOperand",
+      "new": "zReadSongBank",
       "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
       "meaning": "Read the song-bank byte through an LD A,(nn) operand patched by the preceding 16-bit write; retain both bank-switch paths."
     },
@@ -62,7 +62,7 @@
       "source": "src/audio/s3/level_music_transition.s",
       "original_line": 12,
       "old": "loc_54048",
-      "new": "S3LevelMusic_WaitForFadeThenRestoreLevelAndDelete",
+      "new": "S3LevelMusic_WaitToRestore",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Decrement the word timer; signed-negative expiry restores level music and deletes the transition actor."
     },
@@ -70,7 +70,7 @@
       "source": "src/audio/s3/level_music_transition.s",
       "original_line": 25,
       "old": "loc_5406E",
-      "new": "S3LevelMusic_WaitForFadeThenPlaySubtypeAndDelete",
+      "new": "S3LevelMusic_WaitToPlaySubtype",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "On signed timer expiry, pass the subtype byte to Play_Music and delete the actor; Current_music is not latched here."
     },
@@ -78,7 +78,7 @@
       "source": "src/audio/s3/level_music_transition.s",
       "original_line": 46,
       "old": "loc_540A4",
-      "new": "S3LevelMusic_TailPlaySelectedLevelOrInvincibilityMusic",
+      "new": "S3LevelMusic_PlaySelected",
       "profiles": ["s3-eu", "s3-jp", "s3-us"],
       "meaning": "Tail-call Play_Music with the level track or invincibility override; Current_music keeps the level track."
     },
@@ -86,7 +86,7 @@
       "source": "src/audio/sk/level_music_transition.s",
       "original_line": 12,
       "old": "loc_85B1E",
-      "new": "SKLevelMusic_WaitForFadeThenRestoreLevelAndDelete",
+      "new": "SKLevelMusic_WaitToRestore",
       "profiles": ["sk"],
       "meaning": "Decrement the word timer; signed-negative expiry restores level music and deletes the transition actor."
     },
@@ -94,7 +94,7 @@
       "source": "src/audio/sk/level_music_transition.s",
       "original_line": 25,
       "old": "loc_85B44",
-      "new": "SKLevelMusic_WaitNinetyTimerThenLatchSubtypeMusicAndDelete",
+      "new": "SKLevelMusic_WaitToPlaySubtype",
       "profiles": ["sk"],
       "meaning": "On expiry of the 90-seeded signed timer, copy subtype to D0 and the low byte of Current_music, play it, and delete the actor."
     },
@@ -102,7 +102,7 @@
       "source": "src/audio/sk/level_music_transition.s",
       "original_line": 48,
       "old": "loc_85B84",
-      "new": "SKLevelMusic_TailPlayLevelOrInvincibilityOverride",
+      "new": "SKLevelMusic_PlaySelected",
       "profiles": ["sk"],
       "meaning": "Tail-call Play_Music with the level track or invincibility override after storing the level track word in Current_music."
     }
