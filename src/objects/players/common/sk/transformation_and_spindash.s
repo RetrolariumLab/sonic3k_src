@@ -70,12 +70,12 @@ SonicKnux_SuperHyper:
 
 SonicKnux_Spindash:
                 tst.b   spin_dash_flag(a0)
-                bne.s   loc_11C5E
+                bne.s   SKPlayerSpindash_ReleaseOrContinueActiveSpindash
                 cmpi.b  #8,anim(a0)
-                bne.s   locret_11C5C
+                bne.s   SKPlayerSpindash_ReturnFromSpindashEntryOrRejectedStart
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   locret_11C5C
+                beq.w   SKPlayerSpindash_ReturnFromSpindashEntryOrRejectedStart
                 move.b  #9,anim(a0)
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
@@ -83,59 +83,59 @@ SonicKnux_Spindash:
                 move.b  #1,spin_dash_flag(a0)
                 move.w  #0,spin_dash_counter(a0)
                 cmpi.b  #12,air_left(a0)
-                blo.s   loc_11C24
+                blo.s   SKPlayerSpindash_RunEntrySpindashBoundsAndBackgroundChecks
                 move.b  #2,anim(a6)
 
-loc_11C24:
+SKPlayerSpindash_RunEntrySpindashBoundsAndBackgroundChecks:
                 bsr.w   Player_LevelBound
                 bsr.w   Call_Player_AnglePos
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_11C5C
+                beq.s   SKPlayerSpindash_ReturnFromSpindashEntryOrRejectedStart
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_11C4C
+                bpl.s   SKPlayerSpindash_CheckEntrySpindashRightWallAfterLeftCorrection
                 sub.w   d1,x_pos(a0)
 
-loc_11C4C:
+SKPlayerSpindash_CheckEntrySpindashRightWallAfterLeftCorrection:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_11C58
+                bpl.s   SKPlayerSpindash_RestoreEntrySpindashRegistersAfterBothWallChecks
                 add.w   d1,x_pos(a0)
 
-loc_11C58:
+SKPlayerSpindash_RestoreEntrySpindashRegistersAfterBothWallChecks:
                 movem.l (sp)+,a4-a6
 
-locret_11C5C:
+SKPlayerSpindash_ReturnFromSpindashEntryOrRejectedStart:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11C5E:
+SKPlayerSpindash_ReleaseOrContinueActiveSpindash:
                 move.b  (Ctrl_1_held_logical).w,d0
                 btst    #button_down,d0
-                bne.w   loc_11D16
+                bne.w   SKPlayerSpindash_DecayHeldSpindashChargeWord
                 move.b  #$E,y_radius(a0)
                 move.b  #7,x_radius(a0)
                 move.b  #2,anim(a0)
                 addq.w  #5,y_pos(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_11C8C
+                beq.s   SKPlayerSpindash_SelectReleaseSpeedAfterGravityAdjustedShapeShift
                 subi.w  #5*2,y_pos(a0)
 
-loc_11C8C:
+SKPlayerSpindash_SelectReleaseSpeedAfterGravityAdjustedShapeShift:
                 move.b  #0,spin_dash_flag(a0)
                 moveq   #0,d0
                 move.b  spin_dash_counter(a0),d0
                 add.w   d0,d0
-                move.w  word_11CF2(pc,d0.w),ground_vel(a0)
+                move.w  SKPlayerSpindash_NormalReleaseSpeedsByChargeHighByte(pc,d0.w),ground_vel(a0)
                 tst.b   (Super_Sonic_Knux_flag).w
-                beq.s   loc_11CAC
-                move.w  word_11D04(pc,d0.w),ground_vel(a0)
+                beq.s   SKPlayerSpindash_ComputeReleaseCameraLagFromUnsignedSpeed
+                move.w  SKPlayerSpindash_SuperReleaseSpeedsByChargeHighByte(pc,d0.w),ground_vel(a0)
 
-loc_11CAC:
+SKPlayerSpindash_ComputeReleaseCameraLagFromUnsignedSpeed:
                 move.w  ground_vel(a0),d0
                 subi.w  #$800,d0
                 add.w   d0,d0
@@ -144,23 +144,23 @@ loc_11CAC:
                 addi.w  #$2000,d0
                 lea     (H_scroll_frame_offset).w,a1
                 cmpa.w  #Player_1,a0
-                beq.s   loc_11CCE
+                beq.s   SKPlayerSpindash_StoreReleaseCameraLagAndApplyFacing
                 lea     (H_scroll_frame_offset_P2).w,a1
 
-loc_11CCE:
+SKPlayerSpindash_StoreReleaseCameraLagAndApplyFacing:
                 move.w  d0,(a1)
                 btst    #Status_Facing,status(a0)
-                beq.s   loc_11CDC
+                beq.s   SKPlayerSpindash_SetReleasedRollAndStopDust
                 neg.w   ground_vel(a0)
 
-loc_11CDC:
+SKPlayerSpindash_SetReleasedRollAndStopDust:
                 bset    #Status_Roll,status(a0)
                 move.b  #0,anim(a6)
                 moveq   #signextendB(sfx_Dash),d0
                 jsr     (Play_SFX).l
-                bra.s   loc_11D5E
+                bra.s   SKPlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash
 ; ---------------------------------------------------------------------------
-word_11CF2:
+SKPlayerSpindash_NormalReleaseSpeedsByChargeHighByte:
                 dc.w    $800
                 dc.w    $880
                 dc.w    $900
@@ -170,7 +170,7 @@ word_11CF2:
                 dc.w    $B00
                 dc.w    $B80
                 dc.w    $C00
-word_11D04:
+SKPlayerSpindash_SuperReleaseSpeedsByChargeHighByte:
                 dc.w    $B00
                 dc.w    $B80
                 dc.w    $C00
@@ -182,60 +182,60 @@ word_11D04:
                 dc.w    $F00
 ; ---------------------------------------------------------------------------
 
-loc_11D16:
+SKPlayerSpindash_DecayHeldSpindashChargeWord:
                 tst.w   spin_dash_counter(a0)
-                beq.s   loc_11D2E
+                beq.s   SKPlayerSpindash_AddNewButtonChargeAndRestartSpindashAnimation
                 move.w  spin_dash_counter(a0),d0
                 lsr.w   #5,d0
                 sub.w   d0,spin_dash_counter(a0)
-                bcc.s   loc_11D2E
+                bcc.s   SKPlayerSpindash_AddNewButtonChargeAndRestartSpindashAnimation
                 move.w  #0,spin_dash_counter(a0)
 
-loc_11D2E:
+SKPlayerSpindash_AddNewButtonChargeAndRestartSpindashAnimation:
                 move.b  (Ctrl_1_pressed_logical).w,d0
                 andi.b  #button_A_mask|button_B_mask|button_C_mask,d0
-                beq.w   loc_11D5E
+                beq.w   SKPlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash
                 move.w  #9<<8,anim(a0)                  ; and prev_anim
                 move.w  #signextendB(sfx_Spindash),d0
                 jsr     (Play_SFX).l
                 addi.w  #$200,spin_dash_counter(a0)
                 cmpi.w  #$800,spin_dash_counter(a0)
-                blo.s   loc_11D5E
+                blo.s   SKPlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash
                 move.w  #$800,spin_dash_counter(a0)
 
-loc_11D5E:
+SKPlayerSpindash_AbortGroundCallerAndRelaxCameraAfterActiveSpindash:
                 addq.l  #4,sp
                 cmpi.w  #$60,(a5)
-                beq.s   loc_11D6C
-                bcc.s   loc_11D6A
+                beq.s   SKPlayerSpindash_RunActiveSpindashBoundsAndBackgroundChecks
+                bcc.s   SKPlayerSpindash_SubtractTwoFromSpindashCameraDistance
                 addq.w  #4,(a5)
 
-loc_11D6A:
+SKPlayerSpindash_SubtractTwoFromSpindashCameraDistance:
                 subq.w  #2,(a5)
 
-loc_11D6C:
+SKPlayerSpindash_RunActiveSpindashBoundsAndBackgroundChecks:
                 bsr.w   Player_LevelBound
                 bsr.w   Call_Player_AnglePos
                 tst.b   (Background_collision_flag).w
-                beq.s   locret_11DA4
+                beq.s   SKPlayerSpindash_ReturnAfterActiveSpindashBackgroundChecks
                 bsr.w   CheckPlayerBodyFloorClearance
                 tst.w   d1
                 bmi.w   Kill_Character
                 movem.l a4-a6,-(sp)
                 bsr.w   CheckLeftWallDist
                 tst.w   d1
-                bpl.s   loc_11D94
+                bpl.s   SKPlayerSpindash_CheckActiveSpindashRightWallAfterLeftCorrection
                 sub.w   d1,x_pos(a0)
 
-loc_11D94:
+SKPlayerSpindash_CheckActiveSpindashRightWallAfterLeftCorrection:
                 bsr.w   CheckRightWallDist
                 tst.w   d1
-                bpl.s   loc_11DA0
+                bpl.s   SKPlayerSpindash_RestoreActiveSpindashRegistersAfterBothWallChecks
                 add.w   d1,x_pos(a0)
 
-loc_11DA0:
+SKPlayerSpindash_RestoreActiveSpindashRegistersAfterBothWallChecks:
                 movem.l (sp)+,a4-a6
 
-locret_11DA4:
+SKPlayerSpindash_ReturnAfterActiveSpindashBackgroundChecks:
                 rts
 ; End of function SonicKnux_Spindash

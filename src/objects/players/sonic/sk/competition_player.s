@@ -36,10 +36,10 @@ loc_1060E:
 Sonic2P_Index:
                 dc.w    loc_10628-Sonic2P_Index
                 dc.w    loc_10740-Sonic2P_Index
-                dc.w    loc_122BE-Sonic2P_Index
-                dc.w    loc_12390-Sonic2P_Index
-                dc.w    loc_1257C-Sonic2P_Index
-                dc.w    loc_12590-Sonic2P_Index
+                dc.w    SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic2P_Index
+                dc.w    SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic2P_Index
+                dc.w    SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic2P_Index
+                dc.w    SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic2P_Index
 ; ---------------------------------------------------------------------------
 
 loc_10628:

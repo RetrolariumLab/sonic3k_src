@@ -12,37 +12,37 @@ Player_SlopeResist:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bhs.s   locret_11DDA
+                bhs.s   SKPlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$20,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                beq.s   loc_11DDC
-                bmi.s   loc_11DD6
+                beq.s   SKPlayerSlope_TakeSlopeForceMagnitudeForRestingActor
+                bmi.s   SKPlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity
                 tst.w   d0
-                beq.s   locret_11DD4
+                beq.s   SKPlayerSlope_ReturnAfterPositiveSpeedSlopeResistance
                 add.w   d0,ground_vel(a0)
 
-locret_11DD4:
+SKPlayerSlope_ReturnAfterPositiveSpeedSlopeResistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11DD6:
+SKPlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity:
                 add.w   d0,ground_vel(a0)
 
-locret_11DDA:
+SKPlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11DDC:
+SKPlayerSlope_TakeSlopeForceMagnitudeForRestingActor:
                 move.w  d0,d1
-                bpl.s   loc_11DE2
+                bpl.s   SKPlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen
                 neg.w   d1
 
-loc_11DE2:
+SKPlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen:
                 cmpi.w  #$D,d1
-                blo.s   locret_11DDA
+                blo.s   SKPlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate
                 add.w   d0,ground_vel(a0)
                 rts
 ; End of function Player_SlopeResist
@@ -57,31 +57,31 @@ Player_RollRepel:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bhs.s   locret_11E28
+                bhs.s   SKPlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$50,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                bmi.s   loc_11E1E
+                bmi.s   SKPlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed
                 tst.w   d0
-                bpl.s   loc_11E18
+                bpl.s   SKPlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed
                 asr.l   #2,d0
 
-loc_11E18:
+SKPlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed:
                 add.w   d0,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11E1E:
+SKPlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed:
                 tst.w   d0
-                bmi.s   loc_11E24
+                bmi.s   SKPlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity
                 asr.l   #2,d0
 
-loc_11E24:
+SKPlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity:
                 add.w   d0,ground_vel(a0)
 
-locret_11E28:
+SKPlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition:
                 rts
 ; End of function Player_RollRepel
 
@@ -94,44 +94,44 @@ locret_11E28:
 Player_SlopeRepel:
                 nop
                 tst.b   stick_to_convex(a0)
-                bne.s   locret_11E6E
+                bne.s   SKPlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 tst.w   move_lock(a0)
-                bne.s   loc_11E86
+                bne.s   SKPlayerSlope_CountDownExistingSlopeMovementLock
                 move.b  angle(a0),d0
                 addi.b  #$18,d0
                 cmpi.b  #$30,d0
-                blo.s   locret_11E6E
+                blo.s   SKPlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_11E4E
+                bpl.s   SKPlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope
                 neg.w   d0
 
-loc_11E4E:
+SKPlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope:
                 cmpi.w  #$280,d0
-                bhs.s   locret_11E6E
+                bhs.s   SKPlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 move.w  #30,move_lock(a0)
                 move.b  angle(a0),d0
                 addi.b  #$30,d0
                 cmpi.b  #$60,d0
-                blo.s   loc_11E70
+                blo.s   SKPlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector
                 bset    #Status_InAir,status(a0)
 
-locret_11E6E:
+SKPlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11E70:
+SKPlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector:
                 cmpi.b  #$30,d0
-                blo.s   loc_11E7E
+                blo.s   SKPlayerSlope_NudgeSlowSlopeGroundVelocityNegative
                 addi.w  #$80,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11E7E:
+SKPlayerSlope_NudgeSlowSlopeGroundVelocityNegative:
                 subi.w  #$80,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_11E86:
+SKPlayerSlope_CountDownExistingSlopeMovementLock:
                 subq.w  #1,move_lock(a0)
                 rts
 ; End of function Player_SlopeRepel
@@ -145,17 +145,17 @@ loc_11E86:
 Player_JumpAngle:
                 move.b  angle(a0),d0                    ; get Sonic's angle
                 beq.s   Player_JumpFlip                 ; if already 0, branch
-                bpl.s   loc_11E9C                       ; if higher than 0, branch
+                bpl.s   SKPlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp  ; if higher than 0, branch
 
                 addq.b  #2,d0                           ; increase angle
-                bcc.s   loc_11E9A
+                bcc.s   SKPlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp
                 moveq   #0,d0
 
-loc_11E9A:
+SKPlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp:
                 bra.s   Player_JumpAngleSet
 ; ---------------------------------------------------------------------------
 
-loc_11E9C:
+SKPlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp:
                 subq.b  #2,d0                           ; decrease angle
                 bcc.s   Player_JumpAngleSet
                 moveq   #0,d0
@@ -173,20 +173,20 @@ Player_JumpAngleSet:
 
 Player_JumpFlip:
                 move.b  flip_angle(a0),d0
-                beq.s   locret_11EEA
+                beq.s   SKPlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate
                 tst.w   ground_vel(a0)
                 bmi.s   Player_JumpLeftFlip
 
 Player_JumpRightFlip:
                 move.b  flip_speed(a0),d1
                 add.b   d1,d0
-                bcc.s   loc_11EC8
+                bcc.s   SKPlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling
                 subq.b  #1,flips_remaining(a0)
-                bcc.s   loc_11EC8
+                bcc.s   SKPlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling
                 move.b  #0,flips_remaining(a0)
                 moveq   #0,d0
 
-loc_11EC8:
+SKPlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling:
                 bra.s   Player_JumpFlipSet
 ; ---------------------------------------------------------------------------
 
@@ -204,6 +204,6 @@ Player_JumpLeftFlip:
 Player_JumpFlipSet:
                 move.b  d0,flip_angle(a0)
 
-locret_11EEA:
+SKPlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate:
                 rts
 ; End of function Player_JumpAngle

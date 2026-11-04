@@ -12,37 +12,37 @@ Player_SlopeResist:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bhs.s   locret_12D00
+                bhs.s   S3PlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$20,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                beq.s   loc_12D02
-                bmi.s   loc_12CFC
+                beq.s   S3PlayerSlope_TakeSlopeForceMagnitudeForRestingActor
+                bmi.s   S3PlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity
                 tst.w   d0
-                beq.s   locret_12CFA
+                beq.s   S3PlayerSlope_ReturnAfterPositiveSpeedSlopeResistance
                 add.w   d0,ground_vel(a0)
 
-locret_12CFA:
+S3PlayerSlope_ReturnAfterPositiveSpeedSlopeResistance:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12CFC:
+S3PlayerSlope_ApplySlopeResistanceToNegativeGroundVelocity:
                 add.w   d0,ground_vel(a0)
 
-locret_12D00:
+S3PlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12D02:
+S3PlayerSlope_TakeSlopeForceMagnitudeForRestingActor:
                 move.w  d0,d1
-                bpl.s   loc_12D08
+                bpl.s   S3PlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen
                 neg.w   d1
 
-loc_12D08:
+S3PlayerSlope_StartRestingSlopeMotionAtForceMagnitudeThirteen:
                 cmpi.w  #$D,d1
-                blo.s   locret_12D00
+                blo.s   S3PlayerSlope_ReturnAfterSlopeAngleOrRestingForceGate
                 add.w   d0,ground_vel(a0)
                 rts
 ; End of function Player_SlopeResist
@@ -57,31 +57,31 @@ Player_RollRepel:
                 move.b  angle(a0),d0
                 addi.b  #$60,d0
                 cmpi.b  #-$40,d0
-                bhs.s   locret_12D4E
+                bhs.s   S3PlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition
                 move.b  angle(a0),d0
                 jsr     (GetSineCosine).l
                 muls.w  #$50,d0
                 asr.l   #8,d0
                 tst.w   ground_vel(a0)
-                bmi.s   loc_12D44
+                bmi.s   S3PlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed
                 tst.w   d0
-                bpl.s   loc_12D3E
+                bpl.s   S3PlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed
                 asr.l   #2,d0
 
-loc_12D3E:
+S3PlayerSlope_ApplyRollingSlopeForceForNonnegativeGroundSpeed:
                 add.w   d0,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12D44:
+S3PlayerSlope_ScaleOpposingRollingSlopeForceForNegativeGroundSpeed:
                 tst.w   d0
-                bmi.s   loc_12D4A
+                bmi.s   S3PlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity
                 asr.l   #2,d0
 
-loc_12D4A:
+S3PlayerSlope_AddSelectedRollingSlopeForceToGroundVelocity:
                 add.w   d0,ground_vel(a0)
 
-locret_12D4E:
+S3PlayerSlope_ReturnAfterRollingSlopeGateOrForceAddition:
                 rts
 ; End of function Player_RollRepel
 
@@ -94,44 +94,44 @@ locret_12D4E:
 Player_SlopeRepel:
                 nop
                 tst.b   stick_to_convex(a0)
-                bne.s   locret_12D94
+                bne.s   S3PlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 tst.w   move_lock(a0)
-                bne.s   loc_12DAC
+                bne.s   S3PlayerSlope_CountDownExistingSlopeMovementLock
                 move.b  angle(a0),d0
                 addi.b  #$18,d0
                 cmpi.b  #$30,d0
-                blo.s   locret_12D94
+                blo.s   S3PlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 move.w  ground_vel(a0),d0
-                bpl.s   loc_12D74
+                bpl.s   S3PlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope
                 neg.w   d0
 
-loc_12D74:
+S3PlayerSlope_DetachOrNudgeSlowActorOnNonflatSlope:
                 cmpi.w  #$280,d0
-                bhs.s   locret_12D94
+                bhs.s   S3PlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach
                 move.w  #30,move_lock(a0)
                 move.b  angle(a0),d0
                 addi.b  #$30,d0
                 cmpi.b  #$60,d0
-                blo.s   loc_12D96
+                blo.s   S3PlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector
                 bset    #Status_InAir,status(a0)
 
-locret_12D94:
+S3PlayerSlope_ReturnAfterSlopeRepulsionGateOrAirDetach:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12D96:
+S3PlayerSlope_ChooseSlowSlopeNudgeByWrappedAngleSector:
                 cmpi.b  #$30,d0
-                blo.s   loc_12DA4
+                blo.s   S3PlayerSlope_NudgeSlowSlopeGroundVelocityNegative
                 addi.w  #$80,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12DA4:
+S3PlayerSlope_NudgeSlowSlopeGroundVelocityNegative:
                 subi.w  #$80,ground_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12DAC:
+S3PlayerSlope_CountDownExistingSlopeMovementLock:
                 subq.w  #1,move_lock(a0)
                 rts
 ; End of function Player_SlopeRepel
@@ -145,17 +145,17 @@ loc_12DAC:
 Player_JumpAngle:
                 move.b  angle(a0),d0                    ; get Sonic's angle
                 beq.s   Player_JumpFlip                 ; if already 0, branch
-                bpl.s   loc_12DC2                       ; if higher than 0, branch
+                bpl.s   S3PlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp  ; if higher than 0, branch
 
                 addq.b  #2,d0                           ; increase angle
-                bcc.s   loc_12DC0
+                bcc.s   S3PlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp
                 moveq   #0,d0
 
-loc_12DC0:
+S3PlayerSlope_StoreNegativeAngleRecoveryAfterByteCarryClamp:
                 bra.s   Player_JumpAngleSet
 ; ---------------------------------------------------------------------------
 
-loc_12DC2:
+S3PlayerSlope_ReducePositiveAirAngleByTwoWithBorrowClamp:
                 subq.b  #2,d0                           ; decrease angle
                 bcc.s   Player_JumpAngleSet
                 moveq   #0,d0
@@ -173,20 +173,20 @@ Player_JumpAngleSet:
 
 Player_JumpFlip:
                 move.b  flip_angle(a0),d0
-                beq.s   locret_12E10
+                beq.s   S3PlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate
                 tst.w   ground_vel(a0)
                 bmi.s   Player_JumpLeftFlip
 
 Player_JumpRightFlip:
                 move.b  flip_speed(a0),d1
                 add.b   d1,d0
-                bcc.s   loc_12DEE
+                bcc.s   S3PlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling
                 subq.b  #1,flips_remaining(a0)
-                bcc.s   loc_12DEE
+                bcc.s   S3PlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling
                 move.b  #0,flips_remaining(a0)
                 moveq   #0,d0
 
-loc_12DEE:
+S3PlayerSlope_StoreAddedFlipAngleAfterWrapBudgetHandling:
                 bra.s   Player_JumpFlipSet
 ; ---------------------------------------------------------------------------
 
@@ -204,6 +204,6 @@ Player_JumpLeftFlip:
 Player_JumpFlipSet:
                 move.b  d0,flip_angle(a0)
 
-locret_12E10:
+S3PlayerSlope_ReturnAfterFlipAngleZeroOrStoredUpdate:
                 rts
 ; End of function Player_JumpAngle

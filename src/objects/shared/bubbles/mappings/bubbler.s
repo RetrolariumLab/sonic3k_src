@@ -1,86 +1,86 @@
 ; Data owner: objects/shared/bubbles
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_Bubbler_:
-                dc.w    word_2FD0E-Map_Bubbler_
-                dc.w    word_2FD16-Map_Bubbler_
-                dc.w    word_2FD1E-Map_Bubbler_
-                dc.w    word_2FD26-Map_Bubbler_
-                dc.w    word_2FD2E-Map_Bubbler_
-                dc.w    word_2FD36-Map_Bubbler_
-                dc.w    word_2FD3E-Map_Bubbler_
-                dc.w    word_2FD46-Map_Bubbler_
-                dc.w    word_2FD60-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD7A-Map_Bubbler_
-                dc.w    word_2FD82-Map_Bubbler_
-                dc.w    word_2FD8A-Map_Bubbler_
-                dc.w    word_2FD92-Map_Bubbler_
-                dc.w    word_2FD9A-Map_Bubbler_
+                dc.w    Bubbler_Frame0_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame1_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame2_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame3_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame4_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame5_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame6_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame7_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame8_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_PrimaryWarningFrames9To18_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame19_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame20_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame21_Mapping-Map_Bubbler_
+                dc.w    Bubbler_Frame22_Mapping-Map_Bubbler_
 Map_Bubbler2:
 Map_Bubbler2_:
-                dc.w    word_2FD0E-Map_Bubbler2_
-                dc.w    word_2FD16-Map_Bubbler2_
-                dc.w    word_2FD1E-Map_Bubbler2_
-                dc.w    word_2FD26-Map_Bubbler2_
-                dc.w    word_2FD2E-Map_Bubbler2_
-                dc.w    word_2FD36-Map_Bubbler2_
-                dc.w    word_2FD3E-Map_Bubbler2_
-                dc.w    word_2FD46-Map_Bubbler2_
-                dc.w    word_2FD60-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD9C-Map_Bubbler2_
-                dc.w    word_2FD82-Map_Bubbler2_
-                dc.w    word_2FD8A-Map_Bubbler2_
-                dc.w    word_2FD92-Map_Bubbler2_
-                dc.w    word_2FD9A-Map_Bubbler2_
-word_2FD0E:     dc.w    1
+                dc.w    Bubbler_Frame0_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame1_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame2_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame3_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame4_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame5_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame6_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame7_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame8_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_SecondaryWarningFrames9To18_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame19_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame20_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame21_Mapping-Map_Bubbler2_
+                dc.w    Bubbler_Frame22_Mapping-Map_Bubbler2_
+Bubbler_Frame0_Mapping: dc.w    1
                 dc.b    $FC,   0,   0,   0, $FF, $FC
-word_2FD16:     dc.w    1
+Bubbler_Frame1_Mapping: dc.w    1
                 dc.b    $FC,   0,   0,   1, $FF, $FC
-word_2FD1E:     dc.w    1
+Bubbler_Frame2_Mapping: dc.w    1
                 dc.b    $FC,   0,   0,   2, $FF, $FC
-word_2FD26:     dc.w    1
+Bubbler_Frame3_Mapping: dc.w    1
                 dc.b    $F8,   5,   0,   3, $FF, $F8
-word_2FD2E:     dc.w    1
+Bubbler_Frame4_Mapping: dc.w    1
                 dc.b    $F8,   5,   0,   7, $FF, $F8
-word_2FD36:     dc.w    1
+Bubbler_Frame5_Mapping: dc.w    1
                 dc.b    $F4,  $A,   0,  $B, $FF, $F4
-word_2FD3E:     dc.w    1
+Bubbler_Frame6_Mapping: dc.w    1
                 dc.b    $F0,  $F,   0, $14, $FF, $F0
-word_2FD46:     dc.w    4
+Bubbler_Frame7_Mapping: dc.w    4
                 dc.b    $F0,   5,   0, $24, $FF, $F0
                 dc.b    $F0,   5,   8, $24,   0,   0
                 dc.b    0,   5, $10, $24, $FF, $F0
                 dc.b    0,   5, $18, $24,   0,   0
-word_2FD60:     dc.w    4
+Bubbler_Frame8_Mapping: dc.w    4
                 dc.b    $F0,   5,   0, $28, $FF, $F0
                 dc.b    $F0,   5,   8, $28,   0,   0
                 dc.b    0,   5, $10, $28, $FF, $F0
                 dc.b    0,   5, $18, $28,   0,   0
-word_2FD7A:     dc.w    1
+Bubbler_PrimaryWarningFrames9To18_Mapping:  dc.w    1
                 dc.b    $F4,   6,   3, $84, $FF, $F8
-word_2FD82:     dc.w    1
+Bubbler_Frame19_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $2C, $FF, $F8
-word_2FD8A:     dc.w    1
+Bubbler_Frame20_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $30, $FF, $F8
-word_2FD92:     dc.w    1
+Bubbler_Frame21_Mapping:    dc.w    1
                 dc.b    $F8,   5,   0, $34, $FF, $F8
-word_2FD9A:     dc.w    0
-word_2FD9C:     dc.w    1
+Bubbler_Frame22_Mapping:                        dc.w    0
+Bubbler_SecondaryWarningFrames9To18_Mapping:    dc.w    1
                 dc.b    $F4,   6,   3, $94, $FF, $F8

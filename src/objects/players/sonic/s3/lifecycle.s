@@ -44,11 +44,11 @@ Sonic_Normal:
 Sonic_Index:
                 dc.w    Sonic_Init-Sonic_Index          ; 0
                 dc.w    Sonic_Control-Sonic_Index       ; 2
-                dc.w    loc_13142-Sonic_Index           ; 4
-                dc.w    loc_131FE-Sonic_Index           ; 6
-                dc.w    loc_133D4-Sonic_Index           ; 8
-                dc.w    loc_133E8-Sonic_Index           ; $A
-                dc.w    loc_13404-Sonic_Index           ; $C
+                dc.w    S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic_Index  ; 4
+                dc.w    S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic_Index  ; 6
+                dc.w    S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic_Index  ; 8
+                dc.w    S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic_Index  ; $A
+                dc.w    S3PlayerRecovery_DrowningStateCWithDebugPlacementEscape-Sonic_Index  ; $C
 ; ---------------------------------------------------------------------------
 
 Sonic_Init:                                             ; Routine 0

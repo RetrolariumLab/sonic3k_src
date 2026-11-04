@@ -4,30 +4,30 @@
 
 ; ---------------------------------------------------------------------------
 
-loc_122BE:
+SKPlayerRecovery_HurtStateFourWithDebugPlacementEscape:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_122D8
+                beq.s   SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_122D8
+                beq.s   SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_122D8:
+SKPlayerRecovery_IntegrateHurtVelocityThenAddWaterAdjustedGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$30,y_vel(a0)
                 btst    #Status_Underwater,status(a0)
-                beq.s   loc_122F2
+                beq.s   SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum
                 subi.w  #$20,y_vel(a0)
 
-loc_122F2:
+SKPlayerRecovery_WrapHurtYWordAtMinusOneHundredCameraMinimum:
                 cmpi.w  #-$100,(Camera_min_Y_pos).w
-                bne.s   loc_12302
+                bne.s   SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw
                 move.w  (Screen_Y_wrap_value).w,d0
                 and.w   d0,y_pos(a0)
 
-loc_12302:
+SKPlayerRecovery_ResolveHurtLandingThenRunBoundsHistoryAnimationAndDraw:
                 bsr.w   PlayerSKResolveCommonHurtLandingOrDeathPlane
                 bsr.w   Player_LevelBound
                 bsr.w   Sonic_RecordPos
@@ -38,29 +38,29 @@ loc_12302:
 
 PlayerSKResolveCommonHurtLandingOrDeathPlane:
                 tst.b   (Disable_death_plane).w
-                bne.s   loc_12344
+                bne.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
                 tst.b   (Reverse_gravity_flag).w
-                bne.s   loc_12336
+                bne.s   SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary
                 move.w  (Camera_max_Y_pos).w,d0
                 addi.w  #$E0,d0
                 cmp.w   y_pos(a0),d0
-                blt.w   loc_1238A
-                bra.s   loc_12344
+                blt.w   SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane
+                bra.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
 ; ---------------------------------------------------------------------------
 
-loc_12336:
+SKPlayerRecovery_CheckUpperHurtDeathPlaneWithInclusiveReverseGravityBoundary:
                 move.w  (Camera_min_Y_pos).w,d0
                 cmp.w   y_pos(a0),d0
-                blt.s   loc_12344
-                bra.w   loc_1238A
+                blt.s   SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded
+                bra.w   SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane
 ; ---------------------------------------------------------------------------
 
-loc_12344:
+SKPlayerRecovery_RunTerrainCollisionAndResetHurtStateWhenGrounded:
                 movem.l a4-a6,-(sp)
                 bsr.w   SonicKnux_DoLevelCollision
                 movem.l (sp)+,a4-a6
                 btst    #Status_InAir,status(a0)
-                bne.s   locret_12388
+                bne.s   SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset
                 moveq   #0,d0
                 move.w  d0,y_vel(a0)
                 move.w  d0,x_vel(a0)
@@ -72,27 +72,27 @@ loc_12344:
                 move.b  #2*60,invulnerability_timer(a0)
                 move.b  #0,spin_dash_flag(a0)
 
-locret_12388:
+SKPlayerRecovery_ReturnAfterHurtCollisionOrGroundedRecoveryReset:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_1238A:
+SKPlayerRecovery_TailCallCharacterKillFromHurtDeathPlane:
                 jmp     (Kill_Character).l
 ; End of function PlayerSKResolveCommonHurtLandingOrDeathPlane
 
 ; ---------------------------------------------------------------------------
 
-loc_12390:
+SKPlayerRecovery_DeathStateSixWithDebugPlacementEscape:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_123AA
+                beq.s   SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_123AA
+                beq.s   SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_123AA:
+SKPlayerRecovery_ResolveDeathOutcomeThenIntegrateOldVelocityAndDraw:
                 bsr.w   PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn
                 jsr     (MoveSprite_TestGravity).l
                 bsr.w   Sonic_RecordPos
@@ -103,54 +103,54 @@ loc_123AA:
 
 PlayerSKFinishDeathWithFollowerResetRestartOrCompetitionRespawn:
                 cmpa.w  #Player_1,a0
-                bne.s   loc_123D4
+                bne.s   SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock).w
-                bra.s   loc_123DE
+                bra.s   SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy
 ; ---------------------------------------------------------------------------
 
-loc_123D4:
+SKPlayerRecovery_LockNonprimaryScrollUsingPrimaryCameraYForDeathThreshold:
                 move.w  (Camera_Y_pos).w,d0
                 move.b  #1,(Scroll_lock_P2).w
 
-loc_123DE:
+SKPlayerRecovery_PrepareDeathExitDepthWithProfileGravityPolicy:
                 move.b  #0,spin_dash_flag(a0)
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_123FA
+                beq.s   SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold
                 subi.w  #$10,d0
                 cmp.w   y_pos(a0),d0
-                bge.w   loc_12410
-                bra.w   locret_124C6
+                bge.w   SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge
+                bra.w   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
 ; ---------------------------------------------------------------------------
 
-loc_123FA:
+SKPlayerRecovery_PrepareNormalGravityDeathExitThreshold:
                 addi.w  #$100,d0
                 tst.w   (Competition_mode).w
-                beq.s   loc_12408
+                beq.s   SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution
                 subi.w  #$70,d0
 
-loc_12408:
+SKPlayerRecovery_CompareNormalDeathDepthBeforeFollowerOrLifeResolution:
                 cmp.w   y_pos(a0),d0
-                bge.w   locret_124C6
+                bge.w   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
 
-loc_12410:
+SKPlayerRecovery_ResolveAdmittedDeathAsCompetitionFollowerResetOrLifeCharge:
                 tst.w   (Competition_mode).w
-                bne.w   loc_124C8
+                bne.w   SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot
                 cmpi.b  #1,character_id(a0)
-                bne.s   loc_12432
+                bne.s   SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
                 cmpi.w  #2,(Player_mode).w
-                beq.s   loc_12432
+                beq.s   SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver
                 move.b  #2,routine(a0)
                 bra.w   TailsSKResetCPUFollowerToOffscreenCatchUp
 ; ---------------------------------------------------------------------------
 
-loc_12432:
+SKPlayerRecovery_ChargeLifeAndPrepareSixtyTickRestartOrGameOver:
                 move.b  #8,routine(a0)
                 move.w  #60,$3E(a0)
                 move.b  #0,(Respawn_table_keep).w
                 addq.b  #1,(Update_HUD_life_count).w
                 subq.b  #1,(Life_count).w
-                bne.s   loc_12498
+                bne.s   SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
@@ -159,7 +159,7 @@ loc_12432:
                 move.w  a0,(Reserved_object_3+objoff_3E).w
                 clr.b   (Time_over_flag).w
 
-loc_12478:
+SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt:
                 clr.b   (Update_HUD_timer).w
                 clr.b   (Update_HUD_timer_P2).w
                 move.b  #8,routine(a0)
@@ -169,26 +169,26 @@ loc_12478:
                 jmp     (Load_PLC_2).l
 ; ---------------------------------------------------------------------------
 
-loc_12498:
+SKPlayerRecovery_SelectTimeOverOverlayWhenLivesRemainAfterCharge:
                 tst.b   (Time_over_flag).w
-                beq.s   locret_124C6
+                beq.s   SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation
                 move.w  #0,$3E(a0)
                 move.l  #Obj_GameOver,(Reserved_object_3).w
                 move.l  #Obj_GameOver,(Dynamic_object_RAM).w
                 move.b  #2,(Reserved_object_3+mapping_frame).w
                 move.b  #3,(Dynamic_object_RAM+mapping_frame).w
                 move.w  a0,(Reserved_object_3+objoff_3E).w
-                bra.s   loc_12478
+                bra.s   SKPlayerRecovery_StopBothHudTimersAndStartGameOverMusicAndArt
 ; ---------------------------------------------------------------------------
 
-locret_124C6:
+SKPlayerRecovery_ReturnFromDeathFinishWhileWaitingOrAfterRestartPreparation:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_124C8:
+SKPlayerRecovery_RestorePrimaryCompetitionSpawnOrSelectSecondarySlot:
                 move.b  #2,routine(a0)
                 cmpa.w  #Player_1,a0
-                bne.s   loc_12502
+                bne.s   SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState
                 move.b  #0,(Scroll_lock).w
                 move.w  (Saved_X_pos).w,x_pos(a0)
                 move.w  (Saved_Y_pos).w,y_pos(a0)
@@ -197,10 +197,10 @@ loc_124C8:
                 clr.w   (Ring_count).w
                 clr.b   (Extra_life_flags).w
                 move.b  #1,(Competition_lap_count_flag).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
-                bra.s   loc_1252A
+                bra.s   SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet
 ; ---------------------------------------------------------------------------
 
-loc_12502:
+SKPlayerRecovery_RestoreSecondaryCompetitionSpawnAndRingLapState:
                 move.b  #0,(Scroll_lock_P2).w
                 move.w  (Saved2_X_pos).w,x_pos(a0)
                 move.w  (Saved2_Y_pos).w,y_pos(a0)
@@ -209,7 +209,7 @@ loc_12502:
                 clr.w   (Ring_count_P2).w
                 move.b  #1,(Competition_lap_count_flag_P2).w  ; disable the lap count flag, however, later on this value is reset to 0 in Obj_2PGoalMarker
 
-loc_1252A:
+SKPlayerRecovery_ResetCompetitionMovementAndReloadCharacterSpeedTriplet:
                 move.b  #0,object_control(a0)
                 move.b  #5,anim(a0)
                 move.w  #0,x_vel(a0)
@@ -232,40 +232,40 @@ loc_1252A:
 
 ; ---------------------------------------------------------------------------
 
-loc_1257C:
+SKPlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero:
                 tst.w   $3E(a0)
-                beq.s   locret_1258E
+                beq.s   SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
                 subq.w  #1,$3E(a0)
-                bne.s   locret_1258E
+                bne.s   SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion
                 move.w  #1,(Restart_level_flag).w
 
-locret_1258E:
+SKPlayerRecovery_ReturnFromRestartTimerHoldOrCompletion:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12590:
+SKPlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero:
                 tst.w   (H_scroll_amount).w
-                bne.s   loc_125A2
+                bne.s   SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
                 tst.w   (V_scroll_amount).w
-                bne.s   loc_125A2
+                bne.s   SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume
                 move.b  #2,routine(a0)
 
-loc_125A2:
+SKPlayerRecovery_AnimateAndQueueScrollWaitFrameAfterOptionalControlResume:
                 bsr.w   PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_125AC:
+SKPlayerRecovery_DrowningStateCWithDebugPlacementEscape:
                 tst.w   (Debug_mode_flag).w
-                beq.s   loc_125C6
+                beq.s   SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
                 btst    #button_B,(Ctrl_1_pressed).w
-                beq.s   loc_125C6
+                beq.s   SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity
                 move.w  #1,(Debug_placement_mode).w
                 clr.b   (Ctrl_1_locked).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_125C6:
+SKPlayerRecovery_IntegrateDrowningVelocityThenAddOneSixteenthGravity:
                 jsr     (MoveSprite_TestGravity2).l
                 addi.w  #$10,y_vel(a0)
                 bsr.w   Sonic_RecordPos
@@ -276,17 +276,17 @@ loc_125C6:
 
 PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns:
                 tst.w   (Competition_mode).w
-                bne.s   loc_125F8
+                bne.s   SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns
                 bsr.s   Animate_Sonic
                 tst.b   (Reverse_gravity_flag).w
-                beq.s   loc_125F4
+                beq.s   SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip
                 eori.b  #2,render_flags(a0)
 
-loc_125F4:
+SKPlayerRecovery_TailLoadSonicPatternsAfterRecoveryGravityFlip:
                 bra.w   Sonic_Load_PLC
 ; ---------------------------------------------------------------------------
 
-loc_125F8:
+SKPlayerRecovery_AnimateCompetitionRecoveryAndTailLoadSharedPatterns:
                 bsr.w   Animate_SonicKnuckles_2P
                 bra.w   SonicKnuckles2P_Load_PLC
 ; End of function PlayerSKAnimateCommonRecoveryStateAndQueueSonicOrCompetitionPatterns

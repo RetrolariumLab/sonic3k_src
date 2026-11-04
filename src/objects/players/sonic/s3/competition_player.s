@@ -36,10 +36,10 @@ loc_11726:
 Sonic2P_Index:
                 dc.w    loc_11740-Sonic2P_Index
                 dc.w    loc_11858-Sonic2P_Index
-                dc.w    loc_13142-Sonic2P_Index
-                dc.w    loc_131FE-Sonic2P_Index
-                dc.w    loc_133D4-Sonic2P_Index
-                dc.w    loc_133E8-Sonic2P_Index
+                dc.w    S3PlayerRecovery_HurtStateFourWithDebugPlacementEscape-Sonic2P_Index
+                dc.w    S3PlayerRecovery_DeathStateSixWithDebugPlacementEscape-Sonic2P_Index
+                dc.w    S3PlayerRecovery_RestartStateEightCountsNonzeroWordTimerToExactZero-Sonic2P_Index
+                dc.w    S3PlayerRecovery_ScrollWaitStateAResumesControlWhenBothGlobalDeltasZero-Sonic2P_Index
 ; ---------------------------------------------------------------------------
 
 loc_11740:

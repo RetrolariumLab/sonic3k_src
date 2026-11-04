@@ -5,7 +5,7 @@
   "scope": "All35470 researched inherited address and numeric-local labels; completed1571 procedure migration remains independent.",
   "target_count": 35470,
   "scope_sha256": "6d32002c76db58fe4732f6fc7113c9b2d93f88b650fec5e995b26b2a5fe4f278",
-  "applied_targets": 1005,
+  "applied_targets": 1281,
   "packets": [
     {
       "id": "01-audio",
@@ -309,7 +309,7 @@
     },
     {
       "id": "05-player-common",
-      "state": "pending",
+      "state": "applied",
       "target_count": 276,
       "scope_sha256": "9ae52e9ad120c08c889f9a98eb26517e67f20e425974acd99969e0728d44717b",
       "registry": "config/reconstruction/semantic_labels/05-player-common.json",
@@ -7416,5 +7416,5 @@
       "destination_sha256": "2a8b468be40711f1f8204721cd11259cc0427de1e0a5921cb45e223f8e266457"
     }
   ],
-  "applied_order": ["01-audio", "02-system", "03-object-runtime", "04-collision"]
+  "applied_order": ["01-audio", "02-system", "03-object-runtime", "04-collision", "05-player-common"]
 }

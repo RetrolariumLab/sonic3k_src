@@ -4839,24 +4839,24 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 146
       },
-      "declarations_sha256": "8e62b6c10af9482bf4c508dc0da84ffdd143f1920018e37dc010eab4c122c74b",
+      "declarations_sha256": "3d5e1ee5c6069c0abd37632fa8efc83d4817d0df664737af1b9df9ab8716dd06",
       "labels": {
         "Ani_AirCountdown_": 0,
-        "byte_186E2": 30,
-        "byte_186EB": 39,
-        "byte_186F4": 48,
-        "byte_186FD": 57,
-        "byte_18706": 66,
-        "byte_1870F": 75,
-        "byte_18718": 84,
-        "byte_1871D": 89,
-        "byte_18725": 97,
-        "byte_1872D": 105,
-        "byte_18735": 113,
-        "byte_1873D": 121,
-        "byte_18745": 129,
-        "byte_1874D": 137,
-        "byte_1874F": 139
+        "AirCountdown_Animation0_WarningValue0Formation": 30,
+        "AirCountdown_Animation1_WarningValue1Formation": 39,
+        "AirCountdown_Animation2_WarningValue2Formation": 48,
+        "AirCountdown_Animation3_WarningValue3Formation": 57,
+        "AirCountdown_Animation4_WarningValue4Formation": 66,
+        "AirCountdown_Animation5_WarningValue5Formation": 75,
+        "AirCountdown_Animation6_SmallBreathingBubbleFormation": 84,
+        "AirCountdown_Animation7_WarningValue0Blink": 89,
+        "AirCountdown_Animation8_WarningValue1Blink": 97,
+        "AirCountdown_Animation9_WarningValue2Blink": 105,
+        "AirCountdown_Animation10_WarningValue3Blink": 113,
+        "AirCountdown_Animation11_WarningValue4Blink": 121,
+        "AirCountdown_Animation12_WarningValue5Blink": 129,
+        "AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame": 137,
+        "AirCountdown_Animation14_DrowningBubbleFormation": 139
       },
       "external_symbols": [],
       "blocks": [
@@ -4864,105 +4864,105 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_186E2",
+          "target": "AirCountdown_Animation0_WarningValue0Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_186EB",
+          "target": "AirCountdown_Animation1_WarningValue1Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_186F4",
+          "target": "AirCountdown_Animation2_WarningValue2Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_186FD",
+          "target": "AirCountdown_Animation3_WarningValue3Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18706",
+          "target": "AirCountdown_Animation4_WarningValue4Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1870F",
+          "target": "AirCountdown_Animation5_WarningValue5Formation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18718",
+          "target": "AirCountdown_Animation6_SmallBreathingBubbleFormation",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1871D",
+          "target": "AirCountdown_Animation7_WarningValue0Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18725",
+          "target": "AirCountdown_Animation8_WarningValue1Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1872D",
+          "target": "AirCountdown_Animation9_WarningValue2Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18735",
+          "target": "AirCountdown_Animation10_WarningValue3Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1873D",
+          "target": "AirCountdown_Animation11_WarningValue4Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_18745",
+          "target": "AirCountdown_Animation12_WarningValue5Blink",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1874D",
+          "target": "AirCountdown_Animation13_SurfaceBubbleRoutineAdvanceWithoutNewFrame",
           "base": "Ani_AirCountdown_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_1874F",
+          "target": "AirCountdown_Animation14_DrowningBubbleFormation",
           "base": "Ani_AirCountdown_"
         },
         {
@@ -5066,16 +5066,16 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 52
       },
-      "declarations_sha256": "934cd244e55d1eaa4fd8b344fae9a8a60060962af13f58f89dd033803586c803",
+      "declarations_sha256": "b5932082b0030bd128366fbe4cfc8b11430b7edcad9b18e6343a273fbd646ac0",
       "labels": {
         "Ani_Bubbler_": 0,
-        "byte_2FC90": 18,
-        "byte_2FC95": 23,
-        "byte_2FC9B": 29,
-        "byte_2FCA2": 36,
-        "byte_2FCA6": 40,
-        "byte_2FCA8": 42,
-        "byte_2FCAC": 46
+        "Bubbler_Animation0_SmallBubbleFormation": 18,
+        "Bubbler_Animation1_MediumBubbleFormation": 23,
+        "Bubbler_Animation2_LargeCollectableAirBubbleFormation": 29,
+        "Bubbler_Animation3_FastLargeBubbleFormation": 36,
+        "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance": 40,
+        "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop": 42,
+        "Bubbler_Animation8_StationaryGeneratorLoop": 46
       },
       "external_symbols": [],
       "blocks": [
@@ -5083,63 +5083,63 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FC90",
+          "target": "Bubbler_Animation0_SmallBubbleFormation",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FC95",
+          "target": "Bubbler_Animation1_MediumBubbleFormation",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FC9B",
+          "target": "Bubbler_Animation2_LargeCollectableAirBubbleFormation",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCA2",
+          "target": "Bubbler_Animation3_FastLargeBubbleFormation",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCA6",
+          "target": "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCA6",
+          "target": "Bubbler_Animation4_5_SmallOrMediumSurfaceRoutineAdvance",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCA8",
+          "target": "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCA8",
+          "target": "Bubbler_Animation6_7_LargeSurfaceOrCollectedBubblePop",
           "base": "Ani_Bubbler_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "byte_2FCAC",
+          "target": "Bubbler_Animation8_StationaryGeneratorLoop",
           "base": "Ani_Bubbler_"
         },
         {
@@ -5200,26 +5200,26 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 242
       },
-      "declarations_sha256": "1cfe3209a82b88b846374ac607672dcd9547b7c0fbf09c874e6864071a2f1e73",
+      "declarations_sha256": "efd257b0c4708250ae6f0e03639aca4ba5963ffdff73b309b64b7feff98e862c",
       "labels": {
         "Map_Bubbler_": 0,
         "Map_Bubbler2": 46,
         "Map_Bubbler2_": 46,
-        "word_2FD0E": 92,
-        "word_2FD16": 100,
-        "word_2FD1E": 108,
-        "word_2FD26": 116,
-        "word_2FD2E": 124,
-        "word_2FD36": 132,
-        "word_2FD3E": 140,
-        "word_2FD46": 148,
-        "word_2FD60": 174,
-        "word_2FD7A": 200,
-        "word_2FD82": 208,
-        "word_2FD8A": 216,
-        "word_2FD92": 224,
-        "word_2FD9A": 232,
-        "word_2FD9C": 234
+        "Bubbler_Frame0_Mapping": 92,
+        "Bubbler_Frame1_Mapping": 100,
+        "Bubbler_Frame2_Mapping": 108,
+        "Bubbler_Frame3_Mapping": 116,
+        "Bubbler_Frame4_Mapping": 124,
+        "Bubbler_Frame5_Mapping": 132,
+        "Bubbler_Frame6_Mapping": 140,
+        "Bubbler_Frame7_Mapping": 148,
+        "Bubbler_Frame8_Mapping": 174,
+        "Bubbler_PrimaryWarningFrames9To18_Mapping": 200,
+        "Bubbler_Frame19_Mapping": 208,
+        "Bubbler_Frame20_Mapping": 216,
+        "Bubbler_Frame21_Mapping": 224,
+        "Bubbler_Frame22_Mapping": 232,
+        "Bubbler_SecondaryWarningFrames9To18_Mapping": 234
       },
       "external_symbols": [],
       "blocks": [
@@ -5227,322 +5227,322 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD0E",
+          "target": "Bubbler_Frame0_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD16",
+          "target": "Bubbler_Frame1_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD1E",
+          "target": "Bubbler_Frame2_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD26",
+          "target": "Bubbler_Frame3_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD2E",
+          "target": "Bubbler_Frame4_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD36",
+          "target": "Bubbler_Frame5_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD3E",
+          "target": "Bubbler_Frame6_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD46",
+          "target": "Bubbler_Frame7_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD60",
+          "target": "Bubbler_Frame8_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD7A",
+          "target": "Bubbler_PrimaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD82",
+          "target": "Bubbler_Frame19_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD8A",
+          "target": "Bubbler_Frame20_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD92",
+          "target": "Bubbler_Frame21_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9A",
+          "target": "Bubbler_Frame22_Mapping",
           "base": "Map_Bubbler_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD0E",
+          "target": "Bubbler_Frame0_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD16",
+          "target": "Bubbler_Frame1_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD1E",
+          "target": "Bubbler_Frame2_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD26",
+          "target": "Bubbler_Frame3_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD2E",
+          "target": "Bubbler_Frame4_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD36",
+          "target": "Bubbler_Frame5_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD3E",
+          "target": "Bubbler_Frame6_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD46",
+          "target": "Bubbler_Frame7_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD60",
+          "target": "Bubbler_Frame8_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9C",
+          "target": "Bubbler_SecondaryWarningFrames9To18_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD82",
+          "target": "Bubbler_Frame19_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD8A",
+          "target": "Bubbler_Frame20_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD92",
+          "target": "Bubbler_Frame21_Mapping",
           "base": "Map_Bubbler2_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_2FD9A",
+          "target": "Bubbler_Frame22_Mapping",
           "base": "Map_Bubbler2_"
         },
         {

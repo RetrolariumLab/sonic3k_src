@@ -4,157 +4,157 @@
 Animate_SonicKnuckles_2P:
                 lea     (AniSonic2P).l,a1
                 tst.b   character_id(a0)
-                beq.s   loc_12D48
+                beq.s   SKPlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush
                 lea     (AniKnuckles2P).l,a1
 
-loc_12D48:
+SKPlayerCompetitionAnimation_RestartChangedCompetitionAnimationAndClearPush:
                 moveq   #0,d0
                 move.b  anim(a0),d0
                 cmp.b   prev_anim(a0),d0
-                beq.s   loc_12D6A
+                beq.s   SKPlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames
                 move.b  d0,prev_anim(a0)
                 move.b  #0,anim_frame(a0)
                 move.b  #0,anim_frame_timer(a0)
                 bclr    #Status_Push,status(a0)
 
-loc_12D6A:
+SKPlayerCompetitionAnimation_DispatchCompetitionSequenceHeaderAndTimedFrames:
                 add.w   d0,d0
                 adda.w  (a1,d0.w),a1
                 move.b  (a1),d0
-                bmi.s   loc_12DDA
+                bmi.s   SKPlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_12DA8
+                bpl.s   SKPlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
                 move.b  d0,anim_frame_timer(a0)
 
-loc_12D90:
+SKPlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand:
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #$FC,d0
-                bhs.s   loc_12DAA
+                bhs.s   SKPlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand
 
-loc_12DA0:
+SKPlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence:
                 move.b  d0,mapping_frame(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_12DA8:
+SKPlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12DAA:
+SKPlayerCompetitionAnimation_LoopCompetitionSequenceOnFFCommand:
                 addq.b  #1,d0
-                bne.s   loc_12DBA
+                bne.s   SKPlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
-                bra.s   loc_12DA0
+                bra.s   SKPlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence
 ; ---------------------------------------------------------------------------
 
-loc_12DBA:
+SKPlayerCompetitionAnimation_RewindCompetitionSequenceOnFECommand:
                 addq.b  #1,d0
-                bne.s   loc_12DCE
+                bne.s   SKPlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand
                 move.b  2(a1,d1.w),d0
                 sub.b   d0,anim_frame(a0)
                 sub.b   d0,d1
                 move.b  1(a1,d1.w),d0
-                bra.s   loc_12DA0
+                bra.s   SKPlayerCompetitionAnimation_StoreCompetitionMappingFrameAndAdvanceSequence
 ; ---------------------------------------------------------------------------
 
-loc_12DCE:
+SKPlayerCompetitionAnimation_ChangeCompetitionAnimationOnFDCommand:
                 addq.b  #1,d0
-                bne.s   locret_12DD8
+                bne.s   SKPlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand
                 move.b  2(a1,d1.w),anim(a0)
 
-locret_12DD8:
+SKPlayerCompetitionAnimation_ReturnAfterAnimationChangeOrUnhandledFCCommand:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12DDA:
+SKPlayerCompetitionAnimation_DispatchFFHeaderToMovementOrTumble:
                 addq.b  #1,d0
-                bne.w   loc_12EF4
+                bne.w   SKPlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames
                 moveq   #0,d0
                 move.b  flip_angle(a0),d0
-                bne.w   loc_12E8E
+                bne.w   SKPlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing
                 moveq   #0,d1
                 move.b  angle(a0),d0
-                bmi.s   loc_12DF6
-                beq.s   loc_12DF6
+                bmi.s   SKPlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight
+                beq.s   SKPlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight
                 subq.b  #1,d0
 
-loc_12DF6:
+SKPlayerCompetitionAnimation_ReflectMovementAngleWhenFacingRight:
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_12E02
+                bne.s   SKPlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle
                 not.b   d0
 
-loc_12E02:
+SKPlayerCompetitionAnimation_SelectMovementRenderInversionFromWrappedAngle:
                 addi.b  #$10,d0
-                bpl.s   loc_12E0A
+                bpl.s   SKPlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames
                 moveq   #3,d1
 
-loc_12E0A:
+SKPlayerCompetitionAnimation_ApplyMovementFlipAndGatePushingBeforeSpeedFrames:
                 andi.b  #$FC,render_flags(a0)
                 eor.b   d1,d2
                 or.b    d2,render_flags(a0)
                 btst    #Status_Push,status(a0)
-                bne.w   loc_12F3C
+                bne.w   SKPlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires
                 lsr.b   #5,d0
                 andi.b  #3,d0
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_12E2E
+                bpl.s   SKPlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit
                 neg.w   d2
 
-loc_12E2E:
+SKPlayerCompetitionAnimation_DoubleMovementAnimationSpeedForSecondarySignBit:
                 tst.b   status_secondary(a0)
-                bpl.w   loc_12E38
+                bpl.w   SKPlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride
                 add.w   d2,d2
 
-loc_12E38:
+SKPlayerCompetitionAnimation_ChooseCompactWalkOrRunSequenceAndOrientationStride:
                 move.b  d0,d3
                 lea     (AniSonic2P01).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_12E4E
+                bhs.s   SKPlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset
                 lea     (AniSonic2P00).l,a1
                 add.b   d0,d0
 
-loc_12E4E:
+SKPlayerCompetitionAnimation_ReadMovementFrameWithCompactOrientationOffset:
                 add.b   d0,d3
                 moveq   #0,d1
                 move.b  anim_frame(a0),d1
                 move.b  1(a1,d1.w),d0
                 cmpi.b  #-1,d0
-                bne.s   loc_12E6A
+                bne.s   SKPlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer
                 move.b  #0,anim_frame(a0)
                 move.b  1(a1),d0
 
-loc_12E6A:
+SKPlayerCompetitionAnimation_WriteMovementFrameBeforeCheckingAdvanceTimer:
                 move.b  d0,mapping_frame(a0)
                 add.b   d3,mapping_frame(a0)
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.s   locret_12E8C
+                bpl.s   SKPlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance
                 neg.w   d2
                 addi.w  #$800,d2
-                bpl.s   loc_12E82
+                bpl.s   SKPlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex
                 moveq   #0,d2
 
-loc_12E82:
+SKPlayerCompetitionAnimation_ReloadMovementDurationAndAdvanceFrameIndex:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 addq.b  #1,anim_frame(a0)
 
-locret_12E8C:
+SKPlayerCompetitionAnimation_ReturnAfterMovementFrameWriteAndOptionalAdvance:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12E8E:
+SKPlayerCompetitionAnimation_ChooseCompactTumbleOrientationByFacing:
                 move.b  flip_angle(a0),d0
                 moveq   #0,d1
                 move.b  status(a0),d2
                 andi.b  #1,d2
-                bne.s   loc_12EBC
+                bne.s   SKPlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType
                 andi.b  #$FC,render_flags(a0)
                 addi.b  #$16,d0
                 divu.w  #$2C,d0
@@ -164,21 +164,21 @@ loc_12E8E:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12EBC:
+SKPlayerCompetitionAnimation_ChooseLeftFacingTumbleFlipType:
                 andi.b  #$FC,render_flags(a0)
                 tst.b   flip_type(a0)
-                bpl.s   loc_12ED4
+                bpl.s   SKPlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes
                 ori.b   #1,render_flags(a0)
                 addi.b  #$16,d0
-                bra.s   loc_12EE0
+                bra.s   SKPlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame
 ; ---------------------------------------------------------------------------
 
-loc_12ED4:
+SKPlayerCompetitionAnimation_ReverseLeftFacingTumbleAngleAndFlipBothAxes:
                 ori.b   #3,render_flags(a0)
                 neg.b   d0
                 addi.b  #$9A,d0
 
-loc_12EE0:
+SKPlayerCompetitionAnimation_QuantizeLeftTumbleAngleIntoCompactFrame:
                 divu.w  #$2C,d0
                 addi.b  #$15,d0
                 move.b  d0,mapping_frame(a0)
@@ -186,62 +186,62 @@ loc_12EE0:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_12EF4:
+SKPlayerCompetitionAnimation_HandleOtherNegativeHeadersAsTimedRollingFrames:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_12DA8
+                bpl.w   SKPlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
                 move.w  ground_vel(a0),d2
-                bpl.s   loc_12F04
+                bpl.s   SKPlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude
                 neg.w   d2
 
-loc_12F04:
+SKPlayerCompetitionAnimation_SelectRollingSequenceFromUnsignedSpeedMagnitude:
                 lea     (AniSonic2P03).l,a1
                 cmpi.w  #$600,d2
-                bhs.s   loc_12F16
+                bhs.s   SKPlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration
                 lea     (AniSonic2P02).l,a1
 
-loc_12F16:
+SKPlayerCompetitionAnimation_ComputeWrappedRollingFrameDuration:
                 neg.w   d2
                 addi.w  #$400,d2
-                bpl.s   loc_12F20
+                bpl.s   SKPlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead
                 moveq   #0,d2
 
-loc_12F20:
+SKPlayerCompetitionAnimation_ReloadRollingTimerAndFacingBeforeGenericFrameRead:
                 lsr.w   #8,d2
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   loc_12D90
+                bra.w   SKPlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand
 ; ---------------------------------------------------------------------------
 
-loc_12F3C:
+SKPlayerCompetitionAnimation_AdvancePushingOnlyWhenAnimationTimerExpires:
                 subq.b  #1,anim_frame_timer(a0)
-                bpl.w   locret_12DA8
+                bpl.w   SKPlayerCompetitionAnimation_ReturnAfterTimedFrameHoldOrGenericFrameStore
                 move.w  ground_vel(a0),d2
-                bmi.s   loc_12F4C
+                bmi.s   SKPlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator
                 neg.w   d2
 
-loc_12F4C:
+SKPlayerCompetitionAnimation_ComputeWrappedPushingDurationNumerator:
                 addi.w  #$800,d2
-                bpl.s   loc_12F54
+                bpl.s   SKPlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale
                 moveq   #0,d2
 
-loc_12F54:
+SKPlayerCompetitionAnimation_SelectCharacterPushingSequenceAndTimerScale:
                 lsr.w   #6,d2
                 lea     (AniSonic2P04).l,a1
                 tst.b   character_id(a0)
-                beq.s   loc_12F6A
+                beq.s   SKPlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead
                 lea     (AniKnuckles2P04).l,a1
                 lsr.w   #2,d2
 
-loc_12F6A:
+SKPlayerCompetitionAnimation_StorePushingTimerAndFacingBeforeGenericFrameRead:
                 move.b  d2,anim_frame_timer(a0)
                 move.b  status(a0),d1
                 andi.b  #1,d1
                 andi.b  #$FC,render_flags(a0)
                 or.b    d1,render_flags(a0)
-                bra.w   loc_12D90
+                bra.w   SKPlayerCompetitionAnimation_ReadCompetitionFrameOrGenericSequenceCommand
 ; End of function Animate_SonicKnuckles_2P
 
 ; ---------------------------------------------------------------------------
@@ -256,22 +256,22 @@ SonicKnuckles2P_Load_PLC:
                 lea     (PLC_Sonic2P).l,a2
                 move.l  #ArtUnc_Sonic2P,d6
                 tst.b   character_id(a0)
-                beq.s   loc_130BE
+                beq.s   SKPlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination
                 lea     (PLC_Knuckles2P).l,a2
                 move.l  #ArtUnc_Knuckles2P,d6
 
-loc_130BE:
+SKPlayerCompetitionAnimation_ResolveCompetitionFramePatternListAndPlayerDestination:
                 add.w   d0,d0
                 adda.w  (a2,d0.w),a2
                 move.w  (a2)+,d5
                 subq.w  #1,d5
-                bmi.s   locret_13100
+                bmi.s   SKPlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList
                 move.w  #tiles_to_bytes(ArtTile_Player_1),d4
                 cmpa.w  #Player_1,a0
-                beq.s   loc_130D8
+                beq.s   SKPlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination
                 move.w  #tiles_to_bytes(ArtTile_Player_2),d4
 
-loc_130D8:
+SKPlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination:
                 moveq   #0,d1
                 move.w  (a2)+,d1
                 move.w  d1,d3
@@ -285,9 +285,9 @@ loc_130D8:
                 add.w   d3,d4
                 add.w   d3,d4
                 jsr     (Add_To_DMA_Queue).l
-                dbf     d5,loc_130D8
+                dbf     d5,SKPlayerCompetitionAnimation_QueueCompactPatternRunAndAdvanceVramDestination
 
-locret_13100:
+SKPlayerCompetitionAnimation_ReturnAfterEmptyOrQueuedCompetitionPatternList:
                 rts
 ; End of function SonicKnuckles2P_Load_PLC
 
