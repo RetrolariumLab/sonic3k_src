@@ -7,10 +7,11 @@ Obj_AIZEndBoss:
                 move.l  #Obj_AIZEndBossWait,(a0)
                 lea     AIZBossSonicDat(pc),a1
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_691BE
+                bne.s   AIZBossSK_CopyCharacterArenaBase
                 lea     AIZBossKnuxDat(pc),a1
 
-loc_691BE:
+; Copy the trigger X, arena X and exit Y selected for the current character
+AIZBossSK_CopyCharacterArenaBase:
                 lea     (_unkFA82).w,a2
                 move.w  (a1)+,(a2)+
                 move.w  (a1)+,(a2)+
@@ -19,11 +20,11 @@ loc_691BE:
 Obj_AIZEndBossWait:
                 move.w  (_unkFA82).w,d0
                 cmp.w   (Camera_X_pos).w,d0
-                bls.s   loc_691D4                       ; Only branch if Sonic has reached the boss area
+                bls.s   AIZBossSK_LockCameraAndQueueBossArt  ; Only branch if Sonic has reached the boss area
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_691D4:
+AIZBossSK_LockCameraAndQueueBossArt:
                 move.w  d0,(Camera_min_X_pos).w
                 move.w  d0,(Camera_max_X_pos).w
                 move.l  #Obj_Wait,(a0)                  ; Set up object to wait $78 frames
@@ -57,18 +58,18 @@ Obj_AIZEndBossMain:
                 move.w  AIZ_EndBossIndex(pc,d0.w),d1
                 jsr     AIZ_EndBossIndex(pc,d1.w)
                 btst    #6,$38(a0)
-                bne.w   locret_69366                    ; Only draw and touch when boss has revealed itself
+                bne.w   AIZBossSK_SharedReturn          ; Only draw and touch when boss has revealed itself
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 AIZ_EndBossIndex:
                 dc.w    Obj_AIZEndBossInit-AIZ_EndBossIndex
-                dc.w    loc_692E2-AIZ_EndBossIndex
-                dc.w    loc_6932C-AIZ_EndBossIndex
-                dc.w    loc_69368-AIZ_EndBossIndex
-                dc.w    loc_693F0-AIZ_EndBossIndex
-                dc.w    loc_692E2-AIZ_EndBossIndex
-                dc.w    loc_69456-AIZ_EndBossIndex
-                dc.w    loc_6946A-AIZ_EndBossIndex
+                dc.w    AIZBossSK_AnimateRevealBlink-AIZ_EndBossIndex
+                dc.w    AIZBossSK_AnimateEmergenceAndCheckHit-AIZ_EndBossIndex
+                dc.w    AIZBossSK_SwingMoveAndCheckHit-AIZ_EndBossIndex
+                dc.w    AIZBossSK_CheckHitAndTickWait-AIZ_EndBossIndex
+                dc.w    AIZBossSK_AnimateRevealBlink-AIZ_EndBossIndex
+                dc.w    AIZBossSK_CheckTransitCameraMin-AIZ_EndBossIndex
+                dc.w    AIZBossSK_MoveAndTickTransit-AIZ_EndBossIndex
 ; ---------------------------------------------------------------------------
 
 Obj_AIZEndBossInit:
@@ -78,196 +79,199 @@ Obj_AIZEndBossInit:
                 bset    #0,render_flags(a0)
                 lea     (Child1_MakeRoboShip).l,a2
                 jsr     (CreateChild1_Normal).l
-                bne.s   loc_69296
+                bne.s   AIZBossSK_SpawnSideAttachments
                 move.b  #8,subtype(a1)
 
-loc_69296:
-                lea     ChildObjDat_69D18(pc),a2
+AIZBossSK_SpawnSideAttachments:
+                lea     AIZBossSK_SideAttachmentChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_692A0:
+AIZBossSK_BeginRevealAndSplash:
                 move.b  #2,routine(a0)
                 moveq   #signextendB(sfx_WaterfallSplash),d0
                 jsr     (Play_SFX).l
                 ori.b   #$48,$38(a0)
-                move.l  #loc_69302,$34(a0)
+                move.l  #AIZBossSK_EnableCollisionAndEmerge,$34(a0)
                 clr.b   collision_flags(a0)
                 bsr.w   ResetAIZBossHitFlashPalette
                 bclr    #0,render_flags(a0)
                 cmpi.w  #8,angle(a0)
-                bhs.s   loc_692D8
+                bhs.s   AIZBossSK_SpawnRevealSplash
                 bset    #0,render_flags(a0)
 
-loc_692D8:
-                lea     ChildObjDat_69D2E(pc),a2
+AIZBossSK_SpawnRevealSplash:
+                lea     AIZEndBossSK_Root_OneSplashNormalRecord(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_692E2:
-                lea     byte_69D98(pc),a1
+; Frame $2B suppresses the boss draw
+AIZBossSK_AnimateRevealBlink:
+                lea     AIZBossSK_SubmergedBlinkAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 bclr    #6,$38(a0)
                 cmpi.b  #$2B,mapping_frame(a0)
-                bne.s   locret_69300
+                bne.s   AIZBossSK_RevealBlinkReturn
                 bset    #6,$38(a0)
 
-locret_69300:
+AIZBossSK_RevealBlinkReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_69302:
+AIZBossSK_EnableCollisionAndEmerge:
                 move.b  #4,routine(a0)
                 bclr    #6,$38(a0)
                 bset    #7,art_tile(a0)
                 move.b  #$16,collision_flags(a0)
-                move.l  #loc_6933A,$34(a0)
-                lea     ChildObjDat_69D36(pc),a2
+                move.l  #AIZBossSK_BeginExposedSwing,$34(a0)
+                lea     AIZBossSK_EmergenceEffectChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6932C:
-                lea     byte_69DB3(pc),a1
+AIZBossSK_AnimateEmergenceAndCheckHit:
+                lea     AIZBossSK_BodyEmergeAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
-loc_6933A:
+AIZBossSK_BeginExposedSwing:
                 move.b  #6,routine(a0)
                 move.w  #$1F,$2E(a0)
-                move.l  #loc_6937E,$34(a0)
+                move.l  #AIZBossSK_RequestAttackAndSetWait,$34(a0)
                 move.w  #$C0,d0
                 move.w  d0,$3E(a0)
                 move.w  d0,y_vel(a0)
                 move.w  #$10,$40(a0)
                 bclr    #0,$38(a0)
 
-locret_69366:
+AIZBossSK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_69368:
+AIZBossSK_SwingMoveAndCheckHit:
                 jsr     (Swing_UpAndDown).l
                 jsr     (MoveSprite2).l
                 jsr     (Obj_Wait).l
                 bra.w   HandleAIZBossHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 
-loc_6937E:
+AIZBossSK_RequestAttackAndSetWait:
                 bset    #1,$38(a0)
                 btst    #7,$38(a0)
-                bne.s   loc_693A2
+                bne.s   AIZBossSK_ChooseRepeatAttackWait
                 move.w  #4,angle(a0)
                 move.w  #$2F,$2E(a0)
-                move.l  #loc_693DC,$34(a0)
+                move.l  #AIZBossSK_SignalBridgeAndExtendWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_693A2:
+; Give Knuckles 256 calls, compared with 192 for the other characters
+AIZBossSK_ChooseRepeatAttackWait:
                 move.w  #$BF,d0
                 cmpi.b  #2,(Player_1+character_id).w
-                bne.s   loc_693B2
+                bne.s   AIZBossSK_SetRepeatAttackWait
                 move.w  #$FF,d0
 
-loc_693B2:
+AIZBossSK_SetRepeatAttackWait:
                 move.w  d0,$2E(a0)
-                move.l  #loc_693C0,$34(a0)
+                move.l  #AIZBossSK_BeginStationaryWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_693C0:
+AIZBossSK_BeginStationaryWait:
                 move.b  #8,routine(a0)
                 move.w  #$3F,$2E(a0)
-                move.l  #loc_693FA,$34(a0)
+                move.l  #AIZBossSK_BeginSubmergeAndSplash,$34(a0)
                 andi.b  #$F5,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_693DC:
+AIZBossSK_SignalBridgeAndExtendWait:
                 st      (_unkFAA2).w
                 move.w  #$8F,$2E(a0)
-                move.l  #loc_693C0,$34(a0)
+                move.l  #AIZBossSK_BeginStationaryWait,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_693F0:
+; Run the wait even when the hit handler has changed the object routine
+AIZBossSK_CheckHitAndTickWait:
                 bsr.w   HandleAIZBossHitFlashOrDefeat
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_693FA:
+AIZBossSK_BeginSubmergeAndSplash:
                 move.b  #$A,routine(a0)
                 moveq   #signextendB(sfx_WaterfallSplash),d0
                 jsr     (Play_SFX).l
-                move.l  #loc_6942A,$34(a0)
+                move.l  #AIZBossSK_SelectFirstOrRepeatTransit,$34(a0)
                 clr.b   collision_flags(a0)
                 bsr.w   ResetAIZBossHitFlashPalette
-                lea     ChildObjDat_69D2E(pc),a2
+                lea     AIZEndBossSK_Root_OneSplashNormalRecord(pc),a2
                 jsr     (CreateChild1_Normal).l
                 move.b  #2,subtype(a1)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6942A:
+AIZBossSK_SelectFirstOrRepeatTransit:
                 move.b  #$C,routine(a0)
                 bset    #7,$38(a0)
-                beq.s   loc_6943E
+                beq.s   AIZBossSK_ChooseHiddenTransitTarget
                 move.b  #$E,routine(a0)
 
-loc_6943E:
-                move.l  #loc_69476,$34(a0)
+AIZBossSK_ChooseHiddenTransitTarget:
+                move.l  #AIZBossSK_StopTransitAndReveal,$34(a0)
                 bclr    #7,art_tile(a0)
                 move.b  #0,mapping_frame(a0)
-                bra.w   loc_69A66
+                bra.w   AIZBossSK_ChooseNewTransitTarget
 ; ---------------------------------------------------------------------------
 
-loc_69456:
+AIZBossSK_CheckTransitCameraMin:
                 move.w  (Camera_min_X_pos).w,d0
                 addq.w  #2,d0
                 cmp.w   (_unkFA84).w,d0
-                bhi.s   loc_69466
+                bhi.s   AIZBossSK_AdvanceTransitCameraMax
                 move.w  d0,(Camera_min_X_pos).w
 
-loc_69466:
+AIZBossSK_AdvanceTransitCameraMax:
                 addq.w  #2,(Camera_max_X_pos).w
 
-loc_6946A:
+AIZBossSK_MoveAndTickTransit:
                 jsr     (MoveSprite2).l
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_69476:
+AIZBossSK_StopTransitAndReveal:
                 clr.w   x_vel(a0)
                 clr.w   y_vel(a0)
-                bra.w   loc_692A0
+                bra.w   AIZBossSK_BeginRevealAndSplash
 ; ---------------------------------------------------------------------------
 
-loc_69482:
-                move.l  #loc_694A4,$34(a0)
+AIZBossSK_BeginDefeatDebris:
+                move.l  #AIZBossSK_InstallCapsuleWatcher,$34(a0)
                 st      (_unkFAA3).w
                 move.l  #Obj_Wait,(a0)
                 bset    #4,$38(a0)
-                lea     ChildObjDat_69D66(pc),a2
+                lea     AIZBossSK_DefeatDebrisChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_694A4:
-                move.l  #loc_694D4,(a0)
+AIZBossSK_InstallCapsuleWatcher:
+                move.l  #AIZBossSK_WaitCapsuleAndOpenExit,(a0)
 
-loc_694AA:
+AIZBossSK_SignalAndSpawnCapsule:
                 st      (_unkFAA8).w
                 clr.b   (Boss_flag).w
                 lea     (PLC_EggCapsule).l,a1
                 jsr     (Load_PLC_Raw).l
-                lea     ChildObjDat_69D8C(pc),a2
+                lea     AIZBossSK_DefeatCapsuleChild(pc),a2
                 jsr     (CreateChild6_Simple).l
                 bset    #1,render_flags(a1)
                 jmp     (PLCLoad_AnimalsAndExplosion).l
 ; ---------------------------------------------------------------------------
 
-loc_694D4:
+AIZBossSK_WaitCapsuleAndOpenExit:
                 tst.b   (_unkFAA8).w
-                bne.w   locret_69366
-                move.l  #loc_69526,(a0)
+                bne.w   AIZBossSK_SharedReturn
+                move.l  #AIZBossSK_WalkPlayerToExitGate,(a0)
                 jsr     (Restore_PlayerControl).l
                 lea     (Player_2).w,a1
                 jsr     (Restore_PlayerControl2).l
@@ -275,10 +279,10 @@ loc_694D4:
                 st      (Ctrl_1_locked).w
                 clr.w   (Ctrl_1_logical).w
                 jsr     (AllocateObject).l
-                bne.s   loc_6950E
+                bne.s   AIZBossSK_ExtendExitCameraMaxX
                 move.l  #SKInput_LockP2IfActive,(a1)
 
-loc_6950E:
+AIZBossSK_ExtendExitCameraMaxX:
                 move.w  (_unkFA84).w,d0
                 addi.w  #$158,d0
                 move.w  d0,(Camera_stored_max_X_pos).w
@@ -286,72 +290,72 @@ loc_6950E:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_69526:
+AIZBossSK_WalkPlayerToExitGate:
                 move.b  #5,(Flying_picking_Sonic_timer).w
                 lea     (Player_1).w,a1
                 move.w  (_unkFA84).w,d0
                 addi.w  #$1F8,d0
                 cmp.w   x_pos(a1),d0
-                bls.s   loc_69546
+                bls.s   AIZBossSK_StopPlayerAndRouteExit
                 move.w  #(button_right_mask<<8)|button_right_mask,(Ctrl_1_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_69546:
+AIZBossSK_StopPlayerAndRouteExit:
                 jsr     (Stop_Object).l
                 cmpi.b  #2,(Player_1+character_id).w
-                beq.s   loc_6957A
-                move.l  #loc_69588,(a0)
+                beq.s   AIZBossSK_KnucklesStartExitJump
+                move.l  #AIZBossSK_HoldUpUntilInputUnlock,(a0)
                 jsr     (AllocateObject).l
-                bne.s   loc_6956E
+                bne.s   AIZBossSK_LoadExitExplosionArt
                 move.l  #Obj_CutsceneKnuckles,(a1)
                 move.b  #4,subtype(a1)
 
-loc_6956E:
+AIZBossSK_LoadExitExplosionArt:
                 lea     (PLC_Explosion).l,a1
                 jmp     (Load_PLC_Raw).l
 ; ---------------------------------------------------------------------------
 
-loc_6957A:
-                move.l  #loc_695CE,(a0)
+AIZBossSK_KnucklesStartExitJump:
+                move.l  #AIZBossSK_KnucklesWaitForJumpApex,(a0)
                 move.w  #(button_C_mask<<8)|button_C_mask,(Ctrl_1_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_69588:
+AIZBossSK_HoldUpUntilInputUnlock:
                 move.b  #5,(Flying_picking_Sonic_timer).w
                 tst.b   (Ctrl_1_locked).w
-                beq.s   loc_695A0
+                beq.s   AIZBossSK_InstallExitHeightWait
                 move.w  #(button_up_mask<<8)|button_up_mask,(Ctrl_1_logical).w
                 clr.w   (Ctrl_2_logical).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_695A0:
-                move.l  #loc_695A8,(a0)
+AIZBossSK_InstallExitHeightWait:
+                move.l  #AIZBossSK_RefreshExitPickupDelay,(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_695A8:
+AIZBossSK_RefreshExitPickupDelay:
                 move.b  #5,(Flying_picking_Sonic_timer).w
 
-loc_695AE:
+AIZBossSK_CheckExitHeightAndStartHCZ:
                 move.w  (_unkFA86).w,d0
                 addi.w  #$1E6,d0
                 cmp.w   (Player_1+y_pos).w,d0
-                bhi.w   locret_69366
+                bhi.w   AIZBossSK_SharedReturn
                 move.w  #$100,d0
                 jsr     (StartNewLevel).l
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_695CE:
+AIZBossSK_KnucklesWaitForJumpApex:
                 move.w  #button_C_mask<<8,(Ctrl_1_logical).w
                 lea     (Player_1).w,a1
                 bset    #7,art_tile(a1)
                 tst.w   y_vel(a1)
-                bmi.w   locret_69366
-                move.l  #loc_69616,(a0)
+                bmi.w   AIZBossSK_SharedReturn
+                move.l  #AIZBossSK_KnucklesFallToExitHeight,(a0)
                 move.b  #$83,object_control(a1)
                 move.b  #$CB,mapping_frame(a1)
                 jsr     (Player_Load_PLC).l
@@ -362,7 +366,7 @@ loc_695CE:
                 jmp     (CreateChild6_Simple).l
 ; ---------------------------------------------------------------------------
 
-loc_69616:
+AIZBossSK_KnucklesFallToExitHeight:
                 lea     (Player_1).w,a1
                 jsr     (MoveSprite_NormGravity).l
-                bra.s   loc_695AE
+                bra.s   AIZBossSK_CheckExitHeightAndStartHCZ

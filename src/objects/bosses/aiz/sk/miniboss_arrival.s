@@ -8,17 +8,17 @@ Obj_AIZMinibossCutscene:
                 move.b  routine(a0),d0
                 move.w  AIZMinibossCutscene_Index(pc,d0.w),d1
                 jsr     AIZMinibossCutscene_Index(pc,d1.w)
-                bra.w   loc_68F62
+                bra.w   AIZMiniSK_CheckHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 AIZMinibossCutscene_Index:
-                dc.w    loc_68508-AIZMinibossCutscene_Index
-                dc.w    loc_6852C-AIZMinibossCutscene_Index
-                dc.w    loc_68574-AIZMinibossCutscene_Index
-                dc.w    loc_685B8-AIZMinibossCutscene_Index
-                dc.w    loc_685FC-AIZMinibossCutscene_Index
+                dc.w    AIZMiniSK_InitArrivalBoss-AIZMinibossCutscene_Index
+                dc.w    AIZMiniSK_WaitForArrivalCamera-AIZMinibossCutscene_Index
+                dc.w    AIZMiniSK_TickCallbackWait-AIZMinibossCutscene_Index
+                dc.w    AIZMiniSK_DescendAndDraw-AIZMinibossCutscene_Index
+                dc.w    AIZMiniSK_SwingMoveAndDraw-AIZMinibossCutscene_Index
 ; ---------------------------------------------------------------------------
 
-loc_68508:
+AIZMiniSK_InitArrivalBoss:
                 lea     ObjDat_AIZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$60,collision_property(a0)
@@ -28,22 +28,22 @@ loc_68508:
                 jmp     (Load_PLC).l
 ; ---------------------------------------------------------------------------
 
-loc_6852C:
+AIZMiniSK_WaitForArrivalCamera:
                 move.w  (Camera_X_pos).w,d0
                 move.w  #$2F10,d5
                 cmp.w   d5,d0
-                bhs.s   loc_6853A
+                bhs.s   AIZMiniSK_SpawnFlybysAndLoadPalette
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6853A:
-                move.l  #loc_6857A,$34(a0)
-                lea     ChildObjDat_6906A(pc),a2
+AIZMiniSK_SpawnFlybysAndLoadPalette:
+                move.l  #AIZMiniSK_SpawnBodyAndStartDescent,$34(a0)
+                lea     AIZMiniSK_FlybyChildren(pc),a2
                 jsr     (CreateChild3_NormalRepeated).l
                 lea     Pal_AIZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
 
-loc_68556:
+AIZMiniSK_LockCameraAndFadeMusic:
                 move.b  #4,routine(a0)
                 move.w  #3*60,$2E(a0)
                 move.w  d5,(Camera_min_X_pos).w
@@ -51,20 +51,20 @@ loc_68556:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
 
-locret_68572:
+AIZMiniSK_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_68574:
+AIZMiniSK_TickCallbackWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6857A:
-                move.l  #loc_685BE,$34(a0)
+AIZMiniSK_SpawnBodyAndStartDescent:
+                move.l  #AIZMiniSK_ArmBarrelsAndBeginSwing,$34(a0)
                 move.b  #6,routine(a0)
-                lea     ChildObjDat_6905C(pc),a2
+                lea     AIZMiniSK_BodyAndTrimChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_69072(pc),a2
+                lea     AIZMiniSK_ArrivalBarrelChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -80,17 +80,17 @@ StartAIZMinibossDescentAndMusic:
 
 ; ---------------------------------------------------------------------------
 
-loc_685B8:
+AIZMiniSK_DescendAndDraw:
                 jmp     (MoveWaitTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_685BE:
+AIZMiniSK_ArmBarrelsAndBeginSwing:
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_6862E,$34(a0)
+                move.l  #AIZMiniSK_WaitAndSpawnDepartureBlast,$34(a0)
                 move.b  #3,$39(a0)
                 bset    #1,$38(a0)
 
-loc_685D8:
+AIZMiniSK_BeginVerticalSwing:
                 move.b  #8,routine(a0)
                 clr.w   y_vel(a0)
 
@@ -107,16 +107,16 @@ Swing_Setup1:
 
 ; ---------------------------------------------------------------------------
 
-loc_685FC:
+AIZMiniSK_SwingMoveAndDraw:
                 jsr     (Swing_UpAndDown).l
                 jmp     (MoveWaitTouch).l
 ; ---------------------------------------------------------------------------
 ; unused
                 subq.b  #1,$39(a0)
-                bpl.s   loc_68616
-                move.l  #loc_6862E,$34(a0)
+                bpl.s   AIZMiniSK_LegacySpawnArrivalFlames
+                move.l  #AIZMiniSK_WaitAndSpawnDepartureBlast,$34(a0)
 
-loc_68616:
+AIZMiniSK_LegacySpawnArrivalFlames:
                 move.w  #$40,$2E(a0)
                 moveq   #signextendB(sfx_FlamethrowerQuiet),d0
                 jsr     (Play_SFX).l
@@ -124,15 +124,15 @@ loc_68616:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_6862E:
+AIZMiniSK_WaitAndSpawnDepartureBlast:
                 move.w  #$10,$2E(a0)
-                move.l  #loc_68646,$34(a0)
-                lea     ChildObjDat_69104(pc),a2
+                move.l  #AIZMiniSK_BeginRightwardDeparture,$34(a0)
+                lea     AIZMiniSK_DepartureBlastChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_68646:
-                move.l  #loc_68690,(a0)
+AIZMiniSK_BeginRightwardDeparture:
+                move.l  #AIZMiniSK_MoveAndTickDeparture,(a0)
                 lea     Pal_AIZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
                 move.b  #$F,collision_flags(a0)
@@ -142,23 +142,23 @@ loc_68646:
                 clr.w   y_vel(a0)
                 move.w  #$40,$2E(a0)
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_68682
+                bne.s   AIZMiniSK_SetDepartureEventAndCallback
                 move.w  #$120,$2E(a0)
 
-loc_68682:
+AIZMiniSK_SetDepartureEventAndCallback:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 st      (Events_fg_5).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_68690:
+AIZMiniSK_MoveAndTickDeparture:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_686A2
+                bmi.s   AIZMiniSK_RestoreLevelAndQueueCleanup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_686A2:
+AIZMiniSK_RestoreLevelAndQueueCleanup:
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 lea     (PLC_Monitors).l,a1
@@ -166,173 +166,174 @@ loc_686A2:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_686BE:
+AIZMiniSK_InitArrivalRotor:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                lea     word_6900A(pc),a1
+                lea     AIZMiniSK_RotorAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 bset    #4,shield_reaction(a0)
-                move.l  #byte_69126,$30(a0)
-                move.l  #loc_686E8,(a0)
+                move.l  #AIZMiniSK_RotorLoopAnimation,$30(a0)
+                move.l  #AIZMiniSK_RotorFollowAndCheckBossDeath,(a0)
                 jmp     (Child_DrawTouch_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_686E8:
+AIZMiniSK_RotorFollowAndCheckBossDeath:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_68704
+                beq.s   AIZMiniSK_RotorDrawUntilDeparture
                 clr.b   collision_flags(a0)
 
-loc_68704:
+AIZMiniSK_RotorDrawUntilDeparture:
                 jmp     (Child_DrawTouch_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6870A:
+AIZMiniSK_InitArrivalTrim:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                move.l  #loc_68720,(a0)
-                lea     word_69012(pc),a1
+                move.l  #AIZMiniSK_TrimFollowUntilDeparture,(a0)
+                lea     AIZMiniSK_TrimAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes2).l
 ; ---------------------------------------------------------------------------
 
-loc_68720:
+AIZMiniSK_TrimFollowUntilDeparture:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_6872C:
+AIZMiniSK_ArrivalBarrelFollowDispatch:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_68746(pc,d0.w),d1
-                jsr     off_68746(pc,d1.w)
+                move.w  AIZMiniSK_ArrivalBarrelStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniSK_ArrivalBarrelStateOffsets(pc,d1.w)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_68746:
-                dc.w    loc_68754-off_68746
-                dc.w    loc_6875E-off_68746
-                dc.w    loc_6877E-off_68746
-                dc.w    loc_6879C-off_68746
-                dc.w    loc_687DC-off_68746
-                dc.w    loc_6879C-off_68746
-                dc.w    locret_68572-off_68746
+AIZMiniSK_ArrivalBarrelStateOffsets:
+                dc.w    AIZMiniSK_InitBarrelAttributes-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_ArrivalBarrelWaitRequest-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_ArrivalBarrelTickStagger-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_BarrelAnimatePairs-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_ArrivalBarrelTickShots-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_BarrelAnimatePairs-AIZMiniSK_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniSK_SharedReturn-AIZMiniSK_ArrivalBarrelStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_68754:
-                lea     word_6901A(pc),a1
+AIZMiniSK_InitBarrelAttributes:
+                lea     AIZMiniSK_BarrelAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes2).l
 ; ---------------------------------------------------------------------------
 
-loc_6875E:
+AIZMiniSK_ArrivalBarrelWaitRequest:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_6876C
+                bne.s   AIZMiniSK_ArrivalBarrelSetStagger
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6876C:
+AIZMiniSK_ArrivalBarrelSetStagger:
                 move.b  #4,routine(a0)
-                move.l  #loc_68784,$34(a0)
-                bra.w   loc_68EC0
+                move.l  #AIZMiniSK_ArrivalBarrelArmShotCycle,$34(a0)
+                bra.w   AIZMiniSK_LoadBarrelStagger
 ; ---------------------------------------------------------------------------
 
-loc_6877E:
+AIZMiniSK_ArrivalBarrelTickStagger:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_68784:
-                move.l  #loc_687A2,$34(a0)
+AIZMiniSK_ArrivalBarrelArmShotCycle:
+                move.l  #AIZMiniSK_ArrivalBarrelBeginShots,$34(a0)
 
-loc_6878C:
+AIZMiniSK_BarrelBeginOpening:
                 move.b  #6,routine(a0)
-                move.l  #byte_6912F,$30(a0)
+                move.l  #AIZMiniSK_BarrelOpenAnimation,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6879C:
+AIZMiniSK_BarrelAnimatePairs:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_687A2:
+AIZMiniSK_ArrivalBarrelBeginShots:
                 move.b  #8,routine(a0)
                 move.b  #3,$39(a0)
-                move.l  #loc_687B6,$34(a0)
+                move.l  #AIZMiniSK_ArrivalBarrelSelectShot,$34(a0)
 
-loc_687B6:
+AIZMiniSK_ArrivalBarrelSelectShot:
                 move.w  #$1C,$2E(a0)
                 subq.b  #1,$39(a0)
                 cmpi.b  #1,$39(a0)
-                beq.s   loc_687D2
-                lea     ChildObjDat_6909A(pc),a2
+                beq.s   AIZMiniSK_ArrivalBarrelFireFloorShot
+                lea     AIZMiniSK_BurstAndTimedMissileChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_687D2:
-                lea     ChildObjDat_690A8(pc),a2
+; Only counter value 1 selects the floor-seeking missile
+AIZMiniSK_ArrivalBarrelFireFloorShot:
+                lea     AIZMiniSK_BurstAndFloorMissileChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_687DC:
+AIZMiniSK_ArrivalBarrelTickShots:
                 jsr     (Obj_Wait).l
                 tst.b   $39(a0)
-                bmi.s   loc_687EA
+                bmi.s   AIZMiniSK_ArrivalBarrelBeginClosing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_687EA:
+AIZMiniSK_ArrivalBarrelBeginClosing:
                 move.b  #$A,routine(a0)
-                move.l  #byte_69136,$30(a0)
-                move.l  #loc_68802,$34(a0)
+                move.l  #AIZMiniSK_BarrelCloseAnimation,$30(a0)
+                move.l  #AIZMiniSK_ArrivalBarrelSetIdle,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_68802:
+AIZMiniSK_ArrivalBarrelSetIdle:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_6880A:
+AIZMiniSK_BarrelBurstFollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_68824(pc,d0.w),d1
-                jsr     off_68824(pc,d1.w)
+                move.w  AIZMiniSK_BarrelBurstStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniSK_BarrelBurstStateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_68824:
-                dc.w    loc_68828-off_68824
-                dc.w    loc_6879C-off_68824
+AIZMiniSK_BarrelBurstStateOffsets:
+                dc.w    AIZMiniSK_InitBarrelBurst-AIZMiniSK_BarrelBurstStateOffsets
+                dc.w    AIZMiniSK_BarrelAnimatePairs-AIZMiniSK_BarrelBurstStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_68828:
-                lea     byte_69022(pc),a1
+AIZMiniSK_InitBarrelBurst:
+                lea     AIZMiniSK_BurstAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #byte_6913F,$30(a0)
+                move.l  #AIZMiniSK_BurstAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_68844:
+AIZMiniSK_TimedMissileDispatch:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_68852(pc,d0.w),d1
-                jmp     off_68852(pc,d1.w)
+                move.w  AIZMiniSK_TimedMissileStateOffsets(pc,d0.w),d1
+                jmp     AIZMiniSK_TimedMissileStateOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_68852:
-                dc.w    InitializeAIZMinibossRisingMissile-off_68852
-                dc.w    loc_6888E-off_68852
-                dc.w    loc_68574-off_68852
-                dc.w    loc_6888E-off_68852
+AIZMiniSK_TimedMissileStateOffsets:
+                dc.w    InitializeAIZMinibossRisingMissile-AIZMiniSK_TimedMissileStateOffsets
+                dc.w    AIZMiniSK_TimedMissileMoveAndDraw-AIZMiniSK_TimedMissileStateOffsets
+                dc.w    AIZMiniSK_TickCallbackWait-AIZMiniSK_TimedMissileStateOffsets
+                dc.w    AIZMiniSK_TimedMissileMoveAndDraw-AIZMiniSK_TimedMissileStateOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
 InitializeAIZMinibossRisingMissile:
-                lea     word_6902A(pc),a1
+                lea     AIZMiniSK_MissileAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                move.l  #byte_6914C,$30(a0)
-                move.l  #loc_6889A,$34(a0)
+                move.l  #AIZMiniSK_MissileLoopAnimation,$30(a0)
+                move.l  #AIZMiniSK_TimedMissileBeginApexPause,$34(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$60,$2E(a0)
                 jmp     (Draw_Sprite).l
@@ -340,19 +341,19 @@ InitializeAIZMinibossRisingMissile:
 
 ; ---------------------------------------------------------------------------
 
-loc_6888E:
+AIZMiniSK_TimedMissileMoveAndDraw:
                 jsr     (Move_AnimateRaw_Wait).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_6889A:
+AIZMiniSK_TimedMissileBeginApexPause:
                 move.b  #4,routine(a0)
                 move.w  #8,$2E(a0)
-                move.l  #loc_688B0,$34(a0)
+                move.l  #AIZMiniSK_TimedMissileBeginDescent,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_688B0:
+AIZMiniSK_TimedMissileBeginDescent:
                 move.b  #6,routine(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
@@ -379,8 +380,8 @@ Obj_AIZMiniboss_Flame:
 ; ---------------------------------------------------------------------------
 AIZMiniboss_Flame_Index:
                 dc.w    InitializeAIZMinibossStaggeredFlame-AIZMiniboss_Flame_Index
-                dc.w    loc_68574-AIZMiniboss_Flame_Index
-                dc.w    loc_68956-AIZMiniboss_Flame_Index
+                dc.w    AIZMiniSK_TickCallbackWait-AIZMiniboss_Flame_Index
+                dc.w    AIZMiniSK_FlameAnimateAndDraw-AIZMiniboss_Flame_Index
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -388,10 +389,11 @@ InitializeAIZMinibossStaggeredFlame:
                 lea     ObjDat_AIZMiniboss_Flame(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #4,shield_reaction(a0)
-                move.l  #loc_6893E,$34(a0)
+                move.l  #AIZMiniSK_FlameStartAnimation,$34(a0)
                 moveq   #6,d1
 
-loc_68928:
+; Double the subtype-adjusted delay in the low byte before storing the timer word
+AIZMiniSK_SetFlameStaggerFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 sub.w   d0,d1
@@ -403,47 +405,48 @@ loc_68928:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_6893E:
+AIZMiniSK_FlameStartAnimation:
                 move.b  #4,routine(a0)
-                move.l  #byte_6915F,$30(a0)
-                move.l  #loc_68962,$34(a0)
+                move.l  #AIZMinibossSK_Flame_HoldFrameDelayStream,$30(a0)
+                move.l  #AIZMiniSK_FlameExplodeAndTryTrail,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_68956:
+AIZMiniSK_FlameAnimateAndDraw:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_68962:
+; Only the final flame subtype spawns the advancing ground effect
+AIZMiniSK_FlameExplodeAndTryTrail:
                 move.l  #Map_BossExplosion,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BossExplosion2,0,1),art_tile(a0)
-                move.l  #byte_69164,$30(a0)
+                move.l  #AIZMiniSK_FlameExplosionAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 cmpi.b  #6,subtype(a0)
-                bne.w   locret_68572
-                lea     ChildObjDat_690D0(pc),a2
+                bne.w   AIZMiniSK_SharedReturn
+                lea     AIZMiniSK_AdvancingFlameChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function InitializeAIZMinibossStaggeredFlame
 
 ; ---------------------------------------------------------------------------
 
-loc_68994:
+AIZMiniSK_FlameTrailDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_689A8(pc,d0.w),d1
-                jsr     off_689A8(pc,d1.w)
+                move.w  AIZMiniSK_FlameTrailStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniSK_FlameTrailStateOffsets(pc,d1.w)
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_689A8:
-                dc.w    loc_689AC-off_689A8
-                dc.w    loc_689F8-off_689A8
+AIZMiniSK_FlameTrailStateOffsets:
+                dc.w    AIZMiniSK_InitFlameTrailAtBoss-AIZMiniSK_FlameTrailStateOffsets
+                dc.w    AIZMiniSK_FlameTrailAnimateAndStep-AIZMiniSK_FlameTrailStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_689AC:
+AIZMiniSK_InitFlameTrailAtBoss:
                 bsr.w   InitializeAIZMinibossStaggeredFlame
                 move.w  #$100,priority(a0)
-                move.l  #byte_6916F,$30(a0)
+                move.l  #AIZMiniSK_AdvancingFlameAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
@@ -451,34 +454,35 @@ loc_689AC:
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  #-$60,d0
                 btst    #0,render_flags(a1)
-                beq.s   loc_689EC
+                beq.s   AIZMiniSK_FlameTrailSetInitialX
                 neg.w   d0
                 bset    #0,render_flags(a0)
 
-loc_689EC:
+AIZMiniSK_FlameTrailSetInitialX:
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_689F8:
+; Use the animation cursor to select the X step only when the decoder returns positive D2
+AIZMiniSK_FlameTrailAnimateAndStep:
                 jsr     (Animate_RawMultiDelay).l
                 tst.w   d2
-                beq.s   locret_68A16
-                bmi.s   locret_68A16
-                move.w  word_68A18(pc,d0.w),d0
+                beq.s   AIZMiniSK_FlameTrailUpdateReturn
+                bmi.s   AIZMiniSK_FlameTrailUpdateReturn
+                move.w  AIZMiniSK_FlameTrailXSteps(pc,d0.w),d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_68A12
+                bne.s   AIZMiniSK_FlameTrailApplyXStep
                 neg.w   d0
 
-loc_68A12:
+AIZMiniSK_FlameTrailApplyXStep:
                 add.w   d0,x_pos(a0)
 
-locret_68A16:
+AIZMiniSK_FlameTrailUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_68A18:
+AIZMiniSK_FlameTrailXSteps:
                 dc.w    0
                 dc.w    0
                 dc.w    0

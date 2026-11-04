@@ -14175,7 +14175,7 @@
       "responsibility": "Angel Island end-boss attachment states, attack actors, projectiles and private movement records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 417,
+      "physical_lines": 421,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -14215,7 +14215,7 @@
       "responsibility": "Angel Island end-boss child positioning, synchronized drawing, animation and spawn helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 208,
+      "physical_lines": 211,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -14260,7 +14260,7 @@
       "responsibility": "Angel Island end-boss initialization, battle state, defeat sequence and player transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 314,
+      "physical_lines": 316,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -14272,7 +14272,7 @@
       "range_kind": "canonical-normal-build",
       "added_annotations": [
         {
-          "name": "loc_47466",
+          "name": "AIZBossS3_WaitExitHeight",
           "kind": "terminal-tail",
           "reason": "The complete final object state keeps its conditional early return with its unconditional state-transition or sprite-service tail call and contains no original independent return boundary.",
           "origin_first_line": 1350,
@@ -14350,7 +14350,7 @@
       "responsibility": "Angel Island end-boss attachment states, attack actors, projectiles and private movement records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 431,
+      "physical_lines": 436,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -14380,7 +14380,7 @@
       "responsibility": "Angel Island end-boss child positioning, synchronized drawing, animation and spawn helpers.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 204,
+      "physical_lines": 207,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -14415,7 +14415,7 @@
       "responsibility": "Angel Island end-boss initialization, battle state, defeat sequence and player transition.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 368,
+      "physical_lines": 372,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -14475,7 +14475,7 @@
       "responsibility": "Angel Island miniboss lifecycle, attack states, coordinated child actors and private object or animation records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 752,
+      "physical_lines": 754,
       "origin": {
         "commit": "56d2c214b205114aa54dfc39e1f6605a3e683b9d",
         "path": "s3.s",
@@ -14520,7 +14520,7 @@
       "responsibility": "Angel Island miniboss arrival cutscene, flame actors and scene transitions.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 486,
+      "physical_lines": 490,
       "origin": {
         "commit": "a4af3e3425c225cb2ed0f0a121b2504e3242337c",
         "path": "s3.s",
@@ -14560,7 +14560,7 @@
       "responsibility": "Angel Island miniboss lifecycle, attack states, coordinated child actors and private object or animation records.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 778,
+      "physical_lines": 780,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",
@@ -14595,7 +14595,7 @@
       "responsibility": "Angel Island miniboss arrival cutscene, fire effects, movement helpers and private scene resources.",
       "role": "code",
       "status": "owned",
-      "physical_lines": 487,
+      "physical_lines": 491,
       "origin": {
         "commit": "8059ad84d047094386e41f09e544b994df680179",
         "path": "sonic3k.s",

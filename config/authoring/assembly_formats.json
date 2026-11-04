@@ -80209,10 +80209,10 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 40
       },
-      "declarations_sha256": "b70fb585b4e1a13944a79bd1faaf6bdc64799609f10b306bfe0e49d63a47328a",
+      "declarations_sha256": "51ef1f64e5e67e1a8c9e2dae4cd17b99a491827453993dbf4669260b1707b74e",
       "labels": {
         "Map_AIZ2BossSmall_": 0,
-        "word_23C266": 2
+        "AIZ2AirRaidBossSmallS3_MapFrame00": 2
       },
       "external_symbols": [],
       "blocks": [
@@ -80220,7 +80220,7 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "word_23C266",
+          "target": "AIZ2AirRaidBossSmallS3_MapFrame00",
           "base": "Map_AIZ2BossSmall_"
         },
         {
@@ -81002,62 +81002,62 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 1274
       },
-      "declarations_sha256": "e941216c973d7ccf3885bd511c881e6a9a2178208dbbbe96bf9efbd98824bd6f",
+      "declarations_sha256": "6bac2f208f4a99b91b178a4f2b46fc5d031fcb38764dc53566d52846beb9c879",
       "labels": {
         "Map_AIZEndBoss_": 0,
-        "Frame_362046": 112,
-        "Frame_362078": 162,
-        "Frame_362098": 194,
-        "Frame_3620A6": 208,
-        "Frame_3620AE": 216,
-        "Frame_3620B6": 224,
-        "Frame_3620BE": 232,
-        "Frame_3620CC": 246,
-        "Frame_3620D4": 254,
-        "Frame_3620DC": 262,
-        "Frame_3620E4": 270,
-        "Frame_3620EC": 278,
-        "Frame_3620FA": 292,
-        "Frame_362108": 306,
-        "Frame_362116": 320,
-        "Frame_362124": 334,
-        "Frame_362132": 348,
-        "Frame_362140": 362,
-        "Frame_362148": 370,
-        "Frame_362150": 378,
-        "Frame_362158": 386,
-        "Frame_362166": 400,
-        "Frame_362174": 414,
-        "Frame_36217C": 422,
-        "Frame_362184": 430,
-        "Frame_36218C": 438,
-        "Frame_3621BE": 488,
-        "Frame_3621F0": 538,
-        "Frame_362222": 588,
-        "Frame_362242": 620,
-        "Frame_362262": 652,
-        "Frame_362282": 684,
-        "Frame_362290": 698,
-        "Frame_36229E": 712,
-        "Frame_3622AC": 726,
-        "Frame_362326": 848,
-        "Frame_36233A": 868,
-        "Frame_36234E": 888,
-        "Frame_362362": 908,
-        "Frame_362376": 928,
-        "Frame_36238A": 948,
-        "Frame_36238C": 950,
-        "Frame_3623EE": 1048,
-        "Frame_3623FC": 1062,
-        "Frame_36240A": 1076,
-        "Frame_362418": 1090,
-        "Frame_362426": 1104,
-        "Frame_3624A0": 1226,
-        "Frame_3624A8": 1234,
-        "Frame_3624B0": 1242,
-        "Frame_3624B8": 1250,
-        "Frame_3624C0": 1258,
-        "Frame_3624C8": 1266
+        "AIZEndBossS3_MapFrame00": 112,
+        "AIZEndBossS3_MapFrame01": 162,
+        "AIZEndBossS3_MapFrame02": 194,
+        "AIZEndBossS3_MapFrame03": 208,
+        "AIZEndBossS3_MapFrame04": 216,
+        "AIZEndBossS3_MapFrame05": 224,
+        "AIZEndBossS3_MapFrame06": 232,
+        "AIZEndBossS3_MapFrame07": 246,
+        "AIZEndBossS3_MapFrame08": 254,
+        "AIZEndBossS3_MapFrame09": 262,
+        "AIZEndBossS3_MapFrame0A": 270,
+        "AIZEndBossS3_MapFrame0B": 278,
+        "AIZEndBossS3_MapFrame0C": 292,
+        "AIZEndBossS3_MapFrame0D": 306,
+        "AIZEndBossS3_MapFrame0E": 320,
+        "AIZEndBossS3_MapFrame0F": 334,
+        "AIZEndBossS3_MapFrame11": 348,
+        "AIZEndBossS3_MapFrame12": 362,
+        "AIZEndBossS3_MapFrame13": 370,
+        "AIZEndBossS3_MapFrame14": 378,
+        "AIZEndBossS3_MapFrame15": 386,
+        "AIZEndBossS3_MapFrame17": 400,
+        "AIZEndBossS3_MapFrame18": 414,
+        "AIZEndBossS3_MapFrame19": 422,
+        "AIZEndBossS3_MapFrame1A": 430,
+        "AIZEndBossS3_MapFrame1B": 438,
+        "AIZEndBossS3_MapFrame1C": 488,
+        "AIZEndBossS3_MapFrame1D": 538,
+        "AIZEndBossS3_MapFrame1E": 588,
+        "AIZEndBossS3_MapFrame1F": 620,
+        "AIZEndBossS3_MapFrame20": 652,
+        "AIZEndBossS3_MapFrame21": 684,
+        "AIZEndBossS3_MapFrame22": 698,
+        "AIZEndBossS3_MapFrame23": 712,
+        "AIZEndBossS3_MapFrame24": 726,
+        "AIZEndBossS3_MapFrame25": 848,
+        "AIZEndBossS3_MapFrame27": 868,
+        "AIZEndBossS3_MapFrame28": 888,
+        "AIZEndBossS3_MapFrame29": 908,
+        "AIZEndBossS3_MapFrame2A": 928,
+        "AIZEndBossS3_MapFrame2B": 948,
+        "AIZEndBossS3_MapFrame2C": 950,
+        "AIZEndBossS3_MapFrame2D": 1048,
+        "AIZEndBossS3_MapFrame2E": 1062,
+        "AIZEndBossS3_MapFrame2F": 1076,
+        "AIZEndBossS3_MapFrame30": 1090,
+        "AIZEndBossS3_MapFrame31": 1104,
+        "AIZEndBossS3_MapFrame32": 1226,
+        "AIZEndBossS3_MapFrame33": 1234,
+        "AIZEndBossS3_MapFrame34": 1242,
+        "AIZEndBossS3_MapFrame35": 1250,
+        "AIZEndBossS3_MapFrame36": 1258,
+        "AIZEndBossS3_MapFrame37": 1266
       },
       "external_symbols": [],
       "blocks": [
@@ -81065,392 +81065,392 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362046",
+          "target": "AIZEndBossS3_MapFrame00",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362078",
+          "target": "AIZEndBossS3_MapFrame01",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362098",
+          "target": "AIZEndBossS3_MapFrame02",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620A6",
+          "target": "AIZEndBossS3_MapFrame03",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620AE",
+          "target": "AIZEndBossS3_MapFrame04",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620B6",
+          "target": "AIZEndBossS3_MapFrame05",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620BE",
+          "target": "AIZEndBossS3_MapFrame06",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620CC",
+          "target": "AIZEndBossS3_MapFrame07",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620D4",
+          "target": "AIZEndBossS3_MapFrame08",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620DC",
+          "target": "AIZEndBossS3_MapFrame09",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620E4",
+          "target": "AIZEndBossS3_MapFrame0A",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620EC",
+          "target": "AIZEndBossS3_MapFrame0B",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3620FA",
+          "target": "AIZEndBossS3_MapFrame0C",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362108",
+          "target": "AIZEndBossS3_MapFrame0D",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362116",
+          "target": "AIZEndBossS3_MapFrame0E",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362124",
+          "target": "AIZEndBossS3_MapFrame0F",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362124",
+          "target": "AIZEndBossS3_MapFrame0F",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362132",
+          "target": "AIZEndBossS3_MapFrame11",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 36,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362140",
+          "target": "AIZEndBossS3_MapFrame12",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 38,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362148",
+          "target": "AIZEndBossS3_MapFrame13",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 40,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362150",
+          "target": "AIZEndBossS3_MapFrame14",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 42,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362158",
+          "target": "AIZEndBossS3_MapFrame15",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 44,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362158",
+          "target": "AIZEndBossS3_MapFrame15",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 46,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362166",
+          "target": "AIZEndBossS3_MapFrame17",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 48,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362174",
+          "target": "AIZEndBossS3_MapFrame18",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 50,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36217C",
+          "target": "AIZEndBossS3_MapFrame19",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 52,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362184",
+          "target": "AIZEndBossS3_MapFrame1A",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 54,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36218C",
+          "target": "AIZEndBossS3_MapFrame1B",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 56,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3621BE",
+          "target": "AIZEndBossS3_MapFrame1C",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 58,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3621F0",
+          "target": "AIZEndBossS3_MapFrame1D",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 60,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362222",
+          "target": "AIZEndBossS3_MapFrame1E",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 62,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362242",
+          "target": "AIZEndBossS3_MapFrame1F",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 64,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362262",
+          "target": "AIZEndBossS3_MapFrame20",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 66,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362282",
+          "target": "AIZEndBossS3_MapFrame21",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 68,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362290",
+          "target": "AIZEndBossS3_MapFrame22",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 70,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36229E",
+          "target": "AIZEndBossS3_MapFrame23",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 72,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3622AC",
+          "target": "AIZEndBossS3_MapFrame24",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 74,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362326",
+          "target": "AIZEndBossS3_MapFrame25",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 76,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362326",
+          "target": "AIZEndBossS3_MapFrame25",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 78,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36233A",
+          "target": "AIZEndBossS3_MapFrame27",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 80,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36234E",
+          "target": "AIZEndBossS3_MapFrame28",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 82,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362362",
+          "target": "AIZEndBossS3_MapFrame29",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 84,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362376",
+          "target": "AIZEndBossS3_MapFrame2A",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 86,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36238A",
+          "target": "AIZEndBossS3_MapFrame2B",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 88,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36238C",
+          "target": "AIZEndBossS3_MapFrame2C",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 90,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3623EE",
+          "target": "AIZEndBossS3_MapFrame2D",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 92,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3623FC",
+          "target": "AIZEndBossS3_MapFrame2E",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 94,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36240A",
+          "target": "AIZEndBossS3_MapFrame2F",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 96,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362418",
+          "target": "AIZEndBossS3_MapFrame30",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 98,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362426",
+          "target": "AIZEndBossS3_MapFrame31",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 100,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624A0",
+          "target": "AIZEndBossS3_MapFrame32",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 102,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624A8",
+          "target": "AIZEndBossS3_MapFrame33",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 104,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624B0",
+          "target": "AIZEndBossS3_MapFrame34",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 106,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624B8",
+          "target": "AIZEndBossS3_MapFrame35",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 108,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624C0",
+          "target": "AIZEndBossS3_MapFrame36",
           "base": "Map_AIZEndBoss_"
         },
         {
           "offset": 110,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624C8",
+          "target": "AIZEndBossS3_MapFrame37",
           "base": "Map_AIZEndBoss_"
         },
         {
@@ -83125,27 +83125,27 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 282
       },
-      "declarations_sha256": "231130257fd6c064dfbc4b23ff445f81c781be4853d498a262e38e694b55eca3",
+      "declarations_sha256": "cced999fa8a0d4d62a1fbd1fb655470c168e08ee6ad6708177690a7e198eaaf8",
       "labels": {
         "Map_AIZMiniboss_": 0,
-        "Frame_3624F4": 36,
-        "Frame_36251A": 74,
-        "Frame_36252E": 94,
-        "Frame_362542": 114,
-        "Frame_36254A": 122,
-        "Frame_362552": 130,
-        "Frame_36255A": 138,
-        "Frame_362562": 146,
-        "Frame_362570": 160,
-        "Frame_36257E": 174,
-        "Frame_36258C": 188,
-        "Frame_362594": 196,
-        "Frame_36259C": 204,
-        "Frame_3625B0": 224,
-        "Frame_3625C4": 244,
-        "Frame_3625CC": 252,
-        "Frame_3625D4": 260,
-        "Frame_3625DC": 268
+        "AIZMinibossS3_MapFrame00": 36,
+        "AIZMinibossS3_MapFrame01": 74,
+        "AIZMinibossS3_MapFrame02": 94,
+        "AIZMinibossS3_MapFrame03": 114,
+        "AIZMinibossS3_MapFrame04": 122,
+        "AIZMinibossS3_MapFrame05": 130,
+        "AIZMinibossS3_MapFrame06": 138,
+        "AIZMinibossS3_MapFrame07": 146,
+        "AIZMinibossS3_MapFrame08": 160,
+        "AIZMinibossS3_MapFrame09": 174,
+        "AIZMinibossS3_MapFrame0A": 188,
+        "AIZMinibossS3_MapFrame0B": 196,
+        "AIZMinibossS3_MapFrame0C": 204,
+        "AIZMinibossS3_MapFrame0D": 224,
+        "AIZMinibossS3_MapFrame0E": 244,
+        "AIZMinibossS3_MapFrame0F": 252,
+        "AIZMinibossS3_MapFrame10": 260,
+        "AIZMinibossS3_MapFrame11": 268
       },
       "external_symbols": [],
       "blocks": [
@@ -83153,126 +83153,126 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3624F4",
+          "target": "AIZMinibossS3_MapFrame00",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36251A",
+          "target": "AIZMinibossS3_MapFrame01",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36252E",
+          "target": "AIZMinibossS3_MapFrame02",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362542",
+          "target": "AIZMinibossS3_MapFrame03",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36254A",
+          "target": "AIZMinibossS3_MapFrame04",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 10,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362552",
+          "target": "AIZMinibossS3_MapFrame05",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 12,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36255A",
+          "target": "AIZMinibossS3_MapFrame06",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 14,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362562",
+          "target": "AIZMinibossS3_MapFrame07",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 16,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362570",
+          "target": "AIZMinibossS3_MapFrame08",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 18,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36257E",
+          "target": "AIZMinibossS3_MapFrame09",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 20,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36258C",
+          "target": "AIZMinibossS3_MapFrame0A",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 22,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362594",
+          "target": "AIZMinibossS3_MapFrame0B",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 24,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36259C",
+          "target": "AIZMinibossS3_MapFrame0C",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 26,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625B0",
+          "target": "AIZMinibossS3_MapFrame0D",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 28,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625C4",
+          "target": "AIZMinibossS3_MapFrame0E",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 30,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625CC",
+          "target": "AIZMinibossS3_MapFrame0F",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 32,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625D4",
+          "target": "AIZMinibossS3_MapFrame10",
           "base": "Map_AIZMiniboss_"
         },
         {
           "offset": 34,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625DC",
+          "target": "AIZMinibossS3_MapFrame11",
           "base": "Map_AIZMiniboss_"
         },
         {
@@ -83376,14 +83376,14 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 50
       },
-      "declarations_sha256": "540b99b743d8161768079cd0c47eb4f038bd2ddae7707d320254aace9e972efe",
+      "declarations_sha256": "3e851232086c1453e8136218108d2b4d79c7674911f78f52f64c1e71dcc22063",
       "labels": {
         "Map_AIZMinibossFlame_": 0,
-        "Frame_361666": 10,
-        "Frame_36166E": 18,
-        "Frame_361676": 26,
-        "Frame_36167E": 34,
-        "Frame_361686": 42
+        "AIZMinibossFlameS3_MapFrame00": 10,
+        "AIZMinibossFlameS3_MapFrame01": 18,
+        "AIZMinibossFlameS3_MapFrame02": 26,
+        "AIZMinibossFlameS3_MapFrame03": 34,
+        "AIZMinibossFlameS3_MapFrame04": 42
       },
       "external_symbols": [],
       "blocks": [
@@ -83391,35 +83391,35 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361666",
+          "target": "AIZMinibossFlameS3_MapFrame00",
           "base": "Map_AIZMinibossFlame_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36166E",
+          "target": "AIZMinibossFlameS3_MapFrame01",
           "base": "Map_AIZMinibossFlame_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361676",
+          "target": "AIZMinibossFlameS3_MapFrame02",
           "base": "Map_AIZMinibossFlame_"
         },
         {
           "offset": 6,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_36167E",
+          "target": "AIZMinibossFlameS3_MapFrame03",
           "base": "Map_AIZMinibossFlame_"
         },
         {
           "offset": 8,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_361686",
+          "target": "AIZMinibossFlameS3_MapFrame04",
           "base": "Map_AIZMinibossFlame_"
         },
         {
@@ -83458,12 +83458,12 @@
         "policy": "preservation-fixed-footprint",
         "bytes": 30
       },
-      "declarations_sha256": "45c0b464ac126993c59cd7e5a6606b9ecabcdb5976642717a3b323a6a27f8493",
+      "declarations_sha256": "ad1c748e125fea4614bf49f9d375b3c47a60495bc4f29d754c39192d65e55af3",
       "labels": {
         "Map_AIZMinibossSmall_": 0,
-        "Frame_3625F0": 6,
-        "Frame_3625F8": 14,
-        "Frame_362600": 22
+        "AIZMinibossSmallS3_MapFrame00": 6,
+        "AIZMinibossSmallS3_MapFrame01": 14,
+        "AIZMinibossSmallS3_MapFrame02": 22
       },
       "external_symbols": [],
       "blocks": [
@@ -83471,21 +83471,21 @@
           "offset": 0,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625F0",
+          "target": "AIZMinibossSmallS3_MapFrame00",
           "base": "Map_AIZMinibossSmall_"
         },
         {
           "offset": 2,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_3625F8",
+          "target": "AIZMinibossSmallS3_MapFrame01",
           "base": "Map_AIZMinibossSmall_"
         },
         {
           "offset": 4,
           "size": 2,
           "kind": "relative-word",
-          "target": "Frame_362600",
+          "target": "AIZMinibossSmallS3_MapFrame02",
           "base": "Map_AIZMinibossSmall_"
         },
         {

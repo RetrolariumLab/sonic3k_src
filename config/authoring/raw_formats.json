@@ -17,7 +17,7 @@
     },
     {
       "path": "src/game/level/zones/lrz/sk/act3_autoscroll.s",
-      "sha256": "d760814b5627875776dab6d261c7ecb3d8e380db1e0c2f92cea1c66dd6768cb8"
+      "sha256": "abea862651fb96acf0f75eb6e74a233d0bb8a01381d7071e9400689399580cff"
     },
     {
       "path": "src/game/modes/s3/continue_resources.s",
@@ -61,43 +61,43 @@
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/attachments_and_attacks.s",
-      "sha256": "00c250cf3dc7209bb6446429cd584938bb880ea6f9907011ef957515ecc33bb7"
+      "sha256": "916dde103834807d4d23ea360a30f77eef3c4ce111c257ddf10ecd9403d961fc"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/main_control.s",
-      "sha256": "a15611a64aa626ed146728fe5a1355d55c7975a79143c4016b026d87bc8da115"
+      "sha256": "9854c47d347f2193488a17d9ad2070ba0caad275e91ff5ee1fcc4f9989629442"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/object_catalog.s",
-      "sha256": "0013574e1fb831b8e0a53eca5dae65c7ffaa48f71ebbe40278af62771a90f800"
+      "sha256": "a2ddc0e48d10f81652e15c634f756c942bd7d3ab41b56c1888e483070b02fe78"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/attachments_and_attacks.s",
-      "sha256": "aee29f4de89480cb6502857b817aa2ec3b50b7096fafc1554b420c3d32be2386"
+      "sha256": "109b28856926f8bc8ac8982acea1c3d288345b5ee30ae18260dad043336cf537"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/main_control.s",
-      "sha256": "d99d890164717e7281c3b5c9263ad5a64e5a5c9a6db3978dad27aa0da8a6673d"
+      "sha256": "4ec2ec4f2b0af909fd4a7b6ebe6df85e37906a6ed7d07a4563e592e002f5bd92"
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/object_catalog.s",
-      "sha256": "d1c7a9f92c53e1348dad6a020ada308e499da5d79d5c98fc766b135e54fc12eb"
+      "sha256": "99367e99b14d3d89b0fabaf45a115bd47cee56b2e5ff0c3990379f156a9691fa"
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
-      "sha256": "0ad352b4062a33bfdd40f99de171c2cacad4b374e136dc8491fce01b2d78b4a7"
+      "sha256": "f2da0137b76eeedbbf4dbc2487bd53c05776b988168e259a643dbc67f96af5b3"
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss_arrival.s",
-      "sha256": "0c21f473da7478775e116a6813812c12083844141b69bd375bd4ee66cdb6d196"
+      "sha256": "07dc158dc3e1bb770381625afcc1f3c71f5b9affab10f486ba963c14659f6b95"
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss.s",
-      "sha256": "128f9308c943bdeedd2b986b6103a742f91cf7e3b027bd7b307a3cc839442729"
+      "sha256": "b85a39fde4c89b129810f5634248c02812c1b3ad710c9fccdb04df1fa100d170"
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss_arrival.s",
-      "sha256": "7ab960639612c8dcbc88d775fff12831365cf09b0fe37ad1ec56652a2da58981"
+      "sha256": "dafb884654d3be5ba0bb1e3dc196af06b7a0e0533cff73a3274cfb8318c016e4"
     },
     {
       "path": "src/objects/bosses/cnz/end_boss/s3/battle_and_attacks.s",
@@ -309,7 +309,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/battle_and_attacks.s",
-      "sha256": "04ce345ef4313a53b535ab1b5766790f5834e321e167c74d0386c3200700d92e"
+      "sha256": "a931437b134cc089976455db966b6bf91ab84000063673db6273218e45340f2c"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_1/s3/object_catalog.s",
@@ -341,7 +341,7 @@
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/attachments_and_effects.s",
-      "sha256": "8d6f29faef9402748e68f5bc6670fa911aeb406710b11233e53e8bda32fdd035"
+      "sha256": "a318c0a923a1d35ff762b9e6abe5e3107ba35b3535318fb4b130799ab5517b93"
     },
     {
       "path": "src/objects/bosses/lbz/final_boss_2/sk/object_catalog.s",
@@ -1548,13 +1548,13 @@
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/s3/object_catalog.s",
-      "symbol": "byte_47BEE",
-      "scope": "byte_47BEE",
+      "symbol": "AIZBossS3_SubmergedBlinkAnim",
+      "scope": "AIZBossS3_SubmergedBlinkAnim",
       "first_line": 96,
       "last_line": 225,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 232,
-      "declarations_sha256": "414444e9b4b785450ab7208f41106a004c437ee9cdd2419e8469e5c662140b1e",
+      "declarations_sha256": "afbf6b158582d125385721b3d03941ab9aca0f94ff2a3fa163fb3b4c3673845f",
       "entries": [
         [0, "pairs"],
         [27, "pairs"],
@@ -1572,31 +1572,31 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_47BEE",
-        "byte_47C09",
-        "byte_47C14",
-        "byte_47C1F",
-        "byte_47C49",
-        "byte_47C73",
-        "byte_47C79",
-        "byte_47C7F",
-        "byte_47C85",
-        "byte_47C8E",
-        "byte_47C97",
-        "byte_47CA0",
-        "byte_47CBB"
+        "AIZBossS3_SubmergedBlinkAnim",
+        "AIZBossS3_BodyEmergeAnim",
+        "AIZBossS3_AttachmentEmergeAnim",
+        "AIZBossS3_ChargeOuterBlinkAnim",
+        "AIZBossS3_ChargeInnerBlinkAnim",
+        "AIZBossS3_ShotOuterAngleAnim",
+        "AIZBossS3_ShotInnerAngleAnim",
+        "AIZBossS3_ShotGroundAnim",
+        "AIZBossS3_TrailMovingXAnim",
+        "AIZBossS3_TrailZeroXAnim",
+        "AIZBossS3_EmergenceEffectAnim",
+        "AIZBossS3_SplashStartAnim",
+        "AIZBossS3_SplashFallAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/aiz/end_boss/sk/object_catalog.s",
-      "symbol": "byte_69D98",
-      "scope": "byte_69D98",
+      "symbol": "AIZBossSK_SubmergedBlinkAnim",
+      "scope": "AIZBossSK_SubmergedBlinkAnim",
       "first_line": 96,
       "last_line": 225,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 232,
-      "declarations_sha256": "f5efd8ac8574a6df454bcdfe5c3ac3f16600c71e7d0a96ac413ba7de0bd60246",
+      "declarations_sha256": "edff584b8b6c833b09179c62883b4233ae1612319715fd76f35e3282a189f9c5",
       "entries": [
         [0, "pairs"],
         [27, "pairs"],
@@ -1614,45 +1614,45 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_69D98",
-        "byte_69DB3",
-        "byte_69DBE",
-        "byte_69DC9",
-        "byte_69DF3",
-        "byte_69E1D",
-        "byte_69E23",
-        "byte_69E29",
-        "byte_69E2F",
-        "byte_69E38",
-        "byte_69E41",
-        "byte_69E4A",
-        "byte_69E65"
+        "AIZBossSK_SubmergedBlinkAnim",
+        "AIZBossSK_BodyEmergeAnim",
+        "AIZBossSK_AttachmentEmergeAnim",
+        "AIZBossSK_ChargeOuterBlinkAnim",
+        "AIZBossSK_ChargeInnerBlinkAnim",
+        "AIZBossSK_ShotOuterAngleAnim",
+        "AIZBossSK_ShotInnerAngleAnim",
+        "AIZBossSK_ShotGroundAnim",
+        "AIZBossSK_TrailMovingXAnim",
+        "AIZBossSK_TrailZeroXAnim",
+        "AIZBossSK_EmergenceEffectAnim",
+        "AIZBossSK_SplashStartAnim",
+        "AIZBossSK_SplashFallAnim"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
-      "symbol": "byte_46D96",
-      "scope": "byte_46D96",
-      "first_line": 393,
-      "last_line": 400,
+      "symbol": "AIZMiniS3_FlybyMappingFrames",
+      "scope": "AIZMiniS3_FlybyMappingFrames",
+      "first_line": 395,
+      "last_line": 402,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 6,
-      "declarations_sha256": "1ed386d3ee576b634c437ac94dc83f25288f594cb477a2d48a1841ec914e10df",
+      "declarations_sha256": "244f6e2b38368e2e52deb00e37ee6b63cd23ad076e31961596e4bf91c695125a",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_46D96"],
+      "members": ["AIZMiniS3_FlybyMappingFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/aiz/s3/miniboss.s",
-      "symbol": "byte_4703C",
-      "scope": "byte_4703C",
-      "first_line": 698,
-      "last_line": 749,
+      "symbol": "AIZMiniS3_RotorLoopAnimation",
+      "scope": "AIZMiniS3_RotorLoopAnimation",
+      "first_line": 700,
+      "last_line": 751,
       "profiles": ["s3-eu", "s3-jp", "s3-us", "s3k"],
       "capacity_bytes": 86,
-      "declarations_sha256": "e324ec0983a65397a051d77ceb33b786e04abede9feadf7998bce350303be565",
+      "declarations_sha256": "5df0525a8bb7f158abfe977d39de4be990d29dfd31a6688402d58e2bf4109c52",
       "entries": [
         [0, "fixed"],
         [4, "fixed"],
@@ -1667,40 +1667,40 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_4703C",
-        "byte_47045",
-        "byte_4704C",
-        "byte_47055",
-        "byte_47062",
-        "byte_47075",
-        "byte_4707A",
-        "byte_47085"
+        "AIZMiniS3_RotorLoopAnimation",
+        "AIZMiniS3_BarrelOpenAnimation",
+        "AIZMiniS3_BarrelCloseAnimation",
+        "AIZMiniS3_BurstAnimation",
+        "AIZMiniS3_MissileLoopAnimation",
+        "AIZMinibossS3_Flame_HoldFrameDelayStream",
+        "AIZMiniS3_FlameExplosionAnimation",
+        "AIZMiniS3_AdvancingFlameAnimation"
       ],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss.s",
-      "symbol": "byte_68E78",
-      "scope": "byte_68E78",
-      "first_line": 410,
-      "last_line": 417,
+      "symbol": "AIZMiniSK_FlybyMappingFrames",
+      "scope": "AIZMiniSK_FlybyMappingFrames",
+      "first_line": 412,
+      "last_line": 419,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 6,
-      "declarations_sha256": "2fec5250b6cdb16e7ffc4110f954ea6642554e3024b316601c8401df4bab1d00",
+      "declarations_sha256": "337eae8aa8ea9a05e578925cf90469c52043d4b3351cc7af2096ef89bbb18a0d",
       "entries": [[0, "frame-index"]],
       "external_symbols": [],
-      "members": ["byte_68E78"],
+      "members": ["AIZMiniSK_FlybyMappingFrames"],
       "stored_markers": []
     },
     {
       "path": "src/objects/bosses/aiz/sk/miniboss.s",
-      "symbol": "byte_69126",
-      "scope": "byte_69126",
-      "first_line": 719,
-      "last_line": 770,
+      "symbol": "AIZMiniSK_RotorLoopAnimation",
+      "scope": "AIZMiniSK_RotorLoopAnimation",
+      "first_line": 721,
+      "last_line": 772,
       "profiles": ["s3k", "sk"],
       "capacity_bytes": 86,
-      "declarations_sha256": "bb940ca3c69ecb0673ff16be9b18b7bdaa2f8d221e17093341ff081673c8d85b",
+      "declarations_sha256": "dd10b87330361d63528ba7db7a2d5bbaaa13b081b10cd46699384442553822f5",
       "entries": [
         [0, "fixed"],
         [4, "fixed"],
@@ -1715,14 +1715,14 @@
       ],
       "external_symbols": [],
       "members": [
-        "byte_69126",
-        "byte_6912F",
-        "byte_69136",
-        "byte_6913F",
-        "byte_6914C",
-        "byte_6915F",
-        "byte_69164",
-        "byte_6916F"
+        "AIZMiniSK_RotorLoopAnimation",
+        "AIZMiniSK_BarrelOpenAnimation",
+        "AIZMiniSK_BarrelCloseAnimation",
+        "AIZMiniSK_BurstAnimation",
+        "AIZMiniSK_MissileLoopAnimation",
+        "AIZMinibossSK_Flame_HoldFrameDelayStream",
+        "AIZMiniSK_FlameExplosionAnimation",
+        "AIZMiniSK_AdvancingFlameAnimation"
       ],
       "stored_markers": []
     },

@@ -341,7 +341,7 @@ loc_74DA4:
                 move.b  #$7F,$39(a0)
                 movea.w parent3(a0),a1
                 bset    #3,$38(a1)
-                lea     (ChildObjDat_690D8).l,a2
+                lea     (AIZMiniSK_MissileImpactChildren).l,a2
                 jsr     (CreateChild1_Normal).l
                 move.w  #$1000,d0
                 move.w  d0,(Camera_stored_max_Y_pos).w

@@ -397,7 +397,7 @@ loc_4A592:
 
 loc_4A5CA:
                 move.l  #loc_4A5D6,(a0)
-                jmp     (loc_47396).l
+                jmp     (AIZBossS3_SignalAndSpawnCapsule).l
 ; ---------------------------------------------------------------------------
 
 loc_4A5D6:

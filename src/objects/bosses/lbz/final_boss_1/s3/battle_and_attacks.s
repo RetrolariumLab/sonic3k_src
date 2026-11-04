@@ -562,7 +562,7 @@ loc_4FF4C:
 
 loc_4FF60:
                 move.b  #4,routine(a0)
-                lea     (ChildObjDat_46FEE).l,a2
+                lea     (AIZMiniS3_MissileImpactChildren).l,a2
                 jsr     CreateChild1_Normal(pc)
                 lea     (Child6_CreateBossExplosion).l,a2
                 jmp     CreateChild1_Normal(pc)

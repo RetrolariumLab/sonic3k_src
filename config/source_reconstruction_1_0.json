@@ -1155,9 +1155,15 @@
       "commits": ["f347c32059e7a4c4027bbe841aee0bfe1e3ea84f"]
     },
     {
-      "id": "current-shorten-35b-enemies-sk",
+      "id": "change-78e8c8f63174",
       "kind": "source_or_tooling",
       "summary": "Apply 464 reviewed short labels for enemies sk.",
+      "commits": ["78e8c8f631741ed9a2e280c00af12d4d7bbe2265"]
+    },
+    {
+      "id": "current-shorten-36-boss-aiz",
+      "kind": "source_or_tooling",
+      "summary": "Apply 575 reviewed short labels for boss aiz.",
       "commits": ["release-commit"]
     }
   ],

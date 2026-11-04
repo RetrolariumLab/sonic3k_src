@@ -3,111 +3,112 @@
 ; Source provenance and ranges: config/reconstruction/source_layout.json
 ; ---------------------------------------------------------------------------
 
-loc_47486:
+AIZBossS3_AttachmentFollowAndDispatch:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 bsr.w   Child_SyncDraw
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_474B2(pc,d0.w),d1
-                jsr     off_474B2(pc,d1.w)
+                move.w  AIZEndBossS3_Attachment_SixStateOffsets(pc,d0.w),d1
+                jsr     AIZEndBossS3_Attachment_SixStateOffsets(pc,d1.w)
                 btst    #6,$38(a0)
-                bne.w   locret_47246
+                bne.w   AIZBossS3_SharedReturn
                 bsr.w   StartAIZBossAttachmentDelayedBreakaway
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_474B2:
-                dc.w    loc_474BE-off_474B2
-                dc.w    loc_474E6-off_474B2
-                dc.w    loc_47518-off_474B2
-                dc.w    loc_4752E-off_474B2
-                dc.w    loc_47546-off_474B2
-                dc.w    loc_47568-off_474B2
+AIZEndBossS3_Attachment_SixStateOffsets:
+                dc.w    AIZBossS3_InitAttachmentBySubtype-AIZEndBossS3_Attachment_SixStateOffsets
+                dc.w    AIZBossS3_AttachmentWaitReveal-AIZEndBossS3_Attachment_SixStateOffsets
+                dc.w    AIZEndBossS3_Attachment_RunRevealDelay-AIZEndBossS3_Attachment_SixStateOffsets
+                dc.w    AIZBossS3_AttachmentAnimateReveal-AIZEndBossS3_Attachment_SixStateOffsets
+                dc.w    AIZBossS3_AttachmentWaitAttack-AIZEndBossS3_Attachment_SixStateOffsets
+                dc.w    AIZBossS3_AttachmentWaitAttackClear-AIZEndBossS3_Attachment_SixStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_474BE:
-                lea     word_47B36(pc),a1
+AIZBossS3_InitAttachmentBySubtype:
+                lea     AIZBossS3_AttachmentAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 moveq   #0,d0
                 tst.b   subtype(a0)
-                beq.s   loc_474DC
+                beq.s   AIZBossS3_AttachmentSpawnAttackPiece
                 move.b  #$2A,mapping_frame(a0)
                 move.w  #$280,priority(a0)
 
-loc_474DC:
-                lea     ChildObjDat_47B7C(pc),a2
+AIZBossS3_AttachmentSpawnAttackPiece:
+                lea     AIZBossS3_AttackPieceChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_474E6:
+AIZBossS3_AttachmentWaitReveal:
                 movea.w parent3(a0),a1
                 btst    #3,$38(a1)
-                bne.s   loc_474F4
+                bne.s   AIZBossS3_AttachmentRouteReveal
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_474F4:
+; Front attachments pause before the reveal pose. Rear attachments go straight to the attack wait
+AIZBossS3_AttachmentRouteReveal:
                 tst.b   subtype(a0)
-                bne.s   loc_47510
+                bne.s   AIZBossS3_AttachmentSetAttackWait
                 move.b  #4,routine(a0)
                 move.w  #4,$2E(a0)
-                move.l  #loc_4751E,$34(a0)
+                move.l  #AIZBossS3_AttachmentBeginRevealPose,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47510:
+AIZBossS3_AttachmentSetAttackWait:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47518:
+AIZEndBossS3_Attachment_RunRevealDelay:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_4751E:
+AIZBossS3_AttachmentBeginRevealPose:
                 move.b  #6,routine(a0)
-                move.l  #loc_4753E,$34(a0)
+                move.l  #AIZBossS3_AttachmentFinishReveal,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4752E:
+AIZBossS3_AttachmentAnimateReveal:
                 bclr    #6,$38(a0)
-                lea     byte_47C14(pc),a1
+                lea     AIZBossS3_AttachmentEmergeAnim(pc),a1
                 jmp     (Animate_RawNoSSTMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_4753E:
+AIZBossS3_AttachmentFinishReveal:
                 move.b  #8,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47546:
+AIZBossS3_AttachmentWaitAttack:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_47554
+                bne.s   AIZBossS3_AttachmentLatchAttack
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47554:
+AIZBossS3_AttachmentLatchAttack:
                 move.b  #$A,routine(a0)
                 bset    #1,$38(a0)
                 move.w  angle(a1),angle(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47568:
+AIZBossS3_AttachmentWaitAttackClear:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                beq.s   loc_47576
+                beq.s   AIZBossS3_AttachmentResetRevealWait
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47576:
+AIZBossS3_AttachmentResetRevealWait:
                 move.b  #2,routine(a0)
                 bclr    #1,$38(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47584:
+AIZBossS3_AttachmentBeginBreakaway:
                 move.l  #Obj_FlickerMove,(a0)
                 move.b  #1,mapping_frame(a0)
                 clr.b   collision_flags(a0)
@@ -115,257 +116,259 @@ loc_47584:
                 jmp     (Set_IndexedVelocity).l
 ; ---------------------------------------------------------------------------
 
-loc_4759C:
+AIZBossS3_AttackPieceDispatchAndDraw:
                 bsr.w   Child_SyncDraw
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_475C4(pc,d0.w),d1
-                jsr     off_475C4(pc,d1.w)
+                move.w  AIZBossS3_AttackPieceStateOffsets(pc,d0.w),d1
+                jsr     AIZBossS3_AttackPieceStateOffsets(pc,d1.w)
                 jsr     (Refresh_ChildPositionAdjusted).l
                 btst    #6,$38(a0)
-                bne.w   locret_47246
+                bne.w   AIZBossS3_SharedReturn
                 jmp     (Child_Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_475C4:
-                dc.w    loc_475CC-off_475C4
-                dc.w    loc_475D8-off_475C4
-                dc.w    loc_47618-off_475C4
-                dc.w    loc_47664-off_475C4
+AIZBossS3_AttackPieceStateOffsets:
+                dc.w    AIZBossS3_InitAttackPiece-AIZBossS3_AttackPieceStateOffsets
+                dc.w    AIZBossS3_AttackPieceWaitRequest-AIZBossS3_AttackPieceStateOffsets
+                dc.w    AIZBossS3_AttackPieceTickPose-AIZBossS3_AttackPieceStateOffsets
+                dc.w    AIZBossS3_AttackPieceTickClosingWait-AIZBossS3_AttackPieceStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_475CC:
-                lea     word_47B3C(pc),a1
+AIZBossS3_InitAttackPiece:
+                lea     AIZBossS3_AttackPieceAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_475D8:
+AIZBossS3_AttackPieceWaitRequest:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_475E6
+                bne.s   AIZBossS3_AttackPieceBeginOpening
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_475E6:
+AIZBossS3_AttackPieceBeginOpening:
                 move.b  #4,routine(a0)
                 move.b  #1,anim_frame(a0)
                 bset    #1,$38(a0)
-                move.l  #loc_47636,$34(a0)
+                move.l  #AIZBossS3_AttackPieceBeginFiring,$34(a0)
                 move.w  angle(a1),angle(a0)
                 clr.w   $2E(a0)
                 tst.b   subtype(a1)
-                beq.s   locret_47616
+                beq.s   AIZBossS3_AttackPieceOpeningReturn
                 move.w  #$4F,$2E(a0)
 
-locret_47616:
+AIZBossS3_AttackPieceOpeningReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47618:
+; Advance the pose on timer underflow and invoke the callback after two steps
+AIZBossS3_AttackPieceTickPose:
                 subq.w  #1,$2E(a0)
-                bpl.s   locret_47634
+                bpl.s   AIZBossS3_AttackPiecePoseReturn
                 move.w  #3,$2E(a0)
                 bsr.w   AdvanceAIZBossAttackAttachmentPose
                 subq.b  #1,anim_frame(a0)
-                bpl.s   locret_47634
+                bpl.s   AIZBossS3_AttackPiecePoseReturn
                 movea.l $34(a0),a1
                 jsr     (a1)
 
-locret_47634:
+AIZBossS3_AttackPiecePoseReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47636:
+AIZBossS3_AttackPieceBeginFiring:
                 move.b  #6,routine(a0)
                 movea.w parent3(a0),a1
                 bclr    #1,$38(a1)
                 move.w  #$5F,$2E(a0)
-                move.l  #loc_4766A,$34(a0)
-                bra.w   loc_4799C
+                move.l  #AIZBossS3_AttackPieceBeginClosing,$34(a0)
+                bra.w   AIZBossS3_AttackSpawnChargeByAngle
 ; ---------------------------------------------------------------------------
 
-loc_47658:
+AIZBossS3_AttackPieceResetPose:
                 move.b  #2,routine(a0)
                 clr.b   $39(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47664:
+AIZBossS3_AttackPieceTickClosingWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_4766A:
+AIZBossS3_AttackPieceBeginClosing:
                 move.b  #4,routine(a0)
                 move.b  #1,anim_frame(a0)
                 bclr    #1,$38(a0)
                 clr.w   $2E(a0)
-                move.l  #loc_47658,$34(a0)
+                move.l  #AIZBossS3_AttackPieceResetPose,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4768A:
-                lea     word_47B42(pc),a1
+; The charge follows its immediate parent and uses the cached boss handle to check whether the boss is alive
+AIZBossS3_InitChargeAndCacheBoss:
+                lea     AIZBossS3_ChargeAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_476E4,(a0)
+                move.l  #AIZBossS3_ChargeFollowAndDraw,(a0)
                 bset    #4,shield_reaction(a0)
-                move.l  #loc_47702,$34(a0)
+                move.l  #AIZBossS3_ChargeReleaseShot,$34(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a2
                 movea.w parent3(a2),a2
                 move.w  a2,$44(a0)
                 move.w  angle(a1),d0
                 move.w  d0,angle(a0)
-                move.l  off_476D4(pc,d0.w),$30(a0)
+                move.l  AIZBossS3_ChargeAnimationByAngle(pc,d0.w),$30(a0)
                 cmpi.w  #8,d0
-                bhs.s   locret_476D2
+                bhs.s   AIZBossS3_ChargeInitReturn
                 bset    #0,render_flags(a0)
 
-locret_476D2:
+AIZBossS3_ChargeInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
-off_476D4:
-                dc.l    byte_47C1F
-                dc.l    byte_47C49
-                dc.l    byte_47C49
-                dc.l    byte_47C1F
+AIZBossS3_ChargeAnimationByAngle:
+                dc.l    AIZBossS3_ChargeOuterBlinkAnim
+                dc.l    AIZBossS3_ChargeInnerBlinkAnim
+                dc.l    AIZBossS3_ChargeInnerBlinkAnim
+                dc.l    AIZBossS3_ChargeOuterBlinkAnim
 ; ---------------------------------------------------------------------------
 
-loc_476E4:
+AIZBossS3_ChargeFollowAndDraw:
                 movea.w $44(a0),a1
                 btst    #7,status(a1)
-                bne.s   loc_4770C
+                bne.s   AIZBossS3_ChargeHideAndDelete
                 jsr     (Refresh_ChildPosition).l
                 jsr     (Animate_Raw).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47702:
-                lea     ChildObjDat_47BAC(pc),a2
+AIZBossS3_ChargeReleaseShot:
+                lea     AIZBossS3_ReleasedShotChild(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_4770C:
+AIZBossS3_ChargeHideAndDelete:
                 bset    #6,$38(a0)
                 jmp     (Go_Delete_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47718:
-                lea     word_47B48(pc),a1
+AIZBossS3_InitShotMotion:
+                lea     AIZBossS3_ShotAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 bset    #4,shield_reaction(a0)
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
                 move.b  #$C,y_radius(a0)
                 move.w  #$9F,$2E(a0)
-                move.l  #loc_4774E,(a0)
-                move.l  #loc_4778C,$34(a0)
-                bra.w   loc_479B8
+                move.l  #AIZBossS3_ShotCheckFloorIfMovingX,(a0)
+                move.l  #AIZBossS3_ShotBeginGroundMotion,$34(a0)
+                bra.w   AIZBossS3_ShotChooseFlipFromParent
 ; ---------------------------------------------------------------------------
 
-loc_4774E:
+AIZBossS3_ShotCheckFloorIfMovingX:
                 tst.w   x_vel(a0)
-                beq.s   loc_4775A
+                beq.s   AIZBossS3_ShotMoveAndEmitTrail
                 jsr     (ObjHitFloor_DoRoutine).l
 
-loc_4775A:
+AIZBossS3_ShotMoveAndEmitTrail:
                 jsr     (Animate_Raw).l
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_47786
+                bmi.s   AIZBossS3_ShotDeleteOnExpiry
                 move.b  (V_int_run_count+3).w,d0
                 andi.b  #3,d0
-                bne.s   loc_47780
-                lea     ChildObjDat_47BB4(pc),a2
+                bne.s   AIZBossS3_ShotTouchDraw
+                lea     AIZBossS3_ShotTrailChild(pc),a2
                 jsr     (CreateChild1_Normal).l
 
-loc_47780:
+AIZBossS3_ShotTouchDraw:
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47786:
+AIZBossS3_ShotDeleteOnExpiry:
                 jmp     (Delete_Current_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4778C:
-                move.l  #loc_4775A,(a0)
-                move.l  #byte_47C7F,$30(a0)
+AIZBossS3_ShotBeginGroundMotion:
+                move.l  #AIZBossS3_ShotMoveAndEmitTrail,(a0)
+                move.l  #AIZBossS3_ShotGroundAnim,$30(a0)
                 clr.w   y_vel(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_477A0:
-                lea     word_47B4E(pc),a1
+AIZBossS3_InitStationaryShotTrail:
+                lea     AIZBossS3_TrailAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
-                move.l  #loc_477D0,(a0)
+                move.l  #AIZBossS3_TrailAnimateAndDraw,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
-                move.l  #byte_47C85,$30(a0)
+                move.l  #AIZBossS3_TrailMovingXAnim,$30(a0)
                 tst.w   x_vel(a0)
-                bne.s   locret_477CE
-                move.l  #byte_47C8E,$30(a0)
+                bne.s   AIZBossS3_TrailInitReturn
+                move.l  #AIZBossS3_TrailZeroXAnim,$30(a0)
 
-locret_477CE:
+AIZBossS3_TrailInitReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_477D0:
+AIZBossS3_TrailAnimateAndDraw:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_477DC:
+AIZBossS3_InitEmergenceEffect:
                 lea     ObjDat_AIZEndBoss2(pc),a1
                 jsr     (SetUp_ObjAttributes).l
-                move.l  #loc_477F6,(a0)
+                move.l  #AIZBossS3_AnimateEmergenceEffect,(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_477F6:
-                lea     byte_47C97(pc),a1
+AIZBossS3_AnimateEmergenceEffect:
+                lea     AIZBossS3_EmergenceEffectAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelay).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47806:
-                lea     word_47B54(pc),a1
+AIZBossS3_InitSplashBySubtype:
+                lea     AIZEndBossS3_Splash_PartialArtAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #loc_47830,(a0)
+                move.l  #AIZBossS3_SplashAnimateAndCheckDraw,(a0)
                 tst.b   subtype(a0)
-                bne.s   loc_47826
+                bne.s   AIZBossS3_SplashSelectFallCallback
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47826:
-                move.l  #loc_4784A,$34(a0)
+AIZBossS3_SplashSelectFallCallback:
+                move.l  #AIZBossS3_SplashBeginFall,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47830:
-                lea     byte_47CA0(pc),a1
+AIZBossS3_SplashAnimateAndCheckDraw:
+                lea     AIZBossS3_SplashStartAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelayFlipX).l
                 cmpi.b  #$2B,mapping_frame(a0)
-                beq.w   locret_47246
+                beq.w   AIZBossS3_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_4784A:
-                move.l  #loc_47860,(a0)
+AIZBossS3_SplashBeginFall:
+                move.l  #AIZBossS3_SplashFallAndAnimate,(a0)
                 move.w  #$800,y_vel(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_47860:
+AIZBossS3_SplashFallAndAnimate:
                 jsr     (MoveSprite2).l
-                lea     byte_47CBB(pc),a1
+                lea     AIZBossS3_SplashFallAnim(pc),a1
                 jsr     (Animate_RawNoSSTMultiDelayFlipX).l
                 cmpi.b  #$2B,mapping_frame(a0)
-                beq.w   locret_47246
+                beq.w   AIZBossS3_SharedReturn
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_47880:
-                lea     word_47B68(pc),a1
+AIZBossS3_InitDebrisBySubtype:
+                lea     AIZBossS3_DebrisAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes3).l
                 move.l  #Obj_FlickerMove,(a0)
                 move.b  subtype(a0),d0
@@ -377,14 +380,15 @@ loc_47880:
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_478AC:
+; Retry if the random index matches the previous destination, then derive the travel speed from the position delta
+AIZBossS3_ChooseNewTransitTarget:
                 jsr     (Random_Number).l
                 andi.w  #$C,d0
                 move.w  angle(a0),d1
                 move.w  d0,angle(a0)
                 cmp.w   d1,d0
-                beq.s   loc_478AC
-                lea     word_47906(pc,d0.w),a1
+                beq.s   AIZBossS3_ChooseNewTransitTarget
+                lea     AIZBossS3_TransitTargetPositions(pc,d0.w),a1
                 moveq   #0,d2
                 move.w  (a1)+,d2
                 swap    d2
@@ -401,16 +405,16 @@ loc_478AC:
                 move.w  d3,y_vel(a0)
                 move.w  #$7F,$2E(a0)
                 tst.w   d2
-                beq.s   locret_47904
+                beq.s   AIZBossS3_TransitFacingReturn
                 bclr    #0,render_flags(a0)
                 tst.w   d2
-                bmi.s   locret_47904
+                bmi.s   AIZBossS3_TransitFacingReturn
                 bset    #0,render_flags(a0)
 
-locret_47904:
+AIZBossS3_TransitFacingReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_47906:
+AIZBossS3_TransitTargetPositions:
                 dc.w    $48E0+$058, $15A+$76
                 dc.w    $48E0+$0A0, $15A+$46
                 dc.w    $48E0+$160, $15A+$46

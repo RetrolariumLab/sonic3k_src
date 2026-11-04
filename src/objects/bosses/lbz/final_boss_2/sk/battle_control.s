@@ -450,7 +450,7 @@ loc_74710:
                 move.w  (Camera_X_pos).w,d2
                 addi.w  #$40,d2
                 move.w  d2,x_pos(a0)
-                jmp     (loc_694AA).l
+                jmp     (AIZBossSK_SignalAndSpawnCapsule).l
 ; ---------------------------------------------------------------------------
 
 loc_7473A:

@@ -8,22 +8,22 @@ ObjDat_AIZEndBoss:
                 dc.w    make_art_tile(ArtTile_AIZEndBoss,1,1)  ; VRAM
                 dc.w    $280                            ; Priority
                 dc.b    $28, $20,   0, $10              ; Width, Height, Frame, Collision
-word_47B36:
+AIZBossS3_AttachmentAttributes:
                 dc.w    $200
                 dc.b    $24, $14,   1,   0
-word_47B3C:
+AIZBossS3_AttackPieceAttributes:
                 dc.w    $180
                 dc.b    $C,  $C,   4,   0
-word_47B42:
+AIZBossS3_ChargeAttributes:
                 dc.w    $100
                 dc.b    8,   4,  $B, $97
-word_47B48:
+AIZBossS3_ShotAttributes:
                 dc.w    $100
                 dc.b    $14, $18,  $F, $9A
-word_47B4E:
+AIZBossS3_TrailAttributes:
                 dc.w    $100
                 dc.b    8,   8, $18,   0
-word_47B54:
+AIZEndBossS3_Splash_PartialArtAttributes:
                 dc.w    make_art_tile(ArtTile_AIZEndBoss,0,1)
                 dc.w    $100
                 dc.b    $30, $30, $24,   0
@@ -32,68 +32,68 @@ ObjDat_AIZEndBoss2:
                 dc.w    make_art_tile(ArtTile_AIZEndBoss,0,1)
                 dc.w    $100
                 dc.b    $18, $10, $21,   0
-word_47B68:
+AIZBossS3_DebrisAttributes:
                 dc.w    $180
                 dc.b    $10, $10,   0,   0
-ChildObjDat_47B6E:
+AIZBossS3_SideAttachmentChildren:
                 dc.w    2-1
-                dc.l    loc_47486
+                dc.l    AIZBossS3_AttachmentFollowAndDispatch
                 dc.b    $14,  -4
-                dc.l    loc_47486
+                dc.l    AIZBossS3_AttachmentFollowAndDispatch
                 dc.b    -$14,  -4
-ChildObjDat_47B7C:
+AIZBossS3_AttackPieceChild:
                 dc.w    1-1
-                dc.l    loc_4759C
+                dc.l    AIZBossS3_AttackPieceDispatchAndDraw
                 dc.b    -$1C,   0
-ChildObjDat_47B84:
+AIZEndBossS3_Root_OneSplashNormalRecord:
                 dc.w    1-1
-                dc.l    loc_47806
+                dc.l    AIZBossS3_InitSplashBySubtype
                 dc.b    0,   0
-ChildObjDat_47B8C:
+AIZBossS3_EmergenceEffectChild:
                 dc.w    1-1
-                dc.l    loc_477DC
+                dc.l    AIZBossS3_InitEmergenceEffect
                 dc.b    0,-$30
-ChildObjDat_47B94:
+AIZBossS3_ChargeRightChild:
                 dc.w    1-1
-                dc.l    loc_4768A
+                dc.l    AIZBossS3_InitChargeAndCacheBoss
                 dc.b    3,   5
-ChildObjDat_47B9C:
+AIZBossS3_ChargeCenterChild:
                 dc.w    1-1
-                dc.l    loc_4768A
+                dc.l    AIZBossS3_InitChargeAndCacheBoss
                 dc.b    0,   7
-ChildObjDat_47BA4:
+AIZBossS3_ChargeLeftChild:
                 dc.w    1-1
-                dc.l    loc_4768A
+                dc.l    AIZBossS3_InitChargeAndCacheBoss
                 dc.b    -3,   5
-ChildObjDat_47BAC:
+AIZBossS3_ReleasedShotChild:
                 dc.w    1-1
-                dc.l    loc_47718
+                dc.l    AIZBossS3_InitShotMotion
                 dc.b    0,   0
-ChildObjDat_47BB4:
+AIZBossS3_ShotTrailChild:
                 dc.w    1-1
-                dc.l    loc_477A0
+                dc.l    AIZBossS3_InitStationaryShotTrail
                 dc.b    0,   0
-ChildObjDat_47BBC:
+AIZBossS3_DefeatDebrisChildren:
                 dc.w    6-1
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    -$10,-$10
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    $10,-$10
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    -$10,   8
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    $10,   8
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    -$C, $18
-                dc.l    loc_47880
+                dc.l    AIZBossS3_InitDebrisBySubtype
                 dc.b    $C, $18
-ChildObjDat_47BE2:
+AIZBossS3_DefeatCapsuleChild:
                 dc.w    1-1
                 dc.l    Obj_EggCapsule
-ChildObjDat_47BE8:
+AIZBossS3_CutsceneKnucklesChild:
                 dc.w    1-1
                 dc.l    Obj_CutsceneKnuckles
-byte_47BEE:
+AIZBossS3_SubmergedBlinkAnim:
                 dc.b    $2B,   0
                 dc.b    $2B,   0
                 dc.b    $2B,   0
@@ -108,21 +108,21 @@ byte_47BEE:
                 dc.b    $2B,   0
                 dc.b    0,   0
                 dc.b    $F4
-byte_47C09:
+AIZBossS3_BodyEmergeAnim:
                 dc.b    $1B,   0
                 dc.b    $1B,   4
                 dc.b    $1C,   5
                 dc.b    $1D,   6
                 dc.b    0,   0
                 dc.b    $F4
-byte_47C14:
+AIZBossS3_AttachmentEmergeAnim:
                 dc.b    $1E,   0
                 dc.b    $1E,   4
                 dc.b    $1F,   5
                 dc.b    $20,   6
                 dc.b    1,   0
                 dc.b    $F4
-byte_47C1F:
+AIZBossS3_ChargeOuterBlinkAnim:
                 dc.b    0
                 dc.b    7, $2B
                 dc.b    7, $2B
@@ -145,7 +145,7 @@ byte_47C1F:
                 dc.b    $A, $2B
                 dc.b    $A, $2B
                 dc.b    $F4
-byte_47C49:
+AIZBossS3_ChargeInnerBlinkAnim:
                 dc.b    0
                 dc.b    $B, $2B
                 dc.b    $B, $2B
@@ -168,31 +168,31 @@ byte_47C49:
                 dc.b    $E, $2B
                 dc.b    $E, $2B
                 dc.b    $F4
-byte_47C73:
+AIZBossS3_ShotOuterAngleAnim:
                 dc.b    1, $26, $27, $28, $29, $FC
-byte_47C79:
+AIZBossS3_ShotInnerAngleAnim:
                 dc.b    1, $16, $17, $2F, $30, $FC
-byte_47C7F:
+AIZBossS3_ShotGroundAnim:
                 dc.b    1, $10, $11, $2D, $2E, $FC
-byte_47C85:
+AIZBossS3_TrailMovingXAnim:
                 dc.b    $12,   0
                 dc.b    $12,   9
                 dc.b    $13,   2
                 dc.b    $14,   2
                 dc.b    $F4
-byte_47C8E:
+AIZBossS3_TrailZeroXAnim:
                 dc.b    $18,   0
                 dc.b    $18,   9
                 dc.b    $19,   2
                 dc.b    $1A,   2
                 dc.b    $F4
-byte_47C97:
+AIZBossS3_EmergenceEffectAnim:
                 dc.b    $21,   0
                 dc.b    $21,   4
                 dc.b    $22,   5
                 dc.b    $23,   6
                 dc.b    $F4
-byte_47CA0:
+AIZBossS3_SplashStartAnim:
                 dc.b    $2B|$00,   0
                 dc.b    $24|$00,   0
                 dc.b    $24|$40,   0
@@ -207,7 +207,7 @@ byte_47CA0:
                 dc.b    $2C|$40,   0
                 dc.b    $2B|$40,   0
                 dc.b    $F4
-byte_47CBB:
+AIZBossS3_SplashFallAnim:
                 dc.b    $2B|$00,   0
                 dc.b    $24|$00,   0
                 dc.b    $24|$40,   0

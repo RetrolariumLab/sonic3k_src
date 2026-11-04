@@ -244,7 +244,7 @@ SKLRZ3Scene_ArmImpactCollisionAndSignal:
                 move.b  #$91,collision_flags(a0)
                 move.w  #$1F,$2E(a0)
                 addq.w  #8,y_pos(a0)
-                lea     (ChildObjDat_690D8).l,a2
+                lea     (AIZMiniSK_MissileImpactChildren).l,a2
                 jsr     (CreateChild1_Normal).l
                 addi.w  #$18,y_pos(a0)
                 lea     (Child6_CreateBossExplosion).l,a2

@@ -313,7 +313,7 @@ loc_6C2BE:
 
 loc_6C2E2:
                 move.l  #loc_6C2EE,(a0)
-                jmp     (loc_694AA).l
+                jmp     (AIZBossSK_SignalAndSpawnCapsule).l
 ; ---------------------------------------------------------------------------
 
 loc_6C2EE:

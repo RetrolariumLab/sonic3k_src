@@ -8,17 +8,17 @@ Obj_AIZMinibossCutscene:
                 move.b  routine(a0),d0
                 move.w  AIZMinibossCutscene_Index(pc,d0.w),d1
                 jsr     AIZMinibossCutscene_Index(pc,d1.w)
-                bra.w   loc_46E80
+                bra.w   AIZMiniS3_CheckHitFlashOrDefeat
 ; ---------------------------------------------------------------------------
 AIZMinibossCutscene_Index:
-                dc.w    loc_4645E-AIZMinibossCutscene_Index
-                dc.w    loc_46482-AIZMinibossCutscene_Index
-                dc.w    loc_464CA-AIZMinibossCutscene_Index
-                dc.w    loc_46508-AIZMinibossCutscene_Index
-                dc.w    loc_4654C-AIZMinibossCutscene_Index
+                dc.w    AIZMiniS3_InitArrivalBoss-AIZMinibossCutscene_Index
+                dc.w    AIZMiniS3_WaitForArrivalCamera-AIZMinibossCutscene_Index
+                dc.w    AIZMiniS3_TickCallbackWait-AIZMinibossCutscene_Index
+                dc.w    AIZMiniS3_DescendAndDraw-AIZMinibossCutscene_Index
+                dc.w    AIZMiniS3_SwingMoveAndDraw-AIZMinibossCutscene_Index
 ; ---------------------------------------------------------------------------
 
-loc_4645E:
+AIZMiniS3_InitArrivalBoss:
                 lea     ObjDat_AIZMiniboss(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 move.b  #$60,collision_property(a0)
@@ -28,22 +28,22 @@ loc_4645E:
                 jmp     (Load_PLC).l
 ; ---------------------------------------------------------------------------
 
-loc_46482:
+AIZMiniS3_WaitForArrivalCamera:
                 move.w  (Camera_X_pos).w,d0
                 move.w  #$2F10,d5
                 cmp.w   d5,d0
-                bhs.s   loc_46490
+                bhs.s   AIZMiniS3_SpawnFlybysAndLoadPalette
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46490:
-                move.l  #loc_464D0,$34(a0)
-                lea     ChildObjDat_46F80(pc),a2
+AIZMiniS3_SpawnFlybysAndLoadPalette:
+                move.l  #AIZMiniS3_SpawnBodyAndStartDescent,$34(a0)
+                lea     AIZMiniS3_FlybyChildren(pc),a2
                 jsr     (CreateChild3_NormalRepeated).l
                 lea     Pal_AIZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
 
-loc_464AC:
+AIZMiniS3_LockCameraAndFadeMusic:
                 move.b  #4,routine(a0)
                 move.w  #3*60,$2E(a0)
                 move.w  d5,(Camera_min_X_pos).w
@@ -51,20 +51,20 @@ loc_464AC:
                 moveq   #signextendB(cmd_FadeOut),d0
                 jsr     (Play_Music).l
 
-locret_464C8:
+AIZMiniS3_SharedReturn:
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_464CA:
+AIZMiniS3_TickCallbackWait:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_464D0:
-                move.l  #loc_4650E,$34(a0)
+AIZMiniS3_SpawnBodyAndStartDescent:
+                move.l  #AIZMiniS3_ArmBarrelsAndBeginSwing,$34(a0)
                 move.b  #6,routine(a0)
-                lea     ChildObjDat_46F72(pc),a2
+                lea     AIZMiniS3_BodyAndTrimChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
-                lea     ChildObjDat_46F88(pc),a2
+                lea     AIZMiniS3_ArrivalBarrelChildren(pc),a2
                 jsr     (CreateChild1_Normal).l
 
 ; =============== S U B R O U T I N E =======================================
@@ -79,17 +79,17 @@ StartAIZMinibossDescentAndMusic:
 
 ; ---------------------------------------------------------------------------
 
-loc_46508:
+AIZMiniS3_DescendAndDraw:
                 jmp     (MoveWaitTouch).l
 ; ---------------------------------------------------------------------------
 
-loc_4650E:
+AIZMiniS3_ArmBarrelsAndBeginSwing:
                 move.w  #$7F,$2E(a0)
-                move.l  #loc_4657E,$34(a0)
+                move.l  #AIZMiniS3_WaitAndSpawnDepartureBlast,$34(a0)
                 move.b  #3,$39(a0)
                 bset    #1,$38(a0)
 
-loc_46528:
+AIZMiniS3_BeginVerticalSwing:
                 move.b  #8,routine(a0)
                 clr.w   y_vel(a0)
 
@@ -106,16 +106,16 @@ Swing_Setup1:
 
 ; ---------------------------------------------------------------------------
 
-loc_4654C:
+AIZMiniS3_SwingMoveAndDraw:
                 jsr     (Swing_UpAndDown).l
                 jmp     (MoveWaitTouch).l
 ; ---------------------------------------------------------------------------
 ; unused
                 subq.b  #1,$39(a0)
-                bpl.s   loc_46566
-                move.l  #loc_4657E,$34(a0)
+                bpl.s   AIZMiniS3_LegacySpawnArrivalFlames
+                move.l  #AIZMiniS3_WaitAndSpawnDepartureBlast,$34(a0)
 
-loc_46566:
+AIZMiniS3_LegacySpawnArrivalFlames:
                 move.w  #$40,$2E(a0)
                 moveq   #signextendB(sfx_FlamethrowerQuiet),d0
                 jsr     (Play_SFX).l
@@ -123,15 +123,15 @@ loc_46566:
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_4657E:
+AIZMiniS3_WaitAndSpawnDepartureBlast:
                 move.w  #$10,$2E(a0)
-                move.l  #loc_46596,$34(a0)
-                lea     ChildObjDat_4701A(pc),a2
+                move.l  #AIZMiniS3_BeginRightwardDeparture,$34(a0)
+                lea     AIZMiniS3_DepartureBlastChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_46596:
-                move.l  #loc_465E0,(a0)
+AIZMiniS3_BeginRightwardDeparture:
+                move.l  #AIZMiniS3_MoveAndTickDeparture,(a0)
                 lea     Pal_AIZMiniboss(pc),a1
                 jsr     (PalLoad_Line1).l
                 move.b  #$F,collision_flags(a0)
@@ -141,23 +141,23 @@ loc_46596:
                 clr.w   y_vel(a0)
                 move.w  #$40,$2E(a0)
                 cmpi.w  #0,(Current_zone_and_act).w
-                bne.s   loc_465D2
+                bne.s   AIZMiniS3_SetDepartureEventAndCallback
                 move.w  #$120,$2E(a0)
 
-loc_465D2:
+AIZMiniS3_SetDepartureEventAndCallback:
                 move.l  #Go_Delete_Sprite,$34(a0)
                 st      (Events_fg_5).w
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_465E0:
+AIZMiniS3_MoveAndTickDeparture:
                 jsr     (MoveSprite2).l
                 subq.w  #1,$2E(a0)
-                bmi.s   loc_465F2
+                bmi.s   AIZMiniS3_RestoreLevelAndQueueCleanup
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_465F2:
+AIZMiniS3_RestoreLevelAndQueueCleanup:
                 clr.b   (Boss_flag).w
                 jsr     (Restore_LevelMusic).l
                 lea     (PLC_Monitors).l,a1
@@ -165,173 +165,174 @@ loc_465F2:
                 jmp     (Go_Delete_Sprite_2).l
 ; ---------------------------------------------------------------------------
 
-loc_4660E:
+AIZMiniS3_InitArrivalRotor:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                lea     word_46F20(pc),a1
+                lea     AIZMiniS3_RotorAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 bset    #4,shield_reaction(a0)
-                move.l  #byte_4703C,$30(a0)
-                move.l  #loc_46638,(a0)
+                move.l  #AIZMiniS3_RotorLoopAnimation,$30(a0)
+                move.l  #AIZMiniS3_RotorFollowAndCheckBossDeath,(a0)
                 jmp     (Child_DrawTouch_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_46638:
+AIZMiniS3_RotorFollowAndCheckBossDeath:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jsr     (Animate_Raw).l
                 movea.w parent3(a0),a1
                 btst    #7,status(a1)
-                beq.s   loc_46654
+                beq.s   AIZMiniS3_RotorDrawUntilDeparture
                 clr.b   collision_flags(a0)
 
-loc_46654:
+AIZMiniS3_RotorDrawUntilDeparture:
                 jmp     (Child_DrawTouch_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_4665A:
+AIZMiniS3_InitArrivalTrim:
                 jsr     (Refresh_ChildPositionAdjusted).l
-                move.l  #loc_46670,(a0)
-                lea     word_46F28(pc),a1
+                move.l  #AIZMiniS3_TrimFollowUntilDeparture,(a0)
+                lea     AIZMiniS3_TrimAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes2).l
 ; ---------------------------------------------------------------------------
 
-loc_46670:
+AIZMiniS3_TrimFollowUntilDeparture:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
 
-loc_4667C:
+AIZMiniS3_ArrivalBarrelFollowDispatch:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_46696(pc,d0.w),d1
-                jsr     off_46696(pc,d1.w)
+                move.w  AIZMiniS3_ArrivalBarrelStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniS3_ArrivalBarrelStateOffsets(pc,d1.w)
                 jmp     (Child_Draw_Sprite2).l
 ; ---------------------------------------------------------------------------
-off_46696:
-                dc.w    loc_466A4-off_46696
-                dc.w    loc_466AE-off_46696
-                dc.w    loc_466CE-off_46696
-                dc.w    loc_466EC-off_46696
-                dc.w    loc_4672C-off_46696
-                dc.w    loc_466EC-off_46696
-                dc.w    locret_464C8-off_46696
+AIZMiniS3_ArrivalBarrelStateOffsets:
+                dc.w    AIZMiniS3_InitBarrelAttributes-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_ArrivalBarrelWaitRequest-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_ArrivalBarrelTickStagger-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_BarrelAnimatePairs-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_ArrivalBarrelTickShots-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_BarrelAnimatePairs-AIZMiniS3_ArrivalBarrelStateOffsets
+                dc.w    AIZMiniS3_SharedReturn-AIZMiniS3_ArrivalBarrelStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_466A4:
-                lea     word_46F30(pc),a1
+AIZMiniS3_InitBarrelAttributes:
+                lea     AIZMiniS3_BarrelAttributes(pc),a1
                 jmp     (SetUp_ObjAttributes2).l
 ; ---------------------------------------------------------------------------
 
-loc_466AE:
+AIZMiniS3_ArrivalBarrelWaitRequest:
                 movea.w parent3(a0),a1
                 btst    #1,$38(a1)
-                bne.s   loc_466BC
+                bne.s   AIZMiniS3_ArrivalBarrelSetStagger
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_466BC:
+AIZMiniS3_ArrivalBarrelSetStagger:
                 move.b  #4,routine(a0)
-                move.l  #loc_466D4,$34(a0)
-                bra.w   loc_46DDE
+                move.l  #AIZMiniS3_ArrivalBarrelArmShotCycle,$34(a0)
+                bra.w   AIZMiniS3_LoadBarrelStagger
 ; ---------------------------------------------------------------------------
 
-loc_466CE:
+AIZMiniS3_ArrivalBarrelTickStagger:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_466D4:
-                move.l  #loc_466F2,$34(a0)
+AIZMiniS3_ArrivalBarrelArmShotCycle:
+                move.l  #AIZMiniS3_ArrivalBarrelBeginShots,$34(a0)
 
-loc_466DC:
+AIZMiniS3_BarrelBeginOpening:
                 move.b  #6,routine(a0)
-                move.l  #byte_47045,$30(a0)
+                move.l  #AIZMiniS3_BarrelOpenAnimation,$30(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_466EC:
+AIZMiniS3_BarrelAnimatePairs:
                 jmp     (Animate_RawMultiDelay).l
 ; ---------------------------------------------------------------------------
 
-loc_466F2:
+AIZMiniS3_ArrivalBarrelBeginShots:
                 move.b  #8,routine(a0)
                 move.b  #3,$39(a0)
-                move.l  #loc_46706,$34(a0)
+                move.l  #AIZMiniS3_ArrivalBarrelSelectShot,$34(a0)
 
-loc_46706:
+AIZMiniS3_ArrivalBarrelSelectShot:
                 move.w  #$1C,$2E(a0)
                 subq.b  #1,$39(a0)
                 cmpi.b  #1,$39(a0)
-                beq.s   loc_46722
-                lea     ChildObjDat_46FB0(pc),a2
+                beq.s   AIZMiniS3_ArrivalBarrelFireFloorShot
+                lea     AIZMiniS3_BurstAndTimedMissileChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_46722:
-                lea     ChildObjDat_46FBE(pc),a2
+; Only counter value 1 selects the floor-seeking missile
+AIZMiniS3_ArrivalBarrelFireFloorShot:
+                lea     AIZMiniS3_BurstAndFloorMissileChildren(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; ---------------------------------------------------------------------------
 
-loc_4672C:
+AIZMiniS3_ArrivalBarrelTickShots:
                 jsr     (Obj_Wait).l
                 tst.b   $39(a0)
-                bmi.s   loc_4673A
+                bmi.s   AIZMiniS3_ArrivalBarrelBeginClosing
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4673A:
+AIZMiniS3_ArrivalBarrelBeginClosing:
                 move.b  #$A,routine(a0)
-                move.l  #byte_4704C,$30(a0)
-                move.l  #loc_46752,$34(a0)
+                move.l  #AIZMiniS3_BarrelCloseAnimation,$30(a0)
+                move.l  #AIZMiniS3_ArrivalBarrelSetIdle,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46752:
+AIZMiniS3_ArrivalBarrelSetIdle:
                 move.b  #$C,routine(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_4675A:
+AIZMiniS3_BarrelBurstFollowAndDraw:
                 jsr     (Refresh_ChildPositionAdjusted).l
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_46774(pc,d0.w),d1
-                jsr     off_46774(pc,d1.w)
+                move.w  AIZMiniS3_BarrelBurstStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniS3_BarrelBurstStateOffsets(pc,d1.w)
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
-off_46774:
-                dc.w    loc_46778-off_46774
-                dc.w    loc_466EC-off_46774
+AIZMiniS3_BarrelBurstStateOffsets:
+                dc.w    AIZMiniS3_InitBarrelBurst-AIZMiniS3_BarrelBurstStateOffsets
+                dc.w    AIZMiniS3_BarrelAnimatePairs-AIZMiniS3_BarrelBurstStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_46778:
-                lea     word_46F38(pc),a1
+AIZMiniS3_InitBarrelBurst:
+                lea     AIZMiniS3_BurstAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
-                move.l  #byte_47055,$30(a0)
+                move.l  #AIZMiniS3_BurstAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46794:
+AIZMiniS3_TimedMissileDispatch:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_467A2(pc,d0.w),d1
-                jmp     off_467A2(pc,d1.w)
+                move.w  AIZMiniS3_TimedMissileStateOffsets(pc,d0.w),d1
+                jmp     AIZMiniS3_TimedMissileStateOffsets(pc,d1.w)
 ; ---------------------------------------------------------------------------
-off_467A2:
-                dc.w    InitializeAIZMinibossRisingMissile-off_467A2
-                dc.w    loc_467DE-off_467A2
-                dc.w    loc_464CA-off_467A2
-                dc.w    loc_467DE-off_467A2
+AIZMiniS3_TimedMissileStateOffsets:
+                dc.w    InitializeAIZMinibossRisingMissile-AIZMiniS3_TimedMissileStateOffsets
+                dc.w    AIZMiniS3_TimedMissileMoveAndDraw-AIZMiniS3_TimedMissileStateOffsets
+                dc.w    AIZMiniS3_TickCallbackWait-AIZMiniS3_TimedMissileStateOffsets
+                dc.w    AIZMiniS3_TimedMissileMoveAndDraw-AIZMiniS3_TimedMissileStateOffsets
 
 ; =============== S U B R O U T I N E =======================================
 
 InitializeAIZMinibossRisingMissile:
-                lea     word_46F40(pc),a1
+                lea     AIZMiniS3_MissileAttributes(pc),a1
                 jsr     (SetUp_ObjAttributes2).l
                 moveq   #signextendB(sfx_Projectile),d0
                 jsr     (Play_SFX).l
-                move.l  #byte_47062,$30(a0)
-                move.l  #loc_467EA,$34(a0)
+                move.l  #AIZMiniS3_MissileLoopAnimation,$30(a0)
+                move.l  #AIZMiniS3_TimedMissileBeginApexPause,$34(a0)
                 move.w  #-$400,y_vel(a0)
                 move.w  #$60,$2E(a0)
                 jmp     (Draw_Sprite).l
@@ -339,19 +340,19 @@ InitializeAIZMinibossRisingMissile:
 
 ; ---------------------------------------------------------------------------
 
-loc_467DE:
+AIZMiniS3_TimedMissileMoveAndDraw:
                 jsr     (Move_AnimateRaw_Wait).l
                 jmp     (Draw_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_467EA:
+AIZMiniS3_TimedMissileBeginApexPause:
                 move.b  #4,routine(a0)
                 move.w  #8,$2E(a0)
-                move.l  #loc_46800,$34(a0)
+                move.l  #AIZMiniS3_TimedMissileBeginDescent,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46800:
+AIZMiniS3_TimedMissileBeginDescent:
                 move.b  #6,routine(a0)
                 moveq   #signextendB(sfx_MissileThrow),d0
                 jsr     (Play_SFX).l
@@ -362,7 +363,7 @@ loc_46800:
                 movea.w parent3(a0),a1
                 moveq   #0,d0
                 move.b  subtype(a1),d0
-                bsr.w   loc_46E02
+                bsr.w   AIZMiniS3_AdvanceDescentLanePattern
                 move.w  (Camera_Y_pos).w,d0
                 subi.w  #$20,d0
                 move.w  d0,y_pos(a0)
@@ -378,8 +379,8 @@ Obj_AIZMiniboss_Flame:
 ; ---------------------------------------------------------------------------
 AIZMiniboss_Flame_Index:
                 dc.w    InitializeAIZMinibossStaggeredFlame-AIZMiniboss_Flame_Index
-                dc.w    loc_464CA-AIZMiniboss_Flame_Index
-                dc.w    loc_468A6-AIZMiniboss_Flame_Index
+                dc.w    AIZMiniS3_TickCallbackWait-AIZMiniboss_Flame_Index
+                dc.w    AIZMiniS3_FlameAnimateAndDraw-AIZMiniboss_Flame_Index
 
 ; =============== S U B R O U T I N E =======================================
 
@@ -387,10 +388,11 @@ InitializeAIZMinibossStaggeredFlame:
                 lea     ObjDat_AIZMiniboss_Flame(pc),a1
                 jsr     (SetUp_ObjAttributes).l
                 bset    #4,shield_reaction(a0)
-                move.l  #loc_4688E,$34(a0)
+                move.l  #AIZMiniS3_FlameStartAnimation,$34(a0)
                 moveq   #6,d1
 
-loc_46878:
+; Double the subtype-adjusted delay in the low byte before storing the timer word
+AIZMiniS3_SetFlameStaggerFromSubtype:
                 moveq   #0,d0
                 move.b  subtype(a0),d0
                 sub.w   d0,d1
@@ -402,47 +404,48 @@ loc_46878:
                 jmp     (Obj_Wait).l
 ; ---------------------------------------------------------------------------
 
-loc_4688E:
+AIZMiniS3_FlameStartAnimation:
                 move.b  #4,routine(a0)
-                move.l  #byte_47075,$30(a0)
-                move.l  #loc_468B2,$34(a0)
+                move.l  #AIZMinibossS3_Flame_HoldFrameDelayStream,$30(a0)
+                move.l  #AIZMiniS3_FlameExplodeAndTryTrail,$34(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_468A6:
+AIZMiniS3_FlameAnimateAndDraw:
                 jsr     (Animate_RawMultiDelay).l
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
 
-loc_468B2:
+; Only the final flame subtype spawns the advancing ground effect
+AIZMiniS3_FlameExplodeAndTryTrail:
                 move.l  #Map_BossExplosion,mappings(a0)
                 move.w  #make_art_tile(ArtTile_BossExplosion2,0,1),art_tile(a0)
-                move.l  #byte_4707A,$30(a0)
+                move.l  #AIZMiniS3_FlameExplosionAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 cmpi.b  #6,subtype(a0)
-                bne.w   locret_464C8
-                lea     ChildObjDat_46FE6(pc),a2
+                bne.w   AIZMiniS3_SharedReturn
+                lea     AIZMiniS3_AdvancingFlameChild(pc),a2
                 jmp     (CreateChild1_Normal).l
 ; End of function InitializeAIZMinibossStaggeredFlame
 
 ; ---------------------------------------------------------------------------
 
-loc_468E4:
+AIZMiniS3_FlameTrailDispatchAndDraw:
                 moveq   #0,d0
                 move.b  routine(a0),d0
-                move.w  off_468F8(pc,d0.w),d1
-                jsr     off_468F8(pc,d1.w)
+                move.w  AIZMiniS3_FlameTrailStateOffsets(pc,d0.w),d1
+                jsr     AIZMiniS3_FlameTrailStateOffsets(pc,d1.w)
                 jmp     (Draw_And_Touch_Sprite).l
 ; ---------------------------------------------------------------------------
-off_468F8:
-                dc.w    loc_468FC-off_468F8
-                dc.w    loc_46948-off_468F8
+AIZMiniS3_FlameTrailStateOffsets:
+                dc.w    AIZMiniS3_InitFlameTrailAtBoss-AIZMiniS3_FlameTrailStateOffsets
+                dc.w    AIZMiniS3_FlameTrailAnimateAndStep-AIZMiniS3_FlameTrailStateOffsets
 ; ---------------------------------------------------------------------------
 
-loc_468FC:
+AIZMiniS3_InitFlameTrailAtBoss:
                 bsr.w   InitializeAIZMinibossStaggeredFlame
                 move.w  #$100,priority(a0)
-                move.l  #byte_47085,$30(a0)
+                move.l  #AIZMiniS3_AdvancingFlameAnimation,$30(a0)
                 move.l  #Go_Delete_Sprite,$34(a0)
                 movea.w parent3(a0),a1
                 movea.w parent3(a1),a1
@@ -450,34 +453,35 @@ loc_468FC:
                 move.w  y_pos(a1),y_pos(a0)
                 move.w  #-$60,d0
                 btst    #0,render_flags(a1)
-                beq.s   loc_4693C
+                beq.s   AIZMiniS3_FlameTrailSetInitialX
                 neg.w   d0
                 bset    #0,render_flags(a0)
 
-loc_4693C:
+AIZMiniS3_FlameTrailSetInitialX:
                 move.w  x_pos(a1),d1
                 add.w   d0,d1
                 move.w  d1,x_pos(a0)
                 rts
 ; ---------------------------------------------------------------------------
 
-loc_46948:
+; Use the animation cursor to select the X step only when the decoder returns positive D2
+AIZMiniS3_FlameTrailAnimateAndStep:
                 jsr     (Animate_RawMultiDelay).l
                 tst.w   d2
-                beq.s   locret_46966
-                bmi.s   locret_46966
-                move.w  word_46968(pc,d0.w),d0
+                beq.s   AIZMiniS3_FlameTrailUpdateReturn
+                bmi.s   AIZMiniS3_FlameTrailUpdateReturn
+                move.w  AIZMiniS3_FlameTrailXSteps(pc,d0.w),d0
                 btst    #0,render_flags(a0)
-                bne.s   loc_46962
+                bne.s   AIZMiniS3_FlameTrailApplyXStep
                 neg.w   d0
 
-loc_46962:
+AIZMiniS3_FlameTrailApplyXStep:
                 add.w   d0,x_pos(a0)
 
-locret_46966:
+AIZMiniS3_FlameTrailUpdateReturn:
                 rts
 ; ---------------------------------------------------------------------------
-word_46968:
+AIZMiniS3_FlameTrailXSteps:
                 dc.w    0
                 dc.w    0
                 dc.w    0
