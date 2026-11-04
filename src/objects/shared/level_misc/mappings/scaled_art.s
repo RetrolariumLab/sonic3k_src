@@ -1,39 +1,39 @@
 ; Data owner: objects/shared/level_misc
 ; Provenance and source range: config/reconstruction/source_layout.json
 Map_ScaledArt_:
-                dc.w    word_24C28-Map_ScaledArt_
-                dc.w    word_24C8A-Map_ScaledArt_
-                dc.w    word_24CEC-Map_ScaledArt_
-                dc.w    word_24CEC-Map_ScaledArt_
-                dc.w    word_24D24-Map_ScaledArt_
-                dc.w    word_24D24-Map_ScaledArt_
-                dc.w    word_24D24-Map_ScaledArt_
-                dc.w    word_24D3E-Map_ScaledArt_
-                dc.w    word_24D3E-Map_ScaledArt_
-                dc.w    word_24D3E-Map_ScaledArt_
-                dc.w    word_24D3E-Map_ScaledArt_
-                dc.w    word_24D3E-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D58-Map_ScaledArt_
-                dc.w    word_24D60-Map_ScaledArt_
-                dc.w    word_24D60-Map_ScaledArt_
-                dc.w    word_24D60-Map_ScaledArt_
-                dc.w    word_24D60-Map_ScaledArt_
-word_24C28:     dc.w    $10
+                dc.w    SharedScaledArtMap_Frame00-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frame01-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames02_03-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames02_03-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames04_05_06-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames04_05_06-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames04_05_06-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames07Through0B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames07Through0B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames07Through0B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames07Through0B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames07Through0B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames0CThrough1B-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames1CThrough1F-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames1CThrough1F-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames1CThrough1F-Map_ScaledArt_
+                dc.w    SharedScaledArtMap_Frames1CThrough1F-Map_ScaledArt_
+SharedScaledArtMap_Frame00: dc.w    $10
                 dc.b    0,  $F,   0,   0,   0,   0
                 dc.b    0,  $F,   0, $10,   0, $20
                 dc.b    0,  $F,   0, $20,   0, $40
@@ -50,7 +50,7 @@ word_24C28:     dc.w    $10
                 dc.b    $60,  $F,   0, $D0,   0, $20
                 dc.b    $60,  $F,   0, $E0,   0, $40
                 dc.b    $60,  $F,   0, $F0,   0, $60
-word_24C8A:     dc.w    $10
+SharedScaledArtMap_Frame01: dc.w    $10
                 dc.b    0,  $F,   0,   0,   0,   0
                 dc.b    0,  $F,   0, $10,   0, $20
                 dc.b    0,  $F,   0, $20,   0, $40
@@ -67,7 +67,7 @@ word_24C8A:     dc.w    $10
                 dc.b    $60,  $F,   0, $D0,   0, $20
                 dc.b    $60,  $F,   0, $E0,   0, $40
                 dc.b    $60,   7,   0, $F0,   0, $60
-word_24CEC:     dc.w    9
+SharedScaledArtMap_Frames02_03: dc.w    9
                 dc.b    0,  $F,   0,   0,   0,   0
                 dc.b    0,  $F,   0, $10,   0, $20
                 dc.b    0,  $F,   0, $20,   0, $40
@@ -77,17 +77,17 @@ word_24CEC:     dc.w    9
                 dc.b    $40,  $F,   0, $60,   0,   0
                 dc.b    $40,  $F,   0, $70,   0, $20
                 dc.b    $40,  $F,   0, $80,   0, $40
-word_24D24:     dc.w    4
+SharedScaledArtMap_Frames04_05_06:  dc.w    4
                 dc.b    0,  $F,   0,   0,   0,   0
                 dc.b    0,  $F,   0, $10,   0, $20
                 dc.b    $20,  $F,   0, $20,   0,   0
                 dc.b    $20,  $F,   0, $30,   0, $20
-word_24D3E:     dc.w    4
+SharedScaledArtMap_Frames07Through0B:   dc.w    4
                 dc.b    0,  $F,   0,   0,   0,   0
                 dc.b    0,   7,   0, $10,   0, $20
                 dc.b    $20,  $F,   0, $20,   0,   0
                 dc.b    $20,   7,   0, $30,   0, $20
-word_24D58:     dc.w    1
+SharedScaledArtMap_Frames0CThrough1B:   dc.w    1
                 dc.b    0,  $F,   0,   0,   0,   0
-word_24D60:     dc.w    1
+SharedScaledArtMap_Frames1CThrough1F:   dc.w    1
                 dc.b    0,   7,   0,   0,   0,   0

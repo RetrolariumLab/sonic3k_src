@@ -222,7 +222,7 @@ MHZ_TranslateObjectsForAct2:
 loc_54CFA:
                 move.l  (a1),d3
                 beq.s   loc_54D26
-                cmpi.l  #loc_2B962,d3
+                cmpi.l  #SKStaticScenery_CullOrEnqueue,d3
                 bne.s   loc_54D16
                 move.l  #Delete_Current_Sprite,(a1)
                 move.w  respawn_addr(a1),d3

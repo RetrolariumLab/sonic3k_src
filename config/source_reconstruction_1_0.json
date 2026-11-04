@@ -1023,9 +1023,15 @@
       "commits": ["7f9f5935d46b26627abcef18a9811077e49eacc8"]
     },
     {
-      "id": "current-shorten-14-level-results",
+      "id": "change-a62ba22a7f50",
       "kind": "source_or_tooling",
       "summary": "Apply 367 reviewed short labels for level results.",
+      "commits": ["a62ba22a7f5047e6e4f3c20a3e58f62401297c8f"]
+    },
+    {
+      "id": "current-shorten-15-world-sprites",
+      "kind": "source_or_tooling",
+      "summary": "Apply 12 reviewed short labels for world sprites.",
       "commits": ["release-commit"]
     }
   ],

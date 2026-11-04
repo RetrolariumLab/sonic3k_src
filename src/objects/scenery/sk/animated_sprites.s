@@ -13,19 +13,19 @@ Obj_AnimatedStillSprite:
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
-                lea     word_2BF6C(pc,d0.w),a1
+                lea     SKAnimatedScenery_SubtypeAttributes(pc,d0.w),a1
                 move.w  (a1)+,art_tile(a0)
                 move.w  (a1)+,priority(a0)
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
-                move.l  #loc_2BF5A,(a0)
+                move.l  #SKAnimatedScenery_AnimateAndCullOrDraw,(a0)
 
-loc_2BF5A:
+SKAnimatedScenery_AnimateAndCullOrDraw:
                 lea     (Ani_AnimatedStillSprites).l,a1
                 jsr     (Animate_Sprite).l
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-word_2BF6C:
+SKAnimatedScenery_SubtypeAttributes:
                 dc.w    make_art_tile(ArtTile_AIZMisc2,3,0)
                 dc.w    $300
                 dc.b    8,  $C

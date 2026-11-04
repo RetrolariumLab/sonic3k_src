@@ -1,0 +1,1637 @@
+{
+  "schema_version": 1,
+  "packet": "15-world-sprites",
+  "mappings": [
+    {
+      "source": "src/objects/scenery/s3/animated_sprites.s",
+      "original_line": 23,
+      "old": "loc_2B6A4",
+      "new": "S3AnimatedScenery_AnimateAndCullOrDraw",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_AnimateThenCullOrEnqueue."
+    },
+    {
+      "source": "src/objects/scenery/s3/animated_sprites.s",
+      "original_line": 28,
+      "old": "word_2B6B6",
+      "new": "S3AnimatedScenery_SubtypeAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_SubtypeAttributes."
+    },
+    {
+      "source": "src/objects/scenery/s3/static_sprites.s",
+      "original_line": 23,
+      "old": "loc_2B314",
+      "new": "S3StaticScenery_CullOrEnqueue",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_CullOrEnqueue."
+    },
+    {
+      "source": "src/objects/scenery/s3/static_sprites.s",
+      "original_line": 26,
+      "old": "word_2B31A",
+      "new": "S3StaticScenery_SubtypeAttributes",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_SubtypeAttributes."
+    },
+    {
+      "source": "src/objects/scenery/sk/animated_sprites.s",
+      "original_line": 23,
+      "old": "loc_2BF5A",
+      "new": "SKAnimatedScenery_AnimateAndCullOrDraw",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_AnimateThenCullOrEnqueue."
+    },
+    {
+      "source": "src/objects/scenery/sk/animated_sprites.s",
+      "original_line": 28,
+      "old": "word_2BF6C",
+      "new": "SKAnimatedScenery_SubtypeAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_SubtypeAttributes."
+    },
+    {
+      "source": "src/objects/scenery/sk/static_sprites.s",
+      "original_line": 23,
+      "old": "loc_2B962",
+      "new": "SKStaticScenery_CullOrEnqueue",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_CullOrEnqueue."
+    },
+    {
+      "source": "src/objects/scenery/sk/static_sprites.s",
+      "original_line": 26,
+      "old": "word_2B968",
+      "new": "SKStaticScenery_SubtypeAttributes",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_SubtypeAttributes."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 36,
+      "old": "word_24C28",
+      "new": "SharedScaledArtMap_Frame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 53,
+      "old": "word_24C8A",
+      "new": "SharedScaledArtMap_Frame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 70,
+      "old": "word_24CEC",
+      "new": "SharedScaledArtMap_Frames02_03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frames02_03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 80,
+      "old": "word_24D24",
+      "new": "SharedScaledArtMap_Frames04_05_06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frames04_05_06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 85,
+      "old": "word_24D3E",
+      "new": "SharedScaledArtMap_Frames07Through0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frames07Through0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 90,
+      "old": "word_24D58",
+      "new": "SharedScaledArtMap_Frames0CThrough1B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frames0CThrough1B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "original_line": 92,
+      "old": "word_24D60",
+      "new": "SharedScaledArtMap_Frames1CThrough1F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Establish SharedScaledArtMap_Frames1CThrough1F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 21,
+      "old": "word_185980",
+      "new": "SKSpriteMaskMap_Frame00",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame00 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 22,
+      "old": "word_185982",
+      "new": "SKSpriteMaskMap_Frame01",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame01 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 25,
+      "old": "word_185990",
+      "new": "SKSpriteMaskMap_Frame02",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame02 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 28,
+      "old": "word_18599E",
+      "new": "SKSpriteMaskMap_Frame03",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame03 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 31,
+      "old": "word_1859AC",
+      "new": "SKSpriteMaskMap_Frame04",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame04 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 34,
+      "old": "word_1859BA",
+      "new": "SKSpriteMaskMap_Frame05",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame05 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 39,
+      "old": "word_1859D4",
+      "new": "SKSpriteMaskMap_Frame06",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame06 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 44,
+      "old": "word_1859EE",
+      "new": "SKSpriteMaskMap_Frame07",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame07 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 49,
+      "old": "word_185A08",
+      "new": "SKSpriteMaskMap_Frame08",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame08 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 54,
+      "old": "word_185A22",
+      "new": "SKSpriteMaskMap_Frame09",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame09 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 61,
+      "old": "word_185A48",
+      "new": "SKSpriteMaskMap_Frame0A",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0A from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 68,
+      "old": "word_185A6E",
+      "new": "SKSpriteMaskMap_Frame0B",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0B from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 75,
+      "old": "word_185A94",
+      "new": "SKSpriteMaskMap_Frame0C",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0C from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 82,
+      "old": "word_185ABA",
+      "new": "SKSpriteMaskMap_Frame0D",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0D from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 91,
+      "old": "word_185AEC",
+      "new": "SKSpriteMaskMap_Frame0E",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0E from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 100,
+      "old": "word_185B1E",
+      "new": "SKSpriteMaskMap_Frame0F",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame0F from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "original_line": 109,
+      "old": "word_185B50",
+      "new": "SKSpriteMaskMap_Frame10",
+      "profiles": ["sk"],
+      "meaning": "Establish SKSpriteMaskMap_Frame10 from literal owner/relative slots and actual native consumers."
+    },
+    {
+      "source": "src/objects/shared/world/mappings/tension_bridge.s",
+      "original_line": 6,
+      "old": "word_385F4",
+      "new": "SharedTensionBridge_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Describe manually reviewed SharedTensionBridge_MapFrame00."
+    },
+    {
+      "source": "src/objects/shared/world/mappings/tension_bridge.s",
+      "original_line": 8,
+      "old": "word_385FC",
+      "new": "SharedTensionBridge_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us", "sk"],
+      "meaning": "Describe manually reviewed SharedTensionBridge_MapFrame01."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 12,
+      "old": "byte_2BFAC",
+      "new": "SKAnimatedScenery_StandardAnim00",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation00_Frames00Through04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 13,
+      "old": "byte_2BFB3",
+      "new": "SKAnimatedScenery_StandardAnim01",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation01_Frames05Through08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 14,
+      "old": "byte_2BFB9",
+      "new": "SKAnimatedScenery_StandardAnim02",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation02_Frames09Through0A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 15,
+      "old": "byte_2BFBD",
+      "new": "SKAnimatedScenery_StandardAnim03",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation03_Frames0BThrough0D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 16,
+      "old": "byte_2BFC2",
+      "new": "SKAnimatedScenery_StandardAnim04",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation04_Frames0EThrough11."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 17,
+      "old": "byte_2BFC8",
+      "new": "SKAnimatedScenery_StandardAnim05",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation05_Frames12Through15."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 18,
+      "old": "byte_2BFCE",
+      "new": "SKAnimatedScenery_StandardAnim06",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation06_Frames16Through19."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "original_line": 19,
+      "old": "byte_2BFD4",
+      "new": "SKAnimatedScenery_StandardAnim07",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_StandardAnimation07_Frames1AThrough1D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated_s3.s",
+      "original_line": 6,
+      "old": "byte_2B6C6",
+      "new": "S3AnimatedScenery_StandardAnim00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_StandardAnimation00_Frames00Through04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated_s3.s",
+      "original_line": 7,
+      "old": "byte_2B6CD",
+      "new": "S3AnimatedScenery_StandardAnim01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_StandardAnimation01_Frames05Through08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 34,
+      "old": "word_2C016",
+      "new": "SKAnimatedScenery_MapFrame00",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame00."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 36,
+      "old": "word_2C01E",
+      "new": "SKAnimatedScenery_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame01."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 38,
+      "old": "word_2C026",
+      "new": "SKAnimatedScenery_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame02."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 40,
+      "old": "word_2C02E",
+      "new": "SKAnimatedScenery_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame03."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 42,
+      "old": "word_2C036",
+      "new": "SKAnimatedScenery_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 44,
+      "old": "word_2C03E",
+      "new": "SKAnimatedScenery_MapFrame05",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame05."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 46,
+      "old": "word_2C046",
+      "new": "SKAnimatedScenery_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame06."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 48,
+      "old": "word_2C04E",
+      "new": "SKAnimatedScenery_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame07."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 50,
+      "old": "word_2C056",
+      "new": "SKAnimatedScenery_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 52,
+      "old": "word_2C05E",
+      "new": "SKAnimatedScenery_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame09."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 55,
+      "old": "word_2C06C",
+      "new": "SKAnimatedScenery_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 58,
+      "old": "word_2C07A",
+      "new": "SKAnimatedScenery_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 61,
+      "old": "word_2C088",
+      "new": "SKAnimatedScenery_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0C."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 63,
+      "old": "word_2C090",
+      "new": "SKAnimatedScenery_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 65,
+      "old": "word_2C098",
+      "new": "SKAnimatedScenery_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0E."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 67,
+      "old": "word_2C0A0",
+      "new": "SKAnimatedScenery_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame0F."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 69,
+      "old": "word_2C0A8",
+      "new": "SKAnimatedScenery_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame10."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 71,
+      "old": "word_2C0B0",
+      "new": "SKAnimatedScenery_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame11."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 73,
+      "old": "word_2C0B8",
+      "new": "SKAnimatedScenery_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame12."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 76,
+      "old": "word_2C0C6",
+      "new": "SKAnimatedScenery_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame13."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 79,
+      "old": "word_2C0D4",
+      "new": "SKAnimatedScenery_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame14."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 82,
+      "old": "word_2C0E2",
+      "new": "SKAnimatedScenery_MapFrame15",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame15."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 85,
+      "old": "word_2C0F0",
+      "new": "SKAnimatedScenery_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame16."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 90,
+      "old": "word_2C10A",
+      "new": "SKAnimatedScenery_MapFrame17",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame17."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 95,
+      "old": "word_2C124",
+      "new": "SKAnimatedScenery_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame18."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 100,
+      "old": "word_2C13E",
+      "new": "SKAnimatedScenery_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame19."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 105,
+      "old": "word_2C158",
+      "new": "SKAnimatedScenery_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame1A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 112,
+      "old": "word_2C17E",
+      "new": "SKAnimatedScenery_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame1B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 119,
+      "old": "word_2C1A4",
+      "new": "SKAnimatedScenery_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame1C."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "original_line": 126,
+      "old": "word_2C1CA",
+      "new": "SKAnimatedScenery_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKAnimatedScenery_MapFrame1D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 13,
+      "old": "word_2B6E6",
+      "new": "S3AnimatedScenery_MapFrame00",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame00."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 15,
+      "old": "word_2B6EE",
+      "new": "S3AnimatedScenery_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame01."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 17,
+      "old": "word_2B6F6",
+      "new": "S3AnimatedScenery_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame02."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 19,
+      "old": "word_2B6FE",
+      "new": "S3AnimatedScenery_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame03."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 21,
+      "old": "word_2B706",
+      "new": "S3AnimatedScenery_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 23,
+      "old": "word_2B70E",
+      "new": "S3AnimatedScenery_MapFrame05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame05."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 25,
+      "old": "word_2B716",
+      "new": "S3AnimatedScenery_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame06."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 27,
+      "old": "word_2B71E",
+      "new": "S3AnimatedScenery_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame07."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "original_line": 29,
+      "old": "word_2B726",
+      "new": "S3AnimatedScenery_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3AnimatedScenery_MapFrame08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 55,
+      "old": "word_2BB00",
+      "new": "SKStaticScenery_MapFrame00And05",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame00And05."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 58,
+      "old": "word_2BB0E",
+      "new": "SKStaticScenery_MapFrame01",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame01."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 60,
+      "old": "word_2BB16",
+      "new": "SKStaticScenery_MapFrame02",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame02."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 62,
+      "old": "word_2BB1E",
+      "new": "SKStaticScenery_MapFrame03",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame03."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 64,
+      "old": "word_2BB26",
+      "new": "SKStaticScenery_MapFrame04",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 67,
+      "old": "word_2BB34",
+      "new": "SKStaticScenery_MapFrame06",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame06."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 84,
+      "old": "word_2BB96",
+      "new": "SKStaticScenery_MapFrame07",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame07."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 93,
+      "old": "word_2BBC8",
+      "new": "SKStaticScenery_MapFrame08",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 98,
+      "old": "word_2BBE2",
+      "new": "SKStaticScenery_MapFrame09",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame09."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 108,
+      "old": "word_2BC1A",
+      "new": "SKStaticScenery_MapFrame0A",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 121,
+      "old": "word_2BC64",
+      "new": "SKStaticScenery_MapFrame0B",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 125,
+      "old": "word_2BC78",
+      "new": "SKStaticScenery_MapFrame0C",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0C."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 129,
+      "old": "word_2BC8C",
+      "new": "SKStaticScenery_MapFrame0D",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 133,
+      "old": "word_2BCA0",
+      "new": "SKStaticScenery_MapFrame0E",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0E."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 137,
+      "old": "word_2BCB4",
+      "new": "SKStaticScenery_MapFrame0F",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame0F."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 142,
+      "old": "word_2BCCE",
+      "new": "SKStaticScenery_MapFrame10",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame10."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 149,
+      "old": "word_2BCF4",
+      "new": "SKStaticScenery_MapFrame11",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame11."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 152,
+      "old": "word_2BD02",
+      "new": "SKStaticScenery_MapFrame12",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame12."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 161,
+      "old": "word_2BD34",
+      "new": "SKStaticScenery_MapFrame13",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame13."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 163,
+      "old": "word_2BD3C",
+      "new": "SKStaticScenery_MapFrame14",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame14."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 165,
+      "old": "word_2BD44",
+      "new": "SKStaticScenery_MapFrame15And17",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame15And17."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 170,
+      "old": "word_2BD5E",
+      "new": "SKStaticScenery_MapFrame16",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame16."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 179,
+      "old": "word_2BD90",
+      "new": "SKStaticScenery_MapFrame18",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame18."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 181,
+      "old": "word_2BD98",
+      "new": "SKStaticScenery_MapFrame19",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame19."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 183,
+      "old": "word_2BDA0",
+      "new": "SKStaticScenery_MapFrame1A",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 185,
+      "old": "word_2BDA8",
+      "new": "SKStaticScenery_MapFrame1B",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 187,
+      "old": "word_2BDB0",
+      "new": "SKStaticScenery_MapFrame1C",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1C."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 189,
+      "old": "word_2BDB8",
+      "new": "SKStaticScenery_MapFrame1D",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 192,
+      "old": "word_2BDC6",
+      "new": "SKStaticScenery_MapFrame1E",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1E."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 194,
+      "old": "word_2BDCE",
+      "new": "SKStaticScenery_MapFrame1F",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame1F."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 196,
+      "old": "word_2BDD6",
+      "new": "SKStaticScenery_MapFrame20",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame20."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 199,
+      "old": "word_2BDE4",
+      "new": "SKStaticScenery_MapFrame21",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame21."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 203,
+      "old": "word_2BDF8",
+      "new": "SKStaticScenery_MapFrame22",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame22."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 205,
+      "old": "word_2BE00",
+      "new": "SKStaticScenery_MapFrame23",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame23."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 207,
+      "old": "word_2BE08",
+      "new": "SKStaticScenery_MapFrame24",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame24."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 210,
+      "old": "word_2BE16",
+      "new": "SKStaticScenery_MapFrame25",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame25."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 215,
+      "old": "word_2BE30",
+      "new": "SKStaticScenery_MapFrame26",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame26."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 217,
+      "old": "word_2BE38",
+      "new": "SKStaticScenery_MapFrame27",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame27."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 220,
+      "old": "word_2BE46",
+      "new": "SKStaticScenery_MapFrame28",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame28."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 225,
+      "old": "word_2BE60",
+      "new": "SKStaticScenery_MapFrame29",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame29."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 232,
+      "old": "word_2BE86",
+      "new": "SKStaticScenery_MapFrame2A",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame2A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 241,
+      "old": "word_2BEB8",
+      "new": "SKStaticScenery_MapFrame2B",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame2B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 243,
+      "old": "word_2BEC0",
+      "new": "SKStaticScenery_MapFrame2CAnd2D",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame2CAnd2D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 248,
+      "old": "word_2BEDA",
+      "new": "SKStaticScenery_MapFrame2E",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame2E."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 250,
+      "old": "word_2BEE2",
+      "new": "SKStaticScenery_MapFrame2F",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame2F."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 252,
+      "old": "word_2BEEA",
+      "new": "SKStaticScenery_MapFrame30",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame30."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 255,
+      "old": "word_2BEF8",
+      "new": "SKStaticScenery_MapFrame31",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame31."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "original_line": 258,
+      "old": "word_2BF06",
+      "new": "SKStaticScenery_MapFrame32",
+      "profiles": ["sk"],
+      "meaning": "Describe manually reviewed SKStaticScenery_MapFrame32."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 28,
+      "old": "word_2B3DA",
+      "new": "S3StaticScenery_MapFrame00And05",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame00And05."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 31,
+      "old": "word_2B3E8",
+      "new": "S3StaticScenery_MapFrame01",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame01."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 33,
+      "old": "word_2B3F0",
+      "new": "S3StaticScenery_MapFrame02",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame02."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 35,
+      "old": "word_2B3F8",
+      "new": "S3StaticScenery_MapFrame03",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame03."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 37,
+      "old": "word_2B400",
+      "new": "S3StaticScenery_MapFrame04",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame04."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 40,
+      "old": "word_2B40E",
+      "new": "S3StaticScenery_MapFrame06",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame06."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 57,
+      "old": "word_2B470",
+      "new": "S3StaticScenery_MapFrame07",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame07."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 66,
+      "old": "word_2B4A2",
+      "new": "S3StaticScenery_MapFrame08",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame08."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 71,
+      "old": "word_2B4BC",
+      "new": "S3StaticScenery_MapFrame09",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame09."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 81,
+      "old": "word_2B4F4",
+      "new": "S3StaticScenery_MapFrame0A",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0A."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 94,
+      "old": "word_2B53E",
+      "new": "S3StaticScenery_MapFrame0B",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0B."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 98,
+      "old": "word_2B552",
+      "new": "S3StaticScenery_MapFrame0C",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0C."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 102,
+      "old": "word_2B566",
+      "new": "S3StaticScenery_MapFrame0D",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0D."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 106,
+      "old": "word_2B57A",
+      "new": "S3StaticScenery_MapFrame0E",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0E."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 110,
+      "old": "word_2B58E",
+      "new": "S3StaticScenery_MapFrame0F",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame0F."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 115,
+      "old": "word_2B5A8",
+      "new": "S3StaticScenery_MapFrame10",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame10."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 122,
+      "old": "word_2B5CE",
+      "new": "S3StaticScenery_MapFrame11",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame11."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 125,
+      "old": "word_2B5DC",
+      "new": "S3StaticScenery_MapFrame12",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame12."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 134,
+      "old": "word_2B60E",
+      "new": "S3StaticScenery_MapFrame13",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame13."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 136,
+      "old": "word_2B616",
+      "new": "S3StaticScenery_MapFrame14",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame14."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 138,
+      "old": "word_2B61E",
+      "new": "S3StaticScenery_MapFrame15And17",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame15And17."
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "original_line": 143,
+      "old": "word_2B638",
+      "new": "S3StaticScenery_MapFrame16",
+      "profiles": ["s3-eu", "s3-jp", "s3-us"],
+      "meaning": "Describe manually reviewed S3StaticScenery_MapFrame16."
+    }
+  ],
+  "source_edits": [
+    {
+      "source": "src/game/level/zones/mhz/sk/act1_screen.s",
+      "tokens": [[184, 2, 6, ""]]
+    },
+    {
+      "source": "src/objects/scenery/s3/animated_sprites.s",
+      "tokens": [
+        [11, 1, 1, ""],
+        [16, 2, 0, ""],
+        [17, 0, 0, ""],
+        [21, 0, 1, ""]
+      ]
+    },
+    {
+      "source": "src/objects/scenery/s3/static_sprites.s",
+      "tokens": [
+        [11, 1, 3, ""],
+        [16, 2, 2, ""],
+        [17, 0, 2, ""],
+        [19, 0, 3, ""]
+      ]
+    },
+    {
+      "source": "src/objects/scenery/sk/animated_sprites.s",
+      "tokens": [
+        [11, 1, 5, ""],
+        [16, 2, 4, ""],
+        [17, 0, 4, ""],
+        [21, 0, 5, ""]
+      ]
+    },
+    {
+      "source": "src/objects/scenery/sk/static_sprites.s",
+      "tokens": [
+        [11, 1, 7, ""],
+        [16, 2, 6, ""],
+        [17, 0, 6, ""],
+        [19, 0, 7, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/scaled_art.s",
+      "tokens": [
+        [2, 1, 8, ""],
+        [3, 1, 9, ""],
+        [4, 1, 10, ""],
+        [5, 1, 10, ""],
+        [6, 1, 11, ""],
+        [7, 1, 11, ""],
+        [8, 1, 11, ""],
+        [9, 1, 12, ""],
+        [10, 1, 12, ""],
+        [11, 1, 12, ""],
+        [12, 1, 12, ""],
+        [13, 1, 12, ""],
+        [14, 1, 13, ""],
+        [15, 1, 13, ""],
+        [16, 1, 13, ""],
+        [17, 1, 13, ""],
+        [18, 1, 13, ""],
+        [19, 1, 13, ""],
+        [20, 1, 13, ""],
+        [21, 1, 13, ""],
+        [22, 1, 13, ""],
+        [23, 1, 13, ""],
+        [24, 1, 13, ""],
+        [25, 1, 13, ""],
+        [26, 1, 13, ""],
+        [27, 1, 13, ""],
+        [28, 1, 13, ""],
+        [29, 1, 13, ""],
+        [30, 1, 14, ""],
+        [31, 1, 14, ""],
+        [32, 1, 14, ""],
+        [33, 1, 14, ""],
+        [34, 0, 8, ""],
+        [51, 0, 9, ""],
+        [68, 0, 10, ""],
+        [78, 0, 11, ""],
+        [83, 0, 12, ""],
+        [88, 0, 13, ""],
+        [90, 0, 14, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/level_misc/mappings/sprite_mask.s",
+      "tokens": [
+        [2, 1, 15, ""],
+        [3, 1, 16, ""],
+        [4, 1, 17, ""],
+        [5, 1, 18, ""],
+        [6, 1, 19, ""],
+        [7, 1, 20, ""],
+        [8, 1, 21, ""],
+        [9, 1, 22, ""],
+        [10, 1, 23, ""],
+        [11, 1, 24, ""],
+        [12, 1, 25, ""],
+        [13, 1, 26, ""],
+        [14, 1, 27, ""],
+        [15, 1, 28, ""],
+        [16, 1, 29, ""],
+        [17, 1, 30, ""],
+        [18, 1, 31, ""],
+        [19, 0, 15, ""],
+        [20, 0, 16, ""],
+        [23, 0, 17, ""],
+        [26, 0, 18, ""],
+        [29, 0, 19, ""],
+        [32, 0, 20, ""],
+        [37, 0, 21, ""],
+        [42, 0, 22, ""],
+        [47, 0, 23, ""],
+        [52, 0, 24, ""],
+        [59, 0, 25, ""],
+        [66, 0, 26, ""],
+        [73, 0, 27, ""],
+        [80, 0, 28, ""],
+        [89, 0, 29, ""],
+        [98, 0, 30, ""],
+        [107, 0, 31, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/mappings/tension_bridge.s",
+      "tokens": [
+        [2, 1, 32, ""],
+        [3, 1, 33, ""],
+        [4, 0, 32, ""],
+        [6, 0, 33, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated.s",
+      "tokens": [
+        [2, 1, 34, ""],
+        [3, 1, 35, ""],
+        [4, 1, 36, ""],
+        [5, 1, 37, ""],
+        [6, 1, 38, ""],
+        [7, 1, 39, ""],
+        [8, 1, 40, ""],
+        [9, 1, 41, ""],
+        [10, 0, 34, ""],
+        [11, 0, 35, ""],
+        [12, 0, 36, ""],
+        [13, 0, 37, ""],
+        [14, 0, 38, ""],
+        [15, 0, 39, ""],
+        [16, 0, 40, ""],
+        [17, 0, 41, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/animations/animated_s3.s",
+      "tokens": [
+        [2, 1, 42, ""],
+        [3, 1, 43, ""],
+        [4, 0, 42, ""],
+        [5, 0, 43, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated.s",
+      "tokens": [
+        [2, 1, 44, ""],
+        [3, 1, 45, ""],
+        [4, 1, 46, ""],
+        [5, 1, 47, ""],
+        [6, 1, 48, ""],
+        [7, 1, 49, ""],
+        [8, 1, 50, ""],
+        [9, 1, 51, ""],
+        [10, 1, 52, ""],
+        [11, 1, 53, ""],
+        [12, 1, 54, ""],
+        [13, 1, 55, ""],
+        [14, 1, 56, ""],
+        [15, 1, 57, ""],
+        [16, 1, 58, ""],
+        [17, 1, 59, ""],
+        [18, 1, 60, ""],
+        [19, 1, 61, ""],
+        [20, 1, 62, ""],
+        [21, 1, 63, ""],
+        [22, 1, 64, ""],
+        [23, 1, 65, ""],
+        [24, 1, 66, ""],
+        [25, 1, 67, ""],
+        [26, 1, 68, ""],
+        [27, 1, 69, ""],
+        [28, 1, 70, ""],
+        [29, 1, 71, ""],
+        [30, 1, 72, ""],
+        [31, 1, 73, ""],
+        [32, 0, 44, ""],
+        [34, 0, 45, ""],
+        [36, 0, 46, ""],
+        [38, 0, 47, ""],
+        [40, 0, 48, ""],
+        [42, 0, 49, ""],
+        [44, 0, 50, ""],
+        [46, 0, 51, ""],
+        [48, 0, 52, ""],
+        [50, 0, 53, ""],
+        [53, 0, 54, ""],
+        [56, 0, 55, ""],
+        [59, 0, 56, ""],
+        [61, 0, 57, ""],
+        [63, 0, 58, ""],
+        [65, 0, 59, ""],
+        [67, 0, 60, ""],
+        [69, 0, 61, ""],
+        [71, 0, 62, ""],
+        [74, 0, 63, ""],
+        [77, 0, 64, ""],
+        [80, 0, 65, ""],
+        [83, 0, 66, ""],
+        [88, 0, 67, ""],
+        [93, 0, 68, ""],
+        [98, 0, 69, ""],
+        [103, 0, 70, ""],
+        [110, 0, 71, ""],
+        [117, 0, 72, ""],
+        [124, 0, 73, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/animated_s3.s",
+      "tokens": [
+        [2, 1, 74, ""],
+        [3, 1, 75, ""],
+        [4, 1, 76, ""],
+        [5, 1, 77, ""],
+        [6, 1, 78, ""],
+        [7, 1, 79, ""],
+        [8, 1, 80, ""],
+        [9, 1, 81, ""],
+        [10, 1, 82, ""],
+        [11, 0, 74, ""],
+        [13, 0, 75, ""],
+        [15, 0, 76, ""],
+        [17, 0, 77, ""],
+        [19, 0, 78, ""],
+        [21, 0, 79, ""],
+        [23, 0, 80, ""],
+        [25, 0, 81, ""],
+        [27, 0, 82, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/main.s",
+      "tokens": [
+        [2, 1, 83, ""],
+        [3, 1, 84, ""],
+        [4, 1, 85, ""],
+        [5, 1, 86, ""],
+        [6, 1, 87, ""],
+        [7, 1, 83, ""],
+        [8, 1, 88, ""],
+        [9, 1, 89, ""],
+        [10, 1, 90, ""],
+        [11, 1, 91, ""],
+        [12, 1, 92, ""],
+        [13, 1, 93, ""],
+        [14, 1, 94, ""],
+        [15, 1, 95, ""],
+        [16, 1, 96, ""],
+        [17, 1, 97, ""],
+        [18, 1, 98, ""],
+        [19, 1, 99, ""],
+        [20, 1, 100, ""],
+        [21, 1, 101, ""],
+        [22, 1, 102, ""],
+        [23, 1, 103, ""],
+        [24, 1, 104, ""],
+        [25, 1, 103, ""],
+        [26, 1, 105, ""],
+        [27, 1, 106, ""],
+        [28, 1, 107, ""],
+        [29, 1, 108, ""],
+        [30, 1, 109, ""],
+        [31, 1, 110, ""],
+        [32, 1, 111, ""],
+        [33, 1, 112, ""],
+        [34, 1, 113, ""],
+        [35, 1, 114, ""],
+        [36, 1, 115, ""],
+        [37, 1, 116, ""],
+        [38, 1, 117, ""],
+        [39, 1, 118, ""],
+        [40, 1, 119, ""],
+        [41, 1, 120, ""],
+        [42, 1, 121, ""],
+        [43, 1, 122, ""],
+        [44, 1, 123, ""],
+        [45, 1, 124, ""],
+        [46, 1, 125, ""],
+        [47, 1, 125, ""],
+        [48, 1, 126, ""],
+        [49, 1, 127, ""],
+        [50, 1, 128, ""],
+        [51, 1, 129, ""],
+        [52, 1, 130, ""],
+        [53, 0, 83, ""],
+        [56, 0, 84, ""],
+        [58, 0, 85, ""],
+        [60, 0, 86, ""],
+        [62, 0, 87, ""],
+        [65, 0, 88, ""],
+        [82, 0, 89, ""],
+        [91, 0, 90, ""],
+        [96, 0, 91, ""],
+        [106, 0, 92, ""],
+        [119, 0, 93, ""],
+        [123, 0, 94, ""],
+        [127, 0, 95, ""],
+        [131, 0, 96, ""],
+        [135, 0, 97, ""],
+        [140, 0, 98, ""],
+        [147, 0, 99, ""],
+        [150, 0, 100, ""],
+        [159, 0, 101, ""],
+        [161, 0, 102, ""],
+        [163, 0, 103, ""],
+        [168, 0, 104, ""],
+        [177, 0, 105, ""],
+        [179, 0, 106, ""],
+        [181, 0, 107, ""],
+        [183, 0, 108, ""],
+        [185, 0, 109, ""],
+        [187, 0, 110, ""],
+        [190, 0, 111, ""],
+        [192, 0, 112, ""],
+        [194, 0, 113, ""],
+        [197, 0, 114, ""],
+        [201, 0, 115, ""],
+        [203, 0, 116, ""],
+        [205, 0, 117, ""],
+        [208, 0, 118, ""],
+        [213, 0, 119, ""],
+        [215, 0, 120, ""],
+        [218, 0, 121, ""],
+        [223, 0, 122, ""],
+        [230, 0, 123, ""],
+        [239, 0, 124, ""],
+        [241, 0, 125, ""],
+        [246, 0, 126, ""],
+        [248, 0, 127, ""],
+        [250, 0, 128, ""],
+        [253, 0, 129, ""],
+        [256, 0, 130, ""]
+      ]
+    },
+    {
+      "source": "src/objects/shared/world/still_sprites/mappings/s3.s",
+      "tokens": [
+        [2, 1, 131, ""],
+        [3, 1, 132, ""],
+        [4, 1, 133, ""],
+        [5, 1, 134, ""],
+        [6, 1, 135, ""],
+        [7, 1, 131, ""],
+        [8, 1, 136, ""],
+        [9, 1, 137, ""],
+        [10, 1, 138, ""],
+        [11, 1, 139, ""],
+        [12, 1, 140, ""],
+        [13, 1, 141, ""],
+        [14, 1, 142, ""],
+        [15, 1, 143, ""],
+        [16, 1, 144, ""],
+        [17, 1, 145, ""],
+        [18, 1, 146, ""],
+        [19, 1, 147, ""],
+        [20, 1, 148, ""],
+        [21, 1, 149, ""],
+        [22, 1, 150, ""],
+        [23, 1, 151, ""],
+        [24, 1, 152, ""],
+        [25, 1, 151, ""],
+        [26, 0, 131, ""],
+        [29, 0, 132, ""],
+        [31, 0, 133, ""],
+        [33, 0, 134, ""],
+        [35, 0, 135, ""],
+        [38, 0, 136, ""],
+        [55, 0, 137, ""],
+        [64, 0, 138, ""],
+        [69, 0, 139, ""],
+        [79, 0, 140, ""],
+        [92, 0, 141, ""],
+        [96, 0, 142, ""],
+        [100, 0, 143, ""],
+        [104, 0, 144, ""],
+        [108, 0, 145, ""],
+        [113, 0, 146, ""],
+        [120, 0, 147, ""],
+        [123, 0, 148, ""],
+        [132, 0, 149, ""],
+        [134, 0, 150, ""],
+        [136, 0, 151, ""],
+        [141, 0, 152, ""]
+      ]
+    }
+  ]
+}

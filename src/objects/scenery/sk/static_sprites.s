@@ -13,17 +13,17 @@ Obj_StillSprite:
                 move.w  d0,d1
                 add.w   d0,d0
                 add.w   d1,d0
-                lea     word_2B968(pc,d0.w),a1
+                lea     SKStaticScenery_SubtypeAttributes(pc,d0.w),a1
                 move.w  (a1)+,art_tile(a0)
                 move.w  (a1)+,priority(a0)
                 move.b  (a1)+,width_pixels(a0)
                 move.b  (a1)+,height_pixels(a0)
-                move.l  #loc_2B962,(a0)
+                move.l  #SKStaticScenery_CullOrEnqueue,(a0)
 
-loc_2B962:
+SKStaticScenery_CullOrEnqueue:
                 jmp     (Sprite_OnScreen_Test).l
 ; ---------------------------------------------------------------------------
-word_2B968:
+SKStaticScenery_SubtypeAttributes:
                 dc.w    make_art_tile(ArtTile_AIZMisc2,2,0)  ; 0 AIZ2 Bridge Post
                 dc.w    $300
                 dc.b    $C,  $C
