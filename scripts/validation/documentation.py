@@ -3,6 +3,7 @@
 import argparse
 from collections import defaultdict
 import hashlib
+import html
 import json
 from pathlib import Path
 import re
@@ -12,6 +13,53 @@ from urllib.parse import unquote, urlsplit
 from scripts.build.project import ROOT, atomic
 
 LINK = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
+
+
+def outside_code(text):
+    """Ignore fenced and indented examples, including unclosed fences."""
+    lines, fence, width = [], None, 0
+    for line in text.splitlines():
+        marker = re.match(r"^ {0,3}(`{3,}|~{3,})(.*)$", line)
+        if fence:
+            if marker and marker[1][0] == fence and len(marker[1]) >= width and not marker[2].strip():
+                fence = None
+            lines.append("")
+        elif marker:
+            fence, width = marker[1][0], len(marker[1])
+            lines.append("")
+        else:
+            lines.append("" if line.startswith(("    ", "\t")) else line)
+    return "\n".join(lines)
+
+
+def heading_anchors(text):
+    """GitHub-style heading IDs, duplicate suffixes and explicit HTML anchors."""
+    prose = outside_code(text)
+    result, counts, previous = set(), {}, ""
+    for line in prose.splitlines():
+        match = re.match(r"^ {0,3}#{1,6}(?:\s+|$)(.*)$", line)
+        heading = re.sub(r"\s+#+\s*$", "", match[1]) if match else None
+        if re.fullmatch(r" {0,3}(?:=+|-+)\s*", line) and previous.strip() and not previous.lstrip().startswith("#"):
+            heading = previous.strip()
+        previous = line
+        if heading is None:
+            continue
+        heading = re.sub(r"!?\[([^\]]*)\]\([^)]*\)", r"\1", heading)
+        heading = html.unescape(re.sub(r"<[^>]*>", "", heading)).lower()
+        slug = re.sub(r"[^\w\s-]", "", heading).strip()
+        slug = re.sub(r"\s", "-", slug)
+        number = counts.get(slug, 0)
+        candidate = slug if not number else slug + "-" + str(number)
+        while candidate in result:
+            number += 1
+            candidate = slug + "-" + str(number)
+        counts[slug] = number + 1
+        result.add(candidate)
+    navigation = re.sub(r"(`+).*?\1", "", prose)
+    for tag in re.findall(r"<a\b[^>]*>", navigation, re.I):
+        for match in re.finditer(r"\b(?:id|name)\s*=\s*(['\"])(.*?)\1", tag, re.I):
+            result.add(html.unescape(match[2]))
+    return result
 
 
 def tracked(root):
@@ -36,7 +84,7 @@ def document_inventory(root, names, review):
         raise ValueError("Documentation review omits or duplicates a public document")
     if any(row.get("decision") not in {"kept", "reworked", "added", "merged"} or not row.get("reason") for row in rows):
         raise ValueError("Documentation decisions need a substantive reason")
-    graph, inventory, paragraphs = {}, [], defaultdict(list)
+    graph, inventory, paragraphs, anchors = {}, [], defaultdict(list), {}
     for name in sorted(documents):
         path = root / name
         if not path.resolve().is_relative_to(root):
@@ -44,7 +92,7 @@ def document_inventory(root, names, review):
         data = path.read_bytes()
         text = data.decode("utf-8")
         # Code examples may contain placeholder links, which are not navigation.
-        prose = re.sub(r"```.*?```", "", text, flags=re.S)
+        prose = re.sub(r"(`+).*?\1", "", outside_code(text))
         links = []
         for match in LINK.finditer(prose):
             target = match.group(1).strip()
@@ -59,6 +107,11 @@ def document_inventory(root, names, review):
             relative = local.relative_to(root).as_posix()
             if relative not in names and local.is_file():
                 raise ValueError("Documentation links to an untracked file: " + relative)
+            if parsed.fragment and local.is_file() and local.suffix.lower() == ".md":
+                if relative not in anchors:
+                    anchors[relative] = heading_anchors(local.read_text(encoding="utf-8"))
+                if unquote(parsed.fragment) not in anchors[relative]:
+                    raise ValueError("Broken documentation anchor: " + name + " -> " + target)
             links.append(relative)
         graph[name] = set(links) & documents
         for paragraph in re.split(r"\n\s*\n", prose):

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 178
+    "commit_count": 179
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1115,9 +1115,15 @@
       "commits": ["fbe24b7bae661776b41b2162e90ba8802d10445a"]
     },
     {
-      "id": "current-shorten-review-fbe24b7b",
+      "id": "change-aa120dd3f0ae",
       "kind": "source_or_tooling",
       "summary": "Audit numeric address aliases and stack-pointer loads.",
+      "commits": ["aa120dd3f0aec7d8ffecb40a1df6d1e12b0dc2ba"]
+    },
+    {
+      "id": "current-shorten-review-aa120dd3",
+      "kind": "source_or_tooling",
+      "summary": "Reject broken Markdown fragments in the public documentation audit.",
       "commits": ["release-commit"]
     }
   ],

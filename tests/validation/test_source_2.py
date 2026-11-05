@@ -10,7 +10,7 @@ import unittest
 
 from scripts.build.make_interface import recipes
 from scripts.build.project import ROOT, image_records, load
-from scripts.validation.documentation import document_inventory, tracked
+from scripts.validation.documentation import document_inventory, heading_anchors, tracked
 from scripts.validation.release import run_stages
 from scripts.validation.source_2 import validate_content
 from scripts.validation.source_2_contract import STAGES, validate_history
@@ -66,6 +66,56 @@ class AggregateTests(unittest.TestCase):
 
 
 class DocumentationTests(unittest.TestCase):
+    def test_heading_ids_keep_code_unicode_and_unique_duplicate_suffixes(self):
+        text = """# Topic
+## Topic
+## Topic-1
+## `ContentCatalog.encode()` & Память!
+Setext title
+============
+<a id="custom-anchor"></a>
+~~~markdown
+# Fake tilde
+~~~
+````markdown
+# Fake backtick
+```
+# Still fenced
+````
+    # Indented example
+```
+# Unclosed example
+"""
+        self.assertEqual(
+            heading_anchors(text),
+            {"topic", "topic-1", "topic-1-1", "contentcatalogencode--память", "setext-title", "custom-anchor"},
+        )
+
+    def test_real_link_path_rejects_nonexistent_heading_fragments(self):
+        base = ROOT / "build/tests"
+        base.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=base) as folder:
+            root = Path(folder)
+            names = ["README.md", "CONTRIBUTING.md", "docs/topic.md"]
+            (root / "docs").mkdir()
+            (root / "CONTRIBUTING.md").write_text("# Contributing\n", encoding="utf-8")
+            (root / "docs/topic.md").write_text("# Topic\n## Topic\n## Память\n~~~\n## Fake\n~~~\n", encoding="utf-8")
+            review = {
+                "schema_version": 1,
+                "review_scope": "Synthetic fragment review",
+                "documents": [{"path": name, "decision": "kept", "reason": "Cohesive topic"} for name in names],
+            }
+            for fragment in ("topic", "topic-1", "%D0%BF%D0%B0%D0%BC%D1%8F%D1%82%D1%8C"):
+                (root / "README.md").write_text(
+                    "# Example\n[Self](#example)\n[Topic](docs/topic.md#" + fragment + ")\n"
+                )
+                with self.subTest(fragment=fragment):
+                    self.assertTrue(document_inventory(root, names, review)["complete"])
+            for link in ("#missing", "docs/topic.md#missing", "docs/topic.md#fake", "docs/topic.md#topic-2"):
+                (root / "README.md").write_text("# Example\n[Topic](docs/topic.md)\n[Broken](" + link + ")\n")
+                with self.subTest(link=link), self.assertRaisesRegex(ValueError, "anchor"):
+                    document_inventory(root, names, review)
+
     def test_missing_review_broken_escaping_and_orphan_links_fail(self):
         base = ROOT / "build/tests"
         base.mkdir(parents=True, exist_ok=True)
