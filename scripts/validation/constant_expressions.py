@@ -38,9 +38,19 @@ class Resolver:
         expression = re.sub(r"\$([0-9a-f]+)", r"0x\1", expression, flags=re.I)
         expression = re.sub(r"\b([0-9][0-9a-f]*)h\b", r"0x\1", expression, flags=re.I)
         expression = re.sub(r"(?<![\w)])%([01]+)", r"0b\1", expression)
-        # A phase/current-PC declaration remains tied to assembler storage.
-        if re.search(r"(?<![\w)])\*(?=[\s+\-/)&|]|$)|\$(?![\da-f])", expression, re.I):
-            return Resolution(symbolic=True)
+        # A prefix star is the current PC; an infix star is multiplication,
+        # irrespective of spaces. Keep unsupported ** for the AST to reject.
+        original = expression
+        pc_name = "__asm_current_pc"
+        while pc_name in self.constants or re.search(r"\b" + pc_name + r"\b", original, re.I):
+            pc_name += "_"
+
+        def current_pc(match):
+            prefix = original[: match.start()].rstrip()
+            return pc_name if not prefix or prefix[-1] in "(+-*/%&|^~<>" else "*"
+
+        expression = re.sub(r"(?<!\*)\*(?!\*)", current_pc, expression)
+        expression = re.sub(r"\$(?![\da-f])", pc_name, expression, flags=re.I)
         # AS labels such as Owner.return can contain Python keywords. Parse
         # opaque placeholders and resolve their original spellings separately.
         names = {}

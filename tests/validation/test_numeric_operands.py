@@ -165,6 +165,21 @@ Entry:
         self.assertTrue(resolver.resolve("*+$20").symbolic)
         self.assertTrue(resolver.resolve("$+4").symbolic)
 
+    def test_spaced_multiplication_cannot_be_mistaken_for_current_pc(self):
+        for expression in ("2 * $1234", "$1200 * 1", "(2 + 3) * 16", "2*$1234"):
+            with self.subTest(expression=expression):
+                rows = list(candidates("fixture.s", "Alias equ " + expression + "\nEntry:\n jsr Alias"))
+                self.assertTrue(rows)
+                self.assertTrue(rows[0]["values"])
+        resolver = Resolver({})
+        for expression in ("*", "*+$20", "$+4", "2 * *", "3*(*)"):
+            with self.subTest(expression=expression):
+                self.assertTrue(resolver.resolve(expression).symbolic)
+        self.assertTrue(resolver.resolve("2 ** 8").unresolved)
+        collision = Resolver({"__asm_current_pc": ["$1234"]})
+        self.assertTrue(collision.resolve("*+4").symbolic)
+        self.assertEqual(collision.resolve("__asm_current_pc").values, {0x1234})
+
     def test_fixed_interface_exception_binds_instruction_value_and_count(self):
         source = "Stride equ 16\nEntry:\n movea.w #Stride,a3"
         rows = list(candidates("fixture.s", source))

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 180
+    "commit_count": 181
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1127,9 +1127,15 @@
       "commits": ["282a0f616a9f3a7ed7f7d9090d0151e9852a1983"]
     },
     {
-      "id": "current-shorten-review-282a0f61",
+      "id": "change-37ffa353968d",
       "kind": "source_or_tooling",
       "summary": "Align the project overview with sibling reconstructions and completed labels.",
+      "commits": ["37ffa353968dc2f987e0ef680bdfbde458a9267f"]
+    },
+    {
+      "id": "current-shorten-review-37ffa353",
+      "kind": "source_or_tooling",
+      "summary": "Distinguish multiplication from the assembler current-address symbol.",
       "commits": ["release-commit"]
     }
   ],

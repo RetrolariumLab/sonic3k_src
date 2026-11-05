@@ -1389,9 +1389,15 @@
       "commits": ["282a0f616a9f3a7ed7f7d9090d0151e9852a1983"]
     },
     {
-      "id": "current-shorten-review-282a0f61",
+      "id": "change-37ffa353968d",
       "kind": "source_or_tooling",
       "summary": "Align the project overview with sibling reconstructions and completed labels.",
+      "commits": ["37ffa353968dc2f987e0ef680bdfbde458a9267f"]
+    },
+    {
+      "id": "current-shorten-review-37ffa353",
+      "kind": "source_or_tooling",
+      "summary": "Distinguish multiplication from the assembler current-address symbol.",
       "commits": ["release-commit"]
     }
   ],
