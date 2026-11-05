@@ -75,7 +75,7 @@
     {
       "path": "docs/provenance.md",
       "decision": "reworked",
-      "reason": "Record that every semantic packet is applied, retain physical and reversible token provenance, and explain later shortening with source comments."
+      "reason": "Retain completed semantic source provenance and document the old/new commit correspondence, preserved source snapshots and original historical acceptance identities after message repair."
     },
     {
       "path": "docs/raw_animations.md",

@@ -101,3 +101,17 @@ inserted explanations do not invalidate the original physical identities.
 Reversing only these registered edits must recover the baseline code tokens,
 including all instructions, constants and string literals. Historical driver
 statement checks use this exact source view and retain their original contracts.
+
+## Commit message history
+
+The [history correspondence](../config/reconstruction/history_rewrite.json)
+records rewritten commit messages and the matching old/new Git identities. It
+supplies omitted Codex coauthors and replaces generic descriptions with the
+actual change scope. Author identities, dates, parent relationships, assembly
+bytes and build inputs are preserved; pinned references use the corresponding
+rewritten ancestors.
+
+Historical acceptance retains its original commit and recorded fingerprints. The
+map identifies equivalent source snapshots and does not turn an old runtime
+report into fresh acceptance for the rewritten public tree. Current release
+candidates still require the complete aggregate gate.

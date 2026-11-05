@@ -1401,9 +1401,15 @@
       "commits": ["ae5b55db5a1ddc7b6612d7705afabea1e3b70d67"]
     },
     {
-      "id": "current-shorten-review-ae5b55db",
+      "id": "change-43b6b06d1e63",
       "kind": "source_or_tooling",
       "summary": "Compare renamed memory declarations with their original historical ABI.",
+      "commits": ["43b6b06d1e63582d2133627183726376955d602d"]
+    },
+    {
+      "id": "current-shorten-history-message-repair",
+      "kind": "source_or_tooling",
+      "summary": "Record repaired commit narratives and preserve original acceptance identities.",
       "commits": ["release-commit"]
     }
   ],
@@ -1419,7 +1425,10 @@
       "source_sha256": "8d71fbc18329a7f9d557327994758050c108ff38bc5b50b710d330e980b09e97",
       "report": "build/release/source-1-check.json",
       "command": "make release-check",
-      "clean_clone": true
+      "clean_clone": true,
+      "original_commit": "4273c2d2240237c66cca8f092eacd790dc859256",
+      "history_mapping": "config/reconstruction/history_rewrite.json",
+      "note": "Historical clean-clone acceptance at original_commit before the message and reference rewrite. The source fingerprint is unchanged; any tooling/public fingerprints describe that original snapshot. Current acceptance requires independently regenerated reports."
     }
   }
 }

@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 182
+    "commit_count": 183
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1139,9 +1139,15 @@
       "commits": ["ae5b55db5a1ddc7b6612d7705afabea1e3b70d67"]
     },
     {
-      "id": "current-shorten-review-ae5b55db",
+      "id": "change-43b6b06d1e63",
       "kind": "source_or_tooling",
       "summary": "Compare renamed memory declarations with their original historical ABI.",
+      "commits": ["43b6b06d1e63582d2133627183726376955d602d"]
+    },
+    {
+      "id": "current-shorten-history-message-repair",
+      "kind": "source_or_tooling",
+      "summary": "Record repaired commit narratives and preserve original acceptance identities.",
       "commits": ["release-commit"]
     }
   ],
@@ -1510,7 +1516,9 @@
       "public_sha256": "4cbd35cf499cac2e08801792062f329c5e2102b5914ade10bf261b0fb89b940b",
       "runtime_cases": 165,
       "report": "build/release/source-2-check.json",
-      "note": "Historical clean-clone acceptance; generated current reports must independently pass for a changed HEAD."
+      "note": "Historical clean-clone acceptance at original_commit before the message and reference rewrite. The source fingerprint is unchanged; any tooling/public fingerprints describe that original snapshot. Current acceptance requires independently regenerated reports.",
+      "original_commit": "e9cd658c0fcafec4194f09485a76a3650b7145a3",
+      "history_mapping": "config/reconstruction/history_rewrite.json"
     },
     "content_edits": "build/authoring/edited-containers.json"
   }
