@@ -2,6 +2,7 @@
 
 import unittest
 from scripts.validation import memory_layout as codec
+from scripts.build.project import ROOT, load
 from scripts.validation.symbols import parse_declaration_symbols
 
 
@@ -15,6 +16,15 @@ def contract(kind="ram", phases=None, rewind=False):
 
 
 class MemoryLayoutTests(unittest.TestCase):
+    def test_all_project_memory_modules_match_their_registered_contracts(self):
+        owners = [row for row in load("config/reconstruction/source_layout.json")["files"] if row["role"] == "memory"]
+        self.assertTrue(owners)
+        texts = {row["path"]: (ROOT / row["path"]).read_text(encoding="utf-8") for row in owners}
+        codec.check_primitives(texts)
+        for row in owners:
+            with self.subTest(path=row["path"]):
+                codec.declarations(texts[row["path"]], row["memory_contract"])
+
     def test_ram_fields_aliases_and_balanced_phase_are_declarations(self):
         text = "padding off\nphase $FFFF0000\nRAM_start: equ *\nField: ds.b 3\nAlias: set Field+1\nRAM_end: equ *\ndephase\n"
         model = codec.declarations(text, contract())

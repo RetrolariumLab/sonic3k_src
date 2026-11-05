@@ -13359,8 +13359,8 @@
         "phases": [
           "Level_layout_header+$400",
           "Stat_table+$12",
-          "_unkF712+8",
-          "_tempFF88",
+          "CompactSceneObjectRespawnBytes+8",
+          "S3LegacyVersusZoneActOverlayStorage",
           "Demo_mode_flag",
           "V_int_jump"
         ],

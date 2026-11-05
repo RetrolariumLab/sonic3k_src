@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 175
+    "commit_count": 176
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1097,9 +1097,15 @@
       "commits": ["3a2dc60be10da6764ab5d08a3d0d95521081fceb"]
     },
     {
-      "id": "current-reader-abi-fixture",
+      "id": "change-b5beaefc6eb3",
       "kind": "source_or_tooling",
       "summary": "Resolve reader ABI fixture identities through the verified semantic registry.",
+      "commits": ["b5beaefc6eb353f043e8a8c7c72359de491a80e0"]
+    },
+    {
+      "id": "current-shorten-review-b5beaefc",
+      "kind": "source_or_tooling",
+      "summary": "Synchronize renamed memory phases with their source contracts.",
       "commits": ["release-commit"]
     }
   ],
