@@ -1395,9 +1395,15 @@
       "commits": ["37ffa353968dc2f987e0ef680bdfbde458a9267f"]
     },
     {
-      "id": "current-shorten-review-37ffa353",
+      "id": "change-ae5b55db5a1d",
       "kind": "source_or_tooling",
       "summary": "Distinguish multiplication from the assembler current-address symbol.",
+      "commits": ["ae5b55db5a1ddc7b6612d7705afabea1e3b70d67"]
+    },
+    {
+      "id": "current-shorten-review-ae5b55db",
+      "kind": "source_or_tooling",
+      "summary": "Compare renamed memory declarations with their original historical ABI.",
       "commits": ["release-commit"]
     }
   ],

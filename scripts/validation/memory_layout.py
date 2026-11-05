@@ -192,12 +192,26 @@ def _domain(name, value, kind):
             raise ValueError("Sound identifier exceeds its byte domain")
 
 
+def compare_historical_symbols(names, symbols, historical, renames, profile):
+    """Compare every declaration with its original profile-scoped ABI name."""
+    originals = {}
+    for old, new in renames.items():
+        if new in originals:
+            raise ValueError("Registered memory historical names collide")
+        originals[new] = old
+    for name in names:
+        old = originals.get(name, name)
+        if name not in symbols or old not in historical or symbols[name] != historical[old]:
+            raise ValueError("Historical memory ABI symbol changed: " + profile + " " + name)
+
+
 def check_built(rows):
     selected = [row for row in rows if row["role"] == "memory"]
     if not selected:
         return {}
     witness = load("build/provenance/preservation-comparison.json")
     from scripts.authoring.formats_workflow import tooling_fingerprint
+    from scripts.validation.label_renames import profile_maps, validate_registry
 
     if (
         not witness.get("complete")
@@ -207,6 +221,7 @@ def check_built(rows):
     ):
         raise ValueError("Memory ABI check needs a current historical preservation witness")
     baseline = witness["historical_symbols"]
+    mappings = profile_maps(validate_registry())
     evidence, counts = {}, {}
     wanted = {row["path"] for row in selected}
     active = {name: set() for name in wanted}
@@ -241,9 +256,7 @@ def check_built(rows):
             if key not in row["memory_contract"]["profiles"]:
                 continue
             model = declarations((ROOT / row["path"]).read_text(), row["memory_contract"])
-            for name in model["symbols"]:
-                if name not in symbols or name not in baseline[key] or symbols[name] != baseline[key][name]:
-                    raise ValueError("Historical memory ABI symbol changed: " + key + " " + name)
+            compare_historical_symbols(model["symbols"], symbols, baseline[key], mappings.get(key, {}), key)
             for field in model["fields"]:
                 _domain(field["name"], symbols[field["name"]], row["memory_contract"]["kind"])
                 if "external_offset" in field and symbols[field["name"]] != 0x200000 + field["external_offset"]:

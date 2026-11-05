@@ -115,8 +115,11 @@ so its live bytes stay at odd bus addresses.
 Make check-memory-contract checks this grammar without ROMs. Make
 check-memory-layout additionally requires a fresh historical preservation
 witness and current assemblies. Every declared global symbol must match the
-pre-layout baseline for its applicable product. Actual AS includes establish
-applicability. RAM, sound identifier and odd SRAM domains are checked.
+pre-layout baseline for its applicable product. Renamed symbols resolve through
+the validated profile-specific catalog to their original historical names;
+missing declarations, changed values and ambiguous destinations remain errors.
+Actual AS includes establish applicability. RAM, sound identifier and odd SRAM
+domains are checked.
 
 The built proof also reads AS absolute records and independently accounts for
 every physical cartridge byte exactly once. It reconciles both virtual Z80

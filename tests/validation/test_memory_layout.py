@@ -16,6 +16,29 @@ def contract(kind="ram", phases=None, rewind=False):
 
 
 class MemoryLayoutTests(unittest.TestCase):
+    def test_registered_memory_names_preserve_original_profile_addresses(self):
+        names = ["OverlayAlias", "Unchanged"]
+        current = {"OverlayAlias": 0xFFFFFF98, "Unchanged": 0xFFFF0000}
+        historical = {"_unkFF98": 0xFFFFFF98, "Unchanged": 0xFFFF0000}
+        renames = {"_unkFF98": "OverlayAlias"}
+        codec.compare_historical_symbols(names, current, historical, renames, "s3-us")
+        for changed_current, changed_historical, changed_renames in (
+            (current | {"OverlayAlias": 0xFFFFFF96}, historical, renames),
+            ({"Unchanged": 0xFFFF0000}, historical, renames),
+            (current, {"Unchanged": 0xFFFF0000}, renames),
+            (current, historical, {}),
+            (current, historical, {"_unkFF98": "OtherName"}),
+        ):
+            with (
+                self.subTest(current=changed_current, renames=changed_renames),
+                self.assertRaisesRegex(ValueError, "ABI"),
+            ):
+                codec.compare_historical_symbols(names, changed_current, changed_historical, changed_renames, "s3-us")
+
+    def test_memory_name_projection_rejects_ambiguous_destinations(self):
+        with self.assertRaisesRegex(ValueError, "collide"):
+            codec.compare_historical_symbols([], {}, {}, {"OldA": "New", "OldB": "New"}, "s3-us")
+
     def test_all_project_memory_modules_match_their_registered_contracts(self):
         owners = [row for row in load("config/reconstruction/source_layout.json")["files"] if row["role"] == "memory"]
         self.assertTrue(owners)
