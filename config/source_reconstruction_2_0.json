@@ -23,7 +23,7 @@
   "delta_history": {
     "base_commit": "09ca77790fb4b66ca4f16224dbab249942145dfc",
     "tip": "release-commit",
-    "commit_count": 174
+    "commit_count": 175
   },
   "included_scope": [
     "five-official-preservation-profiles",
@@ -1091,9 +1091,15 @@
       "commits": ["65e4d44036e895f131247c3ad0032636f079a6d4"]
     },
     {
-      "id": "current-shorten-label-length-lint",
+      "id": "change-3a2dc60be10d",
       "kind": "source_or_tooling",
       "summary": "Enable the Kit rule that enforces the forty-character assembly label limit.",
+      "commits": ["3a2dc60be10da6764ab5d08a3d0d95521081fceb"]
+    },
+    {
+      "id": "current-reader-abi-fixture",
+      "kind": "source_or_tooling",
+      "summary": "Resolve reader ABI fixture identities through the verified semantic registry.",
       "commits": ["release-commit"]
     }
   ],

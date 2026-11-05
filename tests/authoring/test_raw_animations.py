@@ -309,7 +309,13 @@ class RegisteredReaderTests(unittest.TestCase):
             "byte_7D636": "pairs-flip-x",
             "byte_7D587": "pairs",
         }
-        for symbol, abi in expected.items():
+        from scripts.validation.semantic_labels import validate
+
+        mappings = [row for row in validate(root)["mappings"] if row["old"] in expected]
+        renamed = {row["old"]: row["new"] for row in mappings}
+        self.assertEqual(len(renamed), len(mappings))
+        for original, abi in expected.items():
+            symbol = renamed.get(original, original)
             row = next(r for r in registry["groups"] if symbol in r.get("members", [r["symbol"]]))
             text = "".join(
                 (root / row["path"]).read_text().splitlines(keepends=True)[row["first_line"] - 1 : row["last_line"]]
